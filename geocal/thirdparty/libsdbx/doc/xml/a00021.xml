@@ -1,0 +1,623 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00021" kind="class" prot="public">
+    <compoundname>StringTable</compoundname>
+    <includes refid="a00042" local="no">StringTable.h</includes>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>_key_length</declname>
+        <defname>_key_length</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>max_child_items</declname>
+        <defname>max_child_items</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00021_1f070479b99817e45696d0da2d73af428" prot="public" static="no">
+        <type><ref refid="a00005" kindref="compound">LRUCache</ref>&lt; char, <ref refid="a00023" kindref="compound">UniqueId</ref>, LRUFreeMalloc &gt;</type>
+        <definition>typedef LRUCache&lt;char, UniqueId, LRUFreeMalloc&gt; StringTable&lt; _key_length, max_child_items &gt;::Cache</definition>
+        <argsstring></argsstring>
+        <name>Cache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="94" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="enum" id="a00021_14e8ddffce30cef7c6f6e079876a28cf7" prot="public" static="no">
+        <name>ErrorCode</name>
+        <enumvalue id="a00021_14e8ddffce30cef7c6f6e079876a28cf7afe0b07571546f88e04e33ce504e2441" prot="public">
+          <name>ERR_NONE</name>
+          <initializer> 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00021_14e8ddffce30cef7c6f6e079876a28cf7242ea228ccc7533d7a64b4809f5001ca" prot="public">
+          <name>ERR_INIT_BACKEND</name>
+          <initializer> 500</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00021_14e8ddffce30cef7c6f6e079876a28cf7176849976b5c5aaded8b2e7ef6d43a2d" prot="public">
+          <name>ERR_INIT_CACHE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00021_14e8ddffce30cef7c6f6e079876a28cf7356534868f1b027acdcc5e88a1b7bffb" prot="public">
+          <name>ERR_WRITE_HEADER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00021_14e8ddffce30cef7c6f6e079876a28cf7146d0cec2c83a5f5925f1b0316201249" prot="public">
+          <name>ERR_READ_HEADER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00021_14e8ddffce30cef7c6f6e079876a28cf70c18986aa20d9bedfaa527a1455703c4" prot="public">
+          <name>ERR_OPEN_FILE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00021_14e8ddffce30cef7c6f6e079876a28cf7b7cdb0b3d86db44838de24c3655cedbf" prot="public">
+          <name>ERR_BAD_SEEK</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00021_14e8ddffce30cef7c6f6e079876a28cf7e1ae92bf25baa46736822741ecfbebf0" prot="public">
+          <name>ERR_BAD_WRITE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00021_14e8ddffce30cef7c6f6e079876a28cf7b576a410ec9fcd6a047955068e8741ba" prot="public">
+          <name>ERR_BAD_READ</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="96" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="96" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00021_15f1961ddd6533e9ce2693d0e529c7d6d" prot="public" static="no">
+        <type><ref refid="a00023" kindref="compound">UniqueId</ref></type>
+        <definition>typedef UniqueId StringTable&lt; _key_length, max_child_items &gt;::IdType</definition>
+        <argsstring></argsstring>
+        <name>IdType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="82" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00021_1f0c4e8ba791fb1b6a41601698d65d0a1" prot="public" static="no">
+        <type><ref refid="a00003" kindref="compound">Tree::Iterator</ref></type>
+        <definition>typedef Tree::Iterator StringTable&lt; _key_length, max_child_items &gt;::Iterator</definition>
+        <argsstring></argsstring>
+        <name>Iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="92" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00021_1d8c5e92f95bf1cc59fd0d05741d4d20d" prot="public" static="no">
+        <type><ref refid="a00020" kindref="compound">StringKey</ref>&lt; key_length &gt;</type>
+        <definition>typedef StringKey&lt;key_length&gt; StringTable&lt; _key_length, max_child_items &gt;::KeyType</definition>
+        <argsstring></argsstring>
+        <name>KeyType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="81" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00021_1d84f7f3f83c32765ede8d1b097157521" prot="public" static="no">
+        <type>Tree::size_type</type>
+        <definition>typedef Tree::size_type StringTable&lt; _key_length, max_child_items &gt;::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="91" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00021_18e79899f8c7c96dc380315e9c4928a0b" prot="public" static="no">
+        <type><ref refid="a00001" kindref="compound">BTree</ref>&lt; <ref refid="a00020" kindref="compound">KeyType</ref>, <ref refid="a00023" kindref="compound">IdType</ref>, max_child_items, DiskTreeBackend, true &gt;</type>
+        <definition>typedef BTree&lt; KeyType, IdType, max_child_items, DiskTreeBackend, true&gt; StringTable&lt; _key_length, max_child_items &gt;::Tree</definition>
+        <argsstring></argsstring>
+        <name>Tree</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="89" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00021_17160188abc84d814ad1b20af6dd7cf19" prot="private" static="no" mutable="no">
+        <type><ref refid="a00005" kindref="compound">Cache</ref> *</type>
+        <definition>Cache* StringTable&lt; _key_length, max_child_items &gt;::m_cache</definition>
+        <argsstring></argsstring>
+        <name>m_cache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="442" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="442" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00021_1783027a062becfc43e6af1a7f0e5f683" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool StringTable&lt; _key_length, max_child_items &gt;::m_dirty</definition>
+        <argsstring></argsstring>
+        <name>m_dirty</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="450" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="450" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00021_1e18b61d25a5a0d1b8f218b75a9cff6c1" prot="private" static="no" mutable="no">
+        <type>wxFFile</type>
+        <definition>wxFFile StringTable&lt; _key_length, max_child_items &gt;::m_file</definition>
+        <argsstring></argsstring>
+        <name>m_file</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="441" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="441" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00021_162ae09cffc8b33a2a667879dd5808631" prot="private" static="no" mutable="no">
+        <type><ref refid="a00001" kindref="compound">Tree</ref></type>
+        <definition>Tree StringTable&lt; _key_length, max_child_items &gt;::m_idx</definition>
+        <argsstring></argsstring>
+        <name>m_idx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="444" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="444" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00021_1661fe304e664b271d802ee0fd0b2a9cb" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool StringTable&lt; _key_length, max_child_items &gt;::m_initialized</definition>
+        <argsstring></argsstring>
+        <name>m_initialized</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="449" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="449" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00021_162809b636a1b4a16e8adb68f40d7ac34" prot="private" static="no" mutable="no">
+        <type>ErrorCode</type>
+        <definition>ErrorCode StringTable&lt; _key_length, max_child_items &gt;::m_lastError</definition>
+        <argsstring></argsstring>
+        <name>m_lastError</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="451" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="451" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00021_1a5bd454f29da8f5d3f48a4f8b8bb38d3" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t StringTable&lt; _key_length, max_child_items &gt;::m_next_new_id</definition>
+        <argsstring></argsstring>
+        <name>m_next_new_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="447" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="447" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00021_11b34b5c88a7ac6988c2f60194228f341" prot="private" static="no" mutable="no">
+        <type><ref refid="a00003" kindref="compound">Tree::Traverser</ref> *</type>
+        <definition>Tree::Traverser* StringTable&lt; _key_length, max_child_items &gt;::m_traverser</definition>
+        <argsstring></argsstring>
+        <name>m_traverser</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="445" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="445" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00021_17126971c16c23f957c8c0ab19a03c866" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00003" kindref="compound">Iterator</ref> *</type>
+        <definition>Iterator* StringTable&lt; _key_length, max_child_items &gt;::Begin</definition>
+        <argsstring>()</argsstring>
+        <name>Begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="125" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="124" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="a00021_1c92b05d069b14cb0a4da7733e6784d52" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool StringTable&lt; _key_length, max_child_items &gt;::FindStringId</definition>
+        <argsstring>(const char *str, IdType &amp;id) WARN_IF_UNUSED</argsstring>
+        <name>FindStringId</name>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type><ref refid="a00023" kindref="compound">IdType</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Find the id of a string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string to find </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(out) the id of the string, if found</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if string found, false if string not found or error </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="241" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="240" bodyend="267"/>
+        <references refid="a00003_1e3f37ca45b3e37de7969cd134f72bb59" compoundref="a00028" startline="154" endline="157">BTreeTraverser&lt; _Tree &gt;::current</references>
+        <references refid="a00003_1c4e1935dff52e2ac17ffda583c2dea63" compoundref="a00028" startline="292" endline="367">BTreeTraverser&lt; _Tree &gt;::find</references>
+        <references refid="a00021_1a8395a3054781013e45d909a057d3d54" compoundref="a00042" startline="280" endline="353">StringTable&lt; _key_length, max_child_items &gt;::GetStringById</references>
+        <references refid="a00003_102219cd40c2dbed41d5e9063a8ff30ca" compoundref="a00028" startline="220" endline="274">BTreeTraverser&lt; _Tree &gt;::next</references>
+        <referencedby refid="a00021_1cbac23c55d6a42a98882ec97b8006aac" compoundref="a00042" startline="366" endline="437">StringTable&lt; _key_length, max_child_items &gt;::InsertString</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00021_1cc07e37f66c38cd23a1e7bc5623c6fb7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>ErrorCode</type>
+        <definition>ErrorCode StringTable&lt; _key_length, max_child_items &gt;::GetErrorCode</definition>
+        <argsstring>() const </argsstring>
+        <name>GetErrorCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Either the error code of the string table operation, or the error code of the backend operation </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="134" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="133" bodyend="138"/>
+        <references refid="a00001_1ae74f51fe733b3c48ebff53510dea2cb" compoundref="a00024" startline="194" endline="200">BTree::GetErrorCode</references>
+      </memberdef>
+      <memberdef kind="function" id="a00021_117000a94505633e0579ec899cb7445da" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>size_type StringTable&lt; _key_length, max_child_items &gt;::GetItemCount</definition>
+        <argsstring>() const </argsstring>
+        <name>GetItemCount</name>
+        <briefdescription>
+<para>Gets the number of strings contained in this table. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="142" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="141" bodyend="144"/>
+        <references refid="a00001_1bdf9810775b2f8cf9599161332b0dd92" compoundref="a00024" startline="291" endline="291">BTree::GetItemCount</references>
+      </memberdef>
+      <memberdef kind="function" id="a00021_1a8395a3054781013e45d909a057d3d54" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* StringTable&lt; _key_length, max_child_items &gt;::GetStringById</definition>
+        <argsstring>(const IdType &amp;id)</argsstring>
+        <name>GetStringById</name>
+        <param>
+          <type>const <ref refid="a00023" kindref="compound">IdType</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves a string, given its ID. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This does not detect invalid ID&apos;s particularly well</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Id of the string to find</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>NULL if string not found, or the string if it is found. You should not store this string, it will be deleted automatically. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="281" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="280" bodyend="353"/>
+        <references refid="a00005_1d9c503c0b8f77c161f80205495bb4b2e" compoundref="a00031" startline="275" endline="308">LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::add</references>
+        <references refid="a00005_186654d056acc1762c34f0a8ef47f1e35" compoundref="a00031" startline="214" endline="266">LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::get</references>
+        <referencedby refid="a00021_1c92b05d069b14cb0a4da7733e6784d52" compoundref="a00042" startline="240" endline="267">StringTable&lt; _key_length, max_child_items &gt;::FindStringId</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00021_1ad29815a144f9ac1c738314891d21359" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool StringTable&lt; _key_length, max_child_items &gt;::Initialize</definition>
+        <argsstring>(const wxFileName &amp;filename, std::size_t node_cache_sz=500, std::size_t string_cache_sz=10000) WARN_IF_UNUSED</argsstring>
+        <name>Initialize</name>
+        <param>
+          <type>const wxFileName &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>node_cache_sz</declname>
+          <defval>500</defval>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>string_cache_sz</declname>
+          <defval>10000</defval>
+        </param>
+        <briefdescription>
+<para>Initialization. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>File to store strings in </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>node_cache_sz</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Node cache size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>string_cache_sz</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Leaf/String Cache size </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="165" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="160" bodyend="230"/>
+        <references refid="a00001_1ce71aba8c57958978a31d993cf822d6c" compoundref="a00024" startline="213" endline="216">BTree::GetTraverser</references>
+        <references refid="a00001_16d1943d72e893359a142ded378de6cbe" compoundref="a00024" startline="182" endline="185">BTree::Initialize</references>
+      </memberdef>
+      <memberdef kind="function" id="a00021_1cbac23c55d6a42a98882ec97b8006aac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool StringTable&lt; _key_length, max_child_items &gt;::InsertString</definition>
+        <argsstring>(const char *str, IdType &amp;id) WARN_IF_UNUSED</argsstring>
+        <name>InsertString</name>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type><ref refid="a00023" kindref="compound">IdType</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Inserts a new string into the table. </para>        </briefdescription>
+        <detaileddescription>
+<para>If there is a duplicate string, this will return the id for that string instead.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String to insert </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(out) returns the id of the inserter string</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if string inserted/found </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+<para><xrefsect id="todo_1_todo000007"><xreftitle>Todo</xreftitle><xrefdescription><para>this is very inefficient, it can be done better </para></xrefdescription></xrefsect></para><para><xrefsect id="todo_1_todo000007"><xreftitle>Todo</xreftitle><xrefdescription><para>need a way to roll this stuff back </para></xrefdescription></xrefsect></para>        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="367" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="366" bodyend="437"/>
+        <references refid="a00005_1d9c503c0b8f77c161f80205495bb4b2e" compoundref="a00031" startline="275" endline="308">LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::add</references>
+        <references refid="a00021_1c92b05d069b14cb0a4da7733e6784d52" compoundref="a00042" startline="240" endline="267">StringTable&lt; _key_length, max_child_items &gt;::FindStringId</references>
+        <references refid="a00001_1ab50f07342832b39c3bd29aacd283dfb" compoundref="a00024" startline="242" endline="288">BTree::Insert</references>
+      </memberdef>
+      <memberdef kind="function" id="a00021_1e377ce3433267fc55fe861b39a0b8f42" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>StringTable&lt; _key_length, max_child_items &gt;::StringTable</definition>
+        <argsstring>()</argsstring>
+        <name>StringTable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="113" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="108" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="a00021_112d0b73740a07a590f6d7331b6c9c268" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool StringTable&lt; _key_length, max_child_items &gt;::VerifyIndex</definition>
+        <argsstring>()</argsstring>
+        <name>VerifyIndex</name>
+        <briefdescription>
+<para>ensures that the index isn&apos;t corrupted in a basic way </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="148" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="147" bodyend="150"/>
+        <references refid="a00001_180aa7d0aa00e7d46655894a167436986" compoundref="a00029" startline="33" endline="156">BTree::Verify</references>
+      </memberdef>
+      <memberdef kind="function" id="a00021_1d0788518a39c54333b8eff8a67c1b162" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>StringTable&lt; _key_length, max_child_items &gt;::~StringTable</definition>
+        <argsstring>()</argsstring>
+        <name>~StringTable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="116" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="115" bodyend="119"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This utilizes a <ref refid="a00001" kindref="compound">BTree</ref> structure to store a table of strings in (mostly) sorted order. </para>    </briefdescription>
+    <detaileddescription>
+<para>The strings are cached for quick access, but only some of them.</para><para>There are two index files created, *.ldx and *.ndx, and then a user-specified filename to actually store the files in. This file stores the actual strings, in the following format:</para><para>[byte] Length (0-127) [optional byte] If the high bit is set on the first byte, then the next byte is the low byte of a 2-byte word, and the first byte is the high byte &amp; 0x7F. For strings longer than 127 characters [string of bytes] The actual string, not null-terminated</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_key_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the key to be stored </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_child_items</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of items the tree should store in a node</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Maximum string size is fixed at 2^15-1</para></simplesect>
+<xrefsect id="todo_1_todo000006"><xreftitle>Todo</xreftitle><xrefdescription><para>Fix it so that its completely ordered. The problem is that the tree cannot sort on the value, only on the keys (which have duplicates due to only storing a portion of the string) </para></xrefdescription></xrefsect></para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="679">
+        <label>std::vector&lt; std::size_t &gt;</label>
+      </node>
+      <node id="678">
+        <label>BTreeTraverser&lt; _Tree &gt;</label>
+        <link refid="a00003"/>
+        <childnode refid="679" relation="usage">
+          <edgelabel>idx</edgelabel>
+        </childnode>
+      </node>
+      <node id="676">
+        <label>LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;</label>
+        <link refid="a00005"/>
+        <childnode refid="677" relation="usage">
+          <edgelabel>m_last</edgelabel>
+          <edgelabel>m_first</edgelabel>
+        </childnode>
+      </node>
+      <node id="675">
+        <label>StringTable&lt; _key_length, max_child_items &gt;</label>
+        <link refid="a00021"/>
+        <childnode refid="676" relation="usage">
+          <edgelabel>m_cache</edgelabel>
+        </childnode>
+        <childnode refid="678" relation="usage">
+          <edgelabel>m_traverser</edgelabel>
+        </childnode>
+      </node>
+      <node id="677">
+        <label>LRUCacheNode&lt; CachedObjectType, IdType, deleteType &gt;</label>
+        <link refid="a00006"/>
+        <childnode refid="677" relation="usage">
+          <edgelabel>prev</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" line="76" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/StringTable.h" bodystart="76" bodyend="452"/>
+    <listofallmembers>
+      <member refid="a00021_17126971c16c23f957c8c0ab19a03c866" prot="public" virt="non-virtual"><scope>StringTable</scope><name>Begin</name></member>
+      <member refid="a00021_1f070479b99817e45696d0da2d73af428" prot="public" virt="non-virtual"><scope>StringTable</scope><name>Cache</name></member>
+      <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7b576a410ec9fcd6a047955068e8741ba" prot="public" virt="non-virtual"><scope>StringTable</scope><name>ERR_BAD_READ</name></member>
+      <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7b7cdb0b3d86db44838de24c3655cedbf" prot="public" virt="non-virtual"><scope>StringTable</scope><name>ERR_BAD_SEEK</name></member>
+      <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7e1ae92bf25baa46736822741ecfbebf0" prot="public" virt="non-virtual"><scope>StringTable</scope><name>ERR_BAD_WRITE</name></member>
+      <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7242ea228ccc7533d7a64b4809f5001ca" prot="public" virt="non-virtual"><scope>StringTable</scope><name>ERR_INIT_BACKEND</name></member>
+      <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7176849976b5c5aaded8b2e7ef6d43a2d" prot="public" virt="non-virtual"><scope>StringTable</scope><name>ERR_INIT_CACHE</name></member>
+      <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7afe0b07571546f88e04e33ce504e2441" prot="public" virt="non-virtual"><scope>StringTable</scope><name>ERR_NONE</name></member>
+      <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf70c18986aa20d9bedfaa527a1455703c4" prot="public" virt="non-virtual"><scope>StringTable</scope><name>ERR_OPEN_FILE</name></member>
+      <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7146d0cec2c83a5f5925f1b0316201249" prot="public" virt="non-virtual"><scope>StringTable</scope><name>ERR_READ_HEADER</name></member>
+      <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7356534868f1b027acdcc5e88a1b7bffb" prot="public" virt="non-virtual"><scope>StringTable</scope><name>ERR_WRITE_HEADER</name></member>
+      <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7" prot="public" virt="non-virtual"><scope>StringTable</scope><name>ErrorCode</name></member>
+      <member refid="a00021_1c92b05d069b14cb0a4da7733e6784d52" prot="public" virt="non-virtual"><scope>StringTable</scope><name>FindStringId</name></member>
+      <member refid="a00021_1cc07e37f66c38cd23a1e7bc5623c6fb7" prot="public" virt="non-virtual"><scope>StringTable</scope><name>GetErrorCode</name></member>
+      <member refid="a00021_117000a94505633e0579ec899cb7445da" prot="public" virt="non-virtual"><scope>StringTable</scope><name>GetItemCount</name></member>
+      <member refid="a00021_1a8395a3054781013e45d909a057d3d54" prot="public" virt="non-virtual"><scope>StringTable</scope><name>GetStringById</name></member>
+      <member refid="a00021_15f1961ddd6533e9ce2693d0e529c7d6d" prot="public" virt="non-virtual"><scope>StringTable</scope><name>IdType</name></member>
+      <member refid="a00021_1ad29815a144f9ac1c738314891d21359" prot="public" virt="non-virtual"><scope>StringTable</scope><name>Initialize</name></member>
+      <member refid="a00021_1cbac23c55d6a42a98882ec97b8006aac" prot="public" virt="non-virtual"><scope>StringTable</scope><name>InsertString</name></member>
+      <member refid="a00021_1f0c4e8ba791fb1b6a41601698d65d0a1" prot="public" virt="non-virtual"><scope>StringTable</scope><name>Iterator</name></member>
+      <member refid="a00021_1810c19615394b620583a1734dc46d8b395d7f1b315048b2e37af0b6552cb9bb6" prot="public" virt="non-virtual"><scope>StringTable</scope><name>key_length</name></member>
+      <member refid="a00021_1d8c5e92f95bf1cc59fd0d05741d4d20d" prot="public" virt="non-virtual"><scope>StringTable</scope><name>KeyType</name></member>
+      <member refid="a00021_17160188abc84d814ad1b20af6dd7cf19" prot="private" virt="non-virtual"><scope>StringTable</scope><name>m_cache</name></member>
+      <member refid="a00021_1783027a062becfc43e6af1a7f0e5f683" prot="private" virt="non-virtual"><scope>StringTable</scope><name>m_dirty</name></member>
+      <member refid="a00021_1e18b61d25a5a0d1b8f218b75a9cff6c1" prot="private" virt="non-virtual"><scope>StringTable</scope><name>m_file</name></member>
+      <member refid="a00021_162ae09cffc8b33a2a667879dd5808631" prot="private" virt="non-virtual"><scope>StringTable</scope><name>m_idx</name></member>
+      <member refid="a00021_1661fe304e664b271d802ee0fd0b2a9cb" prot="private" virt="non-virtual"><scope>StringTable</scope><name>m_initialized</name></member>
+      <member refid="a00021_162809b636a1b4a16e8adb68f40d7ac34" prot="private" virt="non-virtual"><scope>StringTable</scope><name>m_lastError</name></member>
+      <member refid="a00021_1a5bd454f29da8f5d3f48a4f8b8bb38d3" prot="private" virt="non-virtual"><scope>StringTable</scope><name>m_next_new_id</name></member>
+      <member refid="a00021_11b34b5c88a7ac6988c2f60194228f341" prot="private" virt="non-virtual"><scope>StringTable</scope><name>m_traverser</name></member>
+      <member refid="a00021_1d84f7f3f83c32765ede8d1b097157521" prot="public" virt="non-virtual"><scope>StringTable</scope><name>size_type</name></member>
+      <member refid="a00021_1e377ce3433267fc55fe861b39a0b8f42" prot="public" virt="non-virtual"><scope>StringTable</scope><name>StringTable</name></member>
+      <member refid="a00021_18e79899f8c7c96dc380315e9c4928a0b" prot="public" virt="non-virtual"><scope>StringTable</scope><name>Tree</name></member>
+      <member refid="a00021_112d0b73740a07a590f6d7331b6c9c268" prot="public" virt="non-virtual"><scope>StringTable</scope><name>VerifyIndex</name></member>
+      <member refid="a00021_1d0788518a39c54333b8eff8a67c1b162" prot="public" virt="non-virtual"><scope>StringTable</scope><name>~StringTable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

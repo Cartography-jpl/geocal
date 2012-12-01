@@ -1,0 +1,144 @@
+/*===========================================================================
+=                                                                           =
+=                                RasterImage                                =
+=                                                                           =
+=============================================================================
+
+                          Jet Propulsion Laboratory
+                                    MISR
+                             GeoCal Processing
+                                                                        
+            Copyright 2006, California Institute of Technology.         
+                           ALL RIGHTS RESERVED.                         
+                 U.S. Government Sponsorship acknowledged.              
+
+!C++=========================================================================
+
+!CLASS NAME: RasterImage
+
+!ABSTRACT:
+
+   This contains inline routines for the parent .h file
+
+!PARENT(S):
+
+  raster_image.h
+
+!REVISION HISTORY:
+
+See ClearCase Log
+
+=============================================================================
+!END=======================================================================*/
+
+#ifndef RASTER_IMAGE_ICC
+#define RASTER_IMAGE_ICC
+#include "range_check.h"
+                                // Definition of range_min_check.
+#include <math.h>		// Prototype of floor.
+
+//***************************************************************************
+// Definition of function inline RasterImage::RasterImage(int Number_line,
+// int Number_sample).
+//***************************************************************************
+
+inline GeoCal::GeoCalCore::RasterImage::RasterImage(
+int		   Number_line, // Number of lines in the image.
+int		   Number_sample
+				// Number of samples in the image.
+)
+:number_line_(Number_line), number_sample_(Number_sample)
+{
+  range_min_check(Number_line, 0);
+  range_min_check(Number_sample, 0);
+}
+
+//***************************************************************************
+// Definition of function inline RasterImage::RasterImage().
+//***************************************************************************
+
+inline GeoCal::GeoCalCore::RasterImage::RasterImage()
+:number_line_(0), number_sample_(0)
+{
+}
+
+//***************************************************************************
+// Definition of function inline RasterImage::~RasterImage().
+//***************************************************************************
+
+inline GeoCal::GeoCalCore::RasterImage::~RasterImage()
+{
+// Do nothing
+}
+
+//***************************************************************************
+// Definition of function inline double
+// RasterImage::interpolate(double Line, double Sample) const.
+//***************************************************************************
+
+inline double GeoCal::GeoCalCore::RasterImage::interpolate(
+double		   Line,	// Line to interpolate to
+double		   Sample	// Sample to interpolate to
+) const
+{
+  int i = (int) floor(Line);
+  int j = (int) floor(Sample);
+  double t1 = (*this)(i, j);
+  double t2 = (*this)(i, j + 1);
+  double t3 = (*this)(i + 1, j);
+  double t4 = (*this)(i + 1, j + 1);
+  double t5 = t1 + (t2 - t1) * (Sample - j);
+  double t6 = t3 + (t4 - t3) * (Sample - j);
+  return t5 + (t6 - t5) * (Line - i);
+}
+
+//***************************************************************************
+// Definition of function inline double
+// RasterImage::interpolate(double Line, double Sample) const.
+//***************************************************************************
+
+inline double GeoCal::GeoCalCore::RasterImage::interpolate(
+const ImageCoor&   Ic		// Point to read.
+) const
+{
+  return interpolate(Ic.line(), Ic.sample());
+}
+
+//***************************************************************************
+// Definition of function inline int RasterImage::number_line() const.
+//***************************************************************************
+
+inline int GeoCal::GeoCalCore::RasterImage::number_line() const
+{
+  return number_line_;
+}
+
+//***************************************************************************
+// Definition of function inline int RasterImage::number_sample() const.
+//***************************************************************************
+
+inline int GeoCal::GeoCalCore::RasterImage::number_sample() const
+{
+  return number_sample_;
+}
+
+//***************************************************************************
+// Definition of function inline int RasterImage::number_tile_line() const.
+//***************************************************************************
+
+inline int GeoCal::GeoCalCore::RasterImage::number_tile_line() const
+{
+  return number_line();
+}
+
+//***************************************************************************
+// Definition of function inline int RasterImage::number_tile_line() const.
+//***************************************************************************
+
+inline int GeoCal::GeoCalCore::RasterImage::number_tile_sample() const
+{
+  return number_sample();
+}
+
+#endif
+

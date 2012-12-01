@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00018" kind="class" prot="public">
+    <compoundname>RTreeNode</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">TreeNodeBase</basecompoundref>
+    <includes refid="a00037" local="no">RTreeNode.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename _Item</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>_max_items</declname>
+        <defname>_max_items</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00018_1b328e2a881be47b08d0d8c33c28083df" prot="public" static="no">
+        <type>_Item::IdType</type>
+        <definition>typedef _Item::IdType RTreeNode&lt; _Item, _max_items &gt;::IdType</definition>
+        <argsstring></argsstring>
+        <name>IdType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" line="48" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00018_1c777621cdac752144fda63ab7c238053" prot="public" static="no">
+        <type>_Item</type>
+        <definition>typedef _Item RTreeNode&lt; _Item, _max_items &gt;::Item</definition>
+        <argsstring></argsstring>
+        <name>Item</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" line="46" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00018_1070fbd9fa01acafc36bd273ad5ab9c77" prot="public" static="no">
+        <type>std::vector&lt; Item &gt;</type>
+        <definition>typedef std::vector&lt; Item &gt; RTreeNode&lt; _Item, _max_items &gt;::ItemArray</definition>
+        <argsstring></argsstring>
+        <name>ItemArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" line="47" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00018_1ae347610887727452633625b4c495b4d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool RTreeNode&lt; _Item, _max_items &gt;::is_dirty</definition>
+        <argsstring></argsstring>
+        <name>is_dirty</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" line="51" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00018_180350751cbebf83dd8eff34b6695e490" prot="public" static="no" mutable="no">
+        <type>ItemArray</type>
+        <definition>ItemArray RTreeNode&lt; _Item, _max_items &gt;::items</definition>
+        <argsstring></argsstring>
+        <name>items</name>
+        <briefdescription>
+<para>set to true if this needs to be re-saved </para>        </briefdescription>
+        <detaileddescription>
+<para>you *must* manage this, it does not get managed automatically </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" line="55" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" bodystart="55" bodyend="-1"/>
+        <referencedby refid="a00018_13533996b97aebe92fb35ea2094ab0fb2" compoundref="a00037" startline="58" endline="62">RTreeNode&lt; _Item, _max_items &gt;::RTreeNode</referencedby>
+        <referencedby refid="a00018_144c99d2762ddd1c2b77a9f55974cccdc" compoundref="a00037" startline="97" endline="115">RTreeNode&lt; _Item, _max_items &gt;::Serialize</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00018_127d5f95667bfdb033f62bf3c400d8615" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IdType</type>
+        <definition>IdType RTreeNode&lt; _Item, _max_items &gt;::get_item_id</definition>
+        <argsstring>(std::size_t idx)</argsstring>
+        <name>get_item_id</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" line="119" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" bodystart="118" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="a00018_12560856d00425b83961c766ab0c4486c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RTreeNode&lt; _Item, _max_items &gt;::RTreeNode</definition>
+        <argsstring>(const unsigned char *const buffer)</argsstring>
+        <name>RTreeNode</name>
+        <param>
+          <type>const unsigned char *const </type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Serialization constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" line="77" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" bodystart="75" bodyend="93"/>
+        <references refid="a00018_180350751cbebf83dd8eff34b6695e490" compoundref="a00037" startline="55">RTreeNode&lt; _Item, _max_items &gt;::items</references>
+      </memberdef>
+      <memberdef kind="function" id="a00018_13533996b97aebe92fb35ea2094ab0fb2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RTreeNode&lt; _Item, _max_items &gt;::RTreeNode</definition>
+        <argsstring>()</argsstring>
+        <name>RTreeNode</name>
+        <briefdescription>
+<para>array of items this node holds </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" line="59" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" bodystart="58" bodyend="62"/>
+        <references refid="a00018_180350751cbebf83dd8eff34b6695e490" compoundref="a00037" startline="55">RTreeNode&lt; _Item, _max_items &gt;::items</references>
+      </memberdef>
+      <memberdef kind="function" id="a00018_144c99d2762ddd1c2b77a9f55974cccdc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RTreeNode&lt; _Item, _max_items &gt;::Serialize</definition>
+        <argsstring>(unsigned char *buffer) const </argsstring>
+        <name>Serialize</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Serializer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" line="98" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" bodystart="97" bodyend="115"/>
+        <references refid="a00018_180350751cbebf83dd8eff34b6695e490" compoundref="a00037" startline="55">RTreeNode&lt; _Item, _max_items &gt;::items</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Stores and handles serialization for items in a Tree. </para>    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Item</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the item being stored. Must support the serialization concept defined in <ref refid="a00068" kindref="compound">Serialization.h</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_max_items</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Max number of items that this stores </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="608">
+        <label>TreeNodeBase</label>
+      </node>
+      <node id="607">
+        <label>RTreeNode&lt; _Item, _max_items &gt;</label>
+        <link refid="a00018"/>
+        <childnode refid="608" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="610">
+        <label>TreeNodeBase</label>
+      </node>
+      <node id="609">
+        <label>RTreeNode&lt; _Item, _max_items &gt;</label>
+        <link refid="a00018"/>
+        <childnode refid="610" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" line="44" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeNode.h" bodystart="44" bodyend="125"/>
+    <listofallmembers>
+      <member refid="a00018_127d5f95667bfdb033f62bf3c400d8615" prot="public" virt="non-virtual"><scope>RTreeNode</scope><name>get_item_id</name></member>
+      <member refid="a00018_1b328e2a881be47b08d0d8c33c28083df" prot="public" virt="non-virtual"><scope>RTreeNode</scope><name>IdType</name></member>
+      <member refid="a00018_1ae347610887727452633625b4c495b4d" prot="public" virt="non-virtual"><scope>RTreeNode</scope><name>is_dirty</name></member>
+      <member refid="a00018_1c777621cdac752144fda63ab7c238053" prot="public" virt="non-virtual"><scope>RTreeNode</scope><name>Item</name></member>
+      <member refid="a00018_1070fbd9fa01acafc36bd273ad5ab9c77" prot="public" virt="non-virtual"><scope>RTreeNode</scope><name>ItemArray</name></member>
+      <member refid="a00018_180350751cbebf83dd8eff34b6695e490" prot="public" virt="non-virtual"><scope>RTreeNode</scope><name>items</name></member>
+      <member refid="a00018_1b82b40e9d9b5523c57ce066227b29f26548d6554c634d47fb1ae5cdf662e5164" prot="public" virt="non-virtual"><scope>RTreeNode</scope><name>max_items</name></member>
+      <member refid="a00018_1b82b40e9d9b5523c57ce066227b29f264854c62bff69b89dd4f82ad2075a1018" prot="public" virt="non-virtual"><scope>RTreeNode</scope><name>record_size</name></member>
+      <member refid="a00018_13533996b97aebe92fb35ea2094ab0fb2" prot="public" virt="non-virtual"><scope>RTreeNode</scope><name>RTreeNode</name></member>
+      <member refid="a00018_12560856d00425b83961c766ab0c4486c" prot="public" virt="non-virtual"><scope>RTreeNode</scope><name>RTreeNode</name></member>
+      <member refid="a00018_144c99d2762ddd1c2b77a9f55974cccdc" prot="public" virt="non-virtual"><scope>RTreeNode</scope><name>Serialize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

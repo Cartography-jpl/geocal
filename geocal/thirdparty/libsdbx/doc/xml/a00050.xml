@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00050" kind="namespace">
+    <compoundname>std</compoundname>
+    <innerclass refid="a00170" prot="public">std::allocator</innerclass>
+    <innerclass refid="a00171" prot="public">std::auto_ptr</innerclass>
+    <innerclass refid="a00172" prot="public">std::bad_alloc</innerclass>
+    <innerclass refid="a00173" prot="public">std::bad_cast</innerclass>
+    <innerclass refid="a00174" prot="public">std::bad_exception</innerclass>
+    <innerclass refid="a00175" prot="public">std::bad_typeid</innerclass>
+    <innerclass refid="a00176" prot="public">std::basic_fstream</innerclass>
+    <innerclass refid="a00177" prot="public">std::basic_ifstream</innerclass>
+    <innerclass refid="a00178" prot="public">std::basic_ios</innerclass>
+    <innerclass refid="a00179" prot="public">std::basic_iostream</innerclass>
+    <innerclass refid="a00180" prot="public">std::basic_istream</innerclass>
+    <innerclass refid="a00181" prot="public">std::basic_istringstream</innerclass>
+    <innerclass refid="a00182" prot="public">std::basic_ofstream</innerclass>
+    <innerclass refid="a00183" prot="public">std::basic_ostream</innerclass>
+    <innerclass refid="a00184" prot="public">std::basic_ostringstream</innerclass>
+    <innerclass refid="a00185" prot="public">std::basic_string</innerclass>
+    <innerclass refid="a00186" prot="public">std::basic_stringstream</innerclass>
+    <innerclass refid="a00187" prot="public">std::bitset</innerclass>
+    <innerclass refid="a00188" prot="public">std::complex</innerclass>
+    <innerclass refid="a00189" prot="public">std::deque</innerclass>
+    <innerclass refid="a00190" prot="public">std::domain_error</innerclass>
+    <innerclass refid="a00191" prot="public">std::exception</innerclass>
+    <innerclass refid="a00192" prot="public">std::fstream</innerclass>
+    <innerclass refid="a00193" prot="public">std::ifstream</innerclass>
+    <innerclass refid="a00194" prot="public">std::invalid_argument</innerclass>
+    <innerclass refid="a00195" prot="public">std::ios</innerclass>
+    <innerclass refid="a00196" prot="public">std::ios_base</innerclass>
+    <innerclass refid="a00197" prot="public">std::istream</innerclass>
+    <innerclass refid="a00198" prot="public">std::istringstream</innerclass>
+    <innerclass refid="a00199" prot="public">std::length_error</innerclass>
+    <innerclass refid="a00200" prot="public">std::list</innerclass>
+    <innerclass refid="a00201" prot="public">std::logic_error</innerclass>
+    <innerclass refid="a00202" prot="public">std::map</innerclass>
+    <innerclass refid="a00203" prot="public">std::multimap</innerclass>
+    <innerclass refid="a00204" prot="public">std::multiset</innerclass>
+    <innerclass refid="a00205" prot="public">std::ofstream</innerclass>
+    <innerclass refid="a00206" prot="public">std::ostream</innerclass>
+    <innerclass refid="a00207" prot="public">std::ostringstream</innerclass>
+    <innerclass refid="a00208" prot="public">std::out_of_range</innerclass>
+    <innerclass refid="a00209" prot="public">std::overflow_error</innerclass>
+    <innerclass refid="a00210" prot="public">std::priority_queue</innerclass>
+    <innerclass refid="a00211" prot="public">std::queue</innerclass>
+    <innerclass refid="a00212" prot="public">std::range_error</innerclass>
+    <innerclass refid="a00213" prot="public">std::runtime_error</innerclass>
+    <innerclass refid="a00214" prot="public">std::set</innerclass>
+    <innerclass refid="a00215" prot="public">std::stack</innerclass>
+    <innerclass refid="a00216" prot="public">std::string</innerclass>
+    <innerclass refid="a00217" prot="public">std::stringstream</innerclass>
+    <innerclass refid="a00218" prot="public">std::underflow_error</innerclass>
+    <innerclass refid="a00219" prot="public">std::valarray</innerclass>
+    <innerclass refid="a00220" prot="public">std::vector</innerclass>
+    <innerclass refid="a00221" prot="public">std::wfstream</innerclass>
+    <innerclass refid="a00222" prot="public">std::wifstream</innerclass>
+    <innerclass refid="a00223" prot="public">std::wios</innerclass>
+    <innerclass refid="a00224" prot="public">std::wistream</innerclass>
+    <innerclass refid="a00225" prot="public">std::wistringstream</innerclass>
+    <innerclass refid="a00226" prot="public">std::wofstream</innerclass>
+    <innerclass refid="a00227" prot="public">std::wostream</innerclass>
+    <innerclass refid="a00228" prot="public">std::wostringstream</innerclass>
+    <innerclass refid="a00229" prot="public">std::wstring</innerclass>
+    <innerclass refid="a00230" prot="public">std::wstringstream</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="a00050_1042280b675ab84027160f36b36f05c29" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ForwardIterator</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool std::is_sorted</definition>
+        <argsstring>(ForwardIterator first, ForwardIterator last)</argsstring>
+        <name>is_sorted</name>
+        <param>
+          <type>ForwardIterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>ForwardIterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/is_sorted.h" line="41" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/is_sorted.h" bodystart="40" bodyend="52"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>STL namespace. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/is_sorted.h" line="37"/>
+  </compounddef>
+</doxygen>

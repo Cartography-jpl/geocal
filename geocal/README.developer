@@ -1,0 +1,225 @@
+Debugging
+=========
+We use libtools to build executables and test software. This has a lot of
+pluses, but one minus is you can't directly debug the program. However,
+libtool has a special mode that is designed for debugging. To use, do
+for example:
+
+./configure --enable-maintainer-mode --enable-debug
+make check
+./libtool --mode=execute gdb --annotate=3 lib/test_all
+
+Note that we use --enable-debug when compiling. By default the build is
+optimized, which isn't good for using in a debugger. With --enable-debug we
+compile with debugging information turned on (and extra checks in some
+libraries such as Blitz++).
+
+test_all runs all the unit tests, which most of the time is what you want.
+But if you are focusing on one test (e.g., debugging what it wrong with it),
+then note that you can run a single test by specifying it on the command line
+using --run_test. This can also take wildcards, if you want to run a set of 
+tests:
+
+lib/test_all --run_test=image_coordinate
+  (runs a suite)
+lib/test_all --run_test=image_coordinate/basic_test
+  (runs a single test)
+
+Consult the boost test documentation for other options that can be set
+(see
+http://beta.boost.org/doc/libs/1_37_0/libs/test/doc/html/utf/user-guide/runtime-config/reference.html)
+
+Developement options
+====================
+In addition to the --enable-debug option mentioned above, another useful 
+option to use during developement is --without-documentation. Normally if
+--enable-maintainer-mode is set, we automatically update the doxygen 
+documentation as needed. However, during development you might not care
+about keeping the documentation up to date at each build.
+
+You can use the --without-documentation to avoid this. This skips 
+the automatic updates to the doxygen documentation, and during install the
+documentation is not installed. This is useful during development, say 
+building, installing and running the ruby bindings in a test area.
+
+If you have a build environment set up this way, you'll want to make sure
+to have another build environment without this option. You can periodically
+build in the environment to update the documentation as desired.
+
+Third Party Dependencies
+========================
+This software has a number of dependencies on third party libraries. This
+is a general philosophy of this software, we try to reuse rather than 
+rewrite. Rather than the old JPL "Not Invented Here" syndrome, we have the
+"I don't want to write and maintain it" syndrome.
+
+For third party libraries, if the software is widely available (i.e., most
+Linux flavors have access to the library) we don't redistribute it ourselves.
+
+Reuse needs to be balanced against the danger of using software that ends
+up being no longer maintained. There is no easy way to avoid this, but we've
+tried to choose packages that are in wide use to mitigate this somewhat.
+
+Some libraries and comments on them
+
+Boost (Mandatory)
+-----------------
+Boost (http://www.boost.org) is a library of things that are likely to appear
+in future versions the C++ standard. This contains things that most projects
+need anyways, but in the past everybody wrote their own (i.e., smart pointers).
+
+It is likely that some of the boost library we are using will end up
+in future version of C++. When that occurs, we'll need to modify our
+software to use the C++ standard version. Since boost is the basis of
+the C++ standard, this will likely be little more than changing which
+name space and include file we get the class from.
+
+Blitz++ (Mandatory)
+-------------------
+This is a general purpose tensor library. It has some overlap in
+functionally with boost::multi_array, but there are a number of things
+supplied by blitz that we don't find in boost.  This software uses a
+technique called "expression templates". This gives FORTRAN or
+handcrafted C like performance with a higher level interface somewhat
+like IDL or FORTRAN 90.
+
+This library is currently being maintained, but doesn't have any active
+development. It is possible we'll need to replace this with something else
+in the future, but for now there are things offered by the library we can't
+find elsewhere.
+
+GSL (Mandatory)
+---------------
+GNU Scientific Library. This is a very complete scientific library. It is
+a standard library, widely used and well maintained. See 
+http://www.gnu.org/software/gsl for details.
+
+CSPICE (Optional)
+-----------------
+This is used for doing time conversions and changing from inertial to
+fixed coordinates (e.g., ECI to ECR). If we ever need to replace this with
+another library, there are only a few places where we directly call CSPICE
+routines. Right now, all of the SPICE calls are centralized in the class 
+SpiceHelper.
+
+SDP Toolkit (Optional)
+---------------------
+This serves much the same function as CSPICE, but is the toolkit that was 
+used by the EOS missions. See 
+http://newsroom.gsfc.nasa.gov/sdptoolkit/toolkit.html
+
+HDFEOS Toolkit (Optional)
+-------------------------
+Needed to read and write HDFEOS formatted files.
+
+Gdal (Optional)
+---------------
+This is used to read and write a wide variety of image formats. It wraps
+a number of other libraries and gives a common interface to reading these
+formats. See http://www.gdal.org for details.
+
+VICAR (Optional)
+----------------
+
+This is needed to read and write VICAR format files, and interact with
+the VICAR shell. Note that even without this library, there is a more
+limited set of classes for reading and writing VICAR format (the
+VicarLiteFile). See http://www-mipl.jpl/external/vicar.html for details.
+
+Libsdx (Included)
+-----------------
+
+Surprisingly, I couldn't find any "standard" libraries that support 
+R*-trees. This is a small library that has a template library to 
+support R*-trees. This has very "boost" feel, but it isn't actually part
+of the boost library. You can read more about this library at
+http://www.virtualroadside.com/blog/index.php/2008/10/04/r-tree-implementation-for-cpp/, the actual code comes from https://roadnav.svn.sourceforge.net/svnroot/roadnav/libsdbx/trunk.
+
+This library can be replaced with a R*-tree library if we happen to find 
+one (e.g., a library gets added to boost).
+
+Autotools
+=================
+The system is built using the standard GNU autotools chain. If you are familiar
+with this, then this system is pretty standard. Things are set up as with most
+projects. Different projects seem to put local autoconf macros in different
+places, on this system they are in config/m4.
+
+If you are only vaguely familiar with autotools, it can be a bit confusing 
+about what files we generate, and which are derived files.
+
+The file ./booststrap can be used to initial generate the derived files.
+
+The input files are configure.in and Makefile.am. From these files the
+./configure and Makefile.in are generated. In addition to these file, there
+are local autoconf macros in config/m4, and derived files used by configure
+in the directory config. You can generally ignore these - you really need
+to know how to use autotools before you want to mess around with the
+autoconf macros (it isn't hard, just a bit obscure).
+
+To make it manageable, Makefile.am is broken into a number of pieces
+that are included into the top level Makefile.am file. Each directory
+with code has its own .am file that describes the code in that
+directory, for instance lib/GeoCalCore/Interface/interface.am.
+
+Once these files are generated, the actual build is done by ./configure and
+make cycle that should be familiar if you've installed any of the GNU 
+software before. This generates an actual Makefile.
+
+If you are going to be changing the configure.in or .am files, it
+can be convenient to enable "maintainer mode" in the Makefiles. This adds rules
+in the Makefile to rebuild the ./configure and Makefile.in files as needed.
+To turn this on, you add the option "--enable-maintainer-mode" when you
+do configure, e.g, "./configure --enable-maintainer-mode".
+
+Autotools Problems
+==================
+Autotools has been showing its age and haphazard design for some time
+(often referred to as "auto-hell" see for example
+http://lwn.net/Articles/188693/), however right now there isn't an
+obvious replacement. Most FOSS project still use these tools, so for
+now we'll continue to do the same. KDE recently moved to CMake, but
+right now they are the only large project to use CMake.
+
+Imake has been used on other JPL projects (most notably VICAR),
+however this is no longer being developed. This was what was used by
+X11, but as of X11R7.0 Imake has been dropped by X (which uses
+autotools instead).
+
+For a user, autotools stuff work fine, all of the complication is in
+writing the input files during development. Fortunately, Geocal isn't
+particularly complicated compared to other projects (like KDE), so for
+now this complication is manageable.
+
+In the future, if there is a clear replacement for autotools, we may
+want to move this system to that.
+
+SWIG
+=================
+In addition to autotools, we also generate wrappers to call code through
+python or ruby. This uses the SWIG package (see http://www.swig.org). This
+is found on most Linux systems, but if you are going to be regenerating the
+wrappers you may need to install it.
+
+Note that the output of SWIG is just a normal ".cc" file. This means
+that if you are simply building/installing the system you don't need
+SWIG, this is only needed to regenerate the wrapper code.
+
+DOXYGEN
+==================
+Documentation is generated using doxygen (see 
+http://www.stack.nl/~dimitri/doxygen/). This generate html from the
+comments found in the code. Like SWIG, this is commonly found on Linux
+systems. If you are going to be regenerating the documentation, you
+may need to install it.
+
+Also like SWIG, the output of doxygen is just normal ".html" files. If you 
+are building/installing the system you don't need doxygen, this is only
+needed if you are regenerating the html.
+
+We use the output of doxygen combined with some scripts to generate 
+documentation picked up by SWIG. This allows us to have the documentation
+available in the native language for the wrappers, e.g., __doc__ for python,
+rdoc for Ruby.
+
+

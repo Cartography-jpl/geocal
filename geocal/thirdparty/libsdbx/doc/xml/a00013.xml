@@ -1,0 +1,941 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00013" kind="class" prot="public">
+    <compoundname>RTree</compoundname>
+    <includes refid="a00033" local="no">RTree.h</includes>
+    <innerclass refid="a00260" prot="private">RTree::OverflowItem</innerclass>
+      <sectiondef kind="user-defined">
+      <header>Query functions</header>
+      <memberdef kind="function" id="a00013_149838e1afbc587ea4b3331831ca7983c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00017" kindref="compound">Iterator</ref> *</type>
+        <definition>Iterator* RTree::Begin</definition>
+        <argsstring>()</argsstring>
+        <name>Begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="224" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="223" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_116310cb8c4ec8d9c7f8b371caced5141" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00017" kindref="compound">EnclosedIterator</ref> *</type>
+        <definition>EnclosedIterator* RTree::FindEnclosed</definition>
+        <argsstring>(const BoundingBox &amp;bound)</argsstring>
+        <name>FindEnclosed</name>
+        <param>
+          <type>const BoundingBox &amp;</type>
+          <declname>bound</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="218" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="217" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_10a5b51cb5d2e776244c07af0a24d318f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00017" kindref="compound">OverlappingIterator</ref> *</type>
+        <definition>OverlappingIterator* RTree::FindOverlapping</definition>
+        <argsstring>(const BoundingBox &amp;bound)</argsstring>
+        <name>FindOverlapping</name>
+        <param>
+          <type>const BoundingBox &amp;</type>
+          <declname>bound</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="212" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="211" bodyend="214"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Backend/control interface</header>
+      <memberdef kind="function" id="a00013_173cc91cc6815efa9acaea74b294bb960" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>ErrorCode</type>
+        <definition>ErrorCode RTree::GetErrorCode</definition>
+        <argsstring>() const </argsstring>
+        <name>GetErrorCode</name>
+        <briefdescription>
+<para>returns the last error code </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="201" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="200" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_15fa9e0f480079e5e72127763c6eac990" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTree::Initialize</definition>
+        <argsstring>(BackendArgs &amp;args) WARN_IF_UNUSED</argsstring>
+        <name>Initialize</name>
+        <param>
+          <type>BackendArgs &amp;</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="190" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="189" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_1d7399987b58b4c8e77fbe91085641037" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTree::IsOk</definition>
+        <argsstring>()</argsstring>
+        <name>IsOk</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="195" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="194" bodyend="197"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00013_16a0b56a93da62f760939f62d5e841711" prot="public" static="no">
+        <type><ref refid="a00014" kindref="compound">RTreeAcceptAny</ref>&lt; NodeItem, LeafItem &gt;</type>
+        <definition>typedef RTreeAcceptAny&lt;NodeItem, LeafItem&gt; RTree::AcceptAny</definition>
+        <argsstring></argsstring>
+        <name>AcceptAny</name>
+        <briefdescription>
+<para>accepts every single node </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="148" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_1050521fcb0828dae353cd4aa8225a6b4" prot="public" static="no">
+        <type><ref refid="a00015" kindref="compound">RTreeAcceptEnclosing</ref>&lt; NodeItem, LeafItem &gt;</type>
+        <definition>typedef RTreeAcceptEnclosing&lt;NodeItem, LeafItem&gt; RTree::AcceptEnclosing</definition>
+        <argsstring></argsstring>
+        <name>AcceptEnclosing</name>
+        <briefdescription>
+<para>enclosed in the specified bound </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="145" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_1b1cd11ac78af030c3a1edb30692a9c3e" prot="public" static="no">
+        <type><ref refid="a00016" kindref="compound">RTreeAcceptOverlapping</ref>&lt; NodeItem, LeafItem &gt;</type>
+        <definition>typedef RTreeAcceptOverlapping&lt;NodeItem, LeafItem&gt; RTree::AcceptOverlapping</definition>
+        <argsstring></argsstring>
+        <name>AcceptOverlapping</name>
+        <briefdescription>
+<para>overlapping the specified bound </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="142" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_1d94abdeb422dd45c69a5c9511ca4d6e5" prot="public" static="no">
+        <type>_Backend&lt; NodeBase, <ref refid="a00018" kindref="compound">RTreeNode</ref>, TreeNodeItem, <ref refid="a00022" kindref="compound">LeafNode</ref>, KeyType, max_child_items &gt;</type>
+        <definition>typedef _Backend&lt; NodeBase, RTreeNode, TreeNodeItem, LeafNode, KeyType, max_child_items&gt; RTree::Backend</definition>
+        <argsstring></argsstring>
+        <name>Backend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="127" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_1c69d197ed2d75739f82501da83cf5a7b" prot="public" static="no">
+        <type>Backend::Args</type>
+        <definition>typedef Backend::Args RTree::BackendArgs</definition>
+        <argsstring></argsstring>
+        <name>BackendArgs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="129" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_1e8a1dfc0f3ac64857e49f91db915c89b" prot="public" static="no">
+        <type>RTreeBoundingBox&lt; dimensions, _bound_type &gt;</type>
+        <definition>typedef RTreeBoundingBox&lt;dimensions, _bound_type&gt; RTree::BoundingBox</definition>
+        <argsstring></argsstring>
+        <name>BoundingBox</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="105" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_131f396f9be9609fa55782ad4829c0b5b" prot="public" static="no">
+        <type><ref refid="a00017" kindref="compound">RTreeIterator</ref>&lt; <ref refid="a00013" kindref="compound">this_type</ref>, <ref refid="a00015" kindref="compound">AcceptEnclosing</ref> &gt;</type>
+        <definition>typedef RTreeIterator&lt;this_type, AcceptEnclosing&gt; RTree::EnclosedIterator</definition>
+        <argsstring></argsstring>
+        <name>EnclosedIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="152" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="enum" id="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed" prot="public" static="no">
+        <name>ErrorCode</name>
+        <enumvalue id="a00013_16e4e4db4b3b4f48d4d3881801f4c5fedc5d7dea67938d9358da62555be104e3e" prot="public">
+          <name>ERR_NONE</name>
+          <initializer> 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed0023a3840bce9159e9baa2ea7347e80b" prot="public">
+          <name>ERR_CREATE_ROOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed621a5aa7cc00c69a3b2fb20e84e95090" prot="public">
+          <name>ERR_GET_LEAFNODE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed2337106daa3e624bff05b9aaf852bc5d" prot="public">
+          <name>ERR_GET_NODE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed145d602148c6cd3c767cf4c47ce6387a" prot="public">
+          <name>ERR_GET_ROOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed7674ddfa879fe665406acc02f3bf4e2c" prot="public">
+          <name>ERR_CREATE_NODE_IN_SPLIT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed5fd0d5ba3876b1df6cb72c4bb368476b" prot="public">
+          <name>ERR_CREATE_SPLIT_ROOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed8f50587c1c6f407edfbb571a12e271e2" prot="public">
+          <name>ERR_GET_SPLIT_ROOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed0b58f47d3161b0602252280d4c520ab6" prot="public">
+          <name>ERR_EXTEND_BOUNDS_FAILED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="161" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="161" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_1148a74616ebab1138a50364e41430735" prot="public" static="no">
+        <type>Backend::IdType</type>
+        <definition>typedef Backend::IdType RTree::IdType</definition>
+        <argsstring></argsstring>
+        <name>IdType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="132" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_12acb045036b6b5778c5183cb573ac269" prot="public" static="no">
+        <type><ref refid="a00017" kindref="compound">RTreeIterator</ref>&lt; <ref refid="a00013" kindref="compound">this_type</ref>, <ref refid="a00014" kindref="compound">AcceptAny</ref> &gt;</type>
+        <definition>typedef RTreeIterator&lt;this_type, AcceptAny&gt; RTree::Iterator</definition>
+        <argsstring></argsstring>
+        <name>Iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="153" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_16af6bb2ee0401a1f141f55ce431971ac" prot="public" static="no">
+        <type>BoundingBox</type>
+        <definition>typedef BoundingBox RTree::KeyType</definition>
+        <argsstring></argsstring>
+        <name>KeyType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="108" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_14e26a3610d2271dcbb760bf4d7263f77" prot="public" static="no">
+        <type>TreeLeafItem&lt; KeyType, LeafType &gt;</type>
+        <definition>typedef TreeLeafItem&lt;KeyType, LeafType&gt; RTree::LeafItem</definition>
+        <argsstring></argsstring>
+        <name>LeafItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="115" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_15a46af0df672bb6a70f25af0f2c290a9" prot="public" static="no">
+        <type>LeafNode::ItemArray</type>
+        <definition>typedef LeafNode::ItemArray RTree::LeafItemArray</definition>
+        <argsstring></argsstring>
+        <name>LeafItemArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="117" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_1e2a75f62592b13676432d7cd4fea785d" prot="public" static="no">
+        <type>LeafItemArray::iterator</type>
+        <definition>typedef LeafItemArray::iterator RTree::LeafItemIterator</definition>
+        <argsstring></argsstring>
+        <name>LeafItemIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="118" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_189ce586f5e8fe01930fcd95d9638e051" prot="public" static="no">
+        <type><ref refid="a00022" kindref="compound">TreeNode</ref>&lt; LeafItem, max_child_items &gt;</type>
+        <definition>typedef TreeNode&lt;LeafItem, max_child_items&gt; RTree::LeafNode</definition>
+        <argsstring></argsstring>
+        <name>LeafNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="116" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_1d5de834085bbce66e4c76e1517ac9c89" prot="public" static="no">
+        <type>_leaf_type</type>
+        <definition>typedef _leaf_type RTree::LeafType</definition>
+        <argsstring></argsstring>
+        <name>LeafType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="109" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_11a293f5d37b9ce0a311083d47e32477e" prot="public" static="no">
+        <type>Backend::Node</type>
+        <definition>typedef Backend::Node RTree::Node</definition>
+        <argsstring></argsstring>
+        <name>Node</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="135" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_14bd8f158d2348e3b4cd15dbf6d143b63" prot="public" static="no">
+        <type>TreeNodeBase</type>
+        <definition>typedef TreeNodeBase RTree::NodeBase</definition>
+        <argsstring></argsstring>
+        <name>NodeBase</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="112" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_19a9e19d08177b06cc5455f7f81b5f983" prot="public" static="no">
+        <type>Backend::NodeItem</type>
+        <definition>typedef Backend::NodeItem RTree::NodeItem</definition>
+        <argsstring></argsstring>
+        <name>NodeItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="134" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_1c457769a7ec256851f478a29e6f5ac9e" prot="public" static="no">
+        <type>Node::ItemArray</type>
+        <definition>typedef Node::ItemArray RTree::NodeItemArray</definition>
+        <argsstring></argsstring>
+        <name>NodeItemArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="136" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_1eb51ffcf9a33c246c73a53848ce27a66" prot="public" static="no">
+        <type>NodeItemArray::iterator</type>
+        <definition>typedef NodeItemArray::iterator RTree::NodeItemIterator</definition>
+        <argsstring></argsstring>
+        <name>NodeItemIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="137" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_115589782110bd0afdf547ae131568be9" prot="public" static="no">
+        <type><ref refid="a00017" kindref="compound">RTreeIterator</ref>&lt; <ref refid="a00013" kindref="compound">this_type</ref>, <ref refid="a00016" kindref="compound">AcceptOverlapping</ref> &gt;</type>
+        <definition>typedef RTreeIterator&lt;this_type, AcceptOverlapping&gt; RTree::OverlappingIterator</definition>
+        <argsstring></argsstring>
+        <name>OverlappingIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="151" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_15346e1bbbcff05fdc69899736667a34c" prot="public" static="no">
+        <type>Backend::size_type</type>
+        <definition>typedef Backend::size_type RTree::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="131" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00013_1dff160509b37615cd3a9f13146c9fc28" prot="public" static="no">
+        <type><ref refid="a00013" kindref="compound">RTree</ref>&lt; __RTREE_TEMPLATE_FN &gt;</type>
+        <definition>typedef RTree&lt;__RTREE_TEMPLATE_FN&gt; RTree::this_type</definition>
+        <argsstring></argsstring>
+        <name>this_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="96" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="a00013_1775575f3806172df875689499df6eba3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class RTreeIterator</definition>
+        <argsstring></argsstring>
+        <name>RTreeIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="157" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00013_1ebdb9bfab5c757d5879b90dcefa6a522" prot="private" static="no" mutable="no">
+        <type>Backend</type>
+        <definition>Backend RTree::backend</definition>
+        <argsstring></argsstring>
+        <name>backend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="845" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="845" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00013_106f42c196f30a06b59bde81553f7dd74" prot="private" static="no" mutable="no">
+        <type>ErrorCode</type>
+        <definition>ErrorCode RTree::m_lastError</definition>
+        <argsstring></argsstring>
+        <name>m_lastError</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="846" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="846" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00013_1598d6cb66c6ce6120bb24975462e1f1d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTree::ExtendBounds</definition>
+        <argsstring>(const BoundingBox &amp;key, const LeafType &amp;leaf) WARN_IF_UNUSED</argsstring>
+        <name>ExtendBounds</name>
+        <param>
+          <type>const BoundingBox &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const LeafType &amp;</type>
+          <declname>leaf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="288" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="287" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_18d50cf62b427f2d4f3f4fa848d945c68" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>size_type RTree::GetDimensions</definition>
+        <argsstring>() const </argsstring>
+        <name>GetDimensions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="342" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="342" bodyend="342"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_161d8107796bdc5417a2a2925643373a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>size_type RTree::GetHeight</definition>
+        <argsstring>() const </argsstring>
+        <name>GetHeight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="341" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="341" bodyend="341"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_1760f5098c2a20f8d50ca6a2dfb378836" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>size_type RTree::GetItemCount</definition>
+        <argsstring>() const </argsstring>
+        <name>GetItemCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="340" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="340" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_1e146de0605ea9cad42e6861922a5b3f2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTree::Insert</definition>
+        <argsstring>(const BoundingBox &amp;key, const LeafType &amp;leaf) WARN_IF_UNUSED</argsstring>
+        <name>Insert</name>
+        <param>
+          <type>const BoundingBox &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const LeafType &amp;</type>
+          <declname>leaf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="233" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="232" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_1311d1bfc3a3f75f8ac2366602cbf009a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RTree::RTree</definition>
+        <argsstring>()</argsstring>
+        <name>RTree</name>
+        <briefdescription>
+<para>Default constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="177" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="176" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_1a97acc30439f24081de19765d8598484" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>__RTREE_TEMPLATE_DEFN bool RTree::Verify</definition>
+        <argsstring>()</argsstring>
+        <name>Verify</name>
+        <briefdescription>
+<para>Use this to verify that a tree has a valid structure (walks all nodes). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="344" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVerify.h" bodystart="33" bodyend="134"/>
+        <references refid="a00022_19ae94d6e7435ced4ab79536df760ab75" compoundref="a00047" startline="53">TreeNode&lt; _Item, _max_items &gt;::items</references>
+      </memberdef>
+      <memberdef kind="function" id="a00013_11e27473bad4be63f3b40ee370e6ce915" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RTree::~RTree</definition>
+        <argsstring>()</argsstring>
+        <name>~RTree</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="182" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="182" bodyend="183"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="a00013_163920f3d8d7eeaa86afe5edbc1603e45" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IdType</type>
+        <definition>IdType RTree::ChooseSubtree</definition>
+        <argsstring>(Node *node, const size_type &amp;level, const BoundingBox &amp;bound)</argsstring>
+        <name>ChooseSubtree</name>
+        <param>
+          <type>Node *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const size_type &amp;</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>const BoundingBox &amp;</type>
+          <declname>bound</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>only pass this items that do not have leaves</para></simplesect>
+I took out the loop portion of this algorithm, so it only picks a subtree at that particular level. The rest is done recursively by insert</para><para>After the subnode is picked, then its bounding box is stretched to include the bound selected.</para><para><simplesect kind="return"><para>id of next node </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="361" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="360" bodyend="419"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_1851f56e6e30c300ea2daf89dddd155d0" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Node *</type>
+        <definition>Node* RTree::FinishOverflowOperation</definition>
+        <argsstring>(OverflowItem *overflowItem, IdType node_id, IdType bound_id)</argsstring>
+        <name>FinishOverflowOperation</name>
+        <param>
+          <type>OverflowItem *</type>
+          <declname>overflowItem</declname>
+        </param>
+        <param>
+          <type>IdType</type>
+          <declname>node_id</declname>
+        </param>
+        <param>
+          <type>IdType</type>
+          <declname>bound_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="797" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="796" bodyend="827"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_12ce6a56033c4800c773dc5a00f45fcc0" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>OverflowItem *</type>
+        <definition>OverflowItem* RTree::InsertInternal</definition>
+        <argsstring>(const LeafItem &amp;leafItem, const IdType node_id, const std::size_t level, const bool firstInsert=true)</argsstring>
+        <name>InsertInternal</name>
+        <param>
+          <type>const LeafItem &amp;</type>
+          <declname>leafItem</declname>
+        </param>
+        <param>
+          <type>const IdType</type>
+          <declname>node_id</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>firstInsert</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="441" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="436" bodyend="497"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_187248b7b1c4d761fb19efeac31f1e0f4" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename NodeType</type>
+          </param>
+        </templateparamlist>
+        <type>OverflowItem *</type>
+        <definition>OverflowItem* RTree::OverflowTreatment</definition>
+        <argsstring>(NodeType *node, const std::size_t &amp;level, bool firstInsert)</argsstring>
+        <name>OverflowTreatment</name>
+        <param>
+          <type>NodeType *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const std::size_t &amp;</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>firstInsert</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="506" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="502" bodyend="536"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_133b988bd477d0536157268c0c6924deb" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>OverflowItem *</type>
+        <definition>OverflowItem* RTree::QueueReinsert</definition>
+        <argsstring>(LeafNode *node)</argsstring>
+        <name>QueueReinsert</name>
+        <param>
+          <type><ref refid="a00022" kindref="compound">LeafNode</ref> *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="738" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="737" bodyend="773"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_1bd6b7027e546745e6f6cae7ce0b52825" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RTree::SearchForItemAndSetBound</definition>
+        <argsstring>(Node *node, IdType node_id, OverflowItem *overflowItem)</argsstring>
+        <name>SearchForItemAndSetBound</name>
+        <param>
+          <type>Node *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>IdType</type>
+          <declname>node_id</declname>
+        </param>
+        <param>
+          <type>OverflowItem *</type>
+          <declname>overflowItem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="832" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="831" bodyend="842"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_11c3734be1fded8b6c252a057a694c68f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename NodeType</type>
+          </param>
+        </templateparamlist>
+        <type>OverflowItem *</type>
+        <definition>OverflowItem* RTree::Split</definition>
+        <argsstring>(NodeType *node, const std::size_t &amp;level)</argsstring>
+        <name>Split</name>
+        <param>
+          <type>NodeType *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const std::size_t &amp;</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>This combines Split, ChooseSplitAxis, and ChooseSplitIndex into one function as an optimization (they all share data structures, so it would be pointless to do all of that copying). </para>        </briefdescription>
+        <detaileddescription>
+<para>This returns a SplitItem, which should be added to the items of the passed node&apos;s parent, and have the nodes bound expanded </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="548" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="547" bodyend="701"/>
+      </memberdef>
+      <memberdef kind="function" id="a00013_103c5b773673a5e2f9cd1a6721551b55d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>OverflowItem *</type>
+        <definition>OverflowItem* RTree::SplitRoot</definition>
+        <argsstring>(OverflowItem *overflowItem)</argsstring>
+        <name>SplitRoot</name>
+        <param>
+          <type>OverflowItem *</type>
+          <declname>overflowItem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="706" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="705" bodyend="732"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implementation of an <ref refid="a00013" kindref="compound">RTree</ref> with an R* index. </para>    </briefdescription>
+    <detaileddescription>
+<para>This is intended to be a templated implementation of an R* Tree, designed to create an efficient and (relatively) small spatial indexing container in N dimensions.</para><para>Based on &quot;The R*-Tree: An Efficient and Robust Access Method for Points and Rectangles&quot; by N. Beckmann, H.P. Kriegel, R. Schneider, and B. Seeger</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_bound_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type used to represent the bounds for the bounding box </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dimensions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of dimensions the bounding boxes are described in </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>min_child_items</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>m, in the range 1 &lt;= m &lt;= M/2 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_child_items</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>M, which must be M &gt;= m*2 </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="93" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="93" bodyend="849"/>
+    <listofallmembers>
+      <member refid="a00013_16a0b56a93da62f760939f62d5e841711" prot="public" virt="non-virtual"><scope>RTree</scope><name>AcceptAny</name></member>
+      <member refid="a00013_1050521fcb0828dae353cd4aa8225a6b4" prot="public" virt="non-virtual"><scope>RTree</scope><name>AcceptEnclosing</name></member>
+      <member refid="a00013_1b1cd11ac78af030c3a1edb30692a9c3e" prot="public" virt="non-virtual"><scope>RTree</scope><name>AcceptOverlapping</name></member>
+      <member refid="a00013_1d94abdeb422dd45c69a5c9511ca4d6e5" prot="public" virt="non-virtual"><scope>RTree</scope><name>Backend</name></member>
+      <member refid="a00013_1ebdb9bfab5c757d5879b90dcefa6a522" prot="private" virt="non-virtual"><scope>RTree</scope><name>backend</name></member>
+      <member refid="a00013_1c69d197ed2d75739f82501da83cf5a7b" prot="public" virt="non-virtual"><scope>RTree</scope><name>BackendArgs</name></member>
+      <member refid="a00013_149838e1afbc587ea4b3331831ca7983c" prot="public" virt="non-virtual"><scope>RTree</scope><name>Begin</name></member>
+      <member refid="a00013_1e8a1dfc0f3ac64857e49f91db915c89b" prot="public" virt="non-virtual"><scope>RTree</scope><name>BoundingBox</name></member>
+      <member refid="a00013_163920f3d8d7eeaa86afe5edbc1603e45" prot="private" virt="non-virtual"><scope>RTree</scope><name>ChooseSubtree</name></member>
+      <member refid="a00013_1039ff1f1c69d84d43f611511a2ed91983852c250b9d23bfc8dc01a36ab744c70" prot="public" virt="non-virtual"><scope>RTree</scope><name>dimensions</name></member>
+      <member refid="a00013_131f396f9be9609fa55782ad4829c0b5b" prot="public" virt="non-virtual"><scope>RTree</scope><name>EnclosedIterator</name></member>
+      <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed7674ddfa879fe665406acc02f3bf4e2c" prot="public" virt="non-virtual"><scope>RTree</scope><name>ERR_CREATE_NODE_IN_SPLIT</name></member>
+      <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed0023a3840bce9159e9baa2ea7347e80b" prot="public" virt="non-virtual"><scope>RTree</scope><name>ERR_CREATE_ROOT</name></member>
+      <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed5fd0d5ba3876b1df6cb72c4bb368476b" prot="public" virt="non-virtual"><scope>RTree</scope><name>ERR_CREATE_SPLIT_ROOT</name></member>
+      <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed0b58f47d3161b0602252280d4c520ab6" prot="public" virt="non-virtual"><scope>RTree</scope><name>ERR_EXTEND_BOUNDS_FAILED</name></member>
+      <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed621a5aa7cc00c69a3b2fb20e84e95090" prot="public" virt="non-virtual"><scope>RTree</scope><name>ERR_GET_LEAFNODE</name></member>
+      <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed2337106daa3e624bff05b9aaf852bc5d" prot="public" virt="non-virtual"><scope>RTree</scope><name>ERR_GET_NODE</name></member>
+      <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed145d602148c6cd3c767cf4c47ce6387a" prot="public" virt="non-virtual"><scope>RTree</scope><name>ERR_GET_ROOT</name></member>
+      <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed8f50587c1c6f407edfbb571a12e271e2" prot="public" virt="non-virtual"><scope>RTree</scope><name>ERR_GET_SPLIT_ROOT</name></member>
+      <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fedc5d7dea67938d9358da62555be104e3e" prot="public" virt="non-virtual"><scope>RTree</scope><name>ERR_NONE</name></member>
+      <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed" prot="public" virt="non-virtual"><scope>RTree</scope><name>ErrorCode</name></member>
+      <member refid="a00013_1598d6cb66c6ce6120bb24975462e1f1d" prot="public" virt="non-virtual"><scope>RTree</scope><name>ExtendBounds</name></member>
+      <member refid="a00013_116310cb8c4ec8d9c7f8b371caced5141" prot="public" virt="non-virtual"><scope>RTree</scope><name>FindEnclosed</name></member>
+      <member refid="a00013_10a5b51cb5d2e776244c07af0a24d318f" prot="public" virt="non-virtual"><scope>RTree</scope><name>FindOverlapping</name></member>
+      <member refid="a00013_1851f56e6e30c300ea2daf89dddd155d0" prot="private" virt="non-virtual"><scope>RTree</scope><name>FinishOverflowOperation</name></member>
+      <member refid="a00013_18d50cf62b427f2d4f3f4fa848d945c68" prot="public" virt="non-virtual"><scope>RTree</scope><name>GetDimensions</name></member>
+      <member refid="a00013_173cc91cc6815efa9acaea74b294bb960" prot="public" virt="non-virtual"><scope>RTree</scope><name>GetErrorCode</name></member>
+      <member refid="a00013_161d8107796bdc5417a2a2925643373a5" prot="public" virt="non-virtual"><scope>RTree</scope><name>GetHeight</name></member>
+      <member refid="a00013_1760f5098c2a20f8d50ca6a2dfb378836" prot="public" virt="non-virtual"><scope>RTree</scope><name>GetItemCount</name></member>
+      <member refid="a00013_1148a74616ebab1138a50364e41430735" prot="public" virt="non-virtual"><scope>RTree</scope><name>IdType</name></member>
+      <member refid="a00013_15fa9e0f480079e5e72127763c6eac990" prot="public" virt="non-virtual"><scope>RTree</scope><name>Initialize</name></member>
+      <member refid="a00013_1e146de0605ea9cad42e6861922a5b3f2" prot="public" virt="non-virtual"><scope>RTree</scope><name>Insert</name></member>
+      <member refid="a00013_12ce6a56033c4800c773dc5a00f45fcc0" prot="private" virt="non-virtual"><scope>RTree</scope><name>InsertInternal</name></member>
+      <member refid="a00013_1d7399987b58b4c8e77fbe91085641037" prot="public" virt="non-virtual"><scope>RTree</scope><name>IsOk</name></member>
+      <member refid="a00013_12acb045036b6b5778c5183cb573ac269" prot="public" virt="non-virtual"><scope>RTree</scope><name>Iterator</name></member>
+      <member refid="a00013_16af6bb2ee0401a1f141f55ce431971ac" prot="public" virt="non-virtual"><scope>RTree</scope><name>KeyType</name></member>
+      <member refid="a00013_14e26a3610d2271dcbb760bf4d7263f77" prot="public" virt="non-virtual"><scope>RTree</scope><name>LeafItem</name></member>
+      <member refid="a00013_15a46af0df672bb6a70f25af0f2c290a9" prot="public" virt="non-virtual"><scope>RTree</scope><name>LeafItemArray</name></member>
+      <member refid="a00013_1e2a75f62592b13676432d7cd4fea785d" prot="public" virt="non-virtual"><scope>RTree</scope><name>LeafItemIterator</name></member>
+      <member refid="a00013_189ce586f5e8fe01930fcd95d9638e051" prot="public" virt="non-virtual"><scope>RTree</scope><name>LeafNode</name></member>
+      <member refid="a00013_1d5de834085bbce66e4c76e1517ac9c89" prot="public" virt="non-virtual"><scope>RTree</scope><name>LeafType</name></member>
+      <member refid="a00013_106f42c196f30a06b59bde81553f7dd74" prot="private" virt="non-virtual"><scope>RTree</scope><name>m_lastError</name></member>
+      <member refid="a00013_1039ff1f1c69d84d43f611511a2ed9198e1868ff0823e59c64f97008c4c97ac84" prot="public" virt="non-virtual"><scope>RTree</scope><name>max_child_items</name></member>
+      <member refid="a00013_1039ff1f1c69d84d43f611511a2ed9198ea8b8e693f1a3907247a7a6a34f343f9" prot="public" virt="non-virtual"><scope>RTree</scope><name>min_child_items</name></member>
+      <member refid="a00013_11a293f5d37b9ce0a311083d47e32477e" prot="public" virt="non-virtual"><scope>RTree</scope><name>Node</name></member>
+      <member refid="a00013_14bd8f158d2348e3b4cd15dbf6d143b63" prot="public" virt="non-virtual"><scope>RTree</scope><name>NodeBase</name></member>
+      <member refid="a00013_19a9e19d08177b06cc5455f7f81b5f983" prot="public" virt="non-virtual"><scope>RTree</scope><name>NodeItem</name></member>
+      <member refid="a00013_1c457769a7ec256851f478a29e6f5ac9e" prot="public" virt="non-virtual"><scope>RTree</scope><name>NodeItemArray</name></member>
+      <member refid="a00013_1eb51ffcf9a33c246c73a53848ce27a66" prot="public" virt="non-virtual"><scope>RTree</scope><name>NodeItemIterator</name></member>
+      <member refid="a00013_187248b7b1c4d761fb19efeac31f1e0f4" prot="private" virt="non-virtual"><scope>RTree</scope><name>OverflowTreatment</name></member>
+      <member refid="a00013_115589782110bd0afdf547ae131568be9" prot="public" virt="non-virtual"><scope>RTree</scope><name>OverlappingIterator</name></member>
+      <member refid="a00013_133b988bd477d0536157268c0c6924deb" prot="private" virt="non-virtual"><scope>RTree</scope><name>QueueReinsert</name></member>
+      <member refid="a00013_1311d1bfc3a3f75f8ac2366602cbf009a" prot="public" virt="non-virtual"><scope>RTree</scope><name>RTree</name></member>
+      <member refid="a00013_1775575f3806172df875689499df6eba3" prot="public" virt="non-virtual"><scope>RTree</scope><name>RTreeIterator</name></member>
+      <member refid="a00013_1bd6b7027e546745e6f6cae7ce0b52825" prot="private" virt="non-virtual"><scope>RTree</scope><name>SearchForItemAndSetBound</name></member>
+      <member refid="a00013_15346e1bbbcff05fdc69899736667a34c" prot="public" virt="non-virtual"><scope>RTree</scope><name>size_type</name></member>
+      <member refid="a00013_11c3734be1fded8b6c252a057a694c68f" prot="private" virt="non-virtual"><scope>RTree</scope><name>Split</name></member>
+      <member refid="a00013_103c5b773673a5e2f9cd1a6721551b55d" prot="private" virt="non-virtual"><scope>RTree</scope><name>SplitRoot</name></member>
+      <member refid="a00013_1dff160509b37615cd3a9f13146c9fc28" prot="public" virt="non-virtual"><scope>RTree</scope><name>this_type</name></member>
+      <member refid="a00013_1a97acc30439f24081de19765d8598484" prot="public" virt="non-virtual"><scope>RTree</scope><name>Verify</name></member>
+      <member refid="a00013_11e27473bad4be63f3b40ee370e6ce915" prot="public" virt="non-virtual"><scope>RTree</scope><name>~RTree</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

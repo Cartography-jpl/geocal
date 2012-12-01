@@ -1,0 +1,413 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00017" kind="class" prot="public">
+    <compoundname>RTreeIterator</compoundname>
+    <includes refid="a00036" local="no">RTreeIterator.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename _Tree</type>
+      </param>
+      <param>
+        <type>typename _Acceptor</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00017_1d60c61c77bfa9f8bcf3706830b022d9c" prot="public" static="no">
+        <type>_Tree::IdType</type>
+        <definition>typedef _Tree::IdType RTreeIterator&lt; _Tree, _Acceptor &gt;::IdType</definition>
+        <argsstring></argsstring>
+        <name>IdType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="93" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00017_1d9a2dbe848fe0fd1785d62b86bc7382e" prot="public" static="no">
+        <type>_Tree::KeyType</type>
+        <definition>typedef _Tree::KeyType RTreeIterator&lt; _Tree, _Acceptor &gt;::KeyType</definition>
+        <argsstring></argsstring>
+        <name>KeyType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="92" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00017_1f062b136505e757f50b25004cdc29ae4" prot="public" static="no">
+        <type>_Tree::LeafItem</type>
+        <definition>typedef _Tree::LeafItem RTreeIterator&lt; _Tree, _Acceptor &gt;::LeafItem</definition>
+        <argsstring></argsstring>
+        <name>LeafItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="99" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00017_1bf3c78181801f0a3d5b24b5d4f41f26c" prot="public" static="no">
+        <type>_Tree::LeafItemIterator</type>
+        <definition>typedef _Tree::LeafItemIterator RTreeIterator&lt; _Tree, _Acceptor &gt;::LeafItemIterator</definition>
+        <argsstring></argsstring>
+        <name>LeafItemIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="100" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00017_1dbac4aa8cd8a67270c5bd18e33f1da69" prot="public" static="no">
+        <type>_Tree::LeafNode</type>
+        <definition>typedef _Tree::LeafNode RTreeIterator&lt; _Tree, _Acceptor &gt;::LeafNode</definition>
+        <argsstring></argsstring>
+        <name>LeafNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="98" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00017_156f0f7d524f1a085637882baeb92ffc5" prot="public" static="no">
+        <type>_Tree::Node</type>
+        <definition>typedef _Tree::Node RTreeIterator&lt; _Tree, _Acceptor &gt;::Node</definition>
+        <argsstring></argsstring>
+        <name>Node</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="95" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00017_180ed9a5a95db560cee6f37db4fc01780" prot="public" static="no">
+        <type>_Tree::NodeItem</type>
+        <definition>typedef _Tree::NodeItem RTreeIterator&lt; _Tree, _Acceptor &gt;::NodeItem</definition>
+        <argsstring></argsstring>
+        <name>NodeItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="96" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00017_1c01c1479fdd0cc3bf03c8f5b847fa4a8" prot="public" static="no">
+        <type>_Tree::NodeItemIterator</type>
+        <definition>typedef _Tree::NodeItemIterator RTreeIterator&lt; _Tree, _Acceptor &gt;::NodeItemIterator</definition>
+        <argsstring></argsstring>
+        <name>NodeItemIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="97" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="a00017_1eb9f6e3ae51c3e1bfae0c4cd6e1bd159" prot="private" static="no">
+        <type>_Tree::BoundingBox</type>
+        <definition>typedef _Tree::BoundingBox RTreeIterator&lt; _Tree, _Acceptor &gt;::BoundingBox</definition>
+        <argsstring></argsstring>
+        <name>BoundingBox</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="228" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00017_16b6fa045e23bef8638ed39c06f41c0f6" prot="private" static="no" mutable="no">
+        <type>const _Acceptor</type>
+        <definition>const _Acceptor RTreeIterator&lt; _Tree, _Acceptor &gt;::accept</definition>
+        <argsstring></argsstring>
+        <name>accept</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="104" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00017_1bdb29fd189a914a3509c94e78549b955" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; IdType &gt;</type>
+        <definition>std::vector&lt;IdType&gt; RTreeIterator&lt; _Tree, _Acceptor &gt;::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="106" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00017_1453e6d15c1fbd10087fdbc9562e39e3d" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::size_t &gt;</type>
+        <definition>std::vector&lt;std::size_t&gt; RTreeIterator&lt; _Tree, _Acceptor &gt;::idx</definition>
+        <argsstring></argsstring>
+        <name>idx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="107" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00017_1ef0a46c0262f33557e871fdc87f55674" prot="private" static="no" mutable="no">
+        <type>LeafNode *</type>
+        <definition>LeafNode* RTreeIterator&lt; _Tree, _Acceptor &gt;::leaf</definition>
+        <argsstring></argsstring>
+        <name>leaf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="110" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00017_167449d76017f4ee182b28c497e257cda" prot="private" static="no" mutable="no">
+        <type>_Tree *</type>
+        <definition>_Tree* RTreeIterator&lt; _Tree, _Acceptor &gt;::m_tree</definition>
+        <argsstring></argsstring>
+        <name>m_tree</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="113" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="a00017_1b07879df5f0d7208e945b04d3993e2e2" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTreeIterator&lt; _Tree, _Acceptor &gt;::ExtendStackBounds</definition>
+        <argsstring>(const BoundingBox &amp;bound)</argsstring>
+        <name>ExtendStackBounds</name>
+        <param>
+          <type>const BoundingBox &amp;</type>
+          <declname>bound</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="232" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="231" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="a00017_10969b4a2283099e131d5ff69a41a273a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void RTreeIterator&lt; _Tree, _Acceptor &gt;::operator=</definition>
+        <argsstring>(const RTreeIterator &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="a00017" kindref="compound">RTreeIterator</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="117"/>
+      </memberdef>
+      <memberdef kind="function" id="a00017_16414f5f138f2b2d23e012ecc32cedc99" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>RTreeIterator&lt; _Tree, _Acceptor &gt;::RTreeIterator</definition>
+        <argsstring>(const RTreeIterator &amp;)</argsstring>
+        <name>RTreeIterator</name>
+        <param>
+          <type>const <ref refid="a00017" kindref="compound">RTreeIterator</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="116"/>
+      </memberdef>
+      <memberdef kind="function" id="a00017_16e89cafd8fd22302f3ab1854266159f7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>RTreeIterator&lt; _Tree, _Acceptor &gt;::RTreeIterator</definition>
+        <argsstring>()</argsstring>
+        <name>RTreeIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="115"/>
+      </memberdef>
+      <memberdef kind="function" id="a00017_1baf38218c0ce8f5baa1f8f7d77a8c89b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTreeIterator&lt; _Tree, _Acceptor &gt;::traverse</definition>
+        <argsstring>()</argsstring>
+        <name>traverse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="185" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="184" bodyend="225"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00017_171692035c2f1c18fa4b4807d6bd5c79f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const LeafItem &amp;</type>
+        <definition>const LeafItem&amp; RTreeIterator&lt; _Tree, _Acceptor &gt;::current</definition>
+        <argsstring>() const </argsstring>
+        <name>current</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="153" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="152" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="a00017_1563e235674f5a604135791c1483d462e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>LeafItem &amp;</type>
+        <definition>LeafItem&amp; RTreeIterator&lt; _Tree, _Acceptor &gt;::current</definition>
+        <argsstring>()</argsstring>
+        <name>current</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="148" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="147" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="a00017_12d84d7c5711e9d58bc4c4f2e0a75c52e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTreeIterator&lt; _Tree, _Acceptor &gt;::end</definition>
+        <argsstring>() const </argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="140" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="139" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="a00017_1aab00f06be1eadf148cde48558d6b8e5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTreeIterator&lt; _Tree, _Acceptor &gt;::next</definition>
+        <argsstring>()</argsstring>
+        <name>next</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="164" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="163" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="a00017_1b77d9b39c319242f74e36bd9e44eda9c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RTreeIterator&lt; _Tree, _Acceptor &gt;::RTreeIterator</definition>
+        <argsstring>(_Tree *tree, const _Acceptor &amp;a)</argsstring>
+        <name>RTreeIterator</name>
+        <param>
+          <type>_Tree *</type>
+          <declname>tree</declname>
+        </param>
+        <param>
+          <type>const _Acceptor &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="124" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="121" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="a00017_1404769bab56dcf888ef17d12a1581fd5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void RTreeIterator&lt; _Tree, _Acceptor &gt;::set_dirty</definition>
+        <argsstring>()</argsstring>
+        <name>set_dirty</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="158" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="157" bodyend="160"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This defines an iterator for the R Tree. </para>    </briefdescription>
+    <detaileddescription>
+<para>It is *not* an STL iterator, since the design constraints for that require double-linked lists (or lots of overhead), and we aren&apos;t doing it that way.</para><para><simplesect kind="warning"><para>At the moment, you can only use one iterator on a tree at a time. Usage of another iterator may invalidate the previous iterator.</para></simplesect>
+<xrefsect id="todo_1_todo000005"><xreftitle>Todo</xreftitle><xrefdescription><para>Make this more like the B-Tree traverser?</para></xrefdescription></xrefsect>Finding a specific item:</para><para>it = tree-&gt;Find(key); if (it &amp;&amp; !it-&gt;end()) { LeafNode &amp; item = it-&gt;current(); if (item-&gt;key == key) do stuff here }</para><para>Iterating all items:</para><para>it = tree-&gt;Begin();</para><para>if (it) { do { LeafItem &amp; item = it-&gt;current();</para><para>} while (it-&gt;next()); }</para><para>Iterating a range:</para><para>it = tree-&gt;Find(start_key);</para><para>if (it &amp;&amp; !it-&gt;end()) { do { LeafItem &amp; item = it-&gt;current();</para><para>if (item.key &gt; end_key) break;</para><para>} while (it-&gt;next()); } </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="605">
+        <label>RTreeIterator&lt; _Tree, _Acceptor &gt;</label>
+        <link refid="a00017"/>
+        <childnode refid="606" relation="usage">
+          <edgelabel>idx</edgelabel>
+        </childnode>
+      </node>
+      <node id="606">
+        <label>std::vector&lt; std::size_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" line="87" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeIterator.h" bodystart="87" bodyend="261"/>
+    <listofallmembers>
+      <member refid="a00017_16b6fa045e23bef8638ed39c06f41c0f6" prot="private" virt="non-virtual"><scope>RTreeIterator</scope><name>accept</name></member>
+      <member refid="a00017_1eb9f6e3ae51c3e1bfae0c4cd6e1bd159" prot="private" virt="non-virtual"><scope>RTreeIterator</scope><name>BoundingBox</name></member>
+      <member refid="a00017_1563e235674f5a604135791c1483d462e" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>current</name></member>
+      <member refid="a00017_171692035c2f1c18fa4b4807d6bd5c79f" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>current</name></member>
+      <member refid="a00017_12d84d7c5711e9d58bc4c4f2e0a75c52e" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>end</name></member>
+      <member refid="a00017_1b07879df5f0d7208e945b04d3993e2e2" prot="private" virt="non-virtual"><scope>RTreeIterator</scope><name>ExtendStackBounds</name></member>
+      <member refid="a00017_1bdb29fd189a914a3509c94e78549b955" prot="private" virt="non-virtual"><scope>RTreeIterator</scope><name>id</name></member>
+      <member refid="a00017_1d60c61c77bfa9f8bcf3706830b022d9c" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>IdType</name></member>
+      <member refid="a00017_1453e6d15c1fbd10087fdbc9562e39e3d" prot="private" virt="non-virtual"><scope>RTreeIterator</scope><name>idx</name></member>
+      <member refid="a00017_1d9a2dbe848fe0fd1785d62b86bc7382e" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>KeyType</name></member>
+      <member refid="a00017_1ef0a46c0262f33557e871fdc87f55674" prot="private" virt="non-virtual"><scope>RTreeIterator</scope><name>leaf</name></member>
+      <member refid="a00017_1f062b136505e757f50b25004cdc29ae4" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>LeafItem</name></member>
+      <member refid="a00017_1bf3c78181801f0a3d5b24b5d4f41f26c" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>LeafItemIterator</name></member>
+      <member refid="a00017_1dbac4aa8cd8a67270c5bd18e33f1da69" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>LeafNode</name></member>
+      <member refid="a00017_167449d76017f4ee182b28c497e257cda" prot="private" virt="non-virtual"><scope>RTreeIterator</scope><name>m_tree</name></member>
+      <member refid="a00017_1aab00f06be1eadf148cde48558d6b8e5" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>next</name></member>
+      <member refid="a00017_156f0f7d524f1a085637882baeb92ffc5" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>Node</name></member>
+      <member refid="a00017_180ed9a5a95db560cee6f37db4fc01780" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>NodeItem</name></member>
+      <member refid="a00017_1c01c1479fdd0cc3bf03c8f5b847fa4a8" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>NodeItemIterator</name></member>
+      <member refid="a00017_10969b4a2283099e131d5ff69a41a273a" prot="private" virt="non-virtual"><scope>RTreeIterator</scope><name>operator=</name></member>
+      <member refid="a00017_16e89cafd8fd22302f3ab1854266159f7" prot="private" virt="non-virtual"><scope>RTreeIterator</scope><name>RTreeIterator</name></member>
+      <member refid="a00017_16414f5f138f2b2d23e012ecc32cedc99" prot="private" virt="non-virtual"><scope>RTreeIterator</scope><name>RTreeIterator</name></member>
+      <member refid="a00017_1b77d9b39c319242f74e36bd9e44eda9c" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>RTreeIterator</name></member>
+      <member refid="a00017_1404769bab56dcf888ef17d12a1581fd5" prot="public" virt="non-virtual"><scope>RTreeIterator</scope><name>set_dirty</name></member>
+      <member refid="a00017_1baf38218c0ce8f5baa1f8f7d77a8c89b" prot="private" virt="non-virtual"><scope>RTreeIterator</scope><name>traverse</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

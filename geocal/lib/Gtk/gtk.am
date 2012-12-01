@@ -1,0 +1,24 @@
+geocalinc_HEADERS+= @srcgtk@/display_stretch.h
+geocalinc_HEADERS+= @srcgtk@/display_stretch_std_dev.h
+libgeocal_la_SOURCES+= @srcgtk@/display_stretch_std_dev.cc
+geocalinc_HEADERS+= @srcgtk@/geocal_pixbuf.h
+libgeocal_la_SOURCES+= @srcgtk@/geocal_pixbuf.cc
+geocalinc_HEADERS+= @srcgtk@/raster_image_with_overlay.h
+libgeocal_la_SOURCES+= @srcgtk@/raster_image_with_overlay.cc
+
+libgeocal_la_LDFLAGS += $(GTGOO_LIBS)
+
+AM_CPPFLAGS+= -I$(GTKGOO_CFLAGS)
+libgeocal_la_LDFLAGS+= $(GTKGOO_LIBS)
+
+#bin_PROGRAMS += gtktest2
+#gtktest2_SOURCES = @srcgtk@/gtktest2.cc
+#gtktest2_LDADD = libgeocal.la 
+
+# Files that contain SWIG wrapper information.
+SWIG_SOURCES += @srcgtk@/gtk.i
+SWIG_SOURCES += @srcgtk@/display_stretch.i
+SWIG_SOURCES += @srcgtk@/display_stretch_std_dev.i
+SWIG_SOURCES += @srcgtk@/raster_image_with_overlay.i
+
+AM_CPPFLAGS+= -I$(srcdir)/@srcgtk@

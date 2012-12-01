@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00204" kind="class" prot="public">
+    <compoundname>std::multiset</compoundname>
+    <innerclass refid="a00255" prot="public">std::multiset::const_iterator</innerclass>
+    <innerclass refid="a00256" prot="public">std::multiset::const_reverse_iterator</innerclass>
+    <innerclass refid="a00257" prot="public">std::multiset::iterator</innerclass>
+    <innerclass refid="a00258" prot="public">std::multiset::reverse_iterator</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+        <declname>K</declname>
+        <defname>K</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00204_193eb79091066c87f6dfb9d07c6c7cbcd" prot="private" static="no" mutable="no">
+        <type>K</type>
+        <definition>K std::multiset&lt; K &gt;::keys</definition>
+        <argsstring></argsstring>
+        <name>keys</name>
+        <briefdescription>
+<para>STL member. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="" line="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>STL class. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="524">
+        <label>K</label>
+      </node>
+      <node id="523">
+        <label>std::multiset&lt; K &gt;</label>
+        <childnode refid="524" relation="usage">
+          <edgelabel>keys</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="[STL]" line="1"/>
+    <listofallmembers>
+      <member refid="a00204_193eb79091066c87f6dfb9d07c6c7cbcd" prot="private" virt="non-virtual"><scope>std::multiset</scope><name>keys</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

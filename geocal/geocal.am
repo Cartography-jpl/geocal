@@ -1,0 +1,143 @@
+# Build these up as we go
+libgeocal_la_SOURCES = 
+SWIG_SOURCES = afids_python/geocal/bindings/doc.i
+libgeocal_la_LDFLAGS =
+
+geocalincdir = @includedir@/geocal
+geocalinc_HEADERS =
+geocal_test_all_SOURCES = 
+
+libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS)
+libgeocal_la_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw)
+libgeocal_la_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS)
+
+# Include boost in builds
+libgeocal_la_LDFLAGS+= -R $(BOOST_LIBDIR) -L$(BOOST_LIBDIR) -lboost_regex -lboost_date_time
+
+# Include blitz in builds
+libgeocal_la_LDFLAGS+= $(BLITZ_LIBS)
+
+if HAVE_GDAL
+# Include gdal in builds
+libgeocal_la_LDFLAGS+= $(GDAL_LIBS)
+libgeocal_la_CPPFLAGS+= $(GDAL_CFLAGS)
+endif
+
+if HAVE_HDF5
+libgeocal_la_LDFLAGS+= $(HDF5_LIBS)
+libgeocal_la_CPPFLAGS+= $(HDF5_CFLAGS)
+endif 
+
+# Include gsl in builds
+libgeocal_la_LDFLAGS+= $(GSL_LIBS)
+
+# Include FFTW in builds
+libgeocal_la_LDFLAGS+= $(FFTW_LIBS)
+
+# Include SDP toolkit
+libgeocal_la_LDFLAGS+=$(SDP_LDFLAGS)
+
+#=================================================================
+# Target to just install geocal
+# header, library, python
+
+geocal_install: install-geocalincHEADERS install-geocalpkgpyexecLTLIBRARIES install-geocalpkgpythonPYTHON libgeocal.la
+	$(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) libgeocal.la "$(DESTDIR)$(libdir)"
+
+include afids_python/geocal/thirdparty/thirdparty.am
+include afids_python/geocal/lib/geocal.am
+include afids_python/geocal/bindings/bindings.am
+include afids_python/geocal/python/python.am
+#=================================================================
+# libgeocal: The main library
+
+lib_LTLIBRARIES += libgeocal.la
+libgeocal_la_LIBADD = $(CARTO_LIBS) libraw.la $(VICAR_RTL_LIBS) 
+libgeocal_la_LIBADD += $(SPICE_LIBS)
+
+#=================================================================
+# Test data used to run unit tests.
+
+include afids_python/geocal/unit_test_data/unit_test_data.am
+
+#=================================================================
+# Unit test
+
+check_PROGRAMS = geocal_test_all
+geocal_test_all_SOURCES += afids_python/geocal/lib/test_all.cc
+geocal_test_all_LDADD = libgeocal.la 
+geocal_test_all_LDADD += $(CARTO_LIBS) libraw.la $(VICAR_RTL_LIBS) $(SPICE_LIBS)
+geocal_test_all_LDADD += $(GDAL_LIBS)
+geocal_test_all_LDFLAGS = -no-install 
+geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS)
+geocal_test_all_CPPFLAGS+=  $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) 
+geocal_test_all_CPPFLAGS+= $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw)
+geocal_test_all_CPPFLAGS+= $(BLITZ_CFLAGS)
+TESTS+= afids_python/geocal/lib/test_all.sh
+EXTRA_DIST+= afids_python/geocal/lib/test_all.sh
+# Variables used in testing
+export abs_top_srcdir 
+export run_test = *
+export AFIDS_VDEV_DATA = $(datavdevdir)
+export ELEV_ROOT = $(srtml2dir)
+
+#=================================================================
+# Normally check builds all the libraries and executables. This
+# version builds just what is needed for unit tests, which is faster
+# to do during development.
+
+geocal_check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) geocal_check-am
+
+geocal_check-am: geocal_test_all
+	@echo "====================================================="
+	@echo "This just builds and runs the geocal unit tests (useful"
+	@echo "during development). It does not build the executables"
+	@echo "and run the AFIDS unit tests, 'make check' for that."
+	@echo "====================================================="
+	$(srcdir)/$(libgeocal)/test_all.sh
+
+#=================================================================
+# This is needed by unit tests that work with VICAR files. VICAR
+# wants to find a PDF file.
+
+BUILT_SOURCES += dummy.pdf test_out/vicar_copy.img 
+BUILT_SOURCES += test_out/dummy_copy
+MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img 
+MOSTLYCLEANFILES += test_out/dummy_copy
+
+dummy.pdf : afids_python/geocal/lib/dummy.pdf
+	cp $^ dummy.pdf
+
+test_out/vicar_copy.img : afids_python/geocal/unit_test_data/vicar.img
+	mkdir -p test_out
+	cp $^ $@
+
+# Make sure that we have created the test_out directory for use with unit 
+# tests
+test_out/dummy_copy : afids_python/geocal/test_out/dummy
+	mkdir -p test_out
+	cp $^ $@
+
+if WITH_DOCUMENTATION
+#=================================================================
+# Generate doxygen documentation
+
+doc/geocal.tag: $(geocalinc_HEADERS) $(libgeocal_la_SOURCES) config/doxygen.cfg $(DOXYGEN_TARGET)
+	$(MKDIR_P) doc/geocal
+	-rm -f doc/geocal/html/*
+	-rm -f doc/geocal/xml/*
+	export PATH=$(bindir):$$PATH && \
+        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
+        srcdir=$(srcdir)/afids_python/geocal DOCDIR=doc/geocal $(DOXYGEN) $(srcdir)/config/doxygen.cfg
+
+geocaldocdir = ${datarootdir}/doc/geocal
+geocaldocsearchdir = ${geocaldocdir}/html/search
+
+INSTALL_DATA_HOOK += install_doxygen_doc
+
+install_doxygen_doc: doc/geocal.tag
+	$(MKDIR_P) $(geocaldocsearchdir)
+	$(INSTALL_DATA) $(filter-out doc/geocal/html/search, $(wildcard doc/geocal/html/*)) $(geocaldocdir)/html
+	$(INSTALL_DATA) doc/geocal/html/search/* $(geocaldocsearchdir)
+endif

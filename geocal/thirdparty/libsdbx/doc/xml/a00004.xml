@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00004" kind="class" prot="public">
+    <compoundname>DiskTree</compoundname>
+    <includes refid="a00030" local="no">DiskTreeBackend.h</includes>
+    <briefdescription>
+<para>So the disk version of this has two files: the node index file, and the leaf file. </para>    </briefdescription>
+    <detaileddescription>
+<para>.. the tree nodes are stored in the node index file. The leaf nodes are stored in the lead index file.</para><para>This uses an LRU cache to optimize memory usage, as opposed to keeping every single node in memory. Items are automatically written to disk. <ref refid="a00019" kindref="compound">SerializedFile</ref> is used to actually read/write the items, so all items used with this class must be serializable using the methods in SerializationGeneric.h</para><para>Two files are created, filename.ldx (leaf node file) and filename.ndx (node file), and they contain a special signature block at the start to ensure that they were created with appropriate versions/etc of this class. filename is specified using the DiskTreeBackendArgs</para><para>You do not need to directly use this class, this is designed to be used internally by the tree structures. However, you do need to provide the type to the tree.</para><para><xrefsect id="todo_1_todo000003"><xreftitle>Todo</xreftitle><xrefdescription><para>Need to determine optimal block sizes/etc </para></xrefdescription></xrefsect></para>    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="74"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

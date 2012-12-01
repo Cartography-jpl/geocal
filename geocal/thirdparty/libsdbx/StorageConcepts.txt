@@ -1,0 +1,124 @@
+
+This file describes the relationships between the tree implementations and
+the generic backends. Anything that is specific to the individual 
+implementation and is not shared is not discussed here.
+
+
+It should be noted that the MemoryTreeBackend is the bare implementation of
+the backend, so it should be easy to understand how the backend works from 
+looking at that. 
+
+
+Class relationships:
+------------------------------------------------------------------------------
+
+KeyType:
+	some random type
+
+IdType:
+	some random type
+
+Node:
+
+	Node < NodeItem, max_items >
+
+NodeItem:
+
+	NodeItem < KeyType, IdType >
+	
+LeafNode:
+
+	LeafNode < LeafItem, max_items >
+
+LeafItem:
+
+	LeafItem < KeyType, LeafType >
+
+Tree:
+
+	Tree < KeyType, LeafType, ... params ... , Backend > 
+
+Backend:
+
+	Backend < NodeBase, NodeType, NodeItemType, LeafNode, KeyType, max_items >
+	-- this assumes leaves and index records have the same max item size
+
+
+It is key to remember that the backend defines IdType, so the tree defines
+what type of node it wants to use, but the Backend completes the definition of
+that type with the correct id type. 
+	
+
+Type relationships:
+------------------------------------------------------------------------------
+
+	Node			passed to backend by tree, defined by backend
+	LeafNode		defined by the tree
+	
+	NodeBase		defined by the tree: should be the base class for
+					Node and LeafNode
+
+	IdType			defined by the backend: is a pointer or offset to 
+					either a Node or a LeafNode
+	size_type		defined by the backend
+
+	
+	
+Functions:
+------------------------------------------------------------------------------
+
+The backend will define the following functions, of which the constness is
+not ever guaranteed for any parameters or the functions themselves:
+
+	bool Initialize(BackendArgs &args)
+	bool IsOK() 
+	
+	// this creates a new root node and places its ID in m_rootItem.id, you
+	// MUST hold onto the old ID and place it in the new root node (which
+	// you will need to retrieve using get_node or get_leaf_node). Each time
+	// you call this the tree height is incremented
+	bool create_root_node()
+	
+	// these manipulate nodes that have nodes or nodes/w leaves as children
+	IdType 			new_node_id			()
+	Node * 			create_node			(IdType id)
+	Node * 			get_node			(IdType id)
+	
+	// these manipulate nodes that have leaves as children
+	IdType 			new_leaf_node_id	()
+	LeafNode * 		create_leaf_node	(IdType id)
+	LeafNode * 		get_leaf_node		()
+
+Variables:
+------------------------------------------------------------------------------
+	
+The backend will define the following variables:
+
+	NodeItem 		m_rootId			// provides an id to load the correct
+										// root
+	
+	std::size_t		m_treeHeight		// height of tree
+	
+	size_type		m_size				// count of leaf items in tree
+	
+
+Tree Backends
+------------------------------------------------------------------------------
+
+Tree backends take care of where the nodes/leaves of a tree are stored. 
+
+The simplest example of a tree backend is the memory tree, as it pretends
+that any "id" is really a pointer to something. In the case of a disk tree,
+it pretends the id is really referring to an offset in a file. In either
+case the ID is always unique for the type (leafnode or node), but there may
+be overlap between leafnode and node. To determine whether an item is a 
+leafnode or a node, check the level that the item resides at against the 
+tree height. Leaves are always at the bottom. 
+
+
+Serialization:
+------------------------------------------------------------------------------
+
+For generic trees, refer to the Serialization.h routines
+
+

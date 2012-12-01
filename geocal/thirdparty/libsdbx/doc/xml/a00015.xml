@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00015" kind="struct" prot="public">
+    <compoundname>RTreeAcceptEnclosing</compoundname>
+    <includes refid="a00039" local="no">RTreeVisitor.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename NodeItem</type>
+      </param>
+      <param>
+        <type>typename LeafItem</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00015_149a6e7955392d02ebf44fd16eb2374d1" prot="public" static="no" mutable="no">
+        <type>const NodeItem::KeyType &amp;</type>
+        <definition>const NodeItem::KeyType&amp; RTreeAcceptEnclosing&lt; NodeItem, LeafItem &gt;::m_bound</definition>
+        <argsstring></argsstring>
+        <name>m_bound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="77" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00015_134140e007948fe62d9cac65b1431b31c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTreeAcceptEnclosing&lt; NodeItem, LeafItem &gt;::operator()</definition>
+        <argsstring>(const LeafItem &amp;item) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const LeafItem &amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="89" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="88" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="a00015_1b5cc97e7f521c49f5c63c79ccfb85e0f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTreeAcceptEnclosing&lt; NodeItem, LeafItem &gt;::operator()</definition>
+        <argsstring>(const NodeItem &amp;item) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const NodeItem &amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="84" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="83" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="a00015_1c2e191c6661ed580c4c6fdeef9560b5f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RTreeAcceptEnclosing&lt; NodeItem, LeafItem &gt;::RTreeAcceptEnclosing</definition>
+        <argsstring>(const typename NodeItem::KeyType &amp;bound)</argsstring>
+        <name>RTreeAcceptEnclosing</name>
+        <param>
+          <type>const typename NodeItem::KeyType &amp;</type>
+          <declname>bound</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="79" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="78" bodyend="81"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="a00015_1e40a3c98f013131962b1a545051a0858" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RTreeAcceptEnclosing&lt; NodeItem, LeafItem &gt;::RTreeAcceptEnclosing</definition>
+        <argsstring>()</argsstring>
+        <name>RTreeAcceptEnclosing</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="93" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="93" bodyend="93"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>returns true if the compared boundary is within the specified bound </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="76" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="75" bodyend="94"/>
+    <listofallmembers>
+      <member refid="a00015_149a6e7955392d02ebf44fd16eb2374d1" prot="public" virt="non-virtual"><scope>RTreeAcceptEnclosing</scope><name>m_bound</name></member>
+      <member refid="a00015_1b5cc97e7f521c49f5c63c79ccfb85e0f" prot="public" virt="non-virtual"><scope>RTreeAcceptEnclosing</scope><name>operator()</name></member>
+      <member refid="a00015_134140e007948fe62d9cac65b1431b31c" prot="public" virt="non-virtual"><scope>RTreeAcceptEnclosing</scope><name>operator()</name></member>
+      <member refid="a00015_1c2e191c6661ed580c4c6fdeef9560b5f" prot="public" virt="non-virtual"><scope>RTreeAcceptEnclosing</scope><name>RTreeAcceptEnclosing</name></member>
+      <member refid="a00015_1e40a3c98f013131962b1a545051a0858" prot="private" virt="non-virtual"><scope>RTreeAcceptEnclosing</scope><name>RTreeAcceptEnclosing</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

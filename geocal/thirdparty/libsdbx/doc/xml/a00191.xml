@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00191" kind="class" prot="public">
+    <compoundname>std::exception</compoundname>
+    <derivedcompoundref refid="a00172" prot="public" virt="non-virtual">std::bad_alloc</derivedcompoundref>
+    <derivedcompoundref refid="a00173" prot="public" virt="non-virtual">std::bad_cast</derivedcompoundref>
+    <derivedcompoundref refid="a00174" prot="public" virt="non-virtual">std::bad_exception</derivedcompoundref>
+    <derivedcompoundref refid="a00175" prot="public" virt="non-virtual">std::bad_typeid</derivedcompoundref>
+    <derivedcompoundref refid="a00241" prot="public" virt="non-virtual">std::ios_base::failure</derivedcompoundref>
+    <derivedcompoundref refid="a00201" prot="public" virt="non-virtual">std::logic_error</derivedcompoundref>
+    <derivedcompoundref refid="a00213" prot="public" virt="non-virtual">std::runtime_error</derivedcompoundref>
+    <briefdescription>
+<para>STL class. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="338">
+        <label>std::logic_error</label>
+        <childnode refid="332" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="333">
+        <label>std::bad_alloc</label>
+        <childnode refid="332" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="340">
+        <label>std::invalid_argument</label>
+        <childnode refid="338" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="336">
+        <label>std::bad_typeid</label>
+        <childnode refid="332" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="342">
+        <label>std::out_of_range</label>
+        <childnode refid="338" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="339">
+        <label>std::domain_error</label>
+        <childnode refid="338" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="343">
+        <label>std::runtime_error</label>
+        <childnode refid="332" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="337">
+        <label>std::ios_base::failure</label>
+        <childnode refid="332" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="332">
+        <label>std::exception</label>
+      </node>
+      <node id="341">
+        <label>std::length_error</label>
+        <childnode refid="338" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="344">
+        <label>std::overflow_error</label>
+        <childnode refid="343" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="335">
+        <label>std::bad_exception</label>
+        <childnode refid="332" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="334">
+        <label>std::bad_cast</label>
+        <childnode refid="332" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="346">
+        <label>std::underflow_error</label>
+        <childnode refid="343" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="345">
+        <label>std::range_error</label>
+        <childnode refid="343" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="[STL]" line="1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

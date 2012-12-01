@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00278" kind="struct" prot="public">
+    <compoundname>TreeNodeItem</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _KeyType</type>
+      </param>
+      <param>
+        <type>typename _IdType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00278_1b8638f16074ae91c63b56ecd3c4a78b1" prot="public" static="no">
+        <type>_IdType</type>
+        <definition>typedef _IdType TreeNodeItem&lt; _KeyType, _IdType &gt;::IdType</definition>
+        <argsstring></argsstring>
+        <name>IdType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="35" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00278_122e8331740b0626f4730cc13b27f34fd" prot="public" static="no">
+        <type>_KeyType</type>
+        <definition>typedef _KeyType TreeNodeItem&lt; _KeyType, _IdType &gt;::KeyType</definition>
+        <argsstring></argsstring>
+        <name>KeyType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="34" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00278_121ccf5dacc1327f910544189d204a545" prot="public" static="no" mutable="no">
+        <type>IdType</type>
+        <definition>IdType TreeNodeItem&lt; _KeyType, _IdType &gt;::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="38" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00278_135645fcd77bd61ab3f9e5f7e24df5ad7" prot="public" static="no" mutable="no">
+        <type>KeyType</type>
+        <definition>KeyType TreeNodeItem&lt; _KeyType, _IdType &gt;::key</definition>
+        <argsstring></argsstring>
+        <name>key</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="37" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00278_13e8d52af9864900574d917a39cc48325" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ItemWithKey</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool TreeNodeItem&lt; _KeyType, _IdType &gt;::operator!=</definition>
+        <argsstring>(const ItemWithKey &amp;item) const </argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const ItemWithKey &amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="83" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="a00278_11179d7e92fb75463282e4b620059277f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ItemWithKey</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool TreeNodeItem&lt; _KeyType, _IdType &gt;::operator&lt;</definition>
+        <argsstring>(const ItemWithKey &amp;item) const </argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const ItemWithKey &amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="73" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="a00278_1740dedd3e66bd2212b83a201788815d9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ItemWithKey</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool TreeNodeItem&lt; _KeyType, _IdType &gt;::operator&lt;=</definition>
+        <argsstring>(const ItemWithKey &amp;item) const </argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>const ItemWithKey &amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="75" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="a00278_1ddf14f95081ce6130088b21b8766fde3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ItemWithKey</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool TreeNodeItem&lt; _KeyType, _IdType &gt;::operator==</definition>
+        <argsstring>(const ItemWithKey &amp;item) const </argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const ItemWithKey &amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="81" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="a00278_15ace758f4dcfe13c399f560b26170ef0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ItemWithKey</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool TreeNodeItem&lt; _KeyType, _IdType &gt;::operator&gt;</definition>
+        <argsstring>(const ItemWithKey &amp;item) const </argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>const ItemWithKey &amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="77" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="a00278_19dfcb3cee17ff233a90ccddde3881825" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ItemWithKey</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool TreeNodeItem&lt; _KeyType, _IdType &gt;::operator&gt;=</definition>
+        <argsstring>(const ItemWithKey &amp;item) const </argsstring>
+        <name>operator&gt;=</name>
+        <param>
+          <type>const ItemWithKey &amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="79" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="a00278_10dc96f0d0a8f731bbc39026b2b3f91da" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void TreeNodeItem&lt; _KeyType, _IdType &gt;::Serialize</definition>
+        <argsstring>(unsigned char *buffer) const </argsstring>
+        <name>Serialize</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Serializer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="66" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="65" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="a00278_17f15da71b6f2570b0679d37e543768a7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TreeNodeItem&lt; _KeyType, _IdType &gt;::TreeNodeItem</definition>
+        <argsstring>(const unsigned char *const buffer)</argsstring>
+        <name>TreeNodeItem</name>
+        <param>
+          <type>const unsigned char *const </type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Serialization constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="62" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="59" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="a00278_14da75c9c66a49553fbbaf5c9505f3e41" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TreeNodeItem&lt; _KeyType, _IdType &gt;::TreeNodeItem</definition>
+        <argsstring>()</argsstring>
+        <name>TreeNodeItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="50" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="a00278_18936c098abba57981324ed1bf8937cb8" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TreeNodeItem&lt; _KeyType, _IdType &gt;::TreeNodeItem</definition>
+        <argsstring>(const KeyType &amp;k, const IdType &amp;i)</argsstring>
+        <name>TreeNodeItem</name>
+        <param>
+          <type>const KeyType &amp;</type>
+          <declname>k</declname>
+        </param>
+        <param>
+          <type>const IdType &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+<para>initialization constructor </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="48" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="46" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="a00278_19f723508e153fd3fa1dbafcc25e80952" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TreeNodeItem&lt; _KeyType, _IdType &gt;::TreeNodeItem</definition>
+        <argsstring>(const KeyType &amp;k)</argsstring>
+        <name>TreeNodeItem</name>
+        <param>
+          <type>const KeyType &amp;</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+<para>initialization constructor </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="43" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="41" bodyend="43"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" line="32" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeItem.h" bodystart="32" bodyend="84"/>
+    <listofallmembers>
+      <member refid="a00278_121ccf5dacc1327f910544189d204a545" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>id</name></member>
+      <member refid="a00278_1cbac41e3f6f313dd0207592a2c455fb8196bd335a6cdac578f49b9eb6ec106a7" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>id_offset</name></member>
+      <member refid="a00278_1b8638f16074ae91c63b56ecd3c4a78b1" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>IdType</name></member>
+      <member refid="a00278_135645fcd77bd61ab3f9e5f7e24df5ad7" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>key</name></member>
+      <member refid="a00278_122e8331740b0626f4730cc13b27f34fd" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>KeyType</name></member>
+      <member refid="a00278_13e8d52af9864900574d917a39cc48325" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>operator!=</name></member>
+      <member refid="a00278_11179d7e92fb75463282e4b620059277f" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>operator&lt;</name></member>
+      <member refid="a00278_1740dedd3e66bd2212b83a201788815d9" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>operator&lt;=</name></member>
+      <member refid="a00278_1ddf14f95081ce6130088b21b8766fde3" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>operator==</name></member>
+      <member refid="a00278_15ace758f4dcfe13c399f560b26170ef0" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>operator&gt;</name></member>
+      <member refid="a00278_19dfcb3cee17ff233a90ccddde3881825" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>operator&gt;=</name></member>
+      <member refid="a00278_1cbac41e3f6f313dd0207592a2c455fb85c76d09781be71446a4ac9bc2565db1b" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>record_size</name></member>
+      <member refid="a00278_10dc96f0d0a8f731bbc39026b2b3f91da" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>Serialize</name></member>
+      <member refid="a00278_19f723508e153fd3fa1dbafcc25e80952" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>TreeNodeItem</name></member>
+      <member refid="a00278_18936c098abba57981324ed1bf8937cb8" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>TreeNodeItem</name></member>
+      <member refid="a00278_14da75c9c66a49553fbbaf5c9505f3e41" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>TreeNodeItem</name></member>
+      <member refid="a00278_17f15da71b6f2570b0679d37e543768a7" prot="public" virt="non-virtual"><scope>TreeNodeItem</scope><name>TreeNodeItem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

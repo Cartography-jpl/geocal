@@ -1,0 +1,920 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00239" kind="class" prot="public">
+    <compoundname>DiskTreeBackend</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename _NodeBase</type>
+      </param>
+      <param>
+        <type>template&lt; typename _i, std::size_t _mi &gt; class</type>
+        <declname>_NodeType</declname>
+        <defname>_NodeType</defname>
+      </param>
+      <param>
+        <type>template&lt; typename _k, typename _v &gt; class</type>
+        <declname>_NodeItemType</declname>
+        <defname>_NodeItemType</defname>
+      </param>
+      <param>
+        <type>typename _LeafNode</type>
+      </param>
+      <param>
+        <type>typename _KeyType</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>_max_node_items</declname>
+        <defname>_max_node_items</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00239_1ec55631c3443b804f0d352d676704e88" prot="public" static="no">
+        <type>DiskTreeBackendArgs</type>
+        <definition>typedef DiskTreeBackendArgs DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::Args</definition>
+        <argsstring></argsstring>
+        <name>Args</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="120" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="enum" id="a00239_1b8182a8bf9fae068ebe2e74fff6759d4" prot="public" static="no">
+        <name>ErrorCode</name>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d4db0284cbb6bf70f0e85d195f1a2f2ce1" prot="public">
+          <name>ERR_NONE</name>
+          <initializer> 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d416243ce450c29f389507055a3e6e2105" prot="public">
+          <name>ERR_OPEN_NODE_FILE</name>
+          <initializer> 1000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d46ac9d40f05ecf5859f3483fd12cc0c4f" prot="public">
+          <name>ERR_OPEN_LEAFNODE_FILE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d4acaa9dd63ed89a023782705cf64264c8" prot="public">
+          <name>ERR_WRITE_NODE_HEADER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d465a04212c7a822369c1364fcc2e7d2d6" prot="public">
+          <name>ERR_WRITE_LEAF_HEADER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d44d120adfefded0b2bfde65fb43879752" prot="public">
+          <name>ERR_READ_NODE_HEADER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d4c3fc5ff865cb262de96428c2bd4cd9c0" prot="public">
+          <name>ERR_READ_LEAF_HEADER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d45ce62db1afc1ec4df722fd30eae4b4a6" prot="public">
+          <name>ERR_CREATE_ROOT_WRITE_LEAF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d435202795eb689c28961323e28738d5c4" prot="public">
+          <name>ERR_CREATE_ROOT_WRITE_NODE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d45c276801dc2fde2aab048b120aaca532" prot="public">
+          <name>ERR_GET_NODE_LOAD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d4bdd4c0464b3e914b00ae48f25ae1c7e9" prot="public">
+          <name>ERR_GET_LEAFNODE_LOAD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d4eeee6da2bc5f24379aedf7191445439d" prot="public">
+          <name>ERR_CREATE_NODE_WRITE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00239_1b8182a8bf9fae068ebe2e74fff6759d436bef85388dc738cafa4324e6ed2bd03" prot="public">
+          <name>ERR_CREATE_LEAFNODE_WRITE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="158" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="158" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_1cab9cfb240fe24da75dd499856f65fb0" prot="public" static="no">
+        <type><ref refid="a00023" kindref="compound">UniqueId</ref></type>
+        <definition>typedef UniqueId DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::IdType</definition>
+        <argsstring></argsstring>
+        <name>IdType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="113" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_1f435275e8bcc31636357bf4bb71002a5" prot="public" static="no">
+        <type><ref refid="a00006" kindref="compound">LeafNodeCache::Node</ref></type>
+        <definition>typedef LeafNodeCache::Node DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::LeafCacheNode</definition>
+        <argsstring></argsstring>
+        <name>LeafCacheNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="152" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_139c727d7572a082c2b49e709cb35b93e" prot="public" static="no">
+        <type>_LeafNode</type>
+        <definition>typedef _LeafNode DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::LeafNode</definition>
+        <argsstring></argsstring>
+        <name>LeafNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="109" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_1883870fb8f74f52c67542d9171dead96" prot="public" static="no">
+        <type><ref refid="a00005" kindref="compound">LRUCache</ref>&lt; LeafNode, <ref refid="a00023" kindref="compound">IdType</ref>, LRUDeleteObject &gt;</type>
+        <definition>typedef LRUCache&lt;LeafNode, IdType, LRUDeleteObject&gt; DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::LeafNodeCache</definition>
+        <argsstring></argsstring>
+        <name>LeafNodeCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="151" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_1d215279664b7a5b3536a5da4fca281f6" prot="public" static="no">
+        <type><ref refid="a00019" kindref="compound">SerializedFile</ref>&lt; LeafNode, leaf_header_sz &gt;</type>
+        <definition>typedef SerializedFile&lt; LeafNode, leaf_header_sz &gt; DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::LeafNodeFile</definition>
+        <argsstring></argsstring>
+        <name>LeafNodeFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="156" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_1d701cf405a49f88041384958ce79871c" prot="public" static="no">
+        <type>_NodeType&lt; NodeItem, _max_node_items &gt;</type>
+        <definition>typedef _NodeType&lt;NodeItem, _max_node_items&gt; DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::Node</definition>
+        <argsstring></argsstring>
+        <name>Node</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="117" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_129e8e62ef8f6834d83484be0d397530b" prot="public" static="no">
+        <type>_NodeBase</type>
+        <definition>typedef _NodeBase DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::NodeBase</definition>
+        <argsstring></argsstring>
+        <name>NodeBase</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="108" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_18f3f0c4ef742d4b10eb7af28898540a6" prot="public" static="no">
+        <type><ref refid="a00005" kindref="compound">LRUCache</ref>&lt; Node, <ref refid="a00023" kindref="compound">IdType</ref>, LRUDeleteObject &gt;</type>
+        <definition>typedef LRUCache&lt;Node, IdType, LRUDeleteObject&gt; DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::NodeCache</definition>
+        <argsstring></argsstring>
+        <name>NodeCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="149" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_172d5132650d8f477fb5cd2d29cacad80" prot="public" static="no">
+        <type><ref refid="a00006" kindref="compound">NodeCache::Node</ref></type>
+        <definition>typedef NodeCache::Node DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::NodeCacheNode</definition>
+        <argsstring></argsstring>
+        <name>NodeCacheNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="150" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_14169f20334055e8eb0482fb8bf001706" prot="public" static="no">
+        <type><ref refid="a00019" kindref="compound">SerializedFile</ref>&lt; Node, node_header_sz &gt;</type>
+        <definition>typedef SerializedFile&lt; Node, node_header_sz &gt; DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::NodeFile</definition>
+        <argsstring></argsstring>
+        <name>NodeFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="155" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_1c9d61b45b1ef3ba7d27ccc37edb38ade" prot="public" static="no">
+        <type>_NodeItemType&lt; _KeyType, <ref refid="a00023" kindref="compound">IdType</ref> &gt;</type>
+        <definition>typedef _NodeItemType&lt;_KeyType, IdType &gt; DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::NodeItem</definition>
+        <argsstring></argsstring>
+        <name>NodeItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="116" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00239_19b26bac50d3cc4a906ecfadf3328271f" prot="public" static="no">
+        <type>uint64_t</type>
+        <definition>typedef uint64_t DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="114" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00239_1f5895cd52250fa9ee776a28e145cb6ef" prot="public" static="no" mutable="no">
+        <type><ref refid="a00023" kindref="compound">IdType</ref></type>
+        <definition>IdType DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_rootId</definition>
+        <argsstring></argsstring>
+        <name>m_rootId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="503" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="503" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00239_1a8536ff4897eb17b5e393f9426590c38" prot="public" static="no" mutable="no">
+        <type>size_type</type>
+        <definition>size_type DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="505" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="505" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00239_10c92c90663477e8fa98fa23d7f3e8705" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_treeHeight</definition>
+        <argsstring></argsstring>
+        <name>m_treeHeight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="504" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="504" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00239_1a0d37a4c2a76530e823660b173839717" prot="private" static="no" mutable="no">
+        <type>wxString</type>
+        <definition>wxString DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::custom_signature</definition>
+        <argsstring></argsstring>
+        <name>custom_signature</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="759" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="759" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00239_19c29683ddb6341d9c8efafe8b0df9d5a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_initialized</definition>
+        <argsstring></argsstring>
+        <name>m_initialized</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="755" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="755" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00239_1ec9bacaf6f15737545c23aa7f78168d0" prot="private" static="no" mutable="no">
+        <type>ErrorCode</type>
+        <definition>ErrorCode DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_lastError</definition>
+        <argsstring></argsstring>
+        <name>m_lastError</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="776" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="776" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00239_1968dbf7b4e709d36ae02f1428769b18c" prot="private" static="no" mutable="no">
+        <type><ref refid="a00023" kindref="compound">IdType</ref></type>
+        <definition>IdType DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_leaf_node_count</definition>
+        <argsstring></argsstring>
+        <name>m_leaf_node_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="757" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="757" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00239_10d0164859ae9c0c30bdb175ad7e3c8ff" prot="private" static="no" mutable="no">
+        <type><ref refid="a00005" kindref="compound">LeafNodeCache</ref> *</type>
+        <definition>LeafNodeCache* DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_leafNodeCache</definition>
+        <argsstring></argsstring>
+        <name>m_leafNodeCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="773" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="773" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00239_134dd0bcd1369287646fd4cb7294ab67c" prot="private" static="no" mutable="no">
+        <type><ref refid="a00019" kindref="compound">LeafNodeFile</ref> *</type>
+        <definition>LeafNodeFile* DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_leafNodeFile</definition>
+        <argsstring></argsstring>
+        <name>m_leafNodeFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="774" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="774" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00239_181a45d492efd423de6c6a269ee25f10b" prot="private" static="no" mutable="no">
+        <type><ref refid="a00023" kindref="compound">IdType</ref></type>
+        <definition>IdType DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_node_count</definition>
+        <argsstring></argsstring>
+        <name>m_node_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="756" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="756" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00239_1d9df5f667311ac32bdab960541beaa3f" prot="private" static="no" mutable="no">
+        <type><ref refid="a00005" kindref="compound">NodeCache</ref> *</type>
+        <definition>NodeCache* DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_nodeCache</definition>
+        <argsstring></argsstring>
+        <name>m_nodeCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="766" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="766" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00239_1d3cd9d996cbd9eaaf9dd6b4b77bf65f7" prot="private" static="no" mutable="no">
+        <type><ref refid="a00019" kindref="compound">NodeFile</ref> *</type>
+        <definition>NodeFile* DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_nodeFile</definition>
+        <argsstring></argsstring>
+        <name>m_nodeFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="767" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="767" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00239_13b955397704abe85aff857fe196dea1a" prot="private" static="no" mutable="no">
+        <type>NodeBase *</type>
+        <definition>NodeBase* DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::m_root</definition>
+        <argsstring></argsstring>
+        <name>m_root</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="770" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="770" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00239_11765b9670a887c85c9483fed0fce639d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>LeafNode *</type>
+        <definition>LeafNode* DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::create_leaf_node</definition>
+        <argsstring>(const IdType &amp;id)</argsstring>
+        <name>create_leaf_node</name>
+        <param>
+          <type>const <ref refid="a00023" kindref="compound">IdType</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="462" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="461" bodyend="477"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_10e9d229ddf8aac466ed2ebaa7c459309" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Node *</type>
+        <definition>Node* DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::create_node</definition>
+        <argsstring>(const IdType &amp;id)</argsstring>
+        <name>create_node</name>
+        <param>
+          <type>const <ref refid="a00023" kindref="compound">IdType</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new node with the specified id, and adds it to the cache. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="406" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="405" bodyend="421"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_1d1084b6476f5127ebb0a2c5112c0d37f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::create_root_node</definition>
+        <argsstring>() WARN_IF_UNUSED</argsstring>
+        <name>create_root_node</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="353" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="352" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_14a2f7ca78e96228043e8f80b77d52ec2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::Destroy</definition>
+        <argsstring>()</argsstring>
+        <name>Destroy</name>
+        <briefdescription>
+<para>This deletes the database. </para>        </briefdescription>
+        <detaileddescription>
+<para>After calling this, you must call initialize to use the object again. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="321" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="320" bodyend="344"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_10355fe662dbc12796e00d6890be8e62f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::DiskTreeBackend</definition>
+        <argsstring>()</argsstring>
+        <name>DiskTreeBackend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="191" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="175" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_12c670b5f2d86d5c179b74fc061c19659" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>LeafNode *</type>
+        <definition>LeafNode* DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::get_leaf_node</definition>
+        <argsstring>(const IdType &amp;id)</argsstring>
+        <name>get_leaf_node</name>
+        <param>
+          <type>const <ref refid="a00023" kindref="compound">IdType</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="480" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="479" bodyend="500"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_14fafbe103a0cce788a1a09b192f51bde" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Node *</type>
+        <definition>Node* DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::get_node</definition>
+        <argsstring>(const IdType &amp;id)</argsstring>
+        <name>get_node</name>
+        <param>
+          <type>const <ref refid="a00023" kindref="compound">IdType</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="428" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="427" bodyend="451"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_178046247f10ff64c6d6fb05819cb3738" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>ErrorCode</type>
+        <definition>ErrorCode DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::GetErrorCode</definition>
+        <argsstring>() const </argsstring>
+        <name>GetErrorCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="314" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="313" bodyend="316"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_1843482997a04fe5c4f4a0b3151de03d8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00023" kindref="compound">IdType</ref></type>
+        <definition>IdType DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::GetLeafNodeCount</definition>
+        <argsstring>() const </argsstring>
+        <name>GetLeafNodeCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="311" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="311" bodyend="311"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_1d21420f1013aca4a0434a73fcf99498b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00023" kindref="compound">IdType</ref></type>
+        <definition>IdType DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::GetNodeCount</definition>
+        <argsstring>() const </argsstring>
+        <name>GetNodeCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="310" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="310" bodyend="310"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_1dd85d106bbdb021e16a1f72333b00016" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::Initialize</definition>
+        <argsstring>(const Args &amp;args) WARN_IF_UNUSED</argsstring>
+        <name>Initialize</name>
+        <param>
+          <type>const Args &amp;</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>This initializes a file-based R-tree with R* indexing. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Filename of tree </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="244" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="243" bodyend="307"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_1a8b1f17ba484f602ad5629ba8aa59b29" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00023" kindref="compound">IdType</ref></type>
+        <definition>IdType DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::new_leaf_node_id</definition>
+        <argsstring>()</argsstring>
+        <name>new_leaf_node_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="454" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="454" bodyend="459"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_189fd6a0dca5206663cd6eea2ff4f378d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00023" kindref="compound">IdType</ref></type>
+        <definition>IdType DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::new_node_id</definition>
+        <argsstring>()</argsstring>
+        <name>new_node_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="397" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="396" bodyend="402"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_1e97fcc9a6e41460a42d60243116aec4b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::~DiskTreeBackend</definition>
+        <argsstring>()</argsstring>
+        <name>~DiskTreeBackend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="194" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="193" bodyend="236"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="a00239_18ff497805478510e15f82e31829877ad" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CacheType</type>
+          </param>
+          <param>
+            <type>typename NodeFileType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::ClearCache</definition>
+        <argsstring>(CacheType *cache, NodeFileType *file)</argsstring>
+        <name>ClearCache</name>
+        <param>
+          <type>CacheType *</type>
+          <declname>cache</declname>
+        </param>
+        <param>
+          <type>NodeFileType *</type>
+          <declname>file</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="741" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="740" bodyend="752"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_1f7daac3bad041eb54f2d39deff80dd6a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::ReadLeafHeader</definition>
+        <argsstring>() WARN_IF_UNUSED</argsstring>
+        <name>ReadLeafHeader</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="688" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="687" bodyend="737"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_1fee376c564792d2e23eb3c42a0bc56d8" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::ReadNodeHeader</definition>
+        <argsstring>() WARN_IF_UNUSED</argsstring>
+        <name>ReadNodeHeader</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="631" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="630" bodyend="685"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_182f153520b80b716578625af7b51fa11" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::write_leaf</definition>
+        <argsstring>(LeafCacheNode *node) WARN_IF_UNUSED</argsstring>
+        <name>write_leaf</name>
+        <param>
+          <type><ref refid="a00006" kindref="compound">LeafCacheNode</ref> *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="523" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="522" bodyend="533"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_19a58af9e81a929affe503509f19fe482" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::write_node</definition>
+        <argsstring>(NodeCacheNode *node) WARN_IF_UNUSED</argsstring>
+        <name>write_node</name>
+        <param>
+          <type><ref refid="a00006" kindref="compound">NodeCacheNode</ref> *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="510" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="509" bodyend="520"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_1aefed202ecc8c6fb86b0300222840fc1" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::WriteLeafHeader</definition>
+        <argsstring>() WARN_IF_UNUSED</argsstring>
+        <name>WriteLeafHeader</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="587" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="586" bodyend="627"/>
+      </memberdef>
+      <memberdef kind="function" id="a00239_1758afd2cac62a45123bc5d0478a04099" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;::WriteNodeHeader</definition>
+        <argsstring>() WARN_IF_UNUSED</argsstring>
+        <name>WriteNodeHeader</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="537" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="536" bodyend="584"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="321">
+        <label>LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;</label>
+        <link refid="a00005"/>
+        <childnode refid="322" relation="usage">
+          <edgelabel>m_last</edgelabel>
+          <edgelabel>m_first</edgelabel>
+        </childnode>
+      </node>
+      <node id="322">
+        <label>LRUCacheNode&lt; CachedObjectType, IdType, deleteType &gt;</label>
+        <link refid="a00006"/>
+        <childnode refid="322" relation="usage">
+          <edgelabel>prev</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="320">
+        <label>SerializedFile&lt; T, start_offset &gt;</label>
+        <link refid="a00019"/>
+      </node>
+      <node id="323">
+        <label>UniqueIdT&lt; high_type &gt;</label>
+        <link refid="a00023"/>
+      </node>
+      <node id="319">
+        <label>DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;</label>
+        <childnode refid="320" relation="usage">
+          <edgelabel>m_leafNodeFile</edgelabel>
+          <edgelabel>m_nodeFile</edgelabel>
+        </childnode>
+        <childnode refid="321" relation="usage">
+          <edgelabel>m_leafNodeCache</edgelabel>
+          <edgelabel>m_nodeCache</edgelabel>
+        </childnode>
+        <childnode refid="323" relation="usage">
+          <edgelabel>m_rootId</edgelabel>
+          <edgelabel>m_node_count</edgelabel>
+          <edgelabel>m_leaf_node_count</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="104" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="104" bodyend="777"/>
+    <listofallmembers>
+      <member refid="a00239_1ec55631c3443b804f0d352d676704e88" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>Args</name></member>
+      <member refid="a00239_18ff497805478510e15f82e31829877ad" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ClearCache</name></member>
+      <member refid="a00239_11765b9670a887c85c9483fed0fce639d" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>create_leaf_node</name></member>
+      <member refid="a00239_10e9d229ddf8aac466ed2ebaa7c459309" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>create_node</name></member>
+      <member refid="a00239_1d1084b6476f5127ebb0a2c5112c0d37f" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>create_root_node</name></member>
+      <member refid="a00239_1a0d37a4c2a76530e823660b173839717" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>custom_signature</name></member>
+      <member refid="a00239_14a2f7ca78e96228043e8f80b77d52ec2" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>Destroy</name></member>
+      <member refid="a00239_10355fe662dbc12796e00d6890be8e62f" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>DiskTreeBackend</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d436bef85388dc738cafa4324e6ed2bd03" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_CREATE_LEAFNODE_WRITE</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4eeee6da2bc5f24379aedf7191445439d" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_CREATE_NODE_WRITE</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d45ce62db1afc1ec4df722fd30eae4b4a6" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_CREATE_ROOT_WRITE_LEAF</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d435202795eb689c28961323e28738d5c4" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_CREATE_ROOT_WRITE_NODE</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4bdd4c0464b3e914b00ae48f25ae1c7e9" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_GET_LEAFNODE_LOAD</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d45c276801dc2fde2aab048b120aaca532" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_GET_NODE_LOAD</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4db0284cbb6bf70f0e85d195f1a2f2ce1" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_NONE</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d46ac9d40f05ecf5859f3483fd12cc0c4f" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_OPEN_LEAFNODE_FILE</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d416243ce450c29f389507055a3e6e2105" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_OPEN_NODE_FILE</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4c3fc5ff865cb262de96428c2bd4cd9c0" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_READ_LEAF_HEADER</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d44d120adfefded0b2bfde65fb43879752" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_READ_NODE_HEADER</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d465a04212c7a822369c1364fcc2e7d2d6" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_WRITE_LEAF_HEADER</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4acaa9dd63ed89a023782705cf64264c8" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ERR_WRITE_NODE_HEADER</name></member>
+      <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ErrorCode</name></member>
+      <member refid="a00239_12c670b5f2d86d5c179b74fc061c19659" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>get_leaf_node</name></member>
+      <member refid="a00239_14fafbe103a0cce788a1a09b192f51bde" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>get_node</name></member>
+      <member refid="a00239_178046247f10ff64c6d6fb05819cb3738" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>GetErrorCode</name></member>
+      <member refid="a00239_1843482997a04fe5c4f4a0b3151de03d8" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>GetLeafNodeCount</name></member>
+      <member refid="a00239_1d21420f1013aca4a0434a73fcf99498b" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>GetNodeCount</name></member>
+      <member refid="a00239_1cab9cfb240fe24da75dd499856f65fb0" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>IdType</name></member>
+      <member refid="a00239_1dd85d106bbdb021e16a1f72333b00016" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>Initialize</name></member>
+      <member refid="a00239_1bddb2b67ad33ed8fd9d366c8024d576b43244c7aaeb5234a51f8e776616fc713" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>leaf_header_sz</name></member>
+      <member refid="a00239_1f435275e8bcc31636357bf4bb71002a5" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>LeafCacheNode</name></member>
+      <member refid="a00239_139c727d7572a082c2b49e709cb35b93e" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>LeafNode</name></member>
+      <member refid="a00239_1883870fb8f74f52c67542d9171dead96" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>LeafNodeCache</name></member>
+      <member refid="a00239_1d215279664b7a5b3536a5da4fca281f6" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>LeafNodeFile</name></member>
+      <member refid="a00239_19c29683ddb6341d9c8efafe8b0df9d5a" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_initialized</name></member>
+      <member refid="a00239_1ec9bacaf6f15737545c23aa7f78168d0" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_lastError</name></member>
+      <member refid="a00239_1968dbf7b4e709d36ae02f1428769b18c" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_leaf_node_count</name></member>
+      <member refid="a00239_10d0164859ae9c0c30bdb175ad7e3c8ff" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_leafNodeCache</name></member>
+      <member refid="a00239_134dd0bcd1369287646fd4cb7294ab67c" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_leafNodeFile</name></member>
+      <member refid="a00239_181a45d492efd423de6c6a269ee25f10b" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_node_count</name></member>
+      <member refid="a00239_1d9df5f667311ac32bdab960541beaa3f" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_nodeCache</name></member>
+      <member refid="a00239_1d3cd9d996cbd9eaaf9dd6b4b77bf65f7" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_nodeFile</name></member>
+      <member refid="a00239_13b955397704abe85aff857fe196dea1a" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_root</name></member>
+      <member refid="a00239_1f5895cd52250fa9ee776a28e145cb6ef" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_rootId</name></member>
+      <member refid="a00239_1a8536ff4897eb17b5e393f9426590c38" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_size</name></member>
+      <member refid="a00239_10c92c90663477e8fa98fa23d7f3e8705" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>m_treeHeight</name></member>
+      <member refid="a00239_1a8b1f17ba484f602ad5629ba8aa59b29" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>new_leaf_node_id</name></member>
+      <member refid="a00239_189fd6a0dca5206663cd6eea2ff4f378d" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>new_node_id</name></member>
+      <member refid="a00239_1d701cf405a49f88041384958ce79871c" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>Node</name></member>
+      <member refid="a00239_1bddb2b67ad33ed8fd9d366c8024d576b03682baa914065540344edc3f7e4bd67" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>node_header_sz</name></member>
+      <member refid="a00239_129e8e62ef8f6834d83484be0d397530b" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>NodeBase</name></member>
+      <member refid="a00239_18f3f0c4ef742d4b10eb7af28898540a6" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>NodeCache</name></member>
+      <member refid="a00239_172d5132650d8f477fb5cd2d29cacad80" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>NodeCacheNode</name></member>
+      <member refid="a00239_14169f20334055e8eb0482fb8bf001706" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>NodeFile</name></member>
+      <member refid="a00239_1c9d61b45b1ef3ba7d27ccc37edb38ade" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>NodeItem</name></member>
+      <member refid="a00239_1f7daac3bad041eb54f2d39deff80dd6a" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ReadLeafHeader</name></member>
+      <member refid="a00239_1fee376c564792d2e23eb3c42a0bc56d8" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>ReadNodeHeader</name></member>
+      <member refid="a00239_19b26bac50d3cc4a906ecfadf3328271f" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>size_type</name></member>
+      <member refid="a00239_182f153520b80b716578625af7b51fa11" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>write_leaf</name></member>
+      <member refid="a00239_19a58af9e81a929affe503509f19fe482" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>write_node</name></member>
+      <member refid="a00239_1aefed202ecc8c6fb86b0300222840fc1" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>WriteLeafHeader</name></member>
+      <member refid="a00239_1758afd2cac62a45123bc5d0478a04099" prot="private" virt="non-virtual"><scope>DiskTreeBackend</scope><name>WriteNodeHeader</name></member>
+      <member refid="a00239_1e97fcc9a6e41460a42d60243116aec4b" prot="public" virt="non-virtual"><scope>DiskTreeBackend</scope><name>~DiskTreeBackend</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

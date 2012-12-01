@@ -1,0 +1,125 @@
+// -*- mode: c++; -*-
+// (Not really c++, but closest emacs mode)
+%module geocal
+%{
+#include "geocal_rpc.h"
+%}
+
+%geocal_shared_ptr(Rpc);
+%geocal_shared_ptr(RasterImage);
+%geocal_shared_ptr(ImageGroundConnection);
+
+%pythoncode {
+def _new_rpc(is_rpc_a, error_bias, error_random, height_offset, 
+             height_scale, latitude_offset,
+             latitude_scale, longitude_offset, longitude_scale,
+             line_offset, line_scale, sample_offset, sample_scale,
+             line_denominator, line_numerator, sample_denominator,
+             sample_numerator, fit_line_numerator, fit_sample_numerator):
+    rpc = Rpc()
+    rpc.rpc_type = Rpc.RPC_A if(is_rpc_a) else Rpc.RPC_B
+    rpc.error_bias = error_bias
+    rpc.error_random = error_random				
+    rpc.height_offset = height_offset
+    rpc.height_scale = height_scale
+    rpc.latitude_offset = latitude_offset
+    rpc.latitude_scale = latitude_scale
+    rpc.longitude_offset = longitude_offset
+    rpc.longitude_scale = longitude_scale
+    rpc.line_offset = line_offset
+    rpc.line_scale = line_scale
+    rpc.sample_offset = sample_offset
+    rpc.sample_scale = sample_scale
+    rpc.line_denominator.set(line_denominator)
+    rpc.line_numerator.set(line_numerator)
+    rpc.sample_denominator.set(sample_denominator)
+    rpc.sample_numerator.set(sample_numerator)
+    rpc.fit_line_numerator.set(fit_line_numerator)
+    rpc.fit_sample_numerator.set(fit_sample_numerator)
+    return rpc
+}
+namespace GeoCal {
+  class RasterImage;
+  class ImageGroundConnection;
+  class Rpc {
+  public:
+%pythoncode {
+def __reduce__(self):
+  return _new_rpc, (self.rpc_type == Rpc.RPC_A,
+		    self.error_bias,
+                    self.error_random,
+		    self.height_offset,
+		    self.height_scale,
+		    self.latitude_offset,
+		    self.latitude_scale,
+		    self.longitude_offset,
+		    self.longitude_scale,
+		    self.line_offset,
+		    self.line_scale,
+		    self.sample_offset,
+		    self.sample_scale,
+		    list(self.line_denominator),
+		    list(self.line_numerator),
+		    list(self.sample_denominator),
+		    list(self.sample_numerator),
+		    list(self.fit_line_numerator),
+		    list(self.fit_sample_numerator))
+}
+    std::string print_to_string() const;
+    enum RpcType {RPC_A, RPC_B};
+    RpcType rpc_type;
+    double error_bias;
+    double error_random;
+    double height_offset;
+    double height_scale;
+    double latitude_offset;
+    double latitude_scale;
+    double longitude_offset;
+    double longitude_scale;
+    double line_offset;
+    double line_scale;
+    double sample_offset;
+    double sample_scale;
+    boost::array<double, 20> line_denominator;
+    boost::array<double, 20> line_numerator;
+    boost::array<double, 20> sample_denominator;
+    boost::array<double, 20> sample_numerator;
+    boost::array<bool, 20> fit_line_numerator;
+    boost::array<bool, 20> fit_sample_numerator;
+    double resolution_meter(const Dem& D) const;
+    void fit(const std::vector<boost::shared_ptr<GroundCoordinate> >& Gc,
+	   const std::vector<ImageCoordinate>& Ic, 
+	   const std::vector<double>& Line_sigma,
+	   const std::vector<double>& Sample_sigma,
+	   std::set<int> Blunder,
+	   double Blunder_threshold = 3,
+	   double Chisq_threshold = 0.8,
+	   bool Blunder_detect = true);
+    void fit_all(const std::vector<double>& Line,
+	       const std::vector<double>& Sample,
+	       const std::vector<double>& Latitude,
+	       const std::vector<double>& Longitude,
+	       const std::vector<double>& Height);
+    static Rpc generate_rpc(const ImageGroundConnection& Igc,
+			  double Min_height, double Max_height,
+			  int Nlat = 20, int Nlon = 20, int Nheight = 20
+			  );
+    Geodetic ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const;
+    ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const;
+    ImageCoordinate image_coordinate(double Latitude, double Longitude, 
+	 			     double Height_ellipsoid) const;
+    blitz::Array<double, 2> image_coordinate_jac_parm(const GroundCoordinate& Gc)
+    const;
+    blitz::Array<double, 2> 
+    image_coordinate_jac_parm(double Latitude, double Longitude, 
+			      double Height_ellipsoid) const;
+    blitz::Array<double, 2> image_coordinate_jac(double Latitude, 
+					      double Longitude, 
+					      double Height_ellipsoid) const;
+    void rpc_project(RasterImage& Res, const RasterImage& Img, 
+		      const Dem& D, double Line_scale = 1, 
+		      double Sample_scale = 1) const;
+    Rpc rpc_type_a() const;
+    Rpc rpc_type_b() const;
+  };
+}

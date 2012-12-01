@@ -1,0 +1,1 @@
+SRCDIR='./sdbx' PROJECT='libsdbx' DOCDIR='doc' VERSION='1.0' PERL_PATH='/opt/local/bin/perl' HAVE_DOT='YES' DOT_PATH='/opt/local/bin' GENERATE_MAN='NO' GENERATE_RTF='NO' GENERATE_XML='NO' GENERATE_HTMLHELP='NO' GENERATE_CHI='NO' GENERATE_HTML='YES' GENERATE_LATEX='NO' /opt/local/bin/doxygen doxygen.cfg

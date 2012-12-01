@@ -1,0 +1,90 @@
+/*===========================================================================
+=                                                                           =
+=                                 ImageCoor                                 =
+=                                                                           =
+=============================================================================
+
+                          Jet Propulsion Laboratory
+                                    MISR
+                             GeoCal Processing
+                                                                        
+            Copyright 2006, California Institute of Technology.         
+                           ALL RIGHTS RESERVED.                         
+                 U.S. Government Sponsorship acknowledged.              
+
+!C++=========================================================================
+
+!CLASS NAME: ImageCoor
+
+!ABSTRACT:
+
+   This contains inline routines for the parent .h file
+
+!PARENT(S):
+
+  image_coor.h
+
+!REVISION HISTORY:
+
+See ClearCase Log
+
+=============================================================================
+!END=======================================================================*/
+
+#ifndef IMAGE_COOR_ICC
+#define IMAGE_COOR_ICC
+
+//***************************************************************************
+// Definition of function inline ImageCoor::ImageCoor(double Line, double
+// Sample).
+//***************************************************************************
+
+inline GeoCal::GeoCalCore::ImageCoor::ImageCoor(
+double		   Line,	// Line number
+double		   Sample	// Sample number
+)
+:line_(Line), sample_(Sample)
+{
+}
+
+//***************************************************************************
+// Definition of function inline ImageCoor::ImageCoor().
+//***************************************************************************
+
+inline GeoCal::GeoCalCore::ImageCoor::ImageCoor()
+{
+// Do nothing;
+}
+
+//***************************************************************************
+// Definition of function inline double ImageCoor::line() const.
+//***************************************************************************
+
+inline double GeoCal::GeoCalCore::ImageCoor::line() const
+{
+  return line_;
+}
+
+//***************************************************************************
+// Definition of function inline double ImageCoor::sample() const.
+//***************************************************************************
+
+inline double GeoCal::GeoCalCore::ImageCoor::sample() const
+{
+  return sample_;
+}
+
+//***************************************************************************
+// Definition of bool operator!=(const ImageCoor& C1, const ImageCoor&
+// C2).
+//***************************************************************************
+
+inline bool GeoCal::GeoCalCore::operator!=(
+const ImageCoor&   C1,		// Coordinate 1.
+const ImageCoor&   C2		// Coordinate 2.
+)
+{
+  return !(C1 ==C2);
+}
+#endif
+

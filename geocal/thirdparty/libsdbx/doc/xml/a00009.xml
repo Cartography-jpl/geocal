@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00009" kind="struct" prot="public">
+    <compoundname>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;</compoundname>
+    <includes refid="a00031" local="no">lru.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename CachedObjectType</type>
+      </param>
+      <param>
+        <type>typename IdType</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00009_128426dc9621e421c667801996d1aa942" prot="public" static="no">
+        <type><ref refid="a00006" kindref="compound">LRUCacheNode</ref>&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;</type>
+        <definition>typedef LRUCacheNode&lt;CachedObjectType, IdType, LRUFreeMalloc&gt; LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;::_Self</definition>
+        <argsstring></argsstring>
+        <name>_Self</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="124" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00009_1548a85d162059e9759ab051a60a7610b" prot="public" static="no" mutable="no">
+        <type>IdType</type>
+        <definition>IdType LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="131" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00009_1d0fd50de5727847bfcbb9a1166fa2243" prot="public" static="no" mutable="no">
+        <type><ref refid="a00009" kindref="compound">_Self</ref> *</type>
+        <definition>_Self* LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="135" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00009_136cf82bd125e57c73af59d5298498555" prot="public" static="no" mutable="no">
+        <type>CachedObjectType *</type>
+        <definition>CachedObjectType* LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;::object</definition>
+        <argsstring></argsstring>
+        <name>object</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="132" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00009_190a81154e1a70a1044831d186706fa00" prot="public" static="no" mutable="no">
+        <type><ref refid="a00009" kindref="compound">_Self</ref> *</type>
+        <definition>_Self* LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;::prev</definition>
+        <argsstring></argsstring>
+        <name>prev</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="136" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00009_17f40952e57ccfc6b8c0716249fabc6a9" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;::LRUCacheNode</definition>
+        <argsstring>(const IdType &amp;i, CachedObjectType *o, _Self *n)</argsstring>
+        <name>LRUCacheNode</name>
+        <param>
+          <type>const IdType &amp;</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>CachedObjectType *</type>
+          <declname>o</declname>
+        </param>
+        <param>
+          <type><ref refid="a00009" kindref="compound">_Self</ref> *</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="127" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="126" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="a00009_148ee14998b2b80f3f9b426ca3dbf1f53" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;::~LRUCacheNode</definition>
+        <argsstring>()</argsstring>
+        <name>~LRUCacheNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="129" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="129" bodyend="129"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>specialized version: free() </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="491">
+        <label>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;</label>
+        <link refid="a00009"/>
+        <childnode refid="491" relation="usage">
+          <edgelabel>prev</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="122" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="122" bodyend="137"/>
+    <listofallmembers>
+      <member refid="a00009_128426dc9621e421c667801996d1aa942" prot="public" virt="non-virtual"><scope>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;</scope><name>_Self</name></member>
+      <member refid="a00009_1548a85d162059e9759ab051a60a7610b" prot="public" virt="non-virtual"><scope>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;</scope><name>id</name></member>
+      <member refid="a00009_17f40952e57ccfc6b8c0716249fabc6a9" prot="public" virt="non-virtual"><scope>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;</scope><name>LRUCacheNode</name></member>
+      <member refid="a00009_1d0fd50de5727847bfcbb9a1166fa2243" prot="public" virt="non-virtual"><scope>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;</scope><name>next</name></member>
+      <member refid="a00009_136cf82bd125e57c73af59d5298498555" prot="public" virt="non-virtual"><scope>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;</scope><name>object</name></member>
+      <member refid="a00009_190a81154e1a70a1044831d186706fa00" prot="public" virt="non-virtual"><scope>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;</scope><name>prev</name></member>
+      <member refid="a00009_148ee14998b2b80f3f9b426ca3dbf1f53" prot="public" virt="non-virtual"><scope>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;</scope><name>~LRUCacheNode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

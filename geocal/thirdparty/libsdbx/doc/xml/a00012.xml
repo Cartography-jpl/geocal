@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00012" kind="struct" prot="public">
+    <compoundname>record</compoundname>
+    <includes refid="a00040" local="no">Serialization.h</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="a00012_1130a824f53e91001ae8656f26b5691f8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const unsigned char *const</type>
+        <definition>static const unsigned char* const record&lt; T &gt;::deserialize</definition>
+        <argsstring>(const unsigned char *const buffer)</argsstring>
+        <name>deserialize</name>
+        <param>
+          <type>const unsigned char *const </type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/Serialization.h" line="121" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/Serialization.h" bodystart="120" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="a00012_132e74e6b2780dd28403cdc3a3aa1e466" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void record&lt; T &gt;::serialize</definition>
+        <argsstring>(const T &amp;var, unsigned char *buffer)</argsstring>
+        <name>serialize</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/Serialization.h" line="127" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/Serialization.h" bodystart="126" bodyend="129"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Generic serialization class. </para>    </briefdescription>
+    <detaileddescription>
+<para>Read the notes in <ref refid="a00069" kindref="compound">SerializedFile.h</ref> first</para><para>These allow us to serialize/deserialize anything that we want without knowing whether its an intrinsic or a user-defined class. There is a template defined, record&lt;T&gt;, that provides three pieces of functionality:</para><para>record&lt;T&gt;::size The record_size of the type</para><para>record&lt;T&gt;::deserialize(buffer) Used in an initializer of a constructor</para><para>record&lt;T&gt;::serialize(var, buffer) Used to serialize a type to a buffer.</para><para>As always, an example is the best way to explain how to use it:</para><para>template &lt;typename T1, typename T2&gt; struct test_record { enum { record_size = record&lt;T1&gt;::size + record&lt;T2&gt;::size};</para><para>test_record(const unsigned char * const buffer) : value1(record&lt;T1&gt;::deserialize(buffer)), value2(record&lt;T2&gt;::deserialize(buffer + record&lt;T1&gt;::size)) {}</para><para>void Serialize(unsigned char * buffer) const { record&lt;T1&gt;::serialize(value1, buffer); record&lt;T2&gt;::serialize(value2, buffer + record&lt;T1&gt;::size); }</para><para>T1 value1; T2 value2; };</para><para>As you can see, its pretty straightforward. The compiler should inline the extra function calls when you&apos;re using optimizations, so there shouldn&apos;t be any extra overhead. However I would anticipate that compiling without optimizations would result in some overhead. </para>    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/Serialization.h" line="116" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/Serialization.h" bodystart="116" bodyend="130"/>
+    <listofallmembers>
+      <member refid="a00012_1130a824f53e91001ae8656f26b5691f8" prot="public" virt="non-virtual"><scope>record</scope><name>deserialize</name></member>
+      <member refid="a00012_132e74e6b2780dd28403cdc3a3aa1e466" prot="public" virt="non-virtual"><scope>record</scope><name>serialize</name></member>
+      <member refid="a00012_1a9f1a5cfb987e8b52080725e391304f27e8fc057363c5f24cd435476ed81d126" prot="public" virt="non-virtual"><scope>record</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

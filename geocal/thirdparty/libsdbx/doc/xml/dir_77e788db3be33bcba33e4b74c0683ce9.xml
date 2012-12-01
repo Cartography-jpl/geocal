@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="dir_77e788db3be33bcba33e4b74c0683ce9" kind="dir">
+    <compoundname>RTree/</compoundname>
+    <innerfile refid="a00033">RTree.h</innerfile>
+    <innerfile refid="a00035">RTreeBoundingBox.h</innerfile>
+    <innerfile refid="a00036">RTreeIterator.h</innerfile>
+    <innerfile refid="a00037">RTreeNode.h</innerfile>
+    <innerfile refid="a00038">RTreeVerify.h</innerfile>
+    <innerfile refid="a00039">RTreeVisitor.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/"/>
+  </compounddef>
+</doxygen>

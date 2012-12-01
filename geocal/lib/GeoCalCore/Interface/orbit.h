@@ -1,0 +1,538 @@
+#ifndef ORBIT_H
+#define ORBIT_H
+#include "printable.h"
+#include "look_vector.h"
+#include "ground_coordinate.h"
+#include "camera.h"
+#include "dem.h"
+#include <boost/math/quaternion.hpp>
+#include <blitz/array.h>
+#include <vector>
+
+namespace GeoCal {
+/****************************************************************//**
+  This class is used to convert ScLookVector,
+  CartesianInertialLookVector and CartesianFixedLookVector to and 
+  from each other at a given time.
+*******************************************************************/
+
+class OrbitData : public Printable<OrbitData> {
+public:
+  virtual ~OrbitData() {}
+
+//-----------------------------------------------------------------------
+/// Convert from ScLookVector to CartesianInertialLookVector.
+//-----------------------------------------------------------------------
+
+  virtual CartesianInertialLookVector 
+  ci_look_vector(const ScLookVector& Sl) const = 0;
+
+//-----------------------------------------------------------------------
+/// Convert from ScLookVector to CartesianFixedLookVector.
+//-----------------------------------------------------------------------
+
+  virtual CartesianFixedLookVector 
+  cf_look_vector(const ScLookVector& Sl) const = 0;
+
+  FrameCoordinate frame_coordinate(const GroundCoordinate& Gc, 
+				   const Camera& C, int Band = 0) const;
+  std::vector<boost::shared_ptr<GroundCoordinate> >
+  footprint(const Camera& C, const Dem& D, 
+	    double Resolution = 30,
+	    int Band = 0, double Max_height = 9000) const;
+  boost::shared_ptr<CartesianFixed>
+  surface_intersect(const Camera& C, 
+		    const FrameCoordinate& Fc,
+		    const Dem& D,
+		    double Resolution = 30,
+		    int Band = 0, double Max_height = 9000) const;
+  boost::shared_ptr<CartesianFixed> 
+  reference_surface_intersect_approximate(const Camera& C, 
+		  const FrameCoordinate& Fc, int Band = 0,
+		  double Height_reference_surface = 0.0) const;
+
+  double resolution_meter(const Camera& C, int Band = 0) const;
+  double resolution_meter(const Camera& C, const FrameCoordinate& Fc, 
+			  int Band = 0) const;
+
+//-----------------------------------------------------------------------
+/// Convert from CartesianInertialLookVector to ScLookVector.
+//-----------------------------------------------------------------------
+
+  virtual ScLookVector 
+  sc_look_vector(const CartesianInertialLookVector& Ci) const = 0;
+
+//-----------------------------------------------------------------------
+/// Convert from CartesianFixedLookVector to ScLookVector.
+//-----------------------------------------------------------------------
+
+  virtual ScLookVector 
+  sc_look_vector(const CartesianFixedLookVector& Cf) const = 0;
+
+//-----------------------------------------------------------------------
+/// Return position as a pointer.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<CartesianInertial> 
+  position_ci() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return position as a pointer.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<CartesianFixed> 
+  position_cf() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return velocity. This is in meters per second, in same
+/// CartesianInertial coordinate system as position (e.g., ECI).
+//-----------------------------------------------------------------------
+
+  virtual boost::array<double, 3> velocity_ci() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return Time of OrbitData.
+//-----------------------------------------------------------------------
+  
+  virtual Time time() const = 0;
+  virtual void print(std::ostream& Os) const = 0;
+};
+
+/****************************************************************//**
+  This class implements the most common way of doing OrbitData
+  conversions, which just uses fixed quaternions.
+								 
+  This accounts for both the orientation of the spacecraft relative to the
+  planet, as well as the aberration of light (a small correction due
+  to the movement of the spacecraft relative to the planet).
+
+  This does *not* account for atmospheric refraction. Depending on the
+  zenith angle, this can be somewhat important for satellites. From
+  the approximate atmospheric model described in "Theoretical Basis of
+  the SDP Toolkit Geolocation package for the ECS", Table 6-5 the
+  linear displacement for a zenith angle of 10 is 0.549 meters, 20
+  degrees is 1.223 meters, and 30 degrees is 2.221.
+
+  We may want to add a atmospheric refraction correction in the
+  future, but this hasn't been done yet.
+
+  We need to have one of the toolkit available if we want to convert
+  for the CartesianFixed coordinates used by this class to 
+  CartesianInertial. If you stick to working with CartesianFixed only,
+  you can avoid the need of using one of these toolkits.
+*******************************************************************/
+
+class QuaternionOrbitData : public OrbitData {
+public:
+  QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+		      const boost::array<double, 3>& vel_fixed,
+		      const boost::math::quaternion<double>& sc_to_cf_q);
+  QuaternionOrbitData(Time Tm, 
+		      const boost::shared_ptr<CartesianInertial>& pos_ci,
+		      const boost::array<double, 3>& vel_inertial,
+		      const boost::math::quaternion<double>& sc_to_ci_q);
+  virtual ~QuaternionOrbitData() {}
+
+  virtual CartesianInertialLookVector 
+  ci_look_vector(const ScLookVector& Sl) const;
+  virtual CartesianFixedLookVector 
+  cf_look_vector(const ScLookVector& Sl) const;
+  virtual ScLookVector 
+  sc_look_vector(const CartesianInertialLookVector& Ci) const;
+  virtual ScLookVector 
+  sc_look_vector(const CartesianFixedLookVector& Cf) const;
+
+//-----------------------------------------------------------------------
+/// Return position as a ptr.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<CartesianInertial> position_ci() const
+  { 
+    fill_in_ci_to_cf();
+    return pos_ci; 
+  }
+
+//-----------------------------------------------------------------------
+/// Return position as a ptr.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<CartesianFixed> position_cf() const
+  { return pos; }
+
+  virtual boost::array<double, 3> velocity_ci() const;
+  boost::array<double, 3> velocity_cf() const;
+
+//-----------------------------------------------------------------------
+/// Return Time of OrbitData.
+//-----------------------------------------------------------------------
+  
+  virtual Time time() const {return tm;}
+  virtual void print(std::ostream& Os) const;
+  friend boost::shared_ptr<QuaternionOrbitData>
+  GeoCal::interpolate(const QuaternionOrbitData& t1, 
+		const QuaternionOrbitData& t2, Time tm);
+
+//-----------------------------------------------------------------------
+/// Return the quaternion used to go from spacecraft to cartesian inertial
+//-----------------------------------------------------------------------
+
+  boost::math::quaternion<double> sc_to_ci() const 
+  { return conj(ci_to_cf()) * sc_to_cf_; }
+  
+//-----------------------------------------------------------------------
+/// Return the quaternion used to go from spacecraft to cartesian fixed.
+//-----------------------------------------------------------------------
+
+  boost::math::quaternion<double> sc_to_cf() const { return sc_to_cf_; }
+
+//-----------------------------------------------------------------------
+/// Was this created form the cartesian fixed version of the
+/// constructor? This is intended for use by python when we pickle
+/// this object so we know which constructor to call. It probably
+/// isn't of interest to anything else.
+//-----------------------------------------------------------------------
+  bool from_cf() const { return from_cf_; }
+protected:
+//-----------------------------------------------------------------------
+/// Default constructor. Derived classes should call initialize before
+/// finishing their constructor.
+//-----------------------------------------------------------------------
+
+  QuaternionOrbitData() {}
+
+  void initialize(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+    const boost::array<double, 3>& vel_fixed, const 
+    boost::math::quaternion<double>& sc_to_cf_q);
+  void initialize(Time Tm, const boost::shared_ptr<CartesianInertial>& pos_ci,
+    const boost::array<double, 3>& vel_inertial, const 
+    boost::math::quaternion<double>& sc_to_ci_q);
+
+
+private:
+  Time tm;			///< Time of OrbitData.
+  boost::shared_ptr<CartesianFixed> pos;
+				///< Position
+  boost::math::quaternion<double> vel_cf; ///< Velocity, in m/s
+  boost::math::quaternion<double> sc_to_cf_;
+				///< Quaternion to go from
+				///ScLookVector to
+				///CartesianFixed.
+  bool from_cf_;
+
+//-----------------------------------------------------------------------
+/// We create ci_to_cf on demand. This means if we don't do any
+/// conversion to CartesianInertial coordinates we don't generate
+/// this. In particular this means we don't require the use of one of
+/// the toolkits (such as SPICE or SDP).
+//-----------------------------------------------------------------------
+
+  boost::math::quaternion<double>& ci_to_cf() const
+  {
+    fill_in_ci_to_cf();
+    return ci_to_cf_;
+  }
+  void fill_in_ci_to_cf() const {
+    if(!have_ci_to_cf) {
+      ci_to_cf_ = pos->ci_to_cf_quat(tm);
+      pos_ci = pos->convert_to_ci(time());
+    }
+  }
+  mutable bool have_ci_to_cf;
+  mutable boost::math::quaternion<double> ci_to_cf_;
+  mutable boost::shared_ptr<CartesianInertial> pos_ci;
+				///< Position
+};
+
+/****************************************************************//**
+   This class is used to model orbit data, allowing conversions from
+   spacecraft coordinates to CartesianInertial and CartesianFixed 
+   coordinates.
+
+   This class is used to return orbit data at a given time. OrbitData
+   is a class that is able to convert from spacecraft coordinates to
+   CartesianInertial coordinates and vice-versa at a given time, as
+   well as giving the platforms position.
+
+   As an optimization, methods for direct conversion from 
+   spacecraft coordinates to CartesianInertial and vice-versa, which
+   don't use the intermediate OrbitData classes, are supplied.
+   The default methods just use the OrbitData methods, but derived
+   classes can supply more optimized versions of these methods.
+
+   An orbit has a min_time() and a max_time() that orbit data is
+   available for. Requesting data outside of this range will cause an
+   exception to be thrown. For Time T, we must have 
+   min_time() <= T < max_time().
+*******************************************************************/
+
+class Orbit : public Printable<Orbit> {
+public:
+//-----------------------------------------------------------------------
+/// Constructor. The Orbit is valid for the given range of minimum to
+/// maximum time.
+//-----------------------------------------------------------------------
+
+  Orbit(Time Min_time = Time::min_valid_time, 
+	Time Max_time = Time::max_valid_time)
+    : min_tm(Min_time), max_tm(Max_time) {}
+
+//-----------------------------------------------------------------------
+/// Destructor.
+//-----------------------------------------------------------------------
+
+  virtual ~Orbit() {}
+
+//-----------------------------------------------------------------------
+/// Give the frame coordinates that a particular point on the ground
+/// is seen.
+//-----------------------------------------------------------------------
+
+  FrameCoordinate frame_coordinate(Time T, const GroundCoordinate& Gc, 
+				   const Camera& C, int Band = 0) const
+  { return orbit_data(T)->frame_coordinate(Gc, C, Band);}
+
+//-----------------------------------------------------------------------
+/// Return location on the reference surface that a particular frame 
+/// coordinate is seen. This is approximate, in the same way 
+/// CartesianFixed::reference_intersect_approximate is approximate.
+//-----------------------------------------------------------------------
+
+  boost::shared_ptr<CartesianFixed> 
+  reference_surface_intersect_approximate(Time T, const Camera& C, 
+	  const FrameCoordinate& Fc, int Band = 0, 
+          double Height_reference_surface = 0.0) const
+  { return orbit_data(T)->reference_surface_intersect_approximate(C, Fc, 
+				  Band, Height_reference_surface); }
+
+//-----------------------------------------------------------------------
+/// Convert from ScLookVector to CartesianInertialLookVector for the
+/// given time. We should have min_time() <= T < max_time(). 
+//-----------------------------------------------------------------------
+
+  virtual CartesianInertialLookVector ci_look_vector(Time T, 
+			     const ScLookVector& Sl) const
+  { return orbit_data(T)->ci_look_vector(Sl); }
+
+//-----------------------------------------------------------------------
+/// Convert from ScLookVector to CartesianFixedLookVector for the
+/// given time. We should have min_time() <= T < max_time(). 
+//-----------------------------------------------------------------------
+
+  virtual CartesianFixedLookVector cf_look_vector(Time T, 
+					  const ScLookVector& Sl) const
+  { return orbit_data(T)->cf_look_vector(Sl); }
+
+//-----------------------------------------------------------------------
+/// Convert from CartesianInertialLookVector to ScLookVector for the
+/// given time. We should have min_time() <= T < max_time(). 
+//-----------------------------------------------------------------------
+
+  virtual ScLookVector sc_look_vector(Time T, 
+			      const CartesianInertialLookVector& Ci) const
+  { return orbit_data(T)->sc_look_vector(Ci); }
+
+//-----------------------------------------------------------------------
+/// Convert from CartesianFixedLookVector to ScLookVector for the
+/// given time. We should have min_time() <= T < max_time(). 
+//-----------------------------------------------------------------------
+
+  virtual ScLookVector sc_look_vector(Time T, 
+			      const CartesianFixedLookVector& Cf) const
+  { return orbit_data(T)->sc_look_vector(Cf); }
+
+//-----------------------------------------------------------------------
+/// Return position at given time. We should have min_time() <= T <
+/// max_time(). 
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const
+  { return orbit_data(T)->position_ci(); }
+
+//-----------------------------------------------------------------------
+/// Return position at given time. We should have min_time() <= T <
+/// max_time(). 
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const
+  { return orbit_data(T)->position_cf(); }
+
+//-----------------------------------------------------------------------
+/// Return velocity at given time. This is in m/s, in same coordinate
+/// system as position.
+//-----------------------------------------------------------------------
+
+  virtual boost::array<double, 3> velocity_ci(Time T) const
+  { return orbit_data(T)->velocity_ci(); }
+
+//-----------------------------------------------------------------------
+/// Minimum time that we can return OrbitData for.
+//-----------------------------------------------------------------------
+
+  Time min_time() const {return min_tm;}
+
+//-----------------------------------------------------------------------
+/// Maximum time that we can return OrbitData for.
+//-----------------------------------------------------------------------
+
+  Time max_time() const {return max_tm;}
+
+//-----------------------------------------------------------------------
+/// Return OrbitData for the given time. We should have min_time() <=
+/// T < max_time().
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;
+  virtual void print(std::ostream& Os) const { Os << "Orbit"; }
+protected:
+//-----------------------------------------------------------------------
+/// This calculates the weighting factor to use to do a Lagrangian 
+/// interpolation.
+//-----------------------------------------------------------------------
+
+  template<class iterator> std::vector<double> 
+  lagrangian_interpolation_factor(iterator tstart, 
+			    iterator tend, Time t) const
+  {
+    std::vector<double> res;
+    for(iterator j = tstart; j != tend; ++j) {
+      double tf = 1.0, bf = 1.0;
+      for(iterator i = tstart; i != tend; ++i)
+	if(i != j) {
+	  tf *= (t - *i);
+	  bf *= (*j - *i);
+	}
+      res.push_back(tf / bf);
+    }
+    return res;
+  }
+
+//-----------------------------------------------------------------------
+/// This calculates a Lagrangian interpolation of the given set of
+/// blitz::Array<double, 1> with the given time intervals.
+//-----------------------------------------------------------------------
+
+  template<class iterator, class iterator2> 
+  blitz::Array<double, 1> lagrangian_interpolation(iterator tstart, 
+						   iterator tend,
+						   Time tm,
+						   iterator2 vstart,
+						   iterator2 vend) const
+  {
+    std::vector<double> fac = lagrangian_interpolation_factor(tstart, tend, tm);
+    std::vector<double>::iterator ifac = fac.begin();
+    blitz::Array<double, 1> res((*vstart).shape());
+    res = 0.0;
+    for(iterator2 v = vstart; v != vend && ifac != fac.end(); ++v, ++ifac)
+      res += (*ifac) * (*v);
+    return res;
+  }
+  void interpolate(const boost::array<double, 3>& P1,
+		   const boost::array<double, 3>& V1,
+		   const boost::array<double, 3>& P2,
+		   const boost::array<double, 3>& V2,
+		   double toffset, double tspace,
+		   boost::array<double, 3>& Pres,
+		   boost::array<double, 3>& Vres) const;
+  boost::math::quaternion<double> interpolate(
+              const boost::math::quaternion<double>& Q1, 
+              const boost::math::quaternion<double>& Q2,
+	      double toffset, double tspace) const;
+  Time min_tm;			///< Minimum time that we have
+				///OrbitData for.
+  Time max_tm;			///< Maximum time that we have
+				///OrbitData for.
+};
+
+/****************************************************************//**
+  This is a simple implementation of an Orbit. It just uses Kepler's
+  equations. This is intended primarily for easy testing of other
+  classes that need an Orbit, rather than being a realistic orbit
+  simulation for real use.
+
+  The default parameters are for a nominal MISR orbit.
+*******************************************************************/
+
+class KeplerOrbit : public Orbit {
+public:
+  KeplerOrbit(Time Min_time = Time::min_valid_time, 
+	      Time Max_time = Time::max_valid_time,
+	      // This is 1998-06-30T10:51:28.32Z, w/o needing to do parsing.
+	      Time Epoch = Time::time_pgs(173357492.32),
+	      double Semimajor_axis = 7086930, 
+	      double Eccentricity = 0.001281620, double
+	      Inclination = 98.199990, 
+	      double Ra_ascending_node = 255.355971130,
+	      double Ap_at_epoch = 69.086962170, 
+	      double Mean_anomaly_at_epoch = 290.912925280);
+  virtual ~KeplerOrbit() {}
+  virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Epoch that rest of data is for.
+//-----------------------------------------------------------------------
+
+  const Time& epoch() const {return epoch_;}
+
+//-----------------------------------------------------------------------
+/// Semimajor axis in meters.
+//-----------------------------------------------------------------------
+  
+  double semimajor_axis() const {return a_;}
+
+//-----------------------------------------------------------------------
+/// Argument of perigee at epoch, in degrees.
+//-----------------------------------------------------------------------
+
+  double argument_of_perigee() const 
+  { return ap_ * Constant::rad_to_deg; }
+
+//-----------------------------------------------------------------------
+/// Eccentricity of orbit.
+//-----------------------------------------------------------------------
+
+  double eccentricity() const {return e_; }
+
+//-----------------------------------------------------------------------
+/// Mean anomoly at epoch, in degrees.
+//-----------------------------------------------------------------------
+  
+  double mean_anomoly() const {return ma_ * Constant::rad_to_deg; }
+
+
+//-----------------------------------------------------------------------
+/// Inclination of orbit, in degrees.
+//-----------------------------------------------------------------------
+
+  double inclination() const {return inc_ * Constant::rad_to_deg; }
+
+//-----------------------------------------------------------------------
+/// Right ascension of ascending node, in degrees.
+//-----------------------------------------------------------------------
+
+  double right_ascension() const 
+  { return ra_ * Constant::rad_to_deg;}
+private:
+  Time epoch_;			///< Epoch that rest of data is for.
+  double a_;			///< Semimajor axis in meters.
+  double ap_;			///< Argument of perigee at epoch, in radians.
+  double e_;			///< Eccentricity of orbit.
+  double freq_rev_;		///< 2 * pi / period of orbit. Called
+				/// omega in Goldstein. 
+  double ma_;			///< Mean anomoly at epoch (in
+				///radians).
+  double inc_;			///< Inclination of orbit, in radians.
+  double ra_;			///< Right ascension of ascending
+				///node, in radians.
+  blitz::Array<double, 2> r_;	///< Rotation matrix that goes from
+				/// orbit in xy plane to one with
+				/// correct inclination and Right
+				/// ascending node. 
+};
+
+  boost::shared_ptr<QuaternionOrbitData>
+  interpolate(const QuaternionOrbitData& t1, 
+		const QuaternionOrbitData& t2, Time tm);
+}
+#endif
+

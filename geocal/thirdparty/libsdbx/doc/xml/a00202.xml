@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00202" kind="class" prot="public">
+    <compoundname>std::map</compoundname>
+    <innerclass refid="a00246" prot="public">std::map::const_iterator</innerclass>
+    <innerclass refid="a00247" prot="public">std::map::const_reverse_iterator</innerclass>
+    <innerclass refid="a00248" prot="public">std::map::iterator</innerclass>
+    <innerclass refid="a00249" prot="public">std::map::reverse_iterator</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+        <declname>K</declname>
+        <defname>K</defname>
+      </param>
+      <param>
+        <type>typename</type>
+        <declname>T</declname>
+        <defname>T</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00202_1c69fe575e214b796b8d9457b0c22469a" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T std::map&lt; K, T &gt;::elements</definition>
+        <argsstring></argsstring>
+        <name>elements</name>
+        <briefdescription>
+<para>STL member. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="" line="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00202_18dc2b3ed44acf51fb2bd3eb30b237269" prot="private" static="no" mutable="no">
+        <type>K</type>
+        <definition>K std::map&lt; K, T &gt;::keys</definition>
+        <argsstring></argsstring>
+        <name>keys</name>
+        <briefdescription>
+<para>STL member. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="" line="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>STL class. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="496">
+        <label>K</label>
+      </node>
+      <node id="497">
+        <label>T</label>
+      </node>
+      <node id="495">
+        <label>std::map&lt; K, T &gt;</label>
+        <childnode refid="496" relation="usage">
+          <edgelabel>keys</edgelabel>
+        </childnode>
+        <childnode refid="497" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="[STL]" line="1"/>
+    <listofallmembers>
+      <member refid="a00202_1c69fe575e214b796b8d9457b0c22469a" prot="private" virt="non-virtual"><scope>std::map</scope><name>elements</name></member>
+      <member refid="a00202_18dc2b3ed44acf51fb2bd3eb30b237269" prot="private" virt="non-virtual"><scope>std::map</scope><name>keys</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

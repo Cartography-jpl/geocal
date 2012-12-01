@@ -1,0 +1,90 @@
+/*===========================================================================
+=                                                                           =
+=                                CodeLocation                               =
+=                                                                           =
+=============================================================================
+
+                          Jet Propulsion Laboratory
+                                    MISR
+                              GeoCal Processing
+                                                                        
+            Copyright 2006, California Institute of Technology.         
+                           ALL RIGHTS RESERVED.                         
+                 U.S. Government Sponsorship acknowledged.              
+
+!C++=========================================================================
+
+!MODULE NAME: CodeLocation
+
+!ABSTRACT:  
+
+  This contains inline routines for the parent .h file.
+
+!PARENT(S):
+
+!REVISION HISTORY:
+
+  See ClearCase Log
+
+=============================================================================
+!END=======================================================================*/
+
+#ifndef CODE_LOCATION_ICC
+#define CODE_LOCATION_ICC
+
+//***************************************************************************
+// Definition of inline CodeLocation::CodeLocation(const char* File,
+// int Line, const char* Function).
+//***************************************************************************
+
+inline GeoCal::GeoCalCore::CodeLocation::CodeLocation(
+const char*	   File,	// File name
+int		   Line,	// Line number
+const char*	   Function	// Function name
+)
+:file_(File), function_(Function), line_(Line)
+{
+}
+
+//***************************************************************************
+// Definition of inline const char* CodeLocation::file() const.
+//***************************************************************************
+
+inline const char* GeoCal::GeoCalCore::CodeLocation::file() const
+{
+  return file_;
+}
+
+//***************************************************************************
+// Definition of inline const char* CodeLocation::function() const.
+//***************************************************************************
+
+inline const char* GeoCal::GeoCalCore::CodeLocation::function() const
+{
+  return function_;
+}
+
+//***************************************************************************
+// Definition of inline int CodeLocation::line() const.
+//***************************************************************************
+
+inline int GeoCal::GeoCalCore::CodeLocation::line() const
+{
+  return line_;
+}
+
+//***************************************************************************
+// Definition of inline ostream& operator<<(ostream& S, const
+// CodeLocation& Cl).
+//***************************************************************************
+
+inline std::ostream& GeoCal::GeoCalCore::operator<<(
+std::ostream&	   S,		// Stream
+const CodeLocation& 
+		   Cl		// CodeLocation to be printed
+)
+{
+  S << "file " << Cl.file() << " at line " << Cl.line();
+  return S;
+}
+#endif

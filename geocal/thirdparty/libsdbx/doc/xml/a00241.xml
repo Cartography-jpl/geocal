@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00241" kind="class" prot="public">
+    <compoundname>std::ios_base::failure</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::exception</basecompoundref>
+    <briefdescription>
+<para>STL class. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="434">
+        <label>std::ios_base::failure</label>
+        <childnode refid="435" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="435">
+        <label>std::exception</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="436">
+        <label>std::ios_base::failure</label>
+        <childnode refid="437" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="437">
+        <label>std::exception</label>
+      </node>
+    </collaborationgraph>
+    <location file="[STL]" line="1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

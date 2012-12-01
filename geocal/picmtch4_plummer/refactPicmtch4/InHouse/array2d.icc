@@ -1,0 +1,200 @@
+/*===========================================================================
+=                                                                           =
+=                                  Array2d<T>                               =
+=                                                                           =
+=============================================================================
+
+                          Jet Propulsion Laboratory
+                                    MISR
+                             GeoCal Processing
+                                                                        
+            Copyright 2006, California Institute of Technology.         
+                           ALL RIGHTS RESERVED.                         
+                 U.S. Government Sponsorship acknowledged.              
+
+!C++=========================================================================
+
+!CLASS NAME: Array2d<T>
+
+!ABSTRACT:
+
+   This contains inline routines for the parent .h file
+
+!PARENT(S):
+
+  array2d.h
+
+!REVISION HISTORY:
+
+See ClearCase Log
+
+=============================================================================
+!END=======================================================================*/
+
+#ifndef ARRAY2D_ICC
+#define ARRAY2D_ICC
+#include "range_check.h"
+#include <algorithm>		// Definition of copy
+
+//***************************************************************************
+// Definition of function inline Array2d::Array2d().
+//***************************************************************************
+
+template<class T>
+inline GeoCal::GeoCalCore::Array2d<T>::Array2d()
+:num_col_(0), num_row_(0)
+{
+}
+
+//***************************************************************************
+// Definition of function inline Array2d<T>::const_iterator
+// Array2d<T>::begin() const. 
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::const_iterator GeoCal::GeoCalCore::Array2d<T>::begin() const
+{
+ return v_.begin();
+}
+
+//***************************************************************************
+// Definition of function inline Array2d<T>::iterator
+// Array2d<T>::begin(). 
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::iterator GeoCal::GeoCalCore::Array2d<T>::begin()
+{
+ return v_.begin();
+}
+
+//***************************************************************************
+// Definition of function inline Array2d<T>::const_iterator
+// Array2d<T>::end() const. 
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::const_iterator GeoCal::GeoCalCore::Array2d<T>::end() const
+{
+ return v_.end();
+}
+
+//***************************************************************************
+// Definition of function inline Array2d<T>::iterator
+// Array2d<T>::end().
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::iterator GeoCal::GeoCalCore::Array2d<T>::end()
+{
+ return v_.end();
+}
+
+//***************************************************************************
+// Definition of function inline Array2d::~Array2d().
+//***************************************************************************
+
+template<class T>
+inline GeoCal::GeoCalCore::Array2d<T>::~Array2d()
+{
+// do nothing;
+}
+
+//***************************************************************************
+// Definition of function inline size_type Array2d::number_col() const.
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::size_type GeoCal::GeoCalCore::Array2d<T>::number_col() const
+{
+  return num_col_;
+}
+
+//***************************************************************************
+// Definition of function inline size_type Array2d::number_row() const.
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::size_type GeoCal::GeoCalCore::Array2d<T>::number_row() const
+{
+  return num_row_;
+}
+
+//***************************************************************************
+// Definition of function inline const_reference
+// Array2d::operator()(size_type i, size_type j) const.
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::const_reference GeoCal::GeoCalCore::Array2d<T>::operator()(
+size_type	   i,		// Row number.
+size_type	   j		// Column number.
+) const
+{
+  range_check(i, (size_type) 0, num_row_);
+  range_check(j, (size_type) 0, num_col_);
+  return v_[i * num_col_ + j];
+}
+
+//***************************************************************************
+// Definition of function inline reference
+// Array2d::operator()(size_type i, size_type j) const.
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::reference GeoCal::GeoCalCore::Array2d<T>::operator()(
+size_type	   i,		// Row number.
+size_type	   j		// Column number.
+)
+{
+  range_check(i, (size_type) 0, num_row_);
+  range_check(j, (size_type) 0, num_col_);
+  return v_[i * num_col_ + j];
+}
+
+//***************************************************************************
+// Definition of function inline Array2d<T>::const_reverse_iterator
+// Array2d<T>::rbegin() const. 
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::const_reverse_iterator GeoCal::GeoCalCore::Array2d<T>::rbegin() const
+{
+ return v_.rbegin();
+}
+
+//***************************************************************************
+// Definition of function inline Array2d<T>::reverse_iterator
+// Array2d<T>::rbegin(). 
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::reverse_iterator GeoCal::GeoCalCore::Array2d<T>::rbegin()
+{
+  return v_.rbegin();
+}
+
+//***************************************************************************
+// Definition of function inline Array2d<T>::const_reverse_iterator
+// Array2d<T>::rend() const. 
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::const_reverse_iterator GeoCal::GeoCalCore::Array2d<T>::rend() const
+{
+  return v_.rend();
+}
+
+//***************************************************************************
+// Definition of function inline Array2d<T>::reverse_iterator
+// Array2d<T>::rend(). 
+//***************************************************************************
+
+template<class T>
+inline typename GeoCal::GeoCalCore::Array2d<T>::reverse_iterator GeoCal::GeoCalCore::Array2d<T>::rend()
+{
+  return v_.rend();
+}
+
+#endif
+

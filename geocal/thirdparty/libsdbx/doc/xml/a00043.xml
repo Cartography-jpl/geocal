@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00043" kind="file">
+    <compoundname>is_sorted.h</compoundname>
+    <includedby refid="a00025" local="yes">BTree.h</includedby>
+    <invincdepgraph>
+      <node id="166">
+        <label>StringTable.h</label>
+        <link refid="a00070"/>
+      </node>
+      <node id="165">
+        <label>BTree.h</label>
+        <link refid="a00053"/>
+        <childnode refid="166" relation="include">
+        </childnode>
+      </node>
+      <node id="164">
+        <label>support/is_sorted.h</label>
+        <link refid="is_sorted.h"/>
+        <childnode refid="165" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="a00050">std</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>(C)<sp/>Copyright<sp/>Jeremy<sp/>Siek<sp/>2001.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Distributed<sp/>under<sp/>the<sp/>Boost<sp/>Software<sp/>License,<sp/>Version<sp/>1.0.<sp/>(See<sp/>accompany-</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ing<sp/>file<sp/>LICENSE_1_0.txt<sp/>or<sp/>copy<sp/>at<sp/>http://www.boost.org/LICENSE_1_0.txt)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>1994</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>Hewlett-Packard<sp/>Company</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>Permission<sp/>to<sp/>use,<sp/>copy,<sp/>modify,<sp/>distribute<sp/>and<sp/>sell<sp/>this<sp/>software</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/>and<sp/>its<sp/>documentation<sp/>for<sp/>any<sp/>purpose<sp/>is<sp/>hereby<sp/>granted<sp/>without<sp/>fee,</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>provided<sp/>that<sp/>the<sp/>above<sp/>copyright<sp/>notice<sp/>appear<sp/>in<sp/>all<sp/>copies<sp/>and</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>that<sp/>both<sp/>that<sp/>copyright<sp/>notice<sp/>and<sp/>this<sp/>permission<sp/>notice<sp/>appear</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>in<sp/>supporting<sp/>documentation.<sp/><sp/>Hewlett-Packard<sp/>Company<sp/>makes<sp/>no</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/>representations<sp/>about<sp/>the<sp/>suitability<sp/>of<sp/>this<sp/>software<sp/>for<sp/>any</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>purpose.<sp/><sp/>It<sp/>is<sp/>provided<sp/>&quot;as<sp/>is&quot;<sp/>without<sp/>express<sp/>or<sp/>implied<sp/>warranty.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>1996</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>Silicon<sp/>Graphics<sp/>Computer<sp/>Systems,<sp/>Inc.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>Permission<sp/>to<sp/>use,<sp/>copy,<sp/>modify,<sp/>distribute<sp/>and<sp/>sell<sp/>this<sp/>software</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>and<sp/>its<sp/>documentation<sp/>for<sp/>any<sp/>purpose<sp/>is<sp/>hereby<sp/>granted<sp/>without<sp/>fee,</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>provided<sp/>that<sp/>the<sp/>above<sp/>copyright<sp/>notice<sp/>appear<sp/>in<sp/>all<sp/>copies<sp/>and</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>that<sp/>both<sp/>that<sp/>copyright<sp/>notice<sp/>and<sp/>this<sp/>permission<sp/>notice<sp/>appear</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>in<sp/>supporting<sp/>documentation.<sp/><sp/>Silicon<sp/>Graphics<sp/>makes<sp/>no</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>representations<sp/>about<sp/>the<sp/>suitability<sp/>of<sp/>this<sp/>software<sp/>for<sp/>any</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>purpose.<sp/><sp/>It<sp/>is<sp/>provided<sp/>&quot;as<sp/>is&quot;<sp/>without<sp/>express<sp/>or<sp/>implied<sp/>warranty.</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__IS_SORTED_H</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>__IS_SORTED_H</highlight></codeline>
+<codeline lineno="34"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>HAVE_IS_SORTED</highlight></codeline>
+<codeline lineno="36"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="a00050" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">std<sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ForwardIterator&gt;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_sorted(ForwardIterator<sp/>first,<sp/>ForwardIterator<sp/>last)</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(first<sp/>==<sp/>last)</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>ForwardIterator<sp/>next<sp/>=<sp/>first;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(++next;<sp/>next<sp/>!=<sp/>last;<sp/>first<sp/>=<sp/>next,<sp/>++next)<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(*next<sp/>&lt;<sp/>*first)</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="56"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="58"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/></highlight></codeline>
+    </programlisting>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/is_sorted.h"/>
+  </compounddef>
+</doxygen>

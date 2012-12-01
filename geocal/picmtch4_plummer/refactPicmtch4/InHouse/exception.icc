@@ -1,0 +1,100 @@
+/*===========================================================================
+=                                                                           =
+=                                 Exception                                 =
+=                                                                           =
+=============================================================================
+
+                          Jet Propulsion Laboratory
+                                     MISR
+                              GeoCal Processing
+
+             Copyright 2002, California Institute of Technology.
+                               ALL RIGHTS RESERVED.
+                    U.S. Government Sponsorship acknowledged.
+
+!C++=========================================================================
+
+!CLASS NAME: Exception
+
+!ABSTRACT:
+
+   This contains inline routines for the parent .h file
+
+!PARENT(S):
+
+   exception.h
+
+!REVISION HISTORY:
+
+See ClearCase Log
+
+=============================================================================
+!END=======================================================================*/
+
+#ifndef EXCEPTION_ICC
+#define EXCEPTION_ICC
+
+//***************************************************************************
+// Definition of function inline Exception::Exception().
+//***************************************************************************
+
+inline GeoCal::GeoCalCore::Exception::Exception() throw()
+{
+}
+
+//***************************************************************************
+// Definition of function inline Exception::Exception(const Exception& E).
+//***************************************************************************
+
+inline GeoCal::GeoCalCore::Exception::Exception(
+const Exception&   E            // Data to copy
+) throw()
+{
+  try {
+    std::string cp(E.s_.str());
+    s_.str(cp);
+  } catch(...) {		// Ignore all errors.
+  }
+}
+
+//***************************************************************************
+// Definition of function inline Exception::~Exception().
+//***************************************************************************
+
+inline GeoCal::GeoCalCore::Exception::~Exception() throw()
+{
+}
+
+//***************************************************************************
+// Definition of function Exception::operator<<.
+//***************************************************************************
+
+template<class T> inline GeoCal::GeoCalCore::Exception& 
+GeoCal::GeoCalCore::Exception::operator<<(const T& V) throw()
+{
+  s_ << V;
+  return *this;
+}
+
+//***************************************************************************
+// Definition of function Exception::str() const.
+//***************************************************************************
+
+inline const char* GeoCal::GeoCalCore::Exception::what() const throw()
+{
+//-----------------------------------------------------------------------
+// We can't just do s_.str().c_str(), because the temporary variable
+// returned by str() disappears when we exit this function. Instead,
+// we use a scratch variable that has the lifetime of this object.
+//-----------------------------------------------------------------------
+
+  try {
+    scratch_ = s_.str();
+  } catch(...) {		// If an error condition occurs,
+				// ignore it and return a null
+				// pointer.
+    return 0;
+  }
+  return scratch_.c_str();
+}
+#endif

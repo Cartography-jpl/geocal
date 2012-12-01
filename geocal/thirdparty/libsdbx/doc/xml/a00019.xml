@@ -1,0 +1,529 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00019" kind="class" prot="public">
+    <compoundname>SerializedFile</compoundname>
+    <includes refid="a00041" local="no">SerializedFile.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>wxFileOffset</type>
+        <declname>start_offset</declname>
+        <defname>start_offset</defname>
+        <defval>0</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00019_1b65d15a8fbb4002a579b920ff79407ad" prot="public" static="no">
+        <type>size_type</type>
+        <definition>typedef size_type SerializedFile&lt; T, start_offset &gt;::IdType</definition>
+        <argsstring></argsstring>
+        <name>IdType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="108" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="enum" id="a00019_199054aed7a18dee9afd6ba6e8a3e347f" prot="public" static="no">
+        <name>SerializedFileError</name>
+        <enumvalue id="a00019_199054aed7a18dee9afd6ba6e8a3e347ff46dacfda67278db2ea1a7247b5acdce" prot="public">
+          <name>ERR_NONE</name>
+          <initializer> 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00019_199054aed7a18dee9afd6ba6e8a3e347fece3cfbcbe16262f50266fa2b597b634" prot="public">
+          <name>ERR_BAD_SEEK</name>
+          <briefdescription>
+<para>no error </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00019_199054aed7a18dee9afd6ba6e8a3e347f128d9a14eed7bd9e3ef32d4888189550" prot="public">
+          <name>ERR_BAD_WRITE</name>
+          <briefdescription>
+<para>error while seeking </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00019_199054aed7a18dee9afd6ba6e8a3e347f691a032468e8f0a09da4e989921deb58" prot="public">
+          <name>ERR_BAD_READ</name>
+          <briefdescription>
+<para>error while writing </para>          </briefdescription>
+          <detaileddescription>
+<para>error while reading </para>          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="111" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="111" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00019_16772c0b609d718f936e60f3b71e31931" prot="public" static="no">
+        <type>uint64_t</type>
+        <definition>typedef uint64_t SerializedFile&lt; T, start_offset &gt;::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="107" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00019_1da4c4d53f75ecd4a66a0b4fcf806fd85" prot="private" static="no" mutable="no">
+        <type>IdType</type>
+        <definition>IdType SerializedFile&lt; T, start_offset &gt;::m_buf_end_id</definition>
+        <argsstring></argsstring>
+        <name>m_buf_end_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="407" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="407" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00019_1df38766ffe444cfa8863e4fad2b708e8" prot="private" static="no" mutable="no">
+        <type>IdType</type>
+        <definition>IdType SerializedFile&lt; T, start_offset &gt;::m_buf_start_id</definition>
+        <argsstring></argsstring>
+        <name>m_buf_start_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="406" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="406" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00019_15ca310d4558c18731f6fa297565d524b" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* SerializedFile&lt; T, start_offset &gt;::m_buffer</definition>
+        <argsstring></argsstring>
+        <name>m_buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="409" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="409" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00019_1577d319d1815dc8533f9cb5b3e9fed10" prot="private" static="no" mutable="no">
+        <type>unsigned char *</type>
+        <definition>unsigned char* SerializedFile&lt; T, start_offset &gt;::m_buffer_end</definition>
+        <argsstring></argsstring>
+        <name>m_buffer_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="410" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="410" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00019_10008e6619d541658c6dbafa9505f6fbd" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t SerializedFile&lt; T, start_offset &gt;::m_buffer_size</definition>
+        <argsstring></argsstring>
+        <name>m_buffer_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="411" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="411" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00019_105aac88e4617a385df74d916d30e49d6" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SerializedFile&lt; T, start_offset &gt;::m_buffer_valid</definition>
+        <argsstring></argsstring>
+        <name>m_buffer_valid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="400" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="400" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00019_113f48f019421b1995519dad4af2beaf2" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SerializedFile&lt; T, start_offset &gt;::m_dirty</definition>
+        <argsstring></argsstring>
+        <name>m_dirty</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="401" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="401" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00019_188d6cb79e58a014bbe757018aa490885" prot="private" static="no" mutable="no">
+        <type>wxFFile</type>
+        <definition>wxFFile SerializedFile&lt; T, start_offset &gt;::m_file</definition>
+        <argsstring></argsstring>
+        <name>m_file</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="396" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="396" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00019_19ab437a20ef246655fc5b0970d161a4c" prot="private" static="no" mutable="no">
+        <type>wxFileName</type>
+        <definition>wxFileName SerializedFile&lt; T, start_offset &gt;::m_filename</definition>
+        <argsstring></argsstring>
+        <name>m_filename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="397" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="397" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00019_1dae73faefb12e3aa2340175eb7de4bb4" prot="private" static="no" mutable="no">
+        <type><ref refid="a00019_199054aed7a18dee9afd6ba6e8a3e347f" kindref="member">SerializedFileError</ref></type>
+        <definition>SerializedFileError SerializedFile&lt; T, start_offset &gt;::m_lastError</definition>
+        <argsstring></argsstring>
+        <name>m_lastError</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="404" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="404" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00019_10102df05ef6e2fd4ad61aceff9a20248" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SerializedFile&lt; T, start_offset &gt;::Delete</definition>
+        <argsstring>()</argsstring>
+        <name>Delete</name>
+        <briefdescription>
+<para>deletes the file this is associated with </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="155" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="154" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="a00019_17f72d52abd9202cf7b01933c9b9078aa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00019_199054aed7a18dee9afd6ba6e8a3e347f" kindref="member">SerializedFileError</ref></type>
+        <definition>SerializedFileError SerializedFile&lt; T, start_offset &gt;::GetErrorCode</definition>
+        <argsstring>() const </argsstring>
+        <name>GetErrorCode</name>
+        <briefdescription>
+<para>Returns the most recent error code. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="176" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="175" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="a00019_16df78547557b3c0460a49492f1ef5249" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>wxString</type>
+        <definition>wxString SerializedFile&lt; T, start_offset &gt;::GetErrorString</definition>
+        <argsstring>() const </argsstring>
+        <name>GetErrorString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="181" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="180" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="a00019_19a0884008210efce9a31601496b40ddd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>wxFFile *</type>
+        <definition>wxFFile* SerializedFile&lt; T, start_offset &gt;::GetFFile</definition>
+        <argsstring>()</argsstring>
+        <name>GetFFile</name>
+        <briefdescription>
+<para>Returns the file handle underneath this class. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="170" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="169" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="a00019_1da9cb5dbe8308b74c31a4798c49d255f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>IdType</type>
+        <definition>IdType SerializedFile&lt; T, start_offset &gt;::GetLastId</definition>
+        <argsstring>() const </argsstring>
+        <name>GetLastId</name>
+        <briefdescription>
+<para>Gets the last ID contained in the file. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>Do not call this often, the value isn&apos;t cached and the Length() operation can take awhile.. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="202" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="201" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="a00019_1677d49ee2f8616db15f86822f2c04df8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SerializedFile&lt; T, start_offset &gt;::IsOpened</definition>
+        <argsstring>() const </argsstring>
+        <name>IsOpened</name>
+        <briefdescription>
+<para>Check to see if the file is initialized properly. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="162" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="161" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="a00019_13c6b781c2dfa9d9759786602b6e133fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>size_type SerializedFile&lt; T, start_offset &gt;::LoadObjects</definition>
+        <argsstring>(const IdType &amp;start_id, const size_t count, T *dst)</argsstring>
+        <name>LoadObjects</name>
+        <param>
+          <type>const IdType &amp;</type>
+          <declname>start_id</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>dst</declname>
+        </param>
+        <briefdescription>
+<para>Load objects from the file into an array. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>start_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>starting id of the object array </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of items to load/initialize </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>number of items load </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="238" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="237" bodyend="320"/>
+        <references refid="a00019_199054aed7a18dee9afd6ba6e8a3e347f691a032468e8f0a09da4e989921deb58" compoundref="a00041" startline="115">SerializedFile&lt; T, start_offset &gt;::ERR_BAD_READ</references>
+        <references refid="a00019_199054aed7a18dee9afd6ba6e8a3e347fece3cfbcbe16262f50266fa2b597b634" compoundref="a00041" startline="113">SerializedFile&lt; T, start_offset &gt;::ERR_BAD_SEEK</references>
+      </memberdef>
+      <memberdef kind="function" id="a00019_1dc926bd60ea435b9a1a1adede3a79e7e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t SerializedFile&lt; T, start_offset &gt;::SaveObjects</definition>
+        <argsstring>(const IdType &amp;start_id, const size_t count, const T *const src)</argsstring>
+        <name>SaveObjects</name>
+        <param>
+          <type>const IdType &amp;</type>
+          <declname>start_id</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>const T *const </type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>Writes a specified number of objects from an array to file. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Be sure to check that the specified number of objects was saved. Use <ref refid="a00019_17f72d52abd9202cf7b01933c9b9078aa" kindref="member">GetErrorCode()</ref> if the numbers do not match</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>start_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>starting id of the object array </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of items to save </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>number of items saved </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="334" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="333" bodyend="390"/>
+        <references refid="a00019_199054aed7a18dee9afd6ba6e8a3e347fece3cfbcbe16262f50266fa2b597b634" compoundref="a00041" startline="113">SerializedFile&lt; T, start_offset &gt;::ERR_BAD_SEEK</references>
+        <references refid="a00019_199054aed7a18dee9afd6ba6e8a3e347f128d9a14eed7bd9e3ef32d4888189550" compoundref="a00041" startline="114">SerializedFile&lt; T, start_offset &gt;::ERR_BAD_WRITE</references>
+      </memberdef>
+      <memberdef kind="function" id="a00019_17a12f5b8c1959ec98516461816416d3d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SerializedFile&lt; T, start_offset &gt;::SerializedFile</definition>
+        <argsstring>(const wxFileName &amp;filename, size_t buffer_size=4096)</argsstring>
+        <name>SerializedFile</name>
+        <param>
+          <type>const wxFileName &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>buffer_size</declname>
+          <defval>4096</defval>
+        </param>
+        <briefdescription>
+<para>Opens the file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Filename to open </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size (in records) of the buffer (defaults to 4096) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="130" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="126" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="a00019_1405112a9647df4e890a6df51f5cca836" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SerializedFile&lt; T, start_offset &gt;::SetBufferSize</definition>
+        <argsstring>(const size_t buffer_size)</argsstring>
+        <name>SetBufferSize</name>
+        <param>
+          <type>const size_t</type>
+          <declname>buffer_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="214" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="213" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="a00019_15921926ef7dad8ffd8598ffdff89c229" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SerializedFile&lt; T, start_offset &gt;::~SerializedFile</definition>
+        <argsstring>()</argsstring>
+        <name>~SerializedFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="148" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="147" bodyend="151"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="a00019_1ebf453bf583406c62acc090f3bdb0ccd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SerializedFile&lt; T, start_offset &gt;::DISALLOW_COPY_AND_ASSIGN</definition>
+        <argsstring>(SerializedFile)</argsstring>
+        <name>DISALLOW_COPY_AND_ASSIGN</name>
+        <param>
+          <type><ref refid="a00019" kindref="compound">SerializedFile</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="394"/>
+      </memberdef>
+      <memberdef kind="function" id="a00019_1831ff019b2b1b63f179d8323c9073b04" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SerializedFile&lt; T, start_offset &gt;::SerializedFile</definition>
+        <argsstring>()</argsstring>
+        <name>SerializedFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="393"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Loads/Saves arrays of fixed-size objects to/from a file. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="note"><para>Notice that it says &apos;fixed-size&apos; objects. This is not designed to do variable-length serialization.</para></simplesect>
+The object being stored in the external vector can be anything, but must have the following members:</para><para>struct T { explicit T(const unsigned char * const buffer); void Serialize(unsigned char * buffer); enum { record_size }; };</para><para>This allows optimized serialization of the items being stored, especially if the compiler inlines the operation. It is important to keep the relative ordering of the class variables in mind when you implement serialization constructors (otherwise GCC will complain, among other things). An example implementation looks like this:</para><para>struct SerializedInt {</para><para>int item1; int item2;</para><para>/ serialization constructor explicit SerializedInt(const unsigned char * const buffer) : DESERIALIZE(int, 0, item1), DESERIALIZE(int, sizeof(int), item2) {}</para><para>/ serializer function void Serialize(unsigned char * buffer) const { SERIALIZE(int, 0, item1); SERIALIZE(int, sizeof(int), item2); }</para><para>/ serialization typedef enum { record_size = sizeof(int)*2 }; };</para><para>There are also generic Serialization routines that you can use if you are serializing containers of T. See <ref refid="a00068" kindref="compound">Serialization.h</ref> for more info.</para><para>At the moment, this may only load/save 2^32 objects at once. However, it uses 64-bit object IDs.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>start_offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>This is the offset that ID 0 begins at. This is so you can have data before the serialized items. If you use this, you *must* fill this (and flush the file) before serializing any items! </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" line="103" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/SerializedFile.h" bodystart="103" bodyend="412"/>
+    <listofallmembers>
+      <member refid="a00019_10102df05ef6e2fd4ad61aceff9a20248" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>Delete</name></member>
+      <member refid="a00019_1ebf453bf583406c62acc090f3bdb0ccd" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>DISALLOW_COPY_AND_ASSIGN</name></member>
+      <member refid="a00019_199054aed7a18dee9afd6ba6e8a3e347f691a032468e8f0a09da4e989921deb58" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>ERR_BAD_READ</name></member>
+      <member refid="a00019_199054aed7a18dee9afd6ba6e8a3e347fece3cfbcbe16262f50266fa2b597b634" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>ERR_BAD_SEEK</name></member>
+      <member refid="a00019_199054aed7a18dee9afd6ba6e8a3e347f128d9a14eed7bd9e3ef32d4888189550" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>ERR_BAD_WRITE</name></member>
+      <member refid="a00019_199054aed7a18dee9afd6ba6e8a3e347ff46dacfda67278db2ea1a7247b5acdce" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>ERR_NONE</name></member>
+      <member refid="a00019_17f72d52abd9202cf7b01933c9b9078aa" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>GetErrorCode</name></member>
+      <member refid="a00019_16df78547557b3c0460a49492f1ef5249" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>GetErrorString</name></member>
+      <member refid="a00019_19a0884008210efce9a31601496b40ddd" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>GetFFile</name></member>
+      <member refid="a00019_1da9cb5dbe8308b74c31a4798c49d255f" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>GetLastId</name></member>
+      <member refid="a00019_1b65d15a8fbb4002a579b920ff79407ad" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>IdType</name></member>
+      <member refid="a00019_1677d49ee2f8616db15f86822f2c04df8" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>IsOpened</name></member>
+      <member refid="a00019_13c6b781c2dfa9d9759786602b6e133fe" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>LoadObjects</name></member>
+      <member refid="a00019_1da4c4d53f75ecd4a66a0b4fcf806fd85" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>m_buf_end_id</name></member>
+      <member refid="a00019_1df38766ffe444cfa8863e4fad2b708e8" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>m_buf_start_id</name></member>
+      <member refid="a00019_15ca310d4558c18731f6fa297565d524b" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>m_buffer</name></member>
+      <member refid="a00019_1577d319d1815dc8533f9cb5b3e9fed10" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>m_buffer_end</name></member>
+      <member refid="a00019_10008e6619d541658c6dbafa9505f6fbd" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>m_buffer_size</name></member>
+      <member refid="a00019_105aac88e4617a385df74d916d30e49d6" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>m_buffer_valid</name></member>
+      <member refid="a00019_113f48f019421b1995519dad4af2beaf2" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>m_dirty</name></member>
+      <member refid="a00019_188d6cb79e58a014bbe757018aa490885" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>m_file</name></member>
+      <member refid="a00019_19ab437a20ef246655fc5b0970d161a4c" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>m_filename</name></member>
+      <member refid="a00019_1dae73faefb12e3aa2340175eb7de4bb4" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>m_lastError</name></member>
+      <member refid="a00019_1dc926bd60ea435b9a1a1adede3a79e7e" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>SaveObjects</name></member>
+      <member refid="a00019_17a12f5b8c1959ec98516461816416d3d" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>SerializedFile</name></member>
+      <member refid="a00019_1831ff019b2b1b63f179d8323c9073b04" prot="private" virt="non-virtual"><scope>SerializedFile</scope><name>SerializedFile</name></member>
+      <member refid="a00019_199054aed7a18dee9afd6ba6e8a3e347f" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>SerializedFileError</name></member>
+      <member refid="a00019_1405112a9647df4e890a6df51f5cca836" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>SetBufferSize</name></member>
+      <member refid="a00019_16772c0b609d718f936e60f3b71e31931" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>size_type</name></member>
+      <member refid="a00019_15921926ef7dad8ffd8598ffdff89c229" prot="public" virt="non-virtual"><scope>SerializedFile</scope><name>~SerializedFile</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

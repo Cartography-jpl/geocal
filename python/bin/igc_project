@@ -1,0 +1,41 @@
+#! /usr/bin/env python
+#
+# This map projects a ImageGroundConnection to the surface, generating
+# a map projected image.
+
+from afids import *
+from optparse import OptionParser
+
+parser = OptionParser(version="%prog September 6, 2012",
+usage="""usage: %prog [options] <igc collection> <index image> <output fname>
+This map projects a ImageGroundConnection to the surface, generating
+a map projected image.
+""")
+parser.add_option("--resolution", dest="resolution_meter", type="float", 
+                  default = 1.0,
+                  help="resolution in meters for output, default is 1 meter")
+parser.add_option("--grid-spacing", dest="grid_spacing", type="int",
+                  default = 1,
+                  help="grid spacing to exactly calculate the image ground connection for, doing a linear interpolation in between. This can greatly affect how long the processing takes. If the grid spacing is something like the DEM resolution, usually you get almost as good output but much faster")
+(options, args) = parser.parse_args()
+if(len(args) != 3):
+    parser.error("Need to specify all the arguments")
+igc_name, img_index, output_fname = args
+
+igc_col = read_shelve(igc_name)
+igc = igc_col.image_ground_connection(int(img_index))
+
+# Create the map projection object
+
+mibase = cib01_mapinfo()
+resbase = mibase.resolution_meter
+miscale = mibase.scale(options.resolution_meter / resbase,
+                       options.resolution_meter / resbase)
+mi = igc.cover(miscale)
+mp = IgcMapProjected(mi, igc)
+out = VicarRasterImage(output_fname, mp.map_info, "HALF")
+mp.write_image(out, options.grid_spacing)
+
+
+
+

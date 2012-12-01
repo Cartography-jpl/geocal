@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00260" kind="struct" prot="private">
+    <compoundname>RTree::OverflowItem</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00260_1ff8672fefd36d321ce80152ce02d179a" prot="public" static="no" mutable="no">
+        <type>BoundingBox</type>
+        <definition>BoundingBox RTree::OverflowItem::oldBound</definition>
+        <argsstring></argsstring>
+        <name>oldBound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="422" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="422" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00260_12305961c68dbc158fa171d247b5392fb" prot="public" static="no" mutable="no">
+        <type>LeafItemArray</type>
+        <definition>LeafItemArray RTree::OverflowItem::removed_items</definition>
+        <argsstring></argsstring>
+        <name>removed_items</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="424" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="424" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00260_16477b02c86940779a6c885d720bf3f11" prot="public" static="no" mutable="no">
+        <type>NodeItem *</type>
+        <definition>NodeItem* RTree::OverflowItem::splitItem</definition>
+        <argsstring></argsstring>
+        <name>splitItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="423" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="423" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00260_143d61cbf96dad3bdd2bb9c6bb33db6de" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RTree::OverflowItem::OverflowItem</definition>
+        <argsstring>(const BoundingBox &amp;b, NodeItem *i)</argsstring>
+        <name>OverflowItem</name>
+        <param>
+          <type>const BoundingBox &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>NodeItem *</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="427" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="426" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_17b06de554d21db50bdd5dead919d0029" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RTree::OverflowItem::~OverflowItem</definition>
+        <argsstring>()</argsstring>
+        <name>~OverflowItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="429" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="429" bodyend="429"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="595">
+        <label>T</label>
+      </node>
+      <node id="594">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="595" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="593">
+        <label>RTreeBoundingBox&lt; dimensions, _bound_type &gt;</label>
+      </node>
+      <node id="592">
+        <label>RTree::OverflowItem</label>
+        <childnode refid="593" relation="usage">
+          <edgelabel>oldBound</edgelabel>
+        </childnode>
+        <childnode refid="594" relation="usage">
+          <edgelabel>removed_items</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" line="421" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTree.h" bodystart="421" bodyend="430"/>
+    <listofallmembers>
+      <member refid="a00260_1ff8672fefd36d321ce80152ce02d179a" prot="public" virt="non-virtual"><scope>RTree::OverflowItem</scope><name>oldBound</name></member>
+      <member refid="a00260_143d61cbf96dad3bdd2bb9c6bb33db6de" prot="public" virt="non-virtual"><scope>RTree::OverflowItem</scope><name>OverflowItem</name></member>
+      <member refid="a00260_12305961c68dbc158fa171d247b5392fb" prot="public" virt="non-virtual"><scope>RTree::OverflowItem</scope><name>removed_items</name></member>
+      <member refid="a00260_16477b02c86940779a6c885d720bf3f11" prot="public" virt="non-virtual"><scope>RTree::OverflowItem</scope><name>splitItem</name></member>
+      <member refid="a00260_17b06de554d21db50bdd5dead919d0029" prot="public" virt="non-virtual"><scope>RTree::OverflowItem</scope><name>~OverflowItem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

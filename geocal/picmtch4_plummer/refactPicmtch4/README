@@ -1,0 +1,12 @@
+This is the picmtch4 image matching code, along with a unit tests.
+
+To build and run unit tests do:
+
+make -j 8 unit_tests
+
+The conversions between OpenCV and GeoCal structures is untested as well as
+the Makefile as OpenCV was not installed on sreca by 8/24/12.
+
+You also get an executeable called runpicmtch4 that uses the code in 
+runImageMatcher.cpp when you build normally via:
+	  make -j 8 

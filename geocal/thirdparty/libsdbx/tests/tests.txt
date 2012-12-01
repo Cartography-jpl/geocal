@@ -1,0 +1,4 @@
+
+Note: These mostly exist for debugging and making sure everything compiles.
+
+TODO: Need to transform these into real unit tests

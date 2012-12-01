@@ -1,0 +1,39 @@
+# This gets included in the top makefile. This list files here that are
+# used to make up libgeocal.la.
+
+SWIG_SOURCES += @libgeocal@/swig.i
+SWIG_SOURCES += @libgeocal@/vector.i
+SWIG_SOURCES += @libgeocal@/array.i
+SWIG_SOURCES += @libgeocal@/quaternion.i
+SWIG_SOURCES += @libgeocal@/shared_ptr_list.i
+
+if HAVE_GDAL
+# bin_PROGRAMS += tryout
+# tryout_SOURCES = @libgeocal@/tryout.cc
+# tryout_LDADD = libgeocal.la $(VICAR_RTL_LIBS) 
+# bin_PROGRAMS += tryout2
+# tryout2_SOURCES = @libgeocal@/tryout2.cc
+# tryout2_LDADD = libgeocal.la $(VICAR_RTL_LIBS) 
+# bin_PROGRAMS += diff_rpc
+# diff_rpc_SOURCES = @libgeocal@/diff_rpc.cc
+# diff_rpc_LDADD = libgeocal.la $(VICAR_RTL_LIBS) 
+#bin_PROGRAMS += dem_fit_tryout
+#dem_fit_tryout_SOURCES = @libgeocal@/dem_fit_tryout.cc
+#dem_fit_tryout_LDADD = libgeocal.la $(VICAR_RTL_LIBS) 
+#bin_PROGRAMS += timing_test
+#timing_test_SOURCES = @libgeocal@/timing_test.cc
+#timing_test_LDADD = libgeocal.la $(SPICE_LDFLAGS) $(VICAR_RTL_LIBS) 
+
+# bin_PROGRAMS += rpc_direct
+# rpc_direct_SOURCES = @libgeocal@/rpc_direct.cc
+# rpc_direct_LDADD = libgeocal.la $(VICAR_RTL_LIBS)
+endif
+EXTRA_DIST += @libgeocal@/dummy.pdf
+EXTRA_DIST += @libgeocal@/geocal_doxygen.h
+
+include afids_python/geocal/lib/GeoCalCore/geocal_core.am
+include afids_python/geocal/lib/CartLab/cart_lab.am
+include afids_python/geocal/lib/Misr/misr.am
+if HAVE_GTKGOO
+include afids_python/geocal/lib/Gtk/gtk.am
+endif

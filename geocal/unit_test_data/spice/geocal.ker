@@ -1,0 +1,21 @@
+This is a list of kernels to load in for use by geocal. Right now, we
+always load the same kernels. We could do something more complicated if
+needed in the future.
+
+As a convention, we always change to the directory this file is located
+in before loading this top level kernel. That means that we can use
+relative paths from the file location to specify other kernels that
+should be loaded.
+
+If you update the version of other kernels, you need to also update this
+file to point to the updated versions.
+
+\begindata
+KERNELS_TO_LOAD = (
+  'lsk/naif0008.tls',
+  'pck/pck00008.tpc',
+  'pck/earth_720101_070426.bpc',
+  'pck/earth_000101_120424_120201.bpc',
+  'fk/planets/earth_assoc_itrf93.tf',
+  'fk/planets/eci_tod.tf'
+)

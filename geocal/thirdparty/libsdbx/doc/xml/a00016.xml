@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00016" kind="struct" prot="public">
+    <compoundname>RTreeAcceptOverlapping</compoundname>
+    <includes refid="a00039" local="no">RTreeVisitor.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename NodeItem</type>
+      </param>
+      <param>
+        <type>typename LeafItem</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00016_14b7e88b7179b6c5c46f6ef8b4d5a89ff" prot="public" static="no" mutable="no">
+        <type>const NodeItem::KeyType &amp;</type>
+        <definition>const NodeItem::KeyType&amp; RTreeAcceptOverlapping&lt; NodeItem, LeafItem &gt;::m_bound</definition>
+        <argsstring></argsstring>
+        <name>m_bound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="54" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00016_1fc3eeade4b6f6f9cda1775c3c9f7f1f3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTreeAcceptOverlapping&lt; NodeItem, LeafItem &gt;::operator()</definition>
+        <argsstring>(const LeafItem &amp;item) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const LeafItem &amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="65" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="64" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="a00016_11cc305d0ed885f1b046f2bcd91c42c82" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RTreeAcceptOverlapping&lt; NodeItem, LeafItem &gt;::operator()</definition>
+        <argsstring>(const NodeItem &amp;item) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const NodeItem &amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="60" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="59" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="a00016_1a279217e450d144e76d48b1dd3dd9ebf" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RTreeAcceptOverlapping&lt; NodeItem, LeafItem &gt;::RTreeAcceptOverlapping</definition>
+        <argsstring>(const typename NodeItem::KeyType &amp;bound)</argsstring>
+        <name>RTreeAcceptOverlapping</name>
+        <param>
+          <type>const typename NodeItem::KeyType &amp;</type>
+          <declname>bound</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="55" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="55" bodyend="57"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="a00016_1cc1a960c7ee82bf2ce30b1e77d54f9f8" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RTreeAcceptOverlapping&lt; NodeItem, LeafItem &gt;::RTreeAcceptOverlapping</definition>
+        <argsstring>()</argsstring>
+        <name>RTreeAcceptOverlapping</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="69" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>returns true if the Item overlaps the specified bound </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" line="53" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeVisitor.h" bodystart="52" bodyend="70"/>
+    <listofallmembers>
+      <member refid="a00016_14b7e88b7179b6c5c46f6ef8b4d5a89ff" prot="public" virt="non-virtual"><scope>RTreeAcceptOverlapping</scope><name>m_bound</name></member>
+      <member refid="a00016_11cc305d0ed885f1b046f2bcd91c42c82" prot="public" virt="non-virtual"><scope>RTreeAcceptOverlapping</scope><name>operator()</name></member>
+      <member refid="a00016_1fc3eeade4b6f6f9cda1775c3c9f7f1f3" prot="public" virt="non-virtual"><scope>RTreeAcceptOverlapping</scope><name>operator()</name></member>
+      <member refid="a00016_1a279217e450d144e76d48b1dd3dd9ebf" prot="public" virt="non-virtual"><scope>RTreeAcceptOverlapping</scope><name>RTreeAcceptOverlapping</name></member>
+      <member refid="a00016_1cc1a960c7ee82bf2ce30b1e77d54f9f8" prot="private" virt="non-virtual"><scope>RTreeAcceptOverlapping</scope><name>RTreeAcceptOverlapping</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

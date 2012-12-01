@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00267" kind="struct" prot="public">
+    <compoundname>SortBoundedItemsByDistanceFromCenter</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename BoundedItem</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00267_12ec705e3922a7d7ba0e2b0513226e4d9" prot="public" static="no" mutable="no">
+        <type>const BoundedItem::KeyType</type>
+        <definition>const BoundedItem::KeyType SortBoundedItemsByDistanceFromCenter&lt; BoundedItem &gt;::m_center</definition>
+        <argsstring></argsstring>
+        <name>m_center</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeBoundingBox.h" line="328" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeBoundingBox.h" bodystart="328" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00267_12c18714d75e4fd484f14ab635deee474" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SortBoundedItemsByDistanceFromCenter&lt; BoundedItem &gt;::operator()</definition>
+        <argsstring>(const BoundedItem &amp;bi1, const BoundedItem &amp;bi2) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const BoundedItem &amp;</type>
+          <declname>bi1</declname>
+        </param>
+        <param>
+          <type>const BoundedItem &amp;</type>
+          <declname>bi2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeBoundingBox.h" line="332" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeBoundingBox.h" bodystart="331" bodyend="334"/>
+      </memberdef>
+      <memberdef kind="function" id="a00267_1aecd8e804ec016bb48cc832208fea01b" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SortBoundedItemsByDistanceFromCenter&lt; BoundedItem &gt;::SortBoundedItemsByDistanceFromCenter</definition>
+        <argsstring>(const typename BoundedItem::KeyType &amp;center)</argsstring>
+        <name>SortBoundedItemsByDistanceFromCenter</name>
+        <param>
+          <type>const typename BoundedItem::KeyType &amp;</type>
+          <declname>center</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeBoundingBox.h" line="329" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeBoundingBox.h" bodystart="329" bodyend="329"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeBoundingBox.h" line="327" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/RTree/RTreeBoundingBox.h" bodystart="325" bodyend="335"/>
+    <listofallmembers>
+      <member refid="a00267_12ec705e3922a7d7ba0e2b0513226e4d9" prot="public" virt="non-virtual"><scope>SortBoundedItemsByDistanceFromCenter</scope><name>m_center</name></member>
+      <member refid="a00267_12c18714d75e4fd484f14ab635deee474" prot="public" virt="non-virtual"><scope>SortBoundedItemsByDistanceFromCenter</scope><name>operator()</name></member>
+      <member refid="a00267_1aecd8e804ec016bb48cc832208fea01b" prot="public" virt="non-virtual"><scope>SortBoundedItemsByDistanceFromCenter</scope><name>SortBoundedItemsByDistanceFromCenter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

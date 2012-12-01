@@ -1,0 +1,8 @@
+procedure
+local ret type=int
+
+body
+let ret = 2
+sample_vicar_python inp=(val1,val2) out=outname ret=ret
+write "ret=&ret"
+end-proc

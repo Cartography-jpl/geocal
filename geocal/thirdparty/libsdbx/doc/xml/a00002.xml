@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00002" kind="struct" prot="public">
+    <compoundname>BTreeNode</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">TreeNodeBase</basecompoundref>
+    <includes refid="a00026" local="no">BTreeNode.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename _Item</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>_max_items</declname>
+        <defname>_max_items</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00002_19bb5fda8edc5a1df582ccfe44eb71a90" prot="public" static="no">
+        <type>Item::IdType</type>
+        <definition>typedef Item::IdType BTreeNode&lt; _Item, _max_items &gt;::IdType</definition>
+        <argsstring></argsstring>
+        <name>IdType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" line="51" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00002_19868805bffe57a55fa1ad1b2c5788d09" prot="public" static="no">
+        <type>_Item</type>
+        <definition>typedef _Item BTreeNode&lt; _Item, _max_items &gt;::Item</definition>
+        <argsstring></argsstring>
+        <name>Item</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" line="49" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00002_17059295562ffdcbd33005c1ba340e2bf" prot="public" static="no">
+        <type>std::vector&lt; Item &gt;</type>
+        <definition>typedef std::vector&lt; Item &gt; BTreeNode&lt; _Item, _max_items &gt;::ItemArray</definition>
+        <argsstring></argsstring>
+        <name>ItemArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" line="50" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00002_156c5e836c76cb18d512f9e144e6158e0" prot="public" static="no" mutable="no">
+        <type>IdType</type>
+        <definition>IdType BTreeNode&lt; _Item, _max_items &gt;::end_id</definition>
+        <argsstring></argsstring>
+        <name>end_id</name>
+        <briefdescription>
+<para>array of items this node holds </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" line="60" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" bodystart="60" bodyend="-1"/>
+        <referencedby refid="a00002_1f1397918891996b699a610b384db6b75" compoundref="a00026" startline="79" endline="101">BTreeNode&lt; _Item, _max_items &gt;::BTreeNode</referencedby>
+        <referencedby refid="a00002_1ab68c76d6595f8cdf42bba4bdcc2b435" compoundref="a00026" startline="105" endline="127">BTreeNode&lt; _Item, _max_items &gt;::Serialize</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="a00002_1095ea381c0927f23cf72b908d3968b3f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool BTreeNode&lt; _Item, _max_items &gt;::is_dirty</definition>
+        <argsstring></argsstring>
+        <name>is_dirty</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" line="54" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00002_12462d8614df04f0efc7fdbdb0d2d4037" prot="public" static="no" mutable="no">
+        <type>ItemArray</type>
+        <definition>ItemArray BTreeNode&lt; _Item, _max_items &gt;::items</definition>
+        <argsstring></argsstring>
+        <name>items</name>
+        <briefdescription>
+<para>set to true if this needs to be re-saved </para>        </briefdescription>
+        <detaileddescription>
+<para>you *must* manage this, it does not get managed automatically </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" line="58" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" bodystart="58" bodyend="-1"/>
+        <referencedby refid="a00002_1f1983f111a095e28f9a60674ec23e882" compoundref="a00026" startline="63" endline="67">BTreeNode&lt; _Item, _max_items &gt;::BTreeNode</referencedby>
+        <referencedby refid="a00002_1ab68c76d6595f8cdf42bba4bdcc2b435" compoundref="a00026" startline="105" endline="127">BTreeNode&lt; _Item, _max_items &gt;::Serialize</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00002_1f1397918891996b699a610b384db6b75" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BTreeNode&lt; _Item, _max_items &gt;::BTreeNode</definition>
+        <argsstring>(const unsigned char *const buffer)</argsstring>
+        <name>BTreeNode</name>
+        <param>
+          <type>const unsigned char *const </type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Serialization constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" line="81" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" bodystart="79" bodyend="101"/>
+        <references refid="a00002_156c5e836c76cb18d512f9e144e6158e0" compoundref="a00026" startline="60">BTreeNode&lt; _Item, _max_items &gt;::end_id</references>
+        <references refid="a00002_12462d8614df04f0efc7fdbdb0d2d4037" compoundref="a00026" startline="58">BTreeNode&lt; _Item, _max_items &gt;::items</references>
+      </memberdef>
+      <memberdef kind="function" id="a00002_1f1983f111a095e28f9a60674ec23e882" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BTreeNode&lt; _Item, _max_items &gt;::BTreeNode</definition>
+        <argsstring>()</argsstring>
+        <name>BTreeNode</name>
+        <briefdescription>
+<para>id on the end of the <ref refid="a00001" kindref="compound">BTree</ref> node </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" line="64" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" bodystart="63" bodyend="67"/>
+        <references refid="a00002_12462d8614df04f0efc7fdbdb0d2d4037" compoundref="a00026" startline="58">BTreeNode&lt; _Item, _max_items &gt;::items</references>
+      </memberdef>
+      <memberdef kind="function" id="a00002_14e3bf1358c177df511fce40c073b9a8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IdType</type>
+        <definition>IdType BTreeNode&lt; _Item, _max_items &gt;::get_item_id</definition>
+        <argsstring>(std::size_t idx)</argsstring>
+        <name>get_item_id</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" line="131" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" bodystart="130" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="a00002_1ab68c76d6595f8cdf42bba4bdcc2b435" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void BTreeNode&lt; _Item, _max_items &gt;::Serialize</definition>
+        <argsstring>(unsigned char *buffer) const </argsstring>
+        <name>Serialize</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Serializer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" line="106" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" bodystart="105" bodyend="127"/>
+        <references refid="a00002_156c5e836c76cb18d512f9e144e6158e0" compoundref="a00026" startline="60">BTreeNode&lt; _Item, _max_items &gt;::end_id</references>
+        <references refid="a00002_12462d8614df04f0efc7fdbdb0d2d4037" compoundref="a00026" startline="58">BTreeNode&lt; _Item, _max_items &gt;::items</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Stores and handles serialization for items in a <ref refid="a00001" kindref="compound">BTree</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Item</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the item being stored. Must support the serialization concept defined in <ref refid="a00068" kindref="compound">Serialization.h</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_max_items</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Max number of items that this stores </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="297">
+        <label>BTreeNodeBase</label>
+      </node>
+      <node id="296">
+        <label>BTreeNode&lt; _Item, _max_items &gt;</label>
+        <link refid="a00002"/>
+        <childnode refid="297" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="299">
+        <label>BTreeNodeBase</label>
+      </node>
+      <node id="298">
+        <label>BTreeNode&lt; _Item, _max_items &gt;</label>
+        <link refid="a00002"/>
+        <childnode refid="299" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" line="47" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeNode.h" bodystart="47" bodyend="139"/>
+    <listofallmembers>
+      <member refid="a00002_1f1983f111a095e28f9a60674ec23e882" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>BTreeNode</name></member>
+      <member refid="a00002_1f1397918891996b699a610b384db6b75" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>BTreeNode</name></member>
+      <member refid="a00002_156c5e836c76cb18d512f9e144e6158e0" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>end_id</name></member>
+      <member refid="a00002_14e3bf1358c177df511fce40c073b9a8c" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>get_item_id</name></member>
+      <member refid="a00002_19bb5fda8edc5a1df582ccfe44eb71a90" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>IdType</name></member>
+      <member refid="a00002_1095ea381c0927f23cf72b908d3968b3f" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>is_dirty</name></member>
+      <member refid="a00002_19868805bffe57a55fa1ad1b2c5788d09" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>Item</name></member>
+      <member refid="a00002_17059295562ffdcbd33005c1ba340e2bf" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>ItemArray</name></member>
+      <member refid="a00002_12462d8614df04f0efc7fdbdb0d2d4037" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>items</name></member>
+      <member refid="a00002_17207fe886add77429dcb1864338fa827c2ff24ebd331c9f65423ce7c3b0db8e1" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>max_items</name></member>
+      <member refid="a00002_17207fe886add77429dcb1864338fa827062d85b8c176295365ff36e26d6bdf5c" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>record_size</name></member>
+      <member refid="a00002_1ab68c76d6595f8cdf42bba4bdcc2b435" prot="public" virt="non-virtual"><scope>BTreeNode</scope><name>Serialize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

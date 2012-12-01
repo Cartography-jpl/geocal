@@ -1,0 +1,83 @@
+#! /usr/bin/env python
+#
+# This copies a GDAL file to a new NITF file. This is very similar to
+# gdal_translate already found in GDAL, but this adds handling of TREs
+# in NITF for things like RPC and igeolo information.
+
+from afids import *
+from optparse import OptionParser
+from tempfile import NamedTemporaryFile
+import subprocess
+
+parser = OptionParser(version="%prog September 26, 2012",
+usage="""usage: %prog [options] input_file output_nitf
+
+This copies a GDAL file to a new NITF file. This is very similar to
+gdal_translate already found in GDAL, but this adds handling of TREs
+in NITF for things like RPC and igeolo information.
+
+The input file can be any file supported by GDAL, including VICAR.
+
+Note that this program should be a replacement for the old VICAR
+proc vicar2ntf
+""")
+parser.add_option("-q", "--quiet",
+                  dest="quiet", default=False,
+                  action="store_true",
+                  help="don't print status message as we copy the data")
+# Parse command line arguments
+(options, args) = parser.parse_args()
+
+if(len(args) != 2):
+    parser.error("Need to specify all the arguments")
+
+inname, outname = args
+
+# Create a "virtual raster image". This is a text file that allows us to
+# set various metadata fields without changing the original file. GDAL then
+# treats this raster image we can later copy.
+
+with NamedTemporaryFile() as tmp:
+    subprocess.check_call(["gdal_translate", "-of", "VRT", "-q",
+                           inname, tmp.name])
+    fin = GdalMultiBand(inname)
+    fvrt = GdalRasterImage(tmp.name)
+    creation_option = []
+    # Function is only optionally available, depending on options
+    # used at build time of AFIDS. If this isn't found then just
+    # continue without complaint
+    try:
+        tre_afid_a(fin, fvrt, creation_option)
+    except NameError as exc:
+        pass
+    if(fin.raster_image(0).has_rpc):
+        if(fin.raster_image(0).rpc.rpc_type == Rpc.RPC_A):
+            tre = TreRPC00A()
+            tre.rpc = fin.raster_image(0).rpc
+            fvrt.rpc00a = tre
+        else:
+            tre = TreRPC00B()
+            tre.rpc = fin.raster_image(0).rpc
+            fvrt.rpc00b = tre
+
+    # NITF creates its IGEOLO data structure from a map projection. If
+    # the input file doesn't already have map info, create an approximate
+    # one if we can from the NITF corner metadata in the file
+    if(not fvrt.has_map_info):
+        mi = fvrt.map_info_from_nitf_corner
+        if(mi is not None):
+            fvrt.set_map_info(mi)
+
+    # Quiet a warning message in case we have the wrong header version 
+    # information (e.g., this was copied from an older NITF file). As
+    # of GDAL 1.9, it supports writing 2.10 only
+    if("NITF_FHDR" in fvrt):
+        fvrt["NITF_FHDR"] = "NITF02.10"
+    fvrt.close()
+    cmd = ["gdal_translate", "-of", "NITF"]
+    if(options.quiet):
+        cmd.append("-q")
+    cmd.extend(creation_option)
+    cmd.append(tmp.name)
+    cmd.append(outname)
+    subprocess.check_call(cmd)

@@ -1,0 +1,45 @@
+#! /usr/bin/env python
+#
+# This collects tie points.
+
+from afids import *
+from optparse import OptionParser
+from multiprocessing import Pool
+
+parser = OptionParser(version="%prog August 14, 2012",
+usage="""usage: %prog [options] igc output 
+
+This creates a sqlite shelve object that holds an array of TiePoints. The
+output should be in "file:key" format, e.g., "my_data.db:tp". The input is
+the IgcCollection to use, also in the same format (which can be in the same
+or a different input file).
+""")
+parser.add_option("--number_process", dest="number_process", 
+                  default=1,
+                  type="int",
+                  help="number of processors to use. Right now there isn't a lot gained by running in parallel, but we will put this option in place for the futre.")
+parser.add_option("--number_x", dest="number_x", default = 100,
+                  type="int",
+                  help="number of grid points in the X direction to try for")
+parser.add_option("--number_y", dest="number_y", default = 100,
+                  type="int",
+                  help="number of grid points in the X direction to try for")
+
+# Parse command line arguments
+(options, args) = parser.parse_args()
+
+if(len(args) != 2):
+    parser.error("Need to specify all the arguments")
+
+igc_name, output_name = args
+pool = None
+if(options.number_process > 1):
+    pool = Pool(options.number_process)
+
+igc = read_shelve(igc_name)
+tpcollect = TiePointCollect(igc)
+tparr = tpcollect.tie_point_grid(options.number_x, options.number_y, 
+                                 pool = pool)
+write_shelve(output_name, tparr)
+
+

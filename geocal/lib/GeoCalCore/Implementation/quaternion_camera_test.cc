@@ -1,0 +1,71 @@
+#include "unit_test_support.h"
+#include "quaternion_camera.h"
+#include "ecr.h"
+#include "geodetic.h"
+#include "eci_tod.h"
+#include "orbit.h"
+using namespace GeoCal;
+
+BOOST_FIXTURE_TEST_SUITE(quaternion_camera, GlobalFixture)
+
+BOOST_AUTO_TEST_CASE(basic_test)
+{
+  // u sample, v line.
+  // Output is longitude, latitude, height, line, sample
+  QuaternionCamera cam(boost::math::quaternion<double>(1,0,0,0),
+		       3375, 3648,
+		       1.0 / 2500000,
+		       1.0 / 2500000,
+		       1.0,
+		       FrameCoordinate(1688.0, 1824.5));
+  BOOST_CHECK_CLOSE(cam.focal_length(), 1.0, 1e-4);
+  BOOST_CHECK_CLOSE(cam.line_pitch(),   1.0 / 2500000, 1e-4);
+  BOOST_CHECK_CLOSE(cam.sample_pitch(), 1.0 / 2500000, 1e-4);
+  BOOST_CHECK_CLOSE(cam.principal_point().line, 1688, 1e-4);
+  BOOST_CHECK_CLOSE(cam.principal_point().sample, 1824.5, 1e-4);
+  BOOST_CHECK_EQUAL(cam.number_line(0), 3375);
+  BOOST_CHECK_EQUAL(cam.number_sample(0), 3648);
+  BOOST_CHECK_EQUAL(cam.number_band(), 1);
+}
+
+// This attempts to match the results of the sc2rpc unit tests.
+// **NOTE** We get results that are about 7 meters different than what
+// sc2rpc gets. This was tracked down to what I believe is a more
+// accurate calculation the spice toolkit for J2000 to ECEF.  We allow
+// a 10 meter error in comparing to sc2rpc.
+
+BOOST_AUTO_TEST_CASE(sc2rpc)
+{
+  Time t = Time::time_acs(215077459.472);
+  boost::shared_ptr<EciTod> eci_tod
+    (new EciTod(3435100.496, 945571.538, -6053387.573));
+  boost::array<double, 3> vel = {{0, 0, 0}};
+  boost::math::quaternion<double> sc_to_ci(0.946366, 0.0, -0.323096813, 0.0);
+  QuaternionOrbitData od(t, eci_tod, vel, sc_to_ci);
+  QuaternionCamera cam(boost::math::quaternion<double>(1,0,0,0),
+		       3375, 3648,
+		       1.0 / 2500000,
+		       1.0 / 2500000,
+		       1.0,
+		       FrameCoordinate(1688.0, 1824.5));
+  boost::shared_ptr<CartesianFixed> pt =
+    od.reference_surface_intersect_approximate(cam, FrameCoordinate(3375, 3648));
+  Ecr pt_ecr(*pt);
+  Geodetic pt_geod(-60.3162137, 47.2465154);
+  BOOST_CHECK(distance(pt_geod, *pt) < 10.0);
+  //  std::cerr << distance(pt_geod, *pt) << "\n";
+  pt = od.reference_surface_intersect_approximate(cam, 
+			  FrameCoordinate(1, 3648), 0, 200);
+  pt_geod = Geodetic(-60.3179857, 47.2296261, 199.9997909);
+  BOOST_CHECK(distance(pt_geod, *pt) < 10.0);
+  //  std::cerr << distance(pt_geod, *pt) << "\n";
+  pt = od.reference_surface_intersect_approximate(cam, 
+			  FrameCoordinate(3375, 1), 0, 100);
+  pt_geod = Geodetic(-60.3247623, 47.2509243, 99.9998955);
+  BOOST_CHECK(distance(pt_geod, *pt) < 10.0);
+  //  std::cerr << distance(pt_geod, *pt) << "\n";
+}
+
+
+BOOST_AUTO_TEST_SUITE_END()
+

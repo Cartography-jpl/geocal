@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00216" kind="class" prot="public">
+    <compoundname>std::string</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::basic_string&lt; char &gt;</basecompoundref>
+    <innerclass refid="a00272" prot="public">std::string::const_iterator</innerclass>
+    <innerclass refid="a00273" prot="public">std::string::const_reverse_iterator</innerclass>
+    <innerclass refid="a00274" prot="public">std::string::iterator</innerclass>
+    <innerclass refid="a00275" prot="public">std::string::reverse_iterator</innerclass>
+    <briefdescription>
+<para>STL class. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="647">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="646">
+        <label>std::string</label>
+        <childnode refid="647" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="649">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="648">
+        <label>std::string</label>
+        <childnode refid="649" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="[STL]" line="1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

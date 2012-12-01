@@ -1,0 +1,19 @@
+This contains the core of the GeoCal library. This is intended to be classes
+that are either fundamental (e.g., Camera) or generally useful to many
+projects (e.g., GDAL access routines).
+
+If you are creating a new class, don't get too hung up on exactly where it
+should go. All of the code gets put into one library, the division between
+"Core" and "Project" is really just to organize the source code files and 
+give you some hint as to where to look for a particular routine.
+
+We divide the code into "Support", "Interface" and "Implementation". The 
+idea is the "Support" is the lowest level (e.g., the GeoCal::Time class),
+"Interface" is mostly abstract classes and functions that work with
+the abstract classes (e.g., Camera), and "Implementation" is specific
+implementations of the abstract classes (e.g., GdalRasterImage).
+
+Again, don't get too hung up on the division. It is really just so we don't
+have one directory with a hundred files in it, the division between "Support",
+"Interface" and "Implemenation" is pretty loose and in many cases somewhat
+arbitrary.

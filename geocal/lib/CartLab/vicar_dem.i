@@ -1,0 +1,37 @@
+// -*- mode: c++; -*-
+// (Not really c++, but closest emacs mode)
+%module geocal
+%{
+#include "vicar_dem.h"
+%}
+
+%geocal_shared_ptr(VicarDem);
+namespace GeoCal {
+class VicarDem : public DemTiledFile {
+public:
+// SWIG gets confused by too complicated a default argument. We split this
+// into calls with and without the Datum, although the same C++ function is
+// called in both cases. The default Datum is NoDatum.
+  VicarDem(const std::string& Fname, 
+	   bool Outside_dem_is_error = false, 
+	   int Number_line_per_tile = 100, int Number_tile = 4);
+  VicarDem(const std::string& Fname, 
+	   bool Outside_dem_is_error, 
+	   int Number_line_per_tile, int Number_tile,
+	   const boost::shared_ptr<Datum>& D);
+  VicarDem(int Instance, 
+	   bool Outside_dem_is_error = false, 
+	   int Number_line_per_tile = 100, int Number_tile = 4,
+	   const std::string& Name = "INP");
+  VicarDem(int Instance, 
+	   bool Outside_dem_is_error, 
+	   int Number_line_per_tile, int Number_tile,
+	   const std::string& Name,
+	   const boost::shared_ptr<Datum>& D);
+  %python_attribute2(vicar_file, vicar_file_ptr, boost::shared_ptr<VicarFile>)
+  virtual double elevation(int Y_index, int X_index) const;
+  %pickle_init(self.vicar_file.file_name, self.outside_dem_is_error,
+	       self.number_line_per_tile, self.number_tile,
+	       self.datum)
+};
+}

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00010" kind="struct" prot="public">
+    <compoundname>LRUCacheNodeSorter</compoundname>
+    <includes refid="a00031" local="no">lru.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename _LRUCacheNode</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00010_1825e5793f07827d678fcb1702fdf81c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LRUCacheNodeSorter&lt; _LRUCacheNode &gt;::operator()</definition>
+        <argsstring>(const _LRUCacheNode *const n1, const _LRUCacheNode *const n2)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const _LRUCacheNode *const </type>
+          <declname>n1</declname>
+        </param>
+        <param>
+          <type>const _LRUCacheNode *const </type>
+          <declname>n2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="145" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="144" bodyend="147"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Used for sorting purposes. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="143" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="142" bodyend="148"/>
+    <listofallmembers>
+      <member refid="a00010_1825e5793f07827d678fcb1702fdf81c5" prot="public" virt="non-virtual"><scope>LRUCacheNodeSorter</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

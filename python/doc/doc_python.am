@@ -1,0 +1,17 @@
+# Sphinx python documentation
+
+install_python_doc: 
+	export PATH=$(bindir):$$PATH && \
+        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
+        $(SPHINXBUILD) -b html $(srcdir)/$(docpythonsrc) $(pythondocdir)
+
+if WITH_DOCUMENTATION
+INSTALL_DATA_HOOK += install_python_doc
+endif
+
+pythondoctest:
+	export PATH=$(bindir):$$PATH && \
+        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
+        $(SPHINXBUILD) -b doctest $(srcdir)/$(docpythonsrc) doctest
+	@echo "Testing of doctests in the sources finished, look at the " \
+	      "results in doctest/output.txt."

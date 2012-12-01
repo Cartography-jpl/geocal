@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="dir_fc737d041ef8f2c4185ce3a0bc957e6a" kind="dir">
+    <compoundname>BTree/</compoundname>
+    <innerfile refid="a00024">BTree.h</innerfile>
+    <innerfile refid="a00026">BTreeNode.h</innerfile>
+    <innerfile refid="a00027">BTreePrint.h</innerfile>
+    <innerfile refid="a00028">BTreeTraverser.h</innerfile>
+    <innerfile refid="a00029">BTreeVerify.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/"/>
+  </compounddef>
+</doxygen>

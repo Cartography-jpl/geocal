@@ -1,0 +1,25 @@
+# This gets included in the top makefile. This list files here that are
+# used to run unit tests.
+
+EXTRA_DIST += unit_test_data/PCF unit_test_data/cib_sample.img 
+EXTRA_DIST += unit_test_data/matcher_test_newimage.bin
+EXTRA_DIST += unit_test_data/matcher_test_refimage.bin
+EXTRA_DIST += unit_test_data/rpc.ntf
+EXTRA_DIST += unit_test_data/vicar.img
+EXTRA_DIST += unit_test_data/spice/lsk/naif0007.tls
+EXTRA_DIST += unit_test_data/spice/lsk/naif0008.tls
+EXTRA_DIST += unit_test_data/spice/lsk/naif0007.tls
+EXTRA_DIST += unit_test_data/spice/pck/earth_000101_080729_080507.bpc
+EXTRA_DIST += unit_test_data/spice/pck/earth_720101_070426.bpc
+EXTRA_DIST += unit_test_data/spice/pck/pck00008.tpc
+EXTRA_DIST += unit_test_data/06JAN06033849-P1BS-005545519120_01_P001.ATT
+EXTRA_DIST += unit_test_data/06JAN06033849-P1BS-005545519120_01_P001.EPH
+EXTRA_DIST += unit_test_data/argus_camera6.jpg
+EXTRA_DIST += unit_test_data/argus.csv
+EXTRA_DIST += unit_test_data/mul.tif
+EXTRA_DIST += unit_test_data/pan.tif
+EXTRA_DIST += unit_test_data/egm96.img
+
+
+
+

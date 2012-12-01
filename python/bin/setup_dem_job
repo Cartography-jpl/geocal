@@ -1,0 +1,148 @@
+#! /usr/bin/env python
+#
+# This sets up everything for using torque to create a DEM
+
+from afids import *
+from optparse import OptionParser
+from functools import partial
+
+parser = OptionParser(version="%prog September 6, 2012",
+usage="""usage: %prog [options] <igc collection> <index first image>
+  <index second image> <output file base>
+
+It currently takes a long time to create a full DEM from a pair of
+large images (e.g. the 35,000 x 25,000 typical of WorldView 2). To
+get this to run in a reasonable amount of time, we break the job into
+a number of tasks which can then be submitted to torque.
+
+This script does this setup. It initializes the database structures for
+handling this work, it creates the initial empty DEM, and it creates a
+script that can be used to submit the jobs to torque. We don't actually
+submit them in this script, but leave this to the user to actually do this.
+
+There are several output files generated from the base name. If the file
+base name as "output", then we generate "output.img", "output.job_script",
+"output.db", and the directory "output_log". The file "output.img" is the
+DEM, it will initially be filled with 0's. The file "output.job_script" is
+the script that will submit jobs to torque. The file "output.db" is a scratch
+file that contains inputs and the status of the jobs as they are run. The
+directory "output_log" will hold the log files from torque as the jobs are
+run.
+""")
+parser.add_option("--number_line", dest="number_line", type = "int", 
+                  default = 1000,
+                  help="number of lines to include in each tile that we work on")
+parser.add_option("--number_sample", dest="number_sample", type = "int", 
+                  default = 1000,
+                  help="number of samples to include in each tile that we work on")
+parser.add_option("--resolution", dest="resolution_meter", type="float", 
+                  default = 1.0,
+                  help="resolution in meters for DEM, default is 1 meter")
+parser.add_option("--surface_image1", dest="surface_image1",
+                  default = None,
+                  help="specify surface projected version of the image. This should have been done using the same image ground connection. We may get better image matching using projected data")
+parser.add_option("--surface_image2", dest="surface_image2",
+                  default = None,
+                  help="specify surface projected version of the image. This should have been done using the same image ground connection. We may get better image matching using projected data")
+
+(options, args) = parser.parse_args()
+if(len(args) != 4):
+    parser.error("Need to specify all the arguments")
+
+igc_name, index1, index2, output_base = args
+
+igc_col = read_shelve(igc_name)
+igc1 = igc_col.image_ground_connection(int(index1))
+igc2 = igc_col.image_ground_connection(int(index2))
+
+# Create the empty DEM
+
+mibase = cib01_mapinfo()
+resbase = mibase.resolution_meter
+miscale = mibase.scale(options.resolution_meter / resbase,
+                       options.resolution_meter / resbase)
+midem = igc1.cover(miscale)
+# Short term, subset data so we have a small test set
+#midem = midem.subset(0,0,2500,2600)
+demname = output_base + ".img"
+f = VicarRasterImage(demname, midem, "REAL")
+
+# Close and reopen file so we can get offset to where data is.
+f.close()
+f = VicarLiteFile(demname)
+aoi_full = f.map_info
+offset = f.data_offset
+nline = f.number_line
+nsamp = f.number_sample
+f = None
+
+# Set up to read surface data, if we have it.
+surface_image1 = None
+surface_image2 = None
+if(options.surface_image1):
+    surface_image1 = VicarLiteRasterImage(options.surface_image1)
+if(options.surface_image2):
+    surface_image2 = VicarLiteRasterImage(options.surface_image2)
+
+# Create all the jobs that we will need to run
+job_index = 0
+database_fname = output_base + ".db"
+try:
+    os.remove(database_fname)
+except OSError as exc:
+    pass                    # Ok if doesn't exist
+
+for lstart in range(0, nline, options.number_line):
+    tile_nline = options.number_line
+    if(lstart + tile_nline > nline):
+        tile_nline = nline - lstart
+    for sstart in range(0, nsamp, options.number_sample):
+        tile_nsamp = options.number_sample
+        if(sstart + tile_nsamp > nsamp):
+            tile_nsamp = nsamp - sstart
+        dg = DemGenerate(igc1, igc2, 
+                      aoi_full.subset(sstart, lstart, tile_nsamp, tile_nline),
+                         surface_image1 = surface_image1,
+                         surface_image2 = surface_image2)
+        job = partial(dem_generate_tile, dg, demname, offset, lstart, sstart,
+                      tile_nline, tile_nsamp, nline, nsamp)
+        write_shelve(database_fname + ":job_%d" % job_index, job)
+        job_index += 1
+number_job = job_index
+
+# Create a script that can submit these jobs
+log_dir = output_base + "_log"
+makedirs_p(log_dir)
+
+job_script = '''#!/bin/bash
+if [[ $# -lt 1 ]]; then
+   echo "Usage: $0 <arguments to qsub>"
+   echo ""
+   echo 'At a minimum, you need to supply the queue to use, e.g., "-q long"'
+   exit 1
+fi
+export SHELVE_DATABASE_FILE="{database_fname}"
+
+jid=`qsub -d {work_dir} -V -j oe -o {log_dir}/qsub.log -N dem_generate -t 0-{max_array_num} ${{AFIDS_ROOT}}/vdev/shelve_job_run $*`
+# Add in ERDAS generation here
+qsub -d {work_dir} -V -j oe -o {log_dir}/qsub.log -N to_erdas -W depend=afterokarray:$jid {output_base}.to_erdas $*
+'''
+
+with open(output_base + ".job_script", 'w') as f:
+    f.write(job_script.format\
+                (database_fname=database_fname,
+                 log_dir=log_dir,
+                 max_array_num = number_job - 1,
+                 output_base = output_base,
+                 work_dir = os.path.abspath(os.path.dirname(database_fname)),
+                 ))
+os.chmod(output_base + ".job_script", 0755)
+
+to_erdas_script = '''#!/bin/bash
+gdal_to_erdas {output_base}.img {output_base}_erdas.img
+'''
+
+with open(output_base + ".to_erdas", 'w') as f:
+    f.write(to_erdas_script.format(output_base = output_base))
+os.chmod(output_base + ".to_erdas", 0755)
+

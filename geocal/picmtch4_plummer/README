@@ -1,0 +1,5 @@
+We had a summer student Bryan Plummer here the summer of 2012. He worked with
+refactoring pictmtch4 as part of the work he did with the MSPI project. His code
+is in the MISR repository at http://ulfrun/svn/MSPI-Ground. This is a copy
+of that code, which we will integrate into GeoCal. We keep the original code 
+here for reference.

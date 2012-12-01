@@ -1,0 +1,53 @@
+/*===========================================================================
+=                                                                           =
+=                              RangeException                               =
+=                                                                           =
+=============================================================================
+
+                          Jet Propulsion Laboratory
+                                     MISR
+                              GeoCal Processing
+
+             Copyright 2002, California Institute of Technology.
+                               ALL RIGHTS RESERVED.
+                    U.S. Government Sponsorship acknowledged.
+
+!C++=========================================================================
+
+!CLASS NAME: RangeException
+
+!ABSTRACT:
+
+   This contains inline routines for the parent .h file
+
+!PARENT(S):
+
+   range_exception.h
+
+!REVISION HISTORY:
+
+See ClearCase Log
+
+=============================================================================
+!END=======================================================================*/
+
+#ifndef RANGE_EXCEPTION_ICC
+#define RANGE_EXCEPTION_ICC
+
+//***************************************************************************
+// Definition of function inline RangeException::RangeException().
+//***************************************************************************
+
+inline GeoCal::GeoCalCore::RangeException::RangeException() throw()
+{
+}
+
+//***************************************************************************
+// Definition of function inline RangeException::~RangeException().
+//***************************************************************************
+
+inline GeoCal::GeoCalCore::RangeException::~RangeException() throw()
+{
+}
+
+#endif

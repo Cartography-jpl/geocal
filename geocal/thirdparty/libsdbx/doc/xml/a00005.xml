@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00005" kind="class" prot="public">
+    <compoundname>LRUCache</compoundname>
+    <includes refid="a00031" local="no">lru.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename CachedObjectType</type>
+      </param>
+      <param>
+        <type>typename IdType</type>
+      </param>
+      <param>
+        <type>LRUCacheDeleteType</type>
+        <declname>deleteObject</declname>
+        <defname>deleteObject</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00005_16411bcd6a31b6fdec535693994a6328c" prot="public" static="no">
+        <type><ref refid="a00006" kindref="compound">LRUCacheNode</ref>&lt; CachedObjectType, IdType, deleteObject &gt;</type>
+        <definition>typedef LRUCacheNode&lt;CachedObjectType, IdType, deleteObject&gt; LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::Node</definition>
+        <argsstring></argsstring>
+        <name>Node</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="186" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00005_179f9a43f0345076e86050c6cebdfa0e7" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="a00006" kindref="compound">Node</ref> * &gt;</type>
+        <definition>typedef std::vector&lt; Node *&gt; LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::NodeArray</definition>
+        <argsstring></argsstring>
+        <name>NodeArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="187" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00005_13cc85ab629d0ea0414adaf8f148dba05" prot="public" static="no">
+        <type>NodeArray::iterator</type>
+        <definition>typedef NodeArray::iterator LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::NodeIterator</definition>
+        <argsstring></argsstring>
+        <name>NodeIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="188" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00005_104b7e1f3f7dd1c1beacc51c0af541f8e" prot="public" static="no">
+        <type><ref refid="a00010" kindref="compound">LRUCacheNodeSorter</ref>&lt; <ref refid="a00006" kindref="compound">Node</ref> &gt;</type>
+        <definition>typedef LRUCacheNodeSorter&lt;Node&gt; LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::NodeSorter</definition>
+        <argsstring></argsstring>
+        <name>NodeSorter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="189" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00005_1e6a856c278487a3d36f84d528a1b2908" prot="public" static="no">
+        <type>std::size_t</type>
+        <definition>typedef std::size_t LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="185" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00005_1e8204031b9e18a2015d741a33e568669" prot="private" static="no" mutable="no">
+        <type><ref refid="a00006" kindref="compound">Node</ref> *</type>
+        <definition>Node* LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::m_first</definition>
+        <argsstring></argsstring>
+        <name>m_first</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="351" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="351" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00005_185e8562db184199c9f9db52e9662847f" prot="private" static="no" mutable="no">
+        <type><ref refid="a00006" kindref="compound">Node</ref> *</type>
+        <definition>Node* LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::m_last</definition>
+        <argsstring></argsstring>
+        <name>m_last</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="352" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="352" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00005_1b801b0230f47d06f0283649fd88c2d0a" prot="private" static="no" mutable="no">
+        <type>size_type</type>
+        <definition>size_type LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::m_max_nodes</definition>
+        <argsstring></argsstring>
+        <name>m_max_nodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="354" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="354" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00005_1e637e7230e5b58e827c204995eeb2afb" prot="private" static="no" mutable="no">
+        <type>NodeArray</type>
+        <definition>NodeArray LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::m_nodes</definition>
+        <argsstring></argsstring>
+        <name>m_nodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="348" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="348" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00005_1d9c503c0b8f77c161f80205495bb4b2e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00006" kindref="compound">Node</ref> *</type>
+        <definition>Node* LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::add</definition>
+        <argsstring>(const IdType &amp;id, CachedObjectType *object) WARN_IF_UNUSED</argsstring>
+        <name>add</name>
+        <param>
+          <type>const IdType &amp;</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>CachedObjectType *</type>
+          <declname>object</declname>
+        </param>
+        <briefdescription>
+<para>Adds an item to the list. </para>        </briefdescription>
+        <detaileddescription>
+<para>Use <ref refid="a00005_186654d056acc1762c34f0a8ef47f1e35" kindref="member">get()</ref> first to determine whether the object actually lives in the cache or not</para><para><simplesect kind="return"><para>a node object, you should delete it after this call returns. This contains the item and its id. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="276" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="275" bodyend="308"/>
+        <references refid="a00006_1db212348500ed1c6267d3450d2c380a2" compoundref="a00031" startline="78">LRUCacheNode&lt; CachedObjectType, IdType, deleteType &gt;::next</references>
+        <references refid="a00006_1d626cf2ba65d1b8bef4b58eabe014231" compoundref="a00031" startline="79">LRUCacheNode&lt; CachedObjectType, IdType, deleteType &gt;::prev</references>
+        <referencedby refid="a00021_1a8395a3054781013e45d909a057d3d54" compoundref="a00042" startline="280" endline="353">StringTable&lt; _key_length, max_child_items &gt;::GetStringById</referencedby>
+        <referencedby refid="a00021_1cbac23c55d6a42a98882ec97b8006aac" compoundref="a00042" startline="366" endline="437">StringTable&lt; _key_length, max_child_items &gt;::InsertString</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00005_186654d056acc1762c34f0a8ef47f1e35" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>CachedObjectType *</type>
+        <definition>CachedObjectType* LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::get</definition>
+        <argsstring>(const IdType &amp;id)</argsstring>
+        <name>get</name>
+        <param>
+          <type>const IdType &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Gets the item, or returns NULL. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="215" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="214" bodyend="266"/>
+        <references refid="a00006_1a9f8fca3a3cd842ce4ef139ecb79e668" compoundref="a00031" startline="74">LRUCacheNode&lt; CachedObjectType, IdType, deleteType &gt;::id</references>
+        <references refid="a00006_1db212348500ed1c6267d3450d2c380a2" compoundref="a00031" startline="78">LRUCacheNode&lt; CachedObjectType, IdType, deleteType &gt;::next</references>
+        <references refid="a00006_1b81202afef8325e106875742c07d11ab" compoundref="a00031" startline="75">LRUCacheNode&lt; CachedObjectType, IdType, deleteType &gt;::object</references>
+        <references refid="a00006_1d626cf2ba65d1b8bef4b58eabe014231" compoundref="a00031" startline="79">LRUCacheNode&lt; CachedObjectType, IdType, deleteType &gt;::prev</references>
+        <referencedby refid="a00021_1a8395a3054781013e45d909a057d3d54" compoundref="a00042" startline="280" endline="353">StringTable&lt; _key_length, max_child_items &gt;::GetStringById</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00005_16477b5cfa837db678c128743fa29581c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::LRUCache</definition>
+        <argsstring>(const size_type &amp;max_nodes)</argsstring>
+        <name>LRUCache</name>
+        <param>
+          <type>const size_type &amp;</type>
+          <declname>max_nodes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="196" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="192" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="a00005_1b34c7737ff4ca63d5bdcef9f35edf08b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00006" kindref="compound">Node</ref> *</type>
+        <definition>Node* LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::removeOne</definition>
+        <argsstring>() WARN_IF_UNUSED</argsstring>
+        <name>removeOne</name>
+        <briefdescription>
+<para>Removes an arbitrary CacheNode. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is useful for clearing the cache: you remove items one by one and if the item needs to be written back to disk, you do so.</para><para><simplesect kind="return"><para>A node object, you should delete it after this call returns. This contains the item and its id. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="320" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="319" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="function" id="a00005_1aa57ef0c4c9f75dbd5408f7e03cdccc2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;::~LRUCache</definition>
+        <argsstring>()</argsstring>
+        <name>~LRUCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="204" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="203" bodyend="209"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implements a relatively simple and low-overhead LRU-style caching mechanism. </para>    </briefdescription>
+    <detaileddescription>
+<para>A key thing here is to remember that when you pass this thing an object, it *owns* that object (if you set deleteObject to true). So once it falls over the edge of the LRU list, then it is no longer valid. So basically, anytime that you need to use an item stored in here, you must query for it.</para><para>Is this a good idea? That sounds like its asking for trouble. However, I can&apos;t think of a good reason why you would keep references for more than one object anyways...</para><para>Ok, I can think of a problem case: recursion. If you call something that uses this, which uses this... and one of them falls off the end of the list, then you&apos;re screwed.</para><para>If LRUCACHE_DEBUG == true, then this will keep statistics about hits and misses.</para><para><xrefsect id="todo_1_todo000004"><xreftitle>Todo</xreftitle><xrefdescription><para>Add locks or something to that effect..</para></xrefdescription></xrefsect></para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="482">
+        <label>LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;</label>
+        <link refid="a00005"/>
+        <childnode refid="483" relation="usage">
+          <edgelabel>m_last</edgelabel>
+          <edgelabel>m_first</edgelabel>
+        </childnode>
+      </node>
+      <node id="483">
+        <label>LRUCacheNode&lt; CachedObjectType, IdType, deleteType &gt;</label>
+        <link refid="a00006"/>
+        <childnode refid="483" relation="usage">
+          <edgelabel>prev</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" line="182" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/lru.h" bodystart="182" bodyend="356"/>
+    <listofallmembers>
+      <member refid="a00005_1d9c503c0b8f77c161f80205495bb4b2e" prot="public" virt="non-virtual"><scope>LRUCache</scope><name>add</name></member>
+      <member refid="a00005_186654d056acc1762c34f0a8ef47f1e35" prot="public" virt="non-virtual"><scope>LRUCache</scope><name>get</name></member>
+      <member refid="a00005_16477b5cfa837db678c128743fa29581c" prot="public" virt="non-virtual"><scope>LRUCache</scope><name>LRUCache</name></member>
+      <member refid="a00005_1e8204031b9e18a2015d741a33e568669" prot="private" virt="non-virtual"><scope>LRUCache</scope><name>m_first</name></member>
+      <member refid="a00005_185e8562db184199c9f9db52e9662847f" prot="private" virt="non-virtual"><scope>LRUCache</scope><name>m_last</name></member>
+      <member refid="a00005_1b801b0230f47d06f0283649fd88c2d0a" prot="private" virt="non-virtual"><scope>LRUCache</scope><name>m_max_nodes</name></member>
+      <member refid="a00005_1e637e7230e5b58e827c204995eeb2afb" prot="private" virt="non-virtual"><scope>LRUCache</scope><name>m_nodes</name></member>
+      <member refid="a00005_16411bcd6a31b6fdec535693994a6328c" prot="public" virt="non-virtual"><scope>LRUCache</scope><name>Node</name></member>
+      <member refid="a00005_179f9a43f0345076e86050c6cebdfa0e7" prot="public" virt="non-virtual"><scope>LRUCache</scope><name>NodeArray</name></member>
+      <member refid="a00005_13cc85ab629d0ea0414adaf8f148dba05" prot="public" virt="non-virtual"><scope>LRUCache</scope><name>NodeIterator</name></member>
+      <member refid="a00005_104b7e1f3f7dd1c1beacc51c0af541f8e" prot="public" virt="non-virtual"><scope>LRUCache</scope><name>NodeSorter</name></member>
+      <member refid="a00005_1b34c7737ff4ca63d5bdcef9f35edf08b" prot="public" virt="non-virtual"><scope>LRUCache</scope><name>removeOne</name></member>
+      <member refid="a00005_1e6a856c278487a3d36f84d528a1b2908" prot="public" virt="non-virtual"><scope>LRUCache</scope><name>size_type</name></member>
+      <member refid="a00005_1aa57ef0c4c9f75dbd5408f7e03cdccc2" prot="public" virt="non-virtual"><scope>LRUCache</scope><name>~LRUCache</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

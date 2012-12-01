@@ -1,0 +1,966 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.5.7">
+  <compound refid="a00170" kind="class"><name>std::allocator</name>
+    <member refid="a00170_155f88dab1194d6b8a34e46017c4dfd79" kind="variable"><name>elements</name></member>
+  </compound>
+  <compound refid="a00171" kind="class"><name>std::auto_ptr</name>
+    <member refid="a00171_1076c936287003dc557981f9ccec1d841" kind="variable"><name>ptr</name></member>
+  </compound>
+  <compound refid="a00172" kind="class"><name>std::bad_alloc</name>
+  </compound>
+  <compound refid="a00173" kind="class"><name>std::bad_cast</name>
+  </compound>
+  <compound refid="a00174" kind="class"><name>std::bad_exception</name>
+  </compound>
+  <compound refid="a00175" kind="class"><name>std::bad_typeid</name>
+  </compound>
+  <compound refid="a00176" kind="class"><name>std::basic_fstream</name>
+  </compound>
+  <compound refid="a00177" kind="class"><name>std::basic_ifstream</name>
+  </compound>
+  <compound refid="a00178" kind="class"><name>std::basic_ios</name>
+  </compound>
+  <compound refid="a00179" kind="class"><name>std::basic_iostream</name>
+  </compound>
+  <compound refid="a00180" kind="class"><name>std::basic_istream</name>
+  </compound>
+  <compound refid="a00181" kind="class"><name>std::basic_istringstream</name>
+  </compound>
+  <compound refid="a00182" kind="class"><name>std::basic_ofstream</name>
+  </compound>
+  <compound refid="a00183" kind="class"><name>std::basic_ostream</name>
+  </compound>
+  <compound refid="a00184" kind="class"><name>std::basic_ostringstream</name>
+  </compound>
+  <compound refid="a00185" kind="class"><name>std::basic_string</name>
+  </compound>
+  <compound refid="a00231" kind="class"><name>std::basic_string::const_iterator</name>
+  </compound>
+  <compound refid="a00232" kind="class"><name>std::basic_string::const_reverse_iterator</name>
+  </compound>
+  <compound refid="a00233" kind="class"><name>std::basic_string::iterator</name>
+  </compound>
+  <compound refid="a00234" kind="class"><name>std::basic_string::reverse_iterator</name>
+  </compound>
+  <compound refid="a00186" kind="class"><name>std::basic_stringstream</name>
+  </compound>
+  <compound refid="a00187" kind="class"><name>std::bitset</name>
+  </compound>
+  <compound refid="a00001" kind="class"><name>BTree</name>
+    <member refid="a00001_10941e161bad609defc47d3b09939e9f8" kind="function"><name>Begin</name></member>
+    <member refid="a00001_1ce71aba8c57958978a31d993cf822d6c" kind="function"><name>GetTraverser</name></member>
+    <member refid="a00001_184028cac8fb514413ee73361ba678a5e" kind="function"><name>Destroy</name></member>
+    <member refid="a00001_1ae74f51fe733b3c48ebff53510dea2cb" kind="function"><name>GetErrorCode</name></member>
+    <member refid="a00001_16d1943d72e893359a142ded378de6cbe" kind="function"><name>Initialize</name></member>
+    <member refid="a00001_1661de2670698ce4317cad22e7fd19d1d" kind="function"><name>IsOk</name></member>
+    <member refid="a00001_145a144d9388ab70b0530054b40c0526e" kind="typedef"><name>Backend</name></member>
+    <member refid="a00001_1a3231d6c9e4a330ef179b7cd4750e9e6" kind="typedef"><name>BackendArgs</name></member>
+    <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22" kind="enum"><name>ErrorCode</name></member>
+    <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22bb47c28aec1ced42b66348104cf6a47d" kind="enumvalue"><name>ERR_NONE</name></member>
+    <member refid="a00001_16b04b9e3852517961c85dc73bc44ec2212aa3c0e4974682436aa46641a984fd0" kind="enumvalue"><name>ERR_CREATE_NODE_IN_SPLIT</name></member>
+    <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22a43ec1dd2952f90ab1a6d1826597ceaf" kind="enumvalue"><name>ERR_CREATE_ROOT</name></member>
+    <member refid="a00001_16b04b9e3852517961c85dc73bc44ec221d79f8f0158f37b177a43f3d52ecd81a" kind="enumvalue"><name>ERR_CREATE_SPLIT_ROOT</name></member>
+    <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22694c0b0b4b42aa897efb16cd2e115148" kind="enumvalue"><name>ERR_GET_LEAFNODE</name></member>
+    <member refid="a00001_16b04b9e3852517961c85dc73bc44ec2245df4b4b09815bca928b3b5363f5fae1" kind="enumvalue"><name>ERR_GET_NODE</name></member>
+    <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22cf74960d8869e3b5bcb8a24f6587d51a" kind="enumvalue"><name>ERR_GET_ROOT</name></member>
+    <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22d6eff8d66835479d5d6e9cce43a448c5" kind="enumvalue"><name>ERR_GET_SPLIT_ROOT</name></member>
+    <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22dd4e0a9175751ffa51219bb63f013a5f" kind="enumvalue"><name>ERR_PROPAGATE_SPLIT</name></member>
+    <member refid="a00001_16b04b9e3852517961c85dc73bc44ec226d14794bebdece1056d387ce27aae4b2" kind="enumvalue"><name>ERR_ITEM_EXISTS</name></member>
+    <member refid="a00001_1be734097976f0426326957a07cfdbbed" kind="typedef"><name>IdType</name></member>
+    <member refid="a00001_135363ef010d53e88d0e358bf193fef09" kind="typedef"><name>Iterator</name></member>
+    <member refid="a00001_1f801a917b495912cbbb239a3859be6d4" kind="typedef"><name>KeyType</name></member>
+    <member refid="a00001_11a7c274ae1c562a385a392fcb45ce531" kind="typedef"><name>LeafItem</name></member>
+    <member refid="a00001_165ac78bb4f7221c4d45e6b57acb41e37" kind="typedef"><name>LeafItemArray</name></member>
+    <member refid="a00001_1d67a7c4c0610439bf31806669e4857b7" kind="typedef"><name>LeafItemIterator</name></member>
+    <member refid="a00001_1d43bcd1d90ea300e977ad1b66bdc3a48" kind="typedef"><name>LeafNode</name></member>
+    <member refid="a00001_19ab7074c4eeac904c4960537af9a13fe" kind="typedef"><name>LeafType</name></member>
+    <member refid="a00001_1c622f1cedbc6f94ed4f6f97cf4bbd4fa" kind="typedef"><name>Node</name></member>
+    <member refid="a00001_13fe1470e08c78343f51144a4261927f2" kind="typedef"><name>NodeBase</name></member>
+    <member refid="a00001_10331e938f93584a419282437a28d9c82" kind="typedef"><name>NodeItem</name></member>
+    <member refid="a00001_12ed9fcc51681f507ab263958584bf6fa" kind="typedef"><name>NodeItemArray</name></member>
+    <member refid="a00001_14688282b76f348be7a607ea10eea14a0" kind="typedef"><name>NodeItemIterator</name></member>
+    <member refid="a00001_1aad0fd7bde6a8a6ac1473c961270f1eb" kind="typedef"><name>size_type</name></member>
+    <member refid="a00001_16a351f9e18e51d3adf239afb363d77c6" kind="typedef"><name>this_type</name></member>
+    <member refid="a00001_1356381169e6ec6c29c9d945e42afd8ea" kind="typedef"><name>Traverser</name></member>
+    <member refid="a00001_195365baf630836d7653215c102d0b6b7" kind="friend"><name>BTreeTraverser&lt; this_type &gt;</name></member>
+    <member refid="a00001_14cbaace943cc00adb7a387aa580cf3d1" kind="variable"><name>backend</name></member>
+    <member refid="a00001_1d39a666b52f6a21ecd23693eba39eaa9" kind="variable"><name>m_inserts</name></member>
+    <member refid="a00001_1c2c2d2ca81569327b47410ae17e35c21" kind="variable"><name>m_lastError</name></member>
+    <member refid="a00001_1e3adf097939b1bce7fba5a5d55ff8907" kind="function"><name>BTree</name></member>
+    <member refid="a00001_1c0061021d9258709326bace218172bfc" kind="function"><name>GetHeight</name></member>
+    <member refid="a00001_1bdf9810775b2f8cf9599161332b0dd92" kind="function"><name>GetItemCount</name></member>
+    <member refid="a00001_1ab50f07342832b39c3bd29aacd283dfb" kind="function"><name>Insert</name></member>
+    <member refid="a00001_147c195fa985ccd957c54fe6970d64589" kind="function"><name>Print</name></member>
+    <member refid="a00001_180aa7d0aa00e7d46655894a167436986" kind="function"><name>Verify</name></member>
+    <member refid="a00001_11d0dbad21ec825a7c8e5625709010e6c" kind="function"><name>~BTree</name></member>
+    <member refid="a00001_1bdb68e8faf1cf9ad9a1f4bbb11a58df2" kind="function"><name>FinishNodeSplit</name></member>
+    <member refid="a00001_17e892d97c6b579f322ad1e5399d76f41" kind="function"><name>InsertInternal</name></member>
+    <member refid="a00001_134428d82513b57b9ea2b03f2539c0961" kind="function"><name>PropagateSplit</name></member>
+    <member refid="a00001_1b2ff4f5cf2c3cefbe3492dedd6afc46b" kind="function"><name>Split</name></member>
+    <member refid="a00001_1b9de0b0b136f069ae866f34c0503551b" kind="function"><name>SplitRoot</name></member>
+  </compound>
+  <compound refid="a00002" kind="struct"><name>BTreeNode</name>
+    <member refid="a00002_19bb5fda8edc5a1df582ccfe44eb71a90" kind="typedef"><name>IdType</name></member>
+    <member refid="a00002_19868805bffe57a55fa1ad1b2c5788d09" kind="typedef"><name>Item</name></member>
+    <member refid="a00002_17059295562ffdcbd33005c1ba340e2bf" kind="typedef"><name>ItemArray</name></member>
+    <member refid="a00002_156c5e836c76cb18d512f9e144e6158e0" kind="variable"><name>end_id</name></member>
+    <member refid="a00002_1095ea381c0927f23cf72b908d3968b3f" kind="variable"><name>is_dirty</name></member>
+    <member refid="a00002_12462d8614df04f0efc7fdbdb0d2d4037" kind="variable"><name>items</name></member>
+    <member refid="a00002_1f1397918891996b699a610b384db6b75" kind="function"><name>BTreeNode</name></member>
+    <member refid="a00002_1f1983f111a095e28f9a60674ec23e882" kind="function"><name>BTreeNode</name></member>
+    <member refid="a00002_14e3bf1358c177df511fce40c073b9a8c" kind="function"><name>get_item_id</name></member>
+    <member refid="a00002_1ab68c76d6595f8cdf42bba4bdcc2b435" kind="function"><name>Serialize</name></member>
+  </compound>
+  <compound refid="a00003" kind="class"><name>BTreeTraverser</name>
+    <member refid="a00003_1711047aba2a0d969ccc8e7a3e8988b0e" kind="typedef"><name>ErrorCode</name></member>
+    <member refid="a00003_140f4ce987c76a0c90b8c5deae15aab95" kind="typedef"><name>IdType</name></member>
+    <member refid="a00003_1145d86d4daee6431b21b662d35e3fdb2" kind="typedef"><name>KeyType</name></member>
+    <member refid="a00003_1cf66b578e0e0e6792739c36a87430116" kind="typedef"><name>LeafItem</name></member>
+    <member refid="a00003_14dea341213e70bcab7f9c2791cc7893b" kind="typedef"><name>LeafItemIterator</name></member>
+    <member refid="a00003_1760d2644f55b53fd82c5c08719f2283d" kind="typedef"><name>LeafNode</name></member>
+    <member refid="a00003_1cb2effd50c1711dfeac463415d11033f" kind="typedef"><name>Node</name></member>
+    <member refid="a00003_1f8cbfa738d5c055b54b245e41b1b6e7a" kind="typedef"><name>NodeItem</name></member>
+    <member refid="a00003_151ddde1e9866930c398839b29ed1d684" kind="typedef"><name>NodeItemIterator</name></member>
+    <member refid="a00003_11f7b4ebaf73d8f9c9c251a37088b9bc9" kind="variable"><name>id</name></member>
+    <member refid="a00003_1f8b74ba645e002f9f28806842937aae0" kind="variable"><name>idx</name></member>
+    <member refid="a00003_101d38dd88c5e75e0bcb4344a7c6c2ea0" kind="variable"><name>leaf</name></member>
+    <member refid="a00003_16733a5d3ab8325dbc403dc4d9899b424" kind="variable"><name>m_inserts</name></member>
+    <member refid="a00003_1b4face5f3dffad92870c2d57bed994e0" kind="variable"><name>m_tree</name></member>
+    <member refid="a00003_17b9217dce469fbd381841ca6f6e03d91" kind="function"><name>BTreeTraverser</name></member>
+    <member refid="a00003_1b58a01faea56505ed2fd41510c83266d" kind="function"><name>BTreeTraverser</name></member>
+    <member refid="a00003_1d83693448658ff054a53a64be02466a8" kind="function"><name>operator=</name></member>
+    <member refid="a00003_161b1544d89b8df47594c11a56c41fb93" kind="function"><name>traverse_to</name></member>
+    <member refid="a00003_1c9734d7d618e849578dad013caf6a994" kind="function"><name>begin</name></member>
+    <member refid="a00003_12a20a6c28bc7de4bf818fa153a389d9d" kind="function"><name>BTreeTraverser</name></member>
+    <member refid="a00003_140e592d8700acf785548411ef090d9fb" kind="function"><name>current</name></member>
+    <member refid="a00003_1e3f37ca45b3e37de7969cd134f72bb59" kind="function"><name>current</name></member>
+    <member refid="a00003_17eef96c0e3e262e35fd59dada2a8d8c9" kind="function"><name>end</name></member>
+    <member refid="a00003_1c4e1935dff52e2ac17ffda583c2dea63" kind="function"><name>find</name></member>
+    <member refid="a00003_102219cd40c2dbed41d5e9063a8ff30ca" kind="function"><name>next</name></member>
+    <member refid="a00003_1618551b1df0c5af62ae8b2531305b518" kind="function"><name>reset</name></member>
+    <member refid="a00003_1aa113c2152f681e594d73884c36394ad" kind="function"><name>set_dirty</name></member>
+  </compound>
+  <compound refid="a00188" kind="class"><name>std::complex</name>
+  </compound>
+  <compound refid="a00189" kind="class"><name>std::deque</name>
+    <member refid="a00189_1090b92581de438d2e14bedc190f0b0f9" kind="variable"><name>elements</name></member>
+  </compound>
+  <compound refid="a00235" kind="class"><name>std::deque::const_iterator</name>
+  </compound>
+  <compound refid="a00236" kind="class"><name>std::deque::const_reverse_iterator</name>
+  </compound>
+  <compound refid="a00237" kind="class"><name>std::deque::iterator</name>
+  </compound>
+  <compound refid="a00238" kind="class"><name>std::deque::reverse_iterator</name>
+  </compound>
+  <compound refid="a00004" kind="class"><name>DiskTree</name>
+  </compound>
+  <compound refid="a00239" kind="class"><name>DiskTreeBackend</name>
+    <member refid="a00239_1ec55631c3443b804f0d352d676704e88" kind="typedef"><name>Args</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4" kind="enum"><name>ErrorCode</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4db0284cbb6bf70f0e85d195f1a2f2ce1" kind="enumvalue"><name>ERR_NONE</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d416243ce450c29f389507055a3e6e2105" kind="enumvalue"><name>ERR_OPEN_NODE_FILE</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d46ac9d40f05ecf5859f3483fd12cc0c4f" kind="enumvalue"><name>ERR_OPEN_LEAFNODE_FILE</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4acaa9dd63ed89a023782705cf64264c8" kind="enumvalue"><name>ERR_WRITE_NODE_HEADER</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d465a04212c7a822369c1364fcc2e7d2d6" kind="enumvalue"><name>ERR_WRITE_LEAF_HEADER</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d44d120adfefded0b2bfde65fb43879752" kind="enumvalue"><name>ERR_READ_NODE_HEADER</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4c3fc5ff865cb262de96428c2bd4cd9c0" kind="enumvalue"><name>ERR_READ_LEAF_HEADER</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d45ce62db1afc1ec4df722fd30eae4b4a6" kind="enumvalue"><name>ERR_CREATE_ROOT_WRITE_LEAF</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d435202795eb689c28961323e28738d5c4" kind="enumvalue"><name>ERR_CREATE_ROOT_WRITE_NODE</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d45c276801dc2fde2aab048b120aaca532" kind="enumvalue"><name>ERR_GET_NODE_LOAD</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4bdd4c0464b3e914b00ae48f25ae1c7e9" kind="enumvalue"><name>ERR_GET_LEAFNODE_LOAD</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d4eeee6da2bc5f24379aedf7191445439d" kind="enumvalue"><name>ERR_CREATE_NODE_WRITE</name></member>
+    <member refid="a00239_1b8182a8bf9fae068ebe2e74fff6759d436bef85388dc738cafa4324e6ed2bd03" kind="enumvalue"><name>ERR_CREATE_LEAFNODE_WRITE</name></member>
+    <member refid="a00239_1cab9cfb240fe24da75dd499856f65fb0" kind="typedef"><name>IdType</name></member>
+    <member refid="a00239_1f435275e8bcc31636357bf4bb71002a5" kind="typedef"><name>LeafCacheNode</name></member>
+    <member refid="a00239_139c727d7572a082c2b49e709cb35b93e" kind="typedef"><name>LeafNode</name></member>
+    <member refid="a00239_1883870fb8f74f52c67542d9171dead96" kind="typedef"><name>LeafNodeCache</name></member>
+    <member refid="a00239_1d215279664b7a5b3536a5da4fca281f6" kind="typedef"><name>LeafNodeFile</name></member>
+    <member refid="a00239_1d701cf405a49f88041384958ce79871c" kind="typedef"><name>Node</name></member>
+    <member refid="a00239_129e8e62ef8f6834d83484be0d397530b" kind="typedef"><name>NodeBase</name></member>
+    <member refid="a00239_18f3f0c4ef742d4b10eb7af28898540a6" kind="typedef"><name>NodeCache</name></member>
+    <member refid="a00239_172d5132650d8f477fb5cd2d29cacad80" kind="typedef"><name>NodeCacheNode</name></member>
+    <member refid="a00239_14169f20334055e8eb0482fb8bf001706" kind="typedef"><name>NodeFile</name></member>
+    <member refid="a00239_1c9d61b45b1ef3ba7d27ccc37edb38ade" kind="typedef"><name>NodeItem</name></member>
+    <member refid="a00239_19b26bac50d3cc4a906ecfadf3328271f" kind="typedef"><name>size_type</name></member>
+    <member refid="a00239_1f5895cd52250fa9ee776a28e145cb6ef" kind="variable"><name>m_rootId</name></member>
+    <member refid="a00239_1a8536ff4897eb17b5e393f9426590c38" kind="variable"><name>m_size</name></member>
+    <member refid="a00239_10c92c90663477e8fa98fa23d7f3e8705" kind="variable"><name>m_treeHeight</name></member>
+    <member refid="a00239_1a0d37a4c2a76530e823660b173839717" kind="variable"><name>custom_signature</name></member>
+    <member refid="a00239_19c29683ddb6341d9c8efafe8b0df9d5a" kind="variable"><name>m_initialized</name></member>
+    <member refid="a00239_1ec9bacaf6f15737545c23aa7f78168d0" kind="variable"><name>m_lastError</name></member>
+    <member refid="a00239_1968dbf7b4e709d36ae02f1428769b18c" kind="variable"><name>m_leaf_node_count</name></member>
+    <member refid="a00239_10d0164859ae9c0c30bdb175ad7e3c8ff" kind="variable"><name>m_leafNodeCache</name></member>
+    <member refid="a00239_134dd0bcd1369287646fd4cb7294ab67c" kind="variable"><name>m_leafNodeFile</name></member>
+    <member refid="a00239_181a45d492efd423de6c6a269ee25f10b" kind="variable"><name>m_node_count</name></member>
+    <member refid="a00239_1d9df5f667311ac32bdab960541beaa3f" kind="variable"><name>m_nodeCache</name></member>
+    <member refid="a00239_1d3cd9d996cbd9eaaf9dd6b4b77bf65f7" kind="variable"><name>m_nodeFile</name></member>
+    <member refid="a00239_13b955397704abe85aff857fe196dea1a" kind="variable"><name>m_root</name></member>
+    <member refid="a00239_11765b9670a887c85c9483fed0fce639d" kind="function"><name>create_leaf_node</name></member>
+    <member refid="a00239_10e9d229ddf8aac466ed2ebaa7c459309" kind="function"><name>create_node</name></member>
+    <member refid="a00239_1d1084b6476f5127ebb0a2c5112c0d37f" kind="function"><name>create_root_node</name></member>
+    <member refid="a00239_14a2f7ca78e96228043e8f80b77d52ec2" kind="function"><name>Destroy</name></member>
+    <member refid="a00239_10355fe662dbc12796e00d6890be8e62f" kind="function"><name>DiskTreeBackend</name></member>
+    <member refid="a00239_12c670b5f2d86d5c179b74fc061c19659" kind="function"><name>get_leaf_node</name></member>
+    <member refid="a00239_14fafbe103a0cce788a1a09b192f51bde" kind="function"><name>get_node</name></member>
+    <member refid="a00239_178046247f10ff64c6d6fb05819cb3738" kind="function"><name>GetErrorCode</name></member>
+    <member refid="a00239_1843482997a04fe5c4f4a0b3151de03d8" kind="function"><name>GetLeafNodeCount</name></member>
+    <member refid="a00239_1d21420f1013aca4a0434a73fcf99498b" kind="function"><name>GetNodeCount</name></member>
+    <member refid="a00239_1dd85d106bbdb021e16a1f72333b00016" kind="function"><name>Initialize</name></member>
+    <member refid="a00239_1a8b1f17ba484f602ad5629ba8aa59b29" kind="function"><name>new_leaf_node_id</name></member>
+    <member refid="a00239_189fd6a0dca5206663cd6eea2ff4f378d" kind="function"><name>new_node_id</name></member>
+    <member refid="a00239_1e97fcc9a6e41460a42d60243116aec4b" kind="function"><name>~DiskTreeBackend</name></member>
+    <member refid="a00239_18ff497805478510e15f82e31829877ad" kind="function"><name>ClearCache</name></member>
+    <member refid="a00239_1f7daac3bad041eb54f2d39deff80dd6a" kind="function"><name>ReadLeafHeader</name></member>
+    <member refid="a00239_1fee376c564792d2e23eb3c42a0bc56d8" kind="function"><name>ReadNodeHeader</name></member>
+    <member refid="a00239_182f153520b80b716578625af7b51fa11" kind="function"><name>write_leaf</name></member>
+    <member refid="a00239_19a58af9e81a929affe503509f19fe482" kind="function"><name>write_node</name></member>
+    <member refid="a00239_1aefed202ecc8c6fb86b0300222840fc1" kind="function"><name>WriteLeafHeader</name></member>
+    <member refid="a00239_1758afd2cac62a45123bc5d0478a04099" kind="function"><name>WriteNodeHeader</name></member>
+  </compound>
+  <compound refid="a00240" kind="struct"><name>DiskTreeBackendArgs</name>
+    <member refid="a00240_1defcb19753ab060bad1bba361c403110" kind="variable"><name>filename</name></member>
+    <member refid="a00240_1372de13c73dcd186a427c2e5a8031b8a" kind="variable"><name>leafNodeCacheSz</name></member>
+    <member refid="a00240_12f052fa4bf0bf577dd5a62b3a6cb2404" kind="variable"><name>nodeCacheSz</name></member>
+    <member refid="a00240_117bc98f3641caf8b85204e899f080931" kind="variable"><name>signature</name></member>
+    <member refid="a00240_15ef770ff8cfd7f7fa8181acd30e22031" kind="function"><name>DiskTreeBackendArgs</name></member>
+  </compound>
+  <compound refid="a00190" kind="class"><name>std::domain_error</name>
+  </compound>
+  <compound refid="a00191" kind="class"><name>std::exception</name>
+  </compound>
+  <compound refid="a00192" kind="class"><name>std::fstream</name>
+  </compound>
+  <compound refid="a00193" kind="class"><name>std::ifstream</name>
+  </compound>
+  <compound refid="a00194" kind="class"><name>std::invalid_argument</name>
+  </compound>
+  <compound refid="a00195" kind="class"><name>std::ios</name>
+  </compound>
+  <compound refid="a00196" kind="class"><name>std::ios_base</name>
+  </compound>
+  <compound refid="a00241" kind="class"><name>std::ios_base::failure</name>
+  </compound>
+  <compound refid="a00197" kind="class"><name>std::istream</name>
+  </compound>
+  <compound refid="a00198" kind="class"><name>std::istringstream</name>
+  </compound>
+  <compound refid="a00199" kind="class"><name>std::length_error</name>
+  </compound>
+  <compound refid="a00200" kind="class"><name>std::list</name>
+    <member refid="a00200_1682e5c7c91eb377d0cb4f019b2b81a5d" kind="variable"><name>elements</name></member>
+  </compound>
+  <compound refid="a00242" kind="class"><name>std::list::const_iterator</name>
+  </compound>
+  <compound refid="a00243" kind="class"><name>std::list::const_reverse_iterator</name>
+  </compound>
+  <compound refid="a00244" kind="class"><name>std::list::iterator</name>
+  </compound>
+  <compound refid="a00245" kind="class"><name>std::list::reverse_iterator</name>
+  </compound>
+  <compound refid="a00201" kind="class"><name>std::logic_error</name>
+  </compound>
+  <compound refid="a00005" kind="class"><name>LRUCache</name>
+    <member refid="a00005_16411bcd6a31b6fdec535693994a6328c" kind="typedef"><name>Node</name></member>
+    <member refid="a00005_179f9a43f0345076e86050c6cebdfa0e7" kind="typedef"><name>NodeArray</name></member>
+    <member refid="a00005_13cc85ab629d0ea0414adaf8f148dba05" kind="typedef"><name>NodeIterator</name></member>
+    <member refid="a00005_104b7e1f3f7dd1c1beacc51c0af541f8e" kind="typedef"><name>NodeSorter</name></member>
+    <member refid="a00005_1e6a856c278487a3d36f84d528a1b2908" kind="typedef"><name>size_type</name></member>
+    <member refid="a00005_1e8204031b9e18a2015d741a33e568669" kind="variable"><name>m_first</name></member>
+    <member refid="a00005_185e8562db184199c9f9db52e9662847f" kind="variable"><name>m_last</name></member>
+    <member refid="a00005_1b801b0230f47d06f0283649fd88c2d0a" kind="variable"><name>m_max_nodes</name></member>
+    <member refid="a00005_1e637e7230e5b58e827c204995eeb2afb" kind="variable"><name>m_nodes</name></member>
+    <member refid="a00005_1d9c503c0b8f77c161f80205495bb4b2e" kind="function"><name>add</name></member>
+    <member refid="a00005_186654d056acc1762c34f0a8ef47f1e35" kind="function"><name>get</name></member>
+    <member refid="a00005_16477b5cfa837db678c128743fa29581c" kind="function"><name>LRUCache</name></member>
+    <member refid="a00005_1b34c7737ff4ca63d5bdcef9f35edf08b" kind="function"><name>removeOne</name></member>
+    <member refid="a00005_1aa57ef0c4c9f75dbd5408f7e03cdccc2" kind="function"><name>~LRUCache</name></member>
+  </compound>
+  <compound refid="a00006" kind="struct"><name>LRUCacheNode</name>
+    <member refid="a00006_1451144449da5649fd920fadf240ec192" kind="typedef"><name>_Self</name></member>
+    <member refid="a00006_1a9f8fca3a3cd842ce4ef139ecb79e668" kind="variable"><name>id</name></member>
+    <member refid="a00006_1db212348500ed1c6267d3450d2c380a2" kind="variable"><name>next</name></member>
+    <member refid="a00006_1b81202afef8325e106875742c07d11ab" kind="variable"><name>object</name></member>
+    <member refid="a00006_1d626cf2ba65d1b8bef4b58eabe014231" kind="variable"><name>prev</name></member>
+    <member refid="a00006_175815ba6ff9f20ee2e25e442d8f101a1" kind="function"><name>LRUCacheNode</name></member>
+  </compound>
+  <compound refid="a00007" kind="struct"><name>LRUCacheNode&lt; CachedObjectType, IdType, LRUDeleteArray &gt;</name>
+    <member refid="a00007_1b5b0c208df72d92cd1d395cd2cbe709c" kind="typedef"><name>_Self</name></member>
+    <member refid="a00007_1e5dadee3bad55b56c5f632b4255ff85e" kind="variable"><name>id</name></member>
+    <member refid="a00007_103ff3de8f90cf6925f3b2ee8adda7576" kind="variable"><name>next</name></member>
+    <member refid="a00007_1889e1c8e97b95b69733d1641cbe5c0c6" kind="variable"><name>object</name></member>
+    <member refid="a00007_10ea2ee091bb4b76ec1c784397162df8f" kind="variable"><name>prev</name></member>
+    <member refid="a00007_1fdbad572bd463fcc887be06cee1aa64b" kind="function"><name>LRUCacheNode</name></member>
+    <member refid="a00007_14f024469d3a0af0ba9353359361483f9" kind="function"><name>~LRUCacheNode</name></member>
+  </compound>
+  <compound refid="a00008" kind="struct"><name>LRUCacheNode&lt; CachedObjectType, IdType, LRUDeleteObject &gt;</name>
+    <member refid="a00008_12752fe4d2d3d413a9eb5cd6c3da8af8e" kind="typedef"><name>_Self</name></member>
+    <member refid="a00008_1449493463a4f3a3157d1ea74458f967d" kind="variable"><name>id</name></member>
+    <member refid="a00008_163cc0f961a86fa3ec6398e3b8f95f570" kind="variable"><name>next</name></member>
+    <member refid="a00008_183be6e75eeef490266b5935de2dadfb0" kind="variable"><name>object</name></member>
+    <member refid="a00008_1e82e801a3078a57c10b629bd01ac5d08" kind="variable"><name>prev</name></member>
+    <member refid="a00008_1301c2000fb1b688685fe36147c5284cf" kind="function"><name>LRUCacheNode</name></member>
+    <member refid="a00008_146becd621d85d931e669681807484229" kind="function"><name>~LRUCacheNode</name></member>
+  </compound>
+  <compound refid="a00009" kind="struct"><name>LRUCacheNode&lt; CachedObjectType, IdType, LRUFreeMalloc &gt;</name>
+    <member refid="a00009_128426dc9621e421c667801996d1aa942" kind="typedef"><name>_Self</name></member>
+    <member refid="a00009_1548a85d162059e9759ab051a60a7610b" kind="variable"><name>id</name></member>
+    <member refid="a00009_1d0fd50de5727847bfcbb9a1166fa2243" kind="variable"><name>next</name></member>
+    <member refid="a00009_136cf82bd125e57c73af59d5298498555" kind="variable"><name>object</name></member>
+    <member refid="a00009_190a81154e1a70a1044831d186706fa00" kind="variable"><name>prev</name></member>
+    <member refid="a00009_17f40952e57ccfc6b8c0716249fabc6a9" kind="function"><name>LRUCacheNode</name></member>
+    <member refid="a00009_148ee14998b2b80f3f9b426ca3dbf1f53" kind="function"><name>~LRUCacheNode</name></member>
+  </compound>
+  <compound refid="a00010" kind="struct"><name>LRUCacheNodeSorter</name>
+    <member refid="a00010_1825e5793f07827d678fcb1702fdf81c5" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="a00202" kind="class"><name>std::map</name>
+    <member refid="a00202_1c69fe575e214b796b8d9457b0c22469a" kind="variable"><name>elements</name></member>
+    <member refid="a00202_18dc2b3ed44acf51fb2bd3eb30b237269" kind="variable"><name>keys</name></member>
+  </compound>
+  <compound refid="a00246" kind="class"><name>std::map::const_iterator</name>
+  </compound>
+  <compound refid="a00247" kind="class"><name>std::map::const_reverse_iterator</name>
+  </compound>
+  <compound refid="a00248" kind="class"><name>std::map::iterator</name>
+  </compound>
+  <compound refid="a00249" kind="class"><name>std::map::reverse_iterator</name>
+  </compound>
+  <compound refid="a00011" kind="class"><name>MemoryTreeBackend</name>
+    <member refid="a00011_1e86acd69b9a5b32a338f83079a1d8e75" kind="typedef"><name>Args</name></member>
+    <member refid="a00011_145c066682a61af9874be393b765e4c04" kind="enum"><name>ErrorCode</name></member>
+    <member refid="a00011_145c066682a61af9874be393b765e4c0490afad3a318e7b3c6ee947a73e8ecf38" kind="enumvalue"><name>ERR_NONE</name></member>
+    <member refid="a00011_1c8d71476d00b925a142d8d570be61b75" kind="typedef"><name>IdType</name></member>
+    <member refid="a00011_1c933aed307dd339b01a33e346d5b6fd4" kind="typedef"><name>LeafNode</name></member>
+    <member refid="a00011_1298b8b62f4dc8cea52cb570faa889060" kind="typedef"><name>Node</name></member>
+    <member refid="a00011_157a864bb7a27c3a7d3dbe459757fb805" kind="typedef"><name>NodeBase</name></member>
+    <member refid="a00011_1e6c7a25ede7ee2bfdb7a79c5ee4a62c9" kind="typedef"><name>NodeItem</name></member>
+    <member refid="a00011_1cebf0b45fbd4a533126e8d835af2469d" kind="typedef"><name>size_type</name></member>
+    <member refid="a00011_1b70c8c74987540f01627ca5a7a1addfa" kind="variable"><name>m_rootId</name></member>
+    <member refid="a00011_15e30597fc6ba97dc0d90fd80b581e6b7" kind="variable"><name>m_size</name></member>
+    <member refid="a00011_154df75824db95670d7b6c1ca68e7f56c" kind="variable"><name>m_treeHeight</name></member>
+    <member refid="a00011_1bd913d854bbd785ce5074a740cb9a6e2" kind="function"><name>Clear</name></member>
+    <member refid="a00011_1c8d88b24b0d52ba9ecdc9e0c8f803efb" kind="function"><name>create_leaf_node</name></member>
+    <member refid="a00011_1a16c85a8add912496afd7f6c813df466" kind="function"><name>create_node</name></member>
+    <member refid="a00011_128ddb39baa83f959e897435ae3daf597" kind="function"><name>create_root_node</name></member>
+    <member refid="a00011_1a72b4603b41bce74defdd11fea3ffe98" kind="function"><name>get_leaf_node</name></member>
+    <member refid="a00011_197ee43d319257faba054b84447ea4847" kind="function"><name>get_node</name></member>
+    <member refid="a00011_19d93b63493b183e97efe840294867cf6" kind="function"><name>GetErrorCode</name></member>
+    <member refid="a00011_1160c214beb0bf2faabc788506e71acc9" kind="function"><name>Initialize</name></member>
+    <member refid="a00011_15afad5f3a18eb1defae5217922d8bb83" kind="function"><name>IsOk</name></member>
+    <member refid="a00011_132280c8a52ffd6f90ec913d64f1bdb27" kind="function"><name>MemoryTreeBackend</name></member>
+    <member refid="a00011_110aef9af413d5b7f4d8764d60b73405f" kind="function"><name>new_leaf_node_id</name></member>
+    <member refid="a00011_12326d6f9760c1d46786efda36d3309f7" kind="function"><name>new_node_id</name></member>
+    <member refid="a00011_17150e4292684f89f504308af4cab939e" kind="function"><name>~MemoryTreeBackend</name></member>
+  </compound>
+  <compound refid="a00250" kind="struct"><name>MemoryTreeBackendArgs</name>
+  </compound>
+  <compound refid="a00203" kind="class"><name>std::multimap</name>
+    <member refid="a00203_1bb7a4781b562bae0a54baeb5726ac28d" kind="variable"><name>elements</name></member>
+    <member refid="a00203_14e7d19eda5925ebfcf1e3dcba085cce5" kind="variable"><name>keys</name></member>
+  </compound>
+  <compound refid="a00251" kind="class"><name>std::multimap::const_iterator</name>
+  </compound>
+  <compound refid="a00252" kind="class"><name>std::multimap::const_reverse_iterator</name>
+  </compound>
+  <compound refid="a00253" kind="class"><name>std::multimap::iterator</name>
+  </compound>
+  <compound refid="a00254" kind="class"><name>std::multimap::reverse_iterator</name>
+  </compound>
+  <compound refid="a00204" kind="class"><name>std::multiset</name>
+    <member refid="a00204_193eb79091066c87f6dfb9d07c6c7cbcd" kind="variable"><name>keys</name></member>
+  </compound>
+  <compound refid="a00255" kind="class"><name>std::multiset::const_iterator</name>
+  </compound>
+  <compound refid="a00256" kind="class"><name>std::multiset::const_reverse_iterator</name>
+  </compound>
+  <compound refid="a00257" kind="class"><name>std::multiset::iterator</name>
+  </compound>
+  <compound refid="a00258" kind="class"><name>std::multiset::reverse_iterator</name>
+  </compound>
+  <compound refid="a00205" kind="class"><name>std::ofstream</name>
+  </compound>
+  <compound refid="a00206" kind="class"><name>std::ostream</name>
+  </compound>
+  <compound refid="a00207" kind="class"><name>std::ostringstream</name>
+  </compound>
+  <compound refid="a00208" kind="class"><name>std::out_of_range</name>
+  </compound>
+  <compound refid="a00209" kind="class"><name>std::overflow_error</name>
+  </compound>
+  <compound refid="a00210" kind="class"><name>std::priority_queue</name>
+    <member refid="a00210_14df2ae826d2b2caf4a6755adbd34a836" kind="variable"><name>elements</name></member>
+  </compound>
+  <compound refid="a00211" kind="class"><name>std::queue</name>
+    <member refid="a00211_1ebacc4dcb935c5e54144e881eb41e356" kind="variable"><name>elements</name></member>
+  </compound>
+  <compound refid="a00212" kind="class"><name>std::range_error</name>
+  </compound>
+  <compound refid="a00012" kind="struct"><name>record</name>
+    <member refid="a00012_1130a824f53e91001ae8656f26b5691f8" kind="function"><name>deserialize</name></member>
+    <member refid="a00012_132e74e6b2780dd28403cdc3a3aa1e466" kind="function"><name>serialize</name></member>
+  </compound>
+  <compound refid="a00259" kind="struct"><name>record&lt; T * &gt;</name>
+    <member refid="a00259_10105756421b56d4ff4262e5e6f80e1e2" kind="function"><name>deserialize</name></member>
+  </compound>
+  <compound refid="a00013" kind="class"><name>RTree</name>
+    <member refid="a00013_149838e1afbc587ea4b3331831ca7983c" kind="function"><name>Begin</name></member>
+    <member refid="a00013_116310cb8c4ec8d9c7f8b371caced5141" kind="function"><name>FindEnclosed</name></member>
+    <member refid="a00013_10a5b51cb5d2e776244c07af0a24d318f" kind="function"><name>FindOverlapping</name></member>
+    <member refid="a00013_173cc91cc6815efa9acaea74b294bb960" kind="function"><name>GetErrorCode</name></member>
+    <member refid="a00013_15fa9e0f480079e5e72127763c6eac990" kind="function"><name>Initialize</name></member>
+    <member refid="a00013_1d7399987b58b4c8e77fbe91085641037" kind="function"><name>IsOk</name></member>
+    <member refid="a00013_16a0b56a93da62f760939f62d5e841711" kind="typedef"><name>AcceptAny</name></member>
+    <member refid="a00013_1050521fcb0828dae353cd4aa8225a6b4" kind="typedef"><name>AcceptEnclosing</name></member>
+    <member refid="a00013_1b1cd11ac78af030c3a1edb30692a9c3e" kind="typedef"><name>AcceptOverlapping</name></member>
+    <member refid="a00013_1d94abdeb422dd45c69a5c9511ca4d6e5" kind="typedef"><name>Backend</name></member>
+    <member refid="a00013_1c69d197ed2d75739f82501da83cf5a7b" kind="typedef"><name>BackendArgs</name></member>
+    <member refid="a00013_1e8a1dfc0f3ac64857e49f91db915c89b" kind="typedef"><name>BoundingBox</name></member>
+    <member refid="a00013_131f396f9be9609fa55782ad4829c0b5b" kind="typedef"><name>EnclosedIterator</name></member>
+    <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed" kind="enum"><name>ErrorCode</name></member>
+    <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fedc5d7dea67938d9358da62555be104e3e" kind="enumvalue"><name>ERR_NONE</name></member>
+    <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed0023a3840bce9159e9baa2ea7347e80b" kind="enumvalue"><name>ERR_CREATE_ROOT</name></member>
+    <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed621a5aa7cc00c69a3b2fb20e84e95090" kind="enumvalue"><name>ERR_GET_LEAFNODE</name></member>
+    <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed2337106daa3e624bff05b9aaf852bc5d" kind="enumvalue"><name>ERR_GET_NODE</name></member>
+    <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed145d602148c6cd3c767cf4c47ce6387a" kind="enumvalue"><name>ERR_GET_ROOT</name></member>
+    <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed7674ddfa879fe665406acc02f3bf4e2c" kind="enumvalue"><name>ERR_CREATE_NODE_IN_SPLIT</name></member>
+    <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed5fd0d5ba3876b1df6cb72c4bb368476b" kind="enumvalue"><name>ERR_CREATE_SPLIT_ROOT</name></member>
+    <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed8f50587c1c6f407edfbb571a12e271e2" kind="enumvalue"><name>ERR_GET_SPLIT_ROOT</name></member>
+    <member refid="a00013_16e4e4db4b3b4f48d4d3881801f4c5fed0b58f47d3161b0602252280d4c520ab6" kind="enumvalue"><name>ERR_EXTEND_BOUNDS_FAILED</name></member>
+    <member refid="a00013_1148a74616ebab1138a50364e41430735" kind="typedef"><name>IdType</name></member>
+    <member refid="a00013_12acb045036b6b5778c5183cb573ac269" kind="typedef"><name>Iterator</name></member>
+    <member refid="a00013_16af6bb2ee0401a1f141f55ce431971ac" kind="typedef"><name>KeyType</name></member>
+    <member refid="a00013_14e26a3610d2271dcbb760bf4d7263f77" kind="typedef"><name>LeafItem</name></member>
+    <member refid="a00013_15a46af0df672bb6a70f25af0f2c290a9" kind="typedef"><name>LeafItemArray</name></member>
+    <member refid="a00013_1e2a75f62592b13676432d7cd4fea785d" kind="typedef"><name>LeafItemIterator</name></member>
+    <member refid="a00013_189ce586f5e8fe01930fcd95d9638e051" kind="typedef"><name>LeafNode</name></member>
+    <member refid="a00013_1d5de834085bbce66e4c76e1517ac9c89" kind="typedef"><name>LeafType</name></member>
+    <member refid="a00013_11a293f5d37b9ce0a311083d47e32477e" kind="typedef"><name>Node</name></member>
+    <member refid="a00013_14bd8f158d2348e3b4cd15dbf6d143b63" kind="typedef"><name>NodeBase</name></member>
+    <member refid="a00013_19a9e19d08177b06cc5455f7f81b5f983" kind="typedef"><name>NodeItem</name></member>
+    <member refid="a00013_1c457769a7ec256851f478a29e6f5ac9e" kind="typedef"><name>NodeItemArray</name></member>
+    <member refid="a00013_1eb51ffcf9a33c246c73a53848ce27a66" kind="typedef"><name>NodeItemIterator</name></member>
+    <member refid="a00013_115589782110bd0afdf547ae131568be9" kind="typedef"><name>OverlappingIterator</name></member>
+    <member refid="a00013_15346e1bbbcff05fdc69899736667a34c" kind="typedef"><name>size_type</name></member>
+    <member refid="a00013_1dff160509b37615cd3a9f13146c9fc28" kind="typedef"><name>this_type</name></member>
+    <member refid="a00013_1775575f3806172df875689499df6eba3" kind="friend"><name>RTreeIterator</name></member>
+    <member refid="a00013_1ebdb9bfab5c757d5879b90dcefa6a522" kind="variable"><name>backend</name></member>
+    <member refid="a00013_106f42c196f30a06b59bde81553f7dd74" kind="variable"><name>m_lastError</name></member>
+    <member refid="a00013_1598d6cb66c6ce6120bb24975462e1f1d" kind="function"><name>ExtendBounds</name></member>
+    <member refid="a00013_18d50cf62b427f2d4f3f4fa848d945c68" kind="function"><name>GetDimensions</name></member>
+    <member refid="a00013_161d8107796bdc5417a2a2925643373a5" kind="function"><name>GetHeight</name></member>
+    <member refid="a00013_1760f5098c2a20f8d50ca6a2dfb378836" kind="function"><name>GetItemCount</name></member>
+    <member refid="a00013_1e146de0605ea9cad42e6861922a5b3f2" kind="function"><name>Insert</name></member>
+    <member refid="a00013_1311d1bfc3a3f75f8ac2366602cbf009a" kind="function"><name>RTree</name></member>
+    <member refid="a00013_1a97acc30439f24081de19765d8598484" kind="function"><name>Verify</name></member>
+    <member refid="a00013_11e27473bad4be63f3b40ee370e6ce915" kind="function"><name>~RTree</name></member>
+    <member refid="a00013_163920f3d8d7eeaa86afe5edbc1603e45" kind="function"><name>ChooseSubtree</name></member>
+    <member refid="a00013_1851f56e6e30c300ea2daf89dddd155d0" kind="function"><name>FinishOverflowOperation</name></member>
+    <member refid="a00013_12ce6a56033c4800c773dc5a00f45fcc0" kind="function"><name>InsertInternal</name></member>
+    <member refid="a00013_187248b7b1c4d761fb19efeac31f1e0f4" kind="function"><name>OverflowTreatment</name></member>
+    <member refid="a00013_133b988bd477d0536157268c0c6924deb" kind="function"><name>QueueReinsert</name></member>
+    <member refid="a00013_1bd6b7027e546745e6f6cae7ce0b52825" kind="function"><name>SearchForItemAndSetBound</name></member>
+    <member refid="a00013_11c3734be1fded8b6c252a057a694c68f" kind="function"><name>Split</name></member>
+    <member refid="a00013_103c5b773673a5e2f9cd1a6721551b55d" kind="function"><name>SplitRoot</name></member>
+  </compound>
+  <compound refid="a00260" kind="struct"><name>RTree::OverflowItem</name>
+    <member refid="a00260_1ff8672fefd36d321ce80152ce02d179a" kind="variable"><name>oldBound</name></member>
+    <member refid="a00260_12305961c68dbc158fa171d247b5392fb" kind="variable"><name>removed_items</name></member>
+    <member refid="a00260_16477b02c86940779a6c885d720bf3f11" kind="variable"><name>splitItem</name></member>
+    <member refid="a00260_143d61cbf96dad3bdd2bb9c6bb33db6de" kind="function"><name>OverflowItem</name></member>
+    <member refid="a00260_17b06de554d21db50bdd5dead919d0029" kind="function"><name>~OverflowItem</name></member>
+  </compound>
+  <compound refid="a00014" kind="struct"><name>RTreeAcceptAny</name>
+    <member refid="a00014_1d154b83e17d2746d9aac8b44bf1793b1" kind="function"><name>operator()</name></member>
+    <member refid="a00014_14ecfeda6c988d2ce22634c7cd8a9d6a0" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="a00015" kind="struct"><name>RTreeAcceptEnclosing</name>
+    <member refid="a00015_149a6e7955392d02ebf44fd16eb2374d1" kind="variable"><name>m_bound</name></member>
+    <member refid="a00015_134140e007948fe62d9cac65b1431b31c" kind="function"><name>operator()</name></member>
+    <member refid="a00015_1b5cc97e7f521c49f5c63c79ccfb85e0f" kind="function"><name>operator()</name></member>
+    <member refid="a00015_1c2e191c6661ed580c4c6fdeef9560b5f" kind="function"><name>RTreeAcceptEnclosing</name></member>
+    <member refid="a00015_1e40a3c98f013131962b1a545051a0858" kind="function"><name>RTreeAcceptEnclosing</name></member>
+  </compound>
+  <compound refid="a00016" kind="struct"><name>RTreeAcceptOverlapping</name>
+    <member refid="a00016_14b7e88b7179b6c5c46f6ef8b4d5a89ff" kind="variable"><name>m_bound</name></member>
+    <member refid="a00016_1fc3eeade4b6f6f9cda1775c3c9f7f1f3" kind="function"><name>operator()</name></member>
+    <member refid="a00016_11cc305d0ed885f1b046f2bcd91c42c82" kind="function"><name>operator()</name></member>
+    <member refid="a00016_1a279217e450d144e76d48b1dd3dd9ebf" kind="function"><name>RTreeAcceptOverlapping</name></member>
+    <member refid="a00016_1cc1a960c7ee82bf2ce30b1e77d54f9f8" kind="function"><name>RTreeAcceptOverlapping</name></member>
+  </compound>
+  <compound refid="a00261" kind="struct"><name>RTreeBoundingBox</name>
+    <member refid="a00261_14f097aeee42a2491541f1cbc260b197b" kind="typedef"><name>this_type</name></member>
+    <member refid="a00261_14284bd50e735af4a438878e2a494f524" kind="variable"><name>edges</name></member>
+    <member refid="a00261_188795c138bc44fb91ed2eba29fb11646" kind="function"><name>area</name></member>
+    <member refid="a00261_1db2038bdbc9a7c4e8e5951b76b94877c" kind="function"><name>distanceFromCenter</name></member>
+    <member refid="a00261_1b0653a938aa24aab0e0fa519a91f149d" kind="function"><name>edgeDeltas</name></member>
+    <member refid="a00261_181c5a0e762df55ce5ac9a04c9f49913d" kind="function"><name>encloses</name></member>
+    <member refid="a00261_1060119d11374ff429b40be4b17834b7b" kind="function"><name>operator==</name></member>
+    <member refid="a00261_1225d2fd614728eb66de45e9b1e97c1b5" kind="function"><name>overlap</name></member>
+    <member refid="a00261_18e55d1e21912e5b90547915e1b617cd7" kind="function"><name>overlaps</name></member>
+    <member refid="a00261_159849ec6bce4dd9550aa95466a6bd6c1" kind="function"><name>reset</name></member>
+    <member refid="a00261_1af357690cf15da032052623ff2d01678" kind="function"><name>RTreeBoundingBox</name></member>
+    <member refid="a00261_1ea52c6fd0fc653799ffd3177ca402cfc" kind="function"><name>RTreeBoundingBox</name></member>
+    <member refid="a00261_1df2428206f2d90241eae027c398178ef" kind="function"><name>Serialize</name></member>
+    <member refid="a00261_149e1e89a0b9c2118317f23202915aef1" kind="function"><name>stretch</name></member>
+    <member refid="a00261_10b35b4c3608cbc42af6531721b089a81" kind="function"><name>ToString</name></member>
+    <member refid="a00261_1756f99efb103ea1f8ca2f3b5359de84a" kind="function"><name>verify</name></member>
+    <member refid="a00261_1af22ddb7c5c33b498c0dc7fc5e0bc5cd" kind="function"><name>MaximumBounds</name></member>
+  </compound>
+  <compound refid="a00017" kind="class"><name>RTreeIterator</name>
+    <member refid="a00017_1d60c61c77bfa9f8bcf3706830b022d9c" kind="typedef"><name>IdType</name></member>
+    <member refid="a00017_1d9a2dbe848fe0fd1785d62b86bc7382e" kind="typedef"><name>KeyType</name></member>
+    <member refid="a00017_1f062b136505e757f50b25004cdc29ae4" kind="typedef"><name>LeafItem</name></member>
+    <member refid="a00017_1bf3c78181801f0a3d5b24b5d4f41f26c" kind="typedef"><name>LeafItemIterator</name></member>
+    <member refid="a00017_1dbac4aa8cd8a67270c5bd18e33f1da69" kind="typedef"><name>LeafNode</name></member>
+    <member refid="a00017_156f0f7d524f1a085637882baeb92ffc5" kind="typedef"><name>Node</name></member>
+    <member refid="a00017_180ed9a5a95db560cee6f37db4fc01780" kind="typedef"><name>NodeItem</name></member>
+    <member refid="a00017_1c01c1479fdd0cc3bf03c8f5b847fa4a8" kind="typedef"><name>NodeItemIterator</name></member>
+    <member refid="a00017_1eb9f6e3ae51c3e1bfae0c4cd6e1bd159" kind="typedef"><name>BoundingBox</name></member>
+    <member refid="a00017_16b6fa045e23bef8638ed39c06f41c0f6" kind="variable"><name>accept</name></member>
+    <member refid="a00017_1bdb29fd189a914a3509c94e78549b955" kind="variable"><name>id</name></member>
+    <member refid="a00017_1453e6d15c1fbd10087fdbc9562e39e3d" kind="variable"><name>idx</name></member>
+    <member refid="a00017_1ef0a46c0262f33557e871fdc87f55674" kind="variable"><name>leaf</name></member>
+    <member refid="a00017_167449d76017f4ee182b28c497e257cda" kind="variable"><name>m_tree</name></member>
+    <member refid="a00017_1b07879df5f0d7208e945b04d3993e2e2" kind="function"><name>ExtendStackBounds</name></member>
+    <member refid="a00017_10969b4a2283099e131d5ff69a41a273a" kind="function"><name>operator=</name></member>
+    <member refid="a00017_16414f5f138f2b2d23e012ecc32cedc99" kind="function"><name>RTreeIterator</name></member>
+    <member refid="a00017_16e89cafd8fd22302f3ab1854266159f7" kind="function"><name>RTreeIterator</name></member>
+    <member refid="a00017_1baf38218c0ce8f5baa1f8f7d77a8c89b" kind="function"><name>traverse</name></member>
+    <member refid="a00017_171692035c2f1c18fa4b4807d6bd5c79f" kind="function"><name>current</name></member>
+    <member refid="a00017_1563e235674f5a604135791c1483d462e" kind="function"><name>current</name></member>
+    <member refid="a00017_12d84d7c5711e9d58bc4c4f2e0a75c52e" kind="function"><name>end</name></member>
+    <member refid="a00017_1aab00f06be1eadf148cde48558d6b8e5" kind="function"><name>next</name></member>
+    <member refid="a00017_1b77d9b39c319242f74e36bd9e44eda9c" kind="function"><name>RTreeIterator</name></member>
+    <member refid="a00017_1404769bab56dcf888ef17d12a1581fd5" kind="function"><name>set_dirty</name></member>
+  </compound>
+  <compound refid="a00018" kind="class"><name>RTreeNode</name>
+    <member refid="a00018_1b328e2a881be47b08d0d8c33c28083df" kind="typedef"><name>IdType</name></member>
+    <member refid="a00018_1c777621cdac752144fda63ab7c238053" kind="typedef"><name>Item</name></member>
+    <member refid="a00018_1070fbd9fa01acafc36bd273ad5ab9c77" kind="typedef"><name>ItemArray</name></member>
+    <member refid="a00018_1ae347610887727452633625b4c495b4d" kind="variable"><name>is_dirty</name></member>
+    <member refid="a00018_180350751cbebf83dd8eff34b6695e490" kind="variable"><name>items</name></member>
+    <member refid="a00018_127d5f95667bfdb033f62bf3c400d8615" kind="function"><name>get_item_id</name></member>
+    <member refid="a00018_12560856d00425b83961c766ab0c4486c" kind="function"><name>RTreeNode</name></member>
+    <member refid="a00018_13533996b97aebe92fb35ea2094ab0fb2" kind="function"><name>RTreeNode</name></member>
+    <member refid="a00018_144c99d2762ddd1c2b77a9f55974cccdc" kind="function"><name>Serialize</name></member>
+  </compound>
+  <compound refid="a00213" kind="class"><name>std::runtime_error</name>
+  </compound>
+  <compound refid="a00019" kind="class"><name>SerializedFile</name>
+    <member refid="a00019_1b65d15a8fbb4002a579b920ff79407ad" kind="typedef"><name>IdType</name></member>
+    <member refid="a00019_199054aed7a18dee9afd6ba6e8a3e347f" kind="enum"><name>SerializedFileError</name></member>
+    <member refid="a00019_199054aed7a18dee9afd6ba6e8a3e347ff46dacfda67278db2ea1a7247b5acdce" kind="enumvalue"><name>ERR_NONE</name></member>
+    <member refid="a00019_199054aed7a18dee9afd6ba6e8a3e347fece3cfbcbe16262f50266fa2b597b634" kind="enumvalue"><name>ERR_BAD_SEEK</name></member>
+    <member refid="a00019_199054aed7a18dee9afd6ba6e8a3e347f128d9a14eed7bd9e3ef32d4888189550" kind="enumvalue"><name>ERR_BAD_WRITE</name></member>
+    <member refid="a00019_199054aed7a18dee9afd6ba6e8a3e347f691a032468e8f0a09da4e989921deb58" kind="enumvalue"><name>ERR_BAD_READ</name></member>
+    <member refid="a00019_16772c0b609d718f936e60f3b71e31931" kind="typedef"><name>size_type</name></member>
+    <member refid="a00019_1da4c4d53f75ecd4a66a0b4fcf806fd85" kind="variable"><name>m_buf_end_id</name></member>
+    <member refid="a00019_1df38766ffe444cfa8863e4fad2b708e8" kind="variable"><name>m_buf_start_id</name></member>
+    <member refid="a00019_15ca310d4558c18731f6fa297565d524b" kind="variable"><name>m_buffer</name></member>
+    <member refid="a00019_1577d319d1815dc8533f9cb5b3e9fed10" kind="variable"><name>m_buffer_end</name></member>
+    <member refid="a00019_10008e6619d541658c6dbafa9505f6fbd" kind="variable"><name>m_buffer_size</name></member>
+    <member refid="a00019_105aac88e4617a385df74d916d30e49d6" kind="variable"><name>m_buffer_valid</name></member>
+    <member refid="a00019_113f48f019421b1995519dad4af2beaf2" kind="variable"><name>m_dirty</name></member>
+    <member refid="a00019_188d6cb79e58a014bbe757018aa490885" kind="variable"><name>m_file</name></member>
+    <member refid="a00019_19ab437a20ef246655fc5b0970d161a4c" kind="variable"><name>m_filename</name></member>
+    <member refid="a00019_1dae73faefb12e3aa2340175eb7de4bb4" kind="variable"><name>m_lastError</name></member>
+    <member refid="a00019_10102df05ef6e2fd4ad61aceff9a20248" kind="function"><name>Delete</name></member>
+    <member refid="a00019_17f72d52abd9202cf7b01933c9b9078aa" kind="function"><name>GetErrorCode</name></member>
+    <member refid="a00019_16df78547557b3c0460a49492f1ef5249" kind="function"><name>GetErrorString</name></member>
+    <member refid="a00019_19a0884008210efce9a31601496b40ddd" kind="function"><name>GetFFile</name></member>
+    <member refid="a00019_1da9cb5dbe8308b74c31a4798c49d255f" kind="function"><name>GetLastId</name></member>
+    <member refid="a00019_1677d49ee2f8616db15f86822f2c04df8" kind="function"><name>IsOpened</name></member>
+    <member refid="a00019_13c6b781c2dfa9d9759786602b6e133fe" kind="function"><name>LoadObjects</name></member>
+    <member refid="a00019_1dc926bd60ea435b9a1a1adede3a79e7e" kind="function"><name>SaveObjects</name></member>
+    <member refid="a00019_17a12f5b8c1959ec98516461816416d3d" kind="function"><name>SerializedFile</name></member>
+    <member refid="a00019_1405112a9647df4e890a6df51f5cca836" kind="function"><name>SetBufferSize</name></member>
+    <member refid="a00019_15921926ef7dad8ffd8598ffdff89c229" kind="function"><name>~SerializedFile</name></member>
+    <member refid="a00019_1ebf453bf583406c62acc090f3bdb0ccd" kind="function"><name>DISALLOW_COPY_AND_ASSIGN</name></member>
+    <member refid="a00019_1831ff019b2b1b63f179d8323c9073b04" kind="function"><name>SerializedFile</name></member>
+  </compound>
+  <compound refid="a00214" kind="class"><name>std::set</name>
+    <member refid="a00214_17f92ca6d6e5216b9c4be631bd87f1df4" kind="variable"><name>keys</name></member>
+  </compound>
+  <compound refid="a00262" kind="class"><name>std::set::const_iterator</name>
+  </compound>
+  <compound refid="a00263" kind="class"><name>std::set::const_reverse_iterator</name>
+  </compound>
+  <compound refid="a00264" kind="class"><name>std::set::iterator</name>
+  </compound>
+  <compound refid="a00265" kind="class"><name>std::set::reverse_iterator</name>
+  </compound>
+  <compound refid="a00266" kind="struct"><name>SortBoundedItemsByAreaEnlargement</name>
+    <member refid="a00266_19ab60a61fefa9105ae1603206ee2f24e" kind="variable"><name>area</name></member>
+    <member refid="a00266_1a682726581914ab078abffaa4e4dec81" kind="function"><name>operator()</name></member>
+    <member refid="a00266_18bb14c207ed6b43286fa2f3ecc7dca8d" kind="function"><name>SortBoundedItemsByAreaEnlargement</name></member>
+  </compound>
+  <compound refid="a00267" kind="struct"><name>SortBoundedItemsByDistanceFromCenter</name>
+    <member refid="a00267_12ec705e3922a7d7ba0e2b0513226e4d9" kind="variable"><name>m_center</name></member>
+    <member refid="a00267_12c18714d75e4fd484f14ab635deee474" kind="function"><name>operator()</name></member>
+    <member refid="a00267_1aecd8e804ec016bb48cc832208fea01b" kind="function"><name>SortBoundedItemsByDistanceFromCenter</name></member>
+  </compound>
+  <compound refid="a00268" kind="struct"><name>SortBoundedItemsByFirstEdge</name>
+    <member refid="a00268_12467938f2555fe5aa680b77ce46730cb" kind="variable"><name>m_axis</name></member>
+    <member refid="a00268_1ac2990b0b79c48a73ec851d4809f6ab4" kind="function"><name>operator()</name></member>
+    <member refid="a00268_105006b57d7b53a78d1342bc0cb5c9d5a" kind="function"><name>SortBoundedItemsByFirstEdge</name></member>
+  </compound>
+  <compound refid="a00269" kind="struct"><name>SortBoundedItemsByOverlapEnlargement</name>
+    <member refid="a00269_10301cf2414b192ab5446dd0ff233a20e" kind="variable"><name>m_center</name></member>
+    <member refid="a00269_11d8468b5cd1ee3151b5d38f70d1c6d4f" kind="function"><name>operator()</name></member>
+    <member refid="a00269_1639b5a7890af17a7a6af2920848b7a3b" kind="function"><name>SortBoundedItemsByOverlapEnlargement</name></member>
+  </compound>
+  <compound refid="a00270" kind="struct"><name>SortBoundedItemsBySecondEdge</name>
+    <member refid="a00270_16feb0f931c4f172c959abe785fece4d7" kind="variable"><name>m_axis</name></member>
+    <member refid="a00270_1cd0c2129b761cc2c3b0d23bfd7472200" kind="function"><name>operator()</name></member>
+    <member refid="a00270_1ccd6be4200dce4983b77b44f9c3abee2" kind="function"><name>SortBoundedItemsBySecondEdge</name></member>
+  </compound>
+  <compound refid="a00215" kind="class"><name>std::stack</name>
+    <member refid="a00215_1020dde37186e898d2aacda2c136aef0f" kind="variable"><name>elements</name></member>
+  </compound>
+  <compound refid="a00271" kind="struct"><name>StretchBoundingBox</name>
+    <member refid="a00271_1071851cdace71395c4ee51d157a00daa" kind="variable"><name>m_bound</name></member>
+    <member refid="a00271_1efcfdb7efacc7db18ed42925524f2efe" kind="function"><name>operator()</name></member>
+    <member refid="a00271_1ced35fc6004d0efeb05a7dc0abf65246" kind="function"><name>StretchBoundingBox</name></member>
+  </compound>
+  <compound refid="a00216" kind="class"><name>std::string</name>
+  </compound>
+  <compound refid="a00272" kind="class"><name>std::string::const_iterator</name>
+  </compound>
+  <compound refid="a00273" kind="class"><name>std::string::const_reverse_iterator</name>
+  </compound>
+  <compound refid="a00274" kind="class"><name>std::string::iterator</name>
+  </compound>
+  <compound refid="a00275" kind="class"><name>std::string::reverse_iterator</name>
+  </compound>
+  <compound refid="a00020" kind="struct"><name>StringKey</name>
+    <member refid="a00020_1a326a0602e412a046cd5174b12b8485e" kind="typedef"><name>this_type</name></member>
+    <member refid="a00020_13d63844acea734a6edf92d1f21f647cd" kind="variable"><name>keyval</name></member>
+    <member refid="a00020_1bc5c07ef84905d6d5b20beb4a3b4515f" kind="function"><name>operator!=</name></member>
+    <member refid="a00020_17aae34383375682d5d5f33d64d784eb1" kind="function"><name>operator&lt;</name></member>
+    <member refid="a00020_129892b6e201e52317e5c29ba9d613c6b" kind="function"><name>operator==</name></member>
+    <member refid="a00020_1aa63f297ca4009be94bb9bbcdaa965f5" kind="function"><name>Serialize</name></member>
+    <member refid="a00020_1286cd216361c81bc50078a57b70a387d" kind="function"><name>StringKey</name></member>
+    <member refid="a00020_19ab017a865336cbb34bd7a6cac4d60dc" kind="function"><name>StringKey</name></member>
+  </compound>
+  <compound refid="a00217" kind="class"><name>std::stringstream</name>
+  </compound>
+  <compound refid="a00021" kind="class"><name>StringTable</name>
+    <member refid="a00021_1f070479b99817e45696d0da2d73af428" kind="typedef"><name>Cache</name></member>
+    <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7" kind="enum"><name>ErrorCode</name></member>
+    <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7afe0b07571546f88e04e33ce504e2441" kind="enumvalue"><name>ERR_NONE</name></member>
+    <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7242ea228ccc7533d7a64b4809f5001ca" kind="enumvalue"><name>ERR_INIT_BACKEND</name></member>
+    <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7176849976b5c5aaded8b2e7ef6d43a2d" kind="enumvalue"><name>ERR_INIT_CACHE</name></member>
+    <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7356534868f1b027acdcc5e88a1b7bffb" kind="enumvalue"><name>ERR_WRITE_HEADER</name></member>
+    <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7146d0cec2c83a5f5925f1b0316201249" kind="enumvalue"><name>ERR_READ_HEADER</name></member>
+    <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf70c18986aa20d9bedfaa527a1455703c4" kind="enumvalue"><name>ERR_OPEN_FILE</name></member>
+    <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7b7cdb0b3d86db44838de24c3655cedbf" kind="enumvalue"><name>ERR_BAD_SEEK</name></member>
+    <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7e1ae92bf25baa46736822741ecfbebf0" kind="enumvalue"><name>ERR_BAD_WRITE</name></member>
+    <member refid="a00021_14e8ddffce30cef7c6f6e079876a28cf7b576a410ec9fcd6a047955068e8741ba" kind="enumvalue"><name>ERR_BAD_READ</name></member>
+    <member refid="a00021_15f1961ddd6533e9ce2693d0e529c7d6d" kind="typedef"><name>IdType</name></member>
+    <member refid="a00021_1f0c4e8ba791fb1b6a41601698d65d0a1" kind="typedef"><name>Iterator</name></member>
+    <member refid="a00021_1d8c5e92f95bf1cc59fd0d05741d4d20d" kind="typedef"><name>KeyType</name></member>
+    <member refid="a00021_1d84f7f3f83c32765ede8d1b097157521" kind="typedef"><name>size_type</name></member>
+    <member refid="a00021_18e79899f8c7c96dc380315e9c4928a0b" kind="typedef"><name>Tree</name></member>
+    <member refid="a00021_17160188abc84d814ad1b20af6dd7cf19" kind="variable"><name>m_cache</name></member>
+    <member refid="a00021_1783027a062becfc43e6af1a7f0e5f683" kind="variable"><name>m_dirty</name></member>
+    <member refid="a00021_1e18b61d25a5a0d1b8f218b75a9cff6c1" kind="variable"><name>m_file</name></member>
+    <member refid="a00021_162ae09cffc8b33a2a667879dd5808631" kind="variable"><name>m_idx</name></member>
+    <member refid="a00021_1661fe304e664b271d802ee0fd0b2a9cb" kind="variable"><name>m_initialized</name></member>
+    <member refid="a00021_162809b636a1b4a16e8adb68f40d7ac34" kind="variable"><name>m_lastError</name></member>
+    <member refid="a00021_1a5bd454f29da8f5d3f48a4f8b8bb38d3" kind="variable"><name>m_next_new_id</name></member>
+    <member refid="a00021_11b34b5c88a7ac6988c2f60194228f341" kind="variable"><name>m_traverser</name></member>
+    <member refid="a00021_17126971c16c23f957c8c0ab19a03c866" kind="function"><name>Begin</name></member>
+    <member refid="a00021_1c92b05d069b14cb0a4da7733e6784d52" kind="function"><name>FindStringId</name></member>
+    <member refid="a00021_1cc07e37f66c38cd23a1e7bc5623c6fb7" kind="function"><name>GetErrorCode</name></member>
+    <member refid="a00021_117000a94505633e0579ec899cb7445da" kind="function"><name>GetItemCount</name></member>
+    <member refid="a00021_1a8395a3054781013e45d909a057d3d54" kind="function"><name>GetStringById</name></member>
+    <member refid="a00021_1ad29815a144f9ac1c738314891d21359" kind="function"><name>Initialize</name></member>
+    <member refid="a00021_1cbac23c55d6a42a98882ec97b8006aac" kind="function"><name>InsertString</name></member>
+    <member refid="a00021_1e377ce3433267fc55fe861b39a0b8f42" kind="function"><name>StringTable</name></member>
+    <member refid="a00021_112d0b73740a07a590f6d7331b6c9c268" kind="function"><name>VerifyIndex</name></member>
+    <member refid="a00021_1d0788518a39c54333b8eff8a67c1b162" kind="function"><name>~StringTable</name></member>
+  </compound>
+  <compound refid="a00276" kind="struct"><name>TreeLeafItem</name>
+    <member refid="a00276_1ce5a02ace4b003a79672311f2948a8b5" kind="typedef"><name>KeyType</name></member>
+    <member refid="a00276_10e5950747f1ea70c93e14dae615057bb" kind="typedef"><name>ValueType</name></member>
+    <member refid="a00276_198b8dd7e302687e380d800c2a060e3dc" kind="variable"><name>key</name></member>
+    <member refid="a00276_16701da65fc1eec76b047724af6dbd6f3" kind="variable"><name>value</name></member>
+    <member refid="a00276_1c117510421ab116cf1ad452fb58dc39b" kind="function"><name>operator!=</name></member>
+    <member refid="a00276_194733e73e528bbe598d00ac2b8289ef4" kind="function"><name>operator&lt;</name></member>
+    <member refid="a00276_137944cc981fd183616baa48eebc513ef" kind="function"><name>operator&lt;=</name></member>
+    <member refid="a00276_1eaff330da48a7726e097e2232a86e88d" kind="function"><name>operator==</name></member>
+    <member refid="a00276_14e390e66209c26130762b885b0105f9a" kind="function"><name>operator&gt;</name></member>
+    <member refid="a00276_1e969c25a856d79d4d29dc31a76132f8c" kind="function"><name>operator&gt;=</name></member>
+    <member refid="a00276_1ae4d7872f319f175d36eb2fb2f165d98" kind="function"><name>Serialize</name></member>
+    <member refid="a00276_121dcfb15edc32be014b1135f963a5fac" kind="function"><name>TreeLeafItem</name></member>
+    <member refid="a00276_1e6bacfd5dbd4e65ec2b427cd70d8d0d5" kind="function"><name>TreeLeafItem</name></member>
+  </compound>
+  <compound refid="a00022" kind="class"><name>TreeNode</name>
+    <member refid="a00022_118da787aa09c3874f1a23d34b3fa5ee5" kind="typedef"><name>Item</name></member>
+    <member refid="a00022_13518fd1ed35931eb71bb44e22f6cc72b" kind="typedef"><name>ItemArray</name></member>
+    <member refid="a00022_1ef78e40d163c358c90dbd1d15d5ec0db" kind="variable"><name>is_dirty</name></member>
+    <member refid="a00022_19ae94d6e7435ced4ab79536df760ab75" kind="variable"><name>items</name></member>
+    <member refid="a00022_1801a4f558aba2af3e77f9e86a6691327" kind="function"><name>Serialize</name></member>
+    <member refid="a00022_144bb25b0fa1e86caee551c8c93595672" kind="function"><name>TreeNode</name></member>
+    <member refid="a00022_1208839dc50026f3b56273ec1e1ff621d" kind="function"><name>TreeNode</name></member>
+  </compound>
+  <compound refid="a00277" kind="struct"><name>TreeNodeBase</name>
+  </compound>
+  <compound refid="a00278" kind="struct"><name>TreeNodeItem</name>
+    <member refid="a00278_1b8638f16074ae91c63b56ecd3c4a78b1" kind="typedef"><name>IdType</name></member>
+    <member refid="a00278_122e8331740b0626f4730cc13b27f34fd" kind="typedef"><name>KeyType</name></member>
+    <member refid="a00278_121ccf5dacc1327f910544189d204a545" kind="variable"><name>id</name></member>
+    <member refid="a00278_135645fcd77bd61ab3f9e5f7e24df5ad7" kind="variable"><name>key</name></member>
+    <member refid="a00278_13e8d52af9864900574d917a39cc48325" kind="function"><name>operator!=</name></member>
+    <member refid="a00278_11179d7e92fb75463282e4b620059277f" kind="function"><name>operator&lt;</name></member>
+    <member refid="a00278_1740dedd3e66bd2212b83a201788815d9" kind="function"><name>operator&lt;=</name></member>
+    <member refid="a00278_1ddf14f95081ce6130088b21b8766fde3" kind="function"><name>operator==</name></member>
+    <member refid="a00278_15ace758f4dcfe13c399f560b26170ef0" kind="function"><name>operator&gt;</name></member>
+    <member refid="a00278_19dfcb3cee17ff233a90ccddde3881825" kind="function"><name>operator&gt;=</name></member>
+    <member refid="a00278_10dc96f0d0a8f731bbc39026b2b3f91da" kind="function"><name>Serialize</name></member>
+    <member refid="a00278_17f15da71b6f2570b0679d37e543768a7" kind="function"><name>TreeNodeItem</name></member>
+    <member refid="a00278_14da75c9c66a49553fbbaf5c9505f3e41" kind="function"><name>TreeNodeItem</name></member>
+    <member refid="a00278_18936c098abba57981324ed1bf8937cb8" kind="function"><name>TreeNodeItem</name></member>
+    <member refid="a00278_19f723508e153fd3fa1dbafcc25e80952" kind="function"><name>TreeNodeItem</name></member>
+  </compound>
+  <compound refid="a00218" kind="class"><name>std::underflow_error</name>
+  </compound>
+  <compound refid="a00023" kind="struct"><name>UniqueIdT</name>
+    <member refid="a00023_1e9f00e134fefa7a44c35361682fd71f2" kind="typedef"><name>this_type</name></member>
+    <member refid="a00023_1f4b7eace3074587a8103eb774a1abf85" kind="variable"><name>hi</name></member>
+    <member refid="a00023_1b72d7a69f6d0dd53d959f203a4efbd49" kind="variable"><name>lo</name></member>
+    <member refid="a00023_1a8d80122f4247f0c4ab319a872788ae6" kind="function"><name>IsNull</name></member>
+    <member refid="a00023_18a04cb171b9ea720dfa86c48c5e60a4c" kind="function"><name>operator uint64_t</name></member>
+    <member refid="a00023_160f863d484477cb1a0cbdf8ada61496b" kind="function"><name>operator!=</name></member>
+    <member refid="a00023_13783ca64e152dda2e3321d8b660273d4" kind="function"><name>operator++</name></member>
+    <member refid="a00023_1972784ac16954d306c48c5df375b7eb6" kind="function"><name>operator&lt;</name></member>
+    <member refid="a00023_112b1db09602f4ed85261195d945ec16f" kind="function"><name>operator==</name></member>
+    <member refid="a00023_131c63849ccd34289ae7df835a19ab902" kind="function"><name>operator&gt;</name></member>
+    <member refid="a00023_1d2b9ee96f688c19ec4e3e4eeca9a93eb" kind="function"><name>Serialize</name></member>
+    <member refid="a00023_15134c0966907c7d6d5280fdb4855395e" kind="function"><name>UniqueIdT</name></member>
+    <member refid="a00023_1a9d670942ddb04b3231e5464683ffc2b" kind="function"><name>UniqueIdT</name></member>
+    <member refid="a00023_19862d0b85248f174e64c0ce34582ca5e" kind="function"><name>UniqueIdT</name></member>
+    <member refid="a00023_1b1e5cb2bb3fee92a74c5c387967efc2f" kind="function"><name>UniqueIdT</name></member>
+  </compound>
+  <compound refid="a00219" kind="class"><name>std::valarray</name>
+    <member refid="a00219_1dce3a23af4e9d36342f49f58300d8568" kind="variable"><name>elements</name></member>
+  </compound>
+  <compound refid="a00220" kind="class"><name>std::vector</name>
+    <member refid="a00220_12396209900e8f592db1f0b2467f7d899" kind="variable"><name>elements</name></member>
+  </compound>
+  <compound refid="a00279" kind="class"><name>std::vector::const_iterator</name>
+  </compound>
+  <compound refid="a00280" kind="class"><name>std::vector::const_reverse_iterator</name>
+  </compound>
+  <compound refid="a00281" kind="class"><name>std::vector::iterator</name>
+  </compound>
+  <compound refid="a00282" kind="class"><name>std::vector::reverse_iterator</name>
+  </compound>
+  <compound refid="a00221" kind="class"><name>std::wfstream</name>
+  </compound>
+  <compound refid="a00222" kind="class"><name>std::wifstream</name>
+  </compound>
+  <compound refid="a00223" kind="class"><name>std::wios</name>
+  </compound>
+  <compound refid="a00224" kind="class"><name>std::wistream</name>
+  </compound>
+  <compound refid="a00225" kind="class"><name>std::wistringstream</name>
+  </compound>
+  <compound refid="a00226" kind="class"><name>std::wofstream</name>
+  </compound>
+  <compound refid="a00227" kind="class"><name>std::wostream</name>
+  </compound>
+  <compound refid="a00228" kind="class"><name>std::wostringstream</name>
+  </compound>
+  <compound refid="a00229" kind="class"><name>std::wstring</name>
+  </compound>
+  <compound refid="a00283" kind="class"><name>std::wstring::const_iterator</name>
+  </compound>
+  <compound refid="a00284" kind="class"><name>std::wstring::const_reverse_iterator</name>
+  </compound>
+  <compound refid="a00285" kind="class"><name>std::wstring::iterator</name>
+  </compound>
+  <compound refid="a00286" kind="class"><name>std::wstring::reverse_iterator</name>
+  </compound>
+  <compound refid="a00230" kind="class"><name>std::wstringstream</name>
+  </compound>
+  <compound refid="a00050" kind="namespace"><name>std</name>
+    <member refid="a00050_1042280b675ab84027160f36b36f05c29" kind="function"><name>is_sorted</name></member>
+  </compound>
+  <compound refid="a00024" kind="file"><name>BTree.h</name>
+    <member refid="a00024_116544584f77cdf457e3cf059b4f7133a" kind="define"><name>__BTREE_TEMPLATE_DEFN</name></member>
+    <member refid="a00024_1981024ff9a4d009e49c442dac744e82e" kind="define"><name>__BTREE_TEMPLATE_FN</name></member>
+    <member refid="a00024_1923a2812905dd3297055f7d12506f692" kind="define"><name>SET_BAD_ERROR</name></member>
+  </compound>
+  <compound refid="a00025" kind="file"><name>BTree.h</name>
+  </compound>
+  <compound refid="a00026" kind="file"><name>BTreeNode.h</name>
+    <member refid="a00026_142d97741b3b0325ac0e679a927468049" kind="typedef"><name>BTreeNodeBase</name></member>
+  </compound>
+  <compound refid="a00027" kind="file"><name>BTreePrint.h</name>
+  </compound>
+  <compound refid="a00028" kind="file"><name>BTreeTraverser.h</name>
+    <member refid="a00028_1d64ce9a58c09d621e3cde6fc271dc4fa" kind="define"><name>BDEBUG</name></member>
+    <member refid="a00028_1de03b77feddf25c217a38f7af9565fdb" kind="define"><name>BDEBUG_INIT</name></member>
+  </compound>
+  <compound refid="a00029" kind="file"><name>BTreeVerify.h</name>
+  </compound>
+  <compound refid="a00030" kind="file"><name>DiskTreeBackend.h</name>
+    <member refid="a00030_19c78bc9eae9eedfdb462f8432f6f3a24" kind="define"><name>DISKTREE_CUSTOM_SIG_SZ</name></member>
+    <member refid="a00030_1a81aab03bdffbe2ca07a4cced9520d13" kind="define"><name>DISKTREE_LEAF_MAGIC</name></member>
+    <member refid="a00030_1582e7f4a3d1d38631ca247af15fd21de" kind="define"><name>DISKTREE_NODE_MAGIC</name></member>
+    <member refid="a00030_1923a2812905dd3297055f7d12506f692" kind="define"><name>SET_BAD_ERROR</name></member>
+  </compound>
+  <compound refid="a00031" kind="file"><name>lru.h</name>
+    <member refid="a00031_1a19e54409f4568b83470b2d36593bd15" kind="define"><name>LRUCACHE_DEBUG_INIT</name></member>
+    <member refid="a00031_11517a8a39cc6d481e6177ee3b26fb955" kind="define"><name>RECORD_HIT</name></member>
+    <member refid="a00031_192d3cd0b15b76121a731304263ef3a5b" kind="define"><name>RECORD_MISS</name></member>
+    <member refid="a00031_18a783e18db88a83d0f2f723203190f0c" kind="enum"><name>LRUCacheDeleteType</name></member>
+    <member refid="a00031_18a783e18db88a83d0f2f723203190f0cccd33f4c9248e42047774b6fbf7d9a98" kind="enumvalue"><name>LRUDeleteNone</name></member>
+    <member refid="a00031_18a783e18db88a83d0f2f723203190f0cfdd55f799b48c083c968f3a001535526" kind="enumvalue"><name>LRUDeleteObject</name></member>
+    <member refid="a00031_18a783e18db88a83d0f2f723203190f0cc9004261d409ab4a483749226875c063" kind="enumvalue"><name>LRUDeleteArray</name></member>
+    <member refid="a00031_18a783e18db88a83d0f2f723203190f0c94b74fadd1c919462dc4e346a8de66f0" kind="enumvalue"><name>LRUFreeMalloc</name></member>
+  </compound>
+  <compound refid="a00032" kind="file"><name>MemoryTreeBackend.h</name>
+  </compound>
+  <compound refid="a00033" kind="file"><name>RTree.h</name>
+    <member refid="a00033_1d9f0f8d8029a5c063b1f9446ecc454a7" kind="define"><name>__RTREE_TEMPLATE_DEFN</name></member>
+    <member refid="a00033_10daf490aa9d3dd9ae9be31aabd357fe4" kind="define"><name>__RTREE_TEMPLATE_FN</name></member>
+    <member refid="a00033_152fd49373329ee1ee45e553d8b004403" kind="define"><name>RTREE_CHOOSE_SUBTREE_P</name></member>
+    <member refid="a00033_1d2810928267314682323514885311ee3" kind="define"><name>RTREE_REINSERT_P</name></member>
+    <member refid="a00033_1923a2812905dd3297055f7d12506f692" kind="define"><name>SET_BAD_ERROR</name></member>
+  </compound>
+  <compound refid="a00034" kind="file"><name>RTree.h</name>
+  </compound>
+  <compound refid="a00035" kind="file"><name>RTreeBoundingBox.h</name>
+  </compound>
+  <compound refid="a00036" kind="file"><name>RTreeIterator.h</name>
+  </compound>
+  <compound refid="a00037" kind="file"><name>RTreeNode.h</name>
+  </compound>
+  <compound refid="a00038" kind="file"><name>RTreeVerify.h</name>
+  </compound>
+  <compound refid="a00039" kind="file"><name>RTreeVisitor.h</name>
+  </compound>
+  <compound refid="a00040" kind="file"><name>Serialization.h</name>
+    <member refid="a00040_1c1d56df9c70de93479ab443c05038984" kind="define"><name>BUFFER_REF</name></member>
+    <member refid="a00040_15a9d5e4df7e0721b3794cb287829dc33" kind="define"><name>DESERIALIZE</name></member>
+    <member refid="a00040_10f00ffd847349de4a6c23895d168c71c" kind="define"><name>SERIALIZE</name></member>
+    <member refid="a00040_1755ad53b32a7a8f7915e007de147180f" kind="define"><name>DESERIALIZE_G</name></member>
+    <member refid="a00040_1da70ec2ffde5ea3c0afc76683a3a9b0e" kind="define"><name>SERIALIZE_G</name></member>
+    <member refid="a00040_1aa758ccaf6d745e52103fabff542282e" kind="define"><name>RECORD_DEFS</name></member>
+    <member refid="a00040_14ec42c752433ea6b56b17c1f32dbf8bd" kind="function"><name>RECORD_DEFS</name></member>
+    <member refid="a00040_19a46ba0c01d2ad82743483500ad61438" kind="function"><name>RECORD_DEFS</name></member>
+    <member refid="a00040_146b004a6f53f5f160d855797df6b7d32" kind="function"><name>RECORD_DEFS</name></member>
+    <member refid="a00040_1cad51248f4de65333890acd9ab28d3a7" kind="function"><name>RECORD_DEFS</name></member>
+    <member refid="a00040_16b6bb654e70610c065551560d641a2a1" kind="function"><name>RECORD_DEFS</name></member>
+    <member refid="a00040_1083344ac3d47553316afa3fbf5ab980f" kind="function"><name>RECORD_DEFS</name></member>
+    <member refid="a00040_13b4bc5d4c4a039d7f14953e370a9567e" kind="function"><name>RECORD_DEFS</name></member>
+  </compound>
+  <compound refid="a00041" kind="file"><name>SerializedFile.h</name>
+    <member refid="a00041_1923a2812905dd3297055f7d12506f692" kind="define"><name>SET_BAD_ERROR</name></member>
+  </compound>
+  <compound refid="a00042" kind="file"><name>StringTable.h</name>
+    <member refid="a00042_1c65337823e798824d6b07c5d3658357a" kind="define"><name>_strdup</name></member>
+    <member refid="a00042_1923a2812905dd3297055f7d12506f692" kind="define"><name>SET_BAD_ERROR</name></member>
+    <member refid="a00042_12fdfcea15acc36142f667bc0b51cabe1" kind="define"><name>STRINGTABLE_MAGIC</name></member>
+  </compound>
+  <compound refid="a00043" kind="file"><name>is_sorted.h</name>
+  </compound>
+  <compound refid="a00044" kind="file"><name>pstdint.h</name>
+    <member refid="a00044_1c58f2c111cc9989c86db2a7dc4fd84ca" kind="define"><name>INT16_MAX</name></member>
+    <member refid="a00044_1d4e9955955b27624963643eac448118a" kind="define"><name>INT16_MIN</name></member>
+    <member refid="a00044_1181807730d4a375f848ba139813ce04f" kind="define"><name>INT32_MAX</name></member>
+    <member refid="a00044_1688eb21a22db27c2b2bd5836943cdcbe" kind="define"><name>INT32_MIN</name></member>
+    <member refid="a00044_1af7f29f45f1a513b4748a4e5014ddf6a" kind="define"><name>INT8_MAX</name></member>
+    <member refid="a00044_1adcf2a81af243df333b31efa6461ab8e" kind="define"><name>INT8_MIN</name></member>
+    <member refid="a00044_12fd35d0ea091e04caec504ff0042cf00" kind="define"><name>INT_FAST16_MAX</name></member>
+    <member refid="a00044_1169460a4e2a79138723d68d99372d958" kind="define"><name>INT_FAST16_MIN</name></member>
+    <member refid="a00044_1c96fa0f41b19e89f109e4f9913ca6635" kind="define"><name>INT_FAST32_MAX</name></member>
+    <member refid="a00044_1d93df1652ed0635513d5efe4f1219926" kind="define"><name>INT_FAST32_MIN</name></member>
+    <member refid="a00044_1cbcdb3bee0f5f904da5df8de69a80ca3" kind="define"><name>INT_FAST8_MAX</name></member>
+    <member refid="a00044_1ad8fb982cb19143efd5ee9a1a7a89390" kind="define"><name>INT_FAST8_MIN</name></member>
+    <member refid="a00044_17eb2a8e2a1c65d6c9ad0f86154890baa" kind="define"><name>INT_LEAST16_MAX</name></member>
+    <member refid="a00044_11f91bfd5820c2f27af3d260fc75813e1" kind="define"><name>INT_LEAST16_MIN</name></member>
+    <member refid="a00044_15618711a0a54f722190a3a1219e278c2" kind="define"><name>INT_LEAST32_MAX</name></member>
+    <member refid="a00044_12360a536116dd734820a6b5b3d560ce7" kind="define"><name>INT_LEAST32_MIN</name></member>
+    <member refid="a00044_1a05109908fb2770f632d2b646b9f85bf" kind="define"><name>INT_LEAST8_MAX</name></member>
+    <member refid="a00044_13e986cad833f63f420962ff60eda87e5" kind="define"><name>INT_LEAST8_MIN</name></member>
+    <member refid="a00044_16b556b8b5f86e13f1c2a6e8f9b9b4966" kind="define"><name>INTMAX_C</name></member>
+    <member refid="a00044_1022b9b0a3564d786244a4631847c37a3" kind="define"><name>INTMAX_MAX</name></member>
+    <member refid="a00044_1c1bfd0b6e49224d67657fe9e7502623c" kind="define"><name>PRINTF_INT16_DEC_WIDTH</name></member>
+    <member refid="a00044_1b330e7280ae15049599408e99c73273b" kind="define"><name>PRINTF_INT16_HEX_WIDTH</name></member>
+    <member refid="a00044_1a7207fcbdc05d7cf877066028543c28b" kind="define"><name>PRINTF_INT32_DEC_WIDTH</name></member>
+    <member refid="a00044_1e6f04461e1801eefd3b64f3b851abed8" kind="define"><name>PRINTF_INT32_HEX_WIDTH</name></member>
+    <member refid="a00044_19d70c86cd8202228d85db7aeed22497b" kind="define"><name>PRINTF_INT64_DEC_WIDTH</name></member>
+    <member refid="a00044_16b45386978db7d05efc9c5ce140ba27c" kind="define"><name>PRINTF_INT64_HEX_WIDTH</name></member>
+    <member refid="a00044_19b86583004a9dce380fe84b16de763b6" kind="define"><name>PRINTF_INT8_DEC_WIDTH</name></member>
+    <member refid="a00044_132f0dce3fbd74aeeb4398ebc25abde7d" kind="define"><name>PRINTF_INT8_HEX_WIDTH</name></member>
+    <member refid="a00044_19c269e817611c8344b5d13cdedbd4465" kind="define"><name>PRINTF_INTMAX_DEC_WIDTH</name></member>
+    <member refid="a00044_1f88f43dbd7532680862099ef08421799" kind="define"><name>PRINTF_INTMAX_HEX_WIDTH</name></member>
+    <member refid="a00044_1d53dd320ab0f0e9f4266bc225a3487df" kind="define"><name>PRINTF_INTMAX_MODIFIER</name></member>
+    <member refid="a00044_1e050ead9591f8e4e8368fe01076e7da4" kind="define"><name>PRINTF_LEAST16_MODIFIER</name></member>
+    <member refid="a00044_1861aa5c171bcd4ac1438845bf9b183e1" kind="define"><name>PRINTF_LEAST32_MODIFIER</name></member>
+    <member refid="a00044_11f5fe9445d0ad0bee21bab1de4cc3e58" kind="define"><name>SIG_ATOMIC_MAX</name></member>
+    <member refid="a00044_13c75bb398badb69c7577b21486f9963f" kind="define"><name>SIZE_MAX</name></member>
+    <member refid="a00044_10c58c27c9332ac03e508bb0674f15ad6" kind="define"><name>STDINT_H_UINTPTR_T_DEFINED</name></member>
+    <member refid="a00044_13ea490c9b3617d4479bd80ef93cd5602" kind="define"><name>UINT16_MAX</name></member>
+    <member refid="a00044_1b5eb23180f7cc12b7d6c04a8ec067fdd" kind="define"><name>UINT32_MAX</name></member>
+    <member refid="a00044_1eb4e270a084ee26fe73e799861bd0252" kind="define"><name>UINT8_MAX</name></member>
+    <member refid="a00044_1ed28ca63d9b222f6f1377358fe73a183" kind="define"><name>UINT_FAST16_MAX</name></member>
+    <member refid="a00044_1d51246a178143208b2db3315efd21c45" kind="define"><name>UINT_FAST32_MAX</name></member>
+    <member refid="a00044_12c6f97ea2d76d0cf6260c84046cdb44e" kind="define"><name>UINT_FAST8_MAX</name></member>
+    <member refid="a00044_16ef6a1a518bbf516ca8b0180b11c358f" kind="define"><name>UINT_LEAST16_MAX</name></member>
+    <member refid="a00044_170cad8bacc9a6db301e1cdc86cc8d571" kind="define"><name>UINT_LEAST32_MAX</name></member>
+    <member refid="a00044_12a80bde77ee1698d0f42f334adad4f2b" kind="define"><name>UINT_LEAST8_MAX</name></member>
+    <member refid="a00044_1572bc4e8e4eae73a2e1e6a158d3837a4" kind="define"><name>UINTMAX_C</name></member>
+    <member refid="a00044_1a54fd5210434219e9027bfa0f0e325c8" kind="define"><name>UINTMAX_MAX</name></member>
+    <member refid="a00044_137ae7009688ff03a821794e036e3e458" kind="define"><name>ULONG_LONG_MAX</name></member>
+    <member refid="a00044_143505f8e7533c9a3b521288e927416ad" kind="typedef"><name>int_fast16_t</name></member>
+    <member refid="a00044_1df31545bab2a12c9d12347af275bff5d" kind="typedef"><name>int_fast32_t</name></member>
+    <member refid="a00044_177eeea3cce53483bdce021415431c1b4" kind="typedef"><name>int_fast8_t</name></member>
+    <member refid="a00044_117f379713bed2a28ac431760401253cd" kind="typedef"><name>int_least16_t</name></member>
+    <member refid="a00044_12676b57a778795e5d0598970f1407f38" kind="typedef"><name>int_least32_t</name></member>
+    <member refid="a00044_1adfd725efbf565422ab13db91ccca53c" kind="typedef"><name>int_least8_t</name></member>
+    <member refid="a00044_11a3f3321a0166a004bde0a1e72553f2b" kind="typedef"><name>intmax_t</name></member>
+    <member refid="a00044_1c2abfb965e6a308c5912f9e749740d4a" kind="typedef"><name>intptr_t</name></member>
+    <member refid="a00044_1d22db665b43dc5f23ed8a42e015373f3" kind="typedef"><name>uint_fast16_t</name></member>
+    <member refid="a00044_151c746994cab2a6465693f8746b7ab52" kind="typedef"><name>uint_fast32_t</name></member>
+    <member refid="a00044_1e3a64b0efa0110e38359b34a0f265667" kind="typedef"><name>uint_fast8_t</name></member>
+    <member refid="a00044_14f3f6e6631cb4aaeadf1c59ff597b2fb" kind="typedef"><name>uint_least16_t</name></member>
+    <member refid="a00044_1c0af81082969e5e3f4d939b1de7002ac" kind="typedef"><name>uint_least32_t</name></member>
+    <member refid="a00044_1c76e2383debd5a3b100514044828961a" kind="typedef"><name>uint_least8_t</name></member>
+    <member refid="a00044_17643e68e022fde0d947e8dc252f716d6" kind="typedef"><name>uintmax_t</name></member>
+  </compound>
+  <compound refid="a00045" kind="file"><name>StringKey.h</name>
+    <member refid="a00045_1526e040cbac6bdd08ba29d458f547f52" kind="function"><name>operator&lt;&lt;</name></member>
+  </compound>
+  <compound refid="a00046" kind="file"><name>TreeItem.h</name>
+  </compound>
+  <compound refid="a00047" kind="file"><name>TreeNode.h</name>
+  </compound>
+  <compound refid="a00048" kind="file"><name>UniqueId.h</name>
+    <member refid="a00048_1a69bb406fcabe38c62da34550883cfd7" kind="define"><name>UNIQUEID_DBG</name></member>
+    <member refid="a00048_17319712a84a08f908083322ac02af56e" kind="define"><name>UNIQUEID_DBG_CONSTRUCTOR</name></member>
+    <member refid="a00048_17c10d47fbcad1f7a08f9e7f5b0da7088" kind="define"><name>UNIQUEID_DEF_CONSTRUCTOR</name></member>
+    <member refid="a00048_196c13b19116ffbf7983813e354088a34" kind="define"><name>UNIQUEID_IS_INIT</name></member>
+    <member refid="a00048_19477a807f3a6a61ff0afec13296865b8" kind="define"><name>UNIQUEID_SZ</name></member>
+    <member refid="a00048_17ec982012fd3f5ba5f512abdc45c6fa4" kind="define"><name>UNIQUEID_USAGE_DEBUG</name></member>
+    <member refid="a00048_13d066f60fc039acfa19b6d2c7ede6669" kind="typedef"><name>UniqueId</name></member>
+  </compound>
+  <compound refid="a00049" kind="file"><name>utility.h</name>
+    <member refid="a00049_1030161a8b4530eedef4eea2c7f27475f" kind="define"><name>DELETE_IF_NOT_NULL</name></member>
+    <member refid="a00049_1f8df3547bfde53a5acb93e2607b0034a" kind="define"><name>DISALLOW_COPY_AND_ASSIGN</name></member>
+    <member refid="a00049_14e8d1181e2a7074c297287b231c7f779" kind="define"><name>NO_DEFAULT_CONSTRUCTOR</name></member>
+    <member refid="a00049_13b40c7b804a59f7bfc7ecb45d66c4bf3" kind="define"><name>WARN_IF_UNUSED</name></member>
+  </compound>
+  <compound refid="todo" kind="page"><name>todo</name>
+  </compound>
+  <compound refid="dir_fc737d041ef8f2c4185ce3a0bc957e6a" kind="dir"><name>BTree/</name>
+  </compound>
+  <compound refid="dir_77e788db3be33bcba33e4b74c0683ce9" kind="dir"><name>RTree/</name>
+  </compound>
+  <compound refid="dir_bf4f60c2190ddc9913e18eab3dd204dd" kind="dir"><name>support/</name>
+  </compound>
+</doxygenindex>

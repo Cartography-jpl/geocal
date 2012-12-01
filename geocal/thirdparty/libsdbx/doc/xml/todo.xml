@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="todo" kind="page">
+    <compoundname>todo</compoundname>
+    <title>Todo List</title>
+    <detaileddescription>
+<para><anchor id="todo_1_todo000001"/> <variablelist>
+<varlistentry><term>Class <ref refid="a00001" kindref="compound">BTree</ref>  </term></varlistentry>
+<listitem><para>Turn this into a buffer tree. Doing it for the B tree should be easy enough, then it should be trivial to convert the R* tree to do it</para><para></para></listitem>
+</variablelist>
+</para><para><anchor id="todo_1_todo000002"/> <variablelist>
+<varlistentry><term>Class <ref refid="a00003" kindref="compound">BTreeTraverser&lt; _Tree &gt;</ref>  </term></varlistentry>
+<listitem><para>Fix that</para><para></para></listitem>
+</variablelist>
+</para><para><anchor id="todo_1_todo000003"/> <variablelist>
+<varlistentry><term>Class <ref refid="a00004" kindref="compound">DiskTree</ref>  </term></varlistentry>
+<listitem><para>Need to determine optimal block sizes/etc </para></listitem>
+</variablelist>
+</para><para><anchor id="todo_1_todo000004"/> <variablelist>
+<varlistentry><term>Class <ref refid="a00005" kindref="compound">LRUCache&lt; CachedObjectType, IdType, deleteObject &gt;</ref>  </term></varlistentry>
+<listitem><para>Add locks or something to that effect..</para><para></para></listitem>
+</variablelist>
+</para><para><anchor id="todo_1_todo000005"/> <variablelist>
+<varlistentry><term>Class <ref refid="a00017" kindref="compound">RTreeIterator&lt; _Tree, _Acceptor &gt;</ref>  </term></varlistentry>
+<listitem><para>Make this more like the B-Tree traverser?</para><para></para></listitem>
+</variablelist>
+</para><para><anchor id="todo_1_todo000006"/> <variablelist>
+<varlistentry><term>Class <ref refid="a00021" kindref="compound">StringTable&lt; _key_length, max_child_items &gt;</ref>  </term></varlistentry>
+<listitem><para>Fix it so that its completely ordered. The problem is that the tree cannot sort on the value, only on the keys (which have duplicates due to only storing a portion of the string) </para></listitem>
+</variablelist>
+</para><para><anchor id="todo_1_todo000007"/> <variablelist>
+<varlistentry><term>Member <ref refid="a00021_1cbac23c55d6a42a98882ec97b8006aac" kindref="member">StringTable::InsertString</ref> (const char *str, IdType &amp;id) WARN_IF_UNUSED </term></varlistentry>
+<listitem><para>this is very inefficient, it can be done better </para></listitem>
+</variablelist>
+</para><para><anchor id="todo_1_todo000007"/> <variablelist>
+<varlistentry><term>Member <ref refid="a00021_1cbac23c55d6a42a98882ec97b8006aac" kindref="member">StringTable::InsertString</ref> (const char *str, IdType &amp;id) WARN_IF_UNUSED </term></varlistentry>
+<listitem><para>need a way to roll this stuff back </para></listitem>
+</variablelist>
+</para>    </detaileddescription>
+  </compounddef>
+</doxygen>

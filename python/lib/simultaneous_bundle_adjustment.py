@@ -1,0 +1,193 @@
+import numpy as np
+from geocal import *
+import scipy
+
+class _coo_helper(object):
+    '''scipy.sparse.coo_matrix has an akward interface, but is much, much
+    faster than lil_matrix. This helper class gives an interface similar to
+    lil_matrix, but really just accumulates everthing for producing a
+    coo_matrix.'''
+    def __init__(self, shape):
+        self.row = []
+        self.col = []
+        self.data = []
+        self.shape = shape
+
+    def __setitem__(self, key, value):
+        if(value != 0.0):
+            self.row.append(key[0])
+            self.col.append(key[1])
+            self.data.append(value)
+
+    def coo_matrix(self):
+        return scipy.sparse.coo_matrix((self.data, (self.row, self.col)),
+                                       shape = self.shape)
+    
+class SimultaneousBundleAdjustment(object):
+    '''This class is used to do a simultaneous bundle adjustment. This
+    takes a set of tie points along with a set of ImageGroundConnection.
+    We then vary the ground location the tie points and the parameters
+    of the ImageGroundConnection to minimize the difference between the
+    predicted image locations and the actual image locations given by
+    the tiepoints.'''
+    def __init__(self, igc_coll, tie_point_array,
+                 dem, dem_sigma = 100, tp_epsilon = 1):
+        '''Constructor. This takes a IgcCollection, and a list of
+        TiePoint. The camera order used in each TiePoint should match
+        the order of IgcCollection.
+
+        The relative weighting given to the Dem surface constraint can
+        be passed in as dem_sigma. We scale the surface constraint equations
+        by 1/dem_sigma.
+
+        We calculate the jacobians with respect to moving the tiepoint on
+        the surface numerically, the epsilon used for the Ecr coordinates
+        can be optionally supplied.
+        '''
+        self.igc_coll = igc_coll
+        self.tie_point_array = tie_point_array
+        self.dem = dem
+        self.dem_sigma = dem_sigma
+        self.tp_epsilon = tp_epsilon
+        self.niloc = 0
+        for tp in self.tie_point_array: 
+            self.niloc += tp.number_image_location
+        self.tp_offset = np.zeros(3 * len(self.tie_point_array))
+
+        # Determine the slices for each of the parameter types. We have
+        # the location each tiepoint first, followed by the parameters for
+        # igc_coll.
+        self.tp_slice = []
+        for i in range(len(self.tie_point_array)):
+            self.tp_slice.append(slice(3 * i, 3 * i + 3))
+
+    @property
+    def tp_offset_slice(self):
+        '''The portion of parameter that gives the tie point offsets'''
+        return slice(0, len(self.tp_offset))
+
+    @property
+    def igc_coll_param_slice(self):
+        '''The portion of parameter that gives the parameters of igc_coll'''
+        return slice(len(self.tp_offset), None)
+
+    @property
+    def parameter(self):
+        '''This is the list of parameters for the SBA. This contains the
+        offset for each tie point, along with the parameters for igc_coll.'''
+        return np.append(self.tp_offset, self.igc_coll.parameter_subset)
+
+    @parameter.setter
+    def parameter(self, value):
+        '''This sets the list of parameters'''
+        self.tp_offset[:] = value[self.tp_offset_slice]
+        self.igc_coll.parameter_subset = value[self.igc_coll_param_slice]
+
+    def ground_location(self, tp_index):
+        '''Using the current value of the parameters, determine
+        the ground location of the given tie point'''
+        # Note subtle memory problem here. We initially did not have
+        # gl_ecr. This mean Ecr went out of scope as was deleted before
+        # gl was used. Easy work around is to store this is a variable
+        gl_ecr = Ecr(self.tie_point_array[tp_index].ground_location)
+        gl = gl_ecr.position
+        t = self.tp_offset[self.tp_slice[tp_index]]
+        pt = Ecr(gl[0] + t[0], gl[1] + t[1], gl[2] + t[2])
+        return pt
+
+    def sba_eq(self, parm):
+        '''Return all the constraints'''
+        self.parameter = parm
+        return np.append(np.append(self.surface_constraint(), 
+                                   self.collinearity_constraint()),
+                         self.parameter_constraint())
+
+    def sba_jacobian(self, parm):
+        '''Return Jacobian for SBA equation'''
+        self.parameter = parm
+        res = _coo_helper((len(self.tie_point_array) +
+                           self.niloc * 2 + len(self.parameter), 
+                           len(self.parameter)))
+        self.row_index = 0
+        self.__surface_constraint_jacobian(res)
+        self.__collinearity_constraint_jacobian(res)
+        self.__parameter_constraint_jacobian(res)
+        return res.coo_matrix()
+
+    def surface_constraint(self):
+        '''Calculate all the surface constraint equations. This is
+        the penalty we get from placing a tiepoint somewhere other than
+        the surface given by the Dem.'''
+        res = np.zeros(len(self.tie_point_array))
+        for i in range(len(self.tie_point_array)):
+            res[i] = self.dem.distance_to_surface(self.ground_location(i))
+        res /= self.dem_sigma
+        return res
+    
+    def __surface_constraint_jacobian(self, res):
+        '''Calculate the Jacobian of the surface constraint equations. Takes
+        matrix to fill in, and row to start at. The row gets updated to
+        just past the end of what we fill out'''
+        for i in range(len(self.tie_point_array)):
+            gp = self.ground_location(i)
+            pind = i * 3
+            x0 = self.dem.distance_to_surface(gp) / self.dem_sigma
+            for j in range(3):
+                gp.position[j] += self.tp_epsilon
+                x = self.dem.distance_to_surface(gp) / self.dem_sigma
+                res[self.row_index + i, pind + j] = (x - x0) / self.tp_epsilon
+                gp.position[j] -= self.tp_epsilon
+        self.row_index += len(self.tie_point_array)
+        
+    def collinearity_constraint(self):
+        '''Calculate the collinearity constraint equations. This is
+        difference between the predicted location in each image vs.
+        the actual location.'''
+        res = np.zeros(self.niloc * 2)
+        ind = 0
+        for i, tp in enumerate(self.tie_point_array):
+            gp = self.ground_location(i)
+            for j, il in enumerate(tp.image_location):
+                if(il):
+                    ic = self.igc_coll.image_coordinate(j, gp)
+                    ictp, lsigma, ssigma = il
+                    res[ind] = (ictp.line - ic.line) / lsigma
+                    res[ind + 1] = (ictp.sample - ic.sample) / ssigma
+                    ind += 2
+        return res
+
+    def __collinearity_constraint_jacobian(self, res):
+        '''Calculate the Jacobian of the collinearity constraint equations.'''
+        ind = self.row_index
+        for i, tp in enumerate(self.tie_point_array):
+            gp = self.ground_location(i)
+            for j, il in enumerate(tp.image_location):
+                if(il):
+                    ictp, lsigma, ssigma = il
+                    jac = self.igc_coll.image_coordinate_jac_ecr(j, gp)
+                    # We have "-" because equation if measured - predicted
+                    ts = self.tp_slice[i].start
+                    for k in range(3):
+                        res[ind, ts + k] = -jac[0,k] / lsigma
+                        res[ind + 1, ts + k] = -jac[1,k] / ssigma
+                    self.igc_coll.image_coordinate_jac_parm(j, gp, res, ind,
+                            self.igc_coll_param_slice.start, -1.0 / lsigma,
+                            -1.0 / ssigma)
+                    ind += 2
+        self.row_index = ind
+
+    def gcp_constraint(self):
+        '''Calculate the GP constraint. This is the penalty for moving
+        a GCP point from its original location.'''
+        pass # Not using yet
+
+    def parameter_constraint(self):
+        '''Calculate the parameter constraint. This is the penalty for
+        moving a particular parameter from its initial value.'''
+        # This needs to be scaled, but for now just do this
+        return np.array(self.parameter) / 10.0
+    
+    def __parameter_constraint_jacobian(self, res):
+        istart = (len(self.tie_point_array) + self.niloc * 2)
+        for i in range(len(self.parameter)):
+            res[istart + i, i] = 1 / 10.0

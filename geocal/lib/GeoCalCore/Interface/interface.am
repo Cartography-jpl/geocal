@@ -1,0 +1,137 @@
+# This gets included in the top makefile. This list files here that are
+# used to make up libgeocal.la.
+
+# srcimplementation is set in configure.in in the top directory, in case
+# you need to change this.
+
+# Source files for library
+
+geocalinc_HEADERS+= @srcinterface@/raster_image.h
+libgeocal_la_SOURCES+= @srcinterface@/raster_image.cc
+geocalinc_HEADERS+= @srcinterface@/raster_image_variable.h
+geocalinc_HEADERS+= @srcinterface@/sub_raster_image.h
+libgeocal_la_SOURCES+= @srcinterface@/sub_raster_image.cc
+geocalinc_HEADERS+= @srcinterface@/raster_image_multi_band.h
+libgeocal_la_SOURCES+= @srcinterface@/raster_image_multi_band.cc
+geocalinc_HEADERS+= @srcinterface@/raster_image_multi_band_variable.h
+geocalinc_HEADERS+= @srcinterface@/image_coordinate.h
+libgeocal_la_SOURCES+= @srcinterface@/image_coordinate.cc
+geocalinc_HEADERS+= @srcinterface@/ground_coordinate.h
+libgeocal_la_SOURCES+= @srcinterface@/ground_coordinate.cc
+geocalinc_HEADERS+= @srcinterface@/mask.h
+libgeocal_la_SOURCES+= @srcinterface@/mask.cc
+geocalinc_HEADERS+= @srcinterface@/frame_coordinate.h
+libgeocal_la_SOURCES+= @srcinterface@/frame_coordinate.cc
+geocalinc_HEADERS+= @srcinterface@/time_table.h
+libgeocal_la_SOURCES+= @srcinterface@/time_table.cc
+geocalinc_HEADERS+= @srcinterface@/camera.h
+libgeocal_la_SOURCES+= @srcinterface@/camera.cc
+geocalinc_HEADERS+= @srcinterface@/ecr.h
+geocalinc_HEADERS+= @srcinterface@/toolkit_coordinate_interface.h
+libgeocal_la_SOURCES+= @srcinterface@/ecr.cc
+geocalinc_HEADERS+= @srcinterface@/eci.h
+libgeocal_la_SOURCES+= @srcinterface@/eci.cc
+geocalinc_HEADERS+= @srcinterface@/look_vector.h
+libgeocal_la_SOURCES+= @srcinterface@/look_vector.cc
+geocalinc_HEADERS+= @srcinterface@/geodetic.h
+libgeocal_la_SOURCES+= @srcinterface@/geodetic.cc
+geocalinc_HEADERS+= @srcinterface@/coordinate_converter.h
+geocalinc_HEADERS+= @srcinterface@/dem.h
+libgeocal_la_SOURCES+= @srcinterface@/dem.cc
+geocalinc_HEADERS+= @srcinterface@/geocal_datum.h
+geocalinc_HEADERS+= @srcinterface@/simple_dem.h
+libgeocal_la_SOURCES+= @srcinterface@/simple_dem.cc
+geocalinc_HEADERS+= @srcinterface@/map_info.h
+libgeocal_la_SOURCES+= @srcinterface@/map_info.cc
+geocalinc_HEADERS+= @srcinterface@/orbit.h
+libgeocal_la_SOURCES+= @srcinterface@/orbit.cc
+geocalinc_HEADERS+= @srcinterface@/memory_raster_image.h
+libgeocal_la_SOURCES+= @srcinterface@/memory_raster_image.cc
+geocalinc_HEADERS+= @srcinterface@/dem_map_info.h
+libgeocal_la_SOURCES+= @srcinterface@/dem_map_info.cc
+geocalinc_HEADERS+= @srcinterface@/feature_detector.h
+libgeocal_la_SOURCES+= @srcinterface@/feature_detector.cc
+geocalinc_HEADERS+= @srcinterface@/forstner_feature_detector.h
+libgeocal_la_SOURCES+= @srcinterface@/forstner_feature_detector.cc
+geocalinc_HEADERS+= @srcinterface@/image_matcher.h
+geocalinc_HEADERS+= @srcinterface@/image_to_image_match.h
+geocalinc_HEADERS+= @srcinterface@/ccorr_matcher.h
+libgeocal_la_SOURCES+= @srcinterface@/ccorr_matcher.cc
+geocalinc_HEADERS+= @srcinterface@/lsm_matcher.h
+libgeocal_la_SOURCES+= @srcinterface@/lsm_matcher.cc
+geocalinc_HEADERS+= @srcinterface@/ccorr_lsm_matcher.h
+libgeocal_la_SOURCES+= @srcinterface@/ccorr_lsm_matcher.cc
+geocalinc_HEADERS+= @srcinterface@/geocal_rpc.h
+libgeocal_la_SOURCES+= @srcinterface@/geocal_rpc.cc
+geocalinc_HEADERS+= @srcinterface@/rpc_image.h
+libgeocal_la_SOURCES+= @srcinterface@/rpc_image.cc
+geocalinc_HEADERS+= @srcinterface@/ipi.h
+libgeocal_la_SOURCES+= @srcinterface@/ipi.cc
+geocalinc_HEADERS+= @srcinterface@/raster_multifile.h
+libgeocal_la_SOURCES+= @srcinterface@/raster_multifile.cc
+geocalinc_HEADERS+= @srcinterface@/image_ground_connection.h
+libgeocal_la_SOURCES+= @srcinterface@/image_ground_connection.cc
+
+# Files that contain SWIG wrapper information.
+SWIG_SOURCES += @srcinterface@/image_coordinate.i
+SWIG_SOURCES += @srcinterface@/look_vector.i
+SWIG_SOURCES += @srcinterface@/ground_coordinate.i
+SWIG_SOURCES += @srcinterface@/coordinate_converter.i
+SWIG_SOURCES += @srcinterface@/ecr.i
+SWIG_SOURCES += @srcinterface@/eci.i
+SWIG_SOURCES += @srcinterface@/geodetic.i
+SWIG_SOURCES += @srcinterface@/dem.i
+SWIG_SOURCES += @srcinterface@/map_info.i
+SWIG_SOURCES += @srcinterface@/geocal_rpc.i
+SWIG_SOURCES += @srcinterface@/raster_image.i
+SWIG_SOURCES += @srcinterface@/image_ground_connection.i
+SWIG_SOURCES += @srcinterface@/frame_coordinate.i
+SWIG_SOURCES += @srcinterface@/camera.i
+SWIG_SOURCES += @srcinterface@/orbit.i
+SWIG_SOURCES += @srcinterface@/time_table.i
+SWIG_SOURCES += @srcinterface@/ipi.i
+SWIG_SOURCES += @srcinterface@/raster_image_variable.i
+SWIG_SOURCES += @srcinterface@/sub_raster_image.i
+SWIG_SOURCES += @srcinterface@/raster_image_multi_band.i
+SWIG_SOURCES += @srcinterface@/raster_image_multi_band_variable.i
+SWIG_SOURCES += @srcinterface@/mask.i
+SWIG_SOURCES += @srcinterface@/geocal_datum.i
+SWIG_SOURCES += @srcinterface@/simple_dem.i
+SWIG_SOURCES += @srcinterface@/memory_raster_image.i
+SWIG_SOURCES += @srcinterface@/dem_map_info.i
+SWIG_SOURCES += @srcinterface@/feature_detector.i
+SWIG_SOURCES += @srcinterface@/forstner_feature_detector.i
+SWIG_SOURCES += @srcinterface@/image_matcher.i
+SWIG_SOURCES += @srcinterface@/image_to_image_match.i
+SWIG_SOURCES += @srcinterface@/ccorr_matcher.i
+SWIG_SOURCES += @srcinterface@/lsm_matcher.i
+SWIG_SOURCES += @srcinterface@/ccorr_lsm_matcher.i
+SWIG_SOURCES += @srcinterface@/rpc_image.i
+SWIG_SOURCES += @srcinterface@/raster_multifile.i
+
+# Test files
+geocal_test_all_SOURCES+= @srcinterface@/memory_raster_image_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/sub_raster_image_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/ground_coordinate_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/mask_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/frame_coordinate_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/time_table_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/camera_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/image_coordinate_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/coordinate_converter_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/simple_dem_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/look_vector_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/map_info_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/dem_map_info_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/feature_detector_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/ccorr_matcher_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/lsm_matcher_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/ccorr_lsm_matcher_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/orbit_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/geocal_rpc_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/rpc_image_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/ipi_test.cc
+
+AM_CPPFLAGS+= -I$(srcdir)/@srcinterface@
+
+

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00185" kind="class" prot="public">
+    <compoundname>std::basic_string</compoundname>
+    <derivedcompoundref refid="a00216" prot="public" virt="non-virtual">std::string</derivedcompoundref>
+    <derivedcompoundref refid="a00229" prot="public" virt="non-virtual">std::wstring</derivedcompoundref>
+    <innerclass refid="a00231" prot="public">std::basic_string::const_iterator</innerclass>
+    <innerclass refid="a00232" prot="public">std::basic_string::const_reverse_iterator</innerclass>
+    <innerclass refid="a00233" prot="public">std::basic_string::iterator</innerclass>
+    <innerclass refid="a00234" prot="public">std::basic_string::reverse_iterator</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+        <declname>Char</declname>
+        <defname>Char</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>STL class. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="267">
+        <label>std::string&lt; char &gt;</label>
+        <childnode refid="266" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="266">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="268">
+        <label>std::wstring&lt; wchar_t &gt;</label>
+        <childnode refid="266" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="[STL]" line="1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,446 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00003" kind="class" prot="public">
+    <compoundname>BTreeTraverser</compoundname>
+    <includes refid="a00028" local="no">BTreeTraverser.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename _Tree</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00003_1711047aba2a0d969ccc8e7a3e8988b0e" prot="public" static="no">
+        <type>_Tree::Backend::ErrorCode</type>
+        <definition>typedef _Tree::Backend::ErrorCode BTreeTraverser&lt; _Tree &gt;::ErrorCode</definition>
+        <argsstring></argsstring>
+        <name>ErrorCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="117" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00003_140f4ce987c76a0c90b8c5deae15aab95" prot="public" static="no">
+        <type>_Tree::IdType</type>
+        <definition>typedef _Tree::IdType BTreeTraverser&lt; _Tree &gt;::IdType</definition>
+        <argsstring></argsstring>
+        <name>IdType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="108" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00003_1145d86d4daee6431b21b662d35e3fdb2" prot="public" static="no">
+        <type>_Tree::KeyType</type>
+        <definition>typedef _Tree::KeyType BTreeTraverser&lt; _Tree &gt;::KeyType</definition>
+        <argsstring></argsstring>
+        <name>KeyType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="107" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00003_1cf66b578e0e0e6792739c36a87430116" prot="public" static="no">
+        <type>_Tree::LeafItem</type>
+        <definition>typedef _Tree::LeafItem BTreeTraverser&lt; _Tree &gt;::LeafItem</definition>
+        <argsstring></argsstring>
+        <name>LeafItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="114" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00003_14dea341213e70bcab7f9c2791cc7893b" prot="public" static="no">
+        <type>_Tree::LeafItemIterator</type>
+        <definition>typedef _Tree::LeafItemIterator BTreeTraverser&lt; _Tree &gt;::LeafItemIterator</definition>
+        <argsstring></argsstring>
+        <name>LeafItemIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="115" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00003_1760d2644f55b53fd82c5c08719f2283d" prot="public" static="no">
+        <type>_Tree::LeafNode</type>
+        <definition>typedef _Tree::LeafNode BTreeTraverser&lt; _Tree &gt;::LeafNode</definition>
+        <argsstring></argsstring>
+        <name>LeafNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="113" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00003_1cb2effd50c1711dfeac463415d11033f" prot="public" static="no">
+        <type>_Tree::Node</type>
+        <definition>typedef _Tree::Node BTreeTraverser&lt; _Tree &gt;::Node</definition>
+        <argsstring></argsstring>
+        <name>Node</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="110" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00003_1f8cbfa738d5c055b54b245e41b1b6e7a" prot="public" static="no">
+        <type>_Tree::NodeItem</type>
+        <definition>typedef _Tree::NodeItem BTreeTraverser&lt; _Tree &gt;::NodeItem</definition>
+        <argsstring></argsstring>
+        <name>NodeItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="111" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00003_151ddde1e9866930c398839b29ed1d684" prot="public" static="no">
+        <type>_Tree::NodeItemIterator</type>
+        <definition>typedef _Tree::NodeItemIterator BTreeTraverser&lt; _Tree &gt;::NodeItemIterator</definition>
+        <argsstring></argsstring>
+        <name>NodeItemIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="112" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00003_11f7b4ebaf73d8f9c9c251a37088b9bc9" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; IdType &gt;</type>
+        <definition>std::vector&lt;IdType&gt; BTreeTraverser&lt; _Tree &gt;::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="121" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00003_1f8b74ba645e002f9f28806842937aae0" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::size_t &gt;</type>
+        <definition>std::vector&lt;std::size_t&gt; BTreeTraverser&lt; _Tree &gt;::idx</definition>
+        <argsstring></argsstring>
+        <name>idx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="122" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00003_101d38dd88c5e75e0bcb4344a7c6c2ea0" prot="private" static="no" mutable="no">
+        <type>LeafNode *</type>
+        <definition>LeafNode* BTreeTraverser&lt; _Tree &gt;::leaf</definition>
+        <argsstring></argsstring>
+        <name>leaf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="125" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00003_16733a5d3ab8325dbc403dc4d9899b424" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t BTreeTraverser&lt; _Tree &gt;::m_inserts</definition>
+        <argsstring></argsstring>
+        <name>m_inserts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="459" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="459" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00003_1b4face5f3dffad92870c2d57bed994e0" prot="public" static="no" mutable="no">
+        <type>_Tree *</type>
+        <definition>_Tree* BTreeTraverser&lt; _Tree &gt;::m_tree</definition>
+        <argsstring></argsstring>
+        <name>m_tree</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="136" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="a00003_17b9217dce469fbd381841ca6f6e03d91" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BTreeTraverser&lt; _Tree &gt;::BTreeTraverser</definition>
+        <argsstring>(const BTreeTraverser &amp;)</argsstring>
+        <name>BTreeTraverser</name>
+        <param>
+          <type>const <ref refid="a00003" kindref="compound">BTreeTraverser</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="131"/>
+      </memberdef>
+      <memberdef kind="function" id="a00003_1b58a01faea56505ed2fd41510c83266d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BTreeTraverser&lt; _Tree &gt;::BTreeTraverser</definition>
+        <argsstring>()</argsstring>
+        <name>BTreeTraverser</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="130"/>
+      </memberdef>
+      <memberdef kind="function" id="a00003_1d83693448658ff054a53a64be02466a8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BTreeTraverser&lt; _Tree &gt;::operator=</definition>
+        <argsstring>(const BTreeTraverser &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="a00003" kindref="compound">BTreeTraverser</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="132"/>
+      </memberdef>
+      <memberdef kind="function" id="a00003_161b1544d89b8df47594c11a56c41fb93" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BTreeTraverser&lt; _Tree &gt;::traverse_to</definition>
+        <argsstring>(const NodeItem &amp;item)</argsstring>
+        <name>traverse_to</name>
+        <param>
+          <type>const NodeItem &amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="397" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="396" bodyend="457"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00003_1c9734d7d618e849578dad013caf6a994" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BTreeTraverser&lt; _Tree &gt;::begin</definition>
+        <argsstring>() WARN_IF_UNUSED</argsstring>
+        <name>begin</name>
+        <briefdescription>
+<para>this function traverses to the very first node (lowest value) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="172" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="171" bodyend="195"/>
+        <referencedby refid="a00001_10941e161bad609defc47d3b09939e9f8" compoundref="a00024" startline="219" endline="224">BTree&lt; StringKey, UniqueIdT, max_child_items, DiskTreeBackend&lt; _NodeBase, _NodeType, _NodeItemType, _LeafNode, _KeyType, _max_node_items &gt;, true &gt;::Begin</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00003_12a20a6c28bc7de4bf818fa153a389d9d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BTreeTraverser&lt; _Tree &gt;::BTreeTraverser</definition>
+        <argsstring>(_Tree *tree)</argsstring>
+        <name>BTreeTraverser</name>
+        <param>
+          <type>_Tree *</type>
+          <declname>tree</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="144" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="141" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="a00003_140e592d8700acf785548411ef090d9fb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const LeafItem &amp;</type>
+        <definition>const LeafItem&amp; BTreeTraverser&lt; _Tree &gt;::current</definition>
+        <argsstring>() const </argsstring>
+        <name>current</name>
+        <briefdescription>
+<para>const accessor </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="161" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="160" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="a00003_1e3f37ca45b3e37de7969cd134f72bb59" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>LeafItem &amp;</type>
+        <definition>LeafItem&amp; BTreeTraverser&lt; _Tree &gt;::current</definition>
+        <argsstring>()</argsstring>
+        <name>current</name>
+        <briefdescription>
+<para>grabs the current leaf that this is pointing to </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>You should *never* modify the returned key, but if you modify the value then you must call set_dirty() </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="155" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="154" bodyend="157"/>
+        <referencedby refid="a00021_1c92b05d069b14cb0a4da7733e6784d52" compoundref="a00042" startline="240" endline="267">StringTable&lt; _key_length, max_child_items &gt;::FindStringId</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00003_17eef96c0e3e262e35fd59dada2a8d8c9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BTreeTraverser&lt; _Tree &gt;::end</definition>
+        <argsstring>() const </argsstring>
+        <name>end</name>
+        <briefdescription>
+<para>returns true if the traverser is finished traversing </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="199" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="198" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="a00003_1c4e1935dff52e2ac17ffda583c2dea63" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BTreeTraverser&lt; _Tree &gt;::find</definition>
+        <argsstring>(const KeyType &amp;key) WARN_IF_UNUSED</argsstring>
+        <name>find</name>
+        <param>
+          <type>const KeyType &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>finds an item </para>        </briefdescription>
+        <detaileddescription>
+<para>This caches its current position, so it doesn&apos;t need to traverse the height of the tree each time that it searches for an item -- IF the item happens to be nearby (for some definition of nearby)</para><para>If an insert occurs, this will automatically detect it, discard the cached data, and start the search from the root of the tree.</para><para>If allow_duplicates is specified, <ref refid="a00003_1c4e1935dff52e2ac17ffda583c2dea63" kindref="member">find()</ref> will only find the left-most instance of a key. You can use <ref refid="a00003_102219cd40c2dbed41d5e9063a8ff30ca" kindref="member">next()</ref> to iterate over other instances of the key.</para><para><simplesect kind="return"><para>true if an item with the key is found </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="293" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="292" bodyend="367"/>
+        <referencedby refid="a00021_1c92b05d069b14cb0a4da7733e6784d52" compoundref="a00042" startline="240" endline="267">StringTable&lt; _key_length, max_child_items &gt;::FindStringId</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00003_102219cd40c2dbed41d5e9063a8ff30ca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BTreeTraverser&lt; _Tree &gt;::next</definition>
+        <argsstring>() WARN_IF_UNUSED</argsstring>
+        <name>next</name>
+        <briefdescription>
+<para>Goes to the next entry. </para>        </briefdescription>
+        <detaileddescription>
+<para>This call will fail unless the Traverser is currently at a leaf node. This means that you have either</para><para><itemizedlist>
+<listitem><para>called <ref refid="a00003_1c9734d7d618e849578dad013caf6a994" kindref="member">begin()</ref></para></listitem><listitem><para>Created the traverser with go_to_start set to true</para></listitem><listitem><para>called <ref refid="a00003_1c4e1935dff52e2ac17ffda583c2dea63" kindref="member">find()</ref> and found an object</para></listitem></itemizedlist>
+</para><para>Additionally, you need to ensure that no inserts occur while you are traversing using begin/next/end, otherwise you will get incorrect results. <ref refid="a00003_1c4e1935dff52e2ac17ffda583c2dea63" kindref="member">find()</ref> does not suffer from this, but using next in conjunction with find will cause errors if an insert occurs. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="221" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="220" bodyend="274"/>
+        <referencedby refid="a00021_1c92b05d069b14cb0a4da7733e6784d52" compoundref="a00042" startline="240" endline="267">StringTable&lt; _key_length, max_child_items &gt;::FindStringId</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00003_1618551b1df0c5af62ae8b2531305b518" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void BTreeTraverser&lt; _Tree &gt;::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="370" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="369" bodyend="391"/>
+      </memberdef>
+      <memberdef kind="function" id="a00003_1aa113c2152f681e594d73884c36394ad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void BTreeTraverser&lt; _Tree &gt;::set_dirty</definition>
+        <argsstring>()</argsstring>
+        <name>set_dirty</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="166" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="165" bodyend="168"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This defines a traverser/iterator for the B+ Tree. </para>    </briefdescription>
+    <detaileddescription>
+<para>While it is similar, it is *not* an STL iterator, since the design constraints for that require double-linked lists (or lots of overhead), and we aren&apos;t doing it that way.</para><para>If any of these functions cause an error, then you can check the main tree to see what the error was.</para><para><simplesect kind="warning"><para>At the moment, you can only use one iterator on a tree at a time. Usage of another iterator may invalidate the previous iterator.</para></simplesect>
+<xrefsect id="todo_1_todo000002"><xreftitle>Todo</xreftitle><xrefdescription><para>Fix that</para></xrefdescription></xrefsect>Finding a specific item:</para><para>it = tree-&gt;GetTraverser();</para><para>if (it &amp;&amp; it-&gt;find(key)) { LeafNode &amp; item = it-&gt;<ref refid="a00003_1e3f37ca45b3e37de7969cd134f72bb59" kindref="member">current()</ref>;</para><para>do stuff here }</para><para>Iterating all items:</para><para>it = tree-&gt;Begin();</para><para>if (it &amp;&amp; !it-&gt;<ref refid="a00003_17eef96c0e3e262e35fd59dada2a8d8c9" kindref="member">end()</ref>) { do { LeafItem &amp; item = it-&gt;<ref refid="a00003_1e3f37ca45b3e37de7969cd134f72bb59" kindref="member">current()</ref>;</para><para>} while (it-&gt;<ref refid="a00003_102219cd40c2dbed41d5e9063a8ff30ca" kindref="member">next()</ref>); }</para><para>Iterating a range:</para><para>it = tree-&gt;Find(start_key);</para><para>if (it &amp;&amp; !it-&gt;<ref refid="a00003_17eef96c0e3e262e35fd59dada2a8d8c9" kindref="member">end()</ref>) { do { LeafItem &amp; item = it-&gt;<ref refid="a00003_1e3f37ca45b3e37de7969cd134f72bb59" kindref="member">current()</ref>;</para><para>if (item.key &gt; end_key) break;</para><para>} while (it-&gt;<ref refid="a00003_102219cd40c2dbed41d5e9063a8ff30ca" kindref="member">next()</ref>); } </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="302">
+        <label>std::vector&lt; std::size_t &gt;</label>
+      </node>
+      <node id="301">
+        <label>BTreeTraverser&lt; _Tree &gt;</label>
+        <link refid="a00003"/>
+        <childnode refid="302" relation="usage">
+          <edgelabel>idx</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" line="102" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeTraverser.h" bodystart="102" bodyend="460"/>
+    <listofallmembers>
+      <member refid="a00003_1c9734d7d618e849578dad013caf6a994" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>begin</name></member>
+      <member refid="a00003_1b58a01faea56505ed2fd41510c83266d" prot="private" virt="non-virtual"><scope>BTreeTraverser</scope><name>BTreeTraverser</name></member>
+      <member refid="a00003_17b9217dce469fbd381841ca6f6e03d91" prot="private" virt="non-virtual"><scope>BTreeTraverser</scope><name>BTreeTraverser</name></member>
+      <member refid="a00003_12a20a6c28bc7de4bf818fa153a389d9d" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>BTreeTraverser</name></member>
+      <member refid="a00003_1e3f37ca45b3e37de7969cd134f72bb59" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>current</name></member>
+      <member refid="a00003_140e592d8700acf785548411ef090d9fb" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>current</name></member>
+      <member refid="a00003_17eef96c0e3e262e35fd59dada2a8d8c9" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>end</name></member>
+      <member refid="a00003_1711047aba2a0d969ccc8e7a3e8988b0e" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>ErrorCode</name></member>
+      <member refid="a00003_1c4e1935dff52e2ac17ffda583c2dea63" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>find</name></member>
+      <member refid="a00003_11f7b4ebaf73d8f9c9c251a37088b9bc9" prot="private" virt="non-virtual"><scope>BTreeTraverser</scope><name>id</name></member>
+      <member refid="a00003_140f4ce987c76a0c90b8c5deae15aab95" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>IdType</name></member>
+      <member refid="a00003_1f8b74ba645e002f9f28806842937aae0" prot="private" virt="non-virtual"><scope>BTreeTraverser</scope><name>idx</name></member>
+      <member refid="a00003_1145d86d4daee6431b21b662d35e3fdb2" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>KeyType</name></member>
+      <member refid="a00003_101d38dd88c5e75e0bcb4344a7c6c2ea0" prot="private" virt="non-virtual"><scope>BTreeTraverser</scope><name>leaf</name></member>
+      <member refid="a00003_1cf66b578e0e0e6792739c36a87430116" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>LeafItem</name></member>
+      <member refid="a00003_14dea341213e70bcab7f9c2791cc7893b" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>LeafItemIterator</name></member>
+      <member refid="a00003_1760d2644f55b53fd82c5c08719f2283d" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>LeafNode</name></member>
+      <member refid="a00003_16733a5d3ab8325dbc403dc4d9899b424" prot="private" virt="non-virtual"><scope>BTreeTraverser</scope><name>m_inserts</name></member>
+      <member refid="a00003_1b4face5f3dffad92870c2d57bed994e0" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>m_tree</name></member>
+      <member refid="a00003_102219cd40c2dbed41d5e9063a8ff30ca" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>next</name></member>
+      <member refid="a00003_1cb2effd50c1711dfeac463415d11033f" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>Node</name></member>
+      <member refid="a00003_1f8cbfa738d5c055b54b245e41b1b6e7a" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>NodeItem</name></member>
+      <member refid="a00003_151ddde1e9866930c398839b29ed1d684" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>NodeItemIterator</name></member>
+      <member refid="a00003_1d83693448658ff054a53a64be02466a8" prot="private" virt="non-virtual"><scope>BTreeTraverser</scope><name>operator=</name></member>
+      <member refid="a00003_1618551b1df0c5af62ae8b2531305b518" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>reset</name></member>
+      <member refid="a00003_1aa113c2152f681e594d73884c36394ad" prot="public" virt="non-virtual"><scope>BTreeTraverser</scope><name>set_dirty</name></member>
+      <member refid="a00003_161b1544d89b8df47594c11a56c41fb93" prot="private" virt="non-virtual"><scope>BTreeTraverser</scope><name>traverse_to</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

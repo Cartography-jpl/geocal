@@ -1,0 +1,836 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00001" kind="class" prot="public">
+    <compoundname>BTree</compoundname>
+    <includes refid="a00024" local="no">BTree.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Query functions</header>
+      <memberdef kind="function" id="a00001_10941e161bad609defc47d3b09939e9f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00003" kindref="compound">Iterator</ref> *</type>
+        <definition>Iterator* BTree::Begin</definition>
+        <argsstring>()</argsstring>
+        <name>Begin</name>
+        <briefdescription>
+<para>when you call this, ensure that end() is not true </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="220" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="219" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="a00001_1ce71aba8c57958978a31d993cf822d6c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="a00003" kindref="compound">Traverser</ref> *</type>
+        <definition>Traverser* BTree::GetTraverser</definition>
+        <argsstring>()</argsstring>
+        <name>GetTraverser</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="214" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="213" bodyend="216"/>
+        <referencedby refid="a00021_1ad29815a144f9ac1c738314891d21359" compoundref="a00042" startline="160" endline="230">StringTable&lt; _key_length, max_child_items &gt;::Initialize</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Backend/control interface</header>
+      <memberdef kind="function" id="a00001_184028cac8fb514413ee73361ba678a5e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void BTree::Destroy</definition>
+        <argsstring>()</argsstring>
+        <name>Destroy</name>
+        <briefdescription>
+<para>erases all nodes from the tree </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="204" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="203" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="a00001_1ae74f51fe733b3c48ebff53510dea2cb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>ErrorCode</type>
+        <definition>ErrorCode BTree::GetErrorCode</definition>
+        <argsstring>() const </argsstring>
+        <name>GetErrorCode</name>
+        <briefdescription>
+<para>returns the last error code: it may either be the trees error code, or the backend&apos;s error code </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="195" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="194" bodyend="200"/>
+        <referencedby refid="a00021_1cc07e37f66c38cd23a1e7bc5623c6fb7" compoundref="a00042" startline="133" endline="138">StringTable&lt; _key_length, max_child_items &gt;::GetErrorCode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00001_16d1943d72e893359a142ded378de6cbe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BTree::Initialize</definition>
+        <argsstring>(BackendArgs &amp;args) WARN_IF_UNUSED</argsstring>
+        <name>Initialize</name>
+        <param>
+          <type>BackendArgs &amp;</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="183" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="182" bodyend="185"/>
+        <referencedby refid="a00021_1ad29815a144f9ac1c738314891d21359" compoundref="a00042" startline="160" endline="230">StringTable&lt; _key_length, max_child_items &gt;::Initialize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00001_1661de2670698ce4317cad22e7fd19d1d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BTree::IsOk</definition>
+        <argsstring>()</argsstring>
+        <name>IsOk</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="188" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="187" bodyend="190"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00001_145a144d9388ab70b0530054b40c0526e" prot="public" static="no">
+        <type>_Backend&lt; NodeBase, <ref refid="a00002" kindref="compound">BTreeNode</ref>, TreeNodeItem, <ref refid="a00022" kindref="compound">LeafNode</ref>, KeyType, max_child_items &gt;</type>
+        <definition>typedef _Backend&lt; NodeBase, BTreeNode, TreeNodeItem, LeafNode, KeyType, max_child_items&gt; BTree::Backend</definition>
+        <argsstring></argsstring>
+        <name>Backend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="133" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_1a3231d6c9e4a330ef179b7cd4750e9e6" prot="public" static="no">
+        <type>Backend::Args</type>
+        <definition>typedef Backend::Args BTree::BackendArgs</definition>
+        <argsstring></argsstring>
+        <name>BackendArgs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="135" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="enum" id="a00001_16b04b9e3852517961c85dc73bc44ec22" prot="public" static="no">
+        <name>ErrorCode</name>
+        <enumvalue id="a00001_16b04b9e3852517961c85dc73bc44ec22bb47c28aec1ced42b66348104cf6a47d" prot="public">
+          <name>ERR_NONE</name>
+          <initializer> 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00001_16b04b9e3852517961c85dc73bc44ec2212aa3c0e4974682436aa46641a984fd0" prot="public">
+          <name>ERR_CREATE_NODE_IN_SPLIT</name>
+          <initializer> 100</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00001_16b04b9e3852517961c85dc73bc44ec22a43ec1dd2952f90ab1a6d1826597ceaf" prot="public">
+          <name>ERR_CREATE_ROOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00001_16b04b9e3852517961c85dc73bc44ec221d79f8f0158f37b177a43f3d52ecd81a" prot="public">
+          <name>ERR_CREATE_SPLIT_ROOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00001_16b04b9e3852517961c85dc73bc44ec22694c0b0b4b42aa897efb16cd2e115148" prot="public">
+          <name>ERR_GET_LEAFNODE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00001_16b04b9e3852517961c85dc73bc44ec2245df4b4b09815bca928b3b5363f5fae1" prot="public">
+          <name>ERR_GET_NODE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00001_16b04b9e3852517961c85dc73bc44ec22cf74960d8869e3b5bcb8a24f6587d51a" prot="public">
+          <name>ERR_GET_ROOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00001_16b04b9e3852517961c85dc73bc44ec22d6eff8d66835479d5d6e9cce43a448c5" prot="public">
+          <name>ERR_GET_SPLIT_ROOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00001_16b04b9e3852517961c85dc73bc44ec22dd4e0a9175751ffa51219bb63f013a5f" prot="public">
+          <name>ERR_PROPAGATE_SPLIT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="a00001_16b04b9e3852517961c85dc73bc44ec226d14794bebdece1056d387ce27aae4b2" prot="public">
+          <name>ERR_ITEM_EXISTS</name>
+          <initializer> 200</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="152" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="152" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_1be734097976f0426326957a07cfdbbed" prot="public" static="no">
+        <type>Backend::IdType</type>
+        <definition>typedef Backend::IdType BTree::IdType</definition>
+        <argsstring></argsstring>
+        <name>IdType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="138" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_135363ef010d53e88d0e358bf193fef09" prot="public" static="no">
+        <type><ref refid="a00003" kindref="compound">Traverser</ref></type>
+        <definition>typedef Traverser BTree::Iterator</definition>
+        <argsstring></argsstring>
+        <name>Iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="147" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_1f801a917b495912cbbb239a3859be6d4" prot="public" static="no">
+        <type>_KeyType</type>
+        <definition>typedef _KeyType BTree::KeyType</definition>
+        <argsstring></argsstring>
+        <name>KeyType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="114" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_11a7c274ae1c562a385a392fcb45ce531" prot="public" static="no">
+        <type>TreeLeafItem&lt; KeyType, LeafType &gt;</type>
+        <definition>typedef TreeLeafItem&lt;KeyType, LeafType&gt; BTree::LeafItem</definition>
+        <argsstring></argsstring>
+        <name>LeafItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="121" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_165ac78bb4f7221c4d45e6b57acb41e37" prot="public" static="no">
+        <type>LeafNode::ItemArray</type>
+        <definition>typedef LeafNode::ItemArray BTree::LeafItemArray</definition>
+        <argsstring></argsstring>
+        <name>LeafItemArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="123" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_1d67a7c4c0610439bf31806669e4857b7" prot="public" static="no">
+        <type>LeafItemArray::iterator</type>
+        <definition>typedef LeafItemArray::iterator BTree::LeafItemIterator</definition>
+        <argsstring></argsstring>
+        <name>LeafItemIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="124" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_1d43bcd1d90ea300e977ad1b66bdc3a48" prot="public" static="no">
+        <type><ref refid="a00022" kindref="compound">TreeNode</ref>&lt; LeafItem, max_child_items &gt;</type>
+        <definition>typedef TreeNode&lt;LeafItem, max_child_items&gt; BTree::LeafNode</definition>
+        <argsstring></argsstring>
+        <name>LeafNode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="122" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_19ab7074c4eeac904c4960537af9a13fe" prot="public" static="no">
+        <type>_leaf_type</type>
+        <definition>typedef _leaf_type BTree::LeafType</definition>
+        <argsstring></argsstring>
+        <name>LeafType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="115" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_1c622f1cedbc6f94ed4f6f97cf4bbd4fa" prot="public" static="no">
+        <type>Backend::Node</type>
+        <definition>typedef Backend::Node BTree::Node</definition>
+        <argsstring></argsstring>
+        <name>Node</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="141" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_13fe1470e08c78343f51144a4261927f2" prot="public" static="no">
+        <type>BTreeNodeBase</type>
+        <definition>typedef BTreeNodeBase BTree::NodeBase</definition>
+        <argsstring></argsstring>
+        <name>NodeBase</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="118" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_10331e938f93584a419282437a28d9c82" prot="public" static="no">
+        <type>Backend::NodeItem</type>
+        <definition>typedef Backend::NodeItem BTree::NodeItem</definition>
+        <argsstring></argsstring>
+        <name>NodeItem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="140" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_12ed9fcc51681f507ab263958584bf6fa" prot="public" static="no">
+        <type>Node::ItemArray</type>
+        <definition>typedef Node::ItemArray BTree::NodeItemArray</definition>
+        <argsstring></argsstring>
+        <name>NodeItemArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="142" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_14688282b76f348be7a607ea10eea14a0" prot="public" static="no">
+        <type>NodeItemArray::iterator</type>
+        <definition>typedef NodeItemArray::iterator BTree::NodeItemIterator</definition>
+        <argsstring></argsstring>
+        <name>NodeItemIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="143" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_1aad0fd7bde6a8a6ac1473c961270f1eb" prot="public" static="no">
+        <type>Backend::size_type</type>
+        <definition>typedef Backend::size_type BTree::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="137" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_16a351f9e18e51d3adf239afb363d77c6" prot="public" static="no">
+        <type><ref refid="a00001" kindref="compound">BTree</ref>&lt; __BTREE_TEMPLATE_FN &gt;</type>
+        <definition>typedef BTree&lt;__BTREE_TEMPLATE_FN&gt; BTree::this_type</definition>
+        <argsstring></argsstring>
+        <name>this_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="112" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00001_1356381169e6ec6c29c9d945e42afd8ea" prot="public" static="no">
+        <type><ref refid="a00003" kindref="compound">BTreeTraverser</ref>&lt; <ref refid="a00001" kindref="compound">this_type</ref> &gt;</type>
+        <definition>typedef BTreeTraverser&lt;this_type&gt; BTree::Traverser</definition>
+        <argsstring></argsstring>
+        <name>Traverser</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="146" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="a00001_195365baf630836d7653215c102d0b6b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class BTreeTraverser&lt; this_type &gt;</definition>
+        <argsstring></argsstring>
+        <name>BTreeTraverser&lt; this_type &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="149" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="a00001_14cbaace943cc00adb7a387aa580cf3d1" prot="protected" static="no" mutable="no">
+        <type>Backend</type>
+        <definition>Backend BTree::backend</definition>
+        <argsstring></argsstring>
+        <name>backend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="554" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="554" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00001_1d39a666b52f6a21ecd23693eba39eaa9" prot="protected" static="no" mutable="no">
+        <type>size_type</type>
+        <definition>size_type BTree::m_inserts</definition>
+        <argsstring></argsstring>
+        <name>m_inserts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="558" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="558" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00001_1c2c2d2ca81569327b47410ae17e35c21" prot="protected" static="no" mutable="no">
+        <type>ErrorCode</type>
+        <definition>ErrorCode BTree::m_lastError</definition>
+        <argsstring></argsstring>
+        <name>m_lastError</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="555" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="555" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00001_1e3adf097939b1bce7fba5a5d55ff8907" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BTree::BTree</definition>
+        <argsstring>()</argsstring>
+        <name>BTree</name>
+        <briefdescription>
+<para>Default constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="172" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="170" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="a00001_1c0061021d9258709326bace218172bfc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>size_type BTree::GetHeight</definition>
+        <argsstring>() const </argsstring>
+        <name>GetHeight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="292" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="292" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="a00001_1bdf9810775b2f8cf9599161332b0dd92" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>size_type BTree::GetItemCount</definition>
+        <argsstring>() const </argsstring>
+        <name>GetItemCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="291" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="291" bodyend="291"/>
+        <referencedby refid="a00021_117000a94505633e0579ec899cb7445da" compoundref="a00042" startline="141" endline="144">StringTable&lt; _key_length, max_child_items &gt;::GetItemCount</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00001_1ab50f07342832b39c3bd29aacd283dfb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BTree::Insert</definition>
+        <argsstring>(const KeyType &amp;key, const LeafType &amp;leaf, bool update=true) WARN_IF_UNUSED</argsstring>
+        <name>Insert</name>
+        <param>
+          <type>const KeyType &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const LeafType &amp;</type>
+          <declname>leaf</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>update</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Insert function, adds a new item to the tree. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Key to index by (must be unique, see the update param) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>leaf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Item to insert </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(ignored if allow_duplicates is true) If this is true, then if the item is found in the tree it will update it. Otherwise it will just insert a new value. If this is false, then if the item is in the tree it will return an error. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="247" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="242" bodyend="288"/>
+        <referencedby refid="a00021_1cbac23c55d6a42a98882ec97b8006aac" compoundref="a00042" startline="366" endline="437">StringTable&lt; _key_length, max_child_items &gt;::InsertString</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00001_147c195fa985ccd957c54fe6970d64589" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t BTree::Print</definition>
+        <argsstring>(const char *filename)</argsstring>
+        <name>Print</name>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="295"/>
+      </memberdef>
+      <memberdef kind="function" id="a00001_180aa7d0aa00e7d46655894a167436986" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>__BTREE_TEMPLATE_DEFN bool BTree::Verify</definition>
+        <argsstring>()</argsstring>
+        <name>Verify</name>
+        <briefdescription>
+<para>Use this to verify that a tree has a valid structure (walks all nodes). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="298" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTreeVerify.h" bodystart="33" bodyend="156"/>
+        <references refid="a00022_19ae94d6e7435ced4ab79536df760ab75" compoundref="a00047" startline="53">TreeNode&lt; _Item, _max_items &gt;::items</references>
+        <referencedby refid="a00021_112d0b73740a07a590f6d7331b6c9c268" compoundref="a00042" startline="147" endline="150">StringTable&lt; _key_length, max_child_items &gt;::VerifyIndex</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="a00001_11d0dbad21ec825a7c8e5625709010e6c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BTree::~BTree</definition>
+        <argsstring>()</argsstring>
+        <name>~BTree</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="175" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="175" bodyend="176"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="a00001_1bdb68e8faf1cf9ad9a1f4bbb11a58df2" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void BTree::FinishNodeSplit</definition>
+        <argsstring>(NodeBase *_node, NodeBase *_new_node)</argsstring>
+        <name>FinishNodeSplit</name>
+        <param>
+          <type>NodeBase *</type>
+          <declname>_node</declname>
+        </param>
+        <param>
+          <type>NodeBase *</type>
+          <declname>_new_node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="465" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="464" bodyend="475"/>
+      </memberdef>
+      <memberdef kind="function" id="a00001_17e892d97c6b579f322ad1e5399d76f41" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NodeItem *</type>
+        <definition>NodeItem* BTree::InsertInternal</definition>
+        <argsstring>(const LeafItem &amp;leafItem, const IdType node_id, const std::size_t level, bool update)</argsstring>
+        <name>InsertInternal</name>
+        <param>
+          <type>const LeafItem &amp;</type>
+          <declname>leafItem</declname>
+        </param>
+        <param>
+          <type>const IdType</type>
+          <declname>node_id</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>update</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="314" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="309" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="a00001_134428d82513b57b9ea2b03f2539c0961" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Node *</type>
+        <definition>Node* BTree::PropagateSplit</definition>
+        <argsstring>(const IdType node_id, const size_type old_idx, NodeItem *splitItem)</argsstring>
+        <name>PropagateSplit</name>
+        <param>
+          <type>const IdType</type>
+          <declname>node_id</declname>
+        </param>
+        <param>
+          <type>const size_type</type>
+          <declname>old_idx</declname>
+        </param>
+        <param>
+          <type>NodeItem *</type>
+          <declname>splitItem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="513" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="509" bodyend="551"/>
+      </memberdef>
+      <memberdef kind="function" id="a00001_1b2ff4f5cf2c3cefbe3492dedd6afc46b" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename NodeType</type>
+          </param>
+        </templateparamlist>
+        <type>NodeItem *</type>
+        <definition>NodeItem* BTree::Split</definition>
+        <argsstring>(NodeType *node, const std::size_t &amp;level)</argsstring>
+        <name>Split</name>
+        <param>
+          <type>NodeType *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>const std::size_t &amp;</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="403" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="400" bodyend="461"/>
+      </memberdef>
+      <memberdef kind="function" id="a00001_1b9de0b0b136f069ae866f34c0503551b" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NodeItem *</type>
+        <definition>NodeItem* BTree::SplitRoot</definition>
+        <argsstring>(const KeyType &amp;key, const IdType &amp;split_id)</argsstring>
+        <name>SplitRoot</name>
+        <param>
+          <type>const KeyType &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const IdType &amp;</type>
+          <declname>split_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="483" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="480" bodyend="506"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implementation of a modified B/B+ Tree. </para>    </briefdescription>
+    <detaileddescription>
+<para>This is intended to be a templated implementation of an B+ Tree. Yes its been done before, but... this is better. Maybe.</para><para>Amusingly enough, this is adapted from the R* Tree implementation, so many of the steps are derived from the way the R* tree does it.</para><para>Structure:</para><para><itemizedlist>
+<listitem><para>Each node has up to max_items in it. Each item has a key, and an id that points to the next node or a leaf node.</para></listitem></itemizedlist>
+</para><para><itemizedlist>
+<listitem><para>In any given node, the key for that node is always equivalent to the key of the last child item of that node, so it is always &gt;= the keys of all child items.</para></listitem></itemizedlist>
+</para><para><itemizedlist>
+<listitem><para>There is an end_id of each non-leaf node, which points to nodes that are always &gt; the last key in the node.</para></listitem></itemizedlist>
+</para><para><itemizedlist>
+<listitem><para>There are LeafNodes and Nodes. LeafNodes contain leaves, whereas Nodes always contain pointers to either LeafNodes or Nodes depending on the level of the tree.</para></listitem></itemizedlist>
+</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_KeyType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of key you want to index on </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_leaf_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of leaf you want to store </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_child_items</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of items in a node/leaf </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_Backend</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the backend to use to store nodes, either DiskTreeBackend or <ref refid="a00011" kindref="compound">MemoryTreeBackend</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_allow_duplicates</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Allow the tree to store items with the same keys</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<xrefsect id="todo_1_todo000001"><xreftitle>Todo</xreftitle><xrefdescription><para>Turn this into a buffer tree. Doing it for the B tree should be easy enough, then it should be trivial to convert the R* tree to do it</para></xrefdescription></xrefsect></para>    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" line="107" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/BTree/BTree.h" bodystart="106" bodyend="559"/>
+    <listofallmembers>
+      <member refid="a00001_1c04c98bb9172fca25b8c37c8f19b932f305b0556b6a83be2aa47d2519a2cc195" prot="public" virt="non-virtual"><scope>BTree</scope><name>allow_duplicates</name></member>
+      <member refid="a00001_145a144d9388ab70b0530054b40c0526e" prot="public" virt="non-virtual"><scope>BTree</scope><name>Backend</name></member>
+      <member refid="a00001_14cbaace943cc00adb7a387aa580cf3d1" prot="protected" virt="non-virtual"><scope>BTree</scope><name>backend</name></member>
+      <member refid="a00001_1a3231d6c9e4a330ef179b7cd4750e9e6" prot="public" virt="non-virtual"><scope>BTree</scope><name>BackendArgs</name></member>
+      <member refid="a00001_10941e161bad609defc47d3b09939e9f8" prot="public" virt="non-virtual"><scope>BTree</scope><name>Begin</name></member>
+      <member refid="a00001_1e3adf097939b1bce7fba5a5d55ff8907" prot="public" virt="non-virtual"><scope>BTree</scope><name>BTree</name></member>
+      <member refid="a00001_195365baf630836d7653215c102d0b6b7" prot="public" virt="non-virtual"><scope>BTree</scope><name>BTreeTraverser&lt; this_type &gt;</name></member>
+      <member refid="a00001_184028cac8fb514413ee73361ba678a5e" prot="public" virt="non-virtual"><scope>BTree</scope><name>Destroy</name></member>
+      <member refid="a00001_16b04b9e3852517961c85dc73bc44ec2212aa3c0e4974682436aa46641a984fd0" prot="public" virt="non-virtual"><scope>BTree</scope><name>ERR_CREATE_NODE_IN_SPLIT</name></member>
+      <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22a43ec1dd2952f90ab1a6d1826597ceaf" prot="public" virt="non-virtual"><scope>BTree</scope><name>ERR_CREATE_ROOT</name></member>
+      <member refid="a00001_16b04b9e3852517961c85dc73bc44ec221d79f8f0158f37b177a43f3d52ecd81a" prot="public" virt="non-virtual"><scope>BTree</scope><name>ERR_CREATE_SPLIT_ROOT</name></member>
+      <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22694c0b0b4b42aa897efb16cd2e115148" prot="public" virt="non-virtual"><scope>BTree</scope><name>ERR_GET_LEAFNODE</name></member>
+      <member refid="a00001_16b04b9e3852517961c85dc73bc44ec2245df4b4b09815bca928b3b5363f5fae1" prot="public" virt="non-virtual"><scope>BTree</scope><name>ERR_GET_NODE</name></member>
+      <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22cf74960d8869e3b5bcb8a24f6587d51a" prot="public" virt="non-virtual"><scope>BTree</scope><name>ERR_GET_ROOT</name></member>
+      <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22d6eff8d66835479d5d6e9cce43a448c5" prot="public" virt="non-virtual"><scope>BTree</scope><name>ERR_GET_SPLIT_ROOT</name></member>
+      <member refid="a00001_16b04b9e3852517961c85dc73bc44ec226d14794bebdece1056d387ce27aae4b2" prot="public" virt="non-virtual"><scope>BTree</scope><name>ERR_ITEM_EXISTS</name></member>
+      <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22bb47c28aec1ced42b66348104cf6a47d" prot="public" virt="non-virtual"><scope>BTree</scope><name>ERR_NONE</name></member>
+      <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22dd4e0a9175751ffa51219bb63f013a5f" prot="public" virt="non-virtual"><scope>BTree</scope><name>ERR_PROPAGATE_SPLIT</name></member>
+      <member refid="a00001_16b04b9e3852517961c85dc73bc44ec22" prot="public" virt="non-virtual"><scope>BTree</scope><name>ErrorCode</name></member>
+      <member refid="a00001_1bdb68e8faf1cf9ad9a1f4bbb11a58df2" prot="protected" virt="non-virtual"><scope>BTree</scope><name>FinishNodeSplit</name></member>
+      <member refid="a00001_1ae74f51fe733b3c48ebff53510dea2cb" prot="public" virt="non-virtual"><scope>BTree</scope><name>GetErrorCode</name></member>
+      <member refid="a00001_1c0061021d9258709326bace218172bfc" prot="public" virt="non-virtual"><scope>BTree</scope><name>GetHeight</name></member>
+      <member refid="a00001_1bdf9810775b2f8cf9599161332b0dd92" prot="public" virt="non-virtual"><scope>BTree</scope><name>GetItemCount</name></member>
+      <member refid="a00001_1ce71aba8c57958978a31d993cf822d6c" prot="public" virt="non-virtual"><scope>BTree</scope><name>GetTraverser</name></member>
+      <member refid="a00001_1be734097976f0426326957a07cfdbbed" prot="public" virt="non-virtual"><scope>BTree</scope><name>IdType</name></member>
+      <member refid="a00001_16d1943d72e893359a142ded378de6cbe" prot="public" virt="non-virtual"><scope>BTree</scope><name>Initialize</name></member>
+      <member refid="a00001_1ab50f07342832b39c3bd29aacd283dfb" prot="public" virt="non-virtual"><scope>BTree</scope><name>Insert</name></member>
+      <member refid="a00001_17e892d97c6b579f322ad1e5399d76f41" prot="protected" virt="non-virtual"><scope>BTree</scope><name>InsertInternal</name></member>
+      <member refid="a00001_1661de2670698ce4317cad22e7fd19d1d" prot="public" virt="non-virtual"><scope>BTree</scope><name>IsOk</name></member>
+      <member refid="a00001_135363ef010d53e88d0e358bf193fef09" prot="public" virt="non-virtual"><scope>BTree</scope><name>Iterator</name></member>
+      <member refid="a00001_1f801a917b495912cbbb239a3859be6d4" prot="public" virt="non-virtual"><scope>BTree</scope><name>KeyType</name></member>
+      <member refid="a00001_11a7c274ae1c562a385a392fcb45ce531" prot="public" virt="non-virtual"><scope>BTree</scope><name>LeafItem</name></member>
+      <member refid="a00001_165ac78bb4f7221c4d45e6b57acb41e37" prot="public" virt="non-virtual"><scope>BTree</scope><name>LeafItemArray</name></member>
+      <member refid="a00001_1d67a7c4c0610439bf31806669e4857b7" prot="public" virt="non-virtual"><scope>BTree</scope><name>LeafItemIterator</name></member>
+      <member refid="a00001_1d43bcd1d90ea300e977ad1b66bdc3a48" prot="public" virt="non-virtual"><scope>BTree</scope><name>LeafNode</name></member>
+      <member refid="a00001_19ab7074c4eeac904c4960537af9a13fe" prot="public" virt="non-virtual"><scope>BTree</scope><name>LeafType</name></member>
+      <member refid="a00001_1d39a666b52f6a21ecd23693eba39eaa9" prot="protected" virt="non-virtual"><scope>BTree</scope><name>m_inserts</name></member>
+      <member refid="a00001_1c2c2d2ca81569327b47410ae17e35c21" prot="protected" virt="non-virtual"><scope>BTree</scope><name>m_lastError</name></member>
+      <member refid="a00001_1c622f1cedbc6f94ed4f6f97cf4bbd4fa" prot="public" virt="non-virtual"><scope>BTree</scope><name>Node</name></member>
+      <member refid="a00001_13fe1470e08c78343f51144a4261927f2" prot="public" virt="non-virtual"><scope>BTree</scope><name>NodeBase</name></member>
+      <member refid="a00001_10331e938f93584a419282437a28d9c82" prot="public" virt="non-virtual"><scope>BTree</scope><name>NodeItem</name></member>
+      <member refid="a00001_12ed9fcc51681f507ab263958584bf6fa" prot="public" virt="non-virtual"><scope>BTree</scope><name>NodeItemArray</name></member>
+      <member refid="a00001_14688282b76f348be7a607ea10eea14a0" prot="public" virt="non-virtual"><scope>BTree</scope><name>NodeItemIterator</name></member>
+      <member refid="a00001_147c195fa985ccd957c54fe6970d64589" prot="public" virt="non-virtual"><scope>BTree</scope><name>Print</name></member>
+      <member refid="a00001_134428d82513b57b9ea2b03f2539c0961" prot="protected" virt="non-virtual"><scope>BTree</scope><name>PropagateSplit</name></member>
+      <member refid="a00001_1aad0fd7bde6a8a6ac1473c961270f1eb" prot="public" virt="non-virtual"><scope>BTree</scope><name>size_type</name></member>
+      <member refid="a00001_1b2ff4f5cf2c3cefbe3492dedd6afc46b" prot="protected" virt="non-virtual"><scope>BTree</scope><name>Split</name></member>
+      <member refid="a00001_1b9de0b0b136f069ae866f34c0503551b" prot="protected" virt="non-virtual"><scope>BTree</scope><name>SplitRoot</name></member>
+      <member refid="a00001_16a351f9e18e51d3adf239afb363d77c6" prot="public" virt="non-virtual"><scope>BTree</scope><name>this_type</name></member>
+      <member refid="a00001_1356381169e6ec6c29c9d945e42afd8ea" prot="public" virt="non-virtual"><scope>BTree</scope><name>Traverser</name></member>
+      <member refid="a00001_180aa7d0aa00e7d46655894a167436986" prot="public" virt="non-virtual"><scope>BTree</scope><name>Verify</name></member>
+      <member refid="a00001_11d0dbad21ec825a7c8e5625709010e6c" prot="public" virt="non-virtual"><scope>BTree</scope><name>~BTree</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

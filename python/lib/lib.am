@@ -1,0 +1,34 @@
+pkgpython_PYTHON+= @srcpythonlib@/job_handle.py
+pkgpython_PYTHON+= @srcpythonlib@/misc.py
+pkgpython_PYTHON+= @srcpythonlib@/igc_collection.py
+pkgpython_PYTHON+= @srcpythonlib@/tie_point.py
+pkgpython_PYTHON+= @srcpythonlib@/vicar_interface.py
+pkgpython_PYTHON+= @srcpythonlib@/image_to_image_connection.py
+pkgpython_PYTHON+= @srcpythonlib@/doc_inherit.py
+pkgpython_PYTHON+= @srcpythonlib@/tre_struct.py
+pkgpython_PYTHON+= @srcpythonlib@/dem_generate.py
+pkgpython_DATA = @srcpythonlib@/cib01_mapinfo.dat
+pkgpython_PYTHON+= @srcpythonlib@/image_ground_connection.py
+pkgpython_PYTHON+= @srcpythonlib@/ray_intersect.py
+pkgpython_PYTHON+= @srcpythonlib@/simultaneous_bundle_adjustment.py
+pkgpython_PYTHON+= @srcpythonlib@/tie_point_collect.py
+pkgpython_PYTHON+= @srcpythonlib@/raster_image_extension.py
+pkgpython_PYTHON+= @srcpythonlib@/lm_optimize.py
+pkgpython_PYTHON+= @srcpythonlib@/vicar_wrap.py
+pkgpython_PYTHON+= @srcpythonlib@/orbit_offset_correction.py
+pkgpython_PYTHON+= @srcpythonlib@/igc_offset_correction.py
+pkgpython_PYTHON+= @srcpythonlib@/instrument_reflectance.py
+pkgpython_PYTHON+= @srcpythonlib@/geoeye1_reflectance.py
+pkgpython_PYTHON+= @srcpythonlib@/ikonos_reflectance.py
+pkgpython_PYTHON+= @srcpythonlib@/quick_bird_reflectance.py
+pkgpython_PYTHON+= @srcpythonlib@/world_view2_reflectance.py
+pkgpython_PYTHON+= @srcpythonlib@/with_parameter.py
+pkgpython_PYTHON+= @srcpythonlib@/sqlite_shelf.py
+pkgpython_PYTHON+= @srcpythonlib@/feature_detector_extension.py
+pkgpython_PYTHON+= @srcpythonlib@/ply_file.py
+if WITH_AFIDS_A
+pkgpython_PYTHON+= @srcpythonlib@/tre_amt_struct.py
+endif
+
+
+

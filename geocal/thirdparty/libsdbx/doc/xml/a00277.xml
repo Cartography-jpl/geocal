@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00277" kind="struct" prot="public">
+    <compoundname>TreeNodeBase</compoundname>
+    <derivedcompoundref refid="a00002" prot="public" virt="non-virtual">BTreeNode&lt; _Item, _max_items &gt;</derivedcompoundref>
+    <derivedcompoundref refid="a00018" prot="public" virt="non-virtual">RTreeNode&lt; _Item, _max_items &gt;</derivedcompoundref>
+    <derivedcompoundref refid="a00022" prot="public" virt="non-virtual">TreeNode&lt; _Item, _max_items &gt;</derivedcompoundref>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="686">
+        <label>TreeNodeBase</label>
+      </node>
+      <node id="688">
+        <label>RTreeNode&lt; _Item, _max_items &gt;</label>
+        <link refid="a00018"/>
+        <childnode refid="686" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="689">
+        <label>TreeNode&lt; _Item, _max_items &gt;</label>
+        <link refid="a00022"/>
+        <childnode refid="686" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="687">
+        <label>BTreeNode&lt; _Item, _max_items &gt;</label>
+        <link refid="a00002"/>
+        <childnode refid="686" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" line="31" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" bodystart="31" bodyend="31"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

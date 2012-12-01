@@ -1,0 +1,3 @@
+This is code that is useful to the CartLab work. This includes things like
+reading and writing VICAR and IBIS files, supporting file formats that are
+specific to the CartLab, etc.

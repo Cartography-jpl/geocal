@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00223" kind="class" prot="public">
+    <compoundname>std::wios</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::basic_ios&lt; wchar_t &gt;</basecompoundref>
+    <briefdescription>
+<para>STL class. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="739">
+        <label>std::wios</label>
+        <childnode refid="740" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="740">
+        <label>std::basic_ios&lt; wchar_t &gt;</label>
+        <childnode refid="741" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="741">
+        <label>std::ios_base</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="742">
+        <label>std::wios</label>
+        <childnode refid="743" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="743">
+        <label>std::basic_ios&lt; wchar_t &gt;</label>
+        <childnode refid="744" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="744">
+        <label>std::ios_base</label>
+      </node>
+    </collaborationgraph>
+    <location file="[STL]" line="1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

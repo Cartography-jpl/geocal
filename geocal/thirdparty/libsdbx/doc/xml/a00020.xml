@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00020" kind="struct" prot="public">
+    <compoundname>StringKey</compoundname>
+    <includes refid="a00045" local="no">StringKey.h</includes>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>key_length</declname>
+        <defname>key_length</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00020_1a326a0602e412a046cd5174b12b8485e" prot="public" static="no">
+        <type><ref refid="a00020" kindref="compound">StringKey</ref>&lt; key_length &gt;</type>
+        <definition>typedef StringKey&lt;key_length&gt; StringKey&lt; key_length &gt;::this_type</definition>
+        <argsstring></argsstring>
+        <name>this_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" line="53" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00020_13d63844acea734a6edf92d1f21f647cd" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char StringKey&lt; key_length &gt;::keyval[key_length]</definition>
+        <argsstring>[key_length]</argsstring>
+        <name>keyval</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" line="48" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00020_1bc5c07ef84905d6d5b20beb4a3b4515f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool StringKey&lt; key_length &gt;::operator!=</definition>
+        <argsstring>(const this_type &amp;bsk) const </argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="a00020" kindref="compound">this_type</ref> &amp;</type>
+          <declname>bsk</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" line="75" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" bodystart="74" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="a00020_17aae34383375682d5d5f33d64d784eb1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool StringKey&lt; key_length &gt;::operator&lt;</definition>
+        <argsstring>(const this_type &amp;bsk) const </argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="a00020" kindref="compound">this_type</ref> &amp;</type>
+          <declname>bsk</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" line="81" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" bodystart="80" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="a00020_129892b6e201e52317e5c29ba9d613c6b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool StringKey&lt; key_length &gt;::operator==</definition>
+        <argsstring>(const this_type &amp;bsk) const </argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="a00020" kindref="compound">this_type</ref> &amp;</type>
+          <declname>bsk</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" line="70" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" bodystart="69" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="a00020_1aa63f297ca4009be94bb9bbcdaa965f5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void StringKey&lt; key_length &gt;::Serialize</definition>
+        <argsstring>(unsigned char *buffer) const </argsstring>
+        <name>Serialize</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>serialization routine </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" line="65" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" bodystart="64" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="a00020_1286cd216361c81bc50078a57b70a387d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>StringKey&lt; key_length &gt;::StringKey</definition>
+        <argsstring>(const unsigned char *const buffer)</argsstring>
+        <name>StringKey</name>
+        <param>
+          <type>const unsigned char *const </type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>constructor </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" line="59" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" bodystart="58" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="a00020_19ab017a865336cbb34bd7a6cac4d60dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>StringKey&lt; key_length &gt;::StringKey</definition>
+        <argsstring>()</argsstring>
+        <name>StringKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" line="55" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A key type to use for a tree that stores a string. </para>    </briefdescription>
+    <detaileddescription>
+<para>This class creates prefix strings of key_length size, that can be stored in the structure as a key. You must specify in the template instantiation that you want to allow duplicate keys.</para><para>This is intended to be used where the key is this class, and the string itself is value used in the tree (or something referring to the string, such as a file offset)</para><para>When querying a tree with these in them, you must check each prefix that has the same prefix as the item you&apos;re searching for to determine if the correct value is present. </para>    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" line="46" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/StringKey.h" bodystart="45" bodyend="85"/>
+    <listofallmembers>
+      <member refid="a00020_13d63844acea734a6edf92d1f21f647cd" prot="public" virt="non-virtual"><scope>StringKey</scope><name>keyval</name></member>
+      <member refid="a00020_1bc5c07ef84905d6d5b20beb4a3b4515f" prot="public" virt="non-virtual"><scope>StringKey</scope><name>operator!=</name></member>
+      <member refid="a00020_17aae34383375682d5d5f33d64d784eb1" prot="public" virt="non-virtual"><scope>StringKey</scope><name>operator&lt;</name></member>
+      <member refid="a00020_129892b6e201e52317e5c29ba9d613c6b" prot="public" virt="non-virtual"><scope>StringKey</scope><name>operator==</name></member>
+      <member refid="a00020_1b547a93ea159f7038e5f61a19a97942d76a4c2cb3fdae43d7ffdb592d05cfe72" prot="public" virt="non-virtual"><scope>StringKey</scope><name>record_size</name></member>
+      <member refid="a00020_1aa63f297ca4009be94bb9bbcdaa965f5" prot="public" virt="non-virtual"><scope>StringKey</scope><name>Serialize</name></member>
+      <member refid="a00020_19ab017a865336cbb34bd7a6cac4d60dc" prot="public" virt="non-virtual"><scope>StringKey</scope><name>StringKey</name></member>
+      <member refid="a00020_1286cd216361c81bc50078a57b70a387d" prot="public" virt="non-virtual"><scope>StringKey</scope><name>StringKey</name></member>
+      <member refid="a00020_1a326a0602e412a046cd5174b12b8485e" prot="public" virt="non-virtual"><scope>StringKey</scope><name>this_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

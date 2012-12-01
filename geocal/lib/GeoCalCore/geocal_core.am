@@ -1,0 +1,6 @@
+# This gets included in the top makefile. This list files here that are
+# used to make up libgeocal.la.
+
+include afids_python/geocal/lib/GeoCalCore/Support/support.am
+include afids_python/geocal/lib/GeoCalCore/Interface/interface.am
+include afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am

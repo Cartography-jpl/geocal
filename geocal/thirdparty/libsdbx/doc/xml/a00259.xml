@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00259" kind="struct" prot="public">
+    <compoundname>record&lt; T * &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="a00259_10105756421b56d4ff4262e5e6f80e1e2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>static T* record&lt; T * &gt;::deserialize</definition>
+        <argsstring>(const unsigned char *const buffer)</argsstring>
+        <name>deserialize</name>
+        <param>
+          <type>const unsigned char *const </type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/Serialization.h" line="140" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/Serialization.h" bodystart="139" bodyend="143"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/Serialization.h" line="135" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/Serialization.h" bodystart="135" bodyend="144"/>
+    <listofallmembers>
+      <member refid="a00259_10105756421b56d4ff4262e5e6f80e1e2" prot="public" virt="non-virtual"><scope>record&lt; T * &gt;</scope><name>deserialize</name></member>
+      <member refid="a00259_1a3f6f77e157fa27528f967b0288eae8508943363b735a19869a8355c30a743ec" prot="public" virt="non-virtual"><scope>record&lt; T * &gt;</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

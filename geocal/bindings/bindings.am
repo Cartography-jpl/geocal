@@ -1,0 +1,20 @@
+SWIG_FLAG = -O
+
+# Only generate these files in maintainer mode, otherwise consider them
+# as input.
+if MAINTAINER_MODE
+if HAVE_SWIG
+
+
+#=================================================================
+# Create list of all swig files
+
+$(srcdir)/afids_python/geocal/bindings/all.i : $(SWIG_SOURCES) $(srcdir)/afids_python/geocal/bindings/all_base.i
+	cat $(srcdir)/afids_python/geocal/bindings/all_base.i > ${@} && \
+        for i in ${SWIG_SOURCES}; do \
+          echo "%include \"../../../$$i\"" >> ${@}; \
+        done
+
+endif HAVE_SWIG
+endif MAINTAINER_MODE
+include afids_python/geocal/bindings/python/python.am

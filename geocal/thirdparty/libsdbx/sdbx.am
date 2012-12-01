@@ -1,0 +1,36 @@
+
+EXTRA_DIST += @srcsdbx@/README @srcsdbx@/StorageConcepts.txt
+sdbxdocdir = ${datarootdir}/doc/libsdbx
+dist_sdbxdoc_DATA = $(srcdir)/@srcsdbx@/doc/html/*
+sdbxdir = $(includedir)/sdbx
+sdbxbtreedir = $(includedir)/sdbx/BTree
+sdbxrtreedir = $(includedir)/sdbx/RTree
+sdbxsupportdir = $(includedir)/sdbx/support
+sdbxbtree_HEADERS = @srcsdbx@/sdbx/BTree/BTree.h
+sdbxbtree_HEADERS+= @srcsdbx@/sdbx/BTree/BTreeNode.h
+sdbxbtree_HEADERS+= @srcsdbx@/sdbx/BTree/BTreePrint.h
+sdbxbtree_HEADERS+= @srcsdbx@/sdbx/BTree/BTreeTraverser.h
+sdbxbtree_HEADERS+= @srcsdbx@/sdbx/BTree/BTreeVerify.h
+sdbxrtree_HEADERS = @srcsdbx@/sdbx/RTree/RTreeBoundingBox.h
+sdbxrtree_HEADERS+= @srcsdbx@/sdbx/RTree/RTreeVerify.h
+sdbxrtree_HEADERS+= @srcsdbx@/sdbx/RTree/RTree.h
+sdbxrtree_HEADERS+= @srcsdbx@/sdbx/RTree/RTreeIterator.h
+sdbxrtree_HEADERS+= @srcsdbx@/sdbx/RTree/RTreeNode.h
+sdbxrtree_HEADERS+= @srcsdbx@/sdbx/RTree/RTreeVisitor.h
+sdbxsupport_HEADERS = @srcsdbx@/sdbx/support/is_sorted.h
+sdbxsupport_HEADERS+= @srcsdbx@/sdbx/support/pstdint.h
+sdbxsupport_HEADERS+= @srcsdbx@/sdbx/support/StringKey.h
+sdbxsupport_HEADERS+= @srcsdbx@/sdbx/support/TreeItem.h
+sdbxsupport_HEADERS+= @srcsdbx@/sdbx/support/TreeNode.h
+sdbxsupport_HEADERS+= @srcsdbx@/sdbx/support/UniqueId.h
+sdbxsupport_HEADERS+= @srcsdbx@/sdbx/support/utility.h
+sdbx_HEADERS = @srcsdbx@/sdbx/BTree.h
+sdbx_HEADERS+= @srcsdbx@/sdbx/DiskTreeBackend.h
+sdbx_HEADERS+= @srcsdbx@/sdbx/lru.h
+sdbx_HEADERS+= @srcsdbx@/sdbx/MemoryTreeBackend.h
+sdbx_HEADERS+= @srcsdbx@/sdbx/RTree.h
+sdbx_HEADERS+= @srcsdbx@/sdbx/Serialization.h
+sdbx_HEADERS+= @srcsdbx@/sdbx/SerializedFile.h
+sdbx_HEADERS+= @srcsdbx@/sdbx/StringTable.h
+
+AM_CPPFLAGS += -I$(srcdir)/@srcsdbx@

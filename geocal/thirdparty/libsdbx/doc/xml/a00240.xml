@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00240" kind="struct" prot="public">
+    <compoundname>DiskTreeBackendArgs</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00240_1defcb19753ab060bad1bba361c403110" prot="public" static="no" mutable="no">
+        <type>wxFileName</type>
+        <definition>wxFileName DiskTreeBackendArgs::filename</definition>
+        <argsstring></argsstring>
+        <name>filename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="50" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00240_1372de13c73dcd186a427c2e5a8031b8a" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t DiskTreeBackendArgs::leafNodeCacheSz</definition>
+        <argsstring></argsstring>
+        <name>leafNodeCacheSz</name>
+        <briefdescription>
+<para>size of cache for nodes </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="56" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00240_12f052fa4bf0bf577dd5a62b3a6cb2404" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t DiskTreeBackendArgs::nodeCacheSz</definition>
+        <argsstring></argsstring>
+        <name>nodeCacheSz</name>
+        <briefdescription>
+<para>signature to embed in file </para>        </briefdescription>
+        <detaileddescription>
+<para>fixed size: must be less than 16 chars </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="55" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00240_117bc98f3641caf8b85204e899f080931" prot="public" static="no" mutable="no">
+        <type>wxString</type>
+        <definition>wxString DiskTreeBackendArgs::signature</definition>
+        <argsstring></argsstring>
+        <name>signature</name>
+        <briefdescription>
+<para>filename to open (no extension) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="52" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00240_15ef770ff8cfd7f7fa8181acd30e22031" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DiskTreeBackendArgs::DiskTreeBackendArgs</definition>
+        <argsstring>(const wxFileName &amp;_filename, const wxString &amp;_signature, std::size_t _nodeCacheSz, std::size_t _leafNodeCacheSz)</argsstring>
+        <name>DiskTreeBackendArgs</name>
+        <param>
+          <type>const wxFileName &amp;</type>
+          <declname>_filename</declname>
+        </param>
+        <param>
+          <type>const wxString &amp;</type>
+          <declname>_signature</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>_nodeCacheSz</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>_leafNodeCacheSz</declname>
+        </param>
+        <briefdescription>
+<para>size of cache for leafNodes </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="69" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="59" bodyend="69"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" line="49" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/DiskTreeBackend.h" bodystart="49" bodyend="70"/>
+    <listofallmembers>
+      <member refid="a00240_15ef770ff8cfd7f7fa8181acd30e22031" prot="public" virt="non-virtual"><scope>DiskTreeBackendArgs</scope><name>DiskTreeBackendArgs</name></member>
+      <member refid="a00240_1defcb19753ab060bad1bba361c403110" prot="public" virt="non-virtual"><scope>DiskTreeBackendArgs</scope><name>filename</name></member>
+      <member refid="a00240_1372de13c73dcd186a427c2e5a8031b8a" prot="public" virt="non-virtual"><scope>DiskTreeBackendArgs</scope><name>leafNodeCacheSz</name></member>
+      <member refid="a00240_12f052fa4bf0bf577dd5a62b3a6cb2404" prot="public" virt="non-virtual"><scope>DiskTreeBackendArgs</scope><name>nodeCacheSz</name></member>
+      <member refid="a00240_117bc98f3641caf8b85204e899f080931" prot="public" virt="non-virtual"><scope>DiskTreeBackendArgs</scope><name>signature</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

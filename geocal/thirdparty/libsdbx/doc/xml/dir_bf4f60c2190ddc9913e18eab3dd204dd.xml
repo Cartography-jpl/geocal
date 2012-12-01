@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="dir_bf4f60c2190ddc9913e18eab3dd204dd" kind="dir">
+    <compoundname>support/</compoundname>
+    <innerfile refid="a00043">is_sorted.h</innerfile>
+    <innerfile refid="a00044">pstdint.h</innerfile>
+    <innerfile refid="a00045">StringKey.h</innerfile>
+    <innerfile refid="a00046">TreeItem.h</innerfile>
+    <innerfile refid="a00047">TreeNode.h</innerfile>
+    <innerfile refid="a00048">UniqueId.h</innerfile>
+    <innerfile refid="a00049">utility.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/"/>
+  </compounddef>
+</doxygen>

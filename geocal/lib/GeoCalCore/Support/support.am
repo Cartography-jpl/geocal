@@ -1,0 +1,78 @@
+# This gets included in the top makefile. This list files here that are
+# used to make up libgeocal.la.
+
+# The various srcxxx are set in configure.in in the top directory, in case
+# you need to modify these.
+
+# Source files for library
+geocalinc_HEADERS+= @srcsupport@/constant.h
+geocalinc_HEADERS+= @srcsupport@/dir_change.h
+geocalinc_HEADERS+= @srcsupport@/null_deleter.h
+geocalinc_HEADERS+= @srcsupport@/wgs84_constant.h
+geocalinc_HEADERS+= @srcsupport@/printable.h
+geocalinc_HEADERS+= @srcsupport@/geocal_exception.h
+geocalinc_HEADERS+= @srcsupport@/tile.h
+geocalinc_HEADERS+= @srcsupport@/tiled_file.h
+geocalinc_HEADERS+= @srcsupport@/memory_map_array.h
+geocalinc_HEADERS+= @srcsupport@/geocal_gsl_matrix.h
+geocalinc_HEADERS+= @srcsupport@/geocal_matrix.h
+libgeocal_la_SOURCES+= @srcsupport@/geocal_gsl_matrix.cc
+geocalinc_HEADERS+= @srcsupport@/geocal_gsl_fit.h
+libgeocal_la_SOURCES+= @srcsupport@/geocal_gsl_fit.cc
+geocalinc_HEADERS+= @srcsupport@/functor.h
+geocalinc_HEADERS+= @srcsupport@/vfunctor_with_derivative.h
+geocalinc_HEADERS+= @srcsupport@/geocal_gsl_root.h
+libgeocal_la_SOURCES+= @srcsupport@/geocal_gsl_root.cc
+geocalinc_HEADERS+= @srcsupport@/geocal_time.h
+libgeocal_la_SOURCES+= @srcsupport@/geocal_time.cc
+geocalinc_HEADERS+= @srcsupport@/toolkit_time_interface.h
+libgeocal_la_SOURCES+= @srcsupport@/covariance.cc
+geocalinc_HEADERS+= @srcsupport@/covariance.h
+libgeocal_la_SOURCES+= @srcsupport@/statistic.cc
+geocalinc_HEADERS+= @srcsupport@/statistic.h
+geocalinc_HEADERS+= @srcsupport@/geocal_fftw.h
+libgeocal_la_SOURCES+= @srcsupport@/geocal_fftw.cc
+if HAVE_HDF5
+geocalinc_HEADERS+= @srcsupport@/hdf_file.h
+libgeocal_la_SOURCES+= @srcsupport@/hdf_file.cc
+endif
+
+# Files that contain SWIG wrapper information.
+SWIG_SOURCES += @srcsupport@/constant.i
+SWIG_SOURCES += @srcsupport@/covariance.i
+SWIG_SOURCES += @srcsupport@/wgs84_constant.i
+SWIG_SOURCES += @srcsupport@/geocal_exception.i
+SWIG_SOURCES += @srcsupport@/functor.i
+SWIG_SOURCES += @srcsupport@/vfunctor_with_derivative.i
+SWIG_SOURCES += @srcsupport@/statistic.i
+SWIG_SOURCES += @srcsupport@/geocal_gsl_fit.i
+SWIG_SOURCES += @srcsupport@/geocal_gsl_root.i
+SWIG_SOURCES += @srcsupport@/geocal_time.i
+SWIG_SOURCES += @srcsupport@/tiled_file.i
+if HAVE_HDF5
+SWIG_SOURCES += @srcsupport@/hdf_file.i
+endif
+# Test files
+EXTRA_DIST += @srcsupport@/unit_test_support.h
+EXTRA_DIST += @srcsupport@/global_fixture.h
+geocal_test_all_SOURCES += @srcsupport@/global_fixture.cc
+geocal_test_all_SOURCES += @srcsupport@/global_fixture_default.cc
+geocal_test_all_SOURCES+= @srcsupport@/geocal_exception_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/geocal_time_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/printable_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/tile_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/tiled_file_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/memory_map_array_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/geocal_gsl_matrix_test.cc
+geocal_test_all_SOURCES+= @srcsupport@/geocal_matrix_test.cc
+geocal_test_all_SOURCES+= @srcsupport@/geocal_gsl_fit_test.cc
+geocal_test_all_SOURCES+= @srcsupport@/geocal_gsl_root_test.cc
+geocal_test_all_SOURCES+= @srcsupport@/covariance_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/statistic_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/geocal_fftw_test.cc 
+if HAVE_HDF5
+geocal_test_all_SOURCES+= @srcsupport@/hdf_file_test.cc 
+endif
+AM_CPPFLAGS+= -I$(srcdir)/@srcsupport@
+
+

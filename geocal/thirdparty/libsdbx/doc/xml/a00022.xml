@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00022" kind="class" prot="public">
+    <compoundname>TreeNode</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">TreeNodeBase</basecompoundref>
+    <includes refid="a00047" local="no">TreeNode.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename _Item</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>_max_items</declname>
+        <defname>_max_items</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="a00022_118da787aa09c3874f1a23d34b3fa5ee5" prot="public" static="no">
+        <type>_Item</type>
+        <definition>typedef _Item TreeNode&lt; _Item, _max_items &gt;::Item</definition>
+        <argsstring></argsstring>
+        <name>Item</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" line="45" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="a00022_13518fd1ed35931eb71bb44e22f6cc72b" prot="public" static="no">
+        <type>std::vector&lt; Item &gt;</type>
+        <definition>typedef std::vector&lt; Item &gt; TreeNode&lt; _Item, _max_items &gt;::ItemArray</definition>
+        <argsstring></argsstring>
+        <name>ItemArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" line="46" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="a00022_1ef78e40d163c358c90dbd1d15d5ec0db" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TreeNode&lt; _Item, _max_items &gt;::is_dirty</definition>
+        <argsstring></argsstring>
+        <name>is_dirty</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" line="49" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00022_19ae94d6e7435ced4ab79536df760ab75" prot="public" static="no" mutable="no">
+        <type>ItemArray</type>
+        <definition>ItemArray TreeNode&lt; _Item, _max_items &gt;::items</definition>
+        <argsstring></argsstring>
+        <name>items</name>
+        <briefdescription>
+<para>set to true if this needs to be re-saved </para>        </briefdescription>
+        <detaileddescription>
+<para>you *must* manage this, it does not get managed automatically </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" line="53" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" bodystart="53" bodyend="-1"/>
+        <referencedby refid="a00022_1801a4f558aba2af3e77f9e86a6691327" compoundref="a00047" startline="95" endline="113">TreeNode&lt; _Item, _max_items &gt;::Serialize</referencedby>
+        <referencedby refid="a00022_1208839dc50026f3b56273ec1e1ff621d" compoundref="a00047" startline="56" endline="60">TreeNode&lt; _Item, _max_items &gt;::TreeNode</referencedby>
+        <referencedby refid="a00013_1a97acc30439f24081de19765d8598484" compoundref="a00038" startline="33" endline="134">RTree::Verify</referencedby>
+        <referencedby refid="a00001_180aa7d0aa00e7d46655894a167436986" compoundref="a00029" startline="33" endline="156">BTree::Verify</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00022_1801a4f558aba2af3e77f9e86a6691327" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void TreeNode&lt; _Item, _max_items &gt;::Serialize</definition>
+        <argsstring>(unsigned char *buffer) const </argsstring>
+        <name>Serialize</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Serializer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" line="96" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" bodystart="95" bodyend="113"/>
+        <references refid="a00022_19ae94d6e7435ced4ab79536df760ab75" compoundref="a00047" startline="53">TreeNode&lt; _Item, _max_items &gt;::items</references>
+      </memberdef>
+      <memberdef kind="function" id="a00022_144bb25b0fa1e86caee551c8c93595672" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TreeNode&lt; _Item, _max_items &gt;::TreeNode</definition>
+        <argsstring>(const unsigned char *const buffer)</argsstring>
+        <name>TreeNode</name>
+        <param>
+          <type>const unsigned char *const </type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Serialization constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" line="75" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" bodystart="73" bodyend="91"/>
+        <references refid="a00022_19ae94d6e7435ced4ab79536df760ab75" compoundref="a00047" startline="53">TreeNode&lt; _Item, _max_items &gt;::items</references>
+      </memberdef>
+      <memberdef kind="function" id="a00022_1208839dc50026f3b56273ec1e1ff621d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TreeNode&lt; _Item, _max_items &gt;::TreeNode</definition>
+        <argsstring>()</argsstring>
+        <name>TreeNode</name>
+        <briefdescription>
+<para>array of items this node holds </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" line="57" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" bodystart="56" bodyend="60"/>
+        <references refid="a00022_19ae94d6e7435ced4ab79536df760ab75" compoundref="a00047" startline="53">TreeNode&lt; _Item, _max_items &gt;::items</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Stores and handles serialization for items in a Tree. </para>    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>_Item</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the item being stored. Must support the serialization concept defined in <ref refid="a00068" kindref="compound">Serialization.h</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_max_items</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Max number of items that this stores </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="683">
+        <label>TreeNodeBase</label>
+      </node>
+      <node id="682">
+        <label>TreeNode&lt; _Item, _max_items &gt;</label>
+        <link refid="a00022"/>
+        <childnode refid="683" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="685">
+        <label>TreeNodeBase</label>
+      </node>
+      <node id="684">
+        <label>TreeNode&lt; _Item, _max_items &gt;</label>
+        <link refid="a00022"/>
+        <childnode refid="685" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" line="43" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/TreeNode.h" bodystart="43" bodyend="114"/>
+    <listofallmembers>
+      <member refid="a00022_1ef78e40d163c358c90dbd1d15d5ec0db" prot="public" virt="non-virtual"><scope>TreeNode</scope><name>is_dirty</name></member>
+      <member refid="a00022_118da787aa09c3874f1a23d34b3fa5ee5" prot="public" virt="non-virtual"><scope>TreeNode</scope><name>Item</name></member>
+      <member refid="a00022_13518fd1ed35931eb71bb44e22f6cc72b" prot="public" virt="non-virtual"><scope>TreeNode</scope><name>ItemArray</name></member>
+      <member refid="a00022_19ae94d6e7435ced4ab79536df760ab75" prot="public" virt="non-virtual"><scope>TreeNode</scope><name>items</name></member>
+      <member refid="a00022_11b89c7ac7ab8d668230ab818b013ec2f38c14e78e59a302a8e8e633dbfe8152e" prot="public" virt="non-virtual"><scope>TreeNode</scope><name>max_items</name></member>
+      <member refid="a00022_11b89c7ac7ab8d668230ab818b013ec2f549e6b9aa02e75a07c445cded7fd67de" prot="public" virt="non-virtual"><scope>TreeNode</scope><name>record_size</name></member>
+      <member refid="a00022_1801a4f558aba2af3e77f9e86a6691327" prot="public" virt="non-virtual"><scope>TreeNode</scope><name>Serialize</name></member>
+      <member refid="a00022_1208839dc50026f3b56273ec1e1ff621d" prot="public" virt="non-virtual"><scope>TreeNode</scope><name>TreeNode</name></member>
+      <member refid="a00022_144bb25b0fa1e86caee551c8c93595672" prot="public" virt="non-virtual"><scope>TreeNode</scope><name>TreeNode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,8 @@
+This directory contains the input files used by the python Sphinx documentation
+tool (see http://sphinx.pocoo.org).
+
+This directory does not contain the actual documentation, but rather contains
+the input files used to generate that documentation. The documentation can be 
+found in the install directory at share/doc/afids/python/index.html.
+
+This is installed as part of the normal "make install" process. 

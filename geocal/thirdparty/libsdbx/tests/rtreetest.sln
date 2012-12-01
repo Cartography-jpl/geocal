@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rtreetest", "rtreetest.vcproj", "{40690B39-DB1D-4A94-B18F-EC6C5B9A0E3A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sdbx", "..\win32\MSVC8LIB\sdbx.vcproj", "{FAE40DDF-6214-4676-9A2C-41C774A3B25D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40690B39-DB1D-4A94-B18F-EC6C5B9A0E3A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{40690B39-DB1D-4A94-B18F-EC6C5B9A0E3A}.Debug|Win32.Build.0 = Debug|Win32
+		{40690B39-DB1D-4A94-B18F-EC6C5B9A0E3A}.Release|Win32.ActiveCfg = Release|Win32
+		{40690B39-DB1D-4A94-B18F-EC6C5B9A0E3A}.Release|Win32.Build.0 = Release|Win32
+		{FAE40DDF-6214-4676-9A2C-41C774A3B25D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FAE40DDF-6214-4676-9A2C-41C774A3B25D}.Debug|Win32.Build.0 = Debug|Win32
+		{FAE40DDF-6214-4676-9A2C-41C774A3B25D}.Release|Win32.ActiveCfg = Release|Win32
+		{FAE40DDF-6214-4676-9A2C-41C774A3B25D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

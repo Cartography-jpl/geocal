@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00049" kind="file">
+    <compoundname>utility.h</compoundname>
+    <includedby refid="a00025" local="yes">BTree.h</includedby>
+    <includedby refid="a00031" local="yes">lru.h</includedby>
+    <includedby refid="a00041" local="yes">SerializedFile.h</includedby>
+    <includedby refid="a00034" local="yes">RTree.h</includedby>
+    <invincdepgraph>
+      <node id="204">
+        <label>StringTable.h</label>
+        <link refid="a00070"/>
+      </node>
+      <node id="207">
+        <label>SerializedFile.h</label>
+        <link refid="a00069"/>
+        <childnode refid="206" relation="include">
+        </childnode>
+      </node>
+      <node id="203">
+        <label>BTree.h</label>
+        <link refid="a00053"/>
+        <childnode refid="204" relation="include">
+        </childnode>
+      </node>
+      <node id="208">
+        <label>RTree.h</label>
+        <link refid="a00062"/>
+      </node>
+      <node id="205">
+        <label>lru.h</label>
+        <link refid="a00059"/>
+        <childnode refid="206" relation="include">
+        </childnode>
+        <childnode refid="204" relation="include">
+        </childnode>
+      </node>
+      <node id="202">
+        <label>support/utility.h</label>
+        <link refid="utility.h"/>
+        <childnode refid="203" relation="include">
+        </childnode>
+        <childnode refid="205" relation="include">
+        </childnode>
+        <childnode refid="207" relation="include">
+        </childnode>
+        <childnode refid="208" relation="include">
+        </childnode>
+      </node>
+      <node id="206">
+        <label>DiskTreeBackend.h</label>
+        <link refid="a00058"/>
+        <childnode refid="204" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="a00049_1030161a8b4530eedef4eea2c7f27475f" prot="public" static="no">
+        <name>DELETE_IF_NOT_NULL</name>
+        <param><defname>var</defname></param>
+        <initializer>if (var) delete var; var = NULL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/utility.h" line="41" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/utility.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="a00049_1f8df3547bfde53a5acb93e2607b0034a" prot="public" static="no">
+        <name>DISALLOW_COPY_AND_ASSIGN</name>
+        <param><defname>TypeName</defname></param>
+        <initializer>TypeName(const TypeName&amp;);               \
+	void operator=(const TypeName&amp;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/utility.h" line="32" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/utility.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="a00049_14e8d1181e2a7074c297287b231c7f779" prot="public" static="no">
+        <name>NO_DEFAULT_CONSTRUCTOR</name>
+        <param><defname>TypeName</defname></param>
+        <initializer>TypeName()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/utility.h" line="37" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/utility.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="a00049_13b40c7b804a59f7bfc7ecb45d66c4bf3" prot="public" static="no">
+        <name>WARN_IF_UNUSED</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/utility.h" line="50" bodyfile="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/utility.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/><sp/>SDBX</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/><sp/>Utility.h</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/><sp/>Copyright<sp/>(c)<sp/>2008<sp/>-<sp/>2009<sp/>Dustin<sp/>Spicuzza<sp/>&lt;dustin@virtualroadside.com&gt;</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/><sp/>This<sp/>program<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/><sp/>modify<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General<sp/>Public</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/><sp/>License<sp/>as<sp/>published<sp/>by<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/>version<sp/>2.1<sp/>of<sp/>the<sp/>License,<sp/>or<sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/><sp/>This<sp/>program<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/><sp/>GNU<sp/>Lesser<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General<sp/>Public</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/>License<sp/>along<sp/>with<sp/>this<sp/>library;<sp/>if<sp/>not,<sp/>write<sp/>to<sp/>the<sp/>Free<sp/>Software</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/><sp/>Foundation,<sp/>Inc.,<sp/>51<sp/>Franklin<sp/>St,<sp/>Fifth<sp/>Floor,<sp/>Boston,<sp/>MA<sp/><sp/>02110-1301<sp/><sp/>USA</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SDBX_SUPPORT_UTILITY_H</highlight></codeline>
+<codeline lineno="23"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>SDBX_SUPPORT_UTILITY_H</highlight></codeline>
+<codeline lineno="24"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/>from<sp/>the<sp/>google<sp/>C++<sp/>Style<sp/>Guide:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/>A<sp/>macro<sp/>to<sp/>disallow<sp/>the<sp/>copy<sp/>constructor<sp/>and<sp/>operator=<sp/>functions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>should<sp/>be<sp/>used<sp/>in<sp/>the<sp/>private:<sp/>declarations<sp/>for<sp/>a<sp/>class</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>DISALLOW_COPY_AND_ASSIGN</highlight></codeline>
+<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>DISALLOW_COPY_AND_ASSIGN(TypeName)<sp/>\</highlight></codeline>
+<codeline lineno="31"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TypeName(const<sp/>TypeName&amp;);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="32"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>void<sp/>operator=(const<sp/>TypeName&amp;)</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="34"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>NO_DEFAULT_CONSTRUCTOR</highlight></codeline>
+<codeline lineno="36"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>NO_DEFAULT_CONSTRUCTOR(TypeName)<sp/>\</highlight></codeline>
+<codeline lineno="37"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TypeName()</highlight></codeline>
+<codeline lineno="38"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="39"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>DELETE_IF_NOT_NULL</highlight></codeline>
+<codeline lineno="41"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>DELETE_IF_NOT_NULL(var)<sp/>if<sp/>(var)<sp/>delete<sp/>var;<sp/>var<sp/>=<sp/>NULL</highlight></codeline>
+<codeline lineno="42"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="43"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>WARN_IF_UNUSED</highlight></codeline>
+<codeline lineno="45"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#ifdef<sp/>__GNUC__</highlight></codeline>
+<codeline lineno="46"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>this<sp/>is<sp/>pretty<sp/>neat<sp/>--<sp/>it<sp/>warns<sp/>you<sp/>if<sp/>you<sp/>don&apos;t</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>use<sp/>the<sp/>return<sp/>value<sp/>of<sp/>a<sp/>function.<sp/>GCC<sp/>only</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#define<sp/>WARN_IF_UNUSED<sp/>__attribute__<sp/>((warn_unused_result))</highlight></codeline>
+<codeline lineno="49"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="50"><highlight class="preprocessor"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#define<sp/>WARN_IF_UNUSED</highlight></codeline>
+<codeline lineno="51"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="52"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="53"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="55"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/Users/smyth/CartLab/thirdparty/libsdbx/sdbx/support/utility.h"/>
+  </compounddef>
+</doxygen>

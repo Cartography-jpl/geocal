@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.5.7">
+  <compounddef id="a00189" kind="class" prot="public">
+    <compoundname>std::deque</compoundname>
+    <innerclass refid="a00235" prot="public">std::deque::const_iterator</innerclass>
+    <innerclass refid="a00236" prot="public">std::deque::const_reverse_iterator</innerclass>
+    <innerclass refid="a00237" prot="public">std::deque::iterator</innerclass>
+    <innerclass refid="a00238" prot="public">std::deque::reverse_iterator</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+        <declname>T</declname>
+        <defname>T</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00189_1090b92581de438d2e14bedc190f0b0f9" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T std::deque&lt; T &gt;::elements</definition>
+        <argsstring></argsstring>
+        <name>elements</name>
+        <briefdescription>
+<para>STL member. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="" line="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>STL class. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="307">
+        <label>T</label>
+      </node>
+      <node id="306">
+        <label>std::deque&lt; T &gt;</label>
+        <childnode refid="307" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="[STL]" line="1"/>
+    <listofallmembers>
+      <member refid="a00189_1090b92581de438d2e14bedc190f0b0f9" prot="private" virt="non-virtual"><scope>std::deque</scope><name>elements</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,52 @@
+SDBX
+Copyright (C) 2008 Dustin Spicuzza <dustin@virtualroadside.com>
+
+SDBX is a generic high-performance set of tree containers for C++ that can
+be either stored directly in memory or in files, with adjustable caching 
+and node size parameters. Currently it includes modified B/B+ tree and an 
+R* Tree implementation. Additionally, SDBX contains a number of storage 
+and serialization items that are used to accomplish these goals.
+
+-----------------------------------------------------------------------------
+
+1. BUILD/INSTALLATION
+
+You don't. Its entirely template-based. Just include the files. If you want
+to install it, then I suppose you could copy the files somewhere.
+
+Parts of SDBX depend on wxWidgets -- it should only be the parts that deal
+with writing to file, however. The rest of SDBX does not have dependencies 
+other than a modern C++ compiler that has good template support, and the STL.
+
+-----------------------------------------------------------------------------
+
+2. LICENSING
+
+SDBX is licensed under version 2.1 of the GNU Lesser General Public 
+License. Please read the COPYING file for a complete copy of the license.
+
+-----------------------------------------------------------------------------
+
+3. RATIONALE
+
+As I was working on improvements for LibRoadnav's map data storage, I was
+focused on making a set of generic containers that could do what I
+needed it to do. However, along the way the containers worked out so well
+that I think it deserved to be in its own library, and thus SDBX was born.
+
+I'm not quite sure what SDBX stands for yet, its probably something along the
+lines of 'Simple DataBase X..something'. Xtreme? Who knows. 
+
+This library is required to build or use LibRoadnav, thus why it is included
+with it directly.
+
+At the moment, I'm not 100% sure what the future direction of this library is,
+though it certainly will be developed according to the needs of LibRoadnav. 
+In fact, it may never get distributed seperately from libroadnav. However, 
+it makes sense to keep it somewhat independent.. I think. We'll see.
+
+-----------------------------------------------------------------------------
+
+Please report any Roadnav-related bugs to the appropriate roadnav resources,
+and any non-Roadnav SDBX bugs (though its hard to see how that could happen)
+directly to dustin@virtualroadside.com. Thanks!

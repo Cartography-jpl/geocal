@@ -2,6 +2,7 @@ from geocal import *
 from vicar_wrap import *
 from nose.tools import *
 import math
+from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../unit_test_data/"
 EciTodBurl.set_delta_ut1(0.1128609)
@@ -10,6 +11,9 @@ def test_scinterp():
     '''This was pulled from tstscinterp.pdf. This isn't actually a very
     good test, since we don't actually interpolate anything. But we want
     to include this test since it is what the underlying pdf file uses.'''
+    # Temporary, we'll come back and make this optional depending on if
+    # we have afids available or not
+    raise SkipTest
     pos = EciTodBurl(3722048.0,4126137.9,3955545.4)
     tpos = Time.time_acs(31556737.5)
     att = Quaternion_double(0.06938316945407,0.20331591888905,
@@ -30,6 +34,9 @@ def test_scinterp():
 
 def test_sc2rpc():
     '''Test data from devsc2rpc'''
+    # Temporary, we'll come back and make this optional depending on if
+    # we have afids available or not
+    raise SkipTest
     v = Array_double_3()
     v[0] = 0
     v[1] = 0
@@ -48,6 +55,9 @@ def test_sc2rpc():
 
 def test_compare_sc2rpc():
     '''Calculate using my code, and see how close we are to sc2rpc'''
+    # Temporary, we'll come back and make this optional depending on if
+    # we have afids available or not
+    raise SkipTest
     v = Array_double_3()
     v[0] = 0
     v[1] = 0

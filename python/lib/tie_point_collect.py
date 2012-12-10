@@ -6,22 +6,24 @@ import math
 import itertools
 import multiprocessing
 from multiprocessing import Pool
-from functools import partial
 import time
 
-def _tie_point_wrap(tp_collect, ic):
+class TiePointWrap(object):
     '''Wrapper around tp_collect.tie_point that can be pickled. We can\'t
     directly use pool.map on tp_collect.tie_point because python can\'t 
     pickle a instance function'''
-    try:
-        return tp_collect.tie_point(ic)
-    except RuntimeError:
+    def __init__(self, tp_collect):
+        self.tp_collect = tp_collect
+    def __call__(self, ic):
+        try:
+            return self.tp_collect.tie_point(ic)
+        except RuntimeError:
         # We may try to find points that don't actually intersect
         # the ground (e.g., we are at a steep angle and above
         # the surface). In that case, just skip this point and
         # go to the next one
-        pass
-    return None
+            pass
+        return None
 
 class TiePointCollect:
     '''Given a IgcCollection, collect tiepoints by image matching.'''
@@ -116,7 +118,7 @@ class TiePointCollect:
         #print "Done with interest point"
         #print "Time: ", time.time() - tstart
         #print "Starting matching"
-        func = partial(_tie_point_wrap, self)
+        func = TiePointWrap(self)
         if(pool):
             res = pool.map(func, iplist, 
                len(iplist) / multiprocessing.cpu_count())

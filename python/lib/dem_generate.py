@@ -6,7 +6,6 @@ from ray_intersect import *
 import itertools
 import multiprocessing
 from multiprocessing import Pool
-from functools import partial
 import numpy as np
 import numpy.linalg as la
 import matplotlib.pyplot as plt

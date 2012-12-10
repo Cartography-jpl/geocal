@@ -1,31 +1,32 @@
 from geocal import *
-from functools import partial
 from itertools import chain
 import multiprocessing
 import time
 
-def _interest_point_grid_raw_wrap(self, img, mask, number_grid_line, 
-                                  number_grid_sample, border, tstart, i):
+class InterestPointGridRawWrap(object):
     '''Wrapper around _interest_point_grid_raw that can be pickled. 
     We can\'t directly use pool.map on _interest_point_grid_raw because
     python can\`t pickle a instance function'''
-    i
-    res = []
-    t2 = time.time()
-    #print "Starting ", i, " - ", multiprocessing.current_process().name, \
-    #    " Time : ", time.time() - tstart
-    for j in range(number_grid_sample):
-        if(mask is None):
-            r = self._interest_point_grid_raw(img, i, j,
-                          number_grid_line, number_grid_sample, border)
-        else:
-            r = self._interest_point_grid_raw(img, mask, i, j,
-                          number_grid_line, number_grid_sample, border)
-        if(r is not None):
-            res.append(r)
-    #print "Done with  ", i, " - ", multiprocessing.current_process().name, \
-    #    " Time : ", time.time() - tstart, " Delta t: ", time.time() - t2
-    return res
+    def __init__(self, fd, img, mask, number_grid_line, 
+                 number_grid_sample, border):
+        self.fd = fd
+        self.img = img
+        self.mask = mask
+        self.number_grid_line = number_grid_line
+        self.number_grid_sample = number_grid_sample
+        self.border = border
+    def __call__(self, i):
+        res = []
+        for j in range(self.number_grid_sample):
+            if(self.mask is None):
+                r = self.fd._interest_point_grid_raw(self.img, i, j,
+                    self.number_grid_line, self.number_grid_sample, self.border)
+            else:
+                r = self.fd._interest_point_grid_raw(self.img, self.mask, i, j,
+                    self.number_grid_line, self.number_grid_sample, self.border)
+            if(r is not None):
+                res.append(r)
+        return res
     
 # Add some useful functions to FeatureDetector
 def interest_point_grid(self, img, number_grid_line, number_grid_sample,
@@ -50,8 +51,9 @@ def interest_point_grid(self, img, number_grid_line, number_grid_sample,
     res = []
     index_list = range(number_grid_line)
     tstart = time.time()
-    func = partial(_interest_point_grid_raw_wrap, self, img, mask,
-                   number_grid_line, number_grid_sample, border, tstart)
+    func = InterestPointGridRawWrap(self, img, mask,
+                                    number_grid_line, number_grid_sample, 
+                                    border)
     if(pool):
         res = pool.map(func, index_list)
     else:

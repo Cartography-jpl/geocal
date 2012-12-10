@@ -20,6 +20,10 @@ the third party library checks.
 AC_VICAR_RTL(require, cannot_build, default_search)
 
 #=================================================================
+# Need to have AFIDS data
+AC_AFIDS_DATA(require, cannot_build, default_build)
+
+#=================================================================
 # Various thirdparty libraries.
 
 AC_BOOST(required, cannot_build, default_search)

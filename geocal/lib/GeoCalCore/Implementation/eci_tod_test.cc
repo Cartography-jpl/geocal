@@ -5,7 +5,6 @@
 #include "ecr.h"
 #include "wgs84_constant.h"
 #include <cmath>
-#include "config.h"
 
 using namespace GeoCal;
 
@@ -19,7 +18,6 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK(e1.position == p);
   BOOST_CHECK(e2.position == p);
 
-#ifdef HAVE_TIME_TOOLKIT
   Geodetic g(10, 20, 10000);
   Time t = Time::parse_time("2003-01-01T10:30:00Z");
   boost::shared_ptr<CartesianInertial> e3 = 
@@ -67,7 +65,6 @@ BOOST_AUTO_TEST_CASE(basic)
   EciTod eci_tod2(eci, t);
   boost::shared_ptr<GroundCoordinate> gc2(eci_tod2.convert_to_cf(t));
   BOOST_CHECK(distance(*gc, *gc2) < 0.01);
-#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

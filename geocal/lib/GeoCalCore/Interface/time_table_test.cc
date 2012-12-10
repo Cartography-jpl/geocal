@@ -1,7 +1,6 @@
 #include "unit_test_support.h"
 #include "time_table.h"
 #include <cmath>
-#include "config.h"
 
 using namespace GeoCal;
 
@@ -9,7 +8,6 @@ BOOST_FIXTURE_TEST_SUITE(time_table, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(constant_spacing_time_table)
 {
-#ifdef HAVE_TIME_TOOLKIT
   Time t = Time::parse_time("2003-01-01T10:30:00Z");
   Time t2 = t + 100.4 * 40.8e-3;
   ConstantSpacingTimeTable tt(t, t2);
@@ -29,7 +27,6 @@ BOOST_AUTO_TEST_CASE(constant_spacing_time_table)
   BOOST_CHECK(fabs(tres - t_expect) < 1e-4);
   BOOST_CHECK_CLOSE(fres.line, f_expect.line, 1e-4);
   BOOST_CHECK_CLOSE(fres.sample, f_expect.sample, 1e-4);
-#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

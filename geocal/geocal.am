@@ -80,6 +80,7 @@ export abs_top_srcdir
 export run_test = *
 export AFIDS_VDEV_DATA = $(datavdevdir)
 export ELEV_ROOT = $(srtml2dir)
+export VICAR_GDALPLUGIN_HOME
 
 #=================================================================
 # Normally check builds all the libraries and executables. This

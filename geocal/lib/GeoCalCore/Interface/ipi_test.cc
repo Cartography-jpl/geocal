@@ -5,7 +5,6 @@
 #include "geodetic.h"
 #include "wgs84_constant.h"
 #include <cmath>
-#include "config.h"
 
 using namespace GeoCal;
 
@@ -13,7 +12,6 @@ BOOST_FIXTURE_TEST_SUITE(ipi, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(basic_test)
 {
-#ifdef HAVE_TIME_TOOLKIT
   Time tmin = Time::parse_time("2003-01-01T11:00:00Z");
   Time tmax = tmin + 10000 * 40.8e-3;
   boost::shared_ptr<Orbit> orb(new KeplerOrbit);
@@ -58,7 +56,6 @@ BOOST_AUTO_TEST_CASE(basic_test)
   ic_expect = tt->image_coordinate(texpect, fc);
   BOOST_CHECK(success);
   BOOST_CHECK_EQUAL(ic, ic_expect);
-#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

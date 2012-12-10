@@ -1,4 +1,3 @@
-#include "config.h"
 #include "spice_helper.h"
 #include "geocal_time.h"
 #include "geocal_exception.h"

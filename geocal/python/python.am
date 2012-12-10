@@ -1,17 +1,15 @@
-geocalpkgpython_PYTHON+= src/geocal/python/mmap_file.py
-geocalpkgpython_PYTHON+= src/geocal/python/raster_tile.py
-
-EXTRA_DIST += $(srcdir)/src/geocal/src/*
+geocalpkgpython_PYTHON+= afids_python/geocal/python/mmap_file.py
+geocalpkgpython_PYTHON+= afids_python/geocal/python/raster_tile.py
 
 python_test :
 	export PYTHONPATH=$(pythondir) && \
         export LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) && \
-        export UNIT_TEST_DATA=$(abs_srcdir)/src/geocal/unit_test_data; \
+        export UNIT_TEST_DATA=$(abs_srcdir)/afids_python/geocal/unit_test_data; \
         $(PYTHON) $(geocalpkgpythontestdir)/run_all.py
 
 # Only install python stuff and test. Does not install libgeocal even 
 # if it has changed
-fast_python_test: src/geocal/bindings/python/_geocal.la install-geocalpkgpythonPYTHON install-geocalpkgpyexecLTLIBRARIES
+fast_python_test: afids_python/geocal/bindings/python/_geocal.la install-geocalpkgpythonPYTHON install-geocalpkgpyexecLTLIBRARIES
 	@echo "=========================================================="
 	@echo "This does a fast install and test of the python stuff. This"
 	@echo "does *not* install libgeocal or executables, even "
@@ -20,8 +18,8 @@ fast_python_test: src/geocal/bindings/python/_geocal.la install-geocalpkgpythonP
 	@echo "=========================================================="
 	export PYTHONPATH=$(pythondir) && \
         export LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) && \
-        export UNIT_TEST_DATA=$(abs_srcdir)/src/geocal/unit_test_data; \
-        $(PYTHON) $(abs_srcdir)/src/geocal/bindings/python/test/run_all.py
+        export UNIT_TEST_DATA=$(abs_srcdir)/afids_python/geocal/unit_test_data; \
+        $(PYTHON) $(abs_srcdir)/afids_python/geocal/bindings/python/test/run_all.py
 
 
 

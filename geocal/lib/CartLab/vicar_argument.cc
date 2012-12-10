@@ -1,4 +1,3 @@
-#include "config.h"
 #include "vicar_argument.h"
 #include "geocal_exception.h"
 #ifdef HAVE_VICAR_RTL

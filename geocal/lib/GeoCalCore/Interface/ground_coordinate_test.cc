@@ -5,7 +5,6 @@
 #include "geodetic.h"
 #include "wgs84_constant.h"
 #include <cmath>
-#include "config.h"
 
 using namespace GeoCal;
 
@@ -19,7 +18,6 @@ BOOST_AUTO_TEST_CASE(eci)
   BOOST_CHECK(e1.position == p);
   BOOST_CHECK(e2.position == p);
 
-#ifdef HAVE_TIME_TOOLKIT
   Geodetic g(10, 20, 10000);
   Time t = Time::parse_time("2003-01-01T10:30:00Z");
   boost::shared_ptr<CartesianInertial> e3 = 
@@ -42,7 +40,6 @@ BOOST_AUTO_TEST_CASE(eci)
 // Check that height is near desired height.
 
   BOOST_CHECK(fabs(e4->convert_to_cf(t)->height_reference_surface() - 100) < 1);
-#endif
 }
 
 BOOST_AUTO_TEST_CASE(ecr)
@@ -64,7 +61,6 @@ BOOST_AUTO_TEST_CASE(ecr)
   BOOST_CHECK(e3.position == cf->position);
   BOOST_CHECK_EQUAL(e1.print_to_string(), "Ecr: (10 m, 20 m, 30 m)");
 
-#ifdef HAVE_TIME_TOOLKIT
   Time t = Time::parse_time("2003-01-01T10:30:00Z");
   boost::shared_ptr<CartesianFixed> e_ecr_start = 
     Geodetic(10, 20, 30).convert_to_cf();
@@ -76,7 +72,6 @@ BOOST_AUTO_TEST_CASE(ecr)
   BOOST_CHECK_CLOSE(e_ecr->position[0], e_ecr_start->position[0], 1e-4);
   BOOST_CHECK_CLOSE(e_ecr->position[1], e_ecr_start->position[1], 1e-4);
   BOOST_CHECK_CLOSE(e_ecr->position[2], e_ecr_start->position[2], 1e-4);
-#endif
 }
 
 BOOST_AUTO_TEST_CASE(geodetic)

@@ -1,5 +1,4 @@
 #include "argus_camera.h"
-#include "config.h"
 #ifdef HAVE_GDAL
 #include "gdal_raster_image.h"
 #endif

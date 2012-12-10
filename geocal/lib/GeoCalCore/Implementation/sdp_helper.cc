@@ -1,4 +1,3 @@
-#include "config.h"
 #include "sdp_helper.h"
 #include "ground_coordinate.h"
 #include "geocal_exception.h"

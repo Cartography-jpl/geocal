@@ -1,7 +1,6 @@
 #include "unit_test_support.h"
 #include "orbit.h"
 #include "geodetic.h"
-#include "config.h"
 
 using namespace GeoCal;
 
@@ -9,7 +8,6 @@ BOOST_FIXTURE_TEST_SUITE(orbit, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(kepler_orbit_data)
 {
-#ifdef HAVE_TIME_TOOLKIT
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
   KeplerOrbit orb(t, t + 100.0);
   BOOST_CHECK_CLOSE(orb.min_time() - t, 0.0, 1e-4);
@@ -29,7 +27,6 @@ BOOST_AUTO_TEST_CASE(kepler_orbit_data)
   } catch(const Exception& e) {
     BOOST_CHECK(true);
   }
-#endif
 }
 
 class OrbitTest : public KeplerOrbit {

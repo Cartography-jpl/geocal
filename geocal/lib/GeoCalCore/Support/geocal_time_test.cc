@@ -1,7 +1,6 @@
 #include "unit_test_support.h"
 #include <cstdlib>
 #include "geocal_time.h"    
-#include "config.h"
 #include "boost/date_time/posix_time/posix_time.hpp"
 
 using namespace GeoCal;

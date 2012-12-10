@@ -32,5 +32,5 @@ std::string GlobalFixture::test_data_dir() const
                "done if you are running 'make check', but you need to\n"
 
                "running in a debugger");
-  return std::string(srcdir) + "/src/geocal/unit_test_data/";
+  return std::string(srcdir) + "/afids_python/geocal/unit_test_data/";
 }

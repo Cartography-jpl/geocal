@@ -1,6 +1,5 @@
 #include "ground_coordinate.h"
 #include <cmath>
-#include "config.h"
 #ifdef HAVE_SPICE
 #include "spice_helper.h"
 #endif

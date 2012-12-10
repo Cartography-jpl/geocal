@@ -1,8 +1,4 @@
 #include "geodetic.h"
-#include "config.h"
-#ifdef HAVE_GDAL
-// #include "ogr_coordinate.h"
-#endif
 #include "ecr.h"
 #include "constant.h"
 #include "wgs84_constant.h"
@@ -20,15 +16,6 @@ Geodetic::Geodetic(const GroundCoordinate& Gc)
     *this = *g;
     return;
   }
-#ifdef HAVE_GDAL
-  // if(const OgrCoordinate* g = dynamic_cast<const OgrCoordinate*>(&Gc)) {
-  //   Geodetic gd(g->to_geodetic());
-  //   lat_ = gd.latitude();
-  //   lon_ = gd.longitude();
-  //   height_ellipsoid_ = gd.height_reference_surface();
-  //   return;
-  // }
-#endif
   *this = Ecr(Gc).convert_to_geodetic();
 }
 

@@ -1,4 +1,3 @@
-#include "config.h"
 #include "ibis_file.h"
 #ifdef HAVE_VICAR_RTL
 #include "ibisfile.h"		// Vicar P1 routines for IBIS access.

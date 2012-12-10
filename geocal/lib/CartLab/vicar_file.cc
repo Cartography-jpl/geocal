@@ -1,4 +1,3 @@
-#include "config.h"
 #include "vicar_file.h"
 #ifdef HAVE_GDAL
 #include "vicar_ogr.h"

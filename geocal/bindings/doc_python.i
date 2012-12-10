@@ -181,7 +181,7 @@ virtual GeoCal::AircraftOrbitData::~AircraftOrbitData()
 Destructor. ";
 
 
-// File: a01114.xml
+// File: a01113.xml
 
 %feature("docstring") std::allocator "
 STL class. ";
@@ -255,7 +255,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::ApplyMask::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -263,7 +262,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::ApplyMask::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -296,8 +294,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::ApplyMask::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::ApplyMask::mask "
 boost::shared_ptr<RasterImage> GeoCal::ApplyMask::mask() const
@@ -379,8 +376,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::ApplyMask::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::ApplyMask::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -961,97 +957,97 @@ Number_sample, Array2d< T > &Res) const
 virtual GeoCal::GeoCalCore::Array2d< T >::~Array2d()
 ";
 
-// File: a01115.xml
+// File: a01114.xml
 
 %feature("docstring") std::auto_ptr "
 STL class. ";
 
 
-// File: a01116.xml
+// File: a01115.xml
 
 %feature("docstring") std::bad_alloc "
 STL class. ";
 
 
-// File: a01117.xml
+// File: a01116.xml
 
 %feature("docstring") std::bad_cast "
 STL class. ";
 
 
-// File: a01118.xml
+// File: a01117.xml
 
 %feature("docstring") std::bad_exception "
 STL class. ";
 
 
-// File: a01119.xml
+// File: a01118.xml
 
 %feature("docstring") std::bad_typeid "
 STL class. ";
 
 
-// File: a01120.xml
+// File: a01119.xml
 
 %feature("docstring") std::basic_fstream "
 STL class. ";
 
 
-// File: a01128.xml
+// File: a01127.xml
 
 %feature("docstring") std::basic_ifstream "
 STL class. ";
 
 
-// File: a01125.xml
+// File: a01124.xml
 
 %feature("docstring") std::basic_ios "
 STL class. ";
 
 
-// File: a01123.xml
+// File: a01122.xml
 
 %feature("docstring") std::basic_iostream "
 STL class. ";
 
 
-// File: a01124.xml
+// File: a01123.xml
 
 %feature("docstring") std::basic_istream "
 STL class. ";
 
 
-// File: a01136.xml
+// File: a01135.xml
 
 %feature("docstring") std::basic_istringstream "
 STL class. ";
 
 
-// File: a01141.xml
+// File: a01140.xml
 
 %feature("docstring") std::basic_ofstream "
 STL class. ";
 
 
-// File: a01127.xml
+// File: a01126.xml
 
 %feature("docstring") std::basic_ostream "
 STL class. ";
 
 
-// File: a01144.xml
+// File: a01143.xml
 
 %feature("docstring") std::basic_ostringstream "
 STL class. ";
 
 
-// File: a00702.xml
+// File: a00701.xml
 
 %feature("docstring") std::basic_string "
 STL class. ";
 
 
-// File: a01133.xml
+// File: a01132.xml
 
 %feature("docstring") std::basic_stringstream "
 STL class. ";
@@ -1077,7 +1073,7 @@ void BasicPcorrMatcher::match(cv::Mat &Ref, cv::Mat &New, cv::Point2f &Ref_loc, 
 static void BilinearIntepolate::apply(T1 &A, T2 &B, T3, T4, T5, T6, T7, T8, T9, T10, T11)
 ";
 
-// File: a01154.xml
+// File: a01153.xml
 
 %feature("docstring") std::bitset "
 STL class. ";
@@ -1095,16 +1091,16 @@ capture the common behavior.
 
 To do this we do two steps:
 
-1. We calculate roughly what the difference in resolution is between
-the original data and final MapInfo. We do this by looking at the
-center pixel of the original data and the pixel +1 in line and sample.
-We then use RasterAveraged to average the original data to roughly the
+We calculate roughly what the difference in resolution is between the
+original data and final MapInfo. We do this by looking at the center
+pixel of the original data and the pixel +1 in line and sample. We
+then use RasterAveraged to average the original data to roughly the
 resolution of the final MapInfo. If the final MapInfo is near the same
 resolution as the original, or if it has a higher resolution, then we
 don't do any averaging. Alternatively, you can pass in the averaging
 factor.
 
-2. We then interpolate the possibly averaged data to the final
+We then interpolate the possibly averaged data to the final
 projection.
 
 It is ok if the final MapInfo contains areas outside of the original
@@ -1158,7 +1154,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::CalcMapProjected::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -1166,7 +1161,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::CalcMapProjected::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -1199,8 +1193,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::CalcMapProjected::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::CalcMapProjected::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -1277,8 +1270,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::CalcMapProjected::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::CalcMapProjected::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -1392,7 +1384,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::CalcRaster::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -1400,7 +1391,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::CalcRaster::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -1433,8 +1423,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::CalcRaster::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::CalcRaster::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -1510,8 +1499,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::CalcRaster::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::CalcRaster::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -2227,127 +2215,127 @@ the check. ";
 virtual GeoCal::CombinedMask::~CombinedMask()
 ";
 
-// File: a01155.xml
+// File: a01154.xml
 
 %feature("docstring") std::complex "
 STL class. ";
 
 
-// File: a01156.xml
+// File: a01155.xml
 
 %feature("docstring") std::map::const_iterator "
 STL iterator class. ";
 
 
-// File: a01157.xml
+// File: a01156.xml
 
 %feature("docstring") std::multimap::const_iterator "
 STL iterator class. ";
 
 
-// File: a01150.xml
+// File: a01149.xml
 
 %feature("docstring") std::basic_string::const_iterator "
 STL iterator class. ";
 
 
-// File: a01158.xml
+// File: a01157.xml
 
 %feature("docstring") std::set::const_iterator "
 STL iterator class. ";
 
 
-// File: a01159.xml
+// File: a01158.xml
 
 %feature("docstring") std::multiset::const_iterator "
 STL iterator class. ";
 
 
-// File: a01160.xml
+// File: a01159.xml
 
 %feature("docstring") std::string::const_iterator "
 STL iterator class. ";
 
 
-// File: a01161.xml
+// File: a01160.xml
 
 %feature("docstring") std::vector::const_iterator "
 STL iterator class. ";
 
 
-// File: a01162.xml
+// File: a01161.xml
 
 %feature("docstring") std::wstring::const_iterator "
 STL iterator class. ";
 
 
-// File: a01163.xml
+// File: a01162.xml
 
 %feature("docstring") std::deque::const_iterator "
 STL iterator class. ";
 
 
-// File: a01164.xml
+// File: a01163.xml
 
 %feature("docstring") std::list::const_iterator "
 STL iterator class. ";
 
 
-// File: a01165.xml
+// File: a01164.xml
 
 %feature("docstring") std::map::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01166.xml
+// File: a01165.xml
 
 %feature("docstring") std::multimap::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01167.xml
+// File: a01166.xml
 
 %feature("docstring") std::set::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01151.xml
+// File: a01150.xml
 
 %feature("docstring") std::basic_string::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01168.xml
+// File: a01167.xml
 
 %feature("docstring") std::multiset::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01169.xml
+// File: a01168.xml
 
 %feature("docstring") std::vector::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01170.xml
+// File: a01169.xml
 
 %feature("docstring") std::string::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01171.xml
+// File: a01170.xml
 
 %feature("docstring") std::wstring::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01172.xml
+// File: a01171.xml
 
 %feature("docstring") std::deque::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01173.xml
+// File: a01172.xml
 
 %feature("docstring") std::list::const_reverse_iterator "
 STL iterator class. ";
@@ -3117,7 +3105,7 @@ void DemUpdater2::print(std::ostream &Os) const
 Print to stream. ";
 
 
-// File: a01174.xml
+// File: a01173.xml
 
 %feature("docstring") std::deque "
 STL class. ";
@@ -3237,7 +3225,7 @@ sink for the data (e.g., creating a gdk_pixbuf). ";
 virtual GeoCal::DisplayStretchStdDev::~DisplayStretchStdDev()
 ";
 
-// File: a01177.xml
+// File: a01176.xml
 
 %feature("docstring") std::domain_error "
 STL class. ";
@@ -3837,7 +3825,7 @@ virtual const char* GeoCal::GeoCalCore::Exception::what() const
 virtual GeoCal::GeoCalCore::Exception::~Exception()
  throw ()";
 
-// File: a00625.xml
+// File: a00624.xml
 
 %feature("docstring") std::exception "
 STL class. ";
@@ -3854,7 +3842,7 @@ F::F(const DemUpdater2 &D, int Line, int Sample)
 virtual F::~F()
 ";
 
-// File: a01179.xml
+// File: a01178.xml
 
 %feature("docstring") std::ios_base::failure "
 STL class. ";
@@ -4152,7 +4140,7 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01121.xml
+// File: a01120.xml
 
 %feature("docstring") std::fstream "
 STL class. ";
@@ -4889,10 +4877,10 @@ fixed size tiles PNG (256 x 256) for google earth.
 We create the file name as Fbase + line_tile + \"_\" + sample_tile +
 \".png\", e.g. foo/0_1.png. We treat 0 as transparent fill value.
 
-Note that this *only* generates the PNG files, we don't produce the
-KML files or image pyramid. This is intended as a low level function
-to be used with some higher level tool that handles the other pieces
-(e.g., Ruby, which is better than C++ for generating XML files)
+Note that this only generates the PNG files, we don't produce the KML
+files or image pyramid. This is intended as a low level function to be
+used with some higher level tool that handles the other pieces (e.g.,
+Ruby, which is better than C++ for generating XML files)
 
 We return the list of files created and the MapInfo for each file. ";
 
@@ -5064,7 +5052,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::GdalRasterImage::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -5077,7 +5064,6 @@ Indicates if a metadata item is found in the file. ";
 
 %feature("docstring")  GeoCal::GdalRasterImage::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -5113,8 +5099,7 @@ bool GeoCal::GdalRasterImage::is_closed() const
 ";
 %feature("docstring")  GeoCal::GdalRasterImage::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::GdalRasterImage::map_info_from_nitf_corner "
 boost::shared_ptr< MapInfo > GdalRasterImage::map_info_from_nitf_corner() const
@@ -6311,7 +6296,7 @@ library, otherwise we throw an exception saying that it isn't
 available. ";
 
 
-// File: a01129.xml
+// File: a01128.xml
 
 %feature("docstring") std::ifstream "
 STL class. ";
@@ -6380,16 +6365,16 @@ ImageGroundConnection and a Camera.
 
 To do this we do two steps:
 
-1. We calculate roughly what the difference in resolution is between
-the original data and final MapInfo. We do this by looking at the
-center pixel of the original data and the pixel +1 in line and sample.
-We then use RasterAveraged to average the original data to roughly the
+We calculate roughly what the difference in resolution is between the
+original data and final MapInfo. We do this by looking at the center
+pixel of the original data and the pixel +1 in line and sample. We
+then use RasterAveraged to average the original data to roughly the
 resolution of the final MapInfo. If the final MapInfo is near the same
 resolution as the original, or if it has a higher resolution, then we
 don't do any averaging. Alternatively, you can pass in the averaging
 factor (include a value of 1 which turns this behavior off).
 
-2. We then interpolate the possibly averaged data to the final
+We then interpolate the possibly averaged data to the final
 projection.
 
 It is ok if the final MapInfo contains areas outside of the original
@@ -6443,7 +6428,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::IgcMapProjected::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -6451,7 +6435,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::IgcMapProjected::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -6507,8 +6490,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::IgcMapProjected::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::IgcMapProjected::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -6585,8 +6567,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::IgcMapProjected::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::IgcMapProjected::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -7004,7 +6985,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::ImagePointDisplay::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -7017,7 +6997,6 @@ Indicates if a metadata item is found in the file. ";
 
 %feature("docstring")  GeoCal::ImagePointDisplay::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -7079,8 +7058,7 @@ bool GeoCal::GdalRasterImage::is_closed() const
 ";
 %feature("docstring")  GeoCal::ImagePointDisplay::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::ImagePointDisplay::map_info_from_nitf_corner "
 boost::shared_ptr< MapInfo > GdalRasterImage::map_info_from_nitf_corner() const
@@ -7453,22 +7431,22 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01187.xml
+// File: a01186.xml
 
 
-// File: a01181.xml
+// File: a01180.xml
 
 %feature("docstring") std::invalid_argument "
 STL class. ";
 
 
-// File: a01131.xml
+// File: a01130.xml
 
 %feature("docstring") std::ios "
 STL class. ";
 
 
-// File: a01126.xml
+// File: a01125.xml
 
 %feature("docstring") std::ios_base "
 STL class. ";
@@ -7855,7 +7833,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::IpiMapProjected::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -7863,7 +7840,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::IpiMapProjected::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -7918,8 +7894,7 @@ it the set of raster image to process. ";
 
 %feature("docstring")  GeoCal::IpiMapProjected::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::IpiMapProjected::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -7996,8 +7971,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::IpiMapProjected::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::IpiMapProjected::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -8061,73 +8035,73 @@ virtual GeoCal::IpiMapProjected::~IpiMapProjected()
 Destructor. ";
 
 
-// File: a01139.xml
+// File: a01138.xml
 
 %feature("docstring") std::istream "
 STL class. ";
 
 
-// File: a01137.xml
+// File: a01136.xml
 
 %feature("docstring") std::istringstream "
 STL class. ";
 
 
-// File: a01188.xml
+// File: a01187.xml
 
 %feature("docstring") std::multimap::iterator "
 STL iterator class. ";
 
 
-// File: a01189.xml
+// File: a01188.xml
 
 %feature("docstring") std::set::iterator "
 STL iterator class. ";
 
 
-// File: a01152.xml
+// File: a01151.xml
 
 %feature("docstring") std::basic_string::iterator "
 STL iterator class. ";
 
 
-// File: a01190.xml
+// File: a01189.xml
 
 %feature("docstring") std::multiset::iterator "
 STL iterator class. ";
 
 
-// File: a01191.xml
+// File: a01190.xml
 
 %feature("docstring") std::vector::iterator "
 STL iterator class. ";
 
 
-// File: a01192.xml
+// File: a01191.xml
 
 %feature("docstring") std::string::iterator "
 STL iterator class. ";
 
 
-// File: a01193.xml
+// File: a01192.xml
 
 %feature("docstring") std::wstring::iterator "
 STL iterator class. ";
 
 
-// File: a01175.xml
+// File: a01174.xml
 
 %feature("docstring") std::deque::iterator "
 STL iterator class. ";
 
 
-// File: a01194.xml
+// File: a01193.xml
 
 %feature("docstring") std::list::iterator "
 STL iterator class. ";
 
 
-// File: a01195.xml
+// File: a01194.xml
 
 %feature("docstring") std::map::iterator "
 STL iterator class. ";
@@ -8291,13 +8265,13 @@ This is in m/s, in same coordinate system as position. ";
 virtual GeoCal::KeplerOrbit::~KeplerOrbit()
 ";
 
-// File: a01182.xml
+// File: a01181.xml
 
 %feature("docstring") std::length_error "
 STL class. ";
 
 
-// File: a01196.xml
+// File: a01195.xml
 
 %feature("docstring") std::list "
 STL class. ";
@@ -8346,7 +8320,7 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01178.xml
+// File: a01177.xml
 
 %feature("docstring") std::logic_error "
 STL class. ";
@@ -8564,7 +8538,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::MagnifyBilinear::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -8572,7 +8545,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::MagnifyBilinear::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -8610,8 +8582,7 @@ Constructor. ";
 
 %feature("docstring")  GeoCal::MagnifyBilinear::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::MagnifyBilinear::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -8687,8 +8658,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::MagnifyBilinear::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::MagnifyBilinear::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -8921,7 +8891,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::MagnifyReplicate::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -8929,7 +8898,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::MagnifyReplicate::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -8970,8 +8938,7 @@ Constructor. ";
 
 %feature("docstring")  GeoCal::MagnifyReplicate::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::MagnifyReplicate::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -9050,8 +9017,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::MagnifyReplicate::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::MagnifyReplicate::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -9093,7 +9059,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::MagnifyReplicate::~MagnifyReplicate()
 ";
 
-// File: a01198.xml
+// File: a01197.xml
 
 %feature("docstring") std::map "
 STL class. ";
@@ -9209,8 +9175,8 @@ double Ulc_y, double Lrc_x, double Lrc_y, int Number_x_pixel, int
 Number_y_pixel)
 Constructor.
 
-Note that ulc and lrc are for the bounding box of the map, *not* for
-the center of the upper left hand or lower right hand pixel.
+Note that ulc and lrc are for the bounding box of the map, not for the
+center of the upper left hand or lower right hand pixel.
 
 Note that it is allowed for Number_x_pixel or Number_y_pixel to be 0.
 This obviously isn't a very useful map, but it is nice for edge cases
@@ -9435,15 +9401,15 @@ projection and/or a different resolution.
 
 To do this we do two steps:
 
-1. We calculate roughly what the difference in resolution is between
-the original and final MapInfo. We do this by looking at the center
-pixel of the original data and the pixel +1 in line and sample. We
-then use RasterAveraged to average the original data to roughly the
-resolution of the final MapInfo. If the final MapInfo is near the same
-resolution as the original, or if it has a higher resolution, then we
-don't do any averaging.
+We calculate roughly what the difference in resolution is between the
+original and final MapInfo. We do this by looking at the center pixel
+of the original data and the pixel +1 in line and sample. We then use
+RasterAveraged to average the original data to roughly the resolution
+of the final MapInfo. If the final MapInfo is near the same resolution
+as the original, or if it has a higher resolution, then we don't do
+any averaging.
 
-2. We then interpolate the possibly averaged data to the final
+We then interpolate the possibly averaged data to the final
 projection.
 
 It is ok if the final MapInfo contains areas outside of the original
@@ -9497,7 +9463,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::MapReprojectedImage::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -9505,7 +9470,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::MapReprojectedImage::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -9538,8 +9502,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::MapReprojectedImage::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::MapReprojectedImage::MapReprojectedImage "
 MapReprojectedImage::MapReprojectedImage(const boost::shared_ptr< RasterImage > Img_in, const MapInfo &Mi)
@@ -9630,8 +9593,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::MapReprojectedImage::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::MapReprojectedImage::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -9842,15 +9804,18 @@ particular the \"f2ratio\" process.
 We read a IBIS file that describes the thresholds for a number of
 material classes. For each material class, we do the following:
 
-1. First, the difference in the pan bands is compared to a threshold.
-The difference is normally calculated by DoughnutAverage, using the
+First, the difference in the pan bands is compared to a threshold. The
+difference is normally calculated by DoughnutAverage, using the
 pandif_raster_image. But something else could be used, all this class
 cares about is having a difference it can compare against a threshold.
-2. Compare pan data to a shadow threshold. This masks at very dark
-pixels that we assume are in shadow. 3. For each point, we calculate
-the required ratios between the multispectral bands, take the
-difference with the supplied class mean and divide by the class sigma.
-4. We sum the abs value of for each of the band ratios divided by the
+Compare pan data to a shadow threshold. This masks at very dark pixels
+that we assume are in shadow.
+
+For each point, we calculate the required ratios between the
+multispectral bands, take the difference with the supplied class mean
+and divide by the class sigma.
+
+We sum the abs value of for each of the band ratios divided by the
 number of band ratios (i.e, we use a L1 norm). This is compared
 against a second threshold.
 
@@ -9915,7 +9880,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::MaterialDetect::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -9923,7 +9887,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::MaterialDetect::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -9956,8 +9919,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::MaterialDetect::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::MaterialDetect::material_dif "
 blitz::Array< double, 2 > MaterialDetect::material_dif(int Lstart, int Sstart, int Number_line, int Number_sample, int
@@ -10087,8 +10049,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::MaterialDetect::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::MaterialDetect::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -10424,7 +10385,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImage::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -10432,7 +10392,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImage::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -10465,8 +10424,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImage::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImage::MemoryRasterImage "
 GeoCal::MemoryRasterImage::MemoryRasterImage(int Number_line=0, int Number_sample=0)
@@ -10567,8 +10525,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImage::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImage::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -10666,7 +10623,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImageRef::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -10674,7 +10630,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImageRef::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -10707,8 +10662,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImageRef::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImageRef::MemoryRasterImageRef "
 GeoCal::MemoryRasterImageRef< T >::MemoryRasterImageRef(T *d, int Number_line, int Number_sample)
@@ -10807,8 +10761,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImageRef::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::MemoryRasterImageRef::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -10890,13 +10843,13 @@ Zero_limit2=-1.0, int Zero_thr=0, double Predictor_adjustment[2]=NULL)
 MspiPcorrMatcher::~MspiPcorrMatcher()
 ";
 
-// File: a01200.xml
+// File: a01199.xml
 
 %feature("docstring") std::multimap "
 STL class. ";
 
 
-// File: a01202.xml
+// File: a01201.xml
 
 %feature("docstring") std::multiset "
 STL class. ";
@@ -11096,7 +11049,7 @@ virtual GeoCal::OffsetImageGroundConnection::~OffsetImageGroundConnection()
 Destructor. ";
 
 
-// File: a01142.xml
+// File: a01141.xml
 
 %feature("docstring") std::ofstream "
 STL class. ";
@@ -11732,16 +11685,16 @@ a Camera.
 
 To do this we do two steps:
 
-1. We calculate roughly what the difference in resolution is between
-the original data and final MapInfo. We do this by looking at the
-center pixel of the original data and the pixel +1 in line and sample.
-We then use RasterAveraged to average the original data to roughly the
+We calculate roughly what the difference in resolution is between the
+original data and final MapInfo. We do this by looking at the center
+pixel of the original data and the pixel +1 in line and sample. We
+then use RasterAveraged to average the original data to roughly the
 resolution of the final MapInfo. If the final MapInfo is near the same
 resolution as the original, or if it has a higher resolution, then we
 don't do any averaging. Alternatively, you can pass in the averaging
 factor.
 
-2. We then interpolate the possibly averaged data to the final
+We then interpolate the possibly averaged data to the final
 projection.
 
 It is ok if the final MapInfo contains areas outside of the original
@@ -11795,7 +11748,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::OrbitMapProjected::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -11803,7 +11755,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::OrbitMapProjected::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -11836,8 +11787,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::OrbitMapProjected::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::OrbitMapProjected::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -11937,8 +11887,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::OrbitMapProjected::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::OrbitMapProjected::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -12117,25 +12066,25 @@ virtual GeoCal::OrbitQuaternionList::~OrbitQuaternionList()
 Destructor. ";
 
 
-// File: a01147.xml
+// File: a01146.xml
 
 %feature("docstring") std::ostream "
 STL class. ";
 
 
-// File: a01145.xml
+// File: a01144.xml
 
 %feature("docstring") std::ostringstream "
 STL class. ";
 
 
-// File: a01183.xml
+// File: a01182.xml
 
 %feature("docstring") std::out_of_range "
 STL class. ";
 
 
-// File: a01184.xml
+// File: a01183.xml
 
 %feature("docstring") std::overflow_error "
 STL class. ";
@@ -12493,7 +12442,7 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01204.xml
+// File: a01203.xml
 
 %feature("docstring") std::priority_queue "
 STL class. ";
@@ -12747,12 +12696,12 @@ This accounts for both the orientation of the spacecraft relative to
 the planet, as well as the aberration of light (a small correction due
 to the movement of the spacecraft relative to the planet).
 
-This does *not* account for atmospheric refraction. Depending on the
+This does not account for atmospheric refraction. Depending on the
 zenith angle, this can be somewhat important for satellites. From the
-approximate atmospheric model described in \"Theoretical Basis of the
-SDP Toolkit Geolocation package for the ECS\", Table 6-5 the linear
-displacement for a zenith angle of 10 is 0.549 meters, 20 degrees is
-1.223 meters, and 30 degrees is 2.221.
+approximate atmospheric model described in \"Theoretical Basis of
+the SDP Toolkit Geolocation package for the ECS\", Table 6-5 the
+linear displacement for a zenith angle of 10 is 0.549 meters, 20
+degrees is 1.223 meters, and 30 degrees is 2.221.
 
 We may want to add a atmospheric refraction correction in the future,
 but this hasn't been done yet.
@@ -12901,7 +12850,7 @@ Return velocity. ";
 virtual GeoCal::QuaternionOrbitData::~QuaternionOrbitData()
 ";
 
-// File: a01205.xml
+// File: a01204.xml
 
 %feature("docstring") std::queue "
 STL class. ";
@@ -12917,8 +12866,8 @@ QuickBirdOrbit.
 
 Note a possible source of confusion. There are a few different
 conventions about the ordering of the quaternion coefficients. The
-boost library places the real part at the front, so we have a + b i +
-c j + d k and the quaternion is 4-tuple (a, b, c, d). The convention
+boost library places the real part at the front, so we have a + b i c
+j + d k and the quaternion is 4-tuple (a, b, c, d). The convention
 used by quickbird data is q1 i + q2 j + q3 k + q4 with the 4-tuple is
 (q1, q2, q3, q4). That means when we bring this over to the boost
 library, we need to reorder this to the 4-tuple (q4, q1, q2, q3).
@@ -13368,7 +13317,7 @@ Convert from ImageCoordinate to Time and FrameCoordinate. ";
 virtual GeoCal::QuickBirdTimeTable::~QuickBirdTimeTable()
 ";
 
-// File: a01185.xml
+// File: a01184.xml
 
 %feature("docstring") std::range_error "
 STL class. ";
@@ -13449,7 +13398,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::RasterAveraged::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -13457,7 +13405,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::RasterAveraged::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -13502,8 +13449,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::RasterAveraged::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::RasterAveraged::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -13600,8 +13546,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::RasterAveraged::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::RasterAveraged::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -13717,7 +13662,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::RasterImage::has_map_info "
 virtual bool GeoCal::RasterImage::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -13725,7 +13669,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::RasterImage::has_rpc "
 virtual bool GeoCal::RasterImage::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -13758,8 +13701,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::RasterImage::map_info "
 virtual const MapInfo& GeoCal::RasterImage::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::RasterImage::number_line "
 virtual int GeoCal::RasterImage::number_line() const =0
@@ -13836,8 +13778,7 @@ Return a subset of the image. ";
 
 %feature("docstring")  GeoCal::RasterImage::rpc "
 virtual Rpc GeoCal::RasterImage::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::RasterImage::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -14121,7 +14062,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::RasterImageTiledFile::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -14129,7 +14069,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::RasterImageTiledFile::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -14162,8 +14101,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::RasterImageTiledFile::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::RasterImageTiledFile::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -14264,8 +14202,7 @@ Reset number of swap counter to 0. ";
 
 %feature("docstring")  GeoCal::RasterImageTiledFile::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::RasterImageTiledFile::tile_file_base "
 const TiledFileBase<2>& GeoCal::RasterImageTiledFile::tile_file_base() const
@@ -14411,7 +14348,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::RasterImageVariable::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -14419,7 +14355,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::RasterImageVariable::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -14452,8 +14387,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::RasterImageVariable::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::RasterImageVariable::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -14534,8 +14468,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::RasterImageVariable::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::RasterImageVariable::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -14717,7 +14650,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  RasterImageWrapClosest::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -14725,7 +14657,6 @@ can override this. ";
 
 %feature("docstring")  RasterImageWrapClosest::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -14758,8 +14689,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  RasterImageWrapClosest::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  RasterImageWrapClosest::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -14838,8 +14768,7 @@ Remove an RPC. ";
 
 %feature("docstring")  RasterImageWrapClosest::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  RasterImageWrapClosest::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -14925,7 +14854,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  RasterImageWrapCvdNorm::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -14933,7 +14861,6 @@ can override this. ";
 
 %feature("docstring")  RasterImageWrapCvdNorm::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -14966,8 +14893,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  RasterImageWrapCvdNorm::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  RasterImageWrapCvdNorm::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -15046,8 +14972,7 @@ Remove an RPC. ";
 
 %feature("docstring")  RasterImageWrapCvdNorm::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  RasterImageWrapCvdNorm::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -15133,7 +15058,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  RasterImageWrapMaterial::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -15141,7 +15065,6 @@ can override this. ";
 
 %feature("docstring")  RasterImageWrapMaterial::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -15174,8 +15097,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  RasterImageWrapMaterial::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  RasterImageWrapMaterial::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -15254,8 +15176,7 @@ Remove an RPC. ";
 
 %feature("docstring")  RasterImageWrapMaterial::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  RasterImageWrapMaterial::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -15341,7 +15262,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  RasterImageWrapPandif::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -15349,7 +15269,6 @@ can override this. ";
 
 %feature("docstring")  RasterImageWrapPandif::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -15382,8 +15301,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  RasterImageWrapPandif::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  RasterImageWrapPandif::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -15462,8 +15380,7 @@ Remove an RPC. ";
 
 %feature("docstring")  RasterImageWrapPandif::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  RasterImageWrapPandif::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -15570,7 +15487,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::RasterMultifile::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -15578,7 +15494,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::RasterMultifile::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -15611,8 +15526,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::RasterMultifile::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::RasterMultifile::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -15695,8 +15609,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::RasterMultifile::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::RasterMultifile::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -15814,7 +15727,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::RasterSubSample::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -15822,7 +15734,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::RasterSubSample::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -15863,8 +15774,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::RasterSubSample::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::RasterSubSample::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -15960,8 +15870,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::RasterSubSample::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::RasterSubSample::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -16061,7 +15970,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::RawRasterImage::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -16069,7 +15977,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::RawRasterImage::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -16102,8 +16009,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::RawRasterImage::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::RawRasterImage::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -16188,8 +16094,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::RawRasterImage::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::RawRasterImage::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -16378,61 +16283,61 @@ Surface zenith angle in radians, given the space zenith angles. ";
 virtual GeoCal::Refraction::~Refraction()
 ";
 
-// File: a01201.xml
+// File: a01200.xml
 
 %feature("docstring") std::multimap::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01206.xml
+// File: a01205.xml
 
 %feature("docstring") std::string::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01207.xml
+// File: a01206.xml
 
 %feature("docstring") std::set::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01199.xml
+// File: a01198.xml
 
 %feature("docstring") std::map::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01153.xml
+// File: a01152.xml
 
 %feature("docstring") std::basic_string::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01208.xml
+// File: a01207.xml
 
 %feature("docstring") std::wstring::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01197.xml
+// File: a01196.xml
 
 %feature("docstring") std::list::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01176.xml
+// File: a01175.xml
 
 %feature("docstring") std::deque::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01203.xml
+// File: a01202.xml
 
 %feature("docstring") std::multiset::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01209.xml
+// File: a01208.xml
 
 %feature("docstring") std::vector::reverse_iterator "
 STL iterator class. ";
@@ -16467,7 +16372,7 @@ numbers to be floats. However file formats such as geotiff and NITF
 treat these as integers. If you store a RPC into a file with one of
 these formats, the data will be truncated. If you plan on saving to
 one of these formats, you should be aware of this and keep these an
-whole numbers. This limitation is *not* present in the VICAR file
+whole numbers. This limitation is not present in the VICAR file
 format.
 
 C++ includes: geocal_rpc.h ";
@@ -16683,7 +16588,7 @@ repeatedly calculate the same data over and over e.g., use a
 MemoryRasterImage to copy the data into memory.
 
 As you update the Rpc parameters, the area covered on the surface
-changes. This class does *not* update the MapInfo describing the area
+changes. This class does not update the MapInfo describing the area
 covered. However, you can call map_info_bounding_update() to update
 this information if desired.
 
@@ -16758,7 +16663,7 @@ default Mask doesn't mask any areas.
 
 We update the line_offset and sample_offset only of rpc() to reduce
 the difference between the map projected image and the Ref_img. This
-functions does *not* fit the other parameters given by
+functions does not fit the other parameters given by
 rpc().fit_line_numerator and rpc().fit_sample_numerator.
 
 We repeat the coarse fit until the remaining differences between the
@@ -16813,7 +16718,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::RpcImage::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -16821,7 +16725,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::RpcImage::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -16866,8 +16769,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::RpcImage::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::RpcImage::map_info_bounding "
 MapInfo RpcImage::map_info_bounding() const
@@ -16987,8 +16889,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::RpcImage::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::RpcImage::RpcImage "
 RpcImage::RpcImage(const boost::shared_ptr< RasterImage > &Raw_img, const Rpc &R, const
@@ -17199,7 +17100,7 @@ virtual GeoCal::RpcImageGroundConnection::~RpcImageGroundConnection()
 Destructor. ";
 
 
-// File: a01180.xml
+// File: a01179.xml
 
 %feature("docstring") std::runtime_error "
 STL class. ";
@@ -17253,7 +17154,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::ScaleImage::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -17261,7 +17161,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::ScaleImage::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -17294,8 +17193,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::ScaleImage::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::ScaleImage::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -17374,8 +17272,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::ScaleImage::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::ScaleImage::scale_factor "
 double GeoCal::ScaleImage::scale_factor() const
@@ -17597,7 +17494,7 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual GeoCal::SdpToolkitTimeInterface::~SdpToolkitTimeInterface()
 ";
 
-// File: a01210.xml
+// File: a01209.xml
 
 %feature("docstring") std::set "
 STL class. ";
@@ -17830,7 +17727,7 @@ The default data is for the nominal MISR DF, red band. ";
 virtual GeoCal::SimplePushBroomCamera::~SimplePushBroomCamera()
 ";
 
-// File: a01211.xml
+// File: a01210.xml
 
 %feature("docstring") std::smart_ptr "
 STL class. ";
@@ -17889,7 +17786,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::SmoothImage::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -17897,7 +17793,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::SmoothImage::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -17930,8 +17825,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::SmoothImage::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::SmoothImage::number_half_size "
 int GeoCal::SmoothImage::number_half_size() const
@@ -18013,8 +17907,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::SmoothImage::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::SmoothImage::SmoothImage "
 SmoothImage::SmoothImage(const boost::shared_ptr< RasterImage > &Data, int Nhs=3, int
@@ -18623,7 +18516,7 @@ given point. ";
 virtual GeoCal::SrtmDem::~SrtmDem()
 ";
 
-// File: a01212.xml
+// File: a01211.xml
 
 %feature("docstring") std::stack "
 STL class. ";
@@ -18689,13 +18582,13 @@ GeoCal::Statistic::Statistic()
 Constructor. ";
 
 
-// File: a00701.xml
+// File: a00700.xml
 
 %feature("docstring") std::string "
 STL class. ";
 
 
-// File: a01134.xml
+// File: a01133.xml
 
 %feature("docstring") std::stringstream "
 STL class. ";
@@ -18761,7 +18654,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::SubRasterImage::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -18769,7 +18661,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::SubRasterImage::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -18802,8 +18693,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::SubRasterImage::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::SubRasterImage::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -18884,8 +18774,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::SubRasterImage::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::SubRasterImage::start_line "
 int GeoCal::SubRasterImage::start_line() const
@@ -19391,9 +19280,9 @@ We could use TAI, GPS, the PGS toolkit. Each of these time system can
 be related to the other by a constant, since the only difference is
 the Epoch that time is measure against.
 
-Note that for accurate work we do *not* want to use something like
-Unix time, because this does not account for leapseconds (POSIX unix
-time is the number of seconds since January 1, 1970 *not* including
+Note that for accurate work we do not want to use something like Unix
+time, because this does not account for leapseconds (POSIX unix time
+is the number of seconds since January 1, 1970 not including
 leapseconds).
 
 Most code doesn't care what the underlying time representation is, we
@@ -19707,13 +19596,13 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual GeoCal::ToolkitTimeInterface::~ToolkitTimeInterface()
 ";
 
-// File: a01186.xml
+// File: a01185.xml
 
 %feature("docstring") std::underflow_error "
 STL class. ";
 
 
-// File: a01213.xml
+// File: a01212.xml
 
 %feature("docstring") std::unique_ptr "
 STL class. ";
@@ -19741,13 +19630,13 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual UnixToolkitTimeInterface::~UnixToolkitTimeInterface()
 ";
 
-// File: a01214.xml
+// File: a01213.xml
 
 %feature("docstring") std::valarray "
 STL class. ";
 
 
-// File: a01215.xml
+// File: a01214.xml
 
 %feature("docstring") std::vector "
 STL class. ";
@@ -20058,7 +19947,7 @@ to do this.
 
 Also a note for developers. The Vicar RTL library uses various
 variable argument functions. You need to end the list of arguments
-with \"NULL\". Note that a cast to a point type is *mandatory*, you
+with \"NULL\". Note that a cast to a point type is mandatory, you
 can't just say \"0\". If say \"0\" then you will get fairly difficult
 to track down errors. Without the cast, this gets passed as an int,
 which the RTL library code will then try to interpret as a char *.
@@ -20508,7 +20397,7 @@ this to read Vicar files in a context where we don't want to use the
 RTL library, or don't want to be constrained to running in the Vicar
 environment.
 
-This class does *not* handle new VICAR features such as compression.
+This class does not handle new VICAR features such as compression.
 
 C++ includes: vicar_lite_file.h ";
 
@@ -20698,7 +20587,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::VicarLiteRasterImage::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -20706,7 +20594,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::VicarLiteRasterImage::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -20746,8 +20633,7 @@ the labels. ";
 
 %feature("docstring")  GeoCal::VicarLiteRasterImage::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::VicarLiteRasterImage::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -20828,8 +20714,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::VicarLiteRasterImage::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::VicarLiteRasterImage::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -20936,7 +20821,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::VicarMultiFile::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -20944,7 +20828,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::VicarMultiFile::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -20977,8 +20860,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::VicarMultiFile::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::VicarMultiFile::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -21061,8 +20943,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::VicarMultiFile::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::VicarMultiFile::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -21273,7 +21154,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::VicarRasterImage::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -21281,7 +21161,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::VicarRasterImage::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -21314,8 +21193,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::VicarRasterImage::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::VicarRasterImage::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -21409,8 +21287,7 @@ Reset number of swap counter to 0. ";
 
 %feature("docstring")  GeoCal::VicarRasterImage::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::VicarRasterImage::set_map_info "
 void GeoCal::VicarRasterImage::set_map_info(const MapInfo &Mi)
@@ -21642,43 +21519,43 @@ virtual GeoCal::VicarTiledFile< T >::~VicarTiledFile()
 Destructor. ";
 
 
-// File: a01216.xml
+// File: a01215.xml
 
 %feature("docstring") std::weak_ptr "
 STL class. ";
 
 
-// File: a01122.xml
+// File: a01121.xml
 
 %feature("docstring") std::wfstream "
 STL class. ";
 
 
-// File: a01130.xml
+// File: a01129.xml
 
 %feature("docstring") std::wifstream "
 STL class. ";
 
 
-// File: a01132.xml
+// File: a01131.xml
 
 %feature("docstring") std::wios "
 STL class. ";
 
 
-// File: a01140.xml
+// File: a01139.xml
 
 %feature("docstring") std::wistream "
 STL class. ";
 
 
-// File: a01138.xml
+// File: a01137.xml
 
 %feature("docstring") std::wistringstream "
 STL class. ";
 
 
-// File: a01143.xml
+// File: a01142.xml
 
 %feature("docstring") std::wofstream "
 STL class. ";
@@ -21691,9 +21568,9 @@ This create a cloud mask using WorldView2 mulispectral data.
 
 This cloud mask has two parts:
 
-1. A simple threshold on the coastal blue band to detect clouds. 2. A
-ratio comparision of (band 8 - band 1) / band 1 < threshold to detect
-cloud shadows.
+A simple threshold on the coastal blue band to detect clouds. A ratio
+comparision of (band 8 - band 1) / band 1 < threshold to detect cloud
+shadows.
 
 To help with false positives, we have a minimum cloud size. This is
 used to average the data, and only if the lower resolution data shows
@@ -21746,7 +21623,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  GeoCal::WorldView2CloudMask::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -21754,7 +21630,6 @@ can override this. ";
 
 %feature("docstring")  GeoCal::WorldView2CloudMask::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -21787,8 +21662,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  GeoCal::WorldView2CloudMask::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  GeoCal::WorldView2CloudMask::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -21864,8 +21738,7 @@ Remove an RPC. ";
 
 %feature("docstring")  GeoCal::WorldView2CloudMask::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  GeoCal::WorldView2CloudMask::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -21963,7 +21836,6 @@ Shortcut to calling mapinfo().ground_coordinate. ";
 
 %feature("docstring")  WorldView2CloudMaskHelper::has_map_info "
 virtual bool GeoCal::RasterImageVariable::has_map_info() const
-*********************************************************************
 Functions available if we have MapInfo data.
 
 Indicate if we have MapInfo. The default is false, but derived classes
@@ -21971,7 +21843,6 @@ can override this. ";
 
 %feature("docstring")  WorldView2CloudMaskHelper::has_rpc "
 virtual bool GeoCal::RasterImageVariable::has_rpc() const
-*********************************************************************
 Functions available if we have RPC
 
 Indicate if we have Rpc. The default is false, but derived classes can
@@ -22004,8 +21875,7 @@ is with respect to the Sample. ";
 
 %feature("docstring")  WorldView2CloudMaskHelper::map_info "
 virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-----------------------------------------------------------------------
-- MapInfo for image. ";
+MapInfo for image. ";
 
 %feature("docstring")  WorldView2CloudMaskHelper::number_line "
 virtual int GeoCal::RasterImageVariable::number_line() const
@@ -22081,8 +21951,7 @@ Remove an RPC. ";
 
 %feature("docstring")  WorldView2CloudMaskHelper::rpc "
 virtual Rpc GeoCal::RasterImageVariable::rpc() const
-----------------------------------------------------------------------
-- Rpc for image. ";
+Rpc for image. ";
 
 %feature("docstring")  WorldView2CloudMaskHelper::unchecked_interpolate "
 double GeoCal::RasterImage::unchecked_interpolate(double Line, double Sample) const
@@ -22129,28 +21998,31 @@ can implement more efficient versions of this. ";
 virtual WorldView2CloudMaskHelper::~WorldView2CloudMaskHelper()
 ";
 
-// File: a01148.xml
+// File: a01147.xml
 
 %feature("docstring") std::wostream "
 STL class. ";
 
 
-// File: a01146.xml
+// File: a01145.xml
 
 %feature("docstring") std::wostringstream "
 STL class. ";
 
 
-// File: a01149.xml
+// File: a01148.xml
 
 %feature("docstring") std::wstring "
 STL class. ";
 
 
-// File: a01135.xml
+// File: a01134.xml
 
 %feature("docstring") std::wstringstream "
 STL class. ";
+
+
+// File: a00507.xml
 
 
 // File: a00508.xml
@@ -22163,9 +22035,6 @@ STL class. ";
 
 
 // File: a00511.xml
-
-
-// File: a00512.xml
 %feature("docstring")  GeoCal::Constant::const_pointer "
 boost::shared_ptr<T> GeoCal::const_pointer(const T &t)
 Create a boost pointer to a reference, where we don't actually take
@@ -22493,10 +22362,10 @@ std::string GeoCal::VicarLiteFile::label< std::string >(const std::string &K, co
 Return value for the given label. ";
 
 
+// File: a00512.xml
+
+
 // File: a00513.xml
-
-
-// File: a00514.xml
 %feature("docstring")  GeoCal::GdalRegister::gdal_register "
 void GeoCal::GdalRegister::gdal_register()
 Register GDAL drivers once.
@@ -22505,7 +22374,7 @@ Not normally directly called by the user, this is an internal
 function. ";
 
 
-// File: a00515.xml
+// File: a00514.xml
 %feature("docstring")  GeoCal::GdalType::gdal_data_type "
 int GeoCal::GdalType::gdal_data_type()
 ";
@@ -22531,7 +22400,7 @@ int GeoCal::GdalType::gdal_data_type< GUInt16 >()
 int GeoCal::GdalType::gdal_data_type< GUInt32 >()
 ";
 
-// File: a00516.xml
+// File: a00515.xml
 %feature("docstring")  GeoCal::GeoCalCore::range_check_template "
 void GeoCal::GeoCalCore::range_check_template(const T &Val, const T &Min, const T &Max, const CodeLocation &Cl)
 ";
@@ -22545,10 +22414,10 @@ void GeoCal::GeoCalCore::range_max_check_template(const T &Val, const T &Max, co
 void GeoCal::GeoCalCore::range_min_check_template(const T &Val, const T &Min, const CodeLocation &Cl)
 ";
 
+// File: a00516.xml
+
+
 // File: a00517.xml
-
-
-// File: a00518.xml
 %feature("docstring")  GeoCal::VicarType::vicar_type "
 std::string GeoCal::VicarType::vicar_type()
 ";
@@ -22568,13 +22437,13 @@ std::string GeoCal::VicarType::vicar_type< VicarFull >()
 std::string GeoCal::VicarType::vicar_type< VicarHalf >()
 ";
 
+// File: a00518.xml
+
+
 // File: a00519.xml
 
 
 // File: a00520.xml
-
-
-// File: a00521.xml
 %feature("docstring")  mmap_file::mmap_file "
 def mmap_file.mmap_file
 Open a VICAR file as a memmap. This either opens for reading or
@@ -22591,17 +22460,17 @@ np.float32, np.int8, np.int16, np.int32, np.uint8, np.uint16,
 np.uint32
 ";
 
-// File: a00522.xml
+// File: a00521.xml
 %feature("docstring")  mmap_file_test::test_read_write "
 def mmap_file_test.test_read_write";
 
+// File: a00522.xml
+
+
 // File: a00523.xml
-
-
-// File: a00524.xml
 %feature("docstring")  raster_tile::read_iterator "
 def raster_tile.read_iterator
- This is similar to tile_iterator, but it is used as a short cut when
+This is similar to tile_iterator, but it is used as a short cut when
 all you want to do is read the tile given by tile_iterator. Instead of
 return a RasterImageTileIterator, this returns a numpy array of the
 data given by the tile. This can be use either with a RasterImage or a
@@ -22612,7 +22481,7 @@ i.shape
 ";
 %feature("docstring")  raster_tile::tile_iterator "
 def raster_tile.tile_iterator
- This gives a tile_iterator. This returns a RasterImageTileIterator
+This gives a tile_iterator. This returns a RasterImageTileIterator
 that can be used to step through a file. See also read_iterator for an
 alternative. This can either be used with a RasterImage or a
 RasterImageMultiBand. For the RasterImageMultiBand we call generate a
@@ -22620,7 +22489,7 @@ iterator for raster_image(0).  Example usage:  for i in
 tile_iterator(file):    print i
 ";
 
-// File: a00525.xml
+// File: a00524.xml
 %feature("docstring")  raster_tile_test::setUp "
 def raster_tile_test.setUp";
 %feature("docstring")  raster_tile_test::test_read_iterator "
@@ -22628,10 +22497,10 @@ def raster_tile_test.test_read_iterator";
 %feature("docstring")  raster_tile_test::test_tile_iterator "
 def raster_tile_test.test_tile_iterator";
 
+// File: a00525.xml
+
+
 // File: a00526.xml
-
-
-// File: a00527.xml
 
 
 // File: a00226.xml
@@ -23464,15 +23333,15 @@ blitz::Array<T, D> to_c_order_const(const blitz::Array< T, D > &In)
 
 
 // File: a00465.xml
-
-
-// File: a00466.xml
 %feature("docstring")  BZ_DECLARE_FUNCTION_RET "
 BZ_DECLARE_FUNCTION_RET(in_range, unsigned char)
 ";
 %feature("docstring")  in_range "
 unsigned char in_range(double x)
 ";
+
+// File: a00466.xml
+
 
 // File: a00467.xml
 
@@ -23481,9 +23350,6 @@ unsigned char in_range(double x)
 
 
 // File: a00469.xml
-
-
-// File: a00470.xml
 %feature("docstring")  cb_key_press_event "
 static gint cb_key_press_event(GtkWidget *widget, GdkEventKey *event)
 ";
@@ -23491,32 +23357,35 @@ static gint cb_key_press_event(GtkWidget *widget, GdkEventKey *event)
 int main(int argc, char **argv)
 ";
 
+// File: a00470.xml
+
+
 // File: a00471.xml
 
 
 // File: a00472.xml
-
+%feature("docstring")  main "
+int main(int Argc, char **Argv)
+";
 
 // File: a00473.xml
-%feature("docstring")  main "
-int main(int Argc, char **Argv)
-";
+
 
 // File: a00474.xml
-
-
-// File: a00475.xml
 %feature("docstring")  main "
 int main(int Argc, char **Argv)
 ";
 
-// File: a00476.xml
+// File: a00475.xml
 %feature("docstring")  main "
 int main(int Argc, char **Argv)
 ";
 %feature("docstring")  sqr "
 double sqr(double x)
 ";
+
+// File: a00476.xml
+
 
 // File: a00477.xml
 
@@ -23534,9 +23403,6 @@ double sqr(double x)
 
 
 // File: a00482.xml
-
-
-// File: a00483.xml
 %feature("docstring")  findBelowThres "
 void findBelowThres(cv::Mat &matrix, std::vector< cv::Point2f > &belThres, double thresh)
 ";
@@ -23569,7 +23435,7 @@ cv::Mat rastToMat(GeoCal::GeoCalCore::RasterImage &src)
 cv::Mat subImage(cv::Mat &img, cv::Point2f pt, cv::Size size)
 ";
 
-// File: a00484.xml
+// File: a00483.xml
 %feature("docstring")  findBelowThres "
 void findBelowThres(cv::Mat &matrix, std::vector< cv::Point2f > &belThres, double
 thresh=0)
@@ -23603,6 +23469,9 @@ cv::Mat rastToMat(GeoCal::GeoCalCore::RasterImage &src)
 cv::Mat subImage(cv::Mat &img, cv::Point2f pt, cv::Size size)
 ";
 
+// File: a00484.xml
+
+
 // File: a00485.xml
 
 
@@ -23634,9 +23503,6 @@ cv::Mat subImage(cv::Mat &img, cv::Point2f pt, cv::Size size)
 
 
 // File: a00495.xml
-
-
-// File: a00496.xml
 %feature("docstring")  convertGeoTIFFTiePoints "
 void convertGeoTIFFTiePoints(float **fstImgCoeff, float **sndImgCoeff, float **c_data, int
 geocord1, double itie[6], double otie[6], int geocord2, int
@@ -23660,7 +23526,7 @@ labns, int gtgetlabval)
 float getzvl(float *imgCoeff, int n, float coord[2], int nw, int nr)
 ";
 
-// File: a00497.xml
+// File: a00496.xml
 %feature("docstring")  convertGeoTIFFTiePoints "
 void convertGeoTIFFTiePoints(float **fstImgCoeff, float **sndImgCoeff, float **c_data, int
 geocord1, double itie[6], double otie[6], int geocord2, int
@@ -23684,7 +23550,7 @@ labns, int gtgetlabval)
 float getzvl(float *imgCoeff, int n, float coord[2], int nw, int nr)
 ";
 
-// File: a00498.xml
+// File: a00497.xml
 %feature("docstring")  calcLeastSquaresFit "
 void calcLeastSquaresFit(double soln[12], bool predfunc, int nEquationsMax, std::vector<
 GeoCal::GeoCalCore::ImageCoor > &fstImgCoors, std::vector<
@@ -23709,7 +23575,7 @@ void tiltCoor(GeoCal::GeoCalCore::RasterImage *Img, GeoCal::GeoCalCore::ImageCoo
 TiePoints[3], double angoff)
 ";
 
-// File: a00499.xml
+// File: a00498.xml
 %feature("docstring")  calcLeastSquaresFit "
 void calcLeastSquaresFit(double soln[12], bool predfunc, int nEquationsMax, std::vector<
 GeoCal::GeoCalCore::ImageCoor > &fstImgCoors, std::vector<
@@ -23739,12 +23605,12 @@ void tiltCoor(GeoCal::GeoCalCore::RasterImage *Img, GeoCal::GeoCalCore::ImageCoo
 TiePoints[3], double angoff)
 ";
 
-// File: a00500.xml
+// File: a00499.xml
 %feature("docstring")  main "
 int main(int argc, char **argv)
 ";
 
-// File: a00501.xml
+// File: a00500.xml
 %feature("docstring")  BOOST_AUTO_TEST_CASE "
 BOOST_AUTO_TEST_CASE(calcLeastSquaresFit_test)
 ";
@@ -23791,6 +23657,9 @@ BOOST_AUTO_TEST_CASE(Match11_FourEdgeCases_For_SubImages)
 BOOST_AUTO_TEST_CASE(Match12_AutoThresh_Case)
 ";
 
+// File: a00501.xml
+
+
 // File: a00502.xml
 
 
@@ -23806,73 +23675,70 @@ BOOST_AUTO_TEST_CASE(Match12_AutoThresh_Case)
 // File: a00506.xml
 
 
-// File: a00507.xml
-
-
-// File: a00530.xml
-
-
-// File: a00528.xml
-
-
-// File: a00532.xml
-
-
 // File: a00529.xml
+
+
+// File: a00527.xml
 
 
 // File: a00531.xml
 
 
-// File: dir_c8552fa9120aefda12228c59a994570c.xml
+// File: a00528.xml
 
 
-// File: dir_735bddacebd46516679234460672b87b.xml
+// File: a00530.xml
 
 
-// File: dir_202ecc32629e11a2a01337f5fed5958b.xml
+// File: dir_a6b25effbb55561dae9229c79c93c63e.xml
 
 
-// File: dir_905fdbc656503797c4691b752d0d9078.xml
+// File: dir_7fabc8d5070d50884683d36eb053c403.xml
 
 
-// File: dir_fb2326268004e269f922a45dc9bb4ef6.xml
+// File: dir_76ba507cc6a93ebb72deddd6ba40c7e3.xml
 
 
-// File: dir_4d998207ea529bb2bf522d00dec484fb.xml
+// File: dir_d45a3f9edce04836d13f7ef2a9102345.xml
 
 
-// File: dir_2af95d1f5880391db5bb31f35c4c484e.xml
+// File: dir_60040d7d2cf9b2bc7a600298af4645df.xml
 
 
-// File: dir_96ad589f6ee5784c80a6fad0c43ddde7.xml
+// File: dir_c1d3ed369cad375590d2eec6d31c4e9d.xml
 
 
-// File: dir_a92b805680b5095d80f11a9f96405247.xml
+// File: dir_17b4e6a7d1a48f7833ad4df3da9d97c1.xml
 
 
-// File: dir_d4e8dfa00aba0986642e2d8f043c1fd5.xml
+// File: dir_baeee0ec13135f84838c512a2d5d914b.xml
 
 
-// File: dir_0301a8c3b1f3047887253c5c40bc9ecf.xml
+// File: dir_4a71c87774650963f5de8ca88e60aa6a.xml
 
 
-// File: dir_54a71ad55ade1676173c6b2a8710ad56.xml
+// File: dir_1a6f470301e258b799b06938ccba281a.xml
 
 
-// File: dir_5b3e47d9a10543b888b7e38901282db6.xml
+// File: dir_a6c12f8f1af1f2b3deecee3f933aa002.xml
 
 
-// File: dir_af38f805ec91fd3da372567b0bbf526c.xml
+// File: dir_534339b2083d3042109d34871b65c676.xml
 
 
-// File: dir_8fb55c858a09fc840950137df115632d.xml
+// File: dir_ee259ff6bfea30afc6b7c1d3b3c37616.xml
 
 
-// File: dir_4d0afaaa7c5aec975e2c5c34e30a1244.xml
+// File: dir_60b44e9a0c43c2a9f6d443aed2802640.xml
 
 
-// File: dir_2077eac343bde02aa82af925e96db427.xml
+// File: dir_f164c57b43fe6fabe78875aa197ef072.xml
+
+
+// File: dir_8fce7f51ecd623c3f4945b28e6d42e12.xml
+
+
+// File: dir_279223300cf58ec0c1ef6de27b4010fa.xml
 
 
 // File: indexpage.xml

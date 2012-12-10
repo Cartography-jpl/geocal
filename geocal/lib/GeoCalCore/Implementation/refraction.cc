@@ -1,6 +1,5 @@
 #include "refraction.h"
 #include "constant.h"
-#include "config.h"
 #include "ecr.h"
 #include "geodetic.h"
 #include <blitz/array.h>

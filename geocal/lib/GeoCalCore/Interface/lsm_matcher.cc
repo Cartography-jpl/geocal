@@ -1,7 +1,6 @@
 #include "lsm_matcher.h"
 #include <blitz/array.h>
 #include <iostream>
-#include "config.h"
 #include "gsl/gsl_linalg.h"
 #include "geocal_gsl_matrix.h"
 using namespace GeoCal;

@@ -1,7 +1,6 @@
 #include "vicar_lite_file.h"
 #include <boost/tokenizer.hpp>
 #include <boost/foreach.hpp>
-#include "config.h"
 #define BOOST_LEXICAL_CAST_ASSUME_C_LOCALE
 #include <boost/lexical_cast.hpp>
 using namespace GeoCal;

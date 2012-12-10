@@ -1595,9 +1595,9 @@ class Time(object):
     be related to the other by a constant, since the only difference is
     the Epoch that time is measure against.
 
-    Note that for accurate work we do *not* want to use something like
-    Unix time, because this does not account for leapseconds (POSIX unix
-    time is the number of seconds since January 1, 1970 *not* including
+    Note that for accurate work we do not want to use something like Unix
+    time, because this does not account for leapseconds (POSIX unix time
+    is the number of seconds since January 1, 1970 not including
     leapseconds).
 
     Most code doesn't care what the underlying time representation is, we
@@ -3421,7 +3421,7 @@ class Rpc(object):
     treat these as integers. If you store a RPC into a file with one of
     these formats, the data will be truncated. If you plan on saving to
     one of these formats, you should be aware of this and keep these an
-    whole numbers. This limitation is *not* present in the VICAR file
+    whole numbers. This limitation is not present in the VICAR file
     format.
 
     C++ includes: geocal_rpc.h 
@@ -3961,7 +3961,6 @@ class RasterImage(object):
     def _has_map_info(self):
         """
         virtual bool GeoCal::RasterImage::has_map_info() const
-        *********************************************************************
         Functions available if we have MapInfo data.
 
         Indicate if we have MapInfo. The default is false, but derived classes
@@ -3976,8 +3975,7 @@ class RasterImage(object):
     def _map_info(self):
         """
         virtual const MapInfo& GeoCal::RasterImage::map_info() const
-        ----------------------------------------------------------------------
-        - MapInfo for image. 
+        MapInfo for image. 
         """
         return _geocal.RasterImage__map_info(self)
 
@@ -4034,7 +4032,6 @@ class RasterImage(object):
     def _has_rpc(self):
         """
         virtual bool GeoCal::RasterImage::has_rpc() const
-        *********************************************************************
         Functions available if we have RPC
 
         Indicate if we have Rpc. The default is false, but derived classes can
@@ -4049,8 +4046,7 @@ class RasterImage(object):
     def _rpc(self):
         """
         virtual Rpc GeoCal::RasterImage::rpc() const
-        ----------------------------------------------------------------------
-        - Rpc for image. 
+        Rpc for image. 
         """
         return _geocal.RasterImage__rpc(self)
 
@@ -4965,12 +4961,12 @@ class QuaternionOrbitData(OrbitData):
     the planet, as well as the aberration of light (a small correction due
     to the movement of the spacecraft relative to the planet).
 
-    This does *not* account for atmospheric refraction. Depending on the
+    This does not account for atmospheric refraction. Depending on the
     zenith angle, this can be somewhat important for satellites. From the
-    approximate atmospheric model described in "Theoretical Basis of the
-    SDP Toolkit Geolocation package for the ECS", Table 6-5 the linear
-    displacement for a zenith angle of 10 is 0.549 meters, 20 degrees is
-    1.223 meters, and 30 degrees is 2.221.
+    approximate atmospheric model described in "Theoretical Basis of
+    the SDP Toolkit Geolocation package for the ECS", Table 6-5 the
+    linear displacement for a zenith angle of 10 is 0.549 meters, 20
+    degrees is 1.223 meters, and 30 degrees is 2.221.
 
     We may want to add a atmospheric refraction correction in the future,
     but this hasn't been done yet.
@@ -7144,7 +7140,7 @@ class RpcImage(RasterImageVariable):
     MemoryRasterImage to copy the data into memory.
 
     As you update the Rpc parameters, the area covered on the surface
-    changes. This class does *not* update the MapInfo describing the area
+    changes. This class does not update the MapInfo describing the area
     covered. However, you can call map_info_bounding_update() to update
     this information if desired.
 
@@ -7252,7 +7248,7 @@ class RpcImage(RasterImageVariable):
 
         We update the line_offset and sample_offset only of rpc() to reduce
         the difference between the map projected image and the Ref_img. This
-        functions does *not* fit the other parameters given by
+        functions does not fit the other parameters given by
         rpc().fit_line_numerator and rpc().fit_sample_numerator.
 
         We repeat the coarse fit until the remaining differences between the
@@ -8076,15 +8072,15 @@ class MapReprojectedImage(RasterImageVariable):
 
     To do this we do two steps:
 
-    1. We calculate roughly what the difference in resolution is between
-    the original and final MapInfo. We do this by looking at the center
-    pixel of the original data and the pixel +1 in line and sample. We
-    then use RasterAveraged to average the original data to roughly the
-    resolution of the final MapInfo. If the final MapInfo is near the same
-    resolution as the original, or if it has a higher resolution, then we
-    don't do any averaging.
+    We calculate roughly what the difference in resolution is between the
+    original and final MapInfo. We do this by looking at the center pixel
+    of the original data and the pixel +1 in line and sample. We then use
+    RasterAveraged to average the original data to roughly the resolution
+    of the final MapInfo. If the final MapInfo is near the same resolution
+    as the original, or if it has a higher resolution, then we don't do
+    any averaging.
 
-    2. We then interpolate the possibly averaged data to the final
+    We then interpolate the possibly averaged data to the final
     projection.
 
     It is ok if the final MapInfo contains areas outside of the original
@@ -8139,16 +8135,16 @@ class CalcMapProjected(RasterImageVariable):
 
     To do this we do two steps:
 
-    1. We calculate roughly what the difference in resolution is between
-    the original data and final MapInfo. We do this by looking at the
-    center pixel of the original data and the pixel +1 in line and sample.
-    We then use RasterAveraged to average the original data to roughly the
+    We calculate roughly what the difference in resolution is between the
+    original data and final MapInfo. We do this by looking at the center
+    pixel of the original data and the pixel +1 in line and sample. We
+    then use RasterAveraged to average the original data to roughly the
     resolution of the final MapInfo. If the final MapInfo is near the same
     resolution as the original, or if it has a higher resolution, then we
     don't do any averaging. Alternatively, you can pass in the averaging
     factor.
 
-    2. We then interpolate the possibly averaged data to the final
+    We then interpolate the possibly averaged data to the final
     projection.
 
     It is ok if the final MapInfo contains areas outside of the original
@@ -8208,16 +8204,16 @@ class OrbitMapProjected(CalcMapProjected):
 
     To do this we do two steps:
 
-    1. We calculate roughly what the difference in resolution is between
-    the original data and final MapInfo. We do this by looking at the
-    center pixel of the original data and the pixel +1 in line and sample.
-    We then use RasterAveraged to average the original data to roughly the
+    We calculate roughly what the difference in resolution is between the
+    original data and final MapInfo. We do this by looking at the center
+    pixel of the original data and the pixel +1 in line and sample. We
+    then use RasterAveraged to average the original data to roughly the
     resolution of the final MapInfo. If the final MapInfo is near the same
     resolution as the original, or if it has a higher resolution, then we
     don't do any averaging. Alternatively, you can pass in the averaging
     factor.
 
-    2. We then interpolate the possibly averaged data to the final
+    We then interpolate the possibly averaged data to the final
     projection.
 
     It is ok if the final MapInfo contains areas outside of the original
@@ -8259,16 +8255,16 @@ class IgcMapProjected(CalcMapProjected):
 
     To do this we do two steps:
 
-    1. We calculate roughly what the difference in resolution is between
-    the original data and final MapInfo. We do this by looking at the
-    center pixel of the original data and the pixel +1 in line and sample.
-    We then use RasterAveraged to average the original data to roughly the
+    We calculate roughly what the difference in resolution is between the
+    original data and final MapInfo. We do this by looking at the center
+    pixel of the original data and the pixel +1 in line and sample. We
+    then use RasterAveraged to average the original data to roughly the
     resolution of the final MapInfo. If the final MapInfo is near the same
     resolution as the original, or if it has a higher resolution, then we
     don't do any averaging. Alternatively, you can pass in the averaging
     factor (include a value of 1 which turns this behavior off).
 
-    2. We then interpolate the possibly averaged data to the final
+    We then interpolate the possibly averaged data to the final
     projection.
 
     It is ok if the final MapInfo contains areas outside of the original
@@ -9048,8 +9044,7 @@ class GdalRasterImage(RasterImageTiledFile):
     def _map_info(self):
         """
         virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-        ----------------------------------------------------------------------
-        - MapInfo for image. 
+        MapInfo for image. 
         """
         return _geocal.GdalRasterImage__map_info(self)
 
@@ -12105,8 +12100,8 @@ class QuickBirdAttitude(object):
 
     Note a possible source of confusion. There are a few different
     conventions about the ordering of the quaternion coefficients. The
-    boost library places the real part at the front, so we have a + b i +
-    c j + d k and the quaternion is 4-tuple (a, b, c, d). The convention
+    boost library places the real part at the front, so we have a + b i c
+    j + d k and the quaternion is 4-tuple (a, b, c, d). The convention
     used by quickbird data is q1 i + q2 j + q3 k + q4 with the 4-tuple is
     (q1, q2, q3, q4). That means when we bring this over to the boost
     library, we need to reorder this to the 4-tuple (q4, q1, q2, q3).
@@ -12328,7 +12323,7 @@ class VicarFile(object):
 
     Also a note for developers. The Vicar RTL library uses various
     variable argument functions. You need to end the list of arguments
-    with "NULL". Note that a cast to a point type is *mandatory*, you
+    with "NULL". Note that a cast to a point type is mandatory, you
     can't just say "0". If say "0" then you will get fairly difficult
     to track down errors. Without the cast, this gets passed as an int,
     which the RTL library code will then try to interpret as a char *.
@@ -12762,7 +12757,7 @@ class VicarLiteFile(object):
     RTL library, or don't want to be constrained to running in the Vicar
     environment.
 
-    This class does *not* handle new VICAR features such as compression.
+    This class does not handle new VICAR features such as compression.
 
     C++ includes: vicar_lite_file.h 
     """
@@ -13308,8 +13303,7 @@ class VicarRasterImage(RasterImageTiledFile):
     def _rpc(self):
         """
         virtual Rpc GeoCal::RasterImageVariable::rpc() const
-        ----------------------------------------------------------------------
-        - Rpc for image. 
+        Rpc for image. 
         """
         return _geocal.VicarRasterImage__rpc(self)
 
@@ -13320,8 +13314,7 @@ class VicarRasterImage(RasterImageTiledFile):
     def _map_info(self):
         """
         virtual const MapInfo& GeoCal::RasterImageVariable::map_info() const
-        ----------------------------------------------------------------------
-        - MapInfo for image. 
+        MapInfo for image. 
         """
         return _geocal.VicarRasterImage__map_info(self)
 
@@ -13441,9 +13434,9 @@ class WorldView2CloudMask(CalcRaster):
 
     This cloud mask has two parts:
 
-    1. A simple threshold on the coastal blue band to detect clouds. 2. A
-    ratio comparision of (band 8 - band 1) / band 1 < threshold to detect
-    cloud shadows.
+    A simple threshold on the coastal blue band to detect clouds. A ratio
+    comparision of (band 8 - band 1) / band 1 < threshold to detect cloud
+    shadows.
 
     To help with false positives, we have a minimum cloud size. This is
     used to average the data, and only if the lower resolution data shows

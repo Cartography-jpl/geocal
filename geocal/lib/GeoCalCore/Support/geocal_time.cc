@@ -1,5 +1,4 @@
 #include "geocal_time.h"
-#include "config.h"
 #ifdef HAVE_SPICE
 #include "spice_helper.h"
 extern "C" {

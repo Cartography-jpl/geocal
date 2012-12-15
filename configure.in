@@ -136,7 +136,7 @@ AC_OUTPUT
 #======================================================================
 
 LOC_MSG()
-LOC_MSG([AFIDS is now configured])
+LOC_MSG([AFIDS Python is now configured])
 LOC_MSG()
 LOC_MSG([  Installation directory:        ${prefix}])
 LOC_MSG([  Build debug version:           ${enable_debug}])

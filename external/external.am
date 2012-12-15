@@ -109,30 +109,6 @@ $(EXIV2_TARGET): $(srcapyexternal)/$(EXIV2_NAME).tar.gz $(PKGCONFIG_TARGET) $(ZL
 
 endif
 
-if BUILD_HDF5
-# ========================================================================
-# Build HDF 5
-HDF5_NAME = hdf5-1.8.4
-HDF5_TARGET = $(DESTDIR)$(libdir)/libhdf5.la
-
-BUILT_SOURCES += $(HDF5_TARGET)
-
-$(HDF5_TARGET): $(srcapyexternal)/$(HDF5_NAME).tar.gz $(ZLIB_TARGET) \
-     $(JPEG_TARGET) $(BISON_TARGET) $(FLEX_TARGET)
-	@echo "*************************** Building HDF-5"
-	${AMTAR} xzf $<
-	cd $(HDF5_NAME) && export PATH=$(bindir):$$PATH && \
-        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
-        ./configure --enable-cxx --with-zlib=$(prefix) \
-          --prefix="$(prefix)" FC="$(FC)" CXX="$(CXX)" CC="$(CC)" && \
-        $(MAKE) -j 1 && $(MAKE) -j 1 install && exit 0; exit 1
-	rm -rf $(HDF5_NAME)
-	touch $(HDF5_TARGET)
-	@echo "========================== Done building HDF-5"
-
-else
-HDF5_TARGET =
-endif
 
 # ========================================================================
 # Build graphviz
@@ -181,7 +157,4 @@ else
 DOXYGEN_TARGET =
 endif
 
-if BUILD_PYTHON
-include afids_python/external/external_python.am
-endif 
 

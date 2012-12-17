@@ -298,6 +298,7 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids_data.m4 \
 	$(top_srcdir)/config/m4/ac_is_mac.m4 \
 	$(top_srcdir)/config/m4/ac_ogdi.m4 \
 	$(top_srcdir)/config/m4/ac_pkg_swig.m4 \
+	$(top_srcdir)/config/m4/ac_python_module_with_version.m4 \
 	$(top_srcdir)/config/m4/ac_python_sphinx.m4 \
 	$(top_srcdir)/config/m4/ac_search_lib.m4 \
 	$(top_srcdir)/config/m4/ac_spice.m4 \
@@ -1159,12 +1160,9 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
 PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
-PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 PYTHON = @PYTHON@
 PYTHON_CPPFLAGS = @PYTHON_CPPFLAGS@
 PYTHON_EXEC_PREFIX = @PYTHON_EXEC_PREFIX@
@@ -1250,18 +1248,14 @@ program_transform_name = @program_transform_name@
 psdir = @psdir@
 pyexecdir = @pyexecdir@
 pythondir = @pythondir@
-pythondocdir = @pythondocdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
-srcapyexternal = @srcapyexternal@
-srcblas = @srcblas@
 srccartlab = @srccartlab@
 srcdir = @srcdir@
 srcgeocalcore = @srcgeocalcore@
 srcgtk = @srcgtk@
 srcimplementation = @srcimplementation@
 srcinterface = @srcinterface@
-srclapack = @srclapack@
 srcmisr = @srcmisr@
 srcpython = @srcpython@
 srcpythonbin = @srcpythonbin@

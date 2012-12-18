@@ -45,5 +45,6 @@ python_check:
 
 export python_test_path=$(platpythondir):$(pythondir):${PYTHONPATH}
 export AFIDS_DATA
+export python_exec_path=$(bindir):$(PATH)
 TESTS+= afids_python/python/test_all.sh
 EXTRA_DIST+= afids_python/python/test_all.sh

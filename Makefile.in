@@ -1160,9 +1160,12 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
 PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
+PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
+PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
+PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 PYTHON = @PYTHON@
 PYTHON_CPPFLAGS = @PYTHON_CPPFLAGS@
 PYTHON_EXEC_PREFIX = @PYTHON_EXEC_PREFIX@
@@ -1248,6 +1251,7 @@ program_transform_name = @program_transform_name@
 psdir = @psdir@
 pyexecdir = @pyexecdir@
 pythondir = @pythondir@
+pythondocdir = @pythondocdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srccartlab = @srccartlab@
@@ -6318,6 +6322,7 @@ clean-local: $(CLEAN_HOOK)
 
 @BUILD_AFIDS_PYTHON_TRUE@export python_test_path=$(platpythondir):$(pythondir):${PYTHONPATH}
 @BUILD_AFIDS_PYTHON_TRUE@export AFIDS_DATA
+@BUILD_AFIDS_PYTHON_TRUE@export python_exec_path=$(bindir):$(PATH)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

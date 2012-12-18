@@ -17,11 +17,11 @@ the third party library checks.
 
 #=================================================================
 # Need to find VICAR RTL library
-AC_VICAR_RTL(require, cannot_build, default_search)
+AC_VICAR_RTL(required, cannot_build, default_search)
 
 #=================================================================
 # Need to have AFIDS data
-AC_AFIDS_DATA(require, cannot_build, default_build)
+AC_AFIDS_DATA(required, cannot_build, default_search)
 
 #=================================================================
 # Various thirdparty libraries.
@@ -39,7 +39,7 @@ AC_VICAR_GDALPLUGIN(required, cannot_build, default_search)
 #=================================================================
 # Need to find carto library. (Need to have this after VICAR_RTL 
 # and GSL, because it uses variables from those functions)
-AC_CARTO(require, cannot_build, default_search)
+AC_CARTO(required, cannot_build, default_search)
 
 #=================================================================
 # Build or find python

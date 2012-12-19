@@ -5,7 +5,5 @@
 export PYTHONPATH=${python_test_path}
 source ${AFIDS_DATA}/setup_afids_data.sh
 export PATH=${python_exec_path}
-echo "Hi there"
-echo ${PATH}
 nosetests ${srcdir}/afids_python/python/*/ 
 

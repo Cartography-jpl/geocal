@@ -89,7 +89,10 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = README $(am__afidspkgpython_PYTHON_DIST) \
-	$(am__configure_deps) $(am__dist_sdbxdoc_DATA_DIST) \
+	$(am__configure_deps) $(am__dist_afids_DATA_DIST) \
+	$(am__dist_afids_SCRIPTS_DIST) \
+	$(am__dist_afidspkgpython_DATA_DIST) \
+	$(am__dist_bin_SCRIPTS_DIST) $(am__dist_sdbxdoc_DATA_DIST) \
 	$(am__geocalinc_HEADERS_DIST) \
 	$(am__geocalpkgpython_PYTHON_DIST) $(am__libraw_HEADERS_DIST) \
 	$(am__sdbx_HEADERS_DIST) $(am__sdbxbtree_HEADERS_DIST) \
@@ -115,7 +118,9 @@ DIST_COMMON = README $(am__afidspkgpython_PYTHON_DIST) \
 	$(srcdir)/afids_python/python/bin/bin.am \
 	$(srcdir)/afids_python/python/doc/doc_python.am \
 	$(srcdir)/afids_python/python/lib/lib.am \
-	$(srcdir)/afids_python/python/python.am $(srcdir)/common.am \
+	$(srcdir)/afids_python/python/python.am \
+	$(srcdir)/afids_python/python/unit_test_data/unit_test_data.am \
+	$(srcdir)/common.am \
 	$(top_srcdir)/afids_python/geocal/lib/GeoCalCore/Support/global_fixture_default.cc.in \
 	$(top_srcdir)/configure AUTHORS COPYING ChangeLog INSTALL NEWS \
 	config/compile config/config.guess config/config.sub \
@@ -149,34 +154,66 @@ bin_PROGRAMS =
 # rpc_direct_SOURCES = @libgeocal@/rpc_direct.cc
 # rpc_direct_LDADD = libgeocal.la $(VICAR_RTL_LIBS)
 # Test files
+
+# Test files
+
+# Make sure that we have created the test_out directory for use with unit 
+# tests (note dummy_copy isn't used for anything, this is just a trick to
+# make surce test_out directory is created).
 @BUILD_AFIDS_PYTHON_TRUE@am__append_5 = @srcsdbx@/README \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsdbx@/StorageConcepts.txt \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/dummy.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/geocal_doxygen.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/unit_test_support.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/global_fixture.h \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/matcher_fixture.h \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.h \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/PCF \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/cib_sample.img \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/matcher_test_newimage.bin \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/matcher_test_refimage.bin \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/rpc.ntf \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/vicar.img \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/spice/lsk/naif0007.tls \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/spice/lsk/naif0008.tls \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/spice/lsk/naif0007.tls \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/spice/pck/earth_000101_080729_080507.bpc \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/spice/pck/earth_720101_070426.bpc \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/spice/pck/pck00008.tpc \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/06JAN06033849-P1BS-005545519120_01_P001.ATT \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/06JAN06033849-P1BS-005545519120_01_P001.EPH \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/argus_camera6.jpg \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/argus.csv \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/mul.tif \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/pan.tif \
-@BUILD_AFIDS_PYTHON_TRUE@	unit_test_data/egm96.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/PCF \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/cib_sample.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/matcher_test_newimage.bin \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/matcher_test_refimage.bin \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/rpc.ntf \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/vicar.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/spice/geocal.ker \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/spice/fk/planets/earth_assoc_itrf93.tf \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/spice/fk/planets/eci_tod.tf \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/spice/lsk/naif0007.tls \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/spice/lsk/naif0008.tls \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/spice/pck/earth_000101_120424_120201.bpc \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/spice/pck/earth_720101_070426.bpc \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/spice/pck/pck00008.tpc \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.ATT \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.EPH \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.IMD \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/argus_camera6.jpg \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/argus.csv \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/argus.ibis \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/cannon_raw.cr2 \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/mul.tif \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/pan.tif \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/egm96.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/s251_sbet_subset.txt \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/cvdnorm_sub.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/material_sub.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/pandif_sub.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/portgaston_bk.int \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/post_b1.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/post_b2.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/post_b3.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/post_b4.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/post_b5.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/post_b6.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/post_b7.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/post_b8.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/post_pan_sub.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/pre_pan_sub.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/README \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/subset_test.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/Stereo \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/sample_orbit.h5 \
 @BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/lib/test_all.sh \
-@BUILD_AFIDS_PYTHON_TRUE@	afids_python/python/test_all.sh
+@BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/lib/dummy.pdf \
+@BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/test_out/dummy
 @BUILD_AFIDS_PYTHON_TRUE@am__append_6 = -I$(srcdir)/@srcsdbx@ \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcsupport@ \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcinterface@ \
@@ -249,24 +286,32 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/display_stretch_std_dev.i \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/raster_image_with_overlay.i
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_27 = $(srcdir)/afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc
+@BUILD_AFIDS_PYTHON_TRUE@am__append_28 = clean_geocalpkgpython
 
 #=================================================================
 # libgeocal: The main library
-@BUILD_AFIDS_PYTHON_TRUE@am__append_28 = libgeocal.la
+@BUILD_AFIDS_PYTHON_TRUE@am__append_29 = libgeocal.la
 @BUILD_AFIDS_PYTHON_TRUE@check_PROGRAMS = geocal_test_all$(EXEEXT)
-@BUILD_AFIDS_PYTHON_TRUE@am__append_29 =  \
-@BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/lib/test_all.sh \
-@BUILD_AFIDS_PYTHON_TRUE@	afids_python/python/test_all.sh
+@BUILD_AFIDS_PYTHON_TRUE@am__append_30 = afids_python/geocal/lib/test_all.sh
 
 #=================================================================
 # This is needed by unit tests that work with VICAR files. VICAR
 # wants to find a PDF file.
-@BUILD_AFIDS_PYTHON_TRUE@am__append_30 = dummy.pdf \
+@BUILD_AFIDS_PYTHON_TRUE@am__append_31 = dummy.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	test_out/vicar_copy.img \
 @BUILD_AFIDS_PYTHON_TRUE@	test_out/dummy_copy
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_31 = install_doxygen_doc \
+@BUILD_AFIDS_PYTHON_TRUE@am__append_32 = clean_unit_test
+
+#=================================================================
+# Generate doxygen documentation
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_33 = config/doxygen.cfg \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	config/doxy2swig.py
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_34 = install_doxygen_doc \
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	install_python_doc
-@BUILD_AFIDS_PYTHON_TRUE@am__append_32 = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_35 = clean_doxygen_doc
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_36 = clean_doxygen_generate
+@BUILD_AFIDS_PYTHON_TRUE@am__append_37 = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_dir \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/create_gdal_igc \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/igc_project \
@@ -276,10 +321,35 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_job_run \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/sba \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/tp_collect
-@BUILD_AFIDS_PYTHON_TRUE@am__append_33 = $(srcdir)/$(srcpythonbin)/sample_vicar_python
-@BUILD_AFIDS_PYTHON_TRUE@am__append_34 = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
+@BUILD_AFIDS_PYTHON_TRUE@am__append_38 = $(srcdir)/$(srcpythonbin)/sample_vicar_python
+@BUILD_AFIDS_PYTHON_TRUE@am__append_39 = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_TRUE@am__append_35 = @srcpythonlib@/tre_amt_struct.py
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_TRUE@am__append_40 = @srcpythonlib@/tre_amt_struct.py
+@BUILD_AFIDS_PYTHON_TRUE@am__append_41 = @docpythonsrc@ \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/07JUN08184839-M1BS-005616921010_01_P001.IMD \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/07JUN08184839-P1BS-005616921010_01_P001.IMD \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/10MAY07185751-M1BS-052360785020_01_P001.IMD \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/10MAY07185751-P1BS-052360785020_01_P001.IMD \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/418524_meta.txt \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/5V090727M0003172424A222000100202M_001535172.pvl \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/leapsecond.dat \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/rpc_example.pkl \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/rpc.ntf \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/rpc.tif \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/sample_orbit.h5 \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/test_use00a.ntf \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/vicar.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/10MAY21-1.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/10MAY21-1_projected.tif \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/10MAY21-2.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/10MAY21-2_projected.tif \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/10MAY21-3.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/aoi.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/generate_proj.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/nevada_elv_aoi.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/README \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/rpc_sba.pkl
+@BUILD_AFIDS_PYTHON_TRUE@am__append_42 = clean_install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids_data.m4 \
@@ -866,7 +936,20 @@ geocal_test_all_OBJECTS = $(am_geocal_test_all_OBJECTS)
 geocal_test_all_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(geocal_test_all_LDFLAGS) $(LDFLAGS) -o $@
-SCRIPTS = $(afids_SCRIPTS) $(bin_SCRIPTS)
+am__dist_afids_SCRIPTS_DIST =  \
+	$(srcdir)/$(srcpythonbin)/sample_vicar_python
+am__dist_bin_SCRIPTS_DIST =  \
+	$(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
+	$(srcdir)/$(srcpythonbin)/shelve_dir \
+	$(srcdir)/$(srcpythonbin)/create_gdal_igc \
+	$(srcdir)/$(srcpythonbin)/igc_project \
+	$(srcdir)/$(srcpythonbin)/gdal_to_erdas \
+	$(srcdir)/$(srcpythonbin)/gdal_to_nitf \
+	$(srcdir)/$(srcpythonbin)/setup_dem_job \
+	$(srcdir)/$(srcpythonbin)/shelve_job_run \
+	$(srcdir)/$(srcpythonbin)/sba \
+	$(srcdir)/$(srcpythonbin)/tp_collect
+SCRIPTS = $(dist_afids_SCRIPTS) $(dist_bin_SCRIPTS)
 DEFAULT_INCLUDES = 
 depcomp = $(SHELL) $(top_srcdir)/config/depcomp
 am__depfiles_maybe = depfiles
@@ -925,9 +1008,13 @@ am__geocalpkgpython_PYTHON_DIST =  \
 	afids_python/geocal/python/mmap_file.py \
 	afids_python/geocal/python/raster_tile.py
 py_compile = $(top_srcdir)/config/py-compile
+am__dist_afids_DATA_DIST =  \
+	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
+	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf
+am__dist_afidspkgpython_DATA_DIST = @srcpythonlib@/cib01_mapinfo.dat
 am__dist_sdbxdoc_DATA_DIST = $(srcdir)/@srcsdbx@/doc/html/*
-DATA = $(afids_DATA) $(afidspkgpython_DATA) $(dist_sdbxdoc_DATA) \
-	$(pkgconfig_DATA)
+DATA = $(dist_afids_DATA) $(dist_afidspkgpython_DATA) \
+	$(dist_sdbxdoc_DATA) $(pkgconfig_DATA)
 am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcsupport@/dir_change.h @srcsupport@/null_deleter.h \
 	@srcsupport@/wgs84_constant.h @srcsupport@/printable.h \
@@ -1206,6 +1293,7 @@ ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
 ac_ct_F77 = @ac_ct_F77@
 ac_ct_FC = @ac_ct_FC@
 afidsdir = @afidsdir@
+afidspkgpythondir = @afidspkgpythondir@
 am__include = @am__include@
 am__leading_dot = @am__leading_dot@
 am__quote = @am__quote@
@@ -1224,6 +1312,7 @@ docdir = @docdir@
 docpythonsrc = @docpythonsrc@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
+geocalunittestdata = @geocalunittestdata@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -1252,6 +1341,7 @@ psdir = @psdir@
 pyexecdir = @pyexecdir@
 pythondir = @pythondir@
 pythondocdir = @pythondocdir@
+pythonunittestdata = @pythonunittestdata@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srccartlab = @srccartlab@
@@ -1284,13 +1374,13 @@ ACLOCAL_AMFLAGS = -I config/m4
 noop = 
 
 # Build these up as we go
-lib_LTLIBRARIES = $(am__append_28)
+lib_LTLIBRARIES = $(am__append_29)
 noinst_LTLIBRARIES = $(am__append_7)
-bin_SCRIPTS = $(am__append_32)
+dist_bin_SCRIPTS = $(am__append_37)
 AM_LDFLAGS = 
-BUILT_SOURCES = $(am__append_27) $(am__append_30)
+BUILT_SOURCES = $(am__append_27) $(am__append_31)
 include_HEADERS = 
-EXTRA_DIST = $(am__append_5)
+EXTRA_DIST = $(am__append_5) $(am__append_33) $(am__append_41)
 pkgconfig_DATA = 
 AM_CPPFLAGS = $(am__append_6) $(am__append_25)
 
@@ -1308,13 +1398,14 @@ AM_CPPFLAGS = $(am__append_6) $(am__append_25)
 
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
-INSTALL_DATA_HOOK = $(am__append_31)
-CLEAN_HOOK = 
-TESTS = $(am__append_29)
+INSTALL_DATA_HOOK = $(am__append_34)
+UNINSTALL_HOOK = $(am__append_28) $(am__append_35) $(am__append_42)
+CLEAN_HOOK = $(am__append_32) $(am__append_36)
+TESTS = $(am__append_30)
 check_PROGRAM = 
 check_DATA = 
-afids_SCRIPTS = $(am__append_33)
-afids_DATA = $(am__append_34)
+dist_afids_SCRIPTS = $(am__append_38)
+dist_afids_DATA = $(am__append_39)
 
 # Build these up as we go
 
@@ -1672,8 +1763,6 @@ afids_DATA = $(am__append_34)
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/material_detect.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/paint_class.h \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_19) $(am__append_22)
-
-# Test files
 # Test files
 @BUILD_AFIDS_PYTHON_TRUE@geocal_test_all_SOURCES =  \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/global_fixture.cc \
@@ -1854,7 +1943,6 @@ afids_DATA = $(am__append_34)
 @BUILD_AFIDS_PYTHON_TRUE@	test_out/dummy_copy
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@geocaldocdir = ${datarootdir}/doc/geocal
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@geocaldocsearchdir = ${geocaldocdir}/html/search
-@BUILD_AFIDS_PYTHON_TRUE@afidspkgpythondir = $(pythondir)/afids
 @BUILD_AFIDS_PYTHON_TRUE@afidspkgpython_PYTHON =  \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpython@/init/__init__.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/job_handle.py \
@@ -1884,8 +1972,8 @@ afids_DATA = $(am__append_34)
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/sqlite_shelf.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/feature_detector_extension.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/ply_file.py \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_35)
-@BUILD_AFIDS_PYTHON_TRUE@afidspkgpython_DATA = @srcpythonlib@/cib01_mapinfo.dat
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_40)
+@BUILD_AFIDS_PYTHON_TRUE@dist_afidspkgpython_DATA = @srcpythonlib@/cib01_mapinfo.dat
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -1893,7 +1981,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .o .obj
 am--refresh:
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/bindings.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/bindings.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -2677,10 +2765,10 @@ afids_python/geocal/lib/geocal_test_all-test_all.$(OBJEXT):  \
 geocal_test_all$(EXEEXT): $(geocal_test_all_OBJECTS) $(geocal_test_all_DEPENDENCIES) 
 	@rm -f geocal_test_all$(EXEEXT)
 	$(geocal_test_all_LINK) $(geocal_test_all_OBJECTS) $(geocal_test_all_LDADD) $(LIBS)
-install-afidsSCRIPTS: $(afids_SCRIPTS)
+install-dist_afidsSCRIPTS: $(dist_afids_SCRIPTS)
 	@$(NORMAL_INSTALL)
 	test -z "$(afidsdir)" || $(MKDIR_P) "$(DESTDIR)$(afidsdir)"
-	@list='$(afids_SCRIPTS)'; test -n "$(afidsdir)" || list=; \
+	@list='$(dist_afids_SCRIPTS)'; test -n "$(afidsdir)" || list=; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  if test -f "$$d$$p"; then echo "$$d$$p"; echo "$$p"; else :; fi; \
@@ -2703,18 +2791,18 @@ install-afidsSCRIPTS: $(afids_SCRIPTS)
 	     } \
 	; done
 
-uninstall-afidsSCRIPTS:
+uninstall-dist_afidsSCRIPTS:
 	@$(NORMAL_UNINSTALL)
-	@list='$(afids_SCRIPTS)'; test -n "$(afidsdir)" || exit 0; \
+	@list='$(dist_afids_SCRIPTS)'; test -n "$(afidsdir)" || exit 0; \
 	files=`for p in $$list; do echo "$$p"; done | \
 	       sed -e 's,.*/,,;$(transform)'`; \
 	test -n "$$list" || exit 0; \
 	echo " ( cd '$(DESTDIR)$(afidsdir)' && rm -f" $$files ")"; \
 	cd "$(DESTDIR)$(afidsdir)" && rm -f $$files
-install-binSCRIPTS: $(bin_SCRIPTS)
+install-dist_binSCRIPTS: $(dist_bin_SCRIPTS)
 	@$(NORMAL_INSTALL)
 	test -z "$(bindir)" || $(MKDIR_P) "$(DESTDIR)$(bindir)"
-	@list='$(bin_SCRIPTS)'; test -n "$(bindir)" || list=; \
+	@list='$(dist_bin_SCRIPTS)'; test -n "$(bindir)" || list=; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  if test -f "$$d$$p"; then echo "$$d$$p"; echo "$$p"; else :; fi; \
@@ -2737,9 +2825,9 @@ install-binSCRIPTS: $(bin_SCRIPTS)
 	     } \
 	; done
 
-uninstall-binSCRIPTS:
+uninstall-dist_binSCRIPTS:
 	@$(NORMAL_UNINSTALL)
-	@list='$(bin_SCRIPTS)'; test -n "$(bindir)" || exit 0; \
+	@list='$(dist_bin_SCRIPTS)'; test -n "$(bindir)" || exit 0; \
 	files=`for p in $$list; do echo "$$p"; done | \
 	       sed -e 's,.*/,,;$(transform)'`; \
 	test -n "$$list" || exit 0; \
@@ -5345,9 +5433,9 @@ clean-libtool:
 
 distclean-libtool:
 	-rm -f libtool config.lt
-@BUILD_AFIDS_PYTHON_FALSE@install-afidspkgpythonPYTHON: $(afidspkgpython_PYTHON)
-@BUILD_AFIDS_PYTHON_FALSE@	@$(NORMAL_INSTALL)
-@BUILD_AFIDS_PYTHON_FALSE@	test -z "$(afidspkgpythondir)" || $(MKDIR_P) "$(DESTDIR)$(afidspkgpythondir)"
+install-afidspkgpythonPYTHON: $(afidspkgpython_PYTHON)
+	@$(NORMAL_INSTALL)
+	test -z "$(afidspkgpythondir)" || $(MKDIR_P) "$(DESTDIR)$(afidspkgpythondir)"
 	@list='$(afidspkgpython_PYTHON)'; dlist=; list2=; test -n "$(afidspkgpythondir)" || list=; \
 	for p in $$list; do \
 	  if test -f "$$p"; then b=; else b="$(srcdir)/"; fi; \
@@ -5421,10 +5509,10 @@ uninstall-geocalpkgpythonPYTHON:
 	cd "$(DESTDIR)$(geocalpkgpythondir)" && rm -f $$filesc || exit $$?; \
 	echo " ( cd '$(DESTDIR)$(geocalpkgpythondir)' && rm -f" $$fileso ")"; \
 	cd "$(DESTDIR)$(geocalpkgpythondir)" && rm -f $$fileso
-install-afidsDATA: $(afids_DATA)
+install-dist_afidsDATA: $(dist_afids_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(afidsdir)" || $(MKDIR_P) "$(DESTDIR)$(afidsdir)"
-	@list='$(afids_DATA)'; test -n "$(afidsdir)" || list=; \
+	@list='$(dist_afids_DATA)'; test -n "$(afidsdir)" || list=; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
@@ -5434,17 +5522,17 @@ install-afidsDATA: $(afids_DATA)
 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(afidsdir)" || exit $$?; \
 	done
 
-uninstall-afidsDATA:
+uninstall-dist_afidsDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(afids_DATA)'; test -n "$(afidsdir)" || list=; \
+	@list='$(dist_afids_DATA)'; test -n "$(afidsdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	test -n "$$files" || exit 0; \
 	echo " ( cd '$(DESTDIR)$(afidsdir)' && rm -f" $$files ")"; \
 	cd "$(DESTDIR)$(afidsdir)" && rm -f $$files
-install-afidspkgpythonDATA: $(afidspkgpython_DATA)
+install-dist_afidspkgpythonDATA: $(dist_afidspkgpython_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(afidspkgpythondir)" || $(MKDIR_P) "$(DESTDIR)$(afidspkgpythondir)"
-	@list='$(afidspkgpython_DATA)'; test -n "$(afidspkgpythondir)" || list=; \
+	@list='$(dist_afidspkgpython_DATA)'; test -n "$(afidspkgpythondir)" || list=; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
@@ -5454,9 +5542,9 @@ install-afidspkgpythonDATA: $(afidspkgpython_DATA)
 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(afidspkgpythondir)" || exit $$?; \
 	done
 
-uninstall-afidspkgpythonDATA:
+uninstall-dist_afidspkgpythonDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(afidspkgpython_DATA)'; test -n "$(afidspkgpythondir)" || list=; \
+	@list='$(dist_afidspkgpython_DATA)'; test -n "$(afidspkgpythondir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	test -n "$$files" || exit 0; \
 	echo " ( cd '$(DESTDIR)$(afidspkgpythondir)' && rm -f" $$files ")"; \
@@ -5992,6 +6080,7 @@ maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
 	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+@BUILD_AFIDS_PYTHON_FALSE@installcheck-local:
 clean: clean-am
 
 clean-am: clean-binPROGRAMS clean-checkPROGRAMS clean-generic \
@@ -6018,8 +6107,8 @@ info: info-am
 
 info-am:
 
-install-data-am: install-afidsDATA install-afidsSCRIPTS \
-	install-afidspkgpythonDATA install-afidspkgpythonPYTHON \
+install-data-am: install-afidspkgpythonPYTHON install-dist_afidsDATA \
+	install-dist_afidsSCRIPTS install-dist_afidspkgpythonDATA \
 	install-dist_sdbxdocDATA install-geocalincHEADERS \
 	install-geocalpkgpythonPYTHON install-includeHEADERS \
 	install-librawHEADERS install-pkgconfigDATA \
@@ -6031,7 +6120,7 @@ install-dvi: install-dvi-am
 
 install-dvi-am:
 
-install-exec-am: install-binPROGRAMS install-binSCRIPTS \
+install-exec-am: install-binPROGRAMS install-dist_binSCRIPTS \
 	install-geocalpkgpyexecLTLIBRARIES install-libLTLIBRARIES
 
 install-html: install-html-am
@@ -6052,7 +6141,7 @@ install-ps: install-ps-am
 
 install-ps-am:
 
-installcheck-am:
+installcheck-am: installcheck-local
 
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
@@ -6074,9 +6163,9 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-afidsDATA uninstall-afidsSCRIPTS \
-	uninstall-afidspkgpythonDATA uninstall-afidspkgpythonPYTHON \
-	uninstall-binPROGRAMS uninstall-binSCRIPTS \
+uninstall-am: uninstall-afidspkgpythonPYTHON uninstall-binPROGRAMS \
+	uninstall-dist_afidsDATA uninstall-dist_afidsSCRIPTS \
+	uninstall-dist_afidspkgpythonDATA uninstall-dist_binSCRIPTS \
 	uninstall-dist_sdbxdocDATA uninstall-geocalincHEADERS \
 	uninstall-geocalpkgpyexecLTLIBRARIES \
 	uninstall-geocalpkgpythonPYTHON uninstall-includeHEADERS \
@@ -6084,9 +6173,10 @@ uninstall-am: uninstall-afidsDATA uninstall-afidsSCRIPTS \
 	uninstall-pkgconfigDATA uninstall-sdbxHEADERS \
 	uninstall-sdbxbtreeHEADERS uninstall-sdbxrtreeHEADERS \
 	uninstall-sdbxsupportHEADERS
-
+	@$(NORMAL_INSTALL)
+	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
 .MAKE: all check check-am install install-am install-data-am \
-	install-strip
+	install-strip uninstall-am
 
 .PHONY: CTAGS GTAGS all all-am am--refresh check check-TESTS check-am \
 	clean clean-binPROGRAMS clean-checkPROGRAMS clean-generic \
@@ -6096,11 +6186,11 @@ uninstall-am: uninstall-afidsDATA uninstall-afidsSCRIPTS \
 	dist-xz dist-zip distcheck distclean distclean-compile \
 	distclean-generic distclean-libtool distclean-tags \
 	distcleancheck distdir distuninstallcheck dvi dvi-am html \
-	html-am info info-am install install-afidsDATA \
-	install-afidsSCRIPTS install-afidspkgpythonDATA \
-	install-afidspkgpythonPYTHON install-am install-binPROGRAMS \
-	install-binSCRIPTS install-data install-data-am \
-	install-data-hook install-dist_sdbxdocDATA install-dvi \
+	html-am info info-am install install-afidspkgpythonPYTHON \
+	install-am install-binPROGRAMS install-data install-data-am \
+	install-data-hook install-dist_afidsDATA \
+	install-dist_afidsSCRIPTS install-dist_afidspkgpythonDATA \
+	install-dist_binSCRIPTS install-dist_sdbxdocDATA install-dvi \
 	install-dvi-am install-exec install-exec-am \
 	install-geocalincHEADERS install-geocalpkgpyexecLTLIBRARIES \
 	install-geocalpkgpythonPYTHON install-html install-html-am \
@@ -6109,22 +6199,24 @@ uninstall-am: uninstall-afidsDATA uninstall-afidsSCRIPTS \
 	install-pdf install-pdf-am install-pkgconfigDATA install-ps \
 	install-ps-am install-sdbxHEADERS install-sdbxbtreeHEADERS \
 	install-sdbxrtreeHEADERS install-sdbxsupportHEADERS \
-	install-strip installcheck installcheck-am installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
-	pdf pdf-am ps ps-am tags uninstall uninstall-afidsDATA \
-	uninstall-afidsSCRIPTS uninstall-afidspkgpythonDATA \
+	install-strip installcheck installcheck-am installcheck-local \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am tags uninstall \
 	uninstall-afidspkgpythonPYTHON uninstall-am \
-	uninstall-binPROGRAMS uninstall-binSCRIPTS \
-	uninstall-dist_sdbxdocDATA uninstall-geocalincHEADERS \
+	uninstall-binPROGRAMS uninstall-dist_afidsDATA \
+	uninstall-dist_afidsSCRIPTS uninstall-dist_afidspkgpythonDATA \
+	uninstall-dist_binSCRIPTS uninstall-dist_sdbxdocDATA \
+	uninstall-geocalincHEADERS \
 	uninstall-geocalpkgpyexecLTLIBRARIES \
-	uninstall-geocalpkgpythonPYTHON uninstall-includeHEADERS \
-	uninstall-libLTLIBRARIES uninstall-librawHEADERS \
-	uninstall-pkgconfigDATA uninstall-sdbxHEADERS \
-	uninstall-sdbxbtreeHEADERS uninstall-sdbxrtreeHEADERS \
-	uninstall-sdbxsupportHEADERS
+	uninstall-geocalpkgpythonPYTHON uninstall-hook \
+	uninstall-includeHEADERS uninstall-libLTLIBRARIES \
+	uninstall-librawHEADERS uninstall-pkgconfigDATA \
+	uninstall-sdbxHEADERS uninstall-sdbxbtreeHEADERS \
+	uninstall-sdbxrtreeHEADERS uninstall-sdbxsupportHEADERS
 
 install-data-hook: $(INSTALL_DATA_HOOK)
+uninstall-hook: $(UNINSTALL_HOOK)
 clean-local: $(CLEAN_HOOK)
 
 #=================================================================
@@ -6199,6 +6291,9 @@ clean-local: $(CLEAN_HOOK)
 
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@-include afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.Pcc
 
+@BUILD_AFIDS_PYTHON_TRUE@clean_geocalpkgpython:
+@BUILD_AFIDS_PYTHON_TRUE@	rm -rf "$(DESTDIR)$(geocalpkgpythondir)"
+
 @BUILD_AFIDS_PYTHON_TRUE@python_test :
 @BUILD_AFIDS_PYTHON_TRUE@	export PYTHONPATH=$(pythondir) && \
 @BUILD_AFIDS_PYTHON_TRUE@        export LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) && \
@@ -6247,16 +6342,14 @@ clean-local: $(CLEAN_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@test_out/vicar_copy.img : afids_python/geocal/unit_test_data/vicar.img
 @BUILD_AFIDS_PYTHON_TRUE@	mkdir -p test_out
 @BUILD_AFIDS_PYTHON_TRUE@	cp $^ $@
-
-# Make sure that we have created the test_out directory for use with unit 
-# tests
+@BUILD_AFIDS_PYTHON_TRUE@	chmod +w $@ 
 @BUILD_AFIDS_PYTHON_TRUE@test_out/dummy_copy : afids_python/geocal/test_out/dummy
 @BUILD_AFIDS_PYTHON_TRUE@	mkdir -p test_out
 @BUILD_AFIDS_PYTHON_TRUE@	cp $^ $@
 
-#=================================================================
-# Generate doxygen documentation
-
+@BUILD_AFIDS_PYTHON_TRUE@clean_unit_test:
+@BUILD_AFIDS_PYTHON_TRUE@	-rm -rf test_out
+@BUILD_AFIDS_PYTHON_TRUE@	-rm vicar_out.img
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@doc/geocal.tag: $(geocalinc_HEADERS) $(libgeocal_la_SOURCES) config/doxygen.cfg $(DOXYGEN_TARGET)
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	$(MKDIR_P) doc/geocal
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	-rm -f doc/geocal/html/*
@@ -6266,14 +6359,24 @@ clean-local: $(CLEAN_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@        srcdir=$(srcdir)/afids_python/geocal DOCDIR=doc/geocal $(DOXYGEN) $(srcdir)/config/doxygen.cfg
 
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@install_doxygen_doc: doc/geocal.tag
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	$(MKDIR_P) $(geocaldocsearchdir)
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	$(INSTALL_DATA) $(filter-out doc/geocal/html/search, $(wildcard doc/geocal/html/*)) $(geocaldocdir)/html
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	$(INSTALL_DATA) doc/geocal/html/search/* $(geocaldocsearchdir)
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	$(MKDIR_P) "$(DESTDIR)$(geocaldocsearchdir)"
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	$(INSTALL_DATA) $(filter-out doc/geocal/html/search, $(wildcard doc/geocal/html/*)) "$(DESTDIR)$(geocaldocdir)/html"
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	$(INSTALL_DATA) doc/geocal/html/search/* "$(DESTDIR)$(geocaldocsearchdir)"
+
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@clean_doxygen_doc:
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	-rm -rf $(DESTDIR)$(geocaldocdir)
+
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@clean_doxygen_generate:
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	-rm -rf doc/geocal
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	-rm -r doc/geocal.tag
 
 @BUILD_AFIDS_PYTHON_TRUE@install_python_doc: 
 @BUILD_AFIDS_PYTHON_TRUE@	export PATH=$(bindir):$$PATH && \
 @BUILD_AFIDS_PYTHON_TRUE@        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
-@BUILD_AFIDS_PYTHON_TRUE@        $(SPHINXBUILD) -b html $(srcdir)/$(docpythonsrc) $(pythondocdir)
+@BUILD_AFIDS_PYTHON_TRUE@        $(SPHINXBUILD) -b html $(srcdir)/$(docpythonsrc) "$(DESTDIR)$(pythondocdir)"
+
+@BUILD_AFIDS_PYTHON_TRUE@clean_install_python_doc:
+@BUILD_AFIDS_PYTHON_TRUE@	rm -rf "$(DESTDIR)$(pythondocdir)"
 
 @BUILD_AFIDS_PYTHON_TRUE@pythondoctest:
 @BUILD_AFIDS_PYTHON_TRUE@	export PATH=$(bindir):$$PATH && \
@@ -6283,36 +6386,36 @@ clean-local: $(CLEAN_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@	      "results in doctest/output.txt."
 
 # Backdoor rule to do a quick install when we are just varying python
-@BUILD_AFIDS_PYTHON_TRUE@python_install: install-pkgpythonPYTHON install-pkgpythonDATA
+@BUILD_AFIDS_PYTHON_TRUE@python_install: install-afidspkgpythonPYTHON install-dist_afidspkgpythonDATA
 
 # This is the normally derived automake install rule, but with LD_LIBRARY_PATH added to
 # python. This is needed because we are using a newly installed version of python that we
 # build ourselves, but with the library in nonstandard location.
 
-@BUILD_AFIDS_PYTHON_TRUE@install-afidspkgpythonPYTHON: $(afidspkgpython_PYTHON)
-@BUILD_AFIDS_PYTHON_TRUE@	@$(NORMAL_INSTALL)
-@BUILD_AFIDS_PYTHON_TRUE@	test -z "$(afidspkgpythondir)" || $(MKDIR_P) "$(DESTDIR)$(afidspkgpythondir)"
-@BUILD_AFIDS_PYTHON_TRUE@	@list='$(afidspkgpython_PYTHON)'; dlist=; list2=; test -n "$(afidspkgpythondir)" || list=; \
-@BUILD_AFIDS_PYTHON_TRUE@	for p in $$list; do \
-@BUILD_AFIDS_PYTHON_TRUE@	  if test -f "$$p"; then b=; else b="$(srcdir)/"; fi; \
-@BUILD_AFIDS_PYTHON_TRUE@	  if test -f $$b$$p; then \
-@BUILD_AFIDS_PYTHON_TRUE@	    $(am__strip_dir) \
-@BUILD_AFIDS_PYTHON_TRUE@	    dlist="$$dlist $$f"; \
-@BUILD_AFIDS_PYTHON_TRUE@	    list2="$$list2 $$b$$p"; \
-@BUILD_AFIDS_PYTHON_TRUE@	  else :; fi; \
-@BUILD_AFIDS_PYTHON_TRUE@	done; \
-@BUILD_AFIDS_PYTHON_TRUE@	for file in $$list2; do echo $$file; done | $(am__base_list) | \
-@BUILD_AFIDS_PYTHON_TRUE@	while read files; do \
-@BUILD_AFIDS_PYTHON_TRUE@	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(afidspkgpythondir)'"; \
-@BUILD_AFIDS_PYTHON_TRUE@	  $(INSTALL_DATA) $$files "$(DESTDIR)$(afidspkgpythondir)" || exit $$?; \
-@BUILD_AFIDS_PYTHON_TRUE@	done || exit $$?; \
-@BUILD_AFIDS_PYTHON_TRUE@	if test -n "$$dlist"; then \
-@BUILD_AFIDS_PYTHON_TRUE@	  if test -z "$(DESTDIR)"; then \
-@BUILD_AFIDS_PYTHON_TRUE@	    LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(py_compile) --basedir "$(afidspkgpythondir)" $$dlist; \
-@BUILD_AFIDS_PYTHON_TRUE@	  else \
-@BUILD_AFIDS_PYTHON_TRUE@	    LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(py_compile) --destdir "$(DESTDIR)" --basedir "$(afidspkgpythondir)" $$dlist; \
-@BUILD_AFIDS_PYTHON_TRUE@	  fi; \
-@BUILD_AFIDS_PYTHON_TRUE@	else :; fi
+# install-afidspkgpythonPYTHON: $(afidspkgpython_PYTHON)
+# 	@$(NORMAL_INSTALL)
+# 	test -z "$(afidspkgpythondir)" || $(MKDIR_P) "$(DESTDIR)$(afidspkgpythondir)"
+# 	@list='$(afidspkgpython_PYTHON)'; dlist=; list2=; test -n "$(afidspkgpythondir)" || list=; \
+# 	for p in $$list; do \
+# 	  if test -f "$$p"; then b=; else b="$(srcdir)/"; fi; \
+# 	  if test -f $$b$$p; then \
+# 	    $(am__strip_dir) \
+# 	    dlist="$$dlist $$f"; \
+# 	    list2="$$list2 $$b$$p"; \
+# 	  else :; fi; \
+# 	done; \
+# 	for file in $$list2; do echo $$file; done | $(am__base_list) | \
+# 	while read files; do \
+# 	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(afidspkgpythondir)'"; \
+# 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(afidspkgpythondir)" || exit $$?; \
+# 	done || exit $$?; \
+# 	if test -n "$$dlist"; then \
+# 	  if test -z "$(DESTDIR)"; then \
+# 	    LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(py_compile) --basedir "$(afidspkgpythondir)" $$dlist; \
+# 	  else \
+# 	    LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(py_compile) --destdir "$(DESTDIR)" --basedir "$(afidspkgpythondir)" $$dlist; \
+# 	  fi; \
+# 	else :; fi
 
 @BUILD_AFIDS_PYTHON_TRUE@python_check:
 @BUILD_AFIDS_PYTHON_TRUE@	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
@@ -6320,9 +6423,7 @@ clean-local: $(CLEAN_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@        export PATH=$(bindir):${PATH} && \
 @BUILD_AFIDS_PYTHON_TRUE@        nosetests $(srcdir)/afids_python/python/*/ 
 
-@BUILD_AFIDS_PYTHON_TRUE@export python_test_path=$(platpythondir):$(pythondir):${PYTHONPATH}
-@BUILD_AFIDS_PYTHON_TRUE@export AFIDS_DATA
-@BUILD_AFIDS_PYTHON_TRUE@export python_exec_path=$(bindir):$(PATH)
+@BUILD_AFIDS_PYTHON_TRUE@installcheck-local: python_check
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

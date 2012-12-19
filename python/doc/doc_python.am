@@ -1,13 +1,20 @@
 # Sphinx python documentation
 
+EXTRA_DIST+= @docpythonsrc@
+
 install_python_doc: 
 	export PATH=$(bindir):$$PATH && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
-        $(SPHINXBUILD) -b html $(srcdir)/$(docpythonsrc) $(pythondocdir)
+        $(SPHINXBUILD) -b html $(srcdir)/$(docpythonsrc) "$(DESTDIR)$(pythondocdir)"
 
 if WITH_DOCUMENTATION
 INSTALL_DATA_HOOK += install_python_doc
 endif
+
+UNINSTALL_HOOK += clean_install_python_doc
+
+clean_install_python_doc:
+	rm -rf "$(DESTDIR)$(pythondocdir)"
 
 pythondoctest:
 	export PATH=$(bindir):$$PATH && \

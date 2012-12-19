@@ -1,25 +1,45 @@
 # This gets included in the top makefile. This list files here that are
 # used to run unit tests.
 
-EXTRA_DIST += unit_test_data/PCF unit_test_data/cib_sample.img 
-EXTRA_DIST += unit_test_data/matcher_test_newimage.bin
-EXTRA_DIST += unit_test_data/matcher_test_refimage.bin
-EXTRA_DIST += unit_test_data/rpc.ntf
-EXTRA_DIST += unit_test_data/vicar.img
-EXTRA_DIST += unit_test_data/spice/lsk/naif0007.tls
-EXTRA_DIST += unit_test_data/spice/lsk/naif0008.tls
-EXTRA_DIST += unit_test_data/spice/lsk/naif0007.tls
-EXTRA_DIST += unit_test_data/spice/pck/earth_000101_080729_080507.bpc
-EXTRA_DIST += unit_test_data/spice/pck/earth_720101_070426.bpc
-EXTRA_DIST += unit_test_data/spice/pck/pck00008.tpc
-EXTRA_DIST += unit_test_data/06JAN06033849-P1BS-005545519120_01_P001.ATT
-EXTRA_DIST += unit_test_data/06JAN06033849-P1BS-005545519120_01_P001.EPH
-EXTRA_DIST += unit_test_data/argus_camera6.jpg
-EXTRA_DIST += unit_test_data/argus.csv
-EXTRA_DIST += unit_test_data/mul.tif
-EXTRA_DIST += unit_test_data/pan.tif
-EXTRA_DIST += unit_test_data/egm96.img
-
-
-
-
+EXTRA_DIST += @geocalunittestdata@/PCF @geocalunittestdata@/cib_sample.img 
+EXTRA_DIST += @geocalunittestdata@/matcher_test_newimage.bin
+EXTRA_DIST += @geocalunittestdata@/matcher_test_refimage.bin
+EXTRA_DIST += @geocalunittestdata@/rpc.ntf
+EXTRA_DIST += @geocalunittestdata@/vicar.img
+EXTRA_DIST += @geocalunittestdata@/spice/geocal.ker
+EXTRA_DIST += @geocalunittestdata@/spice/fk/planets/earth_assoc_itrf93.tf
+EXTRA_DIST += @geocalunittestdata@/spice/fk/planets/eci_tod.tf
+EXTRA_DIST += @geocalunittestdata@/spice/lsk/naif0007.tls
+EXTRA_DIST += @geocalunittestdata@/spice/lsk/naif0008.tls
+EXTRA_DIST += @geocalunittestdata@/spice/pck/earth_000101_120424_120201.bpc
+EXTRA_DIST += @geocalunittestdata@/spice/pck/earth_720101_070426.bpc
+EXTRA_DIST += @geocalunittestdata@/spice/pck/pck00008.tpc
+EXTRA_DIST += @geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.ATT
+EXTRA_DIST += @geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.EPH
+EXTRA_DIST += @geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.IMD
+EXTRA_DIST += @geocalunittestdata@/argus_camera6.jpg
+EXTRA_DIST += @geocalunittestdata@/argus.csv
+EXTRA_DIST += @geocalunittestdata@/argus.ibis
+EXTRA_DIST += @geocalunittestdata@/cannon_raw.cr2
+EXTRA_DIST += @geocalunittestdata@/mul.tif
+EXTRA_DIST += @geocalunittestdata@/pan.tif
+EXTRA_DIST += @geocalunittestdata@/egm96.img
+EXTRA_DIST += @geocalunittestdata@/s251_sbet_subset.txt
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/cvdnorm_sub.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/material_sub.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/pandif_sub.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/portgaston_bk.int
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/post_b1.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/post_b2.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/post_b3.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/post_b4.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/post_b5.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/post_b6.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/post_b7.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/post_b8.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/post_pan_sub.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/pre_pan_sub.img
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/README
+EXTRA_DIST += @geocalunittestdata@/shiva_test_case/subset_test.py
+EXTRA_DIST += @geocalunittestdata@/Stereo
+EXTRA_DIST += @geocalunittestdata@/sample_orbit.h5

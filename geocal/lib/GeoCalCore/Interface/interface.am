@@ -110,6 +110,7 @@ SWIG_SOURCES += @srcinterface@/rpc_image.i
 SWIG_SOURCES += @srcinterface@/raster_multifile.i
 
 # Test files
+EXTRA_DIST += @srcinterface@/matcher_fixture.h
 geocal_test_all_SOURCES+= @srcinterface@/memory_raster_image_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/sub_raster_image_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/ground_coordinate_test.cc

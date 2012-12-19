@@ -107,23 +107,37 @@ BUILT_SOURCES += test_out/dummy_copy
 MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img 
 MOSTLYCLEANFILES += test_out/dummy_copy
 
+EXTRA_DIST+= afids_python/geocal/lib/dummy.pdf
+
 dummy.pdf : afids_python/geocal/lib/dummy.pdf
 	cp $^ dummy.pdf
 
 test_out/vicar_copy.img : afids_python/geocal/unit_test_data/vicar.img
 	mkdir -p test_out
 	cp $^ $@
+	chmod +w $@ 
 
 # Make sure that we have created the test_out directory for use with unit 
-# tests
+# tests (note dummy_copy isn't used for anything, this is just a trick to
+# make surce test_out directory is created).
+EXTRA_DIST+= afids_python/geocal/test_out/dummy
 test_out/dummy_copy : afids_python/geocal/test_out/dummy
 	mkdir -p test_out
 	cp $^ $@
+
+CLEAN_HOOK+= clean_unit_test
+
+clean_unit_test:
+	-rm -rf test_out
+	-rm vicar_out.img
 
 if WITH_DOCUMENTATION
 #=================================================================
 # Generate doxygen documentation
 
+EXTRA_DIST+= config/doxygen.cfg
+EXTRA_DIST+= config/doc_footer.html
+EXTRA_DIST+= config/doxy2swig.py
 doc/geocal.tag: $(geocalinc_HEADERS) $(libgeocal_la_SOURCES) config/doxygen.cfg $(DOXYGEN_TARGET)
 	$(MKDIR_P) doc/geocal
 	-rm -f doc/geocal/html/*
@@ -138,7 +152,19 @@ geocaldocsearchdir = ${geocaldocdir}/html/search
 INSTALL_DATA_HOOK += install_doxygen_doc
 
 install_doxygen_doc: doc/geocal.tag
-	$(MKDIR_P) $(geocaldocsearchdir)
-	$(INSTALL_DATA) $(filter-out doc/geocal/html/search, $(wildcard doc/geocal/html/*)) $(geocaldocdir)/html
-	$(INSTALL_DATA) doc/geocal/html/search/* $(geocaldocsearchdir)
+	$(MKDIR_P) "$(DESTDIR)$(geocaldocsearchdir)"
+	$(INSTALL_DATA) $(filter-out doc/geocal/html/search, $(wildcard doc/geocal/html/*)) "$(DESTDIR)$(geocaldocdir)/html"
+	$(INSTALL_DATA) doc/geocal/html/search/* "$(DESTDIR)$(geocaldocsearchdir)"
+
+UNINSTALL_HOOK+= clean_doxygen_doc
+
+clean_doxygen_doc:
+	-rm -rf $(DESTDIR)$(geocaldocdir)
+
+CLEAN_HOOK+= clean_doxygen_generate
+
+clean_doxygen_generate:
+	-rm -rf doc/geocal
+	-rm -r doc/geocal.tag
+
 endif

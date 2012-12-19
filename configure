@@ -618,6 +618,7 @@ LIBOBJS
 BUILD_AFIDS_PYTHON_FALSE
 BUILD_AFIDS_PYTHON_TRUE
 afidsdir
+afidspkgpythondir
 pythondocdir
 srcraw
 srcsdbx
@@ -628,6 +629,8 @@ srcinterface
 srcsupport
 srcimplementation
 srcgeocalcore
+pythonunittestdata
+geocalunittestdata
 docpythonsrc
 srcpythonbin
 srcpythonlib
@@ -27963,6 +27966,10 @@ srcpythonbin=${srcpython}/bin
 
 docpythonsrc=${srcpython}/doc
 
+geocalunittestdata=afids_python/geocal/unit_test_data
+
+pythonunittestdata=afids_python/python/unit_test_data
+
 srcgeocalcore=$libgeocal/GeoCalCore
 
 srcimplementation=$srcgeocalcore/Implementation
@@ -27982,6 +27989,8 @@ srcsdbx=afids_python/geocal/thirdparty/libsdbx
 srcraw=afids_python/geocal/thirdparty/libraw
 
 pythondocdir=${prefix}/share/doc/afids/python
+
+afidspkgpythondir=$pythondir/afids
 
 
 # One overlap with afids setup, just copy here rather than come up

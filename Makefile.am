@@ -1,4 +1,4 @@
 include common.am
-afids_SCRIPTS=
-afids_DATA=
+dist_afids_SCRIPTS=
+dist_afids_DATA=
 include afids_python.am

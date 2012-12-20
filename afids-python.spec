@@ -8,7 +8,7 @@ Vendor: California Institute of Technology
 URL: http://www-mipl.jpl.nasa.gov/cartlab/cartlab.html
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: python27 numpy27 scipy27 matplotlib27 nose27 h5py27 sphinx27 afids-data
+Requires: python27 numpy27 scipy27 matplotlib27 nose27 h5py27 sphinx27 afids-data vicar-gdalplugin
 Prefix: /opt/afids
 
 %description
@@ -27,6 +27,7 @@ make %_smp_mflags
 rm -rf $RPM_BUILD_ROOT
 make DESTDIR=$RPM_BUILD_ROOT install
 rm -f $RPM_BUILD_ROOT/opt/afids/lib/libgeocal.la
+rm -f $RPM_BUILD_ROOT/opt/afids/share/doc/afids/python/.doctrees/environment.pickle
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -43,19 +44,19 @@ rm -rf $RPM_BUILD_ROOT
 /opt/afids/afids/vdev/call_sample_vicar_python.pdf
 /opt/afids/afids/vdev/sample_vicar_python
 /opt/afids/afids/vdev/sample_vicar_python.pdf
-/opt/afids/afids/bin/create_gdal_igc
-/opt/afids/afids/bin/gdal_to_erdas
-/opt/afids/afids/bin/gdal_to_nitf
-/opt/afids/afids/bin/gen_geneplot_cmd.py
-/opt/afids/afids/bin/igc_project
-/opt/afids/afids/bin/sba
-/opt/afids/afids/bin/setup_dem_job
-/opt/afids/afids/bin/shelve_dir
-/opt/afids/afids/bin/shelve_job_run
-/opt/afids/afids/bin/tp_collect
-/opt/afids/afids/include/geocal/*
-/opt/afids/afids/include/sdbx/*
-/opt/afids/afids/include/libraw*.h
+/opt/afids/bin/create_gdal_igc
+/opt/afids/bin/gdal_to_erdas
+/opt/afids/bin/gdal_to_nitf
+/opt/afids/bin/gen_geneplot_cmd.py
+/opt/afids/bin/igc_project
+/opt/afids/bin/sba
+/opt/afids/bin/setup_dem_job
+/opt/afids/bin/shelve_dir
+/opt/afids/bin/shelve_job_run
+/opt/afids/bin/tp_collect
+/opt/afids/include/geocal/*
+/opt/afids/include/sdbx/*
+/opt/afids/include/libraw*.h
 /opt/afids/share/doc/afids/*
 /opt/afids/share/doc/geocal/*
 /opt/afids/share/doc/libsdbx/*

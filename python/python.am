@@ -8,39 +8,10 @@ include afids_python/python/unit_test_data/unit_test_data.am
 # Backdoor rule to do a quick install when we are just varying python
 python_install: install-afidspkgpythonPYTHON install-dist_afidspkgpythonDATA
 
-# This is the normally derived automake install rule, but with LD_LIBRARY_PATH added to
-# python. This is needed because we are using a newly installed version of python that we
-# build ourselves, but with the library in nonstandard location.
-
-# install-afidspkgpythonPYTHON: $(afidspkgpython_PYTHON)
-# 	@$(NORMAL_INSTALL)
-# 	test -z "$(afidspkgpythondir)" || $(MKDIR_P) "$(DESTDIR)$(afidspkgpythondir)"
-# 	@list='$(afidspkgpython_PYTHON)'; dlist=; list2=; test -n "$(afidspkgpythondir)" || list=; \
-# 	for p in $$list; do \
-# 	  if test -f "$$p"; then b=; else b="$(srcdir)/"; fi; \
-# 	  if test -f $$b$$p; then \
-# 	    $(am__strip_dir) \
-# 	    dlist="$$dlist $$f"; \
-# 	    list2="$$list2 $$b$$p"; \
-# 	  else :; fi; \
-# 	done; \
-# 	for file in $$list2; do echo $$file; done | $(am__base_list) | \
-# 	while read files; do \
-# 	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(afidspkgpythondir)'"; \
-# 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(afidspkgpythondir)" || exit $$?; \
-# 	done || exit $$?; \
-# 	if test -n "$$dlist"; then \
-# 	  if test -z "$(DESTDIR)"; then \
-# 	    LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(py_compile) --basedir "$(afidspkgpythondir)" $$dlist; \
-# 	  else \
-# 	    LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(py_compile) --destdir "$(DESTDIR)" --basedir "$(afidspkgpythondir)" $$dlist; \
-# 	  fi; \
-# 	else :; fi
-
 python_check:
 	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
         source $(AFIDS_DATA)/setup_afids_data.sh && \
         export PATH=$(bindir):${PATH} && \
         nosetests $(srcdir)/afids_python/python/*/ 
 
-installcheck-local: python_check
+INSTALLCHECK_HOOK+= python_check

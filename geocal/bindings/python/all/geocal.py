@@ -13465,5 +13465,283 @@ class WorldView2CloudMask(CalcRaster):
 WorldView2CloudMask_swigregister = _geocal.WorldView2CloudMask_swigregister
 WorldView2CloudMask_swigregister(WorldView2CloudMask)
 
+class DoughnutAverage(CalcRasterMultiBand):
+    """
+    This class does a "doughnut average" of an underlying RasterImage.
+
+    This produces the average value of all the pixels in a given window
+    size, excluding a smaller doughnut. We exclude all points that a value
+    of 0 in the average (e.g., the normal gore used in VICAR images), as
+    well as all points that are beyond the edge of the image. We also
+    preserve gore, so if a point has a value of 0 in any of the bands then
+    we set the doughnut average to 0 for that point.
+
+    Depending on the application, you may or may not want to include
+    points that have gore within the doughnut window. You can specify this
+    in the constructor. If "Allow_gore" is true, then any point other
+    than the center can be gore and we just exclude it from the average.
+    If "Allow_gore" is false, we set a value to 0 if any value in the
+    window is 0. In all cases, we set a value to 0 if the center is 0.
+
+    This is one of the building block used to do the "cvdnorm", you can
+    consult that program for details. But basically this is used to
+    examine small features (smaller than the doughnut whole) that are
+    significantly different than the nearby background.
+
+    C++ includes: doughnut_average.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        DoughnutAverage::DoughnutAverage(const boost::shared_ptr< RasterImageMultiBand > &Rimg, int
+        Window_size=11, int Doughnut_size=5, bool Allow_gore=true, int
+        Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)
+        Constructor.
+
+        Parameters:
+        -----------
+
+        Rimg:  The underlying image we are producing the average for.
+
+        Window_size:  The window size we are averaging. Should be odd number.
+
+        Doughnut_size:  The doughnut we are excluding in the average. Should
+        be odd, and < Window_size. 
+        """
+        _geocal.DoughnutAverage_swiginit(self,_geocal.new_DoughnutAverage(*args))
+    def cvdnorm(self, *args):
+        """
+        Array< double, 2 > DoughnutAverage::cvdnorm(int band, int Lstart, int Sstart, int Number_line, int Number_sample)
+        const
+        Very closely related in the doughnut average is the cvdnorm for one of
+        the bands.
+
+        So we provide the calculation for that. 
+        """
+        return _geocal.DoughnutAverage_cvdnorm(self, *args)
+
+    def pandif(self, *args):
+        """
+        blitz::Array< double, 2 > DoughnutAverage::pandif(int Lstart, int Sstart, int Number_line, int Number_sample) const
+        This is the difference of the first two cvdnorm bands. 
+        """
+        return _geocal.DoughnutAverage_pandif(self, *args)
+
+    def cvdnorm_raster_image(self, *args):
+        """
+        boost::shared_ptr< RasterImage > DoughnutAverage::cvdnorm_raster_image(int band) const
+        Present the cvdnorm as a RasterImage. 
+        """
+        return _geocal.DoughnutAverage_cvdnorm_raster_image(self, *args)
+
+    def _pandif_raster_image(self):
+        """
+        boost::shared_ptr< RasterImage > DoughnutAverage::pandif_raster_image() const
+        Present the pandif as a RasterImage. 
+        """
+        return _geocal.DoughnutAverage__pandif_raster_image(self)
+
+    @property
+    def pandif_raster_image(self):
+        return self._pandif_raster_image()
+
+    def _window_size(self):
+        """
+        int GeoCal::DoughnutAverage::window_size() const
+        The window size. 
+        """
+        return _geocal.DoughnutAverage__window_size(self)
+
+    @property
+    def window_size(self):
+        return self._window_size()
+
+    def _doughnut_size(self):
+        """
+        int GeoCal::DoughnutAverage::doughnut_size() const
+        The doughnut size. 
+        """
+        return _geocal.DoughnutAverage__doughnut_size(self)
+
+    @property
+    def doughnut_size(self):
+        return self._doughnut_size()
+
+    def _allow_gore(self):
+        """
+        bool GeoCal::DoughnutAverage::allow_gore() const
+        If true, we allow gore in a window and just exclude it in the average.
+
+        Otherwise we set a point to 0 if any point in the window is 0. 
+        """
+        return _geocal.DoughnutAverage__allow_gore(self)
+
+    @property
+    def allow_gore(self):
+        return self._allow_gore()
+
+    __swig_destroy__ = _geocal.delete_DoughnutAverage
+DoughnutAverage.cvdnorm = new_instancemethod(_geocal.DoughnutAverage_cvdnorm,None,DoughnutAverage)
+DoughnutAverage.pandif = new_instancemethod(_geocal.DoughnutAverage_pandif,None,DoughnutAverage)
+DoughnutAverage.cvdnorm_raster_image = new_instancemethod(_geocal.DoughnutAverage_cvdnorm_raster_image,None,DoughnutAverage)
+DoughnutAverage._pandif_raster_image = new_instancemethod(_geocal.DoughnutAverage__pandif_raster_image,None,DoughnutAverage)
+DoughnutAverage._window_size = new_instancemethod(_geocal.DoughnutAverage__window_size,None,DoughnutAverage)
+DoughnutAverage._doughnut_size = new_instancemethod(_geocal.DoughnutAverage__doughnut_size,None,DoughnutAverage)
+DoughnutAverage._allow_gore = new_instancemethod(_geocal.DoughnutAverage__allow_gore,None,DoughnutAverage)
+DoughnutAverage_swigregister = _geocal.DoughnutAverage_swigregister
+DoughnutAverage_swigregister(DoughnutAverage)
+
+class MaterialDetect(CalcRaster):
+    """
+    This class is used to do change detection and identify the material
+    for pixels that have changed.
+
+    This duplicates what was done in the VICAR proc "detwvpan", and in
+    particular the "f2ratio" process.
+
+    We read a IBIS file that describes the thresholds for a number of
+    material classes. For each material class, we do the following:
+
+    First, the difference in the pan bands is compared to a threshold. The
+    difference is normally calculated by DoughnutAverage, using the
+    pandif_raster_image. But something else could be used, all this class
+    cares about is having a difference it can compare against a threshold.
+    Compare pan data to a shadow threshold. This masks at very dark pixels
+    that we assume are in shadow.
+
+    For each point, we calculate the required ratios between the
+    multispectral bands, take the difference with the supplied class mean
+    and divide by the class sigma.
+
+    We sum the abs value of for each of the band ratios divided by the
+    number of band ratios (i.e, we use a L1 norm). This is compared
+    against a second threshold.
+
+    We may have more than one class that passes the second threshold. In
+    that case, we sort the classes first by a class priority (with the
+    lower number being selected first). For ties, we then pick the class
+    that has the smallest difference norm.
+
+    C++ includes: material_detect.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        MaterialDetect::MaterialDetect(const boost::shared_ptr< RasterImage > &Pan_data, const
+        boost::shared_ptr< RasterImage > &Pan_diff, const boost::shared_ptr<
+        RasterImageMultiBand > &Mulspect, const blitz::Array< double, 1 >
+        &Pan_diff_threshold, const blitz::Array< double, 1 >
+        &Spectral_diff_threshold, const blitz::Array< int, 1 >
+        &Class_priority, const std::string &Ibis_fname, double
+        Pan_shadow_threshold)
+        Constructor.
+
+        This takes the pan difference band (normally pandif_raster_image from
+        DoughnutAverage), the multispectral bands, the threshold for each
+        material for the pan difference and spectral difference, the class
+        priority for eahc class, and the name of the IBIS file to get the
+        material information.
+
+        The IBIS file should have at least 5 columns (which is all that we
+        read). The first two columns should be full word values, and are the
+        band indices (1 based, rather than the 0 based we use elsewhere). The
+        third should be double (for no good reason, it just is), which is the
+        class id. The fourth and fifth are also double, and are the mean and
+        sigma for that band ratio.
+
+        In generate, the class ID doesn't start from 0. We find the minimum
+        value in the table, and use that as the index into Pan_diff_threshold
+        etc. (so if first id is 8881 then the threshold for 8881 is
+        Pan_diff_threshold[0] and 8885 is Pan_diff_threshold[4]). Obviously we
+        could have just used a map instead, but this convention fits better
+        with the current way we supply this values in the Shiva scripts. 
+        """
+        _geocal.MaterialDetect_swiginit(self,_geocal.new_MaterialDetect(*args))
+    def _closest_material_raster_image(self):
+        """
+        boost::shared_ptr< RasterImage > MaterialDetect::closest_material_raster_image() const
+        This returns an image that gives the distance to the closest material
+        (whose class id will vary from pixel to pixel).
+
+        By convention we multiple this difference by 100 so it can be viewed
+        more easily in xvd (which prefers integers). 
+        """
+        return _geocal.MaterialDetect__closest_material_raster_image(self)
+
+    @property
+    def closest_material_raster_image(self):
+        return self._closest_material_raster_image()
+
+    @property
+    def material_raster_image(self):
+        return self._material_raster_image()
+
+    def _material_raster_image(self, *args):
+        """
+        boost::shared_ptr< RasterImage > MaterialDetect::material_raster_image(int Class_id) const
+        This returns a set image that gives the distance to the given
+        material.
+
+        By convention we multiple this difference by 100 so it can be viewed
+        more easily in xvd (which prefers integers). 
+        """
+        return _geocal.MaterialDetect__material_raster_image(self, *args)
+
+    def closest_material_dif(self, *args):
+        """
+        blitz::Array< double, 2 > MaterialDetect::closest_material_dif(int Lstart, int Sstart, int Number_line, int Number_sample) const
+        Calculate distance for every point from the nearest material.
+
+        By convention we multiple this by 100. 
+        """
+        return _geocal.MaterialDetect_closest_material_dif(self, *args)
+
+    def material_dif(self, *args):
+        """
+        blitz::Array< double, 2 > MaterialDetect::material_dif(int Lstart, int Sstart, int Number_line, int Number_sample, int
+        Class_id) const
+        Calculate the distance for every point from the given material.
+
+        By convention we multiple this by 100. 
+        """
+        return _geocal.MaterialDetect_material_dif(self, *args)
+
+    __swig_destroy__ = _geocal.delete_MaterialDetect
+MaterialDetect._closest_material_raster_image = new_instancemethod(_geocal.MaterialDetect__closest_material_raster_image,None,MaterialDetect)
+MaterialDetect._material_raster_image = new_instancemethod(_geocal.MaterialDetect__material_raster_image,None,MaterialDetect)
+MaterialDetect.closest_material_dif = new_instancemethod(_geocal.MaterialDetect_closest_material_dif,None,MaterialDetect)
+MaterialDetect.material_dif = new_instancemethod(_geocal.MaterialDetect_material_dif,None,MaterialDetect)
+MaterialDetect_swigregister = _geocal.MaterialDetect_swigregister
+MaterialDetect_swigregister(MaterialDetect)
+
+class PaintClass(CalcRasterMultiBand):
+    """
+    This takes two images, a image with the class ID and a pan band.
+
+    It then produces a three color image that is either the given pan band
+    or a color given by the class ID if the class ID is > 0.
+
+    This duplicates what was done with f2multi. This is a pretty specific
+    routine, and is likely to be replaced with something else at some
+    point.
+
+    C++ includes: paint_class.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        PaintClass::PaintClass(const boost::shared_ptr< RasterImage > &Class_id_img, const
+        boost::shared_ptr< RasterImage > &Pan_img, const blitz::Array< int, 2
+        > &Color, int Class_id_first_color=8881)
+
+        """
+        _geocal.PaintClass_swiginit(self,_geocal.new_PaintClass(*args))
+    __swig_destroy__ = _geocal.delete_PaintClass
+PaintClass_swigregister = _geocal.PaintClass_swigregister
+PaintClass_swigregister(PaintClass)
+
 
 

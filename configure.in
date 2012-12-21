@@ -1,8 +1,9 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(afids-python, r1262)
+AC_INIT(afids-python, r1268)
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([config/m4])
+AC_CONFIG_FILES([afids_python/script/setup_afids_python.csh afids_python/script/setup_afids_python.sh])
 AC_CONFIG_FILES([afids_python/geocal/lib/GeoCalCore/Support/global_fixture_default.cc])
 AFIDS_COMMON
 MP_WITH_CURSES
@@ -115,9 +116,6 @@ fi
 # config/m4/afids_source_directory.m4 so we can include this in multiple
 # configuration files.
 AFIDS_PYTHON_SOURCE_DIRECTORY
-# One overlap with afids setup, just copy here rather than come up
-# with some complicated way of handling this
-AC_SUBST([afidsdir], [${prefix}/afids/vdev])
 
 if test "$have_swig" = "yes" -a "$USE_MAINTAINER_MODE" != "no"; then
   generate_swig="yes"

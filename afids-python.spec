@@ -1,6 +1,6 @@
 Summary: This is the AFIDS python
 Name: afids-python
-Version: r1262
+Version: r1268
 Release: 1
 License: Copyright 2012 California Institute of Technology ALL RIGHTS RESERVED
 Group: Applications/Engineering
@@ -60,6 +60,8 @@ rm -rf $RPM_BUILD_ROOT
 /opt/afids/share/doc/afids/*
 /opt/afids/share/doc/geocal/*
 /opt/afids/share/doc/libsdbx/*
+/opt/afids/setup_afids_python.csh
+/opt/afids/setup_afids_python.sh
 
 %changelog
 * Tue Dec 18 2012 Mike M Smyth <smyth@pistol> - python-1

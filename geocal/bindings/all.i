@@ -116,3 +116,6 @@
 %include "../../../afids_python/geocal/lib/CartLab/vicar_raster_image.i"
 %include "../../../afids_python/geocal/lib/CartLab/pos_export_orbit.i"
 %include "../../../afids_python/geocal/lib/CartLab/worldview2_cloudmask.i"
+%include "../../../afids_python/geocal/lib/CartLab/doughnut_average.i"
+%include "../../../afids_python/geocal/lib/CartLab/material_detect.i"
+%include "../../../afids_python/geocal/lib/CartLab/paint_class.i"

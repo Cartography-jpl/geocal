@@ -1,5 +1,3 @@
-geocalpkgpythondir = $(platpythondir)/geocal
-geocalpkgpyexecdir = $(platpythondir)/geocal
 geocalpkgpython_PYTHON = afids_python/geocal/bindings/python/__init__.py
 geocalpkgpyexec_LTLIBRARIES = afids_python/geocal/bindings/python/_geocal.la
 afids_python_geocal_bindings_python__geocal_la_SOURCES = $(SWIG_SOURCES)
@@ -10,35 +8,6 @@ afids_python_geocal_bindings_python__geocal_la_LDFLAGS = -module -avoid-version
 afids_python_geocal_bindings_python__geocal_la_LIBADD = libgeocal.la 
 
 EXTRA_DIST += $(srcdir)/afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.h
-
-# This is the normally derived automake install rule, but with LD_LIBRARY_PATH added to
-# python. This is needed because we are using a newly installed version of python that we
-# build ourselves, but with the library in nonstandard location.
-
-install-geocalpkgpythonPYTHON: $(geocalpkgpython_PYTHON)
-	@$(NORMAL_INSTALL)
-	test -z "$(geocalpkgpythondir)" || $(MKDIR_P) "$(DESTDIR)$(geocalpkgpythondir)"
-	@list='$(geocalpkgpython_PYTHON)'; dlist=; list2=; test -n "$(geocalpkgpythondir)" || list=; \
-	for p in $$list; do \
-	  if test -f "$$p"; then b=; else b="$(srcdir)/"; fi; \
-	  if test -f $$b$$p; then \
-	    $(am__strip_dir) \
-	    dlist="$$dlist $$f"; \
-	    list2="$$list2 $$b$$p"; \
-	  else :; fi; \
-	done; \
-	for file in $$list2; do echo $$file; done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(geocalpkgpythondir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(geocalpkgpythondir)" || exit $$?; \
-	done || exit $$?; \
-	if test -n "$$dlist"; then \
-	  if test -z "$(DESTDIR)"; then \
-	    LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(py_compile) --basedir "$(geocalpkgpythondir)" $$dlist; \
-	  else \
-	    LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(py_compile) --destdir "$(DESTDIR)" --basedir "$(geocalpkgpythondir)" $$dlist; \
-	  fi; \
-	else :; fi
 
 # Only generate these files in maintainer mode, otherwise consider them
 # as input.

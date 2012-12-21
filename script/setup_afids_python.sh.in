@@ -1,0 +1,10 @@
+if [ -n "$PYTHONPATH" ]; then
+  export PYTHONPATH=@pythondir@:@platpythondir@:${PYTHONPATH}
+else
+  export PYTHONPATH=@pythondir@:@platpythondir@
+fi
+if [ -n "$PATH" ]; then
+  export PATH=@prefix@/bin:${PATH}
+else
+  export PATH=@prefix@/bin
+fi

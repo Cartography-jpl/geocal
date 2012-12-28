@@ -26892,7 +26892,7 @@ $as_echo "$am_cv_python_pyexecdir" >&6; }
   fi
 
 
-     PYTHON="${prefix}/bin/python"
+     PYTHON=`pwd`"/external/python_wrap.sh"
      PYTHON_CPPFLAGS="-I${prefix}/include/python2.7"
      PYTHON_NUMPY_CPPFLAGS="-I${prefix}/lib/python2.7/site-packages/numpy/core/include"
      pythondir="${prefix}/lib/python2.7/site-packages"

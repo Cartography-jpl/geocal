@@ -10,6 +10,7 @@ python_install: install-afidspkgpythonPYTHON install-dist_afidspkgpythonDATA
 
 python_check:
 	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
+        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         source $(AFIDS_DATA)/setup_afids_data.sh && \
         export PATH=$(bindir):${PATH} && \
         nosetests $(srcdir)/afids_python/python/*/ 

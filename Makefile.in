@@ -6332,6 +6332,7 @@ installcheck-local: $(INSTALLCHECK_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@export AFIDS_VDEV_DATA = $(datavdevdir)
 @BUILD_AFIDS_PYTHON_TRUE@export ELEV_ROOT = $(srtml2dir)
 @BUILD_AFIDS_PYTHON_TRUE@export VICAR_GDALPLUGIN_HOME
+@BUILD_AFIDS_PYTHON_TRUE@export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
 
 #=================================================================
 # Normally check builds all the libraries and executables. This
@@ -6403,6 +6404,7 @@ installcheck-local: $(INSTALLCHECK_HOOK)
 
 @BUILD_AFIDS_PYTHON_TRUE@python_check:
 @BUILD_AFIDS_PYTHON_TRUE@	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
+@BUILD_AFIDS_PYTHON_TRUE@        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
 @BUILD_AFIDS_PYTHON_TRUE@        source $(AFIDS_DATA)/setup_afids_data.sh && \
 @BUILD_AFIDS_PYTHON_TRUE@        export PATH=$(bindir):${PATH} && \
 @BUILD_AFIDS_PYTHON_TRUE@        nosetests $(srcdir)/afids_python/python/*/ 

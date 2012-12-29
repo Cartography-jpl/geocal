@@ -8,7 +8,6 @@ import multiprocessing
 from multiprocessing import Pool
 import numpy as np
 import numpy.linalg as la
-import matplotlib.pyplot as plt
 from igc_collection import *
 from ply_file import *
 
@@ -188,6 +187,12 @@ class DemGenerate:
         You can optionally pass in an image to show in the plot. If passed
         in, this should be map projected and cover the same area as self.aoi.
         If you leave this out, then we just leave those plots empty.'''
+
+        # Import is here rather than top of the function. We may be running this
+        # in an environment without an interactive display, so this import will fail.
+        # As long as the user doesn't call this function, this isn't a problem.
+        import matplotlib.pyplot as plt
+
         dv_orig = self.dem_orig()
         plt.subplot(221)
         #plt.imshow(dv_orig, vmin = 1300, vmax=1320)

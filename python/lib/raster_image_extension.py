@@ -1,6 +1,5 @@
 from geocal import *
 import numpy as np
-import matplotlib.pyplot as plt
 
 # Add some useful functions to RasterImage
 def read_with_pad(self, Lstart, Sstart, Number_line, Number_sample):
@@ -44,6 +43,12 @@ def display(self, ic, sz, cross_hair = True):
     with 0's in that case.
     
     You can optionally put a crosshairs at ic. The default is to do this'''
+
+    # Import is here rather than top of the function. We may be running this
+    # in an environment without an interactive display, so this import will fail.
+    # As long as the user doesn't call this function, this isn't a problem.
+    import matplotlib.pyplot as plt
+
     nline = sz
     nsamp = sz
     ln = int(round(ic.line)) - nline / 2

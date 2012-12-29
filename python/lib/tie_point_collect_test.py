@@ -2,7 +2,6 @@ from nose.tools import *
 from geocal import *
 from tie_point_collect import *
 from image_ground_connection import *
-import matplotlib.pyplot as plt
 import multiprocessing
 from multiprocessing import Pool
 from nose.plugins.skip import Skip, SkipTest
@@ -37,6 +36,7 @@ def test_pickle():
     
 def test_show_image():
     raise SkipTest
+    import matplotlib.pyplot as plt
     tp = tp_collect.tie_point(ImageCoordinate(500, 500))
     tp.display(igc_coll)
     plt.show()

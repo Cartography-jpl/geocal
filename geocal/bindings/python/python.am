@@ -3,7 +3,7 @@ geocalpkgpyexec_LTLIBRARIES = afids_python/geocal/bindings/python/_geocal.la
 afids_python_geocal_bindings_python__geocal_la_SOURCES = $(SWIG_SOURCES)
 geocalpkgpython_PYTHON+= afids_python/geocal/bindings/python/all/geocal.py
 afids_python_geocal_bindings_python__geocal_la_SOURCES+= afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc
-afids_python_geocal_bindings_python__geocal_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(AM_CPPFLAGS)
+afids_python_geocal_bindings_python__geocal_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) $(AM_CPPFLAGS)
 afids_python_geocal_bindings_python__geocal_la_LDFLAGS = -module -avoid-version
 afids_python_geocal_bindings_python__geocal_la_LIBADD = libgeocal.la 
 

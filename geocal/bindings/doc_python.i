@@ -181,7 +181,7 @@ virtual GeoCal::AircraftOrbitData::~AircraftOrbitData()
 Destructor. ";
 
 
-// File: a01113.xml
+// File: a01165.xml
 
 %feature("docstring") std::allocator "
 STL class. ";
@@ -900,6 +900,12 @@ orbit data.
 We save this to the given file, with the given Type. ";
 
 
+// File: a01166.xml
+
+%feature("docstring") std::array "
+STL class. ";
+
+
 // File: a00007.xml
 
 %feature("docstring") GeoCal::GeoCalCore::Array2d "
@@ -957,97 +963,97 @@ Number_sample, Array2d< T > &Res) const
 virtual GeoCal::GeoCalCore::Array2d< T >::~Array2d()
 ";
 
-// File: a01114.xml
+// File: a01167.xml
 
 %feature("docstring") std::auto_ptr "
 STL class. ";
 
 
-// File: a01115.xml
+// File: a01168.xml
 
 %feature("docstring") std::bad_alloc "
 STL class. ";
 
 
-// File: a01116.xml
+// File: a01169.xml
 
 %feature("docstring") std::bad_cast "
 STL class. ";
 
 
-// File: a01117.xml
+// File: a01170.xml
 
 %feature("docstring") std::bad_exception "
 STL class. ";
 
 
-// File: a01118.xml
+// File: a01171.xml
 
 %feature("docstring") std::bad_typeid "
 STL class. ";
 
 
-// File: a01119.xml
+// File: a01172.xml
 
 %feature("docstring") std::basic_fstream "
 STL class. ";
 
 
-// File: a01127.xml
+// File: a01180.xml
 
 %feature("docstring") std::basic_ifstream "
 STL class. ";
 
 
-// File: a01124.xml
+// File: a01177.xml
 
 %feature("docstring") std::basic_ios "
 STL class. ";
 
 
-// File: a01122.xml
+// File: a01175.xml
 
 %feature("docstring") std::basic_iostream "
 STL class. ";
 
 
-// File: a01123.xml
+// File: a01176.xml
 
 %feature("docstring") std::basic_istream "
 STL class. ";
 
 
-// File: a01135.xml
+// File: a01188.xml
 
 %feature("docstring") std::basic_istringstream "
 STL class. ";
 
 
-// File: a01140.xml
+// File: a01193.xml
 
 %feature("docstring") std::basic_ofstream "
 STL class. ";
 
 
-// File: a01126.xml
+// File: a01179.xml
 
 %feature("docstring") std::basic_ostream "
 STL class. ";
 
 
-// File: a01143.xml
+// File: a01196.xml
 
 %feature("docstring") std::basic_ostringstream "
 STL class. ";
 
 
-// File: a00701.xml
+// File: a00716.xml
 
 %feature("docstring") std::basic_string "
 STL class. ";
 
 
-// File: a01132.xml
+// File: a01185.xml
 
 %feature("docstring") std::basic_stringstream "
 STL class. ";
@@ -1073,7 +1079,7 @@ void BasicPcorrMatcher::match(cv::Mat &Ref, cv::Mat &New, cv::Point2f &Ref_loc, 
 static void BilinearIntepolate::apply(T1 &A, T2 &B, T3, T4, T5, T6, T7, T8, T9, T10, T11)
 ";
 
-// File: a01153.xml
+// File: a01206.xml
 
 %feature("docstring") std::bitset "
 STL class. ";
@@ -2215,129 +2221,189 @@ the check. ";
 virtual GeoCal::CombinedMask::~CombinedMask()
 ";
 
-// File: a01154.xml
+// File: a01207.xml
 
 %feature("docstring") std::complex "
 STL class. ";
 
 
-// File: a01155.xml
-
-%feature("docstring") std::map::const_iterator "
-STL iterator class. ";
-
-
-// File: a01156.xml
-
-%feature("docstring") std::multimap::const_iterator "
-STL iterator class. ";
-
-
-// File: a01149.xml
-
-%feature("docstring") std::basic_string::const_iterator "
-STL iterator class. ";
-
-
-// File: a01157.xml
-
-%feature("docstring") std::set::const_iterator "
-STL iterator class. ";
-
-
-// File: a01158.xml
-
-%feature("docstring") std::multiset::const_iterator "
-STL iterator class. ";
-
-
-// File: a01159.xml
-
-%feature("docstring") std::string::const_iterator "
-STL iterator class. ";
-
-
-// File: a01160.xml
-
-%feature("docstring") std::vector::const_iterator "
-STL iterator class. ";
-
-
-// File: a01161.xml
-
-%feature("docstring") std::wstring::const_iterator "
-STL iterator class. ";
-
-
-// File: a01162.xml
-
-%feature("docstring") std::deque::const_iterator "
-STL iterator class. ";
-
-
-// File: a01163.xml
+// File: a01208.xml
 
 %feature("docstring") std::list::const_iterator "
 STL iterator class. ";
 
 
-// File: a01164.xml
+// File: a01209.xml
+
+%feature("docstring") std::forward_list::const_iterator "
+STL iterator class. ";
+
+
+// File: a01210.xml
+
+%feature("docstring") std::map::const_iterator "
+STL iterator class. ";
+
+
+// File: a01211.xml
+
+%feature("docstring") std::unordered_map::const_iterator "
+STL iterator class. ";
+
+
+// File: a01212.xml
+
+%feature("docstring") std::multimap::const_iterator "
+STL iterator class. ";
+
+
+// File: a01202.xml
+
+%feature("docstring") std::basic_string::const_iterator "
+STL iterator class. ";
+
+
+// File: a01213.xml
+
+%feature("docstring") std::unordered_multimap::const_iterator "
+STL iterator class. ";
+
+
+// File: a01214.xml
+
+%feature("docstring") std::set::const_iterator "
+STL iterator class. ";
+
+
+// File: a01215.xml
+
+%feature("docstring") std::string::const_iterator "
+STL iterator class. ";
+
+
+// File: a01216.xml
+
+%feature("docstring") std::unordered_set::const_iterator "
+STL iterator class. ";
+
+
+// File: a01217.xml
+
+%feature("docstring") std::wstring::const_iterator "
+STL iterator class. ";
+
+
+// File: a01218.xml
+
+%feature("docstring") std::multiset::const_iterator "
+STL iterator class. ";
+
+
+// File: a01219.xml
+
+%feature("docstring") std::unordered_multiset::const_iterator "
+STL iterator class. ";
+
+
+// File: a01220.xml
+
+%feature("docstring") std::vector::const_iterator "
+STL iterator class. ";
+
+
+// File: a01221.xml
+
+%feature("docstring") std::deque::const_iterator "
+STL iterator class. ";
+
+
+// File: a01222.xml
+
+%feature("docstring") std::list::const_reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01223.xml
+
+%feature("docstring") std::forward_list::const_reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01224.xml
 
 %feature("docstring") std::map::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01165.xml
+// File: a01225.xml
+
+%feature("docstring") std::unordered_map::const_reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01226.xml
 
 %feature("docstring") std::multimap::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01166.xml
-
-%feature("docstring") std::set::const_reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01150.xml
+// File: a01203.xml
 
 %feature("docstring") std::basic_string::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01167.xml
+// File: a01227.xml
 
-%feature("docstring") std::multiset::const_reverse_iterator "
+%feature("docstring") std::unordered_multimap::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01168.xml
+// File: a01228.xml
 
-%feature("docstring") std::vector::const_reverse_iterator "
+%feature("docstring") std::set::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01169.xml
+// File: a01229.xml
 
 %feature("docstring") std::string::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01170.xml
+// File: a01230.xml
+
+%feature("docstring") std::unordered_set::const_reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01231.xml
+
+%feature("docstring") std::multiset::const_reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01232.xml
 
 %feature("docstring") std::wstring::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01171.xml
+// File: a01233.xml
 
-%feature("docstring") std::deque::const_reverse_iterator "
+%feature("docstring") std::unordered_multiset::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01172.xml
+// File: a01234.xml
 
-%feature("docstring") std::list::const_reverse_iterator "
+%feature("docstring") std::vector::const_reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01235.xml
+
+%feature("docstring") std::deque::const_reverse_iterator "
 STL iterator class. ";
 
 
@@ -3105,7 +3171,7 @@ void DemUpdater2::print(std::ostream &Os) const
 Print to stream. ";
 
 
-// File: a01173.xml
+// File: a01236.xml
 
 %feature("docstring") std::deque "
 STL class. ";
@@ -3225,7 +3291,7 @@ sink for the data (e.g., creating a gdk_pixbuf). ";
 virtual GeoCal::DisplayStretchStdDev::~DisplayStretchStdDev()
 ";
 
-// File: a01176.xml
+// File: a01239.xml
 
 %feature("docstring") std::domain_error "
 STL class. ";
@@ -3777,6 +3843,24 @@ Set the mapinfo. ";
 virtual ErdasBands::~ErdasBands()
 ";
 
+// File: a01241.xml
+
+%feature("docstring") std::error_category "
+STL class. ";
+
+
+// File: a01242.xml
+
+%feature("docstring") std::error_code "
+STL class. ";
+
+
+// File: a01243.xml
+
+%feature("docstring") std::error_condition "
+STL class. ";
+
+
 // File: a00051.xml
 
 %feature("docstring") GeoCal::Exception "
@@ -3825,7 +3909,7 @@ virtual const char* GeoCal::GeoCalCore::Exception::what() const
 virtual GeoCal::GeoCalCore::Exception::~Exception()
  throw ()";
 
-// File: a00624.xml
+// File: a00633.xml
 
 %feature("docstring") std::exception "
 STL class. ";
@@ -3842,7 +3926,7 @@ F::F(const DemUpdater2 &D, int Line, int Sample)
 virtual F::~F()
 ";
 
-// File: a01178.xml
+// File: a01244.xml
 
 %feature("docstring") std::ios_base::failure "
 STL class. ";
@@ -4113,6 +4197,12 @@ virtual GeoCal::ForstnerFeatureDetector::~ForstnerFeatureDetector()
 Destructor. ";
 
 
+// File: a01252.xml
+
+%feature("docstring") std::forward_list "
+STL class. ";
+
+
 // File: a00058.xml
 
 %feature("docstring") GeoCal::FrameCoordinate "
@@ -4140,7 +4230,7 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01120.xml
+// File: a01173.xml
 
 %feature("docstring") std::fstream "
 STL class. ";
@@ -6296,7 +6386,7 @@ library, otherwise we throw an exception saying that it isn't
 available. ";
 
 
-// File: a01128.xml
+// File: a01181.xml
 
 %feature("docstring") std::ifstream "
 STL class. ";
@@ -7431,22 +7521,22 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01186.xml
+// File: a01255.xml
 
 
-// File: a01180.xml
+// File: a01246.xml
 
 %feature("docstring") std::invalid_argument "
 STL class. ";
 
 
-// File: a01130.xml
+// File: a01183.xml
 
 %feature("docstring") std::ios "
 STL class. ";
 
 
-// File: a01125.xml
+// File: a01178.xml
 
 %feature("docstring") std::ios_base "
 STL class. ";
@@ -8035,75 +8125,105 @@ virtual GeoCal::IpiMapProjected::~IpiMapProjected()
 Destructor. ";
 
 
-// File: a01138.xml
+// File: a01191.xml
 
 %feature("docstring") std::istream "
 STL class. ";
 
 
-// File: a01136.xml
+// File: a01189.xml
 
 %feature("docstring") std::istringstream "
 STL class. ";
 
 
-// File: a01187.xml
-
-%feature("docstring") std::multimap::iterator "
-STL iterator class. ";
-
-
-// File: a01188.xml
-
-%feature("docstring") std::set::iterator "
-STL iterator class. ";
-
-
-// File: a01151.xml
-
-%feature("docstring") std::basic_string::iterator "
-STL iterator class. ";
-
-
-// File: a01189.xml
-
-%feature("docstring") std::multiset::iterator "
-STL iterator class. ";
-
-
-// File: a01190.xml
-
-%feature("docstring") std::vector::iterator "
-STL iterator class. ";
-
-
-// File: a01191.xml
-
-%feature("docstring") std::string::iterator "
-STL iterator class. ";
-
-
-// File: a01192.xml
-
-%feature("docstring") std::wstring::iterator "
-STL iterator class. ";
-
-
-// File: a01174.xml
-
-%feature("docstring") std::deque::iterator "
-STL iterator class. ";
-
-
-// File: a01193.xml
+// File: a01256.xml
 
 %feature("docstring") std::list::iterator "
 STL iterator class. ";
 
 
-// File: a01194.xml
+// File: a01253.xml
+
+%feature("docstring") std::forward_list::iterator "
+STL iterator class. ";
+
+
+// File: a01257.xml
 
 %feature("docstring") std::map::iterator "
+STL iterator class. ";
+
+
+// File: a01258.xml
+
+%feature("docstring") std::unordered_map::iterator "
+STL iterator class. ";
+
+
+// File: a01259.xml
+
+%feature("docstring") std::multimap::iterator "
+STL iterator class. ";
+
+
+// File: a01204.xml
+
+%feature("docstring") std::basic_string::iterator "
+STL iterator class. ";
+
+
+// File: a01260.xml
+
+%feature("docstring") std::unordered_multimap::iterator "
+STL iterator class. ";
+
+
+// File: a01261.xml
+
+%feature("docstring") std::set::iterator "
+STL iterator class. ";
+
+
+// File: a01262.xml
+
+%feature("docstring") std::string::iterator "
+STL iterator class. ";
+
+
+// File: a01263.xml
+
+%feature("docstring") std::unordered_set::iterator "
+STL iterator class. ";
+
+
+// File: a01264.xml
+
+%feature("docstring") std::wstring::iterator "
+STL iterator class. ";
+
+
+// File: a01265.xml
+
+%feature("docstring") std::multiset::iterator "
+STL iterator class. ";
+
+
+// File: a01266.xml
+
+%feature("docstring") std::unordered_multiset::iterator "
+STL iterator class. ";
+
+
+// File: a01267.xml
+
+%feature("docstring") std::vector::iterator "
+STL iterator class. ";
+
+
+// File: a01237.xml
+
+%feature("docstring") std::deque::iterator "
 STL iterator class. ";
 
 
@@ -8265,13 +8385,13 @@ This is in m/s, in same coordinate system as position. ";
 virtual GeoCal::KeplerOrbit::~KeplerOrbit()
 ";
 
-// File: a01181.xml
+// File: a01247.xml
 
 %feature("docstring") std::length_error "
 STL class. ";
 
 
-// File: a01195.xml
+// File: a01268.xml
 
 %feature("docstring") std::list "
 STL class. ";
@@ -8320,7 +8440,7 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01177.xml
+// File: a01240.xml
 
 %feature("docstring") std::logic_error "
 STL class. ";
@@ -9059,7 +9179,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::MagnifyReplicate::~MagnifyReplicate()
 ";
 
-// File: a01197.xml
+// File: a01270.xml
 
 %feature("docstring") std::map "
 STL class. ";
@@ -9808,6 +9928,7 @@ First, the difference in the pan bands is compared to a threshold. The
 difference is normally calculated by DoughnutAverage, using the
 pandif_raster_image. But something else could be used, all this class
 cares about is having a difference it can compare against a threshold.
+
 Compare pan data to a shadow threshold. This masks at very dark pixels
 that we assume are in shadow.
 
@@ -10843,13 +10964,13 @@ Zero_limit2=-1.0, int Zero_thr=0, double Predictor_adjustment[2]=NULL)
 MspiPcorrMatcher::~MspiPcorrMatcher()
 ";
 
-// File: a01199.xml
+// File: a01272.xml
 
 %feature("docstring") std::multimap "
 STL class. ";
 
 
-// File: a01201.xml
+// File: a01274.xml
 
 %feature("docstring") std::multiset "
 STL class. ";
@@ -10886,6 +11007,11 @@ Destructor.
 
 // File: a00125.xml
 
+%feature("docstring") null_deleter "
+";
+
+// File: a00126.xml
+
 %feature("docstring") GeoCal::null_deleter "
 This is a class that can be used to create a boost pointer to a value
 that does not actually claim ownership of the object.
@@ -10894,11 +11020,6 @@ This won't delete anything when the pointer goes out of scope.
 
 C++ includes: null_deleter.h ";
 
-
-// File: a00126.xml
-
-%feature("docstring") null_deleter "
-";
 
 // File: a00127.xml
 
@@ -11049,7 +11170,7 @@ virtual GeoCal::OffsetImageGroundConnection::~OffsetImageGroundConnection()
 Destructor. ";
 
 
-// File: a01141.xml
+// File: a01194.xml
 
 %feature("docstring") std::ofstream "
 STL class. ";
@@ -12066,25 +12187,25 @@ virtual GeoCal::OrbitQuaternionList::~OrbitQuaternionList()
 Destructor. ";
 
 
-// File: a01146.xml
+// File: a01199.xml
 
 %feature("docstring") std::ostream "
 STL class. ";
 
 
-// File: a01144.xml
+// File: a01197.xml
 
 %feature("docstring") std::ostringstream "
 STL class. ";
 
 
-// File: a01182.xml
+// File: a01248.xml
 
 %feature("docstring") std::out_of_range "
 STL class. ";
 
 
-// File: a01183.xml
+// File: a01249.xml
 
 %feature("docstring") std::overflow_error "
 STL class. ";
@@ -12442,7 +12563,7 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01203.xml
+// File: a01276.xml
 
 %feature("docstring") std::priority_queue "
 STL class. ";
@@ -12850,7 +12971,7 @@ Return velocity. ";
 virtual GeoCal::QuaternionOrbitData::~QuaternionOrbitData()
 ";
 
-// File: a01204.xml
+// File: a01277.xml
 
 %feature("docstring") std::queue "
 STL class. ";
@@ -13317,7 +13438,7 @@ Convert from ImageCoordinate to Time and FrameCoordinate. ";
 virtual GeoCal::QuickBirdTimeTable::~QuickBirdTimeTable()
 ";
 
-// File: a01184.xml
+// File: a01250.xml
 
 %feature("docstring") std::range_error "
 STL class. ";
@@ -16283,63 +16404,93 @@ Surface zenith angle in radians, given the space zenith angles. ";
 virtual GeoCal::Refraction::~Refraction()
 ";
 
-// File: a01200.xml
-
-%feature("docstring") std::multimap::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01205.xml
+// File: a01278.xml
 
 %feature("docstring") std::string::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01206.xml
-
-%feature("docstring") std::set::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01198.xml
-
-%feature("docstring") std::map::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01152.xml
+// File: a01205.xml
 
 %feature("docstring") std::basic_string::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01207.xml
+// File: a01279.xml
 
-%feature("docstring") std::wstring::reverse_iterator "
+%feature("docstring") std::unordered_map::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01196.xml
+// File: a01280.xml
 
-%feature("docstring") std::list::reverse_iterator "
+%feature("docstring") std::unordered_multiset::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01175.xml
+// File: a01281.xml
 
-%feature("docstring") std::deque::reverse_iterator "
+%feature("docstring") std::vector::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01202.xml
+// File: a01271.xml
+
+%feature("docstring") std::map::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01273.xml
+
+%feature("docstring") std::multimap::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01282.xml
+
+%feature("docstring") std::unordered_set::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01275.xml
 
 %feature("docstring") std::multiset::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01208.xml
+// File: a01269.xml
 
-%feature("docstring") std::vector::reverse_iterator "
+%feature("docstring") std::list::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01254.xml
+
+%feature("docstring") std::forward_list::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01283.xml
+
+%feature("docstring") std::wstring::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01284.xml
+
+%feature("docstring") std::set::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01285.xml
+
+%feature("docstring") std::unordered_multimap::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01238.xml
+
+%feature("docstring") std::deque::reverse_iterator "
 STL iterator class. ";
 
 
@@ -17100,7 +17251,7 @@ virtual GeoCal::RpcImageGroundConnection::~RpcImageGroundConnection()
 Destructor. ";
 
 
-// File: a01179.xml
+// File: a01245.xml
 
 %feature("docstring") std::runtime_error "
 STL class. ";
@@ -17494,7 +17645,7 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual GeoCal::SdpToolkitTimeInterface::~SdpToolkitTimeInterface()
 ";
 
-// File: a01209.xml
+// File: a01286.xml
 
 %feature("docstring") std::set "
 STL class. ";
@@ -17727,7 +17878,7 @@ The default data is for the nominal MISR DF, red band. ";
 virtual GeoCal::SimplePushBroomCamera::~SimplePushBroomCamera()
 ";
 
-// File: a01210.xml
+// File: a01287.xml
 
 %feature("docstring") std::smart_ptr "
 STL class. ";
@@ -18516,7 +18667,7 @@ given point. ";
 virtual GeoCal::SrtmDem::~SrtmDem()
 ";
 
-// File: a01211.xml
+// File: a01288.xml
 
 %feature("docstring") std::stack "
 STL class. ";
@@ -18582,13 +18733,13 @@ GeoCal::Statistic::Statistic()
 Constructor. ";
 
 
-// File: a00700.xml
+// File: a00715.xml
 
 %feature("docstring") std::string "
 STL class. ";
 
 
-// File: a01133.xml
+// File: a01186.xml
 
 %feature("docstring") std::stringstream "
 STL class. ";
@@ -18939,6 +19090,12 @@ Constructor, where we supply the already map projected data. ";
 virtual GeoCal::SurfaceImageToImageMatch::~SurfaceImageToImageMatch()
 ";
 
+// File: a01289.xml
+
+%feature("docstring") std::system_error "
+STL class. ";
+
+
 // File: a00193.xml
 
 %feature("docstring") GeoCal::VicarOgrNsp::TempFile "
@@ -18949,6 +19106,12 @@ GeoCal::VicarOgrNsp::TempFile::TempFile()
 %feature("docstring")  GeoCal::VicarOgrNsp::TempFile::~TempFile "
 GeoCal::VicarOgrNsp::TempFile::~TempFile()
 ";
+
+// File: a01290.xml
+
+%feature("docstring") std::thread "
+STL class. ";
+
 
 // File: a00194.xml
 
@@ -19596,13 +19759,13 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual GeoCal::ToolkitTimeInterface::~ToolkitTimeInterface()
 ";
 
-// File: a01185.xml
+// File: a01251.xml
 
 %feature("docstring") std::underflow_error "
 STL class. ";
 
 
-// File: a01212.xml
+// File: a01291.xml
 
 %feature("docstring") std::unique_ptr "
 STL class. ";
@@ -19630,13 +19793,37 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual UnixToolkitTimeInterface::~UnixToolkitTimeInterface()
 ";
 
-// File: a01213.xml
+// File: a01292.xml
+
+%feature("docstring") std::unordered_map "
+STL class. ";
+
+
+// File: a01293.xml
+
+%feature("docstring") std::unordered_multimap "
+STL class. ";
+
+
+// File: a01294.xml
+
+%feature("docstring") std::unordered_multiset "
+STL class. ";
+
+
+// File: a01295.xml
+
+%feature("docstring") std::unordered_set "
+STL class. ";
+
+
+// File: a01296.xml
 
 %feature("docstring") std::valarray "
 STL class. ";
 
 
-// File: a01214.xml
+// File: a01297.xml
 
 %feature("docstring") std::vector "
 STL class. ";
@@ -21519,43 +21706,43 @@ virtual GeoCal::VicarTiledFile< T >::~VicarTiledFile()
 Destructor. ";
 
 
-// File: a01215.xml
+// File: a01298.xml
 
 %feature("docstring") std::weak_ptr "
 STL class. ";
 
 
-// File: a01121.xml
+// File: a01174.xml
 
 %feature("docstring") std::wfstream "
 STL class. ";
 
 
-// File: a01129.xml
+// File: a01182.xml
 
 %feature("docstring") std::wifstream "
 STL class. ";
 
 
-// File: a01131.xml
+// File: a01184.xml
 
 %feature("docstring") std::wios "
 STL class. ";
 
 
-// File: a01139.xml
+// File: a01192.xml
 
 %feature("docstring") std::wistream "
 STL class. ";
 
 
-// File: a01137.xml
+// File: a01190.xml
 
 %feature("docstring") std::wistringstream "
 STL class. ";
 
 
-// File: a01142.xml
+// File: a01195.xml
 
 %feature("docstring") std::wofstream "
 STL class. ";
@@ -21568,9 +21755,10 @@ This create a cloud mask using WorldView2 mulispectral data.
 
 This cloud mask has two parts:
 
-A simple threshold on the coastal blue band to detect clouds. A ratio
-comparision of (band 8 - band 1) / band 1 < threshold to detect cloud
-shadows.
+A simple threshold on the coastal blue band to detect clouds.
+
+A ratio comparision of (band 8 - band 1) / band 1 < threshold to
+detect cloud shadows.
 
 To help with false positives, we have a minimum cloud size. This is
 used to average the data, and only if the lower resolution data shows
@@ -21998,25 +22186,25 @@ can implement more efficient versions of this. ";
 virtual WorldView2CloudMaskHelper::~WorldView2CloudMaskHelper()
 ";
 
-// File: a01147.xml
+// File: a01200.xml
 
 %feature("docstring") std::wostream "
 STL class. ";
 
 
-// File: a01145.xml
+// File: a01198.xml
 
 %feature("docstring") std::wostringstream "
 STL class. ";
 
 
-// File: a01148.xml
+// File: a01201.xml
 
 %feature("docstring") std::wstring "
 STL class. ";
 
 
-// File: a01134.xml
+// File: a01187.xml
 
 %feature("docstring") std::wstringstream "
 STL class. ";
@@ -23690,55 +23878,55 @@ BOOST_AUTO_TEST_CASE(Match12_AutoThresh_Case)
 // File: a00530.xml
 
 
-// File: dir_a6b25effbb55561dae9229c79c93c63e.xml
+// File: dir_e3c950c503af0d29a94f9d2411001540.xml
 
 
-// File: dir_7fabc8d5070d50884683d36eb053c403.xml
+// File: dir_e4fb1bdd54a1a4645acf9adad6425614.xml
 
 
-// File: dir_76ba507cc6a93ebb72deddd6ba40c7e3.xml
+// File: dir_0e47e45d8ef4a23a30c4a21f588080ec.xml
 
 
-// File: dir_d45a3f9edce04836d13f7ef2a9102345.xml
+// File: dir_04cb3c2a39956f40865d2f339d5da087.xml
 
 
-// File: dir_60040d7d2cf9b2bc7a600298af4645df.xml
+// File: dir_8aea0434caf14e47b01eff1351e30760.xml
 
 
-// File: dir_c1d3ed369cad375590d2eec6d31c4e9d.xml
+// File: dir_3bd603cd31b0aa334cbb465e79004331.xml
 
 
-// File: dir_17b4e6a7d1a48f7833ad4df3da9d97c1.xml
+// File: dir_66123305a919358161846d878ad6da9b.xml
 
 
-// File: dir_baeee0ec13135f84838c512a2d5d914b.xml
+// File: dir_f1f3c50d6c24ade81914cee87cd15f6b.xml
 
 
-// File: dir_4a71c87774650963f5de8ca88e60aa6a.xml
+// File: dir_c695e4760f5b677b37300ef6aabea724.xml
 
 
-// File: dir_1a6f470301e258b799b06938ccba281a.xml
+// File: dir_7837fde3ab9c1fb2fc5be7b717af8d79.xml
 
 
-// File: dir_a6c12f8f1af1f2b3deecee3f933aa002.xml
+// File: dir_d28a1561714a1b205019d34df1e8fef9.xml
 
 
-// File: dir_534339b2083d3042109d34871b65c676.xml
+// File: dir_d236c901a5cb7ed58839f950287d156f.xml
 
 
-// File: dir_ee259ff6bfea30afc6b7c1d3b3c37616.xml
+// File: dir_6a35a669724cafba0f8e713c23b72912.xml
 
 
-// File: dir_60b44e9a0c43c2a9f6d443aed2802640.xml
+// File: dir_8fade57c89df1280866cb17a5673c84a.xml
 
 
-// File: dir_f164c57b43fe6fabe78875aa197ef072.xml
+// File: dir_f0c3ea8e89c97f4ab686258b82e32f01.xml
 
 
-// File: dir_8fce7f51ecd623c3f4945b28e6d42e12.xml
+// File: dir_edea5628604ba6a75bb9b6674e32a8fa.xml
 
 
-// File: dir_279223300cf58ec0c1ef6de27b4010fa.xml
+// File: dir_889f1817e8f9cf923f07da4fc0f91f14.xml
 
 
 // File: indexpage.xml

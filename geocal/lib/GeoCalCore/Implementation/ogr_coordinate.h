@@ -21,6 +21,7 @@ namespace GeoCal {
 class OgrWrapper : public boost::noncopyable,
 	           public Printable<OgrWrapper>  {
 public:
+  OgrWrapper(const std::string& Wkt);
   OgrWrapper(const boost::shared_ptr<OGRSpatialReference>& Ogr);
   static boost::shared_ptr<OgrWrapper> from_epsg(int Epsg_id);
   virtual ~OgrWrapper();
@@ -48,10 +49,12 @@ public:
   {return *ogr_inverse_transform_;}
 
   std::string pretty_wkt() const;
+  std::string wkt() const;
   void print(std::ostream& Os) const;  
   std::string projected_cs_type_geo_key() const;
   std::string pcs_citation_geo_key() const;
 private:
+  void init(const boost::shared_ptr<OGRSpatialReference>& Ogr);
   boost::shared_ptr<OGRSpatialReference> ogr_;
   OGRCoordinateTransformation* ogr_transform_;
   OGRCoordinateTransformation* ogr_inverse_transform_;

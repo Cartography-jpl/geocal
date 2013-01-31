@@ -9,12 +9,19 @@
 #include "eci_tod.h"
 #include "eci_tod.h"
 #include "eci_tod_burl.h"
+#include "ogr_coordinate.h"
 %}
 
 %geocal_shared_ptr(GroundCoordinate);
 %geocal_shared_ptr(CartesianFixed);
 %geocal_shared_ptr(CartesianInertial);
 
+%shared_ptr_dynamic_list(GeoCal::GroundCoordinate,
+			 GeoCal::Ecr,
+			 GeoCal::Geocentric,
+			 GeoCal::Geodetic,
+			 GeoCal::OgrCoordinate,
+			 GeoCal::CartesianFixed);
 %shared_ptr_dynamic_list(GeoCal::CartesianInertial,
 			 GeoCal::Eci,
 			 GeoCal::EciTod,

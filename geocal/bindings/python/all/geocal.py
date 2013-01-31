@@ -9460,7 +9460,7 @@ class OgrWrapper(object):
     def __init__(self, *args): 
         """
         OgrWrapper::OgrWrapper(const boost::shared_ptr< OGRSpatialReference > &Ogr)
-        Constructor. 
+        Constructor, from an existing OGRSpatialReference. 
         """
         _geocal.OgrWrapper_swiginit(self,_geocal.new_OgrWrapper(*args))
     def from_epsg(*args):
@@ -9538,6 +9538,28 @@ class OgrWrapper(object):
     def pcs_citation_geo_key(self):
         return self._pcs_citation_geo_key()
 
+    def _wkt(self):
+        """
+        std::string OgrWrapper::wkt() const
+        Write out a the WKT (Well Known Text) for ogr_. 
+        """
+        return _geocal.OgrWrapper__wkt(self)
+
+    @property
+    def wkt(self):
+        return self._wkt()
+
+    def _pretty_wkt(self):
+        """
+        std::string OgrWrapper::pretty_wkt() const
+        Write out a prettified version of the WKT for ogr_. 
+        """
+        return _geocal.OgrWrapper__pretty_wkt(self)
+
+    @property
+    def pretty_wkt(self):
+        return self._pretty_wkt()
+
     def __str__(self):
         """
         std::string GeoCal::Printable< OgrWrapper  >::print_to_string() const
@@ -9548,12 +9570,17 @@ class OgrWrapper(object):
         """
         return _geocal.OgrWrapper___str__(self)
 
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, self.wkt)
+
     __swig_destroy__ = _geocal.delete_OgrWrapper
 OgrWrapper._ogr = new_instancemethod(_geocal.OgrWrapper__ogr,None,OgrWrapper)
 OgrWrapper._transform = new_instancemethod(_geocal.OgrWrapper__transform,None,OgrWrapper)
 OgrWrapper._inverse_transform = new_instancemethod(_geocal.OgrWrapper__inverse_transform,None,OgrWrapper)
 OgrWrapper._projected_cs_type_geo_key = new_instancemethod(_geocal.OgrWrapper__projected_cs_type_geo_key,None,OgrWrapper)
 OgrWrapper._pcs_citation_geo_key = new_instancemethod(_geocal.OgrWrapper__pcs_citation_geo_key,None,OgrWrapper)
+OgrWrapper._wkt = new_instancemethod(_geocal.OgrWrapper__wkt,None,OgrWrapper)
+OgrWrapper._pretty_wkt = new_instancemethod(_geocal.OgrWrapper__pretty_wkt,None,OgrWrapper)
 OgrWrapper.__str__ = new_instancemethod(_geocal.OgrWrapper___str__,None,OgrWrapper)
 OgrWrapper_swigregister = _geocal.OgrWrapper_swigregister
 OgrWrapper_swigregister(OgrWrapper)
@@ -9627,6 +9654,9 @@ class OgrCoordinate(GroundCoordinate):
         return _geocal.OgrCoordinate_to_utm(*args)
 
     to_utm = staticmethod(to_utm)
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, self.ogr,self.x,self.y,self.z)
+
     __swig_destroy__ = _geocal.delete_OgrCoordinate
 OgrCoordinate.to_geodetic = new_instancemethod(_geocal.OgrCoordinate_to_geodetic,None,OgrCoordinate)
 OgrCoordinate._ogr = new_instancemethod(_geocal.OgrCoordinate__ogr,None,OgrCoordinate)
@@ -9678,6 +9708,9 @@ class OgrCoordinateConverter(CoordinateConverter):
         OgrWrapper projection. 
         """
         return _geocal.OgrCoordinateConverter_convert_from_coordinate(self, *args)
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, self.ogr)
 
     __swig_destroy__ = _geocal.delete_OgrCoordinateConverter
 OgrCoordinateConverter._ogr = new_instancemethod(_geocal.OgrCoordinateConverter__ogr,None,OgrCoordinateConverter)

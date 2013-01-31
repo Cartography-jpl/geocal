@@ -3,13 +3,15 @@
 %module geocal
 %{
 #include "coordinate_converter.h"
+#include "ogr_coordinate.h"
 %}
 
 %geocal_shared_ptr(CoordinateConverter);
 %geocal_shared_ptr(GeodeticConverter);
 
 %shared_ptr_dynamic_list(GeoCal::CoordinateConverter,
-			 GeoCal::GeodeticConverter)
+			 GeoCal::GeodeticConverter,
+			 GeoCal::OgrCoordinateConverter)
 
 namespace GeoCal {
 class CoordinateConverter {

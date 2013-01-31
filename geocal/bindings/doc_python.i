@@ -11216,8 +11216,13 @@ Return underlying OGRSpatialReference. ";
 const boost::shared_ptr<OGRSpatialReference>& GeoCal::OgrWrapper::ogr_ptr() const
 ";
 %feature("docstring")  GeoCal::OgrWrapper::OgrWrapper "
+OgrWrapper::OgrWrapper(const std::string &Wkt)
+Constructor that creates a OGRSpatialReference from a WKT (Well Known
+Text) string. ";
+
+%feature("docstring")  GeoCal::OgrWrapper::OgrWrapper "
 OgrWrapper::OgrWrapper(const boost::shared_ptr< OGRSpatialReference > &Ogr)
-Constructor. ";
+Constructor, from an existing OGRSpatialReference. ";
 
 %feature("docstring")  GeoCal::OgrWrapper::pcs_citation_geo_key "
 std::string OgrWrapper::pcs_citation_geo_key() const
@@ -11252,6 +11257,10 @@ This is just the EPSG id written as text. ";
 const OGRCoordinateTransformation& GeoCal::OgrWrapper::transform() const
 Return transformation that takes us from our coordinate system to
 Geodetic. ";
+
+%feature("docstring")  GeoCal::OgrWrapper::wkt "
+std::string OgrWrapper::wkt() const
+Write out a the WKT (Well Known Text) for ogr_. ";
 
 %feature("docstring")  GeoCal::OgrWrapper::~OgrWrapper "
 OgrWrapper::~OgrWrapper()

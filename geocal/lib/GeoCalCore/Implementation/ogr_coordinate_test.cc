@@ -37,6 +37,10 @@ BOOST_AUTO_TEST_CASE(ogr_wrapper)
   BOOST_CHECK_EQUAL(ogrw->projected_cs_type_geo_key(), std::string("32612"));
   BOOST_CHECK_EQUAL(ogrw->pcs_citation_geo_key(), 
 		    std::string("WGS 84 / UTM zone 12N"));
+  OgrWrapper ogrw2(ogrw->wkt());
+  BOOST_CHECK_EQUAL(ogrw2.projected_cs_type_geo_key(), std::string("32612"));
+  BOOST_CHECK_EQUAL(ogrw2.pcs_citation_geo_key(), 
+		    std::string("WGS 84 / UTM zone 12N"));
 }
 
 BOOST_AUTO_TEST_CASE(ogr_coordinate_converter)

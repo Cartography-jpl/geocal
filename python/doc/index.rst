@@ -11,6 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   generate_dem
    image_ground
    sba
    vicar

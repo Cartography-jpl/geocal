@@ -12,6 +12,7 @@
 namespace GeoCal {
 class OgrWrapper {
 public:
+  OgrWrapper(const std::string& Wkt);
   OgrWrapper(const boost::shared_ptr<OGRSpatialReference>& Ogr);
   static boost::shared_ptr<OgrWrapper> from_epsg(int Epsg_id);
   %python_attribute2(ogr, ogr_ptr, boost::shared_ptr<OGRSpatialReference>)
@@ -19,7 +20,10 @@ public:
   %python_attribute(inverse_transform, const OGRCoordinateTransformation&)
   %python_attribute(projected_cs_type_geo_key, std::string)
   %python_attribute(pcs_citation_geo_key, std::string)
+  %python_attribute(wkt, std::string)
+  %python_attribute(pretty_wkt, std::string)
   std::string print_to_string() const;
+  %pickle_init(self.wkt)
 };
 
 class OgrCoordinate : public GroundCoordinate {
@@ -35,6 +39,7 @@ public:
   double y;
   double z;
   static OgrCoordinate to_utm(const Geodetic& Gc, int zone = -999);
+  %pickle_init(self.ogr, self.x, self.y, self.z)
 };
 
 class OgrCoordinateConverter : public CoordinateConverter {
@@ -45,6 +50,7 @@ public:
     convert_from_coordinate(double X, double Y, double Height = 0) const;
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
 			       double& Y, double& Height) const;
+  %pickle_init(self.ogr)
 };
 
 }

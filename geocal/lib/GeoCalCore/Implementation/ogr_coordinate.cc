@@ -9,12 +9,41 @@ using namespace GeoCal;
 boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_geodetic;
 
 //-----------------------------------------------------------------------
-/// Constructor
+/// Constructor that creates a OGRSpatialReference from a WKT (Well
+/// Known Text) string.
+//-----------------------------------------------------------------------
+
+OgrWrapper::OgrWrapper(const std::string& Wkt)
+{
+  boost::shared_ptr<OGRSpatialReference> ogr_create(new OGRSpatialReference);
+  char* wkt_str = const_cast<char*>(Wkt.c_str());
+  OGRErr status = ogr_create->importFromWkt(&wkt_str);
+  if(status != OGRERR_NONE) {
+    Exception e;
+    e << "Create of OGRSpatialReference failed. "
+      << "The WKT (Well Known Text) was:\n"
+      << Wkt;
+    throw e;
+  }
+  init(ogr_create);
+}
+
+//-----------------------------------------------------------------------
+/// Constructor, from an existing OGRSpatialReference
 //-----------------------------------------------------------------------
 
 OgrWrapper::OgrWrapper(const boost::shared_ptr<OGRSpatialReference>& Ogr)
-  : ogr_(Ogr)
 {
+  init(Ogr);
+}
+
+//-----------------------------------------------------------------------
+/// Initialize, given a OGRSpatialReference
+//-----------------------------------------------------------------------
+
+void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
+{
+  ogr_ = Ogr;
   if(!ogr_geodetic.get()) {
     ogr_geodetic.reset(new OGRSpatialReference);
     ogr_geodetic->SetWellKnownGeogCS("WGS84");
@@ -82,6 +111,19 @@ std::string OgrWrapper::pretty_wkt() const
 {
   char *res;
   ogr_->exportToPrettyWkt(&res);
+  std::string ress(res);
+  OGRFree(res);
+  return ress;
+}
+
+//-----------------------------------------------------------------------
+/// Write out a the WKT (Well Known Text) for ogr_.
+//-----------------------------------------------------------------------
+
+std::string OgrWrapper::wkt() const
+{
+  char *res;
+  ogr_->exportToWkt(&res);
   std::string ress(res);
   OGRFree(res);
   return ress;

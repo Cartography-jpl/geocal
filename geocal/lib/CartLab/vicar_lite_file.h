@@ -42,7 +42,8 @@ public:
 //-----------------------------------------------------------------------
 
   enum access_type {READ, WRITE, UPDATE};
-  VicarLiteFile(const std::string& Fname, access_type Access = READ);
+  VicarLiteFile(const std::string& Fname, access_type Access = READ,
+		bool Force_area_pixel = false);
   VicarLiteFile(const std::string& Fname, int Number_line, int Number_sample,
 	    const std::string& Type = "BYTE");
   virtual ~VicarLiteFile() {}
@@ -52,6 +53,16 @@ public:
 //-----------------------------------------------------------------------
 
   access_type access() const {return access_;}
+
+//-----------------------------------------------------------------------
+/// If true, then force the file to be treated as "pixel is area".
+/// This is really just meant as a work around for the SRTM data,
+/// which incorrectly labels the data as "point" rather than
+/// "area". Since this is a 15 meter difference, it matters for many
+/// applications. Most users should just ignore this value.
+//-----------------------------------------------------------------------
+
+  bool force_area_pixel() const { return force_area_pixel_; }
 
 //-----------------------------------------------------------------------
 /// Offset to where the data starts.
@@ -180,6 +191,7 @@ private:
   std::set<std::string> prop_set_; ///<List of properties.
   int data_offset_;
   std::string fname_;
+  bool force_area_pixel_;
   int number_line_;
   int number_sample_;
   int number_band_;
@@ -471,13 +483,21 @@ public:
 
 //-----------------------------------------------------------------------
 /// Constructor.
+///
+/// The Force_area_pixel forces the file to be treated as
+/// "pixel as area" rather than "pixel as point". This is really just
+/// meant as a work around for the SRTM data, which incorrectly labels
+/// the data as "point" rather than "area". Since this is a 15 meter
+/// difference, it matters for many applications. Most users should
+/// just ignore this value.
 //-----------------------------------------------------------------------
 
   VicarLiteRasterImage(const std::string& Fname, 
 		       access_type Access = VicarLiteFile::READ,
 		       int Band = 0, int Number_tile_line = -1,
-		       int Number_tile_sample = -1)
-    : band_(Band), f_(new VicarLiteFile(Fname, Access))
+		       int Number_tile_sample = -1,
+		       bool Force_area_pixel = false)
+    : band_(Band), f_(new VicarLiteFile(Fname, Access, Force_area_pixel))
   {
     number_line_ = f_->number_line();
     number_sample_ = f_->number_sample();

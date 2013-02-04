@@ -15,11 +15,13 @@ public:
   enum data_type {VICAR_BYTE, VICAR_HALF, VICAR_FULL, VICAR_FLOAT,
 		  VICAR_DOUBLE};
   enum access_type {READ, WRITE, UPDATE};
-  VicarLiteFile(const std::string& Fname, access_type Access = READ);
+  VicarLiteFile(const std::string& Fname, access_type Access = READ,
+		bool Force_area_pixel = false);
   VicarLiteFile(const std::string& Fname, int Number_line, int Number_sample,
 	    const std::string& Type = "BYTE");
   ~VicarLiteFile();
   %python_attribute(access, access_type)
+  %python_attribute(force_area_pixel, bool)
   %python_attribute(data_offset, int)
   %python_attribute(file_name, std::string)
   static bool is_vicar_file(const std::string& Fname);
@@ -41,7 +43,7 @@ public:
        return k;
     }
   }	
-  %pickle_init(self.file_name, self.access)
+  %pickle_init(self.file_name, self.access, self.force_area_pixel)
 };
 
 class VicarLiteRasterImage : public RasterImage {
@@ -50,14 +52,16 @@ public:
   VicarLiteRasterImage(const std::string& Fname, 
 		       access_type Access = VicarLiteFile::READ,
 		       int Band = 0, int Number_tile_line = -1,
-		       int Number_tile_sample = -1);
+		       int Number_tile_sample = -1,
+		       bool Force_area_pixel = false);
   virtual ~VicarLiteRasterImage();
   %python_attribute2(file, file_ptr, boost::shared_ptr<VicarLiteFile>)
   virtual void write(int Line, int Sample, int Val);
   %python_attribute(is_compressed, bool)
   %python_attribute(band, int)
   %pickle_init(self.file.file_name, self.file.access, self.band,
-	       self.number_tile_line, self.number_tile_sample)
+	       self.number_tile_line, self.number_tile_sample,
+	       self.file.force_area_pixel)
 };
 
 class VicarLiteDem : public DemMapInfo {

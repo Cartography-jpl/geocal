@@ -22,11 +22,20 @@ bool VicarLiteFile::is_vicar_file(const std::string& Fname)
 
 //-----------------------------------------------------------------------
 /// Open an existing VICAR file for reading or update.
+///
+/// The Force_area_pixel forces the file to be treated as
+/// "pixel as area" rather than "pixel as point". This is really just
+/// meant as a work around for the SRTM data, which incorrectly labels
+/// the data as "point" rather than "area". Since this is a 15 meter
+/// difference, it matters for many applications. Most users should
+/// just ignore this value.
 //-----------------------------------------------------------------------
 
-VicarLiteFile::VicarLiteFile(const std::string& Fname, access_type Access)
+VicarLiteFile::VicarLiteFile(const std::string& Fname, access_type Access,
+			     bool Force_area_pixel)
   : access_(Access),
     fname_(Fname), 
+    force_area_pixel_(Force_area_pixel),
     f_(new std::fstream(Fname.c_str(), (Access ==READ ? std::ios_base::in :
        std::ios_base::in | std::ios_base::out)))
 {
@@ -153,7 +162,8 @@ VicarLiteFile::VicarLiteFile(const std::string& Fname, access_type Access)
 VicarLiteFile::VicarLiteFile(const std::string& Fname, int Number_line, 
 		     int Number_sample, const std::string& Type)
 : access_(VicarLiteFile::WRITE),
-  fname_(Fname), number_line_(Number_line), 
+  fname_(Fname), force_area_pixel_(false),
+  number_line_(Number_line), 
   number_sample_(Number_sample)
 {
   throw Exception("Not implemented yet");
@@ -335,7 +345,7 @@ MapInfo VicarLiteFile::map_info() const
     std::istringstream ise(label<string>("GTRASTERTYPEGEOKEY", "GEOTIFF"));
     int rt_id;
     ise >> rt_id;
-    if(rt_id ==2) {		// Point type
+    if(rt_id ==2 && !force_area_pixel_) {		// Point type
       lon -= 0.5 * lon_scale;
       lat -= 0.5 * lat_scale;
     }

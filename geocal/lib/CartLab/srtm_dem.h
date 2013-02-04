@@ -6,6 +6,24 @@
 namespace GeoCal {
 /****************************************************************//**
   This class provides access to the SRTM.
+
+  Note comment from Tom about this data:
+  
+  The srtm_filled data were prepared back in 2003. The goal was to
+  create a quick and dirty global data set, which means the data came
+  from a variety of sources, scales, datums, and accuracy. At that
+  time, a half pixel error was well below the threshold of concern
+  (15-30 was high resolution back then). So, point and area data were
+  often mixed in the void filling process, and some regional areas
+  (not covered by srtm) were carved into quadrangles and retained
+  their individual pixel types. I know its a mess, but the bottom line
+  is that the data are not accurate to half a pixel, which makes the
+  'point vs. area' discuss not really relevant.
+
+  The SRTM VICAR files incorrectly label the data as "pixel is point",
+  when really this is "pixel is area". This matters, because it is a
+  1/2 pixel shift.  The code overrides what the VICAR files says, and
+  treats it as "area" rather than "pixel".
 *******************************************************************/
 
 class SrtmDem : public DemMapInfo {

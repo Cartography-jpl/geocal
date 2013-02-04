@@ -78,8 +78,8 @@ EXTRA_DIST+= afids_python/geocal/lib/test_all.sh
 # Variables used in testing
 export abs_top_srcdir 
 export run_test = *
-export AFIDS_VDEV_DATA = $(datavdevdir)
-export ELEV_ROOT = $(srtml2dir)
+export AFIDS_VDEV_DATA = $(AFIDS_DATA)/vdev
+export ELEV_ROOT = $(AFIDS_DATA)/srtmL2_filled
 export VICAR_GDALPLUGIN_HOME
 export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
 

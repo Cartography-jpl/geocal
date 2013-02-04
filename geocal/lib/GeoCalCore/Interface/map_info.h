@@ -181,6 +181,7 @@ private:
   int number_x_pixel_;          ///< Number of X pixels in image
   int number_y_pixel_;		///< Number of Y pixels in image
   blitz::Array<double, 1> param; ///< Affine parameters.
+  void latitude_range_correct();
 };
 }
 

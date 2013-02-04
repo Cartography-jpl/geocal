@@ -37,6 +37,7 @@ MapInfo::MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv,
     number_x_pixel_ = 0;
     number_y_pixel_ = 0;
   }
+  latitude_range_correct();
 }
 
 //-----------------------------------------------------------------------
@@ -63,6 +64,7 @@ MapInfo::MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv,
     number_x_pixel_ = 0;
     number_y_pixel_ = 0;
   }
+  latitude_range_correct();
 }
 
 //-----------------------------------------------------------------------
@@ -273,5 +275,17 @@ MapInfo MapInfo::scale(double Number_x_per_pixel,
   return res;
 }
 
+//-----------------------------------------------------------------------
+/// We can read data sets that use longitude out of our convention of
+/// -180.0 to 180.0. This is not an error, it is just different than
+/// our convention. But in this case, we need to change to our convention.
+//-----------------------------------------------------------------------
+
+void MapInfo::latitude_range_correct()
+{
+  if(dynamic_cast<const GeodeticConverter*>(conv_.get()) &&
+     param(0) >= 180)
+    param(0) -= 360;
+}
   
 

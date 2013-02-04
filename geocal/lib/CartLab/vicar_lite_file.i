@@ -17,8 +17,14 @@ public:
   enum access_type {READ, WRITE, UPDATE};
   VicarLiteFile(const std::string& Fname, access_type Access = READ,
 		bool Force_area_pixel = false);
+  // Because SWIG squashes some types together, it can't tell the
+  // difference between this constructor and the read
+  // constructor. Remove the default Type, and it can then tell the
+  // difference
+  // VicarLiteFile(const std::string& Fname, int Number_line, int Number_sample,
+  //	    const std::string& Type = "BYTE");
   VicarLiteFile(const std::string& Fname, int Number_line, int Number_sample,
-	    const std::string& Type = "BYTE");
+		const std::string& Type);
   ~VicarLiteFile();
   %python_attribute(access, access_type)
   %python_attribute(force_area_pixel, bool)

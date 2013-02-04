@@ -25,6 +25,7 @@ public:
 	    compression C = NONE);
   ~VicarFile();
   %python_attribute(access, access_type)
+  %python_attribute(force_area_pixel, bool)
   %python_attribute(file_name, std::string)
   static bool is_vicar_file(const std::string& Fname);
   static int file_name_to_unit(const std::string& Fname);
@@ -71,5 +72,6 @@ public:
      { return std::vector<std::string>($self->property().begin(), $self->property().end());}
 
   }	
+  %pickle_init(self.file_name, self.access, self.force_area_pixel)
 };
 }

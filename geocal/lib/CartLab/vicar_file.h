@@ -87,7 +87,8 @@ public:
 
   enum access_type {READ, WRITE, UPDATE};
   enum compression {NONE, BASIC, BASIC2};
-  VicarFile(const std::string& Fname, access_type Access = READ);
+  VicarFile(const std::string& Fname, access_type Access = READ,
+	    bool Force_area_pixel = false);
   VicarFile(const std::string& Fname, int Number_line, int Number_sample,
 	    const std::string& Type = "BYTE",
 	    compression C = NONE);
@@ -104,6 +105,16 @@ public:
 //-----------------------------------------------------------------------
 
   access_type access() const {return access_;}
+
+//-----------------------------------------------------------------------
+/// If true, then force the file to be treated as "pixel is area".
+/// This is really just meant as a work around for the SRTM data,
+/// which incorrectly labels the data as "point" rather than
+/// "area". Since this is a 15 meter difference, it matters for many
+/// applications. Most users should just ignore this value.
+//-----------------------------------------------------------------------
+
+  bool force_area_pixel() const { return force_area_pixel_; }
 
 //-----------------------------------------------------------------------
 /// File name
@@ -234,6 +245,7 @@ private:
 				///< Cache of MapInfo information.
   std::set<std::string> prop_set_; ///<List of properties.
   std::string fname_;
+  bool force_area_pixel_;
   int unit_;
   mutable int number_line_;
   mutable int number_sample_;

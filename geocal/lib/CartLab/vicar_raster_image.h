@@ -18,12 +18,20 @@ public:
 
 //-----------------------------------------------------------------------
 /// Open an existing VICAR file for reading or update.
+///
+/// The Force_area_pixel forces the file to be treated as
+/// "pixel as area" rather than "pixel as point". This is really just
+/// meant as a work around for the SRTM data, which incorrectly labels
+/// the data as "point" rather than "area". Since this is a 15 meter
+/// difference, it matters for may applications. Most users should
+/// just ignore this value.
 //-----------------------------------------------------------------------
 
   VicarRasterImage(const std::string& Fname, 
 		   access_type Access = VicarFile::READ,
-		   int Number_line_per_tile = 100, int Number_tile = 4)
-    : vicar_file_(new VicarFile(Fname, Access))
+		   int Number_line_per_tile = 100, int Number_tile = 4,
+		   bool Force_area_pixel = false)
+    : vicar_file_(new VicarFile(Fname, Access, Force_area_pixel))
   {
     initialize(Number_line_per_tile, Number_tile);
   }

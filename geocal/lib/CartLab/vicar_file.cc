@@ -65,10 +65,19 @@ bool VicarFile::is_vicar_file(const std::string& Fname)
 
 //-----------------------------------------------------------------------
 /// Open an existing VICAR file for reading or update.
+///
+/// The Force_area_pixel forces the file to be treated as
+/// "pixel as area" rather than "pixel as point". This is really just
+/// meant as a work around for the SRTM data, which incorrectly labels
+/// the data as "point" rather than "area". Since this is a 15 meter
+/// difference, it matters for may applications. Most users should
+/// just ignore this value.
 //-----------------------------------------------------------------------
 
-VicarFile::VicarFile(const std::string& Fname, access_type Access)
-: fname_(Fname), unit_(-1), access_(Access)
+VicarFile::VicarFile(const std::string& Fname, access_type Access, 
+		     bool Force_area_pixel)
+: fname_(Fname), force_area_pixel_(Force_area_pixel), 
+  unit_(-1), access_(Access)
 {
   unit_ = file_name_to_unit(Fname);
   open_unit();
@@ -81,8 +90,9 @@ VicarFile::VicarFile(const std::string& Fname, access_type Access)
 VicarFile::VicarFile(const std::string& Fname, int Number_line, 
 		     int Number_sample, const std::string& Type,
 		     compression Compress)
-: fname_(Fname), unit_(-1), number_line_(Number_line), 
-  number_sample_(Number_sample), access_(WRITE)
+  : fname_(Fname), force_area_pixel_(false), 
+    unit_(-1), number_line_(Number_line), 
+    number_sample_(Number_sample), access_(WRITE)
 {
 #ifdef HAVE_VICAR_RTL
   unit_ = file_name_to_unit(Fname);
@@ -143,7 +153,8 @@ void VicarFile::set_type(const std::string& Type)
 VicarFile::VicarFile(int Instance, int Number_line, int Number_sample,
 		     const std::string& Type,
 		     const std::string& Name, compression Compress)
-  : unit_(-1), number_line_(Number_line), number_sample_(Number_sample),
+  : force_area_pixel_(false),
+    unit_(-1), number_line_(Number_line), number_sample_(Number_sample),
     access_(WRITE)
 {
 #ifdef HAVE_VICAR_RTL
@@ -190,7 +201,7 @@ VicarFile::VicarFile(int Instance, int Number_line, int Number_sample,
 
 VicarFile::VicarFile(int Instance, access_type Access, 
 		     const std::string& Name)
-  : unit_(-1), access_(Access)
+  : force_area_pixel_(false), unit_(-1), access_(Access)
 {
 #ifdef HAVE_VICAR_RTL
   int status = zvunit(&unit_, const_cast<char*>(Name.c_str()), Instance, 

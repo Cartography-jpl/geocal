@@ -13,7 +13,8 @@ public:
   typedef VicarFile::compression compression;
   VicarRasterImage(const std::string& Fname, 
 		   access_type Access = VicarFile::READ,
-		   int Number_line_per_tile = 100, int Number_tile = 4);
+		   int Number_line_per_tile = 100, int Number_tile = 4,
+		   bool Force_area_pixel = false);
   VicarRasterImage(const std::string& Fname, 
 		   const std::string& Type,
 		   int Number_line, int Number_sample,
@@ -46,7 +47,8 @@ public:
   %python_attribute(rpc, Rpc)
   %python_attribute(map_info, MapInfo)
   %pickle_init(self.vicar_file.file_name, self.vicar_file.access,
-	       self.number_tile_line, self.number_tile)
+	       self.number_tile_line, self.number_tile, 
+	       self.vicar_file.force_area_pixel)
   %pythoncode {
 @rpc.setter
 def rpc(self, val):

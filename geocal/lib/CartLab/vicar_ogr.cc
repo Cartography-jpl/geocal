@@ -262,6 +262,13 @@ MapInfo VicarOgr::from_vicar(const VicarFile& F)
 	std::string tv = F.label<std::string>(tag_to_vicar_name[t],
 					     "GEOTIFF");
 	int v = atoi(tv.c_str());
+	// Special handling to override GTRASTERTYPEGEOKEY and force
+	// pixel is area. This is a workaround for an error in SRTM
+	// data, see VicarFile force_area_pixel description for details.
+	if(F.force_area_pixel() &&
+	   tag_to_vicar_name[t] == "GTRASTERTYPEGEOKEY")
+	  v = 1;		// Force RasterPixelIsArea, which is
+				// code 1.
 	GTIFKeySet(g.gtif, (geokey_t) t, TYPE_SHORT, 1, (geocode_t) v);
       }
     }

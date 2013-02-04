@@ -64,6 +64,12 @@ MapInfo GdalBase::map_info() const
   else 
     coor_conv.reset(new OgrCoordinateConverter(boost::shared_ptr<OgrWrapper>
 					       (new OgrWrapper(ogr))));
+
+  // Note that Geotiff there are two ways the parameters are
+  // specified, point or area. GDAL already handles this, so we don't
+  // need anything special here (so the fact code to handle this isn't
+  // here is *not* an error).
+
   blitz::Array<double, 1> param(6);
   status = data_set_->GetGeoTransform(param.data());
   if(status ==CE_Failure)
@@ -71,21 +77,6 @@ MapInfo GdalBase::map_info() const
   boost::array<index, 2> size = 
     {{const_cast<GDALRasterBand&>(raster_band()).GetYSize(),
       const_cast<GDALRasterBand&>(raster_band()).GetXSize()}};
-
-// For Geotiff, there are two ways the parameters are specified. For
-// area based pixels, the ulc is the ulc of the pixel, which is what
-// MapInfo expects. For point, the ulc given is for the center of the
-// pixel. That means we need to offset this by 1/2 pixel to match what
-// we expect in MapInfo. We check and see if the file has metadata
-// giving this information, and if so if we need to offset the pixel.
-
-  if(data_set_->GetMetadataItem(GDALMD_AREA_OR_POINT) &&
-     data_set_->GetMetadataItem(GDALMD_AREA_OR_POINT) == 
-     std::string(GDALMD_AOP_POINT)) {
-    param(0) -= 0.5 * param(1) + 0.5 * param(2);
-    param(3) -= 0.5 * param(4) + 0.5 * param(5);
-  }
-
   MapInfo res(coor_conv, param, size[1], size[0]);
   return res;
 }

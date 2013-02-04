@@ -25,6 +25,6 @@ SrtmDem::SrtmDem(const std::string& Db_name, const std::string& Dirbase,
   if(dbname =="")
     dbname = dirbase + "/L2_dem_db.int";
   f.reset(new VicarMultiFile(dbname, dirbase, "", 10000, 10000, 100000, 4, 4, 
-			     false, Outside_dem_is_error, 0));
+			     false, Outside_dem_is_error, 0, true));
   initialize(D, f->map_info(), Outside_dem_is_error);
 }

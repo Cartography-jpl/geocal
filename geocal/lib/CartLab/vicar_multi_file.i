@@ -17,7 +17,8 @@ public:
 		 int Number_tile_each_file = 4,
 		 int Number_file = 4, bool Favor_memory_mapped = true,
 		 bool No_coverage_is_error = true, 
-		 int No_coverage_fill_value = 0);
+		 int No_coverage_fill_value = 0,
+		 bool Force_area_pixel = false);
   virtual void write(int Line, int Sample, int Val);
 };
 }

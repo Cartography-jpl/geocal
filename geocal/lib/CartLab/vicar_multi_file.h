@@ -33,7 +33,8 @@ public:
 		 int Number_tile_each_file = 4,
 		 int Number_file = 4, bool Favor_memory_mapped = true,
 		 bool No_coverage_is_error = true, 
-		 int No_coverage_fill_value = 0);
+		 int No_coverage_fill_value = 0,
+		 bool Force_area_pixel = false);
   virtual ~VicarMultiFile() {}
   virtual  RasterMultifileTile get_file(int Line, int Sample) const;
 
@@ -48,6 +49,7 @@ public:
        << "  Directory base: " << dirbase << "\n"
        << "  File exention:  " << extension << "\n"
        << "  Map info:       " << map_info() << "\n"
+       << "  Force area based pixel: " << force_area_pixel_ << "\n"
        << "  Favor memory mapped: " << favor_memory_mapped << "\n";
   }
 private:
@@ -56,6 +58,7 @@ private:
   bool favor_memory_mapped;	///< Whether we use memory mapping or
 				///not when reading an uncompressed
 				///file. 
+  bool force_area_pixel_;
   int number_line_per_tile;	///< Number of lines we read in a tile
 				/// for each file
   int number_tile_each_file;	///< Number of tiles in a single file.

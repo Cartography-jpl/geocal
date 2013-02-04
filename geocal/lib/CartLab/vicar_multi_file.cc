@@ -41,6 +41,14 @@ const double VicarMultiFile::map_info_tolerance = 0.01;
 /// memory mapping won't work. This class handles this case - it
 /// checks if the file is compressed before trying to do memory
 /// mapping. 
+///
+///
+/// The Force_area_pixel forces the file to be treated as
+/// "pixel as area" rather than "pixel as point". This is really just
+/// meant as a work around for the SRTM data, which incorrectly labels
+/// the data as "point" rather than "area". Since this is a 15 meter
+/// difference, it matters for may applications. Most users should
+/// just ignore this value.
 //-----------------------------------------------------------------------
 
 VicarMultiFile::VicarMultiFile(const std::string& Db_name, 
@@ -53,11 +61,13 @@ VicarMultiFile::VicarMultiFile(const std::string& Db_name,
 			       int Number_file,
 			       bool Favor_memory_mapped,
 			       bool No_coverage_is_error,
-			       int No_coverage_fill_value)
+			       int No_coverage_fill_value,
+			       bool Force_area_pixel)
 : RasterMultifile(Number_file, No_coverage_fill_value, 
 		  No_coverage_fill_value),
   db_name(Db_name), dirbase(Dirbase), extension(Extension),
   favor_memory_mapped(Favor_memory_mapped),
+  force_area_pixel_(Force_area_pixel),
   number_line_per_tile(Number_line_per_tile),
   number_tile_each_file(Number_tile_each_file)
 {
@@ -92,7 +102,7 @@ VicarMultiFile::VicarMultiFile(const std::string& Db_name,
 //-----------------------------------------------------------------------
 
   VicarRasterImage m(Dirbase + "/" + ibf.data<std::string>(0,0) +
-			   Extension);
+		     Extension, VicarFile::READ, 100, 4, force_area_pixel_);
   std::vector<boost::shared_ptr<GroundCoordinate> > gp;
   gp.push_back(m.map_info().coordinate_converter().
 	       convert_from_coordinate(lon_min, lat_max));
@@ -148,7 +158,8 @@ RasterMultifileTile VicarMultiFile::get_file(int Line, int Sample) const
   try {
     if(favor_memory_mapped) {
       boost::shared_ptr<VicarLiteRasterImage> 
-	f2(new VicarLiteRasterImage(fname));
+	f2(new VicarLiteRasterImage(fname, VicarLiteFile::READ,
+				    0, -1, -1, force_area_pixel_));
       if(!f2->is_compressed())  // Can only use memory mapped for
 				// uncompressed files.
 	f = f2;
@@ -158,8 +169,9 @@ RasterMultifileTile VicarMultiFile::get_file(int Line, int Sample) const
   }
   if(!f.get())
     f.reset(new VicarRasterImage(fname, VicarFile::READ,
-				       number_line_per_tile, 
-				       number_tile_each_file));
+				 number_line_per_tile, 
+				 number_tile_each_file,
+				 force_area_pixel_));
 
   //-----------------------------------------------------------------------
   // Check that MapInfo of file aligns with a pixel boundary, and that

@@ -37,7 +37,7 @@ class TiePoint:
             if(v): res += 1
         return res
 
-    def display(self, igc_coll, sz = 500, number_row = None):
+    def display(self, igc_coll, sz = 500, ref_image = None, number_row = None):
         '''This executes plt.imshow for the images that make up this
         tiepoint.  Since we don't store the images in a tiepoint, you
         need to also pass in the IgcCollection that this tiepoint
@@ -52,14 +52,24 @@ class TiePoint:
         # As long as the user doesn't call this function, this isn't a problem.
         import matplotlib.pyplot as plt
 
+        nimg = self.number_camera
+        if(ref_image is not None):
+            nimg = nimg + 1
         if(not number_row):
-            number_row = int(math.ceil(math.sqrt(self.number_camera)))
-        number_col = int(math.ceil(self.number_camera / float(number_row)))
+            number_row = int(math.ceil(math.sqrt(nimg)))
+        number_col = int(math.ceil(nimg / float(number_row)))
         plt.clf()
         for i in range(self.number_camera):
             plt.subplot(number_row, number_col, i + 1)
             plt.title(igc_coll.image_title(i))
             if(self.image_location[i]):
                 igc_coll.image(i).display(self.image_location[i][0], sz)
+        if(ref_image is not None):
+            plt.subplot(number_row, number_col, self.number_camera + 1)
+            plt.title("Reference Image")
+            if(self.is_gcp):
+                ic = ref_image.coordinate(self.ground_location)
+                ref_image.display(ic, sz)
+
         
 

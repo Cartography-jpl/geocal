@@ -2,6 +2,7 @@ from geocal import *
 from igc_collection import *
 from tie_point import *
 from ray_intersect import *
+from feature_detector_extension import *
 import math
 import itertools
 import multiprocessing
@@ -25,7 +26,7 @@ class TiePointWrap(object):
             pass
         return None
 
-class TiePointCollect:
+class TiePointCollect(object):
     '''Given a IgcCollection, collect tiepoints by image matching.'''
     def __init__(self, igc_collection, map_info = None, base_image_index = 0,
                  max_ground_covariance = 20 * 20,
@@ -142,3 +143,77 @@ class TiePointCollect:
                 if(success):
                     tp.image_location[i] = ic2, lsigma, ssigma
         return self.ri.ray_intersect(tp)
+
+class GcpTiePointCollect(object):
+    '''Given a IgcCollection and a reference image, collect GCPs by 
+    image matching.'''
+    def __init__(self, ref_image, dem, igc_collection):
+        '''This sets up for doing a tie point collection with a reference
+        image. A IgcCollection and reference image needs to be supplied'''
+        image_matcher = CcorrLsmMatcher()
+        self.igc_collection = igc_collection
+        self.dem = dem
+        self.ref_image = ref_image
+        # Find an area that covers all the ground projected images
+        mi = self.igc_collection.image_ground_connection(0).\
+            cover(ref_image.map_info)
+        for i in range(igc_collection.number_image):
+            igc = igc_collection.image_ground_connection(i)
+            mi = mi.map_union(igc.cover(mi))
+        # Subset ref image to cover as much of that as possible
+        mi = ref_image.map_info.intersection(mi)
+        vg = Vector_GroundCoordinate()
+        vg.push_back(mi.ground_coordinate(0, 0))
+        vg.push_back(mi.ground_coordinate(mi.number_x_pixel, mi.number_y_pixel))
+        self.sub_ref_image = SubRasterImage(ref_image, vg)
+        self.ref_igc = MapInfoImageGroundConnection(self.sub_ref_image, 
+                       dem, "Reference Image")
+        self.itoim = [None]*self.igc_collection.number_image 
+        for j in range(self.igc_collection.number_image):
+            igc2 = self.igc_collection.image_ground_connection(j)
+            self.itoim[j] = SurfaceImageToImageMatch(self.ref_igc, igc2,
+                                                     mi, image_matcher)
+
+    def __getstate__(self):
+        return {"ref_image" : self.ref_image,
+                "dem" : self.dem,
+                "igc_collection" : self.igc_collection}
+
+    def __setstate(self, dict):
+        self.__init__(dict["ref_image"], dict["dem"], dict["igc_collection"])
+
+    @property
+    def number_image(self):
+        return self.igc_collection.number_image
+
+    def tie_point_grid(self, num_x, num_y, border = 100, pool = None):
+        fd = ForstnerFeatureDetector()
+        iplist = fd.interest_point_grid(self.sub_ref_image, num_y, num_x, 
+                                        border, pool = pool)
+        func = TiePointWrap(self)
+        if(pool):
+            res = pool.map(func, iplist, 
+               len(iplist) / multiprocessing.cpu_count())
+        else:
+            res = map(func, iplist)
+        return filter(lambda i : i is not None and i.number_image_location > 0,
+                      res)
+
+    def tie_point(self, ic1):
+        '''Return a tie point that is roughly at the given location in the
+        reference image. Note that we try matching all the other images to the
+        first image, i.e., we don\'t chain by map 2 to 3 and 3 to 4. 
+        If we aren't successful at matching, this returns None.'''
+        tp = TiePoint(self.number_image)
+        tp.is_gcp = True
+        tp.ground_location = \
+            Ecr(self.sub_ref_image.ground_coordinate(ic1, self.dem))
+        for i in range(self.number_image):
+            ic2, lsigma, ssigma, success, diagnostic = \
+                self.itoim[i].match(ic1)
+            if(success):
+                tp.image_location[i] = ic2, lsigma, ssigma
+        return tp
+
+
+                                                     

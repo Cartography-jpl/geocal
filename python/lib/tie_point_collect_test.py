@@ -14,8 +14,10 @@ igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
 igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
 igc_coll = IgcArray([igc1, igc2, igc3])
 gaoi = VicarLiteRasterImage(test_data + "aoi.img").map_info
+ref_img = VicarLiteRasterImage(test_data + "nevada_doq_aoi.img")
 
 tp_collect = TiePointCollect(igc_coll)
+gtp_collect = GcpTiePointCollect(ref_img, demin, igc_coll)
 
 def test_tp():
     ic = igc1.image_coordinate(demin.surface_point(gaoi.ground_coordinate(550, 550)))
@@ -31,12 +33,27 @@ def test_tie_point_grid():
                                       pool = pool)
     assert len(tpcol) == 95
 
+def test_gp_point_grid():
+    pool = Pool()
+    tpcol = gtp_collect.tie_point_grid(10, 10)
+    assert len(tpcol) == 53
+
 def test_pickle():
     t = cPickle.dumps(tp_collect)
-    
+    t = cPickle.dumps(gtp_collect)
+
 def test_show_image():
     raise SkipTest
     import matplotlib.pyplot as plt
     tp = tp_collect.tie_point(ImageCoordinate(500, 500))
     tp.display(igc_coll)
     plt.show()
+
+def test_show_ref_image():
+    raise SkipTest
+    import matplotlib.pyplot as plt
+    tp = gtp_collect.tie_point_grid(10, 10)
+    tp[0].display(igc_coll, ref_image = gtp_collect.sub_ref_image)
+    plt.show()
+
+

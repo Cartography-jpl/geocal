@@ -6,40 +6,81 @@ from afids import *
 from optparse import OptionParser
 from multiprocessing import Pool
 
-parser = OptionParser(version="%prog August 14, 2012",
-usage="""usage: %prog [options] igc output 
+version = "February 4, 2013"
+usage="""Usage: 
+  tp_collect [options] <igc> <output>
+  tp_collect --gcp [options] <igc> <reference_image> (--srtm | <reference_DEM>)
+        <output>
+  tp_collect -h | --help
+  tp_collect -v | --version
+
+This program is used to generate a collection of tie points or ground control
+points (tie points with the addition of ground truth).
 
 This creates a sqlite shelve object that holds an array of TiePoints. The
 output should be in "file:key" format, e.g., "my_data.db:tp". The input is
 the IgcCollection to use, also in the same format (which can be in the same
 or a different input file).
-""")
-parser.add_option("--number_process", dest="number_process", 
-                  default=1,
-                  type="int",
-                  help="number of processors to use. Right now there isn't a lot gained by running in parallel, but we will put this option in place for the futre.")
-parser.add_option("--number_x", dest="number_x", default = 100,
-                  type="int",
-                  help="number of grid points in the X direction to try for")
-parser.add_option("--number_y", dest="number_y", default = 100,
-                  type="int",
-                  help="number of grid points in the X direction to try for")
 
-# Parse command line arguments
-(options, args) = parser.parse_args()
+Options:
+  -h --help         
+       Print this message
 
-if(len(args) != 2):
-    parser.error("Need to specify all the arguments")
+  --add-tp
+       The default behavior is to overwrite whatever "file:key" value is
+       specified as the output. You can optionally add the TP/GCPs we 
+       generate.
 
-igc_name, output_name = args
+  --gcp
+       Create GCPs, which requires the additional arguments of a reference
+       image 
+
+  --number-process=n 
+       Number of processors to use. Right now there isn't a lot gained 
+       by running in parallel, but we will put this option in place for 
+       the future. [default: 1]
+
+  --number-x=n      
+       Number of grid points in the X direction to try for [default: 100]
+
+  --number-y=n      
+       Number of grid points in the Y direction to try for [default: 100]
+ 
+  --srtm
+       Use the SRTM rather than supplying a DEM file.
+
+  -v --version      
+       Print program version
+"""
+
+args = docopt_simple(usage, version=version)
 pool = None
-if(options.number_process > 1):
-    pool = Pool(options.number_process)
+if(args.number_process > 1):
+    pool = Pool(args.number_process)
 
-igc = read_shelve(igc_name)
-tpcollect = TiePointCollect(igc)
-tparr = tpcollect.tie_point_grid(options.number_x, options.number_y, 
+igc = read_shelve(args.igc)
+if(args.gcp):
+    if(args.srtm):
+        dem = SrtmDem()
+    else:
+        if VicarFile.is_vicar_file(args.reference_DEM):
+            dem = VicarLiteDem(args.reference_DEM, True)
+        else:
+            dem = GdalDem(args.reference_DEM, NoDatum(), 1, True)
+    if(VicarFile.is_vicar_file(args.reference_image)):
+        refimg = VicarLiteRasterImage(args.reference_image)
+    else:
+        refimg = GdalRasterImage(args.reference_image)
+    tpcollect = GcpTiePointCollect(refimg, dem, igc)
+else:
+    tpcollect = TiePointCollect(igc)
+
+tparr = tpcollect.tie_point_grid(args.number_x, args.number_y, 
                                  pool = pool)
-write_shelve(output_name, tparr)
+
+if(args.add_tp):
+    tparr.extend(read_shelve(args.output))
+
+write_shelve(args.output, tparr)
 
 

@@ -17,8 +17,10 @@ class DocOptSimple(object):
         self.args = docopt(doc, argv=argv, help=help, version=version, 
                            options_first=options_first)
     def __getattr__(self, name):
-        for key in (name, "<" + name + ">", "--" + name,
-                  "--" + name.replace("_", "-")):
+        for key in (name, 
+                    "<" + name + ">", 
+                    "--" + name,
+                    "--" + name.replace("_", "-")):
             if(key in self.args):
                 return self.__find_type(key)
         raise AttributeError(name)

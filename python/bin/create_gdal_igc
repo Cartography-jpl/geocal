@@ -3,16 +3,13 @@
 # This creates a IgcCollection that uses GDAL data files for the DEM, 
 # image, and RPC.
 from afids import *
-from optparse import OptionParser
-from itertools import izip
 
-def pairwise(t):
-    '''This goes through a iterator in pairs'''
-    it = iter(t)
-    return izip(it,it)
-
-parser = OptionParser(version="%prog August 13, 2012",
-usage="""usage: %prog [options] output [dem] image_1 title_1 image_2 title_2 ...
+version = "February 4, 2013"
+usage='''Usage: 
+  create_gdal_igc [options] <output> [--srtm | <dem>] 
+      <image> <title> [(<image> <title>)...]
+  create_gdal_igc -h | --help
+  create_gdal_igc -v | --version
 
 This creates a sqlite shelve object that holds a IgcCollection. The
 output should be in "file:key" format, e.g., "my_data.db:igc". Each
@@ -22,46 +19,59 @@ etc.
 We check first if the data is actually a VICAR file, and if so we use
 the VICAR interface rather than the GDAL interface. For VICAR files, this
 tends to be more efficient.
-""")
-parser.add_option("--srtm",
-                  dest="srtm", default=False,
-                  action="store_true",
-                  help="Use SRTM as the dem")
-parser.add_option("--rpc_line_fit", dest="rpc_line_fit",
-                  default="",
-                  help="A comma separated list of 0 based parameters that we should set a being able to be fit (e.g., \"0,1,3\"). This assumes we want to fit the same values for each of the ImageGroundConnection, which is usually the case. We could create a more specific way to specify this for each ImageGroundConnection if we need to. Default is to fit nothing.")
-parser.add_option("--rpc_sample_fit", dest="rpc_sample_fit",
-                  default="",
-                  help="A comma separated list of 0 based parameters that we should set a being able to be fit (e.g., \"0,1,3\"). This assumes we want to fit the same values for each of the ImageGroundConnection, which is usually the case. We could create a more specific way to specify this for each ImageGroundConnection if we need to. Default is to fit nothing.")
 
+Options:
+  -h --help         
+       Print this message
+
+  --rpc-line-fit=list
+       A comma separated list of 0 based parameters that we should set
+       a being able to be fit (e.g., "0,1,3"). This assumes we want
+       to fit the same values for each of the ImageGroundConnection,
+       which is usually the case. We could create a more specific way
+       to specify this for each ImageGroundConnection if we need
+       to. [default: ]
+
+  --rpc-sample-fit=list
+       A comma separated list of 0 based parameters that we should set
+       a being able to be fit (e.g., "0,1,3"). This assumes we want
+       to fit the same values for each of the ImageGroundConnection,
+       which is usually the case. We could create a more specific way
+       to specify this for each ImageGroundConnection if we need
+       to. [default: ]
+
+   --srtm 
+       Use the SRTM rather than supplying a DEM file.
+
+  -v --version      
+       Print program version
+'''
 # Parse command line arguments
-(options, args) = parser.parse_args()
+args = docopt_simple(usage, version=version)
 
 line_fit = []
-for i in options.rpc_line_fit.split(','):
+for i in str(args.rpc_line_fit).split(','):
     if(i != ''):
         line_fit.append(int(i))
 sample_fit = []
-for i in options.rpc_line_fit.split(','):
+for i in str(args.rpc_sample_fit).split(','):
     if(i != ''):
         sample_fit.append(int(i))
 
-out = args.pop(0)
-if(options.srtm):
+if(args.srtm):
     dem = SrtmDem()
 else:
-    demfname = args.pop(0)
-    if VicarFile.is_vicar_file(demfname):
-        dem = VicarLiteDem(demfname, True)
+    if VicarFile.is_vicar_file(args.dem):
+        dem = VicarLiteDem(args.dem, True)
     else:
-        dem = GdalDem(args.pop(0), NoDatum(), 1, True)
+        dem = GdalDem(args.dem, NoDatum(), 1, True)
 
 igc_coll = IgcArray()
-for fname, title in pairwise(args):
-    if VicarFile.is_vicar_file(fname):
-        t = VicarImageGroundConnection(fname, dem, title=title)
+for i in range(len(args.image)):
+    if VicarFile.is_vicar_file(args.image[i]):
+        t = VicarImageGroundConnection(args.image[i], dem, title=args.title[i])
     else:
-        t = GdalImageGroundConnection(fname, dem, title=title)
+        t = GdalImageGroundConnection(args.image[i], dem, title=args.title[i])
     for i in range(20):
         t.rpc.fit_line_numerator[i] = False
         t.rpc.fit_sample_numerator[i] = False
@@ -72,5 +82,5 @@ for fname, title in pairwise(args):
     igc_coll.igc.append(t)
 igc_coll.parameter_subset_mask = [True] * len(igc_coll.parameter)
 
-write_shelve(out, igc_coll)
+write_shelve(args.output, igc_coll)
 

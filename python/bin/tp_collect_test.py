@@ -14,8 +14,8 @@ def test_tp_collection():
                            test_data + "10MAY21-1.img", "Image 1",
                            test_data + "10MAY21-2.img", "Image 2",
                            test_data + "10MAY21-3.img", "Image 3"])
-    subprocess.check_call(["tp_collect", "--number_x", "10",
-                           "--number_y", "10", "sqlite_shelf.db:igc",
+    subprocess.check_call(["tp_collect", "--number-x", "10",
+                           "--number-y", "10", "sqlite_shelf.db:igc",
                            "sqlite_shelf.db:tpcol"])
     tpcol = read_shelve("sqlite_shelf.db:tpcol")
     assert len(tpcol) > 90

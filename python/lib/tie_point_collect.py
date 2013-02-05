@@ -179,7 +179,7 @@ class GcpTiePointCollect(object):
                 "dem" : self.dem,
                 "igc_collection" : self.igc_collection}
 
-    def __setstate(self, dict):
+    def __setstate__(self, dict):
         self.__init__(dict["ref_image"], dict["dem"], dict["igc_collection"])
 
     @property

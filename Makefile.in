@@ -1005,7 +1005,8 @@ am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/with_parameter.py \
 	@srcpythonlib@/sqlite_shelf.py \
 	@srcpythonlib@/feature_detector_extension.py \
-	@srcpythonlib@/ply_file.py @srcpythonlib@/tre_amt_struct.py
+	@srcpythonlib@/ply_file.py @srcpythonlib@/docopt_simple.py \
+	@srcpythonlib@/docopt.py @srcpythonlib@/tre_amt_struct.py
 am__geocalpkgpython_PYTHON_DIST =  \
 	afids_python/geocal/bindings/python/__init__.py \
 	afids_python/geocal/bindings/python/all/geocal.py \
@@ -1951,6 +1952,8 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	test_out/dummy_copy
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@geocaldocdir = ${datarootdir}/doc/geocal
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@geocaldocsearchdir = ${geocaldocdir}/html/search
+# Temporary, until we decide we want this. If we do, then we'll want to
+# install this like all the other thirdparty packages.
 @BUILD_AFIDS_PYTHON_TRUE@afidspkgpython_PYTHON =  \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpython@/init/__init__.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/job_handle.py \
@@ -1980,6 +1983,8 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/sqlite_shelf.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/feature_detector_extension.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/ply_file.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/docopt_simple.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/docopt.py \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_38)
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \

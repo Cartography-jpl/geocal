@@ -127,7 +127,7 @@ class TiePointCollect(object):
             res = map(func, iplist)
         #print "Done with matching"
         #print "Time: ", time.time() - tstart
-        return filter(lambda i : i is not None, res)
+        return TiePointCollection(filter(lambda i : i is not None, res))
 
     def tie_point(self, ic1):
         '''Return a tie point that is roughly at the given location in the
@@ -196,8 +196,9 @@ class GcpTiePointCollect(object):
                len(iplist) / multiprocessing.cpu_count())
         else:
             res = map(func, iplist)
-        return filter(lambda i : i is not None and i.number_image_location > 0,
-                      res)
+        return TiePointCollection(
+            filter(lambda i : i is not None and i.number_image_location > 0,
+                   res))
 
     def tie_point(self, ic1):
         '''Return a tie point that is roughly at the given location in the

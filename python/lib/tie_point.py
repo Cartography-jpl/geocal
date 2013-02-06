@@ -1,7 +1,7 @@
 import math
 import raster_image_extension
 
-class TiePoint:
+class TiePoint(object):
     '''
     This is a tiepoint. This is little more than a structure.
     This contains the following pieces
@@ -71,5 +71,23 @@ class TiePoint:
                 ic = ref_image.coordinate(self.ground_location)
                 ref_image.display(ic, sz)
 
+class TiePointCollection(list):
+    '''This is just a list of TiePoint, with a few useful functions defined'''
+    def __init__(self, inital_array = []):
+        self.extend(inital_array)
+
+    @property
+    def number_gcp(self):
+        cnt = 0
+        for i in self:
+            if(i.is_gcp):
+                cnt += 1
+        return cnt
+
+    def __str__(self):
+        res =  "TiePointCollection\n"
+        res += "  Total number tp: %d\n" % len(self)
+        res += "  Number GCPs:     %d\n" % self.number_gcp
+        return res
         
 

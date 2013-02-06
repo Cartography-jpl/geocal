@@ -130,6 +130,17 @@ class IgcArray(IgcCollection):
         self.igc = initial_data
         self._parameter_subset_mask = [True] * len(self.parameter)
 
+    def __str__(self):
+        res =  "IgcArray\n"
+        res += "  Number of images: %d\n" % self.number_image
+        res += "  Images:\n"
+        for i in range(self.number_image):
+            res += "     %s\n" % self.image_title(i)
+        res += "  Parameters:\n"
+        for i in range(len(self.parameter)):
+            res += "     %s: %f\n" % (self.parameter_name[i], self.parameter[i])
+        return res
+
     @property
     def parameter(self):
         '''Value of parameters controlling mapping to and from image 

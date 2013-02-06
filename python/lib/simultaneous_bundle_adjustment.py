@@ -98,7 +98,8 @@ class SimultaneousBundleAdjustment(object):
     def sba_eq(self, parm):
         '''Return all the constraints'''
         self.parameter = parm
-        return np.append(np.append(self.surface_constraint(), 
+        return np.append(np.append(np.append(self.surface_constraint(), 
+                                             self.gcp_constraint()),
                                    self.collinearity_constraint()),
                          self.parameter_constraint())
 
@@ -110,9 +111,22 @@ class SimultaneousBundleAdjustment(object):
                            len(self.parameter)))
         self.row_index = 0
         self.__surface_constraint_jacobian(res)
+        self.__gcp_constraint_jacobian(res)
         self.__collinearity_constraint_jacobian(res)
         self.__parameter_constraint_jacobian(res)
         return res.coo_matrix()
+
+    def gcp_constraint(self):
+        '''Calculate the GCP constraint equations. This is the penalty
+        we get from placing a tiepoint somewhere other than the location
+        given by the GCP'''
+        return np.zeros(0)
+
+    def __gcp_constraint_jacobian(self, res):
+        '''Calculate the Jacobian of the GCP constraint equations. Takes
+        matrix to fill in, and row to start at. The row gets updated to
+        just past the end of what we fill out'''
+        pass
 
     def surface_constraint(self):
         '''Calculate all the surface constraint equations. This is
@@ -175,11 +189,6 @@ class SimultaneousBundleAdjustment(object):
                             -1.0 / ssigma)
                     ind += 2
         self.row_index = ind
-
-    def gcp_constraint(self):
-        '''Calculate the GP constraint. This is the penalty for moving
-        a GCP point from its original location.'''
-        pass # Not using yet
 
     def parameter_constraint(self):
         '''Calculate the parameter constraint. This is the penalty for

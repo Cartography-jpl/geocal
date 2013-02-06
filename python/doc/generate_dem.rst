@@ -331,6 +331,20 @@ gives::
     Total number tp: 6822
     Number GCPs:     49
 
+You can now run the simultaneous bundle adjustment to adjust the RPCs of the
+initial IGC collection. This also adjusts the ground location of the 
+tiepoints, so we generate 2 outputs. The command::
+
+   sba nevada.db:igc_initial nevada.db:tpcol nevada.db:igc_sba \
+       nevada.db:tpcol_sba
+
+You should pay some attention to the final :math:`\chi^2`. This indicates
+how well we fitted the given tiepoint, subject to the constraints of the
+initial DEM. This should be a number on the order or 1 or so. 2 or 3
+should also be fine, but much larger than that indicates we are not fitting
+the data well. In that case, you'll want to investigate further why we
+are fitting so poorly (this is outside the scope of this document).
+  
 
 Move your data from the local disk to the raids
 -----------------------------------------------

@@ -58,6 +58,7 @@ class TestClass:
 
     def test_sba_eq(self):
         assert len(sba.surface_constraint()) == 95
+        assert len(sba.gcp_constraint()) == 0
         assert len(sba.collinearity_constraint()) == 548
         assert len(sba.parameter_constraint()) == 291
         assert len(sba.sba_eq(sba.parameter)) == 95 + 548 + 291

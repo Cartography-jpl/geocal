@@ -1,0 +1,40 @@
+#! /usr/bin/env python
+#
+# This sets up a RasterImage into a shelve.
+
+from afids import *
+
+version = "February 4, 2013"
+usage='''Usage: 
+  shelve_image [options] <image_file> <output>
+  shelve_image -h | --help
+  shelve_image -v | --version
+
+This program is used to setup a image as a sqlite shelve object. The
+output should be in the "file:key" format, e.g., "my_data.db:image".
+
+Options:
+  -h --help         
+       Print this message
+
+  -b --band=b
+       Band of file to use (1 based). [default: 1]
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+if VicarFile.is_vicar_file(args.image_file):
+    # -1 in band is because VicarLiteRasterImage uses 0-based band, rather
+    # than 1-based we use in this program.
+    img = VicarLiteRasterImage(args.image_file, VicarLiteFile.READ,
+                               args.band - 1)
+else:
+    img = GdalRasterImage(args.image_file, args.band)
+
+write_shelve(args.output, img)
+
+
+

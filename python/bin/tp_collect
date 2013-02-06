@@ -3,14 +3,12 @@
 # This collects tie points.
 
 from afids import *
-from optparse import OptionParser
 from multiprocessing import Pool
 
 version = "February 4, 2013"
 usage="""Usage: 
   tp_collect [options] <igc> <output>
-  tp_collect --gcp [options] <igc> <reference_image> (--srtm | <reference_DEM>)
-        <output>
+  tp_collect --gcp [options] <igc> <reference_image> <output>
   tp_collect -h | --help
   tp_collect -v | --version
 
@@ -22,6 +20,8 @@ output should be in "file:key" format, e.g., "my_data.db:tp". The input is
 the IgcCollection to use, also in the same format (which can be in the same
 or a different input file).
 
+If you supply a reference image, this should be a "file:key" object.
+
 Options:
   -h --help         
        Print this message
@@ -31,14 +31,16 @@ Options:
        specified as the output. You can optionally add the TP/GCPs we 
        generate.
 
+  --reference-dem=shelve
+       DEM to use with the reference image specified as file:key. 
+       If not specified, we use the DEM from the first IGC.
+
   --gcp
        Create GCPs, which requires the additional arguments of a reference
-       image 
+       image.
 
   --number-process=n 
-       Number of processors to use. Right now there isn't a lot gained 
-       by running in parallel, but we will put this option in place for 
-       the future. [default: 1]
+       Number of processors to use. [default: 1]
 
   --number-x=n      
        Number of grid points in the X direction to try for [default: 100]
@@ -46,9 +48,6 @@ Options:
   --number-y=n      
        Number of grid points in the Y direction to try for [default: 100]
  
-  --srtm
-       Use the SRTM rather than supplying a DEM file.
-
   -v --version      
        Print program version
 """
@@ -60,17 +59,11 @@ if(args.number_process > 1):
 
 igc = read_shelve(args.igc)
 if(args.gcp):
-    if(args.srtm):
-        dem = SrtmDem()
+    if(args.reference_dem):
+        dem = read_shelve(args.reference_dem)
     else:
-        if VicarFile.is_vicar_file(args.reference_DEM):
-            dem = VicarLiteDem(args.reference_DEM, True)
-        else:
-            dem = GdalDem(args.reference_DEM, NoDatum(), 1, True)
-    if(VicarFile.is_vicar_file(args.reference_image)):
-        refimg = VicarLiteRasterImage(args.reference_image)
-    else:
-        refimg = GdalRasterImage(args.reference_image)
+        dem = igc.dem(0)
+    refimg = read_shelve(args.reference_image)
     tpcollect = GcpTiePointCollect(refimg, dem, igc)
 else:
     tpcollect = TiePointCollect(igc)

@@ -1,0 +1,65 @@
+#! /usr/bin/env python
+#
+# This sets up a DEM into a shelve.
+
+from afids import *
+
+version = "February 4, 2013"
+usage='''Usage: 
+  shelve_dem [options] <dem_file> <output>
+  shelve_dem [options] <dem_file> <datum_file> <output>
+  shelve_dem --srtm <output>
+  shelve_dem -h | --help
+  shelve_dem -v | --version
+
+This program is used to setup a DEM as a sqlite shelve object. The
+output should be in the "file:key" format, e.g., "my_data.db:dem".
+
+You can supply a DEM file along with an optional Datum file. This should
+be any format readable by GDAL (e.g., GeoTIFF) or VICAR format.
+
+Options:
+  -h --help         
+       Print this message
+
+  --outside-dem-not-error
+       If a program attempts to read a DEM value outside of the supplied 
+       file, this is normally treated as an error. Alternatively, you can
+       specify this option and we will return a height of "0" for any
+       attempt to read outside the DEM.
+
+  --dem-band=b
+       The band of the DEM file to use (1 based). [default: 1]
+
+  --datum-band=b
+       The band of the Datum file to use (1 based). [default: 1]
+
+  --srtm
+       Use the SRTM rather than supplying a DEM file.
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+if(args.srtm):
+    dem = SrtmDem()
+else:
+    if(args.datum_file):
+        datum = GdalDatum(args.datum_file, args.datum_band)
+    else:
+        datum = SimpleDatum(0)
+    if VicarFile.is_vicar_file(args.dem_file):
+        # -1 in band is because VicarLiteDem uses 0-based band, rather
+        # than 1-based we use in this program.
+        dem = VicarLiteDem(args.dem_file, not args.outside_dem_not_error, 
+                           datum, args.dem_band - 1)
+    else:
+        dem = GdalDem(args.dem_file, datum, args.dem_band, 
+                      not args.outside_dem_not_error)
+
+write_shelve(args.output, dem)
+
+
+

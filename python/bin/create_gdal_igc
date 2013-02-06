@@ -6,8 +6,8 @@ from afids import *
 
 version = "February 4, 2013"
 usage='''Usage: 
-  create_gdal_igc [options] <output> [--srtm | <dem>] 
-      <image> <title> [(<image> <title>)...]
+  create_gdal_igc [options] <output> <dem> 
+       <image> <title> [(<image> <title>)...]
   create_gdal_igc -h | --help
   create_gdal_igc -v | --version
 
@@ -16,9 +16,7 @@ output should be in "file:key" format, e.g., "my_data.db:igc". Each
 of the images should also have a title which can be used when plotting
 etc.
 
-We check first if the data is actually a VICAR file, and if so we use
-the VICAR interface rather than the GDAL interface. For VICAR files, this
-tends to be more efficient.
+The DEM should be given as a "file:key" sqlite shelve object.
 
 Options:
   -h --help         
@@ -40,9 +38,6 @@ Options:
        to specify this for each ImageGroundConnection if we need
        to. [default: ]
 
-   --srtm 
-       Use the SRTM rather than supplying a DEM file.
-
   -v --version      
        Print program version
 '''
@@ -58,13 +53,7 @@ for i in str(args.rpc_sample_fit).split(','):
     if(i != ''):
         sample_fit.append(int(i))
 
-if(args.srtm):
-    dem = SrtmDem()
-else:
-    if VicarFile.is_vicar_file(args.dem):
-        dem = VicarLiteDem(args.dem, True)
-    else:
-        dem = GdalDem(args.dem, NoDatum(), 1, True)
+dem = read_shelve(args.dem)
 
 igc_coll = IgcArray()
 for i in range(len(args.image)):

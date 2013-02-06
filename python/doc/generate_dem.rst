@@ -18,7 +18,7 @@ There are several steps to creating the DEM:
 #. Set up an area to work
 #. Locate the input data
 #. Convert the NITF to VICAR format
-#. Create the initial image ground collection
+#. Create the initial image ground connection collection
 #. Correct the RPCs for the input images
 #. Move your data from the local disk to the raids
 
@@ -113,10 +113,10 @@ all the input data is. For the purpose of this example, we'll skip this step.
 If you do create symbolic links, you can just replace the later steps with the
 full path with a local path.
 
-Create the initial image ground collection
-------------------------------------------
+Create the initial image ground connection collection
+-----------------------------------------------------
 One of the central things used in DEM generation is an
-"image ground collection". 
+"image ground connection collection". 
 This is used internally by the various programs, and as a user you can
 ignore most of the details about this object. But it get created by supplying
 a reference DEM, and set of images (in our example, 2 for the stereo pair),

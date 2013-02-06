@@ -5,14 +5,15 @@
 # tiepoints.
 
 from afids import *
-from optparse import OptionParser
 
-parser = OptionParser(version="%prog August 27, 2012",
-usage="""usage: %prog [options] <igc collection in> <tiepoint collection> 
-         <output igc collection> <final tiepoint>
+version = "February 4, 2013"
+usage='''Usage: 
+  sba [options] <igc_in> <tpcol_in> <igc_out> <tpcol_out>
+  sba -h | --help
+  sba -v | --version
 
 This runs a simultatenous bundle adjustment to adjust the parameters of
-a image ground connnection collection to more closely fit a given set o
+a image ground connnection collection to more closely fit a given set of
 tiepoints.
 
 The input igc collection and tie point array, and the final output are
@@ -28,49 +29,57 @@ image ground connections in the collection, and this is the same one we
 want to use for the SBA. In this case, you don't need to specify the DEM, we
 just grab the DEM from the first image ground connection. You can optionally
 specify a different DEM to use.
-""")
-parser.add_option("--dem", dest="dem_name", default = None,
-                  help="DEM to use. If not specified, we use the DEM from the first igc")
-parser.add_option("--dem_sigma", dest="dem_sigma", type="float",
-                  default = 100.0,
-                  help="Weighting to give surface constraint from DEM")
-parser.add_option("--tp_epsilon", dest="tp_epsilon", type="float",
-                  default = 1.0,
-                  help="Epsilon to use when calculation tie point Jacobian")
-parser.add_option("-q", "--quiet",
-                  action="store_false", dest="verbose", default=True,
-                  help="don't print status messages to stdout")
 
-(options, args) = parser.parse_args()
+Options:
+  -h --help         
+       Print this message
 
-if(len(args) != 4):
-    parser.error("Need to specify all the arguments")
+  --dem=shelve
+       DEM to use, specified as file:key. If not specified, we use the 
+       DEM from the first IGC.
 
-igc_name, tpcol_name, igc_output_name, tpcol_output_name = args
-igc = read_shelve(igc_name)
-tpcol = read_shelve(tpcol_name)
-if(options.dem_name is not None):
-    dem = read_shelve(options.dem_name)
+  --dem-sigma=v
+       Weighting to give surface constraint from DEM [default: 10.0]
+
+  -q --quiet
+       Suppress print status messages to stdout.
+
+  --tp-epsilon=v
+       Epsilon to use during the calculation of the tie point Jacobian.
+       [default: 1.0]
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+igc = read_shelve(args.igc_in)
+tpcol = read_shelve(args.tpcol_in)
+if(args.dem):
+    dem = read_shelve(args.dem)
 else:
     dem = igc.dem(0)
 
-sba = SimultaneousBundleAdjustment(igc, tpcol, dem, options.dem_sigma,
-                                   options.tp_epsilon)
+sba = SimultaneousBundleAdjustment(igc, tpcol, dem, args.dem_sigma,
+                                   args.tp_epsilon)
 v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-if(options.verbose):
+verbose = not args.quiet
+
+if(verbose):
     print "Initial Chisq: ", chisq
 parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian, 
-                   diagnostic = options.verbose)
+                   diagnostic = verbose)
 sba.parameter = parm
 v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-if(options.verbose):
+if(verbose):
     print "Final Chisq: ", chisq
-write_shelve(igc_output_name, sba.igc_coll)
+write_shelve(args.igc_out, sba.igc_coll)
 tpcol = sba.tie_point_array
 for i in range(len(tpcol)):
     tpcol[i].ground_location = sba.ground_location(i)
-write_shelve(tpcol_output_name, tpcol)
+write_shelve(args.tpcol_out, tpcol)
 
 

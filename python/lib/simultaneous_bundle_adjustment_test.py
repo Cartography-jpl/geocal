@@ -29,6 +29,9 @@ igc_coll.parameter_subset_mask = [True, True, True, True, False, True, True,
                                   False]
 tp_collect = TiePointCollect(igc_coll)
 tpcol = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin)
+# Arbitrarily pick 2 points and pretend like they are GCPs
+tpcol[0].is_gcp = True
+tpcol[5].is_gcp = True
 sba = SimultaneousBundleAdjustment(igc_coll, tpcol, demin)
 parm0 = sba.parameter
 print igc_coll.parameter_subset_mask
@@ -58,14 +61,14 @@ class TestClass:
 
     def test_sba_eq(self):
         assert len(sba.surface_constraint()) == 95
-        assert len(sba.gcp_constraint()) == 0
+        assert len(sba.gcp_constraint()) == 6
         assert len(sba.collinearity_constraint()) == 548
         assert len(sba.parameter_constraint()) == 291
-        assert len(sba.sba_eq(sba.parameter)) == 95 + 548 + 291
+        assert len(sba.sba_eq(sba.parameter)) == 95 + 6 + 548 + 291
 
     def test_sba_jacobian(self):
         t = sba.sba_jacobian(sba.parameter)
-        assert t.shape[0] == 95 + 548 + 291
+        assert t.shape[0] == 95 + 6 + 548 + 291
         assert t.shape[1] == 291
 
     def test_solve_lm(self):

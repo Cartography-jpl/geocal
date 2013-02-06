@@ -41,6 +41,9 @@ Options:
   --dem-sigma=v
        Weighting to give surface constraint from DEM [default: 10.0]
 
+  --gcp-sigma=v
+       Weighting to give GCP constraint [default: 10.0]
+
   -q --quiet
        Suppress print status messages to stdout.
 
@@ -61,8 +64,9 @@ if(args.dem):
 else:
     dem = igc.dem(0)
 
-sba = SimultaneousBundleAdjustment(igc, tpcol, dem, args.dem_sigma,
-                                   args.tp_epsilon)
+sba = SimultaneousBundleAdjustment(igc, tpcol, dem, dem_sigma=args.dem_sigma,
+                                   gcp_sigma=args.gcp_sigma,
+                                   tp_epsilon=args.tp_epsilon)
 v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
 verbose = not args.quiet
@@ -77,7 +81,7 @@ chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
 if(verbose):
     print "Final Chisq: ", chisq
 write_shelve(args.igc_out, sba.igc_coll)
-tpcol = sba.tie_point_array
+tpcol = sba.tpcol
 for i in range(len(tpcol)):
     tpcol[i].ground_location = sba.ground_location(i)
 write_shelve(args.tpcol_out, tpcol)

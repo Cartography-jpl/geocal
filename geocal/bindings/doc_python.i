@@ -181,7 +181,7 @@ virtual GeoCal::AircraftOrbitData::~AircraftOrbitData()
 Destructor. ";
 
 
-// File: a01113.xml
+// File: a01118.xml
 
 %feature("docstring") std::allocator "
 STL class. ";
@@ -957,97 +957,97 @@ Number_sample, Array2d< T > &Res) const
 virtual GeoCal::GeoCalCore::Array2d< T >::~Array2d()
 ";
 
-// File: a01114.xml
+// File: a01119.xml
 
 %feature("docstring") std::auto_ptr "
 STL class. ";
 
 
-// File: a01115.xml
+// File: a01120.xml
 
 %feature("docstring") std::bad_alloc "
 STL class. ";
 
 
-// File: a01116.xml
+// File: a01121.xml
 
 %feature("docstring") std::bad_cast "
 STL class. ";
 
 
-// File: a01117.xml
+// File: a01122.xml
 
 %feature("docstring") std::bad_exception "
 STL class. ";
 
 
-// File: a01118.xml
+// File: a01123.xml
 
 %feature("docstring") std::bad_typeid "
 STL class. ";
 
 
-// File: a01119.xml
+// File: a01124.xml
 
 %feature("docstring") std::basic_fstream "
 STL class. ";
 
 
-// File: a01127.xml
+// File: a01132.xml
 
 %feature("docstring") std::basic_ifstream "
 STL class. ";
 
 
-// File: a01124.xml
+// File: a01129.xml
 
 %feature("docstring") std::basic_ios "
 STL class. ";
 
 
-// File: a01122.xml
+// File: a01127.xml
 
 %feature("docstring") std::basic_iostream "
 STL class. ";
 
 
-// File: a01123.xml
+// File: a01128.xml
 
 %feature("docstring") std::basic_istream "
 STL class. ";
 
 
-// File: a01135.xml
+// File: a01140.xml
 
 %feature("docstring") std::basic_istringstream "
 STL class. ";
 
 
-// File: a01140.xml
+// File: a01145.xml
 
 %feature("docstring") std::basic_ofstream "
 STL class. ";
 
 
-// File: a01126.xml
+// File: a01131.xml
 
 %feature("docstring") std::basic_ostream "
 STL class. ";
 
 
-// File: a01143.xml
+// File: a01148.xml
 
 %feature("docstring") std::basic_ostringstream "
 STL class. ";
 
 
-// File: a00701.xml
+// File: a00704.xml
 
 %feature("docstring") std::basic_string "
 STL class. ";
 
 
-// File: a01132.xml
+// File: a01137.xml
 
 %feature("docstring") std::basic_stringstream "
 STL class. ";
@@ -1073,7 +1073,7 @@ void BasicPcorrMatcher::match(cv::Mat &Ref, cv::Mat &New, cv::Point2f &Ref_loc, 
 static void BilinearIntepolate::apply(T1 &A, T2 &B, T3, T4, T5, T6, T7, T8, T9, T10, T11)
 ";
 
-// File: a01153.xml
+// File: a01158.xml
 
 %feature("docstring") std::bitset "
 STL class. ";
@@ -2215,127 +2215,127 @@ the check. ";
 virtual GeoCal::CombinedMask::~CombinedMask()
 ";
 
-// File: a01154.xml
+// File: a01159.xml
 
 %feature("docstring") std::complex "
 STL class. ";
 
 
-// File: a01155.xml
+// File: a01160.xml
 
 %feature("docstring") std::map::const_iterator "
 STL iterator class. ";
 
 
-// File: a01156.xml
+// File: a01161.xml
 
 %feature("docstring") std::multimap::const_iterator "
 STL iterator class. ";
 
 
-// File: a01149.xml
+// File: a01154.xml
 
 %feature("docstring") std::basic_string::const_iterator "
 STL iterator class. ";
 
 
-// File: a01157.xml
+// File: a01162.xml
 
 %feature("docstring") std::set::const_iterator "
 STL iterator class. ";
 
 
-// File: a01158.xml
+// File: a01163.xml
 
 %feature("docstring") std::multiset::const_iterator "
 STL iterator class. ";
 
 
-// File: a01159.xml
+// File: a01164.xml
 
 %feature("docstring") std::string::const_iterator "
 STL iterator class. ";
 
 
-// File: a01160.xml
+// File: a01165.xml
 
 %feature("docstring") std::vector::const_iterator "
 STL iterator class. ";
 
 
-// File: a01161.xml
+// File: a01166.xml
 
 %feature("docstring") std::wstring::const_iterator "
 STL iterator class. ";
 
 
-// File: a01162.xml
+// File: a01167.xml
 
 %feature("docstring") std::deque::const_iterator "
 STL iterator class. ";
 
 
-// File: a01163.xml
+// File: a01168.xml
 
 %feature("docstring") std::list::const_iterator "
 STL iterator class. ";
 
 
-// File: a01164.xml
+// File: a01169.xml
 
 %feature("docstring") std::map::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01165.xml
+// File: a01170.xml
 
 %feature("docstring") std::multimap::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01166.xml
+// File: a01171.xml
 
 %feature("docstring") std::set::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01150.xml
+// File: a01155.xml
 
 %feature("docstring") std::basic_string::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01167.xml
+// File: a01172.xml
 
 %feature("docstring") std::multiset::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01168.xml
+// File: a01173.xml
 
 %feature("docstring") std::vector::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01169.xml
+// File: a01174.xml
 
 %feature("docstring") std::string::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01170.xml
+// File: a01175.xml
 
 %feature("docstring") std::wstring::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01171.xml
+// File: a01176.xml
 
 %feature("docstring") std::deque::const_reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01172.xml
+// File: a01177.xml
 
 %feature("docstring") std::list::const_reverse_iterator "
 STL iterator class. ";
@@ -3105,7 +3105,7 @@ void DemUpdater2::print(std::ostream &Os) const
 Print to stream. ";
 
 
-// File: a01173.xml
+// File: a01178.xml
 
 %feature("docstring") std::deque "
 STL class. ";
@@ -3225,7 +3225,7 @@ sink for the data (e.g., creating a gdk_pixbuf). ";
 virtual GeoCal::DisplayStretchStdDev::~DisplayStretchStdDev()
 ";
 
-// File: a01176.xml
+// File: a01181.xml
 
 %feature("docstring") std::domain_error "
 STL class. ";
@@ -3825,7 +3825,7 @@ virtual const char* GeoCal::GeoCalCore::Exception::what() const
 virtual GeoCal::GeoCalCore::Exception::~Exception()
  throw ()";
 
-// File: a00624.xml
+// File: a00627.xml
 
 %feature("docstring") std::exception "
 STL class. ";
@@ -3842,7 +3842,7 @@ F::F(const DemUpdater2 &D, int Line, int Sample)
 virtual F::~F()
 ";
 
-// File: a01178.xml
+// File: a01183.xml
 
 %feature("docstring") std::ios_base::failure "
 STL class. ";
@@ -4140,7 +4140,7 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01120.xml
+// File: a01125.xml
 
 %feature("docstring") std::fstream "
 STL class. ";
@@ -6296,7 +6296,7 @@ library, otherwise we throw an exception saying that it isn't
 available. ";
 
 
-// File: a01128.xml
+// File: a01133.xml
 
 %feature("docstring") std::ifstream "
 STL class. ";
@@ -7431,22 +7431,22 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01186.xml
+// File: a01191.xml
 
 
-// File: a01180.xml
+// File: a01185.xml
 
 %feature("docstring") std::invalid_argument "
 STL class. ";
 
 
-// File: a01130.xml
+// File: a01135.xml
 
 %feature("docstring") std::ios "
 STL class. ";
 
 
-// File: a01125.xml
+// File: a01130.xml
 
 %feature("docstring") std::ios_base "
 STL class. ";
@@ -8035,73 +8035,73 @@ virtual GeoCal::IpiMapProjected::~IpiMapProjected()
 Destructor. ";
 
 
-// File: a01138.xml
+// File: a01143.xml
 
 %feature("docstring") std::istream "
 STL class. ";
 
 
-// File: a01136.xml
+// File: a01141.xml
 
 %feature("docstring") std::istringstream "
 STL class. ";
 
 
-// File: a01187.xml
+// File: a01192.xml
 
 %feature("docstring") std::multimap::iterator "
 STL iterator class. ";
 
 
-// File: a01188.xml
+// File: a01193.xml
 
 %feature("docstring") std::set::iterator "
 STL iterator class. ";
 
 
-// File: a01151.xml
+// File: a01156.xml
 
 %feature("docstring") std::basic_string::iterator "
 STL iterator class. ";
 
 
-// File: a01189.xml
+// File: a01194.xml
 
 %feature("docstring") std::multiset::iterator "
 STL iterator class. ";
 
 
-// File: a01190.xml
+// File: a01195.xml
 
 %feature("docstring") std::vector::iterator "
 STL iterator class. ";
 
 
-// File: a01191.xml
+// File: a01196.xml
 
 %feature("docstring") std::string::iterator "
 STL iterator class. ";
 
 
-// File: a01192.xml
+// File: a01197.xml
 
 %feature("docstring") std::wstring::iterator "
 STL iterator class. ";
 
 
-// File: a01174.xml
+// File: a01179.xml
 
 %feature("docstring") std::deque::iterator "
 STL iterator class. ";
 
 
-// File: a01193.xml
+// File: a01198.xml
 
 %feature("docstring") std::list::iterator "
 STL iterator class. ";
 
 
-// File: a01194.xml
+// File: a01199.xml
 
 %feature("docstring") std::map::iterator "
 STL iterator class. ";
@@ -8265,13 +8265,13 @@ This is in m/s, in same coordinate system as position. ";
 virtual GeoCal::KeplerOrbit::~KeplerOrbit()
 ";
 
-// File: a01181.xml
+// File: a01186.xml
 
 %feature("docstring") std::length_error "
 STL class. ";
 
 
-// File: a01195.xml
+// File: a01200.xml
 
 %feature("docstring") std::list "
 STL class. ";
@@ -8320,7 +8320,7 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01177.xml
+// File: a01182.xml
 
 %feature("docstring") std::logic_error "
 STL class. ";
@@ -9059,7 +9059,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::MagnifyReplicate::~MagnifyReplicate()
 ";
 
-// File: a01197.xml
+// File: a01202.xml
 
 %feature("docstring") std::map "
 STL class. ";
@@ -10843,13 +10843,13 @@ Zero_limit2=-1.0, int Zero_thr=0, double Predictor_adjustment[2]=NULL)
 MspiPcorrMatcher::~MspiPcorrMatcher()
 ";
 
-// File: a01199.xml
+// File: a01204.xml
 
 %feature("docstring") std::multimap "
 STL class. ";
 
 
-// File: a01201.xml
+// File: a01206.xml
 
 %feature("docstring") std::multiset "
 STL class. ";
@@ -11049,7 +11049,7 @@ virtual GeoCal::OffsetImageGroundConnection::~OffsetImageGroundConnection()
 Destructor. ";
 
 
-// File: a01141.xml
+// File: a01146.xml
 
 %feature("docstring") std::ofstream "
 STL class. ";
@@ -12075,31 +12075,57 @@ virtual GeoCal::OrbitQuaternionList::~OrbitQuaternionList()
 Destructor. ";
 
 
-// File: a01146.xml
+// File: a01151.xml
 
 %feature("docstring") std::ostream "
 STL class. ";
 
 
-// File: a01144.xml
+// File: a00136.xml
+
+%feature("docstring") GeoCal::OstreamPad "
+This is a filtering stream that adds a pad to the front of every line
+written out.
+
+This can be used to do simple formating (among other things) of adding
+space for a nested item.
+
+C++ includes: ostream_pad.h ";
+
+%feature("docstring")  GeoCal::OstreamPad::OstreamPad "
+GeoCal::OstreamPad::OstreamPad(std::ostream &Os, const std::string &Pad)
+";
+
+// File: a00137.xml
+
+%feature("docstring") GeoCal::OstreamPadFilter "
+";
+%feature("docstring")  GeoCal::OstreamPadFilter::OstreamPadFilter "
+GeoCal::OstreamPadFilter::OstreamPadFilter(const std::string &Pad)
+";
+%feature("docstring")  GeoCal::OstreamPadFilter::put "
+bool GeoCal::OstreamPadFilter::put(Sink &snk, char c)
+";
+
+// File: a01149.xml
 
 %feature("docstring") std::ostringstream "
 STL class. ";
 
 
-// File: a01182.xml
+// File: a01187.xml
 
 %feature("docstring") std::out_of_range "
 STL class. ";
 
 
-// File: a01183.xml
+// File: a01188.xml
 
 %feature("docstring") std::overflow_error "
 STL class. ";
 
 
-// File: a00136.xml
+// File: a00138.xml
 
 %feature("docstring") GeoCal::PaintClass "
 This takes two images, a image with the class ID and a pan band.
@@ -12184,7 +12210,7 @@ Data should be number_band() x nline x nsamp. ";
 virtual GeoCal::PaintClass::~PaintClass()
 ";
 
-// File: a00137.xml
+// File: a00139.xml
 
 %feature("docstring") GeoCal::PanSharpen "
 This create a set of pan sharpened images from a pan band and a set of
@@ -12298,7 +12324,7 @@ Data should be number_band() x nline x nsamp. ";
 virtual GeoCal::PanSharpen::~PanSharpen()
 ";
 
-// File: a00138.xml
+// File: a00140.xml
 
 %feature("docstring") GeoCal::PosExportOrbit "
 This read a POS export file to supply an Orbit.
@@ -12424,7 +12450,7 @@ This is in m/s, in same coordinate system as position. ";
 virtual GeoCal::PosExportOrbit::~PosExportOrbit()
 ";
 
-// File: a00139.xml
+// File: a00141.xml
 
 %feature("docstring") GeoCal::Printable "
 This is a Mixin for classes that can be printed.
@@ -12451,13 +12477,13 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01203.xml
+// File: a01208.xml
 
 %feature("docstring") std::priority_queue "
 STL class. ";
 
 
-// File: a00140.xml
+// File: a00142.xml
 
 %feature("docstring") GeoCal::PushBroomCamera "
 This is a camera specialized to 1 line per band.
@@ -12546,7 +12572,7 @@ camera has infinite extent. ";
 virtual GeoCal::PushBroomCamera::~PushBroomCamera()
 ";
 
-// File: a00141.xml
+// File: a00143.xml
 
 %feature("docstring") GeoCal::QuaternionCamera "
 This is a simple frame camera.
@@ -12695,7 +12721,7 @@ virtual GeoCal::QuaternionCamera::~QuaternionCamera()
 Destructor. ";
 
 
-// File: a00142.xml
+// File: a00144.xml
 
 %feature("docstring") GeoCal::QuaternionOrbitData "
 This class implements the most common way of doing OrbitData
@@ -12859,13 +12885,13 @@ Return velocity. ";
 virtual GeoCal::QuaternionOrbitData::~QuaternionOrbitData()
 ";
 
-// File: a01204.xml
+// File: a01209.xml
 
 %feature("docstring") std::queue "
 STL class. ";
 
 
-// File: a00143.xml
+// File: a00145.xml
 
 %feature("docstring") GeoCal::QuickBirdAttitude "
 This is a low level class that reads a Quickbird attitude file.
@@ -12935,7 +12961,7 @@ double GeoCal::QuickBirdFile< D >::time_spacing() const
 Spacing in seconds between points. ";
 
 
-// File: a00144.xml
+// File: a00146.xml
 
 %feature("docstring") GeoCal::QuickBirdCamera "
 This class models a the QuickBird camera.
@@ -13049,7 +13075,7 @@ virtual GeoCal::QuickBirdCamera::~QuickBirdCamera()
 Destructor. ";
 
 
-// File: a00145.xml
+// File: a00147.xml
 
 %feature("docstring") GeoCal::QuickBirdEphemeris "
 This is a low level class that reads a Quickbird ephemeris file.
@@ -13105,7 +13131,7 @@ double GeoCal::QuickBirdFile< D >::time_spacing() const
 Spacing in seconds between points. ";
 
 
-// File: a00146.xml
+// File: a00148.xml
 
 %feature("docstring") GeoCal::QuickBirdFile "
 Reading QuickBird ephemeris and attitude is almost identical.
@@ -13140,7 +13166,7 @@ double GeoCal::QuickBirdFile< D >::time_spacing() const
 Spacing in seconds between points. ";
 
 
-// File: a00147.xml
+// File: a00149.xml
 
 %feature("docstring") GeoCal::QuickBirdOrbit "
 This is a Quickbird Orbit.
@@ -13268,7 +13294,7 @@ virtual GeoCal::QuickBirdOrbit::~QuickBirdOrbit()
 Destructor. ";
 
 
-// File: a00148.xml
+// File: a00150.xml
 
 %feature("docstring") GeoCal::QuickBirdTimeTable "
 This reads a quickbird .IMD file to get time table information.
@@ -13326,13 +13352,13 @@ Convert from ImageCoordinate to Time and FrameCoordinate. ";
 virtual GeoCal::QuickBirdTimeTable::~QuickBirdTimeTable()
 ";
 
-// File: a01184.xml
+// File: a01189.xml
 
 %feature("docstring") std::range_error "
 STL class. ";
 
 
-// File: a00149.xml
+// File: a00151.xml
 
 %feature("docstring") GeoCal::GeoCalCore::RangeException "
 ";
@@ -13346,7 +13372,7 @@ virtual const char* GeoCal::GeoCalCore::Exception::what() const
 virtual GeoCal::GeoCalCore::RangeException::~RangeException()
  throw ()";
 
-// File: a00150.xml
+// File: a00152.xml
 
 %feature("docstring") GeoCal::RasterAveraged "
 This averages a higher resolution RasterImage into a lower resolution
@@ -13594,7 +13620,7 @@ virtual GeoCal::RasterAveraged::~RasterAveraged()
 Destructor. ";
 
 
-// File: a00151.xml
+// File: a00153.xml
 
 %feature("docstring") GeoCal::RasterImage "
 This is a general image class.
@@ -13829,7 +13855,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::RasterImage::~RasterImage()
 ";
 
-// File: a00152.xml
+// File: a00154.xml
 
 %feature("docstring") GeoCal::GeoCalCore::RasterImage "
 ";
@@ -13868,7 +13894,7 @@ virtual void GeoCal::GeoCalCore::RasterImage::write(int Line, int Sample, int Va
 virtual GeoCal::GeoCalCore::RasterImage::~RasterImage()
 ";
 
-// File: a00153.xml
+// File: a00155.xml
 
 %feature("docstring") GeoCal::RasterImageMultiBand "
 This is a set of RasterImages, one for each band.
@@ -13938,7 +13964,7 @@ Data should be number_band() x nline x nsamp. ";
 virtual GeoCal::RasterImageMultiBand::~RasterImageMultiBand()
 ";
 
-// File: a00154.xml
+// File: a00156.xml
 
 %feature("docstring") GeoCal::RasterImageMultiBandVariable "
 A common implementation of RasterImageMultiBand is to just store a
@@ -14020,7 +14046,7 @@ Data should be number_band() x nline x nsamp. ";
 virtual GeoCal::RasterImageMultiBandVariable::~RasterImageMultiBandVariable()
 ";
 
-// File: a00155.xml
+// File: a00157.xml
 
 %feature("docstring") GeoCal::RasterImageTiledFile "
 This is a RasterImage that is implemented as a TiledFile<T, 2>.
@@ -14256,7 +14282,7 @@ Write a subset of the image. ";
 virtual GeoCal::RasterImageTiledFile::~RasterImageTiledFile()
 ";
 
-// File: a00156.xml
+// File: a00158.xml
 
 %feature("docstring") GeoCal::RasterImageTileIterator "
 It can be useful to step through a Raster Image in tiles.
@@ -14306,7 +14332,7 @@ Constructor, where we supply a tile size to use (which may be
 different than Ri's tile size). ";
 
 
-// File: a00157.xml
+// File: a00159.xml
 
 %feature("docstring") GeoCal::RasterImageVariable "
 Much of the time the constructor for a RasterImage determine the size,
@@ -14519,7 +14545,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::RasterImageVariable::~RasterImageVariable()
 ";
 
-// File: a00158.xml
+// File: a00160.xml
 
 %feature("docstring") GeoCal::RasterImageWithOverlay "
 This is a simple widget.
@@ -14615,7 +14641,7 @@ Set zoom factor. ";
 virtual GeoCal::RasterImageWithOverlay::~RasterImageWithOverlay()
 ";
 
-// File: a00159.xml
+// File: a00161.xml
 
 %feature("docstring") RasterImageWrapClosest "
 ";
@@ -14819,7 +14845,7 @@ can implement more efficient versions of this. ";
 virtual RasterImageWrapClosest::~RasterImageWrapClosest()
 ";
 
-// File: a00160.xml
+// File: a00162.xml
 
 %feature("docstring") RasterImageWrapCvdNorm "
 ";
@@ -15023,7 +15049,7 @@ can implement more efficient versions of this. ";
 virtual RasterImageWrapCvdNorm::~RasterImageWrapCvdNorm()
 ";
 
-// File: a00161.xml
+// File: a00163.xml
 
 %feature("docstring") RasterImageWrapMaterial "
 ";
@@ -15227,7 +15253,7 @@ can implement more efficient versions of this. ";
 virtual RasterImageWrapMaterial::~RasterImageWrapMaterial()
 ";
 
-// File: a00162.xml
+// File: a00164.xml
 
 %feature("docstring") RasterImageWrapPandif "
 ";
@@ -15431,7 +15457,7 @@ can implement more efficient versions of this. ";
 virtual RasterImageWrapPandif::~RasterImageWrapPandif()
 ";
 
-// File: a00163.xml
+// File: a00165.xml
 
 %feature("docstring") GeoCal::RasterMultifile "
 There are certain larger data sets that are made up of a number of
@@ -15655,7 +15681,7 @@ virtual GeoCal::RasterMultifile::~RasterMultifile()
 Destructor. ";
 
 
-// File: a00164.xml
+// File: a00166.xml
 
 %feature("docstring") GeoCal::RasterMultifileTile "
 This is a single file used by RasterMultifile.
@@ -15683,7 +15709,7 @@ void GeoCal::RasterMultifileTile::unchecked_write(int Line, int Sample, int Val)
 Write data. ";
 
 
-// File: a00165.xml
+// File: a00167.xml
 
 %feature("docstring") GeoCal::RasterSubSample "
 This subsamples a higher resolution RasterImage into a lower
@@ -15917,7 +15943,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::RasterSubSample::~RasterSubSample()
 ";
 
-// File: a00166.xml
+// File: a00168.xml
 
 %feature("docstring") GeoCal::RawRasterImage "
 This uses libraw to read RAW format.
@@ -16145,7 +16171,7 @@ These read all three bands of a file at once.
 This is faster than reading each band separately. ";
 
 
-// File: a00167.xml
+// File: a00169.xml
 
 %feature("docstring") GeoCal::RayIntersect "
 This finds the point closest intersection of two look vector.
@@ -16191,7 +16217,7 @@ CartesianFixed &P2, const CartesianFixedLookVector &L2,
 boost::shared_ptr< CartesianFixed > &P, double &Dist)
 ";
 
-// File: a00168.xml
+// File: a00170.xml
 
 %feature("docstring") GeoCal::Refraction "
 This calculates refraction.
@@ -16292,67 +16318,67 @@ Surface zenith angle in radians, given the space zenith angles. ";
 virtual GeoCal::Refraction::~Refraction()
 ";
 
-// File: a01200.xml
-
-%feature("docstring") std::multimap::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01205.xml
-
-%feature("docstring") std::string::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01206.xml
-
-%feature("docstring") std::set::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01198.xml
+// File: a01203.xml
 
 %feature("docstring") std::map::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01152.xml
-
-%feature("docstring") std::basic_string::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01207.xml
+// File: a01210.xml
 
 %feature("docstring") std::wstring::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01196.xml
+// File: a01211.xml
 
-%feature("docstring") std::list::reverse_iterator "
+%feature("docstring") std::set::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01175.xml
+// File: a01157.xml
+
+%feature("docstring") std::basic_string::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01180.xml
 
 %feature("docstring") std::deque::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01202.xml
+// File: a01212.xml
 
-%feature("docstring") std::multiset::reverse_iterator "
+%feature("docstring") std::string::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a01208.xml
+// File: a01205.xml
+
+%feature("docstring") std::multimap::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01213.xml
 
 %feature("docstring") std::vector::reverse_iterator "
 STL iterator class. ";
 
 
-// File: a00169.xml
+// File: a01207.xml
+
+%feature("docstring") std::multiset::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a01201.xml
+
+%feature("docstring") std::list::reverse_iterator "
+STL iterator class. ";
+
+
+// File: a00171.xml
 
 %feature("docstring") GeoCal::Rpc "
 This is used to handle RPC (Rational Polynomial Coefficients).
@@ -16576,7 +16602,7 @@ We determine that latitude and longitude range to use automatically to
 cover the range given by the ImageGroundConnection. ";
 
 
-// File: a00170.xml
+// File: a00172.xml
 
 %feature("docstring") GeoCal::RpcImage "
 This handles both an Rpc, and the RasterImage data the Rpc map
@@ -16958,7 +16984,7 @@ virtual GeoCal::RpcImage::~RpcImage()
 Destructor. ";
 
 
-// File: a00171.xml
+// File: a00173.xml
 
 %feature("docstring") GeoCal::RpcImageGroundConnection "
 This is a ImageGroundConnection where the connection is made by a Rpc.
@@ -17109,13 +17135,13 @@ virtual GeoCal::RpcImageGroundConnection::~RpcImageGroundConnection()
 Destructor. ";
 
 
-// File: a01179.xml
+// File: a01184.xml
 
 %feature("docstring") std::runtime_error "
 STL class. ";
 
 
-// File: a00172.xml
+// File: a00174.xml
 
 %feature("docstring") GeoCal::ScaleImage "
 This is a simple adapter that multiples a underlying image by a scale
@@ -17329,7 +17355,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::ScaleImage::~ScaleImage()
 ";
 
-// File: a00173.xml
+// File: a00175.xml
 
 %feature("docstring") GeoCal::ScLookVector "
 This is a look vector in an spacecraft coordinates.
@@ -17378,7 +17404,7 @@ Constructor. ";
 virtual GeoCal::ScLookVector::~ScLookVector()
 ";
 
-// File: a00174.xml
+// File: a00176.xml
 
 %feature("docstring") GeoCal::SdpHelper "
 This class centralizes all of the SDP library calls.
@@ -17423,7 +17449,7 @@ This converts Time to CCSDS ASCII time format (e.g.,
 \"1996-07-03T04:13:57.987654Z\"). ";
 
 
-// File: a00175.xml
+// File: a00177.xml
 
 %feature("docstring") GeoCal::SdpNotAvailableException "
 Exception thrown if SDP Toolkit isn't available.
@@ -17445,7 +17471,7 @@ virtual GeoCal::SdpNotAvailableException::~SdpNotAvailableException()
 Destructor.
 ";
 
-// File: a00176.xml
+// File: a00178.xml
 
 %feature("docstring") GeoCal::SdpToolkitCoordinateInterface "
 ";
@@ -17482,7 +17508,7 @@ other body will trigger an error. ";
 virtual GeoCal::SdpToolkitCoordinateInterface::~SdpToolkitCoordinateInterface()
 ";
 
-// File: a00177.xml
+// File: a00179.xml
 
 %feature("docstring") GeoCal::SdpToolkitTimeInterface "
 ";
@@ -17503,13 +17529,13 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual GeoCal::SdpToolkitTimeInterface::~SdpToolkitTimeInterface()
 ";
 
-// File: a01209.xml
+// File: a01214.xml
 
 %feature("docstring") std::set "
 STL class. ";
 
 
-// File: a00178.xml
+// File: a00180.xml
 
 %feature("docstring") GeoCal::SimpleDatum "
 This is a Datum which returns a constant undulation everywhere.
@@ -17551,7 +17577,7 @@ virtual GeoCal::SimpleDatum::~SimpleDatum()
 Destructor. ";
 
 
-// File: a00179.xml
+// File: a00181.xml
 
 %feature("docstring") GeoCal::SimpleDem "
 This is a simple implementation of a Dem, intended primarily for use
@@ -17623,7 +17649,7 @@ virtual GeoCal::SimpleDem::~SimpleDem()
 Destructor. ";
 
 
-// File: a00180.xml
+// File: a00182.xml
 
 %feature("docstring") GeoCal::SimplePushBroomCamera "
 This is a simple PushBroomCamera.
@@ -17736,13 +17762,13 @@ The default data is for the nominal MISR DF, red band. ";
 virtual GeoCal::SimplePushBroomCamera::~SimplePushBroomCamera()
 ";
 
-// File: a01210.xml
+// File: a01215.xml
 
 %feature("docstring") std::smart_ptr "
 STL class. ";
 
 
-// File: a00181.xml
+// File: a00183.xml
 
 %feature("docstring") GeoCal::SmoothImage "
 This creates a smoothed version of a RasterImage.
@@ -17967,7 +17993,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::SmoothImage::~SmoothImage()
 ";
 
-// File: a00182.xml
+// File: a00184.xml
 
 %feature("docstring") GeoCal::SpiceException "
 Exception thrown if Spice call fails.
@@ -17992,7 +18018,7 @@ virtual GeoCal::SpiceException::~SpiceException()
 Destructor.
 ";
 
-// File: a00183.xml
+// File: a00185.xml
 
 %feature("docstring") GeoCal::SpiceHelper "
 This class centralizes all of the CSPICE calls from the CSPICE library
@@ -18071,7 +18097,7 @@ This converts Time to CCSDS ASCII time format (e.g.,
 \"1996-07-03T04:13:57.987654Z\"). ";
 
 
-// File: a00184.xml
+// File: a00186.xml
 
 %feature("docstring") GeoCal::SpiceNotAvailableException "
 Exception thrown if Spice isn't available.
@@ -18093,7 +18119,7 @@ virtual GeoCal::SpiceNotAvailableException::~SpiceNotAvailableException()
 Destructor.
 ";
 
-// File: a00185.xml
+// File: a00187.xml
 
 %feature("docstring") GeoCal::SpiceToolkitCoordinateInterface "
 ";
@@ -18127,7 +18153,7 @@ details). ";
 virtual GeoCal::SpiceToolkitCoordinateInterface::~SpiceToolkitCoordinateInterface()
 ";
 
-// File: a00186.xml
+// File: a00188.xml
 
 %feature("docstring") GeoCal::SpiceToolkitTimeInterface "
 ";
@@ -18148,7 +18174,7 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual GeoCal::SpiceToolkitTimeInterface::~SpiceToolkitTimeInterface()
 ";
 
-// File: a00187.xml
+// File: a00189.xml
 
 %feature("docstring") GeoCal::SpotCamera "
 This class models the SPOT camera.
@@ -18275,7 +18301,7 @@ We require that Psi_y be strictly increasing. ";
 virtual GeoCal::SpotCamera::~SpotCamera()
 ";
 
-// File: a00188.xml
+// File: a00190.xml
 
 %feature("docstring") GeoCal::SpotOrbit "
 This class models the SPOT orbit.
@@ -18426,7 +18452,7 @@ This is in m/s, in same coordinate system as position. ";
 virtual GeoCal::SpotOrbit::~SpotOrbit()
 ";
 
-// File: a00189.xml
+// File: a00191.xml
 
 %feature("docstring") GeoCal::SrtmDem "
 This class provides access to the SRTM.
@@ -18543,13 +18569,13 @@ given point. ";
 virtual GeoCal::SrtmDem::~SrtmDem()
 ";
 
-// File: a01211.xml
+// File: a01216.xml
 
 %feature("docstring") std::stack "
 STL class. ";
 
 
-// File: a00190.xml
+// File: a00192.xml
 
 %feature("docstring") GeoCal::Statistic "
 This calculates basic statistics.
@@ -18609,19 +18635,19 @@ GeoCal::Statistic::Statistic()
 Constructor. ";
 
 
-// File: a00700.xml
+// File: a00703.xml
 
 %feature("docstring") std::string "
 STL class. ";
 
 
-// File: a01133.xml
+// File: a01138.xml
 
 %feature("docstring") std::stringstream "
 STL class. ";
 
 
-// File: a00191.xml
+// File: a00193.xml
 
 %feature("docstring") GeoCal::SubRasterImage "
 This allows you to take a subset of a larger RasterImage and treat it
@@ -18861,7 +18887,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::SubRasterImage::~SubRasterImage()
 ";
 
-// File: a00192.xml
+// File: a00194.xml
 
 %feature("docstring") GeoCal::SurfaceImageToImageMatch "
 This is an ImageToImageMatch that takes two image ground connections
@@ -18966,7 +18992,7 @@ Constructor, where we supply the already map projected data. ";
 virtual GeoCal::SurfaceImageToImageMatch::~SurfaceImageToImageMatch()
 ";
 
-// File: a00193.xml
+// File: a00195.xml
 
 %feature("docstring") GeoCal::VicarOgrNsp::TempFile "
 ";
@@ -18977,7 +19003,7 @@ GeoCal::VicarOgrNsp::TempFile::TempFile()
 GeoCal::VicarOgrNsp::TempFile::~TempFile()
 ";
 
-// File: a00194.xml
+// File: a00196.xml
 
 %feature("docstring") GeoCal::VicarOgrNsp::Tif "
 ";
@@ -18988,7 +19014,7 @@ GeoCal::VicarOgrNsp::Tif::Tif(const TempFile &Tf, const char *mode)
 GeoCal::VicarOgrNsp::Tif::~Tif()
 ";
 
-// File: a00195.xml
+// File: a00197.xml
 
 %feature("docstring") GeoCal::Tile "
 This is used by TiledFile to maintain a tile of data.
@@ -19026,7 +19052,7 @@ GeoCal::Tile< T, D >::Tile()
 Constructor. ";
 
 
-// File: a00196.xml
+// File: a00198.xml
 
 %feature("docstring") GeoCal::TiledFile "
 This class is used to handle reading and writing a file using tiles.
@@ -19174,7 +19200,7 @@ virtual GeoCal::TiledFile< T, D >::~TiledFile()
 Destructor. ";
 
 
-// File: a00197.xml
+// File: a00199.xml
 
 %feature("docstring") GeoCal::TiledFileBase "
 This class is the base class of TiledFile<T, D>.
@@ -19283,7 +19309,7 @@ virtual GeoCal::TiledFileBase< D >::~TiledFileBase()
 Destructor. ";
 
 
-// File: a00198.xml
+// File: a00200.xml
 
 %feature("docstring") GeoCal::TiledFileReference "
 This is a helper class for TiledFile.
@@ -19298,7 +19324,7 @@ C++ includes: tiled_file.h ";
 GeoCal::TiledFileReference< T >::TiledFileReference(T &Val, bool &Changed)
 ";
 
-// File: a00199.xml
+// File: a00201.xml
 
 %feature("docstring") GeoCal::Time "
 There are a few reasonable choices for expressing time information.
@@ -19449,7 +19475,7 @@ double GeoCal::Time::unix_time_double() const
 Give time in unix time, as a double. ";
 
 
-// File: a00200.xml
+// File: a00202.xml
 
 %feature("docstring") GeoCal::TimeAcsCreator "
 Small helper class to wrap creation of time in a common interface.
@@ -19459,7 +19485,7 @@ This is useful for templates.
 C++ includes: geocal_time.h ";
 
 
-// File: a00201.xml
+// File: a00203.xml
 
 %feature("docstring") GeoCal::TimeEtCreator "
 Small helper class to wrap creation of time in a common interface.
@@ -19469,7 +19495,7 @@ This is useful for templates.
 C++ includes: geocal_time.h ";
 
 
-// File: a00202.xml
+// File: a00204.xml
 
 %feature("docstring") GeoCal::TimeGpsCreator "
 Small helper class to wrap creation of time in a common interface.
@@ -19479,7 +19505,7 @@ This is useful for templates.
 C++ includes: geocal_time.h ";
 
 
-// File: a00203.xml
+// File: a00205.xml
 
 %feature("docstring") GeoCal::TimeJ2000Creator "
 Small helper class to wrap creation of time in a common interface.
@@ -19489,7 +19515,7 @@ This is useful for templates.
 C++ includes: geocal_time.h ";
 
 
-// File: a00204.xml
+// File: a00206.xml
 
 %feature("docstring") GeoCal::TimePgsCreator "
 Small helper class to wrap creation of time in a common interface.
@@ -19499,7 +19525,7 @@ This is useful for templates.
 C++ includes: geocal_time.h ";
 
 
-// File: a00205.xml
+// File: a00207.xml
 
 %feature("docstring") GeoCal::TimeTable "
 This class is used to relate time to image line number and vice versa.
@@ -19553,7 +19579,7 @@ Default constructor. ";
 virtual GeoCal::TimeTable::~TimeTable()
 ";
 
-// File: a00206.xml
+// File: a00208.xml
 
 %feature("docstring") TokenizerFunction "
 Function to doing tokens. ";
@@ -19562,7 +19588,7 @@ Function to doing tokens. ";
 void TokenizerFunction::reset()
 ";
 
-// File: a00207.xml
+// File: a00209.xml
 
 %feature("docstring") GeoCal::ToolkitCoordinateInterface "
 Each toolkit supplies methods to convert to and from
@@ -19599,7 +19625,7 @@ toolkit doesn't need to be SPICE. ";
 virtual GeoCal::ToolkitCoordinateInterface::~ToolkitCoordinateInterface()
 ";
 
-// File: a00208.xml
+// File: a00210.xml
 
 %feature("docstring") GeoCal::ToolkitTimeInterface "
 Each toolkit supplies methods to convert to and from strings.
@@ -19623,19 +19649,19 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual GeoCal::ToolkitTimeInterface::~ToolkitTimeInterface()
 ";
 
-// File: a01185.xml
+// File: a01190.xml
 
 %feature("docstring") std::underflow_error "
 STL class. ";
 
 
-// File: a01212.xml
+// File: a01217.xml
 
 %feature("docstring") std::unique_ptr "
 STL class. ";
 
 
-// File: a00209.xml
+// File: a00211.xml
 
 %feature("docstring") UnixToolkitTimeInterface "
 Unix version. ";
@@ -19657,19 +19683,19 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual UnixToolkitTimeInterface::~UnixToolkitTimeInterface()
 ";
 
-// File: a01213.xml
+// File: a01218.xml
 
 %feature("docstring") std::valarray "
 STL class. ";
 
 
-// File: a01214.xml
+// File: a01219.xml
 
 %feature("docstring") std::vector "
 STL class. ";
 
 
-// File: a00210.xml
+// File: a00212.xml
 
 %feature("docstring") GeoCal::VFunctorWithDerivative "
 ";
@@ -19686,7 +19712,7 @@ Often this can be calculated more quickly. The default implementation
 here just calls opererator() and df separately. ";
 
 
-// File: a00211.xml
+// File: a00213.xml
 
 %feature("docstring") GeoCal::VicarArgument "
 This provides access to arguments passed by VICAR.
@@ -19795,7 +19821,7 @@ library, otherwise we throw an exception saying that it isn't
 available. ";
 
 
-// File: a00212.xml
+// File: a00214.xml
 
 %feature("docstring") GeoCal::VicarDem "
 This uses a VicarTiledFile<T> as a DEM.
@@ -19927,7 +19953,7 @@ virtual GeoCal::VicarDem::~VicarDem()
 Destructor. ";
 
 
-// File: a00213.xml
+// File: a00215.xml
 
 %feature("docstring") GeoCal::VicarException "
 Exception thrown if Vicar call fails.
@@ -19951,7 +19977,7 @@ virtual GeoCal::VicarException::~VicarException()
 Destructor.
 ";
 
-// File: a00214.xml
+// File: a00216.xml
 
 %feature("docstring") GeoCal::VicarFile "
 This handles opening and closing a Vicar file.
@@ -20280,7 +20306,7 @@ library, otherwise we throw an exception saying that it isn't
 available. ";
 
 
-// File: a00215.xml
+// File: a00217.xml
 
 %feature("docstring") GeoCal::VicarImageCoordinate "
 VICAR programs use a different convention than our ImageCoordinate.
@@ -20320,7 +20346,7 @@ Default constructor, line and sample aren't initialized. ";
 virtual GeoCal::VicarImageCoordinate::~VicarImageCoordinate()
 ";
 
-// File: a00216.xml
+// File: a00218.xml
 
 %feature("docstring") GeoCal::VicarLiteDem "
 This uses VicarLiteFile to implement a Dem.
@@ -20427,7 +20453,7 @@ just return a height of 0. ";
 virtual GeoCal::VicarLiteDem::~VicarLiteDem()
 ";
 
-// File: a00217.xml
+// File: a00219.xml
 
 %feature("docstring") GeoCal::VicarLiteFile "
 This handles opening and closing a Vicar file.
@@ -20584,7 +20610,7 @@ This looks for the first few characters of the file being \"LBLSIZE=\"
 ";
 
 
-// File: a00218.xml
+// File: a00220.xml
 
 %feature("docstring") GeoCal::VicarLiteRasterImage "
 This uses VicarLiteFile to implement a RasterImage.
@@ -20726,7 +20752,7 @@ have an overview, this returns a null - which the calling routine
 needs to be ready to handle. ";
 
 %feature("docstring")  GeoCal::VicarLiteRasterImage::print "
-virtual void GeoCal::RasterImage::print(std::ostream &Os) const
+virtual void GeoCal::VicarLiteRasterImage::print(std::ostream &Os) const
 Print to stream. ";
 
 %feature("docstring")  GeoCal::VicarLiteRasterImage::print_to_string "
@@ -20824,7 +20850,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::VicarLiteRasterImage::~VicarLiteRasterImage()
 ";
 
-// File: a00219.xml
+// File: a00221.xml
 
 %feature("docstring") GeoCal::VicarMultiFile "
 This gives read access to some of the larger AFIDS datasets, such as
@@ -21092,7 +21118,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::VicarMultiFile::~VicarMultiFile()
 ";
 
-// File: a00220.xml
+// File: a00222.xml
 
 %feature("docstring") GeoCal::VicarNotAvailableException "
 Exception thrown if Vicar isn't available.
@@ -21114,7 +21140,7 @@ virtual GeoCal::VicarNotAvailableException::~VicarNotAvailableException()
 Destructor.
 ";
 
-// File: a00221.xml
+// File: a00223.xml
 
 %feature("docstring") GeoCal::VicarOgr "
 This class is really part of VicarFile, but because of the
@@ -21169,7 +21195,7 @@ Normally we only have one of these objects around, although nothing is
 hurt if you create multiple copies. ";
 
 
-// File: a00222.xml
+// File: a00224.xml
 
 %feature("docstring") GeoCal::VicarRasterImage "
 This wraps a VicarTiledFile<T> to make a RasterImage.
@@ -21477,7 +21503,7 @@ virtual GeoCal::VicarRasterImage::~VicarRasterImage()
 Destructor. ";
 
 
-// File: a00223.xml
+// File: a00225.xml
 
 %feature("docstring") GeoCal::VicarTiledFile "
 This reads and writes a VICAR file, as a TiledFile.
@@ -21603,49 +21629,49 @@ virtual GeoCal::VicarTiledFile< T >::~VicarTiledFile()
 Destructor. ";
 
 
-// File: a01215.xml
+// File: a01220.xml
 
 %feature("docstring") std::weak_ptr "
 STL class. ";
 
 
-// File: a01121.xml
+// File: a01126.xml
 
 %feature("docstring") std::wfstream "
 STL class. ";
 
 
-// File: a01129.xml
+// File: a01134.xml
 
 %feature("docstring") std::wifstream "
 STL class. ";
 
 
-// File: a01131.xml
+// File: a01136.xml
 
 %feature("docstring") std::wios "
 STL class. ";
 
 
-// File: a01139.xml
+// File: a01144.xml
 
 %feature("docstring") std::wistream "
 STL class. ";
 
 
-// File: a01137.xml
+// File: a01142.xml
 
 %feature("docstring") std::wistringstream "
 STL class. ";
 
 
-// File: a01142.xml
+// File: a01147.xml
 
 %feature("docstring") std::wofstream "
 STL class. ";
 
 
-// File: a00224.xml
+// File: a00226.xml
 
 %feature("docstring") GeoCal::WorldView2CloudMask "
 This create a cloud mask using WorldView2 mulispectral data.
@@ -21869,7 +21895,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::WorldView2CloudMask::~WorldView2CloudMask()
 ";
 
-// File: a00225.xml
+// File: a00227.xml
 
 %feature("docstring") WorldView2CloudMaskHelper "
 ";
@@ -22082,43 +22108,43 @@ can implement more efficient versions of this. ";
 virtual WorldView2CloudMaskHelper::~WorldView2CloudMaskHelper()
 ";
 
-// File: a01147.xml
+// File: a01152.xml
 
 %feature("docstring") std::wostream "
 STL class. ";
 
 
-// File: a01145.xml
+// File: a01150.xml
 
 %feature("docstring") std::wostringstream "
 STL class. ";
 
 
-// File: a01148.xml
+// File: a01153.xml
 
 %feature("docstring") std::wstring "
 STL class. ";
 
 
-// File: a01134.xml
+// File: a01139.xml
 
 %feature("docstring") std::wstringstream "
 STL class. ";
-
-
-// File: a00507.xml
-
-
-// File: a00508.xml
-
-
-// File: a00509.xml
 
 
 // File: a00510.xml
 
 
 // File: a00511.xml
+
+
+// File: a00512.xml
+
+
+// File: a00513.xml
+
+
+// File: a00514.xml
 %feature("docstring")  GeoCal::Constant::const_pointer "
 boost::shared_ptr<T> GeoCal::const_pointer(const T &t)
 Create a boost pointer to a reference, where we don't actually take
@@ -22446,10 +22472,10 @@ std::string GeoCal::VicarLiteFile::label< std::string >(const std::string &K, co
 Return value for the given label. ";
 
 
-// File: a00512.xml
+// File: a00515.xml
 
 
-// File: a00513.xml
+// File: a00516.xml
 %feature("docstring")  GeoCal::GdalRegister::gdal_register "
 void GeoCal::GdalRegister::gdal_register()
 Register GDAL drivers once.
@@ -22458,7 +22484,7 @@ Not normally directly called by the user, this is an internal
 function. ";
 
 
-// File: a00514.xml
+// File: a00517.xml
 %feature("docstring")  GeoCal::GdalType::gdal_data_type "
 int GeoCal::GdalType::gdal_data_type()
 ";
@@ -22484,7 +22510,7 @@ int GeoCal::GdalType::gdal_data_type< GUInt16 >()
 int GeoCal::GdalType::gdal_data_type< GUInt32 >()
 ";
 
-// File: a00515.xml
+// File: a00518.xml
 %feature("docstring")  GeoCal::GeoCalCore::range_check_template "
 void GeoCal::GeoCalCore::range_check_template(const T &Val, const T &Min, const T &Max, const CodeLocation &Cl)
 ";
@@ -22498,10 +22524,10 @@ void GeoCal::GeoCalCore::range_max_check_template(const T &Val, const T &Max, co
 void GeoCal::GeoCalCore::range_min_check_template(const T &Val, const T &Min, const CodeLocation &Cl)
 ";
 
-// File: a00516.xml
+// File: a00519.xml
 
 
-// File: a00517.xml
+// File: a00520.xml
 %feature("docstring")  GeoCal::VicarType::vicar_type "
 std::string GeoCal::VicarType::vicar_type()
 ";
@@ -22521,13 +22547,13 @@ std::string GeoCal::VicarType::vicar_type< VicarFull >()
 std::string GeoCal::VicarType::vicar_type< VicarHalf >()
 ";
 
-// File: a00518.xml
+// File: a00521.xml
 
 
-// File: a00519.xml
+// File: a00522.xml
 
 
-// File: a00520.xml
+// File: a00523.xml
 %feature("docstring")  mmap_file::mmap_file "
 def mmap_file.mmap_file
 Open a VICAR file as a memmap. This either opens for reading or
@@ -22544,14 +22570,14 @@ np.float32, np.int8, np.int16, np.int32, np.uint8, np.uint16,
 np.uint32
 ";
 
-// File: a00521.xml
+// File: a00524.xml
 %feature("docstring")  mmap_file_test::test_read_write "
 def mmap_file_test.test_read_write";
 
-// File: a00522.xml
+// File: a00525.xml
 
 
-// File: a00523.xml
+// File: a00526.xml
 %feature("docstring")  raster_tile::read_iterator "
 def raster_tile.read_iterator
 This is similar to tile_iterator, but it is used as a short cut when
@@ -22573,7 +22599,7 @@ iterator for raster_image(0).  Example usage:  for i in
 tile_iterator(file):    print i
 ";
 
-// File: a00524.xml
+// File: a00527.xml
 %feature("docstring")  raster_tile_test::setUp "
 def raster_tile_test.setUp";
 %feature("docstring")  raster_tile_test::test_read_iterator "
@@ -22581,16 +22607,10 @@ def raster_tile_test.test_read_iterator";
 %feature("docstring")  raster_tile_test::test_tile_iterator "
 def raster_tile_test.test_tile_iterator";
 
-// File: a00525.xml
+// File: a00528.xml
 
 
-// File: a00526.xml
-
-
-// File: a00226.xml
-
-
-// File: a00227.xml
+// File: a00529.xml
 
 
 // File: a00228.xml
@@ -22612,24 +22632,24 @@ def raster_tile_test.test_tile_iterator";
 
 
 // File: a00234.xml
-%feature("docstring")  v2_deactivate_a_unit "
-int v2_deactivate_a_unit(int unit)
-";
+
 
 // File: a00235.xml
 
 
 // File: a00236.xml
-%feature("docstring")  material_class_sort "
-bool material_class_sort(const MaterialDetect::MaterialClass &M1, const
-MaterialDetect::MaterialClass &M2)
+%feature("docstring")  v2_deactivate_a_unit "
+int v2_deactivate_a_unit(int unit)
 ";
 
 // File: a00237.xml
 
 
 // File: a00238.xml
-
+%feature("docstring")  material_class_sort "
+bool material_class_sort(const MaterialDetect::MaterialClass &M1, const
+MaterialDetect::MaterialClass &M2)
+";
 
 // File: a00239.xml
 
@@ -22689,18 +22709,18 @@ MaterialDetect::MaterialClass &M2)
 
 
 // File: a00258.xml
+
+
+// File: a00259.xml
+
+
+// File: a00260.xml
 %feature("docstring")  to_s1 "
 std::string to_s1(double x)
 ";
 %feature("docstring")  to_s2 "
 std::string to_s2(double x)
 ";
-
-// File: a00259.xml
-
-
-// File: a00260.xml
-
 
 // File: a00261.xml
 
@@ -22712,6 +22732,12 @@ std::string to_s2(double x)
 
 
 // File: a00264.xml
+
+
+// File: a00265.xml
+
+
+// File: a00266.xml
 %feature("docstring")  GeoCal::GTIFFree "
 void GTIFFree(GTIF *gtif)
 ";
@@ -22752,12 +22778,6 @@ void XTIFFClose(TIFF *tif)
 TIFF* XTIFFOpen(const char *name, const char *mode)
 ";
 
-// File: a00265.xml
-
-
-// File: a00266.xml
-
-
 // File: a00267.xml
 
 
@@ -22789,23 +22809,23 @@ TIFF* XTIFFOpen(const char *name, const char *mode)
 
 
 // File: a00277.xml
+
+
+// File: a00278.xml
+
+
+// File: a00279.xml
 %feature("docstring")  gmm::main "
 int main(int Argc, char **Argv)
 ";
 
-// File: a00278.xml
+// File: a00280.xml
 %feature("docstring")  main "
 int main(int Argc, char **Argv)
 ";
 %feature("docstring")  sqr "
 double sqr(double x)
 ";
-
-// File: a00279.xml
-
-
-// File: a00280.xml
-
 
 // File: a00281.xml
 
@@ -22880,26 +22900,26 @@ double sqr(double x)
 
 
 // File: a00305.xml
-%feature("docstring")  do_read_all "
-std::vector<boost::shared_ptr<RasterImage> > do_read_all(const GdalRasterImage &d)
-";
+
 
 // File: a00306.xml
 
 
 // File: a00307.xml
-%feature("docstring")  to_s1 "
-std::string to_s1(double x)
-";
-%feature("docstring")  to_s2 "
-std::string to_s2(double x)
+%feature("docstring")  do_read_all "
+std::vector<boost::shared_ptr<RasterImage> > do_read_all(const GdalRasterImage &d)
 ";
 
 // File: a00308.xml
 
 
 // File: a00309.xml
-
+%feature("docstring")  to_s1 "
+std::string to_s1(double x)
+";
+%feature("docstring")  to_s2 "
+std::string to_s2(double x)
+";
 
 // File: a00310.xml
 
@@ -23106,15 +23126,15 @@ std::string to_s2(double x)
 
 
 // File: a00378.xml
-%feature("docstring")  sqr "
-double sqr(double x)
-";
+
 
 // File: a00379.xml
 
 
 // File: a00380.xml
-
+%feature("docstring")  sqr "
+double sqr(double x)
+";
 
 // File: a00381.xml
 
@@ -23141,9 +23161,7 @@ double sqr(double x)
 
 
 // File: a00389.xml
-%feature("docstring")  sqr "
-double sqr(double x)
-";
+
 
 // File: a00390.xml
 
@@ -23157,7 +23175,9 @@ double sqr(double x)
 
 
 // File: a00393.xml
-
+%feature("docstring")  sqr "
+double sqr(double x)
+";
 
 // File: a00394.xml
 
@@ -23181,15 +23201,15 @@ double sqr(double x)
 
 
 // File: a00401.xml
-%feature("docstring")  sqr "
-double sqr(double x)
-Length of look vector, in meters. ";
 
 
 // File: a00402.xml
 
 
 // File: a00403.xml
+%feature("docstring")  sqr "
+double sqr(double x)
+Length of look vector, in meters. ";
 
 
 // File: a00404.xml
@@ -23217,6 +23237,12 @@ Length of look vector, in meters. ";
 
 
 // File: a00412.xml
+
+
+// File: a00413.xml
+
+
+// File: a00414.xml
 %feature("docstring")  cross2 "
 blitz::Array<double, 1> cross2(const blitz::Array< double, 1 > &x, const blitz::Array< double, 1 >
 &y)
@@ -23258,12 +23284,6 @@ interpolation of that angle for the given time. ";
 double normb(const blitz::Array< double, 1 > &x)
 ";
 
-// File: a00413.xml
-
-
-// File: a00414.xml
-
-
 // File: a00415.xml
 
 
@@ -23271,15 +23291,15 @@ double normb(const blitz::Array< double, 1 > &x)
 
 
 // File: a00417.xml
-%feature("docstring")  to_c_order_const "
-blitz::Array<T, D> to_c_order_const(const blitz::Array< T, D > &In)
-";
+
 
 // File: a00418.xml
 
 
 // File: a00419.xml
-
+%feature("docstring")  to_c_order_const "
+blitz::Array<T, D> to_c_order_const(const blitz::Array< T, D > &In)
+";
 
 // File: a00420.xml
 
@@ -23417,12 +23437,7 @@ blitz::Array<T, D> to_c_order_const(const blitz::Array< T, D > &In)
 
 
 // File: a00465.xml
-%feature("docstring")  BZ_DECLARE_FUNCTION_RET "
-BZ_DECLARE_FUNCTION_RET(in_range, unsigned char)
-";
-%feature("docstring")  in_range "
-unsigned char in_range(double x)
-";
+
 
 // File: a00466.xml
 
@@ -23431,15 +23446,15 @@ unsigned char in_range(double x)
 
 
 // File: a00468.xml
-
+%feature("docstring")  BZ_DECLARE_FUNCTION_RET "
+BZ_DECLARE_FUNCTION_RET(in_range, unsigned char)
+";
+%feature("docstring")  in_range "
+unsigned char in_range(double x)
+";
 
 // File: a00469.xml
-%feature("docstring")  cb_key_press_event "
-static gint cb_key_press_event(GtkWidget *widget, GdkEventKey *event)
-";
-%feature("docstring")  main "
-int main(int argc, char **argv)
-";
+
 
 // File: a00470.xml
 
@@ -23448,34 +23463,39 @@ int main(int argc, char **argv)
 
 
 // File: a00472.xml
+%feature("docstring")  cb_key_press_event "
+static gint cb_key_press_event(GtkWidget *widget, GdkEventKey *event)
+";
 %feature("docstring")  main "
-int main(int Argc, char **Argv)
+int main(int argc, char **argv)
 ";
 
 // File: a00473.xml
 
 
 // File: a00474.xml
-%feature("docstring")  main "
-int main(int Argc, char **Argv)
-";
+
 
 // File: a00475.xml
 %feature("docstring")  main "
 int main(int Argc, char **Argv)
-";
-%feature("docstring")  sqr "
-double sqr(double x)
 ";
 
 // File: a00476.xml
 
 
 // File: a00477.xml
-
+%feature("docstring")  main "
+int main(int Argc, char **Argv)
+";
 
 // File: a00478.xml
-
+%feature("docstring")  main "
+int main(int Argc, char **Argv)
+";
+%feature("docstring")  sqr "
+double sqr(double x)
+";
 
 // File: a00479.xml
 
@@ -23487,6 +23507,15 @@ double sqr(double x)
 
 
 // File: a00482.xml
+
+
+// File: a00483.xml
+
+
+// File: a00484.xml
+
+
+// File: a00485.xml
 %feature("docstring")  findBelowThres "
 void findBelowThres(cv::Mat &matrix, std::vector< cv::Point2f > &belThres, double thresh)
 ";
@@ -23519,7 +23548,7 @@ cv::Mat rastToMat(GeoCal::GeoCalCore::RasterImage &src)
 cv::Mat subImage(cv::Mat &img, cv::Point2f pt, cv::Size size)
 ";
 
-// File: a00483.xml
+// File: a00486.xml
 %feature("docstring")  findBelowThres "
 void findBelowThres(cv::Mat &matrix, std::vector< cv::Point2f > &belThres, double
 thresh=0)
@@ -23553,15 +23582,6 @@ cv::Mat rastToMat(GeoCal::GeoCalCore::RasterImage &src)
 cv::Mat subImage(cv::Mat &img, cv::Point2f pt, cv::Size size)
 ";
 
-// File: a00484.xml
-
-
-// File: a00485.xml
-
-
-// File: a00486.xml
-
-
 // File: a00487.xml
 
 
@@ -23587,6 +23607,15 @@ cv::Mat subImage(cv::Mat &img, cv::Point2f pt, cv::Size size)
 
 
 // File: a00495.xml
+
+
+// File: a00496.xml
+
+
+// File: a00497.xml
+
+
+// File: a00498.xml
 %feature("docstring")  convertGeoTIFFTiePoints "
 void convertGeoTIFFTiePoints(float **fstImgCoeff, float **sndImgCoeff, float **c_data, int
 geocord1, double itie[6], double otie[6], int geocord2, int
@@ -23610,7 +23639,7 @@ labns, int gtgetlabval)
 float getzvl(float *imgCoeff, int n, float coord[2], int nw, int nr)
 ";
 
-// File: a00496.xml
+// File: a00499.xml
 %feature("docstring")  convertGeoTIFFTiePoints "
 void convertGeoTIFFTiePoints(float **fstImgCoeff, float **sndImgCoeff, float **c_data, int
 geocord1, double itie[6], double otie[6], int geocord2, int
@@ -23634,7 +23663,7 @@ labns, int gtgetlabval)
 float getzvl(float *imgCoeff, int n, float coord[2], int nw, int nr)
 ";
 
-// File: a00497.xml
+// File: a00500.xml
 %feature("docstring")  calcLeastSquaresFit "
 void calcLeastSquaresFit(double soln[12], bool predfunc, int nEquationsMax, std::vector<
 GeoCal::GeoCalCore::ImageCoor > &fstImgCoors, std::vector<
@@ -23659,7 +23688,7 @@ void tiltCoor(GeoCal::GeoCalCore::RasterImage *Img, GeoCal::GeoCalCore::ImageCoo
 TiePoints[3], double angoff)
 ";
 
-// File: a00498.xml
+// File: a00501.xml
 %feature("docstring")  calcLeastSquaresFit "
 void calcLeastSquaresFit(double soln[12], bool predfunc, int nEquationsMax, std::vector<
 GeoCal::GeoCalCore::ImageCoor > &fstImgCoors, std::vector<
@@ -23689,12 +23718,12 @@ void tiltCoor(GeoCal::GeoCalCore::RasterImage *Img, GeoCal::GeoCalCore::ImageCoo
 TiePoints[3], double angoff)
 ";
 
-// File: a00499.xml
+// File: a00502.xml
 %feature("docstring")  main "
 int main(int argc, char **argv)
 ";
 
-// File: a00500.xml
+// File: a00503.xml
 %feature("docstring")  BOOST_AUTO_TEST_CASE "
 BOOST_AUTO_TEST_CASE(calcLeastSquaresFit_test)
 ";
@@ -23741,15 +23770,6 @@ BOOST_AUTO_TEST_CASE(Match11_FourEdgeCases_For_SubImages)
 BOOST_AUTO_TEST_CASE(Match12_AutoThresh_Case)
 ";
 
-// File: a00501.xml
-
-
-// File: a00502.xml
-
-
-// File: a00503.xml
-
-
 // File: a00504.xml
 
 
@@ -23759,19 +23779,28 @@ BOOST_AUTO_TEST_CASE(Match12_AutoThresh_Case)
 // File: a00506.xml
 
 
-// File: a00529.xml
+// File: a00507.xml
 
 
-// File: a00527.xml
+// File: a00508.xml
+
+
+// File: a00509.xml
+
+
+// File: a00532.xml
+
+
+// File: a00530.xml
+
+
+// File: a00534.xml
 
 
 // File: a00531.xml
 
 
-// File: a00528.xml
-
-
-// File: a00530.xml
+// File: a00533.xml
 
 
 // File: dir_a6b25effbb55561dae9229c79c93c63e.xml

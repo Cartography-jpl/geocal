@@ -3,6 +3,7 @@
 #include "dem_tiled_file.h"
 #include "did_datum.h"
 #include "geocal_gdal.h"
+#include "ostream_pad.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -37,15 +38,19 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const 
-  { Os << "GDAL Dem:\n"
-       << "  File: " << *gdal
-       << "  Map info:\n"
-       << map_info()
-       << "  Datum:\n"
-       << datum()
-       << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
+  { 
+    OstreamPad opad(Os, "    ");
+    Os << "GDAL Dem:\n"
+       << "  File:    " << *gdal
+       << "  Band id: " << band_id() << "\n"
+       << "  Map info:\n";
+    opad << map_info();
+    opad.strict_sync();
+    Os << "  Datum:\n";
+    opad << datum();
+    opad.strict_sync();
+    Os << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
   }
-
   int band_id() const {return band_id_;}
   const std::string& file_name() const {return fname;}
 private:

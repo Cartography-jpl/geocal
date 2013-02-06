@@ -6,6 +6,7 @@
 #include "memory_map_array.h"
 #include "raster_image_variable.h"
 #include "dem_map_info.h"
+#include "ostream_pad.h"
 #include "printable.h"
 #include <boost/shared_ptr.hpp>
 #include <map>
@@ -152,7 +153,8 @@ public:
   { Os << "Vicar Lite File \n" 
        << "  File:          " << file_name() << "\n"
        << "  Number line:   " << number_line() << "\n"
-       << "  Number sample: " << number_sample() << "\n";
+       << "  Number sample: " << number_sample() << "\n"
+       << "  Number band:   " << number_band() << "\n";
   }
 
 //-----------------------------------------------------------------------
@@ -499,6 +501,7 @@ public:
 		       bool Force_area_pixel = false)
     : band_(Band), f_(new VicarLiteFile(Fname, Access, Force_area_pixel))
   {
+    range_check(band_, 0, f_->number_band());
     number_line_ = f_->number_line();
     number_sample_ = f_->number_sample();
     number_tile_line_ = Number_tile_line;
@@ -561,6 +564,30 @@ public:
 /// Return band number
 //-----------------------------------------------------------------------
   int band() const { return band_; }
+
+  virtual void print(std::ostream& Os) const 
+  {
+    OstreamPad opad(Os, "    ");
+    Os << "VicarLiteRasterImage:\n"
+       << "  File:          " << f_->file_name() << "\n"
+       << "  Band:          " << band() << "\n"
+       << "  Number line:   " << number_line() << "\n"
+       << "  Number sample: " << number_sample() << "\n";
+    Os << "  Map Info:      ";
+    if(has_map_info()) {
+      Os << "\n";
+      opad << map_info();
+      opad.strict_sync();
+    } else
+      Os << "None\n";
+    Os << "  RPC:           ";
+    if(has_rpc()) {
+      Os << "\n";
+      opad << rpc();
+      opad.strict_sync();
+    } else
+      Os << "None\n";
+  }
 private:
   int band_;
   boost::shared_ptr<VicarLiteFile> f_;
@@ -588,6 +615,7 @@ public:
     : band_(Band), f_(new VicarLiteFile(Fname))
   {
     initialize(D, f_->map_info(), Outside_dem_is_error);
+    range_check(band_, 0, f_->number_band());
   }
   virtual ~VicarLiteDem() {}
 
@@ -617,14 +645,18 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const 
-  { Os << "Vicar Lite Dem:\n"
+  { 
+    OstreamPad opad(Os, "    ");
+    Os << "Vicar Lite Dem:\n"
        << "  File: " << f_->file_name() << "\n"
        << "  Band: " << band_ << "\n"
-       << "  Map info:\n"
-       << map_info()
-       << "  Datum:\n"
-       << datum()
-       << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
+       << "  Map info:\n";
+    opad << map_info();
+    opad.strict_sync();
+    Os << "  Datum:\n";
+    opad << datum();
+    opad.strict_sync();
+    Os << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
   }
 
 //-----------------------------------------------------------------------

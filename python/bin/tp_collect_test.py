@@ -12,7 +12,7 @@ def test_tp_collection():
     subprocess.check_call(["shelve_dem", 
                            test_data + "nevada_elv_aoi.img",
                            "sqlite_shelf.db:dem_initial"])
-    subprocess.check_call(["create_gdal_igc", "sqlite_shelf.db:igc",
+    subprocess.check_call(["shelve_igccol", "sqlite_shelf.db:igc",
                            "sqlite_shelf.db:dem_initial",
                            test_data + "10MAY21-1.img", "Image 1",
                            test_data + "10MAY21-2.img", "Image 2",

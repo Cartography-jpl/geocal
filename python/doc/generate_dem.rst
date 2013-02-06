@@ -17,10 +17,60 @@ There are several steps to creating the DEM:
 #. Set up to use the latest version of AFIDS/Python
 #. Set up an area to work
 #. Locate the input data
+#. Create shelve objects for the initial DEM and reference image
 #. Convert the NITF to VICAR format
 #. Create the initial image ground connection collection
 #. Correct the RPCs for the input images
 #. Move your data from the local disk to the raids
+
+Shelve objects
+--------------
+
+We have a number of complicated objects used in the generation of DEM. Each
+object may be made up of several pieces. For example, a DEM might contain
+a height image file, along with a second datum file (e.g., National Map DEMs
+that tend to be against NAVD 88). The code will create these objects once,
+and then allow them to be used in multiple programs.
+
+As a convenience, we store the objects as “pickled” python
+objects. This is a built in method in python of creating persistent
+objects. To allow multiple objects to be stored, we store these
+pickled objects in a sqlite database, which we then can access in
+other pieces of software by giving it a database file along with an
+object name. The data is stored as a key/value pair, where the key is
+an arbitrary name we choose to assign to it.
+
+This is somewhat analogous to the IBIS files used in AFIDS which can contain 
+various parameters (e.g., a RPC that Al's code has fitted for), 
+although the shelve objects are much more general.
+
+We refer to objects in the various programs by a "file\:key" notation.
+For example, if we store a reference image in the file "nevada.db" as
+"ref_image", we would refer to this as "nevada.db:ref_image"
+
+There are a few useful general commands that work with shelve objects.
+To find out what keys are in a file, you can use "shelve_dir"::
+
+  shelve_dir nevada.db
+
+To find out more details about a particular object, you can use the command
+shelve_show::
+
+  shelve_show nevada.db:ref_image
+
+which returns::
+
+  VicarLiteRasterImage:
+    File:          /raid22/nevada/nevada_doq.img
+    Band:          0
+    Number line:   33338
+    Number sample: 33338
+    Map Info:      
+      Coordinate: Geodetic Coordinate Converter
+      ULC:       (-116.3, 36.95)
+      LRC:       (-116, 36.65)
+      Number:    (33338, 33338)
+    RPC:           None
 
 Setting up your environment
 ----------------------------
@@ -92,6 +142,74 @@ For our example, the input data is:
 3. /raid22/nevada/nevada_doq.img
 4. /raid22/nevada/nevada_elv.hlf
 
+Create shelve objects for the initial DEM and reference image
+-------------------------------------------------------------
+
+To start, we need to create shelve objects for our reference image and
+initial DEM. This will then allow these to be used in future programs.
+
+We use the programs "shelve_dem" and "shelve_image" to set up these 
+objects::
+
+  shelve_image /raid22/nevada/nevada_doq.img nevada.db:ref_image
+  shelve_dem /raid22/nevada/nevada_elv.hlf nevada.db:dem_initial
+
+Note that shelve_dem can also be directed to use the SRTM Level 2 data we
+have in AFIDS by passing "--srtm" option, and it can also be passed a datum
+file if the elevation is relative to mean sea level rather than a reference
+ellipsoid.
+
+In general, you can pass the option "-h" or "--help" to a program to get
+a list of all the options and arguments.
+
+Once we have created the shelve database, we can find out what the contents
+are::
+
+  shelve_dir nevada.db
+
+This prints out::
+
+  dem_initial
+  ref_image
+
+Looking at the DEM we created::
+
+   shelve_show nevada.db:dem_initial
+
+which returns::
+
+  Vicar Lite Dem:
+    File: /raid22/nevada/nevada_elv.hlf
+    Band: 0
+    Map info:
+      Coordinate: Geodetic Coordinate Converter
+      ULC:       (-117.001, 38.0007)
+      LRC:       (-114.999, 35.9992)
+      Number:    (21617, 21616)
+    Datum:
+      Simple Datum, undulation 0m 
+    Outside Dem is error: 1
+
+And the reference image::
+
+  shelve_show nevada.db:ref_image
+
+which returns::
+
+  VicarLiteRasterImage:
+    File:          /raid22/nevada/nevada_doq.img
+    Band:          0
+    Number line:   33338
+    Number sample: 33338
+    Map Info:      
+      Coordinate: Geodetic Coordinate Converter
+      ULC:       (-116.3, 36.95)
+      LRC:       (-116, 36.65)
+      Number:    (33338, 33338)
+    RPC:           None
+
+
+
 Convert the NITF to VICAR format
 --------------------------------
 The NITF format is pretty slow, so we convert the Worldview 1 or 2 data to
@@ -115,48 +233,32 @@ full path with a local path.
 
 Create the initial image ground connection collection
 -----------------------------------------------------
-One of the central things used in DEM generation is an
-"image ground connection collection". 
-This is used internally by the various programs, and as a user you can
-ignore most of the details about this object. But it get created by supplying
-a reference DEM, and set of images (in our example, 2 for the stereo pair),
-and a list of RPC parameters to adjust.
 
-We keep track of this information a "sqlite shelve object". This is a file
-that contains various names values.  The file typically has a ".db" extension
-and can contain any number of key/value pairs. Various programs access
-these values by being passed a "file\:key" pair, e.g., "my_data.db:tp" would
-refer to the key/value pair "tp" found in the file "my_data.db". This is
-somewhat analogous to the IBIS files used in AFIDS which can contain 
-various parameters, although the "sqlite shelve objects" are much more 
-general.
+One of the central things used by the software is called a “Image
+Ground Connection” or “IGC”. This is a generalization of the
+traditional orbit/camera model used in photogrammetry to an object
+that can support frame cameras, push broom cameras, and systems using
+RPCs. We have an image, and a generic invertible function that maps
+that image to and from the ground. For WV-2 we use an image plus an
+RPC.  A set of 1 or more IGCs forms a “IGC Collection”. This is the
+central object used by the simultaneous bundle adjustment and DSM
+generation software.
 
 We need to create the initial image ground collection using the program
-"create_gdal_igc". This takes a "file\:key" pair for the output, the set
+"shelve_igccol". This takes a "file\:key" pair for the output, the set
 of RPC parameters to fit for, the DEM to use, and each of the VICAR images.
 We include a description of the images, which can be used in various plots.
 
 For World view 1 or 2, we can correct just the first RPC parameters, this
 corresponds to doing an overall block adjustment. So the command would be::
 
-  create_gdal_igc --rpc-line-fit=0 --rpc-sample-fit=0 \
+  shelve_igccol --rpc-line-fit=0 --rpc-sample-fit=0 \
        nevada.db:igc_original /raid22/nevada/nevada_elv.hlf \
        10MAY-1.img "Image 1" 10MAY-2.img "Image 2"
 
-If you don't have another DEM source to use, you can use the option
-"--srtm" rather than supplying the DEM file.
-
-This creates the file "nevada.db". You can mostly ignore exactly what
-is in this file, but it can be useful to find a list of all the key/values
-in it (e.g., "did I create the tiepoints yet?").  You can use the command
-"shelve_dir" to find out what is in a ".db" file::
-  
-   shelve_dir nevada.db
-
-This returns::
+If we then look at what was created::
  
-    igc_original
-
+  shelve_show nevada.db:igc_original
 
 Correct the RPCs for the input images
 -------------------------------------

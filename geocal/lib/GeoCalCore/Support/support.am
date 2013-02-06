@@ -8,6 +8,7 @@
 geocalinc_HEADERS+= @srcsupport@/constant.h
 geocalinc_HEADERS+= @srcsupport@/dir_change.h
 geocalinc_HEADERS+= @srcsupport@/null_deleter.h
+geocalinc_HEADERS+= @srcsupport@/ostream_pad.h
 geocalinc_HEADERS+= @srcsupport@/wgs84_constant.h
 geocalinc_HEADERS+= @srcsupport@/printable.h
 geocalinc_HEADERS+= @srcsupport@/geocal_exception.h
@@ -60,6 +61,7 @@ geocal_test_all_SOURCES += @srcsupport@/global_fixture_default.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_exception_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/geocal_time_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/printable_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/ostream_pad_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/tile_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/tiled_file_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/memory_map_array_test.cc 

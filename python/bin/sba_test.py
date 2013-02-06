@@ -10,7 +10,7 @@ def test_sba():
         os.remove("sqlite_shelf.db")
     except OSError as exc:
         pass                    # Ok if doesn't exist
-    subprocess.check_call(["create_gdal_igc", "sqlite_shelf.db:igc",
+    subprocess.check_call(["shelve_igccol", "sqlite_shelf.db:igc",
                            '--rpc-line-fit=0', '--rpc-sample-fit=0',
                            test_data + "nevada_elv_aoi.img",
                            test_data + "10MAY21-1.img", "Image 1",

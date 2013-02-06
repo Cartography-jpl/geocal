@@ -3,6 +3,7 @@
 #include "raster_image_tiled_file.h"
 #include "raster_image_multi_band.h"
 #include "geocal_gdal.h"
+#include "ostream_pad.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -177,10 +178,26 @@ public:
 
   virtual void print(std::ostream& Os) const 
   {
+    OstreamPad opad(Os, "    ");
     Os << "GDAL Raster Image:\n"
        << "  File:          " << gdal_data_base() << "\n"
+       << "  Band:          " << band_id() << "\n"
        << "  Number line:   " << number_line() << "\n"
        << "  Number sample: " << number_sample() << "\n";
+    Os << "  Map Info:      ";
+    if(has_map_info()) {
+      Os << "\n";
+      opad << map_info();
+      opad.strict_sync();
+    } else
+      Os << "None\n";
+    Os << "  RPC:           ";
+    if(has_rpc()) {
+      Os << "\n";
+      opad << rpc();
+      opad.strict_sync();
+    } else
+      Os << "None\n";
   }
 
   static void save_to_erdas(const std::string& Oname, 

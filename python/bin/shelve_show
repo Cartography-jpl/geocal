@@ -1,0 +1,28 @@
+#! /usr/bin/env python
+#
+# This short program prints out the value found in a SQLiteShelf.
+from afids import *
+
+version = "February 4, 2013"
+usage="""Usage: 
+  shelve_show <shelve_object>
+  shelve_show -h | --help
+  shelve_show -v | --version
+
+This prints out the value found in a SQLiteShelf file. The object
+should be in a "file:key" format, e.g., "my_data.db:dem".
+
+Options:
+  -h --help         
+       Print this message
+
+  -v --version      
+       Print program version
+"""
+
+args = docopt_simple(usage, version=version)
+
+t = read_shelve(args.shelve_object)
+print t
+
+

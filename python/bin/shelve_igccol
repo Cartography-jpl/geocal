@@ -6,10 +6,10 @@ from afids import *
 
 version = "February 4, 2013"
 usage='''Usage: 
-  create_gdal_igc [options] <output> <dem> 
+  shelve_igccol [options] <output> <dem> 
        <image> <title> [(<image> <title>)...]
-  create_gdal_igc -h | --help
-  create_gdal_igc -v | --version
+  shelve_igccol -h | --help
+  shelve_igccol -v | --version
 
 This creates a sqlite shelve object that holds a IgcCollection. The
 output should be in "file:key" format, e.g., "my_data.db:igc". Each

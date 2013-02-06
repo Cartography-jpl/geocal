@@ -1,22 +1,28 @@
 #! /usr/bin/env python
 #
 # This short program prints out the keys found in a SQLiteShelf.
-from afids import SQLiteShelf
-from optparse import OptionParser
+from afids import *
 
-parser = OptionParser(version="%prog August 13, 2012",
-usage="""usage: %prog [-h] file
+version = "February 4, 2013"
+usage="""Usage: 
+  shelve_dir <shelve_file>
+  shelve_dir -h | --help
+  shelve_dir -v | --version
 
 This prints out the keys found in a SQLiteShelf.
-""")
 
-# Parse command line arguments
-(options, args) = parser.parse_args()
-if(len(args) != 1):
-    parser.error("Need to specify a SQLiteShelf file")
+Options:
+  -h --help         
+       Print this message
 
-t = SQLiteShelf(args[0], "r").keys()
-t.sort
+  -v --version      
+       Print program version
+"""
+
+args = docopt_simple(usage, version=version)
+
+t = SQLiteShelf(args.shelve_file, "r").keys()
+t.sort()
 for v in t:
     print v
 

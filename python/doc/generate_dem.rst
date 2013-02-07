@@ -26,6 +26,9 @@ There are several steps to creating the DEM:
 #. Actually run the DEM generation
 #. Move your data from the local disk to the raids
 
+There is a Makefile at /data/smyth/DemSample/Makefile that you can use
+to run all these commands.
+
 Shelve objects
 --------------
 
@@ -427,12 +430,16 @@ we calculate the RPC for every 10th point and then do a linear interpolation
 in between. This is almost as accurate as calculating every point, but is
 much faster.
 
-So we can do this calculation by::
+Even with this, it can take a couple of minutes per image to do the 
+orthorectification. So we can use a number of processors to do this in 
+parallel.
 
-  igc_project --grid-spacing=10 --resolution=0.5 nevada.db:igc_sba 0 \
-      10MAY-1_proj.img
-  igc_project --grid-spacing=10 --resolution=0.5 nevada.db:igc_sba 1 \
-      10MAY-2_proj.img
+We can do this calculation by::
+
+  igc_project --grid-spacing=10 --resolution=0.5 --number-process=24 \
+      nevada.db:igc_sba 0 10MAY-1_proj.img
+  igc_project --grid-spacing=10 --resolution=0.5 --number-process=24 \
+      nevada.db:igc_sba 1 10MAY-2_proj.img
 
 We then shelve these objects to use in the next step::
 

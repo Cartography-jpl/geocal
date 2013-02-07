@@ -4,6 +4,8 @@
 # a map projected image.
 
 from afids import *
+from functools import partial
+from multiprocessing import Pool
 
 version = "February 6, 2013"
 usage='''Usage: 
@@ -48,16 +50,47 @@ igc = igc_col.image_ground_connection(args.image_index)
 if(args.dem):
     igc.dem = read_shelve(args.dem)
 
-# Create the map projection object
+# Create the map projection object, and the output file
 
 mibase = cib01_mapinfo()
 resbase = mibase.resolution_meter
 miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
 mi = igc.cover(miscale)
-mp = IgcMapProjected(mi, igc)
-out = VicarRasterImage(args.output, mp.map_info, "HALF")
-mp.write_image(out, args.grid_spacing)
+mp = IgcMapProjected(mi, igc, -1, False)
+mi = mp.map_info
+mp = None
+f = VicarRasterImage(args.output, mi, "HALF")
+f.close()
 
+def process_tile(mi, igc, outname, lstart, sstart, nline, nsamp, grid_spacing):
+    mp = IgcMapProjected(mi.subset(sstart, lstart, nsamp, nline), igc, -1, 
+                         False)
+    f = VicarLiteRasterImage(outname, VicarLiteFile.UPDATE)
+    f_sub = SubRasterImage(f, lstart, sstart, nline, nsamp)
+    mp.write_image(f_sub, grid_spacing)
 
+def do_process(p):
+    p()
+    return True
 
+# Figure out number of lines to process at once. We make this an even
+# division of grid_spacing
+process_nline = mi.number_y_pixel / args.number_process
+process_nline = max(process_nline / args.grid_spacing, 1) * args.grid_spacing
+
+# Set up all the processes, which will do in the next step
+process_list = []
+for lstart in range(0, mi.number_y_pixel, process_nline):
+    tile_nline = process_nline
+    if(lstart + tile_nline > mi.number_y_pixel):
+        tile_nline = mi.number_y_pixel - lstart
+    job = partial(process_tile, mi, igc, args.output, lstart, 0, tile_nline,
+                  mi.number_x_pixel, args.grid_spacing)
+    process_list.append(job)
+
+if(args.number_process == 1):
+    res = map(do_process, process_list)
+else:
+    pool = Pool(args.number_process)
+    res = pool.map(do_process, process_list)
 

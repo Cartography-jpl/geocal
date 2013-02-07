@@ -88,6 +88,17 @@ nline = f.number_line
 nsamp = f.number_sample
 f = None
 
+# Temporary, also write out filled version
+demname_filled = args.output_base + "_filled.img"
+f = VicarRasterImage(demname_filled, midem, "REAL")
+# Set nodata value as metadata. This is the fill value used in height_grid.
+f["NODATA"] = -9999.0
+# Close and reopen file so we can get offset to where data is.
+f.close()
+f = VicarLiteFile(demname_filled)
+offset_filled = f.data_offset
+f = None
+
 # Set up to read surface data, if we have it.
 surface_image1 = None
 surface_image2 = None
@@ -116,7 +127,8 @@ for lstart in range(0, nline, args.process_number_line):
                          surface_image1 = surface_image1,
                          surface_image2 = surface_image2)
         job = partial(dem_generate_tile, dg, demname, offset, lstart, sstart,
-                      tile_nline, tile_nsamp, nline, nsamp)
+                      tile_nline, tile_nsamp, nline, nsamp, demname_filled, 
+                      offset_filled)
         write_shelve(database_fname + ":job_%d" % job_index, job)
         job_index += 1
 number_job = job_index
@@ -157,6 +169,7 @@ os.chmod(args.output_base + ".job_script", 0755)
 to_erdas_script = '''#!/bin/bash
 export PYTHONPATH={pythonpath}
 {gdal_to_erdas} {output_base}.img {output_base}_erdas.img
+{gdal_to_erdas} {output_base}_filled.img {output_base}_filled_erdas.img
 '''
 
 with open(args.output_base + ".to_erdas", 'w') as f:

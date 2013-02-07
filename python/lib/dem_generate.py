@@ -12,7 +12,8 @@ from igc_collection import *
 from ply_file import *
 
 def dem_generate_tile(dem_generate, file_name, offset, lstart, sstart, 
-                      tile_nline, tile_nsamp, nline, nsamp):
+                      tile_nline, tile_nsamp, nline, nsamp,
+                      file_name_fill, offset_fill):
     '''This is a function that wraps the calculation of tile of height
     data in a memory mapped file. This is really just meant for the program
     setup_dem_job.
@@ -24,6 +25,13 @@ def dem_generate_tile(dem_generate, file_name, offset, lstart, sstart,
     d = np.memmap(file_name, dtype = np.float32, mode='r+', offset=offset,
                   shape=(nline, nsamp))
     d[lstart:(lstart + tile_nline),sstart:(sstart + tile_nsamp)] = h
+    d.flush()
+    # Temporary, also write out filled data
+    d = np.memmap(file_name_fill, dtype = np.float32, mode='r+', 
+                  offset=offset_fill,
+                  shape=(nline, nsamp))
+    d[lstart:(lstart + tile_nline),sstart:(sstart + tile_nsamp)] = \
+        dem_generate.h_fill
     d.flush()
 
 class SurfacePointWrap(object):    
@@ -171,6 +179,23 @@ class DemGenerate:
             if(line >= 0 and line < self.h.shape[0] and
                sample >= 0 and sample < self.h.shape[1]):
                 self.h[int(line), int(sample)] = self.r[i, 2]
+
+        # For now, we'll also get the filled data. This will probably
+        # go away to be replaced with something better in the future
+        g = np.zeros((self.aoi.number_y_pixel, 
+                      self.aoi.number_x_pixel, 2))
+        for i in range(self.aoi.number_x_pixel):
+            for j in range(self.aoi.number_y_pixel):
+                g[j,i,0] = self.aoi.ground_coordinate(i, j).latitude
+                g[j,i,1] = self.aoi.ground_coordinate(i, j).longitude
+        if len(self.r) > 0:
+            self.h_fill = scipy.interpolate.griddata(self.r[:,0:2], 
+                                                     self.r[:, 2], g, 
+                                                     method = "nearest") 
+        else:
+            self.h_fill = np.zeros((self.aoi.number_y_pixel,
+                                    self.aoi.number_x_pixel))
+            self.h_fill[:] = fill_value
         return self.h
 
     def dem_orig(self):

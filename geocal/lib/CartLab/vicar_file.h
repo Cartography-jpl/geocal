@@ -163,7 +163,7 @@ public:
 		 int Val,
 		 const std::string& Property = "");
   void label_set(const std::string& F, 
-		 double Val,
+		 float Val,
 		 const std::string& Property = "");
   void label_set(const std::string& F, 
 		 const std::string& Val,

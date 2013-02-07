@@ -5,6 +5,7 @@
 from afids import *
 from functools import partial
 import subprocess
+import os
 
 version = "February 6, 2013"
 usage='''Usage: 
@@ -76,7 +77,8 @@ midem = igc1.cover(miscale)
 
 demname = args.output_base + ".img"
 f = VicarRasterImage(demname, midem, "REAL")
-
+# Set nodata value as metadata. This is the fill value used in height_grid.
+f["NODATA"] = -9999.0
 # Close and reopen file so we can get offset to where data is.
 f.close()
 f = VicarLiteFile(demname)
@@ -121,6 +123,10 @@ number_job = job_index
 
 # Create a script that can submit these jobs
 log_dir = args.output_base + "_log"
+shelve_job_run = subprocess.check_output(["which", "shelve_job_run"]).replace("\n", "")
+gdal_to_erdas = subprocess.check_output(["which", "gdal_to_erdas"]).replace("\n", "")
+pythonpath = os.environ["PYTHONPATH"]
+
 makedirs_p(log_dir)
 
 job_script = '''#!/bin/bash
@@ -141,7 +147,7 @@ with open(args.output_base + ".job_script", 'w') as f:
     f.write(job_script.format\
                 (database_fname=database_fname,
                  log_dir=log_dir,
-                 shelve_job_run=subprocess.check_output(["which", "shelve_job_run"]).replace("\n", ""),
+                 shelve_job_run=shelve_job_run,
                  max_array_num = number_job - 1,
                  output_base = args.output_base,
                  work_dir = os.path.abspath(os.path.dirname(database_fname)),
@@ -149,9 +155,12 @@ with open(args.output_base + ".job_script", 'w') as f:
 os.chmod(args.output_base + ".job_script", 0755)
 
 to_erdas_script = '''#!/bin/bash
-gdal_to_erdas {output_base}.img {output_base}_erdas.img
+export PYTHONPATH={pythonpath}
+{gdal_to_erdas} {output_base}.img {output_base}_erdas.img
 '''
 
 with open(args.output_base + ".to_erdas", 'w') as f:
-    f.write(to_erdas_script.format(output_base = args.output_base))
+    f.write(to_erdas_script.format(output_base = args.output_base,
+                                   gdal_to_erdas = gdal_to_erdas,
+                                   pythonpath = pythonpath))
 os.chmod(args.output_base + ".to_erdas", 0755)

@@ -22,6 +22,10 @@ Options:
   -h --help         
        Print this message
 
+  --from-shelve
+       Instead of getting images from a file, get them from a shelve object.
+       This should be in a "file:key" format. 
+
   --rpc-line-fit=list
        A comma separated list of 0 based parameters that we should set
        a being able to be fit (e.g., "0,1,3"). This assumes we want
@@ -57,7 +61,10 @@ dem = read_shelve(args.dem)
 
 igc_coll = IgcArray()
 for i in range(len(args.image)):
-    if VicarFile.is_vicar_file(args.image[i]):
+    if(args.from_shelve):
+        img = read_shelve(args.image[i])
+        t = RpcImageGroundConnection(img.rpc, dem, img, args.title[i])
+    elif VicarFile.is_vicar_file(args.image[i]):
         t = VicarImageGroundConnection(args.image[i], dem, title=args.title[i])
     else:
         t = GdalImageGroundConnection(args.image[i], dem, title=args.title[i])

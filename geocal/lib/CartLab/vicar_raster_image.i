@@ -59,18 +59,10 @@ def map_info(self, val):
    self.set_map_info(val)
 
 def __getitem__(self, key):
-    if(isinstance(key, list) or isinstance(key, tuple)):
-      prop, ky = key
-      return self.vicar_file.label_string(ky, prop)
-    else:
-      return self.vicar_file.label_string(key)
+    return self.vicar_file[key]
 
 def __setitem__(self, key, v):
-    if(isinstance(key, list) or isinstance(key, tuple)):
-      prop, ky = key
-      self.vicar_file.label_set(ky, v, prop)
-    else:
-      self.vicar_file.label_set(key, v)
+    self.vicar_file[key] = v
     
   }
 };

@@ -43,7 +43,7 @@ public:
 		 int Val,
 		 const std::string& Property = "");
   void label_set(const std::string& F, 
-		 double Val,
+		 float Val,
 		 const std::string& Property = "");
   void label_set(const std::string& F, 
 		 const std::string& Val,
@@ -72,6 +72,33 @@ public:
      { return std::vector<std::string>($self->property().begin(), $self->property().end());}
 
   }	
+  %pythoncode {
+def __getitem__(self, key):
+    if(isinstance(key, list) or isinstance(key, tuple)):
+      prop, ky = key
+      tp = self.ltype(prop + " " + ky)
+      if(tp == VicarFile.VICAR_INT):
+         return self.label_int(ky, prop)
+      elif(tp == VicarFile.VICAR_REAL):
+         return self.label_float(ky, prop)
+      else:
+         return self.label_string(ky, prop)
+    else:
+      tp = self.ltype(key)
+      if(tp == VicarFile.VICAR_INT):
+         return self.label_int(key)
+      elif(tp == VicarFile.VICAR_REAL):
+         return self.label_float(key)
+      else:
+         return self.label_string(key)
+
+def __setitem__(self, key, v):
+    if(isinstance(key, list) or isinstance(key, tuple)):
+      prop, ky = key
+      self.label_set(ky, v, prop)
+    else:
+      self.label_set(key, v)
+  }
   %pickle_init(self.file_name, self.access, self.force_area_pixel)
 };
 }

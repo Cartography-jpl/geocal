@@ -20083,7 +20083,7 @@ this new value. Otherwise, it is simply added. Optionally the label
 can be part of a Property. ";
 
 %feature("docstring")  GeoCal::VicarFile::label_set "
-void VicarFile::label_set(const std::string &F, double Val, const std::string &Property=\"\")
+void VicarFile::label_set(const std::string &F, float Val, const std::string &Property=\"\")
 Set the value of a label.
 
 If the label is already in the file, is is deleted and replaced with

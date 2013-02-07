@@ -12577,6 +12577,32 @@ class VicarFile(object):
         """
         return _geocal.VicarFile_label_set(self, *args)
 
+    def __getitem__(self, key):
+        if(isinstance(key, list) or isinstance(key, tuple)):
+          prop, ky = key
+          tp = self.ltype(prop + " " + ky)
+          if(tp == VicarFile.VICAR_INT):
+             return self.label_int(ky, prop)
+          elif(tp == VicarFile.VICAR_REAL):
+             return self.label_float(ky, prop)
+          else:
+             return self.label_string(ky, prop)
+        else:
+          tp = self.ltype(key)
+          if(tp == VicarFile.VICAR_INT):
+             return self.label_int(key)
+          elif(tp == VicarFile.VICAR_REAL):
+             return self.label_float(key)
+          else:
+             return self.label_string(key)
+
+    def __setitem__(self, key, v):
+        if(isinstance(key, list) or isinstance(key, tuple)):
+          prop, ky = key
+          self.label_set(ky, v, prop)
+        else:
+          self.label_set(key, v)
+      
     def __reduce__(self):
       return _new_from_init, (self.__class__, self.file_name,self.access,self.force_area_pixel)
 
@@ -13437,18 +13463,10 @@ class VicarRasterImage(RasterImageTiledFile):
        self.set_map_info(val)
 
     def __getitem__(self, key):
-        if(isinstance(key, list) or isinstance(key, tuple)):
-          prop, ky = key
-          return self.vicar_file.label_string(ky, prop)
-        else:
-          return self.vicar_file.label_string(key)
+        return self.vicar_file[key]
 
     def __setitem__(self, key, v):
-        if(isinstance(key, list) or isinstance(key, tuple)):
-          prop, ky = key
-          self.vicar_file.label_set(ky, v, prop)
-        else:
-          self.vicar_file.label_set(key, v)
+        self.vicar_file[key] = v
         
       
     __swig_destroy__ = _geocal.delete_VicarRasterImage

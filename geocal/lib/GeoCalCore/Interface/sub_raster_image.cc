@@ -1,4 +1,5 @@
 #include "sub_raster_image.h"
+#include "ostream_pad.h"
 using namespace GeoCal;
 using namespace blitz;
 
@@ -108,9 +109,12 @@ void SubRasterImage::unchecked_write(int Line, int Sample, int Val)
 
 void SubRasterImage::print(std::ostream& Os) const
 {
+  OstreamPad opad(Os, "    ");
   Os << "SubRasterImage from (" << start_line_ << ", " << start_sample_ 
      << ") to (" << start_line_ + number_line() - 1 << ", "
      << start_sample_ + number_sample() - 1 << ")\n"
-     << "  Underlying RasterImage: \n" << full_raster_image();
+     << "  Underlying RasterImage: \n";
+  opad << full_raster_image();
+  opad.strict_sync();
 }
 

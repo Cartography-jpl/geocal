@@ -450,7 +450,7 @@ void VicarFile::label_set(const std::string& F,
 //-----------------------------------------------------------------------
 
 void VicarFile::label_set(const std::string& F, 
-			  double Val,
+			  float Val,
 			  const std::string& Property)
 {
 #ifdef HAVE_VICAR_RTL

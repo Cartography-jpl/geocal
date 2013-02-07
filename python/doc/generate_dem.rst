@@ -249,7 +249,12 @@ of RPC parameters to fit for, the DEM to use, and each of the VICAR images.
 We include a description of the images, which can be used in various plots.
 
 For World view 1 or 2, we can correct just the first RPC parameters, this
-corresponds to doing an overall block adjustment. So the command would be::
+corresponds to doing an overall block adjustment. 
+
+**Note** see the optional subset command in the next section before running
+this.
+
+The command for the full DEM would be::
 
   shelve_igccol --rpc-line-fit=0 --rpc-sample-fit=0 \
        nevada.db:igc_original nevada.db:dem_initial \
@@ -272,6 +277,60 @@ we get::
        Igc 1 - RPC Line Numerator Parameter 0: 0.003429
        Igc 1 - RPC Sample Numerator Parameter 0: 0.000342
 
+*Optional* Create subsetted IGC collection
+------------------------------------------
+
+For normal runs, you want to generate the DEM that fully covers the input
+images. However, it can be useful to work with a subset of the data. This
+is particularly useful the first time you run through this example, since
+everything will run much faster.
+
+The trick to doing this is to
+
+#. Create a subsetted version of the input data
+#. Use the subsetted data in the IGC creation
+
+You can create a subsetted version of the input data by creating a shelve
+object to subset the data. Note that this doesn't actually generate a new
+VICAR file, all it does is set things up so this looks like a subset in
+future programs. This is done by using "shelve_image" like we have before,
+but now specifying a "--subset". To get a 5000x5000 subset a little ways into
+the image, you can run::
+
+  shelve_image --subset 1000 1000 5000 5000 10MAY-1.img \
+      nevada.db:img1_sub
+  shelve_image --subset 1000 1000 5000 5000 10MAY-2.img \
+      nevada.db:img2_sub
+
+Now if we look at what was created::
+
+  shelve_show nevada.db:img1_sub
+
+Returns::
+
+  SubRasterImage from (1000, 1000) to (5999, 5999)
+    Underlying RasterImage: 
+      VicarLiteRasterImage:
+        File:          10MAY-1.img
+        Band:          0
+        Number line:   25356
+        Number sample: 35180
+        Map Info:      None
+        RPC:           
+          RPC:
+            <Blah Blah Blah...>
+
+The shelve_igcol command is very similar, but we use the option 
+"--from-shelve" to get the images from our shelve objects rather than from
+existing files:
+
+  shelve_igccol --rpc-line-fit=0 --rpc-sample-fit=0 \
+    --from-shelve \
+    nevada.db:igc_initial nevada.db:dem_initial \
+   nevada.db:img1_sub "Image 1 Sub" nevada.db:img2_sub "Image 2 Sub"
+
+After creating this subsetted IGC collection, the rest of the directions
+are the same.
 
 Correct the RPCs for the input images
 -------------------------------------
@@ -404,17 +463,27 @@ by::
 
   ./nevada_generated_dem.job_script -q long
 
+This will submitted a number of jobs in the queue, which you can monitor
+using "qstat" (note various useful options like "qstat -q" to show a
+queue-centric view, and "qstat -t" which shows all the jobs in a single
+job array).
 
+Note that you do *not* need to finish on DEM job before submitting another.
+You can also *wait* to submit the jobs, say right before leaving for the day.
+A useful scenario would be to run a number of DEM jobs through the 
+"setup_dem_job" step, and then submitting all of the to the queue at the 
+end of the day.
 
 Move your data from the local disk to the raids
 -----------------------------------------------
+
 The local disk on pistol is much faster, but it is also relatively small.
 You shouldn't leave the data on it once you are done generating the DEM.
 The various intermediate files generated during the DEM creation do not need
 to be kept, unless you want them for a record. So you can do something like::
 
   mkdir -p /raid1/smyth/NevadaDem
-  mv dem* /raid1/smyth/NevadaDem
+  mv nevada_generated_dem.img /raid1/smyth/NevadaDem
   rm *
 
 (replace with your own directories). You can leave off the "rm \*" and just

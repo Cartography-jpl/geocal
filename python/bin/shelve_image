@@ -6,7 +6,9 @@ from afids import *
 
 version = "February 4, 2013"
 usage='''Usage: 
-  shelve_image [options] <image_file> <output>
+  shelve_image [options] <image> <output>
+  shelve_image [options] --subset <start_line> <start_sample>
+      <number_line> <number_sample> <image> <output>
   shelve_image -h | --help
   shelve_image -v | --version
 
@@ -20,19 +22,32 @@ Options:
   -b --band=b
        Band of file to use (1 based). [default: 1]
 
+  --from-shelve
+       Instead of getting image from a file, get it from a shelve object.
+       This should be in a "file:key" format. This might be useful if
+       you use further options such as --subset.
+
+  --subset  start_line start_sample number_line number_sample
+       Subset the image.
+
   -v --version      
        Print program version
 '''
 
 args = docopt_simple(usage, version=version)
 
-if VicarFile.is_vicar_file(args.image_file):
+if(args.from_shelve):
+    img = read_shelve(args.image)
+elif VicarFile.is_vicar_file(args.image):
     # -1 in band is because VicarLiteRasterImage uses 0-based band, rather
     # than 1-based we use in this program.
-    img = VicarLiteRasterImage(args.image_file, VicarLiteFile.READ,
+    img = VicarLiteRasterImage(args.image, VicarLiteFile.READ,
                                args.band - 1)
 else:
-    img = GdalRasterImage(args.image_file, args.band)
+    img = GdalRasterImage(args.image, args.band)
+if(args.start_line):
+    img = SubRasterImage(img, args.start_line, args.start_sample,
+                         args.number_line, args.number_sample)
 
 write_shelve(args.output, img)
 

@@ -3,10 +3,12 @@
 # This runs a job from a shelf file.
 
 from afids import *
-from optparse import OptionParser
 
-parser = OptionParser(version="%prog September 6, 2012",
-usage="""usage: %prog [options] [database file] [job index]
+version = "February 6, 2013"
+usage='''Usage: 
+  shelve_job_run [options] [<shelve_file> <job_index>]
+  shelve_job_run -h | --help
+  shelve_job_run -v | --version
 
 This runs a job that is a pickled function stored in a shelve
 database file. The function should take no arguments, we just 
@@ -20,21 +22,23 @@ We normally get the database file from the environment variable
 "SHELVE_DATABASE_FILE", and the index of the job from "PBS_ARRAYID".
 You can also pass this on the command line, which can be useful when
 testing to directly run a job.
-""")
 
-(options, args) = parser.parse_args()
-if(len(args) > 2):
-    parser.error("Need to specify the right number of arguments")
-if(len(args) == 2):
-    fname, job_index = args
+Options:
+  -h --help         
+       Print this message
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+if(args.shelve_file):
+    fname = args.shelve_file
+    job_index = args.job_index
 else:
+    fname = os.environ["SHELVE_DATABASE_FILE"]
     job_index = os.environ["PBS_ARRAYID"]
-    if(len(args) == 1):
-        fname, = args
-    else:
-        fname = os.environ["SHELVE_DATABASE_FILE"]
-
-job_index = int(job_index)
 
 print "Starting job %d from %s" % (job_index, fname)
 f = read_shelve(fname + ":job_%d" % job_index)

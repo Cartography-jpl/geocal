@@ -21,6 +21,9 @@ There are several steps to creating the DEM:
 #. Convert the NITF to VICAR format
 #. Create the initial image ground connection collection
 #. Correct the RPCs for the input images
+#. Generate approximate orthorectified images
+#. Set up for doing DEM generation
+#. Actually run the DEM generation
 #. Move your data from the local disk to the raids
 
 Shelve objects
@@ -61,7 +64,7 @@ shelve_show::
 which returns::
 
   VicarLiteRasterImage:
-    File:          /raid22/nevada/nevada_doq.img
+    File:          nevada_doq.img
     Band:          0
     Number line:   33338
     Number sample: 33338
@@ -96,7 +99,8 @@ work with files on a local disk, rather than using NFS mounted drives
 moved to one of the raids after generating the DEM. 
 
 There is no reason to move the original input files to the local disk, only
-the intermediate files we'll be generating need to be on the local disk.
+the intermediate files we'll be generating need to be on the local disk,
+along with the reference image and DEM.a
 
 For pistol, the local disk is /data.  You can make an area to work in by
 something like::
@@ -151,8 +155,10 @@ initial DEM. This will then allow these to be used in future programs.
 We use the programs "shelve_dem" and "shelve_image" to set up these 
 objects::
 
-  shelve_image /raid22/nevada/nevada_doq.img nevada.db:ref_image
-  shelve_dem /raid22/nevada/nevada_elv.hlf nevada.db:dem_initial
+  cp /raid22/nevada/nevada_doq.img .
+  cp /raid22/nevada/nevada_elv.hlf .
+  shelve_image nevada_doq.img nevada.db:ref_image
+  shelve_dem  nevada_elv.hlf nevada.db:dem_initial
 
 Note that shelve_dem can also be directed to use the SRTM Level 2 data we
 have in AFIDS by passing "--srtm" option, and it can also be passed a datum
@@ -179,7 +185,7 @@ Looking at the DEM we created::
 which returns::
 
   Vicar Lite Dem:
-    File: /raid22/nevada/nevada_elv.hlf
+    File: nevada_elv.hlf
     Band: 0
     Map info:
       Coordinate: Geodetic Coordinate Converter
@@ -197,7 +203,7 @@ And the reference image::
 which returns::
 
   VicarLiteRasterImage:
-    File:          /raid22/nevada/nevada_doq.img
+    File:          nevada_doq.img
     Band:          0
     Number line:   33338
     Number sample: 33338
@@ -207,7 +213,6 @@ which returns::
       LRC:       (-116, 36.65)
       Number:    (33338, 33338)
     RPC:           None
-
 
 
 Convert the NITF to VICAR format
@@ -224,12 +229,6 @@ For our example, the conversion would be as follows::
   gdal_translate -of VICAR /raid22/nevada/10MAY21184820-P1BS-052366903050_01_P001.NTF 10MAY-1.img
   gdal_translate -of VICAR /raid22/nevada/10MAY21184840-P1BS-052366905020_01_P001.NTF 10MAY-2.img
 
-If desired, you can also make a symbolic link (i.e., "ln -s") from the
-original location of the input DEM and reference image. This is
-entirely a matter of preference, I often do this just to keep straight where
-all the input data is. For the purpose of this example, we'll skip this step.
-If you do create symbolic links, you can just replace the later steps with the
-full path with a local path.
 
 Create the initial image ground connection collection
 -----------------------------------------------------
@@ -338,7 +337,8 @@ these are 10 meters.
 
 For DOQ data, the horizontal accuracy is required to
 have 90% match the U.S. National Map Accuracy Standards for Horizontal 
-Accuracy (see for http://www.tceq.texas.gov/gis/natmap.html) at 1:12,000 
+Accuracy (see for `here <http://www.tceq.texas.gov/gis/natmap.html>`_) 
+at 1:12,000 
 scale for 3.75 minute quarter quadrangles, and 1:24,000 scale for 7.5 
 minute quadrangles. This corresponds to 10.2 and 12.2 meters respectively,
 so the default of 10 meters is reasonable good guess. You can modify this
@@ -350,7 +350,61 @@ initial DEM. This should be a number on the order or 1 or so. 2 or 3
 should also be fine, but much larger than that indicates we are not fitting
 the data well. In that case, you'll want to investigate further why we
 are fitting so poorly (this is outside the scope of this document).
-  
+
+Generate approximate orthorectified images
+------------------------------------------
+
+The next step is to produce orthorectified images using the improved RPCs.
+These are approximate because we are using the initial DEM rather than
+the final one. But this data is sufficient for us to do the stereo retrieval
+on.
+
+The program for this is "igc_project". The resolution of the output defaults
+to 1.0. meter, which is a bit coarser than the WV-2. So we change this to 
+0.5 meter. Another parameter is the "grid-spacing". By default the RPC is
+calculated for every point. This is a bit of an overkill, particularly if
+the initial DEM is at a coarser resolution. If we set the grid-spacing to 10,
+we calculate the RPC for every 10th point and then do a linear interpolation
+in between. This is almost as accurate as calculating every point, but is
+much faster.
+
+So we can do this calculation by::
+
+  igc_project --grid-spacing=10 --resolution=0.5 nevada.db:igc_sba 0 \
+      10MAY-1_proj.img
+  igc_project --grid-spacing=10 --resolution=0.5 nevada.db:igc_sba 1 \
+      10MAY-2_proj.img
+
+We then shelve these objects to use in the next step::
+
+  shelve_image 10MAY-1_proj.img nevada.db:surface_1
+  shelve_image 10MAY-2_proj.img nevada.db:surface_2
+
+Set up for doing DEM generation
+-------------------------------
+
+The DEM generation takes a long time. We make use of the system "torque".
+The home page is `here <http://www.adaptivecomputing.com/products/open-source/torque>`_, and a short introduction is `here <http://www.rcc.uh.edu/hpc-docs/49-using-torque-to-submit-and-monitor-jobs.html>`_.
+
+We start with a program that creates a empty DEM file, along with a script
+that can be used to submit all the torque jobs to fill in the DEM. We
+need to supply the IGC Collection, the surface images, the 0-based indexes
+to use the stereo retrieval, and the base name to use for the output::
+
+  setup_dem_job nevada.db:igc_sba nevada.db:surface_1 nevada.db:surface_2 \
+     0 1 nevada_generated_dem
+
+Actually run the DEM generation
+-------------------------------  
+
+Once the jobs are set up, you can run them by executing the script
+"nevada_generated_dem.job_script". You need to supply a queue to run this
+on. Right now, we only have one queue "long" on pistol, so you submit this
+by::
+
+  ./nevada_generated_dem.job_script -q long
+
+
 
 Move your data from the local disk to the raids
 -----------------------------------------------

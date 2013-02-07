@@ -35,13 +35,13 @@ def test_range_img1():
 def test_height_grid():
     pool = Pool()
 #    pool = None
-    print dgen.height_grid(pool)
+    print dgen.height_grid(pool = pool)
 #    dgen.plot_res()
 
 def test_height_grid_surf():
     pool = Pool()
 #    pool = None
-    print dgen_surf.height_grid(pool)
+    print dgen_surf.height_grid(pool = pool)
 #    dgen.plot_res()
 
 def test_pickle():
@@ -56,5 +56,5 @@ def test_plot():
     # Don't normally run this
     raise SkipTest
     pool = Pool()
-    dgen.height_grid(pool)
+    dgen.height_grid(pool = pool)
     dgen.plot_res(gaoi)

@@ -148,26 +148,29 @@ class DemGenerate:
         res = pool.map(func, arg)
         return np.concatenate(res)
         
-    def height_grid(self, pool = None):
+    def height_grid(self, fill_value = -9999.0, pool = None):
         '''Determine surface points from conjugate points, and resample to
         the AOI grid. Returns the height.
+
+        We only fill grid cells that contain a height retrieval, there is
+        no interpolation of filling in missing data. We may come up with
+        a way to do that, but for now we just expect to have a lots of
+        holes in the data. Grid cells with no height get assigned the
+        given fill value.
 
         Because this can take a while to run, you can optionally supply
         a multiprocessing.Pool. If this is given, we use that pool 
         of processors to do this calculation.'''
         self.r = self.height_all(pool)
-        g = np.zeros((self.aoi.number_y_pixel, 
-                      self.aoi.number_x_pixel, 2))
-        for i in range(self.aoi.number_x_pixel):
-            for j in range(self.aoi.number_y_pixel):
-                g[j,i,0] = self.aoi.ground_coordinate(i, j).latitude
-                g[j,i,1] = self.aoi.ground_coordinate(i, j).longitude
-        if len(self.r) > 0:
-            self.h = scipy.interpolate.griddata(self.r[:,0:2], self.r[:, 2], g, 
-                                                method = "nearest") 
-        else:
-            self.h = np.zeros((self.aoi.number_y_pixel,
-                               self.aoi.number_x_pixel))
+        self.h = np.empty((self.aoi.number_y_pixel,
+                           self.aoi.number_x_pixel))
+        self.h[:] = fill_value
+        for i in range(self.r.shape[0]):
+            gp = Geodetic(self.r[i,0], self.r[i,1])
+            sample,line = self.aoi.coordinate(gp)
+            if(line >= 0 and line < self.h.shape[0] and
+               sample >= 0 and sample < self.h.shape[1]):
+                self.h[int(line), int(sample)] = self.r[i, 2]
         return self.h
 
     def dem_orig(self):

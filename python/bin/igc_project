@@ -4,37 +4,59 @@
 # a map projected image.
 
 from afids import *
-from optparse import OptionParser
 
-parser = OptionParser(version="%prog September 6, 2012",
-usage="""usage: %prog [options] <igc collection> <index image> <output fname>
+version = "February 6, 2013"
+usage='''Usage: 
+  igc_project [options] <igc_collection> <image_index> <output>
+  igc_project -h | --help
+  igc_project -v | --version
+
 This map projects a ImageGroundConnection to the surface, generating
-a map projected image.
-""")
-parser.add_option("--resolution", dest="resolution_meter", type="float", 
-                  default = 1.0,
-                  help="resolution in meters for output, default is 1 meter")
-parser.add_option("--grid-spacing", dest="grid_spacing", type="int",
-                  default = 1,
-                  help="grid spacing to exactly calculate the image ground connection for, doing a linear interpolation in between. This can greatly affect how long the processing takes. If the grid spacing is something like the DEM resolution, usually you get almost as good output but much faster")
-(options, args) = parser.parse_args()
-if(len(args) != 3):
-    parser.error("Need to specify all the arguments")
-igc_name, img_index, output_fname = args
+a map projected image. The igc_collection should be in the normal
+"file:key" format. The index number for which image to use is supplied,
+this is -0-based. The output is a VICAR file.
 
-igc_col = read_shelve(igc_name)
-igc = igc_col.image_ground_connection(int(img_index))
+Options:
+  -h --help         
+       Print this message
+
+  --dem=shelve
+       DEM to use, specified as file:key. If not specified, we use the 
+       DEM from the IGC.
+
+  --grid-spacing=g
+       Grid spacing to exactly calculate the image ground connection
+       for, doing a linear interpolation in between. This can greatly
+       affect how long the processing takes. If the grid spacing is
+       something like the DEM resolution, usually you get almost as
+       good output but much faster. [default: 1]
+
+  --number-process=n 
+       Number of processors to use. [default: 1]
+
+  --resolution=r
+       Resolution in meters of output. [default: 1.0]
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+igc_col = read_shelve(args.igc_collection)
+igc = igc_col.image_ground_connection(args.image_index)
+if(args.dem):
+    igc.dem = read_shelve(args.dem)
 
 # Create the map projection object
 
 mibase = cib01_mapinfo()
 resbase = mibase.resolution_meter
-miscale = mibase.scale(options.resolution_meter / resbase,
-                       options.resolution_meter / resbase)
+miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
 mi = igc.cover(miscale)
 mp = IgcMapProjected(mi, igc)
-out = VicarRasterImage(output_fname, mp.map_info, "HALF")
-mp.write_image(out, options.grid_spacing)
+out = VicarRasterImage(args.output, mp.map_info, "HALF")
+mp.write_image(out, args.grid_spacing)
 
 
 

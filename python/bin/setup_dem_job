@@ -3,12 +3,17 @@
 # This sets up everything for using torque to create a DEM
 
 from afids import *
-from optparse import OptionParser
 from functools import partial
+import subprocess
 
-parser = OptionParser(version="%prog September 6, 2012",
-usage="""usage: %prog [options] <igc collection> <index first image>
-  <index second image> <output file base>
+version = "February 6, 2013"
+usage='''Usage: 
+  setup_dem_job [options] <igc_collection> <index_image1> 
+        <index_image2> <output_base>
+  setup_dem_job [options] <igc_collection> <surface_image1>
+        <surface_image2> <index_image1> <index_image2> <output_base>
+  setup_dem_job -h | --help
+  setup_dem_job -v | --version
 
 It currently takes a long time to create a full DEM from a pair of
 large images (e.g. the 35,000 x 25,000 typical of WorldView 2). To
@@ -28,43 +33,48 @@ the script that will submit jobs to torque. The file "output.db" is a scratch
 file that contains inputs and the status of the jobs as they are run. The
 directory "output_log" will hold the log files from torque as the jobs are
 run.
-""")
-parser.add_option("--number_line", dest="number_line", type = "int", 
-                  default = 1000,
-                  help="number of lines to include in each tile that we work on")
-parser.add_option("--number_sample", dest="number_sample", type = "int", 
-                  default = 1000,
-                  help="number of samples to include in each tile that we work on")
-parser.add_option("--resolution", dest="resolution_meter", type="float", 
-                  default = 1.0,
-                  help="resolution in meters for DEM, default is 1 meter")
-parser.add_option("--surface_image1", dest="surface_image1",
-                  default = None,
-                  help="specify surface projected version of the image. This should have been done using the same image ground connection. We may get better image matching using projected data")
-parser.add_option("--surface_image2", dest="surface_image2",
-                  default = None,
-                  help="specify surface projected version of the image. This should have been done using the same image ground connection. We may get better image matching using projected data")
 
-(options, args) = parser.parse_args()
-if(len(args) != 4):
-    parser.error("Need to specify all the arguments")
+The IGC collection should be specified as a "file:key" pair, and you need
+to select a pair of 0-based image index to work on (e.g., 0 and 1 for the
+first and second image in the collection).  You can optionally supply
+a surface projected version of the images, which should have been performed
+using the same IGC collection (e.g., you can run the program igc_project).
+This often give better DEM coverage than directly matching the unprojected
+images.
 
-igc_name, index1, index2, output_base = args
+Options:
+  -h --help         
+       Print this message
 
-igc_col = read_shelve(igc_name)
-igc1 = igc_col.image_ground_connection(int(index1))
-igc2 = igc_col.image_ground_connection(int(index2))
+  --process-number-line=n
+       Number of lines to include in each tile that we work on. This 
+       controls how long each torque job takes to run. [default: 1000]
+
+  --process-number-sample=n
+       Number of lines to include in each tile that we work on. This 
+       controls how long each torque job takes to run. [default: 1000]
+
+  --resolution=r
+       Resolution in meters of output. [default: 1.0]
+
+  -v --version      
+       Print program version
+'''
+args = docopt_simple(usage, version=version)
+
+igc_col = read_shelve(args.igc_collection)
+igc1 = igc_col.image_ground_connection(args.index_image1)
+igc2 = igc_col.image_ground_connection(args.index_image2)
 
 # Create the empty DEM
 
 mibase = cib01_mapinfo()
 resbase = mibase.resolution_meter
-miscale = mibase.scale(options.resolution_meter / resbase,
-                       options.resolution_meter / resbase)
+miscale = mibase.scale(args.resolution / resbase,
+                       args.resolution / resbase)
 midem = igc1.cover(miscale)
-# Short term, subset data so we have a small test set
-#midem = midem.subset(0,0,2500,2600)
-demname = output_base + ".img"
+
+demname = args.output_base + ".img"
 f = VicarRasterImage(demname, midem, "REAL")
 
 # Close and reopen file so we can get offset to where data is.
@@ -79,25 +89,24 @@ f = None
 # Set up to read surface data, if we have it.
 surface_image1 = None
 surface_image2 = None
-if(options.surface_image1):
-    surface_image1 = VicarLiteRasterImage(options.surface_image1)
-if(options.surface_image2):
-    surface_image2 = VicarLiteRasterImage(options.surface_image2)
+if(args.surface_image1):
+    surface_image1 = read_shelve(args.surface_image1)
+    surface_image2 = read_shelve(args.surface_image2)
 
 # Create all the jobs that we will need to run
 job_index = 0
-database_fname = output_base + ".db"
+database_fname = args.output_base + ".db"
 try:
     os.remove(database_fname)
 except OSError as exc:
     pass                    # Ok if doesn't exist
 
-for lstart in range(0, nline, options.number_line):
-    tile_nline = options.number_line
+for lstart in range(0, nline, args.process_number_line):
+    tile_nline = args.process_number_line
     if(lstart + tile_nline > nline):
         tile_nline = nline - lstart
-    for sstart in range(0, nsamp, options.number_sample):
-        tile_nsamp = options.number_sample
+    for sstart in range(0, nsamp, args.process_number_sample):
+        tile_nsamp = args.process_number_sample
         if(sstart + tile_nsamp > nsamp):
             tile_nsamp = nsamp - sstart
         dg = DemGenerate(igc1, igc2, 
@@ -111,7 +120,7 @@ for lstart in range(0, nline, options.number_line):
 number_job = job_index
 
 # Create a script that can submit these jobs
-log_dir = output_base + "_log"
+log_dir = args.output_base + "_log"
 makedirs_p(log_dir)
 
 job_script = '''#!/bin/bash
@@ -123,26 +132,26 @@ if [[ $# -lt 1 ]]; then
 fi
 export SHELVE_DATABASE_FILE="{database_fname}"
 
-jid=`qsub -d {work_dir} -V -j oe -o {log_dir}/qsub.log -N dem_generate -t 0-{max_array_num} ${{AFIDS_ROOT}}/vdev/shelve_job_run $*`
+jid=`qsub -d {work_dir} -V -j oe -o {log_dir}/qsub.log -N dem_generate -t 0-{max_array_num} {shelve_job_run} $*`
 # Add in ERDAS generation here
 qsub -d {work_dir} -V -j oe -o {log_dir}/qsub.log -N to_erdas -W depend=afterokarray:$jid {output_base}.to_erdas $*
 '''
 
-with open(output_base + ".job_script", 'w') as f:
+with open(args.output_base + ".job_script", 'w') as f:
     f.write(job_script.format\
                 (database_fname=database_fname,
                  log_dir=log_dir,
+                 shelve_job_run=subprocess.check_output(["which", "shelve_job_run"]).replace("\n", ""),
                  max_array_num = number_job - 1,
-                 output_base = output_base,
+                 output_base = args.output_base,
                  work_dir = os.path.abspath(os.path.dirname(database_fname)),
                  ))
-os.chmod(output_base + ".job_script", 0755)
+os.chmod(args.output_base + ".job_script", 0755)
 
 to_erdas_script = '''#!/bin/bash
 gdal_to_erdas {output_base}.img {output_base}_erdas.img
 '''
 
-with open(output_base + ".to_erdas", 'w') as f:
-    f.write(to_erdas_script.format(output_base = output_base))
-os.chmod(output_base + ".to_erdas", 0755)
-
+with open(args.output_base + ".to_erdas", 'w') as f:
+    f.write(to_erdas_script.format(output_base = args.output_base))
+os.chmod(args.output_base + ".to_erdas", 0755)

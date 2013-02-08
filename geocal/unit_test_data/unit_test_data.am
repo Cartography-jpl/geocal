@@ -43,3 +43,5 @@ EXTRA_DIST += @geocalunittestdata@/shiva_test_case/README
 EXTRA_DIST += @geocalunittestdata@/shiva_test_case/subset_test.py
 EXTRA_DIST += @geocalunittestdata@/Stereo
 EXTRA_DIST += @geocalunittestdata@/sample_orbit.h5
+EXTRA_DIST += @geocalunittestdata@/test_pixel_is_point.img
+EXTRA_DIST += @geocalunittestdata@/test_pixel_is_area.img

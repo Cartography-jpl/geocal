@@ -213,6 +213,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/shiva_test_case/subset_test.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/Stereo \
 @BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/sample_orbit.h5 \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/test_pixel_is_point.img \
+@BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/test_pixel_is_area.img \
 @BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/lib/test_all.sh \
 @BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/lib/dummy.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/test_out/dummy

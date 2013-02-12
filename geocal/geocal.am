@@ -12,7 +12,8 @@ libgeocal_la_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw)
 libgeocal_la_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS)
 
 # Include boost in builds
-libgeocal_la_LDFLAGS+= -R $(BOOST_LIBDIR) -L$(BOOST_LIBDIR) -lboost_regex -lboost_date_time
+libgeocal_la_LDFLAGS+= -R $(BOOST_LIBDIR) -L$(BOOST_LIBDIR)
+libgeocal_la_LDFLAGS+= $(BOOST_REGEX_LIB) $(BOOST_DATETIME_LIB)
 
 # Include blitz in builds
 libgeocal_la_LDFLAGS+= $(BLITZ_LIBS)

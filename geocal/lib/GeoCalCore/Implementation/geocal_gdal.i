@@ -6,14 +6,18 @@
 %}
 
 %geocal_shared_ptr(GdalBase);
-%shared_ptr(GDALDataset);
-%nodefaultctor GDALDataset;
-class GDALDataset {
-  virtual ~GDALDataset();
-  int GetRasterXSize();
-  int GetRasterYSize();
-  int GetRasterCount();
-};
+// GDALDataset causes SWIG 2.09 to segment fault. Not sure why, this
+// seems like a clear bug (SWIG should report an error if there is a
+// problem). But I don't think we actually need or use GDALDataset, so
+// as an easy workaround just remove all references to it.
+//%shared_ptr(GDALDataset);
+//%nodefaultctor GDALDataset;
+// class GDALDataset {
+//   virtual ~GDALDataset();
+//   int GetRasterXSize();
+//   int GetRasterYSize();
+//   int GetRasterCount();
+// };
 
 namespace GeoCal {
 #define GDT_BYTE GDT_Byte
@@ -26,7 +30,7 @@ namespace GeoCal {
 class GdalBase {
 public:
   enum {};
-  %python_attribute(data_set, boost::shared_ptr<GDALDataset>)
+  // %python_attribute(data_set, boost::shared_ptr<GDALDataset>)
   %python_attribute_with_set(map_info, MapInfo)
   %python_attribute_nonconst(raster_band, GDALRasterBand&)
   void close();
@@ -47,14 +51,14 @@ public:
   }
 };
 
-boost::shared_ptr<GDALDataset> gdal_create_copy(const std::string& Fname, 
- const std::string& Driver_name, 
- const GDALDataset& Source_dataset,
- const std::string& Options, bool Log_progress = false);
+// boost::shared_ptr<GDALDataset> gdal_create_copy(const std::string& Fname, 
+//  const std::string& Driver_name, 
+//  const GDALDataset& Source_dataset,
+//  const std::string& Options, bool Log_progress = false);
 
-boost::shared_ptr<GDALDataset> 
-GeoCal::gdal_create_erdas(const std::string& Fname, 
-			  const GDALDataset& Source_dataset,
-			  bool Log_progress = false);
+// boost::shared_ptr<GDALDataset> 
+// GeoCal::gdal_create_erdas(const std::string& Fname, 
+// 			  const GDALDataset& Source_dataset,
+// 			  bool Log_progress = false);
 
 }

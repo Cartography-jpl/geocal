@@ -590,6 +590,7 @@ am__DEPENDENCIES_1 =
 @BUILD_AFIDS_PYTHON_TRUE@libgeocal_la_DEPENDENCIES =  \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__DEPENDENCIES_1) libraw.la \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__DEPENDENCIES_1) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__DEPENDENCIES_1) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__DEPENDENCIES_1)
 am__libgeocal_la_SOURCES_DIST = @srcsupport@/geocal_gsl_matrix.cc \
 	@srcsupport@/geocal_gsl_fit.cc @srcsupport@/geocal_gsl_root.cc \
@@ -2222,7 +2223,8 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@@WITH_DOCUMENTATION_TRUE@SWIG_PYTHON_DOC = $(srcdir)/afids_python/geocal/bindings/doc_python.i
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@CLEANFILES = afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.Pcc
 @BUILD_AFIDS_PYTHON_TRUE@libgeocal_la_LIBADD = $(CARTO_LIBS) libraw.la \
-@BUILD_AFIDS_PYTHON_TRUE@	$(VICAR_RTL_LIBS) $(SPICE_LIBS)
+@BUILD_AFIDS_PYTHON_TRUE@	$(VICAR_RTL_LIBS) $(FLIBS) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(SPICE_LIBS)
 @BUILD_AFIDS_PYTHON_TRUE@geocal_test_all_LDADD = libgeocal.la \
 @BUILD_AFIDS_PYTHON_TRUE@	$(CARTO_LIBS) libraw.la \
 @BUILD_AFIDS_PYTHON_TRUE@	$(VICAR_RTL_LIBS) $(SPICE_LIBS) \

@@ -24705,13 +24705,12 @@ if test "x$want_boost" = "xyes"; then
 $as_echo_n "checking for BOOST library... " >&6; }
         succeeded=no
         if test "$ac_boost_path" != ""; then
-            BOOST_LIBDIR="$ac_boost_path/lib"
             BOOST_CPPFLAGS="-I$ac_boost_path/include"
             succeeded=yes
         else
             for ac_boost_path_tmp in $prefix $THIRDPARTY /opt/afids_support /usr /usr/local /opt /opt/local /sw ; do
                   if test -e "$ac_boost_path_tmp/include/boost/smart_ptr.hpp" && test -r "$ac_boost_path_tmp/include/boost/smart_ptr.hpp"; then
-		      BOOST_LIBDIR="$ac_boost_path_tmp/lib"
+                      ac_boost_path="$ac_boost_path_tmp"
                       BOOST_CPPFLAGS="-I$ac_boost_path_tmp/include"
                       succeeded=yes
                       break;
@@ -24720,24 +24719,30 @@ $as_echo_n "checking for BOOST library... " >&6; }
         fi
         if test "$succeeded" = "yes" ; then
             boost_done=no
-            for ac_boost_lib in libboost_regex.la libboost_regex.so libboost_regex.dylib ; do
-               if test -e "$BOOST_LIBDIR/$ac_boost_lib"; then
-                   BOOST_REGEX_LIB="-lboost_regex"
-                   BOOST_DATETIME_LIB="-lboost_date_time"
-                   boost_done=yes
-                   break;
-               fi
+            for ac_boost_lib_base in "$ac_boost_path/lib" "$ac_boost_path/lib64"; do
+              if test "$boost_done" = "no"; then
+                for ac_boost_lib in libboost_regex.la libboost_regex.so libboost_regex.dylib ; do
+                   if test -e "$ac_boost_lib_base/$ac_boost_lib"; then
+                       BOOST_LIBDIR="$ac_boost_lib_base"
+                       BOOST_REGEX_LIB="-lboost_regex"
+                       BOOST_DATETIME_LIB="-lboost_date_time"
+                       boost_done=yes
+                       break;
+                   fi
+                done
+              fi
+              if test "$boost_done" = "no"; then
+                for ac_boost_lib in libboost_regex-mt.la libboost_regex-mt.so libboost_regex-mt.dylib ; do
+                   if test -e "$ac_boost_lib_base/$ac_boost_lib"; then
+                       BOOST_LIBDIR="$ac_boost_lib_base"
+                       BOOST_REGEX_LIB="-lboost_regex-mt"
+                       BOOST_DATETIME_LIB="-lboost_date_time-mt"
+                       boost_done=yes
+                       break;
+                   fi
+                done
+              fi
             done
-            if test "$boost_done" = "no"; then
-              for ac_boost_lib in libboost_regex-mt.la libboost_regex-mt.so libboost_regex-mt.dylib ; do
-                 if test -e "$BOOST_LIBDIR/$ac_boost_lib"; then
-                     BOOST_REGEX_LIB="-lboost_regex-mt"
-                     BOOST_DATETIME_LIB="-lboost_date_time-mt"
-                     boost_done=yes
-                     break;
-                 fi
-              done
-            fi
             if test "$boost_done" = "no"; then
                 succeeded=no
             fi

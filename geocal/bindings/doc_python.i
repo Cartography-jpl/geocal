@@ -181,12 +181,6 @@ virtual GeoCal::AircraftOrbitData::~AircraftOrbitData()
 Destructor. ";
 
 
-// File: a01118.xml
-
-%feature("docstring") std::allocator "
-STL class. ";
-
-
 // File: a00003.xml
 
 %feature("docstring") GeoCal::ApplyMask "
@@ -902,16 +896,21 @@ We save this to the given file, with the given Type. ";
 
 // File: a00007.xml
 
+%feature("docstring") Array2d "
+";
+
+// File: a00008.xml
+
 %feature("docstring") GeoCal::GeoCalCore::Array2d "
 ";
 %feature("docstring")  GeoCal::GeoCalCore::Array2d::Array2d "
 GeoCal::GeoCalCore::Array2d< T >::Array2d()
 ";
 %feature("docstring")  GeoCal::GeoCalCore::Array2d::Array2d "
-GeoCal::GeoCalCore::Array2d< T >::Array2d(size_type num_row, size_type num_col)
+Array2d< T >::Array2d(size_type num_row, size_type num_col)
 ";
 %feature("docstring")  GeoCal::GeoCalCore::Array2d::Array2d "
-GeoCal::GeoCalCore::Array2d< T >::Array2d(size_type num_row, size_type num_col, const T &C)
+Array2d< T >::Array2d(size_type num_row, size_type num_col, const T &C)
 ";
 %feature("docstring")  GeoCal::GeoCalCore::Array2d::begin "
 const_iterator GeoCal::GeoCalCore::Array2d< T >::begin() const
@@ -944,116 +943,20 @@ const_reverse_iterator GeoCal::GeoCalCore::Array2d< T >::rend() const
 reverse_iterator GeoCal::GeoCalCore::Array2d< T >::rend()
 ";
 %feature("docstring")  GeoCal::GeoCalCore::Array2d::resize "
-void GeoCal::GeoCalCore::Array2d< T >::resize(size_type num_row, size_type num_col, const T &C)
+void Array2d< T >::resize(size_type num_row, size_type num_col, const T &C)
 ";
 %feature("docstring")  GeoCal::GeoCalCore::Array2d::resize "
-void GeoCal::GeoCalCore::Array2d< T >::resize(size_type num_row, size_type num_col)
+void Array2d< T >::resize(size_type num_row, size_type num_col)
 ";
 %feature("docstring")  GeoCal::GeoCalCore::Array2d::subset "
-void GeoCal::GeoCalCore::Array2d< T >::subset(size_type Lstart, size_type Sstart, size_type Number_line, size_type
+void Array2d< T >::subset(size_type Lstart, size_type Sstart, size_type Number_line, size_type
 Number_sample, Array2d< T > &Res) const
 ";
 %feature("docstring")  GeoCal::GeoCalCore::Array2d::~Array2d "
 virtual GeoCal::GeoCalCore::Array2d< T >::~Array2d()
 ";
 
-// File: a01119.xml
-
-%feature("docstring") std::auto_ptr "
-STL class. ";
-
-
-// File: a01120.xml
-
-%feature("docstring") std::bad_alloc "
-STL class. ";
-
-
-// File: a01121.xml
-
-%feature("docstring") std::bad_cast "
-STL class. ";
-
-
-// File: a01122.xml
-
-%feature("docstring") std::bad_exception "
-STL class. ";
-
-
-// File: a01123.xml
-
-%feature("docstring") std::bad_typeid "
-STL class. ";
-
-
-// File: a01124.xml
-
-%feature("docstring") std::basic_fstream "
-STL class. ";
-
-
-// File: a01132.xml
-
-%feature("docstring") std::basic_ifstream "
-STL class. ";
-
-
-// File: a01129.xml
-
-%feature("docstring") std::basic_ios "
-STL class. ";
-
-
-// File: a01127.xml
-
-%feature("docstring") std::basic_iostream "
-STL class. ";
-
-
-// File: a01128.xml
-
-%feature("docstring") std::basic_istream "
-STL class. ";
-
-
-// File: a01140.xml
-
-%feature("docstring") std::basic_istringstream "
-STL class. ";
-
-
-// File: a01145.xml
-
-%feature("docstring") std::basic_ofstream "
-STL class. ";
-
-
-// File: a01131.xml
-
-%feature("docstring") std::basic_ostream "
-STL class. ";
-
-
-// File: a01148.xml
-
-%feature("docstring") std::basic_ostringstream "
-STL class. ";
-
-
-// File: a00704.xml
-
-%feature("docstring") std::basic_string "
-STL class. ";
-
-
-// File: a01137.xml
-
-%feature("docstring") std::basic_stringstream "
-STL class. ";
-
-
-// File: a00008.xml
+// File: a00009.xml
 
 %feature("docstring") BasicPcorrMatcher "
 ";
@@ -1065,7 +968,7 @@ void BasicPcorrMatcher::match(cv::Mat &Ref, cv::Mat &New, cv::Point2f &Ref_loc, 
 &New_guess, cv::Point2f &Result, bool *Success, double *Cov)
 ";
 
-// File: a00009.xml
+// File: a00010.xml
 
 %feature("docstring") BilinearIntepolate "
 ";
@@ -1073,13 +976,7 @@ void BasicPcorrMatcher::match(cv::Mat &Ref, cv::Mat &New, cv::Point2f &Ref_loc, 
 static void BilinearIntepolate::apply(T1 &A, T2 &B, T3, T4, T5, T6, T7, T8, T9, T10, T11)
 ";
 
-// File: a01158.xml
-
-%feature("docstring") std::bitset "
-STL class. ";
-
-
-// File: a00010.xml
+// File: a00011.xml
 
 %feature("docstring") GeoCal::CalcMapProjected "
 This is a RasterImage that has been map projected by a ground to image
@@ -1334,7 +1231,7 @@ virtual GeoCal::CalcMapProjected::~CalcMapProjected()
 Destructor. ";
 
 
-// File: a00011.xml
+// File: a00012.xml
 
 %feature("docstring") GeoCal::CalcRaster "
 Some classes most naturally generate a RasterImage by calculating a
@@ -1541,7 +1438,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::CalcRaster::~CalcRaster()
 ";
 
-// File: a00012.xml
+// File: a00013.xml
 
 %feature("docstring") GeoCal::CalcRasterMultiBand "
 Some classes most naturally generate a RasterImageMultiBand by
@@ -1618,7 +1515,7 @@ Write the data to the same location in each image.
 Data should be number_band() x nline x nsamp. ";
 
 
-// File: a00013.xml
+// File: a00014.xml
 
 %feature("docstring") GeoCal::Camera "
 This class models a frame camera.
@@ -1714,7 +1611,7 @@ virtual GeoCal::Camera::~Camera()
 Destructor. ";
 
 
-// File: a00014.xml
+// File: a00015.xml
 
 %feature("docstring") GeoCal::CartesianFixed "
 This gives the fixed Cartesian Coordinates for a ground coordinate.
@@ -1814,7 +1711,7 @@ virtual GeoCal::CartesianFixed::~CartesianFixed()
 Destructor. ";
 
 
-// File: a00015.xml
+// File: a00016.xml
 
 %feature("docstring") GeoCal::CartesianFixedLookVector "
 This is a look vector in CartesianFixed coordinates.
@@ -1863,7 +1760,7 @@ method in ruby. ";
 virtual GeoCal::CartesianFixedLookVector::~CartesianFixedLookVector()
 ";
 
-// File: a00016.xml
+// File: a00017.xml
 
 %feature("docstring") GeoCal::CartesianInertial "
 This gives the location in a Cartesian inertial coordinate system
@@ -1920,7 +1817,7 @@ virtual GeoCal::CartesianInertial::~CartesianInertial()
 Destructor. ";
 
 
-// File: a00017.xml
+// File: a00018.xml
 
 %feature("docstring") GeoCal::CartesianInertialLookVector "
 This is a look vector in CartesianInertial coordinates.
@@ -1969,7 +1866,7 @@ method in ruby. ";
 virtual GeoCal::CartesianInertialLookVector::~CartesianInertialLookVector()
 ";
 
-// File: a00018.xml
+// File: a00019.xml
 
 %feature("docstring") GeoCal::CcorrLsmMatcher "
 This class performs image matching.
@@ -2067,7 +1964,7 @@ virtual GeoCal::CcorrLsmMatcher::~CcorrLsmMatcher()
 Destructor. ";
 
 
-// File: a00019.xml
+// File: a00020.xml
 
 %feature("docstring") GeoCal::CcorrMatcher "
 This class performs image matching.
@@ -2139,7 +2036,7 @@ virtual GeoCal::CcorrMatcher::~CcorrMatcher()
 Destructor. ";
 
 
-// File: a00020.xml
+// File: a00021.xml
 
 %feature("docstring") GeoCal::GeoCalCore::CodeLocation "
 ";
@@ -2156,7 +2053,7 @@ const char* GeoCal::GeoCalCore::CodeLocation::function() const
 int GeoCal::GeoCalCore::CodeLocation::line() const
 ";
 
-// File: a00021.xml
+// File: a00022.xml
 
 %feature("docstring") GeoCal::CombinedMask "
 This is combines a set of masks into a single one.
@@ -2215,133 +2112,7 @@ the check. ";
 virtual GeoCal::CombinedMask::~CombinedMask()
 ";
 
-// File: a01159.xml
-
-%feature("docstring") std::complex "
-STL class. ";
-
-
-// File: a01160.xml
-
-%feature("docstring") std::map::const_iterator "
-STL iterator class. ";
-
-
-// File: a01161.xml
-
-%feature("docstring") std::multimap::const_iterator "
-STL iterator class. ";
-
-
-// File: a01154.xml
-
-%feature("docstring") std::basic_string::const_iterator "
-STL iterator class. ";
-
-
-// File: a01162.xml
-
-%feature("docstring") std::set::const_iterator "
-STL iterator class. ";
-
-
-// File: a01163.xml
-
-%feature("docstring") std::multiset::const_iterator "
-STL iterator class. ";
-
-
-// File: a01164.xml
-
-%feature("docstring") std::string::const_iterator "
-STL iterator class. ";
-
-
-// File: a01165.xml
-
-%feature("docstring") std::vector::const_iterator "
-STL iterator class. ";
-
-
-// File: a01166.xml
-
-%feature("docstring") std::wstring::const_iterator "
-STL iterator class. ";
-
-
-// File: a01167.xml
-
-%feature("docstring") std::deque::const_iterator "
-STL iterator class. ";
-
-
-// File: a01168.xml
-
-%feature("docstring") std::list::const_iterator "
-STL iterator class. ";
-
-
-// File: a01169.xml
-
-%feature("docstring") std::map::const_reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01170.xml
-
-%feature("docstring") std::multimap::const_reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01171.xml
-
-%feature("docstring") std::set::const_reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01155.xml
-
-%feature("docstring") std::basic_string::const_reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01172.xml
-
-%feature("docstring") std::multiset::const_reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01173.xml
-
-%feature("docstring") std::vector::const_reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01174.xml
-
-%feature("docstring") std::string::const_reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01175.xml
-
-%feature("docstring") std::wstring::const_reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01176.xml
-
-%feature("docstring") std::deque::const_reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01177.xml
-
-%feature("docstring") std::list::const_reverse_iterator "
-STL iterator class. ";
-
-
-// File: a00022.xml
+// File: a00023.xml
 
 %feature("docstring") GeoCal::ConstantSpacingTimeTable "
 This is a time table that has a constant spacing between lines.
@@ -2398,12 +2169,12 @@ double GeoCal::ConstantSpacingTimeTable::time_space() const
 virtual GeoCal::ConstantSpacingTimeTable::~ConstantSpacingTimeTable()
 ";
 
-// File: a00023.xml
+// File: a00024.xml
 
 %feature("docstring") GeoCal::GdalType::Conv "
 ";
 
-// File: a00024.xml
+// File: a00025.xml
 
 %feature("docstring") GeoCal::GdalType::Conv< boost::array< T, D > > "
 ";
@@ -2411,7 +2182,7 @@ virtual GeoCal::ConstantSpacingTimeTable::~ConstantSpacingTimeTable()
 static boost::array<T, D> GeoCal::GdalType::Conv< boost::array< T, D > >::conv(const char *M)
 ";
 
-// File: a00025.xml
+// File: a00026.xml
 
 %feature("docstring") GeoCal::GdalType::Conv< double > "
 ";
@@ -2419,7 +2190,7 @@ static boost::array<T, D> GeoCal::GdalType::Conv< boost::array< T, D > >::conv(c
 static double GeoCal::GdalType::Conv< double >::conv(const char *M)
 ";
 
-// File: a00026.xml
+// File: a00027.xml
 
 %feature("docstring") GeoCal::GdalType::Conv< int > "
 ";
@@ -2427,7 +2198,7 @@ static double GeoCal::GdalType::Conv< double >::conv(const char *M)
 static int GeoCal::GdalType::Conv< int >::conv(const char *M)
 ";
 
-// File: a00027.xml
+// File: a00028.xml
 
 %feature("docstring") GeoCal::GdalType::Conv< std::string > "
 ";
@@ -2435,7 +2206,7 @@ static int GeoCal::GdalType::Conv< int >::conv(const char *M)
 static std::string GeoCal::GdalType::Conv< std::string >::conv(const char *M)
 ";
 
-// File: a00028.xml
+// File: a00029.xml
 
 %feature("docstring") GeoCal::ConvergenceFailure "
 Exception thrown if Math routine fails to converge.
@@ -2459,7 +2230,7 @@ virtual GeoCal::ConvergenceFailure::~ConvergenceFailure()
 Destructor.
 ";
 
-// File: a00029.xml
+// File: a00030.xml
 
 %feature("docstring") GeoCal::CoordinateConverter "
 This class is used to convert from and to a particular coordinate
@@ -2521,7 +2292,7 @@ virtual GeoCal::CoordinateConverter::~CoordinateConverter()
 Destructor. ";
 
 
-// File: a00030.xml
+// File: a00031.xml
 
 %feature("docstring") GeoCal::Covariance "
 This calculates simple statistics on a pair of numbers.
@@ -2567,7 +2338,7 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a00031.xml
+// File: a00032.xml
 
 %feature("docstring") GeoCal::Datum "
 This is a Datum, which returns the distance from mean sea level to a
@@ -2598,7 +2369,7 @@ virtual GeoCal::Datum::~Datum()
 Destructor. ";
 
 
-// File: a00032.xml
+// File: a00033.xml
 
 %feature("docstring") GeoCal::DatumGeoid96 "
 This class read the EGM 96 geoid data to provide a Datum.
@@ -2634,7 +2405,7 @@ Return the undulation for a given location. ";
 virtual GeoCal::DatumGeoid96::~DatumGeoid96()
 ";
 
-// File: a00033.xml
+// File: a00034.xml
 
 %feature("docstring") GeoCal::Dem "
 This class gives an interface to a digital elevation model (DEM).
@@ -2694,7 +2465,7 @@ virtual GeoCal::Dem::~Dem()
 Destructor. ";
 
 
-// File: a00034.xml
+// File: a00035.xml
 
 %feature("docstring") GeoCal::DemFit "
 This is a set of equations for fitting a Dem to a stereo pair of RPC
@@ -2722,7 +2493,7 @@ void DemFit::write(const std::string &fname1, const std::string &fname2, const
 std::string &fname3, const std::string &fname4) const
 ";
 
-// File: a00035.xml
+// File: a00036.xml
 
 %feature("docstring") GeoCal::DemMapInfo "
 This handles a Dem from a file with a MapInfo.
@@ -2817,7 +2588,7 @@ virtual GeoCal::DemMapInfo::~DemMapInfo()
 Destructor. ";
 
 
-// File: a00036.xml
+// File: a00037.xml
 
 %feature("docstring") GeoCal::DemMatch "
 This class does matching between two images, and then finds the
@@ -2880,7 +2651,7 @@ code. ";
 virtual GeoCal::DemMatch::~DemMatch()
 ";
 
-// File: a00037.xml
+// File: a00038.xml
 
 %feature("docstring") GeoCal::DemTiledFile "
 This is a DemMapInfo that is implemented as a TiledFile<T, 2>
@@ -2985,7 +2756,7 @@ virtual GeoCal::DemTiledFile::~DemTiledFile()
 Destructor. ";
 
 
-// File: a00038.xml
+// File: a00039.xml
 
 %feature("docstring") GeoCal::DemUpdater "
 This is used to update a Dem that is used to map project a pair of
@@ -3039,7 +2810,7 @@ void DemUpdater::print(std::ostream &Os) const
 Print to stream. ";
 
 
-// File: a00039.xml
+// File: a00040.xml
 
 %feature("docstring") GeoCal::DemUpdater2 "
 This is a second try at DemUpdater.
@@ -3105,13 +2876,7 @@ void DemUpdater2::print(std::ostream &Os) const
 Print to stream. ";
 
 
-// File: a01178.xml
-
-%feature("docstring") std::deque "
-STL class. ";
-
-
-// File: a00040.xml
+// File: a00041.xml
 
 %feature("docstring") GeoCal::DidDatum "
 This is a Datum used for the the DID.
@@ -3151,7 +2916,7 @@ virtual GeoCal::DidDatum::~DidDatum()
 Destructor. ";
 
 
-// File: a00041.xml
+// File: a00042.xml
 
 %feature("docstring") GeoCal::DirChange "
 Utility class.
@@ -3167,7 +2932,7 @@ GeoCal::DirChange::DirChange(const std::string &newdir)
 GeoCal::DirChange::~DirChange()
 ";
 
-// File: a00042.xml
+// File: a00043.xml
 
 %feature("docstring") GeoCal::DisplayStretch "
 This stretches data for displaying as 8 bit data.
@@ -3189,7 +2954,7 @@ sink for the data (e.g., creating a gdk_pixbuf). ";
 virtual GeoCal::DisplayStretch::~DisplayStretch()
 ";
 
-// File: a00043.xml
+// File: a00044.xml
 
 %feature("docstring") GeoCal::DisplayStretchStdDev "
 This stretches data linearly between a two values.
@@ -3225,13 +2990,7 @@ sink for the data (e.g., creating a gdk_pixbuf). ";
 virtual GeoCal::DisplayStretchStdDev::~DisplayStretchStdDev()
 ";
 
-// File: a01181.xml
-
-%feature("docstring") std::domain_error "
-STL class. ";
-
-
-// File: a00044.xml
+// File: a00045.xml
 
 %feature("docstring") GeoCal::DoughnutAverage "
 This class does a \"doughnut average\" of an underlying RasterImage.
@@ -3373,7 +3132,7 @@ Data should be number_band() x nline x nsamp. ";
 virtual GeoCal::DoughnutAverage::~DoughnutAverage()
 ";
 
-// File: a00045.xml
+// File: a00046.xml
 
 %feature("docstring") DummyToolkitCoordinateInterface "
 Each toolkit supplies methods to convert to and from
@@ -3411,7 +3170,7 @@ virtual void DummyToolkitCoordinateInterface::to_inertial(int Body_id, const Tim
 virtual DummyToolkitCoordinateInterface::~DummyToolkitCoordinateInterface()
 ";
 
-// File: a00046.xml
+// File: a00047.xml
 
 %feature("docstring") GeoCal::Eci "
 This is a ECI coordinate (J2000)
@@ -3478,7 +3237,7 @@ virtual GeoCal::Eci::~Eci()
 Destructor. ";
 
 
-// File: a00047.xml
+// File: a00048.xml
 
 %feature("docstring") GeoCal::EciTod "
 This is a ECI true of date coordinate.
@@ -3554,7 +3313,7 @@ virtual GeoCal::EciTod::~EciTod()
 Destructor. ";
 
 
-// File: a00048.xml
+// File: a00049.xml
 
 %feature("docstring") GeoCal::EciTodBurl "
 This is a ECI true of date coordinate.
@@ -3628,7 +3387,7 @@ virtual GeoCal::EciTodBurl::~EciTodBurl()
 Destructor. ";
 
 
-// File: a00049.xml
+// File: a00050.xml
 
 %feature("docstring") GeoCal::Ecr "
 This is a ground coordinate, represented in ECR coordinates.
@@ -3736,7 +3495,7 @@ virtual GeoCal::Ecr::~Ecr()
 Destructor. ";
 
 
-// File: a00050.xml
+// File: a00051.xml
 
 %feature("docstring") ErdasBands "
 This is a simple class that has a number of bands all in memory.
@@ -3777,7 +3536,7 @@ Set the mapinfo. ";
 virtual ErdasBands::~ErdasBands()
 ";
 
-// File: a00051.xml
+// File: a00052.xml
 
 %feature("docstring") GeoCal::Exception "
 This is the base of the exception hierarchy for GeoCal code.
@@ -3808,7 +3567,7 @@ virtual GeoCal::Exception::~Exception()
 Destructor.
 ";
 
-// File: a00052.xml
+// File: a00053.xml
 
 %feature("docstring") GeoCal::GeoCalCore::Exception "
 ";
@@ -3825,13 +3584,7 @@ virtual const char* GeoCal::GeoCalCore::Exception::what() const
 virtual GeoCal::GeoCalCore::Exception::~Exception()
  throw ()";
 
-// File: a00627.xml
-
-%feature("docstring") std::exception "
-STL class. ";
-
-
-// File: a00053.xml
+// File: a00054.xml
 
 %feature("docstring") F "
 ";
@@ -3842,13 +3595,7 @@ F::F(const DemUpdater2 &D, int Line, int Sample)
 virtual F::~F()
 ";
 
-// File: a01183.xml
-
-%feature("docstring") std::ios_base::failure "
-STL class. ";
-
-
-// File: a00054.xml
+// File: a00055.xml
 
 %feature("docstring") GeoCal::FeatureDetector "
 This class detects interest points in an image.
@@ -3930,7 +3677,7 @@ virtual GeoCal::FeatureDetector::~FeatureDetector()
 Destructor. ";
 
 
-// File: a00055.xml
+// File: a00056.xml
 
 %feature("docstring") GeoCal::Fftw2dBackward "
 This is a light wrapper around the FFTW library.
@@ -3971,7 +3718,7 @@ Fftw2dBackward::~Fftw2dBackward()
 Destructor. ";
 
 
-// File: a00056.xml
+// File: a00057.xml
 
 %feature("docstring") GeoCal::Fftw2dForward "
 This is a light wrapper around the FFTW library.
@@ -4008,7 +3755,7 @@ Fftw2dForward::~Fftw2dForward()
 Destructor. ";
 
 
-// File: a00057.xml
+// File: a00058.xml
 
 %feature("docstring") GeoCal::ForstnerFeatureDetector "
 This class detects interest points in an image using Forstner feature
@@ -4113,7 +3860,7 @@ virtual GeoCal::ForstnerFeatureDetector::~ForstnerFeatureDetector()
 Destructor. ";
 
 
-// File: a00058.xml
+// File: a00059.xml
 
 %feature("docstring") GeoCal::FrameCoordinate "
 This is the coordinates of a frame camera.
@@ -4140,13 +3887,7 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01125.xml
-
-%feature("docstring") std::fstream "
-STL class. ";
-
-
-// File: a00059.xml
+// File: a00060.xml
 
 %feature("docstring") GeoCal::Functor "
 This is a general Functor (Function object).
@@ -4160,7 +3901,7 @@ virtual GeoCal::Functor< T, S >::~Functor()
 Destructor. ";
 
 
-// File: a00060.xml
+// File: a00061.xml
 
 %feature("docstring") GeoCal::Gdal "
 Read and write files supported by GDAL library.
@@ -4397,7 +4138,7 @@ virtual GeoCal::Gdal< T >::~Gdal()
 Destructor. ";
 
 
-// File: a00061.xml
+// File: a00062.xml
 
 %feature("docstring") GeoCal::GdalBase "
 Base class of Gdal<T>.
@@ -4499,7 +4240,7 @@ virtual GeoCal::GdalBase::~GdalBase()
 Destructor. ";
 
 
-// File: a00062.xml
+// File: a00063.xml
 
 %feature("docstring") GeoCal::GdalDatum "
 This uses a GdalRasterImage to provide a datum.
@@ -4543,7 +4284,7 @@ virtual GeoCal::GdalDatum::~GdalDatum()
 Destructor. ";
 
 
-// File: a00063.xml
+// File: a00064.xml
 
 %feature("docstring") GeoCal::GdalDem "
 This uses a Gdal<T> as a DEM.
@@ -4673,7 +4414,7 @@ virtual GeoCal::GdalDem::~GdalDem()
 Destructor. ";
 
 
-// File: a00064.xml
+// File: a00065.xml
 
 %feature("docstring") GeoCal::GdalMultiBand "
 This is a set of Gdal RasterImages, one for each band.
@@ -4811,7 +4552,7 @@ We copy map and RPC information (if found) from the first band in
 RasterImageMultiBand. ";
 
 
-// File: a00065.xml
+// File: a00066.xml
 
 %feature("docstring") GeoCal::GdalMultiFile "
 This gives read access to a large dataset that is represented as a
@@ -4885,7 +4626,7 @@ Ruby, which is better than C++ for generating XML files)
 We return the list of files created and the MapInfo for each file. ";
 
 
-// File: a00066.xml
+// File: a00067.xml
 
 %feature("docstring") GeoCal::GdalNotAvailableException "
 Exception thrown if GDAL isn't available.
@@ -4907,7 +4648,7 @@ virtual GeoCal::GdalNotAvailableException::~GdalNotAvailableException()
 Destructor.
 ";
 
-// File: a00067.xml
+// File: a00068.xml
 
 %feature("docstring") GeoCal::GdalRasterImage "
 This wraps a Gdal<T> to make a RasterImage.
@@ -5366,7 +5107,7 @@ This calculates the statistics and image pyramid needed by Erdas also.
 The given Fill_value is excluded from the statistics calculation. ";
 
 
-// File: a00068.xml
+// File: a00069.xml
 
 %feature("docstring") GeoCal::Geocentric "
 This is a ground coordinate, represented in Geocentric coordinates.
@@ -5420,7 +5161,7 @@ virtual GeoCal::Geocentric::~Geocentric()
 Destructor. ";
 
 
-// File: a00069.xml
+// File: a00070.xml
 
 %feature("docstring") GeoCal::Geodetic "
 This is a ground coordinate, represented in Geodetic coordinates.
@@ -5474,7 +5215,7 @@ virtual GeoCal::Geodetic::~Geodetic()
 Destructor. ";
 
 
-// File: a00070.xml
+// File: a00071.xml
 
 %feature("docstring") GeoCal::GeodeticConverter "
 CoordinateConverter that goes to and from Geodetic coordinates.
@@ -5516,7 +5257,7 @@ virtual GeoCal::GeodeticConverter::~GeodeticConverter()
 Destructor. ";
 
 
-// File: a00071.xml
+// File: a00072.xml
 
 %feature("docstring") GeoCal::GlobalFixture "
 This is a global fixture that is available to all unit tests.
@@ -5544,7 +5285,7 @@ test_data_data() + \"foo.txt\" in your unit tests. ";
 virtual GeoCal::GlobalFixture::~GlobalFixture()
 ";
 
-// File: a00072.xml
+// File: a00073.xml
 
 %feature("docstring") GeoCal::GroundCoordinate "
 This represents a location on the ground.
@@ -5606,7 +5347,7 @@ virtual GeoCal::GroundCoordinate::~GroundCoordinate()
 Destructor. ";
 
 
-// File: a00073.xml
+// File: a00074.xml
 
 %feature("docstring") GeoCal::GslFsolver "
 ";
@@ -5617,7 +5358,7 @@ GeoCal::GslFsolver::GslFsolver()
 GeoCal::GslFsolver::~GslFsolver()
 ";
 
-// File: a00074.xml
+// File: a00075.xml
 
 %feature("docstring") GeoCal::GslMatrix "
 This provides thin wrapper around the GNU Scientific Library
@@ -5694,7 +5435,7 @@ GslMatrix::~GslMatrix()
 Destructor. ";
 
 
-// File: a00075.xml
+// File: a00076.xml
 
 %feature("docstring") GeoCal::GslMultiFdfsolver "
 ";
@@ -5705,7 +5446,7 @@ GeoCal::GslMultiFdfsolver::GslMultiFdfsolver(size_t n)
 GeoCal::GslMultiFdfsolver::~GslMultiFdfsolver()
 ";
 
-// File: a00076.xml
+// File: a00077.xml
 
 %feature("docstring") GeoCal::GslMultiFsolver "
 ";
@@ -5716,7 +5457,7 @@ GeoCal::GslMultiFsolver::GslMultiFsolver(size_t n)
 GeoCal::GslMultiFsolver::~GslMultiFsolver()
 ";
 
-// File: a00077.xml
+// File: a00078.xml
 
 %feature("docstring") GeoCal::GslVector "
 This provides thin wrapper around the GNU Scientific Library
@@ -5793,7 +5534,7 @@ GslVector::~GslVector()
 Destructor. ";
 
 
-// File: a00078.xml
+// File: a00079.xml
 
 %feature("docstring") GeoCal::GslWorkspace "
 ";
@@ -5804,7 +5545,7 @@ GeoCal::GslWorkspace::GslWorkspace(size_t n, size_t p)
 GeoCal::GslWorkspace::~GslWorkspace()
 ";
 
-// File: a00079.xml
+// File: a00080.xml
 
 %feature("docstring") GeoCal::VicarOgrNsp::Gtif "
 ";
@@ -5815,7 +5556,7 @@ GeoCal::VicarOgrNsp::Gtif::Gtif(const Tif &T)
 GeoCal::VicarOgrNsp::Gtif::~Gtif()
 ";
 
-// File: a00080.xml
+// File: a00081.xml
 
 %feature("docstring") HDFEOS5Image "
 ";
@@ -5855,7 +5596,7 @@ void HDFEOS5Image::write(int Line, int Sample, int Val)
 HDFEOS5Image::~HDFEOS5Image()
 ";
 
-// File: a00081.xml
+// File: a00082.xml
 
 %feature("docstring") GeoCal::HdfFile "
 This class reads a HDF5 file.
@@ -5937,7 +5678,7 @@ static bool GeoCal::HdfFile::is_hdf(const std::string &Fname)
 Return true if the given file is an HDF file. ";
 
 
-// File: a00082.xml
+// File: a00083.xml
 
 %feature("docstring") GeoCal::HdfOrbit "
 This is an implementation of an Orbit that reads position, velocity,
@@ -6066,7 +5807,7 @@ This is in m/s, in same coordinate system as position. ";
 virtual GeoCal::HdfOrbit< PositionType, TimeCreatorType >::~HdfOrbit()
 ";
 
-// File: a00083.xml
+// File: a00084.xml
 
 %feature("docstring") GeoCal::IbisColumn "
 This class handles reading and writing a single column of a IBIS file.
@@ -6121,7 +5862,7 @@ other types are just the size of the underlying type. ";
 virtual GeoCal::IbisColumn< T >::~IbisColumn()
 ";
 
-// File: a00084.xml
+// File: a00085.xml
 
 %feature("docstring") GeoCal::IbisColumnBase "
 Base class for all IBIS columns.
@@ -6164,7 +5905,7 @@ other types are just the size of the underlying type. ";
 virtual GeoCal::IbisColumnBase::~IbisColumnBase()
 ";
 
-// File: a00085.xml
+// File: a00086.xml
 
 %feature("docstring") GeoCal::IbisFile "
 This provides read and write for a IBIS file.
@@ -6296,13 +6037,7 @@ library, otherwise we throw an exception saying that it isn't
 available. ";
 
 
-// File: a01133.xml
-
-%feature("docstring") std::ifstream "
-STL class. ";
-
-
-// File: a00086.xml
+// File: a00087.xml
 
 %feature("docstring") GeoCal::IgcImageToImageMatch "
 ImageToImageMatch where the images and prediction comes from
@@ -6357,7 +6092,7 @@ method in ruby. ";
 virtual GeoCal::IgcImageToImageMatch::~IgcImageToImageMatch()
 ";
 
-// File: a00087.xml
+// File: a00088.xml
 
 %feature("docstring") GeoCal::IgcMapProjected "
 This is a RasterImage that has been map projected using an
@@ -6631,7 +6366,7 @@ virtual GeoCal::IgcMapProjected::~IgcMapProjected()
 Destructor. ";
 
 
-// File: a00088.xml
+// File: a00089.xml
 
 %feature("docstring") GeoCal::GeoCalCore::ImageCoor "
 ";
@@ -6648,7 +6383,7 @@ double GeoCal::GeoCalCore::ImageCoor::line() const
 double GeoCal::GeoCalCore::ImageCoor::sample() const
 ";
 
-// File: a00089.xml
+// File: a00090.xml
 
 %feature("docstring") GeoCal::ImageCoordinate "
 This describes an image coordinate.
@@ -6691,7 +6426,7 @@ method in ruby. ";
 virtual GeoCal::ImageCoordinate::~ImageCoordinate()
 ";
 
-// File: a00090.xml
+// File: a00091.xml
 
 %feature("docstring") GeoCal::ImageGroundConnection "
 Depending on the the data we are using, we may connect a location in
@@ -6839,7 +6574,7 @@ virtual GeoCal::ImageGroundConnection::~ImageGroundConnection()
 Destructor. ";
 
 
-// File: a00091.xml
+// File: a00092.xml
 
 %feature("docstring") GeoCal::ImageGroundConnectionFailed "
 Exception thrown if ImageGroundConnection fails to calculate a image
@@ -6864,7 +6599,7 @@ virtual GeoCal::ImageGroundConnectionFailed::~ImageGroundConnectionFailed()
 Destructor.
 ";
 
-// File: a00092.xml
+// File: a00093.xml
 
 %feature("docstring") GeoCal::ImageMatcher "
 This class performs image matching, finding the location of a point in
@@ -6907,7 +6642,7 @@ virtual GeoCal::ImageMatcher::~ImageMatcher()
 Destructor. ";
 
 
-// File: a00093.xml
+// File: a00094.xml
 
 %feature("docstring") GeoCal::ImagePointDisplay "
 This class is used to generate a display of image points.
@@ -7325,7 +7060,7 @@ This calculates the statistics and image pyramid needed by Erdas also.
 The given Fill_value is excluded from the statistics calculation. ";
 
 
-// File: a00094.xml
+// File: a00095.xml
 
 %feature("docstring") GeoCal::ImageToImageMatch "
 This class find matches between two images.
@@ -7366,7 +7101,7 @@ method in ruby. ";
 virtual GeoCal::ImageToImageMatch::~ImageToImageMatch()
 ";
 
-// File: a00095.xml
+// File: a00096.xml
 
 %feature("docstring") ImageVis "
 ";
@@ -7404,7 +7139,7 @@ void ImageVis::drawPoint(cv::Mat &ref, cv::Point2f &center, bool rgb=false)
 cv::Scalar ImageVis::randomColor(cv::RNG &rng)
 ";
 
-// File: a00096.xml
+// File: a00097.xml
 
 %feature("docstring") GeoCal::InterestPoint "
 This is an interest point, determined by a FeatureDetector.
@@ -7431,28 +7166,10 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01191.xml
+// File: a01178.xml
 
 
-// File: a01185.xml
-
-%feature("docstring") std::invalid_argument "
-STL class. ";
-
-
-// File: a01135.xml
-
-%feature("docstring") std::ios "
-STL class. ";
-
-
-// File: a01130.xml
-
-%feature("docstring") std::ios_base "
-STL class. ";
-
-
-// File: a00097.xml
+// File: a00098.xml
 
 %feature("docstring") GeoCal::Ipi "
 This performs an image point intersection (IPI), finding the time or
@@ -7620,7 +7337,7 @@ How accurate we find the time. ";
 virtual GeoCal::Ipi::~Ipi()
 ";
 
-// File: a00098.xml
+// File: a00099.xml
 
 %feature("docstring") GeoCal::IpiImageGroundConnection "
 This is a ImageGroundConnection where the connection is made by a Ipi.
@@ -7780,7 +7497,7 @@ virtual GeoCal::IpiImageGroundConnection::~IpiImageGroundConnection()
 Destructor. ";
 
 
-// File: a00099.xml
+// File: a00100.xml
 
 %feature("docstring") GeoCal::IpiMapProjected "
 This is a CalcMapProjected where the calculation of the image
@@ -8035,79 +7752,7 @@ virtual GeoCal::IpiMapProjected::~IpiMapProjected()
 Destructor. ";
 
 
-// File: a01143.xml
-
-%feature("docstring") std::istream "
-STL class. ";
-
-
-// File: a01141.xml
-
-%feature("docstring") std::istringstream "
-STL class. ";
-
-
-// File: a01192.xml
-
-%feature("docstring") std::multimap::iterator "
-STL iterator class. ";
-
-
-// File: a01193.xml
-
-%feature("docstring") std::set::iterator "
-STL iterator class. ";
-
-
-// File: a01156.xml
-
-%feature("docstring") std::basic_string::iterator "
-STL iterator class. ";
-
-
-// File: a01194.xml
-
-%feature("docstring") std::multiset::iterator "
-STL iterator class. ";
-
-
-// File: a01195.xml
-
-%feature("docstring") std::vector::iterator "
-STL iterator class. ";
-
-
-// File: a01196.xml
-
-%feature("docstring") std::string::iterator "
-STL iterator class. ";
-
-
-// File: a01197.xml
-
-%feature("docstring") std::wstring::iterator "
-STL iterator class. ";
-
-
-// File: a01179.xml
-
-%feature("docstring") std::deque::iterator "
-STL iterator class. ";
-
-
-// File: a01198.xml
-
-%feature("docstring") std::list::iterator "
-STL iterator class. ";
-
-
-// File: a01199.xml
-
-%feature("docstring") std::map::iterator "
-STL iterator class. ";
-
-
-// File: a00100.xml
+// File: a00101.xml
 
 %feature("docstring") KeplerEquation "
 Kepler's equation, see Goldstein \"Classical Mechanics 2nd Edition\"
@@ -8120,7 +7765,7 @@ KeplerEquation::KeplerEquation(double wt, double e)
 virtual KeplerEquation::~KeplerEquation()
 ";
 
-// File: a00101.xml
+// File: a00102.xml
 
 %feature("docstring") GeoCal::KeplerOrbit "
 This is a simple implementation of an Orbit.
@@ -8265,19 +7910,7 @@ This is in m/s, in same coordinate system as position. ";
 virtual GeoCal::KeplerOrbit::~KeplerOrbit()
 ";
 
-// File: a01186.xml
-
-%feature("docstring") std::length_error "
-STL class. ";
-
-
-// File: a01200.xml
-
-%feature("docstring") std::list "
-STL class. ";
-
-
-// File: a00102.xml
+// File: a00103.xml
 
 %feature("docstring") GeoCal::LocationToFile "
 A common implementation of MapProjectedMultifile is to have some sort
@@ -8320,13 +7953,7 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01182.xml
-
-%feature("docstring") std::logic_error "
-STL class. ";
-
-
-// File: a00103.xml
+// File: a00104.xml
 
 %feature("docstring") GeoCal::LookVector "
 This is a look vector in an unspecified coordinate system.
@@ -8364,7 +7991,7 @@ method in ruby. ";
 virtual GeoCal::LookVector::~LookVector()
 ";
 
-// File: a00104.xml
+// File: a00105.xml
 
 %feature("docstring") GeoCal::LsmMatcher "
 This class performs image matching.
@@ -8489,7 +8116,7 @@ virtual GeoCal::LsmMatcher::~LsmMatcher()
 Destructor. ";
 
 
-// File: a00105.xml
+// File: a00106.xml
 
 %feature("docstring") GeoCal::MagnifyBilinear "
 This creates a magnified image of a RasterImage.
@@ -8700,7 +8327,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::MagnifyBilinear::~MagnifyBilinear()
 ";
 
-// File: a00106.xml
+// File: a00107.xml
 
 %feature("docstring") GeoCal::MagnifyBilinearImageGroundConnection "
 This create an ImageGroundConnection that is magnified the same way
@@ -8842,7 +8469,7 @@ virtual GeoCal::MagnifyBilinearImageGroundConnection::~MagnifyBilinearImageGroun
 Destructor. ";
 
 
-// File: a00107.xml
+// File: a00108.xml
 
 %feature("docstring") GeoCal::MagnifyReplicate "
 This creates a magnified image of a RasterImage.
@@ -9059,13 +8686,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::MagnifyReplicate::~MagnifyReplicate()
 ";
 
-// File: a01202.xml
-
-%feature("docstring") std::map "
-STL class. ";
-
-
-// File: a00108.xml
+// File: a00109.xml
 
 %feature("docstring") GeoCal::MapInfo "
 This contains information describing a map.
@@ -9259,7 +8880,7 @@ Note that this is for the outer edge of the pixel, not the center
 (i.e., for the bounding box). ";
 
 
-// File: a00109.xml
+// File: a00110.xml
 
 %feature("docstring") GeoCal::MapInfoImageGroundConnection "
 This class creates an ImageGroundConnection that simply maps map
@@ -9393,7 +9014,7 @@ virtual GeoCal::MapInfoImageGroundConnection::~MapInfoImageGroundConnection()
 Destructor. ";
 
 
-// File: a00110.xml
+// File: a00111.xml
 
 %feature("docstring") GeoCal::MapReprojectedImage "
 This is a RasterImage that has been resampled to a different map
@@ -9632,7 +9253,7 @@ virtual GeoCal::MapReprojectedImage::~MapReprojectedImage()
 Destructor. ";
 
 
-// File: a00111.xml
+// File: a00112.xml
 
 %feature("docstring") GeoCal::Mask "
 This provides a Mask, which can be used to prevent doing some kind of
@@ -9653,7 +9274,7 @@ region in UTM, or something else. The region search is useful only for
 small areas where these difference aren't very important. If you need
 detailed, accurate information about a region in a specific map
 projection then you should simply look at each individual point. The
-region is useful for the \"don't bother   looking here for tie points,
+region is useful for the \"don't bother looking here for tie points,
 look somewhere else\" sorts of uses.
 
 If the region search returns true, then all of the region is masked.
@@ -9702,7 +9323,7 @@ virtual GeoCal::Mask::~Mask()
 Destructor. ";
 
 
-// File: a00112.xml
+// File: a00113.xml
 
 %feature("docstring") GeoCal::MaskImage "
 This provides a Mask where the underlying data is a RasterImage.
@@ -9766,7 +9387,7 @@ virtual GeoCal::MaskImage::~MaskImage()
 Destructor. ";
 
 
-// File: a00113.xml
+// File: a00114.xml
 
 %feature("docstring") GeoCal::MatcherFixture "
 ";
@@ -9787,12 +9408,12 @@ This already includes the trailing slash, so you can just do
 test_data_data() + \"foo.txt\" in your unit tests. ";
 
 
-// File: a00114.xml
+// File: a00115.xml
 
 %feature("docstring") GeoCal::MaterialDetect::MaterialClass "
 ";
 
-// File: a00115.xml
+// File: a00116.xml
 
 %feature("docstring") GeoCal::MaterialDetect "
 This class is used to do change detection and identify the material
@@ -9808,6 +9429,7 @@ First, the difference in the pan bands is compared to a threshold. The
 difference is normally calculated by DoughnutAverage, using the
 pandif_raster_image. But something else could be used, all this class
 cares about is having a difference it can compare against a threshold.
+
 Compare pan data to a shadow threshold. This masks at very dark pixels
 that we assume are in shadow.
 
@@ -10091,7 +9713,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::MaterialDetect::~MaterialDetect()
 ";
 
-// File: a00116.xml
+// File: a00117.xml
 
 %feature("docstring") GeoCal::MemoryDem "
 This is a DemMapInfo that has everything stored in memory.
@@ -10195,7 +9817,7 @@ virtual GeoCal::MemoryDem::~MemoryDem()
 Destructor. ";
 
 
-// File: a00117.xml
+// File: a00118.xml
 
 %feature("docstring") GeoCal::MemoryMapArray "
 Access a binary file as an array.
@@ -10239,7 +9861,7 @@ virtual GeoCal::MemoryMapArray< T, D >::~MemoryMapArray()
 Destructor. ";
 
 
-// File: a00118.xml
+// File: a00119.xml
 
 %feature("docstring") GeoCal::MemoryMultiBand "
 This reads a RasterImageMultiBand into memory, and allow access that
@@ -10326,7 +9948,7 @@ Data should be number_band() x nline x nsamp. ";
 virtual GeoCal::MemoryMultiBand::~MemoryMultiBand()
 ";
 
-// File: a00119.xml
+// File: a00120.xml
 
 %feature("docstring") GeoCal::MemoryRasterImage "
 This is a simple implementation of a RasterImage, where the data is
@@ -10567,7 +10189,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::MemoryRasterImage::~MemoryRasterImage()
 ";
 
-// File: a00120.xml
+// File: a00121.xml
 
 %feature("docstring") GeoCal::MemoryRasterImageRef "
 This is a variation of MemoryRasterImage where the data comes from
@@ -10797,7 +10419,7 @@ can implement more efficient versions of this. ";
 virtual GeoCal::MemoryRasterImageRef< T >::~MemoryRasterImageRef()
 ";
 
-// File: a00121.xml
+// File: a00122.xml
 
 %feature("docstring") GeoCal::MetadataMissing "
 Exception thrown if Metadata is missing.
@@ -10821,7 +10443,7 @@ virtual GeoCal::MetadataMissing::~MetadataMissing()
 Destructor.
 ";
 
-// File: a00122.xml
+// File: a00123.xml
 
 %feature("docstring") MspiPcorrMatcher "
 ";
@@ -10843,19 +10465,7 @@ Zero_limit2=-1.0, int Zero_thr=0, double Predictor_adjustment[2]=NULL)
 MspiPcorrMatcher::~MspiPcorrMatcher()
 ";
 
-// File: a01204.xml
-
-%feature("docstring") std::multimap "
-STL class. ";
-
-
-// File: a01206.xml
-
-%feature("docstring") std::multiset "
-STL class. ";
-
-
-// File: a00123.xml
+// File: a00124.xml
 
 %feature("docstring") GeoCal::NoCoverage "
 Exception thrown if no coverage.
@@ -10879,12 +10489,12 @@ virtual GeoCal::NoCoverage::~NoCoverage()
 Destructor.
 ";
 
-// File: a00124.xml
+// File: a00125.xml
 
-%feature("docstring") boost::noncopyable "
+%feature("docstring") null_deleter "
 ";
 
-// File: a00125.xml
+// File: a00126.xml
 
 %feature("docstring") GeoCal::null_deleter "
 This is a class that can be used to create a boost pointer to a value
@@ -10894,11 +10504,6 @@ This won't delete anything when the pointer goes out of scope.
 
 C++ includes: null_deleter.h ";
 
-
-// File: a00126.xml
-
-%feature("docstring") null_deleter "
-";
 
 // File: a00127.xml
 
@@ -11047,12 +10652,6 @@ Set image title. ";
 %feature("docstring")  GeoCal::OffsetImageGroundConnection::~OffsetImageGroundConnection "
 virtual GeoCal::OffsetImageGroundConnection::~OffsetImageGroundConnection()
 Destructor. ";
-
-
-// File: a01146.xml
-
-%feature("docstring") std::ofstream "
-STL class. ";
 
 
 // File: a00128.xml
@@ -12075,12 +11674,6 @@ virtual GeoCal::OrbitQuaternionList::~OrbitQuaternionList()
 Destructor. ";
 
 
-// File: a01151.xml
-
-%feature("docstring") std::ostream "
-STL class. ";
-
-
 // File: a00136.xml
 
 %feature("docstring") GeoCal::OstreamPad "
@@ -12106,24 +11699,6 @@ GeoCal::OstreamPadFilter::OstreamPadFilter(const std::string &Pad)
 %feature("docstring")  GeoCal::OstreamPadFilter::put "
 bool GeoCal::OstreamPadFilter::put(Sink &snk, char c)
 ";
-
-// File: a01149.xml
-
-%feature("docstring") std::ostringstream "
-STL class. ";
-
-
-// File: a01187.xml
-
-%feature("docstring") std::out_of_range "
-STL class. ";
-
-
-// File: a01188.xml
-
-%feature("docstring") std::overflow_error "
-STL class. ";
-
 
 // File: a00138.xml
 
@@ -12477,12 +12052,6 @@ This is primarily useful for SWIG wrappers to this class, e.g. a to_s
 method in ruby. ";
 
 
-// File: a01208.xml
-
-%feature("docstring") std::priority_queue "
-STL class. ";
-
-
 // File: a00142.xml
 
 %feature("docstring") GeoCal::PushBroomCamera "
@@ -12733,10 +12302,10 @@ to the movement of the spacecraft relative to the planet).
 
 This does not account for atmospheric refraction. Depending on the
 zenith angle, this can be somewhat important for satellites. From the
-approximate atmospheric model described in \"Theoretical Basis of
-the SDP Toolkit Geolocation package for the ECS\", Table 6-5 the
-linear displacement for a zenith angle of 10 is 0.549 meters, 20
-degrees is 1.223 meters, and 30 degrees is 2.221.
+approximate atmospheric model described in \"Theoretical Basis of the
+SDP Toolkit Geolocation package for the ECS\", Table 6-5 the linear
+displacement for a zenith angle of 10 is 0.549 meters, 20 degrees is
+1.223 meters, and 30 degrees is 2.221.
 
 We may want to add a atmospheric refraction correction in the future,
 but this hasn't been done yet.
@@ -12884,12 +12453,6 @@ Return velocity. ";
 %feature("docstring")  GeoCal::QuaternionOrbitData::~QuaternionOrbitData "
 virtual GeoCal::QuaternionOrbitData::~QuaternionOrbitData()
 ";
-
-// File: a01209.xml
-
-%feature("docstring") std::queue "
-STL class. ";
-
 
 // File: a00145.xml
 
@@ -13351,12 +12914,6 @@ Convert from ImageCoordinate to Time and FrameCoordinate. ";
 %feature("docstring")  GeoCal::QuickBirdTimeTable::~QuickBirdTimeTable "
 virtual GeoCal::QuickBirdTimeTable::~QuickBirdTimeTable()
 ";
-
-// File: a01189.xml
-
-%feature("docstring") std::range_error "
-STL class. ";
-
 
 // File: a00151.xml
 
@@ -16225,13 +15782,13 @@ This calculates refraction.
 The algorithm used was take from the SDP toolkit. The original code
 was written by Peter Noerdlinger as the SDP toolkit function
 PGS_CSC_SpaceRefract. The algorithm is described in detail in
-\"Theoretical Basis of the SDP Toolkit   Geolocation Package for the
+\"Theoretical Basis of the SDP Toolkit Geolocation Package for the
 ECS\".
 
 This depends on the index of refraction of air at the surface. We
 don't actually know this. There are various approximations, and the
 toolkit uses one described in the \"Theoretical Basis of the SDP
-Toolkit   Geolocation Package for the ECS\".
+Toolkit Geolocation Package for the ECS\".
 
 This class allows the index of refraction to simple be given. This
 allows us to just fit for this unknown using something like a
@@ -16317,66 +15874,6 @@ Surface zenith angle in radians, given the space zenith angles. ";
 %feature("docstring")  GeoCal::Refraction::~Refraction "
 virtual GeoCal::Refraction::~Refraction()
 ";
-
-// File: a01203.xml
-
-%feature("docstring") std::map::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01210.xml
-
-%feature("docstring") std::wstring::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01211.xml
-
-%feature("docstring") std::set::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01157.xml
-
-%feature("docstring") std::basic_string::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01180.xml
-
-%feature("docstring") std::deque::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01212.xml
-
-%feature("docstring") std::string::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01205.xml
-
-%feature("docstring") std::multimap::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01213.xml
-
-%feature("docstring") std::vector::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01207.xml
-
-%feature("docstring") std::multiset::reverse_iterator "
-STL iterator class. ";
-
-
-// File: a01201.xml
-
-%feature("docstring") std::list::reverse_iterator "
-STL iterator class. ";
-
 
 // File: a00171.xml
 
@@ -17135,12 +16632,6 @@ virtual GeoCal::RpcImageGroundConnection::~RpcImageGroundConnection()
 Destructor. ";
 
 
-// File: a01184.xml
-
-%feature("docstring") std::runtime_error "
-STL class. ";
-
-
 // File: a00174.xml
 
 %feature("docstring") GeoCal::ScaleImage "
@@ -17529,12 +17020,6 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual GeoCal::SdpToolkitTimeInterface::~SdpToolkitTimeInterface()
 ";
 
-// File: a01214.xml
-
-%feature("docstring") std::set "
-STL class. ";
-
-
 // File: a00180.xml
 
 %feature("docstring") GeoCal::SimpleDatum "
@@ -17761,12 +17246,6 @@ The default data is for the nominal MISR DF, red band. ";
 %feature("docstring")  GeoCal::SimplePushBroomCamera::~SimplePushBroomCamera "
 virtual GeoCal::SimplePushBroomCamera::~SimplePushBroomCamera()
 ";
-
-// File: a01215.xml
-
-%feature("docstring") std::smart_ptr "
-STL class. ";
-
 
 // File: a00183.xml
 
@@ -18569,12 +18048,6 @@ given point. ";
 virtual GeoCal::SrtmDem::~SrtmDem()
 ";
 
-// File: a01216.xml
-
-%feature("docstring") std::stack "
-STL class. ";
-
-
 // File: a00192.xml
 
 %feature("docstring") GeoCal::Statistic "
@@ -18633,18 +18106,6 @@ Standard deviation. ";
 %feature("docstring")  GeoCal::Statistic::Statistic "
 GeoCal::Statistic::Statistic()
 Constructor. ";
-
-
-// File: a00703.xml
-
-%feature("docstring") std::string "
-STL class. ";
-
-
-// File: a01138.xml
-
-%feature("docstring") std::stringstream "
-STL class. ";
 
 
 // File: a00193.xml
@@ -19649,18 +19110,6 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 virtual GeoCal::ToolkitTimeInterface::~ToolkitTimeInterface()
 ";
 
-// File: a01190.xml
-
-%feature("docstring") std::underflow_error "
-STL class. ";
-
-
-// File: a01217.xml
-
-%feature("docstring") std::unique_ptr "
-STL class. ";
-
-
 // File: a00211.xml
 
 %feature("docstring") UnixToolkitTimeInterface "
@@ -19682,18 +19131,6 @@ Generate CCSDS format of time (e.g., \"1996-07-03T04:13:57.987654Z\")
 %feature("docstring")  UnixToolkitTimeInterface::~UnixToolkitTimeInterface "
 virtual UnixToolkitTimeInterface::~UnixToolkitTimeInterface()
 ";
-
-// File: a01218.xml
-
-%feature("docstring") std::valarray "
-STL class. ";
-
-
-// File: a01219.xml
-
-%feature("docstring") std::vector "
-STL class. ";
-
 
 // File: a00212.xml
 
@@ -21629,48 +21066,6 @@ virtual GeoCal::VicarTiledFile< T >::~VicarTiledFile()
 Destructor. ";
 
 
-// File: a01220.xml
-
-%feature("docstring") std::weak_ptr "
-STL class. ";
-
-
-// File: a01126.xml
-
-%feature("docstring") std::wfstream "
-STL class. ";
-
-
-// File: a01134.xml
-
-%feature("docstring") std::wifstream "
-STL class. ";
-
-
-// File: a01136.xml
-
-%feature("docstring") std::wios "
-STL class. ";
-
-
-// File: a01144.xml
-
-%feature("docstring") std::wistream "
-STL class. ";
-
-
-// File: a01142.xml
-
-%feature("docstring") std::wistringstream "
-STL class. ";
-
-
-// File: a01147.xml
-
-%feature("docstring") std::wofstream "
-STL class. ";
-
-
 // File: a00226.xml
 
 %feature("docstring") GeoCal::WorldView2CloudMask "
@@ -21678,9 +21073,10 @@ This create a cloud mask using WorldView2 mulispectral data.
 
 This cloud mask has two parts:
 
-A simple threshold on the coastal blue band to detect clouds. A ratio
-comparision of (band 8 - band 1) / band 1 < threshold to detect cloud
-shadows.
+A simple threshold on the coastal blue band to detect clouds.
+
+A ratio comparision of (band 8 - band 1) / band 1 < threshold to
+detect cloud shadows.
 
 To help with false positives, we have a minimum cloud size. This is
 used to average the data, and only if the lower resolution data shows
@@ -22107,30 +21503,6 @@ can implement more efficient versions of this. ";
 %feature("docstring")  WorldView2CloudMaskHelper::~WorldView2CloudMaskHelper "
 virtual WorldView2CloudMaskHelper::~WorldView2CloudMaskHelper()
 ";
-
-// File: a01152.xml
-
-%feature("docstring") std::wostream "
-STL class. ";
-
-
-// File: a01150.xml
-
-%feature("docstring") std::wostringstream "
-STL class. ";
-
-
-// File: a01153.xml
-
-%feature("docstring") std::wstring "
-STL class. ";
-
-
-// File: a01139.xml
-
-%feature("docstring") std::wstringstream "
-STL class. ";
-
 
 // File: a00510.xml
 
@@ -23803,55 +23175,55 @@ BOOST_AUTO_TEST_CASE(Match12_AutoThresh_Case)
 // File: a00533.xml
 
 
-// File: dir_a6b25effbb55561dae9229c79c93c63e.xml
+// File: dir_a0829c313a30547d7efa91339b1a388f.xml
 
 
-// File: dir_7fabc8d5070d50884683d36eb053c403.xml
+// File: dir_7b67cc4b920c37b462314add18b60018.xml
 
 
-// File: dir_76ba507cc6a93ebb72deddd6ba40c7e3.xml
+// File: dir_df39bf6fc98920badba39c5fa631a0d6.xml
 
 
-// File: dir_d45a3f9edce04836d13f7ef2a9102345.xml
+// File: dir_ccb0f084aec90d7cc1e8d086cae51afd.xml
 
 
-// File: dir_60040d7d2cf9b2bc7a600298af4645df.xml
+// File: dir_16f36eeabd2180ddf3448b3d77a405e6.xml
 
 
-// File: dir_c1d3ed369cad375590d2eec6d31c4e9d.xml
+// File: dir_158938e36ef2040290ea8fdd96e205f9.xml
 
 
-// File: dir_17b4e6a7d1a48f7833ad4df3da9d97c1.xml
+// File: dir_d57dec2b8f4f597ca0eea7d894fa8064.xml
 
 
-// File: dir_baeee0ec13135f84838c512a2d5d914b.xml
+// File: dir_25ef20aba111b0af1f66ae93c49a4fd2.xml
 
 
-// File: dir_4a71c87774650963f5de8ca88e60aa6a.xml
+// File: dir_38cbaf74ee92d3b7ba5fd551063262a3.xml
 
 
-// File: dir_1a6f470301e258b799b06938ccba281a.xml
+// File: dir_23fc22250618b966bfbe805518515d66.xml
 
 
-// File: dir_a6c12f8f1af1f2b3deecee3f933aa002.xml
+// File: dir_ec060fc67e0248db616666cc23495cb2.xml
 
 
-// File: dir_534339b2083d3042109d34871b65c676.xml
+// File: dir_3e268f65050961e7f9333a0180667793.xml
 
 
-// File: dir_ee259ff6bfea30afc6b7c1d3b3c37616.xml
+// File: dir_ff705a6d89cf5d5869d737501a24dcd0.xml
 
 
-// File: dir_60b44e9a0c43c2a9f6d443aed2802640.xml
+// File: dir_840a6be0f0be3899c9a8608e4258d756.xml
 
 
-// File: dir_f164c57b43fe6fabe78875aa197ef072.xml
+// File: dir_1ebd689d1f8b0d66be136203e18a528c.xml
 
 
-// File: dir_8fce7f51ecd623c3f4945b28e6d42e12.xml
+// File: dir_f039da14e071925044c01cb28178634c.xml
 
 
-// File: dir_279223300cf58ec0c1ef6de27b4010fa.xml
+// File: dir_a90acb26e12c2b07ff5dfbb460d552a2.xml
 
 
 // File: indexpage.xml

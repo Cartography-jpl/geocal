@@ -170,11 +170,14 @@ class SimultaneousBundleAdjustment(object):
             gp = self.ground_location(i)
             pind = self.tp_index_to_parameter_index(i)
             x0 = self.dem.distance_to_surface(gp) / self.dem_sigma
+            p0 = gp.position
             for j in range(3):
-                gp.position[j] += self.tp_epsilon
+                p = p0.copy()
+                p[j] += self.tp_epsilon
+                gp.position = p
                 x = self.dem.distance_to_surface(gp) / self.dem_sigma
                 res[self.row_index + i, pind + j] = (x - x0) / self.tp_epsilon
-                gp.position[j] -= self.tp_epsilon
+            gp.position = p0
         self.row_index += len(self.tpcol)
         
     def collinearity_constraint(self):

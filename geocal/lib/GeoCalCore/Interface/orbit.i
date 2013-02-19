@@ -63,7 +63,20 @@ public:
 		    const Dem& D,
 		    double Resolution = 30,
 		    int Band = 0, double Max_height = 9000) const;
-  %python_attribute(velocity_ci, virtual boost::array<double, 3>)
+  %extend {
+    blitz::Array<double, 1> _velocity_ci() const {
+      blitz::Array<double, 1> res(3);
+      boost::array<double, 3> v = $self->velocity_ci();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return res;
+    }
+  }
+  %pythoncode {
+@property
+def velocity_ci(self):
+    return self._velocity_ci()
+  }
   %python_attribute(time, virtual Time)
   std::string print_to_string() const;
 };
@@ -88,7 +101,20 @@ public:
   %python_attribute(sc_to_ci, boost::math::quaternion<double>)
   %python_attribute(sc_to_cf, boost::math::quaternion<double>)
   %python_attribute(from_cf, bool)
-  %python_attribute(velocity_cf, virtual boost::array<double, 3>)
+  %extend {
+    blitz::Array<double, 1> _velocity_cf() const {
+      blitz::Array<double, 1> res(3);
+      boost::array<double, 3> v = $self->velocity_cf();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return res;
+    }
+  }
+  %pythoncode {
+@property
+def velocity_cf(self):
+    return self._velocity_cf()
+  }
 %pythoncode {
 def __reduce__(self):
   if(self.from_cf):
@@ -137,7 +163,6 @@ public:
 			      const CartesianFixedLookVector& Cf) const;
   virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const;
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
-  virtual boost::array<double, 3> velocity_ci(Time T) const;
   %python_attribute(min_time, Time)
   %python_attribute(max_time, Time)
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;

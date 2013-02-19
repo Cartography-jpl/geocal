@@ -2332,7 +2332,14 @@ class LookVector(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    look_vector = _swig_property(_geocal.LookVector_look_vector_get, _geocal.LookVector_look_vector_set)
+    @property
+    def look_vector(self):
+        return self._look_vector()
+
+    @look_vector.setter
+    def look_vector(self, value):
+      self._look_vector(value)
+
     def _direction(self):
         """
         boost::array< double, 3 > LookVector::direction() const
@@ -2366,6 +2373,7 @@ class LookVector(object):
         return _geocal.LookVector___str__(self)
 
     __swig_destroy__ = _geocal.delete_LookVector
+LookVector._look_vector = new_instancemethod(_geocal.LookVector__look_vector,None,LookVector)
 LookVector._direction = new_instancemethod(_geocal.LookVector__direction,None,LookVector)
 LookVector._length = new_instancemethod(_geocal.LookVector__length,None,LookVector)
 LookVector.__str__ = new_instancemethod(_geocal.LookVector___str__,None,LookVector)
@@ -2627,7 +2635,14 @@ class CartesianInertial(object):
         """
         return _geocal.CartesianInertial___str__(self)
 
-    position = _swig_property(_geocal.CartesianInertial_position_get, _geocal.CartesianInertial_position_set)
+    @property
+    def position(self):
+        return self._position()
+
+    @position.setter
+    def position(self, value):
+      self._position(value)
+
     __swig_destroy__ = _geocal.delete_CartesianInertial
 CartesianInertial.convert_to_cf = new_instancemethod(_geocal.CartesianInertial_convert_to_cf,None,CartesianInertial)
 CartesianInertial.ci_to_cf = new_instancemethod(_geocal.CartesianInertial_ci_to_cf,None,CartesianInertial)
@@ -2635,6 +2650,7 @@ CartesianInertial.ci_to_cf_quat = new_instancemethod(_geocal.CartesianInertial_c
 CartesianInertial.create = new_instancemethod(_geocal.CartesianInertial_create,None,CartesianInertial)
 CartesianInertial.reference_surface_intersect_approximate = new_instancemethod(_geocal.CartesianInertial_reference_surface_intersect_approximate,None,CartesianInertial)
 CartesianInertial.__str__ = new_instancemethod(_geocal.CartesianInertial___str__,None,CartesianInertial)
+CartesianInertial._position = new_instancemethod(_geocal.CartesianInertial__position,None,CartesianInertial)
 CartesianInertial_swigregister = _geocal.CartesianInertial_swigregister
 CartesianInertial_swigregister(CartesianInertial)
 
@@ -2717,7 +2733,14 @@ class CartesianFixed(GroundCoordinate):
     def min_radius_reference_surface(self):
         return self._min_radius_reference_surface()
 
-    position = _swig_property(_geocal.CartesianFixed_position_get, _geocal.CartesianFixed_position_set)
+    @property
+    def position(self):
+        return self._position()
+
+    @position.setter
+    def position(self, value):
+      self._position(value)
+
     __swig_destroy__ = _geocal.delete_CartesianFixed
 CartesianFixed.convert_to_ci = new_instancemethod(_geocal.CartesianFixed_convert_to_ci,None,CartesianFixed)
 CartesianFixed.create = new_instancemethod(_geocal.CartesianFixed_create,None,CartesianFixed)
@@ -2725,6 +2748,7 @@ CartesianFixed.ci_to_cf = new_instancemethod(_geocal.CartesianFixed_ci_to_cf,Non
 CartesianFixed.ci_to_cf_quat = new_instancemethod(_geocal.CartesianFixed_ci_to_cf_quat,None,CartesianFixed)
 CartesianFixed.reference_surface_intersect_approximate = new_instancemethod(_geocal.CartesianFixed_reference_surface_intersect_approximate,None,CartesianFixed)
 CartesianFixed._min_radius_reference_surface = new_instancemethod(_geocal.CartesianFixed__min_radius_reference_surface,None,CartesianFixed)
+CartesianFixed._position = new_instancemethod(_geocal.CartesianFixed__position,None,CartesianFixed)
 CartesianFixed_swigregister = _geocal.CartesianFixed_swigregister
 CartesianFixed_swigregister(CartesianFixed)
 
@@ -3385,12 +3409,12 @@ def _new_rpc(is_rpc_a, error_bias, error_random, height_offset,
     rpc.line_scale = line_scale
     rpc.sample_offset = sample_offset
     rpc.sample_scale = sample_scale
-    rpc.line_denominator.set(line_denominator)
-    rpc.line_numerator.set(line_numerator)
-    rpc.sample_denominator.set(sample_denominator)
-    rpc.sample_numerator.set(sample_numerator)
-    rpc.fit_line_numerator.set(fit_line_numerator)
-    rpc.fit_sample_numerator.set(fit_sample_numerator)
+    rpc.line_denominator = line_denominator
+    rpc.line_numerator = line_numerator
+    rpc.sample_denominator = sample_denominator
+    rpc.sample_numerator = sample_numerator
+    rpc.fit_line_numerator = fit_line_numerator
+    rpc.fit_sample_numerator = fit_sample_numerator
     return rpc
 
 class Rpc(object):
@@ -3474,12 +3498,54 @@ class Rpc(object):
     line_scale = _swig_property(_geocal.Rpc_line_scale_get, _geocal.Rpc_line_scale_set)
     sample_offset = _swig_property(_geocal.Rpc_sample_offset_get, _geocal.Rpc_sample_offset_set)
     sample_scale = _swig_property(_geocal.Rpc_sample_scale_get, _geocal.Rpc_sample_scale_set)
-    line_denominator = _swig_property(_geocal.Rpc_line_denominator_get, _geocal.Rpc_line_denominator_set)
-    line_numerator = _swig_property(_geocal.Rpc_line_numerator_get, _geocal.Rpc_line_numerator_set)
-    sample_denominator = _swig_property(_geocal.Rpc_sample_denominator_get, _geocal.Rpc_sample_denominator_set)
-    sample_numerator = _swig_property(_geocal.Rpc_sample_numerator_get, _geocal.Rpc_sample_numerator_set)
-    fit_line_numerator = _swig_property(_geocal.Rpc_fit_line_numerator_get, _geocal.Rpc_fit_line_numerator_set)
-    fit_sample_numerator = _swig_property(_geocal.Rpc_fit_sample_numerator_get, _geocal.Rpc_fit_sample_numerator_set)
+    @property
+    def line_denominator(self):
+        return self._line_denominator()
+
+    @line_denominator.setter
+    def line_denominator(self, value):
+      self._line_denominator(value)
+
+    @property
+    def line_numerator(self):
+        return self._line_numerator()
+
+    @line_numerator.setter
+    def line_numerator(self, value):
+      self._line_numerator(value)
+
+    @property
+    def sample_denominator(self):
+        return self._sample_denominator()
+
+    @sample_denominator.setter
+    def sample_denominator(self, value):
+      self._sample_denominator(value)
+
+    @property
+    def sample_numerator(self):
+        return self._sample_numerator()
+
+    @sample_numerator.setter
+    def sample_numerator(self, value):
+      self._sample_numerator(value)
+
+    @property
+    def fit_line_numerator(self):
+        return self._fit_line_numerator()
+
+    @fit_line_numerator.setter
+    def fit_line_numerator(self, value):
+      self._fit_line_numerator(value)
+
+    @property
+    def fit_sample_numerator(self):
+        return self._fit_sample_numerator()
+
+    @fit_sample_numerator.setter
+    def fit_sample_numerator(self, value):
+      self._fit_sample_numerator(value)
+
     def resolution_meter(self, *args):
         """
         double Rpc::resolution_meter(const Dem &D) const
@@ -3662,6 +3728,12 @@ class Rpc(object):
         _geocal.Rpc_swiginit(self,_geocal.new_Rpc())
     __swig_destroy__ = _geocal.delete_Rpc
 Rpc.__str__ = new_instancemethod(_geocal.Rpc___str__,None,Rpc)
+Rpc._line_denominator = new_instancemethod(_geocal.Rpc__line_denominator,None,Rpc)
+Rpc._line_numerator = new_instancemethod(_geocal.Rpc__line_numerator,None,Rpc)
+Rpc._sample_denominator = new_instancemethod(_geocal.Rpc__sample_denominator,None,Rpc)
+Rpc._sample_numerator = new_instancemethod(_geocal.Rpc__sample_numerator,None,Rpc)
+Rpc._fit_line_numerator = new_instancemethod(_geocal.Rpc__fit_line_numerator,None,Rpc)
+Rpc._fit_sample_numerator = new_instancemethod(_geocal.Rpc__fit_sample_numerator,None,Rpc)
 Rpc.resolution_meter = new_instancemethod(_geocal.Rpc_resolution_meter,None,Rpc)
 Rpc.fit = new_instancemethod(_geocal.Rpc_fit,None,Rpc)
 Rpc.fit_all = new_instancemethod(_geocal.Rpc_fit_all,None,Rpc)
@@ -3855,17 +3927,6 @@ class RasterImage(object):
         """
         return _geocal.RasterImage_overview(self, *args)
 
-    def interpolate_derivative(self, *args):
-        """
-        boost::array<double, 2> GeoCal::RasterImage::interpolate_derivative(double Line, double Sample) const
-        This calculates the derivative of interpolate with respect to Line and
-        Sample.
-
-        First entry in results is derivative with respect to Line, the second
-        is with respect to the Sample. 
-        """
-        return _geocal.RasterImage_interpolate_derivative(self, *args)
-
     def interpolate(self, *args):
         """
         double GeoCal::RasterImage::interpolate(const ImageCoordinate &Ic) const
@@ -4056,7 +4117,6 @@ class RasterImage(object):
 
     __swig_destroy__ = _geocal.delete_RasterImage
 RasterImage.overview = new_instancemethod(_geocal.RasterImage_overview,None,RasterImage)
-RasterImage.interpolate_derivative = new_instancemethod(_geocal.RasterImage_interpolate_derivative,None,RasterImage)
 RasterImage.interpolate = new_instancemethod(_geocal.RasterImage_interpolate,None,RasterImage)
 RasterImage._number_line = new_instancemethod(_geocal.RasterImage__number_line,None,RasterImage)
 RasterImage._number_sample = new_instancemethod(_geocal.RasterImage__number_sample,None,RasterImage)
@@ -4900,20 +4960,10 @@ class OrbitData(object):
         """
         return _geocal.OrbitData_surface_intersect(self, *args)
 
-    def _velocity_ci(self):
-        """
-        virtual boost::array<double, 3> GeoCal::OrbitData::velocity_ci() const =0
-        Return velocity.
-
-        This is in meters per second, in same CartesianInertial coordinate
-        system as position (e.g., ECI). 
-        """
-        return _geocal.OrbitData__velocity_ci(self)
-
     @property
     def velocity_ci(self):
         return self._velocity_ci()
-
+      
     def _time(self):
         """
         virtual Time GeoCal::OrbitData::time() const =0
@@ -5037,17 +5087,10 @@ class QuaternionOrbitData(OrbitData):
     def from_cf(self):
         return self._from_cf()
 
-    def _velocity_cf(self):
-        """
-        boost::array< double, 3 > QuaternionOrbitData::velocity_cf() const
-        Velocity in CartisianFixed coordinates. 
-        """
-        return _geocal.QuaternionOrbitData__velocity_cf(self)
-
     @property
     def velocity_cf(self):
         return self._velocity_cf()
-
+      
     def __reduce__(self):
       if(self.from_cf):
         return _new_from_init, (self.__class__, self.time, self.position_cf, 
@@ -5175,15 +5218,6 @@ class Orbit(object):
         """
         return _geocal.Orbit_position_cf(self, *args)
 
-    def velocity_ci(self, *args):
-        """
-        virtual boost::array<double, 3> GeoCal::Orbit::velocity_ci(Time T) const
-        Return velocity at given time.
-
-        This is in m/s, in same coordinate system as position. 
-        """
-        return _geocal.Orbit_velocity_ci(self, *args)
-
     def _min_time(self):
         """
         Time GeoCal::Orbit::min_time() const
@@ -5252,7 +5286,6 @@ Orbit.reference_surface_intersect_approximate = new_instancemethod(_geocal.Orbit
 Orbit.sc_look_vector = new_instancemethod(_geocal.Orbit_sc_look_vector,None,Orbit)
 Orbit.position_ci = new_instancemethod(_geocal.Orbit_position_ci,None,Orbit)
 Orbit.position_cf = new_instancemethod(_geocal.Orbit_position_cf,None,Orbit)
-Orbit.velocity_ci = new_instancemethod(_geocal.Orbit_velocity_ci,None,Orbit)
 Orbit._min_time = new_instancemethod(_geocal.Orbit__min_time,None,Orbit)
 Orbit._max_time = new_instancemethod(_geocal.Orbit__max_time,None,Orbit)
 Orbit.orbit_data = new_instancemethod(_geocal.Orbit_orbit_data,None,Orbit)

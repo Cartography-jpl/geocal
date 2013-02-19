@@ -9,6 +9,7 @@
 #undef _REENTRANT
 #include <blitz/array.h>
 #include <blitz/range.h>
+#include <boost/array.hpp>
 %}
 
 #ifdef SWIGPYTHON
@@ -192,6 +193,18 @@ template<class T, int D> inline blitz::Array<T, D>
   }
   return blitz::Array<T, D>((T*)PyArray_DATA(numpy), shape, stride, 
 			    blitz::neverDeleteData);
+}
+
+template<class T, int D> inline boost::array<T, D> 
+  to_boost_array(PyObject* numpy)
+{
+  blitz::Array<T, 1> b = to_blitz_array<T, 1>(numpy);
+  if(b.rows() != D)
+     throw GeoCal::Exception("Array not expeced size");
+  boost::array<T, D> res;
+  for(int i = 0; i < D; ++i)
+    res[i]= b(i);
+  return res;
 }
 %}
 #endif
@@ -577,11 +590,63 @@ public:
 #endif
 };
 
-%template(Array_double_20) array<double, 20>;
-%template(Array_double_12) array<double, 12>;
-%template(Array_double_14) array<double, 14>;
-%template(Array_double_3) array<double, 3>;
-%template(Array_bool_20) array<bool, 20>;
+#ifdef SWIGPYTHON
+
+%define %boost_array_template(NAME,TYPE, LEN)
+   %template(NAME) array<TYPE, LEN>;
+
+%typemap(in) const boost::array<TYPE, LEN>& (boost::array<TYPE, LEN> a, PythonObject numpy) 
+{
+  numpy.obj = to_numpy<TYPE>($input);
+  if(!numpy.obj)
+    return NULL;
+  a = to_boost_array<TYPE, LEN>(numpy);
+  $1 = &a;
+}
+
+%typemap(in) boost::array<TYPE, LEN> (PythonObject numpy) 
+{
+  numpy.obj = to_numpy<TYPE>($input);
+  if(!numpy.obj)
+    return NULL;
+  $1 = to_boost_array<TYPE, LEN>(numpy);
+}
+
+%enddef
+
+%define %python_attribute_boost_array(NAME, TYPE, LEN)
+   %extend {
+    blitz::Array<TYPE, 1> _ ## NAME() const {
+      blitz::Array<TYPE, 1> res(LEN);
+      for(int i = 0; i < LEN; ++i)
+        res(i) = $self->NAME[i];
+      return res;
+    }
+    void _ ## NAME(const blitz::Array<TYPE, 1>& V) {
+      if(V.rows() != LEN)
+	throw GeoCal::Exception("Array not expeced size");
+      for(int i = 0; i < LEN; ++i)
+        $self->NAME[i] = V(i);
+    }
+    }
+%pythoncode {
+@property
+def NAME(self):
+    return self._ ## NAME()
+
+@NAME.setter
+def NAME(self, value):
+  self._ ## NAME(value)
+}
+%enddef
+
+#endif
+
+%boost_array_template(Array_double_20, double, 20)
+%boost_array_template(Array_double_12, double, 12)
+%boost_array_template(Array_double_14, double, 14)
+%boost_array_template(Array_double_3, double, 3)
+%boost_array_template(Array_bool_20, bool, 20)
 }
 
 %template(Vector_Array_double_12) std::vector<boost::array<double, 12> >;

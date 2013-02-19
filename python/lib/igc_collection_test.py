@@ -41,14 +41,16 @@ def test_time():
 def test_igc_array():
     demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
     igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", demin)
-    igc1.rpc.fit_line_numerator[0] = True
-    igc1.rpc.fit_sample_numerator[0] = True
+    t = [False] * 20
+    t[0] = True
+    igc1.rpc.fit_line_numerator = t
+    igc1.rpc.fit_sample_numerator = t
     igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
-    igc2.rpc.fit_line_numerator[0] = True
-    igc2.rpc.fit_sample_numerator[0] = True
+    igc2.rpc.fit_line_numerator = t
+    igc2.rpc.fit_sample_numerator = t
     igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
-    igc3.rpc.fit_line_numerator[0] = True
-    igc3.rpc.fit_sample_numerator[0] = True
+    igc3.rpc.fit_line_numerator = t
+    igc3.rpc.fit_sample_numerator = t
     igc_coll = IgcArray([igc1, igc2, igc3])
     assert igc_coll.number_image == 3
     assert_almost_equal(igc_coll.parameter[0], igc1.parameter[0], 10)

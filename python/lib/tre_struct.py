@@ -389,8 +389,8 @@ def tre_get_rpc(self):
     rpc.line_scale = self.line_scale
     rpc.sample_offset = self.samp_off
     rpc.sample_scale = self.samp_scale
-    rpc.fit_line_numerator.set([False] * 20)
-    rpc.fit_sample_numerator.set([False] * 20)
+    rpc.fit_line_numerator = [False] * 20
+    rpc.fit_sample_numerator = [False] * 20
     for i in range(20):
         rpc.line_denominator[i] = getattr(self, "line_den_coeff_%d" % (i+1))
         rpc.line_numerator[i] = getattr(self, "line_num_coeff_%d" % (i+1))

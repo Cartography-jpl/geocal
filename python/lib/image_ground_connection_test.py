@@ -18,8 +18,10 @@ def test_rpc_image_ground_pickle():
 
 def test_vicar_image_ground_connection():
     igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", dem)
-    igc1.rpc.fit_line_numerator[0] = True
-    igc1.rpc.fit_sample_numerator[0] = True
+    t = [False] * 20
+    t[0] = True
+    igc1.rpc.fit_line_numerator = t
+    igc1.rpc.fit_sample_numerator = t
     t = cPickle.dumps(igc1)
     igc2 = cPickle.loads(t)
     assert_almost_equal(igc2.parameter[0], 0.003954957)

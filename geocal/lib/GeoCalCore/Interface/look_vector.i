@@ -13,7 +13,7 @@
 namespace GeoCal {
 class LookVector {
 public:
-  boost::array<double, 3> look_vector;
+  %python_attribute_boost_array(look_vector, double, 3);
   %python_attribute(direction, boost::array<double, 3>)
   %python_attribute(length, double)
   std::string print_to_string() const = 0;

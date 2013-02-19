@@ -139,10 +139,9 @@ class OrbitOffsetCorrection(Orbit, WithParameter):
     def orbit_data(self, t):
         '''Return orbit data for given time'''
         od = self.uncorrected_orbit.orbit_data(t)
-        p = od.position_ci.position
-        pcorr = Array_double_3()
+        pcorr = od.position_ci.position.copy()
         for i in range(3):
-            pcorr[i] = p[i] + self.__parameter[i]
+            pcorr[i] += self.__parameter[i]
         return QuaternionOrbitData(od.time, od.position_ci.create(pcorr),
                                    od.velocity_ci, 
                                    od.sc_to_ci * self.quaternion_correction(t))

@@ -30,12 +30,12 @@ def _new_rpc(is_rpc_a, error_bias, error_random, height_offset,
     rpc.line_scale = line_scale
     rpc.sample_offset = sample_offset
     rpc.sample_scale = sample_scale
-    rpc.line_denominator.set(line_denominator)
-    rpc.line_numerator.set(line_numerator)
-    rpc.sample_denominator.set(sample_denominator)
-    rpc.sample_numerator.set(sample_numerator)
-    rpc.fit_line_numerator.set(fit_line_numerator)
-    rpc.fit_sample_numerator.set(fit_sample_numerator)
+    rpc.line_denominator = line_denominator
+    rpc.line_numerator = line_numerator
+    rpc.sample_denominator = sample_denominator
+    rpc.sample_numerator = sample_numerator
+    rpc.fit_line_numerator = fit_line_numerator
+    rpc.fit_sample_numerator = fit_sample_numerator
     return rpc
 }
 namespace GeoCal {
@@ -80,12 +80,12 @@ def __reduce__(self):
     double line_scale;
     double sample_offset;
     double sample_scale;
-    boost::array<double, 20> line_denominator;
-    boost::array<double, 20> line_numerator;
-    boost::array<double, 20> sample_denominator;
-    boost::array<double, 20> sample_numerator;
-    boost::array<bool, 20> fit_line_numerator;
-    boost::array<bool, 20> fit_sample_numerator;
+    %python_attribute_boost_array(line_denominator, double, 20);
+    %python_attribute_boost_array(line_numerator, double, 20);
+    %python_attribute_boost_array(sample_denominator, double, 20);
+    %python_attribute_boost_array(sample_numerator, double, 20);
+    %python_attribute_boost_array(fit_line_numerator, bool, 20);
+    %python_attribute_boost_array(fit_sample_numerator, bool, 20);
     double resolution_meter(const Dem& D) const;
     void fit(const std::vector<boost::shared_ptr<GroundCoordinate> >& Gc,
 	   const std::vector<ImageCoordinate>& Ic, 

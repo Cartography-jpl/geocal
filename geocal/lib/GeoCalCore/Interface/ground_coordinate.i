@@ -55,7 +55,7 @@ public:
   const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
   const = 0;
   std::string print_to_string() const;
-  boost::array<double, 3> position;
+  %python_attribute_boost_array(position, double, 3)
 };
 
 class CartesianFixed : public GroundCoordinate {
@@ -72,7 +72,7 @@ public:
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0) 
   const = 0;
   %python_attribute(min_radius_reference_surface, virtual double)
-  boost::array<double, 3> position;
+  %python_attribute_boost_array(position, double, 3)
 };
 
 double distance(const GroundCoordinate& G1, const GroundCoordinate& G2);

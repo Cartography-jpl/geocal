@@ -68,13 +68,14 @@ for i in range(len(args.image)):
         t = VicarImageGroundConnection(args.image[i], dem, title=args.title[i])
     else:
         t = GdalImageGroundConnection(args.image[i], dem, title=args.title[i])
-    for i in range(20):
-        t.rpc.fit_line_numerator[i] = False
-        t.rpc.fit_sample_numerator[i] = False
+    fln = [False] * 20
+    fsmp = [False] * 20
     for i in line_fit:
-        t.rpc.fit_line_numerator[i] = True
+        fln[i] = True
     for i in sample_fit:
-        t.rpc.fit_sample_numerator[i] = True
+        fsmp[i] = True
+    t.rpc.fit_line_numerator = fln
+    t.rpc.fit_sample_numerator = fsmp
     igc_coll.igc.append(t)
 igc_coll.parameter_subset_mask = [True] * len(igc_coll.parameter)
 

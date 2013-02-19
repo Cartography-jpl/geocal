@@ -84,8 +84,10 @@ class RasterImage {
 public:
   double interpolate(double Line, double Sample) const;
   virtual boost::shared_ptr<RasterImage> overview(int Min_number_sample) const;
-  boost::array<double, 2> interpolate_derivative(double Line, double Sample) 
-    const;
+  // Don't bother with this, since we need to convert from
+  //boost::array. Revisit if we actually need this
+  //boost::array<double, 2> interpolate_derivative(double Line, double Sample) 
+  //  const;
   double interpolate(const ImageCoordinate& Ic) const;
   %python_attribute(number_line, int)
   %python_attribute(number_sample, int)

@@ -11,18 +11,18 @@ libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS)
 libgeocal_la_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw)
 libgeocal_la_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS)
 
+if HAVE_GDAL
+# Include gdal in builds
+libgeocal_la_LDFLAGS+= $(GDAL_LIBS)
+libgeocal_la_CPPFLAGS+= $(GDAL_CFLAGS)
+endif
+
 # Include boost in builds
 libgeocal_la_LDFLAGS+= -R $(BOOST_LIBDIR) -L$(BOOST_LIBDIR)
 libgeocal_la_LDFLAGS+= $(BOOST_REGEX_LIB) $(BOOST_DATETIME_LIB)
 
 # Include blitz in builds
 libgeocal_la_LDFLAGS+= $(BLITZ_LIBS)
-
-if HAVE_GDAL
-# Include gdal in builds
-libgeocal_la_LDFLAGS+= $(GDAL_LIBS)
-libgeocal_la_CPPFLAGS+= $(GDAL_CFLAGS)
-endif
 
 if HAVE_HDF5
 libgeocal_la_LDFLAGS+= $(HDF5_LIBS)

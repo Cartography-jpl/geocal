@@ -132,8 +132,17 @@ SwigPyIterator_swigregister = _geocal.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
 class Vector_double(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_double_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_double_swiginit(self,_geocal.new_Vector_double(*args))
@@ -173,8 +182,17 @@ Vector_double_swigregister = _geocal.Vector_double_swigregister
 Vector_double_swigregister(Vector_double)
 
 class Vector_string(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_string_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_string_swiginit(self,_geocal.new_Vector_string(*args))
@@ -214,8 +232,17 @@ Vector_string_swigregister = _geocal.Vector_string_swigregister
 Vector_string_swigregister(Vector_string)
 
 class Vector_unsigned_char(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_unsigned_char_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_unsigned_char_swiginit(self,_geocal.new_Vector_unsigned_char(*args))
@@ -255,8 +282,17 @@ Vector_unsigned_char_swigregister = _geocal.Vector_unsigned_char_swigregister
 Vector_unsigned_char_swigregister(Vector_unsigned_char)
 
 class Vector_short_int(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_short_int_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_short_int_swiginit(self,_geocal.new_Vector_short_int(*args))
@@ -296,8 +332,17 @@ Vector_short_int_swigregister = _geocal.Vector_short_int_swigregister
 Vector_short_int_swigregister(Vector_short_int)
 
 class Vector_int(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_int_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_int_swiginit(self,_geocal.new_Vector_int(*args))
@@ -337,8 +382,17 @@ Vector_int_swigregister = _geocal.Vector_int_swigregister
 Vector_int_swigregister(Vector_int)
 
 class Vector_float(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_float_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_float_swiginit(self,_geocal.new_Vector_float(*args))
@@ -1004,8 +1058,17 @@ Array_bool_20_swigregister = _geocal.Array_bool_20_swigregister
 Array_bool_20_swigregister(Array_bool_20)
 
 class Vector_Array_double_12(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_Array_double_12_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_Array_double_12_swiginit(self,_geocal.new_Vector_Array_double_12(*args))
@@ -1045,8 +1108,17 @@ Vector_Array_double_12_swigregister = _geocal.Vector_Array_double_12_swigregiste
 Vector_Array_double_12_swigregister(Vector_Array_double_12)
 
 class Vector_Array_double_14(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_Array_double_14_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_Array_double_14_swiginit(self,_geocal.new_Vector_Array_double_14(*args))
@@ -1813,8 +1885,17 @@ Time.min_valid_time = _geocal.cvar.Time_min_valid_time
 Time.max_valid_time = _geocal.cvar.Time_max_valid_time
 
 class Vector_Time(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_Time_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_Time_swiginit(self,_geocal.new_Vector_Time(*args))
@@ -2141,8 +2222,17 @@ VicarImageCoordinate_swigregister = _geocal.VicarImageCoordinate_swigregister
 VicarImageCoordinate_swigregister(VicarImageCoordinate)
 
 class Vector_ImageCoordinate(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_ImageCoordinate_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_ImageCoordinate_swiginit(self,_geocal.new_Vector_ImageCoordinate(*args))
@@ -2182,8 +2272,17 @@ Vector_ImageCoordinate_swigregister = _geocal.Vector_ImageCoordinate_swigregiste
 Vector_ImageCoordinate_swigregister(Vector_ImageCoordinate)
 
 class Vector_ImageCoordinatePtr(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_ImageCoordinatePtr_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_ImageCoordinatePtr_swiginit(self,_geocal.new_Vector_ImageCoordinatePtr(*args))
@@ -2658,8 +2757,17 @@ def distance(*args):
   return _geocal.distance(*args)
 distance = _geocal.distance
 class Vector_GroundCoordinate(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_GroundCoordinate_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_GroundCoordinate_swiginit(self,_geocal.new_Vector_GroundCoordinate(*args))
@@ -4030,8 +4138,17 @@ RasterImage_swigregister = _geocal.RasterImage_swigregister
 RasterImage_swigregister(RasterImage)
 
 class Vector_RasterImage(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_RasterImage_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_RasterImage_swiginit(self,_geocal.new_Vector_RasterImage(*args))
@@ -4685,8 +4802,17 @@ SimplePushBroomCamera_swigregister = _geocal.SimplePushBroomCamera_swigregister
 SimplePushBroomCamera_swigregister(SimplePushBroomCamera)
 
 class Vector_Camera(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_Camera_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_Camera_swiginit(self,_geocal.new_Vector_Camera(*args))
@@ -4887,10 +5013,10 @@ class QuaternionOrbitData(OrbitData):
 
     This does not account for atmospheric refraction. Depending on the
     zenith angle, this can be somewhat important for satellites. From the
-    approximate atmospheric model described in "Theoretical Basis of the
-    SDP Toolkit Geolocation package for the ECS", Table 6-5 the linear
-    displacement for a zenith angle of 10 is 0.549 meters, 20 degrees is
-    1.223 meters, and 30 degrees is 2.221.
+    approximate atmospheric model described in "Theoretical Basis of
+    the SDP Toolkit Geolocation package for the ECS", Table 6-5 the
+    linear displacement for a zenith angle of 10 is 0.549 meters, 20
+    degrees is 1.223 meters, and 30 degrees is 2.221.
 
     We may want to add a atmospheric refraction correction in the future,
     but this hasn't been done yet.
@@ -5290,8 +5416,17 @@ KeplerOrbit_swigregister = _geocal.KeplerOrbit_swigregister
 KeplerOrbit_swigregister(KeplerOrbit)
 
 class Vector_QuaternionOrbitData(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_QuaternionOrbitData_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_QuaternionOrbitData_swiginit(self,_geocal.new_Vector_QuaternionOrbitData(*args))
@@ -5955,7 +6090,7 @@ class Mask(object):
     small areas where these difference aren't very important. If you need
     detailed, accurate information about a region in a specific map
     projection then you should simply look at each individual point. The
-    region is useful for the "don't bother looking here for tie points,
+    region is useful for the "don't bother   looking here for tie points,
     look somewhere else" sorts of uses.
 
     If the region search returns true, then all of the region is masked.
@@ -6048,8 +6183,17 @@ CombinedMask_swigregister = _geocal.CombinedMask_swigregister
 CombinedMask_swigregister(CombinedMask)
 
 class Vector_Mask(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_Mask_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_Mask_swiginit(self,_geocal.new_Vector_Mask(*args))
@@ -6392,8 +6536,17 @@ FeatureDetector_swigregister = _geocal.FeatureDetector_swigregister
 FeatureDetector_swigregister(FeatureDetector)
 
 class Vector_InterestPoint(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_InterestPoint_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_InterestPoint_swiginit(self,_geocal.new_Vector_InterestPoint(*args))
@@ -10370,13 +10523,13 @@ class Refraction(object):
     The algorithm used was take from the SDP toolkit. The original code
     was written by Peter Noerdlinger as the SDP toolkit function
     PGS_CSC_SpaceRefract. The algorithm is described in detail in
-    "Theoretical Basis of the SDP Toolkit Geolocation Package for the
+    "Theoretical Basis of the SDP Toolkit   Geolocation Package for the
     ECS".
 
     This depends on the index of refraction of air at the surface. We
     don't actually know this. There are various approximations, and the
     toolkit uses one described in the "Theoretical Basis of the SDP
-    Toolkit Geolocation Package for the ECS".
+    Toolkit   Geolocation Package for the ECS".
 
     This class allows the index of refraction to simple be given. This
     allows us to just fit for this unknown using something like a
@@ -11089,8 +11242,17 @@ ArgusOrbit_swigregister = _geocal.ArgusOrbit_swigregister
 ArgusOrbit_swigregister(ArgusOrbit)
 
 class Vector_ArgusOrbitData(object):
+    """
+    STL class. 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def iterator(self):
+        """
+        STL iterator class. 
+        """
+        return _geocal.Vector_ArgusOrbitData_iterator(self)
+
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal.Vector_ArgusOrbitData_swiginit(self,_geocal.new_Vector_ArgusOrbitData(*args))
@@ -13398,10 +13560,9 @@ class WorldView2CloudMask(CalcRaster):
 
     This cloud mask has two parts:
 
-    A simple threshold on the coastal blue band to detect clouds.
-
-    A ratio comparision of (band 8 - band 1) / band 1 < threshold to
-    detect cloud shadows.
+    A simple threshold on the coastal blue band to detect clouds. A ratio
+    comparision of (band 8 - band 1) / band 1 < threshold to detect cloud
+    shadows.
 
     To help with false positives, we have a minimum cloud size. This is
     used to average the data, and only if the lower resolution data shows
@@ -13572,7 +13733,6 @@ class MaterialDetect(CalcRaster):
     difference is normally calculated by DoughnutAverage, using the
     pandif_raster_image. But something else could be used, all this class
     cares about is having a difference it can compare against a threshold.
-
     Compare pan data to a shadow threshold. This masks at very dark pixels
     that we assume are in shadow.
 

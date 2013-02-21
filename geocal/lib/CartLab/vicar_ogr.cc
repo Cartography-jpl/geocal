@@ -244,11 +244,12 @@ VicarOgr::VicarOgr()
 }
 
 //-----------------------------------------------------------------------
-/// Read the metadata from a Vicar File, and use to create a MapInfo
-/// based on GDAL.
+/// We can use the same code to get MapInfo for either a VicarFile or
+/// a VicarLiteFile. We use a template here so we don't need to repeat
+/// our code
 //-----------------------------------------------------------------------
 
-MapInfo VicarOgr::from_vicar(const VicarFile& F)
+template<class T> MapInfo VicarOgr::from_vicar_template(const T& F) 
 {
   using namespace VicarOgrNsp;
   TempFile f;
@@ -258,8 +259,8 @@ MapInfo VicarOgr::from_vicar(const VicarFile& F)
     Tif tf(f, "w");
     Gtif g(tf);
     BOOST_FOREACH(int t, geotiff_tag_short) {
-      if(F.label_type().count("GEOTIFF " + tag_to_vicar_name[t]) != 0) {
-	std::string tv = F.label<std::string>(tag_to_vicar_name[t],
+      if(F.has_label("GEOTIFF " + tag_to_vicar_name[t])) {
+	std::string tv = F.label_string(tag_to_vicar_name[t],
 					     "GEOTIFF");
 	int v = atoi(tv.c_str());
 	// Special handling to override GTRASTERTYPEGEOKEY and force
@@ -273,13 +274,13 @@ MapInfo VicarOgr::from_vicar(const VicarFile& F)
       }
     }
     BOOST_FOREACH(int t, geotiff_tag_ascii) {
-      if(F.label_type().count("GEOTIFF " + tag_to_vicar_name[t]) != 0) {
-	std::string v = F.label<std::string>(tag_to_vicar_name[t], "GEOTIFF");
+      if(F.has_label("GEOTIFF " + tag_to_vicar_name[t])) {
+	std::string v = F.label_string(tag_to_vicar_name[t], "GEOTIFF");
 	GTIFKeySet(g.gtif, (geokey_t) t, TYPE_ASCII, 0, v.c_str());
       }
     }
-    if(F.label_type().count("GEOTIFF MODELPIXELSCALETAG") != 0) {
-      std::string vs = F.label<std::string>("MODELPIXELSCALETAG", "GEOTIFF");
+    if(F.has_label("GEOTIFF MODELPIXELSCALETAG")) {
+      std::string vs = F.label_string("MODELPIXELSCALETAG", "GEOTIFF");
       BOOST_FOREACH(char& c, vs)
 	if(c == '(' || c == ')' || c == ',')
 	  c = ' ';
@@ -293,8 +294,8 @@ MapInfo VicarOgr::from_vicar(const VicarFile& F)
       }
       TIFFSetField(tf.tif, TIFFTAG_GEOPIXELSCALE, 3, v);
     }
-    if(F.label_type().count("GEOTIFF MODELTIEPOINTTAG") != 0) {
-      std::string vs = F.label<std::string>("MODELTIEPOINTTAG", "GEOTIFF");
+    if(F.has_label("GEOTIFF MODELTIEPOINTTAG")) {
+      std::string vs = F.label_string("MODELTIEPOINTTAG", "GEOTIFF");
       BOOST_FOREACH(char& c, vs)
 	if(c == '(' || c == ')' || c == ',')
 	  c = ' ';
@@ -308,8 +309,8 @@ MapInfo VicarOgr::from_vicar(const VicarFile& F)
       }
       TIFFSetField(tf.tif, TIFFTAG_GEOTIEPOINTS, 6, v);
     }
-    if(F.label_type().count("GEOTIFF MODELTRANSFORMATIONTAG") != 0) {
-      std::string vs = F.label<std::string>("MODELTRANSFORMATIONTAG", "GEOTIFF");
+    if(F.has_label("GEOTIFF MODELTRANSFORMATIONTAG")) {
+      std::string vs = F.label_string("MODELTRANSFORMATIONTAG", "GEOTIFF");
       BOOST_FOREACH(char& c, vs)
 	if(c == '(' || c == ')' || c == ',')
 	  c = ' ';
@@ -333,9 +334,9 @@ MapInfo VicarOgr::from_vicar(const VicarFile& F)
     // this corresponds to "GCS_WGS_84".
     //----------------------------------------------------------------
 
-    if(F.label_type().count("GEOTIFF GEOGRAPHICTYPEGEOKEY") ==0 &&
-       F.label_type().count("GEOTIFF GTMODELTYPEGEOKEY") != 0 &&
-       atoi(F.label<std::string>("GTMODELTYPEGEOKEY", "GEOTIFF").c_str()) 
+    if(!F.has_label("GEOTIFF GEOGRAPHICTYPEGEOKEY") &&
+       F.has_label("GEOTIFF GTMODELTYPEGEOKEY") &&
+       atoi(F.label_string("GTMODELTYPEGEOKEY", "GEOTIFF").c_str()) 
        == 2)
       GTIFKeySet(g.gtif, GeographicTypeGeoKey, TYPE_SHORT, 1, 
 		 (geocode_t) 4326); 
@@ -368,6 +369,17 @@ MapInfo VicarOgr::from_vicar(const VicarFile& F)
 //----------------------------------------------------------------
 
   return m.subset(0, 0, F.number_sample(), F.number_line());
+}
+
+
+//-----------------------------------------------------------------------
+/// Read the metadata from a Vicar File, and use to create a MapInfo
+/// based on GDAL.
+//-----------------------------------------------------------------------
+
+MapInfo VicarOgr::from_vicar(const VicarFile& F)
+{
+  return from_vicar_template(F);
 }
 
 //-----------------------------------------------------------------------

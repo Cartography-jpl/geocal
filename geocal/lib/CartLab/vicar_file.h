@@ -135,6 +135,13 @@ public:
   {return label_type_;}
 
 //-----------------------------------------------------------------------
+/// Test if a label is found in a file, and if so return
+/// true. Otherwise return false.
+//-----------------------------------------------------------------------
+  bool has_label(const std::string& Lbl) const
+  { return label_type_.count(Lbl) != 0; }
+
+//-----------------------------------------------------------------------
 /// Map between Label names and the number of elements.
 /// As a convention, we store a label that is part of a property as
 /// the string "property label". We can break this out in the future
@@ -157,6 +164,14 @@ public:
   
   template<class T> T label(const std::string& F, 
 			    const std::string& Property = "") const;
+
+
+//-----------------------------------------------------------------------
+/// Non template form of label, useful in some contexts.
+//-----------------------------------------------------------------------
+
+  inline std::string label_string(const std::string& F, 
+				  const std::string& Property = "") const;
 
   void label_delete(const std::string& F, const std::string& Property = "");
   void label_set(const std::string& F, 
@@ -456,5 +471,8 @@ VicarFile::label<std::vector<std::string> >(const std::string& K,
 }
 
 
+inline std::string VicarFile::label_string(const std::string& F, 
+				  const std::string& Property) const
+{ return label<std::string>(F, Property); }
 }
 #endif

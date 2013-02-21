@@ -330,8 +330,8 @@ void VicarFile::close()
 
 bool VicarFile::has_map_info() const
 {
-  return (label_type().count("GEOTIFF MODELTRANSFORMATIONTAG") == 1 ||
-	  label_type().count("GEOTIFF MODELTIEPOINTTAG") == 1);
+  return (has_label("GEOTIFF MODELTRANSFORMATIONTAG") ||
+	  has_label("GEOTIFF MODELTIEPOINTTAG"));
 }
 
 //-----------------------------------------------------------------------
@@ -341,7 +341,7 @@ bool VicarFile::has_map_info() const
 
 bool VicarFile::has_rpc() const
 {
-  return (label_type().count("GEOTIFF NITF_CETAG") == 1);
+  return (has_label("GEOTIFF NITF_CETAG"));
 }
 
 //-----------------------------------------------------------------------

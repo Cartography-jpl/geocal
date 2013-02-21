@@ -47,6 +47,7 @@ public:
   MapInfo from_vicar(const VicarFile& F);
   void to_vicar(const MapInfo& Mi, VicarFile& F);
 private:
+  template<class T> MapInfo from_vicar_template(const T& F);
   std::vector<int> geotiff_tag_ascii;
   std::vector<int> geotiff_tag_double;
   std::vector<int> geotiff_tag_short;

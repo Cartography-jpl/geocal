@@ -47,6 +47,11 @@ Options:
   -h --help         
        Print this message
 
+  --map-info=f
+       Rather than generating a DEM to cover the full area, match exactly
+       the supplied shelve image. This is useful to when comparing against
+       an existing image/DEM.
+
   --process-number-line=n
        Number of lines to include in each tile that we work on. This 
        controls how long each torque job takes to run. [default: 1000]
@@ -69,11 +74,14 @@ igc2 = igc_col.image_ground_connection(args.index_image2)
 
 # Create the empty DEM
 
-mibase = cib01_mapinfo()
-resbase = mibase.resolution_meter
-miscale = mibase.scale(args.resolution / resbase,
-                       args.resolution / resbase)
-midem = igc1.cover(miscale)
+if(args.map_info):
+    midem = read_shelve(args.map_info).map_info
+else:
+    mibase = cib01_mapinfo()
+    resbase = mibase.resolution_meter
+    miscale = mibase.scale(args.resolution / resbase,
+                           args.resolution / resbase)
+    midem = igc1.cover(miscale)
 
 demname = args.output_base + ".img"
 f = VicarRasterImage(demname, midem, "REAL")

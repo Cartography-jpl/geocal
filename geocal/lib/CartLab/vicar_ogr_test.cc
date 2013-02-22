@@ -19,6 +19,10 @@ BOOST_AUTO_TEST_CASE(basic)
   MapInfo mi2 = v.from_vicar(f2);
   OgrCoordinateConverter& ogr = *(dynamic_cast<OgrCoordinateConverter*>(mi.coordinate_converter_ptr().get()));
   BOOST_CHECK(ogr.ogr().ogr().IsSame(&cv->ogr().ogr()));
+  VicarLiteFile f3("test_out/vicar_ogr_write.img");
+  MapInfo mi3 = v.from_vicar(f3);
+  OgrCoordinateConverter& ogr2 = *(dynamic_cast<OgrCoordinateConverter*>(mi.coordinate_converter_ptr().get()));
+  BOOST_CHECK(ogr2.ogr().ogr().IsSame(&cv->ogr().ogr()));
 }
 
 BOOST_AUTO_TEST_CASE(vicar_ogr_point_vs_area)

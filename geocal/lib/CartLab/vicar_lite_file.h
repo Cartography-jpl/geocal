@@ -93,6 +93,13 @@ public:
   template<class T> T label(const std::string& F, 
 			    const std::string& Property = "") const;
 
+//-----------------------------------------------------------------------
+/// Non template form of label, useful in some contexts.
+//-----------------------------------------------------------------------
+
+  inline std::string label_string(const std::string& F, 
+				  const std::string& Property = "") const;
+
 //   void label_set(const std::string& F, 
 // 		 int Val,
 // 		 const std::string& Property = "");
@@ -109,6 +116,14 @@ public:
 
   const std::map<std::string, std::string>& label_map() const
   {return label_;}
+
+//-----------------------------------------------------------------------
+/// Test if a label is found in a file, and if so return
+/// true. Otherwise return false.
+//-----------------------------------------------------------------------
+
+  bool has_label(const std::string& Lbl) const
+  { return label_.count(Lbl) != 0; }
 
 //-----------------------------------------------------------------------
 /// Number of bands in file.
@@ -281,6 +296,31 @@ VicarLiteFile::to_int<int, true>(const char* c) const
   return res; 
 }
 
+template<> inline int VicarLiteFile::to_int<float, false>(const char* c) const
+{ return (int) *reinterpret_cast<const float*>(c); }
+
+template<> inline int VicarLiteFile::to_int<double, false>(const char* c) const
+{ return (int) *reinterpret_cast<const double*>(c); }
+
+template<> inline double VicarLiteFile::to_double<unsigned char, true>(const char* c) const
+{ return to_int<unsigned char, true>(c); }
+template<> inline double VicarLiteFile::to_double<unsigned char, false>(const char* c) const
+{ return to_int<unsigned char, false>(c); }
+template<> inline double VicarLiteFile::to_double<short int, true>(const char* c) const
+{ return to_int<short int, true>(c); }
+template<> inline double VicarLiteFile::to_double<short int, false>(const char* c) const
+{ return to_int<short int, false>(c); }
+template<> inline double VicarLiteFile::to_double<int, true>(const char* c) const
+{ return to_int<int, true>(c); }
+template<> inline double VicarLiteFile::to_double<int, false>(const char* c) const
+{ return to_int<int, false>(c); }
+
+template<> inline double VicarLiteFile::to_double<float, false>(const char* c) const
+{ return *reinterpret_cast<const float*>(c); }
+
+template<> inline double VicarLiteFile::to_double<double, false>(const char* c) const
+{ return *reinterpret_cast<const double*>(c); }
+
 //-----------------------------------------------------------------------
 /// Convert from int.
 //-----------------------------------------------------------------------
@@ -313,6 +353,12 @@ VicarLiteFile::from_int<int, true>(const int& I, char* c) const
 template<> inline void 
 VicarLiteFile::from_int<int, false>(const int& I, char* c) const
 { *(reinterpret_cast<int *>(c)) = static_cast<int>(I); }
+template<> inline void 
+VicarLiteFile::from_int<float, false>(const int& I, char* c) const
+{ *(reinterpret_cast<float *>(c)) = static_cast<float>(I); }
+template<> inline void 
+VicarLiteFile::from_int<double, false>(const int& I, char* c) const
+{ *(reinterpret_cast<double *>(c)) = static_cast<double>(I); }
 
 //-----------------------------------------------------------------------
 /// Read data as an int.
@@ -328,8 +374,6 @@ inline int VicarLiteFile::read_int(int B, int L, int S) const
       return to_int<unsigned char, true>(&(data_raw->data()[B][L][S][0]));
     case VICAR_HALF:
       return to_int<short int, true>(&(data_raw->data()[B][L][S][0]));
-    case VICAR_FULL:
-      return to_int<int, true>(&(data_raw->data()[B][L][S][0]));
     default:
       throw Exception("Unrecognized type");
       }
@@ -341,6 +385,10 @@ inline int VicarLiteFile::read_int(int B, int L, int S) const
       return to_int<short int, false>(&(data_raw->data()[B][L][S][0]));
     case VICAR_FULL:
       return to_int<int, false>(&(data_raw->data()[B][L][S][0]));
+    case VICAR_FLOAT:
+      return to_int<float, false>(&(data_raw->data()[B][L][S][0]));
+    case VICAR_DOUBLE:
+      return to_int<double, false>(&(data_raw->data()[B][L][S][0]));
     default:
       throw Exception("Unrecognized type");
     }
@@ -373,6 +421,10 @@ inline double VicarLiteFile::read_double(int B, int L, int S) const
       return to_double<short int, false>(&(data_raw->data()[B][L][S][0]));
     case VICAR_FULL:
       return to_double<int, false>(&(data_raw->data()[B][L][S][0]));
+    case VICAR_FLOAT:
+      return to_double<float, false>(&(data_raw->data()[B][L][S][0]));
+    case VICAR_DOUBLE:
+      return to_double<double, false>(&(data_raw->data()[B][L][S][0]));
     default:
       throw Exception("Unrecognized type");
     }
@@ -430,10 +482,26 @@ inline void VicarLiteFile::read_int(int B, int L, int S, int Nb, int Nl,
 	  for(int k = S; k < S + Ns; ++k, ++Res)
 	    *Res = to_int<int, false>(&(data_raw->data()[i][j][k][0]));
       break;
+    case VICAR_FLOAT:
+      for(int i = B; i < B + Nb; ++i)
+	for(int j = L; j < L + Nl; ++j)
+	  for(int k = S; k < S + Ns; ++k, ++Res)
+	    *Res = to_int<float, false>(&(data_raw->data()[i][j][k][0]));
+      break;
+    case VICAR_DOUBLE:
+      for(int i = B; i < B + Nb; ++i)
+	for(int j = L; j < L + Nl; ++j)
+	  for(int k = S; k < S + Ns; ++k, ++Res)
+	    *Res = to_int<double, false>(&(data_raw->data()[i][j][k][0]));
+      break;
     default:
       throw Exception("Unrecognized type");
     }
 }
+
+inline std::string VicarLiteFile::label_string(const std::string& F, 
+				  const std::string& Property) const
+{ return label<std::string>(F, Property); }
 
 //-----------------------------------------------------------------------
 /// Write data as an int.
@@ -467,6 +535,12 @@ inline void VicarLiteFile::write_int(int B, int L, int S, int V) const
       break;
     case VICAR_FULL:
       from_int<int, false>(V, &(data_raw->data()[B][L][S][0]));
+      break;
+    case VICAR_FLOAT:
+      from_int<float, false>(V, &(data_raw->data()[B][L][S][0]));
+      break;
+    case VICAR_DOUBLE:
+      from_int<double, false>(V, &(data_raw->data()[B][L][S][0]));
       break;
     default:
       throw Exception("Unrecognized type");

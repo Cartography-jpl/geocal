@@ -20045,6 +20045,12 @@ incorrectly labels the data as \"point\" rather than \"area\". Since
 this is a 15 meter difference, it matters for many applications. Most
 users should just ignore this value. ";
 
+%feature("docstring")  GeoCal::VicarFile::has_label "
+bool GeoCal::VicarFile::has_label(const std::string &Lbl) const
+Test if a label is found in a file, and if so return true.
+
+Otherwise return false. ";
+
 %feature("docstring")  GeoCal::VicarFile::has_map_info "
 bool VicarFile::has_map_info() const
 Return true if the file has a GEOTIFF label in it, indicating it has
@@ -20098,6 +20104,10 @@ Set the value of a label.
 If the label is already in the file, is is deleted and replaced with
 this new value. Otherwise, it is simply added. Optionally the label
 can be part of a Property. ";
+
+%feature("docstring")  GeoCal::VicarFile::label_string "
+std::string GeoCal::VicarFile::label_string(const std::string &F, const std::string &Property=\"\") const
+Non template form of label, useful in some contexts. ";
 
 %feature("docstring")  GeoCal::VicarFile::label_type "
 const std::map<std::string, int>& GeoCal::VicarFile::label_type() const
@@ -20492,6 +20502,12 @@ incorrectly labels the data as \"point\" rather than \"area\". Since
 this is a 15 meter difference, it matters for many applications. Most
 users should just ignore this value. ";
 
+%feature("docstring")  GeoCal::VicarLiteFile::has_label "
+bool GeoCal::VicarLiteFile::has_label(const std::string &Lbl) const
+Test if a label is found in a file, and if so return true.
+
+Otherwise return false. ";
+
 %feature("docstring")  GeoCal::VicarLiteFile::has_map_info "
 bool VicarLiteFile::has_map_info() const
 Return true if the file has a GEOTIFF label in it, indicating it has
@@ -20519,6 +20535,10 @@ Optionally also supply a property for labels that are part of one
 %feature("docstring")  GeoCal::VicarLiteFile::label_map "
 const std::map<std::string, std::string>& GeoCal::VicarLiteFile::label_map() const
 Sometimes it is more convenient to work directly with a map. ";
+
+%feature("docstring")  GeoCal::VicarLiteFile::label_string "
+std::string GeoCal::VicarLiteFile::label_string(const std::string &F, const std::string &Property=\"\") const
+Non template form of label, useful in some contexts. ";
 
 %feature("docstring")  GeoCal::VicarLiteFile::map_info "
 MapInfo VicarLiteFile::map_info() const
@@ -21182,6 +21202,11 @@ C++ includes: vicar_ogr.h ";
 MapInfo VicarOgr::from_vicar(const VicarFile &F)
 Read the metadata from a Vicar File, and use to create a MapInfo based
 on GDAL. ";
+
+%feature("docstring")  GeoCal::VicarOgr::from_vicar "
+MapInfo VicarOgr::from_vicar(const VicarLiteFile &F)
+Read the metadata from a VicarLiteFile, and use to create a MapInfo
+based on GDAL. ";
 
 %feature("docstring")  GeoCal::VicarOgr::to_vicar "
 void VicarOgr::to_vicar(const MapInfo &Mi, VicarFile &F)

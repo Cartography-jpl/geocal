@@ -3,7 +3,14 @@
 #include <boost/foreach.hpp>
 #define BOOST_LEXICAL_CAST_ASSUME_C_LOCALE
 #include <boost/lexical_cast.hpp>
+#ifdef HAVE_GDAL
+#include "vicar_ogr.h"
+#endif
 using namespace GeoCal;
+
+#ifdef HAVE_GDAL
+static VicarOgr vlogr;
+#endif
 
 //-----------------------------------------------------------------------
 /// Determine if a given file is a VICAR file or not.
@@ -99,7 +106,7 @@ VicarLiteFile::VicarLiteFile(const std::string& Fname, access_type Access,
 //-----------------------------------------------------------------------
 
   std::string intfmt = "LOW";
-  if(label_.count("INTFMT") > 0)
+  if(has_label("INTFMT"))
     intfmt = (*label_.find("INTFMT")).second;
   if(intfmt == "LOW") {
 #ifdef WORDS_BIGENDIAN
@@ -125,7 +132,7 @@ VicarLiteFile::VicarLiteFile(const std::string& Fname, access_type Access,
   boost::multi_array<char, 4>::size_type ordering[4];
   bool ascending[] = {true, true, true, true};
   std::string ord = "BSQ";
-  if(label_.count("ORG") > 0)
+  if(has_label("ORG"))
     ord = (*label_.find("ORG")).second;
   if(ord == "BSQ") {
     ordering[0] = 3; ordering[1] = 2; ordering[2] = 1; ordering[3] = 0;
@@ -140,7 +147,7 @@ VicarLiteFile::VicarLiteFile(const std::string& Fname, access_type Access,
   // We can't actually read compressed data, although it can be useful
   // to look at the labels. If the data is compressed, punt for now.
   // We might do something more sophisticated in the future.
-  if(label_.count("COMPRESS") == 0 ||
+  if(!has_label("COMPRESS") ||
      label_["COMPRESS"] == "NONE") {
     is_compressed_ = false;
     data_raw.reset(new MemoryMapArray<char, 4>
@@ -270,29 +277,41 @@ MapInfo VicarLiteFile::map_info() const
   int projection_id;
   isp >> projection_id;
   if(projection_id != 2)
+#ifdef HAVE_GDAL
+    return vlogr.from_vicar(*this);
+#else
     throw Exception("Right now, only Geographic projections are supported. File "
 		    + fname_ + " had projection " + 
 		    label<string>("GTMODELTYPEGEOKEY", "GEOTIFF"));
-  if(label_map().count("GEOTIFF GEOGELLIPSOIDGEOKEY") == 1) {
+#endif
+  if(has_label("GEOTIFF GEOGELLIPSOIDGEOKEY")) {
     std::istringstream ise(label<string>("GEOGELLIPSOIDGEOKEY", "GEOTIFF"));
     int ellipsoid_id;
     ise >> ellipsoid_id;
     if(ellipsoid_id != 7030)
+#ifdef HAVE_GDAL
+      return vlogr.from_vicar(*this);
+#else
       throw Exception("Right now, only WGS-84 reference ellipsoid is supported. File "
 		      + fname_ + " had reference ellipsoid " + 
 		      label<string>("GTMODELTYPEGEOKEY", "GEOTIFF"));
-  } else if(label_map().count("GEOTIFF GEOGRAPHICTYPEGEOKEY") == 1) {
+#endif
+  } else if(has_label("GEOTIFF GEOGRAPHICTYPEGEOKEY")) {
     std::istringstream ise(label<string>("GEOGRAPHICTYPEGEOKEY", "GEOTIFF"));
     int geo_id;
     ise >> geo_id;
     if(geo_id != 4326)
+#ifdef HAVE_GDAL
+      return vlogr.from_vicar(*this);
+#else
       throw Exception("Right now, only WGS-84 reference ellipsoid is supported. File "
 		      + fname_ + " had reference ellipsoid " + 
 		      label<string>("GEOGRAPHICTYPEGEOKEY", "GEOTIFF"));
+#endif
   } else {
     throw Exception("Must have GEOGELLIPSOIDGEOKEY or GEOGRAPHICTYPEGEOKEY. File" + fname_);
   }
-  if(label_map().count("GEOTIFF MODELTRANSFORMATIONTAG") == 1) {
+  if(has_label("GEOTIFF MODELTRANSFORMATIONTAG")) {
     string t1 = label<string>("MODELTRANSFORMATIONTAG", "GEOTIFF");
     BOOST_FOREACH(char& c, t1)
       if(c == '(' || c == ')' || c == ',')
@@ -341,7 +360,7 @@ MapInfo VicarLiteFile::map_info() const
 // we expect in MapInfo. We check and see if the file has metadata
 // giving this information, and if so if we need to offset the pixel.
 
-  if(label_map().count("GEOTIFF GTRASTERTYPEGEOKEY")) {
+  if(has_label("GEOTIFF GTRASTERTYPEGEOKEY")) {
     std::istringstream ise(label<string>("GTRASTERTYPEGEOKEY", "GEOTIFF"));
     int rt_id;
     ise >> rt_id;
@@ -373,8 +392,8 @@ void VicarLiteFile::map_info(const MapInfo& M)
 
 bool VicarLiteFile::has_map_info() const
 {
-  return (label_map().count("GEOTIFF MODELTRANSFORMATIONTAG") == 1 ||
-	  label_map().count("GEOTIFF MODELTIEPOINTTAG") == 1);
+  return (has_label("GEOTIFF MODELTRANSFORMATIONTAG") ||
+	  has_label("GEOTIFF MODELTIEPOINTTAG"));
 }
 
 //-----------------------------------------------------------------------
@@ -384,7 +403,7 @@ bool VicarLiteFile::has_map_info() const
 
 bool VicarLiteFile::has_rpc() const
 {
-  return (label_map().count("GEOTIFF NITF_CETAG") == 1);
+  return (has_label("GEOTIFF NITF_CETAG"));
 }
 
 //-----------------------------------------------------------------------

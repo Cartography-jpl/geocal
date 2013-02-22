@@ -383,6 +383,16 @@ MapInfo VicarOgr::from_vicar(const VicarFile& F)
 }
 
 //-----------------------------------------------------------------------
+/// Read the metadata from a VicarLiteFile, and use to create a MapInfo
+/// based on GDAL.
+//-----------------------------------------------------------------------
+
+MapInfo VicarOgr::from_vicar(const VicarLiteFile& F)
+{
+  return from_vicar_template(F);
+}
+
+//-----------------------------------------------------------------------
 /// Use a MapInfo to write the GeoTIFF metadata for a Vicar File.
 //-----------------------------------------------------------------------
 

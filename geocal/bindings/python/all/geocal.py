@@ -12582,6 +12582,13 @@ class VicarFile(object):
         """
         return _geocal.VicarFile_label_set(self, *args)
 
+    def label_string(self, *args):
+        """
+        std::string GeoCal::VicarFile::label_string(const std::string &F, const std::string &Property="") const
+        Non template form of label, useful in some contexts. 
+        """
+        return _geocal.VicarFile_label_string(self, *args)
+
     def __getitem__(self, key):
         if(isinstance(key, list) or isinstance(key, tuple)):
           prop, ky = key
@@ -13020,6 +13027,13 @@ class VicarLiteFile(object):
     @property
     def is_compressed(self):
         return self._is_compressed()
+
+    def label_string(self, *args):
+        """
+        std::string GeoCal::VicarLiteFile::label_string(const std::string &F, const std::string &Property="") const
+        Non template form of label, useful in some contexts. 
+        """
+        return _geocal.VicarLiteFile_label_string(self, *args)
 
     def __reduce__(self):
       return _new_from_init, (self.__class__, self.file_name,self.access,self.force_area_pixel)

@@ -1,6 +1,7 @@
 #ifndef VICAR_OGR_H
 #define VICAR_OGR_H
 #include "vicar_file.h"
+#include "vicar_lite_file.h"
 #include "ogr_coordinate.h"
 #include "map_info.h"
 #include <map>
@@ -45,6 +46,7 @@ class VicarOgr {
 public:
   VicarOgr();
   MapInfo from_vicar(const VicarFile& F);
+  MapInfo from_vicar(const VicarLiteFile& F);
   void to_vicar(const MapInfo& Mi, VicarFile& F);
 private:
   template<class T> MapInfo from_vicar_template(const T& F);

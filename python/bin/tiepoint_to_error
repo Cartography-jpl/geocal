@@ -1,0 +1,70 @@
+#! /usr/bin/env python
+#
+# This uses an existing tiepoint dataset and picks out the the GCPs. We then
+# find those GCPs that also have height information from a DEM file (which
+# may contains fill values). For those GCPs we find the CE90 error to the
+# reference for each of the igcs.
+
+from afids import *
+
+version = "February 21, 2013"
+usage = '''Usage:
+  tiepoint_to_error [options] <tpcol_in> <dem_in> <igccol>
+  tiepoint_to_error -h | --help
+  tiepoint_to_error -v | --version
+
+This uses an existing tiepoint dataset and picks out the the GCPs. We then
+find those GCPs that also have height information from a DEM file (which
+may contains fill values). For those GCPs we find the CE90 error to the
+reference for each of the igcs.
+
+The input tie point data is given as  sqlite shelve objects. The sqlite 
+shelve objects are in 
+"file:key" format, e.g., "my_data.db:tp".
+
+Options:
+  -h --help         
+       Print this message
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+tpcol = read_shelve(args.tpcol_in)
+dem = read_shelve(args.dem_in)
+igccol = read_shelve(args.igccol)
+
+# The calculation here is for the CE90%. The details of how to calculate this
+# can be found in Dr. Charles G. O'Hara "Accuracy Analyst: A Horizontal 
+# Accuracy Assessment Tool.
+goodtp = TiePointCollection()
+diff = [ [ ] for i in range(tpcol[0].number_camera)]
+for tp in tpcol:
+    if(tp.is_gcp):
+        smp, ln = dem.map_info.coordinate(tp.ground_location)
+        if(ln > 0 and ln < dem.map_info.number_y_pixel and
+           smp > 0 and smp < dem.map_info.number_x_pixel):
+            h = dem.elevation(int(ln), int(smp))
+            if(h > -9000):
+                gp = dem.map_info.ground_coordinate(smp,ln, SimpleDem(h))
+                for i in range(len(diff)):
+                    iloc = tp.image_location[i]
+                    if(iloc is not None):
+                        ilocpred = igccol.image_coordinate(i, gp)
+                        r = igccol.image_ground_connection(i).resolution_meter(ilocpred)
+                        diff[i].append([(iloc[0].line - ilocpred.line) ** 2,
+                                        (iloc[0].sample - ilocpred.sample) ** 2])
+                goodtp.append(tp)
+
+print "%d gcps out of %d had elevation data" % (goodtp.number_gcp, tpcol.number_gcp)
+print
+for i in range(len(diff)):
+    print "Igc %d had %d matches" % ((i + 1), len(diff[i]))
+    sigma_1 = sqrt(np.array(diff[i]).mean(0)[0])
+    sigma_2 = sqrt(np.array(diff[i]).mean(0)[1])
+    sigma_c = 0.5 * (sigma_1 + sigma_2) # This is equation 7 in the paper
+    print "CE 90%% to reference: %f m" % (sigma_c * 2.1460)
+    print
+

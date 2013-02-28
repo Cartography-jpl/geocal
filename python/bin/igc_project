@@ -33,6 +33,11 @@ Options:
        something like the DEM resolution, usually you get almost as
        good output but much faster. [default: 1]
 
+  --map-info=f
+       Rather than generating a DEM to cover the full area, match exactly
+       the supplied shelve image. This is useful to when comparing against
+       an existing image/DEM.
+
   --number-process=n 
        Number of processors to use. [default: 1]
 
@@ -52,13 +57,17 @@ if(args.dem):
 
 # Create the map projection object, and the output file
 
-mibase = cib01_mapinfo()
-resbase = mibase.resolution_meter
-miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
-mi = igc.cover(miscale)
-mp = IgcMapProjected(mi, igc, -1, False)
-mi = mp.map_info
-mp = None
+if(args.map_info):
+    mi = read_shelve(args.map_info).map_info
+else:
+    mibase = cib01_mapinfo()
+    resbase = mibase.resolution_meter
+    miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
+    mi = igc.cover(miscale)
+    mp = IgcMapProjected(mi, igc, -1, False)
+    mi = mp.map_info
+    mp = None
+
 f = VicarRasterImage(args.output, mi, "HALF")
 f.close()
 

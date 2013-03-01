@@ -10,6 +10,7 @@
 namespace GeoCal {
 class GdalDem : public DemTiledFile {
 public:
+  GdalDem(const std::string& Fname);
   GdalDem(const std::string& Fname, 
        const boost::shared_ptr<Datum>& D,int Band_id = 1, 
 	  bool Outside_dem_is_error = false,

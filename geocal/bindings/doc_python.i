@@ -4589,8 +4589,9 @@ Note that the call is in line, sample order, which means Y and then X.
 const std::string& GeoCal::GdalDem::file_name() const
 ";
 %feature("docstring")  GeoCal::GdalDem::GdalDem "
-GdalDem::GdalDem(const std::string &Fname, const boost::shared_ptr< Datum > &D, int
-Band_id=1, bool Outside_dem_is_error=false, int Number_tile=4, int
+GdalDem::GdalDem(const std::string &Fname, const boost::shared_ptr< Datum >
+&D=boost::shared_ptr< Datum >(new NoDatum()), int Band_id=1, bool
+Outside_dem_is_error=false, int Number_tile=4, int
 Tile_number_line=-1, int Tile_number_sample=-1)
 Constructor that reads an existing file to get the Dem data.
 
@@ -5194,7 +5195,7 @@ boost::multi_array< int, 2 > RasterImage::read_array(int Lstart, int Sstart, int
 Return a subset of the image. ";
 
 %feature("docstring")  GeoCal::GdalRasterImage::read_double "
-blitz::Array< double, 2 > RasterImage::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
+virtual blitz::Array<double, 2> GeoCal::RasterImageTiledFile::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
 Some raster images actually are floating point values (e.g., a
 CalcRaster).
 
@@ -7153,7 +7154,7 @@ boost::multi_array< int, 2 > RasterImage::read_array(int Lstart, int Sstart, int
 Return a subset of the image. ";
 
 %feature("docstring")  GeoCal::ImagePointDisplay::read_double "
-blitz::Array< double, 2 > RasterImage::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
+virtual blitz::Array<double, 2> GeoCal::RasterImageTiledFile::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
 Some raster images actually are floating point values (e.g., a
 CalcRaster).
 
@@ -14214,7 +14215,7 @@ boost::multi_array< int, 2 > RasterImage::read_array(int Lstart, int Sstart, int
 Return a subset of the image. ";
 
 %feature("docstring")  GeoCal::RasterImageTiledFile::read_double "
-blitz::Array< double, 2 > RasterImage::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
+virtual blitz::Array<double, 2> GeoCal::RasterImageTiledFile::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
 Some raster images actually are floating point values (e.g., a
 CalcRaster).
 
@@ -20579,6 +20580,10 @@ List of properties. ";
 double GeoCal::VicarLiteFile::read_double(int B, int L, int S) const
 Read data as an double. ";
 
+%feature("docstring")  GeoCal::VicarLiteFile::read_double "
+void GeoCal::VicarLiteFile::read_double(int B, int L, int S, int Nb, int Nl, int Ns, double *Res) const
+Read data as a double. ";
+
 %feature("docstring")  GeoCal::VicarLiteFile::read_int "
 int GeoCal::VicarLiteFile::read_int(int B, int L, int S) const
 Read data as an int. ";
@@ -20802,7 +20807,7 @@ boost::multi_array< int, 2 > RasterImage::read_array(int Lstart, int Sstart, int
 Return a subset of the image. ";
 
 %feature("docstring")  GeoCal::VicarLiteRasterImage::read_double "
-blitz::Array< double, 2 > RasterImage::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
+virtual blitz::Array<double, 2> GeoCal::VicarLiteRasterImage::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
 Some raster images actually are floating point values (e.g., a
 CalcRaster).
 
@@ -21391,7 +21396,7 @@ boost::multi_array< int, 2 > RasterImage::read_array(int Lstart, int Sstart, int
 Return a subset of the image. ";
 
 %feature("docstring")  GeoCal::VicarRasterImage::read_double "
-blitz::Array< double, 2 > RasterImage::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
+virtual blitz::Array<double, 2> GeoCal::RasterImageTiledFile::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
 Some raster images actually are floating point values (e.g., a
 CalcRaster).
 

@@ -158,6 +158,8 @@ public:
   int read_int(int B, int L, int S) const;
   double read_double(int B, int L, int S) const;
   void read_int(int B, int L, int S, int Nb, int Nl, int Ns, int* Res) const;
+  void read_double(int B, int L, int S, int Nb, int Nl, int Ns, 
+		   double* Res) const;
   void write_int(int B, int L, int S, int V) const;
 
 //-----------------------------------------------------------------------
@@ -499,6 +501,75 @@ inline void VicarLiteFile::read_int(int B, int L, int S, int Nb, int Nl,
     }
 }
 
+//-----------------------------------------------------------------------
+/// Read data as a double.
+//-----------------------------------------------------------------------
+
+inline void VicarLiteFile::read_double(int B, int L, int S, int Nb, int Nl, 
+				       int Ns, double* Res) const
+{
+  if(is_compressed_)
+    throw Exception("Can't use VicarLiteFile to read a compressed file");
+  if(swap_needed_)
+    switch(type_) {
+    case VICAR_BYTE:
+      for(int i = B; i < B + Nb; ++i)
+	for(int j = L; j < L + Nl; ++j)
+	  for(int k = S; k < S + Ns; ++k, ++Res)
+	    *Res = to_double<unsigned char, true>(&(data_raw->data()[i][j][k][0]));
+      break;
+    case VICAR_HALF:
+      for(int i = B; i < B + Nb; ++i)
+	for(int j = L; j < L + Nl; ++j)
+	  for(int k = S; k < S + Ns; ++k, ++Res)
+	    *Res = to_double<short int, true>(&(data_raw->data()[i][j][k][0]));
+      break;
+    case VICAR_FULL:
+      for(int i = B; i < B + Nb; ++i)
+	for(int j = L; j < L + Nl; ++j)
+	  for(int k = S; k < S + Ns; ++k, ++Res)
+	    *Res = to_double<int, true>(&(data_raw->data()[i][j][k][0]));
+      break;
+    default:
+      throw Exception("Unrecognized type");
+      }
+  else
+    switch(type_) {
+    case VICAR_BYTE:
+      for(int i = B; i < B + Nb; ++i)
+	for(int j = L; j < L + Nl; ++j)
+	  for(int k = S; k < S + Ns; ++k, ++Res)
+	    *Res = to_double<unsigned char, false>(&(data_raw->data()[i][j][k][0]));
+      break;
+    case VICAR_HALF:
+      for(int i = B; i < B + Nb; ++i)
+	for(int j = L; j < L + Nl; ++j)
+	  for(int k = S; k < S + Ns; ++k, ++Res)
+	    *Res = to_double<short int, false>(&(data_raw->data()[i][j][k][0]));
+      break;
+    case VICAR_FULL:
+      for(int i = B; i < B + Nb; ++i)
+	for(int j = L; j < L + Nl; ++j)
+	  for(int k = S; k < S + Ns; ++k, ++Res)
+	    *Res = to_double<int, false>(&(data_raw->data()[i][j][k][0]));
+      break;
+    case VICAR_FLOAT:
+      for(int i = B; i < B + Nb; ++i)
+	for(int j = L; j < L + Nl; ++j)
+	  for(int k = S; k < S + Ns; ++k, ++Res)
+	    *Res = to_double<float, false>(&(data_raw->data()[i][j][k][0]));
+      break;
+    case VICAR_DOUBLE:
+      for(int i = B; i < B + Nb; ++i)
+	for(int j = L; j < L + Nl; ++j)
+	  for(int k = S; k < S + Ns; ++k, ++Res)
+	    *Res = to_double<double, false>(&(data_raw->data()[i][j][k][0]));
+      break;
+    default:
+      throw Exception("Unrecognized type");
+    }
+}
+
 inline std::string VicarLiteFile::label_string(const std::string& F, 
 				  const std::string& Property) const
 { return label<std::string>(F, Property); }
@@ -619,6 +690,17 @@ public:
   virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
 			int Number_sample, int* Res) const
   { f_->read_int(band_, Lstart, Sstart, 1, Number_line, Number_sample, Res); }
+
+
+  virtual blitz::Array<double, 2> 
+  read_double(int Lstart, int Sstart, int Number_line, 
+	      int Number_sample) const
+  { 
+    blitz::Array<double, 2> res(Number_line, Number_sample);
+    f_->read_double(band_, Lstart, Sstart, 1, Number_line, Number_sample, 
+		       res.data());
+    return res;
+  }
 
 //-----------------------------------------------------------------------
 /// Write the pixel value to the given location.

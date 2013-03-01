@@ -22,7 +22,8 @@ namespace GeoCal {
 
 class GdalDem : public DemTiledFile {
 public:
-  GdalDem(const std::string& Fname, const boost::shared_ptr<Datum>& D,
+  GdalDem(const std::string& Fname, const boost::shared_ptr<Datum>& D =
+	  boost::shared_ptr<Datum>(new NoDatum()),
 	  int Band_id = 1, bool Outside_dem_is_error = false, 
 	  int Number_tile = 4, int Tile_number_line = -1,
 	  int Tile_number_sample = -1);

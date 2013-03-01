@@ -73,6 +73,18 @@ public:
     data_->read_int(min_index, max_index, Res);
   }
 
+  virtual blitz::Array<double, 2> 
+  read_double(int Lstart, int Sstart, int Number_line, 
+	      int Number_sample) const
+  {
+    boost::array<index, 2> min_index = {{Lstart, Sstart}};
+    boost::array<index, 2> max_index = {{Lstart + Number_line, 
+					 Sstart + Number_sample}};
+    blitz::Array<double, 2> res(Number_line, Number_sample);
+    data_->read_double(min_index, max_index, res.data());
+    return res;
+  }
+
 //-----------------------------------------------------------------------
 /// Write the pixel value to the given location.
 //-----------------------------------------------------------------------

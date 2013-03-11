@@ -14,12 +14,20 @@ public:
 
 //-----------------------------------------------------------------------
 /// Constructor.
+/// \param D Datum to use when translating to elevation about
+///    ellipsoid
+/// \param M MapInfo going with file F
+/// \param Outside_dem_is_error If true, we treat requests for
+///   elevation outside of the MapInfo M as error. Otherwise,
+///   we just return 0.
+/// \param Scale Value to multiple underlying data by to get meters
+///   (e.g., DEM might be in US survey foot).
 //-----------------------------------------------------------------------
 
   DemTiledFile(const boost::shared_ptr<TiledFileBase<2> >& F,
 	       const boost::shared_ptr<Datum>& D, const MapInfo& M, 
-	       bool Outside_dem_is_error = false)
-  { initialize(F, D, M, Outside_dem_is_error); }
+	       bool Outside_dem_is_error = false, double Scale = 1.0)
+  { initialize(F, D, M, Outside_dem_is_error, Scale); }
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -35,7 +43,7 @@ public:
   virtual double elevation(int Y_index, int X_index) const
   {
     boost::array<index, 2> i = {{Y_index, X_index}};
-    return data_->get_double(i);
+    return scale_ * data_->get_double(i);
   }
 
   unsigned int number_tile() const {return data_->number_tile();}
@@ -53,16 +61,27 @@ protected:
 
 //-----------------------------------------------------------------------
 /// Initialize data.
+/// \param D Datum to use when translating to elevation about
+///    ellipsoid
+/// \param M MapInfo going with file F
+/// \param Outside_dem_is_error If true, we treat requests for
+///   elevation outside of the MapInfo M as error. Otherwise,
+///   we just return 0.
+/// \param Scale Value to multiple underlying data by to get meters
+///   (e.g., DEM might be in US survey foot).
 //-----------------------------------------------------------------------
 
   void initialize(const boost::shared_ptr<TiledFileBase<2> >& F,
 		  const boost::shared_ptr<Datum>& D, const MapInfo& M, 
-		  bool Outside_dem_is_error = false)
+		  bool Outside_dem_is_error = false, double Scale = 1.0)
   { 
     data_ = F;
+    scale_ = Scale;
     DemMapInfo::initialize(D, M, Outside_dem_is_error);
   }
   boost::shared_ptr<TiledFileBase<2> > data_; ///< Underlying data.
+  double scale_;			      ///< Scale to apply to
+					      ///data to get meters.
 };
 }
 #endif

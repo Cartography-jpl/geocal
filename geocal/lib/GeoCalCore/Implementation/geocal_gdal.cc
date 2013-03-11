@@ -39,6 +39,33 @@ void GdalBase::print(std::ostream& Os) const
 }
 
 //-----------------------------------------------------------------------
+/// Return linear units name.
+//-----------------------------------------------------------------------
+
+std::string GdalBase::linear_unit_name() const
+{
+  if(!has_map_info())
+    throw Exception("Attempt to read map_info() data from a GDAL file without map_info()");
+  OGRSpatialReference ogr(data_set_->GetProjectionRef());
+  char* nm;
+  ogr.GetLinearUnits(&nm);
+  return nm;
+}
+
+//-----------------------------------------------------------------------
+/// Return linear units scale, which is the factor needed to multiple
+/// linear distance by to get meters.
+//-----------------------------------------------------------------------
+
+double GdalBase::linear_unit_scale() const 
+{   
+  if(!has_map_info())
+    throw Exception("Attempt to read map_info() data from a GDAL file without map_info()");
+  OGRSpatialReference ogr(data_set_->GetProjectionRef());
+  return ogr.GetLinearUnits(); 
+}
+
+//-----------------------------------------------------------------------
 /// Read the MapInfo for the file. An exception is thrown if there
 /// isn't map projection information in the file or if it is an
 /// unsupported map projection. 

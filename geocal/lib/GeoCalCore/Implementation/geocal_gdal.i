@@ -33,6 +33,8 @@ public:
   // %python_attribute(data_set, boost::shared_ptr<GDALDataset>)
   %python_attribute_with_set(map_info, MapInfo)
   %python_attribute_nonconst(raster_band, GDALRasterBand&)
+  %python_attribute(linear_unit_name, std::string)
+  %python_attribute(linear_unit_scale, double)
   void close();
   %python_attribute(is_closed, bool)
   void flush();

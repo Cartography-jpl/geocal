@@ -153,7 +153,8 @@ public:
   {
     gdal_map_info(*data_set(), M);
   }
-
+  std::string linear_unit_name() const;
+  double linear_unit_scale() const;
 //-----------------------------------------------------------------------
 /// The underlying GDALRasterBand object.
 //-----------------------------------------------------------------------

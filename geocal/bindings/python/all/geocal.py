@@ -8788,6 +8788,29 @@ class GdalBase(object):
     def raster_band(self):
         return self._raster_band()
 
+    def _linear_unit_name(self):
+        """
+        std::string GdalBase::linear_unit_name() const
+        Return linear units name. 
+        """
+        return _geocal.GdalBase__linear_unit_name(self)
+
+    @property
+    def linear_unit_name(self):
+        return self._linear_unit_name()
+
+    def _linear_unit_scale(self):
+        """
+        double GdalBase::linear_unit_scale() const
+        Return linear units scale, which is the factor needed to multiple
+        linear distance by to get meters. 
+        """
+        return _geocal.GdalBase__linear_unit_scale(self)
+
+    @property
+    def linear_unit_scale(self):
+        return self._linear_unit_scale()
+
     def close(self):
         """
         void GeoCal::GdalBase::close()
@@ -8844,6 +8867,8 @@ class GdalBase(object):
     __swig_destroy__ = _geocal.delete_GdalBase
 GdalBase._map_info = new_instancemethod(_geocal.GdalBase__map_info,None,GdalBase)
 GdalBase._raster_band = new_instancemethod(_geocal.GdalBase__raster_band,None,GdalBase)
+GdalBase._linear_unit_name = new_instancemethod(_geocal.GdalBase__linear_unit_name,None,GdalBase)
+GdalBase._linear_unit_scale = new_instancemethod(_geocal.GdalBase__linear_unit_scale,None,GdalBase)
 GdalBase.close = new_instancemethod(_geocal.GdalBase_close,None,GdalBase)
 GdalBase._is_closed = new_instancemethod(_geocal.GdalBase__is_closed,None,GdalBase)
 GdalBase.flush = new_instancemethod(_geocal.GdalBase_flush,None,GdalBase)

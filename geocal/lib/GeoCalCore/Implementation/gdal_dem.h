@@ -76,7 +76,8 @@ private:
 					      Tile_number_line, 
 					      Tile_number_sample));
     gdal = t;
-    DemTiledFile::initialize(t, D, t->map_info(), Outside_dem_is_error);
+    DemTiledFile::initialize(t, D, t->map_info(), Outside_dem_is_error,
+			     t->linear_unit_scale());
   }
 };
 }

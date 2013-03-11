@@ -2898,8 +2898,21 @@ Pointer to datum. ";
 %feature("docstring")  GeoCal::DemTiledFile::DemTiledFile "
 GeoCal::DemTiledFile::DemTiledFile(const boost::shared_ptr< TiledFileBase< 2 > > &F, const
 boost::shared_ptr< Datum > &D, const MapInfo &M, bool
-Outside_dem_is_error=false)
-Constructor. ";
+Outside_dem_is_error=false, double Scale=1.0)
+Constructor.
+
+Parameters:
+-----------
+
+D:   Datum to use when translating to elevation about ellipsoid
+
+M:   MapInfo going with file F
+
+Outside_dem_is_error:  If true, we treat requests for elevation
+outside of the MapInfo M as error. Otherwise, we just return 0.
+
+Scale:  Value to multiple underlying data by to get meters (e.g., DEM
+might be in US survey foot). ";
 
 %feature("docstring")  GeoCal::DemTiledFile::distance_to_surface "
 double DemMapInfo::distance_to_surface(const GroundCoordinate &Gp) const
@@ -4268,6 +4281,15 @@ True if we have RPC. ";
 %feature("docstring")  GeoCal::Gdal::is_closed "
 bool GeoCal::GdalBase::is_closed() const
 ";
+%feature("docstring")  GeoCal::Gdal::linear_unit_name "
+std::string GdalBase::linear_unit_name() const
+Return linear units name. ";
+
+%feature("docstring")  GeoCal::Gdal::linear_unit_scale "
+double GdalBase::linear_unit_scale() const
+Return linear units scale, which is the factor needed to multiple
+linear distance by to get meters. ";
+
 %feature("docstring")  GeoCal::Gdal::map_info "
 virtual MapInfo GeoCal::Gdal< T >::map_info() const
 Return MapInfo. ";
@@ -4441,6 +4463,15 @@ virtual bool GeoCal::GdalBase::has_rpc() const
 %feature("docstring")  GeoCal::GdalBase::is_closed "
 bool GeoCal::GdalBase::is_closed() const
 ";
+%feature("docstring")  GeoCal::GdalBase::linear_unit_name "
+std::string GdalBase::linear_unit_name() const
+Return linear units name. ";
+
+%feature("docstring")  GeoCal::GdalBase::linear_unit_scale "
+double GdalBase::linear_unit_scale() const
+Return linear units scale, which is the factor needed to multiple
+linear distance by to get meters. ";
+
 %feature("docstring")  GeoCal::GdalBase::map_info "
 MapInfo GdalBase::map_info() const
 Read the MapInfo for the file.

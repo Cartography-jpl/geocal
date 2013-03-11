@@ -52,6 +52,11 @@ Options:
        the supplied shelve image. This is useful to when comparing against
        an existing image/DEM.
 
+  --map-info-cover=f
+       Like --map-info, but adjust the area to cover the output data, i.e.,
+       use the same projection but not the bounding box of the given 
+       image/DEM
+
   --process-number-line=n
        Number of lines to include in each tile that we work on. This 
        controls how long each torque job takes to run. [default: 1000]
@@ -76,6 +81,9 @@ igc2 = igc_col.image_ground_connection(args.index_image2)
 
 if(args.map_info):
     midem = read_shelve(args.map_info).map_info
+elif(args.map_info_cover):
+    midem = read_shelve(args.map_info_cover).map_info
+    midem = igc1.cover(midem)
 else:
     mibase = cib01_mapinfo()
     resbase = mibase.resolution_meter

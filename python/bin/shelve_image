@@ -22,6 +22,10 @@ Options:
   -b --band=b
        Band of file to use (1 based). [default: 1]
 
+  --average=n
+       Average nxn to get a single pixel - useful for taking high resolution
+       data to lower resolution.
+
   --from-shelve
        Instead of getting image from a file, get it from a shelve object.
        This should be in a "file:key" format. This might be useful if
@@ -48,6 +52,9 @@ else:
 if(args.start_line):
     img = SubRasterImage(img, args.start_line, args.start_sample,
                          args.number_line, args.number_sample)
+
+if(args.average):
+    img = RasterAveraged(img, args.average, args.average)
 
 write_shelve(args.output, img)
 

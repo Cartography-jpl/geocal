@@ -57,6 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 /opt/afids/bin/shelve_job_run
 /opt/afids/bin/shelve_show
 /opt/afids/bin/tp_collect
+/opt/afids/bin/tiepoint_to_error
 /opt/afids/include/geocal/*
 /opt/afids/include/sdbx/*
 /opt/afids/include/libraw*.h

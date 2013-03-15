@@ -1,6 +1,6 @@
 Summary: This is the AFIDS python
 Name: afids-python
-Version: r1273
+Version: r1276
 Release: 1
 License: Copyright 2012 California Institute of Technology ALL RIGHTS RESERVED
 Group: Applications/Engineering

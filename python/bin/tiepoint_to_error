@@ -6,6 +6,8 @@
 # reference for each of the igcs.
 
 from afids import *
+import matplotlib.pyplot as plt
+import matplotlib.mlab as mlab
 
 version = "February 21, 2013"
 usage = '''Usage:
@@ -54,17 +56,37 @@ for tp in tpcol:
                     if(iloc is not None):
                         ilocpred = igccol.image_coordinate(i, gp)
                         r = igccol.image_ground_connection(i).resolution_meter(ilocpred)
-                        diff[i].append([(iloc[0].line - ilocpred.line) ** 2,
-                                        (iloc[0].sample - ilocpred.sample) ** 2])
+                        dist = r * sqrt(((iloc[0].line - ilocpred.line)) ** 2 + (iloc[0].sample - ilocpred.sample) ** 2)
+                        diff[i].append(dist)
                 goodtp.append(tp)
 
 print "%d gcps out of %d had elevation data" % (goodtp.number_gcp, tpcol.number_gcp)
 print
 for i in range(len(diff)):
     print "Igc %d had %d matches" % ((i + 1), len(diff[i]))
-    sigma_1 = sqrt(np.array(diff[i]).mean(0)[0])
-    sigma_2 = sqrt(np.array(diff[i]).mean(0)[1])
-    sigma_c = 0.5 * (sigma_1 + sigma_2) # This is equation 7 in the paper
-    print "CE 90%% to reference: %f m" % (sigma_c * 2.1460)
+    d = np.array(diff[i])
+    d.sort()
+    print "90% CE: ", d[len(d) * .9]
     print
-
+    mu = 0
+    sigma = sqrt(((d - mu) ** 2).mean())
+    n, bins, patchs = plt.hist(d, bins=50, facecolor='green', normed=1)
+    y = mlab.normpdf( bins, mu, sigma)
+    l = plt.plot(bins, y, 'r--', linewidth=1)
+    plt.xlabel("Difference meters")
+    plt.ylabel("Fraction")
+    plt.title("Histogram of differences")
+    plt.grid(True)
+    plt.text(0.8,0.9, "Difference mean: %f\nDifference sigma: %f" %(mu, sigma),
+             ha='center', va='center', transform = plt.axes().transAxes)
+    plt.show()
+    plt.clf()
+    n, bins, patchs = plt.hist(d, bins=50, facecolor='green', 
+                               normed=1,
+                               cumulative=1, range=(0,2))
+    plt.xlabel("Difference meters")
+    plt.ylabel("Cumulative Fraction")
+    plt.title("Cumulative Histogram of Differences")
+    plt.grid(True)
+    plt.show()
+    plt.clf()

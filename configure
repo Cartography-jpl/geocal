@@ -777,17 +777,14 @@ HAVE_AFIDS_DATA_TRUE
 AFIDS_DATA
 BUILD_VICAR_RTL_FALSE
 BUILD_VICAR_RTL_TRUE
-VICAR_RTL_BUILD_DEPEND
 VICAR_RTL_LIBS
+VICAR_RTL_BUILD_DEPEND
 VICAR_RTL_CFLAGS
 THIRDPARTY
 HAVE_CURSES_FALSE
 HAVE_CURSES_TRUE
 CURSES_LIB
 pkgconfigdir
-PKG_CONFIG_LIBDIR
-PKG_CONFIG_PATH
-PKG_CONFIG
 HAVE_G77_FALSE
 HAVE_G77_TRUE
 HAVE_GCC_FALSE
@@ -974,30 +971,7 @@ CFLAGS
 CPP
 CXXCPP
 DEBUG_FLAGS
-PKG_CONFIG
-PKG_CONFIG_PATH
-PKG_CONFIG_LIBDIR
 THIRDPARTY
-VICAR_RTL_CFLAGS
-VICAR_RTL_LIBS
-SPICE_CFLAGS
-SPICE_LIBS
-BLITZ_CFLAGS
-BLITZ_LIBS
-GSL_CFLAGS
-GSL_LIBS
-HDF5_CFLAGS
-HDF5_LIBS
-FFTW_CFLAGS
-FFTW_LIBS
-GDAL_CFLAGS
-GDAL_LIBS
-GEOS_CFLAGS
-GEOS_LIBS
-OGDI_CFLAGS
-OGDI_LIBS
-CARTO_CFLAGS
-CARTO_LIBS
 PYTHON
 PYTHON_VERSION
 SPHINXBUILD'
@@ -1712,41 +1686,11 @@ Some influential environment variables:
   CPP         C preprocessor
   CXXCPP      C++ preprocessor
   DEBUG_FLAGS C++ compiler debugging flags
-  PKG_CONFIG  path to pkg-config utility
-  PKG_CONFIG_PATH
-              directories to add to pkg-config's search path
-  PKG_CONFIG_LIBDIR
-              path overriding pkg-config's built-in search path
   THIRDPARTY  It is common that either 1) you want to build a local copy of
               all thirdparty software or 2) you have a central location not
               already searched for that you want to be searched. You can
               specify THIRDPARTY=build or THIRDPARTY=<directory>. This gets
               added to all the third party library checks.
-  VICAR_RTL_CFLAGS
-              C compiler flags for VICAR_RTL, overriding pkg-config
-  VICAR_RTL_LIBS
-              linker flags for VICAR_RTL, overriding pkg-config
-  SPICE_CFLAGS
-              C compiler flags for SPICE, overriding pkg-config
-  SPICE_LIBS  linker flags for SPICE, overriding pkg-config
-  BLITZ_CFLAGS
-              C compiler flags for BLITZ, overriding pkg-config
-  BLITZ_LIBS  linker flags for BLITZ, overriding pkg-config
-  GSL_CFLAGS  C compiler flags for GSL, overriding pkg-config
-  GSL_LIBS    linker flags for GSL, overriding pkg-config
-  HDF5_CFLAGS C compiler flags for HDF5, overriding pkg-config
-  HDF5_LIBS   linker flags for HDF5, overriding pkg-config
-  FFTW_CFLAGS C compiler flags for FFTW, overriding pkg-config
-  FFTW_LIBS   linker flags for FFTW, overriding pkg-config
-  GDAL_CFLAGS C compiler flags for GDAL, overriding pkg-config
-  GDAL_LIBS   linker flags for GDAL, overriding pkg-config
-  GEOS_CFLAGS C compiler flags for GEOS, overriding pkg-config
-  GEOS_LIBS   linker flags for GEOS, overriding pkg-config
-  OGDI_CFLAGS C compiler flags for OGDI, overriding pkg-config
-  OGDI_LIBS   linker flags for OGDI, overriding pkg-config
-  CARTO_CFLAGS
-              C compiler flags for CARTO, overriding pkg-config
-  CARTO_LIBS  linker flags for CARTO, overriding pkg-config
   PYTHON      the Python interpreter
   PYTHON_VERSION
               The installed Python version to use, for example '2.3'. This
@@ -24078,126 +24022,7 @@ fi
 #=================================================================
 # Add prefix, THIRDPARTY, and /opt/afids_support for pkgconfig file
 
-
-
-
-
-
-
-
-if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then
-	if test -n "$ac_tool_prefix"; then
-  # Extract the first word of "${ac_tool_prefix}pkg-config", so it can be a program name with args.
-set dummy ${ac_tool_prefix}pkg-config; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_path_PKG_CONFIG+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  case $PKG_CONFIG in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_PKG_CONFIG="$PKG_CONFIG" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_path_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-  ;;
-esac
-fi
-PKG_CONFIG=$ac_cv_path_PKG_CONFIG
-if test -n "$PKG_CONFIG"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PKG_CONFIG" >&5
-$as_echo "$PKG_CONFIG" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-
-fi
-if test -z "$ac_cv_path_PKG_CONFIG"; then
-  ac_pt_PKG_CONFIG=$PKG_CONFIG
-  # Extract the first word of "pkg-config", so it can be a program name with args.
-set dummy pkg-config; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_path_ac_pt_PKG_CONFIG+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  case $ac_pt_PKG_CONFIG in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_ac_pt_PKG_CONFIG="$ac_pt_PKG_CONFIG" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_path_ac_pt_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-  ;;
-esac
-fi
-ac_pt_PKG_CONFIG=$ac_cv_path_ac_pt_PKG_CONFIG
-if test -n "$ac_pt_PKG_CONFIG"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_pt_PKG_CONFIG" >&5
-$as_echo "$ac_pt_PKG_CONFIG" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-  if test "x$ac_pt_PKG_CONFIG" = x; then
-    PKG_CONFIG=""
-  else
-    case $cross_compiling:$ac_tool_warned in
-yes:)
-{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
-$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
-ac_tool_warned=yes ;;
-esac
-    PKG_CONFIG=$ac_pt_PKG_CONFIG
-  fi
-else
-  PKG_CONFIG="$ac_cv_path_PKG_CONFIG"
-fi
-
-fi
-if test -n "$PKG_CONFIG"; then
-	_pkg_min_version=0.9.0
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking pkg-config is at least version $_pkg_min_version" >&5
-$as_echo_n "checking pkg-config is at least version $_pkg_min_version... " >&6; }
-	if $PKG_CONFIG --atleast-pkgconfig-version $_pkg_min_version; then
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	else
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-		PKG_CONFIG=""
-	fi
-fi
+PKG_PROG_PKG_CONFIG
 
 if test "x$THIRDPARTY" = x; then
   pkg_extra_path=$prefix/lib/pkgconfig:/opt/afids_support/lib/pkgconfig
@@ -24396,77 +24221,7 @@ $as_echo_n "checking for VICAR RTL library... " >&6; }
             succeeded=yes
         else
 
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for VICAR_RTL" >&5
-$as_echo_n "checking for VICAR_RTL... " >&6; }
-
-if test -n "$VICAR_RTL_CFLAGS"; then
-    pkg_cv_VICAR_RTL_CFLAGS="$VICAR_RTL_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"vicar-rtl\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "vicar-rtl") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_VICAR_RTL_CFLAGS=`$PKG_CONFIG --cflags "vicar-rtl" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$VICAR_RTL_LIBS"; then
-    pkg_cv_VICAR_RTL_LIBS="$VICAR_RTL_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"vicar-rtl\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "vicar-rtl") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_VICAR_RTL_LIBS=`$PKG_CONFIG --libs "vicar-rtl" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "vicar-rtl" 2>&1`
-        else
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "vicar-rtl" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$VICAR_RTL_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	VICAR_RTL_CFLAGS=$pkg_cv_VICAR_RTL_CFLAGS
-	VICAR_RTL_LIBS=$pkg_cv_VICAR_RTL_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
+  PKG_CHECK_MODULES(VICAR_RTL, vicar-rtl, succeeded=yes, succeeded=no)
   if test "$succeeded" = "yes"; then
      VICAR_RTL_PREFIX=`$PKG_CONFIG --variable=prefix "vicar-rtl" 2>/dev/null`
   fi
@@ -24855,77 +24610,7 @@ $as_echo_n "checking for SPICE library... " >&6; }
             succeeded=yes
         else
 
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for SPICE" >&5
-$as_echo_n "checking for SPICE... " >&6; }
-
-if test -n "$SPICE_CFLAGS"; then
-    pkg_cv_SPICE_CFLAGS="$SPICE_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"spice\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "spice") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_SPICE_CFLAGS=`$PKG_CONFIG --cflags "spice" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$SPICE_LIBS"; then
-    pkg_cv_SPICE_LIBS="$SPICE_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"spice\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "spice") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_SPICE_LIBS=`$PKG_CONFIG --libs "spice" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "spice" 2>&1`
-        else
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "spice" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$SPICE_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	SPICE_CFLAGS=$pkg_cv_SPICE_CFLAGS
-	SPICE_LIBS=$pkg_cv_SPICE_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
+  PKG_CHECK_MODULES(SPICE, spice, succeeded=yes, succeeded=no)
   if test "$succeeded" = "yes"; then
      SPICE_PREFIX=`$PKG_CONFIG --variable=prefix "spice" 2>/dev/null`
   fi
@@ -25065,77 +24750,7 @@ $as_echo_n "checking for Blitz library... " >&6; }
             succeeded=yes
         else
 
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for BLITZ" >&5
-$as_echo_n "checking for BLITZ... " >&6; }
-
-if test -n "$BLITZ_CFLAGS"; then
-    pkg_cv_BLITZ_CFLAGS="$BLITZ_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"blitz\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "blitz") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_BLITZ_CFLAGS=`$PKG_CONFIG --cflags "blitz" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$BLITZ_LIBS"; then
-    pkg_cv_BLITZ_LIBS="$BLITZ_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"blitz\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "blitz") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_BLITZ_LIBS=`$PKG_CONFIG --libs "blitz" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "blitz" 2>&1`
-        else
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "blitz" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$BLITZ_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	BLITZ_CFLAGS=$pkg_cv_BLITZ_CFLAGS
-	BLITZ_LIBS=$pkg_cv_BLITZ_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
+  PKG_CHECK_MODULES(BLITZ, blitz, succeeded=yes, succeeded=no)
   if test "$succeeded" = "yes"; then
      BLITZ_PREFIX=`$PKG_CONFIG --variable=prefix "blitz" 2>/dev/null`
   fi
@@ -25275,77 +24890,7 @@ $as_echo_n "checking for GSL library... " >&6; }
             succeeded=yes
         else
 
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for GSL" >&5
-$as_echo_n "checking for GSL... " >&6; }
-
-if test -n "$GSL_CFLAGS"; then
-    pkg_cv_GSL_CFLAGS="$GSL_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gsl\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "gsl") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_GSL_CFLAGS=`$PKG_CONFIG --cflags "gsl" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$GSL_LIBS"; then
-    pkg_cv_GSL_LIBS="$GSL_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gsl\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "gsl") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_GSL_LIBS=`$PKG_CONFIG --libs "gsl" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gsl" 2>&1`
-        else
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gsl" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$GSL_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	GSL_CFLAGS=$pkg_cv_GSL_CFLAGS
-	GSL_LIBS=$pkg_cv_GSL_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
+  PKG_CHECK_MODULES(GSL, gsl, succeeded=yes, succeeded=no)
   if test "$succeeded" = "yes"; then
      GSL_PREFIX=`$PKG_CONFIG --variable=prefix "gsl" 2>/dev/null`
   fi
@@ -25487,77 +25032,7 @@ $as_echo_n "checking for HDF5 library... " >&6; }
             succeeded=yes
         else
 
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDF5" >&5
-$as_echo_n "checking for HDF5... " >&6; }
-
-if test -n "$HDF5_CFLAGS"; then
-    pkg_cv_HDF5_CFLAGS="$HDF5_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf5\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdf5") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDF5_CFLAGS=`$PKG_CONFIG --cflags "hdf5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$HDF5_LIBS"; then
-    pkg_cv_HDF5_LIBS="$HDF5_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf5\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdf5") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDF5_LIBS=`$PKG_CONFIG --libs "hdf5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdf5" 2>&1`
-        else
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdf5" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDF5_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	HDF5_CFLAGS=$pkg_cv_HDF5_CFLAGS
-	HDF5_LIBS=$pkg_cv_HDF5_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
+  PKG_CHECK_MODULES(HDF5, hdf5, succeeded=yes, succeeded=no)
   if test "$succeeded" = "yes"; then
      HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
   fi
@@ -25841,77 +25316,7 @@ $as_echo_n "checking for Fftw library... " >&6; }
             succeeded=yes
         else
 
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for FFTW" >&5
-$as_echo_n "checking for FFTW... " >&6; }
-
-if test -n "$FFTW_CFLAGS"; then
-    pkg_cv_FFTW_CFLAGS="$FFTW_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"fftw3\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "fftw3") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_FFTW_CFLAGS=`$PKG_CONFIG --cflags "fftw3" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$FFTW_LIBS"; then
-    pkg_cv_FFTW_LIBS="$FFTW_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"fftw3\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "fftw3") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_FFTW_LIBS=`$PKG_CONFIG --libs "fftw3" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "fftw3" 2>&1`
-        else
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "fftw3" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$FFTW_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	FFTW_CFLAGS=$pkg_cv_FFTW_CFLAGS
-	FFTW_LIBS=$pkg_cv_FFTW_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
+  PKG_CHECK_MODULES(FFTW, fftw3, succeeded=yes, succeeded=no)
   if test "$succeeded" = "yes"; then
      FFTW_PREFIX=`$PKG_CONFIG --variable=prefix "fftw3" 2>/dev/null`
   fi
@@ -26049,77 +25454,7 @@ $as_echo_n "checking for GDAL library... " >&6; }
             succeeded=yes
         else
 
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for GDAL" >&5
-$as_echo_n "checking for GDAL... " >&6; }
-
-if test -n "$GDAL_CFLAGS"; then
-    pkg_cv_GDAL_CFLAGS="$GDAL_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gdal\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "gdal") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_GDAL_CFLAGS=`$PKG_CONFIG --cflags "gdal" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$GDAL_LIBS"; then
-    pkg_cv_GDAL_LIBS="$GDAL_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gdal\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "gdal") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_GDAL_LIBS=`$PKG_CONFIG --libs "gdal" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gdal" 2>&1`
-        else
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gdal" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$GDAL_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	GDAL_CFLAGS=$pkg_cv_GDAL_CFLAGS
-	GDAL_LIBS=$pkg_cv_GDAL_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
+  PKG_CHECK_MODULES(GDAL, gdal, succeeded=yes, succeeded=no)
   if test "$succeeded" = "yes"; then
      GDAL_PREFIX=`$PKG_CONFIG --variable=prefix "gdal" 2>/dev/null`
   fi
@@ -26231,77 +25566,7 @@ $as_echo_n "checking for GEOS library... " >&6; }
             succeeded=yes
         else
 
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for GEOS" >&5
-$as_echo_n "checking for GEOS... " >&6; }
-
-if test -n "$GEOS_CFLAGS"; then
-    pkg_cv_GEOS_CFLAGS="$GEOS_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"geos\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "geos") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_GEOS_CFLAGS=`$PKG_CONFIG --cflags "geos" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$GEOS_LIBS"; then
-    pkg_cv_GEOS_LIBS="$GEOS_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"geos\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "geos") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_GEOS_LIBS=`$PKG_CONFIG --libs "geos" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        GEOS_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "geos" 2>&1`
-        else
-	        GEOS_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "geos" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$GEOS_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	GEOS_CFLAGS=$pkg_cv_GEOS_CFLAGS
-	GEOS_LIBS=$pkg_cv_GEOS_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
+  PKG_CHECK_MODULES(GEOS, geos, succeeded=yes, succeeded=no)
   if test "$succeeded" = "yes"; then
      GEOS_PREFIX=`$PKG_CONFIG --variable=prefix "geos" 2>/dev/null`
   fi
@@ -26440,77 +25705,7 @@ $as_echo_n "checking for Ogdi library... " >&6; }
             succeeded=yes
         else
 
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for OGDI" >&5
-$as_echo_n "checking for OGDI... " >&6; }
-
-if test -n "$OGDI_CFLAGS"; then
-    pkg_cv_OGDI_CFLAGS="$OGDI_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ogdi\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "ogdi") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_OGDI_CFLAGS=`$PKG_CONFIG --cflags "ogdi" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$OGDI_LIBS"; then
-    pkg_cv_OGDI_LIBS="$OGDI_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ogdi\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "ogdi") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_OGDI_LIBS=`$PKG_CONFIG --libs "ogdi" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        OGDI_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "ogdi" 2>&1`
-        else
-	        OGDI_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "ogdi" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$OGDI_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	OGDI_CFLAGS=$pkg_cv_OGDI_CFLAGS
-	OGDI_LIBS=$pkg_cv_OGDI_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
+  PKG_CHECK_MODULES(OGDI, ogdi, succeeded=yes, succeeded=no)
   if test "$succeeded" = "yes"; then
      OGDI_PREFIX=`$PKG_CONFIG --variable=prefix "ogdi" 2>/dev/null`
   fi
@@ -26827,77 +26022,7 @@ $as_echo_n "checking for Carto library... " >&6; }
             succeeded=yes
         else
 
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for CARTO" >&5
-$as_echo_n "checking for CARTO... " >&6; }
-
-if test -n "$CARTO_CFLAGS"; then
-    pkg_cv_CARTO_CFLAGS="$CARTO_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"carto\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "carto") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_CARTO_CFLAGS=`$PKG_CONFIG --cflags "carto" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$CARTO_LIBS"; then
-    pkg_cv_CARTO_LIBS="$CARTO_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"carto\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "carto") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_CARTO_LIBS=`$PKG_CONFIG --libs "carto" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "carto" 2>&1`
-        else
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "carto" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$CARTO_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	CARTO_CFLAGS=$pkg_cv_CARTO_CFLAGS
-	CARTO_LIBS=$pkg_cv_CARTO_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
+  PKG_CHECK_MODULES(CARTO, carto, succeeded=yes, succeeded=no)
   if test "$succeeded" = "yes"; then
      CARTO_PREFIX=`$PKG_CONFIG --variable=prefix "carto" 2>/dev/null`
   fi

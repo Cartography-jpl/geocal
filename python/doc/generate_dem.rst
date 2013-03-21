@@ -84,13 +84,23 @@ Setting up your environment
 Set up your environment for the latest version of Afids/Python. If you
 are on pistol, this can be done by:: 
 
+  export GDAL_DRIVER_PATH=/opt/afids_support/lib/gdalplugins
+  export PATH=/opt/afids_support/bin:${PATH}
+  export LD_LIBRARY_PATH=/opt/afids_support/lib64:/opt/afids_support/lib:${LD_LIBRARY_PATH}
   source /opt/afids/setup_afids_env.sh
 
 or :: 
 
+  setenv GDAL_DRIVER_PATH /opt/afids_support/lib/gdalplugins
+  setenv PATH /opt/afids_support/bin:${PATH}
+  setenv LD_LIBRARY_PATH /opt/afids_support/lib64:/opt/afids_support/lib:${LD_LIBRARY_PATH}
   source /opt/afids/setup_afids_env.csh 
 
 depending on if you are using bash or csh as your login shell.
+
+Note that the first part there sets up of afids support stuff like GDAL. This
+can be placed in your .bashrc or .cshrc.
+
 
 Setting up an area to work
 --------------------------
@@ -229,7 +239,7 @@ type of the input to the output by default, which works fine for the NITF data
 
 For our example, the conversion would be as follows::
 
-  gdal_translate -of VICAR /raid22/nevada/10MAY21184820-P1BS-052366903050_01_P001.NTF 10MAY-1.img
+ gdal_translate -of VICAR /raid22/nevada/10MAY21184820-P1BS-052366903050_01_P001.NTF 10MAY-1.img
   gdal_translate -of VICAR /raid22/nevada/10MAY21184840-P1BS-052366905020_01_P001.NTF 10MAY-2.img
 
 
@@ -260,12 +270,12 @@ this.
 The command for the full DEM would be::
 
   shelve_igccol --rpc-line-fit=0 --rpc-sample-fit=0 \
-       nevada.db:igc_original nevada.db:dem_initial \
+       nevada.db:igc_initial nevada.db:dem_initial \
        10MAY-1.img "Image 1" 10MAY-2.img "Image 2"
 
 If we then look at what was created::
  
-  shelve_show nevada.db:igc_original
+  shelve_show nevada.db:igc_initial
 
 we get::
 
@@ -305,6 +315,9 @@ the image, you can run::
   shelve_image --subset 1000 1000 5000 5000 10MAY-2.img \
       nevada.db:img2_sub
 
+(Note here that this is start_line, start_sample, number_line, number_sample.
+Also this is 0 based, rather than the 1 based used in VICAR).
+
 Now if we look at what was created::
 
   shelve_show nevada.db:img1_sub
@@ -325,7 +338,7 @@ Returns::
 
 The shelve_igcol command is very similar, but we use the option 
 "--from-shelve" to get the images from our shelve objects rather than from
-existing files:
+existing files::
 
   shelve_igccol --rpc-line-fit=0 --rpc-sample-fit=0 \
     --from-shelve \
@@ -364,7 +377,7 @@ a convenience, not a requirement.
 
 You can generate a tie point collection by::
 
-  tp_collect --number-process=24 nevada.db:igc_original nevada.db:tpcol
+  tp_collect --number-process=24 nevada.db:igc_initial nevada.db:tpcol
 
 The GCPs is generated in a similar way, although we need to supply a
 new arguments. The default is to overwrite the output. Since we
@@ -374,7 +387,7 @@ option "--add-tp".
 So we have::
 
   tp_collect --gcp --add-tp --number-process=24 \
-  nevada.db:igc_original nevada.db:ref_image nevada.db:tpcol
+  nevada.db:igc_initial nevada.db:ref_image nevada.db:tpcol
 
 Looking at what we have generated::
 
@@ -441,6 +454,8 @@ We can do this calculation by::
   igc_project --grid-spacing=10 --resolution=0.5 --number-process=24 \
       nevada.db:igc_sba 1 10MAY-2_proj.img
 
+(The "0" and "1" here is the 0 based image number)
+
 We then shelve these objects to use in the next step::
 
   shelve_image 10MAY-1_proj.img nevada.db:surface_1
@@ -480,6 +495,32 @@ You can also *wait* to submit the jobs, say right before leaving for the day.
 A useful scenario would be to run a number of DEM jobs through the 
 "setup_dem_job" step, and then submitting all of the to the queue at the 
 end of the day.
+
+Final orthorectified images
+-------------------------------  
+
+An optional final step is to generate orthorectified images. This isn't
+necessary for generating the DEM, but is often a desired output.
+
+It can also be useful to generate these images with exactly the same map 
+projection, so they can be overlaided on top of each other (e.g., open
+in xvd). You can do this by::
+
+  shelve_dem --outside-dem-not-error \
+     nevada_generated_dem_filled.img nevada.db:dem_generated_filled
+  igc_project --number-process=24 --resolution=0.5 \
+     --dem=nevada.db:dem_generated_filled \
+     nevada.db:igc_sba 0 10MAY-1_proj_final.img
+  shelve_image 10MAY-1_proj_final.img nevada.db:final_proj_1
+  igc_project --number-process=24 \
+    --map-info=nevada.db:final_proj_1 \
+     --dem=nevada.db:dem_generated_filled \
+     nevada.db:igc_sba 1 10MAY-2_proj_final.img
+
+Note that the grid spacing defaults to 1 here. Since we have a high resolution
+DEM, we need to run the RPC on every point. The second image is fit to
+the same map info as the first, rather than calculating it own value.
+
 
 Move your data from the local disk to the raids
 -----------------------------------------------

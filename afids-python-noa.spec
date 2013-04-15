@@ -1,7 +1,7 @@
 Summary: This is the AFIDS python
 Name: afids-python
 Version: r1280
-Release: 1
+Release: 1na
 License: Copyright 2013 California Institute of Technology ALL RIGHTS RESERVED
 Group: Applications/Engineering
 Vendor: California Institute of Technology
@@ -20,7 +20,7 @@ of python modules.
 %setup -q
 
 %build
-./configure --prefix=/opt/afids --with-afids-a
+./configure --prefix=/opt/afids
 make %_smp_mflags 
 
 %install

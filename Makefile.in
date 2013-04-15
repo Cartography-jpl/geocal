@@ -1066,9 +1066,10 @@ am__can_run_installinfo = \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
 am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
-	@srcpythonlib@/job_handle.py @srcpythonlib@/misc.py \
-	@srcpythonlib@/igc_collection.py @srcpythonlib@/tie_point.py \
-	@srcpythonlib@/vicar_interface.py \
+	@srcpythonlib@/job_handle.py \
+	@srcpythonlib@/safe_matplotlib_import.py \
+	@srcpythonlib@/misc.py @srcpythonlib@/igc_collection.py \
+	@srcpythonlib@/tie_point.py @srcpythonlib@/vicar_interface.py \
 	@srcpythonlib@/image_to_image_connection.py \
 	@srcpythonlib@/doc_inherit.py @srcpythonlib@/tre_struct.py \
 	@srcpythonlib@/dem_generate.py \
@@ -2250,6 +2251,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@afidspkgpython_PYTHON =  \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpython@/init/__init__.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/job_handle.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/safe_matplotlib_import.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/misc.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/igc_collection.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/tie_point.py \

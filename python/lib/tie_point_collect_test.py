@@ -6,6 +6,8 @@ import multiprocessing
 from multiprocessing import Pool
 from nose.plugins.skip import Skip, SkipTest
 import cPickle
+import safe_matplotlib_import
+import matplotlib.pyplot as plt
 
 test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
 demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
@@ -44,14 +46,12 @@ def test_pickle():
 
 def test_show_image():
     raise SkipTest
-    import matplotlib.pyplot as plt
     tp = tp_collect.tie_point(ImageCoordinate(500, 500))
     tp.display(igc_coll)
     plt.show()
 
 def test_show_ref_image():
     raise SkipTest
-    import matplotlib.pyplot as plt
     tp = gtp_collect.tie_point_grid(10, 10)
     tp[0].display(igc_coll, ref_image = gtp_collect.sub_ref_image)
     plt.show()

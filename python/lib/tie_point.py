@@ -1,5 +1,7 @@
 import math
 import raster_image_extension
+import safe_matplotlib_import
+import matplotlib.pyplot as plt
 
 class TiePoint(object):
     '''
@@ -47,10 +49,6 @@ class TiePoint(object):
         You can optionally specify the number of rows to use. Otherwise,
         we choose the number of rows and columns to make a square figure
         '''
-        # Import is here rather than top of the function. We may be running this
-        # in an environment without an interactive display, so this import will fail.
-        # As long as the user doesn't call this function, this isn't a problem.
-        import matplotlib.pyplot as plt
 
         nimg = self.number_camera
         if(ref_image is not None):

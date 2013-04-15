@@ -2,6 +2,8 @@ from geocal import *
 from raster_image_extension import *
 import numpy as np
 from nose.plugins.skip import Skip, SkipTest
+import safe_matplotlib_import
+import matplotlib.pyplot as plt
 
 test_data = os.path.dirname(__file__) + "/../unit_test_data/"
 img = VicarRasterImage(test_data + "vicar.img")
@@ -46,14 +48,12 @@ def test_no_image():
 
 def test_display():
     raise SkipTest
-    import matplotlib.pyplot as plt
     img = VicarLiteRasterImage(test_data + "Stereo/10MAY21-1.img")
     img.display(ImageCoordinate(300, 300), 20)
     plt.show()
 
 def test_display2():
     raise SkipTest
-    import matplotlib.pyplot as plt
     img = VicarLiteRasterImage(test_data + "Stereo/10MAY21-1.img")
     img.display(ImageCoordinate(100, 50), 500)
     plt.show()

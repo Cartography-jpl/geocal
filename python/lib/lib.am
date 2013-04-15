@@ -1,4 +1,5 @@
 afidspkgpython_PYTHON+= @srcpythonlib@/job_handle.py
+afidspkgpython_PYTHON+= @srcpythonlib@/safe_matplotlib_import.py
 afidspkgpython_PYTHON+= @srcpythonlib@/misc.py
 afidspkgpython_PYTHON+= @srcpythonlib@/igc_collection.py
 afidspkgpython_PYTHON+= @srcpythonlib@/tie_point.py

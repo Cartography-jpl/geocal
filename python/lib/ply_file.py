@@ -1,14 +1,5 @@
 import numpy as np
-# This may fail because we aren't attached to a X windows display. To avoid this,
-# we first check for the DISPLAY environment variable and if it isn't present we select
-# a noninteractive backend
-import os, sys
-if('matplotlib.backends' not in sys.modules and
-   (os.getenv("DISPLAY") is None or
-    os.getenv("DISPLAY") == "")):
-    import matplotlib
-    matplotlib.use('agg')
-
+import safe_matplotlib_import
 import matplotlib.pyplot as plt
 import struct
 

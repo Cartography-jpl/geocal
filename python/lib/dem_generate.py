@@ -10,6 +10,8 @@ import numpy as np
 import numpy.linalg as la
 from igc_collection import *
 from ply_file import *
+import safe_matplotlib_import
+import matplotlib.pyplot as plt
 
 def dem_generate_tile(dem_generate, file_name, offset, lstart, sstart, 
                       tile_nline, tile_nsamp, nline, nsamp,
@@ -216,10 +218,6 @@ class DemGenerate:
         in, this should be map projected and cover the same area as self.aoi.
         If you leave this out, then we just leave those plots empty.'''
 
-        # Import is here rather than top of the function. We may be running this
-        # in an environment without an interactive display, so this import will fail.
-        # As long as the user doesn't call this function, this isn't a problem.
-        import matplotlib.pyplot as plt
 
         dv_orig = self.dem_orig()
         plt.subplot(221)

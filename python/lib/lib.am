@@ -28,9 +28,8 @@ afidspkgpython_PYTHON+= @srcpythonlib@/sqlite_shelf.py
 afidspkgpython_PYTHON+= @srcpythonlib@/feature_detector_extension.py
 afidspkgpython_PYTHON+= @srcpythonlib@/ply_file.py
 afidspkgpython_PYTHON+= @srcpythonlib@/docopt_simple.py
-# Temporary, until we decide we want this. If we do, then we'll want to
-# install this like all the other thirdparty packages.
 afidspkgpython_PYTHON+= @srcpythonlib@/docopt.py
+afidspkgpython_PYTHON+= @srcpythonlib@/shape_file.py
 if WITH_AFIDS_A
 afidspkgpython_PYTHON+= @srcpythonlib@/tre_amt_struct.py
 endif

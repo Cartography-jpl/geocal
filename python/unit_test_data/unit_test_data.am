@@ -21,3 +21,4 @@ EXTRA_DIST+= @pythonunittestdata@/Stereo/generate_proj.py
 EXTRA_DIST+= @pythonunittestdata@/Stereo/nevada_elv_aoi.img
 EXTRA_DIST+= @pythonunittestdata@/Stereo/README
 EXTRA_DIST+= @pythonunittestdata@/Stereo/rpc_sba.pkl
+EXTRA_DIST+= @pythonunittestdata@/FRST_POIof090514.shp

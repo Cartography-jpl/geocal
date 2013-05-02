@@ -54,7 +54,7 @@ class ShapeFile(collections.Mapping):
         self.data_source.SyncToDisk()
         self.data_source = None
 
-class ShapeLayer(object):
+class ShapeLayer(collections.Sequence):
     '''This class handles access to a single layers in a Shapefile.'''
     def __init__(self, shape_file, index):
         '''Create ShapeLayer for given ShapeFile and index. This isn't 
@@ -66,3 +66,82 @@ class ShapeLayer(object):
     @property
     def name(self):
         return self.layer.GetName()
+
+    def set_filter_rect(self, x1, y1, x2, y2):
+        '''Filter the features so only those that intersect the rectangle
+        are returned. The x and y are given in whatever the spatial
+        reference is for the layer, e.g., longitude and latitude
+        (note the order, X is longitude)'''
+        self.layer.SetSpatialFilterRect(x1, y1, x2, y2)
+
+    def set_spatial_filter(self, ogr_geometry):
+        '''Filter the features based on a spatial filter. The spatial filter 
+        should be an Ogr::Geometry, and we filter based on intersecting 
+        that geometry. Note that the special case of a rectangle filter is
+        handled by set_filter_rect, which has an easier interface (although
+        there is nothing wrong with creating a rectangle as an Ogr::Geometry
+        and calling this function if desired.
+        
+        Note that you can additionally filter by attributes using 
+        set_attribute_filter.'''
+        self.layer.SetSpatialFilter(ogr_geometry)
+
+    def set_attribute_filter(self, where_clause):
+        '''Filter the features based on an SQL where clause on the attributes.
+        Note that this is in addition to any spatial filters, you can have
+        both a spatial and an attribute filter at the same time.'''
+        self.layer.SetAttributeFilter(where_clause)
+
+    def clear_filter(self):
+        '''Clear whatever filters have been set.'''
+        self.layer.SetSpatialFilter(None)
+        self.layer.SetAttributeFilter(None)
+
+    def geometry_collection(self):
+        '''Return the geometry union of all the features. This is useful for 
+        example if this layer is POI list and we are finding the intersection
+        with a footprint layer.'''
+        gcol = ogr.Geometry(ogr.wkbGeometryCollection)
+        for ft in self:
+            gcol.AddGeometry(ft["Geometry"])
+        return gcol
+
+    def __getitem__(self, index):
+        if(index < 0 or index >= len(self)):
+            raise IndexError
+        self.layer.SetNextByIndex(index)
+        return ShapeFeature(self, self.layer.GetNextFeature())
+
+    def __len__(self):
+        return self.layer.GetFeatureCount()
+    
+
+class ShapeFeature(collections.Mapping):
+    '''This handles a Feature in a Layer.'''
+    def __init__(self, shape_layer, ogr_feature):
+        self.layer = shape_layer
+        self.feature = ogr_feature
+
+    def keys():
+        res = ["Geometry"]
+        res.extend(self.layer.field_list)
+        return res
+
+    def __iter__(self):
+        for k in self.keys():
+            yield k
+        return
+
+    def __len__(self, key):
+        return 1 + len(self.layer.field_list)
+
+    def __getitem__(self, key):
+        if(key == "Geometry"):
+            return self.feature.GetGeometryRef()
+        else:
+            ind = self.feature.GetFieldIndex(key)
+            if(ind < 0):
+                raise KeyError(key)
+            return self.feature.GetField(ind)
+
+    

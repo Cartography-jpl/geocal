@@ -1,5 +1,6 @@
 from geocal import *
 from math import *
+from shape_file import *
 import numpy as np
 import os.path
 
@@ -93,3 +94,24 @@ def _view_angle(self, image_coordinate, delta_h = 100):
     return zen, az
 
 geocal.ImageGroundConnection.view_angle = _view_angle
+
+def _footprint_geometry(self, cconver = geocal.GeodeticConverter()):
+    '''Return a ogr Geometry object describing the footprint of the 
+    ImageGroundConnection. This includes the 4 corners of the image 
+    projected to the surface.
+
+    You can supply the coordinates to use, the default it Geodetic
+    longitude and latitude.
+
+    This can then be used to write information to a ShapeFile.'''
+    corners = []
+    for pt in [geocal.ImageCoordinate(0,0), 
+               geocal.ImageCoordinate(self.image.number_line, 0), 
+               geocal.ImageCoordinate(self.image.number_line, 
+                                      self.image.number_sample), 
+               geocal.ImageCoordinate(0, self.image.number_sample)]:
+        x, y, z = cconver.convert_to_coordinate(self.ground_coordinate(pt))
+        corners.append((x, y))
+    return ShapeLayer.polygon_2d(corners)
+
+geocal.ImageGroundConnection.footprint_geometry = _footprint_geometry

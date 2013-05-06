@@ -47,6 +47,11 @@ def test_view_angle():
     assert_almost_equal(zen, 33.29, 2)
     assert_almost_equal(azm, 7.2390, 2)
 
+def test_footprint_geometry():
+    igc1 = GdalImageGroundConnection(test_data + "10MAY21-1.img", dem)
+    g = igc1.footprint_geometry()
+    assert g.IsValid()
+
 
     
 

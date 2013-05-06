@@ -377,7 +377,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/generate_proj.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/nevada_elv_aoi.img \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/README \
-@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/rpc_sba.pkl
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/rpc_sba.pkl \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/FRST_POIof090514.shp
 @BUILD_AFIDS_PYTHON_TRUE@am__append_40 = clean_install_python_doc
 @BUILD_AFIDS_PYTHON_TRUE@am__append_41 = python_check
 subdir = .
@@ -1090,7 +1091,8 @@ am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/sqlite_shelf.py \
 	@srcpythonlib@/feature_detector_extension.py \
 	@srcpythonlib@/ply_file.py @srcpythonlib@/docopt_simple.py \
-	@srcpythonlib@/docopt.py @srcpythonlib@/tre_amt_struct.py
+	@srcpythonlib@/docopt.py @srcpythonlib@/shape_file.py \
+	@srcpythonlib@/tre_amt_struct.py
 am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 am__pep3147_tweak = \
   sed -e 's|\.py$$||' -e 's|[^/]*$$|__pycache__/&.*.py|'
@@ -2246,8 +2248,6 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	test_out/dummy_copy
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@geocaldocdir = ${datarootdir}/doc/geocal
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@geocaldocsearchdir = ${geocaldocdir}/html/search
-# Temporary, until we decide we want this. If we do, then we'll want to
-# install this like all the other thirdparty packages.
 @BUILD_AFIDS_PYTHON_TRUE@afidspkgpython_PYTHON =  \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpython@/init/__init__.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/job_handle.py \
@@ -2280,6 +2280,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/ply_file.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/docopt_simple.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/docopt.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/shape_file.py \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_38)
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \

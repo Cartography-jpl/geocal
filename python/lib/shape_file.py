@@ -2,6 +2,7 @@ import ogr
 import osr
 import os.path
 import collections
+import weakref
 
 class ShapeFile(collections.Mapping):
     '''library OGR. You can see supported formats at 
@@ -53,8 +54,12 @@ class ShapeFile(collections.Mapping):
 
     def close(self):
         '''Close the file and write everything to disk'''
-        self.data_source.SyncToDisk()
+        if(self.data_source is not None):
+            self.data_source.SyncToDisk()
         self.data_source = None
+
+    def __del__(self):
+        self.close()
 
     def add_layer(self, name, geometry_type, fields, spatial_reference = osr.SpatialReference(osr.GetUserInputAsWKT("WGS84"))):
         '''Add a layer of the given geometry type with the given fields.
@@ -86,7 +91,7 @@ class ShapeLayer(collections.Sequence):
     def __init__(self, shape_file, index):
         '''Create ShapeLayer for given ShapeFile and index. This isn't 
         normally called directly, instead go through ShapeFile'''
-        self.shape_file = shape_file
+        self.shape_file = weakref.proxy(shape_file)
         self.layer = self.shape_file.data_source.GetLayer(index)
         self.field_list = [self.layer.GetLayerDefn().GetFieldDefn(i).GetName() for i in range(self.layer.GetLayerDefn().GetFieldCount())]
 
@@ -196,7 +201,7 @@ class ShapeLayer(collections.Sequence):
 class ShapeFeature(collections.Mapping):
     '''This handles a Feature in a Layer.'''
     def __init__(self, shape_layer, ogr_feature):
-        self.layer = shape_layer
+        self.layer = weakref.proxy(shape_layer)
         self.feature = ogr_feature
 
     def keys():

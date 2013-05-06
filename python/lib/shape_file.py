@@ -1,4 +1,5 @@
 import ogr
+import osr
 import os.path
 import collections
 
@@ -14,8 +15,9 @@ class ShapeFile(collections.Mapping):
         '''Open the given file, with the given mode. If you are writing, 
         you can supply the driver name to use.'''
         # Shape files don't like being overwritten, so we remove
-        if(mode == "w" and driver_name == "ESRI Shapefile"and
-           os.path.exists(fname)):
+        ext = os.path.splitext(fname)
+        if(mode == "w" and driver_name == "ESRI Shapefile" and
+           ext == ".shp" and os.path.exists(fname)):
             os.remove(fname)
         self.layers = {}
         if(mode == "r"):
@@ -54,6 +56,31 @@ class ShapeFile(collections.Mapping):
         self.data_source.SyncToDisk()
         self.data_source = None
 
+    def add_layer(self, name, geometry_type, fields, spatial_reference = osr.SpatialReference(osr.GetUserInputAsWKT("WGS84"))):
+        '''Add a layer of the given geometry type with the given fields.
+
+        For example:
+          t.add_layer("out", ogr.wkbPolygon,
+             [["File", ogr.OFTString, 100],
+             ["Row", ogr.OFTInteger],])
+   
+        Each field has a name, type, optionally a width, and optionally a
+        precision.
+
+        You can specify the spatial reference, but the default is WGS84'''
+        data_layer = self.data_source.CreateLayer(name, spatial_reference,
+                                                  geometry_type)
+        for v in fields:
+            f = ogr.FieldDefn(v[0], v[1])
+            if(len(v) >= 3):
+                f.SetWidth(v[2])
+            if(len(v) >= 4):
+                f.SetPrecision(v[3])
+            data_layer.CreateField(f)
+        lay= ShapeLayer(self, self.data_source.GetLayerCount() - 1)
+        self.layers[lay.name] = lay
+        return lay
+
 class ShapeLayer(collections.Sequence):
     '''This class handles access to a single layers in a Shapefile.'''
     def __init__(self, shape_file, index):
@@ -66,6 +93,56 @@ class ShapeLayer(collections.Sequence):
     @property
     def name(self):
         return self.layer.GetName()
+
+    @staticmethod
+    def linear_ring_2d(v):
+        '''Create a linear  ring using 2d points. We pass in an array,
+        with each entry in the array being an array of 2 values.'''
+        g = ogr.Geometry(ogr.wkbLinearRing)
+        for i in v:
+            g.AddPoint_2D(*i)
+        return g
+
+    @staticmethod
+    def polygon_2d(*v):
+        '''Create a polygon using 2D points. A polygon has one exterior
+        ring and zero or more interior rings. This gets passed as one or
+        more arrays, with each array having arrays of 2 values.
+        
+        We close any rings passed in, so you don't have to give the closing
+        point if you don't want to (although it doesn't hurt to do so).'''
+        g = ogr.Geometry(ogr.wkbPolygon)
+        for vf in v:
+            gf = ShapeLayer.linear_ring_2d(vf)
+            gf.CloseRings()
+            g.AddGeometry(gf)
+        return g
+
+    @staticmethod
+    def point_2d(x, y):
+        '''Create a 2D point'''
+        g = ogr.Geometry(ogr.wkbPoint)
+        g.AddPoint_2D(x, y)
+        return g
+
+    def add_feature(self, d):
+        '''Add a feature. We pass in a dictionary of keyword/value pairs. The 
+        keyword "Geometry" is used to set the geometry. You can optionally
+        include a "Style" to pass in a style string.
+
+        As a convenience, this returns this object, so you can add multiple 
+        features in a row'''
+        f = ogr.Feature(self.layer.GetLayerDefn())
+        for name, value in d.items():
+            if(name =="Geometry"):
+                f.SetGeometry(value)
+            elif(name =="Style"):
+                f.SetStyleString(value)
+            else:
+                f.SetField(name, value)
+        self.layer.CreateFeature(f)
+        return self
+        
 
     def set_filter_rect(self, x1, y1, x2, y2):
         '''Filter the features so only those that intersect the rectangle

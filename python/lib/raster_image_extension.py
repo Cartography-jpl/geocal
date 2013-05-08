@@ -2,9 +2,10 @@ from geocal import *
 import numpy as np
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
+from shape_file import *
 
 # Add some useful functions to RasterImage
-def read_with_pad(self, Lstart, Sstart, Number_line, Number_sample):
+def _read_with_pad(self, Lstart, Sstart, Number_line, Number_sample):
     '''This is variation of read that allows the data read to extend
     past the actual RasterImage. In that case, we return 0's for the 
     outside area.'''
@@ -36,9 +37,9 @@ def read_with_pad(self, Lstart, Sstart, Number_line, Number_sample):
         self.read(rline, rsamp, nlind, nsind)
     return res
 
-setattr(RasterImage, "read_with_pad", read_with_pad)
+geocal.RasterImage.read_with_pad = _read_with_pad
 
-def display(self, ic, sz, cross_hair = True):
+def _display(self, ic, sz, cross_hair = True):
     '''This executes plt.imshow for the image centered as the given
     image coordinate, with the given number of lines and samples. It
     is ok if this goes past the end of the image data, we just fill
@@ -62,5 +63,28 @@ def display(self, ic, sz, cross_hair = True):
                vmin = min, vmax = max, 
                extent = [smp, smp + nsamp, ln + nline, ln])
 
-setattr(RasterImage, "display", display)
+geocal.RasterImage.display = _display
+
+def _footprint_geometry(self, cconver = geocal.GeodeticConverter()):
+    '''Return a ogr Geometry object describing the footprint of the 
+    RasterImage. This includes the 4 corners of the image.
+
+    You can supply the coordinates to use, the default it Geodetic
+    longitude and latitude.
+
+    This can then be used to write information to a ShapeFile.'''
+    corners = []
+    for pt in [geocal.ImageCoordinate(0,0), 
+               geocal.ImageCoordinate(self.number_line, 0), 
+               geocal.ImageCoordinate(self.number_line, 
+                                      self.number_sample), 
+               geocal.ImageCoordinate(0, self.number_sample)]:
+        x, y, z = cconver.convert_to_coordinate(self.ground_coordinate(pt))
+        corners.append((x, y))
+    return ShapeLayer.polygon_2d(corners)
+
+geocal.RasterImage.footprint_geometry = _footprint_geometry
+
+
+
 

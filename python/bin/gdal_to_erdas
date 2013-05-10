@@ -4,35 +4,41 @@
 # an image pyramid.
 
 from afids import *
-from optparse import OptionParser
 import subprocess
 
-parser = OptionParser(version="%prog September 6, 2012",
-usage="""usage: %prog [options] <input gdal file> <output erdas>
+version = "May 10,2013"
+usage='''Usage:
+  gdal_to_erdas [options] <input_gdal_file> <output_erdas>
+  gdal_to_erdas -m | --multiple-band <output_erdas> <input_band> <input_band>...
+  gdal_to_erdas -h | --help
+  gdal_to_erdas -v | --version
+
 This converts a GDAL file to ERDAS, including calculating statistics and
 an image pyramid.
-""")
 
-(options, args) = parser.parse_args()
-if(len(args) != 2):
-    parser.error("Need to specify all the arguments")
-infname, outfname = args
+Options:
+  -h --help         
+       Print this message
 
-infile = GdalRasterImage(infname)
-subprocess.check_call(["gdal_translate", 
-                       "-of", "hfa",
-                       "-co", "STATISTICS=YES",
-                       "-co", "COMPRESSED=YES",
-                       infname, outfname])
-# The default blocksize of ERDAS is 64x64. Since we just created the file,
-# we know this is the blocksize. 
-blocksize = 64
-cmd = ["gdaladdo", outfname, "2"]
-i = 2
-# We want to make image pyramids down to a single block
-while(infile.number_line / i > blocksize and
-      infile.number_sample / i > blocksize):
-    i *= 2
-    cmd.append(str(i))
-subprocess.check_call(cmd)
+  -m --multiple-band
+       We supply multiple bands (e.g., subsets from  GDAL file, separate VICAR
+       files). The data for each file should be the same size, and we stack
+       them into one file.
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+if(args.input_band):
+    with TempDir() as t:
+        tfile = t.name + "/temp.vrt"
+        cmd = ["gdalbuildvrt", "-separate", tfile]
+        cmd.extend(args.input_band)
+        subprocess.check_call(cmd)
+        gdal_to_erdas_file(tfile, args.output_erdas)
+else:
+    gdal_to_erdas_file(args.input_gdal_file, args.output_erdas)
+
 

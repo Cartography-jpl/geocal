@@ -29,7 +29,9 @@ afidspkgpython_PYTHON+= @srcpythonlib@/feature_detector_extension.py
 afidspkgpython_PYTHON+= @srcpythonlib@/ply_file.py
 afidspkgpython_PYTHON+= @srcpythonlib@/docopt_simple.py
 afidspkgpython_PYTHON+= @srcpythonlib@/docopt.py
+afidspkgpython_PYTHON+= @srcpythonlib@/tempdir.py
 afidspkgpython_PYTHON+= @srcpythonlib@/shape_file.py
+afidspkgpython_PYTHON+= @srcpythonlib@/gdal_to_erdas_file.py
 if WITH_AFIDS_A
 afidspkgpython_PYTHON+= @srcpythonlib@/tre_amt_struct.py
 endif

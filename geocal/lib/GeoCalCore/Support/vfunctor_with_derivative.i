@@ -1,11 +1,14 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "vfunctor_with_derivative.h"
 %}
 
-%geocal_shared_ptr(VFunctorWithDerivative);
+%base_import(functor)
+%geocal_shared_ptr(GeoCal::VFunctorWithDerivative);
 
 namespace GeoCal {
 class VFunctorWithDerivative : public VFunctor {

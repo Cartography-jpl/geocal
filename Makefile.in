@@ -244,6 +244,7 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/test_out/dummy
 @BUILD_AFIDS_PYTHON_TRUE@am__append_6 = -I$(srcdir)/@srcsdbx@ \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcsupport@ \
+@BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcsupport@/boost \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcinterface@ \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcimplementation@ \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srccartlab@
@@ -479,10 +480,19 @@ LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES) \
 	$(pkgpythonswig_LTLIBRARIES)
 @BUILD_AFIDS_PYTHON_TRUE@_swig_wrap_la_DEPENDENCIES = libgeocal.la
 am___swig_wrap_la_SOURCES_DIST = @swigsrc@/constant_wrap.cc \
-	@swigsrc@/generic_object_wrap.cc @swigsrc@/swig_wrap.cc
+	@swigsrc@/generic_object_wrap.cc @swigsrc@/covariance_wrap.cc \
+	@swigsrc@/wgs84_constant_wrap.cc \
+	@swigsrc@/geocal_exception_wrap.cc @swigsrc@/functor_wrap.cc \
+	@swigsrc@/vfunctor_with_derivative_wrap.cc \
+	@swigsrc@/swig_wrap.cc
 am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@am__objects_1 = @swigsrc@/_swig_wrap_la-constant_wrap.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-generic_object_wrap.lo
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-generic_object_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-covariance_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-wgs84_constant_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-geocal_exception_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-functor_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-vfunctor_with_derivative_wrap.lo
 @BUILD_AFIDS_PYTHON_TRUE@am__swig_wrap_la_OBJECTS = $(am__objects_1) \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-swig_wrap.lo
 _swig_wrap_la_OBJECTS = $(am__swig_wrap_la_OBJECTS)
@@ -1023,8 +1033,8 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcsupport@/tile.h @srcsupport@/tiled_file.h \
 	@srcsupport@/memory_map_array.h \
 	@srcsupport@/geocal_gsl_matrix.h @srcsupport@/geocal_matrix.h \
-	@srcsupport@/geocal_gsl_fit.h @srcsupport@/functor.h \
-	@srcsupport@/vfunctor_with_derivative.h \
+	@srcsupport@/boost/backtrace.hpp @srcsupport@/geocal_gsl_fit.h \
+	@srcsupport@/functor.h @srcsupport@/vfunctor_with_derivative.h \
 	@srcsupport@/geocal_gsl_root.h @srcsupport@/geocal_time.h \
 	@srcsupport@/toolkit_time_interface.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
@@ -1713,7 +1723,12 @@ check_DATA =
 
 # Files that contain SWIG wrapper information.
 @BUILD_AFIDS_PYTHON_TRUE@SWIG_SRC = @swigsrc@/constant_wrap.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/generic_object_wrap.cc
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/generic_object_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/covariance_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/wgs84_constant_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/geocal_exception_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/functor_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/vfunctor_with_derivative_wrap.cc
 
 # Include boost in builds
 
@@ -1749,6 +1764,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/memory_map_array.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_gsl_matrix.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_matrix.h \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/boost/backtrace.hpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_gsl_fit.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/functor.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/vfunctor_with_derivative.h \
@@ -2016,12 +2032,6 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/array.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/quaternion.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/shared_ptr_list.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/constant.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/covariance.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/wgs84_constant.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_exception.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/functor.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/vfunctor_with_derivative.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/statistic.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_gsl_fit.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_gsl_root.i \
@@ -2340,6 +2350,16 @@ clean-pkgpythonswigLTLIBRARIES:
 @swigsrc@/_swig_wrap_la-constant_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-generic_object_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-covariance_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-wgs84_constant_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-geocal_exception_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-functor_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-vfunctor_with_derivative_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-swig_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -3308,8 +3328,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-hdf_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-statistic.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-constant_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-covariance_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-functor_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-generic_object_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_exception_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Po@am__quote@
 
 .cc.o:
@@ -3349,6 +3374,41 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/generic_object_wrap.cc' object='@swigsrc@/_swig_wrap_la-generic_object_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-generic_object_wrap.lo `test -f '@swigsrc@/generic_object_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/generic_object_wrap.cc
+
+@swigsrc@/_swig_wrap_la-covariance_wrap.lo: @swigsrc@/covariance_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-covariance_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-covariance_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-covariance_wrap.lo `test -f '@swigsrc@/covariance_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/covariance_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-covariance_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-covariance_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/covariance_wrap.cc' object='@swigsrc@/_swig_wrap_la-covariance_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-covariance_wrap.lo `test -f '@swigsrc@/covariance_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/covariance_wrap.cc
+
+@swigsrc@/_swig_wrap_la-wgs84_constant_wrap.lo: @swigsrc@/wgs84_constant_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-wgs84_constant_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-wgs84_constant_wrap.lo `test -f '@swigsrc@/wgs84_constant_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/wgs84_constant_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/wgs84_constant_wrap.cc' object='@swigsrc@/_swig_wrap_la-wgs84_constant_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-wgs84_constant_wrap.lo `test -f '@swigsrc@/wgs84_constant_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/wgs84_constant_wrap.cc
+
+@swigsrc@/_swig_wrap_la-geocal_exception_wrap.lo: @swigsrc@/geocal_exception_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-geocal_exception_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_exception_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-geocal_exception_wrap.lo `test -f '@swigsrc@/geocal_exception_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_exception_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_exception_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_exception_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/geocal_exception_wrap.cc' object='@swigsrc@/_swig_wrap_la-geocal_exception_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-geocal_exception_wrap.lo `test -f '@swigsrc@/geocal_exception_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_exception_wrap.cc
+
+@swigsrc@/_swig_wrap_la-functor_wrap.lo: @swigsrc@/functor_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-functor_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-functor_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-functor_wrap.lo `test -f '@swigsrc@/functor_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/functor_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-functor_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-functor_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/functor_wrap.cc' object='@swigsrc@/_swig_wrap_la-functor_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-functor_wrap.lo `test -f '@swigsrc@/functor_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/functor_wrap.cc
+
+@swigsrc@/_swig_wrap_la-vfunctor_with_derivative_wrap.lo: @swigsrc@/vfunctor_with_derivative_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vfunctor_with_derivative_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vfunctor_with_derivative_wrap.lo `test -f '@swigsrc@/vfunctor_with_derivative_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vfunctor_with_derivative_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/vfunctor_with_derivative_wrap.cc' object='@swigsrc@/_swig_wrap_la-vfunctor_with_derivative_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vfunctor_with_derivative_wrap.lo `test -f '@swigsrc@/vfunctor_with_derivative_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vfunctor_with_derivative_wrap.cc
 
 @swigsrc@/_swig_wrap_la-swig_wrap.lo: @swigsrc@/swig_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-swig_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-swig_wrap.lo `test -f '@swigsrc@/swig_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/swig_wrap.cc

@@ -18,18 +18,12 @@ void LsmMatcher::solve(Array<double, 2>& A, Array<double, 2>& y) const
   gsl_permutation * p = gsl_permutation_alloc(A.extent(0));
   int s;
   int status = gsl_linalg_LU_decomp(am.gsl(), p, &s);
-  if(status) {
-    gsl_permutation_free(p);
-    throw Exception("gsl_linalg_LU_decomp failed");
-  }
+  gsl_check(status);
   for(int i = 0; i < y.extent(0); ++i) {
     Array<double,1> yr(y(i, Range::all()));
     GslVector yrv(yr);
     status = gsl_linalg_LU_svx(am.gsl(), p, yrv.gsl());
-    if(status) {
-      gsl_permutation_free(p);
-      throw Exception("gsl_linalg_LU_solve failed");
-    }
+    gsl_check(status);
   }
   gsl_permutation_free(p);
 }

@@ -1,5 +1,6 @@
 #ifndef FUNCTOR_H
 #define FUNCTOR_H
+#include "printable.h"
 #include <blitz/array.h>
 
 namespace GeoCal {
@@ -8,7 +9,7 @@ namespace GeoCal {
   type S. We have typedefs for common mappings.
 *******************************************************************/
 
-template<class T, class S> class Functor {
+template<class T, class S> class Functor : public Printable<Functor<T, S> > {
 public:
 //-----------------------------------------------------------------------
 /// Destructor
@@ -21,6 +22,11 @@ public:
 //-----------------------------------------------------------------------
 
   virtual S operator()(const T& X) const = 0;
+
+  void print(std::ostream& os) const
+  {
+    os << "Functor";
+  }
 };
 
 /****************************************************************//**

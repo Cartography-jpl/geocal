@@ -1,14 +1,30 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "geocal_exception.h"
 %}
 
+%base_import(generic_object)
+
+%init {
+  GeoCal::no_gsl_abort();
+}
+
+%geocal_shared_ptr(GeoCal::Exception)
+%geocal_shared_ptr(GeoCal::ConvergenceFailure)
+%geocal_shared_ptr(GeoCal::NoCoverage)
+%geocal_shared_ptr(GeoCal::MetadataMissing)
+%geocal_shared_ptr(GeoCal::VicarException)
+
 namespace GeoCal {
-  class Exception {
+  class Exception : public GenericObject {
   public:
     Exception(const std::string& W);
     const char* what();
+    std::string print_to_string() const;
   };
 
   class ConvergenceFailure : public Exception {
@@ -31,6 +47,6 @@ public:
   VicarException(int status, const std::string& W = "");
 };
 
-  
+void no_gsl_abort();
 }
 

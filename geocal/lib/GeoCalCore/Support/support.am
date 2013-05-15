@@ -19,6 +19,7 @@ geocalinc_HEADERS+= @srcsupport@/tiled_file.h
 geocalinc_HEADERS+= @srcsupport@/memory_map_array.h
 geocalinc_HEADERS+= @srcsupport@/geocal_gsl_matrix.h
 geocalinc_HEADERS+= @srcsupport@/geocal_matrix.h
+geocalinc_HEADERS+= @srcsupport@/boost/backtrace.hpp
 libgeocal_la_SOURCES+= @srcsupport@/geocal_gsl_matrix.cc
 geocalinc_HEADERS+= @srcsupport@/geocal_gsl_fit.h
 libgeocal_la_SOURCES+= @srcsupport@/geocal_gsl_fit.cc
@@ -43,12 +44,11 @@ endif
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/constant_wrap.cc
 SWIG_SRC += @swigsrc@/generic_object_wrap.cc
-SWIG_SOURCES += @srcsupport@/constant.i
-SWIG_SOURCES += @srcsupport@/covariance.i
-SWIG_SOURCES += @srcsupport@/wgs84_constant.i
-SWIG_SOURCES += @srcsupport@/geocal_exception.i
-SWIG_SOURCES += @srcsupport@/functor.i
-SWIG_SOURCES += @srcsupport@/vfunctor_with_derivative.i
+SWIG_SRC += @swigsrc@/covariance_wrap.cc
+SWIG_SRC += @swigsrc@/wgs84_constant_wrap.cc
+SWIG_SRC += @swigsrc@/geocal_exception_wrap.cc
+SWIG_SRC += @swigsrc@/functor_wrap.cc
+SWIG_SRC += @swigsrc@/vfunctor_with_derivative_wrap.cc
 SWIG_SOURCES += @srcsupport@/statistic.i
 SWIG_SOURCES += @srcsupport@/geocal_gsl_fit.i
 SWIG_SOURCES += @srcsupport@/geocal_gsl_root.i
@@ -79,7 +79,7 @@ geocal_test_all_SOURCES+= @srcsupport@/geocal_fftw_test.cc
 if HAVE_HDF5
 geocal_test_all_SOURCES+= @srcsupport@/hdf_file_test.cc 
 endif
-AM_CPPFLAGS+= -I$(srcdir)/@srcsupport@
+AM_CPPFLAGS+= -I$(srcdir)/@srcsupport@ -I$(srcdir)/@srcsupport@/boost
 
 
 # Allow searchs for .i, .h. and .cc files in this directory

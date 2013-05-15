@@ -11,6 +11,11 @@ extern "C" {
   void init_swig_wrap(void);
   void init_constant(void);
   void init_generic_object(void);
+  void init_covariance(void);
+  void init_wgs84_constant(void);
+  void init_geocal_exception(void);
+  void init_functor(void);
+  void init_vfunctor_with_derivative(void);
 }
 
 // Used throughout SWIG wrapper, define here because it is convenient.
@@ -74,4 +79,9 @@ void init_swig_wrap(void)
   
   init_extension_module(package, "_constant", init_constant);
   init_extension_module(package, "_generic_object", init_generic_object);
+  init_extension_module(package, "_covariance", init_covariance);
+  init_extension_module(package, "_wgs84_constant", init_wgs84_constant);
+  init_extension_module(package, "_geocal_exception", init_geocal_exception);
+  init_extension_module(package, "_functor", init_functor);
+  init_extension_module(package, "_vfunctor_with_derivative", init_vfunctor_with_derivative);
 }

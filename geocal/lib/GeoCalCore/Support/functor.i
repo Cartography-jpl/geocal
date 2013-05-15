@@ -1,20 +1,24 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "functor.h"
 %}
 
-%geocal_shared_ptr(DFunctor);
-%geocal_shared_ptr(VFunctor);
+%base_import(generic_object)
+
+%geocal_shared_ptr(GeoCal::DFunctor);
+%geocal_shared_ptr(GeoCal::VFunctor);
 
 namespace GeoCal {
-  class DFunctor {
+class DFunctor : public GenericObject {
   public:
     virtual double operator()(const double& X) const = 0;
   };
 
-  class VFunctor {
+  class VFunctor : public GenericObject {
   public:
     virtual blitz::Array<double, 1> operator()(const blitz::Array<double, 
     1>& X) const = 0;

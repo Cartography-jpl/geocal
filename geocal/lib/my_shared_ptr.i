@@ -1,6 +1,9 @@
 // There appears to be a bug in the shared_ptr handler of SWIG, as of
 // version 2.0.4. This is "boost_shared_ptr.i" from
 // share/swig/2.0.4/python/, with some fixes
+//
+// The fixes are related to proper handling of shared_ptr returned by
+// directors.
 %include <shared_ptr.i>
 
 %{

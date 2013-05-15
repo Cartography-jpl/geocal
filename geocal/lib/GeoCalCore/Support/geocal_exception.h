@@ -1,7 +1,10 @@
 #ifndef GEOCAL_EXCEPTION_H
 #define GEOCAL_EXCEPTION_H
 
+#include "printable.h"
+#include "backtrace.hpp"
 #include <sstream>		// Definition of ostringstream.
+#include <gsl/gsl_errno.h>
 
 namespace GeoCal {
 
@@ -11,7 +14,8 @@ namespace GeoCal {
   exception. This is derived from the standard library std::exception
 *******************************************************************/
 
-class Exception: public std::exception {
+class Exception: public std::exception, public Printable<Exception>, 
+		 public boost::backtrace {
 public:
 //-----------------------------------------------------------------------
 /// Default constructor. Can give an optional string describing
@@ -61,6 +65,22 @@ public:
   {
     s_ << V;
     return *this;
+  }
+
+//-----------------------------------------------------------------------
+/// Print out description of object.
+//-----------------------------------------------------------------------
+
+  virtual void print(std::ostream& Os) const 
+  {
+    Os << "GeoCal Exception:\n"
+       << "=========================\n" 
+       << what() << "\n"
+       << "=========================\n" 
+       << "Backtrace:\n"
+       << "=========================\n" 
+       << boost::trace(*this) << "\n"
+       << "=========================\n";
   }
 
 //-----------------------------------------------------------------------
@@ -330,6 +350,40 @@ int                Line
 
 #define range_max_check(V, Max) \
       GeoCal::range_max_check_template(V, Max, __FILE__, __LINE__)
+
+//-----------------------------------------------------------------------
+/// Turn off gsl errors abort
+//-----------------------------------------------------------------------
+
+inline void no_gsl_abort()
+{
+  gsl_set_error_handler_off();
+}
+
+//-----------------------------------------------------------------------
+/// Check for gsl errors
+//-----------------------------------------------------------------------
+
+inline void gsl_check_func
+(int status,
+const char* File,
+int Line
+)
+{
+  if(status != 0) {
+    Exception e;
+    e << "GSL error in file " << File << " at line " << Line << "\n"
+      << "GSL error: " << gsl_strerror(status) << "\n";
+    throw e;
+  }
+}
+
+//-----------------------------------------------------------------------
+/// GSL check
+//-----------------------------------------------------------------------
+
+#define gsl_check(status) \
+      GeoCal::gsl_check_func(status, __FILE__, __LINE__)
 
 }
 /*@}*/

@@ -43,8 +43,7 @@ void GeoCal::gsl_fit(const GslMatrix& X, const GslVector& W,
   int status = gsl_multifit_wlinear(X.gsl(), W.gsl(), Y.gsl(), C.gsl(), 
 				    Cov.gsl(), &Chisq,
 				    ws.work_space);
-  if(status)
-    throw Exception("Call to gsl_multifit_wlinear failed.");
+  gsl_check(status);
 }
 
 //-----------------------------------------------------------------------
@@ -70,6 +69,5 @@ void GeoCal::gsl_fit(const GslMatrix& X, const GslVector& Y,
   }
   int status = gsl_multifit_linear(X.gsl(), Y.gsl(), C.gsl(), Cov.gsl(), 
 				   &Chisq, ws.work_space);
-  if(status)
-    throw Exception("Call to gsl_multifit_wlinear failed.");
+  gsl_check(status);
 }

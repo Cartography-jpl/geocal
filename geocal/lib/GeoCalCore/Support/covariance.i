@@ -1,13 +1,18 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
+%include "common.i"
+
 %{
 #include "covariance.h"
 %}
 
-%geocal_shared_ptr(Covariance);
+%base_import(generic_object)
+
+%geocal_shared_ptr(GeoCal::Covariance);
+
 namespace GeoCal {
-class Covariance {
+class Covariance : public GenericObject {
 public:
   Covariance();
   void add(double x1, double x2);

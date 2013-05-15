@@ -1,12 +1,11 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "mask.h"
 %}
 
-%geocal_shared_ptr(Mask);
-%geocal_shared_ptr(CombinedMask);
+%geocal_shared_ptr(GeoCal::Mask);
+%geocal_shared_ptr(GeoCal::CombinedMask);
 namespace GeoCal {
 class Mask {
 public:
@@ -24,7 +23,7 @@ public:
   virtual bool region_masked(const GroundCoordinate& Ulc, 
 			     const GroundCoordinate& Lrc) const;
   std::vector<boost::shared_ptr<Mask> > mask_list;
-  %pickle_init(self.mask_list)
+  %pickle_init(1, self.mask_list)
 };
 
 }

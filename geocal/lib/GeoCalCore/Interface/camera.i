@@ -1,6 +1,5 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "camera.h"
 #include "argus_camera.h"
@@ -9,9 +8,9 @@
 #include "spot_camera.h"
 %}
 
-%geocal_shared_ptr(Camera);
-%geocal_shared_ptr(PushBroomCamera);
-%geocal_shared_ptr(SimplePushBroomCamera);
+%geocal_shared_ptr(GeoCal::Camera);
+%geocal_shared_ptr(GeoCal::PushBroomCamera);
+%geocal_shared_ptr(GeoCal::SimplePushBroomCamera);
 
 %shared_ptr_dynamic_list(GeoCal::Camera,
 			 GeoCal::ArgusCamera,
@@ -67,7 +66,7 @@ public:
   %python_attribute(focal_length, double)
   %python_attribute(line_pitch, double)
   %python_attribute(sample_pitch, double)
-  %pickle_init(self.beta, self.delta, self.epsilon, self.focal_length,
+  %pickle_init(1, self.beta, self.delta, self.epsilon, self.focal_length,
 	       self.line_pitch, self.sample_pitch, self.number_sample(0))
 };
 }

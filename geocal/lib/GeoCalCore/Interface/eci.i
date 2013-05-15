@@ -1,10 +1,9 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "eci.h"
 %}
-%geocal_shared_ptr(Eci);
+%geocal_shared_ptr(GeoCal::Eci);
 namespace GeoCal {
 class Eci : public CartesianInertial {
 public:
@@ -19,6 +18,6 @@ public:
     reference_surface_intersect_approximate(
     const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
     const;
-  %pickle_init(self.position[0], self.position[1], self.position[2])
+  %pickle_init(1, self.position[0], self.position[1], self.position[2])
 };
 }

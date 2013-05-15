@@ -10,3 +10,4 @@
 %template(vector_short_int) std::vector<short int>;
 %template(vector_int) std::vector<int>;
 %template(vector_float) std::vector<float>;
+

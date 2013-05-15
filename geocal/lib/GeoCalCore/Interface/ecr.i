@@ -1,11 +1,10 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "ecr.h"
 %}
 
-%geocal_shared_ptr(Ecr);
+%geocal_shared_ptr(GeoCal::Ecr);
 namespace GeoCal {
 class CartesianFixed;
 class Geodetic;
@@ -39,7 +38,7 @@ public:
   reference_surface_intersect_approximate(
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0) 
   const;
-  %pickle_init(self.position[0], self.position[1], self.position[2])
+  %pickle_init(1, self.position[0], self.position[1], self.position[2])
 };
 
 }

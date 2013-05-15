@@ -1,11 +1,10 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "ccorr_lsm_matcher.h"
 %}
 
-%geocal_shared_ptr(CcorrLsmMatcher);
+%geocal_shared_ptr(GeoCal::CcorrLsmMatcher);
 namespace GeoCal {
 
 class CcorrLsmMatcher: public ImageMatcher {
@@ -25,7 +24,7 @@ public:
   %python_attribute2(lsm_matcher, lsm_matcher_ptr, 
 		     boost::shared_ptr<LsmMatcher>)
   %python_attribute(accept_ccorr_only, bool)
-  %pickle_init(self.ccorr_matcher, self.lsm_matcher, 
+  %pickle_init(1, self.ccorr_matcher, self.lsm_matcher, 
 	       self.accept_ccorr_only)
 };
 }

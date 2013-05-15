@@ -1,12 +1,11 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "time_table.h"
 #include "quickbird_time_table.h"
 %}
-%geocal_shared_ptr(TimeTable);
-%geocal_shared_ptr(ConstantSpacingTimeTable);
+%geocal_shared_ptr(GeoCal::TimeTable);
+%geocal_shared_ptr(GeoCal::ConstantSpacingTimeTable);
 
 %shared_ptr_dynamic_list(GeoCal::TimeTable,
 			 GeoCal::ConstantSpacingTimeTable,
@@ -35,6 +34,6 @@ public:
   virtual void time(const ImageCoordinate& Ic, Time &OUTPUT, 
 		    FrameCoordinate &OUTPUT) const;
   %python_attribute(time_space, double)
-  %pickle_init(self.min_time, self.max_time, self.time_space)
+  %pickle_init(1, self.min_time, self.max_time, self.time_space)
 };
 }

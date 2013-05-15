@@ -1,11 +1,10 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "frame_coordinate.h"
 %}
 
-%geocal_shared_ptr(FrameCoordinate);
+%geocal_shared_ptr(GeoCal::FrameCoordinate);
 
 namespace GeoCal {
 
@@ -16,6 +15,6 @@ public:
   double line;
   double sample;
   std::string print_to_string() const;
-  %pickle_init(self.line, self.sample)
+  %pickle_init(1, self.line, self.sample)
 };
 }

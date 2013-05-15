@@ -1,6 +1,5 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "raster_image.h"
 #include "igc_map_projected.h"
@@ -23,8 +22,8 @@
 %}
 
 // In geocal_rpc.i
-//%geocal_shared_ptr(RasterImage);
-%geocal_shared_ptr(RasterImageTileIterator);
+//%geocal_shared_ptr(GeoCal::RasterImage);
+%geocal_shared_ptr(GeoCal::RasterImageTileIterator);
 
 // Note, MaterialDetect is not included in the list below. This is
 // only compiled if we select afids_b, so we don't always have it

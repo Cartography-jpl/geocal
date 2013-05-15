@@ -1,12 +1,15 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+%include <std_vector.i>
+%include "common.i"
+
 %{
 #include "image_coordinate.h"
 %}
 
-%geocal_shared_ptr(ImageCoordinate);
-%geocal_shared_ptr(VicarImageCoordinate);
+%base_import(generic_object)
+%geocal_shared_ptr(GeoCal::ImageCoordinate);
+%geocal_shared_ptr(GeoCal::VicarImageCoordinate);
 namespace GeoCal {
 
 // Handle returns as a argout
@@ -23,7 +26,7 @@ namespace GeoCal {
 #endif
 
   class VicarImageCoordinate;
-  class ImageCoordinate {
+  class ImageCoordinate : public GenericObject {
   public:
     ImageCoordinate(double Line, double Sample);
     ImageCoordinate(const VicarImageCoordinate& Vic);
@@ -31,9 +34,9 @@ namespace GeoCal {
     double line;
     double sample;
     std::string print_to_string() const;
-    %pickle_init(self.line, self.sample)
+    %pickle_init(1, self.line, self.sample)
   };
-  class VicarImageCoordinate {
+  class VicarImageCoordinate : public GenericObject {
   public:
     VicarImageCoordinate(double Line, double Sample);
     VicarImageCoordinate(const ImageCoordinate& Vic);
@@ -41,7 +44,7 @@ namespace GeoCal {
     double line;
     double sample;
     std::string print_to_string() const;
-    %pickle_init(self.line, self.sample)
+    %pickle_init(1, self.line, self.sample)
   };
 
 }

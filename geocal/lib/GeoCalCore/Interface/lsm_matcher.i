@@ -1,10 +1,9 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "lsm_matcher.h"
 %}
-%geocal_shared_ptr(LsmMatcher);
+%geocal_shared_ptr(GeoCal::LsmMatcher);
 namespace GeoCal {
 
 class LsmMatcher: public ImageMatcher {
@@ -30,7 +29,7 @@ public:
   %python_attribute(rad_uncertainty_factor, double)
   %python_attribute(precision_min_geo_goal, double)
   %python_attribute(precision_min_rad_goal, double)
-  %pickle_init(self.number_line, self.number_sample, 
+  %pickle_init(1, self.number_line, self.number_sample, 
 	       self.border_size, self.precision_goal,
 	       self.precision_requirement, self.max_sigma,
 	       self.rad_uncertainty_factor, self.precision_min_geo_goal,

@@ -47,6 +47,9 @@ public:
 %import "swig_std.i"
 %include "swig_array_inc.i"
 %import "swig_array.i"
+%include "swig_boost_array_inc.i"
+%import "swig_boost_array.i"
+%import "swig_quaternion.i"
  // Don't think we need this
  //%import "swig_rational.i"
 

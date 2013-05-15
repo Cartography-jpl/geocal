@@ -11,6 +11,8 @@ extern "C" {
   void init_swig_wrap(void);
   void init_swig_std(void);
   void init_swig_array(void);
+  void init_swig_boost_array(void);
+  void init_swig_quaternion(void);
   void init_constant(void);
   void init_generic_object(void);
   void init_covariance(void);
@@ -24,6 +26,9 @@ extern "C" {
   void init_geocal_time(void);
   void init_tiled_file(void);
   void init_hdf_file(void);
+  void init_image_coordinate(void);
+  void init_look_vector(void);
+  void init_ground_coordinate(void);
 }
 
 // Used throughout SWIG wrapper, define here because it is convenient.
@@ -87,6 +92,8 @@ void init_swig_wrap(void)
   
   init_extension_module(package, "_swig_std", init_swig_std);
   init_extension_module(package, "_swig_array", init_swig_array);
+  init_extension_module(package, "_swig_boost_array", init_swig_boost_array);
+  init_extension_module(package, "_swig_quaternion", init_swig_quaternion);
   init_extension_module(package, "_constant", init_constant);
   init_extension_module(package, "_generic_object", init_generic_object);
   init_extension_module(package, "_covariance", init_covariance);
@@ -100,4 +107,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_time", init_geocal_time);
   init_extension_module(package, "_tiled_file", init_tiled_file);
   init_extension_module(package, "_hdf_file", init_hdf_file);
+  init_extension_module(package, "_image_coordinate", init_image_coordinate);
+  init_extension_module(package, "_look_vector", init_look_vector);
+  init_extension_module(package, "_ground_coordinate", init_ground_coordinate);
 }

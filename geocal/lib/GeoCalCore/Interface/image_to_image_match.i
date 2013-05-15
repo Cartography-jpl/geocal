@@ -1,11 +1,10 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "image_to_image_match.h"
 %}
 
-%geocal_shared_ptr(ImageToImageMatch);
+%geocal_shared_ptr(GeoCal::ImageToImageMatch);
 namespace GeoCal {
 
 class ImageToImageMatch {

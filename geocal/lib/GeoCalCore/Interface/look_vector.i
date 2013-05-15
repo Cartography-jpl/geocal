@@ -1,17 +1,20 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "look_vector.h"
 %}
+%base_import(generic_object)
 
-%geocal_shared_ptr(LookVector);
-%geocal_shared_ptr(ScLookVector);
-%geocal_shared_ptr(CartesianInertialLookVector);
-%geocal_shared_ptr(CartesianFixedLookVector);
+%geocal_shared_ptr(GeoCal::LookVector);
+%geocal_shared_ptr(GeoCal::ScLookVector);
+%geocal_shared_ptr(GeoCal::CartesianInertialLookVector);
+%geocal_shared_ptr(GeoCal::CartesianFixedLookVector);
 
 namespace GeoCal {
-class LookVector {
+class LookVector : public GenericObject {
 public:
   %python_attribute_boost_array(look_vector, double, 3);
   %python_attribute(direction, boost::array<double, 3>)
@@ -25,7 +28,7 @@ public:
   ScLookVector(double x, double y, double z);
   ScLookVector(const boost::array<double, 3>& Lv);
   std::string print_to_string() const;
-  %pickle_init(self.look_vector[0], self.look_vector[1],
+  %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])
 };
 
@@ -35,7 +38,7 @@ public:
   CartesianInertialLookVector(const boost::array<double, 3>& Lv);
   CartesianInertialLookVector(double x, double y, double z);
   std::string print_to_string() const;
-  %pickle_init(self.look_vector[0], self.look_vector[1],
+  %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])
 };
 
@@ -67,7 +70,7 @@ public:
   CartesianFixedLookVector(const boost::array<double, 3>& Lv);
   CartesianFixedLookVector(double x, double y, double z);
   std::string print_to_string() const;
-  %pickle_init(self.look_vector[0], self.look_vector[1],
+  %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])
 };
 }

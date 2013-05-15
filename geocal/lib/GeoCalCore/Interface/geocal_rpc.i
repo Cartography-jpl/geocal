@@ -1,13 +1,12 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "geocal_rpc.h"
 %}
 
-%geocal_shared_ptr(Rpc);
-%geocal_shared_ptr(RasterImage);
-%geocal_shared_ptr(ImageGroundConnection);
+%geocal_shared_ptr(GeoCal::Rpc);
+%geocal_shared_ptr(GeoCal::RasterImage);
+%geocal_shared_ptr(GeoCal::ImageGroundConnection);
 
 %pythoncode {
 def _new_rpc(is_rpc_a, error_bias, error_random, height_offset, 

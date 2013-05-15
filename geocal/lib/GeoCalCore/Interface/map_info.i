@@ -1,10 +1,9 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "map_info.h"
 %}
-%geocal_shared_ptr(MapInfo);
+%geocal_shared_ptr(GeoCal::MapInfo);
 
 namespace GeoCal {
 class MapInfo {
@@ -45,7 +44,7 @@ public:
   %python_attribute(ulc_y, double)
   %python_attribute(transform, blitz::Array<double, 1>)
   std::string print_to_string() const;
-  %pickle_init(self.coordinate_converter, self.transform,
+  %pickle_init(1, self.coordinate_converter, self.transform,
 	       self.number_x_pixel, self.number_y_pixel)
 };
 

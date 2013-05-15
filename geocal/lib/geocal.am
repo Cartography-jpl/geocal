@@ -4,12 +4,14 @@
 SWIG_SOURCES =
 SWIG_SOURCES += @libgeocal@/swig.i
 SWIG_SOURCES += @libgeocal@/array.i
-SWIG_SOURCES += @libgeocal@/quaternion.i
 SWIG_SOURCES += @libgeocal@/shared_ptr_list.i
 
 SWIG_SRC += @swigsrc@/swig_std_wrap.cc
 SWIG_SRC += @swigsrc@/swig_array_wrap.cc
+SWIG_SRC += @swigsrc@/swig_boost_array_wrap.cc
+SWIG_SRC += @swigsrc@/swig_quaternion_wrap.cc
 
+EXTRA_DIST+= @libgeocal@/*.i 
 EXTRA_DIST+= @libgeocal@/swig_to_python.h
 EXTRA_DIST+= @libgeocal@/swig_type_mapper_base.h
 EXTRA_DIST+= @libgeocal@/swig_type_mapper.h

@@ -1,11 +1,10 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "raster_multifile.h"
 %}
 
-%geocal_shared_ptr(RasterMultifile);
+%geocal_shared_ptr(GeoCal::RasterMultifile);
 
 namespace GeoCal {
 %nodefaultctor RasterMultifile;

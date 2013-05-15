@@ -1,12 +1,11 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "feature_detector.h"
 %}
 
-%geocal_shared_ptr(InterestPoint);
-%geocal_shared_ptr(FeatureDetector);
+%geocal_shared_ptr(GeoCal::InterestPoint);
+%geocal_shared_ptr(GeoCal::FeatureDetector);
 namespace GeoCal {
 %rename("_interest_point_grid_raw") FeatureDetector::interest_point_grid_ptr;
 class InterestPoint {
@@ -26,7 +25,7 @@ public:
         return 0;
      }
   }
-  %pickle_init(self.image_coordinate, self.weight)
+  %pickle_init(1, self.image_coordinate, self.weight)
 };
 
 class FeatureDetector {

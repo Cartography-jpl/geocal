@@ -73,9 +73,9 @@ geocalinc_HEADERS+= @srcinterface@/image_ground_connection.h
 libgeocal_la_SOURCES+= @srcinterface@/image_ground_connection.cc
 
 # Files that contain SWIG wrapper information.
-SWIG_SOURCES += @srcinterface@/image_coordinate.i
-SWIG_SOURCES += @srcinterface@/look_vector.i
-SWIG_SOURCES += @srcinterface@/ground_coordinate.i
+SWIG_SRC += @swigsrc@/image_coordinate_wrap.cc
+SWIG_SRC += @swigsrc@/look_vector_wrap.cc
+SWIG_SRC += @swigsrc@/ground_coordinate_wrap.cc
 SWIG_SOURCES += @srcinterface@/coordinate_converter.i
 SWIG_SOURCES += @srcinterface@/ecr.i
 SWIG_SOURCES += @srcinterface@/eci.i
@@ -135,4 +135,7 @@ geocal_test_all_SOURCES+= @srcinterface@/ipi_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcinterface@
 
-
+# Allow searchs for .i, .h. and .cc files in this directory
+vpath %.cc $(srcdir)/@srcinterface@
+vpath %.h $(srcdir)/@srcinterface@
+vpath %.i $(srcdir)/@srcinterface@

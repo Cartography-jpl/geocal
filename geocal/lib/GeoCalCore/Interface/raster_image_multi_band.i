@@ -1,12 +1,11 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "raster_image_multi_band.h"
 %}
 
-%geocal_shared_ptr(RasterImageMultiBand);
-%geocal_shared_ptr(RasterImageMultiBandVariable);
+%geocal_shared_ptr(GeoCal::RasterImageMultiBand);
+%geocal_shared_ptr(GeoCal::RasterImageMultiBandVariable);
 
 namespace GeoCal {
 class RasterImageMultiBandVariable;

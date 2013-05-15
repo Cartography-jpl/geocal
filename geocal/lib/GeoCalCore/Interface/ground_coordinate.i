@@ -1,39 +1,21 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+%include <std_vector.i>
+%include "common.i"
+
 %{
 #include "ground_coordinate.h"
-#include "geocal_time.h"
-#include "ecr.h"
-#include "eci.h"
-#include "eci_tod.h"
-#include "eci_tod.h"
-#include "eci_tod_burl.h"
-#include "ogr_coordinate.h"
 %}
-
-%geocal_shared_ptr(GroundCoordinate);
-%geocal_shared_ptr(CartesianFixed);
-%geocal_shared_ptr(CartesianInertial);
-
-%shared_ptr_dynamic_list(GeoCal::GroundCoordinate,
-			 GeoCal::Ecr,
-			 GeoCal::Geocentric,
-			 GeoCal::Geodetic,
-			 GeoCal::OgrCoordinate,
-			 GeoCal::CartesianFixed);
-%shared_ptr_dynamic_list(GeoCal::CartesianInertial,
-			 GeoCal::Eci,
-			 GeoCal::EciTod,
-			 GeoCal::EciTodBurl
-			 );
-%shared_ptr_dynamic_list(GeoCal::CartesianFixed,
-			 GeoCal::Ecr
-			 );
+%base_import(generic_object)
+%import "geocal_time.i"
+%import "look_vector.i"
+%geocal_shared_ptr(GeoCal::GroundCoordinate);
+%geocal_shared_ptr(GeoCal::CartesianFixed);
+%geocal_shared_ptr(GeoCal::CartesianInertial);
 
 namespace GeoCal {
 class CartesianFixed;
-class GroundCoordinate {
+class GroundCoordinate : public GenericObject {
 public:
   %python_attribute(latitude, virtual double)
   %python_attribute(longitude, virtual double)
@@ -42,7 +24,7 @@ public:
   std::string print_to_string() const;
 };
 
-class CartesianInertial {
+class CartesianInertial : public GenericObject {
 public:
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf(const Time& T) 
     const = 0;

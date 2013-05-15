@@ -1,6 +1,5 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "orbit.h"
 #include "argus_orbit.h"
@@ -13,10 +12,10 @@ namespace GeoCal {
 }
 %}
 
-%geocal_shared_ptr(OrbitData);
-%geocal_shared_ptr(QuaternionOrbitData);
-%geocal_shared_ptr(Orbit);
-%geocal_shared_ptr(KeplerOrbit);
+%geocal_shared_ptr(GeoCal::OrbitData);
+%geocal_shared_ptr(GeoCal::QuaternionOrbitData);
+%geocal_shared_ptr(GeoCal::Orbit);
+%geocal_shared_ptr(GeoCal::KeplerOrbit);
 
 %shared_ptr_dynamic_list(GeoCal::Orbit,
 			 GeoCal::KeplerOrbit,
@@ -195,7 +194,7 @@ public:
   %python_attribute(mean_anomoly, double)
   %python_attribute(inclination, double)
   %python_attribute(right_ascension, double)
-  %pickle_init(self.min_time, self.max_time, self.epoch,
+  %pickle_init(1, self.min_time, self.max_time, self.epoch,
 	       self.semimajor_axis, self.eccentricity,
 	       self.inclination, self.right_ascension,
 	       self.argument_of_perigee, self.mean_anomoly)

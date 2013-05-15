@@ -1,7 +1,6 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
-%module geocal
 %{
 #include "dem.h"
 #include "simple_dem.h"
@@ -11,7 +10,7 @@
 #include "gdal_dem.h"
 %}
 
-%geocal_shared_ptr(Dem);
+%geocal_shared_ptr(GeoCal::Dem);
 
 %shared_ptr_dynamic_list(GeoCal::Dem,
 			 GeoCal::SimpleDem, 

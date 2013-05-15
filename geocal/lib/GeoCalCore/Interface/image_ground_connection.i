@@ -1,7 +1,6 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
-%module geocal
 %{
 #include "image_ground_connection.h"
 #include "ipi_image_ground_connection.h"
@@ -12,8 +11,8 @@
 %}
 
 // In geocal_rpc.i
-//%geocal_shared_ptr(ImageGroundConnection);
-%geocal_shared_ptr(OffsetImageGroundConnection);
+//%geocal_shared_ptr(GeoCal::ImageGroundConnection);
+%geocal_shared_ptr(GeoCal::OffsetImageGroundConnection);
 
 %shared_ptr_dynamic_list(GeoCal::ImageGroundConnection,
 			 GeoCal::OffsetImageGroundConnection,
@@ -113,7 +112,7 @@ public:
 		    boost::shared_ptr<ImageGroundConnection>)
   %python_attribute(line_offset, double)
   %python_attribute(sample_offset, double)
-  %pickle_init(self.original_image_ground_connection, self.line_offset, 
+  %pickle_init(1, self.original_image_ground_connection, self.line_offset, 
 	       self.sample_offset, self.number_line, self.number_sample)
 };
 

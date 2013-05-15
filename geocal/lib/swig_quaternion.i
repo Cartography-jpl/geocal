@@ -1,9 +1,12 @@
-%module geocal
-
+// -*- mode: c++; -*-
+// (Not really c++, but closest emacs mode)
+%include "swig_pickle.i"
 %{
 #include <sstream>
 #include <boost/math/quaternion.hpp>
+#include <blitz/array.h>
 #include "geocal_matrix.h"
+#include "geocal_exception.h"
 %}
 
 namespace boost {
@@ -11,10 +14,10 @@ namespace boost {
     template<class T> class quaternion {
     public:
       quaternion(T a, T b, T c, T d);
-      T R_component_1() const;
-      T R_component_2() const;
-      T R_component_3() const;
-      T R_component_4() const;
+      %python_attribute(R_component_1, T);
+      %python_attribute(R_component_2, T);
+      %python_attribute(R_component_3, T);
+      %python_attribute(R_component_4, T);
       %extend {
          quaternion<T> __add__(T x) {return (boost::math::quaternion<T>(*$self) += x); }
          quaternion<T> __add__(const quaternion<T>& x) {return (boost::math::quaternion<T>(*$self) += x); }
@@ -54,13 +57,9 @@ namespace boost {
            return os.str();
          }
       }
-%pythoncode {
-def __reduce__(self):
-  return _new_from_init, (self.__class__, self.R_component_1(),
-			  self.R_component_2(), self.R_component_3(),
-			  self.R_component_4())
-
-      }
+      %pickle_init(1, self.R_component_1,
+		   self.R_component_2, self.R_component_3,
+		   self.R_component_4);
     };
     %template(Quaternion_double) quaternion<double>;
   }

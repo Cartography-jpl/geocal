@@ -1,11 +1,10 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "rpc_image.h"
 %}
 
-%geocal_shared_ptr(RpcImage);
+%geocal_shared_ptr(GeoCal::RpcImage);
 namespace GeoCal {
 class RpcImage : public RasterImageVariable {
 public:

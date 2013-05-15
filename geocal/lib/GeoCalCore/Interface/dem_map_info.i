@@ -1,12 +1,11 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "dem_map_info.h"
 %}
 
 
-%geocal_shared_ptr(DemMapInfo);
+%geocal_shared_ptr(GeoCal::DemMapInfo);
 
 namespace GeoCal {
 class DemMapInfo : public Dem {

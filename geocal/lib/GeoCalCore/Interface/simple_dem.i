@@ -1,12 +1,11 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "simple_dem.h"
 %}
 
 
-%geocal_shared_ptr(SimpleDem);
+%geocal_shared_ptr(GeoCal::SimpleDem);
 namespace GeoCal {
 class SimpleDem : public Dem {
 public:
@@ -17,6 +16,6 @@ public:
   virtual boost::shared_ptr<GroundCoordinate> 
   surface_point(const GroundCoordinate& Gp) const;
   %python_attribute_with_set(h, double)
-  %pickle_init(self.h)
+  %pickle_init(1, self.h)
 };
 }

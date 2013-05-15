@@ -4888,6 +4888,22 @@ template<class T, int D> inline blitz::Array<T, D>
 
 
 
+#include <boost/array.hpp>
+#include <boost/foreach.hpp>
+
+template<class T, int D> inline boost::array<T, D> 
+  to_boost_array(PyObject* numpy)
+{
+  blitz::Array<T, 1> b = to_blitz_array<T, 1>(numpy);
+  if(b.rows() != D)
+     throw GeoCal::Exception("Array not expeced size");
+  boost::array<T, D> res;
+  for(int i = 0; i < D; ++i)
+    res[i]= b(i);
+  return res;
+}
+
+
 #include "tiled_file.h"
 
 
@@ -5116,7 +5132,7 @@ SWIGINTERN PyObject *_wrap_TiledFileBase_2__v_size(PyObject *SWIGUNUSEDPARM(self
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  boost::array< GeoCal::TiledFileBase< 2 >::index,2 > result;
+  SwigValueWrapper< boost::array< boost::multi_array_types::index,2 > > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -5147,7 +5163,7 @@ SWIGINTERN PyObject *_wrap_TiledFileBase_2__v_tile_size(PyObject *SWIGUNUSEDPARM
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  boost::array< GeoCal::TiledFileBase< 2 >::index,2 > result;
+  SwigValueWrapper< boost::array< boost::multi_array_types::index,2 > > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;

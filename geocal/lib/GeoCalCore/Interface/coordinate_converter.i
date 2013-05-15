@@ -1,13 +1,12 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "coordinate_converter.h"
 #include "ogr_coordinate.h"
 %}
 
-%geocal_shared_ptr(CoordinateConverter);
-%geocal_shared_ptr(GeodeticConverter);
+%geocal_shared_ptr(GeoCal::CoordinateConverter);
+%geocal_shared_ptr(GeoCal::GeodeticConverter);
 
 %shared_ptr_dynamic_list(GeoCal::CoordinateConverter,
 			 GeoCal::GeodeticConverter,

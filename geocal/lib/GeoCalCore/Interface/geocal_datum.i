@@ -1,6 +1,5 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "geocal_datum.h"
 #include "datum_geoid96.h"
@@ -8,8 +7,8 @@
 #include "gdal_datum.h"
 %}
 
-%geocal_shared_ptr(Datum);
-%geocal_shared_ptr(SimpleDatum);
+%geocal_shared_ptr(GeoCal::Datum);
+%geocal_shared_ptr(GeoCal::SimpleDatum);
 
 %shared_ptr_dynamic_list(GeoCal::Datum,
 			 GeoCal::SimpleDatum,
@@ -28,6 +27,6 @@ public:
   SimpleDatum(double U = 0.0);
   %python_attribute(u, double)
   virtual double undulation(const GroundCoordinate& Gc) const;
-  %pickle_init(self.u)
+  %pickle_init(1, self.u)
 };
 }

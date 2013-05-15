@@ -1,11 +1,10 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "forstner_feature_detector.h"
 %}
 
-%geocal_shared_ptr(ForstnerFeatureDetector);
+%geocal_shared_ptr(GeoCal::ForstnerFeatureDetector);
 namespace GeoCal {
 class ForstnerFeatureDetector : public FeatureDetector {
 public:
@@ -24,7 +23,7 @@ public:
   %python_attribute(roundness_threshold, double)
   %python_attribute(weight_threshold, double)
   %python_attribute(basic_robert_threshold, double)
-  %pickle_init(self.basic_ip_large_number, self.maximum_weight_threshold,
+  %pickle_init(1, self.basic_ip_large_number, self.maximum_weight_threshold,
 	       self.forstner_max_window_large_size, 
 	       self.forstner_max_window_small_size,
 	       self.forstner_window_size,

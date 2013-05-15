@@ -1,11 +1,10 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
 %{
 #include "memory_raster_image.h"
 %}
 
-%geocal_shared_ptr(MemoryRasterImage);
+%geocal_shared_ptr(GeoCal::MemoryRasterImage);
 
 namespace GeoCal {
 class MemoryRasterImage : public RasterImageVariable {

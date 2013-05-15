@@ -1,11 +1,16 @@
 # This gets included in the top makefile. This list files here that are
 # used to make up libgeocal.la.
 
+SWIG_SOURCES =
 SWIG_SOURCES += @libgeocal@/swig.i
 SWIG_SOURCES += @libgeocal@/vector.i
 SWIG_SOURCES += @libgeocal@/array.i
 SWIG_SOURCES += @libgeocal@/quaternion.i
 SWIG_SOURCES += @libgeocal@/shared_ptr_list.i
+
+EXTRA_DIST+= @libgeocal@/swig_to_python.h
+EXTRA_DIST+= @libgeocal@/swig_type_mapper_base.h
+EXTRA_DIST+= @libgeocal@/swig_type_mapper.h
 
 if HAVE_GDAL
 # bin_PROGRAMS += tryout
@@ -37,3 +42,9 @@ include afids_python/geocal/lib/Misr/misr.am
 if HAVE_GTKGOO
 include afids_python/geocal/lib/Gtk/gtk.am
 endif
+
+# Allow fils to be include in other directories
+AM_CPPFLAGS+= -I$(srcdir)/@libgeocal@
+
+# Allow searchs for .i in this directory
+vpath %.i $(srcdir)/@libgeocal@

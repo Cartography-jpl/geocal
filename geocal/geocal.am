@@ -1,7 +1,8 @@
 # Build these up as we go
 libgeocal_la_SOURCES = 
-SWIG_SOURCES = afids_python/geocal/bindings/doc.i
+SWIG_SRC=
 libgeocal_la_LDFLAGS =
+SWIG_FLAG = 
 
 geocalincdir = @includedir@/geocal
 geocalinc_HEADERS =
@@ -47,8 +48,8 @@ geocal_install: install-geocalincHEADERS install-geocalpkgpyexecLTLIBRARIES inst
 
 include afids_python/geocal/thirdparty/thirdparty.am
 include afids_python/geocal/lib/geocal.am
-include afids_python/geocal/bindings/bindings.am
-include afids_python/geocal/python/python.am
+include afids_python/geocal/bindings/python/python.am
+#include afids_python/geocal/python/python.am
 #=================================================================
 # libgeocal: The main library
 

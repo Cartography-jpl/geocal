@@ -651,6 +651,8 @@ srcmisr
 srccartlab
 srcinterface
 srcsupport
+swigsrc
+pythonswigsrc
 srcimplementation
 srcgeocalcore
 pythonunittestdata
@@ -28298,6 +28300,10 @@ pythonunittestdata=afids_python/python/unit_test_data
 srcgeocalcore=$libgeocal/GeoCalCore
 
 srcimplementation=$srcgeocalcore/Implementation
+
+pythonswigsrc=afids_python/geocal/bindings/python
+
+swigsrc=afids_python/geocal/bindings/python/swig
 
 srcsupport=$srcgeocalcore/Support
 

@@ -1,0 +1,30 @@
+geocalpkgpython_PYTHON+= afids_python/geocal/python/mmap_file.py
+geocalpkgpython_PYTHON+= afids_python/geocal/python/raster_tile.py
+
+UNINSTALL_HOOK+= clean_geocalpkgpython
+
+clean_geocalpkgpython:
+	rm -rf "$(DESTDIR)$(geocalpkgpythondir)"
+
+python_test :
+	export PYTHONPATH=$(pythondir) && \
+        export LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) && \
+        export UNIT_TEST_DATA=$(abs_srcdir)/afids_python/geocal/unit_test_data; \
+        $(PYTHON) $(geocalpkgpythontestdir)/run_all.py
+
+# Only install python stuff and test. Does not install libgeocal even 
+# if it has changed
+fast_python_test: afids_python/geocal/bindings/python/_geocal.la install-geocalpkgpythonPYTHON install-geocalpkgpyexecLTLIBRARIES
+	@echo "=========================================================="
+	@echo "This does a fast install and test of the python stuff. This"
+	@echo "does *not* install libgeocal or executables, even "
+	@echo "if it has changed. But this test is faster to run when you "
+	@echo "are just working on the SWIG stuff."
+	@echo "=========================================================="
+	export PYTHONPATH=$(pythondir) && \
+        export LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) && \
+        export UNIT_TEST_DATA=$(abs_srcdir)/afids_python/geocal/unit_test_data; \
+        $(PYTHON) $(abs_srcdir)/afids_python/geocal/bindings/python/test/run_all.py
+
+
+

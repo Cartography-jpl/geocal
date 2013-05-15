@@ -6,6 +6,8 @@
 
 # Source files for library
 geocalinc_HEADERS+= @srcsupport@/constant.h
+geocalinc_HEADERS+= @srcsupport@/generic_object.h
+geocalinc_HEADERS+= @srcsupport@/geocal_type_index.h
 geocalinc_HEADERS+= @srcsupport@/dir_change.h
 geocalinc_HEADERS+= @srcsupport@/null_deleter.h
 geocalinc_HEADERS+= @srcsupport@/ostream_pad.h
@@ -39,6 +41,8 @@ libgeocal_la_SOURCES+= @srcsupport@/hdf_file.cc
 endif
 
 # Files that contain SWIG wrapper information.
+SWIG_SRC += @swigsrc@/constant_wrap.cc
+SWIG_SRC += @swigsrc@/generic_object_wrap.cc
 SWIG_SOURCES += @srcsupport@/constant.i
 SWIG_SOURCES += @srcsupport@/covariance.i
 SWIG_SOURCES += @srcsupport@/wgs84_constant.i
@@ -78,3 +82,7 @@ endif
 AM_CPPFLAGS+= -I$(srcdir)/@srcsupport@
 
 
+# Allow searchs for .i, .h. and .cc files in this directory
+vpath %.cc $(srcdir)/@srcsupport@
+vpath %.h $(srcdir)/@srcsupport@
+vpath %.i $(srcdir)/@srcsupport@

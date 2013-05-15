@@ -1,45 +1,87 @@
-geocalpkgpython_PYTHON = afids_python/geocal/bindings/python/__init__.py
-geocalpkgpyexec_LTLIBRARIES = afids_python/geocal/bindings/python/_geocal.la
-afids_python_geocal_bindings_python__geocal_la_SOURCES = $(SWIG_SOURCES)
-geocalpkgpython_PYTHON+= afids_python/geocal/bindings/python/all/geocal.py
-afids_python_geocal_bindings_python__geocal_la_SOURCES+= afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc
-afids_python_geocal_bindings_python__geocal_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) $(AM_CPPFLAGS)
-afids_python_geocal_bindings_python__geocal_la_LDFLAGS = -module -avoid-version
-afids_python_geocal_bindings_python__geocal_la_LIBADD = libgeocal.la 
+SWIG_FLAG += -O
+if BUILD_AFIDS_PYTHON
+pkgpythonswigdir = @pythondir@/geocal
+pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py
+pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC))
+pkgpythonswig_LTLIBRARIES = _swig_wrap.la
 
-EXTRA_DIST += $(srcdir)/afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.h
+_swig_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) 
+_swig_wrap_la_CPPFLAGS+= $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) 
+_swig_wrap_la_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) 
+_swig_wrap_la_CPPFLAGS+= -I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) 
+_swig_wrap_la_CPPFLAGS+= $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) 
+_swig_wrap_la_CPPFLAGS+= $(AM_CPPFLAGS)
+_swig_wrap_la_CPPFLAGS+= -DSWIG_TYPE_TABLE=geocal
+_swig_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
+_swig_wrap_la_LDFLAGS = -module -avoid-version
+_swig_wrap_la_LIBADD = libgeocal.la
+_swig_wrap_la_SOURCES = $(SWIG_SRC)
+_swig_wrap_la_SOURCES+= @swigsrc@/swig_wrap.cc
+
+endif BUILD_AFIDS_PYTHON
+
+install-python-2: install-libLTLIBRARIES install-pkgpythonLTLIBRARIES install-pkgpythonPYTHON install-fpscriptDATA install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
+	$(noop)
+
+if BUILD_AFIDS_PYTHON
+install-python: all
+	$(MAKE) -j 1 install-python-2 
+else
+install-python: 
+	$(noop)
+endif
 
 # Only generate these files in maintainer mode, otherwise consider them
 # as input.
 if MAINTAINER_MODE
 if HAVE_SWIG
 
-$(srcdir)/afids_python/geocal/bindings/doc_python.i : doc/geocal.tag config/doxy2swig.py $(PYTHON_TARGET)
-	LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) $(PYTHON) $(srcdir)/config/doxy2swig.py doc/geocal/xml/index.xml $@
+$(swigsrc)/%_wrap.Pcc : %.i %.cc %.h
+	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
+	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
+	rm $@.tmp
+	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.cc" >> $@
+	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.h" >> $@
 
-afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.Pcc : $(srcdir)/afids_python/geocal/bindings/all.i
-	$(MKDIR_P) $(srcdir)/afids_python/geocal/bindings/python/all
-	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $@ -o $(srcdir)/afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc $<
+$(swigsrc)/%_wrap.Pcc : %.i %.h
+	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
+	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
+	rm $@.tmp
+	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.h" >> $@
 
-if WITH_DOCUMENTATION
-SWIG_PYTHON_DOC = $(srcdir)/afids_python/geocal/bindings/doc_python.i
-else
-SWIG_PYTHON_DOC =
-endif
+$(swigsrc)/%_wrap.Pcc : %.i
+	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
+	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
+	rm $@.tmp
 
-# Note multiple targets here. For pattern rules, GNU make knows these get
-# created at the same time (unlike static rules, where this just means two
-# things created by running the same rule twice)
-$(srcdir)/afids_python/geocal/bindings/python/%/geocal_swig_python_wrap.cc $(srcdir)/afids_python/geocal/bindings/python/%/geocal.py: $(srcdir)/afids_python/geocal/bindings/%.i $(SWIG_PYTHON_DOC)
-	$(MKDIR_P) $(srcdir)/afids_python/geocal/bindings/python/all
-	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -o $(srcdir)/afids_python/geocal/bindings/python/$*/geocal_swig_python_wrap.cc $<
+$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile
+	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC)))
 
+$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc
+	mkdir -p $*_doc
+	OUTDIR=$*_doc INPUT="$(<D)/$*.h $(<D)/$*.cc" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
+	$(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
+	rm -r $*_doc
+	echo "%include \"$*.i\"" >> $*_doc.i
+	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
+	rm $*_doc.i
 
-BUILT_SOURCES+= $(srcdir)/afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc
+$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h
+	mkdir -p $*_doc
+	OUTDIR=$*_doc INPUT="$(<D)/$*.h" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
+	$(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
+	rm -r $*_doc
+	echo "%include \"$*.i\"" >> $*_doc.i
+	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
+	rm $*_doc.i
 
--include afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.Pcc
+$(srcdir)/$(swigsrc)/%_wrap.cc: %.i
+	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
 
-CLEANFILES = afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.Pcc
+BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC))
+BUILT_SOURCES+= $(srcdir)/$(swigsrc)/swig_wrap.cc
+
+-include $(patsubst %.cc, %.Pcc, $(SWIG_SRC))
 
 endif HAVE_SWIG
 endif MAINTAINER_MODE

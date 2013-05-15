@@ -1,5 +1,6 @@
 #ifndef PRINTABLE_H
 #define PRINTABLE_H
+#include "generic_object.h"
 #include <sstream>
 
 namespace GeoCal {
@@ -20,7 +21,7 @@ namespace GeoCal {
   should derive from Printable<T>, and then define print(ostream& Os). 
 *******************************************************************/
 
-template<class T> class Printable {
+template<class T> class Printable : public virtual GenericObject {
 public:
 //-----------------------------------------------------------------------
 /// Print to string. This is primarily useful for SWIG wrappers to

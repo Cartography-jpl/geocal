@@ -117,9 +117,7 @@ DIST_COMMON = $(srcdir)/common.am $(srcdir)/afids_python.am \
 	$(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am \
 	$(srcdir)/afids_python/geocal/lib/Misr/misr.am \
 	$(srcdir)/afids_python/geocal/lib/Gtk/gtk.am \
-	$(srcdir)/afids_python/geocal/bindings/bindings.am \
 	$(srcdir)/afids_python/geocal/bindings/python/python.am \
-	$(srcdir)/afids_python/geocal/python/python.am \
 	$(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am \
 	$(srcdir)/afids_python/python/python.am \
 	$(srcdir)/afids_python/python/bin/bin.am \
@@ -135,7 +133,7 @@ DIST_COMMON = $(srcdir)/common.am $(srcdir)/afids_python.am \
 	$(am__dist_afidspythonvdev_SCRIPTS_DIST) \
 	$(am__dist_bin_SCRIPTS_DIST) $(top_srcdir)/config/depcomp \
 	$(am__afidspkgpython_PYTHON_DIST) \
-	$(am__geocalpkgpython_PYTHON_DIST) \
+	$(am__pkgpythonswig_PYTHON_DIST) \
 	$(top_srcdir)/config/py-compile \
 	$(am__dist_afidspkgpython_DATA_DIST) \
 	$(am__dist_afidspythonvdev_DATA_DIST) \
@@ -187,12 +185,14 @@ bin_PROGRAMS =
 # make surce test_out directory is created).
 @BUILD_AFIDS_PYTHON_TRUE@am__append_5 = @srcsdbx@/README \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsdbx@/StorageConcepts.txt \
+@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/swig_to_python.h \
+@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/swig_type_mapper_base.h \
+@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/swig_type_mapper.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/dummy.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/geocal_doxygen.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/unit_test_support.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/global_fixture.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/matcher_fixture.h \
-@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/PCF \
 @BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/cib_sample.img \
 @BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/matcher_test_newimage.bin \
@@ -313,9 +313,15 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/display_stretch.i \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/display_stretch_std_dev.i \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/raster_image_with_overlay.i
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_27 = $(srcdir)/afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc
-@BUILD_AFIDS_PYTHON_TRUE@am__append_28 = clean_geocalpkgpython
 
+# Allow fils to be include in other directories
+@BUILD_AFIDS_PYTHON_TRUE@am__append_27 = -I$(srcdir)/@libgeocal@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_28 = $(addprefix \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG_SRC)) \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
+
+#include afids_python/geocal/python/python.am
 #=================================================================
 # libgeocal: The main library
 @BUILD_AFIDS_PYTHON_TRUE@am__append_29 = libgeocal.la
@@ -457,11 +463,11 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(geocalpkgpyexecdir)" \
-	"$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
+am__installdirs = "$(DESTDIR)$(libdir)" \
+	"$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(afidspkgpythondir)" \
-	"$(DESTDIR)$(geocalpkgpythondir)" \
+	"$(DESTDIR)$(pkgpythonswigdir)" \
 	"$(DESTDIR)$(afidspkgpythondir)" \
 	"$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" \
 	"$(DESTDIR)$(installafidspythondir)" \
@@ -469,126 +475,27 @@ am__installdirs = "$(DESTDIR)$(geocalpkgpyexecdir)" \
 	"$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" \
 	"$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" \
 	"$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)"
-LTLIBRARIES = $(geocalpkgpyexec_LTLIBRARIES) $(lib_LTLIBRARIES) \
-	$(noinst_LTLIBRARIES)
-@BUILD_AFIDS_PYTHON_TRUE@afids_python_geocal_bindings_python__geocal_la_DEPENDENCIES =  \
-@BUILD_AFIDS_PYTHON_TRUE@	libgeocal.la
-am__afids_python_geocal_bindings_python__geocal_la_SOURCES_DIST =  \
-	afids_python/geocal/bindings/doc.i @libgeocal@/swig.i \
-	@libgeocal@/vector.i @libgeocal@/array.i \
-	@libgeocal@/quaternion.i @libgeocal@/shared_ptr_list.i \
-	@srcsupport@/constant.i @srcsupport@/covariance.i \
-	@srcsupport@/wgs84_constant.i @srcsupport@/geocal_exception.i \
-	@srcsupport@/functor.i @srcsupport@/vfunctor_with_derivative.i \
-	@srcsupport@/statistic.i @srcsupport@/geocal_gsl_fit.i \
-	@srcsupport@/geocal_gsl_root.i @srcsupport@/geocal_time.i \
-	@srcsupport@/tiled_file.i @srcsupport@/hdf_file.i \
-	@srcinterface@/image_coordinate.i @srcinterface@/look_vector.i \
-	@srcinterface@/ground_coordinate.i \
-	@srcinterface@/coordinate_converter.i @srcinterface@/ecr.i \
-	@srcinterface@/eci.i @srcinterface@/geodetic.i \
-	@srcinterface@/dem.i @srcinterface@/map_info.i \
-	@srcinterface@/geocal_rpc.i @srcinterface@/raster_image.i \
-	@srcinterface@/image_ground_connection.i \
-	@srcinterface@/frame_coordinate.i @srcinterface@/camera.i \
-	@srcinterface@/orbit.i @srcinterface@/time_table.i \
-	@srcinterface@/ipi.i @srcinterface@/raster_image_variable.i \
-	@srcinterface@/sub_raster_image.i \
-	@srcinterface@/raster_image_multi_band.i \
-	@srcinterface@/raster_image_multi_band_variable.i \
-	@srcinterface@/mask.i @srcinterface@/geocal_datum.i \
-	@srcinterface@/simple_dem.i \
-	@srcinterface@/memory_raster_image.i \
-	@srcinterface@/dem_map_info.i \
-	@srcinterface@/feature_detector.i \
-	@srcinterface@/forstner_feature_detector.i \
-	@srcinterface@/image_matcher.i \
-	@srcinterface@/image_to_image_match.i \
-	@srcinterface@/ccorr_matcher.i @srcinterface@/lsm_matcher.i \
-	@srcinterface@/ccorr_lsm_matcher.i @srcinterface@/rpc_image.i \
-	@srcinterface@/raster_multifile.i \
-	@srcimplementation@/did_datum.i \
-	@srcimplementation@/map_info_image_ground_connection.i \
-	@srcimplementation@/mask_image.i \
-	@srcimplementation@/raster_averaged.i \
-	@srcimplementation@/raster_subsample.i \
-	@srcimplementation@/calc_raster.i \
-	@srcimplementation@/calc_raster_multi_band.i \
-	@srcimplementation@/magnify_bilinear.i \
-	@srcimplementation@/magnify_replicate.i \
-	@srcimplementation@/smooth_image.i \
-	@srcimplementation@/raster_image_tiled_file.i \
-	@srcimplementation@/dem_tiled_file.i \
-	@srcimplementation@/memory_dem.i \
-	@srcimplementation@/map_reprojected_image.i \
-	@srcimplementation@/calc_map_projected.i \
-	@srcimplementation@/orbit_map_projected.i \
-	@srcimplementation@/igc_map_projected.i \
-	@srcimplementation@/igc_image_to_image_match.i \
-	@srcimplementation@/surface_image_to_image_match.i \
-	@srcimplementation@/ipi_map_projected.i \
-	@srcimplementation@/location_to_file.i \
-	@srcimplementation@/ray_intersect.i \
-	@srcimplementation@/dem_match.i \
-	@srcimplementation@/geocal_gdal.i \
-	@srcimplementation@/gdal_raster_image.i \
-	@srcimplementation@/gdal_datum.i \
-	@srcimplementation@/gdal_dem.i \
-	@srcimplementation@/gdal_multi_band.i \
-	@srcimplementation@/image_point_display.i \
-	@srcimplementation@/ogr_coordinate.i \
-	@srcimplementation@/memory_multi_band.i \
-	@srcimplementation@/spice_helper.i \
-	@srcimplementation@/raw_raster_image.i \
-	@srcimplementation@/aircraft_orbit_data.i \
-	@srcimplementation@/orbit_quaternion_list.i \
-	@srcimplementation@/pan_sharpen.i \
-	@srcimplementation@/scale_image.i \
-	@srcimplementation@/apply_mask.i \
-	@srcimplementation@/rpc_image_ground_connection.i \
-	@srcimplementation@/ipi_image_ground_connection.i \
-	@srcimplementation@/eci_tod.i \
-	@srcimplementation@/eci_tod_burl.i \
-	@srcimplementation@/quaternion_camera.i \
-	@srcimplementation@/refraction.i \
-	@srcimplementation@/orbit_data_image_ground_connection.i \
-	@srcimplementation@/hdf_orbit.i @srccartlab@/argus_camera.i \
-	@srccartlab@/argus_orbit.i @srccartlab@/ibis_file.i \
-	@srccartlab@/quickbird_camera.i @srccartlab@/spot_camera.i \
-	@srccartlab@/spot_orbit.i @srccartlab@/quickbird_orbit.i \
-	@srccartlab@/quickbird_time_table.i @srccartlab@/vicar_file.i \
-	@srccartlab@/vicar_argument.i @srccartlab@/vicar_dem.i \
-	@srccartlab@/vicar_lite_file.i @srccartlab@/vicar_multi_file.i \
-	@srccartlab@/datum_geoid96.i @srccartlab@/srtm_dem.i \
-	@srccartlab@/vicar_raster_image.i \
-	@srccartlab@/pos_export_orbit.i \
-	@srccartlab@/worldview2_cloudmask.i \
-	@srccartlab@/doughnut_average.i @srccartlab@/material_detect.i \
-	@srccartlab@/paint_class.i @srcgtk@/gtk.i \
-	@srcgtk@/display_stretch.i @srcgtk@/display_stretch_std_dev.i \
-	@srcgtk@/raster_image_with_overlay.i \
-	afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc
-am__objects_1 =
-@BUILD_AFIDS_PYTHON_TRUE@am__objects_2 = $(am__objects_1) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_1) $(am__objects_1) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_1)
+LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES) \
+	$(pkgpythonswig_LTLIBRARIES)
+@BUILD_AFIDS_PYTHON_TRUE@_swig_wrap_la_DEPENDENCIES = libgeocal.la
+am___swig_wrap_la_SOURCES_DIST = @swigsrc@/constant_wrap.cc \
+	@swigsrc@/generic_object_wrap.cc @swigsrc@/swig_wrap.cc
 am__dirstamp = $(am__leading_dot)dirstamp
-@BUILD_AFIDS_PYTHON_TRUE@am_afids_python_geocal_bindings_python__geocal_la_OBJECTS =  \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_2) \
-@BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/bindings/python/all/afids_python_geocal_bindings_python__geocal_la-geocal_swig_python_wrap.lo
-afids_python_geocal_bindings_python__geocal_la_OBJECTS =  \
-	$(am_afids_python_geocal_bindings_python__geocal_la_OBJECTS)
+@BUILD_AFIDS_PYTHON_TRUE@am__objects_1 = @swigsrc@/_swig_wrap_la-constant_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-generic_object_wrap.lo
+@BUILD_AFIDS_PYTHON_TRUE@am__swig_wrap_la_OBJECTS = $(am__objects_1) \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-swig_wrap.lo
+_swig_wrap_la_OBJECTS = $(am__swig_wrap_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-afids_python_geocal_bindings_python__geocal_la_LINK = $(LIBTOOL) \
-	$(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
-	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	$(afids_python_geocal_bindings_python__geocal_la_LDFLAGS) \
+_swig_wrap_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) $(_swig_wrap_la_LDFLAGS) \
 	$(LDFLAGS) -o $@
-@BUILD_AFIDS_PYTHON_TRUE@am_afids_python_geocal_bindings_python__geocal_la_rpath =  \
-@BUILD_AFIDS_PYTHON_TRUE@	-rpath $(geocalpkgpyexecdir)
+@BUILD_AFIDS_PYTHON_TRUE@am__swig_wrap_la_rpath = -rpath \
+@BUILD_AFIDS_PYTHON_TRUE@	$(pkgpythonswigdir)
 am__DEPENDENCIES_1 =
 @BUILD_AFIDS_PYTHON_TRUE@libgeocal_la_DEPENDENCIES =  \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__DEPENDENCIES_1) libraw.la \
@@ -670,15 +577,15 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/geocal_gsl_matrix.cc \
 	@srccartlab@/vicar_ogr.cc @srcgtk@/display_stretch_std_dev.cc \
 	@srcgtk@/geocal_pixbuf.cc \
 	@srcgtk@/raster_image_with_overlay.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_3 = @srcsupport@/libgeocal_la-hdf_file.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_4 = @srcimplementation@/libgeocal_la-geocal_gdal.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_2 = @srcsupport@/libgeocal_la-hdf_file.lo
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_3 = @srcimplementation@/libgeocal_la-geocal_gdal.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_dem.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_raster_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_multi_band.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-image_point_display.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-ogr_coordinate.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_5 = @srccartlab@/libgeocal_la-vicar_ogr.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__objects_6 = @srcgtk@/libgeocal_la-display_stretch_std_dev.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_4 = @srccartlab@/libgeocal_la-vicar_ogr.lo
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__objects_5 = @srcgtk@/libgeocal_la-display_stretch_std_dev.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/libgeocal_la-geocal_pixbuf.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/libgeocal_la-raster_image_with_overlay.lo
 @BUILD_AFIDS_PYTHON_TRUE@am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-geocal_gsl_matrix.lo \
@@ -688,7 +595,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/geocal_gsl_matrix.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-covariance.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-statistic.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-geocal_fftw.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_3) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_2) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-raster_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-sub_raster_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-raster_image_multi_band.lo \
@@ -746,7 +653,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/geocal_gsl_matrix.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-refraction.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-ray_intersect.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-dem_match.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_4) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_3) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-spice_helper.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-sdp_helper.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-argus_camera.lo \
@@ -770,7 +677,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/geocal_gsl_matrix.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-doughnut_average.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-material_detect.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-paint_class.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_5) $(am__objects_6)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_4) $(am__objects_5)
 libgeocal_la_OBJECTS = $(am_libgeocal_la_OBJECTS)
 libgeocal_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
@@ -878,15 +785,15 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 	@srccartlab@/doughnut_average_test.cc \
 	@srccartlab@/material_detect_test.cc \
 	afids_python/geocal/lib/test_all.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_7 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_8 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_6 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_7 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-geocal_gdal_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_dem_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-image_point_display_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_9 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_10 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_8 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_9 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@am_geocal_test_all_OBJECTS = @srcsupport@/geocal_test_all-global_fixture.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-global_fixture_default.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-geocal_exception_test.$(OBJEXT) \
@@ -903,7 +810,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-covariance_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-statistic_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-geocal_fftw_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_7) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_6) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-memory_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-sub_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-ground_coordinate_test.$(OBJEXT) \
@@ -925,7 +832,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-geocal_rpc_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-rpc_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-ipi_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_8) $(am__objects_9) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_7) $(am__objects_8) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-spice_helper_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-sdp_helper_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-did_datum_test.$(OBJEXT) \
@@ -954,7 +861,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-igc_image_to_image_match_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-surface_image_to_image_match_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-dem_match_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_10) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_9) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_camera_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_orbit_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-ibis_file_test.$(OBJEXT) \
@@ -1055,10 +962,9 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(afids_python_geocal_bindings_python__geocal_la_SOURCES) \
-	$(libgeocal_la_SOURCES) $(libraw_la_SOURCES) \
-	$(geocal_test_all_SOURCES)
-DIST_SOURCES = $(am__afids_python_geocal_bindings_python__geocal_la_SOURCES_DIST) \
+SOURCES = $(_swig_wrap_la_SOURCES) $(libgeocal_la_SOURCES) \
+	$(libraw_la_SOURCES) $(geocal_test_all_SOURCES)
+DIST_SOURCES = $(am___swig_wrap_la_SOURCES_DIST) \
 	$(am__libgeocal_la_SOURCES_DIST) $(am__libraw_la_SOURCES_DIST) \
 	$(am__geocal_test_all_SOURCES_DIST)
 am__can_run_installinfo = \
@@ -1098,11 +1004,8 @@ am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 am__pep3147_tweak = \
   sed -e 's|\.py$$||' -e 's|[^/]*$$|__pycache__/&.*.py|'
-am__geocalpkgpython_PYTHON_DIST =  \
-	afids_python/geocal/bindings/python/__init__.py \
-	afids_python/geocal/bindings/python/all/geocal.py \
-	afids_python/geocal/python/mmap_file.py \
-	afids_python/geocal/python/raster_tile.py
+am__pkgpythonswig_PYTHON_DIST = @pythonswigsrc@/__init__.py $(patsubst \
+	%_wrap.cc, %.py, $(SWIG_SRC))
 py_compile = $(top_srcdir)/config/py-compile
 am__dist_afidspkgpython_DATA_DIST = @srcpythonlib@/cib01_mapinfo.dat
 am__dist_afidspythonvdev_DATA_DIST =  \
@@ -1113,6 +1016,7 @@ DATA = $(dist_afidspkgpython_DATA) $(dist_afidspythonvdev_DATA) \
 	$(dist_sdbxdoc_DATA) $(installafidspython_DATA) \
 	$(pkgconfig_DATA)
 am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
+	@srcsupport@/generic_object.h @srcsupport@/geocal_type_index.h \
 	@srcsupport@/dir_change.h @srcsupport@/null_deleter.h \
 	@srcsupport@/ostream_pad.h @srcsupport@/wgs84_constant.h \
 	@srcsupport@/printable.h @srcsupport@/geocal_exception.h \
@@ -1644,6 +1548,7 @@ psdir = @psdir@
 pyexecdir = @pyexecdir@
 pythondir = @pythondir@
 pythondocdir = @pythondocdir@
+pythonswigsrc = @pythonswigsrc@
 pythonunittestdata = @pythonunittestdata@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
@@ -1661,6 +1566,7 @@ srcpythonscript = @srcpythonscript@
 srcraw = @srcraw@
 srcsdbx = @srcsdbx@
 srcsupport = @srcsupport@
+swigsrc = @swigsrc@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
@@ -1682,11 +1588,11 @@ lib_LTLIBRARIES = $(am__append_29)
 noinst_LTLIBRARIES = $(am__append_7)
 dist_bin_SCRIPTS = $(am__append_37)
 AM_LDFLAGS = 
-BUILT_SOURCES = $(am__append_27) $(am__append_31)
+BUILT_SOURCES = $(am__append_28) $(am__append_31)
 include_HEADERS = 
 EXTRA_DIST = $(am__append_5) $(am__append_33) $(am__append_39)
 pkgconfig_DATA = 
-AM_CPPFLAGS = $(am__append_6) $(am__append_25)
+AM_CPPFLAGS = $(am__append_6) $(am__append_25) $(am__append_27)
 
 #=================================================================
 # Some flags needed for GCC compilers.
@@ -1703,7 +1609,7 @@ AM_CPPFLAGS = $(am__append_6) $(am__append_25)
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_DATA_HOOK = $(am__append_34)
-UNINSTALL_HOOK = $(am__append_28) $(am__append_35) $(am__append_40)
+UNINSTALL_HOOK = $(am__append_35) $(am__append_40)
 CLEAN_HOOK = $(am__append_32) $(am__append_36)
 INSTALLCHECK_HOOK = $(am__append_41)
 TESTS = $(am__append_30)
@@ -1806,127 +1712,8 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_20) $(am__append_23)
 
 # Files that contain SWIG wrapper information.
-
-# Files that contain SWIG wrapper information.
-
-# Files that contain SWIG wrapper information.
-#  SWIG_SOURCES += @srcimplementation@/gdal_multi_file.i
-@BUILD_AFIDS_PYTHON_TRUE@SWIG_SOURCES =  \
-@BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/bindings/doc.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/swig.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/vector.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/array.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/quaternion.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/shared_ptr_list.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/constant.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/covariance.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/wgs84_constant.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_exception.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/functor.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/vfunctor_with_derivative.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/statistic.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_gsl_fit.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_gsl_root.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_time.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/tiled_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_10) \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_coordinate.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/look_vector.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ground_coordinate.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/coordinate_converter.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ecr.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/eci.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geodetic.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/dem.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/map_info.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_rpc.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_ground_connection.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/frame_coordinate.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/camera.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/orbit.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/time_table.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ipi.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image_variable.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/sub_raster_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image_multi_band.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image_multi_band_variable.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/mask.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_datum.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/simple_dem.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/memory_raster_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/dem_map_info.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/feature_detector.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/forstner_feature_detector.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_matcher.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_to_image_match.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ccorr_matcher.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/lsm_matcher.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ccorr_lsm_matcher.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/rpc_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_multifile.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/did_datum.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/map_info_image_ground_connection.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/mask_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raster_averaged.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raster_subsample.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/calc_raster.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/calc_raster_multi_band.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/magnify_bilinear.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/magnify_replicate.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/smooth_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raster_image_tiled_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_tiled_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/memory_dem.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/map_reprojected_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/calc_map_projected.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/orbit_map_projected.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/igc_map_projected.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/igc_image_to_image_match.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/surface_image_to_image_match.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ipi_map_projected.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/location_to_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ray_intersect.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match.i \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_17) \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/memory_multi_band.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/spice_helper.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raw_raster_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/aircraft_orbit_data.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/orbit_quaternion_list.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/pan_sharpen.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/scale_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/apply_mask.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/rpc_image_ground_connection.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ipi_image_ground_connection.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/eci_tod.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/eci_tod_burl.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/quaternion_camera.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/refraction.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/orbit_data_image_ground_connection.i \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_18) \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_camera.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_orbit.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/ibis_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/quickbird_camera.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/spot_camera.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/spot_orbit.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/quickbird_orbit.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/quickbird_time_table.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_argument.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_dem.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_lite_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_multi_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/datum_geoid96.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/srtm_dem.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_raster_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/pos_export_orbit.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/worldview2_cloudmask.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/doughnut_average.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/material_detect.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/paint_class.i \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_26)
+@BUILD_AFIDS_PYTHON_TRUE@SWIG_SRC = @swigsrc@/constant_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/generic_object_wrap.cc
 
 # Include boost in builds
 
@@ -1944,10 +1731,13 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_3) $(GSL_LIBS) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(FFTW_LIBS) $(SDP_LDFLAGS) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_24)
+@BUILD_AFIDS_PYTHON_TRUE@SWIG_FLAG = -O
 @BUILD_AFIDS_PYTHON_TRUE@geocalincdir = @includedir@/geocal
 
 # Source files for library
 @BUILD_AFIDS_PYTHON_TRUE@geocalinc_HEADERS = @srcsupport@/constant.h \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/generic_object.h \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_type_index.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/dir_change.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/null_deleter.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/ostream_pad.h \
@@ -2216,21 +2006,144 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcraw@/libraw_defines.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcraw@/var_defines.h
 @BUILD_AFIDS_PYTHON_TRUE@libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
-@BUILD_AFIDS_PYTHON_TRUE@SWIG_FLAG = -O
-@BUILD_AFIDS_PYTHON_TRUE@geocalpkgpython_PYTHON = afids_python/geocal/bindings/python/__init__.py \
-@BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/bindings/python/all/geocal.py \
-@BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/python/mmap_file.py \
-@BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/python/raster_tile.py
-@BUILD_AFIDS_PYTHON_TRUE@geocalpkgpyexec_LTLIBRARIES = afids_python/geocal/bindings/python/_geocal.la
-@BUILD_AFIDS_PYTHON_TRUE@afids_python_geocal_bindings_python__geocal_la_SOURCES =  \
-@BUILD_AFIDS_PYTHON_TRUE@	$(SWIG_SOURCES) \
-@BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc
-@BUILD_AFIDS_PYTHON_TRUE@afids_python_geocal_bindings_python__geocal_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) $(AM_CPPFLAGS)
-@BUILD_AFIDS_PYTHON_TRUE@afids_python_geocal_bindings_python__geocal_la_LDFLAGS = -module -avoid-version
-@BUILD_AFIDS_PYTHON_TRUE@afids_python_geocal_bindings_python__geocal_la_LIBADD = libgeocal.la 
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@@WITH_DOCUMENTATION_FALSE@SWIG_PYTHON_DOC = 
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@@WITH_DOCUMENTATION_TRUE@SWIG_PYTHON_DOC = $(srcdir)/afids_python/geocal/bindings/doc_python.i
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@CLEANFILES = afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.Pcc
+
+# Files that contain SWIG wrapper information.
+
+# Files that contain SWIG wrapper information.
+#  SWIG_SOURCES += @srcimplementation@/gdal_multi_file.i
+@BUILD_AFIDS_PYTHON_TRUE@SWIG_SOURCES = @libgeocal@/swig.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/vector.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/array.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/quaternion.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/shared_ptr_list.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/constant.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/covariance.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/wgs84_constant.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_exception.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/functor.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/vfunctor_with_derivative.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/statistic.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_gsl_fit.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_gsl_root.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_time.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/tiled_file.i \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_10) \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_coordinate.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/look_vector.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ground_coordinate.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/coordinate_converter.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ecr.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/eci.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geodetic.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/dem.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/map_info.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_rpc.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_ground_connection.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/frame_coordinate.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/camera.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/orbit.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/time_table.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ipi.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image_variable.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/sub_raster_image.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image_multi_band.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image_multi_band_variable.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/mask.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_datum.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/simple_dem.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/memory_raster_image.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/dem_map_info.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/feature_detector.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/forstner_feature_detector.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_matcher.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_to_image_match.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ccorr_matcher.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/lsm_matcher.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ccorr_lsm_matcher.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/rpc_image.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_multifile.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/did_datum.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/map_info_image_ground_connection.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/mask_image.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raster_averaged.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raster_subsample.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/calc_raster.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/calc_raster_multi_band.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/magnify_bilinear.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/magnify_replicate.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/smooth_image.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raster_image_tiled_file.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_tiled_file.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/memory_dem.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/map_reprojected_image.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/calc_map_projected.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/orbit_map_projected.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/igc_map_projected.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/igc_image_to_image_match.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/surface_image_to_image_match.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ipi_map_projected.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/location_to_file.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ray_intersect.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match.i \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_17) \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/memory_multi_band.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/spice_helper.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raw_raster_image.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/aircraft_orbit_data.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/orbit_quaternion_list.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/pan_sharpen.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/scale_image.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/apply_mask.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/rpc_image_ground_connection.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ipi_image_ground_connection.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/eci_tod.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/eci_tod_burl.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/quaternion_camera.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/refraction.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/orbit_data_image_ground_connection.i \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_18) \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_camera.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_orbit.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/ibis_file.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/quickbird_camera.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/spot_camera.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/spot_orbit.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/quickbird_orbit.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/quickbird_time_table.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_file.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_argument.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_dem.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_lite_file.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_multi_file.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/datum_geoid96.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/srtm_dem.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_raster_image.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/pos_export_orbit.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/worldview2_cloudmask.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/doughnut_average.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/material_detect.i \
+@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/paint_class.i \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_26)
+@BUILD_AFIDS_PYTHON_TRUE@pkgpythonswigdir = @pythondir@/geocal
+@BUILD_AFIDS_PYTHON_TRUE@pkgpythonswig_PYTHON =  \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonswigsrc@/__init__.py \
+@BUILD_AFIDS_PYTHON_TRUE@	$(patsubst %_wrap.cc, %.py, \
+@BUILD_AFIDS_PYTHON_TRUE@	$(SWIG_SRC))
+@BUILD_AFIDS_PYTHON_TRUE@pkgpythonswig_LTLIBRARIES = _swig_wrap.la
+@BUILD_AFIDS_PYTHON_TRUE@_swig_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(PYTHON_NUMPY_CPPFLAGS) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(SPICE_CFLAGS) $(FFTW_CPPFLAGS) \
+@BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(CARTO_CFLAGS) $(GDAL_CFLAGS) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(HDF5_CFLAGS) $(AM_CPPFLAGS) \
+@BUILD_AFIDS_PYTHON_TRUE@	-DSWIG_TYPE_TABLE=geocal
+@BUILD_AFIDS_PYTHON_TRUE@_swig_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
+@BUILD_AFIDS_PYTHON_TRUE@_swig_wrap_la_LDFLAGS = -module -avoid-version
+@BUILD_AFIDS_PYTHON_TRUE@_swig_wrap_la_LIBADD = libgeocal.la
+@BUILD_AFIDS_PYTHON_TRUE@_swig_wrap_la_SOURCES = $(SWIG_SRC) \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/swig_wrap.cc
 @BUILD_AFIDS_PYTHON_TRUE@libgeocal_la_LIBADD = $(CARTO_LIBS) libraw.la \
 @BUILD_AFIDS_PYTHON_TRUE@	$(VICAR_RTL_LIBS) $(FLIBS) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(SPICE_LIBS)
@@ -2298,7 +2211,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/bindings.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -2321,7 +2234,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
-$(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/bindings.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am:
+$(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am:
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -2337,41 +2250,6 @@ afids_python/script/setup_afids_python.sh: $(top_builddir)/config.status $(top_s
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 afids_python/geocal/lib/GeoCalCore/Support/global_fixture_default.cc: $(top_builddir)/config.status $(top_srcdir)/afids_python/geocal/lib/GeoCalCore/Support/global_fixture_default.cc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
-
-install-geocalpkgpyexecLTLIBRARIES: $(geocalpkgpyexec_LTLIBRARIES)
-	@$(NORMAL_INSTALL)
-	@list='$(geocalpkgpyexec_LTLIBRARIES)'; test -n "$(geocalpkgpyexecdir)" || list=; \
-	list2=; for p in $$list; do \
-	  if test -f $$p; then \
-	    list2="$$list2 $$p"; \
-	  else :; fi; \
-	done; \
-	test -z "$$list2" || { \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(geocalpkgpyexecdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(geocalpkgpyexecdir)" || exit 1; \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(geocalpkgpyexecdir)'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(geocalpkgpyexecdir)"; \
-	}
-
-uninstall-geocalpkgpyexecLTLIBRARIES:
-	@$(NORMAL_UNINSTALL)
-	@list='$(geocalpkgpyexec_LTLIBRARIES)'; test -n "$(geocalpkgpyexecdir)" || list=; \
-	for p in $$list; do \
-	  $(am__strip_dir) \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(geocalpkgpyexecdir)/$$f'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(geocalpkgpyexecdir)/$$f"; \
-	done
-
-clean-geocalpkgpyexecLTLIBRARIES:
-	-test -z "$(geocalpkgpyexec_LTLIBRARIES)" || rm -f $(geocalpkgpyexec_LTLIBRARIES)
-	@list='$(geocalpkgpyexec_LTLIBRARIES)'; \
-	locs=`for p in $$list; do echo $$p; done | \
-	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
-	      sort -u`; \
-	test -z "$$locs" || { \
-	  echo rm -f $${locs}; \
-	  rm -f $${locs}; \
-	}
 
 install-libLTLIBRARIES: $(lib_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
@@ -2418,20 +2296,55 @@ clean-noinstLTLIBRARIES:
 	  echo rm -f $${locs}; \
 	  rm -f $${locs}; \
 	}
-afids_python/geocal/bindings/python/all/$(am__dirstamp):
-	@$(MKDIR_P) afids_python/geocal/bindings/python/all
-	@: > afids_python/geocal/bindings/python/all/$(am__dirstamp)
-afids_python/geocal/bindings/python/all/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) afids_python/geocal/bindings/python/all/$(DEPDIR)
-	@: > afids_python/geocal/bindings/python/all/$(DEPDIR)/$(am__dirstamp)
-afids_python/geocal/bindings/python/all/afids_python_geocal_bindings_python__geocal_la-geocal_swig_python_wrap.lo:  \
-	afids_python/geocal/bindings/python/all/$(am__dirstamp) \
-	afids_python/geocal/bindings/python/all/$(DEPDIR)/$(am__dirstamp)
-afids_python/geocal/bindings/python/$(am__dirstamp):
-	@$(MKDIR_P) afids_python/geocal/bindings/python
-	@: > afids_python/geocal/bindings/python/$(am__dirstamp)
-afids_python/geocal/bindings/python/_geocal.la: $(afids_python_geocal_bindings_python__geocal_la_OBJECTS) $(afids_python_geocal_bindings_python__geocal_la_DEPENDENCIES) $(EXTRA_afids_python_geocal_bindings_python__geocal_la_DEPENDENCIES) afids_python/geocal/bindings/python/$(am__dirstamp)
-	$(AM_V_CXXLD)$(afids_python_geocal_bindings_python__geocal_la_LINK) $(am_afids_python_geocal_bindings_python__geocal_la_rpath) $(afids_python_geocal_bindings_python__geocal_la_OBJECTS) $(afids_python_geocal_bindings_python__geocal_la_LIBADD) $(LIBS)
+
+install-pkgpythonswigLTLIBRARIES: $(pkgpythonswig_LTLIBRARIES)
+	@$(NORMAL_INSTALL)
+	@list='$(pkgpythonswig_LTLIBRARIES)'; test -n "$(pkgpythonswigdir)" || list=; \
+	list2=; for p in $$list; do \
+	  if test -f $$p; then \
+	    list2="$$list2 $$p"; \
+	  else :; fi; \
+	done; \
+	test -z "$$list2" || { \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(pkgpythonswigdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(pkgpythonswigdir)" || exit 1; \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(pkgpythonswigdir)'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(pkgpythonswigdir)"; \
+	}
+
+uninstall-pkgpythonswigLTLIBRARIES:
+	@$(NORMAL_UNINSTALL)
+	@list='$(pkgpythonswig_LTLIBRARIES)'; test -n "$(pkgpythonswigdir)" || list=; \
+	for p in $$list; do \
+	  $(am__strip_dir) \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(pkgpythonswigdir)/$$f'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(pkgpythonswigdir)/$$f"; \
+	done
+
+clean-pkgpythonswigLTLIBRARIES:
+	-test -z "$(pkgpythonswig_LTLIBRARIES)" || rm -f $(pkgpythonswig_LTLIBRARIES)
+	@list='$(pkgpythonswig_LTLIBRARIES)'; \
+	locs=`for p in $$list; do echo $$p; done | \
+	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
+	      sort -u`; \
+	test -z "$$locs" || { \
+	  echo rm -f $${locs}; \
+	  rm -f $${locs}; \
+	}
+@swigsrc@/$(am__dirstamp):
+	@$(MKDIR_P) @swigsrc@
+	@: > @swigsrc@/$(am__dirstamp)
+@swigsrc@/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @swigsrc@/$(DEPDIR)
+	@: > @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-constant_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-generic_object_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-swig_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+_swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__swig_wrap_la_DEPENDENCIES) 
+	$(AM_V_CXXLD)$(_swig_wrap_la_LINK) $(am__swig_wrap_la_rpath) $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_LIBADD) $(LIBS)
 @srcsupport@/$(am__dirstamp):
 	@$(MKDIR_P) @srcsupport@
 	@: > @srcsupport@/$(am__dirstamp)
@@ -3191,8 +3104,8 @@ mostlyclean-compile:
 	-rm -f @srcraw@/*.lo
 	-rm -f @srcsupport@/*.$(OBJEXT)
 	-rm -f @srcsupport@/*.lo
-	-rm -f afids_python/geocal/bindings/python/all/*.$(OBJEXT)
-	-rm -f afids_python/geocal/bindings/python/all/*.lo
+	-rm -f @swigsrc@/*.$(OBJEXT)
+	-rm -f @swigsrc@/*.lo
 	-rm -f afids_python/geocal/lib/*.$(OBJEXT)
 
 distclean-compile:
@@ -3394,7 +3307,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-geocal_time.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-hdf_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-statistic.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@afids_python/geocal/bindings/python/all/$(DEPDIR)/afids_python_geocal_bindings_python__geocal_la-geocal_swig_python_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-constant_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-generic_object_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Po@am__quote@
 
 .cc.o:
@@ -3421,12 +3336,26 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
 
-afids_python/geocal/bindings/python/all/afids_python_geocal_bindings_python__geocal_la-geocal_swig_python_wrap.lo: afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(afids_python_geocal_bindings_python__geocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT afids_python/geocal/bindings/python/all/afids_python_geocal_bindings_python__geocal_la-geocal_swig_python_wrap.lo -MD -MP -MF afids_python/geocal/bindings/python/all/$(DEPDIR)/afids_python_geocal_bindings_python__geocal_la-geocal_swig_python_wrap.Tpo -c -o afids_python/geocal/bindings/python/all/afids_python_geocal_bindings_python__geocal_la-geocal_swig_python_wrap.lo `test -f 'afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc' || echo '$(srcdir)/'`afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) afids_python/geocal/bindings/python/all/$(DEPDIR)/afids_python_geocal_bindings_python__geocal_la-geocal_swig_python_wrap.Tpo afids_python/geocal/bindings/python/all/$(DEPDIR)/afids_python_geocal_bindings_python__geocal_la-geocal_swig_python_wrap.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc' object='afids_python/geocal/bindings/python/all/afids_python_geocal_bindings_python__geocal_la-geocal_swig_python_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@swigsrc@/_swig_wrap_la-constant_wrap.lo: @swigsrc@/constant_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-constant_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-constant_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-constant_wrap.lo `test -f '@swigsrc@/constant_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/constant_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-constant_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-constant_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/constant_wrap.cc' object='@swigsrc@/_swig_wrap_la-constant_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(afids_python_geocal_bindings_python__geocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o afids_python/geocal/bindings/python/all/afids_python_geocal_bindings_python__geocal_la-geocal_swig_python_wrap.lo `test -f 'afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc' || echo '$(srcdir)/'`afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-constant_wrap.lo `test -f '@swigsrc@/constant_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/constant_wrap.cc
+
+@swigsrc@/_swig_wrap_la-generic_object_wrap.lo: @swigsrc@/generic_object_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-generic_object_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-generic_object_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-generic_object_wrap.lo `test -f '@swigsrc@/generic_object_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/generic_object_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-generic_object_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-generic_object_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/generic_object_wrap.cc' object='@swigsrc@/_swig_wrap_la-generic_object_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-generic_object_wrap.lo `test -f '@swigsrc@/generic_object_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/generic_object_wrap.cc
+
+@swigsrc@/_swig_wrap_la-swig_wrap.lo: @swigsrc@/swig_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-swig_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-swig_wrap.lo `test -f '@swigsrc@/swig_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/swig_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/swig_wrap.cc' object='@swigsrc@/_swig_wrap_la-swig_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-swig_wrap.lo `test -f '@swigsrc@/swig_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/swig_wrap.cc
 
 @srcsupport@/libgeocal_la-geocal_gsl_matrix.lo: @srcsupport@/geocal_gsl_matrix.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/libgeocal_la-geocal_gsl_matrix.lo -MD -MP -MF @srcsupport@/$(DEPDIR)/libgeocal_la-geocal_gsl_matrix.Tpo -c -o @srcsupport@/libgeocal_la-geocal_gsl_matrix.lo `test -f '@srcsupport@/geocal_gsl_matrix.cc' || echo '$(srcdir)/'`@srcsupport@/geocal_gsl_matrix.cc
@@ -5500,8 +5429,7 @@ clean-libtool:
 	-rm -rf @srcinterface@/.libs @srcinterface@/_libs
 	-rm -rf @srcraw@/.libs @srcraw@/_libs
 	-rm -rf @srcsupport@/.libs @srcsupport@/_libs
-	-rm -rf afids_python/geocal/bindings/python/.libs afids_python/geocal/bindings/python/_libs
-	-rm -rf afids_python/geocal/bindings/python/all/.libs afids_python/geocal/bindings/python/all/_libs
+	-rm -rf @swigsrc@/.libs @swigsrc@/_libs
 
 distclean-libtool:
 	-rm -f libtool config.lt
@@ -5553,12 +5481,12 @@ uninstall-afidspkgpythonPYTHON:
 	  $(am__uninstall_files_from_dir) || st=$$?; \
 	done; \
 	exit $$st
-install-geocalpkgpythonPYTHON: $(geocalpkgpython_PYTHON)
+install-pkgpythonswigPYTHON: $(pkgpythonswig_PYTHON)
 	@$(NORMAL_INSTALL)
-	@list='$(geocalpkgpython_PYTHON)'; dlist=; list2=; test -n "$(geocalpkgpythondir)" || list=; \
+	@list='$(pkgpythonswig_PYTHON)'; dlist=; list2=; test -n "$(pkgpythonswigdir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(geocalpkgpythondir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(geocalpkgpythondir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(pkgpythonswigdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(pkgpythonswigdir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then b=; else b="$(srcdir)/"; fi; \
@@ -5570,20 +5498,20 @@ install-geocalpkgpythonPYTHON: $(geocalpkgpython_PYTHON)
 	done; \
 	for file in $$list2; do echo $$file; done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(geocalpkgpythondir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(geocalpkgpythondir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(pkgpythonswigdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(pkgpythonswigdir)" || exit $$?; \
 	done || exit $$?; \
 	if test -n "$$dlist"; then \
 	  $(am__py_compile) --destdir "$(DESTDIR)" \
-	                    --basedir "$(geocalpkgpythondir)" $$dlist; \
+	                    --basedir "$(pkgpythonswigdir)" $$dlist; \
 	else :; fi
 
-uninstall-geocalpkgpythonPYTHON:
+uninstall-pkgpythonswigPYTHON:
 	@$(NORMAL_UNINSTALL)
-	@list='$(geocalpkgpython_PYTHON)'; test -n "$(geocalpkgpythondir)" || list=; \
+	@list='$(pkgpythonswig_PYTHON)'; test -n "$(pkgpythonswigdir)" || list=; \
 	py_files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	test -n "$$py_files" || exit 0; \
-	dir='$(DESTDIR)$(geocalpkgpythondir)'; \
+	dir='$(DESTDIR)$(pkgpythonswigdir)'; \
 	pyc_files=`echo "$$py_files" | sed 's|$$|c|'`; \
 	pyo_files=`echo "$$py_files" | sed 's|$$|o|'`; \
 	py_files_pep3147=`echo "$$py_files" | $(am__pep3147_tweak)`; \
@@ -6242,7 +6170,7 @@ all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(geocalpkgpyexecdir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspkgpythondir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(afidspkgpythondir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspkgpythondir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspkgpythondir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -6272,7 +6200,6 @@ mostlyclean-generic:
 	-test -z "$(TEST_SUITE_LOG)" || rm -f $(TEST_SUITE_LOG)
 
 clean-generic:
-	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
@@ -6289,9 +6216,8 @@ distclean-generic:
 	-rm -f @srcraw@/$(am__dirstamp)
 	-rm -f @srcsupport@/$(DEPDIR)/$(am__dirstamp)
 	-rm -f @srcsupport@/$(am__dirstamp)
-	-rm -f afids_python/geocal/bindings/python/$(am__dirstamp)
-	-rm -f afids_python/geocal/bindings/python/all/$(DEPDIR)/$(am__dirstamp)
-	-rm -f afids_python/geocal/bindings/python/all/$(am__dirstamp)
+	-rm -f @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @swigsrc@/$(am__dirstamp)
 	-rm -f afids_python/geocal/lib/$(DEPDIR)/$(am__dirstamp)
 	-rm -f afids_python/geocal/lib/$(am__dirstamp)
 
@@ -6302,13 +6228,13 @@ maintainer-clean-generic:
 clean: clean-am
 
 clean-am: clean-binPROGRAMS clean-checkPROGRAMS clean-generic \
-	clean-geocalpkgpyexecLTLIBRARIES clean-libLTLIBRARIES \
-	clean-libtool clean-local clean-noinstLTLIBRARIES \
+	clean-libLTLIBRARIES clean-libtool clean-local \
+	clean-noinstLTLIBRARIES clean-pkgpythonswigLTLIBRARIES \
 	mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf @srccartlab@/$(DEPDIR) @srcgtk@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) afids_python/geocal/bindings/python/all/$(DEPDIR) afids_python/geocal/lib/$(DEPDIR)
+	-rm -rf @srccartlab@/$(DEPDIR) @srcgtk@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @swigsrc@/$(DEPDIR) afids_python/geocal/lib/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-libtool distclean-tags
@@ -6329,11 +6255,12 @@ install-data-am: install-afidspkgpythonPYTHON \
 	install-dist_afidspkgpythonDATA \
 	install-dist_afidspythonvdevDATA \
 	install-dist_afidspythonvdevSCRIPTS install-dist_sdbxdocDATA \
-	install-geocalincHEADERS install-geocalpkgpythonPYTHON \
-	install-includeHEADERS install-installafidspythonDATA \
-	install-librawHEADERS install-pkgconfigDATA \
-	install-sdbxHEADERS install-sdbxbtreeHEADERS \
-	install-sdbxrtreeHEADERS install-sdbxsupportHEADERS
+	install-geocalincHEADERS install-includeHEADERS \
+	install-installafidspythonDATA install-librawHEADERS \
+	install-pkgconfigDATA install-pkgpythonswigLTLIBRARIES \
+	install-pkgpythonswigPYTHON install-sdbxHEADERS \
+	install-sdbxbtreeHEADERS install-sdbxrtreeHEADERS \
+	install-sdbxsupportHEADERS
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
 install-dvi: install-dvi-am
@@ -6341,7 +6268,7 @@ install-dvi: install-dvi-am
 install-dvi-am:
 
 install-exec-am: install-binPROGRAMS install-dist_binSCRIPTS \
-	install-geocalpkgpyexecLTLIBRARIES install-libLTLIBRARIES
+	install-libLTLIBRARIES
 
 install-html: install-html-am
 
@@ -6366,7 +6293,7 @@ installcheck-am: installcheck-local
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf @srccartlab@/$(DEPDIR) @srcgtk@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) afids_python/geocal/bindings/python/all/$(DEPDIR) afids_python/geocal/lib/$(DEPDIR)
+	-rm -rf @srccartlab@/$(DEPDIR) @srcgtk@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @swigsrc@/$(DEPDIR) afids_python/geocal/lib/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -6388,13 +6315,13 @@ uninstall-am: uninstall-afidspkgpythonPYTHON uninstall-binPROGRAMS \
 	uninstall-dist_afidspythonvdevDATA \
 	uninstall-dist_afidspythonvdevSCRIPTS \
 	uninstall-dist_binSCRIPTS uninstall-dist_sdbxdocDATA \
-	uninstall-geocalincHEADERS \
-	uninstall-geocalpkgpyexecLTLIBRARIES \
-	uninstall-geocalpkgpythonPYTHON uninstall-includeHEADERS \
+	uninstall-geocalincHEADERS uninstall-includeHEADERS \
 	uninstall-installafidspythonDATA uninstall-libLTLIBRARIES \
 	uninstall-librawHEADERS uninstall-pkgconfigDATA \
-	uninstall-sdbxHEADERS uninstall-sdbxbtreeHEADERS \
-	uninstall-sdbxrtreeHEADERS uninstall-sdbxsupportHEADERS
+	uninstall-pkgpythonswigLTLIBRARIES \
+	uninstall-pkgpythonswigPYTHON uninstall-sdbxHEADERS \
+	uninstall-sdbxbtreeHEADERS uninstall-sdbxrtreeHEADERS \
+	uninstall-sdbxsupportHEADERS
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
 .MAKE: all check check-am install install-am install-data-am \
@@ -6402,11 +6329,11 @@ uninstall-am: uninstall-afidspkgpythonPYTHON uninstall-binPROGRAMS \
 
 .PHONY: CTAGS GTAGS TAGS all all-am am--refresh check check-TESTS \
 	check-am clean clean-binPROGRAMS clean-checkPROGRAMS \
-	clean-cscope clean-generic clean-geocalpkgpyexecLTLIBRARIES \
-	clean-libLTLIBRARIES clean-libtool clean-local \
-	clean-noinstLTLIBRARIES cscope cscopelist-am ctags ctags-am \
-	dist dist-all dist-bzip2 dist-gzip dist-lzip dist-shar \
-	dist-tarZ dist-xz dist-zip distcheck distclean \
+	clean-cscope clean-generic clean-libLTLIBRARIES clean-libtool \
+	clean-local clean-noinstLTLIBRARIES \
+	clean-pkgpythonswigLTLIBRARIES cscope cscopelist-am ctags \
+	ctags-am dist dist-all dist-bzip2 dist-gzip dist-lzip \
+	dist-shar dist-tarZ dist-xz dist-zip distcheck distclean \
 	distclean-compile distclean-generic distclean-libtool \
 	distclean-tags distcleancheck distdir distuninstallcheck dvi \
 	dvi-am html html-am info info-am install \
@@ -6417,29 +6344,28 @@ uninstall-am: uninstall-afidspkgpythonPYTHON uninstall-binPROGRAMS \
 	install-dist_afidspythonvdevSCRIPTS install-dist_binSCRIPTS \
 	install-dist_sdbxdocDATA install-dvi install-dvi-am \
 	install-exec install-exec-am install-geocalincHEADERS \
-	install-geocalpkgpyexecLTLIBRARIES \
-	install-geocalpkgpythonPYTHON install-html install-html-am \
-	install-includeHEADERS install-info install-info-am \
-	install-installafidspythonDATA install-libLTLIBRARIES \
-	install-librawHEADERS install-man install-pdf install-pdf-am \
-	install-pkgconfigDATA install-ps install-ps-am \
-	install-sdbxHEADERS install-sdbxbtreeHEADERS \
-	install-sdbxrtreeHEADERS install-sdbxsupportHEADERS \
-	install-strip installcheck installcheck-am installcheck-local \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am recheck tags tags-am \
-	uninstall uninstall-afidspkgpythonPYTHON uninstall-am \
+	install-html install-html-am install-includeHEADERS \
+	install-info install-info-am install-installafidspythonDATA \
+	install-libLTLIBRARIES install-librawHEADERS install-man \
+	install-pdf install-pdf-am install-pkgconfigDATA \
+	install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON \
+	install-ps install-ps-am install-sdbxHEADERS \
+	install-sdbxbtreeHEADERS install-sdbxrtreeHEADERS \
+	install-sdbxsupportHEADERS install-strip installcheck \
+	installcheck-am installcheck-local installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am recheck tags tags-am uninstall \
+	uninstall-afidspkgpythonPYTHON uninstall-am \
 	uninstall-binPROGRAMS uninstall-dist_afidspkgpythonDATA \
 	uninstall-dist_afidspythonvdevDATA \
 	uninstall-dist_afidspythonvdevSCRIPTS \
 	uninstall-dist_binSCRIPTS uninstall-dist_sdbxdocDATA \
-	uninstall-geocalincHEADERS \
-	uninstall-geocalpkgpyexecLTLIBRARIES \
-	uninstall-geocalpkgpythonPYTHON uninstall-hook \
+	uninstall-geocalincHEADERS uninstall-hook \
 	uninstall-includeHEADERS uninstall-installafidspythonDATA \
 	uninstall-libLTLIBRARIES uninstall-librawHEADERS \
-	uninstall-pkgconfigDATA uninstall-sdbxHEADERS \
+	uninstall-pkgconfigDATA uninstall-pkgpythonswigLTLIBRARIES \
+	uninstall-pkgpythonswigPYTHON uninstall-sdbxHEADERS \
 	uninstall-sdbxbtreeHEADERS uninstall-sdbxrtreeHEADERS \
 	uninstall-sdbxsupportHEADERS
 
@@ -6460,59 +6386,68 @@ installcheck-local: $(INSTALLCHECK_HOOK)
 #dcraw_LDADD = libraw.la
 #AM_CPPFLAGS += -I$(srcdir)/@srcraw@
 
+# Allow searchs for .i, .h. and .cc files in this directory
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.cc $(srcdir)/@srcsupport@
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.h $(srcdir)/@srcsupport@
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@srcsupport@
+
+# Allow searchs for .i in this directory
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@libgeocal@
+
+@BUILD_AFIDS_PYTHON_TRUE@install-python-2: install-libLTLIBRARIES install-pkgpythonLTLIBRARIES install-pkgpythonPYTHON install-fpscriptDATA install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
+@BUILD_AFIDS_PYTHON_TRUE@	$(noop)
+
+@BUILD_AFIDS_PYTHON_TRUE@install-python: all
+@BUILD_AFIDS_PYTHON_TRUE@	$(MAKE) -j 1 install-python-2 
+#install-python: 
+#	$(noop)
+
 # Only generate these files in maintainer mode, otherwise consider them
 # as input.
 
-#=================================================================
-# Create list of all swig files
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(swigsrc)/%_wrap.Pcc : %.i %.cc %.h
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.cc" >> $@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.h" >> $@
 
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/afids_python/geocal/bindings/all.i : $(SWIG_SOURCES) $(srcdir)/afids_python/geocal/bindings/all_base.i
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	cat $(srcdir)/afids_python/geocal/bindings/all_base.i > ${@} && \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@        for i in ${SWIG_SOURCES}; do \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@          echo "%include \"../../../$$i\"" >> ${@}; \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@        done
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(swigsrc)/%_wrap.Pcc : %.i %.h
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.h" >> $@
 
-# Only generate these files in maintainer mode, otherwise consider them
-# as input.
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(swigsrc)/%_wrap.Pcc : %.i
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
 
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/afids_python/geocal/bindings/doc_python.i : doc/geocal.tag config/doxy2swig.py $(PYTHON_TARGET)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) $(PYTHON) $(srcdir)/config/doxy2swig.py doc/geocal/xml/index.xml $@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC)))
 
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.Pcc : $(srcdir)/afids_python/geocal/bindings/all.i
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(MKDIR_P) $(srcdir)/afids_python/geocal/bindings/python/all
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $@ -o $(srcdir)/afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.cc $<
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	mkdir -p $*_doc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	OUTDIR=$*_doc INPUT="$(<D)/$*.h $(<D)/$*.cc" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm -r $*_doc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "%include \"$*.i\"" >> $*_doc.i
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $*_doc.i
 
-# Note multiple targets here. For pattern rules, GNU make knows these get
-# created at the same time (unlike static rules, where this just means two
-# things created by running the same rule twice)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/afids_python/geocal/bindings/python/%/geocal_swig_python_wrap.cc $(srcdir)/afids_python/geocal/bindings/python/%/geocal.py: $(srcdir)/afids_python/geocal/bindings/%.i $(SWIG_PYTHON_DOC)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(MKDIR_P) $(srcdir)/afids_python/geocal/bindings/python/all
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -o $(srcdir)/afids_python/geocal/bindings/python/$*/geocal_swig_python_wrap.cc $<
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	mkdir -p $*_doc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	OUTDIR=$*_doc INPUT="$(<D)/$*.h" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm -r $*_doc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "%include \"$*.i\"" >> $*_doc.i
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $*_doc.i
 
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@-include afids_python/geocal/bindings/python/all/geocal_swig_python_wrap.Pcc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
 
-@BUILD_AFIDS_PYTHON_TRUE@clean_geocalpkgpython:
-@BUILD_AFIDS_PYTHON_TRUE@	rm -rf "$(DESTDIR)$(geocalpkgpythondir)"
-
-@BUILD_AFIDS_PYTHON_TRUE@python_test :
-@BUILD_AFIDS_PYTHON_TRUE@	export PYTHONPATH=$(pythondir) && \
-@BUILD_AFIDS_PYTHON_TRUE@        export LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) && \
-@BUILD_AFIDS_PYTHON_TRUE@        export UNIT_TEST_DATA=$(abs_srcdir)/afids_python/geocal/unit_test_data; \
-@BUILD_AFIDS_PYTHON_TRUE@        $(PYTHON) $(geocalpkgpythontestdir)/run_all.py
-
-# Only install python stuff and test. Does not install libgeocal even 
-# if it has changed
-@BUILD_AFIDS_PYTHON_TRUE@fast_python_test: afids_python/geocal/bindings/python/_geocal.la install-geocalpkgpythonPYTHON install-geocalpkgpyexecLTLIBRARIES
-@BUILD_AFIDS_PYTHON_TRUE@	@echo "=========================================================="
-@BUILD_AFIDS_PYTHON_TRUE@	@echo "This does a fast install and test of the python stuff. This"
-@BUILD_AFIDS_PYTHON_TRUE@	@echo "does *not* install libgeocal or executables, even "
-@BUILD_AFIDS_PYTHON_TRUE@	@echo "if it has changed. But this test is faster to run when you "
-@BUILD_AFIDS_PYTHON_TRUE@	@echo "are just working on the SWIG stuff."
-@BUILD_AFIDS_PYTHON_TRUE@	@echo "=========================================================="
-@BUILD_AFIDS_PYTHON_TRUE@	export PYTHONPATH=$(pythondir) && \
-@BUILD_AFIDS_PYTHON_TRUE@        export LD_LIBRARY_PATH=$(libdir):$(LD_LIBRARY_PATH) && \
-@BUILD_AFIDS_PYTHON_TRUE@        export UNIT_TEST_DATA=$(abs_srcdir)/afids_python/geocal/unit_test_data; \
-@BUILD_AFIDS_PYTHON_TRUE@        $(PYTHON) $(abs_srcdir)/afids_python/geocal/bindings/python/test/run_all.py
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@-include $(patsubst %.cc, %.Pcc, $(SWIG_SRC))
 # Variables used in testing
 @BUILD_AFIDS_PYTHON_TRUE@export abs_top_srcdir 
 @BUILD_AFIDS_PYTHON_TRUE@export run_test = *

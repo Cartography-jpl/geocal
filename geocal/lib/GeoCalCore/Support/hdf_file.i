@@ -1,13 +1,17 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "hdf_file.h"
 %}
 
+%base_import(generic_object)
 %geocal_shared_ptr(GeoCal::HdfFile);
 
 namespace GeoCal {
-class HdfFile {
+class HdfFile : public GenericObject {
 public:
   std::string print_to_string();
   enum Mode {READ, CREATE, READ_WRITE};

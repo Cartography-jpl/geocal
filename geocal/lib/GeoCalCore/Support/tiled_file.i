@@ -1,6 +1,7 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+%include "common.i"
+
 %{
 #include "tiled_file.h"
 %}

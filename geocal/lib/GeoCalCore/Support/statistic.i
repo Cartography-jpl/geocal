@@ -1,14 +1,18 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "statistic.h"
 %}
 
-%geocal_shared_ptr(Statistic);
+%base_import(generic_object)
+
+%geocal_shared_ptr(GeoCal::Statistic);
 
 namespace GeoCal {
-class Statistic {
+class Statistic : public GenericObject {
 public:
   Statistic();
   void add(double x);

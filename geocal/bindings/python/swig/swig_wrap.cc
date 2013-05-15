@@ -9,6 +9,8 @@ std::map<type_index, boost::shared_ptr<SwigTypeMapperBase> >
 
 extern "C" {
   void init_swig_wrap(void);
+  void init_swig_std(void);
+  void init_swig_array(void);
   void init_constant(void);
   void init_generic_object(void);
   void init_covariance(void);
@@ -16,6 +18,12 @@ extern "C" {
   void init_geocal_exception(void);
   void init_functor(void);
   void init_vfunctor_with_derivative(void);
+  void init_statistic(void);
+  void init_geocal_gsl_fit(void);
+  void init_geocal_gsl_root(void);
+  void init_geocal_time(void);
+  void init_tiled_file(void);
+  void init_hdf_file(void);
 }
 
 // Used throughout SWIG wrapper, define here because it is convenient.
@@ -77,6 +85,8 @@ void init_swig_wrap(void)
     return;
   }
   
+  init_extension_module(package, "_swig_std", init_swig_std);
+  init_extension_module(package, "_swig_array", init_swig_array);
   init_extension_module(package, "_constant", init_constant);
   init_extension_module(package, "_generic_object", init_generic_object);
   init_extension_module(package, "_covariance", init_covariance);
@@ -84,4 +94,10 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_exception", init_geocal_exception);
   init_extension_module(package, "_functor", init_functor);
   init_extension_module(package, "_vfunctor_with_derivative", init_vfunctor_with_derivative);
+  init_extension_module(package, "_statistic", init_statistic);
+  init_extension_module(package, "_geocal_gsl_fit", init_geocal_gsl_fit);
+  init_extension_module(package, "_geocal_gsl_root", init_geocal_gsl_root);
+  init_extension_module(package, "_geocal_time", init_geocal_time);
+  init_extension_module(package, "_tiled_file", init_tiled_file);
+  init_extension_module(package, "_hdf_file", init_hdf_file);
 }

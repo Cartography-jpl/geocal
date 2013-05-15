@@ -1,9 +1,11 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+%include "common.i"
+
 %{
 #include "geocal_gsl_root.h"
 %}
+%import "functor.i"
 
 namespace GeoCal {
 blitz::Array<double, 1> gsl_root(const VFunctor& F, 

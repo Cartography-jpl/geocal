@@ -20,6 +20,7 @@ geocalinc_HEADERS+= @srcsupport@/memory_map_array.h
 geocalinc_HEADERS+= @srcsupport@/geocal_gsl_matrix.h
 geocalinc_HEADERS+= @srcsupport@/geocal_matrix.h
 geocalinc_HEADERS+= @srcsupport@/boost/backtrace.hpp
+libgeocal_la_SOURCES+= @srcsupport@/boost/backtrace.cpp
 libgeocal_la_SOURCES+= @srcsupport@/geocal_gsl_matrix.cc
 geocalinc_HEADERS+= @srcsupport@/geocal_gsl_fit.h
 libgeocal_la_SOURCES+= @srcsupport@/geocal_gsl_fit.cc
@@ -49,13 +50,13 @@ SWIG_SRC += @swigsrc@/wgs84_constant_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_exception_wrap.cc
 SWIG_SRC += @swigsrc@/functor_wrap.cc
 SWIG_SRC += @swigsrc@/vfunctor_with_derivative_wrap.cc
-SWIG_SOURCES += @srcsupport@/statistic.i
-SWIG_SOURCES += @srcsupport@/geocal_gsl_fit.i
-SWIG_SOURCES += @srcsupport@/geocal_gsl_root.i
-SWIG_SOURCES += @srcsupport@/geocal_time.i
-SWIG_SOURCES += @srcsupport@/tiled_file.i
+SWIG_SRC += @swigsrc@/statistic_wrap.cc
+SWIG_SRC += @swigsrc@/geocal_gsl_fit_wrap.cc
+SWIG_SRC += @swigsrc@/geocal_gsl_root_wrap.cc
+SWIG_SRC += @swigsrc@/geocal_time_wrap.cc
+SWIG_SRC += @swigsrc@/tiled_file_wrap.cc
 if HAVE_HDF5
-SWIG_SOURCES += @srcsupport@/hdf_file.i
+SWIG_SRC += @swigsrc@/hdf_file_wrap.cc
 endif
 # Test files
 EXTRA_DIST += @srcsupport@/unit_test_support.h

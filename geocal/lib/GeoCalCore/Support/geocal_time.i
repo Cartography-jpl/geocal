@@ -1,11 +1,15 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+%include <std_vector.i>
+%include "common.i"
+
 %{
 #include "geocal_time.h"
 %}
 
-%geocal_shared_ptr(Time);
+%base_import(generic_object)
+
+%geocal_shared_ptr(GeoCal::Time);
 %pythoncode {
 import datetime
 import time
@@ -15,7 +19,7 @@ def _new_time(pgs):
 }
 
 namespace GeoCal {
-class Time {
+class Time : public GenericObject {
 public:
   static Time time_et(double et);
   static Time time_pgs(double pgs);

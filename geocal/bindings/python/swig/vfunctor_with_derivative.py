@@ -108,9 +108,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.functor
-import geocal_swig.generic_object
-class VFunctorWithDerivative(geocal_swig.functor.VFunctor):
+import geocal.functor
+import geocal.generic_object
+class VFunctorWithDerivative(geocal.functor.VFunctor):
     """
     C++ includes: vfunctor_with_derivative.h
 

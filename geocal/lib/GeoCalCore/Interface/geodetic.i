@@ -1,8 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "geodetic.h"
 %}
+
+%base_import(ground_coordinate)
 
 %geocal_shared_ptr(GeoCal::Geodetic);
 %geocal_shared_ptr(GeoCal::Geocentric);

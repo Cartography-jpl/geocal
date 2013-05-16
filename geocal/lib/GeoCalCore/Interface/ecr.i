@@ -1,12 +1,17 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "ecr.h"
+#include "geodetic.h"
 %}
+
+%base_import(ground_coordinate)
 
 %geocal_shared_ptr(GeoCal::Ecr);
 namespace GeoCal {
-class CartesianFixed;
 class Geodetic;
 
 // Handle returns as a argout
@@ -33,7 +38,10 @@ public:
   const;
   virtual boost::shared_ptr<CartesianFixed> 
   create(boost::array<double, 3> P) const;
-  Geodetic convert_to_geodetic() const;
+  %extend {
+    boost::shared_ptr<GeoCal::Geodetic> convert_to_geodetic() const
+    { return boost::shared_ptr<GeoCal::Geodetic>(new GeoCal::Geodetic($self->convert_to_geodetic())); }
+  }
   virtual boost::shared_ptr<CartesianFixed>
   reference_surface_intersect_approximate(
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0) 

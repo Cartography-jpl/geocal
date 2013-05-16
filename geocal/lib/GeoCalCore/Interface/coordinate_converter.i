@@ -1,19 +1,18 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+%include "common.i"
 %{
 #include "coordinate_converter.h"
-#include "ogr_coordinate.h"
 %}
+
+%base_import(generic_object)
+%import "ground_coordinate.i"
 
 %geocal_shared_ptr(GeoCal::CoordinateConverter);
 %geocal_shared_ptr(GeoCal::GeodeticConverter);
 
-%shared_ptr_dynamic_list(GeoCal::CoordinateConverter,
-			 GeoCal::GeodeticConverter,
-			 GeoCal::OgrCoordinateConverter)
-
 namespace GeoCal {
-class CoordinateConverter {
+class CoordinateConverter : public GenericObject {
 public:
   virtual boost::shared_ptr<GroundCoordinate>
     convert_from_coordinate(double X, double Y, double Height = 0) const = 0;
@@ -29,9 +28,6 @@ public:
     convert_from_coordinate(double X, double Y, double Height = 0) const;
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
   double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
-  %pythoncode {
-def __reduce__(self):
-  return _new_from_init, (self.__class__,)
-  }
+  %pickle_init(1);
 };
 }

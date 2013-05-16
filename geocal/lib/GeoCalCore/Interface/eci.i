@@ -1,8 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "eci.h"
 %}
+%base_import(ground_coordinate)
+
 %geocal_shared_ptr(GeoCal::Eci);
 namespace GeoCal {
 class Eci : public CartesianInertial {

@@ -108,8 +108,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.generic_object
-class HdfFile(geocal_swig.generic_object.GenericObject):
+import geocal.generic_object
+class HdfFile(geocal.generic_object.GenericObject):
     """
     This class reads a HDF5 file.
 

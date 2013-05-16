@@ -8,7 +8,7 @@
 
 from sys import version_info
 if version_info >= (3,0,0):
-    new_instancemethod = lambda func, inst, cls: _geocal_gsl_root.SWIG_PyInstanceMethod_New(func)
+    new_instancemethod = lambda func, inst, cls: _eci.SWIG_PyInstanceMethod_New(func)
 else:
     from new import instancemethod as new_instancemethod
 if version_info >= (2,6,0):
@@ -17,20 +17,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_geocal_gsl_root', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_eci', [dirname(__file__)])
         except ImportError:
-            import _geocal_gsl_root
-            return _geocal_gsl_root
+            import _eci
+            return _eci
         if fp is not None:
             try:
-                _mod = imp.load_module('_geocal_gsl_root', fp, pathname, description)
+                _mod = imp.load_module('_eci', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _geocal_gsl_root = swig_import_helper()
+    _eci = swig_import_helper()
     del swig_import_helper
 else:
-    import _geocal_gsl_root
+    import _eci
 del version_info
 try:
     _swig_property = property
@@ -88,7 +88,7 @@ except:
     weakref_proxy = lambda x: x
 
 
-SHARED_PTR_DISOWN = _geocal_gsl_root.SHARED_PTR_DISOWN
+SHARED_PTR_DISOWN = _eci.SHARED_PTR_DISOWN
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -108,45 +108,49 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal.ground_coordinate
 import geocal.generic_object
-
-def gsl_root(*args):
-  """
-    double GeoCal::gsl_root(const DFunctor &F, double Xmin, double Xmax, double Eps=1e-6)
-    This finds the root of a Double -> Double function, without a
-    derivative available.
-
-    The solution found is in the bracketed range Xmin <= X <= Xmax. We
-    find a solution when we have bracketed it within a range xlow, xhigh,
-    with xhigh - xlow < Eps.
-
-    If we can't find a solution, we throw a ConvergenceFailure exception.
-
+class Eci(geocal.ground_coordinate.CartesianInertial):
     """
-  return _geocal_gsl_root.gsl_root(*args)
+    This is a ECI coordinate (J2000)
 
-def root_list(*args):
-  """
-    std::vector< double > GeoCal::root_list(const DFunctor &F, double Xmin, double Xmax, double
-    Root_minimum_spacing, double Eps=1e-6)
-    This will find a (possible empty) list of roots of a function, where
-    the roots have a seperation of at least the supplied minimum
-    separation.
-
-    This function is useful for finding roots when you don't know how many
-    solutions there are in the given range. It will find all roots,
-    provided that they have a seperation larger then Root_minimum_spacing,
-    and return the list of solutions. This list is ordered from smallest
-    to greatest.
-
-    This function works by sampling the Functor with a spacing of
-    Root_minimum_spacing. If the function changes sign between one spacing
-    and the next, the routine root is called between those spacings and
-    the results is added to the root list.
-
-    This will not finds roots that are closer together then the supplied
-    minimum spacing. (Limitation) 
+    C++ includes: eci.h 
     """
-  return _geocal_gsl_root.root_list(*args)
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::Eci::Eci(const boost::array< double, 3 > &Pos)
+        Create an Eci with the given position in meters. 
+        """
+        _eci.Eci_swiginit(self,_eci.new_Eci(*args))
+    def reference_surface_intersect_approximate(self, *args):
+        """
+        boost::shared_ptr< CartesianInertial > Eci::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double
+        Height_reference_surface=0) const
+        Find the intersection with the surface at the given height starting at
+        this point and looking in the given direction.
+
+        The intersection is done in an approximate but quicker manner.
+
+        We find the intersection with the ellipsoid that has the given height
+        added to the equatorial and polar axis. This is not the same as the
+        figure with a height h above the ellipsoid (which isn't an ellipsoid),
+        but for many purposes this is close enough. 
+        """
+        return _eci.Eci_reference_surface_intersect_approximate(self, *args)
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.position[0],self.position[1],self.position[2])
+
+    __swig_destroy__ = _eci.delete_Eci
+Eci.reference_surface_intersect_approximate = new_instancemethod(_eci.Eci_reference_surface_intersect_approximate,None,Eci)
+Eci_swigregister = _eci.Eci_swigregister
+Eci_swigregister(Eci)
+
 
 

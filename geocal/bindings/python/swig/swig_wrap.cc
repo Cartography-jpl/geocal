@@ -29,6 +29,10 @@ extern "C" {
   void init_image_coordinate(void);
   void init_look_vector(void);
   void init_ground_coordinate(void);
+  void init_coordinate_converter(void);
+  void init_ecr(void);
+  void init_eci(void);
+  void init_geodetic(void);
 }
 
 // Used throughout SWIG wrapper, define here because it is convenient.
@@ -110,4 +114,8 @@ void init_swig_wrap(void)
   init_extension_module(package, "_image_coordinate", init_image_coordinate);
   init_extension_module(package, "_look_vector", init_look_vector);
   init_extension_module(package, "_ground_coordinate", init_ground_coordinate);
+  init_extension_module(package, "_coordinate_converter", init_coordinate_converter);
+  init_extension_module(package, "_ecr", init_ecr);
+  init_extension_module(package, "_eci", init_eci);
+  init_extension_module(package, "_geodetic", init_geodetic);
 }

@@ -133,14 +133,14 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.generic_object
+import geocal.generic_object
 import datetime
 import time
 
 def _new_time(pgs):
   return Time.time_pgs(pgs)
 
-class Time(geocal_swig.generic_object.GenericObject):
+class Time(geocal.generic_object.GenericObject):
     """
     There are a few reasonable choices for expressing time information.
 

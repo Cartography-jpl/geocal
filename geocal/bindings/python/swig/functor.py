@@ -108,8 +108,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.generic_object
-class DFunctor(geocal_swig.generic_object.GenericObject):
+import geocal.generic_object
+class DFunctor(geocal.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
@@ -118,7 +118,7 @@ DFunctor.__call__ = new_instancemethod(_functor.DFunctor___call__,None,DFunctor)
 DFunctor_swigregister = _functor.DFunctor_swigregister
 DFunctor_swigregister(DFunctor)
 
-class VFunctor(geocal_swig.generic_object.GenericObject):
+class VFunctor(geocal.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr

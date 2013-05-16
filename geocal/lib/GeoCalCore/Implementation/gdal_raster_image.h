@@ -218,7 +218,7 @@ public:
 			    int Dt = GDT_Byte,
 			    int Fill_value = 0);
   static void save_to_erdas(const std::string& Oname, 
-	    const std::vector<boost::shared_ptr<GeoCal::RasterImage> >& d,
+	    const std::vector<boost::shared_ptr<RasterImage> >& d,
 	    int Dt = GDT_Byte,
 	    int Fill_value = 0);
   static void save_to_erdas(const std::string& Oname, 

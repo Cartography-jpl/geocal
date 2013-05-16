@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "vicar_multi_file.h"
 %}
-
-%geocal_shared_ptr(VicarMultiFile);
+%base_import(raster_multifile)
+%geocal_shared_ptr(GeoCal::VicarMultiFile);
 namespace GeoCal {
 class VicarMultiFile : public RasterMultifile {
 public:

@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "spot_camera.h"
 %}
-
-%geocal_shared_ptr(SpotCamera);
+%base_import(camera)
+%geocal_shared_ptr(GeoCal::SpotCamera);
 namespace GeoCal {
 class SpotCamera : public PushBroomCamera {
 public:
@@ -18,7 +20,7 @@ public:
 				      int Band) const;
   %python_attribute(psi_x, std::vector<double>)
   %python_attribute(psi_y, std::vector<double>)
-  %pickle_init(self.psi_x, self.psi_y)
+  %pickle_init(1, self.psi_x, self.psi_y)
 };
 
 }

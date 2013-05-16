@@ -1,12 +1,14 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "orbit_map_projected.h"
 %}
 
 
-%geocal_shared_ptr(OrbitMapProjected);
+%geocal_shared_ptr(GeoCal::OrbitMapProjected);
 namespace GeoCal {
 class OrbitMapProjected : public CalcMapProjected {
 public:

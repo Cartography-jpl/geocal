@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "ibis_file.h"
 %}
-
-%geocal_shared_ptr(IbisFile);
+%base_import(generic_object)
+%geocal_shared_ptr(GeoCal::IbisFile);
 namespace GeoCal {
 class IbisFile;
 template<class T> class IbisColumn {
@@ -29,7 +31,7 @@ private:
 %template(IbisColumn_string) GeoCal::IbisColumn<std::string>;
 
 namespace GeoCal {
-class IbisFile {
+class IbisFile : public GenericObject {
 public:
   enum access_type {READ, WRITE, UPDATE};
   enum data_type {VICAR_BYTE, VICAR_HALF, VICAR_FULL, VICAR_FLOAT,
@@ -48,7 +50,7 @@ public:
   %python_attribute(unit, int)
   void flush();
   std::string print_to_string() const;
-  %pickle_init(self.file_name, self.access)
+  %pickle_init(1, self.file_name, self.access)
   %extend {
 // We use the C types here rather than the Vicar typedef because SWIG wants
 // to treat unsigned char differently than VicarByte, for example. So that

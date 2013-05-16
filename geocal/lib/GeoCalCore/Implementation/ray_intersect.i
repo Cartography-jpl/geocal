@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "ray_intersect.h"
 %}
 
-%geocal_shared_ptr(RayIntersect);
+%geocal_shared_ptr(GeoCal::RayIntersect);
 namespace GeoCal {
 class RayIntersect {
 public:
@@ -25,7 +27,7 @@ public:
 		    boost::shared_ptr<ImageGroundConnection>)
   %python_attribute(image_ground_connection2, 
 		    boost::shared_ptr<ImageGroundConnection>)
-  %pickle_init(self.image_ground_connection1, self.image_ground_connection2)
+  %pickle_init(1, self.image_ground_connection1, self.image_ground_connection2)
 };
 }
 

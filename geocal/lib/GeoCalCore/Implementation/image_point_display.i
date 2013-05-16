@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "image_point_display.h"
 %}
 
-%geocal_shared_ptr(ImagePointDisplay);
+%geocal_shared_ptr(GeoCal::ImagePointDisplay);
 namespace GeoCal {
 class ImagePointDisplay : public GdalRasterImage {
 public:

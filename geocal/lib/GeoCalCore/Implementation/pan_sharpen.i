@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "pan_sharpen.h"
 %}
 
-%geocal_shared_ptr(PanSharpen);
+%geocal_shared_ptr(GeoCal::PanSharpen);
 
 namespace GeoCal {
 class PanSharpen : public CalcRasterMultiBand {

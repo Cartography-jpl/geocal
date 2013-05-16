@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "orbit_quaternion_list.h"
 %}
-
-%geocal_shared_ptr(OrbitQuaternionList);
+%base_import(orbit)
+%geocal_shared_ptr(GeoCal::OrbitQuaternionList);
 
 namespace GeoCal {
 class OrbitQuaternionList : public Orbit {

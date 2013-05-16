@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "raster_averaged.h"
 %}
 
-%geocal_shared_ptr(RasterAveraged);
+%geocal_shared_ptr(GeoCal::RasterAveraged);
 
 namespace GeoCal {
 class RasterAveraged : public RasterImage {
@@ -23,7 +25,7 @@ public:
   virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
 			int Number_sample, int* Res) const;
   virtual void write(int Line, int Sample, int Val);
-  %pickle_init(self.high_resolution_image,
+  %pickle_init(1, self.high_resolution_image,
 	       self.number_line_per_pixel, self.number_sample_per_pixel,
 	       self.ignore_zero)
 };

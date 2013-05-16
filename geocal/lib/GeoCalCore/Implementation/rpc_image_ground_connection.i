@@ -1,12 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
-%module geocal
+%include "common.i"
+
 %{
 #include "rpc_image_ground_connection.h"
 %}
 
-%geocal_shared_ptr(RpcImageGroundConnection);
+%geocal_shared_ptr(GeoCal::RpcImageGroundConnection);
 namespace GeoCal {
 class RpcImageGroundConnection: public ImageGroundConnection {
 public:
@@ -21,7 +22,7 @@ public:
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
   %python_attribute2(rpc, rpc_ptr, boost::shared_ptr<Rpc>)
-  %pickle_init(self.rpc, self.dem, self.image, self.title)
+  %pickle_init(1, self.rpc, self.dem, self.image, self.title)
 };
 }
 

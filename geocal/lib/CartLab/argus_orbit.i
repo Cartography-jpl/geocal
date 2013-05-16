@@ -1,12 +1,20 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+%include <std_vector.i>
+%include "common.i"
+
 %{
 #include "argus_orbit.h"
+#include "ecr.h"
+#include "image_ground_connection.h"
+#include "raster_image_multi_band_variable.h"
 %}
-
-%geocal_shared_ptr(ArgusOrbitData);
-%geocal_shared_ptr(ArgusOrbit);
+%base_import(orbit_quaternion_list)
+%base_import(aircraft_orbit_data)
+%import "map_info.i"
+%import "gdal_raster_image.i"
+%geocal_shared_ptr(GeoCal::ArgusOrbitData);
+%geocal_shared_ptr(GeoCal::ArgusOrbit);
 namespace GeoCal {
 class ArgusOrbitData : public AircraftOrbitData {
 public:
@@ -32,10 +40,10 @@ public:
 		     const MapInfo& Mi, const std::string& Fname,
 		     const std::string& Type,
 		     int Border = 10);
-  GdalRasterImage image(int band = 1) const;
+  boost::shared_ptr<GdalRasterImage> image(int band = 1) const;
   %python_attribute(file_name, std::string)
   %python_attribute(camera_number, int)
-  %pickle_init(self.time, self.file_name, self.camera_number,
+  %pickle_init(1, self.time, self.file_name, self.camera_number,
 	       self.position_geodetic, self.vector_cf, self.roll,
 	       self.pitch, self.heading)
 };
@@ -48,7 +56,7 @@ public:
   %python_attribute(number_row, int)
   boost::shared_ptr<ArgusOrbitData> nav(int row, int camera_num) const;
   %python_attribute(file_name, std::string)
-  %pickle_init(self.file_name)
+  %pickle_init(1, self.file_name)
 };
 }
 

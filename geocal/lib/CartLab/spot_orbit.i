@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "spot_orbit.h"
 %}
-
-%geocal_shared_ptr(SpotOrbit);
+%base_import(orbit)
+%geocal_shared_ptr(GeoCal::SpotOrbit);
 namespace GeoCal {
 class SpotOrbit : public Orbit {
 public:

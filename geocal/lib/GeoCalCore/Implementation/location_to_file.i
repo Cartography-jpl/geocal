@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "location_to_file.h"
 %}
 
-%geocal_shared_ptr(LocationToFile);
+%geocal_shared_ptr(GeoCal::LocationToFile);
 namespace GeoCal {
 class LocationToFile {
   LocationToFile() {}

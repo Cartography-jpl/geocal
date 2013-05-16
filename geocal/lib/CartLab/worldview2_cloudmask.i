@@ -1,11 +1,15 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "worldview2_cloudmask.h"
+#include "raster_image_multi_band_variable.h"
 %}
-
-%geocal_shared_ptr(WorldView2CloudMask);
+%base_import(calc_raster)
+%import "raster_image_multi_band.i"
+%geocal_shared_ptr(GeoCal::WorldView2CloudMask);
 
 namespace GeoCal {
 class WorldView2CloudMask : public CalcRaster {

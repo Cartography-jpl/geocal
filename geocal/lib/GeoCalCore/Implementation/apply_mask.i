@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "apply_mask.h"
 %}
 
-%geocal_shared_ptr(ApplyMask);
+%geocal_shared_ptr(GeoCal::ApplyMask);
 
 namespace GeoCal {
 class ApplyMask : public CalcRaster {
@@ -16,7 +18,7 @@ public:
   %python_attribute(raw_data, boost::shared_ptr<RasterImage>)
   %python_attribute(mask, boost::shared_ptr<RasterImage>)
   %python_attribute(good_value, int)
-  %pickle_init(self.raw_data, self.mask, self.good_value)
+  %pickle_init(1, self.raw_data, self.mask, self.good_value)
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 };

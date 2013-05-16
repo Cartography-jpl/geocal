@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "surface_image_to_image_match.h"
 %}
 
-%geocal_shared_ptr(SurfaceImageToImageMatch);
+%geocal_shared_ptr(GeoCal::SurfaceImageToImageMatch);
 namespace GeoCal {
 
 class SurfaceImageToImageMatch : public ImageToImageMatch {
@@ -34,14 +36,18 @@ public:
   %python_attribute(surface_image1, boost::shared_ptr<RasterImage>)
   %python_attribute(surface_image2, boost::shared_ptr<RasterImage>)
   %pythoncode {
+@classmethod
+def pickle_format_version(cls):
+  return 1
+
 def __reduce__(self):
     if(self.map_project_on_demand):
-      return _new_from_init, (self.__class__, self.image_ground_connection1,
+      return _new_from_init, (self.__class__, 1, self.image_ground_connection1,
 			      self.image_ground_connection2, 
 			      self.surface_image1.map_info(),
 			      self.matcher)
     else:
-      return _new_from_init, (self.__class__, self.image_ground_connection1,
+      return _new_from_init, (self.__class__, 1, self.image_ground_connection1,
 			      self.surface_image1,
 			      self.image_ground_connection2, 
 			      self.surface_image2,

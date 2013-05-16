@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "mask_image.h"
 %}
 
-%geocal_shared_ptr(MaskImage);
+%geocal_shared_ptr(GeoCal::MaskImage);
 
 namespace GeoCal {
 class MaskImage : public Mask {
@@ -17,7 +19,7 @@ public:
   virtual bool mask(const GroundCoordinate& Gc) const;
   virtual bool region_masked(const GroundCoordinate& Ulc, 
 			     const GroundCoordinate& Lrc) const;
-  %pickle_init(self.raster_image, self.masked_value)
+  %pickle_init(1, self.raster_image, self.masked_value)
 };
 
 }

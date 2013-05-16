@@ -1,13 +1,15 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "ogr_coordinate.h"
 %}
 
-%geocal_shared_ptr(OgrWrapper);
-%geocal_shared_ptr(OgrCoordinate);
-%geocal_shared_ptr(OgrCoordinateConverter);
+%geocal_shared_ptr(GeoCal::OgrWrapper);
+%geocal_shared_ptr(GeoCal::OgrCoordinate);
+%geocal_shared_ptr(GeoCal::OgrCoordinateConverter);
 
 namespace GeoCal {
 class OgrWrapper {
@@ -23,7 +25,7 @@ public:
   %python_attribute(wkt, std::string)
   %python_attribute(pretty_wkt, std::string)
   std::string print_to_string() const;
-  %pickle_init(self.wkt)
+  %pickle_init(1, self.wkt)
 };
 
 class OgrCoordinate : public GroundCoordinate {
@@ -39,7 +41,7 @@ public:
   double y;
   double z;
   static OgrCoordinate to_utm(const Geodetic& Gc, int zone = -999);
-  %pickle_init(self.ogr, self.x, self.y, self.z)
+  %pickle_init(1, self.ogr, self.x, self.y, self.z)
 };
 
 class OgrCoordinateConverter : public CoordinateConverter {
@@ -50,7 +52,7 @@ public:
     convert_from_coordinate(double X, double Y, double Height = 0) const;
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
 			       double& Y, double& Height) const;
-  %pickle_init(self.ogr)
+  %pickle_init(1, self.ogr)
 };
 
 }

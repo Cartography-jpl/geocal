@@ -148,12 +148,12 @@ void ArgusOrbitData::save_to_file(const std::string& Fname,
 /// is what Gdal uses.
 //-----------------------------------------------------------------------
 
-GdalRasterImage ArgusOrbitData::image(int band) const
+boost::shared_ptr<GdalRasterImage> ArgusOrbitData::image(int band) const
 {
   if(gdal_data_.get())
-    return GdalRasterImage(gdal_data_, band);
-  GdalRasterImage g(file_name(), band);
-  gdal_data_ = g.gdal_data_base().data_set();
+    return boost::shared_ptr<GdalRasterImage>(new GdalRasterImage(gdal_data_, band));
+  boost::shared_ptr<GdalRasterImage> g(new GdalRasterImage(file_name(), band));
+  gdal_data_ = g->gdal_data_base().data_set();
   return g;
 }
 
@@ -293,7 +293,7 @@ double ArgusOrbit::focal_length(int camera_num) const
   for(int i = 0; i < number_row(); ++i) 
     if(nav(i, camera_num).get() &&
        nav(i, camera_num)->file_name() != "")
-      return nav(i, camera_num)->image().metadata<double>("EXIF_FocalLength");
+      return nav(i, camera_num)->image()->metadata<double>("EXIF_FocalLength");
   return -1;
 }
 

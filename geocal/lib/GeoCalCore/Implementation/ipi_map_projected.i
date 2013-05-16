@@ -1,12 +1,14 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "ipi_map_projected.h"
 %}
 
 
-%geocal_shared_ptr(IpiMapProjected);
+%geocal_shared_ptr(GeoCal::IpiMapProjected);
 namespace GeoCal {
 class IpiMapProjected : public CalcMapProjected {
 public:

@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "map_info_image_ground_connection.h"
 %}
 
-%geocal_shared_ptr(MapInfoImageGroundConnection);
+%geocal_shared_ptr(GeoCal::MapInfoImageGroundConnection);
 
 namespace GeoCal {
 class MapInfoImageGroundConnection: public ImageGroundConnection {
@@ -20,6 +22,6 @@ public:
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
-  %pickle_init(self.image, self.dem, self.title)
+  %pickle_init(1, self.image, self.dem, self.title)
 };
 }

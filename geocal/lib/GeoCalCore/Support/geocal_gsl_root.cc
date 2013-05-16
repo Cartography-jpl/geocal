@@ -87,8 +87,8 @@ double dfunctor_adapter(double x, void* params)
 /// exception. 
 //-----------------------------------------------------------------------
 
-Array<double, 1> 
-GeoCal::gsl_root(const VFunctor& F, const Array<double, 1>& Initial,
+blitz::Array<double, 1> 
+GeoCal::gsl_root(const VFunctor& F, const blitz::Array<double, 1>& Initial,
 		 double Residual)
 {
   GslMultiFsolver w(Initial.extent(0));
@@ -124,9 +124,9 @@ GeoCal::gsl_root(const VFunctor& F, const Array<double, 1>& Initial,
 /// exception. 
 //-----------------------------------------------------------------------
 
-Array<double, 1> 
+blitz::Array<double, 1> 
 GeoCal::gsl_root(const VFunctorWithDerivative& F, 
-		 const Array<double, 1>& Initial,
+		 const blitz::Array<double, 1>& Initial,
 		 double Residual)
 {
   GslMultiFdfsolver w(Initial.extent(0));

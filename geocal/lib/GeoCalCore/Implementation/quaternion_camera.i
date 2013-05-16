@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "quaternion_camera.h"
 %}
 
-%geocal_shared_ptr(QuaternionCamera);
+%geocal_shared_ptr(GeoCal::QuaternionCamera);
 namespace GeoCal {
 
 class QuaternionCamera : public Camera {
@@ -30,7 +32,7 @@ public:
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
   %python_attribute(frame_to_sc, boost::math::quaternion<double>)
-  %pickle_init(self.frame_to_sc, self.number_line(0), self.number_sample(0), 
+  %pickle_init(1, self.frame_to_sc, self.number_line(0), self.number_sample(0), 
 	       self.line_pitch, self.sample_pitch, self.focal_length, 
 	       self.principal_point, self.line_scale, self.sample_scale)
 };

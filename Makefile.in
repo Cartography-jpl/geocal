@@ -280,28 +280,28 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate_test.cc
 #  geocal_test_all_SOURCES+= @srcimplementation@/gdal_multi_file_test.cc
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_16 = @srcimplementation@/hdf_orbit_test.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_17 = @srcimplementation@/geocal_gdal.i \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_datum.i \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_17 = @swigsrc@/geocal_gdal_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@swigsrc@/gdal_raster_image_wrap.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_18 = @srcimplementation@/gdal_datum.i \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem.i \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_multi_band.i \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/image_point_display.i \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate.i
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_18 = @srcimplementation@/hdf_orbit.i
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_19 = @srccartlab@/vicar_ogr.h
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_20 = @srccartlab@/vicar_ogr.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_21 = @srccartlab@/vicar_ogr_test.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_22 = @srcgtk@/display_stretch.h \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_19 = @srcimplementation@/hdf_orbit.i
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_20 = @srccartlab@/vicar_ogr.h
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_21 = @srccartlab@/vicar_ogr.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_22 = @srccartlab@/vicar_ogr_test.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_23 = @srcgtk@/display_stretch.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/display_stretch_std_dev.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/geocal_pixbuf.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/raster_image_with_overlay.h
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_23 = @srcgtk@/display_stretch_std_dev.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_24 = @srcgtk@/display_stretch_std_dev.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/geocal_pixbuf.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/raster_image_with_overlay.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_24 =  \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_25 =  \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	$(GTGOO_LIBS) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	$(GTKGOO_LIBS)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_25 =  \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_26 =  \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	-I$(GTKGOO_CFLAGS) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	-I$(srcdir)/@srcgtk@
 
@@ -310,12 +310,12 @@ bin_PROGRAMS =
 #gtktest2_LDADD = libgeocal.la 
 
 # Files that contain SWIG wrapper information.
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_26 = @swigsrc@/display_stretch_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_27 = @swigsrc@/display_stretch_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@swigsrc@/display_stretch_std_dev_wrap.cc
 
 # Allow fils to be include in other directories
-@BUILD_AFIDS_PYTHON_TRUE@am__append_27 = -I$(srcdir)/@libgeocal@
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_28 = $(addprefix \
+@BUILD_AFIDS_PYTHON_TRUE@am__append_28 = -I$(srcdir)/@libgeocal@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_29 = $(addprefix \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG_SRC)) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
@@ -323,28 +323,28 @@ bin_PROGRAMS =
 #include afids_python/geocal/python/python.am
 #=================================================================
 # libgeocal: The main library
-@BUILD_AFIDS_PYTHON_TRUE@am__append_29 = libgeocal.la
+@BUILD_AFIDS_PYTHON_TRUE@am__append_30 = libgeocal.la
 @BUILD_AFIDS_PYTHON_TRUE@check_PROGRAMS = geocal_test_all$(EXEEXT)
-@BUILD_AFIDS_PYTHON_TRUE@am__append_30 = afids_python/geocal/lib/test_all.sh
+@BUILD_AFIDS_PYTHON_TRUE@am__append_31 = afids_python/geocal/lib/test_all.sh
 
 #=================================================================
 # This is needed by unit tests that work with VICAR files. VICAR
 # wants to find a PDF file.
-@BUILD_AFIDS_PYTHON_TRUE@am__append_31 = dummy.pdf \
+@BUILD_AFIDS_PYTHON_TRUE@am__append_32 = dummy.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	test_out/vicar_copy.img \
 @BUILD_AFIDS_PYTHON_TRUE@	test_out/dummy_copy
-@BUILD_AFIDS_PYTHON_TRUE@am__append_32 = clean_unit_test
+@BUILD_AFIDS_PYTHON_TRUE@am__append_33 = clean_unit_test
 
 #=================================================================
 # Generate doxygen documentation
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_33 = config/doxygen.cfg \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_34 = config/doxygen.cfg \
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	config/doxy2swig.py
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_34 = install_doxygen_doc \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_35 = install_doxygen_doc \
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	install_python_doc
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_35 = clean_doxygen_doc
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_36 = clean_doxygen_generate
-@BUILD_AFIDS_PYTHON_TRUE@am__append_37 = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_36 = clean_doxygen_doc
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_37 = clean_doxygen_generate
+@BUILD_AFIDS_PYTHON_TRUE@am__append_38 = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_dir \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_show \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_igccol \
@@ -358,8 +358,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_dem \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_image \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/tiepoint_to_error
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_TRUE@am__append_38 = @srcpythonlib@/tre_amt_struct.py
-@BUILD_AFIDS_PYTHON_TRUE@am__append_39 = @docpythonsrc@ \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_TRUE@am__append_39 = @srcpythonlib@/tre_amt_struct.py
+@BUILD_AFIDS_PYTHON_TRUE@am__append_40 = @docpythonsrc@ \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/07JUN08184839-M1BS-005616921010_01_P001.IMD \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/07JUN08184839-P1BS-005616921010_01_P001.IMD \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/10MAY07185751-M1BS-052360785020_01_P001.IMD \
@@ -384,8 +384,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/README \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/rpc_sba.pkl \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/FRST_POIof090514.shp
-@BUILD_AFIDS_PYTHON_TRUE@am__append_40 = clean_install_python_doc
-@BUILD_AFIDS_PYTHON_TRUE@am__append_41 = python_check
+@BUILD_AFIDS_PYTHON_TRUE@am__append_41 = clean_install_python_doc
+@BUILD_AFIDS_PYTHON_TRUE@am__append_42 = python_check
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids_data.m4 \
@@ -513,14 +513,38 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/ccorr_matcher_wrap.cc @swigsrc@/lsm_matcher_wrap.cc \
 	@swigsrc@/ccorr_lsm_matcher_wrap.cc \
 	@swigsrc@/rpc_image_wrap.cc @swigsrc@/raster_multifile_wrap.cc \
+	@swigsrc@/calc_raster_wrap.cc \
+	@swigsrc@/calc_raster_multi_band_wrap.cc \
+	@swigsrc@/raster_image_tiled_file_wrap.cc \
+	@swigsrc@/dem_tiled_file_wrap.cc @swigsrc@/geocal_gdal_wrap.cc \
+	@swigsrc@/gdal_raster_image_wrap.cc \
+	@swigsrc@/aircraft_orbit_data_wrap.cc \
+	@swigsrc@/orbit_quaternion_list_wrap.cc \
+	@swigsrc@/argus_camera_wrap.cc @swigsrc@/argus_orbit_wrap.cc \
+	@swigsrc@/ibis_file_wrap.cc @swigsrc@/quickbird_camera_wrap.cc \
+	@swigsrc@/spot_camera_wrap.cc @swigsrc@/spot_orbit_wrap.cc \
+	@swigsrc@/quickbird_orbit_wrap.cc \
+	@swigsrc@/quickbird_time_table_wrap.cc \
+	@swigsrc@/vicar_file_wrap.cc @swigsrc@/vicar_argument_wrap.cc \
+	@swigsrc@/vicar_dem_wrap.cc @swigsrc@/vicar_lite_file_wrap.cc \
+	@swigsrc@/vicar_multi_file_wrap.cc \
+	@swigsrc@/datum_geoid96_wrap.cc @swigsrc@/srtm_dem_wrap.cc \
+	@swigsrc@/vicar_raster_image_wrap.cc \
+	@swigsrc@/pos_export_orbit_wrap.cc \
+	@swigsrc@/worldview2_cloudmask_wrap.cc \
+	@swigsrc@/doughnut_average_wrap.cc \
+	@swigsrc@/material_detect_wrap.cc \
+	@swigsrc@/paint_class_wrap.cc \
 	@swigsrc@/display_stretch_wrap.cc \
 	@swigsrc@/display_stretch_std_dev_wrap.cc \
 	@swigsrc@/swig_wrap.cc
 am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_1 = @swigsrc@/_swig_wrap_la-hdf_file_wrap.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__objects_2 = @swigsrc@/_swig_wrap_la-display_stretch_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_2 = @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@swigsrc@/_swig_wrap_la-gdal_raster_image_wrap.lo
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__objects_3 = @swigsrc@/_swig_wrap_la-display_stretch_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@swigsrc@/_swig_wrap_la-display_stretch_std_dev_wrap.lo
-@BUILD_AFIDS_PYTHON_TRUE@am__objects_3 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@am__objects_4 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-swig_array_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-swig_boost_array_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
@@ -572,8 +596,36 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-ccorr_lsm_matcher_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-rpc_image_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_2)
-@BUILD_AFIDS_PYTHON_TRUE@am__swig_wrap_la_OBJECTS = $(am__objects_3) \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-calc_raster_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-raster_image_tiled_file_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-dem_tiled_file_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_2) \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-argus_camera_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-argus_orbit_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-ibis_file_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-quickbird_camera_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-spot_camera_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-spot_orbit_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-quickbird_orbit_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-quickbird_time_table_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-vicar_file_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-vicar_argument_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-vicar_dem_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-vicar_multi_file_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-datum_geoid96_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-srtm_dem_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-pos_export_orbit_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-worldview2_cloudmask_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-doughnut_average_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-material_detect_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-paint_class_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_3)
+@BUILD_AFIDS_PYTHON_TRUE@am__swig_wrap_la_OBJECTS = $(am__objects_4) \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-swig_wrap.lo
 _swig_wrap_la_OBJECTS = $(am__swig_wrap_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -668,15 +720,15 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srccartlab@/vicar_ogr.cc @srcgtk@/display_stretch_std_dev.cc \
 	@srcgtk@/geocal_pixbuf.cc \
 	@srcgtk@/raster_image_with_overlay.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_4 = @srcsupport@/libgeocal_la-hdf_file.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_5 = @srcimplementation@/libgeocal_la-geocal_gdal.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_5 = @srcsupport@/libgeocal_la-hdf_file.lo
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_6 = @srcimplementation@/libgeocal_la-geocal_gdal.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_dem.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_raster_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_multi_band.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-image_point_display.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-ogr_coordinate.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_6 = @srccartlab@/libgeocal_la-vicar_ogr.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__objects_7 = @srcgtk@/libgeocal_la-display_stretch_std_dev.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_7 = @srccartlab@/libgeocal_la-vicar_ogr.lo
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__objects_8 = @srcgtk@/libgeocal_la-display_stretch_std_dev.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/libgeocal_la-geocal_pixbuf.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/libgeocal_la-raster_image_with_overlay.lo
 @BUILD_AFIDS_PYTHON_TRUE@am_libgeocal_la_OBJECTS = @srcsupport@/boost/libgeocal_la-backtrace.lo \
@@ -687,7 +739,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-covariance.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-statistic.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-geocal_fftw.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_4) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_5) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-raster_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-sub_raster_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-raster_image_multi_band.lo \
@@ -745,7 +797,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-refraction.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-ray_intersect.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-dem_match.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_5) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_6) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-spice_helper.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-sdp_helper.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-argus_camera.lo \
@@ -769,7 +821,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-doughnut_average.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-material_detect.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-paint_class.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_6) $(am__objects_7)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_7) $(am__objects_8)
 libgeocal_la_OBJECTS = $(am_libgeocal_la_OBJECTS)
 libgeocal_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
@@ -877,15 +929,15 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 	@srccartlab@/doughnut_average_test.cc \
 	@srccartlab@/material_detect_test.cc \
 	afids_python/geocal/lib/test_all.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_8 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_9 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_9 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_10 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-geocal_gdal_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_dem_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-image_point_display_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_10 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_11 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_11 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_12 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@am_geocal_test_all_OBJECTS = @srcsupport@/geocal_test_all-global_fixture.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-global_fixture_default.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-geocal_exception_test.$(OBJEXT) \
@@ -902,7 +954,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-covariance_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-statistic_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-geocal_fftw_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_8) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_9) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-memory_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-sub_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-ground_coordinate_test.$(OBJEXT) \
@@ -924,7 +976,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-geocal_rpc_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-rpc_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-ipi_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_9) $(am__objects_10) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_10) $(am__objects_11) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-spice_helper_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-sdp_helper_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-did_datum_test.$(OBJEXT) \
@@ -953,7 +1005,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-igc_image_to_image_match_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-surface_image_to_image_match_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-dem_match_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_11) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_12) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_camera_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_orbit_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-ibis_file_test.$(OBJEXT) \
@@ -1676,15 +1728,15 @@ ACLOCAL_AMFLAGS = -I config/m4
 noop = 
 
 # Build these up as we go
-lib_LTLIBRARIES = $(am__append_29)
+lib_LTLIBRARIES = $(am__append_30)
 noinst_LTLIBRARIES = $(am__append_7)
-dist_bin_SCRIPTS = $(am__append_37)
+dist_bin_SCRIPTS = $(am__append_38)
 AM_LDFLAGS = 
-BUILT_SOURCES = $(am__append_28) $(am__append_31)
+BUILT_SOURCES = $(am__append_29) $(am__append_32)
 include_HEADERS = 
-EXTRA_DIST = $(am__append_5) $(am__append_33) $(am__append_39)
+EXTRA_DIST = $(am__append_5) $(am__append_34) $(am__append_40)
 pkgconfig_DATA = 
-AM_CPPFLAGS = $(am__append_6) $(am__append_25) $(am__append_27)
+AM_CPPFLAGS = $(am__append_6) $(am__append_26) $(am__append_28)
 
 #=================================================================
 # Some flags needed for GCC compilers.
@@ -1700,11 +1752,11 @@ AM_CPPFLAGS = $(am__append_6) $(am__append_25) $(am__append_27)
 
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
-INSTALL_DATA_HOOK = $(am__append_34)
-UNINSTALL_HOOK = $(am__append_35) $(am__append_40)
-CLEAN_HOOK = $(am__append_32) $(am__append_36)
-INSTALLCHECK_HOOK = $(am__append_41)
-TESTS = $(am__append_30)
+INSTALL_DATA_HOOK = $(am__append_35)
+UNINSTALL_HOOK = $(am__append_36) $(am__append_41)
+CLEAN_HOOK = $(am__append_33) $(am__append_37)
+INSTALLCHECK_HOOK = $(am__append_42)
+TESTS = $(am__append_31)
 check_PROGRAM = 
 check_DATA = 
 
@@ -1802,7 +1854,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/doughnut_average.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/material_detect.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/paint_class.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_20) $(am__append_23)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_21) $(am__append_24)
 
 # Files that contain SWIG wrapper information.
 
@@ -1859,7 +1911,35 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/ccorr_lsm_matcher_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/rpc_image_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/raster_multifile_wrap.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_26)
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/calc_raster_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/calc_raster_multi_band_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/raster_image_tiled_file_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/dem_tiled_file_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_17) \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/aircraft_orbit_data_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/orbit_quaternion_list_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/argus_camera_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/argus_orbit_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/ibis_file_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/quickbird_camera_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/spot_camera_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/spot_orbit_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/quickbird_orbit_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/quickbird_time_table_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/vicar_file_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/vicar_argument_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/vicar_dem_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/vicar_lite_file_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/vicar_multi_file_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/datum_geoid96_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/srtm_dem_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/vicar_raster_image_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/pos_export_orbit_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/worldview2_cloudmask_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/doughnut_average_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/material_detect_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/paint_class_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_27)
 
 # Include boost in builds
 
@@ -1876,7 +1956,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	$(BOOST_DATETIME_LIB) $(BLITZ_LIBS) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_3) $(GSL_LIBS) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(FFTW_LIBS) $(SDP_LDFLAGS) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_24)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_25)
 @BUILD_AFIDS_PYTHON_TRUE@SWIG_FLAG = -O
 @BUILD_AFIDS_PYTHON_TRUE@geocalincdir = @includedir@/geocal
 
@@ -2004,7 +2084,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/doughnut_average.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/material_detect.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/paint_class.h \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_19) $(am__append_22)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_20) $(am__append_23)
 # Test files
 @BUILD_AFIDS_PYTHON_TRUE@geocal_test_all_SOURCES =  \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/global_fixture.cc \
@@ -2074,7 +2154,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/igc_image_to_image_match_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/surface_image_to_image_match_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match_test.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_21) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_22) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_camera_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_orbit_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/ibis_file_test.cc \
@@ -2164,13 +2244,9 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/mask_image.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raster_averaged.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raster_subsample.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/calc_raster.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/calc_raster_multi_band.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/magnify_bilinear.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/magnify_replicate.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/smooth_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raster_image_tiled_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_tiled_file.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/memory_dem.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/map_reprojected_image.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/calc_map_projected.i \
@@ -2182,12 +2258,10 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/location_to_file.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ray_intersect.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match.i \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_17) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_18) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/memory_multi_band.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/spice_helper.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raw_raster_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/aircraft_orbit_data.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/orbit_quaternion_list.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/pan_sharpen.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/scale_image.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/apply_mask.i \
@@ -2198,28 +2272,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/quaternion_camera.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/refraction.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/orbit_data_image_ground_connection.i \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_18) \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_camera.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_orbit.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/ibis_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/quickbird_camera.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/spot_camera.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/spot_orbit.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/quickbird_orbit.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/quickbird_time_table.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_argument.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_dem.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_lite_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_multi_file.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/datum_geoid96.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/srtm_dem.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/vicar_raster_image.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/pos_export_orbit.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/worldview2_cloudmask.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/doughnut_average.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/material_detect.i \
-@BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/paint_class.i
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_19)
 @BUILD_AFIDS_PYTHON_TRUE@pkgpythonswigdir = @pythondir@/geocal
 @BUILD_AFIDS_PYTHON_TRUE@pkgpythonswig_PYTHON =  \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonswigsrc@/__init__.py \
@@ -2293,7 +2346,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/tempdir.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/shape_file.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/gdal_to_erdas_file.py \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_38)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_39)
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf
@@ -2535,6 +2588,64 @@ clean-pkgpythonswigLTLIBRARIES:
 @swigsrc@/_swig_wrap_la-rpc_image_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-calc_raster_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-raster_image_tiled_file_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-dem_tiled_file_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-gdal_raster_image_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-argus_camera_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-argus_orbit_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-ibis_file_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-quickbird_camera_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-spot_camera_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-spot_orbit_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-quickbird_orbit_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-quickbird_time_table_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-vicar_file_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-vicar_argument_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-vicar_dem_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-vicar_multi_file_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-datum_geoid96_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-srtm_dem_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-pos_export_orbit_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-worldview2_cloudmask_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-doughnut_average_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-material_detect_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-paint_class_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-display_stretch_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -3518,25 +3629,35 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-hdf_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-statistic.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-aircraft_orbit_data_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_camera_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_orbit_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ccorr_lsm_matcher_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ccorr_matcher_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-constant_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-coordinate_converter_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-covariance_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-datum_geoid96_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_map_info_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_tiled_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-display_stretch_std_dev_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-display_stretch_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-doughnut_average_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ecr_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-feature_detector_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-forstner_feature_detector_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-frame_coordinate_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-functor_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-gdal_raster_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-generic_object_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_datum_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_exception_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_gdal_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_gsl_fit_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_gsl_root_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_rpc_wrap.Plo@am__quote@
@@ -3544,6 +3665,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geodetic_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_coordinate_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-hdf_file_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ibis_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_coordinate_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_ground_connection_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_matcher_wrap.Plo@am__quote@
@@ -3553,15 +3675,26 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-lsm_matcher_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-map_info_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-mask_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-material_detect_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-memory_raster_image_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-paint_class_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-pos_export_orbit_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_camera_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_orbit_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_time_table_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_multi_band_variable_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_multi_band_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_tiled_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_variable_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_multifile_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-rpc_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-simple_dem_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-spot_camera_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-spot_orbit_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-srtm_dem_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-statistic_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-sub_raster_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_array_wrap.Plo@am__quote@
@@ -3572,7 +3705,14 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-tiled_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-time_table_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_dem_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_file_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_lite_file_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_multi_file_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_raster_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Po@am__quote@
 
 .cc.o:
@@ -3962,6 +4102,209 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/raster_multifile_wrap.cc' object='@swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo `test -f '@swigsrc@/raster_multifile_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/raster_multifile_wrap.cc
+
+@swigsrc@/_swig_wrap_la-calc_raster_wrap.lo: @swigsrc@/calc_raster_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-calc_raster_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-calc_raster_wrap.lo `test -f '@swigsrc@/calc_raster_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/calc_raster_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/calc_raster_wrap.cc' object='@swigsrc@/_swig_wrap_la-calc_raster_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-calc_raster_wrap.lo `test -f '@swigsrc@/calc_raster_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/calc_raster_wrap.cc
+
+@swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo: @swigsrc@/calc_raster_multi_band_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo `test -f '@swigsrc@/calc_raster_multi_band_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/calc_raster_multi_band_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/calc_raster_multi_band_wrap.cc' object='@swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo `test -f '@swigsrc@/calc_raster_multi_band_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/calc_raster_multi_band_wrap.cc
+
+@swigsrc@/_swig_wrap_la-raster_image_tiled_file_wrap.lo: @swigsrc@/raster_image_tiled_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-raster_image_tiled_file_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_tiled_file_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-raster_image_tiled_file_wrap.lo `test -f '@swigsrc@/raster_image_tiled_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/raster_image_tiled_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_tiled_file_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_tiled_file_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/raster_image_tiled_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-raster_image_tiled_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-raster_image_tiled_file_wrap.lo `test -f '@swigsrc@/raster_image_tiled_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/raster_image_tiled_file_wrap.cc
+
+@swigsrc@/_swig_wrap_la-dem_tiled_file_wrap.lo: @swigsrc@/dem_tiled_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-dem_tiled_file_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_tiled_file_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-dem_tiled_file_wrap.lo `test -f '@swigsrc@/dem_tiled_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/dem_tiled_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_tiled_file_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_tiled_file_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/dem_tiled_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-dem_tiled_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-dem_tiled_file_wrap.lo `test -f '@swigsrc@/dem_tiled_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/dem_tiled_file_wrap.cc
+
+@swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo: @swigsrc@/geocal_gdal_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_gdal_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo `test -f '@swigsrc@/geocal_gdal_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_gdal_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_gdal_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_gdal_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/geocal_gdal_wrap.cc' object='@swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo `test -f '@swigsrc@/geocal_gdal_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_gdal_wrap.cc
+
+@swigsrc@/_swig_wrap_la-gdal_raster_image_wrap.lo: @swigsrc@/gdal_raster_image_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-gdal_raster_image_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-gdal_raster_image_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-gdal_raster_image_wrap.lo `test -f '@swigsrc@/gdal_raster_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/gdal_raster_image_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-gdal_raster_image_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-gdal_raster_image_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/gdal_raster_image_wrap.cc' object='@swigsrc@/_swig_wrap_la-gdal_raster_image_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-gdal_raster_image_wrap.lo `test -f '@swigsrc@/gdal_raster_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/gdal_raster_image_wrap.cc
+
+@swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo: @swigsrc@/aircraft_orbit_data_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-aircraft_orbit_data_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo `test -f '@swigsrc@/aircraft_orbit_data_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/aircraft_orbit_data_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-aircraft_orbit_data_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-aircraft_orbit_data_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/aircraft_orbit_data_wrap.cc' object='@swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo `test -f '@swigsrc@/aircraft_orbit_data_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/aircraft_orbit_data_wrap.cc
+
+@swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo: @swigsrc@/orbit_quaternion_list_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo `test -f '@swigsrc@/orbit_quaternion_list_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_quaternion_list_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/orbit_quaternion_list_wrap.cc' object='@swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo `test -f '@swigsrc@/orbit_quaternion_list_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_quaternion_list_wrap.cc
+
+@swigsrc@/_swig_wrap_la-argus_camera_wrap.lo: @swigsrc@/argus_camera_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-argus_camera_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_camera_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-argus_camera_wrap.lo `test -f '@swigsrc@/argus_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/argus_camera_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_camera_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_camera_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/argus_camera_wrap.cc' object='@swigsrc@/_swig_wrap_la-argus_camera_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-argus_camera_wrap.lo `test -f '@swigsrc@/argus_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/argus_camera_wrap.cc
+
+@swigsrc@/_swig_wrap_la-argus_orbit_wrap.lo: @swigsrc@/argus_orbit_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-argus_orbit_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_orbit_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-argus_orbit_wrap.lo `test -f '@swigsrc@/argus_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/argus_orbit_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_orbit_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_orbit_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/argus_orbit_wrap.cc' object='@swigsrc@/_swig_wrap_la-argus_orbit_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-argus_orbit_wrap.lo `test -f '@swigsrc@/argus_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/argus_orbit_wrap.cc
+
+@swigsrc@/_swig_wrap_la-ibis_file_wrap.lo: @swigsrc@/ibis_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-ibis_file_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-ibis_file_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-ibis_file_wrap.lo `test -f '@swigsrc@/ibis_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ibis_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-ibis_file_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-ibis_file_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/ibis_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-ibis_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-ibis_file_wrap.lo `test -f '@swigsrc@/ibis_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ibis_file_wrap.cc
+
+@swigsrc@/_swig_wrap_la-quickbird_camera_wrap.lo: @swigsrc@/quickbird_camera_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-quickbird_camera_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_camera_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-quickbird_camera_wrap.lo `test -f '@swigsrc@/quickbird_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/quickbird_camera_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_camera_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_camera_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/quickbird_camera_wrap.cc' object='@swigsrc@/_swig_wrap_la-quickbird_camera_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-quickbird_camera_wrap.lo `test -f '@swigsrc@/quickbird_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/quickbird_camera_wrap.cc
+
+@swigsrc@/_swig_wrap_la-spot_camera_wrap.lo: @swigsrc@/spot_camera_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-spot_camera_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-spot_camera_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-spot_camera_wrap.lo `test -f '@swigsrc@/spot_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/spot_camera_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-spot_camera_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-spot_camera_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/spot_camera_wrap.cc' object='@swigsrc@/_swig_wrap_la-spot_camera_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-spot_camera_wrap.lo `test -f '@swigsrc@/spot_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/spot_camera_wrap.cc
+
+@swigsrc@/_swig_wrap_la-spot_orbit_wrap.lo: @swigsrc@/spot_orbit_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-spot_orbit_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-spot_orbit_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-spot_orbit_wrap.lo `test -f '@swigsrc@/spot_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/spot_orbit_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-spot_orbit_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-spot_orbit_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/spot_orbit_wrap.cc' object='@swigsrc@/_swig_wrap_la-spot_orbit_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-spot_orbit_wrap.lo `test -f '@swigsrc@/spot_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/spot_orbit_wrap.cc
+
+@swigsrc@/_swig_wrap_la-quickbird_orbit_wrap.lo: @swigsrc@/quickbird_orbit_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-quickbird_orbit_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_orbit_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-quickbird_orbit_wrap.lo `test -f '@swigsrc@/quickbird_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/quickbird_orbit_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_orbit_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_orbit_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/quickbird_orbit_wrap.cc' object='@swigsrc@/_swig_wrap_la-quickbird_orbit_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-quickbird_orbit_wrap.lo `test -f '@swigsrc@/quickbird_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/quickbird_orbit_wrap.cc
+
+@swigsrc@/_swig_wrap_la-quickbird_time_table_wrap.lo: @swigsrc@/quickbird_time_table_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-quickbird_time_table_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_time_table_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-quickbird_time_table_wrap.lo `test -f '@swigsrc@/quickbird_time_table_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/quickbird_time_table_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_time_table_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_time_table_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/quickbird_time_table_wrap.cc' object='@swigsrc@/_swig_wrap_la-quickbird_time_table_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-quickbird_time_table_wrap.lo `test -f '@swigsrc@/quickbird_time_table_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/quickbird_time_table_wrap.cc
+
+@swigsrc@/_swig_wrap_la-vicar_file_wrap.lo: @swigsrc@/vicar_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vicar_file_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_file_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vicar_file_wrap.lo `test -f '@swigsrc@/vicar_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_file_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_file_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/vicar_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-vicar_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vicar_file_wrap.lo `test -f '@swigsrc@/vicar_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_file_wrap.cc
+
+@swigsrc@/_swig_wrap_la-vicar_argument_wrap.lo: @swigsrc@/vicar_argument_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vicar_argument_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vicar_argument_wrap.lo `test -f '@swigsrc@/vicar_argument_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_argument_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/vicar_argument_wrap.cc' object='@swigsrc@/_swig_wrap_la-vicar_argument_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vicar_argument_wrap.lo `test -f '@swigsrc@/vicar_argument_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_argument_wrap.cc
+
+@swigsrc@/_swig_wrap_la-vicar_dem_wrap.lo: @swigsrc@/vicar_dem_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vicar_dem_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_dem_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vicar_dem_wrap.lo `test -f '@swigsrc@/vicar_dem_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_dem_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_dem_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_dem_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/vicar_dem_wrap.cc' object='@swigsrc@/_swig_wrap_la-vicar_dem_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vicar_dem_wrap.lo `test -f '@swigsrc@/vicar_dem_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_dem_wrap.cc
+
+@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo: @swigsrc@/vicar_lite_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_lite_file_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo `test -f '@swigsrc@/vicar_lite_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_lite_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_lite_file_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_lite_file_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/vicar_lite_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo `test -f '@swigsrc@/vicar_lite_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_lite_file_wrap.cc
+
+@swigsrc@/_swig_wrap_la-vicar_multi_file_wrap.lo: @swigsrc@/vicar_multi_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vicar_multi_file_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_multi_file_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vicar_multi_file_wrap.lo `test -f '@swigsrc@/vicar_multi_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_multi_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_multi_file_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_multi_file_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/vicar_multi_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-vicar_multi_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vicar_multi_file_wrap.lo `test -f '@swigsrc@/vicar_multi_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_multi_file_wrap.cc
+
+@swigsrc@/_swig_wrap_la-datum_geoid96_wrap.lo: @swigsrc@/datum_geoid96_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-datum_geoid96_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-datum_geoid96_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-datum_geoid96_wrap.lo `test -f '@swigsrc@/datum_geoid96_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/datum_geoid96_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-datum_geoid96_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-datum_geoid96_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/datum_geoid96_wrap.cc' object='@swigsrc@/_swig_wrap_la-datum_geoid96_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-datum_geoid96_wrap.lo `test -f '@swigsrc@/datum_geoid96_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/datum_geoid96_wrap.cc
+
+@swigsrc@/_swig_wrap_la-srtm_dem_wrap.lo: @swigsrc@/srtm_dem_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-srtm_dem_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-srtm_dem_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-srtm_dem_wrap.lo `test -f '@swigsrc@/srtm_dem_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/srtm_dem_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-srtm_dem_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-srtm_dem_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/srtm_dem_wrap.cc' object='@swigsrc@/_swig_wrap_la-srtm_dem_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-srtm_dem_wrap.lo `test -f '@swigsrc@/srtm_dem_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/srtm_dem_wrap.cc
+
+@swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo: @swigsrc@/vicar_raster_image_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_raster_image_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo `test -f '@swigsrc@/vicar_raster_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_raster_image_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_raster_image_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_raster_image_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/vicar_raster_image_wrap.cc' object='@swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo `test -f '@swigsrc@/vicar_raster_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_raster_image_wrap.cc
+
+@swigsrc@/_swig_wrap_la-pos_export_orbit_wrap.lo: @swigsrc@/pos_export_orbit_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-pos_export_orbit_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-pos_export_orbit_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-pos_export_orbit_wrap.lo `test -f '@swigsrc@/pos_export_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/pos_export_orbit_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-pos_export_orbit_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-pos_export_orbit_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/pos_export_orbit_wrap.cc' object='@swigsrc@/_swig_wrap_la-pos_export_orbit_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-pos_export_orbit_wrap.lo `test -f '@swigsrc@/pos_export_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/pos_export_orbit_wrap.cc
+
+@swigsrc@/_swig_wrap_la-worldview2_cloudmask_wrap.lo: @swigsrc@/worldview2_cloudmask_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-worldview2_cloudmask_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-worldview2_cloudmask_wrap.lo `test -f '@swigsrc@/worldview2_cloudmask_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/worldview2_cloudmask_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/worldview2_cloudmask_wrap.cc' object='@swigsrc@/_swig_wrap_la-worldview2_cloudmask_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-worldview2_cloudmask_wrap.lo `test -f '@swigsrc@/worldview2_cloudmask_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/worldview2_cloudmask_wrap.cc
+
+@swigsrc@/_swig_wrap_la-doughnut_average_wrap.lo: @swigsrc@/doughnut_average_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-doughnut_average_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-doughnut_average_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-doughnut_average_wrap.lo `test -f '@swigsrc@/doughnut_average_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/doughnut_average_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-doughnut_average_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-doughnut_average_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/doughnut_average_wrap.cc' object='@swigsrc@/_swig_wrap_la-doughnut_average_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-doughnut_average_wrap.lo `test -f '@swigsrc@/doughnut_average_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/doughnut_average_wrap.cc
+
+@swigsrc@/_swig_wrap_la-material_detect_wrap.lo: @swigsrc@/material_detect_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-material_detect_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-material_detect_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-material_detect_wrap.lo `test -f '@swigsrc@/material_detect_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/material_detect_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-material_detect_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-material_detect_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/material_detect_wrap.cc' object='@swigsrc@/_swig_wrap_la-material_detect_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-material_detect_wrap.lo `test -f '@swigsrc@/material_detect_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/material_detect_wrap.cc
+
+@swigsrc@/_swig_wrap_la-paint_class_wrap.lo: @swigsrc@/paint_class_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-paint_class_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-paint_class_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-paint_class_wrap.lo `test -f '@swigsrc@/paint_class_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/paint_class_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-paint_class_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-paint_class_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/paint_class_wrap.cc' object='@swigsrc@/_swig_wrap_la-paint_class_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-paint_class_wrap.lo `test -f '@swigsrc@/paint_class_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/paint_class_wrap.cc
 
 @swigsrc@/_swig_wrap_la-display_stretch_wrap.lo: @swigsrc@/display_stretch_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-display_stretch_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-display_stretch_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-display_stretch_wrap.lo `test -f '@swigsrc@/display_stretch_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/display_stretch_wrap.cc
@@ -7032,6 +7375,21 @@ installcheck-local: $(INSTALLCHECK_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@vpath %.cc $(srcdir)/@srcinterface@
 @BUILD_AFIDS_PYTHON_TRUE@vpath %.h $(srcdir)/@srcinterface@
 @BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@srcinterface@
+
+# Allow searchs for .i, .h. and .cc files in this directory
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.cc $(srcdir)/@srcimplementation@
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.h $(srcdir)/@srcimplementation@
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@srcimplementation@
+
+# Allow searchs for .i, .h. and .cc files in this directory
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.cc $(srcdir)/@srccartlab@
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.h $(srcdir)/@srccartlab@
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@srccartlab@
+
+# Allow searchs for .i, .h. and .cc files in this directory
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@vpath %.cc $(srcdir)/@srcgtk@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@vpath %.h $(srcdir)/@srcgtk@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@vpath %.i $(srcdir)/@srcgtk@
 
 # Allow searchs for .i in this directory
 @BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@libgeocal@

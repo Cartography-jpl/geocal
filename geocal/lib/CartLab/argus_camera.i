@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "argus_camera.h"
 %}
-
-%geocal_shared_ptr(ArgusCamera);
+%base_import(camera)
+%geocal_shared_ptr(GeoCal::ArgusCamera);
 namespace GeoCal {
 class ArgusCamera : public Camera {
 public:
@@ -23,6 +25,6 @@ public:
 					   int Band) const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
-  %pickle_init(self.yaw, self.pitch, self.roll, self.focal_length)
+  %pickle_init(1, self.yaw, self.pitch, self.roll, self.focal_length)
 };
 }

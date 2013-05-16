@@ -1,10 +1,12 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "eci_tod_burl.h"
 %}
-%geocal_shared_ptr(EciTodBurl);
+%geocal_shared_ptr(GeoCal::EciTodBurl);
 namespace GeoCal {
 class EciTodBurl : public CartesianInertial {
 public:
@@ -23,6 +25,6 @@ public:
     static void set_delta_ut1(double v) {GeoCal::EciTodBurl::delta_ut1 = v;}
     static double get_delta_ut1() { return GeoCal::EciTodBurl::delta_ut1; }
   }
-  %pickle_init(self.position[0], self.position[1], self.position[2])
+  %pickle_init(1, self.position[0], self.position[1], self.position[2])
 };
 }

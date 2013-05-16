@@ -49,7 +49,7 @@ public:
 
   const std::string& file_name() const { return file_name_;}
 
-  GdalRasterImage image(int band = 1) const;
+  boost::shared_ptr<GdalRasterImage> image(int band = 1) const;
 
   void save_ortho(const MapInfo& Mi, const Camera& Cam, const Dem& D,
 		  const std::string& Fname,

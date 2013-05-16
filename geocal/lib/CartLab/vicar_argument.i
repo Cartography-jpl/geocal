@@ -1,15 +1,18 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "vicar_argument.h"
 %}
+%base_import(generic_object)
 
 %include "argcargv.i"
 
-%geocal_shared_ptr(VicarArgument);
+%geocal_shared_ptr(GeoCal::VicarArgument);
 namespace GeoCal {
-class VicarArgument {
+class VicarArgument: public GenericObject {
 public:
   VicarArgument(int ARGC, char** ARGV, bool copy_primary_input_label = false);
   void write_out(const std::string& Keyword, int Val);

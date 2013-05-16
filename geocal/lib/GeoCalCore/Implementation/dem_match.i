@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "dem_match.h"
 %}
 
-%geocal_shared_ptr(DemMatch);
+%geocal_shared_ptr(GeoCal::DemMatch);
 namespace GeoCal {
 class DemMatch{
 public:
@@ -19,7 +21,7 @@ public:
   %python_attribute(match, boost::shared_ptr<ImageToImageMatch>)
   %python_attribute(ray_intersect, boost::shared_ptr<RayIntersect>)
   %python_attribute(max_distance, double)
-  %pickle_init(self.match, self.ray_intersect, self.max_distance)
+  %pickle_init(1, self.match, self.ray_intersect, self.max_distance)
 };
 }
 

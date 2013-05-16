@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "quickbird_time_table.h"
 %}
-
-%geocal_shared_ptr(QuickBirdTimeTable);
+%base_import(time_table)
+%geocal_shared_ptr(GeoCal::QuickBirdTimeTable);
 namespace GeoCal {
 
 class QuickBirdTimeTable : public TimeTable {

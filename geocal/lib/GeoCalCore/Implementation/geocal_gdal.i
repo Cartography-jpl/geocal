@@ -1,11 +1,20 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "geocal_gdal.h"
+#include "ecr.h"
+#include "image_ground_connection.h"
 %}
 
-%geocal_shared_ptr(GdalBase);
+%base_import(generic_object)
+%import "map_info.i"
+%import "geocal_rpc.i"
+%import "ground_coordinate.i"
+%import "ecr.i"
+%geocal_shared_ptr(GeoCal::GdalBase);
 // GDALDataset causes SWIG 2.09 to segment fault. Not sure why, this
 // seems like a clear bug (SWIG should report an error if there is a
 // problem). But I don't think we actually need or use GDALDataset, so
@@ -27,7 +36,7 @@ namespace GeoCal {
 #define GDT_INT32 GDT_Int32
 #define GDT_FLOAT32 GDT_Float32
 #define GDT_FLOAT64 GDT_Float64
-class GdalBase {
+class GdalBase : public GenericObject {
 public:
   enum {};
   // %python_attribute(data_set, boost::shared_ptr<GDALDataset>)

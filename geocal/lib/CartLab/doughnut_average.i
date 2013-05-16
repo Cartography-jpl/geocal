@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "doughnut_average.h"
 %}
-
-%geocal_shared_ptr(DoughnutAverage);
+%base_import(calc_raster_multi_band)
+%geocal_shared_ptr(GeoCal::DoughnutAverage);
 
 namespace GeoCal {
 class DoughnutAverage : public CalcRasterMultiBand {

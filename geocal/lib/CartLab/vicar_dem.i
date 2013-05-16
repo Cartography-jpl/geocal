@@ -1,11 +1,16 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "vicar_dem.h"
+#include "ecr.h"
+#include "image_ground_connection.h"
 %}
-
-%geocal_shared_ptr(VicarDem);
+%base_import(dem_tiled_file)
+%import "vicar_file.i"
+%geocal_shared_ptr(GeoCal::VicarDem);
 namespace GeoCal {
 class VicarDem : public DemTiledFile {
 public:
@@ -30,7 +35,7 @@ public:
 	   const boost::shared_ptr<Datum>& D);
   %python_attribute2(vicar_file, vicar_file_ptr, boost::shared_ptr<VicarFile>)
   virtual double elevation(int Y_index, int X_index) const;
-  %pickle_init(self.vicar_file.file_name, self.outside_dem_is_error,
+  %pickle_init(1, self.vicar_file.file_name, self.outside_dem_is_error,
 	       self.number_line_per_tile, self.number_tile,
 	       self.datum)
 };

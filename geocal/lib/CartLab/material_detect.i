@@ -1,11 +1,15 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "material_detect.h"
+#include "raster_image_multi_band_variable.h"
 %}
-
-%geocal_shared_ptr(MaterialDetect);
+%base_import(calc_raster)
+%import "raster_image_multi_band.i"
+%geocal_shared_ptr(GeoCal::MaterialDetect);
 
 namespace GeoCal {
 class MaterialDetect : public CalcRaster {

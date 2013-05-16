@@ -118,13 +118,13 @@ SWIG_SOURCES += @srcimplementation@/map_info_image_ground_connection.i
 SWIG_SOURCES += @srcimplementation@/mask_image.i
 SWIG_SOURCES += @srcimplementation@/raster_averaged.i
 SWIG_SOURCES += @srcimplementation@/raster_subsample.i
-SWIG_SOURCES += @srcimplementation@/calc_raster.i
-SWIG_SOURCES += @srcimplementation@/calc_raster_multi_band.i
+SWIG_SRC += @swigsrc@/calc_raster_wrap.cc
+SWIG_SRC += @swigsrc@/calc_raster_multi_band_wrap.cc
 SWIG_SOURCES += @srcimplementation@/magnify_bilinear.i
 SWIG_SOURCES += @srcimplementation@/magnify_replicate.i
 SWIG_SOURCES += @srcimplementation@/smooth_image.i
-SWIG_SOURCES += @srcimplementation@/raster_image_tiled_file.i
-SWIG_SOURCES += @srcimplementation@/dem_tiled_file.i
+SWIG_SRC += @swigsrc@/raster_image_tiled_file_wrap.cc
+SWIG_SRC += @swigsrc@/dem_tiled_file_wrap.cc
 SWIG_SOURCES += @srcimplementation@/memory_dem.i
 SWIG_SOURCES += @srcimplementation@/map_reprojected_image.i
 SWIG_SOURCES += @srcimplementation@/calc_map_projected.i
@@ -137,8 +137,8 @@ SWIG_SOURCES += @srcimplementation@/location_to_file.i
 SWIG_SOURCES += @srcimplementation@/ray_intersect.i
 SWIG_SOURCES += @srcimplementation@/dem_match.i
 if HAVE_GDAL
-  SWIG_SOURCES += @srcimplementation@/geocal_gdal.i
-  SWIG_SOURCES += @srcimplementation@/gdal_raster_image.i
+  SWIG_SRC += @swigsrc@/geocal_gdal_wrap.cc
+  SWIG_SRC += @swigsrc@/gdal_raster_image_wrap.cc
   SWIG_SOURCES += @srcimplementation@/gdal_datum.i
   SWIG_SOURCES += @srcimplementation@/gdal_dem.i
   SWIG_SOURCES += @srcimplementation@/gdal_multi_band.i
@@ -149,8 +149,8 @@ endif
 SWIG_SOURCES += @srcimplementation@/memory_multi_band.i
 SWIG_SOURCES += @srcimplementation@/spice_helper.i
 SWIG_SOURCES += @srcimplementation@/raw_raster_image.i
-SWIG_SOURCES += @srcimplementation@/aircraft_orbit_data.i
-SWIG_SOURCES += @srcimplementation@/orbit_quaternion_list.i
+SWIG_SRC += @swigsrc@/aircraft_orbit_data_wrap.cc
+SWIG_SRC += @swigsrc@/orbit_quaternion_list_wrap.cc
 SWIG_SOURCES += @srcimplementation@/pan_sharpen.i
 SWIG_SOURCES += @srcimplementation@/scale_image.i
 SWIG_SOURCES += @srcimplementation@/apply_mask.i
@@ -195,4 +195,8 @@ geocal_test_all_SOURCES+= @srcimplementation@/dem_match_test.cc
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 
 
+# Allow searchs for .i, .h. and .cc files in this directory
+vpath %.cc $(srcdir)/@srcimplementation@
+vpath %.h $(srcdir)/@srcimplementation@
+vpath %.i $(srcdir)/@srcimplementation@
 

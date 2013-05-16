@@ -1,11 +1,18 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "gdal_raster_image.h"
+#include "ecr.h"
+#include "image_ground_connection.h"
+#include "raster_image_multi_band_variable.h"
 %}
-
-%geocal_shared_ptr(GdalRasterImage);
+%base_import(raster_image_tiled_file)
+%import "raster_image_multi_band.i"
+%import "geocal_gdal.i"
+%geocal_shared_ptr(GeoCal::GdalRasterImage);
 namespace GeoCal {
 template<class T> class Gdal;
 
@@ -13,9 +20,10 @@ class GdalRasterImage : public RasterImageTiledFile {
 public:
   enum { Byte, UInt16, Int16, UInt32, Int32, Float32,
          Float64 };
-  GdalRasterImage(const boost::shared_ptr<GDALDataset>&
-     Data_set, int Band_id = 1, int Number_tile = 4,
-     int Tile_number_line = -1, int Tile_number_sample = -1);
+  // See note in geocal_gdal on GDALDataset
+  // GdalRasterImage(const boost::shared_ptr<GDALDataset>&
+  //    Data_set, int Band_id = 1, int Number_tile = 4,
+  //    int Tile_number_line = -1, int Tile_number_sample = -1);
   GdalRasterImage(const std::string& Fname, const std::string& 
 		  Driver_name, int Number_line, int Number_sample,
 		  int Number_band,
@@ -48,7 +56,8 @@ public:
     read_all(const std::string& Fname);
   %python_attribute2(gdal_data_base, gdal_data_base_ptr, 
 		     boost::shared_ptr<GdalBase>)
-  %python_attribute(data_set, boost::shared_ptr<GDALDataset>)
+  // See note in geocal_gdal on GDALDataset
+   // %python_attribute(data_set, boost::shared_ptr<GDALDataset>)
   virtual void flush() const;
   void close();
   %python_attribute(is_closed, bool)
@@ -157,7 +166,7 @@ def __contains__(self, key):
 		   const std::string& Option = "",
 		   bool Require_copy = false,
 		   int Fill_value = -1000);
-  %pickle_init(self.file_names[0], 
+  %pickle_init(1, self.file_names[0], 
 	       self.band_id, self.number_tile, self.update,
 	       self.number_tile_line, 
 	       self.number_tile_sample)

@@ -1,10 +1,12 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "eci_tod.h"
 %}
-%geocal_shared_ptr(EciTod);
+%geocal_shared_ptr(GeoCal::EciTod);
 namespace GeoCal {
 class EciTod : public CartesianInertial {
 public:
@@ -21,6 +23,6 @@ public:
     const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
     const;
   Eci to_eci(const Time& T);
-  %pickle_init(self.position[0], self.position[1], self.position[2])
+  %pickle_init(1, self.position[0], self.position[1], self.position[2])
 };
 }

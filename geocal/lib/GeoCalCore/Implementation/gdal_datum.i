@@ -1,12 +1,14 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "gdal_datum.h"
 %}
 
 
-%geocal_shared_ptr(GdalDatum);
+%geocal_shared_ptr(GeoCal::GdalDatum);
 namespace GeoCal {
 class GdalDatum : public Datum {
 public:
@@ -16,7 +18,7 @@ public:
   GdalDatum(const boost::shared_ptr<GdalRasterImage>& Map_file);
   virtual double undulation(const GroundCoordinate& Gc) const;
   %python_attribute(map_file, boost::shared_ptr<GdalRasterImage>)
-  %pickle_init(self.map_file)
+  %pickle_init(1, self.map_file)
 };
 
 }

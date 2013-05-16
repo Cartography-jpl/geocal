@@ -1,12 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
-%module geocal
+%include "common.i"
+
 %{
 #include "orbit_data_image_ground_connection.h"
 %}
 
-%geocal_shared_ptr(OrbitDataImageGroundConnection);
+%geocal_shared_ptr(GeoCal::OrbitDataImageGroundConnection);
 namespace GeoCal {
 class OrbitDataImageGroundConnection: public ImageGroundConnection {
 public:
@@ -41,7 +42,7 @@ public:
   %python_attribute(refraction, boost::shared_ptr<Refraction>)
   %python_attribute(band, int)
   %python_attribute(max_height, double)
-  %pickle_init(self.orbit_data, self.camera, self.dem,
+  %pickle_init(1, self.orbit_data, self.camera, self.dem,
 	       self.image, self.title, self.refraction,
 	       self.resolution, self.band, self.max_height)
 };

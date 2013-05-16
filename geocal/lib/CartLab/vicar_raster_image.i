@@ -1,11 +1,16 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "vicar_raster_image.h"
+#include "ecr.h"
+#include "image_ground_connection.h"
 %}
-
-%geocal_shared_ptr(VicarRasterImage);
+%base_import(raster_image_tiled_file)
+%import "vicar_file.i"
+%geocal_shared_ptr(GeoCal::VicarRasterImage);
 namespace GeoCal {
 class VicarRasterImage : public RasterImageTiledFile {
 public:
@@ -46,7 +51,7 @@ public:
   void set_map_info(const MapInfo& Mi);
   %python_attribute(rpc, Rpc)
   %python_attribute(map_info, MapInfo)
-  %pickle_init(self.vicar_file.file_name, self.vicar_file.access,
+  %pickle_init(1, self.vicar_file.file_name, self.vicar_file.access,
 	       self.number_tile_line, self.number_tile, 
 	       self.vicar_file.force_area_pixel)
   %pythoncode {

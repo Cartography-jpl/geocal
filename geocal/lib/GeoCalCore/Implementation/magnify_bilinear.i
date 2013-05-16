@@ -1,12 +1,14 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "magnify_bilinear.h"
 %}
 
-%geocal_shared_ptr(MagnifyBilinear);
-%geocal_shared_ptr(MagnifyBilinearImageGroundConnection);
+%geocal_shared_ptr(GeoCal::MagnifyBilinear);
+%geocal_shared_ptr(GeoCal::MagnifyBilinearImageGroundConnection);
 
 namespace GeoCal {
 class MagnifyBilinear : public CalcRaster {
@@ -30,7 +32,7 @@ public:
   %python_attribute(original_image_ground_connection,
 		    boost::shared_ptr<ImageGroundConnection>)
   %python_attribute(magnification_factor, int)
-  %pickle_init(self.original_image_ground_connection, self.magnification_factor)
+  %pickle_init(1, self.original_image_ground_connection, self.magnification_factor)
 };
 
 }

@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "gdal_multi_file.h"
 %}
 
-%geocal_shared_ptr(GdalMultiFile);
+%geocal_shared_ptr(GeoCal::GdalMultiFile);
 namespace GeoCal {
 class GdalMultiFile : public MapProjectedMultifile {
 public:

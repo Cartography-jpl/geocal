@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "refraction.h"
 %}
 
-%geocal_shared_ptr(Refraction);
+%geocal_shared_ptr(GeoCal::Refraction);
 namespace GeoCal {
 class Refraction {
 public:
@@ -23,6 +25,6 @@ public:
   refraction_reverse(const GroundCoordinate& Spacecraft_pos,
   		     const GroundCoordinate& Gc_with_refraction) const;
   std::string print_to_string() const;
-  %pickle_init(self.altitude, self.latitude, self.index_refraction_surface)
+  %pickle_init(1, self.altitude, self.latitude, self.index_refraction_surface)
 };
 }

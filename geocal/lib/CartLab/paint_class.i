@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "paint_class.h"
 %}
-
-%geocal_shared_ptr(PaintClass);
+%base_import(calc_raster_multi_band)
+%geocal_shared_ptr(GeoCal::PaintClass);
 
 namespace GeoCal {
 class PaintClass : public CalcRasterMultiBand {

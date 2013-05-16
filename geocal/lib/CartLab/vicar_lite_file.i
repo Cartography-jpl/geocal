@@ -1,16 +1,24 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "vicar_lite_file.h"
+#include "ecr.h"
+#include "image_ground_connection.h"
 %}
-
-%geocal_shared_ptr(VicarLiteFile);
-%geocal_shared_ptr(VicarLiteRasterImage);
-%geocal_shared_ptr(VicarLiteDem);
+%base_import(generic_object)
+%base_import(raster_image)
+%base_import(dem_map_info)
+%import "map_info.i"
+%import "geocal_rpc.i"
+%geocal_shared_ptr(GeoCal::VicarLiteFile);
+%geocal_shared_ptr(GeoCal::VicarLiteRasterImage);
+%geocal_shared_ptr(GeoCal::VicarLiteDem);
 
 namespace GeoCal {
-class VicarLiteFile {
+class VicarLiteFile: public GenericObject {
 public:
   enum data_type {VICAR_BYTE, VICAR_HALF, VICAR_FULL, VICAR_FLOAT,
 		  VICAR_DOUBLE};
@@ -49,7 +57,7 @@ public:
        return k;
     }
   }	
-  %pickle_init(self.file_name, self.access, self.force_area_pixel)
+  %pickle_init(1, self.file_name, self.access, self.force_area_pixel)
 };
 
 class VicarLiteRasterImage : public RasterImage {
@@ -65,7 +73,7 @@ public:
   virtual void write(int Line, int Sample, int Val);
   %python_attribute(is_compressed, bool)
   %python_attribute(band, int)
-  %pickle_init(self.file.file_name, self.file.access, self.band,
+  %pickle_init(1, self.file.file_name, self.file.access, self.band,
 	       self.number_tile_line, self.number_tile_sample,
 	       self.file.force_area_pixel)
 };
@@ -81,7 +89,7 @@ public:
   %python_attribute2(file, file_ptr, boost::shared_ptr<VicarLiteFile>)
   virtual double elevation(int Y_index, int X_index) const;
   %python_attribute(band, int)
-  %pickle_init(self.file.file_name, self.outside_dem_is_error,
+  %pickle_init(1, self.file.file_name, self.outside_dem_is_error,
 	       self.datum, self.band)
 };
 

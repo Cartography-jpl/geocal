@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "calc_raster.h"
 %}
-
-%geocal_shared_ptr(CalcRaster);
+%base_import(raster_image_variable)
+%geocal_shared_ptr(GeoCal::CalcRaster);
 
 namespace GeoCal {
 class CalcRaster : public RasterImageVariable {

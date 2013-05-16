@@ -1,13 +1,19 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "vicar_file.h"
+#include "ecr.h"
+#include "image_ground_connection.h"
 %}
-
-%geocal_shared_ptr(VicarFile);
+%base_import(generic_object)
+%import "map_info.i"
+%import "geocal_rpc.i"
+%geocal_shared_ptr(GeoCal::VicarFile);
 namespace GeoCal {
-class VicarFile {
+class VicarFile : public GenericObject {
 public:
   enum label_type {VICAR_INT, VICAR_REAL, VICAR_STRING};
   enum data_type {VICAR_BYTE, VICAR_HALF, VICAR_FULL, VICAR_FLOAT,
@@ -99,6 +105,6 @@ def __setitem__(self, key, v):
     else:
       self.label_set(key, v)
   }
-  %pickle_init(self.file_name, self.access, self.force_area_pixel)
+  %pickle_init(1, self.file_name, self.access, self.force_area_pixel)
 };
 }

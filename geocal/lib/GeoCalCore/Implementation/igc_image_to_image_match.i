@@ -1,11 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "igc_image_to_image_match.h"
 %}
 
-%geocal_shared_ptr(IgcImageToImageMatch);
+%geocal_shared_ptr(GeoCal::IgcImageToImageMatch);
 namespace GeoCal {
 class IgcImageToImageMatch : public ImageToImageMatch {
 public:
@@ -21,7 +23,7 @@ public:
   %python_attribute(image_ground_connection2, 
 		    boost::shared_ptr<ImageGroundConnection>)
   %python_attribute(matcher, boost::shared_ptr<ImageMatcher>)
-  %pickle_init(self.image_ground_connection1,
+  %pickle_init(1, self.image_ground_connection1,
 	       self.image_ground_connection2, self.matcher)
 };
 }

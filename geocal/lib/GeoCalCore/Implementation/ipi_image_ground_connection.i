@@ -1,12 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
-%module geocal
+%include "common.i"
+
 %{
 #include "ipi_image_ground_connection.h"
 %}
 
-%geocal_shared_ptr(IpiImageGroundConnection);
+%geocal_shared_ptr(GeoCal::IpiImageGroundConnection);
 namespace GeoCal {
 class IpiImageGroundConnection: public ImageGroundConnection {
 public:
@@ -27,7 +28,7 @@ public:
   %python_attribute(band, int)
   %python_attribute(resolution, double)
   %python_attribute(maximum_height, double)
-  %pickle_init(self.ipi, self.dem, self.image, self.title,
+  %pickle_init(1, self.ipi, self.dem, self.image, self.title,
 	       self.resolution, self.band, self.maximum_height)
 };
 }

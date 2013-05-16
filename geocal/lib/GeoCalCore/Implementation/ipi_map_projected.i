@@ -6,8 +6,10 @@
 %{
 #include "ipi_map_projected.h"
 %}
-
-
+%base_import(calc_map_projected)
+%import "ipi.i"
+%import "dem.i"
+%import "raster_image.i"
 %geocal_shared_ptr(GeoCal::IpiMapProjected);
 namespace GeoCal {
 class IpiMapProjected : public CalcMapProjected {

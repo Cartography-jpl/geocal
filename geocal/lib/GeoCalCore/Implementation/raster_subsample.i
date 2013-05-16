@@ -6,7 +6,7 @@
 %{
 #include "raster_subsample.h"
 %}
-
+%base_import(raster_image_variable)
 %geocal_shared_ptr(GeoCal::RasterSubSample);
 
 namespace GeoCal {

@@ -1,10 +1,10 @@
 # This gets included in the top makefile. This list files here that are
 # used to make up libgeocal.la.
 
-SWIG_SOURCES =
-SWIG_SOURCES += @libgeocal@/swig.i
-SWIG_SOURCES += @libgeocal@/array.i
-SWIG_SOURCES += @libgeocal@/shared_ptr_list.i
+# Keep this for a short time, until we know we have everything out of
+# these
+#SWIG_SOURCES += @libgeocal@/swig.i
+#SWIG_SOURCES += @libgeocal@/array.i
 
 SWIG_SRC += @swigsrc@/swig_std_wrap.cc
 SWIG_SRC += @swigsrc@/swig_array_wrap.cc

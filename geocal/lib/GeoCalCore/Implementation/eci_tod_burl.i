@@ -6,6 +6,7 @@
 %{
 #include "eci_tod_burl.h"
 %}
+%base_import(ground_coordinate)
 %geocal_shared_ptr(GeoCal::EciTodBurl);
 namespace GeoCal {
 class EciTodBurl : public CartesianInertial {

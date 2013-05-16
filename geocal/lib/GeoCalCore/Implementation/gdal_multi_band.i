@@ -5,8 +5,12 @@
 
 %{
 #include "gdal_multi_band.h"
+#include "ecr.h"
+#include "raster_image_multi_band_variable.h"
+#include "image_ground_connection.h"
 %}
-
+%base_import(raster_image_multi_band_variable)
+%import "gdal_raster_image.i"
 %geocal_shared_ptr(GeoCal::GdalMultiBand);
 namespace GeoCal {
 class GdalMultiBand : public RasterImageMultiBandVariable {

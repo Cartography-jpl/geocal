@@ -7,6 +7,7 @@
 #include "calc_map_projected.h"
 %}
 
+%base_import(raster_image_variable)
 %geocal_shared_ptr(GeoCal::CalcMapProjected);
 
 namespace GeoCal {

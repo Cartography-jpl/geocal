@@ -6,6 +6,7 @@
 %{
 #include "gdal_multi_file.h"
 %}
+%base_import(map_projected_multifile)
 
 %geocal_shared_ptr(GeoCal::GdalMultiFile);
 namespace GeoCal {

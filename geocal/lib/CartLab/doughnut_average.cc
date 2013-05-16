@@ -93,6 +93,14 @@ blitz::Array<double, 2> DoughnutAverage::pandif(int Lstart, int Sstart,
 /// \param Window_size The window size we are averaging. Should be odd number.
 /// \param Doughnut_size The doughnut we are excluding in the average.
 ///    Should be odd, and < Window_size.
+/// \param Allow_gore If "Allow_gore" is true, then any point
+///    other than the center can be gore and we just exclude it from the
+///    average. If "Allow_gore" is false, we set a value to 0 if any value
+///    in the window is 0. In all cases, we set a value to 0 if the center
+//     is 0.
+/// \param Number_tile_line Number of lines in each tile
+/// \param Number_tile_sample Number of samples in each tile
+/// \param Number_tile Number of tiles to use
 //-----------------------------------------------------------------------
 
 DoughnutAverage::DoughnutAverage

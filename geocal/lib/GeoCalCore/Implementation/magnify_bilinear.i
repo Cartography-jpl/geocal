@@ -6,7 +6,8 @@
 %{
 #include "magnify_bilinear.h"
 %}
-
+%base_import(calc_raster)
+%base_import(image_ground_connection)
 %geocal_shared_ptr(GeoCal::MagnifyBilinear);
 %geocal_shared_ptr(GeoCal::MagnifyBilinearImageGroundConnection);
 

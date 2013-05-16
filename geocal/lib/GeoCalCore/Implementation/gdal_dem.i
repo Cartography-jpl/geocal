@@ -6,7 +6,8 @@
 %{
 #include "gdal_dem.h"
 %}
-
+%base_import(dem_tiled_file)
+%import "geocal_datum.i"
 %geocal_shared_ptr(GeoCal::GdalDem);
 
 namespace GeoCal {

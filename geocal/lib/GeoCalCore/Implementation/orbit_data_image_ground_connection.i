@@ -6,7 +6,12 @@
 %{
 #include "orbit_data_image_ground_connection.h"
 %}
-
+%base_import(image_ground_connection)
+%import "orbit.i"
+%import "camera.i"
+%import "dem.i"
+%import "raster_image.i"
+%import "refraction.i"
 %geocal_shared_ptr(GeoCal::OrbitDataImageGroundConnection);
 namespace GeoCal {
 class OrbitDataImageGroundConnection: public ImageGroundConnection {

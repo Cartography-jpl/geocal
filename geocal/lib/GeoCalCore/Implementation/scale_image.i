@@ -6,7 +6,7 @@
 %{
 #include "scale_image.h"
 %}
-
+%base_import(calc_raster)
 %geocal_shared_ptr(GeoCal::ScaleImage);
 
 namespace GeoCal {

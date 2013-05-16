@@ -5,8 +5,12 @@
 
 %{
 #include "surface_image_to_image_match.h"
+#include "image_ground_connection.h"
 %}
-
+%base_import(image_to_image_match)
+%import "image_ground_connection.i"
+%import "map_info.i"
+%import "image_matcher.i"
 %geocal_shared_ptr(GeoCal::SurfaceImageToImageMatch);
 namespace GeoCal {
 

@@ -8,8 +8,9 @@
 #include "eci_tod.h"
 #include "eci_tod_burl.h"
 %}
-
-
+%base_import(orbit)
+%import "eci_tod.i"
+%import "eci_tod_burl.i"
 namespace GeoCal {
 template<class PositionType, class TimeCreatorType> class HdfOrbit : public Orbit {
 public:
@@ -21,7 +22,7 @@ public:
 };
 }
 
-%shared_ptr(GeoCal::HdfOrbit<GeoCal::EciTod, GeoCal::TimeAcsCreator>);
+%geocal_shared_ptr(GeoCal::HdfOrbit<GeoCal::EciTod, GeoCal::TimeAcsCreator>);
 %template(HdfOrbit_EciTod_TimeAcs) GeoCal::HdfOrbit<GeoCal::EciTod, GeoCal::TimeAcsCreator>;
-%shared_ptr(GeoCal::HdfOrbit<GeoCal::EciTodBurl, GeoCal::TimeAcsCreator>);
+%geocal_shared_ptr(GeoCal::HdfOrbit<GeoCal::EciTodBurl, GeoCal::TimeAcsCreator>);
 %template(HdfOrbit_EciTodBurl_TimeAcs) GeoCal::HdfOrbit<GeoCal::EciTodBurl, GeoCal::TimeAcsCreator>;

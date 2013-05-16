@@ -6,8 +6,10 @@
 %{
 #include "igc_map_projected.h"
 %}
-
-
+%base_import(calc_map_projected)
+%import "image_ground_connection.i"
+%import "raster_image.i"
+%import "map_info.i"
 %geocal_shared_ptr(GeoCal::IgcMapProjected);
 namespace GeoCal {
 class IgcMapProjected : public CalcMapProjected {

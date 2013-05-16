@@ -154,7 +154,18 @@ class DoughnutAverage(geocal.calc_raster_multi_band.CalcRasterMultiBand):
         Window_size:  The window size we are averaging. Should be odd number.
 
         Doughnut_size:  The doughnut we are excluding in the average. Should
-        be odd, and < Window_size. 
+        be odd, and < Window_size.
+
+        Allow_gore:  If "Allow_gore" is true, then any point other than the
+        center can be gore and we just exclude it from the average. If
+        "Allow_gore" is false, we set a value to 0 if any value in the
+        window is 0. In all cases, we set a value to 0 if the center
+
+        Number_tile_line:  Number of lines in each tile
+
+        Number_tile_sample:  Number of samples in each tile
+
+        Number_tile:  Number of tiles to use 
         """
         _doughnut_average.DoughnutAverage_swiginit(self,_doughnut_average.new_DoughnutAverage(*args))
     def cvdnorm(self, *args):

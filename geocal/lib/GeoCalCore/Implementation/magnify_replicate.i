@@ -6,7 +6,7 @@
 %{
 #include "magnify_replicate.h"
 %}
-
+%base_import(calc_raster)
 %geocal_shared_ptr(GeoCal::MagnifyReplicate);
 
 namespace GeoCal {

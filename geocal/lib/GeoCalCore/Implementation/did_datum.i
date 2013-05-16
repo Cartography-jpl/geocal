@@ -7,7 +7,7 @@
 #include "did_datum.h"
 %}
 
-
+%base_import(geocal_datum)
 %geocal_shared_ptr(GeoCal::DidDatum);
 namespace GeoCal {
 class DidDatum : public Datum {

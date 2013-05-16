@@ -14,6 +14,7 @@ public:
 
 //-----------------------------------------------------------------------
 /// Constructor.
+/// \param F Underlying file
 /// \param D Datum to use when translating to elevation about
 ///    ellipsoid
 /// \param M MapInfo going with file F
@@ -61,6 +62,7 @@ protected:
 
 //-----------------------------------------------------------------------
 /// Initialize data.
+/// \param F File
 /// \param D Datum to use when translating to elevation about
 ///    ellipsoid
 /// \param M MapInfo going with file F

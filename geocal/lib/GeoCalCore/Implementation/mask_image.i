@@ -6,7 +6,8 @@
 %{
 #include "mask_image.h"
 %}
-
+%base_import(mask)
+%import "raster_image.i"
 %geocal_shared_ptr(GeoCal::MaskImage);
 
 namespace GeoCal {

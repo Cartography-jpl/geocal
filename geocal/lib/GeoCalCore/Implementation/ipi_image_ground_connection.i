@@ -6,7 +6,10 @@
 %{
 #include "ipi_image_ground_connection.h"
 %}
-
+%base_import(image_ground_connection)
+%import "ipi.i"
+%import "dem.i"
+%import "raster_image.i"
 %geocal_shared_ptr(GeoCal::IpiImageGroundConnection);
 namespace GeoCal {
 class IpiImageGroundConnection: public ImageGroundConnection {

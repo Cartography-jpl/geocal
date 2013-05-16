@@ -6,10 +6,12 @@
 %{
 #include "dem_match.h"
 %}
-
+%base_import(generic_object)
+%import "image_to_image_match.i"
+%import "ray_intersect.i"
 %geocal_shared_ptr(GeoCal::DemMatch);
 namespace GeoCal {
-class DemMatch{
+class DemMatch : public GenericObject {
 public:
   DemMatch(const boost::shared_ptr<ImageToImageMatch>& Match,
 	   const boost::shared_ptr<RayIntersect>& Ray_intersect,

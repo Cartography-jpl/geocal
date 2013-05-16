@@ -6,10 +6,13 @@
 %{
 #include "ray_intersect.h"
 %}
-
+%base_import(generic_object)
+%import "image_ground_connection.i"
+%import "ecr.i"
+%import "ground_coordinate.i"
 %geocal_shared_ptr(GeoCal::RayIntersect);
 namespace GeoCal {
-class RayIntersect {
+class RayIntersect : public GenericObject {
 public:
   RayIntersect(const boost::shared_ptr<ImageGroundConnection> Igc1,
 	       const boost::shared_ptr<ImageGroundConnection> Igc2);

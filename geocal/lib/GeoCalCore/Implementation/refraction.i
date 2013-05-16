@@ -6,10 +6,11 @@
 %{
 #include "refraction.h"
 %}
-
+%base_import(generic_object)
+%import "ground_coordinate.i"
 %geocal_shared_ptr(GeoCal::Refraction);
 namespace GeoCal {
-class Refraction {
+class Refraction : public GenericObject {
 public:
   Refraction(double Altitude, double Latitude, 
 	     double Index_refraction_surface = -1);

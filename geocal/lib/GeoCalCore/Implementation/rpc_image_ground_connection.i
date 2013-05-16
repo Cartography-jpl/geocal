@@ -6,7 +6,10 @@
 %{
 #include "rpc_image_ground_connection.h"
 %}
-
+%base_import(image_ground_connection)
+%import "geocal_rpc.i"
+%import "dem.i"
+%import "raster_image.i"
 %geocal_shared_ptr(GeoCal::RpcImageGroundConnection);
 namespace GeoCal {
 class RpcImageGroundConnection: public ImageGroundConnection {

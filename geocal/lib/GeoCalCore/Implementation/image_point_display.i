@@ -5,8 +5,11 @@
 
 %{
 #include "image_point_display.h"
+#include "ecr.h"
+#include "raster_image_multi_band_variable.h"
+#include "image_ground_connection.h"
 %}
-
+%base_import(gdal_raster_image)
 %geocal_shared_ptr(GeoCal::ImagePointDisplay);
 namespace GeoCal {
 class ImagePointDisplay : public GdalRasterImage {

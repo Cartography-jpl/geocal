@@ -6,7 +6,7 @@
 %{
 #include "raw_raster_image.h"
 %}
-
+%base_import(raster_image)
 %geocal_shared_ptr(GeoCal::RawRasterImage);
 
 namespace GeoCal {

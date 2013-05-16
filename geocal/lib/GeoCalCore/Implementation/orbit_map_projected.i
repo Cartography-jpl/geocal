@@ -6,8 +6,11 @@
 %{
 #include "orbit_map_projected.h"
 %}
-
-
+%base_import(calc_map_projected)
+%import "orbit.i"
+%import "camera.i"
+%import "dem.i"
+%import "map_info.i"
 %geocal_shared_ptr(GeoCal::OrbitMapProjected);
 namespace GeoCal {
 class OrbitMapProjected : public CalcMapProjected {

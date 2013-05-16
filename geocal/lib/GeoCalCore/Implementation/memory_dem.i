@@ -6,7 +6,7 @@
 %{
 #include "memory_dem.h"
 %}
-
+%base_import(dem_map_info)
 %geocal_shared_ptr(GeoCal::MemoryDem);
 namespace GeoCal {
 class MemoryDem : public DemMapInfo {

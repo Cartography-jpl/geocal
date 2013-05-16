@@ -6,13 +6,16 @@
 %{
 #include "ogr_coordinate.h"
 %}
-
+%base_import(generic_object)
+%base_import(ground_coordinate)
+%base_import(coordinate_converter)
+%import "geodetic.i"
 %geocal_shared_ptr(GeoCal::OgrWrapper);
 %geocal_shared_ptr(GeoCal::OgrCoordinate);
 %geocal_shared_ptr(GeoCal::OgrCoordinateConverter);
 
 namespace GeoCal {
-class OgrWrapper {
+class OgrWrapper : public GenericObject {
 public:
   OgrWrapper(const std::string& Wkt);
   OgrWrapper(const boost::shared_ptr<OGRSpatialReference>& Ogr);

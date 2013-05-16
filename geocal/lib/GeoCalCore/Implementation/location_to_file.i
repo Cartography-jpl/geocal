@@ -6,10 +6,10 @@
 %{
 #include "location_to_file.h"
 %}
-
+%base_import(generic_object)
 %geocal_shared_ptr(GeoCal::LocationToFile);
 namespace GeoCal {
-class LocationToFile {
+class LocationToFile: public GenericObject {
   LocationToFile() {}
   void add(int x1, int y1, int x2, int y2, const std::string& fname);
   std::string find(int x, int y) const;

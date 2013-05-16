@@ -6,7 +6,7 @@
 %{
 #include "raster_averaged.h"
 %}
-
+%base_import(raster_image)
 %geocal_shared_ptr(GeoCal::RasterAveraged);
 
 namespace GeoCal {

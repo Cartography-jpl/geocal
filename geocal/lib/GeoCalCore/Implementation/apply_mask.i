@@ -6,7 +6,7 @@
 %{
 #include "apply_mask.h"
 %}
-
+%base_import(calc_raster)
 %geocal_shared_ptr(GeoCal::ApplyMask);
 
 namespace GeoCal {

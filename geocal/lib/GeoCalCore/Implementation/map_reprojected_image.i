@@ -6,7 +6,7 @@
 %{
 #include "map_reprojected_image.h"
 %}
-
+%base_import(raster_image_variable)
 %geocal_shared_ptr(GeoCal::MapReprojectedImage);
 namespace GeoCal {
 class MapReprojectedImage : public RasterImageVariable {

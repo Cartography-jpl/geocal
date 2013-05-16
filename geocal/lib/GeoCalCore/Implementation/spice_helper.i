@@ -6,9 +6,8 @@
 %{
 #include "spice_helper.h"
 %}
-
 namespace GeoCal {
-class SpiceHelper {
+class SpiceHelper  {
 public:
   static bool spice_available();
   static void spice_setup(const std::string& Kernel = "geocal.ker");

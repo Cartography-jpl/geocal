@@ -5,9 +5,12 @@
 
 %{
 #include "gdal_datum.h"
+#include "ecr.h"
+#include "raster_image_multi_band_variable.h"
+#include "image_ground_connection.h"
 %}
-
-
+%base_import(geocal_datum)
+%import "gdal_raster_image.i"
 %geocal_shared_ptr(GeoCal::GdalDatum);
 namespace GeoCal {
 class GdalDatum : public Datum {

@@ -6,7 +6,7 @@
 %{
 #include "smooth_image.h"
 %}
-
+%base_import(calc_raster)
 %geocal_shared_ptr(GeoCal::SmoothImage);
 
 namespace GeoCal {

@@ -6,7 +6,8 @@
 %{
 #include "pan_sharpen.h"
 %}
-
+%base_import(calc_raster_multi_band)
+%import "statistic.i"
 %geocal_shared_ptr(GeoCal::PanSharpen);
 
 namespace GeoCal {

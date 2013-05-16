@@ -1,37 +1,23 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+%include <std_vector.i>
+%include "common.i"
+
 %{
 #include "orbit.h"
-#include "argus_orbit.h"
-#include "hdf_orbit.h"
-#include "quickbird_orbit.h"
-#include "spot_orbit.h"
-#include "eci_tod.h"
-namespace GeoCal {
-  typedef HdfOrbit<EciTod, TimeAcsCreator> HdfOrbit_EciTod_TimeAcs;
-}
 %}
-
+%base_import(generic_object)
+%import "camera.i"
+%import "ground_coordinate.i"
+%import "look_vector.i"
+%import "dem.i"
 %geocal_shared_ptr(GeoCal::OrbitData);
 %geocal_shared_ptr(GeoCal::QuaternionOrbitData);
 %geocal_shared_ptr(GeoCal::Orbit);
 %geocal_shared_ptr(GeoCal::KeplerOrbit);
 
-%shared_ptr_dynamic_list(GeoCal::Orbit,
-			 GeoCal::KeplerOrbit,
-			 GeoCal::QuickBirdOrbit,
-			 GeoCal::SpotOrbit,
-			 GeoCal::ArgusOrbit,
-			 GeoCal::PosExportOrbit,
-			 GeoCal::HdfOrbit_EciTod_TimeAcs
-			 );
-
-%shared_ptr_dynamic_list(GeoCal::OrbitData,
-			 GeoCal::ArgusOrbitData,
-			 GeoCal::AircraftOrbitData,
-			 GeoCal::QuaternionOrbitData);
 namespace GeoCal {
-class OrbitData {
+class OrbitData : public GenericObject {
 public:
   double resolution_meter(const Camera& C, int Band = 0) const;
   double OrbitData::resolution_meter(const Camera& C, const FrameCoordinate& Fc,
@@ -115,12 +101,16 @@ def velocity_cf(self):
     return self._velocity_cf()
   }
 %pythoncode {
+@classmethod
+def pickle_format_version(cls):
+  return 1
+
 def __reduce__(self):
   if(self.from_cf):
-    return _new_from_init, (self.__class__, self.time, self.position_cf, 
+    return _new_from_init, (self.__class__, 1, self.time, self.position_cf, 
 			    self.velocity_cf, self.sc_to_cf)
   else:
-    return _new_from_init, (self.__class__, self.time, self.position_ci, 
+    return _new_from_init, (self.__class__, 1, self.time, self.position_ci, 
 			    self.velocity_ci, self.sc_to_ci)
 
 }
@@ -141,7 +131,7 @@ def __reduce__(self):
 // base class. But I'll keep this note here in case we are cutting
 // and pasting to make another class a director
 
-class Orbit {
+class Orbit : public GenericObject {
 public:
   Orbit(Time Min_time = Time::min_valid_time, 
 	Time Max_time = Time::max_valid_time);

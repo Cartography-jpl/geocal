@@ -1,14 +1,18 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "frame_coordinate.h"
 %}
+%base_import(generic_object)
 
 %geocal_shared_ptr(GeoCal::FrameCoordinate);
 
 namespace GeoCal {
 
-class FrameCoordinate {
+class FrameCoordinate : public GenericObject {
 public:
   FrameCoordinate();
   FrameCoordinate(double L, double S);

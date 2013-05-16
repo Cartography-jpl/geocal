@@ -1,32 +1,20 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+%include <std_vector.i>
+%include "common.i"
+
 %{
 #include "camera.h"
-#include "argus_camera.h"
-#include "quaternion_camera.h"
-#include "quickbird_camera.h"
-#include "spot_camera.h"
 %}
-
+%base_import(generic_object)
+%import "frame_coordinate.i"
+%import "look_vector.i"
 %geocal_shared_ptr(GeoCal::Camera);
 %geocal_shared_ptr(GeoCal::PushBroomCamera);
 %geocal_shared_ptr(GeoCal::SimplePushBroomCamera);
 
-%shared_ptr_dynamic_list(GeoCal::Camera,
-			 GeoCal::ArgusCamera,
-			 GeoCal::QuaternionCamera,
-			 GeoCal::SimplePushBroomCamera,
-			 GeoCal::QuickBirdCamera,
-			 GeoCal::SpotCamera,
-			 GeoCal::PushBroomCamera);
-
-%shared_ptr_dynamic_list(GeoCal::PushBroomCamera,
-			 GeoCal::SimplePushBroomCamera,
-			 GeoCal::QuickBirdCamera,
-			 GeoCal::SpotCamera)
-
 namespace GeoCal {
-class Camera {
+class Camera : public GenericObject {
 public:
   enum Direction {FORWARD, AFTWARD};
   Camera();

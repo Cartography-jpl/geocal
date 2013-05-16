@@ -1,25 +1,18 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
+%include "common.i"
+
 %{
 #include "dem.h"
-#include "simple_dem.h"
-#include "srtm_dem.h"
-#include "vicar_lite_file.h"
-#include "vicar_dem.h"
-#include "gdal_dem.h"
 %}
 
-%geocal_shared_ptr(GeoCal::Dem);
+%base_import(generic_object)
+%import "ground_coordinate.i"
 
-%shared_ptr_dynamic_list(GeoCal::Dem,
-			 GeoCal::SimpleDem, 
-			 GeoCal::SrtmDem,
-			 GeoCal::VicarLiteDem,
-			 GeoCal::VicarDem,
-			 GeoCal::GdalDem);
+%geocal_shared_ptr(GeoCal::Dem);
 namespace GeoCal {
-class Dem {
+class Dem : public GenericObject {
 public:
   virtual double distance_to_surface(const GroundCoordinate& Gp) const = 0;
   virtual double height_reference_surface(const GroundCoordinate& Gp) 

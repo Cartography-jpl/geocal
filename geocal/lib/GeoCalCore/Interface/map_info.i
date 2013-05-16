@@ -1,12 +1,19 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "map_info.h"
 %}
+%base_import(generic_object)
+%import "coordinate_converter.i"
+%import "ground_coordinate.i"
+%import "dem.i"
 %geocal_shared_ptr(GeoCal::MapInfo);
 
 namespace GeoCal {
-class MapInfo {
+class MapInfo : public GenericObject {
 public:
   MapInfo() {}
   MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv, double Ulc_x, 

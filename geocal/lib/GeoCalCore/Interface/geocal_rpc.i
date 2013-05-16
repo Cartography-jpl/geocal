@@ -1,20 +1,30 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "geocal_rpc.h"
+#include "image_ground_connection.h"
 %}
-
+%base_import(generic_object)
+%import "dem.i"
+%import "ground_coordinate.i"
+%import "image_coordinate.i"
+%import "image_ground_connection.i"
+%import "geodetic.i"
+%import "raster_image.i"
 %geocal_shared_ptr(GeoCal::Rpc);
-%geocal_shared_ptr(GeoCal::RasterImage);
-%geocal_shared_ptr(GeoCal::ImageGroundConnection);
 
 %pythoncode {
-def _new_rpc(is_rpc_a, error_bias, error_random, height_offset, 
+def _new_rpc(cls, version, is_rpc_a, error_bias, error_random, height_offset, 
              height_scale, latitude_offset,
              latitude_scale, longitude_offset, longitude_scale,
              line_offset, line_scale, sample_offset, sample_scale,
              line_denominator, line_numerator, sample_denominator,
              sample_numerator, fit_line_numerator, fit_sample_numerator):
+    if(cls.pickle_format_version() != version):
+      raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
     rpc = Rpc()
     rpc.rpc_type = Rpc.RPC_A if(is_rpc_a) else Rpc.RPC_B
     rpc.error_bias = error_bias
@@ -40,11 +50,15 @@ def _new_rpc(is_rpc_a, error_bias, error_random, height_offset,
 namespace GeoCal {
   class RasterImage;
   class ImageGroundConnection;
-  class Rpc {
+  class Rpc : public GenericObject {
   public:
 %pythoncode {
+@classmethod
+def pickle_format_version(cls):
+  return 1
+
 def __reduce__(self):
-  return _new_rpc, (self.rpc_type == Rpc.RPC_A,
+  return _new_rpc, (self.__class__, 1, self.rpc_type == Rpc.RPC_A,
 		    self.error_bias,
                     self.error_random,
 		    self.height_offset,

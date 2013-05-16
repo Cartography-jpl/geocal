@@ -33,6 +33,11 @@ extern "C" {
   void init_ecr(void);
   void init_eci(void);
   void init_geodetic(void);
+  void init_dem(void);
+  void init_map_info(void);
+  void init_geocal_rpc(void);
+  void init_raster_image(void);
+  void init_image_ground_connection(void);
 }
 
 // Used throughout SWIG wrapper, define here because it is convenient.
@@ -118,4 +123,9 @@ void init_swig_wrap(void)
   init_extension_module(package, "_ecr", init_ecr);
   init_extension_module(package, "_eci", init_eci);
   init_extension_module(package, "_geodetic", init_geodetic);
+  init_extension_module(package, "_dem", init_dem);
+  init_extension_module(package, "_map_info", init_map_info);
+  init_extension_module(package, "_geocal_rpc", init_geocal_rpc);
+  init_extension_module(package, "_raster_image", init_raster_image);
+  init_extension_module(package, "_image_ground_connection", init_image_ground_connection);
 }

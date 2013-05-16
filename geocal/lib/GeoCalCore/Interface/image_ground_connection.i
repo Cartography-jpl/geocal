@@ -1,26 +1,21 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
+%include "common.i"
+
 %{
 #include "image_ground_connection.h"
-#include "ipi_image_ground_connection.h"
-#include "magnify_bilinear.h"
-#include "rpc_image_ground_connection.h"
-#include "orbit_data_image_ground_connection.h"
-#include "map_info.h"
 %}
-
-// In geocal_rpc.i
-//%geocal_shared_ptr(GeoCal::ImageGroundConnection);
+%base_import(generic_object)
+%base_import(geocal_exception)
+%import "dem.i"
+%import "raster_image.i"
+%import "ground_coordinate.i"
+%import "image_coordinate.i"
+%import "ecr.i"
+%geocal_shared_ptr(GeoCal::ImageGroundConnection);
 %geocal_shared_ptr(GeoCal::OffsetImageGroundConnection);
-
-%shared_ptr_dynamic_list(GeoCal::ImageGroundConnection,
-			 GeoCal::OffsetImageGroundConnection,
-			 GeoCal::MapInfoImageGroundConnection,
-			 GeoCal::MagnifyBilinearImageGroundConnection,
-			 GeoCal::RpcImageGroundConnection,
-			 GeoCal::IpiImageGroundConnection,
-			 GeoCal::OrbitDataImageGroundConnection);
+%geocal_shared_ptr(GeoCal::ImageGroundConnectionFailed);
 
 namespace GeoCal {
 
@@ -49,7 +44,7 @@ public:
 %rename("__dem") ImageGroundConnection::dem;
 %rename("__ground_coordinate") ImageGroundConnection::ground_coordinate;
 #endif
-class ImageGroundConnection {
+class ImageGroundConnection: public GenericObject {
 protected:
   ImageGroundConnection(const boost::shared_ptr<Dem> d, 
 			const boost::shared_ptr<RasterImage>& Img, 

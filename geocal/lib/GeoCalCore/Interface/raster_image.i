@@ -1,67 +1,23 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+%include <std_vector.i>
+%include "common.i"
+
 %{
 #include "raster_image.h"
-#include "igc_map_projected.h"
-#include "ipi_map_projected.h"
-#include "orbit_map_projected.h"
-#include "apply_mask.h"
-#include "magnify_bilinear.h"
-#include "magnify_replicate.h"
-#include "scale_image.h"
-#include "smooth_image.h"
-#include "worldview2_cloudmask.h"
-#include "image_point_display.h"
-#include "vicar_raster_image.h"
-#include "vicar_multi_file.h"
-#include "raster_subsample.h"
-#include "raw_raster_image.h"
-#include "rpc_image.h"
-#include "sub_raster_image.h"
-#include "vicar_lite_file.h"
 %}
-
-// In geocal_rpc.i
-//%geocal_shared_ptr(GeoCal::RasterImage);
+%base_import(generic_object)
+%import "image_coordinate.i"
+%import "map_info.i"
+%import "ground_coordinate.i"
+%geocal_shared_ptr(GeoCal::RasterImage);
 %geocal_shared_ptr(GeoCal::RasterImageTileIterator);
 
-// Note, MaterialDetect is not included in the list below. This is
-// only compiled if we select afids_b, so we don't always have it
-// available. For now, just leave it out so we don't need some
-// complicated afids_b logic. We can figure out how to put this in
-// if this ever becomes an issue.
-%shared_ptr_dynamic_list(GeoCal::RasterImage,
-			 GeoCal::MapReprojectedImage,
-			 GeoCal::MemoryRasterImage,
-			 GeoCal::RasterAveraged,
-			 GeoCal::ImagePointDisplay,
-			 GeoCal::GdalRasterImage,
-			 GeoCal::VicarRasterImage,
-			 GeoCal::VicarMultiFile,
-			 GeoCal::RasterSubSample,
-			 GeoCal::RawRasterImage,
-			 GeoCal::RpcImage,
-			 GeoCal::SubRasterImage,
-			 GeoCal::VicarLiteRasterImage,
-			 GeoCal::IgcMapProjected,
-			 GeoCal::IpiMapProjected,
-			 GeoCal::OrbitMapProjected,
-			 GeoCal::ApplyMask,
-			 GeoCal::MagnifyBilinear,
-			 GeoCal::MagnifyReplicate,
-			 GeoCal::ScaleImage,
-			 GeoCal::SmoothImage,
-			 GeoCal::WorldView2CloudMask,
-			 GeoCal::RasterMultifile,
-			 GeoCal::RasterImageTiledFile,
-			 GeoCal::CalcMapProjected,
-			 GeoCal::CalcRaster,
-			 GeoCal::RasterImageVariable)
 namespace GeoCal {
 class RasterImage;
 
 %rename("next") RasterImageTileIterator::operator++;
-class RasterImageTileIterator {
+class RasterImageTileIterator: public GenericObject {
 public:
   RasterImageTileIterator(const RasterImage& Ri);
   %python_attribute(istart, int)
@@ -79,7 +35,7 @@ public:
 
 // Forward declaration.
 class Rpc;
-class RasterImage {
+class RasterImage : public GenericObject {
 public:
   double interpolate(double Line, double Sample) const;
   virtual boost::shared_ptr<RasterImage> overview(int Min_number_sample) const;

@@ -1,18 +1,20 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "time_table.h"
-#include "quickbird_time_table.h"
 %}
+%base_import(generic_object)
+%import "image_coordinate.i"
+%import "geocal_time.i"
+%import "frame_coordinate.i"
 %geocal_shared_ptr(GeoCal::TimeTable);
 %geocal_shared_ptr(GeoCal::ConstantSpacingTimeTable);
 
-%shared_ptr_dynamic_list(GeoCal::TimeTable,
-			 GeoCal::ConstantSpacingTimeTable,
-			 GeoCal::QuickBirdTimeTable)
-
 namespace GeoCal {
-class TimeTable {
+class TimeTable : public GenericObject {
 public:
   TimeTable();
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)

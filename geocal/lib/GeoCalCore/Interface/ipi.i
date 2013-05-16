@@ -1,13 +1,25 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "ipi.h"
 %}
+%base_import(generic_object)
+%import "orbit.i"
+%import "camera.i"
+%import "time_table.i"
+%import "ground_coordinate.i"
+%import "image_coordinate.i"
+%import "frame_coordinate.i"
+%import "geocal_time.i"
+
 %geocal_shared_ptr(GeoCal::Ipi);
 
 namespace GeoCal {
 
-class Ipi {
+class Ipi : public GenericObject {
 public:
   Ipi(const boost::shared_ptr<Orbit>& Orb, const 
       boost::shared_ptr<PushBroomCamera>& Cam,

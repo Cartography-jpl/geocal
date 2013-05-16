@@ -41,6 +41,8 @@ extern "C" {
   void init_frame_coordinate(void);
   void init_camera(void);
   void init_orbit(void);
+  void init_time_table(void);
+  void init_ipi(void);
 }
 
 // Used throughout SWIG wrapper, define here because it is convenient.
@@ -134,4 +136,6 @@ void init_swig_wrap(void)
   init_extension_module(package, "_frame_coordinate", init_frame_coordinate);
   init_extension_module(package, "_camera", init_camera);
   init_extension_module(package, "_orbit", init_orbit);
+  init_extension_module(package, "_time_table", init_time_table);
+  init_extension_module(package, "_ipi", init_ipi);
 }

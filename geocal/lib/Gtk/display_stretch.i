@@ -1,15 +1,16 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "display_stretch.h"
 %}
-
-%geocal_markfunc(DisplayStretch);
-%geocal_shared_ptr(DisplayStretch);
+%base_import(generic_object)
+%geocal_shared_ptr(GeoCal::DisplayStretch);
 
 namespace GeoCal {
-class DisplayStretch {
+class DisplayStretch : public GenericObject {
 public:
   std::string print_to_string() const;
   virtual void stretch(const blitz::Array<int, 2>& Raw_data, 

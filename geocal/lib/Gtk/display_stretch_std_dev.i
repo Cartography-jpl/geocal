@@ -1,12 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%module geocal
+
+%include "common.i"
+
 %{
 #include "display_stretch_std_dev.h"
 %}
-
-%geocal_markfunc(DisplayStretchStdDev);
-%geocal_shared_ptr(DisplayStretchStdDev);
+%base_import(display_stretch)
+%geocal_shared_ptr(GeoCal::DisplayStretchStdDev);
 namespace GeoCal {
 class DisplayStretchStdDev : public DisplayStretch {
 public:

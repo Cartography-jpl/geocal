@@ -16,9 +16,7 @@ libgeocal_la_LDFLAGS+= $(GTKGOO_LIBS)
 #gtktest2_LDADD = libgeocal.la 
 
 # Files that contain SWIG wrapper information.
-SWIG_SOURCES += @srcgtk@/gtk.i
-SWIG_SOURCES += @srcgtk@/display_stretch.i
-SWIG_SOURCES += @srcgtk@/display_stretch_std_dev.i
-SWIG_SOURCES += @srcgtk@/raster_image_with_overlay.i
+SWIG_SRC += @swigsrc@/display_stretch_wrap.cc
+SWIG_SRC += @swigsrc@/display_stretch_std_dev_wrap.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcgtk@

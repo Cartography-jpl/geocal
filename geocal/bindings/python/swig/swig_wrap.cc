@@ -43,6 +43,24 @@ extern "C" {
   void init_orbit(void);
   void init_time_table(void);
   void init_ipi(void);
+  void init_raster_image_variable(void);
+  void init_sub_raster_image(void);
+  void init_raster_image_multi_band(void);
+  void init_raster_image_multi_band_variable(void);
+  void init_mask(void);
+  void init_geocal_datum(void);
+  void init_simple_dem(void);
+  void init_memory_raster_image(void);
+  void init_dem_map_info(void);
+  void init_feature_detector(void);
+  void init_forstner_feature_detector(void);
+  void init_image_matcher(void);
+  void init_image_to_image_match(void);
+  void init_ccorr_matcher(void);
+  void init_lsm_matcher(void);
+  void init_ccorr_lsm_matcher(void);
+  void init_rpc_image(void);
+  void init_raster_multifile(void);
 }
 
 // Used throughout SWIG wrapper, define here because it is convenient.
@@ -138,4 +156,22 @@ void init_swig_wrap(void)
   init_extension_module(package, "_orbit", init_orbit);
   init_extension_module(package, "_time_table", init_time_table);
   init_extension_module(package, "_ipi", init_ipi);
+  init_extension_module(package, "_raster_image_variable", init_raster_image_variable);
+  init_extension_module(package, "_sub_raster_image", init_sub_raster_image);
+  init_extension_module(package, "_raster_image_multi_band", init_raster_image_multi_band);
+  init_extension_module(package, "_raster_image_multi_band_variable", init_raster_image_multi_band_variable);
+  init_extension_module(package, "_mask", init_mask);
+  init_extension_module(package, "_geocal_datum", init_geocal_datum);
+  init_extension_module(package, "_simple_dem", init_simple_dem);
+  init_extension_module(package, "_memory_raster_image", init_memory_raster_image);
+  init_extension_module(package, "_dem_map_info", init_dem_map_info);
+  init_extension_module(package, "_feature_detector", init_feature_detector);
+  init_extension_module(package, "_forstner_feature_detector", init_forstner_feature_detector);
+  init_extension_module(package, "_image_matcher", init_image_matcher);
+  init_extension_module(package, "_image_to_image_match", init_image_to_image_match);
+  init_extension_module(package, "_ccorr_matcher", init_ccorr_matcher);
+  init_extension_module(package, "_lsm_matcher", init_lsm_matcher);
+  init_extension_module(package, "_ccorr_lsm_matcher", init_ccorr_lsm_matcher);
+  init_extension_module(package, "_rpc_image", init_rpc_image);
+  init_extension_module(package, "_raster_multifile", init_raster_multifile);
 }

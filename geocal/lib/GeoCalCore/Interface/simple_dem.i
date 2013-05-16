@@ -1,10 +1,12 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "simple_dem.h"
 %}
-
-
+%base_import(dem)
 %geocal_shared_ptr(GeoCal::SimpleDem);
 namespace GeoCal {
 class SimpleDem : public Dem {

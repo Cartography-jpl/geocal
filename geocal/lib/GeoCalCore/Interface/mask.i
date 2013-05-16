@@ -1,13 +1,17 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+%include <std_vector.i>
+%include "common.i"
+
 %{
 #include "mask.h"
 %}
-
+%base_import(generic_object)
+%import "ground_coordinate.i"
 %geocal_shared_ptr(GeoCal::Mask);
 %geocal_shared_ptr(GeoCal::CombinedMask);
 namespace GeoCal {
-class Mask {
+class Mask: public GenericObject {
 public:
   virtual bool mask(const GroundCoordinate& Gc) const = 0;
   virtual bool region_masked(const GroundCoordinate& Ulc, 

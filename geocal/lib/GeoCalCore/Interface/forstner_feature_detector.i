@@ -1,8 +1,12 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "forstner_feature_detector.h"
 %}
+%base_import(feature_detector)
 
 %geocal_shared_ptr(GeoCal::ForstnerFeatureDetector);
 namespace GeoCal {

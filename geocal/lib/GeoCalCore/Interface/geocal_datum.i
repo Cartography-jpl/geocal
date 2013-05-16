@@ -1,22 +1,18 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "geocal_datum.h"
-#include "datum_geoid96.h"
-#include "did_datum.h"
-#include "gdal_datum.h"
 %}
-
+%base_import(generic_object)
+%import "ground_coordinate.i"
 %geocal_shared_ptr(GeoCal::Datum);
 %geocal_shared_ptr(GeoCal::SimpleDatum);
 
-%shared_ptr_dynamic_list(GeoCal::Datum,
-			 GeoCal::SimpleDatum,
-			 GeoCal::DatumGeoid96,
-			 GeoCal::DidDatum,
-			 GeoCal::GdalDatum);
 namespace GeoCal {
-class Datum {
+class Datum : public GenericObject {
 public:
   virtual double undulation(const GroundCoordinate& Gc) const = 0;
   std::string print_to_string() const;

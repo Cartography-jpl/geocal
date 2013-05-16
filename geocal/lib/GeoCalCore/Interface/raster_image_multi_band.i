@@ -1,15 +1,19 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "raster_image_multi_band.h"
+#include "raster_image_multi_band_variable.h"
 %}
-
+%base_import(generic_object)
+%import "raster_image.i"
 %geocal_shared_ptr(GeoCal::RasterImageMultiBand);
-%geocal_shared_ptr(GeoCal::RasterImageMultiBandVariable);
 
 namespace GeoCal {
 class RasterImageMultiBandVariable;
-class RasterImageMultiBand {
+class RasterImageMultiBand : public GenericObject {
 public:
   %rename(raster_image) raster_image_ptr;
   %python_attribute(number_band, virtual int)
@@ -29,3 +33,5 @@ void copy(const RasterImageMultiBand& Img_in, RasterImageMultiBand& Img_out,
 	  bool Log_progress = false);
 
 }
+
+%import "raster_image_multi_band_variable.i"

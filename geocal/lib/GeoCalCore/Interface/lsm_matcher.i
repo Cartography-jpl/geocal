@@ -1,8 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "lsm_matcher.h"
 %}
+%base_import(image_matcher)
+
 %geocal_shared_ptr(GeoCal::LsmMatcher);
 namespace GeoCal {
 

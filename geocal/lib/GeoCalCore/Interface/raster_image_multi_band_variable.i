@@ -1,8 +1,12 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "raster_image_multi_band_variable.h"
 %}
+%base_import(raster_image_multi_band)
 
 %geocal_shared_ptr(GeoCal::RasterImageMultiBandVariable);
 

@@ -1,8 +1,12 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "memory_raster_image.h"
 %}
+%base_import(raster_image_variable)
 
 %geocal_shared_ptr(GeoCal::MemoryRasterImage);
 

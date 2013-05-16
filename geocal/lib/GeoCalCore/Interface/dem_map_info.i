@@ -1,10 +1,15 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "dem_map_info.h"
 %}
 
-
+%base_import(dem)
+%import "geocal_datum.i"
+%import "map_info.i"
 %geocal_shared_ptr(GeoCal::DemMapInfo);
 
 namespace GeoCal {

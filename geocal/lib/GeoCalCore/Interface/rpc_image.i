@@ -1,9 +1,17 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+
+%include "common.i"
+
 %{
 #include "rpc_image.h"
 %}
-
+%base_import(raster_image_variable)
+%import "dem.i"
+%import "mask.i"
+%import "map_info.i"
+%import "feature_detector.i"
+%import "image_matcher.i"
 %geocal_shared_ptr(GeoCal::RpcImage);
 namespace GeoCal {
 class RpcImage : public RasterImageVariable {

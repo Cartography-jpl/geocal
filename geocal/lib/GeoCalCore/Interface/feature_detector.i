@@ -1,14 +1,20 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+%include <std_vector.i>
+%include "common.i"
+
 %{
 #include "feature_detector.h"
 %}
-
+%base_import(generic_object)
+%import "image_coordinate.i"
+%import "raster_image.i"
+%import "mask.i"
 %geocal_shared_ptr(GeoCal::InterestPoint);
 %geocal_shared_ptr(GeoCal::FeatureDetector);
 namespace GeoCal {
 %rename("_interest_point_grid_raw") FeatureDetector::interest_point_grid_ptr;
-class InterestPoint {
+class InterestPoint : public GenericObject {
 public:
   InterestPoint();
   InterestPoint(const ImageCoordinate &Ic, double Weight);
@@ -28,7 +34,7 @@ public:
   %pickle_init(1, self.image_coordinate, self.weight)
 };
 
-class FeatureDetector {
+class FeatureDetector : public GenericObject {
 public:
   FeatureDetector();
   virtual std::vector<InterestPoint>

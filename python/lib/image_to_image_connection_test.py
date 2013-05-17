@@ -9,7 +9,8 @@ test_data = os.path.dirname(__file__) + "/../unit_test_data/"
 # Basic test of Rpc
 def test_rpc_image_ground_connection():
     # A sample RPC. Nothing special about this, these are just reasonable
-    # values
+    # values. Note that this gets created in pickle_test.py if you need to
+    # regenerate this for some reason
     with open(test_data + "rpc_example.pkl") as f:
         rpc1 = cPickle.load(f)
     with open(test_data + "rpc_example.pkl") as f:

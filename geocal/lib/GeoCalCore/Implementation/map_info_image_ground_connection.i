@@ -7,10 +7,8 @@
 #include "map_info_image_ground_connection.h"
 %}
 %base_import(image_ground_connection)
+%import "geocal_rpc.i"
 %import "dem.i"
-%import "raster_image.i"
-%import "image_coordinate.i"
-%import "ground_coordinate.i"
 %geocal_shared_ptr(GeoCal::MapInfoImageGroundConnection);
 
 namespace GeoCal {

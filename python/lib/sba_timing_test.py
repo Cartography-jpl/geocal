@@ -62,7 +62,8 @@ def test_time():
                 tplist.append(tp)
 
     igc_coll.parameter = parameter_start
-    sba = SimultaneousBundleAdjustment(igc_coll, tplist, demin)
+    sba = SimultaneousBundleAdjustment(igc_coll, TiePointCollection(tplist),
+                                       demin)
 #    res = sba.sba_jacobian(sba.parameter)
 #    print res.tolil()
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian, 

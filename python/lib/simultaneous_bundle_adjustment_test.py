@@ -96,8 +96,8 @@ class TestClass:
         # have above
         v = sba.sba_eq(sba.parameter)
         chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-        assert chisq > 500
         print "Chisq", chisq
+        assert chisq > 50
         parm, res = scipy.optimize.leastsq(sba.sba_eq, sba.parameter,
                                            Dfun = lambda x: sba.sba_jacobian(x).todense())
         sba.parameter = parm

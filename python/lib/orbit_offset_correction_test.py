@@ -16,8 +16,9 @@ cam = QuaternionCamera(Quaternion_double(1,0,0,0),
 def test_time():
     raise SkipTest
     t = Time.time_acs(215077459.472);
+    img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
     igc = OrbitDataImageGroundConnection(orb_uncorr.orbit_data(t),
-                                         cam, SimpleDem(), True)
+                                         cam, SimpleDem(), img, "Image 1")
     ic = ImageCoordinate(100, 200)
     gp = igc.ground_coordinate(ic)
     for i in range(100000):

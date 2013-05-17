@@ -119,16 +119,14 @@ class MapInfoImageGroundConnection(geocal.image_ground_connection.ImageGroundCon
     C++ includes: map_info_image_ground_connection.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    def ground_coordinate_dem(self, *args):
+    def __init__(self, *args): 
         """
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::MapInfoImageGroundConnection::ground_coordinate_dem(const ImageCoordinate &Ic, const Dem &D) const
-        Return ground coordinate that goes with a particular image coordinate.
-
+        GeoCal::MapInfoImageGroundConnection::MapInfoImageGroundConnection(const boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<
+        Dem > &D, const std::string &Title="Image")
+        Constructor. 
         """
-        return _map_info_image_ground_connection.MapInfoImageGroundConnection_ground_coordinate_dem(self, *args)
-
+        _map_info_image_ground_connection.MapInfoImageGroundConnection_swiginit(self,_map_info_image_ground_connection.new_MapInfoImageGroundConnection(*args))
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -137,7 +135,6 @@ class MapInfoImageGroundConnection(geocal.image_ground_connection.ImageGroundCon
       return _new_from_init, (self.__class__, 1, self.image,self.dem,self.title)
 
     __swig_destroy__ = _map_info_image_ground_connection.delete_MapInfoImageGroundConnection
-MapInfoImageGroundConnection.ground_coordinate_dem = new_instancemethod(_map_info_image_ground_connection.MapInfoImageGroundConnection_ground_coordinate_dem,None,MapInfoImageGroundConnection)
 MapInfoImageGroundConnection_swigregister = _map_info_image_ground_connection.MapInfoImageGroundConnection_swigregister
 MapInfoImageGroundConnection_swigregister(MapInfoImageGroundConnection)
 

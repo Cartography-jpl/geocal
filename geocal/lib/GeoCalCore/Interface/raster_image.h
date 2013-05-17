@@ -329,6 +329,12 @@ public:
   virtual Rpc rpc() const 
   { throw Exception("Do not have RPC for this RasterImage"); }
 
+///-----------------------------------------------------------------------
+/// Pointer version of rpc(). This makes python happier.
+///-----------------------------------------------------------------------
+
+  boost::shared_ptr<Rpc> rpc_ptr() const
+  { return boost::shared_ptr<Rpc>(new Rpc(rpc())); }
 };
 
 

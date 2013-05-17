@@ -461,8 +461,10 @@ class RasterImage(geocal.generic_object.GenericObject):
 
     def _v_rpc(self):
         """
-        virtual Rpc GeoCal::RasterImage::rpc() const
-        Rpc for image. 
+        boost::shared_ptr<Rpc> GeoCal::RasterImage::rpc_ptr() const
+        Pointer version of rpc().
+
+        This makes python happier. 
         """
         return _raster_image.RasterImage__v_rpc(self)
 

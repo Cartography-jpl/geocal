@@ -3463,37 +3463,37 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__MapInfo swig_types[11]
 #define SWIGTYPE_p_GeoCal__RasterImage swig_types[12]
 #define SWIGTYPE_p_GeoCal__RasterImageTileIterator swig_types[13]
-#define SWIGTYPE_p_GeoCal__Rpc swig_types[14]
-#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[15]
-#define SWIGTYPE_p_GeoCal__Time swig_types[16]
-#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[17]
-#define SWIGTYPE_p_allocator_type swig_types[18]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[19]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[20]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[21]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[22]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[23]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[24]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[25]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[26]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[27]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[28]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[29]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[30]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[31]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[32]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[33]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[34]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[35]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[36]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[37]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[38]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[39]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[40]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVector_t swig_types[41]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[42]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[43]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[44]
+#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[14]
+#define SWIGTYPE_p_GeoCal__Time swig_types[15]
+#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[16]
+#define SWIGTYPE_p_allocator_type swig_types[17]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[18]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[19]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[20]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[25]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[26]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[27]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[28]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[29]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[30]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[31]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[32]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[33]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[34]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[35]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[36]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[37]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[38]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[39]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVector_t swig_types[40]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[41]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[42]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[43]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t swig_types[44]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[45]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[46]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[47]
@@ -8353,7 +8353,7 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_rpc(PyObject *SWIGUNUSEDPARM(self), Py
   boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
   boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  GeoCal::Rpc result;
+  SwigValueWrapper< boost::shared_ptr< GeoCal::Rpc > > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -8374,14 +8374,14 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_rpc(PyObject *SWIGUNUSEDPARM(self), Py
   }
   {
     try {
-      result = ((GeoCal::RasterImage const *)arg1)->rpc();
+      result = ((GeoCal::RasterImage const *)arg1)->rpc_ptr();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj((new GeoCal::Rpc(static_cast< const GeoCal::Rpc& >(result))), SWIGTYPE_p_GeoCal__Rpc, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new boost::shared_ptr< GeoCal::Rpc >(static_cast< const boost::shared_ptr< GeoCal::Rpc >& >(result))), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -11426,8 +11426,10 @@ static PyMethodDef SwigMethods[] = {
 		"override this. \n"
 		""},
 	 { (char *)"RasterImage__v_rpc", (PyCFunction)_wrap_RasterImage__v_rpc, METH_O, (char *)"\n"
-		"virtual Rpc GeoCal::RasterImage::rpc() const\n"
-		"Rpc for image. \n"
+		"boost::shared_ptr<Rpc> GeoCal::RasterImage::rpc_ptr() const\n"
+		"Pointer version of rpc().\n"
+		"\n"
+		"This makes python happier. \n"
 		""},
 	 { (char *)"delete_RasterImage", (PyCFunction)_wrap_delete_RasterImage, METH_O, (char *)"\n"
 		"virtual GeoCal::RasterImage::~RasterImage()\n"
@@ -11664,7 +11666,6 @@ static swig_type_info _swigt__p_GeoCal__LookVector = {"_p_GeoCal__LookVector", "
 static swig_type_info _swigt__p_GeoCal__MapInfo = {"_p_GeoCal__MapInfo", "GeoCal::MapInfo *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__RasterImage = {"_p_GeoCal__RasterImage", "GeoCal::RasterImage *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__RasterImageTileIterator = {"_p_GeoCal__RasterImageTileIterator", "GeoCal::RasterImageTileIterator *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__Rpc = {"_p_GeoCal__Rpc", "GeoCal::Rpc *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ScLookVector = {"_p_GeoCal__ScLookVector", "GeoCal::ScLookVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__Time = {"_p_GeoCal__Time", "GeoCal::Time *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__VicarImageCoordinate = {"_p_GeoCal__VicarImageCoordinate", "GeoCal::VicarImageCoordinate *", 0, 0, (void*)0, 0};
@@ -11695,6 +11696,7 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__LookVector_t = {"_p_b
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t = {"_p_boost__shared_ptrT_GeoCal__MapInfo_t", "boost::shared_ptr< GeoCal::MapInfo > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t = {"_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t", "boost::shared_ptr< GeoCal::RasterImageTileIterator > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t = {"_p_boost__shared_ptrT_GeoCal__RasterImage_t", "boost::shared_ptr< GeoCal::RasterImage > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Rpc_t = {"_p_boost__shared_ptrT_GeoCal__Rpc_t", "boost::shared_ptr< GeoCal::Rpc > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t = {"_p_boost__shared_ptrT_GeoCal__ScLookVector_t", "boost::shared_ptr< GeoCal::ScLookVector > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Time_t = {"_p_boost__shared_ptrT_GeoCal__Time_t", "boost::shared_ptr< GeoCal::Time > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t", "boost::shared_ptr< GeoCal::VicarImageCoordinate > *", 0, 0, (void*)0, 0};
@@ -11738,7 +11740,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__MapInfo,
   &_swigt__p_GeoCal__RasterImage,
   &_swigt__p_GeoCal__RasterImageTileIterator,
-  &_swigt__p_GeoCal__Rpc,
   &_swigt__p_GeoCal__ScLookVector,
   &_swigt__p_GeoCal__Time,
   &_swigt__p_GeoCal__VicarImageCoordinate,
@@ -11769,6 +11770,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__Rpc_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__Time_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,
@@ -11812,7 +11814,6 @@ static swig_cast_info _swigc__p_GeoCal__LookVector[] = {  {&_swigt__p_GeoCal__Lo
 static swig_cast_info _swigc__p_GeoCal__MapInfo[] = {  {&_swigt__p_GeoCal__MapInfo, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__RasterImage[] = {  {&_swigt__p_GeoCal__RasterImage, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__RasterImageTileIterator[] = {  {&_swigt__p_GeoCal__RasterImageTileIterator, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__Rpc[] = {  {&_swigt__p_GeoCal__Rpc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ScLookVector[] = {  {&_swigt__p_GeoCal__ScLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Time[] = {  {&_swigt__p_GeoCal__Time, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__VicarImageCoordinate[] = {  {&_swigt__p_GeoCal__VicarImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
@@ -11843,6 +11844,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVector_t[] = {  {
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__MapInfo_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImage_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Rpc_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Rpc_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11886,7 +11888,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__MapInfo,
   _swigc__p_GeoCal__RasterImage,
   _swigc__p_GeoCal__RasterImageTileIterator,
-  _swigc__p_GeoCal__Rpc,
   _swigc__p_GeoCal__ScLookVector,
   _swigc__p_GeoCal__Time,
   _swigc__p_GeoCal__VicarImageCoordinate,
@@ -11917,6 +11918,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__MapInfo_t,
   _swigc__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t,
   _swigc__p_boost__shared_ptrT_GeoCal__RasterImage_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__Rpc_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t,
   _swigc__p_boost__shared_ptrT_GeoCal__Time_t,
   _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,

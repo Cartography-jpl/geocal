@@ -105,6 +105,22 @@ class Quaternion_double(object):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         _swig_quaternion.Quaternion_double_swiginit(self,_swig_quaternion.new_Quaternion_double(*args))
+    @property
+    def R_component_1(self):
+        return self._v_R_component_1()
+
+    @property
+    def R_component_2(self):
+        return self._v_R_component_2()
+
+    @property
+    def R_component_3(self):
+        return self._v_R_component_3()
+
+    @property
+    def R_component_4(self):
+        return self._v_R_component_4()
+
     from_matrix = staticmethod(_swig_quaternion.Quaternion_double_from_matrix)
     @classmethod
     def pickle_format_version(cls):
@@ -114,6 +130,10 @@ class Quaternion_double(object):
       return _new_from_init, (self.__class__, 1, self.R_component_1,self.R_component_2,self.R_component_3,self.R_component_4)
 
     __swig_destroy__ = _swig_quaternion.delete_Quaternion_double
+Quaternion_double._v_R_component_1 = new_instancemethod(_swig_quaternion.Quaternion_double__v_R_component_1,None,Quaternion_double)
+Quaternion_double._v_R_component_2 = new_instancemethod(_swig_quaternion.Quaternion_double__v_R_component_2,None,Quaternion_double)
+Quaternion_double._v_R_component_3 = new_instancemethod(_swig_quaternion.Quaternion_double__v_R_component_3,None,Quaternion_double)
+Quaternion_double._v_R_component_4 = new_instancemethod(_swig_quaternion.Quaternion_double__v_R_component_4,None,Quaternion_double)
 Quaternion_double.__add__ = new_instancemethod(_swig_quaternion.Quaternion_double___add__,None,Quaternion_double)
 Quaternion_double.__sub__ = new_instancemethod(_swig_quaternion.Quaternion_double___sub__,None,Quaternion_double)
 Quaternion_double.__mul__ = new_instancemethod(_swig_quaternion.Quaternion_double___mul__,None,Quaternion_double)

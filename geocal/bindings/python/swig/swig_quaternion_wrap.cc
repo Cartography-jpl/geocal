@@ -3126,6 +3126,9 @@ SWIG_AsVal_double (PyObject *obj, double *val)
   return res;
 }
 
+
+  #define SWIG_From_double   PyFloat_FromDouble 
+
 SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____add____SWIG_0(boost::math::quaternion< double > *self,double x){return (boost::math::quaternion<double>(*self) += x); }
 SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____add____SWIG_1(boost::math::quaternion< double > *self,boost::math::quaternion< double > const &x){return (boost::math::quaternion<double>(*self) += x); }
 SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____sub____SWIG_0(boost::math::quaternion< double > *self,double x){return (boost::math::quaternion<double>(*self) -= x); }
@@ -3202,6 +3205,98 @@ SWIGINTERN PyObject *_wrap_new_Quaternion_double(PyObject *SWIGUNUSEDPARM(self),
   arg4 = static_cast< double >(val4);
   result = (boost::math::quaternion< double > *)new boost::math::quaternion< double >(arg1,arg2,arg3,arg4);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_boost__math__quaternionT_double_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_double__v_R_component_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< double > *arg1 = (boost::math::quaternion< double > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_double_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_double__v_R_component_1" "', argument " "1"" of type '" "boost::math::quaternion< double > const *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
+  result = (double)((boost::math::quaternion< double > const *)arg1)->R_component_1();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_double__v_R_component_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< double > *arg1 = (boost::math::quaternion< double > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_double_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_double__v_R_component_2" "', argument " "1"" of type '" "boost::math::quaternion< double > const *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
+  result = (double)((boost::math::quaternion< double > const *)arg1)->R_component_2();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_double__v_R_component_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< double > *arg1 = (boost::math::quaternion< double > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_double_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_double__v_R_component_3" "', argument " "1"" of type '" "boost::math::quaternion< double > const *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
+  result = (double)((boost::math::quaternion< double > const *)arg1)->R_component_3();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_double__v_R_component_4(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< double > *arg1 = (boost::math::quaternion< double > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_double_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_double__v_R_component_4" "', argument " "1"" of type '" "boost::math::quaternion< double > const *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
+  result = (double)((boost::math::quaternion< double > const *)arg1)->R_component_4();
+  resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
   return NULL;
@@ -3691,6 +3786,10 @@ SWIGINTERN PyObject *Quaternion_double_swiginit(PyObject *SWIGUNUSEDPARM(self), 
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_Quaternion_double", _wrap_new_Quaternion_double, METH_VARARGS, NULL},
+	 { (char *)"Quaternion_double__v_R_component_1", (PyCFunction)_wrap_Quaternion_double__v_R_component_1, METH_O, NULL},
+	 { (char *)"Quaternion_double__v_R_component_2", (PyCFunction)_wrap_Quaternion_double__v_R_component_2, METH_O, NULL},
+	 { (char *)"Quaternion_double__v_R_component_3", (PyCFunction)_wrap_Quaternion_double__v_R_component_3, METH_O, NULL},
+	 { (char *)"Quaternion_double__v_R_component_4", (PyCFunction)_wrap_Quaternion_double__v_R_component_4, METH_O, NULL},
 	 { (char *)"Quaternion_double___add__", _wrap_Quaternion_double___add__, METH_VARARGS, NULL},
 	 { (char *)"Quaternion_double___sub__", _wrap_Quaternion_double___sub__, METH_VARARGS, NULL},
 	 { (char *)"Quaternion_double___mul__", _wrap_Quaternion_double___mul__, METH_VARARGS, NULL},

@@ -1,6 +1,7 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 %include "swig_pickle.i"
+%include "swig_python_attribute.i"
 %{
 #include <sstream>
 #include <boost/math/quaternion.hpp>

@@ -79,7 +79,7 @@ public:
   %python_attribute(grid_center_line_resolution, double)
   %python_attribute(grid_center_sample_resolution, double)
   %python_attribute(has_rpc, bool)
-  %python_attribute(rpc, Rpc)
+  %python_attribute2(rpc, rpc_ptr, boost::shared_ptr<Rpc>)
 };
 
 void copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);

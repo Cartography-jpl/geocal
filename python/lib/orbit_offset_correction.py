@@ -3,6 +3,7 @@ from with_parameter import *
 import math
 import bisect
 import scipy.sparse as sp
+import numpy as np
 
 class OrbitOffsetCorrection(Orbit, WithParameter):
     '''This class gives an orbit that tries to correct errors in another

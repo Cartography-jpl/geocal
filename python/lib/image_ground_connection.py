@@ -4,6 +4,15 @@ from shape_file import *
 import numpy as np
 import os.path
 
+def _new_from_init(cls, version, *args):
+    '''For use with pickle, covers common case where we just store the
+    arguments needed to create an object. See for example HdfFile'''
+    if(cls.pickle_format_version() != version):
+      raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
+    inst = cls.__new__(cls)
+    inst.__init__(*args)
+    return inst
+
 class GdalImageGroundConnection(geocal.RpcImageGroundConnection):
     '''This is a convenience class that both reads a GDAL image, and
     creates a RPC based ground connection. Note that you can edit
@@ -18,13 +27,18 @@ class GdalImageGroundConnection(geocal.RpcImageGroundConnection):
             rpc = img.rpc
         geocal.RpcImageGroundConnection.__init__(self, rpc, dem, img, title)
 
+    @classmethod
+    def pickle_format_version(cls):
+        return 1
+
     def __reduce__(self):
         '''Base class RpcImageGroundConnection can be pickled, but the 
         init function for this class is different. Give a simple reduce 
         to handle this.'''
-        return geocal._new_from_init, (self.__class__, 
-                                       self.fname,
-                                       self.dem, self.rpc, self.title)
+        return _new_from_init, (self.__class__, 
+                                self.__class__.pickle_format_version(),
+                                self.fname,
+                                self.dem, self.rpc, self.title)
 
 class VicarImageGroundConnection(geocal.RpcImageGroundConnection):
     '''This is a convenience class that both reads a VICAR image, and
@@ -40,13 +54,18 @@ class VicarImageGroundConnection(geocal.RpcImageGroundConnection):
             rpc = img.rpc
         geocal.RpcImageGroundConnection.__init__(self, rpc, dem, img, title)
 
+    @classmethod
+    def pickle_format_version(cls):
+        return 1
+
     def __reduce__(self):
         '''Base class RpcImageGroundConnection can be pickled, but the 
         init function for this class is different. Give a simple reduce 
         to handle this.'''
-        return geocal._new_from_init, (self.__class__, 
-                                       self.fname,
-                                       self.dem, self.rpc, self.title)
+        return _new_from_init, (self.__class__, 
+                                self.__class__.pickle_format_version(),
+                                self.fname,
+                                self.dem, self.rpc, self.title)
 
 def _view_angle(self, image_coordinate, delta_h = 100):
     '''This return the zenith and azimuth view angles for a particular

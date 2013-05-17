@@ -106,10 +106,10 @@ def test_quaternion_pickle():
     '''Make sure we can pickle quaternions'''
     t = cPickle.dumps(Quaternion_double(1, 2, 3, 4), cPickle.HIGHEST_PROTOCOL)
     q = cPickle.loads(t)
-    assert_almost_equal(q.R_component_1(), 1, 4)
-    assert_almost_equal(q.R_component_2(), 2, 4)
-    assert_almost_equal(q.R_component_3(), 3, 4)
-    assert_almost_equal(q.R_component_4(), 4, 4)
+    assert_almost_equal(q.R_component_1, 1, 4)
+    assert_almost_equal(q.R_component_2, 2, 4)
+    assert_almost_equal(q.R_component_3, 3, 4)
+    assert_almost_equal(q.R_component_4, 4, 4)
 
 def create_rpc_sample():
     '''Small routine to create a sample RPC that can be used elsewhere. We

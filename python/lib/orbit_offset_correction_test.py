@@ -61,10 +61,10 @@ def test_orbit_quaternion_correction():
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 20, 40, 
                      60, -10, -20, -30]
     q = orb.quaternion_correction(t1 + 5)
-    assert_almost_equal(q.R_component_1(), 0.959964, 4)
-    assert_almost_equal(q.R_component_2(), 0.13533, 4)
-    assert_almost_equal(q.R_component_3(), 0.0834714, 4)
-    assert_almost_equal(q.R_component_4(), 0.230623, 4)
+    assert_almost_equal(q.R_component_1, 0.959964, 4)
+    assert_almost_equal(q.R_component_2, 0.13533, 4)
+    assert_almost_equal(q.R_component_3, 0.0834714, 4)
+    assert_almost_equal(q.R_component_4, 0.230623, 4)
     # Make sure we can call for each time
     orb.quaternion_correction(t1)
     orb.quaternion_correction(t2)
@@ -89,10 +89,10 @@ def test_insert_time_point():
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 20, 40, 
                      60, -10, -20, -30]
     q = orb.quaternion_correction(t1 + 5)
-    assert_almost_equal(q.R_component_1(), 0.959964, 4)
-    assert_almost_equal(q.R_component_2(), 0.13533, 4)
-    assert_almost_equal(q.R_component_3(), 0.0834714, 4)
-    assert_almost_equal(q.R_component_4(), 0.230623, 4)
+    assert_almost_equal(q.R_component_1, 0.959964, 4)
+    assert_almost_equal(q.R_component_2, 0.13533, 4)
+    assert_almost_equal(q.R_component_3, 0.0834714, 4)
+    assert_almost_equal(q.R_component_4, 0.230623, 4)
     # Make sure we can call for each time
     orb.quaternion_correction(t1)
     orb.quaternion_correction(t2)

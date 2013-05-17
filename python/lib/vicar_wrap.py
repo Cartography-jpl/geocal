@@ -18,18 +18,18 @@ class __scinterp(VicarInterface):
         self.time = time
         self.peph = [0.0, pos_previous.position[0], pos_previous.position[1],
                      pos_previous.position[2], t_pos_previous.acs]
-        self.patt = [att_previous.R_component_1(),
-                     att_previous.R_component_2(),
-                     att_previous.R_component_3(),
-                     att_previous.R_component_4(),
+        self.patt = [att_previous.R_component_1,
+                     att_previous.R_component_2,
+                     att_previous.R_component_3,
+                     att_previous.R_component_4,
                      t_att_previous.acs]
         self.seph = [0.0, pos_subsequent.position[0], 
                      pos_subsequent.position[1],
                      pos_subsequent.position[2], t_pos_subsequent.acs]
-        self.satt = [att_subsequent.R_component_1(),
-                     att_subsequent.R_component_2(),
-                     att_subsequent.R_component_3(),
-                     att_subsequent.R_component_4(),
+        self.satt = [att_subsequent.R_component_1,
+                     att_subsequent.R_component_2,
+                     att_subsequent.R_component_3,
+                     att_subsequent.R_component_4,
                      t_att_subsequent.acs]
         self.imtime = time.acs
         self.before_body = '''
@@ -75,17 +75,9 @@ write "&o3"
                     break
             for line in f:
                 res.append(float(line))
-        t = Array_double_3()
-        t[0] = res[0]
-        t[1] = res[1]
-        t[2] = res[2]
-        v = Array_double_3()
-        v[0] = 0
-        v[1] = 0
-        v[2] = 0
-        p = self.pos_sample.create(t)
+        p = self.pos_sample.create(res[0:3])
         att = Quaternion_double(*res[3:7])
-        self.res = QuaternionOrbitData(self.time, p, v, att)
+        self.res = QuaternionOrbitData(self.time, p, [0,0,0], att)
 
 def scinterp(time, pos_previous, t_pos_previous, att_previous, t_att_previous,
              pos_subsequent, t_pos_subsequent, att_subsequent, 
@@ -140,16 +132,16 @@ ibis-gen xxxb nc=5 nr=8 deffmt=DOUB
         # Rodrigues vector and Rodrigues vector to matrix calculations.
         # Without forcing this, you get minor hard to account for
         # differences between GeoCal and sc2rpc.
-        self.tod_q_sv = np.array([orbit_data.sc_to_ci.R_component_1(),
-                                  orbit_data.sc_to_ci.R_component_2(),
-                                  orbit_data.sc_to_ci.R_component_3(),
-                                  orbit_data.sc_to_ci.R_component_4()])
+        self.tod_q_sv = np.array([orbit_data.sc_to_ci.R_component_1,
+                                  orbit_data.sc_to_ci.R_component_2,
+                                  orbit_data.sc_to_ci.R_component_3,
+                                  orbit_data.sc_to_ci.R_component_4])
         self.tod_q_sv /= math.sqrt(np.dot(self.tod_q_sv, self.tod_q_sv))
         self.sv_t_c = [0,0,0]
-        self.sv_q_c = np.array([sc_to_cam_q.R_component_1(),
-                                sc_to_cam_q.R_component_2(),
-                                sc_to_cam_q.R_component_3(),
-                                sc_to_cam_q.R_component_4()])
+        self.sv_q_c = np.array([sc_to_cam_q.R_component_1,
+                                sc_to_cam_q.R_component_2,
+                                sc_to_cam_q.R_component_3,
+                                sc_to_cam_q.R_component_4])
         self.sv_q_c /= math.sqrt(np.dot(self.sv_q_c, self.sv_q_c))
         self.q = 0
         self.u0 = 1824.5

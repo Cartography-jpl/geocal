@@ -6,6 +6,10 @@
 %{
 #include "ibis_file.h"
 %}
+%pythoncode %{
+import numpy as np
+%}
+
 %base_import(generic_object)
 %geocal_shared_ptr(GeoCal::IbisFile);
 namespace GeoCal {

@@ -108,6 +108,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import numpy as np
+
 import geocal.generic_object
 class IbisColumn_byte(object):
     """

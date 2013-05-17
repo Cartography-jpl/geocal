@@ -3,7 +3,6 @@
 import cPickle
 from geocal import *
 from nose.tools import *
-from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../unit_test_data/"
 

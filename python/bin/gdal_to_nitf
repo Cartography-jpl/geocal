@@ -5,12 +5,15 @@
 # in NITF for things like RPC and igeolo information.
 
 from afids import *
-from optparse import OptionParser
 from tempfile import NamedTemporaryFile
 import subprocess
+import os
 
-parser = OptionParser(version="%prog September 26, 2012",
-usage="""usage: %prog [options] input_file output_nitf
+version="%prog May 22, 2013"
+usage="""Usage: 
+  gdal_to_nitf [options] <input_file> <output_nitf>
+  gdal_to_nitf -h | --help
+  gdal_to_nitf -v | --version
 
 This copies a GDAL file to a new NITF file. This is very similar to
 gdal_translate already found in GDAL, but this adds handling of TREs
@@ -20,18 +23,24 @@ The input file can be any file supported by GDAL, including VICAR.
 
 Note that this program should be a replacement for the old VICAR
 proc vicar2ntf
-""")
-parser.add_option("-q", "--quiet",
-                  dest="quiet", default=False,
-                  action="store_true",
-                  help="don't print status message as we copy the data")
-# Parse command line arguments
-(options, args) = parser.parse_args()
 
-if(len(args) != 2):
-    parser.error("Need to specify all the arguments")
+Options:
+  -h --help         
+       Print this message
 
-inname, outname = args
+  -k --keep-aux
+       By default, we remove the .aux.xml file gdal_translate creates to
+       store things that don't fit in the NITF file. Use this option to
+       keep that file.
+
+  -q --quiet
+       Don't print status message as we copy the data.
+
+  -v --version      
+       Print program version
+
+"""
+args = docopt_simple(usage, version=version)
 
 # Create a "virtual raster image". This is a text file that allows us to
 # set various metadata fields without changing the original file. GDAL then
@@ -39,8 +48,8 @@ inname, outname = args
 
 with NamedTemporaryFile() as tmp:
     subprocess.check_call(["gdal_translate", "-of", "VRT", "-q",
-                           inname, tmp.name])
-    fin = GdalMultiBand(inname)
+                           args.input_file, tmp.name])
+    fin = GdalMultiBand(args.input_file)
     fvrt = GdalRasterImage(tmp.name)
     creation_option = []
     # Function is only optionally available, depending on options
@@ -75,9 +84,15 @@ with NamedTemporaryFile() as tmp:
         fvrt["NITF_FHDR"] = "NITF02.10"
     fvrt.close()
     cmd = ["gdal_translate", "-of", "NITF"]
-    if(options.quiet):
+    if(args.quiet):
         cmd.append("-q")
     cmd.extend(creation_option)
     cmd.append(tmp.name)
-    cmd.append(outname)
+    cmd.append(args.output_nitf)
     subprocess.check_call(cmd)
+    if(not args.keep_aux):
+        try:
+            os.remove(args.output_nitf + ".aux.xml")
+        except OSError:
+            # Ok if file doesn't exist
+            pass

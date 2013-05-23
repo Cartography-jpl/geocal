@@ -18,7 +18,7 @@ def tile_iterator(data):
     else:
         t = RasterImageTileIterator(data)
 
-    while(not t.end()):
+    while(not t.end):
         yield t
         t.next()
 
@@ -43,8 +43,8 @@ def read_iterator(data):
     else:
         t = RasterImageTileIterator(data)
 
-    while(not t.end()):
-        yield data.read(t.istart(), t.jstart(), t.number_line(),
-                        t.number_sample())
+    while(not t.end):
+        yield data.read(t.istart, t.jstart, t.number_line,
+                        t.number_sample)
         t.next()
 

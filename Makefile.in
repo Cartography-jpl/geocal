@@ -1221,6 +1221,7 @@ am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/docopt.py @srcpythonlib@/tempdir.py \
 	@srcpythonlib@/shape_file.py \
 	@srcpythonlib@/gdal_to_erdas_file.py \
+	@srcpythonlib@/mmap_file.py @srcpythonlib@/raster_tile.py \
 	@srcpythonlib@/tre_amt_struct.py
 am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 am__pep3147_tweak = \
@@ -2419,6 +2420,8 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/tempdir.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/shape_file.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/gdal_to_erdas_file.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/mmap_file.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/raster_tile.py \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_38)
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \

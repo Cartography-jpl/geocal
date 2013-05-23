@@ -1,6 +1,3 @@
-# This is miscellaneous functions that should eventually get sucked into
-# afids python or C++
-
 from geocal import *
 import numpy as np
 

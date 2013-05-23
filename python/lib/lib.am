@@ -32,6 +32,8 @@ afidspkgpython_PYTHON+= @srcpythonlib@/docopt.py
 afidspkgpython_PYTHON+= @srcpythonlib@/tempdir.py
 afidspkgpython_PYTHON+= @srcpythonlib@/shape_file.py
 afidspkgpython_PYTHON+= @srcpythonlib@/gdal_to_erdas_file.py
+afidspkgpython_PYTHON+= @srcpythonlib@/mmap_file.py
+afidspkgpython_PYTHON+= @srcpythonlib@/raster_tile.py
 if WITH_AFIDS_A
 afidspkgpython_PYTHON+= @srcpythonlib@/tre_amt_struct.py
 endif

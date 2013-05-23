@@ -1,4 +1,4 @@
-from geocal import *
+from mmap_file import *
 from nose.tools import *
 
 def test_read_write():

@@ -1,6 +1,28 @@
 from geocal import *
 import numpy as np
 
+def _new_memmap(version, args, kwargs):
+    '''For use with pickle, covers common case where we just store the
+    arguments needed to create an object. See for example HdfFile'''
+    cls = memmap_wrap
+    if(cls.pickle_format_version() != version):
+      raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
+    return memmap_wrap(*args, **kwargs)
+
+class memmap_wrap(np.memmap):
+    '''This adds a wrapper for being able to pickle this object'''
+    def __init__(self, *args, **kwargs):
+        self.__args_save = args
+        self.__kwargs_save = kwargs
+        np.memmap.__init__(self, *args, **kwargs)
+        
+    @classmethod
+    def pickle_format_version(cls):
+        return 1
+
+    def __reduce__(self):
+        return _new_memmap, (1, self.__args_save, self.__kwargs_save)
+    
 def mmap_file(*args, **kwargs):
     '''Open a VICAR file as a memmap. This either opens for reading or
     creates a new Vicar file with the given map info and data type. 
@@ -17,7 +39,11 @@ def mmap_file(*args, **kwargs):
          np.int8.
 
     The data type should be one of np.float64, np.float32, np.int8, np.int16,
-    np.int32, np.uint8, np.uint16, np.uint32'''
+    np.int32, np.uint8, np.uint16, np.uint32
+
+    Note that we actually wrap the np.memmap object up so that we can 
+    efficiently pickle it (the default is to pickle the underlying array,
+    which can be huge)'''
     
     # Create a file
     if(len(args) ==2):
@@ -58,5 +84,5 @@ def mmap_file(*args, **kwargs):
             raise ValueError("Unknown file format")
     else:
         dtype = kwargs.get('dtype')
-    return np.memmap(fname, dtype = dtype, offset = lsize, shape=shp)
+    return memmap_wrap(fname, dtype = dtype, offset = lsize, shape=shp)
 

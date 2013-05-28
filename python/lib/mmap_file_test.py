@@ -1,5 +1,6 @@
 from mmap_file import *
 from nose.tools import *
+import cPickle
 
 def test_read_write():
     # Basic read and write test.
@@ -30,4 +31,12 @@ def test_read_write():
     for i in range(200):
         for j in range(100):
             assert_almost_equal(f2[i,j], (i * 200 + j * 100) / 4.0)
-
+    t = cPickle.dumps(f2, cPickle.HIGHEST_PROTOCOL)
+    # Make sure we aren't just dumping all the data
+    assert len(t) < 200
+    f3 = cPickle.loads(t)
+    assert f3.shape[0] == 200
+    assert f3.shape[1] == 100
+    for i in range(200):
+        for j in range(100):
+            assert_almost_equal(f3[i,j], (i * 200 + j * 100) / 4.0)

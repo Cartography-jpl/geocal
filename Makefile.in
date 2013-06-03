@@ -7850,7 +7850,7 @@ installcheck-local: $(INSTALLCHECK_HOOK)
 # Allow searchs for .i in this directory
 @BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@libgeocal@
 
-@BUILD_AFIDS_PYTHON_TRUE@install-python-2: install-libLTLIBRARIES install-pkgpythonLTLIBRARIES install-pkgpythonPYTHON install-fpscriptDATA install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
+@BUILD_AFIDS_PYTHON_TRUE@install-python-2: install-libLTLIBRARIES install-python-afids install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
 @BUILD_AFIDS_PYTHON_TRUE@	$(noop)
 
 @BUILD_AFIDS_PYTHON_TRUE@install-python: all
@@ -7978,7 +7978,7 @@ installcheck-local: $(INSTALLCHECK_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@	      "results in doctest/output.txt."
 
 # Backdoor rule to do a quick install when we are just varying python
-@BUILD_AFIDS_PYTHON_TRUE@python_install: install-afidspkgpythonPYTHON install-dist_afidspkgpythonDATA
+@BUILD_AFIDS_PYTHON_TRUE@install-python-afids: install-afidspkgpythonPYTHON install-dist_afidspkgpythonDATA install-dist_binSCRIPTS
 
 @BUILD_AFIDS_PYTHON_TRUE@python_check:
 @BUILD_AFIDS_PYTHON_TRUE@	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \

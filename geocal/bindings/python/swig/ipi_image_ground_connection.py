@@ -128,6 +128,14 @@ class IpiImageGroundConnection(geocal.image_ground_connection.ImageGroundConnect
 
         """
         _ipi_image_ground_connection.IpiImageGroundConnection_swiginit(self,_ipi_image_ground_connection.new_IpiImageGroundConnection(*args))
+    def cf_look_vector(self, *args):
+        """
+        virtual void GeoCal::IpiImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,
+        boost::shared_ptr< CartesianFixed > &P) const
+
+        """
+        return _ipi_image_ground_connection.IpiImageGroundConnection_cf_look_vector(self, *args)
+
     def _v_ipi(self):
         """
         const boost::shared_ptr<Ipi>& GeoCal::IpiImageGroundConnection::ipi_ptr() const
@@ -180,6 +188,7 @@ class IpiImageGroundConnection(geocal.image_ground_connection.ImageGroundConnect
       return _new_from_init, (self.__class__, 1, self.ipi,self.dem,self.image,self.title,self.resolution,self.band,self.maximum_height)
 
     __swig_destroy__ = _ipi_image_ground_connection.delete_IpiImageGroundConnection
+IpiImageGroundConnection.cf_look_vector = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection_cf_look_vector,None,IpiImageGroundConnection)
 IpiImageGroundConnection._v_ipi = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_ipi,None,IpiImageGroundConnection)
 IpiImageGroundConnection._v_band = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_band,None,IpiImageGroundConnection)
 IpiImageGroundConnection._v_resolution = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_resolution,None,IpiImageGroundConnection)

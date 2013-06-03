@@ -127,6 +127,14 @@ class RpcImageGroundConnection(geocal.image_ground_connection.ImageGroundConnect
 
         """
         _rpc_image_ground_connection.RpcImageGroundConnection_swiginit(self,_rpc_image_ground_connection.new_RpcImageGroundConnection(*args))
+    def cf_look_vector(self, *args):
+        """
+        void RpcImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,
+        boost::shared_ptr< CartesianFixed > &P) const
+
+        """
+        return _rpc_image_ground_connection.RpcImageGroundConnection_cf_look_vector(self, *args)
+
     def _v_rpc(self):
         """
         boost::shared_ptr<Rpc> GeoCal::RpcImageGroundConnection::rpc_ptr() const
@@ -146,6 +154,7 @@ class RpcImageGroundConnection(geocal.image_ground_connection.ImageGroundConnect
       return _new_from_init, (self.__class__, 1, self.rpc,self.dem,self.image,self.title)
 
     __swig_destroy__ = _rpc_image_ground_connection.delete_RpcImageGroundConnection
+RpcImageGroundConnection.cf_look_vector = new_instancemethod(_rpc_image_ground_connection.RpcImageGroundConnection_cf_look_vector,None,RpcImageGroundConnection)
 RpcImageGroundConnection._v_rpc = new_instancemethod(_rpc_image_ground_connection.RpcImageGroundConnection__v_rpc,None,RpcImageGroundConnection)
 RpcImageGroundConnection_swigregister = _rpc_image_ground_connection.RpcImageGroundConnection_swigregister
 RpcImageGroundConnection_swigregister(RpcImageGroundConnection)

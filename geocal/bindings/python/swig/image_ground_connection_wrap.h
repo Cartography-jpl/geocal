@@ -21,7 +21,8 @@ public:
     SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const d, boost::shared_ptr< GeoCal::RasterImage > const &Img, std::string const &Title);
     SwigDirector_ImageGroundConnection(PyObject *self);
     virtual ~SwigDirector_ImageGroundConnection();
-    virtual void cf_look_vector(GeoCal::ImageCoordinate const &Ic, GeoCal::CartesianFixedLookVector &OUTPUT2, boost::shared_ptr< GeoCal::CartesianFixed > &OUTPUT) const;
+    virtual boost::shared_ptr< GeoCal::CartesianFixedLookVector > cf_look_vector_lv(GeoCal::ImageCoordinate const &Ic) const;
+    virtual boost::shared_ptr< GeoCal::CartesianFixed > cf_look_vector_pos(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate_dem(GeoCal::ImageCoordinate const &Ic, GeoCal::Dem const &D) const;
     virtual GeoCal::ImageCoordinate image_coordinate(GeoCal::GroundCoordinate const &Gc) const;
@@ -64,7 +65,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[10];
+    mutable swig::SwigVar_PyObject vtable[11];
 #endif
 
 };

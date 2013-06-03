@@ -86,10 +86,8 @@ def _view_angle(self, image_coordinate, delta_h = 100):
     '''
     gc1 = self.ground_coordinate(image_coordinate)
     h = gc1.height_reference_surface
-    d = self.dem
-    self.dem = SimpleDem(h + delta_h)
-    gc2 = self.ground_coordinate(image_coordinate)
-    self.dem = d
+    d = SimpleDem(h + delta_h)
+    gc2 = self.ground_coordinate_dem(image_coordinate, d)
     e1 = Ecr(gc1)
     e2 = Ecr(gc2)
     slat = sin(radians(gc1.latitude))
@@ -101,15 +99,14 @@ def _view_angle(self, image_coordinate, delta_h = 100):
     to_lc = np.array([[-clon * slat, -slon * slat,  clat],
                       [-slon,         clon,         0],
                       [-clon * clat,  -slon * clat, -slat]])
-    # I'm pretty sure this is the right direction of "follow the photon"
-    # convention used by MISR
     lv = np.array([e2.position[0] - e1.position[0],
                    e2.position[1] - e1.position[1],
                    e2.position[2] - e1.position[2]])
-    lc_dir = np.dot(to_lc, lv)
+    lv = lv / sqrt(np.dot(lv, lv))
+    lc_dir = to_lc.dot(lv)
     az = degrees(atan2(lc_dir[1], lc_dir[0]))
     if(az < 0) : az += 360
-    zen = 180 - degrees(acos(lc_dir[2] / sqrt(np.dot(lv, lv))))
+    zen = 180 - degrees(acos(lc_dir[2] / sqrt(np.dot(lc_dir, lc_dir))))
     return zen, az
 
 geocal.ImageGroundConnection.view_angle = _view_angle

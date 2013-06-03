@@ -20,7 +20,7 @@ _swig_wrap_la_SOURCES+= @swigsrc@/swig_wrap.cc
 
 endif BUILD_AFIDS_PYTHON
 
-install-python-2: install-libLTLIBRARIES install-pkgpythonLTLIBRARIES install-pkgpythonPYTHON install-fpscriptDATA install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
+install-python-2: install-libLTLIBRARIES install-python-afids install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
 	$(noop)
 
 if BUILD_AFIDS_PYTHON

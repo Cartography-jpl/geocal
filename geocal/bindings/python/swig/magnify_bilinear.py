@@ -151,6 +151,14 @@ class MagnifyBilinearImageGroundConnection(geocal.image_ground_connection.ImageG
         Constructor. 
         """
         _magnify_bilinear.MagnifyBilinearImageGroundConnection_swiginit(self,_magnify_bilinear.new_MagnifyBilinearImageGroundConnection(*args))
+    def cf_look_vector(self, *args):
+        """
+        virtual void GeoCal::MagnifyBilinearImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,
+        boost::shared_ptr< CartesianFixed > &P) const
+
+        """
+        return _magnify_bilinear.MagnifyBilinearImageGroundConnection_cf_look_vector(self, *args)
+
     def _v_original_image_ground_connection(self):
         """
         boost::shared_ptr<ImageGroundConnection> GeoCal::MagnifyBilinearImageGroundConnection::original_image_ground_connection() const
@@ -181,6 +189,7 @@ class MagnifyBilinearImageGroundConnection(geocal.image_ground_connection.ImageG
       return _new_from_init, (self.__class__, 1, self.original_image_ground_connection,self.magnification_factor)
 
     __swig_destroy__ = _magnify_bilinear.delete_MagnifyBilinearImageGroundConnection
+MagnifyBilinearImageGroundConnection.cf_look_vector = new_instancemethod(_magnify_bilinear.MagnifyBilinearImageGroundConnection_cf_look_vector,None,MagnifyBilinearImageGroundConnection)
 MagnifyBilinearImageGroundConnection._v_original_image_ground_connection = new_instancemethod(_magnify_bilinear.MagnifyBilinearImageGroundConnection__v_original_image_ground_connection,None,MagnifyBilinearImageGroundConnection)
 MagnifyBilinearImageGroundConnection._v_magnification_factor = new_instancemethod(_magnify_bilinear.MagnifyBilinearImageGroundConnection__v_magnification_factor,None,MagnifyBilinearImageGroundConnection)
 MagnifyBilinearImageGroundConnection_swigregister = _magnify_bilinear.MagnifyBilinearImageGroundConnection_swigregister

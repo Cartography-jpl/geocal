@@ -134,6 +134,14 @@ class OrbitDataImageGroundConnection(geocal.image_ground_connection.ImageGroundC
         default is not to. 
         """
         _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_swiginit(self,_orbit_data_image_ground_connection.new_OrbitDataImageGroundConnection(*args))
+    def cf_look_vector(self, *args):
+        """
+        virtual void GeoCal::OrbitDataImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,
+        boost::shared_ptr< CartesianFixed > &P) const
+
+        """
+        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_cf_look_vector(self, *args)
+
     def _v_orbit_data(self):
         """
         const boost::shared_ptr<OrbitData>& GeoCal::OrbitDataImageGroundConnection::orbit_data_ptr() const
@@ -213,6 +221,7 @@ class OrbitDataImageGroundConnection(geocal.image_ground_connection.ImageGroundC
       return _new_from_init, (self.__class__, 1, self.orbit_data,self.camera,self.dem,self.image,self.title,self.refraction,self.resolution,self.band,self.max_height)
 
     __swig_destroy__ = _orbit_data_image_ground_connection.delete_OrbitDataImageGroundConnection
+OrbitDataImageGroundConnection.cf_look_vector = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection_cf_look_vector,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_image = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_image,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_title = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_title,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_orbit_data = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_orbit_data,None,OrbitDataImageGroundConnection)

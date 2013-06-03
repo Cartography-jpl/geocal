@@ -5433,7 +5433,11 @@ SwigDirector_ImageGroundConnection::SwigDirector_ImageGroundConnection(PyObject 
 SwigDirector_ImageGroundConnection::~SwigDirector_ImageGroundConnection() {
 }
 
-void SwigDirector_ImageGroundConnection::cf_look_vector(GeoCal::ImageCoordinate const &Ic, GeoCal::CartesianFixedLookVector &OUTPUT2, boost::shared_ptr< GeoCal::CartesianFixed > &OUTPUT) const {
+boost::shared_ptr< GeoCal::CartesianFixedLookVector > SwigDirector_ImageGroundConnection::cf_look_vector_lv(GeoCal::ImageCoordinate const &Ic) const {
+  void *swig_argp ;
+  int swig_res = 0 ;
+  
+  boost::shared_ptr< GeoCal::CartesianFixedLookVector > c_result;
   swig::SwigVar_PyObject obj0;
   {
     boost::shared_ptr< const GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::ImageCoordinate >((GeoCal::ImageCoordinate *)&Ic, SWIG_null_deleter());
@@ -5444,11 +5448,11 @@ void SwigDirector_ImageGroundConnection::cf_look_vector(GeoCal::ImageCoordinate 
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
   const size_t swig_method_index = 0;
-  const char * const swig_method_name = "cf_look_vector";
+  const char * const swig_method_name = "cf_look_vector_lv";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
 #else
-  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"cf_look_vector");
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"cf_look_vector_lv");
   swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0, NULL);
 #endif
   if (!result) {
@@ -5462,6 +5466,78 @@ void SwigDirector_ImageGroundConnection::cf_look_vector(GeoCal::ImageCoordinate 
       }
     }
   }
+  int newmem = 0;
+  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,  0  | 0, &newmem);
+  if (!SWIG_IsOK(swig_res)) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::CartesianFixedLookVector >""'");
+  }
+  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixedLookVector > * >(swig_argp));
+  // Special handling if this is a director class. In that case, we
+  // don't own the underlying python object. Instead,
+  // we tell python we have a reference to the underlying object, and
+  // when this gets destroyed we decrement the reference to the python
+  // object. 
+  Swig::Director* dp = dynamic_cast<Swig::Director*>(c_result.get());
+  if(dp) {
+    Py_INCREF(dp->swig_get_self());
+    c_result.reset(c_result.get(), PythonRefPtrCleanup(dp->swig_get_self()));
+  }
+  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixedLookVector > * >(swig_argp);
+  return (boost::shared_ptr< GeoCal::CartesianFixedLookVector >) c_result;
+}
+
+
+boost::shared_ptr< GeoCal::CartesianFixed > SwigDirector_ImageGroundConnection::cf_look_vector_pos(GeoCal::ImageCoordinate const &Ic) const {
+  void *swig_argp ;
+  int swig_res = 0 ;
+  
+  boost::shared_ptr< GeoCal::CartesianFixed > c_result;
+  swig::SwigVar_PyObject obj0;
+  {
+    boost::shared_ptr< const GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::ImageCoordinate >((GeoCal::ImageCoordinate *)&Ic, SWIG_null_deleter());
+    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
+  }
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 1;
+  const char * const swig_method_name = "cf_look_vector_pos";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"cf_look_vector_pos");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  int newmem = 0;
+  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0  | 0, &newmem);
+  if (!SWIG_IsOK(swig_res)) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::CartesianFixed >""'");
+  }
+  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(swig_argp));
+  // Special handling if this is a director class. In that case, we
+  // don't own the underlying python object. Instead,
+  // we tell python we have a reference to the underlying object, and
+  // when this gets destroyed we decrement the reference to the python
+  // object. 
+  Swig::Director* dp = dynamic_cast<Swig::Director*>(c_result.get());
+  if(dp) {
+    Py_INCREF(dp->swig_get_self());
+    c_result.reset(c_result.get(), PythonRefPtrCleanup(dp->swig_get_self()));
+  }
+  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(swig_argp);
+  return (boost::shared_ptr< GeoCal::CartesianFixed >) c_result;
 }
 
 
@@ -5479,7 +5555,7 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_ImageGroundConnection
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 1;
+  const size_t swig_method_index = 2;
   const char * const swig_method_name = "__ground_coordinate";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -5538,7 +5614,7 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_ImageGroundConnection
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 2;
+  const size_t swig_method_index = 3;
   const char * const swig_method_name = "ground_coordinate_dem";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1, NULL);
@@ -5592,7 +5668,7 @@ GeoCal::ImageCoordinate SwigDirector_ImageGroundConnection::image_coordinate(Geo
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 3;
+  const size_t swig_method_index = 4;
   const char * const swig_method_name = "image_coordinate";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -5635,7 +5711,7 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::image_coordinate_ja
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 4;
+  const size_t swig_method_index = 5;
   const char * const swig_method_name = "image_coordinate_jac_ecr";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -5674,7 +5750,7 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::image_coordinate_ja
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 5;
+  const size_t swig_method_index = 6;
   const char * const swig_method_name = "image_coordinate_jac_parm";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -5706,7 +5782,7 @@ int SwigDirector_ImageGroundConnection::number_line() const {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 6;
+  const size_t swig_method_index = 7;
   const char * const swig_method_name = "_v_number_line";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject args = PyTuple_New(0);
@@ -5742,7 +5818,7 @@ int SwigDirector_ImageGroundConnection::number_sample() const {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 7;
+  const size_t swig_method_index = 8;
   const char * const swig_method_name = "_v_number_sample";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject args = PyTuple_New(0);
@@ -5783,7 +5859,7 @@ double SwigDirector_ImageGroundConnection::resolution_meter(GeoCal::ImageCoordin
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 8;
+  const size_t swig_method_index = 9;
   const char * const swig_method_name = "resolution_meter";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -5818,7 +5894,7 @@ double SwigDirector_ImageGroundConnection::resolution_meter() const {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 9;
+  const size_t swig_method_index = 10;
   const char * const swig_method_name = "resolution_meter";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject args = PyTuple_New(0);
@@ -6142,12 +6218,10 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_lv(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::ImageGroundConnection *arg1 = (GeoCal::ImageGroundConnection *) 0 ;
   GeoCal::ImageCoordinate *arg2 = 0 ;
-  GeoCal::CartesianFixedLookVector *arg3 = 0 ;
-  boost::shared_ptr< GeoCal::CartesianFixed > *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
@@ -6155,24 +6229,17 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector(PyObject *SWIGUN
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
-  GeoCal::CartesianFixedLookVector temp3 ;
-  boost::shared_ptr< GeoCal::CartesianFixed > temp4 ;
   PyObject *swig_obj[2] ;
   Swig::Director *director = 0;
   bool upcall = false;
+  boost::shared_ptr< GeoCal::CartesianFixedLookVector > result;
   
-  {
-    arg3 = &temp3;
-  }
-  {
-    arg4 = &temp4;
-  }
-  if (!SWIG_Python_UnpackTuple(args,"ImageGroundConnection_cf_look_vector",2,2,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"ImageGroundConnection_cf_look_vector_lv",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ImageGroundConnection_cf_look_vector" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ImageGroundConnection_cf_look_vector_lv" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
@@ -6194,10 +6261,10 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector(PyObject *SWIGUN
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ImageGroundConnection_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ImageGroundConnection_cf_look_vector_lv" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageGroundConnection_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageGroundConnection_cf_look_vector_lv" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
@@ -6214,9 +6281,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector(PyObject *SWIGUN
     {
       try {
         if (upcall) {
-          Swig::DirectorPureVirtualException::raise("GeoCal::ImageGroundConnection::cf_look_vector");
+          result = ((GeoCal::ImageGroundConnection const *)arg1)->GeoCal::ImageGroundConnection::cf_look_vector_lv((GeoCal::ImageCoordinate const &)*arg2);
         } else {
-          ((GeoCal::ImageGroundConnection const *)arg1)->cf_look_vector((GeoCal::ImageCoordinate const &)*arg2,*arg3,*arg4);
+          result = ((GeoCal::ImageGroundConnection const *)arg1)->cf_look_vector_lv((GeoCal::ImageCoordinate const &)*arg2);
         }
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6227,14 +6294,93 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector(PyObject *SWIGUN
   } catch (Swig::DirectorException&) {
     SWIG_fail;
   }
-  resultobj = SWIG_Py_Void();
   {
-    boost::shared_ptr<GeoCal::CartesianFixedLookVector> *smartresult = new boost::shared_ptr<GeoCal::CartesianFixedLookVector>(new GeoCal::CartesianFixedLookVector(*arg3));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_pos(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageGroundConnection *arg1 = (GeoCal::ImageGroundConnection *) 0 ;
+  GeoCal::ImageCoordinate *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  boost::shared_ptr< GeoCal::CartesianFixed > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"ImageGroundConnection_cf_look_vector_pos",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ImageGroundConnection_cf_look_vector_pos" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
+    }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixed >(*arg4);
-    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN));
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ImageGroundConnection_cf_look_vector_pos" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageGroundConnection_cf_look_vector_pos" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::ImageGroundConnection const *)arg1)->GeoCal::ImageGroundConnection::cf_look_vector_pos((GeoCal::ImageCoordinate const &)*arg2);
+        } else {
+          result = ((GeoCal::ImageGroundConnection const *)arg1)->cf_look_vector_pos((GeoCal::ImageCoordinate const &)*arg2);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
   }
   return resultobj;
 fail:
@@ -7796,6 +7942,94 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OffsetImageGroundConnection_cf_look_vector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OffsetImageGroundConnection *arg1 = (GeoCal::OffsetImageGroundConnection *) 0 ;
+  GeoCal::ImageCoordinate *arg2 = 0 ;
+  GeoCal::CartesianFixedLookVector *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OffsetImageGroundConnection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OffsetImageGroundConnection const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
+  GeoCal::CartesianFixedLookVector temp3 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > temp4 ;
+  PyObject *swig_obj[2] ;
+  
+  {
+    arg3 = &temp3;
+  }
+  {
+    arg4 = &temp4;
+  }
+  if (!SWIG_Python_UnpackTuple(args,"OffsetImageGroundConnection_cf_look_vector",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OffsetImageGroundConnection_cf_look_vector" "', argument " "1"" of type '" "GeoCal::OffsetImageGroundConnection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::OffsetImageGroundConnection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::OffsetImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OffsetImageGroundConnection_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OffsetImageGroundConnection_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::OffsetImageGroundConnection const *)arg1)->cf_look_vector((GeoCal::ImageCoordinate const &)*arg2,*arg3,*arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<GeoCal::CartesianFixedLookVector> *smartresult = new boost::shared_ptr<GeoCal::CartesianFixedLookVector>(new GeoCal::CartesianFixedLookVector(*arg3));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixed >(*arg4);
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_OffsetImageGroundConnection__v_original_image_ground_connection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OffsetImageGroundConnection *arg1 = (GeoCal::OffsetImageGroundConnection *) 0 ;
@@ -8001,12 +8235,17 @@ static PyMethodDef SwigMethods[] = {
 		"virtual GeoCal::ImageGroundConnection::~ImageGroundConnection()\n"
 		"Destructor. \n"
 		""},
-	 { (char *)"ImageGroundConnection_cf_look_vector", _wrap_ImageGroundConnection_cf_look_vector, METH_VARARGS, (char *)"\n"
-		"virtual void GeoCal::ImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,\n"
-		"boost::shared_ptr< CartesianFixed > &P) const =0\n"
-		"Return look vector for given coordinate, along with a position that\n"
-		"lies along the direction of the look vector (so position of satellite,\n"
-		"or a position on the surface. \n"
+	 { (char *)"ImageGroundConnection_cf_look_vector_lv", _wrap_ImageGroundConnection_cf_look_vector_lv, METH_VARARGS, (char *)"\n"
+		"virtual boost::shared_ptr<CartesianFixedLookVector> GeoCal::ImageGroundConnection::cf_look_vector_lv(const ImageCoordinate &Ic) const\n"
+		"SWIG/python doesn't like returning 2 items through a director, so we\n"
+		"implement cf_look_vector in 2 parts.\n"
+		"\n"
+		"In general, C++ to override cf_look_vector rather than these 2\n"
+		"functions (although it could do these 2 if useful for some reason. \n"
+		""},
+	 { (char *)"ImageGroundConnection_cf_look_vector_pos", _wrap_ImageGroundConnection_cf_look_vector_pos, METH_VARARGS, (char *)"\n"
+		"virtual boost::shared_ptr<CartesianFixed> GeoCal::ImageGroundConnection::cf_look_vector_pos(const ImageCoordinate &Ic) const\n"
+		"\n"
 		""},
 	 { (char *)"ImageGroundConnection___ground_coordinate", _wrap_ImageGroundConnection___ground_coordinate, METH_VARARGS, (char *)"\n"
 		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::ImageGroundConnection::ground_coordinate(const ImageCoordinate &Ic) const\n"
@@ -8095,6 +8334,13 @@ static PyMethodDef SwigMethods[] = {
 		"GeoCal::OffsetImageGroundConnection::OffsetImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > &Ig_original, double\n"
 		"Line_offset, double Sample_offset, int Number_line, int Number_sample)\n"
 		"Constructor. \n"
+		""},
+	 { (char *)"OffsetImageGroundConnection_cf_look_vector", _wrap_OffsetImageGroundConnection_cf_look_vector, METH_VARARGS, (char *)"\n"
+		"virtual void GeoCal::OffsetImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,\n"
+		"boost::shared_ptr< CartesianFixed > &P) const\n"
+		"Return look vector for given coordinate, along with a position that\n"
+		"lies along the direction of the look vector (so position of satellite,\n"
+		"or a position on the surface. \n"
 		""},
 	 { (char *)"OffsetImageGroundConnection__v_original_image_ground_connection", (PyCFunction)_wrap_OffsetImageGroundConnection__v_original_image_ground_connection, METH_O, (char *)"\n"
 		"boost::shared_ptr<ImageGroundConnection> GeoCal::OffsetImageGroundConnection::original_image_ground_connection() const\n"

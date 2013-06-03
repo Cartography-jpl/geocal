@@ -127,6 +127,14 @@ class MapInfoImageGroundConnection(geocal.image_ground_connection.ImageGroundCon
         Constructor. 
         """
         _map_info_image_ground_connection.MapInfoImageGroundConnection_swiginit(self,_map_info_image_ground_connection.new_MapInfoImageGroundConnection(*args))
+    def cf_look_vector(self, *args):
+        """
+        virtual void GeoCal::MapInfoImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,
+        boost::shared_ptr< CartesianFixed > &P) const
+
+        """
+        return _map_info_image_ground_connection.MapInfoImageGroundConnection_cf_look_vector(self, *args)
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -135,6 +143,7 @@ class MapInfoImageGroundConnection(geocal.image_ground_connection.ImageGroundCon
       return _new_from_init, (self.__class__, 1, self.image,self.dem,self.title)
 
     __swig_destroy__ = _map_info_image_ground_connection.delete_MapInfoImageGroundConnection
+MapInfoImageGroundConnection.cf_look_vector = new_instancemethod(_map_info_image_ground_connection.MapInfoImageGroundConnection_cf_look_vector,None,MapInfoImageGroundConnection)
 MapInfoImageGroundConnection_swigregister = _map_info_image_ground_connection.MapInfoImageGroundConnection_swigregister
 MapInfoImageGroundConnection_swigregister(MapInfoImageGroundConnection)
 

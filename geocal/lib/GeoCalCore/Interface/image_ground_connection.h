@@ -68,8 +68,37 @@ public:
   
   virtual void cf_look_vector(const ImageCoordinate& Ic, 
 			      CartesianFixedLookVector& Lv,
-			      boost::shared_ptr<CartesianFixed>& P) const = 0;
+			      boost::shared_ptr<CartesianFixed>& P) const
+  {
+    Lv = *cf_look_vector_lv(Ic);
+    P = cf_look_vector_pos(Ic);
+  }
 
+//-----------------------------------------------------------------------
+/// SWIG/python doesn't like returning 2 items through a director, so
+/// we implement cf_look_vector in 2 parts. In general, C++ to
+/// override cf_look_vector rather than these 2 functions (although it
+/// could do these 2 if useful for some reason.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<CartesianFixedLookVector>
+  cf_look_vector_lv(const ImageCoordinate& Ic) const
+  { 
+    CartesianFixedLookVector lv;
+    boost::shared_ptr<CartesianFixed> p;
+    cf_look_vector(Ic, lv, p);
+    return boost::shared_ptr<CartesianFixedLookVector>
+      (new CartesianFixedLookVector(lv));
+  }
+  virtual boost::shared_ptr<CartesianFixed>
+  cf_look_vector_pos(const ImageCoordinate& Ic) const
+  { 
+    CartesianFixedLookVector lv;
+    boost::shared_ptr<CartesianFixed> p;
+    cf_look_vector(Ic, lv, p);
+    return p;
+  }
+    
 //-----------------------------------------------------------------------
 /// Return ground coordinate that goes with a particular image
 /// coordinate. 

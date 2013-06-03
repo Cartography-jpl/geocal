@@ -5400,6 +5400,94 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MagnifyBilinearImageGroundConnection_cf_look_vector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MagnifyBilinearImageGroundConnection *arg1 = (GeoCal::MagnifyBilinearImageGroundConnection *) 0 ;
+  GeoCal::ImageCoordinate *arg2 = 0 ;
+  GeoCal::CartesianFixedLookVector *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MagnifyBilinearImageGroundConnection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MagnifyBilinearImageGroundConnection const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
+  GeoCal::CartesianFixedLookVector temp3 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > temp4 ;
+  PyObject *swig_obj[2] ;
+  
+  {
+    arg3 = &temp3;
+  }
+  {
+    arg4 = &temp4;
+  }
+  if (!SWIG_Python_UnpackTuple(args,"MagnifyBilinearImageGroundConnection_cf_look_vector",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyBilinearImageGroundConnection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyBilinearImageGroundConnection_cf_look_vector" "', argument " "1"" of type '" "GeoCal::MagnifyBilinearImageGroundConnection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MagnifyBilinearImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MagnifyBilinearImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::MagnifyBilinearImageGroundConnection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MagnifyBilinearImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::MagnifyBilinearImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MagnifyBilinearImageGroundConnection_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MagnifyBilinearImageGroundConnection_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::MagnifyBilinearImageGroundConnection const *)arg1)->cf_look_vector((GeoCal::ImageCoordinate const &)*arg2,*arg3,*arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<GeoCal::CartesianFixedLookVector> *smartresult = new boost::shared_ptr<GeoCal::CartesianFixedLookVector>(new GeoCal::CartesianFixedLookVector(*arg3));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixed >(*arg4);
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MagnifyBilinearImageGroundConnection__v_original_image_ground_connection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MagnifyBilinearImageGroundConnection *arg1 = (GeoCal::MagnifyBilinearImageGroundConnection *) 0 ;
@@ -5558,6 +5646,11 @@ static PyMethodDef SwigMethods[] = {
 		"GeoCal::MagnifyBilinearImageGroundConnection::MagnifyBilinearImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > &Ig_original, int\n"
 		"Magfactor)\n"
 		"Constructor. \n"
+		""},
+	 { (char *)"MagnifyBilinearImageGroundConnection_cf_look_vector", _wrap_MagnifyBilinearImageGroundConnection_cf_look_vector, METH_VARARGS, (char *)"\n"
+		"virtual void GeoCal::MagnifyBilinearImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,\n"
+		"boost::shared_ptr< CartesianFixed > &P) const\n"
+		"\n"
 		""},
 	 { (char *)"MagnifyBilinearImageGroundConnection__v_original_image_ground_connection", (PyCFunction)_wrap_MagnifyBilinearImageGroundConnection__v_original_image_ground_connection, METH_O, (char *)"\n"
 		"boost::shared_ptr<ImageGroundConnection> GeoCal::MagnifyBilinearImageGroundConnection::original_image_ground_connection() const\n"

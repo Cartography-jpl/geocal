@@ -52,9 +52,16 @@ protected:
   ImageGroundConnection();
 public:
   virtual ~ImageGroundConnection();
-  virtual void
-  cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& OUTPUT2,
-		 boost::shared_ptr<CartesianFixed>& OUTPUT) const = 0;
+  // Having multiple return values seriously confuses SWIG director
+  // stuff. Just leave this function out, so SWIG doesn't know about
+  // this at all. We'll create a python equivalent 
+  //virtual void
+  //cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
+  //boost::shared_ptr<CartesianFixed>& P) const;
+  virtual boost::shared_ptr<CartesianFixedLookVector>
+  cf_look_vector_lv(const ImageCoordinate& Ic) const;
+  virtual boost::shared_ptr<CartesianFixed>
+  cf_look_vector_pos(const ImageCoordinate& Ic) const;
   virtual boost::shared_ptr<GroundCoordinate> 
     ground_coordinate(const ImageCoordinate& Ic) const;
   virtual boost::shared_ptr<GroundCoordinate> 
@@ -81,6 +88,9 @@ public:
 @dem.setter
 def dem(self, value):  
   self.__dem(value)
+
+def cf_look_vector(self, ic):
+  return (self.cf_look_vector_lv(ic), self.cf_look_vector_pos(ic))
 
 def ground_coordinate(self, ic, dem = None):
   '''Return ground coordinate for the given image coordinate. You can specify

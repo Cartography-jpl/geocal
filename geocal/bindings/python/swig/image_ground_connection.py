@@ -159,15 +159,23 @@ class ImageGroundConnection(geocal.generic_object.GenericObject):
             _self = self
         _image_ground_connection.ImageGroundConnection_swiginit(self,_image_ground_connection.new_ImageGroundConnection(_self, *args))
     __swig_destroy__ = _image_ground_connection.delete_ImageGroundConnection
-    def cf_look_vector(self, *args):
+    def cf_look_vector_lv(self, *args):
         """
-        virtual void GeoCal::ImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,
-        boost::shared_ptr< CartesianFixed > &P) const =0
-        Return look vector for given coordinate, along with a position that
-        lies along the direction of the look vector (so position of satellite,
-        or a position on the surface. 
+        virtual boost::shared_ptr<CartesianFixedLookVector> GeoCal::ImageGroundConnection::cf_look_vector_lv(const ImageCoordinate &Ic) const
+        SWIG/python doesn't like returning 2 items through a director, so we
+        implement cf_look_vector in 2 parts.
+
+        In general, C++ to override cf_look_vector rather than these 2
+        functions (although it could do these 2 if useful for some reason. 
         """
-        return _image_ground_connection.ImageGroundConnection_cf_look_vector(self, *args)
+        return _image_ground_connection.ImageGroundConnection_cf_look_vector_lv(self, *args)
+
+    def cf_look_vector_pos(self, *args):
+        """
+        virtual boost::shared_ptr<CartesianFixed> GeoCal::ImageGroundConnection::cf_look_vector_pos(const ImageCoordinate &Ic) const
+
+        """
+        return _image_ground_connection.ImageGroundConnection_cf_look_vector_pos(self, *args)
 
     def __ground_coordinate(self, *args):
         """
@@ -333,6 +341,9 @@ class ImageGroundConnection(geocal.generic_object.GenericObject):
     def dem(self, value):  
       self.__dem(value)
 
+    def cf_look_vector(self, ic):
+      return (self.cf_look_vector_lv(ic), self.cf_look_vector_pos(ic))
+
     def ground_coordinate(self, ic, dem = None):
       '''Return ground coordinate for the given image coordinate. You can specify
        a dem to use, or we use the dem associated with the class.'''
@@ -345,7 +356,8 @@ class ImageGroundConnection(geocal.generic_object.GenericObject):
         self.this.disown()
         _image_ground_connection.disown_ImageGroundConnection(self)
         return weakref_proxy(self)
-ImageGroundConnection.cf_look_vector = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector,None,ImageGroundConnection)
+ImageGroundConnection.cf_look_vector_lv = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_lv,None,ImageGroundConnection)
+ImageGroundConnection.cf_look_vector_pos = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_pos,None,ImageGroundConnection)
 ImageGroundConnection.__ground_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection___ground_coordinate,None,ImageGroundConnection)
 ImageGroundConnection.ground_coordinate_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_dem,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate,None,ImageGroundConnection)
@@ -384,6 +396,16 @@ class OffsetImageGroundConnection(ImageGroundConnection):
         Constructor. 
         """
         _image_ground_connection.OffsetImageGroundConnection_swiginit(self,_image_ground_connection.new_OffsetImageGroundConnection(*args))
+    def cf_look_vector(self, *args):
+        """
+        virtual void GeoCal::OffsetImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,
+        boost::shared_ptr< CartesianFixed > &P) const
+        Return look vector for given coordinate, along with a position that
+        lies along the direction of the look vector (so position of satellite,
+        or a position on the surface. 
+        """
+        return _image_ground_connection.OffsetImageGroundConnection_cf_look_vector(self, *args)
+
     def _v_original_image_ground_connection(self):
         """
         boost::shared_ptr<ImageGroundConnection> GeoCal::OffsetImageGroundConnection::original_image_ground_connection() const
@@ -425,6 +447,7 @@ class OffsetImageGroundConnection(ImageGroundConnection):
       return _new_from_init, (self.__class__, 1, self.original_image_ground_connection,self.line_offset,self.sample_offset,self.number_line,self.number_sample)
 
     __swig_destroy__ = _image_ground_connection.delete_OffsetImageGroundConnection
+OffsetImageGroundConnection.cf_look_vector = new_instancemethod(_image_ground_connection.OffsetImageGroundConnection_cf_look_vector,None,OffsetImageGroundConnection)
 OffsetImageGroundConnection._v_original_image_ground_connection = new_instancemethod(_image_ground_connection.OffsetImageGroundConnection__v_original_image_ground_connection,None,OffsetImageGroundConnection)
 OffsetImageGroundConnection._v_line_offset = new_instancemethod(_image_ground_connection.OffsetImageGroundConnection__v_line_offset,None,OffsetImageGroundConnection)
 OffsetImageGroundConnection._v_sample_offset = new_instancemethod(_image_ground_connection.OffsetImageGroundConnection__v_sample_offset,None,OffsetImageGroundConnection)

@@ -7,8 +7,19 @@ void IgcImageToImageMatch::match
  double& Line_sigma, double& Sample_sigma,
  bool& Success, int* Diagnostic) const
 {
-  ImageCoordinate ic2_guess =
-    igc2->image_coordinate(*igc1->ground_coordinate(Ic1));
+  ImageCoordinate ic2_guess;
+  try {
+    ic2_guess =
+      igc2->image_coordinate(*igc1->ground_coordinate(Ic1));
+  } catch (const Exception& E) {
+    // Allow to fail, the image_coordinate calculate might have
+    // problems (e.g., out of range). In that case, we just have a
+    // failed image matching rather than an error.
+    Success = false;
+    if(Diagnostic)
+      *Diagnostic = IMAGE_COOR_FAILED;
+    return;
+  }
   matcher_->match(*igc1->image(), *igc2->image(), Ic1, 
 		  ic2_guess, Ic2, Line_sigma, Sample_sigma, Success,
 		  Diagnostic);

@@ -17,6 +17,7 @@ public:
 		       const boost::shared_ptr<ImageGroundConnection>& Igc2,
 		       const boost::shared_ptr<ImageMatcher>& Matcher)
     : igc1(Igc1), igc2(Igc2), matcher_(Matcher) {}
+  enum Diagnostic { IMAGE_COOR_FAILED = 100 };
   virtual ~IgcImageToImageMatch() {}
   virtual void match(const ImageCoordinate& Ic1, ImageCoordinate& Ic2,
 		     double& Line_sigma, double& Sample_sigma,

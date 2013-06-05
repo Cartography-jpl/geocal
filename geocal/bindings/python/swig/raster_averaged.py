@@ -110,6 +110,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal.raster_image
 import geocal.generic_object
+import geocal.image_ground_connection
+import geocal.geocal_exception
 class RasterAveraged(geocal.raster_image.RasterImage):
     """
     This averages a higher resolution RasterImage into a lower resolution
@@ -210,6 +212,105 @@ RasterAveraged.__call__ = new_instancemethod(_raster_averaged.RasterAveraged___c
 RasterAveraged.read_ptr = new_instancemethod(_raster_averaged.RasterAveraged_read_ptr,None,RasterAveraged)
 RasterAveraged_swigregister = _raster_averaged.RasterAveraged_swigregister
 RasterAveraged_swigregister(RasterAveraged)
+
+class AveragedImageGroundConnection(geocal.image_ground_connection.ImageGroundConnection):
+    """
+    This takes an existing ImageGroundConnection and it averages the
+    raster image, accounting for this in the ground/image calculation.
+
+    You can either have the image averaged on the fly, or have it done
+    once and kept in memory.
+
+    C++ includes: raster_averaged.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        AveragedImageGroundConnection::AveragedImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > Igc, int
+        Number_line_per_pixel, int Number_sample_per_pixel, bool
+        In_memory=false, bool Ignore_zero=false)
+        Constructor for average.
+
+        You can specify your choice of doing the average calculation on the
+        fly, or once and kept in memory.
+
+        Note that we set the title to the empty string, you can optionally set
+        this to whatever after creating this object. 
+        """
+        _raster_averaged.AveragedImageGroundConnection_swiginit(self,_raster_averaged.new_AveragedImageGroundConnection(*args))
+    def _v_original_image_ground_connection(self):
+        """
+        boost::shared_ptr<ImageGroundConnection> GeoCal::AveragedImageGroundConnection::original_image_ground_connection() const
+        Underlying ImageGroundConnection. 
+        """
+        return _raster_averaged.AveragedImageGroundConnection__v_original_image_ground_connection(self)
+
+    @property
+    def original_image_ground_connection(self):
+        return self._v_original_image_ground_connection()
+
+    def _v_number_line_per_pixel(self):
+        """
+        int GeoCal::AveragedImageGroundConnection::number_line_per_pixel() const
+        Number of lines of high resolution data per pixel of this lower
+        resolution RasterImage. 
+        """
+        return _raster_averaged.AveragedImageGroundConnection__v_number_line_per_pixel(self)
+
+    @property
+    def number_line_per_pixel(self):
+        return self._v_number_line_per_pixel()
+
+    def _v_number_sample_per_pixel(self):
+        """
+        int GeoCal::AveragedImageGroundConnection::number_sample_per_pixel() const
+        Number of samples of high resolution data per pixel of this lower
+        resolution RasterImage. 
+        """
+        return _raster_averaged.AveragedImageGroundConnection__v_number_sample_per_pixel(self)
+
+    @property
+    def number_sample_per_pixel(self):
+        return self._v_number_sample_per_pixel()
+
+    def _v_ignore_zero(self):
+        """
+        bool GeoCal::AveragedImageGroundConnection::ignore_zero() const
+        If true, we ignore zeros when calculating the average. 
+        """
+        return _raster_averaged.AveragedImageGroundConnection__v_ignore_zero(self)
+
+    @property
+    def ignore_zero(self):
+        return self._v_ignore_zero()
+
+    def _v_in_memory(self):
+        """
+        bool GeoCal::AveragedImageGroundConnection::in_memory() const
+        If true, calculation done once and is in memory. 
+        """
+        return _raster_averaged.AveragedImageGroundConnection__v_in_memory(self)
+
+    @property
+    def in_memory(self):
+        return self._v_in_memory()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.original_image_ground_connection,self.number_line_per_pixel,self.number_sample_per_pixel,self.in_memory,self.ignore_zero)
+
+    __swig_destroy__ = _raster_averaged.delete_AveragedImageGroundConnection
+AveragedImageGroundConnection._v_original_image_ground_connection = new_instancemethod(_raster_averaged.AveragedImageGroundConnection__v_original_image_ground_connection,None,AveragedImageGroundConnection)
+AveragedImageGroundConnection._v_number_line_per_pixel = new_instancemethod(_raster_averaged.AveragedImageGroundConnection__v_number_line_per_pixel,None,AveragedImageGroundConnection)
+AveragedImageGroundConnection._v_number_sample_per_pixel = new_instancemethod(_raster_averaged.AveragedImageGroundConnection__v_number_sample_per_pixel,None,AveragedImageGroundConnection)
+AveragedImageGroundConnection._v_ignore_zero = new_instancemethod(_raster_averaged.AveragedImageGroundConnection__v_ignore_zero,None,AveragedImageGroundConnection)
+AveragedImageGroundConnection._v_in_memory = new_instancemethod(_raster_averaged.AveragedImageGroundConnection__v_in_memory,None,AveragedImageGroundConnection)
+AveragedImageGroundConnection_swigregister = _raster_averaged.AveragedImageGroundConnection_swigregister
+AveragedImageGroundConnection_swigregister(AveragedImageGroundConnection)
 
 
 

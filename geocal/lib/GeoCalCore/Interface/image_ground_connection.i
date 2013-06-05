@@ -110,9 +110,6 @@ public:
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
-  virtual void 
-  cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& OUTPUT,
-		 boost::shared_ptr<CartesianFixed>& OUTPUT) const;
   %python_attribute(original_image_ground_connection, 
 		    boost::shared_ptr<ImageGroundConnection>)
   %python_attribute(line_offset, double)

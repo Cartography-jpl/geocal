@@ -7,7 +7,9 @@
 #include "raster_averaged.h"
 %}
 %base_import(raster_image)
+%base_import(image_ground_connection)
 %geocal_shared_ptr(GeoCal::RasterAveraged);
+%geocal_shared_ptr(GeoCal::AveragedImageGroundConnection);
 
 namespace GeoCal {
 class RasterAveraged : public RasterImage {
@@ -30,4 +32,27 @@ public:
 	       self.ignore_zero)
 };
 
+class AveragedImageGroundConnection: public ImageGroundConnection {
+public:
+  AveragedImageGroundConnection
+  (const boost::shared_ptr<ImageGroundConnection> Igc,
+   int Number_line_per_pixel, 
+   int Number_sample_per_pixel,
+   bool In_memory = false,
+   bool Ignore_zero = false);
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const;
+  virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
+    const;
+  %python_attribute(original_image_ground_connection, 
+		    boost::shared_ptr<ImageGroundConnection>)
+  %python_attribute(number_line_per_pixel, int)
+  %python_attribute(number_sample_per_pixel, int)
+  %python_attribute(ignore_zero, bool)
+  %python_attribute(in_memory, bool)
+  %pickle_init(1, self.original_image_ground_connection, 
+	       self.number_line_per_pixel, 
+	       self.number_sample_per_pixel,
+	       self.in_memory, self.ignore_zero);
+};
 }

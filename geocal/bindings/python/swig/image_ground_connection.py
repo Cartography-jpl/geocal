@@ -396,16 +396,6 @@ class OffsetImageGroundConnection(ImageGroundConnection):
         Constructor. 
         """
         _image_ground_connection.OffsetImageGroundConnection_swiginit(self,_image_ground_connection.new_OffsetImageGroundConnection(*args))
-    def cf_look_vector(self, *args):
-        """
-        virtual void GeoCal::OffsetImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,
-        boost::shared_ptr< CartesianFixed > &P) const
-        Return look vector for given coordinate, along with a position that
-        lies along the direction of the look vector (so position of satellite,
-        or a position on the surface. 
-        """
-        return _image_ground_connection.OffsetImageGroundConnection_cf_look_vector(self, *args)
-
     def _v_original_image_ground_connection(self):
         """
         boost::shared_ptr<ImageGroundConnection> GeoCal::OffsetImageGroundConnection::original_image_ground_connection() const
@@ -447,7 +437,6 @@ class OffsetImageGroundConnection(ImageGroundConnection):
       return _new_from_init, (self.__class__, 1, self.original_image_ground_connection,self.line_offset,self.sample_offset,self.number_line,self.number_sample)
 
     __swig_destroy__ = _image_ground_connection.delete_OffsetImageGroundConnection
-OffsetImageGroundConnection.cf_look_vector = new_instancemethod(_image_ground_connection.OffsetImageGroundConnection_cf_look_vector,None,OffsetImageGroundConnection)
 OffsetImageGroundConnection._v_original_image_ground_connection = new_instancemethod(_image_ground_connection.OffsetImageGroundConnection__v_original_image_ground_connection,None,OffsetImageGroundConnection)
 OffsetImageGroundConnection._v_line_offset = new_instancemethod(_image_ground_connection.OffsetImageGroundConnection__v_line_offset,None,OffsetImageGroundConnection)
 OffsetImageGroundConnection._v_sample_offset = new_instancemethod(_image_ground_connection.OffsetImageGroundConnection__v_sample_offset,None,OffsetImageGroundConnection)

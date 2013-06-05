@@ -1,6 +1,7 @@
 #ifndef RASTER_AVERAGED_H
 #define RASTER_AVERAGED_H
 #include "raster_image_variable.h"
+#include "image_ground_connection.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -78,6 +79,110 @@ private:
   int number_sample_per_pixel_;
 };
 
+/****************************************************************//**
+  This takes an existing ImageGroundConnection and it averages the
+  raster image, accounting for this in the ground/image
+  calculation. You can either have the image averaged on the fly, or
+  have it done once and kept in memory.
+*******************************************************************/
+
+class AveragedImageGroundConnection : public ImageGroundConnection {
+public:
+  AveragedImageGroundConnection
+  (const boost::shared_ptr<ImageGroundConnection> Igc,
+   int Number_line_per_pixel, 
+   int Number_sample_per_pixel,
+   bool In_memory = false,
+   bool Ignore_zero = false);
+
+  virtual ~AveragedImageGroundConnection() {}
+
+//-----------------------------------------------------------------------
+/// Number of lines of high resolution data per pixel of this lower
+/// resolution RasterImage.
+//-----------------------------------------------------------------------
+
+  int number_line_per_pixel() const {return number_line_per_pixel_;}
+
+//-----------------------------------------------------------------------
+/// Number of samples of high resolution data per pixel of this lower
+/// resolution RasterImage.
+//-----------------------------------------------------------------------
+
+  int number_sample_per_pixel() const {return number_sample_per_pixel_;}
+
+//-----------------------------------------------------------------------
+/// If true, we ignore zeros when calculating the average.
+//-----------------------------------------------------------------------
+  
+  bool ignore_zero() const {return ignore_zero_;}
+
+//-----------------------------------------------------------------------
+/// If true, calculation done once and is in memory.
+//-----------------------------------------------------------------------
+  
+  bool in_memory() const {return in_memory_;}
+
+//-----------------------------------------------------------------------
+/// Underlying ImageGroundConnection.
+//-----------------------------------------------------------------------
+
+  boost::shared_ptr<ImageGroundConnection> original_image_ground_connection()
+    const {return ig_;}
+  virtual void print(std::ostream& Os) const;
+
+  virtual blitz::Array<double, 1> parameter() const 
+  { return ig_->parameter(); }
+  virtual void parameter(const blitz::Array<double, 1>& Parm)
+  { ig_->parameter(Parm); }
+  virtual std::vector<std::string> parameter_name() const
+  { return ig_->parameter_name(); }
+
+  virtual void
+  cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
+		 boost::shared_ptr<CartesianFixed>& P) const
+  {
+    ImageCoordinate ic2((Ic.line + 0.5) * number_line_per_pixel_ - 0.5,
+			(Ic.sample + 0.5) * number_sample_per_pixel_ - 0.5);
+    return ig_->cf_look_vector(ic2, Lv, P); 
+  }
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const
+  { 
+    ImageCoordinate ic2((Ic.line + 0.5) * number_line_per_pixel_ - 0.5,
+			(Ic.sample + 0.5) * number_sample_per_pixel_ - 0.5);
+    return ig_->ground_coordinate_dem(ic2, D); 
+  }
+  virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const
+  {
+    ImageCoordinate ic = ig_->image_coordinate(Gc);
+    ic.line = (ic.line + 0.5)  /  number_line_per_pixel_ - 0.5;
+    ic.sample = (ic.sample + 0.5) / number_sample_per_pixel_ - 0.5;
+    return ic;
+  }
+  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) const
+  { 
+    blitz::Array<double, 2> res = ig_->image_coordinate_jac_ecr(Gc); 
+    res(0) /= number_line_per_pixel_;
+    res(1) /= number_sample_per_pixel_;
+    return res;
+  }
+  virtual blitz::Array<double, 2> 
+  image_coordinate_jac_parm(const GroundCoordinate& Gc) const
+  { 
+    blitz::Array<double, 2> res = ig_->image_coordinate_jac_ecr(Gc); 
+    res(0) /= number_line_per_pixel_;
+    res(1) /= number_sample_per_pixel_;
+    return res;
+  }
+
+public:
+  boost::shared_ptr<ImageGroundConnection> ig_;
+  int number_line_per_pixel_;
+  int number_sample_per_pixel_;
+  bool in_memory_;
+  bool ignore_zero_;
+};
 }
 #endif
 

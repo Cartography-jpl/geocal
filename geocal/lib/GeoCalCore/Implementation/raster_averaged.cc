@@ -1,4 +1,5 @@
 #include "raster_averaged.h"
+#include "memory_raster_image.h"
 
 using namespace GeoCal;
 
@@ -101,3 +102,47 @@ void RasterAveraged::print(std::ostream& Os) const
      << "  Number sample per pixel: " << number_sample_per_pixel() << "\n"
      << "  RasterImage: " << high_resolution_image() << "\n";
 }
+
+//-----------------------------------------------------------------------
+/// Constructor for average. You can specify your choice of doing the 
+/// average calculation on the fly, or once and kept in memory.
+///
+/// Note that we set the title to the empty string, you can optionally 
+/// set this to whatever after creating this object.
+//-----------------------------------------------------------------------
+
+AveragedImageGroundConnection::AveragedImageGroundConnection
+(const boost::shared_ptr<ImageGroundConnection> Igc,
+ int Number_line_per_pixel, 
+ int Number_sample_per_pixel,
+ bool In_memory,
+ bool Ignore_zero)
+  : ig_(Igc), number_line_per_pixel_(Number_line_per_pixel),
+    number_sample_per_pixel_(Number_sample_per_pixel),
+    in_memory_(In_memory), ignore_zero_(Ignore_zero) 
+{ 
+  dem_ = ig_->dem_ptr();
+  boost::shared_ptr<RasterImage> ra
+    (new RasterAveraged(ig_->image(), number_line_per_pixel_, 
+			number_sample_per_pixel_, ignore_zero_));
+  if(in_memory_)
+    image_.reset(new MemoryRasterImage(*ra));
+  else
+    image_ = ra;
+}
+
+//-----------------------------------------------------------------------
+/// Print to stream.
+//-----------------------------------------------------------------------
+
+void AveragedImageGroundConnection::print(std::ostream& Os) const
+{ 
+  Os << "AveragedImageGroundConnection\n"
+     << "  Number line per pixel:   " << number_line_per_pixel() << "\n"
+     << "  Number sample per pixel: " << number_sample_per_pixel() << "\n"
+     << "  Ignore zero:             " << ignore_zero() << "\n"
+     << "  In memory:               " << in_memory() << "\n"
+     << "  Original ImageGroundConnection:\n"
+     << *ig_ << "\n";
+}
+

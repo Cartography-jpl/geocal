@@ -190,7 +190,7 @@ bin_PROGRAMS =
 # make surce test_out directory is created).
 @BUILD_AFIDS_PYTHON_TRUE@am__append_5 = @srcsdbx@/README \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsdbx@/StorageConcepts.txt \
-@BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/*.i \
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(libgeocal)/*.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/swig_to_python.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/swig_type_mapper_base.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/swig_type_mapper.h \
@@ -199,6 +199,7 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/unit_test_support.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/global_fixture.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/matcher_fixture.h \
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(swigsrc)/*_wrap.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/PCF \
 @BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/cib_sample.img \
 @BUILD_AFIDS_PYTHON_TRUE@	@geocalunittestdata@/matcher_test_newimage.bin \
@@ -306,21 +307,21 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_24 =  \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	$(GTGOO_LIBS) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	$(GTKGOO_LIBS)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_25 =  \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	-I$(GTKGOO_CFLAGS) \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	-I$(srcdir)/@srcgtk@
 
 #bin_PROGRAMS += gtktest2
 #gtktest2_SOURCES = @srcgtk@/gtktest2.cc
 #gtktest2_LDADD = libgeocal.la 
 
 # Files that contain SWIG wrapper information.
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_26 = @swigsrc@/display_stretch_wrap.cc \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@swigsrc@/display_stretch_std_dev_wrap.cc
+#SWIG_SRC += @swigsrc@/display_stretch_wrap.cc
+#SWIG_SRC += @swigsrc@/display_stretch_std_dev_wrap.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_25 =  \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	-I$(GTKGOO_CFLAGS) \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	-I$(srcdir)/@srcgtk@
 
 # Allow fils to be include in other directories
-@BUILD_AFIDS_PYTHON_TRUE@am__append_27 = -I$(srcdir)/@libgeocal@
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_28 = $(addprefix \
+@BUILD_AFIDS_PYTHON_TRUE@am__append_26 = -I$(srcdir)/@libgeocal@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_27 = $(addprefix \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG_SRC)) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
@@ -328,28 +329,28 @@ bin_PROGRAMS =
 #include afids_python/geocal/python/python.am
 #=================================================================
 # libgeocal: The main library
-@BUILD_AFIDS_PYTHON_TRUE@am__append_29 = libgeocal.la
+@BUILD_AFIDS_PYTHON_TRUE@am__append_28 = libgeocal.la
 @BUILD_AFIDS_PYTHON_TRUE@check_PROGRAMS = geocal_test_all$(EXEEXT)
-@BUILD_AFIDS_PYTHON_TRUE@am__append_30 = afids_python/geocal/lib/test_all.sh
+@BUILD_AFIDS_PYTHON_TRUE@am__append_29 = afids_python/geocal/lib/test_all.sh
 
 #=================================================================
 # This is needed by unit tests that work with VICAR files. VICAR
 # wants to find a PDF file.
-@BUILD_AFIDS_PYTHON_TRUE@am__append_31 = dummy.pdf \
+@BUILD_AFIDS_PYTHON_TRUE@am__append_30 = dummy.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	test_out/vicar_copy.img \
 @BUILD_AFIDS_PYTHON_TRUE@	test_out/dummy_copy
-@BUILD_AFIDS_PYTHON_TRUE@am__append_32 = clean_unit_test
+@BUILD_AFIDS_PYTHON_TRUE@am__append_31 = clean_unit_test
 
 #=================================================================
 # Generate doxygen documentation
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_33 = config/doxygen.cfg \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_32 = config/doxygen.cfg \
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	config/doxy2swig.py
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_34 = install_doxygen_doc \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_33 = install_doxygen_doc \
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	install_python_doc
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_35 = clean_doxygen_doc
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_36 = clean_doxygen_generate
-@BUILD_AFIDS_PYTHON_TRUE@am__append_37 = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_34 = clean_doxygen_doc
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_35 = clean_doxygen_generate
+@BUILD_AFIDS_PYTHON_TRUE@am__append_36 = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_dir \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_show \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_igccol \
@@ -363,8 +364,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_dem \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_image \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/tiepoint_to_error
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_TRUE@am__append_38 = @srcpythonlib@/tre_amt_struct.py
-@BUILD_AFIDS_PYTHON_TRUE@am__append_39 = @docpythonsrc@ \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_TRUE@am__append_37 = @srcpythonlib@/tre_amt_struct.py
+@BUILD_AFIDS_PYTHON_TRUE@am__append_38 = @docpythonsrc@ \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/07JUN08184839-M1BS-005616921010_01_P001.IMD \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/07JUN08184839-P1BS-005616921010_01_P001.IMD \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/10MAY07185751-M1BS-052360785020_01_P001.IMD \
@@ -389,8 +390,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/README \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/rpc_sba.pkl \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/FRST_POIof090514.shp
-@BUILD_AFIDS_PYTHON_TRUE@am__append_40 = clean_install_python_doc
-@BUILD_AFIDS_PYTHON_TRUE@am__append_41 = python_check
+@BUILD_AFIDS_PYTHON_TRUE@am__append_39 = clean_install_python_doc
+@BUILD_AFIDS_PYTHON_TRUE@am__append_40 = python_check
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids_data.m4 \
@@ -572,10 +573,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/worldview2_cloudmask_wrap.cc \
 	@swigsrc@/doughnut_average_wrap.cc \
 	@swigsrc@/material_detect_wrap.cc \
-	@swigsrc@/paint_class_wrap.cc \
-	@swigsrc@/display_stretch_wrap.cc \
-	@swigsrc@/display_stretch_std_dev_wrap.cc \
-	@swigsrc@/swig_wrap.cc
+	@swigsrc@/paint_class_wrap.cc @swigsrc@/swig_wrap.cc
 am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_1 = @swigsrc@/_swig_wrap_la-hdf_file_wrap.lo
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_2 = @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo \
@@ -586,9 +584,7 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@swigsrc@/_swig_wrap_la-image_point_display_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@swigsrc@/_swig_wrap_la-ogr_coordinate_wrap.lo
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_3 = @swigsrc@/_swig_wrap_la-hdf_orbit_wrap.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__objects_4 = @swigsrc@/_swig_wrap_la-display_stretch_wrap.lo \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@swigsrc@/_swig_wrap_la-display_stretch_std_dev_wrap.lo
-@BUILD_AFIDS_PYTHON_TRUE@am__objects_5 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@am__objects_4 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-swig_array_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-swig_boost_array_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
@@ -700,9 +696,8 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-worldview2_cloudmask_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-doughnut_average_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-material_detect_wrap.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-paint_class_wrap.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_4)
-@BUILD_AFIDS_PYTHON_TRUE@am__swig_wrap_la_OBJECTS = $(am__objects_5) \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-paint_class_wrap.lo
+@BUILD_AFIDS_PYTHON_TRUE@am__swig_wrap_la_OBJECTS = $(am__objects_4) \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-swig_wrap.lo
 _swig_wrap_la_OBJECTS = $(am__swig_wrap_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -797,15 +792,15 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srccartlab@/vicar_ogr.cc @srcgtk@/display_stretch_std_dev.cc \
 	@srcgtk@/geocal_pixbuf.cc \
 	@srcgtk@/raster_image_with_overlay.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_6 = @srcsupport@/libgeocal_la-hdf_file.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_7 = @srcimplementation@/libgeocal_la-geocal_gdal.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_5 = @srcsupport@/libgeocal_la-hdf_file.lo
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_6 = @srcimplementation@/libgeocal_la-geocal_gdal.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_dem.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_raster_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_multi_band.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-image_point_display.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-ogr_coordinate.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_8 = @srccartlab@/libgeocal_la-vicar_ogr.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__objects_9 = @srcgtk@/libgeocal_la-display_stretch_std_dev.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_7 = @srccartlab@/libgeocal_la-vicar_ogr.lo
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__objects_8 = @srcgtk@/libgeocal_la-display_stretch_std_dev.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/libgeocal_la-geocal_pixbuf.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/libgeocal_la-raster_image_with_overlay.lo
 @BUILD_AFIDS_PYTHON_TRUE@am_libgeocal_la_OBJECTS = @srcsupport@/boost/libgeocal_la-backtrace.lo \
@@ -816,7 +811,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-covariance.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-statistic.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-geocal_fftw.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_6) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_5) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-raster_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-sub_raster_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-raster_image_multi_band.lo \
@@ -874,7 +869,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-refraction.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-ray_intersect.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-dem_match.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_7) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_6) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-spice_helper.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-sdp_helper.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-argus_camera.lo \
@@ -898,7 +893,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-doughnut_average.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-material_detect.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-paint_class.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_8) $(am__objects_9)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_7) $(am__objects_8)
 libgeocal_la_OBJECTS = $(am_libgeocal_la_OBJECTS)
 libgeocal_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
@@ -1006,15 +1001,15 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 	@srccartlab@/doughnut_average_test.cc \
 	@srccartlab@/material_detect_test.cc \
 	afids_python/geocal/lib/test_all.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_10 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_11 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_9 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_10 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-geocal_gdal_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_dem_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-image_point_display_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_12 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_13 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_11 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_12 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@am_geocal_test_all_OBJECTS = @srcsupport@/geocal_test_all-global_fixture.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-global_fixture_default.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-geocal_exception_test.$(OBJEXT) \
@@ -1031,7 +1026,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-covariance_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-statistic_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-geocal_fftw_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_10) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_9) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-memory_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-sub_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-ground_coordinate_test.$(OBJEXT) \
@@ -1053,7 +1048,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-geocal_rpc_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-rpc_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-ipi_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_11) $(am__objects_12) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_10) $(am__objects_11) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-spice_helper_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-sdp_helper_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-did_datum_test.$(OBJEXT) \
@@ -1082,7 +1077,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-igc_image_to_image_match_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-surface_image_to_image_match_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-dem_match_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_13) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_12) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_camera_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_orbit_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-ibis_file_test.$(OBJEXT) \
@@ -1806,15 +1801,15 @@ ACLOCAL_AMFLAGS = -I config/m4
 noop = 
 
 # Build these up as we go
-lib_LTLIBRARIES = $(am__append_29)
+lib_LTLIBRARIES = $(am__append_28)
 noinst_LTLIBRARIES = $(am__append_7)
-dist_bin_SCRIPTS = $(am__append_37)
+dist_bin_SCRIPTS = $(am__append_36)
 AM_LDFLAGS = 
-BUILT_SOURCES = $(am__append_28) $(am__append_31)
+BUILT_SOURCES = $(am__append_27) $(am__append_30)
 include_HEADERS = 
-EXTRA_DIST = $(am__append_5) $(am__append_33) $(am__append_39)
+EXTRA_DIST = $(am__append_5) $(am__append_32) $(am__append_38)
 pkgconfig_DATA = 
-AM_CPPFLAGS = $(am__append_6) $(am__append_25) $(am__append_27)
+AM_CPPFLAGS = $(am__append_6) $(am__append_25) $(am__append_26)
 
 #=================================================================
 # Some flags needed for GCC compilers.
@@ -1830,11 +1825,11 @@ AM_CPPFLAGS = $(am__append_6) $(am__append_25) $(am__append_27)
 
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
-INSTALL_DATA_HOOK = $(am__append_34)
-UNINSTALL_HOOK = $(am__append_35) $(am__append_40)
-CLEAN_HOOK = $(am__append_32) $(am__append_36)
-INSTALLCHECK_HOOK = $(am__append_41)
-TESTS = $(am__append_30)
+INSTALL_DATA_HOOK = $(am__append_33)
+UNINSTALL_HOOK = $(am__append_34) $(am__append_39)
+CLEAN_HOOK = $(am__append_31) $(am__append_35)
+INSTALLCHECK_HOOK = $(am__append_40)
+TESTS = $(am__append_29)
 check_PROGRAM = 
 check_DATA = 
 
@@ -2052,8 +2047,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/worldview2_cloudmask_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/doughnut_average_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/material_detect_wrap.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/paint_class_wrap.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_26)
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/paint_class_wrap.cc
 
 # Include boost in builds
 
@@ -2422,7 +2416,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/gdal_to_erdas_file.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/mmap_file.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/raster_tile.py \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_38)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_37)
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf
@@ -2798,10 +2792,6 @@ clean-pkgpythonswigLTLIBRARIES:
 @swigsrc@/_swig_wrap_la-material_detect_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-paint_class_wrap.lo:  \
-	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
-@swigsrc@/_swig_wrap_la-display_stretch_wrap.lo:  \
-	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
-@swigsrc@/_swig_wrap_la-display_stretch_std_dev_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-swig_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -3800,8 +3790,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_tiled_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-did_datum_wrap.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-display_stretch_std_dev_wrap.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-display_stretch_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-doughnut_average_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_tod_burl_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_tod_wrap.Plo@am__quote@
@@ -4761,20 +4749,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/paint_class_wrap.cc' object='@swigsrc@/_swig_wrap_la-paint_class_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-paint_class_wrap.lo `test -f '@swigsrc@/paint_class_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/paint_class_wrap.cc
-
-@swigsrc@/_swig_wrap_la-display_stretch_wrap.lo: @swigsrc@/display_stretch_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-display_stretch_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-display_stretch_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-display_stretch_wrap.lo `test -f '@swigsrc@/display_stretch_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/display_stretch_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-display_stretch_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-display_stretch_wrap.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/display_stretch_wrap.cc' object='@swigsrc@/_swig_wrap_la-display_stretch_wrap.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-display_stretch_wrap.lo `test -f '@swigsrc@/display_stretch_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/display_stretch_wrap.cc
-
-@swigsrc@/_swig_wrap_la-display_stretch_std_dev_wrap.lo: @swigsrc@/display_stretch_std_dev_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-display_stretch_std_dev_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-display_stretch_std_dev_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-display_stretch_std_dev_wrap.lo `test -f '@swigsrc@/display_stretch_std_dev_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/display_stretch_std_dev_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-display_stretch_std_dev_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-display_stretch_std_dev_wrap.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/display_stretch_std_dev_wrap.cc' object='@swigsrc@/_swig_wrap_la-display_stretch_std_dev_wrap.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-display_stretch_std_dev_wrap.lo `test -f '@swigsrc@/display_stretch_std_dev_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/display_stretch_std_dev_wrap.cc
 
 @swigsrc@/_swig_wrap_la-swig_wrap.lo: @swigsrc@/swig_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-swig_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-swig_wrap.lo `test -f '@swigsrc@/swig_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/swig_wrap.cc

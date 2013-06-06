@@ -19,6 +19,7 @@ _swig_wrap_la_SOURCES = $(SWIG_SRC)
 _swig_wrap_la_SOURCES+= @swigsrc@/swig_wrap.cc
 
 endif BUILD_AFIDS_PYTHON
+EXTRA_DIST+= $(srcdir)/$(swigsrc)/*_wrap.h
 
 install-python-2: install-libLTLIBRARIES install-python-afids install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
 	$(noop)

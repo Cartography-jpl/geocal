@@ -188,6 +188,65 @@ class DemMatch(geocal.generic_object.GenericObject):
     def max_distance(self):
         return self._v_max_distance()
 
+    def _v_number_point(self):
+        """
+        int GeoCal::DemMatch::number_point() const
+        Total number of points we attempted matching in last call to
+        surface_point. 
+        """
+        return _dem_match.DemMatch__v_number_point(self)
+
+    @property
+    def number_point(self):
+        return self._v_number_point()
+
+    def _v_number_match(self):
+        """
+        int GeoCal::DemMatch::number_match() const
+        Number of successful matches in last call to surface_point. 
+        """
+        return _dem_match.DemMatch__v_number_match(self)
+
+    @property
+    def number_match(self):
+        return self._v_number_match()
+
+    def _v_number_success(self):
+        """
+        int GeoCal::DemMatch::number_success() const
+        Number of point matched that then satisfied epipolar constraint in
+        last call to surface_point, so total number of points returned. 
+        """
+        return _dem_match.DemMatch__v_number_success(self)
+
+    @property
+    def number_success(self):
+        return self._v_number_success()
+
+    def _v_all_distance_stat(self):
+        """
+        const boost::shared_ptr<Statistic>& GeoCal::DemMatch::all_distance_stat() const
+        Statistics on distance for last call to surface point, including all
+        matches (including those later rejected). 
+        """
+        return _dem_match.DemMatch__v_all_distance_stat(self)
+
+    @property
+    def all_distance_stat(self):
+        return self._v_all_distance_stat()
+
+    def _v_good_distance_stat(self):
+        """
+        const boost::shared_ptr<Statistic>& GeoCal::DemMatch::good_distance_stat() const
+        Statistics on distance for last call to surface point, only including
+        matches that are accepted as good points. 
+        """
+        return _dem_match.DemMatch__v_good_distance_stat(self)
+
+    @property
+    def good_distance_stat(self):
+        return self._v_good_distance_stat()
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -201,6 +260,11 @@ DemMatch.__str__ = new_instancemethod(_dem_match.DemMatch___str__,None,DemMatch)
 DemMatch._v_match = new_instancemethod(_dem_match.DemMatch__v_match,None,DemMatch)
 DemMatch._v_ray_intersect = new_instancemethod(_dem_match.DemMatch__v_ray_intersect,None,DemMatch)
 DemMatch._v_max_distance = new_instancemethod(_dem_match.DemMatch__v_max_distance,None,DemMatch)
+DemMatch._v_number_point = new_instancemethod(_dem_match.DemMatch__v_number_point,None,DemMatch)
+DemMatch._v_number_match = new_instancemethod(_dem_match.DemMatch__v_number_match,None,DemMatch)
+DemMatch._v_number_success = new_instancemethod(_dem_match.DemMatch__v_number_success,None,DemMatch)
+DemMatch._v_all_distance_stat = new_instancemethod(_dem_match.DemMatch__v_all_distance_stat,None,DemMatch)
+DemMatch._v_good_distance_stat = new_instancemethod(_dem_match.DemMatch__v_good_distance_stat,None,DemMatch)
 DemMatch_swigregister = _dem_match.DemMatch_swigregister
 DemMatch_swigregister(DemMatch)
 

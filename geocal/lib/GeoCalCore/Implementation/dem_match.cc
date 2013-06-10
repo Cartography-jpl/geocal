@@ -25,13 +25,19 @@ blitz::Array<double, 2> DemMatch::surface_point
   double line_sigma, sample_sigma, dist;
   boost::shared_ptr<CartesianFixed> p;
   bool success;
+  npoint = 0;
+  all_stat.reset(new Statistic);
+  good_stat.reset(new Statistic);
   for(int i = Lstart; i < Lend;  i += Lstride)
     for(int j = Sstart; j < Send; j += Sstride) {
+      ++npoint;
       match_->match(ImageCoordinate(i,j), ic2, line_sigma, sample_sigma, 
 		   success);
       if(success) {
 	ri->two_ray_intersect(ImageCoordinate(i, j), ic2, p, dist);
+	all_stat->add(dist);
 	if(dist < max_dist) {
+	  good_stat->add(dist);
 	  Ecr* ecr = dynamic_cast<Ecr*>(p.get());
 	  if(!ecr)
 	    throw Exception("Must be Ecr");

@@ -9,6 +9,7 @@
 %base_import(generic_object)
 %import "image_to_image_match.i"
 %import "ray_intersect.i"
+%import "statistic.i"
 %geocal_shared_ptr(GeoCal::DemMatch);
 namespace GeoCal {
 class DemMatch : public GenericObject {
@@ -23,6 +24,11 @@ public:
   %python_attribute(match, boost::shared_ptr<ImageToImageMatch>)
   %python_attribute(ray_intersect, boost::shared_ptr<RayIntersect>)
   %python_attribute(max_distance, double)
+  %python_attribute(number_point, int);
+  %python_attribute(number_match, int);
+  %python_attribute(number_success, int);
+  %python_attribute(all_distance_stat, boost::shared_ptr<Statistic>)
+  %python_attribute(good_distance_stat, boost::shared_ptr<Statistic>)
   %pickle_init(1, self.match, self.ray_intersect, self.max_distance)
 };
 }

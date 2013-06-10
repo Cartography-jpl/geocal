@@ -2,6 +2,7 @@
 #define DEM_MATCH_H
 #include "image_to_image_match.h"
 #include "ray_intersect.h"
+#include "statistic.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -23,7 +24,9 @@ public:
   DemMatch(const boost::shared_ptr<ImageToImageMatch>& Match,
 	   const boost::shared_ptr<RayIntersect>& Ray_intersect,
 	   double Max_dist_good_point)
-    : match_(Match), ri(Ray_intersect), max_dist(Max_dist_good_point) {}
+    : npoint(0), all_stat(new Statistic), good_stat(new Statistic), 
+      match_(Match), ri(Ray_intersect), 
+      max_dist(Max_dist_good_point) {}
   virtual ~DemMatch() {}
   blitz::Array<double, 2> surface_point(int Lstart, int Sstart,
 					int Lend, int Send,
@@ -39,7 +42,45 @@ public:
   boost::shared_ptr<ImageToImageMatch> match() const {return match_;}
   boost::shared_ptr<RayIntersect> ray_intersect() const {return ri;}
   double max_distance() const {return max_dist;}
+
+//-----------------------------------------------------------------------
+/// Total number of points we attempted matching in last call to
+/// surface_point. 
+//-----------------------------------------------------------------------
+
+  int number_point() const { return npoint;}
+
+//-----------------------------------------------------------------------
+/// Number of successful matches in last call to surface_point.
+//-----------------------------------------------------------------------
+
+  int number_match() const { return all_stat->count();}
+
+//-----------------------------------------------------------------------
+/// Number of point matched that then satisfied epipolar constraint in
+/// last call to surface_point, so total number of points returned.
+//-----------------------------------------------------------------------
+
+  int number_success() const { return good_stat->count(); }
+
+//-----------------------------------------------------------------------
+/// Statistics on distance for last call to surface point, including
+/// all matches (including those later rejected).
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<Statistic>& all_distance_stat() 
+    const { return all_stat; }
+
+//-----------------------------------------------------------------------
+/// Statistics on distance for last call to surface point, only
+/// including matches that are accepted as good points.
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<Statistic>& good_distance_stat() 
+    const { return good_stat; }
 private:
+  mutable int npoint;
+  mutable boost::shared_ptr<Statistic> all_stat, good_stat;
   boost::shared_ptr<ImageToImageMatch> match_;
   boost::shared_ptr<RayIntersect> ri;
   double max_dist;

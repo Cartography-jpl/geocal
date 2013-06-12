@@ -8,8 +8,8 @@
  * interface file instead. 
  * ----------------------------------------------------------------------------- */
 
-#ifndef SWIG_mask_image_WRAP_H_
-#define SWIG_mask_image_WRAP_H_
+#ifndef SWIG_ground_mask_image_WRAP_H_
+#define SWIG_ground_mask_image_WRAP_H_
 
 #include <map>
 #include <string>

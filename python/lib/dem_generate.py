@@ -106,8 +106,14 @@ class DemGenerate:
 
     def surface_point(self, lstart, sstart, lend, send):
         '''Calculate surface points'''
-        return self.dem_match.surface_point(lstart, sstart, lend, send,
+        r = self.dem_match.surface_point(lstart, sstart, lend, send,
                                             self.stride, self.stride)
+        print "Number point:   %d" %(self.dem_match.number_point)
+        print "Number match:   %d" %(self.dem_match.number_match)
+        print "Number success: %d" %(self.dem_match.number_success)
+        print "All distance:\n", self.dem_match.all_distance_stat
+        print "Good distance:\n", self.dem_match.good_distance_stat
+        return r
 
     def find_intersection(self, ic1, ic2):
         '''Find the ground intersection of two conjugate image coordinates.

@@ -1,4 +1,4 @@
-#include "mask_image.h"
+#include "ground_mask_image.h"
 
 using namespace GeoCal;
 
@@ -8,7 +8,7 @@ using namespace GeoCal;
 /// matching)
 //-----------------------------------------------------------------------
 
-bool MaskImage::mask(const GroundCoordinate& Gc) const
+bool GroundMaskImage::mask(const GroundCoordinate& Gc) const
 {
   ImageCoordinate ic = img->coordinate(Gc);
   int i = (int) floor(ic.line);
@@ -22,10 +22,10 @@ bool MaskImage::mask(const GroundCoordinate& Gc) const
 
 //-----------------------------------------------------------------------
 /// Indicated if a region is all masked or not. See the discussion in
-/// the comments of Mask for detailed discussion of the check.
+/// the comments of GroundMask for detailed discussion of the check.
 //-----------------------------------------------------------------------
 
-bool MaskImage::region_masked(const GroundCoordinate& Ulc, 
+bool GroundMaskImage::region_masked(const GroundCoordinate& Ulc, 
 			      const GroundCoordinate& Lrc) const
 {
   ImageCoordinate ic1 = img->coordinate(Ulc);
@@ -46,9 +46,9 @@ bool MaskImage::region_masked(const GroundCoordinate& Ulc,
 /// Print to given stream.
 //-----------------------------------------------------------------------
 
-void MaskImage::print(std::ostream& Os) const
+void GroundMaskImage::print(std::ostream& Os) const
 {
-  Os << "Mask image:\n"
+  Os << "Ground Mask image:\n"
      << "  Map projected image:\n"
      << *img
      << "  Mask value: " << maskv << "\n";

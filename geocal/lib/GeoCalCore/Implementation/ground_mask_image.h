@@ -1,11 +1,11 @@
-#ifndef MASK_IMAGE_H
-#define MASK_IMAGE_H
-#include "mask.h"
+#ifndef GROUND_MASK_IMAGE_H
+#define GROUND_MASK_IMAGE_H
+#include "ground_mask.h"
 #include "raster_image.h"
 
 namespace GeoCal {
 /****************************************************************//**
-  This provides a Mask where the underlying data is a
+  This provides a GroundMask where the underlying data is a
   RasterImage. 
 
   We use the underlying map projection of the RasterImage we
@@ -20,13 +20,13 @@ namespace GeoCal {
   Vicar ("world_30as_lwm.img")
 *******************************************************************/
 
-class MaskImage : public Mask {
+class GroundMaskImage : public GroundMask {
 public:
 //-----------------------------------------------------------------------
 /// Constructor.
 //-----------------------------------------------------------------------
 
-  MaskImage(boost::shared_ptr<RasterImage> Img, int Mask_value = 0)
+  GroundMaskImage(boost::shared_ptr<RasterImage> Img, int Mask_value = 0)
     : img(Img), maskv(Mask_value) 
   {
   }
@@ -35,7 +35,7 @@ public:
 /// Destructor.
 //-----------------------------------------------------------------------
 
-  virtual ~MaskImage() {}
+  virtual ~GroundMaskImage() {}
 
 //-----------------------------------------------------------------------
 /// Underlying RasterImage.

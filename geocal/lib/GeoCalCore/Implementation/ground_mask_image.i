@@ -4,16 +4,16 @@
 %include "common.i"
 
 %{
-#include "mask_image.h"
+#include "ground_mask_image.h"
 %}
-%base_import(mask)
+%base_import(ground_mask)
 %import "raster_image.i"
-%geocal_shared_ptr(GeoCal::MaskImage);
+%geocal_shared_ptr(GeoCal::GroundMaskImage);
 
 namespace GeoCal {
-class MaskImage : public Mask {
+class GroundMaskImage : public GroundMask {
 public:
-  MaskImage(boost::shared_ptr<RasterImage> Img, int Mask_value = 0);
+  GroundMaskImage(boost::shared_ptr<RasterImage> Img, int Mask_value = 0);
   %python_attribute2(raster_image, raster_image_ptr, 
 		     boost::shared_ptr<RasterImage>)
   %python_attribute(masked_value, int)

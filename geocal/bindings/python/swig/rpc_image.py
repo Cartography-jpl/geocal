@@ -203,8 +203,8 @@ class RpcImage(geocal.raster_image_variable.RasterImageVariable):
 
     def fit(self, *args):
         """
-        void RpcImage::fit(const RasterImage &Ref_img, double Max_diff=1000, const Mask
-        &M=CombinedMask(), const FeatureDetector
+        void RpcImage::fit(const RasterImage &Ref_img, double Max_diff=1000, const GroundMask
+        &M=CombinedGroundMask(), const FeatureDetector
         &Fd=ForstnerFeatureDetector(), const ImageMatcher
         &Coarse_im=CcorrMatcher(), const ImageMatcher
         &Fine_im=CcorrLsmMatcher(true), double Match_search=15, int
@@ -233,9 +233,9 @@ class RpcImage(geocal.raster_image_variable.RasterImageVariable):
         We use the FeatureDetector Fd to determine where to match, the areas
         we look for a feature is in each grid square of Feature_grid_space x
         Feature_grid_space. We then match at these features between the
-        reference and map projected images. We use the supplied Mask to mask
-        out areas that we should not do matching on (e.g., water, clouds). The
-        default Mask doesn't mask any areas.
+        reference and map projected images. We use the supplied GroundMask to
+        mask out areas that we should not do matching on (e.g., water,
+        clouds). The default GroundMask doesn't mask any areas.
 
         We update the line_offset and sample_offset only of rpc() to reduce
         the difference between the map projected image and the Ref_img. This

@@ -8,7 +8,7 @@
 %}
 %base_import(raster_image_variable)
 %import "dem.i"
-%import "mask.i"
+%import "ground_mask.i"
 %import "map_info.i"
 %import "feature_detector.i"
 %import "image_matcher.i"
@@ -29,7 +29,7 @@ public:
   virtual void write(int Line, int Sample, int Val);
   void fit(const RasterImage& Ref_img,
 	   double Max_diff = 1000,
-	   const Mask& M = CombinedMask(),
+	   const GroundMask& M = CombinedGroundMask(),
 	   const FeatureDetector& Fd = ForstnerFeatureDetector(), 
 	   const ImageMatcher& Coarse_im = CcorrMatcher(),
 	   const ImageMatcher& Fine_im = CcorrLsmMatcher(),

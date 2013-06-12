@@ -47,7 +47,7 @@ extern "C" {
   void init_sub_raster_image(void);
   void init_raster_image_multi_band(void);
   void init_raster_image_multi_band_variable(void);
-  void init_mask(void);
+  void init_ground_mask(void);
   void init_geocal_datum(void);
   void init_simple_dem(void);
   void init_memory_raster_image(void);
@@ -63,7 +63,7 @@ extern "C" {
   void init_raster_multifile(void);
   void init_did_datum(void);
   void init_map_info_image_ground_connection(void);
-  void init_mask_image(void);
+  void init_ground_mask_image(void);
   void init_raster_averaged(void);
   void init_raster_subsample(void);
   void init_calc_raster(void);
@@ -227,7 +227,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_sub_raster_image", init_sub_raster_image);
   init_extension_module(package, "_raster_image_multi_band", init_raster_image_multi_band);
   init_extension_module(package, "_raster_image_multi_band_variable", init_raster_image_multi_band_variable);
-  init_extension_module(package, "_mask", init_mask);
+  init_extension_module(package, "_ground_mask", init_ground_mask);
   init_extension_module(package, "_geocal_datum", init_geocal_datum);
   init_extension_module(package, "_simple_dem", init_simple_dem);
   init_extension_module(package, "_memory_raster_image", init_memory_raster_image);
@@ -243,7 +243,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_raster_multifile", init_raster_multifile);
   init_extension_module(package, "_did_datum", init_did_datum);
   init_extension_module(package, "_map_info_image_ground_connection", init_map_info_image_ground_connection);
-  init_extension_module(package, "_mask_image", init_mask_image);
+  init_extension_module(package, "_ground_mask_image", init_ground_mask_image);
   init_extension_module(package, "_raster_averaged", init_raster_averaged);
   init_extension_module(package, "_raster_subsample", init_raster_subsample);
   init_extension_module(package, "_calc_raster", init_calc_raster);

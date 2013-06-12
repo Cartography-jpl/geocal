@@ -3,7 +3,7 @@
 #include "image_coordinate.h"
 #include "printable.h"
 #include "raster_image.h"
-#include "mask.h"
+#include "ground_mask.h"
 #include <boost/operators.hpp>
 #include <vector>
 
@@ -90,14 +90,14 @@ public:
   virtual std::vector<InterestPoint>
   interest_point_detect(const RasterImage& Img) const = 0;
   std::vector<ImageCoordinate> interest_point_grid(const RasterImage& Img,
-     const Mask& M,					   
+     const GroundMask& M,					   
      int Number_grid_line, int Number_grid_sample, int Border = 0) const;
   std::vector<ImageCoordinate> interest_point_grid(const RasterImage& Img,
      int Number_grid_line, int Number_grid_sample, int Border = 0) const;
 
   boost::shared_ptr<ImageCoordinate>
   interest_point_grid_ptr(const RasterImage& Img,
-			  const Mask& M, int i, int j,
+			  const GroundMask& M, int i, int j,
 			  int Number_grid_line, int Number_grid_sample, 
 			  int Border = 0) const;
   boost::shared_ptr<ImageCoordinate>
@@ -114,7 +114,7 @@ public:
 protected:
 private:
   boost::shared_ptr<ImageCoordinate> 
-  ip_grid(const RasterImage& Img, const Mask* M,
+  ip_grid(const RasterImage& Img, const GroundMask* M,
 	  int i, int j, int Number_grid_line, int Number_grid_sample,
 	  int Border) const;
 };

@@ -1,5 +1,5 @@
-#include "mask.h"
-
+#include "ground_mask.h"
+#include <boost/foreach.hpp>
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
@@ -8,27 +8,27 @@ using namespace GeoCal;
 /// matching)
 //-----------------------------------------------------------------------
 
-bool CombinedMask::mask(const GroundCoordinate& Gc) const
+bool CombinedGroundMask::mask(const GroundCoordinate& Gc) const
 {
-  for(std::vector<boost::shared_ptr<Mask> >::size_type i = 0;
-      i < mask_list.size(); ++i)
-    if(mask_list[i]->mask(Gc))
+  BOOST_FOREACH(boost::shared_ptr<GroundMask> m, mask_list) {
+    if(m->mask(Gc))
       return true;
+  }
   return false;
 }
 
 //-----------------------------------------------------------------------
 /// Indicated if a region is all masked or not. See the discussion in
-/// the comments of Mask for detailed discussion of the check.
+/// the comments of GroundMask for detailed discussion of the check.
 //-----------------------------------------------------------------------
 
-bool CombinedMask::region_masked(const GroundCoordinate& Ulc, 
+bool CombinedGroundMask::region_masked(const GroundCoordinate& Ulc, 
 				const GroundCoordinate& Lrc) const
 {
-  for(std::vector<boost::shared_ptr<Mask> >::size_type i = 0;
-      i < mask_list.size(); ++i)
-    if(mask_list[i]->region_masked(Ulc, Lrc))
+  BOOST_FOREACH(boost::shared_ptr<GroundMask> m, mask_list) {
+    if(m->region_masked(Ulc, Lrc))
       return true;
+  }
   return false;
 }
 
@@ -36,14 +36,15 @@ bool CombinedMask::region_masked(const GroundCoordinate& Ulc,
 /// Print to given stream.
 //-----------------------------------------------------------------------
 
-void CombinedMask::print(std::ostream& Os) const
+void CombinedGroundMask::print(std::ostream& Os) const
 {
   if(mask_list.size() ==0)
-    Os << "Empty CombinedMask\n";
+    Os << "Empty CombinedGroundMask\n";
   else {
-    Os << "CombinedMask: \n";
-    for(std::vector<boost::shared_ptr<Mask> >::size_type i = 0;
-	i < mask_list.size(); ++i)
-      Os << "  Mask " << i + 1 << ":\n" << *(mask_list[i]);
+    Os << "CombinedGroundMask: \n";
+    int i = 0;
+    BOOST_FOREACH(boost::shared_ptr<GroundMask> m, mask_list) {
+      Os << "  Mask " << ++i << ":\n" << *m;
+    }
   }
 }

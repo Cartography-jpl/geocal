@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(forstner_feature_detector)
   InterestPoint& ip_max = *std::max_element(res.begin(), res.end());
   BOOST_CHECK_EQUAL(ip_max.image_coordinate, ImageCoordinate(55.7685, 51.705));
   BOOST_CHECK_CLOSE(ip_max.weight, 9.71407806, 1e-4);
-  CombinedMask m;
+  CombinedGroundMask m;
   std::vector<ImageCoordinate> g = fd.interest_point_grid(img, m, 3, 3, 2);
   BOOST_CHECK_EQUAL(g.size(), std::vector<ImageCoordinate>::size_type(9));
   BOOST_CHECK_EQUAL(g[0], ImageCoordinate(42.2927, 7.52101));

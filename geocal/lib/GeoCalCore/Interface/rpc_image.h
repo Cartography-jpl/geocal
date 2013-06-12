@@ -6,7 +6,7 @@
 #include "image_matcher.h"
 #include "ccorr_lsm_matcher.h"
 #include "forstner_feature_detector.h"
-#include "mask.h"
+#include "ground_mask.h"
 #include <boost/timer.hpp>
 
 namespace GeoCal {
@@ -79,7 +79,7 @@ public:
   virtual void unchecked_write(int Line, int Sample, int Val);
   void fit(const RasterImage& Ref_img,
 	   double Max_diff = 1000,
-           const Mask& M = CombinedMask(),
+           const GroundMask& M = CombinedGroundMask(),
 	   const FeatureDetector& Fd = ForstnerFeatureDetector(), 
 	   const ImageMatcher& Coarse_im = CcorrMatcher(),
 	   const ImageMatcher& Fine_im = CcorrLsmMatcher(true),
@@ -190,7 +190,7 @@ private:
                                 /// matching and interest point.
   void set_ref_img(const RasterImage& Ref_img, 
 		   const RasterImage& New_img);
-  void interest_point(const FeatureDetector& Fd, const Mask& M,
+  void interest_point(const FeatureDetector& Fd, const GroundMask& M,
 		      int Feature_grid_space);
   double match(const RasterImage& New_img,
 	       const ImageMatcher& Im);
@@ -199,7 +199,7 @@ private:
 		  double Chisq_threshold = 0.8,
 		  bool Blunder_detect = true);
   double fit_coarse(const RasterImage& Ref_img,
-		    const FeatureDetector& Fd, const Mask& M,
+		    const FeatureDetector& Fd, const GroundMask& M,
 		    const ImageMatcher& Im,
 		    double Max_diff,
 		    double Match_search,

@@ -21,13 +21,13 @@ void InterestPoint::print(std::ostream& Os) const
 /// function out because we have several similar interest_point_grid
 /// functions that make use of this common functionality.
 ///
-/// The Mask M may be present, or may be null indicating we have no
+/// The GroundMask M may be present, or may be null indicating we have no
 /// mask. We might or might not find a point (e.g., the entire area is
 /// masked). If we don't then a null pointer is returned.
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<ImageCoordinate> FeatureDetector::ip_grid
-(const RasterImage& Img, const Mask* M,
+(const RasterImage& Img, const GroundMask* M,
  int i, int j, int Number_grid_line, int Number_grid_sample,
  int Border) const
 {
@@ -73,12 +73,12 @@ boost::shared_ptr<ImageCoordinate> FeatureDetector::ip_grid
 /// an optional border to exclude can be supplied. None of the points
 /// returned will be within the border of the edge of the image. 
 ///
-/// We exclude points that are marked by the Mask.
+/// We exclude points that are marked by the GroundMask.
 //-----------------------------------------------------------------------
 
 std::vector<ImageCoordinate> 
 FeatureDetector::interest_point_grid(const RasterImage& Img,
-     const Mask& M,
+     const GroundMask& M,
      int Number_grid_line, int Number_grid_sample, int Border) const
 {
   std::vector<ImageCoordinate> res;
@@ -93,7 +93,7 @@ FeatureDetector::interest_point_grid(const RasterImage& Img,
 }
 
 //-----------------------------------------------------------------------
-/// Variation of interest_point_grid that does not use as Mask.
+/// Variation of interest_point_grid that does not use as GroundMask.
 //-----------------------------------------------------------------------
 
 std::vector<ImageCoordinate> 
@@ -123,7 +123,7 @@ FeatureDetector::interest_point_grid(const RasterImage& Img,
 boost::shared_ptr<ImageCoordinate>
 FeatureDetector::interest_point_grid_ptr
 (const RasterImage& Img,
- const Mask& M, int i, int j,
+ const GroundMask& M, int i, int j,
  int Number_grid_line, int Number_grid_sample, 
  int Border) const
 {

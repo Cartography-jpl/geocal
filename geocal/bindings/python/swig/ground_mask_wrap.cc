@@ -3453,11 +3453,11 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__CartesianFixedLookVector swig_types[1]
 #define SWIGTYPE_p_GeoCal__CartesianInertial swig_types[2]
 #define SWIGTYPE_p_GeoCal__CartesianInertialLookVector swig_types[3]
-#define SWIGTYPE_p_GeoCal__CombinedMask swig_types[4]
+#define SWIGTYPE_p_GeoCal__CombinedGroundMask swig_types[4]
 #define SWIGTYPE_p_GeoCal__GenericObject swig_types[5]
 #define SWIGTYPE_p_GeoCal__GroundCoordinate swig_types[6]
-#define SWIGTYPE_p_GeoCal__LookVector swig_types[7]
-#define SWIGTYPE_p_GeoCal__Mask swig_types[8]
+#define SWIGTYPE_p_GeoCal__GroundMask swig_types[7]
+#define SWIGTYPE_p_GeoCal__LookVector swig_types[8]
 #define SWIGTYPE_p_GeoCal__ScLookVector swig_types[9]
 #define SWIGTYPE_p_GeoCal__Time swig_types[10]
 #define SWIGTYPE_p_allocator_type swig_types[11]
@@ -3477,11 +3477,11 @@ namespace Swig {
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[25]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[26]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[27]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedMask_t swig_types[28]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t swig_types[28]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[29]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[30]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVector_t swig_types[31]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t swig_types[32]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t swig_types[31]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVector_t swig_types[32]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[33]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[34]
 #define SWIGTYPE_p_char swig_types[35]
@@ -3498,13 +3498,13 @@ namespace Swig {
 #define SWIGTYPE_p_size_t swig_types[46]
 #define SWIGTYPE_p_size_type swig_types[47]
 #define SWIGTYPE_p_state_type swig_types[48]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t swig_types[49]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t swig_types[49]
 #define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[50]
 #define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[51]
 #define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[52]
 #define SWIGTYPE_p_std__invalid_argument swig_types[53]
 #define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[54]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t swig_types[55]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t swig_types[55]
 #define SWIGTYPE_p_swig__SwigPyIterator swig_types[56]
 #define SWIGTYPE_p_traits_type swig_types[57]
 #define SWIGTYPE_p_value_type swig_types[58]
@@ -3535,16 +3535,16 @@ static swig_module_info swig_module = {swig_types, 59, 0, 0, 0, 0};
 #define SWIG_TypeQuery SWIG_Python_TypeQuery
 
 /*-----------------------------------------------
-              @(target):= _mask.so
+              @(target):= _ground_mask.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__mask
+#  define SWIG_init    PyInit__ground_mask
 
 #else
-#  define SWIG_init    init_mask
+#  define SWIG_init    init_ground_mask
 
 #endif
-#define SWIG_name    "_mask"
+#define SWIG_name    "_ground_mask"
 
 #define SWIGVERSION 0x020009 
 #define SWIG_VERSION SWIGVERSION
@@ -5163,7 +5163,7 @@ template<class T, int D> inline boost::array<T, D>
 }
 
 
-#include "mask.h"
+#include "ground_mask.h"
 
 
 SWIGINTERN swig_type_info*
@@ -5221,9 +5221,9 @@ struct SWIG_null_deleter {
 
 
   namespace swig {
-    template <>  struct traits<boost::shared_ptr< GeoCal::Mask > > {
+    template <>  struct traits<boost::shared_ptr< GeoCal::GroundMask > > {
       typedef pointer_category category;
-      static const char* type_name() { return"boost::shared_ptr< GeoCal::Mask >"; }
+      static const char* type_name() { return"boost::shared_ptr< GeoCal::GroundMask >"; }
     };
   }
 
@@ -5327,24 +5327,24 @@ namespace swig {
 
 
       namespace swig {
-	template <>  struct traits<std::vector<boost::shared_ptr< GeoCal::Mask >, std::allocator< boost::shared_ptr< GeoCal::Mask > > > > {
+	template <>  struct traits<std::vector<boost::shared_ptr< GeoCal::GroundMask >, std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > > {
 	  typedef pointer_category category;
 	  static const char* type_name() {
-	    return "std::vector<" "boost::shared_ptr< GeoCal::Mask >" "," "std::allocator< boost::shared_ptr< GeoCal::Mask > >" " >";
+	    return "std::vector<" "boost::shared_ptr< GeoCal::GroundMask >" "," "std::allocator< boost::shared_ptr< GeoCal::GroundMask > >" " >";
 	  }
 	};
       }
     
-SWIGINTERN swig::SwigPyIterator *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg__iterator(std::vector< boost::shared_ptr< GeoCal::Mask > > *self,PyObject **PYTHON_SELF){
+SWIGINTERN swig::SwigPyIterator *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__iterator(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self,PyObject **PYTHON_SELF){
       return swig::make_output_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
     }
-SWIGINTERN bool std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____nonzero__(std::vector< boost::shared_ptr< GeoCal::Mask > > const *self){
+SWIGINTERN bool std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____nonzero__(std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *self){
       return !(self->empty());
     }
-SWIGINTERN bool std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____bool__(std::vector< boost::shared_ptr< GeoCal::Mask > > const *self){
+SWIGINTERN bool std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____bool__(std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *self){
       return !(self->empty());
     }
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____len__(std::vector< boost::shared_ptr< GeoCal::Mask > > const *self){
+SWIGINTERN std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____len__(std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *self){
       return self->size();
     }
 
@@ -5362,76 +5362,76 @@ SWIG_From_size_t  (size_t value)
   return SWIG_From_unsigned_SS_long  (static_cast< unsigned long >(value));
 }
 
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg__pop(std::vector< boost::shared_ptr< GeoCal::Mask > > *self){
+SWIGINTERN std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__pop(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self){
       if (self->size() == 0)
 	throw std::out_of_range("pop from empty container");
-      std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > >::value_type x = self->back();
+      std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > >::value_type x = self->back();
       self->pop_back();
       return x;
     }
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____getslice__(std::vector< boost::shared_ptr< GeoCal::Mask > > *self,std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type j){
+SWIGINTERN std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____getslice__(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type j){
       return swig::getslice(self, i, j, 1);
     }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____setslice____SWIG_0(std::vector< boost::shared_ptr< GeoCal::Mask > > *self,std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type j,std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &v=std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > >()){
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____setslice____SWIG_0(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type j,std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &v=std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > >()){
       swig::setslice(self, i, j, 1, v);
     }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____delslice__(std::vector< boost::shared_ptr< GeoCal::Mask > > *self,std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type j){
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____delslice__(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type j){
       swig::delslice(self, i, j, 1);
     }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____delitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::Mask > > *self,std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type i){
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____delitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i){
       self->erase(swig::getpos(self,i));
     }
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____getitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::Mask > > *self,PySliceObject *slice){
+SWIGINTERN std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____getitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self,PySliceObject *slice){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return NULL;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > >::difference_type id = i;
-      std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > >::difference_type jd = j;
+      std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > >::difference_type id = i;
+      std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > >::difference_type jd = j;
       return swig::getslice(self, id, jd, step);
     }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____setitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::Mask > > *self,PySliceObject *slice,std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &v){
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____setitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self,PySliceObject *slice,std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &v){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > >::difference_type id = i;
-      std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > >::difference_type jd = j;
+      std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > >::difference_type id = i;
+      std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > >::difference_type jd = j;
       swig::setslice(self, id, jd, step, v);
     }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____setitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::Mask > > *self,PySliceObject *slice){
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____setitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self,PySliceObject *slice){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > >::difference_type id = i;
-      std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > >::difference_type jd = j;
+      std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > >::difference_type id = i;
+      std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > >::difference_type jd = j;
       swig::delslice(self, id, jd, step);
     }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____delitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::Mask > > *self,PySliceObject *slice){
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____delitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self,PySliceObject *slice){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > >::difference_type id = i;
-      std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > >::difference_type jd = j;
+      std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > >::difference_type id = i;
+      std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > >::difference_type jd = j;
       swig::delslice(self, id, jd, step);
     }
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____getitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::Mask > > const *self,std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type i){
+SWIGINTERN std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____getitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *self,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i){
       return *(swig::cgetpos(self, i));
     }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____setitem____SWIG_2(std::vector< boost::shared_ptr< GeoCal::Mask > > *self,std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &x){
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____setitem____SWIG_2(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &x){
       *(swig::getpos(self,i)) = x;
     }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg__append(std::vector< boost::shared_ptr< GeoCal::Mask > > *self,std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &x){
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__append(std::vector< boost::shared_ptr< GeoCal::GroundMask > > *self,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &x){
       self->push_back(x);
     }
 
@@ -5440,7 +5440,7 @@ SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg__append(std
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "mask_wrap.h"
+#include "ground_mask_wrap.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -6215,34 +6215,34 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_Mask_mask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_GroundMask_mask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::Mask *arg1 = (GeoCal::Mask *) 0 ;
+  GeoCal::GroundMask *arg1 = (GeoCal::GroundMask *) 0 ;
   GeoCal::GroundCoordinate *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Mask const > tempshared1 ;
-  boost::shared_ptr< GeoCal::Mask const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::GroundMask const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GroundMask const > *smartarg1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
   PyObject *swig_obj[2] ;
   bool result;
   
-  if (!SWIG_Python_UnpackTuple(args,"Mask_mask",2,2,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"GroundMask_mask",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Mask_mask" "', argument " "1"" of type '" "GeoCal::Mask const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundMask_mask" "', argument " "1"" of type '" "GeoCal::GroundMask const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Mask > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Mask > * >(argp1);
-      arg1 = const_cast< GeoCal::Mask * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMask > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMask * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Mask > * >(argp1);
-      arg1 = const_cast< GeoCal::Mask * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMask * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
@@ -6256,10 +6256,10 @@ SWIGINTERN PyObject *_wrap_Mask_mask(PyObject *SWIGUNUSEDPARM(self), PyObject *a
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Mask_mask" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GroundMask_mask" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Mask_mask" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GroundMask_mask" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
@@ -6272,7 +6272,7 @@ SWIGINTERN PyObject *_wrap_Mask_mask(PyObject *SWIGUNUSEDPARM(self), PyObject *a
   }
   {
     try {
-      result = (bool)((GeoCal::Mask const *)arg1)->mask((GeoCal::GroundCoordinate const &)*arg2);
+      result = (bool)((GeoCal::GroundMask const *)arg1)->mask((GeoCal::GroundCoordinate const &)*arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6286,15 +6286,15 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Mask_region_masked(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_GroundMask_region_masked(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::Mask *arg1 = (GeoCal::Mask *) 0 ;
+  GeoCal::GroundMask *arg1 = (GeoCal::GroundMask *) 0 ;
   GeoCal::GroundCoordinate *arg2 = 0 ;
   GeoCal::GroundCoordinate *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Mask const > tempshared1 ;
-  boost::shared_ptr< GeoCal::Mask const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::GroundMask const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GroundMask const > *smartarg1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
@@ -6304,20 +6304,20 @@ SWIGINTERN PyObject *_wrap_Mask_region_masked(PyObject *SWIGUNUSEDPARM(self), Py
   PyObject *swig_obj[3] ;
   bool result;
   
-  if (!SWIG_Python_UnpackTuple(args,"Mask_region_masked",3,3,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"GroundMask_region_masked",3,3,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Mask_region_masked" "', argument " "1"" of type '" "GeoCal::Mask const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundMask_region_masked" "', argument " "1"" of type '" "GeoCal::GroundMask const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Mask > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Mask > * >(argp1);
-      arg1 = const_cast< GeoCal::Mask * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMask > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMask * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Mask > * >(argp1);
-      arg1 = const_cast< GeoCal::Mask * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMask * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
@@ -6331,10 +6331,10 @@ SWIGINTERN PyObject *_wrap_Mask_region_masked(PyObject *SWIGUNUSEDPARM(self), Py
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Mask_region_masked" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GroundMask_region_masked" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Mask_region_masked" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GroundMask_region_masked" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
@@ -6356,10 +6356,10 @@ SWIGINTERN PyObject *_wrap_Mask_region_masked(PyObject *SWIGUNUSEDPARM(self), Py
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Mask_region_masked" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GroundMask_region_masked" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
       }
       if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Mask_region_masked" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GroundMask_region_masked" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
@@ -6372,7 +6372,7 @@ SWIGINTERN PyObject *_wrap_Mask_region_masked(PyObject *SWIGUNUSEDPARM(self), Py
   }
   {
     try {
-      result = (bool)((GeoCal::Mask const *)arg1)->region_masked((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3);
+      result = (bool)((GeoCal::GroundMask const *)arg1)->region_masked((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6386,13 +6386,13 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Mask___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_GroundMask___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::Mask *arg1 = (GeoCal::Mask *) 0 ;
+  GeoCal::GroundMask *arg1 = (GeoCal::GroundMask *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Mask const > tempshared1 ;
-  boost::shared_ptr< GeoCal::Mask const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::GroundMask const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GroundMask const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   std::string result;
   
@@ -6400,22 +6400,22 @@ SWIGINTERN PyObject *_wrap_Mask___str__(PyObject *SWIGUNUSEDPARM(self), PyObject
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Mask___str__" "', argument " "1"" of type '" "GeoCal::Mask const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundMask___str__" "', argument " "1"" of type '" "GeoCal::GroundMask const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Mask > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Mask > * >(argp1);
-      arg1 = const_cast< GeoCal::Mask * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMask > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMask * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Mask > * >(argp1);
-      arg1 = const_cast< GeoCal::Mask * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMask * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = ((GeoCal::Mask const *)arg1)->print_to_string();
+      result = ((GeoCal::GroundMask const *)arg1)->print_to_string();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6429,30 +6429,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_Mask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_GroundMask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::Mask *arg1 = (GeoCal::Mask *) 0 ;
+  GeoCal::GroundMask *arg1 = (GeoCal::GroundMask *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Mask > tempshared1 ;
-  boost::shared_ptr< GeoCal::Mask > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::GroundMask > tempshared1 ;
+  boost::shared_ptr< GeoCal::GroundMask > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Mask" "', argument " "1"" of type '" "GeoCal::Mask *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_GroundMask" "', argument " "1"" of type '" "GeoCal::GroundMask *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Mask > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Mask > * >(argp1);
-      arg1 = const_cast< GeoCal::Mask * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GroundMask > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::GroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMask * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Mask > * >(argp1);
-      arg1 = const_cast< GeoCal::Mask * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::GroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMask * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
@@ -6471,21 +6471,21 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Mask_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *GroundMask_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_CombinedMask__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+SWIGINTERN PyObject *_wrap_new_CombinedGroundMask__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
   PyObject *resultobj = 0;
-  GeoCal::CombinedMask *result = 0 ;
+  GeoCal::CombinedGroundMask *result = 0 ;
   
   if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
   {
     try {
-      result = (GeoCal::CombinedMask *)new GeoCal::CombinedMask();
+      result = (GeoCal::CombinedGroundMask *)new GeoCal::CombinedGroundMask();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6493,8 +6493,8 @@ SWIGINTERN PyObject *_wrap_new_CombinedMask__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CombinedMask > *smartresult = result ? new boost::shared_ptr<  GeoCal::CombinedMask >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedMask_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::CombinedGroundMask > *smartresult = result ? new boost::shared_ptr<  GeoCal::CombinedGroundMask >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -6502,25 +6502,25 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_CombinedMask__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_CombinedGroundMask__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *arg1 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *arg1 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  GeoCal::CombinedMask *result = 0 ;
+  GeoCal::CombinedGroundMask *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t,  0  | 0);
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t,  0  | 0);
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CombinedMask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CombinedGroundMask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &""'"); 
   }
   if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CombinedMask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CombinedGroundMask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > * >(argp1);
   {
     try {
-      result = (GeoCal::CombinedMask *)new GeoCal::CombinedMask((std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &)*arg1);
+      result = (GeoCal::CombinedGroundMask *)new GeoCal::CombinedGroundMask((std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &)*arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6528,8 +6528,8 @@ SWIGINTERN PyObject *_wrap_new_CombinedMask__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CombinedMask > *smartresult = result ? new boost::shared_ptr<  GeoCal::CombinedMask >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedMask_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::CombinedGroundMask > *smartresult = result ? new boost::shared_ptr<  GeoCal::CombinedGroundMask >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -6537,61 +6537,61 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_CombinedMask(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_CombinedGroundMask(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[2];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_CombinedMask",0,1,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_CombinedGroundMask",0,1,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
-    return _wrap_new_CombinedMask__SWIG_0(self, argc, argv);
+    return _wrap_new_CombinedGroundMask__SWIG_0(self, argc, argv);
   }
   if (argc == 1) {
-    return _wrap_new_CombinedMask__SWIG_1(self, argc, argv);
+    return _wrap_new_CombinedGroundMask__SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_CombinedMask'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_CombinedGroundMask'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::CombinedMask::CombinedMask()\n"
-    "    GeoCal::CombinedMask::CombinedMask(std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &)\n");
+    "    GeoCal::CombinedGroundMask::CombinedGroundMask()\n"
+    "    GeoCal::CombinedGroundMask::CombinedGroundMask(std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_CombinedMask_mask_list_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CombinedGroundMask_mask_list_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::CombinedMask *arg1 = (GeoCal::CombinedMask *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *arg2 = (std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *) 0 ;
+  GeoCal::CombinedGroundMask *arg1 = (GeoCal::CombinedGroundMask *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *arg2 = (std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::CombinedMask > tempshared1 ;
-  boost::shared_ptr< GeoCal::CombinedMask > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::CombinedGroundMask > tempshared1 ;
+  boost::shared_ptr< GeoCal::CombinedGroundMask > *smartarg1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject *swig_obj[2] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"CombinedMask_mask_list_set",2,2,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"CombinedGroundMask_mask_list_set",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedMask_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CombinedMask_mask_list_set" "', argument " "1"" of type '" "GeoCal::CombinedMask *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CombinedGroundMask_mask_list_set" "', argument " "1"" of type '" "GeoCal::CombinedGroundMask *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedMask > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedMask > * >(argp1);
-      arg1 = const_cast< GeoCal::CombinedMask * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedGroundMask > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedGroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::CombinedGroundMask * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedMask > * >(argp1);
-      arg1 = const_cast< GeoCal::CombinedMask * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedGroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::CombinedGroundMask * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CombinedMask_mask_list_set" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CombinedGroundMask_mask_list_set" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *""'"); 
   }
-  arg2 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > * >(argp2);
+  arg2 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > * >(argp2);
   if (arg1) (arg1)->mask_list = *arg2;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -6600,65 +6600,65 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CombinedMask_mask_list_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CombinedGroundMask_mask_list_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::CombinedMask *arg1 = (GeoCal::CombinedMask *) 0 ;
+  GeoCal::CombinedGroundMask *arg1 = (GeoCal::CombinedGroundMask *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::CombinedMask > tempshared1 ;
-  boost::shared_ptr< GeoCal::CombinedMask > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::CombinedGroundMask > tempshared1 ;
+  boost::shared_ptr< GeoCal::CombinedGroundMask > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *result = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *result = 0 ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedMask_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CombinedMask_mask_list_get" "', argument " "1"" of type '" "GeoCal::CombinedMask *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CombinedGroundMask_mask_list_get" "', argument " "1"" of type '" "GeoCal::CombinedGroundMask *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedMask > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedMask > * >(argp1);
-      arg1 = const_cast< GeoCal::CombinedMask * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedGroundMask > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedGroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::CombinedGroundMask * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedMask > * >(argp1);
-      arg1 = const_cast< GeoCal::CombinedMask * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedGroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::CombinedGroundMask * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  result = (std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *)& ((arg1)->mask_list);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  result = (std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *)& ((arg1)->mask_list);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_CombinedMask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_CombinedGroundMask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::CombinedMask *arg1 = (GeoCal::CombinedMask *) 0 ;
+  GeoCal::CombinedGroundMask *arg1 = (GeoCal::CombinedGroundMask *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::CombinedMask > tempshared1 ;
-  boost::shared_ptr< GeoCal::CombinedMask > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::CombinedGroundMask > tempshared1 ;
+  boost::shared_ptr< GeoCal::CombinedGroundMask > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedMask_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CombinedMask" "', argument " "1"" of type '" "GeoCal::CombinedMask *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CombinedGroundMask" "', argument " "1"" of type '" "GeoCal::CombinedGroundMask *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedMask > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedMask > * >(argp1);
-      arg1 = const_cast< GeoCal::CombinedMask * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedGroundMask > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedGroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::CombinedGroundMask * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedMask > * >(argp1);
-      arg1 = const_cast< GeoCal::CombinedMask * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CombinedGroundMask > * >(argp1);
+      arg1 = const_cast< GeoCal::CombinedGroundMask * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
@@ -6677,20 +6677,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *CombinedMask_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *CombinedGroundMask_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedMask_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *CombinedMask_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *CombinedGroundMask_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   return SWIG_Python_InitShadowInstance(args);
 }
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   PyObject **arg2 = (PyObject **) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -6700,14 +6700,14 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_iterator(PyObject *SWIGUNUSEDPARM(self), 
   arg2 = &swig_obj[0];
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_iterator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_iterator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
-      result = (swig::SwigPyIterator *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg__iterator(arg1,arg2);
+      result = (swig::SwigPyIterator *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__iterator(arg1,arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6721,9 +6721,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
@@ -6731,14 +6731,14 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___nonzero__(PyObject *SWIGUNUSEDPARM(self
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___nonzero__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___nonzero__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
-      result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____nonzero__((std::vector< boost::shared_ptr< GeoCal::Mask > > const *)arg1);
+      result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____nonzero__((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6752,9 +6752,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___bool__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___bool__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
@@ -6762,14 +6762,14 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___bool__(PyObject *SWIGUNUSEDPARM(self), 
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___bool__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___bool__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
-      result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____bool__((std::vector< boost::shared_ptr< GeoCal::Mask > > const *)arg1);
+      result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____bool__((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6783,24 +6783,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___len__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___len__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type result;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___len__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___len__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
-      result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____len__((std::vector< boost::shared_ptr< GeoCal::Mask > > const *)arg1);
+      result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____len__((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6814,25 +6814,25 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_pop(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_pop(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type result;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_pop" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_pop" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
       try {
-        result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg__pop(arg1);
+        result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__pop(arg1);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6853,11 +6853,11 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___getslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___getslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type arg3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -6865,28 +6865,28 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___getslice__(PyObject *SWIGUNUSEDPARM(sel
   ptrdiff_t val3 ;
   int ecode3 = 0 ;
   PyObject *swig_obj[3] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *result = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"Vector_Mask___getslice__",3,3,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  if (!SWIG_Python_UnpackTuple(args,"Vector_GroundMask___getslice__",3,3,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___getslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___getslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Mask___getslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_GroundMask___getslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type""'");
   } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type >(val2);
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Mask___getslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_GroundMask___getslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type""'");
   } 
-  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type >(val3);
+  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type >(val3);
   {
     try {
       try {
-        result = (std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____getslice__(arg1,arg2,arg3);
+        result = (std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____getslice__(arg1,arg2,arg3);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6901,19 +6901,19 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___getslice__(PyObject *SWIGUNUSEDPARM(sel
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___setslice____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___setslice____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type arg3 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *arg4 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type arg3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -6923,36 +6923,36 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___setslice____SWIG_0(PyObject *SWIGUNUSED
   int res4 = SWIG_OLDOBJ ;
   
   if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Mask___setslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_GroundMask___setslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type""'");
   } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type >(val2);
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Mask___setslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_GroundMask___setslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type""'");
   } 
-  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type >(val3);
+  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type >(val3);
   {
-    std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *)0;
+    std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *)0;
     res4 = swig::asptr(swig_obj[3], &ptr);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_Mask___setslice__" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_GroundMask___setslice__" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Mask___setslice__" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_GroundMask___setslice__" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &""'"); 
     }
     arg4 = ptr;
   }
   {
     try {
       try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &)*arg4);
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &)*arg4);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6976,11 +6976,11 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___setslice____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___setslice____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type arg3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -6989,25 +6989,25 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___setslice____SWIG_1(PyObject *SWIGUNUSED
   int ecode3 = 0 ;
   
   if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Mask___setslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_GroundMask___setslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type""'");
   } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type >(val2);
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Mask___setslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_GroundMask___setslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type""'");
   } 
-  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type >(val3);
+  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type >(val3);
   {
     try {
       try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____setslice____SWIG_0(arg1,arg2,arg3);
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____setslice____SWIG_0(arg1,arg2,arg3);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7029,33 +7029,33 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___setslice__(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___setslice__(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[5];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Mask___setslice__",0,4,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_GroundMask___setslice__",0,4,argv))) SWIG_fail;
   --argc;
   if (argc == 3) {
-    return _wrap_Vector_Mask___setslice____SWIG_1(self, argc, argv);
+    return _wrap_Vector_GroundMask___setslice____SWIG_1(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_Vector_Mask___setslice____SWIG_0(self, argc, argv);
+    return _wrap_Vector_GroundMask___setslice____SWIG_0(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Mask___setslice__'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_GroundMask___setslice__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::__setslice__(std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type,std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type,std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::__setslice__(std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type,std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type)\n");
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::__setslice__(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type,std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::__setslice__(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___delslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___delslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type arg3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -7064,26 +7064,26 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___delslice__(PyObject *SWIGUNUSEDPARM(sel
   int ecode3 = 0 ;
   PyObject *swig_obj[3] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"Vector_Mask___delslice__",3,3,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  if (!SWIG_Python_UnpackTuple(args,"Vector_GroundMask___delslice__",3,3,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___delslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___delslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Mask___delslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_GroundMask___delslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type""'");
   } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type >(val2);
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Mask___delslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_GroundMask___delslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type""'");
   } 
-  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type >(val3);
+  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type >(val3);
   {
     try {
       try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____delslice__(arg1,arg2,arg3);
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____delslice__(arg1,arg2,arg3);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7105,30 +7105,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___delitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___delitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
   int ecode2 = 0 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Mask___delitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_GroundMask___delitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type""'");
   } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type >(val2);
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type >(val2);
   {
     try {
       try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____delitem____SWIG_0(arg1,arg2);
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____delitem____SWIG_0(arg1,arg2);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7147,30 +7147,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___getitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___getitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *result = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *result = 0 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     if (!PySlice_Check(swig_obj[1])) {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask___getitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask___getitem__" "', argument " "2"" of type '" "PySliceObject *""'");
     }
     arg2 = (PySliceObject *) swig_obj[1];
   }
   {
     try {
       try {
-        result = (std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____getitem____SWIG_0(arg1,arg2);
+        result = (std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____getitem____SWIG_0(arg1,arg2);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7185,49 +7185,49 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___getitem____SWIG_0(PyObject *SWIGUNUSEDP
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___setitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___setitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *arg3 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int res3 = SWIG_OLDOBJ ;
   
   if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     if (!PySlice_Check(swig_obj[1])) {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
     }
     arg2 = (PySliceObject *) swig_obj[1];
   }
   {
-    std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *)0;
+    std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *)0;
     res3 = swig::asptr(swig_obj[2], &ptr);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Mask___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundMask___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Mask___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_GroundMask___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &""'"); 
     }
     arg3 = ptr;
   }
   {
     try {
       try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____setitem____SWIG_0(arg1,arg2,(std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &)*arg3);
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____setitem____SWIG_0(arg1,arg2,(std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &)*arg3);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7251,29 +7251,29 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___setitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___setitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     if (!PySlice_Check(swig_obj[1])) {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
     }
     arg2 = (PySliceObject *) swig_obj[1];
   }
   {
     try {
       try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____setitem____SWIG_1(arg1,arg2);
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____setitem____SWIG_1(arg1,arg2);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7295,29 +7295,29 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___delitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___delitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     if (!PySlice_Check(swig_obj[1])) {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask___delitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask___delitem__" "', argument " "2"" of type '" "PySliceObject *""'");
     }
     arg2 = (PySliceObject *) swig_obj[1];
   }
   {
     try {
       try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____delitem____SWIG_1(arg1,arg2);
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____delitem____SWIG_1(arg1,arg2);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7339,11 +7339,11 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___delitem__(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___delitem__(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[3];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Mask___delitem__",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_GroundMask___delitem__",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
     int _v = 0;
@@ -7353,48 +7353,48 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___delitem__(PyObject *self, PyObject *arg
       }
     }
     if (!_v) goto check_1;
-    return _wrap_Vector_Mask___delitem____SWIG_1(self, argc, argv);
+    return _wrap_Vector_GroundMask___delitem____SWIG_1(self, argc, argv);
   }
 check_1:
   
   if (argc == 2) {
-    return _wrap_Vector_Mask___delitem____SWIG_0(self, argc, argv);
+    return _wrap_Vector_GroundMask___delitem____SWIG_0(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Mask___delitem__'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_GroundMask___delitem__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::__delitem__(std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::__delitem__(PySliceObject *)\n");
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::__delitem__(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::__delitem__(PySliceObject *)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___getitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___getitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
   int ecode2 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *result = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *result = 0 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Mask___getitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_GroundMask___getitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type""'");
   } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type >(val2);
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type >(val2);
   {
     try {
       try {
-        result = (std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *) &std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____getitem____SWIG_1((std::vector< boost::shared_ptr< GeoCal::Mask > > const *)arg1,arg2);
+        result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *) &std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____getitem____SWIG_1((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1,arg2);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7415,11 +7415,11 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___getitem__(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___getitem__(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[3];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Mask___getitem__",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_GroundMask___getitem__",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
     int _v = 0;
@@ -7429,60 +7429,60 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___getitem__(PyObject *self, PyObject *arg
       }
     }
     if (!_v) goto check_1;
-    return _wrap_Vector_Mask___getitem____SWIG_0(self, argc, argv);
+    return _wrap_Vector_GroundMask___getitem____SWIG_0(self, argc, argv);
   }
 check_1:
   
   if (argc == 2) {
-    return _wrap_Vector_Mask___getitem____SWIG_1(self, argc, argv);
+    return _wrap_Vector_GroundMask___getitem____SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Mask___getitem__'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_GroundMask___getitem__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::__getitem__(PySliceObject *)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::__getitem__(std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type) const\n");
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::__getitem__(PySliceObject *)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::__getitem__(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type) const\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___setitem____SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___setitem____SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *arg3 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
   int ecode2 = 0 ;
   void *argp3 ;
   int res3 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type tempshared3 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type temp2shared3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type tempshared3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type temp2shared3 ;
   
   if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Mask___setitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_GroundMask___setitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type""'");
   } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type >(val2);
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type >(val2);
   {
     int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t,  0 , &newmem);
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Mask___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundMask___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3);
+      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3);
       arg3 = &tempshared3;
     } else {
-      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3) : &tempshared3;
+      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3) : &tempshared3;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -7499,7 +7499,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___setitem____SWIG_2(PyObject *SWIGUNUSEDP
   {
     try {
       try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg____setitem____SWIG_2(arg1,arg2,(boost::shared_ptr< GeoCal::Mask > const &)*arg3);
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____setitem____SWIG_2(arg1,arg2,(boost::shared_ptr< GeoCal::GroundMask > const &)*arg3);
       }
       catch(std::out_of_range &_e) {
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7518,14 +7518,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask___setitem__(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask___setitem__(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[4];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Mask___setitem__",0,3,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_GroundMask___setitem__",0,3,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
-    return _wrap_Vector_Mask___setitem____SWIG_1(self, argc, argv);
+    return _wrap_Vector_GroundMask___setitem____SWIG_1(self, argc, argv);
   }
   if (argc == 3) {
     int _v = 0;
@@ -7536,58 +7536,58 @@ SWIGINTERN PyObject *_wrap_Vector_Mask___setitem__(PyObject *self, PyObject *arg
     }
     if (!_v) goto check_2;
     {
-      int res = swig::asptr(argv[2], (std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > >**)(0));
+      int res = swig::asptr(argv[2], (std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > >**)(0));
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_2;
-    return _wrap_Vector_Mask___setitem____SWIG_0(self, argc, argv);
+    return _wrap_Vector_GroundMask___setitem____SWIG_0(self, argc, argv);
   }
 check_2:
   
   if (argc == 3) {
-    return _wrap_Vector_Mask___setitem____SWIG_2(self, argc, argv);
+    return _wrap_Vector_GroundMask___setitem____SWIG_2(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Mask___setitem__'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_GroundMask___setitem__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::__setitem__(PySliceObject *,std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > const &)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::__setitem__(PySliceObject *)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::__setitem__(std::vector< boost::shared_ptr< GeoCal::Mask > >::difference_type,std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &)\n");
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::__setitem__(PySliceObject *,std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::__setitem__(PySliceObject *)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::__setitem__(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_append(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_append(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *arg2 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 ;
   int res2 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type tempshared2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type temp2shared2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type tempshared2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type temp2shared2 ;
   PyObject *swig_obj[2] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"Vector_Mask_append",2,2,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  if (!SWIG_Python_UnpackTuple(args,"Vector_GroundMask_append",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_append" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_append" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t,  0 , &newmem);
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_Mask_append" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_GroundMask_append" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp2);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp2);
+      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2);
       arg2 = &tempshared2;
     } else {
-      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp2) : &tempshared2;
+      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2) : &tempshared2;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -7603,7 +7603,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_append(PyObject *SWIGUNUSEDPARM(self), Py
   }
   {
     try {
-      std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Mask_Sg__Sg__append(arg1,(boost::shared_ptr< GeoCal::Mask > const &)*arg2);
+      std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__append(arg1,(boost::shared_ptr< GeoCal::GroundMask > const &)*arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7617,55 +7617,55 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Vector_Mask__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+SWIGINTERN PyObject *_wrap_new_Vector_GroundMask__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *result = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *result = 0 ;
   
   if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
   {
     try {
-      result = (std::vector< boost::shared_ptr< GeoCal::Mask > > *)new std::vector< boost::shared_ptr< GeoCal::Mask > >();
+      result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *)new std::vector< boost::shared_ptr< GeoCal::GroundMask > >();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, SWIG_POINTER_NEW |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Vector_Mask__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_Vector_GroundMask__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *result = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
-    std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *)0;
+    std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *)0;
     res1 = swig::asptr(swig_obj[0], &ptr);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Vector_Mask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Vector_GroundMask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Vector_Mask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Vector_GroundMask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const &""'"); 
     }
     arg1 = ptr;
   }
   {
     try {
-      result = (std::vector< boost::shared_ptr< GeoCal::Mask > > *)new std::vector< boost::shared_ptr< GeoCal::Mask > >((std::vector< boost::shared_ptr< GeoCal::Mask > > const &)*arg1);
+      result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *)new std::vector< boost::shared_ptr< GeoCal::GroundMask > >((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const &)*arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, SWIG_POINTER_NEW |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
@@ -7674,9 +7674,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_empty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_empty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
@@ -7684,14 +7684,14 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_empty(PyObject *SWIGUNUSEDPARM(self), PyO
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_empty" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_empty" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
-      result = (bool)((std::vector< boost::shared_ptr< GeoCal::Mask > > const *)arg1)->empty();
+      result = (bool)((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->empty();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7705,24 +7705,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type result;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_size" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_size" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
-      result = ((std::vector< boost::shared_ptr< GeoCal::Mask > > const *)arg1)->size();
+      result = ((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->size();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7736,20 +7736,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_clear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_clear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_clear" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_clear" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
       (arg1)->clear();
@@ -7766,30 +7766,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_swap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_swap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg2 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject *swig_obj[2] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"Vector_Mask_swap",2,2,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  if (!SWIG_Python_UnpackTuple(args,"Vector_GroundMask_swap",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_swap" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_swap" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
-  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t,  0 );
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_Mask_swap" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_GroundMask_swap" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Mask_swap" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_GroundMask_swap" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > &""'"); 
   }
-  arg2 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp2);
+  arg2 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp2);
   {
     try {
       (arg1)->swap(*arg2);
@@ -7806,52 +7806,52 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_get_allocator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_get_allocator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  SwigValueWrapper< std::allocator< boost::shared_ptr< GeoCal::Mask > > > result;
+  SwigValueWrapper< std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_get_allocator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_get_allocator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
-      result = ((std::vector< boost::shared_ptr< GeoCal::Mask > > const *)arg1)->get_allocator();
+      result = ((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->get_allocator();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj((new std::vector< boost::shared_ptr< GeoCal::Mask > >::allocator_type(static_cast< const std::vector< boost::shared_ptr< GeoCal::Mask > >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new std::vector< boost::shared_ptr< GeoCal::GroundMask > >::allocator_type(static_cast< const std::vector< boost::shared_ptr< GeoCal::GroundMask > >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_begin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_begin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator result;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_begin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_begin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
       result = (arg1)->begin();
@@ -7861,7 +7861,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_begin(PyObject *SWIGUNUSEDPARM(self), PyO
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -7869,21 +7869,21 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator result;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_end" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_end" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
       result = (arg1)->end();
@@ -7893,7 +7893,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_end(PyObject *SWIGUNUSEDPARM(self), PyObj
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -7901,21 +7901,21 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::reverse_iterator result;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::reverse_iterator result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_rbegin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_rbegin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
       result = (arg1)->rbegin();
@@ -7925,7 +7925,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_rbegin(PyObject *SWIGUNUSEDPARM(self), Py
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Mask > >::reverse_iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::GroundMask > >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -7933,21 +7933,21 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_rend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_rend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::reverse_iterator result;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::reverse_iterator result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_rend" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_rend" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
       result = (arg1)->rend();
@@ -7957,7 +7957,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_rend(PyObject *SWIGUNUSEDPARM(self), PyOb
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Mask > >::reverse_iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::GroundMask > >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -7965,49 +7965,49 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Vector_Mask__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_Vector_GroundMask__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type arg1 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type arg1 ;
   size_t val1 ;
   int ecode1 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *result = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   ecode1 = SWIG_AsVal_size_t(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Vector_Mask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Vector_GroundMask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type""'");
   } 
-  arg1 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type >(val1);
+  arg1 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type >(val1);
   {
     try {
-      result = (std::vector< boost::shared_ptr< GeoCal::Mask > > *)new std::vector< boost::shared_ptr< GeoCal::Mask > >(arg1);
+      result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *)new std::vector< boost::shared_ptr< GeoCal::GroundMask > >(arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, SWIG_POINTER_NEW |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_pop_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_pop_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_pop_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_pop_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
       (arg1)->pop_back();
@@ -8024,26 +8024,26 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   size_t val2 ;
   int ecode2 = 0 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Mask_resize" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_GroundMask_resize" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type""'");
   } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type >(val2);
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type >(val2);
   {
     try {
       (arg1)->resize(arg2);
@@ -8060,31 +8060,31 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
   int res2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator result;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator result;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator""'");
     }
   }
   {
@@ -8096,7 +8096,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(se
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -8104,45 +8104,45 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator arg3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
   int res2 ;
   swig::SwigPyIterator *iter3 = 0 ;
   int res3 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator result;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator result;
   
   if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator""'");
     }
   }
   res3 = SWIG_ConvertPtr(swig_obj[2], SWIG_as_voidptrptr(&iter3), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res3) || !iter3) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask_erase" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask_erase" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator > *>(iter3);
+    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator > *>(iter3);
     if (iter_t) {
       arg3 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask_erase" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask_erase" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator""'");
     }
   }
   {
@@ -8154,7 +8154,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(se
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -8162,58 +8162,58 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_erase(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_erase(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[4];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Mask_erase",0,3,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_GroundMask_erase",0,3,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
-    return _wrap_Vector_Mask_erase__SWIG_0(self, argc, argv);
+    return _wrap_Vector_GroundMask_erase__SWIG_0(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_Vector_Mask_erase__SWIG_1(self, argc, argv);
+    return _wrap_Vector_GroundMask_erase__SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Mask_erase'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_GroundMask_erase'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::erase(std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::erase(std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator,std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator)\n");
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::erase(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::erase(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Vector_Mask__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_Vector_GroundMask__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type arg1 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *arg2 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type arg1 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *arg2 = 0 ;
   size_t val1 ;
   int ecode1 = 0 ;
   void *argp2 ;
   int res2 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type tempshared2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type temp2shared2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *result = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type tempshared2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type temp2shared2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *result = 0 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   ecode1 = SWIG_AsVal_size_t(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Vector_Mask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Vector_GroundMask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type""'");
   } 
-  arg1 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type >(val1);
+  arg1 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type >(val1);
   {
     int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t,  0 , &newmem);
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_Vector_Mask" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_Vector_GroundMask" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp2);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp2);
+      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2);
       arg2 = &tempshared2;
     } else {
-      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp2) : &tempshared2;
+      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2) : &tempshared2;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -8229,28 +8229,28 @@ SWIGINTERN PyObject *_wrap_new_Vector_Mask__SWIG_3(PyObject *SWIGUNUSEDPARM(self
   }
   {
     try {
-      result = (std::vector< boost::shared_ptr< GeoCal::Mask > > *)new std::vector< boost::shared_ptr< GeoCal::Mask > >(arg1,(std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &)*arg2);
+      result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *)new std::vector< boost::shared_ptr< GeoCal::GroundMask > >(arg1,(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)*arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, SWIG_POINTER_NEW |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Vector_Mask(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Vector_GroundMask(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[3];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_Vector_Mask",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_Vector_GroundMask",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
-    return _wrap_new_Vector_Mask__SWIG_0(self, argc, argv);
+    return _wrap_new_Vector_GroundMask__SWIG_0(self, argc, argv);
   }
   if (argc == 1) {
     int _v = 0;
@@ -8261,58 +8261,58 @@ SWIGINTERN PyObject *_wrap_new_Vector_Mask(PyObject *self, PyObject *args) {
       }
     }
     if (!_v) goto check_2;
-    return _wrap_new_Vector_Mask__SWIG_2(self, argc, argv);
+    return _wrap_new_Vector_GroundMask__SWIG_2(self, argc, argv);
   }
 check_2:
   
   if (argc == 1) {
-    return _wrap_new_Vector_Mask__SWIG_1(self, argc, argv);
+    return _wrap_new_Vector_GroundMask__SWIG_1(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_new_Vector_Mask__SWIG_3(self, argc, argv);
+    return _wrap_new_Vector_GroundMask__SWIG_3(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Vector_Mask'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Vector_GroundMask'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::vector()\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::vector(std::vector< boost::shared_ptr< GeoCal::Mask > > const &)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::vector(std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::vector(std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type,std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &)\n");
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::vector()\n"
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::vector(std::vector< boost::shared_ptr< GeoCal::GroundMask > > const &)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::vector(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::vector(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_push_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_push_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *arg2 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 ;
   int res2 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type tempshared2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type temp2shared2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type tempshared2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type temp2shared2 ;
   PyObject *swig_obj[2] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"Vector_Mask_push_back",2,2,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  if (!SWIG_Python_UnpackTuple(args,"Vector_GroundMask_push_back",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_push_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_push_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t,  0 , &newmem);
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_Mask_push_back" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_GroundMask_push_back" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp2);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp2);
+      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2);
       arg2 = &tempshared2;
     } else {
-      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp2) : &tempshared2;
+      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2) : &tempshared2;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -8328,7 +8328,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_push_back(PyObject *SWIGUNUSEDPARM(self),
   }
   {
     try {
-      (arg1)->push_back((std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &)*arg2);
+      (arg1)->push_back((std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)*arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -8342,24 +8342,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *result = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *result = 0 ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_front" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_front" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
-      result = (std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::Mask > > const *)arg1)->front();
+      result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->front();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -8375,24 +8375,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *result = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *result = 0 ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
-      result = (std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::Mask > > const *)arg1)->back();
+      result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->back();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -8408,44 +8408,44 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_assign(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_assign(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *arg3 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   size_t val2 ;
   int ecode2 = 0 ;
   void *argp3 ;
   int res3 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type tempshared3 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type temp2shared3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type tempshared3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type temp2shared3 ;
   PyObject *swig_obj[3] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"Vector_Mask_assign",3,3,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  if (!SWIG_Python_UnpackTuple(args,"Vector_GroundMask_assign",3,3,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_assign" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_assign" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Mask_assign" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_GroundMask_assign" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type""'");
   } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type >(val2);
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type >(val2);
   {
     int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t,  0 , &newmem);
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Mask_assign" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundMask_assign" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3);
+      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3);
       arg3 = &tempshared3;
     } else {
-      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3) : &tempshared3;
+      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3) : &tempshared3;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -8461,7 +8461,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_assign(PyObject *SWIGUNUSEDPARM(self), Py
   }
   {
     try {
-      (arg1)->assign(arg2,(std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &)*arg3);
+      (arg1)->assign(arg2,(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)*arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -8475,43 +8475,43 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *arg3 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   size_t val2 ;
   int ecode2 = 0 ;
   void *argp3 ;
   int res3 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type tempshared3 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type temp2shared3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type tempshared3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type temp2shared3 ;
   
   if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Mask_resize" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_GroundMask_resize" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type""'");
   } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type >(val2);
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type >(val2);
   {
     int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t,  0 , &newmem);
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Mask_resize" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundMask_resize" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3);
+      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3);
       arg3 = &tempshared3;
     } else {
-      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3) : &tempshared3;
+      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3) : &tempshared3;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -8527,7 +8527,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(s
   }
   {
     try {
-      (arg1)->resize(arg2,(std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &)*arg3);
+      (arg1)->resize(arg2,(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)*arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -8541,72 +8541,72 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_resize(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_resize(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[4];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Mask_resize",0,3,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_GroundMask_resize",0,3,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
-    return _wrap_Vector_Mask_resize__SWIG_0(self, argc, argv);
+    return _wrap_Vector_GroundMask_resize__SWIG_0(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_Vector_Mask_resize__SWIG_1(self, argc, argv);
+    return _wrap_Vector_GroundMask_resize__SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Mask_resize'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_GroundMask_resize'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::resize(std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::resize(std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type,std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &)\n");
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::resize(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::resize(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *arg3 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
   int res2 ;
   void *argp3 ;
   int res3 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type tempshared3 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type temp2shared3 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator result;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type tempshared3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type temp2shared3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator result;
   
   if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator""'");
     }
   }
   {
     int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t,  0 , &newmem);
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Mask_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundMask_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3);
+      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3);
       arg3 = &tempshared3;
     } else {
-      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp3) : &tempshared3;
+      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3) : &tempshared3;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -8622,14 +8622,14 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(s
   }
   {
     try {
-      result = (arg1)->insert(arg2,(std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &)*arg3);
+      result = (arg1)->insert(arg2,(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)*arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -8637,12 +8637,12 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type arg3 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type *arg4 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type arg3 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
@@ -8651,43 +8651,43 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(s
   int ecode3 = 0 ;
   void *argp4 ;
   int res4 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type tempshared4 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type temp2shared4 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type tempshared4 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type temp2shared4 ;
   
   if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Mask_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_GroundMask_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator""'");
     }
   }
   ecode3 = SWIG_AsVal_size_t(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Mask_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_GroundMask_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type""'");
   } 
-  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type >(val3);
+  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type >(val3);
   {
     int newmem = 0;
-    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Mask_t,  0 , &newmem);
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_Mask_insert" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_GroundMask_insert" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp4) tempshared4 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp4);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp4);
+      if (argp4) tempshared4 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp4);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp4);
       arg4 = &tempshared4;
     } else {
-      arg4 = (argp4) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type * >(argp4) : &tempshared4;
+      arg4 = (argp4) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp4) : &tempshared4;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -8703,7 +8703,7 @@ SWIGINTERN PyObject *_wrap_Vector_Mask_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(s
   }
   {
     try {
-      (arg1)->insert(arg2,arg3,(std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &)*arg4);
+      (arg1)->insert(arg2,arg3,(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)*arg4);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -8717,49 +8717,49 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_insert(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_insert(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[5];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Mask_insert",0,4,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_GroundMask_insert",0,4,argv))) SWIG_fail;
   --argc;
   if (argc == 3) {
-    return _wrap_Vector_Mask_insert__SWIG_0(self, argc, argv);
+    return _wrap_Vector_GroundMask_insert__SWIG_0(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_Vector_Mask_insert__SWIG_1(self, argc, argv);
+    return _wrap_Vector_GroundMask_insert__SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Mask_insert'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_GroundMask_insert'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::insert(std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator,std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::Mask > >::insert(std::vector< boost::shared_ptr< GeoCal::Mask > >::iterator,std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type,std::vector< boost::shared_ptr< GeoCal::Mask > >::value_type const &)\n");
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::insert(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::GroundMask > >::insert(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type,std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_reserve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_reserve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   size_t val2 ;
   int ecode2 = 0 ;
   PyObject *swig_obj[2] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"Vector_Mask_reserve",2,2,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  if (!SWIG_Python_UnpackTuple(args,"Vector_GroundMask_reserve",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_reserve" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_reserve" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Mask_reserve" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_GroundMask_reserve" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type""'");
   } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type >(val2);
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type >(val2);
   {
     try {
       (arg1)->reserve(arg2);
@@ -8776,24 +8776,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Vector_Mask_capacity(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vector_GroundMask_capacity(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::Mask > >::size_type result;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Mask_capacity" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_GroundMask_capacity" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
-      result = ((std::vector< boost::shared_ptr< GeoCal::Mask > > const *)arg1)->capacity();
+      result = ((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->capacity();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -8807,20 +8807,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_Vector_Mask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_Vector_GroundMask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Mask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Mask > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundMask > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Vector_Mask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Mask > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Vector_GroundMask" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundMask > > *""'"); 
   }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Mask > > * >(argp1);
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > > * >(argp1);
   {
     try {
       delete arg1;
@@ -8837,14 +8837,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Vector_Mask_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *Vector_GroundMask_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *Vector_Mask_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *Vector_GroundMask_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   return SWIG_Python_InitShadowInstance(args);
 }
 
@@ -8868,74 +8868,74 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
-	 { (char *)"Mask_mask", _wrap_Mask_mask, METH_VARARGS, (char *)"\n"
-		"virtual bool GeoCal::Mask::mask(const GroundCoordinate &Gc) const =0\n"
+	 { (char *)"GroundMask_mask", _wrap_GroundMask_mask, METH_VARARGS, (char *)"\n"
+		"virtual bool GeoCal::GroundMask::mask(const GroundCoordinate &Gc) const =0\n"
 		"Indicate if a particular point is masked.\n"
 		"\n"
 		"If true, the point is masked and should not be used in processing\n"
 		"(e.g., don't do image matching) \n"
 		""},
-	 { (char *)"Mask_region_masked", _wrap_Mask_region_masked, METH_VARARGS, (char *)"\n"
-		"virtual bool GeoCal::Mask::region_masked(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc) const =0\n"
+	 { (char *)"GroundMask_region_masked", _wrap_GroundMask_region_masked, METH_VARARGS, (char *)"\n"
+		"virtual bool GeoCal::GroundMask::region_masked(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc) const =0\n"
 		"Indicated if a region is all masked or not.\n"
 		"\n"
 		"See the discussion in the comments of Mask for detailed discussion of\n"
 		"the check. \n"
 		""},
-	 { (char *)"Mask___str__", (PyCFunction)_wrap_Mask___str__, METH_O, NULL},
-	 { (char *)"delete_Mask", (PyCFunction)_wrap_delete_Mask, METH_O, (char *)"\n"
-		"virtual GeoCal::Mask::~Mask()\n"
+	 { (char *)"GroundMask___str__", (PyCFunction)_wrap_GroundMask___str__, METH_O, NULL},
+	 { (char *)"delete_GroundMask", (PyCFunction)_wrap_delete_GroundMask, METH_O, (char *)"\n"
+		"virtual GeoCal::GroundMask::~GroundMask()\n"
 		"Destructor. \n"
 		""},
-	 { (char *)"Mask_swigregister", Mask_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_CombinedMask", _wrap_new_CombinedMask, METH_VARARGS, (char *)"\n"
-		"GeoCal::CombinedMask::CombinedMask(It First, It Last)\n"
+	 { (char *)"GroundMask_swigregister", GroundMask_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_CombinedGroundMask", _wrap_new_CombinedGroundMask, METH_VARARGS, (char *)"\n"
+		"GeoCal::CombinedGroundMask::CombinedGroundMask(It First, It Last)\n"
 		"Create a CombinedMask using the given set of masks, where we get this\n"
 		"from a general InputIterator. \n"
 		""},
-	 { (char *)"CombinedMask_mask_list_set", _wrap_CombinedMask_mask_list_set, METH_VARARGS, NULL},
-	 { (char *)"CombinedMask_mask_list_get", (PyCFunction)_wrap_CombinedMask_mask_list_get, METH_O, NULL},
-	 { (char *)"delete_CombinedMask", (PyCFunction)_wrap_delete_CombinedMask, METH_O, (char *)"\n"
-		"virtual GeoCal::CombinedMask::~CombinedMask()\n"
+	 { (char *)"CombinedGroundMask_mask_list_set", _wrap_CombinedGroundMask_mask_list_set, METH_VARARGS, NULL},
+	 { (char *)"CombinedGroundMask_mask_list_get", (PyCFunction)_wrap_CombinedGroundMask_mask_list_get, METH_O, NULL},
+	 { (char *)"delete_CombinedGroundMask", (PyCFunction)_wrap_delete_CombinedGroundMask, METH_O, (char *)"\n"
+		"virtual GeoCal::CombinedGroundMask::~CombinedGroundMask()\n"
 		"\n"
 		""},
-	 { (char *)"CombinedMask_swigregister", CombinedMask_swigregister, METH_VARARGS, NULL},
-	 { (char *)"CombinedMask_swiginit", CombinedMask_swiginit, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask_iterator", (PyCFunction)_wrap_Vector_Mask_iterator, METH_O, NULL},
-	 { (char *)"Vector_Mask___nonzero__", (PyCFunction)_wrap_Vector_Mask___nonzero__, METH_O, NULL},
-	 { (char *)"Vector_Mask___bool__", (PyCFunction)_wrap_Vector_Mask___bool__, METH_O, NULL},
-	 { (char *)"Vector_Mask___len__", (PyCFunction)_wrap_Vector_Mask___len__, METH_O, NULL},
-	 { (char *)"Vector_Mask_pop", (PyCFunction)_wrap_Vector_Mask_pop, METH_O, NULL},
-	 { (char *)"Vector_Mask___getslice__", _wrap_Vector_Mask___getslice__, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask___setslice__", _wrap_Vector_Mask___setslice__, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask___delslice__", _wrap_Vector_Mask___delslice__, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask___delitem__", _wrap_Vector_Mask___delitem__, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask___getitem__", _wrap_Vector_Mask___getitem__, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask___setitem__", _wrap_Vector_Mask___setitem__, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask_append", _wrap_Vector_Mask_append, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask_empty", (PyCFunction)_wrap_Vector_Mask_empty, METH_O, NULL},
-	 { (char *)"Vector_Mask_size", (PyCFunction)_wrap_Vector_Mask_size, METH_O, NULL},
-	 { (char *)"Vector_Mask_clear", (PyCFunction)_wrap_Vector_Mask_clear, METH_O, NULL},
-	 { (char *)"Vector_Mask_swap", _wrap_Vector_Mask_swap, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask_get_allocator", (PyCFunction)_wrap_Vector_Mask_get_allocator, METH_O, NULL},
-	 { (char *)"Vector_Mask_begin", (PyCFunction)_wrap_Vector_Mask_begin, METH_O, NULL},
-	 { (char *)"Vector_Mask_end", (PyCFunction)_wrap_Vector_Mask_end, METH_O, NULL},
-	 { (char *)"Vector_Mask_rbegin", (PyCFunction)_wrap_Vector_Mask_rbegin, METH_O, NULL},
-	 { (char *)"Vector_Mask_rend", (PyCFunction)_wrap_Vector_Mask_rend, METH_O, NULL},
-	 { (char *)"Vector_Mask_pop_back", (PyCFunction)_wrap_Vector_Mask_pop_back, METH_O, NULL},
-	 { (char *)"Vector_Mask_erase", _wrap_Vector_Mask_erase, METH_VARARGS, NULL},
-	 { (char *)"new_Vector_Mask", _wrap_new_Vector_Mask, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask_push_back", _wrap_Vector_Mask_push_back, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask_front", (PyCFunction)_wrap_Vector_Mask_front, METH_O, NULL},
-	 { (char *)"Vector_Mask_back", (PyCFunction)_wrap_Vector_Mask_back, METH_O, NULL},
-	 { (char *)"Vector_Mask_assign", _wrap_Vector_Mask_assign, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask_resize", _wrap_Vector_Mask_resize, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask_insert", _wrap_Vector_Mask_insert, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask_reserve", _wrap_Vector_Mask_reserve, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask_capacity", (PyCFunction)_wrap_Vector_Mask_capacity, METH_O, NULL},
-	 { (char *)"delete_Vector_Mask", (PyCFunction)_wrap_delete_Vector_Mask, METH_O, NULL},
-	 { (char *)"Vector_Mask_swigregister", Vector_Mask_swigregister, METH_VARARGS, NULL},
-	 { (char *)"Vector_Mask_swiginit", Vector_Mask_swiginit, METH_VARARGS, NULL},
+	 { (char *)"CombinedGroundMask_swigregister", CombinedGroundMask_swigregister, METH_VARARGS, NULL},
+	 { (char *)"CombinedGroundMask_swiginit", CombinedGroundMask_swiginit, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask_iterator", (PyCFunction)_wrap_Vector_GroundMask_iterator, METH_O, NULL},
+	 { (char *)"Vector_GroundMask___nonzero__", (PyCFunction)_wrap_Vector_GroundMask___nonzero__, METH_O, NULL},
+	 { (char *)"Vector_GroundMask___bool__", (PyCFunction)_wrap_Vector_GroundMask___bool__, METH_O, NULL},
+	 { (char *)"Vector_GroundMask___len__", (PyCFunction)_wrap_Vector_GroundMask___len__, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_pop", (PyCFunction)_wrap_Vector_GroundMask_pop, METH_O, NULL},
+	 { (char *)"Vector_GroundMask___getslice__", _wrap_Vector_GroundMask___getslice__, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask___setslice__", _wrap_Vector_GroundMask___setslice__, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask___delslice__", _wrap_Vector_GroundMask___delslice__, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask___delitem__", _wrap_Vector_GroundMask___delitem__, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask___getitem__", _wrap_Vector_GroundMask___getitem__, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask___setitem__", _wrap_Vector_GroundMask___setitem__, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask_append", _wrap_Vector_GroundMask_append, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask_empty", (PyCFunction)_wrap_Vector_GroundMask_empty, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_size", (PyCFunction)_wrap_Vector_GroundMask_size, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_clear", (PyCFunction)_wrap_Vector_GroundMask_clear, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_swap", _wrap_Vector_GroundMask_swap, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask_get_allocator", (PyCFunction)_wrap_Vector_GroundMask_get_allocator, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_begin", (PyCFunction)_wrap_Vector_GroundMask_begin, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_end", (PyCFunction)_wrap_Vector_GroundMask_end, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_rbegin", (PyCFunction)_wrap_Vector_GroundMask_rbegin, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_rend", (PyCFunction)_wrap_Vector_GroundMask_rend, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_pop_back", (PyCFunction)_wrap_Vector_GroundMask_pop_back, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_erase", _wrap_Vector_GroundMask_erase, METH_VARARGS, NULL},
+	 { (char *)"new_Vector_GroundMask", _wrap_new_Vector_GroundMask, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask_push_back", _wrap_Vector_GroundMask_push_back, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask_front", (PyCFunction)_wrap_Vector_GroundMask_front, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_back", (PyCFunction)_wrap_Vector_GroundMask_back, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_assign", _wrap_Vector_GroundMask_assign, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask_resize", _wrap_Vector_GroundMask_resize, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask_insert", _wrap_Vector_GroundMask_insert, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask_reserve", _wrap_Vector_GroundMask_reserve, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask_capacity", (PyCFunction)_wrap_Vector_GroundMask_capacity, METH_O, NULL},
+	 { (char *)"delete_Vector_GroundMask", (PyCFunction)_wrap_delete_Vector_GroundMask, METH_O, NULL},
+	 { (char *)"Vector_GroundMask_swigregister", Vector_GroundMask_swigregister, METH_VARARGS, NULL},
+	 { (char *)"Vector_GroundMask_swiginit", Vector_GroundMask_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -8966,9 +8966,12 @@ static void *_p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector(void 
 static void *_p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector *)  ((GeoCal::CartesianFixedLookVector *) x));
 }
-static void *_p_boost__shared_ptrT_GeoCal__CombinedMask_tTo_p_boost__shared_ptrT_GeoCal__Mask_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_tTo_p_boost__shared_ptrT_GeoCal__GroundMask_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Mask >(*(boost::shared_ptr< GeoCal::CombinedMask > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::GroundMask >(*(boost::shared_ptr< GeoCal::CombinedGroundMask > *)x);
+}
+static void *_p_GeoCal__CombinedGroundMaskTo_p_GeoCal__GroundMask(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GroundMask *)  ((GeoCal::CombinedGroundMask *) x));
 }
 static void *_p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -8998,20 +9001,17 @@ static void *_p_GeoCal__TimeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDP
 static void *_p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::GroundCoordinate *) x));
 }
-static void *_p_GeoCal__MaskTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::Mask *) x));
+static void *_p_GeoCal__GroundMaskTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::GroundMask *) x));
 }
-static void *_p_GeoCal__CombinedMaskTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::Mask *) ((GeoCal::CombinedMask *) x));
+static void *_p_GeoCal__CombinedGroundMaskTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::GroundMask *) ((GeoCal::CombinedGroundMask *) x));
 }
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_istream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
 }
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_ostream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
-}
-static void *_p_GeoCal__CombinedMaskTo_p_GeoCal__Mask(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Mask *)  ((GeoCal::CombinedMask *) x));
 }
 static void *_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -9025,13 +9025,13 @@ static void *_p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal_
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::Time > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__Mask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__GroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::Mask > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::GroundMask > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__CombinedMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::CombinedMask > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::CombinedGroundMask > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -9057,11 +9057,11 @@ static swig_type_info _swigt__p_GeoCal__CartesianFixed = {"_p_GeoCal__CartesianF
 static swig_type_info _swigt__p_GeoCal__CartesianFixedLookVector = {"_p_GeoCal__CartesianFixedLookVector", "GeoCal::CartesianFixedLookVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__CartesianInertial = {"_p_GeoCal__CartesianInertial", "GeoCal::CartesianInertial *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__CartesianInertialLookVector = {"_p_GeoCal__CartesianInertialLookVector", "GeoCal::CartesianInertialLookVector *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__CombinedMask = {"_p_GeoCal__CombinedMask", "GeoCal::CombinedMask *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__CombinedGroundMask = {"_p_GeoCal__CombinedGroundMask", "GeoCal::CombinedGroundMask *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObject", "GeoCal::GenericObject *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__GroundCoordinate = {"_p_GeoCal__GroundCoordinate", "GeoCal::GroundCoordinate *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__GroundMask = {"_p_GeoCal__GroundMask", "GeoCal::GroundMask *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__LookVector = {"_p_GeoCal__LookVector", "GeoCal::LookVector *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__Mask = {"_p_GeoCal__Mask", "GeoCal::Mask *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ScLookVector = {"_p_GeoCal__ScLookVector", "GeoCal::ScLookVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__Time = {"_p_GeoCal__Time", "GeoCal::Time *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
@@ -9081,11 +9081,11 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVec
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t = {"_p_boost__shared_ptrT_GeoCal__CartesianFixed_t", "boost::shared_ptr< GeoCal::CartesianFixed > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t = {"_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t", "boost::shared_ptr< GeoCal::CartesianInertialLookVector > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t = {"_p_boost__shared_ptrT_GeoCal__CartesianInertial_t", "boost::shared_ptr< GeoCal::CartesianInertial > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CombinedMask_t = {"_p_boost__shared_ptrT_GeoCal__CombinedMask_t", "boost::shared_ptr< GeoCal::CombinedMask > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t = {"_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t", "boost::shared_ptr< GeoCal::CombinedGroundMask > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_p_boost__shared_ptrT_GeoCal__GenericObject_t", "boost::shared_ptr< GeoCal::GenericObject > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t", "boost::shared_ptr< GeoCal::GroundCoordinate > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GroundMask_t = {"_p_boost__shared_ptrT_GeoCal__GroundMask_t", "boost::shared_ptr< GeoCal::GroundMask > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__LookVector_t = {"_p_boost__shared_ptrT_GeoCal__LookVector_t", "boost::shared_ptr< GeoCal::LookVector > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Mask_t = {"_p_boost__shared_ptrT_GeoCal__Mask_t", "boost::shared_ptr< GeoCal::Mask > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t = {"_p_boost__shared_ptrT_GeoCal__ScLookVector_t", "boost::shared_ptr< GeoCal::ScLookVector > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Time_t = {"_p_boost__shared_ptrT_GeoCal__Time_t", "boost::shared_ptr< GeoCal::Time > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
@@ -9102,13 +9102,13 @@ static swig_type_info _swigt__p_seekdir = {"_p_seekdir", "seekdir *", 0, 0, (voi
 static swig_type_info _swigt__p_size_t = {"_p_size_t", "std::streamsize *|size_t *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_state_type = {"_p_state_type", "state_type *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t = {"_p_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t", "std::vector< boost::shared_ptr< GeoCal::Mask > >::allocator_type *|std::allocator< boost::shared_ptr< GeoCal::Mask > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t = {"_p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t", "std::allocator< boost::shared_ptr< GeoCal::GroundMask > > *|std::vector< boost::shared_ptr< GeoCal::GroundMask > >::allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t", "std::basic_iostream< char,std::char_traits< char > > *|std::iostream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_istreamT_char_std__char_traitsT_char_t_t", "std::basic_istream< char,std::char_traits< char > > *|std::istream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t", "std::basic_ostream< char,std::char_traits< char > > *|std::ostream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT__Tp__Alloc_t = {"_p_std__vectorT__Tp__Alloc_t", "std::vector< _Tp,_Alloc > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t = {"_p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t", "std::vector< boost::shared_ptr< GeoCal::Mask > > *|std::vector< boost::shared_ptr< GeoCal::Mask >,std::allocator< boost::shared_ptr< GeoCal::Mask > > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t = {"_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t", "std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > *|std::vector< boost::shared_ptr< GeoCal::GroundMask > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
@@ -9118,11 +9118,11 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__CartesianFixedLookVector,
   &_swigt__p_GeoCal__CartesianInertial,
   &_swigt__p_GeoCal__CartesianInertialLookVector,
-  &_swigt__p_GeoCal__CombinedMask,
+  &_swigt__p_GeoCal__CombinedGroundMask,
   &_swigt__p_GeoCal__GenericObject,
   &_swigt__p_GeoCal__GroundCoordinate,
+  &_swigt__p_GeoCal__GroundMask,
   &_swigt__p_GeoCal__LookVector,
-  &_swigt__p_GeoCal__Mask,
   &_swigt__p_GeoCal__ScLookVector,
   &_swigt__p_GeoCal__Time,
   &_swigt__p_allocator_type,
@@ -9142,11 +9142,11 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__CombinedMask_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__GroundMask_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__Mask_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__Time_t,
   &_swigt__p_char,
@@ -9163,13 +9163,13 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_size_t,
   &_swigt__p_size_type,
   &_swigt__p_state_type,
-  &_swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t,
+  &_swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t,
   &_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__invalid_argument,
   &_swigt__p_std__vectorT__Tp__Alloc_t,
-  &_swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t,
+  &_swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t,
   &_swigt__p_swig__SwigPyIterator,
   &_swigt__p_traits_type,
   &_swigt__p_value_type,
@@ -9179,11 +9179,11 @@ static swig_cast_info _swigc__p_GeoCal__CartesianFixed[] = {  {&_swigt__p_GeoCal
 static swig_cast_info _swigc__p_GeoCal__CartesianFixedLookVector[] = {  {&_swigt__p_GeoCal__CartesianFixedLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianInertial[] = {  {&_swigt__p_GeoCal__CartesianInertial, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianInertialLookVector[] = {  {&_swigt__p_GeoCal__CartesianInertialLookVector, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__CombinedMask[] = {  {&_swigt__p_GeoCal__CombinedMask, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__LookVector, _p_GeoCal__LookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedMask, _p_GeoCal__CombinedMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Mask, _p_GeoCal__MaskTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__CombinedGroundMask[] = {  {&_swigt__p_GeoCal__CombinedGroundMask, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__LookVector, _p_GeoCal__LookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundMask, _p_GeoCal__GroundMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedGroundMask, _p_GeoCal__CombinedGroundMaskTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GroundCoordinate[] = {  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GroundCoordinate, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GroundMask[] = {  {&_swigt__p_GeoCal__GroundMask, 0, 0, 0},  {&_swigt__p_GeoCal__CombinedGroundMask, _p_GeoCal__CombinedGroundMaskTo_p_GeoCal__GroundMask, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__LookVector[] = {  {&_swigt__p_GeoCal__LookVector, 0, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__Mask[] = {  {&_swigt__p_GeoCal__CombinedMask, _p_GeoCal__CombinedMaskTo_p_GeoCal__Mask, 0, 0},  {&_swigt__p_GeoCal__Mask, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ScLookVector[] = {  {&_swigt__p_GeoCal__ScLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Time[] = {  {&_swigt__p_GeoCal__Time, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -9203,11 +9203,11 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVec
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixed_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianInertial_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CombinedMask_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedMask_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedMask_t, _p_boost__shared_ptrT_GeoCal__CombinedMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Mask_t, _p_boost__shared_ptrT_GeoCal__Mask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t, _p_boost__shared_ptrT_GeoCal__LookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, _p_boost__shared_ptrT_GeoCal__CartesianInertial_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, _p_boost__shared_ptrT_GeoCal__GroundCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundMask_t, _p_boost__shared_ptrT_GeoCal__GroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, _p_boost__shared_ptrT_GeoCal__CombinedGroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t, _p_boost__shared_ptrT_GeoCal__LookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, _p_boost__shared_ptrT_GeoCal__CartesianInertial_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, _p_boost__shared_ptrT_GeoCal__GroundCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GroundMask_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundMask_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, _p_boost__shared_ptrT_GeoCal__CombinedGroundMask_tTo_p_boost__shared_ptrT_GeoCal__GroundMask_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Mask_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedMask_t, _p_boost__shared_ptrT_GeoCal__CombinedMask_tTo_p_boost__shared_ptrT_GeoCal__Mask_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Mask_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
@@ -9224,13 +9224,13 @@ static swig_cast_info _swigc__p_seekdir[] = {  {&_swigt__p_seekdir, 0, 0, 0},{0,
 static swig_cast_info _swigc__p_size_t[] = {  {&_swigt__p_size_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_state_type[] = {  {&_swigt__p_state_type, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t[] = {  {&_swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t[] = {  {&_swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT__Tp__Alloc_t[] = {  {&_swigt__p_std__vectorT__Tp__Alloc_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t[] = {  {&_swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t[] = {  {&_swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -9240,11 +9240,11 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__CartesianFixedLookVector,
   _swigc__p_GeoCal__CartesianInertial,
   _swigc__p_GeoCal__CartesianInertialLookVector,
-  _swigc__p_GeoCal__CombinedMask,
+  _swigc__p_GeoCal__CombinedGroundMask,
   _swigc__p_GeoCal__GenericObject,
   _swigc__p_GeoCal__GroundCoordinate,
+  _swigc__p_GeoCal__GroundMask,
   _swigc__p_GeoCal__LookVector,
-  _swigc__p_GeoCal__Mask,
   _swigc__p_GeoCal__ScLookVector,
   _swigc__p_GeoCal__Time,
   _swigc__p_allocator_type,
@@ -9264,11 +9264,11 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixed_t,
   _swigc__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t,
   _swigc__p_boost__shared_ptrT_GeoCal__CartesianInertial_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__CombinedMask_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t,
   _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   _swigc__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__GroundMask_t,
   _swigc__p_boost__shared_ptrT_GeoCal__LookVector_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__Mask_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t,
   _swigc__p_boost__shared_ptrT_GeoCal__Time_t,
   _swigc__p_char,
@@ -9285,13 +9285,13 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_size_t,
   _swigc__p_size_type,
   _swigc__p_state_type,
-  _swigc__p_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t,
+  _swigc__p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t,
   _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__invalid_argument,
   _swigc__p_std__vectorT__Tp__Alloc_t,
-  _swigc__p_std__vectorT_boost__shared_ptrT_GeoCal__Mask_t_std__allocatorT_boost__shared_ptrT_GeoCal__Mask_t_t_t,
+  _swigc__p_std__vectorT_boost__shared_ptrT_GeoCal__GroundMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundMask_t_t_t,
   _swigc__p_swig__SwigPyIterator,
   _swigc__p_traits_type,
   _swigc__p_value_type,
@@ -9981,12 +9981,12 @@ SWIG_init(void) {
   
   SWIG_Python_SetConstant(d, "SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Mask))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Mask >("boost::shared_ptr< GeoCal::Mask > *"));
+  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::GroundMask))] =
+  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::GroundMask >("boost::shared_ptr< GeoCal::GroundMask > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CombinedMask))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CombinedMask >("boost::shared_ptr< GeoCal::CombinedMask > *"));
+  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CombinedGroundMask))] =
+  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CombinedGroundMask >("boost::shared_ptr< GeoCal::CombinedGroundMask > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

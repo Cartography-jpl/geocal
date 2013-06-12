@@ -1,12 +1,12 @@
-#ifndef MASK_H
-#define MASK_H
+#ifndef GROUND_MASK_H
+#define GROUND_MASK_H
 #include "printable.h"
 #include "ground_coordinate.h"
 #include <vector>
 
 namespace GeoCal {
 /****************************************************************//**
-  This provides a Mask, which can be used to prevent doing some kind
+  This provides a GroundMask, which can be used to prevent doing some kind
   of processing. An example is a using a Land/Water mask to restrict
   image matching to land, or a cloud mask to restrict image matching
   to cloud free areas.
@@ -40,15 +40,17 @@ namespace GeoCal {
   derived class uses - a common approach is to mask if any of the 4
   neighboring pixels are masked (but check the derived class for
   details).
+
+  This mask works in GroundCoordinates, cf. ImageMask.
 *******************************************************************/
 
-class Mask : public Printable<Mask> {
+class GroundMask : public Printable<GroundMask> {
 public:
 //-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
 
-  virtual ~Mask() {}
+  virtual ~GroundMask() {}
 
 //-----------------------------------------------------------------------
 /// Indicate if a particular point is masked. If true, the point is
@@ -86,29 +88,29 @@ public:
   When there are no masks, we return true.
 *******************************************************************/
 
-class CombinedMask: public Mask {
+class CombinedGroundMask: public GroundMask {
 public:
 //-----------------------------------------------------------------------
 /// Create a empty CombinedMask.
 //-----------------------------------------------------------------------
 
-  CombinedMask() {}
+  CombinedGroundMask() {}
 
 //-----------------------------------------------------------------------
 /// Create a CombinedMask using the given set of masks.
 //-----------------------------------------------------------------------
 
-  CombinedMask(const std::vector<boost::shared_ptr<Mask> >& Ml)
+  CombinedGroundMask(const std::vector<boost::shared_ptr<GroundMask> >& Ml)
     : mask_list(Ml) {}
 
-  virtual ~CombinedMask() {}
+  virtual ~CombinedGroundMask() {}
 
 //-----------------------------------------------------------------------
 /// Create a CombinedMask using the given set of masks, where we get
 /// this from a general InputIterator.
 //-----------------------------------------------------------------------
 
-  template<typename It> CombinedMask(It First, It Last)
+  template<typename It> CombinedGroundMask(It First, It Last)
     : mask_list(First, Last) {}
 
   virtual bool mask(const GroundCoordinate& Gc) const;
@@ -125,7 +127,7 @@ public:
 /// Possibly empty set of masks to use.
 //-----------------------------------------------------------------------
 
-  std::vector<boost::shared_ptr<Mask> > mask_list;
+  std::vector<boost::shared_ptr<GroundMask> > mask_list;
 };
 
 }

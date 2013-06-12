@@ -9,7 +9,7 @@
 %base_import(generic_object)
 %import "image_coordinate.i"
 %import "raster_image.i"
-%import "mask.i"
+%import "ground_mask.i"
 %geocal_shared_ptr(GeoCal::InterestPoint);
 %geocal_shared_ptr(GeoCal::FeatureDetector);
 namespace GeoCal {
@@ -41,7 +41,7 @@ public:
                    interest_point_detect(const RasterImage& Img) const = 0;
   boost::shared_ptr<ImageCoordinate>
   interest_point_grid_ptr(const RasterImage& Img,
-			  const Mask& M, int i, int j,
+			  const GroundMask& M, int i, int j,
 			  int Number_grid_line, int Number_grid_sample, 
 			  int Border = 0) const;
   boost::shared_ptr<ImageCoordinate>

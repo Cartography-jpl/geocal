@@ -166,13 +166,13 @@ void RpcImage::set_ref_img(const RasterImage& Ref_img,
 ///
 /// We use the FeatureDetector Fd to determine where to match, the
 /// areas we look for a feature is in each grid square of
-/// Feature_grid_space x Feature_grid_space. We use the Mask to
+/// Feature_grid_space x Feature_grid_space. We use the GroundMask to
 /// exclude areas that we should not do matching in.
 ///
 /// We collect the interest points from ref_img.
 //-----------------------------------------------------------------------
 
-void RpcImage::interest_point(const FeatureDetector& Fd, const Mask& M,
+void RpcImage::interest_point(const FeatureDetector& Fd, const GroundMask& M,
 	            int Feature_grid_space)
 {
   std::cerr << "Starting Interest Points. Elapsed time: " << tmr.elapsed() << " s.\n";
@@ -272,8 +272,8 @@ double RpcImage::match(const RasterImage& New_img,
 /// areas we look for a feature is in each grid square of
 /// Feature_grid_space x Feature_grid_space. We then match at these
 /// features between the reference and map projected images. We use
-/// the supplied Mask to mask out areas that we should not do matching
-/// on (e.g., water, clouds). The default Mask doesn't mask any areas.
+/// the supplied GroundMask to mask out areas that we should not do matching
+/// on (e.g., water, clouds). The default GroundMask doesn't mask any areas.
 ///
 /// We update the line_offset and sample_offset only of rpc() to
 /// reduce the difference between the map projected image and the
@@ -300,7 +300,7 @@ double RpcImage::match(const RasterImage& New_img,
 
 void RpcImage::fit(const RasterImage& Ref_img,
 		   double Max_diff,
-		   const Mask& M,
+		   const GroundMask& M,
 		   const FeatureDetector& Fd, 
 		   const ImageMatcher& Coarse_im,
 		   const ImageMatcher& Fine_im,
@@ -415,7 +415,7 @@ void RpcImage::fit(const RasterImage& Ref_img,
 
 double RpcImage::fit_coarse(const RasterImage& Ref_img,
 			    const FeatureDetector& Fd,
-			    const Mask& M,
+			    const GroundMask& M,
 			    const ImageMatcher& Im,
 			    double Max_diff,
 			    double Match_search,

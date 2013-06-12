@@ -14,8 +14,8 @@ public:
 /// Diagnostic codes indicates why a match failed.
 //-----------------------------------------------------------------------
 
-  enum Diagnostic {NO_FAIL = 0, TOO_CLOSE_TO_IMAGE_EDGE = 1,
-		   VARIANCE_TOO_LOW = 2, CORRELATION_TO_LOW = 3};
+  enum Diagnostic {NO_FAIL = 0, IMAGE_MASKED = 1, TOO_CLOSE_TO_IMAGE_EDGE = 2,
+		   VARIANCE_TOO_LOW = 3, CORRELATION_TO_LOW = 4};
   CcorrMatcher(int Target_nline = 37, int Target_nsamp = 37, int
 	       Template_nline = 9, int Template_nsamp = 9, double Min_ccorr =
 	       0.3, double Min_variance = 0);
@@ -25,12 +25,15 @@ public:
 //-----------------------------------------------------------------------
 
   virtual ~CcorrMatcher() {}
-  virtual void match(const RasterImage& Ref, const RasterImage&
-		     New, const ImageCoordinate& Ref_loc, const
-		     ImageCoordinate& New_guess, 
-		     ImageCoordinate& New_res,
-		     double& Line_sigma, double& Sample_sigma,
-		     bool& Success, int* Diagnostic = 0) const;
+  virtual void match_mask(const RasterImage& Ref, const ImageMask& Ref_mask,
+			  const RasterImage& New, 
+			  const ImageMask& New_mask,
+			  const ImageCoordinate& Ref_loc, const
+			  ImageCoordinate& New_guess, 
+			  ImageCoordinate& New_res,
+			  double& Line_sigma, double& Sample_sigma,
+			  bool& Success,
+			  int* Diagnostic = 0) const;
 
 //-----------------------------------------------------------------------
 /// Minimum correlation threshold.

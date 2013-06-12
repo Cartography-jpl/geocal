@@ -46,12 +46,16 @@ CcorrMatcher::CcorrMatcher(int Target_nline, int Target_nsamp, int
 /// parameters of a LsmMatcher).
 //-----------------------------------------------------------------------
 
-void CcorrMatcher::match(const RasterImage& Ref, const RasterImage&
-			 New, const ImageCoordinate& Ref_loc, const
-			 ImageCoordinate& New_guess, 
-			 ImageCoordinate& New_res,
-			 double& Line_sigma, double& Sample_sigma,
-			 bool& Success, int* Diagnostic) const
+void CcorrMatcher::match_mask
+(const RasterImage& Ref, 
+ const ImageMask& Ref_mask,			 
+ const RasterImage& New, 
+ const ImageMask& New_mask,
+ const ImageCoordinate& Ref_loc, 
+ const ImageCoordinate& New_guess, 
+ ImageCoordinate& New_res,
+ double& Line_sigma, double& Sample_sigma,
+ bool& Success, int* Diagnostic) const
 {
   Success = false;		// We'll change this once we succeed.
   int ref_line = int(Ref_loc.line) - (template_number_line() - 1) / 2;
@@ -78,6 +82,19 @@ void CcorrMatcher::match(const RasterImage& Ref, const RasterImage&
      new_sample + target_number_sample()   >=New.number_sample()) {
     if(Diagnostic)
       *Diagnostic = TOO_CLOSE_TO_IMAGE_EDGE;
+    return;
+  }
+
+//-----------------------------------------------------------------------
+// Check if any of the date we want to use is masked.
+//-----------------------------------------------------------------------
+
+  if(Ref_mask.area_any_masked(ref_line, ref_sample, template_number_line(),
+			      template_number_sample()) ||
+     New_mask.area_any_masked(new_line, new_sample, target_number_line(),
+			      target_number_sample())) {
+    if(Diagnostic)
+      *Diagnostic = IMAGE_MASKED;
     return;
   }
 

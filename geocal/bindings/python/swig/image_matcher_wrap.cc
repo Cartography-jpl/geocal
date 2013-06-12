@@ -3453,74 +3453,76 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__CartesianFixedLookVector swig_types[1]
 #define SWIGTYPE_p_GeoCal__CartesianInertial swig_types[2]
 #define SWIGTYPE_p_GeoCal__CartesianInertialLookVector swig_types[3]
-#define SWIGTYPE_p_GeoCal__CoordinateConverter swig_types[4]
-#define SWIGTYPE_p_GeoCal__Dem swig_types[5]
-#define SWIGTYPE_p_GeoCal__GenericObject swig_types[6]
-#define SWIGTYPE_p_GeoCal__GeodeticConverter swig_types[7]
-#define SWIGTYPE_p_GeoCal__GroundCoordinate swig_types[8]
-#define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[9]
-#define SWIGTYPE_p_GeoCal__ImageMatcher swig_types[10]
-#define SWIGTYPE_p_GeoCal__LookVector swig_types[11]
-#define SWIGTYPE_p_GeoCal__MapInfo swig_types[12]
-#define SWIGTYPE_p_GeoCal__RasterImage swig_types[13]
-#define SWIGTYPE_p_GeoCal__RasterImageTileIterator swig_types[14]
-#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[15]
-#define SWIGTYPE_p_GeoCal__Time swig_types[16]
-#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[17]
-#define SWIGTYPE_p_allocator_type swig_types[18]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[19]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[20]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[21]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[22]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[23]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[24]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[25]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[26]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[27]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[28]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[29]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[30]
-#define SWIGTYPE_p_bool swig_types[31]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[32]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[33]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[34]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[35]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[36]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[37]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[38]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[39]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[40]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[41]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMatcher_t swig_types[42]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVector_t swig_types[43]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[44]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[45]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[46]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[47]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[48]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[49]
-#define SWIGTYPE_p_char swig_types[50]
-#define SWIGTYPE_p_char_type swig_types[51]
-#define SWIGTYPE_p_difference_type swig_types[52]
-#define SWIGTYPE_p_double swig_types[53]
-#define SWIGTYPE_p_fmtflags swig_types[54]
-#define SWIGTYPE_p_int swig_types[55]
-#define SWIGTYPE_p_int_type swig_types[56]
-#define SWIGTYPE_p_iostate swig_types[57]
-#define SWIGTYPE_p_off_type swig_types[58]
-#define SWIGTYPE_p_openmode swig_types[59]
-#define SWIGTYPE_p_pos_type swig_types[60]
-#define SWIGTYPE_p_seekdir swig_types[61]
-#define SWIGTYPE_p_size_t swig_types[62]
-#define SWIGTYPE_p_size_type swig_types[63]
-#define SWIGTYPE_p_state_type swig_types[64]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[65]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[66]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[67]
-#define SWIGTYPE_p_traits_type swig_types[68]
-#define SWIGTYPE_p_value_type swig_types[69]
-static swig_type_info *swig_types[71];
-static swig_module_info swig_module = {swig_types, 70, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__CombinedImageMask swig_types[4]
+#define SWIGTYPE_p_GeoCal__CoordinateConverter swig_types[5]
+#define SWIGTYPE_p_GeoCal__Dem swig_types[6]
+#define SWIGTYPE_p_GeoCal__GenericObject swig_types[7]
+#define SWIGTYPE_p_GeoCal__GeodeticConverter swig_types[8]
+#define SWIGTYPE_p_GeoCal__GroundCoordinate swig_types[9]
+#define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[10]
+#define SWIGTYPE_p_GeoCal__ImageMask swig_types[11]
+#define SWIGTYPE_p_GeoCal__ImageMatcher swig_types[12]
+#define SWIGTYPE_p_GeoCal__LookVector swig_types[13]
+#define SWIGTYPE_p_GeoCal__MapInfo swig_types[14]
+#define SWIGTYPE_p_GeoCal__RasterImage swig_types[15]
+#define SWIGTYPE_p_GeoCal__RasterImageTileIterator swig_types[16]
+#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[17]
+#define SWIGTYPE_p_GeoCal__Time swig_types[18]
+#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[19]
+#define SWIGTYPE_p_allocator_type swig_types[20]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[25]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[26]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[27]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[28]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[29]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[30]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[31]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[32]
+#define SWIGTYPE_p_bool swig_types[33]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[34]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[35]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[36]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[37]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[38]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[39]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[40]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[41]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[42]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[43]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMatcher_t swig_types[44]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVector_t swig_types[45]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[46]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[47]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[48]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[49]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[50]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[51]
+#define SWIGTYPE_p_char swig_types[52]
+#define SWIGTYPE_p_char_type swig_types[53]
+#define SWIGTYPE_p_difference_type swig_types[54]
+#define SWIGTYPE_p_double swig_types[55]
+#define SWIGTYPE_p_fmtflags swig_types[56]
+#define SWIGTYPE_p_int swig_types[57]
+#define SWIGTYPE_p_int_type swig_types[58]
+#define SWIGTYPE_p_iostate swig_types[59]
+#define SWIGTYPE_p_off_type swig_types[60]
+#define SWIGTYPE_p_openmode swig_types[61]
+#define SWIGTYPE_p_pos_type swig_types[62]
+#define SWIGTYPE_p_seekdir swig_types[63]
+#define SWIGTYPE_p_size_t swig_types[64]
+#define SWIGTYPE_p_size_type swig_types[65]
+#define SWIGTYPE_p_state_type swig_types[66]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[67]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[68]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[69]
+#define SWIGTYPE_p_traits_type swig_types[70]
+#define SWIGTYPE_p_value_type swig_types[71]
+static swig_type_info *swig_types[73];
+static swig_module_info swig_module = {swig_types, 72, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5208,6 +5210,234 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ImageMatcher_match_mask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageMatcher *arg1 = (GeoCal::ImageMatcher *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  GeoCal::ImageMask *arg3 = 0 ;
+  GeoCal::RasterImage *arg4 = 0 ;
+  GeoCal::ImageMask *arg5 = 0 ;
+  GeoCal::ImageCoordinate *arg6 = 0 ;
+  GeoCal::ImageCoordinate *arg7 = 0 ;
+  GeoCal::ImageCoordinate *arg8 = 0 ;
+  double *arg9 = 0 ;
+  double *arg10 = 0 ;
+  bool *arg11 = 0 ;
+  int *arg12 = (int *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageMatcher const > tempshared1 ;
+  boost::shared_ptr< GeoCal::ImageMatcher const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared4 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  void *argp6 = 0 ;
+  int res6 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared6 ;
+  void *argp7 = 0 ;
+  int res7 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared7 ;
+  GeoCal::ImageCoordinate temp8 ;
+  double temp9 ;
+  int res9 = SWIG_TMPOBJ ;
+  double temp10 ;
+  int res10 = SWIG_TMPOBJ ;
+  bool temp11 ;
+  int res11 = SWIG_TMPOBJ ;
+  int temp12 ;
+  int res12 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[7] ;
+  
+  {
+    arg8 = &temp8;
+  }
+  arg9 = &temp9;
+  arg10 = &temp10;
+  arg11 = &temp11;
+  arg12 = &temp12;
+  if (!SWIG_Python_UnpackTuple(args,"ImageMatcher_match_mask",7,7,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMatcher_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ImageMatcher_match_mask" "', argument " "1"" of type '" "GeoCal::ImageMatcher const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageMatcher > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageMatcher > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageMatcher * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::ImageMatcher > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageMatcher * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ImageMatcher_match_mask" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageMatcher_match_mask" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_GeoCal__ImageMask,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "ImageMatcher_match_mask" "', argument " "3"" of type '" "GeoCal::ImageMask const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageMatcher_match_mask" "', argument " "3"" of type '" "GeoCal::ImageMask const &""'"); 
+  }
+  arg3 = reinterpret_cast< GeoCal::ImageMask * >(argp3);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "ImageMatcher_match_mask" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageMatcher_match_mask" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp4);
+        arg4 = const_cast< GeoCal::RasterImage * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp4)->get());
+      }
+    }
+  }
+  res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_GeoCal__ImageMask,  0  | 0);
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "ImageMatcher_match_mask" "', argument " "5"" of type '" "GeoCal::ImageMask const &""'"); 
+  }
+  if (!argp5) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageMatcher_match_mask" "', argument " "5"" of type '" "GeoCal::ImageMask const &""'"); 
+  }
+  arg5 = reinterpret_cast< GeoCal::ImageMask * >(argp5);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res6)) {
+      arg6 = ptr;
+    } else {
+      res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res6)) {
+        SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "ImageMatcher_match_mask" "', argument " "6"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp6) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageMatcher_match_mask" "', argument " "6"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared6 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp6);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp6);
+        arg6 = const_cast< GeoCal::ImageCoordinate * >(tempshared6.get());
+      } else {
+        arg6 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp6)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res7 = SWIG_ConvertPtrAndOwn(swig_obj[6], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res7)) {
+      arg7 = ptr;
+    } else {
+      res7 = SWIG_ConvertPtrAndOwn(swig_obj[6], &argp7, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res7)) {
+        SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "ImageMatcher_match_mask" "', argument " "7"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp7) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageMatcher_match_mask" "', argument " "7"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared7 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp7);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp7);
+        arg7 = const_cast< GeoCal::ImageCoordinate * >(tempshared7.get());
+      } else {
+        arg7 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp7)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::ImageMatcher const *)arg1)->match_mask((GeoCal::RasterImage const &)*arg2,(GeoCal::ImageMask const &)*arg3,(GeoCal::RasterImage const &)*arg4,(GeoCal::ImageMask const &)*arg5,(GeoCal::ImageCoordinate const &)*arg6,(GeoCal::ImageCoordinate const &)*arg7,*arg8,*arg9,*arg10,*arg11,arg12);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<GeoCal::ImageCoordinate> *smartresult = new boost::shared_ptr<GeoCal::ImageCoordinate>(new GeoCal::ImageCoordinate(*arg8));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsTmpObj(res9)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg9)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res9) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg9), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsTmpObj(res10)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg10)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res10) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg10), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsTmpObj(res11)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_bool((*arg11)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res11) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg11), SWIGTYPE_p_bool, new_flags));
+  }
+  if (SWIG_IsTmpObj(res12)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_int((*arg12)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res12) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg12), SWIGTYPE_p_int, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ImageMatcher___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::ImageMatcher *arg1 = (GeoCal::ImageMatcher *) 0 ;
@@ -5306,7 +5536,27 @@ static PyMethodDef SwigMethods[] = {
 		"virtual void GeoCal::ImageMatcher::match(const RasterImage &Ref, const RasterImage &New, const ImageCoordinate\n"
 		"&Ref_loc, const ImageCoordinate &New_guess, ImageCoordinate &New_res,\n"
 		"double &Line_sigma, double &Sample_sigma, bool &Success, int\n"
-		"*Diagnostic=0) const =0\n"
+		"*Diagnostic=0) const\n"
+		"Match a point found in the reference image with a point in the new\n"
+		"image.\n"
+		"\n"
+		"A initial guess in the new image is supplied. We return an improved\n"
+		"image in the new image along with the uncertainty if Success is true,\n"
+		"otherwise the match failed.\n"
+		"\n"
+		"The Diagnostic argument is used to indicate why a match failed. For\n"
+		"many purposes you can ignore this, because you need to know detailed\n"
+		"information about the specific ImageMatcher that a user passed to a\n"
+		"function and what the diagnostic codes mean. However, for some\n"
+		"purposes the failure reason can be useful (e.g., tuning parameters of\n"
+		"a LsmMatcher). \n"
+		""},
+	 { (char *)"ImageMatcher_match_mask", _wrap_ImageMatcher_match_mask, METH_VARARGS, (char *)"\n"
+		"virtual void GeoCal::ImageMatcher::match_mask(const RasterImage &Ref, const ImageMask &Ref_mask, const RasterImage\n"
+		"&New, const ImageMask &New_mask, const ImageCoordinate &Ref_loc, const\n"
+		"ImageCoordinate &New_guess, ImageCoordinate &New_res, double\n"
+		"&Line_sigma, double &Sample_sigma, bool &Success, int *Diagnostic=0)\n"
+		"const =0\n"
 		"Match a point found in the reference image with a point in the new\n"
 		"image.\n"
 		"\n"
@@ -5333,25 +5583,6 @@ static PyMethodDef SwigMethods[] = {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_GeoCal__CartesianFixedTo_p_GeoCal__GroundCoordinate(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GroundCoordinate *)  ((GeoCal::CartesianFixed *) x));
-}
-static void *_p_boost__shared_ptrT_GeoCal__GeodeticConverter_tTo_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::CoordinateConverter >(*(boost::shared_ptr< GeoCal::GeodeticConverter > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::CartesianFixedLookVector > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::ScLookVector > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::CartesianInertialLookVector > *)x);
-}
 static void *_p_GeoCal__ScLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector *)  ((GeoCal::ScLookVector *) x));
 }
@@ -5361,66 +5592,12 @@ static void *_p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector(void 
 static void *_p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector *)  ((GeoCal::CartesianFixedLookVector *) x));
 }
-static void *_p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t(void *x, int *newmemory) {
+static void *_p_GeoCal__CartesianFixedTo_p_GeoCal__GroundCoordinate(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GroundCoordinate *)  ((GeoCal::CartesianFixed *) x));
+}
+static void *_p_boost__shared_ptrT_GeoCal__GeodeticConverter_tTo_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GroundCoordinate >(*(boost::shared_ptr< GeoCal::CartesianFixed > *)x);
-}
-static void *_p_GeoCal__ImageMatcherTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageMatcher *) x));
-}
-static void *_p_GeoCal__RasterImageTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::RasterImage *) x));
-}
-static void *_p_GeoCal__DemTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::Dem *) x));
-}
-static void *_p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::GroundCoordinate *) ((GeoCal::CartesianFixed *) x));
-}
-static void *_p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::GroundCoordinate *) x));
-}
-static void *_p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::VicarImageCoordinate *) x));
-}
-static void *_p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageCoordinate *) x));
-}
-static void *_p_GeoCal__MapInfoTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::MapInfo *) x));
-}
-static void *_p_GeoCal__TimeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::Time *) x));
-}
-static void *_p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::CartesianInertial *) x));
-}
-static void *_p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::CartesianFixedLookVector *) x));
-}
-static void *_p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::CartesianInertialLookVector *) x));
-}
-static void *_p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::ScLookVector *) x));
-}
-static void *_p_GeoCal__LookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::LookVector *) x));
-}
-static void *_p_GeoCal__GeodeticConverterTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::CoordinateConverter *) ((GeoCal::GeodeticConverter *) x));
-}
-static void *_p_GeoCal__CoordinateConverterTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::CoordinateConverter *) x));
-}
-static void *_p_GeoCal__RasterImageTileIteratorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::RasterImageTileIterator *) x));
-}
-static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((std::basic_istream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
-}
-static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((std::basic_ostream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
+    return (void *) new boost::shared_ptr< GeoCal::CoordinateConverter >(*(boost::shared_ptr< GeoCal::GeodeticConverter > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__ImageMatcher_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -5490,6 +5667,82 @@ static void *_p_boost__shared_ptrT_GeoCal__RasterImage_tTo_p_boost__shared_ptrT_
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::RasterImage > *)x);
 }
+static void *_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::CartesianFixedLookVector > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::ScLookVector > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::CartesianInertialLookVector > *)x);
+}
+static void *_p_GeoCal__ImageMatcherTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageMatcher *) x));
+}
+static void *_p_GeoCal__RasterImageTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::RasterImage *) x));
+}
+static void *_p_GeoCal__DemTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::Dem *) x));
+}
+static void *_p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::GroundCoordinate *) ((GeoCal::CartesianFixed *) x));
+}
+static void *_p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::GroundCoordinate *) x));
+}
+static void *_p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::VicarImageCoordinate *) x));
+}
+static void *_p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageCoordinate *) x));
+}
+static void *_p_GeoCal__MapInfoTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::MapInfo *) x));
+}
+static void *_p_GeoCal__TimeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::Time *) x));
+}
+static void *_p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::CartesianInertial *) x));
+}
+static void *_p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::CartesianFixedLookVector *) x));
+}
+static void *_p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::CartesianInertialLookVector *) x));
+}
+static void *_p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::ScLookVector *) x));
+}
+static void *_p_GeoCal__LookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::LookVector *) x));
+}
+static void *_p_GeoCal__GeodeticConverterTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::CoordinateConverter *) ((GeoCal::GeodeticConverter *) x));
+}
+static void *_p_GeoCal__CoordinateConverterTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::CoordinateConverter *) x));
+}
+static void *_p_GeoCal__RasterImageTileIteratorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::RasterImageTileIterator *) x));
+}
+static void *_p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GroundCoordinate >(*(boost::shared_ptr< GeoCal::CartesianFixed > *)x);
+}
+static void *_p_GeoCal__CombinedImageMaskTo_p_GeoCal__ImageMask(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::ImageMask *)  ((GeoCal::CombinedImageMask *) x));
+}
+static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((std::basic_ostream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
+}
+static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((std::basic_istream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
+}
 static void *_p_GeoCal__GeodeticConverterTo_p_GeoCal__CoordinateConverter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::CoordinateConverter *)  ((GeoCal::GeodeticConverter *) x));
 }
@@ -5503,6 +5756,8 @@ static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObje
 static swig_type_info _swigt__p_GeoCal__GeodeticConverter = {"_p_GeoCal__GeodeticConverter", "GeoCal::GeodeticConverter *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__GroundCoordinate = {"_p_GeoCal__GroundCoordinate", "GeoCal::GroundCoordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ImageCoordinate = {"_p_GeoCal__ImageCoordinate", "GeoCal::ImageCoordinate *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__ImageMask = {"_p_GeoCal__ImageMask", "GeoCal::ImageMask *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__CombinedImageMask = {"_p_GeoCal__CombinedImageMask", 0, 0, 0, 0, 0};
 static swig_type_info _swigt__p_GeoCal__ImageMatcher = {"_p_GeoCal__ImageMatcher", "GeoCal::ImageMatcher *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__LookVector = {"_p_GeoCal__LookVector", "GeoCal::LookVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__MapInfo = {"_p_GeoCal__MapInfo", "GeoCal::MapInfo *", 0, 0, (void*)0, 0};
@@ -5569,12 +5824,14 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__CartesianFixedLookVector,
   &_swigt__p_GeoCal__CartesianInertial,
   &_swigt__p_GeoCal__CartesianInertialLookVector,
+  &_swigt__p_GeoCal__CombinedImageMask,
   &_swigt__p_GeoCal__CoordinateConverter,
   &_swigt__p_GeoCal__Dem,
   &_swigt__p_GeoCal__GenericObject,
   &_swigt__p_GeoCal__GeodeticConverter,
   &_swigt__p_GeoCal__GroundCoordinate,
   &_swigt__p_GeoCal__ImageCoordinate,
+  &_swigt__p_GeoCal__ImageMask,
   &_swigt__p_GeoCal__ImageMatcher,
   &_swigt__p_GeoCal__LookVector,
   &_swigt__p_GeoCal__MapInfo,
@@ -5647,6 +5904,8 @@ static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal_
 static swig_cast_info _swigc__p_GeoCal__GeodeticConverter[] = {  {&_swigt__p_GeoCal__GeodeticConverter, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GroundCoordinate[] = {  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GroundCoordinate, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ImageCoordinate[] = {  {&_swigt__p_GeoCal__ImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__CombinedImageMask[] = {{&_swigt__p_GeoCal__CombinedImageMask, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__ImageMask[] = {  {&_swigt__p_GeoCal__ImageMask, 0, 0, 0},  {&_swigt__p_GeoCal__CombinedImageMask, _p_GeoCal__CombinedImageMaskTo_p_GeoCal__ImageMask, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ImageMatcher[] = {  {&_swigt__p_GeoCal__ImageMatcher, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__LookVector[] = {  {&_swigt__p_GeoCal__LookVector, 0, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__MapInfo[] = {  {&_swigt__p_GeoCal__MapInfo, 0, 0, 0},{0, 0, 0, 0}};
@@ -5713,12 +5972,14 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__CartesianFixedLookVector,
   _swigc__p_GeoCal__CartesianInertial,
   _swigc__p_GeoCal__CartesianInertialLookVector,
+  _swigc__p_GeoCal__CombinedImageMask,
   _swigc__p_GeoCal__CoordinateConverter,
   _swigc__p_GeoCal__Dem,
   _swigc__p_GeoCal__GenericObject,
   _swigc__p_GeoCal__GeodeticConverter,
   _swigc__p_GeoCal__GroundCoordinate,
   _swigc__p_GeoCal__ImageCoordinate,
+  _swigc__p_GeoCal__ImageMask,
   _swigc__p_GeoCal__ImageMatcher,
   _swigc__p_GeoCal__LookVector,
   _swigc__p_GeoCal__MapInfo,

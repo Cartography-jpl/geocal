@@ -70,12 +70,15 @@ public:
   const LsmMatcher& lsm_matcher() const {return *lsm_matcher_;}
   boost::shared_ptr<LsmMatcher> lsm_matcher_ptr() const 
   {return lsm_matcher_;}
-  virtual void match(const RasterImage& Ref, const RasterImage&
-		     New, const ImageCoordinate& Ref_loc, const
-		     ImageCoordinate& New_guess, 
-		     ImageCoordinate& New_res,
-		     double& Line_sigma, double& Sample_sigma,
-		     bool& Success, int* Diagnostic = 0) const;
+  virtual void match_mask(const RasterImage& Ref, const ImageMask& Ref_mask,
+			  const RasterImage& New, 
+			  const ImageMask& New_mask,
+			  const ImageCoordinate& Ref_loc, const
+			  ImageCoordinate& New_guess, 
+			  ImageCoordinate& New_res,
+			  double& Line_sigma, double& Sample_sigma,
+			  bool& Success,
+			  int* Diagnostic = 0) const;
   virtual void print(std::ostream& Os) const;
 
 //-----------------------------------------------------------------------

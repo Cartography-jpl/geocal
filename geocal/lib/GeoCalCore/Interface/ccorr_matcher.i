@@ -15,12 +15,15 @@ public:
   CcorrMatcher(int Target_nline = 37, int Target_nsamp = 37, int
 	       Template_nline = 9, int Template_nsamp = 9, double Min_ccorr =
 	       0.3, double Min_variance = 0);
-  virtual void match(const RasterImage& Ref, const RasterImage&
-		     New, const ImageCoordinate& Ref_loc, const
-		     ImageCoordinate& New_guess, 
-		     ImageCoordinate &OUTPUT,
-		     double &OUTPUT, double &OUTPUT,
-		     bool &OUTPUT, int *OUTPUT) const;  
+  virtual void match_mask(const RasterImage& Ref, 
+			  const ImageMask& Ref_mask,
+			  const RasterImage& New, 
+			  const ImageMask& New_mask,
+			  const ImageCoordinate& Ref_loc, 
+			  const ImageCoordinate& New_guess, 
+			  ImageCoordinate &OUTPUT,
+			  double &OUTPUT, double &OUTPUT,
+			  bool &OUTPUT, int *OUTPUT) const;
   %python_attribute(min_correlation, double)
   %python_attribute(min_variance, double)
   %python_attribute(target_number_line, int)

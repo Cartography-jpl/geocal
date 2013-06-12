@@ -124,7 +124,7 @@ class ImageMatcher(geocal.generic_object.GenericObject):
         virtual void GeoCal::ImageMatcher::match(const RasterImage &Ref, const RasterImage &New, const ImageCoordinate
         &Ref_loc, const ImageCoordinate &New_guess, ImageCoordinate &New_res,
         double &Line_sigma, double &Sample_sigma, bool &Success, int
-        *Diagnostic=0) const =0
+        *Diagnostic=0) const
         Match a point found in the reference image with a point in the new
         image.
 
@@ -141,8 +141,32 @@ class ImageMatcher(geocal.generic_object.GenericObject):
         """
         return _image_matcher.ImageMatcher_match(self, *args)
 
+    def match_mask(self, *args):
+        """
+        virtual void GeoCal::ImageMatcher::match_mask(const RasterImage &Ref, const ImageMask &Ref_mask, const RasterImage
+        &New, const ImageMask &New_mask, const ImageCoordinate &Ref_loc, const
+        ImageCoordinate &New_guess, ImageCoordinate &New_res, double
+        &Line_sigma, double &Sample_sigma, bool &Success, int *Diagnostic=0)
+        const =0
+        Match a point found in the reference image with a point in the new
+        image.
+
+        A initial guess in the new image is supplied. We return an improved
+        image in the new image along with the uncertainty if Success is true,
+        otherwise the match failed.
+
+        The Diagnostic argument is used to indicate why a match failed. For
+        many purposes you can ignore this, because you need to know detailed
+        information about the specific ImageMatcher that a user passed to a
+        function and what the diagnostic codes mean. However, for some
+        purposes the failure reason can be useful (e.g., tuning parameters of
+        a LsmMatcher). 
+        """
+        return _image_matcher.ImageMatcher_match_mask(self, *args)
+
     __swig_destroy__ = _image_matcher.delete_ImageMatcher
 ImageMatcher.match = new_instancemethod(_image_matcher.ImageMatcher_match,None,ImageMatcher)
+ImageMatcher.match_mask = new_instancemethod(_image_matcher.ImageMatcher_match_mask,None,ImageMatcher)
 ImageMatcher.__str__ = new_instancemethod(_image_matcher.ImageMatcher___str__,None,ImageMatcher)
 ImageMatcher_swigregister = _image_matcher.ImageMatcher_swigregister
 ImageMatcher_swigregister(ImageMatcher)

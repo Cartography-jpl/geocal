@@ -47,10 +47,10 @@ public:
 /// Diagnostic codes indicates why a match failed.
 //-----------------------------------------------------------------------
 
-  enum Diagnostic {NO_FAIL = 0, TOO_CLOSE_TO_IMAGE_EDGE = 1,
-		   EXCEED_MAX_SIGMA = 4, EXCEED_MAX_RADIANCE_VARIANCE = 5,
-		   EXCEED_PRECISION_REQUIREMENT = 6, MOVE_PAST_TARGET = 7,
-                   SOLVE_FAILED = 8};
+  enum Diagnostic {NO_FAIL = 0, IMAGE_MASKED = 1, TOO_CLOSE_TO_IMAGE_EDGE = 2,
+		   EXCEED_MAX_SIGMA = 5, EXCEED_MAX_RADIANCE_VARIANCE = 6,
+		   EXCEED_PRECISION_REQUIREMENT = 7, MOVE_PAST_TARGET = 8,
+                   SOLVE_FAILED = 9};
   LsmMatcher(int Number_line = 21, int Number_sample = 21, int
      Border_size = 3, double Precision_goal = 0.0625, 
      double Precision_requirement = 0.2, 
@@ -64,12 +64,15 @@ public:
 //-----------------------------------------------------------------------
 
   virtual ~LsmMatcher() {}
-  virtual void match(const RasterImage& Ref, const RasterImage&
-		     New, const ImageCoordinate& Ref_loc, const
-		     ImageCoordinate& New_guess, 
-		     ImageCoordinate& New_res,
-		     double& Line_sigma, double& Sample_sigma,
-		     bool& Success, int* Diagnostic = 0) const;
+  virtual void match_mask(const RasterImage& Ref, const ImageMask& Ref_mask,
+			  const RasterImage& New, 
+			  const ImageMask& New_mask,
+			  const ImageCoordinate& Ref_loc, const
+			  ImageCoordinate& New_guess, 
+			  ImageCoordinate& New_res,
+			  double& Line_sigma, double& Sample_sigma,
+			  bool& Success,
+			  int* Diagnostic = 0) const;
 
 //-----------------------------------------------------------------------
 /// Number of lines in target and template.

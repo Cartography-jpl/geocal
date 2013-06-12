@@ -175,12 +175,16 @@ Array<double, 3> LsmMatcher::jacobian() const
 /// parameters of a LsmMatcher).
 //-----------------------------------------------------------------------
 
-void LsmMatcher::match(const RasterImage& Ref, const RasterImage&
-		       New, const ImageCoordinate& Ref_loc, const
-		       ImageCoordinate& New_guess, 
-		       ImageCoordinate& New_res,
-		       double& Line_sigma, double& Sample_sigma,
-		       bool& Success, int* Diagnostic) const
+void LsmMatcher::match_mask
+(const RasterImage& Ref, 
+ const ImageMask& Ref_mask,
+ const RasterImage& New, 
+ const ImageMask& New_mask,
+ const ImageCoordinate& Ref_loc, const
+ ImageCoordinate& New_guess, 
+ ImageCoordinate& New_res,
+ double& Line_sigma, double& Sample_sigma,
+ bool& Success, int* Diagnostic) const
 {
   Success = false;		   // We'll change this once we
 				   // succeed. .
@@ -217,6 +221,23 @@ void LsmMatcher::match(const RasterImage& Ref, const RasterImage&
      >=New.number_sample()) {
     if(Diagnostic)
       *Diagnostic = TOO_CLOSE_TO_IMAGE_EDGE;
+    return;
+  }
+
+//-----------------------------------------------------------------------
+// Check if any of the date we want to use is masked.
+//-----------------------------------------------------------------------
+
+  if(Ref_mask.area_any_masked((int) ref_line, (int) ref_sample, 
+			      number_line() + 2 * kadjust + 1,
+			      number_sample() + 2 * kadjust + 1) ||
+     New_mask.area_any_masked((int) new_line, (int) new_sample, 
+			      number_line() + 2 * kadjust + 
+			      2 * border_size() + 1,
+			      number_sample() + 2 * kadjust + 
+			      2 * border_size() + 1)) {
+    if(Diagnostic)
+      *Diagnostic = IMAGE_MASKED;
     return;
   }
 

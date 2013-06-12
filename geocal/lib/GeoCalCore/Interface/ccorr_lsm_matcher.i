@@ -18,12 +18,15 @@ public:
   CcorrLsmMatcher(const boost::shared_ptr<CcorrMatcher> Ccorr,
 		  const boost::shared_ptr<LsmMatcher> LsmMatcher,
 		  bool Accept_ccorr_only = false);
-  virtual void match(const RasterImage& Ref, const RasterImage&
-		     New, const ImageCoordinate& Ref_loc, const
-		     ImageCoordinate& New_guess, 
-		     ImageCoordinate &OUTPUT,
-		     double &OUTPUT, double &OUTPUT,
-		     bool &OUTPUT, int *OUTPUT) const;  
+  virtual void match_mask(const RasterImage& Ref, 
+			  const ImageMask& Ref_mask,
+			  const RasterImage& New, 
+			  const ImageMask& New_mask,
+			  const ImageCoordinate& Ref_loc, 
+			  const ImageCoordinate& New_guess, 
+			  ImageCoordinate &OUTPUT,
+			  double &OUTPUT, double &OUTPUT,
+			  bool &OUTPUT, int *OUTPUT) const;
   %python_attribute2(ccorr_matcher, ccorr_matcher_ptr, 
 		     boost::shared_ptr<CcorrMatcher>)
   %python_attribute2(lsm_matcher, lsm_matcher_ptr, 

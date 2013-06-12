@@ -4,7 +4,7 @@
 
 using namespace GeoCal;
 
-BOOST_FIXTURE_TEST_SUITE(mask, GlobalFixture)
+BOOST_FIXTURE_TEST_SUITE(ground_mask, GlobalFixture)
 
 class EmptyMask : public GroundMask {
 public:

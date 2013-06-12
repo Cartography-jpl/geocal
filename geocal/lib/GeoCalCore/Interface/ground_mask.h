@@ -62,7 +62,7 @@ public:
 
 //-----------------------------------------------------------------------
 /// Indicated if a region is all masked or not. See the discussion in
-/// the comments of Mask for detailed discussion of the check.
+/// the comments of GroundMask for detailed discussion of the check.
 //-----------------------------------------------------------------------
 
   virtual bool region_masked(const GroundCoordinate& Ulc, 
@@ -91,13 +91,13 @@ public:
 class CombinedGroundMask: public GroundMask {
 public:
 //-----------------------------------------------------------------------
-/// Create a empty CombinedMask.
+/// Create a empty CombinedGroundMask.
 //-----------------------------------------------------------------------
 
   CombinedGroundMask() {}
 
 //-----------------------------------------------------------------------
-/// Create a CombinedMask using the given set of masks.
+/// Create a CombinedGroundMask using the given set of masks.
 //-----------------------------------------------------------------------
 
   CombinedGroundMask(const std::vector<boost::shared_ptr<GroundMask> >& Ml)
@@ -106,7 +106,7 @@ public:
   virtual ~CombinedGroundMask() {}
 
 //-----------------------------------------------------------------------
-/// Create a CombinedMask using the given set of masks, where we get
+/// Create a CombinedGroundMask using the given set of masks, where we get
 /// this from a general InputIterator.
 //-----------------------------------------------------------------------
 

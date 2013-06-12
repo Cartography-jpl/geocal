@@ -48,6 +48,7 @@ extern "C" {
   void init_raster_image_multi_band(void);
   void init_raster_image_multi_band_variable(void);
   void init_ground_mask(void);
+  void init_image_mask(void);
   void init_geocal_datum(void);
   void init_simple_dem(void);
   void init_memory_raster_image(void);
@@ -228,6 +229,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_raster_image_multi_band", init_raster_image_multi_band);
   init_extension_module(package, "_raster_image_multi_band_variable", init_raster_image_multi_band_variable);
   init_extension_module(package, "_ground_mask", init_ground_mask);
+  init_extension_module(package, "_image_mask", init_image_mask);
   init_extension_module(package, "_geocal_datum", init_geocal_datum);
   init_extension_module(package, "_simple_dem", init_simple_dem);
   init_extension_module(package, "_memory_raster_image", init_memory_raster_image);

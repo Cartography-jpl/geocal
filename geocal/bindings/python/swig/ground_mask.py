@@ -193,8 +193,8 @@ class GroundMask(geocal.generic_object.GenericObject):
         virtual bool GeoCal::GroundMask::region_masked(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc) const =0
         Indicated if a region is all masked or not.
 
-        See the discussion in the comments of Mask for detailed discussion of
-        the check. 
+        See the discussion in the comments of GroundMask for detailed
+        discussion of the check. 
         """
         return _ground_mask.GroundMask_region_masked(self, *args)
 
@@ -226,8 +226,8 @@ class CombinedGroundMask(GroundMask):
     def __init__(self, *args): 
         """
         GeoCal::CombinedGroundMask::CombinedGroundMask(It First, It Last)
-        Create a CombinedMask using the given set of masks, where we get this
-        from a general InputIterator. 
+        Create a CombinedGroundMask using the given set of masks, where we get
+        this from a general InputIterator. 
         """
         _ground_mask.CombinedGroundMask_swiginit(self,_ground_mask.new_CombinedGroundMask(*args))
     mask_list = _swig_property(_ground_mask.CombinedGroundMask_mask_list_get, _ground_mask.CombinedGroundMask_mask_list_set)

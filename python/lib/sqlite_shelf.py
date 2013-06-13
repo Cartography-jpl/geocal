@@ -31,9 +31,17 @@ def from_db_type(value):
 def read_shelve(f):
     '''This handles reading a value from a shelve file. The string f should
     be of the form file_name:key. We open the given file, and read the
-    value for the given key.'''
+    value for the given key.
+
+    Note that it can be useful to execute python code before using
+    a shelve file, e.g., we are using python modules not already 
+    included in AFIDS. If the special key "_extra_python_init" is 
+    found, we execute the code found there. This can do things like 
+    import modules.'''
     fname, key = f.split(':')
     t = SQLiteShelf(fname, "r")
+    if("_extra_python_init" in t.keys()):
+        exec(t["_extra_python_init"])
     return t[key]
 
 def write_shelve(f, val):
@@ -50,7 +58,8 @@ class SQLiteShelf(UserDict.DictMixin):
     """Shelf implementation using an SQLite3 database. """
     def __init__(self, filename, mode = "r+"):
         '''Open an existing file, or create a new one if it doesn't exist.
-        The mode can be "r+" for read/write or "r" for read only.'''
+        The mode can be "r+" for read/write or "r" for read only.
+        '''
         self._database = sqlite3.connect(filename)
         self._database.execute("CREATE TABLE IF NOT EXISTS Shelf "
                                "(Key TEXT PRIMARY KEY NOT NULL, Value BLOB)")

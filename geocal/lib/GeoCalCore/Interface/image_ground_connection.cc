@@ -3,6 +3,26 @@
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
+/// Constructor. As a convenience, if Img_mask or Ground_mask are null
+/// pointer, we replace them with an empty CombinedImageMask or
+/// CombinedGroundMask.
+//-----------------------------------------------------------------------
+ImageGroundConnection::ImageGroundConnection
+(const boost::shared_ptr<Dem>& d, 
+ const boost::shared_ptr<RasterImage>& Img, 
+ const std::string& Title,
+ const boost::shared_ptr<ImageMask>& Img_mask,
+ const boost::shared_ptr<GroundMask>& Ground_mask)
+: dem_(d), image_(Img), title_(Title), image_mask_(Img_mask),
+  ground_mask_(Ground_mask)
+{
+  if(!image_mask_)
+    image_mask_.reset(new CombinedImageMask);
+  if(!ground_mask_)
+    ground_mask_.reset(new CombinedGroundMask);
+}
+
+//-----------------------------------------------------------------------
 /// Find a MapInfo that covers the ground coordinate of this 
 /// ImageGroundConnection. We calculate the ground coordinate of the
 /// four corners, then find the MapInfo that covers those corners,

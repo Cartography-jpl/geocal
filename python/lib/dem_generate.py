@@ -53,15 +53,24 @@ class DemGenerate:
     when two image are close to the same angle), or we can do the image 
     matching on the surface. By default we use the original image, but you
     can optionally supply two surface images to use instead. These should be
-    map projected data for the two image.'''
+    map projected data for the two image.
+
+    We do a range calculation by default to decide how much of the
+    image to look at for height (so we don't do unneeded
+    matching). This breaks down for AirMISP data. Might come up with a
+    more general solution at some point, but for now just skip this
+    step if "all_image" is True.
+    '''
     def __init__(self, image_ground_connnection1, 
                  image_ground_connnection2, 
                  aoi, image_matcher = CcorrLsmMatcher(),
                  surface_image1 = None, surface_image2 = None,
-                 max_dist_good_point = 0.5):
+                 max_dist_good_point = 0.5,
+                 all_image = False):
         self.igc1 = image_ground_connnection1
         self.igc2 = image_ground_connnection2
         self.max_dist_good_point = max_dist_good_point
+        self.all_image = all_image
         self.initial_dem = self.igc1.dem
         self.surface_image1 = surface_image1
         self.surface_image2 = surface_image2
@@ -86,6 +95,7 @@ class DemGenerate:
 
     def __getstate__(self):
         return { "igc1" : self.igc1, "igc2" : self.igc2, 
+                 "all_image" : self.all_image,
                  "aoi" : self.aoi, 
                  "im" : self.image_matcher,
                  "maxd" : self.max_dist_good_point,
@@ -100,7 +110,8 @@ class DemGenerate:
                       dict["aoi"], image_matcher = dict["im"],
                       surface_image1 = dict["simg1"],
                       surface_image2 = dict["simg2"],
-                      max_dist_good_point = dict["maxd"])
+                      max_dist_good_point = dict["maxd"],
+                      all_image = dict["all_image"])
         self.h = dict["h"]
         self.r = dict["r"]
 
@@ -145,8 +156,15 @@ class DemGenerate:
         
         Because this can take a while to run, you can optionally supply
         a multiprocessing.Pool. If this is given, we use that pool 
-        of processors to do this calculation.'''
-        lstart, sstart, lend, send = self.range_image1()
+        of processors to do this calculation.
+        '''
+        if(self.all_image):
+            lstart = 0
+            sstart = 0
+            lend = self.igc1.number_line
+            send = self.igc1.number_sample
+        else:
+            lstart, sstart, lend, send = self.range_image1()
         if(pool is None):
             return self.surface_point(lstart, sstart, lend, send)
         if(lstart > sstart):

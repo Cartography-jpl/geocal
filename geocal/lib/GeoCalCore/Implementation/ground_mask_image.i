@@ -22,5 +22,4 @@ public:
 			     const GroundCoordinate& Lrc) const;
   %pickle_init(1, self.raster_image, self.masked_value)
 };
-
 }

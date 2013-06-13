@@ -65,6 +65,7 @@ extern "C" {
   void init_did_datum(void);
   void init_map_info_image_ground_connection(void);
   void init_ground_mask_image(void);
+  void init_image_mask_image(void);
   void init_raster_averaged(void);
   void init_raster_subsample(void);
   void init_calc_raster(void);
@@ -246,6 +247,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_did_datum", init_did_datum);
   init_extension_module(package, "_map_info_image_ground_connection", init_map_info_image_ground_connection);
   init_extension_module(package, "_ground_mask_image", init_ground_mask_image);
+  init_extension_module(package, "_image_mask_image", init_image_mask_image);
   init_extension_module(package, "_raster_averaged", init_raster_averaged);
   init_extension_module(package, "_raster_subsample", init_raster_subsample);
   init_extension_module(package, "_calc_raster", init_calc_raster);

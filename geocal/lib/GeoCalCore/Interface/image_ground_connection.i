@@ -12,6 +12,8 @@
 %import "raster_image.i"
 %import "ground_coordinate.i"
 %import "image_coordinate.i"
+%import "image_mask.i"
+%import "ground_mask.i"
 %import "ecr.i"
 %geocal_shared_ptr(GeoCal::ImageGroundConnection);
 %geocal_shared_ptr(GeoCal::OffsetImageGroundConnection);
@@ -46,9 +48,18 @@ public:
 #endif
 class ImageGroundConnection: public GenericObject {
 protected:
-  ImageGroundConnection(const boost::shared_ptr<Dem> d, 
+  ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
 			const boost::shared_ptr<RasterImage>& Img, 
 			const std::string& Title);
+  ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
+			const boost::shared_ptr<RasterImage>& Img, 
+			const std::string& Title,
+			const boost::shared_ptr<ImageMask>& Img_mask);
+  ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
+			const boost::shared_ptr<RasterImage>& Img, 
+			const std::string& Title,
+			const boost::shared_ptr<ImageMask>& Img_mask,
+			const boost::shared_ptr<GroundMask>& Ground_mask);
   ImageGroundConnection();
 public:
   virtual ~ImageGroundConnection();
@@ -74,6 +85,8 @@ public:
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   MapInfo cover(const MapInfo& Mi, int boundary = 0) const;
   %python_attribute(image, boost::shared_ptr<RasterImage>)
+  %python_attribute(image_mask, boost::shared_ptr<ImageMask>)
+  %python_attribute(ground_mask, boost::shared_ptr<GroundMask>)
   %python_attribute(number_line, virtual int)
   %python_attribute(number_sample, virtual int)
   %python_attribute_with_set(title, std::string)

@@ -248,6 +248,28 @@ class ImageGroundConnection(geocal.generic_object.GenericObject):
     def image(self):
         return self._v_image()
 
+    def _v_image_mask(self):
+        """
+        virtual boost::shared_ptr<ImageMask> GeoCal::ImageGroundConnection::image_mask() const
+        Mask to apply to image. 
+        """
+        return _image_ground_connection.ImageGroundConnection__v_image_mask(self)
+
+    @property
+    def image_mask(self):
+        return self._v_image_mask()
+
+    def _v_ground_mask(self):
+        """
+        virtual boost::shared_ptr<GroundMask> GeoCal::ImageGroundConnection::ground_mask() const
+        Mask to apply to ground. 
+        """
+        return _image_ground_connection.ImageGroundConnection__v_ground_mask(self)
+
+    @property
+    def ground_mask(self):
+        return self._v_ground_mask()
+
     def _v_number_line(self):
         """
         virtual int GeoCal::ImageGroundConnection::number_line() const
@@ -365,6 +387,8 @@ ImageGroundConnection.image_coordinate_jac_ecr = new_instancemethod(_image_groun
 ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm,None,ImageGroundConnection)
 ImageGroundConnection.cover = new_instancemethod(_image_ground_connection.ImageGroundConnection_cover,None,ImageGroundConnection)
 ImageGroundConnection._v_image = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image,None,ImageGroundConnection)
+ImageGroundConnection._v_image_mask = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image_mask,None,ImageGroundConnection)
+ImageGroundConnection._v_ground_mask = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_ground_mask,None,ImageGroundConnection)
 ImageGroundConnection._v_number_line = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_number_line,None,ImageGroundConnection)
 ImageGroundConnection._v_number_sample = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_number_sample,None,ImageGroundConnection)
 ImageGroundConnection._v_title = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_title,None,ImageGroundConnection)

@@ -18,7 +18,9 @@
 class SwigDirector_ImageGroundConnection : public GeoCal::ImageGroundConnection, public Swig::Director {
 
 public:
-    SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const d, boost::shared_ptr< GeoCal::RasterImage > const &Img, std::string const &Title);
+    SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const &d, boost::shared_ptr< GeoCal::RasterImage > const &Img, std::string const &Title);
+    SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const &d, boost::shared_ptr< GeoCal::RasterImage > const &Img, std::string const &Title, boost::shared_ptr< GeoCal::ImageMask > const &Img_mask);
+    SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const &d, boost::shared_ptr< GeoCal::RasterImage > const &Img, std::string const &Title, boost::shared_ptr< GeoCal::ImageMask > const &Img_mask, boost::shared_ptr< GeoCal::GroundMask > const &Ground_mask);
     SwigDirector_ImageGroundConnection(PyObject *self);
     virtual ~SwigDirector_ImageGroundConnection();
     virtual boost::shared_ptr< GeoCal::CartesianFixedLookVector > cf_look_vector_lv(GeoCal::ImageCoordinate const &Ic) const;

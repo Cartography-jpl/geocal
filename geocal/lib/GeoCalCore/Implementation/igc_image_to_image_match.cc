@@ -8,6 +8,12 @@ void IgcImageToImageMatch::match
  bool& Success, int* Diagnostic) const
 {
   ImageCoordinate ic2_guess;
+  if(igc1->image_mask()->mask((int) Ic1.line, (int) Ic1.sample)) {
+    Success = false;
+    if(Diagnostic)
+      *Diagnostic = IMAGE_MASKED;
+    return;
+  }
   try {
     ic2_guess =
       igc2->image_coordinate(*igc1->ground_coordinate(Ic1));
@@ -18,6 +24,12 @@ void IgcImageToImageMatch::match
     Success = false;
     if(Diagnostic)
       *Diagnostic = IMAGE_COOR_FAILED;
+    return;
+  }
+  if(igc2->image_mask()->mask((int) ic2_guess.line, (int) ic2_guess.sample)) {
+    Success = false;
+    if(Diagnostic)
+      *Diagnostic = IMAGE_MASKED;
     return;
   }
   matcher_->match(*igc1->image(), *igc2->image(), Ic1, 

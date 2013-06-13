@@ -6,6 +6,8 @@
 #include "printable.h"
 #include "ecr.h"
 #include "raster_image.h"
+#include "ground_mask.h"
+#include "image_mask.h"
 #include <blitz/array.h>
 
 namespace GeoCal {
@@ -124,6 +126,19 @@ public:
   virtual boost::shared_ptr<RasterImage> image() const {return image_;}
 
 //-----------------------------------------------------------------------
+/// Mask to apply to image.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<ImageMask> image_mask() const {return image_mask_;}
+
+//-----------------------------------------------------------------------
+/// Mask to apply to ground.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<GroundMask> ground_mask() const 
+  {return ground_mask_;}
+
+//-----------------------------------------------------------------------
 /// Title that we can use to describe the image. This can be any
 /// string that is useful as a label.
 //-----------------------------------------------------------------------
@@ -236,10 +251,13 @@ public:
   const Dem& dem() const { return *dem_;}
 
 protected:
-  ImageGroundConnection(const boost::shared_ptr<Dem> d, 
-			const boost::shared_ptr<RasterImage> Img, 
-			const std::string& Title)
-    : dem_(d), image_(Img), title_(Title) {}
+  ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
+			const boost::shared_ptr<RasterImage>& Img, 
+			const std::string& Title,
+			const boost::shared_ptr<ImageMask>& Img_mask = 
+			boost::shared_ptr<ImageMask>(),
+			const boost::shared_ptr<GroundMask>& Ground_mask =
+			boost::shared_ptr<GroundMask>());
   ImageGroundConnection() {}
   /// DEM to use, should be set by constructor.
   boost::shared_ptr<Dem> dem_;
@@ -247,6 +265,12 @@ protected:
   boost::shared_ptr<RasterImage> image_;
   /// Title of image to use, should be set by constructor.
   std::string title_;
+  /// Image mask to use, should be set by constructor (can set to
+  /// empty CombinedImageMask if there is no mask).
+  boost::shared_ptr<ImageMask> image_mask_;
+  /// Ground mask to use, should be set by constructor (can set to
+  /// empty CombinedGroundMask if there is no mask).
+  boost::shared_ptr<GroundMask> ground_mask_;
 };
 
 /****************************************************************//**

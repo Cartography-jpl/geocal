@@ -103,6 +103,37 @@ void RasterAveraged::print(std::ostream& Os) const
      << "  RasterImage: " << high_resolution_image() << "\n";
 }
 
+
+bool ImageMaskAveraged::mask(int Line, int Sample) const
+{
+  return data_->area_any_masked(Line * number_line_per_pixel_,
+				Sample * number_sample_per_pixel_,
+				number_line_per_pixel_,
+				number_sample_per_pixel_);
+}
+
+bool ImageMaskAveraged::area_any_masked
+(int Line, int Sample, int Number_line,
+ int Number_sample) const
+{
+  return data_->area_any_masked(Line * number_line_per_pixel_,
+				Sample * number_sample_per_pixel_,
+				Number_line * number_line_per_pixel_,
+				Number_sample * number_sample_per_pixel_);
+}
+
+//-----------------------------------------------------------------------
+/// Print to stream.
+//-----------------------------------------------------------------------
+
+void ImageMaskAveraged::print(std::ostream& Os) const
+{
+  Os << "ImageMaskrAverage:\n"
+     << "  Number line per pixel: " << number_line_per_pixel() << "\n"
+     << "  Number sample per pixel: " << number_sample_per_pixel() << "\n"
+     << "  ImageMask: " << high_resolution_image_mask() << "\n";
+}
+
 //-----------------------------------------------------------------------
 /// Constructor for average. You can specify your choice of doing the 
 /// average calculation on the fly, or once and kept in memory.
@@ -125,10 +156,14 @@ AveragedImageGroundConnection::AveragedImageGroundConnection
   boost::shared_ptr<RasterImage> ra
     (new RasterAveraged(ig_->image(), number_line_per_pixel_, 
 			number_sample_per_pixel_, ignore_zero_));
+  image_mask_.reset
+    (new ImageMaskAveraged(ig_->image_mask(), number_line_per_pixel_,
+			   number_sample_per_pixel_));
   if(in_memory_)
     image_.reset(new MemoryRasterImage(*ra));
   else
     image_ = ra;
+  ground_mask_ = ig_->ground_mask();
 }
 
 //-----------------------------------------------------------------------

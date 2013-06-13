@@ -110,6 +110,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal.raster_image
 import geocal.generic_object
+import geocal.image_mask
 import geocal.image_ground_connection
 import geocal.geocal_exception
 class RasterAveraged(geocal.raster_image.RasterImage):
@@ -212,6 +213,66 @@ RasterAveraged.__call__ = new_instancemethod(_raster_averaged.RasterAveraged___c
 RasterAveraged.read_ptr = new_instancemethod(_raster_averaged.RasterAveraged_read_ptr,None,RasterAveraged)
 RasterAveraged_swigregister = _raster_averaged.RasterAveraged_swigregister
 RasterAveraged_swigregister(RasterAveraged)
+
+class ImageMaskAveraged(geocal.image_mask.ImageMask):
+    """
+    Take an existing image mask, and averages it like RasterAveraged.
+
+    We mask a point if any of the points that make it up are masked. This
+    does the calculation on fly.
+
+    C++ includes: raster_averaged.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::ImageMaskAveraged::ImageMaskAveraged(const boost::shared_ptr< ImageMask > &Data, int
+        Number_line_per_pixel, int Number_sample_per_pixel)
+
+        """
+        _raster_averaged.ImageMaskAveraged_swiginit(self,_raster_averaged.new_ImageMaskAveraged(*args))
+    def _v_high_resolution_image_mask(self):
+        """
+        const boost::shared_ptr<ImageMask>& GeoCal::ImageMaskAveraged::high_resolution_image_mask_ptr() const
+        Pointer to high resolution image mask that this object is based on. 
+        """
+        return _raster_averaged.ImageMaskAveraged__v_high_resolution_image_mask(self)
+
+    @property
+    def high_resolution_image_mask(self):
+        return self._v_high_resolution_image_mask()
+
+    def _v_number_line_per_pixel(self):
+        """
+        int GeoCal::ImageMaskAveraged::number_line_per_pixel() const
+        Number of lines of high resolution data per pixel of this lower
+        resolution ImageMatch. 
+        """
+        return _raster_averaged.ImageMaskAveraged__v_number_line_per_pixel(self)
+
+    @property
+    def number_line_per_pixel(self):
+        return self._v_number_line_per_pixel()
+
+    def _v_number_sample_per_pixel(self):
+        """
+        int GeoCal::ImageMaskAveraged::number_sample_per_pixel() const
+        Number of samples of high resolution data per pixel of this lower
+        resolution ImageMask. 
+        """
+        return _raster_averaged.ImageMaskAveraged__v_number_sample_per_pixel(self)
+
+    @property
+    def number_sample_per_pixel(self):
+        return self._v_number_sample_per_pixel()
+
+    __swig_destroy__ = _raster_averaged.delete_ImageMaskAveraged
+ImageMaskAveraged._v_high_resolution_image_mask = new_instancemethod(_raster_averaged.ImageMaskAveraged__v_high_resolution_image_mask,None,ImageMaskAveraged)
+ImageMaskAveraged._v_number_line_per_pixel = new_instancemethod(_raster_averaged.ImageMaskAveraged__v_number_line_per_pixel,None,ImageMaskAveraged)
+ImageMaskAveraged._v_number_sample_per_pixel = new_instancemethod(_raster_averaged.ImageMaskAveraged__v_number_sample_per_pixel,None,ImageMaskAveraged)
+ImageMaskAveraged_swigregister = _raster_averaged.ImageMaskAveraged_swigregister
+ImageMaskAveraged_swigregister(ImageMaskAveraged)
 
 class AveragedImageGroundConnection(geocal.image_ground_connection.ImageGroundConnection):
     """

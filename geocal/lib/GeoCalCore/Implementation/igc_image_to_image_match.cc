@@ -32,7 +32,9 @@ void IgcImageToImageMatch::match
       *Diagnostic = IMAGE_MASKED;
     return;
   }
-  matcher_->match(*igc1->image(), *igc2->image(), Ic1, 
-		  ic2_guess, Ic2, Line_sigma, Sample_sigma, Success,
-		  Diagnostic);
+  matcher_->match_mask(*igc1->image(), *igc1->image_mask(), *igc2->image(), 
+		       *igc2->image_mask(),
+		       Ic1, 
+		       ic2_guess, Ic2, Line_sigma, Sample_sigma, Success,
+		       Diagnostic);
 }

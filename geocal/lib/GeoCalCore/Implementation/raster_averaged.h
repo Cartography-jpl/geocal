@@ -80,6 +80,64 @@ private:
 };
 
 /****************************************************************//**
+  Take an existing image mask, and averages it like RasterAveraged.
+  We mask a point if any of the points that make it up are masked.
+  This does the calculation on fly.
+*******************************************************************/
+
+class ImageMaskAveraged : public ImageMask {
+public:
+  ImageMaskAveraged(const boost::shared_ptr<ImageMask>& Data,
+		    int Number_line_per_pixel,
+		    int Number_sample_per_pixel)
+    : data_(Data), number_line_per_pixel_(Number_line_per_pixel),
+      number_sample_per_pixel_(Number_sample_per_pixel) { }
+
+//-----------------------------------------------------------------------
+/// Destructor.
+//-----------------------------------------------------------------------
+
+  virtual ~ImageMaskAveraged() {}
+
+//-----------------------------------------------------------------------
+/// High resolution image mask that this object is based on.
+//-----------------------------------------------------------------------
+
+  const ImageMask& high_resolution_image_mask() const {return *data_; }
+
+//-----------------------------------------------------------------------
+/// Pointer to high resolution image mask that this object is based on.
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<ImageMask>& high_resolution_image_mask_ptr() const 
+  {return data_; }
+
+//-----------------------------------------------------------------------
+/// Number of lines of high resolution data per pixel of this lower
+/// resolution ImageMatch
+//-----------------------------------------------------------------------
+
+  int number_line_per_pixel() const {return number_line_per_pixel_;}
+
+//-----------------------------------------------------------------------
+/// Number of samples of high resolution data per pixel of this lower
+/// resolution ImageMask
+//-----------------------------------------------------------------------
+
+  int number_sample_per_pixel() const {return number_sample_per_pixel_;}
+
+
+  virtual bool mask(int Line, int Sample) const;
+  virtual bool area_any_masked(int Line, int Sample, int Number_line,
+			       int Number_sample) const;
+  virtual void print(std::ostream& Os) const;
+private:
+  boost::shared_ptr<ImageMask> data_;
+  int number_line_per_pixel_;
+  int number_sample_per_pixel_;
+};
+
+/****************************************************************//**
   This takes an existing ImageGroundConnection and it averages the
   raster image, accounting for this in the ground/image
   calculation. You can either have the image averaged on the fly, or

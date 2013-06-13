@@ -7,8 +7,10 @@
 #include "raster_averaged.h"
 %}
 %base_import(raster_image)
+%base_import(image_mask)
 %base_import(image_ground_connection)
 %geocal_shared_ptr(GeoCal::RasterAveraged);
+%geocal_shared_ptr(GeoCal::ImageMaskAveraged);
 %geocal_shared_ptr(GeoCal::AveragedImageGroundConnection);
 
 namespace GeoCal {
@@ -30,6 +32,18 @@ public:
   %pickle_init(1, self.high_resolution_image,
 	       self.number_line_per_pixel, self.number_sample_per_pixel,
 	       self.ignore_zero)
+};
+
+class ImageMaskAveraged : public ImageMask {
+public:
+  ImageMaskAveraged(const boost::shared_ptr<ImageMask>& Data,
+		    int Number_line_per_pixel,
+		    int Number_sample_per_pixel);
+  %python_attribute2(high_resolution_image_mask, high_resolution_image_mask_ptr,
+		     boost::shared_ptr<ImageMask>)
+  %python_attribute(number_line_per_pixel, int)
+  %python_attribute(number_sample_per_pixel, int)
+  virtual bool mask(int Line, int Sample) const;
 };
 
 class AveragedImageGroundConnection: public ImageGroundConnection {

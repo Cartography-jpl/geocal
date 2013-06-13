@@ -17,8 +17,10 @@ std::string parse_python_exception() {{
   PyObject *type = NULL, *value = NULL, *tb = NULL;
   PyErr_Fetch(&type, &value, &tb);
   PyObject* mod = PyImport_ImportModule("traceback");
-  PyObject* err_str_list = PyObject_CallMethodObjArgs(mod,
-		 PyString_FromString("format_exception"), type, value, tb, NULL);
+  PyObject* err_str_list = NULL;
+  if(tb)
+    err_str_list = PyObject_CallMethodObjArgs(mod,
+	      PyString_FromString("format_exception"), type, value, tb, NULL);
   std::string ret = "Python error that I can't parse";
   if(err_str_list) {{
     PyObject* err_str = 

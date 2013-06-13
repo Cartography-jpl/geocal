@@ -33,11 +33,6 @@
 # This gets included in the top makefile. This list files here that are
 # used to make up libgeocal.la.
 
-# Keep this for a short time, until we know we have everything out of
-# these
-#SWIG_SOURCES += @libgeocal@/swig.i
-#SWIG_SOURCES += @libgeocal@/array.i
-
 # This gets included in the top makefile. This list files here that are
 # used to make up libgeocal.la.
 

@@ -682,10 +682,8 @@ SWIG
 BUILD_PYTHON_FALSE
 BUILD_PYTHON_TRUE
 SPHINXBUILD
-PYTHON_EXTRA_LDFLAGS
-PYTHON_EXTRA_LIBS
-PYTHON_SITE_PKG
 PYTHON_LDFLAGS
+PYTHON_CONFIG
 HAVE_SPHINX_FALSE
 HAVE_SPHINX_TRUE
 platpythondir
@@ -24086,6 +24084,7 @@ fi
 
 
 
+
 if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then
 	if test -n "$ac_tool_prefix"; then
   # Extract the first word of "${ac_tool_prefix}pkg-config", so it can be a program name with args.
@@ -24412,6 +24411,7 @@ if test -n "$VICAR_RTL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_VICAR_RTL_CFLAGS=`$PKG_CONFIG --cflags "vicar-rtl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -24428,6 +24428,7 @@ if test -n "$VICAR_RTL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_VICAR_RTL_LIBS=`$PKG_CONFIG --libs "vicar-rtl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -24447,9 +24448,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "vicar-rtl" 2>&1`
+	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "vicar-rtl" 2>&1`
         else
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --print-errors "vicar-rtl" 2>&1`
+	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "vicar-rtl" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$VICAR_RTL_PKG_ERRORS" >&5
@@ -24869,6 +24870,7 @@ if test -n "$SPICE_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_SPICE_CFLAGS=`$PKG_CONFIG --cflags "spice" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -24885,6 +24887,7 @@ if test -n "$SPICE_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_SPICE_LIBS=`$PKG_CONFIG --libs "spice" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -24904,9 +24907,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "spice" 2>&1`
+	        SPICE_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "spice" 2>&1`
         else
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --print-errors "spice" 2>&1`
+	        SPICE_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "spice" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$SPICE_PKG_ERRORS" >&5
@@ -25077,6 +25080,7 @@ if test -n "$BLITZ_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_BLITZ_CFLAGS=`$PKG_CONFIG --cflags "blitz" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25093,6 +25097,7 @@ if test -n "$BLITZ_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_BLITZ_LIBS=`$PKG_CONFIG --libs "blitz" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25112,9 +25117,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "blitz" 2>&1`
+	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "blitz" 2>&1`
         else
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --print-errors "blitz" 2>&1`
+	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "blitz" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$BLITZ_PKG_ERRORS" >&5
@@ -25285,6 +25290,7 @@ if test -n "$GSL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GSL_CFLAGS=`$PKG_CONFIG --cflags "gsl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25301,6 +25307,7 @@ if test -n "$GSL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GSL_LIBS=`$PKG_CONFIG --libs "gsl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25320,9 +25327,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "gsl" 2>&1`
+	        GSL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gsl" 2>&1`
         else
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --print-errors "gsl" 2>&1`
+	        GSL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gsl" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$GSL_PKG_ERRORS" >&5
@@ -25495,6 +25502,7 @@ if test -n "$HDF5_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_CFLAGS=`$PKG_CONFIG --cflags "hdf5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25511,6 +25519,7 @@ if test -n "$HDF5_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_LIBS=`$PKG_CONFIG --libs "hdf5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25530,9 +25539,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdf5" 2>&1`
         else
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdf5" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$HDF5_PKG_ERRORS" >&5
@@ -25847,6 +25856,7 @@ if test -n "$FFTW_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_FFTW_CFLAGS=`$PKG_CONFIG --cflags "fftw3" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25863,6 +25873,7 @@ if test -n "$FFTW_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_FFTW_LIBS=`$PKG_CONFIG --libs "fftw3" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25882,9 +25893,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "fftw3" 2>&1`
+	        FFTW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "fftw3" 2>&1`
         else
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --print-errors "fftw3" 2>&1`
+	        FFTW_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "fftw3" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$FFTW_PKG_ERRORS" >&5
@@ -26053,6 +26064,7 @@ if test -n "$GDAL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GDAL_CFLAGS=`$PKG_CONFIG --cflags "gdal" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26069,6 +26081,7 @@ if test -n "$GDAL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GDAL_LIBS=`$PKG_CONFIG --libs "gdal" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26088,9 +26101,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "gdal" 2>&1`
+	        GDAL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gdal" 2>&1`
         else
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --print-errors "gdal" 2>&1`
+	        GDAL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gdal" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$GDAL_PKG_ERRORS" >&5
@@ -26233,6 +26246,7 @@ if test -n "$GEOS_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GEOS_CFLAGS=`$PKG_CONFIG --cflags "geos" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26249,6 +26263,7 @@ if test -n "$GEOS_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GEOS_LIBS=`$PKG_CONFIG --libs "geos" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26268,9 +26283,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GEOS_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "geos" 2>&1`
+	        GEOS_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "geos" 2>&1`
         else
-	        GEOS_PKG_ERRORS=`$PKG_CONFIG --print-errors "geos" 2>&1`
+	        GEOS_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "geos" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$GEOS_PKG_ERRORS" >&5
@@ -26440,6 +26455,7 @@ if test -n "$OGDI_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_OGDI_CFLAGS=`$PKG_CONFIG --cflags "ogdi" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26456,6 +26472,7 @@ if test -n "$OGDI_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_OGDI_LIBS=`$PKG_CONFIG --libs "ogdi" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26475,9 +26492,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        OGDI_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "ogdi" 2>&1`
+	        OGDI_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "ogdi" 2>&1`
         else
-	        OGDI_PKG_ERRORS=`$PKG_CONFIG --print-errors "ogdi" 2>&1`
+	        OGDI_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "ogdi" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$OGDI_PKG_ERRORS" >&5
@@ -26825,6 +26842,7 @@ if test -n "$CARTO_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_CARTO_CFLAGS=`$PKG_CONFIG --cflags "carto" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26841,6 +26859,7 @@ if test -n "$CARTO_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_CARTO_LIBS=`$PKG_CONFIG --libs "carto" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26860,9 +26879,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "carto" 2>&1`
+	        CARTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "carto" 2>&1`
         else
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --print-errors "carto" 2>&1`
+	        CARTO_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "carto" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$CARTO_PKG_ERRORS" >&5
@@ -27234,12 +27253,8 @@ fi
 
    else
 
-	#
-	# Allow the use of a (user set) custom python version
-	#
 
-
-	# Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
+# Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
 set dummy python$PYTHON_VERSION; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
 $as_echo_n "checking for $ac_word... " >&6; }
@@ -27279,256 +27294,166 @@ $as_echo "no" >&6; }
 fi
 
 
-	if test -z "$PYTHON"; then
-	   as_fn_error $? "Cannot find python$PYTHON_VERSION in your system path" "$LINENO" 5
-	   PYTHON_VERSION=""
-	fi
-
-	#
-	# Check for a version of Python >= 2.1.0
-	#
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python >= '2.1.0'" >&5
-$as_echo_n "checking for a version of Python >= '2.1.0'... " >&6; }
-	ac_supports_python_ver=`$PYTHON -c "import sys; \
-		ver = sys.version.split ()[0]; \
-		print (ver >= '2.1.0')"`
-	if test "$ac_supports_python_ver" != "True"; then
-		if test -z "$PYTHON_NOVERSIONCHECK"; then
-			{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-			{ { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
-$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
-as_fn_error $? "
-This version of the AC_PYTHON_DEVEL macro
-doesn't work properly with versions of Python before
-2.1.0. You may need to re-run configure, setting the
-variables PYTHON_CPPFLAGS, PYTHON_LDFLAGS, PYTHON_SITE_PKG,
-PYTHON_EXTRA_LIBS and PYTHON_EXTRA_LDFLAGS by hand.
-Moreover, to disable this check, set PYTHON_NOVERSIONCHECK
-to something else than an empty string.
-
-See \`config.log' for more details" "$LINENO" 5; }
-		else
-			{ $as_echo "$as_me:${as_lineno-$LINENO}: result: skip at user request" >&5
-$as_echo "skip at user request" >&6; }
-		fi
-	else
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	fi
-
-	#
-	# if the macro parameter ``version'' is set, honour it
-	#
-	if test -n ">= '2.6.1'"; then
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python >= '2.6.1'" >&5
+if test -z "$PYTHON"; then
+   as_fn_error $? "Cannot find python$PYTHON_VERSION in your system path" "$LINENO" 5
+   PYTHON_VERSION=""
+fi
+#
+# if the macro parameter ``version'' is set, honour it
+#
+if test -n ">= '2.6.1'"; then
+   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python >= '2.6.1'" >&5
 $as_echo_n "checking for a version of Python >= '2.6.1'... " >&6; }
-		ac_supports_python_ver=`$PYTHON -c "import sys; \
-			ver = sys.version.split ()[0]; \
-			print (ver >= '2.6.1')"`
-		if test "$ac_supports_python_ver" = "True"; then
-		   { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+   ac_supports_python_ver=`$PYTHON -c "import sys; \
+	ver = sys.version.split ()[0]; \
+	print (ver >= '2.6.1')"`
+   if test "$ac_supports_python_ver" = "True"; then
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-		else
-			{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   else
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-			as_fn_error $? "this package requires Python >= '2.6.1'.
+      as_fn_error $? "this package requires Python >= '2.6.1'.
 If you have it installed, but it isn't the default Python
 interpreter in your system path, please pass the PYTHON_VERSION
 variable to configure. See \`\`configure --help'' for reference.
 " "$LINENO" 5
-			PYTHON_VERSION=""
-		fi
-	fi
+      PYTHON_VERSION=""
+   fi
+fi
 
-	#
-	# Check if you have distutils, else fail
-	#
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for the distutils Python package" >&5
-$as_echo_n "checking for the distutils Python package... " >&6; }
-	ac_distutils_result=`$PYTHON -c "import distutils" 2>&1`
-	if test -z "$ac_distutils_result"; then
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	else
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking for python-config" >&5
+$as_echo_n "checking Checking for python-config... " >&6; }
+if test -n "$ac_tool_prefix"; then
+  # Extract the first word of "${ac_tool_prefix}python-config", so it can be a program name with args.
+set dummy ${ac_tool_prefix}python-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON_CONFIG="$PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PYTHON_CONFIG=$ac_cv_path_PYTHON_CONFIG
+if test -n "$PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_CONFIG" >&5
+$as_echo "$PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-		as_fn_error $? "cannot import Python module \"distutils\".
-Please check your Python installation. The error was:
-$ac_distutils_result" "$LINENO" 5
-		PYTHON_VERSION=""
-	fi
-
-	#
-	# Check for Python include path
-	#
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for Python include path" >&5
-$as_echo_n "checking for Python include path... " >&6; }
-	if test -z "$PYTHON_CPPFLAGS"; then
-		python_path=`$PYTHON -c "import distutils.sysconfig; \
-			print (distutils.sysconfig.get_python_inc ());"`
-		if test -n "${python_path}"; then
-			python_path="-I$python_path"
-		fi
-		PYTHON_CPPFLAGS=$python_path
-	fi
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_CPPFLAGS" >&5
-$as_echo "$PYTHON_CPPFLAGS" >&6; }
+fi
 
 
-	#
-	# Check for Python library path
-	#
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for Python library path" >&5
-$as_echo_n "checking for Python library path... " >&6; }
-	if test -z "$PYTHON_LDFLAGS"; then
-		# (makes two attempts to ensure we've got a version number
-		# from the interpreter)
-		ac_python_version=`cat<<EOD | $PYTHON -
+fi
+if test -z "$ac_cv_path_PYTHON_CONFIG"; then
+  ac_pt_PYTHON_CONFIG=$PYTHON_CONFIG
+  # Extract the first word of "python-config", so it can be a program name with args.
+set dummy python-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_ac_pt_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $ac_pt_PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_ac_pt_PYTHON_CONFIG="$ac_pt_PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_ac_pt_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
 
-# join all versioning strings, on some systems
-# major/minor numbers could be in different list elements
-from distutils.sysconfig import *
-ret = ''
-for e in get_config_vars ('VERSION'):
-	if (e != None):
-		ret += e
-print (ret)
-EOD`
+  ;;
+esac
+fi
+ac_pt_PYTHON_CONFIG=$ac_cv_path_ac_pt_PYTHON_CONFIG
+if test -n "$ac_pt_PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_pt_PYTHON_CONFIG" >&5
+$as_echo "$ac_pt_PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
 
-		if test -z "$ac_python_version"; then
-			if test -n "$PYTHON_VERSION"; then
-				ac_python_version=$PYTHON_VERSION
-			else
-				ac_python_version=`$PYTHON -c "import sys; \
-					print (sys.version[:3])"`
-			fi
-		fi
+  if test "x$ac_pt_PYTHON_CONFIG" = x; then
+    PYTHON_CONFIG=""
+  else
+    case $cross_compiling:$ac_tool_warned in
+yes:)
+{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
+$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
+ac_tool_warned=yes ;;
+esac
+    PYTHON_CONFIG=$ac_pt_PYTHON_CONFIG
+  fi
+else
+  PYTHON_CONFIG="$ac_cv_path_PYTHON_CONFIG"
+fi
 
-		# Make the versioning information available to the compiler
+if test -n "$PYTHON_CONFIG" ; then
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+    PYTHON_VERSION=$(python -c "import sys;print '.'.join(map(str, sys.version_info[:2]))")
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
 
-cat >>confdefs.h <<_ACEOF
-#define HAVE_PYTHON "$ac_python_version"
-_ACEOF
+if test -z "$PYTHON_CONFIG" ; then
+  as_fn_error $? "no python-config found." "$LINENO" 5
+fi
 
+PYTHON_CPPFLAGS="$("$PYTHON_CONFIG" --includes)"
+PYTHON_LDFLAGS="$("$PYTHON_CONFIG" --ldflags)"
 
-		# First, the library directory:
-		ac_python_libdir=`cat<<EOD | $PYTHON -
-
-# There should be only one
-import distutils.sysconfig
-for e in distutils.sysconfig.get_config_vars ('LIBDIR'):
-	if e != None:
-		print (e)
-		break
-EOD`
-
-		# Before checking for libpythonX.Y, we need to know
-		# the extension the OS we're on uses for libraries
-		# (we take the first one, if there's more than one fix me!):
-		ac_python_soext=`$PYTHON -c \
-		  "import distutils.sysconfig; \
-		  print (distutils.sysconfig.get_config_vars('SO')[0])"`
-
-		# Now, for the library:
-		ac_python_soname=`$PYTHON -c \
-		  "import distutils.sysconfig; \
-		  print (distutils.sysconfig.get_config_vars('LDLIBRARY')[0])"`
-
-		# Strip away extension from the end to canonicalize its name:
-		ac_python_library=`echo "$ac_python_soname" | sed "s/${ac_python_soext}$//"`
-
-		# This small piece shamelessly adapted from PostgreSQL python macro;
-		# credits goes to momjian, I think. I'd like to put the right name
-		# in the credits, if someone can point me in the right direction... ?
-		#
-		if test -n "$ac_python_libdir" -a -n "$ac_python_library" \
-			-a x"$ac_python_library" != x"$ac_python_soname"
-		then
-			# use the official shared library
-			ac_python_library=`echo "$ac_python_library" | sed "s/^lib//"`
-			PYTHON_LDFLAGS="-L$ac_python_libdir -l$ac_python_library"
-		else
-			# old way: use libpython from python_configdir
-			ac_python_libdir=`$PYTHON -c \
-			  "from distutils.sysconfig import get_python_lib as f; \
-			  import os; \
-			  print (os.path.join(f(plat_specific=1, standard_lib=1), 'config'));"`
-			PYTHON_LDFLAGS="-L$ac_python_libdir -lpython$ac_python_version"
-		fi
-
-		if test -z "PYTHON_LDFLAGS"; then
-			as_fn_error $? "
-  Cannot determine location of your Python DSO. Please check it was installed with
-  dynamic libraries enabled, or try setting PYTHON_LDFLAGS by hand.
-			" "$LINENO" 5
-		fi
-	fi
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_LDFLAGS" >&5
-$as_echo "$PYTHON_LDFLAGS" >&6; }
-
-
-	#
-	# Check for site packages
-	#
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for Python site-packages path" >&5
-$as_echo_n "checking for Python site-packages path... " >&6; }
-	if test -z "$PYTHON_SITE_PKG"; then
-		PYTHON_SITE_PKG=`$PYTHON -c "import distutils.sysconfig; \
-			print (distutils.sysconfig.get_python_lib(0,0));"`
-	fi
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_SITE_PKG" >&5
-$as_echo "$PYTHON_SITE_PKG" >&6; }
-
-
-	#
-	# libraries which must be linked in when embedding
-	#
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking python extra libraries" >&5
-$as_echo_n "checking python extra libraries... " >&6; }
-	if test -z "$PYTHON_EXTRA_LIBS"; then
-	   PYTHON_EXTRA_LIBS=`$PYTHON -c "import distutils.sysconfig; \
-                conf = distutils.sysconfig.get_config_var; \
-                print (conf('LOCALMODLIBS') + ' ' + conf('LIBS'))"`
-	fi
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_EXTRA_LIBS" >&5
-$as_echo "$PYTHON_EXTRA_LIBS" >&6; }
-
-
-	#
-	# linking flags needed when embedding
-	#
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking python extra linking flags" >&5
-$as_echo_n "checking python extra linking flags... " >&6; }
-	if test -z "$PYTHON_EXTRA_LDFLAGS"; then
-		PYTHON_EXTRA_LDFLAGS=`$PYTHON -c "import distutils.sysconfig; \
-			conf = distutils.sysconfig.get_config_var; \
-			print (conf('LINKFORSHARED'))"`
-	fi
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_EXTRA_LDFLAGS" >&5
-$as_echo "$PYTHON_EXTRA_LDFLAGS" >&6; }
-
-
-	#
-	# final check to see if everything compiles alright
-	#
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking consistency of all components of python development environment" >&5
-$as_echo_n "checking consistency of all components of python development environment... " >&6; }
-	# save current global flags
-	ac_save_LIBS="$LIBS"
-	ac_save_CPPFLAGS="$CPPFLAGS"
-	LIBS="$ac_save_LIBS $PYTHON_LDFLAGS $PYTHON_EXTRA_LDFLAGS $PYTHON_EXTRA_LIBS"
-	CPPFLAGS="$ac_save_CPPFLAGS $PYTHON_CPPFLAGS"
-	ac_ext=c
+ac_save_CPPFLAGS="$CPPFLAGS"
+ac_save_LIBS="$LIBS"
+CPPFLAGS="$LIBS $PYTHON_CPPFLAGS"
+LIBS="$LIBS $PYTHON_LIBS"
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking if python-config results are accurate" >&5
+$as_echo_n "checking Checking if python-config results are accurate... " >&6; }
+ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
-	cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
-		#include <Python.h>
+  #include <Python.h>
 #ifdef F77_DUMMY_MAIN
 
 #  ifdef __cplusplus
@@ -27547,46 +27472,28 @@ Py_Initialize();
 
 _ACEOF
 if ac_fn_c_try_link "$LINENO"; then :
-  pythonexists=yes
-else
-  pythonexists=no
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+   as_fn_error $? "$PYTHON_CONFIG output is not usable" "$LINENO" 5
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
-	ac_ext=c
+ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
-	# turn back to default flags
-	CPPFLAGS="$ac_save_CPPFLAGS"
-	LIBS="$ac_save_LIBS"
 
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $pythonexists" >&5
-$as_echo "$pythonexists" >&6; }
+CPPFLAGS="$ac_save_CPPFLAGS"
+LIBS="$ac_save_LIBS"
 
-        if test ! "x$pythonexists" = "xyes"; then
-	   { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
-$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
-as_fn_error $? "
-  Could not link test program to Python. Maybe the main Python library has been
-  installed in some non-standard library path. If so, pass it to configure,
-  via the LDFLAGS environment variable.
-  Example: ./configure LDFLAGS=\"-L/usr/non-standard-path/python/lib\"
-  ============================================================================
-   ERROR!
-   You probably have to install the development version of the Python package
-   for your distribution.  The exact name of this package varies among them.
-  ============================================================================
 
-See \`config.log' for more details" "$LINENO" 5; }
-	  PYTHON_VERSION=""
-	fi
 
-	#
-	# all done!
-	#
+
+
 
 
     if test -z $PYTHON;

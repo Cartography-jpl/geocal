@@ -79,6 +79,7 @@ extern "C" {
   void init_map_reprojected_image(void);
   void init_calc_map_projected(void);
   void init_orbit_map_projected(void);
+  void init_pyramid_image_matcher(void);
   void init_igc_map_projected(void);
   void init_igc_image_to_image_match(void);
   void init_surface_image_to_image_match(void);
@@ -263,6 +264,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_map_reprojected_image", init_map_reprojected_image);
   init_extension_module(package, "_calc_map_projected", init_calc_map_projected);
   init_extension_module(package, "_orbit_map_projected", init_orbit_map_projected);
+  init_extension_module(package, "_pyramid_image_matcher", init_pyramid_image_matcher);
   init_extension_module(package, "_igc_map_projected", init_igc_map_projected);
   init_extension_module(package, "_igc_image_to_image_match", init_igc_image_to_image_match);
   init_extension_module(package, "_surface_image_to_image_match", init_surface_image_to_image_match);

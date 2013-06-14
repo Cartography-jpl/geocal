@@ -31,15 +31,24 @@ class TiePointCollect(object):
     def __init__(self, igc_collection, map_info = None, base_image_index = 0,
                  max_ground_covariance = 20 * 20,
                  start_image_index = 0,
-                 end_image_index = None):
+                 end_image_index = None,
+                 avg_level = 0):
         '''This sets up for doing tie point collection. A IgcCollection
-        needs to be supplied.'''
+        needs to be supplied.
+
+        You can optionally specify avg_level to use. If supplied, we
+        use a PyramidImageMatcher on top of the CcorrLsmMatcher, useful for
+        difficult to match imagery.
+        '''
         image_matcher = CcorrLsmMatcher()
+        if(avg_level > 0):
+            image_matcher = PyramidImageMatcher(image_matcher, avg_level)
         self.start_image_index = start_image_index
         if(end_image_index is None):
             self.end_image_index = igc_collection.number_image
         else:
             self.end_image_index = end_image_index
+        self.avg_level = avg_level
         self.map_info = map_info
         self.base_image_index = base_image_index
         self.max_ground_covariance = max_ground_covariance
@@ -67,6 +76,7 @@ class TiePointCollect(object):
                 "max_ground_covariance" : self.max_ground_covariance,
                 "start_image_index" : self.start_image_index,
                 "end_image_index" : self.end_image_index,
+                "avg_level" : self.avg_level,
                 }
 
     def __setstate__(self, dict):
@@ -75,6 +85,7 @@ class TiePointCollect(object):
                       max_ground_covariance = dict["max_ground_covariance"],
                       start_image_index = dict["start_image_index"],
                       end_image_index = dict["end_image_index"],
+                      avg_level = dict["avg_level"],
                       )
 
     @property
@@ -147,10 +158,19 @@ class TiePointCollect(object):
 class GcpTiePointCollect(object):
     '''Given a IgcCollection and a reference image, collect GCPs by 
     image matching.'''
-    def __init__(self, ref_image, dem, igc_collection):
+    def __init__(self, ref_image, dem, igc_collection,
+                 avg_level = 0):
         '''This sets up for doing a tie point collection with a reference
-        image. A IgcCollection and reference image needs to be supplied'''
+        image. A IgcCollection and reference image needs to be supplied
+
+        You can optionally specify avg_level to use. If supplied, we
+        use a PyramidImageMatcher on top of the CcorrLsmMatcher, useful for
+        difficult to match imagery.
+        '''
         image_matcher = CcorrLsmMatcher()
+        if(avg_level > 0):
+            image_matcher = PyramidImageMatcher(image_matcher, avg_level)
+        self.avg_level = avg_level
         self.igc_collection = igc_collection
         self.dem = dem
         self.ref_image = ref_image
@@ -177,10 +197,13 @@ class GcpTiePointCollect(object):
     def __getstate__(self):
         return {"ref_image" : self.ref_image,
                 "dem" : self.dem,
-                "igc_collection" : self.igc_collection}
+                "igc_collection" : self.igc_collection,
+                "avg_level" : self.avg_level,
+                }
 
     def __setstate__(self, dict):
-        self.__init__(dict["ref_image"], dict["dem"], dict["igc_collection"])
+        self.__init__(dict["ref_image"], dict["dem"], dict["igc_collection"],
+                      avg_level = dict["avg_level"])
 
     @property
     def number_image(self):

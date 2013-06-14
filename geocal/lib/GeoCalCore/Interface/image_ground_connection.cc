@@ -105,8 +105,8 @@ OffsetImageGroundConnection::image_coordinate_jac_parm
 { 
   Array<double, 2> rest = ig_->image_coordinate_jac_parm(Gc);
   Array<double, 2> res(2, 2 + rest.cols());
-  res(0,0) = line_offset_;
-  res(1,1) = sample_offset_;
+  res(0,0) = 1;
+  res(1,1) = 1;
   res(1,0) = 0;
   res(0,1) = 0;
   if(rest.cols() > 0)

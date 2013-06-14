@@ -9,7 +9,7 @@
 %base_import(generic_object)
 %import "raster_image.i"
 %import "image_coordinate.i"
-%import "image_mask.h"
+%import "image_mask.i"
 %geocal_shared_ptr(GeoCal::ImageMatcher);
 namespace GeoCal {
 class ImageMatcher : public GenericObject {

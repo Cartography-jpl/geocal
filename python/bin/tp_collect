@@ -31,13 +31,22 @@ Options:
        specified as the output. You can optionally add the TP/GCPs we 
        generate.
 
-  --reference-dem=shelve
-       DEM to use with the reference image specified as file:key. 
-       If not specified, we use the DEM from the first IGC.
+  --avg-level=n
+       You can specify an averaging level to use. If supplied, we use
+       a pyramid image matching scheme, starting at a resolution of 
+       2^avg_level, and proceeding down factors of 2 until we fail image
+       matching or get all the way down to full resolution data. Useful
+       for difficult to match imagery. [default: 0]
 
   --gcp
        Create GCPs, which requires the additional arguments of a reference
        image.
+
+  --max-ground-sigma=d
+       How far off the various matched points can miss when intersecting
+       on the surface, in meters. This is used to filter out bad tie-points,
+       but you want this large enough you aren't filtering out good points.
+       [default: 20.0]
 
   --number-process=n 
        Number of processors to use. [default: 1]
@@ -48,6 +57,10 @@ Options:
   --number-y=n      
        Number of grid points in the Y direction to try for [default: 100]
  
+  --reference-dem=shelve
+       DEM to use with the reference image specified as file:key. 
+       If not specified, we use the DEM from the first IGC.
+
   -v --version      
        Print program version
 """
@@ -64,9 +77,14 @@ if(args.gcp):
     else:
         dem = igc.dem(0)
     refimg = read_shelve(args.reference_image)
-    tpcollect = GcpTiePointCollect(refimg, dem, igc)
+    tpcollect = GcpTiePointCollect(refimg, dem, igc, 
+                                   avg_level = args.avg_level,
+                                   max_ground_covariance = 
+                                   args.max_ground_sigma ** 2)
 else:
-    tpcollect = TiePointCollect(igc)
+    tpcollect = TiePointCollect(igc, avg_level = args.avg_level,
+                                max_ground_covariance = 
+                                args.max_ground_sigma ** 2)
 
 tparr = tpcollect.tie_point_grid(args.number_x, args.number_y, 
                                  pool = pool)

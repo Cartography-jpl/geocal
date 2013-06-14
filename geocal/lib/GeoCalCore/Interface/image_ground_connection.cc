@@ -1,6 +1,7 @@
 #include "image_ground_connection.h"
 #include "simple_dem.h"
 using namespace GeoCal;
+using namespace blitz;
 
 //-----------------------------------------------------------------------
 /// Constructor. As a convenience, if Img_mask or Ground_mask are null
@@ -96,3 +97,60 @@ double ImageGroundConnection::resolution_meter() const
   return resolution_meter(ImageCoordinate(number_line() / 2.0, 
 					  number_sample() / 2.0));
 }
+
+// See base class for description
+blitz::Array<double, 2> 
+OffsetImageGroundConnection::image_coordinate_jac_parm
+(const GroundCoordinate& Gc) const
+{ 
+  Array<double, 2> rest = ig_->image_coordinate_jac_parm(Gc);
+  Array<double, 2> res(2, 2 + rest.cols());
+  res(0,0) = line_offset_;
+  res(1,1) = sample_offset_;
+  res(1,0) = 0;
+  res(0,1) = 0;
+  if(rest.cols() > 0)
+    res(Range::all(), Range(2, toEnd)) = rest;
+  return res;
+}
+
+// See base class for description
+blitz::Array<double, 1> OffsetImageGroundConnection::parameter() const 
+{ 
+  Array<double, 1> rest = ig_->parameter(); 
+  Array<double, 1> res(2 + rest.rows());
+  res(0) = line_offset_;
+  res(1) = sample_offset_;
+  if(res.rows() > 2)
+    res(Range(2, toEnd)) = rest;
+  return res;
+}
+
+// See base class for description
+void OffsetImageGroundConnection::parameter
+(const blitz::Array<double, 1>& Parm)
+{ 
+  if(Parm.rows() != parameter().rows()) {
+    Exception e;
+    e << "Expected parameter to have " << parameter().rows() 
+      << " rows, but got " << Parm.rows();
+    throw e;
+  }
+  line_offset_ = Parm(0);
+  sample_offset_ = Parm(1);
+  if(Parm.rows() > 2)
+    ig_->parameter(Parm(Range(2,toEnd)));
+}
+
+// See base class for description
+std::vector<std::string> OffsetImageGroundConnection::parameter_name() const
+{ 
+  std::vector<std::string> res;
+  res.push_back("Line offset");
+  res.push_back("Sample offset");
+  std::vector<std::string> rest(ig_->parameter_name());
+  res.insert(res.end(), rest.begin(), rest.end());
+  return res;
+}
+
+

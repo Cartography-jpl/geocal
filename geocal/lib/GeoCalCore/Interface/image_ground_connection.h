@@ -287,14 +287,15 @@ public:
 //-----------------------------------------------------------------------
   OffsetImageGroundConnection
   (const boost::shared_ptr<ImageGroundConnection>& Ig_original, 
-   double Line_offset, double Sample_offset, int Number_line, int Number_sample)
-    : ig_(Ig_original), line_offset_(Line_offset), 
-      sample_offset_(Sample_offset),
-      number_line_(Number_line),
-      number_sample_(Number_sample)
+   double Line_offset, double Sample_offset)
+    :  ImageGroundConnection(Ig_original->dem_ptr(),
+			     Ig_original->image(),
+			     Ig_original->title(),
+			     Ig_original->image_mask(),
+			     Ig_original->ground_mask()),
+       ig_(Ig_original), line_offset_(Line_offset), 
+       sample_offset_(Sample_offset)
   { 
-    dem_ = Ig_original->dem_ptr();
-    // No raster image or title
   }
   
 //-----------------------------------------------------------------------
@@ -334,17 +335,12 @@ public:
   }
   virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) const
   { return ig_->image_coordinate_jac_ecr(Gc); }
+
   virtual blitz::Array<double, 2> 
-  image_coordinate_jac_parm(const GroundCoordinate& Gc) const
-  { return ig_->image_coordinate_jac_parm(Gc); }
-
-  virtual blitz::Array<double, 1> parameter() const 
-  { return ig_->parameter(); }
-  virtual void parameter(const blitz::Array<double, 1>& Parm)
-  { ig_->parameter(Parm); }
-  virtual std::vector<std::string> parameter_name() const
-  { return ig_->parameter_name(); }
-
+  image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
+  virtual blitz::Array<double, 1> parameter() const;
+  virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual std::vector<std::string> parameter_name() const;
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -377,13 +373,10 @@ public:
 //-----------------------------------------------------------------------
 
   double sample_offset() const { return sample_offset_;}
-  virtual int number_line() const {return number_line_;}
-  virtual int number_sample() const {return number_sample_;}
 private:
   boost::shared_ptr<ImageGroundConnection> ig_;
   double line_offset_;
   double sample_offset_;
-  int number_line_, number_sample_;
 };
 
 

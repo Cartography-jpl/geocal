@@ -166,9 +166,7 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
     psmooth_orig->remove_rpc();
   psmooth = psmooth_orig;
   boost::shared_ptr<ImageGroundConnection> 
-    psmooth_ig(new OffsetImageGroundConnection(pan_ig, -nhs, -nhs,
-				       pan_ig->number_line() - 2 * nhs,
-				       pan_ig->number_sample() - 2 * nhs));
+    psmooth_ig(new OffsetImageGroundConnection(pan_ig, -nhs, -nhs));
   boost::shared_ptr<ImageGroundConnection>
     mag_ig(new MagnifyBilinearImageGroundConnection(ms_ig, magfactor));
   for(int i = 0; i < Mul.number_band(); ++i)

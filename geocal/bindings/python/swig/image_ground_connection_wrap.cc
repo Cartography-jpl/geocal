@@ -5240,6 +5240,24 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+SWIGINTERN int
+SWIG_AsVal_std_string (PyObject * obj, std::string *val)
+{
+  std::string* v = (std::string *) 0;
+  int res = SWIG_AsPtr_std_string (obj, &v);
+  if (!SWIG_IsOK(res)) return res;
+  if (v) {
+    if (val) *val = *v;
+    if (SWIG_IsNewObj(res)) {
+      delete v;
+      res = SWIG_DelNewMask(res);
+    }
+    return res;
+  }
+  return SWIG_ERROR;
+}
+
+
 SWIGINTERNINLINE PyObject *
 SWIG_FromCharPtrAndSize(const char* carray, size_t size)
 {
@@ -5265,24 +5283,6 @@ SWIGINTERNINLINE PyObject *
 SWIG_From_std_string  (const std::string& s)
 {
   return SWIG_FromCharPtrAndSize(s.data(), s.size());
-}
-
-
-SWIGINTERN int
-SWIG_AsVal_std_string (PyObject * obj, std::string *val)
-{
-  std::string* v = (std::string *) 0;
-  int res = SWIG_AsPtr_std_string (obj, &v);
-  if (!SWIG_IsOK(res)) return res;
-  if (v) {
-    if (val) *val = *v;
-    if (SWIG_IsNewObj(res)) {
-      delete v;
-      res = SWIG_DelNewMask(res);
-    }
-    return res;
-  }
-  return SWIG_ERROR;
 }
 
 
@@ -5870,6 +5870,43 @@ int SwigDirector_ImageGroundConnection::number_sample() const {
 }
 
 
+std::vector< std::string,std::allocator< std::string > > SwigDirector_ImageGroundConnection::parameter_name() const {
+  std::vector< std::string,std::allocator< std::string > > c_result;
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 9;
+  const char * const swig_method_name = "_v_parameter_name";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject args = PyTuple_New(0);
+  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject*) args, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter_name");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  std::vector<std::string,std::allocator< std::string > > *swig_optr = 0;
+  int swig_ores = swig::asptr(result, &swig_optr);
+  if (!SWIG_IsOK(swig_ores) || !swig_optr) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError((swig_optr ? swig_ores : SWIG_TypeError))), "in output value of type '""std::vector< std::string,std::allocator< std::string > >""'");
+  }
+  c_result = *swig_optr;
+  if (SWIG_IsNewObj(swig_ores)) delete swig_optr;
+  return (std::vector< std::string,std::allocator< std::string > >) c_result;
+}
+
+
 double SwigDirector_ImageGroundConnection::resolution_meter(GeoCal::ImageCoordinate const &Ic) const {
   double c_result;
   swig::SwigVar_PyObject obj0;
@@ -5881,7 +5918,7 @@ double SwigDirector_ImageGroundConnection::resolution_meter(GeoCal::ImageCoordin
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 9;
+  const size_t swig_method_index = 10;
   const char * const swig_method_name = "resolution_meter";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -5916,7 +5953,7 @@ double SwigDirector_ImageGroundConnection::resolution_meter() const {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 10;
+  const size_t swig_method_index = 11;
   const char * const swig_method_name = "resolution_meter";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject args = PyTuple_New(0);
@@ -7932,6 +7969,8 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_name(PyObject *SWI
   boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   std::vector< std::string,std::allocator< std::string > > result;
   
   if (!args) SWIG_fail;
@@ -7951,14 +7990,24 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_name(PyObject *SWI
       arg1 = const_cast< GeoCal::ImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    try {
-      result = ((GeoCal::ImageGroundConnection const *)arg1)->parameter_name();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::ImageGroundConnection const *)arg1)->GeoCal::ImageGroundConnection::parameter_name();
+        } else {
+          result = ((GeoCal::ImageGroundConnection const *)arg1)->parameter_name();
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   resultobj = swig::from(static_cast< std::vector<std::string,std::allocator< std::string > > >(result));
   return resultobj;
@@ -8294,8 +8343,6 @@ SWIGINTERN PyObject *_wrap_new_OffsetImageGroundConnection(PyObject *SWIGUNUSEDP
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg1 = 0 ;
   double arg2 ;
   double arg3 ;
-  int arg4 ;
-  int arg5 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared1 ;
@@ -8304,14 +8351,10 @@ SWIGINTERN PyObject *_wrap_new_OffsetImageGroundConnection(PyObject *SWIGUNUSEDP
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  PyObject *swig_obj[5] ;
+  PyObject *swig_obj[3] ;
   GeoCal::OffsetImageGroundConnection *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"new_OffsetImageGroundConnection",5,5,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"new_OffsetImageGroundConnection",3,3,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
@@ -8347,19 +8390,9 @@ SWIGINTERN PyObject *_wrap_new_OffsetImageGroundConnection(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_OffsetImageGroundConnection" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_OffsetImageGroundConnection" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_OffsetImageGroundConnection" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
   {
     try {
-      result = (GeoCal::OffsetImageGroundConnection *)new GeoCal::OffsetImageGroundConnection((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,arg2,arg3,arg4,arg5);
+      result = (GeoCal::OffsetImageGroundConnection *)new GeoCal::OffsetImageGroundConnection((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,arg2,arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -8686,7 +8719,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ImageGroundConnection_swiginit", ImageGroundConnection_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_OffsetImageGroundConnection", _wrap_new_OffsetImageGroundConnection, METH_VARARGS, (char *)"\n"
 		"GeoCal::OffsetImageGroundConnection::OffsetImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > &Ig_original, double\n"
-		"Line_offset, double Sample_offset, int Number_line, int Number_sample)\n"
+		"Line_offset, double Sample_offset)\n"
 		"Constructor. \n"
 		""},
 	 { (char *)"OffsetImageGroundConnection__v_original_image_ground_connection", (PyCFunction)_wrap_OffsetImageGroundConnection__v_original_image_ground_connection, METH_O, (char *)"\n"

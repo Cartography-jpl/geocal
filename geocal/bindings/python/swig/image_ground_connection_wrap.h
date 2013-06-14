@@ -32,6 +32,7 @@ public:
     virtual blitz::Array< double,2 > image_coordinate_jac_parm(GeoCal::GroundCoordinate const &Gc) const;
     virtual int number_line() const;
     virtual int number_sample() const;
+    virtual std::vector< std::string,std::allocator< std::string > > parameter_name() const;
     virtual double resolution_meter(GeoCal::ImageCoordinate const &Ic) const;
     virtual double resolution_meter() const;
 
@@ -67,7 +68,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[11];
+    mutable swig::SwigVar_PyObject vtable[12];
 #endif
 
 };

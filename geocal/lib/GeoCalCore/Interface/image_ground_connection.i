@@ -92,7 +92,7 @@ public:
   %python_attribute_with_set(title, std::string)
   std::string print_to_string() const;
   %python_attribute_with_set(parameter, blitz::Array<double, 1>)
-  %python_attribute(parameter_name, std::vector<std::string>)
+  %python_attribute(parameter_name, virtual std::vector<std::string>)
   virtual double resolution_meter(const ImageCoordinate& Ic) const;
   virtual double resolution_meter() const;
   %python_attribute2(dem, dem_ptr, boost::shared_ptr<Dem>)
@@ -118,7 +118,7 @@ def ground_coordinate(self, ic, dem = None):
 
 class OffsetImageGroundConnection: public ImageGroundConnection {
 public:
-  OffsetImageGroundConnection(const boost::shared_ptr<ImageGroundConnection>& Ig_original, double Line_offset, double Sample_offset, int Number_line, int Number_sample);
+  OffsetImageGroundConnection(const boost::shared_ptr<ImageGroundConnection>& Ig_original, double Line_offset, double Sample_offset);
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
@@ -128,7 +128,7 @@ public:
   %python_attribute(line_offset, double)
   %python_attribute(sample_offset, double)
   %pickle_init(1, self.original_image_ground_connection, self.line_offset, 
-	       self.sample_offset, self.number_line, self.number_sample)
+	       self.sample_offset)
 };
 
 }

@@ -416,7 +416,7 @@ class OffsetImageGroundConnection(ImageGroundConnection):
     def __init__(self, *args): 
         """
         GeoCal::OffsetImageGroundConnection::OffsetImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > &Ig_original, double
-        Line_offset, double Sample_offset, int Number_line, int Number_sample)
+        Line_offset, double Sample_offset)
         Constructor. 
         """
         _image_ground_connection.OffsetImageGroundConnection_swiginit(self,_image_ground_connection.new_OffsetImageGroundConnection(*args))
@@ -458,7 +458,7 @@ class OffsetImageGroundConnection(ImageGroundConnection):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.original_image_ground_connection,self.line_offset,self.sample_offset,self.number_line,self.number_sample)
+      return _new_from_init, (self.__class__, 1, self.original_image_ground_connection,self.line_offset,self.sample_offset)
 
     __swig_destroy__ = _image_ground_connection.delete_OffsetImageGroundConnection
 OffsetImageGroundConnection._v_original_image_ground_connection = new_instancemethod(_image_ground_connection.OffsetImageGroundConnection__v_original_image_ground_connection,None,OffsetImageGroundConnection)

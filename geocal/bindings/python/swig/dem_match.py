@@ -137,7 +137,7 @@ class DemMatch(geocal.generic_object.GenericObject):
     def surface_point(self, *args):
         """
         blitz::Array< double, 2 > DemMatch::surface_point(int Lstart, int Sstart, int Lend, int Send, int Lstride=1, int
-        Sstride=1) const
+        Sstride=1, bool Include_ic=false) const
         Look through the given range in line and sample for the first image.
 
         Try image matching, and where it succeeds look at the intersection of
@@ -151,7 +151,11 @@ class DemMatch(geocal.generic_object.GenericObject):
         each row corresponding to a point. The columns are latitude,
         longitude, and height (in degrees and meters). This is a bit odd way
         to return this, but it works well with the python class that uses this
-        code. 
+        code.
+
+        Note that you can optionally specify Include_ic as true. If this is
+        true, we return a N x (3 + 4) array, where the last four columns are
+        the image coordinate for the first and second images. 
         """
         return _dem_match.DemMatch_surface_point(self, *args)
 

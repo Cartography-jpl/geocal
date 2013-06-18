@@ -5128,6 +5128,17 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
 {
@@ -5284,6 +5295,117 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_0(PyObject *SWIGUNUSEDPA
   int arg5 ;
   int arg6 ;
   int arg7 ;
+  bool arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMatch const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMatch const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  bool val8 ;
+  int ecode8 = 0 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMatch_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMatch_surface_point" "', argument " "1"" of type '" "GeoCal::DemMatch const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DemMatch > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DemMatch > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMatch * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DemMatch > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMatch * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DemMatch_surface_point" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "DemMatch_surface_point" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "DemMatch_surface_point" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "DemMatch_surface_point" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "DemMatch_surface_point" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "DemMatch_surface_point" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "DemMatch_surface_point" "', argument " "8"" of type '" "bool""'");
+  } 
+  arg8 = static_cast< bool >(val8);
+  {
+    try {
+      result = ((GeoCal::DemMatch const *)arg1)->surface_point(arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double>(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+      SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      SWIG_POINTER_NEW | 0 );
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMatch *arg1 = (GeoCal::DemMatch *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  int arg7 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::DemMatch const > tempshared1 ;
@@ -5378,7 +5500,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::DemMatch *arg1 = (GeoCal::DemMatch *) 0 ;
   int arg2 ;
@@ -5473,7 +5595,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::DemMatch *arg1 = (GeoCal::DemMatch *) 0 ;
   int arg2 ;
@@ -5562,23 +5684,27 @@ fail:
 
 SWIGINTERN PyObject *_wrap_DemMatch_surface_point(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[8];
+  PyObject *argv[9];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"DemMatch_surface_point",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"DemMatch_surface_point",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 5) {
-    return _wrap_DemMatch_surface_point__SWIG_2(self, argc, argv);
+    return _wrap_DemMatch_surface_point__SWIG_3(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_DemMatch_surface_point__SWIG_1(self, argc, argv);
+    return _wrap_DemMatch_surface_point__SWIG_2(self, argc, argv);
   }
   if (argc == 7) {
+    return _wrap_DemMatch_surface_point__SWIG_1(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_DemMatch_surface_point__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'DemMatch_surface_point'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::DemMatch::surface_point(int,int,int,int,int,int,bool) const\n"
     "    GeoCal::DemMatch::surface_point(int,int,int,int,int,int) const\n"
     "    GeoCal::DemMatch::surface_point(int,int,int,int,int) const\n"
     "    GeoCal::DemMatch::surface_point(int,int,int,int) const\n");
@@ -6044,7 +6170,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"DemMatch_surface_point", _wrap_DemMatch_surface_point, METH_VARARGS, (char *)"\n"
 		"blitz::Array< double, 2 > DemMatch::surface_point(int Lstart, int Sstart, int Lend, int Send, int Lstride=1, int\n"
-		"Sstride=1) const\n"
+		"Sstride=1, bool Include_ic=false) const\n"
 		"Look through the given range in line and sample for the first image.\n"
 		"\n"
 		"Try image matching, and where it succeeds look at the intersection of\n"
@@ -6058,7 +6184,11 @@ static PyMethodDef SwigMethods[] = {
 		"each row corresponding to a point. The columns are latitude,\n"
 		"longitude, and height (in degrees and meters). This is a bit odd way\n"
 		"to return this, but it works well with the python class that uses this\n"
-		"code. \n"
+		"code.\n"
+		"\n"
+		"Note that you can optionally specify Include_ic as true. If this is\n"
+		"true, we return a N x (3 + 4) array, where the last four columns are\n"
+		"the image coordinate for the first and second images. \n"
 		""},
 	 { (char *)"DemMatch___str__", (PyCFunction)_wrap_DemMatch___str__, METH_O, NULL},
 	 { (char *)"DemMatch__v_match", (PyCFunction)_wrap_DemMatch__v_match, METH_O, (char *)"\n"

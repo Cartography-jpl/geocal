@@ -15,12 +15,18 @@ using namespace GeoCal;
 /// longitude, and height (in degrees and meters). This is a bit odd
 /// way to return this, but it works well with the python class that
 /// uses this code.
+///
+/// Note that you can optionally specify Include_ic as true. If this
+/// is true, we return a N x (3 + 4) array, where the last four
+/// columns are the image coordinate for the first and second images.
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 2> DemMatch::surface_point
-(int Lstart, int Sstart, int Lend, int Send, int Lstride, int Sstride) const
+(int Lstart, int Sstart, int Lend, int Send, int Lstride, int Sstride,
+ bool Include_ic) const
 {
   std::vector<Geodetic> res;
+  std::vector<ImageCoordinate> ic1v, ic2v;
   ImageCoordinate ic2;
   double line_sigma, sample_sigma, dist;
   boost::shared_ptr<CartesianFixed> p;
@@ -42,14 +48,24 @@ blitz::Array<double, 2> DemMatch::surface_point
 	  if(!ecr)
 	    throw Exception("Must be Ecr");
 	  res.push_back(ecr->convert_to_geodetic());
+	  if(Include_ic) {
+	    ic1v.push_back(ImageCoordinate(i, j));
+	    ic2v.push_back(ic2);
+	  }
 	}
       }
     }
-  blitz::Array<double, 2> res2((int) res.size(), 3);
+  blitz::Array<double, 2> res2((int) res.size(), (Include_ic ? 3 + 4 : 3));
   for(int i = 0; i < res2.rows(); ++i) {
     res2(i, 0) = res[i].latitude();
     res2(i, 1) = res[i].longitude();
     res2(i, 2) = res[i].height_reference_surface();
+    if(Include_ic) {
+      res2(i, 3) = ic1v[i].line;
+      res2(i, 4) = ic1v[i].sample;
+      res2(i, 5) = ic2v[i].line;
+      res2(i, 6) = ic2v[i].sample;
+    }
   }
   return res2;
 }

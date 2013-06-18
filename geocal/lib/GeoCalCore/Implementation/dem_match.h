@@ -31,7 +31,8 @@ public:
   blitz::Array<double, 2> surface_point(int Lstart, int Sstart,
 					int Lend, int Send,
 					int Lstride = 1, 
-					int Sstride = 1) const;
+					int Sstride = 1,
+					bool Include_ic = false) const;
 
 //-----------------------------------------------------------------------
 /// Print to stream.

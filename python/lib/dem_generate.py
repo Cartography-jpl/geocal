@@ -115,10 +115,11 @@ class DemGenerate:
         self.h = dict["h"]
         self.r = dict["r"]
 
-    def surface_point(self, lstart, sstart, lend, send):
+    def surface_point(self, lstart, sstart, lend, send, include_image = False):
         '''Calculate surface points'''
         r = self.dem_match.surface_point(lstart, sstart, lend, send,
-                                            self.stride, self.stride)
+                                         self.stride, self.stride, 
+                                         include_image)
         print "Number point:   %d" %(self.dem_match.number_point)
         print "Number match:   %d" %(self.dem_match.number_match)
         print "Number success: %d" %(self.dem_match.number_success)
@@ -151,7 +152,7 @@ class DemGenerate:
                     self.aoi.coordinate(Geodetic(self.r[i,0], self.r[i,1]))
         
         
-    def height_all(self, pool = None):
+    def height_all(self, pool = None, include_image = False):
         '''Find list of surface points by exploring the entire AOI.
         
         Because this can take a while to run, you can optionally supply
@@ -166,7 +167,7 @@ class DemGenerate:
         else:
             lstart, sstart, lend, send = self.range_image1()
         if(pool is None):
-            return self.surface_point(lstart, sstart, lend, send)
+            return self.surface_point(lstart, sstart, lend, send, include_image)
         if(lstart > sstart):
             lstep = (lend - lstart) / multiprocessing.cpu_count()
             sstep = send - sstart
@@ -177,12 +178,13 @@ class DemGenerate:
         for ls in range(lstart, lend, lstep):
             for ss in range(sstart, send, sstep):
                 arg.append([ls, ss, min(ls + lstep, lend),
-                            min(ss + sstep, send)])
+                            min(ss + sstep, send), include_image])
         func = SurfacePointWrap(self)
         res = pool.map(func, arg)
         return np.concatenate(res)
         
-    def height_grid(self, fill_value = -9999.0, pool = None):
+    def height_grid(self, fill_value = -9999.0, pool = None, 
+                    include_image = False):
         '''Determine surface points from conjugate points, and resample to
         the AOI grid. Returns the height.
 
@@ -194,17 +196,32 @@ class DemGenerate:
 
         Because this can take a while to run, you can optionally supply
         a multiprocessing.Pool. If this is given, we use that pool 
-        of processors to do this calculation.'''
-        self.r = self.height_all(pool)
+        of processors to do this calculation.
+
+        You can specify include_image as True, and then we return the height 
+        map projected, and also the height in image 1 and image 2 space.'''
+        self.r = self.height_all(pool, include_image)
         self.h = np.empty((self.aoi.number_y_pixel,
                            self.aoi.number_x_pixel))
         self.h[:] = fill_value
+        if(include_image):
+            self.img1_h = np.empty((self.igc1.number_line, 
+                                    self.igc1.number_sample))
+            self.img2_h = np.empty((self.igc2.number_line, 
+                                    self.igc2.number_sample))
+            self.img1_h[:] = fill_value
+            self.img2_h[:] = fill_value
         for i in range(self.r.shape[0]):
             gp = Geodetic(self.r[i,0], self.r[i,1])
             sample,line = self.aoi.coordinate(gp)
             if(line >= 0 and line < self.h.shape[0] and
                sample >= 0 and sample < self.h.shape[1]):
                 self.h[int(line), int(sample)] = self.r[i, 2]
+            if(include_image):
+                self.img1_h[int(round(self.r[i,3])), 
+                            int(round(self.r[i,4]))] = self.r[i,2]
+                self.img2_h[int(round(self.r[i,5])), 
+                            int(round(self.r[i,6]))] = self.r[i,2]
 
         # For now, we'll also get the filled data. This will probably
         # go away to be replaced with something better in the future
@@ -222,7 +239,10 @@ class DemGenerate:
             self.h_fill = np.zeros((self.aoi.number_y_pixel,
                                     self.aoi.number_x_pixel))
             self.h_fill[:] = fill_value
-        return self.h
+        if(include_image):
+            return self.h, self.img1_h, self.img2_h
+        else:
+            return self.h
 
     def dem_orig(self):
         dv_orig = np.zeros((self.aoi.number_y_pixel, 

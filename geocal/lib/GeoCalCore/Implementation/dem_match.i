@@ -19,7 +19,7 @@ public:
 	   double Max_dist_good_point);
   blitz::Array<double, 2> surface_point
     (int Lstart, int Sstart, int Lend, int Send,
-     int Lstride = 1, int Sstride = 1) const;
+     int Lstride = 1, int Sstride = 1, bool Include_ic = false) const;
   std::string print_to_string() const;
   %python_attribute(match, boost::shared_ptr<ImageToImageMatch>)
   %python_attribute(ray_intersect, boost::shared_ptr<RayIntersect>)

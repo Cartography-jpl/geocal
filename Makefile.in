@@ -8037,6 +8037,8 @@ installcheck-local: $(INSTALLCHECK_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@clean_doxygen_generate:
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	-rm -rf doc/geocal
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	-rm -r doc/geocal.tag
+# Used to short circuit tests that would otherwise run.
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_FALSE@export NO_AFIDS_A_TEST=t
 
 @BUILD_AFIDS_PYTHON_TRUE@install_python_doc: 
 @BUILD_AFIDS_PYTHON_TRUE@	export PATH=$(bindir):$$PATH && \

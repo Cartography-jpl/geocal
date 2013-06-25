@@ -224,6 +224,13 @@ class Vector_ImageMask(object):
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _image_mask.Vector_ImageMask_swiginit(self,_image_mask.new_Vector_ImageMask(*args))
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, list(self))
+
     __swig_destroy__ = _image_mask.delete_Vector_ImageMask
 Vector_ImageMask.iterator = new_instancemethod(_image_mask.Vector_ImageMask_iterator,None,Vector_ImageMask)
 Vector_ImageMask.__nonzero__ = new_instancemethod(_image_mask.Vector_ImageMask___nonzero__,None,Vector_ImageMask)

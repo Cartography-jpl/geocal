@@ -17,6 +17,17 @@ public:
   RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
 			   const boost::shared_ptr<RasterImage>& Img,
 			   const std::string& Title = "Image");
+  RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
+			   const boost::shared_ptr<RasterImage>& Img,
+			   const std::string& Title,
+			   const boost::shared_ptr<ImageMask>& Img_mask
+			   );
+  RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
+			   const boost::shared_ptr<RasterImage>& Img,
+			   const std::string& Title,
+			   const boost::shared_ptr<ImageMask>& Img_mask,
+			   const boost::shared_ptr<GroundMask>& Ground_mask
+			   );
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& OUTPUT,
 		 boost::shared_ptr<CartesianFixed>& OUTPUT) const;
@@ -25,7 +36,8 @@ public:
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
   %python_attribute2(rpc, rpc_ptr, boost::shared_ptr<Rpc>)
-  %pickle_init(1, self.rpc, self.dem, self.image, self.title)
+  %pickle_init(1, self.rpc, self.dem, self.image, self.title, self.image_mask,
+	       self.ground_mask)
 };
 }
 

@@ -9,6 +9,7 @@ usage='''Usage:
   shelve_dem [options] <dem_file> <output>
   shelve_dem [options] <dem_file> <datum_file> <output>
   shelve_dem --srtm <output>
+  shelve_dem --constant-dem=h <output>
   shelve_dem -h | --help
   shelve_dem -v | --version
 
@@ -28,6 +29,9 @@ Options:
        specify this option and we will return a height of "0" for any
        attempt to read outside the DEM.
 
+  --constant-dem=h
+       Use a constant height DEM (a SimpleDem), with the given height.
+
   --dem-band=b
        The band of the DEM file to use (1 based). [default: 1]
 
@@ -45,6 +49,8 @@ args = docopt_simple(usage, version=version)
 
 if(args.srtm):
     dem = SrtmDem()
+elif(args.constant_dem is not None):
+    dem = SimpleDem(args.constant_dem)
 else:
     if(args.datum_file):
         datum = GdalDatum(args.datum_file, args.datum_band)

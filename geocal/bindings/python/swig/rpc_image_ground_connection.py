@@ -123,7 +123,9 @@ class RpcImageGroundConnection(geocal.image_ground_connection.ImageGroundConnect
         """
         GeoCal::RpcImageGroundConnection::RpcImageGroundConnection(const Rpc &R, const boost::shared_ptr< Dem > &D, const
         boost::shared_ptr< RasterImage > &Img, const std::string
-        &Title="Image")
+        &Title="Image", const boost::shared_ptr< ImageMask >
+        &Img_mask=boost::shared_ptr< ImageMask >(), const boost::shared_ptr<
+        GroundMask > &Ground_mask=boost::shared_ptr< GroundMask >())
 
         """
         _rpc_image_ground_connection.RpcImageGroundConnection_swiginit(self,_rpc_image_ground_connection.new_RpcImageGroundConnection(*args))
@@ -151,7 +153,7 @@ class RpcImageGroundConnection(geocal.image_ground_connection.ImageGroundConnect
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.rpc,self.dem,self.image,self.title)
+      return _new_from_init, (self.__class__, 1, self.rpc,self.dem,self.image,self.title,self.image_mask,self.ground_mask)
 
     __swig_destroy__ = _rpc_image_ground_connection.delete_RpcImageGroundConnection
 RpcImageGroundConnection.cf_look_vector = new_instancemethod(_rpc_image_ground_connection.RpcImageGroundConnection_cf_look_vector,None,RpcImageGroundConnection)

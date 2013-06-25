@@ -17,8 +17,14 @@ public:
 
   RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
 			   const boost::shared_ptr<RasterImage>& Img,
-			   const std::string& Title = "Image")
-    : ImageGroundConnection(D, Img, Title), rpc_(new Rpc(R))
+			   const std::string& Title = "Image",
+			   const boost::shared_ptr<ImageMask>& Img_mask = 
+			   boost::shared_ptr<ImageMask>(),
+			   const boost::shared_ptr<GroundMask>& Ground_mask =
+			   boost::shared_ptr<GroundMask>())
+			   
+    : ImageGroundConnection(D, Img, Title, Img_mask, Ground_mask), 
+      rpc_(new Rpc(R))
   { }
 
 //-----------------------------------------------------------------------

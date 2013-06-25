@@ -248,6 +248,13 @@ class Vector_GroundMask(object):
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _ground_mask.Vector_GroundMask_swiginit(self,_ground_mask.new_Vector_GroundMask(*args))
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, list(self))
+
     __swig_destroy__ = _ground_mask.delete_Vector_GroundMask
 Vector_GroundMask.iterator = new_instancemethod(_ground_mask.Vector_GroundMask_iterator,None,Vector_GroundMask)
 Vector_GroundMask.__nonzero__ = new_instancemethod(_ground_mask.Vector_GroundMask___nonzero__,None,Vector_GroundMask)

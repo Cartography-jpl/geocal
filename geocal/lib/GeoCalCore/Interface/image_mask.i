@@ -29,3 +29,7 @@ public:
 
 }
 %template(Vector_ImageMask) std::vector<boost::shared_ptr<GeoCal::ImageMask> >;
+
+%extend std::vector<boost::shared_ptr<GeoCal::ImageMask> > {
+  %pickle_init(1, list(self))
+};

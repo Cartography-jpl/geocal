@@ -12,4 +12,8 @@ def test_shelve_dem():
     subprocess.check_call(["shelve_dem", 
                            test_data + "nevada_elv_aoi.img",
                            "sqlite_shelf.db:dem_initial"])
+    subprocess.check_call(["shelve_dem", "--srtm",
+                           "sqlite_shelf.db:dem_srtm"])
+    subprocess.check_call(["shelve_dem", "--constant-dem=10",
+                           "sqlite_shelf.db:dem_constant"])
 

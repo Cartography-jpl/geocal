@@ -32,3 +32,6 @@ public:
 
 }
 %template(Vector_GroundMask) std::vector<boost::shared_ptr<GeoCal::GroundMask> >;
+%extend std::vector<boost::shared_ptr<GeoCal::GroundMask> > {
+  %pickle_init(1, list(self))
+};

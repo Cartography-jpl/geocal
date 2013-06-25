@@ -200,8 +200,9 @@ public:
   Geodetic ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const;
   static Rpc generate_rpc(const ImageGroundConnection& Igc,
 			  double Min_height, double Max_height,
-			  int Nlat = 20, int Nlon = 20, int Nheight = 20
-			  );
+			  int Nlat = 20, int Nlon = 20, int Nheight = 20,
+			  bool Skip_masked_point = false,
+			  bool Ignore_error = false);
 	   
 //-----------------------------------------------------------------------
 /// Use the RPC to convert from a GroundCoordinate to image space.

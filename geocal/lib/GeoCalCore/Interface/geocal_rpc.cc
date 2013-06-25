@@ -15,43 +15,29 @@ using namespace blitz;
 /// ImageGroundConnection.  We determine that latitude and longitude
 /// range to use automatically to cover the range given by the
 /// ImageGroundConnection.
+///
+/// This routine always ignores ImageGroundConnectionFailed
+/// exceptions, and just skips to the next point. But if we are using
+/// python code for the ImageGroundConnection we can't translate
+/// errors to ImageGroundConnectionFailed (this is a limitation of
+/// SWIG). So you can optionally specify Ignore_error as true, in
+/// which case we ignore *all* exceptions and just skip to the next
+/// point.
+///
+/// We normally look at all image points when generating the RPC. You
+/// can optionally specify Skip_masked_point to skip all image points
+/// that are masked.
 //-----------------------------------------------------------------------
 
 Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
 		      double Min_height, double Max_height,
-		      int Nln, int Nsmp, int Nheight)
+		      int Nln, int Nsmp, int Nheight, bool Skip_masked_point,
+		      bool Ignore_error)
 {
-  double min_lat = -999, max_lat = -999, min_lon = -999, max_lon = -999;
-  SimpleDem d1(Min_height);
-  SimpleDem d2(Max_height);
-  for(int i = 0; i < Igc.number_line(); i += Igc.number_line() - 1)
-    for(int j = 0; j < Igc.number_sample(); j += Igc.number_sample() - 1) {
-      boost::shared_ptr<GroundCoordinate> pt1 =
-	Igc.ground_coordinate_dem(ImageCoordinate(i, j), d1);
-      boost::shared_ptr<GroundCoordinate> pt2 =
-	Igc.ground_coordinate_dem(ImageCoordinate(i, j), d2);
-      if(i == 0 && j ==0) {
-	min_lat = max_lat = pt1->latitude();
-	min_lon = max_lon = pt1->longitude();
-      } else {
-	min_lat = std::min(min_lat, pt1->latitude());
-	max_lat = std::max(max_lat, pt1->latitude());
-	min_lon = std::min(min_lon, pt1->longitude());
-	max_lon = std::max(max_lon, pt1->longitude());
-      }
-      min_lat = std::min(min_lat, pt2->latitude());
-      max_lat = std::max(max_lat, pt2->latitude());
-      min_lon = std::min(min_lon, pt2->longitude());
-      max_lon = std::max(max_lon, pt2->longitude());
-    }
   Rpc rpc;
   rpc.error_bias = 0;		// We don't calculate these right now
   rpc.error_random = 0;
   rpc.rpc_type = Rpc::RPC_B;
-  rpc.latitude_offset = (max_lat + min_lat) / 2.0;
-  rpc.latitude_scale = (max_lat - min_lat) / 2.0;
-  rpc.longitude_offset = (max_lon + min_lon) / 2.0;
-  rpc.longitude_scale = (max_lon - min_lon) / 2.0;
 
   // The NITF convention is to have these be integers.
   rpc.height_offset = floor((Max_height + Min_height) / 2.0 + 0.5);
@@ -61,21 +47,12 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
   rpc.sample_offset = floor(Igc.number_sample() / 2.0 + 0.5);
   rpc.sample_scale = floor(Igc.number_sample() / 2.0 + 0.5);
 
-  // The NITF convention is to have these have 4 digits after
-  // the decimal point.
-  rpc.latitude_offset = floor(rpc.latitude_offset * 10000.0 + 0.5) / 10000.0;
-  rpc.latitude_scale = floor(rpc.latitude_scale * 10000.0 + 0.5) / 10000.0;
-  rpc.longitude_offset = floor(rpc.longitude_offset * 10000.0 + 0.5) / 10000.0;
-  rpc.longitude_scale = floor(rpc.longitude_scale * 10000.0 + 0.5) / 10000.0;
-
-  // The NITF convention is to have these be integers.
-  rpc.height_offset = floor(rpc.height_offset + 0.5);
-  rpc.height_scale = floor(rpc.height_scale + 0.5);
-
   std::vector<double> ln, smp, lat, lon, h;
 
   // Make sure to nail down the edges of the image, since RPC
   // polynomial extrapolates poorly
+  double min_lat = -999, max_lat = -999, min_lon = -999, max_lon = -999;
+  bool first = true;
   for(int ih = 0; ih < Nheight; ++ih)
     for(int i = 0; i < Nln + 1; ++i)
       for(int j = 0; j < Nsmp + 1; ++j) {
@@ -84,6 +61,8 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
 				Igc.number_line() - 1);
 	  double smpv = std::min((Igc.number_sample() / Nsmp) * j, 
 				 Igc.number_sample() - 1);
+	  if(Skip_masked_point && Igc.image_mask()->mask(lnv, smpv))
+	    continue;
 	  double hdem = rpc.height_offset + rpc.height_scale * 
 	    (ih * 2.0 / Nheight - 1);
 	  boost::shared_ptr<GroundCoordinate> 
@@ -95,10 +74,36 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
 	  h.push_back(pt->height_reference_surface());
 	  ln.push_back(ic.line);
 	  smp.push_back(ic.sample);
+	  if(first) {
+	    min_lat = max_lat = pt->latitude();
+	    min_lon = max_lon = pt->longitude();
+	    first = false;
+	  } else {
+	    min_lat = std::min(min_lat, pt->latitude());
+	    max_lat = std::max(max_lat, pt->latitude());
+	    min_lon = std::min(min_lon, pt->longitude());
+	    max_lon = std::max(max_lon, pt->longitude());
+	  }
 	} catch(const ImageGroundConnectionFailed&) {
 	  // Ignore failures, just go to next point.
+	} catch(...) {
+	  if(!Ignore_error)
+	    throw;
 	}
       }
+
+  rpc.latitude_offset = (max_lat + min_lat) / 2.0;
+  rpc.latitude_scale = (max_lat - min_lat) / 2.0;
+  rpc.longitude_offset = (max_lon + min_lon) / 2.0;
+  rpc.longitude_scale = (max_lon - min_lon) / 2.0;
+
+  // The NITF convention is to have these have 4 digits after
+  // the decimal point.
+  rpc.latitude_offset = floor(rpc.latitude_offset * 10000.0 + 0.5) / 10000.0;
+  rpc.latitude_scale = floor(rpc.latitude_scale * 10000.0 + 0.5) / 10000.0;
+  rpc.longitude_offset = floor(rpc.longitude_offset * 10000.0 + 0.5) / 10000.0;
+  rpc.longitude_scale = floor(rpc.longitude_scale * 10000.0 + 0.5) / 10000.0;
+
   rpc.fit_all(ln, smp, lat, lon, h);
   return rpc;
 }

@@ -335,12 +335,24 @@ class Rpc(geocal.generic_object.GenericObject):
     def generate_rpc(*args):
         """
         Rpc Rpc::generate_rpc(const ImageGroundConnection &Igc, double Min_height, double
-        Max_height, int Nlat=20, int Nlon=20, int Nheight=20)
+        Max_height, int Nlat=20, int Nlon=20, int Nheight=20, bool
+        Skip_masked_point=false, bool Ignore_error=false)
         Generate a RPC that approximates the calculation done by a
         ImageGroundConnection.
 
         We determine that latitude and longitude range to use automatically to
-        cover the range given by the ImageGroundConnection. 
+        cover the range given by the ImageGroundConnection.
+
+        This routine always ignores ImageGroundConnectionFailed exceptions,
+        and just skips to the next point. But if we are using python code for
+        the ImageGroundConnection we can't translate errors to
+        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
+        optionally specify Ignore_error as true, in which case we ignore all
+        exceptions and just skip to the next point.
+
+        We normally look at all image points when generating the RPC. You can
+        optionally specify Skip_masked_point to skip all image points that are
+        masked. 
         """
         return _geocal_rpc.Rpc_generate_rpc(*args)
 
@@ -467,12 +479,24 @@ Rpc_swigregister(Rpc)
 def Rpc_generate_rpc(*args):
   """
     Rpc Rpc::generate_rpc(const ImageGroundConnection &Igc, double Min_height, double
-    Max_height, int Nlat=20, int Nlon=20, int Nheight=20)
+    Max_height, int Nlat=20, int Nlon=20, int Nheight=20, bool
+    Skip_masked_point=false, bool Ignore_error=false)
     Generate a RPC that approximates the calculation done by a
     ImageGroundConnection.
 
     We determine that latitude and longitude range to use automatically to
-    cover the range given by the ImageGroundConnection. 
+    cover the range given by the ImageGroundConnection.
+
+    This routine always ignores ImageGroundConnectionFailed exceptions,
+    and just skips to the next point. But if we are using python code for
+    the ImageGroundConnection we can't translate errors to
+    ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
+    optionally specify Ignore_error as true, in which case we ignore all
+    exceptions and just skip to the next point.
+
+    We normally look at all image points when generating the RPC. You can
+    optionally specify Skip_masked_point to skip all image points that are
+    masked. 
     """
   return _geocal_rpc.Rpc_generate_rpc(*args)
 

@@ -184,7 +184,7 @@ class DemGenerate:
         return np.concatenate(res)
         
     def height_grid(self, fill_value = -9999.0, pool = None, 
-                    include_image = False):
+                    include_image = False, interpolate_method = 'nearest'):
         '''Determine surface points from conjugate points, and resample to
         the AOI grid. Returns the height.
 
@@ -233,8 +233,9 @@ class DemGenerate:
                 g[j,i,1] = self.aoi.ground_coordinate(i, j).longitude
         if len(self.r) > 0:
             self.h_fill = scipy.interpolate.griddata(self.r[:,0:2], 
-                                                     self.r[:, 2], g, 
-                                                     method = "nearest") 
+                                          self.r[:, 2], g, 
+                                          method = interpolate_method,
+                                          fill_value = fill_value) 
         else:
             self.h_fill = np.zeros((self.aoi.number_y_pixel,
                                     self.aoi.number_x_pixel))

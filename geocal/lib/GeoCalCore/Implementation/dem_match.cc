@@ -31,14 +31,16 @@ blitz::Array<double, 2> DemMatch::surface_point
   double line_sigma, sample_sigma, dist;
   boost::shared_ptr<CartesianFixed> p;
   bool success;
+  int diagnostic;
   npoint = 0;
+  diagnostic_value = 0;
   all_stat.reset(new Statistic);
   good_stat.reset(new Statistic);
   for(int i = Lstart; i < Lend;  i += Lstride)
     for(int j = Sstart; j < Send; j += Sstride) {
       ++npoint;
       match_->match(ImageCoordinate(i,j), ic2, line_sigma, sample_sigma, 
-		   success);
+		    success, &diagnostic);
       if(success) {
 	ri->two_ray_intersect(ImageCoordinate(i, j), ic2, p, dist);
 	all_stat->add(dist);
@@ -53,7 +55,13 @@ blitz::Array<double, 2> DemMatch::surface_point
 	    ic2v.push_back(ic2);
 	  }
 	}
+      } else {
+	if(diagnostic >= 0 && diagnostic <= MAX_DIAGNOSTIC_VALUE)
+	  diagnostic_value(diagnostic) += 1;
+	else
+	  diagnostic_value(MAX_DIAGNOSTIC_VALUE + 1) += 1;
       }
+      
     }
   blitz::Array<double, 2> res2((int) res.size(), (Include_ic ? 3 + 4 : 3));
   for(int i = 0; i < res2.rows(); ++i) {

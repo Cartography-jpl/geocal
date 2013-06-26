@@ -6017,6 +6017,63 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_DemMatch__v_diagnostic(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMatch *arg1 = (GeoCal::DemMatch *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMatch const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMatch const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< int,1 > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMatch_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMatch__v_diagnostic" "', argument " "1"" of type '" "GeoCal::DemMatch const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DemMatch > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DemMatch > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMatch * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DemMatch > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMatch * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::DemMatch const *)arg1)->diagnostic();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(int);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<int>(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<int, 1>* t = new blitz::Array<int, 1>(result);
+    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+      SWIGTYPE_p_blitz__ArrayT_int_1_t, 
+      SWIG_POINTER_NEW | 0 );
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_DemMatch__v_all_distance_stat(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::DemMatch *arg1 = (GeoCal::DemMatch *) 0 ;
@@ -6216,6 +6273,11 @@ static PyMethodDef SwigMethods[] = {
 		"int GeoCal::DemMatch::number_success() const\n"
 		"Number of point matched that then satisfied epipolar constraint in\n"
 		"last call to surface_point, so total number of points returned. \n"
+		""},
+	 { (char *)"DemMatch__v_diagnostic", (PyCFunction)_wrap_DemMatch__v_diagnostic, METH_O, (char *)"\n"
+		"blitz::Array<int, 1> GeoCal::DemMatch::diagnostic() const\n"
+		"Diagnostic values for failed image matches in the last call to\n"
+		"surface_point. \n"
 		""},
 	 { (char *)"DemMatch__v_all_distance_stat", (PyCFunction)_wrap_DemMatch__v_all_distance_stat, METH_O, (char *)"\n"
 		"const boost::shared_ptr<Statistic>& GeoCal::DemMatch::all_distance_stat() const\n"

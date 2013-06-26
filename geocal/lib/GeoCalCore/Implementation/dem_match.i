@@ -26,7 +26,8 @@ public:
   %python_attribute(max_distance, double)
   %python_attribute(number_point, int);
   %python_attribute(number_match, int);
-  %python_attribute(number_success, int);
+  %python_attribute(number_success, int)
+  %python_attribute(diagnostic, blitz::Array<int, 1>)
   %python_attribute(all_distance_stat, boost::shared_ptr<Statistic>)
   %python_attribute(good_distance_stat, boost::shared_ptr<Statistic>)
   %pickle_init(1, self.match, self.ray_intersect, self.max_distance)

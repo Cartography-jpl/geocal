@@ -17,6 +17,9 @@ namespace GeoCal {
 
 class DemMatch: public Printable<DemMatch> {
 public:
+// This comes from looking at CcorrMatcher and LsmMatcher
+  enum {MAX_DIAGNOSTIC_VALUE = 9};
+
 //-----------------------------------------------------------------------
 /// Constructor
 //-----------------------------------------------------------------------
@@ -25,6 +28,7 @@ public:
 	   const boost::shared_ptr<RayIntersect>& Ray_intersect,
 	   double Max_dist_good_point)
     : npoint(0), all_stat(new Statistic), good_stat(new Statistic), 
+      diagnostic_value(MAX_DIAGNOSTIC_VALUE + 2),
       match_(Match), ri(Ray_intersect), 
       max_dist(Max_dist_good_point) {}
   virtual ~DemMatch() {}
@@ -65,6 +69,13 @@ public:
   int number_success() const { return good_stat->count(); }
 
 //-----------------------------------------------------------------------
+/// Diagnostic values for failed image matches in the
+/// last call to surface_point.
+//-----------------------------------------------------------------------
+
+  blitz::Array<int, 1> diagnostic() const { return diagnostic_value; }
+
+//-----------------------------------------------------------------------
 /// Statistics on distance for last call to surface point, including
 /// all matches (including those later rejected).
 //-----------------------------------------------------------------------
@@ -82,6 +93,7 @@ public:
 private:
   mutable int npoint;
   mutable boost::shared_ptr<Statistic> all_stat, good_stat;
+  mutable blitz::Array<int, 1> diagnostic_value;
   boost::shared_ptr<ImageToImageMatch> match_;
   boost::shared_ptr<RayIntersect> ri;
   double max_dist;

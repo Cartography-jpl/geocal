@@ -125,6 +125,27 @@ class DemGenerate:
         print "Number success: %d" %(self.dem_match.number_success)
         print "All distance:\n", self.dem_match.all_distance_stat
         print "Good distance:\n", self.dem_match.good_distance_stat
+        print "Points not matched:\n"
+        print "  Image masked:                 %d" \
+            %(self.dem_match.diagnostic[1])
+        print "  Too close to image edge:      %d" \
+            %(self.dem_match.diagnostic[2])
+        print "  Variance too low:             %d" \
+            %(self.dem_match.diagnostic[3])
+        print "  Correlation too low:          %d" \
+            %(self.dem_match.diagnostic[4])
+        print "  Exceed max sigma:             %d" \
+            %(self.dem_match.diagnostic[5])
+        print "  Exceed max radiance variance: %d" \
+            %(self.dem_match.diagnostic[6])
+        print "  Exceed precision requirement: %d" \
+            %(self.dem_match.diagnostic[7])
+        print "  Move past target:             %d" \
+            %(self.dem_match.diagnostic[8])
+        print "  Solve failed:                 %d" \
+            %(self.dem_match.diagnostic[9])
+        print "  Unknown:                      %d" \
+            %(self.dem_match.diagnostic[10])
         return r
 
     def find_intersection(self, ic1, ic2):

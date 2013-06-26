@@ -227,6 +227,18 @@ class DemMatch(geocal.generic_object.GenericObject):
     def number_success(self):
         return self._v_number_success()
 
+    def _v_diagnostic(self):
+        """
+        blitz::Array<int, 1> GeoCal::DemMatch::diagnostic() const
+        Diagnostic values for failed image matches in the last call to
+        surface_point. 
+        """
+        return _dem_match.DemMatch__v_diagnostic(self)
+
+    @property
+    def diagnostic(self):
+        return self._v_diagnostic()
+
     def _v_all_distance_stat(self):
         """
         const boost::shared_ptr<Statistic>& GeoCal::DemMatch::all_distance_stat() const
@@ -267,6 +279,7 @@ DemMatch._v_max_distance = new_instancemethod(_dem_match.DemMatch__v_max_distanc
 DemMatch._v_number_point = new_instancemethod(_dem_match.DemMatch__v_number_point,None,DemMatch)
 DemMatch._v_number_match = new_instancemethod(_dem_match.DemMatch__v_number_match,None,DemMatch)
 DemMatch._v_number_success = new_instancemethod(_dem_match.DemMatch__v_number_success,None,DemMatch)
+DemMatch._v_diagnostic = new_instancemethod(_dem_match.DemMatch__v_diagnostic,None,DemMatch)
 DemMatch._v_all_distance_stat = new_instancemethod(_dem_match.DemMatch__v_all_distance_stat,None,DemMatch)
 DemMatch._v_good_distance_stat = new_instancemethod(_dem_match.DemMatch__v_good_distance_stat,None,DemMatch)
 DemMatch_swigregister = _dem_match.DemMatch_swigregister

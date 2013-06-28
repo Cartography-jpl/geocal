@@ -24716,6 +24716,12 @@ $as_echo_n "checking for BOOST library... " >&6; }
         fi
         if test "$succeeded" = "yes" ; then
             boost_done=no
+            if test "$build_boost" = "yes"; then
+               BOOST_LIBDIR="$ac_boost_path/lib"
+               BOOST_REGEX_LIB="-lboost_regex"
+               BOOST_DATETIME_LIB="-lboost_date_time"
+               boost_done=yes
+            fi
             for ac_boost_lib_base in "$ac_boost_path/lib" "$ac_boost_path/lib64"; do
               if test "$boost_done" = "no"; then
                 for ac_boost_lib in libboost_regex.la libboost_regex.so libboost_regex.dylib ; do

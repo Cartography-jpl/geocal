@@ -63,6 +63,7 @@ extern "C" {
   void init_rpc_image(void);
   void init_raster_multifile(void);
   void init_did_datum(void);
+  void init_dem_map_info_offset(void);
   void init_map_info_image_ground_connection(void);
   void init_ground_mask_image(void);
   void init_image_mask_image(void);
@@ -248,6 +249,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_rpc_image", init_rpc_image);
   init_extension_module(package, "_raster_multifile", init_raster_multifile);
   init_extension_module(package, "_did_datum", init_did_datum);
+  init_extension_module(package, "_dem_map_info_offset", init_dem_map_info_offset);
   init_extension_module(package, "_map_info_image_ground_connection", init_map_info_image_ground_connection);
   init_extension_module(package, "_ground_mask_image", init_ground_mask_image);
   init_extension_module(package, "_image_mask_image", init_image_mask_image);

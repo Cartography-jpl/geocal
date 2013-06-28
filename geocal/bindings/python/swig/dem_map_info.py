@@ -112,27 +112,8 @@ import geocal.dem
 import geocal.generic_object
 class DemMapInfo(geocal.dem.Dem):
     """
-    This handles a Dem from a file with a MapInfo.
+    C++ includes: dem_map_info.h
 
-    A very common Dem is one where the height is a geodetic height
-    relative to a Datum on a regular grid in some map projection (e.g., a
-    GeoTiff file containing elevations on a latitude/longitude grid). This
-    class implements surface_gp and distance_to_surface in terms of a
-    derived class supplied "elevation" function.
-
-    We do a bilinear interpolation to get heights in between the values
-    given by elevation.
-
-    Depending on what we are doing, calling with a location outside of the
-    underlying DEM data might be ok, or might be something that should
-    trigger an error. If requested, this class can just return a
-    height_reference_surface of 0 everywhere outside of the Dem (so
-    height_datum is -datum().undulation).
-
-    Derived classes need to call the constructor or initialize(), and fill
-    in the elavation() function.
-
-    C++ includes: dem_map_info.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")

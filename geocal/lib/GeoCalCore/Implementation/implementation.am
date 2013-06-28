@@ -7,6 +7,7 @@
 # Source files for library
 libgeocal_la_SOURCES+= @srcimplementation@/did_datum.cc
 geocalinc_HEADERS+= @srcimplementation@/did_datum.h
+geocalinc_HEADERS+= @srcimplementation@/dem_map_info_offset.h
 geocalinc_HEADERS+= @srcimplementation@/map_info_image_ground_connection.h
 libgeocal_la_SOURCES+= @srcimplementation@/ground_mask_image.cc
 geocalinc_HEADERS+= @srcimplementation@/ground_mask_image.h
@@ -118,6 +119,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/sdp_helper_test.cc
 
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/did_datum_wrap.cc
+SWIG_SRC += @swigsrc@/dem_map_info_offset_wrap.cc
 SWIG_SRC += @swigsrc@/map_info_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/ground_mask_image_wrap.cc
 SWIG_SRC += @swigsrc@/image_mask_image_wrap.cc
@@ -172,6 +174,7 @@ SWIG_SRC += @swigsrc@/hdf_orbit_wrap.cc
 endif 
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/dem_map_info_offset_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/ground_mask_image_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/raster_averaged_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/raster_subsample_test.cc

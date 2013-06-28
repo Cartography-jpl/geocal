@@ -11,6 +11,8 @@ Array<double, 1> RpcImageGroundConnection::parameter() const
 			rpc_->fit_line_numerator.end(), true) +
     std::count(rpc_->fit_sample_numerator.begin(), 
 	       rpc_->fit_sample_numerator.end(), true);
+  if(fit_height_offset())
+    size += 1;
   Array<double, 1> res(size);
   int j = 0;
   for(int i = 0; i < (int) rpc_->fit_line_numerator.size();  ++i)
@@ -19,6 +21,8 @@ Array<double, 1> RpcImageGroundConnection::parameter() const
   for(int i = 0; i < (int) rpc_->fit_sample_numerator.size();  ++i)
     if(rpc_->fit_sample_numerator[i])
       res(j++) = rpc_->sample_numerator[i];
+  if(fit_height_offset())
+    res(j++) = rpc_->height_offset;
   return res;
 }
 
@@ -33,6 +37,8 @@ std::vector<std::string> RpcImageGroundConnection::parameter_name() const
     if(rpc_->fit_sample_numerator[i])
       res.push_back("RPC Sample Numerator Parameter " + 
 		    boost::lexical_cast<std::string>(i));
+  if(fit_height_offset())
+    res.push_back("RPC Height Offset");
   return res;
 }
 
@@ -70,6 +76,8 @@ void RpcImageGroundConnection::parameter(const Array<double, 1>& Parm)
 			rpc_->fit_line_numerator.end(), true) +
     std::count(rpc_->fit_sample_numerator.begin(), 
 	       rpc_->fit_sample_numerator.end(), true);
+  if(fit_height_offset())
+    size += 1;
   if(Parm.rows() != size) {
     Exception e;
     e << "Parm is the wrong size\n"
@@ -84,6 +92,8 @@ void RpcImageGroundConnection::parameter(const Array<double, 1>& Parm)
   for(int i = 0; i < (int) rpc_->fit_sample_numerator.size();  ++i)
     if(rpc_->fit_sample_numerator[i])
       rpc_->sample_numerator[i] = Parm(j++);
+  if(fit_height_offset())
+    rpc_->height_offset = Parm(j++);
 }
 
 Array<double, 2> RpcImageGroundConnection::image_coordinate_jac_ecr
@@ -108,6 +118,24 @@ Array<double, 2> RpcImageGroundConnection::image_coordinate_jac_ecr
     rpc_->image_coordinate_jac(g0.latitude(), g0.longitude(), 
 			      g0.height_reference_surface());
   res = sum(jac_geod(i1, i3) * dgeod_decr(i3, i2), i3);
+  return res;
+}
+
+blitz::Array<double, 2> 
+RpcImageGroundConnection::image_coordinate_jac_parm
+(const GroundCoordinate& Gc) const
+{
+  Array<double, 2> res = rpc_->image_coordinate_jac_parm(Gc);
+  if(fit_height_offset()) {
+    res.resizeAndPreserve(res.rows(), res.cols() + 1);
+    Array<double, 2> jac_geod = 
+      rpc_->image_coordinate_jac(Gc.latitude(), Gc.longitude(), 
+				 Gc.height_reference_surface());
+    // Negative here because increasing height_offset is like
+    // decreasing the height passed to the RPC
+    res(0,res.cols() - 1) = -jac_geod(0,2);
+    res(1,res.cols() - 1) = -jac_geod(1,2);
+  }
   return res;
 }
 

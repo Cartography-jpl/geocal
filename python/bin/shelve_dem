@@ -38,6 +38,10 @@ Options:
   --datum-band=b
        The band of the Datum file to use (1 based). [default: 1]
 
+  --constant-datum=u
+       Use a datum with a constant undulation. This is useful as a quick
+       way to add an offset to  DEM file. [default: 0.0]
+
   --srtm
        Use the SRTM rather than supplying a DEM file.
 
@@ -55,7 +59,7 @@ else:
     if(args.datum_file):
         datum = GdalDatum(args.datum_file, args.datum_band)
     else:
-        datum = SimpleDatum(0)
+        datum = SimpleDatum(args.constant_datum)
     if VicarFile.is_vicar_file(args.dem_file):
         # -1 in band is because VicarLiteDem uses 0-based band, rather
         # than 1-based we use in this program.

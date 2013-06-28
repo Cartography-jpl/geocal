@@ -22,6 +22,12 @@ Options:
   -h --help         
        Print this message
 
+  --fit-height-offset
+       Fit for the height offset, in addition to RPC parameters. Note that
+       in general the height_offset will *not* be an integer. NITF requires
+       this to be an integer, so if you use this parameter you should be
+       sure not to try to write the RPC to NITF.
+
   --from-shelve
        Instead of getting images from a file, get them from a shelve object.
        This should be in a "file:key" format. 
@@ -76,6 +82,8 @@ for i in range(len(args.image)):
         fsmp[i] = True
     t.rpc.fit_line_numerator = fln
     t.rpc.fit_sample_numerator = fsmp
+    if(args.fit_height_offset):
+        t.fit_height_offset = True
     igc_coll.igc.append(t)
 igc_coll.parameter_subset_mask = [True] * len(igc_coll.parameter)
 

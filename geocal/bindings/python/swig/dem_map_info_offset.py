@@ -8,7 +8,7 @@
 
 from sys import version_info
 if version_info >= (3,0,0):
-    new_instancemethod = lambda func, inst, cls: _rpc_image_ground_connection.SWIG_PyInstanceMethod_New(func)
+    new_instancemethod = lambda func, inst, cls: _dem_map_info_offset.SWIG_PyInstanceMethod_New(func)
 else:
     from new import instancemethod as new_instancemethod
 if version_info >= (2,6,0):
@@ -17,20 +17,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_rpc_image_ground_connection', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_dem_map_info_offset', [dirname(__file__)])
         except ImportError:
-            import _rpc_image_ground_connection
-            return _rpc_image_ground_connection
+            import _dem_map_info_offset
+            return _dem_map_info_offset
         if fp is not None:
             try:
-                _mod = imp.load_module('_rpc_image_ground_connection', fp, pathname, description)
+                _mod = imp.load_module('_dem_map_info_offset', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _rpc_image_ground_connection = swig_import_helper()
+    _dem_map_info_offset = swig_import_helper()
     del swig_import_helper
 else:
-    import _rpc_image_ground_connection
+    import _dem_map_info_offset
 del version_info
 try:
     _swig_property = property
@@ -88,7 +88,7 @@ except:
     weakref_proxy = lambda x: x
 
 
-SHARED_PTR_DISOWN = _rpc_image_ground_connection.SHARED_PTR_DISOWN
+SHARED_PTR_DISOWN = _dem_map_info_offset.SHARED_PTR_DISOWN
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -108,78 +108,61 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.image_ground_connection
+import geocal.dem_map_info
+import geocal.dem
 import geocal.generic_object
-import geocal.geocal_exception
-class RpcImageGroundConnection(geocal.image_ground_connection.ImageGroundConnection):
+class DemMapInfoOffset(geocal.dem_map_info.DemMapInfo):
     """
-    This is a ImageGroundConnection where the connection is made by a Rpc.
+    This applies a fixed height offset to a DemMapInfo.
 
-    C++ includes: rpc_image_ground_connection.h 
+    C++ includes: dem_map_info_offset.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::RpcImageGroundConnection::RpcImageGroundConnection(const Rpc &R, const boost::shared_ptr< Dem > &D, const
-        boost::shared_ptr< RasterImage > &Img, const std::string
-        &Title="Image", const boost::shared_ptr< ImageMask >
-        &Img_mask=boost::shared_ptr< ImageMask >(), const boost::shared_ptr<
-        GroundMask > &Ground_mask=boost::shared_ptr< GroundMask >(), bool
-        Fit_height_offset=false)
+        GeoCal::DemMapInfoOffset::DemMapInfoOffset(const boost::shared_ptr< DemMapInfo > &Dem_underlying, double
+        Height_offset)
+        Constructor.
+
+        Height_offset should be in meters, and is added to the underlying DEM.
 
         """
-        _rpc_image_ground_connection.RpcImageGroundConnection_swiginit(self,_rpc_image_ground_connection.new_RpcImageGroundConnection(*args))
-    def cf_look_vector(self, *args):
+        _dem_map_info_offset.DemMapInfoOffset_swiginit(self,_dem_map_info_offset.new_DemMapInfoOffset(*args))
+    def _v_dem_underlying(self):
         """
-        void RpcImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,
-        boost::shared_ptr< CartesianFixed > &P) const
-
+        const boost::shared_ptr<DemMapInfo>& GeoCal::DemMapInfoOffset::dem_underlying() const
+        Underlying DEM. 
         """
-        return _rpc_image_ground_connection.RpcImageGroundConnection_cf_look_vector(self, *args)
-
-    def _v_rpc(self):
-        """
-        boost::shared_ptr<Rpc> GeoCal::RpcImageGroundConnection::rpc_ptr() const
-
-        """
-        return _rpc_image_ground_connection.RpcImageGroundConnection__v_rpc(self)
+        return _dem_map_info_offset.DemMapInfoOffset__v_dem_underlying(self)
 
     @property
-    def rpc(self):
-        return self._v_rpc()
+    def dem_underlying(self):
+        return self._v_dem_underlying()
 
-    def _v_fit_height_offset(self, *args):
+    def _v_height_offset(self):
         """
-        bool GeoCal::RpcImageGroundConnection::fit_height_offset() const
-        If true, we are fitting for the height offset.
-
-        See the note in setting fit_height_offset on issues with storing the
-        RPC in NITF if you fit for height offset. 
+        double GeoCal::DemMapInfoOffset::height_offset() const
+        Height offset in meters added to underlying DEM. 
         """
-        return _rpc_image_ground_connection.RpcImageGroundConnection__v_fit_height_offset(self, *args)
+        return _dem_map_info_offset.DemMapInfoOffset__v_height_offset(self)
 
     @property
-    def fit_height_offset(self):
-        return self._v_fit_height_offset()
-
-    @fit_height_offset.setter
-    def fit_height_offset(self, value):
-      self._v_fit_height_offset(value)
+    def height_offset(self):
+        return self._v_height_offset()
 
     @classmethod
     def pickle_format_version(cls):
-      return 2
+      return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 2, self.rpc,self.dem,self.image,self.title,self.image_mask,self.ground_mask,self.fit_height_offset)
+      return _new_from_init, (self.__class__, 1, self.dem_underlying,self.height_offset)
 
-    __swig_destroy__ = _rpc_image_ground_connection.delete_RpcImageGroundConnection
-RpcImageGroundConnection.cf_look_vector = new_instancemethod(_rpc_image_ground_connection.RpcImageGroundConnection_cf_look_vector,None,RpcImageGroundConnection)
-RpcImageGroundConnection._v_rpc = new_instancemethod(_rpc_image_ground_connection.RpcImageGroundConnection__v_rpc,None,RpcImageGroundConnection)
-RpcImageGroundConnection._v_fit_height_offset = new_instancemethod(_rpc_image_ground_connection.RpcImageGroundConnection__v_fit_height_offset,None,RpcImageGroundConnection)
-RpcImageGroundConnection_swigregister = _rpc_image_ground_connection.RpcImageGroundConnection_swigregister
-RpcImageGroundConnection_swigregister(RpcImageGroundConnection)
+    __swig_destroy__ = _dem_map_info_offset.delete_DemMapInfoOffset
+DemMapInfoOffset._v_dem_underlying = new_instancemethod(_dem_map_info_offset.DemMapInfoOffset__v_dem_underlying,None,DemMapInfoOffset)
+DemMapInfoOffset._v_height_offset = new_instancemethod(_dem_map_info_offset.DemMapInfoOffset__v_height_offset,None,DemMapInfoOffset)
+DemMapInfoOffset_swigregister = _dem_map_info_offset.DemMapInfoOffset_swigregister
+DemMapInfoOffset_swigregister(DemMapInfoOffset)
 
 
 

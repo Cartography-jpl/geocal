@@ -285,9 +285,9 @@ class Rpc(geocal.generic_object.GenericObject):
         This updates the RPC parameters to better match a given set of data.
 
         This class takes a list of GroundCoordinates, and the ImageCoordinate
-        that should be returned by the RPC. Each of the ImageCoordinate has
-        and associated line and sample sigma used to weight it (i.e., the line
-        and sigma returned by ImageMatcher).
+        that should be returned by the RPC. Each of the ImageCoordinate has an
+        associated line and sample sigma used to weight it (i.e., the line and
+        sigma returned by ImageMatcher).
 
         We update the set of parameters given by fit_line_numerator and
         fit_sample_numerator. Right now, we only do a linear fit and don't try

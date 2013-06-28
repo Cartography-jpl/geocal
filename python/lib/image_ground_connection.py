@@ -5,12 +5,16 @@ import numpy as np
 import os.path
 
 def _new_from_init(cls, version, *args):
-    '''For use with pickle, covers common case where we just store the
-    arguments needed to create an object. See for example HdfFile'''
-    if(cls.pickle_format_version() != version):
-      raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
+    '''Handle older versions'''
+    if(cls.pickle_format_version() < version):
+        raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
     inst = cls.__new__(cls)
-    inst.__init__(*args)
+    # Added Fit_height_offset in version 2. For version 1, just set this to
+    # False
+    if(version ==1):
+        inst.__init__(args[0], args[1], args[2], args[3], None, None, False)
+    else:
+        inst.__init__(*args)
     return inst
 
 class GdalImageGroundConnection(geocal.RpcImageGroundConnection):
@@ -18,18 +22,21 @@ class GdalImageGroundConnection(geocal.RpcImageGroundConnection):
     creates a RPC based ground connection. Note that you can edit
     the RPC if desired, just change the values of the attribute
     rpc'''
-    def __init__(self, fname, dem, rpc = None, title=None):
+    def __init__(self, fname, dem, rpc = None, title=None, image_mask=None,
+                 ground_mask=None, fit_height_offset=None):
         self.fname = fname
         img = GdalRasterImage(fname)
         if(not title):
             title = os.path.basename(fname)
         if(not rpc):
             rpc = img.rpc
-        geocal.RpcImageGroundConnection.__init__(self, rpc, dem, img, title)
+        geocal.RpcImageGroundConnection.__init__(self, rpc, dem, img, title, 
+                                                 image_mask, ground_mask, 
+                                                 fit_height_offset)
 
     @classmethod
     def pickle_format_version(cls):
-        return 1
+        return 2
 
     def __reduce__(self):
         '''Base class RpcImageGroundConnection can be pickled, but the 
@@ -38,25 +45,30 @@ class GdalImageGroundConnection(geocal.RpcImageGroundConnection):
         return _new_from_init, (self.__class__, 
                                 self.__class__.pickle_format_version(),
                                 self.fname,
-                                self.dem, self.rpc, self.title)
+                                self.dem, self.rpc, self.title,
+                                self.image_mask, self.ground_mask, 
+                                self.fit_height_offset)
 
 class VicarImageGroundConnection(geocal.RpcImageGroundConnection):
     '''This is a convenience class that both reads a VICAR image, and
     creates a RPC based ground connection. Note that you can edit
     the RPC if desired, just change the values of the attribute
     rpc'''
-    def __init__(self, fname, dem, rpc = None, title=None):
+    def __init__(self, fname, dem, rpc = None, title=None, image_mask=None,
+                 ground_mask=None, fit_height_offset=None):
         self.fname = fname
         img = VicarLiteRasterImage(fname)
         if(not title):
             title = os.path.basename(fname)
         if(not rpc):
             rpc = img.rpc
-        geocal.RpcImageGroundConnection.__init__(self, rpc, dem, img, title)
+        geocal.RpcImageGroundConnection.__init__(self, rpc, dem, img, title, 
+                                                 image_mask, ground_mask, 
+                                                 fit_height_offset)
 
     @classmethod
     def pickle_format_version(cls):
-        return 1
+        return 2
 
     def __reduce__(self):
         '''Base class RpcImageGroundConnection can be pickled, but the 
@@ -65,7 +77,9 @@ class VicarImageGroundConnection(geocal.RpcImageGroundConnection):
         return _new_from_init, (self.__class__, 
                                 self.__class__.pickle_format_version(),
                                 self.fname,
-                                self.dem, self.rpc, self.title)
+                                self.dem, self.rpc, self.title,
+                                self.image_mask, self.ground_mask, 
+                                self.fit_height_offset)
 
 def _view_angle(self, image_coordinate, delta_h = 100):
     '''This return the zenith and azimuth view angles for a particular

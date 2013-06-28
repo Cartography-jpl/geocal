@@ -411,7 +411,7 @@ void Rpc::fit_all(const std::vector<double>& Line,
 /// This updates the RPC parameters to better match a given set of
 /// data. This class takes a list of GroundCoordinates, and the
 /// ImageCoordinate that should be returned by the RPC. Each of the
-/// ImageCoordinate has and associated line and sample sigma used to
+/// ImageCoordinate has an associated line and sample sigma used to
 /// weight it (i.e., the line and sigma returned by ImageMatcher).
 ///
 /// We update the set of parameters given by fit_line_numerator and

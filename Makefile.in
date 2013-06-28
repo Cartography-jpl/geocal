@@ -516,6 +516,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/ccorr_lsm_matcher_wrap.cc \
 	@swigsrc@/rpc_image_wrap.cc @swigsrc@/raster_multifile_wrap.cc \
 	@swigsrc@/did_datum_wrap.cc \
+	@swigsrc@/dem_map_info_offset_wrap.cc \
 	@swigsrc@/map_info_image_ground_connection_wrap.cc \
 	@swigsrc@/ground_mask_image_wrap.cc \
 	@swigsrc@/image_mask_image_wrap.cc \
@@ -637,6 +638,7 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-rpc_image_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-did_datum_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-dem_map_info_offset_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-map_info_image_ground_connection_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-ground_mask_image_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-image_mask_image_wrap.lo \
@@ -965,6 +967,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 	@srcimplementation@/spice_helper_test.cc \
 	@srcimplementation@/sdp_helper_test.cc \
 	@srcimplementation@/did_datum_test.cc \
+	@srcimplementation@/dem_map_info_offset_test.cc \
 	@srcimplementation@/ground_mask_image_test.cc \
 	@srcimplementation@/raster_averaged_test.cc \
 	@srcimplementation@/raster_subsample_test.cc \
@@ -1062,6 +1065,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-spice_helper_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-sdp_helper_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-did_datum_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-dem_map_info_offset_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-ground_mask_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-raster_averaged_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-raster_subsample_test.$(OBJEXT) \
@@ -1285,6 +1289,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcinterface@/raster_multifile.h \
 	@srcinterface@/image_ground_connection.h \
 	@srcimplementation@/did_datum.h \
+	@srcimplementation@/dem_map_info_offset.h \
 	@srcimplementation@/map_info_image_ground_connection.h \
 	@srcimplementation@/ground_mask_image.h \
 	@srcimplementation@/image_mask_image.h \
@@ -2004,6 +2009,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/rpc_image_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/raster_multifile_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/did_datum_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/dem_map_info_offset_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/map_info_image_ground_connection_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/ground_mask_image_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/image_mask_image_wrap.cc \
@@ -2150,6 +2156,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_multifile.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_ground_connection.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/did_datum.h \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_map_info_offset.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/map_info_image_ground_connection.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ground_mask_image.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/image_mask_image.h \
@@ -2259,6 +2266,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/spice_helper_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/sdp_helper_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/did_datum_test.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_map_info_offset_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ground_mask_image_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raster_averaged_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/raster_subsample_test.cc \
@@ -2685,6 +2693,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-did_datum_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-dem_map_info_offset_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-map_info_image_ground_connection_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-ground_mask_image_wrap.lo:  \
@@ -3374,6 +3384,9 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-did_datum_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-dem_map_info_offset_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-ground_mask_image_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -3661,6 +3674,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcgtk@/$(DEPDIR)/libgeocal_la-geocal_pixbuf.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcgtk@/$(DEPDIR)/libgeocal_la-raster_image_with_overlay.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-aircraft_orbit_data_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-dem_match_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-did_datum_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-eci_tod_burl_test.Po@am__quote@
@@ -3830,6 +3844,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-coordinate_converter_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-covariance_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-datum_geoid96_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_map_info_offset_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_map_info_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_match_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_tiled_file_wrap.Plo@am__quote@
@@ -4342,6 +4357,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/did_datum_wrap.cc' object='@swigsrc@/_swig_wrap_la-did_datum_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-did_datum_wrap.lo `test -f '@swigsrc@/did_datum_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/did_datum_wrap.cc
+
+@swigsrc@/_swig_wrap_la-dem_map_info_offset_wrap.lo: @swigsrc@/dem_map_info_offset_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-dem_map_info_offset_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_map_info_offset_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-dem_map_info_offset_wrap.lo `test -f '@swigsrc@/dem_map_info_offset_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/dem_map_info_offset_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_map_info_offset_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_map_info_offset_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/dem_map_info_offset_wrap.cc' object='@swigsrc@/_swig_wrap_la-dem_map_info_offset_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-dem_map_info_offset_wrap.lo `test -f '@swigsrc@/dem_map_info_offset_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/dem_map_info_offset_wrap.cc
 
 @swigsrc@/_swig_wrap_la-map_info_image_ground_connection_wrap.lo: @swigsrc@/map_info_image_ground_connection_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-map_info_image_ground_connection_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-map_info_image_ground_connection_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-map_info_image_ground_connection_wrap.lo `test -f '@swigsrc@/map_info_image_ground_connection_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/map_info_image_ground_connection_wrap.cc
@@ -6261,6 +6283,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-did_datum_test.obj `if test -f '@srcimplementation@/did_datum_test.cc'; then $(CYGPATH_W) '@srcimplementation@/did_datum_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/did_datum_test.cc'; fi`
 
+@srcimplementation@/geocal_test_all-dem_map_info_offset_test.o: @srcimplementation@/dem_map_info_offset_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-dem_map_info_offset_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Tpo -c -o @srcimplementation@/geocal_test_all-dem_map_info_offset_test.o `test -f '@srcimplementation@/dem_map_info_offset_test.cc' || echo '$(srcdir)/'`@srcimplementation@/dem_map_info_offset_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/dem_map_info_offset_test.cc' object='@srcimplementation@/geocal_test_all-dem_map_info_offset_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-dem_map_info_offset_test.o `test -f '@srcimplementation@/dem_map_info_offset_test.cc' || echo '$(srcdir)/'`@srcimplementation@/dem_map_info_offset_test.cc
+
+@srcimplementation@/geocal_test_all-dem_map_info_offset_test.obj: @srcimplementation@/dem_map_info_offset_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-dem_map_info_offset_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Tpo -c -o @srcimplementation@/geocal_test_all-dem_map_info_offset_test.obj `if test -f '@srcimplementation@/dem_map_info_offset_test.cc'; then $(CYGPATH_W) '@srcimplementation@/dem_map_info_offset_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/dem_map_info_offset_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/dem_map_info_offset_test.cc' object='@srcimplementation@/geocal_test_all-dem_map_info_offset_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-dem_map_info_offset_test.obj `if test -f '@srcimplementation@/dem_map_info_offset_test.cc'; then $(CYGPATH_W) '@srcimplementation@/dem_map_info_offset_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/dem_map_info_offset_test.cc'; fi`
+
 @srcimplementation@/geocal_test_all-ground_mask_image_test.o: @srcimplementation@/ground_mask_image_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-ground_mask_image_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Tpo -c -o @srcimplementation@/geocal_test_all-ground_mask_image_test.o `test -f '@srcimplementation@/ground_mask_image_test.cc' || echo '$(srcdir)/'`@srcimplementation@/ground_mask_image_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Po
@@ -7988,7 +8024,8 @@ installcheck-local: $(INSTALLCHECK_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@export AFIDS_VDEV_DATA = $(AFIDS_DATA)/vdev
 @BUILD_AFIDS_PYTHON_TRUE@export ELEV_ROOT = $(AFIDS_DATA)/srtmL2_filled
 @BUILD_AFIDS_PYTHON_TRUE@export VICAR_GDALPLUGIN_HOME
-@BUILD_AFIDS_PYTHON_TRUE@export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_VICAR_GDALPLUGIN_TRUE@export GDAL_DRIVER_PATH=$(abs_builddir)/.libs:$(abs_builddir):$(VICAR_GDALPLUGIN_HOME)
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_VICAR_GDALPLUGIN_FALSE@export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
 
 #=================================================================
 # Normally check builds all the libraries and executables. This

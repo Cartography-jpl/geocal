@@ -28,7 +28,7 @@ namespace GeoCal {
   fill in the elavation() function.
 
 *******************************************************************/
-
+class DemMapInfoOffset;
 class DemMapInfo : public Dem {
 public:
 //-----------------------------------------------------------------------
@@ -98,6 +98,8 @@ protected:
 
   void initialize(const boost::shared_ptr<Datum>& D, const MapInfo& M, 
 		  bool Outside_dem_is_error = false);
+  friend class DemMapInfoOffset; // Allows this class access to the
+				 // protected member elevation.
 private:
   boost::shared_ptr<Datum> datum_; ///< Datum height is relative to.
   MapInfo map_info_;		   ///< Map info used to look up

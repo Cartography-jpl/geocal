@@ -43,7 +43,17 @@ def mmap_file(*args, **kwargs):
 
     Note that we actually wrap the np.memmap object up so that we can 
     efficiently pickle it (the default is to pickle the underlying array,
-    which can be huge)'''
+    which can be huge)
+
+    In addition to the dtype, you can pass in the mode
+         'r'   Open existing file for reading only.
+         'r+'  Open existing file for reading and writing.
+         'c'   Copy-on-write: assignments affect data in memory, but
+               changes are not saved to disk. The file on disk is read-only.
+
+    Default mode if 'r' for existing files, 'r+' for files that we create
+    (i.e., passing in the mapinfo)
+    '''
     
     # Create a file
     if(len(args) ==2):
@@ -62,8 +72,11 @@ def mmap_file(*args, **kwargs):
         else:
             raise ValueError("Unsupport data type")
         t = None                    # Force write to disk
-    elif(len(args) != 1):
-        raise ValueError("Wrong number of arguments given")
+        mode = kwargs.get('mode', 'r+')
+    else:
+        mode = kwargs.get('mode', 'r')
+        if(len(args) != 1):
+            raise ValueError("Wrong number of arguments given")
     fname = args[0]
     f = VicarFile(fname)
     lsize = f.label_int("LBLSIZE")[0]
@@ -84,5 +97,6 @@ def mmap_file(*args, **kwargs):
             raise ValueError("Unknown file format")
     else:
         dtype = kwargs.get('dtype')
-    return memmap_wrap(fname, dtype = dtype, offset = lsize, shape=shp)
+    return memmap_wrap(fname, dtype = dtype, offset = lsize, shape=shp, 
+                       mode=mode)
 

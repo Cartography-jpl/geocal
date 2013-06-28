@@ -52,7 +52,10 @@ def mmap_file(*args, **kwargs):
                changes are not saved to disk. The file on disk is read-only.
 
     Default mode if 'r' for existing files, 'r+' for files that we create
-    (i.e., passing in the mapinfo)
+    (i.e., passing in the mapinfo).
+
+    A "nodata" value can be passed in, if supplied we write that to the
+    VicarFile.
     '''
     
     # Create a file
@@ -71,6 +74,8 @@ def mmap_file(*args, **kwargs):
             t = VicarRasterImage(fname, mi, "FULL")
         else:
             raise ValueError("Unsupport data type")
+        if(kwargs.get('nodata')):
+            t["NODATA"] = kwargs.get('nodata')
         t = None                    # Force write to disk
         mode = kwargs.get('mode', 'r+')
     else:

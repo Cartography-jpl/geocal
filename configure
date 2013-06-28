@@ -26800,7 +26800,7 @@ $as_echo_n "checking for Carto library... " >&6; }
         succeeded=no
         if test "$build_carto" == "yes"; then
             CARTO_LIBS="-R$ac_carto_path/lib -L$ac_carto_path/lib -lcarto $VICAR_RTL_LIBS $GSL_LIBS"
-            CARTO_CFLAGS="-I$ac_carto_path/include/carto -I$ac_carto_path/include $VICAR_RTL_CFLAGS $GSL_CFLAGS"
+            CARTO_CFLAGS="-I$srcdir/carto/inc $VICAR_RTL_CFLAGS $GSL_CFLAGS"
             succeeded=yes
         elif test "$ac_carto_path" != ""; then
             CARTO_LIBS="-R$ac_carto_path/lib -L$ac_carto_path/lib -lcarto $VICAR_RTL_LIBS $GSL_LIBS"

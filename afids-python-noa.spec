@@ -42,6 +42,7 @@ rm -rf $RPM_BUILD_ROOT
 /opt/afids/lib/python2.7/site-packages/afids/*
 /opt/afids/lib/python2.7/site-packages/geocal/*
 /opt/afids/afids/vdev/call_sample_vicar_python.pdf
+/opt/afids/afids/vdev/pair_ortho.pdf
 /opt/afids/afids/vdev/sample_vicar_python
 /opt/afids/afids/vdev/sample_vicar_python.pdf
 /opt/afids/bin/gdal_to_erdas

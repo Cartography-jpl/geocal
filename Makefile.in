@@ -1242,7 +1242,8 @@ py_compile = $(top_srcdir)/config/py-compile
 am__dist_afidspkgpython_DATA_DIST = @srcpythonlib@/cib01_mapinfo.dat
 am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
-	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf
+	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
+	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf
 am__dist_sdbxdoc_DATA_DIST = $(srcdir)/@srcsdbx@/doc/html/*
 DATA = $(dist_afidspkgpython_DATA) $(dist_afidspythonvdev_DATA) \
 	$(dist_sdbxdoc_DATA) $(installafidspython_DATA) \
@@ -2449,7 +2450,8 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_37)
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
-@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspkgpython_DATA = @srcpythonlib@/cib01_mapinfo.dat
 @BUILD_AFIDS_PYTHON_TRUE@installafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 all: $(BUILT_SOURCES)
@@ -3531,9 +3533,12 @@ afids_python/geocal/lib/$(DEPDIR)/$(am__dirstamp):
 afids_python/geocal/lib/geocal_test_all-test_all.$(OBJEXT):  \
 	afids_python/geocal/lib/$(am__dirstamp) \
 	afids_python/geocal/lib/$(DEPDIR)/$(am__dirstamp)
-geocal_test_all$(EXEEXT): $(geocal_test_all_OBJECTS) $(geocal_test_all_DEPENDENCIES) $(EXTRA_geocal_test_all_DEPENDENCIES) 
-	@rm -f geocal_test_all$(EXEEXT)
-	$(AM_V_CXXLD)$(geocal_test_all_LINK) $(geocal_test_all_OBJECTS) $(geocal_test_all_LDADD) $(LIBS)
+@BUILD_AFIDS_PYTHON_FALSE@geocal_test_all$(EXEEXT): $(geocal_test_all_OBJECTS) $(geocal_test_all_DEPENDENCIES) $(EXTRA_geocal_test_all_DEPENDENCIES) 
+@BUILD_AFIDS_PYTHON_FALSE@	@rm -f geocal_test_all$(EXEEXT)
+@BUILD_AFIDS_PYTHON_FALSE@	$(AM_V_CXXLD)$(geocal_test_all_LINK) $(geocal_test_all_OBJECTS) $(geocal_test_all_LDADD) $(LIBS)
+@BUILD_VICAR_GDALPLUGIN_FALSE@geocal_test_all$(EXEEXT): $(geocal_test_all_OBJECTS) $(geocal_test_all_DEPENDENCIES) $(EXTRA_geocal_test_all_DEPENDENCIES) 
+@BUILD_VICAR_GDALPLUGIN_FALSE@	@rm -f geocal_test_all$(EXEEXT)
+@BUILD_VICAR_GDALPLUGIN_FALSE@	$(AM_V_CXXLD)$(geocal_test_all_LINK) $(geocal_test_all_OBJECTS) $(geocal_test_all_LDADD) $(LIBS)
 install-dist_afidspythonvdevSCRIPTS: $(dist_afidspythonvdev_SCRIPTS)
 	@$(NORMAL_INSTALL)
 	@list='$(dist_afidspythonvdev_SCRIPTS)'; test -n "$(afidspythonvdevdir)" || list=; \
@@ -8024,8 +8029,9 @@ installcheck-local: $(INSTALLCHECK_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@export AFIDS_VDEV_DATA = $(AFIDS_DATA)/vdev
 @BUILD_AFIDS_PYTHON_TRUE@export ELEV_ROOT = $(AFIDS_DATA)/srtmL2_filled
 @BUILD_AFIDS_PYTHON_TRUE@export VICAR_GDALPLUGIN_HOME
-@BUILD_AFIDS_PYTHON_TRUE@@BUILD_VICAR_GDALPLUGIN_TRUE@export GDAL_DRIVER_PATH=$(abs_builddir)/.libs:$(abs_builddir):$(VICAR_GDALPLUGIN_HOME)
-@BUILD_AFIDS_PYTHON_TRUE@@BUILD_VICAR_GDALPLUGIN_FALSE@export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
+@BUILD_AFIDS_PYTHON_TRUE@export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
+
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_VICAR_GDALPLUGIN_TRUE@geocal_test_all: install_vicar_gdalplugin_early
 
 #=================================================================
 # Normally check builds all the libraries and executables. This

@@ -5,8 +5,9 @@
 # tiepoints.
 
 from afids import *
+import numpy as np
 
-version = "February 4, 2013"
+version = "July 11, 2013"
 usage='''Usage: 
   sba [options] <igc_in> <tpcol_in> <igc_out> <tpcol_out>
   sba -h | --help
@@ -37,6 +38,13 @@ Options:
   --dem=shelve
        DEM to use, specified as file:key. If not specified, we use the 
        DEM from the first IGC.
+
+  --dem-height-block-adjust
+       For poor quality DEMs, we may find that the whole DEM should be
+       shifted up or down. If we select this option, then after running the
+       SBA we determine the median difference of all the tiepoints from
+       the surface. The DEM for each of the image ground connections are
+       then adjusted by this amount.
 
   --dem-sigma=v
        Weighting to give surface constraint from DEM [default: 10.0]
@@ -80,6 +88,20 @@ v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
 if(verbose):
     print "Final Chisq: ", chisq
+
+if(args.dem_height_block_adjust):
+    print sba.igc_coll.dem(0)
+    d = sba.igc_coll.dem(0)
+    sdiff = [ d.distance_to_surface(sba.ground_location(i)) 
+              for i in range(len(tpcol)) ]
+    hadj = np.median(sdiff)
+    print "Doing DEM height block adjustment of ", hadj
+    d = DemMapInfoOffset(d, hadj)
+    sdiff = [ d.distance_to_surface(sba.ground_location(i)) 
+              for i in range(len(tpcol)) ]
+    for i in range(sba.igc_coll.number_image):
+        sba.igc_coll.image_ground_connection(i).dem = d
+
 write_shelve(args.igc_out, sba.igc_coll)
 tpcol = sba.tpcol
 for i in range(len(tpcol)):

@@ -1,6 +1,6 @@
 Summary: This is the AFIDS python
 Name: afids-python
-Version: 1.01
+Version: 1.02
 Release: 1na
 License: Copyright 2013 California Institute of Technology ALL RIGHTS RESERVED
 Group: Applications/Engineering
@@ -57,6 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 /opt/afids/bin/shelve_job_run
 /opt/afids/bin/shelve_show
 /opt/afids/bin/tp_collect
+/opt/afids/bin/tp_show
 /opt/afids/bin/tiepoint_to_error
 /opt/afids/include/geocal/*
 /opt/afids/include/sdbx/*
@@ -68,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 /opt/afids/setup_afids_python.sh
 
 %changelog
+* Thu Jul 11 2013 Mike M Smyth <smyth@pistol> - 1.02-1
+- Add pair_ortho proc for Tom and Rich
+
 * Tue Dec 18 2012 Mike M Smyth <smyth@pistol> - python-1
 - Initial build.
 

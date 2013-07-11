@@ -83,11 +83,7 @@ export run_test = *
 export AFIDS_VDEV_DATA = $(AFIDS_DATA)/vdev
 export ELEV_ROOT = $(AFIDS_DATA)/srtmL2_filled
 export VICAR_GDALPLUGIN_HOME
-if BUILD_VICAR_GDALPLUGIN
-export GDAL_DRIVER_PATH=$(abs_builddir)/.libs:$(abs_builddir):$(VICAR_GDALPLUGIN_HOME)
-else
 export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
-endif
 
 if BUILD_VICAR_GDALPLUGIN
 geocal_test_all: install_vicar_gdalplugin_early

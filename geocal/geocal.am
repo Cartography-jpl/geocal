@@ -86,7 +86,7 @@ export VICAR_GDALPLUGIN_HOME
 export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
 
 if BUILD_VICAR_GDALPLUGIN
-geocal_test_all: install_vicar_gdalplugin_early
+EXTRA_geocal_test_all_DEPENDENCIES = install_vicar_gdalplugin_early
 endif
 
 #=================================================================

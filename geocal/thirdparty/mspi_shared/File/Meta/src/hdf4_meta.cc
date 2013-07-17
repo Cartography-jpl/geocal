@@ -54,7 +54,7 @@ MSPI::Shared::Hdf4Meta::hdf4_import(
 
   for (int32 i = 0 ; i < number_attribute ; i++) {
 
-    std::vector<char> attr_name(MAX_NC_NAME+1,0);
+    std::vector<char> attr_name(H4_MAX_NC_NAME+1,0);
     int32 type;
     int32 count;
     int32 size_bytes;
@@ -108,7 +108,7 @@ MSPI::Shared::Hdf4Meta::hdf4_import(
 
   int32 data_type;
   int32 count;
-  char attr_name[MAX_NC_NAME];
+  char attr_name[H4_MAX_NC_NAME];
   int32 size_bytes;
   
   intn status = Vattrinfo(Group_id, attr_index, attr_name, &data_type, &count,

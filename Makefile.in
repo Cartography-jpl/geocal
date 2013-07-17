@@ -1001,11 +1001,9 @@ am__libmspi_shared_la_SOURCES_DIST =  \
 	@srcmspishared@/File/FileHandle/src/hdfeos5_file_handle.cc \
 	@srcmspishared@/File/FileHandle/src/hdfeos2_file_handle.cc \
 	@srcmspishared@/File/Ancillary/src/rdqi.cc \
-	@srcmspishared@/File/Ancillary/src/create_out_of_band_rdqi_main.cc \
 	@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc \
 	@srcmspishared@/File/Meta/src/hdf4_meta.cc \
 	@srcmspishared@/File/Meta/src/hdf5_meta.cc \
-	@srcmspishared@/File/Meta/src/meta_repair_main.cc \
 	@srcmspishared@/File/Meta/src/meta.cc \
 	@srcmspishared@/ErrorHandling/src/exception.cc \
 	@srcmspishared@/Config/src/name_value_parser.cc \
@@ -1044,11 +1042,9 @@ am__libmspi_shared_la_SOURCES_DIST =  \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos5_file_handle.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos2_file_handle.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Ancillary/src/libmspi_shared_la-rdqi.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Ancillary/src/libmspi_shared_la-create_out_of_band_rdqi_main.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Meta/src/libmspi_shared_la-hdf4_meta.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Meta/src/libmspi_shared_la-hdf5_meta.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Meta/src/libmspi_shared_la-meta_repair_main.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/ErrorHandling/src/libmspi_shared_la-exception.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/Config/src/libmspi_shared_la-name_value_parser.lo \
@@ -2537,7 +2533,8 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@libmspi_shared_la_LDFLAGS = $(HDFEOS_LIB)
 @BUILD_AFIDS_PYTHON_TRUE@libmspi_shared_la_CPPFLAGS =  \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcmspishared@ \
-@BUILD_AFIDS_PYTHON_TRUE@	$(HDFEOS_CFLAGS) $(HDFEOS5_CFLAGS)
+@BUILD_AFIDS_PYTHON_TRUE@	$(HDFEOS_CFLAGS) $(HDFEOS5_CFLAGS) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(GDAL_CFLAGS)
 @BUILD_AFIDS_PYTHON_TRUE@libmspi_shared_la_SOURCES = @srcmspishared@/Support/src/auto_remove_temp_dir.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/Support/src/projection_information.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/Support/src/scaled_double.cc \
@@ -2571,11 +2568,9 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/FileHandle/src/hdfeos5_file_handle.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/FileHandle/src/hdfeos2_file_handle.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Ancillary/src/rdqi.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Ancillary/src/create_out_of_band_rdqi_main.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Meta/src/hdf4_meta.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Meta/src/hdf5_meta.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Meta/src/meta_repair_main.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/File/Meta/src/meta.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/ErrorHandling/src/exception.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcmspishared@/Config/src/name_value_parser.cc \
@@ -3556,9 +3551,6 @@ libgeocal.la: $(libgeocal_la_OBJECTS) $(libgeocal_la_DEPENDENCIES) $(EXTRA_libge
 @srcmspishared@/File/Ancillary/src/libmspi_shared_la-rdqi.lo:  \
 	@srcmspishared@/File/Ancillary/src/$(am__dirstamp) \
 	@srcmspishared@/File/Ancillary/src/$(DEPDIR)/$(am__dirstamp)
-@srcmspishared@/File/Ancillary/src/libmspi_shared_la-create_out_of_band_rdqi_main.lo:  \
-	@srcmspishared@/File/Ancillary/src/$(am__dirstamp) \
-	@srcmspishared@/File/Ancillary/src/$(DEPDIR)/$(am__dirstamp)
 @srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo:  \
 	@srcmspishared@/File/Ancillary/src/$(am__dirstamp) \
 	@srcmspishared@/File/Ancillary/src/$(DEPDIR)/$(am__dirstamp)
@@ -3572,9 +3564,6 @@ libgeocal.la: $(libgeocal_la_OBJECTS) $(libgeocal_la_DEPENDENCIES) $(EXTRA_libge
 	@srcmspishared@/File/Meta/src/$(am__dirstamp) \
 	@srcmspishared@/File/Meta/src/$(DEPDIR)/$(am__dirstamp)
 @srcmspishared@/File/Meta/src/libmspi_shared_la-hdf5_meta.lo:  \
-	@srcmspishared@/File/Meta/src/$(am__dirstamp) \
-	@srcmspishared@/File/Meta/src/$(DEPDIR)/$(am__dirstamp)
-@srcmspishared@/File/Meta/src/libmspi_shared_la-meta_repair_main.lo:  \
 	@srcmspishared@/File/Meta/src/$(am__dirstamp) \
 	@srcmspishared@/File/Meta/src/$(DEPDIR)/$(am__dirstamp)
 @srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo:  \
@@ -4282,7 +4271,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-config_table.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-name_value_parser.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/ErrorHandling/src/$(DEPDIR)/libmspi_shared_la-exception.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-create_out_of_band_rdqi_main.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-out_of_band_calibration_data.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-rdqi.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-configured_field_map.Plo@am__quote@
@@ -4302,7 +4290,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-hdf4_meta.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-hdf5_meta.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-meta.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-meta_repair_main.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-band_table.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-polygon_table.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-row_table.Plo@am__quote@
@@ -6315,13 +6302,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Ancillary/src/libmspi_shared_la-rdqi.lo `test -f '@srcmspishared@/File/Ancillary/src/rdqi.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Ancillary/src/rdqi.cc
 
-@srcmspishared@/File/Ancillary/src/libmspi_shared_la-create_out_of_band_rdqi_main.lo: @srcmspishared@/File/Ancillary/src/create_out_of_band_rdqi_main.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Ancillary/src/libmspi_shared_la-create_out_of_band_rdqi_main.lo -MD -MP -MF @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-create_out_of_band_rdqi_main.Tpo -c -o @srcmspishared@/File/Ancillary/src/libmspi_shared_la-create_out_of_band_rdqi_main.lo `test -f '@srcmspishared@/File/Ancillary/src/create_out_of_band_rdqi_main.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Ancillary/src/create_out_of_band_rdqi_main.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-create_out_of_band_rdqi_main.Tpo @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-create_out_of_band_rdqi_main.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Ancillary/src/create_out_of_band_rdqi_main.cc' object='@srcmspishared@/File/Ancillary/src/libmspi_shared_la-create_out_of_band_rdqi_main.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Ancillary/src/libmspi_shared_la-create_out_of_band_rdqi_main.lo `test -f '@srcmspishared@/File/Ancillary/src/create_out_of_band_rdqi_main.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Ancillary/src/create_out_of_band_rdqi_main.cc
-
 @srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo: @srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo -MD -MP -MF @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-out_of_band_calibration_data.Tpo -c -o @srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo `test -f '@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-out_of_band_calibration_data.Tpo @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-out_of_band_calibration_data.Plo
@@ -6342,13 +6322,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Meta/src/hdf5_meta.cc' object='@srcmspishared@/File/Meta/src/libmspi_shared_la-hdf5_meta.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Meta/src/libmspi_shared_la-hdf5_meta.lo `test -f '@srcmspishared@/File/Meta/src/hdf5_meta.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Meta/src/hdf5_meta.cc
-
-@srcmspishared@/File/Meta/src/libmspi_shared_la-meta_repair_main.lo: @srcmspishared@/File/Meta/src/meta_repair_main.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Meta/src/libmspi_shared_la-meta_repair_main.lo -MD -MP -MF @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-meta_repair_main.Tpo -c -o @srcmspishared@/File/Meta/src/libmspi_shared_la-meta_repair_main.lo `test -f '@srcmspishared@/File/Meta/src/meta_repair_main.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Meta/src/meta_repair_main.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-meta_repair_main.Tpo @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-meta_repair_main.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Meta/src/meta_repair_main.cc' object='@srcmspishared@/File/Meta/src/libmspi_shared_la-meta_repair_main.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Meta/src/libmspi_shared_la-meta_repair_main.lo `test -f '@srcmspishared@/File/Meta/src/meta_repair_main.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Meta/src/meta_repair_main.cc
 
 @srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo: @srcmspishared@/File/Meta/src/meta.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo -MD -MP -MF @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-meta.Tpo -c -o @srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo `test -f '@srcmspishared@/File/Meta/src/meta.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Meta/src/meta.cc

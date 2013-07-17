@@ -23,7 +23,7 @@
 #include <vector>		   // Definition of std::vector
 #include "MSPI-Shared/Config/src/config_file.h"
 				// Definition of ConfigFile
-#include <gdal/ogr_spatialref.h>
+#include <ogr_spatialref.h>
 				// Definition of OGRSpatialReferencea
 #include <boost/shared_ptr.hpp> // Definition of boost::shared_ptr
 

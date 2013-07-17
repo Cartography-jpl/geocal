@@ -564,7 +564,7 @@ MSPI::Shared::HDF4::L1AFile::read_data(
 
   {
     int rank;
-    std::vector<int32> dims(MAX_VAR_DIMS);
+    std::vector<int32> dims(H4_MAX_VAR_DIMS);
     int32 datatype;
 
     status = SWfieldinfo(sid, (char *)field_name_dn.c_str(),
@@ -679,7 +679,7 @@ MSPI::Shared::HDF4::L1AFile::read_float(
 
   {
     int rank;
-    std::vector<int32> dims(MAX_VAR_DIMS);
+    std::vector<int32> dims(H4_MAX_VAR_DIMS);
     int32 datatype;
 
     status = SWfieldinfo(sid, (char *)field_name_float.c_str(),

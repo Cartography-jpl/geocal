@@ -15,7 +15,7 @@
 #ifndef GEOTIFF_FILE_H
 #define GEOTIFF_FILE_H
 
-#include <gdal/gdal_priv.h>	// Definition of GDALDataset
+#include <gdal_priv.h>		 // Definition of GDALDataset
 #include "boost/multi_array.hpp"  // Definition of boost::multi_array
 #include "MSPI-Shared/Support/src/projection_information.h"
 				// Definition of ProjectionInformation

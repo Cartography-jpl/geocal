@@ -38,10 +38,19 @@ AC_GDAL(required, cannot_build, default_search)
 AC_VICAR_GDALPLUGIN(required, cannot_build, default_search)
 
 #=================================================================
-# Needed by MSPI. We can take this back out if we aren't building
-# MSPI stuff.
-AC_HDFEOS(required, cannot_build, default_search)
-AC_HDFEOS5(required, cannot_build, default_search)
+# Right now, always include MSPI. We may make this optional later
+with_mspi=yes
+if test x$with_afids_a = xyes; then
+   AM_CONDITIONAL([BUILD_MSPI], [true])
+   AM_CONDITIONAL([HAVE_MSPI], [true])
+fi
+
+#=================================================================
+# Libraries needed by MSPI.
+if test x$with_afids_a = xyes; then
+   AC_HDFEOS(required, cannot_build, default_search)
+   AC_HDFEOS5(required, cannot_build, default_search)
+fi
 
 #=================================================================
 # Need to find carto library. (Need to have this after VICAR_RTL 
@@ -151,3 +160,4 @@ LOC_MSG()
 LOC_MSG([  Generate SWIG wrappers:        ${generate_swig}])
 LOC_MSG([  Install documentation:         ${with_documentation}])
 LOC_MSG([  Include AFIDS A configuration: ${with_afids_a}])
+LOC_MSG([  Include MSPI:                  ${with_mspi}])

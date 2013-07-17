@@ -722,6 +722,10 @@ HAVE_HDF4_FALSE
 HAVE_HDF4_TRUE
 HDF4_LIBS
 HDF4_CFLAGS
+HAVE_MSPI_FALSE
+HAVE_MSPI_TRUE
+BUILD_MSPI_FALSE
+BUILD_MSPI_TRUE
 BUILD_VICAR_GDALPLUGIN_FALSE
 BUILD_VICAR_GDALPLUGIN_TRUE
 HAVE_VICAR_GDALPLUGIN_FALSE
@@ -26796,8 +26800,30 @@ fi
 
 
 #=================================================================
-# Needed by MSPI. We can take this back out if we aren't building
-# MSPI stuff.
+# Right now, always include MSPI. We may make this optional later
+with_mspi=yes
+if test x$with_afids_a = xyes; then
+    if true; then
+  BUILD_MSPI_TRUE=
+  BUILD_MSPI_FALSE='#'
+else
+  BUILD_MSPI_TRUE='#'
+  BUILD_MSPI_FALSE=
+fi
+
+    if true; then
+  HAVE_MSPI_TRUE=
+  HAVE_MSPI_FALSE='#'
+else
+  HAVE_MSPI_TRUE='#'
+  HAVE_MSPI_FALSE=
+fi
+
+fi
+
+#=================================================================
+# Libraries needed by MSPI.
+if test x$with_afids_a = xyes; then
 
 
 have_hdfeos="no"
@@ -27971,6 +27997,7 @@ fi
 
 
 
+fi
 
 #=================================================================
 # Need to find carto library. (Need to have this after VICAR_RTL
@@ -29778,6 +29805,14 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_VICAR_GDALPLUGIN_TRUE}" && test -z "${BUILD_VICAR_GDALPLUGIN_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_VICAR_GDALPLUGIN\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_MSPI_TRUE}" && test -z "${BUILD_MSPI_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_MSPI\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_MSPI_TRUE}" && test -z "${HAVE_MSPI_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_MSPI\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_HDF4_TRUE}" && test -z "${HAVE_HDF4_FALSE}"; then
@@ -32708,4 +32743,7 @@ echo "  Install documentation:         ${with_documentation}"
 
 
 echo "  Include AFIDS A configuration: ${with_afids_a}"
+
+
+echo "  Include MSPI:                  ${with_mspi}"
 

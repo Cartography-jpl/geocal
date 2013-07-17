@@ -647,6 +647,7 @@ srcraw
 srcsdbx
 srcpythonscript
 srcgtk
+srcmspi
 srcmisr
 srccartlab
 srcinterface
@@ -28204,6 +28205,8 @@ srcinterface=$srcgeocalcore/Interface
 srccartlab=$libgeocal/CartLab
 
 srcmisr=$libgeocal/Misr
+
+srcmspi=$libgeocal/Mspi
 
 srcgtk=$libgeocal/Gtk
 

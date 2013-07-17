@@ -1,0 +1,15 @@
+# This gets included in the top makefile. This list files here that are
+# used to make up libgeocal.la.
+#geocalinc_HEADERS+= @srcmspi@/argus_camera.h
+#libgeocal_la_SOURCES+= @srcmspi@/argus_camera.cc
+
+#SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
+
+#geocal_test_all_SOURCES+= @srcmspi@/argus_camera_test.cc
+
+AM_CPPFLAGS+= -I$(srcdir)/@srcmspi@
+
+# Allow searchs for .i, .h. and .cc files in this directory
+vpath %.cc $(srcdir)/@srcmspi@
+vpath %.h $(srcdir)/@srcmspi@
+vpath %.i $(srcdir)/@srcmspi@

@@ -60,6 +60,15 @@
 # used to make up libgeocal.la.
 
 # This gets included in the top makefile. This list files here that are
+# used to make up libgeocal.la.
+#geocalinc_HEADERS+= @srcmspi@/argus_camera.h
+#libgeocal_la_SOURCES+= @srcmspi@/argus_camera.cc
+
+#SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
+
+#geocal_test_all_SOURCES+= @srcmspi@/argus_camera_test.cc
+
+# This gets included in the top makefile. This list files here that are
 # used to run unit tests.
 
 # Sphinx python documentation
@@ -116,6 +125,7 @@ DIST_COMMON = $(srcdir)/common.am $(srcdir)/afids_python.am \
 	$(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am \
 	$(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am \
 	$(srcdir)/afids_python/geocal/lib/Misr/misr.am \
+	$(srcdir)/afids_python/geocal/lib/Mspi/mspi.am \
 	$(srcdir)/afids_python/geocal/lib/Gtk/gtk.am \
 	$(srcdir)/afids_python/geocal/bindings/python/python.am \
 	$(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am \
@@ -249,7 +259,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcsupport@/boost \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcinterface@ \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcimplementation@ \
-@BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srccartlab@
+@BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srccartlab@ \
+@BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcmspi@
 @BUILD_AFIDS_PYTHON_TRUE@am__append_7 = libraw.la
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_8 = @srcsupport@/hdf_file.h
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_9 = @srcsupport@/hdf_file.cc
@@ -1794,6 +1805,7 @@ srcgtk = @srcgtk@
 srcimplementation = @srcimplementation@
 srcinterface = @srcinterface@
 srcmisr = @srcmisr@
+srcmspi = @srcmspi@
 srcpython = @srcpython@
 srcpythonbin = @srcpythonbin@
 srcpythonlib = @srcpythonlib@
@@ -2462,7 +2474,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Mspi/mspi.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -2485,7 +2497,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
-$(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am:
+$(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Mspi/mspi.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am:
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -7958,6 +7970,11 @@ installcheck-local: $(INSTALLCHECK_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@vpath %.cc $(srcdir)/@srccartlab@
 @BUILD_AFIDS_PYTHON_TRUE@vpath %.h $(srcdir)/@srccartlab@
 @BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@srccartlab@
+
+# Allow searchs for .i, .h. and .cc files in this directory
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.cc $(srcdir)/@srcmspi@
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.h $(srcdir)/@srcmspi@
+@BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@srcmspi@
 
 # Allow searchs for .i, .h. and .cc files in this directory
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@vpath %.cc $(srcdir)/@srcgtk@

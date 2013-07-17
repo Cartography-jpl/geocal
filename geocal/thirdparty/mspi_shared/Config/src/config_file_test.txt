@@ -1,0 +1,16 @@
+#####################################################################################
+# Sample config file for unit-test.
+#
+1.1      : parameter1           # Parameter 1 comment
+         # Comment line
+2.1 -3.1  : parameter2
+# Comment line
+4 -5 6    : parameter3
+T F TRUE FALSE .TRUE. .FALSE. # multi-line array
+t f true false .true. .false. : parameter4
+1.00000001 : parameter6   # Double
+alpha beta gamma : parameter7
+100 101 102 103
+200 201 202 203
+300 301 302 303 : array1
+18446744073709551615 0 -2 : signedlonglong

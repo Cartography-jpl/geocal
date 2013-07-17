@@ -1,0 +1,23 @@
+granule_MSPI-Shared/File/L1B2File/src/l1b2_file_test.simple_field_map2 : granule_id
+2 2 : grids.size
+grid_name grid_number : grids.columns
+700_nm_band 6
+801_nm_band 7
+: grids.table
+
+4 3 : 700_nm_band.size
+field_name type fill : 700_nm_band.columns
+Time     double  -9.999e-9
+I        float   -9.999e-9
+DOLP     float   -9.999e-9
+Chi_scat float   -9.999e-9
+: 700_nm_band.table
+
+
+4 3 : 801_nm_band.size
+field_name type fill : 801_nm_band.columns
+Time     double  -9.999e-9
+I        float   -9.999e-9
+DOLP     float   -9.999e-9
+Chi_scat float   -9.999e-9
+: 801_nm_band.table

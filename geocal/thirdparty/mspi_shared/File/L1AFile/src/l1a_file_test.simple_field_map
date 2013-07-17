@@ -1,0 +1,31 @@
+granule_MSPI-Shared/File/L1AFile/src/l1a_file_test.simple_field_map : granule_id
+3 2 : grids.size
+grid_name grid_number : grids.columns
+355-I 63
+470-Q 47
+470-U 42
+: grids.table
+
+4 3 : 355-I.size
+field_name type fill : 355-I.columns
+p1 float -9999
+p2 float -9999
+xn float -9999
+dn uint16 65533
+: 355-I.table
+
+4 3 : 470-Q.size
+field_name type fill : 470-Q.columns
+p1 float -9999
+p2 float -9999
+x0n float -9999
+d0n uint16 65533
+: 470-Q.table
+
+4 3 : 470-U.size
+field_name type fill : 470-U.columns
+p1 float -9999
+p2 float -9999
+x45n float -9999
+d45n uint16 65533
+: 470-U.table

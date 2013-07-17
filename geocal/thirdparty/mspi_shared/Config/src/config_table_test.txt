@@ -1,0 +1,13 @@
+#####################################################################################
+# Sample config file for unit-test.
+#
+apples bananas nuts : monkey_food
+
+3 5 : monkeys.size # (rows, columns)
+name height weight number_banana hungry : monkeys.columns
+Kanzi 5.1    100.6   15           T
+Bobo  4.3    94.6    12           false
+Koko  5.2    150     20           true
+: monkeys.table
+
+1 2 3 4 5 : other_parameter

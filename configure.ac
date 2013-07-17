@@ -38,6 +38,12 @@ AC_GDAL(required, cannot_build, default_search)
 AC_VICAR_GDALPLUGIN(required, cannot_build, default_search)
 
 #=================================================================
+# Needed by MSPI. We can take this back out if we aren't building
+# MSPI stuff.
+AC_HDFEOS(required, cannot_build, default_search)
+AC_HDFEOS5(required, cannot_build, default_search)
+
+#=================================================================
 # Need to find carto library. (Need to have this after VICAR_RTL 
 # and GSL, because it uses variables from those functions)
 AC_CARTO(required, cannot_build, default_search)

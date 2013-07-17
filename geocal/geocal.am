@@ -56,6 +56,7 @@ include afids_python/geocal/bindings/python/python.am
 lib_LTLIBRARIES += libgeocal.la
 libgeocal_la_LIBADD = $(CARTO_LIBS) libraw.la $(VICAR_RTL_LIBS) $(FLIBS)
 libgeocal_la_LIBADD += $(SPICE_LIBS)
+libgeocal_la_LIBADD += $(MSPI_SHARED_LIBS)
 
 #=================================================================
 # Test data used to run unit tests.

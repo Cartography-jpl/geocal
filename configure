@@ -25529,7 +25529,7 @@ $as_echo_n "checking for HDF5 library... " >&6; }
         succeeded=no
         if test "$ac_hdf5_path" != ""; then
             HDF5HOME=$ac_hdf5_path
-            HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
+            HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5_hl.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
             HDF5_CFLAGS="-I$ac_hdf5_path/include"
             succeeded=yes
         else
@@ -25612,27 +25612,27 @@ fi
           HDF5_PREFIX=$ac_path_tmp
           HDF5_CFLAGS="-I$ac_path_tmp/include/"
           if test -e "$ac_path_tmp/lib/libhdf5_cpp.la"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhdf5_cpp.so"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhdf5_cpp.dylib"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.la"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
               succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.so"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.dylib"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           fi
@@ -27566,7 +27566,7 @@ $as_echo_n "checking for HDF5 library... " >&6; }
         succeeded=no
         if test "$ac_hdf5_path" != ""; then
             HDF5HOME=$ac_hdf5_path
-            HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
+            HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5_hl.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
             HDF5_CFLAGS="-I$ac_hdf5_path/include"
             succeeded=yes
         else
@@ -27649,27 +27649,27 @@ fi
           HDF5_PREFIX=$ac_path_tmp
           HDF5_CFLAGS="-I$ac_path_tmp/include/"
           if test -e "$ac_path_tmp/lib/libhdf5_cpp.la"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhdf5_cpp.so"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhdf5_cpp.dylib"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.la"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
               succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.so"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.dylib"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5 -lz"
+             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           fi

@@ -1,11 +1,11 @@
 # This gets included in the top makefile. This list files here that are
 # used to make up libgeocal.la.
-#geocalinc_HEADERS+= @srcmspi@/argus_camera.h
-#libgeocal_la_SOURCES+= @srcmspi@/argus_camera.cc
+geocalinc_HEADERS+= @srcmspi@/paraxial_transform.h
+libgeocal_la_SOURCES+= @srcmspi@/paraxial_transform.cc
 
 #SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
 
-#geocal_test_all_SOURCES+= @srcmspi@/argus_camera_test.cc
+geocal_test_all_SOURCES+= @srcmspi@/paraxial_transform_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcmspi@
 

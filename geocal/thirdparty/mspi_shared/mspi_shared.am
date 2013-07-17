@@ -1,5 +1,9 @@
 lib_LTLIBRARIES += libmspi_shared.la
-libmspi_shared_la_LDFLAGS = $(HDFEOS_LIB)
+MSPI_SHARED_LIBS = libmspi_shared.la
+libmspi_shared_la_LDFLAGS = $(HDFEOS_LIBS) $(HDF4_LIBS) 
+libmspi_shared_la_LDFLAGS+= $(HDFEOS5_LIBS) $(HDF5_LIBS)
+libmspi_shared_la_LDFLAGS+= -R $(BOOST_LIBDIR) -L$(BOOST_LIBDIR)
+libmspi_shared_la_LDFLAGS+= -lboost_filesystem
 libmspi_shared_la_CPPFLAGS = -I$(srcdir)/@srcmspishared@
 libmspi_shared_la_CPPFLAGS += $(HDFEOS_CFLAGS)
 libmspi_shared_la_CPPFLAGS += $(HDFEOS5_CFLAGS)
@@ -90,3 +94,4 @@ libmspi_shared_la_SOURCES+= @srcmspishared@/Config/src/name_value_parser.cc
 libmspi_shared_la_SOURCES+= @srcmspishared@/Config/src/config_file.cc
 libmspi_shared_la_SOURCES+= @srcmspishared@/Config/src/config_table.cc
 
+AM_CPPFLAGS+= -I$(srcdir)/@srcmspishared@

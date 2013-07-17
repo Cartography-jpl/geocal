@@ -1,6 +1,6 @@
 include afids_python/geocal/thirdparty/libsdbx/sdbx.am
 include afids_python/geocal/thirdparty/libraw/libraw.am
 if BUILD_MSPI
-   include afids_python/geocal/thirdparty/mspi_shared/mspi_shared.am
+include afids_python/geocal/thirdparty/mspi_shared/mspi_shared.am
 endif
 

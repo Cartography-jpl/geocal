@@ -8,6 +8,7 @@ libgeocal_la_SOURCES+= @srcmspi@/mspi_camera.cc
 #SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
 
 geocal_test_all_SOURCES+= @srcmspi@/paraxial_transform_test.cc
+geocal_test_all_SOURCES+= @srcmspi@/mspi_camera_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcmspi@
 

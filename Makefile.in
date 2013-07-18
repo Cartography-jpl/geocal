@@ -367,7 +367,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@	@srcmspi@/mspi_camera.cc
 
 #SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_33 = @srcmspi@/paraxial_transform_test.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_33 = @srcmspi@/paraxial_transform_test.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@	@srcmspi@/mspi_camera_test.cc
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_34 = -I$(srcdir)/@srcmspi@
 
 # Allow fils to be include in other directories
@@ -1168,6 +1169,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 	@srccartlab@/doughnut_average_test.cc \
 	@srccartlab@/material_detect_test.cc \
 	@srcmspi@/paraxial_transform_test.cc \
+	@srcmspi@/mspi_camera_test.cc \
 	afids_python/geocal/lib/test_all.cc
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_10 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_11 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
@@ -1178,7 +1180,8 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_12 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_13 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__objects_14 = @srcmspi@/geocal_test_all-paraxial_transform_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__objects_14 = @srcmspi@/geocal_test_all-paraxial_transform_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@	@srcmspi@/geocal_test_all-mspi_camera_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@am_geocal_test_all_OBJECTS = @srcsupport@/geocal_test_all-global_fixture.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-global_fixture_default.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-geocal_exception_test.$(OBJEXT) \
@@ -3993,6 +3996,8 @@ clean-checkPROGRAMS:
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/geocal_test_all-paraxial_transform_test.$(OBJEXT):  \
 	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/geocal_test_all-mspi_camera_test.$(OBJEXT):  \
+	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
 afids_python/geocal/lib/$(am__dirstamp):
 	@$(MKDIR_P) afids_python/geocal/lib
 	@: > afids_python/geocal/lib/$(am__dirstamp)
@@ -4306,6 +4311,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-time_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-paraxial_transform_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-mspi_camera.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-paraxial_transform.Plo@am__quote@
@@ -7792,6 +7798,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/paraxial_transform_test.cc' object='@srcmspi@/geocal_test_all-paraxial_transform_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-paraxial_transform_test.obj `if test -f '@srcmspi@/paraxial_transform_test.cc'; then $(CYGPATH_W) '@srcmspi@/paraxial_transform_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/paraxial_transform_test.cc'; fi`
+
+@srcmspi@/geocal_test_all-mspi_camera_test.o: @srcmspi@/mspi_camera_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-mspi_camera_test.o -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Tpo -c -o @srcmspi@/geocal_test_all-mspi_camera_test.o `test -f '@srcmspi@/mspi_camera_test.cc' || echo '$(srcdir)/'`@srcmspi@/mspi_camera_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Tpo @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/mspi_camera_test.cc' object='@srcmspi@/geocal_test_all-mspi_camera_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-mspi_camera_test.o `test -f '@srcmspi@/mspi_camera_test.cc' || echo '$(srcdir)/'`@srcmspi@/mspi_camera_test.cc
+
+@srcmspi@/geocal_test_all-mspi_camera_test.obj: @srcmspi@/mspi_camera_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-mspi_camera_test.obj -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Tpo -c -o @srcmspi@/geocal_test_all-mspi_camera_test.obj `if test -f '@srcmspi@/mspi_camera_test.cc'; then $(CYGPATH_W) '@srcmspi@/mspi_camera_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/mspi_camera_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Tpo @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/mspi_camera_test.cc' object='@srcmspi@/geocal_test_all-mspi_camera_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-mspi_camera_test.obj `if test -f '@srcmspi@/mspi_camera_test.cc'; then $(CYGPATH_W) '@srcmspi@/mspi_camera_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/mspi_camera_test.cc'; fi`
 
 afids_python/geocal/lib/geocal_test_all-test_all.o: afids_python/geocal/lib/test_all.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT afids_python/geocal/lib/geocal_test_all-test_all.o -MD -MP -MF afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Tpo -c -o afids_python/geocal/lib/geocal_test_all-test_all.o `test -f 'afids_python/geocal/lib/test_all.cc' || echo '$(srcdir)/'`afids_python/geocal/lib/test_all.cc

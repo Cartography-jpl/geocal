@@ -29,15 +29,10 @@ See Subversion Log
 =============================================================================
 !END=======================================================================*/
 
+#include "unit_test_support.h"
 #include "mspi_camera.h"	// Definition of MspiCamera
 #include <iostream>		// Definition of cerr.
 #include "MSPI-Shared/ErrorHandling/src/exception.h" // Definition of Exception.
-#include "GeoCalCore/InterfaceClass/Camera/frame_coor.h"
-                                // Definition of FrameCoor
-#include "GeoCalCore/InterfaceClass/ScCoordinate/sc_look_vector.h"
-                                // Definition of ScLookVector.
-#include "GeoCalCore/Support/Exception/exception.h"
-				// Definition of Exception. 
 #include <fstream>  		// Definition of std::ofstream
 #include <sstream>  		// Definition of std::ostringstream
 #include "MSPI-Shared/UnitTest/src/double_comparator.h"
@@ -50,11 +45,8 @@ See Subversion Log
 #include <boost/filesystem.hpp>	// Definition of boost::filesystem::remove
 
 using std::cerr;
-using GeoCal::Mspi::MspiCamera;
+using namespace GeoCal;
 using MSPI::Shared::Exception;
-using GeoCal::GeoCalCore::ScLookVector;
-using NEWMAT::ColumnVector;
-using GeoCal::GeoCalCore::FrameCoor;
 using MSPI::Shared::DoubleComparator;
 using MSPI::Shared::ConfigFile;
 using MSPI::Shared::array_check;
@@ -71,14 +63,14 @@ const std::string new_expect_filename = "GeoCal/MspiCamera/src/mspi_camera_test.
 /// Convert NEWMAT::Matrix to boost::multi_array<double,2>
 /////////////////////////////////////////////////////////////////////////////
 
-boost::multi_array<double,2> multi_array(const NEWMAT::Matrix& Matrix)
+boost::multi_array<double,2> multi_array(const blitz::Array<double, 2>& Matrix)
 {
-  size_t number_row = Matrix.Nrows();
-  size_t number_col = Matrix.Ncols();
+  int number_row = Matrix.rows();
+  int number_col = Matrix.cols();
   boost::multi_array<double,2> result(boost::extents[number_row][number_col]);
-  for (size_t i = 0 ; i < number_row ; i++) {
-    for (size_t j = 0 ; j < number_col ; j++) {
-      result[i][j] = Matrix(i+1,j+1); // Matrix is 1-based
+  for (int i = 0 ; i < number_row ; i++) {
+    for (int j = 0 ; j < number_col ; j++) {
+      result[i][j] = Matrix(i,j);
     }
   }
   return result;
@@ -137,17 +129,13 @@ void save_expect(
 // Main
 /////////////////////////////////////////////////////////////////////////
 
-int main()
+BOOST_FIXTURE_TEST_SUITE(mspi_camera, GlobalFixture)
+
+BOOST_AUTO_TEST_CASE(basic)
 {
   int test_number = 0;		// Number identifying this test. 
   bool error = false;		// Flag indicating test failure.
   DoubleComparator cmp(100.0);	// Double comparator
-
-//-----------------------------------------------------------------------
-// Begin try block for main.
-//-----------------------------------------------------------------------
-
-  try {
 
 //-----------------------------------------------------------------------
 // Delete new expected result file.
@@ -194,42 +182,6 @@ int main()
     }
 
 //-----------------------------------------------------------------------
-// Test covariance()
-//-----------------------------------------------------------------------
-
-    test_number++;
-    {
-      size_t size = camera.parameter_size();
-      boost::multi_array<double,2> expect(boost::extents[size][size]);
-      for (size_t i = 0 ; i < size ; i++) {
-	expect[i][i] = 1;
-      }
-      
-      array_check(multi_array(camera.covariance()), expect, cmp, __LINE__, error);
-    }
-
-//-----------------------------------------------------------------------
-// Test covariance(boost::multi_array<double>)
-//-----------------------------------------------------------------------
-
-    test_number++;
-    {
-      size_t size = camera.parameter_size();
-      NEWMAT::SymmetricMatrix matrix(size);
-      boost::multi_array<double,2> expect(boost::extents[size][size]);
-      for (size_t i = 0 ; i < size ; i++) {
-	for (size_t j = i ; j < size ; j++) {
-	  expect[i][j] = expect[j][i] = i * 0.13 + j * 0.17;
-	  matrix(i+1,j+1) = expect[i][j];  // NEWMAT::SymmetricMatrix is 1-based
-	}
-      }
-
-      camera.covariance(matrix);
-      
-      array_check(multi_array(camera.covariance()),expect, cmp, __LINE__, error);
-    }
-
-//-----------------------------------------------------------------------
 // Test row_number(int)
 // Test band_number(int)
 //-----------------------------------------------------------------------
@@ -262,14 +214,7 @@ int main()
     test_number++;
 
     {
-      ColumnVector v(3);
-      v(1) = 27.0; // (Xscs, Zccs, Zdcs)   
-      v(2) = -0.3;   // (Yscs, -Yccs, -Ydcs, +xf)
-      v(3) = 0.4;   // (Zscs, Xccs, Xdcs, +yf)
-      
-      double length = 3.0;
-    
-      ScLookVector sc(v,length);
+      ScLookVector sc(27.0, -0.3, 0.4);
 
       double line_expect[number_band] = {4.02840527542328388222e+01,
                                          4.82840527542328388222e+01,
@@ -288,19 +233,15 @@ int main()
       
       for (int iband = 0 ; iband < number_band ; iband++) {
 	
-	FrameCoor fc = camera.frame_coor(sc, iband);
-	double fc_line = camera.frame_line_coor(sc, iband);
+	FrameCoordinate fc = camera.frame_coordinate(sc, iband);
 
 
-	if (cmp.neq(fc.line(),line_expect[iband]) ||
-	    cmp.neq(fc.sample(),sample_expect[iband]) ||
-	    cmp.neq(fc_line,line_expect[iband])) {
-	  cerr << iband << ": fc.line() = " << fc.line()
+	if (cmp.neq(fc.line,line_expect[iband]) ||
+	    cmp.neq(fc.sample,sample_expect[iband])) {
+	  cerr << iband << ": fc.line = " << fc.line
 	       << " (expected " << line_expect[iband] << ")\n";
-	  cerr << iband << ": fc.sample() = " << fc.sample()
+	  cerr << iband << ": fc.sample = " << fc.sample
 	       << " (expected " << sample_expect[iband] << ")\n";
-	  cerr << iband << ": fc_line = " << fc_line
-	       << " (expected " << line_expect[iband] << ")\n";
 	  cerr << "Unexpected result at line "<< __LINE__ << "\n";
 	  error = true;
 	}
@@ -316,14 +257,7 @@ int main()
     {
       ConfigFile config("GeoCal/MspiCamera/src/mspi_camera_test.config2");
       MspiCamera camera(config);
-      ColumnVector v(3);
-      v(1) = 27.0; // (Xscs, Zccs, Zdcs)   
-      v(2) = -0.3;   // (Yscs, -Yccs, -Ydcs, +xf)
-      v(3) = 0.4;   // (Zscs, Xccs, Xdcs, +yf)
-      
-      double length = 3.0;
-    
-      ScLookVector sc(v,length);
+      ScLookVector sc(27.0, -0.3, 0.4);
 
       double line_expect[number_band] = {-4.02840527542328388222e+01,
                                          -4.82840527542328388222e+01,
@@ -342,19 +276,14 @@ int main()
       
       for (int iband = 0 ; iband < number_band ; iband++) {
 	
-	FrameCoor fc = camera.frame_coor(sc, iband);
-	double fc_line = camera.frame_line_coor(sc, iband);
+	FrameCoordinate fc = camera.frame_coordinate(sc, iband);
 
-
-	if (cmp.neq(fc.line(),line_expect[iband]) ||
-	    cmp.neq(fc.sample(),sample_expect[iband]) ||
-	    cmp.neq(fc_line,line_expect[iband])) {
-	  cerr << iband << ": fc.line() = " << fc.line()
+	if (cmp.neq(fc.line,line_expect[iband]) ||
+	    cmp.neq(fc.sample,sample_expect[iband])) {
+	  cerr << iband << ": fc.line = " << fc.line
 	       << " (expected " << line_expect[iband] << ")\n";
-	  cerr << iband << ": fc.sample() = " << fc.sample()
+	  cerr << iband << ": fc.sample = " << fc.sample
 	       << " (expected " << sample_expect[iband] << ")\n";
-	  cerr << iband << ": fc_line = " << fc_line
-	       << " (expected " << line_expect[iband] << ")\n";
 	  cerr << "Unexpected result at line "<< __LINE__ << "\n";
 	  error = true;
 	}
@@ -368,14 +297,7 @@ int main()
     test_number++;
 
     {
-      ColumnVector v(3);
-      v(1) = 27.0; // (Xscs, Zccs, Zdcs)
-      v(2) = 0.3;  // (Yscs, -Yccs, -Ydcs, +xf)
-      v(3) = -0.4;  // (Zscs, Xccs, Xdcs, +yf)
-      
-      double length = 5.0;
-      
-      ScLookVector sc(v,length);
+      ScLookVector sc(27.0, 0.3, -0.4);
       
       double line_expect[number_band] = {-4.17447096000012081163e+01,
 					 -3.37447096000012081163e+01,
@@ -394,19 +316,13 @@ int main()
       
       for (int iband = 0 ; iband < number_band ; iband++) {
 	
-	FrameCoor fc = camera.frame_coor(sc, iband);
-	double fc_line = camera.frame_line_coor(sc, iband);
-	
-	
-	if (cmp.neq(fc.line(),line_expect[iband]) ||
-	    cmp.neq(fc.sample(),sample_expect[iband]) ||
-	    cmp.neq(fc_line,line_expect[iband])) {
-	  cerr << iband << ": fc.line() = " << fc.line()
+	FrameCoordinate fc = camera.frame_coordinate(sc, iband);
+	if (cmp.neq(fc.line,line_expect[iband]) ||
+	    cmp.neq(fc.sample,sample_expect[iband])) {
+	  cerr << iband << ": fc.line = " << fc.line
 	       << " (expected " << line_expect[iband] << ")\n";
-	  cerr << iband << ": fc.sample() = " << fc.sample()
+	  cerr << iband << ": fc.sample = " << fc.sample
 	       << " (expected " << sample_expect[iband] << ")\n";
-	  cerr << iband << ": fc_line = " << fc_line
-	       << " (expected " << line_expect[iband] << ")\n";
 	  cerr << "Unexpected result at line "<< __LINE__ << "\n";
 	  error = true;
 	}
@@ -414,7 +330,7 @@ int main()
     }
 
 //-----------------------------------------------------------------------
-// Test sc_coor()
+// Test sc_look_vector()
 // Compare with next test: decreasing frame line coor increases yf, 
 // and decreases Xscs.
 //-----------------------------------------------------------------------
@@ -447,21 +363,21 @@ int main()
       };
       
       for (int iband = 0 ; iband < number_band ; iband++) {
-	FrameCoor fc(-5,0);
+	FrameCoordinate fc(-5,0);
 	
-	ScLookVector sc = camera.sc_coor(fc, iband);
+	ScLookVector sc = camera.sc_look_vector(fc, iband);
 	
 	double length_expect = 1.0;
 	
-	if (cmp.neq(sc.direction()(1),direction_expect[iband][0]) ||
-	    cmp.neq(sc.direction()(2),direction_expect[iband][1]) ||
-	    cmp.neq(sc.direction()(3),direction_expect[iband][2]) ||
+	if (cmp.neq(sc.direction()[0],direction_expect[iband][0]) ||
+	    cmp.neq(sc.direction()[1],direction_expect[iband][1]) ||
+	    cmp.neq(sc.direction()[2],direction_expect[iband][2]) ||
 	    cmp.neq(sc.length(),length_expect)) {
-	  cerr << "sc.direction()(1) = " << sc.direction()(1) 
+	  cerr << "sc.direction()[0] = " << sc.direction()[0] 
 	       << " (expected " << direction_expect[iband][0] << ")\n";
-	  cerr << "sc.direction()(2) = " << sc.direction()(2) 
+	  cerr << "sc.direction()[1] = " << sc.direction()[1] 
 	       << " (expected " << direction_expect[iband][1] << ")\n";
-	  cerr << "sc.direction()(3) = " << sc.direction()(3) 
+	  cerr << "sc.direction()[2] = " << sc.direction()[2] 
 	       << " (expected " << direction_expect[iband][2] << ")\n";
 	  cerr << "sc_length() = " << sc.length()
 	       << " (expected " << length_expect << ")\n";
@@ -472,7 +388,7 @@ int main()
     }
       
 //-----------------------------------------------------------------------
-// Test sc_coor() with direction reversal
+// Test sc_look_vector() with direction reversal
 // Compare with next test: decreasing frame line coor increases yf, 
 // and decreases Xscs.
 //-----------------------------------------------------------------------
@@ -508,21 +424,21 @@ int main()
       };
       
       for (int iband = 0 ; iband < number_band ; iband++) {
-	FrameCoor fc(-5,0);
+	FrameCoordinate fc(-5,0);
 	
-	ScLookVector sc = camera.sc_coor(fc, iband);
+	ScLookVector sc = camera.sc_look_vector(fc, iband);
 	
 	double length_expect = 1.0;
 	
-	if (cmp.neq(sc.direction()(1),direction_expect[iband][0]) ||
-	    cmp.neq(sc.direction()(2),direction_expect[iband][1]) ||
-	    cmp.neq(sc.direction()(3),direction_expect[iband][2]) ||
+	if (cmp.neq(sc.direction()[0],direction_expect[iband][0]) ||
+	    cmp.neq(sc.direction()[1],direction_expect[iband][1]) ||
+	    cmp.neq(sc.direction()[2],direction_expect[iband][2]) ||
 	    cmp.neq(sc.length(),length_expect)) {
-	  cerr << "sc.direction()(1) = " << sc.direction()(1) 
+	  cerr << "sc.direction()[0] = " << sc.direction()[0]
 	       << " (expected " << direction_expect[iband][0] << ")\n";
-	  cerr << "sc.direction()(2) = " << sc.direction()(2) 
+	  cerr << "sc.direction()[1] = " << sc.direction()[1]
 	       << " (expected " << direction_expect[iband][1] << ")\n";
-	  cerr << "sc.direction()(3) = " << sc.direction()(3) 
+	  cerr << "sc.direction()[2] = " << sc.direction()[2]
 	       << " (expected " << direction_expect[iband][2] << ")\n";
 	  cerr << "sc_length() = " << sc.length()
 	       << " (expected " << length_expect << ")\n";
@@ -533,7 +449,7 @@ int main()
     }
       
 //-----------------------------------------------------------------------
-// Test sc_coor()
+// Test sc_look_vector()
 // Compare with previous test: increasing frame line coor decreases yf, 
 // and increases Xscs.
 //-----------------------------------------------------------------------
@@ -565,21 +481,21 @@ int main()
       };
 
       for (int iband = 0 ; iband < number_band ; iband++) {
-	FrameCoor fc(5,0);
+	FrameCoordinate fc(5,0);
 
-	ScLookVector sc = camera.sc_coor(fc, iband);
+	ScLookVector sc = camera.sc_look_vector(fc, iband);
 
 	double length_expect = 1.0;
     
-	if (cmp.neq(sc.direction()(1),direction_expect[iband][0]) ||
-	    cmp.neq(sc.direction()(2),direction_expect[iband][1]) ||
-	    cmp.neq(sc.direction()(3),direction_expect[iband][2]) ||
+	if (cmp.neq(sc.direction()[0],direction_expect[iband][0]) ||
+	    cmp.neq(sc.direction()[1],direction_expect[iband][1]) ||
+	    cmp.neq(sc.direction()[2],direction_expect[iband][2]) ||
 	    cmp.neq(sc.length(),length_expect)) {
-	  cerr << "sc.direction()(1) = " << sc.direction()(1) 
+	  cerr << "sc.direction()[0] = " << sc.direction()[0]
 	       << " (expected " << direction_expect[iband][0] << ")\n";
-	  cerr << "sc.direction()(2) = " << sc.direction()(2) 
+	  cerr << "sc.direction()[1] = " << sc.direction()[1] 
 	       << " (expected " << direction_expect[iband][1] << ")\n";
-	  cerr << "sc.direction()(3) = " << sc.direction()(3) 
+	  cerr << "sc.direction()[2] = " << sc.direction()[2] 
 	       << " (expected " << direction_expect[iband][2] << ")\n";
 	  cerr << "sc_length() = " << sc.length()
 	       << " (expected " << length_expect << ")\n";
@@ -590,7 +506,7 @@ int main()
     }
 
 //-----------------------------------------------------------------------
-// Test sc_coor()
+// Test sc_look_vector()
 // Compare with previous test: increasing frame sample coor increases xf, 
 // increases Ydcs, and decreases Yscs.
 //-----------------------------------------------------------------------
@@ -622,21 +538,21 @@ int main()
       };
 
       for (int iband = 0 ; iband < number_band ; iband++) {
-	FrameCoor fc(5,1535);
+	FrameCoordinate fc(5,1535);
 
-	ScLookVector sc = camera.sc_coor(fc, iband);
+	ScLookVector sc = camera.sc_look_vector(fc, iband);
 
 	double length_expect = 1.0;
     
-	if (cmp.neq(sc.direction()(1),direction_expect[iband][0]) ||
-	    cmp.neq(sc.direction()(2),direction_expect[iband][1]) ||
-	    cmp.neq(sc.direction()(3),direction_expect[iband][2]) ||
+	if (cmp.neq(sc.direction()[0],direction_expect[iband][0]) ||
+	    cmp.neq(sc.direction()[1],direction_expect[iband][1]) ||
+	    cmp.neq(sc.direction()[2],direction_expect[iband][2]) ||
 	    cmp.neq(sc.length(),length_expect)) {
-	  cerr << iband << ":sc.direction()(1) = " << sc.direction()(1) 
+	  cerr << iband << ":sc.direction()[0] = " << sc.direction()[0]
 	       << " (expected " << direction_expect[iband][0] << ")\n";
-	  cerr << iband << ":sc.direction()(2) = " << sc.direction()(2) 
+	  cerr << iband << ":sc.direction()[1] = " << sc.direction()[1] 
 	       << " (expected " << direction_expect[iband][1] << ")\n";
-	  cerr << iband << ":sc.direction()(3) = " << sc.direction()(3) 
+	  cerr << iband << ":sc.direction()[2] = " << sc.direction()[2] 
 	       << " (expected " << direction_expect[iband][2] << ")\n";
 	  cerr << "sc_length() = " << sc.length()
 	       << " (expected " << length_expect << ")\n";
@@ -647,7 +563,7 @@ int main()
     }
 
 //-----------------------------------------------------------------------
-// Test sc_coor()
+// Test sc_look_vector()
 // Compare with previous test: decreasing frame sample coor decreases xf, 
 // decreases Ydcs, and increases Yscs.
 //-----------------------------------------------------------------------
@@ -679,21 +595,21 @@ int main()
       };
 
       for (int iband = 0 ; iband < number_band ; iband++) {
-	FrameCoor fc(5,0);
+	FrameCoordinate fc(5,0);
 
-	ScLookVector sc = camera.sc_coor(fc, iband);
+	ScLookVector sc = camera.sc_look_vector(fc, iband);
 
 	double length_expect = 1.0;
     
-	if (cmp.neq(sc.direction()(1),direction_expect[iband][0]) ||
-	    cmp.neq(sc.direction()(2),direction_expect[iband][1]) ||
-	    cmp.neq(sc.direction()(3),direction_expect[iband][2]) ||
+	if (cmp.neq(sc.direction()[0],direction_expect[iband][0]) ||
+	    cmp.neq(sc.direction()[1],direction_expect[iband][1]) ||
+	    cmp.neq(sc.direction()[2],direction_expect[iband][2]) ||
 	    cmp.neq(sc.length(),length_expect)) {
-	  cerr << "sc.direction()(1) = " << sc.direction()(1) 
+	  cerr << "sc.direction()[0] = " << sc.direction()[0] 
 	       << " (expected " << direction_expect[iband][0] << ")\n";
-	  cerr << "sc.direction()(2) = " << sc.direction()(2) 
+	  cerr << "sc.direction()[1] = " << sc.direction()[1] 
 	       << " (expected " << direction_expect[iband][1] << ")\n";
-	  cerr << "sc.direction()(3) = " << sc.direction()(3) 
+	  cerr << "sc.direction()[2] = " << sc.direction()[2] 
 	       << " (expected " << direction_expect[iband][2] << ")\n";
 	  cerr << "sc_length() = " << sc.length()
 	       << " (expected " << length_expect << ")\n";
@@ -734,19 +650,19 @@ int main()
       };
 
       for (int iband = 0 ; iband < number_band ; iband++) {
-	FrameCoor fc(5,0);
+	FrameCoordinate fc(5,0);
 
-	NEWMAT::ColumnVector v_dcs(3);
+	blitz::Array<double, 1> v_dcs(3);
 	camera.detector_look(fc,iband,v_dcs);
 
-	if (cmp.neq(v_dcs(1),v_dcs_expect[iband][0]) ||
-	    cmp.neq(v_dcs(2),v_dcs_expect[iband][1]) ||
-	    cmp.neq(v_dcs(3),v_dcs_expect[iband][2])) {
-	  cerr << "v_dcs()(1) = " << v_dcs(1) 
+	if (cmp.neq(v_dcs(0),v_dcs_expect[iband][0]) ||
+	    cmp.neq(v_dcs(1),v_dcs_expect[iband][1]) ||
+	    cmp.neq(v_dcs(2),v_dcs_expect[iband][2])) {
+	  cerr << "v_dcs()(1) = " << v_dcs(0) 
 	       << " (expected " << v_dcs_expect[iband][0] << ")\n";
-	  cerr << "v_dcs()(2) = " << v_dcs(2) 
+	  cerr << "v_dcs()(2) = " << v_dcs(1) 
 	       << " (expected " << v_dcs_expect[iband][1] << ")\n";
-	  cerr << "v_dcs()(3) = " << v_dcs(3) 
+	  cerr << "v_dcs()(3) = " << v_dcs(2) 
 	       << " (expected " << v_dcs_expect[iband][2] << ")\n";
 	  cerr << "Unexpected result at line "<< __LINE__ << "\n";
 	  error = true;
@@ -761,13 +677,7 @@ int main()
     test_number++;
 
     {
-      ColumnVector v(3);
-      v(1) = 27.0; // (Xscs, Zccs, Zdcs)   
-      v(2) = -0.3;   // (Yscs, -Yccs, -Ydcs, +xf)
-      v(3) = 0.4;   // (Zscs, Xccs, Xdcs, +yf)
-      
-      double length = 2.0;
-      ScLookVector sc(v,length);
+      ScLookVector sc(27.0, -0.3, 0.4);
 
       double v_dcs_expect[3] = {
 	1.48122752048167587863e-02,
@@ -775,17 +685,17 @@ int main()
 	9.99828576325131113123e-01
       };
 	
-      NEWMAT::ColumnVector v_dcs(3);
+      blitz::Array<double, 1> v_dcs(3);
       camera.detector_look(sc,v_dcs);
 
-      if (cmp.neq(v_dcs(1),v_dcs_expect[0]) ||
-	  cmp.neq(v_dcs(2),v_dcs_expect[1]) ||
-	  cmp.neq(v_dcs(3),v_dcs_expect[2])) {
-	cerr << "v_dcs()(1) = " << v_dcs(1) 
+      if (cmp.neq(v_dcs(0),v_dcs_expect[0]) ||
+	  cmp.neq(v_dcs(1),v_dcs_expect[1]) ||
+	  cmp.neq(v_dcs(2),v_dcs_expect[2])) {
+	cerr << "v_dcs()(1) = " << v_dcs(0) 
 	     << " (expected " << v_dcs_expect[0] << ")\n";
-	cerr << "v_dcs()(2) = " << v_dcs(2) 
+	cerr << "v_dcs()(2) = " << v_dcs(1) 
 	     << " (expected " << v_dcs_expect[1] << ")\n";
-	cerr << "v_dcs()(3) = " << v_dcs(3) 
+	cerr << "v_dcs()(3) = " << v_dcs(2) 
 	     << " (expected " << v_dcs_expect[2] << ")\n";
 	cerr << "Unexpected result at line "<< __LINE__ << "\n";
 	error = true;
@@ -849,7 +759,7 @@ int main()
 	 3.20145509437610442660e+01,
 	 0.0};
 
-      FrameCoor f(-0.3, 0.1);
+      FrameCoordinate f(-0.3, 0.1);
 
       for (int iband = 0 ; iband < number_band ; iband++) {
 
@@ -880,24 +790,24 @@ int main()
 
     {
       const int size_expect = 3;
-      NEWMAT::ColumnVector parameter_expect(size_expect);
+      blitz::Array<double, 1> parameter_expect(size_expect);
 
       double deg_to_rad = acos(-1.0) / 180.0;
-      parameter_expect(1) = 180.0 * deg_to_rad;
-      parameter_expect(2) = 90.0 * deg_to_rad;
-      parameter_expect(3) = 0.0 * deg_to_rad;
+      parameter_expect(0) = 180.0 * deg_to_rad;
+      parameter_expect(1) = 90.0 * deg_to_rad;
+      parameter_expect(2) = 0.0 * deg_to_rad;
       
-      NEWMAT::ColumnVector parameter = camera.parameter();
+      blitz::Array<double, 1> parameter = camera.parameter();
       
-      if (parameter.Nrows() != size_expect) {
-	cerr << "parameter.Nrows() = " << parameter.Nrows() 
+      if (parameter.rows() != size_expect) {
+	cerr << "parameter.Nrows() = " << parameter.rows() 
 	     << " (expected " << size_expect << ")\n";
 	cerr << "Unexpected result at line "<< __LINE__ << "\n";
 	error = true;
 	
       }
 
-      for (int i = 1 ; i <= size_expect ; i++) {
+      for (int i = 0 ; i < size_expect ; i++) {
 	if (parameter(i) != parameter_expect(i)) {
 	  cerr << "parameter("<<i<<") = " << parameter(i) 
 	       << " (expected " << parameter_expect(i) << ")\n";
@@ -917,25 +827,25 @@ int main()
       MspiCamera camera(config);
 
       const int size_expect = 3;
-      NEWMAT::ColumnVector parameter_expect(size_expect);
-      parameter_expect(1) = 10.0;
-      parameter_expect(2) = 20.0;
-      parameter_expect(3) = 30.0;
+      blitz::Array<double, 1> parameter_expect(size_expect);
+      parameter_expect(0) = 10.0;
+      parameter_expect(1) = 20.0;
+      parameter_expect(2) = 30.0;
       
 
       camera.parameter(parameter_expect);
 
-      NEWMAT::ColumnVector parameter = camera.parameter();
+      blitz::Array<double, 1> parameter = camera.parameter();
       
-      if (parameter.Nrows() != size_expect) {
-	cerr << "parameter.Nrows() = " << parameter.Nrows() 
+      if (parameter.rows() != size_expect) {
+	cerr << "parameter.Nrows() = " << parameter.rows() 
 	     << " (expected " << size_expect << ")\n";
 	cerr << "Unexpected result at line "<< __LINE__ << "\n";
 	error = true;
 	
       }
 
-      for (int i = 1 ; i <= size_expect ; i++) {
+      for (int i = 0 ; i < size_expect ; i++) {
 	if (parameter(i) != parameter_expect(i)) {
 	  cerr << "parameter("<<i<<") = " << parameter(i) 
 	       << " (expected " << parameter_expect(i) << ")\n";
@@ -952,14 +862,7 @@ int main()
     test_number++;
 
     {
-      ColumnVector v(3);
-      v(1) = 27.0; // (Xscs, Zccs, Zdcs)
-      v(2) = 0.3;  // (Yscs, -Yccs, -Ydcs, +xf)
-      v(3) = -0.4;  // (Zscs, Xccs, Xdcs, +yf)
-      
-      double length = 5.0;
-      
-      ScLookVector sc(v,length);
+      ScLookVector sc(27.0, 0.3, -0.4);
 
       std::string name = "jacobian_look";
       for (int iband = 0 ; iband < number_band ; iband++) {
@@ -980,14 +883,7 @@ int main()
     test_number++;
 
     {
-      ColumnVector v(3);
-      v(1) = 27.0; // (Xscs, Zccs, Zdcs)
-      v(2) = 0.3;  // (Yscs, -Yccs, -Ydcs, +xf)
-      v(3) = -0.4;  // (Zscs, Xccs, Xdcs, +yf)
-      
-      double length = 5.0;
-      
-      ScLookVector sc(v,length);
+      ScLookVector sc(27.0, 0.3, -0.4);
 
       std::string name = "jacobian";
       for (int iband = 0 ; iband < number_band ; iband++) {
@@ -1012,14 +908,7 @@ int main()
       ConfigFile config("GeoCal/MspiCamera/src/AIRMSPI_CONFIG_CAMERA_MODEL_0001.config");
       MspiCamera camera(config);
 
-      ColumnVector v(3);
-      v(1) = 0; // (Xscs, Xccs, Xdcs, +yf)
-      v(2) = 0;  // (Yscs, Yccs, Ydcs, -xf)
-      v(3) = 1;  // (Zscs, Zccs, Zdcs)
-      
-      double length = 5.0;
-      
-      ScLookVector sc(v,length);
+      ScLookVector sc(0,0,1);
 
       std::string name = "jacobian-AirMSPI";
       for (int iband = 0 ; iband < camera.number_band() ; iband++) {
@@ -1055,7 +944,7 @@ int main()
 //	p(1) = p0(1) + yaw;
 //	camera.parameter(p);
 //	FrameCoor fc = camera.frame_coor(sc, 0);
-//	cerr << yaw << " " << fc.line() - fc0.line() << " (yaw diff line)\n";
+//	cerr << yaw << " " << fc.line - fc0.line() << " (yaw diff line)\n";
 //      }
 //    }
 
@@ -1073,8 +962,8 @@ int main()
 	filename << "GeoCal/MspiCamera/tmp/mspi_camera_test.band" << iband << ".dat";
 	std::ofstream dat(filename.str().c_str());
 	
-	for (int isample = 0 ; isample < camera.number_sample() ; isample++) {
-	  FrameCoor f(0, isample);
+	for (int isample = 0 ; isample < camera.number_sample(0) ; isample++) {
+	  FrameCoordinate f(0, isample);
 
 	  double line_offset;
 	  double sample_offset;
@@ -1096,12 +985,12 @@ int main()
     {
       bool caught_exception = false;
       int band = -1;
-      FrameCoor fc(0,0);
-      ScLookVector sc = camera.sc_coor(fc, 0);
+      FrameCoordinate fc(0,0);
+      ScLookVector sc = camera.sc_look_vector(fc, 0);
 
       try {
-	FrameCoor fc = camera.frame_coor(sc, band);
-      } catch (GeoCal::GeoCalCore::Exception& e) {
+	FrameCoordinate fc = camera.frame_coordinate(sc, band);
+      } catch (Exception& e) {
 	caught_exception = true;
 	if (strcmp(e.what(), "Band < 0")) {
 	  cerr << "exception = "<<e.what()<<"\n";
@@ -1119,12 +1008,12 @@ int main()
     {
       bool caught_exception = false;
       int band = 50;
-      FrameCoor fc(0,0);
-      ScLookVector sc = camera.sc_coor(fc, 0);
+      FrameCoordinate fc(0,0);
+      ScLookVector sc = camera.sc_look_vector(fc, 0);
 
       try {
-	FrameCoor fc = camera.frame_coor(sc, band);
-      } catch (GeoCal::GeoCalCore::Exception& e) {
+	FrameCoordinate fc = camera.frame_coordinate(sc, band);
+      } catch (Exception& e) {
 	caught_exception = true;
 	if (strcmp(e.what(), "Band > number_band() - 1")) {
 	  cerr << "exception = "<<e.what()<<"\n";
@@ -1142,7 +1031,7 @@ int main()
 //-----------------------------------------------------------------------
 // Argument check: Band < 0 
 //                 Band > number_band()-1
-// (sc_coor)
+// (sc_look_vector)
 //-----------------------------------------------------------------------
 
     test_number++;
@@ -1150,11 +1039,11 @@ int main()
     {
       bool caught_exception = false;
       int band = -1;
-      FrameCoor fc(0,0);
+      FrameCoordinate fc(0,0);
 
       try {
-	ScLookVector sc = camera.sc_coor(fc, band);
-      } catch (GeoCal::GeoCalCore::Exception& e) {
+	ScLookVector sc = camera.sc_look_vector(fc, band);
+      } catch (Exception& e) {
 	caught_exception = true;
 	if (strcmp(e.what(), "Band < 0")) {
 	  cerr << "exception = "<<e.what()<<"\n";
@@ -1172,11 +1061,11 @@ int main()
     {
       bool caught_exception = false;
       int band = 50;
-      FrameCoor fc(0,0);
+      FrameCoordinate fc(0,0);
 
       try {
-	ScLookVector sc = camera.sc_coor(fc, band);
-      } catch (GeoCal::GeoCalCore::Exception& e) {
+	ScLookVector sc = camera.sc_look_vector(fc, band);
+      } catch (Exception& e) {
 	caught_exception = true;
 	if (strcmp(e.what(), "Band > number_band() - 1")) {
 	  cerr << "exception = "<<e.what()<<"\n";
@@ -1228,28 +1117,6 @@ int main()
     } else {
       cerr << "All tests succeeded.\n";
     }
-
-//-----------------------------------------------------------------------
-// End try block for main.
-//-----------------------------------------------------------------------
-    
-  }
-
-//-----------------------------------------------------------------------
-// Catch exceptions.
-//-----------------------------------------------------------------------
-
-  catch(const Exception& e) {
-    cerr << "catch(const Exception& e): " << e.what() << "\n"
-	 << "test_number = " << test_number <<"\n";
-  }
-  catch(const GeoCal::GeoCalCore::Exception& e) {
-    cerr << "catch(const GeoCal::GeoCalCore::Exception& e): " << e.what() << "\n"
-	 << "test_number = " << test_number <<"\n";
-  }
-  catch(...) {
-    cerr << "catch (...)\n"
-	 << "test_number = " << test_number <<"\n";
-  }
 }
+BOOST_AUTO_TEST_SUITE_END()
 

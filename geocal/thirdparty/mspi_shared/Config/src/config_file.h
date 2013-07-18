@@ -53,6 +53,7 @@ public:
   template <class T> boost::multi_array<T,2> 
     get(const std::string& Name, 
 	size_t Number_row, size_t Number_column) const;
+  const std::string& filename() const {return filename_; }
 protected:
 private:
   std::string filename_;

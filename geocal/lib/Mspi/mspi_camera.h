@@ -20,26 +20,19 @@
 #ifndef MSPI_CAMERA_H
 #define MSPI_CAMERA_H
 
-#include "GeoCalCore/InterfaceClass/Camera/push_broom_camera.h"
+#include "camera.h"
                                 // Definition of PushBroomCamera.
 #include "boost/multi_array.hpp"  // Definition of boost::multi_array
 #include "paraxial_transform.h"	  // Definition of ParaxialTransform
 #include "MSPI-Shared/Config/src/config_file.h" 
 				// Definition of MSPI::Shared::ConfigFile
 #include <cmath> 		// Definition of std::atan
-#include "GeoCalCore/InterfaceClass/Camera/frame_coor.h"
-                                // Definition of FrameCoor
 #include <sstream>		// Definition of std::ostringstream
-#include "GeoCalCore/InterfaceClass/ScCoordinate/sc_look_vector.h"
-                                // Definition of ScLookVector.
 #include <boost/multi_array.hpp>
 				// Definition of boost::multi_array
+#include <blitz/array.h>
 
 namespace GeoCal {
-   namespace Mspi {
-      class MspiCamera;
-   }
-}
 
 /////////////////////////////////////////////////////////////////////////////
 /// @brief MSPI Camera Model
@@ -49,35 +42,35 @@ namespace GeoCal {
 ///     for GroundMSPI L1B2 process, Rev. A, July 16, 2009.
 /////////////////////////////////////////////////////////////////////////////
 
-class GeoCal::Mspi::MspiCamera: public GeoCal::GeoCalCore::PushBroomCamera {
+class MspiCamera: public PushBroomCamera {
 public:
   MspiCamera(const MSPI::Shared::ConfigFile& Config);
 
-  virtual ~MspiCamera();
-  virtual GeoCal::GeoCalCore::FrameCoor
-    frame_coor(const GeoCal::GeoCalCore::ScLookVector& Sl, int Band) const;
-  virtual double
-    frame_line_coor(const GeoCal::GeoCalCore::ScLookVector& Sl, int Band) const;
-  virtual NEWMAT::Matrix 
-    jacobian_look(const GeoCal::GeoCalCore::ScLookVector& Sl, int Band) const;
+  virtual ~MspiCamera() {}
+  virtual int number_band() const { return nband; }
+  virtual int number_sample(int Band) const {return nsamp; }
+  virtual FrameCoordinate
+    frame_coordinate(const ScLookVector& Sl, int Band) const;
+  virtual blitz::Array<double, 2>
+    jacobian_look(const ScLookVector& Sl, int Band) const;
   boost::multi_array<double,2>
-    jacobian(const GeoCal::GeoCalCore::ScLookVector& Sl, int Band) const;
+    jacobian(const ScLookVector& Sl, int Band) const;
   virtual void    
-    parameter(const NEWMAT::ColumnVector& Pr);
-  virtual NEWMAT::ColumnVector parameter() const;
-  virtual GeoCal::GeoCalCore::ScLookVector 
-    sc_coor(const GeoCal::GeoCalCore::FrameCoor& F, int Band) const;
-  GeoCal::GeoCalCore::ScLookVector 
-    sc_coor(const NEWMAT::ColumnVector& V_dcs) const; 
-  void detector_look(const GeoCal::GeoCalCore::FrameCoor& F,int Band,
-		     NEWMAT::ColumnVector& Dcs_look) const;
-  void detector_look(const GeoCal::GeoCalCore::ScLookVector& Sl,
-		     NEWMAT::ColumnVector& Dcs_look) const;
+  parameter(const blitz::Array<double, 1>& Pr);
+  virtual blitz::Array<double, 1> parameter() const;
+  virtual ScLookVector 
+    sc_look_vector(const FrameCoordinate& F, int Band) const;
+  ScLookVector 
+    sc_coor(const blitz::Array<double, 1>& V_dcs) const; 
+  void detector_look(const FrameCoordinate& F,int Band,
+		     blitz::Array<double, 1>& Dcs_look) const;
+  void detector_look(const ScLookVector& Sl,
+		     blitz::Array<double, 1>& Dcs_look) const;
   double
     angular_separation(int Reference_band, 
 		       int Target_band) const;
   void paraxial_offset(int Band,
-		       const GeoCal::GeoCalCore::FrameCoor& F,
+		       const FrameCoordinate& F,
 		       double& Line_offset,
 		       double& Sample_offset) const;
   int row_number(int Band) const;
@@ -85,16 +78,20 @@ public:
   int inversion () const;
   const std::string& granule_id() const;
   const std::vector<double>& parameter_step_size() const;
-  const NEWMAT::SymmetricMatrix& covariance() const;
-  void covariance(const NEWMAT::SymmetricMatrix& Matrix);
   void write(const std::string& Filename) const;
-
+  virtual void print(std::ostream& Os) const
+  {
+    Os << "MspiCamera:\n"
+       << "  Filename: " << filename << "\n";
+  }
 protected:
 
 private:
+  int nband, nsamp;
+  std::string filename;
   double row_origin(int Band) const;
   void real_focal_plane_coor(int Band, 
-			     const GeoCal::GeoCalCore::FrameCoor& F,
+			     const FrameCoordinate& F,
 			     double& Xf_prime, 
 			     double& Yf_prime) const;
   void init_camera_to_station_transform();
@@ -125,10 +122,10 @@ private:
   int inversion_;       ///< Defines inversion of 180 deg around boresight axis prior to the scan
                         ///< this is specifcly needed for AirMSPI camera used on the ground
 
-  NEWMAT::Matrix t_dc_; ///< Matrix to transform camera coordinates to detector coordinates.
-  NEWMAT::Matrix t_cd_; ///< Matrix to transform detector coordinates to camera coordinates.
-  NEWMAT::Matrix t_sc_; ///< Matrix to transform camera coordinates to station coordinates.
-  NEWMAT::Matrix t_cs_; ///< Matrix to transform station coordinates to camera coordinates.
+  blitz::Array<double, 2> t_dc_; ///< Matrix to transform camera coordinates to detector coordinates.
+  blitz::Array<double, 2> t_cd_; ///< Matrix to transform detector coordinates to camera coordinates.
+  blitz::Array<double, 2> t_sc_; ///< Matrix to transform camera coordinates to station coordinates.
+  blitz::Array<double, 2> t_cs_; ///< Matrix to transform station coordinates to camera coordinates.
   std::vector<int> row_number_;   ///< Assigned row number for each band.
   std::map<int,int> band_number_; ///< Band number for each row.
   ParaxialTransform paraxial_transform_;
@@ -136,51 +133,14 @@ private:
   std::vector<double> parameter_step_size_;
                         ///< Suggested interval to use when stepping parameters for 
                         ///< calculation of numerical derivatives.
-  NEWMAT::SymmetricMatrix covariance_;
 };
-
-/////////////////////////////////////////////////////////////////////////////
-/// Update covariance matrix.
-/////////////////////////////////////////////////////////////////////////////
-
-inline void
-GeoCal::Mspi::MspiCamera::covariance(const NEWMAT::SymmetricMatrix& Matrix)
-{
-  //------------------------------------------------------------------------
-  // Argument check: Matrix.Nrows() != covariance_.Nrows()
-  //                 Matrix.Ncols() != covariance_.Ncols()
-  //------------------------------------------------------------------------
-
-  if (Matrix.Nrows() != covariance_.Nrows()) {
-    throw std::range_error("Matrix.Nrows() != covariance_.Nrows()");
-  }
-  if (Matrix.Ncols() != covariance_.Ncols()) {
-    throw std::range_error("Matrix.Ncols() != covariance_.Ncols()");
-  }
-
-  //------------------------------------------------------------------------
-  // Update matrix
-  //------------------------------------------------------------------------
-
-  covariance_ = Matrix;
-}
-
-/////////////////////////////////////////////////////////////////////////////
-/// Return covariance matrix.
-/////////////////////////////////////////////////////////////////////////////
-
-inline const NEWMAT::SymmetricMatrix& 
-GeoCal::Mspi::MspiCamera::covariance() const
-{
-  return covariance_;
-}
 
 /////////////////////////////////////////////////////////////////////////////
 /// Return vector of step sizes for each parameter.
 /////////////////////////////////////////////////////////////////////////////
 
 inline const std::vector<double>&
-GeoCal::Mspi::MspiCamera::parameter_step_size() const
+MspiCamera::parameter_step_size() const
 {
   return parameter_step_size_;
 }
@@ -190,7 +150,7 @@ GeoCal::Mspi::MspiCamera::parameter_step_size() const
 /////////////////////////////////////////////////////////////////////////////
 
 inline const std::string&
-GeoCal::Mspi::MspiCamera::granule_id() const
+MspiCamera::granule_id() const
 {
   return granule_id_;
 }
@@ -199,38 +159,42 @@ GeoCal::Mspi::MspiCamera::granule_id() const
 /// Translate frame coordinates to look vector for the given band.
 /////////////////////////////////////////////////////////////////////////////
 
-inline GeoCal::GeoCalCore::ScLookVector 
-GeoCal::Mspi::MspiCamera::sc_coor(
-  const NEWMAT::ColumnVector& V_dcs
+inline ScLookVector 
+MspiCamera::sc_coor(
+  const blitz::Array<double, 1>& V_dcs
 ) const
 {
+  blitz::firstIndex i1; blitz::secondIndex i2;
+
   //-------------------------------------------------------------------------
   // Transform look vector from detector coordinate space to camera 
   // coordinate space.
   //-------------------------------------------------------------------------
 
-  NEWMAT::ColumnVector v_ccs = t_cd_ * V_dcs;
+  blitz::Array<double, 1> v_ccs(t_cd_.rows());
+  v_ccs = blitz::sum(t_cd_(i1, i2) * V_dcs(i2), i2);
 
   //-------------------------------------------------------------------------
   // Transform look vector from camera coordinates to station coordinates
   //-------------------------------------------------------------------------
 
-  NEWMAT::ColumnVector v_scs = t_sc_ * v_ccs;
+  blitz::Array<double, 1> v_scs(t_sc_.rows());
+  v_scs = blitz::sum(t_sc_(i1, i2) * v_ccs(i2));
 
   //-------------------------------------------------------------------------
   // Return
   //-------------------------------------------------------------------------
 
-  return GeoCal::GeoCalCore::ScLookVector(v_scs, 1.0);
+  return ScLookVector(v_scs(0), v_scs(1), v_scs(2));
 }
 
 /////////////////////////////////////////////////////////////////////////////
 /// Translate frame coordinates to look vector for the given band.
 /////////////////////////////////////////////////////////////////////////////
 
-inline GeoCal::GeoCalCore::ScLookVector 
-GeoCal::Mspi::MspiCamera::sc_coor(
-  const GeoCal::GeoCalCore::FrameCoor& F,
+inline ScLookVector 
+MspiCamera::sc_look_vector(
+  const FrameCoordinate& F,
   int Band
 ) const
 {
@@ -238,7 +202,7 @@ GeoCal::Mspi::MspiCamera::sc_coor(
   // Transform Frame Coordinate to look vectors in detector coordinate system.
   //-------------------------------------------------------------------------
 
-  NEWMAT::ColumnVector v_dcs(3);
+  blitz::Array<double, 1> v_dcs(3);
   detector_look(F,Band,v_dcs);
 
   //-------------------------------------------------------------------------
@@ -254,7 +218,7 @@ GeoCal::Mspi::MspiCamera::sc_coor(
 ////////////////////////////////////////////////////////////////////////////
 
 inline double
-GeoCal::Mspi::MspiCamera::row_origin(int Band) const
+MspiCamera::row_origin(int Band) const
 {
   return -dy_ * (row_number_[Band] + 0.5 - (number_row_ / 2.0));
 }
@@ -266,7 +230,7 @@ GeoCal::Mspi::MspiCamera::row_origin(int Band) const
 ////////////////////////////////////////////////////////////////////////////
 
 inline double
-GeoCal::Mspi::MspiCamera::angular_separation(
+MspiCamera::angular_separation(
   int Reference_band, 
   int Target_band) const
 {
@@ -283,9 +247,9 @@ GeoCal::Mspi::MspiCamera::angular_separation(
 ////////////////////////////////////////////////////////////////////////////
 
 inline void
-GeoCal::Mspi::MspiCamera::paraxial_offset(
+MspiCamera::paraxial_offset(
   int Band, 
-  const GeoCal::GeoCalCore::FrameCoor& F,
+  const FrameCoordinate& F,
   double& Line_offset,
   double& Sample_offset
 ) const
@@ -311,15 +275,15 @@ GeoCal::Mspi::MspiCamera::paraxial_offset(
 ////////////////////////////////////////////////////////////////////////////
 
 inline void
-GeoCal::Mspi::MspiCamera::real_focal_plane_coor(
+MspiCamera::real_focal_plane_coor(
   int Band, 
-  const GeoCal::GeoCalCore::FrameCoor& F,
+  const FrameCoordinate& F,
   double& Xf_prime, 
   double& Yf_prime
 ) const
 {
-  Xf_prime = dx_ * pixel_order_ * ( F.sample() - s_origin_ );
-  Yf_prime = (row_origin(Band) - F.line() * ypitch_ / direction_);
+  Xf_prime = dx_ * pixel_order_ * ( F.sample - s_origin_ );
+  Yf_prime = (row_origin(Band) - F.line * ypitch_ / direction_);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -327,7 +291,7 @@ GeoCal::Mspi::MspiCamera::real_focal_plane_coor(
 ////////////////////////////////////////////////////////////////////////////
 
 inline int
-GeoCal::Mspi::MspiCamera::row_number(int Band) const
+MspiCamera::row_number(int Band) const
 {
   return row_number_[Band];
 }
@@ -338,7 +302,7 @@ GeoCal::Mspi::MspiCamera::row_number(int Band) const
 ////////////////////////////////////////////////////////////////////////////
 
 inline int
-GeoCal::Mspi::MspiCamera::band_number(int Row_number) const
+MspiCamera::band_number(int Row_number) const
 {
   std::map<int,int>::const_iterator 
     h = band_number_.find(Row_number);
@@ -353,9 +317,10 @@ GeoCal::Mspi::MspiCamera::band_number(int Row_number) const
 }
 
 inline int
-GeoCal::Mspi::MspiCamera::inversion() const
+MspiCamera::inversion() const
 {
 
   return inversion_;
+}
 }
 #endif

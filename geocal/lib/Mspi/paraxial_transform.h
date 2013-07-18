@@ -26,10 +26,6 @@
 				// Definition of MSPI::Shared::ConfigFile
 
 namespace GeoCal {
-   namespace Mspi {
-      class ParaxialTransform;
-   }
-}
 
 /////////////////////////////////////////////////////////////////////////////
 /// @brief Implements paraxial-to-real and real-to-paraxial transform for 
@@ -37,7 +33,7 @@ namespace GeoCal {
 ///
 /////////////////////////////////////////////////////////////////////////////
 
-class GeoCal::Mspi::ParaxialTransform {
+class ParaxialTransform {
 public:
   ParaxialTransform(std::map<int,std::vector<double> > A, 
 		    std::map<int,std::vector<double> > B,
@@ -76,4 +72,5 @@ private:
 //***************************************************************************
 
 //#include "mspi_camera.icc"
+}
 #endif

@@ -39,7 +39,6 @@ See Subversion Log
 #include <string.h> 		// Definition of strcmp
 
 using std::cerr;
-using GeoCal::Mspi::ParaxialTransform;
 using MSPI::Shared::Exception;
 using MSPI::Shared::DoubleComparator;
 using MSPI::Shared::ConfigFile;

@@ -32,57 +32,52 @@ See Subversion Log
 #include "mspi_camera.h"	// Definition of class.
 #include "MSPI-Shared/ErrorHandling/src/exception.h" 
 				// Definition of MSPI_EXCEPTIONm.
-#include "GeoCalCore/InterfaceClass/Camera/frame_coor.h"
-                                // Definition of FrameCoor
-#include "GeoCalCore/Support/Err/range_check.h"
-                                // Definition of range_check.
-#include "GeoCalCore/Support/Exception/exception.h" // Definition of Exception
+#include "geocal_exception.h" // Definition of Exception
 #include <cmath> 		// Definition of std::cos
 #include <iomanip>  		// Definition of std::setw
 #include <fstream> 		// Definition of std::ofstream
+
+using namespace GeoCal;
 
 /////////////////////////////////////////////////////////////////////////////
 /// Convert NEWMAT::ColumnVector to std::vector<double>
 /////////////////////////////////////////////////////////////////////////////
 
-namespace {
-  std::vector<double> std_vector(const NEWMAT::ColumnVector& Column_vector)
-  {
-    size_t size = Column_vector.Nrows();
-    std::vector<double> result(size);
-    for (size_t i = 0 ; i < size ; i++) {
-      result[i] = Column_vector(i+1); // ColumnVector is 1-based
-    }
-    return result;
-  }
+inline std::vector<double> std_vector(const blitz::Array<double, 1>& 
+				      Column_vector)
+{
+  return std::vector<double>(Column_vector.begin(), Column_vector.end());
 }
+
 
 /////////////////////////////////////////////////////////////////////////////
 /// Convert std::vector<double> to NEWMAT::ColumnVector
 /////////////////////////////////////////////////////////////////////////////
 
-namespace {
-  NEWMAT::ColumnVector column_vector(const std::vector<double>& Vector)
-  {
-    size_t size = Vector.size();
-    NEWMAT::ColumnVector result(size);
-    for (size_t i = 0 ; i < size ; i++) {
-      result(i+1) = Vector[i]; // ColumnVector is 1-based
-    }
-    return result;
-  }
+blitz::Array<double, 1> column_vector(const std::vector<double>& Vector)
+{
+  blitz::Array<double, 1> res((int) Vector.size());
+  for (int i = 0 ; i < res.rows() ; i++)
+    res(i) = Vector[i];
+  return res;
 }
 
 /////////////////////////////////////////////////////////////////////////////
 /// Initialize camera model using parameter in the given configuration file.
 /////////////////////////////////////////////////////////////////////////////
 
-GeoCal::Mspi::MspiCamera::MspiCamera(
-  const MSPI::Shared::ConfigFile& Config
-) : GeoCal::GeoCalCore::PushBroomCamera(Config.get<int>("number_band"),
-					Config.get<int>("number_sample"),
-					Config.get<int>("number_parameter")),
-    pi_(std::acos(-1)),
+// PushBroomCamera(,
+// 		    ,
+// 		    Config.get<int>("number_parameter")),
+
+MspiCamera::MspiCamera
+(
+ const MSPI::Shared::ConfigFile& Config
+ ) 
+  : nband(Config.get<int>("number_band")),
+    nsamp(Config.get<int>("number_sample")),
+    filename(Config.filename()),
+  pi_(std::acos(-1)),
     deg_to_rad_(pi_ / 180.0),
     focal_length_(Config.get<double>("focal_length")), /// focal length (millimeters)
     dx_(0.010),      ///< center-to-center sample spacing (millimeters)
@@ -99,11 +94,10 @@ GeoCal::Mspi::MspiCamera::MspiCamera(
     inversion_(Config.get<int>("inversion")),
     t_dc_(3,3),
     t_cd_(3,3),
-    row_number_(number_band()),
+    row_number_(Config.get<int>("number_band")),
     paraxial_transform_(Config),
     granule_id_(Config.get<std::string>("granule_id")),
-    parameter_step_size_(parameter_size()),
-    covariance_(parameter_size())
+    parameter_step_size_(Config.get<int>("number_parameter"))
 {
 
   //--------------------------------------------------------------------------
@@ -120,32 +114,35 @@ GeoCal::Mspi::MspiCamera::MspiCamera(
   // coordinate system.
   //--------------------------------------------------------------------------
 
+  blitz::firstIndex i1; blitz::secondIndex i2; blitz::thirdIndex i3;
+  blitz::fourthIndex i4;
   {
-    NEWMAT::Matrix t_epsilon(3,3);
+
+    blitz::Array<double, 2> t_epsilon(3,3);
     t_epsilon = 0;
+    t_epsilon(0,0) = std::cos(epsilon);
+    t_epsilon(0,1) = std::sin(epsilon);
+    t_epsilon(1,0) = -std::sin(epsilon);
     t_epsilon(1,1) = std::cos(epsilon);
-    t_epsilon(1,2) = std::sin(epsilon);
-    t_epsilon(2,1) = -std::sin(epsilon);
-    t_epsilon(2,2) = std::cos(epsilon);
-    t_epsilon(3,3) = 1;
+    t_epsilon(2,2) = 1;
 
-    NEWMAT::Matrix t_psi(3,3);
+    blitz::Array<double, 2> t_psi(3,3);
     t_psi = 0;
-    t_psi(1,1) = std::cos(psi);
-    t_psi(1,3) = -std::sin(psi);
-    t_psi(2,2) = 1;
-    t_psi(3,1) = std::sin(psi);
-    t_psi(3,3) = std::cos(psi);
+    t_psi(0,0) = std::cos(psi);
+    t_psi(0,2) = -std::sin(psi);
+    t_psi(1,1) = 1;
+    t_psi(2,0) = std::sin(psi);
+    t_psi(2,2) = std::cos(psi);
 
-    NEWMAT::Matrix t_theta(3,3);
+    blitz::Array<double, 2> t_theta(3,3);
     t_theta = 0;
-    t_theta(1,1) = 1;
+    t_theta(0,0) = 1;
+    t_theta(1,1) = std::cos(theta);
+    t_theta(1,2) = std::sin(theta);
+    t_theta(2,1) = -std::sin(theta);
     t_theta(2,2) = std::cos(theta);
-    t_theta(2,3) = std::sin(theta);
-    t_theta(3,2) = -std::sin(theta);
-    t_theta(3,3) = std::cos(theta);
 
-    t_dc_ = t_epsilon * t_psi * t_theta;
+    t_dc_ = sum(sum(t_epsilon(i1, i3) * t_psi(i3, i4) * t_theta(i4, i2), i4), i3);
   }
 
   //--------------------------------------------------------------------------
@@ -153,7 +150,7 @@ GeoCal::Mspi::MspiCamera::MspiCamera(
   // coordinate system.
   //--------------------------------------------------------------------------
 
-  t_cd_ = t_dc_.t();
+  t_cd_ = t_dc_(i2, i1);
 
   //-------------------------------------------------------------------------
   // Construct matrix for transforming camera coordinates to station 
@@ -178,22 +175,6 @@ GeoCal::Mspi::MspiCamera::MspiCamera(
   }
 
   //-------------------------------------------------------------------------
-  // Set integration time in base class.
-  //-------------------------------------------------------------------------
-
-  for (int iband = 0 ; iband < number_band() ; iband++) {
-    integration_time(iband, 0.0355);
-  }
-
-  //-------------------------------------------------------------------------
-  // Set direction in base class.
-  //-------------------------------------------------------------------------
-
-  for (int iband = 0 ; iband < number_band() ; iband++) {
-    direction(GeoCal::GeoCalCore::PushBroomCamera::FORWARD);
-  }
-
-  //-------------------------------------------------------------------------
   // Set suggested step sizes for calculating numerical derivatives.
   //-------------------------------------------------------------------------
 
@@ -201,22 +182,6 @@ GeoCal::Mspi::MspiCamera::MspiCamera(
   parameter_step_size_[1] = 0.1 * deg_to_rad_;  // pitch
   parameter_step_size_[2] = 0.1 * deg_to_rad_;  // roll
 
-  //-------------------------------------------------------------------------
-  // Initialize covariance to identity matrix
-  //-------------------------------------------------------------------------
-
-  covariance_ = 0;
-  for (int i = 0 ; i < parameter_size() ; i++) {
-    covariance_(i+1,i+1) = 1;  // NEWMAT::SymmetricMatrix is 1-based
-  }
-}
-
-/////////////////////////////////////////////////////////////////////////////
-/// Destructor.
-/////////////////////////////////////////////////////////////////////////////
-
-GeoCal::Mspi::MspiCamera::~MspiCamera()
-{
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -224,9 +189,9 @@ GeoCal::Mspi::MspiCamera::~MspiCamera()
 /// given band.
 /////////////////////////////////////////////////////////////////////////////
 
-GeoCal::GeoCalCore::FrameCoor 
-GeoCal::Mspi::MspiCamera::frame_coor(
-  const GeoCal::GeoCalCore::ScLookVector& Sl, 
+FrameCoordinate
+MspiCamera::frame_coordinate(
+  const ScLookVector& Sl, 
   int Band
 ) const
 {
@@ -236,12 +201,12 @@ GeoCal::Mspi::MspiCamera::frame_coor(
   //-------------------------------------------------------------------------
 
   if (Band < 0) {
-    GeoCal::GeoCalCore::Exception e;
+    Exception e;
     e << "Band < 0";
     throw e;
   }
   if (Band > number_band() - 1) {
-    GeoCal::GeoCalCore::Exception e;
+    Exception e;
     e << "Band > number_band() - 1";
     throw e;
   }
@@ -250,7 +215,7 @@ GeoCal::Mspi::MspiCamera::frame_coor(
   // Transform look vector to detector coordinate space.
   //-------------------------------------------------------------------------
  
-  NEWMAT::ColumnVector v_dcs(3);
+  blitz::Array<double, 1> v_dcs(3);
   detector_look(Sl, v_dcs);
 
   //-------------------------------------------------------------------------
@@ -258,8 +223,8 @@ GeoCal::Mspi::MspiCamera::frame_coor(
   // millimeters.
   //-------------------------------------------------------------------------
 
-  double yf = ( focal_length_ / v_dcs(3) ) * (-v_dcs(1));
-  double xf = ( focal_length_ / v_dcs(3) ) * v_dcs(2);
+  double yf = ( focal_length_ / v_dcs(2) ) * (-v_dcs(0));
+  double xf = ( focal_length_ / v_dcs(2) ) * v_dcs(1);
 
   //-------------------------------------------------------------------------
   // Transform paraxial focal plane coordinate to real focal plane coordinate.
@@ -282,21 +247,7 @@ GeoCal::Mspi::MspiCamera::frame_coor(
   // Return
   //-------------------------------------------------------------------------
   
-  return GeoCal::GeoCalCore::FrameCoor(line, sample);
-}
-
-/////////////////////////////////////////////////////////////////////////////
-/// Translate from look vector to frame line coordinates for
-/// the given band.
-/////////////////////////////////////////////////////////////////////////////
-
-double
-GeoCal::Mspi::MspiCamera::frame_line_coor(
-  const GeoCal::GeoCalCore::ScLookVector& Sl,
-  int Band
-) const
-{
-  return frame_coor(Sl,Band).line();
+  return FrameCoordinate(line, sample);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -306,30 +257,30 @@ GeoCal::Mspi::MspiCamera::frame_line_coor(
 /// derivatives of the sample.
 /////////////////////////////////////////////////////////////////////////////
 
-NEWMAT::Matrix 
-GeoCal::Mspi::MspiCamera::jacobian_look(
-  const GeoCal::GeoCalCore::ScLookVector& Sl,
+blitz::Array<double, 2>
+MspiCamera::jacobian_look(
+  const ScLookVector& Sl,
   int Band
 ) const
 {
-  NEWMAT::ColumnVector d(Sl.direction());
-  NEWMAT::Matrix result(2,3);
+  boost::array<double, 3> d(Sl.direction());
+  blitz::Array<double, 2> result(2,3);
   double pstep = 5e-7;
-  for (int i = 1; i <= 3 ; i++) {
-    NEWMAT::ColumnVector d0(d);
-    NEWMAT::ColumnVector d1(d);
+  for (int i = 0; i < 3 ; i++) {
+    boost::array<double, 3> d0(d);
+    boost::array<double, 3> d1(d);
     
-    d0(i) -= pstep;
-    d1(i) += pstep;
+    d0[i] -= pstep;
+    d1[i] += pstep;
 
-    GeoCal::GeoCalCore::ScLookVector sl0(d0, Sl.length());
-    GeoCal::GeoCalCore::ScLookVector sl1(d1, Sl.length());
+    ScLookVector sl0(d0);
+    ScLookVector sl1(d1);
 
-    GeoCal::GeoCalCore::FrameCoor fc0 = frame_coor(sl0, Band);
-    GeoCal::GeoCalCore::FrameCoor fc1 = frame_coor(sl1, Band);
+    FrameCoordinate fc0 = frame_coordinate(sl0, Band);
+    FrameCoordinate fc1 = frame_coordinate(sl1, Band);
  
-    result(1,i) = (fc1.line() - fc0.line()) / (pstep * 2.0);
-    result(2,i) = (fc1.sample() - fc0.sample()) / (pstep * 2.0);
+    result(0,i) = (fc1.line - fc0.line) / (pstep * 2.0);
+    result(0,i) = (fc1.sample - fc0.sample) / (pstep * 2.0);
   }
   
   return result;
@@ -342,8 +293,8 @@ GeoCal::Mspi::MspiCamera::jacobian_look(
 /////////////////////////////////////////////////////////////////////////////
 
 boost::multi_array<double,2>
-GeoCal::Mspi::MspiCamera::jacobian(
-  const GeoCal::GeoCalCore::ScLookVector& Sl,
+MspiCamera::jacobian(
+  const ScLookVector& Sl,
   int Band
 ) const
 {
@@ -367,11 +318,11 @@ GeoCal::Mspi::MspiCamera::jacobian(
     camera_tmp0.parameter(column_vector(p0));
     camera_tmp1.parameter(column_vector(p1));
 
-    GeoCal::GeoCalCore::FrameCoor fc0 = camera_tmp0.frame_coor(Sl, Band);
-    GeoCal::GeoCalCore::FrameCoor fc1 = camera_tmp1.frame_coor(Sl, Band);
+    FrameCoordinate fc0 = camera_tmp0.frame_coordinate(Sl, Band);
+    FrameCoordinate fc1 = camera_tmp1.frame_coordinate(Sl, Band);
 
-    result[0][i] = (fc1.line() - fc0.line()) / pstep;
-    result[1][i] = (fc1.sample() - fc0.sample()) / pstep;
+    result[0][i] = (fc1.line - fc0.line) / pstep;
+    result[1][i] = (fc1.sample - fc0.sample) / pstep;
   }
 
   return result;
@@ -382,17 +333,17 @@ GeoCal::Mspi::MspiCamera::jacobian(
 /// following parameters:
 ///
 ///  index    parameter
-///   1       camera to station yaw in radians
-///   2       camera to station pitch in radians
-///   3       camera to station roll in radians
+///   0       camera to station yaw in radians
+///   1       camera to station pitch in radians
+///   2       camera to station roll in radians
 /////////////////////////////////////////////////////////////////////////////
 
 void    
-GeoCal::Mspi::MspiCamera::parameter(const NEWMAT::ColumnVector& Pr)
+MspiCamera::parameter(const blitz::Array<double, 1>& Pr)
 {
-  camera_yaw_ = Pr(1);
-  camera_pitch_ = Pr(2);
-  camera_roll_ = Pr(3);
+  camera_yaw_ = Pr(0);
+  camera_pitch_ = Pr(1);
+  camera_roll_ = Pr(2);
   init_camera_to_station_transform();
 }
 
@@ -401,18 +352,18 @@ GeoCal::Mspi::MspiCamera::parameter(const NEWMAT::ColumnVector& Pr)
 /// following:
 ///
 ///  index    parameter
-///   1       camera to station yaw in radians
-///   2       camera to station pitch in radians
-///   3       camera to station roll in radians
+///   0       camera to station yaw in radians
+///   1       camera to station pitch in radians
+///   2       camera to station roll in radians
 /////////////////////////////////////////////////////////////////////////////
 
-NEWMAT::ColumnVector 
-GeoCal::Mspi::MspiCamera::parameter() const
+blitz::Array<double, 1>
+MspiCamera::parameter() const
 {
-  NEWMAT::ColumnVector result(3);
-  result(1) = camera_yaw_;
-  result(2) = camera_pitch_;
-  result(3) = camera_roll_;
+  blitz::Array<double, 1> result(3);
+  result(0) = camera_yaw_;
+  result(1) = camera_pitch_;
+  result(2) = camera_roll_;
   return result;
 }
 
@@ -422,10 +373,10 @@ GeoCal::Mspi::MspiCamera::parameter() const
 /////////////////////////////////////////////////////////////////////////////
 
 void 
-GeoCal::Mspi::MspiCamera::detector_look(
-  const GeoCal::GeoCalCore::FrameCoor& F,
+MspiCamera::detector_look(
+  const FrameCoordinate& F,
   int Band,
-  NEWMAT::ColumnVector& Dcs_look
+  blitz::Array<double, 1>& Dcs_look
 ) const
 {
 
@@ -435,12 +386,12 @@ GeoCal::Mspi::MspiCamera::detector_look(
   //-------------------------------------------------------------------------
 
   if (Band < 0) {
-    GeoCal::GeoCalCore::Exception e;
+    Exception e;
     e << "Band < 0";
     throw e;
   }
   if (Band > number_band() - 1) {
-    GeoCal::GeoCalCore::Exception e;
+    Exception e;
     e << "Band > number_band() - 1";
     throw e;
   }
@@ -470,9 +421,10 @@ GeoCal::Mspi::MspiCamera::detector_look(
   //-------------------------------------------------------------------------
 
   double u = 1.0 / std::sqrt(yf * yf + xf * xf + focal_length_ * focal_length_);
-  Dcs_look(1) = -yf * u;
-  Dcs_look(2) = xf * u;
-  Dcs_look(3) = focal_length_ * u;
+  Dcs_look.resize(3);
+  Dcs_look(0) = -yf * u;
+  Dcs_look(1) = xf * u;
+  Dcs_look(2) = focal_length_ * u;
 
 }
 
@@ -482,23 +434,27 @@ GeoCal::Mspi::MspiCamera::detector_look(
 /////////////////////////////////////////////////////////////////////////////
 
 void 
-GeoCal::Mspi::MspiCamera::detector_look(
-  const GeoCal::GeoCalCore::ScLookVector& Sl,
-  NEWMAT::ColumnVector& Dcs_look
+MspiCamera::detector_look(
+  const ScLookVector& Sl,
+  blitz::Array<double, 1>& Dcs_look
 ) const
 {
+  blitz::firstIndex i1; blitz::secondIndex i2; blitz::thirdIndex i3;
+  blitz::fourthIndex i4;
   //-------------------------------------------------------------------------
-  // Transform look vector from station coordinates to camera coordinates
-  //-------------------------------------------------------------------------
-
-  NEWMAT::ColumnVector v_ccs = t_cs_ * Sl.direction();
-
-  //-------------------------------------------------------------------------
+  // Transform look vector from station coordinates to camera
+  // coordinates
+  //
   // Transform look vector from camera coordinate space to detector coordinate
   // space.  Result is a unit vector because Sl.direction is a unit vector.
   //-------------------------------------------------------------------------
 
-  Dcs_look = t_dc_ * v_ccs;
+  blitz::Array<double, 1> dir(3);
+  dir(0) = Sl.direction()[0];
+  dir(1) = Sl.direction()[1];
+  dir(2) = Sl.direction()[2];
+  Dcs_look.resize(t_dc_.rows());
+  Dcs_look = sum(sum(t_dc_(i1, i2) * t_cs_(i2, i3) * dir(i3), i3), i2);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -506,57 +462,56 @@ GeoCal::Mspi::MspiCamera::detector_look(
 /////////////////////////////////////////////////////////////////////////////
 
 void 
-GeoCal::Mspi::MspiCamera::init_camera_to_station_transform()
+MspiCamera::init_camera_to_station_transform()
 {
+
+  blitz::firstIndex i1; blitz::secondIndex i2; blitz::thirdIndex i3;
+  blitz::fourthIndex i4;
 
   //-------------------------------------------------------------------------
   // Construct matrix for transforming camera coordinates to station 
   // coordinates.
   //-------------------------------------------------------------------------
 
-  NEWMAT::Matrix t_axes(3,3);
-  
-  NEWMAT::Matrix t_yaw(3,3);
+  blitz::Array<double, 2> t_yaw(3,3);
   t_yaw = 0;
+  t_yaw(0,0) = std::cos(camera_yaw_);
+  t_yaw(0,1) = std::sin(camera_yaw_);
+  t_yaw(1,0) = -std::sin(camera_yaw_);
   t_yaw(1,1) = std::cos(camera_yaw_);
-  t_yaw(1,2) = std::sin(camera_yaw_);
-  t_yaw(2,1) = -std::sin(camera_yaw_);
-  t_yaw(2,2) = std::cos(camera_yaw_);
-  t_yaw(3,3) = 1;
+  t_yaw(2,2) = 1;
 
-  NEWMAT::Matrix t_pitch(3,3);
+  blitz::Array<double, 2> t_pitch(3,3);
   t_pitch = 0;
-  t_pitch(1,1) = std::cos(camera_pitch_);
-  t_pitch(1,3) = -std::sin(camera_pitch_);
-  t_pitch(2,2) = 1;
-  t_pitch(3,1) = std::sin(camera_pitch_);
-  t_pitch(3,3) = std::cos(camera_pitch_);
+  t_pitch(0,0) = std::cos(camera_pitch_);
+  t_pitch(0,2) = -std::sin(camera_pitch_);
+  t_pitch(1,1) = 1;
+  t_pitch(2,0) = std::sin(camera_pitch_);
+  t_pitch(2,2) = std::cos(camera_pitch_);
 
-  NEWMAT::Matrix t_roll(3,3);
+  blitz::Array<double, 2> t_roll(3,3);
   t_roll = 0;
-  t_roll(1,1) = 1;
+  t_roll(0,0) = 1;
+  t_roll(1,1) = std::cos(camera_roll_);
+  t_roll(1,2) = std::sin(camera_roll_);
+  t_roll(2,1) = -std::sin(camera_roll_);
   t_roll(2,2) = std::cos(camera_roll_);
-  t_roll(2,3) = std::sin(camera_roll_);
-  t_roll(3,2) = -std::sin(camera_roll_);
-  t_roll(3,3) = std::cos(camera_roll_);
   
-  t_axes = t_yaw * t_pitch * t_roll;
-
-  NEWMAT::Matrix t_boresight(3,3);
+  blitz::Array<double, 2> t_boresight(3,3);
   t_boresight = 0;
-  t_boresight(1,1) = std::cos(boresight_angle_);
-  t_boresight(1,3) = -std::sin(boresight_angle_);
-  t_boresight(2,2) = 1;
-  t_boresight(3,1) = std::sin(boresight_angle_);
-  t_boresight(3,3) = std::cos(boresight_angle_);
+  t_boresight(0,0) = std::cos(boresight_angle_);
+  t_boresight(0,2) = -std::sin(boresight_angle_);
+  t_boresight(1,1) = 1;
+  t_boresight(2,0) = std::sin(boresight_angle_);
+  t_boresight(2,2) = std::cos(boresight_angle_);
 
-  t_sc_ = t_axes * t_boresight;
+  t_sc_ = sum(sum(sum(t_yaw(i1, i2) * t_pitch(i2, i3) * t_roll(i3, i4) * t_boresight(i4), i4), i3), i2);
 
   //-------------------------------------------------------------------------
   // Construct matrix for transforming station coordinates to camera coordinates
   //-------------------------------------------------------------------------
 
-  t_cs_ = t_sc_.t();
+  t_cs_ = t_sc_(i2, i1);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -564,7 +519,7 @@ GeoCal::Mspi::MspiCamera::init_camera_to_station_transform()
 /////////////////////////////////////////////////////////////////////////////
 
 void 
-GeoCal::Mspi::MspiCamera::write(
+MspiCamera::write(
   const std::string& Filename  ///< File name.
 ) const
 {

@@ -35,11 +35,13 @@ See Subversion Log
 #include <utility> 		// Definition of std::pair
 #include <sstream>              // Definition of std::ostringstream
 
+using namespace GeoCal;
+
 /////////////////////////////////////////////////////////////////////////////
 /// Constructor.   Initialize class with the given parameters.
 /////////////////////////////////////////////////////////////////////////////
 
-GeoCal::Mspi::ParaxialTransform::ParaxialTransform(
+ParaxialTransform::ParaxialTransform(
   std::map<int,std::vector<double> > A, ///< Real to paraxial transform coefficients for each row. (xf)
   std::map<int,std::vector<double> > B, ///< Real to paraxial transform coefficients for each row. (yf)
   std::map<int,std::vector<double> > C, ///< Paraxial to real transform coefficients for each row. (xf)
@@ -56,7 +58,7 @@ GeoCal::Mspi::ParaxialTransform::ParaxialTransform(
 /// Constructor.
 /////////////////////////////////////////////////////////////////////////////
 
-GeoCal::Mspi::ParaxialTransform::ParaxialTransform(
+ParaxialTransform::ParaxialTransform(
   const MSPI::Shared::ConfigFile& Config
 )
 {
@@ -86,7 +88,7 @@ GeoCal::Mspi::ParaxialTransform::ParaxialTransform(
 /////////////////////////////////////////////////////////////////////////////
 
 void
-GeoCal::Mspi::ParaxialTransform::paraxial_to_real(
+ParaxialTransform::paraxial_to_real(
   int Row_number,
   double Paraxial_x,
   double Paraxial_y,
@@ -181,7 +183,7 @@ GeoCal::Mspi::ParaxialTransform::paraxial_to_real(
 /////////////////////////////////////////////////////////////////////////////
 
 void
-GeoCal::Mspi::ParaxialTransform::real_to_paraxial(
+ParaxialTransform::real_to_paraxial(
   int Row_number,
   double Real_x,
   double Real_y,

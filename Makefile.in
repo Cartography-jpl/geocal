@@ -361,8 +361,10 @@ bin_PROGRAMS =
 
 # This gets included in the top makefile. This list files here that are
 # used to make up libgeocal.la.
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_31 = @srcmspi@/paraxial_transform.h
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_32 = @srcmspi@/paraxial_transform.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_31 = @srcmspi@/paraxial_transform.h \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@	@srcmspi@/mspi_camera.h
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_32 = @srcmspi@/paraxial_transform.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@	@srcmspi@/mspi_camera.cc
 
 #SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_33 = @srcmspi@/paraxial_transform_test.cc
@@ -857,7 +859,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srccartlab@/vicar_ogr.cc @srcgtk@/display_stretch_std_dev.cc \
 	@srcgtk@/geocal_pixbuf.cc \
 	@srcgtk@/raster_image_with_overlay.cc \
-	@srcmspi@/paraxial_transform.cc
+	@srcmspi@/paraxial_transform.cc @srcmspi@/mspi_camera.cc
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_5 = @srcsupport@/libgeocal_la-hdf_file.lo
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_6 = @srcimplementation@/libgeocal_la-geocal_gdal.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_dem.lo \
@@ -869,7 +871,8 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__objects_8 = @srcgtk@/libgeocal_la-display_stretch_std_dev.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/libgeocal_la-geocal_pixbuf.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/libgeocal_la-raster_image_with_overlay.lo
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__objects_9 = @srcmspi@/libgeocal_la-paraxial_transform.lo
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__objects_9 = @srcmspi@/libgeocal_la-paraxial_transform.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@	@srcmspi@/libgeocal_la-mspi_camera.lo
 @BUILD_AFIDS_PYTHON_TRUE@am_libgeocal_la_OBJECTS = @srcsupport@/boost/libgeocal_la-backtrace.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-geocal_gsl_matrix.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-geocal_gsl_fit.lo \
@@ -1512,7 +1515,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srccartlab@/paint_class.h @srccartlab@/vicar_ogr.h \
 	@srcgtk@/display_stretch.h @srcgtk@/display_stretch_std_dev.h \
 	@srcgtk@/geocal_pixbuf.h @srcgtk@/raster_image_with_overlay.h \
-	@srcmspi@/paraxial_transform.h
+	@srcmspi@/paraxial_transform.h @srcmspi@/mspi_camera.h
 am__libraw_HEADERS_DIST = @srcraw@/libraw.h @srcraw@/libraw_alloc.h \
 	@srcraw@/libraw_const.h @srcraw@/libraw_datastream.h \
 	@srcraw@/libraw_internal.h @srcraw@/libraw_internal_funcs.h \
@@ -3396,6 +3399,8 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@: > @srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/libgeocal_la-paraxial_transform.lo:  \
 	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/libgeocal_la-mspi_camera.lo: @srcmspi@/$(am__dirstamp) \
+	@srcmspi@/$(DEPDIR)/$(am__dirstamp)
 libgeocal.la: $(libgeocal_la_OBJECTS) $(libgeocal_la_DEPENDENCIES) $(EXTRA_libgeocal_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libgeocal_la_LINK) $(am_libgeocal_la_rpath) $(libgeocal_la_OBJECTS) $(libgeocal_la_LIBADD) $(LIBS)
 @srcmspishared@/Support/src/$(am__dirstamp):
@@ -4302,6 +4307,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-time_table.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-paraxial_transform_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-mspi_camera.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-paraxial_transform.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-config_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-config_table.Plo@am__quote@
@@ -6113,6 +6119,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/paraxial_transform.cc' object='@srcmspi@/libgeocal_la-paraxial_transform.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/libgeocal_la-paraxial_transform.lo `test -f '@srcmspi@/paraxial_transform.cc' || echo '$(srcdir)/'`@srcmspi@/paraxial_transform.cc
+
+@srcmspi@/libgeocal_la-mspi_camera.lo: @srcmspi@/mspi_camera.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/libgeocal_la-mspi_camera.lo -MD -MP -MF @srcmspi@/$(DEPDIR)/libgeocal_la-mspi_camera.Tpo -c -o @srcmspi@/libgeocal_la-mspi_camera.lo `test -f '@srcmspi@/mspi_camera.cc' || echo '$(srcdir)/'`@srcmspi@/mspi_camera.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/libgeocal_la-mspi_camera.Tpo @srcmspi@/$(DEPDIR)/libgeocal_la-mspi_camera.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/mspi_camera.cc' object='@srcmspi@/libgeocal_la-mspi_camera.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/libgeocal_la-mspi_camera.lo `test -f '@srcmspi@/mspi_camera.cc' || echo '$(srcdir)/'`@srcmspi@/mspi_camera.cc
 
 @srcmspishared@/Support/src/libmspi_shared_la-auto_remove_temp_dir.lo: @srcmspishared@/Support/src/auto_remove_temp_dir.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/Support/src/libmspi_shared_la-auto_remove_temp_dir.lo -MD -MP -MF @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-auto_remove_temp_dir.Tpo -c -o @srcmspishared@/Support/src/libmspi_shared_la-auto_remove_temp_dir.lo `test -f '@srcmspishared@/Support/src/auto_remove_temp_dir.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/auto_remove_temp_dir.cc

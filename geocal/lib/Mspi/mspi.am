@@ -2,6 +2,8 @@
 # used to make up libgeocal.la.
 geocalinc_HEADERS+= @srcmspi@/paraxial_transform.h
 libgeocal_la_SOURCES+= @srcmspi@/paraxial_transform.cc
+geocalinc_HEADERS+= @srcmspi@/mspi_camera.h
+libgeocal_la_SOURCES+= @srcmspi@/mspi_camera.cc
 
 #SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
 

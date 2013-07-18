@@ -2333,6 +2333,9 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(CARTO_CFLAGS) $(am__append_2) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_4)
+@BUILD_AFIDS_PYTHON_TRUE@EXTRA_libgeocal_la_DEPENDENCIES =  \
+@BUILD_AFIDS_PYTHON_TRUE@	$(VICAR_RTL_BUILD_DEPEND) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(CARTO_BUILD_DEPEND)
 @BUILD_AFIDS_PYTHON_TRUE@sdbxdocdir = ${datarootdir}/doc/libsdbx
 @BUILD_AFIDS_PYTHON_TRUE@dist_sdbxdoc_DATA = $(srcdir)/@srcsdbx@/doc/html/*
 @BUILD_AFIDS_PYTHON_TRUE@sdbxdir = $(includedir)/sdbx

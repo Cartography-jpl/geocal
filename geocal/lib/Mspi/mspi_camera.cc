@@ -94,6 +94,8 @@ MspiCamera::MspiCamera
     inversion_(Config.get<int>("inversion")),
     t_dc_(3,3),
     t_cd_(3,3),
+    t_sc_(3,3),
+    t_cs_(3,3),
     row_number_(Config.get<int>("number_band")),
     paraxial_transform_(Config),
     granule_id_(Config.get<std::string>("granule_id")),
@@ -142,7 +144,9 @@ MspiCamera::MspiCamera
     t_theta(2,1) = -std::sin(theta);
     t_theta(2,2) = std::cos(theta);
 
-    t_dc_ = sum(sum(t_epsilon(i1, i3) * t_psi(i3, i4) * t_theta(i4, i2), i4), i3);
+    blitz::Array<double, 2> t1(3, 3);
+    t1 = sum(t_psi(i1, i3) * t_theta(i3, i2), i3);
+    t_dc_ = sum(t_epsilon(i1, i3) * t1(i3, i2), i3);
   }
 
   //--------------------------------------------------------------------------
@@ -454,7 +458,9 @@ MspiCamera::detector_look(
   dir(1) = Sl.direction()[1];
   dir(2) = Sl.direction()[2];
   Dcs_look.resize(t_dc_.rows());
-  Dcs_look = sum(sum(t_dc_(i1, i2) * t_cs_(i2, i3) * dir(i3), i3), i2);
+  blitz::Array<double, 1> t1(3);
+  t1 = sum(t_cs_(i1, i2) * dir(i2), i2);
+  Dcs_look = sum(t_dc_(i1, i2) * t1(i2), i2);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -505,7 +511,10 @@ MspiCamera::init_camera_to_station_transform()
   t_boresight(2,0) = std::sin(boresight_angle_);
   t_boresight(2,2) = std::cos(boresight_angle_);
 
-  t_sc_ = sum(sum(sum(t_yaw(i1, i2) * t_pitch(i2, i3) * t_roll(i3, i4) * t_boresight(i4), i4), i3), i2);
+  blitz::Array<double, 2> t1(3, 3), t2(3, 3);
+  t1 = sum(t_roll(i1, i3) * t_boresight(i3, i2), i3);
+  t2 = sum(t_pitch(i1, i3) * t1(i3, i2), i3);
+  t_sc_ = sum(t_yaw(i1, i3) * t2(i3, i2), i3);
 
   //-------------------------------------------------------------------------
   // Construct matrix for transforming station coordinates to camera coordinates

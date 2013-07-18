@@ -148,8 +148,8 @@ BOOST_AUTO_TEST_CASE(basic)
 //-----------------------------------------------------------------------
 
     test_number++;
-    std::string config_filename = 
-      "GeoCal/MspiCamera/src/mspi_camera_test.config";
+    std::string config_filename = mspi_test_data_dir() + 
+      "mspi_camera_test.config";
     ConfigFile config(config_filename);
     MspiCamera camera(config);
     const int number_band = 7;
@@ -255,7 +255,8 @@ BOOST_AUTO_TEST_CASE(basic)
     test_number++;
 
     {
-      ConfigFile config("GeoCal/MspiCamera/src/mspi_camera_test.config2");
+      ConfigFile config(mspi_test_data_dir() + 
+			"mspi_camera_test.config2");
       MspiCamera camera(config);
       ScLookVector sc(27.0, -0.3, 0.4);
 
@@ -396,7 +397,7 @@ BOOST_AUTO_TEST_CASE(basic)
     test_number++;
     
     {
-      ConfigFile config("GeoCal/MspiCamera/src/mspi_camera_test.config2");
+      ConfigFile config(mspi_test_data_dir() + "mspi_camera_test.config2");
       MspiCamera camera(config);
 
       double direction_expect[number_band][3] = {

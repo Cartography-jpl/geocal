@@ -12,6 +12,9 @@ libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS)
 libgeocal_la_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw)
 libgeocal_la_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS)
 
+EXTRA_libgeocal_la_DEPENDENCIES = $(VICAR_RTL_BUILD_DEPEND)
+EXTRA_libgeocal_la_DEPENDENCIES+= $(CARTO_BUILD_DEPEND)
+
 if HAVE_GDAL
 # Include gdal in builds
 libgeocal_la_LDFLAGS+= $(GDAL_LIBS)

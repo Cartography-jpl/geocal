@@ -702,6 +702,7 @@ PYTHON_VERSION
 PYTHON
 BUILD_CARTO_FALSE
 BUILD_CARTO_TRUE
+CARTO_BUILD_DEPEND
 CARTO_LIBS
 CARTO_CFLAGS
 BUILD_HDFEOS5_FALSE
@@ -28054,8 +28055,10 @@ if test "x$want_carto" = "xyes"; then
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Carto library" >&5
 $as_echo_n "checking for Carto library... " >&6; }
         succeeded=no
+	CARTO_BUILD_DEPEND=""
         if test "$build_carto" == "yes"; then
-            CARTO_LIBS="-R$ac_carto_path/lib -L$ac_carto_path/lib -lcarto $VICAR_RTL_LIBS $GSL_LIBS"
+            CARTO_LIBS="libcarto.la"
+	    CARTO_BUILD_DEPEND="libcarto.la"
             CARTO_CFLAGS="-I$srcdir/carto/inc $VICAR_RTL_CFLAGS $GSL_CFLAGS"
             succeeded=yes
         elif test "$ac_carto_path" != ""; then
@@ -28178,6 +28181,7 @@ $as_echo "no" >&6; }
         else
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
+
 
 
                 have_carto="yes"

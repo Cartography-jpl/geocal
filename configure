@@ -26088,7 +26088,7 @@ if test "x$want_gdal" = "xyes"; then
 $as_echo_n "checking for GDAL library... " >&6; }
         succeeded=no
         if test "$ac_gdal_path" != ""; then
-            GDAL_LIBS="-R$ac_gdal_path/lib -lgdal -logdi -lgeos -lopenjpeg"
+            GDAL_LIBS="-R$ac_gdal_path/lib -L$ac_gdal_path/lib -lgdal -logdi -lgeos -lopenjpeg"
             GDAL_CFLAGS="-I$ac_gdal_path/include"
             succeeded=yes
         else

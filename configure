@@ -26806,8 +26806,7 @@ fi
 # Not actually ready for this, so turn off for now
 #with_mspi=yes
 with_mspi=no
-if test x$with_mspi = xyes; then
-    if true; then
+ if  test x$with_mspi = xyes ; then
   BUILD_MSPI_TRUE=
   BUILD_MSPI_FALSE='#'
 else
@@ -26815,7 +26814,7 @@ else
   BUILD_MSPI_FALSE=
 fi
 
-    if true; then
+ if  test x$with_mspi = xyes ; then
   HAVE_MSPI_TRUE=
   HAVE_MSPI_FALSE='#'
 else
@@ -26823,7 +26822,6 @@ else
   HAVE_MSPI_FALSE=
 fi
 
-fi
 
 #=================================================================
 # Libraries needed by MSPI.
@@ -28000,6 +27998,55 @@ library. " "$LINENO" 5
 fi
 
 
+
+else
+    if false; then
+  HAVE_HDFEOS_TRUE=
+  HAVE_HDFEOS_FALSE='#'
+else
+  HAVE_HDFEOS_TRUE='#'
+  HAVE_HDFEOS_FALSE=
+fi
+
+    if false; then
+  BUILD_HDFEOS_TRUE=
+  BUILD_HDFEOS_FALSE='#'
+else
+  BUILD_HDFEOS_TRUE='#'
+  BUILD_HDFEOS_FALSE=
+fi
+
+    if false; then
+  HAVE_HDFEOS5_TRUE=
+  HAVE_HDFEOS5_FALSE='#'
+else
+  HAVE_HDFEOS5_TRUE='#'
+  HAVE_HDFEOS5_FALSE=
+fi
+
+    if false; then
+  BUILD_HDFEOS5_TRUE=
+  BUILD_HDFEOS5_FALSE='#'
+else
+  BUILD_HDFEOS5_TRUE='#'
+  BUILD_HDFEOS5_FALSE=
+fi
+
+    if false; then
+  HAVE_HDF4_TRUE=
+  HAVE_HDF4_FALSE='#'
+else
+  HAVE_HDF4_TRUE='#'
+  HAVE_HDF4_FALSE=
+fi
+
+    if false; then
+  BUILD_HDF4_TRUE=
+  BUILD_HDF4_FALSE='#'
+else
+  BUILD_HDF4_TRUE='#'
+  BUILD_HDF4_FALSE=
+fi
 
 fi
 
@@ -29852,6 +29899,30 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_HDFEOS5_TRUE}" && test -z "${BUILD_HDFEOS5_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_HDFEOS5\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_HDFEOS_TRUE}" && test -z "${HAVE_HDFEOS_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_HDFEOS\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_HDFEOS_TRUE}" && test -z "${BUILD_HDFEOS_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_HDFEOS\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_HDFEOS5_TRUE}" && test -z "${HAVE_HDFEOS5_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_HDFEOS5\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_HDFEOS5_TRUE}" && test -z "${BUILD_HDFEOS5_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_HDFEOS5\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_HDF4_TRUE}" && test -z "${HAVE_HDF4_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_HDF4\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_HDF4_TRUE}" && test -z "${BUILD_HDF4_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_HDF4\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_CARTO_TRUE}" && test -z "${BUILD_CARTO_FALSE}"; then

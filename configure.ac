@@ -43,16 +43,21 @@ AC_VICAR_GDALPLUGIN(required, cannot_build, default_search)
 # Not actually ready for this, so turn off for now
 #with_mspi=yes
 with_mspi=no
-if test x$with_mspi = xyes; then
-   AM_CONDITIONAL([BUILD_MSPI], [true])
-   AM_CONDITIONAL([HAVE_MSPI], [true])
-fi
+AM_CONDITIONAL([BUILD_MSPI], [ test x$with_mspi = xyes ])
+AM_CONDITIONAL([HAVE_MSPI], [ test x$with_mspi = xyes ])
 
 #=================================================================
 # Libraries needed by MSPI.
 if test x$with_mspi = xyes; then
    AC_HDFEOS(required, cannot_build, default_search)
    AC_HDFEOS5(required, cannot_build, default_search)
+else
+   AM_CONDITIONAL([HAVE_HDFEOS], [false])
+   AM_CONDITIONAL([BUILD_HDFEOS], [false])
+   AM_CONDITIONAL([HAVE_HDFEOS5], [false])
+   AM_CONDITIONAL([BUILD_HDFEOS5], [false])
+   AM_CONDITIONAL([HAVE_HDF4], [false])
+   AM_CONDITIONAL([BUILD_HDF4], [false])
 fi
 
 #=================================================================

@@ -26802,8 +26802,11 @@ fi
 
 #=================================================================
 # Right now, always include MSPI. We may make this optional later
-with_mspi=yes
-if test x$with_afids_a = xyes; then
+
+# Not actually ready for this, so turn off for now
+#with_mspi=yes
+with_mspi=no
+if test x$with_mspi = xyes; then
     if true; then
   BUILD_MSPI_TRUE=
   BUILD_MSPI_FALSE='#'
@@ -26824,7 +26827,7 @@ fi
 
 #=================================================================
 # Libraries needed by MSPI.
-if test x$with_afids_a = xyes; then
+if test x$with_mspi = xyes; then
 
 
 have_hdfeos="no"

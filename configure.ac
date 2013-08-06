@@ -39,15 +39,18 @@ AC_VICAR_GDALPLUGIN(required, cannot_build, default_search)
 
 #=================================================================
 # Right now, always include MSPI. We may make this optional later
-with_mspi=yes
-if test x$with_afids_a = xyes; then
+
+# Not actually ready for this, so turn off for now
+#with_mspi=yes
+with_mspi=no
+if test x$with_mspi = xyes; then
    AM_CONDITIONAL([BUILD_MSPI], [true])
    AM_CONDITIONAL([HAVE_MSPI], [true])
 fi
 
 #=================================================================
 # Libraries needed by MSPI.
-if test x$with_afids_a = xyes; then
+if test x$with_mspi = xyes; then
    AC_HDFEOS(required, cannot_build, default_search)
    AC_HDFEOS5(required, cannot_build, default_search)
 fi

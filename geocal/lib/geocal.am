@@ -41,9 +41,8 @@ include afids_python/geocal/lib/Misr/misr.am
 if HAVE_GTKGOO
 include afids_python/geocal/lib/Gtk/gtk.am
 endif
-# Not ready to work with MSPI yet. We'll come back to this
 if HAVE_MSPI
-#include afids_python/geocal/lib/Mspi/mspi.am
+include afids_python/geocal/lib/Mspi/mspi.am
 endif
 
 # Allow fils to be include in other directories

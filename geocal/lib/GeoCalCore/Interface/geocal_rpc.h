@@ -409,35 +409,40 @@ private:
     } else {
 // Rewrite this to be more efficient to calculate
 //       T res(c[0] + c[1] * y + c[2] * x + c[3] * z +
-// 	    c[4] * x * y + c[5] * y * z + c[6] * x * z +
-// 	    c[7] * x * y * z + c[8] * y * y + c[9] * x * x +
-// 	    c[10] * z * z + c[11] * y * y * y +
-// 	    c[12] * x * y * y  + 
-// 	    c[13] * y * y * z + c[14] * x * x * y  +
-// 	    c[15] * x * x * x + c[16] * x * x * z +
-// 	    c[17] * y * z * z + c[18] * x * z * z + 
+// 	    c[4] * x * y + c[5] * y * z + c[6] * x * z  + 
+// 	    c[10] * y * y  + c[7] * x * x + c[8] * z * z  + 
+// 	    c[9] * x * y * z  + c[11] * y * y * y + 
+// 	    c[14] * x * x * y  + 
+// 	    c[17] * y * z * z + c[12] * x * y * y +
+// 	    c[15] * x * x * x + 
+// 	    c[18] * x * z * z + c[13] * y * y * z  + 
+// 	    c[16] * x * x * z + 
 // 	    c[19] * z * z * z);
       T res(c[0] + 
 	    x * (c[2] + 
-		 x * (c[9] +
-		      c[15] * x + 
-		      c[14] * y  +
-		      c[16] * z )+
+		 x * (c[7] + 
+		      c[15] * x +
+		      c[14] * y + 
+		      c[16] * z  
+		      ) + 
 		 y * (c[4] + 
-		      c[12] * y  + 
-		      c[7] * z)+ 
-		 z * (c[6] +
-		      c[18] * z) 
+		      c[12] * y +
+		      c[9] * z 
+		      ) + 
+		 z * (c[6] + 
+		      c[18] * z
+		      )
 		 ) + 
 	    y * (c[1] + 
-		 y * (c[8] + 
-		      c[11] * y +
-		      c[13] * z)+ 
+		 y * ( c[10] + 
+		       c[11] * y + 
+		       c[13] * z 
+		       ) + 
 		 z * (c[5] + 
-		      c[17] * z)
-		 ) + 
-	    z * (c[3] +
-		 z * (c[10] + 
+		      c[17] * z) 
+		 )+ 
+ 	    z * (c[3] +
+		 z * (c[8]  + 
 		      c[19] * z)
 		 )
 	    );
@@ -462,9 +467,13 @@ private:
 	    3 * c[19] * z * z);
       return res;
     } else {
-      T res(c[3] + c[5] * y + c[6] * x + c[7] * x * y + 
-	    2 * c[10] * z + c[13] * y * y + c[16] * x * x +
-	    2 * c[17] * y * z + 2 * c[18] * x * z + 
+      T res(c[3] + c[5] * y + c[6] * x + 
+	    2 * c[8] * z  + 
+	    c[9] * x * y +
+	    2 * c[17] * z * y + 
+	    2 * c[18] * z * x + 
+	    c[13] * y * y + 
+	    c[16] * x * x + 
 	    3 * c[19] * z * z);
       return res;
     }
@@ -483,9 +492,9 @@ private:
 	     c[16] * z * z + 2 * c[18] * x * z);
       return res;
     } else {
-      T res(c[2] + c[4] * y + c[6] * z + c[7] * y * z + 2 * c[9] * x +
- 	    c[12] * y * y  + 2 * c[14] * x * y  + 3 * c[15] * x * x + 
-	    2 * c[16] * x * z + c[18] * z * z);
+       T res(c[2] + c[4] * y + c[6] * z  + 2 * c[7] * x + c[9] * y * z  + 
+	     2 * c[14] * x * y  + c[12] * y * y + 3 * c[15] * x * x + 
+	     c[18] * z * z + 2 * c[16] * x * z);
       return res;
     }
   }
@@ -503,9 +512,9 @@ private:
  	    c[13] * z * z + 2 * c[14] * x * y + 2 * c[17] * y * z);
       return res;
     } else {
-      T res(c[1] + c[4] * x + c[5] * z + c[7] * x  * z + 2 * c[8] * y +
- 	    3 * c[11] * y * y + 2 * c[12] * x * y  + 
-	    2 * c[13] * y * z + c[14] * x * x  + c[17] * z * z);
+       T res(c[1] + c[4] * x + c[5] * z + 2 * c[10] * y  +
+ 	    c[9] * x * z  + 3 * c[11] * y * y + c[14] * x * x + 
+ 	    c[17] * z * z + 2 * c[12] * x * y + 2 * c[13] * y * z);
       return res;
     }
   }

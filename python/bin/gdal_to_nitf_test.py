@@ -63,8 +63,10 @@ def test_gdal_to_nitf_a():
     # Check that NITF was created correctly
     f1 = GdalRasterImage("gdal_to_nitf.ntf")
     f2 = GdalRasterImage(test_data + "10MAY21-1_A.img")
-    rpc = f1.rpc
-    rpc2 = f2.rpc
+    # GDAL NITF always returns the RPC as type B. Go ahead an explicitly 
+    # convert both, so can directly compare
+    rpc = f1.rpc.rpc_type_b()
+    rpc2 = f2.rpc.rpc_type_b()
     assert_almost_equal(rpc.error_bias, rpc2.error_bias, 5)
     assert_almost_equal(rpc.error_random, rpc2.error_random, 5)
     assert_almost_equal(rpc.height_offset, rpc2.height_offset, 3)

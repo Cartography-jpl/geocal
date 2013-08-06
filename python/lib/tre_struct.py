@@ -267,7 +267,7 @@ TreRPC00A = create_tre("TreTPC00A",
             ["err_bias", 7, float, "%07.2lf"],
             ["err_rand", 7, float, "%07.2lf"],
             ["line_off", 6, int, "%06d"],
-            ["sample_off", 5, int, "%05d"],
+            ["samp_off", 5, int, "%05d"],
             ["lat_off", 8, float, "%+08.4lf"],
             ["long_off", 9, float, "%+09.4lf"],
             ["height_off", 5, int, "%+05d"],
@@ -391,11 +391,19 @@ def tre_get_rpc(self):
     rpc.sample_scale = self.samp_scale
     rpc.fit_line_numerator = [False] * 20
     rpc.fit_sample_numerator = [False] * 20
+    ld = [0.0] * 20
+    ln = [0.0] * 20
+    sd = [0.0] * 20
+    sn = [0.0] * 20
     for i in range(20):
-        rpc.line_denominator[i] = getattr(self, "line_den_coeff_%d" % (i+1))
-        rpc.line_numerator[i] = getattr(self, "line_num_coeff_%d" % (i+1))
-        rpc.sample_denominator[i] = getattr(self, "samp_den_coeff_%d" % (i+1))
-        rpc.sample_numerator[i] = getattr(self, "samp_num_coeff_%d" % (i+1))
+        ld[i] = getattr(self, "line_den_coeff_%d" % (i+1))
+        ln[i] = getattr(self, "line_num_coeff_%d" % (i+1))
+        sd[i] = getattr(self, "samp_den_coeff_%d" % (i+1))
+        sn[i] = getattr(self, "samp_num_coeff_%d" % (i+1))
+    rpc.line_denominator = ld
+    rpc.line_numerator = ln
+    rpc.sample_denominator = sd
+    rpc.sample_numerator = sn
     return rpc
 
 def tre_set_from_rpc(self, rpc):

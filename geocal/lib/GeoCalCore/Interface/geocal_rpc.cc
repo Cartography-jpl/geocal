@@ -210,10 +210,10 @@ Rpc Rpc::rpc_type_a() const
   else {
     Rpc res(*this);
     res.rpc_type = RPC_A;
-    res.line_numerator[8] = line_numerator[7];
-    res.line_numerator[9] = line_numerator[8];
-    res.line_numerator[10] = line_numerator[9];
-    res.line_numerator[7] = line_numerator[10];
+    res.line_numerator[10] = line_numerator[7];
+    res.line_numerator[7] = line_numerator[8];
+    res.line_numerator[8] = line_numerator[9];
+    res.line_numerator[9] = line_numerator[10];
     res.line_numerator[14] = line_numerator[12];
     res.line_numerator[17] = line_numerator[13];
     res.line_numerator[12] = line_numerator[14];
@@ -221,10 +221,10 @@ Rpc Rpc::rpc_type_a() const
     res.line_numerator[13] = line_numerator[17];
     res.line_numerator[16] = line_numerator[18];
 
-    res.line_denominator[8] = line_denominator[7];
-    res.line_denominator[9] = line_denominator[8];
-    res.line_denominator[10] = line_denominator[9];
-    res.line_denominator[7] = line_denominator[10];
+    res.line_denominator[10] = line_denominator[7];
+    res.line_denominator[7] = line_denominator[8];
+    res.line_denominator[8] = line_denominator[9];
+    res.line_denominator[9] = line_denominator[10];
     res.line_denominator[14] = line_denominator[12];
     res.line_denominator[17] = line_denominator[13];
     res.line_denominator[12] = line_denominator[14];
@@ -232,10 +232,10 @@ Rpc Rpc::rpc_type_a() const
     res.line_denominator[13] = line_denominator[17];
     res.line_denominator[16] = line_denominator[18];
 
-    res.sample_numerator[8] = sample_numerator[7];
-    res.sample_numerator[9] = sample_numerator[8];
-    res.sample_numerator[10] = sample_numerator[9];
-    res.sample_numerator[7] = sample_numerator[10];
+    res.sample_numerator[10] = sample_numerator[7];
+    res.sample_numerator[7] = sample_numerator[8];
+    res.sample_numerator[8] = sample_numerator[9];
+    res.sample_numerator[9] = sample_numerator[10];
     res.sample_numerator[14] = sample_numerator[12];
     res.sample_numerator[17] = sample_numerator[13];
     res.sample_numerator[12] = sample_numerator[14];
@@ -243,10 +243,10 @@ Rpc Rpc::rpc_type_a() const
     res.sample_numerator[13] = sample_numerator[17];
     res.sample_numerator[16] = sample_numerator[18];
 
-    res.sample_denominator[8] = sample_denominator[7];
-    res.sample_denominator[9] = sample_denominator[8];
-    res.sample_denominator[10] = sample_denominator[9];
-    res.sample_denominator[7] = sample_denominator[10];
+    res.sample_denominator[10] = sample_denominator[7];
+    res.sample_denominator[7] = sample_denominator[8];
+    res.sample_denominator[8] = sample_denominator[9];
+    res.sample_denominator[9] = sample_denominator[10];
     res.sample_denominator[14] = sample_denominator[12];
     res.sample_denominator[17] = sample_denominator[13];
     res.sample_denominator[12] = sample_denominator[14];
@@ -292,10 +292,10 @@ Rpc Rpc::rpc_type_b() const
   else {
     Rpc res(*this);
     res.rpc_type = RPC_B;
-    res.line_numerator[7] = line_numerator[8];
-    res.line_numerator[8] = line_numerator[9];
-    res.line_numerator[9] = line_numerator[10];
-    res.line_numerator[10] = line_numerator[7];
+    res.line_numerator[7] = line_numerator[10];
+    res.line_numerator[8] = line_numerator[7];
+    res.line_numerator[9] = line_numerator[8];
+    res.line_numerator[10] = line_numerator[9];
     res.line_numerator[12] = line_numerator[14];
     res.line_numerator[13] = line_numerator[17];
     res.line_numerator[14] = line_numerator[12];
@@ -303,10 +303,10 @@ Rpc Rpc::rpc_type_b() const
     res.line_numerator[17] = line_numerator[13];
     res.line_numerator[18] = line_numerator[16];
 
-    res.line_denominator[7] = line_denominator[8];
-    res.line_denominator[8] = line_denominator[9];
-    res.line_denominator[9] = line_denominator[10];
-    res.line_denominator[10] = line_denominator[7];
+    res.line_denominator[7] = line_denominator[10];
+    res.line_denominator[8] = line_denominator[7];
+    res.line_denominator[9] = line_denominator[8];
+    res.line_denominator[10] = line_denominator[9];
     res.line_denominator[12] = line_denominator[14];
     res.line_denominator[13] = line_denominator[17];
     res.line_denominator[14] = line_denominator[12];
@@ -314,10 +314,10 @@ Rpc Rpc::rpc_type_b() const
     res.line_denominator[17] = line_denominator[13];
     res.line_denominator[18] = line_denominator[16];
 
-    res.sample_numerator[7] = sample_numerator[8];
-    res.sample_numerator[8] = sample_numerator[9];
-    res.sample_numerator[9] = sample_numerator[10];
-    res.sample_numerator[10] = sample_numerator[7];
+    res.sample_numerator[7] = sample_numerator[10];
+    res.sample_numerator[8] = sample_numerator[7];
+    res.sample_numerator[9] = sample_numerator[8];
+    res.sample_numerator[10] = sample_numerator[9];
     res.sample_numerator[12] = sample_numerator[14];
     res.sample_numerator[13] = sample_numerator[17];
     res.sample_numerator[14] = sample_numerator[12];
@@ -325,10 +325,10 @@ Rpc Rpc::rpc_type_b() const
     res.sample_numerator[17] = sample_numerator[13];
     res.sample_numerator[18] = sample_numerator[16];
 
-    res.sample_denominator[7] = sample_denominator[8];
-    res.sample_denominator[8] = sample_denominator[9];
-    res.sample_denominator[9] = sample_denominator[10];
-    res.sample_denominator[10] = sample_denominator[7];
+    res.sample_denominator[7] = sample_denominator[10];
+    res.sample_denominator[8] = sample_denominator[7];
+    res.sample_denominator[9] = sample_denominator[8];
+    res.sample_denominator[10] = sample_denominator[9];
     res.sample_denominator[12] = sample_denominator[14];
     res.sample_denominator[13] = sample_denominator[17];
     res.sample_denominator[14] = sample_denominator[12];

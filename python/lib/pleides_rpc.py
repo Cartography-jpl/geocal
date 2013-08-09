@@ -28,7 +28,7 @@ def pleides_rpc(fname):
     rpc.longitude_scale = float(t.findtext("LONG_SCALE"))
     rpc.height_offset = float(t.findtext("HEIGHT_OFF"))
     rpc.height_scale = float(t.findtext("HEIGHT_SCALE"))
-    t = doc.find("Rational_Function_Model/Global_RFM/Direct_Model")
+    t = doc.find("Rational_Function_Model/Global_RFM/Inverse_Model")
     line_num = []
     line_den = []
     samp_num = []

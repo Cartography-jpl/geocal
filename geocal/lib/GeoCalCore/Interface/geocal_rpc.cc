@@ -91,7 +91,8 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
 	    throw;
 	}
       }
-
+  if(first)
+    throw Exception("Did not get any points for RPC fitting in fit_rpc");
   rpc.latitude_offset = (max_lat + min_lat) / 2.0;
   rpc.latitude_scale = (max_lat - min_lat) / 2.0;
   rpc.longitude_offset = (max_lon + min_lon) / 2.0;

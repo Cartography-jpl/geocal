@@ -39,6 +39,9 @@ public:
   const boost::shared_ptr<RasterImage>& 
   raster_image_ptr() const {return img;}
 
+  void unmasked_bounding_box(int& Minline, int &Minsample, int &Numberline,
+			     int &Numbersample) const;
+
 //-----------------------------------------------------------------------
 /// Value indicating masked data.
 //-----------------------------------------------------------------------

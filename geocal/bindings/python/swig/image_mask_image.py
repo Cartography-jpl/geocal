@@ -124,6 +124,17 @@ class ImageMaskImage(geocal.image_mask.ImageMask):
         Constructor. 
         """
         _image_mask_image.ImageMaskImage_swiginit(self,_image_mask_image.new_ImageMaskImage(*args))
+    def unmasked_bounding_box(self):
+        """
+        void ImageMaskImage::unmasked_bounding_box(int &Minline, int &Minsample, int &Numberline, int &Numbersample)
+        const
+        This returns the bounding box of the unmasked area.
+
+        This can be useful for an image to chop off an outer edge that is
+        completely masked. 
+        """
+        return _image_mask_image.ImageMaskImage_unmasked_bounding_box(self)
+
     def _v_raster_image(self):
         """
         const boost::shared_ptr<RasterImage>& GeoCal::ImageMaskImage::raster_image_ptr() const
@@ -154,6 +165,7 @@ class ImageMaskImage(geocal.image_mask.ImageMask):
       return _new_from_init, (self.__class__, 1, self.raster_image,self.masked_value)
 
     __swig_destroy__ = _image_mask_image.delete_ImageMaskImage
+ImageMaskImage.unmasked_bounding_box = new_instancemethod(_image_mask_image.ImageMaskImage_unmasked_bounding_box,None,ImageMaskImage)
 ImageMaskImage._v_raster_image = new_instancemethod(_image_mask_image.ImageMaskImage__v_raster_image,None,ImageMaskImage)
 ImageMaskImage._v_masked_value = new_instancemethod(_image_mask_image.ImageMaskImage__v_masked_value,None,ImageMaskImage)
 ImageMaskImage_swigregister = _image_mask_image.ImageMaskImage_swigregister

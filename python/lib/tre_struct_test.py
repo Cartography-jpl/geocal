@@ -4,6 +4,7 @@ from tre_struct import *
 import subprocess
 
 test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data2 = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
 
 # Basic test of tre_struct
 def test_tre_struct():
@@ -108,6 +109,60 @@ def test_gdal_raster():
     assert tre.max_lp_seg == 6287
     assert tre.sun_el == 68.5
     assert tre.sun_az == 131.3
+
+def test_tre_rpc():
+    '''Test reading and writing a RPC'''
+    rpc = GdalRasterImage(test_data2 + "10MAY21-1.img").rpc
+    rpc_a = rpc.rpc_type_a()
+    tb = TreRPC00B()
+    ta = TreRPC00A()
+    # Test creating a type B rpc, and make sure we can read it back.
+    tb.rpc = rpc
+    rpc2 = tb.rpc
+    assert_almost_equal(rpc.error_bias, rpc2.error_bias, 5)
+    assert_almost_equal(rpc.error_random, rpc2.error_random, 5)
+    assert_almost_equal(rpc.height_offset, rpc2.height_offset, 3)
+    assert_almost_equal(rpc.height_scale, rpc2.height_scale, 3)
+    assert_almost_equal(rpc.latitude_offset, rpc2.latitude_offset, 3)
+    assert_almost_equal(rpc.latitude_scale, rpc2.latitude_scale, 3)
+    assert_almost_equal(rpc.longitude_offset, rpc2.longitude_offset, 3)
+    assert_almost_equal(rpc.longitude_scale, rpc2.longitude_scale, 3)
+    assert_almost_equal(rpc.line_offset, rpc2.line_offset, 3)
+    assert_almost_equal(rpc.line_scale, rpc2.line_scale, 3)
+    assert_almost_equal(rpc.sample_offset, rpc2.sample_offset, 3)
+    assert_almost_equal(rpc.sample_scale, rpc2.sample_scale, 3)
+    for i in range(20):
+        assert_almost_equal(rpc.line_numerator[i], rpc2.line_numerator[i], 6)
+        assert_almost_equal(rpc.line_denominator[i], 
+                            rpc2.line_denominator[i], 6)
+        assert_almost_equal(rpc.sample_numerator[i], 
+                            rpc2.sample_numerator[i], 6)
+        assert_almost_equal(rpc.sample_denominator[i], 
+                            rpc2.sample_denominator[i], 6)
+
+    # Test creating a type B rpc, and make sure we can read it back.
+    ta.rpc = rpc_a
+    rpc2 = ta.rpc
+    assert_almost_equal(rpc_a.error_bias, rpc2.error_bias, 5)
+    assert_almost_equal(rpc_a.error_random, rpc2.error_random, 5)
+    assert_almost_equal(rpc_a.height_offset, rpc2.height_offset, 3)
+    assert_almost_equal(rpc_a.height_scale, rpc2.height_scale, 3)
+    assert_almost_equal(rpc_a.latitude_offset, rpc2.latitude_offset, 3)
+    assert_almost_equal(rpc_a.latitude_scale, rpc2.latitude_scale, 3)
+    assert_almost_equal(rpc_a.longitude_offset, rpc2.longitude_offset, 3)
+    assert_almost_equal(rpc_a.longitude_scale, rpc2.longitude_scale, 3)
+    assert_almost_equal(rpc_a.line_offset, rpc2.line_offset, 3)
+    assert_almost_equal(rpc_a.line_scale, rpc2.line_scale, 3)
+    assert_almost_equal(rpc_a.sample_offset, rpc2.sample_offset, 3)
+    assert_almost_equal(rpc_a.sample_scale, rpc2.sample_scale, 3)
+    for i in range(20):
+        assert_almost_equal(rpc_a.line_numerator[i], rpc2.line_numerator[i], 6)
+        assert_almost_equal(rpc_a.line_denominator[i], 
+                            rpc2.line_denominator[i], 6)
+        assert_almost_equal(rpc_a.sample_numerator[i], 
+                            rpc2.sample_numerator[i], 6)
+        assert_almost_equal(rpc_a.sample_denominator[i], 
+                            rpc2.sample_denominator[i], 6)
 
 def noruntest_nitf_rpc():
     tb = TreRPC00B()

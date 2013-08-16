@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(afids-python, 1.02)
+AC_INIT(afids-python, 1.03)
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([config/m4])
 AC_CONFIG_FILES([afids_python/script/setup_afids_python.csh afids_python/script/setup_afids_python.sh])
@@ -36,6 +36,29 @@ AC_DOXYGEN(required, cannot_build, default_search)
 AC_FFTW(required, cannot_build, default_search)
 AC_GDAL(required, cannot_build, default_search)
 AC_VICAR_GDALPLUGIN(required, cannot_build, default_search)
+
+#=================================================================
+# Right now, always include MSPI. We may make this optional later
+
+# Not actually ready for this, so turn off for now
+#with_mspi=yes
+with_mspi=no
+AM_CONDITIONAL([BUILD_MSPI], [ test x$with_mspi = xyes ])
+AM_CONDITIONAL([HAVE_MSPI], [ test x$with_mspi = xyes ])
+
+#=================================================================
+# Libraries needed by MSPI.
+if test x$with_mspi = xyes; then
+   AC_HDFEOS(required, cannot_build, default_search)
+   AC_HDFEOS5(required, cannot_build, default_search)
+else
+   AM_CONDITIONAL([HAVE_HDFEOS], [false])
+   AM_CONDITIONAL([BUILD_HDFEOS], [false])
+   AM_CONDITIONAL([HAVE_HDFEOS5], [false])
+   AM_CONDITIONAL([BUILD_HDFEOS5], [false])
+   AM_CONDITIONAL([HAVE_HDF4], [false])
+   AM_CONDITIONAL([BUILD_HDF4], [false])
+fi
 
 #=================================================================
 # Need to find carto library. (Need to have this after VICAR_RTL 
@@ -145,3 +168,4 @@ LOC_MSG()
 LOC_MSG([  Generate SWIG wrappers:        ${generate_swig}])
 LOC_MSG([  Install documentation:         ${with_documentation}])
 LOC_MSG([  Include AFIDS A configuration: ${with_afids_a}])
+LOC_MSG([  Include MSPI:                  ${with_mspi}])

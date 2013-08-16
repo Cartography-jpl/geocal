@@ -1,0 +1,25 @@
+granule_MSPI-Shared/File/FieldMap/src/hdf4_l1b2_field_map_test.field_map : granule_id
+3 2 : grids.size
+grid_name grid_number : grids.columns
+gridC 63
+gridA 57
+gridB 52
+: grids.table
+
+3 3 : gridC.size
+field_name type fill : gridC.columns
+A          float -9999
+R          int 5555
+C          float -9999
+: gridC.table
+
+1 3 : gridA.size
+field_name type fill : gridA.columns
+E          float -9999
+: gridA.table
+
+2 3 : gridB.size
+field_name type fill : gridB.columns
+F          float -9999
+H          float -9999
+: gridB.table

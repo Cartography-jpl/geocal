@@ -1,0 +1,1 @@
+/home/smyth/Local/MSPI-Shared/stub.mk

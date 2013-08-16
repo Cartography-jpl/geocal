@@ -1,0 +1,97 @@
+define a(n,irow) {
+  return irow * 10 + n
+}
+define b(n,irow) {
+  return irow * 20 + n
+}
+
+define c(n,irow) {
+  return irow * 30 + n
+}
+define d(n,irow) {
+  return irow * 40 + n
+}
+
+define xf_prime(xf,yf,irow) {
+  return c(0,irow) * xf + \
+         c(1,irow) * xf * yf + \
+         c(2,irow) * xf * yf^2 + \
+         c(3,irow) * xf^3 + \
+         c(4,irow) * xf^3 * yf + \
+         c(5,irow) * xf^3 * yf^2 + \
+         c(6,irow) * xf^5 + \
+         c(7,irow) * xf^5 * yf + \
+         c(8,irow) * xf^5 * yf^2 + \
+         c(9,irow) * xf^7 + \
+         c(10,irow) * xf^7 * yf + \
+         c(11,irow) * xf^7 * yf^2
+}
+
+define yf_prime(xf,yf,irow) {
+  return d(0,irow) + \
+         d(1,irow) * yf + \
+         d(2,irow) * yf^2 + \
+         d(3,irow) * xf^2 + \
+         d(4,irow) * xf^2 * yf + \
+         d(5,irow) * xf^2 * yf^2 + \
+         d(6,irow) * xf^4 + \
+         d(7,irow) * xf^4 * yf + \
+         d(8,irow) * xf^4 * yf^2 + \
+         d(9,irow) * xf^6 + \
+         d(10,irow) * xf^6 * yf + \
+         d(11,irow) * xf^6 * yf^2
+}
+
+define xf(xfp,yfp,irow) {
+  return a(0,irow) * xfp + \
+         a(1,irow) * xfp^3 + \
+	 a(2,irow) * xfp^5 + \
+         a(3,irow) * xfp^7
+}       
+
+define yf(xfp,yfp,irow) {
+  return b(0,irow) + \
+         yfp + \
+         b(1,irow) * xfp^2 + \
+	 b(2,irow) * xfp^4 + \
+         b(3,irow) * xfp^6
+}       
+
+paraxial_x0 = 0.1
+paraxial_y0 = -0.2
+paraxial_x1 = 0.0
+paraxial_y1 = 0.0
+paraxial_x2 = -0.1
+paraxial_y2= 0.2
+print "(real_x_expect)\n"
+for (irow = 0 ; irow < 4 ; irow++) {
+   print irow," {",xf_prime(paraxial_x0, paraxial_y0, irow),", ",\
+                  xf_prime(paraxial_x1, paraxial_y1, irow),", ",\
+		  xf_prime(paraxial_x2, paraxial_y2, irow),"},\n"
+}
+print "(real_y_expect)\n"
+for (irow = 0 ; irow < 4 ; irow++) {
+   print irow," {",yf_prime(paraxial_x0, paraxial_y0, irow),", ",\
+                  yf_prime(paraxial_x1, paraxial_y1, irow),", ",\
+		  yf_prime(paraxial_x2, paraxial_y2, irow),"},\n"
+}
+
+real_x0 = 0.3
+real_y0 = -0.4;
+real_x1 = 0.0
+real_y1 = 0.0;
+real_x2 = -0.3
+real_y2 = 0.4;
+print "(paraxial_x_expect)\n"
+for (irow = 0 ; irow < 4 ; irow++) {
+   print irow," {",xf(real_x0, real_y0, irow),", ",\
+                  xf(real_x1, real_y1, irow),", ",\
+		  xf(real_x2, real_y2, irow),"},\n"
+}
+print "(paraxial_y_expect)\n"
+for (irow = 0 ; irow < 4 ; irow++) {
+   print irow," {",yf(real_x0, real_y0, irow),", ",\
+                  yf(real_x1, real_y1, irow),", ",\
+		  yf(real_x2, real_y2, irow),"},\n"
+}
+quit

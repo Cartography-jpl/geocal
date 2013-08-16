@@ -60,15 +60,6 @@
 # used to make up libgeocal.la.
 
 # This gets included in the top makefile. This list files here that are
-# used to make up libgeocal.la.
-#geocalinc_HEADERS+= @srcmspi@/argus_camera.h
-#libgeocal_la_SOURCES+= @srcmspi@/argus_camera.cc
-
-#SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
-
-#geocal_test_all_SOURCES+= @srcmspi@/argus_camera_test.cc
-
-# This gets included in the top makefile. This list files here that are
 # used to run unit tests.
 
 # Sphinx python documentation
@@ -118,6 +109,7 @@ DIST_COMMON = $(srcdir)/common.am $(srcdir)/afids_python.am \
 	$(srcdir)/afids_python/geocal/thirdparty/thirdparty.am \
 	$(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am \
 	$(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am \
+	$(srcdir)/afids_python/geocal/thirdparty/mspi_shared/mspi_shared.am \
 	$(srcdir)/afids_python/geocal/lib/geocal.am \
 	$(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am \
 	$(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am \
@@ -125,8 +117,8 @@ DIST_COMMON = $(srcdir)/common.am $(srcdir)/afids_python.am \
 	$(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am \
 	$(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am \
 	$(srcdir)/afids_python/geocal/lib/Misr/misr.am \
-	$(srcdir)/afids_python/geocal/lib/Mspi/mspi.am \
 	$(srcdir)/afids_python/geocal/lib/Gtk/gtk.am \
+	$(srcdir)/afids_python/geocal/lib/Mspi/mspi.am \
 	$(srcdir)/afids_python/geocal/bindings/python/python.am \
 	$(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am \
 	$(srcdir)/afids_python/python/python.am \
@@ -166,6 +158,53 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_2 = $(GDAL_CFLAGS)
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_3 = $(HDF5_LIBS)
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_4 = $(HDF5_CFLAGS)
+@BUILD_AFIDS_PYTHON_TRUE@am__append_5 = @srcsdbx@/README @srcsdbx@/StorageConcepts.txt
+@BUILD_AFIDS_PYTHON_TRUE@am__append_6 = -I$(srcdir)/@srcsdbx@
+@BUILD_AFIDS_PYTHON_TRUE@am__append_7 = libraw.la
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@am__append_8 = libmspi_shared.la
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@am__append_9 = @srcmspishared@/README \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/scaled_double.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/projection_information.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/time_converter.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/map_information.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/auto_remove_temp_dir.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/box_region_coor.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/UnitTest/src/double_comparator.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/UnitTest/src/check.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/UnitTest/src/float_comparator.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1B1File/src/l1b1_reader.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1B1File/src/l1b1_file.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1B2File/src/l1b2_file.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/hdf5_l1b1_field_map.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/hdf5_l1b2_field_map.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/field_map.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/hdf4_l1b1_field_map.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/configured_field_map.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/hdf4_l1b2_field_map.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1AFile/src/l1a_file.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1AFile/src/frame_info.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Geotiff/src/geotiff_file.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Table/src/row_table.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Table/src/polygon_table.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Table/src/band_table.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/L1B1File/src/l1b1_file.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/L1B2File/src/l1b2_file.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/L1AFile/src/l1a_file.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/Table/src/row_table.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/Table/src/polygon_table.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/Table/src/band_table.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FileHandle/src/hdfeos2_file_handle.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FileHandle/src/hdfeos5_file_handle.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Ancillary/src/rdqi.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Meta/src/hdf4_meta.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Meta/src/hdf5_meta.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Meta/src/meta.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/ErrorHandling/src/exception.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Config/src/name_value_parser.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Config/src/config_file.h \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Config/src/config_table.h
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@am__append_10 = -I$(srcdir)/@srcmspishared@
 
 # bin_PROGRAMS += tryout
 # tryout_SOURCES = @libgeocal@/tryout.cc
@@ -193,9 +232,7 @@ bin_PROGRAMS =
 # Make sure that we have created the test_out directory for use with unit 
 # tests (note dummy_copy isn't used for anything, this is just a trick to
 # make surce test_out directory is created).
-@BUILD_AFIDS_PYTHON_TRUE@am__append_5 = @srcsdbx@/README \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcsdbx@/StorageConcepts.txt \
-@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(libgeocal)/*.i \
+@BUILD_AFIDS_PYTHON_TRUE@am__append_11 = $(srcdir)/$(libgeocal)/*.i \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/swig_to_python.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/swig_type_mapper_base.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@libgeocal@/swig_type_mapper.h \
@@ -254,29 +291,26 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/lib/test_all.sh \
 @BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/lib/dummy.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/test_out/dummy
-@BUILD_AFIDS_PYTHON_TRUE@am__append_6 = -I$(srcdir)/@srcsdbx@ \
-@BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcsupport@ \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_12 = @srcsupport@/hdf_file.h
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_13 = @srcsupport@/hdf_file.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_14 = @swigsrc@/hdf_file_wrap.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_15 = @srcsupport@/hdf_file_test.cc 
+@BUILD_AFIDS_PYTHON_TRUE@am__append_16 = -I$(srcdir)/@srcsupport@ \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcsupport@/boost \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcinterface@ \
 @BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcimplementation@ \
-@BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srccartlab@ \
-@BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srcmspi@
-@BUILD_AFIDS_PYTHON_TRUE@am__append_7 = libraw.la
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_8 = @srcsupport@/hdf_file.h
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_9 = @srcsupport@/hdf_file.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_10 = @swigsrc@/hdf_file_wrap.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_11 = @srcsupport@/hdf_file_test.cc 
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_12 = @srcimplementation@/hdf_orbit.h
+@BUILD_AFIDS_PYTHON_TRUE@	-I$(srcdir)/@srccartlab@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_17 = @srcimplementation@/hdf_orbit.h
 
 # File only included if we have GDAL library
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_13 = @srcimplementation@/gdal_datum.h \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_18 = @srcimplementation@/gdal_datum.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_multi_band.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/image_point_display.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate.h
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_14 = @srcimplementation@/geocal_gdal.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_19 = @srcimplementation@/geocal_gdal.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_multi_band.cc \
@@ -284,33 +318,33 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate.cc
 #  geocalinc_HEADERS+= @srcimplementation@/gdal_multi_file.h
 #  libgeocal_la_SOURCES+= @srcimplementation@/gdal_multi_file.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_15 = @srcimplementation@/gdal_datum_test.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_20 = @srcimplementation@/gdal_datum_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/image_point_display_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate_test.cc
 #  geocal_test_all_SOURCES+= @srcimplementation@/gdal_multi_file_test.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_16 = @srcimplementation@/hdf_orbit_test.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_17 = @swigsrc@/geocal_gdal_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_21 = @srcimplementation@/hdf_orbit_test.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_22 = @swigsrc@/geocal_gdal_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@swigsrc@/gdal_raster_image_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@swigsrc@/gdal_datum_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@swigsrc@/gdal_dem_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@swigsrc@/gdal_multi_band_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@swigsrc@/image_point_display_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@swigsrc@/ogr_coordinate_wrap.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_18 = @swigsrc@/hdf_orbit_wrap.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_19 = @srccartlab@/vicar_ogr.h
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_20 = @srccartlab@/vicar_ogr.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_21 = @srccartlab@/vicar_ogr_test.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_22 = @srcgtk@/display_stretch.h \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_23 = @swigsrc@/hdf_orbit_wrap.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_24 = @srccartlab@/vicar_ogr.h
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_25 = @srccartlab@/vicar_ogr.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_26 = @srccartlab@/vicar_ogr_test.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_27 = @srcgtk@/display_stretch.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/display_stretch_std_dev.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/geocal_pixbuf.h \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/raster_image_with_overlay.h
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_23 = @srcgtk@/display_stretch_std_dev.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_28 = @srcgtk@/display_stretch_std_dev.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/geocal_pixbuf.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/raster_image_with_overlay.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_24 =  \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_29 =  \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	$(GTGOO_LIBS) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	$(GTKGOO_LIBS)
 
@@ -321,13 +355,25 @@ bin_PROGRAMS =
 # Files that contain SWIG wrapper information.
 #SWIG_SRC += @swigsrc@/display_stretch_wrap.cc
 #SWIG_SRC += @swigsrc@/display_stretch_std_dev_wrap.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_25 =  \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__append_30 =  \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	-I$(GTKGOO_CFLAGS) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	-I$(srcdir)/@srcgtk@
 
+# This gets included in the top makefile. This list files here that are
+# used to make up libgeocal.la.
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_31 = @srcmspi@/paraxial_transform.h \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@	@srcmspi@/mspi_camera.h
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_32 = @srcmspi@/paraxial_transform.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@	@srcmspi@/mspi_camera.cc
+
+#SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_33 = @srcmspi@/paraxial_transform_test.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@	@srcmspi@/mspi_camera_test.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__append_34 = -I$(srcdir)/@srcmspi@
+
 # Allow fils to be include in other directories
-@BUILD_AFIDS_PYTHON_TRUE@am__append_26 = -I$(srcdir)/@libgeocal@
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_27 = $(addprefix \
+@BUILD_AFIDS_PYTHON_TRUE@am__append_35 = -I$(srcdir)/@libgeocal@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_36 = $(addprefix \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG_SRC)) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
@@ -335,28 +381,28 @@ bin_PROGRAMS =
 #include afids_python/geocal/python/python.am
 #=================================================================
 # libgeocal: The main library
-@BUILD_AFIDS_PYTHON_TRUE@am__append_28 = libgeocal.la
+@BUILD_AFIDS_PYTHON_TRUE@am__append_37 = libgeocal.la
 @BUILD_AFIDS_PYTHON_TRUE@check_PROGRAMS = geocal_test_all$(EXEEXT)
-@BUILD_AFIDS_PYTHON_TRUE@am__append_29 = afids_python/geocal/lib/test_all.sh
+@BUILD_AFIDS_PYTHON_TRUE@am__append_38 = afids_python/geocal/lib/test_all.sh
 
 #=================================================================
 # This is needed by unit tests that work with VICAR files. VICAR
 # wants to find a PDF file.
-@BUILD_AFIDS_PYTHON_TRUE@am__append_30 = dummy.pdf \
+@BUILD_AFIDS_PYTHON_TRUE@am__append_39 = dummy.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	test_out/vicar_copy.img \
 @BUILD_AFIDS_PYTHON_TRUE@	test_out/dummy_copy
-@BUILD_AFIDS_PYTHON_TRUE@am__append_31 = clean_unit_test
+@BUILD_AFIDS_PYTHON_TRUE@am__append_40 = clean_unit_test
 
 #=================================================================
 # Generate doxygen documentation
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_32 = config/doxygen.cfg \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_41 = config/doxygen.cfg \
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	config/doxy2swig.py
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_33 = install_doxygen_doc \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_42 = install_doxygen_doc \
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	install_python_doc
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_34 = clean_doxygen_doc
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_35 = clean_doxygen_generate
-@BUILD_AFIDS_PYTHON_TRUE@am__append_36 = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_43 = clean_doxygen_doc
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@am__append_44 = clean_doxygen_generate
+@BUILD_AFIDS_PYTHON_TRUE@am__append_45 = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_dir \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_show \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_igccol \
@@ -371,8 +417,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_dem \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_image \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/tiepoint_to_error
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_TRUE@am__append_37 = @srcpythonlib@/tre_amt_struct.py
-@BUILD_AFIDS_PYTHON_TRUE@am__append_38 = @docpythonsrc@ \
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_TRUE@am__append_46 = @srcpythonlib@/tre_amt_struct.py
+@BUILD_AFIDS_PYTHON_TRUE@am__append_47 = @docpythonsrc@ \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/07JUN08184839-M1BS-005616921010_01_P001.IMD \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/07JUN08184839-P1BS-005616921010_01_P001.IMD \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/10MAY07185751-M1BS-052360785020_01_P001.IMD \
@@ -397,8 +443,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/README \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/rpc_sba.pkl \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/FRST_POIof090514.shp
-@BUILD_AFIDS_PYTHON_TRUE@am__append_39 = clean_install_python_doc
-@BUILD_AFIDS_PYTHON_TRUE@am__append_40 = python_check
+@BUILD_AFIDS_PYTHON_TRUE@am__append_48 = clean_install_python_doc
+@BUILD_AFIDS_PYTHON_TRUE@am__append_49 = python_check
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids_data.m4 \
@@ -413,7 +459,10 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids_data.m4 \
 	$(top_srcdir)/config/m4/ac_geos.m4 \
 	$(top_srcdir)/config/m4/ac_gsl.m4 \
 	$(top_srcdir)/config/m4/ac_handle_with_arg.m4 \
+	$(top_srcdir)/config/m4/ac_hdf4.m4 \
 	$(top_srcdir)/config/m4/ac_hdf5.m4 \
+	$(top_srcdir)/config/m4/ac_hdfeos.m4 \
+	$(top_srcdir)/config/m4/ac_hdfeos5.m4 \
 	$(top_srcdir)/config/m4/ac_is_mac.m4 \
 	$(top_srcdir)/config/m4/ac_ogdi.m4 \
 	$(top_srcdir)/config/m4/ac_pkg_swig.m4 \
@@ -730,7 +779,8 @@ am__DEPENDENCIES_1 =
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__DEPENDENCIES_1) libraw.la \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__DEPENDENCIES_1) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__DEPENDENCIES_1) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__DEPENDENCIES_1)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__DEPENDENCIES_1) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(MSPI_SHARED_LIBS)
 am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/geocal_gsl_matrix.cc \
 	@srcsupport@/geocal_gsl_fit.cc @srcsupport@/geocal_gsl_root.cc \
@@ -809,7 +859,8 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srccartlab@/material_detect.cc @srccartlab@/paint_class.cc \
 	@srccartlab@/vicar_ogr.cc @srcgtk@/display_stretch_std_dev.cc \
 	@srcgtk@/geocal_pixbuf.cc \
-	@srcgtk@/raster_image_with_overlay.cc
+	@srcgtk@/raster_image_with_overlay.cc \
+	@srcmspi@/paraxial_transform.cc @srcmspi@/mspi_camera.cc
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_5 = @srcsupport@/libgeocal_la-hdf_file.lo
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_6 = @srcimplementation@/libgeocal_la-geocal_gdal.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_dem.lo \
@@ -821,6 +872,8 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@am__objects_8 = @srcgtk@/libgeocal_la-display_stretch_std_dev.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/libgeocal_la-geocal_pixbuf.lo \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@	@srcgtk@/libgeocal_la-raster_image_with_overlay.lo
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__objects_9 = @srcmspi@/libgeocal_la-paraxial_transform.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@	@srcmspi@/libgeocal_la-mspi_camera.lo
 @BUILD_AFIDS_PYTHON_TRUE@am_libgeocal_la_OBJECTS = @srcsupport@/boost/libgeocal_la-backtrace.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-geocal_gsl_matrix.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/libgeocal_la-geocal_gsl_fit.lo \
@@ -914,12 +967,104 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-doughnut_average.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-material_detect.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/libgeocal_la-paint_class.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_7) $(am__objects_8)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_7) $(am__objects_8) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_9)
 libgeocal_la_OBJECTS = $(am_libgeocal_la_OBJECTS)
 libgeocal_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(libgeocal_la_LDFLAGS) $(LDFLAGS) -o $@
 @BUILD_AFIDS_PYTHON_TRUE@am_libgeocal_la_rpath = -rpath $(libdir)
+libmspi_shared_la_LIBADD =
+am__libmspi_shared_la_SOURCES_DIST =  \
+	@srcmspishared@/Support/src/auto_remove_temp_dir.cc \
+	@srcmspishared@/Support/src/projection_information.cc \
+	@srcmspishared@/Support/src/scaled_double.cc \
+	@srcmspishared@/Support/src/box_region_coor.cc \
+	@srcmspishared@/Support/src/time_converter.cc \
+	@srcmspishared@/Support/src/map_information.cc \
+	@srcmspishared@/UnitTest/src/float_comparator.cc \
+	@srcmspishared@/UnitTest/src/double_comparator.cc \
+	@srcmspishared@/UnitTest/src/check.cc \
+	@srcmspishared@/File/L1B1File/src/l1b1_reader.cc \
+	@srcmspishared@/File/L1B1File/src/l1b1_file.cc \
+	@srcmspishared@/File/L1B2File/src/l1b2_file.cc \
+	@srcmspishared@/File/FieldMap/src/hdf4_l1b2_field_map.cc \
+	@srcmspishared@/File/FieldMap/src/hdf5_l1b1_field_map.cc \
+	@srcmspishared@/File/FieldMap/src/configured_field_map.cc \
+	@srcmspishared@/File/FieldMap/src/hdf4_l1b1_field_map.cc \
+	@srcmspishared@/File/FieldMap/src/field_map.cc \
+	@srcmspishared@/File/FieldMap/src/hdf5_l1b2_field_map.cc \
+	@srcmspishared@/File/L1AFile/src/frame_info.cc \
+	@srcmspishared@/File/L1AFile/src/l1a_file.cc \
+	@srcmspishared@/File/Geotiff/src/geotiff_file.cc \
+	@srcmspishared@/File/Table/src/row_table.cc \
+	@srcmspishared@/File/Table/src/band_table.cc \
+	@srcmspishared@/File/Table/src/polygon_table.cc \
+	@srcmspishared@/File/hdf4/L1B1File/src/l1b1_file.cc \
+	@srcmspishared@/File/hdf4/L1B2File/src/l1b2_file.cc \
+	@srcmspishared@/File/hdf4/L1AFile/src/l1a_file.cc \
+	@srcmspishared@/File/hdf4/Table/src/row_table.cc \
+	@srcmspishared@/File/hdf4/Table/src/band_table.cc \
+	@srcmspishared@/File/hdf4/Table/src/polygon_table.cc \
+	@srcmspishared@/File/FileHandle/src/hdfeos5_file_handle.cc \
+	@srcmspishared@/File/FileHandle/src/hdfeos2_file_handle.cc \
+	@srcmspishared@/File/Ancillary/src/rdqi.cc \
+	@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc \
+	@srcmspishared@/File/Meta/src/hdf4_meta.cc \
+	@srcmspishared@/File/Meta/src/hdf5_meta.cc \
+	@srcmspishared@/File/Meta/src/meta.cc \
+	@srcmspishared@/ErrorHandling/src/exception.cc \
+	@srcmspishared@/Config/src/name_value_parser.cc \
+	@srcmspishared@/Config/src/config_file.cc \
+	@srcmspishared@/Config/src/config_table.cc
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@am_libmspi_shared_la_OBJECTS = @srcmspishared@/Support/src/libmspi_shared_la-auto_remove_temp_dir.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/libmspi_shared_la-projection_information.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/libmspi_shared_la-scaled_double.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/libmspi_shared_la-box_region_coor.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/libmspi_shared_la-time_converter.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/libmspi_shared_la-map_information.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/UnitTest/src/libmspi_shared_la-float_comparator.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/UnitTest/src/libmspi_shared_la-double_comparator.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/UnitTest/src/libmspi_shared_la-check.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_reader.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_file.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1B2File/src/libmspi_shared_la-l1b2_file.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b2_field_map.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b1_field_map.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/libmspi_shared_la-configured_field_map.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b1_field_map.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/libmspi_shared_la-field_map.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b2_field_map.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1AFile/src/libmspi_shared_la-frame_info.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1AFile/src/libmspi_shared_la-l1a_file.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Geotiff/src/libmspi_shared_la-geotiff_file.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Table/src/libmspi_shared_la-row_table.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Table/src/libmspi_shared_la-band_table.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Table/src/libmspi_shared_la-polygon_table.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/L1B1File/src/libmspi_shared_la-l1b1_file.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/L1B2File/src/libmspi_shared_la-l1b2_file.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/L1AFile/src/libmspi_shared_la-l1a_file.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-row_table.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-band_table.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-polygon_table.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos5_file_handle.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos2_file_handle.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Ancillary/src/libmspi_shared_la-rdqi.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Meta/src/libmspi_shared_la-hdf4_meta.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Meta/src/libmspi_shared_la-hdf5_meta.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/ErrorHandling/src/libmspi_shared_la-exception.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Config/src/libmspi_shared_la-name_value_parser.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Config/src/libmspi_shared_la-config_file.lo \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Config/src/libmspi_shared_la-config_table.lo
+libmspi_shared_la_OBJECTS = $(am_libmspi_shared_la_OBJECTS)
+libmspi_shared_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(AM_CXXFLAGS) $(CXXFLAGS) $(libmspi_shared_la_LDFLAGS) \
+	$(LDFLAGS) -o $@
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@am_libmspi_shared_la_rpath =  \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	-rpath $(libdir)
 libraw_la_LIBADD =
 am__libraw_la_SOURCES_DIST = @srcraw@/dcraw_common.cpp \
 	@srcraw@/dcraw_fileio.cpp @srcraw@/foveon.cpp \
@@ -1023,16 +1168,20 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 	@srccartlab@/pos_export_orbit_test.cc \
 	@srccartlab@/doughnut_average_test.cc \
 	@srccartlab@/material_detect_test.cc \
+	@srcmspi@/paraxial_transform_test.cc \
+	@srcmspi@/mspi_camera_test.cc \
 	afids_python/geocal/lib/test_all.cc
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_9 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_10 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_10 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_11 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-geocal_gdal_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_dem_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-image_point_display_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_11 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_12 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_12 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_13 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__objects_14 = @srcmspi@/geocal_test_all-paraxial_transform_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@	@srcmspi@/geocal_test_all-mspi_camera_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@am_geocal_test_all_OBJECTS = @srcsupport@/geocal_test_all-global_fixture.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-global_fixture_default.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-geocal_exception_test.$(OBJEXT) \
@@ -1049,7 +1198,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-covariance_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-statistic_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_test_all-geocal_fftw_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_9) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_10) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-memory_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-sub_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-ground_coordinate_test.$(OBJEXT) \
@@ -1072,7 +1221,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-geocal_rpc_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-rpc_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_test_all-ipi_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_10) $(am__objects_11) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_11) $(am__objects_12) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-spice_helper_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-sdp_helper_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-did_datum_test.$(OBJEXT) \
@@ -1102,7 +1251,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-igc_image_to_image_match_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-surface_image_to_image_match_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-dem_match_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_12) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_13) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_camera_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_orbit_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-ibis_file_test.$(OBJEXT) \
@@ -1122,6 +1271,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-pos_export_orbit_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-doughnut_average_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-material_detect_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_14) \
 @BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/lib/geocal_test_all-test_all.$(OBJEXT)
 geocal_test_all_OBJECTS = $(am_geocal_test_all_OBJECTS)
 @BUILD_AFIDS_PYTHON_TRUE@geocal_test_all_DEPENDENCIES = libgeocal.la \
@@ -1205,9 +1355,12 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(_swig_wrap_la_SOURCES) $(libgeocal_la_SOURCES) \
-	$(libraw_la_SOURCES) $(geocal_test_all_SOURCES)
+	$(libmspi_shared_la_SOURCES) $(libraw_la_SOURCES) \
+	$(geocal_test_all_SOURCES)
 DIST_SOURCES = $(am___swig_wrap_la_SOURCES_DIST) \
-	$(am__libgeocal_la_SOURCES_DIST) $(am__libraw_la_SOURCES_DIST) \
+	$(am__libgeocal_la_SOURCES_DIST) \
+	$(am__libmspi_shared_la_SOURCES_DIST) \
+	$(am__libraw_la_SOURCES_DIST) \
 	$(am__geocal_test_all_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
@@ -1243,7 +1396,7 @@ am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/shape_file.py \
 	@srcpythonlib@/gdal_to_erdas_file.py \
 	@srcpythonlib@/mmap_file.py @srcpythonlib@/raster_tile.py \
-	@srcpythonlib@/tre_amt_struct.py
+	@srcpythonlib@/pleides_rpc.py @srcpythonlib@/tre_amt_struct.py
 am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 am__pep3147_tweak = \
   sed -e 's|\.py$$||' -e 's|[^/]*$$|__pycache__/&.*.py|'
@@ -1364,7 +1517,8 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srccartlab@/doughnut_average.h @srccartlab@/material_detect.h \
 	@srccartlab@/paint_class.h @srccartlab@/vicar_ogr.h \
 	@srcgtk@/display_stretch.h @srcgtk@/display_stretch_std_dev.h \
-	@srcgtk@/geocal_pixbuf.h @srcgtk@/raster_image_with_overlay.h
+	@srcgtk@/geocal_pixbuf.h @srcgtk@/raster_image_with_overlay.h \
+	@srcmspi@/paraxial_transform.h @srcmspi@/mspi_camera.h
 am__libraw_HEADERS_DIST = @srcraw@/libraw.h @srcraw@/libraw_alloc.h \
 	@srcraw@/libraw_const.h @srcraw@/libraw_datastream.h \
 	@srcraw@/libraw_internal.h @srcraw@/libraw_internal_funcs.h \
@@ -1665,10 +1819,16 @@ GEOS_LIBS = @GEOS_LIBS@
 GREP = @GREP@
 GSL_CFLAGS = @GSL_CFLAGS@
 GSL_LIBS = @GSL_LIBS@
+HDF4_CFLAGS = @HDF4_CFLAGS@
+HDF4_LIBS = @HDF4_LIBS@
 HDF5HOME = @HDF5HOME@
 HDF5_BIN = @HDF5_BIN@
 HDF5_CFLAGS = @HDF5_CFLAGS@
 HDF5_LIBS = @HDF5_LIBS@
+HDFEOS5_CFLAGS = @HDFEOS5_CFLAGS@
+HDFEOS5_LIBS = @HDFEOS5_LIBS@
+HDFEOS_CFLAGS = @HDFEOS_CFLAGS@
+HDFEOS_LIBS = @HDFEOS_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -1807,6 +1967,7 @@ srcimplementation = @srcimplementation@
 srcinterface = @srcinterface@
 srcmisr = @srcmisr@
 srcmspi = @srcmspi@
+srcmspishared = @srcmspishared@
 srcpython = @srcpython@
 srcpythonbin = @srcpythonbin@
 srcpythonlib = @srcpythonlib@
@@ -1832,15 +1993,17 @@ ACLOCAL_AMFLAGS = -I config/m4
 noop = 
 
 # Build these up as we go
-lib_LTLIBRARIES = $(am__append_28)
+lib_LTLIBRARIES = $(am__append_8) $(am__append_37)
 noinst_LTLIBRARIES = $(am__append_7)
-dist_bin_SCRIPTS = $(am__append_36)
+dist_bin_SCRIPTS = $(am__append_45)
 AM_LDFLAGS = 
-BUILT_SOURCES = $(am__append_27) $(am__append_30)
+BUILT_SOURCES = complain_if_afids $(am__append_36) $(am__append_39)
 include_HEADERS = 
-EXTRA_DIST = $(am__append_5) $(am__append_32) $(am__append_38)
+EXTRA_DIST = $(am__append_5) $(am__append_9) $(am__append_11) \
+	$(am__append_41) $(am__append_47)
 pkgconfig_DATA = 
-AM_CPPFLAGS = $(am__append_6) $(am__append_25) $(am__append_26)
+AM_CPPFLAGS = $(am__append_6) $(am__append_10) $(am__append_16) \
+	$(am__append_30) $(am__append_34) $(am__append_35)
 
 #=================================================================
 # Some flags needed for GCC compilers.
@@ -1856,11 +2019,11 @@ AM_CPPFLAGS = $(am__append_6) $(am__append_25) $(am__append_26)
 
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
-INSTALL_DATA_HOOK = $(am__append_33)
-UNINSTALL_HOOK = $(am__append_34) $(am__append_39)
-CLEAN_HOOK = $(am__append_31) $(am__append_35)
-INSTALLCHECK_HOOK = $(am__append_40)
-TESTS = $(am__append_29)
+INSTALL_DATA_HOOK = $(am__append_42)
+UNINSTALL_HOOK = $(am__append_43) $(am__append_48)
+CLEAN_HOOK = $(am__append_40) $(am__append_44)
+INSTALLCHECK_HOOK = $(am__append_49)
+TESTS = $(am__append_38)
 check_PROGRAM = 
 check_DATA = 
 
@@ -1876,7 +2039,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/covariance.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/statistic.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_fftw.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_9) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_13) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/sub_raster_image.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image_multi_band.cc \
@@ -1937,7 +2100,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/refraction.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ray_intersect.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_14) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_19) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/spice_helper.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/sdp_helper.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_camera.cc \
@@ -1961,7 +2124,8 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/doughnut_average.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/material_detect.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/paint_class.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_20) $(am__append_23)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_25) $(am__append_28) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_32)
 
 # Files that contain SWIG wrapper information.
 
@@ -1985,7 +2149,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/geocal_gsl_root_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/geocal_time_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/tiled_file_wrap.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_10) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_14) \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/image_coordinate_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/look_vector_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/ground_coordinate_wrap.cc \
@@ -2048,7 +2212,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/location_to_file_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/ray_intersect_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/dem_match_wrap.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_17) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_22) \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/memory_multi_band_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/spice_helper_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/raw_raster_image_wrap.cc \
@@ -2064,7 +2228,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/quaternion_camera_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/refraction_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_18) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_23) \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/argus_camera_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/argus_orbit_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/ibis_file_wrap.cc \
@@ -2102,7 +2266,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	$(BOOST_DATETIME_LIB) $(BLITZ_LIBS) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_3) $(GSL_LIBS) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(FFTW_LIBS) $(SDP_LDFLAGS) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_24)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_29)
 @BUILD_AFIDS_PYTHON_TRUE@SWIG_FLAG = -O
 @BUILD_AFIDS_PYTHON_TRUE@geocalincdir = @includedir@/geocal
 
@@ -2131,7 +2295,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/covariance.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/statistic.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_fftw.h \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_8) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_12) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image_variable.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/sub_raster_image.h \
@@ -2209,7 +2373,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/orbit_data_image_ground_connection.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ray_intersect.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match.h \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_12) $(am__append_13) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_17) $(am__append_18) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/spice_helper.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/sdp_helper.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_camera.h \
@@ -2234,7 +2398,8 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/doughnut_average.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/material_detect.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/paint_class.h \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_19) $(am__append_22)
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_24) $(am__append_27) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_31)
 # Test files
 @BUILD_AFIDS_PYTHON_TRUE@geocal_test_all_SOURCES =  \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/global_fixture.cc \
@@ -2253,7 +2418,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/covariance_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/statistic_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcsupport@/geocal_fftw_test.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_11) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_15) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/memory_raster_image_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/sub_raster_image_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ground_coordinate_test.cc \
@@ -2276,7 +2441,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geocal_rpc_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/rpc_image_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ipi_test.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_15) $(am__append_16) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_20) $(am__append_21) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/spice_helper_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/sdp_helper_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/did_datum_test.cc \
@@ -2306,7 +2471,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/igc_image_to_image_match_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/surface_image_to_image_match_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match_test.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_21) \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_26) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_camera_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_orbit_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/ibis_file_test.cc \
@@ -2326,6 +2491,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/pos_export_orbit_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/doughnut_average_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/material_detect_test.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_33) \
 @BUILD_AFIDS_PYTHON_TRUE@	afids_python/geocal/lib/test_all.cc
 @BUILD_AFIDS_PYTHON_TRUE@libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) \
@@ -2388,6 +2554,60 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcraw@/libraw_defines.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcraw@/var_defines.h
 @BUILD_AFIDS_PYTHON_TRUE@libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@MSPI_SHARED_LIBS = libmspi_shared.la
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@libmspi_shared_la_LDFLAGS =  \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	$(HDFEOS_LIBS) \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	$(HDF4_LIBS) \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	$(HDFEOS5_LIBS) \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	$(HDF5_LIBS) -R \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	$(BOOST_LIBDIR) \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	-L$(BOOST_LIBDIR) \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	-lboost_filesystem
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@libmspi_shared_la_CPPFLAGS = -I$(srcdir)/@srcmspishared@ \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	$(HDFEOS_CFLAGS) \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	$(HDFEOS5_CFLAGS) \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	$(GDAL_CFLAGS)
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@libmspi_shared_la_SOURCES = @srcmspishared@/Support/src/auto_remove_temp_dir.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/projection_information.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/scaled_double.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/box_region_coor.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/time_converter.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Support/src/map_information.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/UnitTest/src/float_comparator.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/UnitTest/src/double_comparator.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/UnitTest/src/check.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1B1File/src/l1b1_reader.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1B1File/src/l1b1_file.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1B2File/src/l1b2_file.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/hdf4_l1b2_field_map.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/hdf5_l1b1_field_map.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/configured_field_map.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/hdf4_l1b1_field_map.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/field_map.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FieldMap/src/hdf5_l1b2_field_map.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1AFile/src/frame_info.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/L1AFile/src/l1a_file.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Geotiff/src/geotiff_file.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Table/src/row_table.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Table/src/band_table.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Table/src/polygon_table.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/L1B1File/src/l1b1_file.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/L1B2File/src/l1b2_file.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/L1AFile/src/l1a_file.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/Table/src/row_table.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/Table/src/band_table.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/hdf4/Table/src/polygon_table.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FileHandle/src/hdfeos5_file_handle.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/FileHandle/src/hdfeos2_file_handle.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Ancillary/src/rdqi.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Meta/src/hdf4_meta.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Meta/src/hdf5_meta.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/File/Meta/src/meta.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/ErrorHandling/src/exception.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Config/src/name_value_parser.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Config/src/config_file.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@BUILD_MSPI_TRUE@	@srcmspishared@/Config/src/config_table.cc
 @BUILD_AFIDS_PYTHON_TRUE@pkgpythonswigdir = @pythondir@/geocal
 @BUILD_AFIDS_PYTHON_TRUE@pkgpythonswig_PYTHON =  \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonswigsrc@/__init__.py \
@@ -2409,7 +2629,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/swig_wrap.cc
 @BUILD_AFIDS_PYTHON_TRUE@libgeocal_la_LIBADD = $(CARTO_LIBS) libraw.la \
 @BUILD_AFIDS_PYTHON_TRUE@	$(VICAR_RTL_LIBS) $(FLIBS) \
-@BUILD_AFIDS_PYTHON_TRUE@	$(SPICE_LIBS)
+@BUILD_AFIDS_PYTHON_TRUE@	$(SPICE_LIBS) $(MSPI_SHARED_LIBS)
 @BUILD_AFIDS_PYTHON_TRUE@geocal_test_all_LDADD = libgeocal.la \
 @BUILD_AFIDS_PYTHON_TRUE@	$(CARTO_LIBS) libraw.la \
 @BUILD_AFIDS_PYTHON_TRUE@	$(VICAR_RTL_LIBS) $(SPICE_LIBS) \
@@ -2464,7 +2684,8 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/gdal_to_erdas_file.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/mmap_file.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/raster_tile.py \
-@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_37)
+@BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/pleides_rpc.py \
+@BUILD_AFIDS_PYTHON_TRUE@	$(am__append_46)
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
@@ -2478,7 +2699,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Mspi/mspi.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/thirdparty/mspi_shared/mspi_shared.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/lib/Mspi/mspi.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -2501,7 +2722,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
-$(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Mspi/mspi.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am:
+$(srcdir)/common.am $(srcdir)/afids_python.am $(srcdir)/afids_python/geocal/geocal.am $(srcdir)/afids_python/geocal/thirdparty/thirdparty.am $(srcdir)/afids_python/geocal/thirdparty/libsdbx/sdbx.am $(srcdir)/afids_python/geocal/thirdparty/libraw/libraw.am $(srcdir)/afids_python/geocal/thirdparty/mspi_shared/mspi_shared.am $(srcdir)/afids_python/geocal/lib/geocal.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/afids_python/geocal/lib/CartLab/cart_lab.am $(srcdir)/afids_python/geocal/lib/Misr/misr.am $(srcdir)/afids_python/geocal/lib/Gtk/gtk.am $(srcdir)/afids_python/geocal/lib/Mspi/mspi.am $(srcdir)/afids_python/geocal/bindings/python/python.am $(srcdir)/afids_python/geocal/unit_test_data/unit_test_data.am $(srcdir)/afids_python/python/python.am $(srcdir)/afids_python/python/bin/bin.am $(srcdir)/afids_python/python/lib/lib.am $(srcdir)/afids_python/python/doc/doc_python.am $(srcdir)/afids_python/python/unit_test_data/unit_test_data.am $(srcdir)/afids_python/script/script.am:
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -3178,8 +3399,245 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcgtk@/$(DEPDIR)/$(am__dirstamp)
 @srcgtk@/libgeocal_la-raster_image_with_overlay.lo:  \
 	@srcgtk@/$(am__dirstamp) @srcgtk@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspi@
+	@: > @srcmspi@/$(am__dirstamp)
+@srcmspi@/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspi@/$(DEPDIR)
+	@: > @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/libgeocal_la-paraxial_transform.lo:  \
+	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/libgeocal_la-mspi_camera.lo: @srcmspi@/$(am__dirstamp) \
+	@srcmspi@/$(DEPDIR)/$(am__dirstamp)
 libgeocal.la: $(libgeocal_la_OBJECTS) $(libgeocal_la_DEPENDENCIES) $(EXTRA_libgeocal_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libgeocal_la_LINK) $(am_libgeocal_la_rpath) $(libgeocal_la_OBJECTS) $(libgeocal_la_LIBADD) $(LIBS)
+@srcmspishared@/Support/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/Support/src
+	@: > @srcmspishared@/Support/src/$(am__dirstamp)
+@srcmspishared@/Support/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/Support/src/$(DEPDIR)
+	@: > @srcmspishared@/Support/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/Support/src/libmspi_shared_la-auto_remove_temp_dir.lo:  \
+	@srcmspishared@/Support/src/$(am__dirstamp) \
+	@srcmspishared@/Support/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/Support/src/libmspi_shared_la-projection_information.lo:  \
+	@srcmspishared@/Support/src/$(am__dirstamp) \
+	@srcmspishared@/Support/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/Support/src/libmspi_shared_la-scaled_double.lo:  \
+	@srcmspishared@/Support/src/$(am__dirstamp) \
+	@srcmspishared@/Support/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/Support/src/libmspi_shared_la-box_region_coor.lo:  \
+	@srcmspishared@/Support/src/$(am__dirstamp) \
+	@srcmspishared@/Support/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/Support/src/libmspi_shared_la-time_converter.lo:  \
+	@srcmspishared@/Support/src/$(am__dirstamp) \
+	@srcmspishared@/Support/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/Support/src/libmspi_shared_la-map_information.lo:  \
+	@srcmspishared@/Support/src/$(am__dirstamp) \
+	@srcmspishared@/Support/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/UnitTest/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/UnitTest/src
+	@: > @srcmspishared@/UnitTest/src/$(am__dirstamp)
+@srcmspishared@/UnitTest/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/UnitTest/src/$(DEPDIR)
+	@: > @srcmspishared@/UnitTest/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/UnitTest/src/libmspi_shared_la-float_comparator.lo:  \
+	@srcmspishared@/UnitTest/src/$(am__dirstamp) \
+	@srcmspishared@/UnitTest/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/UnitTest/src/libmspi_shared_la-double_comparator.lo:  \
+	@srcmspishared@/UnitTest/src/$(am__dirstamp) \
+	@srcmspishared@/UnitTest/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/UnitTest/src/libmspi_shared_la-check.lo:  \
+	@srcmspishared@/UnitTest/src/$(am__dirstamp) \
+	@srcmspishared@/UnitTest/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/L1B1File/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/L1B1File/src
+	@: > @srcmspishared@/File/L1B1File/src/$(am__dirstamp)
+@srcmspishared@/File/L1B1File/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/L1B1File/src/$(DEPDIR)
+	@: > @srcmspishared@/File/L1B1File/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_reader.lo:  \
+	@srcmspishared@/File/L1B1File/src/$(am__dirstamp) \
+	@srcmspishared@/File/L1B1File/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_file.lo:  \
+	@srcmspishared@/File/L1B1File/src/$(am__dirstamp) \
+	@srcmspishared@/File/L1B1File/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/L1B2File/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/L1B2File/src
+	@: > @srcmspishared@/File/L1B2File/src/$(am__dirstamp)
+@srcmspishared@/File/L1B2File/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/L1B2File/src/$(DEPDIR)
+	@: > @srcmspishared@/File/L1B2File/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/L1B2File/src/libmspi_shared_la-l1b2_file.lo:  \
+	@srcmspishared@/File/L1B2File/src/$(am__dirstamp) \
+	@srcmspishared@/File/L1B2File/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/FieldMap/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/FieldMap/src
+	@: > @srcmspishared@/File/FieldMap/src/$(am__dirstamp)
+@srcmspishared@/File/FieldMap/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/FieldMap/src/$(DEPDIR)
+	@: > @srcmspishared@/File/FieldMap/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b2_field_map.lo:  \
+	@srcmspishared@/File/FieldMap/src/$(am__dirstamp) \
+	@srcmspishared@/File/FieldMap/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b1_field_map.lo:  \
+	@srcmspishared@/File/FieldMap/src/$(am__dirstamp) \
+	@srcmspishared@/File/FieldMap/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-configured_field_map.lo:  \
+	@srcmspishared@/File/FieldMap/src/$(am__dirstamp) \
+	@srcmspishared@/File/FieldMap/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b1_field_map.lo:  \
+	@srcmspishared@/File/FieldMap/src/$(am__dirstamp) \
+	@srcmspishared@/File/FieldMap/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-field_map.lo:  \
+	@srcmspishared@/File/FieldMap/src/$(am__dirstamp) \
+	@srcmspishared@/File/FieldMap/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b2_field_map.lo:  \
+	@srcmspishared@/File/FieldMap/src/$(am__dirstamp) \
+	@srcmspishared@/File/FieldMap/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/L1AFile/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/L1AFile/src
+	@: > @srcmspishared@/File/L1AFile/src/$(am__dirstamp)
+@srcmspishared@/File/L1AFile/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/L1AFile/src/$(DEPDIR)
+	@: > @srcmspishared@/File/L1AFile/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/L1AFile/src/libmspi_shared_la-frame_info.lo:  \
+	@srcmspishared@/File/L1AFile/src/$(am__dirstamp) \
+	@srcmspishared@/File/L1AFile/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/L1AFile/src/libmspi_shared_la-l1a_file.lo:  \
+	@srcmspishared@/File/L1AFile/src/$(am__dirstamp) \
+	@srcmspishared@/File/L1AFile/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Geotiff/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/Geotiff/src
+	@: > @srcmspishared@/File/Geotiff/src/$(am__dirstamp)
+@srcmspishared@/File/Geotiff/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/Geotiff/src/$(DEPDIR)
+	@: > @srcmspishared@/File/Geotiff/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Geotiff/src/libmspi_shared_la-geotiff_file.lo:  \
+	@srcmspishared@/File/Geotiff/src/$(am__dirstamp) \
+	@srcmspishared@/File/Geotiff/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Table/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/Table/src
+	@: > @srcmspishared@/File/Table/src/$(am__dirstamp)
+@srcmspishared@/File/Table/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/Table/src/$(DEPDIR)
+	@: > @srcmspishared@/File/Table/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Table/src/libmspi_shared_la-row_table.lo:  \
+	@srcmspishared@/File/Table/src/$(am__dirstamp) \
+	@srcmspishared@/File/Table/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Table/src/libmspi_shared_la-band_table.lo:  \
+	@srcmspishared@/File/Table/src/$(am__dirstamp) \
+	@srcmspishared@/File/Table/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Table/src/libmspi_shared_la-polygon_table.lo:  \
+	@srcmspishared@/File/Table/src/$(am__dirstamp) \
+	@srcmspishared@/File/Table/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/hdf4/L1B1File/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/hdf4/L1B1File/src
+	@: > @srcmspishared@/File/hdf4/L1B1File/src/$(am__dirstamp)
+@srcmspishared@/File/hdf4/L1B1File/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/hdf4/L1B1File/src/$(DEPDIR)
+	@: > @srcmspishared@/File/hdf4/L1B1File/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/hdf4/L1B1File/src/libmspi_shared_la-l1b1_file.lo:  \
+	@srcmspishared@/File/hdf4/L1B1File/src/$(am__dirstamp) \
+	@srcmspishared@/File/hdf4/L1B1File/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/hdf4/L1B2File/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/hdf4/L1B2File/src
+	@: > @srcmspishared@/File/hdf4/L1B2File/src/$(am__dirstamp)
+@srcmspishared@/File/hdf4/L1B2File/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/hdf4/L1B2File/src/$(DEPDIR)
+	@: > @srcmspishared@/File/hdf4/L1B2File/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/hdf4/L1B2File/src/libmspi_shared_la-l1b2_file.lo:  \
+	@srcmspishared@/File/hdf4/L1B2File/src/$(am__dirstamp) \
+	@srcmspishared@/File/hdf4/L1B2File/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/hdf4/L1AFile/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/hdf4/L1AFile/src
+	@: > @srcmspishared@/File/hdf4/L1AFile/src/$(am__dirstamp)
+@srcmspishared@/File/hdf4/L1AFile/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/hdf4/L1AFile/src/$(DEPDIR)
+	@: > @srcmspishared@/File/hdf4/L1AFile/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/hdf4/L1AFile/src/libmspi_shared_la-l1a_file.lo:  \
+	@srcmspishared@/File/hdf4/L1AFile/src/$(am__dirstamp) \
+	@srcmspishared@/File/hdf4/L1AFile/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/hdf4/Table/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/hdf4/Table/src
+	@: > @srcmspishared@/File/hdf4/Table/src/$(am__dirstamp)
+@srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)
+	@: > @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-row_table.lo:  \
+	@srcmspishared@/File/hdf4/Table/src/$(am__dirstamp) \
+	@srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-band_table.lo:  \
+	@srcmspishared@/File/hdf4/Table/src/$(am__dirstamp) \
+	@srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-polygon_table.lo:  \
+	@srcmspishared@/File/hdf4/Table/src/$(am__dirstamp) \
+	@srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/FileHandle/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/FileHandle/src
+	@: > @srcmspishared@/File/FileHandle/src/$(am__dirstamp)
+@srcmspishared@/File/FileHandle/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/FileHandle/src/$(DEPDIR)
+	@: > @srcmspishared@/File/FileHandle/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos5_file_handle.lo:  \
+	@srcmspishared@/File/FileHandle/src/$(am__dirstamp) \
+	@srcmspishared@/File/FileHandle/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos2_file_handle.lo:  \
+	@srcmspishared@/File/FileHandle/src/$(am__dirstamp) \
+	@srcmspishared@/File/FileHandle/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Ancillary/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/Ancillary/src
+	@: > @srcmspishared@/File/Ancillary/src/$(am__dirstamp)
+@srcmspishared@/File/Ancillary/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/Ancillary/src/$(DEPDIR)
+	@: > @srcmspishared@/File/Ancillary/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Ancillary/src/libmspi_shared_la-rdqi.lo:  \
+	@srcmspishared@/File/Ancillary/src/$(am__dirstamp) \
+	@srcmspishared@/File/Ancillary/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo:  \
+	@srcmspishared@/File/Ancillary/src/$(am__dirstamp) \
+	@srcmspishared@/File/Ancillary/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Meta/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/Meta/src
+	@: > @srcmspishared@/File/Meta/src/$(am__dirstamp)
+@srcmspishared@/File/Meta/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/File/Meta/src/$(DEPDIR)
+	@: > @srcmspishared@/File/Meta/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Meta/src/libmspi_shared_la-hdf4_meta.lo:  \
+	@srcmspishared@/File/Meta/src/$(am__dirstamp) \
+	@srcmspishared@/File/Meta/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Meta/src/libmspi_shared_la-hdf5_meta.lo:  \
+	@srcmspishared@/File/Meta/src/$(am__dirstamp) \
+	@srcmspishared@/File/Meta/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo:  \
+	@srcmspishared@/File/Meta/src/$(am__dirstamp) \
+	@srcmspishared@/File/Meta/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/ErrorHandling/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/ErrorHandling/src
+	@: > @srcmspishared@/ErrorHandling/src/$(am__dirstamp)
+@srcmspishared@/ErrorHandling/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/ErrorHandling/src/$(DEPDIR)
+	@: > @srcmspishared@/ErrorHandling/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/ErrorHandling/src/libmspi_shared_la-exception.lo:  \
+	@srcmspishared@/ErrorHandling/src/$(am__dirstamp) \
+	@srcmspishared@/ErrorHandling/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/Config/src/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/Config/src
+	@: > @srcmspishared@/Config/src/$(am__dirstamp)
+@srcmspishared@/Config/src/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspishared@/Config/src/$(DEPDIR)
+	@: > @srcmspishared@/Config/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/Config/src/libmspi_shared_la-name_value_parser.lo:  \
+	@srcmspishared@/Config/src/$(am__dirstamp) \
+	@srcmspishared@/Config/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/Config/src/libmspi_shared_la-config_file.lo:  \
+	@srcmspishared@/Config/src/$(am__dirstamp) \
+	@srcmspishared@/Config/src/$(DEPDIR)/$(am__dirstamp)
+@srcmspishared@/Config/src/libmspi_shared_la-config_table.lo:  \
+	@srcmspishared@/Config/src/$(am__dirstamp) \
+	@srcmspishared@/Config/src/$(DEPDIR)/$(am__dirstamp)
+libmspi_shared.la: $(libmspi_shared_la_OBJECTS) $(libmspi_shared_la_DEPENDENCIES) $(EXTRA_libmspi_shared_la_DEPENDENCIES) 
+	$(AM_V_CXXLD)$(libmspi_shared_la_LINK) $(am_libmspi_shared_la_rpath) $(libmspi_shared_la_OBJECTS) $(libmspi_shared_la_LIBADD) $(LIBS)
 @srcraw@/$(am__dirstamp):
 	@$(MKDIR_P) @srcraw@
 	@: > @srcraw@/$(am__dirstamp)
@@ -3541,6 +3999,10 @@ clean-checkPROGRAMS:
 @srccartlab@/geocal_test_all-material_detect_test.$(OBJEXT):  \
 	@srccartlab@/$(am__dirstamp) \
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/geocal_test_all-paraxial_transform_test.$(OBJEXT):  \
+	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/geocal_test_all-mspi_camera_test.$(OBJEXT):  \
+	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
 afids_python/geocal/lib/$(am__dirstamp):
 	@$(MKDIR_P) afids_python/geocal/lib
 	@: > afids_python/geocal/lib/$(am__dirstamp)
@@ -3634,6 +4096,42 @@ mostlyclean-compile:
 	-rm -f @srcimplementation@/*.lo
 	-rm -f @srcinterface@/*.$(OBJEXT)
 	-rm -f @srcinterface@/*.lo
+	-rm -f @srcmspi@/*.$(OBJEXT)
+	-rm -f @srcmspi@/*.lo
+	-rm -f @srcmspishared@/Config/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/Config/src/*.lo
+	-rm -f @srcmspishared@/ErrorHandling/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/ErrorHandling/src/*.lo
+	-rm -f @srcmspishared@/File/Ancillary/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/Ancillary/src/*.lo
+	-rm -f @srcmspishared@/File/FieldMap/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/FieldMap/src/*.lo
+	-rm -f @srcmspishared@/File/FileHandle/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/FileHandle/src/*.lo
+	-rm -f @srcmspishared@/File/Geotiff/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/Geotiff/src/*.lo
+	-rm -f @srcmspishared@/File/L1AFile/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/L1AFile/src/*.lo
+	-rm -f @srcmspishared@/File/L1B1File/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/L1B1File/src/*.lo
+	-rm -f @srcmspishared@/File/L1B2File/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/L1B2File/src/*.lo
+	-rm -f @srcmspishared@/File/Meta/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/Meta/src/*.lo
+	-rm -f @srcmspishared@/File/Table/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/Table/src/*.lo
+	-rm -f @srcmspishared@/File/hdf4/L1AFile/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/hdf4/L1AFile/src/*.lo
+	-rm -f @srcmspishared@/File/hdf4/L1B1File/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/hdf4/L1B1File/src/*.lo
+	-rm -f @srcmspishared@/File/hdf4/L1B2File/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/hdf4/L1B2File/src/*.lo
+	-rm -f @srcmspishared@/File/hdf4/Table/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/File/hdf4/Table/src/*.lo
+	-rm -f @srcmspishared@/Support/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/Support/src/*.lo
+	-rm -f @srcmspishared@/UnitTest/src/*.$(OBJEXT)
+	-rm -f @srcmspishared@/UnitTest/src/*.lo
 	-rm -f @srcraw@/*.$(OBJEXT)
 	-rm -f @srcraw@/*.lo
 	-rm -f @srcsupport@/*.$(OBJEXT)
@@ -3818,6 +4316,51 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-time_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-paraxial_transform_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-mspi_camera.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-paraxial_transform.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-config_file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-config_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-name_value_parser.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/ErrorHandling/src/$(DEPDIR)/libmspi_shared_la-exception.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-out_of_band_calibration_data.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-rdqi.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-configured_field_map.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-field_map.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf4_l1b1_field_map.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf4_l1b2_field_map.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf5_l1b1_field_map.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf5_l1b2_field_map.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/FileHandle/src/$(DEPDIR)/libmspi_shared_la-hdfeos2_file_handle.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/FileHandle/src/$(DEPDIR)/libmspi_shared_la-hdfeos5_file_handle.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Geotiff/src/$(DEPDIR)/libmspi_shared_la-geotiff_file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/L1AFile/src/$(DEPDIR)/libmspi_shared_la-frame_info.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/L1AFile/src/$(DEPDIR)/libmspi_shared_la-l1a_file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_reader.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/L1B2File/src/$(DEPDIR)/libmspi_shared_la-l1b2_file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-hdf4_meta.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-hdf5_meta.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-meta.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-band_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-polygon_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-row_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/hdf4/L1AFile/src/$(DEPDIR)/libmspi_shared_la-l1a_file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/hdf4/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/hdf4/L1B2File/src/$(DEPDIR)/libmspi_shared_la-l1b2_file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-band_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-polygon_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-row_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-auto_remove_temp_dir.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-box_region_coor.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-map_information.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-projection_information.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-scaled_double.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-time_converter.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-check.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-double_comparator.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-float_comparator.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-dcraw_fileio.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-foveon.Plo@am__quote@
@@ -5581,6 +6124,307 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcgtk@/libgeocal_la-raster_image_with_overlay.lo `test -f '@srcgtk@/raster_image_with_overlay.cc' || echo '$(srcdir)/'`@srcgtk@/raster_image_with_overlay.cc
 
+@srcmspi@/libgeocal_la-paraxial_transform.lo: @srcmspi@/paraxial_transform.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/libgeocal_la-paraxial_transform.lo -MD -MP -MF @srcmspi@/$(DEPDIR)/libgeocal_la-paraxial_transform.Tpo -c -o @srcmspi@/libgeocal_la-paraxial_transform.lo `test -f '@srcmspi@/paraxial_transform.cc' || echo '$(srcdir)/'`@srcmspi@/paraxial_transform.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/libgeocal_la-paraxial_transform.Tpo @srcmspi@/$(DEPDIR)/libgeocal_la-paraxial_transform.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/paraxial_transform.cc' object='@srcmspi@/libgeocal_la-paraxial_transform.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/libgeocal_la-paraxial_transform.lo `test -f '@srcmspi@/paraxial_transform.cc' || echo '$(srcdir)/'`@srcmspi@/paraxial_transform.cc
+
+@srcmspi@/libgeocal_la-mspi_camera.lo: @srcmspi@/mspi_camera.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/libgeocal_la-mspi_camera.lo -MD -MP -MF @srcmspi@/$(DEPDIR)/libgeocal_la-mspi_camera.Tpo -c -o @srcmspi@/libgeocal_la-mspi_camera.lo `test -f '@srcmspi@/mspi_camera.cc' || echo '$(srcdir)/'`@srcmspi@/mspi_camera.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/libgeocal_la-mspi_camera.Tpo @srcmspi@/$(DEPDIR)/libgeocal_la-mspi_camera.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/mspi_camera.cc' object='@srcmspi@/libgeocal_la-mspi_camera.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/libgeocal_la-mspi_camera.lo `test -f '@srcmspi@/mspi_camera.cc' || echo '$(srcdir)/'`@srcmspi@/mspi_camera.cc
+
+@srcmspishared@/Support/src/libmspi_shared_la-auto_remove_temp_dir.lo: @srcmspishared@/Support/src/auto_remove_temp_dir.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/Support/src/libmspi_shared_la-auto_remove_temp_dir.lo -MD -MP -MF @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-auto_remove_temp_dir.Tpo -c -o @srcmspishared@/Support/src/libmspi_shared_la-auto_remove_temp_dir.lo `test -f '@srcmspishared@/Support/src/auto_remove_temp_dir.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/auto_remove_temp_dir.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-auto_remove_temp_dir.Tpo @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-auto_remove_temp_dir.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/Support/src/auto_remove_temp_dir.cc' object='@srcmspishared@/Support/src/libmspi_shared_la-auto_remove_temp_dir.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/Support/src/libmspi_shared_la-auto_remove_temp_dir.lo `test -f '@srcmspishared@/Support/src/auto_remove_temp_dir.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/auto_remove_temp_dir.cc
+
+@srcmspishared@/Support/src/libmspi_shared_la-projection_information.lo: @srcmspishared@/Support/src/projection_information.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/Support/src/libmspi_shared_la-projection_information.lo -MD -MP -MF @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-projection_information.Tpo -c -o @srcmspishared@/Support/src/libmspi_shared_la-projection_information.lo `test -f '@srcmspishared@/Support/src/projection_information.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/projection_information.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-projection_information.Tpo @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-projection_information.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/Support/src/projection_information.cc' object='@srcmspishared@/Support/src/libmspi_shared_la-projection_information.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/Support/src/libmspi_shared_la-projection_information.lo `test -f '@srcmspishared@/Support/src/projection_information.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/projection_information.cc
+
+@srcmspishared@/Support/src/libmspi_shared_la-scaled_double.lo: @srcmspishared@/Support/src/scaled_double.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/Support/src/libmspi_shared_la-scaled_double.lo -MD -MP -MF @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-scaled_double.Tpo -c -o @srcmspishared@/Support/src/libmspi_shared_la-scaled_double.lo `test -f '@srcmspishared@/Support/src/scaled_double.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/scaled_double.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-scaled_double.Tpo @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-scaled_double.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/Support/src/scaled_double.cc' object='@srcmspishared@/Support/src/libmspi_shared_la-scaled_double.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/Support/src/libmspi_shared_la-scaled_double.lo `test -f '@srcmspishared@/Support/src/scaled_double.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/scaled_double.cc
+
+@srcmspishared@/Support/src/libmspi_shared_la-box_region_coor.lo: @srcmspishared@/Support/src/box_region_coor.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/Support/src/libmspi_shared_la-box_region_coor.lo -MD -MP -MF @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-box_region_coor.Tpo -c -o @srcmspishared@/Support/src/libmspi_shared_la-box_region_coor.lo `test -f '@srcmspishared@/Support/src/box_region_coor.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/box_region_coor.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-box_region_coor.Tpo @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-box_region_coor.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/Support/src/box_region_coor.cc' object='@srcmspishared@/Support/src/libmspi_shared_la-box_region_coor.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/Support/src/libmspi_shared_la-box_region_coor.lo `test -f '@srcmspishared@/Support/src/box_region_coor.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/box_region_coor.cc
+
+@srcmspishared@/Support/src/libmspi_shared_la-time_converter.lo: @srcmspishared@/Support/src/time_converter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/Support/src/libmspi_shared_la-time_converter.lo -MD -MP -MF @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-time_converter.Tpo -c -o @srcmspishared@/Support/src/libmspi_shared_la-time_converter.lo `test -f '@srcmspishared@/Support/src/time_converter.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/time_converter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-time_converter.Tpo @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-time_converter.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/Support/src/time_converter.cc' object='@srcmspishared@/Support/src/libmspi_shared_la-time_converter.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/Support/src/libmspi_shared_la-time_converter.lo `test -f '@srcmspishared@/Support/src/time_converter.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/time_converter.cc
+
+@srcmspishared@/Support/src/libmspi_shared_la-map_information.lo: @srcmspishared@/Support/src/map_information.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/Support/src/libmspi_shared_la-map_information.lo -MD -MP -MF @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-map_information.Tpo -c -o @srcmspishared@/Support/src/libmspi_shared_la-map_information.lo `test -f '@srcmspishared@/Support/src/map_information.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/map_information.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-map_information.Tpo @srcmspishared@/Support/src/$(DEPDIR)/libmspi_shared_la-map_information.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/Support/src/map_information.cc' object='@srcmspishared@/Support/src/libmspi_shared_la-map_information.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/Support/src/libmspi_shared_la-map_information.lo `test -f '@srcmspishared@/Support/src/map_information.cc' || echo '$(srcdir)/'`@srcmspishared@/Support/src/map_information.cc
+
+@srcmspishared@/UnitTest/src/libmspi_shared_la-float_comparator.lo: @srcmspishared@/UnitTest/src/float_comparator.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/UnitTest/src/libmspi_shared_la-float_comparator.lo -MD -MP -MF @srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-float_comparator.Tpo -c -o @srcmspishared@/UnitTest/src/libmspi_shared_la-float_comparator.lo `test -f '@srcmspishared@/UnitTest/src/float_comparator.cc' || echo '$(srcdir)/'`@srcmspishared@/UnitTest/src/float_comparator.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-float_comparator.Tpo @srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-float_comparator.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/UnitTest/src/float_comparator.cc' object='@srcmspishared@/UnitTest/src/libmspi_shared_la-float_comparator.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/UnitTest/src/libmspi_shared_la-float_comparator.lo `test -f '@srcmspishared@/UnitTest/src/float_comparator.cc' || echo '$(srcdir)/'`@srcmspishared@/UnitTest/src/float_comparator.cc
+
+@srcmspishared@/UnitTest/src/libmspi_shared_la-double_comparator.lo: @srcmspishared@/UnitTest/src/double_comparator.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/UnitTest/src/libmspi_shared_la-double_comparator.lo -MD -MP -MF @srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-double_comparator.Tpo -c -o @srcmspishared@/UnitTest/src/libmspi_shared_la-double_comparator.lo `test -f '@srcmspishared@/UnitTest/src/double_comparator.cc' || echo '$(srcdir)/'`@srcmspishared@/UnitTest/src/double_comparator.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-double_comparator.Tpo @srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-double_comparator.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/UnitTest/src/double_comparator.cc' object='@srcmspishared@/UnitTest/src/libmspi_shared_la-double_comparator.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/UnitTest/src/libmspi_shared_la-double_comparator.lo `test -f '@srcmspishared@/UnitTest/src/double_comparator.cc' || echo '$(srcdir)/'`@srcmspishared@/UnitTest/src/double_comparator.cc
+
+@srcmspishared@/UnitTest/src/libmspi_shared_la-check.lo: @srcmspishared@/UnitTest/src/check.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/UnitTest/src/libmspi_shared_la-check.lo -MD -MP -MF @srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-check.Tpo -c -o @srcmspishared@/UnitTest/src/libmspi_shared_la-check.lo `test -f '@srcmspishared@/UnitTest/src/check.cc' || echo '$(srcdir)/'`@srcmspishared@/UnitTest/src/check.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-check.Tpo @srcmspishared@/UnitTest/src/$(DEPDIR)/libmspi_shared_la-check.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/UnitTest/src/check.cc' object='@srcmspishared@/UnitTest/src/libmspi_shared_la-check.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/UnitTest/src/libmspi_shared_la-check.lo `test -f '@srcmspishared@/UnitTest/src/check.cc' || echo '$(srcdir)/'`@srcmspishared@/UnitTest/src/check.cc
+
+@srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_reader.lo: @srcmspishared@/File/L1B1File/src/l1b1_reader.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_reader.lo -MD -MP -MF @srcmspishared@/File/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_reader.Tpo -c -o @srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_reader.lo `test -f '@srcmspishared@/File/L1B1File/src/l1b1_reader.cc' || echo '$(srcdir)/'`@srcmspishared@/File/L1B1File/src/l1b1_reader.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_reader.Tpo @srcmspishared@/File/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_reader.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/L1B1File/src/l1b1_reader.cc' object='@srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_reader.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_reader.lo `test -f '@srcmspishared@/File/L1B1File/src/l1b1_reader.cc' || echo '$(srcdir)/'`@srcmspishared@/File/L1B1File/src/l1b1_reader.cc
+
+@srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_file.lo: @srcmspishared@/File/L1B1File/src/l1b1_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_file.lo -MD -MP -MF @srcmspishared@/File/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_file.Tpo -c -o @srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_file.lo `test -f '@srcmspishared@/File/L1B1File/src/l1b1_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/L1B1File/src/l1b1_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_file.Tpo @srcmspishared@/File/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/L1B1File/src/l1b1_file.cc' object='@srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/L1B1File/src/libmspi_shared_la-l1b1_file.lo `test -f '@srcmspishared@/File/L1B1File/src/l1b1_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/L1B1File/src/l1b1_file.cc
+
+@srcmspishared@/File/L1B2File/src/libmspi_shared_la-l1b2_file.lo: @srcmspishared@/File/L1B2File/src/l1b2_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/L1B2File/src/libmspi_shared_la-l1b2_file.lo -MD -MP -MF @srcmspishared@/File/L1B2File/src/$(DEPDIR)/libmspi_shared_la-l1b2_file.Tpo -c -o @srcmspishared@/File/L1B2File/src/libmspi_shared_la-l1b2_file.lo `test -f '@srcmspishared@/File/L1B2File/src/l1b2_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/L1B2File/src/l1b2_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/L1B2File/src/$(DEPDIR)/libmspi_shared_la-l1b2_file.Tpo @srcmspishared@/File/L1B2File/src/$(DEPDIR)/libmspi_shared_la-l1b2_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/L1B2File/src/l1b2_file.cc' object='@srcmspishared@/File/L1B2File/src/libmspi_shared_la-l1b2_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/L1B2File/src/libmspi_shared_la-l1b2_file.lo `test -f '@srcmspishared@/File/L1B2File/src/l1b2_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/L1B2File/src/l1b2_file.cc
+
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b2_field_map.lo: @srcmspishared@/File/FieldMap/src/hdf4_l1b2_field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b2_field_map.lo -MD -MP -MF @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf4_l1b2_field_map.Tpo -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b2_field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/hdf4_l1b2_field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/hdf4_l1b2_field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf4_l1b2_field_map.Tpo @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf4_l1b2_field_map.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/FieldMap/src/hdf4_l1b2_field_map.cc' object='@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b2_field_map.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b2_field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/hdf4_l1b2_field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/hdf4_l1b2_field_map.cc
+
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b1_field_map.lo: @srcmspishared@/File/FieldMap/src/hdf5_l1b1_field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b1_field_map.lo -MD -MP -MF @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf5_l1b1_field_map.Tpo -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b1_field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/hdf5_l1b1_field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/hdf5_l1b1_field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf5_l1b1_field_map.Tpo @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf5_l1b1_field_map.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/FieldMap/src/hdf5_l1b1_field_map.cc' object='@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b1_field_map.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b1_field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/hdf5_l1b1_field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/hdf5_l1b1_field_map.cc
+
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-configured_field_map.lo: @srcmspishared@/File/FieldMap/src/configured_field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/FieldMap/src/libmspi_shared_la-configured_field_map.lo -MD -MP -MF @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-configured_field_map.Tpo -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-configured_field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/configured_field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/configured_field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-configured_field_map.Tpo @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-configured_field_map.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/FieldMap/src/configured_field_map.cc' object='@srcmspishared@/File/FieldMap/src/libmspi_shared_la-configured_field_map.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-configured_field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/configured_field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/configured_field_map.cc
+
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b1_field_map.lo: @srcmspishared@/File/FieldMap/src/hdf4_l1b1_field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b1_field_map.lo -MD -MP -MF @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf4_l1b1_field_map.Tpo -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b1_field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/hdf4_l1b1_field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/hdf4_l1b1_field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf4_l1b1_field_map.Tpo @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf4_l1b1_field_map.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/FieldMap/src/hdf4_l1b1_field_map.cc' object='@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b1_field_map.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf4_l1b1_field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/hdf4_l1b1_field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/hdf4_l1b1_field_map.cc
+
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-field_map.lo: @srcmspishared@/File/FieldMap/src/field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/FieldMap/src/libmspi_shared_la-field_map.lo -MD -MP -MF @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-field_map.Tpo -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-field_map.Tpo @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-field_map.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/FieldMap/src/field_map.cc' object='@srcmspishared@/File/FieldMap/src/libmspi_shared_la-field_map.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/field_map.cc
+
+@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b2_field_map.lo: @srcmspishared@/File/FieldMap/src/hdf5_l1b2_field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b2_field_map.lo -MD -MP -MF @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf5_l1b2_field_map.Tpo -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b2_field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/hdf5_l1b2_field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/hdf5_l1b2_field_map.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf5_l1b2_field_map.Tpo @srcmspishared@/File/FieldMap/src/$(DEPDIR)/libmspi_shared_la-hdf5_l1b2_field_map.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/FieldMap/src/hdf5_l1b2_field_map.cc' object='@srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b2_field_map.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/FieldMap/src/libmspi_shared_la-hdf5_l1b2_field_map.lo `test -f '@srcmspishared@/File/FieldMap/src/hdf5_l1b2_field_map.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FieldMap/src/hdf5_l1b2_field_map.cc
+
+@srcmspishared@/File/L1AFile/src/libmspi_shared_la-frame_info.lo: @srcmspishared@/File/L1AFile/src/frame_info.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/L1AFile/src/libmspi_shared_la-frame_info.lo -MD -MP -MF @srcmspishared@/File/L1AFile/src/$(DEPDIR)/libmspi_shared_la-frame_info.Tpo -c -o @srcmspishared@/File/L1AFile/src/libmspi_shared_la-frame_info.lo `test -f '@srcmspishared@/File/L1AFile/src/frame_info.cc' || echo '$(srcdir)/'`@srcmspishared@/File/L1AFile/src/frame_info.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/L1AFile/src/$(DEPDIR)/libmspi_shared_la-frame_info.Tpo @srcmspishared@/File/L1AFile/src/$(DEPDIR)/libmspi_shared_la-frame_info.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/L1AFile/src/frame_info.cc' object='@srcmspishared@/File/L1AFile/src/libmspi_shared_la-frame_info.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/L1AFile/src/libmspi_shared_la-frame_info.lo `test -f '@srcmspishared@/File/L1AFile/src/frame_info.cc' || echo '$(srcdir)/'`@srcmspishared@/File/L1AFile/src/frame_info.cc
+
+@srcmspishared@/File/L1AFile/src/libmspi_shared_la-l1a_file.lo: @srcmspishared@/File/L1AFile/src/l1a_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/L1AFile/src/libmspi_shared_la-l1a_file.lo -MD -MP -MF @srcmspishared@/File/L1AFile/src/$(DEPDIR)/libmspi_shared_la-l1a_file.Tpo -c -o @srcmspishared@/File/L1AFile/src/libmspi_shared_la-l1a_file.lo `test -f '@srcmspishared@/File/L1AFile/src/l1a_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/L1AFile/src/l1a_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/L1AFile/src/$(DEPDIR)/libmspi_shared_la-l1a_file.Tpo @srcmspishared@/File/L1AFile/src/$(DEPDIR)/libmspi_shared_la-l1a_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/L1AFile/src/l1a_file.cc' object='@srcmspishared@/File/L1AFile/src/libmspi_shared_la-l1a_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/L1AFile/src/libmspi_shared_la-l1a_file.lo `test -f '@srcmspishared@/File/L1AFile/src/l1a_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/L1AFile/src/l1a_file.cc
+
+@srcmspishared@/File/Geotiff/src/libmspi_shared_la-geotiff_file.lo: @srcmspishared@/File/Geotiff/src/geotiff_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Geotiff/src/libmspi_shared_la-geotiff_file.lo -MD -MP -MF @srcmspishared@/File/Geotiff/src/$(DEPDIR)/libmspi_shared_la-geotiff_file.Tpo -c -o @srcmspishared@/File/Geotiff/src/libmspi_shared_la-geotiff_file.lo `test -f '@srcmspishared@/File/Geotiff/src/geotiff_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Geotiff/src/geotiff_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Geotiff/src/$(DEPDIR)/libmspi_shared_la-geotiff_file.Tpo @srcmspishared@/File/Geotiff/src/$(DEPDIR)/libmspi_shared_la-geotiff_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Geotiff/src/geotiff_file.cc' object='@srcmspishared@/File/Geotiff/src/libmspi_shared_la-geotiff_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Geotiff/src/libmspi_shared_la-geotiff_file.lo `test -f '@srcmspishared@/File/Geotiff/src/geotiff_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Geotiff/src/geotiff_file.cc
+
+@srcmspishared@/File/Table/src/libmspi_shared_la-row_table.lo: @srcmspishared@/File/Table/src/row_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Table/src/libmspi_shared_la-row_table.lo -MD -MP -MF @srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-row_table.Tpo -c -o @srcmspishared@/File/Table/src/libmspi_shared_la-row_table.lo `test -f '@srcmspishared@/File/Table/src/row_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Table/src/row_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-row_table.Tpo @srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-row_table.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Table/src/row_table.cc' object='@srcmspishared@/File/Table/src/libmspi_shared_la-row_table.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Table/src/libmspi_shared_la-row_table.lo `test -f '@srcmspishared@/File/Table/src/row_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Table/src/row_table.cc
+
+@srcmspishared@/File/Table/src/libmspi_shared_la-band_table.lo: @srcmspishared@/File/Table/src/band_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Table/src/libmspi_shared_la-band_table.lo -MD -MP -MF @srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-band_table.Tpo -c -o @srcmspishared@/File/Table/src/libmspi_shared_la-band_table.lo `test -f '@srcmspishared@/File/Table/src/band_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Table/src/band_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-band_table.Tpo @srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-band_table.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Table/src/band_table.cc' object='@srcmspishared@/File/Table/src/libmspi_shared_la-band_table.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Table/src/libmspi_shared_la-band_table.lo `test -f '@srcmspishared@/File/Table/src/band_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Table/src/band_table.cc
+
+@srcmspishared@/File/Table/src/libmspi_shared_la-polygon_table.lo: @srcmspishared@/File/Table/src/polygon_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Table/src/libmspi_shared_la-polygon_table.lo -MD -MP -MF @srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-polygon_table.Tpo -c -o @srcmspishared@/File/Table/src/libmspi_shared_la-polygon_table.lo `test -f '@srcmspishared@/File/Table/src/polygon_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Table/src/polygon_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-polygon_table.Tpo @srcmspishared@/File/Table/src/$(DEPDIR)/libmspi_shared_la-polygon_table.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Table/src/polygon_table.cc' object='@srcmspishared@/File/Table/src/libmspi_shared_la-polygon_table.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Table/src/libmspi_shared_la-polygon_table.lo `test -f '@srcmspishared@/File/Table/src/polygon_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Table/src/polygon_table.cc
+
+@srcmspishared@/File/hdf4/L1B1File/src/libmspi_shared_la-l1b1_file.lo: @srcmspishared@/File/hdf4/L1B1File/src/l1b1_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/hdf4/L1B1File/src/libmspi_shared_la-l1b1_file.lo -MD -MP -MF @srcmspishared@/File/hdf4/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_file.Tpo -c -o @srcmspishared@/File/hdf4/L1B1File/src/libmspi_shared_la-l1b1_file.lo `test -f '@srcmspishared@/File/hdf4/L1B1File/src/l1b1_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/L1B1File/src/l1b1_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/hdf4/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_file.Tpo @srcmspishared@/File/hdf4/L1B1File/src/$(DEPDIR)/libmspi_shared_la-l1b1_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/hdf4/L1B1File/src/l1b1_file.cc' object='@srcmspishared@/File/hdf4/L1B1File/src/libmspi_shared_la-l1b1_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/hdf4/L1B1File/src/libmspi_shared_la-l1b1_file.lo `test -f '@srcmspishared@/File/hdf4/L1B1File/src/l1b1_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/L1B1File/src/l1b1_file.cc
+
+@srcmspishared@/File/hdf4/L1B2File/src/libmspi_shared_la-l1b2_file.lo: @srcmspishared@/File/hdf4/L1B2File/src/l1b2_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/hdf4/L1B2File/src/libmspi_shared_la-l1b2_file.lo -MD -MP -MF @srcmspishared@/File/hdf4/L1B2File/src/$(DEPDIR)/libmspi_shared_la-l1b2_file.Tpo -c -o @srcmspishared@/File/hdf4/L1B2File/src/libmspi_shared_la-l1b2_file.lo `test -f '@srcmspishared@/File/hdf4/L1B2File/src/l1b2_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/L1B2File/src/l1b2_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/hdf4/L1B2File/src/$(DEPDIR)/libmspi_shared_la-l1b2_file.Tpo @srcmspishared@/File/hdf4/L1B2File/src/$(DEPDIR)/libmspi_shared_la-l1b2_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/hdf4/L1B2File/src/l1b2_file.cc' object='@srcmspishared@/File/hdf4/L1B2File/src/libmspi_shared_la-l1b2_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/hdf4/L1B2File/src/libmspi_shared_la-l1b2_file.lo `test -f '@srcmspishared@/File/hdf4/L1B2File/src/l1b2_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/L1B2File/src/l1b2_file.cc
+
+@srcmspishared@/File/hdf4/L1AFile/src/libmspi_shared_la-l1a_file.lo: @srcmspishared@/File/hdf4/L1AFile/src/l1a_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/hdf4/L1AFile/src/libmspi_shared_la-l1a_file.lo -MD -MP -MF @srcmspishared@/File/hdf4/L1AFile/src/$(DEPDIR)/libmspi_shared_la-l1a_file.Tpo -c -o @srcmspishared@/File/hdf4/L1AFile/src/libmspi_shared_la-l1a_file.lo `test -f '@srcmspishared@/File/hdf4/L1AFile/src/l1a_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/L1AFile/src/l1a_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/hdf4/L1AFile/src/$(DEPDIR)/libmspi_shared_la-l1a_file.Tpo @srcmspishared@/File/hdf4/L1AFile/src/$(DEPDIR)/libmspi_shared_la-l1a_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/hdf4/L1AFile/src/l1a_file.cc' object='@srcmspishared@/File/hdf4/L1AFile/src/libmspi_shared_la-l1a_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/hdf4/L1AFile/src/libmspi_shared_la-l1a_file.lo `test -f '@srcmspishared@/File/hdf4/L1AFile/src/l1a_file.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/L1AFile/src/l1a_file.cc
+
+@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-row_table.lo: @srcmspishared@/File/hdf4/Table/src/row_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-row_table.lo -MD -MP -MF @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-row_table.Tpo -c -o @srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-row_table.lo `test -f '@srcmspishared@/File/hdf4/Table/src/row_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/Table/src/row_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-row_table.Tpo @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-row_table.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/hdf4/Table/src/row_table.cc' object='@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-row_table.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-row_table.lo `test -f '@srcmspishared@/File/hdf4/Table/src/row_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/Table/src/row_table.cc
+
+@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-band_table.lo: @srcmspishared@/File/hdf4/Table/src/band_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-band_table.lo -MD -MP -MF @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-band_table.Tpo -c -o @srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-band_table.lo `test -f '@srcmspishared@/File/hdf4/Table/src/band_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/Table/src/band_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-band_table.Tpo @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-band_table.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/hdf4/Table/src/band_table.cc' object='@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-band_table.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-band_table.lo `test -f '@srcmspishared@/File/hdf4/Table/src/band_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/Table/src/band_table.cc
+
+@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-polygon_table.lo: @srcmspishared@/File/hdf4/Table/src/polygon_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-polygon_table.lo -MD -MP -MF @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-polygon_table.Tpo -c -o @srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-polygon_table.lo `test -f '@srcmspishared@/File/hdf4/Table/src/polygon_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/Table/src/polygon_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-polygon_table.Tpo @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/libmspi_shared_la-polygon_table.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/hdf4/Table/src/polygon_table.cc' object='@srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-polygon_table.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/hdf4/Table/src/libmspi_shared_la-polygon_table.lo `test -f '@srcmspishared@/File/hdf4/Table/src/polygon_table.cc' || echo '$(srcdir)/'`@srcmspishared@/File/hdf4/Table/src/polygon_table.cc
+
+@srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos5_file_handle.lo: @srcmspishared@/File/FileHandle/src/hdfeos5_file_handle.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos5_file_handle.lo -MD -MP -MF @srcmspishared@/File/FileHandle/src/$(DEPDIR)/libmspi_shared_la-hdfeos5_file_handle.Tpo -c -o @srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos5_file_handle.lo `test -f '@srcmspishared@/File/FileHandle/src/hdfeos5_file_handle.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FileHandle/src/hdfeos5_file_handle.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/FileHandle/src/$(DEPDIR)/libmspi_shared_la-hdfeos5_file_handle.Tpo @srcmspishared@/File/FileHandle/src/$(DEPDIR)/libmspi_shared_la-hdfeos5_file_handle.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/FileHandle/src/hdfeos5_file_handle.cc' object='@srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos5_file_handle.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos5_file_handle.lo `test -f '@srcmspishared@/File/FileHandle/src/hdfeos5_file_handle.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FileHandle/src/hdfeos5_file_handle.cc
+
+@srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos2_file_handle.lo: @srcmspishared@/File/FileHandle/src/hdfeos2_file_handle.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos2_file_handle.lo -MD -MP -MF @srcmspishared@/File/FileHandle/src/$(DEPDIR)/libmspi_shared_la-hdfeos2_file_handle.Tpo -c -o @srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos2_file_handle.lo `test -f '@srcmspishared@/File/FileHandle/src/hdfeos2_file_handle.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FileHandle/src/hdfeos2_file_handle.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/FileHandle/src/$(DEPDIR)/libmspi_shared_la-hdfeos2_file_handle.Tpo @srcmspishared@/File/FileHandle/src/$(DEPDIR)/libmspi_shared_la-hdfeos2_file_handle.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/FileHandle/src/hdfeos2_file_handle.cc' object='@srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos2_file_handle.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/FileHandle/src/libmspi_shared_la-hdfeos2_file_handle.lo `test -f '@srcmspishared@/File/FileHandle/src/hdfeos2_file_handle.cc' || echo '$(srcdir)/'`@srcmspishared@/File/FileHandle/src/hdfeos2_file_handle.cc
+
+@srcmspishared@/File/Ancillary/src/libmspi_shared_la-rdqi.lo: @srcmspishared@/File/Ancillary/src/rdqi.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Ancillary/src/libmspi_shared_la-rdqi.lo -MD -MP -MF @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-rdqi.Tpo -c -o @srcmspishared@/File/Ancillary/src/libmspi_shared_la-rdqi.lo `test -f '@srcmspishared@/File/Ancillary/src/rdqi.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Ancillary/src/rdqi.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-rdqi.Tpo @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-rdqi.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Ancillary/src/rdqi.cc' object='@srcmspishared@/File/Ancillary/src/libmspi_shared_la-rdqi.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Ancillary/src/libmspi_shared_la-rdqi.lo `test -f '@srcmspishared@/File/Ancillary/src/rdqi.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Ancillary/src/rdqi.cc
+
+@srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo: @srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo -MD -MP -MF @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-out_of_band_calibration_data.Tpo -c -o @srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo `test -f '@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-out_of_band_calibration_data.Tpo @srcmspishared@/File/Ancillary/src/$(DEPDIR)/libmspi_shared_la-out_of_band_calibration_data.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc' object='@srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Ancillary/src/libmspi_shared_la-out_of_band_calibration_data.lo `test -f '@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Ancillary/src/out_of_band_calibration_data.cc
+
+@srcmspishared@/File/Meta/src/libmspi_shared_la-hdf4_meta.lo: @srcmspishared@/File/Meta/src/hdf4_meta.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Meta/src/libmspi_shared_la-hdf4_meta.lo -MD -MP -MF @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-hdf4_meta.Tpo -c -o @srcmspishared@/File/Meta/src/libmspi_shared_la-hdf4_meta.lo `test -f '@srcmspishared@/File/Meta/src/hdf4_meta.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Meta/src/hdf4_meta.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-hdf4_meta.Tpo @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-hdf4_meta.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Meta/src/hdf4_meta.cc' object='@srcmspishared@/File/Meta/src/libmspi_shared_la-hdf4_meta.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Meta/src/libmspi_shared_la-hdf4_meta.lo `test -f '@srcmspishared@/File/Meta/src/hdf4_meta.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Meta/src/hdf4_meta.cc
+
+@srcmspishared@/File/Meta/src/libmspi_shared_la-hdf5_meta.lo: @srcmspishared@/File/Meta/src/hdf5_meta.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Meta/src/libmspi_shared_la-hdf5_meta.lo -MD -MP -MF @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-hdf5_meta.Tpo -c -o @srcmspishared@/File/Meta/src/libmspi_shared_la-hdf5_meta.lo `test -f '@srcmspishared@/File/Meta/src/hdf5_meta.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Meta/src/hdf5_meta.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-hdf5_meta.Tpo @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-hdf5_meta.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Meta/src/hdf5_meta.cc' object='@srcmspishared@/File/Meta/src/libmspi_shared_la-hdf5_meta.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Meta/src/libmspi_shared_la-hdf5_meta.lo `test -f '@srcmspishared@/File/Meta/src/hdf5_meta.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Meta/src/hdf5_meta.cc
+
+@srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo: @srcmspishared@/File/Meta/src/meta.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo -MD -MP -MF @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-meta.Tpo -c -o @srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo `test -f '@srcmspishared@/File/Meta/src/meta.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Meta/src/meta.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-meta.Tpo @srcmspishared@/File/Meta/src/$(DEPDIR)/libmspi_shared_la-meta.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/File/Meta/src/meta.cc' object='@srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/File/Meta/src/libmspi_shared_la-meta.lo `test -f '@srcmspishared@/File/Meta/src/meta.cc' || echo '$(srcdir)/'`@srcmspishared@/File/Meta/src/meta.cc
+
+@srcmspishared@/ErrorHandling/src/libmspi_shared_la-exception.lo: @srcmspishared@/ErrorHandling/src/exception.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/ErrorHandling/src/libmspi_shared_la-exception.lo -MD -MP -MF @srcmspishared@/ErrorHandling/src/$(DEPDIR)/libmspi_shared_la-exception.Tpo -c -o @srcmspishared@/ErrorHandling/src/libmspi_shared_la-exception.lo `test -f '@srcmspishared@/ErrorHandling/src/exception.cc' || echo '$(srcdir)/'`@srcmspishared@/ErrorHandling/src/exception.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/ErrorHandling/src/$(DEPDIR)/libmspi_shared_la-exception.Tpo @srcmspishared@/ErrorHandling/src/$(DEPDIR)/libmspi_shared_la-exception.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/ErrorHandling/src/exception.cc' object='@srcmspishared@/ErrorHandling/src/libmspi_shared_la-exception.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/ErrorHandling/src/libmspi_shared_la-exception.lo `test -f '@srcmspishared@/ErrorHandling/src/exception.cc' || echo '$(srcdir)/'`@srcmspishared@/ErrorHandling/src/exception.cc
+
+@srcmspishared@/Config/src/libmspi_shared_la-name_value_parser.lo: @srcmspishared@/Config/src/name_value_parser.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/Config/src/libmspi_shared_la-name_value_parser.lo -MD -MP -MF @srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-name_value_parser.Tpo -c -o @srcmspishared@/Config/src/libmspi_shared_la-name_value_parser.lo `test -f '@srcmspishared@/Config/src/name_value_parser.cc' || echo '$(srcdir)/'`@srcmspishared@/Config/src/name_value_parser.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-name_value_parser.Tpo @srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-name_value_parser.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/Config/src/name_value_parser.cc' object='@srcmspishared@/Config/src/libmspi_shared_la-name_value_parser.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/Config/src/libmspi_shared_la-name_value_parser.lo `test -f '@srcmspishared@/Config/src/name_value_parser.cc' || echo '$(srcdir)/'`@srcmspishared@/Config/src/name_value_parser.cc
+
+@srcmspishared@/Config/src/libmspi_shared_la-config_file.lo: @srcmspishared@/Config/src/config_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/Config/src/libmspi_shared_la-config_file.lo -MD -MP -MF @srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-config_file.Tpo -c -o @srcmspishared@/Config/src/libmspi_shared_la-config_file.lo `test -f '@srcmspishared@/Config/src/config_file.cc' || echo '$(srcdir)/'`@srcmspishared@/Config/src/config_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-config_file.Tpo @srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-config_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/Config/src/config_file.cc' object='@srcmspishared@/Config/src/libmspi_shared_la-config_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/Config/src/libmspi_shared_la-config_file.lo `test -f '@srcmspishared@/Config/src/config_file.cc' || echo '$(srcdir)/'`@srcmspishared@/Config/src/config_file.cc
+
+@srcmspishared@/Config/src/libmspi_shared_la-config_table.lo: @srcmspishared@/Config/src/config_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspishared@/Config/src/libmspi_shared_la-config_table.lo -MD -MP -MF @srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-config_table.Tpo -c -o @srcmspishared@/Config/src/libmspi_shared_la-config_table.lo `test -f '@srcmspishared@/Config/src/config_table.cc' || echo '$(srcdir)/'`@srcmspishared@/Config/src/config_table.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-config_table.Tpo @srcmspishared@/Config/src/$(DEPDIR)/libmspi_shared_la-config_table.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspishared@/Config/src/config_table.cc' object='@srcmspishared@/Config/src/libmspi_shared_la-config_table.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmspi_shared_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspishared@/Config/src/libmspi_shared_la-config_table.lo `test -f '@srcmspishared@/Config/src/config_table.cc' || echo '$(srcdir)/'`@srcmspishared@/Config/src/config_table.cc
+
 @srcraw@/libraw_la-dcraw_common.lo: @srcraw@/dcraw_common.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcraw@/libraw_la-dcraw_common.lo -MD -MP -MF @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Tpo -c -o @srcraw@/libraw_la-dcraw_common.lo `test -f '@srcraw@/dcraw_common.cpp' || echo '$(srcdir)/'`@srcraw@/dcraw_common.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Tpo @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Plo
@@ -6946,6 +7790,34 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srccartlab@/geocal_test_all-material_detect_test.obj `if test -f '@srccartlab@/material_detect_test.cc'; then $(CYGPATH_W) '@srccartlab@/material_detect_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srccartlab@/material_detect_test.cc'; fi`
 
+@srcmspi@/geocal_test_all-paraxial_transform_test.o: @srcmspi@/paraxial_transform_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-paraxial_transform_test.o -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-paraxial_transform_test.Tpo -c -o @srcmspi@/geocal_test_all-paraxial_transform_test.o `test -f '@srcmspi@/paraxial_transform_test.cc' || echo '$(srcdir)/'`@srcmspi@/paraxial_transform_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/geocal_test_all-paraxial_transform_test.Tpo @srcmspi@/$(DEPDIR)/geocal_test_all-paraxial_transform_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/paraxial_transform_test.cc' object='@srcmspi@/geocal_test_all-paraxial_transform_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-paraxial_transform_test.o `test -f '@srcmspi@/paraxial_transform_test.cc' || echo '$(srcdir)/'`@srcmspi@/paraxial_transform_test.cc
+
+@srcmspi@/geocal_test_all-paraxial_transform_test.obj: @srcmspi@/paraxial_transform_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-paraxial_transform_test.obj -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-paraxial_transform_test.Tpo -c -o @srcmspi@/geocal_test_all-paraxial_transform_test.obj `if test -f '@srcmspi@/paraxial_transform_test.cc'; then $(CYGPATH_W) '@srcmspi@/paraxial_transform_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/paraxial_transform_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/geocal_test_all-paraxial_transform_test.Tpo @srcmspi@/$(DEPDIR)/geocal_test_all-paraxial_transform_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/paraxial_transform_test.cc' object='@srcmspi@/geocal_test_all-paraxial_transform_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-paraxial_transform_test.obj `if test -f '@srcmspi@/paraxial_transform_test.cc'; then $(CYGPATH_W) '@srcmspi@/paraxial_transform_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/paraxial_transform_test.cc'; fi`
+
+@srcmspi@/geocal_test_all-mspi_camera_test.o: @srcmspi@/mspi_camera_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-mspi_camera_test.o -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Tpo -c -o @srcmspi@/geocal_test_all-mspi_camera_test.o `test -f '@srcmspi@/mspi_camera_test.cc' || echo '$(srcdir)/'`@srcmspi@/mspi_camera_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Tpo @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/mspi_camera_test.cc' object='@srcmspi@/geocal_test_all-mspi_camera_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-mspi_camera_test.o `test -f '@srcmspi@/mspi_camera_test.cc' || echo '$(srcdir)/'`@srcmspi@/mspi_camera_test.cc
+
+@srcmspi@/geocal_test_all-mspi_camera_test.obj: @srcmspi@/mspi_camera_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-mspi_camera_test.obj -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Tpo -c -o @srcmspi@/geocal_test_all-mspi_camera_test.obj `if test -f '@srcmspi@/mspi_camera_test.cc'; then $(CYGPATH_W) '@srcmspi@/mspi_camera_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/mspi_camera_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Tpo @srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/mspi_camera_test.cc' object='@srcmspi@/geocal_test_all-mspi_camera_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-mspi_camera_test.obj `if test -f '@srcmspi@/mspi_camera_test.cc'; then $(CYGPATH_W) '@srcmspi@/mspi_camera_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/mspi_camera_test.cc'; fi`
+
 afids_python/geocal/lib/geocal_test_all-test_all.o: afids_python/geocal/lib/test_all.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT afids_python/geocal/lib/geocal_test_all-test_all.o -MD -MP -MF afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Tpo -c -o afids_python/geocal/lib/geocal_test_all-test_all.o `test -f 'afids_python/geocal/lib/test_all.cc' || echo '$(srcdir)/'`afids_python/geocal/lib/test_all.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Tpo afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Po
@@ -6993,6 +7865,24 @@ clean-libtool:
 	-rm -rf @srcgtk@/.libs @srcgtk@/_libs
 	-rm -rf @srcimplementation@/.libs @srcimplementation@/_libs
 	-rm -rf @srcinterface@/.libs @srcinterface@/_libs
+	-rm -rf @srcmspi@/.libs @srcmspi@/_libs
+	-rm -rf @srcmspishared@/Config/src/.libs @srcmspishared@/Config/src/_libs
+	-rm -rf @srcmspishared@/ErrorHandling/src/.libs @srcmspishared@/ErrorHandling/src/_libs
+	-rm -rf @srcmspishared@/File/Ancillary/src/.libs @srcmspishared@/File/Ancillary/src/_libs
+	-rm -rf @srcmspishared@/File/FieldMap/src/.libs @srcmspishared@/File/FieldMap/src/_libs
+	-rm -rf @srcmspishared@/File/FileHandle/src/.libs @srcmspishared@/File/FileHandle/src/_libs
+	-rm -rf @srcmspishared@/File/Geotiff/src/.libs @srcmspishared@/File/Geotiff/src/_libs
+	-rm -rf @srcmspishared@/File/L1AFile/src/.libs @srcmspishared@/File/L1AFile/src/_libs
+	-rm -rf @srcmspishared@/File/L1B1File/src/.libs @srcmspishared@/File/L1B1File/src/_libs
+	-rm -rf @srcmspishared@/File/L1B2File/src/.libs @srcmspishared@/File/L1B2File/src/_libs
+	-rm -rf @srcmspishared@/File/Meta/src/.libs @srcmspishared@/File/Meta/src/_libs
+	-rm -rf @srcmspishared@/File/Table/src/.libs @srcmspishared@/File/Table/src/_libs
+	-rm -rf @srcmspishared@/File/hdf4/L1AFile/src/.libs @srcmspishared@/File/hdf4/L1AFile/src/_libs
+	-rm -rf @srcmspishared@/File/hdf4/L1B1File/src/.libs @srcmspishared@/File/hdf4/L1B1File/src/_libs
+	-rm -rf @srcmspishared@/File/hdf4/L1B2File/src/.libs @srcmspishared@/File/hdf4/L1B2File/src/_libs
+	-rm -rf @srcmspishared@/File/hdf4/Table/src/.libs @srcmspishared@/File/hdf4/Table/src/_libs
+	-rm -rf @srcmspishared@/Support/src/.libs @srcmspishared@/Support/src/_libs
+	-rm -rf @srcmspishared@/UnitTest/src/.libs @srcmspishared@/UnitTest/src/_libs
 	-rm -rf @srcraw@/.libs @srcraw@/_libs
 	-rm -rf @srcsupport@/.libs @srcsupport@/_libs
 	-rm -rf @srcsupport@/boost/.libs @srcsupport@/boost/_libs
@@ -7779,6 +8669,42 @@ distclean-generic:
 	-rm -f @srcimplementation@/$(am__dirstamp)
 	-rm -f @srcinterface@/$(DEPDIR)/$(am__dirstamp)
 	-rm -f @srcinterface@/$(am__dirstamp)
+	-rm -f @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspi@/$(am__dirstamp)
+	-rm -f @srcmspishared@/Config/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/Config/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/ErrorHandling/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/ErrorHandling/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/Ancillary/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/Ancillary/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/FieldMap/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/FieldMap/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/FileHandle/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/FileHandle/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/Geotiff/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/Geotiff/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/L1AFile/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/L1AFile/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/L1B1File/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/L1B1File/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/L1B2File/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/L1B2File/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/Meta/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/Meta/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/Table/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/Table/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/hdf4/L1AFile/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/hdf4/L1AFile/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/hdf4/L1B1File/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/hdf4/L1B1File/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/hdf4/L1B2File/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/hdf4/L1B2File/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/hdf4/Table/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/File/hdf4/Table/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/Support/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/Support/src/$(am__dirstamp)
+	-rm -f @srcmspishared@/UnitTest/src/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspishared@/UnitTest/src/$(am__dirstamp)
 	-rm -f @srcraw@/$(DEPDIR)/$(am__dirstamp)
 	-rm -f @srcraw@/$(am__dirstamp)
 	-rm -f @srcsupport@/$(DEPDIR)/$(am__dirstamp)
@@ -7803,7 +8729,7 @@ clean-am: clean-binPROGRAMS clean-checkPROGRAMS clean-generic \
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf @srccartlab@/$(DEPDIR) @srcgtk@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR) afids_python/geocal/lib/$(DEPDIR)
+	-rm -rf @srccartlab@/$(DEPDIR) @srcgtk@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcmspi@/$(DEPDIR) @srcmspishared@/Config/src/$(DEPDIR) @srcmspishared@/ErrorHandling/src/$(DEPDIR) @srcmspishared@/File/Ancillary/src/$(DEPDIR) @srcmspishared@/File/FieldMap/src/$(DEPDIR) @srcmspishared@/File/FileHandle/src/$(DEPDIR) @srcmspishared@/File/Geotiff/src/$(DEPDIR) @srcmspishared@/File/L1AFile/src/$(DEPDIR) @srcmspishared@/File/L1B1File/src/$(DEPDIR) @srcmspishared@/File/L1B2File/src/$(DEPDIR) @srcmspishared@/File/Meta/src/$(DEPDIR) @srcmspishared@/File/Table/src/$(DEPDIR) @srcmspishared@/File/hdf4/L1AFile/src/$(DEPDIR) @srcmspishared@/File/hdf4/L1B1File/src/$(DEPDIR) @srcmspishared@/File/hdf4/L1B2File/src/$(DEPDIR) @srcmspishared@/File/hdf4/Table/src/$(DEPDIR) @srcmspishared@/Support/src/$(DEPDIR) @srcmspishared@/UnitTest/src/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR) afids_python/geocal/lib/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-libtool distclean-tags
@@ -7862,7 +8788,7 @@ installcheck-am: installcheck-local
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf @srccartlab@/$(DEPDIR) @srcgtk@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR) afids_python/geocal/lib/$(DEPDIR)
+	-rm -rf @srccartlab@/$(DEPDIR) @srcgtk@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcmspi@/$(DEPDIR) @srcmspishared@/Config/src/$(DEPDIR) @srcmspishared@/ErrorHandling/src/$(DEPDIR) @srcmspishared@/File/Ancillary/src/$(DEPDIR) @srcmspishared@/File/FieldMap/src/$(DEPDIR) @srcmspishared@/File/FileHandle/src/$(DEPDIR) @srcmspishared@/File/Geotiff/src/$(DEPDIR) @srcmspishared@/File/L1AFile/src/$(DEPDIR) @srcmspishared@/File/L1B1File/src/$(DEPDIR) @srcmspishared@/File/L1B2File/src/$(DEPDIR) @srcmspishared@/File/Meta/src/$(DEPDIR) @srcmspishared@/File/Table/src/$(DEPDIR) @srcmspishared@/File/hdf4/L1AFile/src/$(DEPDIR) @srcmspishared@/File/hdf4/L1B1File/src/$(DEPDIR) @srcmspishared@/File/hdf4/L1B2File/src/$(DEPDIR) @srcmspishared@/File/hdf4/Table/src/$(DEPDIR) @srcmspishared@/Support/src/$(DEPDIR) @srcmspishared@/UnitTest/src/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR) afids_python/geocal/lib/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -7943,6 +8869,22 @@ uninstall-hook: $(UNINSTALL_HOOK)
 clean-local: $(CLEAN_HOOK)
 installcheck-local: $(INSTALLCHECK_HOOK)
 
+# ========================================================================
+# An error we run into every once in a while is somebody trying to build
+# after having doing a setup_afids_env. The problem with this is that
+# the AFIDS distribution contains a program "sort" that interfers with the
+# unix sort.
+
+complain_if_afids:
+	@if test -n "${AFIDSTOP}"; then \
+          echo "${red}You have sourced setup_afids_env.sh or setup_afids_env.csh.";  \
+          echo "This will cause the build to *fail*, because MIPL has";  \
+          echo "a program called 'sort' that interferes with the unix";  \
+          echo "sort command. You need to restart the build *without*"; \
+          echo "sourcing setup_afids_env.sh or setup_afids_env.csh${default}"; \
+          exit 1; \
+        fi
+
 #=================================================================
 # Target to just install geocal
 # header, library, python
@@ -7976,14 +8918,14 @@ installcheck-local: $(INSTALLCHECK_HOOK)
 @BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@srccartlab@
 
 # Allow searchs for .i, .h. and .cc files in this directory
-@BUILD_AFIDS_PYTHON_TRUE@vpath %.cc $(srcdir)/@srcmspi@
-@BUILD_AFIDS_PYTHON_TRUE@vpath %.h $(srcdir)/@srcmspi@
-@BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@srcmspi@
-
-# Allow searchs for .i, .h. and .cc files in this directory
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@vpath %.cc $(srcdir)/@srcgtk@
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@vpath %.h $(srcdir)/@srcgtk@
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GTKGOO_TRUE@vpath %.i $(srcdir)/@srcgtk@
+
+# Allow searchs for .i, .h. and .cc files in this directory
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@vpath %.cc $(srcdir)/@srcmspi@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@vpath %.h $(srcdir)/@srcmspi@
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@vpath %.i $(srcdir)/@srcmspi@
 
 # Allow searchs for .i in this directory
 @BUILD_AFIDS_PYTHON_TRUE@vpath %.i $(srcdir)/@libgeocal@

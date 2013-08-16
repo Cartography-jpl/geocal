@@ -1,6 +1,6 @@
 Summary: This is the AFIDS python
 Name: afids-python
-Version: 1.02
+Version: 1.03
 Release: 1
 License: Copyright 2013 California Institute of Technology ALL RIGHTS RESERVED
 Group: Applications/Engineering
@@ -70,6 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 /opt/afids/setup_afids_python.sh
 
 %changelog
+* Fri Aug  9 2013 Mike M Smyth <smyth@pistol> - 1.03-1
+- Proper handling of RPC A format in gdal_to_nitf
+
 * Thu Jul 11 2013 Mike M Smyth <smyth@pistol> - 1.02-1
 - Add pair_ortho proc for Tom and Rich
 

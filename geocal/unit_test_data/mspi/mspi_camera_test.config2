@@ -1,0 +1,72 @@
+granule_MSPI-Ground/GeoCal/MspiCamera/src/mspi_camera_test.config2 : granule_id
+7          : number_band
+1536       : number_sample
+3          : number_parameter
+-1         : direction
+27.825088  : focal_length
+767.5      : origin
+1          : pixel_order
+0.0        : boresight_angle
+180.0      : camera_yaw   # Camera to station yaw in degrees
+90.0       : camera_pitch # Camera to station pitch in degrees
+0.0        : camera_roll  # Camera to station roll in degrees
+1          : inversion
+
+# Row number to band number mapping.
+# Rows 34, 29, and 24 are used by the 660 nm camera with the mis-aligned
+# filter plate.
+#
+#row : band<band number>
+32 : band0
+27 : band1
+22 : band2
+34 : band3
+29 : band4
+24 : band5
+64 : band6
+
+7 : paraxial_number_row  # Number of rows for which paraxial transform coefficients are provided.
+34 32 29 27 24 22 64 : paraxial_row_numbers # Row numbers for which paraxial transform coefficients are provided.
+
+# Real to paraxial X
+#    X       X^3        X^5        X^7
+
+0.9399 0.0003211 1.381e-007 8.259e-011 : a34 # Row 34  (copy of Row 32)
+0.9399 0.0003211 1.381e-007 8.259e-011 : a32 # Row 32
+0.9394 0.0003209 1.38e-007  8.246e-011 : a29 # Row 29  (copy of Row 27)
+0.9394 0.0003209 1.38e-007  8.246e-011 : a27 # Row 27
+0.9389 0.0003207 1.381e-007 8.198e-011 : a24 # Row 24  (copy of Row 22)
+0.9389 0.0003207 1.381e-007 8.198e-011 : a22 # Row 22
+1.0    0.0       0.0        0.0        : a64 # Row 64 (identity)
+
+# Real to paraxial Y
+#   b0 = X^0 - F(n)orgin
+#
+#    b0      X^2       X^4       X^6
+-.00727 0.006595 2.79e-006 1.60e-009 : b34 # Row 34 (copy of row 32)
+-.00727 0.006595 2.79e-006 1.60e-009 : b32 # Row 32
+-.00682 0.006622 2.81e-006 1.61e-009 : b29 # Row 29 (copy of row 27)
+-.00682 0.006622 2.81e-006 1.61e-009 : b27 # Row 27
+-.00640 0.006649 2.89e-006 1.62e-009 : b24 # Row 24 (copy of row 22)
+-.00640 0.006649 2.89e-006 1.62e-009 : b22 # Row 22
+0.0     0.0      0.0       0.0       : b64 # Row 64 (identity)
+
+# Paraxial to real X
+#      x        xy       xy^2        x^3       x^3y    x^3y^2       x^5      x^5y     x^5y^2        x^7       x^7y    x^7y^2 
+1.06E+00  7.25E-03  -4.10E-04  -4.64E-04  -5.59E-06  6.59E-07  3.33E-07  4.78E-09  -9.54E-10  -1.95E-10  -3.08E-12  1.00E-12 : c34 # Row 34 (660nm)
+1.06E+00  7.25E-03  -4.10E-04  -4.64E-04  -5.59E-06  6.59E-07  3.33E-07  4.78E-09  -9.54E-10  -1.95E-10  -3.08E-12  1.00E-12 : c32 # Row 32 (660nm)
+1.06E+00  7.25E-03  -4.10E-04  -4.64E-04  -5.59E-06  6.59E-07  3.33E-07  4.78E-09  -9.54E-10  -1.95E-10  -3.08E-12  1.00E-12 : c29 # Row 29 (660nm)
+1.06E+00  7.25E-03  -4.10E-04  -4.64E-04  -5.59E-06  6.59E-07  3.33E-07  4.78E-09  -9.54E-10  -1.95E-10  -3.08E-12  1.00E-12 : c27 # Row 27 (660nm)
+1.06E+00  7.25E-03  -4.10E-04  -4.64E-04  -5.59E-06  6.59E-07  3.33E-07  4.78E-09  -9.54E-10  -1.95E-10  -3.08E-12  1.00E-12 : c24 # Row 24 (660nm)
+1.06E+00  7.25E-03  -4.10E-04  -4.64E-04  -5.59E-06  6.59E-07  3.33E-07  4.78E-09  -9.54E-10  -1.95E-10  -3.08E-12  1.00E-12 : c22 # Row 22 (660nm)
+1.0       0.0       0.0        0.0        0.0        0.0       0.0       0.0       0.0        0.0        0.0        0.0      : c64 # Row 64 (identity)
+
+# Paraxial to real Y
+#      1          y         y^2        x^2       x^2y    x^2y^2       x^4       x^4y      x^4y^2        x^6       x^6y    x^6y^2
+2.51E-04   9.95E-01   -1.41E-03  -7.41E-03  -4.72E-04  7.11E-06  5.44E-06   3.53E-07   -1.10E-08  -3.33E-09  -2.18E-10  9.49E-12 : d34 # Row 34 (660nm)
+2.51E-04   9.95E-01   -1.41E-03  -7.41E-03  -4.72E-04  7.11E-06  5.44E-06   3.53E-07   -1.10E-08  -3.33E-09  -2.18E-10  9.49E-12 : d32 # Row 32 (660nm)
+2.51E-04   9.95E-01   -1.41E-03  -7.41E-03  -4.72E-04  7.11E-06  5.44E-06   3.53E-07   -1.10E-08  -3.33E-09  -2.18E-10  9.49E-12 : d29 # Row 29 (660nm)
+2.51E-04   9.95E-01   -1.41E-03  -7.41E-03  -4.72E-04  7.11E-06  5.44E-06   3.53E-07   -1.10E-08  -3.33E-09  -2.18E-10  9.49E-12 : d27 # Row 27 (660nm)
+2.51E-04   9.95E-01   -1.41E-03  -7.41E-03  -4.72E-04  7.11E-06  5.44E-06   3.53E-07   -1.10E-08  -3.33E-09  -2.18E-10  9.49E-12 : d24 # Row 24 (660nm)
+2.51E-04   9.95E-01   -1.41E-03  -7.41E-03  -4.72E-04  7.11E-06  5.44E-06   3.53E-07   -1.10E-08  -3.33E-09  -2.18E-10  9.49E-12 : d22 # Row 22 (660nm)
+0.0        1.0        0.0        0.0        0.0        0.0       0.0        0.0        0.0        0.0        0.0        0.0      : d64 # Row 64 (identity)

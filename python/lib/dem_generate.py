@@ -15,7 +15,8 @@ import matplotlib.pyplot as plt
 
 def dem_generate_tile(dem_generate, file_name, offset, lstart, sstart, 
                       tile_nline, tile_nsamp, nline, nsamp,
-                      file_name_fill, offset_fill):
+                      file_name_fill, offset_fill,
+                      interpolate_method, buffer):
     '''This is a function that wraps the calculation of tile of height
     data in a memory mapped file. This is really just meant for the program
     setup_dem_job.
@@ -23,7 +24,8 @@ def dem_generate_tile(dem_generate, file_name, offset, lstart, sstart,
     offset is the number of bytes to skip in the file to get to the data.
     The tile is described by lstart, sstart, tile_nline, and tile_nsamp. The
     full size of the data we are writing is given by nline and nsamp'''
-    h = dem_generate.height_grid()
+    h = dem_generate.height_grid(interpolate_method = interpolate_method, 
+                                 buffer = buffer)
     d = np.memmap(file_name, dtype = np.float32, mode='r+', offset=offset,
                   shape=(nline, nsamp))
     d[lstart:(lstart + tile_nline),sstart:(sstart + tile_nsamp)] = h
@@ -173,7 +175,7 @@ class DemGenerate:
                     self.aoi.coordinate(Geodetic(self.r[i,0], self.r[i,1]))
         
         
-    def height_all(self, pool = None, include_image = False):
+    def height_all(self, pool = None, include_image = False, buffer = 5):
         '''Find list of surface points by exploring the entire AOI.
         
         Because this can take a while to run, you can optionally supply
@@ -187,6 +189,10 @@ class DemGenerate:
             send = self.igc1.number_sample
         else:
             lstart, sstart, lend, send = self.range_image1()
+            lstart -= self.stride * buffer
+            sstart -= self.stride * buffer
+            lend += self.stride * buffer
+            send += self.stride * buffer
         if(pool is None):
             return self.surface_point(lstart, sstart, lend, send, include_image)
         if(lstart > sstart):
@@ -205,7 +211,8 @@ class DemGenerate:
         return np.concatenate(res)
         
     def height_grid(self, fill_value = -9999.0, pool = None, 
-                    include_image = False, interpolate_method = 'nearest'):
+                    include_image = False, interpolate_method = 'nearest',
+                    buffer = 5):
         '''Determine surface points from conjugate points, and resample to
         the AOI grid. Returns the height.
 
@@ -221,7 +228,7 @@ class DemGenerate:
 
         You can specify include_image as True, and then we return the height 
         map projected, and also the height in image 1 and image 2 space.'''
-        self.r = self.height_all(pool, include_image)
+        self.r = self.height_all(pool, include_image, buffer = buffer)
         self.h = np.empty((self.aoi.number_y_pixel,
                            self.aoi.number_x_pixel))
         self.h[:] = fill_value

@@ -47,6 +47,14 @@ Options:
   -h --help         
        Print this message
 
+  --buffer=d
+       The buffer to use between tiles, so we have enough data to interpolate
+       at the edge of a tile. [default: 5]
+
+  --interpolation-method=s
+       Interpolation method to use for filling in missing data. This should
+       be one of nearest, linear, cubic. [default: linear]
+
   --map-info=f
        Rather than generating a DEM to cover the full area, match exactly
        the supplied shelve image. This is useful to when comparing against
@@ -144,7 +152,8 @@ for lstart in range(0, nline, args.process_number_line):
                          surface_image2 = surface_image2)
         job = partial(dem_generate_tile, dg, demname, offset, lstart, sstart,
                       tile_nline, tile_nsamp, nline, nsamp, demname_filled, 
-                      offset_filled)
+                      offset_filled, args.interpolation_method,
+                      args.buffer)
         write_shelve(database_fname + ":job_%d" % job_index, job)
         job_index += 1
 number_job = job_index

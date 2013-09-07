@@ -9031,9 +9031,7 @@ complain_if_afids:
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@        srcdir=$(srcdir)/afids_python/geocal DOCDIR=doc/geocal $(DOXYGEN) $(srcdir)/config/doxygen.cfg
 
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@install_doxygen_doc: doc/geocal.tag
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	$(MKDIR_P) "$(DESTDIR)$(geocaldocsearchdir)"
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	$(INSTALL_DATA) $(filter-out doc/geocal/html/search, $(wildcard doc/geocal/html/*)) "$(DESTDIR)$(geocaldocdir)/html"
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	$(INSTALL_DATA) doc/geocal/html/search/* "$(DESTDIR)$(geocaldocsearchdir)"
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	cp -ur doc/geocal/html "$(DESTDIR)$(geocaldocdir)"
 
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@clean_doxygen_doc:
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	-rm -rf $(DESTDIR)$(geocaldocdir)

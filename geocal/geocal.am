@@ -163,9 +163,7 @@ geocaldocsearchdir = ${geocaldocdir}/html/search
 INSTALL_DATA_HOOK += install_doxygen_doc
 
 install_doxygen_doc: doc/geocal.tag
-	$(MKDIR_P) "$(DESTDIR)$(geocaldocsearchdir)"
-	$(INSTALL_DATA) $(filter-out doc/geocal/html/search, $(wildcard doc/geocal/html/*)) "$(DESTDIR)$(geocaldocdir)/html"
-	$(INSTALL_DATA) doc/geocal/html/search/* "$(DESTDIR)$(geocaldocsearchdir)"
+	cp -ur doc/geocal/html "$(DESTDIR)$(geocaldocdir)"
 
 UNINSTALL_HOOK+= clean_doxygen_doc
 

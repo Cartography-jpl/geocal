@@ -2,7 +2,6 @@
 #include "gdal_raster_image.h"
 #include "gdal_raster_image.h"
 #include "vicar_raster_image.h"
-#include "orbit_map_projected.h"
 #include "memory_raster_image.h"
 #include "sub_raster_image.h"
 #include <fstream>
@@ -40,6 +39,13 @@ const Camera& Cam,
 const Dem& D,
 int Border) const
 {
+  // The OrbitMapProjected here has been replace with
+  // IgcMapProject. We could change this function to use this, but we
+  // don't have any test data for this and don't use this function
+  // anyways. For now, just throw an exception if this somehow gets
+  // called.
+  throw Exception("Not implemented");
+ 
   std::vector<boost::shared_ptr<GroundCoordinate> > fp =
     footprint(Cam, D);
   SubRasterImage m1out(M1,fp, Border);
@@ -51,12 +57,12 @@ int Border) const
 				   null_deleter());
   boost::shared_ptr<Camera> camp(const_cast<Camera*>(&Cam),null_deleter());
   boost::shared_ptr<Dem> demp(const_cast<Dem*>(&D),null_deleter());
-  OrbitMapProjected m1(m1out.map_info(), odp, img[0], camp, demp);
-  OrbitMapProjected m2(m2out.map_info(), odp, img[1], camp, demp);
-  OrbitMapProjected m3(m3out.map_info(), odp, img[2], camp, demp);
-  copy_only_to_fill(m1, m1out);
-  copy_only_to_fill(m2, m2out);
-  copy_only_to_fill(m3, m3out);
+  // OrbitMapProjected m1(m1out.map_info(), odp, img[0], camp, demp);
+  // OrbitMapProjected m2(m2out.map_info(), odp, img[1], camp, demp);
+  // OrbitMapProjected m3(m3out.map_info(), odp, img[2], camp, demp);
+  // copy_only_to_fill(m1, m1out);
+  // copy_only_to_fill(m2, m2out);
+  // copy_only_to_fill(m3, m3out);
 }
 
 //-----------------------------------------------------------------------
@@ -85,6 +91,13 @@ void ArgusOrbitData::save_ortho(const MapInfo& Mi, const Camera& Cam,
 				const std::string& Type, int Border,
 				int Grid_spacing) const
 {
+  // The OrbitMapProjected here has been replace with
+  // IgcMapProject. We could change this function to use this, but we
+  // don't have any test data for this and don't use this function
+  // anyways. For now, just throw an exception if this somehow gets
+  // called.
+  throw Exception("Not implemented");
+
   MapInfo misub = Mi.cover(footprint(Cam, D), Border);
   std::vector<boost::shared_ptr<RasterImage> > img =
     GdalRasterImage::read_all(file_name());
@@ -92,19 +105,19 @@ void ArgusOrbitData::save_ortho(const MapInfo& Mi, const Camera& Cam,
 				   null_deleter());
   boost::shared_ptr<Camera> camp(const_cast<Camera*>(&Cam),null_deleter());
   boost::shared_ptr<Dem> demp(const_cast<Dem*>(&D),null_deleter());
-  OrbitMapProjected m(misub, odp, img, camp, demp);
-  std::vector<boost::shared_ptr<RasterImage> > mres;
-  mres.push_back(boost::shared_ptr<RasterImage>(new 
-         MemoryRasterImage(misub)));
-  mres.push_back(boost::shared_ptr<RasterImage>(new 
-         MemoryRasterImage(misub)));
-  mres.push_back(boost::shared_ptr<RasterImage>(new 
-         MemoryRasterImage(misub)));
-  if(Grid_spacing == 1)
-    m.write_multiple(mres);
-  else
-    m.write_multiple(mres, Grid_spacing);
-  save_to_file(Fname, *mres[0], *mres[1], *mres[2], Type);
+  // OrbitMapProjected m(misub, odp, img, camp, demp);
+  // std::vector<boost::shared_ptr<RasterImage> > mres;
+  // mres.push_back(boost::shared_ptr<RasterImage>(new 
+  //        MemoryRasterImage(misub)));
+  // mres.push_back(boost::shared_ptr<RasterImage>(new 
+  //        MemoryRasterImage(misub)));
+  // mres.push_back(boost::shared_ptr<RasterImage>(new 
+  //        MemoryRasterImage(misub)));
+  // if(Grid_spacing == 1)
+  //   m.write_multiple(mres);
+  // else
+  //   m.write_multiple(mres, Grid_spacing);
+  // save_to_file(Fname, *mres[0], *mres[1], *mres[2], Type);
 }
 
 //-----------------------------------------------------------------------

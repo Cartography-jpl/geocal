@@ -60,7 +60,6 @@ extern "C" {
   void init_ccorr_matcher(void);
   void init_lsm_matcher(void);
   void init_ccorr_lsm_matcher(void);
-  void init_rpc_image(void);
   void init_raster_multifile(void);
   void init_did_datum(void);
   void init_dem_map_info_offset(void);
@@ -79,12 +78,10 @@ extern "C" {
   void init_memory_dem(void);
   void init_map_reprojected_image(void);
   void init_calc_map_projected(void);
-  void init_orbit_map_projected(void);
   void init_pyramid_image_matcher(void);
   void init_igc_map_projected(void);
   void init_igc_image_to_image_match(void);
   void init_surface_image_to_image_match(void);
-  void init_ipi_map_projected(void);
   void init_location_to_file(void);
   void init_ray_intersect(void);
   void init_dem_match(void);
@@ -246,7 +243,6 @@ void init_swig_wrap(void)
   init_extension_module(package, "_ccorr_matcher", init_ccorr_matcher);
   init_extension_module(package, "_lsm_matcher", init_lsm_matcher);
   init_extension_module(package, "_ccorr_lsm_matcher", init_ccorr_lsm_matcher);
-  init_extension_module(package, "_rpc_image", init_rpc_image);
   init_extension_module(package, "_raster_multifile", init_raster_multifile);
   init_extension_module(package, "_did_datum", init_did_datum);
   init_extension_module(package, "_dem_map_info_offset", init_dem_map_info_offset);
@@ -265,12 +261,10 @@ void init_swig_wrap(void)
   init_extension_module(package, "_memory_dem", init_memory_dem);
   init_extension_module(package, "_map_reprojected_image", init_map_reprojected_image);
   init_extension_module(package, "_calc_map_projected", init_calc_map_projected);
-  init_extension_module(package, "_orbit_map_projected", init_orbit_map_projected);
   init_extension_module(package, "_pyramid_image_matcher", init_pyramid_image_matcher);
   init_extension_module(package, "_igc_map_projected", init_igc_map_projected);
   init_extension_module(package, "_igc_image_to_image_match", init_igc_image_to_image_match);
   init_extension_module(package, "_surface_image_to_image_match", init_surface_image_to_image_match);
-  init_extension_module(package, "_ipi_map_projected", init_ipi_map_projected);
   init_extension_module(package, "_location_to_file", init_location_to_file);
   init_extension_module(package, "_ray_intersect", init_ray_intersect);
   init_extension_module(package, "_dem_match", init_dem_match);

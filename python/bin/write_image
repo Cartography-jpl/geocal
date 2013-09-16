@@ -41,15 +41,14 @@ Options:
 
   --process-number-line=n
        Number of lines to include in each tile that we work on. This 
-       controls how long each torque/parallel job takes to run. This 
-       option is ignored unless we are using GNU parallel or torque. 
-       [default: 1000]
+       controls how long each torque/parallel job takes to run. If
+       not supplied, we just divide the total image size by the number
+       of processes we are using.
 
   --process-number-sample=n
        Number of lines to include in each tile that we work on. This 
-       controls how long each torque/parallel job takes to run. This 
-       option is ignored unless we are using GNU parallel or torque. 
-       [default: 1000]
+       controls how long each torque/parallel job takes to run. If
+       not supplied, we use the total image size.
 
   --subset
        Subset the input image.
@@ -61,6 +60,9 @@ Options:
   --vicar-type=type
        Type of file to generate. This should by BYTE, HALF, FULL, REAL, or
        DOUB. [default: HALF]
+
+  --verbose
+       Indicate if we print out messages while processing each tile.
 
   -v --version      
        Print program version
@@ -82,4 +84,13 @@ if(args.no_data_value is not None):
     out["NODATA"] = float(args.no_data_value)
 out.close()
 out = mmap_file(args.output_image, mode="r+")
-parallel_process_image(img, out, args.number_process)
+if(args.process_number_line is not None):
+    process_nline = args.process_number_line
+else:
+    process_nline = img.number_line / args.number_process
+if(args.process_number_sample is not None):
+    process_nsamp = args.process_number_sample
+else:
+    process_nsamp = img.number_sample
+parallel_process_image(img, out, process_nline, process_nsamp, 
+                       args.number_process, verbose = args.verbose)

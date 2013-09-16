@@ -13,6 +13,7 @@ dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/tp_show
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/shelve_dem
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/shelve_image
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/tiepoint_to_error
+dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/write_image
 dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf
 dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf

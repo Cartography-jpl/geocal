@@ -1,0 +1,85 @@
+#! /usr/bin/env python
+from afids import *
+
+version = "September 16, 2013"
+usage='''Usage: 
+  write_image [options] <input_image> <output_image>
+  write_image [options] --subset <start_line> <start_sample>
+      <number_line> <number_sample> <input_image> <output_image>
+  write_image -h | --help
+  write_image -v | --version
+
+This program is used write to a VICAR image. The input is an image as
+a sqlite shelve object in the "file:key" format", e.g.,
+"my_data.db:image".  The input image might require a calculation to
+generate the results, e.g., it is a scaled image.
+
+The data can be generate in parallel. Depending on the environment, you
+can do the parallel generation in 1 of a few ways:
+
+1. Run this program in parallel. Requires that all the CPUs use the same
+   shared memory space (e.g., a single multi core machine).
+2. Set up go use gnu parallel program. This is useful if you are using a
+   cluster of CPUs (e.g., a few difference machines in a cluster).
+3. Set up to use torque job processing. This is useful for very large jobs
+   that take a long time to run (e.g., full resolution DSM generation).
+
+Options:
+  -h --help         
+       Print this message
+
+  --gnu-parallel
+       Set up to using gnu parallel program, including generating a script
+       for this. We do not actually run the script.
+
+  --no-data-value=n
+       Value to indicate no data. This is just set as metadata for the
+       output file, it doesn't affect the generation of the image at all.
+
+  --number-process=n
+       Number of processors to use. [default: 1]
+
+  --process-number-line=n
+       Number of lines to include in each tile that we work on. This 
+       controls how long each torque/parallel job takes to run. This 
+       option is ignored unless we are using GNU parallel or torque. 
+       [default: 1000]
+
+  --process-number-sample=n
+       Number of lines to include in each tile that we work on. This 
+       controls how long each torque/parallel job takes to run. This 
+       option is ignored unless we are using GNU parallel or torque. 
+       [default: 1000]
+
+  --subset
+       Subset the input image.
+
+  --torque
+       Set up to using torque, including generating a script for this. We 
+       do not actually run the script to submit the jobs.
+
+  --vicar-type=type
+       Type of file to generate. This should by BYTE, HALF, FULL, REAL, or
+       DOUB. [default: HALF]
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+img = read_shelve(args.input_image)
+if(args.start_line):
+    img = SubRasterImage(img, args.start_line, args.start_sample,
+                         args.number_line, args.number_sample)
+
+out = VicarRasterImage(args.output_image, args.vicar_type, img.number_line, 
+                       img.number_sample)
+if(img.has_map_info):
+    out.set_map_info(img.map_info)
+if(img.has_rpc):
+    out.set_rpc(img.rpc)
+if(args.no_data_value is not None):
+    out["NODATA"] = float(args.no_data_value)
+out.close()
+out = mmap_file(args.output_image, mode="r+")
+parallel_process_image(img, out, args.number_process)

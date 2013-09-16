@@ -396,7 +396,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/tp_show \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_dem \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_image \
-@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/tiepoint_to_error
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/tiepoint_to_error \
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/write_image
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_TRUE@am__append_46 = @srcpythonlib@/tre_amt_struct.py
 @BUILD_AFIDS_PYTHON_TRUE@am__append_47 = @docpythonsrc@ \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/07JUN08184839-M1BS-005616921010_01_P001.IMD \
@@ -1269,7 +1270,8 @@ am__dist_bin_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/tp_show \
 	$(srcdir)/$(srcpythonbin)/shelve_dem \
 	$(srcdir)/$(srcpythonbin)/shelve_image \
-	$(srcdir)/$(srcpythonbin)/tiepoint_to_error
+	$(srcdir)/$(srcpythonbin)/tiepoint_to_error \
+	$(srcdir)/$(srcpythonbin)/write_image
 SCRIPTS = $(dist_afidspythonvdev_SCRIPTS) $(dist_bin_SCRIPTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -1365,7 +1367,9 @@ am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/shape_file.py \
 	@srcpythonlib@/gdal_to_erdas_file.py \
 	@srcpythonlib@/mmap_file.py @srcpythonlib@/raster_tile.py \
-	@srcpythonlib@/pleides_rpc.py @srcpythonlib@/tre_amt_struct.py
+	@srcpythonlib@/pleides_rpc.py \
+	@srcpythonlib@/parallel_process.py \
+	@srcpythonlib@/tre_amt_struct.py
 am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 am__pep3147_tweak = \
   sed -e 's|\.py$$||' -e 's|[^/]*$$|__pycache__/&.*.py|'
@@ -2650,6 +2654,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/mmap_file.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/raster_tile.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/pleides_rpc.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/parallel_process.py \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_46)
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \

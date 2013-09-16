@@ -4,9 +4,9 @@ import os
 
 version = "September 16, 2013"
 usage='''Usage: 
-  write_image [options] <input_image> <output_image>
+  write_image [options] <input_image> <output_image>...
   write_image [options] --subset <start_line> <start_sample>
-      <number_line> <number_sample> <input_image> <output_image>
+      <number_line> <number_sample> <input_image> <output_image>...
   write_image -h | --help
   write_image -v | --version
 
@@ -14,6 +14,9 @@ This program is used write to a VICAR image. The input is an image as
 a sqlite shelve object in the "file:key" format", e.g.,
 "my_data.db:image".  The input image might require a calculation to
 generate the results, e.g., it is a scaled image.
+
+The image can also be a MultiBandRasterImage, in which case you need to
+specify as many output images as there are bands in the multi band image.
 
 The data can be generate in parallel. Depending on the environment, you
 can do the parallel generation in 1 of a few ways:
@@ -70,29 +73,46 @@ Options:
 '''
 
 args = docopt_simple(usage, version=version)
-img = read_shelve(args.input_image)
+img_in = read_shelve(args.input_image)
 if(args.start_line):
-    img = SubRasterImage(img, args.start_line, args.start_sample,
-                         args.number_line, args.number_sample)
+    if(isinstance(img_in, RasterImageMultiBand)):
+        img_in = img_in.subset(args.start_line, args.start_sample,
+                               args.number_line, args.number_sample)
+    else:
+        img_in = SubRasterImage(img_in, args.start_line, args.start_sample,
+                                args.number_line, args.number_sample)
 
-out = VicarRasterImage(args.output_image, args.vicar_type, img.number_line, 
-                       img.number_sample)
-if(img.has_map_info):
-    out.set_map_info(img.map_info)
-if(img.has_rpc):
-    out.set_rpc(img.rpc)
-if(args.no_data_value is not None):
-    out["NODATA"] = float(args.no_data_value)
-out.close()
-out = mmap_file(args.output_image, mode="r+")
+img_list = []
+if(isinstance(img_in, RasterImageMultiBand)):
+    for i in range(img_in.number_band):
+        img_list.append(img_in.raster_image(i))
+else:
+    img_list.append(img_in)
+
+out_list = []
+for i, img in enumerate(img_list):
+    out = VicarRasterImage(args.output_image[i], args.vicar_type, 
+                           img.number_line, img.number_sample)
+    if(img.has_map_info):
+        out.set_map_info(img.map_info)
+    if(img.has_rpc):
+        out.set_rpc(img.rpc)
+    if(args.no_data_value is not None):
+        out["NODATA"] = float(args.no_data_value)
+    out.close()
+    out_list.append(mmap_file(args.output_image[i], mode="r+"))
+
+if(not isinstance(img_in, RasterImageMultiBand)):
+    out_list = out_list[0]
+
 if(args.process_number_line is not None):
     process_nline = args.process_number_line
 else:
-    process_nline = img.number_line / args.number_process
+    process_nline = img_list[0].number_line / args.number_process
 if(args.process_number_sample is not None):
     process_nsamp = args.process_number_sample
 else:
-    process_nsamp = img.number_sample
+    process_nsamp = img_list[0].number_sample
 if(args.torque or args.gnu_parallel):
     base_name = os.path.splitext(args.output_image)[0]
     shelve_name =  base_name + ".db"
@@ -100,8 +120,11 @@ if(args.torque or args.gnu_parallel):
         os.remove(shelve_name)
     except OSError as exc:
         pass                    # Ok if doesn't exist
+else:
+    shelve_name = None
     
-number_job = parallel_process_image(img, out, process_nline, process_nsamp, 
+number_job = parallel_process_image(img_in, out_list, process_nline, 
+                                    process_nsamp, 
                                     args.number_process, verbose = args.verbose,
                                     shelve_name = shelve_name)
 if(args.torque):

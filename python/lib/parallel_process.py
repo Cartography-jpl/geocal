@@ -3,6 +3,7 @@
 from sqlite_shelf import write_shelve
 from functools import partial
 import numpy as np
+import geocal
 from multiprocessing import Pool
 
 def parallel_process_tile(img_in, lstart, sstart, nline, nsamp, out, 
@@ -16,6 +17,19 @@ def parallel_process_tile(img_in, lstart, sstart, nline, nsamp, out,
     else:
         out[lstart:(lstart + nline), sstart:(sstart + nsamp)] = \
             img_in.read(lstart, sstart, nline, nsamp)
+
+# Variation where img_in in a RasterImageMultiBand.
+def parallel_process_tile2(img_in, lstart, sstart, nline, nsamp, out, 
+                          verbose = False):
+    if(verbose):
+        print "Processing (%d, %d) to (%d, %d)" % \
+            (lstart, sstart, lstart + nline, sstart + nsamp)
+    if(out[0].dtype == np.float32 or out[0].dtype == np.float64):
+        t = img_in.read_double(lstart, sstart, nline, nsamp)
+    else:
+        t = img_in.read(lstart, sstart, nline, nsamp)
+    for i in range(img_in.number_band):
+        out[i][lstart:(lstart + nline), sstart:(sstart + nsamp)] = t[i, :, :]
 
 def do_parallel_process(p):
     p()
@@ -35,16 +49,24 @@ def parallel_process_image(img_in, out, process_nline, process_nsamp,
     the jobs.'''
     process_list =  [ ] 
     job_index = 0
-    for lstart in range(0, img_in.number_line, process_nline):
+    if(isinstance(img_in, geocal.RasterImageMultiBand)):
+        nline = img_in.raster_image(0).number_line
+        nsamp = img_in.raster_image(0).number_sample
+        func = parallel_process_tile2
+    else:
+        nline = img_in.number_line
+        nsamp = img_in.number_sample
+        func = parallel_process_tile
+    for lstart in range(0, nline, process_nline):
         tile_nline = process_nline
-        if(lstart + tile_nline > img_in.number_line):
-            tile_nline = img_in.number_line - lstart
-        for sstart in range(0, img_in.number_sample, process_nsamp):
+        if(lstart + tile_nline > nline):
+            tile_nline = nline - lstart
+        for sstart in range(0, nsamp, process_nsamp):
             tile_nsamp = process_nsamp
-            if(sstart + tile_nsamp > img_in.number_sample):
-                tile_nsamp = img_in.number_sample - sstart
-            job = partial(parallel_process_tile, img_in, lstart, sstart,
-                          tile_nline, tile_nsamp, out, verbose = verbose)
+            if(sstart + tile_nsamp > nsamp):
+                tile_nsamp = nsamp - sstart
+            job = partial(func, img_in, lstart, sstart, tile_nline, 
+                          tile_nsamp, out, verbose = verbose)
             if(shelve_name is not None):
                 write_shelve(shelve_name + ":job_%d" % job_index, job)
             job_index += 1

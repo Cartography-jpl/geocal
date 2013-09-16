@@ -1369,6 +1369,7 @@ am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/mmap_file.py @srcpythonlib@/raster_tile.py \
 	@srcpythonlib@/pleides_rpc.py \
 	@srcpythonlib@/parallel_process.py \
+	@srcpythonlib@/raster_image_multi_band.py \
 	@srcpythonlib@/tre_amt_struct.py
 am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 am__pep3147_tweak = \
@@ -2655,6 +2656,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/raster_tile.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/pleides_rpc.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/parallel_process.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/raster_image_multi_band.py \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_46)
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \

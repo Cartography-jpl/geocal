@@ -36,6 +36,7 @@ afidspkgpython_PYTHON+= @srcpythonlib@/mmap_file.py
 afidspkgpython_PYTHON+= @srcpythonlib@/raster_tile.py
 afidspkgpython_PYTHON+= @srcpythonlib@/pleides_rpc.py
 afidspkgpython_PYTHON+= @srcpythonlib@/parallel_process.py
+afidspkgpython_PYTHON+= @srcpythonlib@/raster_image_multi_band.py
 if WITH_AFIDS_A
 afidspkgpython_PYTHON+= @srcpythonlib@/tre_amt_struct.py
 else

@@ -389,7 +389,7 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/igc_project \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/gdal_to_erdas \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/gdal_to_nitf \
-@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/setup_dem_job \
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/dem_generate \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_job_run \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/sba \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/tp_collect \
@@ -1263,7 +1263,7 @@ am__dist_bin_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/igc_project \
 	$(srcdir)/$(srcpythonbin)/gdal_to_erdas \
 	$(srcdir)/$(srcpythonbin)/gdal_to_nitf \
-	$(srcdir)/$(srcpythonbin)/setup_dem_job \
+	$(srcdir)/$(srcpythonbin)/dem_generate \
 	$(srcdir)/$(srcpythonbin)/shelve_job_run \
 	$(srcdir)/$(srcpythonbin)/sba \
 	$(srcdir)/$(srcpythonbin)/tp_collect \

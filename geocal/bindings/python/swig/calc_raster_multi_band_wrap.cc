@@ -5087,12 +5087,218 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
  * --------------------------------------------------- */
 
 #include "calc_raster_multi_band_wrap.h"
+
+SwigDirector_CalcRasterMultiBand::SwigDirector_CalcRasterMultiBand(PyObject *self): GeoCal::CalcRasterMultiBand(), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((GeoCal::CalcRasterMultiBand *)this, this); 
+}
+
+
+
+
+SwigDirector_CalcRasterMultiBand::SwigDirector_CalcRasterMultiBand(PyObject *self, GeoCal::RasterImage const &Img, int Nband, int Number_tile_line, int Number_tile_sample, int Number_tile): GeoCal::CalcRasterMultiBand(Img, Nband, Number_tile_line, Number_tile_sample, Number_tile), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((GeoCal::CalcRasterMultiBand *)this, this); 
+}
+
+
+
+
+SwigDirector_CalcRasterMultiBand::SwigDirector_CalcRasterMultiBand(PyObject *self, int Nline, int Nsamp, int Nband, int Number_tile_line, int Number_tile_sample, int Number_tile): GeoCal::CalcRasterMultiBand(Nline, Nsamp, Nband, Number_tile_line, Number_tile_sample, Number_tile), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((GeoCal::CalcRasterMultiBand *)this, this); 
+}
+
+
+
+
+SwigDirector_CalcRasterMultiBand::SwigDirector_CalcRasterMultiBand(PyObject *self, GeoCal::MapInfo const &Mi, int Nband, int Number_tile_line, int Number_tile_sample, int Number_tile): GeoCal::CalcRasterMultiBand(Mi, Nband, Number_tile_line, Number_tile_sample, Number_tile), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((GeoCal::CalcRasterMultiBand *)this, this); 
+}
+
+
+
+
+SwigDirector_CalcRasterMultiBand::~SwigDirector_CalcRasterMultiBand() {
+}
+
+int SwigDirector_CalcRasterMultiBand::number_band() const {
+  int c_result;
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call CalcRasterMultiBand.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 0;
+  const char * const swig_method_name = "_v_number_band";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject args = PyTuple_New(0);
+  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject*) args, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_number_band");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  int swig_val;
+  int swig_res = SWIG_AsVal_int(result, &swig_val);
+  if (!SWIG_IsOK(swig_res)) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""int""'");
+  }
+  c_result = static_cast< int >(swig_val);
+  return (int) c_result;
+}
+
+
+boost::shared_ptr< GeoCal::RasterImage > SwigDirector_CalcRasterMultiBand::raster_image_ptr(int band) {
+  void *swig_argp ;
+  int swig_res = 0 ;
+  
+  boost::shared_ptr< GeoCal::RasterImage > c_result;
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_From_int(static_cast< int >(band));
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call CalcRasterMultiBand.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 1;
+  const char * const swig_method_name = "raster_image";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"raster_image");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  int newmem = 0;
+  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0  | 0, &newmem);
+  if (!SWIG_IsOK(swig_res)) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::RasterImage >""'");
+  }
+  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(swig_argp));
+  // Special handling if this is a director class. In that case, we
+  // don't own the underlying python object. Instead,
+  // we tell python we have a reference to the underlying object, and
+  // when this gets destroyed we decrement the reference to the python
+  // object. 
+  Swig::Director* dp = dynamic_cast<Swig::Director*>(c_result.get());
+  if(dp) {
+    Py_INCREF(dp->swig_get_self());
+    c_result.reset(c_result.get(), PythonRefPtrCleanup(dp->swig_get_self()));
+  }
+  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(swig_argp);
+  return (boost::shared_ptr< GeoCal::RasterImage >) c_result;
+}
+
+
+blitz::Array< double,3 > SwigDirector_CalcRasterMultiBand::read_double(int Lstart, int Sstart, int Nline, int Nsamp) const {
+  PythonObject numpy ;
+  
+  blitz::Array< double,3 > c_result;
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_From_int(static_cast< int >(Lstart));
+  swig::SwigVar_PyObject obj1;
+  obj1 = SWIG_From_int(static_cast< int >(Sstart));
+  swig::SwigVar_PyObject obj2;
+  obj2 = SWIG_From_int(static_cast< int >(Nline));
+  swig::SwigVar_PyObject obj3;
+  obj3 = SWIG_From_int(static_cast< int >(Nsamp));
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call CalcRasterMultiBand.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 2;
+  const char * const swig_method_name = "read_double";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2,(PyObject *)obj3, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"read_double");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2,(PyObject *)obj3, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  {
+    c_result.reference(to_blitz_array<double, 3>(result).copy());
+  }
+  return (blitz::Array< double,3 >) c_result;
+}
+
+
+void SwigDirector_CalcRasterMultiBand::calc(int Lstart, int Sstart) const {
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_From_int(static_cast< int >(Lstart));
+  swig::SwigVar_PyObject obj1;
+  obj1 = SWIG_From_int(static_cast< int >(Sstart));
+  swig_set_inner("calc", true);
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call CalcRasterMultiBand.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 3;
+  const char * const swig_method_name = "calc";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"calc");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0,(PyObject *)obj1, NULL);
+#endif
+  swig_set_inner("calc", false);
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+}
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -5117,6 +5323,8 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_read_double(PyObject *SWIGUNUSEDP
   int val5 ;
   int ecode5 = 0 ;
   PyObject *swig_obj[5] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   SwigValueWrapper< blitz::Array< double,3 > > result;
   
   if (!SWIG_Python_UnpackTuple(args,"CalcRasterMultiBand_read_double",5,5,swig_obj)) SWIG_fail;
@@ -5155,14 +5363,24 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_read_double(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CalcRasterMultiBand_read_double" "', argument " "5"" of type '" "int""'");
   } 
   arg5 = static_cast< int >(val5);
-  {
-    try {
-      result = ((GeoCal::CalcRasterMultiBand const *)arg1)->read_double(arg2,arg3,arg4,arg5);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::CalcRasterMultiBand const *)arg1)->GeoCal::CalcRasterMultiBand::read_double(arg2,arg3,arg4,arg5);
+        } else {
+          result = ((GeoCal::CalcRasterMultiBand const *)arg1)->read_double(arg2,arg3,arg4,arg5);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   {
     npy_intp dims[3], stride[3];
@@ -5182,6 +5400,2504 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_read_double(PyObject *SWIGUNUSEDP
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_raster_image(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  boost::shared_ptr< GeoCal::RasterImage > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"CalcRasterMultiBand_raster_image",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_raster_image" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CalcRasterMultiBand_raster_image" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = (arg1)->GeoCal::CalcRasterMultiBand::raster_image_ptr(arg2);
+        } else {
+          result = (arg1)->raster_image_ptr(arg2);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand__v_number_band(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand const > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand__v_number_band" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = (int)((GeoCal::CalcRasterMultiBand const *)arg1)->GeoCal::CalcRasterMultiBand::number_band();
+        } else {
+          result = (int)((GeoCal::CalcRasterMultiBand const *)arg1)->number_band();
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand__v_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  blitz::Array< double,3 > *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand__v_data" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      result = (blitz::Array< double,3 > *) &(darg)->data_ptr();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    npy_intp dims[3], stride[3];
+    for(int i = 0; i < 3; ++i) {
+      dims[i] = result->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = result->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<double>(), 
+      stride, result->data(), 0, NPY_WRITEABLE, 0);
+    blitz::Array<double, 3>* t = new blitz::Array<double, 3>(*result);
+    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+      SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      SWIG_POINTER_NEW | 0 );
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_calc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand const > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if (!SWIG_Python_UnpackTuple(args,"CalcRasterMultiBand_calc",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_calc" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CalcRasterMultiBand_calc" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_calc" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  director = SWIG_DIRECTOR_CAST(arg1);
+  if (!director || !(director->swig_get_inner("calc"))) {
+    SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing protected member calc");
+    SWIG_fail;
+  }
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+    {
+      try {
+        if (upcall) {
+          Swig::DirectorPureVirtualException::raise("GeoCal::CalcRasterMultiBand::calc");
+        } else {
+          ((SwigDirector_CalcRasterMultiBand const *)darg)->calc(arg2,arg3);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRasterMultiBand" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CalcRasterMultiBand" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_CalcRasterMultiBand" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,(GeoCal::RasterImage const &)*arg2,arg3,arg4,arg5,arg6); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRasterMultiBand" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CalcRasterMultiBand" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,(GeoCal::RasterImage const &)*arg2,arg3,arg4,arg5); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRasterMultiBand" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,(GeoCal::RasterImage const &)*arg2,arg3,arg4); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  int arg3 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,(GeoCal::RasterImage const &)*arg2,arg3); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  int arg7 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  arg1 = swig_obj[0];
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRasterMultiBand" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CalcRasterMultiBand" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_CalcRasterMultiBand" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_CalcRasterMultiBand" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,arg2,arg3,arg4,arg5,arg6,arg7); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  arg1 = swig_obj[0];
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRasterMultiBand" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CalcRasterMultiBand" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_CalcRasterMultiBand" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,arg2,arg3,arg4,arg5,arg6); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  arg1 = swig_obj[0];
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRasterMultiBand" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CalcRasterMultiBand" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,arg2,arg3,arg4,arg5); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  arg1 = swig_obj[0];
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRasterMultiBand" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,arg2,arg3,arg4); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRasterMultiBand" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CalcRasterMultiBand" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_CalcRasterMultiBand" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,(GeoCal::MapInfo const &)*arg2,arg3,arg4,arg5,arg6); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRasterMultiBand" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CalcRasterMultiBand" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,(GeoCal::MapInfo const &)*arg2,arg3,arg4,arg5); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRasterMultiBand" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,(GeoCal::MapInfo const &)*arg2,arg3,arg4); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_12(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  int arg3 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::CalcRasterMultiBand *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRasterMultiBand" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRasterMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRasterMultiBand *)new SwigDirector_CalcRasterMultiBand(arg1,(GeoCal::MapInfo const &)*arg2,arg3); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRasterMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRasterMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[8];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_CalcRasterMultiBand",0,7,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_CalcRasterMultiBand__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_2;
+    return _wrap_new_CalcRasterMultiBand__SWIG_4(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 3) {
+    return _wrap_new_CalcRasterMultiBand__SWIG_12(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_4;
+    return _wrap_new_CalcRasterMultiBand__SWIG_11(self, argc, argv);
+  }
+check_4:
+  
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_CalcRasterMultiBand__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_CalcRasterMultiBand__SWIG_8(self, argc, argv);
+  }
+  if (argc == 5) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_7;
+    return _wrap_new_CalcRasterMultiBand__SWIG_10(self, argc, argv);
+  }
+check_7:
+  
+  if (argc == 5) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_8;
+    return _wrap_new_CalcRasterMultiBand__SWIG_2(self, argc, argv);
+  }
+check_8:
+  
+  if (argc == 5) {
+    return _wrap_new_CalcRasterMultiBand__SWIG_7(self, argc, argv);
+  }
+  if (argc == 6) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_10;
+    return _wrap_new_CalcRasterMultiBand__SWIG_1(self, argc, argv);
+  }
+check_10:
+  
+  if (argc == 6) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_11;
+    return _wrap_new_CalcRasterMultiBand__SWIG_9(self, argc, argv);
+  }
+check_11:
+  
+  if (argc == 6) {
+    return _wrap_new_CalcRasterMultiBand__SWIG_6(self, argc, argv);
+  }
+  if (argc == 7) {
+    return _wrap_new_CalcRasterMultiBand__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_CalcRasterMultiBand'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand()\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(GeoCal::RasterImage const &,int,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(GeoCal::RasterImage const &,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(GeoCal::RasterImage const &,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(GeoCal::RasterImage const &,int)\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(int,int,int,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(int,int,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(int,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(GeoCal::MapInfo const &,int,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(GeoCal::MapInfo const &,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(GeoCal::MapInfo const &,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::CalcRasterMultiBand(PyObject *,GeoCal::MapInfo const &,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRasterMultiBand_initialize" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CalcRasterMultiBand_initialize" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "CalcRasterMultiBand_initialize" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize((GeoCal::RasterImage const &)*arg2,arg3,arg4,arg5,arg6);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRasterMultiBand_initialize" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CalcRasterMultiBand_initialize" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize((GeoCal::RasterImage const &)*arg2,arg3,arg4,arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRasterMultiBand_initialize" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize((GeoCal::RasterImage const &)*arg2,arg3,arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize((GeoCal::RasterImage const &)*arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  int arg7 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRasterMultiBand_initialize" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CalcRasterMultiBand_initialize" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "CalcRasterMultiBand_initialize" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "CalcRasterMultiBand_initialize" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize(arg2,arg3,arg4,arg5,arg6,arg7);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRasterMultiBand_initialize" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CalcRasterMultiBand_initialize" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "CalcRasterMultiBand_initialize" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize(arg2,arg3,arg4,arg5,arg6);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRasterMultiBand_initialize" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CalcRasterMultiBand_initialize" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize(arg2,arg3,arg4,arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRasterMultiBand_initialize" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize(arg2,arg3,arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRasterMultiBand_initialize" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CalcRasterMultiBand_initialize" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "CalcRasterMultiBand_initialize" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize((GeoCal::MapInfo const &)*arg2,arg3,arg4,arg5,arg6);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRasterMultiBand_initialize" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CalcRasterMultiBand_initialize" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize((GeoCal::MapInfo const &)*arg2,arg3,arg4,arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRasterMultiBand_initialize" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize((GeoCal::MapInfo const &)*arg2,arg3,arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  SwigDirector_CalcRasterMultiBand *darg = 0;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_initialize" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CalcRasterMultiBand_initialize" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_initialize" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  darg = dynamic_cast<SwigDirector_CalcRasterMultiBand *>(arg1);
+  {
+    try {
+      (darg)->initialize((GeoCal::MapInfo const &)*arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[8];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"CalcRasterMultiBand_initialize",0,7,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_3(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 3) {
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_11(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_10(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_4;
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_2(self, argc, argv);
+  }
+check_4:
+  
+  if (argc == 4) {
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_7(self, argc, argv);
+  }
+  if (argc == 5) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_6;
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_9(self, argc, argv);
+  }
+check_6:
+  
+  if (argc == 5) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_7;
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_1(self, argc, argv);
+  }
+check_7:
+  
+  if (argc == 5) {
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_6(self, argc, argv);
+  }
+  if (argc == 6) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_9;
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_0(self, argc, argv);
+  }
+check_9:
+  
+  if (argc == 6) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_10;
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_8(self, argc, argv);
+  }
+check_10:
+  
+  if (argc == 6) {
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_5(self, argc, argv);
+  }
+  if (argc == 7) {
+    return _wrap_CalcRasterMultiBand_initialize__SWIG_4(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'CalcRasterMultiBand_initialize'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(GeoCal::RasterImage const &,int,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(GeoCal::RasterImage const &,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(GeoCal::RasterImage const &,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(GeoCal::RasterImage const &,int)\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(int,int,int,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(int,int,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(int,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(GeoCal::MapInfo const &,int,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(GeoCal::MapInfo const &,int,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(GeoCal::MapInfo const &,int,int)\n"
+    "    GeoCal::CalcRasterMultiBand::initialize(GeoCal::MapInfo const &,int)\n");
+  return 0;
 }
 
 
@@ -5227,11 +7943,53 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_disown_CalcRasterMultiBand(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "disown_CalcRasterMultiBand" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    Swig::Director *director = SWIG_DIRECTOR_CAST(arg1);
+    if (director) director->swig_disown();
+  }
+  
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *CalcRasterMultiBand_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
   SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *CalcRasterMultiBand_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
 }
 
 static PyMethodDef SwigMethods[] = {
@@ -5240,8 +7998,16 @@ static PyMethodDef SwigMethods[] = {
 		"Array< double, 3 > CalcRasterMultiBand::read_double(int Lstart, int Sstart, int Nline, int Nsamp) const\n"
 		"\n"
 		""},
+	 { (char *)"CalcRasterMultiBand_raster_image", _wrap_CalcRasterMultiBand_raster_image, METH_VARARGS, NULL},
+	 { (char *)"CalcRasterMultiBand__v_number_band", (PyCFunction)_wrap_CalcRasterMultiBand__v_number_band, METH_O, NULL},
+	 { (char *)"CalcRasterMultiBand__v_data", (PyCFunction)_wrap_CalcRasterMultiBand__v_data, METH_O, NULL},
+	 { (char *)"CalcRasterMultiBand_calc", _wrap_CalcRasterMultiBand_calc, METH_VARARGS, NULL},
+	 { (char *)"new_CalcRasterMultiBand", _wrap_new_CalcRasterMultiBand, METH_VARARGS, NULL},
+	 { (char *)"CalcRasterMultiBand_initialize", _wrap_CalcRasterMultiBand_initialize, METH_VARARGS, NULL},
 	 { (char *)"delete_CalcRasterMultiBand", (PyCFunction)_wrap_delete_CalcRasterMultiBand, METH_O, NULL},
+	 { (char *)"disown_CalcRasterMultiBand", (PyCFunction)_wrap_disown_CalcRasterMultiBand, METH_O, NULL},
 	 { (char *)"CalcRasterMultiBand_swigregister", CalcRasterMultiBand_swigregister, METH_VARARGS, NULL},
+	 { (char *)"CalcRasterMultiBand_swiginit", CalcRasterMultiBand_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

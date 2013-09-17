@@ -125,7 +125,6 @@ class CalcRasterMultiBand(geocal.raster_image_multi_band_variable.RasterImageMul
     C++ includes: calc_raster_multi_band.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
     def read_double(self, *args):
         """
@@ -134,8 +133,31 @@ class CalcRasterMultiBand(geocal.raster_image_multi_band_variable.RasterImageMul
         """
         return _calc_raster_multi_band.CalcRasterMultiBand_read_double(self, *args)
 
+    @property
+    def number_band(self):
+        return self._v_number_band()
+
+    @property
+    def data(self):
+        return self._v_data()
+
+    def __init__(self, *args): 
+        if self.__class__ == CalcRasterMultiBand:
+            _self = None
+        else:
+            _self = self
+        _calc_raster_multi_band.CalcRasterMultiBand_swiginit(self,_calc_raster_multi_band.new_CalcRasterMultiBand(_self, *args))
     __swig_destroy__ = _calc_raster_multi_band.delete_CalcRasterMultiBand
+    def __disown__(self):
+        self.this.disown()
+        _calc_raster_multi_band.disown_CalcRasterMultiBand(self)
+        return weakref_proxy(self)
 CalcRasterMultiBand.read_double = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_read_double,None,CalcRasterMultiBand)
+CalcRasterMultiBand.raster_image = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_raster_image,None,CalcRasterMultiBand)
+CalcRasterMultiBand._v_number_band = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand__v_number_band,None,CalcRasterMultiBand)
+CalcRasterMultiBand._v_data = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand__v_data,None,CalcRasterMultiBand)
+CalcRasterMultiBand.calc = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_calc,None,CalcRasterMultiBand)
+CalcRasterMultiBand.initialize = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_initialize,None,CalcRasterMultiBand)
 CalcRasterMultiBand_swigregister = _calc_raster_multi_band.CalcRasterMultiBand_swigregister
 CalcRasterMultiBand_swigregister(CalcRasterMultiBand)
 

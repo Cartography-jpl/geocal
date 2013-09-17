@@ -177,6 +177,7 @@ class SubRasterImage(geocal.raster_image_variable.RasterImageVariable):
 SubRasterImage._v_start_line = new_instancemethod(_sub_raster_image.SubRasterImage__v_start_line,None,SubRasterImage)
 SubRasterImage._v_start_sample = new_instancemethod(_sub_raster_image.SubRasterImage__v_start_sample,None,SubRasterImage)
 SubRasterImage._v_full_raster_image = new_instancemethod(_sub_raster_image.SubRasterImage__v_full_raster_image,None,SubRasterImage)
+SubRasterImage.write = new_instancemethod(_sub_raster_image.SubRasterImage_write,None,SubRasterImage)
 SubRasterImage_swigregister = _sub_raster_image.SubRasterImage_swigregister
 SubRasterImage_swigregister(SubRasterImage)
 

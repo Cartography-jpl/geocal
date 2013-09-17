@@ -5138,42 +5138,6 @@ SwigDirector_CalcRasterMultiBand::SwigDirector_CalcRasterMultiBand(PyObject *sel
 SwigDirector_CalcRasterMultiBand::~SwigDirector_CalcRasterMultiBand() {
 }
 
-int SwigDirector_CalcRasterMultiBand::number_band() const {
-  int c_result;
-  if (!swig_get_self()) {
-    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call CalcRasterMultiBand.__init__.");
-  }
-#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 0;
-  const char * const swig_method_name = "_v_number_band";
-  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
-  swig::SwigVar_PyObject args = PyTuple_New(0);
-  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject*) args, NULL);
-#else
-  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_number_band");
-  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
-#endif
-  if (!result) {
-    PyObject *error = PyErr_Occurred();
-    {
-      if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
-      }
-    }
-  }
-  int swig_val;
-  int swig_res = SWIG_AsVal_int(result, &swig_val);
-  if (!SWIG_IsOK(swig_res)) {
-    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""int""'");
-  }
-  c_result = static_cast< int >(swig_val);
-  return (int) c_result;
-}
-
-
 boost::shared_ptr< GeoCal::RasterImage > SwigDirector_CalcRasterMultiBand::raster_image_ptr(int band) {
   void *swig_argp ;
   int swig_res = 0 ;
@@ -5185,7 +5149,7 @@ boost::shared_ptr< GeoCal::RasterImage > SwigDirector_CalcRasterMultiBand::raste
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call CalcRasterMultiBand.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 1;
+  const size_t swig_method_index = 0;
   const char * const swig_method_name = "raster_image";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -5225,48 +5189,6 @@ boost::shared_ptr< GeoCal::RasterImage > SwigDirector_CalcRasterMultiBand::raste
 }
 
 
-blitz::Array< double,3 > SwigDirector_CalcRasterMultiBand::read_double(int Lstart, int Sstart, int Nline, int Nsamp) const {
-  PythonObject numpy ;
-  
-  blitz::Array< double,3 > c_result;
-  swig::SwigVar_PyObject obj0;
-  obj0 = SWIG_From_int(static_cast< int >(Lstart));
-  swig::SwigVar_PyObject obj1;
-  obj1 = SWIG_From_int(static_cast< int >(Sstart));
-  swig::SwigVar_PyObject obj2;
-  obj2 = SWIG_From_int(static_cast< int >(Nline));
-  swig::SwigVar_PyObject obj3;
-  obj3 = SWIG_From_int(static_cast< int >(Nsamp));
-  if (!swig_get_self()) {
-    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call CalcRasterMultiBand.__init__.");
-  }
-#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 2;
-  const char * const swig_method_name = "read_double";
-  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
-  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2,(PyObject *)obj3, NULL);
-#else
-  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"read_double");
-  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2,(PyObject *)obj3, NULL);
-#endif
-  if (!result) {
-    PyObject *error = PyErr_Occurred();
-    {
-      if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
-      }
-    }
-  }
-  {
-    c_result.reference(to_blitz_array<double, 3>(result).copy());
-  }
-  return (blitz::Array< double,3 >) c_result;
-}
-
-
 void SwigDirector_CalcRasterMultiBand::calc(int Lstart, int Sstart) const {
   swig::SwigVar_PyObject obj0;
   obj0 = SWIG_From_int(static_cast< int >(Lstart));
@@ -5277,7 +5199,7 @@ void SwigDirector_CalcRasterMultiBand::calc(int Lstart, int Sstart) const {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call CalcRasterMultiBand.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 3;
+  const size_t swig_method_index = 1;
   const char * const swig_method_name = "calc";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1, NULL);
@@ -5303,106 +5225,6 @@ void SwigDirector_CalcRasterMultiBand::calc(int Lstart, int Sstart) const {
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_read_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::CalcRasterMultiBand const > tempshared1 ;
-  boost::shared_ptr< GeoCal::CalcRasterMultiBand const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  PyObject *swig_obj[5] ;
-  Swig::Director *director = 0;
-  bool upcall = false;
-  SwigValueWrapper< blitz::Array< double,3 > > result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"CalcRasterMultiBand_read_double",5,5,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_read_double" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
-      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
-      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CalcRasterMultiBand_read_double" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRasterMultiBand_read_double" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRasterMultiBand_read_double" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CalcRasterMultiBand_read_double" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  director = SWIG_DIRECTOR_CAST(arg1);
-  upcall = (director && (director->swig_get_self()==swig_obj[0]));
-  try {
-    {
-      try {
-        if (upcall) {
-          result = ((GeoCal::CalcRasterMultiBand const *)arg1)->GeoCal::CalcRasterMultiBand::read_double(arg2,arg3,arg4,arg5);
-        } else {
-          result = ((GeoCal::CalcRasterMultiBand const *)arg1)->read_double(arg2,arg3,arg4,arg5);
-        }
-      } catch (const std::exception& e) {
-        SWIG_exception(SWIG_RuntimeError, e.what());
-      } catch (Swig::DirectorException &e) {
-        SWIG_fail; 
-      }
-    }
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
-  {
-    npy_intp dims[3], stride[3];
-    for(int i = 0; i < 3; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(double);
-    }
-    resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<double>(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 3>* t = new blitz::Array<double, 3>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_double_3_t, 
-      SWIG_POINTER_NEW | 0 );
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_raster_image(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
@@ -5461,61 +5283,6 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_raster_image(PyObject *SWIGUNUSED
   {
     resultobj = GeoCal::swig_to_python(result);
   }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_CalcRasterMultiBand__v_number_band(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::CalcRasterMultiBand *arg1 = (GeoCal::CalcRasterMultiBand *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::CalcRasterMultiBand const > tempshared1 ;
-  boost::shared_ptr< GeoCal::CalcRasterMultiBand const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  Swig::Director *director = 0;
-  bool upcall = false;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand__v_number_band" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
-      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
-      arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  director = SWIG_DIRECTOR_CAST(arg1);
-  upcall = (director && (director->swig_get_self()==swig_obj[0]));
-  try {
-    {
-      try {
-        if (upcall) {
-          result = (int)((GeoCal::CalcRasterMultiBand const *)arg1)->GeoCal::CalcRasterMultiBand::number_band();
-        } else {
-          result = (int)((GeoCal::CalcRasterMultiBand const *)arg1)->number_band();
-        }
-      } catch (const std::exception& e) {
-        SWIG_exception(SWIG_RuntimeError, e.what());
-      } catch (Swig::DirectorException &e) {
-        SWIG_fail; 
-      }
-    }
-  } catch (Swig::DirectorException&) {
-    SWIG_fail;
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -7994,12 +7761,7 @@ SWIGINTERN PyObject *CalcRasterMultiBand_swiginit(PyObject *SWIGUNUSEDPARM(self)
 
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"CalcRasterMultiBand_read_double", _wrap_CalcRasterMultiBand_read_double, METH_VARARGS, (char *)"\n"
-		"Array< double, 3 > CalcRasterMultiBand::read_double(int Lstart, int Sstart, int Nline, int Nsamp) const\n"
-		"\n"
-		""},
 	 { (char *)"CalcRasterMultiBand_raster_image", _wrap_CalcRasterMultiBand_raster_image, METH_VARARGS, NULL},
-	 { (char *)"CalcRasterMultiBand__v_number_band", (PyCFunction)_wrap_CalcRasterMultiBand__v_number_band, METH_O, NULL},
 	 { (char *)"CalcRasterMultiBand__v_data", (PyCFunction)_wrap_CalcRasterMultiBand__v_data, METH_O, NULL},
 	 { (char *)"CalcRasterMultiBand_calc", _wrap_CalcRasterMultiBand_calc, METH_VARARGS, NULL},
 	 { (char *)"new_CalcRasterMultiBand", _wrap_new_CalcRasterMultiBand, METH_VARARGS, NULL},

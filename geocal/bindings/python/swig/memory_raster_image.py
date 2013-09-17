@@ -130,6 +130,7 @@ class MemoryRasterImage(geocal.raster_image_variable.RasterImageVariable):
         """
         _memory_raster_image.MemoryRasterImage_swiginit(self,_memory_raster_image.new_MemoryRasterImage(*args))
     __swig_destroy__ = _memory_raster_image.delete_MemoryRasterImage
+MemoryRasterImage.write = new_instancemethod(_memory_raster_image.MemoryRasterImage_write,None,MemoryRasterImage)
 MemoryRasterImage_swigregister = _memory_raster_image.MemoryRasterImage_swigregister
 MemoryRasterImage_swigregister(MemoryRasterImage)
 

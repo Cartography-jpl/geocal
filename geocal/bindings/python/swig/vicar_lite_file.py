@@ -407,6 +407,7 @@ class VicarLiteRasterImage(geocal.raster_image.RasterImage):
       return _new_from_init, (self.__class__, 1, self.file.file_name,self.file.access,self.band,self.number_tile_line,self.number_tile_sample,self.file.force_area_pixel)
 
 VicarLiteRasterImage._v_file = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_file,None,VicarLiteRasterImage)
+VicarLiteRasterImage.write = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage_write,None,VicarLiteRasterImage)
 VicarLiteRasterImage._v_is_compressed = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_is_compressed,None,VicarLiteRasterImage)
 VicarLiteRasterImage._v_band = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_band,None,VicarLiteRasterImage)
 VicarLiteRasterImage_swigregister = _vicar_lite_file.VicarLiteRasterImage_swigregister

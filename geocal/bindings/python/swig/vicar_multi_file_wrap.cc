@@ -6403,6 +6403,71 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_VicarMultiFile_write(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  PyObject *swig_obj[4] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"VicarMultiFile_write",4,4,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile_write" "', argument " "1"" of type '" "GeoCal::VicarMultiFile *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "VicarMultiFile_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "VicarMultiFile_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "VicarMultiFile_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    try {
+      (arg1)->write(arg2,arg3,arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_VicarMultiFile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
@@ -6502,6 +6567,7 @@ static PyMethodDef SwigMethods[] = {
 		"it matters for may applications. Most users should just ignore this\n"
 		"value. \n"
 		""},
+	 { (char *)"VicarMultiFile_write", _wrap_VicarMultiFile_write, METH_VARARGS, NULL},
 	 { (char *)"delete_VicarMultiFile", (PyCFunction)_wrap_delete_VicarMultiFile, METH_O, (char *)"\n"
 		"virtual GeoCal::VicarMultiFile::~VicarMultiFile()\n"
 		"\n"

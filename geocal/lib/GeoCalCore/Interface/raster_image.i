@@ -38,7 +38,7 @@ class Rpc;
 class RasterImage : public GenericObject {
 public:
   double interpolate(double Line, double Sample) const;
-  virtual boost::shared_ptr<RasterImage> overview(int Min_number_sample) const;
+  boost::shared_ptr<RasterImage> overview(int Min_number_sample) const;
   // Don't bother with this, since we need to convert from
   //boost::array. Revisit if we actually need this
   //boost::array<double, 2> interpolate_derivative(double Line, double Sample) 
@@ -46,9 +46,9 @@ public:
   double interpolate(const ImageCoordinate& Ic) const;
   %python_attribute(number_line, int)
   %python_attribute(number_sample, int)
-  %python_attribute(number_tile_line, virtual int)
-  %python_attribute(number_tile_sample, virtual int)
-  virtual int read(int Line, int Sample) const;
+  %python_attribute(number_tile_line, int)
+  %python_attribute(number_tile_sample, int)
+  int read(int Line, int Sample) const;
 
   blitz::Array<int, 2>
   read(int Lstart, int Sstart, int Number_line, int Number_sample) 
@@ -58,8 +58,8 @@ public:
     const;
   blitz::Array<int, 2>
   read(const RasterImageTileIterator& Ti) const; 
-  virtual void write(int Line, int Sample, int Val);
-  virtual void write(int Lstart, int Sstart, const blitz::Array<int, 2>& A);
+  void write(int Line, int Sample, int Val);
+  void write(int Lstart, int Sstart, const blitz::Array<int, 2>& A);
   std::string print_to_string() const;
   %python_attribute(has_map_info, bool)
   %python_attribute(map_info, MapInfo)

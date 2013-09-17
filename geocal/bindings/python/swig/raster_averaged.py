@@ -211,6 +211,7 @@ RasterAveraged._v_number_sample_per_pixel = new_instancemethod(_raster_averaged.
 RasterAveraged._v_ignore_zero = new_instancemethod(_raster_averaged.RasterAveraged__v_ignore_zero,None,RasterAveraged)
 RasterAveraged.__call__ = new_instancemethod(_raster_averaged.RasterAveraged___call__,None,RasterAveraged)
 RasterAveraged.read_ptr = new_instancemethod(_raster_averaged.RasterAveraged_read_ptr,None,RasterAveraged)
+RasterAveraged.write = new_instancemethod(_raster_averaged.RasterAveraged_write,None,RasterAveraged)
 RasterAveraged_swigregister = _raster_averaged.RasterAveraged_swigregister
 RasterAveraged_swigregister(RasterAveraged)
 

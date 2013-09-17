@@ -126,17 +126,6 @@ class CalcRasterMultiBand(geocal.raster_image_multi_band_variable.RasterImageMul
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
-    def read_double(self, *args):
-        """
-        Array< double, 3 > CalcRasterMultiBand::read_double(int Lstart, int Sstart, int Nline, int Nsamp) const
-
-        """
-        return _calc_raster_multi_band.CalcRasterMultiBand_read_double(self, *args)
-
-    @property
-    def number_band(self):
-        return self._v_number_band()
-
     @property
     def data(self):
         return self._v_data()
@@ -152,9 +141,7 @@ class CalcRasterMultiBand(geocal.raster_image_multi_band_variable.RasterImageMul
         self.this.disown()
         _calc_raster_multi_band.disown_CalcRasterMultiBand(self)
         return weakref_proxy(self)
-CalcRasterMultiBand.read_double = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_read_double,None,CalcRasterMultiBand)
 CalcRasterMultiBand.raster_image = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_raster_image,None,CalcRasterMultiBand)
-CalcRasterMultiBand._v_number_band = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand__v_number_band,None,CalcRasterMultiBand)
 CalcRasterMultiBand._v_data = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand__v_data,None,CalcRasterMultiBand)
 CalcRasterMultiBand.calc = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_calc,None,CalcRasterMultiBand)
 CalcRasterMultiBand.initialize = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_initialize,None,CalcRasterMultiBand)

@@ -171,6 +171,7 @@ class MapReprojectedImage(geocal.raster_image_variable.RasterImageVariable):
 
     __swig_destroy__ = _map_reprojected_image.delete_MapReprojectedImage
 MapReprojectedImage._v_raw_image = new_instancemethod(_map_reprojected_image.MapReprojectedImage__v_raw_image,None,MapReprojectedImage)
+MapReprojectedImage.write = new_instancemethod(_map_reprojected_image.MapReprojectedImage_write,None,MapReprojectedImage)
 MapReprojectedImage_swigregister = _map_reprojected_image.MapReprojectedImage_swigregister
 MapReprojectedImage_swigregister(MapReprojectedImage)
 

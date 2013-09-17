@@ -173,6 +173,7 @@ class RawRasterImage(geocal.raster_image.RasterImage):
       return _new_from_init, (self.__class__, 1, self.file_name,self.band)
 
     __swig_destroy__ = _raw_raster_image.delete_RawRasterImage
+RawRasterImage.write = new_instancemethod(_raw_raster_image.RawRasterImage_write,None,RawRasterImage)
 RawRasterImage._v_file_name = new_instancemethod(_raw_raster_image.RawRasterImage__v_file_name,None,RawRasterImage)
 RawRasterImage._v_band = new_instancemethod(_raw_raster_image.RawRasterImage__v_band,None,RawRasterImage)
 RawRasterImage_swigregister = _raw_raster_image.RawRasterImage_swigregister

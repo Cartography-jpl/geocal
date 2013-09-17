@@ -123,21 +123,6 @@ class CalcRaster(geocal.raster_image_variable.RasterImageVariable):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     @property
-    def number_tile_line(self):
-        return self._v_number_tile_line()
-
-    @property
-    def number_tile_sample(self):
-        return self._v_number_tile_sample()
-
-    def read_double(self, *args):
-        """
-        blitz::Array< double, 2 > CalcRaster::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
-        Calculate the results as a blitz::Array of doubles. 
-        """
-        return _calc_raster.CalcRaster_read_double(self, *args)
-
-    @property
     def data(self):
         return self._v_data()
 
@@ -152,12 +137,6 @@ class CalcRaster(geocal.raster_image_variable.RasterImageVariable):
         self.this.disown()
         _calc_raster.disown_CalcRaster(self)
         return weakref_proxy(self)
-CalcRaster.overview = new_instancemethod(_calc_raster.CalcRaster_overview,None,CalcRaster)
-CalcRaster._v_number_tile_line = new_instancemethod(_calc_raster.CalcRaster__v_number_tile_line,None,CalcRaster)
-CalcRaster._v_number_tile_sample = new_instancemethod(_calc_raster.CalcRaster__v_number_tile_sample,None,CalcRaster)
-CalcRaster.read = new_instancemethod(_calc_raster.CalcRaster_read,None,CalcRaster)
-CalcRaster.write = new_instancemethod(_calc_raster.CalcRaster_write,None,CalcRaster)
-CalcRaster.read_double = new_instancemethod(_calc_raster.CalcRaster_read_double,None,CalcRaster)
 CalcRaster._v_data = new_instancemethod(_calc_raster.CalcRaster__v_data,None,CalcRaster)
 CalcRaster.calc = new_instancemethod(_calc_raster.CalcRaster_calc,None,CalcRaster)
 CalcRaster_swigregister = _calc_raster.CalcRaster_swigregister

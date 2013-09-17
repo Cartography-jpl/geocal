@@ -15,10 +15,7 @@ namespace GeoCal {
 
 class CalcRasterMultiBand: public RasterImageMultiBandVariable {
 public:
-  virtual blitz::Array<double, 3> read_double(int Lstart, int Sstart, 
-					      int Nline, int Nsamp) const;
   virtual boost::shared_ptr<RasterImage> raster_image_ptr(int band);
-  %python_attribute(number_band, virtual int)
 protected:
   %python_attribute2_nonconst(data, data_ptr, blitz::Array<double, 3>&)
   virtual void calc(int Lstart, int Sstart) const = 0; 

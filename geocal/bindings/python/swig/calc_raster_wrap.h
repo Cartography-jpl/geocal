@@ -24,13 +24,6 @@ public:
     SwigDirector_CalcRaster(PyObject *self, GeoCal::MapInfo const &Mi, int Number_tile = 4);
     SwigDirector_CalcRaster(PyObject *self, GeoCal::RasterImage const &Img, int Number_tile = 4);
     virtual ~SwigDirector_CalcRaster();
-    virtual boost::shared_ptr< GeoCal::RasterImage > overview(int Min_number_sample) const;
-    virtual int number_tile_line() const;
-    virtual int number_tile_sample() const;
-    virtual int read(int Line, int Sample) const;
-    virtual void write(int Line, int Sample, int Val);
-    virtual void write(int Lstart, int Sstart, blitz::Array< int,2 > const &A);
-    virtual blitz::Array< double,2 > read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const;
     virtual void calc(int Lstart, int Sstart) const;
     using GeoCal::CalcRaster::data_ptr;
 
@@ -66,7 +59,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[8];
+    mutable swig::SwigVar_PyObject vtable[1];
 #endif
 
 };

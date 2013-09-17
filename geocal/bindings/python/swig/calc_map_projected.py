@@ -176,6 +176,7 @@ class CalcMapProjected(geocal.raster_image_variable.RasterImageVariable):
     __swig_destroy__ = _calc_map_projected.delete_CalcMapProjected
 CalcMapProjected.write_image = new_instancemethod(_calc_map_projected.CalcMapProjected_write_image,None,CalcMapProjected)
 CalcMapProjected.write_multiple = new_instancemethod(_calc_map_projected.CalcMapProjected_write_multiple,None,CalcMapProjected)
+CalcMapProjected.write = new_instancemethod(_calc_map_projected.CalcMapProjected_write,None,CalcMapProjected)
 CalcMapProjected_swigregister = _calc_map_projected.CalcMapProjected_swigregister
 CalcMapProjected_swigregister(CalcMapProjected)
 

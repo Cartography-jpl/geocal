@@ -188,6 +188,7 @@ RasterSubSample._v_number_line_per_pixel = new_instancemethod(_raster_subsample.
 RasterSubSample._v_number_sample_per_pixel = new_instancemethod(_raster_subsample.RasterSubSample__v_number_sample_per_pixel,None,RasterSubSample)
 RasterSubSample.__call__ = new_instancemethod(_raster_subsample.RasterSubSample___call__,None,RasterSubSample)
 RasterSubSample.read_ptr = new_instancemethod(_raster_subsample.RasterSubSample_read_ptr,None,RasterSubSample)
+RasterSubSample.write = new_instancemethod(_raster_subsample.RasterSubSample_write,None,RasterSubSample)
 RasterSubSample_swigregister = _raster_subsample.RasterSubSample_swigregister
 RasterSubSample_swigregister(RasterSubSample)
 

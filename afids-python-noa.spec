@@ -1,6 +1,6 @@
 Summary: This is the AFIDS python
 Name: afids-python
-Version: 1.03
+Version: 1.04
 Release: 1na
 License: Copyright 2013 California Institute of Technology ALL RIGHTS RESERVED
 Group: Applications/Engineering
@@ -70,6 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 /opt/afids/setup_afids_python.sh
 
 %changelog
+* Tue Sep 17 2013 Mike M Smyth <smyth@pistol> - 1.04-1
+- Add pair_ortho2 for Tom, which is like pair_ortho but also generates a DEM.
+
 * Fri Aug  25 2013 Mike M Smyth <smyth@pistol> - 1.03-1
 - Proper handling of RPC A format in gdal_to_nitf, and better handling of 
   interpolation in DEM generation.

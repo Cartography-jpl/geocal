@@ -1,0 +1,127 @@
+procedure help=*
+refgbl $echo
+parm image1 string
+parm image2 string
+parm dem_initial string
+parm output1 string
+parm output2 string
+parm nprocess int default=24
+parm grid_spacing int default=10
+parm resolution real default=0.5
+parm dem_resolution real default=5.0
+parm tp_numx int default=100
+parm tp_numy int default=100
+parm dbfile string default="scratch.db"
+parm surface1 string default="surf1.img"
+parm surface2 string default="surf2.img"
+parm dem string default="dem_generated.img"
+parm dem_filled string default="dem_generated_filled.img"
+body
+let $echo="yes"
+! Remove old data. Ignore any errors here, ok for data to be missing
+ush rm &dbfile &output1 &output2 || exit 0
+
+! Create DEM in database
+ush shelve_dem &dem_initial &dbfile:dem_initial
+
+! Create initial image ground connection collection, fitting for 
+! a constant shift in x y direction
+ush shelve_igccol --rpc-line-fit=0 --rpc-sample-fit=0 &dbfile:igc_initial +
+    &dbfile:dem_initial &image1 'Image 1' &image2 'Image 2'
+
+! Collect tiepoints for the 2 image.
+ush tp_collect --number-process=&nprocess --number-x=&tp_numx +
+     --number-y=&tp_numy &dbfile:igc_initial &dbfile:tpcol
+
+! Run SBA, includiing doing a height block adjustment to the DEM
+ush sba --dem-height-block-adjust &dbfile:igc_initial &dbfile:tpcol +
+    &dbfile:igc_sba &dbfile:tpcol_sba
+
+! First image, reprojected to desired resolution
+ush igc_project --number-process=&nprocess --grid-spacing=&grid_spacing +
+    --resolution=&resolution &dbfile:igc_sba 0 &surface1
+ush shelve_image &surface1 &dbfile:surface_1
+
+! Second image, reprojected on a grid matching the first image
+ush igc_project --number-process=&nprocess --grid-spacing=&grid_spacing +
+     --map-info=&dbfile:surface_1 &dbfile:igc_sba 1 &surface2
+ush shelve_image &surface2 &dbfile:surface_2
+
+! Create DEM
+ush dem_generate --resolution=&dem_resolution &dbfile:igc_sba +
+    &dbfile:surface_1 &dbfile:surface_2 0 1 &dbfile:dem_generate
+ush write_image --vicar-type=DOUB --no-data-value=-9999 +
+    --number-process=&nprocess &dbfile:dem_generate +
+    &dem &dem_filled
+ush shelve_dem &dem_filled &dbfile:dem_generate_filled
+
+! Generate final output files
+ush igc_project --number-process=&nprocess +
+    --map-info=&dbfile:surface_1 +
+    --dem=&dbfile:dem_generate_filled +
+    --resolution=&resolution &dbfile:igc_sba 0 &output1
+ush shelve_image &output1 &dbfile:surface2_1
+ush igc_project --number-process=&nprocess +
+    --map-info=&dbfile:surface_1 +
+    --dem=&dbfile:dem_generate_filled +
+    --resolution=&resolution &dbfile:igc_sba 1 &output2
+ush shelve_image &output1 &dbfile:surface2_2
+
+end-proc
+.TITLE
+pair_ortho2 - Correct the RPCs, generate DEM, and then orthorectify 2 images
+.HELP
+PURPOSE
+  This is the first step in change detection algorithm. This proc
+  stitches together some python routines that corrects the RPCs if
+  2 VICAR images to they are more closely coregistered. It then does
+  a block height offset correction to the supplied DEM (to correct for
+  gross errors in the DEM), and then it produces orthorectified data
+  of the 2 images. We produce a DSM from the orthos, and then regenerate
+  a final set of ortho images.
+
+CALL
+  pair_ortho2 image1 image2 dem_initial output1 output2
+
+.LEVEL1
+.VARI image1
+The first image, should be in VICAR format with RPC. Can convert from
+NITF using gdal_translate
+.VARI image2
+The second image, should be in VICAR format with RPC. Can convert from
+NITF using gdal_translate
+.VARI dem_initial
+Inital Digital Elevation Model. This should be in meters from WGS 84 ellipsoid,
+and can be any format that GDAL can read (e.g., VICAR)
+.VARI output1
+Name of file for reprojected image 1
+.VARI output2
+Name of file for reprojected image 2
+.VARI nprocess
+Number of processors to use in code that can run in parallel.
+.VARI grid_spacing
+Spacing between locations tht we do the RPC. We interpolate in between this.
+While we can easily do every point, there isn't much point is having
+the spacing much finer than the undelying DEM.
+.VARI resolution
+Resolution in meters of the output
+.VARI dem_resolution
+Resolution in meters of the generated DEM.
+.VARI tp_numx
+Number of tiepoints to collect in the x direction
+.VARI tp_numy
+Number of tiepoints to collect in the y direction
+.VARI dbfile
+Database file used internally by the python code.
+.VARI surface1
+Name for initial surface projected data. This uses the initial DEM, so
+it isn't as accurate as the final output.
+.VARI surface2
+Name for initial surface projected data. This uses the initial DEM, so
+it isn't as accurate as the final output.
+.VARI dem
+Name of DEM file, for DEM that only contains actual matchs (so has
+lots of holes)
+.VARI dem_filled
+Name of DEM file for DEM that uses interpolation to fill in holes.
+.END

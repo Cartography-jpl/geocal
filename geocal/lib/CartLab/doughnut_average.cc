@@ -1,33 +1,7 @@
 #include "doughnut_average.h"
-#include "calc_raster.h"
 
 using namespace GeoCal;
 using namespace blitz;
-
-class RasterImageWrapCvdNorm: public CalcRaster {
-public:
-  RasterImageWrapCvdNorm(const DoughnutAverage& Davg, int Band)
-    : CalcRaster(Davg.raster_image(0)), davg(Davg), band(Band) {}
-  virtual ~RasterImageWrapCvdNorm() {};
-protected:
-  virtual void calc(int Lstart, int Sstart) const 
-  { data = davg.cvdnorm(band, Lstart, Sstart, data.rows(), data.cols()); }
-private:
-  const DoughnutAverage& davg;
-  int band;
-};
-
-class RasterImageWrapPandif: public CalcRaster {
-public:
-  RasterImageWrapPandif(const DoughnutAverage& Davg)
-    : CalcRaster(Davg.raster_image(0)), davg(Davg) {}
-  virtual ~RasterImageWrapPandif() {};
-protected:
-  virtual void calc(int Lstart, int Sstart) const 
-  {  data = davg.pandif(Lstart, Sstart, data.rows(), data.cols()); }
-private:
-  const DoughnutAverage& davg;
-};
 
 //-----------------------------------------------------------------------
 /// Very closely related in the doughnut average is the cvdnorm for
@@ -48,26 +22,6 @@ Array<double, 2> DoughnutAverage::cvdnorm(int band, int Lstart, int Sstart,
   if(band == 1)
     res += davg(0, ra, ra) - davg(1, ra, ra);
   return res;
-}
-
-//-----------------------------------------------------------------------
-/// Present the cvdnorm as a RasterImage.
-//-----------------------------------------------------------------------
-
-boost::shared_ptr<RasterImage> 
-DoughnutAverage::cvdnorm_raster_image(int band) const
-{
-  return boost::shared_ptr<RasterImage>(new RasterImageWrapCvdNorm(*this, 
-								   band));
-}
-
-//-----------------------------------------------------------------------
-/// Present the pandif as a RasterImage.
-//-----------------------------------------------------------------------
-
-boost::shared_ptr<RasterImage> DoughnutAverage::pandif_raster_image() const
-{
-  return boost::shared_ptr<RasterImage>(new RasterImageWrapPandif(*this));
 }
 
 //-----------------------------------------------------------------------

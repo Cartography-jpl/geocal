@@ -1,6 +1,7 @@
 #ifndef DOUGHNUT_AVERAGE_H
 #define DOUGHNUT_AVERAGE_H
 #include "calc_raster_multi_band.h"
+#include "calc_raster.h"
 
 namespace GeoCal {
 
@@ -40,8 +41,6 @@ public:
 				  int Number_line, int Number_sample) const;
   blitz::Array<double, 2> pandif(int Lstart, int Sstart,
 				 int Number_line, int Number_sample) const;
-  boost::shared_ptr<RasterImage> cvdnorm_raster_image(int band) const;
-  boost::shared_ptr<RasterImage> pandif_raster_image() const;
 
 //-----------------------------------------------------------------------
 /// The window size.
@@ -61,6 +60,12 @@ public:
 //-----------------------------------------------------------------------
   bool allow_gore() const {return allow_gore_;}
 
+//-----------------------------------------------------------------------
+/// The underlying image
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<RasterImageMultiBand>& underlying_image() const
+  { return rimg; }
 protected:
   virtual void calc(int Lstart, int Sstart) const; 
 private:
@@ -77,6 +82,40 @@ private:
   // The input data, with 0's propagated
   mutable blitz::Array<double, 3> input_data;
 };
+
+class RasterImageWrapCvdNorm: public CalcRaster {
+public:
+  RasterImageWrapCvdNorm(const boost::shared_ptr<DoughnutAverage>& Davg, 
+			 int Band)
+    : CalcRaster(Davg->raster_image(0)), davg_(Davg), band_(Band) {}
+  virtual ~RasterImageWrapCvdNorm() {};
+  int band() const { return band_;}
+  const boost::shared_ptr<DoughnutAverage>& davg() const { return davg_;}
+  virtual void print(std::ostream& Os) const
+  { Os << "RasterImageWrapCvdNorm"; }
+protected:
+  virtual void calc(int Lstart, int Sstart) const 
+  { data = davg_->cvdnorm(band_, Lstart, Sstart, data.rows(), data.cols()); }
+private:
+  boost::shared_ptr<DoughnutAverage> davg_;
+  int band_;
+};
+
+class RasterImageWrapPandif: public CalcRaster {
+public:
+  RasterImageWrapPandif(const boost::shared_ptr<DoughnutAverage>& Davg)
+    : CalcRaster(Davg->raster_image(0)), davg_(Davg) {}
+  virtual ~RasterImageWrapPandif() {};
+  const boost::shared_ptr<DoughnutAverage>& davg() const { return davg_;}
+  virtual void print(std::ostream& Os) const
+  { Os << "RasterImageWrapPandif"; }
+protected:
+  virtual void calc(int Lstart, int Sstart) const 
+  {  data = davg_->pandif(Lstart, Sstart, data.rows(), data.cols()); }
+private:
+  boost::shared_ptr<DoughnutAverage> davg_;
+};
+
 }
 #endif
 

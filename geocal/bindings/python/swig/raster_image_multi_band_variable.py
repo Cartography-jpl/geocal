@@ -110,6 +110,17 @@ def _new_from_set(cls, version, *args):
 
 import geocal.raster_image_multi_band
 import geocal.generic_object
+def _create_rimb(cls, version, *args):
+    '''For use with pickle, covers common case where we just store the
+    arguments needed to create an object. See for example HdfFile'''
+    if(cls.pickle_format_version() != version):
+      raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
+    inst = cls.__new__(cls)
+    inst.__init__()
+    for i in args:
+        inst.add_raster_image(i)
+    return inst
+
 class RasterImageMultiBandVariable(geocal.raster_image_multi_band.RasterImageMultiBand):
     """
     A common implementation of RasterImageMultiBand is to just store a
@@ -134,8 +145,26 @@ class RasterImageMultiBandVariable(geocal.raster_image_multi_band.RasterImageMul
         """
         return _raster_image_multi_band_variable.RasterImageMultiBandVariable_add_raster_image(self, *args)
 
+    def raster_image(self, *args):
+        """
+        virtual boost::shared_ptr<RasterImage> GeoCal::RasterImageMultiBandVariable::raster_image_ptr(int band) const
+
+        """
+        return _raster_image_multi_band_variable.RasterImageMultiBandVariable_raster_image(self, *args)
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+       arg_list = [self.__class__, self.__class__.pickle_format_version()]
+       for i in range(self.number_band):
+          arg_list.append(self.raster_image(i))
+       return _create_rimb, tuple(arg_list)
+
     __swig_destroy__ = _raster_image_multi_band_variable.delete_RasterImageMultiBandVariable
 RasterImageMultiBandVariable.add_raster_image = new_instancemethod(_raster_image_multi_band_variable.RasterImageMultiBandVariable_add_raster_image,None,RasterImageMultiBandVariable)
+RasterImageMultiBandVariable.raster_image = new_instancemethod(_raster_image_multi_band_variable.RasterImageMultiBandVariable_raster_image,None,RasterImageMultiBandVariable)
 RasterImageMultiBandVariable_swigregister = _raster_image_multi_band_variable.RasterImageMultiBandVariable_swigregister
 RasterImageMultiBandVariable_swigregister(RasterImageMultiBandVariable)
 

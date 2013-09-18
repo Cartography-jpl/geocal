@@ -65,7 +65,7 @@ ush igc_project --number-process=&nprocess +
     --map-info=&dbfile:surface_1 +
     --dem=&dbfile:dem_generate_filled +
     --resolution=&resolution &dbfile:igc_sba 1 &output2
-ush shelve_image &output1 &dbfile:surface2_2
+ush shelve_image &output2 &dbfile:surface2_2
 
 end-proc
 .TITLE

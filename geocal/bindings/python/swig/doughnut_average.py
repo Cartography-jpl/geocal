@@ -112,6 +112,8 @@ import geocal.calc_raster_multi_band
 import geocal.raster_image_multi_band_variable
 import geocal.raster_image_multi_band
 import geocal.generic_object
+import geocal.calc_raster
+import geocal.raster_image_variable
 class DoughnutAverage(geocal.calc_raster_multi_band.CalcRasterMultiBand):
     """
     This class does a "doughnut average" of an underlying RasterImage.
@@ -186,24 +188,6 @@ class DoughnutAverage(geocal.calc_raster_multi_band.CalcRasterMultiBand):
         """
         return _doughnut_average.DoughnutAverage_pandif(self, *args)
 
-    def cvdnorm_raster_image(self, *args):
-        """
-        boost::shared_ptr< RasterImage > DoughnutAverage::cvdnorm_raster_image(int band) const
-        Present the cvdnorm as a RasterImage. 
-        """
-        return _doughnut_average.DoughnutAverage_cvdnorm_raster_image(self, *args)
-
-    def _v_pandif_raster_image(self):
-        """
-        boost::shared_ptr< RasterImage > DoughnutAverage::pandif_raster_image() const
-        Present the pandif as a RasterImage. 
-        """
-        return _doughnut_average.DoughnutAverage__v_pandif_raster_image(self)
-
-    @property
-    def pandif_raster_image(self):
-        return self._v_pandif_raster_image()
-
     def _v_window_size(self):
         """
         int GeoCal::DoughnutAverage::window_size() const
@@ -239,16 +223,117 @@ class DoughnutAverage(geocal.calc_raster_multi_band.CalcRasterMultiBand):
     def allow_gore(self):
         return self._v_allow_gore()
 
+    def _v_underlying_image(self):
+        """
+        const boost::shared_ptr<RasterImageMultiBand>& GeoCal::DoughnutAverage::underlying_image() const
+        The underlying image. 
+        """
+        return _doughnut_average.DoughnutAverage__v_underlying_image(self)
+
+    @property
+    def underlying_image(self):
+        return self._v_underlying_image()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.underlying_image,self.window_size,self.doughnut_size,self.allow_gore,self.raster_image(0).number_tile_line,self.raster_image(0).number_tile_sample)
+
     __swig_destroy__ = _doughnut_average.delete_DoughnutAverage
 DoughnutAverage.cvdnorm = new_instancemethod(_doughnut_average.DoughnutAverage_cvdnorm,None,DoughnutAverage)
 DoughnutAverage.pandif = new_instancemethod(_doughnut_average.DoughnutAverage_pandif,None,DoughnutAverage)
-DoughnutAverage.cvdnorm_raster_image = new_instancemethod(_doughnut_average.DoughnutAverage_cvdnorm_raster_image,None,DoughnutAverage)
-DoughnutAverage._v_pandif_raster_image = new_instancemethod(_doughnut_average.DoughnutAverage__v_pandif_raster_image,None,DoughnutAverage)
 DoughnutAverage._v_window_size = new_instancemethod(_doughnut_average.DoughnutAverage__v_window_size,None,DoughnutAverage)
 DoughnutAverage._v_doughnut_size = new_instancemethod(_doughnut_average.DoughnutAverage__v_doughnut_size,None,DoughnutAverage)
 DoughnutAverage._v_allow_gore = new_instancemethod(_doughnut_average.DoughnutAverage__v_allow_gore,None,DoughnutAverage)
+DoughnutAverage._v_underlying_image = new_instancemethod(_doughnut_average.DoughnutAverage__v_underlying_image,None,DoughnutAverage)
 DoughnutAverage_swigregister = _doughnut_average.DoughnutAverage_swigregister
 DoughnutAverage_swigregister(DoughnutAverage)
+
+class RasterImageWrapCvdNorm(geocal.calc_raster.CalcRaster):
+    """
+    C++ includes: doughnut_average.h
+
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::RasterImageWrapCvdNorm::RasterImageWrapCvdNorm(const boost::shared_ptr< DoughnutAverage > &Davg, int Band)
+
+        """
+        _doughnut_average.RasterImageWrapCvdNorm_swiginit(self,_doughnut_average.new_RasterImageWrapCvdNorm(*args))
+    def _v_band(self):
+        """
+        int GeoCal::RasterImageWrapCvdNorm::band() const
+
+        """
+        return _doughnut_average.RasterImageWrapCvdNorm__v_band(self)
+
+    @property
+    def band(self):
+        return self._v_band()
+
+    def _v_davg(self):
+        """
+        const boost::shared_ptr<DoughnutAverage>& GeoCal::RasterImageWrapCvdNorm::davg() const
+
+        """
+        return _doughnut_average.RasterImageWrapCvdNorm__v_davg(self)
+
+    @property
+    def davg(self):
+        return self._v_davg()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.davg,self.band)
+
+    __swig_destroy__ = _doughnut_average.delete_RasterImageWrapCvdNorm
+RasterImageWrapCvdNorm._v_band = new_instancemethod(_doughnut_average.RasterImageWrapCvdNorm__v_band,None,RasterImageWrapCvdNorm)
+RasterImageWrapCvdNorm._v_davg = new_instancemethod(_doughnut_average.RasterImageWrapCvdNorm__v_davg,None,RasterImageWrapCvdNorm)
+RasterImageWrapCvdNorm_swigregister = _doughnut_average.RasterImageWrapCvdNorm_swigregister
+RasterImageWrapCvdNorm_swigregister(RasterImageWrapCvdNorm)
+
+class RasterImageWrapPandif(geocal.calc_raster.CalcRaster):
+    """
+    C++ includes: doughnut_average.h
+
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::RasterImageWrapPandif::RasterImageWrapPandif(const boost::shared_ptr< DoughnutAverage > &Davg)
+
+        """
+        _doughnut_average.RasterImageWrapPandif_swiginit(self,_doughnut_average.new_RasterImageWrapPandif(*args))
+    def _v_davg(self):
+        """
+        const boost::shared_ptr<DoughnutAverage>& GeoCal::RasterImageWrapPandif::davg() const
+
+        """
+        return _doughnut_average.RasterImageWrapPandif__v_davg(self)
+
+    @property
+    def davg(self):
+        return self._v_davg()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.davg)
+
+    __swig_destroy__ = _doughnut_average.delete_RasterImageWrapPandif
+RasterImageWrapPandif._v_davg = new_instancemethod(_doughnut_average.RasterImageWrapPandif__v_davg,None,RasterImageWrapPandif)
+RasterImageWrapPandif_swigregister = _doughnut_average.RasterImageWrapPandif_swigregister
+RasterImageWrapPandif_swigregister(RasterImageWrapPandif)
 
 
 

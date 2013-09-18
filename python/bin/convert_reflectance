@@ -1,0 +1,34 @@
+#! /usr/bin/env python
+from afids import *
+import os
+
+version = "September 18, 2013"
+usage='''Usage:
+  convert_reflectance [options] <input_image> <output_image>
+  convert_reflectance -h | --help
+  convert_reflectance -v | --version
+
+This program converts to reflectance units. Not sure about this program,
+we may need to rework how this works.
+
+Options:
+  -h --help         
+       Print this message
+
+  --wv2-pan=f
+       Data is a WV-2 panchromatic band. We need to supply the IMD file for
+       this data.
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+img_in = read_shelve(args.input_image)
+if(args.wv2_pan):
+    wv2 = WorldView2Reflectance(None, args.wv2_pan)
+    out = ScaleImage(img_in, wv2.dn2TOAReflectance_factor(wv2.pan_band()))
+else:
+    raise RuntimeException("Need to select a image type to convert to reflectance")
+write_shelve(args.output_image, out)
+

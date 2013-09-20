@@ -65,10 +65,9 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
 	    continue;
 	  double hdem = rpc.height_offset + rpc.height_scale * 
 	    (ih * 2.0 / Nheight - 1);
+	  ImageCoordinate ic(lnv, smpv);
 	  boost::shared_ptr<GroundCoordinate> 
-	    pt(Igc.ground_coordinate_dem(ImageCoordinate(lnv, smpv), 
-					 SimpleDem(hdem)));
-	  ImageCoordinate ic = Igc.image_coordinate(*pt);
+	    pt(Igc.ground_coordinate_dem(ic, SimpleDem(hdem)));
 	  lat.push_back(pt->latitude());
 	  lon.push_back(pt->longitude());
 	  h.push_back(pt->height_reference_surface());

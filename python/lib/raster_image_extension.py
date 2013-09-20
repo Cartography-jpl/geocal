@@ -54,7 +54,7 @@ def _display(self, ic, sz, cross_hair = True):
     d = self.read_with_pad(ln, smp, nline, nsamp)
     max = np.max(d)
     if(max > 0):
-        min = np.min(d[np.nonzero(d)])
+        min = np.min(d[d > 0])
     else:
         min = 0
     if(cross_hair):

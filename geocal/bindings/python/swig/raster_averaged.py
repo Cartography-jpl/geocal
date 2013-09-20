@@ -189,14 +189,6 @@ class RasterAveraged(geocal.raster_image.RasterImage):
     def ignore_zero(self):
         return self._v_ignore_zero()
 
-    def read_ptr(self, *args):
-        """
-        void RasterAveraged::read_ptr(int Lstart, int Sstart, int Number_line, int Number_sample, int *Res)
-        const
-        Return a subset of the image. 
-        """
-        return _raster_averaged.RasterAveraged_read_ptr(self, *args)
-
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -209,9 +201,6 @@ RasterAveraged._v_high_resolution_image = new_instancemethod(_raster_averaged.Ra
 RasterAveraged._v_number_line_per_pixel = new_instancemethod(_raster_averaged.RasterAveraged__v_number_line_per_pixel,None,RasterAveraged)
 RasterAveraged._v_number_sample_per_pixel = new_instancemethod(_raster_averaged.RasterAveraged__v_number_sample_per_pixel,None,RasterAveraged)
 RasterAveraged._v_ignore_zero = new_instancemethod(_raster_averaged.RasterAveraged__v_ignore_zero,None,RasterAveraged)
-RasterAveraged.__call__ = new_instancemethod(_raster_averaged.RasterAveraged___call__,None,RasterAveraged)
-RasterAveraged.read_ptr = new_instancemethod(_raster_averaged.RasterAveraged_read_ptr,None,RasterAveraged)
-RasterAveraged.write = new_instancemethod(_raster_averaged.RasterAveraged_write,None,RasterAveraged)
 RasterAveraged_swigregister = _raster_averaged.RasterAveraged_swigregister
 RasterAveraged_swigregister(RasterAveraged)
 

@@ -23,10 +23,6 @@ public:
   MapInfo map_info_bounding() const;
   void map_info_bounding_update();
   %python_attribute2(raw_image, raw_image_ptr, boost::shared_ptr<RasterImage>)
-  virtual int operator()(int Line, int Sample) const;
-  virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
-			int Number_sample, int* Res) const;
-  virtual void write(int Line, int Sample, int Val);
   void fit(const RasterImage& Ref_img,
 	   double Max_diff = 1000,
 	   const GroundMask& M = CombinedGroundMask(),

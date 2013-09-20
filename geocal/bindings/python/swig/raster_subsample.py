@@ -167,14 +167,6 @@ class RasterSubSample(geocal.raster_image_variable.RasterImageVariable):
     def number_sample_per_pixel(self):
         return self._v_number_sample_per_pixel()
 
-    def read_ptr(self, *args):
-        """
-        void RasterSubSample::read_ptr(int Lstart, int Sstart, int Number_line, int Number_sample, int *Res)
-        const
-        Return a subset of the image. 
-        """
-        return _raster_subsample.RasterSubSample_read_ptr(self, *args)
-
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -186,9 +178,6 @@ class RasterSubSample(geocal.raster_image_variable.RasterImageVariable):
 RasterSubSample._v_high_resolution_image = new_instancemethod(_raster_subsample.RasterSubSample__v_high_resolution_image,None,RasterSubSample)
 RasterSubSample._v_number_line_per_pixel = new_instancemethod(_raster_subsample.RasterSubSample__v_number_line_per_pixel,None,RasterSubSample)
 RasterSubSample._v_number_sample_per_pixel = new_instancemethod(_raster_subsample.RasterSubSample__v_number_sample_per_pixel,None,RasterSubSample)
-RasterSubSample.__call__ = new_instancemethod(_raster_subsample.RasterSubSample___call__,None,RasterSubSample)
-RasterSubSample.read_ptr = new_instancemethod(_raster_subsample.RasterSubSample_read_ptr,None,RasterSubSample)
-RasterSubSample.write = new_instancemethod(_raster_subsample.RasterSubSample_write,None,RasterSubSample)
 RasterSubSample_swigregister = _raster_subsample.RasterSubSample_swigregister
 RasterSubSample_swigregister(RasterSubSample)
 

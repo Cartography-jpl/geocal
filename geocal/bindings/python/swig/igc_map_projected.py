@@ -158,6 +158,7 @@ class IgcMapProjected(geocal.calc_map_projected.CalcMapProjected):
         """
         _igc_map_projected.IgcMapProjected_swiginit(self,_igc_map_projected.new_IgcMapProjected(*args))
     __swig_destroy__ = _igc_map_projected.delete_IgcMapProjected
+IgcMapProjected.write = new_instancemethod(_igc_map_projected.IgcMapProjected_write,None,IgcMapProjected)
 IgcMapProjected_swigregister = _igc_map_projected.IgcMapProjected_swigregister
 IgcMapProjected_swigregister(IgcMapProjected)
 

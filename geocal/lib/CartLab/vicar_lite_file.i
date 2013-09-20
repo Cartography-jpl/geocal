@@ -68,9 +68,7 @@ public:
 		       int Band = 0, int Number_tile_line = -1,
 		       int Number_tile_sample = -1,
 		       bool Force_area_pixel = false);
-  virtual ~VicarLiteRasterImage();
   %python_attribute2(file, file_ptr, boost::shared_ptr<VicarLiteFile>)
-  virtual void write(int Line, int Sample, int Val);
   %python_attribute(is_compressed, bool)
   %python_attribute(band, int)
   %pickle_init(1, self.file.file_name, self.file.access, self.band,
@@ -85,7 +83,6 @@ public:
 	       const boost::shared_ptr<Datum>& D = 
 	       boost::shared_ptr<Datum>(new NoDatum()),
 	       int Band = 0);
-  virtual ~VicarLiteDem();
   %python_attribute2(file, file_ptr, boost::shared_ptr<VicarLiteFile>)
   virtual double elevation(int Y_index, int X_index) const;
   %python_attribute(band, int)

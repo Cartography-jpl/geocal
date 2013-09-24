@@ -818,6 +818,7 @@ HAVE_G77_TRUE
 HAVE_GCC_FALSE
 HAVE_GCC_TRUE
 DEBUG_FLAGS
+COPY_DIRECTORY
 CXXCPP
 CPP
 OTOOL64
@@ -22650,6 +22651,29 @@ else
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no, using $LN_S" >&5
 $as_echo "no, using $LN_S" >&6; }
 fi
+
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for copy directory" >&5
+$as_echo_n "checking for copy directory... " >&6; }
+ rm -fr conftestdata
+ mkdir conftestdata
+ touch conftestdata/test.data
+ if cp -ur conftestdata conftestdatacopy 2>/dev/null; then
+    cp_prog="cp -ur"
+    rm -rf conftestdatacopy conftestdata
+ else
+    if rsync -r conftestdata conftestdatacopy 2>/dev/null; then
+      cp_prog="rsync -r"
+      rm -rf conftestdatacopy conftestdata
+    else
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+      as_fn_error $? "Cannot find way to copy directory (tried cp -ur and rsync)" "$LINENO" 5
+    fi
+ fi
+ { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+ COPY_DIRECTORY="$cp_prog"
+
 
 
 #AC_PREFIX_DEFAULT([`pwd`/install])

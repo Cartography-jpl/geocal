@@ -435,6 +435,7 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids_data.m4 \
 	$(top_srcdir)/config/m4/ac_boost.m4 \
 	$(top_srcdir)/config/m4/ac_carto.m4 \
 	$(top_srcdir)/config/m4/ac_check_found.m4 \
+	$(top_srcdir)/config/m4/ac_copy_dir.m4 \
 	$(top_srcdir)/config/m4/ac_doxygen.m4 \
 	$(top_srcdir)/config/m4/ac_enable_debug.m4 \
 	$(top_srcdir)/config/m4/ac_fftw.m4 \
@@ -1761,6 +1762,7 @@ CARTO_LIBS = @CARTO_LIBS@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+COPY_DIRECTORY = @COPY_DIRECTORY@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CURSES_LIB = @CURSES_LIB@
@@ -8939,7 +8941,7 @@ complain_if_afids:
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@        srcdir=$(srcdir)/afids_python/geocal DOCDIR=doc/geocal $(DOXYGEN) $(srcdir)/config/doxygen.cfg
 
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@install_doxygen_doc: doc/geocal.tag
-@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	cp -ur doc/geocal/html "$(DESTDIR)$(geocaldocdir)"
+@BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	@COPY_DIRECTORY@ doc/geocal/html "$(DESTDIR)$(geocaldocdir)"
 
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@clean_doxygen_doc:
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_DOCUMENTATION_TRUE@	-rm -rf $(DESTDIR)$(geocaldocdir)

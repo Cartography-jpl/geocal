@@ -77,7 +77,7 @@ def import_image(fname, name):
 
 def initial_proj(name, index):
     with timing("Initial orthorectification %s" % name):
-        subprocess.check_call(["igc_project", "--grid-spacing=10",
+        subprocess.check_call(["igc_project", nproc, "--grid-spacing=10",
                                "--resolution=0.5", dbfile + ":igc_sba",
                                str(index), name + ".img"])
     shelve_image(name + ".img", name)
@@ -139,7 +139,7 @@ with timing("Final orthorectification image 1"):
     # This doesn't work yet, because we don't have a mask on the DEM. 
     # We'll want to come back to this, but for now just use same size as
     # with the initial images.
-    subprocess.check_call(["igc_project", 
+    subprocess.check_call(["igc_project", nproc,
                            # "--resolution=0.5", 
                            "--map-info=" + dbfile + ":initial_surf1",
                            dbfile + ":igc_sba",
@@ -147,7 +147,7 @@ with timing("Final orthorectification image 1"):
                            "0", "final_surf1.img"])
 shelve_image("final_surf1.img", "final_surf1")
 with timing("Final orthorectification image 2"):
-    subprocess.check_call(["igc_project", 
+    subprocess.check_call(["igc_project", nproc,
                            "--map-info=" + dbfile + ":final_surf1",
                            dbfile + ":igc_sba",
                            "--dem=" + dbfile + ":dem_generate_filled",
@@ -170,7 +170,7 @@ subprocess.check_call(["doughnut_diff", dbfile + ":refl1",
 if(args.diagnostic):
     with timing("Diagnostic pandiff file"):
         subprocess.check_call(["write_image", "--vicar-type=HALF",
-                               "--scale=10000", nproc, dbfile + ":pandiff",
+p                               "--scale=10000", nproc, dbfile + ":pandiff",
                                "pandiff.img"])
     with timing("Diagnostic cvdnorm file"):
         subprocess.check_call(["write_image", "--vicar-type=HALF",

@@ -12,6 +12,7 @@ from igc_collection import *
 from ply_file import *
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
+import logging
 
 def _new_from_init(cls, version, *args):
     if(cls.pickle_format_version() < version):
@@ -153,32 +154,33 @@ class DemGenerate:
         r = self.dem_match.surface_point(lstart, sstart, lend, send,
                                          self.stride, self.stride, 
                                          include_image)
-        print "Number point:   %d" %(self.dem_match.number_point)
-        print "Number match:   %d" %(self.dem_match.number_match)
-        print "Number success: %d" %(self.dem_match.number_success)
-        print "All distance:\n", self.dem_match.all_distance_stat
-        print "Good distance:\n", self.dem_match.good_distance_stat
-        print "Points not matched:\n"
-        print "  Image masked:                 %d" \
-            %(self.dem_match.diagnostic[1])
-        print "  Too close to image edge:      %d" \
-            %(self.dem_match.diagnostic[2])
-        print "  Variance too low:             %d" \
-            %(self.dem_match.diagnostic[3])
-        print "  Correlation too low:          %d" \
-            %(self.dem_match.diagnostic[4])
-        print "  Exceed max sigma:             %d" \
-            %(self.dem_match.diagnostic[5])
-        print "  Exceed max radiance variance: %d" \
-            %(self.dem_match.diagnostic[6])
-        print "  Exceed precision requirement: %d" \
-            %(self.dem_match.diagnostic[7])
-        print "  Move past target:             %d" \
-            %(self.dem_match.diagnostic[8])
-        print "  Solve failed:                 %d" \
-            %(self.dem_match.diagnostic[9])
-        print "  Unknown:                      %d" \
-            %(self.dem_match.diagnostic[10])
+        log = logging.getLogger("afids-python.dem_generate")
+        log.info("Number point:   %d" %(self.dem_match.number_point))
+        log.info("Number match:   %d" %(self.dem_match.number_match))
+        log.info("Number success: %d" %(self.dem_match.number_success))
+        log.info("All distance:\n", self.dem_match.all_distance_stat)
+        log.info("Good distance:\n", self.dem_match.good_distance_stat)
+        log.info("Points not matched:\n")
+        log.info("  Image masked:                 %d" \
+            %(self.dem_match.diagnostic[1]))
+        log.info("  Too close to image edge:      %d" \
+            %(self.dem_match.diagnostic[2]))
+        log.info("  Variance too low:             %d" \
+            %(self.dem_match.diagnostic[3]))
+        log.info("  Correlation too low:          %d" \
+            %(self.dem_match.diagnostic[4]))
+        log.info("  Exceed max sigma:             %d" \
+            %(self.dem_match.diagnostic[5]))
+        log.info("  Exceed max radiance variance: %d" \
+            %(self.dem_match.diagnostic[6]))
+        log.info("  Exceed precision requirement: %d" \
+            %(self.dem_match.diagnostic[7]))
+        log.info("  Move past target:             %d" \
+            %(self.dem_match.diagnostic[8]))
+        log.info("  Solve failed:                 %d" \
+            %(self.dem_match.diagnostic[9]))
+        log.info("  Unknown:                      %d" \
+            %(self.dem_match.diagnostic[10]))
         return r
 
     def find_intersection(self, ic1, ic2):

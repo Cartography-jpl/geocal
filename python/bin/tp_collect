@@ -4,6 +4,7 @@
 
 from afids import *
 from multiprocessing import Pool
+import logging
 
 version = "February 4, 2013"
 usage="""Usage: 
@@ -61,11 +62,16 @@ Options:
        DEM to use with the reference image specified as file:key. 
        If not specified, we use the DEM from the first IGC.
 
+  --verbose
+       Print more information as we run.
+
   -v --version      
        Print program version
 """
 
 args = docopt_simple(usage, version=version)
+if(args.verbose):
+    logging.basicConfig(level = logging.INFO)
 pool = None
 if(args.number_process > 1):
     pool = Pool(args.number_process)

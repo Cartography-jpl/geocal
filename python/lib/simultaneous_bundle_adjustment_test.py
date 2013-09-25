@@ -8,7 +8,9 @@ import scipy.optimize
 import cPickle
 import numpy as np
 from nose.plugins.skip import Skip, SkipTest
+import logging
 
+logging.basicConfig(level = logging.INFO)
 test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
 
 demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
@@ -82,8 +84,7 @@ class TestClass:
         chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
         assert chisq > 50
         print "Chisq", chisq
-        parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian, 
-                           diagnostic = True)
+        parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
         sba.parameter = parm
         v = sba.sba_eq(sba.parameter)
         chisq = np.inner(v, v) / (len(v) - len(sba.parameter))

@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 from afids import *
 import os
+import logging
 
 version = "September 16, 2013"
 usage='''Usage: 
@@ -54,6 +55,11 @@ Options:
        controls how long each torque/parallel job takes to run. If
        not supplied, we use the total image size.
 
+  --scale=f
+       Factor to scale image by. This can be particularly useful when you
+       are mapping float data to an integer type like HALF (e.g., reflectance
+       from 0.0 to 1.0 expressed as a HALF VICAR file).
+
   --subset
        Subset the input image.
 
@@ -66,13 +72,17 @@ Options:
        DOUB. [default: HALF]
 
   --verbose
-       Indicate if we print out messages while processing each tile.
+       Print more information as we run.
 
   -v --version      
        Print program version
 '''
 
 args = docopt_simple(usage, version=version)
+if(args.verbose):
+    logging.basicConfig(level = logging.INFO)
+log = logging.getLogger("afids-python")
+
 img_in = read_shelve(args.input_image)
 if(args.start_line):
     if(isinstance(img_in, RasterImageMultiBand)):
@@ -81,6 +91,10 @@ if(args.start_line):
     else:
         img_in = SubRasterImage(img_in, args.start_line, args.start_sample,
                                 args.number_line, args.number_sample)
+if(args.scale):
+    if(isinstance(img_in, RasterImageMultiBand)):
+        raise "Scaling isn't support yet for RasterImageMultiBand"
+    img_in = ScaleImage(img_in, args.scale)
 
 img_list = []
 if(isinstance(img_in, RasterImageMultiBand)):
@@ -125,7 +139,7 @@ else:
     
 number_job = parallel_process_image(img_in, out_list, process_nline, 
                                     process_nsamp, 
-                                    args.number_process, verbose = args.verbose,
+                                    args.number_process, 
                                     shelve_name = shelve_name)
 if(args.torque):
 # Create a script that can submit these jobs

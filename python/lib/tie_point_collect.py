@@ -8,6 +8,7 @@ import itertools
 import multiprocessing
 from multiprocessing import Pool
 import time
+import logging
 
 class TiePointWrap(object):
     '''Wrapper around tp_collect.tie_point that can be pickled. We can\'t
@@ -105,6 +106,7 @@ class TiePointCollect(object):
         distributed on that. If not, then we find relative to the first 
         image in the image list'''
         tstart = time.time()
+        log = logging.getLogger("afids-python.tie_point_collect")
         if(aoi):
             nline = aoi.number_y_pixel
             nsamp = aoi.number_x_pixel
@@ -122,22 +124,22 @@ class TiePointCollect(object):
                     iplist.append(ic1)
         else:
             fd = ForstnerFeatureDetector()
-            #print "Starting interest point"
-            #print "Time: ", time.time() - tstart
+            log.info("Starting interest point")
+            log.info("Time: %f" % (time.time() - tstart))
             iplist = fd.interest_point_grid(
                 self.igc_collection.image(self.base_image_index),
                 num_y, num_x, border, pool = pool)
-        #print "Done with interest point"
-        #print "Time: ", time.time() - tstart
-        #print "Starting matching"
+        log.info("Done with interest point")
+        log.info("Time: %f" % (time.time() - tstart))
+        log.info("Starting matching")
         func = TiePointWrap(self)
         if(pool):
             res = pool.map(func, iplist, 
                len(iplist) / multiprocessing.cpu_count())
         else:
             res = map(func, iplist)
-        #print "Done with matching"
-        #print "Time: ", time.time() - tstart
+        log.info("Done with matching")
+        log.info("Time: %f" % (time.time() - tstart))
         return TiePointCollection(filter(lambda i : i is not None, res))
 
     def tie_point(self, ic1):

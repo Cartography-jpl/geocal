@@ -4,10 +4,11 @@ import os
 import subprocess
 import logging
 import time
+from contextlib import contextmanager
 
 version = "September 25, 2013"
 usage='''Usage:
-  abachd [options] <pre_pan> <post_pan> <output>
+  abachd [options] <dem> <pre_pan> <post_pan> <output>
   abachd -h | --help
   abachd -v | --version
 
@@ -38,6 +39,7 @@ tstart = time.time()
 # Get input files 
 pre_pan_raw = os.path.realpath(args.pre_pan)
 post_pan_raw = os.path.realpath(args.post_pan)
+dem = os.path.realpath(args.dem)
 
 # Few things that appear often enough that it is worth stashing.
 dbfile = "end_to_end.db"
@@ -47,16 +49,21 @@ nproc = "--number-process=%d" % args.number_process
 def shelve_image(fname, name):
     subprocess.check_call(["shelve_image", fname, dbfile + ":" + name])
 
-def import_image(fname, name):
-    shelve_image(fname, "%s_raw" % name)
-    log.info("Importing %s image" % name)
+@contextmanager
+def timing(txt):
+    log.info(txt)
     tstart2 = time.time()
-    subprocess.check_call(["write_image", 
-                           "--process-number-line=2048",
-                           "--process-number-sample=2048",
-                           nproc, dbfile + ":%s_raw" % name, name + ".img"])
+    yield
     log.info("Delta Time: %f" % (time.time() - tstart2))
     log.info("Total Time: %f" % (time.time() - tstart))
+
+def import_image(fname, name):
+    shelve_image(fname, "%s_raw" % name)
+    with timing("Importing %s image" % name):
+        subprocess.check_call(["write_image", 
+                               "--process-number-line=2048",
+                               "--process-number-sample=2048",
+                               nproc, dbfile + ":%s_raw" % name, name + ".img"])
     shelve_image(name + ".img", name)
 
 # 1. Create the output directory, if it doesn't already exist.
@@ -67,3 +74,18 @@ os.chdir(args.output)
 import_image(pre_pan_raw, "pre_pan")
 import_image(post_pan_raw, "post_pan")
 
+# 3. Initial DEM
+subprocess.check_call(["shelve_dem", dem, dbfile + ":dem_initial"])
+
+# 4. Create initial igccol
+subprocess.check_call(["shelve_igccol", "--rpc-line-fit=0",
+                       "--rpc-sample-fit=0", dbfile + ":igc_initial",
+                       dbfile + ":dem_initial",
+                       "pre_pan.img", "Pre Pan", "post_pan.img", "Post pan"])
+
+# 5. Collect tie points
+with timing("Collecting tiepoints"):
+    subprocess.check_call(["tp_collect", dbfile + ":igc_initial", 
+                           dbfile + ":tpcol"])
+
+                       

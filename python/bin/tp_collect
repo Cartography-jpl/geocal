@@ -57,6 +57,10 @@ Options:
 
   --number-y=n      
        Number of grid points in the Y direction to try for [default: 100]
+
+  --min-grid-size=n
+       If we have a smaller image, then reduce the number x and y so the
+       grid cell we examine isn't smaller than this size [default: 100]
  
   --reference-dem=shelve
        DEM to use with the reference image specified as file:key. 
@@ -91,9 +95,12 @@ else:
     tpcollect = TiePointCollect(igc, avg_level = args.avg_level,
                                 max_ground_covariance = 
                                 args.max_ground_sigma ** 2)
+maxnumx = int(igc.image(0).number_line / args.min_grid_size)
+maxnumy = int(igc.image(0).number_sample / args.min_grid_size)
+numx = min(args.number_x, maxnumx)
+numy = min(args.number_y, maxnumy)
 
-tparr = tpcollect.tie_point_grid(args.number_x, args.number_y, 
-                                 pool = pool)
+tparr = tpcollect.tie_point_grid(numx, numy, pool = pool)
 
 if(args.add_tp):
     tparr.extend(read_shelve(args.output))

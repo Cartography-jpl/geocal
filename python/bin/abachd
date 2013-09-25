@@ -170,7 +170,7 @@ subprocess.check_call(["doughnut_diff", dbfile + ":refl1",
 if(args.diagnostic):
     with timing("Diagnostic pandiff file"):
         subprocess.check_call(["write_image", "--vicar-type=HALF",
-p                               "--scale=10000", nproc, dbfile + ":pandiff",
+                               "--scale=10000", nproc, dbfile + ":pandiff",
                                "pandiff.img"])
     with timing("Diagnostic cvdnorm file"):
         subprocess.check_call(["write_image", "--vicar-type=HALF",

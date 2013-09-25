@@ -158,9 +158,9 @@ class DemGenerate:
         log.info("Number point:   %d" %(self.dem_match.number_point))
         log.info("Number match:   %d" %(self.dem_match.number_match))
         log.info("Number success: %d" %(self.dem_match.number_success))
-        log.info("All distance:\n", self.dem_match.all_distance_stat)
-        log.info("Good distance:\n", self.dem_match.good_distance_stat)
-        log.info("Points not matched:\n")
+        log.info("All distance:\n%s" % self.dem_match.all_distance_stat)
+        log.info("Good distance:\n%s" % self.dem_match.good_distance_stat)
+        log.info("Points not matched:")
         log.info("  Image masked:                 %d" \
             %(self.dem_match.diagnostic[1]))
         log.info("  Too close to image edge:      %d" \

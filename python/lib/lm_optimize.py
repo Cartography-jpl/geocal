@@ -26,16 +26,16 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
     res = eq_func(x)
     log = logging.getLogger("afids-python.lm_optimize")
     log.info("Done with residual.")
-    log.info("  Total time:", time.clock() - start_time)
-    log.info("  Delta time:", time.clock() - t1)
+    log.info("  Total time: %f " % (time.clock() - start_time))
+    log.info("  Delta time: %f" % (time.clock() - t1))
     chisq = np.inner(res, res) / (len(res) - len(x0))
     lam = lambda_initial
     for i in range(max_iteration):
         t1 = time.clock()
         j = jac_func(x).tocsr()
         log.info("Done with jacobian.")
-        log.info("  Total time:", time.clock() - start_time)
-        log.info("  Delta time:", time.clock() - t1)
+        log.info("  Total time: %f " % (time.clock() - start_time))
+        log.info("  Delta time: %f" % (time.clock() - t1))
         jtj = j.transpose() * j
         chisqold = chisq
         for k in range(max_iteration):
@@ -50,13 +50,13 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
             xnew = x - sp.linalg.spsolve(c, jtres, use_umfpack=True,
                                          permc_spec="MMD_ATA")
             log.info("Done with spsolve.")
-            log.info("  Total time:", time.clock() - start_time)
-            log.info("  Delta time:", time.clock() - t1)
+            log.info("  Total time: %f " % (time.clock() - start_time))
+            log.info("  Delta time: %f" % (time.clock() - t1))
             t1 = time.clock()
             resnew = eq_func(xnew)
             log.info("Done with residual.")
-            log.info("  Total time:", time.clock() - start_time)
-            log.info("  Delta time:", time.clock() - t1)
+            log.info("  Total time: %f " % (time.clock() - start_time))
+            log.info("  Delta time: %f" % (time.clock() - t1))
             chisq = np.inner(resnew, resnew) / (len(resnew) - len(x0))
             if(chisq < chisqold):
                 x = xnew
@@ -65,7 +65,7 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
                 break
             else:
                 lam *= boost
-                log.info("Redoing iteration with lambda boosted to", lam)
+                log.info("Redoing iteration with lambda boosted to %f" % lam)
         else:
             raise RuntimeError("Exceeded maximum number of iterators")
         if(chisq < min_chisqr or
@@ -75,5 +75,5 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
     else:
         raise RuntimeError("Exceeded maximum number of iterators")
     log.info("Done with optimize.")
-    log.info("  Total time:", time.clock() - start_time)
+    log.info("  Total time: %f" %(time.clock() - start_time))
     return x

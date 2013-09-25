@@ -67,7 +67,7 @@ Options:
 args = docopt_simple(usage, version=version)
 if(args.verbose):
     logging.basicConfig(level = logging.INFO)
-log = logging.getLogger("afids-python")
+log = logging.getLogger("sba")
 
 igc = read_shelve(args.igc_in)
 tpcol = read_shelve(args.tpcol_in)
@@ -82,19 +82,19 @@ sba = SimultaneousBundleAdjustment(igc, tpcol, dem, dem_sigma=args.dem_sigma,
 v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
 
-log.info("Initial Chisq: ", chisq)
+log.info("Initial Chisq: %f" % chisq)
 parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
 sba.parameter = parm
 v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-log.info("Final Chisq: ", chisq)
+log.info("Final Chisq: %f" % chisq)
 
 if(args.dem_height_block_adjust):
     d = sba.igc_coll.dem(0)
     sdiff = [ d.distance_to_surface(sba.ground_location(i)) 
               for i in range(len(tpcol)) ]
     hadj = np.median(sdiff)
-    log.info("Doing DEM height block adjustment of ", hadj)
+    log.info("Doing DEM height block adjustment of %f" % hadj)
     d = DemMapInfoOffset(d, hadj)
     sdiff = [ d.distance_to_surface(sba.ground_location(i)) 
               for i in range(len(tpcol)) ]

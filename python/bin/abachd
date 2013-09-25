@@ -16,9 +16,18 @@ This program does the ABAChD change detection process. The output is
 a directory (created if it doesn't already exist), where all the
 output files are placed.
 
+Note it is assumed that the IMD files have the same name as the NITF files,
+but with ".NTF" replaced with ".IMD". We generally have that. We can allow
+more complicated arguments to specify this is more detail if needed, but 
+for now just assume that.
+
 Options:
   -h --help         
        Print this message
+
+  --diagnostic
+       Generate files that we don't actually need for processing, but can
+       be useful for diagnostic (e.g., the pandiff.img)
 
   --number-process=n
        Number of processors to use. [default: 1]
@@ -66,6 +75,28 @@ def import_image(fname, name):
                                nproc, dbfile + ":%s_raw" % name, name + ".img"])
     shelve_image(name + ".img", name)
 
+def initial_proj(name, index):
+    with timing("Initial orthorectification %s" % name):
+        subprocess.check_call(["igc_project", "--grid-spacing=10",
+                               "--resolution=0.5", dbfile + ":igc_sba",
+                               str(index), name + ".img"])
+    shelve_image(name + ".img", name)
+
+def dem_generate():
+    with timing("DEM generation"):
+        subprocess.check_call(["dem_generate", "--resolution=5.0", 
+                               dbfile + ":igc_sba", dbfile + ":initial_surf1", 
+                               dbfile + ":initial_surf2",
+                               "0", "1", dbfile + ":dem_generate"])
+        cmd = ["write_image", "--vicar-type=DOUB", "--no-data-value=-9999",
+               nproc, dbfile + ":dem_generate", "dem_generate.img",
+               "dem_generate_filled.img"]
+        if(args.verbose):
+            cmd.append("--verbose")
+        subprocess.check_call(cmd)
+        subprocess.check_call(["shelve_dem", "dem_generate_filled.img",
+                               dbfile + ":dem_generate_filled"])
+
 # 1. Create the output directory, if it doesn't already exist.
 subprocess.check_call(["mkdir", "-p", args.output])
 os.chdir(args.output)
@@ -86,6 +117,63 @@ subprocess.check_call(["shelve_igccol", "--rpc-line-fit=0",
 # 5. Collect tie points
 with timing("Collecting tiepoints"):
     subprocess.check_call(["tp_collect", dbfile + ":igc_initial", 
-                           dbfile + ":tpcol"])
+                           dbfile + ":tpcol", nproc])
 
-                       
+# 6. SBA
+cmd = ["sba", "--dem-height-block-adjust", dbfile + ":igc_initial",
+       dbfile + ":tpcol", dbfile + ":igc_sba", dbfile + ":tpcol_sba"]
+if(args.verbose):
+    cmd.append("--verbose")
+with timing("Doing SBA"):
+    subprocess.check_call(cmd)
+
+# 7. Initial projection to surface, for DEM generation. 
+initial_proj("initial_surf1", 0)
+initial_proj("initial_surf2", 1)
+
+# 8. DEM generation
+dem_generate()
+
+# 9. Do final projection to surface, using the DEM.
+with timing("Final orthorectification image 1"):
+    # This doesn't work yet, because we don't have a mask on the DEM. 
+    # We'll want to come back to this, but for now just use same size as
+    # with the initial images.
+    subprocess.check_call(["igc_project", 
+                           # "--resolution=0.5", 
+                           "--map-info=" + dbfile + ":initial_surf1",
+                           dbfile + ":igc_sba",
+                           "--dem=" + dbfile + ":dem_generate_filled",
+                           "0", "final_surf1.img"])
+shelve_image("final_surf1.img", "final_surf1")
+with timing("Final orthorectification image 2"):
+    subprocess.check_call(["igc_project", 
+                           "--map-info=" + dbfile + ":final_surf1",
+                           dbfile + ":igc_sba",
+                           "--dem=" + dbfile + ":dem_generate_filled",
+                           "1", "final_surf2.img"])
+shelve_image("final_surf2.img", "final_surf2")
+
+# 10. Convert to reflectance and generate pandiff image.
+pre_pan_imd = os.path.splitext(pre_pan_raw)[0] + ".IMD"
+post_pan_imd = os.path.splitext(post_pan_raw)[0] + ".IMD"
+subprocess.check_call(["convert_reflectance", "--wv2-pan=" + pre_pan_imd,
+                       dbfile + ":final_surf1", dbfile + ":refl1"])
+subprocess.check_call(["convert_reflectance", "--wv2-pan=" + post_pan_imd,
+                       dbfile + ":final_surf2", dbfile + ":refl2"])
+subprocess.check_call(["doughnut_diff", dbfile + ":refl1", 
+                       dbfile + ":refl2", dbfile + ":pandiff",
+                       dbfile + ":cvdnorm"])
+
+
+# 11. Generate diagnostic files.
+if(args.diagnostic):
+    with timing("Diagnostic pandiff file"):
+        subprocess.check_call(["write_image", "--vicar-type=HALF",
+                               "--scale=10000", nproc, dbfile + ":pandiff",
+                               "pandiff.img"])
+    with timing("Diagnostic cvdnorm file"):
+        subprocess.check_call(["write_image", "--vicar-type=HALF",
+                               "--scale=10000", nproc, dbfile + ":cvdnorm",
+                               "cvdnorm.img"])
+    

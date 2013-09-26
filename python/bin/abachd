@@ -45,10 +45,13 @@ if(args.verbose):
 log = logging.getLogger("abachd")
 tstart = time.time()
 
-# Get input files 
-pre_pan_raw = os.path.realpath(args.pre_pan)
-post_pan_raw = os.path.realpath(args.post_pan)
-dem = os.path.realpath(args.dem)
+# Get input files
+# Note that we really do want abspath here, not realpath. It is common to
+# use symbolic links to collect data together, and the IMD file going with a
+# nitf file may appear in the same directory, but be links to separate directories. 
+pre_pan_raw = os.path.abspath(args.pre_pan)
+post_pan_raw = os.path.abspath(args.post_pan)
+dem = os.path.abspath(args.dem)
 
 # Few things that appear often enough that it is worth stashing.
 dbfile = "end_to_end.db"

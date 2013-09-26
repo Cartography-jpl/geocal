@@ -9,12 +9,18 @@ from contextlib import contextmanager
 version = "September 25, 2013"
 usage='''Usage:
   abachd [options] <dem> <pre_pan> <post_pan> <output>
+  abachd [options] --subset <start_line> <start_sample> 
+        <number_line> <number_sample> <dem> <pre_pan> <post_pan> <output>
   abachd -h | --help
   abachd -v | --version
 
 This program does the ABAChD change detection process. The output is
 a directory (created if it doesn't already exist), where all the
 output files are placed.
+
+If you supply the subset, this is in terms of the raw pre_pan image. We
+subset the post_pan image to match the pre_pan image on the ground (using
+the original DEM). 
 
 Note it is assumed that the IMD files have the same name as the NITF files,
 but with ".NTF" replaced with ".IMD". We generally have that. We can allow
@@ -31,6 +37,10 @@ Options:
 
   --number-process=n
        Number of processors to use. [default: 1]
+
+  --subset  start_line start_sample number_line number_sample
+       Subset the pre_pan raw image, and the subset the post image to match
+       the ground location of the pre_pan image.
 
   --verbose
        Print more information as we run.
@@ -58,8 +68,15 @@ dbfile = "end_to_end.db"
 nproc = "--number-process=%d" % args.number_process
 
 # A few helper functions
-def shelve_image(fname, name):
-    subprocess.check_call(["shelve_image", fname, dbfile + ":" + name])
+def shelve_image(fname, name, subset = None):
+    cmd = ["shelve_image"] 
+    if(subset is not None):
+        cmd.append("--subset")
+        for i in subset:
+            cmd.append(str(i))
+    cmd.append(fname)
+    cmd.append(dbfile + ":" + name)
+    subprocess.check_call(cmd)
 
 @contextmanager
 def timing(txt):
@@ -69,8 +86,8 @@ def timing(txt):
     log.info("Delta Time: %f" % (time.time() - tstart2))
     log.info("Total Time: %f" % (time.time() - tstart))
 
-def import_image(fname, name):
-    shelve_image(fname, "%s_raw" % name)
+def import_image(fname, name, subset = None):
+    shelve_image(fname, "%s_raw" % name, subset = subset)
     with timing("Importing %s image" % name):
         subprocess.check_call(["write_image", 
                                "--process-number-line=2048",
@@ -104,12 +121,29 @@ def dem_generate():
 subprocess.check_call(["mkdir", "-p", args.output])
 os.chdir(args.output)
 
-# 2. Import the images to vicar
-import_image(pre_pan_raw, "pre_pan")
-import_image(post_pan_raw, "post_pan")
-
-# 3. Initial DEM
+# 2. Initial DEM
 subprocess.check_call(["shelve_dem", dem, dbfile + ":dem_initial"])
+
+# 3. Import the images to vicar
+subset = None
+if(args.start_line):
+    subset = [args.start_line, args.start_sample, args.number_line,
+              args.number_sample]
+import_image(pre_pan_raw, "pre_pan", subset = subset)
+if(args.start_line):
+    dem = read_shelve(dbfile + ":dem_initial")
+    igc1 = VicarImageGroundConnection("pre_pan.img", dem)
+    igc2 = GdalImageGroundConnection(post_pan_raw, dem)
+    ulc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(0, 0)))
+    lrc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(igc1.number_line, igc1.number_sample)))
+    sl = max(int(floor(ulc.line)), 0)
+    ss = max(int(floor(ulc.sample)), 0)
+    el = min(int(ceil(lrc.line)), igc2.number_line - 1)
+    es = min(int(ceil(lrc.sample)), igc2.number_sample - 1)
+    igc1 = None
+    igc2 = None
+    subset = [sl, ss, el - sl + 1, es - ss + 1]
+import_image(post_pan_raw, "post_pan", subset = subset)
 
 # 4. Create initial igccol
 subprocess.check_call(["shelve_igccol", "--rpc-line-fit=0",

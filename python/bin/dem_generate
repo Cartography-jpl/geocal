@@ -31,6 +31,11 @@ Options:
   -h --help         
        Print this message
 
+  --boundary=d
+       Number of pixels to add as a boundary when calculating the output
+       image coverage. Useful to make sure we completely cover an 
+       image. [default: 5]
+
   --buffer=d
        The buffer to use between tiles, so we have enough data to interpolate
        at the edge of a tile. [default: 5]
@@ -77,7 +82,7 @@ else:
     resbase = mibase.resolution_meter
     miscale = mibase.scale(args.resolution / resbase,
                            args.resolution / resbase)
-    midem = igc1.cover(miscale)
+    midem = igc1.cover(miscale, args.boundary)
 
 # Set up to read surface data, if we have it.
 surface_image1 = None

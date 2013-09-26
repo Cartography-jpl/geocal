@@ -5,6 +5,7 @@ import subprocess
 import logging
 import time
 from contextlib import contextmanager
+import glob
 
 version = "September 25, 2013"
 usage='''Usage:
@@ -33,7 +34,7 @@ Options:
 
   --diagnostic
        Generate files that we don't actually need for processing, but can
-       be useful for diagnostic (e.g., the pandiff.img)
+       be useful for diagnostic (e.g., the normdiff.img)
 
   --number-process=n
        Number of processors to use. [default: 1]
@@ -203,7 +204,7 @@ with timing("Final orthorectification image 2"):
                            "1", "final_surf2.img"])
 shelve_image("final_surf2.img", "final_surf2")
 
-# 10. Convert to reflectance and generate pandiff image.
+# 10. Convert to reflectance and generate normdiff image.
 pre_pan_imd = os.path.splitext(pre_pan_raw)[0] + ".IMD"
 post_pan_imd = os.path.splitext(post_pan_raw)[0] + ".IMD"
 subprocess.check_call(["convert_reflectance", "--wv2-pan=" + pre_pan_imd,
@@ -211,18 +212,31 @@ subprocess.check_call(["convert_reflectance", "--wv2-pan=" + pre_pan_imd,
 subprocess.check_call(["convert_reflectance", "--wv2-pan=" + post_pan_imd,
                        dbfile + ":final_surf2", dbfile + ":refl2"])
 subprocess.check_call(["doughnut_diff", dbfile + ":refl1", 
-                       dbfile + ":refl2", dbfile + ":pandiff",
+                       dbfile + ":refl2", dbfile + ":normdiff",
                        dbfile + ":cvdnorm"])
 
 
 # 11. Generate diagnostic files.
 if(args.diagnostic):
-    with timing("Diagnostic pandiff file"):
+    with timing("Diagnostic normdiff file"):
         subprocess.check_call(["write_image", "--vicar-type=HALF",
-                               "--scale=10000", nproc, dbfile + ":pandiff",
-                               "pandiff.img"])
+                               "--scale=10000", nproc, dbfile + ":normdiff",
+                               "normdiff.img"])
     with timing("Diagnostic cvdnorm file"):
         subprocess.check_call(["write_image", "--vicar-type=HALF",
                                "--scale=10000", nproc, dbfile + ":cvdnorm",
                                "cvdnorm.img"])
+    with timing("Accuracy check"):
+        res = subprocess.check_output(["vicarb", "accck", "final_surf1.img",
+                                       "final_surf2.img",  "magnif=1",
+                                       "fftsize=128", "outnl=1200", 
+                                       "remap=n", "seq=qr",  'echo=n',
+                                       "labeladd=y", "rmscrit=90.0"])
+        for ln in res.split('\n'):
+            if(re.match(r'^MSG', ln)):
+                log.info(ln)
+        for f in glob.glob("xxx*"):
+            os.remove(f)
+
+
     

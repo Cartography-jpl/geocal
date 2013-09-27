@@ -213,19 +213,19 @@ subprocess.check_call(["convert_reflectance", "--wv2-pan=" + post_pan_imd,
                        dbfile + ":final_surf2", dbfile + ":refl2"])
 subprocess.check_call(["doughnut_diff", dbfile + ":refl1", 
                        dbfile + ":refl2", dbfile + ":normdiff",
-                       dbfile + ":cvdnorm"])
+                       dbfile + ":normdiff_and_cvdnorm"])
 
 
 # 11. Generate diagnostic files.
 if(args.diagnostic):
-    with timing("Diagnostic normdiff file"):
+    with timing("Diagnostic normdiff and cvdnorm file"):
         subprocess.check_call(["write_image", "--vicar-type=HALF",
-                               "--scale=10000", nproc, dbfile + ":normdiff",
-                               "normdiff.img"])
-    with timing("Diagnostic cvdnorm file"):
-        subprocess.check_call(["write_image", "--vicar-type=HALF",
-                               "--scale=10000", nproc, dbfile + ":cvdnorm",
-                               "cvdnorm.img"])
+                               "--scale=10000", 
+                               "--process-number-line=1000",
+                               "--process-number-sample=1000",
+                               nproc, 
+                               dbfile + ":normdiff_and_cvdnorm",
+                               "normdiff.img", "cvdnorm.img"])
     with timing("Accuracy check"):
         res = subprocess.check_output(["vicarb", "accck", "final_surf1.img",
                                        "final_surf2.img",  "magnif=1",

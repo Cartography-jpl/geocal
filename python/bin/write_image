@@ -93,8 +93,9 @@ if(args.start_line):
                                 args.number_line, args.number_sample)
 if(args.scale):
     if(isinstance(img_in, RasterImageMultiBand)):
-        raise "Scaling isn't support yet for RasterImageMultiBand"
-    img_in = ScaleImage(img_in, args.scale)
+        img_in = ScaleImageMultiBand(img_in, args.scale)
+    else:
+        img_in = ScaleImage(img_in, args.scale)
 
 img_list = []
 if(isinstance(img_in, RasterImageMultiBand)):

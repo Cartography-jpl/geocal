@@ -4,7 +4,8 @@ from afids import *
 version = "September 18, 2013"
 usage='''Usage:
   doughnut_diff [options] <input_image_1> <input_image_2> <pandiff>
-  doughnut_diff [options] <input_image_1> <input_image_2> <pandiff> <cvdnorm>
+  doughnut_diff [options] <input_image_1> <input_image_2> <pandiff> 
+        <pandiff_and_cvdnorm>
   doughnut_diff -h | --help
   doughnut_diff -v | --version
 
@@ -39,5 +40,8 @@ davg = DoughnutAverage(mb, args.window_size, args.doughnut_size,
                        not args.disallow_gore)
 pdiff = RasterImageWrapPandif(davg)
 write_shelve(args.pandiff, pdiff)
-if(args.cvdnorm):
-    write_shelve(args.cvdnorm, RasterImageWrapCvdNorm(davg, 1))
+if(args.pandiff_and_cvdnorm):
+    write_shelve(args.pandiff_and_cvdnorm, 
+                 RasterImageMB(pdiff,
+                               RasterImageWrapCvdNorm(davg, 1)))
+

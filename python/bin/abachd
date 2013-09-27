@@ -175,7 +175,7 @@ with timing("Initial orthorectification initial_surf1"):
                            "0", "initial_surf1.img"])
     shelve_image("initial_surf1.img", "initial_surf1")
 with timing("Initial orthorectification initial_surf2"):
-    subprocess.check_call(["igc_project", nproc, 
+    subprocess.check_call(["igc_project", nproc, "--grid-spacing=10",
                            "--map-info=" + dbfile + ":initial_surf1",
                            dbfile + ":igc_sba",
                            "1", "initial_surf2.img"])

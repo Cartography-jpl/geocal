@@ -129,7 +129,7 @@ if(args.process_number_sample is not None):
 else:
     process_nsamp = img_list[0].number_sample
 if(args.torque or args.gnu_parallel):
-    base_name = os.path.splitext(args.output_image)[0]
+    base_name = os.path.splitext(args.output_image[0])[0]
     shelve_name =  base_name + ".db"
     try:
         os.remove(shelve_name)

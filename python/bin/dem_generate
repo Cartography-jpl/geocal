@@ -76,7 +76,7 @@ if(args.map_info):
     midem = read_shelve(args.map_info).map_info
 elif(args.map_info_cover):
     midem = read_shelve(args.map_info_cover).map_info
-    midem = igc1.cover(midem)
+    midem = igc1.cover(midem, args.boundary)
 else:
     mibase = cib01_mapinfo()
     resbase = mibase.resolution_meter

@@ -48,16 +48,8 @@ RpcImageGroundConnection::cf_look_vector
  CartesianFixedLookVector& Lv,
  boost::shared_ptr<CartesianFixed>& P) const
 {
-  Geodetic gc1;
-  try {
-    // This sometimes fails, particularly for steep terrain. It if
-    // does, then try calling with a simpler dem. This is a bit less
-    // accurate, but gives an answer.
-    gc1 = rpc_->ground_coordinate(Ic, dem());
-  } catch(const ConvergenceFailure& E) {
-    gc1 = rpc_->ground_coordinate(Ic, rpc_->height_offset);
-  }
-  double h = gc1.height_reference_surface();
+  double h = rpc_->height_offset;
+  Geodetic gc1 = rpc_->ground_coordinate(Ic, h);
   double delta_h = 10;
   Geodetic gc2 = rpc_->ground_coordinate(Ic, h + delta_h);
   P = gc1.convert_to_cf();

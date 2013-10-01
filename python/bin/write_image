@@ -2,6 +2,7 @@
 from afids import *
 import os
 import logging
+import math
 
 version = "September 16, 2013"
 usage='''Usage: 
@@ -123,7 +124,7 @@ if(not isinstance(img_in, RasterImageMultiBand)):
 if(args.process_number_line is not None):
     process_nline = args.process_number_line
 else:
-    process_nline = img_list[0].number_line / args.number_process
+    process_nline = int(math.ceil(float(img_list[0].number_line) / args.number_process))
 if(args.process_number_sample is not None):
     process_nsamp = args.process_number_sample
 else:

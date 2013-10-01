@@ -20,11 +20,11 @@ def test_connection_igc():
     gp = igc3.ground_coordinate(ic)
     assert distance(gp, igc.ground_coordinate(ic)) < 0.01
     ic = igc3.image_coordinate(gp)
-    assert_almost_equal(igc.image_coordinate(gp).line, ic.line, 4)
-    assert_almost_equal(igc.image_coordinate(gp).sample, ic.sample, 4)
+    assert_almost_equal(igc.image_coordinate(gp).line, ic.line, 2)
+    assert_almost_equal(igc.image_coordinate(gp).sample, ic.sample, 2)
     rpc = Rpc.generate_rpc(igc, -100, 100)
-    assert_almost_equal(rpc.image_coordinate(gp).line, ic.line, 4)
-    assert_almost_equal(rpc.image_coordinate(gp).sample, ic.sample, 4)
+    assert_almost_equal(rpc.image_coordinate(gp).line, ic.line, 2)
+    assert_almost_equal(rpc.image_coordinate(gp).sample, ic.sample, 2)
 
 def test_time():
     raise SkipTest

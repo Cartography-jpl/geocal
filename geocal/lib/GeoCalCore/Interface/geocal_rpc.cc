@@ -585,6 +585,10 @@ void Rpc::fit(const std::vector<boost::shared_ptr<GroundCoordinate> >& Gc,
    
 Geodetic Rpc::ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const
 {
+  // This is a common enough special case to treat specially:
+  const SimpleDem* sdem = dynamic_cast<const SimpleDem*>(&D);
+  if(sdem)
+    return ground_coordinate(Ic, sdem->h());
   Geodetic gc1 = ground_coordinate(Ic, height_offset);
   double delta_h = 10;
   Geodetic gc2 = ground_coordinate(Ic, height_offset + delta_h);

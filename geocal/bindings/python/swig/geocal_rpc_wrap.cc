@@ -8547,7 +8547,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc_ground_coordinate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Rpc_ground_coordinate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   GeoCal::ImageCoordinate *arg2 = 0 ;
@@ -8562,10 +8562,9 @@ SWIGINTERN PyObject *_wrap_Rpc_ground_coordinate(PyObject *SWIGUNUSEDPARM(self),
   void *argp3 = 0 ;
   int res3 = 0 ;
   boost::shared_ptr< GeoCal::Dem const > tempshared3 ;
-  PyObject *swig_obj[3] ;
   GeoCal::Geodetic result;
   
-  if (!SWIG_Python_UnpackTuple(args,"Rpc_ground_coordinate",3,3,swig_obj)) SWIG_fail;
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
@@ -8647,6 +8646,117 @@ SWIGINTERN PyObject *_wrap_Rpc_ground_coordinate(PyObject *SWIGUNUSEDPARM(self),
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rpc_ground_coordinate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
+  GeoCal::ImageCoordinate *arg2 = 0 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rpc const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rpc const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  GeoCal::Geodetic result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc_ground_coordinate" "', argument " "1"" of type '" "GeoCal::Rpc const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rpc_ground_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rpc_ground_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rpc_ground_coordinate" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      result = ((GeoCal::Rpc const *)arg1)->ground_coordinate((GeoCal::ImageCoordinate const &)*arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::Geodetic > *smartresult = new boost::shared_ptr<  GeoCal::Geodetic >(new GeoCal::Geodetic((GeoCal::Geodetic &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geodetic_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rpc_ground_coordinate(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Rpc_ground_coordinate",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_Rpc_ground_coordinate__SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 3) {
+    return _wrap_Rpc_ground_coordinate__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Rpc_ground_coordinate'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Rpc::ground_coordinate(GeoCal::ImageCoordinate const &,GeoCal::Dem const &) const\n"
+    "    GeoCal::Rpc::ground_coordinate(GeoCal::ImageCoordinate const &,double) const\n");
+  return 0;
 }
 
 
@@ -9795,7 +9905,7 @@ static PyMethodDef SwigMethods[] = {
 		"masked. \n"
 		""},
 	 { (char *)"Rpc_ground_coordinate", _wrap_Rpc_ground_coordinate, METH_VARARGS, (char *)"\n"
-		"Geodetic Rpc::ground_coordinate(const ImageCoordinate &Ic, const Dem &D) const\n"
+		"Geodetic Rpc::ground_coordinate(const ImageCoordinate &Ic, double Height) const\n"
 		"Invert the RPC to find the ground coordinate that maps to a give\n"
 		"ImageCoordinate.\n"
 		"\n"

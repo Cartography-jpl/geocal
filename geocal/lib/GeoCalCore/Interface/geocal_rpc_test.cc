@@ -134,6 +134,9 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(r(1, 0), ic_expect.sample, 1e-4);
   Geodetic gcalc = rpc.ground_coordinate(ic_expect, 1017);
   BOOST_CHECK(distance(gcalc, g) < 0.1);
+  SimpleDem dem(1017);
+  Geodetic gcalc2 = rpc.ground_coordinate(ic_expect, dem);
+  BOOST_CHECK(distance(gcalc2, g) < 0.1);
 
 //-----------------------------------------------------------------------
 // Test fit function.
@@ -234,7 +237,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(inverse_fails)
 {
-  return;    // Don't normally run this, it still fails.
+  return;    // Don't normally run this, it depends on data we don't
+	     // normally have
 
   // This was an inverse test case that failed to calculate
   // ground_coordinate. Extract this out so we can look at this in
@@ -289,6 +293,9 @@ BOOST_AUTO_TEST_CASE(inverse_fails)
 
 BOOST_AUTO_TEST_CASE(inverse_fails2)
 {
+  return;    // Don't normally run this, since it depends on data that
+             // we normally don't have.
+
   // Another inverse that fails. This depends on test data that we
   // don't normally have available, so this will not normally be run.
   // But have this in place so we can investigate what is going on
@@ -300,5 +307,8 @@ BOOST_AUTO_TEST_CASE(inverse_fails2)
   DemMapInfoOffset dem(dem1, 20.5801);
   ImageCoordinate ic(8862, 14383);
   Geodetic g = rpc.ground_coordinate(ic, dem);
+  ImageCoordinate ic2 = rpc.image_coordinate(g);
+  BOOST_CHECK_CLOSE(ic.line, ic2.line, 1e-4);
+  BOOST_CHECK_CLOSE(ic.sample, ic2.sample, 1e-4);
 }
 BOOST_AUTO_TEST_SUITE_END()

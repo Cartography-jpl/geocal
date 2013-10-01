@@ -585,71 +585,18 @@ void Rpc::fit(const std::vector<boost::shared_ptr<GroundCoordinate> >& Gc,
    
 Geodetic Rpc::ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const
 {
-//-----------------------------------------------------------------------
-// Class describing RcpEquation. This just takes the latitude and
-// longitude in, uses a supplied Dem to get a height, and then
-// calculate image coordinates using the Rpc. We then return the
-// difference between this and the desired ImageCoordinates.
-//-----------------------------------------------------------------------
-
-  class RpcEq : public VFunctorWithDerivative {
-  public:
-    RpcEq(const Rpc& R, const ImageCoordinate& Ic, const Dem& D)
-      : r_(R), ic_(Ic), d_(D) {}
-    virtual ~RpcEq() {}
-    virtual blitz::Array<double, 1> operator()(const 
-      blitz::Array<double, 1>& X) const {
-      boost::shared_ptr<GroundCoordinate> gc = 
-	d_.surface_point(Geodetic(X(0), X(1)));
-      ImageCoordinate icres = r_.image_coordinate(*gc);
-      blitz::Array<double, 1> res(2);
-      res(0) = icres.line - ic_.line;
-      res(1) = icres.sample - ic_.sample;
-      return res;
-    }
-    virtual blitz::Array<double, 2> df
-    (const blitz::Array<double, 1>& X) const {
-      boost::shared_ptr<GroundCoordinate> gc = 
-	d_.surface_point(Geodetic(X(0), X(1)));
-      ImageCoordinate icres = r_.image_coordinate(*gc);
-      blitz::Array<double, 2> jac = 
-	r_.image_coordinate_jac(gc->latitude(), gc->longitude(),
-				gc->height_reference_surface());
-      blitz::Array<double, 2> res(jac(Range::all(), Range(0,1)));
-      return res;
-    }
-  private:
-    const Rpc& r_;
-    ImageCoordinate ic_;
-    const Dem& d_;
-  };
-
-//-----------------------------------------------------------------------
-// Solve the equation to get the latitude and longitude. We only look
-// for a 0.01 pixel accuracy.
-//-----------------------------------------------------------------------
-
-  RpcEq eq(*this, Ic, D);
-
-// Initial guess is solution to linear approximation of Rpc. This
-// gives the rough latitude and longitude.
-
-  double f1 = (Ic.line - line_offset) / line_scale;
-  double f3 = (Ic.sample - sample_offset) / sample_scale;
-  f1 -= line_numerator[0];
-  f3 -= sample_numerator[0];
-  double y = (f1 * sample_numerator[2] - f3 * line_numerator[2]) /
-    (line_numerator[1] * sample_numerator[2] - 
-     line_numerator[2] * sample_numerator[1]);
-  double x = (f3 * line_numerator[1] - f1 * sample_numerator[1]) /
-    (sample_numerator[2] * line_numerator[1] - 
-     line_numerator[2] * sample_numerator[1]);
-  blitz::Array<double, 1> xint(2);
-  xint = x * latitude_scale + latitude_offset,
-    y * longitude_scale + longitude_offset;
-  blitz::Array<double, 1> res = gsl_root(eq, xint, 0.1);
-  double height = D.height_reference_surface(Geodetic(res(0), res(1)));
-  return Geodetic(res(0), res(1), height);
+  Geodetic gc1 = ground_coordinate(Ic, height_offset);
+  double delta_h = 10;
+  Geodetic gc2 = ground_coordinate(Ic, height_offset + delta_h);
+  boost::shared_ptr<CartesianFixed> p = gc1.convert_to_cf();
+  boost::shared_ptr<CartesianFixed> p2 = gc2.convert_to_cf();
+  CartesianFixedLookVector lv;
+  lv.look_vector[0] = p->position[0] - p2->position[0];
+  lv.look_vector[1] = p->position[1] - p2->position[1];
+  lv.look_vector[2] = p->position[2] - p2->position[2];
+  double resolution = 1.0;
+  boost::shared_ptr<CartesianFixed> surfp = D.intersect(*p, lv, resolution);
+  return Geodetic(*surfp);
 }
 
 //-----------------------------------------------------------------------

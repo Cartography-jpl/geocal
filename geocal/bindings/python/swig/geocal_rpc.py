@@ -359,7 +359,7 @@ class Rpc(geocal.generic_object.GenericObject):
     generate_rpc = staticmethod(generate_rpc)
     def ground_coordinate(self, *args):
         """
-        Geodetic Rpc::ground_coordinate(const ImageCoordinate &Ic, const Dem &D) const
+        Geodetic Rpc::ground_coordinate(const ImageCoordinate &Ic, double Height) const
         Invert the RPC to find the ground coordinate that maps to a give
         ImageCoordinate.
 

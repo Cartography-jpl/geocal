@@ -198,6 +198,7 @@ public:
 	       const std::vector<double>& Longitude,
 	       const std::vector<double>& Height);
   Geodetic ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const;
+  Geodetic ground_coordinate(const ImageCoordinate& Ic, double Height) const;
   static Rpc generate_rpc(const ImageGroundConnection& Igc,
 			  double Min_height, double Max_height,
 			  int Nlat = 20, int Nlon = 20, int Nheight = 20,

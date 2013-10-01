@@ -653,6 +653,75 @@ Geodetic Rpc::ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const
 }
 
 //-----------------------------------------------------------------------
+/// Invert the RPC to find the ground coordinate that maps to a give
+/// ImageCoordinate.
+///
+/// This routine may fail to find a solution, in which case a 
+/// ConvergenceFailure exception will be thrown.
+//-----------------------------------------------------------------------
+   
+Geodetic Rpc::ground_coordinate(const ImageCoordinate& Ic, double Height) const
+{
+//-----------------------------------------------------------------------
+// Class describing RcpEquation. This just takes the latitude and
+// longitude in, uses a supplied Dem to get a height, and then
+// calculate image coordinates using the Rpc. We then return the
+// difference between this and the desired ImageCoordinates.
+//-----------------------------------------------------------------------
+
+  class RpcEq : public VFunctorWithDerivative {
+  public:
+    RpcEq(const Rpc& R, const ImageCoordinate& Ic, double Height)
+      : r_(R), ic_(Ic), h_(Height) {}
+    virtual ~RpcEq() {}
+    virtual blitz::Array<double, 1> operator()(const 
+      blitz::Array<double, 1>& X) const {
+      ImageCoordinate icres = r_.image_coordinate(X(0), X(1), h_);
+      blitz::Array<double, 1> res(2);
+      res(0) = icres.line - ic_.line;
+      res(1) = icres.sample - ic_.sample;
+      return res;
+    }
+    virtual blitz::Array<double, 2> df
+    (const blitz::Array<double, 1>& X) const {
+      blitz::Array<double, 2> jac = r_.image_coordinate_jac(X(0), X(1), h_);
+      blitz::Array<double, 2> res(jac(Range::all(), Range(0,1)));
+      return res;
+    }
+  private:
+    const Rpc& r_;
+    ImageCoordinate ic_;
+    double h_;
+  };
+
+//-----------------------------------------------------------------------
+// Solve the equation to get the latitude and longitude. We only look
+// for a 0.01 pixel accuracy.
+//-----------------------------------------------------------------------
+
+  RpcEq eq(*this, Ic, Height);
+
+// Initial guess is solution to linear approximation of Rpc. This
+// gives the rough latitude and longitude.
+
+  double f1 = (Ic.line - line_offset) / line_scale;
+  double f3 = (Ic.sample - sample_offset) / sample_scale;
+  f1 -= line_numerator[0];
+  f3 -= sample_numerator[0];
+  double y = (f1 * sample_numerator[2] - f3 * line_numerator[2]) /
+    (line_numerator[1] * sample_numerator[2] - 
+     line_numerator[2] * sample_numerator[1]);
+  double x = (f3 * line_numerator[1] - f1 * sample_numerator[1]) /
+    (sample_numerator[2] * line_numerator[1] - 
+     line_numerator[2] * sample_numerator[1]);
+  blitz::Array<double, 1> xint(2);
+  xint = x * latitude_scale + latitude_offset,
+    y * longitude_scale + longitude_offset;
+  blitz::Array<double, 1> res = gsl_root(eq, xint, 0.1);
+  return Geodetic(res(0), res(1), Height);
+}
+
+//-----------------------------------------------------------------------
 /// Calculate Jacobian of polynomial wrt to each coefficient. This is
 /// the full Jacobian, not just the parameters listed in
 /// fit_line_numerator or fit_sample_numerator.

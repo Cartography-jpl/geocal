@@ -7,6 +7,8 @@
 #include "memory_raster_image.h"
 #include "ecr.h"
 #include "srtm_dem.h"
+#include "vicar_lite_file.h"
+#include "dem_map_info_offset.h"
 using namespace GeoCal;
 
 BOOST_FIXTURE_TEST_SUITE(rpc, GlobalFixture)
@@ -130,8 +132,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   blitz::Array<double, 2> r = rpc.image_coordinate(lat, lon, height);
   BOOST_CHECK_CLOSE(r(0, 0), ic_expect.line, 1e-4);
   BOOST_CHECK_CLOSE(r(1, 0), ic_expect.sample, 1e-4);
-  SimpleDem d(1017);
-  Geodetic gcalc = rpc.ground_coordinate(ic_expect, d);
+  Geodetic gcalc = rpc.ground_coordinate(ic_expect, 1017);
   BOOST_CHECK(distance(gcalc, g) < 0.1);
 
 //-----------------------------------------------------------------------
@@ -286,4 +287,18 @@ BOOST_AUTO_TEST_CASE(inverse_fails)
   Geodetic g = rpc.ground_coordinate(ic, dem);
 }
 
+BOOST_AUTO_TEST_CASE(inverse_fails2)
+{
+  // Another inverse that fails. This depends on test data that we
+  // don't normally have available, so this will not normally be run.
+  // But have this in place so we can investigate what is going on
+  // here.
+
+  VicarLiteRasterImage f("/home/smyth/Local/ShivaEndToEnd/syria1/pre_pan.img");
+  Rpc rpc = f.rpc();
+  boost::shared_ptr<DemMapInfo> dem1(new VicarLiteDem("/raid10/sba_gold/syria1/syria1_dem.hlf"));
+  DemMapInfoOffset dem(dem1, 20.5801);
+  ImageCoordinate ic(8862, 14383);
+  Geodetic g = rpc.ground_coordinate(ic, dem);
+}
 BOOST_AUTO_TEST_SUITE_END()

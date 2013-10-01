@@ -38,28 +38,33 @@ blitz::Array<double, 2> DemMatch::surface_point
   good_stat.reset(new Statistic);
   for(int i = Lstart; i < Lend;  i += Lstride)
     for(int j = Sstart; j < Send; j += Sstride) {
-      ++npoint;
-      match_->match(ImageCoordinate(i,j), ic2, line_sigma, sample_sigma, 
-		    success, &diagnostic);
-      if(success) {
-	ri->two_ray_intersect(ImageCoordinate(i, j), ic2, p, dist);
-	all_stat->add(dist);
-	if(dist < max_dist) {
-	  good_stat->add(dist);
-	  Ecr* ecr = dynamic_cast<Ecr*>(p.get());
-	  if(!ecr)
-	    throw Exception("Must be Ecr");
-	  res.push_back(ecr->convert_to_geodetic());
-	  if(Include_ic) {
-	    ic1v.push_back(ImageCoordinate(i, j));
-	    ic2v.push_back(ic2);
+      try {
+	++npoint;
+	match_->match(ImageCoordinate(i,j), ic2, line_sigma, sample_sigma, 
+		      success, &diagnostic);
+	if(success) {
+	  ri->two_ray_intersect(ImageCoordinate(i, j), ic2, p, dist);
+	  all_stat->add(dist);
+	  if(dist < max_dist) {
+	    good_stat->add(dist);
+	    Ecr* ecr = dynamic_cast<Ecr*>(p.get());
+	    if(!ecr)
+	      throw Exception("Must be Ecr");
+	    res.push_back(ecr->convert_to_geodetic());
+	    if(Include_ic) {
+	      ic1v.push_back(ImageCoordinate(i, j));
+	      ic2v.push_back(ic2);
+	    }
 	  }
+	} else {
+	  if(diagnostic >= 0 && diagnostic <= MAX_DIAGNOSTIC_VALUE)
+	    diagnostic_value(diagnostic) += 1;
+	  else
+	    diagnostic_value(MAX_DIAGNOSTIC_VALUE + 1) += 1;
 	}
-      } else {
-	if(diagnostic >= 0 && diagnostic <= MAX_DIAGNOSTIC_VALUE)
-	  diagnostic_value(diagnostic) += 1;
-	else
-	  diagnostic_value(MAX_DIAGNOSTIC_VALUE + 1) += 1;
+      } catch(Exception& E) {
+	E << "Error occurred in Dem Match at point (" << i << ", " << j << ")";
+	throw;
       }
       
     }

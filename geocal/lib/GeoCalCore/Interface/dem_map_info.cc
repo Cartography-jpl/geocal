@@ -56,6 +56,32 @@ double DemMapInfo::height_reference_surface(const GroundCoordinate& Gp) const
   return height_datum(Gp) + datum().undulation(Gp);
 }
 
+// See base class for description
+boost::shared_ptr<CartesianFixed> DemMapInfo::intersect
+(const CartesianFixed& Cf,
+ const CartesianFixedLookVector& Lv, double Resolution,
+ double Max_height) const
+{
+  // Regardless of outside_dem_is_error_ value, we allow intersect to
+  // explore areas outside of the DEM bounding box. However, the
+  // solution found must satisfy the constraint imposed by
+  // outside_dem_is_error_.
+  bool outside_dem_is_error_save = outside_dem_is_error_;
+  boost::shared_ptr<CartesianFixed> res;
+  try {
+    outside_dem_is_error_ = false;
+    res = Dem::intersect(Cf, Lv, Resolution, Max_height);
+  } catch(...) {
+    outside_dem_is_error_ = outside_dem_is_error_save;
+    throw;
+  }
+  outside_dem_is_error_ = outside_dem_is_error_save;
+  // Side effect of this is to check outside_dem_is_error_ is
+  // satisfied.
+  height_reference_surface(*res);
+  return res;			// Make it here, then things are ok.
+}
+
 //-----------------------------------------------------------------------
 /// Return a GroundCoordinate on the surface directly above or below
 /// the given point.

@@ -115,7 +115,9 @@ def dem_generate():
         if(args.verbose):
             cmd.append("--verbose")
         subprocess.check_call(cmd)
-        subprocess.check_call(["shelve_dem", "dem_generate_filled.img",
+        subprocess.check_call(["shelve_dem", 
+                               "--outside-dem-not-error",
+                               "dem_generate_filled.img",
                                dbfile + ":dem_generate_filled"])
 
 # 1. Create the output directory, if it doesn't already exist.

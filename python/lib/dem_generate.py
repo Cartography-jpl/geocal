@@ -230,7 +230,10 @@ class DemGenerate:
             arg = [lstart, sstart, lend, self, include_image]
         else:
             if(isinstance(self.itoim, SurfaceImageToImageMatch)):
-                arg = [self.aoi, include_image]
+                mi = self.aoi.subset(-buffer_size, -buffer_size, 
+                                      self.aoi.number_x_pixel + 2 * buffer_size,
+                                      self.aoi.number_y_pixel + 2 * buffer_size)
+                arg = [mi, include_image]
             else:
                 lstart, sstart, lend, send = self.range_image1()
                 lstart -= self.stride * buffer_size

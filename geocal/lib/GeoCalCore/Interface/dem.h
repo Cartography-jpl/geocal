@@ -40,7 +40,7 @@ public:
   virtual double height_reference_surface(const GroundCoordinate& Gp) 
     const = 0;
 
-  boost::shared_ptr<CartesianFixed> intersect(const CartesianFixed& Cf,
+  virtual boost::shared_ptr<CartesianFixed> intersect(const CartesianFixed& Cf,
       const CartesianFixedLookVector& Lv, double Resolution,
       double Max_height = 9000) const;
 

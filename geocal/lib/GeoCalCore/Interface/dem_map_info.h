@@ -59,6 +59,11 @@ public:
   double height_datum(const GroundCoordinate& Gp) const;
   virtual double height_reference_surface(const GroundCoordinate& Gp) 
     const;
+
+  virtual boost::shared_ptr<CartesianFixed> intersect(const CartesianFixed& Cf,
+      const CartesianFixedLookVector& Lv, double Resolution,
+      double Max_height = 9000) const;
+
 //-----------------------------------------------------------------------
 /// If true, then calling with values outside the range of area of the
 /// DEM triggers an exception, otherwise we just return a height of 0.
@@ -104,7 +109,7 @@ private:
   boost::shared_ptr<Datum> datum_; ///< Datum height is relative to.
   MapInfo map_info_;		   ///< Map info used to look up
 				   ///elevation values.
-  bool outside_dem_is_error_;	   ///< If false, height requests
+  mutable bool outside_dem_is_error_;	   ///< If false, height requests
 				   ///outside of underlying Dem will
 				   ///return 0, otherwise throw an
 				   ///exception. 

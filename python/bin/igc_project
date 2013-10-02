@@ -22,6 +22,13 @@ Options:
   -h --help         
        Print this message
 
+  --bounding-box=mi
+       Use the given image to supply the bounding box for the output. 
+       Note that we use the projection and bounding box, but not the
+       resolution of the map info (unlike --map-info). This can be useful
+       to for example cover the area of a generated DEM, even if the DEM
+       is lower resolution than what we want to project here.
+
   --dem=shelve
        DEM to use, specified as file:key. If not specified, we use the 
        DEM from the IGC.
@@ -59,6 +66,13 @@ if(args.dem):
 
 if(args.map_info):
     mi = read_shelve(args.map_info).map_info
+elif(args.bounding_box):
+    mibase = read_shelve(args.bounding_box).map_info
+    resbase = mibase.resolution_meter
+    miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
+    mp = IgcMapProjected(miscale, igc, -1, False)
+    mi = mp.map_info
+    mp = None
 else:
     mibase = cib01_mapinfo()
     resbase = mibase.resolution_meter

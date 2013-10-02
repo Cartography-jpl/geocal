@@ -191,7 +191,7 @@ with timing("Final orthorectification image 1"):
     # with the initial images.
     subprocess.check_call(["igc_project", nproc,
                            # "--resolution=0.5", 
-                           "--map-info=" + dbfile + ":initial_surf1",
+                           "--bounding-box=" + dbfile + ":dem_generate_filled",
                            dbfile + ":igc_sba",
                            "--dem=" + dbfile + ":dem_generate_filled",
                            "0", "final_surf1.img"])

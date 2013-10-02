@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(basic)
   ImageCoordinate ic_expect(5729.22, 27561.36);
   Geodetic g(35.8399968, 45.0770183, 1017);
   BOOST_CHECK_EQUAL(ig.image_coordinate(g), ic_expect);
-  BOOST_CHECK_CLOSE(ig.resolution_meter(ic_expect), 0.79235060462485429, 1e-4);
+  BOOST_CHECK_CLOSE(ig.resolution_meter(ic_expect), 0.7923528069944753, 1e-4);
   boost::shared_ptr<GroundCoordinate> gcalc = 
     ig.ground_coordinate(ic_expect);
   BOOST_CHECK(distance(*gcalc, g) < 0.1);

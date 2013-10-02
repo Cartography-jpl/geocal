@@ -33,6 +33,17 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK(success);
   BOOST_CHECK_CLOSE(ic2.line, 1032.539, 1e-3);
   BOOST_CHECK_CLOSE(ic2.sample, 1022.133, 1e-3);
+  ImageCoordinate ic1;
+  boost::shared_ptr<GroundCoordinate> gc = 
+    igc1->ground_coordinate(ImageCoordinate(1000,1000));
+  imgtoimg.match_surf(*gc, ic1, ic2, line_sigma, sample_sigma, 
+		 success);
+  BOOST_CHECK(success);
+  BOOST_CHECK_CLOSE(ic2.line, 1032.539, 1e-3);
+  BOOST_CHECK_CLOSE(ic2.sample, 1022.133, 1e-3);
+  BOOST_CHECK_CLOSE(ic1.line, 1000.0, 1e-3);
+  BOOST_CHECK_CLOSE(ic1.sample, 1000.0, 1e-3);
+  
 }
 
 BOOST_AUTO_TEST_CASE(with_surface_image)

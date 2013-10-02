@@ -75,3 +75,35 @@ void SurfaceImageToImageMatch::match
     Ic2 = igc2->image_coordinate(*simg2->ground_coordinate(sic2, igc2->dem()));
   }
 }
+
+//-----------------------------------------------------------------------
+/// Variation of match where we supply the ground location to start
+/// with. This can be faster than match if the particular
+/// ImageGroundConnection has a ground_coordinate that is expensive
+/// (typically ground_coordinate takes more time than
+/// image_coordinate).
+///
+/// Note that you don't need to worry about including height in Gc,
+/// only the latitude and longitude is important (however the height
+/// doesn't hurt either).
+//-----------------------------------------------------------------------
+
+void SurfaceImageToImageMatch::match_surf
+(const GroundCoordinate& Gc, 
+ ImageCoordinate& Ic1, ImageCoordinate& Ic2,
+ double& Line_sigma, double& Sample_sigma,
+ bool& Success, int* Diagnostic) const
+{
+  ImageCoordinate sic1 = simg1->coordinate(Gc);
+  ImageCoordinate sic2_guess = simg2->coordinate(Gc);
+  ImageCoordinate sic2;
+  matcher_->match(*simg1, *simg2, sic1, 
+		  sic2_guess, sic2, Line_sigma, Sample_sigma, Success,
+		  Diagnostic);
+  if(Success) {
+    Line_sigma = std::max(Line_sigma, Sample_sigma) * pix_fact;
+    Sample_sigma = Line_sigma;
+    Ic1 = igc1->image_coordinate(*simg1->ground_coordinate(sic1, igc1->dem()));
+    Ic2 = igc2->image_coordinate(*simg2->ground_coordinate(sic2, igc2->dem()));
+  }
+}

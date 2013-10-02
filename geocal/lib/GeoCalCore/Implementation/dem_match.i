@@ -20,6 +20,8 @@ public:
   blitz::Array<double, 2> surface_point
     (int Lstart, int Sstart, int Lend, int Send,
      int Lstride = 1, int Sstride = 1, bool Include_ic = false) const;
+  blitz::Array<double, 2> surface_point(const MapInfo& Mi,
+					bool Include_ic = false) const;
   std::string print_to_string() const;
   %python_attribute(match, boost::shared_ptr<ImageToImageMatch>)
   %python_attribute(ray_intersect, boost::shared_ptr<RayIntersect>)

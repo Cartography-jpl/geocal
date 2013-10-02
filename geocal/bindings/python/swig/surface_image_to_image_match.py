@@ -150,6 +150,23 @@ class SurfaceImageToImageMatch(geocal.image_to_image_match.ImageToImageMatch):
         Constructor, where we supply the already map projected data. 
         """
         _surface_image_to_image_match.SurfaceImageToImageMatch_swiginit(self,_surface_image_to_image_match.new_SurfaceImageToImageMatch(*args))
+    def match_surf(self, *args):
+        """
+        void SurfaceImageToImageMatch::match_surf(const GroundCoordinate &Gc, ImageCoordinate &Ic1, ImageCoordinate
+        &Ic2, double &Line_sigma, double &Sample_sigma, bool &Success, int
+        *Diagnostic=0) const
+        Variation of match where we supply the ground location to start with.
+
+        This can be faster than match if the particular ImageGroundConnection
+        has a ground_coordinate that is expensive (typically ground_coordinate
+        takes more time than image_coordinate).
+
+        Note that you don't need to worry about including height in Gc, only
+        the latitude and longitude is important (however the height doesn't
+        hurt either). 
+        """
+        return _surface_image_to_image_match.SurfaceImageToImageMatch_match_surf(self, *args)
+
     def _v_image_ground_connection1(self):
         """
         const boost::shared_ptr<ImageGroundConnection>& GeoCal::SurfaceImageToImageMatch::image_ground_connection1() const
@@ -235,6 +252,7 @@ class SurfaceImageToImageMatch(geocal.image_to_image_match.ImageToImageMatch):
     			      self.matcher)
       
     __swig_destroy__ = _surface_image_to_image_match.delete_SurfaceImageToImageMatch
+SurfaceImageToImageMatch.match_surf = new_instancemethod(_surface_image_to_image_match.SurfaceImageToImageMatch_match_surf,None,SurfaceImageToImageMatch)
 SurfaceImageToImageMatch._v_image_ground_connection1 = new_instancemethod(_surface_image_to_image_match.SurfaceImageToImageMatch__v_image_ground_connection1,None,SurfaceImageToImageMatch)
 SurfaceImageToImageMatch._v_image_ground_connection2 = new_instancemethod(_surface_image_to_image_match.SurfaceImageToImageMatch__v_image_ground_connection2,None,SurfaceImageToImageMatch)
 SurfaceImageToImageMatch._v_matcher = new_instancemethod(_surface_image_to_image_match.SurfaceImageToImageMatch__v_matcher,None,SurfaceImageToImageMatch)

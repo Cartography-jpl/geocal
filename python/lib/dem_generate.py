@@ -16,7 +16,7 @@ import logging
 
 def _new_from_init(cls, version, *args):
     if(cls.pickle_format_version() < version):
-        raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
+        raise RuntimeError("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
@@ -149,11 +149,18 @@ class DemGenerate:
         self.h = dict["h"]
         self.r = dict["r"]
 
-    def surface_point(self, lstart, sstart, lend, send, include_image = False):
+    def surface_point(self, *arg):
         '''Calculate surface points'''
-        r = self.dem_match.surface_point(lstart, sstart, lend, send,
-                                         self.stride, self.stride, 
-                                         include_image)
+        if(len(arg) == 5):
+            lstart, sstart, lend, send, include_image = arg
+            r = self.dem_match.surface_point(lstart, sstart, lend, send,
+                                             self.stride, self.stride, 
+                                             include_image)
+        elif(len(arg) ==2):
+            mi, include_image = arg
+            r = self.dem_match.surface_point(mi, include_image)
+        else:
+            raise RuntimeError("Wrong number of arguments to surface_point")
         log = logging.getLogger("afids-python.dem_generate")
         log.info("Number point:   %d" %(self.dem_match.number_point))
         log.info("Number match:   %d" %(self.dem_match.number_match))
@@ -220,25 +227,44 @@ class DemGenerate:
             sstart = 0
             lend = self.igc1.number_line
             send = self.igc1.number_sample
+            arg = [lstart, sstart, lend, self, include_image]
         else:
-            lstart, sstart, lend, send = self.range_image1()
-            lstart -= self.stride * buffer_size
-            sstart -= self.stride * buffer_size
-            lend += self.stride * buffer_size
-            send += self.stride * buffer_size
+            if(isinstance(self.itoim, SurfaceImageToImageMatch)):
+                arg = [self.aoi, include_image]
+            else:
+                lstart, sstart, lend, send = self.range_image1()
+                lstart -= self.stride * buffer_size
+                sstart -= self.stride * buffer_size
+                lend += self.stride * buffer_size
+                send += self.stride * buffer_size
+                arg = [lstart, sstart, lend, send, include_image]
         if(pool is None):
-            return self.surface_point(lstart, sstart, lend, send, include_image)
-        if(lstart > sstart):
-            lstep = (lend - lstart) / multiprocessing.cpu_count()
-            sstep = send - sstart
-        else:
-            lstep = lend - lstart
-            sstep = (send - sstart) / multiprocessing.cpu_count()
+            return self.surface_point(*arg)
         arg = []
-        for ls in range(lstart, lend, lstep):
-            for ss in range(sstart, send, sstep):
-                arg.append([ls, ss, min(ls + lstep, lend),
-                            min(ss + sstep, send), include_image])
+        if(isinstance(self.itoim, SurfaceImageToImageMatch)):
+            numy = self.aoi.number_y_pixel
+            numx = self.aoi.number_x_pixel
+            if(numx > numy):
+                xstep = numx / multiprocessing.cpu_count()
+                ystep = numy
+            else:
+                xstep = numx
+                ystep = numy / multiprocessing.cpu_count()
+            for x in range(0, numx, xstep):
+                for y in range(0, numy, ystep):
+                    arg.append([self.aoi.subset(x, y, xstep, ystep),
+                                include_image])
+        else:
+            if(lstart > sstart):
+                lstep = (lend - lstart) / multiprocessing.cpu_count()
+                sstep = send - sstart
+            else:
+                lstep = lend - lstart
+                sstep = (send - sstart) / multiprocessing.cpu_count()
+            for ls in range(lstart, lend, lstep):
+                for ss in range(sstart, send, sstep):
+                    arg.append([ls, ss, min(ls + lstep, lend),
+                                min(ss + sstep, send), include_image])
         func = SurfacePointWrap(self)
         res = pool.map(func, arg)
         return np.concatenate(res)

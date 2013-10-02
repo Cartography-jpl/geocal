@@ -38,6 +38,7 @@ BOOST_AUTO_TEST_CASE(with_surface_image)
   boost::shared_ptr<RayIntersect>
     ri(new RayIntersect(igc1, igc2));
   DemMatch dm(imgtoimg, ri, 0.5);
-  blitz::Array<double, 2> res = dm.surface_point(0, 0, 100, 100);
+  MapInfo mi = simg1->map_info().subset(0, 0, 100, 100);
+  blitz::Array<double, 2> res = dm.surface_point(mi);
 }
 BOOST_AUTO_TEST_SUITE_END()

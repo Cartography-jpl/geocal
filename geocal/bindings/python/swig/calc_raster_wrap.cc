@@ -5085,6 +5085,19 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -5092,16 +5105,144 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 
 #include "calc_raster_wrap.h"
 
+SwigDirector_CalcRaster::SwigDirector_CalcRaster(PyObject *self, int Number_tile): GeoCal::CalcRaster(Number_tile), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((GeoCal::CalcRaster *)this, this); 
+}
+
+
+
+
+SwigDirector_CalcRaster::SwigDirector_CalcRaster(PyObject *self, int Nline, int Nsamp, int Number_tile): GeoCal::CalcRaster(Nline, Nsamp, Number_tile), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((GeoCal::CalcRaster *)this, this); 
+}
+
+
+
+
+SwigDirector_CalcRaster::SwigDirector_CalcRaster(PyObject *self, int Nline, int Nsamp, int Ntileln, int Ntilesmp, int Number_tile): GeoCal::CalcRaster(Nline, Nsamp, Ntileln, Ntilesmp, Number_tile), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((GeoCal::CalcRaster *)this, this); 
+}
+
+
+
+
+SwigDirector_CalcRaster::SwigDirector_CalcRaster(PyObject *self, GeoCal::MapInfo const &Mi, int Number_tile): GeoCal::CalcRaster(Mi, Number_tile), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((GeoCal::CalcRaster *)this, this); 
+}
+
+
+
+
+SwigDirector_CalcRaster::SwigDirector_CalcRaster(PyObject *self, GeoCal::RasterImage const &Img, int Number_tile): GeoCal::CalcRaster(Img, Number_tile), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((GeoCal::CalcRaster *)this, this); 
+}
+
+
+
+
+SwigDirector_CalcRaster::~SwigDirector_CalcRaster() {
+}
+
+void SwigDirector_CalcRaster::calc(int Lstart, int Sstart) const {
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_From_int(static_cast< int >(Lstart));
+  swig::SwigVar_PyObject obj1;
+  obj1 = SWIG_From_int(static_cast< int >(Sstart));
+  swig_set_inner("calc", true);
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call CalcRaster.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 0;
+  const char * const swig_method_name = "calc";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"calc");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0,(PyObject *)obj1, NULL);
+#endif
+  swig_set_inner("calc", false);
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_CalcRaster_read_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CalcRaster__v_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRaster *arg1 = (GeoCal::CalcRaster *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRaster > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRaster > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigDirector_CalcRaster *darg = 0;
+  blitz::Array< double,2 > *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRaster__v_data" "', argument " "1"" of type '" "GeoCal::CalcRaster *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRaster > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRaster > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRaster * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRaster > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRaster * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  darg = dynamic_cast<SwigDirector_CalcRaster *>(arg1);
+  {
+    try {
+      result = (blitz::Array< double,2 > *) &(darg)->data_ptr();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = result->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = result->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double>(), 
+      stride, result->data(), 0, NPY_WRITEABLE, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*result);
+    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+      SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      SWIG_POINTER_NEW | 0 );
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CalcRaster_calc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::CalcRaster *arg1 = (GeoCal::CalcRaster *) 0 ;
   int arg2 ;
   int arg3 ;
-  int arg4 ;
-  int arg5 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::CalcRaster const > tempshared1 ;
@@ -5110,19 +5251,17 @@ SWIGINTERN PyObject *_wrap_CalcRaster_read_double(PyObject *SWIGUNUSEDPARM(self)
   int ecode2 = 0 ;
   int val3 ;
   int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  PyObject *swig_obj[5] ;
-  SwigValueWrapper< blitz::Array< double,2 > > result;
+  PyObject *swig_obj[3] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  SwigDirector_CalcRaster *darg = 0;
   
-  if (!SWIG_Python_UnpackTuple(args,"CalcRaster_read_double",5,5,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"CalcRaster_calc",3,3,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRaster_read_double" "', argument " "1"" of type '" "GeoCal::CalcRaster const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRaster_calc" "', argument " "1"" of type '" "GeoCal::CalcRaster const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRaster > * >(argp1);
@@ -5135,27 +5274,70 @@ SWIGINTERN PyObject *_wrap_CalcRaster_read_double(PyObject *SWIGUNUSEDPARM(self)
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CalcRaster_read_double" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CalcRaster_calc" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
   ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRaster_read_double" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CalcRaster_calc" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "CalcRaster_read_double" "', argument " "4"" of type '" "int""'");
+  director = SWIG_DIRECTOR_CAST(arg1);
+  if (!director || !(director->swig_get_inner("calc"))) {
+    SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing protected member calc");
+    SWIG_fail;
+  }
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    darg = dynamic_cast<SwigDirector_CalcRaster *>(arg1);
+    {
+      try {
+        if (upcall) {
+          Swig::DirectorPureVirtualException::raise("GeoCal::CalcRaster::calc");
+        } else {
+          ((SwigDirector_CalcRaster const *)darg)->calc(arg2,arg3);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  int arg2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  GeoCal::CalcRaster *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  arg1 = swig_obj[0];
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CalcRaster" "', argument " "2"" of type '" "int""'");
   } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CalcRaster_read_double" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
+  arg2 = static_cast< int >(val2);
   {
     try {
-      result = ((GeoCal::CalcRaster const *)arg1)->read_double(arg2,arg3,arg4,arg5);
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRaster *)new SwigDirector_CalcRaster(arg1,arg2); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5163,23 +5345,639 @@ SWIGINTERN PyObject *_wrap_CalcRaster_read_double(PyObject *SWIGUNUSEDPARM(self)
     }
   }
   {
-    npy_intp dims[2], stride[2];
-    for(int i = 0; i < 2; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(double);
-    }
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double>(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_double_2_t, 
-      SWIG_POINTER_NEW | 0 );
+    boost::shared_ptr<  GeoCal::CalcRaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::CalcRaster *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRaster *)new SwigDirector_CalcRaster(arg1); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  GeoCal::CalcRaster *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  arg1 = swig_obj[0];
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CalcRaster" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRaster" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRaster" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRaster *)new SwigDirector_CalcRaster(arg1,arg2,arg3,arg4); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::CalcRaster *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  arg1 = swig_obj[0];
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CalcRaster" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRaster" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRaster *)new SwigDirector_CalcRaster(arg1,arg2,arg3); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  GeoCal::CalcRaster *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  arg1 = swig_obj[0];
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CalcRaster" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRaster" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRaster" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CalcRaster" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_CalcRaster" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRaster *)new SwigDirector_CalcRaster(arg1,arg2,arg3,arg4,arg5,arg6); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  GeoCal::CalcRaster *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  arg1 = swig_obj[0];
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CalcRaster" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRaster" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CalcRaster" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CalcRaster" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRaster *)new SwigDirector_CalcRaster(arg1,arg2,arg3,arg4,arg5); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  int arg3 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::CalcRaster *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRaster" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRaster" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRaster" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRaster *)new SwigDirector_CalcRaster(arg1,(GeoCal::MapInfo const &)*arg2,arg3); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  GeoCal::CalcRaster *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRaster" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRaster" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRaster *)new SwigDirector_CalcRaster(arg1,(GeoCal::MapInfo const &)*arg2); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  int arg3 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::CalcRaster *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRaster" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRaster" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CalcRaster" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRaster *)new SwigDirector_CalcRaster(arg1,(GeoCal::RasterImage const &)*arg2,arg3); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  GeoCal::CalcRaster *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  arg1 = swig_obj[0];
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CalcRaster" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CalcRaster" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::CalcRaster *)new SwigDirector_CalcRaster(arg1,(GeoCal::RasterImage const &)*arg2); 
+      } else {
+        SWIG_SetErrorMsg(PyExc_RuntimeError,"accessing abstract class or protected constructor"); 
+        SWIG_fail;
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CalcRaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::CalcRaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CalcRaster(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_CalcRaster",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_CalcRaster__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_2;
+    return _wrap_new_CalcRaster__SWIG_7(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_CalcRaster__SWIG_9(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 2) {
+    return _wrap_new_CalcRaster__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_CalcRaster__SWIG_8(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_6;
+    return _wrap_new_CalcRaster__SWIG_6(self, argc, argv);
+  }
+check_6:
+  
+  if (argc == 3) {
+    return _wrap_new_CalcRaster__SWIG_3(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_new_CalcRaster__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_CalcRaster__SWIG_5(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_new_CalcRaster__SWIG_4(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_CalcRaster'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::CalcRaster::CalcRaster(int)\n"
+    "    GeoCal::CalcRaster::CalcRaster()\n"
+    "    GeoCal::CalcRaster::CalcRaster(int,int,int)\n"
+    "    GeoCal::CalcRaster::CalcRaster(int,int)\n"
+    "    GeoCal::CalcRaster::CalcRaster(int,int,int,int,int)\n"
+    "    GeoCal::CalcRaster::CalcRaster(int,int,int,int)\n"
+    "    GeoCal::CalcRaster::CalcRaster(GeoCal::MapInfo const &,int)\n"
+    "    GeoCal::CalcRaster::CalcRaster(GeoCal::MapInfo const &)\n"
+    "    GeoCal::CalcRaster::CalcRaster(GeoCal::RasterImage const &,int)\n"
+    "    GeoCal::CalcRaster::CalcRaster(PyObject *,GeoCal::RasterImage const &)\n");
+  return 0;
 }
 
 
@@ -5225,6 +6023,44 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_disown_CalcRaster(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CalcRaster *arg1 = (GeoCal::CalcRaster *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRaster > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRaster > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRaster_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "disown_CalcRaster" "', argument " "1"" of type '" "GeoCal::CalcRaster *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRaster > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRaster > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRaster * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRaster > * >(argp1);
+      arg1 = const_cast< GeoCal::CalcRaster * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    Swig::Director *director = SWIG_DIRECTOR_CAST(arg1);
+    if (director) director->swig_disown();
+  }
+  
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *CalcRaster_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
@@ -5232,17 +6068,22 @@ SWIGINTERN PyObject *CalcRaster_swigregister(PyObject *SWIGUNUSEDPARM(self), PyO
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *CalcRaster_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"CalcRaster_read_double", _wrap_CalcRaster_read_double, METH_VARARGS, (char *)"\n"
-		"blitz::Array< double, 2 > CalcRaster::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"
-		"Calculate the results as a blitz::Array of doubles. \n"
-		""},
+	 { (char *)"CalcRaster__v_data", (PyCFunction)_wrap_CalcRaster__v_data, METH_O, NULL},
+	 { (char *)"CalcRaster_calc", _wrap_CalcRaster_calc, METH_VARARGS, NULL},
+	 { (char *)"new_CalcRaster", _wrap_new_CalcRaster, METH_VARARGS, NULL},
 	 { (char *)"delete_CalcRaster", (PyCFunction)_wrap_delete_CalcRaster, METH_O, (char *)"\n"
 		"virtual GeoCal::CalcRaster::~CalcRaster()\n"
 		"\n"
 		""},
+	 { (char *)"disown_CalcRaster", (PyCFunction)_wrap_disown_CalcRaster, METH_O, NULL},
 	 { (char *)"CalcRaster_swigregister", CalcRaster_swigregister, METH_VARARGS, NULL},
+	 { (char *)"CalcRaster_swiginit", CalcRaster_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

@@ -13,28 +13,61 @@ from ply_file import *
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
 
-def dem_generate_tile(dem_generate, file_name, offset, lstart, sstart, 
-                      tile_nline, tile_nsamp, nline, nsamp,
-                      file_name_fill, offset_fill):
-    '''This is a function that wraps the calculation of tile of height
-    data in a memory mapped file. This is really just meant for the program
-    setup_dem_job.
+def _new_from_init(cls, version, *args):
+    if(cls.pickle_format_version() < version):
+        raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
+    inst = cls.__new__(cls)
+    inst.__init__(*args)
+    return inst
 
-    offset is the number of bytes to skip in the file to get to the data.
-    The tile is described by lstart, sstart, tile_nline, and tile_nsamp. The
-    full size of the data we are writing is given by nline and nsamp'''
-    h = dem_generate.height_grid()
-    d = np.memmap(file_name, dtype = np.float32, mode='r+', offset=offset,
-                  shape=(nline, nsamp))
-    d[lstart:(lstart + tile_nline),sstart:(sstart + tile_nsamp)] = h
-    d.flush()
-    # Temporary, also write out filled data
-    d = np.memmap(file_name_fill, dtype = np.float32, mode='r+', 
-                  offset=offset_fill,
-                  shape=(nline, nsamp))
-    d[lstart:(lstart + tile_nline),sstart:(sstart + tile_nsamp)] = \
-        dem_generate.h_fill
-    d.flush()
+class DemGenerateMB(geocal.CalcRasterMultiBand):
+    '''This is an adapter than makes the more complicated DemGenerate 
+    class look like just a CalcRasterMultiBand. We may eventually just
+    merge this functionality into DemGenerate, but for now keeping this
+    separate seems to be cleaner.
+    '''
+    def __init__(self, igc1, igc2, mi, interpolate_method = 'linear', 
+                 image_matcher = CcorrLsmMatcher(),
+                 surface_image1 = None, surface_image2 = None,
+                 max_dist_good_point = 0.5,
+                 buffer_size = 5):
+        self.dem_generate = DemGenerate(igc1, igc2, mi, 
+                            image_matcher = image_matcher,
+                            surface_image1 = surface_image1,
+                            surface_image2 = surface_image2,
+                            max_dist_good_point = max_dist_good_point)
+        self.interpolate_method = interpolate_method
+        self.buffer_size = buffer_size
+        self.map_info = mi
+        CalcRasterMultiBand.__init__(self, mi, 2)
+
+    @classmethod
+    def pickle_format_version(cls):
+        return 1
+
+    def __reduce__(self):
+        return _new_from_init, \
+            (self.__class__, 
+             self.__class__.pickle_format_version(),
+             self.dem_generate.igc1,
+             self.dem_generate.igc2,
+             self.map_info,
+             self.interpolate_method,
+             self.dem_generate.image_matcher,
+             self.dem_generate.surface_image1,
+             self.dem_generate.surface_image2,
+             self.dem_generate.max_dist_good_point,
+             self.buffer_size,
+             )
+
+    def calc(self, lstart, sstart):
+        self.dem_generate.aoi = \
+            self.map_info.subset(sstart, lstart, self.data.shape[2],
+                                 self.data.shape[1])
+        self.data[0,:,:] = self.dem_generate.height_grid(\
+               interpolate_method = self.interpolate_method, 
+               buffer_size = self.buffer_size)
+        self.data[1,:,:] = self.dem_generate.h_fill
 
 class SurfacePointWrap(object):    
     '''Wrapper around demg.surface_point that can be pickled. We can't
@@ -173,7 +206,7 @@ class DemGenerate:
                     self.aoi.coordinate(Geodetic(self.r[i,0], self.r[i,1]))
         
         
-    def height_all(self, pool = None, include_image = False):
+    def height_all(self, pool = None, include_image = False, buffer_size = 5):
         '''Find list of surface points by exploring the entire AOI.
         
         Because this can take a while to run, you can optionally supply
@@ -187,6 +220,10 @@ class DemGenerate:
             send = self.igc1.number_sample
         else:
             lstart, sstart, lend, send = self.range_image1()
+            lstart -= self.stride * buffer_size
+            sstart -= self.stride * buffer_size
+            lend += self.stride * buffer_size
+            send += self.stride * buffer_size
         if(pool is None):
             return self.surface_point(lstart, sstart, lend, send, include_image)
         if(lstart > sstart):
@@ -205,7 +242,8 @@ class DemGenerate:
         return np.concatenate(res)
         
     def height_grid(self, fill_value = -9999.0, pool = None, 
-                    include_image = False, interpolate_method = 'nearest'):
+                    include_image = False, interpolate_method = 'nearest',
+                    buffer_size = 5):
         '''Determine surface points from conjugate points, and resample to
         the AOI grid. Returns the height.
 
@@ -221,7 +259,7 @@ class DemGenerate:
 
         You can specify include_image as True, and then we return the height 
         map projected, and also the height in image 1 and image 2 space.'''
-        self.r = self.height_all(pool, include_image)
+        self.r = self.height_all(pool, include_image, buffer_size = buffer_size)
         self.h = np.empty((self.aoi.number_y_pixel,
                            self.aoi.number_x_pixel))
         self.h[:] = fill_value

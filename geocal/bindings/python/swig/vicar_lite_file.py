@@ -362,7 +362,6 @@ class VicarLiteRasterImage(geocal.raster_image.RasterImage):
         value. 
         """
         _vicar_lite_file.VicarLiteRasterImage_swiginit(self,_vicar_lite_file.new_VicarLiteRasterImage(*args))
-    __swig_destroy__ = _vicar_lite_file.delete_VicarLiteRasterImage
     def _v_file(self):
         """
         boost::shared_ptr<VicarLiteFile> GeoCal::VicarLiteRasterImage::file_ptr() const
@@ -406,6 +405,7 @@ class VicarLiteRasterImage(geocal.raster_image.RasterImage):
     def __reduce__(self):
       return _new_from_init, (self.__class__, 1, self.file.file_name,self.file.access,self.band,self.number_tile_line,self.number_tile_sample,self.file.force_area_pixel)
 
+    __swig_destroy__ = _vicar_lite_file.delete_VicarLiteRasterImage
 VicarLiteRasterImage._v_file = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_file,None,VicarLiteRasterImage)
 VicarLiteRasterImage._v_is_compressed = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_is_compressed,None,VicarLiteRasterImage)
 VicarLiteRasterImage._v_band = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_band,None,VicarLiteRasterImage)
@@ -434,7 +434,6 @@ class VicarLiteDem(geocal.dem_map_info.DemMapInfo):
         just return a height of 0. 
         """
         _vicar_lite_file.VicarLiteDem_swiginit(self,_vicar_lite_file.new_VicarLiteDem(*args))
-    __swig_destroy__ = _vicar_lite_file.delete_VicarLiteDem
     def _v_file(self):
         """
         boost::shared_ptr<VicarLiteFile> GeoCal::VicarLiteDem::file_ptr() const
@@ -471,6 +470,7 @@ class VicarLiteDem(geocal.dem_map_info.DemMapInfo):
     def __reduce__(self):
       return _new_from_init, (self.__class__, 1, self.file.file_name,self.outside_dem_is_error,self.datum,self.band)
 
+    __swig_destroy__ = _vicar_lite_file.delete_VicarLiteDem
 VicarLiteDem._v_file = new_instancemethod(_vicar_lite_file.VicarLiteDem__v_file,None,VicarLiteDem)
 VicarLiteDem.elevation = new_instancemethod(_vicar_lite_file.VicarLiteDem_elevation,None,VicarLiteDem)
 VicarLiteDem._v_band = new_instancemethod(_vicar_lite_file.VicarLiteDem__v_band,None,VicarLiteDem)

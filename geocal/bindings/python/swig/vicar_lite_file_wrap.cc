@@ -6996,48 +6996,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_VicarLiteRasterImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarLiteRasterImage *arg1 = (GeoCal::VicarLiteRasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarLiteRasterImage > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarLiteRasterImage > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarLiteRasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_VicarLiteRasterImage" "', argument " "1"" of type '" "GeoCal::VicarLiteRasterImage *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteRasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarLiteRasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarLiteRasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      (void)arg1; delete smartarg1;
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_VicarLiteRasterImage__v_file(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::VicarLiteRasterImage *arg1 = (GeoCal::VicarLiteRasterImage *) 0 ;
@@ -7163,6 +7121,48 @@ SWIGINTERN PyObject *_wrap_VicarLiteRasterImage__v_band(PyObject *SWIGUNUSEDPARM
     }
   }
   resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_VicarLiteRasterImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarLiteRasterImage *arg1 = (GeoCal::VicarLiteRasterImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarLiteRasterImage > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarLiteRasterImage > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarLiteRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_VicarLiteRasterImage" "', argument " "1"" of type '" "GeoCal::VicarLiteRasterImage *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarLiteRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarLiteRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (void)arg1; delete smartarg1;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -7458,48 +7458,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_VicarLiteDem(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarLiteDem *arg1 = (GeoCal::VicarLiteDem *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarLiteDem > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarLiteDem > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarLiteDem_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_VicarLiteDem" "', argument " "1"" of type '" "GeoCal::VicarLiteDem *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteDem > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteDem > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarLiteDem * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteDem > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarLiteDem * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      (void)arg1; delete smartarg1;
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_VicarLiteDem__v_file(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::VicarLiteDem *arg1 = (GeoCal::VicarLiteDem *) 0 ;
@@ -7646,6 +7604,48 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_delete_VicarLiteDem(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarLiteDem *arg1 = (GeoCal::VicarLiteDem *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarLiteDem > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarLiteDem > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarLiteDem_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_VicarLiteDem" "', argument " "1"" of type '" "GeoCal::VicarLiteDem *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteDem > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteDem > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarLiteDem * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteDem > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarLiteDem * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (void)arg1; delete smartarg1;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *VicarLiteDem_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
@@ -7748,10 +7748,6 @@ static PyMethodDef SwigMethods[] = {
 		"it matters for many applications. Most users should just ignore this\n"
 		"value. \n"
 		""},
-	 { (char *)"delete_VicarLiteRasterImage", (PyCFunction)_wrap_delete_VicarLiteRasterImage, METH_O, (char *)"\n"
-		"virtual GeoCal::VicarLiteRasterImage::~VicarLiteRasterImage()\n"
-		"\n"
-		""},
 	 { (char *)"VicarLiteRasterImage__v_file", (PyCFunction)_wrap_VicarLiteRasterImage__v_file, METH_O, (char *)"\n"
 		"boost::shared_ptr<VicarLiteFile> GeoCal::VicarLiteRasterImage::file_ptr() const\n"
 		"\n"
@@ -7767,6 +7763,10 @@ static PyMethodDef SwigMethods[] = {
 		"int GeoCal::VicarLiteRasterImage::band() const\n"
 		"Return band number. \n"
 		""},
+	 { (char *)"delete_VicarLiteRasterImage", (PyCFunction)_wrap_delete_VicarLiteRasterImage, METH_O, (char *)"\n"
+		"virtual GeoCal::VicarLiteRasterImage::~VicarLiteRasterImage()\n"
+		"\n"
+		""},
 	 { (char *)"VicarLiteRasterImage_swigregister", VicarLiteRasterImage_swigregister, METH_VARARGS, NULL},
 	 { (char *)"VicarLiteRasterImage_swiginit", VicarLiteRasterImage_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_VicarLiteDem", _wrap_new_VicarLiteDem, METH_VARARGS, (char *)"\n"
@@ -7779,10 +7779,6 @@ static PyMethodDef SwigMethods[] = {
 		"the range of the Dem cause an exception to be thrown, otherwise we\n"
 		"just return a height of 0. \n"
 		""},
-	 { (char *)"delete_VicarLiteDem", (PyCFunction)_wrap_delete_VicarLiteDem, METH_O, (char *)"\n"
-		"virtual GeoCal::VicarLiteDem::~VicarLiteDem()\n"
-		"\n"
-		""},
 	 { (char *)"VicarLiteDem__v_file", (PyCFunction)_wrap_VicarLiteDem__v_file, METH_O, (char *)"\n"
 		"boost::shared_ptr<VicarLiteFile> GeoCal::VicarLiteDem::file_ptr() const\n"
 		"\n"
@@ -7794,6 +7790,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"VicarLiteDem__v_band", (PyCFunction)_wrap_VicarLiteDem__v_band, METH_O, (char *)"\n"
 		"int GeoCal::VicarLiteDem::band() const\n"
 		"Return band number. \n"
+		""},
+	 { (char *)"delete_VicarLiteDem", (PyCFunction)_wrap_delete_VicarLiteDem, METH_O, (char *)"\n"
+		"virtual GeoCal::VicarLiteDem::~VicarLiteDem()\n"
+		"\n"
 		""},
 	 { (char *)"VicarLiteDem_swigregister", VicarLiteDem_swigregister, METH_VARARGS, NULL},
 	 { (char *)"VicarLiteDem_swiginit", VicarLiteDem_swiginit, METH_VARARGS, NULL},

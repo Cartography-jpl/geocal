@@ -27,6 +27,7 @@ public:
 	      int Number_sample) const;
   virtual void unchecked_write(int Line, int Sample, int Val);
 protected:
+  blitz::Array<double, 2>& data_ptr() { return data; }
   mutable blitz::Array<double, 2> data;
 
 //-----------------------------------------------------------------------

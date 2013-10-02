@@ -109,7 +109,10 @@ SWIG_SRC += @swigsrc@/image_to_image_match_wrap.cc
 SWIG_SRC += @swigsrc@/ccorr_matcher_wrap.cc
 SWIG_SRC += @swigsrc@/lsm_matcher_wrap.cc
 SWIG_SRC += @swigsrc@/ccorr_lsm_matcher_wrap.cc
-SWIG_SRC += @swigsrc@/rpc_image_wrap.cc
+# This is a deprecated class. We almost certainly do want to use this
+# in python. If we have a need for it for some odd reason, we can
+# uncomment this.
+#SWIG_SRC += @swigsrc@/rpc_image_wrap.cc
 SWIG_SRC += @swigsrc@/raster_multifile_wrap.cc
 
 # Test files

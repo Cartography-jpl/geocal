@@ -1,0 +1,43 @@
+#! /usr/bin/env python
+from afids import *
+
+version = "September 18, 2013"
+usage='''Usage:
+  doughnut_diff [options] <input_image_1> <input_image_2> <pandiff>
+  doughnut_diff [options] <input_image_1> <input_image_2> <pandiff> <cvdnorm>
+  doughnut_diff -h | --help
+  doughnut_diff -v | --version
+
+This does a "doughnut average", followed by a difference. This is like the
+cvdnorm program. 
+
+Options:
+  -h --help         
+       Print this message
+
+  --disallow-gore
+       By default, we ignore any point other than the center which has
+       a value of "0". With this option, we set the center of the window 
+       to 0 if any of the window is 0.
+
+  --doughnut-size=d
+       The doughnut to exclude in the average. Should be odd, and < 
+       window size. [default: 5]
+
+  --window-size=d
+       The window size we are averaging. This should be a an odd number.
+       [default: 11]
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+mb = RasterImageMB(read_shelve(args.input_image_1), 
+                   read_shelve(args.input_image_2))
+davg = DoughnutAverage(mb, args.window_size, args.doughnut_size,
+                       not args.disallow_gore)
+pdiff = RasterImageWrapPandif(davg)
+write_shelve(args.pandiff, pdiff)
+if(args.cvdnorm):
+    write_shelve(args.cvdnorm, RasterImageWrapCvdNorm(davg, 1))

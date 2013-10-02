@@ -1,7 +1,7 @@
 Summary: This is the AFIDS python
 Name: afids-python
 Version: 1.04
-Release: 1na
+Release: 1
 License: Copyright 2013 California Institute of Technology ALL RIGHTS RESERVED
 Group: Applications/Engineering
 Vendor: California Institute of Technology
@@ -20,7 +20,7 @@ of python modules.
 %setup -q
 
 %build
-./configure --prefix=/opt/afids
+./configure --prefix=/opt/afids --with-afids-a
 make %_smp_mflags 
 
 %install
@@ -50,6 +50,8 @@ rm -rf $RPM_BUILD_ROOT
 /opt/afids/bin/gdal_to_erdas
 /opt/afids/bin/gdal_to_nitf
 /opt/afids/bin/gen_geneplot_cmd.py
+/opt/afids/bin/gen_geneplot_cmd.pyc
+/opt/afids/bin/gen_geneplot_cmd.pyo
 /opt/afids/bin/igc_project
 /opt/afids/bin/sba
 /opt/afids/bin/shelve_dem

@@ -121,17 +121,24 @@ class CalcRaster(geocal.raster_image_variable.RasterImageVariable):
     C++ includes: calc_raster.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    def read_double(self, *args):
-        """
-        blitz::Array< double, 2 > CalcRaster::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
-        Calculate the results as a blitz::Array of doubles. 
-        """
-        return _calc_raster.CalcRaster_read_double(self, *args)
+    @property
+    def data(self):
+        return self._v_data()
 
+    def __init__(self, *args): 
+        if self.__class__ == CalcRaster:
+            _self = None
+        else:
+            _self = self
+        _calc_raster.CalcRaster_swiginit(self,_calc_raster.new_CalcRaster(_self, *args))
     __swig_destroy__ = _calc_raster.delete_CalcRaster
-CalcRaster.read_double = new_instancemethod(_calc_raster.CalcRaster_read_double,None,CalcRaster)
+    def __disown__(self):
+        self.this.disown()
+        _calc_raster.disown_CalcRaster(self)
+        return weakref_proxy(self)
+CalcRaster._v_data = new_instancemethod(_calc_raster.CalcRaster__v_data,None,CalcRaster)
+CalcRaster.calc = new_instancemethod(_calc_raster.CalcRaster_calc,None,CalcRaster)
 CalcRaster_swigregister = _calc_raster.CalcRaster_swigregister
 CalcRaster_swigregister(CalcRaster)
 

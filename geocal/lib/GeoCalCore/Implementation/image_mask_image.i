@@ -14,6 +14,8 @@ class ImageMaskImage : public ImageMask {
 public:
   ImageMaskImage(boost::shared_ptr<RasterImage> Img, int Mask_value = 0);
   virtual bool mask(int Line, int Sample) const;
+  void unmasked_bounding_box(int &OUTPUT, int &OUTPUT, int &OUTPUT,
+			     int &OUTPUT) const;
   %python_attribute2(raster_image, raster_image_ptr, 
 		     boost::shared_ptr<RasterImage>)
   %python_attribute(masked_value, int)

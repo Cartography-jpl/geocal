@@ -146,7 +146,7 @@ class CalcMapProjected(geocal.raster_image_variable.RasterImageVariable):
     C++ includes: calc_map_projected.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
     def write_image(self, *args):
         """

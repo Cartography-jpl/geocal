@@ -10,13 +10,12 @@
 %geocal_shared_ptr(GeoCal::CalcRaster);
 
 namespace GeoCal {
+// Allow this class to be derived from in Python.
+%feature("director") CalcRaster;
+
 class CalcRaster : public RasterImageVariable {
-public:
-  virtual blitz::Array<double, 2> 
-  read_double(int Lstart, int Sstart, int Number_line, 
-	      int Number_sample) const;
 protected:
-  mutable blitz::Array<double, 2> data;
+  %python_attribute2_nonconst(data, data_ptr, blitz::Array<double, 2>&)
   virtual void calc(int Lstart, int Sstart) const = 0; 
   CalcRaster(int Number_tile = 4);
   CalcRaster(int Nline, int Nsamp,int Number_tile = 4);

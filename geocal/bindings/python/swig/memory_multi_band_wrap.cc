@@ -5173,6 +5173,14 @@ static void *_p_GeoCal__RasterImageMultiBandVariableTo_p_GeoCal__RasterImageMult
 static void *_p_GeoCal__MemoryMultiBandTo_p_GeoCal__RasterImageMultiBand(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::RasterImageMultiBand *) (GeoCal::RasterImageMultiBandVariable *) ((GeoCal::MemoryMultiBand *) x));
 }
+static void *_p_boost__shared_ptrT_GeoCal__MemoryMultiBand_tTo_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::RasterImageMultiBand >(*(boost::shared_ptr< GeoCal::MemoryMultiBand > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_tTo_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::RasterImageMultiBand >(*(boost::shared_ptr< GeoCal::RasterImageMultiBandVariable > *)x);
+}
 static void *_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::CartesianFixedLookVector > *)x);
@@ -5184,14 +5192,6 @@ static void *_p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT
 static void *_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::CartesianInertialLookVector > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__MemoryMultiBand_tTo_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::RasterImageMultiBand >(*(boost::shared_ptr< GeoCal::MemoryMultiBand > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_tTo_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::RasterImageMultiBand >(*(boost::shared_ptr< GeoCal::RasterImageMultiBandVariable > *)x);
 }
 static void *_p_GeoCal__ScLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector *)  ((GeoCal::ScLookVector *) x));
@@ -5305,13 +5305,13 @@ static void *_p_boost__shared_ptrT_GeoCal__Dem_tTo_p_boost__shared_ptrT_GeoCal__
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::Dem > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::CartesianFixedLookVector > *)x);
-}
 static void *_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::RasterImageMultiBand > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::CartesianFixedLookVector > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;

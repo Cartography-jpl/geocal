@@ -11,27 +11,6 @@ EXTRA_DIST+= @libgeocal@/swig_to_python.h
 EXTRA_DIST+= @libgeocal@/swig_type_mapper_base.h
 EXTRA_DIST+= @libgeocal@/swig_type_mapper.h
 
-if HAVE_GDAL
-# bin_PROGRAMS += tryout
-# tryout_SOURCES = @libgeocal@/tryout.cc
-# tryout_LDADD = libgeocal.la $(VICAR_RTL_LIBS) 
-# bin_PROGRAMS += tryout2
-# tryout2_SOURCES = @libgeocal@/tryout2.cc
-# tryout2_LDADD = libgeocal.la $(VICAR_RTL_LIBS) 
-# bin_PROGRAMS += diff_rpc
-# diff_rpc_SOURCES = @libgeocal@/diff_rpc.cc
-# diff_rpc_LDADD = libgeocal.la $(VICAR_RTL_LIBS) 
-#bin_PROGRAMS += dem_fit_tryout
-#dem_fit_tryout_SOURCES = @libgeocal@/dem_fit_tryout.cc
-#dem_fit_tryout_LDADD = libgeocal.la $(VICAR_RTL_LIBS) 
-#bin_PROGRAMS += timing_test
-#timing_test_SOURCES = @libgeocal@/timing_test.cc
-#timing_test_LDADD = libgeocal.la $(SPICE_LDFLAGS) $(VICAR_RTL_LIBS) 
-
-# bin_PROGRAMS += rpc_direct
-# rpc_direct_SOURCES = @libgeocal@/rpc_direct.cc
-# rpc_direct_LDADD = libgeocal.la $(VICAR_RTL_LIBS)
-endif
 EXTRA_DIST += @libgeocal@/dummy.pdf
 EXTRA_DIST += @libgeocal@/geocal_doxygen.h
 

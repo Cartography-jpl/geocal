@@ -17,6 +17,7 @@ public:
   virtual blitz::Array<double, 3> read_double(int Lstart, int Sstart, 
 					      int Nline, int Nsamp) const;
 protected:
+  blitz::Array<double, 3>& data_ptr() { return data; }
   mutable blitz::Array<double, 3> data;
 
 //-----------------------------------------------------------------------
@@ -50,7 +51,29 @@ protected:
     initialize(Img, Nband, Number_tile_line, Number_tile_sample,
 	       Number_tile);
   }      
+
+  CalcRasterMultiBand(int Nline, int Nsamp, int Nband,
+		      int Number_tile_line = -1, int Number_tile_sample = -1, 
+		      int Number_tile = 4)
+  {
+    initialize(Nline, Nsamp, Nband, Number_tile_line, Number_tile_sample,
+	       Number_tile);
+  }
+
+  CalcRasterMultiBand(const MapInfo& Mi, int Nband,
+		      int Number_tile_line = -1, int Number_tile_sample = -1, 
+		      int Number_tile = 4)
+  {
+    initialize(Mi, Nband, Number_tile_line, Number_tile_sample, Number_tile);
+  }
+
   void initialize(const RasterImage& Img, int Nband,
+		  int Number_tile_line = -1, int Number_tile_sample = -1, 
+		  int Number_tile = 4);
+  void initialize(int Nline, int Nsamp, int Nband,
+		  int Number_tile_line = -1, int Number_tile_sample = -1, 
+		  int Number_tile = 4);
+  void initialize(const MapInfo&, int Nband,
 		  int Number_tile_line = -1, int Number_tile_sample = -1, 
 		  int Number_tile = 4);
 private:

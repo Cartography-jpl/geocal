@@ -25,10 +25,6 @@ public:
   %python_attribute(number_line_per_pixel, int)
   %python_attribute(number_sample_per_pixel, int)
   %python_attribute(ignore_zero, bool)
-  virtual int operator()(int Line, int Sample) const;
-  virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
-			int Number_sample, int* Res) const;
-  virtual void write(int Line, int Sample, int Val);
   %pickle_init(1, self.high_resolution_image,
 	       self.number_line_per_pixel, self.number_sample_per_pixel,
 	       self.ignore_zero)

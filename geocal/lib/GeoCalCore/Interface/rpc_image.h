@@ -11,6 +11,12 @@
 
 namespace GeoCal {
 /****************************************************************//**
+   \deprecated This class has been almost entirely replaced with 
+   RpcImageGroundConnection. We'll leave this code in place for now,
+   because this includes blunder detection that is not used by
+   RpcImageGroundConnection. But you almost certainly do want to use
+   this class.
+
    This handles both an Rpc, and the RasterImage data the Rpc map
    projects. 
 

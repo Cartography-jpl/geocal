@@ -65,10 +65,9 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
 	    continue;
 	  double hdem = rpc.height_offset + rpc.height_scale * 
 	    (ih * 2.0 / Nheight - 1);
+	  ImageCoordinate ic(lnv, smpv);
 	  boost::shared_ptr<GroundCoordinate> 
-	    pt(Igc.ground_coordinate_dem(ImageCoordinate(lnv, smpv), 
-					 SimpleDem(hdem)));
-	  ImageCoordinate ic = Igc.image_coordinate(*pt);
+	    pt(Igc.ground_coordinate_dem(ic, SimpleDem(hdem)));
 	  lat.push_back(pt->latitude());
 	  lon.push_back(pt->longitude());
 	  h.push_back(pt->height_reference_surface());
@@ -91,7 +90,8 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
 	    throw;
 	}
       }
-
+  if(first)
+    throw Exception("Did not get any points for RPC fitting in fit_rpc");
   rpc.latitude_offset = (max_lat + min_lat) / 2.0;
   rpc.latitude_scale = (max_lat - min_lat) / 2.0;
   rpc.longitude_offset = (max_lon + min_lon) / 2.0;

@@ -20,6 +20,28 @@ public:
     number_tile_line_ = Number_tile_line;
     number_tile_sample_ = Number_tile_sample;
   }
+  RasterImageWrap(const CalcRasterMultiBand& Mband,
+		  int Nline, int Nsamp,
+		  int Number_tile_line,
+		  int Number_tile_sample,
+		  int Number_tile,
+		  int Band)
+    : CalcRaster(Nline, Nsamp, Number_tile), mband(Mband), band(Band) 
+  {
+    number_tile_line_ = Number_tile_line;
+    number_tile_sample_ = Number_tile_sample;
+  }
+  RasterImageWrap(const CalcRasterMultiBand& Mband,
+		  const MapInfo& Mi,
+		  int Number_tile_line,
+		  int Number_tile_sample,
+		  int Number_tile,
+		  int Band)
+    : CalcRaster(Mi, Number_tile), mband(Mband), band(Band) 
+  {
+    number_tile_line_ = Number_tile_line;
+    number_tile_sample_ = Number_tile_sample;
+  }
 protected:
   void calc(int Lstart, int Sstart) const
   {
@@ -72,4 +94,37 @@ int Number_tile_sample, int Number_tile)
     RasterImageWrap(*this, Img, Number_tile_line, Number_tile_sample, 
 		    Number_tile, i)));
 }
+
+void CalcRasterMultiBand::initialize(
+int Nline, int Nsamp, int Nband, int Number_tile_line,
+int Number_tile_sample, int Number_tile)
+{
+  lstart = -1;
+  sstart = -1;
+  if(Number_tile_line == -1)
+    Number_tile_line = Nline;
+  if(Number_tile_sample == -1)
+    Number_tile_sample = Nsamp;
+  for(int i = 0; i < Nband; ++i)
+    add_raster_image(boost::shared_ptr<RasterImage>(new 
+    RasterImageWrap(*this, Nline, Nsamp, Number_tile_line, Number_tile_sample, 
+		    Number_tile, i)));
+}
+
+void CalcRasterMultiBand::initialize(
+const MapInfo& Mi, int Nband, int Number_tile_line,
+int Number_tile_sample, int Number_tile)
+{
+  lstart = -1;
+  sstart = -1;
+  if(Number_tile_line == -1)
+    Number_tile_line = Mi.number_y_pixel();
+  if(Number_tile_sample == -1)
+    Number_tile_sample = Mi.number_x_pixel();
+  for(int i = 0; i < Nband; ++i)
+    add_raster_image(boost::shared_ptr<RasterImage>(new 
+    RasterImageWrap(*this, Mi, Number_tile_line, Number_tile_sample, 
+		    Number_tile, i)));
+}
+
 

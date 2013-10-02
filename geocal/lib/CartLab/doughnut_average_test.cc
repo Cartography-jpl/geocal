@@ -56,14 +56,6 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_MATRIX_CLOSE(d3, dall(ra,Range(80,99), Range(0,24)));
   Array<double, 3> d4 = davg.read_double(0,175,20,25);
   BOOST_CHECK_MATRIX_CLOSE(d4, dall(ra,Range(0,19), Range(175,199)));
-
-  if(false) {
-    mb->add_raster_image(mi);
-    DoughnutAverage davg2(mb, 11, 5);
-    std::cerr << davg2.pandif(0,0,20,25);
-    std::cerr << davg2.cvdnorm(0,0,0,20,25);
-    std::cerr << davg2.cvdnorm(1,0,0,20,25);
-  }
 }
 // Compare with test data from a previous Shiva run.
 BOOST_AUTO_TEST_CASE(shiva)
@@ -74,7 +66,7 @@ BOOST_AUTO_TEST_CASE(shiva)
      (new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
   mb->add_raster_image(boost::shared_ptr<RasterImage>
      (new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
-  DoughnutAverage davg(mb, 11, 5);
+  boost::shared_ptr<DoughnutAverage> davg(new DoughnutAverage(mb, 11, 5));
   VicarLiteRasterImage cvd_expect(shiva_test_data_dir() + "cvdnorm_sub.img");
   // Expect edges to be different because we aren't calculating
   // outside the window. So only compare middle part of image.
@@ -84,13 +76,13 @@ BOOST_AUTO_TEST_CASE(shiva)
   int ns = cvd_expect.number_sample() - 12;
   // Round off allows us to have up to a difference of 1.
   BOOST_CHECK(max(abs(cvd_expect.read_double(ls, ss, nl, ns) -
-		      davg.cvdnorm(1, ls, ss, nl, ns))) < 1.01);
+		      davg->cvdnorm(1, ls, ss, nl, ns))) < 1.01);
 
   VicarLiteRasterImage pandif_expect(shiva_test_data_dir() + "pandif_sub.img");
   BOOST_CHECK(max(abs(pandif_expect.read_double(ls, ss, nl, ns) -
-		      davg.pandif(ls, ss, nl, ns))) < 1.01);
-  boost::shared_ptr<RasterImage> cvdnorm_img = davg.cvdnorm_raster_image(1);
-  boost::shared_ptr<RasterImage> pandif_img = davg.pandif_raster_image();
+		      davg->pandif(ls, ss, nl, ns))) < 1.01);
+  boost::shared_ptr<RasterImage> cvdnorm_img(new RasterImageWrapCvdNorm(davg, 1));
+  boost::shared_ptr<RasterImage> pandif_img(new RasterImageWrapPandif(davg));
   BOOST_CHECK(max(abs(cvd_expect.read(ls, ss, nl, ns) -
 		      cvdnorm_img->read(ls, ss, nl, ns))) <= 2);
   BOOST_CHECK(max(abs(pandif_expect.read(ls, ss, nl, ns) -

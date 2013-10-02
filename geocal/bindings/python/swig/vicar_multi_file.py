@@ -182,6 +182,7 @@ class VicarMultiFile(geocal.raster_multifile.RasterMultifile):
         """
         _vicar_multi_file.VicarMultiFile_swiginit(self,_vicar_multi_file.new_VicarMultiFile(*args))
     __swig_destroy__ = _vicar_multi_file.delete_VicarMultiFile
+VicarMultiFile.write = new_instancemethod(_vicar_multi_file.VicarMultiFile_write,None,VicarMultiFile)
 VicarMultiFile_swigregister = _vicar_multi_file.VicarMultiFile_swigregister
 VicarMultiFile_swigregister(VicarMultiFile)
 

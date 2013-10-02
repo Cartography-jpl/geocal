@@ -3532,23 +3532,22 @@ namespace Swig {
 #define SWIGTYPE_p_char_type swig_types[80]
 #define SWIGTYPE_p_difference_type swig_types[81]
 #define SWIGTYPE_p_fmtflags swig_types[82]
-#define SWIGTYPE_p_int swig_types[83]
-#define SWIGTYPE_p_int_type swig_types[84]
-#define SWIGTYPE_p_iostate swig_types[85]
-#define SWIGTYPE_p_off_type swig_types[86]
-#define SWIGTYPE_p_openmode swig_types[87]
-#define SWIGTYPE_p_pos_type swig_types[88]
-#define SWIGTYPE_p_seekdir swig_types[89]
-#define SWIGTYPE_p_size_t swig_types[90]
-#define SWIGTYPE_p_size_type swig_types[91]
-#define SWIGTYPE_p_state_type swig_types[92]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[93]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[94]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[95]
-#define SWIGTYPE_p_traits_type swig_types[96]
-#define SWIGTYPE_p_value_type swig_types[97]
-static swig_type_info *swig_types[99];
-static swig_module_info swig_module = {swig_types, 98, 0, 0, 0, 0};
+#define SWIGTYPE_p_int_type swig_types[83]
+#define SWIGTYPE_p_iostate swig_types[84]
+#define SWIGTYPE_p_off_type swig_types[85]
+#define SWIGTYPE_p_openmode swig_types[86]
+#define SWIGTYPE_p_pos_type swig_types[87]
+#define SWIGTYPE_p_seekdir swig_types[88]
+#define SWIGTYPE_p_size_t swig_types[89]
+#define SWIGTYPE_p_size_type swig_types[90]
+#define SWIGTYPE_p_state_type swig_types[91]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[92]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[93]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[94]
+#define SWIGTYPE_p_traits_type swig_types[95]
+#define SWIGTYPE_p_value_type swig_types[96]
+static swig_type_info *swig_types[98];
+static swig_module_info swig_module = {swig_types, 97, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5499,145 +5498,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RasterAveraged___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterAveraged *arg1 = (GeoCal::RasterAveraged *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterAveraged const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterAveraged const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  PyObject *swig_obj[3] ;
-  int result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"RasterAveraged___call__",3,3,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterAveraged_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterAveraged___call__" "', argument " "1"" of type '" "GeoCal::RasterAveraged const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterAveraged > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterAveraged > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterAveraged * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterAveraged > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterAveraged * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterAveraged___call__" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterAveraged___call__" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  {
-    try {
-      result = (int)((GeoCal::RasterAveraged const *)arg1)->operator ()(arg2,arg3);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterAveraged_read_ptr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterAveraged *arg1 = (GeoCal::RasterAveraged *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  int *arg6 = (int *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterAveraged const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterAveraged const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  void *argp6 = 0 ;
-  int res6 = 0 ;
-  PyObject *swig_obj[6] ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"RasterAveraged_read_ptr",6,6,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterAveraged_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterAveraged_read_ptr" "', argument " "1"" of type '" "GeoCal::RasterAveraged const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterAveraged > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterAveraged > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterAveraged * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterAveraged > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterAveraged * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterAveraged_read_ptr" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterAveraged_read_ptr" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RasterAveraged_read_ptr" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RasterAveraged_read_ptr" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  res6 = SWIG_ConvertPtr(swig_obj[5], &argp6,SWIGTYPE_p_int, 0 |  0 );
-  if (!SWIG_IsOK(res6)) {
-    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "RasterAveraged_read_ptr" "', argument " "6"" of type '" "int *""'"); 
-  }
-  arg6 = reinterpret_cast< int * >(argp6);
-  {
-    try {
-      ((GeoCal::RasterAveraged const *)arg1)->read_ptr(arg2,arg3,arg4,arg5,arg6);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_delete_RasterAveraged(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RasterAveraged *arg1 = (GeoCal::RasterAveraged *) 0 ;
@@ -6478,12 +6338,6 @@ static PyMethodDef SwigMethods[] = {
 		"bool GeoCal::RasterAveraged::ignore_zero() const\n"
 		"If true, we ignore zeros when calculating the average. \n"
 		""},
-	 { (char *)"RasterAveraged___call__", _wrap_RasterAveraged___call__, METH_VARARGS, NULL},
-	 { (char *)"RasterAveraged_read_ptr", _wrap_RasterAveraged_read_ptr, METH_VARARGS, (char *)"\n"
-		"void RasterAveraged::read_ptr(int Lstart, int Sstart, int Number_line, int Number_sample, int *Res)\n"
-		"const\n"
-		"Return a subset of the image. \n"
-		""},
 	 { (char *)"delete_RasterAveraged", (PyCFunction)_wrap_delete_RasterAveraged, METH_O, (char *)"\n"
 		"virtual GeoCal::RasterAveraged::~RasterAveraged()\n"
 		"Destructor. \n"
@@ -7000,7 +6854,6 @@ static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_fmtflags = {"_p_fmtflags", "fmtflags *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_int = {"_p_int", "int *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_off_type = {"_p_off_type", "off_type *", 0, 0, (void*)0, 0};
@@ -7100,7 +6953,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
   &_swigt__p_fmtflags,
-  &_swigt__p_int,
   &_swigt__p_int_type,
   &_swigt__p_iostate,
   &_swigt__p_off_type,
@@ -7200,7 +7052,6 @@ static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0,
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_fmtflags[] = {  {&_swigt__p_fmtflags, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_off_type[] = {  {&_swigt__p_off_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -7300,7 +7151,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char_type,
   _swigc__p_difference_type,
   _swigc__p_fmtflags,
-  _swigc__p_int,
   _swigc__p_int_type,
   _swigc__p_iostate,
   _swigc__p_off_type,

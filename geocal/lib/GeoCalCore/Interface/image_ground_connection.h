@@ -124,12 +124,16 @@ public:
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<RasterImage> image() const {return image_;}
+  virtual void image(const boost::shared_ptr<RasterImage>& Img) 
+  {image_ = Img;}
 
 //-----------------------------------------------------------------------
 /// Mask to apply to image.
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<ImageMask> image_mask() const {return image_mask_;}
+  virtual void image_mask(const boost::shared_ptr<ImageMask>& Image_mask) 
+  { image_mask_ = Image_mask;}
 
 //-----------------------------------------------------------------------
 /// Mask to apply to ground.
@@ -137,6 +141,8 @@ public:
 
   virtual boost::shared_ptr<GroundMask> ground_mask() const 
   {return ground_mask_;}
+  virtual void ground_mask(const boost::shared_ptr<GroundMask>& Ground_mask) 
+  { ground_mask_ = Ground_mask; }
 
 //-----------------------------------------------------------------------
 /// Title that we can use to describe the image. This can be any
@@ -379,6 +385,58 @@ private:
   double sample_offset_;
 };
 
+/****************************************************************//**
+  Simple ImageGroundConnection where we use the mapping from an 
+  underlying ImageGroundConnection, but allow the raster image, 
+  dem, title, image mask, or ground mask to be different. You can
+  create a copy, and then modify the image etc. without changing the
+  underlying ImageGroundConnection.
+*******************************************************************/
+
+class ImageGroundConnectionCopy: public ImageGroundConnection
+{
+public:
+  ImageGroundConnectionCopy
+  (const boost::shared_ptr<ImageGroundConnection>& Igc)
+    : ImageGroundConnection(Igc->dem_ptr(), Igc->image(), 
+			    Igc->title(), Igc->image_mask(), 
+			    Igc->ground_mask()),
+      igc(Igc)
+  {
+  }
+  virtual ~ImageGroundConnectionCopy() {}
+  virtual void cf_look_vector(const ImageCoordinate& Ic, 
+			      CartesianFixedLookVector& Lv,
+			      boost::shared_ptr<CartesianFixed>& P) const
+  { igc->cf_look_vector(Ic, Lv, P); }
+  virtual boost::shared_ptr<CartesianFixedLookVector>
+  cf_look_vector_lv(const ImageCoordinate& Ic) const
+  { return igc->cf_look_vector_lv(Ic); }
+  virtual boost::shared_ptr<CartesianFixed>
+  cf_look_vector_pos(const ImageCoordinate& Ic) const
+  {  return igc->cf_look_vector_pos(Ic); }
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_dem(const ImageCoordinate& Ic, 
+			const Dem& D) const
+  { return igc->ground_coordinate_dem(Ic, D); }
+  const boost::shared_ptr<ImageGroundConnection>& igc_original() const
+  { return igc; }
+  virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
+    const { return igc->image_coordinate(Gc); }
+  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) 
+    const { return igc->image_coordinate_jac_ecr(Gc); }
+  virtual blitz::Array<double, 2> 
+  image_coordinate_jac_parm(const GroundCoordinate& Gc) const
+  { return igc->image_coordinate_jac_parm(Gc); }
+  virtual blitz::Array<double, 1> parameter() const
+  { return igc->parameter(); }
+  virtual void parameter(const blitz::Array<double, 1>& Parm)
+  { igc->parameter(Parm); }
+  virtual std::vector<std::string> parameter_name() const
+  { return igc->parameter_name(); }
+private:
+  boost::shared_ptr<ImageGroundConnection> igc;
+};
 
 }
 #endif

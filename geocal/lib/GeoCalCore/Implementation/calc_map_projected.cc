@@ -178,16 +178,6 @@ void CalcMapProjected::read_ptr(int Lstart, int Sstart, int Number_line,
 }
 
 //-----------------------------------------------------------------------
-/// Write a value. This isn't actually implemented for this type of 
-/// RasterImage.
-//-----------------------------------------------------------------------
-
-void CalcMapProjected::unchecked_write(int Line, int Sample, int Val)
-{
-  throw Exception("Write not implemented for CalcMapProjected");
-}
-
-//-----------------------------------------------------------------------
 /// Do a bilinear interpolate at the four points to get the line and
 /// sample.
 //-----------------------------------------------------------------------

@@ -54,7 +54,6 @@ public:
   virtual int unchecked_read(int Line, int Sample) const;
   virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
 			int Number_sample, int* Res) const;
-  virtual void unchecked_write(int Line, int Sample, int Val);
   // Temporary
   virtual blitz::Array<double, 2> 
   read_double(int Lstart, int Sstart, int Number_line, 

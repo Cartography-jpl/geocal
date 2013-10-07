@@ -15,7 +15,7 @@ void CalcRaster::read_ptr(int Lstart, int Sstart, int Number_line,
 // See base class for description of this.
 void CalcRaster::unchecked_write(int Line, int Sample, int Val)
 {
-  throw Exception("MagnifyBilinear doesn't support writing to.");
+  throw Exception("CalcRaster doesn't support writing to.");
 }
 
 //-----------------------------------------------------------------------

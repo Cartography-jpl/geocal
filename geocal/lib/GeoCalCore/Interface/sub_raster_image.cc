@@ -73,15 +73,6 @@ int boundary)
 }
 
 //-----------------------------------------------------------------------
-/// Return pixel value at given line and sample.
-//-----------------------------------------------------------------------
-
-int SubRasterImage::unchecked_read(int Line, int Sample) const
-{
-  return (*data_)(Line + start_line_, Sample + start_sample_);
-}
-
-//-----------------------------------------------------------------------
 /// Return a subset of the image.
 //-----------------------------------------------------------------------
 

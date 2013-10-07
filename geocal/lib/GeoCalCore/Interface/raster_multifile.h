@@ -65,6 +65,10 @@ namespace GeoCal {
     int unchecked_read(int Line, int Sample) const
     { return data->unchecked_read(Line - line_offset, Sample - sample_offset); }
 
+    double unchecked_read_double(int Line, int Sample) const
+    { return data->unchecked_read_double(Line - line_offset, 
+					 Sample - sample_offset); }
+
 //-----------------------------------------------------------------------
 /// Write data.
 //-----------------------------------------------------------------------
@@ -112,6 +116,18 @@ public:
   { RasterMultifileTile& mi = swap(Line, Sample);
     if(mi.data.get())
       return mi.unchecked_read(Line, Sample);
+    if(no_coverage_is_error) {
+      NoCoverage e("Attempt to read data where we don't have a file in RasterMultifile.");
+      e << " Location: " << *ground_coordinate(ImageCoordinate(Line,Sample));
+      throw e;
+    }
+    return no_coverage_fill_value;
+  }
+
+  virtual double unchecked_read_double(int Line, int Sample) const
+  { RasterMultifileTile& mi = swap(Line, Sample);
+    if(mi.data.get())
+      return mi.unchecked_read_double(Line, Sample);
     if(no_coverage_is_error) {
       NoCoverage e("Attempt to read data where we don't have a file in RasterMultifile.");
       e << " Location: " << *ground_coordinate(ImageCoordinate(Line,Sample));

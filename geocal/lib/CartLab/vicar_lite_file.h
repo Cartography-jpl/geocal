@@ -682,6 +682,8 @@ public:
 
   virtual int unchecked_read(int Line, int Sample) const
   { return f_->read_int(band_, Line, Sample); }
+  virtual double unchecked_read_double(int Line, int Sample) const
+  { return f_->read_double(band_, Line, Sample); }
   
 //-----------------------------------------------------------------------
 /// Return a subset of the image.

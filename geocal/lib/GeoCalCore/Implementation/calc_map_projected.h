@@ -51,21 +51,11 @@ public:
   void write_multiple(const 
     std::vector<boost::shared_ptr<RasterImage> >& Out, int Grid_spacing)
     const;
-  virtual int unchecked_read(int Line, int Sample) const
-  { return (int) unchecked_read_double(Line, Sample); }
-  virtual double unchecked_read_double(int Line, int Sample) const;
-  virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
-			int Number_sample, int* Res) const;
-  // Temporary
-  virtual blitz::Array<double, 2> 
-  read_double(int Lstart, int Sstart, int Number_line, 
-			   int Number_sample) const
+  virtual void print(std::ostream& Os) const
   {
-    using namespace blitz;
-    Array<int, 2> dataint = read(Lstart, Sstart, Number_line, Number_sample);
-    Array<double, 2> res(dataint.shape());
-    res = cast<double>(dataint);
-    return res;
+    Os << "IgcMapProjected:\n"
+       << "  Map info:   " << map_info() << "\n"
+       << "  Image ground connection: " << *igc_ << "\n";
   }
 protected:
 //-----------------------------------------------------------------------
@@ -76,13 +66,7 @@ protected:
 
   void initialize(const boost::shared_ptr<ImageGroundConnection>& Igc, const 
 		  int Avg_fact, bool Read_into_memory);
-  virtual void print(std::ostream& Os) const
-  {
-    Os << "IgcMapProjected:\n"
-       << "  Map info:   " << map_info() << "\n"
-       << "  Image ground connection: " << *igc_ << "\n";
-  }
-  virtual void calc(int Lstart, int Sstart) const {}
+  virtual void calc(int Lstart, int Sstart) const;
 private:
   int line_avg_;
   int samp_avg_;

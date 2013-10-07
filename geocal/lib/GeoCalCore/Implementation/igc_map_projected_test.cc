@@ -23,7 +23,7 @@ BOOST_AUTO_TEST_CASE(full_res)
   // value. If this fails, you may want to enable writing out the full
   // output and seeing what is going on.
   BOOST_CHECK_CLOSE(mp.read_double(473, 1000, 100, 100)(0, 0),
-		    394, 1e-4);
+		    394.18319143107396, 1e-4);
   // Optionally write this out for manual inspection
   if(true) {
     VicarRasterImage out("full_res.img", mp.map_info(), "HALF");
@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(averaged_res)
   // value. If this fails, you may want to enable writing out the full
   // output and seeing what is going on.
   BOOST_CHECK_CLOSE(mp.read_double(273, 200, 100, 100)(0, 0),
-		    464, 1e-4);
+		    464.77649443975633, 1e-4);
   // Optionally write this out for manual inspection
   if(true) {
     VicarRasterImage out("averaged_res.img", mp.map_info(), "HALF");
@@ -69,7 +69,7 @@ BOOST_AUTO_TEST_CASE(grid_res)
   // value. If this fails, you may want to enable writing out the full
   // output and seeing what is going on.
   BOOST_CHECK_CLOSE(mp.read_double(473, 1000, 100, 100)(0, 0),
-		    394, 1e-4);
+		    394.18319143107396, 1e-4);
 
   // Optionally write this out for manual inspection
   if(true) {

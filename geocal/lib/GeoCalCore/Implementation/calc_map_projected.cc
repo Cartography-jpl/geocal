@@ -146,35 +146,21 @@ void CalcMapProjected::write_multiple(const
 	}
 }
 
-//-----------------------------------------------------------------------
-/// Read pixel value at given line and sample.
-//-----------------------------------------------------------------------
-
-double CalcMapProjected::unchecked_read_double(int Line, int Sample) const
+// See base class for description
+void CalcMapProjected::calc(int Lstart, int Sstart) const
 {
-  boost::shared_ptr<GroundCoordinate> gc = 
-    ground_coordinate(ImageCoordinate(Line, Sample), igc_->dem());
-  ImageCoordinate ic = igc_->image_coordinate(*gc);
-  if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
-     ic.sample < 0 || ic.sample >= igc_->number_sample() - 1)
-    return 0;			// Data outside of image, so return 0.
-  return igc_->image()->unchecked_interpolate(ic.line, ic.sample);
-}
-
-//-----------------------------------------------------------------------
-/// Return a subset of the image.
-//-----------------------------------------------------------------------
-
-void CalcMapProjected::read_ptr(int Lstart, int Sstart, int Number_line, 
-			         int Number_sample, int* Res) const
-{
-  range_min_check(Lstart, 0);
-  range_min_check(Sstart, 0);
-  range_max_check(Lstart + Number_line - 1, number_line());
-  range_max_check(Sstart + Number_sample - 1, number_sample());
-  for(int i = Lstart; i < Lstart + Number_line; ++i)
-    for(int j = Sstart; j < Sstart + Number_sample; ++j, ++Res)
-      *Res = (*this)(i, j);
+  for(int i = 0; i < data.rows(); ++i)
+    for(int j = 0; j < data.cols(); ++j) {
+      boost::shared_ptr<GroundCoordinate> gc = 
+	ground_coordinate(ImageCoordinate(Lstart + i, Sstart + j), 
+			  igc_->dem());
+      ImageCoordinate ic = igc_->image_coordinate(*gc);
+      if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
+	 ic.sample < 0 || ic.sample >= igc_->number_sample() - 1)
+	data(i, j) =  0;	// Data outside of image, so 0.
+      else
+	data(i, j) = igc_->image()->unchecked_interpolate(ic.line, ic.sample);
+    }
 }
 
 //-----------------------------------------------------------------------

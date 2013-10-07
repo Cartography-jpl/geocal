@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(averaged_res)
   // value. If this fails, you may want to enable writing out the full
   // output and seeing what is going on.
   BOOST_CHECK_CLOSE(mp.read_double(273, 200, 100, 100)(0, 0),
-		    465, 1e-4);
+		    464, 1e-4);
   // Optionally write this out for manual inspection
   if(true) {
     VicarRasterImage out("averaged_res.img", mp.map_info(), "HALF");

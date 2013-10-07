@@ -150,7 +150,7 @@ void CalcMapProjected::write_multiple(const
 /// Read pixel value at given line and sample.
 //-----------------------------------------------------------------------
 
-int CalcMapProjected::unchecked_read(int Line, int Sample) const
+double CalcMapProjected::unchecked_read_double(int Line, int Sample) const
 {
   boost::shared_ptr<GroundCoordinate> gc = 
     ground_coordinate(ImageCoordinate(Line, Sample), igc_->dem());
@@ -158,7 +158,7 @@ int CalcMapProjected::unchecked_read(int Line, int Sample) const
   if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
      ic.sample < 0 || ic.sample >= igc_->number_sample() - 1)
     return 0;			// Data outside of image, so return 0.
-  return (int) round(igc_->image()->unchecked_interpolate(ic.line, ic.sample));
+  return igc_->image()->unchecked_interpolate(ic.line, ic.sample);
 }
 
 //-----------------------------------------------------------------------

@@ -51,7 +51,9 @@ public:
   void write_multiple(const 
     std::vector<boost::shared_ptr<RasterImage> >& Out, int Grid_spacing)
     const;
-  virtual int unchecked_read(int Line, int Sample) const;
+  virtual int unchecked_read(int Line, int Sample) const
+  { return (int) unchecked_read_double(Line, Sample); }
+  virtual double unchecked_read_double(int Line, int Sample) const;
   virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
 			int Number_sample, int* Res) const;
   // Temporary

@@ -19,10 +19,8 @@ using namespace GeoCal;
 
 void CalcMapProjected::initialize
 (const boost::shared_ptr<ImageGroundConnection>& Igc,
- const boost::shared_ptr<Dem>& D, 
  int Avg_fact, bool Read_into_memory)
 {
-  dem_ = D;
   line_avg_ = Avg_fact;
   samp_avg_ = Avg_fact;
   if(line_avg_ > 1 || samp_avg_ > 1) {
@@ -78,7 +76,7 @@ void CalcMapProjected::write_multiple(const
       for(int i = istart; i < istart + tnl && i < number_line(); ++i)
 	for(int j = jstart; j < jstart + tns && j < number_sample(); ++j) {
 	  boost::shared_ptr<GroundCoordinate> gc = 
-	    ground_coordinate(ImageCoordinate(i, j), dem());
+	    ground_coordinate(ImageCoordinate(i, j), igc_->dem());
 	  ImageCoordinate ic = calc_image_coordinates(*gc);
 	  if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
 	     ic.sample < 0 || ic.sample >= igc_->number_sample() - 1) {
@@ -155,7 +153,7 @@ void CalcMapProjected::write_multiple(const
 int CalcMapProjected::unchecked_read(int Line, int Sample) const
 {
   boost::shared_ptr<GroundCoordinate> gc = 
-    ground_coordinate(ImageCoordinate(Line, Sample), dem());
+    ground_coordinate(ImageCoordinate(Line, Sample), igc_->dem());
   ImageCoordinate ic = calc_image_coordinates(*gc);
   if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
      ic.sample < 0 || ic.sample >= igc_->number_sample() - 1)
@@ -202,22 +200,23 @@ void CalcMapProjected::interpolate_ic(int Start_line, int Start_sample,
   double sample[2][2];
   boost::shared_ptr<GroundCoordinate> gc;
   gc = ground_coordinate(ImageCoordinate(Start_line, Start_sample),
-			 dem());
+			 igc_->dem());
   ImageCoordinate ic = calc_image_coordinates(*gc);
   line[0][0] = ic.line;
   sample[0][0] = ic.sample;
   gc = ground_coordinate(ImageCoordinate(Start_line, Start_sample + Nsamp - 1),
-			 dem());
+			 igc_->dem());
   ic = calc_image_coordinates(*gc);
   line[0][1] = ic.line;
   sample[0][1] = ic.sample;
   gc = ground_coordinate(ImageCoordinate(Start_line + Nline - 1, 
-					 Start_sample), dem());
+					 Start_sample), igc_->dem());
   ic = calc_image_coordinates(*gc);
   line[1][0] = ic.line;
   sample[1][0] = ic.sample;
   gc = ground_coordinate(ImageCoordinate(Start_line + Nline - 1, 
-					 Start_sample + Nsamp - 1), dem());
+					 Start_sample + Nsamp - 1), 
+			 igc_->dem());
   ic = calc_image_coordinates(*gc);
   line[1][1] = ic.line;
   sample[1][1] = ic.sample;

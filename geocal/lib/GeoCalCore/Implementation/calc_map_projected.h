@@ -74,8 +74,7 @@ protected:
   CalcMapProjected(const MapInfo& Mi) : RasterImageVariable(Mi) { }
 
   void initialize(const boost::shared_ptr<ImageGroundConnection>& Igc, const 
-		  boost::shared_ptr<Dem>& D, int Avg_fact,
-		  bool Read_into_memory);
+		  int Avg_fact, bool Read_into_memory);
 
 //-----------------------------------------------------------------------
 /// Return calculated image coordinates for given ground
@@ -96,14 +95,12 @@ protected:
     const = 0;
   int line_avg() const {return line_avg_;}
   int samp_avg() const {return samp_avg_;}
-  const Dem& dem() const {return *dem_;}
 private:
   int line_avg_;
   int samp_avg_;
   boost::shared_ptr<ImageGroundConnection> igc_;
                                ///< Underlying data, possibly averaged
                                ///using RasterAveraged.
-  boost::shared_ptr<Dem> dem_;
   int number_tile_line_;
   int number_tile_sample_;
   void interpolate_ic(int Start_line, int Start_sample, int Nline, int Nsamp,

@@ -22,7 +22,7 @@ IgcMapProjected::IgcMapProjected
   if(Avg_fact < 0)
     Avg_fact = (int) round(Mi.resolution_meter() / 
 			   igc->resolution_meter(ImageCoordinate(R->number_line() / 2.0, R->number_sample() / 2.0)));
-  initialize(Igc, Igc->dem_ptr(), Avg_fact, Read_into_memory);
+  initialize(Igc, Avg_fact, Read_into_memory);
 }
 
 //-----------------------------------------------------------------------
@@ -44,7 +44,7 @@ IgcMapProjected::IgcMapProjected
   if(Avg_fact < 0)
     Avg_fact = (int) round(Mi.resolution_meter() / 
 			   igc->resolution_meter(ImageCoordinate(R->number_line() / 2.0, R->number_sample() / 2.0)));
-  initialize(Igc, Igc->dem_ptr(), Avg_fact, Read_into_memory);
+  initialize(Igc, Avg_fact, Read_into_memory);
 }
 
 //-----------------------------------------------------------------------

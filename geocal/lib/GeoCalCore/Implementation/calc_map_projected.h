@@ -3,6 +3,7 @@
 #include "raster_image_variable.h"
 #include "image_ground_connection.h"
 #include <boost/multi_array.hpp>
+#include "calc_raster.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -36,25 +37,13 @@ namespace GeoCal {
   memory.
 *******************************************************************/
 
-class CalcMapProjected : public RasterImageVariable {
+class CalcMapProjected : public CalcRaster {
 public:
 //-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
 
   virtual ~CalcMapProjected() {}
-
-//-----------------------------------------------------------------------
-/// Number of lines in each tile.
-//-----------------------------------------------------------------------
-
-  virtual int number_tile_line() const {return number_tile_line_;}
-
-//-----------------------------------------------------------------------
-/// Number of samples in each tile.
-//-----------------------------------------------------------------------
-
-  virtual int number_tile_sample() const {return number_tile_sample_;}
 
   void write_image(RasterImage& Out, int Grid_spacing = 1) const;
   void write_multiple(const 
@@ -66,12 +55,23 @@ public:
   virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
 			int Number_sample, int* Res) const;
   virtual void unchecked_write(int Line, int Sample, int Val);
+  // Temporary
+  virtual blitz::Array<double, 2> 
+  read_double(int Lstart, int Sstart, int Number_line, 
+			   int Number_sample) const
+  {
+    using namespace blitz;
+    Array<int, 2> dataint = read(Lstart, Sstart, Number_line, Number_sample);
+    Array<double, 2> res(dataint.shape());
+    res = cast<double>(dataint);
+    return res;
+  }
 protected:
 //-----------------------------------------------------------------------
 /// Constructor. Note that derived classes should call initialize.
 //-----------------------------------------------------------------------
 
-  CalcMapProjected(const MapInfo& Mi) : RasterImageVariable(Mi) { }
+  CalcMapProjected(const MapInfo& Mi) : CalcRaster(Mi) { }
 
   void initialize(const boost::shared_ptr<ImageGroundConnection>& Igc, const 
 		  int Avg_fact, bool Read_into_memory);
@@ -81,14 +81,13 @@ protected:
        << "  Map info:   " << map_info() << "\n"
        << "  Image ground connection: " << *igc_ << "\n";
   }
+  virtual void calc(int Lstart, int Sstart) const {}
 private:
   int line_avg_;
   int samp_avg_;
   boost::shared_ptr<ImageGroundConnection> igc_;
                                ///< Underlying data, possibly averaged
                                ///using RasterAveraged.
-  int number_tile_line_;
-  int number_tile_sample_;
   void interpolate_ic(int Start_line, int Start_sample, int Nline, int Nsamp,
 		      boost::multi_array<double, 2>& Ic_line,
 		      boost::multi_array<double, 2>& Ic_sample) const;

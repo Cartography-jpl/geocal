@@ -6,34 +6,6 @@
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
-/// Initialize. We average the data by the factor given as
-/// Avg_fact. This should be something like the
-/// MapInfo.resolution_meter() / resolution of data on ground.
-///
-/// We usually want to read everything into memory to get a reasonable
-/// performance. However, there may be times that you don't want this
-/// done (e.g., data is already in memory, we are only using a small
-/// part of the full image). You can turn this off by having 
-/// Read_into_memory set to false.
-//-----------------------------------------------------------------------
-
-void CalcMapProjected::initialize
-(const boost::shared_ptr<ImageGroundConnection>& Igc,
- int Avg_fact, bool Read_into_memory)
-{
-  line_avg_ = Avg_fact;
-  samp_avg_ = Avg_fact;
-  if(line_avg_ > 1 || samp_avg_ > 1) {
-    igc_.reset(new AveragedImageGroundConnection(Igc, line_avg_, samp_avg_,
-						 Read_into_memory));
-  } else {
-    igc_ = Igc;
-  }
-  number_tile_line_ = number_line();
-  number_tile_sample_ = number_sample();
-}
-
-//-----------------------------------------------------------------------
 // Write output to a RasterImage. You can optionally pass a grid
 // spacing to use. We calculate the image coordinates in the
 /// input exactly at this grid spacing, and interpolate in between.

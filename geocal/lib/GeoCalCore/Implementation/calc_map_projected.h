@@ -59,15 +59,8 @@ protected:
 
   CalcMapProjected(const MapInfo& Mi) : CalcRaster(Mi) { }
 
-  void initialize(const boost::shared_ptr<ImageGroundConnection>& Igc, const 
-		  int Avg_fact, bool Read_into_memory);
   virtual void calc(int Lstart, int Sstart) const;
-private:
-  int line_avg_;
-  int samp_avg_;
   boost::shared_ptr<ImageGroundConnection> igc_;
-                               ///< Underlying data, possibly averaged
-                               ///using RasterAveraged.
   void interpolate_ic(int Start_line, int Start_sample, int Nline, int Nsamp,
 		      boost::multi_array<double, 2>& Ic_line,
 		      boost::multi_array<double, 2>& Ic_sample) const;

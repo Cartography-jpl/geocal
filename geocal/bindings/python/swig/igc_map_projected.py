@@ -148,17 +148,77 @@ class IgcMapProjected(geocal.calc_map_projected.CalcMapProjected):
     def __init__(self, *args): 
         """
         IgcMapProjected::IgcMapProjected(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >
-        &Igc, int Avg_fact=-1, bool Read_into_memory=true)
+        &Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,
+        int Number_tile_line=-1, int Number_tile_sample=-1)
         Constructor.
 
         We average the data either by the factor given as Avg_fact, or by
-        ratio of the Mapinfo resolution and the camera resolution.
+        ratio of the Mapinfo resolution and the Igc resolution.
 
-        This uses the Igc.image(). 
+        You can optionally pass a grid spacing to use. We calculate image
+        coordinates in the input exactly at the grid spacing, and interpolate
+        in betweeen. This is much faster than calculating every point, and if
+        the grid spacing is small compared to the Dem and any nonlinearities
+        then it gives results very close to the full calculation. 
         """
         _igc_map_projected.IgcMapProjected_swiginit(self,_igc_map_projected.new_IgcMapProjected(*args))
+    def _v_igc_original(self):
+        """
+        const boost::shared_ptr<ImageGroundConnection>& GeoCal::IgcMapProjected::igc_original() const
+
+        """
+        return _igc_map_projected.IgcMapProjected__v_igc_original(self)
+
+    @property
+    def igc_original(self):
+        return self._v_igc_original()
+
+    def _v_avg_factor(self):
+        """
+        int GeoCal::IgcMapProjected::avg_factor() const
+
+        """
+        return _igc_map_projected.IgcMapProjected__v_avg_factor(self)
+
+    @property
+    def avg_factor(self):
+        return self._v_avg_factor()
+
+    def _v_grid_spacing(self):
+        """
+        int GeoCal::IgcMapProjected::grid_spacing() const
+
+        """
+        return _igc_map_projected.IgcMapProjected__v_grid_spacing(self)
+
+    @property
+    def grid_spacing(self):
+        return self._v_grid_spacing()
+
+    def _v_read_into_memory(self):
+        """
+        bool GeoCal::IgcMapProjected::read_into_memory() const
+
+        """
+        return _igc_map_projected.IgcMapProjected__v_read_into_memory(self)
+
+    @property
+    def read_into_memory(self):
+        return self._v_read_into_memory()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.map_info,self.igc_original,self.grid_spacing,self.avg_factor,self.read_into_memory,self.number_tile_line,self.number_tile_sample)
+
     __swig_destroy__ = _igc_map_projected.delete_IgcMapProjected
 IgcMapProjected.write = new_instancemethod(_igc_map_projected.IgcMapProjected_write,None,IgcMapProjected)
+IgcMapProjected._v_igc_original = new_instancemethod(_igc_map_projected.IgcMapProjected__v_igc_original,None,IgcMapProjected)
+IgcMapProjected._v_avg_factor = new_instancemethod(_igc_map_projected.IgcMapProjected__v_avg_factor,None,IgcMapProjected)
+IgcMapProjected._v_grid_spacing = new_instancemethod(_igc_map_projected.IgcMapProjected__v_grid_spacing,None,IgcMapProjected)
+IgcMapProjected._v_read_into_memory = new_instancemethod(_igc_map_projected.IgcMapProjected__v_read_into_memory,None,IgcMapProjected)
 IgcMapProjected_swigregister = _igc_map_projected.IgcMapProjected_swigregister
 IgcMapProjected_swigregister(IgcMapProjected)
 

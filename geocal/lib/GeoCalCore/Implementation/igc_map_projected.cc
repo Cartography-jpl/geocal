@@ -5,24 +5,35 @@ using namespace GeoCal;
 
 //-----------------------------------------------------------------------
 /// Constructor. We average the data either by the factor given as
-/// Avg_fact, or by ratio of the Mapinfo resolution and the camera
+/// Avg_fact, or by ratio of the Mapinfo resolution and the Igc
 /// resolution. 
 ///
-/// This uses the Igc.image().
+/// You can optionally pass a grid spacing to use. We calculate
+/// image coordinates in the input exactly at the grid spacing, and
+/// interpolate in betweeen. This is much faster than calculating
+/// every point, and if the grid spacing is small compared to the Dem
+/// and any nonlinearities then it gives results very close to the
+/// full calculation.
 //-----------------------------------------------------------------------
 
 IgcMapProjected::IgcMapProjected
 (const MapInfo& Mi, 
  const boost::shared_ptr<ImageGroundConnection>& Igc,
+ int Grid_spacing,
  int Avg_fact,
- bool Read_into_memory)
-  : CalcMapProjected(Mi)
+ bool Read_into_memory,
+ int Number_tile_line, int Number_tile_sample)
+  : CalcMapProjected(Mi), 
+    igc_original_(Igc), 
+    avg_factor_(Avg_fact),
+    grid_spacing_(Grid_spacing),
+    read_into_memory_(Read_into_memory)
 {
-  if(Avg_fact < 0)
-    Avg_fact = (int) round(Mi.resolution_meter() / 
+  if(avg_factor_ < 0)
+    avg_factor_ = (int) round(Mi.resolution_meter() / 
 			   Igc->resolution_meter(ImageCoordinate(Igc->number_line() / 2.0, Igc->number_sample() / 2.0)));
-  if(Avg_fact > 1)
-    igc_.reset(new AveragedImageGroundConnection(Igc, Avg_fact, Avg_fact,
+  if(avg_factor_ > 1)
+    igc_.reset(new AveragedImageGroundConnection(Igc, avg_factor_, avg_factor_,
 						 Read_into_memory));
   else {
     if(Read_into_memory) {
@@ -32,8 +43,14 @@ IgcMapProjected::IgcMapProjected
     } else
       igc_ = Igc;
   }
-  number_tile_line_ = number_line();
-  number_tile_sample_ = number_sample();
+  if(Number_tile_line < 0)
+    number_tile_line_ = number_line();
+  else
+    number_tile_line_ = Number_tile_line;
+  if(Number_tile_sample < 0)
+    number_tile_sample_ = number_sample();
+  else
+    number_tile_sample_ = Number_tile_sample;
 }
 
 // See base class for description

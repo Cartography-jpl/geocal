@@ -38,8 +38,11 @@ class IgcMapProjected : public CalcMapProjected {
 public:
   IgcMapProjected(const MapInfo& Mi, 
 		  const boost::shared_ptr<ImageGroundConnection>& Igc,
+		  int Grid_spacing = 1,
 		  int Avg_fact = -1,
-		  bool Read_into_memory = true);
+		  bool Read_into_memory = true,
+		  int Number_tile_line = -1,
+		  int Number_tile_sample = -1);
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -52,8 +55,17 @@ public:
        << "  Map info:   " << map_info() << "\n"
        << "  Image ground connection: " << *igc_ << "\n";
   }
+  const boost::shared_ptr<ImageGroundConnection>& igc_original() const
+  { return igc_original_; }
+  int avg_factor() const { return avg_factor_; }
+  int grid_spacing() const { return grid_spacing_; }
+  bool read_into_memory() const { return read_into_memory_; }
 protected:
   virtual void calc(int Lstart, int Sstart) const;
+  boost::shared_ptr<ImageGroundConnection> igc_original_;
+  int avg_factor_;
+  int grid_spacing_;
+  bool read_into_memory_;
 };
 
 }

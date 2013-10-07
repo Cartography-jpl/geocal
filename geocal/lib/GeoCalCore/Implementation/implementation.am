@@ -99,6 +99,7 @@ if HAVE_GDAL
   geocal_test_all_SOURCES+= @srcimplementation@/gdal_raster_image_test.cc
   geocal_test_all_SOURCES+= @srcimplementation@/image_point_display_test.cc
   geocal_test_all_SOURCES+= @srcimplementation@/ogr_coordinate_test.cc
+  geocal_test_all_SOURCES+= @srcimplementation@/igc_map_projected_test.cc
 #  geocal_test_all_SOURCES+= @srcimplementation@/gdal_multi_file_test.cc
 endif # End HAVE_GDAL
 if HAVE_HDF5

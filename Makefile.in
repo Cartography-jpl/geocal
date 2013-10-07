@@ -303,7 +303,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/image_point_display_test.cc \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate_test.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate_test.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/igc_map_projected_test.cc
 #  geocal_test_all_SOURCES+= @srcimplementation@/gdal_multi_file_test.cc
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_21 = @srcimplementation@/hdf_orbit_test.cc
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_22 = @swigsrc@/geocal_gdal_wrap.cc \
@@ -1095,6 +1096,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 	@srcimplementation@/gdal_raster_image_test.cc \
 	@srcimplementation@/image_point_display_test.cc \
 	@srcimplementation@/ogr_coordinate_test.cc \
+	@srcimplementation@/igc_map_projected_test.cc \
 	@srcimplementation@/hdf_orbit_test.cc \
 	@srcimplementation@/spice_helper_test.cc \
 	@srcimplementation@/sdp_helper_test.cc \
@@ -1152,7 +1154,8 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_dem_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-image_point_display_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-igc_map_projected_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_12 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_13 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__objects_14 = @srcmspi@/geocal_test_all-paraxial_transform_test.$(OBJEXT) \
@@ -3819,6 +3822,9 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-igc_map_projected_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -4170,6 +4176,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-hdf_orbit_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_image_to_image_match_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-image_point_display_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ipi_image_ground_connection_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-location_to_file_test.Po@am__quote@
@@ -7015,6 +7022,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/ogr_coordinate_test.cc' object='@srcimplementation@/geocal_test_all-ogr_coordinate_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-ogr_coordinate_test.obj `if test -f '@srcimplementation@/ogr_coordinate_test.cc'; then $(CYGPATH_W) '@srcimplementation@/ogr_coordinate_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/ogr_coordinate_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-igc_map_projected_test.o: @srcimplementation@/igc_map_projected_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_map_projected_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_map_projected_test.o `test -f '@srcimplementation@/igc_map_projected_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_map_projected_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_map_projected_test.cc' object='@srcimplementation@/geocal_test_all-igc_map_projected_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_map_projected_test.o `test -f '@srcimplementation@/igc_map_projected_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_map_projected_test.cc
+
+@srcimplementation@/geocal_test_all-igc_map_projected_test.obj: @srcimplementation@/igc_map_projected_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_map_projected_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_map_projected_test.obj `if test -f '@srcimplementation@/igc_map_projected_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_map_projected_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_map_projected_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_map_projected_test.cc' object='@srcimplementation@/geocal_test_all-igc_map_projected_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_map_projected_test.obj `if test -f '@srcimplementation@/igc_map_projected_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_map_projected_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_map_projected_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-hdf_orbit_test.o: @srcimplementation@/hdf_orbit_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-hdf_orbit_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-hdf_orbit_test.Tpo -c -o @srcimplementation@/geocal_test_all-hdf_orbit_test.o `test -f '@srcimplementation@/hdf_orbit_test.cc' || echo '$(srcdir)/'`@srcimplementation@/hdf_orbit_test.cc

@@ -159,20 +159,6 @@ class CalcMapProjected(geocal.raster_image_variable.RasterImageVariable):
         """
         return _calc_map_projected.CalcMapProjected_write_image(self, *args)
 
-    def write_multiple(self, *args):
-        """
-        void CalcMapProjected::write_multiple(const std::vector< boost::shared_ptr< RasterImage > > &Out, int
-        Grid_spacing) const
-        Write output to multiple RasterImage at once.
-
-        This variation takes a grid spacing to use. We calculate the image
-        coordinates in the input exactly at this grid spacing, and interpolate
-        in between. This is much faster than calculating ever point, and if
-        the grid spacing is small compared to the Dem and any Camera
-        nonlinearities give results very close to the full calculation. 
-        """
-        return _calc_map_projected.CalcMapProjected_write_multiple(self, *args)
-
     __swig_destroy__ = _calc_map_projected.delete_CalcMapProjected
 CalcMapProjected.write_image = new_instancemethod(_calc_map_projected.CalcMapProjected_write_image,None,CalcMapProjected)
 CalcMapProjected.write_multiple = new_instancemethod(_calc_map_projected.CalcMapProjected_write_multiple,None,CalcMapProjected)

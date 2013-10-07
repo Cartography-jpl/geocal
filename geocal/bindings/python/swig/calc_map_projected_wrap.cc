@@ -5578,17 +5578,7 @@ static PyMethodDef SwigMethods[] = {
 		"spacing is small compared to the Dem and any nonlinearities give\n"
 		"results very close to the full calculation. \n"
 		""},
-	 { (char *)"CalcMapProjected_write_multiple", _wrap_CalcMapProjected_write_multiple, METH_VARARGS, (char *)"\n"
-		"void CalcMapProjected::write_multiple(const std::vector< boost::shared_ptr< RasterImage > > &Out, int\n"
-		"Grid_spacing) const\n"
-		"Write output to multiple RasterImage at once.\n"
-		"\n"
-		"This variation takes a grid spacing to use. We calculate the image\n"
-		"coordinates in the input exactly at this grid spacing, and interpolate\n"
-		"in between. This is much faster than calculating ever point, and if\n"
-		"the grid spacing is small compared to the Dem and any Camera\n"
-		"nonlinearities give results very close to the full calculation. \n"
-		""},
+	 { (char *)"CalcMapProjected_write_multiple", _wrap_CalcMapProjected_write_multiple, METH_VARARGS, NULL},
 	 { (char *)"delete_CalcMapProjected", (PyCFunction)_wrap_delete_CalcMapProjected, METH_O, (char *)"\n"
 		"virtual GeoCal::CalcMapProjected::~CalcMapProjected()\n"
 		"Destructor. \n"

@@ -46,11 +46,6 @@ public:
   virtual ~CalcMapProjected() {}
 
   void write_image(RasterImage& Out, int Grid_spacing = 1) const;
-  void write_multiple(const 
-     std::vector<boost::shared_ptr<RasterImage> >& Out) const;
-  void write_multiple(const 
-    std::vector<boost::shared_ptr<RasterImage> >& Out, int Grid_spacing)
-    const;
   virtual void print(std::ostream& Os) const
   {
     Os << "IgcMapProjected:\n"

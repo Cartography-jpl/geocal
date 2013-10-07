@@ -45,72 +45,11 @@ void CalcMapProjected::initialize
 void CalcMapProjected::write_image(RasterImage& Out, 
 				   int Grid_spacing) const
 {
-  std::vector<boost::shared_ptr<RasterImage> > t2;
-  t2.push_back(pointer(Out));
-  if(Grid_spacing == 1)
-    write_multiple(t2);
-  else
-    write_multiple(t2, Grid_spacing);
-}
-
-//-----------------------------------------------------------------------
-/// Write output to multiple RasterImage at once. The number should be
-/// <= the number given to the constructor.
-//-----------------------------------------------------------------------
-
-void CalcMapProjected::write_multiple(const 
-  std::vector<boost::shared_ptr<RasterImage> >& Out) const
-{
-  BOOST_FOREACH(const boost::shared_ptr<RasterImage>& outr, Out)
-    if(number_line() != outr->number_line() ||
-       number_sample() != outr->number_sample())
-      throw Exception("Images need to be the same size");
-  if(Out.size() <= 0 || Out.size() > 1)
-    throw Exception("Out needs to have at least one file, and less than the number of images");
-  int tnl = Out[0]->number_tile_line();
-  int tns = Out[0]->number_tile_sample();
-  for(int istart = 0; istart < number_line();
-      istart += tnl)
-    for(int jstart = 0; jstart < number_sample();
-	jstart += tns)
-      for(int i = istart; i < istart + tnl && i < number_line(); ++i)
-	for(int j = jstart; j < jstart + tns && j < number_sample(); ++j) {
-	  boost::shared_ptr<GroundCoordinate> gc = 
-	    ground_coordinate(ImageCoordinate(i, j), igc_->dem());
-	  ImageCoordinate ic = igc_->image_coordinate(*gc);
-	  if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
-	     ic.sample < 0 || ic.sample >= igc_->number_sample() - 1) {
-	    BOOST_FOREACH(const boost::shared_ptr<RasterImage>& outr, Out)
-	      outr->unchecked_write(i, j, 0);
-	  } else {
-	    for(int k = 0; k < (int) Out.size(); ++k)
-	      Out[k]->unchecked_write(i, j, 
-      (int) round(igc_->image()->unchecked_interpolate(ic.line, ic.sample)));
-	  }
-	}
-}
-
-//-----------------------------------------------------------------------
-/// Write output to multiple RasterImage at once. This variation takes
-/// a grid spacing to use. We calculate the image coordinates in the
-/// input exactly at this grid spacing, and interpolate in between.
-/// This is much faster than calculating ever point, and if the grid 
-/// spacing is small compared to the Dem and any Camera nonlinearities
-/// give results very close to the full calculation.
-//-----------------------------------------------------------------------
-
-void CalcMapProjected::write_multiple(const 
-  std::vector<boost::shared_ptr<RasterImage> >& Out,
-  int Grid_spacing) const
-{
-  BOOST_FOREACH(const boost::shared_ptr<RasterImage>& outr, Out)
-    if(number_line() != outr->number_line() ||
-       number_sample() != outr->number_sample())
-      throw Exception("Images need to be the same size");
-  if(Out.size() <= 0 || Out.size() > 1)
-    throw Exception("Out needs to have at least one file, and less than the number of images");
-  int tnl = Out[0]->number_tile_line();
-  int tns = Out[0]->number_tile_sample();
+  if(number_line() != Out.number_line() ||
+     number_sample() != Out.number_sample())
+    throw Exception("Images need to be the same size");
+  int tnl = Out.number_tile_line();
+  int tns = Out.number_tile_sample();
   boost::multi_array<double, 2>::extent_gen extents;
   boost::multi_array<double, 2> ic_line(extents[Grid_spacing][Grid_spacing]); 
   boost::multi_array<double, 2> 
@@ -134,13 +73,10 @@ void CalcMapProjected::write_multiple(const
 		 ic_line[ii][jj] >= igc_->number_line() - 1 ||
 		 ic_sample[ii][jj] < 0 || 
 		 ic_sample[ii][jj] >= igc_->number_sample() - 1) {
-		BOOST_FOREACH(const 
-			      boost::shared_ptr<RasterImage>& outr, Out)
-		  outr->unchecked_write(i + ii, j + jj, 0);
+		  Out.unchecked_write(i + ii, j + jj, 0);
 	      } else {
-		for(int k = 0; k < (int) Out.size(); ++k)
-		  Out[k]->unchecked_write(i + ii, j + jj, 
-	  (int) round(igc_->image()->unchecked_interpolate(ic_line[ii][jj], 
+		Out.unchecked_write(i + ii, j + jj, 
+	     (int) round(igc_->image()->unchecked_interpolate(ic_line[ii][jj], 
 					ic_sample[ii][jj])));
 	      }
 	}

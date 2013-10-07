@@ -73,14 +73,7 @@ protected:
 
   CalcMapProjected(const MapInfo& Mi) : RasterImageVariable(Mi) { }
 
-//-----------------------------------------------------------------------
-/// Constructor. Note that derived classes should set up map_info_ and
-/// call initialize.
-//-----------------------------------------------------------------------
-  CalcMapProjected() { }
-
-
-  void initialize(const boost::shared_ptr<RasterImage>& R, const 
+  void initialize(const boost::shared_ptr<ImageGroundConnection>& Igc, const 
 		  boost::shared_ptr<Dem>& D, int Avg_fact,
 		  bool Read_into_memory);
 
@@ -107,7 +100,7 @@ protected:
 private:
   int line_avg_;
   int samp_avg_;
-  boost::shared_ptr<RasterImage> img_;
+  boost::shared_ptr<ImageGroundConnection> igc_;
                                ///< Underlying data, possibly averaged
                                ///using RasterAveraged.
   boost::shared_ptr<Dem> dem_;

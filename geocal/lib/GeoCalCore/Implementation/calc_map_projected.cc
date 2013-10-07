@@ -17,35 +17,22 @@ using namespace GeoCal;
 /// Read_into_memory set to false.
 //-----------------------------------------------------------------------
 
-void CalcMapProjected::initialize(const boost::shared_ptr<RasterImage>& R,
-				  const boost::shared_ptr<Dem>& D, 
-				  int Avg_fact, bool Read_into_memory)
+void CalcMapProjected::initialize
+(const boost::shared_ptr<ImageGroundConnection>& Igc,
+ const boost::shared_ptr<Dem>& D, 
+ int Avg_fact, bool Read_into_memory)
 {
   dem_ = D;
   line_avg_ = Avg_fact;
   samp_avg_ = Avg_fact;
   if(line_avg_ > 1 || samp_avg_ > 1) {
-    if(Read_into_memory) {
-      img_.reset(new MemoryRasterImage(RasterAveraged(R, line_avg_, 
-							 samp_avg_)));
-      number_tile_line_ = number_line();
-      number_tile_sample_ = number_sample();
-    } else {
-      img_.reset(new RasterAveraged(R, line_avg_, samp_avg_));
-      number_tile_line_ = img_->number_tile_line();
-      number_tile_sample_ = img_->number_tile_sample();
-    }
+    igc_.reset(new AveragedImageGroundConnection(Igc, line_avg_, samp_avg_,
+						 Read_into_memory));
   } else {
-    if(Read_into_memory) {
-      img_.reset(new MemoryRasterImage(*R));
-      number_tile_line_ = number_line();
-      number_tile_sample_ = number_sample();
-    } else {
-      img_ = R;
-      number_tile_line_ = img_->number_tile_line();
-      number_tile_sample_ = img_->number_tile_sample();
-    }
+    igc_ = Igc;
   }
+  number_tile_line_ = number_line();
+  number_tile_sample_ = number_sample();
 }
 
 //-----------------------------------------------------------------------
@@ -93,14 +80,14 @@ void CalcMapProjected::write_multiple(const
 	  boost::shared_ptr<GroundCoordinate> gc = 
 	    ground_coordinate(ImageCoordinate(i, j), dem());
 	  ImageCoordinate ic = calc_image_coordinates(*gc);
-	  if(ic.line < 0 || ic.line >= img_->number_line() - 1 ||
-	     ic.sample < 0 || ic.sample >= img_->number_sample() - 1) {
+	  if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
+	     ic.sample < 0 || ic.sample >= igc_->number_sample() - 1) {
 	    BOOST_FOREACH(const boost::shared_ptr<RasterImage>& outr, Out)
 	      outr->unchecked_write(i, j, 0);
 	  } else {
 	    for(int k = 0; k < (int) Out.size(); ++k)
 	      Out[k]->unchecked_write(i, j, 
-	      (int) round(img_->unchecked_interpolate(ic.line, ic.sample)));
+      (int) round(igc_->image()->unchecked_interpolate(ic.line, ic.sample)));
 	  }
 	}
 }
@@ -146,17 +133,17 @@ void CalcMapProjected::write_multiple(const
 	  for(int ii = 0; ii < inum; ++ii)
 	    for(int jj = 0; jj < jnum; ++jj)
 	      if(ic_line[ii][jj] < 0 || 
-		 ic_line[ii][jj] >= img_->number_line() - 1 ||
+		 ic_line[ii][jj] >= igc_->number_line() - 1 ||
 		 ic_sample[ii][jj] < 0 || 
-		 ic_sample[ii][jj] >= img_->number_sample() - 1) {
+		 ic_sample[ii][jj] >= igc_->number_sample() - 1) {
 		BOOST_FOREACH(const 
 			      boost::shared_ptr<RasterImage>& outr, Out)
 		  outr->unchecked_write(i + ii, j + jj, 0);
 	      } else {
 		for(int k = 0; k < (int) Out.size(); ++k)
 		  Out[k]->unchecked_write(i + ii, j + jj, 
-		  (int) round(img_->unchecked_interpolate(ic_line[ii][jj], 
-						ic_sample[ii][jj])));
+	  (int) round(igc_->image()->unchecked_interpolate(ic_line[ii][jj], 
+					ic_sample[ii][jj])));
 	      }
 	}
 }
@@ -170,10 +157,10 @@ int CalcMapProjected::unchecked_read(int Line, int Sample) const
   boost::shared_ptr<GroundCoordinate> gc = 
     ground_coordinate(ImageCoordinate(Line, Sample), dem());
   ImageCoordinate ic = calc_image_coordinates(*gc);
-  if(ic.line < 0 || ic.line >= img_->number_line() - 1 ||
-     ic.sample < 0 || ic.sample >= img_->number_sample() - 1)
+  if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
+     ic.sample < 0 || ic.sample >= igc_->number_sample() - 1)
     return 0;			// Data outside of image, so return 0.
-  return (int) round(img_->unchecked_interpolate(ic.line, ic.sample));
+  return (int) round(igc_->image()->unchecked_interpolate(ic.line, ic.sample));
 }
 
 //-----------------------------------------------------------------------

@@ -18,84 +18,32 @@ using namespace GeoCal;
 //-----------------------------------------------------------------------
 
 void CalcMapProjected::initialize(const boost::shared_ptr<RasterImage>& R,
-				  const boost::shared_ptr<Dem>& D,
+				  const boost::shared_ptr<Dem>& D, 
 				  int Avg_fact, bool Read_into_memory)
 {
   dem_ = D;
   line_avg_ = Avg_fact;
   samp_avg_ = Avg_fact;
-  img_.resize(1);
   if(line_avg_ > 1 || samp_avg_ > 1) {
     if(Read_into_memory) {
-      img_[0].reset(new MemoryRasterImage(RasterAveraged(R, line_avg_, 
+      img_.reset(new MemoryRasterImage(RasterAveraged(R, line_avg_, 
 							 samp_avg_)));
       number_tile_line_ = number_line();
       number_tile_sample_ = number_sample();
     } else {
-      img_[0].reset(new RasterAveraged(R, line_avg_, samp_avg_));
-      number_tile_line_ = img_[0]->number_tile_line();
-      number_tile_sample_ = img_[0]->number_tile_sample();
+      img_.reset(new RasterAveraged(R, line_avg_, samp_avg_));
+      number_tile_line_ = img_->number_tile_line();
+      number_tile_sample_ = img_->number_tile_sample();
     }
   } else {
     if(Read_into_memory) {
-      img_[0].reset(new MemoryRasterImage(*R));
-      number_tile_line_ = number_line();
-      number_tile_sample_ = number_sample();
-    } else {
-      img_[0] = R;
-      number_tile_line_ = img_[0]->number_tile_line();
-      number_tile_sample_ = img_[0]->number_tile_sample();
-    }
-  }
-}
-
-//-----------------------------------------------------------------------
-/// Initialize. We average the data by the factor given as
-/// Avg_fact. This should be something like the
-/// MapInfo.resolution_meter() / resolution of data on ground
-///
-/// We usually want to read everything into memory to get a reasonable
-/// performance. However, there may be times that you don't want this
-/// done (e.g., data is already in memory, we are only using a small
-/// part of the full image). You can turn this off by having 
-/// Read_into_memory set to false.
-///
-/// This is a variation that handles multiple bands at one time, you
-/// give it the set of raster image to process.
-//-----------------------------------------------------------------------
-
-void CalcMapProjected::initialize(
-		     const std::vector<boost::shared_ptr<RasterImage> >& R,
-		     const boost::shared_ptr<Dem>& D,
-		     int Avg_fact, bool Read_into_memory)
-{
-  dem_ = D;
-  line_avg_ = Avg_fact;
-  samp_avg_ = Avg_fact;
-  if(line_avg_ > 1 || samp_avg_ > 1) {
-    BOOST_FOREACH(const boost::shared_ptr<RasterImage>& rs, R)
-      if(Read_into_memory) {
-	img_.push_back(boost::shared_ptr<RasterImage>(new 
-         MemoryRasterImage(RasterAveraged(rs, line_avg_, samp_avg_))));
-	number_tile_line_ = number_line();
-	number_tile_sample_ = number_sample();
-      } else {
-	img_.push_back(boost::shared_ptr<RasterImage>
-		       (new RasterAveraged(rs, line_avg_, samp_avg_)));
-	number_tile_line_ = img_[0]->number_tile_line();
-	number_tile_sample_ = img_[0]->number_tile_sample();
-      }
-  } else {
-    if(Read_into_memory) {
-      BOOST_FOREACH(const boost::shared_ptr<RasterImage>& rs, R)
-	img_.push_back(boost::shared_ptr<RasterImage>
-		       (new MemoryRasterImage(*rs)));
+      img_.reset(new MemoryRasterImage(*R));
       number_tile_line_ = number_line();
       number_tile_sample_ = number_sample();
     } else {
       img_ = R;
-      number_tile_line_ = img_[0]->number_tile_line();
-      number_tile_sample_ = img_[0]->number_tile_sample();
+      number_tile_line_ = img_->number_tile_line();
+      number_tile_sample_ = img_->number_tile_sample();
     }
   }
 }
@@ -132,7 +80,7 @@ void CalcMapProjected::write_multiple(const
     if(number_line() != outr->number_line() ||
        number_sample() != outr->number_sample())
       throw Exception("Images need to be the same size");
-  if(Out.size() <= 0 || Out.size() > img().size())
+  if(Out.size() <= 0 || Out.size() > 1)
     throw Exception("Out needs to have at least one file, and less than the number of images");
   int tnl = Out[0]->number_tile_line();
   int tns = Out[0]->number_tile_sample();
@@ -145,14 +93,14 @@ void CalcMapProjected::write_multiple(const
 	  boost::shared_ptr<GroundCoordinate> gc = 
 	    ground_coordinate(ImageCoordinate(i, j), dem());
 	  ImageCoordinate ic = calc_image_coordinates(*gc);
-	  if(ic.line < 0 || ic.line >= img()[0]->number_line() - 1 ||
-	     ic.sample < 0 || ic.sample >= img()[0]->number_sample() - 1) {
+	  if(ic.line < 0 || ic.line >= img_->number_line() - 1 ||
+	     ic.sample < 0 || ic.sample >= img_->number_sample() - 1) {
 	    BOOST_FOREACH(const boost::shared_ptr<RasterImage>& outr, Out)
 	      outr->unchecked_write(i, j, 0);
 	  } else {
 	    for(int k = 0; k < (int) Out.size(); ++k)
 	      Out[k]->unchecked_write(i, j, 
-	      (int) round(img()[k]->unchecked_interpolate(ic.line, ic.sample)));
+	      (int) round(img_->unchecked_interpolate(ic.line, ic.sample)));
 	  }
 	}
 }
@@ -174,7 +122,7 @@ void CalcMapProjected::write_multiple(const
     if(number_line() != outr->number_line() ||
        number_sample() != outr->number_sample())
       throw Exception("Images need to be the same size");
-  if(Out.size() <= 0 || Out.size() > img().size())
+  if(Out.size() <= 0 || Out.size() > 1)
     throw Exception("Out needs to have at least one file, and less than the number of images");
   int tnl = Out[0]->number_tile_line();
   int tns = Out[0]->number_tile_sample();
@@ -198,16 +146,16 @@ void CalcMapProjected::write_multiple(const
 	  for(int ii = 0; ii < inum; ++ii)
 	    for(int jj = 0; jj < jnum; ++jj)
 	      if(ic_line[ii][jj] < 0 || 
-		 ic_line[ii][jj] >= img()[0]->number_line() - 1 ||
+		 ic_line[ii][jj] >= img_->number_line() - 1 ||
 		 ic_sample[ii][jj] < 0 || 
-		 ic_sample[ii][jj] >= img()[0]->number_sample() - 1) {
+		 ic_sample[ii][jj] >= img_->number_sample() - 1) {
 		BOOST_FOREACH(const 
 			      boost::shared_ptr<RasterImage>& outr, Out)
 		  outr->unchecked_write(i + ii, j + jj, 0);
 	      } else {
 		for(int k = 0; k < (int) Out.size(); ++k)
 		  Out[k]->unchecked_write(i + ii, j + jj, 
-		  (int) round(img()[k]->unchecked_interpolate(ic_line[ii][jj], 
+		  (int) round(img_->unchecked_interpolate(ic_line[ii][jj], 
 						ic_sample[ii][jj])));
 	      }
 	}
@@ -222,10 +170,10 @@ int CalcMapProjected::unchecked_read(int Line, int Sample) const
   boost::shared_ptr<GroundCoordinate> gc = 
     ground_coordinate(ImageCoordinate(Line, Sample), dem());
   ImageCoordinate ic = calc_image_coordinates(*gc);
-  if(ic.line < 0 || ic.line >= img()[0]->number_line() - 1 ||
-     ic.sample < 0 || ic.sample >= img()[0]->number_sample() - 1)
+  if(ic.line < 0 || ic.line >= img_->number_line() - 1 ||
+     ic.sample < 0 || ic.sample >= img_->number_sample() - 1)
     return 0;			// Data outside of image, so return 0.
-  return (int) round(img()[0]->unchecked_interpolate(ic.line, ic.sample));
+  return (int) round(img_->unchecked_interpolate(ic.line, ic.sample));
 }
 
 //-----------------------------------------------------------------------

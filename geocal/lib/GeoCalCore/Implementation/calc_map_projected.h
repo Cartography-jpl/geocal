@@ -1,6 +1,7 @@
 #ifndef CALC_MAP_PROJECTED_H
 #define CALC_MAP_PROJECTED_H
 #include "raster_image_variable.h"
+#include "image_ground_connection.h"
 #include <boost/multi_array.hpp>
 
 namespace GeoCal {
@@ -82,9 +83,6 @@ protected:
   void initialize(const boost::shared_ptr<RasterImage>& R, const 
 		  boost::shared_ptr<Dem>& D, int Avg_fact,
 		  bool Read_into_memory);
-  void initialize(const std::vector<boost::shared_ptr<RasterImage> >& R,
-		  const boost::shared_ptr<Dem>& D, int Avg_fact,
-		  bool Read_into_memory);
 
 //-----------------------------------------------------------------------
 /// Return calculated image coordinates for given ground
@@ -106,12 +104,10 @@ protected:
   int line_avg() const {return line_avg_;}
   int samp_avg() const {return samp_avg_;}
   const Dem& dem() const {return *dem_;}
-  const std::vector<boost::shared_ptr<RasterImage> >& img() const {return img_;}
-
 private:
   int line_avg_;
   int samp_avg_;
-  std::vector<boost::shared_ptr<RasterImage> > img_;
+  boost::shared_ptr<RasterImage> img_;
                                ///< Underlying data, possibly averaged
                                ///using RasterAveraged.
   boost::shared_ptr<Dem> dem_;

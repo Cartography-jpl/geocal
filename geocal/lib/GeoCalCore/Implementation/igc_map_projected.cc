@@ -55,7 +55,6 @@ void IgcMapProjected::print(std::ostream& Os) const
 {
   Os << "IgcMapProjected:\n"
      << "  Map info:   " << map_info() << "\n"
-     << "  Image ground connection: " << *igc << "\n"
-     << "  Image:      " << img()[0] << "\n";
+     << "  Image ground connection: " << *igc << "\n";
 }
 

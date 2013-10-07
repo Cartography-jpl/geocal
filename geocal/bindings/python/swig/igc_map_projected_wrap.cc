@@ -5151,369 +5151,6 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_0(PyObject *SWIGUNUSEDPARM(
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
-  int arg4 ;
-  bool arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared2 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection > temp2shared2 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared3 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared3 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  bool val5 ;
-  int ecode5 = 0 ;
-  GeoCal::IgcMapProjected *result = 0 ;
-  
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::MapInfo *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_IgcMapProjected" "', argument " "1"" of type '" "GeoCal::MapInfo const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcMapProjected" "', argument " "1"" of type '" "GeoCal::MapInfo const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
-        arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_IgcMapProjected" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::ImageGroundConnection > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2) : &tempshared2;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  {
-    int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_IgcMapProjected" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
-      arg3 = &tempshared3;
-    } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg3 = &temp2shared3;
-    }
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IgcMapProjected" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcMapProjected" "', argument " "5"" of type '" "bool""'");
-  } 
-  arg5 = static_cast< bool >(val5);
-  {
-    try {
-      result = (GeoCal::IgcMapProjected *)new GeoCal::IgcMapProjected((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,arg4,arg5);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::IgcMapProjected > *smartresult = result ? new boost::shared_ptr<  GeoCal::IgcMapProjected >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMapProjected_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::MapInfo *arg1 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
-  int arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared2 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection > temp2shared2 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared3 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared3 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  GeoCal::IgcMapProjected *result = 0 ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::MapInfo *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_IgcMapProjected" "', argument " "1"" of type '" "GeoCal::MapInfo const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcMapProjected" "', argument " "1"" of type '" "GeoCal::MapInfo const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
-        arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_IgcMapProjected" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::ImageGroundConnection > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2) : &tempshared2;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  {
-    int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_IgcMapProjected" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
-      arg3 = &tempshared3;
-    } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg3 = &temp2shared3;
-    }
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IgcMapProjected" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  {
-    try {
-      result = (GeoCal::IgcMapProjected *)new GeoCal::IgcMapProjected((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,arg4);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::IgcMapProjected > *smartresult = result ? new boost::shared_ptr<  GeoCal::IgcMapProjected >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMapProjected_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::MapInfo *arg1 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared2 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection > temp2shared2 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared3 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared3 ;
-  GeoCal::IgcMapProjected *result = 0 ;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::MapInfo *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_IgcMapProjected" "', argument " "1"" of type '" "GeoCal::MapInfo const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcMapProjected" "', argument " "1"" of type '" "GeoCal::MapInfo const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
-        arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_IgcMapProjected" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::ImageGroundConnection > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2) : &tempshared2;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  {
-    int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_IgcMapProjected" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
-      arg3 = &tempshared3;
-    } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg3 = &temp2shared3;
-    }
-  }
-  {
-    try {
-      result = (GeoCal::IgcMapProjected *)new GeoCal::IgcMapProjected((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::IgcMapProjected > *smartresult = result ? new boost::shared_ptr<  GeoCal::IgcMapProjected >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMapProjected_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::MapInfo *arg1 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
   int arg3 ;
   bool arg4 ;
   void *argp1 = 0 ;
@@ -5609,7 +5246,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -5700,7 +5337,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -5785,58 +5422,23 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_IgcMapProjected(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[6];
+  PyObject *argv[5];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IgcMapProjected",0,5,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IgcMapProjected",0,4,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
-    return _wrap_new_IgcMapProjected__SWIG_5(self, argc, argv);
-  }
-  if (argc == 3) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
     return _wrap_new_IgcMapProjected__SWIG_2(self, argc, argv);
   }
-check_2:
-  
   if (argc == 3) {
-    return _wrap_new_IgcMapProjected__SWIG_4(self, argc, argv);
-  }
-  if (argc == 4) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_4;
-    {
-      {
-        int res = SWIG_AsVal_int(argv[3], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_4;
     return _wrap_new_IgcMapProjected__SWIG_1(self, argc, argv);
   }
-check_4:
-  
   if (argc == 4) {
-    return _wrap_new_IgcMapProjected__SWIG_3(self, argc, argv);
-  }
-  if (argc == 5) {
     return _wrap_new_IgcMapProjected__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_IgcMapProjected'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::IgcMapProjected::IgcMapProjected(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,boost::shared_ptr< GeoCal::RasterImage > const &,int,bool)\n"
-    "    GeoCal::IgcMapProjected::IgcMapProjected(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,boost::shared_ptr< GeoCal::RasterImage > const &,int)\n"
-    "    GeoCal::IgcMapProjected::IgcMapProjected(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,boost::shared_ptr< GeoCal::RasterImage > const &)\n"
     "    GeoCal::IgcMapProjected::IgcMapProjected(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,bool)\n"
     "    GeoCal::IgcMapProjected::IgcMapProjected(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int)\n"
     "    GeoCal::IgcMapProjected::IgcMapProjected(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &)\n");

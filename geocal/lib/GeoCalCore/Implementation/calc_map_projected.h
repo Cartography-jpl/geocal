@@ -75,9 +75,12 @@ protected:
 
   void initialize(const boost::shared_ptr<ImageGroundConnection>& Igc, const 
 		  int Avg_fact, bool Read_into_memory);
-
-  int line_avg() const {return line_avg_;}
-  int samp_avg() const {return samp_avg_;}
+  virtual void print(std::ostream& Os) const
+  {
+    Os << "IgcMapProjected:\n"
+       << "  Map info:   " << map_info() << "\n"
+       << "  Image ground connection: " << *igc_ << "\n";
+  }
 private:
   int line_avg_;
   int samp_avg_;

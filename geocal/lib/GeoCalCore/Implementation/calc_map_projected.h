@@ -46,12 +46,6 @@ public:
   virtual ~CalcMapProjected() {}
 
   void write_image(RasterImage& Out, int Grid_spacing = 1) const;
-  virtual void print(std::ostream& Os) const
-  {
-    Os << "IgcMapProjected:\n"
-       << "  Map info:   " << map_info() << "\n"
-       << "  Image ground connection: " << *igc_ << "\n";
-  }
 protected:
 //-----------------------------------------------------------------------
 /// Constructor. Note that derived classes should call initialize.
@@ -59,7 +53,6 @@ protected:
 
   CalcMapProjected(const MapInfo& Mi) : CalcRaster(Mi) { }
 
-  virtual void calc(int Lstart, int Sstart) const;
   boost::shared_ptr<ImageGroundConnection> igc_;
   void interpolate_ic(int Start_line, int Start_sample, int Nline, int Nsamp,
 		      boost::multi_array<double, 2>& Ic_line,

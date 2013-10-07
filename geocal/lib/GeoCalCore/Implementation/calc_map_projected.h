@@ -76,23 +76,6 @@ protected:
   void initialize(const boost::shared_ptr<ImageGroundConnection>& Igc, const 
 		  int Avg_fact, bool Read_into_memory);
 
-//-----------------------------------------------------------------------
-/// Return calculated image coordinates for given ground
-/// location. This should be the image coordinates of the averaged
-/// data, i.e., you need to include line_avg and sample_avg in your
-/// calculation. It is ok if this is out of the range of the image, we
-/// check for that. In particular, for calculations that may fail for
-/// out of range data (e.g., Ipi), you can just return
-/// ImageCoordinate(-1, -1) (you should not trigger an exception).
-///
-/// Because we may use these points to interpolate, to prevent odd
-/// behavior at the edges of the image you should smoothly extend for
-/// out of range data (e.g., value of ImageCoordinate for sample might
-/// be -0.1 near the edge, or -10.0 farther away).
-//-----------------------------------------------------------------------
-
-  virtual ImageCoordinate calc_image_coordinates(const GroundCoordinate& Gc) 
-    const = 0;
   int line_avg() const {return line_avg_;}
   int samp_avg() const {return samp_avg_;}
 private:

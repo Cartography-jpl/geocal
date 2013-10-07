@@ -53,13 +53,6 @@ public:
   virtual ~IgcMapProjected() {}
 
   virtual void print(std::ostream& Os) const;
-protected:
-  virtual ImageCoordinate calc_image_coordinates(const GroundCoordinate& Gc) 
-    const 
-  {
-    ImageCoordinate ic = igc->image_coordinate(Gc);
-    return ImageCoordinate(ic.line / line_avg(), ic.sample / samp_avg()); 
-  }
 private:
   boost::shared_ptr<ImageGroundConnection> igc;
 };

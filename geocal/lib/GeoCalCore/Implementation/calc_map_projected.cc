@@ -77,7 +77,7 @@ void CalcMapProjected::write_multiple(const
 	for(int j = jstart; j < jstart + tns && j < number_sample(); ++j) {
 	  boost::shared_ptr<GroundCoordinate> gc = 
 	    ground_coordinate(ImageCoordinate(i, j), igc_->dem());
-	  ImageCoordinate ic = calc_image_coordinates(*gc);
+	  ImageCoordinate ic = igc_->image_coordinate(*gc);
 	  if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
 	     ic.sample < 0 || ic.sample >= igc_->number_sample() - 1) {
 	    BOOST_FOREACH(const boost::shared_ptr<RasterImage>& outr, Out)
@@ -154,7 +154,7 @@ int CalcMapProjected::unchecked_read(int Line, int Sample) const
 {
   boost::shared_ptr<GroundCoordinate> gc = 
     ground_coordinate(ImageCoordinate(Line, Sample), igc_->dem());
-  ImageCoordinate ic = calc_image_coordinates(*gc);
+  ImageCoordinate ic = igc_->image_coordinate(*gc);
   if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
      ic.sample < 0 || ic.sample >= igc_->number_sample() - 1)
     return 0;			// Data outside of image, so return 0.
@@ -201,23 +201,23 @@ void CalcMapProjected::interpolate_ic(int Start_line, int Start_sample,
   boost::shared_ptr<GroundCoordinate> gc;
   gc = ground_coordinate(ImageCoordinate(Start_line, Start_sample),
 			 igc_->dem());
-  ImageCoordinate ic = calc_image_coordinates(*gc);
+  ImageCoordinate ic = igc_->image_coordinate(*gc);
   line[0][0] = ic.line;
   sample[0][0] = ic.sample;
   gc = ground_coordinate(ImageCoordinate(Start_line, Start_sample + Nsamp - 1),
 			 igc_->dem());
-  ic = calc_image_coordinates(*gc);
+  ic = igc_->image_coordinate(*gc);
   line[0][1] = ic.line;
   sample[0][1] = ic.sample;
   gc = ground_coordinate(ImageCoordinate(Start_line + Nline - 1, 
 					 Start_sample), igc_->dem());
-  ic = calc_image_coordinates(*gc);
+  ic = igc_->image_coordinate(*gc);
   line[1][0] = ic.line;
   sample[1][0] = ic.sample;
   gc = ground_coordinate(ImageCoordinate(Start_line + Nline - 1, 
 					 Start_sample + Nsamp - 1), 
 			 igc_->dem());
-  ic = calc_image_coordinates(*gc);
+  ic = igc_->image_coordinate(*gc);
   line[1][1] = ic.line;
   sample[1][1] = ic.sample;
   for(int ii = 0; ii < Nline; ++ii)

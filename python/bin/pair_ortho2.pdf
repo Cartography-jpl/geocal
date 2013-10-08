@@ -38,13 +38,15 @@ ush sba --dem-height-block-adjust &dbfile:igc_initial &dbfile:tpcol +
     &dbfile:igc_sba &dbfile:tpcol_sba
 
 ! First image, reprojected to desired resolution
-ush igc_project --number-process=&nprocess --grid-spacing=&grid_spacing +
-    --resolution=&resolution &dbfile:igc_sba 0 &surface1
+ush igc_project --grid-spacing=&grid_spacing +
+    --resolution=&resolution &dbfile:igc_sba 0 &dbfile:surface_1_init
+ush write_image --number-process=&nprocess &dbfile:surface_1_init &surface1
 ush shelve_image &surface1 &dbfile:surface_1
 
 ! Second image, reprojected on a grid matching the first image
-ush igc_project --number-process=&nprocess --grid-spacing=&grid_spacing +
-     --map-info=&dbfile:surface_1 &dbfile:igc_sba 1 &surface2
+ush igc_project --grid-spacing=&grid_spacing +
+     --map-info=&dbfile:surface_1 &dbfile:igc_sba 1 &dbfile:surface_2_init
+ush write_image --number-process=&nprocess &dbfile:surface_2_init &surface2
 ush shelve_image &surface2 &dbfile:surface_2
 
 ! Create DEM
@@ -56,15 +58,17 @@ ush write_image --vicar-type=DOUB --no-data-value=-9999 +
 ush shelve_dem &dem_filled &dbfile:dem_generate_filled
 
 ! Generate final output files
-ush igc_project --number-process=&nprocess +
+ush igc_project +
     --map-info=&dbfile:surface_1 +
     --dem=&dbfile:dem_generate_filled +
-    --resolution=&resolution &dbfile:igc_sba 0 &output1
+    --resolution=&resolution &dbfile:igc_sba 0 &dbfile:surface2_1_init
+ush write_image --number-process=&nprocess &dbfile:surface2_1_init &output1
 ush shelve_image &output1 &dbfile:surface2_1
-ush igc_project --number-process=&nprocess +
+ush igc_project +
     --map-info=&dbfile:surface_1 +
     --dem=&dbfile:dem_generate_filled +
-    --resolution=&resolution &dbfile:igc_sba 1 &output2
+    --resolution=&resolution &dbfile:igc_sba 1 &dbfile:surface2_2_init
+ush write_image --number-process=&nprocess &dbfile:surface2_2_init &output2
 ush shelve_image &output2 &dbfile:surface2_2
 
 end-proc

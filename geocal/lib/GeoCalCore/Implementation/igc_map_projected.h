@@ -1,7 +1,7 @@
 #ifndef IGC_MAP_PROJECTED_H
 #define IGC_MAP_PROJECTED_H
 #include "image_ground_connection.h"
-#include "calc_map_projected.h"
+#include "calc_raster.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -34,7 +34,7 @@ namespace GeoCal {
   memory.
 *******************************************************************/
 
-class IgcMapProjected : public CalcMapProjected {
+class IgcMapProjected : public CalcRaster {
 public:
   IgcMapProjected(const MapInfo& Mi, 
 		  const boost::shared_ptr<ImageGroundConnection>& Igc,
@@ -52,8 +52,12 @@ public:
   virtual void print(std::ostream& Os) const
   {
     Os << "IgcMapProjected:\n"
-       << "  Map info:   " << map_info() << "\n"
-       << "  Image ground connection: " << *igc_ << "\n";
+       << "  Avg_factor:   " << avg_factor() << "\n"
+       << "  Grid spacing: " << grid_spacing() << "\n"
+       << "  Map info:\n" 
+       << map_info() << "\n"
+       << "  Image ground connection:\n" 
+       << *igc_ << "\n";
   }
   const boost::shared_ptr<ImageGroundConnection>& igc_original() const
   { return igc_original_; }
@@ -62,10 +66,16 @@ public:
   bool read_into_memory() const { return read_into_memory_; }
 protected:
   virtual void calc(int Lstart, int Sstart) const;
+private:
   boost::shared_ptr<ImageGroundConnection> igc_original_;
+  boost::shared_ptr<ImageGroundConnection> igc_;
   int avg_factor_;
   int grid_spacing_;
   bool read_into_memory_;
+  mutable blitz::Array<double, 2> ic_line, ic_sample;
+  void interpolate_ic(int Start_line, int Start_sample) const;
+  void calc_no_grid(int Lstart, int Sstart) const;
+  void calc_grid(int Lstart, int Sstart) const;
 };
 
 }

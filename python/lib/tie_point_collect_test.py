@@ -38,7 +38,7 @@ def test_tie_point_grid():
 def test_gp_point_grid():
     pool = Pool()
     tpcol = gtp_collect.tie_point_grid(10, 10, pool = pool)
-    assert len(tpcol) == 53
+    assert len(tpcol) == 57
 
 def test_pickle():
     t = cPickle.dumps(tp_collect)

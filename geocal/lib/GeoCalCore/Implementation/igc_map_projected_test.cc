@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_CASE(full_res)
   BOOST_CHECK_CLOSE(mp.read_double(473, 1000, 100, 100)(0, 0),
 		    394.18319143107396, 1e-4);
   // Optionally write this out for manual inspection
-  if(true) {
+  if(false) {
     VicarRasterImage out("full_res.img", mp.map_info(), "HALF");
     copy(mp, out);
   }
@@ -46,9 +46,9 @@ BOOST_AUTO_TEST_CASE(averaged_res)
   // value. If this fails, you may want to enable writing out the full
   // output and seeing what is going on.
   BOOST_CHECK_CLOSE(mp.read_double(273, 200, 100, 100)(0, 0),
-		    464.77649443975633, 1e-4);
+		    448.04033680543279, 1e-4);
   // Optionally write this out for manual inspection
-  if(true) {
+  if(false) {
     VicarRasterImage out("averaged_res.img", mp.map_info(), "HALF");
     copy(mp, out);
   }
@@ -63,18 +63,18 @@ BOOST_AUTO_TEST_CASE(grid_res)
   boost::shared_ptr<ImageGroundConnection>
     igc(new RpcImageGroundConnection(img->rpc(), dem, img));
   GdalRasterImage simg(stereo_test_data_dir() + "10MAY21-1_projected.tif");
-  IgcMapProjected mp(simg.map_info(), igc);
+  IgcMapProjected mp(simg.map_info(), igc, 10);
 
   // Manually inspected output as ok. For testing, just check a single
   // value. If this fails, you may want to enable writing out the full
   // output and seeing what is going on.
   BOOST_CHECK_CLOSE(mp.read_double(473, 1000, 100, 100)(0, 0),
-		    394.18319143107396, 1e-4);
+		    393.99503672488697, 1e-4);
 
   // Optionally write this out for manual inspection
-  if(true) {
+  if(false) {
     VicarRasterImage out("grid_res.img", mp.map_info(), "HALF");
-    mp.write_image(out, 10);
+    copy(mp, out);
   }
 }
 

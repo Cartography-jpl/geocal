@@ -18,8 +18,8 @@ SurfaceImageToImageMatch::SurfaceImageToImageMatch
     : igc1(Igc1), igc2(Igc2), matcher_(Matcher), map_project_on_demand_(true)
 {
   MapInfo mi = igc1->cover(Map_info).map_union(igc2->cover(Map_info));
-  simg1.reset(new IgcMapProjected(mi, igc1, -1, false));
-  simg2.reset(new IgcMapProjected(mi, igc2, -1, false));
+  simg1.reset(new IgcMapProjected(mi, igc1, 1, -1, false));
+  simg2.reset(new IgcMapProjected(mi, igc2, 1, -1, false));
   pix_fact = mi.resolution_meter() / igc1->resolution_meter();
 }
 

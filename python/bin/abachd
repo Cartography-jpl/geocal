@@ -79,6 +79,12 @@ def shelve_image(fname, name, subset = None):
     cmd.append(dbfile + ":" + name)
     subprocess.check_call(cmd)
 
+def generate_image(fname, name_in, name, subset = None):
+    subprocess.check_call(["write_image", 
+                           nproc, dbfile + ":" + name_in,
+                           fname])
+    shelve_image(fname, name)
+
 @contextmanager
 def timing(txt):
     log.info(txt)
@@ -94,13 +100,6 @@ def import_image(fname, name, subset = None):
                                "--process-number-line=2048",
                                "--process-number-sample=2048",
                                nproc, dbfile + ":%s_raw" % name, name + ".img"])
-    shelve_image(name + ".img", name)
-
-def initial_proj(name, index):
-    with timing("Initial orthorectification %s" % name):
-        subprocess.check_call(["igc_project", nproc, "--grid-spacing=10",
-                               "--resolution=0.5", dbfile + ":igc_sba",
-                               str(index), name + ".img"])
     shelve_image(name + ".img", name)
 
 def dem_generate():
@@ -172,16 +171,16 @@ with timing("Doing SBA"):
 igc_sba = read_shelve(dbfile + ":igc_sba")
 res = round(igc_sba.image_ground_connection(0).resolution_meter() * 10) / 10.0
 with timing("Initial orthorectification initial_surf1"):
-    subprocess.check_call(["igc_project", nproc, "--grid-spacing=10",
+    subprocess.check_call(["igc_project", "--grid-spacing=10",
                            "--resolution=%f" % res, dbfile + ":igc_sba",
-                           "0", "initial_surf1.img"])
-    shelve_image("initial_surf1.img", "initial_surf1")
+                           "0", dbfile + ":initial_surf1_init"])
+    generate_image("initial_surf1.img", "initial_surf1_init", "initial_surf1")
 with timing("Initial orthorectification initial_surf2"):
-    subprocess.check_call(["igc_project", nproc, "--grid-spacing=10",
-                           "--map-info=" + dbfile + ":initial_surf1",
+    subprocess.check_call(["igc_project", "--grid-spacing=10",
+                           "--map-info=" + dbfile + ":initial_surf1_init",
                            dbfile + ":igc_sba",
-                           "1", "initial_surf2.img"])
-    shelve_image("initial_surf2.img", "initial_surf2")
+                           "1", dbfile + ":initial_surf2_init"])
+    generate_image("initial_surf2.img", "initial_surf2_init", "initial_surf2")
 
 # 8. DEM generation
 dem_generate()
@@ -191,20 +190,20 @@ with timing("Final orthorectification image 1"):
     # This doesn't work yet, because we don't have a mask on the DEM. 
     # We'll want to come back to this, but for now just use same size as
     # with the initial images.
-    subprocess.check_call(["igc_project", nproc,
+    subprocess.check_call(["igc_project", 
                            # "--resolution=0.5", 
                            "--bounding-box=" + dbfile + ":dem_generate_filled",
                            dbfile + ":igc_sba",
                            "--dem=" + dbfile + ":dem_generate_filled",
-                           "0", "final_surf1.img"])
-shelve_image("final_surf1.img", "final_surf1")
+                           "0", dbfile + ":final_surf1_init"])
+    generate_image("final_surf1.img", "final_surf1_init", "final_surf1")
 with timing("Final orthorectification image 2"):
-    subprocess.check_call(["igc_project", nproc,
-                           "--map-info=" + dbfile + ":final_surf1",
+    subprocess.check_call(["igc_project", 
+                           "--map-info=" + dbfile + ":final_surf1_init",
                            dbfile + ":igc_sba",
                            "--dem=" + dbfile + ":dem_generate_filled",
-                           "1", "final_surf2.img"])
-shelve_image("final_surf2.img", "final_surf2")
+                           "1", dbfile + ":final_surf2_init"])
+    generate_image("final_surf2.img", "final_surf2_init", "final_surf2")
 
 # 10. Convert to reflectance and generate normdiff image.
 pre_pan_imd = os.path.splitext(pre_pan_raw)[0] + ".IMD"

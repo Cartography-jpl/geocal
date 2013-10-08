@@ -108,12 +108,12 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.calc_map_projected
+import geocal.calc_raster
 import geocal.raster_image_variable
 import geocal.raster_image
 import geocal.generic_object
 import geocal.geocal_exception
-class IgcMapProjected(geocal.calc_map_projected.CalcMapProjected):
+class IgcMapProjected(geocal.calc_raster.CalcRaster):
     """
     This is a RasterImage that has been map projected using an
     ImageGroundConnection and a Camera.
@@ -214,7 +214,6 @@ class IgcMapProjected(geocal.calc_map_projected.CalcMapProjected):
       return _new_from_init, (self.__class__, 1, self.map_info,self.igc_original,self.grid_spacing,self.avg_factor,self.read_into_memory,self.number_tile_line,self.number_tile_sample)
 
     __swig_destroy__ = _igc_map_projected.delete_IgcMapProjected
-IgcMapProjected.write = new_instancemethod(_igc_map_projected.IgcMapProjected_write,None,IgcMapProjected)
 IgcMapProjected._v_igc_original = new_instancemethod(_igc_map_projected.IgcMapProjected__v_igc_original,None,IgcMapProjected)
 IgcMapProjected._v_avg_factor = new_instancemethod(_igc_map_projected.IgcMapProjected__v_avg_factor,None,IgcMapProjected)
 IgcMapProjected._v_grid_spacing = new_instancemethod(_igc_map_projected.IgcMapProjected__v_grid_spacing,None,IgcMapProjected)

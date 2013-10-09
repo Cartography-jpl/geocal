@@ -31,6 +31,9 @@ Options:
        This should be in a "file:key" format. This might be useful if
        you use further options such as --subset.
 
+  --scale=f
+        Scale the data by the given factor.
+
   --subset  start_line start_sample number_line number_sample
        Subset the image.
 
@@ -55,6 +58,8 @@ if(args.start_line):
 
 if(args.average):
     img = RasterAveraged(img, args.average, args.average)
+if(args.scale):
+    img = ScaleImage(img, args.scale)
 
 write_shelve(args.output, img)
 

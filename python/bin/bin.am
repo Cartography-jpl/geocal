@@ -17,6 +17,7 @@ dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/write_image
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/convert_reflectance
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/doughnut_diff
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/abachd
+dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/height_to_color
 dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf
 dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf

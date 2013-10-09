@@ -1,0 +1,57 @@
+#! /usr/bin/env python
+
+from afids import *
+import matplotlib.pyplot as plt
+import subprocess
+import os
+
+cm = plt.cm.jet
+
+version = "June 25, 2013"
+usage="""Usage:
+  height_to_color [options] <fname>
+  height_to_color -h | --help
+  height_to_color -v | --version
+  
+Create Erdas image from input vicar image. This should get sucked into
+gdal_to_erdas at some point, but for now we'll do this here
+
+Options:
+  -h --help         
+       Print this message
+
+  --vmin=d
+       Minimum value [default: 450.0]
+  
+  --vmax=d
+       Maximum value [default: 700.0]
+
+  -v --version      
+       Print program version
+"""
+args = docopt_simple(usage, version=version)
+mi = VicarRasterImage(args.fname + ".img").map_info
+d = mmap_file(args.fname + ".img")
+img1 = VicarRasterImage(args.fname + "_b1.img", mi, "BYTE")
+img1["NODATA"] = 0.0
+img2 = VicarRasterImage(args.fname + "_b2.img", mi, "BYTE")
+img2["NODATA"] = 0.0
+img3 = VicarRasterImage(args.fname + "_b3.img", mi, "BYTE")
+img3["NODATA"] = 0.0
+cdata = cm((d - args.vmin) / (args.vmax - args.vmin))
+for i in range(d.shape[0]):
+    for j in range(d.shape[1]):
+        if(d[i, j] < -9998):
+            cdata[i, j, :] = 0
+cdata = np.round(cdata * 255).astype(np.int)
+img1.write(0,0,cdata[:,:,0])
+img2.write(0,0,cdata[:,:,1])
+img3.write(0,0,cdata[:,:,2])
+img1.close()
+img2.close()
+img3.close()
+subprocess.check_call(["gdal_to_erdas", args.fname + "_b1:3.img", 
+                       args.fname + "_erdas.img"])
+os.remove(args.fname + "_b1.img")
+os.remove(args.fname + "_b2.img")
+os.remove(args.fname + "_b3.img")

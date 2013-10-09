@@ -5,7 +5,8 @@ class WorldView2Reflectance(InstrumentReflectance):
    '''This class does DN to TOA Reflectance conversion for WorldView 2'''
    def __init__(self, multimetafname, panmetafname):
       '''Initialization of class'''
-      super(InstrumentReflectance, self).__init__()
+#      super(InstrumentReflectance, self).__init__()
+      InstrumentReflectance.__init__(self);
       self.pan_year = -999.
       self.pan_month = -999.
       self.pan_day = -999.

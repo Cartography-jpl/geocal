@@ -1,5 +1,6 @@
 import math
 
+#################################################################################
 class InstrumentReflectance(object):
    '''This is the base class for doing a DN to TOA Reflectance conversion.
    We derive from this class and supply instrument specific information.'''
@@ -41,7 +42,6 @@ class InstrumentReflectance(object):
               math.pow(self.solarDist, 2.)*math.pi)/\
               (self.esun[band]*math.cos(self.solarZenithAngleInRadians))
  
-
    def dn2TOARadiance(self, tile, band):
       '''Convert from DN passed in as tile to TOA radiance'''
       return tile * self.dn2TOARadiance_factor(band)
@@ -69,4 +69,44 @@ class InstrumentReflectance(object):
       self.solarDist = 1.00014 - 0.01671*math.cos(radg) - 0.00014*math.cos(2*radg)
 
       if self.solarDist < 0.983 or self.solarDist > 1.017:
+         raise ValueError("Solar Distance should be between 0.983 and 1.017")
+
+#################################################################################
+class PanInstrumentReflectance(object):
+
+   def __init__(self):
+      self.pan_year = -999.
+      self.pan_month = -999.
+      self.pan_day = -999.
+      self.pan_hh = -999.
+      self.pan_mm = -999.
+      self.pan_ssdd = -999.
+      self.pan_solarElevation = -999.
+      self.pan_solarZenithAngle = -999.
+      self.pan_solarZenithAngleInRadians = -999.
+      self.pan_solarDist = -999.
+
+   def readPanMetaData(self, filename):
+      '''Read pan metadata needed to set up the instrument'''
+      raise NotImplementedError("Subclasses should implement this method.")
+
+   def calculatePanSolarDistance(self):
+      '''Calculate the solar distance.'''
+      if self.pan_year == -999 or self.pan_month == -999 or self.pan_day == -999 or \
+             self.pan_hh == -999 or self.pan_mm == -999 or self.pan_ssdd == -999:
+         raise ValueError("Metadata for date time is not set")
+      ut = self.pan_hh + self.pan_mm/60.0 + self.pan_ssdd/3600.0
+      if self.pan_month == 1.0 or self.pan_month == 2.0:
+         self.pan_year = self.pan_year - 1
+         self.pan_month = self.pan_month + 12
+
+      A = int(self.pan_year/100)
+      B = 2 - A + int(A/4)
+      JD = int(365.25*(self.pan_year + 4716)) + int(30.6001*(self.pan_month + 1)) + self.pan_day + ut/24.0 + B - 1524.5
+      D = JD - 2451545.0
+      g = 357.529 + 0.98560028*D
+      radg = g*(math.pi/180.)
+      self.pan_solarDist = 1.00014 - 0.01671*math.cos(radg) - 0.00014*math.cos(2*radg)
+
+      if self.pan_solarDist < 0.983 or self.pan_solarDist > 1.017:
          raise ValueError("Solar Distance should be between 0.983 and 1.017")

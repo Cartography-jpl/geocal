@@ -14,3 +14,11 @@ def test_air_mspi_igc():
     igc = AirMspiIgc(test_data)
     t = cPickle.dumps(igc)
     igc2 = cPickle.loads(t)
+    assert_almost_equal(igc.view_zenith(ImageCoordinate(500,600)),
+                        30.021980285644531, 5)
+    assert_almost_equal(igc2.view_zenith(ImageCoordinate(500,600)),
+                        30.021980285644531, 5)
+    assert_almost_equal(igc.view_azimuth(ImageCoordinate(500,600)),
+                        326.30319213867188, 5)
+    assert_almost_equal(igc.view_azimuth(ImageCoordinate(500,600)),
+                        326.30319213867188, 5)

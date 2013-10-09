@@ -118,10 +118,17 @@ class ImageMaskImage(geocal.image_mask.ImageMask):
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    OUTSIDE_MASKED = _image_mask_image.ImageMaskImage_OUTSIDE_MASKED
+    OUTSIDE_NOT_MASKED = _image_mask_image.ImageMaskImage_OUTSIDE_NOT_MASKED
+    OUTSIDE_ERROR = _image_mask_image.ImageMaskImage_OUTSIDE_ERROR
     def __init__(self, *args): 
         """
-        GeoCal::ImageMaskImage::ImageMaskImage(boost::shared_ptr< RasterImage > Img, int Mask_value=0)
-        Constructor. 
+        GeoCal::ImageMaskImage::ImageMaskImage(boost::shared_ptr< RasterImage > Img, int Mask_value=0,
+        OutsideHandling Handling=OUTSIDE_MASKED)
+        Constructor.
+
+        Values outside of the Image may or may not want to be marked as
+        masked. 
         """
         _image_mask_image.ImageMaskImage_swiginit(self,_image_mask_image.new_ImageMaskImage(*args))
     def unmasked_bounding_box(self):
@@ -157,17 +164,29 @@ class ImageMaskImage(geocal.image_mask.ImageMask):
     def masked_value(self):
         return self._v_masked_value()
 
+    def _v_outside_handling(self):
+        """
+        OutsideHandling GeoCal::ImageMaskImage::outside_handling() const
+        Handling for data outside of image. 
+        """
+        return _image_mask_image.ImageMaskImage__v_outside_handling(self)
+
+    @property
+    def outside_handling(self):
+        return self._v_outside_handling()
+
     @classmethod
     def pickle_format_version(cls):
-      return 1
+      return 2
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.raster_image,self.masked_value)
+      return _new_from_init, (self.__class__, 2, self.raster_image,self.masked_value,self.outside_handling)
 
     __swig_destroy__ = _image_mask_image.delete_ImageMaskImage
 ImageMaskImage.unmasked_bounding_box = new_instancemethod(_image_mask_image.ImageMaskImage_unmasked_bounding_box,None,ImageMaskImage)
 ImageMaskImage._v_raster_image = new_instancemethod(_image_mask_image.ImageMaskImage__v_raster_image,None,ImageMaskImage)
 ImageMaskImage._v_masked_value = new_instancemethod(_image_mask_image.ImageMaskImage__v_masked_value,None,ImageMaskImage)
+ImageMaskImage._v_outside_handling = new_instancemethod(_image_mask_image.ImageMaskImage__v_outside_handling,None,ImageMaskImage)
 ImageMaskImage_swigregister = _image_mask_image.ImageMaskImage_swigregister
 ImageMaskImage_swigregister(ImageMaskImage)
 

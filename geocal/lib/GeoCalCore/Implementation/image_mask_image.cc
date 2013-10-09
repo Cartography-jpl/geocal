@@ -40,10 +40,29 @@ bool ImageMaskImage::area_any_masked
 (int Line, int Sample, int Number_line, int Number_sample) const
 {
   if(Line < 0 || Line + Number_line >= img->number_line() ||
-     Sample < 0 || Sample + Number_sample >= img->number_sample())
-    return true;
+     Sample < 0 || Sample + Number_sample >= img->number_sample()) {
+    if(oh == OUTSIDE_MASKED)
+      return true;
+    if(oh == OUTSIDE_NOT_MASKED)
+      return ImageMask::area_any_masked(Line, Sample, Number_line, 
+					Number_sample);
+    throw Exception("Point is outside of image");
+  }
   return blitz::any((*img).read(Line, Sample, Number_line, Number_sample) == 
 		    maskv);
+}
+
+bool ImageMaskImage::mask(int Line, int Sample) const
+{
+  if(Line < 0 || Line > img->number_line() - 1 ||
+     Sample < 0 || Sample > img->number_sample() - 1) {
+    if(oh == OUTSIDE_MASKED)
+      return true;
+    if(oh == OUTSIDE_NOT_MASKED)
+      return false;
+    throw Exception("Point is outside of image");
+  }
+  return (*img)(Line, Sample) == maskv;
 }
 
 //-----------------------------------------------------------------------

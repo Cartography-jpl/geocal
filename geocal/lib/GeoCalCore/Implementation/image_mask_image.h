@@ -11,12 +11,17 @@ namespace GeoCal {
 
 class ImageMaskImage : public ImageMask {
 public:
+  enum OutsideHandling { OUTSIDE_MASKED, OUTSIDE_NOT_MASKED, OUTSIDE_ERROR };
 //-----------------------------------------------------------------------
 /// Constructor.
+///
+/// Values outside of the Image may or may not want to be marked as
+/// masked. 
 //-----------------------------------------------------------------------
 
-  ImageMaskImage(boost::shared_ptr<RasterImage> Img, int Mask_value = 0)
-    : img(Img), maskv(Mask_value) 
+  ImageMaskImage(boost::shared_ptr<RasterImage> Img, int Mask_value = 0,
+		 OutsideHandling Handling = OUTSIDE_MASKED)
+    : img(Img), maskv(Mask_value), oh(Handling)
   {
   }
 
@@ -26,6 +31,10 @@ public:
 
   virtual ~ImageMaskImage() {}
 
+//-----------------------------------------------------------------------
+/// Handling for data outside of image.
+//-----------------------------------------------------------------------
+  OutsideHandling outside_handling() const {return oh; }
 //-----------------------------------------------------------------------
 /// Underlying RasterImage.
 //-----------------------------------------------------------------------
@@ -47,10 +56,7 @@ public:
 //-----------------------------------------------------------------------
 
   int masked_value() const {return maskv;}
-  virtual bool mask(int Line, int Sample) const
-  {
-    return (*img)(Line, Sample) == maskv;
-  }
+  virtual bool mask(int Line, int Sample) const;
   virtual bool area_any_masked(int Line, int Sample, int Number_line,
 			       int Number_sample) const;
   virtual void print(std::ostream& Os) const;
@@ -58,6 +64,7 @@ private:
   boost::shared_ptr<RasterImage> img; ///< Underlying image.
   int maskv;				    ///< Value that indicates
 					    ///a masked point.
+  OutsideHandling oh;
 };
 }
 #endif

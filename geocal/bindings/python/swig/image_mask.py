@@ -164,6 +164,15 @@ class ImageMask(geocal.generic_object.GenericObject):
         """
         return _image_mask.ImageMask_mask(self, *args)
 
+    def mask_ic(self, *args):
+        """
+        bool ImageMask::mask_ic(const ImageCoordinate &Ic) const
+        Indicate if an ImageCoordinate is masked or not.
+
+        We search for the 4 neighbors around an ImageCoordinate are masked. 
+        """
+        return _image_mask.ImageMask_mask_ic(self, *args)
+
     def area_any_masked(self, *args):
         """
         bool ImageMask::area_any_masked(int Line, int Sample, int Number_line, int Number_sample) const
@@ -176,6 +185,7 @@ class ImageMask(geocal.generic_object.GenericObject):
 
     __swig_destroy__ = _image_mask.delete_ImageMask
 ImageMask.mask = new_instancemethod(_image_mask.ImageMask_mask,None,ImageMask)
+ImageMask.mask_ic = new_instancemethod(_image_mask.ImageMask_mask_ic,None,ImageMask)
 ImageMask.area_any_masked = new_instancemethod(_image_mask.ImageMask_area_any_masked,None,ImageMask)
 ImageMask.__str__ = new_instancemethod(_image_mask.ImageMask___str__,None,ImageMask)
 ImageMask_swigregister = _image_mask.ImageMask_swigregister

@@ -1,6 +1,7 @@
 #ifndef IMAGE_MASK_H
 #define IMAGE_MASK_H
 #include "printable.h"
+#include "image_coordinate.h"
 #include <boost/shared_ptr.hpp>
 #include <vector>
 
@@ -33,7 +34,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual bool mask(int Line, int Sample) const = 0;
-
+  virtual bool mask_ic(const ImageCoordinate& Ic) const;
   virtual bool area_any_masked(int Line, int Sample, int Number_line,
 			       int Number_sample) const;
 

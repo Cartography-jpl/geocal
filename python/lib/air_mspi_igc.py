@@ -1,5 +1,6 @@
 from geocal import *
 from math import *
+import scipy.optimize
 
 class AirMspiIgc(ImageGroundConnection):
     '''This is an AirMSPI Ellipsoid projected file as a ImageGroundConnection.
@@ -102,3 +103,46 @@ class AirMspiIgc(ImageGroundConnection):
         if(res > 360):
             res -= 360
         return res
+
+    def cf_look_vector_lv(self, ic):
+        '''Return look vector.'''
+        if(self.image_mask.mask_ic(ic)):
+            raise RuntimeError("Masked data at (%f, %f)" % (ic.line, ic.sample))
+        az = self.view_azimuth(ic)
+        zen = self.view_zenith(ic)
+        lc = [-cos(radians(az)) * sin(radians(180 - zen)),
+              -sin(radians(az)) * sin(radians(180 - zen)),
+              -cos(radians(180 - zen))]
+        return CartesianFixedLookVector(self.__from_lc(ic).dot(lc))
+
+    def cf_look_vector_pos(self, ic):
+        '''Return point along the look vector.'''
+        return Ecr(self.image.ground_coordinate(ic, self.dem))
+
+    def ground_coordinate_dem(self, ic, d):
+        '''Determine what ground coordinate is seen the given DEM for the
+        given ImageCoordinate'''
+        lv, p = self.cf_look_vector(ic)
+        resolution = 1.0
+        return d.intersect(p, lv, resolution)
+
+    def image_coordinate(self, gc):
+        def func(x, self, gc):
+            ic = ImageCoordinate(x[0], x[1])
+            gc2 = self.ground_coordinate_dem(ic, 
+                          SimpleDem(gc.height_reference_surface))
+            return [gc.latitude - gc2.latitude, gc.longitude - gc2.longitude]
+        xsol = scipy.optimize.root(func, [self.number_line / 2.0,
+                                          self.number_sample / 2.0],
+                                   args=(self, gc), tol = 0.01)
+        if(not xsol['success']):
+            raise RuntimeError("Couldn't find solution")
+        return ImageCoordinate(xsol["x"][0], xsol["x"][1])
+
+    def __str__(self):
+        return '''AirMspiIgc:
+  File name:        %s
+  Group name:       %s
+  Title:            %s
+  Ellipsoid Height: %f''' % (self.fname, self.group_name, self.title, 
+                             self.dem.h)

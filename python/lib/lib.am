@@ -23,6 +23,7 @@ afidspkgpython_PYTHON+= @srcpythonlib@/geoeye1_reflectance.py
 afidspkgpython_PYTHON+= @srcpythonlib@/ikonos_reflectance.py
 afidspkgpython_PYTHON+= @srcpythonlib@/quick_bird_reflectance.py
 afidspkgpython_PYTHON+= @srcpythonlib@/world_view2_reflectance.py
+afidspkgpython_PYTHON+= @srcpythonlib@/spot_reflectance.py
 afidspkgpython_PYTHON+= @srcpythonlib@/with_parameter.py
 afidspkgpython_PYTHON+= @srcpythonlib@/sqlite_shelf.py
 afidspkgpython_PYTHON+= @srcpythonlib@/feature_detector_extension.py

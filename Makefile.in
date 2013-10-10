@@ -1369,6 +1369,7 @@ am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/ikonos_reflectance.py \
 	@srcpythonlib@/quick_bird_reflectance.py \
 	@srcpythonlib@/world_view2_reflectance.py \
+	@srcpythonlib@/spot_reflectance.py \
 	@srcpythonlib@/with_parameter.py \
 	@srcpythonlib@/sqlite_shelf.py \
 	@srcpythonlib@/feature_detector_extension.py \
@@ -2652,6 +2653,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/ikonos_reflectance.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/quick_bird_reflectance.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/world_view2_reflectance.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/spot_reflectance.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/with_parameter.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/sqlite_shelf.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/feature_detector_extension.py \

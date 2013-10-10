@@ -79,14 +79,16 @@ BOOST_AUTO_TEST_CASE(shiva)
 		      davg->cvdnorm(1, ls, ss, nl, ns))) < 1.01);
 
   VicarLiteRasterImage pandif_expect(shiva_test_data_dir() + "pandif_sub.img");
+  // Note, we removed the abs after shiva. Add back in here so we can
+  // do comparison.
   BOOST_CHECK(max(abs(pandif_expect.read_double(ls, ss, nl, ns) -
-		      davg->pandif(ls, ss, nl, ns))) < 1.01);
+		      abs(davg->pandif(ls, ss, nl, ns)))) < 1.01);
   boost::shared_ptr<RasterImage> cvdnorm_img(new RasterImageWrapCvdNorm(davg, 1));
   boost::shared_ptr<RasterImage> pandif_img(new RasterImageWrapPandif(davg));
   BOOST_CHECK(max(abs(cvd_expect.read(ls, ss, nl, ns) -
 		      cvdnorm_img->read(ls, ss, nl, ns))) <= 2);
   BOOST_CHECK(max(abs(pandif_expect.read(ls, ss, nl, ns) -
-		      pandif_img->read(ls, ss, nl, ns))) <= 2);
+		      abs(pandif_img->read(ls, ss, nl, ns)))) <= 2);
   
 }
 

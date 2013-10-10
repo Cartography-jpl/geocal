@@ -38,7 +38,7 @@ blitz::Array<double, 2> DoughnutAverage::pandif(int Lstart, int Sstart,
   inpd = input_data(ra, Range(0,Number_line - 1), 
 		    Range(0,Number_sample - 1));
   return Array<double, 2>
-    (abs(inpd(0,ra,ra) - (inpd(1, ra, ra) + davg(0,ra,ra) - davg(1,ra,ra))));
+    (inpd(0,ra,ra) - (inpd(1, ra, ra) + davg(0,ra,ra) - davg(1,ra,ra)));
 }
 
 //-----------------------------------------------------------------------

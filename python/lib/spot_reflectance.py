@@ -34,8 +34,7 @@ class SpotReflectance(InstrumentReflectance, PanInstrumentReflectance):
 
     def dn2TOARadiance_factor(self, band):
         '''Scale factor to convert DN to TOA radiance factor'''
-        print "This method should not be called... use dn2TOARadiance directly";
-        raise
+        raise RuntimeError("This method should not be called... use dn2TOARadiance directly")
 
     def dn2TOARadiance(self, tile, band):
         return tile/self.gain[band] + self.bias[band];
@@ -45,6 +44,9 @@ class SpotReflectance(InstrumentReflectance, PanInstrumentReflectance):
 
     def readPanMetaData(self, filename):
         self.genericMetaDataParser(filename, 'pan');
+
+    def printMetadata(self):
+        print "Peter, fill this in."
 
     def genericMetaDataParser(self, filename, type):
         tree = ET.parse(filename);
@@ -94,3 +96,4 @@ class SpotReflectance(InstrumentReflectance, PanInstrumentReflectance):
                 self.pan_solarElevation = float(locGeo.find('Solar_Incidences').find('SUN_ELEVATION').text);
                 self.pan_solarZenithAngle = 90 - self.pan_solarElevation;
                 self.pan_solarZenithAngleInRadians = self.pan_solarZenithAngle*(math.pi/180);
+

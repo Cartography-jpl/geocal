@@ -9,9 +9,9 @@ import glob
 
 version = "September 25, 2013"
 usage='''Usage:
-  abachd [options] <dem> <pre_pan> <post_pan> <output>
+  abachd [options] <pre_pan> <post_pan> <post_ms> <output>
   abachd [options] --subset <start_line> <start_sample> 
-        <number_line> <number_sample> <dem> <pre_pan> <post_pan> <output>
+        <number_line> <number_sample> <pre_pan> <post_pan> <post_ms> <output>
   abachd -h | --help
   abachd -v | --version
 
@@ -31,6 +31,10 @@ for now just assume that.
 Options:
   -h --help         
        Print this message
+
+  --dem-file=f
+       Can optionally specify a DEM file to use. The default is to use the
+       SRTM Level 2 data.
 
   --diagnostic
        Generate files that we don't actually need for processing, but can
@@ -62,7 +66,6 @@ tstart = time.time()
 # nitf file may appear in the same directory, but be links to separate directories. 
 pre_pan_raw = os.path.abspath(args.pre_pan)
 post_pan_raw = os.path.abspath(args.post_pan)
-dem = os.path.abspath(args.dem)
 
 # Few things that appear often enough that it is worth stashing.
 dbfile = "end_to_end.db"
@@ -124,7 +127,11 @@ subprocess.check_call(["mkdir", "-p", args.output])
 os.chdir(args.output)
 
 # 2. Initial DEM
-subprocess.check_call(["shelve_dem", dem, dbfile + ":dem_initial"])
+if(args.dem_file):
+    subprocess.check_call(["shelve_dem", args.dem_file, 
+                           dbfile + ":dem_initial"])
+else:
+    subprocess.check_call(["shelve_dem", "--srtm", dbfile + ":dem_initial"])
 
 # 3. Import the images to vicar
 subset = None

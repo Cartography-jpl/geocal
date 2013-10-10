@@ -10,8 +10,11 @@ import glob
 version = "September 25, 2013"
 usage='''Usage:
   abachd [options] <pre_pan> <post_pan> <post_ms> <output>
+  abachd [options] --pre-ms <pre_pan> <pre_ms> <post_pan> <output>
   abachd [options] --subset <start_line> <start_sample> 
         <number_line> <number_sample> <pre_pan> <post_pan> <post_ms> <output>
+  abachd [options] --pre-ms --subset <start_line> <start_sample> 
+        <number_line> <number_sample> <pre_pan> <pres_ms> <post_pan> <output>
   abachd -h | --help
   abachd -v | --version
 
@@ -42,6 +45,11 @@ Options:
 
   --number-process=n
        Number of processors to use. [default: 1]
+
+  --pre-ms
+       The default is to use the multispectral image going with the post
+       panchromatic image. However, in some cases we might not have that 
+       data.
 
   --subset  start_line start_sample number_line number_sample
        Subset the pre_pan raw image, and the subset the post image to match

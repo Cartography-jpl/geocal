@@ -11,10 +11,13 @@ version = "September 25, 2013"
 usage='''Usage:
   abachd [options] <pre_pan> <post_pan> <post_ms> <output>
   abachd [options] --pre-ms <pre_pan> <pre_ms> <post_pan> <output>
+  abachd [options] --no-ms <pre_pan> <post_pan> <output>
   abachd [options] --subset <start_line> <start_sample> 
         <number_line> <number_sample> <pre_pan> <post_pan> <post_ms> <output>
   abachd [options] --pre-ms --subset <start_line> <start_sample> 
         <number_line> <number_sample> <pre_pan> <pres_ms> <post_pan> <output>
+  abachd [options] --no-ms --subset <start_line> <start_sample> 
+        <number_line> <number_sample> <pre_pan> <post_pan> <output>
   abachd -h | --help
   abachd -v | --version
 
@@ -42,6 +45,9 @@ Options:
   --diagnostic
        Generate files that we don't actually need for processing, but can
        be useful for diagnostic (e.g., the normdiff.img)
+
+  --no-ms
+       Don't have any multispectral data.
 
   --number-process=n
        Number of processors to use. [default: 1]

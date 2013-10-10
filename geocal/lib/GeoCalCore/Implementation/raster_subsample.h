@@ -57,6 +57,11 @@ public:
     return data_->unchecked_read(Line * number_line_per_pixel(),
 				 Sample * number_sample_per_pixel());
   }
+  virtual double unchecked_read_double(int Line, int Sample) const
+  {
+    return data_->unchecked_read_double(Line * number_line_per_pixel(),
+				 Sample * number_sample_per_pixel());
+  }
   virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
 			int Number_sample, int* Res) const;
   virtual void unchecked_write(int Line, int Sample, int Val);

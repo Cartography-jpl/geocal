@@ -37,6 +37,8 @@ public:
 					int Lstride = 1, 
 					int Sstride = 1,
 					bool Include_ic = false) const;
+  blitz::Array<double, 2> surface_point(const MapInfo& Mi,
+					bool Include_ic = false) const;
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -97,6 +99,18 @@ private:
   boost::shared_ptr<ImageToImageMatch> match_;
   boost::shared_ptr<RayIntersect> ri;
   double max_dist;
+
+  // Scratch variables used between functions.
+  mutable std::vector<Geodetic> res;
+  mutable std::vector<ImageCoordinate> ic1v, ic2v;
+  mutable ImageCoordinate ic1, ic2;
+  mutable double line_sigma, sample_sigma, dist;
+  mutable boost::shared_ptr<CartesianFixed> p;
+  mutable bool success, include_ic;
+  mutable int diagnosticv;
+  void process_setup() const;
+  void process_match() const;
+  blitz::Array<double, 2> process_res() const;
 };
 }
 #endif

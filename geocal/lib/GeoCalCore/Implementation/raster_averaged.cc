@@ -37,16 +37,17 @@ RasterAveraged::RasterAveraged(const boost::shared_ptr<RasterImage>& Data,
 /// Return pixel value at given line and sample.
 //-----------------------------------------------------------------------
 
-int RasterAveraged::unchecked_read(int Line, int Sample) const
+double RasterAveraged::unchecked_read_double(int Line, int Sample) const
 {
   double tot = 0;
   int count = 0;
   for(int i = 0; i < number_line_per_pixel_; ++i)
     for(int j = 0; j < number_sample_per_pixel_; ++j) {
-      int v = data_->unchecked_read(i + Line * number_line_per_pixel_, 
-				    j + Sample * number_sample_per_pixel_);
+      double v = 
+	data_->unchecked_read_double(i + Line * number_line_per_pixel_, 
+				     j + Sample * number_sample_per_pixel_);
       tot += v;
-      if(!ignore_zero_ || v != 0)
+      if(!ignore_zero_ || v != 0.0)
 	++count;
     }
   return (count == 0 ? 0 : (int) (tot / count));

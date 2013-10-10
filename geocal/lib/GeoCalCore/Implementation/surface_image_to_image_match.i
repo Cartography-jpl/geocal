@@ -31,6 +31,11 @@ public:
 		     ImageCoordinate &OUTPUT,
 		     double &OUTPUT, double &OUTPUT,
 		     bool &OUTPUT, int *OUTPUT) const;  
+  void match_surf(const GroundCoordinate& Gc, 
+		  ImageCoordinate &OUTPUT,
+		  ImageCoordinate &OUTPUT,
+		  double &OUTPUT, double &OUTPUT,
+		  bool &OUTPUT, int *OUTPUT) const;  
   %python_attribute(image_ground_connection1, 
 		    boost::shared_ptr<ImageGroundConnection>)
   %python_attribute(image_ground_connection2, 

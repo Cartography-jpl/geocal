@@ -27,7 +27,7 @@ def test_tp():
     ic.sample= round(ic.sample)
     tp = tp_collect.tie_point(ic)
     assert distance(tp.ground_location, Geodetic(36.7731567549,
-                    -116.116742172, 1276.29944154)) < 0.01
+                    -116.116742172, 1276.29944154)) < 0.1
 
 def test_tie_point_grid():
     pool = Pool()
@@ -38,7 +38,7 @@ def test_tie_point_grid():
 def test_gp_point_grid():
     pool = Pool()
     tpcol = gtp_collect.tie_point_grid(10, 10, pool = pool)
-    assert len(tpcol) == 53
+    assert len(tpcol) == 57
 
 def test_pickle():
     t = cPickle.dumps(tp_collect)

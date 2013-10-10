@@ -10,7 +10,7 @@ echo "unit tests. See boost unit test documentation for details"
 echo "==========================================================="
 
 if [ ${log_test} ] ; then
-    valgrind ./geocal_test_all --log_level=test_suite --run_test=${run_test}
+    ./geocal_test_all --log_level=test_suite --run_test=${run_test}
 else
     ./geocal_test_all --show_progress --run_test=${run_test}
 fi

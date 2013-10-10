@@ -55,6 +55,16 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Return pixel value at given line and sample.
+//-----------------------------------------------------------------------
+
+  virtual double unchecked_read_double(int Line, int Sample) const
+  { 
+    boost::array<index, 2> i = {{Line, Sample}};
+    return data_->get_double(i);
+  }
+
+//-----------------------------------------------------------------------
 /// Number of tiles
 //-----------------------------------------------------------------------
 

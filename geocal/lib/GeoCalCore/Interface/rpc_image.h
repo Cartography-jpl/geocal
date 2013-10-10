@@ -77,6 +77,8 @@ public:
 
   virtual int unchecked_read(int Line, int Sample) const
   { return (int) value(Line, Sample); }
+  virtual double unchecked_read_double(int Line, int Sample) const
+  { return value(Line, Sample); }
 
   double value(int Line, int Sample) const;
   double value(int Line, int Sample, double Height) const;

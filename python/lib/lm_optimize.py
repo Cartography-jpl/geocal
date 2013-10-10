@@ -2,10 +2,11 @@ import numpy as np
 import scipy.sparse as sp
 import scipy.sparse.linalg
 import time
+import logging
 
 def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1, 
                 stopping_criteria = 0.001, max_iteration = 50, boost = 2, 
-                drop = 3, lambda_initial =0.1, diagnostic = False):
+                drop = 3, lambda_initial =0.1):
     '''This is a simple implementation of Levenberg Marquardt for minimizing
     the residuals of a set of equations. scipy already has an optimizer 
     called scipy.optimize.leastsq. You should generally use this scipy 
@@ -23,19 +24,18 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
     x = x0
     t1 = time.clock()
     res = eq_func(x)
-    if(diagnostic):
-        print "Done with residual."
-        print "  Total time:", time.clock() - start_time
-        print "  Delta time:", time.clock() - t1
+    log = logging.getLogger("afids-python.lm_optimize")
+    log.info("Done with residual.")
+    log.info("  Total time: %f " % (time.clock() - start_time))
+    log.info("  Delta time: %f" % (time.clock() - t1))
     chisq = np.inner(res, res) / (len(res) - len(x0))
     lam = lambda_initial
     for i in range(max_iteration):
         t1 = time.clock()
         j = jac_func(x).tocsr()
-        if(diagnostic):
-            print "Done with jacobian."
-            print "  Total time:", time.clock() - start_time
-            print "  Delta time:", time.clock() - t1
+        log.info("Done with jacobian.")
+        log.info("  Total time: %f " % (time.clock() - start_time))
+        log.info("  Delta time: %f" % (time.clock() - t1))
         jtj = j.transpose() * j
         chisqold = chisq
         for k in range(max_iteration):
@@ -49,16 +49,14 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
             # this up.
             xnew = x - sp.linalg.spsolve(c, jtres, use_umfpack=True,
                                          permc_spec="MMD_ATA")
-            if(diagnostic):
-                print "Done with spsolve."
-                print "  Total time:", time.clock() - start_time
-                print "  Delta time:", time.clock() - t1
+            log.info("Done with spsolve.")
+            log.info("  Total time: %f " % (time.clock() - start_time))
+            log.info("  Delta time: %f" % (time.clock() - t1))
             t1 = time.clock()
             resnew = eq_func(xnew)
-            if(diagnostic):
-                print "Done with residual."
-                print "  Total time:", time.clock() - start_time
-                print "  Delta time:", time.clock() - t1
+            log.info("Done with residual.")
+            log.info("  Total time: %f " % (time.clock() - start_time))
+            log.info("  Delta time: %f" % (time.clock() - t1))
             chisq = np.inner(resnew, resnew) / (len(resnew) - len(x0))
             if(chisq < chisqold):
                 x = xnew
@@ -67,18 +65,15 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
                 break
             else:
                 lam *= boost
-                if(diagnostic):
-                    print "Redoing iteration with lambda boosted to", lam
+                log.info("Redoing iteration with lambda boosted to %f" % lam)
         else:
             raise RuntimeError("Exceeded maximum number of iterators")
         if(chisq < min_chisqr or
            (chisqold - chisq) / chisq < stopping_criteria):
             break
-        if(diagnostic):
-            print "Done with iteration %d, chisq %f" % (i, chisq)
+        log.info("Done with iteration %d, chisq %f" % (i, chisq))
     else:
         raise RuntimeError("Exceeded maximum number of iterators")
-    if(diagnostic):
-        print "Done with optimize."
-        print "  Total time:", time.clock() - start_time
+    log.info("Done with optimize.")
+    log.info("  Total time: %f" %(time.clock() - start_time))
     return x

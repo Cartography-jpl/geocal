@@ -63,8 +63,8 @@ blitz::Array<double, 2> RasterImage::interpolate(double Line, double Sample,
   int sint = (int) floor(Sample);
   double lfrac = Line - lint;
   double sfrac = Sample - sint;
-  blitz::Array<int, 2> data = read(lint, sint, Number_line + 1, 
-					 Number_sample + 1);
+  blitz::Array<double, 2> data = read_double(lint, sint, Number_line + 1, 
+					     Number_sample + 1);
   blitz::Array<double, 2> res(Number_line, Number_sample);
   blitz::Range r1(0, Number_line - 1);
   blitz::Range r1p1(1, Number_line);

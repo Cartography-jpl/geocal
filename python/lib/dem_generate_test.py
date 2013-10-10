@@ -47,7 +47,7 @@ def test_height_grid_surf():
 def test_pickle():
     t = cPickle.dumps(dgen)
     dgen2 = cPickle.loads(t)
-    r = dgen2.surface_point(550, 550, 551, 551)
+    r = dgen2.surface_point(550, 550, 551, 551, False)
     assert_almost_equal(r[0][0], 36.77545375201947, 3)
     assert_almost_equal(r[0][1], -116.11898159763552, 3)
     assert_almost_equal(r[0][2], 1294.49, 1)

@@ -82,7 +82,9 @@ public:
   %python_attribute2(rpc, rpc_ptr, boost::shared_ptr<Rpc>)
 };
 
-void copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
+// Move this to raster_image_multi_band.i so SWIG can do the
+// handling of overloaded function correctly
+//void copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
 void copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out, int Fill_value = 0, bool diagnostic = false);
 
 }

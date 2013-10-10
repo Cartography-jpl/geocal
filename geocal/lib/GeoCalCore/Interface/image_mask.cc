@@ -1,7 +1,20 @@
 #include "image_mask.h"
 #include <boost/foreach.hpp>
+#include <cmath>
 using namespace GeoCal;
 
+//-----------------------------------------------------------------------
+/// Indicate if an ImageCoordinate is masked or not. We search for the
+/// 4 neighbors around an ImageCoordinate are masked.
+//-----------------------------------------------------------------------
+
+bool ImageMask::mask_ic(const ImageCoordinate& Ic) const
+{
+  int ln = (int) floor(Ic.line);
+  int smp = (int) floor(Ic.sample);
+  return area_any_masked(ln, smp, (ln == Ic.line ? 1 : 2),
+			 (smp == Ic.sample ? 1 : 2));
+}
 
 //-----------------------------------------------------------------------
 /// Indicated if a area has any masking or not. See the discussion in

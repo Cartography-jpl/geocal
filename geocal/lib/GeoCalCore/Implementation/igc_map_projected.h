@@ -1,7 +1,7 @@
 #ifndef IGC_MAP_PROJECTED_H
 #define IGC_MAP_PROJECTED_H
 #include "image_ground_connection.h"
-#include "calc_map_projected.h"
+#include "calc_raster.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -34,34 +34,48 @@ namespace GeoCal {
   memory.
 *******************************************************************/
 
-class IgcMapProjected : public CalcMapProjected {
+class IgcMapProjected : public CalcRaster {
 public:
   IgcMapProjected(const MapInfo& Mi, 
 		  const boost::shared_ptr<ImageGroundConnection>& Igc,
-		  const boost::shared_ptr<RasterImage>& R,
+		  int Grid_spacing = 1,
 		  int Avg_fact = -1,
-		  bool Read_into_memory = true);
-  IgcMapProjected(const MapInfo& Mi, 
-		  const boost::shared_ptr<ImageGroundConnection>& Igc,
-		  int Avg_fact = -1,
-		  bool Read_into_memory = true);
+		  bool Read_into_memory = true,
+		  int Number_tile_line = -1,
+		  int Number_tile_sample = -1);
 
 //-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
 
   virtual ~IgcMapProjected() {}
-
-  virtual void print(std::ostream& Os) const;
-protected:
-  virtual ImageCoordinate calc_image_coordinates(const GroundCoordinate& Gc) 
-    const 
+  virtual void print(std::ostream& Os) const
   {
-    ImageCoordinate ic = igc->image_coordinate(Gc);
-    return ImageCoordinate(ic.line / line_avg(), ic.sample / samp_avg()); 
+    Os << "IgcMapProjected:\n"
+       << "  Avg_factor:   " << avg_factor() << "\n"
+       << "  Grid spacing: " << grid_spacing() << "\n"
+       << "  Map info:\n" 
+       << map_info() << "\n"
+       << "  Image ground connection:\n" 
+       << *igc_ << "\n";
   }
+  const boost::shared_ptr<ImageGroundConnection>& igc_original() const
+  { return igc_original_; }
+  int avg_factor() const { return avg_factor_; }
+  int grid_spacing() const { return grid_spacing_; }
+  bool read_into_memory() const { return read_into_memory_; }
+protected:
+  virtual void calc(int Lstart, int Sstart) const;
 private:
-  boost::shared_ptr<ImageGroundConnection> igc;
+  boost::shared_ptr<ImageGroundConnection> igc_original_;
+  boost::shared_ptr<ImageGroundConnection> igc_;
+  int avg_factor_;
+  int grid_spacing_;
+  bool read_into_memory_;
+  mutable blitz::Array<double, 2> ic_line, ic_sample;
+  void interpolate_ic(int Start_line, int Start_sample) const;
+  void calc_no_grid(int Lstart, int Sstart) const;
+  void calc_grid(int Lstart, int Sstart) const;
 };
 
 }

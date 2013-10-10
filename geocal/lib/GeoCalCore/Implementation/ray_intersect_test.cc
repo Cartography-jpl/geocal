@@ -26,6 +26,6 @@ BOOST_AUTO_TEST_CASE(basic)
 		       ImageCoordinate(553.659, 553.99), res, dist);
   Geodetic expect(36.7754303197, -116.118981291, 1290.64);
   BOOST_CHECK(distance(*res, expect) < 0.01);
-  BOOST_CHECK_CLOSE(dist, 0.359094, 1e-4);
+  BOOST_CHECK_CLOSE(dist, 0.359056, 1e-4);
 }
 BOOST_AUTO_TEST_SUITE_END()

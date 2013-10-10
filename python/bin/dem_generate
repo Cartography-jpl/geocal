@@ -31,6 +31,11 @@ Options:
   -h --help         
        Print this message
 
+  --boundary=d
+       Number of pixels to add as a boundary when calculating the output
+       image coverage. Useful to make sure we completely cover an 
+       image. [default: 5]
+
   --buffer=d
        The buffer to use between tiles, so we have enough data to interpolate
        at the edge of a tile. [default: 5]
@@ -71,13 +76,15 @@ if(args.map_info):
     midem = read_shelve(args.map_info).map_info
 elif(args.map_info_cover):
     midem = read_shelve(args.map_info_cover).map_info
-    midem = igc1.cover(midem)
+    midem = igc1.cover(midem, args.boundary)
+    midem = midem.intersection(igc2.cover(midem, args.boundary))
 else:
     mibase = cib01_mapinfo()
     resbase = mibase.resolution_meter
     miscale = mibase.scale(args.resolution / resbase,
                            args.resolution / resbase)
-    midem = igc1.cover(miscale)
+    midem = igc1.cover(miscale, args.boundary)
+    midem = midem.intersection(igc2.cover(midem, args.boundary))
 
 # Set up to read surface data, if we have it.
 surface_image1 = None

@@ -120,6 +120,7 @@ def __reduce__(self):
 			    bool Ignore_error = false
 			    );
     Geodetic ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const;
+    Geodetic ground_coordinate(const ImageCoordinate& Ic, double Height) const;
     ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const;
     ImageCoordinate image_coordinate(double Latitude, double Longitude, 
 	 			     double Height_ellipsoid) const;

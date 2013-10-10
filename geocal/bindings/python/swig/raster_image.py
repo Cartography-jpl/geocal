@@ -495,17 +495,6 @@ RasterImage_swigregister = _raster_image.RasterImage_swigregister
 RasterImage_swigregister(RasterImage)
 
 
-def copy(*args):
-  """
-    void GeoCal::copy(const RasterImage &Img_in, RasterImage &Img_out, bool
-    diagnostic=false, int Tile_nline=-1, int Tile_nsamp=-1)
-    This copies one image to another.
-
-    The images should be the same size. Setting Diagnostic to true causes
-    messages to be printed as we do the copying. 
-    """
-  return _raster_image.copy(*args)
-
 def copy_no_fill(*args):
   """
     void GeoCal::copy_no_fill(const RasterImage &Img_in, RasterImage &Img_out, int Fill_value=0,

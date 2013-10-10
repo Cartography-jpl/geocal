@@ -1,0 +1,243 @@
+#! /usr/bin/env python
+from afids import *
+import os
+import subprocess
+import logging
+import time
+from contextlib import contextmanager
+import glob
+
+version = "September 25, 2013"
+usage='''Usage:
+  abachd [options] <dem> <pre_pan> <post_pan> <output>
+  abachd [options] --subset <start_line> <start_sample> 
+        <number_line> <number_sample> <dem> <pre_pan> <post_pan> <output>
+  abachd -h | --help
+  abachd -v | --version
+
+This program does the ABAChD change detection process. The output is
+a directory (created if it doesn't already exist), where all the
+output files are placed.
+
+If you supply the subset, this is in terms of the raw pre_pan image. We
+subset the post_pan image to match the pre_pan image on the ground (using
+the original DEM). 
+
+Note it is assumed that the IMD files have the same name as the NITF files,
+but with ".NTF" replaced with ".IMD". We generally have that. We can allow
+more complicated arguments to specify this is more detail if needed, but 
+for now just assume that.
+
+Options:
+  -h --help         
+       Print this message
+
+  --diagnostic
+       Generate files that we don't actually need for processing, but can
+       be useful for diagnostic (e.g., the normdiff.img)
+
+  --number-process=n
+       Number of processors to use. [default: 1]
+
+  --subset  start_line start_sample number_line number_sample
+       Subset the pre_pan raw image, and the subset the post image to match
+       the ground location of the pre_pan image.
+
+  --verbose
+       Print more information as we run.
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+if(args.verbose):
+    logging.basicConfig(level = logging.INFO)
+log = logging.getLogger("abachd")
+tstart = time.time()
+
+# Get input files
+# Note that we really do want abspath here, not realpath. It is common to
+# use symbolic links to collect data together, and the IMD file going with a
+# nitf file may appear in the same directory, but be links to separate directories. 
+pre_pan_raw = os.path.abspath(args.pre_pan)
+post_pan_raw = os.path.abspath(args.post_pan)
+dem = os.path.abspath(args.dem)
+
+# Few things that appear often enough that it is worth stashing.
+dbfile = "end_to_end.db"
+nproc = "--number-process=%d" % args.number_process
+
+# A few helper functions
+def shelve_image(fname, name, subset = None):
+    cmd = ["shelve_image"] 
+    if(subset is not None):
+        cmd.append("--subset")
+        for i in subset:
+            cmd.append(str(i))
+    cmd.append(fname)
+    cmd.append(dbfile + ":" + name)
+    subprocess.check_call(cmd)
+
+def generate_image(fname, name_in, name, subset = None):
+    subprocess.check_call(["write_image", 
+                           nproc, dbfile + ":" + name_in,
+                           fname])
+    shelve_image(fname, name)
+
+@contextmanager
+def timing(txt):
+    log.info(txt)
+    tstart2 = time.time()
+    yield
+    log.info("Delta Time: %f" % (time.time() - tstart2))
+    log.info("Total Time: %f" % (time.time() - tstart))
+
+def import_image(fname, name, subset = None):
+    shelve_image(fname, "%s_raw" % name, subset = subset)
+    with timing("Importing %s image" % name):
+        subprocess.check_call(["write_image", 
+                               "--process-number-line=2048",
+                               "--process-number-sample=2048",
+                               nproc, dbfile + ":%s_raw" % name, name + ".img"])
+    shelve_image(name + ".img", name)
+
+def dem_generate():
+    with timing("DEM generation"):
+        subprocess.check_call(["dem_generate", "--resolution=5.0", 
+                               dbfile + ":igc_sba", dbfile + ":initial_surf1", 
+                               dbfile + ":initial_surf2",
+                               "0", "1", dbfile + ":dem_generate"])
+        cmd = ["write_image", "--vicar-type=DOUB", "--no-data-value=-9999",
+               nproc, dbfile + ":dem_generate", "dem_generate.img",
+               "dem_generate_filled.img"]
+        if(args.verbose):
+            cmd.append("--verbose")
+        subprocess.check_call(cmd)
+        subprocess.check_call(["shelve_dem", 
+                               "--outside-dem-not-error",
+                               "dem_generate_filled.img",
+                               dbfile + ":dem_generate_filled"])
+
+# 1. Create the output directory, if it doesn't already exist.
+subprocess.check_call(["mkdir", "-p", args.output])
+os.chdir(args.output)
+
+# 2. Initial DEM
+subprocess.check_call(["shelve_dem", dem, dbfile + ":dem_initial"])
+
+# 3. Import the images to vicar
+subset = None
+if(args.start_line):
+    subset = [args.start_line, args.start_sample, args.number_line,
+              args.number_sample]
+import_image(pre_pan_raw, "pre_pan", subset = subset)
+if(args.start_line):
+    dem = read_shelve(dbfile + ":dem_initial")
+    igc1 = VicarImageGroundConnection("pre_pan.img", dem)
+    igc2 = GdalImageGroundConnection(post_pan_raw, dem)
+    ulc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(0, 0)))
+    lrc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(igc1.number_line, igc1.number_sample)))
+    sl = max(int(floor(ulc.line)), 0)
+    ss = max(int(floor(ulc.sample)), 0)
+    el = min(int(ceil(lrc.line)), igc2.number_line - 1)
+    es = min(int(ceil(lrc.sample)), igc2.number_sample - 1)
+    igc1 = None
+    igc2 = None
+    subset = [sl, ss, el - sl + 1, es - ss + 1]
+import_image(post_pan_raw, "post_pan", subset = subset)
+
+# 4. Create initial igccol
+subprocess.check_call(["shelve_igccol", "--rpc-line-fit=0",
+                       "--rpc-sample-fit=0", dbfile + ":igc_initial",
+                       dbfile + ":dem_initial",
+                       "pre_pan.img", "Pre Pan", "post_pan.img", "Post pan"])
+
+# 5. Collect tie points
+with timing("Collecting tiepoints"):
+    subprocess.check_call(["tp_collect", dbfile + ":igc_initial", 
+                           dbfile + ":tpcol", nproc])
+
+# 6. SBA
+cmd = ["sba", "--dem-height-block-adjust", dbfile + ":igc_initial",
+       dbfile + ":tpcol", dbfile + ":igc_sba", dbfile + ":tpcol_sba"]
+if(args.verbose):
+    cmd.append("--verbose")
+with timing("Doing SBA"):
+    subprocess.check_call(cmd)
+
+# 7. Initial projection to surface, for DEM generation.
+# Determine image resolution, by going the nearest multiple of 0.1 (e.g., 0.8)
+igc_sba = read_shelve(dbfile + ":igc_sba")
+res = round(igc_sba.image_ground_connection(0).resolution_meter() * 10) / 10.0
+with timing("Initial orthorectification initial_surf1"):
+    subprocess.check_call(["igc_project", "--grid-spacing=10",
+                           "--resolution=%f" % res, dbfile + ":igc_sba",
+                           "0", dbfile + ":initial_surf1_init"])
+    generate_image("initial_surf1.img", "initial_surf1_init", "initial_surf1")
+with timing("Initial orthorectification initial_surf2"):
+    subprocess.check_call(["igc_project", "--grid-spacing=10",
+                           "--map-info=" + dbfile + ":initial_surf1_init",
+                           dbfile + ":igc_sba",
+                           "1", dbfile + ":initial_surf2_init"])
+    generate_image("initial_surf2.img", "initial_surf2_init", "initial_surf2")
+
+# 8. DEM generation
+dem_generate()
+
+# 9. Do final projection to surface, using the DEM.
+with timing("Final orthorectification image 1"):
+    # This doesn't work yet, because we don't have a mask on the DEM. 
+    # We'll want to come back to this, but for now just use same size as
+    # with the initial images.
+    subprocess.check_call(["igc_project", 
+                           # "--resolution=0.5", 
+                           "--bounding-box=" + dbfile + ":dem_generate_filled",
+                           dbfile + ":igc_sba",
+                           "--dem=" + dbfile + ":dem_generate_filled",
+                           "0", dbfile + ":final_surf1_init"])
+    generate_image("final_surf1.img", "final_surf1_init", "final_surf1")
+with timing("Final orthorectification image 2"):
+    subprocess.check_call(["igc_project", 
+                           "--map-info=" + dbfile + ":final_surf1_init",
+                           dbfile + ":igc_sba",
+                           "--dem=" + dbfile + ":dem_generate_filled",
+                           "1", dbfile + ":final_surf2_init"])
+    generate_image("final_surf2.img", "final_surf2_init", "final_surf2")
+
+# 10. Convert to reflectance and generate normdiff image.
+pre_pan_imd = os.path.splitext(pre_pan_raw)[0] + ".IMD"
+post_pan_imd = os.path.splitext(post_pan_raw)[0] + ".IMD"
+subprocess.check_call(["convert_reflectance", "--wv2-pan=" + pre_pan_imd,
+                       dbfile + ":final_surf1", dbfile + ":refl1"])
+subprocess.check_call(["convert_reflectance", "--wv2-pan=" + post_pan_imd,
+                       dbfile + ":final_surf2", dbfile + ":refl2"])
+subprocess.check_call(["doughnut_diff", dbfile + ":refl1", 
+                       dbfile + ":refl2", dbfile + ":normdiff",
+                       dbfile + ":normdiff_and_cvdnorm"])
+
+
+# 11. Generate diagnostic files.
+if(args.diagnostic):
+    with timing("Diagnostic normdiff and cvdnorm file"):
+        subprocess.check_call(["write_image", "--vicar-type=HALF",
+                               "--scale=10000", 
+                               "--process-number-line=1000",
+                               "--process-number-sample=1000",
+                               nproc, 
+                               dbfile + ":normdiff_and_cvdnorm",
+                               "normdiff.img", "cvdnorm.img"])
+    with timing("Accuracy check"):
+        res = subprocess.check_output(["vicarb", "accck", "final_surf1.img",
+                                       "final_surf2.img",  "magnif=1",
+                                       "fftsize=128", "outnl=1200", 
+                                       "remap=n", "seq=qr",  'echo=n',
+                                       "labeladd=y", "rmscrit=90.0"])
+        for ln in res.split('\n'):
+            if(re.match(r'^MSG', ln)):
+                log.info(ln)
+        for f in glob.glob("xxx*"):
+            os.remove(f)
+
+
+    

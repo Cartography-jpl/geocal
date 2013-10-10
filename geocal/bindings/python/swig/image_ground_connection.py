@@ -237,38 +237,50 @@ class ImageGroundConnection(geocal.generic_object.GenericObject):
         """
         return _image_ground_connection.ImageGroundConnection_cover(self, *args)
 
-    def _v_image(self):
+    def _v_image(self, *args):
         """
-        virtual boost::shared_ptr<RasterImage> GeoCal::ImageGroundConnection::image() const
-        Underlying image. 
+        virtual void GeoCal::ImageGroundConnection::image(const boost::shared_ptr< RasterImage > &Img)
+
         """
-        return _image_ground_connection.ImageGroundConnection__v_image(self)
+        return _image_ground_connection.ImageGroundConnection__v_image(self, *args)
 
     @property
     def image(self):
         return self._v_image()
 
-    def _v_image_mask(self):
+    @image.setter
+    def image(self, value):
+      self._v_image(value)
+
+    def _v_image_mask(self, *args):
         """
-        virtual boost::shared_ptr<ImageMask> GeoCal::ImageGroundConnection::image_mask() const
-        Mask to apply to image. 
+        virtual void GeoCal::ImageGroundConnection::image_mask(const boost::shared_ptr< ImageMask > &Image_mask)
+
         """
-        return _image_ground_connection.ImageGroundConnection__v_image_mask(self)
+        return _image_ground_connection.ImageGroundConnection__v_image_mask(self, *args)
 
     @property
     def image_mask(self):
         return self._v_image_mask()
 
-    def _v_ground_mask(self):
+    @image_mask.setter
+    def image_mask(self, value):
+      self._v_image_mask(value)
+
+    def _v_ground_mask(self, *args):
         """
-        virtual boost::shared_ptr<GroundMask> GeoCal::ImageGroundConnection::ground_mask() const
-        Mask to apply to ground. 
+        virtual void GeoCal::ImageGroundConnection::ground_mask(const boost::shared_ptr< GroundMask > &Ground_mask)
+
         """
-        return _image_ground_connection.ImageGroundConnection__v_ground_mask(self)
+        return _image_ground_connection.ImageGroundConnection__v_ground_mask(self, *args)
 
     @property
     def ground_mask(self):
         return self._v_ground_mask()
+
+    @ground_mask.setter
+    def ground_mask(self, value):
+      self._v_ground_mask(value)
 
     def _v_number_line(self):
         """
@@ -466,6 +478,37 @@ OffsetImageGroundConnection._v_line_offset = new_instancemethod(_image_ground_co
 OffsetImageGroundConnection._v_sample_offset = new_instancemethod(_image_ground_connection.OffsetImageGroundConnection__v_sample_offset,None,OffsetImageGroundConnection)
 OffsetImageGroundConnection_swigregister = _image_ground_connection.OffsetImageGroundConnection_swigregister
 OffsetImageGroundConnection_swigregister(OffsetImageGroundConnection)
+
+class ImageGroundConnectionCopy(ImageGroundConnection):
+    """
+    Simple ImageGroundConnection where we use the mapping from an
+    underlying ImageGroundConnection, but allow the raster image, dem,
+    title, image mask, or ground mask to be different.
+
+    You can create a copy, and then modify the image etc. without changing
+    the underlying ImageGroundConnection.
+
+    C++ includes: image_ground_connection.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::ImageGroundConnectionCopy::ImageGroundConnectionCopy(const boost::shared_ptr< ImageGroundConnection > &Igc)
+
+        """
+        _image_ground_connection.ImageGroundConnectionCopy_swiginit(self,_image_ground_connection.new_ImageGroundConnectionCopy(*args))
+    def igc_original(self):
+        """
+        const boost::shared_ptr<ImageGroundConnection>& GeoCal::ImageGroundConnectionCopy::igc_original() const
+
+        """
+        return _image_ground_connection.ImageGroundConnectionCopy_igc_original(self)
+
+    __swig_destroy__ = _image_ground_connection.delete_ImageGroundConnectionCopy
+ImageGroundConnectionCopy.igc_original = new_instancemethod(_image_ground_connection.ImageGroundConnectionCopy_igc_original,None,ImageGroundConnectionCopy)
+ImageGroundConnectionCopy_swigregister = _image_ground_connection.ImageGroundConnectionCopy_swigregister
+ImageGroundConnectionCopy_swigregister(ImageGroundConnectionCopy)
 
 
 

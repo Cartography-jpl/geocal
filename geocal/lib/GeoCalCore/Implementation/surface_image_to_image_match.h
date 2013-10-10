@@ -49,6 +49,11 @@ public:
   virtual void print(std::ostream& Os) const 
   { Os << "SurfaceImageToImageMatcher"; }
 
+  void match_surf(const GroundCoordinate& Gc, 
+		  ImageCoordinate& Ic1, ImageCoordinate& Ic2,
+		  double& Line_sigma, double& Sample_sigma,
+		  bool& Success, int* Diagnostic = 0) const;
+
 //-----------------------------------------------------------------------
 /// ImageGroundConnection for image 1.
 //-----------------------------------------------------------------------

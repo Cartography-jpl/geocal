@@ -432,6 +432,8 @@ Rpc VicarLiteFile::rpc() const
   res.latitude_scale = atof(label<string>("RPC_FIELD11",  g).c_str());
   res.longitude_scale = atof(label<string>("RPC_FIELD12",  g).c_str());
   res.height_scale = atof(label<string>("RPC_FIELD13",  g).c_str());
+  res.error_bias = 0.0;
+  res.error_random = 0.0;
   for(int i = 1; i <= 20; ++i) {
     std::string is = boost::lexical_cast<std::string>(i);
     res.line_numerator[i - 1] = 

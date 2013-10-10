@@ -23,7 +23,7 @@ def test_sba():
     subprocess.check_call(["tp_collect", "--number-x", "10",
                            "--number-y", "10", "sqlite_shelf.db:igc",
                            "sqlite_shelf.db:tpcol"])
-    subprocess.check_call(["sba", "-q", "sqlite_shelf.db:igc",
+    subprocess.check_call(["sba", "sqlite_shelf.db:igc",
                            "sqlite_shelf.db:tpcol", "sqlite_shelf.db:igc_sba",
                            "sqlite_shelf.db:tpcol_sba"])
     igc = read_shelve("sqlite_shelf.db:igc_sba")

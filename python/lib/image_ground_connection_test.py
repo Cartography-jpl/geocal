@@ -44,7 +44,7 @@ def test_view_angle():
     ic = ImageCoordinate(igc1.image.number_line / 2.0,
                          igc1.image.number_sample / 2.0)
     zen, azm = igc1.view_angle(ic)
-    assert_almost_equal(zen, 33.29, 2)
+    assert_almost_equal(zen, 33.2911, 2)
     assert_almost_equal(azm, 7.2390, 2)
 
 def test_footprint_geometry():

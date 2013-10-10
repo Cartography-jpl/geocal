@@ -23,7 +23,7 @@ def test_rpc_image_ground_connection():
                                RpcImageGroundConnection(rpc2, dem, img))
     ic1 = ImageCoordinate(10, 20)
     ic2 = ImageCoordinate(ic1.line + 2, ic1.sample + 3)
-    assert_almost_equal(c.image_coordinate2(ic1).line, ic2.line, 2)
-    assert_almost_equal(c.image_coordinate2(ic1).sample, ic2.sample, 2)
+    assert_almost_equal(c.image_coordinate2(ic1).line, ic2.line, 1)
+    assert_almost_equal(c.image_coordinate2(ic1).sample, ic2.sample, 1)
     
 

@@ -27,7 +27,10 @@ class RawRasterImage : public RasterImageVariable {
 /// Return pixel value at given line and sample.
 //-----------------------------------------------------------------------
 
-  virtual int unchecked_read(int Line, int Sample) const {return data->unchecked_read(Line,Sample);}
+  virtual int unchecked_read(int Line, int Sample) const 
+  {return data->unchecked_read(Line,Sample);}
+  virtual double unchecked_read_double(int Line, int Sample) const 
+  {return data->unchecked_read_double(Line,Sample);}
 
 //-----------------------------------------------------------------------
 /// Return a subset of the image.

@@ -112,6 +112,9 @@ import geocal.calc_raster
 import geocal.raster_image_variable
 import geocal.raster_image
 import geocal.generic_object
+import geocal.calc_raster_multi_band
+import geocal.raster_image_multi_band_variable
+import geocal.raster_image_multi_band
 class ScaleImage(geocal.calc_raster.CalcRaster):
     """
     This is a simple adapter that multiples a underlying image by a scale
@@ -161,6 +164,57 @@ ScaleImage._v_raw_data = new_instancemethod(_scale_image.ScaleImage__v_raw_data,
 ScaleImage._v_scale_factor = new_instancemethod(_scale_image.ScaleImage__v_scale_factor,None,ScaleImage)
 ScaleImage_swigregister = _scale_image.ScaleImage_swigregister
 ScaleImage_swigregister(ScaleImage)
+
+class ScaleImageMultiBand(geocal.calc_raster_multi_band.CalcRasterMultiBand):
+    """
+    This is a simple adapter that multiples a underlying image by a scale
+    factor.
+
+    C++ includes: scale_image.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::ScaleImageMultiBand::ScaleImageMultiBand(const boost::shared_ptr< RasterImageMultiBand > &Data, double
+        Scale_factor)
+
+        """
+        _scale_image.ScaleImageMultiBand_swiginit(self,_scale_image.new_ScaleImageMultiBand(*args))
+    def _v_raw_data(self):
+        """
+        const boost::shared_ptr<RasterImageMultiBand>& GeoCal::ScaleImageMultiBand::raw_data() const
+
+        """
+        return _scale_image.ScaleImageMultiBand__v_raw_data(self)
+
+    @property
+    def raw_data(self):
+        return self._v_raw_data()
+
+    def _v_scale_factor(self):
+        """
+        double GeoCal::ScaleImageMultiBand::scale_factor() const
+
+        """
+        return _scale_image.ScaleImageMultiBand__v_scale_factor(self)
+
+    @property
+    def scale_factor(self):
+        return self._v_scale_factor()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.raw_data,self.scale_factor)
+
+    __swig_destroy__ = _scale_image.delete_ScaleImageMultiBand
+ScaleImageMultiBand._v_raw_data = new_instancemethod(_scale_image.ScaleImageMultiBand__v_raw_data,None,ScaleImageMultiBand)
+ScaleImageMultiBand._v_scale_factor = new_instancemethod(_scale_image.ScaleImageMultiBand__v_scale_factor,None,ScaleImageMultiBand)
+ScaleImageMultiBand_swigregister = _scale_image.ScaleImageMultiBand_swigregister
+ScaleImageMultiBand_swigregister(ScaleImageMultiBand)
 
 
 

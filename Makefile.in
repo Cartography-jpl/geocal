@@ -303,7 +303,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/image_point_display_test.cc \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate_test.cc
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate_test.cc \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/igc_map_projected_test.cc
 #  geocal_test_all_SOURCES+= @srcimplementation@/gdal_multi_file_test.cc
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__append_21 = @srcimplementation@/hdf_orbit_test.cc
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__append_22 = @swigsrc@/geocal_gdal_wrap.cc \
@@ -399,7 +400,10 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/tiepoint_to_error \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/write_image \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/convert_reflectance \
-@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/doughnut_diff
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/doughnut_diff \
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/abachd \
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/height_to_color \
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_airmspi_igc
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_TRUE@am__append_46 = @srcpythonlib@/tre_amt_struct.py
 @BUILD_AFIDS_PYTHON_TRUE@am__append_47 = @docpythonsrc@ \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/07JUN08184839-M1BS-005616921010_01_P001.IMD \
@@ -574,7 +578,6 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/raster_image_tiled_file_wrap.cc \
 	@swigsrc@/dem_tiled_file_wrap.cc @swigsrc@/memory_dem_wrap.cc \
 	@swigsrc@/map_reprojected_image_wrap.cc \
-	@swigsrc@/calc_map_projected_wrap.cc \
 	@swigsrc@/pyramid_image_matcher_wrap.cc \
 	@swigsrc@/igc_map_projected_wrap.cc \
 	@swigsrc@/igc_image_to_image_match_wrap.cc \
@@ -694,7 +697,6 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-dem_tiled_file_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-memory_dem_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-map_reprojected_image_wrap.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-calc_map_projected_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-pyramid_image_matcher_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-igc_map_projected_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-igc_image_to_image_match_wrap.lo \
@@ -797,7 +799,6 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srcimplementation@/magnify_replicate.cc \
 	@srcimplementation@/smooth_image.cc \
 	@srcimplementation@/map_reprojected_image.cc \
-	@srcimplementation@/calc_map_projected.cc \
 	@srcimplementation@/igc_map_projected.cc \
 	@srcimplementation@/igc_image_to_image_match.cc \
 	@srcimplementation@/surface_image_to_image_match.cc \
@@ -901,7 +902,6 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-magnify_replicate.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-smooth_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-map_reprojected_image.lo \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-calc_map_projected.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-igc_map_projected.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-igc_image_to_image_match.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-surface_image_to_image_match.lo \
@@ -1094,6 +1094,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 	@srcimplementation@/gdal_raster_image_test.cc \
 	@srcimplementation@/image_point_display_test.cc \
 	@srcimplementation@/ogr_coordinate_test.cc \
+	@srcimplementation@/igc_map_projected_test.cc \
 	@srcimplementation@/hdf_orbit_test.cc \
 	@srcimplementation@/spice_helper_test.cc \
 	@srcimplementation@/sdp_helper_test.cc \
@@ -1151,7 +1152,8 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_dem_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_raster_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-image_point_display_test.$(OBJEXT) \
-@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT)
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-igc_map_projected_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_HDF5_TRUE@am__objects_12 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_GDAL_TRUE@am__objects_13 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
 @BUILD_AFIDS_PYTHON_TRUE@@HAVE_MSPI_TRUE@am__objects_14 = @srcmspi@/geocal_test_all-paraxial_transform_test.$(OBJEXT) \
@@ -1276,7 +1278,10 @@ am__dist_bin_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/tiepoint_to_error \
 	$(srcdir)/$(srcpythonbin)/write_image \
 	$(srcdir)/$(srcpythonbin)/convert_reflectance \
-	$(srcdir)/$(srcpythonbin)/doughnut_diff
+	$(srcdir)/$(srcpythonbin)/doughnut_diff \
+	$(srcdir)/$(srcpythonbin)/abachd \
+	$(srcdir)/$(srcpythonbin)/height_to_color \
+	$(srcdir)/$(srcpythonbin)/shelve_airmspi_igc
 SCRIPTS = $(dist_afidspythonvdev_SCRIPTS) $(dist_bin_SCRIPTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -1375,6 +1380,7 @@ am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/pleides_rpc.py \
 	@srcpythonlib@/parallel_process.py \
 	@srcpythonlib@/raster_image_multi_band.py \
+	@srcpythonlib@/air_mspi_igc.py \
 	@srcpythonlib@/tre_amt_struct.py
 am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 am__pep3147_tweak = \
@@ -1449,7 +1455,6 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcimplementation@/dem_tiled_file.h \
 	@srcimplementation@/memory_dem.h \
 	@srcimplementation@/map_reprojected_image.h \
-	@srcimplementation@/calc_map_projected.h \
 	@srcimplementation@/igc_map_projected.h \
 	@srcimplementation@/igc_image_to_image_match.h \
 	@srcimplementation@/surface_image_to_image_match.h \
@@ -2062,7 +2067,6 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/magnify_replicate.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/smooth_image.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/map_reprojected_image.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/calc_map_projected.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/igc_map_projected.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/igc_image_to_image_match.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/surface_image_to_image_match.cc \
@@ -2184,7 +2188,6 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/dem_tiled_file_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/memory_dem_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/map_reprojected_image_wrap.cc \
-@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/calc_map_projected_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/pyramid_image_matcher_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/igc_map_projected_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/igc_image_to_image_match_wrap.cc \
@@ -2329,7 +2332,6 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_tiled_file.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/memory_dem.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/map_reprojected_image.h \
-@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/calc_map_projected.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/igc_map_projected.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/igc_image_to_image_match.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/surface_image_to_image_match.h \
@@ -2664,6 +2666,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/pleides_rpc.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/parallel_process.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/raster_image_multi_band.py \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/air_mspi_igc.py \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_46)
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
@@ -2941,8 +2944,6 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-map_reprojected_image_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
-@swigsrc@/_swig_wrap_la-calc_map_projected_wrap.lo:  \
-	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-pyramid_image_matcher_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-igc_map_projected_wrap.lo:  \
@@ -3212,9 +3213,6 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-map_reprojected_image.lo:  \
-	@srcimplementation@/$(am__dirstamp) \
-	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
-@srcimplementation@/libgeocal_la-calc_map_projected.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-igc_map_projected.lo:  \
@@ -3817,6 +3815,9 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-igc_map_projected_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -4168,6 +4169,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-hdf_orbit_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_image_to_image_match_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-image_point_display_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ipi_image_ground_connection_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-location_to_file_test.Po@am__quote@
@@ -4191,7 +4193,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-spice_helper_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-surface_image_to_image_match_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_map_projected.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_match.Plo@am__quote@
@@ -4358,7 +4359,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-apply_mask_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_camera_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_orbit_wrap.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_map_projected_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_wrap.Plo@am__quote@
@@ -4976,13 +4976,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/map_reprojected_image_wrap.cc' object='@swigsrc@/_swig_wrap_la-map_reprojected_image_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-map_reprojected_image_wrap.lo `test -f '@swigsrc@/map_reprojected_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/map_reprojected_image_wrap.cc
-
-@swigsrc@/_swig_wrap_la-calc_map_projected_wrap.lo: @swigsrc@/calc_map_projected_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-calc_map_projected_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_map_projected_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-calc_map_projected_wrap.lo `test -f '@swigsrc@/calc_map_projected_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/calc_map_projected_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_map_projected_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_map_projected_wrap.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/calc_map_projected_wrap.cc' object='@swigsrc@/_swig_wrap_la-calc_map_projected_wrap.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-calc_map_projected_wrap.lo `test -f '@swigsrc@/calc_map_projected_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/calc_map_projected_wrap.cc
 
 @swigsrc@/_swig_wrap_la-pyramid_image_matcher_wrap.lo: @swigsrc@/pyramid_image_matcher_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-pyramid_image_matcher_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-pyramid_image_matcher_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-pyramid_image_matcher_wrap.lo `test -f '@swigsrc@/pyramid_image_matcher_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/pyramid_image_matcher_wrap.cc
@@ -5697,13 +5690,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/map_reprojected_image.cc' object='@srcimplementation@/libgeocal_la-map_reprojected_image.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-map_reprojected_image.lo `test -f '@srcimplementation@/map_reprojected_image.cc' || echo '$(srcdir)/'`@srcimplementation@/map_reprojected_image.cc
-
-@srcimplementation@/libgeocal_la-calc_map_projected.lo: @srcimplementation@/calc_map_projected.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-calc_map_projected.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_map_projected.Tpo -c -o @srcimplementation@/libgeocal_la-calc_map_projected.lo `test -f '@srcimplementation@/calc_map_projected.cc' || echo '$(srcdir)/'`@srcimplementation@/calc_map_projected.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_map_projected.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_map_projected.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/calc_map_projected.cc' object='@srcimplementation@/libgeocal_la-calc_map_projected.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-calc_map_projected.lo `test -f '@srcimplementation@/calc_map_projected.cc' || echo '$(srcdir)/'`@srcimplementation@/calc_map_projected.cc
 
 @srcimplementation@/libgeocal_la-igc_map_projected.lo: @srcimplementation@/igc_map_projected.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-igc_map_projected.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_map_projected.Tpo -c -o @srcimplementation@/libgeocal_la-igc_map_projected.lo `test -f '@srcimplementation@/igc_map_projected.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_map_projected.cc
@@ -7013,6 +6999,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/ogr_coordinate_test.cc' object='@srcimplementation@/geocal_test_all-ogr_coordinate_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-ogr_coordinate_test.obj `if test -f '@srcimplementation@/ogr_coordinate_test.cc'; then $(CYGPATH_W) '@srcimplementation@/ogr_coordinate_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/ogr_coordinate_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-igc_map_projected_test.o: @srcimplementation@/igc_map_projected_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_map_projected_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_map_projected_test.o `test -f '@srcimplementation@/igc_map_projected_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_map_projected_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_map_projected_test.cc' object='@srcimplementation@/geocal_test_all-igc_map_projected_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_map_projected_test.o `test -f '@srcimplementation@/igc_map_projected_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_map_projected_test.cc
+
+@srcimplementation@/geocal_test_all-igc_map_projected_test.obj: @srcimplementation@/igc_map_projected_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_map_projected_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_map_projected_test.obj `if test -f '@srcimplementation@/igc_map_projected_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_map_projected_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_map_projected_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_map_projected_test.cc' object='@srcimplementation@/geocal_test_all-igc_map_projected_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_map_projected_test.obj `if test -f '@srcimplementation@/igc_map_projected_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_map_projected_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_map_projected_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-hdf_orbit_test.o: @srcimplementation@/hdf_orbit_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-hdf_orbit_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-hdf_orbit_test.Tpo -c -o @srcimplementation@/geocal_test_all-hdf_orbit_test.o `test -f '@srcimplementation@/hdf_orbit_test.cc' || echo '$(srcdir)/'`@srcimplementation@/hdf_orbit_test.cc

@@ -67,7 +67,9 @@ public:
 //-----------------------------------------------------------------------
   
   bool ignore_zero() const {return ignore_zero_;}
-  virtual int unchecked_read(int Line, int Sample) const;
+  virtual int unchecked_read(int Line, int Sample) const
+  { return (int) unchecked_read_double(Line, Sample); }
+  virtual double unchecked_read_double(int Line, int Sample) const;
   virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
 			int Number_sample, int* Res) const;
   virtual void unchecked_write(int Line, int Sample, int Val);

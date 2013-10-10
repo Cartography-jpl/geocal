@@ -56,17 +56,9 @@ public:
 
   double interpolate(double Line, double Sample) const
   {
-    int i = (int) floor(Line);
-    int j = (int) floor(Sample);
-    range_check(i, 0, number_line() - 1);
-    range_check(j, 0, number_sample() - 1);
-    double t1 = (*this)(i, j);
-    double t2 = (*this)(i, j + 1);
-    double t3 = (*this)(i + 1, j);
-    double t4 = (*this)(i + 1, j + 1);
-    double t5 = t1 + (t2 - t1) * (Sample - j);
-    double t6 = t3 + (t4 - t3) * (Sample - j);
-    return t5 + (t6 - t5) * (Line - i);
+    range_check(Line, 0.0, (double) (number_line() - 1));
+    range_check(Sample, 0.0, (double) (number_sample() - 1));
+    return unchecked_interpolate(Line, Sample);
   }
 
 //-----------------------------------------------------------------------
@@ -78,10 +70,10 @@ public:
   {
     int i = (int) floor(Line);
     int j = (int) floor(Sample);
-    double t1 = unchecked_read(i, j);
-    double t2 = unchecked_read(i, j + 1);
-    double t3 = unchecked_read(i + 1, j);
-    double t4 = unchecked_read(i + 1, j + 1);
+    double t1 = unchecked_read_double(i, j);
+    double t2 = unchecked_read_double(i, j + 1);
+    double t3 = unchecked_read_double(i + 1, j);
+    double t4 = unchecked_read_double(i + 1, j + 1);
     double t5 = t1 + (t2 - t1) * (Sample - j);
     double t6 = t3 + (t4 - t3) * (Sample - j);
     return t5 + (t6 - t5) * (Line - i);
@@ -98,10 +90,12 @@ public:
   {
     int i = (int) floor(Line);
     int j = (int) floor(Sample);
-    double t1 = (*this)(i, j);
-    double t2 = (*this)(i, j + 1);
-    double t3 = (*this)(i + 1, j);
-    double t4 = (*this)(i + 1, j + 1);
+    range_check(i, 0, number_line() - 1);
+    range_check(j, 0, number_sample() - 1);
+    double t1 = unchecked_read_double(i, j);
+    double t2 = unchecked_read_double(i, j + 1);
+    double t3 = unchecked_read_double(i + 1, j);
+    double t4 = unchecked_read_double(i + 1, j + 1);
     double t5 = t1 + (t2 - t1) * (Sample - j);
     double dt5 = t2 - t1;
     double t6 = t3 + (t4 - t3) * (Sample - j);
@@ -178,6 +172,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual int unchecked_read(int Line, int Sample) const = 0;
+  virtual double unchecked_read_double(int Line, int Sample) const = 0;
 
 //-----------------------------------------------------------------------
 /// Alternate name for operator(). Languages that wrap this class such

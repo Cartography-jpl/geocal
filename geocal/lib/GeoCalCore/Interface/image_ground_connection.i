@@ -18,6 +18,7 @@
 %geocal_shared_ptr(GeoCal::ImageGroundConnection);
 %geocal_shared_ptr(GeoCal::OffsetImageGroundConnection);
 %geocal_shared_ptr(GeoCal::ImageGroundConnectionFailed);
+%geocal_shared_ptr(GeoCal::ImageGroundConnectionCopy);
 
 namespace GeoCal {
 
@@ -84,9 +85,9 @@ public:
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   MapInfo cover(const MapInfo& Mi, int boundary = 0) const;
-  %python_attribute(image, boost::shared_ptr<RasterImage>)
-  %python_attribute(image_mask, boost::shared_ptr<ImageMask>)
-  %python_attribute(ground_mask, boost::shared_ptr<GroundMask>)
+  %python_attribute_with_set(image, boost::shared_ptr<RasterImage>)
+  %python_attribute_with_set(image_mask, boost::shared_ptr<ImageMask>)
+  %python_attribute_with_set(ground_mask, boost::shared_ptr<GroundMask>)
   %python_attribute(number_line, virtual int)
   %python_attribute(number_sample, virtual int)
   %python_attribute_with_set(title, std::string)
@@ -129,6 +130,18 @@ public:
   %python_attribute(sample_offset, double)
   %pickle_init(1, self.original_image_ground_connection, self.line_offset, 
 	       self.sample_offset)
+};
+
+class ImageGroundConnectionCopy: public ImageGroundConnection
+{
+public:
+  ImageGroundConnectionCopy
+  (const boost::shared_ptr<ImageGroundConnection>& Igc);
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const;
+  virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
+    const;
+  const boost::shared_ptr<ImageGroundConnection>& igc_original() const;
 };
 
 }

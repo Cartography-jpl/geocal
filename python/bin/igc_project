@@ -7,7 +7,7 @@ from afids import *
 from functools import partial
 from multiprocessing import Pool
 
-version = "February 6, 2013"
+version = "October 8, 2013"
 usage='''Usage: 
   igc_project [options] <igc_collection> <image_index> <output>
   igc_project -h | --help
@@ -16,11 +16,25 @@ usage='''Usage:
 This map projects a ImageGroundConnection to the surface, generating
 a map projected image. The igc_collection should be in the normal
 "file:key" format. The index number for which image to use is supplied,
-this is -0-based. The output is a VICAR file.
+this is -0-based. The output is also "file:key". To actually generate
+a file, use "write_image" program.
 
 Options:
   -h --help         
        Print this message
+
+  --avg_factor=d
+       The averaging factor to use on the original data before projecting
+       it. If this isn't specified, we match the map resolution to the
+       resolution of center pixel of the projected ImageGroundCollection.
+       Otherwise, we average by the given factor. [default: -1]
+
+  --bounding-box=mi
+       Use the given image to supply the bounding box for the output. 
+       Note that we use the projection and bounding box, but not the
+       resolution of the map info (unlike --map-info). This can be useful
+       to for example cover the area of a generated DEM, even if the DEM
+       is lower resolution than what we want to project here.
 
   --dem=shelve
        DEM to use, specified as file:key. If not specified, we use the 
@@ -38,9 +52,6 @@ Options:
        the supplied shelve image. This is useful to when comparing against
        an existing image/DEM.
 
-  --number-process=n 
-       Number of processors to use. [default: 1]
-
   --resolution=r
        Resolution in meters of output. [default: 1.0]
 
@@ -55,51 +66,25 @@ igc = igc_col.image_ground_connection(args.image_index)
 if(args.dem):
     igc.dem = read_shelve(args.dem)
 
-# Create the map projection object, and the output file
+# Create the map projection object, and the output object
 
 if(args.map_info):
     mi = read_shelve(args.map_info).map_info
+elif(args.bounding_box):
+    mibase = read_shelve(args.bounding_box).map_info
+    resbase = mibase.resolution_meter
+    miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
+    mp = IgcMapProjected(miscale, igc, 1, -1, False)
+    mi = mp.map_info
+    mp = None
 else:
     mibase = cib01_mapinfo()
     resbase = mibase.resolution_meter
     miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
     mi = igc.cover(miscale)
-    mp = IgcMapProjected(mi, igc, -1, False)
+    mp = IgcMapProjected(mi, igc, 1, -1, False)
     mi = mp.map_info
     mp = None
 
-f = VicarRasterImage(args.output, mi, "HALF")
-f.close()
-
-def process_tile(mi, igc, outname, lstart, sstart, nline, nsamp, grid_spacing):
-    mp = IgcMapProjected(mi.subset(sstart, lstart, nsamp, nline), igc, -1, 
-                         False)
-    f = VicarLiteRasterImage(outname, VicarLiteFile.UPDATE)
-    f_sub = SubRasterImage(f, lstart, sstart, nline, nsamp)
-    mp.write_image(f_sub, grid_spacing)
-
-def do_process(p):
-    p()
-    return True
-
-# Figure out number of lines to process at once. We make this an even
-# division of grid_spacing
-process_nline = mi.number_y_pixel / args.number_process
-process_nline = max(process_nline / args.grid_spacing, 1) * args.grid_spacing
-
-# Set up all the processes, which will do in the next step
-process_list = []
-for lstart in range(0, mi.number_y_pixel, process_nline):
-    tile_nline = process_nline
-    if(lstart + tile_nline > mi.number_y_pixel):
-        tile_nline = mi.number_y_pixel - lstart
-    job = partial(process_tile, mi, igc, args.output, lstart, 0, tile_nline,
-                  mi.number_x_pixel, args.grid_spacing)
-    process_list.append(job)
-
-if(args.number_process == 1):
-    res = map(do_process, process_list)
-else:
-    pool = Pool(args.number_process)
-    res = pool.map(do_process, process_list)
-
+igc = IgcMapProjected(mi, igc, args.grid_spacing, args.avg_factor, False)
+write_shelve(args.output, igc)

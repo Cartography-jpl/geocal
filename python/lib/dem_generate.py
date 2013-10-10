@@ -12,10 +12,11 @@ from igc_collection import *
 from ply_file import *
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
+import logging
 
 def _new_from_init(cls, version, *args):
     if(cls.pickle_format_version() < version):
-        raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
+        raise RuntimeError("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
@@ -148,37 +149,45 @@ class DemGenerate:
         self.h = dict["h"]
         self.r = dict["r"]
 
-    def surface_point(self, lstart, sstart, lend, send, include_image = False):
+    def surface_point(self, *arg):
         '''Calculate surface points'''
-        r = self.dem_match.surface_point(lstart, sstart, lend, send,
-                                         self.stride, self.stride, 
-                                         include_image)
-        print "Number point:   %d" %(self.dem_match.number_point)
-        print "Number match:   %d" %(self.dem_match.number_match)
-        print "Number success: %d" %(self.dem_match.number_success)
-        print "All distance:\n", self.dem_match.all_distance_stat
-        print "Good distance:\n", self.dem_match.good_distance_stat
-        print "Points not matched:\n"
-        print "  Image masked:                 %d" \
-            %(self.dem_match.diagnostic[1])
-        print "  Too close to image edge:      %d" \
-            %(self.dem_match.diagnostic[2])
-        print "  Variance too low:             %d" \
-            %(self.dem_match.diagnostic[3])
-        print "  Correlation too low:          %d" \
-            %(self.dem_match.diagnostic[4])
-        print "  Exceed max sigma:             %d" \
-            %(self.dem_match.diagnostic[5])
-        print "  Exceed max radiance variance: %d" \
-            %(self.dem_match.diagnostic[6])
-        print "  Exceed precision requirement: %d" \
-            %(self.dem_match.diagnostic[7])
-        print "  Move past target:             %d" \
-            %(self.dem_match.diagnostic[8])
-        print "  Solve failed:                 %d" \
-            %(self.dem_match.diagnostic[9])
-        print "  Unknown:                      %d" \
-            %(self.dem_match.diagnostic[10])
+        if(len(arg) == 5):
+            lstart, sstart, lend, send, include_image = arg
+            r = self.dem_match.surface_point(lstart, sstart, lend, send,
+                                             self.stride, self.stride, 
+                                             include_image)
+        elif(len(arg) ==2):
+            mi, include_image = arg
+            r = self.dem_match.surface_point(mi, include_image)
+        else:
+            raise RuntimeError("Wrong number of arguments to surface_point")
+        log = logging.getLogger("afids-python.dem_generate")
+        log.info("Number point:   %d" %(self.dem_match.number_point))
+        log.info("Number match:   %d" %(self.dem_match.number_match))
+        log.info("Number success: %d" %(self.dem_match.number_success))
+        log.info("All distance:\n%s" % self.dem_match.all_distance_stat)
+        log.info("Good distance:\n%s" % self.dem_match.good_distance_stat)
+        log.info("Points not matched:")
+        log.info("  Image masked:                 %d" \
+            %(self.dem_match.diagnostic[1]))
+        log.info("  Too close to image edge:      %d" \
+            %(self.dem_match.diagnostic[2]))
+        log.info("  Variance too low:             %d" \
+            %(self.dem_match.diagnostic[3]))
+        log.info("  Correlation too low:          %d" \
+            %(self.dem_match.diagnostic[4]))
+        log.info("  Exceed max sigma:             %d" \
+            %(self.dem_match.diagnostic[5]))
+        log.info("  Exceed max radiance variance: %d" \
+            %(self.dem_match.diagnostic[6]))
+        log.info("  Exceed precision requirement: %d" \
+            %(self.dem_match.diagnostic[7]))
+        log.info("  Move past target:             %d" \
+            %(self.dem_match.diagnostic[8]))
+        log.info("  Solve failed:                 %d" \
+            %(self.dem_match.diagnostic[9]))
+        log.info("  Unknown:                      %d" \
+            %(self.dem_match.diagnostic[10]))
         return r
 
     def find_intersection(self, ic1, ic2):
@@ -218,25 +227,47 @@ class DemGenerate:
             sstart = 0
             lend = self.igc1.number_line
             send = self.igc1.number_sample
+            arg = [lstart, sstart, lend, self, include_image]
         else:
-            lstart, sstart, lend, send = self.range_image1()
-            lstart -= self.stride * buffer_size
-            sstart -= self.stride * buffer_size
-            lend += self.stride * buffer_size
-            send += self.stride * buffer_size
+            if(isinstance(self.itoim, SurfaceImageToImageMatch)):
+                mi = self.aoi.subset(-buffer_size, -buffer_size, 
+                                      self.aoi.number_x_pixel + 2 * buffer_size,
+                                      self.aoi.number_y_pixel + 2 * buffer_size)
+                arg = [mi, include_image]
+            else:
+                lstart, sstart, lend, send = self.range_image1()
+                lstart -= self.stride * buffer_size
+                sstart -= self.stride * buffer_size
+                lend += self.stride * buffer_size
+                send += self.stride * buffer_size
+                arg = [lstart, sstart, lend, send, include_image]
         if(pool is None):
-            return self.surface_point(lstart, sstart, lend, send, include_image)
-        if(lstart > sstart):
-            lstep = (lend - lstart) / multiprocessing.cpu_count()
-            sstep = send - sstart
-        else:
-            lstep = lend - lstart
-            sstep = (send - sstart) / multiprocessing.cpu_count()
+            return self.surface_point(*arg)
         arg = []
-        for ls in range(lstart, lend, lstep):
-            for ss in range(sstart, send, sstep):
-                arg.append([ls, ss, min(ls + lstep, lend),
-                            min(ss + sstep, send), include_image])
+        if(isinstance(self.itoim, SurfaceImageToImageMatch)):
+            numy = self.aoi.number_y_pixel
+            numx = self.aoi.number_x_pixel
+            if(numx > numy):
+                xstep = numx / multiprocessing.cpu_count()
+                ystep = numy
+            else:
+                xstep = numx
+                ystep = numy / multiprocessing.cpu_count()
+            for x in range(0, numx, xstep):
+                for y in range(0, numy, ystep):
+                    arg.append([self.aoi.subset(x, y, xstep, ystep),
+                                include_image])
+        else:
+            if(lstart > sstart):
+                lstep = (lend - lstart) / multiprocessing.cpu_count()
+                sstep = send - sstart
+            else:
+                lstep = lend - lstart
+                sstep = (send - sstart) / multiprocessing.cpu_count()
+            for ls in range(lstart, lend, lstep):
+                for ss in range(sstart, send, sstep):
+                    arg.append([ls, ss, min(ls + lstep, lend),
+                                min(ss + sstep, send), include_image])
         func = SurfacePointWrap(self)
         res = pool.map(func, arg)
         return np.concatenate(res)

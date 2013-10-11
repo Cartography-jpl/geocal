@@ -4,10 +4,11 @@
 # image, and RPC.
 from afids import *
 
-version = "February 4, 2013"
+version = "October 11, 2013"
 usage='''Usage: 
   shelve_igccol [options] <output> <dem> 
        <image> <title> [(<image> <title>)...]
+  shelve_igccol [options] --from-shelve <output> <input>...
   shelve_igccol -h | --help
   shelve_igccol -v | --version
 
@@ -29,6 +30,10 @@ Options:
        sure not to try to write the RPC to NITF.
 
   --from-shelve
+       Get ImageGroundConnection from shelve objects, and put into a
+       IgcCollection.
+
+  --image-from-shelve
        Instead of getting images from a file, get them from a shelve object.
        This should be in a "file:key" format. 
 
@@ -62,30 +67,37 @@ sample_fit = []
 for i in str(args.rpc_sample_fit).split(','):
     if(i != ''):
         sample_fit.append(int(i))
-
-dem = read_shelve(args.dem)
+fln = [False] * 20
+fsmp = [False] * 20
+for i in line_fit:
+    fln[i] = True
+for i in sample_fit:
+    fsmp[i] = True
 
 igc_coll = IgcArray()
-for i in range(len(args.image)):
-    if(args.from_shelve):
-        img = read_shelve(args.image[i])
-        t = RpcImageGroundConnection(img.rpc, dem, img, args.title[i])
-    elif VicarFile.is_vicar_file(args.image[i]):
-        t = VicarImageGroundConnection(args.image[i], dem, title=args.title[i])
-    else:
-        t = GdalImageGroundConnection(args.image[i], dem, title=args.title[i])
-    fln = [False] * 20
-    fsmp = [False] * 20
-    for i in line_fit:
-        fln[i] = True
-    for i in sample_fit:
-        fsmp[i] = True
+if(args.from_shelve):
+    for inp in args.input:
+        t = read_shelve(inp)
+        igc_coll.igc.append(t)
+    igc_coll.parameter_subset_mask = [True] * len(igc_coll.parameter)
+else:
+    dem = read_shelve(args.dem)
+    for i in range(len(args.image)):
+        if(args.image_from_shelve):
+            img = read_shelve(args.image[i])
+            t = RpcImageGroundConnection(img.rpc, dem, img, args.title[i])
+        elif VicarFile.is_vicar_file(args.image[i]):
+            t = VicarImageGroundConnection(args.image[i], dem, 
+                                           title=args.title[i])
+        else:
+            t = GdalImageGroundConnection(args.image[i], dem, 
+                                          title=args.title[i])
     t.rpc.fit_line_numerator = fln
     t.rpc.fit_sample_numerator = fsmp
     if(args.fit_height_offset):
         t.fit_height_offset = True
     igc_coll.igc.append(t)
-igc_coll.parameter_subset_mask = [True] * len(igc_coll.parameter)
+    igc_coll.parameter_subset_mask = [True] * len(igc_coll.parameter)
 
 write_shelve(args.output, igc_coll)
 

@@ -74,12 +74,11 @@ for i in line_fit:
 for i in sample_fit:
     fsmp[i] = True
 
-igc_coll = IgcArray()
+a = []
 if(args.from_shelve):
     for inp in args.input:
         t = read_shelve(inp)
-        igc_coll.igc.append(t)
-    igc_coll.parameter_subset_mask = [True] * len(igc_coll.parameter)
+        a.append(t)
 else:
     dem = read_shelve(args.dem)
     for i in range(len(args.image)):
@@ -92,12 +91,13 @@ else:
         else:
             t = GdalImageGroundConnection(args.image[i], dem, 
                                           title=args.title[i])
-    t.rpc.fit_line_numerator = fln
-    t.rpc.fit_sample_numerator = fsmp
-    if(args.fit_height_offset):
-        t.fit_height_offset = True
-    igc_coll.igc.append(t)
-    igc_coll.parameter_subset_mask = [True] * len(igc_coll.parameter)
+        t.rpc.fit_line_numerator = fln
+        t.rpc.fit_sample_numerator = fsmp
+        if(args.fit_height_offset):
+            t.fit_height_offset = True
+        a.append(t)
 
+igc_coll = IgcArray(a)
+igc_coll.parameter_subset_mask = [True] * len(igc_coll.parameter)
 write_shelve(args.output, igc_coll)
 

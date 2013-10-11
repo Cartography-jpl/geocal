@@ -1,0 +1,92 @@
+#! /usr/bin/env python
+
+from afids import *
+
+version = "October 11, 2013"
+usage='''Usage: 
+  igc_to_rpc [options] <input> <output>
+  igc_to_rpc -h | --help
+  igc_to_rpc -v | --version
+
+This takes an existing ImageGroundConnection, and creates a
+RpcImageGroundConnection that approximates it. This would be used when
+a RPC is faster than the existing ImageGroundConnection, or when you
+want to adjust the RPC parameters with an sba.  The input and output
+should be in "file:key" format, e.g., "my_data.db:igc".
+
+Options:
+  -h --help         
+       Print this message
+
+  --height-min=f
+       Minimum height to include in RPC fit [default: 0.0]
+
+  --height-max=f
+       Maximum height to include in RPC fit [default: 2000.0]
+
+   --grid-number=n
+       Number of points to include in the grid used to approximate the
+       RPC, in each direction [default: 20]
+
+  --fit-height-offset
+       Fit for the height offset, in addition to RPC parameters. Note that
+       in general the height_offset will *not* be an integer. NITF requires
+       this to be an integer, so if you use this parameter you should be
+       sure not to try to write the RPC to NITF.
+
+  --rpc-line-fit=list
+       A comma separated list of 0 based parameters that we should set
+       a being able to be fit (e.g., "0,1,3"). This assumes we want
+       to fit the same values for each of the ImageGroundConnection,
+       which is usually the case. We could create a more specific way
+       to specify this for each ImageGroundConnection if we need
+       to. [default: ]
+
+  --rpc-sample-fit=list
+       A comma separated list of 0 based parameters that we should set
+       a being able to be fit (e.g., "0,1,3"). This assumes we want
+       to fit the same values for each of the ImageGroundConnection,
+       which is usually the case. We could create a more specific way
+       to specify this for each ImageGroundConnection if we need
+       to. [default: ]
+
+  -v --version      
+       Print program version
+'''
+
+# Parse command line arguments
+
+args = docopt_simple(usage, version=version)
+line_fit = []
+for i in str(args.rpc_line_fit).split(','):
+    if(i != ''):
+        line_fit.append(int(i))
+sample_fit = []
+for i in str(args.rpc_sample_fit).split(','):
+    if(i != ''):
+        sample_fit.append(int(i))
+
+# Generate RPC
+
+igc_in = read_shelve(args.input)
+rpc = Rpc.generate_rpc(igc_in, args.height_min, args.height_max,
+                       args.grid_number, args.grid_number,
+                       args.grid_number, True, True)
+fln = [False] * 20
+fsmp = [False] * 20
+for i in line_fit:
+    fln[i] = True
+for i in sample_fit:
+    fsmp[i] = True
+rpc.fit_line_numerator = fln
+rpc.fit_sample_numerator = fsmp
+
+# And use to create ImageGroundConnection
+
+igc_out = RpcImageGroundConnection(rpc, igc_in.dem, igc_in.image,
+                                   igc_in.title, igc_in.image_mask,
+                                   igc_in.ground_mask)
+if(args.fit_height_offset):
+    igc_out.fit_height_offset = True
+
+write_shelve(args.output, igc_out)

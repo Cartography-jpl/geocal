@@ -35,8 +35,8 @@ const blitz::Array<double, 2>& CalcRaster::swap(int Line, int Sample) const
        Sample <= a.ubound(1))
       return a;
   TinyVector<int, 2> start;
-  start(0) = Line / number_tile_line();
-  start(1) = Sample / number_tile_sample();
+  start(0) = (Line / number_tile_line()) * number_tile_line();
+  start(1) = (Sample / number_tile_sample()) * number_tile_sample();
   int nl = std::min(number_tile_line(), number_line() - start(0));
   int ns = std::min(number_tile_sample(), number_sample() - start(1));
   next_swap->reference(read_double(start(0), start(1), nl, ns));
@@ -75,5 +75,5 @@ CalcRaster::read_double(int Lstart, int Sstart, int Nline,
   }
   data.resize(Nline, Nsamp);
   calc(Lstart, Sstart);
-  return data;
+  return data.copy();
 }

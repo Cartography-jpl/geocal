@@ -7196,6 +7196,64 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RasterImage_unchecked_read_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"RasterImage_unchecked_read_double",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_unchecked_read_double" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_unchecked_read_double" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_unchecked_read_double" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (double)((GeoCal::RasterImage const *)arg1)->unchecked_read_double(arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RasterImage_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
@@ -10972,6 +11030,10 @@ static PyMethodDef SwigMethods[] = {
 		"Number of samples in the preferred tile size.\n"
 		"\n"
 		"Default is the entire image. \n"
+		""},
+	 { (char *)"RasterImage_unchecked_read_double", _wrap_RasterImage_unchecked_read_double, METH_VARARGS, (char *)"\n"
+		"virtual double GeoCal::RasterImage::unchecked_read_double(int Line, int Sample) const =0\n"
+		"\n"
 		""},
 	 { (char *)"RasterImage_read_double", _wrap_RasterImage_read_double, METH_VARARGS, (char *)"\n"
 		"blitz::Array< double, 2 > RasterImage::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"

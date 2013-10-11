@@ -348,6 +348,13 @@ class RasterImage(geocal.generic_object.GenericObject):
     def number_tile_sample(self):
         return self._v_number_tile_sample()
 
+    def unchecked_read_double(self, *args):
+        """
+        virtual double GeoCal::RasterImage::unchecked_read_double(int Line, int Sample) const =0
+
+        """
+        return _raster_image.RasterImage_unchecked_read_double(self, *args)
+
     def read_double(self, *args):
         """
         blitz::Array< double, 2 > RasterImage::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
@@ -479,6 +486,7 @@ RasterImage._v_number_line = new_instancemethod(_raster_image.RasterImage__v_num
 RasterImage._v_number_sample = new_instancemethod(_raster_image.RasterImage__v_number_sample,None,RasterImage)
 RasterImage._v_number_tile_line = new_instancemethod(_raster_image.RasterImage__v_number_tile_line,None,RasterImage)
 RasterImage._v_number_tile_sample = new_instancemethod(_raster_image.RasterImage__v_number_tile_sample,None,RasterImage)
+RasterImage.unchecked_read_double = new_instancemethod(_raster_image.RasterImage_unchecked_read_double,None,RasterImage)
 RasterImage.read_double = new_instancemethod(_raster_image.RasterImage_read_double,None,RasterImage)
 RasterImage.read = new_instancemethod(_raster_image.RasterImage_read,None,RasterImage)
 RasterImage.write = new_instancemethod(_raster_image.RasterImage_write,None,RasterImage)

@@ -49,6 +49,7 @@ public:
   %python_attribute(number_tile_line, int)
   %python_attribute(number_tile_sample, int)
   int read(int Line, int Sample) const;
+  double unchecked_read_double(int Line, int Sample) const;
 
   blitz::Array<int, 2>
   read(int Lstart, int Sstart, int Number_line, int Number_sample) 

@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(afids-python, 1.04)
+AC_INIT(afids-python, 1.05)
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([config/m4])
 AC_CONFIG_FILES([afids_python/script/setup_afids_python.csh afids_python/script/setup_afids_python.sh])

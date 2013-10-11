@@ -1,6 +1,6 @@
 Summary: This is the AFIDS python
 Name: afids-python
-Version: 1.04
+Version: 1.05
 Release: 1
 License: Copyright 2013 California Institute of Technology ALL RIGHTS RESERVED
 Group: Applications/Engineering
@@ -46,14 +46,19 @@ rm -rf $RPM_BUILD_ROOT
 /opt/afids/afids/vdev/pair_ortho2.pdf
 /opt/afids/afids/vdev/sample_vicar_python
 /opt/afids/afids/vdev/sample_vicar_python.pdf
+/opt/afids/bin/abachd
+/opt/afids/bin/convert_reflectance
 /opt/afids/bin/dem_generate
+/opt/afids/bin/doughnut_diff
 /opt/afids/bin/gdal_to_erdas
 /opt/afids/bin/gdal_to_nitf
 /opt/afids/bin/gen_geneplot_cmd.py
 /opt/afids/bin/gen_geneplot_cmd.pyc
 /opt/afids/bin/gen_geneplot_cmd.pyo
+/opt/afids/bin/height_to_color
 /opt/afids/bin/igc_project
 /opt/afids/bin/sba
+/opt/afids/bin/shelve_airmspi_igc
 /opt/afids/bin/shelve_dem
 /opt/afids/bin/shelve_dir
 /opt/afids/bin/shelve_igccol
@@ -74,6 +79,10 @@ rm -rf $RPM_BUILD_ROOT
 /opt/afids/setup_afids_python.sh
 
 %changelog
+* Fri Oct 11 2013 Mike M Smyth <smyth@pistol> - 1.05-1
+- ABAChD alpha delivery. Numerous changes, but largest is adding
+  abachd script along with support programs.
+
 * Tue Sep 17 2013 Mike M Smyth <smyth@pistol> - 1.04-1
 - Add pair_ortho2 for Tom, which is like pair_ortho but also generates a DEM.
 

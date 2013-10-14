@@ -186,8 +186,10 @@ class DemGenerate:
             %(self.dem_match.diagnostic[8]))
         log.info("  Solve failed:                 %d" \
             %(self.dem_match.diagnostic[9]))
-        log.info("  Unknown:                      %d" \
+        log.info("  Ray Intersect failed:         %d" \
             %(self.dem_match.diagnostic[10]))
+        log.info("  Unknown:                      %d" \
+            %(self.dem_match.diagnostic[11]))
         return r
 
     def find_intersection(self, ic1, ic2):

@@ -71,7 +71,7 @@ blitz::Array<double, 2> DemMatch::surface_point(const MapInfo& Mi,
 			   success, &diagnosticv);
 	process_match();
       } catch(Exception& E) {
-	E << "Error occurred in Dem Match at surface point (" << i << ", " << j << "), gc: " << *gc;
+	E << "\nError occurred in Dem Match at surface point (" << i << ", " << j << "), gc: " << *gc;
 	throw;
       }
       
@@ -93,17 +93,24 @@ void DemMatch::process_setup() const
 void DemMatch::process_match() const
 {
   if(success) {
-    ri->two_ray_intersect(ic1, ic2, p, dist);
-    all_stat->add(dist);
-    if(dist < max_dist) {
-      good_stat->add(dist);
-      Ecr* ecr = dynamic_cast<Ecr*>(p.get());
-      if(!ecr)
-	throw Exception("Must be Ecr");
-      res.push_back(ecr->convert_to_geodetic());
-      if(include_ic) {
-	ic1v.push_back(ic1);
-	ic2v.push_back(ic2);
+    try {
+      ri->two_ray_intersect(ic1, ic2, p, dist);
+    } catch(...) {
+      success = false;
+      diagnostic_value(RAY_INTERSECT_FAILED) += 1;
+    }
+    if(success) {
+      all_stat->add(dist);
+      if(dist < max_dist) {
+	good_stat->add(dist);
+	Ecr* ecr = dynamic_cast<Ecr*>(p.get());
+	if(!ecr)
+	  throw Exception("Must be Ecr");
+	res.push_back(ecr->convert_to_geodetic());
+	if(include_ic) {
+	  ic1v.push_back(ic1);
+	  ic2v.push_back(ic2);
+	}
       }
     }
   } else {

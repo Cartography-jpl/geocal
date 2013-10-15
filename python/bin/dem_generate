@@ -31,6 +31,15 @@ Options:
   -h --help         
        Print this message
 
+  --average=d
+       If this option is given, then average the ImageGroundConnections 
+       images by the given factor before generating a DEM. This is useful
+       for doing things like AirMPSI cloud DEM generation. Note that you 
+       should make sure the resolution of the DEM makes sense with the given
+       average factor. If you supply surface data, then this is also averaged
+       by the same value (i.e., we assume the surface image is at full
+       resolution).
+     
   --boundary=d
        Number of pixels to add as a boundary when calculating the output
        image coverage. Useful to make sure we completely cover an 
@@ -92,6 +101,17 @@ surface_image2 = None
 if(args.surface_image1):
     surface_image1 = read_shelve(args.surface_image1)
     surface_image2 = read_shelve(args.surface_image2)
+
+# Average data id requested
+if(args.average):
+    igc1 = AveragedImageGroundConnection(igc1, args.average, args.average, True)
+    igc2 = AveragedImageGroundConnection(igc2, args.average, args.average, True)
+    if(surface_image1 is not None):
+        surface_image1 = RasterAveraged(surface_image1, args.average, 
+                                        args.average)
+    if(surface_image2 is not None):
+        surface_image2 = RasterAveraged(surface_image2, args.average, 
+                                        args.average)
 
 # Create the DEM object and save.
 dem = DemGenerateMB(igc1, igc2, midem, 

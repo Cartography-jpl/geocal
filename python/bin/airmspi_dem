@@ -56,9 +56,12 @@ def timing(txt):
     log.info("Delta Time: %f" % (time.time() - tstart2))
     log.info("Total Time: %f" % (time.time() - tstart))
 
-def track_dependency(inp, outp):
-    if(args.use_dependency and
-       shelve_time_after(outp, inp)):
+def track_dependency(outp, *inp):
+    '''Return True if we need to rebuild outp'''
+    if(args.use_dependency):
+        for i in inp:
+            if(not shelve_time_after(outp, i)):
+                return True
         log.info("Skipping generation of %s, it is up to date" % outp)
         return False
     return True
@@ -70,33 +73,34 @@ os.chdir(args.output_dir)
 # 2. Create initial ImageGroundConnections. These are slow, because they
 # are implemented in python
 with timing("Initial ImageGroundConnections"):
-    if track_dependency(img1_name, dbfile + "igc1_slow"):
+    if track_dependency(dbfile + "igc1_slow", img1_name):
         subprocess.check_call(["shelve_airmspi_igc", img1_name, "Image 1",
                                dbfile + "igc1_slow"])
-    if track_dependency(img2_name, dbfile + "igc2_slow"):
+    if track_dependency(dbfile + "igc2_slow", img2_name):
         subprocess.check_call(["shelve_airmspi_igc", img2_name, "Image 2",
                                dbfile + "igc2_slow"])
-    if track_dependency(imgnadir_name, dbfile + "igc_nadir_slow"):
+    if track_dependency(dbfile + "igc_nadir_slow", imgnadir_name):
         subprocess.check_call(["shelve_airmspi_igc", imgnadir_name, 
                                "Nadir Image", dbfile + "igc_nadir_slow"])
 
 # 3. Create RPC approximations
 with timing("RPC approximations"):
-    if track_dependency(dbfile + "igc1_slow", dbfile + "igc1"):
+    if track_dependency(dbfile + "igc1", dbfile + "igc1_slow"):
         subprocess.check_call(["igc_to_rpc", "--rpc-line-fit=0", 
                                "--rpc-sample-fit=0",
                                dbfile + "igc1_slow", dbfile + "igc1"])
-    if track_dependency(dbfile + "igc2_slow", dbfile + "igc2"):
+    if track_dependency(dbfile + "igc2", dbfile + "igc2_slow"):
         subprocess.check_call(["igc_to_rpc", "--rpc-line-fit=0", 
                                "--rpc-sample-fit=0",
                            dbfile + "igc2_slow", dbfile + "igc2"])
-    if track_dependency(dbfile + "igc_nadir_slow", dbfile + "igc_nadir"):
+    if track_dependency(dbfile + "igc_nadir", dbfile + "igc_nadir_slow"):
         subprocess.check_call(["igc_to_rpc", 
                                dbfile + "igc_nadir_slow", dbfile + "igc_nadir"])
 
 # 4. Put into IgcCollection
 with timing("IgcCollection"):
-    if track_dependency(dbfile + "igc1", dbfile + "igc_initial"):
+    if track_dependency(dbfile + "igc_initial", dbfile + "igc1",
+                        dbfile + "igc2", dbfile + "igc_nadir"):
         subprocess.check_call(["shelve_igccol", "--from-shelve",
                                dbfile + "igc_initial", 
                                dbfile + "igc1", dbfile + "igc_nadir",
@@ -104,7 +108,7 @@ with timing("IgcCollection"):
 
 # 5. Collect tiepoints
 with timing("Collect tiepoints"):
-    if track_dependency(dbfile + "igc_initial", dbfile + "tpcol"):
+    if track_dependency(dbfile + "tpcol", dbfile + "igc_initial"):
         subprocess.check_call(["tp_collect", "--max-ground-sigma=300",
                                dbfile + "igc_initial", dbfile + "tpcol"])
 
@@ -117,7 +121,8 @@ with timing("SBA"):
            dbfile + "igc_sba", dbfile + "tpcol_sba"]
     if(args.verbose):
         cmd.append("--verbose")
-    if track_dependency(dbfile + "tpcol", dbfile + "igc_sba"):
+    if track_dependency(dbfile + "igc_sba", dbfile + "tpcol",
+                        dbfile + "igc_initial"):
         subprocess.check_call(cmd)
 
 

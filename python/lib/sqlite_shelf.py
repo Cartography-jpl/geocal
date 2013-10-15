@@ -48,13 +48,20 @@ def read_shelve(f):
 def shelve_time_after(f1, f2):
     '''Compare the update time on 2 shelve objects, return if f1 update time
     >= f2 update time. Note that either f1 or f2 can be files, in which case
-    we use the file modify time instead.'''
+    we use the file modify time instead.
+    It is ok if f1 doesn't exist, in that case always return False. '''
     if(':' in f1):
         fname, key = f1.split(':')
         t = SQLiteShelf(fname, "r")
-        f1time = t.update_time_unix(key)
+        if key in t:
+            f1time = t.update_time_unix(key)
+        else:
+            return False
     else:
-        f1time = os.path.getmtime(f1)
+        if(os.path.exists(f1)):
+            f1time = os.path.getmtime(f1)
+        else:
+            return False
     if(':' in f2):
         fname, key = f2.split(':')
         t = SQLiteShelf(fname, "r")

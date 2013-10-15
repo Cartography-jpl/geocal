@@ -18,6 +18,13 @@ Options:
   -h --help         
        Print this message
 
+  --avg-level=d
+       How much to average the 10 meter to for generating the DEM. For
+       clear scenes you can just do this at full resolution, but for 
+       clouds a value of "3" seems to work well in practice. This is the
+       power of 2 to average the data by, so "3" is 2^3 = 8, meaning we
+       generate 80m pixels. [default: 0]
+
   --image1-index=d
        Index to use for the first image in DEM generation. This is in the
        same order the images are listed on the command line. [default: 0]
@@ -26,6 +33,11 @@ Options:
        Index to use for the second image in DEM generation. This is in the
        same order the images are listed on the command line. [default: 2]
 
+  --max-distance-good-point=f
+       How far apart the intersection of the rays from the conjugate points
+       can be and we still call this is a good match. You will want to raise
+       this number considerable if you are working with clouds, the example
+       we've done showed 80.0 as a good number. [default: 2.0]
 
   --number-process=n
        Number of processors to use. [default: 1]
@@ -52,7 +64,8 @@ tstart = time.time()
 # to change this at some point.
 img1_index = args.image1_index
 img2_index = args.image2_index
-dem_resolution = 10
+average_factor = int(pow(2, args.avg_level))
+dem_resolution = 10 * average_factor
 
 # Get input files
 img1_name = os.path.abspath(args.image_1)
@@ -124,8 +137,11 @@ with timing("IgcCollection"):
 # 5. Collect tiepoints
 with timing("Collect tiepoints"):
     if track_dependency(dbfile + "tpcol", dbfile + "igc_initial"):
-        subprocess.check_call(["tp_collect", "--max-ground-sigma=300",
-                               dbfile + "igc_initial", dbfile + "tpcol"])
+        cmd = ["tp_collect", "--max-ground-sigma=300",
+               dbfile + "igc_initial", dbfile + "tpcol"]
+        if(args.avg_level > 0):
+            cmd.append("--avg-level=%d" % args.avg_level)
+        subprocess.check_call(cmd)
 
 # 6. Run SBA
 # Note really big DEM sigma. We don't actually have functionality in place
@@ -169,10 +185,13 @@ with timing("Generate DEM"):
                         dbfile + "surface_1",
                         dbfile + "surface_2"):
         cmd = ["dem_generate", "--resolution=%f" % dem_resolution,
-               "--max-distance-good-point=2.0",
+               "--max-distance-good-point=%f" % args.max_distance_good_point,
+               "--airmspi-image-match",
                dbfile + "igc_sba", dbfile + "surface_1",
                dbfile + "surface_2", str(img1_index), str(img2_index),
                dbfile + "dem_init"]
+        if(average_factor > 1):
+            cmd.append("--average=%d" % average_factor)
         subprocess.check_call(cmd)
         cmd = ["write_image", "--vicar-type=DOUB", "--no-data-value=-9999",
                nproc, dbfile + "dem_init",

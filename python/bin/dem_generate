@@ -31,6 +31,10 @@ Options:
   -h --help         
        Print this message
 
+  --airmspi-image-match
+       If true, use an image matcher values more tuned for AirMSPI. This
+       relaxes some of the constraints in the Least squares matcher.
+
   --average=d
        If this option is given, then average the ImageGroundConnections 
        images by the given factor before generating a DEM. This is useful
@@ -113,8 +117,15 @@ if(args.average):
         surface_image2 = RasterAveraged(surface_image2, args.average, 
                                         args.average)
 
+# Set up image matcher
+if(args.airmspi_image_match):
+    im = CcorrLsmMatcher(CcorrMatcher(), LsmMatcher(11, 11, 5, 0.3, 0.5, 2.0))
+else:
+    im = CcorrLsmMatcher()
+
 # Create the DEM object and save.
 dem = DemGenerateMB(igc1, igc2, midem, 
+                    image_matcher = im,
                     interpolate_method = args.interpolation_method,
                     buffer_size = args.buffer,
                     surface_image1 = surface_image1,

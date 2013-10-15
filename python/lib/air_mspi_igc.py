@@ -17,7 +17,14 @@ class AirMspiIgc(ImageGroundConnection):
         self.group_name = group_name
         # Read in the full image mask, to figure out how we will subset
         # the rest of the data.
-        self.gdal_base = "HDF4_EOS:EOS_GRID:%s:%s:" % (fname, group_name)
+
+        # There are 2 formats, HDF 4 and HDF 5. We try 4 first, and if
+        # it fails we then try the HDF 5 format. We can tell which by
+        # using our HdfFile.is_hdf, which returns True only for HDF 5 files. 
+        if(HdfFile.is_hdf(fname)):
+            self.gdal_base = "HDF5:\"%s\"://HDFEOS/GRIDS/%s/Data_Fields/" % (fname, group_name)
+        else:
+            self.gdal_base = "HDF4_EOS:EOS_GRID:%s:%s:" % (fname, group_name)
         im = ImageMaskImage(GdalRasterImage(self.gdal_base + "I.mask"))
         self.bounding_box = im.unmasked_bounding_box()
         # Now read in the reset of the data

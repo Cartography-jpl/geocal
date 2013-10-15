@@ -1,6 +1,7 @@
 from nose.tools import *
 from sqlite_shelf import *
 import os
+import time
 
 def test_sqlite_shelf():
     try:
@@ -10,6 +11,7 @@ def test_sqlite_shelf():
     
     d = SQLiteShelf("sqlite_shelf.db")
     d["value1"] = 1
+    time.sleep(0.1)
     d["value2"] = [1, 2, 3, "blah"]
     d["value3"] = 3
     d["value3"] = 4
@@ -22,7 +24,13 @@ def test_sqlite_shelf():
     assert d["value3"] == 4
     assert_raises(KeyError, d.__getitem__, "value4")
     assert_raises(RuntimeError, d.__setitem__, "value4", 1)
-
+    # This should be close to 0.1 seconds. But don't depend on that for
+    # a test, instead just say we are ordered
+    #print d.update_time_unix("value2") - d.update_time_unix("value1")
+    assert d.update_time_julian("value2") > d.update_time_julian("value1")
+    assert shelve_time_after("sqlite_shelf.db:value2",
+                             "sqlite_shelf.db:value1")
+    assert shelve_time_after("sqlite_shelf.db", "sqlite_shelf.db:value1")
 
 def test_read_write_shelf():
     try:

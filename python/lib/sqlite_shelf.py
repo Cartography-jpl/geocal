@@ -11,6 +11,7 @@
 import UserDict
 import pickle
 import sqlite3
+import os.path
 
 def to_db_type(value):
     """If value's type is supported natively in SQLite, return value.
@@ -44,6 +45,25 @@ def read_shelve(f):
         exec(t["_extra_python_init"])
     return t[key]
 
+def shelve_time_after(f1, f2):
+    '''Compare the update time on 2 shelve objects, return if f1 update time
+    >= f2 update time. Note that either f1 or f2 can be files, in which case
+    we use the file modify time instead.'''
+    if(':' in f1):
+        fname, key = f1.split(':')
+        t = SQLiteShelf(fname, "r")
+        f1time = t.update_time_unix(key)
+    else:
+        f1time = os.path.getmtime(f1)
+    if(':' in f2):
+        fname, key = f2.split(':')
+        t = SQLiteShelf(fname, "r")
+        f2time = t.update_time_unix(key)
+    else:
+        f2time = os.path.getmtime(f2)
+    return f1time >= f2time
+        
+
 def write_shelve(f, val):
     '''This handles writing a value to a shelve file, possibly creating the
     file is it doesn't exist. The string f should be of the form
@@ -62,7 +82,7 @@ class SQLiteShelf(UserDict.DictMixin):
         '''
         self._database = sqlite3.connect(filename)
         self._database.execute("CREATE TABLE IF NOT EXISTS Shelf "
-                               "(Key TEXT PRIMARY KEY NOT NULL, Value BLOB)")
+                               "(Key TEXT PRIMARY KEY NOT NULL, Value BLOB, Updated datetime)")
         self._open = True
         self._read_only = (mode == "r")
 
@@ -77,10 +97,33 @@ class SQLiteShelf(UserDict.DictMixin):
         else:
             raise KeyError(key)
 
+    def update_time(self, key):
+        '''Return updated time as a string.'''
+        row = self._database.execute("SELECT Updated FROM Shelf WHERE Key=?",
+                                     [key]).fetchone()
+        if row:
+            return from_db_type(row[0])
+        else:
+            raise KeyError(key)
+
+    def update_time_julian(self, key):
+        '''Return updated time as Julian day, including fraction'''
+        row = self._database.execute("SELECT julianday(Updated) FROM Shelf WHERE Key=?",
+                                     [key]).fetchone()
+        if row:
+            return from_db_type(row[0])
+        else:
+            raise KeyError(key)
+
+    def update_time_unix(self, key):
+        '''Return updated time as unix time, including fraction'''
+        # Unix epoch in Julian days is 2440587.5
+        return (self.update_time_julian(key) - 2440587.5) * 86400.0
+
     def __setitem__(self, key, value):
         if(self._read_only):
             raise RuntimeError("Attempt to write to read only shelve.")
-        self._database.execute("INSERT OR REPLACE INTO Shelf VALUES (?, ?)",
+        self._database.execute("INSERT OR REPLACE INTO Shelf VALUES (?, ?, strftime('%Y-%m-%d %H:%M:%f', 'now'))",
                                [key, to_db_type(value)])
 
     def __delitem__(self, key):

@@ -1,0 +1,102 @@
+#! /usr/bin/env python
+from afids import *
+import os
+import logging
+import time
+
+version = "October 15, 2013"
+usage='''Usage:
+  airmspi_dem [options] <image_1> <image_nadir> <image_2> <output_dir>
+  airmspi_dem  -h | --help
+  airmspi_dem  -v | --version
+
+This generates a AirMSPI DEM. It takes a pair of images (in Level 2 HDF 
+format), along with a nadir image. The results are placed in a given output
+directory (which is created if it doesn't already exist).
+
+Options:
+  -h --help         
+       Print this message
+
+  --number-process=n
+       Number of processors to use. [default: 1]
+
+  --verbose
+       Print more information as we run.
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+if(args.verbose):
+    logging.basicConfig(level = logging.INFO)
+log = logging.getLogger("airmspi_dem")
+tstart = time.time()
+
+# Get input files
+img1_name = os.path.abspath(args.image_1)
+img2_name = os.path.abspath(args.image_2)
+imgnadir_name = os.path.abspath(args.image_nadir)
+
+# Few things that appear often enough that it is worth stashing.
+dbfile = "airmspi_dem.db:"
+nproc = "--number-process=%d" % args.number_process
+
+@contextmanager
+def timing(txt):
+    log.info(txt)
+    tstart2 = time.time()
+    yield
+    log.info("Delta Time: %f" % (time.time() - tstart2))
+    log.info("Total Time: %f" % (time.time() - tstart))
+
+# 1. Create the output directory, if it doesn't already exist.
+subprocess.check_call(["mkdir", "-p", args.output_dir])
+os.chdir(args.output_dir)
+
+# 2. Create initial ImageGroundConnections. These are slow, because they
+# are implemented in python
+with timing("Initial ImageGroundConnections"):
+    subprocess.check_call(["shelve_airmspi_igc", img1_name, "Image 1",
+                           dbfile + "igc1_slow"])
+    subprocess.check_call(["shelve_airmspi_igc", img2_name, "Image 2",
+                           dbfile + "igc2_slow"])
+    subprocess.check_call(["shelve_airmspi_igc", imgnadir_name, "Nadir Image",
+                           dbfile + "igc_nadir_slow"])
+
+# 3. Create RPC approximations
+with timing("RPC approximations"):
+    subprocess.check_call(["igc_to_rpc", "--rpc-line-fit=0", 
+                           "--rpc-sample-fit=0",
+                           dbfile + "igc1_slow", dbfile + "igc1"])
+    subprocess.check_call(["igc_to_rpc", "--rpc-line-fit=0", 
+                           "--rpc-sample-fit=0",
+                           dbfile + "igc2_slow", dbfile + "igc2"])
+    subprocess.check_call(["igc_to_rpc", 
+                           dbfile + "igc_nadir_slow", dbfile + "igc_nadir"])
+
+# 4. Put into IgcCollection
+with timing("IgcCollection"):
+    subprocess.check_call(["shelve_igccol", "--from-shelve",
+                           dbfile + "igc_initial", 
+                           dbfile + "igc1", dbfile + "igc_nadir",
+                           dbfile + "igc2"])
+
+# 5. Collect tiepoints
+with timing("Collect tiepoints"):
+    subprocess.check_call(["tp_collect", "--max-ground-shelve=300",
+                           dbfile + "igc_initial", dbfile + "tpcol"])
+
+# Run SBA
+# Note really big DEM sigma. We don't actually have functionality in place
+# to skip the surface constraint, but the essientially reduces the weight of
+# it to almost 0
+with timing("SBA"):
+    cmd = ["sba","--dem-sigma=10000", dbfile + "igc_initial", dbfile + "tpcol",
+           dbfile + "igc_sba", dbfile + "tpcol_sba"]
+    if(args.verbose):
+        cmd.append("--verbose")
+    subprocess.check_call(cmd)
+
+

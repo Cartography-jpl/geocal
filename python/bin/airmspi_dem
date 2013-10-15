@@ -18,6 +18,15 @@ Options:
   -h --help         
        Print this message
 
+  --image1-index=d
+       Index to use for the first image in DEM generation. This is in the
+       same order the images are listed on the command line. [default: 0]
+
+  --image2-index=d
+       Index to use for the second image in DEM generation. This is in the
+       same order the images are listed on the command line. [default: 2]
+
+
   --number-process=n
        Number of processors to use. [default: 1]
 
@@ -38,6 +47,12 @@ if(args.verbose):
     logging.basicConfig(level = logging.INFO)
 log = logging.getLogger("airmspi_dem")
 tstart = time.time()
+
+# Right now this is hardcoded. We have this called out, in case we want 
+# to change this at some point.
+img1_index = args.image1_index
+img2_index = args.image2_index
+dem_resolution = 10
 
 # Get input files
 img1_name = os.path.abspath(args.image_1)
@@ -112,7 +127,7 @@ with timing("Collect tiepoints"):
         subprocess.check_call(["tp_collect", "--max-ground-sigma=300",
                                dbfile + "igc_initial", dbfile + "tpcol"])
 
-# Run SBA
+# 6. Run SBA
 # Note really big DEM sigma. We don't actually have functionality in place
 # to skip the surface constraint, but the essientially reduces the weight of
 # it to almost 0
@@ -124,5 +139,51 @@ with timing("SBA"):
     if track_dependency(dbfile + "igc_sba", dbfile + "tpcol",
                         dbfile + "igc_initial"):
         subprocess.check_call(cmd)
+
+# 7. Project to surface. Note parallel writing doesn't work here, there
+# is a bug we haven't tracked down yet in using HDF/GDAL files as input
+# for parallel runs.
+with timing("Project to surface"):
+    if track_dependency(dbfile + "surface_1", dbfile + "igc_sba"):
+        subprocess.check_call(["igc_project", "--grid-spacing=10",
+                               "--resolution=10", dbfile + "igc_sba",
+                               str(img1_index), dbfile + "surface_1_init"])
+        subprocess.check_call(["write_image", dbfile + "surface_1_init",
+                              "img1_surf.img"])
+        subprocess.check_call(["shelve_image", "img1_surf.img", 
+                               dbfile + "surface_1"])
+    if track_dependency(dbfile + "surface_2", dbfile + "surface_1",
+                        dbfile + "igc_sba"):
+        subprocess.check_call(["igc_project", "--grid-spacing=10",
+                               "--map-info=" + dbfile + "surface_1", 
+                               dbfile + "igc_sba",
+                               str(img2_index), dbfile + "surface_2_init"])
+        subprocess.check_call(["write_image", dbfile + "surface_2_init",
+                              "img2_surf.img"])
+        subprocess.check_call(["shelve_image", "img2_surf.img", 
+                               dbfile + "surface_2"])
+
+# 8. Generate DEM
+with timing("Generate DEM"):
+    if track_dependency(dbfile + "dem", dbfile + "igc_sba", 
+                        dbfile + "surface_1",
+                        dbfile + "surface_2"):
+        cmd = ["dem_generate", "--resolution=%f" % dem_resolution,
+               "--max-distance-good-point=2.0",
+               dbfile + "igc_sba", dbfile + "surface_1",
+               dbfile + "surface_2", str(img1_index), str(img2_index),
+               dbfile + "dem_init"]
+        subprocess.check_call(cmd)
+        cmd = ["write_image", "--vicar-type=DOUB", "--no-data-value=-9999",
+               nproc, dbfile + "dem_init",
+               "dem_generated_%dm_nofill.img" % dem_resolution,
+               "dem_generated_%dm.img" % dem_resolution]
+        if(args.verbose):
+            cmd.append("--verbose")
+        subprocess.check_call(cmd)
+        subprocess.check_call(["shelve_dem", 
+                               "dem_generated_%dm.img" % dem_resolution,
+                               dbfile + "dem"])
+
 
 

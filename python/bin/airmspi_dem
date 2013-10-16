@@ -204,12 +204,12 @@ with timing("Generate DEM"):
                                "dem_generated_%dm.img" % dem_resolution,
                                dbfile + "dem"])
 # 9. Convert to tiff
-subprocess.check_call("gdal_translate", "-q",
-                      "dem_generated_%dm.img" % dem_resolution,
-                      "dem_generated_%dm.tif" % dem_resolution)
-subprocess.check_call("gdal_translate", "-q",
-                      "dem_generated_%dm_nofill.img" % dem_resolution,
-                      "dem_generated_%dm_nofill.tif" % dem_resolution)
+subprocess.check_call(["gdal_translate", "-q",
+                       "dem_generated_%dm.img" % dem_resolution,
+                       "dem_generated_%dm.tif" % dem_resolution])
+subprocess.check_call(["gdal_translate", "-q",
+                       "dem_generated_%dm_nofill.img" % dem_resolution,
+                       "dem_generated_%dm_nofill.tif" % dem_resolution])
 
 
 

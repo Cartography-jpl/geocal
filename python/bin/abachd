@@ -57,6 +57,10 @@ Options:
        panchromatic image. However, in some cases we might not have that 
        data.
 
+  --resolution=f
+       The resolution of the final images (note intermediate files may be
+       at a different resolution. [default: 0.8]
+
   --subset  start_line start_sample number_line number_sample
        Subset the pre_pan raw image, and the subset the post image to match
        the ground location of the pre_pan image.
@@ -212,7 +216,7 @@ with timing("Final orthorectification image 1"):
     # We'll want to come back to this, but for now just use same size as
     # with the initial images.
     subprocess.check_call(["igc_project", 
-                           # "--resolution=0.5", 
+                           "--resolution=%f" % args.resolution, 
                            "--bounding-box=" + dbfile + ":dem_generate_filled",
                            dbfile + ":igc_sba",
                            "--dem=" + dbfile + ":dem_generate_filled",

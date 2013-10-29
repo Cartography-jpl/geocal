@@ -57,6 +57,8 @@ public:
 //-----------------------------------------------------------------------
 
   const boost::shared_ptr<GDALDataset>& data_set() const {return gd;}
+  virtual void print(std::ostream& Os) const;
+  
 private:
   boost::shared_ptr<GDALDataset> gd;
 };

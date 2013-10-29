@@ -4,7 +4,7 @@
 
 from afids import *
 
-version = "February 4, 2013"
+version = "October 29, 2013"
 usage='''Usage: 
   shelve_image [options] <image> <output>
   shelve_image [options] --subset <start_line> <start_sample>
@@ -31,6 +31,9 @@ Options:
        This should be in a "file:key" format. This might be useful if
        you use further options such as --subset.
 
+  --multi-band
+        Specify this is the image is actually multiple bands.  
+
   --scale=f
         Scale the data by the given factor.
 
@@ -45,6 +48,8 @@ args = docopt_simple(usage, version=version)
 
 if(args.from_shelve):
     img = read_shelve(args.image)
+elif(args.multi_band):
+    img = GdalMultiBand(args.image)
 elif VicarFile.is_vicar_file(args.image):
     # -1 in band is because VicarLiteRasterImage uses 0-based band, rather
     # than 1-based we use in this program.
@@ -53,13 +58,23 @@ elif VicarFile.is_vicar_file(args.image):
 else:
     img = GdalRasterImage(args.image, args.band)
 if(args.start_line):
-    img = SubRasterImage(img, args.start_line, args.start_sample,
-                         args.number_line, args.number_sample)
+    if(isinstance(img, RasterImageMultiBand)):
+        img = SubRasterImageMultiBand(img, args.start_line, args.start_sample,
+                                      args.number_line, args.number_sample)
+    else:
+        img = SubRasterImage(img, args.start_line, args.start_sample,
+                             args.number_line, args.number_sample)
 
 if(args.average):
-    img = RasterAveraged(img, args.average, args.average)
+    if(isinstance(img, RasterImageMultiBand)):
+        raise RuntimeError("We don't support averaging yet for RasterImageMultiBand")
+    else:
+        img = RasterAveraged(img, args.average, args.average)
 if(args.scale):
-    img = ScaleImage(img, args.scale)
+    if(isinstance(img, RasterImageMultiBand)):
+        img = ScaleImageMultiBand(img, args.scale)
+    else:
+        img = ScaleImage(img, args.scale)
 
 write_shelve(args.output, img)
 

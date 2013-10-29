@@ -7,7 +7,7 @@ import time
 from contextlib import contextmanager
 import glob
 
-version = "September 25, 2013"
+version = "October 29, 2013"
 usage='''Usage:
   abachd [options] <pre_pan> <post_pan> <post_ms> <output>
   abachd [options] --pre-ms <pre_pan> <pre_ms> <post_pan> <output>
@@ -59,7 +59,7 @@ Options:
 
   --resolution=f
        The resolution of the final images (note intermediate files may be
-       at a different resolution. [default: 0.8]
+       at a different resolution. [default: 0.5]
 
   --subset  start_line start_sample number_line number_sample
        Subset the pre_pan raw image, and the subset the post image to match
@@ -83,19 +83,29 @@ tstart = time.time()
 # use symbolic links to collect data together, and the IMD file going with a
 # nitf file may appear in the same directory, but be links to separate directories. 
 pre_pan_raw = os.path.abspath(args.pre_pan)
+if(args.pre_ms):
+    pre_ms_raw = os.path.abspath(args.pre_ms)
+else:
+    pre_ms_raw = None
 post_pan_raw = os.path.abspath(args.post_pan)
+if(args.post_ms):
+    post_ms_raw = os.path.abspath(args.post_ms)
+else:
+    post_ms_raw = None
 
 # Few things that appear often enough that it is worth stashing.
 dbfile = "end_to_end.db"
 nproc = "--number-process=%d" % args.number_process
 
 # A few helper functions
-def shelve_image(fname, name, subset = None):
+def shelve_image(fname, name, subset = None, multi_band = False):
     cmd = ["shelve_image"] 
     if(subset is not None):
         cmd.append("--subset")
         for i in subset:
             cmd.append(str(i))
+    if(multi_band):
+        cmd.append("--multi-band")
     cmd.append(fname)
     cmd.append(dbfile + ":" + name)
     subprocess.check_call(cmd)
@@ -114,6 +124,23 @@ def timing(txt):
     log.info("Delta Time: %f" % (time.time() - tstart2))
     log.info("Total Time: %f" % (time.time() - tstart))
 
+def determine_subset(fname):
+    subset = None
+    if(args.start_line):
+        dem = read_shelve(dbfile + ":dem_initial")
+        igc1 = VicarImageGroundConnection("pre_pan.img", dem)
+        igc2 = GdalImageGroundConnection(fname, dem)
+        ulc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(0, 0)))
+        lrc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(igc1.number_line, igc1.number_sample)))
+        sl = max(int(floor(ulc.line)), 0)
+        ss = max(int(floor(ulc.sample)), 0)
+        el = min(int(ceil(lrc.line)), igc2.number_line - 1)
+        es = min(int(ceil(lrc.sample)), igc2.number_sample - 1)
+        igc1 = None
+        igc2 = None
+        subset = [sl, ss, el - sl + 1, es - ss + 1]
+    return subset
+
 def import_image(fname, name, subset = None):
     shelve_image(fname, "%s_raw" % name, subset = subset)
     with timing("Importing %s image" % name):
@@ -122,6 +149,24 @@ def import_image(fname, name, subset = None):
                                "--process-number-sample=2048",
                                nproc, dbfile + ":%s_raw" % name, name + ".img"])
     shelve_image(name + ".img", name)
+
+def import_ms_image(fname, name, subset = None):
+    shelve_image(fname, "%s_raw" % name, subset = subset, 
+                 multi_band = True)
+    with timing("Importing %s image" % name):
+        subprocess.check_call(["write_image", 
+                               "--process-number-line=2048",
+                               "--process-number-sample=2048",
+                               nproc, dbfile + ":%s_raw" % name, 
+                               name + "_b1.img",
+                               name + "_b2.img",
+                               name + "_b3.img",
+                               name + "_b4.img",
+                               name + "_b5.img",
+                               name + "_b6.img",
+                               name + "_b7.img",
+                               name + "_b8.img"])
+    shelve_image(name + "_b1:8.img", name, multi_band = True)
 
 def dem_generate():
     with timing("DEM generation"):
@@ -157,20 +202,12 @@ if(args.start_line):
     subset = [args.start_line, args.start_sample, args.number_line,
               args.number_sample]
 import_image(pre_pan_raw, "pre_pan", subset = subset)
-if(args.start_line):
-    dem = read_shelve(dbfile + ":dem_initial")
-    igc1 = VicarImageGroundConnection("pre_pan.img", dem)
-    igc2 = GdalImageGroundConnection(post_pan_raw, dem)
-    ulc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(0, 0)))
-    lrc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(igc1.number_line, igc1.number_sample)))
-    sl = max(int(floor(ulc.line)), 0)
-    ss = max(int(floor(ulc.sample)), 0)
-    el = min(int(ceil(lrc.line)), igc2.number_line - 1)
-    es = min(int(ceil(lrc.sample)), igc2.number_sample - 1)
-    igc1 = None
-    igc2 = None
-    subset = [sl, ss, el - sl + 1, es - ss + 1]
-import_image(post_pan_raw, "post_pan", subset = subset)
+if(pre_ms_raw):
+    import_ms_image(pre_ms_raw, "pre_ms", subset = determine_subset(pre_ms_raw))
+import_image(post_pan_raw, "post_pan", subset = determine_subset(post_pan_raw))
+if(post_ms_raw):
+    import_ms_image(post_ms_raw, "post_ms", 
+                   subset = determine_subset(post_ms_raw))
 
 # 4. Create initial igccol
 subprocess.check_call(["shelve_igccol", "--rpc-line-fit=0",

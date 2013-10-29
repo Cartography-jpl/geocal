@@ -148,3 +148,9 @@ void GdalMultiBand::close() const
       b->close();
   }
 }
+
+void GdalMultiBand::print(std::ostream& Os) const 
+{ 
+  Os << "GdalMultiBand\n"
+     << "  Filename: " << gdal_raster_image(0)->file_names()[0] << "\n";
+}

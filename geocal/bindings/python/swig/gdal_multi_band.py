@@ -192,6 +192,13 @@ class GdalMultiBand(geocal.raster_image_multi_band_variable.RasterImageMultiBand
         """
         return _gdal_multi_band.GdalMultiBand_close(self)
 
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.gdal_raster_image(0).file_names[0],self.gdal_raster_image(0).number_tile,self.gdal_raster_image(0).number_tile_line,self.gdal_raster_image(0).number_tile_sample)
+
     __swig_destroy__ = _gdal_multi_band.delete_GdalMultiBand
 GdalMultiBand.set_rpc = new_instancemethod(_gdal_multi_band.GdalMultiBand_set_rpc,None,GdalMultiBand)
 GdalMultiBand.set_map_info = new_instancemethod(_gdal_multi_band.GdalMultiBand_set_map_info,None,GdalMultiBand)

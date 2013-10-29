@@ -156,3 +156,22 @@ std::vector<std::string> OffsetImageGroundConnection::parameter_name() const
 }
 
 
+void ImageGroundConnectionCopy::print(std::ostream& Os) const
+{
+  Os << "ImageGroundConnectionCopy:\n"
+     << "Underlying Igc:\n"
+     << *igc_original() << "\n"
+     << "Dem:\n"
+     << dem() << "\n";
+  if(image())
+    Os << "Image:\n"
+       << *image() << "\n";
+  if(image_multi_band())
+    Os << "Image multi-band:\n"
+       << *image_multi_band() << "\n";
+  Os << "Title: " << title() << "\n"
+     << "Image mask:\n"
+     << *image_mask() << "\n"
+     << "Ground mask:\n"
+     << *ground_mask() << "\n";
+}

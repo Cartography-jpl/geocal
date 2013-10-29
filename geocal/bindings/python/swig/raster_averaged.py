@@ -257,6 +257,13 @@ class ImageMaskAveraged(geocal.image_mask.ImageMask):
     def number_sample_per_pixel(self):
         return self._v_number_sample_per_pixel()
 
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.high_resolution_image_mask,self.number_line_per_pixel,self.number_sample_per_pixel)
+
     __swig_destroy__ = _raster_averaged.delete_ImageMaskAveraged
 ImageMaskAveraged._v_high_resolution_image_mask = new_instancemethod(_raster_averaged.ImageMaskAveraged__v_high_resolution_image_mask,None,ImageMaskAveraged)
 ImageMaskAveraged._v_number_line_per_pixel = new_instancemethod(_raster_averaged.ImageMaskAveraged__v_number_line_per_pixel,None,ImageMaskAveraged)

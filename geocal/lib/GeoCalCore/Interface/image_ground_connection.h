@@ -492,6 +492,7 @@ public:
   { igc->parameter(Parm); }
   virtual std::vector<std::string> parameter_name() const
   { return igc->parameter_name(); }
+  virtual void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<ImageGroundConnection> igc;
 };

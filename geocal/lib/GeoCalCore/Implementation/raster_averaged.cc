@@ -129,7 +129,7 @@ bool ImageMaskAveraged::area_any_masked
 
 void ImageMaskAveraged::print(std::ostream& Os) const
 {
-  Os << "ImageMaskrAverage:\n"
+  Os << "ImageMaskAverage:\n"
      << "  Number line per pixel: " << number_line_per_pixel() << "\n"
      << "  Number sample per pixel: " << number_sample_per_pixel() << "\n"
      << "  ImageMask: " << high_resolution_image_mask() << "\n";

@@ -49,5 +49,9 @@ public:
   const boost::shared_ptr<GDALDataset>& data_set() const;
   void flush() const;
   void close() const;
+  %pickle_init(1, self.gdal_raster_image(0).file_names[0], 
+	       self.gdal_raster_image(0).number_tile, 
+	       self.gdal_raster_image(0).number_tile_line, 
+	       self.gdal_raster_image(0).number_tile_sample)
 };
 }

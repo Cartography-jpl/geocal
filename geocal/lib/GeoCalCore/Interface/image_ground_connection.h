@@ -6,6 +6,8 @@
 #include "printable.h"
 #include "ecr.h"
 #include "raster_image.h"
+#include "raster_image_multi_band.h"
+#include "raster_image_multi_band_variable.h"
 #include "ground_mask.h"
 #include "image_mask.h"
 #include <blitz/array.h>
@@ -120,12 +122,22 @@ public:
 			const Dem& D) const = 0;
 
 //-----------------------------------------------------------------------
-/// Underlying image.
+/// Underlying image (if present)
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<RasterImage> image() const {return image_;}
   virtual void image(const boost::shared_ptr<RasterImage>& Img) 
   {image_ = Img;}
+
+//-----------------------------------------------------------------------
+/// Underlying RasterImageMultiBand (if present)
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<RasterImageMultiBand> 
+  image_multi_band() const {return image_mb_;}
+  virtual void image_multi_band
+  (const boost::shared_ptr<RasterImageMultiBand>& Img_mb) 
+  {image_mb_ = Img_mb;}
 
 //-----------------------------------------------------------------------
 /// Mask to apply to image.
@@ -190,13 +202,40 @@ public:
 /// Return number of lines in underlying image.
 //-----------------------------------------------------------------------
 
-  virtual int number_line() const {return image()->number_line();}
+  virtual int number_line() const 
+  {
+    if(image())
+      return image()->number_line();
+    if(image_multi_band())
+      return image_multi_band()->raster_image(0).number_line();
+    return 0;
+  }
 
 //-----------------------------------------------------------------------
 /// Return number of samples in underlying image.
 //-----------------------------------------------------------------------
 
-  virtual int number_sample() const { return image()->number_sample();}
+  virtual int number_sample() const
+  {
+    if(image())
+      return image()->number_sample();
+    if(image_multi_band())
+      return image_multi_band()->raster_image(0).number_sample();
+    return 0;
+  }
+
+//-----------------------------------------------------------------------
+/// Return number of bands.
+//-----------------------------------------------------------------------
+
+  virtual int number_band() const 
+  {
+    if(image())
+      return 1;
+    if(image_multi_band())
+      return image_multi_band()->number_band();
+    return 0;
+  }
 
 //-----------------------------------------------------------------------
 /// A image to ground connection may depend on a set of parameters,
@@ -259,6 +298,7 @@ public:
 protected:
   ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
 			const boost::shared_ptr<RasterImage>& Img, 
+			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
 			const std::string& Title,
 			const boost::shared_ptr<ImageMask>& Img_mask = 
 			boost::shared_ptr<ImageMask>(),
@@ -267,8 +307,12 @@ protected:
   ImageGroundConnection() {}
   /// DEM to use, should be set by constructor.
   boost::shared_ptr<Dem> dem_;
-  /// Raster image to use, should be set by constructor.
+  /// Raster image to use, should be set by constructor. This might be
+  /// null, indicating we have no image.
   boost::shared_ptr<RasterImage> image_;
+  /// Raster image multiband to use, should be set by constructor. 
+  /// This might be null, indicating we have no image.
+  boost::shared_ptr<RasterImageMultiBand> image_mb_;
   /// Title of image to use, should be set by constructor.
   std::string title_;
   /// Image mask to use, should be set by constructor (can set to
@@ -296,6 +340,7 @@ public:
    double Line_offset, double Sample_offset)
     :  ImageGroundConnection(Ig_original->dem_ptr(),
 			     Ig_original->image(),
+			     Ig_original->image_multi_band(),
 			     Ig_original->title(),
 			     Ig_original->image_mask(),
 			     Ig_original->ground_mask()),
@@ -398,7 +443,8 @@ class ImageGroundConnectionCopy: public ImageGroundConnection
 public:
   ImageGroundConnectionCopy
   (const boost::shared_ptr<ImageGroundConnection>& Igc)
-    : ImageGroundConnection(Igc->dem_ptr(), Igc->image(), 
+    : ImageGroundConnection(Igc->dem_ptr(), Igc->image(),
+			    Igc->image_multi_band(),
 			    Igc->title(), Igc->image_mask(), 
 			    Igc->ground_mask()),
       igc(Igc)

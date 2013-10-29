@@ -252,6 +252,21 @@ class ImageGroundConnection(geocal.generic_object.GenericObject):
     def image(self, value):
       self._v_image(value)
 
+    def _v_image_multi_band(self, *args):
+        """
+        virtual void GeoCal::ImageGroundConnection::image_multi_band(const boost::shared_ptr< RasterImageMultiBand > &Img_mb)
+
+        """
+        return _image_ground_connection.ImageGroundConnection__v_image_multi_band(self, *args)
+
+    @property
+    def image_multi_band(self):
+        return self._v_image_multi_band()
+
+    @image_multi_band.setter
+    def image_multi_band(self, value):
+      self._v_image_multi_band(value)
+
     def _v_image_mask(self, *args):
         """
         virtual void GeoCal::ImageGroundConnection::image_mask(const boost::shared_ptr< ImageMask > &Image_mask)
@@ -303,6 +318,17 @@ class ImageGroundConnection(geocal.generic_object.GenericObject):
     @property
     def number_sample(self):
         return self._v_number_sample()
+
+    def _v_number_band(self):
+        """
+        virtual int GeoCal::ImageGroundConnection::number_band() const
+        Return number of bands. 
+        """
+        return _image_ground_connection.ImageGroundConnection__v_number_band(self)
+
+    @property
+    def number_band(self):
+        return self._v_number_band()
 
     def _v_title(self, *args):
         """
@@ -399,10 +425,12 @@ ImageGroundConnection.image_coordinate_jac_ecr = new_instancemethod(_image_groun
 ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm,None,ImageGroundConnection)
 ImageGroundConnection.cover = new_instancemethod(_image_ground_connection.ImageGroundConnection_cover,None,ImageGroundConnection)
 ImageGroundConnection._v_image = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image,None,ImageGroundConnection)
+ImageGroundConnection._v_image_multi_band = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image_multi_band,None,ImageGroundConnection)
 ImageGroundConnection._v_image_mask = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image_mask,None,ImageGroundConnection)
 ImageGroundConnection._v_ground_mask = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_ground_mask,None,ImageGroundConnection)
 ImageGroundConnection._v_number_line = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_number_line,None,ImageGroundConnection)
 ImageGroundConnection._v_number_sample = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_number_sample,None,ImageGroundConnection)
+ImageGroundConnection._v_number_band = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_number_band,None,ImageGroundConnection)
 ImageGroundConnection._v_title = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_title,None,ImageGroundConnection)
 ImageGroundConnection.__str__ = new_instancemethod(_image_ground_connection.ImageGroundConnection___str__,None,ImageGroundConnection)
 ImageGroundConnection._v_parameter = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter,None,ImageGroundConnection)

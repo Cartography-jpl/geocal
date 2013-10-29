@@ -78,6 +78,7 @@ class ImageGroundConnectionIgc(ImageGroundConnection, WithParameter):
     def __init__(self, igc_collection, image_index):
         ImageGroundConnection.__init__(self, igc_collection.dem(image_index),
                                        igc_collection.image(image_index),
+                                       None,
                                        igc_collection.image_title(image_index))
         self.igc_collection = igc_collection
         self.image_index = image_index

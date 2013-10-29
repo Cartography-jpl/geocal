@@ -29,6 +29,45 @@ public:
 			   const boost::shared_ptr<GroundMask>& Ground_mask,
 			   bool Fit_height_offset = false
 			   );
+  RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
+			   const boost::shared_ptr<RasterImageMultiBand>& 
+			   Img_mb,
+			   const std::string& Title = "Image");
+  RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
+			   const boost::shared_ptr<RasterImageMultiBand>& 
+			   Img_mb,
+			   const std::string& Title,
+			   const boost::shared_ptr<ImageMask>& Img_mask
+			   );
+  RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
+			   const boost::shared_ptr<RasterImageMultiBand>& 
+			   Img_mb,
+			   const std::string& Title,
+			   const boost::shared_ptr<ImageMask>& Img_mask,
+			   const boost::shared_ptr<GroundMask>& Ground_mask,
+			   bool Fit_height_offset = false
+			   );
+  RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
+			   const boost::shared_ptr<RasterImage>& Img,
+			   const boost::shared_ptr<RasterImageMultiBand>& 
+			   Img_mb,
+			   const std::string& Title = "Image");
+  RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
+			   const boost::shared_ptr<RasterImage>& Img,
+			   const boost::shared_ptr<RasterImageMultiBand>& 
+			   Img_mb,
+			   const std::string& Title,
+			   const boost::shared_ptr<ImageMask>& Img_mask
+			   );
+  RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
+			   const boost::shared_ptr<RasterImage>& Img,
+			   const boost::shared_ptr<RasterImageMultiBand>& 
+			   Img_mb,
+			   const std::string& Title,
+			   const boost::shared_ptr<ImageMask>& Img_mask,
+			   const boost::shared_ptr<GroundMask>& Ground_mask,
+			   bool Fit_height_offset = false
+			   );
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& OUTPUT,
 		 boost::shared_ptr<CartesianFixed>& OUTPUT) const;
@@ -38,7 +77,8 @@ public:
     const;
   %python_attribute2(rpc, rpc_ptr, boost::shared_ptr<Rpc>)
   %python_attribute_with_set(fit_height_offset, bool)
-  %pickle_init(2, self.rpc, self.dem, self.image, self.title, self.image_mask,
+  %pickle_init(3, self.rpc, self.dem, self.image, self.image_multi_band,
+	       self.title, self.image_mask,
 	       self.ground_mask, self.fit_height_offset)
 };
 }

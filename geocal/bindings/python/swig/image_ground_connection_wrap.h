@@ -18,9 +18,9 @@
 class SwigDirector_ImageGroundConnection : public GeoCal::ImageGroundConnection, public Swig::Director {
 
 public:
-    SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const &d, boost::shared_ptr< GeoCal::RasterImage > const &Img, std::string const &Title);
-    SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const &d, boost::shared_ptr< GeoCal::RasterImage > const &Img, std::string const &Title, boost::shared_ptr< GeoCal::ImageMask > const &Img_mask);
-    SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const &d, boost::shared_ptr< GeoCal::RasterImage > const &Img, std::string const &Title, boost::shared_ptr< GeoCal::ImageMask > const &Img_mask, boost::shared_ptr< GeoCal::GroundMask > const &Ground_mask);
+    SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const &d, boost::shared_ptr< GeoCal::RasterImage > const &Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const &Img_mb, std::string const &Title);
+    SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const &d, boost::shared_ptr< GeoCal::RasterImage > const &Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const &Img_mb, std::string const &Title, boost::shared_ptr< GeoCal::ImageMask > const &Img_mask);
+    SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const &d, boost::shared_ptr< GeoCal::RasterImage > const &Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const &Img_mb, std::string const &Title, boost::shared_ptr< GeoCal::ImageMask > const &Img_mask, boost::shared_ptr< GeoCal::GroundMask > const &Ground_mask);
     SwigDirector_ImageGroundConnection(PyObject *self);
     virtual ~SwigDirector_ImageGroundConnection();
     virtual boost::shared_ptr< GeoCal::CartesianFixedLookVector > cf_look_vector_lv(GeoCal::ImageCoordinate const &Ic) const;
@@ -32,6 +32,7 @@ public:
     virtual blitz::Array< double,2 > image_coordinate_jac_parm(GeoCal::GroundCoordinate const &Gc) const;
     virtual int number_line() const;
     virtual int number_sample() const;
+    virtual int number_band() const;
     virtual std::vector< std::string,std::allocator< std::string > > parameter_name() const;
     virtual double resolution_meter(GeoCal::ImageCoordinate const &Ic) const;
     virtual double resolution_meter() const;
@@ -68,7 +69,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[12];
+    mutable swig::SwigVar_PyObject vtable[13];
 #endif
 
 };

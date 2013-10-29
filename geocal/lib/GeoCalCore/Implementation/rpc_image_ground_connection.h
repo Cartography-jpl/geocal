@@ -24,7 +24,46 @@ public:
 			   boost::shared_ptr<GroundMask>(),
 			   bool Fit_height_offset = false)
 			   
-    : ImageGroundConnection(D, Img, Title, Img_mask, Ground_mask), 
+    : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
+			    Title, Img_mask, Ground_mask), 
+      rpc_(new Rpc(R)),
+      fit_height_offset_(Fit_height_offset)
+  { }
+
+//-----------------------------------------------------------------------
+// Constructor.
+//-----------------------------------------------------------------------
+
+  RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
+			   const boost::shared_ptr<RasterImageMultiBand>& 
+			   Img_mb,
+			   const std::string& Title = "Image",
+			   const boost::shared_ptr<ImageMask>& Img_mask = 
+			   boost::shared_ptr<ImageMask>(),
+			   const boost::shared_ptr<GroundMask>& Ground_mask =
+			   boost::shared_ptr<GroundMask>(),
+			   bool Fit_height_offset = false)
+    : ImageGroundConnection(D, boost::shared_ptr<RasterImage>(), Img_mb,
+			    Title, Img_mask, Ground_mask), 
+      rpc_(new Rpc(R)),
+      fit_height_offset_(Fit_height_offset)
+  { }
+
+//-----------------------------------------------------------------------
+// Constructor.
+//-----------------------------------------------------------------------
+
+  RpcImageGroundConnection(const Rpc& R, const boost::shared_ptr<Dem>& D,
+			   const boost::shared_ptr<RasterImage>& Img,
+			   const boost::shared_ptr<RasterImageMultiBand>& 
+			   Img_mb,
+			   const std::string& Title = "Image",
+			   const boost::shared_ptr<ImageMask>& Img_mask = 
+			   boost::shared_ptr<ImageMask>(),
+			   const boost::shared_ptr<GroundMask>& Ground_mask =
+			   boost::shared_ptr<GroundMask>(),
+			   bool Fit_height_offset = false)
+    : ImageGroundConnection(D, Img, Img_mb, Title, Img_mask, Ground_mask), 
       rpc_(new Rpc(R)),
       fit_height_offset_(Fit_height_offset)
   { }

@@ -11,10 +11,12 @@ using namespace blitz;
 ImageGroundConnection::ImageGroundConnection
 (const boost::shared_ptr<Dem>& d, 
  const boost::shared_ptr<RasterImage>& Img, 
+ const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
  const std::string& Title,
  const boost::shared_ptr<ImageMask>& Img_mask,
  const boost::shared_ptr<GroundMask>& Ground_mask)
-: dem_(d), image_(Img), title_(Title), image_mask_(Img_mask),
+: dem_(d), image_(Img), image_mb_(Img_mb), title_(Title), 
+  image_mask_(Img_mask),
   ground_mask_(Ground_mask)
 {
   if(!image_mask_)

@@ -10,6 +10,7 @@
 %base_import(geocal_exception)
 %import "dem.i"
 %import "raster_image.i"
+%import "raster_image_multi_band.i"
 %import "ground_coordinate.i"
 %import "image_coordinate.i"
 %import "image_mask.i"
@@ -51,13 +52,16 @@ class ImageGroundConnection: public GenericObject {
 protected:
   ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
 			const boost::shared_ptr<RasterImage>& Img, 
+			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
 			const std::string& Title);
   ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
 			const boost::shared_ptr<RasterImage>& Img, 
+			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
 			const std::string& Title,
 			const boost::shared_ptr<ImageMask>& Img_mask);
   ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
 			const boost::shared_ptr<RasterImage>& Img, 
+			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
 			const std::string& Title,
 			const boost::shared_ptr<ImageMask>& Img_mask,
 			const boost::shared_ptr<GroundMask>& Ground_mask);
@@ -86,10 +90,13 @@ public:
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   MapInfo cover(const MapInfo& Mi, int boundary = 0) const;
   %python_attribute_with_set(image, boost::shared_ptr<RasterImage>)
+  %python_attribute_with_set(image_multi_band, 
+			     boost::shared_ptr<RasterImageMultiBand>)
   %python_attribute_with_set(image_mask, boost::shared_ptr<ImageMask>)
   %python_attribute_with_set(ground_mask, boost::shared_ptr<GroundMask>)
   %python_attribute(number_line, virtual int)
   %python_attribute(number_sample, virtual int)
+  %python_attribute(number_band, virtual int)
   %python_attribute_with_set(title, std::string)
   std::string print_to_string() const;
   %python_attribute_with_set(parameter, blitz::Array<double, 1>)

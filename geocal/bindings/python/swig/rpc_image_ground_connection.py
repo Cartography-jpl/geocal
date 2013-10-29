@@ -122,10 +122,11 @@ class RpcImageGroundConnection(geocal.image_ground_connection.ImageGroundConnect
     def __init__(self, *args): 
         """
         GeoCal::RpcImageGroundConnection::RpcImageGroundConnection(const Rpc &R, const boost::shared_ptr< Dem > &D, const
-        boost::shared_ptr< RasterImage > &Img, const std::string
-        &Title="Image", const boost::shared_ptr< ImageMask >
-        &Img_mask=boost::shared_ptr< ImageMask >(), const boost::shared_ptr<
-        GroundMask > &Ground_mask=boost::shared_ptr< GroundMask >(), bool
+        boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<
+        RasterImageMultiBand > &Img_mb, const std::string &Title="Image",
+        const boost::shared_ptr< ImageMask > &Img_mask=boost::shared_ptr<
+        ImageMask >(), const boost::shared_ptr< GroundMask >
+        &Ground_mask=boost::shared_ptr< GroundMask >(), bool
         Fit_height_offset=false)
 
         """
@@ -169,10 +170,10 @@ class RpcImageGroundConnection(geocal.image_ground_connection.ImageGroundConnect
 
     @classmethod
     def pickle_format_version(cls):
-      return 2
+      return 3
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 2, self.rpc,self.dem,self.image,self.title,self.image_mask,self.ground_mask,self.fit_height_offset)
+      return _new_from_init, (self.__class__, 3, self.rpc,self.dem,self.image,self.image_multi_band,self.title,self.image_mask,self.ground_mask,self.fit_height_offset)
 
     __swig_destroy__ = _rpc_image_ground_connection.delete_RpcImageGroundConnection
 RpcImageGroundConnection.cf_look_vector = new_instancemethod(_rpc_image_ground_connection.RpcImageGroundConnection_cf_look_vector,None,RpcImageGroundConnection)

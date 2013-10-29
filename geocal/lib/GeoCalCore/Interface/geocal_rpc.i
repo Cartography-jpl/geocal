@@ -14,6 +14,7 @@
 %import "image_ground_connection.i"
 %import "geodetic.i"
 %import "raster_image.i"
+%import "raster_image_multi_band.i"
 %geocal_shared_ptr(GeoCal::Rpc);
 
 %pythoncode {

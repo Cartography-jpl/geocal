@@ -16,7 +16,31 @@ public:
   MapInfoImageGroundConnection(const boost::shared_ptr<RasterImage>& Img,
 			       const boost::shared_ptr<Dem>& D,
 			       const std::string& Title = "Image")
-    : ImageGroundConnection(D, Img, Title)
+    : ImageGroundConnection(D, Img, 
+			    boost::shared_ptr<RasterImageMultiBand>(),
+			    Title)
+  { }
+  
+//-----------------------------------------------------------------------
+/// Constructor.
+//-----------------------------------------------------------------------
+  MapInfoImageGroundConnection(const boost::shared_ptr<RasterImageMultiBand>& 
+			       Img_mb,
+			       const boost::shared_ptr<Dem>& D,
+			       const std::string& Title = "Image")
+    : ImageGroundConnection(D, boost::shared_ptr<RasterImage>(),
+			    Img_mb, Title)
+  { }
+  
+//-----------------------------------------------------------------------
+/// Constructor.
+//-----------------------------------------------------------------------
+  MapInfoImageGroundConnection(const boost::shared_ptr<RasterImage>& Img,
+			       const boost::shared_ptr<RasterImageMultiBand>& 
+			       Img_mb,
+			       const boost::shared_ptr<Dem>& D,
+			       const std::string& Title = "Image")
+    : ImageGroundConnection(D, Img, Img_mb, Title)
   { }
   
 //-----------------------------------------------------------------------
@@ -39,7 +63,9 @@ public:
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const
   { 
-    return image()->ground_coordinate(Ic, D);
+    if(image())
+      return image()->ground_coordinate(Ic, D);
+    return image_multi_band()->raster_image(0).ground_coordinate(Ic, D);
   }
 
 //-----------------------------------------------------------------------
@@ -48,7 +74,9 @@ public:
 
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const
   {
-    return image()->coordinate(Gc);
+    if(image())
+      return image()->coordinate(Gc);
+    return image_multi_band()->raster_image(0).coordinate(Gc);
   }
 
   virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) const
@@ -73,9 +101,13 @@ public:
 
   virtual void print(std::ostream& Os) const
   { 
-    Os << "MapInfoImageGroundConnection\n"
-       << "  RasterImage:\n"
-       << *image() << "\n";
+    Os << "MapInfoImageGroundConnection\n";
+    if(image())
+      Os << "  RasterImage:\n"
+	 << *image() << "\n";
+    else
+      Os << "  RasterImageMultiBand:\n"
+	 << *image_multi_band() << "\n";
   }
 };
 }

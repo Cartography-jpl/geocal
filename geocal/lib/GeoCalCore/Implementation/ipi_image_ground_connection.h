@@ -21,7 +21,8 @@ public:
 			   const std::string& Title = "Image",
 			   double Resolution = 30, int Band = 0,
 			   double Max_height = 9000) 
-    : ImageGroundConnection(D, Img, Title), ipi_(I), res(Resolution), 
+    : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
+			    Title), ipi_(I), res(Resolution), 
       max_h(Max_height), b(Band) {}
 
 //-----------------------------------------------------------------------

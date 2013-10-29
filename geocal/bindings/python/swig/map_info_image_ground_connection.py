@@ -123,7 +123,8 @@ class MapInfoImageGroundConnection(geocal.image_ground_connection.ImageGroundCon
     def __init__(self, *args): 
         """
         GeoCal::MapInfoImageGroundConnection::MapInfoImageGroundConnection(const boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<
-        Dem > &D, const std::string &Title="Image")
+        RasterImageMultiBand > &Img_mb, const boost::shared_ptr< Dem > &D,
+        const std::string &Title="Image")
         Constructor. 
         """
         _map_info_image_ground_connection.MapInfoImageGroundConnection_swiginit(self,_map_info_image_ground_connection.new_MapInfoImageGroundConnection(*args))
@@ -137,10 +138,10 @@ class MapInfoImageGroundConnection(geocal.image_ground_connection.ImageGroundCon
 
     @classmethod
     def pickle_format_version(cls):
-      return 1
+      return 2
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.image,self.dem,self.title)
+      return _new_from_init, (self.__class__, 2, self.image,self.image_multi_band,self.dem,self.title)
 
     __swig_destroy__ = _map_info_image_ground_connection.delete_MapInfoImageGroundConnection
 MapInfoImageGroundConnection.cf_look_vector = new_instancemethod(_map_info_image_ground_connection.MapInfoImageGroundConnection_cf_look_vector,None,MapInfoImageGroundConnection)

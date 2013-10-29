@@ -27,7 +27,8 @@ public:
 				 bool Include_refraction = false,
 				 double Resolution=30, int Band=0, 
 				 double Max_height=9000)
-    : ImageGroundConnection(D, Img, Title), od(Od), cam(Cam),
+    : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
+			    Title), od(Od), cam(Cam),
       refraction_(Ref),
       res(Resolution), b(Band), max_h(Max_height) {}
 

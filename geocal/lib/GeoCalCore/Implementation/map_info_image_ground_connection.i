@@ -17,6 +17,15 @@ public:
   MapInfoImageGroundConnection(const boost::shared_ptr<RasterImage>& Img,
 			       const boost::shared_ptr<Dem>& D,
 			       const std::string& Title = "Image");
+  MapInfoImageGroundConnection(const boost::shared_ptr<RasterImageMultiBand>& 
+			       Img_mb,
+			       const boost::shared_ptr<Dem>& D,
+			       const std::string& Title = "Image");
+  MapInfoImageGroundConnection(const boost::shared_ptr<RasterImage>& Img,
+			       const boost::shared_ptr<RasterImageMultiBand>& 
+			       Img_mb,
+			       const boost::shared_ptr<Dem>& D,
+			       const std::string& Title = "Image");
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& OUTPUT,
 		 boost::shared_ptr<CartesianFixed>& OUTPUT) const;
@@ -24,6 +33,6 @@ public:
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
-  %pickle_init(1, self.image, self.dem, self.title)
+  %pickle_init(2, self.image, self.image_multi_band, self.dem, self.title)
 };
 }

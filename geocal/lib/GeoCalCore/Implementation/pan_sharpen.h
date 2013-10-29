@@ -23,7 +23,7 @@ namespace GeoCal {
 class PanSharpen : public CalcRasterMultiBand {
 public:
   PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
-	     const RasterImageMultiBand& Mul, 
+	     const boost::shared_ptr<RasterImageMultiBand>& Mul, 
 	     bool Force_rpc = false,
 	     bool Log_progress = true,
 	     const boost::shared_ptr<RasterImage>& Pan_overview =
@@ -36,7 +36,7 @@ public:
   // sharpen calculation. These pieces are subset to cover the same
   // area and are at the same resolution.
   boost::shared_ptr<RasterImage> psmooth, pansub;
-  RasterImageMultiBandVariable mag, mulsub;
+  boost::shared_ptr<RasterImageMultiBand> mag, mulsub;
   Statistic psq_stat;
   Statistic isq_stat;
 protected:

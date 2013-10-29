@@ -131,8 +131,8 @@ class PanSharpen(geocal.calc_raster_multi_band.CalcRasterMultiBand):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        PanSharpen::PanSharpen(const boost::shared_ptr< RasterImage > &Pan, const
-        RasterImageMultiBand &Mul, bool Force_rpc=false, bool
+        PanSharpen::PanSharpen(const boost::shared_ptr< RasterImage > &Pan, const boost::shared_ptr<
+        RasterImageMultiBand > &Mul, bool Force_rpc=false, bool
         Log_progress=true, const boost::shared_ptr< RasterImage >
         &Pan_overview=boost::shared_ptr< RasterImage >(), const
         boost::shared_ptr< RasterImageMultiBand >
@@ -163,12 +163,6 @@ class PanSharpen(geocal.calc_raster_multi_band.CalcRasterMultiBand):
         through the data. 
         """
         _pan_sharpen.PanSharpen_swiginit(self,_pan_sharpen.new_PanSharpen(*args))
-    psmooth = _swig_property(_pan_sharpen.PanSharpen_psmooth_get, _pan_sharpen.PanSharpen_psmooth_set)
-    pansub = _swig_property(_pan_sharpen.PanSharpen_pansub_get, _pan_sharpen.PanSharpen_pansub_set)
-    mag = _swig_property(_pan_sharpen.PanSharpen_mag_get, _pan_sharpen.PanSharpen_mag_set)
-    mulsub = _swig_property(_pan_sharpen.PanSharpen_mulsub_get, _pan_sharpen.PanSharpen_mulsub_set)
-    psq_stat = _swig_property(_pan_sharpen.PanSharpen_psq_stat_get, _pan_sharpen.PanSharpen_psq_stat_set)
-    isq_stat = _swig_property(_pan_sharpen.PanSharpen_isq_stat_get, _pan_sharpen.PanSharpen_isq_stat_set)
     __swig_destroy__ = _pan_sharpen.delete_PanSharpen
 PanSharpen_swigregister = _pan_sharpen.PanSharpen_swigregister
 PanSharpen_swigregister(PanSharpen)

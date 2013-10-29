@@ -165,14 +165,6 @@ class RasterImageMultiBand(geocal.generic_object.GenericObject):
         """
         return _raster_image_multi_band.RasterImageMultiBand_write(self, *args)
 
-    def subset(self, *args):
-        """
-        RasterImageMultiBandVariable RasterImageMultiBand::subset(int line_offset, int sample_offset, int nline, int nsamp) const
-        Create a RasterImageMultiBandVariable by taking the same
-        SubRasterImage of each band. 
-        """
-        return _raster_image_multi_band.RasterImageMultiBand_subset(self, *args)
-
     def overview(self, *args):
         """
         RasterImageMultiBandVariable RasterImageMultiBand::overview(int Min_number_sample) const
@@ -193,7 +185,6 @@ RasterImageMultiBand.read = new_instancemethod(_raster_image_multi_band.RasterIm
 RasterImageMultiBand.read_double = new_instancemethod(_raster_image_multi_band.RasterImageMultiBand_read_double,None,RasterImageMultiBand)
 RasterImageMultiBand.write = new_instancemethod(_raster_image_multi_band.RasterImageMultiBand_write,None,RasterImageMultiBand)
 RasterImageMultiBand.__str__ = new_instancemethod(_raster_image_multi_band.RasterImageMultiBand___str__,None,RasterImageMultiBand)
-RasterImageMultiBand.subset = new_instancemethod(_raster_image_multi_band.RasterImageMultiBand_subset,None,RasterImageMultiBand)
 RasterImageMultiBand.overview = new_instancemethod(_raster_image_multi_band.RasterImageMultiBand_overview,None,RasterImageMultiBand)
 RasterImageMultiBand_swigregister = _raster_image_multi_band.RasterImageMultiBand_swigregister
 RasterImageMultiBand_swigregister(RasterImageMultiBand)

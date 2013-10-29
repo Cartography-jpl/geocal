@@ -5533,80 +5533,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RasterImageMultiBand_subset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImageMultiBand *arg1 = (GeoCal::RasterImageMultiBand *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  PyObject *swig_obj[5] ;
-  GeoCal::RasterImageMultiBandVariable result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"RasterImageMultiBand_subset",5,5,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageMultiBand_subset" "', argument " "1"" of type '" "GeoCal::RasterImageMultiBand const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageMultiBand > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageMultiBand > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageMultiBand * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageMultiBand > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageMultiBand * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImageMultiBand_subset" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImageMultiBand_subset" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RasterImageMultiBand_subset" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RasterImageMultiBand_subset" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  {
-    try {
-      result = ((GeoCal::RasterImageMultiBand const *)arg1)->subset(arg2,arg3,arg4,arg5);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_NewPointerObj((new GeoCal::RasterImageMultiBandVariable(static_cast< const GeoCal::RasterImageMultiBandVariable& >(result))), SWIGTYPE_p_GeoCal__RasterImageMultiBandVariable, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_RasterImageMultiBand_overview(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RasterImageMultiBand *arg1 = (GeoCal::RasterImageMultiBand *) 0 ;
@@ -6325,11 +6251,6 @@ static PyMethodDef SwigMethods[] = {
 		"Data should be number_band() x nline x nsamp. \n"
 		""},
 	 { (char *)"RasterImageMultiBand___str__", (PyCFunction)_wrap_RasterImageMultiBand___str__, METH_O, NULL},
-	 { (char *)"RasterImageMultiBand_subset", _wrap_RasterImageMultiBand_subset, METH_VARARGS, (char *)"\n"
-		"RasterImageMultiBandVariable RasterImageMultiBand::subset(int line_offset, int sample_offset, int nline, int nsamp) const\n"
-		"Create a RasterImageMultiBandVariable by taking the same\n"
-		"SubRasterImage of each band. \n"
-		""},
 	 { (char *)"RasterImageMultiBand_overview", _wrap_RasterImageMultiBand_overview, METH_VARARGS, (char *)"\n"
 		"RasterImageMultiBandVariable RasterImageMultiBand::overview(int Min_number_sample) const\n"
 		"Create a RasterImageMultiBandVariable by finding the overview (if any)\n"

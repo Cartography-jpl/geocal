@@ -74,23 +74,6 @@ void RasterImageMultiBand::write(int Lstart, int Sstart,
 }
 
 //-----------------------------------------------------------------------
-/// Create a RasterImageMultiBandVariable by taking the same
-/// SubRasterImage of each band.
-//-----------------------------------------------------------------------
-
-RasterImageMultiBandVariable
-RasterImageMultiBand::subset(int line_offset, int sample_offset,
-			     int nline, int nsamp) const
-{
-  RasterImageMultiBandVariable res;
-  for(int i = 0; i < number_band(); ++i)
-    res.add_raster_image(boost::shared_ptr<RasterImage>
-	(new SubRasterImage(raster_image_ptr(i), line_offset, sample_offset,
-			    nline, nsamp)));
-  return res;
-}
-
-//-----------------------------------------------------------------------
 /// Create a RasterImageMultiBandVariable by finding the overview (if
 /// any) for each of the raster bands. The bands will all be the same
 /// size, so if the overviews don't match in size we don't use them.

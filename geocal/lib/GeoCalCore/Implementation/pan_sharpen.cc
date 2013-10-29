@@ -5,6 +5,7 @@
 #include "sub_raster_image.h"
 #include "rpc_image_ground_connection.h"
 #include "map_info_image_ground_connection.h"
+#include "sub_raster_image_multi_band.h"
 #include "statistic.h"
 #include <boost/progress.hpp>
 using namespace GeoCal;
@@ -19,7 +20,7 @@ void PanSharpen::calc(int Start_line, int Start_sample) const
   Range ra(Range::all());
   int number_line = data.cols();
   int number_sample = data.depth();
-  Array<double, 3> ncs = mag.read_double(Start_line, Start_sample,
+  Array<double, 3> ncs = mag->read_double(Start_line, Start_sample,
 					 number_line, number_sample);
   Array<double, 2> pan_data = 
     pansub->read_double(Start_line, Start_sample,
@@ -110,7 +111,7 @@ void PanSharpen::iadj(Array<double, 2> i, const Array<double, 2>& pan_data,
 //-----------------------------------------------------------------------
 
 PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
-		       const RasterImageMultiBand& Mul,
+		       const boost::shared_ptr<RasterImageMultiBand>& Mul,
 		       bool Force_rpc,
 		       bool Log_progress,
 		       const boost::shared_ptr<RasterImage>& Pan_overview,
@@ -122,20 +123,20 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
   bool remove_rpc;
   if(!Force_rpc &&
      Pan->has_map_info() &&
-     Mul.raster_image(0).has_map_info()) {
+     Mul->raster_image(0).has_map_info()) {
     d.reset(new SimpleDem);
     pan_ig.reset(new MapInfoImageGroundConnection(Pan, d));
-    ms_ig.reset(new MapInfoImageGroundConnection(Mul.raster_image_ptr(0), d));
+    ms_ig.reset(new MapInfoImageGroundConnection(Mul->raster_image_ptr(0), d));
     remove_rpc = true;
   } else {
     if(!Pan->has_rpc() ||
-       !Mul.raster_image(0).has_rpc())
+       !Mul->raster_image(0).has_rpc())
       throw Exception("We require Pan and Mul to have RPCs or map info");
     d.reset(new SimpleDem(Pan->rpc().height_offset));
     pan_ig.reset(new RpcImageGroundConnection(Pan->rpc(), d, Pan));
     ms_ig.reset
-      (new RpcImageGroundConnection(Mul.raster_image(0).rpc(), d,
-				    Mul.raster_image_ptr(0)));
+      (new RpcImageGroundConnection(Mul->raster_image(0).rpc(), d,
+				    Mul->raster_image_ptr(0)));
     remove_rpc = false;
   }
 
@@ -169,10 +170,12 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
     psmooth_ig(new OffsetImageGroundConnection(pan_ig, -nhs, -nhs));
   boost::shared_ptr<ImageGroundConnection>
     mag_ig(new MagnifyBilinearImageGroundConnection(ms_ig, magfactor));
-  for(int i = 0; i < Mul.number_band(); ++i)
-    mag.add_raster_image(boost::shared_ptr<RasterImage>
-			 (new MagnifyBilinear(Mul.raster_image_ptr(i), 
-					      magfactor)));
+  boost::shared_ptr<RasterImageMultiBandVariable> 
+    mags(new RasterImageMultiBandVariable());
+  for(int i = 0; i < Mul->number_band(); ++i)
+    mags->add_raster_image(boost::shared_ptr<RasterImage>
+			   (new MagnifyBilinear(Mul->raster_image_ptr(i), 
+						magfactor)));
 
 //-----------------------------------------------------------------------
 // Determine overlap area. We do this in psmooth image, just to pick
@@ -185,8 +188,8 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
   ImageCoordinate ulc_mag =
     psmooth_ig->image_coordinate
     (*mag_ig->ground_coordinate(ImageCoordinate(0,0)));
-  int nline = mag.raster_image(0).number_line();
-  int nsamp = mag.raster_image(0).number_sample();
+  int nline = mags->raster_image(0).number_line();
+  int nsamp = mags->raster_image(0).number_sample();
   ImageCoordinate lrc_mag =
     psmooth_ig->image_coordinate
     (*mag_ig->ground_coordinate(ImageCoordinate(nline,nsamp)));
@@ -210,11 +213,12 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
   ulc_mag = mag_ig->image_coordinate(*ulc_g);
   int ulc_mag_lstart = (int) floor(ulc_mag.line + 0.5);
   int ulc_mag_sstart = (int) floor(ulc_mag.sample + 0.5);
-  nline = std::min(nline, mag.raster_image(0).number_line() - ulc_mag_lstart);
-  nsamp = std::min(nsamp, mag.raster_image(0).number_sample() - ulc_mag_sstart);
+  nline = std::min(nline, mags->raster_image(0).number_line() - ulc_mag_lstart);
+  nsamp = std::min(nsamp, mags->raster_image(0).number_sample() - ulc_mag_sstart);
   psmooth.reset(new SubRasterImage(psmooth, (int) floor(ulc.line + 0.5),
 	   (int) floor(ulc.sample + 0.5), nline, nsamp));
-  mag = mag.subset(ulc_mag_lstart, ulc_mag_sstart, nline, nsamp);
+  mag.reset(new SubRasterImageMultiBand(mags, ulc_mag_lstart, ulc_mag_sstart, 
+					nline, nsamp));
   ImageCoordinate ulc_pan = pan_ig->image_coordinate(*ulc_g);
   pansub.reset(new SubRasterImage(Pan, (int) floor(ulc_pan.line + 0.5),
 	  (int) floor(ulc_pan.sample + 0.5), nline, nsamp));
@@ -222,13 +226,13 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
   int mulstart_ln = std::max((int) floor(ulc_mul.line), 0);
   int mulstart_smp = std::max((int) floor(ulc_mul.sample), 0);
   int mulstart_nline = 
-    std::min(Mul.raster_image(0).number_line() - mulstart_ln,
+    std::min(Mul->raster_image(0).number_line() - mulstart_ln,
 	     ((int) ceil(lrc_mul.line)) - ((int) floor(ulc_mul.line)));
   int mulstart_nsamp = 
-    std::min(Mul.raster_image(0).number_sample() - mulstart_smp,
+    std::min(Mul->raster_image(0).number_sample() - mulstart_smp,
 	     ((int) ceil(lrc_mul.sample)) - ((int) floor(ulc_mul.sample)));
-  mulsub = Mul.subset(mulstart_ln, mulstart_smp, mulstart_nline, 
-		      mulstart_nsamp);
+  mulsub.reset(new SubRasterImageMultiBand(Mul, mulstart_ln, mulstart_smp, 
+					   mulstart_nline, mulstart_nsamp));
 
 //-----------------------------------------------------------------------
 // Calculate statistics on PS^2 and I^2 as described in the paper.
@@ -246,7 +250,7 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
   } else {
     if(Log_progress)
       std::cout << "Calculating statistics on multispectral image:\n";
-    mul_stat = &mulsub;
+    mul_stat = mulsub.get();
   }
   boost::shared_ptr<boost::progress_display> disp;
   if(Log_progress)
@@ -289,5 +293,5 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
       }
   }
 
-  initialize(*psmooth, mag.number_band());
+  initialize(*psmooth, mag->number_band());
 }

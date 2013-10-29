@@ -24,8 +24,6 @@ public:
 				      int Nsamp) const; 
   void write(int Lstart, int Sstart, const blitz::Array<int, 3>& Data);
   std::string print_to_string() const;
-  RasterImageMultiBandVariable subset(int line_offset, int sample_offset,
-				      int nline, int nsamp) const;
   RasterImageMultiBandVariable overview(int Min_number_sample) const;
 };
 

@@ -16,7 +16,8 @@ BOOST_AUTO_TEST_CASE(basic)
   // We need to subset this data and store in test area.
   boost::shared_ptr<RasterImage> pan
     (new GdalRasterImage(test_data_dir() + "pan.tif"));
-  GdalMultiBand mul(test_data_dir() + "mul.tif");
+  boost::shared_ptr<RasterImageMultiBand> mul
+    (new GdalMultiBand(test_data_dir() + "mul.tif"));
   PanSharpen ps(pan, mul, false, false);
 
   // Check that the various raster image objects we will be using are
@@ -24,12 +25,12 @@ BOOST_AUTO_TEST_CASE(basic)
 
   BOOST_CHECK_EQUAL(ps.psmooth->number_line(), ps.pansub->number_line());
   BOOST_CHECK_EQUAL(ps.psmooth->number_sample(), ps.pansub->number_sample());
-  BOOST_CHECK_EQUAL(ps.mag.number_band(), mul.number_band());
-  for(int i = 0; i < ps.mag.number_band(); ++i) {
+  BOOST_CHECK_EQUAL(ps.mag->number_band(), mul->number_band());
+  for(int i = 0; i < ps.mag->number_band(); ++i) {
     BOOST_CHECK_EQUAL(ps.psmooth->number_line(), 
-		      ps.mag.raster_image(i).number_line());
+		      ps.mag->raster_image(i).number_line());
     BOOST_CHECK_EQUAL(ps.psmooth->number_sample(), 
-		      ps.mag.raster_image(i).number_sample());
+		      ps.mag->raster_image(i).number_sample());
   }
   SimpleDem d;
   ImageCoordinate ulc(-0.5,-0.5);
@@ -39,16 +40,16 @@ BOOST_AUTO_TEST_CASE(basic)
        ps.pansub->rpc().ground_coordinate(ulc, d)) < 0.2);
   BOOST_CHECK(GeoCal::distance(ps.psmooth->rpc().ground_coordinate(lrc, d),
        ps.pansub->rpc().ground_coordinate(lrc, d)) < 0.2);
-  for(int i = 0; i < ps.mag.number_band(); ++i) {
+  for(int i = 0; i < ps.mag->number_band(); ++i) {
     BOOST_CHECK(GeoCal::distance(ps.psmooth->rpc().ground_coordinate(ulc, d),
-	 ps.mag.raster_image(i).rpc().ground_coordinate(ulc, d)) < 0.2);
+	 ps.mag->raster_image(i).rpc().ground_coordinate(ulc, d)) < 0.2);
     BOOST_CHECK(GeoCal::distance(ps.psmooth->rpc().ground_coordinate(lrc, d),
-	 ps.mag.raster_image(i).rpc().ground_coordinate(lrc, d)) < 0.2);
+	 ps.mag->raster_image(i).rpc().ground_coordinate(lrc, d)) < 0.2);
   }
 
   // Check set up of ps itself.
-  BOOST_CHECK_EQUAL(ps.number_band(), mul.number_band());
-  for(int i = 0; i < ps.mag.number_band(); ++i) {
+  BOOST_CHECK_EQUAL(ps.number_band(), mul->number_band());
+  for(int i = 0; i < ps.mag->number_band(); ++i) {
     BOOST_CHECK_EQUAL(ps.raster_image(i).number_line(),
 		      ps.psmooth->number_line());
     BOOST_CHECK_EQUAL(ps.raster_image(i).number_sample(),
@@ -62,8 +63,8 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_EQUAL(ps.psq_stat.count(), 
 		    ps.psmooth->number_line() * ps.psmooth->number_sample());
   BOOST_CHECK_EQUAL(ps.isq_stat.count(), 
-		    ps.mulsub.raster_image(0).number_line() * 
-		    ps.mulsub.raster_image(0).number_sample());
+		    ps.mulsub->raster_image(0).number_line() * 
+		    ps.mulsub->raster_image(0).number_sample());
 
   Array<double, 3> pan_sharp = 
     ps.read_double(0,0,ps.raster_image(0).number_line(),
@@ -90,7 +91,8 @@ BOOST_AUTO_TEST_CASE(timing)
   // large to put into our source tree.
   boost::shared_ptr<RasterImage> 
     pan(new GdalRasterImage("/Users/smyth/Cloudy/12MAR_Pan.NTF"));
-  GdalMultiBand mul("/Users/smyth/Cloudy/12MAR.NTF");
+  boost::shared_ptr<RasterImageMultiBand> mul
+    (new GdalMultiBand("/Users/smyth/Cloudy/12MAR.NTF"));
   PanSharpen ps(pan, mul, false, true);
   int count = 0;
   for(RasterImageTileIterator i(ps.raster_image(0)); !i.end(); ++i)

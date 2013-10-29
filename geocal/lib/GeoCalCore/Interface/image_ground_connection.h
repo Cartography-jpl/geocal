@@ -450,6 +450,18 @@ public:
       igc(Igc)
   {
   }
+  ImageGroundConnectionCopy
+  (const boost::shared_ptr<ImageGroundConnection>& Igc,
+   const boost::shared_ptr<Dem>& d, 
+   const boost::shared_ptr<RasterImage>& Img, 
+   const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
+   const std::string& Title,
+   const boost::shared_ptr<ImageMask>& Img_mask,
+   const boost::shared_ptr<GroundMask>& Ground_mask)
+    : ImageGroundConnection(d, Img, Img_mb, Title, Img_mask, Ground_mask),
+      igc(Igc)
+  {
+  }
   virtual ~ImageGroundConnectionCopy() {}
   virtual void cf_look_vector(const ImageCoordinate& Ic, 
 			      CartesianFixedLookVector& Lv,

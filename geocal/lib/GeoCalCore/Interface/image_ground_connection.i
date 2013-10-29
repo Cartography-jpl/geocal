@@ -144,11 +144,22 @@ class ImageGroundConnectionCopy: public ImageGroundConnection
 public:
   ImageGroundConnectionCopy
   (const boost::shared_ptr<ImageGroundConnection>& Igc);
+  ImageGroundConnectionCopy
+  (const boost::shared_ptr<ImageGroundConnection>& Igc,
+   const boost::shared_ptr<Dem>& d, 
+   const boost::shared_ptr<RasterImage>& Img, 
+   const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
+   const std::string& Title,
+   const boost::shared_ptr<ImageMask>& Img_mask,
+   const boost::shared_ptr<GroundMask>& Ground_mask);
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
-  const boost::shared_ptr<ImageGroundConnection>& igc_original() const;
+  %python_attribute(igc_original, boost::shared_ptr<ImageGroundConnection>)
+  %pickle_init(1, self.igc_original, self.dem, self.image,
+	       self.image_multi_band, self.title, self.image_mask,
+	       self.ground_mask)
 };
 
 }

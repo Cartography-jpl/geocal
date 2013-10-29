@@ -522,19 +522,34 @@ class ImageGroundConnectionCopy(ImageGroundConnection):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::ImageGroundConnectionCopy::ImageGroundConnectionCopy(const boost::shared_ptr< ImageGroundConnection > &Igc)
+        GeoCal::ImageGroundConnectionCopy::ImageGroundConnectionCopy(const boost::shared_ptr< ImageGroundConnection > &Igc, const
+        boost::shared_ptr< Dem > &d, const boost::shared_ptr< RasterImage >
+        &Img, const boost::shared_ptr< RasterImageMultiBand > &Img_mb, const
+        std::string &Title, const boost::shared_ptr< ImageMask > &Img_mask,
+        const boost::shared_ptr< GroundMask > &Ground_mask)
 
         """
         _image_ground_connection.ImageGroundConnectionCopy_swiginit(self,_image_ground_connection.new_ImageGroundConnectionCopy(*args))
-    def igc_original(self):
+    def _v_igc_original(self):
         """
         const boost::shared_ptr<ImageGroundConnection>& GeoCal::ImageGroundConnectionCopy::igc_original() const
 
         """
-        return _image_ground_connection.ImageGroundConnectionCopy_igc_original(self)
+        return _image_ground_connection.ImageGroundConnectionCopy__v_igc_original(self)
+
+    @property
+    def igc_original(self):
+        return self._v_igc_original()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.igc_original,self.dem,self.image,self.image_multi_band,self.title,self.image_mask,self.ground_mask)
 
     __swig_destroy__ = _image_ground_connection.delete_ImageGroundConnectionCopy
-ImageGroundConnectionCopy.igc_original = new_instancemethod(_image_ground_connection.ImageGroundConnectionCopy_igc_original,None,ImageGroundConnectionCopy)
+ImageGroundConnectionCopy._v_igc_original = new_instancemethod(_image_ground_connection.ImageGroundConnectionCopy__v_igc_original,None,ImageGroundConnectionCopy)
 ImageGroundConnectionCopy_swigregister = _image_ground_connection.ImageGroundConnectionCopy_swigregister
 ImageGroundConnectionCopy_swigregister(ImageGroundConnectionCopy)
 

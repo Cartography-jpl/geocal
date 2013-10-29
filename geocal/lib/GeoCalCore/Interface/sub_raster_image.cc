@@ -108,4 +108,3 @@ void SubRasterImage::print(std::ostream& Os) const
   opad << full_raster_image();
   opad.strict_sync();
 }
-

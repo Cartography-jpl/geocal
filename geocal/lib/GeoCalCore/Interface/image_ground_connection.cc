@@ -1,5 +1,6 @@
 #include "image_ground_connection.h"
 #include "simple_dem.h"
+#include "ostream_pad.h"
 using namespace GeoCal;
 using namespace blitz;
 
@@ -158,20 +159,29 @@ std::vector<std::string> OffsetImageGroundConnection::parameter_name() const
 
 void ImageGroundConnectionCopy::print(std::ostream& Os) const
 {
+  OstreamPad opad(Os, "    ");
   Os << "ImageGroundConnectionCopy:\n"
-     << "Underlying Igc:\n"
-     << *igc_original() << "\n"
-     << "Dem:\n"
-     << dem() << "\n";
-  if(image())
-    Os << "Image:\n"
-       << *image() << "\n";
-  if(image_multi_band())
-    Os << "Image multi-band:\n"
-       << *image_multi_band() << "\n";
-  Os << "Title: " << title() << "\n"
-     << "Image mask:\n"
-     << *image_mask() << "\n"
-     << "Ground mask:\n"
-     << *ground_mask() << "\n";
+     << "  Underlying Igc:\n";
+  opad << *igc_original() << "\n";
+  opad.strict_sync();
+  Os << "  Dem:\n";
+  opad << dem() << "\n";
+  opad.strict_sync();
+  if(image()) {
+    Os << "  Image:\n";
+    opad << *image() << "\n";
+    opad.strict_sync();
+  }
+  if(image_multi_band()) {
+    Os << "  Image multi-band:\n";
+    opad << *image_multi_band() << "\n";
+    opad.strict_sync();
+  }
+  Os << "  Title: " << title() << "\n"
+     << "  Image mask:\n";
+  opad << *image_mask() << "\n";
+  opad.strict_sync();
+  Os << "  Ground mask:\n";
+  opad << *ground_mask() << "\n";
+  opad.strict_sync();
 }

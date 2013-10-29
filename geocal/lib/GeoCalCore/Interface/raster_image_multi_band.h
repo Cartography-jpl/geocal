@@ -37,9 +37,8 @@ public:
   RasterImageMultiBandVariable overview(int Min_number_sample) const;
 };
 
+
 void copy(const RasterImageMultiBand& Img_in, RasterImageMultiBand& Img_out, 
 	  bool Log_progress = false);
-
 }
 #endif
-

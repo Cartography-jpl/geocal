@@ -555,6 +555,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/sub_raster_image_wrap.cc \
 	@swigsrc@/raster_image_multi_band_wrap.cc \
 	@swigsrc@/raster_image_multi_band_variable_wrap.cc \
+	@swigsrc@/sub_raster_image_multi_band_wrap.cc \
 	@swigsrc@/ground_mask_wrap.cc @swigsrc@/image_mask_wrap.cc \
 	@swigsrc@/geocal_datum_wrap.cc @swigsrc@/simple_dem_wrap.cc \
 	@swigsrc@/memory_raster_image_wrap.cc \
@@ -669,6 +670,7 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-sub_raster_image_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-raster_image_multi_band_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-raster_image_multi_band_variable_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-sub_raster_image_multi_band_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-ground_mask_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-image_mask_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-geocal_datum_wrap.lo \
@@ -772,6 +774,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/hdf_file.cc @srcinterface@/raster_image.cc \
 	@srcinterface@/sub_raster_image.cc \
 	@srcinterface@/raster_image_multi_band.cc \
+	@srcinterface@/sub_raster_image_multi_band.cc \
 	@srcinterface@/image_coordinate.cc \
 	@srcinterface@/ground_coordinate.cc \
 	@srcinterface@/ground_mask.cc @srcinterface@/image_mask.cc \
@@ -866,6 +869,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-raster_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-sub_raster_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-raster_image_multi_band.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-image_coordinate.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-ground_coordinate.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/libgeocal_la-ground_mask.lo \
@@ -1422,6 +1426,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcinterface@/sub_raster_image.h \
 	@srcinterface@/raster_image_multi_band.h \
 	@srcinterface@/raster_image_multi_band_variable.h \
+	@srcinterface@/sub_raster_image_multi_band.h \
 	@srcinterface@/image_coordinate.h \
 	@srcinterface@/ground_coordinate.h \
 	@srcinterface@/ground_mask.h @srcinterface@/image_mask.h \
@@ -2034,6 +2039,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/sub_raster_image.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image_multi_band.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/sub_raster_image_multi_band.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_coordinate.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ground_coordinate.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ground_mask.cc \
@@ -2163,6 +2169,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/sub_raster_image_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/raster_image_multi_band_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/raster_image_multi_band_variable_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/sub_raster_image_multi_band_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/ground_mask_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/image_mask_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/geocal_datum_wrap.cc \
@@ -2289,6 +2296,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/sub_raster_image.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image_multi_band.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_image_multi_band_variable.h \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/sub_raster_image_multi_band.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_coordinate.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ground_coordinate.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ground_mask.h \
@@ -2890,6 +2898,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-raster_image_multi_band_variable_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-sub_raster_image_multi_band_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-ground_mask_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-image_mask_wrap.lo: @swigsrc@/$(am__dirstamp) \
@@ -3105,6 +3115,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-raster_image_multi_band.lo:  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo:  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-image_coordinate.lo:  \
@@ -4284,6 +4297,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-rpc_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image_multi_band.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-time_table.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-mspi_camera_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-paraxial_transform_test.Po@am__quote@
@@ -4463,6 +4477,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-spot_orbit_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-srtm_dem_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-statistic_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-sub_raster_image_multi_band_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-sub_raster_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-surface_image_to_image_match_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_array_wrap.Plo@am__quote@
@@ -4772,6 +4787,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/raster_image_multi_band_variable_wrap.cc' object='@swigsrc@/_swig_wrap_la-raster_image_multi_band_variable_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-raster_image_multi_band_variable_wrap.lo `test -f '@swigsrc@/raster_image_multi_band_variable_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/raster_image_multi_band_variable_wrap.cc
+
+@swigsrc@/_swig_wrap_la-sub_raster_image_multi_band_wrap.lo: @swigsrc@/sub_raster_image_multi_band_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-sub_raster_image_multi_band_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-sub_raster_image_multi_band_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-sub_raster_image_multi_band_wrap.lo `test -f '@swigsrc@/sub_raster_image_multi_band_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/sub_raster_image_multi_band_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-sub_raster_image_multi_band_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-sub_raster_image_multi_band_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/sub_raster_image_multi_band_wrap.cc' object='@swigsrc@/_swig_wrap_la-sub_raster_image_multi_band_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-sub_raster_image_multi_band_wrap.lo `test -f '@swigsrc@/sub_raster_image_multi_band_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/sub_raster_image_multi_band_wrap.cc
 
 @swigsrc@/_swig_wrap_la-ground_mask_wrap.lo: @swigsrc@/ground_mask_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-ground_mask_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-ground_mask_wrap.lo `test -f '@swigsrc@/ground_mask_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ground_mask_wrap.cc
@@ -5430,6 +5452,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/raster_image_multi_band.cc' object='@srcinterface@/libgeocal_la-raster_image_multi_band.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-raster_image_multi_band.lo `test -f '@srcinterface@/raster_image_multi_band.cc' || echo '$(srcdir)/'`@srcinterface@/raster_image_multi_band.cc
+
+@srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo: @srcinterface@/sub_raster_image_multi_band.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image_multi_band.Tpo -c -o @srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo `test -f '@srcinterface@/sub_raster_image_multi_band.cc' || echo '$(srcdir)/'`@srcinterface@/sub_raster_image_multi_band.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image_multi_band.Tpo @srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image_multi_band.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/sub_raster_image_multi_band.cc' object='@srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo `test -f '@srcinterface@/sub_raster_image_multi_band.cc' || echo '$(srcdir)/'`@srcinterface@/sub_raster_image_multi_band.cc
 
 @srcinterface@/libgeocal_la-image_coordinate.lo: @srcinterface@/image_coordinate.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-image_coordinate.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-image_coordinate.Tpo -c -o @srcinterface@/libgeocal_la-image_coordinate.lo `test -f '@srcinterface@/image_coordinate.cc' || echo '$(srcdir)/'`@srcinterface@/image_coordinate.cc

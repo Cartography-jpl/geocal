@@ -31,6 +31,13 @@ def test_sqlite_shelf():
     assert shelve_time_after("sqlite_shelf.db:value2",
                              "sqlite_shelf.db:value1")
     assert shelve_time_after("sqlite_shelf.db", "sqlite_shelf.db:value1")
+    time.sleep(0.1)
+    d.close()
+    d = SQLiteShelf("sqlite_shelf.db", "r+")
+    d.touch("value1")
+    d.close()
+    d = SQLiteShelf("sqlite_shelf.db", "r")
+    assert d.update_time_julian("value1") > d.update_time_julian("value2")
 
 def test_read_write_shelf():
     try:

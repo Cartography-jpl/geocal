@@ -127,6 +127,12 @@ class SQLiteShelf(UserDict.DictMixin):
         # Unix epoch in Julian days is 2440587.5
         return (self.update_time_julian(key) - 2440587.5) * 86400.0
 
+    def touch(self, key):
+        '''Change the updated time to now (like the unix command "touch")'''
+        if(self._read_only):
+            raise RuntimeError("Attempt to write to read only shelve.")
+        self._database.execute("UPDATE Shelf SET Updated=strftime('%Y-%m-%d %H:%M:%f', 'now') WHERE Key=?", [key])
+
     def __setitem__(self, key, value):
         if(self._read_only):
             raise RuntimeError("Attempt to write to read only shelve.")

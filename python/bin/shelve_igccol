@@ -17,6 +17,10 @@ output should be in "file:key" format, e.g., "my_data.db:igc". Each
 of the images should also have a title which can be used when plotting
 etc.
 
+This can also be used to generate just a singe Image Ground Connection.
+This is so similar to creating a collection that we don't have a separate
+program for this, just a special option.
+
 The DEM should be given as a "file:key" sqlite shelve object.
 
 Options:
@@ -36,6 +40,10 @@ Options:
   --image-from-shelve
        Instead of getting images from a file, get them from a shelve object.
        This should be in a "file:key" format. 
+
+  --image-ground-connection
+       Make a ImageGroundConnection instead of a IgcCollection. We just
+       take the first image etc. for this.
 
   --rpc-line-fit=list
        A comma separated list of 0 based parameters that we should set
@@ -99,5 +107,8 @@ else:
 
 igc_coll = IgcArray(a)
 igc_coll.parameter_subset_mask = [True] * len(igc_coll.parameter)
-write_shelve(args.output, igc_coll)
+if(args.image_ground_connection):
+    write_shelve(args.output, a[0])
+else:
+    write_shelve(args.output, igc_coll)
 

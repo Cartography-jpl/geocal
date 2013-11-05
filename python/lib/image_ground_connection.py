@@ -25,11 +25,13 @@ class GdalImageGroundConnection(geocal.RpcImageGroundConnection):
     def __init__(self, fname, dem, rpc = None, title=None, image_mask=None,
                  ground_mask=None, fit_height_offset=None):
         self.fname = fname
-        img = GdalRasterImage(fname)
+        img = GdalMultiBand(fname)
+        if(not rpc):
+            rpc = img.gdal_raster_image(0).rpc
+        if(img.number_band == 1):
+            img = img.gdal_raster_image(0)
         if(not title):
             title = os.path.basename(fname)
-        if(not rpc):
-            rpc = img.rpc
         geocal.RpcImageGroundConnection.__init__(self, rpc, dem, img, title, 
                                                  image_mask, ground_mask, 
                                                  fit_height_offset)

@@ -38,12 +38,24 @@ def read_shelve(f):
     a shelve file, e.g., we are using python modules not already 
     included in AFIDS. If the special key "_extra_python_init" is 
     found, we execute the code found there. This can do things like 
-    import modules.'''
+    import modules.
+
+    Because we often use relative names for files, we first chdir to 
+    the same directory as the database file (if different than the current
+    one). We change back to the current directory when done.
+    '''
     fname, key = f.split(':')
-    t = SQLiteShelf(fname, "r")
-    if("_extra_python_init" in t.keys()):
-        exec(t["_extra_python_init"])
-    return t[key]
+    dirn, f = os.path.split(fname)
+    curdir = os.getcwd()
+    try:
+        if(dirn):
+            os.chdir(dirn)
+        t = SQLiteShelf(f, "r")
+        if("_extra_python_init" in t.keys()):
+            exec(t["_extra_python_init"])
+        return t[key]
+    finally:
+        os.chdir(curdir)
 
 def shelve_time_after(f1, f2):
     '''Compare the update time on 2 shelve objects, return if f1 update time

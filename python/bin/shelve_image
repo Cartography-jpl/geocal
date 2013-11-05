@@ -49,7 +49,15 @@ args = docopt_simple(usage, version=version)
 if(args.from_shelve):
     img = read_shelve(args.image)
 elif(args.multi_band):
-    img = GdalMultiBand(args.image)
+    # Leverage off of VicarImageGroundConnection, even though we don't care
+    # about the rpc.
+    if(VicarImageGroundConnection.is_vicar_file(args.image)):
+        img = VicarImageGroundConnection(args.image, SrtmDem()).image_multi_band
+        if(not img):
+            img = RasterImageMultiBandVariable()
+            img.add_raster_image(VicarLiteRasterImage(args.image))
+    else:
+        img = GdalMultiBand(args.image)
 elif VicarFile.is_vicar_file(args.image):
     # -1 in band is because VicarLiteRasterImage uses 0-based band, rather
     # than 1-based we use in this program.

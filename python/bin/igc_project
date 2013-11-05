@@ -9,6 +9,7 @@ from multiprocessing import Pool
 
 version = "October 8, 2013"
 usage='''Usage: 
+  igc_project [options] <igc> <output>
   igc_project [options] <igc_collection> <image_index> <output>
   igc_project -h | --help
   igc_project -v | --version
@@ -61,8 +62,12 @@ Options:
 
 args = docopt_simple(usage, version=version)
 
-igc_col = read_shelve(args.igc_collection)
-igc = igc_col.image_ground_connection(args.image_index)
+if(args.igc_collection):
+    igc_col = read_shelve(args.igc_collection)
+    igc = igc_col.image_ground_connection(args.image_index)
+else:
+    igc = read_shelve(args.igc)
+
 if(args.dem):
     igc.dem = read_shelve(args.dem)
 

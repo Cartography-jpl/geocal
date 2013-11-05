@@ -214,6 +214,20 @@ subprocess.check_call(["shelve_igccol", "--rpc-line-fit=0",
                        "--rpc-sample-fit=0", dbfile + ":igc_initial",
                        dbfile + ":dem_initial",
                        "pre_pan.img", "Pre Pan", "post_pan.img", "Post pan"])
+if(pre_ms_raw):
+    subprocess.check_call(["shelve_igccol", "--image-from-shelve",
+                           "--image-ground-connection",
+                           dbfile + ":pre_ms_initial",
+                           dbfile + ":dem_initial",                           
+                           dbfile + ":pre_ms",
+                           "Pre Multi-spectral"])
+if(post_ms_raw):
+    subprocess.check_call(["shelve_igccol", "--image-from-shelve",
+                           "--image-ground-connection",
+                           dbfile + ":post_ms_initial",
+                           dbfile + ":dem_initial",                           
+                           dbfile + ":post_ms",
+                           "Post Multi-spectral"])
 
 # 5. Collect tie points
 with timing("Collecting tiepoints"):

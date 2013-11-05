@@ -93,7 +93,7 @@ else:
         if(args.image_from_shelve):
             img = read_shelve(args.image[i])
             t = RpcImageGroundConnection(img.rpc, dem, img, args.title[i])
-        elif VicarFile.is_vicar_file(args.image[i]):
+        elif VicarImageGroundConnection.is_vicar_file(args.image[i]):
             t = VicarImageGroundConnection(args.image[i], dem, 
                                            title=args.title[i])
         else:

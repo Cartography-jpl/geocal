@@ -3,6 +3,7 @@ from math import *
 from shape_file import *
 import numpy as np
 import os.path
+import re
 
 def _new_from_init(cls, version, *args):
     '''Handle older versions'''
@@ -59,15 +60,38 @@ class VicarImageGroundConnection(geocal.RpcImageGroundConnection):
     def __init__(self, fname, dem, rpc = None, title=None, image_mask=None,
                  ground_mask=None, fit_height_offset=None):
         self.fname = fname
-        img = VicarLiteRasterImage(fname)
+        # Check for multiple bands
+        m = re.match(r'(.*)(\d+):(\d+)(.*)', fname)
+        if(m):
+            base = m.group(1)
+            baseend = m.group(4)
+            img = RasterImageMultiBandVariable()
+            for i in range(int(m.group(2)), int(m.group(3)) + 1):
+                img.add_raster_image(VicarLiteRasterImage("%s%d%s" % (base, i, baseend)))
+            if(not rpc):
+                rpc = img.raster_image(0).rpc
+        else:
+            img = VicarLiteRasterImage(fname)
+            if(not rpc):
+                rpc = img.rpc
         if(not title):
             title = os.path.basename(fname)
-        if(not rpc):
-            rpc = img.rpc
         geocal.RpcImageGroundConnection.__init__(self, rpc, dem, img, title, 
                                                  image_mask, ground_mask, 
                                                  fit_height_offset)
 
+    @classmethod
+    def is_vicar_file(cls, fname):
+        '''Return true if file is a vicar file'''
+        m = re.match(r'(.*)(\d+):(\d+)(.*)', fname)
+        if(m):
+            base = m.group(1)
+            baseend = m.group(4)
+            i = int(m.group(2))
+            return VicarFile.is_vicar_file("%s%d%s" % (base, i, baseend))
+        else:
+            return VicarFile.is_vicar_file(fname)
+        
     @classmethod
     def pickle_format_version(cls):
         return 2

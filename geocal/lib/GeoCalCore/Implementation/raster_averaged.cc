@@ -1,5 +1,6 @@
 #include "raster_averaged.h"
 #include "memory_raster_image.h"
+#include "memory_multi_band.h"
 #include "ostream_pad.h"
 
 using namespace GeoCal;
@@ -181,16 +182,28 @@ AveragedImageGroundConnection::AveragedImageGroundConnection
     in_memory_(In_memory), ignore_zero_(Ignore_zero) 
 { 
   dem_ = ig_->dem_ptr();
-  boost::shared_ptr<RasterImage> ra
-    (new RasterAveraged(ig_->image(), number_line_per_pixel_, 
-			number_sample_per_pixel_, ignore_zero_));
+  if(ig_->image()) {
+    boost::shared_ptr<RasterImage> ra
+      (new RasterAveraged(ig_->image(), number_line_per_pixel_, 
+			  number_sample_per_pixel_, ignore_zero_));
+    if(in_memory_)
+      image_.reset(new MemoryRasterImage(*ra));
+    else
+      image_ = ra;
+  }
+  if(ig_->image_multi_band()) {
+    boost::shared_ptr<RasterImageMultiBand> ra
+      (new RasterAveragedMultiBand(ig_->image_multi_band(), 
+				   number_line_per_pixel_, 
+				   number_sample_per_pixel_, ignore_zero_));
+    if(in_memory_)
+      image_mb_.reset(new MemoryMultiBand(*ra));
+    else
+      image_mb_ = ra;
+  }
   image_mask_.reset
     (new ImageMaskAveraged(ig_->image_mask(), number_line_per_pixel_,
 			   number_sample_per_pixel_));
-  if(in_memory_)
-    image_.reset(new MemoryRasterImage(*ra));
-  else
-    image_ = ra;
   ground_mask_ = ig_->ground_mask();
 }
 

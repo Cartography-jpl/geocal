@@ -164,7 +164,7 @@ class IgcMapProjected(geocal.calc_raster.CalcRaster):
         _igc_map_projected.IgcMapProjected_swiginit(self,_igc_map_projected.new_IgcMapProjected(*args))
     def _v_igc_original(self):
         """
-        const boost::shared_ptr<ImageGroundConnection>& GeoCal::IgcMapProjected::igc_original() const
+        const boost::shared_ptr<ImageGroundConnection>& GeoCal::IgcMapProjectedBase::igc_original() const
 
         """
         return _igc_map_projected.IgcMapProjected__v_igc_original(self)
@@ -175,7 +175,7 @@ class IgcMapProjected(geocal.calc_raster.CalcRaster):
 
     def _v_avg_factor(self):
         """
-        int GeoCal::IgcMapProjected::avg_factor() const
+        int GeoCal::IgcMapProjectedBase::avg_factor() const
 
         """
         return _igc_map_projected.IgcMapProjected__v_avg_factor(self)
@@ -186,7 +186,7 @@ class IgcMapProjected(geocal.calc_raster.CalcRaster):
 
     def _v_grid_spacing(self):
         """
-        int GeoCal::IgcMapProjected::grid_spacing() const
+        int GeoCal::IgcMapProjectedBase::grid_spacing() const
 
         """
         return _igc_map_projected.IgcMapProjected__v_grid_spacing(self)
@@ -197,7 +197,7 @@ class IgcMapProjected(geocal.calc_raster.CalcRaster):
 
     def _v_read_into_memory(self):
         """
-        bool GeoCal::IgcMapProjected::read_into_memory() const
+        bool GeoCal::IgcMapProjectedBase::read_into_memory() const
 
         """
         return _igc_map_projected.IgcMapProjected__v_read_into_memory(self)

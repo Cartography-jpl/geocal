@@ -307,7 +307,7 @@ public:
     return res;
   }
 
-public:
+private:
   boost::shared_ptr<ImageGroundConnection> ig_;
   int number_line_per_pixel_;
   int number_sample_per_pixel_;

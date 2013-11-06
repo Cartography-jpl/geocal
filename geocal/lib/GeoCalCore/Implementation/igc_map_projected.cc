@@ -1,6 +1,7 @@
 #include "igc_map_projected.h"
 #include "raster_averaged.h"
 #include "memory_raster_image.h"
+#include "memory_multi_band.h"
 using namespace GeoCal;
 using namespace blitz;
 
@@ -32,8 +33,12 @@ IgcMapProjectedBase::IgcMapProjectedBase
   else {
     if(Read_into_memory) {
       igc_.reset(new ImageGroundConnectionCopy(Igc));
-      igc_->image(boost::shared_ptr<RasterImage>
-		  (new MemoryRasterImage(*Igc->image())));
+      if(Igc->image())
+	igc_->image(boost::shared_ptr<RasterImage>
+		    (new MemoryRasterImage(*Igc->image())));
+      if(Igc->image_multi_band())
+	igc_->image_multi_band(boost::shared_ptr<RasterImageMultiBand>
+		    (new MemoryMultiBand(*Igc->image_multi_band())));
     } else
       igc_ = Igc;
   }

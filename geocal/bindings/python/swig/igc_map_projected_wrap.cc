@@ -6061,19 +6061,19 @@ static PyMethodDef SwigMethods[] = {
 		"then it gives results very close to the full calculation. \n"
 		""},
 	 { (char *)"IgcMapProjected__v_igc_original", (PyCFunction)_wrap_IgcMapProjected__v_igc_original, METH_O, (char *)"\n"
-		"const boost::shared_ptr<ImageGroundConnection>& GeoCal::IgcMapProjected::igc_original() const\n"
+		"const boost::shared_ptr<ImageGroundConnection>& GeoCal::IgcMapProjectedBase::igc_original() const\n"
 		"\n"
 		""},
 	 { (char *)"IgcMapProjected__v_avg_factor", (PyCFunction)_wrap_IgcMapProjected__v_avg_factor, METH_O, (char *)"\n"
-		"int GeoCal::IgcMapProjected::avg_factor() const\n"
+		"int GeoCal::IgcMapProjectedBase::avg_factor() const\n"
 		"\n"
 		""},
 	 { (char *)"IgcMapProjected__v_grid_spacing", (PyCFunction)_wrap_IgcMapProjected__v_grid_spacing, METH_O, (char *)"\n"
-		"int GeoCal::IgcMapProjected::grid_spacing() const\n"
+		"int GeoCal::IgcMapProjectedBase::grid_spacing() const\n"
 		"\n"
 		""},
 	 { (char *)"IgcMapProjected__v_read_into_memory", (PyCFunction)_wrap_IgcMapProjected__v_read_into_memory, METH_O, (char *)"\n"
-		"bool GeoCal::IgcMapProjected::read_into_memory() const\n"
+		"bool GeoCal::IgcMapProjectedBase::read_into_memory() const\n"
 		"\n"
 		""},
 	 { (char *)"delete_IgcMapProjected", (PyCFunction)_wrap_delete_IgcMapProjected, METH_O, (char *)"\n"

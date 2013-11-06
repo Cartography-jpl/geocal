@@ -113,7 +113,7 @@ import geocal.generic_object
 import geocal.image_mask
 import geocal.image_ground_connection
 import geocal.geocal_exception
-class RasterAveraged(geocal.raster_image.RasterImage):
+class RasterAveraged(object):
     """
     This averages a higher resolution RasterImage into a lower resolution
     one.

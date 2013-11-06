@@ -1,6 +1,6 @@
 #ifndef RASTER_AVERAGED_H
 #define RASTER_AVERAGED_H
-#include "raster_image_variable.h"
+#include "calc_raster.h"
 #include "image_ground_connection.h"
 
 namespace GeoCal {
@@ -22,7 +22,7 @@ namespace GeoCal {
   once and keep it in memory.
 *******************************************************************/
 
-class RasterAveraged : public RasterImageVariable {
+class RasterAveraged : public CalcRaster {
 public:
   RasterAveraged(const boost::shared_ptr<RasterImage>& Data,
 		 int Number_line_per_pixel, 
@@ -39,14 +39,14 @@ public:
 /// High resolution image that this object is based on.
 //-----------------------------------------------------------------------
 
-  const RasterImage& high_resolution_image() const {return *data_; }
+  const RasterImage& high_resolution_image() const {return *raw_data_; }
 
 //-----------------------------------------------------------------------
 /// Pointer to high resolution image that this object is based on.
 //-----------------------------------------------------------------------
 
   const boost::shared_ptr<RasterImage>& high_resolution_image_ptr() const 
-  {return data_; }
+  {return raw_data_; }
 
 //-----------------------------------------------------------------------
 /// Number of lines of high resolution data per pixel of this lower
@@ -67,15 +67,11 @@ public:
 //-----------------------------------------------------------------------
   
   bool ignore_zero() const {return ignore_zero_;}
-  virtual int unchecked_read(int Line, int Sample) const
-  { return (int) unchecked_read_double(Line, Sample); }
-  virtual double unchecked_read_double(int Line, int Sample) const;
-  virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
-			int Number_sample, int* Res) const;
-  virtual void unchecked_write(int Line, int Sample, int Val);
   virtual void print(std::ostream& Os) const;
+protected:
+  virtual void calc(int Lstart, int Sstart) const;
 private:
-  boost::shared_ptr<RasterImage> data_;
+  boost::shared_ptr<RasterImage> raw_data_;
   bool ignore_zero_;
   int number_line_per_pixel_;
   int number_sample_per_pixel_;

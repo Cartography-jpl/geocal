@@ -14,7 +14,7 @@
 %geocal_shared_ptr(GeoCal::AveragedImageGroundConnection);
 
 namespace GeoCal {
-class RasterAveraged : public RasterImage {
+class RasterAveraged : public CalcRaster {
 public:
   RasterAveraged(const boost::shared_ptr<RasterImage>& Data,
 		 int Number_line_per_pixel, 
@@ -28,6 +28,8 @@ public:
   %pickle_init(1, self.high_resolution_image,
 	       self.number_line_per_pixel, self.number_sample_per_pixel,
 	       self.ignore_zero)
+protected:
+  virtual void calc(int Lstart, int Sstart) const;
 };
 
 class ImageMaskAveraged : public ImageMask {

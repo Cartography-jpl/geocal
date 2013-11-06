@@ -4,6 +4,36 @@
 #include "calc_raster.h"
 
 namespace GeoCal {
+
+/****************************************************************//**
+  The functionality that is common between IgcMapProjected and
+  IgcMapProjectedMultiBand
+*******************************************************************/
+
+class IgcMapProjectedBase {
+public:
+  virtual ~IgcMapProjectedBase() {}
+  const boost::shared_ptr<ImageGroundConnection>& igc_original() const
+  { return igc_original_; }
+  int avg_factor() const { return avg_factor_; }
+  int grid_spacing() const { return grid_spacing_; }
+  bool read_into_memory() const { return read_into_memory_; }
+protected:
+  IgcMapProjectedBase(const MapInfo& Mi, 
+		      const boost::shared_ptr<ImageGroundConnection>& Igc,
+		      int Grid_spacing,
+		      int Avg_fact,
+		      bool Read_into_memory);
+  boost::shared_ptr<ImageGroundConnection> igc_original_;
+  boost::shared_ptr<ImageGroundConnection> igc_;
+  int avg_factor_;
+  int grid_spacing_;
+  MapInfo mi;
+  bool read_into_memory_;
+  mutable blitz::Array<double, 2> ic_line, ic_sample;
+  void interpolate_ic(int Start_line, int Start_sample) const;
+};
+
 /****************************************************************//**
   This is a RasterImage that has been map projected using an
   ImageGroundConnection and a Camera.
@@ -34,7 +64,7 @@ namespace GeoCal {
   memory.
 *******************************************************************/
 
-class IgcMapProjected : public CalcRaster {
+class IgcMapProjected : public CalcRaster, public IgcMapProjectedBase {
 public:
   IgcMapProjected(const MapInfo& Mi, 
 		  const boost::shared_ptr<ImageGroundConnection>& Igc,
@@ -59,21 +89,9 @@ public:
        << "  Image ground connection:\n" 
        << *igc_ << "\n";
   }
-  const boost::shared_ptr<ImageGroundConnection>& igc_original() const
-  { return igc_original_; }
-  int avg_factor() const { return avg_factor_; }
-  int grid_spacing() const { return grid_spacing_; }
-  bool read_into_memory() const { return read_into_memory_; }
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 private:
-  boost::shared_ptr<ImageGroundConnection> igc_original_;
-  boost::shared_ptr<ImageGroundConnection> igc_;
-  int avg_factor_;
-  int grid_spacing_;
-  bool read_into_memory_;
-  mutable blitz::Array<double, 2> ic_line, ic_sample;
-  void interpolate_ic(int Start_line, int Start_sample) const;
   void calc_no_grid(int Lstart, int Sstart) const;
   void calc_grid(int Lstart, int Sstart) const;
 };

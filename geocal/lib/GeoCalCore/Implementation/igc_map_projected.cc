@@ -5,6 +5,92 @@ using namespace GeoCal;
 using namespace blitz;
 
 //-----------------------------------------------------------------------
+/// Constructor.
+//-----------------------------------------------------------------------
+
+IgcMapProjectedBase::IgcMapProjectedBase
+(const MapInfo& Mi, 
+ const boost::shared_ptr<ImageGroundConnection>& Igc,
+ int Grid_spacing,
+ int Avg_fact,
+ bool Read_into_memory)
+: igc_original_(Igc), 
+  avg_factor_(Avg_fact),
+  grid_spacing_(Grid_spacing),
+  mi(Mi),
+  read_into_memory_(Read_into_memory),
+  ic_line(grid_spacing_, grid_spacing_),
+  ic_sample(grid_spacing_, grid_spacing_)
+{
+  range_min_check(grid_spacing_, 1);
+  if(avg_factor_ < 0)
+    avg_factor_ = (int) floor(Mi.resolution_meter() / 
+			   Igc->resolution_meter(ImageCoordinate(Igc->number_line() / 2.0, Igc->number_sample() / 2.0)));
+  if(avg_factor_ > 1)
+    igc_.reset(new AveragedImageGroundConnection(Igc, avg_factor_, avg_factor_,
+						 Read_into_memory));
+  else {
+    if(Read_into_memory) {
+      igc_.reset(new ImageGroundConnectionCopy(Igc));
+      igc_->image(boost::shared_ptr<RasterImage>
+		  (new MemoryRasterImage(*Igc->image())));
+    } else
+      igc_ = Igc;
+  }
+}
+
+//-----------------------------------------------------------------------
+/// This sets up ic_line and ic_sample to interpolate. This will cover
+/// The given start line and start sample.
+//-----------------------------------------------------------------------
+
+void IgcMapProjectedBase::interpolate_ic(int Start_line, int Start_sample) const
+{
+  int sl = Start_line - (Start_line % grid_spacing_);
+  int ss = Start_sample - (Start_sample % grid_spacing_);
+  int el = std::min(sl + grid_spacing_ - 1, mi.number_y_pixel() - 1);
+  int es = std::min(ss + grid_spacing_ - 1, mi.number_x_pixel() - 1);
+  ic_line.reindexSelf(TinyVector<int, 2>(sl, ss));
+  ic_sample.reindexSelf(TinyVector<int, 2>(sl, ss));
+  double line[2][2];
+  double sample[2][2];
+  boost::shared_ptr<GroundCoordinate> gc;
+  gc = mi.ground_coordinate(ss, sl, igc_->dem());
+  ImageCoordinate ic = igc_->image_coordinate(*gc);
+  line[0][0] = ic.line;
+  sample[0][0] = ic.sample;
+  gc = mi.ground_coordinate(es, sl, igc_->dem());
+  ic = igc_->image_coordinate(*gc);
+  line[0][1] = ic.line;
+  sample[0][1] = ic.sample;
+  gc = mi.ground_coordinate(ss, el, igc_->dem());
+  ic = igc_->image_coordinate(*gc);
+  line[1][0] = ic.line;
+  sample[1][0] = ic.sample;
+  gc = mi.ground_coordinate(es, el, igc_->dem());
+  ic = igc_->image_coordinate(*gc);
+  line[1][1] = ic.line;
+  sample[1][1] = ic.sample;
+  int nline = el - sl + 1;
+  int nsamp = es - ss + 1;
+  for(int i = 0; i < nline; ++i)
+    for(int j = 0; j < nsamp; ++j) {
+      double lfrac = (nline > 1 ? i / (nline - 1.0) : 0.0);
+      double sfrac = (nsamp > 1 ? j / (nsamp - 1.0) : 0.0);
+      ic_line(sl + i, ss + j) = 
+	(1.0 - lfrac - sfrac + lfrac * sfrac) * line[0][0] +
+	(sfrac - lfrac * sfrac) * line[0][1] +
+	(lfrac - lfrac * sfrac) * line[1][0] +
+	(lfrac * sfrac) * line[1][1];
+      ic_sample(sl + i, ss + j) = 
+	(1.0 - lfrac - sfrac + lfrac * sfrac) * sample[0][0] +
+	(sfrac - lfrac * sfrac) * sample[0][1] +
+	(lfrac - lfrac * sfrac) * sample[1][0] +
+	(lfrac * sfrac) * sample[1][1];
+    }
+}
+
+//-----------------------------------------------------------------------
 /// Constructor. We average the data either by the factor given as
 /// Avg_fact, or by ratio of the Mapinfo resolution and the Igc
 /// resolution. 
@@ -25,28 +111,8 @@ IgcMapProjected::IgcMapProjected
  bool Read_into_memory,
  int Number_tile_line, int Number_tile_sample)
   : CalcRaster(Mi), 
-    igc_original_(Igc), 
-    avg_factor_(Avg_fact),
-    grid_spacing_(Grid_spacing),
-    read_into_memory_(Read_into_memory),
-    ic_line(grid_spacing_, grid_spacing_),
-    ic_sample(grid_spacing_, grid_spacing_)
+    IgcMapProjectedBase(Mi, Igc, Grid_spacing, Avg_fact, Read_into_memory)
 {
-  range_min_check(grid_spacing_, 1);
-  if(avg_factor_ < 0)
-    avg_factor_ = (int) floor(Mi.resolution_meter() / 
-			   Igc->resolution_meter(ImageCoordinate(Igc->number_line() / 2.0, Igc->number_sample() / 2.0)));
-  if(avg_factor_ > 1)
-    igc_.reset(new AveragedImageGroundConnection(Igc, avg_factor_, avg_factor_,
-						 Read_into_memory));
-  else {
-    if(Read_into_memory) {
-      igc_.reset(new ImageGroundConnectionCopy(Igc));
-      igc_->image(boost::shared_ptr<RasterImage>
-		  (new MemoryRasterImage(*Igc->image())));
-    } else
-      igc_ = Igc;
-  }
   if(Number_tile_line < 0)
     number_tile_line_ = number_line();
   else
@@ -110,58 +176,6 @@ void IgcMapProjected::calc_grid(int Lstart, int Sstart) const
 	  else
 	    data(ii, jj) = igc_->image()->unchecked_interpolate(ln, smp);
 	}
-    }
-}
-
-//-----------------------------------------------------------------------
-/// This sets up ic_line and ic_sample to interpolate. This will cover
-/// The given start line and start sample.
-//-----------------------------------------------------------------------
-
-void IgcMapProjected::interpolate_ic(int Start_line, int Start_sample) const
-{
-  int sl = Start_line - (Start_line % grid_spacing_);
-  int ss = Start_sample - (Start_sample % grid_spacing_);
-  int el = std::min(sl + grid_spacing_ - 1, number_line() - 1);
-  int es = std::min(ss + grid_spacing_ - 1, number_sample() - 1);
-  ic_line.reindexSelf(TinyVector<int, 2>(sl, ss));
-  ic_sample.reindexSelf(TinyVector<int, 2>(sl, ss));
-  double line[2][2];
-  double sample[2][2];
-  boost::shared_ptr<GroundCoordinate> gc;
-  gc = ground_coordinate(ImageCoordinate(sl, ss),
-			 igc_->dem());
-  ImageCoordinate ic = igc_->image_coordinate(*gc);
-  line[0][0] = ic.line;
-  sample[0][0] = ic.sample;
-  gc = ground_coordinate(ImageCoordinate(sl, es), igc_->dem());
-  ic = igc_->image_coordinate(*gc);
-  line[0][1] = ic.line;
-  sample[0][1] = ic.sample;
-  gc = ground_coordinate(ImageCoordinate(el, ss), igc_->dem());
-  ic = igc_->image_coordinate(*gc);
-  line[1][0] = ic.line;
-  sample[1][0] = ic.sample;
-  gc = ground_coordinate(ImageCoordinate(el, es), igc_->dem());
-  ic = igc_->image_coordinate(*gc);
-  line[1][1] = ic.line;
-  sample[1][1] = ic.sample;
-  int nline = el - sl + 1;
-  int nsamp = es - ss + 1;
-  for(int i = 0; i < nline; ++i)
-    for(int j = 0; j < nsamp; ++j) {
-      double lfrac = (nline > 1 ? i / (nline - 1.0) : 0.0);
-      double sfrac = (nsamp > 1 ? j / (nsamp - 1.0) : 0.0);
-      ic_line(sl + i, ss + j) = 
-	(1.0 - lfrac - sfrac + lfrac * sfrac) * line[0][0] +
-	(sfrac - lfrac * sfrac) * line[0][1] +
-	(lfrac - lfrac * sfrac) * line[1][0] +
-	(lfrac * sfrac) * line[1][1];
-      ic_sample(sl + i, ss + j) = 
-	(1.0 - lfrac - sfrac + lfrac * sfrac) * sample[0][0] +
-	(sfrac - lfrac * sfrac) * sample[0][1] +
-	(lfrac - lfrac * sfrac) * sample[1][0] +
-	(lfrac * sfrac) * sample[1][1];
     }
 }
 

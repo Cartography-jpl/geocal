@@ -79,17 +79,30 @@ elif(args.bounding_box):
     mibase = read_shelve(args.bounding_box).map_info
     resbase = mibase.resolution_meter
     miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
-    mp = IgcMapProjected(miscale, igc, 1, -1, False)
-    mi = mp.map_info
+    if(igc.image):
+        mp = IgcMapProjected(miscale, igc, 1, -1, False)
+        mi = mp.map_info
+    else:
+        mp = IgcMapProjectedMultiBand(miscale, igc, 1, -1, False)
+        mi = mp.raster_image(0).map_info
     mp = None
 else:
     mibase = cib01_mapinfo()
     resbase = mibase.resolution_meter
     miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
     mi = igc.cover(miscale)
-    mp = IgcMapProjected(mi, igc, 1, -1, False)
-    mi = mp.map_info
+    if(igc.image):
+        mp = IgcMapProjected(mi, igc, 1, -1, False)
+        mi = mp.map_info
+    else:
+        mp = IgcMapProjectedMultiBand(mi, igc, 1, -1, False)
+        mi = mp.raster_image(0).map_info
     mp = None
 
-igc = IgcMapProjected(mi, igc, args.grid_spacing, args.avg_factor, False)
+if(igc.image):
+    igc = IgcMapProjected(mi, igc, args.grid_spacing, args.avg_factor, False)
+else:
+    igc = IgcMapProjectedMultiBand(mi, igc, args.grid_spacing, 
+                                   args.avg_factor, False)
+    
 write_shelve(args.output, igc)

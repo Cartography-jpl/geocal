@@ -47,9 +47,11 @@ public:
   %python_attribute(avg_factor, int)
   %python_attribute(grid_spacing, int)
   %python_attribute(read_into_memory, bool)
-  %pickle_init(1, self.map_info, self.igc_original, self.grid_spacing,
-	       self.avg_factor, self.read_into_memory, self.number_tile_line,
-	       self.number_tile_sample)
+  %pickle_init(1, self.raster_image(0).map_info, 
+	       self.igc_original, self.grid_spacing,
+	       self.avg_factor, self.read_into_memory, 
+	       self.raster_image(0).number_tile_line,
+	       self.raster_image(0).number_tile_sample)
 protected:
   virtual void calc(int Lstart, int Sstart) const; 
 };

@@ -116,6 +116,20 @@ def generate_image(fname, name_in, name, subset = None):
                            fname])
     shelve_image(fname, name)
 
+def generate_image_ms(fname, name_in, name, subset = None):
+    subprocess.check_call(["write_image", 
+                           nproc, dbfile + ":" + name_in,
+                           fname + "_b1.img",
+                           fname + "_b2.img",
+                           fname + "_b3.img",
+                           fname + "_b4.img",
+                           fname + "_b5.img",
+                           fname + "_b6.img",
+                           fname + "_b7.img",
+                           fname + "_b8.img",
+                           ])
+    shelve_image(fname + "_b1:8.img", name)
+
 @contextmanager
 def timing(txt):
     log.info(txt)
@@ -290,6 +304,23 @@ with timing("Final orthorectification image 2"):
                            "--dem=" + dbfile + ":dem_generate_filled",
                            "1", dbfile + ":final_surf2_init"])
     generate_image("final_surf2.img", "final_surf2_init", "final_surf2")
+if(pre_ms_raw):
+    with timing("Final Pre Multi-spectral orthorectification"):
+        subprocess.check_call(["igc_project",
+                           "--map-info=" + dbfile + ":final_surf1_init",
+                           "--dem=" + dbfile + ":dem_generate_filled",
+                           dbfile + ":igc_pre_ms_sba",
+                           dbfile + ":final_pre_ms_init"])
+        generate_image_ms("final_pre_ms", "final_pre_ms_init", "final_pre_ms")
+if(post_ms_raw):
+    with timing("Final Post Multi-spectral orthorectification"):
+        subprocess.check_call(["igc_project",
+                           "--map-info=" + dbfile + ":final_surf1_init",
+                           "--dem=" + dbfile + ":dem_generate_filled",
+                           dbfile + ":igc_post_ms_sba",
+                           dbfile + ":final_post_ms_init"])
+        generate_image_ms("final_post_ms", "final_post_ms_init", "final_post_ms")
+
 
 # 10. Convert to reflectance and generate normdiff image.
 pre_pan_imd = os.path.splitext(pre_pan_raw)[0] + ".IMD"

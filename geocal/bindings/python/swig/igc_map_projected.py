@@ -322,7 +322,7 @@ class IgcMapProjectedMultiBand(geocal.calc_raster_multi_band.CalcRasterMultiBand
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.map_info,self.igc_original,self.grid_spacing,self.avg_factor,self.read_into_memory,self.number_tile_line,self.number_tile_sample)
+      return _new_from_init, (self.__class__, 1, self.raster_image(0).map_info,self.igc_original,self.grid_spacing,self.avg_factor,self.read_into_memory,self.raster_image(0).number_tile_line,self.raster_image(0).number_tile_sample)
 
     __swig_destroy__ = _igc_map_projected.delete_IgcMapProjectedMultiBand
 IgcMapProjectedMultiBand._v_igc_original = new_instancemethod(_igc_map_projected.IgcMapProjectedMultiBand__v_igc_original,None,IgcMapProjectedMultiBand)

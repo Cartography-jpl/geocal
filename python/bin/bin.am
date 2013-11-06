@@ -21,6 +21,7 @@ dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/height_to_color
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/shelve_airmspi_igc
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/igc_to_rpc
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/airmspi_dem
+dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/pan_to_ms_igc
 dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
 dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf
 dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf

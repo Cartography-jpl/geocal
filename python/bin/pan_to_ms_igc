@@ -1,0 +1,65 @@
+#! /usr/bin/env python
+from afids import *
+
+version = "November 5, 2013"
+usage='''Usage: 
+  pan_to_ms_igc [options] <initial_pan_igc> <final_pan_igc> <initial_ms_igc>
+       <output>
+  pan_to_ms_igc [options] <initial_pan_igccol> <orignal_index> 
+       <final_pan_igccol> <final_index> <initial_ms_igc> <output>
+  pan_to_ms_igc -h | --help
+  pan_to_ms_igc -v | --version
+
+This is used to translate corrections from a panchromatic WV-2 band to
+the multi-spectral bands. The multi-spectral bands can have an offset and
+scale difference from the panchromatic band. We set up this relationship
+by looking that the initial panchromatic and multi-spectral image ground
+connection. We then apply the same offset/scale to the final (presumably 
+corrected) image ground connection for the panchromatic band to the 
+multi-spectral band.
+
+You can either specify the image ground connection, or supply a igc
+collection along with an index number.
+
+Options:
+  -h --help         
+       Print this message
+
+  -v --version      
+       Print program version
+'''
+# Parse command line arguments
+args = docopt_simple(usage, version=version)
+
+if(args.initial_pan_igc):
+    pan_init = read_shelve(args.initial_pan_igc)
+else:
+    pan_init = read_shelve(args.initial_pan_igccol).image_ground_connection(args.orignal_index)
+if(args.final_pan_igc):
+    pan_final = read_shelve(args.final_pan_igc)
+else:
+    pan_final = read_shelve(args.final_pan_igccol).image_ground_connection(args.orignal_index)
+ms = read_shelve(args.initial_ms_igc)
+
+# Determine scaling and offset so that it matches the ms, and then apply
+# to the final image ground connection
+ic1 = pan_init.image_coordinate(
+    ms.ground_coordinate(ImageCoordinate(-0.5,-0.5)))
+ic2 = pan_init.image_coordinate(
+    ms.ground_coordinate(ImageCoordinate(-0.5 + 1.0,-0.5)))
+ic3 = pan_init.image_coordinate(ms.ground_coordinate(
+        ImageCoordinate(-0.5,-0.5 + 1.0)))
+pavg = AveragedImageGroundConnection(
+    OffsetImageGroundConnection(pan_final, -0.5 - ic1.line, -0.5 - ic1.sample), 
+    int(round(ic2.line - ic1.line)), int(round(ic3.sample - ic1.sample)))
+
+# Now apply this to the multi-spectral data
+msigc = ImageGroundConnectionCopy(pavg)
+msigc.image = None
+msigc.image_multi_band = ms.image_multi_band
+msigc.title = ms.title
+
+# And then save
+write_shelve(args.output, msigc)
+
+

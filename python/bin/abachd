@@ -217,14 +217,14 @@ subprocess.check_call(["shelve_igccol", "--rpc-line-fit=0",
 if(pre_ms_raw):
     subprocess.check_call(["shelve_igccol", "--image-from-shelve",
                            "--image-ground-connection",
-                           dbfile + ":pre_ms_initial",
+                           dbfile + ":igc_pre_ms_initial",
                            dbfile + ":dem_initial",                           
                            dbfile + ":pre_ms",
                            "Pre Multi-spectral"])
 if(post_ms_raw):
     subprocess.check_call(["shelve_igccol", "--image-from-shelve",
                            "--image-ground-connection",
-                           dbfile + ":post_ms_initial",
+                           dbfile + ":igc_post_ms_initial",
                            dbfile + ":dem_initial",                           
                            dbfile + ":post_ms",
                            "Post Multi-spectral"])
@@ -257,6 +257,16 @@ with timing("Initial orthorectification initial_surf2"):
                            dbfile + ":igc_sba",
                            "1", dbfile + ":initial_surf2_init"])
     generate_image("initial_surf2.img", "initial_surf2_init", "initial_surf2")
+if(pre_ms_raw):
+    subprocess.check_call(["pan_to_ms_igc", dbfile + ":igc_initial", "0",
+                           dbfile + ":igc_sba", "0",
+                           dbfile + ":igc_pre_ms_initial",
+                           dbfile + ":igc_pre_ms_sba"])
+if(post_ms_raw):
+    subprocess.check_call(["pan_to_ms_igc", dbfile + ":igc_initial", "1",
+                           dbfile + ":igc_sba", "1",
+                           dbfile + ":igc_post_ms_initial",
+                           dbfile + ":igc_post_ms_sba"])
 
 # 8. DEM generation
 dem_generate()

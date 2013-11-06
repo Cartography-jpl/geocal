@@ -405,7 +405,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/height_to_color \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/shelve_airmspi_igc \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/igc_to_rpc \
-@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/airmspi_dem
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/airmspi_dem \
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/pan_to_ms_igc
 @BUILD_AFIDS_PYTHON_TRUE@@WITH_AFIDS_A_TRUE@am__append_46 = @srcpythonlib@/tre_amt_struct.py
 @BUILD_AFIDS_PYTHON_TRUE@am__append_47 = @docpythonsrc@ \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/07JUN08184839-M1BS-005616921010_01_P001.IMD \
@@ -1289,7 +1290,8 @@ am__dist_bin_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/height_to_color \
 	$(srcdir)/$(srcpythonbin)/shelve_airmspi_igc \
 	$(srcdir)/$(srcpythonbin)/igc_to_rpc \
-	$(srcdir)/$(srcpythonbin)/airmspi_dem
+	$(srcdir)/$(srcpythonbin)/airmspi_dem \
+	$(srcdir)/$(srcpythonbin)/pan_to_ms_igc
 SCRIPTS = $(dist_afidspythonvdev_SCRIPTS) $(dist_bin_SCRIPTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)

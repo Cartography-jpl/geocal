@@ -1,6 +1,7 @@
 #ifndef RASTER_AVERAGED_H
 #define RASTER_AVERAGED_H
 #include "calc_raster.h"
+#include "calc_raster_multi_band.h"
 #include "image_ground_connection.h"
 
 namespace GeoCal {
@@ -72,6 +73,80 @@ protected:
   virtual void calc(int Lstart, int Sstart) const;
 private:
   boost::shared_ptr<RasterImage> raw_data_;
+  bool ignore_zero_;
+  int number_line_per_pixel_;
+  int number_sample_per_pixel_;
+};
+
+/****************************************************************//**
+  This averages a higher resolution RasterImageMultiBand into a lower
+  resolution one.
+
+  The data is a straight average of a given number of pixels in the
+  line and sample direction of the full resolution data.
+
+  Typically the pixel averaging factor doesn't exactly divide the
+  number of lines and samples of the full resolution data. We just
+  trim the data to the largest low resolution pixel that completely
+  fits in the higher resolution data.
+
+  This class calculates the average on the fly. Sometimes this is what
+  you want, but if you are going to be using the resulting data a few
+  times, you may want to use a MemoryRasterImage to generate a copy
+  once and keep it in memory.
+*******************************************************************/
+
+class RasterAveragedMultiBand : public CalcRasterMultiBand {
+public:
+  RasterAveragedMultiBand(const boost::shared_ptr<RasterImageMultiBand>& Data,
+		 int Number_line_per_pixel, 
+		 int Number_sample_per_pixel,
+		 bool Ignore_zero = false);
+
+//-----------------------------------------------------------------------
+/// Destructor.
+//-----------------------------------------------------------------------
+
+  virtual ~RasterAveragedMultiBand() {}
+
+//-----------------------------------------------------------------------
+/// High resolution image that this object is based on.
+//-----------------------------------------------------------------------
+
+  const RasterImageMultiBand& high_resolution_image() 
+    const {return *raw_data_; }
+
+//-----------------------------------------------------------------------
+/// Pointer to high resolution image that this object is based on.
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<RasterImageMultiBand>& high_resolution_image_ptr() 
+    const {return raw_data_; }
+
+//-----------------------------------------------------------------------
+/// Number of lines of high resolution data per pixel of this lower
+/// resolution RasterImage.
+//-----------------------------------------------------------------------
+
+  int number_line_per_pixel() const {return number_line_per_pixel_;}
+
+//-----------------------------------------------------------------------
+/// Number of samples of high resolution data per pixel of this lower
+/// resolution RasterImage.
+//-----------------------------------------------------------------------
+
+  int number_sample_per_pixel() const {return number_sample_per_pixel_;}
+
+//-----------------------------------------------------------------------
+/// If true, we ignore zeros when calculating the average.
+//-----------------------------------------------------------------------
+  
+  bool ignore_zero() const {return ignore_zero_;}
+  virtual void print(std::ostream& Os) const;
+protected:
+  virtual void calc(int Lstart, int Sstart) const;
+private:
+  boost::shared_ptr<RasterImageMultiBand> raw_data_;
   bool ignore_zero_;
   int number_line_per_pixel_;
   int number_sample_per_pixel_;

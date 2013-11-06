@@ -6,10 +6,12 @@
 %{
 #include "raster_averaged.h"
 %}
-%base_import(raster_image)
+%base_import(calc_raster)
+%base_import(calc_raster_multi_band)
 %base_import(image_mask)
 %base_import(image_ground_connection)
 %geocal_shared_ptr(GeoCal::RasterAveraged);
+%geocal_shared_ptr(GeoCal::RasterAveragedMultiBand);
 %geocal_shared_ptr(GeoCal::ImageMaskAveraged);
 %geocal_shared_ptr(GeoCal::AveragedImageGroundConnection);
 
@@ -22,6 +24,24 @@ public:
 		 bool Ignore_zero = false);
   %python_attribute2(high_resolution_image, high_resolution_image_ptr,
 		     boost::shared_ptr<RasterImage>)
+  %python_attribute(number_line_per_pixel, int)
+  %python_attribute(number_sample_per_pixel, int)
+  %python_attribute(ignore_zero, bool)
+  %pickle_init(1, self.high_resolution_image,
+	       self.number_line_per_pixel, self.number_sample_per_pixel,
+	       self.ignore_zero)
+protected:
+  virtual void calc(int Lstart, int Sstart) const;
+};
+
+class RasterAveragedMultiBand : public CalcRasterMultiBand {
+public:
+  RasterAveragedMultiBand(const boost::shared_ptr<RasterImageMultiBand>& Data,
+		 int Number_line_per_pixel, 
+		 int Number_sample_per_pixel,
+		 bool Ignore_zero = false);
+  %python_attribute2(high_resolution_image, high_resolution_image_ptr,
+		     boost::shared_ptr<RasterImageMultiBand>)
   %python_attribute(number_line_per_pixel, int)
   %python_attribute(number_sample_per_pixel, int)
   %python_attribute(ignore_zero, bool)

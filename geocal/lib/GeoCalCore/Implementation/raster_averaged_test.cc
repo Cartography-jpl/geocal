@@ -30,6 +30,44 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_EQUAL(rarr[0][1], expected);
 }
 
+BOOST_AUTO_TEST_CASE(basic_mb_test)
+{
+  boost::shared_ptr<RasterImage> data(new MemoryRasterImage(11, 10));
+  int val = 0;
+  for(int i = 0; i < data->number_line(); ++i)
+    for(int j = 0; j < data->number_sample(); ++j, ++val)
+      data->write(i, j, val);
+  boost::shared_ptr<RasterImage> data2(new MemoryRasterImage(11, 10));
+  for(int i = 0; i < data2->number_line(); ++i)
+    for(int j = 0; j < data2->number_sample(); ++j, ++val)
+      data2->write(i, j, val);
+  boost::shared_ptr<RasterImageMultiBandVariable> 
+    mb(new RasterImageMultiBandVariable());
+  mb->add_raster_image(data);
+  mb->add_raster_image(data2);
+  RasterAveragedMultiBand ra(mb, 2, 3);
+  BOOST_CHECK_EQUAL(ra.raster_image(0).number_line(), 5);
+  BOOST_CHECK_EQUAL(ra.raster_image(0).number_sample(), 3);
+  BOOST_CHECK_EQUAL(ra.number_band(), 2);
+  BOOST_CHECK_EQUAL(ra.raster_image(1).number_line(), 5);
+  BOOST_CHECK_EQUAL(ra.raster_image(1).number_sample(), 3);
+  BOOST_CHECK_EQUAL(ra.high_resolution_image().raster_image(0).number_line(), 11);
+  BOOST_CHECK_EQUAL(ra.number_line_per_pixel(), 2);
+  BOOST_CHECK_EQUAL(ra.number_sample_per_pixel(), 3);
+  double expected = 0;
+  for(int i = 0; i < 2; ++i)
+    for(int j = 0; j < 3; ++j)
+      expected += (*data)(2 + i, 6 + j);
+  expected /= 6;
+  BOOST_CHECK_CLOSE(ra.read_double(1, 2, 1, 1)(0,0,0) , expected, 1e-4);
+  double expected2 = 0;
+  for(int i = 0; i < 2; ++i)
+    for(int j = 0; j < 3; ++j)
+      expected2 += (*data2)(2 + i, 6 + j);
+  expected2 /= 6;
+  BOOST_CHECK_CLOSE(ra.read_double(1, 2, 1, 1)(1,0,0) , expected2, 1e-4);
+}
+
 BOOST_AUTO_TEST_CASE(map_projected_averaged_test)
 {
   double ulc_x = 50;

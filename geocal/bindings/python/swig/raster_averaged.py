@@ -108,12 +108,17 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal.calc_raster
+import geocal.raster_image_variable
 import geocal.raster_image
 import geocal.generic_object
+import geocal.calc_raster_multi_band
+import geocal.raster_image_multi_band_variable
+import geocal.raster_image_multi_band
 import geocal.image_mask
 import geocal.image_ground_connection
 import geocal.geocal_exception
-class RasterAveraged(object):
+class RasterAveraged(geocal.calc_raster.CalcRaster):
     """
     This averages a higher resolution RasterImage into a lower resolution
     one.
@@ -203,6 +208,97 @@ RasterAveraged._v_number_sample_per_pixel = new_instancemethod(_raster_averaged.
 RasterAveraged._v_ignore_zero = new_instancemethod(_raster_averaged.RasterAveraged__v_ignore_zero,None,RasterAveraged)
 RasterAveraged_swigregister = _raster_averaged.RasterAveraged_swigregister
 RasterAveraged_swigregister(RasterAveraged)
+
+class RasterAveragedMultiBand(geocal.calc_raster_multi_band.CalcRasterMultiBand):
+    """
+    This averages a higher resolution RasterImageMultiBand into a lower
+    resolution one.
+
+    The data is a straight average of a given number of pixels in the line
+    and sample direction of the full resolution data.
+
+    Typically the pixel averaging factor doesn't exactly divide the number
+    of lines and samples of the full resolution data. We just trim the
+    data to the largest low resolution pixel that completely fits in the
+    higher resolution data.
+
+    This class calculates the average on the fly. Sometimes this is what
+    you want, but if you are going to be using the resulting data a few
+    times, you may want to use a MemoryRasterImage to generate a copy once
+    and keep it in memory.
+
+    C++ includes: raster_averaged.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        RasterAveragedMultiBand::RasterAveragedMultiBand(const boost::shared_ptr< RasterImageMultiBand > &Data, int
+        Number_line_per_pixel, int Number_sample_per_pixel, bool
+        Ignore_zero=false)
+        Constructor. 
+        """
+        _raster_averaged.RasterAveragedMultiBand_swiginit(self,_raster_averaged.new_RasterAveragedMultiBand(*args))
+    def _v_high_resolution_image(self):
+        """
+        const boost::shared_ptr<RasterImageMultiBand>& GeoCal::RasterAveragedMultiBand::high_resolution_image_ptr() const
+        Pointer to high resolution image that this object is based on. 
+        """
+        return _raster_averaged.RasterAveragedMultiBand__v_high_resolution_image(self)
+
+    @property
+    def high_resolution_image(self):
+        return self._v_high_resolution_image()
+
+    def _v_number_line_per_pixel(self):
+        """
+        int GeoCal::RasterAveragedMultiBand::number_line_per_pixel() const
+        Number of lines of high resolution data per pixel of this lower
+        resolution RasterImage. 
+        """
+        return _raster_averaged.RasterAveragedMultiBand__v_number_line_per_pixel(self)
+
+    @property
+    def number_line_per_pixel(self):
+        return self._v_number_line_per_pixel()
+
+    def _v_number_sample_per_pixel(self):
+        """
+        int GeoCal::RasterAveragedMultiBand::number_sample_per_pixel() const
+        Number of samples of high resolution data per pixel of this lower
+        resolution RasterImage. 
+        """
+        return _raster_averaged.RasterAveragedMultiBand__v_number_sample_per_pixel(self)
+
+    @property
+    def number_sample_per_pixel(self):
+        return self._v_number_sample_per_pixel()
+
+    def _v_ignore_zero(self):
+        """
+        bool GeoCal::RasterAveragedMultiBand::ignore_zero() const
+        If true, we ignore zeros when calculating the average. 
+        """
+        return _raster_averaged.RasterAveragedMultiBand__v_ignore_zero(self)
+
+    @property
+    def ignore_zero(self):
+        return self._v_ignore_zero()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.high_resolution_image,self.number_line_per_pixel,self.number_sample_per_pixel,self.ignore_zero)
+
+    __swig_destroy__ = _raster_averaged.delete_RasterAveragedMultiBand
+RasterAveragedMultiBand._v_high_resolution_image = new_instancemethod(_raster_averaged.RasterAveragedMultiBand__v_high_resolution_image,None,RasterAveragedMultiBand)
+RasterAveragedMultiBand._v_number_line_per_pixel = new_instancemethod(_raster_averaged.RasterAveragedMultiBand__v_number_line_per_pixel,None,RasterAveragedMultiBand)
+RasterAveragedMultiBand._v_number_sample_per_pixel = new_instancemethod(_raster_averaged.RasterAveragedMultiBand__v_number_sample_per_pixel,None,RasterAveragedMultiBand)
+RasterAveragedMultiBand._v_ignore_zero = new_instancemethod(_raster_averaged.RasterAveragedMultiBand__v_ignore_zero,None,RasterAveragedMultiBand)
+RasterAveragedMultiBand_swigregister = _raster_averaged.RasterAveragedMultiBand_swigregister
+RasterAveragedMultiBand_swigregister(RasterAveragedMultiBand)
 
 class ImageMaskAveraged(geocal.image_mask.ImageMask):
     """

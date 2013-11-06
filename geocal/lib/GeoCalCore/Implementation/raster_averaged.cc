@@ -1,5 +1,6 @@
 #include "raster_averaged.h"
 #include "memory_raster_image.h"
+#include "ostream_pad.h"
 
 using namespace GeoCal;
 
@@ -34,8 +35,29 @@ RasterAveraged::RasterAveraged(const boost::shared_ptr<RasterImage>& Data,
 }
 
 //-----------------------------------------------------------------------
-/// Return a subset of the image.
+/// Constructor.
 //-----------------------------------------------------------------------
+
+RasterAveragedMultiBand::RasterAveragedMultiBand(
+const boost::shared_ptr<RasterImageMultiBand>& Data,
+int Number_line_per_pixel, 
+int Number_sample_per_pixel,
+bool Ignore_zero)
+: raw_data_(Data),
+  ignore_zero_(Ignore_zero),
+  number_line_per_pixel_(Number_line_per_pixel),
+  number_sample_per_pixel_(Number_sample_per_pixel)
+{
+  range_min_check(Number_line_per_pixel, 1);
+  range_min_check(Number_sample_per_pixel, 1);
+  RasterAveraged sample_rimg(Data->raster_image_ptr(0),Number_line_per_pixel,
+			     Number_sample_per_pixel, Ignore_zero);
+  initialize(sample_rimg, Data->number_band(),
+	     std::max(Data->raster_image(0).number_tile_line() / 
+		      Number_line_per_pixel, 1),
+	     std::max(Data->raster_image(0).number_tile_sample() / 
+		      Number_sample_per_pixel, 1));
+}
 
 void RasterAveraged::calc(int Lstart, int Sstart) const
 {
@@ -57,16 +79,56 @@ void RasterAveraged::calc(int Lstart, int Sstart) const
     }
 }
 
+void RasterAveragedMultiBand::calc(int Lstart, int Sstart) const
+{
+  blitz::Array<double, 3> res_high = 
+    raw_data_->read_double(Lstart * number_line_per_pixel(),
+			   Sstart * number_sample_per_pixel(),
+			   data.cols() * number_line_per_pixel(),
+			   data.depth() * number_sample_per_pixel());
+  for(int i = 0; i < data.cols(); ++i)
+    for(int j = 0; j < data.depth(); ++j) {
+      blitz::Range r1(i * number_line_per_pixel(), 
+		      (i + 1) * number_line_per_pixel() - 1);
+      blitz::Range r2(j * number_sample_per_pixel(), 
+		      (j + 1) * number_sample_per_pixel() - 1);
+      for(int k = 0; k < data.rows(); ++k) {
+	blitz::Array<double, 2> res_high_sub(res_high(k, r1, r2));
+	int cnt = (ignore_zero_ ? count(res_high_sub != 0) : 
+		   res_high_sub.size());
+	data(k,i,j) = (cnt == 0 ? 0 : (int) sum(res_high_sub) / cnt);
+      }
+    }
+}
+
 //-----------------------------------------------------------------------
 /// Print to stream.
 //-----------------------------------------------------------------------
 
 void RasterAveraged::print(std::ostream& Os) const
 {
+  OstreamPad opad(Os, "    ");
   Os << "RasterAverage:\n"
      << "  Number line per pixel: " << number_line_per_pixel() << "\n"
      << "  Number sample per pixel: " << number_sample_per_pixel() << "\n"
-     << "  RasterImage: " << high_resolution_image() << "\n";
+     << "  RasterImage:\n";
+  opad << high_resolution_image() << "\n";
+  opad.strict_sync();
+}
+
+//-----------------------------------------------------------------------
+/// Print to stream.
+//-----------------------------------------------------------------------
+
+void RasterAveragedMultiBand::print(std::ostream& Os) const
+{
+  OstreamPad opad(Os, "    ");
+  Os << "RasterAverageMultiBand:\n"
+     << "  Number line per pixel: " << number_line_per_pixel() << "\n"
+     << "  Number sample per pixel: " << number_sample_per_pixel() << "\n"
+     << "  RasterImageMultiBand:\n";
+  opad << high_resolution_image() << "\n";
+  opad.strict_sync();
 }
 
 

@@ -2,6 +2,7 @@
 #include "raster_averaged.h"
 #include "memory_raster_image.h"
 #include "memory_multi_band.h"
+#include "ostream_pad.h"
 using namespace GeoCal;
 using namespace blitz;
 
@@ -118,6 +119,8 @@ IgcMapProjected::IgcMapProjected
   : CalcRaster(Mi), 
     IgcMapProjectedBase(Mi, Igc, Grid_spacing, Avg_fact, Read_into_memory)
 {
+  if(!Igc->image())
+    throw Exception("No Image found in IgcMapProjected. Did you mean to use IgcMapProjectedMultiBand?");
   if(Number_tile_line < 0)
     number_tile_line_ = number_line();
   else
@@ -128,8 +131,80 @@ IgcMapProjected::IgcMapProjected
     number_tile_sample_ = Number_tile_sample;
 }
 
+//-----------------------------------------------------------------------
+/// Constructor. We average the data either by the factor given as
+/// Avg_fact, or by ratio of the Mapinfo resolution and the Igc
+/// resolution. 
+///
+/// You can optionally pass a grid spacing to use. We calculate
+/// image coordinates in the input exactly at the grid spacing, and
+/// interpolate in betweeen. This is much faster than calculating
+/// every point, and if the grid spacing is small compared to the Dem
+/// and any nonlinearities then it gives results very close to the
+/// full calculation.
+//-----------------------------------------------------------------------
+
+IgcMapProjectedMultiBand::IgcMapProjectedMultiBand
+(const MapInfo& Mi, 
+ const boost::shared_ptr<ImageGroundConnection>& Igc,
+ int Grid_spacing,
+ int Avg_fact,
+ bool Read_into_memory,
+ int Number_tile_line, int Number_tile_sample)
+: IgcMapProjectedBase(Mi, Igc, Grid_spacing, Avg_fact, Read_into_memory)
+{
+  if(!Igc->image_multi_band())
+    throw Exception("No mult-band image found in IgcMapProjectedMultiBand. Did you mean to use IgcMapProjected?");
+  int ntl = Number_tile_line;
+  int nts = Number_tile_sample;
+  if(Number_tile_line < 0)
+    ntl = Mi.number_y_pixel();
+  if(Number_tile_sample < 0)
+    nts = Mi.number_x_pixel();
+  initialize(Mi, Igc->number_band(), ntl, nts);
+}
+
+// See base class for description
+void IgcMapProjected::print(std::ostream& Os) const
+{
+  OstreamPad opad(Os, "    ");
+  Os << "IgcMapProjected:\n"
+     << "  Avg_factor:   " << avg_factor() << "\n"
+     << "  Grid spacing: " << grid_spacing() << "\n"
+     << "  Map info:\n";
+  opad << map_info() << "\n";
+  opad.strict_sync();
+  Os << "  Image ground connection:\n" ;
+  opad << *igc_ << "\n";
+  opad.strict_sync();
+}
+
+// See base class for description
+void IgcMapProjectedMultiBand::print(std::ostream& Os) const
+{
+  OstreamPad opad(Os, "    ");
+  Os << "IgcMapProjectedMultiBand:\n"
+     << "  Avg_factor:   " << avg_factor() << "\n"
+     << "  Grid spacing: " << grid_spacing() << "\n"
+     << "  Map info:\n";
+  opad << raster_image(0).map_info() << "\n";
+  opad.strict_sync();
+  Os << "  Image ground connection:\n" ;
+  opad << *igc_ << "\n";
+  opad.strict_sync();
+}
+
 // See base class for description
 void IgcMapProjected::calc(int Lstart, int Sstart) const
+{
+  if(grid_spacing_ == 1)
+    calc_no_grid(Lstart, Sstart);
+  else
+    calc_grid(Lstart, Sstart);
+}
+
+// See base class for description
+void IgcMapProjectedMultiBand::calc(int Lstart, int Sstart) const
 {
   if(grid_spacing_ == 1)
     calc_no_grid(Lstart, Sstart);
@@ -160,6 +235,29 @@ void IgcMapProjected::calc_no_grid(int Lstart, int Sstart) const
 }
 
 //-----------------------------------------------------------------------
+/// Calculation of map projected data when we don't do any grid
+/// interpolation.
+//-----------------------------------------------------------------------
+
+void IgcMapProjectedMultiBand::calc_no_grid(int Lstart, int Sstart) const
+{
+  for(int i = 0; i < data.cols(); ++i)
+    for(int j = 0; j < data.depth(); ++j) {
+      boost::shared_ptr<GroundCoordinate> gc = 
+	mi.ground_coordinate(Sstart + j, Lstart + i, igc_->dem());
+      ImageCoordinate ic = igc_->image_coordinate(*gc);
+      if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
+	 ic.sample < 0 || ic.sample >= igc_->number_sample() - 1)
+	data(Range::all(), i, j) =  0;	// Data outside of image, so 0.
+      else
+	for(int k = 0; k < data.rows(); ++k)
+	  data(k, i, j) = 
+	    igc_->image_multi_band()->raster_image(k).
+	    unchecked_interpolate(ic.line, ic.sample);
+    }
+}
+
+//-----------------------------------------------------------------------
 /// Calculation when we do have grid interpolation.
 //-----------------------------------------------------------------------
 
@@ -180,6 +278,33 @@ void IgcMapProjected::calc_grid(int Lstart, int Sstart) const
 	    data(ii, jj) =  0;	// Data outside of image, so 0.
 	  else
 	    data(ii, jj) = igc_->image()->unchecked_interpolate(ln, smp);
+	}
+    }
+}
+//-----------------------------------------------------------------------
+/// Calculation when we do have grid interpolation.
+//-----------------------------------------------------------------------
+
+void IgcMapProjectedMultiBand::calc_grid(int Lstart, int Sstart) const
+{
+  for(int i = -(Lstart % grid_spacing_); i < data.cols(); i += grid_spacing_)
+    for(int j = -(Sstart % grid_spacing_); j < data.depth(); 
+	j += grid_spacing_) {
+      interpolate_ic(Lstart + i, Sstart + j); 
+      for(int ii = std::max(i, 0); 
+	  ii < std::min(i + grid_spacing_, data.cols()); ++ii)
+	for(int jj = std::max(j, 0); 
+	    jj < std::min(j + grid_spacing_, data.depth()); ++jj) {
+	  double ln = ic_line(ii + Lstart, jj + Sstart);
+	  double smp = ic_sample(ii + Lstart, jj + Sstart);
+	  if(ln < 0 || ln >= igc_->number_line() - 1 ||
+	     smp < 0 || smp >= igc_->number_sample() - 1)
+	    data(Range::all(), ii, jj) =  0;	// Data outside of image, so 0.
+	  else
+	    for(int k = 0; k < data.rows(); ++k)
+	      data(k, ii, jj) = 
+		igc_->image_multi_band()->raster_image(k).
+		unchecked_interpolate(ln, smp);
 	}
     }
 }

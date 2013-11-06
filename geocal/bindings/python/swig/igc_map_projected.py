@@ -112,6 +112,9 @@ import geocal.calc_raster
 import geocal.raster_image_variable
 import geocal.raster_image
 import geocal.generic_object
+import geocal.calc_raster_multi_band
+import geocal.raster_image_multi_band_variable
+import geocal.raster_image_multi_band
 import geocal.geocal_exception
 class IgcMapProjected(geocal.calc_raster.CalcRaster):
     """
@@ -220,6 +223,114 @@ IgcMapProjected._v_grid_spacing = new_instancemethod(_igc_map_projected.IgcMapPr
 IgcMapProjected._v_read_into_memory = new_instancemethod(_igc_map_projected.IgcMapProjected__v_read_into_memory,None,IgcMapProjected)
 IgcMapProjected_swigregister = _igc_map_projected.IgcMapProjected_swigregister
 IgcMapProjected_swigregister(IgcMapProjected)
+
+class IgcMapProjectedMultiBand(geocal.calc_raster_multi_band.CalcRasterMultiBand):
+    """
+    This is a RasterImageMultiBand that has been map projected using an
+    ImageGroundConnection and a Camera.
+
+    To do this we do two steps:
+
+    We calculate roughly what the difference in resolution is between the
+    original data and final MapInfo. We do this by looking at the center
+    pixel of the original data and the pixel +1 in line and sample. We
+    then use RasterAveraged to average the original data to roughly the
+    resolution of the final MapInfo. If the final MapInfo is near the same
+    resolution as the original, or if it has a higher resolution, then we
+    don't do any averaging. Alternatively, you can pass in the averaging
+    factor (include a value of 1 which turns this behavior off).
+
+    We then interpolate the possibly averaged data to the final
+    projection.
+
+    It is ok if the final MapInfo contains areas outside of the original
+    data. For any pixel outside of the original data, we just return a
+    value of 0.
+
+    This class calculates the data on the fly. Sometimes this is what you
+    want, but if you are going to be using the resulting data a few times,
+    you may want to use a MemoryRasterImage to generate a copy once and
+    keep it in memory.
+
+    C++ includes: igc_map_projected.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        IgcMapProjectedMultiBand::IgcMapProjectedMultiBand(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >
+        &Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,
+        int Number_tile_line=-1, int Number_tile_sample=-1)
+        Constructor.
+
+        We average the data either by the factor given as Avg_fact, or by
+        ratio of the Mapinfo resolution and the Igc resolution.
+
+        You can optionally pass a grid spacing to use. We calculate image
+        coordinates in the input exactly at the grid spacing, and interpolate
+        in betweeen. This is much faster than calculating every point, and if
+        the grid spacing is small compared to the Dem and any nonlinearities
+        then it gives results very close to the full calculation. 
+        """
+        _igc_map_projected.IgcMapProjectedMultiBand_swiginit(self,_igc_map_projected.new_IgcMapProjectedMultiBand(*args))
+    def _v_igc_original(self):
+        """
+        const boost::shared_ptr<ImageGroundConnection>& GeoCal::IgcMapProjectedBase::igc_original() const
+
+        """
+        return _igc_map_projected.IgcMapProjectedMultiBand__v_igc_original(self)
+
+    @property
+    def igc_original(self):
+        return self._v_igc_original()
+
+    def _v_avg_factor(self):
+        """
+        int GeoCal::IgcMapProjectedBase::avg_factor() const
+
+        """
+        return _igc_map_projected.IgcMapProjectedMultiBand__v_avg_factor(self)
+
+    @property
+    def avg_factor(self):
+        return self._v_avg_factor()
+
+    def _v_grid_spacing(self):
+        """
+        int GeoCal::IgcMapProjectedBase::grid_spacing() const
+
+        """
+        return _igc_map_projected.IgcMapProjectedMultiBand__v_grid_spacing(self)
+
+    @property
+    def grid_spacing(self):
+        return self._v_grid_spacing()
+
+    def _v_read_into_memory(self):
+        """
+        bool GeoCal::IgcMapProjectedBase::read_into_memory() const
+
+        """
+        return _igc_map_projected.IgcMapProjectedMultiBand__v_read_into_memory(self)
+
+    @property
+    def read_into_memory(self):
+        return self._v_read_into_memory()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.map_info,self.igc_original,self.grid_spacing,self.avg_factor,self.read_into_memory,self.number_tile_line,self.number_tile_sample)
+
+    __swig_destroy__ = _igc_map_projected.delete_IgcMapProjectedMultiBand
+IgcMapProjectedMultiBand._v_igc_original = new_instancemethod(_igc_map_projected.IgcMapProjectedMultiBand__v_igc_original,None,IgcMapProjectedMultiBand)
+IgcMapProjectedMultiBand._v_avg_factor = new_instancemethod(_igc_map_projected.IgcMapProjectedMultiBand__v_avg_factor,None,IgcMapProjectedMultiBand)
+IgcMapProjectedMultiBand._v_grid_spacing = new_instancemethod(_igc_map_projected.IgcMapProjectedMultiBand__v_grid_spacing,None,IgcMapProjectedMultiBand)
+IgcMapProjectedMultiBand._v_read_into_memory = new_instancemethod(_igc_map_projected.IgcMapProjectedMultiBand__v_read_into_memory,None,IgcMapProjectedMultiBand)
+IgcMapProjectedMultiBand_swigregister = _igc_map_projected.IgcMapProjectedMultiBand_swigregister
+IgcMapProjectedMultiBand_swigregister(IgcMapProjectedMultiBand)
 
 
 

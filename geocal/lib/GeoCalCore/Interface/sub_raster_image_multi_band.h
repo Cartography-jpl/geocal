@@ -21,7 +21,7 @@ public:
   void write(int Lstart, int Sstart, const blitz::Array<int, 3>& Data);
   virtual void print(std::ostream& Os) const;
   int start_line() const {return sl;}
-  int start_sample() const {return ns;}
+  int start_sample() const {return ss;}
   boost::shared_ptr<RasterImageMultiBand> full_raster_image_multi_band()
     const { return rmb; }
 private:

@@ -73,10 +73,10 @@ if(args.log_file):
                         format = '%(asctime)s %(levelname)s:%(name)s:%(message)s',
                         filename = args.log_file)
     if(args.verbose):
-        console = logging.StreamHandler()
+        console = logging.StreamHandler(stream=sys.stdout)
         console.setLevel(logging.INFO)
         console.setFormatter(logging.Formatter('%(levelname)s:%(name)s:%(message)s'))
-        logging.getLogger("afids-python.sba").addHandler(console)
+        logging.getLogger("afids-python").addHandler(console)
 elif(args.verbose):
     logging.basicConfig(level = logging.INFO)
 log = logging.getLogger("afids-python.sba")
@@ -118,5 +118,5 @@ tpcol = sba.tpcol
 for i in range(len(tpcol)):
     tpcol[i].ground_location = sba.ground_location(i)
 write_shelve(args.tpcol_out, tpcol)
-
+logging.shutdown()
 

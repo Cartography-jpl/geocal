@@ -124,10 +124,14 @@ def generate_image_ms(fname, name_in, name, subset = None):
 @contextmanager
 def timing(txt):
     logstep.info(txt)
+    for h in log.handlers:
+        h.flush()
     tstart2 = time.time()
     yield
     log.info("Delta Time: %f" % (time.time() - tstart2))
     log.info("Total Time: %f" % (time.time() - tstart))
+    for h in log.handlers:
+        h.flush()
 
 def determine_subset(fname):
     subset = None
@@ -202,10 +206,11 @@ pfile.setLevel(logging.INFO)
 pfile.setFormatter(logging.Formatter('%(message)s'))
 logstep.addHandler(pfile)
 if(args.verbose):
-    console = logging.StreamHandler()
+    console = logging.StreamHandler(stream=sys.stdout)
     console.setLevel(logging.INFO)
     console.setFormatter(logging.Formatter('%(levelname)s:%(name)s:%(message)s'))
     log.addHandler(console)
+    logstep.addHandler(console)
 
 
 # 2. Initial DEM

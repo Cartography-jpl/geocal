@@ -53,6 +53,9 @@ Options:
   --gcp-sigma=v
        Weighting to give GCP constraint [default: 10.0]
 
+  --log-file=f
+       File name to use as a log file.
+
   --tp-epsilon=v
        Epsilon to use during the calculation of the tie point Jacobian.
        [default: 1.0]
@@ -65,9 +68,18 @@ Options:
 '''
 
 args = docopt_simple(usage, version=version)
-if(args.verbose):
+if(args.log_file):
+    logging.basicConfig(level = logging.INFO,
+                        format = '%(asctime)s %(levelname)s:%(name)s:%(message)s',
+                        filename = args.log_file)
+    if(args.verbose):
+        console = logging.StreamHandler()
+        console.setLevel(logging.INFO)
+        console.setFormatter(logging.Formatter('%(levelname)s:%(name)s:%(message)s'))
+        logging.getLogger("afids-python.sba").addHandler(console)
+elif(args.verbose):
     logging.basicConfig(level = logging.INFO)
-log = logging.getLogger("sba")
+log = logging.getLogger("afids-python.sba")
 
 igc = read_shelve(args.igc_in)
 tpcol = read_shelve(args.tpcol_in)

@@ -38,6 +38,9 @@ Options:
        Set up to using gnu parallel program, including generating a script
        for this. We do not actually run the script.
 
+  --log-file=f
+       File name to use as a log file.
+
   --no-data-value=n
        Value to indicate no data. This is just set as metadata for the
        output file, it doesn't affect the generation of the image at all.
@@ -80,9 +83,18 @@ Options:
 '''
 
 args = docopt_simple(usage, version=version)
-if(args.verbose):
+if(args.log_file):
+    logging.basicConfig(level = logging.INFO,
+                        format = '%(asctime)s %(levelname)s:%(name)s:%(message)s',
+                        filename = args.log_file)
+    if(args.verbose):
+        console = logging.StreamHandler()
+        console.setLevel(logging.INFO)
+        console.setFormatter(logging.Formatter('%(levelname)s:%(name)s:%(message)s'))
+        logging.getLogger("afids-python.write_image").addHandler(console)
+elif(args.verbose):
     logging.basicConfig(level = logging.INFO)
-log = logging.getLogger("afids-python")
+log = logging.getLogger("afids-python.write_image")
 
 img_in = read_shelve(args.input_image)
 if(args.start_line):

@@ -73,9 +73,6 @@ Options:
 '''
 
 args = docopt_simple(usage, version=version)
-if(args.verbose):
-    logging.basicConfig(level = logging.INFO)
-log = logging.getLogger("abachd")
 tstart = time.time()
 
 # Get input files
@@ -132,7 +129,7 @@ def generate_image_ms(fname, name_in, name, subset = None):
 
 @contextmanager
 def timing(txt):
-    log.info(txt)
+    logstep.info(txt)
     tstart2 = time.time()
     yield
     log.info("Delta Time: %f" % (time.time() - tstart2))
@@ -164,7 +161,7 @@ def import_image(fname, name, subset = None):
                                nproc, dbfile + ":%s_raw" % name, name + ".img"])
     shelve_image(name + ".img", name)
 
-def import_ms_image(fname, name, subset = None):
+def import_image_ms(fname, name, subset = None):
     shelve_image(fname, "%s_raw" % name, subset = subset, 
                  multi_band = True)
     with timing("Importing %s image" % name):
@@ -189,6 +186,7 @@ def dem_generate():
                                dbfile + ":initial_surf2",
                                "0", "1", dbfile + ":dem_generate"])
         cmd = ["write_image", "--vicar-type=DOUB", "--no-data-value=-9999",
+               "--log-file=logfile.log",
                nproc, dbfile + ":dem_generate", "dem_generate.img",
                "dem_generate_filled.img"]
         if(args.verbose):
@@ -199,9 +197,26 @@ def dem_generate():
                                "dem_generate_filled.img",
                                dbfile + ":dem_generate_filled"])
 
-# 1. Create the output directory, if it doesn't already exist.
+# 1. Create the output directory, if it doesn't already exist, and
+# set up logger
 subprocess.check_call(["mkdir", "-p", args.output])
 os.chdir(args.output)
+logging.basicConfig(level = logging.INFO,
+                    filename = "logfile.log",
+                    format = '%(asctime)s %(levelname)s:%(name)s:%(message)s',
+                    filemode='w')
+log = logging.getLogger("abachd")
+logstep = logging.getLogger("abachd-step")
+pfile = logging.FileHandler("process-step.log")
+pfile.setLevel(logging.INFO)
+pfile.setFormatter(logging.Formatter('%(message)s'))
+logstep.addHandler(pfile)
+if(args.verbose):
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
+    console.setFormatter(logging.Formatter('%(levelname)s:%(name)s:%(message)s'))
+    log.addHandler(console)
+
 
 # 2. Initial DEM
 if(args.dem_file):
@@ -217,10 +232,10 @@ if(args.start_line):
               args.number_sample]
 import_image(pre_pan_raw, "pre_pan", subset = subset)
 if(pre_ms_raw):
-    import_ms_image(pre_ms_raw, "pre_ms", subset = determine_subset(pre_ms_raw))
+    import_image_ms(pre_ms_raw, "pre_ms", subset = determine_subset(pre_ms_raw))
 import_image(post_pan_raw, "post_pan", subset = determine_subset(post_pan_raw))
 if(post_ms_raw):
-    import_ms_image(post_ms_raw, "post_ms", 
+    import_image_ms(post_ms_raw, "post_ms", 
                    subset = determine_subset(post_ms_raw))
 
 # 4. Create initial igccol
@@ -249,7 +264,8 @@ with timing("Collecting tiepoints"):
                            dbfile + ":tpcol", nproc])
 
 # 6. SBA
-cmd = ["sba", "--dem-height-block-adjust", dbfile + ":igc_initial",
+cmd = ["sba", "--dem-height-block-adjust", "--log-file=logfile.log",
+       dbfile + ":igc_initial",
        dbfile + ":tpcol", dbfile + ":igc_sba", dbfile + ":tpcol_sba"]
 if(args.verbose):
     cmd.append("--verbose")

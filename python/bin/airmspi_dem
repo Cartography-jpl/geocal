@@ -42,6 +42,11 @@ Options:
   --number-process=n
        Number of processors to use. [default: 1]
 
+  --sba
+       Run SBA to correct the co-registration of the data. If it is already
+       registered correctly, this is likely to make things worse - so this
+       is off by default.
+
   --use-dependency
        By default, we just run all steps. It can be useful, particularly 
        when debugging, to only run a step if the input is newer than the
@@ -135,44 +140,49 @@ with timing("IgcCollection"):
                                dbfile + "igc2"])
 
 # 5. Collect tiepoints
-with timing("Collect tiepoints"):
-    if track_dependency(dbfile + "tpcol", dbfile + "igc_initial"):
-        cmd = ["tp_collect", "--max-ground-sigma=300",
-               dbfile + "igc_initial", dbfile + "tpcol"]
-        if(args.avg_level > 0):
-            cmd.append("--avg-level=%d" % args.avg_level)
-        subprocess.check_call(cmd)
+if(args.sba):
+    with timing("Collect tiepoints"):
+        if track_dependency(dbfile + "tpcol", dbfile + "igc_initial"):
+            cmd = ["tp_collect", "--max-ground-sigma=300",
+                   dbfile + "igc_initial", dbfile + "tpcol"]
+            if(args.avg_level > 0):
+                cmd.append("--avg-level=%d" % args.avg_level)
+            subprocess.check_call(cmd)
 
 # 6. Run SBA
 # Note really big DEM sigma. We don't actually have functionality in place
 # to skip the surface constraint, but the essientially reduces the weight of
 # it to almost 0
-with timing("SBA"):
-    cmd = ["sba","--dem-sigma=10000", dbfile + "igc_initial", dbfile + "tpcol",
-           dbfile + "igc_sba", dbfile + "tpcol_sba"]
-    if(args.verbose):
-        cmd.append("--verbose")
-    if track_dependency(dbfile + "igc_sba", dbfile + "tpcol",
-                        dbfile + "igc_initial"):
-        subprocess.check_call(cmd)
+if(args.sba):
+    with timing("SBA"):
+        cmd = ["sba","--dem-sigma=10000", dbfile + "igc_initial", dbfile + "tpcol",
+               dbfile + "igc_sba", dbfile + "tpcol_sba"]
+        if(args.verbose):
+            cmd.append("--verbose")
+        if track_dependency(dbfile + "igc_sba", dbfile + "tpcol",
+                            dbfile + "igc_initial"):
+            subprocess.check_call(cmd)
+        igc_to_use = dbfile + "igc_sba"
+else:
+    igc_to_use = dbfile + "igc_initial"
 
 # 7. Project to surface. Note parallel writing doesn't work here, there
 # is a bug we haven't tracked down yet in using HDF/GDAL files as input
 # for parallel runs.
 with timing("Project to surface"):
-    if track_dependency(dbfile + "surface_1", dbfile + "igc_sba"):
+    if track_dependency(dbfile + "surface_1", igc_to_use):
         subprocess.check_call(["igc_project", "--grid-spacing=10",
-                               "--resolution=10", dbfile + "igc_sba",
+                               "--resolution=10", igc_to_use,
                                str(img1_index), dbfile + "surface_1_init"])
         subprocess.check_call(["write_image", dbfile + "surface_1_init",
                               "img1_surf.img"])
         subprocess.check_call(["shelve_image", "img1_surf.img", 
                                dbfile + "surface_1"])
     if track_dependency(dbfile + "surface_2", dbfile + "surface_1",
-                        dbfile + "igc_sba"):
+                        igc_to_use):
         subprocess.check_call(["igc_project", "--grid-spacing=10",
                                "--map-info=" + dbfile + "surface_1", 
-                               dbfile + "igc_sba",
+                               igc_to_use,
                                str(img2_index), dbfile + "surface_2_init"])
         subprocess.check_call(["write_image", dbfile + "surface_2_init",
                               "img2_surf.img"])
@@ -181,13 +191,13 @@ with timing("Project to surface"):
 
 # 8. Generate DEM
 with timing("Generate DEM"):
-    if track_dependency(dbfile + "dem", dbfile + "igc_sba", 
+    if track_dependency(dbfile + "dem", igc_to_use, 
                         dbfile + "surface_1",
                         dbfile + "surface_2"):
         cmd = ["dem_generate", "--resolution=%f" % dem_resolution,
                "--max-distance-good-point=%f" % args.max_distance_good_point,
                "--airmspi-image-match",
-               dbfile + "igc_sba", dbfile + "surface_1",
+               igc_to_use, dbfile + "surface_1",
                dbfile + "surface_2", str(img1_index), str(img2_index),
                dbfile + "dem_init"]
         if(average_factor > 1):

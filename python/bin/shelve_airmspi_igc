@@ -17,6 +17,12 @@ Options:
   -h --help         
        Print this message
 
+  --data-field=s
+       The data field to read [default: I]
+
+  --data-scale=f
+       The scale to apply to the data [default: 32767.0]
+
   --group-name=s
        The group name to read from the HDF file. [default: 555nm_band]
 
@@ -29,5 +35,5 @@ Options:
 # Parse command line arguments
 args = docopt_simple(usage, version=version)
 igc = AirMspiIgc(args.air_mspi_file, args.title, args.ellipsoid_height,
-                 args.group_name)
+                 args.group_name, args.data_field, args.data_scale)
 write_shelve(args.output, igc)

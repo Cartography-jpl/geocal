@@ -25,6 +25,15 @@ Options:
        power of 2 to average the data by, so "3" is 2^3 = 8, meaning we
        generate 80m pixels. [default: 0]
 
+  --data-field=s
+       The data field to read [default: I]
+
+  --data-scale=f
+       The scale to apply to the data [default: 32767.0]
+
+  --group-name=s
+       The group name to read from the HDF file. [default: 555nm_band]
+
   --image1-index=d
        Index to use for the first image in DEM generation. This is in the
        same order the images are listed on the command line. [default: 0]
@@ -107,13 +116,23 @@ os.chdir(args.output_dir)
 # are implemented in python
 with timing("Initial ImageGroundConnections"):
     if track_dependency(dbfile + "igc1_slow", img1_name):
-        subprocess.check_call(["shelve_airmspi_igc", img1_name, "Image 1",
-                               dbfile + "igc1_slow"])
+        subprocess.check_call(["shelve_airmspi_igc", 
+                               "--data-field=%s" % args.data_field,
+                               "--data-scale=%f" % float(args.data_scale),
+                               "--group-name=%s" % args.group_name,
+                               img1_name, "Image 1", dbfile + "igc1_slow"])
     if track_dependency(dbfile + "igc2_slow", img2_name):
-        subprocess.check_call(["shelve_airmspi_igc", img2_name, "Image 2",
-                               dbfile + "igc2_slow"])
+        subprocess.check_call(["shelve_airmspi_igc", 
+                               "--data-field=%s" % args.data_field,
+                               "--data-scale=%f" % float(args.data_scale),
+                               "--group-name=%s" % args.group_name,
+                               img2_name, "Image 2", dbfile + "igc2_slow"])
     if track_dependency(dbfile + "igc_nadir_slow", imgnadir_name):
-        subprocess.check_call(["shelve_airmspi_igc", imgnadir_name, 
+        subprocess.check_call(["shelve_airmspi_igc", 
+                               "--data-field=%s" % args.data_field,
+                               "--data-scale=%f" % float(args.data_scale),
+                               "--group-name=%s" % args.group_name,
+                               imgnadir_name, 
                                "Nadir Image", dbfile + "igc_nadir_slow"])
 
 # 3. Create RPC approximations

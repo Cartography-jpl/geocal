@@ -10,11 +10,15 @@ class AirMspiIgc(ImageGroundConnection):
     This class is in python, and is fairly slow. We typically start with
     this class, but then fit a RPC to this to speed up the processing.'''
     def __init__(self, fname, title = "Image", ellipsoid_height = 0,
-                 group_name = "555nm_band"):
+                 group_name = "555nm_band", data_field = "I", 
+                 data_scale = 32767.0):
         ImageGroundConnection.__init__(self)
         # Save initial state, so we can pickle this.
         self.fname = fname
         self.group_name = group_name
+        self.data_field = data_field
+        self.data_scale = data_scale
+
         # Read in the full image mask, to figure out how we will subset
         # the rest of the data.
 
@@ -28,7 +32,8 @@ class AirMspiIgc(ImageGroundConnection):
         im = ImageMaskImage(GdalRasterImage(self.gdal_base + "I.mask"))
         self.bounding_box = im.unmasked_bounding_box()
         # Now read in the reset of the data
-        self.image = ScaleImage(self.__gdal_data("I"), 32767.0)
+        self.image = ScaleImage(self.__gdal_data(self.data_field), 
+                                self.data_scale)
         self.image_mask = ImageMaskImage(self.__gdal_data("I.mask"))
         self.ground_mask = GroundMaskImage(self.__gdal_data("I.mask"))
         self.vzen = self.__gdal_data("View_zenith")
@@ -44,12 +49,15 @@ class AirMspiIgc(ImageGroundConnection):
     def __getstate__(self):
         return { "fname" : self.fname,
                  "title" : self.title,
+                 "data_field" : self.data_field,
+                 "data_scale" : self.data_scale,
                  "ellipsoid_height" : self.dem.h,
                  "group_name" : self.group_name }
         
     def __setstate__(self, dict):
         self.__init__(dict["fname"], dict["title"], dict["ellipsoid_height"],
-                      dict["group_name"])
+                      dict["group_name"], dict["data_field"], 
+                      dict["data_scale"])
 
     def __to_lc(self, ic):
         '''Determine matrix that takes us to local coordinates for the given
@@ -150,6 +158,9 @@ class AirMspiIgc(ImageGroundConnection):
         return '''AirMspiIgc:
   File name:        %s
   Group name:       %s
+  Data field:       %s
   Title:            %s
-  Ellipsoid Height: %f''' % (self.fname, self.group_name, self.title, 
+  Ellipsoid Height: %f''' % (self.fname, self.group_name, self.data_field,
+                             self.data_scale,
+                             self.title, 
                              self.dem.h)

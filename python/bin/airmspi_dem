@@ -42,6 +42,10 @@ Options:
        Index to use for the second image in DEM generation. This is in the
        same order the images are listed on the command line. [default: 2]
 
+  --interpolation-method=s
+       Interpolation method to use for filling in missing data. This should
+       be one of nearest, linear, cubic. [default: linear]
+
   --max-distance-good-point=f
        How far apart the intersection of the rays from the conjugate points
        can be and we still call this is a good match. You will want to raise
@@ -215,6 +219,7 @@ with timing("Generate DEM"):
                         dbfile + "surface_2"):
         cmd = ["dem_generate", "--resolution=%f" % dem_resolution,
                "--max-distance-good-point=%f" % args.max_distance_good_point,
+               "--interpolation-method=%s" % args.interpolation_method,
                "--airmspi-image-match",
                igc_to_use, dbfile + "surface_1",
                dbfile + "surface_2", str(img1_index), str(img2_index),

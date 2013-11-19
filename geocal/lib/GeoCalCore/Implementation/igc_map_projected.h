@@ -19,16 +19,19 @@ public:
   int avg_factor() const { return avg_factor_; }
   int grid_spacing() const { return grid_spacing_; }
   bool read_into_memory() const { return read_into_memory_; }
+  double fill_value() const {return fill_value_;}
 protected:
   IgcMapProjectedBase(const MapInfo& Mi, 
 		      const boost::shared_ptr<ImageGroundConnection>& Igc,
 		      int Grid_spacing,
 		      int Avg_fact,
-		      bool Read_into_memory);
+		      bool Read_into_memory,
+		      double Fill_value);
   boost::shared_ptr<ImageGroundConnection> igc_original_;
   boost::shared_ptr<ImageGroundConnection> igc_;
   int avg_factor_;
   int grid_spacing_;
+  double fill_value_;
   MapInfo mi;
   bool read_into_memory_;
   mutable blitz::Array<double, 2> ic_line, ic_sample;
@@ -73,7 +76,9 @@ public:
 		  int Avg_fact = -1,
 		  bool Read_into_memory = true,
 		  int Number_tile_line = -1,
-		  int Number_tile_sample = -1);
+		  int Number_tile_sample = -1,
+		  double Fill_value = 0.0
+		  );
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -127,7 +132,8 @@ public:
 			   int Avg_fact = -1,
 			   bool Read_into_memory = true,
 			   int Number_tile_line = -1,
-			   int Number_tile_sample = -1);
+			   int Number_tile_sample = -1,
+			   double Fill_value = 0.0);
 
 //-----------------------------------------------------------------------
 /// Destructor.

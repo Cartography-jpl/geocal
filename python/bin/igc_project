@@ -48,6 +48,10 @@ Options:
        something like the DEM resolution, usually you get almost as
        good output but much faster. [default: 1]
 
+  --ground-mask=shelve
+       Ground mask to use. This is appended to any ground mask already in
+       the ImageGroundConnection.
+
   --map-info=f
        Rather than generating a image to cover the full area, match exactly
        the supplied shelve image. This is useful to when comparing against
@@ -68,8 +72,17 @@ if(args.igc_collection):
 else:
     igc = read_shelve(args.igc)
 
+# Allow changes to be made to igc
+igc = ImageGroundConnectionCopy(igc)
+
 if(args.dem):
     igc.dem = read_shelve(args.dem)
+if(args.ground_mask):
+    if(not isinstance(igc.ground_mask, CombinedGroundMask)):
+        gmnew = CombinedGroundMask()
+        gmnew.mask_list.push_back(igc.ground_mask)
+        igc.ground_mask = gmnew
+    igc.ground_mask.mask_list.push_back(read_shelve(args.ground_mask))
 
 # Create the map projection object, and the output object
 

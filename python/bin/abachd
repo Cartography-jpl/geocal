@@ -190,6 +190,13 @@ def dem_generate():
                                "--outside-dem-not-error",
                                "dem_generate_filled.img",
                                dbfile + ":dem_generate_filled"])
+        # Create mask
+        f = VicarLiteRasterImage("dem_generate_filled.img")
+        fv = int(float(f.file.label_string("NODATA")))
+        gmask = GroundMaskImage(f, fv, True)
+        write_shelve("end_to_end.db:dem_mask", gmask)
+        gmask = None
+        f = None
 
 # 1. Create the output directory, if it doesn't already exist, and
 # set up logger
@@ -304,6 +311,7 @@ with timing("Final orthorectification image 1"):
     subprocess.check_call(["igc_project", 
                            "--resolution=%f" % args.resolution, 
                            "--bounding-box=" + dbfile + ":dem_generate_filled",
+                           "--ground-mask=" + dbfile + ":dem_mask",
                            dbfile + ":igc_sba",
                            "--dem=" + dbfile + ":dem_generate_filled",
                            "0", dbfile + ":final_surf1_init"])
@@ -311,6 +319,7 @@ with timing("Final orthorectification image 1"):
 with timing("Final orthorectification image 2"):
     subprocess.check_call(["igc_project", 
                            "--map-info=" + dbfile + ":final_surf1_init",
+                           "--ground-mask=" + dbfile + ":dem_mask",
                            dbfile + ":igc_sba",
                            "--dem=" + dbfile + ":dem_generate_filled",
                            "1", dbfile + ":final_surf2_init"])
@@ -319,6 +328,7 @@ if(pre_ms_raw):
     with timing("Final Pre Multi-spectral orthorectification"):
         subprocess.check_call(["igc_project",
                            "--map-info=" + dbfile + ":final_surf1_init",
+                           "--ground-mask=" + dbfile + ":dem_mask",
                            "--dem=" + dbfile + ":dem_generate_filled",
                            dbfile + ":igc_pre_ms_sba",
                            dbfile + ":final_pre_ms_init"])
@@ -327,6 +337,7 @@ if(post_ms_raw):
     with timing("Final Post Multi-spectral orthorectification"):
         subprocess.check_call(["igc_project",
                            "--map-info=" + dbfile + ":final_surf1_init",
+                           "--ground-mask=" + dbfile + ":dem_mask",
                            "--dem=" + dbfile + ":dem_generate_filled",
                            dbfile + ":igc_post_ms_sba",
                            dbfile + ":final_post_ms_init"])

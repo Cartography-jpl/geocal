@@ -5147,6 +5147,9 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 SWIGINTERNINLINE PyObject*
   SWIG_From_bool  (bool value)
 {
@@ -5165,6 +5168,137 @@ SWIGINTERNINLINE PyObject*
 extern "C" {
 #endif
 SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::MapInfo *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  bool arg5 ;
+  int arg6 ;
+  int arg7 ;
+  double arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared2 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > temp2shared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  double val8 ;
+  int ecode8 = 0 ;
+  GeoCal::IgcMapProjected *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_IgcMapProjected" "', argument " "1"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcMapProjected" "', argument " "1"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+        arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_IgcMapProjected" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::ImageGroundConnection > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_IgcMapProjected" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IgcMapProjected" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcMapProjected" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_IgcMapProjected" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_IgcMapProjected" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  ecode8 = SWIG_AsVal_double(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_IgcMapProjected" "', argument " "8"" of type '" "double""'");
+  } 
+  arg8 = static_cast< double >(val8);
+  {
+    try {
+      result = (GeoCal::IgcMapProjected *)new GeoCal::IgcMapProjected((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::IgcMapProjected > *smartresult = result ? new boost::shared_ptr<  GeoCal::IgcMapProjected >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMapProjected_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -5287,7 +5421,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -5402,7 +5536,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -5509,7 +5643,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -5608,7 +5742,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -5699,7 +5833,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -5784,32 +5918,36 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_IgcMapProjected(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[8];
+  PyObject *argv[9];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IgcMapProjected",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IgcMapProjected",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
-    return _wrap_new_IgcMapProjected__SWIG_5(self, argc, argv);
+    return _wrap_new_IgcMapProjected__SWIG_6(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_IgcMapProjected__SWIG_4(self, argc, argv);
+    return _wrap_new_IgcMapProjected__SWIG_5(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_new_IgcMapProjected__SWIG_3(self, argc, argv);
+    return _wrap_new_IgcMapProjected__SWIG_4(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_new_IgcMapProjected__SWIG_2(self, argc, argv);
+    return _wrap_new_IgcMapProjected__SWIG_3(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_IgcMapProjected__SWIG_1(self, argc, argv);
+    return _wrap_new_IgcMapProjected__SWIG_2(self, argc, argv);
   }
   if (argc == 7) {
+    return _wrap_new_IgcMapProjected__SWIG_1(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_new_IgcMapProjected__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_IgcMapProjected'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::IgcMapProjected::IgcMapProjected(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,bool,int,int,double)\n"
     "    GeoCal::IgcMapProjected::IgcMapProjected(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,bool,int,int)\n"
     "    GeoCal::IgcMapProjected::IgcMapProjected(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,bool,int)\n"
     "    GeoCal::IgcMapProjected::IgcMapProjected(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,bool)\n"
@@ -5951,6 +6089,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_IgcMapProjected__v_fill_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMapProjected *arg1 = (GeoCal::IgcMapProjected *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMapProjected const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMapProjected const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMapProjected_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMapProjected__v_fill_value" "', argument " "1"" of type '" "GeoCal::IgcMapProjected const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMapProjected > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMapProjected > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMapProjected * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMapProjected > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMapProjected * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::IgcMapProjected const *)arg1)->fill_value();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_IgcMapProjected__v_read_into_memory(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IgcMapProjected *arg1 = (GeoCal::IgcMapProjected *) 0 ;
@@ -6048,6 +6229,137 @@ SWIGINTERN PyObject *IgcMapProjected_swiginit(PyObject *SWIGUNUSEDPARM(self), Py
 }
 
 SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::MapInfo *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  bool arg5 ;
+  int arg6 ;
+  int arg7 ;
+  double arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared2 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > temp2shared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  double val8 ;
+  int ecode8 = 0 ;
+  GeoCal::IgcMapProjectedMultiBand *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_IgcMapProjectedMultiBand" "', argument " "1"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcMapProjectedMultiBand" "', argument " "1"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+        arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_IgcMapProjectedMultiBand" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::ImageGroundConnection > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_IgcMapProjectedMultiBand" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IgcMapProjectedMultiBand" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcMapProjectedMultiBand" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_IgcMapProjectedMultiBand" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_IgcMapProjectedMultiBand" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  ecode8 = SWIG_AsVal_double(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_IgcMapProjectedMultiBand" "', argument " "8"" of type '" "double""'");
+  } 
+  arg8 = static_cast< double >(val8);
+  {
+    try {
+      result = (GeoCal::IgcMapProjectedMultiBand *)new GeoCal::IgcMapProjectedMultiBand((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::IgcMapProjectedMultiBand > *smartresult = result ? new boost::shared_ptr<  GeoCal::IgcMapProjectedMultiBand >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMapProjectedMultiBand_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -6170,7 +6482,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -6285,7 +6597,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -6392,7 +6704,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -6491,7 +6803,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -6582,7 +6894,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
@@ -6667,32 +6979,36 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[8];
+  PyObject *argv[9];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IgcMapProjectedMultiBand",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IgcMapProjectedMultiBand",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
-    return _wrap_new_IgcMapProjectedMultiBand__SWIG_5(self, argc, argv);
+    return _wrap_new_IgcMapProjectedMultiBand__SWIG_6(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_IgcMapProjectedMultiBand__SWIG_4(self, argc, argv);
+    return _wrap_new_IgcMapProjectedMultiBand__SWIG_5(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_new_IgcMapProjectedMultiBand__SWIG_3(self, argc, argv);
+    return _wrap_new_IgcMapProjectedMultiBand__SWIG_4(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_new_IgcMapProjectedMultiBand__SWIG_2(self, argc, argv);
+    return _wrap_new_IgcMapProjectedMultiBand__SWIG_3(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_IgcMapProjectedMultiBand__SWIG_1(self, argc, argv);
+    return _wrap_new_IgcMapProjectedMultiBand__SWIG_2(self, argc, argv);
   }
   if (argc == 7) {
+    return _wrap_new_IgcMapProjectedMultiBand__SWIG_1(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_new_IgcMapProjectedMultiBand__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_IgcMapProjectedMultiBand'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::IgcMapProjectedMultiBand::IgcMapProjectedMultiBand(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,bool,int,int,double)\n"
     "    GeoCal::IgcMapProjectedMultiBand::IgcMapProjectedMultiBand(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,bool,int,int)\n"
     "    GeoCal::IgcMapProjectedMultiBand::IgcMapProjectedMultiBand(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,bool,int)\n"
     "    GeoCal::IgcMapProjectedMultiBand::IgcMapProjectedMultiBand(GeoCal::MapInfo const &,boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,bool)\n"
@@ -6834,6 +7150,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_IgcMapProjectedMultiBand__v_fill_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMapProjectedMultiBand *arg1 = (GeoCal::IgcMapProjectedMultiBand *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMapProjectedMultiBand const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMapProjectedMultiBand const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMapProjectedMultiBand_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMapProjectedMultiBand__v_fill_value" "', argument " "1"" of type '" "GeoCal::IgcMapProjectedMultiBand const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMapProjectedMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMapProjectedMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMapProjectedMultiBand * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMapProjectedMultiBand > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMapProjectedMultiBand * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::IgcMapProjectedMultiBand const *)arg1)->fill_value();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_IgcMapProjectedMultiBand__v_read_into_memory(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IgcMapProjectedMultiBand *arg1 = (GeoCal::IgcMapProjectedMultiBand *) 0 ;
@@ -6935,7 +7294,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_IgcMapProjected", _wrap_new_IgcMapProjected, METH_VARARGS, (char *)"\n"
 		"IgcMapProjected::IgcMapProjected(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >\n"
 		"&Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,\n"
-		"int Number_tile_line=-1, int Number_tile_sample=-1)\n"
+		"int Number_tile_line=-1, int Number_tile_sample=-1, double\n"
+		"Fill_value=0.0)\n"
 		"Constructor.\n"
 		"\n"
 		"We average the data either by the factor given as Avg_fact, or by\n"
@@ -6959,6 +7319,10 @@ static PyMethodDef SwigMethods[] = {
 		"int GeoCal::IgcMapProjectedBase::grid_spacing() const\n"
 		"\n"
 		""},
+	 { (char *)"IgcMapProjected__v_fill_value", (PyCFunction)_wrap_IgcMapProjected__v_fill_value, METH_O, (char *)"\n"
+		"double GeoCal::IgcMapProjectedBase::fill_value() const\n"
+		"\n"
+		""},
 	 { (char *)"IgcMapProjected__v_read_into_memory", (PyCFunction)_wrap_IgcMapProjected__v_read_into_memory, METH_O, (char *)"\n"
 		"bool GeoCal::IgcMapProjectedBase::read_into_memory() const\n"
 		"\n"
@@ -6972,7 +7336,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_IgcMapProjectedMultiBand", _wrap_new_IgcMapProjectedMultiBand, METH_VARARGS, (char *)"\n"
 		"IgcMapProjectedMultiBand::IgcMapProjectedMultiBand(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >\n"
 		"&Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,\n"
-		"int Number_tile_line=-1, int Number_tile_sample=-1)\n"
+		"int Number_tile_line=-1, int Number_tile_sample=-1, double\n"
+		"Fill_value=0.0)\n"
 		"Constructor.\n"
 		"\n"
 		"We average the data either by the factor given as Avg_fact, or by\n"
@@ -6994,6 +7359,10 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"IgcMapProjectedMultiBand__v_grid_spacing", (PyCFunction)_wrap_IgcMapProjectedMultiBand__v_grid_spacing, METH_O, (char *)"\n"
 		"int GeoCal::IgcMapProjectedBase::grid_spacing() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMapProjectedMultiBand__v_fill_value", (PyCFunction)_wrap_IgcMapProjectedMultiBand__v_fill_value, METH_O, (char *)"\n"
+		"double GeoCal::IgcMapProjectedBase::fill_value() const\n"
 		"\n"
 		""},
 	 { (char *)"IgcMapProjectedMultiBand__v_read_into_memory", (PyCFunction)_wrap_IgcMapProjectedMultiBand__v_read_into_memory, METH_O, (char *)"\n"

@@ -15,10 +15,12 @@ IgcMapProjectedBase::IgcMapProjectedBase
  const boost::shared_ptr<ImageGroundConnection>& Igc,
  int Grid_spacing,
  int Avg_fact,
- bool Read_into_memory)
+ bool Read_into_memory,
+ double Fill_value)
 : igc_original_(Igc), 
   avg_factor_(Avg_fact),
   grid_spacing_(Grid_spacing),
+  fill_value_(Fill_value),
   mi(Mi),
   read_into_memory_(Read_into_memory),
   ic_line(grid_spacing_, grid_spacing_),
@@ -115,9 +117,11 @@ IgcMapProjected::IgcMapProjected
  int Grid_spacing,
  int Avg_fact,
  bool Read_into_memory,
- int Number_tile_line, int Number_tile_sample)
+ int Number_tile_line, int Number_tile_sample, 
+ double Fill_value)
   : CalcRaster(Mi), 
-    IgcMapProjectedBase(Mi, Igc, Grid_spacing, Avg_fact, Read_into_memory)
+    IgcMapProjectedBase(Mi, Igc, Grid_spacing, Avg_fact, Read_into_memory, 
+			Fill_value)
 {
   if(!Igc->image())
     throw Exception("No Image found in IgcMapProjected. Did you mean to use IgcMapProjectedMultiBand?");
@@ -150,8 +154,9 @@ IgcMapProjectedMultiBand::IgcMapProjectedMultiBand
  int Grid_spacing,
  int Avg_fact,
  bool Read_into_memory,
- int Number_tile_line, int Number_tile_sample)
-: IgcMapProjectedBase(Mi, Igc, Grid_spacing, Avg_fact, Read_into_memory)
+ int Number_tile_line, int Number_tile_sample, double Fill_value)
+: IgcMapProjectedBase(Mi, Igc, Grid_spacing, Avg_fact, Read_into_memory, 
+		      Fill_value)
 {
   if(!Igc->image_multi_band())
     throw Exception("No mult-band image found in IgcMapProjectedMultiBand. Did you mean to use IgcMapProjected?");
@@ -171,6 +176,7 @@ void IgcMapProjected::print(std::ostream& Os) const
   Os << "IgcMapProjected:\n"
      << "  Avg_factor:   " << avg_factor() << "\n"
      << "  Grid spacing: " << grid_spacing() << "\n"
+     << "  Fill value:   " << fill_value() << "\n"
      << "  Map info:\n";
   opad << map_info() << "\n";
   opad.strict_sync();
@@ -186,6 +192,7 @@ void IgcMapProjectedMultiBand::print(std::ostream& Os) const
   Os << "IgcMapProjectedMultiBand:\n"
      << "  Avg_factor:   " << avg_factor() << "\n"
      << "  Grid spacing: " << grid_spacing() << "\n"
+     << "  Fill value:   " << fill_value() << "\n"
      << "  Map info:\n";
   opad << raster_image(0).map_info() << "\n";
   opad.strict_sync();
@@ -225,12 +232,17 @@ void IgcMapProjected::calc_no_grid(int Lstart, int Sstart) const
       boost::shared_ptr<GroundCoordinate> gc = 
 	ground_coordinate(ImageCoordinate(Lstart + i, Sstart + j), 
 			  igc_->dem());
-      ImageCoordinate ic = igc_->image_coordinate(*gc);
-      if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
-	 ic.sample < 0 || ic.sample >= igc_->number_sample() - 1)
-	data(i, j) =  0;	// Data outside of image, so 0.
-      else
-	data(i, j) = igc_->image()->unchecked_interpolate(ic.line, ic.sample);
+      if(igc_->ground_mask()->mask(*gc))
+	data(i, j) = fill_value_;
+      else {
+	ImageCoordinate ic = igc_->image_coordinate(*gc);
+	if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
+	   ic.sample < 0 || ic.sample >= igc_->number_sample() - 1 ||
+	   igc_->image_mask()->mask_ic(ic))
+	  data(i, j) =  fill_value_;	// Data outside of image, so fill_value.
+	else
+	  data(i, j) = igc_->image()->unchecked_interpolate(ic.line, ic.sample);
+      }
     }
 }
 
@@ -246,14 +258,19 @@ void IgcMapProjectedMultiBand::calc_no_grid(int Lstart, int Sstart) const
       boost::shared_ptr<GroundCoordinate> gc = 
 	mi.ground_coordinate(Sstart + j, Lstart + i, igc_->dem());
       ImageCoordinate ic = igc_->image_coordinate(*gc);
-      if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
-	 ic.sample < 0 || ic.sample >= igc_->number_sample() - 1)
-	data(Range::all(), i, j) =  0;	// Data outside of image, so 0.
-      else
-	for(int k = 0; k < data.rows(); ++k)
-	  data(k, i, j) = 
-	    igc_->image_multi_band()->raster_image(k).
-	    unchecked_interpolate(ic.line, ic.sample);
+      if(igc_->ground_mask()->mask(*gc))
+	data(Range::all(), i, j) = fill_value_;
+      else {
+	if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
+	   ic.sample < 0 || ic.sample >= igc_->number_sample() - 1 ||
+	   igc_->image_mask()->mask_ic(ic))
+	  data(Range::all(), i, j) =  fill_value_;	
+	else
+	  for(int k = 0; k < data.rows(); ++k)
+	    data(k, i, j) = 
+	      igc_->image_multi_band()->raster_image(k).
+	      unchecked_interpolate(ic.line, ic.sample);
+      }
     }
 }
 
@@ -271,13 +288,21 @@ void IgcMapProjected::calc_grid(int Lstart, int Sstart) const
 	  ii < std::min(i + grid_spacing_, data.rows()); ++ii)
 	for(int jj = std::max(j, 0); 
 	    jj < std::min(j + grid_spacing_, data.cols()); ++jj) {
-	  double ln = ic_line(ii + Lstart, jj + Sstart);
-	  double smp = ic_sample(ii + Lstart, jj + Sstart);
-	  if(ln < 0 || ln >= igc_->number_line() - 1 ||
-	     smp < 0 || smp >= igc_->number_sample() - 1)
-	    data(ii, jj) =  0;	// Data outside of image, so 0.
-	  else
-	    data(ii, jj) = igc_->image()->unchecked_interpolate(ln, smp);
+	  boost::shared_ptr<GroundCoordinate> gc = 
+	    ground_coordinate(ImageCoordinate(Lstart + ii, Sstart + jj), 
+			      igc_->dem());
+	  if(igc_->ground_mask()->mask(*gc)) {
+	    data(ii, jj) =  fill_value_;
+	  } else {
+	    double ln = ic_line(ii + Lstart, jj + Sstart);
+	    double smp = ic_sample(ii + Lstart, jj + Sstart);
+	    if(ln < 0 || ln >= igc_->number_line() - 1 ||
+	       smp < 0 || smp >= igc_->number_sample() - 1 ||
+	       igc_->image_mask()->mask(ln, smp))
+	      data(ii, jj) =  fill_value_;
+	    else
+	      data(ii, jj) = igc_->image()->unchecked_interpolate(ln, smp);
+	  }
 	}
     }
 }
@@ -295,16 +320,23 @@ void IgcMapProjectedMultiBand::calc_grid(int Lstart, int Sstart) const
 	  ii < std::min(i + grid_spacing_, data.cols()); ++ii)
 	for(int jj = std::max(j, 0); 
 	    jj < std::min(j + grid_spacing_, data.depth()); ++jj) {
-	  double ln = ic_line(ii + Lstart, jj + Sstart);
-	  double smp = ic_sample(ii + Lstart, jj + Sstart);
-	  if(ln < 0 || ln >= igc_->number_line() - 1 ||
-	     smp < 0 || smp >= igc_->number_sample() - 1)
-	    data(Range::all(), ii, jj) =  0;	// Data outside of image, so 0.
-	  else
-	    for(int k = 0; k < data.rows(); ++k)
-	      data(k, ii, jj) = 
-		igc_->image_multi_band()->raster_image(k).
-		unchecked_interpolate(ln, smp);
+	  boost::shared_ptr<GroundCoordinate> gc = 
+	    mi.ground_coordinate(Sstart + jj, Lstart + ii, igc_->dem());
+	  if(igc_->ground_mask()->mask(*gc)) {
+	    data(Range::all(), ii, jj) =  fill_value_;
+	  } else {
+	    double ln = ic_line(ii + Lstart, jj + Sstart);
+	    double smp = ic_sample(ii + Lstart, jj + Sstart);
+	    if(ln < 0 || ln >= igc_->number_line() - 1 ||
+	       smp < 0 || smp >= igc_->number_sample() - 1 ||
+	       igc_->image_mask()->mask(ln, smp))
+	      data(Range::all(), ii, jj) =  fill_value_;
+	    else
+	      for(int k = 0; k < data.rows(); ++k)
+		data(k, ii, jj) = 
+		  igc_->image_multi_band()->raster_image(k).
+		  unchecked_interpolate(ln, smp);
+	  }
 	}
     }
 }

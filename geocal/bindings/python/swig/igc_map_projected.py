@@ -98,6 +98,16 @@ def _new_from_init(cls, version, *args):
     inst.__init__(*args)
     return inst
 
+def _new_vector(cls, version, lst):
+    '''Create a vector from a list.'''
+    if(cls.pickle_format_version() != version):
+      raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
+    inst = cls.__new__(cls)
+    inst.__init__()
+    for i in lst:
+       inst.append(i)
+    return inst
+
 def _new_from_set(cls, version, *args):
     '''For use with pickle, covers common case where we use a set function 
     to assign the value'''
@@ -152,7 +162,8 @@ class IgcMapProjected(geocal.calc_raster.CalcRaster):
         """
         IgcMapProjected::IgcMapProjected(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >
         &Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,
-        int Number_tile_line=-1, int Number_tile_sample=-1)
+        int Number_tile_line=-1, int Number_tile_sample=-1, double
+        Fill_value=0.0)
         Constructor.
 
         We average the data either by the factor given as Avg_fact, or by
@@ -198,6 +209,17 @@ class IgcMapProjected(geocal.calc_raster.CalcRaster):
     def grid_spacing(self):
         return self._v_grid_spacing()
 
+    def _v_fill_value(self):
+        """
+        double GeoCal::IgcMapProjectedBase::fill_value() const
+
+        """
+        return _igc_map_projected.IgcMapProjected__v_fill_value(self)
+
+    @property
+    def fill_value(self):
+        return self._v_fill_value()
+
     def _v_read_into_memory(self):
         """
         bool GeoCal::IgcMapProjectedBase::read_into_memory() const
@@ -211,15 +233,16 @@ class IgcMapProjected(geocal.calc_raster.CalcRaster):
 
     @classmethod
     def pickle_format_version(cls):
-      return 1
+      return 2
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.map_info,self.igc_original,self.grid_spacing,self.avg_factor,self.read_into_memory,self.number_tile_line,self.number_tile_sample)
+      return _new_from_init, (self.__class__, 2, self.map_info,self.igc_original,self.grid_spacing,self.avg_factor,self.read_into_memory,self.number_tile_line,self.number_tile_sample,self.fill_value)
 
     __swig_destroy__ = _igc_map_projected.delete_IgcMapProjected
 IgcMapProjected._v_igc_original = new_instancemethod(_igc_map_projected.IgcMapProjected__v_igc_original,None,IgcMapProjected)
 IgcMapProjected._v_avg_factor = new_instancemethod(_igc_map_projected.IgcMapProjected__v_avg_factor,None,IgcMapProjected)
 IgcMapProjected._v_grid_spacing = new_instancemethod(_igc_map_projected.IgcMapProjected__v_grid_spacing,None,IgcMapProjected)
+IgcMapProjected._v_fill_value = new_instancemethod(_igc_map_projected.IgcMapProjected__v_fill_value,None,IgcMapProjected)
 IgcMapProjected._v_read_into_memory = new_instancemethod(_igc_map_projected.IgcMapProjected__v_read_into_memory,None,IgcMapProjected)
 IgcMapProjected_swigregister = _igc_map_projected.IgcMapProjected_swigregister
 IgcMapProjected_swigregister(IgcMapProjected)
@@ -260,7 +283,8 @@ class IgcMapProjectedMultiBand(geocal.calc_raster_multi_band.CalcRasterMultiBand
         """
         IgcMapProjectedMultiBand::IgcMapProjectedMultiBand(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >
         &Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,
-        int Number_tile_line=-1, int Number_tile_sample=-1)
+        int Number_tile_line=-1, int Number_tile_sample=-1, double
+        Fill_value=0.0)
         Constructor.
 
         We average the data either by the factor given as Avg_fact, or by
@@ -306,6 +330,17 @@ class IgcMapProjectedMultiBand(geocal.calc_raster_multi_band.CalcRasterMultiBand
     def grid_spacing(self):
         return self._v_grid_spacing()
 
+    def _v_fill_value(self):
+        """
+        double GeoCal::IgcMapProjectedBase::fill_value() const
+
+        """
+        return _igc_map_projected.IgcMapProjectedMultiBand__v_fill_value(self)
+
+    @property
+    def fill_value(self):
+        return self._v_fill_value()
+
     def _v_read_into_memory(self):
         """
         bool GeoCal::IgcMapProjectedBase::read_into_memory() const
@@ -319,15 +354,16 @@ class IgcMapProjectedMultiBand(geocal.calc_raster_multi_band.CalcRasterMultiBand
 
     @classmethod
     def pickle_format_version(cls):
-      return 1
+      return 2
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.raster_image(0).map_info,self.igc_original,self.grid_spacing,self.avg_factor,self.read_into_memory,self.raster_image(0).number_tile_line,self.raster_image(0).number_tile_sample)
+      return _new_from_init, (self.__class__, 2, self.raster_image(0).map_info,self.igc_original,self.grid_spacing,self.avg_factor,self.read_into_memory,self.raster_image(0).number_tile_line,self.raster_image(0).number_tile_sample,self.fill_value)
 
     __swig_destroy__ = _igc_map_projected.delete_IgcMapProjectedMultiBand
 IgcMapProjectedMultiBand._v_igc_original = new_instancemethod(_igc_map_projected.IgcMapProjectedMultiBand__v_igc_original,None,IgcMapProjectedMultiBand)
 IgcMapProjectedMultiBand._v_avg_factor = new_instancemethod(_igc_map_projected.IgcMapProjectedMultiBand__v_avg_factor,None,IgcMapProjectedMultiBand)
 IgcMapProjectedMultiBand._v_grid_spacing = new_instancemethod(_igc_map_projected.IgcMapProjectedMultiBand__v_grid_spacing,None,IgcMapProjectedMultiBand)
+IgcMapProjectedMultiBand._v_fill_value = new_instancemethod(_igc_map_projected.IgcMapProjectedMultiBand__v_fill_value,None,IgcMapProjectedMultiBand)
 IgcMapProjectedMultiBand._v_read_into_memory = new_instancemethod(_igc_map_projected.IgcMapProjectedMultiBand__v_read_into_memory,None,IgcMapProjectedMultiBand)
 IgcMapProjectedMultiBand_swigregister = _igc_map_projected.IgcMapProjectedMultiBand_swigregister
 IgcMapProjectedMultiBand_swigregister(IgcMapProjectedMultiBand)

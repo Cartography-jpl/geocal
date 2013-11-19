@@ -14,7 +14,8 @@ namespace GeoCal {
   For any point, we look at the four neighboring pixels. If any of the
   pixels are the mask_value, we say the point is masked, otherwise it
   is not masked. If we are outside of the RasterImage, then we
-  say it is no masked.
+  say it is not masked or masked based on the flag passed in the
+  constructor. 
 
   An example of this kind of Mask is the Land/Water mask used by
   Vicar ("world_30as_lwm.img")
@@ -26,8 +27,9 @@ public:
 /// Constructor.
 //-----------------------------------------------------------------------
 
-  GroundMaskImage(boost::shared_ptr<RasterImage> Img, int Mask_value = 0)
-    : img(Img), maskv(Mask_value) 
+  GroundMaskImage(boost::shared_ptr<RasterImage> Img, int Mask_value = 0,
+		  bool Outside_is_masked = false)
+    : img(Img), maskv(Mask_value), outside_is_masked_(Outside_is_masked) 
   {
   }
 
@@ -55,6 +57,13 @@ public:
 //-----------------------------------------------------------------------
 
   int masked_value() const {return maskv;}
+
+//-----------------------------------------------------------------------
+/// Indicated if outside of the image is masked or not.
+//-----------------------------------------------------------------------
+
+  bool outside_is_masked() const {return outside_is_masked_; }
+
   virtual bool mask(const GroundCoordinate& Gc) const;
   virtual bool region_masked(const GroundCoordinate& Ulc, 
 			     const GroundCoordinate& Lrc) const;
@@ -63,6 +72,7 @@ private:
   boost::shared_ptr<RasterImage> img; ///< Underlying image.
   int maskv;				    ///< Value that indicates
 					    ///a masked point.
+  bool outside_is_masked_;
 };
 }
 #endif

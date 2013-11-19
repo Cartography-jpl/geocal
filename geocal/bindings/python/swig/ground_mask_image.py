@@ -119,8 +119,8 @@ class GroundMaskImage(geocal.ground_mask.GroundMask):
 
     For any point, we look at the four neighboring pixels. If any of the
     pixels are the mask_value, we say the point is masked, otherwise it is
-    not masked. If we are outside of the RasterImage, then we say it is no
-    masked.
+    not masked. If we are outside of the RasterImage, then we say it is
+    not masked or masked based on the flag passed in the constructor.
 
     An example of this kind of Mask is the Land/Water mask used by Vicar
     ("world_30as_lwm.img")
@@ -131,7 +131,8 @@ class GroundMaskImage(geocal.ground_mask.GroundMask):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::GroundMaskImage::GroundMaskImage(boost::shared_ptr< RasterImage > Img, int Mask_value=0)
+        GeoCal::GroundMaskImage::GroundMaskImage(boost::shared_ptr< RasterImage > Img, int Mask_value=0, bool
+        Outside_is_masked=false)
         Constructor. 
         """
         _ground_mask_image.GroundMaskImage_swiginit(self,_ground_mask_image.new_GroundMaskImage(*args))
@@ -157,16 +158,28 @@ class GroundMaskImage(geocal.ground_mask.GroundMask):
     def masked_value(self):
         return self._v_masked_value()
 
+    def _v_outside_is_masked(self):
+        """
+        bool GeoCal::GroundMaskImage::outside_is_masked() const
+        Indicated if outside of the image is masked or not. 
+        """
+        return _ground_mask_image.GroundMaskImage__v_outside_is_masked(self)
+
+    @property
+    def outside_is_masked(self):
+        return self._v_outside_is_masked()
+
     @classmethod
     def pickle_format_version(cls):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.raster_image,self.masked_value)
+      return _new_from_init, (self.__class__, 1, self.raster_image,self.masked_value,self.outside_is_masked)
 
     __swig_destroy__ = _ground_mask_image.delete_GroundMaskImage
 GroundMaskImage._v_raster_image = new_instancemethod(_ground_mask_image.GroundMaskImage__v_raster_image,None,GroundMaskImage)
 GroundMaskImage._v_masked_value = new_instancemethod(_ground_mask_image.GroundMaskImage__v_masked_value,None,GroundMaskImage)
+GroundMaskImage._v_outside_is_masked = new_instancemethod(_ground_mask_image.GroundMaskImage__v_outside_is_masked,None,GroundMaskImage)
 GroundMaskImage_swigregister = _ground_mask_image.GroundMaskImage_swigregister
 GroundMaskImage_swigregister(GroundMaskImage)
 

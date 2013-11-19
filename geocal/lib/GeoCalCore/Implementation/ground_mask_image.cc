@@ -1,4 +1,5 @@
 #include "ground_mask_image.h"
+#include "ostream_pad.h"
 
 using namespace GeoCal;
 
@@ -15,7 +16,7 @@ bool GroundMaskImage::mask(const GroundCoordinate& Gc) const
   int j = (int) floor(ic.sample);
   if(i < 0 || i + 1 >= img->number_line() ||
      j < 0 || j + 1 >= img->number_sample())
-    return false;
+    return outside_is_masked_;
   return ((*img)(i, j)     ==maskv || (*img)(i, j + 1) ==maskv ||
 	  (*img)(i + 1, j) ==maskv || (*img)(i + 1, j + 1) ==maskv);
 }
@@ -37,7 +38,7 @@ bool GroundMaskImage::region_masked(const GroundCoordinate& Ulc,
 
   if(i1 < 0 || i2 >= img->number_line() ||
      j1 < 0 || j2 >= img->number_sample())
-    return false;
+    return outside_is_masked_;
   return blitz::any((*img).read(i1, j1, (i2 - i1) + 1, (j2 - j1) + 1) == 
 		    maskv);
 }
@@ -48,10 +49,14 @@ bool GroundMaskImage::region_masked(const GroundCoordinate& Ulc,
 
 void GroundMaskImage::print(std::ostream& Os) const
 {
+  OstreamPad opad(Os, "    ");
   Os << "Ground Mask image:\n"
-     << "  Map projected image:\n"
-     << *img
-     << "  Mask value: " << maskv << "\n";
+     << "  Mask value:        " << maskv << "\n"
+     << "  Outside is masked: " << (outside_is_masked_ ? "true" : "false")
+     << "\n"
+     << "  Map projected image:\n";
+  opad << *img << "\n";
+  opad.strict_sync();
 }
 
 

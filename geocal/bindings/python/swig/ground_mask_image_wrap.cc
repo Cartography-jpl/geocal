@@ -5087,6 +5087,17 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -5100,6 +5111,13 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+SWIGINTERNINLINE PyObject*
+  SWIG_From_bool  (bool value)
+{
+  return PyBool_FromLong(value ? 1 : 0);
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -5111,6 +5129,68 @@ struct SWIG_null_deleter {
 extern "C" {
 #endif
 SWIGINTERN PyObject *_wrap_new_GroundMaskImage__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::RasterImage > arg1 ;
+  int arg2 ;
+  bool arg3 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::GroundMaskImage *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GroundMaskImage" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::RasterImage >""'"); 
+    }
+    if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>((&arg1)->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      (&arg1)->reset((&arg1)->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GroundMaskImage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GroundMaskImage" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = (GeoCal::GroundMaskImage *)new GeoCal::GroundMaskImage(arg1,arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GroundMaskImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::GroundMaskImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMaskImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GroundMaskImage__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::RasterImage > arg1 ;
   int arg2 ;
@@ -5164,7 +5244,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GroundMaskImage__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_GroundMaskImage__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::RasterImage > arg1 ;
   void *argp1 ;
@@ -5212,20 +5292,24 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_GroundMaskImage(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[3];
+  PyObject *argv[4];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_GroundMaskImage",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_GroundMaskImage",0,3,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_new_GroundMaskImage__SWIG_1(self, argc, argv);
+    return _wrap_new_GroundMaskImage__SWIG_2(self, argc, argv);
   }
   if (argc == 2) {
+    return _wrap_new_GroundMaskImage__SWIG_1(self, argc, argv);
+  }
+  if (argc == 3) {
     return _wrap_new_GroundMaskImage__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_GroundMaskImage'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::GroundMaskImage::GroundMaskImage(boost::shared_ptr< GeoCal::RasterImage >,int,bool)\n"
     "    GeoCal::GroundMaskImage::GroundMaskImage(boost::shared_ptr< GeoCal::RasterImage >,int)\n"
     "    GeoCal::GroundMaskImage::GroundMaskImage(boost::shared_ptr< GeoCal::RasterImage >)\n");
   return 0;
@@ -5320,6 +5404,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GroundMaskImage__v_outside_is_masked(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GroundMaskImage *arg1 = (GeoCal::GroundMaskImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GroundMaskImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GroundMaskImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMaskImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundMaskImage__v_outside_is_masked" "', argument " "1"" of type '" "GeoCal::GroundMaskImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMaskImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMaskImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMaskImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMaskImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMaskImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::GroundMaskImage const *)arg1)->outside_is_masked();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_GroundMaskImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GroundMaskImage *arg1 = (GeoCal::GroundMaskImage *) 0 ;
@@ -5376,7 +5503,8 @@ SWIGINTERN PyObject *GroundMaskImage_swiginit(PyObject *SWIGUNUSEDPARM(self), Py
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_GroundMaskImage", _wrap_new_GroundMaskImage, METH_VARARGS, (char *)"\n"
-		"GeoCal::GroundMaskImage::GroundMaskImage(boost::shared_ptr< RasterImage > Img, int Mask_value=0)\n"
+		"GeoCal::GroundMaskImage::GroundMaskImage(boost::shared_ptr< RasterImage > Img, int Mask_value=0, bool\n"
+		"Outside_is_masked=false)\n"
 		"Constructor. \n"
 		""},
 	 { (char *)"GroundMaskImage__v_raster_image", (PyCFunction)_wrap_GroundMaskImage__v_raster_image, METH_O, (char *)"\n"
@@ -5386,6 +5514,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"GroundMaskImage__v_masked_value", (PyCFunction)_wrap_GroundMaskImage__v_masked_value, METH_O, (char *)"\n"
 		"int GeoCal::GroundMaskImage::masked_value() const\n"
 		"Value indicating masked data. \n"
+		""},
+	 { (char *)"GroundMaskImage__v_outside_is_masked", (PyCFunction)_wrap_GroundMaskImage__v_outside_is_masked, METH_O, (char *)"\n"
+		"bool GeoCal::GroundMaskImage::outside_is_masked() const\n"
+		"Indicated if outside of the image is masked or not. \n"
 		""},
 	 { (char *)"delete_GroundMaskImage", (PyCFunction)_wrap_delete_GroundMaskImage, METH_O, (char *)"\n"
 		"virtual GeoCal::GroundMaskImage::~GroundMaskImage()\n"

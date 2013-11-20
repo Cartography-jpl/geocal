@@ -18,9 +18,10 @@ Array<double, 2> DoughnutAverage::cvdnorm(int band, int Lstart, int Sstart,
   if(number_band() != 2)
     throw Exception("Only have logic in place now for 2 cvdnorm items. We can extend this is needed");
   Array<double, 2> res(Number_line, Number_sample);
-  res = input_data(band, Range(0,Number_line - 1), Range(0,Number_sample - 1));
+  res = input_data(band - 1, Range(0,Number_line - 1), 
+		   Range(0,Number_sample - 1));
   if(band == 1)
-    res += davg(0, ra, ra) - davg(1, ra, ra);
+    res -= davg(0, ra, ra) - davg(1, ra, ra);
   return res;
 }
 
@@ -38,7 +39,7 @@ blitz::Array<double, 2> DoughnutAverage::pandif(int Lstart, int Sstart,
   inpd = input_data(ra, Range(0,Number_line - 1), 
 		    Range(0,Number_sample - 1));
   return Array<double, 2>
-    ((inpd(1, ra, ra) + davg(0,ra,ra) - davg(1,ra,ra)) - inpd(0,ra,ra));
+    (inpd(1, ra, ra) - (inpd(0,ra,ra) - (davg(0,ra,ra) - davg(1,ra,ra))));
 }
 
 //-----------------------------------------------------------------------

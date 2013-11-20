@@ -108,14 +108,22 @@ def shelve_image(fname, name, subset = None, multi_band = False):
     subprocess.check_call(cmd)
 
 def generate_image(fname, name_in, name, subset = None):
+    # Producing data as 1000x1000 seems to go much faster
     subprocess.check_call(["write_image", 
                            nproc, dbfile + ":" + name_in,
+                           "--process-number-line=1000", 
+                           "--process-number-sample=1000"]
                            fname])
     shelve_image(fname, name)
 
 def generate_image_ms(fname, name_in, name, subset = None):
     nband = read_shelve(dbfile + ":" + name_in).number_band
-    cmd = ["write_image", nproc, dbfile + ":" + name_in]
+    # Producing data as 1000x1000 seems to go much faster
+    cmd = ["write_image", nproc, dbfile + ":" + name_in,
+           "--process-number-line=1000", "--process-number-sample=1000"]
+    # Don't think we actually need this anymore
+    #if(args.verbose):
+    #    cmd.append("--verbose")
     for i in range(1, nband + 1):
         cmd.append("%s_b%d.img" % (fname, i))
     subprocess.check_call(cmd)

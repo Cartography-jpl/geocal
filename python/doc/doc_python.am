@@ -5,6 +5,7 @@ EXTRA_DIST+= @docpythonsrc@
 install_python_doc: 
 	export PATH=$(bindir):$$PATH && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
+        export PYTHONPATH="" && \
         $(SPHINXBUILD) -b html $(srcdir)/$(docpythonsrc) "$(DESTDIR)$(pythondocdir)"
 
 if WITH_DOCUMENTATION

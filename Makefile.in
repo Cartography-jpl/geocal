@@ -8992,6 +8992,7 @@ complain_if_afids:
 @BUILD_AFIDS_PYTHON_TRUE@install_python_doc: 
 @BUILD_AFIDS_PYTHON_TRUE@	export PATH=$(bindir):$$PATH && \
 @BUILD_AFIDS_PYTHON_TRUE@        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
+@BUILD_AFIDS_PYTHON_TRUE@        export PYTHONPATH="" && \
 @BUILD_AFIDS_PYTHON_TRUE@        $(SPHINXBUILD) -b html $(srcdir)/$(docpythonsrc) "$(DESTDIR)$(pythondocdir)"
 
 @BUILD_AFIDS_PYTHON_TRUE@clean_install_python_doc:

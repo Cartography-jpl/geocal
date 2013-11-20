@@ -112,7 +112,7 @@ def generate_image(fname, name_in, name, subset = None):
     subprocess.check_call(["write_image", 
                            nproc, dbfile + ":" + name_in,
                            "--process-number-line=1000", 
-                           "--process-number-sample=1000"]
+                           "--process-number-sample=1000",
                            fname])
     shelve_image(fname, name)
 

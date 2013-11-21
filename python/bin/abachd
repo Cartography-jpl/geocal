@@ -44,7 +44,7 @@ Options:
 
   --diagnostic
        Generate files that we don't actually need for processing, but can
-       be useful for diagnostic (e.g., the normdiff.img)
+       be useful for diagnostic (e.g., the normdiff.hlf)
 
   --no-ms
        Don't have any multispectral data.
@@ -125,9 +125,9 @@ def generate_image_ms(fname, name_in, name, subset = None):
     #if(args.verbose):
     #    cmd.append("--verbose")
     for i in range(1, nband + 1):
-        cmd.append("%s_b%d.img" % (fname, i))
+        cmd.append("%s_b%d.hlf" % (fname, i))
     subprocess.check_call(cmd)
-    shelve_image(fname + "_b1:%d.img" % nband, name)
+    shelve_image(fname + "_b1:%d.hlf" % nband, name)
 
 @contextmanager
 def timing(txt):
@@ -145,7 +145,7 @@ def determine_subset(fname):
     subset = None
     if(args.start_line):
         dem = read_shelve(dbfile + ":dem_initial")
-        igc1 = VicarImageGroundConnection("pre_pan.img", dem)
+        igc1 = VicarImageGroundConnection("pre_pan_raw.hlf", dem)
         igc2 = GdalImageGroundConnection(fname, dem)
         ulc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(0, 0)))
         lrc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(igc1.number_line, igc1.number_sample)))
@@ -164,8 +164,8 @@ def import_image(fname, name, subset = None):
         subprocess.check_call(["write_image", 
                                "--process-number-line=2048",
                                "--process-number-sample=2048",
-                               nproc, dbfile + ":%s_raw" % name, name + ".img"])
-    shelve_image(name + ".img", name)
+                               nproc, dbfile + ":%s_raw" % name, name + ".hlf"])
+    shelve_image(name + ".hlf", name)
 
 def import_image_ms(fname, name, subset = None):
     shelve_image(fname, "%s_raw" % name, subset = subset, 
@@ -177,9 +177,9 @@ def import_image_ms(fname, name, subset = None):
                "--process-number-sample=2048",
                nproc, dbfile + ":%s_raw" % name]
         for i in range(1, nband + 1):
-            cmd.append("%s_b%d.img" % (name, i))
+            cmd.append("%s_b%d.hlf" % (name, i))
         subprocess.check_call(cmd)
-    shelve_image("%s_b1:%d.img" % (name, i), name, multi_band = True)
+    shelve_image("%s_b1:%d.hlf" % (name, i), name, multi_band = True)
 
 def dem_generate():
     with timing("DEM generation"):
@@ -240,32 +240,33 @@ subset = None
 if(args.start_line):
     subset = [args.start_line, args.start_sample, args.number_line,
               args.number_sample]
-import_image(pre_pan_raw, "pre_pan", subset = subset)
+import_image(pre_pan_raw, "pre_pan_raw", subset = subset)
 if(pre_ms_raw):
-    import_image_ms(pre_ms_raw, "pre_ms", subset = determine_subset(pre_ms_raw))
-import_image(post_pan_raw, "post_pan", subset = determine_subset(post_pan_raw))
+    import_image_ms(pre_ms_raw, "pre_raw_ms", subset = determine_subset(pre_ms_raw))
+import_image(post_pan_raw, "post_pan_raw", subset = determine_subset(post_pan_raw))
 if(post_ms_raw):
-    import_image_ms(post_ms_raw, "post_ms", 
+    import_image_ms(post_ms_raw, "post_raw_ms", 
                    subset = determine_subset(post_ms_raw))
 
 # 4. Create initial igccol
 subprocess.check_call(["shelve_igccol", "--rpc-line-fit=0",
                        "--rpc-sample-fit=0", dbfile + ":igc_initial",
                        dbfile + ":dem_initial",
-                       "pre_pan.img", "Pre Pan", "post_pan.img", "Post pan"])
+                       "pre_pan_raw.hlf", "Pre Pan", "post_pan_raw.hlf", 
+                       "Post pan"])
 if(pre_ms_raw):
     subprocess.check_call(["shelve_igccol", "--image-from-shelve",
                            "--image-ground-connection",
                            dbfile + ":igc_pre_ms_initial",
                            dbfile + ":dem_initial",                           
-                           dbfile + ":pre_ms",
+                           dbfile + ":pre_raw_ms",
                            "Pre Multi-spectral"])
 if(post_ms_raw):
     subprocess.check_call(["shelve_igccol", "--image-from-shelve",
                            "--image-ground-connection",
                            dbfile + ":igc_post_ms_initial",
                            dbfile + ":dem_initial",                           
-                           dbfile + ":post_ms",
+                           dbfile + ":post_raw_ms",
                            "Post Multi-spectral"])
 
 # 5. Collect tie points
@@ -290,13 +291,13 @@ with timing("Initial orthorectification initial_surf1"):
     subprocess.check_call(["igc_project", "--grid-spacing=10",
                            "--resolution=%f" % res, dbfile + ":igc_sba",
                            "0", dbfile + ":initial_surf1_init"])
-    generate_image("initial_surf1.img", "initial_surf1_init", "initial_surf1")
+    generate_image("initial_surf1.hlf", "initial_surf1_init", "initial_surf1")
 with timing("Initial orthorectification initial_surf2"):
     subprocess.check_call(["igc_project", "--grid-spacing=10",
                            "--map-info=" + dbfile + ":initial_surf1_init",
                            dbfile + ":igc_sba",
                            "1", dbfile + ":initial_surf2_init"])
-    generate_image("initial_surf2.img", "initial_surf2_init", "initial_surf2")
+    generate_image("initial_surf2.hlf", "initial_surf2_init", "initial_surf2")
 if(pre_ms_raw):
     subprocess.check_call(["pan_to_ms_igc", dbfile + ":igc_initial", "0",
                            dbfile + ":igc_sba", "0",
@@ -322,43 +323,43 @@ with timing("Final orthorectification image 1"):
                            "--ground-mask=" + dbfile + ":dem_mask",
                            dbfile + ":igc_sba",
                            "--dem=" + dbfile + ":dem_generate_filled",
-                           "0", dbfile + ":final_surf1_init"])
-    generate_image("final_surf1.img", "final_surf1_init", "final_surf1")
+                           "0", dbfile + ":pre_reg_init"])
+    generate_image("pre_reg.hlf", "pre_reg_init", "pre_reg")
 with timing("Final orthorectification image 2"):
     subprocess.check_call(["igc_project", 
-                           "--map-info=" + dbfile + ":final_surf1_init",
+                           "--map-info=" + dbfile + ":pre_reg_init",
                            "--ground-mask=" + dbfile + ":dem_mask",
                            dbfile + ":igc_sba",
                            "--dem=" + dbfile + ":dem_generate_filled",
-                           "1", dbfile + ":final_surf2_init"])
-    generate_image("final_surf2.img", "final_surf2_init", "final_surf2")
+                           "1", dbfile + ":post_reg_init"])
+    generate_image("post_reg.hlf", "post_reg_init", "post_reg")
 if(pre_ms_raw):
     with timing("Final Pre Multi-spectral orthorectification"):
         subprocess.check_call(["igc_project",
-                           "--map-info=" + dbfile + ":final_surf1_init",
+                           "--map-info=" + dbfile + ":pre_reg_init",
                            "--ground-mask=" + dbfile + ":dem_mask",
                            "--dem=" + dbfile + ":dem_generate_filled",
                            dbfile + ":igc_pre_ms_sba",
-                           dbfile + ":final_pre_ms_init"])
-        generate_image_ms("final_pre_ms", "final_pre_ms_init", "final_pre_ms")
+                           dbfile + ":pre_reg_ms_init"])
+        generate_image_ms("pre_reg_ms", "pre_reg_ms_init", "pre_reg_ms")
 if(post_ms_raw):
     with timing("Final Post Multi-spectral orthorectification"):
         subprocess.check_call(["igc_project",
-                           "--map-info=" + dbfile + ":final_surf1_init",
+                           "--map-info=" + dbfile + ":pre_reg_init",
                            "--ground-mask=" + dbfile + ":dem_mask",
                            "--dem=" + dbfile + ":dem_generate_filled",
                            dbfile + ":igc_post_ms_sba",
-                           dbfile + ":final_post_ms_init"])
-        generate_image_ms("final_post_ms", "final_post_ms_init", "final_post_ms")
+                           dbfile + ":post_reg_ms_init"])
+        generate_image_ms("post_reg_ms", "post_reg_ms_init", "post_reg_ms")
 
 
 # 10. Convert to reflectance and generate normdiff image.
 pre_pan_imd = os.path.splitext(pre_pan_raw)[0] + ".IMD"
 post_pan_imd = os.path.splitext(post_pan_raw)[0] + ".IMD"
 subprocess.check_call(["convert_reflectance", "--wv2-pan=" + pre_pan_imd,
-                       dbfile + ":final_surf1", dbfile + ":refl1"])
+                       dbfile + ":pre_reg", dbfile + ":refl1"])
 subprocess.check_call(["convert_reflectance", "--wv2-pan=" + post_pan_imd,
-                       dbfile + ":final_surf2", dbfile + ":refl2"])
+                       dbfile + ":post_reg", dbfile + ":refl2"])
 subprocess.check_call(["doughnut_diff", dbfile + ":refl1", 
                        dbfile + ":refl2", dbfile + ":normdiff",
                        dbfile + ":normdiff_and_cvdnorm"])
@@ -373,10 +374,10 @@ if(args.diagnostic):
                                "--process-number-sample=1000",
                                nproc, 
                                dbfile + ":normdiff_and_cvdnorm",
-                               "normdiff.img", "cvdnorm.img"])
+                               "diff_norm.hlf", "pre_norm.hlf"])
     with timing("Accuracy check"):
-        res = subprocess.check_output(["vicarb", "accck", "final_surf1.img",
-                                       "final_surf2.img",  "magnif=1",
+        res = subprocess.check_output(["vicarb", "accck", "pre_reg.hlf",
+                                       "post_reg.hlf",  "magnif=1",
                                        "fftsize=128", "outnl=1200", 
                                        "remap=n", "seq=qr",  'echo=n',
                                        "labeladd=y", "rmscrit=90.0"])

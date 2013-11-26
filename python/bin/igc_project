@@ -54,8 +54,8 @@ Options:
 
   --map-info=f
        Rather than generating a image to cover the full area, match exactly
-       the supplied shelve image. This is useful to when comparing against
-       an existing image/DEM.
+       the supplied shelve image or MapInfo. This is useful to when 
+       comparing against an existing image/DEM.
 
   --resolution=r
        Resolution in meters of output. [default: 1.0]
@@ -87,7 +87,9 @@ if(args.ground_mask):
 # Create the map projection object, and the output object
 
 if(args.map_info):
-    mi = read_shelve(args.map_info).map_info
+    mi = read_shelve(args.map_info)
+    if(not isinstance(mi, MapInfo)):
+        mi = mi.map_info
 elif(args.bounding_box):
     mibase = read_shelve(args.bounding_box).map_info
     resbase = mibase.resolution_meter

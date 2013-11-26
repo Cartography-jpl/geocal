@@ -235,6 +235,7 @@ with timing("Generate DEM"):
             cmd.append("--verbose")
         subprocess.check_call(cmd)
         subprocess.check_call(["shelve_dem", 
+                               "--outside-dem-not-error",
                                "dem_generated_%dm.img" % dem_resolution,
                                dbfile + "dem"])
 # 9. Convert to tiff
@@ -247,3 +248,79 @@ subprocess.check_call(["gdal_translate", "-q",
 
 
 
+# 10. Generate initial and final image data for display
+# Create mask
+f = VicarLiteRasterImage("dem_generated_%dm.img" % dem_resolution)
+fv = int(float(f.file.label_string("NODATA")))
+gmask = GroundMaskImage(f, fv, True)
+write_shelve(dbfile + "dem_mask", gmask)
+gmask = None
+f = None
+# Determine map info that covers everything
+d = mmap_file("dem_generated_%dm_nofill.img" % dem_resolution)
+h = np.median(d[d > -9999])
+dm = SimpleDem(float(h))
+mi = cib01_mapinfo()
+resbase = mi.resolution_meter
+mi = mi.scale(10.0 / resbase, 10.0 / resbase)
+igc = read_shelve(igc_to_use)
+igc_initial = read_shelve(dbfile + "igc_initial")
+igc0 = igc.image_ground_connection(0)
+igc0.dem = dm
+mi = igc0.cover(mi)
+for i in range(3):
+    mi = mi.map_union(igc_initial.image_ground_connection(i).cover(mi))
+    igct = igc.image_ground_connection(i)
+    igct.dem = dm
+    mi = mi.map_union(igct.cover(mi))
+write_shelve(dbfile + "final_map_info", mi)
+with timing("Final projection 1"):
+    subprocess.check_call(["igc_project", 
+                           "--map-info=" + dbfile + "final_map_info", 
+                           "--dem=" + dbfile + "dem",
+                           "--ground-mask=" + dbfile + "dem_mask",
+                           igc_to_use,
+                           "0", dbfile + "surface_1_dem_init"])
+    subprocess.check_call(["write_image", dbfile + "surface_1_dem_init",
+                           "img1_dem.img"])
+    subprocess.check_call(["shelve_image", "img1_dem.img", 
+                           dbfile + "surface_1_dem"])
+with timing("Final projection 2"):
+    subprocess.check_call(["igc_project", 
+                           "--map-info=" + dbfile + "final_map_info", 
+                           "--dem=" + dbfile + "dem",
+                           "--ground-mask=" + dbfile + "dem_mask",
+                           igc_to_use,
+                           "1", dbfile + "surface_n_dem"])
+    subprocess.check_call(["write_image", dbfile + "surface_n_dem",
+                           "imgnadir_dem.img"])
+with timing("Final projection 3"):
+    subprocess.check_call(["igc_project", 
+                           "--map-info=" + dbfile + "final_map_info", 
+                           "--dem=" + dbfile + "dem",
+                           "--ground-mask=" + dbfile + "dem_mask",
+                           igc_to_use,
+                           "2", dbfile + "surface_2_dem"])
+    subprocess.check_call(["write_image", dbfile + "surface_2_dem",
+                           "img2_dem.img"])
+with timing("Initial projection 1"):
+    subprocess.check_call(["igc_project", 
+                           "--map-info=" + dbfile + "final_map_info", 
+                           dbfile + "igc_initial",
+                           "0", dbfile + "surface_1_initial"])
+    subprocess.check_call(["write_image", dbfile + "surface_1_initial",
+                           "img1_initial.img"])
+with timing("Initial projection 2"):
+    subprocess.check_call(["igc_project", 
+                           "--map-info=" + dbfile + "final_map_info", 
+                           dbfile + "igc_initial",
+                           "1", dbfile + "surface_n_initial"])
+    subprocess.check_call(["write_image", dbfile + "surface_n_initial",
+                           "imgnadir_initial.img"])
+with timing("Initial projection 3"):
+    subprocess.check_call(["igc_project", 
+                           "--map-info=" + dbfile + "final_map_info", 
+                           dbfile + "igc_initial",
+                           "2", dbfile + "surface_2_initial"])
+    subprocess.check_call(["write_image", dbfile + "surface_2_initial",
+                           "img2_initial.img"])

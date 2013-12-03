@@ -153,7 +153,7 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
 //-----------------------------------------------------------------------
 
   int nhs = 3;
-  boost::shared_ptr<SmoothImage> psmooth_orig(new SmoothImage(Pan, nhs));
+  boost::shared_ptr<SmoothImage> psmooth_orig(new SmoothImage(pan_ig->image(), nhs));
 
   // Sometimes we have an old RPC even after the data has been map
   // projected. Remove this if we are using map projected data.
@@ -214,7 +214,8 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
   mag.reset(new SubRasterImageMultiBand(mags, ulc_mag_lstart, ulc_mag_sstart, 
 					nline, nsamp));
   ImageCoordinate ulc_pan = pan_ig->image_coordinate(*ulc_g);
-  pansub.reset(new SubRasterImage(Pan, (int) floor(ulc_pan.line + 0.5),
+  pansub.reset(new SubRasterImage(pan_ig->image(), 
+				  (int) floor(ulc_pan.line + 0.5),
 	  (int) floor(ulc_pan.sample + 0.5), nline, nsamp));
   
   int mulstart_ln = std::max((int) floor(ulc_mul.line), 0);

@@ -143,10 +143,7 @@ class PanSharpen(geocal.calc_raster_multi_band.CalcRasterMultiBand):
         """
         PanSharpen::PanSharpen(const boost::shared_ptr< RasterImage > &Pan, const boost::shared_ptr<
         RasterImageMultiBand > &Mul, bool Force_rpc=false, bool
-        Log_progress=true, const boost::shared_ptr< RasterImage >
-        &Pan_overview=boost::shared_ptr< RasterImage >(), const
-        boost::shared_ptr< RasterImageMultiBand >
-        &Mul_overview=boost::shared_ptr< RasterImageMultiBand >())
+        Log_progress=true)
         Constructor.
 
         This takes in a pan image and a multi spectral image. We subset to the
@@ -162,12 +159,6 @@ class PanSharpen(geocal.calc_raster_multi_band.CalcRasterMultiBand):
         Force_rpc:  Sometimes an image will have both map information and an
         RPC. In this case, we use the map information by preference, unless
         directed by Force_rpc being true.
-
-        Pan_overview:  Optional overview to use instead of Pan for calculating
-        the initial statistics.
-
-        Mul_overview:  Optional overview to use instead of Mul for calculating
-        the initial statistics.
 
         Log_progress:  If true, write progress message to std::cout as we work
         through the data. 

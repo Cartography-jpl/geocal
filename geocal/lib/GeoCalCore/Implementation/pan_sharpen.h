@@ -25,11 +25,7 @@ public:
   PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
 	     const boost::shared_ptr<RasterImageMultiBand>& Mul, 
 	     bool Force_rpc = false,
-	     bool Log_progress = true,
-	     const boost::shared_ptr<RasterImage>& Pan_overview =
-	     boost::shared_ptr<RasterImage>(),
-	     const boost::shared_ptr<RasterImageMultiBand>& Mul_overview =
-	     boost::shared_ptr<RasterImageMultiBand>());
+	     bool Log_progress = true);
   virtual ~PanSharpen() {}
 
   // To help with debugging, these are the pieces that make up the pan

@@ -102,10 +102,6 @@ void PanSharpen::iadj(Array<double, 2> i, const Array<double, 2>& pan_data,
 /// \param Force_rpc Sometimes an image will have both map information
 /// and an RPC. In this case, we use the map information by
 /// preference, unless directed by Force_rpc being true.
-/// \param Pan_overview Optional overview to use instead of Pan for
-/// calculating the initial statistics.
-/// \param Mul_overview Optional overview to use instead of Mul for
-/// calculating the initial statistics.
 /// \param Log_progress If true, write progress message to std::cout
 /// as we work through the data.
 //-----------------------------------------------------------------------
@@ -113,9 +109,7 @@ void PanSharpen::iadj(Array<double, 2> i, const Array<double, 2>& pan_data,
 PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
 		       const boost::shared_ptr<RasterImageMultiBand>& Mul,
 		       bool Force_rpc,
-		       bool Log_progress,
-		       const boost::shared_ptr<RasterImage>& Pan_overview,
-		       const boost::shared_ptr<RasterImageMultiBand>& Mul_overview)
+		       bool Log_progress)
 {
   firstIndex i1; secondIndex i2; thirdIndex i3;
   boost::shared_ptr<ImageGroundConnection> pan_ig, ms_ig;
@@ -236,22 +230,12 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
 
 //-----------------------------------------------------------------------
 // Calculate statistics on PS^2 and I^2 as described in the paper.
-// 
-// If we can, we try to use overview for the Pan and Multispectral
-// data. If we can't then we use all of the data.
 //-----------------------------------------------------------------------
 
   RasterImageMultiBand* mul_stat = 0;
-  if(Mul_overview.get()) {
-    if(Log_progress)
-      std::cout 
-	<< "Calculating statistics on multispectral image using overview:\n";
-    mul_stat = Mul_overview.get();
-  } else {
-    if(Log_progress)
-      std::cout << "Calculating statistics on multispectral image:\n";
-    mul_stat = mulsub.get();
-  }
+  if(Log_progress)
+    std::cout << "Calculating statistics on multispectral image:\n";
+  mul_stat = mulsub.get();
   boost::shared_ptr<boost::progress_display> disp;
   if(Log_progress)
     disp.reset(new boost::progress_display
@@ -270,15 +254,9 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
       }
   }
   RasterImage* pan_stat = 0;
-  if(Pan_overview.get()) {
-    if(Log_progress)
-      std::cout << "Calculating statistics on pan image using overview:\n";
-    pan_stat = Pan_overview.get();
-  } else {
-    if(Log_progress)
-      std::cout << "Calculating statistics on pan image:\n";
-    pan_stat = pansub.get();
-  }
+  if(Log_progress)
+    std::cout << "Calculating statistics on pan image:\n";
+  pan_stat = pansub.get();
   if(Log_progress)
     disp.reset(new boost::progress_display
 	       (pan_stat->number_line() * pan_stat->number_sample()));

@@ -16,11 +16,7 @@ public:
   PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
 	     const boost::shared_ptr<RasterImageMultiBand>& Mul,
 	     bool Force_rpc = false,
-	     bool Log_progress = true,
-	     const boost::shared_ptr<RasterImage>& Pan_overview =
-	     boost::shared_ptr<RasterImage>(),
-	     const boost::shared_ptr<RasterImageMultiBand>& Mul_overview =
-	     boost::shared_ptr<RasterImageMultiBand>());
+	     bool Log_progress = true);
 protected:
   virtual void calc(int Start_line, int Start_sample) const;
 };

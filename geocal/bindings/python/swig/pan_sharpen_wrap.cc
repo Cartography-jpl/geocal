@@ -5105,296 +5105,6 @@ SWIGINTERN PyObject *_wrap_new_PanSharpen__SWIG_0(PyObject *SWIGUNUSEDPARM(self)
   boost::shared_ptr< GeoCal::RasterImageMultiBand > *arg2 = 0 ;
   bool arg3 ;
   bool arg4 ;
-  boost::shared_ptr< GeoCal::RasterImage > *arg5 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand > *arg6 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared1 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand > tempshared2 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand > temp2shared2 ;
-  bool val3 ;
-  int ecode3 = 0 ;
-  bool val4 ;
-  int ecode4 = 0 ;
-  void *argp5 ;
-  int res5 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared5 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared5 ;
-  void *argp6 ;
-  int res6 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand > tempshared6 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand > temp2shared6 ;
-  GeoCal::PanSharpen *result = 0 ;
-  
-  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_PanSharpen" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
-      arg1 = &tempshared1;
-    } else {
-      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg1 = &temp2shared1;
-    }
-  }
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_PanSharpen" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::RasterImageMultiBand > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp2);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp2) : &tempshared2;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_PanSharpen" "', argument " "3"" of type '" "bool""'");
-  } 
-  arg3 = static_cast< bool >(val3);
-  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_PanSharpen" "', argument " "4"" of type '" "bool""'");
-  } 
-  arg4 = static_cast< bool >(val4);
-  {
-    int newmem = 0;
-    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_PanSharpen" "', argument " "5"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp5) tempshared5 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp5);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp5);
-      arg5 = &tempshared5;
-    } else {
-      arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp5) : &tempshared5;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg5->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared5.reset(arg5->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg5 = &temp2shared5;
-    }
-  }
-  {
-    int newmem = 0;
-    res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
-    if (!SWIG_IsOK(res6)) {
-      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_PanSharpen" "', argument " "6"" of type '" "boost::shared_ptr< GeoCal::RasterImageMultiBand > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp6) tempshared6 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp6);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp6);
-      arg6 = &tempshared6;
-    } else {
-      arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp6) : &tempshared6;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg6->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared6.reset(arg6->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg6 = &temp2shared6;
-    }
-  }
-  {
-    try {
-      result = (GeoCal::PanSharpen *)new GeoCal::PanSharpen((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg2,arg3,arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg6);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::PanSharpen > *smartresult = result ? new boost::shared_ptr<  GeoCal::PanSharpen >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PanSharpen_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_PanSharpen__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  boost::shared_ptr< GeoCal::RasterImage > *arg1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand > *arg2 = 0 ;
-  bool arg3 ;
-  bool arg4 ;
-  boost::shared_ptr< GeoCal::RasterImage > *arg5 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared1 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand > tempshared2 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand > temp2shared2 ;
-  bool val3 ;
-  int ecode3 = 0 ;
-  bool val4 ;
-  int ecode4 = 0 ;
-  void *argp5 ;
-  int res5 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared5 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared5 ;
-  GeoCal::PanSharpen *result = 0 ;
-  
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_PanSharpen" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
-      arg1 = &tempshared1;
-    } else {
-      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg1 = &temp2shared1;
-    }
-  }
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_PanSharpen" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::RasterImageMultiBand > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp2);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp2) : &tempshared2;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_PanSharpen" "', argument " "3"" of type '" "bool""'");
-  } 
-  arg3 = static_cast< bool >(val3);
-  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_PanSharpen" "', argument " "4"" of type '" "bool""'");
-  } 
-  arg4 = static_cast< bool >(val4);
-  {
-    int newmem = 0;
-    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_PanSharpen" "', argument " "5"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp5) tempshared5 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp5);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp5);
-      arg5 = &tempshared5;
-    } else {
-      arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp5) : &tempshared5;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg5->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared5.reset(arg5->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg5 = &temp2shared5;
-    }
-  }
-  {
-    try {
-      result = (GeoCal::PanSharpen *)new GeoCal::PanSharpen((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg2,arg3,arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::PanSharpen > *smartresult = result ? new boost::shared_ptr<  GeoCal::PanSharpen >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PanSharpen_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_PanSharpen__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  boost::shared_ptr< GeoCal::RasterImage > *arg1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand > *arg2 = 0 ;
-  bool arg3 ;
-  bool arg4 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
@@ -5489,7 +5199,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_PanSharpen__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_PanSharpen__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::RasterImage > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::RasterImageMultiBand > *arg2 = 0 ;
@@ -5581,7 +5291,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_PanSharpen__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_PanSharpen__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::RasterImage > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::RasterImageMultiBand > *arg2 = 0 ;
@@ -5667,31 +5377,23 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_PanSharpen(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[7];
+  PyObject *argv[5];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_PanSharpen",0,6,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_PanSharpen",0,4,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
-    return _wrap_new_PanSharpen__SWIG_4(self, argc, argv);
-  }
-  if (argc == 3) {
-    return _wrap_new_PanSharpen__SWIG_3(self, argc, argv);
-  }
-  if (argc == 4) {
     return _wrap_new_PanSharpen__SWIG_2(self, argc, argv);
   }
-  if (argc == 5) {
+  if (argc == 3) {
     return _wrap_new_PanSharpen__SWIG_1(self, argc, argv);
   }
-  if (argc == 6) {
+  if (argc == 4) {
     return _wrap_new_PanSharpen__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_PanSharpen'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::PanSharpen::PanSharpen(boost::shared_ptr< GeoCal::RasterImage > const &,boost::shared_ptr< GeoCal::RasterImageMultiBand > const &,bool,bool,boost::shared_ptr< GeoCal::RasterImage > const &,boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)\n"
-    "    GeoCal::PanSharpen::PanSharpen(boost::shared_ptr< GeoCal::RasterImage > const &,boost::shared_ptr< GeoCal::RasterImageMultiBand > const &,bool,bool,boost::shared_ptr< GeoCal::RasterImage > const &)\n"
     "    GeoCal::PanSharpen::PanSharpen(boost::shared_ptr< GeoCal::RasterImage > const &,boost::shared_ptr< GeoCal::RasterImageMultiBand > const &,bool,bool)\n"
     "    GeoCal::PanSharpen::PanSharpen(boost::shared_ptr< GeoCal::RasterImage > const &,boost::shared_ptr< GeoCal::RasterImageMultiBand > const &,bool)\n"
     "    GeoCal::PanSharpen::PanSharpen(boost::shared_ptr< GeoCal::RasterImage > const &,boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)\n");
@@ -5757,10 +5459,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_PanSharpen", _wrap_new_PanSharpen, METH_VARARGS, (char *)"\n"
 		"PanSharpen::PanSharpen(const boost::shared_ptr< RasterImage > &Pan, const boost::shared_ptr<\n"
 		"RasterImageMultiBand > &Mul, bool Force_rpc=false, bool\n"
-		"Log_progress=true, const boost::shared_ptr< RasterImage >\n"
-		"&Pan_overview=boost::shared_ptr< RasterImage >(), const\n"
-		"boost::shared_ptr< RasterImageMultiBand >\n"
-		"&Mul_overview=boost::shared_ptr< RasterImageMultiBand >())\n"
+		"Log_progress=true)\n"
 		"Constructor.\n"
 		"\n"
 		"This takes in a pan image and a multi spectral image. We subset to the\n"
@@ -5776,12 +5475,6 @@ static PyMethodDef SwigMethods[] = {
 		"Force_rpc:  Sometimes an image will have both map information and an\n"
 		"RPC. In this case, we use the map information by preference, unless\n"
 		"directed by Force_rpc being true.\n"
-		"\n"
-		"Pan_overview:  Optional overview to use instead of Pan for calculating\n"
-		"the initial statistics.\n"
-		"\n"
-		"Mul_overview:  Optional overview to use instead of Mul for calculating\n"
-		"the initial statistics.\n"
 		"\n"
 		"Log_progress:  If true, write progress message to std::cout as we work\n"
 		"through the data. \n"

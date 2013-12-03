@@ -111,7 +111,6 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
 		       bool Force_rpc,
 		       bool Log_progress)
 {
-  firstIndex i1; secondIndex i2; thirdIndex i3;
   boost::shared_ptr<ImageGroundConnection> pan_ig, ms_ig;
   boost::shared_ptr<Dem> d;
   bool remove_rpc;
@@ -120,7 +119,7 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
      Mul->raster_image(0).has_map_info()) {
     d.reset(new SimpleDem);
     pan_ig.reset(new MapInfoImageGroundConnection(Pan, d));
-    ms_ig.reset(new MapInfoImageGroundConnection(Mul->raster_image_ptr(0), d));
+    ms_ig.reset(new MapInfoImageGroundConnection(Mul, d));
     remove_rpc = true;
   } else {
     if(!Pan->has_rpc() ||
@@ -130,9 +129,19 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
     pan_ig.reset(new RpcImageGroundConnection(Pan->rpc(), d, Pan));
     ms_ig.reset
       (new RpcImageGroundConnection(Mul->raster_image(0).rpc(), d,
-				    Mul->raster_image_ptr(0)));
+				    Mul));
     remove_rpc = false;
   }
+  initialize(pan_ig, ms_ig, remove_rpc, Log_progress);
+}
+
+void PanSharpen::initialize(
+const boost::shared_ptr<ImageGroundConnection> Pan_ig,
+const boost::shared_ptr<ImageGroundConnection> Ms_ig,
+bool Remove_rpc,
+bool Log_progress)
+{
+  firstIndex i1; secondIndex i2; thirdIndex i3;
 
 //-----------------------------------------------------------------------
 // Determine the magnification of Mul we need to do to get to the
@@ -140,9 +149,9 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
 //-----------------------------------------------------------------------
 
   ImageCoordinate ic1 =
-    pan_ig->image_coordinate(*ms_ig->ground_coordinate(ImageCoordinate(0, 0)));
+    Pan_ig->image_coordinate(*Ms_ig->ground_coordinate(ImageCoordinate(0, 0)));
   ImageCoordinate ic2 =
-    pan_ig->image_coordinate(*ms_ig->ground_coordinate(ImageCoordinate(1, 0)));
+    Pan_ig->image_coordinate(*Ms_ig->ground_coordinate(ImageCoordinate(1, 0)));
   int magfactor = (int) floor(ic2.line - ic1.line + 0.5);
 
 //-----------------------------------------------------------------------
@@ -153,22 +162,22 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
 //-----------------------------------------------------------------------
 
   int nhs = 3;
-  boost::shared_ptr<SmoothImage> psmooth_orig(new SmoothImage(pan_ig->image(), nhs));
+  boost::shared_ptr<SmoothImage> psmooth_orig(new SmoothImage(Pan_ig->image(), nhs));
 
   // Sometimes we have an old RPC even after the data has been map
   // projected. Remove this if we are using map projected data.
-  if(remove_rpc)
+  if(Remove_rpc)
     psmooth_orig->remove_rpc();
   psmooth = psmooth_orig;
   boost::shared_ptr<ImageGroundConnection> 
-    psmooth_ig(new OffsetImageGroundConnection(pan_ig, -nhs, -nhs));
+    psmooth_ig(new OffsetImageGroundConnection(Pan_ig, -nhs, -nhs));
   boost::shared_ptr<ImageGroundConnection>
-    mag_ig(new MagnifyBilinearImageGroundConnection(ms_ig, magfactor));
+    mag_ig(new MagnifyBilinearImageGroundConnection(Ms_ig, magfactor));
   boost::shared_ptr<RasterImageMultiBandVariable> 
     mags(new RasterImageMultiBandVariable());
-  for(int i = 0; i < Mul->number_band(); ++i)
+  for(int i = 0; i < Ms_ig->number_band(); ++i)
     mags->add_raster_image(boost::shared_ptr<RasterImage>
-			   (new MagnifyBilinear(Mul->raster_image_ptr(i), 
+			   (new MagnifyBilinear(Ms_ig->image_multi_band()->raster_image_ptr(i), 
 						magfactor)));
 
 //-----------------------------------------------------------------------
@@ -197,8 +206,8 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
     psmooth_ig->ground_coordinate(ulc);
   boost::shared_ptr<GroundCoordinate> lrc_g = 
     psmooth_ig->ground_coordinate(lrc);
-  ImageCoordinate ulc_mul = ms_ig->image_coordinate(*ulc_g);
-  ImageCoordinate lrc_mul = ms_ig->image_coordinate(*lrc_g);
+  ImageCoordinate ulc_mul = Ms_ig->image_coordinate(*ulc_g);
+  ImageCoordinate lrc_mul = Ms_ig->image_coordinate(*lrc_g);
 
 //-----------------------------------------------------------------------
 // Now subset all the data to the common area.
@@ -213,20 +222,21 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
 	   (int) floor(ulc.sample + 0.5), nline, nsamp));
   mag.reset(new SubRasterImageMultiBand(mags, ulc_mag_lstart, ulc_mag_sstart, 
 					nline, nsamp));
-  ImageCoordinate ulc_pan = pan_ig->image_coordinate(*ulc_g);
-  pansub.reset(new SubRasterImage(pan_ig->image(), 
+  ImageCoordinate ulc_pan = Pan_ig->image_coordinate(*ulc_g);
+  pansub.reset(new SubRasterImage(Pan_ig->image(), 
 				  (int) floor(ulc_pan.line + 0.5),
 	  (int) floor(ulc_pan.sample + 0.5), nline, nsamp));
   
   int mulstart_ln = std::max((int) floor(ulc_mul.line), 0);
   int mulstart_smp = std::max((int) floor(ulc_mul.sample), 0);
   int mulstart_nline = 
-    std::min(Mul->raster_image(0).number_line() - mulstart_ln,
+    std::min(Ms_ig->number_line() - mulstart_ln,
 	     ((int) ceil(lrc_mul.line)) - ((int) floor(ulc_mul.line)));
   int mulstart_nsamp = 
-    std::min(Mul->raster_image(0).number_sample() - mulstart_smp,
+    std::min(Ms_ig->number_sample() - mulstart_smp,
 	     ((int) ceil(lrc_mul.sample)) - ((int) floor(ulc_mul.sample)));
-  mulsub.reset(new SubRasterImageMultiBand(Mul, mulstart_ln, mulstart_smp, 
+  mulsub.reset(new SubRasterImageMultiBand(Ms_ig->image_multi_band(), 
+					   mulstart_ln, mulstart_smp, 
 					   mulstart_nline, mulstart_nsamp));
 
 //-----------------------------------------------------------------------
@@ -272,5 +282,5 @@ PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
       }
   }
 
-  initialize(*psmooth, mag->number_band());
+  CalcRasterMultiBand::initialize(*psmooth, mag->number_band());
 }

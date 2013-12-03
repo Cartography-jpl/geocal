@@ -38,6 +38,10 @@ public:
 protected:
   virtual void calc(int Start_line, int Start_sample) const;
 private:
+  void initialize(const boost::shared_ptr<ImageGroundConnection> Pan_ig,
+		  const boost::shared_ptr<ImageGroundConnection> Ms_ig,
+		  bool Remove_rpc,
+		  bool Log_progress);
   boost::shared_ptr<PanSharpenHelper> phelp;
   blitz::Array<double, 3> to_hcs(const blitz::Array<double, 3>& ncs) const;
   void to_ncs(const blitz::Array<double, 3>& hcs) const;

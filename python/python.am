@@ -12,7 +12,7 @@ python_check:
 	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         source $(AFIDS_DATA)/setup_afids_data.sh && \
-        export PATH=$(bindir):${PATH} && \
+        export PATH=$(bindir):$(afidspythonvdevdir):${PATH} && \
         nosetests $(srcdir)/afids_python/python/*/ 
 
 INSTALLCHECK_HOOK+= python_check

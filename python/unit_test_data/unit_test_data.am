@@ -22,3 +22,8 @@ EXTRA_DIST+= @pythonunittestdata@/Stereo/nevada_elv_aoi.img
 EXTRA_DIST+= @pythonunittestdata@/Stereo/README
 EXTRA_DIST+= @pythonunittestdata@/Stereo/rpc_sba.pkl
 EXTRA_DIST+= @pythonunittestdata@/FRST_POIof090514.shp
+EXTRA_DIST+= @pythonunittestdata@/expected_results
+EXTRA_DIST+= @pythonunittestdata@/shiva_test_case
+EXTRA_DIST+= @pythonunittestdata@/mul.tif
+EXTRA_DIST+= @pythonunittestdata@/pan.tif
+

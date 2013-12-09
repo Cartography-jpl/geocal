@@ -432,7 +432,11 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/nevada_elv_aoi.img \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/README \
 @BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/Stereo/rpc_sba.pkl \
-@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/FRST_POIof090514.shp
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/FRST_POIof090514.shp \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/expected_results \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/shiva_test_case \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/mul.tif \
+@BUILD_AFIDS_PYTHON_TRUE@	@pythonunittestdata@/pan.tif
 @BUILD_AFIDS_PYTHON_TRUE@am__append_48 = clean_install_python_doc
 @BUILD_AFIDS_PYTHON_TRUE@am__append_49 = python_check
 subdir = .
@@ -9018,7 +9022,7 @@ complain_if_afids:
 @BUILD_AFIDS_PYTHON_TRUE@	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
 @BUILD_AFIDS_PYTHON_TRUE@        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
 @BUILD_AFIDS_PYTHON_TRUE@        source $(AFIDS_DATA)/setup_afids_data.sh && \
-@BUILD_AFIDS_PYTHON_TRUE@        export PATH=$(bindir):${PATH} && \
+@BUILD_AFIDS_PYTHON_TRUE@        export PATH=$(bindir):$(afidspythonvdevdir):${PATH} && \
 @BUILD_AFIDS_PYTHON_TRUE@        nosetests $(srcdir)/afids_python/python/*/ 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

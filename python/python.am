@@ -8,11 +8,17 @@ include afids_python/python/unit_test_data/unit_test_data.am
 # Backdoor rule to do a quick install when we are just varying python
 install-python-afids: install-afidspkgpythonPYTHON install-dist_afidspkgpythonDATA install-dist_binSCRIPTS
 
+if HAVE_AFIDS
+PYTHON_CHECK_PATH=$(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}
+else
+PYTHON_CHECK_PATH=$(bindir):$(afidspythonvdevdir):${PATH}
+endif
+
 python_check:
 	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         source $(AFIDS_DATA)/setup_afids_data.sh && \
-        export PATH=$(bindir):$(afidspythonvdevdir):${PATH} && \
+        export PATH=$(PYTHON_CHECK_PATH) && \
         nosetests $(srcdir)/afids_python/python/*/ 
 
 INSTALLCHECK_HOOK+= python_check

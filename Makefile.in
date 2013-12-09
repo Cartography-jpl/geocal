@@ -441,7 +441,8 @@ bin_PROGRAMS =
 @BUILD_AFIDS_PYTHON_TRUE@am__append_49 = python_check
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids_data.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
+	$(top_srcdir)/config/m4/ac_afids_data.m4 \
 	$(top_srcdir)/config/m4/ac_blitz.m4 \
 	$(top_srcdir)/config/m4/ac_boost.m4 \
 	$(top_srcdir)/config/m4/ac_carto.m4 \
@@ -1766,6 +1767,7 @@ am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
 distcleancheck_listfiles = find . -type f -print
 ACLOCAL = @ACLOCAL@
 AFIDS_DATA = @AFIDS_DATA@
+AFIDS_PREFIX = @AFIDS_PREFIX@
 AMTAR = @AMTAR@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
 AR = @AR@
@@ -2700,6 +2702,8 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspkgpython_DATA = @srcpythonlib@/cib01_mapinfo.dat
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${PATH}
+@BUILD_AFIDS_PYTHON_TRUE@@HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}
 @BUILD_AFIDS_PYTHON_TRUE@installafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -9022,7 +9026,7 @@ complain_if_afids:
 @BUILD_AFIDS_PYTHON_TRUE@	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
 @BUILD_AFIDS_PYTHON_TRUE@        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
 @BUILD_AFIDS_PYTHON_TRUE@        source $(AFIDS_DATA)/setup_afids_data.sh && \
-@BUILD_AFIDS_PYTHON_TRUE@        export PATH=$(bindir):$(afidspythonvdevdir):${PATH} && \
+@BUILD_AFIDS_PYTHON_TRUE@        export PATH=$(PYTHON_CHECK_PATH) && \
 @BUILD_AFIDS_PYTHON_TRUE@        nosetests $(srcdir)/afids_python/python/*/ 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

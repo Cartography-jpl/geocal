@@ -1477,6 +1477,7 @@ AC_SUBST([am__tar])
 AC_SUBST([am__untar])
 ]) # _AM_PROG_TAR
 
+m4_include([config/m4/ac_afids.m4])
 m4_include([config/m4/ac_afids_data.m4])
 m4_include([config/m4/ac_blitz.m4])
 m4_include([config/m4/ac_boost.m4])

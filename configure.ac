@@ -38,6 +38,11 @@ AC_GDAL(required, cannot_build, default_search)
 AC_VICAR_GDALPLUGIN(required, cannot_build, default_search)
 
 #=================================================================
+# We have some unit tests that make use of vicarb if it is available.
+# It is fine if it isn't, we just skip these tests.
+AC_AFIDS(notrequired, cannot_build, default_search)
+
+#=================================================================
 # Right now, always include MSPI. We may make this optional later
 
 # Not actually ready for this, so turn off for now
@@ -169,3 +174,4 @@ LOC_MSG([  Generate SWIG wrappers:        ${generate_swig}])
 LOC_MSG([  Install documentation:         ${with_documentation}])
 LOC_MSG([  Include AFIDS A configuration: ${with_afids_a}])
 LOC_MSG([  Include MSPI:                  ${with_mspi}])
+LOC_MSG([  Include AFIDS Tests:           ${have_afids}])

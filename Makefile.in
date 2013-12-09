@@ -1266,7 +1266,8 @@ geocal_test_all_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(geocal_test_all_LDFLAGS) \
 	$(LDFLAGS) -o $@
 am__dist_afidspythonvdev_SCRIPTS_DIST =  \
-	$(srcdir)/$(srcpythonbin)/sample_vicar_python
+	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
+	$(srcdir)/$(srcpythonbin)/pan_sharpen
 am__dist_bin_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/shelve_dir \
@@ -1404,7 +1405,8 @@ am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
-	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf
+	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
+	$(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
 am__dist_sdbxdoc_DATA_DIST = $(srcdir)/@srcsdbx@/doc/html/*
 DATA = $(dist_afidspkgpython_DATA) $(dist_afidspythonvdev_DATA) \
 	$(dist_sdbxdoc_DATA) $(installafidspython_DATA) \
@@ -2686,11 +2688,13 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/raster_image_multi_band.py \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcpythonlib@/air_mspi_igc.py \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_46)
-@BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python
+@BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/sample_vicar_python \
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/pan_sharpen
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 @BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
-@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
+@BUILD_AFIDS_PYTHON_TRUE@	$(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
 @BUILD_AFIDS_PYTHON_TRUE@dist_afidspkgpython_DATA = @srcpythonlib@/cib01_mapinfo.dat
 @BUILD_AFIDS_PYTHON_TRUE@installafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 all: $(BUILT_SOURCES)

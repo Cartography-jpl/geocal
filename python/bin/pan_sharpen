@@ -1,0 +1,23 @@
+#! /usr/bin/env python
+# -*-Python-*-
+#
+# This runs the pan sharpening algorithm.
+
+from afids import *
+import sys
+
+va = VicarArgument(sys.argv)
+ntile_line = 100
+pan_file = GdalRasterImage(va["inp"][0], 1, 4, False, ntile_line)
+if(len(va["inp"]) ==2):
+    mul_file = GdalMultiBand(va["inp"][1], 4, ntile_line)
+else:
+    mul_file = RasterImageMultiBandVariable()
+    for fname in va["inp"][1:]:
+        mul_file.add_raster_image(GdalRasterImage(fname))
+if(va["force_rpc"] == "y"):
+    force_rpc = True
+else:
+    force_rpc = False
+psharp = PanSharpen(pan_file, mul_file, force_rpc)
+GdalMultiBand.save(va["out"], "VICAR", psharp, True, GdalRasterImage.Int16)

@@ -1,0 +1,82 @@
+process help=*
+PARM INP TYPE=STRING COUNT=(2:99)
+PARM FORCE_RPC type=string count=1 valid=("n","y") default="y"
+PARM OUT TYPE=STRING
+End-proc
+.title
+VICAR program pan_sharpen - Create pan sharpened images
+.HELP
+PURPOSE
+  This create a set of pan sharpened images from a pan band and a set
+  of multipspectral bands (at lower resolution). Because we are
+  reading the data anyways, we also log the panchromatic file.
+
+  This can be *before* doing orthorectification, i.e., it can be run
+  on the raw worldview 2 data (e.g., NITF, VICAR converted from
+  NITF). You can also run this after orthorectification if desired.
+
+  This uses the pan sharpening algorithm described in "WorldView-2
+  Pan-Sharpening" by Chris Padwick et. al. (ASPRS 2010 Annual
+  Conference).
+
+  The input files should be anything readable by GDAL (e.g., NITF,
+  VICAR). The panchromatic band is entered first, followed by the
+  multispectral band. Note for the multipspectral if you are using
+  VICAR you can specify multiple bands using ':', so for example
+  'my_ms_b1:8.img'.  You can also list each of the multiple bands 
+  seperately.
+
+  This will always trim 3 pixels from the full size of the pan image.
+  This is because we do a 7x7 convolution in the pan sharpening, and
+  rather than doing something clever at the edges we just don't do
+  anything at the border.
+
+  You specify only the band 1 output file name, which should end with
+  '_b1'. We add the other bands to give the full band names. S for
+  example 'my_ps_b1.img'.
+
+CALL
+    pan_sharpen INP force_rpc="y" OUT
+  WHERE:
+    INP          1) The panchromatic data, anything readable by GDAL
+                 2) The multispectral data, anything readable by GDAL.
+                    For VICAR input, specify using ':' for band range,
+                    so 'my_ms_b1:8.img'. Alternatively, you can
+                    list each band separately.
+    FORCE_RPC    Sometimes an image will have both map information
+                 and an RPC. In this case, we use the map information by
+                 preference, unless directed by Force_rpc being y.
+    OUT          Output VICAR file, should have '_b1' in name, 
+                 so 'my_ps_b1.img'
+
+OPERATION
+
+  This uses the pan sharpening algorithm described in "WorldView-2
+  Pan-Sharpening" by Chris Padwick et. al. (ASPRS 2010 Annual
+  Conference).
+.PAGE
+Restrictions
+------------
+  This should be run *before* doing orthorectification, it is run
+  on the raw worldview 2 data (e.g., NITF, VICAR converted from
+  NITF).
+.PAGE
+Original Programmer: Mike Smyth, 22 Aug, 2010
+Current Cognizant Programmer: Mike Smyth
+.LEVEL1
+.VARIABLE INP
+The panchromatic data, anything 
+readable by GDAL, and the 
+multispectral data, anything 
+readable by GDAL. For VICAR 
+input, specify using ':' 
+for band range, so 
+'my_ms_b1:8.img'
+.VARIABLE FORCE_RPC
+Sometimes an image will have both map information
+and an RPC. In this case, we use the map information by
+preference, unless directed by Force_rpc being true.
+.VARIABLE OUT
+Output VICAR file, should have 
+'_b1' in name, so 'my_ps_b1.img'
+.end

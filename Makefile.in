@@ -593,6 +593,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/surface_image_to_image_match_wrap.cc \
 	@swigsrc@/location_to_file_wrap.cc \
 	@swigsrc@/ray_intersect_wrap.cc @swigsrc@/dem_match_wrap.cc \
+	@swigsrc@/phase_correlation_matcher_wrap.cc \
 	@swigsrc@/geocal_gdal_wrap.cc \
 	@swigsrc@/gdal_raster_image_wrap.cc \
 	@swigsrc@/gdal_datum_wrap.cc @swigsrc@/gdal_dem_wrap.cc \
@@ -714,6 +715,7 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-location_to_file_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-ray_intersect_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-dem_match_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-phase_correlation_matcher_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_2) \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-memory_multi_band_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-spice_helper_wrap.lo \
@@ -826,6 +828,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srcimplementation@/refraction.cc \
 	@srcimplementation@/ray_intersect.cc \
 	@srcimplementation@/dem_match.cc \
+	@srcimplementation@/phase_correlation_matcher.cc \
 	@srcimplementation@/geocal_gdal.cc \
 	@srcimplementation@/gdal_dem.cc \
 	@srcimplementation@/gdal_raster_image.cc \
@@ -930,6 +933,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-refraction.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-ray_intersect.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-dem_match.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-phase_correlation_matcher.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_6) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-spice_helper.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-sdp_helper.lo \
@@ -1136,6 +1140,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 	@srcimplementation@/igc_image_to_image_match_test.cc \
 	@srcimplementation@/surface_image_to_image_match_test.cc \
 	@srcimplementation@/dem_match_test.cc \
+	@srcimplementation@/phase_correlation_matcher_test.cc \
 	@srccartlab@/vicar_ogr_test.cc \
 	@srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
@@ -1238,6 +1243,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-igc_image_to_image_match_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-surface_image_to_image_match_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-dem_match_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-phase_correlation_matcher_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_13) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_camera_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_orbit_test.$(OBJEXT) \
@@ -1495,6 +1501,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
 	@srcimplementation@/ray_intersect.h \
 	@srcimplementation@/dem_match.h \
+	@srcimplementation@/phase_correlation_matcher.h \
 	@srcimplementation@/hdf_orbit.h \
 	@srcimplementation@/gdal_datum.h \
 	@srcimplementation@/geocal_gdal.h \
@@ -2106,6 +2113,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/refraction.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ray_intersect.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/phase_correlation_matcher.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_19) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/spice_helper.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/sdp_helper.cc \
@@ -2219,6 +2227,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/location_to_file_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/ray_intersect_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/dem_match_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/phase_correlation_matcher_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_22) \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/memory_multi_band_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/spice_helper_wrap.cc \
@@ -2378,6 +2387,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/orbit_data_image_ground_connection.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/ray_intersect.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match.h \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/phase_correlation_matcher.h \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_17) $(am__append_18) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/spice_helper.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/sdp_helper.h \
@@ -2475,6 +2485,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/igc_image_to_image_match_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/surface_image_to_image_match_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match_test.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/phase_correlation_matcher_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_26) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_camera_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_orbit_test.cc \
@@ -2990,6 +3001,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-dem_match_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-phase_correlation_matcher_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-gdal_raster_image_wrap.lo:  \
@@ -3296,6 +3309,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-dem_match.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-phase_correlation_matcher.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-geocal_gdal.lo:  \
@@ -3940,6 +3956,9 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-dem_match_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-phase_correlation_matcher_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT):  \
 	@srccartlab@/$(am__dirstamp) \
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
@@ -4216,6 +4235,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_data_image_ground_connection_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-pan_sharpen_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-phase_correlation_matcher_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-quaternion_camera_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_averaged_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po@am__quote@
@@ -4250,6 +4270,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ogr_coordinate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_quaternion_list.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-pan_sharpen.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-phase_correlation_matcher.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-pyramid_image_matcher.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-quaternion_camera.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_averaged.Plo@am__quote@
@@ -4467,6 +4488,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-paint_class_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-pan_sharpen_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-phase_correlation_matcher_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-pos_export_orbit_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-pyramid_image_matcher_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-quaternion_camera_wrap.Plo@am__quote@
@@ -5069,6 +5091,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/dem_match_wrap.cc' object='@swigsrc@/_swig_wrap_la-dem_match_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-dem_match_wrap.lo `test -f '@swigsrc@/dem_match_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/dem_match_wrap.cc
+
+@swigsrc@/_swig_wrap_la-phase_correlation_matcher_wrap.lo: @swigsrc@/phase_correlation_matcher_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-phase_correlation_matcher_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-phase_correlation_matcher_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-phase_correlation_matcher_wrap.lo `test -f '@swigsrc@/phase_correlation_matcher_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/phase_correlation_matcher_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-phase_correlation_matcher_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-phase_correlation_matcher_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/phase_correlation_matcher_wrap.cc' object='@swigsrc@/_swig_wrap_la-phase_correlation_matcher_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-phase_correlation_matcher_wrap.lo `test -f '@swigsrc@/phase_correlation_matcher_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/phase_correlation_matcher_wrap.cc
 
 @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo: @swigsrc@/geocal_gdal_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_gdal_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo `test -f '@swigsrc@/geocal_gdal_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_gdal_wrap.cc
@@ -5853,6 +5882,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/dem_match.cc' object='@srcimplementation@/libgeocal_la-dem_match.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-dem_match.lo `test -f '@srcimplementation@/dem_match.cc' || echo '$(srcdir)/'`@srcimplementation@/dem_match.cc
+
+@srcimplementation@/libgeocal_la-phase_correlation_matcher.lo: @srcimplementation@/phase_correlation_matcher.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-phase_correlation_matcher.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-phase_correlation_matcher.Tpo -c -o @srcimplementation@/libgeocal_la-phase_correlation_matcher.lo `test -f '@srcimplementation@/phase_correlation_matcher.cc' || echo '$(srcdir)/'`@srcimplementation@/phase_correlation_matcher.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-phase_correlation_matcher.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-phase_correlation_matcher.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/phase_correlation_matcher.cc' object='@srcimplementation@/libgeocal_la-phase_correlation_matcher.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-phase_correlation_matcher.lo `test -f '@srcimplementation@/phase_correlation_matcher.cc' || echo '$(srcdir)/'`@srcimplementation@/phase_correlation_matcher.cc
 
 @srcimplementation@/libgeocal_la-geocal_gdal.lo: @srcimplementation@/geocal_gdal.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-geocal_gdal.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-geocal_gdal.Tpo -c -o @srcimplementation@/libgeocal_la-geocal_gdal.lo `test -f '@srcimplementation@/geocal_gdal.cc' || echo '$(srcdir)/'`@srcimplementation@/geocal_gdal.cc
@@ -7470,6 +7506,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/dem_match_test.cc' object='@srcimplementation@/geocal_test_all-dem_match_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-dem_match_test.obj `if test -f '@srcimplementation@/dem_match_test.cc'; then $(CYGPATH_W) '@srcimplementation@/dem_match_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/dem_match_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-phase_correlation_matcher_test.o: @srcimplementation@/phase_correlation_matcher_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-phase_correlation_matcher_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-phase_correlation_matcher_test.Tpo -c -o @srcimplementation@/geocal_test_all-phase_correlation_matcher_test.o `test -f '@srcimplementation@/phase_correlation_matcher_test.cc' || echo '$(srcdir)/'`@srcimplementation@/phase_correlation_matcher_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-phase_correlation_matcher_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-phase_correlation_matcher_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/phase_correlation_matcher_test.cc' object='@srcimplementation@/geocal_test_all-phase_correlation_matcher_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-phase_correlation_matcher_test.o `test -f '@srcimplementation@/phase_correlation_matcher_test.cc' || echo '$(srcdir)/'`@srcimplementation@/phase_correlation_matcher_test.cc
+
+@srcimplementation@/geocal_test_all-phase_correlation_matcher_test.obj: @srcimplementation@/phase_correlation_matcher_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-phase_correlation_matcher_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-phase_correlation_matcher_test.Tpo -c -o @srcimplementation@/geocal_test_all-phase_correlation_matcher_test.obj `if test -f '@srcimplementation@/phase_correlation_matcher_test.cc'; then $(CYGPATH_W) '@srcimplementation@/phase_correlation_matcher_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/phase_correlation_matcher_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-phase_correlation_matcher_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-phase_correlation_matcher_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/phase_correlation_matcher_test.cc' object='@srcimplementation@/geocal_test_all-phase_correlation_matcher_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-phase_correlation_matcher_test.obj `if test -f '@srcimplementation@/phase_correlation_matcher_test.cc'; then $(CYGPATH_W) '@srcimplementation@/phase_correlation_matcher_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/phase_correlation_matcher_test.cc'; fi`
 
 @srccartlab@/geocal_test_all-vicar_ogr_test.o: @srccartlab@/vicar_ogr_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srccartlab@/geocal_test_all-vicar_ogr_test.o -MD -MP -MF @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_ogr_test.Tpo -c -o @srccartlab@/geocal_test_all-vicar_ogr_test.o `test -f '@srccartlab@/vicar_ogr_test.cc' || echo '$(srcdir)/'`@srccartlab@/vicar_ogr_test.cc

@@ -94,6 +94,17 @@ boost::shared_ptr<OgrWrapper> OgrWrapper::from_epsg(int Epsg_id)
 }
 
 //-----------------------------------------------------------------------
+/// Create a OgrWrapper for a coordinate system from a Proj 4 string.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<OgrWrapper> OgrWrapper::from_proj4(const std::string& Proj4_string)
+{
+  boost::shared_ptr<OGRSpatialReference> ogr(new OGRSpatialReference);
+  ogr->importFromProj4(Proj4_string.c_str());
+  return boost::shared_ptr<OgrWrapper>(new OgrWrapper(ogr));
+}
+
+//-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
 

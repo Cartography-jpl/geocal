@@ -85,6 +85,7 @@ extern "C" {
   void init_location_to_file(void);
   void init_ray_intersect(void);
   void init_dem_match(void);
+  void init_phase_correlation_matcher(void);
   void init_geocal_gdal(void);
   void init_gdal_raster_image(void);
   void init_gdal_datum(void);
@@ -268,6 +269,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_location_to_file", init_location_to_file);
   init_extension_module(package, "_ray_intersect", init_ray_intersect);
   init_extension_module(package, "_dem_match", init_dem_match);
+  init_extension_module(package, "_phase_correlation_matcher", init_phase_correlation_matcher);
   init_extension_module(package, "_geocal_gdal", init_geocal_gdal);
   init_extension_module(package, "_gdal_raster_image", init_gdal_raster_image);
   init_extension_module(package, "_gdal_datum", init_gdal_datum);

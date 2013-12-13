@@ -152,6 +152,14 @@ class OgrWrapper(geocal.generic_object.GenericObject):
         return _ogr_coordinate.OgrWrapper_from_epsg(*args)
 
     from_epsg = staticmethod(from_epsg)
+    def from_proj4(*args):
+        """
+        boost::shared_ptr< OgrWrapper > OgrWrapper::from_proj4(const std::string &Proj4_string)
+        Create a OgrWrapper for a coordinate system from a Proj 4 string. 
+        """
+        return _ogr_coordinate.OgrWrapper_from_proj4(*args)
+
+    from_proj4 = staticmethod(from_proj4)
     def _v_ogr(self):
         """
         const boost::shared_ptr<OGRSpatialReference>& GeoCal::OgrWrapper::ogr_ptr() const
@@ -266,6 +274,13 @@ def OgrWrapper_from_epsg(*args):
     athttp://www.epsg-registry.org 
     """
   return _ogr_coordinate.OgrWrapper_from_epsg(*args)
+
+def OgrWrapper_from_proj4(*args):
+  """
+    boost::shared_ptr< OgrWrapper > OgrWrapper::from_proj4(const std::string &Proj4_string)
+    Create a OgrWrapper for a coordinate system from a Proj 4 string. 
+    """
+  return _ogr_coordinate.OgrWrapper_from_proj4(*args)
 
 class OgrCoordinate(geocal.ground_coordinate.GroundCoordinate):
     """

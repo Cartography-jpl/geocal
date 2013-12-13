@@ -20,6 +20,8 @@ public:
   OgrWrapper(const std::string& Wkt);
   OgrWrapper(const boost::shared_ptr<OGRSpatialReference>& Ogr);
   static boost::shared_ptr<OgrWrapper> from_epsg(int Epsg_id);
+  static boost::shared_ptr<OgrWrapper> 
+  from_proj4(const std::string& Proj4_string);
   %python_attribute2(ogr, ogr_ptr, boost::shared_ptr<OGRSpatialReference>)
   %python_attribute(transform, const OGRCoordinateTransformation&)
   %python_attribute(inverse_transform, const OGRCoordinateTransformation&)

@@ -69,6 +69,8 @@ geocalinc_HEADERS+= @srcimplementation@/ray_intersect.h
 libgeocal_la_SOURCES+= @srcimplementation@/ray_intersect.cc
 geocalinc_HEADERS+= @srcimplementation@/dem_match.h
 libgeocal_la_SOURCES+= @srcimplementation@/dem_match.cc
+geocalinc_HEADERS+= @srcimplementation@/phase_correlation_matcher.h
+libgeocal_la_SOURCES+= @srcimplementation@/phase_correlation_matcher.cc
 if HAVE_HDF5
 geocalinc_HEADERS+= @srcimplementation@/hdf_orbit.h
 endif
@@ -136,6 +138,7 @@ SWIG_SRC += @swigsrc@/surface_image_to_image_match_wrap.cc
 SWIG_SRC += @swigsrc@/location_to_file_wrap.cc
 SWIG_SRC += @swigsrc@/ray_intersect_wrap.cc
 SWIG_SRC += @swigsrc@/dem_match_wrap.cc
+SWIG_SRC += @swigsrc@/phase_correlation_matcher_wrap.cc
 if HAVE_GDAL
   SWIG_SRC += @swigsrc@/geocal_gdal_wrap.cc
   SWIG_SRC += @swigsrc@/gdal_raster_image_wrap.cc
@@ -191,6 +194,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/ray_intersect_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_image_to_image_match_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/surface_image_to_image_match_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_match_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/phase_correlation_matcher_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 

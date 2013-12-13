@@ -151,6 +151,8 @@ void GdalRegister::gdal_register()
   static bool registered = false;
   if(!registered) {
     GDALAllRegister();
+    // Silence printing out error information
+    CPLSetErrorHandler(CPLQuietErrorHandler);
     registered = true;
   }
 }
@@ -195,7 +197,17 @@ bool GeoCal::gdal_has_map_info(const std::string& Fname)
   double param[6];
   if(data_set->GetGeoTransform(param) ==CE_Failure)
     return false;
-  return true;
+  // Sometimes we have some map info, but not enough to set up the 
+  // full map (for example, a projection of "unknown" type). In that
+  // case, say we don't have map info.
+  try {
+    boost::shared_ptr<OGRSpatialReference> 
+      ogr(new OGRSpatialReference(data_set->GetProjectionRef()));
+    boost::shared_ptr<OgrWrapper> ogr_wrap(new OgrWrapper(ogr));
+    return true;
+  } catch(...) {
+  }
+  return false;
 }
 
 //-----------------------------------------------------------------------
@@ -211,7 +223,17 @@ bool GdalBase::has_map_info() const
   double param[6];
   if(data_set_->GetGeoTransform(param) ==CE_Failure)
     return false;
-  return true;
+  // Sometimes we have some map info, but not enough to set up the 
+  // full map (for example, a projection of "unknown" type). In that
+  // case, say we don't have map info.
+  try {
+    boost::shared_ptr<OGRSpatialReference> 
+      ogr(new OGRSpatialReference(data_set_->GetProjectionRef()));
+    boost::shared_ptr<OgrWrapper> ogr_wrap(new OgrWrapper(ogr));
+    return true;
+  } catch(...) {
+  }
+  return false;
 }
 
 //-----------------------------------------------------------------------

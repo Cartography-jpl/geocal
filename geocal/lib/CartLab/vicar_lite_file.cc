@@ -392,8 +392,18 @@ void VicarLiteFile::map_info(const MapInfo& M)
 
 bool VicarLiteFile::has_map_info() const
 {
-  return (has_label("GEOTIFF MODELTRANSFORMATIONTAG") ||
-	  has_label("GEOTIFF MODELTIEPOINTTAG"));
+  if(!(has_label("GEOTIFF MODELTRANSFORMATIONTAG") ||
+       has_label("GEOTIFF MODELTIEPOINTTAG")))
+     return false;
+  // We *probably* have a map info, but VICAR can write out some
+  // seriously mangled metadata. Try to actually read the map_info,
+  // and if this fails we'll just say we don't have mapinfo
+  try {
+    map_info();
+    return true;
+  } catch(...) {
+  }
+  return false;
 }
 
 //-----------------------------------------------------------------------

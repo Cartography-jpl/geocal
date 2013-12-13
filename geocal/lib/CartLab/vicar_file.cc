@@ -330,8 +330,23 @@ void VicarFile::close()
 
 bool VicarFile::has_map_info() const
 {
-  return (has_label("GEOTIFF MODELTRANSFORMATIONTAG") ||
-	  has_label("GEOTIFF MODELTIEPOINTTAG"));
+  if(!(has_label("GEOTIFF MODELTRANSFORMATIONTAG") ||
+       has_label("GEOTIFF MODELTIEPOINTTAG")))
+     return false;
+  // We *probably* have a map info, but VICAR can write out some
+  // seriously mangled metadata. Try to actually read the map_info,
+  // and if this fails we'll just say we don't have mapinfo
+  try {
+#ifdef HAVE_GDAL
+    if(!map_info_.get())
+      map_info_.reset(new MapInfo(vogr.from_vicar(*this)));
+#else
+  throw Exception("The current implementation of VicarFile::map_info uses the GDAL library, which was not found during the build of this library");
+#endif
+    return true;
+  } catch(...) {
+  }
+  return false;
 }
 
 //-----------------------------------------------------------------------
@@ -354,12 +369,9 @@ MapInfo VicarFile::map_info() const
     return *map_info_;
   if(!has_map_info())
     throw Exception("Attempt to call map_info() on a file that doesn't have it.");
-#ifdef HAVE_GDAL
-  map_info_.reset(new MapInfo(vogr.from_vicar(*this)));
+  // has_map_info has the side effect of setting up map_info, so we
+  // can just return this now.
   return *map_info_;
-#else
-  throw Exception("The current implementation of VicarFile::map_info uses the GDAL library, which was not found during the build of this library");
-#endif
 }
 
 //-----------------------------------------------------------------------

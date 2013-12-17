@@ -24,7 +24,8 @@ namespace GeoCal {
 class PhaseCorrelationMatcher : public ImageMatcher, 
 				public boost::noncopyable {
 public:
-  enum Diagnostic {NO_FAIL = 0, IMAGE_MASKED = 1, TOO_CLOSE_TO_IMAGE_EDGE = 2};
+  enum Diagnostic {NO_FAIL = 0, IMAGE_MASKED = 1, TOO_CLOSE_TO_IMAGE_EDGE = 2,
+		   REFINE_FAILED = 10};
   PhaseCorrelationMatcher(int Template_size = 32, int Search_size = 32);
 
 //-----------------------------------------------------------------------
@@ -66,8 +67,12 @@ private:
   int fftsize, search;
   fftw_complex *afftin,*afftout,*bfftin,*bfftout;
   bool nohpf; // If true, shut off high pass filter.
+  bool subpix; // If true, then get subpixel accuracy.
   void rfit(int ilin,int jsmp, float* vmax, float* vloff,float* vsoff,
 	    float corr[3][3],int srchdim, float *chip1, float* asrch) const;
+  void refine(float corr[3][3],float* vloff,float* vsoff,int *ireferr) const;
+  void lsqfit(double * a, double * r, int m, int n, double * x, double eps, 
+	      int * ierror ) const;
 };
 
 }

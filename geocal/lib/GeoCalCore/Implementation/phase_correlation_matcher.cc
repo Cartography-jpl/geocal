@@ -19,7 +19,8 @@ int Search_size
 )
 : fftsize(Template_size),
   search(Search_size),
-  nohpf(false)
+  nohpf(false),
+  subpix(true)
 {
   range_min_check(Template_size, 0);
   range_min_check(Search_size, Template_size);
@@ -102,9 +103,27 @@ void PhaseCorrelationMatcher::match_mask
   float vmax, vloff, vsoff, corr[3][3];
   rfit(ilin, jsmp, &vmax, &vloff, &vsoff, corr, srchdim, chip1f.data(), 
        asrchf.data());
-  std::cerr << "vmax: " << vmax << "\n"
-	    << "vloff: " << vloff << "\n"
-	    << "vsoff: " << vsoff << "\n";
+  int referr = 0;
+  if(subpix)
+    refine(corr, &vloff, &vsoff, &referr);
+  // Add threshold test here
+  if(!referr) {
+    New_res.line = new_line + search_size() / 2 + vloff;
+    New_res.sample = new_sample + search_size() / 2 + vsoff;
+    Success = true;
+    if(Diagnostic)
+      *Diagnostic = NO_FAIL;
+    if(subpix) {
+      Line_sigma = 0.1;
+      Sample_sigma = 0.1;
+    } else {
+      Line_sigma = 0.5;
+      Sample_sigma = 0.5;
+    }
+  } else {
+    if(Diagnostic)
+      *Diagnostic = REFINE_FAILED;
+  }
 }
 
 //-----------------------------------------------------------------------
@@ -256,5 +275,255 @@ void PhaseCorrelationMatcher::rfit
       for (j=0;j<3;j++)
 	 corr[j][i] = bfftout[(jxmax+j-1)*srchdim+ixmax+i-1][0];
 
+   return;
+}
+
+//-----------------------------------------------------------------------
+/// refine
+///
+/// refines the match produced by routine rfit
+///
+/// uses the 3 x 3 center of the fft correlation matrix and fits
+/// a general quadratic (least squares), then sets the partial
+/// derivatives in x and y to zero to find the max.  The max
+/// must be within 0.7 pixels of the center to qualify (otherwise
+/// the center itself is returned).
+///
+/// \param corr: input, float corr[3][3];
+///	center of the correlation matrix as
+///	returned by rfit
+/// \param vloff: input,output, float *vloff;
+///	the match produced by routine rfit at
+///	the exact center of the 3 x 3, output
+///	is the refined value
+/// \param vsoff: input,output, float *vsoff;
+///	the match produced by routine rfit at
+///	the exact center of the 3 x 3, output
+///	is the refined value
+/// \param ireferr: input,output, int *ireferr;
+///	error return, 0 if OK, 1 if error
+//-----------------------------------------------------------------------
+
+void PhaseCorrelationMatcher::refine(float corr[3][3],float* vloff,
+				     float* vsoff,int * ireferr) const
+{
+   int i,j,iq,ierror;
+   double a[54],b[9],s[6],jvar,ivar,imx,jmx,eps;
+   
+   *ireferr = 0;
+   for (i=0;i<3;i++)
+      {
+      ivar = (float)i-1.0;
+      for (j=0;j<3;j++)
+	 {
+	 jvar = (float)j-1.0;
+	 iq = i*3+j;
+	 a[iq] = jvar*jvar;
+	 a[iq+9] = jvar*ivar;
+	 a[iq+18] = ivar*ivar;
+	 a[iq+27] = jvar;
+	 a[iq+36] = ivar;
+	 a[iq+45] = 1.;
+	 b[iq] = corr[i][j];
+	 }
+      }
+   eps=1.e-7;
+   lsqfit(a,b,9,6,s,eps,&ierror);
+   if (ierror!=0 || s[0]==0 || (4.0*s[2]*s[0]==s[1]*s[1]))
+      { printf("sing rfit"); *ireferr = 1; return; }
+   imx = (s[1]*s[3]-2.0*s[4]*s[0])/(4.0*s[2]*s[0]-s[1]*s[1]);
+   jmx = -(s[1]*imx+s[3])/(2.0*s[0]);
+   if (imx*imx+jmx*jmx>=2.0) { *ireferr = 1; return; }
+   *vloff = *vloff+imx;
+   *vsoff = *vsoff+jmx;
+   return;
+}
+
+//-----------------------------------------------------------------------
+/// lsqfit
+///
+/// lsqfit solves for the minimum least squares fit (for ax=r, the minimum
+/// over all x of L2 norm of r-ax)
+///
+/// The matrix a is stored by column order
+/// \param a: input and output, double *a;
+///	m by n coefficient matrix, destroyed.
+/// \param  r: input and output, double *r;
+///	input right hand m-vector.
+/// \param  m: input, int m;
+///	number of linear equations.
+/// \param  n: input, int n;
+///	number of independent coords; dimension of x.
+/// \param x: output, double *x;
+///	solution vector.
+/// \param eps: input double eps;
+///	gaussian pivot tolerance (usually set to 1.e-14)
+/// \param ierror: output int *ierror;
+///	result 0=OK; K=singular at kth column
+///	-1=zero matrix a; -2=m<n
+//-----------------------------------------------------------------------
+
+void PhaseCorrelationMatcher::lsqfit( double * a, double * r, int m, int n, double * x, double eps, int * ierror ) const
+{
+   double *buf,*alznorm; int *ipiv;
+   int i,j,k,il,iu,kpiv=0,id,jl,ii,kl;
+   double piv,h,sig,tol,beta,alzmax;
+
+   buf=(double *)malloc(16*n);
+   ipiv=(int *)malloc(4*n);
+   alznorm=(double *)malloc(8*n);
+   
+   /* normalize the columns, then fix solution at end */
+   
+   for (i=0;i<n;i++)
+      {
+      alzmax = fabs(a[i*m]);
+      for (j=1;j<m;j++) if (fabs(a[i*m+j])>alzmax) alzmax = fabs(a[i*m+j]);
+      if (alzmax>0.0) for (j=0;j<m;j++) a[i*m+j] /= alzmax;
+      alznorm[i] = alzmax;
+      }
+
+   /* end of normalize the columns */
+
+   if (m<n) { *ierror = -2; goto done; }
+   piv = 0.;
+   iu = 0;
+   for (k=1;k<=n;k++)
+      {
+      ipiv[k-1] = k;
+      h = 0.;
+      il = iu+1;
+      iu = iu+m;
+      for (i=il;i<=iu;i++) h = h+a[i-1]*a[i-1];
+      buf[k-1] = h;
+      if (h<=piv) continue;
+      piv = h;
+      kpiv = k;
+      }
+   if (piv<=0.) { *ierror = -1; goto done; }
+   sig = sqrt(piv);
+   tol = sig*fabs(eps);
+   
+   il = -m;
+   for (k=1;k<=n;k++)
+      {
+      il = il+m+1;
+      iu = il+m-k;
+      i = kpiv-k;
+      if (i>0)
+	 {
+	 h = buf[k-1];
+	 buf[k-1] = buf[kpiv-1];
+	 buf[kpiv-1] = h;
+	 id = i*m;
+	 for (i=il;i<=iu;i++)
+	    {
+	    j = i+id;
+	    h = a[i-1];
+	    a[i-1] = a[j-1];
+	    a[j-1] = h;
+	    }
+	 }
+      if (k>1)
+	 {
+	 sig = 0.;
+	 for (i=il;i<=iu;i++) sig = sig+a[i-1]*a[i-1];
+	 sig = sqrt((double)sig);
+	 if (sig<tol) { *ierror = k-1; goto done; }
+	 }
+      h = a[il-1];
+      if (h<0.) sig = -sig;
+      ipiv[kpiv-1] = ipiv[k-1];
+      ipiv[k-1] = kpiv;
+      beta = h+sig;
+      a[il-1] = beta;
+      beta = 1./(sig*beta);
+      j = n+k;
+      buf[j-1] = -sig;
+      if (k<n)
+	 {
+	 piv = 0.;
+	 id = 0;
+	 jl = k+1;
+	 kpiv = jl;
+	 for (j=jl;j<=n;j++)
+	    {
+	    id = id+m;
+	    h = 0.;
+	    for (i=il;i<=iu;i++)
+	       {
+	       ii = i+id;
+	       h = h+a[i-1]*a[ii-1];
+	       }
+	    h = beta*h;
+	    for (i=il;i<=iu;i++)
+	       {
+	       ii = i+id;
+	       a[ii-1] = a[ii-1]-a[i-1]*h;
+	       }
+	    ii = il+id;
+	    h = buf[j-1]-a[ii-1]*a[ii-1];
+	    buf[j-1] = h;
+	    if (h<=piv) continue;
+	    piv = h;
+	    kpiv = j;
+	    }
+	 }
+      h = 0.;
+      ii = il;
+      for (i=k;i<=m;i++)
+	 {
+	 h = h+a[ii-1]*r[i-1];
+	 ii = ii+1;
+	 }
+      h = beta*h;
+      ii = il;
+      for (i=k;i<=m;i++)
+	 {
+	 r[i-1] = r[i-1]-a[ii-1]*h;
+	 ii = ii+1;
+	 }
+      }
+
+   *ierror = 0;
+   piv = 1./buf[2*n-1];
+   x[n-1] = piv*r[n-1];
+   if (n>1)
+      {
+      jl = (n-1)*m+n;
+      for (j=2;j<=n;j++)
+	 {
+	 jl = jl-m-1;
+	 k = n+n+1-j;
+	 piv = 1./buf[k-1];
+	 kl = k-n;
+	 id = ipiv[kl-1]-kl;
+	 il = 2-j;
+	 h = r[kl-1];
+	 il = il+n;
+	 iu = il+j-2;
+	 ii = jl;
+	 for (i=il;i<=iu;i++)
+	    {
+	    ii = ii+m;
+	    h = h-a[ii-1]*x[i-1];
+	    }
+	 i = il-1;
+	 ii = i+id;
+	 x[i-1] = x[ii-1];
+	 x[ii-1] = piv*h;
+	 }
+      }
+      
+   done:
+   free(buf);
+   free(ipiv);
+   for (i=0;i<n;i++)
+      if (x[i]!=0.0)
+         {
+         for (j=0;j<n;j++) x[j] /= alznorm[j];
+         return;
+         }
+   *ierror = -1;
    return;
 }

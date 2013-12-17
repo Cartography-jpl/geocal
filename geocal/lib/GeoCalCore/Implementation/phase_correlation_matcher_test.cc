@@ -16,11 +16,14 @@ BOOST_AUTO_TEST_CASE(picmtch4_test)
   ImageCoordinate new_res;
   double line_sigma, sample_sigma;
   bool success;
+  ImageCoordinate new_ic_expected(ref_ic.line - 4, ref_ic.sample - 5);
   // Perfect prediction
-  ImageCoordinate new_ic(ref_ic.line - 4, ref_ic.sample - 5);
-  m.match(img1, img2, ref_ic, 
-	  new_ic, new_res,
-	  line_sigma, sample_sigma, success);
+  ImageCoordinate new_ic = new_ic_expected;
+  m.match(img1, img2, ref_ic, new_ic, new_res, line_sigma, 
+	  sample_sigma, success);
+  BOOST_CHECK(success);
+  BOOST_CHECK_CLOSE(new_res.line, new_ic_expected.line, 1e-4);
+  BOOST_CHECK_CLOSE(new_res.sample, new_ic_expected.sample, 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

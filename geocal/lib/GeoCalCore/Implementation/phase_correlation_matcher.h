@@ -1,6 +1,9 @@
 #ifndef PHASE_CORRELATION_MATCHER_H
 #define PHASE_CORRELATION_MATCHER_H
 #include "image_matcher.h"
+#include <boost/utility.hpp>
+#include <fftw3.h>
+
 namespace GeoCal {
 /****************************************************************//**
   This class performs image matching. It uses phase correlation. This
@@ -18,7 +21,8 @@ namespace GeoCal {
      pp. 163-165.
 *******************************************************************/
 
-class PhaseCorrelationMatcher : public ImageMatcher {
+class PhaseCorrelationMatcher : public ImageMatcher, 
+				public boost::noncopyable {
 public:
   enum Diagnostic {NO_FAIL = 0, IMAGE_MASKED = 1, TOO_CLOSE_TO_IMAGE_EDGE = 2};
   PhaseCorrelationMatcher(int Template_size = 32, int Search_size = 32);
@@ -27,7 +31,7 @@ public:
 /// Destructor.
 //-----------------------------------------------------------------------
 
-  virtual ~PhaseCorrelationMatcher() {}
+  virtual ~PhaseCorrelationMatcher();
 
   virtual void match_mask(const RasterImage& Ref, const ImageMask& Ref_mask,
 			  const RasterImage& New, 
@@ -60,6 +64,10 @@ public:
   virtual void print(std::ostream& Os) const;
 private:
   int fftsize, search;
+  fftw_complex *afftin,*afftout,*bfftin,*bfftout;
+  bool nohpf; // If true, shut off high pass filter.
+  void rfit(int ilin,int jsmp, float* vmax, float* vloff,float* vsoff,
+	    float corr[3][3],int srchdim, float *chip1, float* asrch) const;
 };
 
 }

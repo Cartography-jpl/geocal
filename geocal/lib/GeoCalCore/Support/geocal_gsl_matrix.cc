@@ -45,14 +45,14 @@ void GslMatrix::reset(blitz::Array<double, 2>& M)
   else
     blitz_array_.reference(M.copy());
   gsl_matrix_ = (gsl_matrix*) malloc(sizeof(gsl_matrix));
-  gsl_matrix_->size1 = M.extent(0);
-  gsl_matrix_->size2 = M.extent(1);
-  gsl_matrix_->tda = M.extent(1);
-  gsl_matrix_->data = M.data();
+  gsl_matrix_->size1 = blitz_array_.extent(0);
+  gsl_matrix_->size2 = blitz_array_.extent(1);
+  gsl_matrix_->tda = blitz_array_.extent(1);
+  gsl_matrix_->data = blitz_array_.data();
   gsl_matrix_->owner = 0;
   gsl_matrix_->block = (gsl_block*) malloc(sizeof(gsl_block));
-  gsl_matrix_->block->size = M.size();
-  gsl_matrix_->block->data = M.data();
+  gsl_matrix_->block->size = blitz_array_.size();
+  gsl_matrix_->block->data = blitz_array_.data();
   owned_ = true;
   block_owned_ = true;
 }
@@ -111,13 +111,13 @@ void GslVector::reset(blitz::Array<double, 1>& M)
   else
     blitz_array_.reference(M.copy());
   gsl_vector_ = (gsl_vector*) malloc(sizeof(gsl_vector));
-  gsl_vector_->size = M.extent(0);
+  gsl_vector_->size = blitz_array_.extent(0);
   gsl_vector_->stride = 1;
-  gsl_vector_->data = M.data();
+  gsl_vector_->data = blitz_array_.data();
   gsl_vector_->owner = 0;
   gsl_vector_->block = (gsl_block*) malloc(sizeof(gsl_block));
-  gsl_vector_->block->size = M.size();
-  gsl_vector_->block->data = M.data();
+  gsl_vector_->block->size = blitz_array_.size();
+  gsl_vector_->block->data = blitz_array_.data();
   owned_ = true;
   block_owned_ = true;
 }

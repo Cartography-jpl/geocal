@@ -157,7 +157,7 @@ class GeometricModel(geocal.generic_object.GenericObject):
     __repr__ = _swig_repr
     def image_coordinate(self, *args):
         """
-        virtual ImageCoordinate GeoCal::GeometricModel::image_coordinate(const ImageCoordinate &Resampled_Ic) const =0
+        virtual ImageCoordinate GeoCal::GeometricModel::image_coordinate(const ImageCoordinate &Resampled_ic) const =0
         Map image coordinates to an underlying set of image coordinates. 
         """
         return _geometric_model.GeometricModel_image_coordinate(self, *args)

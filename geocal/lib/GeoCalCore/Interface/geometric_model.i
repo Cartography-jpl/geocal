@@ -15,8 +15,7 @@ namespace GeoCal {
 
 class GeometricModel: public GenericObject {
 public:
-  RasterImageTileIterator(const RasterImage& Ri);
-  virtual ImageCoordinate image_coordinate(const ImageCoordinate& Resampled_Ic)
+  virtual ImageCoordinate image_coordinate(const ImageCoordinate& Resampled_ic)
     const;
   std::string print_to_string() const;
 };

@@ -17,7 +17,7 @@ public:
 /// Map image coordinates to an underlying set of image coordinates.
 //-----------------------------------------------------------------------
 
-  virtual ImageCoordinate image_coordinate(const ImageCoordinate& Resampled_Ic)
+  virtual ImageCoordinate image_coordinate(const ImageCoordinate& Resampled_ic)
     const = 0;
 
 //-----------------------------------------------------------------------

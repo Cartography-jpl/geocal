@@ -62,13 +62,19 @@ public:
 //-----------------------------------------------------------------------
   int search_size() const {return search; }
 
+//-----------------------------------------------------------------------
+/// The maximum correlation of last match.
+//-----------------------------------------------------------------------
+  double correlation_last_match() const { return vmax; }
+
   virtual void print(std::ostream& Os) const;
 private:
   int fftsize, search;
   fftw_complex *afftin,*afftout,*bfftin,*bfftout;
   bool nohpf; // If true, shut off high pass filter.
   bool subpix; // If true, then get subpixel accuracy.
-  void rfit(int ilin,int jsmp, float* vmax, float* vloff,float* vsoff,
+  mutable double vmax;
+  void rfit(int ilin,int jsmp, float* vloff,float* vsoff,
 	    float corr[3][3],int srchdim, float *chip1, float* asrch) const;
   void refine(float corr[3][3],float* vloff,float* vsoff,int *ireferr) const;
   void lsqfit(double * a, double * r, int m, int n, double * x, double eps, 

@@ -100,12 +100,15 @@ void PhaseCorrelationMatcher::match_mask
   int srchdim = search;
   int ilin = (search - srchdim) / 2;
   int jsmp = ilin;
-  float vmax, vloff, vsoff, corr[3][3];
-  rfit(ilin, jsmp, &vmax, &vloff, &vsoff, corr, srchdim, chip1f.data(), 
+  float vloff, vsoff, corr[3][3];
+  rfit(ilin, jsmp, &vloff, &vsoff, corr, srchdim, chip1f.data(), 
        asrchf.data());
   int referr = 0;
   if(subpix)
     refine(corr, &vloff, &vsoff, &referr);
+  std::cerr << "vloff: " << vloff << "\n"
+	    << "vsoff: " << vsoff << "\n"
+	    << "vmax: " << vmax << "\n";
   // Add threshold test here
   if(!referr) {
     New_res.line = new_line + search_size() / 2 + vloff;
@@ -150,8 +153,6 @@ void PhaseCorrelationMatcher::print(std::ostream& Os) const
 ///	line offset into asrch (the larger array)
 /// \param jsmp: input, int jsmp;
 ///	sample offset into asrch (the larger array)
-/// \param vmax: output, float *vmax;
-///	the max correlation value
 /// \param vloff: output, float *vloff;
 ///	the line offset of the peak match relative to the
 ///	center of chip1 (16.0,16.0)
@@ -166,7 +167,7 @@ void PhaseCorrelationMatcher::print(std::ostream& Os) const
 //-----------------------------------------------------------------------
 
 void PhaseCorrelationMatcher::rfit
-(int ilin,int jsmp,float* vmax,float* vloff,float* vsoff,float corr[3][3],
+(int ilin,int jsmp,float* vloff,float* vsoff,float corr[3][3],
  int srchdim, float *chip1, float* asrch) const
 {
    int i,j,ixmax,jxmax,koff;
@@ -265,7 +266,7 @@ void PhaseCorrelationMatcher::rfit
    
    ttemp = log10((double)srchdim)/log10((double)2.0);
    ttemp = ttemp*ttemp;
-   *vmax = tvmax*10.0/(srchdim*ttemp*ttemp);
+   vmax = tvmax*10.0/(srchdim*ttemp*ttemp);
    *vloff = (float)jxmax-quadmark;
    *vsoff = (float)ixmax-quadmark;
    /*printf("ilin,srchdim,*vloff,*vsoff,quadmark,koff %d %d %7.1f %7.1f %d %d\n",

@@ -572,6 +572,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/image_to_image_match_wrap.cc \
 	@swigsrc@/ccorr_matcher_wrap.cc @swigsrc@/lsm_matcher_wrap.cc \
 	@swigsrc@/ccorr_lsm_matcher_wrap.cc \
+	@swigsrc@/geometric_model_wrap.cc \
 	@swigsrc@/raster_multifile_wrap.cc @swigsrc@/did_datum_wrap.cc \
 	@swigsrc@/dem_map_info_offset_wrap.cc \
 	@swigsrc@/map_info_image_ground_connection_wrap.cc \
@@ -691,6 +692,7 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-ccorr_matcher_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-lsm_matcher_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-ccorr_lsm_matcher_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-geometric_model_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-did_datum_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-dem_map_info_offset_wrap.lo \
@@ -1464,6 +1466,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcinterface@/rpc_image.h @srcinterface@/ipi.h \
 	@srcinterface@/raster_multifile.h \
 	@srcinterface@/image_ground_connection.h \
+	@srcinterface@/geometric_model.h \
 	@srcimplementation@/did_datum.h \
 	@srcimplementation@/dem_map_info_offset.h \
 	@srcimplementation@/map_info_image_ground_connection.h \
@@ -2203,6 +2206,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/ccorr_matcher_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/lsm_matcher_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/ccorr_lsm_matcher_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/geometric_model_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/raster_multifile_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/did_datum_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/dem_map_info_offset_wrap.cc \
@@ -2350,6 +2354,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/ipi.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/raster_multifile.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/image_ground_connection.h \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcinterface@/geometric_model.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/did_datum.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_map_info_offset.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/map_info_image_ground_connection.h \
@@ -2952,6 +2957,8 @@ clean-pkgpythonswigLTLIBRARIES:
 @swigsrc@/_swig_wrap_la-lsm_matcher_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-ccorr_lsm_matcher_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-geometric_model_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -4453,6 +4460,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_rpc_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_time_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geodetic_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_coordinate_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_wrap.Plo@am__quote@
@@ -4923,6 +4931,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/ccorr_lsm_matcher_wrap.cc' object='@swigsrc@/_swig_wrap_la-ccorr_lsm_matcher_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-ccorr_lsm_matcher_wrap.lo `test -f '@swigsrc@/ccorr_lsm_matcher_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ccorr_lsm_matcher_wrap.cc
+
+@swigsrc@/_swig_wrap_la-geometric_model_wrap.lo: @swigsrc@/geometric_model_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-geometric_model_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-geometric_model_wrap.lo `test -f '@swigsrc@/geometric_model_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geometric_model_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/geometric_model_wrap.cc' object='@swigsrc@/_swig_wrap_la-geometric_model_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-geometric_model_wrap.lo `test -f '@swigsrc@/geometric_model_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geometric_model_wrap.cc
 
 @swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo: @swigsrc@/raster_multifile_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_multifile_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo `test -f '@swigsrc@/raster_multifile_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/raster_multifile_wrap.cc

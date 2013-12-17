@@ -61,6 +61,7 @@ extern "C" {
   void init_ccorr_matcher(void);
   void init_lsm_matcher(void);
   void init_ccorr_lsm_matcher(void);
+  void init_geometric_model(void);
   void init_raster_multifile(void);
   void init_did_datum(void);
   void init_dem_map_info_offset(void);
@@ -245,6 +246,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_ccorr_matcher", init_ccorr_matcher);
   init_extension_module(package, "_lsm_matcher", init_lsm_matcher);
   init_extension_module(package, "_ccorr_lsm_matcher", init_ccorr_lsm_matcher);
+  init_extension_module(package, "_geometric_model", init_geometric_model);
   init_extension_module(package, "_raster_multifile", init_raster_multifile);
   init_extension_module(package, "_did_datum", init_did_datum);
   init_extension_module(package, "_dem_map_info_offset", init_dem_map_info_offset);

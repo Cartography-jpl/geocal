@@ -88,6 +88,7 @@ extern "C" {
   void init_dem_match(void);
   void init_phase_correlation_matcher(void);
   void init_quadratic_geometric_model(void);
+  void init_geometric_model_image(void);
   void init_geocal_gdal(void);
   void init_gdal_raster_image(void);
   void init_gdal_datum(void);
@@ -274,6 +275,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_dem_match", init_dem_match);
   init_extension_module(package, "_phase_correlation_matcher", init_phase_correlation_matcher);
   init_extension_module(package, "_quadratic_geometric_model", init_quadratic_geometric_model);
+  init_extension_module(package, "_geometric_model_image", init_geometric_model_image);
   init_extension_module(package, "_geocal_gdal", init_geocal_gdal);
   init_extension_module(package, "_gdal_raster_image", init_gdal_raster_image);
   init_extension_module(package, "_gdal_datum", init_gdal_datum);

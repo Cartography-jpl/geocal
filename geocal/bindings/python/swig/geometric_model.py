@@ -168,5 +168,63 @@ GeometricModel.__str__ = new_instancemethod(_geometric_model.GeometricModel___st
 GeometricModel_swigregister = _geometric_model.GeometricModel_swigregister
 GeometricModel_swigregister(GeometricModel)
 
+class GeometricTiePoints(geocal.generic_object.GenericObject):
+    """
+    Often GeometricModels are created by fitting a set of points tieing
+    the image together.
+
+    This is just complicated enough to need a class to maintain it. This
+    is little more than a structure.
+
+    C++ includes: geometric_model.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self): 
+        """
+        GeoCal::GeometricTiePoints::GeometricTiePoints()
+
+        """
+        _geometric_model.GeometricTiePoints_swiginit(self,_geometric_model.new_GeometricTiePoints())
+    def add_point(self, *args):
+        """
+        void GeoCal::GeometricTiePoints::add_point(const ImageCoordinate &Resampled_ic, const ImageCoordinate
+        &Original_ic)
+        Add a point. 
+        """
+        return _geometric_model.GeometricTiePoints_add_point(self, *args)
+
+    def _v_x(self):
+        """
+        blitz::Array<double, 2> GeoCal::GeometricTiePoints::x() const
+        Return the resampled_ic as 2 columns, first is line second is sample;.
+
+        """
+        return _geometric_model.GeometricTiePoints__v_x(self)
+
+    @property
+    def x(self):
+        return self._v_x()
+
+    def _v_y(self):
+        """
+        blitz::Array<double, 2> GeoCal::GeometricTiePoints::y() const
+        Return the resampled_ic as 2 columns, first is line second is sample;.
+
+        """
+        return _geometric_model.GeometricTiePoints__v_y(self)
+
+    @property
+    def y(self):
+        return self._v_y()
+
+    __swig_destroy__ = _geometric_model.delete_GeometricTiePoints
+GeometricTiePoints.add_point = new_instancemethod(_geometric_model.GeometricTiePoints_add_point,None,GeometricTiePoints)
+GeometricTiePoints._v_x = new_instancemethod(_geometric_model.GeometricTiePoints__v_x,None,GeometricTiePoints)
+GeometricTiePoints._v_y = new_instancemethod(_geometric_model.GeometricTiePoints__v_y,None,GeometricTiePoints)
+GeometricTiePoints.__str__ = new_instancemethod(_geometric_model.GeometricTiePoints___str__,None,GeometricTiePoints)
+GeometricTiePoints_swigregister = _geometric_model.GeometricTiePoints_swigregister
+GeometricTiePoints_swigregister(GeometricTiePoints)
+
 
 

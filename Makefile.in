@@ -596,6 +596,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/ray_intersect_wrap.cc @swigsrc@/dem_match_wrap.cc \
 	@swigsrc@/phase_correlation_matcher_wrap.cc \
 	@swigsrc@/quadratic_geometric_model_wrap.cc \
+	@swigsrc@/geometric_model_image_wrap.cc \
 	@swigsrc@/geocal_gdal_wrap.cc \
 	@swigsrc@/gdal_raster_image_wrap.cc \
 	@swigsrc@/gdal_datum_wrap.cc @swigsrc@/gdal_dem_wrap.cc \
@@ -720,6 +721,7 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-dem_match_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-phase_correlation_matcher_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-quadratic_geometric_model_wrap.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-geometric_model_image_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_2) \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-memory_multi_band_wrap.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/_swig_wrap_la-spice_helper_wrap.lo \
@@ -834,6 +836,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srcimplementation@/dem_match.cc \
 	@srcimplementation@/phase_correlation_matcher.cc \
 	@srcimplementation@/quadratic_geometric_model.cc \
+	@srcimplementation@/geometric_model_image.cc \
 	@srcimplementation@/geocal_gdal.cc \
 	@srcimplementation@/gdal_dem.cc \
 	@srcimplementation@/gdal_raster_image.cc \
@@ -940,6 +943,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-dem_match.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-phase_correlation_matcher.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-quadratic_geometric_model.lo \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-geometric_model_image.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_6) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-spice_helper.lo \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/libgeocal_la-sdp_helper.lo \
@@ -1148,6 +1152,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 	@srcimplementation@/dem_match_test.cc \
 	@srcimplementation@/phase_correlation_matcher_test.cc \
 	@srcimplementation@/quadratic_geometric_model_test.cc \
+	@srcimplementation@/geometric_model_image_test.cc \
 	@srccartlab@/vicar_ogr_test.cc \
 	@srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
@@ -1252,6 +1257,7 @@ am__geocal_test_all_SOURCES_DIST = @srcsupport@/global_fixture.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-dem_match_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-phase_correlation_matcher_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-quadratic_geometric_model_test.$(OBJEXT) \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geocal_test_all-geometric_model_image_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__objects_13) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_camera_test.$(OBJEXT) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/geocal_test_all-argus_orbit_test.$(OBJEXT) \
@@ -1512,6 +1518,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcimplementation@/dem_match.h \
 	@srcimplementation@/phase_correlation_matcher.h \
 	@srcimplementation@/quadratic_geometric_model.h \
+	@srcimplementation@/geometric_model_image.h \
 	@srcimplementation@/hdf_orbit.h \
 	@srcimplementation@/gdal_datum.h \
 	@srcimplementation@/geocal_gdal.h \
@@ -2125,6 +2132,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/phase_correlation_matcher.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/quadratic_geometric_model.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geometric_model_image.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_19) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/spice_helper.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/sdp_helper.cc \
@@ -2241,6 +2249,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/dem_match_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/phase_correlation_matcher_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/quadratic_geometric_model_wrap.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/geometric_model_image_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_22) \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/memory_multi_band_wrap.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@swigsrc@/spice_helper_wrap.cc \
@@ -2403,6 +2412,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/phase_correlation_matcher.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/quadratic_geometric_model.h \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geometric_model_image.h \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_17) $(am__append_18) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/spice_helper.h \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/sdp_helper.h \
@@ -2502,6 +2512,7 @@ check_DATA =
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/dem_match_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/phase_correlation_matcher_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/quadratic_geometric_model_test.cc \
+@BUILD_AFIDS_PYTHON_TRUE@	@srcimplementation@/geometric_model_image_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	$(am__append_26) \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_camera_test.cc \
 @BUILD_AFIDS_PYTHON_TRUE@	@srccartlab@/argus_orbit_test.cc \
@@ -3023,6 +3034,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-quadratic_geometric_model_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-geometric_model_image_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-gdal_raster_image_wrap.lo:  \
@@ -3335,6 +3348,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-quadratic_geometric_model.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-geometric_model_image.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-geocal_gdal.lo:  \
@@ -3985,6 +4001,9 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-quadratic_geometric_model_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-geometric_model_image_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT):  \
 	@srccartlab@/$(am__dirstamp) \
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
@@ -4246,6 +4265,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-gdal_dem_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-gdal_raster_image_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-geocal_gdal_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-geometric_model_image_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-hdf_orbit_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_image_to_image_match_test.Po@am__quote@
@@ -4285,6 +4305,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_multi_band.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_raster_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-geocal_gdal.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-geometric_model_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ground_mask_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_image_to_image_match.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_map_projected.Plo@am__quote@
@@ -4481,6 +4502,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_rpc_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_time_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geodetic_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_coordinate_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_image_wrap.Plo@am__quote@
@@ -5142,6 +5164,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/quadratic_geometric_model_wrap.cc' object='@swigsrc@/_swig_wrap_la-quadratic_geometric_model_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-quadratic_geometric_model_wrap.lo `test -f '@swigsrc@/quadratic_geometric_model_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/quadratic_geometric_model_wrap.cc
+
+@swigsrc@/_swig_wrap_la-geometric_model_image_wrap.lo: @swigsrc@/geometric_model_image_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-geometric_model_image_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_image_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-geometric_model_image_wrap.lo `test -f '@swigsrc@/geometric_model_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geometric_model_image_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_image_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_image_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/geometric_model_image_wrap.cc' object='@swigsrc@/_swig_wrap_la-geometric_model_image_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-geometric_model_image_wrap.lo `test -f '@swigsrc@/geometric_model_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geometric_model_image_wrap.cc
 
 @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo: @swigsrc@/geocal_gdal_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_gdal_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo `test -f '@swigsrc@/geocal_gdal_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_gdal_wrap.cc
@@ -5940,6 +5969,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/quadratic_geometric_model.cc' object='@srcimplementation@/libgeocal_la-quadratic_geometric_model.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-quadratic_geometric_model.lo `test -f '@srcimplementation@/quadratic_geometric_model.cc' || echo '$(srcdir)/'`@srcimplementation@/quadratic_geometric_model.cc
+
+@srcimplementation@/libgeocal_la-geometric_model_image.lo: @srcimplementation@/geometric_model_image.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-geometric_model_image.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-geometric_model_image.Tpo -c -o @srcimplementation@/libgeocal_la-geometric_model_image.lo `test -f '@srcimplementation@/geometric_model_image.cc' || echo '$(srcdir)/'`@srcimplementation@/geometric_model_image.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-geometric_model_image.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-geometric_model_image.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/geometric_model_image.cc' object='@srcimplementation@/libgeocal_la-geometric_model_image.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-geometric_model_image.lo `test -f '@srcimplementation@/geometric_model_image.cc' || echo '$(srcdir)/'`@srcimplementation@/geometric_model_image.cc
 
 @srcimplementation@/libgeocal_la-geocal_gdal.lo: @srcimplementation@/geocal_gdal.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-geocal_gdal.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-geocal_gdal.Tpo -c -o @srcimplementation@/libgeocal_la-geocal_gdal.lo `test -f '@srcimplementation@/geocal_gdal.cc' || echo '$(srcdir)/'`@srcimplementation@/geocal_gdal.cc
@@ -7585,6 +7621,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/quadratic_geometric_model_test.cc' object='@srcimplementation@/geocal_test_all-quadratic_geometric_model_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-quadratic_geometric_model_test.obj `if test -f '@srcimplementation@/quadratic_geometric_model_test.cc'; then $(CYGPATH_W) '@srcimplementation@/quadratic_geometric_model_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/quadratic_geometric_model_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-geometric_model_image_test.o: @srcimplementation@/geometric_model_image_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-geometric_model_image_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-geometric_model_image_test.Tpo -c -o @srcimplementation@/geocal_test_all-geometric_model_image_test.o `test -f '@srcimplementation@/geometric_model_image_test.cc' || echo '$(srcdir)/'`@srcimplementation@/geometric_model_image_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-geometric_model_image_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-geometric_model_image_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/geometric_model_image_test.cc' object='@srcimplementation@/geocal_test_all-geometric_model_image_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-geometric_model_image_test.o `test -f '@srcimplementation@/geometric_model_image_test.cc' || echo '$(srcdir)/'`@srcimplementation@/geometric_model_image_test.cc
+
+@srcimplementation@/geocal_test_all-geometric_model_image_test.obj: @srcimplementation@/geometric_model_image_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-geometric_model_image_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-geometric_model_image_test.Tpo -c -o @srcimplementation@/geocal_test_all-geometric_model_image_test.obj `if test -f '@srcimplementation@/geometric_model_image_test.cc'; then $(CYGPATH_W) '@srcimplementation@/geometric_model_image_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/geometric_model_image_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-geometric_model_image_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-geometric_model_image_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/geometric_model_image_test.cc' object='@srcimplementation@/geocal_test_all-geometric_model_image_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-geometric_model_image_test.obj `if test -f '@srcimplementation@/geometric_model_image_test.cc'; then $(CYGPATH_W) '@srcimplementation@/geometric_model_image_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/geometric_model_image_test.cc'; fi`
 
 @srccartlab@/geocal_test_all-vicar_ogr_test.o: @srccartlab@/vicar_ogr_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srccartlab@/geocal_test_all-vicar_ogr_test.o -MD -MP -MF @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_ogr_test.Tpo -c -o @srccartlab@/geocal_test_all-vicar_ogr_test.o `test -f '@srccartlab@/vicar_ogr_test.cc' || echo '$(srcdir)/'`@srccartlab@/vicar_ogr_test.cc

@@ -170,6 +170,14 @@ class QuadraticGeometricModel(geocal.geometric_model.GeometricModel):
         trans(10)*py*py+trans(11)*px*py 
         """
         _quadratic_geometric_model.QuadraticGeometricModel_swiginit(self,_quadratic_geometric_model.new_QuadraticGeometricModel(*args))
+    def fit_transformation(self, *args):
+        """
+        void QuadraticGeometricModel::fit_transformation(const GeometricTiePoints &Tp)
+        Fit the transformation in the least squares sense to match the given
+        set of tiepoints. 
+        """
+        return _quadratic_geometric_model.QuadraticGeometricModel_fit_transformation(self, *args)
+
     def _v_transformation(self):
         """
         const blitz::Array<double, 1> GeoCal::QuadraticGeometricModel::transformation() const
@@ -229,6 +237,7 @@ class QuadraticGeometricModel(geocal.geometric_model.GeometricModel):
       return _new_from_init, (self.__class__, 1, self.transformation,self.fit_type,self.magnify_line,self.magnify_sample)
 
     __swig_destroy__ = _quadratic_geometric_model.delete_QuadraticGeometricModel
+QuadraticGeometricModel.fit_transformation = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel_fit_transformation,None,QuadraticGeometricModel)
 QuadraticGeometricModel._v_transformation = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_transformation,None,QuadraticGeometricModel)
 QuadraticGeometricModel._v_magnify_line = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_magnify_line,None,QuadraticGeometricModel)
 QuadraticGeometricModel._v_magnify_sample = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_magnify_sample,None,QuadraticGeometricModel)

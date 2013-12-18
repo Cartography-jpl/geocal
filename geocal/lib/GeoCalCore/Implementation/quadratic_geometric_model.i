@@ -13,15 +13,21 @@
 namespace GeoCal {
 class QuadraticGeometricModel: public GeometricModel {
 public:
-  QuadraticGeometricModel(double Magnify_line = 1.0, 
-			  double Magnify_sample = 1.0);
-  QuadraticGeometricModel(const blitz::Array<double, 1>& Transformation,
+  enum FitType {LINEAR = 0, QUADRATIC};
+  QuadraticGeometricModel(FitType ft = LINEAR,
 			  double Magnify_line = 1.0, 
 			  double Magnify_sample = 1.0);
+  QuadraticGeometricModel(const blitz::Array<double, 1>& Transformation,
+			  FitType ft = LINEAR,
+			  double Magnify_line = 1.0, 
+			  double Magnify_sample = 1.0);
+  void fit_transformation(const GeometricTiePoints& Tp);
   %python_attribute(transformation, blitz::Array<double, 1>)
   %python_attribute(magnify_line, double)
   %python_attribute(magnify_sample, double)
-  %pickle_init(1, self.transformation, self.magnify_line, self.magnify_sample);
+  %python_attribute(fit_type, FitType)
+  %pickle_init(1, self.transformation, self.fit_type, 
+	       self.magnify_line, self.magnify_sample);
 };
 
 }

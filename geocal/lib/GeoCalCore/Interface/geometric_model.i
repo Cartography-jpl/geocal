@@ -9,6 +9,7 @@
 %base_import(generic_object)
 %import "image_coordinate.i"
 %geocal_shared_ptr(GeoCal::GeometricModel);
+%geocal_shared_ptr(GeoCal::GeometricTiePoints);
 
 namespace GeoCal {
 %nodefaultctor GeometricModel;
@@ -20,5 +21,14 @@ public:
   std::string print_to_string() const;
 };
 
+class GeometricTiePoints : public GenericObject {
+public:
+  GeometricTiePoints();
+  void add_point(const ImageCoordinate& Resampled_ic,
+		 const ImageCoordinate& Original_ic);
+  %python_attribute(x, blitz::Array<double, 2>)
+  %python_attribute(y, blitz::Array<double, 2>)
+  std::string print_to_string() const;
+};
 }
 

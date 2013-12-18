@@ -46,6 +46,14 @@ public:
 //-----------------------------------------------------------------------
 
   GslMatrix(blitz::Array<double, 2>& M) : gsl_matrix_(0) {reset(M);}
+
+//-----------------------------------------------------------------------
+/// Variation that doesn't change the underlying data.
+//-----------------------------------------------------------------------
+
+  GslMatrix(const blitz::Array<double, 2>& M) 
+    : gsl_matrix_(0) {blitz::Array<double, 2> m2(M.copy()); reset(m2);}
+
   ~GslMatrix();
   void reset(gsl_matrix* M, bool Owned = true);
   void reset(blitz::Array<double, 2>& M);
@@ -122,6 +130,14 @@ public:
 
   GslVector(blitz::Array<double, 1>& M) 
     :gsl_vector_(0) { reset(M);}
+
+//-----------------------------------------------------------------------
+/// Variation that doesn't change the underlying data.
+//-----------------------------------------------------------------------
+
+  GslVector(const blitz::Array<double, 1>& M) 
+    :gsl_vector_(0) {blitz::Array<double, 1> m2(M.copy()); reset(m2);}
+
   ~GslVector();
   void reset(gsl_vector* M, bool Owned = true);
   void reset(blitz::Array<double, 1>& M);

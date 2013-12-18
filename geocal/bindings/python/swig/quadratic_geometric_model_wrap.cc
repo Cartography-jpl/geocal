@@ -5150,6 +5150,32 @@ template<class T, int D> inline boost::array<T, D>
 #include "quadratic_geometric_model.h"
 
 
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -5948,20 +5974,68 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
 
 SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  double arg1 ;
+  GeoCal::QuadraticGeometricModel::FitType arg1 ;
   double arg2 ;
-  double val1 ;
+  double arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  GeoCal::QuadraticGeometricModel *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_QuadraticGeometricModel" "', argument " "1"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
+  } 
+  arg1 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val1);
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_QuadraticGeometricModel" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel(arg1,arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::QuadraticGeometricModel > *smartresult = result ? new boost::shared_ptr<  GeoCal::QuadraticGeometricModel >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuadraticGeometricModel_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::QuadraticGeometricModel::FitType arg1 ;
+  double arg2 ;
+  int val1 ;
   int ecode1 = 0 ;
   double val2 ;
   int ecode2 = 0 ;
   GeoCal::QuadraticGeometricModel *result = 0 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_QuadraticGeometricModel" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_QuadraticGeometricModel" "', argument " "1"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
   } 
-  arg1 = static_cast< double >(val1);
+  arg1 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val1);
   ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "double""'");
@@ -5986,19 +6060,19 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  double arg1 ;
-  double val1 ;
+  GeoCal::QuadraticGeometricModel::FitType arg1 ;
+  int val1 ;
   int ecode1 = 0 ;
   GeoCal::QuadraticGeometricModel *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_QuadraticGeometricModel" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_QuadraticGeometricModel" "', argument " "1"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
   } 
-  arg1 = static_cast< double >(val1);
+  arg1 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val1);
   {
     try {
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel(arg1);
@@ -6018,7 +6092,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
   PyObject *resultobj = 0;
   GeoCal::QuadraticGeometricModel *result = 0 ;
   
@@ -6042,14 +6116,76 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,1 > *arg1 = 0 ;
-  double arg2 ;
+  GeoCal::QuadraticGeometricModel::FitType arg2 ;
+  double arg3 ;
+  double arg4 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  GeoCal::QuadraticGeometricModel *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double>(swig_obj[0]);
+      if(!numpy1.obj)
+      return NULL;
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
+  } 
+  arg2 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_QuadraticGeometricModel" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_QuadraticGeometricModel" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  {
+    try {
+      result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel((blitz::Array< double,1 > const &)*arg1,arg2,arg3,arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::QuadraticGeometricModel > *smartresult = result ? new boost::shared_ptr<  GeoCal::QuadraticGeometricModel >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuadraticGeometricModel_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  GeoCal::QuadraticGeometricModel::FitType arg2 ;
   double arg3 ;
   blitz::Array< double,1 > a1 ;
   PythonObject numpy1 ;
-  double val2 ;
+  int val2 ;
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
@@ -6067,11 +6203,11 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_3(PyObject *SWIGUNU
       arg1 = &a1;
     }
   }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
   } 
-  arg2 = static_cast< double >(val2);
+  arg2 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val2);
   ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_QuadraticGeometricModel" "', argument " "3"" of type '" "double""'");
@@ -6096,13 +6232,13 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,1 > *arg1 = 0 ;
-  double arg2 ;
+  GeoCal::QuadraticGeometricModel::FitType arg2 ;
   blitz::Array< double,1 > a1 ;
   PythonObject numpy1 ;
-  double val2 ;
+  int val2 ;
   int ecode2 = 0 ;
   GeoCal::QuadraticGeometricModel *result = 0 ;
   
@@ -6118,11 +6254,11 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_4(PyObject *SWIGUNU
       arg1 = &a1;
     }
   }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
   } 
-  arg2 = static_cast< double >(val2);
+  arg2 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val2);
   {
     try {
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel((blitz::Array< double,1 > const &)*arg1,arg2);
@@ -6142,7 +6278,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,1 > *arg1 = 0 ;
   blitz::Array< double,1 > a1 ;
@@ -6182,57 +6318,89 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[4];
+  PyObject *argv[5];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_QuadraticGeometricModel",0,3,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_QuadraticGeometricModel",0,4,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
-    return _wrap_new_QuadraticGeometricModel__SWIG_2(self, argc, argv);
+    return _wrap_new_QuadraticGeometricModel__SWIG_3(self, argc, argv);
   }
   if (argc == 1) {
     int _v = 0;
     {
       {
-        PythonObject t(to_numpy<double>(argv[0]));
-        _v = (t.obj && PyArray_NDIM(t.obj) ==1 ? 1 : 0);
+        int res = SWIG_AsVal_int(argv[0], NULL);
+        _v = SWIG_CheckState(res);
       }
     }
     if (!_v) goto check_2;
-    return _wrap_new_QuadraticGeometricModel__SWIG_5(self, argc, argv);
+    return _wrap_new_QuadraticGeometricModel__SWIG_2(self, argc, argv);
   }
 check_2:
   
   if (argc == 1) {
-    return _wrap_new_QuadraticGeometricModel__SWIG_1(self, argc, argv);
+    return _wrap_new_QuadraticGeometricModel__SWIG_7(self, argc, argv);
   }
   if (argc == 2) {
     int _v = 0;
     {
       {
-        PythonObject t(to_numpy<double>(argv[0]));
-        _v = (t.obj && PyArray_NDIM(t.obj) ==1 ? 1 : 0);
+        int res = SWIG_AsVal_int(argv[0], NULL);
+        _v = SWIG_CheckState(res);
       }
     }
     if (!_v) goto check_4;
-    return _wrap_new_QuadraticGeometricModel__SWIG_4(self, argc, argv);
+    {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_4;
+    return _wrap_new_QuadraticGeometricModel__SWIG_1(self, argc, argv);
   }
 check_4:
   
   if (argc == 2) {
-    return _wrap_new_QuadraticGeometricModel__SWIG_0(self, argc, argv);
+    return _wrap_new_QuadraticGeometricModel__SWIG_6(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_QuadraticGeometricModel__SWIG_3(self, argc, argv);
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[0], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_6;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_6;
+    return _wrap_new_QuadraticGeometricModel__SWIG_0(self, argc, argv);
+  }
+check_6:
+  
+  if (argc == 3) {
+    return _wrap_new_QuadraticGeometricModel__SWIG_5(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_new_QuadraticGeometricModel__SWIG_4(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_QuadraticGeometricModel'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(double,double)\n"
-    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(double)\n"
+    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(GeoCal::QuadraticGeometricModel::FitType,double,double)\n"
+    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(GeoCal::QuadraticGeometricModel::FitType,double)\n"
+    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(GeoCal::QuadraticGeometricModel::FitType)\n"
     "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel()\n"
-    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(blitz::Array< double,1 > const &,double,double)\n"
-    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(blitz::Array< double,1 > const &,double)\n"
+    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(blitz::Array< double,1 > const &,GeoCal::QuadraticGeometricModel::FitType,double,double)\n"
+    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(blitz::Array< double,1 > const &,GeoCal::QuadraticGeometricModel::FitType,double)\n"
+    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(blitz::Array< double,1 > const &,GeoCal::QuadraticGeometricModel::FitType)\n"
     "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(blitz::Array< double,1 > const &)\n");
   return 0;
 }
@@ -6381,6 +6549,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_fit_type(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::QuadraticGeometricModel *arg1 = (GeoCal::QuadraticGeometricModel *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuadraticGeometricModel const > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuadraticGeometricModel const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::QuadraticGeometricModel::FitType result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuadraticGeometricModel_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuadraticGeometricModel__v_fit_type" "', argument " "1"" of type '" "GeoCal::QuadraticGeometricModel const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuadraticGeometricModel > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuadraticGeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::QuadraticGeometricModel * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuadraticGeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::QuadraticGeometricModel * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (GeoCal::QuadraticGeometricModel::FitType)((GeoCal::QuadraticGeometricModel const *)arg1)->fit_type();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_QuadraticGeometricModel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::QuadraticGeometricModel *arg1 = (GeoCal::QuadraticGeometricModel *) 0 ;
@@ -6455,8 +6666,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_QuadraticGeometricModel", _wrap_new_QuadraticGeometricModel, METH_VARARGS, (char *)"\n"
-		"QuadraticGeometricModel::QuadraticGeometricModel(const blitz::Array< double, 1 > &Transformation, double\n"
-		"Magnify_line=1.0, double Magnify_sample=1.0)\n"
+		"QuadraticGeometricModel::QuadraticGeometricModel(const blitz::Array< double, 1 > &Transformation, FitType ft=LINEAR,\n"
+		"double Magnify_line=1.0, double Magnify_sample=1.0)\n"
 		"Constructor.\n"
 		"\n"
 		"The transform gives the coefficients of the quadratic transform, it\n"
@@ -6484,6 +6695,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"QuadraticGeometricModel__v_magnify_sample", (PyCFunction)_wrap_QuadraticGeometricModel__v_magnify_sample, METH_O, (char *)"\n"
 		"double GeoCal::QuadraticGeometricModel::magnify_sample() const\n"
 		"Magnification factor to apply sample direction. \n"
+		""},
+	 { (char *)"QuadraticGeometricModel__v_fit_type", (PyCFunction)_wrap_QuadraticGeometricModel__v_fit_type, METH_O, (char *)"\n"
+		"FitType GeoCal::QuadraticGeometricModel::fit_type() const\n"
+		"Type of fit to do. \n"
 		""},
 	 { (char *)"delete_QuadraticGeometricModel", (PyCFunction)_wrap_delete_QuadraticGeometricModel, METH_O, (char *)"\n"
 		"virtual GeoCal::QuadraticGeometricModel::~QuadraticGeometricModel()\n"
@@ -7405,6 +7620,8 @@ SWIG_init(void) {
   GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::QuadraticGeometricModel))] =
   boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::QuadraticGeometricModel >("boost::shared_ptr< GeoCal::QuadraticGeometricModel > *"));
   
+  SWIG_Python_SetConstant(d, "QuadraticGeometricModel_LINEAR",SWIG_From_int(static_cast< int >(GeoCal::QuadraticGeometricModel::LINEAR)));
+  SWIG_Python_SetConstant(d, "QuadraticGeometricModel_QUADRATIC",SWIG_From_int(static_cast< int >(GeoCal::QuadraticGeometricModel::QUADRATIC)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

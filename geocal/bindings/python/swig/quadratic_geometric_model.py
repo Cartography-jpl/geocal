@@ -154,10 +154,12 @@ class QuadraticGeometricModel(geocal.geometric_model.GeometricModel):
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    LINEAR = _quadratic_geometric_model.QuadraticGeometricModel_LINEAR
+    QUADRATIC = _quadratic_geometric_model.QuadraticGeometricModel_QUADRATIC
     def __init__(self, *args): 
         """
-        QuadraticGeometricModel::QuadraticGeometricModel(const blitz::Array< double, 1 > &Transformation, double
-        Magnify_line=1.0, double Magnify_sample=1.0)
+        QuadraticGeometricModel::QuadraticGeometricModel(const blitz::Array< double, 1 > &Transformation, FitType ft=LINEAR,
+        double Magnify_line=1.0, double Magnify_sample=1.0)
         Constructor.
 
         The transform gives the coefficients of the quadratic transform, it
@@ -208,17 +210,29 @@ class QuadraticGeometricModel(geocal.geometric_model.GeometricModel):
     def magnify_sample(self):
         return self._v_magnify_sample()
 
+    def _v_fit_type(self):
+        """
+        FitType GeoCal::QuadraticGeometricModel::fit_type() const
+        Type of fit to do. 
+        """
+        return _quadratic_geometric_model.QuadraticGeometricModel__v_fit_type(self)
+
+    @property
+    def fit_type(self):
+        return self._v_fit_type()
+
     @classmethod
     def pickle_format_version(cls):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.transformation,self.magnify_line,self.magnify_sample)
+      return _new_from_init, (self.__class__, 1, self.transformation,self.fit_type,self.magnify_line,self.magnify_sample)
 
     __swig_destroy__ = _quadratic_geometric_model.delete_QuadraticGeometricModel
 QuadraticGeometricModel._v_transformation = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_transformation,None,QuadraticGeometricModel)
 QuadraticGeometricModel._v_magnify_line = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_magnify_line,None,QuadraticGeometricModel)
 QuadraticGeometricModel._v_magnify_sample = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_magnify_sample,None,QuadraticGeometricModel)
+QuadraticGeometricModel._v_fit_type = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_fit_type,None,QuadraticGeometricModel)
 QuadraticGeometricModel_swigregister = _quadratic_geometric_model.QuadraticGeometricModel_swigregister
 QuadraticGeometricModel_swigregister(QuadraticGeometricModel)
 

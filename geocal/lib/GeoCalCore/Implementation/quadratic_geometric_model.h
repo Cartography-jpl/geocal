@@ -11,12 +11,18 @@ namespace GeoCal {
 
 class QuadraticGeometricModel : public GeometricModel {
 public:
-  QuadraticGeometricModel(double Magnify_line = 1.0, 
-			  double Magnify_sample = 1.0);
-  QuadraticGeometricModel(const blitz::Array<double, 1>& Transformation,
+  enum FitType {LINEAR = 0, QUADRATIC};
+  QuadraticGeometricModel(FitType ft = LINEAR,
 			  double Magnify_line = 1.0, 
-			  double Magnify_sample = 1.0);
+			  double Magnify_sample = 1.0
+			  );
+  QuadraticGeometricModel(const blitz::Array<double, 1>& Transformation,
+			  FitType ft = LINEAR,
+			  double Magnify_line = 1.0, 
+			  double Magnify_sample = 1.0
+			  );
   virtual ~QuadraticGeometricModel() {}
+  void fit_transformation(const GeometricTiePoints& Tp);
   virtual ImageCoordinate image_coordinate(const ImageCoordinate& Resampled_ic)
     const;
   virtual void print(std::ostream& Os) const;
@@ -44,9 +50,15 @@ public:
 //-----------------------------------------------------------------------
 
   double magnify_sample() const {return mag_smp;}
+
+//-----------------------------------------------------------------------
+/// Type of fit to do.
+//-----------------------------------------------------------------------
+  FitType fit_type() const {return ft;}
 private:
   blitz::Array<double, 1> trans;
   double mag_ln, mag_smp;
+  FitType ft;
 };
 
 }

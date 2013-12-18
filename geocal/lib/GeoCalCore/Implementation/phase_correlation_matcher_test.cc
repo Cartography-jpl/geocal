@@ -1,5 +1,7 @@
 #include "unit_test_support.h"
 #include "phase_correlation_matcher.h"
+#include "geometric_model_image.h"
+#include "quadratic_geometric_model.h"
 #include "vicar_lite_file.h"
 using namespace GeoCal;
 
@@ -9,8 +11,8 @@ BOOST_AUTO_TEST_CASE(picmtch4_test)
 {
   // This test matches the picmtch4 tests. The data used here was
   // extracted for that test.
-  VicarLiteRasterImage img1(test_data_dir() + "phase_correlation/xxim1");
-  VicarLiteRasterImage img2(test_data_dir() + "phase_correlation/xxim2");
+  boost::shared_ptr<RasterImage> img1(new VicarLiteRasterImage(test_data_dir() + "phase_correlation/xxim1"));
+  boost::shared_ptr<RasterImage> img2(new VicarLiteRasterImage(test_data_dir() + "phase_correlation/xxim2"));
   ImageCoordinate ref_ic(150.0, 150.0);
   PhaseCorrelationMatcher m(32, 32);
   ImageCoordinate new_res;
@@ -19,7 +21,7 @@ BOOST_AUTO_TEST_CASE(picmtch4_test)
   ImageCoordinate new_ic_expected(ref_ic.line - 4, ref_ic.sample - 5);
   // Perfect prediction
   ImageCoordinate new_ic = new_ic_expected;
-  m.match(img1, img2, ref_ic, new_ic, new_res, line_sigma, 
+  m.match(*img1, *img2, ref_ic, new_ic, new_res, line_sigma, 
 	  sample_sigma, success);
   BOOST_CHECK(success);
   BOOST_CHECK_CLOSE(new_res.line, new_ic_expected.line, 1e-2);
@@ -29,7 +31,7 @@ BOOST_AUTO_TEST_CASE(picmtch4_test)
   PhaseCorrelationMatcher m2(32, 96);
   new_ic.line = ref_ic.line;
   new_ic.sample = ref_ic.sample;
-  m2.match(img1, img2, ref_ic, new_ic, new_res, line_sigma, 
+  m2.match(*img1, *img2, ref_ic, new_ic, new_res, line_sigma, 
 	   sample_sigma, success);
   BOOST_CHECK(success);
   BOOST_CHECK(fabs(new_res.line - new_ic_expected.line) < line_sigma);
@@ -40,6 +42,21 @@ BOOST_AUTO_TEST_CASE(picmtch4_test)
   // results from picmtch4 to get the expected results here.
   BOOST_CHECK_CLOSE(new_res.line, ref_ic.line - 3.98539, 1e-4);
   BOOST_CHECK_CLOSE(new_res.sample, ref_ic.sample - 5.017241, 1e-4);
+
+  // Now, start doing geometric resampling of the second image to
+  // match what picmtch4 is doing.
+  boost::shared_ptr<QuadraticGeometricModel> geom_model(new QuadraticGeometricModel());
+  GeometricModelImage gimg2(img2, geom_model, img1->number_line(), 
+			    img1->number_sample());
+  GeometricTiePoints tp;
+  tp.add_point(ImageCoordinate(1,2), ImageCoordinate(1,1));
+  tp.add_point(ImageCoordinate(1,310), ImageCoordinate(1,301));
+  tp.add_point(ImageCoordinate(309,2), ImageCoordinate(301, 1));
+  geom_model->fit_transformation(tp);
+  m2.match(*img1, gimg2, ref_ic, ref_ic, new_res, line_sigma, 
+	   sample_sigma, success);
+  BOOST_CHECK(new_res == ImageCoordinate(149.96, 150.01));
+  BOOST_CHECK_CLOSE(m2.correlation_last_match(), 0.104, 1e-2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -55,6 +55,7 @@ SWIG_SRC += @swigsrc@/geocal_gsl_fit_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_gsl_root_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_time_wrap.cc
 SWIG_SRC += @swigsrc@/tiled_file_wrap.cc
+SWIG_SRC += @swigsrc@/geocal_fftw_wrap.cc
 if HAVE_HDF5
 SWIG_SRC += @swigsrc@/hdf_file_wrap.cc
 endif

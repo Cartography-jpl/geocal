@@ -25,6 +25,7 @@ extern "C" {
   void init_geocal_gsl_root(void);
   void init_geocal_time(void);
   void init_tiled_file(void);
+  void init_geocal_fftw(void);
   void init_hdf_file(void);
   void init_image_coordinate(void);
   void init_look_vector(void);
@@ -212,6 +213,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_gsl_root", init_geocal_gsl_root);
   init_extension_module(package, "_geocal_time", init_geocal_time);
   init_extension_module(package, "_tiled_file", init_tiled_file);
+  init_extension_module(package, "_geocal_fftw", init_geocal_fftw);
   init_extension_module(package, "_hdf_file", init_hdf_file);
   init_extension_module(package, "_image_coordinate", init_image_coordinate);
   init_extension_module(package, "_look_vector", init_look_vector);

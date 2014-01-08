@@ -3,6 +3,7 @@ from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 import subprocess
 import os
+import string
 
 def cmd_exists(cmd):
     '''Check if a cmd exists by using type, which returns a nonzero status if

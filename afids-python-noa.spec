@@ -8,7 +8,7 @@ Vendor: California Institute of Technology
 URL: http://www-mipl.jpl.nasa.gov/cartlab/cartlab.html
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: python27 numpy27 scipy27 matplotlib27 nose27 h5py27 sphinx27 afids-data gdal19 vicar-gdalplugin opencv27
+Requires: python27 numpy27 scipy27 matplotlib27 nose27 h5py27 sphinx27 afids-data gdal19 vicar-gdalplugin opencv27 ipython27
 Prefix: /opt/afids
 
 %description

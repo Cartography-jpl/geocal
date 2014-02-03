@@ -12482,18 +12482,16 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_KeplerOrbit__v_epoch(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_epoch__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > tempshared1 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   GeoCal::Time result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
@@ -12528,18 +12526,107 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_KeplerOrbit__v_semimajor_axis(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_epoch__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
+  GeoCal::Time *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "KeplerOrbit__v_epoch" "', argument " "1"" of type '" "GeoCal::KeplerOrbit *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "KeplerOrbit__v_epoch" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "KeplerOrbit__v_epoch" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->epoch((GeoCal::Time const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_epoch(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"KeplerOrbit__v_epoch",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_KeplerOrbit__v_epoch__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_KeplerOrbit__v_epoch__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'KeplerOrbit__v_epoch'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::KeplerOrbit::epoch() const\n"
+    "    GeoCal::KeplerOrbit::epoch(GeoCal::Time const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_semimajor_axis__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > tempshared1 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   double result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
@@ -12571,18 +12658,88 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_KeplerOrbit__v_argument_of_perigee(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_semimajor_axis__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
+  double *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > *smartarg1 = 0 ;
+  double temp2 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "KeplerOrbit__v_semimajor_axis" "', argument " "1"" of type '" "GeoCal::KeplerOrbit *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "KeplerOrbit__v_semimajor_axis" "', argument " "2"" of type '" "double""'");
+  } 
+  temp2 = static_cast< double >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->semimajor_axis((double const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_semimajor_axis(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"KeplerOrbit__v_semimajor_axis",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_KeplerOrbit__v_semimajor_axis__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_KeplerOrbit__v_semimajor_axis__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'KeplerOrbit__v_semimajor_axis'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::KeplerOrbit::semimajor_axis() const\n"
+    "    GeoCal::KeplerOrbit::semimajor_axis(double const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_argument_of_perigee__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > tempshared1 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   double result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
@@ -12614,18 +12771,88 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_KeplerOrbit__v_eccentricity(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_argument_of_perigee__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
+  double *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > *smartarg1 = 0 ;
+  double temp2 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "KeplerOrbit__v_argument_of_perigee" "', argument " "1"" of type '" "GeoCal::KeplerOrbit *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "KeplerOrbit__v_argument_of_perigee" "', argument " "2"" of type '" "double""'");
+  } 
+  temp2 = static_cast< double >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->argument_of_perigee((double const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_argument_of_perigee(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"KeplerOrbit__v_argument_of_perigee",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_KeplerOrbit__v_argument_of_perigee__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_KeplerOrbit__v_argument_of_perigee__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'KeplerOrbit__v_argument_of_perigee'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::KeplerOrbit::argument_of_perigee() const\n"
+    "    GeoCal::KeplerOrbit::argument_of_perigee(double const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_eccentricity__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > tempshared1 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   double result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
@@ -12657,18 +12884,88 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_KeplerOrbit__v_mean_anomoly(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_eccentricity__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
+  double *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > *smartarg1 = 0 ;
+  double temp2 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "KeplerOrbit__v_eccentricity" "', argument " "1"" of type '" "GeoCal::KeplerOrbit *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "KeplerOrbit__v_eccentricity" "', argument " "2"" of type '" "double""'");
+  } 
+  temp2 = static_cast< double >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->eccentricity((double const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_eccentricity(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"KeplerOrbit__v_eccentricity",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_KeplerOrbit__v_eccentricity__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_KeplerOrbit__v_eccentricity__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'KeplerOrbit__v_eccentricity'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::KeplerOrbit::eccentricity() const\n"
+    "    GeoCal::KeplerOrbit::eccentricity(double const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_mean_anomoly__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > tempshared1 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   double result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
@@ -12700,18 +12997,88 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_KeplerOrbit__v_inclination(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_mean_anomoly__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
+  double *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > *smartarg1 = 0 ;
+  double temp2 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "KeplerOrbit__v_mean_anomoly" "', argument " "1"" of type '" "GeoCal::KeplerOrbit *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "KeplerOrbit__v_mean_anomoly" "', argument " "2"" of type '" "double""'");
+  } 
+  temp2 = static_cast< double >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->mean_anomoly((double const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_mean_anomoly(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"KeplerOrbit__v_mean_anomoly",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_KeplerOrbit__v_mean_anomoly__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_KeplerOrbit__v_mean_anomoly__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'KeplerOrbit__v_mean_anomoly'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::KeplerOrbit::mean_anomoly() const\n"
+    "    GeoCal::KeplerOrbit::mean_anomoly(double const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_inclination__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > tempshared1 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   double result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
@@ -12743,18 +13110,88 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_KeplerOrbit__v_right_ascension(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_inclination__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
+  double *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > *smartarg1 = 0 ;
+  double temp2 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "KeplerOrbit__v_inclination" "', argument " "1"" of type '" "GeoCal::KeplerOrbit *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "KeplerOrbit__v_inclination" "', argument " "2"" of type '" "double""'");
+  } 
+  temp2 = static_cast< double >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->inclination((double const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_inclination(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"KeplerOrbit__v_inclination",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_KeplerOrbit__v_inclination__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_KeplerOrbit__v_inclination__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'KeplerOrbit__v_inclination'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::KeplerOrbit::inclination() const\n"
+    "    GeoCal::KeplerOrbit::inclination(double const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_right_ascension__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > tempshared1 ;
   boost::shared_ptr< GeoCal::KeplerOrbit const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   double result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
@@ -12773,6 +13210,121 @@ SWIGINTERN PyObject *_wrap_KeplerOrbit__v_right_ascension(PyObject *SWIGUNUSEDPA
   {
     try {
       result = (double)((GeoCal::KeplerOrbit const *)arg1)->right_ascension();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_right_ascension__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
+  double *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit > *smartarg1 = 0 ;
+  double temp2 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "KeplerOrbit__v_right_ascension" "', argument " "1"" of type '" "GeoCal::KeplerOrbit *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "KeplerOrbit__v_right_ascension" "', argument " "2"" of type '" "double""'");
+  } 
+  temp2 = static_cast< double >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->right_ascension((double const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_right_ascension(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"KeplerOrbit__v_right_ascension",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_KeplerOrbit__v_right_ascension__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_KeplerOrbit__v_right_ascension__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'KeplerOrbit__v_right_ascension'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::KeplerOrbit::right_ascension() const\n"
+    "    GeoCal::KeplerOrbit::right_ascension(double const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_KeplerOrbit__v_period(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::KeplerOrbit *arg1 = (GeoCal::KeplerOrbit *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit const > tempshared1 ;
+  boost::shared_ptr< GeoCal::KeplerOrbit const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "KeplerOrbit__v_period" "', argument " "1"" of type '" "GeoCal::KeplerOrbit const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::KeplerOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::KeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::KeplerOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::KeplerOrbit const *)arg1)->period();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -15232,33 +15784,37 @@ static PyMethodDef SwigMethods[] = {
 		"Time that the rest of the data is valid for. The default values are a\n"
 		"nominal orbit for MISR. \n"
 		""},
-	 { (char *)"KeplerOrbit__v_epoch", (PyCFunction)_wrap_KeplerOrbit__v_epoch, METH_O, (char *)"\n"
-		"const Time& GeoCal::KeplerOrbit::epoch() const\n"
-		"Epoch that rest of data is for. \n"
+	 { (char *)"KeplerOrbit__v_epoch", _wrap_KeplerOrbit__v_epoch, METH_VARARGS, (char *)"\n"
+		"void GeoCal::KeplerOrbit::epoch(const Time &Epoch)\n"
+		"Set epoch that rest of data is for. \n"
 		""},
-	 { (char *)"KeplerOrbit__v_semimajor_axis", (PyCFunction)_wrap_KeplerOrbit__v_semimajor_axis, METH_O, (char *)"\n"
-		"double GeoCal::KeplerOrbit::semimajor_axis() const\n"
-		"Semimajor axis in meters. \n"
+	 { (char *)"KeplerOrbit__v_semimajor_axis", _wrap_KeplerOrbit__v_semimajor_axis, METH_VARARGS, (char *)"\n"
+		"void GeoCal::KeplerOrbit::semimajor_axis(double Semimajor_axis)\n"
+		"Set semimajor axis in meters. \n"
 		""},
-	 { (char *)"KeplerOrbit__v_argument_of_perigee", (PyCFunction)_wrap_KeplerOrbit__v_argument_of_perigee, METH_O, (char *)"\n"
-		"double GeoCal::KeplerOrbit::argument_of_perigee() const\n"
-		"Argument of perigee at epoch, in degrees. \n"
+	 { (char *)"KeplerOrbit__v_argument_of_perigee", _wrap_KeplerOrbit__v_argument_of_perigee, METH_VARARGS, (char *)"\n"
+		"void GeoCal::KeplerOrbit::argument_of_perigee(double Ap_at_epoch)\n"
+		"Set Argument of perigee at epoch, in degrees. \n"
 		""},
-	 { (char *)"KeplerOrbit__v_eccentricity", (PyCFunction)_wrap_KeplerOrbit__v_eccentricity, METH_O, (char *)"\n"
-		"double GeoCal::KeplerOrbit::eccentricity() const\n"
-		"Eccentricity of orbit. \n"
+	 { (char *)"KeplerOrbit__v_eccentricity", _wrap_KeplerOrbit__v_eccentricity, METH_VARARGS, (char *)"\n"
+		"void GeoCal::KeplerOrbit::eccentricity(double Eccentricity)\n"
+		"Set eccentricity of orbit. \n"
 		""},
-	 { (char *)"KeplerOrbit__v_mean_anomoly", (PyCFunction)_wrap_KeplerOrbit__v_mean_anomoly, METH_O, (char *)"\n"
-		"double GeoCal::KeplerOrbit::mean_anomoly() const\n"
-		"Mean anomoly at epoch, in degrees. \n"
+	 { (char *)"KeplerOrbit__v_mean_anomoly", _wrap_KeplerOrbit__v_mean_anomoly, METH_VARARGS, (char *)"\n"
+		"void GeoCal::KeplerOrbit::mean_anomoly(double Mean_anomaly_at_epoch)\n"
+		"Set mean anomoly at epoch, in degrees. \n"
 		""},
-	 { (char *)"KeplerOrbit__v_inclination", (PyCFunction)_wrap_KeplerOrbit__v_inclination, METH_O, (char *)"\n"
-		"double GeoCal::KeplerOrbit::inclination() const\n"
-		"Inclination of orbit, in degrees. \n"
+	 { (char *)"KeplerOrbit__v_inclination", _wrap_KeplerOrbit__v_inclination, METH_VARARGS, (char *)"\n"
+		"void GeoCal::KeplerOrbit::inclination(double Inclination)\n"
+		"Set inclination of orbit, in degrees. \n"
 		""},
-	 { (char *)"KeplerOrbit__v_right_ascension", (PyCFunction)_wrap_KeplerOrbit__v_right_ascension, METH_O, (char *)"\n"
-		"double GeoCal::KeplerOrbit::right_ascension() const\n"
-		"Right ascension of ascending node, in degrees. \n"
+	 { (char *)"KeplerOrbit__v_right_ascension", _wrap_KeplerOrbit__v_right_ascension, METH_VARARGS, (char *)"\n"
+		"void GeoCal::KeplerOrbit::right_ascension(double Ra_ascending_node)\n"
+		"Set right ascension of ascending node, in degrees. \n"
+		""},
+	 { (char *)"KeplerOrbit__v_period", (PyCFunction)_wrap_KeplerOrbit__v_period, METH_O, (char *)"\n"
+		"double GeoCal::KeplerOrbit::period() const\n"
+		"Period in seconds. \n"
 		""},
 	 { (char *)"delete_KeplerOrbit", (PyCFunction)_wrap_delete_KeplerOrbit, METH_O, (char *)"\n"
 		"virtual GeoCal::KeplerOrbit::~KeplerOrbit()\n"

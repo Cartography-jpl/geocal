@@ -177,13 +177,14 @@ public:
 	      double Mean_anomaly_at_epoch = 290.912925280);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   
-  %python_attribute(epoch, Time)
-  %python_attribute(semimajor_axis, double)
-  %python_attribute(argument_of_perigee, double)
-  %python_attribute(eccentricity, double)
-  %python_attribute(mean_anomoly, double)
-  %python_attribute(inclination, double)
-  %python_attribute(right_ascension, double)
+  %python_attribute_with_set(epoch, Time)
+  %python_attribute_with_set(semimajor_axis, double)
+  %python_attribute_with_set(argument_of_perigee, double)
+  %python_attribute_with_set(eccentricity, double)
+  %python_attribute_with_set(mean_anomoly, double)
+  %python_attribute_with_set(inclination, double)
+  %python_attribute_with_set(right_ascension, double)
+  %python_attribute(period, double)
   %pickle_init(1, self.min_time, self.max_time, self.epoch,
 	       self.semimajor_axis, self.eccentricity,
 	       self.inclination, self.right_ascension,

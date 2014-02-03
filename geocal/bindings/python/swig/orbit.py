@@ -601,82 +601,121 @@ class KeplerOrbit(Orbit):
         nominal orbit for MISR. 
         """
         _orbit.KeplerOrbit_swiginit(self,_orbit.new_KeplerOrbit(*args))
-    def _v_epoch(self):
+    def _v_epoch(self, *args):
         """
-        const Time& GeoCal::KeplerOrbit::epoch() const
-        Epoch that rest of data is for. 
+        void GeoCal::KeplerOrbit::epoch(const Time &Epoch)
+        Set epoch that rest of data is for. 
         """
-        return _orbit.KeplerOrbit__v_epoch(self)
+        return _orbit.KeplerOrbit__v_epoch(self, *args)
 
     @property
     def epoch(self):
         return self._v_epoch()
 
-    def _v_semimajor_axis(self):
+    @epoch.setter
+    def epoch(self, value):
+      self._v_epoch(value)
+
+    def _v_semimajor_axis(self, *args):
         """
-        double GeoCal::KeplerOrbit::semimajor_axis() const
-        Semimajor axis in meters. 
+        void GeoCal::KeplerOrbit::semimajor_axis(double Semimajor_axis)
+        Set semimajor axis in meters. 
         """
-        return _orbit.KeplerOrbit__v_semimajor_axis(self)
+        return _orbit.KeplerOrbit__v_semimajor_axis(self, *args)
 
     @property
     def semimajor_axis(self):
         return self._v_semimajor_axis()
 
-    def _v_argument_of_perigee(self):
+    @semimajor_axis.setter
+    def semimajor_axis(self, value):
+      self._v_semimajor_axis(value)
+
+    def _v_argument_of_perigee(self, *args):
         """
-        double GeoCal::KeplerOrbit::argument_of_perigee() const
-        Argument of perigee at epoch, in degrees. 
+        void GeoCal::KeplerOrbit::argument_of_perigee(double Ap_at_epoch)
+        Set Argument of perigee at epoch, in degrees. 
         """
-        return _orbit.KeplerOrbit__v_argument_of_perigee(self)
+        return _orbit.KeplerOrbit__v_argument_of_perigee(self, *args)
 
     @property
     def argument_of_perigee(self):
         return self._v_argument_of_perigee()
 
-    def _v_eccentricity(self):
+    @argument_of_perigee.setter
+    def argument_of_perigee(self, value):
+      self._v_argument_of_perigee(value)
+
+    def _v_eccentricity(self, *args):
         """
-        double GeoCal::KeplerOrbit::eccentricity() const
-        Eccentricity of orbit. 
+        void GeoCal::KeplerOrbit::eccentricity(double Eccentricity)
+        Set eccentricity of orbit. 
         """
-        return _orbit.KeplerOrbit__v_eccentricity(self)
+        return _orbit.KeplerOrbit__v_eccentricity(self, *args)
 
     @property
     def eccentricity(self):
         return self._v_eccentricity()
 
-    def _v_mean_anomoly(self):
+    @eccentricity.setter
+    def eccentricity(self, value):
+      self._v_eccentricity(value)
+
+    def _v_mean_anomoly(self, *args):
         """
-        double GeoCal::KeplerOrbit::mean_anomoly() const
-        Mean anomoly at epoch, in degrees. 
+        void GeoCal::KeplerOrbit::mean_anomoly(double Mean_anomaly_at_epoch)
+        Set mean anomoly at epoch, in degrees. 
         """
-        return _orbit.KeplerOrbit__v_mean_anomoly(self)
+        return _orbit.KeplerOrbit__v_mean_anomoly(self, *args)
 
     @property
     def mean_anomoly(self):
         return self._v_mean_anomoly()
 
-    def _v_inclination(self):
+    @mean_anomoly.setter
+    def mean_anomoly(self, value):
+      self._v_mean_anomoly(value)
+
+    def _v_inclination(self, *args):
         """
-        double GeoCal::KeplerOrbit::inclination() const
-        Inclination of orbit, in degrees. 
+        void GeoCal::KeplerOrbit::inclination(double Inclination)
+        Set inclination of orbit, in degrees. 
         """
-        return _orbit.KeplerOrbit__v_inclination(self)
+        return _orbit.KeplerOrbit__v_inclination(self, *args)
 
     @property
     def inclination(self):
         return self._v_inclination()
 
-    def _v_right_ascension(self):
+    @inclination.setter
+    def inclination(self, value):
+      self._v_inclination(value)
+
+    def _v_right_ascension(self, *args):
         """
-        double GeoCal::KeplerOrbit::right_ascension() const
-        Right ascension of ascending node, in degrees. 
+        void GeoCal::KeplerOrbit::right_ascension(double Ra_ascending_node)
+        Set right ascension of ascending node, in degrees. 
         """
-        return _orbit.KeplerOrbit__v_right_ascension(self)
+        return _orbit.KeplerOrbit__v_right_ascension(self, *args)
 
     @property
     def right_ascension(self):
         return self._v_right_ascension()
+
+    @right_ascension.setter
+    def right_ascension(self, value):
+      self._v_right_ascension(value)
+
+    def _v_period(self):
+        """
+        double GeoCal::KeplerOrbit::period() const
+        Period in seconds. 
+        """
+        return _orbit.KeplerOrbit__v_period(self)
+
+    @property
+    def period(self):
+        return self._v_period()
 
     @classmethod
     def pickle_format_version(cls):
@@ -693,6 +732,7 @@ KeplerOrbit._v_eccentricity = new_instancemethod(_orbit.KeplerOrbit__v_eccentric
 KeplerOrbit._v_mean_anomoly = new_instancemethod(_orbit.KeplerOrbit__v_mean_anomoly,None,KeplerOrbit)
 KeplerOrbit._v_inclination = new_instancemethod(_orbit.KeplerOrbit__v_inclination,None,KeplerOrbit)
 KeplerOrbit._v_right_ascension = new_instancemethod(_orbit.KeplerOrbit__v_right_ascension,None,KeplerOrbit)
+KeplerOrbit._v_period = new_instancemethod(_orbit.KeplerOrbit__v_period,None,KeplerOrbit)
 KeplerOrbit_swigregister = _orbit.KeplerOrbit_swigregister
 KeplerOrbit_swigregister(KeplerOrbit)
 

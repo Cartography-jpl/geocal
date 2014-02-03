@@ -475,10 +475,26 @@ public:
   const Time& epoch() const {return epoch_;}
 
 //-----------------------------------------------------------------------
+/// Set epoch that rest of data is for.
+//-----------------------------------------------------------------------
+
+  void epoch(const Time& Epoch) { epoch_ = Epoch; }
+
+//-----------------------------------------------------------------------
 /// Semimajor axis in meters.
 //-----------------------------------------------------------------------
   
   double semimajor_axis() const {return a_;}
+
+//-----------------------------------------------------------------------
+/// Set semimajor axis in meters
+//-----------------------------------------------------------------------
+
+  void semimajor_axis(double Semimajor_axis) 
+  { 
+    a_ = Semimajor_axis;
+    calc_freq_rev();
+  }
 
 //-----------------------------------------------------------------------
 /// Argument of perigee at epoch, in degrees.
@@ -488,10 +504,23 @@ public:
   { return ap_ * Constant::rad_to_deg; }
 
 //-----------------------------------------------------------------------
+/// Set Argument of perigee at epoch, in degrees.
+//-----------------------------------------------------------------------
+
+  void argument_of_perigee(double Ap_at_epoch)
+  { ap_ = Ap_at_epoch * Constant::deg_to_rad; }
+
+//-----------------------------------------------------------------------
 /// Eccentricity of orbit.
 //-----------------------------------------------------------------------
 
   double eccentricity() const {return e_; }
+
+//-----------------------------------------------------------------------
+/// Set eccentricity of orbit.
+//-----------------------------------------------------------------------
+
+  void eccentricity(double Eccentricity) {e_ = Eccentricity; }
 
 //-----------------------------------------------------------------------
 /// Mean anomoly at epoch, in degrees.
@@ -499,6 +528,12 @@ public:
   
   double mean_anomoly() const {return ma_ * Constant::rad_to_deg; }
 
+//-----------------------------------------------------------------------
+/// Set mean anomoly at epoch, in degrees.
+//-----------------------------------------------------------------------
+  
+  void mean_anomoly(double Mean_anomaly_at_epoch) 
+  { ma_ = Mean_anomaly_at_epoch * Constant::deg_to_rad; }
 
 //-----------------------------------------------------------------------
 /// Inclination of orbit, in degrees.
@@ -507,11 +542,38 @@ public:
   double inclination() const {return inc_ * Constant::rad_to_deg; }
 
 //-----------------------------------------------------------------------
+/// Set inclination of orbit, in degrees.
+//-----------------------------------------------------------------------
+
+  void inclination(double Inclination) 
+  { 
+    inc_  = Inclination * Constant::deg_to_rad; 
+    calc_r();
+  }
+
+//-----------------------------------------------------------------------
 /// Right ascension of ascending node, in degrees.
 //-----------------------------------------------------------------------
 
   double right_ascension() const 
   { return ra_ * Constant::rad_to_deg;}
+
+//-----------------------------------------------------------------------
+/// Set right ascension of ascending node, in degrees.
+//-----------------------------------------------------------------------
+
+  void right_ascension(double Ra_ascending_node) 
+  { 
+    ra_  = Ra_ascending_node * Constant::deg_to_rad;
+    calc_r();
+  }
+
+//-----------------------------------------------------------------------
+/// Period in seconds
+//-----------------------------------------------------------------------
+
+  double period() const 
+  { return 2 * Constant::pi / freq_rev_; }
 private:
   Time epoch_;			///< Epoch that rest of data is for.
   double a_;			///< Semimajor axis in meters.
@@ -528,6 +590,8 @@ private:
 				/// orbit in xy plane to one with
 				/// correct inclination and Right
 				/// ascending node. 
+  void calc_freq_rev();
+  void calc_r();
 };
 
   boost::shared_ptr<QuaternionOrbitData>

@@ -149,19 +149,33 @@ KeplerOrbit::KeplerOrbit(Time Min_time,
   ra_(Ra_ascending_node * Constant::deg_to_rad),
   r_(3, 3)
 {
+  calc_freq_rev();
+  calc_r();
+}
+
 //-----------------------------------------------------------------------
-// Calcluate frequency of revolution, called omega in Goldstein.
+/// Calcluate frequency of revolution, called omega in Goldstein.
 //-----------------------------------------------------------------------
 
+void KeplerOrbit::calc_freq_rev()
+{
   const double GM = 3.986032e14; 
 				// G * mass earth, in m^3 / s^2. This
 				// is from A E Roy "Orbital Motion"
   freq_rev_ = sqrt(GM / (a_ * a_ * a_));
+}
 
+//-----------------------------------------------------------------------
+/// Calculate r_ which takes the kepler orbit and applies the correct
+/// inclination and right ascension of the ascending node.
+//-----------------------------------------------------------------------
+
+void KeplerOrbit::calc_r()
+{  
 //-----------------------------------------------------------------------
 // Rotate about x axis by inclination.
 //-----------------------------------------------------------------------
-  
+
   blitz::Array<double, 2> r1(3, 3);
   r1 = 1,         0,          0,
        0, cos(inc_), -sin(inc_),

@@ -71,10 +71,7 @@ Geodetic Ecr::convert_to_geodetic() const
   double normz = position[2] / a;
   double signn = ((sqr(normrho) + sqr(normz) / (1 - esq)) 
 		  > 1 ? 1 : -1);
-  static double q  = 0.0;	// The initial guess for q will be the
-				// resulting q from the last time this
-				// function was called. This is
-				// usually a pretty good guess.
+  double q  = 0.0;
   double qold;
   int n = 0;
   double t1 = sqr(normz) * (1 - esq);

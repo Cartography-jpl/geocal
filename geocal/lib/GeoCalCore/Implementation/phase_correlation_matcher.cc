@@ -106,9 +106,6 @@ void PhaseCorrelationMatcher::match_mask
   int referr = 0;
   if(subpix)
     refine(corr, &vloff, &vsoff, &referr);
-  std::cerr << "vloff: " << vloff << "\n"
-	    << "vsoff: " << vsoff << "\n"
-	    << "vmax: " << vmax << "\n";
   // Add threshold test here
   if(!referr) {
     New_res.line = new_line + search_size() / 2 + vloff;

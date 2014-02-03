@@ -24,6 +24,14 @@ public:
 /// direction and sample in the +x direction. This is different
 /// convention that we have used in other cameras, but matches the use
 /// for the initial use we have for this camera.
+///
+/// You can rotate back by doing a conversion:
+///
+/// quat_rot = Quaternion_double(cos(90 * deg_to_rad / 2), 0, 0, sin(90
+///                    * deg_to_rad / 2))
+/// quat_ref = Quaternion_double(0,1,0,0)
+///
+/// quat = quat_ref * quat_rot
 //-----------------------------------------------------------------------
 
   QuaternionCamera(boost::math::quaternion<double> frame_to_sc_q, 
@@ -77,11 +85,25 @@ public:
 
   double focal_length() const {return focal_length_;}
 
+
+//-----------------------------------------------------------------------
+/// Set focal length, in mm.
+//-----------------------------------------------------------------------
+
+  void focal_length(double V) { focal_length_ = V; }
+
 //-----------------------------------------------------------------------
 /// Principal point of camera
 //-----------------------------------------------------------------------
 
   const FrameCoordinate& principal_point() const {return pp_;}
+
+
+//-----------------------------------------------------------------------
+/// Set principal point of camera
+//-----------------------------------------------------------------------
+
+  void principal_point(const FrameCoordinate& Fc) {pp_ = Fc;}
 
 //-----------------------------------------------------------------------
 /// CCD pitch, in mm
@@ -89,11 +111,24 @@ public:
 
   double line_pitch() const {return line_pitch_; }
 
+
+//-----------------------------------------------------------------------
+/// Set CCD pitch, in mm
+//-----------------------------------------------------------------------
+
+  void line_pitch(double Lp) {line_pitch_ = Lp; }
+
 //-----------------------------------------------------------------------
 /// CCD pitch, in mm
 //-----------------------------------------------------------------------
 
   double sample_pitch() const {return sample_pitch_;}
+
+//-----------------------------------------------------------------------
+/// Set CCD pitch, in mm
+//-----------------------------------------------------------------------
+
+  void sample_pitch(double Sp) {sample_pitch_ = Sp;}
 
 //-----------------------------------------------------------------------
 /// Scaling of line.
@@ -115,6 +150,13 @@ public:
 
   const boost::math::quaternion<double>& frame_to_sc() const
   {return frame_to_sc_;}
+
+//-----------------------------------------------------------------------
+/// Set frame to spacecraft quaternion.
+//-----------------------------------------------------------------------
+
+  void frame_to_sc(const boost::math::quaternion<double>& frame_to_sc_q) 
+  { frame_to_sc_ = frame_to_sc_q; }
 
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;

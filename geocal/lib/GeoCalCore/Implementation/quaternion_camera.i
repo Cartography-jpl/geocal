@@ -21,10 +21,10 @@ public:
 		   double Sample_scale = 1.0);
   virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
-  %python_attribute(focal_length, double)
-  %python_attribute(principal_point, FrameCoordinate)
-  %python_attribute(line_pitch, double)
-  %python_attribute(sample_pitch, double)
+  %python_attribute_with_set(focal_length, double)
+  %python_attribute_with_set(principal_point, FrameCoordinate)
+  %python_attribute_with_set(line_pitch, double)
+  %python_attribute_with_set(sample_pitch, double)
   %python_attribute_with_set(line_scale, double)
   %python_attribute_with_set(sample_scale, double)
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 

@@ -149,52 +149,75 @@ class QuaternionCamera(geocal.camera.Camera):
         Note that by convention the quaternion has line going in the +y
         direction and sample in the +x direction. This is different convention
         that we have used in other cameras, but matches the use for the
-        initial use we have for this camera. 
+        initial use we have for this camera.
+
+        You can rotate back by doing a conversion:
+
+        quat_rot = Quaternion_double(cos(90 * deg_to_rad / 2), 0, 0, sin(90
+        deg_to_rad / 2)) quat_ref = Quaternion_double(0,1,0,0)
+
+        quat = quat_ref * quat_rot 
         """
         _quaternion_camera.QuaternionCamera_swiginit(self,_quaternion_camera.new_QuaternionCamera(*args))
-    def _v_focal_length(self):
+    def _v_focal_length(self, *args):
         """
-        double GeoCal::QuaternionCamera::focal_length() const
-        Focal length, in mm. 
+        void GeoCal::QuaternionCamera::focal_length(double V)
+        Set focal length, in mm. 
         """
-        return _quaternion_camera.QuaternionCamera__v_focal_length(self)
+        return _quaternion_camera.QuaternionCamera__v_focal_length(self, *args)
 
     @property
     def focal_length(self):
         return self._v_focal_length()
 
-    def _v_principal_point(self):
+    @focal_length.setter
+    def focal_length(self, value):
+      self._v_focal_length(value)
+
+    def _v_principal_point(self, *args):
         """
-        const FrameCoordinate& GeoCal::QuaternionCamera::principal_point() const
-        Principal point of camera. 
+        void GeoCal::QuaternionCamera::principal_point(const FrameCoordinate &Fc)
+        Set principal point of camera. 
         """
-        return _quaternion_camera.QuaternionCamera__v_principal_point(self)
+        return _quaternion_camera.QuaternionCamera__v_principal_point(self, *args)
 
     @property
     def principal_point(self):
         return self._v_principal_point()
 
-    def _v_line_pitch(self):
+    @principal_point.setter
+    def principal_point(self, value):
+      self._v_principal_point(value)
+
+    def _v_line_pitch(self, *args):
         """
-        double GeoCal::QuaternionCamera::line_pitch() const
-        CCD pitch, in mm. 
+        void GeoCal::QuaternionCamera::line_pitch(double Lp)
+        Set CCD pitch, in mm. 
         """
-        return _quaternion_camera.QuaternionCamera__v_line_pitch(self)
+        return _quaternion_camera.QuaternionCamera__v_line_pitch(self, *args)
 
     @property
     def line_pitch(self):
         return self._v_line_pitch()
 
-    def _v_sample_pitch(self):
+    @line_pitch.setter
+    def line_pitch(self, value):
+      self._v_line_pitch(value)
+
+    def _v_sample_pitch(self, *args):
         """
-        double GeoCal::QuaternionCamera::sample_pitch() const
-        CCD pitch, in mm. 
+        void GeoCal::QuaternionCamera::sample_pitch(double Sp)
+        Set CCD pitch, in mm. 
         """
-        return _quaternion_camera.QuaternionCamera__v_sample_pitch(self)
+        return _quaternion_camera.QuaternionCamera__v_sample_pitch(self, *args)
 
     @property
     def sample_pitch(self):
         return self._v_sample_pitch()
+
+    @sample_pitch.setter
+    def sample_pitch(self, value):
+      self._v_sample_pitch(value)
 
     def _v_line_scale(self, *args):
         """
@@ -228,8 +251,8 @@ class QuaternionCamera(geocal.camera.Camera):
 
     def _v_frame_to_sc(self):
         """
-        const boost::math::quaternion<double>& GeoCal::QuaternionCamera::frame_to_sc() const
-        Frame to spacecraft quaternion. 
+        void GeoCal::QuaternionCamera::frame_to_sc(const boost::math::quaternion< double > &frame_to_sc_q)
+        Set frame to spacecraft quaternion. 
         """
         return _quaternion_camera.QuaternionCamera__v_frame_to_sc(self)
 

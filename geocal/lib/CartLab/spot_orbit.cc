@@ -44,28 +44,14 @@ SpotOrbit::SpotOrbit(const std::vector<Time>& Ephemeris_time,
 // pitch and roll are about -X and -Y. So we need to change the sign
 // of Roll and Pitch, but not yaw, here.
 //
-// If you don't happen to remember off the top of your head, you
-// rotate an angle 'a' around an axis 'u' by the quaternion cos(a / 2) +
-// sin(a / 2) * u.
 //-----------------------------------------------------------------------
 
   for(int i = 0; i < Ypr.shape()[0]; ++i) {
     double yaw = Ypr(i,0);
     double pitch = Ypr(i,1);
     double roll = Ypr(i,2);
-    boost::math::quaternion<double> rx(cos(-pitch / 2),
-				       sin(-pitch / 2),
-				       0,
-				       0);
-    boost::math::quaternion<double> ry(cos(-roll / 2),
-				       0,
-				       sin(-roll  / 2),
-				       0);
-    boost::math::quaternion<double> rz(cos(yaw / 2),
-				       0,
-				       0,
-				       sin(yaw / 2));
-    sc_to_orb[Attitude_time[i]] = rx * ry * rz;
+    sc_to_orb[Attitude_time[i]] = quat_rot_x(-pitch) * quat_rot_y(-roll) * 
+      quat_rot_z(yaw);
   }
   min_tm = std::max(teph.front(), sc_to_orb.begin()->first);
   max_tm = std::min(teph.back(), sc_to_orb.rbegin()->first);

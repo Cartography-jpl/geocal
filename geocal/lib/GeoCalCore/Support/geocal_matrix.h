@@ -20,6 +20,51 @@ namespace GeoCal {
 */
 
 //-----------------------------------------------------------------------
+/// Quaternion that rotate about x
+///
+/// If you don't happen to remember off the top of your head, you
+/// rotate an angle 'a' around an axis 'u' by the quaternion cos(a / 2) +
+/// sin(a / 2) * u.
+//-----------------------------------------------------------------------
+inline boost::math::quaternion<double> quat_rot_x(double A)
+{
+  return boost::math::quaternion<double>(cos(A / 2),
+					 sin(A / 2),
+					 0,
+					 0);
+}
+
+//-----------------------------------------------------------------------
+/// Quaternion that rotate about y
+///
+/// If you don't happen to remember off the top of your head, you
+/// rotate an angle 'a' around an axis 'u' by the quaternion cos(a / 2) +
+/// sin(a / 2) * u.
+//-----------------------------------------------------------------------
+inline boost::math::quaternion<double> quat_rot_y(double A)
+{
+  return boost::math::quaternion<double>(cos(A / 2),
+					 0,
+					 sin(A / 2),
+					 0);
+}
+
+//-----------------------------------------------------------------------
+/// Quaternion that rotate about z
+///
+/// If you don't happen to remember off the top of your head, you
+/// rotate an angle 'a' around an axis 'u' by the quaternion cos(a / 2) +
+/// sin(a / 2) * u.
+//-----------------------------------------------------------------------
+inline boost::math::quaternion<double> quat_rot_z(double A)
+{
+  return boost::math::quaternion<double>(cos(A / 2),
+					 0,
+					 0,
+					 sin(A / 2));
+}
+
+//-----------------------------------------------------------------------
 /// Convert a quaternion to a rotation matrix.
 //-----------------------------------------------------------------------
 

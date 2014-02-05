@@ -4,6 +4,7 @@
 #include "geodetic.h"
 #include "eci_tod.h"
 #include "orbit.h"
+#include "geocal_matrix.h"
 using namespace GeoCal;
 
 BOOST_FIXTURE_TEST_SUITE(quaternion_camera, GlobalFixture)
@@ -68,6 +69,74 @@ BOOST_AUTO_TEST_CASE(sc2rpc)
   //  std::cerr << distance(pt_geod, *pt) << "\n";
 }
 
+BOOST_AUTO_TEST_CASE(compare_simple_camera)
+{
+  // Make sure we duplicate what a SimpleCamera generates.
+  SimplePushBroomCamera cam1;
+  QuaternionCamera cam2(quat_rot_z(cam1.epsilon()) *
+			quat_rot_y(cam1.beta()) *
+			quat_rot_x(cam1.delta()),
+			cam1.number_line(0), cam1.number_sample(0), 
+			cam1.line_pitch() / 1e-3, 
+			cam1.sample_pitch() / 1e-3,
+			cam1.focal_length() / 1e-3,
+			FrameCoordinate(cam1.number_line(0) / 2.0, 
+					cam1.number_sample(0) / 2.0));
+  FrameCoordinate fc(0,0);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).sample -  fc.sample) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+					 0).sample -  fc.sample) < 1e-6);
+  fc = FrameCoordinate(10,0);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).sample -  fc.sample) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+					 0).sample -  fc.sample) < 1e-6);
+  fc = FrameCoordinate(0,1504);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).sample -  fc.sample) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+					 0).sample -  fc.sample) < 1e-6);
+  fc = FrameCoordinate(10,1504);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).sample -  fc.sample) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+					 0).sample -  fc.sample) < 1e-6);
+  fc = FrameCoordinate(-10,1504);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).sample -  fc.sample) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+					 0).sample -  fc.sample) < 1e-6);
+  fc = FrameCoordinate(-10,-1504);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam2.frame_coordinate(cam1.sc_look_vector(fc, 0), 
+	     			       0).sample -  fc.sample) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+	     			       0).line -  fc.line) < 1e-6);
+  BOOST_CHECK(fabs(cam1.frame_coordinate(cam2.sc_look_vector(fc, 0), 
+					 0).sample -  fc.sample) < 1e-6);
+}
 
 BOOST_AUTO_TEST_SUITE_END()
 

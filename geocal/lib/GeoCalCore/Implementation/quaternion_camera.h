@@ -9,9 +9,32 @@ namespace GeoCal {
   This is a simple frame camera. This doesn't account for any lens
   distortion, we model this as a pinhole camera. The camera has 
   an orientation to the spacecraft frame by a given quaternion.
+
+  There are 2 conventions used for the frame coordinates. The
+  convention used by other Cameras we have implemented is that the
+  line direction is +x, and the sample direction is +y.
+
+  However, another convention is that line goes in the +y direction
+  and sample goes in +x direction. This is what was used in the
+  VICAR procedure sc2rpc. Note that this is more than just a
+  rotation from the other convention, it is both a rotation and a
+  reflection (so the chirality is different).
+
+  We support both conventions, depending on the setting of the
+  frame_convention.
+
+  Note that in addition to the line and sample pitch, we supply a 
+  line and sample scale. You could achieve exactly the same behavior
+  either changing the scale, or just directly changing pitch. The
+  scale is supplied as a convenience, it is a more natural thing to
+  vary if you are calibrating the camera. If you wish, you can 
+  leave the scale fixed at 1.0 and ignore it if you don't want to use
+  it. 
 *******************************************************************/
 class QuaternionCamera : public Camera {
 public:
+  enum FrameConvention { LINE_IS_X, LINE_IS_Y};
+
 //-----------------------------------------------------------------------
 /// Create a QuaternionCamera. The orientation of the camera to the
 /// spacecraft to given by the quaternion that takes frame coordinates
@@ -19,28 +42,16 @@ public:
 /// pitch, sample pitch, and focal length are given. By convention,
 /// these are given in mm. Finally the Principal_point (coordinates at
 /// center) are given.
-///
-/// Note that by convention the quaternion has line going in the +y
-/// direction and sample in the +x direction. This is different
-/// convention that we have used in other cameras, but matches the use
-/// for the initial use we have for this camera.
-///
-/// You can rotate back by doing a conversion:
-///
-/// quat_rot = Quaternion_double(cos(90 * deg_to_rad / 2), 0, 0, sin(90
-///                    * deg_to_rad / 2))
-/// quat_ref = Quaternion_double(0,1,0,0)
-///
-/// quat = quat_ref * quat_rot
 //-----------------------------------------------------------------------
 
-  QuaternionCamera(boost::math::quaternion<double> frame_to_sc_q, 
+  QuaternionCamera(boost::math::quaternion<double> Frame_to_sc_q, 
 		   double Number_line, double Number_sample,
 		   double Line_pitch, double Sample_pitch,
 		   double Focal_length, 
 		   const FrameCoordinate& Principal_point,
 		   double Line_scale = 1.0,
-		   double Sample_scale = 1.0)
+		   double Sample_scale = 1.0,
+		   FrameConvention Frame_convention = LINE_IS_X)
     : focal_length_(Focal_length),
       nline_(Number_line),
       nsamp_(Number_sample),
@@ -49,7 +60,8 @@ public:
       line_scale_(Line_scale),
       sample_scale_(Sample_scale),
       pp_(Principal_point),
-      frame_to_sc_(frame_to_sc_q)
+      frame_to_sc_(Frame_to_sc_q),
+      frame_convention_(Frame_convention)
   { }
 
 //-----------------------------------------------------------------------
@@ -158,6 +170,17 @@ public:
   void frame_to_sc(const boost::math::quaternion<double>& frame_to_sc_q) 
   { frame_to_sc_ = frame_to_sc_q; }
 
+//-----------------------------------------------------------------------
+/// Frame convention, indicates if Line is in X or Y direction in
+/// frame coordinates.
+//-----------------------------------------------------------------------
+  FrameConvention frame_convention() const { return frame_convention_; }
+
+//-----------------------------------------------------------------------
+/// Set frame convention.
+//-----------------------------------------------------------------------
+  void frame_convention(FrameConvention Frame_convention)
+  { frame_convention_ = Frame_convention; }
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
 
@@ -174,6 +197,8 @@ private:
                                 // Scaling of line and sample.
   FrameCoordinate pp_;		// Principal point
   boost::math::quaternion<double> frame_to_sc_;
+  FrameConvention frame_convention_;
+                                // Indicates if X or Y is the line direction.
 };
 }
 #endif

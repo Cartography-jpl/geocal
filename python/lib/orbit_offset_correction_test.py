@@ -11,7 +11,8 @@ cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                        1.0 / 2500000,
                        1.0 / 2500000,
                        1.0,
-                       FrameCoordinate(1688.0, 1824.5))
+                       FrameCoordinate(1688.0, 1824.5),
+                       1.0, 1.0, QuaternionCamera.LINE_IS_Y)
 
 def test_time():
     raise SkipTest

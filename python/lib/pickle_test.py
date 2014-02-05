@@ -89,7 +89,8 @@ def test_quaternion_camera_pickle():
                            1.0 / 2500000,
                            1.0 / 2500000,
                            1.0,
-                           FrameCoordinate(1688.0, 1824.5))
+                           FrameCoordinate(1688.0, 1824.5),
+                           1.0, 1.0, QuaternionCamera.LINE_IS_Y)
     t = cPickle.dumps(cam, cPickle.HIGHEST_PROTOCOL)
     cam2 = cPickle.loads(t)
     assert_almost_equal(cam.focal_length, 1.0, 4)

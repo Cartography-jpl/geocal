@@ -11,7 +11,8 @@ cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                        1.0 / 2500000,
                        1.0 / 2500000,
                        1.0,
-                       FrameCoordinate(1688.0, 1824.5))
+                       FrameCoordinate(1688.0, 1824.5),
+                       1.0, 1.0, QuaternionCamera.LINE_IS_Y)
 demin = SimpleDem()
 img1 = VicarLiteRasterImage(test_data + "10MAY21-1.img")
 img2 = VicarLiteRasterImage(test_data + "10MAY21-2.img")
@@ -38,11 +39,11 @@ def test_igc():
     gp = igc1.ground_coordinate(ic)
     assert distance(gp, igc_coll.ground_coordinate(0, ic)) < 0.01
     assert_almost_equal(igc_coll.image_coordinate(0, gp).line, ic.line, 4)
-    assert_almost_equal(igc_coll.image_coordinate(0, gp).sample, ic.sample, 4)
+    assert_almost_equal(igc_coll.image_coordinate(0, gp).sample, ic.sample, 3)
     t = cPickle.dumps(igc_coll, cPickle.HIGHEST_PROTOCOL)
     igc_coll2 = cPickle.loads(t)
     assert igc_coll2.image_title(1) == igc_coll.image_title(1)
     assert_almost_equal(igc_coll2.image_coordinate(0, gp).line, ic.line, 4)
-    assert_almost_equal(igc_coll2.image_coordinate(0, gp).sample, ic.sample, 4)
+    assert_almost_equal(igc_coll2.image_coordinate(0, gp).sample, ic.sample, 3)
 
 

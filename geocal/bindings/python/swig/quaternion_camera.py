@@ -128,35 +128,46 @@ class QuaternionCamera(geocal.camera.Camera):
     pinhole camera. The camera has an orientation to the spacecraft frame
     by a given quaternion.
 
+    There are 2 conventions used for the frame coordinates. The convention
+    used by other Cameras we have implemented is that the line direction
+    is +x, and the sample direction is +y.
+
+    However, another convention is that line goes in the +y direction and
+    sample goes in +x direction. This is what was used in the VICAR
+    procedure sc2rpc. Note that this is more than just a rotation from the
+    other convention, it is both a rotation and a reflection (so the
+    chirality is different).
+
+    We support both conventions, depending on the setting of the
+    frame_convention.
+
+    Note that in addition to the line and sample pitch, we supply a line
+    and sample scale. You could achieve exactly the same behavior either
+    changing the scale, or just directly changing pitch. The scale is
+    supplied as a convenience, it is a more natural thing to vary if you
+    are calibrating the camera. If you wish, you can leave the scale fixed
+    at 1.0 and ignore it if you don't want to use it.
+
     C++ includes: quaternion_camera.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    LINE_IS_X = _quaternion_camera.QuaternionCamera_LINE_IS_X
+    LINE_IS_Y = _quaternion_camera.QuaternionCamera_LINE_IS_Y
     def __init__(self, *args): 
         """
-        GeoCal::QuaternionCamera::QuaternionCamera(boost::math::quaternion< double > frame_to_sc_q, double Number_line,
+        GeoCal::QuaternionCamera::QuaternionCamera(boost::math::quaternion< double > Frame_to_sc_q, double Number_line,
         double Number_sample, double Line_pitch, double Sample_pitch, double
         Focal_length, const FrameCoordinate &Principal_point, double
-        Line_scale=1.0, double Sample_scale=1.0)
+        Line_scale=1.0, double Sample_scale=1.0, FrameConvention
+        Frame_convention=LINE_IS_X)
         Create a QuaternionCamera.
 
         The orientation of the camera to the spacecraft to given by the
         quaternion that takes frame coordinates to spacecraft coordinates. The
         size of the camera and the line pitch, sample pitch, and focal length
         are given. By convention, these are given in mm. Finally the
-        Principal_point (coordinates at center) are given.
-
-        Note that by convention the quaternion has line going in the +y
-        direction and sample in the +x direction. This is different convention
-        that we have used in other cameras, but matches the use for the
-        initial use we have for this camera.
-
-        You can rotate back by doing a conversion:
-
-        quat_rot = Quaternion_double(cos(90 * deg_to_rad / 2), 0, 0, sin(90
-        deg_to_rad / 2)) quat_ref = Quaternion_double(0,1,0,0)
-
-        quat = quat_ref * quat_rot 
+        Principal_point (coordinates at center) are given. 
         """
         _quaternion_camera.QuaternionCamera_swiginit(self,_quaternion_camera.new_QuaternionCamera(*args))
     def _v_focal_length(self, *args):
@@ -249,6 +260,21 @@ class QuaternionCamera(geocal.camera.Camera):
     def sample_scale(self, value):
       self._v_sample_scale(value)
 
+    def _v_frame_convention(self, *args):
+        """
+        void GeoCal::QuaternionCamera::frame_convention(FrameConvention Frame_convention)
+        Set frame convention. 
+        """
+        return _quaternion_camera.QuaternionCamera__v_frame_convention(self, *args)
+
+    @property
+    def frame_convention(self):
+        return self._v_frame_convention()
+
+    @frame_convention.setter
+    def frame_convention(self, value):
+      self._v_frame_convention(value)
+
     def _v_frame_to_sc(self):
         """
         void GeoCal::QuaternionCamera::frame_to_sc(const boost::math::quaternion< double > &frame_to_sc_q)
@@ -265,7 +291,7 @@ class QuaternionCamera(geocal.camera.Camera):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.frame_to_sc,self.number_line(0),self.number_sample(0),self.line_pitch,self.sample_pitch,self.focal_length,self.principal_point,self.line_scale,self.sample_scale)
+      return _new_from_init, (self.__class__, 1, self.frame_to_sc,self.number_line(0),self.number_sample(0),self.line_pitch,self.sample_pitch,self.focal_length,self.principal_point,self.line_scale,self.sample_scale,self.frame_convention)
 
     __swig_destroy__ = _quaternion_camera.delete_QuaternionCamera
 QuaternionCamera._v_focal_length = new_instancemethod(_quaternion_camera.QuaternionCamera__v_focal_length,None,QuaternionCamera)
@@ -274,6 +300,7 @@ QuaternionCamera._v_line_pitch = new_instancemethod(_quaternion_camera.Quaternio
 QuaternionCamera._v_sample_pitch = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_pitch,None,QuaternionCamera)
 QuaternionCamera._v_line_scale = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_scale,None,QuaternionCamera)
 QuaternionCamera._v_sample_scale = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_scale,None,QuaternionCamera)
+QuaternionCamera._v_frame_convention = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_convention,None,QuaternionCamera)
 QuaternionCamera._v_frame_to_sc = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_to_sc,None,QuaternionCamera)
 QuaternionCamera_swigregister = _quaternion_camera.QuaternionCamera_swigregister
 QuaternionCamera_swigregister(QuaternionCamera)

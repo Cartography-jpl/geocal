@@ -17,7 +17,8 @@ def test_time():
                            1.0 / 2500000,
                            1.0 / 2500000,
                            1.0,
-                           FrameCoordinate(1688.0, 1824.5))
+                           FrameCoordinate(1688.0, 1824.5),
+                           1.0, 1.0, QuaternionCamera.LINE_IS_Y)
     demin = SimpleDem()
 # Image not actually used for anything, but the SBA expects it
     t1 = Time.time_acs(215077459.472);

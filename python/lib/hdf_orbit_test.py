@@ -61,7 +61,8 @@ def test_sc2rpc():
                            1.0 / 2500000,
                            1.0 / 2500000,
                            1.0,
-                           FrameCoordinate(1688.0, 1824.5))
+                           FrameCoordinate(1688.0, 1824.5),
+                           1.0, 1.0, QuaternionCamera.LINE_IS_Y)
     t = Time.time_acs(215077459.472);
     pt = orb.reference_surface_intersect_approximate(t, cam, FrameCoordinate(3375, 3648))
     pt_geod = Geodetic(-60.3162137, 47.2465154)
@@ -77,7 +78,8 @@ def test_pickle():
                            1.0 / 2500000,
                            1.0 / 2500000,
                            1.0,
-                           FrameCoordinate(1688.0, 1824.5))
+                           FrameCoordinate(1688.0, 1824.5),
+                           1.0, 1.0, QuaternionCamera.LINE_IS_Y)
     t = Time.time_acs(215077459.472);
     pt = orb.reference_surface_intersect_approximate(t, cam, FrameCoordinate(3375, 3648))
     pt2 = orb2.reference_surface_intersect_approximate(t, cam, FrameCoordinate(3375, 3648))

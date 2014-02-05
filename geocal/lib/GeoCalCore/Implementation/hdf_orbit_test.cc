@@ -22,7 +22,8 @@ BOOST_AUTO_TEST_CASE(sc2rpc)
 		       1.0 / 2500000,
 		       1.0 / 2500000,
 		       1.0,
-		       FrameCoordinate(1688.0, 1824.5));
+		       FrameCoordinate(1688.0, 1824.5),
+		       1.0, 1.0, QuaternionCamera::LINE_IS_Y);
   Time t = Time::time_acs(215077459.472);
   boost::shared_ptr<CartesianFixed> pt =
     orb.reference_surface_intersect_approximate(t, cam, FrameCoordinate(3375, 3648));

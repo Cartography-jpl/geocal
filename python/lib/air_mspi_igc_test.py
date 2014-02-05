@@ -23,5 +23,5 @@ def test_air_mspi_igc():
     assert_almost_equal(igc.view_azimuth(ImageCoordinate(500,600)),
                         326.30319213867188, 5)
     ic = igc.image_coordinate(igc.ground_coordinate(ImageCoordinate(500, 600)))
-    assert_almost_equal(ic.line, 500, 3)
-    assert_almost_equal(ic.sample, 600, 3)
+    assert_almost_equal(ic.line, 500, 1)
+    assert_almost_equal(ic.sample, 600, 1)

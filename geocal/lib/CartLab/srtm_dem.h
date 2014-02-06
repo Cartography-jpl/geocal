@@ -3,6 +3,7 @@
 #include "dem_map_info.h"
 #include "datum_geoid96.h"
 #include "vicar_multi_file.h"
+#include "ostream_pad.h"
 namespace GeoCal {
 /****************************************************************//**
   This class provides access to the SRTM.
@@ -61,12 +62,16 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  { Os << "SRTM DEM:\n"
-       << "  Datum:\n"
-       << datum() << "\n"
-       << "  Data:\n"
-       << *f
-       << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
+  {     
+    OstreamPad opad(Os, "    ");
+    Os << "SRTM DEM:\n"
+       << "  Datum:\n";
+    opad << datum();
+    opad.strict_sync();
+    Os << "  Data:\n";
+    opad << *f;
+    opad.strict_sync();
+    Os << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
   }
 private:
   boost::shared_ptr<VicarMultiFile> f;

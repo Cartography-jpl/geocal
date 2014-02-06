@@ -2,6 +2,7 @@
 #define VICAR_MULTI_FILE_H
 #include "raster_multifile.h"
 #include "location_to_file.h"
+#include "ostream_pad.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -43,14 +44,18 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const 
-  { Os << "VicarMultifile " << number_line() << " x " << number_sample() 
+  { 
+    OstreamPad opad(Os, "    ");
+    Os << "VicarMultifile " << number_line() << " x " << number_sample() 
        << "\n"
        << "  Database file:  " << db_name << "\n"
        << "  Directory base: " << dirbase << "\n"
        << "  File exention:  " << extension << "\n"
-       << "  Map info:       " << map_info() << "\n"
        << "  Force area based pixel: " << force_area_pixel_ << "\n"
-       << "  Favor memory mapped: " << favor_memory_mapped << "\n";
+       << "  Favor memory mapped: " << favor_memory_mapped << "\n"
+       << "  Map info:       \n";
+    opad << map_info();
+    opad.strict_sync();
   }
 private:
   static const double map_info_tolerance;

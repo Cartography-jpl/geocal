@@ -275,16 +275,20 @@ class QuaternionCamera(geocal.camera.Camera):
     def frame_convention(self, value):
       self._v_frame_convention(value)
 
-    def _v_frame_to_sc(self):
+    def _v_frame_to_sc(self, *args):
         """
         void GeoCal::QuaternionCamera::frame_to_sc(const boost::math::quaternion< double > &frame_to_sc_q)
         Set frame to spacecraft quaternion. 
         """
-        return _quaternion_camera.QuaternionCamera__v_frame_to_sc(self)
+        return _quaternion_camera.QuaternionCamera__v_frame_to_sc(self, *args)
 
     @property
     def frame_to_sc(self):
         return self._v_frame_to_sc()
+
+    @frame_to_sc.setter
+    def frame_to_sc(self, value):
+      self._v_frame_to_sc(value)
 
     @classmethod
     def pickle_format_version(cls):

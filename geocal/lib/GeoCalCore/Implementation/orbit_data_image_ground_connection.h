@@ -3,6 +3,7 @@
 #include "image_ground_connection.h"
 #include "orbit.h"
 #include "refraction.h"
+#include "ostream_pad.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -78,13 +79,17 @@ public:
   }
   virtual void print(std::ostream& Os) const \
   {
+    OstreamPad opad(Os, "    ");
     Os << "OrbitDataImageGroundConnection" << "\n"
-       << "  Orbit Data: \n"
-       << *od << "\n"
-       << "  Camera: \n"
-       << *cam << "\n"
-       << "  Dem: \n"
-       << *dem_ << "\n";
+       << "  Orbit Data: \n";
+    opad << *od;
+    opad.strict_sync();
+    Os << "  Camera: \n";
+    opad << *cam;
+    opad.strict_sync();
+    Os << "  Dem: \n";
+    opad << dem();
+    opad.strict_sync();
   }
 
 //-----------------------------------------------------------------------

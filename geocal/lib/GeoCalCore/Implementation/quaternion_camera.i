@@ -30,11 +30,11 @@ public:
   %python_attribute_with_set(line_scale, double)
   %python_attribute_with_set(sample_scale, double)  
   %python_attribute_with_set(frame_convention, FrameConvention)  
+  %python_attribute_with_set(frame_to_sc, boost::math::quaternion<double>)
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
-  %python_attribute(frame_to_sc, boost::math::quaternion<double>)
   %pickle_init(1, self.frame_to_sc, self.number_line(0), self.number_sample(0), 
 	       self.line_pitch, self.sample_pitch, self.focal_length, 
 	       self.principal_point, self.line_scale, self.sample_scale,

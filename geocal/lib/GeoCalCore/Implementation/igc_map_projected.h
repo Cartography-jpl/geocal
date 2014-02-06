@@ -40,7 +40,7 @@ protected:
 
 /****************************************************************//**
   This is a RasterImage that has been map projected using an
-  ImageGroundConnection and a Camera.
+  ImageGroundConnection.
 
   To do this we do two steps:
 
@@ -95,7 +95,7 @@ private:
 
 /****************************************************************//**
   This is a RasterImageMultiBand that has been map projected using an
-  ImageGroundConnection and a Camera.
+  ImageGroundConnection.
 
   To do this we do two steps:
 

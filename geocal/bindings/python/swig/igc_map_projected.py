@@ -129,7 +129,7 @@ import geocal.geocal_exception
 class IgcMapProjected(geocal.calc_raster.CalcRaster):
     """
     This is a RasterImage that has been map projected using an
-    ImageGroundConnection and a Camera.
+    ImageGroundConnection.
 
     To do this we do two steps:
 
@@ -250,7 +250,7 @@ IgcMapProjected_swigregister(IgcMapProjected)
 class IgcMapProjectedMultiBand(geocal.calc_raster_multi_band.CalcRasterMultiBand):
     """
     This is a RasterImageMultiBand that has been map projected using an
-    ImageGroundConnection and a Camera.
+    ImageGroundConnection.
 
     To do this we do two steps:
 

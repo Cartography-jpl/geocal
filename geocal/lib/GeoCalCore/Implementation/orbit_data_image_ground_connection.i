@@ -41,12 +41,12 @@ public:
   virtual int number_sample() const;
   virtual boost::shared_ptr<RasterImage> image() const;
   virtual std::string title() const;
-  %python_attribute2(orbit_data, orbit_data_ptr, boost::shared_ptr<OrbitData>)
-  %python_attribute2(camera, camera_ptr, boost::shared_ptr<Camera>)
-  %python_attribute(resolution, double)
-  %python_attribute(refraction, boost::shared_ptr<Refraction>)
-  %python_attribute(band, int)
-  %python_attribute(max_height, double)
+  %python_attribute_with_set(orbit_data, boost::shared_ptr<OrbitData>)
+  %python_attribute_with_set(camera,boost::shared_ptr<Camera>)
+  %python_attribute_with_set(resolution, double)
+  %python_attribute_with_set(refraction, boost::shared_ptr<Refraction>)
+  %python_attribute_with_set(band, int)
+  %python_attribute_with_set(max_height, double)
   %pickle_init(1, self.orbit_data, self.camera, self.dem,
 	       self.image, self.title, self.refraction,
 	       self.resolution, self.band, self.max_height)

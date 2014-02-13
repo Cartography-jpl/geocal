@@ -96,7 +96,7 @@ def column(self, cindex):
         return np.array(self.column_float(cindex).data)
     elif(t == IbisFile.VICAR_DOUBLE):
         return np.array(self.column_double(cindex).data)
-    elif(t == IbisFile.VICAR_STRING):
+    elif(t == IbisFile.VICAR_ASCII):
         return np.array(self.column_string(cindex).data)
     else:
         raise "Unrecognized type %d" % t

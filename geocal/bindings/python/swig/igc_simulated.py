@@ -229,7 +229,7 @@ class IgcSimulated(geocal.calc_raster.CalcRaster):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.igc,selg.map_projected_image,self.avg_factor,self.read_into_memory,self.number_tile_line,self.number_tile_sample,self.fill_value)
+      return _new_from_init, (self.__class__, 1, self.igc,self.map_projected_image,self.avg_factor,self.read_into_memory,self.number_tile_line,self.number_tile_sample,self.fill_value)
 
     __swig_destroy__ = _igc_simulated.delete_IgcSimulated
 IgcSimulated._v_igc = new_instancemethod(_igc_simulated.IgcSimulated__v_igc,None,IgcSimulated)

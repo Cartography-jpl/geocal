@@ -150,7 +150,7 @@ class VicarMultiFile(geocal.raster_multifile.RasterMultifile):
         VicarMultiFile::VicarMultiFile(const std::string &Db_name, const std::string &Dirbase, const
         std::string &Extension="", int Number_tile_line=10000, int
         Number_tile_sample=10000, int Number_line_per_tile=100000, int
-        Number_tile_each_file=4, int Number_file=4, bool
+        Number_tile_each_file=4, int Number_tile=4, bool
         Favor_memory_mapped=true, bool No_coverage_is_error=true, int
         No_coverage_fill_value=0, bool Force_area_pixel=false)
         Constructor.
@@ -168,7 +168,7 @@ class VicarMultiFile(geocal.raster_multifile.RasterMultifile):
         is needed.
 
         There are two kinds of tiling going on. At the top level, we have a
-        number of files open at one time, given by Number_file. For each file,
+        number of files open at one time, given by Number_tile. For each file,
         we read that it tiles with the given Number_line_per_tile and
         Number_tile_each_file tiles.
 
@@ -187,12 +187,141 @@ class VicarMultiFile(geocal.raster_multifile.RasterMultifile):
         area" rather than "pixel as point". This is really just meant as a
         work around for the SRTM data, which incorrectly labels the data as
         "point" rather than "area". Since this is a 15 meter difference,
-        it matters for may applications. Most users should just ignore this
+        it matters for many applications. Most users should just ignore this
         value. 
         """
         _vicar_multi_file.VicarMultiFile_swiginit(self,_vicar_multi_file.new_VicarMultiFile(*args))
+    def _v_db_name(self):
+        """
+        const std::string& GeoCal::VicarMultiFile::db_name() const
+        IBIS index file name. 
+        """
+        return _vicar_multi_file.VicarMultiFile__v_db_name(self)
+
+    @property
+    def db_name(self):
+        return self._v_db_name()
+
+    def _v_dirbase(self):
+        """
+        const std::string& GeoCal::VicarMultiFile::dirbase() const
+        Directory base, where the underlying files are. 
+        """
+        return _vicar_multi_file.VicarMultiFile__v_dirbase(self)
+
+    @property
+    def dirbase(self):
+        return self._v_dirbase()
+
+    def _v_extension(self):
+        """
+        const std::string& GeoCal::VicarMultiFile::extension() const
+        Extension to add to names in IBIS index file to get file names (e.g.,
+        ".img" if it is left out in IBIS index file name) 
+        """
+        return _vicar_multi_file.VicarMultiFile__v_extension(self)
+
+    @property
+    def extension(self):
+        return self._v_extension()
+
+    @property
+    def number_tile_line(self):
+        return self._v_number_tile_line()
+
+    @property
+    def number_tile_sample(self):
+        return self._v_number_tile_sample()
+
+    def _v_number_line_per_tile(self):
+        """
+        int GeoCal::VicarMultiFile::number_line_per_tile() const
+        Number of lines to include in each tile in the underlying VICAR files
+        we read.
+
+        This doesn't apply if we are doing memory mapping. 
+        """
+        return _vicar_multi_file.VicarMultiFile__v_number_line_per_tile(self)
+
+    @property
+    def number_line_per_tile(self):
+        return self._v_number_line_per_tile()
+
+    def _v_number_tile_each_file(self):
+        """
+        int GeoCal::VicarMultiFile::number_tile_each_file() const
+        Number of tiles to use for each underlying VICAR file.
+
+        This doesn't apply if we are doing memory mapping. 
+        """
+        return _vicar_multi_file.VicarMultiFile__v_number_tile_each_file(self)
+
+    @property
+    def number_tile_each_file(self):
+        return self._v_number_tile_each_file()
+
+    def _v_favor_memory_mapped(self):
+        """
+        bool GeoCal::VicarMultiFile::favor_memory_mapped() const
+        Whether we use memory mapping or not when reading an uncompressed
+        files. 
+        """
+        return _vicar_multi_file.VicarMultiFile__v_favor_memory_mapped(self)
+
+    @property
+    def favor_memory_mapped(self):
+        return self._v_favor_memory_mapped()
+
+    def _v_force_area_pixel(self):
+        """
+        bool GeoCal::VicarMultiFile::force_area_pixel() const
+        If true, force the file to be treated as "pixel as area" rather than
+        "pixel as point".
+
+        This is really just meant as a work around for the SRTM data, which
+        incorrectly labels the data as "point" rather than "area". Since
+        this is a 15 meter difference, it matters for many applications. Most
+        users should just ignore this value. 
+        """
+        return _vicar_multi_file.VicarMultiFile__v_force_area_pixel(self)
+
+    @property
+    def force_area_pixel(self):
+        return self._v_force_area_pixel()
+
+    @property
+    def no_coverage_is_error(self):
+        return self._v_no_coverage_is_error()
+
+    @property
+    def no_coverage_fill_value(self):
+        return self._v_no_coverage_fill_value()
+
+    @property
+    def number_tile(self):
+        return self._v_number_tile()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.db_name,self.dirbase,self.extension,self.number_tile_line,self.number_tile_sample,self.number_line_per_tile,self.number_tile_each_file,self.number_tile,self.favor_memory_mapped,self.no_coverage_is_error,self.no_coverage_fill_value,self.force_area_pixel)
+
     __swig_destroy__ = _vicar_multi_file.delete_VicarMultiFile
 VicarMultiFile.write = new_instancemethod(_vicar_multi_file.VicarMultiFile_write,None,VicarMultiFile)
+VicarMultiFile._v_db_name = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_db_name,None,VicarMultiFile)
+VicarMultiFile._v_dirbase = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_dirbase,None,VicarMultiFile)
+VicarMultiFile._v_extension = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_extension,None,VicarMultiFile)
+VicarMultiFile._v_number_tile_line = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_number_tile_line,None,VicarMultiFile)
+VicarMultiFile._v_number_tile_sample = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_number_tile_sample,None,VicarMultiFile)
+VicarMultiFile._v_number_line_per_tile = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_number_line_per_tile,None,VicarMultiFile)
+VicarMultiFile._v_number_tile_each_file = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_number_tile_each_file,None,VicarMultiFile)
+VicarMultiFile._v_favor_memory_mapped = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_favor_memory_mapped,None,VicarMultiFile)
+VicarMultiFile._v_force_area_pixel = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_force_area_pixel,None,VicarMultiFile)
+VicarMultiFile._v_no_coverage_is_error = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_no_coverage_is_error,None,VicarMultiFile)
+VicarMultiFile._v_no_coverage_fill_value = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_no_coverage_fill_value,None,VicarMultiFile)
+VicarMultiFile._v_number_tile = new_instancemethod(_vicar_multi_file.VicarMultiFile__v_number_tile,None,VicarMultiFile)
 VicarMultiFile_swigregister = _vicar_multi_file.VicarMultiFile_swigregister
 VicarMultiFile_swigregister(VicarMultiFile)
 

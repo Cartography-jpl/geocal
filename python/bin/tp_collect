@@ -88,9 +88,7 @@ if(args.gcp):
         dem = igc.dem(0)
     refimg = read_shelve(args.reference_image)
     tpcollect = GcpTiePointCollect(refimg, dem, igc, 
-                                   avg_level = args.avg_level,
-                                   max_ground_covariance = 
-                                   args.max_ground_sigma ** 2)
+                                   avg_level = args.avg_level)
 else:
     tpcollect = TiePointCollect(igc, avg_level = args.avg_level,
                                 max_ground_covariance = 

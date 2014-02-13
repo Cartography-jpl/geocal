@@ -26,7 +26,7 @@ const double VicarMultiFile::map_info_tolerance = 0.01;
 /// extension that is needed.
 ///
 /// There are two kinds of tiling going on. At the top level, we have
-/// a number of files open at one time, given by Number_file. For each
+/// a number of files open at one time, given by Number_tile. For each
 /// file, we read that it tiles with the given Number_line_per_tile
 /// and Number_tile_each_file tiles.
 ///
@@ -47,7 +47,7 @@ const double VicarMultiFile::map_info_tolerance = 0.01;
 /// "pixel as area" rather than "pixel as point". This is really just
 /// meant as a work around for the SRTM data, which incorrectly labels
 /// the data as "point" rather than "area". Since this is a 15 meter
-/// difference, it matters for may applications. Most users should
+/// difference, it matters for many applications. Most users should
 /// just ignore this value.
 //-----------------------------------------------------------------------
 
@@ -58,18 +58,18 @@ VicarMultiFile::VicarMultiFile(const std::string& Db_name,
 			       int Number_tile_sample,
 			       int Number_line_per_tile, 
 			       int Number_tile_each_file,
-			       int Number_file,
+			       int Number_tile,
 			       bool Favor_memory_mapped,
 			       bool No_coverage_is_error,
 			       int No_coverage_fill_value,
 			       bool Force_area_pixel)
-: RasterMultifile(Number_file, No_coverage_fill_value, 
+: RasterMultifile(Number_tile, No_coverage_is_error, 
 		  No_coverage_fill_value),
-  db_name(Db_name), dirbase(Dirbase), extension(Extension),
-  favor_memory_mapped(Favor_memory_mapped),
+  db_name_(Db_name), dirbase_(Dirbase), extension_(Extension),
+  favor_memory_mapped_(Favor_memory_mapped),
   force_area_pixel_(Force_area_pixel),
-  number_line_per_tile(Number_line_per_tile),
-  number_tile_each_file(Number_tile_each_file)
+  number_line_per_tile_(Number_line_per_tile),
+  number_tile_each_file_(Number_tile_each_file)
 {
   IbisFile ibf(Db_name);
   if(ibf.number_col() < 5)
@@ -156,7 +156,7 @@ RasterMultifileTile VicarMultiFile::get_file(int Line, int Sample) const
 
   boost::shared_ptr<RasterImage> f;
   try {
-    if(favor_memory_mapped) {
+    if(favor_memory_mapped_) {
       boost::shared_ptr<VicarLiteRasterImage> 
 	f2(new VicarLiteRasterImage(fname, VicarLiteFile::READ,
 				    0, -1, -1, force_area_pixel_));
@@ -169,8 +169,8 @@ RasterMultifileTile VicarMultiFile::get_file(int Line, int Sample) const
   }
   if(!f.get())
     f.reset(new VicarRasterImage(fname, VicarFile::READ,
-				 number_line_per_tile, 
-				 number_tile_each_file,
+				 number_line_per_tile_, 
+				 number_tile_each_file_,
 				 force_area_pixel_));
 
   //-----------------------------------------------------------------------

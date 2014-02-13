@@ -26,7 +26,7 @@ public:
   %python_attribute(fill_value, double)
   %python_attribute(read_into_memory, bool)
   %python_attribute(map_projected_image, boost::shared_ptr<RasterImage>)
-     %pickle_init(1, self.igc, selg.map_projected_image,
+     %pickle_init(1, self.igc, self.map_projected_image,
 	       self.avg_factor, self.read_into_memory, self.number_tile_line,
 	       self.number_tile_sample, self.fill_value)
 protected:

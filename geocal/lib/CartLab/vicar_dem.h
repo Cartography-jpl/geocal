@@ -2,6 +2,7 @@
 #define VICAR_DEM_H
 #include "dem_tiled_file.h"
 #include "vicar_tiled_file.h"
+#include "ostream_pad.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -72,12 +73,17 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const 
-  { Os << "Vicar Dem:\n"
-       << "  Map info:\n"
-       << map_info()
-       << "  Datum:\n"
-       << datum()
-       << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
+  { 
+        OstreamPad opad(Os, "    ");
+	Os << "Vicar Dem:\n"
+	   << "  File:    " << vicar_file_->file_name() << "\n"
+	   << "  Map info:\n";
+	opad << map_info();
+	opad.strict_sync();
+	Os << "  Datum:\n";
+	opad << datum();
+	opad.strict_sync();
+	Os << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
   }
 private:
   boost::shared_ptr<VicarFile> vicar_file_; 

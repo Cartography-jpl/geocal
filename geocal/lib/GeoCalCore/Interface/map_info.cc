@@ -1,5 +1,6 @@
 #include "map_info.h"
 #include "geocal_exception.h"
+#include "ostream_pad.h"
 #include <boost/foreach.hpp>
 using namespace GeoCal;
 using namespace blitz;
@@ -225,8 +226,11 @@ double MapInfo::resolution_meter() const
 
 void MapInfo::print(std::ostream& Os) const
 {
-  Os << "Coordinate: " << coordinate_converter() << "\n"
-     << "ULC:       (" << ulc_x() << ", " << ulc_y() << ")\n"
+  OstreamPad opad(Os, "    ");
+  Os << "Coordinate: \n";
+  opad << coordinate_converter();
+  opad.strict_sync();
+  Os << "ULC:       (" << ulc_x() << ", " << ulc_y() << ")\n"
      << "LRC:       (" << lrc_x() << ", " << lrc_y() << ")\n"
      << "Number:    (" << number_x_pixel() << ", "
      << number_y_pixel() << ")\n";

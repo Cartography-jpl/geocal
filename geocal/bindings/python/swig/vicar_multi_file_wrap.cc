@@ -5231,6 +5231,41 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
+#else
+      return PyString_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+
+SWIGINTERNINLINE PyObject*
+  SWIG_From_bool  (bool value)
+{
+  return PyBool_FromLong(value ? 1 : 0);
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6468,6 +6503,522 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_db_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_db_name" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::VicarMultiFile const *)arg1)->db_name();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_dirbase(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_dirbase" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::VicarMultiFile const *)arg1)->dirbase();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_extension(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_extension" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::VicarMultiFile const *)arg1)->extension();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_number_tile_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_number_tile_line" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::VicarMultiFile const *)arg1)->number_tile_line();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_number_tile_sample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_number_tile_sample" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::VicarMultiFile const *)arg1)->number_tile_sample();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_number_line_per_tile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_number_line_per_tile" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::VicarMultiFile const *)arg1)->number_line_per_tile();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_number_tile_each_file(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_number_tile_each_file" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::VicarMultiFile const *)arg1)->number_tile_each_file();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_favor_memory_mapped(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_favor_memory_mapped" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::VicarMultiFile const *)arg1)->favor_memory_mapped();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_force_area_pixel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_force_area_pixel" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::VicarMultiFile const *)arg1)->force_area_pixel();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_no_coverage_is_error(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_no_coverage_is_error" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::VicarMultiFile const *)arg1)->no_coverage_is_error();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_no_coverage_fill_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_no_coverage_fill_value" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::VicarMultiFile const *)arg1)->no_coverage_fill_value();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarMultiFile__v_number_tile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_number_tile" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::VicarMultiFile const *)arg1)->number_tile();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_VicarMultiFile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
@@ -6527,7 +7078,7 @@ static PyMethodDef SwigMethods[] = {
 		"VicarMultiFile::VicarMultiFile(const std::string &Db_name, const std::string &Dirbase, const\n"
 		"std::string &Extension=\"\", int Number_tile_line=10000, int\n"
 		"Number_tile_sample=10000, int Number_line_per_tile=100000, int\n"
-		"Number_tile_each_file=4, int Number_file=4, bool\n"
+		"Number_tile_each_file=4, int Number_tile=4, bool\n"
 		"Favor_memory_mapped=true, bool No_coverage_is_error=true, int\n"
 		"No_coverage_fill_value=0, bool Force_area_pixel=false)\n"
 		"Constructor.\n"
@@ -6545,7 +7096,7 @@ static PyMethodDef SwigMethods[] = {
 		"is needed.\n"
 		"\n"
 		"There are two kinds of tiling going on. At the top level, we have a\n"
-		"number of files open at one time, given by Number_file. For each file,\n"
+		"number of files open at one time, given by Number_tile. For each file,\n"
 		"we read that it tiles with the given Number_line_per_tile and\n"
 		"Number_tile_each_file tiles.\n"
 		"\n"
@@ -6564,10 +7115,56 @@ static PyMethodDef SwigMethods[] = {
 		"area\" rather than \"pixel as point\". This is really just meant as a\n"
 		"work around for the SRTM data, which incorrectly labels the data as\n"
 		"\"point\" rather than \"area\". Since this is a 15 meter difference,\n"
-		"it matters for may applications. Most users should just ignore this\n"
+		"it matters for many applications. Most users should just ignore this\n"
 		"value. \n"
 		""},
 	 { (char *)"VicarMultiFile_write", _wrap_VicarMultiFile_write, METH_VARARGS, NULL},
+	 { (char *)"VicarMultiFile__v_db_name", (PyCFunction)_wrap_VicarMultiFile__v_db_name, METH_O, (char *)"\n"
+		"const std::string& GeoCal::VicarMultiFile::db_name() const\n"
+		"IBIS index file name. \n"
+		""},
+	 { (char *)"VicarMultiFile__v_dirbase", (PyCFunction)_wrap_VicarMultiFile__v_dirbase, METH_O, (char *)"\n"
+		"const std::string& GeoCal::VicarMultiFile::dirbase() const\n"
+		"Directory base, where the underlying files are. \n"
+		""},
+	 { (char *)"VicarMultiFile__v_extension", (PyCFunction)_wrap_VicarMultiFile__v_extension, METH_O, (char *)"\n"
+		"const std::string& GeoCal::VicarMultiFile::extension() const\n"
+		"Extension to add to names in IBIS index file to get file names (e.g.,\n"
+		"\".img\" if it is left out in IBIS index file name) \n"
+		""},
+	 { (char *)"VicarMultiFile__v_number_tile_line", (PyCFunction)_wrap_VicarMultiFile__v_number_tile_line, METH_O, NULL},
+	 { (char *)"VicarMultiFile__v_number_tile_sample", (PyCFunction)_wrap_VicarMultiFile__v_number_tile_sample, METH_O, NULL},
+	 { (char *)"VicarMultiFile__v_number_line_per_tile", (PyCFunction)_wrap_VicarMultiFile__v_number_line_per_tile, METH_O, (char *)"\n"
+		"int GeoCal::VicarMultiFile::number_line_per_tile() const\n"
+		"Number of lines to include in each tile in the underlying VICAR files\n"
+		"we read.\n"
+		"\n"
+		"This doesn't apply if we are doing memory mapping. \n"
+		""},
+	 { (char *)"VicarMultiFile__v_number_tile_each_file", (PyCFunction)_wrap_VicarMultiFile__v_number_tile_each_file, METH_O, (char *)"\n"
+		"int GeoCal::VicarMultiFile::number_tile_each_file() const\n"
+		"Number of tiles to use for each underlying VICAR file.\n"
+		"\n"
+		"This doesn't apply if we are doing memory mapping. \n"
+		""},
+	 { (char *)"VicarMultiFile__v_favor_memory_mapped", (PyCFunction)_wrap_VicarMultiFile__v_favor_memory_mapped, METH_O, (char *)"\n"
+		"bool GeoCal::VicarMultiFile::favor_memory_mapped() const\n"
+		"Whether we use memory mapping or not when reading an uncompressed\n"
+		"files. \n"
+		""},
+	 { (char *)"VicarMultiFile__v_force_area_pixel", (PyCFunction)_wrap_VicarMultiFile__v_force_area_pixel, METH_O, (char *)"\n"
+		"bool GeoCal::VicarMultiFile::force_area_pixel() const\n"
+		"If true, force the file to be treated as \"pixel as area\" rather than\n"
+		"\"pixel as point\".\n"
+		"\n"
+		"This is really just meant as a work around for the SRTM data, which\n"
+		"incorrectly labels the data as \"point\" rather than \"area\". Since\n"
+		"this is a 15 meter difference, it matters for many applications. Most\n"
+		"users should just ignore this value. \n"
+		""},
+	 { (char *)"VicarMultiFile__v_no_coverage_is_error", (PyCFunction)_wrap_VicarMultiFile__v_no_coverage_is_error, METH_O, NULL},
+	 { (char *)"VicarMultiFile__v_no_coverage_fill_value", (PyCFunction)_wrap_VicarMultiFile__v_no_coverage_fill_value, METH_O, NULL},
+	 { (char *)"VicarMultiFile__v_number_tile", (PyCFunction)_wrap_VicarMultiFile__v_number_tile, METH_O, NULL},
 	 { (char *)"delete_VicarMultiFile", (PyCFunction)_wrap_delete_VicarMultiFile, METH_O, (char *)"\n"
 		"virtual GeoCal::VicarMultiFile::~VicarMultiFile()\n"
 		"\n"

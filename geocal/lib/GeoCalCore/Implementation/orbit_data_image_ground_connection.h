@@ -25,7 +25,6 @@ public:
 				 const std::string Title = "",
 				 const boost::shared_ptr<Refraction>&
 				 Ref = boost::shared_ptr<Refraction>(),
-				 bool Include_refraction = false,
 				 double Resolution=30, int Band=0, 
 				 double Max_height=9000)
     : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
@@ -81,6 +80,10 @@ public:
   {
     OstreamPad opad(Os, "    ");
     Os << "OrbitDataImageGroundConnection" << "\n"
+       << "  Title:      " << title() << "\n"
+       << "  Resolution: " << resolution() << "\n"
+       << "  Band:       " << band() << "\n"
+       << "  Max height: " << max_height() << "\n"
        << "  Orbit Data: \n";
     opad << *od;
     opad.strict_sync();
@@ -90,19 +93,41 @@ public:
     Os << "  Dem: \n";
     opad << dem();
     opad.strict_sync();
+    Os << "  Image: \n";
+    opad << *image();
+    opad.strict_sync();
+    Os << "  Refraction\n";
+    if(!refraction())
+      opad << "No refraction model included\n";
+    else
+      opad << *refraction();
+    opad.strict_sync();
   }
 
 //-----------------------------------------------------------------------
 /// Orbit data that we are using
 //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<OrbitData>& orbit_data_ptr() const { return od; }
+  const boost::shared_ptr<OrbitData>& orbit_data() const { return od; }
+
+
+//-----------------------------------------------------------------------
+/// Set orbit data that we are using
+//-----------------------------------------------------------------------
+
+  void orbit_data(const boost::shared_ptr<OrbitData>& Od) { od = Od; }
 
 //-----------------------------------------------------------------------
 /// Camera that we are using
 //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<Camera>& camera_ptr() const {return cam; }
+  const boost::shared_ptr<Camera>& camera() const {return cam; }
+
+//-----------------------------------------------------------------------
+/// Set Camera that we are using
+//-----------------------------------------------------------------------
+
+  void camera(const boost::shared_ptr<Camera>& C) { cam = C; }
 
 //-----------------------------------------------------------------------
 /// Resolution in meters that we examine Dem out. This affects how
@@ -113,22 +138,49 @@ public:
   double resolution() const { return res; }
 
 //-----------------------------------------------------------------------
+/// Set resolution in meters that we examine Dem out. This affects how
+/// long ground_coordinate takes to figure out. It should be about the
+/// resolution of the Dem
+//-----------------------------------------------------------------------
+
+  void resolution(double R) { res = R; }
+
+//-----------------------------------------------------------------------
 /// Camera band we are using.
 //-----------------------------------------------------------------------
 
   int band() const { return b; }
 
 //-----------------------------------------------------------------------
+/// Set camera band we are using.
+//-----------------------------------------------------------------------
+
+  void band(int B) { b = B; }
+
+//-----------------------------------------------------------------------
 /// Maximum height that we expect to see in the Dem.
 //-----------------------------------------------------------------------
 
-  int max_height() const {return max_h;}
+  double max_height() const {return max_h;}
+
+//-----------------------------------------------------------------------
+/// Set Maximum height that we expect to see in the Dem.
+//-----------------------------------------------------------------------
+
+  void max_height(double Max_h) { max_h = Max_h;}
 
 //-----------------------------------------------------------------------
 /// Refraction object we are using. May be null if we aren't including
 /// refraction. 
 //-----------------------------------------------------------------------
   boost::shared_ptr<Refraction> refraction() const {return refraction_;}
+
+//-----------------------------------------------------------------------
+/// Set refraction object we are using. May be null if we aren't including
+/// refraction. 
+//-----------------------------------------------------------------------
+  void refraction(const boost::shared_ptr<Refraction>& Ref) 
+  {refraction_ = Ref;}
 private:
   boost::shared_ptr<OrbitData> od;
   boost::shared_ptr<Camera> cam;

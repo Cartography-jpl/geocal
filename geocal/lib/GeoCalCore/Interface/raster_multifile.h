@@ -116,24 +116,24 @@ public:
   { RasterMultifileTile& mi = swap(Line, Sample);
     if(mi.data.get())
       return mi.unchecked_read(Line, Sample);
-    if(no_coverage_is_error) {
+    if(no_coverage_is_error_) {
       NoCoverage e("Attempt to read data where we don't have a file in RasterMultifile.");
       e << " Location: " << *ground_coordinate(ImageCoordinate(Line,Sample));
       throw e;
     }
-    return no_coverage_fill_value;
+    return no_coverage_fill_value_;
   }
 
   virtual double unchecked_read_double(int Line, int Sample) const
   { RasterMultifileTile& mi = swap(Line, Sample);
     if(mi.data.get())
       return mi.unchecked_read_double(Line, Sample);
-    if(no_coverage_is_error) {
+    if(no_coverage_is_error_) {
       NoCoverage e("Attempt to read data where we don't have a file in RasterMultifile.");
       e << " Location: " << *ground_coordinate(ImageCoordinate(Line,Sample));
       throw e;
     }
-    return no_coverage_fill_value;
+    return no_coverage_fill_value_;
   }
 
 //-----------------------------------------------------------------------
@@ -168,6 +168,23 @@ public:
        << "\n"
        << "  Map info: " << map_info() << "\n";
   }
+
+//-----------------------------------------------------------------------
+/// If true, we throw an error if we try to read an area with no data.
+//-----------------------------------------------------------------------
+
+  bool no_coverage_is_error() const {return no_coverage_is_error_; }
+
+//-----------------------------------------------------------------------
+/// Fill value to return for areas with no coverage.
+//-----------------------------------------------------------------------
+
+  int no_coverage_fill_value() const {return no_coverage_fill_value_; }
+
+//-----------------------------------------------------------------------
+/// Number of tiles we have open at one time.
+//-----------------------------------------------------------------------
+  int number_tile() const {return (int) tile.size(); }
 protected:
 //-----------------------------------------------------------------------
 /// Default constructor. Make sure to update map_info_ yourself if you
@@ -177,8 +194,8 @@ protected:
   RasterMultifile(int Number_tile = 4,
 			bool No_coverage_is_error = true, 
 			int No_coverage_fill_value = -1)
-    : no_coverage_is_error(No_coverage_is_error),
-      no_coverage_fill_value(No_coverage_fill_value),
+    : no_coverage_is_error_(No_coverage_is_error),
+      no_coverage_fill_value_(No_coverage_fill_value),
       tile(Number_tile)
   {
     next_swap = tile.begin();
@@ -192,8 +209,8 @@ protected:
 			bool No_coverage_is_error = true, 
 			int No_coverage_fill_value = -1)
     : RasterImageVariable(M), 
-      no_coverage_is_error(No_coverage_is_error),
-      no_coverage_fill_value(No_coverage_fill_value),
+      no_coverage_is_error_(No_coverage_is_error),
+      no_coverage_fill_value_(No_coverage_fill_value),
       tile(Number_tile)
   {
     next_swap = tile.begin();
@@ -209,13 +226,13 @@ protected:
 /// If true, we throw an error if we try to read an area with no data.
 //-----------------------------------------------------------------------
 
-  bool no_coverage_is_error;
+  bool no_coverage_is_error_;
 
 //-----------------------------------------------------------------------
 /// Fill value to return for areas with no coverage.
 //-----------------------------------------------------------------------
 
-  int no_coverage_fill_value;
+  int no_coverage_fill_value_;
 private:
   mutable RasterMultifileTile mt_scratch;
   RasterMultifileTile& swap(int Line, int Sample) const;

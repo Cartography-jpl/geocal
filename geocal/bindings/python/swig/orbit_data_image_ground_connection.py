@@ -136,8 +136,8 @@ class OrbitDataImageGroundConnection(geocal.image_ground_connection.ImageGroundC
         Camera > &Cam, const boost::shared_ptr< Dem > &D, const
         boost::shared_ptr< RasterImage > &Img, const std::string Title="",
         const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<
-        Refraction >(), bool Include_refraction=false, double Resolution=30,
-        int Band=0, double Max_height=9000)
+        Refraction >(), double Resolution=30, int Band=0, double
+        Max_height=9000)
         Constructor.
 
         You can optionally include a approximate refraction correction, the
@@ -152,76 +152,100 @@ class OrbitDataImageGroundConnection(geocal.image_ground_connection.ImageGroundC
         """
         return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_cf_look_vector(self, *args)
 
-    def _v_orbit_data(self):
+    def _v_orbit_data(self, *args):
         """
-        const boost::shared_ptr<OrbitData>& GeoCal::OrbitDataImageGroundConnection::orbit_data_ptr() const
-        Orbit data that we are using. 
+        void GeoCal::OrbitDataImageGroundConnection::orbit_data(const boost::shared_ptr< OrbitData > &Od)
+        Set orbit data that we are using. 
         """
-        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_orbit_data(self)
+        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_orbit_data(self, *args)
 
     @property
     def orbit_data(self):
         return self._v_orbit_data()
 
-    def _v_camera(self):
+    @orbit_data.setter
+    def orbit_data(self, value):
+      self._v_orbit_data(value)
+
+    def _v_camera(self, *args):
         """
-        const boost::shared_ptr<Camera>& GeoCal::OrbitDataImageGroundConnection::camera_ptr() const
-        Camera that we are using. 
+        void GeoCal::OrbitDataImageGroundConnection::camera(const boost::shared_ptr< Camera > &C)
+        Set Camera that we are using. 
         """
-        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_camera(self)
+        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_camera(self, *args)
 
     @property
     def camera(self):
         return self._v_camera()
 
-    def _v_resolution(self):
+    @camera.setter
+    def camera(self, value):
+      self._v_camera(value)
+
+    def _v_resolution(self, *args):
         """
-        double GeoCal::OrbitDataImageGroundConnection::resolution() const
-        Resolution in meters that we examine Dem out.
+        void GeoCal::OrbitDataImageGroundConnection::resolution(double R)
+        Set resolution in meters that we examine Dem out.
 
         This affects how long ground_coordinate takes to figure out. It should
         be about the resolution of the Dem 
         """
-        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_resolution(self)
+        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_resolution(self, *args)
 
     @property
     def resolution(self):
         return self._v_resolution()
 
-    def _v_refraction(self):
+    @resolution.setter
+    def resolution(self, value):
+      self._v_resolution(value)
+
+    def _v_refraction(self, *args):
         """
-        boost::shared_ptr<Refraction> GeoCal::OrbitDataImageGroundConnection::refraction() const
-        Refraction object we are using.
+        void GeoCal::OrbitDataImageGroundConnection::refraction(const boost::shared_ptr< Refraction > &Ref)
+        Set refraction object we are using.
 
         May be null if we aren't including refraction. 
         """
-        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_refraction(self)
+        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_refraction(self, *args)
 
     @property
     def refraction(self):
         return self._v_refraction()
 
-    def _v_band(self):
+    @refraction.setter
+    def refraction(self, value):
+      self._v_refraction(value)
+
+    def _v_band(self, *args):
         """
-        int GeoCal::OrbitDataImageGroundConnection::band() const
-        Camera band we are using. 
+        void GeoCal::OrbitDataImageGroundConnection::band(int B)
+        Set camera band we are using. 
         """
-        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_band(self)
+        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_band(self, *args)
 
     @property
     def band(self):
         return self._v_band()
 
-    def _v_max_height(self):
+    @band.setter
+    def band(self, value):
+      self._v_band(value)
+
+    def _v_max_height(self, *args):
         """
-        int GeoCal::OrbitDataImageGroundConnection::max_height() const
-        Maximum height that we expect to see in the Dem. 
+        void GeoCal::OrbitDataImageGroundConnection::max_height(double Max_h)
+        Set Maximum height that we expect to see in the Dem. 
         """
-        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_max_height(self)
+        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_max_height(self, *args)
 
     @property
     def max_height(self):
         return self._v_max_height()
+
+    @max_height.setter
+    def max_height(self, value):
+      self._v_max_height(value)
 
     @classmethod
     def pickle_format_version(cls):

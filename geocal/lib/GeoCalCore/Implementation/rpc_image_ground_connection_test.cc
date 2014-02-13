@@ -63,6 +63,10 @@ BOOST_AUTO_TEST_CASE(basic)
   boost::shared_ptr<GroundCoordinate> gcalc = 
     ig.ground_coordinate(ic_expect);
   BOOST_CHECK(distance(*gcalc, g) < 0.1);
+  boost::shared_ptr<GroundCoordinate> gcalc2 = 
+    ig.ground_coordinate_approx_height(ic_expect, 
+				       g.height_reference_surface());
+  BOOST_CHECK(distance(*gcalc2, g) < 0.1);
   ig.rpc().fit_line_numerator[0] = true;
   ig.rpc().fit_line_numerator[2] = true;
   ig.rpc().fit_sample_numerator[0] = true;

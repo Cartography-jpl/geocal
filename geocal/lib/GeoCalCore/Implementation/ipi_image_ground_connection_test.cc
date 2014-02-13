@@ -31,6 +31,12 @@ BOOST_AUTO_TEST_CASE(basic_test)
   ImageCoordinate ic2 = igc.image_coordinate(*gc);
   BOOST_CHECK(fabs(ic2.line - ic.line) < 1.0 / 16);
   BOOST_CHECK(fabs(ic2.sample - ic.sample) < 1.0 / 16);
+  boost::shared_ptr<GroundCoordinate> gc2 = 
+    igc.ground_coordinate_approx_height(ic, 100);
+  ImageCoordinate ic3 = igc.image_coordinate(*gc2);
+  BOOST_CHECK(fabs(ic3.line - ic.line) < 1.0 / 16);
+  BOOST_CHECK(fabs(ic3.sample - ic.sample) < 1.0 / 16);
+  BOOST_CHECK_CLOSE(gc2->height_reference_surface(), 100.0, 1e-2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

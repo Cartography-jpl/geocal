@@ -68,6 +68,13 @@ public:
 			(Ic.sample + 0.5) / magfactor_ - 0.5);
     return ig_->ground_coordinate_dem(ic2, D); 
   }
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
+  { 
+    ImageCoordinate ic2((Ic.line + 0.5) / magfactor_ - 0.5,
+			(Ic.sample + 0.5) / magfactor_ - 0.5);
+    return ig_->ground_coordinate_approx_height(ic2, H); 
+  }
   virtual int number_line() const {return ig_->number_line() * magfactor_; }
   virtual int number_sample() const {return ig_->number_sample() * magfactor_; }
 

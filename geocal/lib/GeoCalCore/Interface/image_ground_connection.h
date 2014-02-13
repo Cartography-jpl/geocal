@@ -121,6 +121,10 @@ public:
   ground_coordinate_dem(const ImageCoordinate& Ic, 
 			const Dem& D) const = 0;
 
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_approx_height(const ImageCoordinate& Ic, 
+				  double H) const;
+
 //-----------------------------------------------------------------------
 /// Underlying image (if present)
 //-----------------------------------------------------------------------
@@ -373,6 +377,12 @@ public:
     return ig_->ground_coordinate_dem(ic2, D); 
   }
 
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
+  { ImageCoordinate ic2(Ic.line - line_offset_, Ic.sample - sample_offset_);
+    return ig_->ground_coordinate_approx_height(ic2, H); 
+  }
+
 //-----------------------------------------------------------------------
 /// Return image coordinate that goes with a particular GroundCoordinate.
 //-----------------------------------------------------------------------
@@ -477,6 +487,10 @@ public:
   ground_coordinate_dem(const ImageCoordinate& Ic, 
 			const Dem& D) const
   { return igc->ground_coordinate_dem(Ic, D); }
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_approx_height(const ImageCoordinate& Ic, 
+				  double H) const
+  { return igc->ground_coordinate_approx_height(Ic, H); }
   const boost::shared_ptr<ImageGroundConnection>& igc_original() const
   { return igc; }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 

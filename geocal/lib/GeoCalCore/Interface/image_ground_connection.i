@@ -82,6 +82,9 @@ public:
     ground_coordinate(const ImageCoordinate& Ic) const;
   virtual boost::shared_ptr<GroundCoordinate> 
     ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const = 0;
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_approx_height(const ImageCoordinate& Ic, 
+				  double H) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const = 0;
   virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) 

@@ -284,6 +284,13 @@ public:
 			(Ic.sample + 0.5) * number_sample_per_pixel_ - 0.5);
     return ig_->ground_coordinate_dem(ic2, D); 
   }
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
+  { 
+    ImageCoordinate ic2((Ic.line + 0.5) * number_line_per_pixel_ - 0.5,
+			(Ic.sample + 0.5) * number_sample_per_pixel_ - 0.5);
+    return ig_->ground_coordinate_approx_height(ic2, H); 
+  }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const
   {
     ImageCoordinate ic = ig_->image_coordinate(Gc);

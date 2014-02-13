@@ -212,10 +212,10 @@ BOOST_AUTO_TEST_CASE(basic_test)
   }
   rpc3.fit_all(line, sample, latitude, longitude, h2);
   for(int i = 0; i < 20; ++i) {
-    BOOST_CHECK_CLOSE(rpc3.line_numerator[i], rpc.line_numerator[i], 0.1);
-    BOOST_CHECK_CLOSE(rpc3.sample_numerator[i], rpc.sample_numerator[i], 0.1);
-    BOOST_CHECK_CLOSE(rpc3.line_denominator[i], rpc.line_denominator[i], 0.1);
-    BOOST_CHECK_CLOSE(rpc3.sample_denominator[i], rpc.sample_denominator[i], 0.1);
+    BOOST_CHECK_CLOSE(rpc3.line_numerator[i], rpc.line_numerator[i], 0.15);
+    BOOST_CHECK_CLOSE(rpc3.sample_numerator[i], rpc.sample_numerator[i], 0.15);
+    BOOST_CHECK_CLOSE(rpc3.line_denominator[i], rpc.line_denominator[i], 0.15);
+    BOOST_CHECK_CLOSE(rpc3.sample_denominator[i], rpc.sample_denominator[i], 0.15);
   }
 
 //-----------------------------------------------------------------------

@@ -67,7 +67,7 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
 	    (ih * 2.0 / Nheight - 1);
 	  ImageCoordinate ic(lnv, smpv);
 	  boost::shared_ptr<GroundCoordinate> 
-	    pt(Igc.ground_coordinate_dem(ic, SimpleDem(hdem)));
+	    pt(Igc.ground_coordinate_approx_height(ic, hdem));
 	  lat.push_back(pt->latitude());
 	  lon.push_back(pt->longitude());
 	  h.push_back(pt->height_reference_surface());
@@ -370,40 +370,44 @@ void Rpc::fit_all(const std::vector<double>& Line,
      Line.size() != Longitude.size() ||
      Line.size() != Height.size())
     throw Exception("Line, Sample, Latitude, Longitude and Height all need to be the same size");
-  Array<double, 1> lhs(Line.size() * 2);
-  Array<double, 2> jac(Line.size() * 2, 78);
-  jac = 0.0;
-  int off = Line.size();
+  Array<double, 1> ln_lhs(Line.size());
+  Array<double, 1> smp_lhs(Line.size());
+  Array<double, 2> ln_jac(Line.size(), 39);
+  Array<double, 2> smp_jac(Line.size(), 39);
+  ln_jac = 0.0;
+  smp_jac = 0.0;
   for(int i = 0; i < (int) Line.size(); ++i) {
     double x = (Latitude[i] - latitude_offset) / latitude_scale;
     double y = (Longitude[i] - longitude_offset) / longitude_scale;
     double z = (Height[i] - height_offset) / height_scale;
-    lhs(i) = (Line[i] - line_offset) / line_scale;
-    lhs(i + off) = (Sample[i] - sample_offset) / sample_scale;
+    ln_lhs(i) = (Line[i] - line_offset) / line_scale;
+    smp_lhs(i) = (Sample[i] - sample_offset) / sample_scale;
     boost::array<double, 20> pjac;
     polynomial_jac(x, y, z, pjac);
     for(int j = 0; j < 20; ++j) {
-      jac(i, j) = pjac[j];
-      jac(i + off, j + 39) = pjac[j];
+      ln_jac(i, j) = pjac[j];
+      smp_jac(i, j) = pjac[j];
     }
     for(int j = 0; j < 19; ++j) {
-      jac(i, j + 20) = -lhs(i) * pjac[j + 1];
-      jac(i + off, j + 39 + 20) = -lhs(i + off) * pjac[j + 1];
+      ln_jac(i, j + 20) = -ln_lhs(i) * pjac[j + 1];
+      smp_jac(i, j + 20) = -smp_lhs(i) * pjac[j + 1];
     }
   }
   GslMatrix cov;
-  GslVector c;
+  GslVector ln_c;
+  GslVector smp_c;
   double chisq;
-  gsl_fit(jac, lhs, c, cov, chisq);
+  gsl_fit(ln_jac, ln_lhs, ln_c, cov, chisq);
+  gsl_fit(smp_jac, smp_lhs, smp_c, cov, chisq);
   for(int i = 0; i < 20; ++i) {
-    line_numerator[i] = c.blitz_array()(i);
-    sample_numerator[i] = c.blitz_array()(i + 39);
+    line_numerator[i] = ln_c.blitz_array()(i);
+    sample_numerator[i] = smp_c.blitz_array()(i);
   }
   line_denominator[0] = 1.0;
   sample_denominator[0] = 1.0;
   for(int i = 0; i < 19; ++i) {
-    line_denominator[i + 1] = c.blitz_array()(i + 20);
-    sample_denominator[i + 1] = c.blitz_array()(i + 39 + 20);
+    line_denominator[i + 1] = ln_c.blitz_array()(i + 20);
+    sample_denominator[i + 1] = smp_c.blitz_array()(i + 20);
   }
 }
 

@@ -27,6 +27,7 @@ public:
     virtual boost::shared_ptr< GeoCal::CartesianFixed > cf_look_vector_pos(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate_dem(GeoCal::ImageCoordinate const &Ic, GeoCal::Dem const &D) const;
+    virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate_approx_height(GeoCal::ImageCoordinate const &Ic, double H) const;
     virtual GeoCal::ImageCoordinate image_coordinate(GeoCal::GroundCoordinate const &Gc) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_ecr(GeoCal::Ecr const &Gc) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_parm(GeoCal::GroundCoordinate const &Gc) const;
@@ -69,7 +70,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[13];
+    mutable swig::SwigVar_PyObject vtable[14];
 #endif
 
 };

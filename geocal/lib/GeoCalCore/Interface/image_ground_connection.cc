@@ -70,6 +70,27 @@ blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_ecr
 }
 
 //-----------------------------------------------------------------------
+/// Return ground coordinate that is nearly the given height above
+/// the reference surface. This is exact in the sense that the
+/// returned point matches the image coordinate (to 
+/// igc.image_coordinate(res) = Ic up to roundoff errors), but it is
+/// approximate in the sense that the height might not be exactly
+/// the supplied height. This is similar to
+/// Ecr::reference_surface_intersect_approximate. A particular
+/// implementation can be much faster than ground_coordinate_dem,
+/// since it doesn't need to do ray tracing.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<GroundCoordinate> 
+ImageGroundConnection::ground_coordinate_approx_height
+(const ImageCoordinate& Ic, 
+ double H) const
+{
+  // Default implementation just uses ground_coordinate_dem
+  return ground_coordinate_dem(Ic, SimpleDem(H));
+}
+
+//-----------------------------------------------------------------------
 /// Calculate the approximate resolution on the ground of a given
 /// ImageCoordinate. This finds the intersection with the
 /// reference surface for the given pixel, + 1 in the

@@ -20,6 +20,10 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_CLOSE(g.latitude(), 0.4234604, 1e-2);
   BOOST_CHECK_CLOSE(g.longitude(), 157.656, 1e-2);
   BOOST_CHECK_CLOSE(g.height_reference_surface(), 100, 1e-2);
+  Geodetic g2(*igc.ground_coordinate_approx_height(ic, 100.0));
+  BOOST_CHECK_CLOSE(g2.latitude(), 0.4234604, 1e-2);
+  BOOST_CHECK_CLOSE(g2.longitude(), 157.656, 1e-2);
+  BOOST_CHECK_CLOSE(g2.height_reference_surface(), 100, 1e-2);
   ImageCoordinate ic_calc = igc.image_coordinate(g);
   BOOST_CHECK_CLOSE(ic_calc.line, ic.line, 1e-2);
   BOOST_CHECK_CLOSE(ic_calc.sample, ic.sample, 1e-2);
@@ -53,6 +57,10 @@ BOOST_AUTO_TEST_CASE(include_refraction)
   BOOST_CHECK_CLOSE(g.latitude(), 0.42379054325268539, 1e-2);
   BOOST_CHECK_CLOSE(g.longitude(), 157.656, 1e-2);
   BOOST_CHECK_CLOSE(g.height_reference_surface(), 100, 1e-2);
+  Geodetic g2(*igc.ground_coordinate_approx_height(ic, 100));
+  BOOST_CHECK_CLOSE(g2.latitude(), 0.42379054325268539, 1e-2);
+  BOOST_CHECK_CLOSE(g2.longitude(), 157.656, 1e-2);
+  BOOST_CHECK_CLOSE(g2.height_reference_surface(), 100, 1e-2);
   ImageCoordinate ic_calc = igc.image_coordinate(g);
   BOOST_CHECK_CLOSE(ic_calc.line, ic.line, 1e-2);
   BOOST_CHECK_CLOSE(ic_calc.sample, ic.sample, 1e-2);

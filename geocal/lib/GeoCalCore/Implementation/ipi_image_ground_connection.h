@@ -51,6 +51,16 @@ public:
     return ipi_->orbit().orbit_data(t)->
       surface_intersect(ipi_->camera(), f, D, res, b, max_h);
   }
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_approx_height(const ImageCoordinate& Ic,
+				  double H) const
+  { 
+    Time t;
+    FrameCoordinate f;
+    ipi_->time_table().time(Ic, t, f);
+    return ipi_->orbit().orbit_data(t)->
+      reference_surface_intersect_approximate(ipi_->camera(), f, b, H);
+  }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const 
   { 

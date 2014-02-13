@@ -64,6 +64,23 @@ public:
        gc_corr_ecr.position[2] - od->position_cf()->position[2]);
     return D.intersect(*od->position_cf(), lv, res, max_h);
   }
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
+  { 
+    boost::shared_ptr<GroundCoordinate> gc_uncorr = 
+      od->reference_surface_intersect_approximate
+      (*cam, FrameCoordinate(Ic.line, Ic.sample), b, H);
+    if(!refraction_)
+      return gc_uncorr;
+    boost::shared_ptr<GroundCoordinate> gc_corr =
+      refraction_->refraction_apply(*od->position_cf(), *gc_uncorr);
+    Ecr gc_corr_ecr(*gc_corr);
+    CartesianFixedLookVector lv
+      (gc_corr_ecr.position[0] - od->position_cf()->position[0],
+       gc_corr_ecr.position[1] - od->position_cf()->position[1],
+       gc_corr_ecr.position[2] - od->position_cf()->position[2]);
+    return od->position_cf()->reference_surface_intersect_approximate(lv, H);
+  }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const 
   { 

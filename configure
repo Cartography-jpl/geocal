@@ -1765,7 +1765,7 @@ Some influential environment variables:
   CXXFLAGS    C++ compiler flags
   CPP         C preprocessor
   CXXCPP      C++ preprocessor
-  DEBUG_FLAGS C++ compiler debugging flags
+  DEBUG_FLAGS Compiler debugging flags
   PKG_CONFIG  path to pkg-config utility
   PKG_CONFIG_PATH
               directories to add to pkg-config's search path
@@ -24304,6 +24304,7 @@ fi
 else
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
+ enable_debug=no
 
 $as_echo "#define BOOST_DISABLE_ASSERTS /**/" >>confdefs.h
 

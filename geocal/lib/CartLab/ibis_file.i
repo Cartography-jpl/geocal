@@ -17,11 +17,20 @@ class IbisFile;
 template<class T> class IbisColumn {
 public:
   const IbisFile& ibis_file() const;
-  int column_index() const;
-  int size_byte() const;
+  %python_attribute(column_index, int)
+  %python_attribute(size_byte, int)
   std::string print_to_string() const;
   std::vector<T> data;
   bool update;
+  %pythoncode {
+def __getitem__(self, i):
+  return self.data[i]
+
+def __setitem__(self, i, v):
+  self.update = True
+  self.data[i] = v
+
+  }
 private:
   IbisColumn(const IbisColumn<T>&);
 };
@@ -75,32 +84,5 @@ public:
     GeoCal::IbisColumn<std::string>& column_string(int I)
     { return $self->column<std::string>(I); }
   }
-#ifdef SWIGPYTHON
-// Provide a simple "column" function that returns a numpy array of
-// data of whatever the underlying type is.
-%pythoncode %{
-def __getitem__(self, index):
-  return self.column(index[1])[index[0]]
-
-def column(self, cindex):
-    '''This return a numpy.array of whatever type the given column is. This
-    reads all the data.'''
-    t = self.column_data_type(cindex)
-    if(t == IbisFile.VICAR_BYTE):
-        return np.array(self.column_byte(cindex).data)
-    elif(t == IbisFile.VICAR_HALF):
-        return np.array(self.column_half(cindex).data)
-    elif(t == IbisFile.VICAR_FULL):
-        return np.array(self.column_full(cindex).data)
-    elif(t == IbisFile.VICAR_FLOAT):
-        return np.array(self.column_float(cindex).data)
-    elif(t == IbisFile.VICAR_DOUBLE):
-        return np.array(self.column_double(cindex).data)
-    elif(t == IbisFile.VICAR_ASCII):
-        return np.array(self.column_string(cindex).data)
-    else:
-        raise "Unrecognized type %d" % t
-%}
-#endif
 };
 }

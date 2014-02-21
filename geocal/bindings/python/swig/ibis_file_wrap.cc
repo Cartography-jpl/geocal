@@ -5718,7 +5718,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_byte_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_byte__v_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< unsigned char > *arg1 = (GeoCal::IbisColumn< unsigned char > *) 0 ;
   void *argp1 = 0 ;
@@ -5730,7 +5730,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_byte_column_index(PyObject *SWIGUNUSEDPARM
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_unsigned_char_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_byte_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< unsigned char > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_byte__v_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< unsigned char > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< unsigned char > * >(argp1);
   {
@@ -5749,7 +5749,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_byte_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_byte__v_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< unsigned char > *arg1 = (GeoCal::IbisColumn< unsigned char > *) 0 ;
   void *argp1 = 0 ;
@@ -5761,7 +5761,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_byte_size_byte(PyObject *SWIGUNUSEDPARM(se
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_unsigned_char_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_byte_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< unsigned char > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_byte__v_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< unsigned char > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< unsigned char > * >(argp1);
   {
@@ -5986,7 +5986,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_half_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_half__v_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< short > *arg1 = (GeoCal::IbisColumn< short > *) 0 ;
   void *argp1 = 0 ;
@@ -5998,7 +5998,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_half_column_index(PyObject *SWIGUNUSEDPARM
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_short_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_half_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< short > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_half__v_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< short > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< short > * >(argp1);
   {
@@ -6017,7 +6017,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_half_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_half__v_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< short > *arg1 = (GeoCal::IbisColumn< short > *) 0 ;
   void *argp1 = 0 ;
@@ -6029,7 +6029,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_half_size_byte(PyObject *SWIGUNUSEDPARM(se
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_short_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_half_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< short > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_half__v_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< short > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< short > * >(argp1);
   {
@@ -6254,7 +6254,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_full_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_full__v_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< int > *arg1 = (GeoCal::IbisColumn< int > *) 0 ;
   void *argp1 = 0 ;
@@ -6266,7 +6266,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_full_column_index(PyObject *SWIGUNUSEDPARM
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_int_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_full_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< int > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_full__v_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< int > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< int > * >(argp1);
   {
@@ -6285,7 +6285,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_full_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_full__v_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< int > *arg1 = (GeoCal::IbisColumn< int > *) 0 ;
   void *argp1 = 0 ;
@@ -6297,7 +6297,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_full_size_byte(PyObject *SWIGUNUSEDPARM(se
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_int_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_full_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< int > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_full__v_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< int > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< int > * >(argp1);
   {
@@ -6522,7 +6522,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_float_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_float__v_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< float > *arg1 = (GeoCal::IbisColumn< float > *) 0 ;
   void *argp1 = 0 ;
@@ -6534,7 +6534,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_float_column_index(PyObject *SWIGUNUSEDPAR
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_float_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_float_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< float > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_float__v_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< float > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< float > * >(argp1);
   {
@@ -6553,7 +6553,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_float_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_float__v_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< float > *arg1 = (GeoCal::IbisColumn< float > *) 0 ;
   void *argp1 = 0 ;
@@ -6565,7 +6565,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_float_size_byte(PyObject *SWIGUNUSEDPARM(s
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_float_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_float_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< float > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_float__v_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< float > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< float > * >(argp1);
   {
@@ -6790,7 +6790,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_double_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_double__v_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< double > *arg1 = (GeoCal::IbisColumn< double > *) 0 ;
   void *argp1 = 0 ;
@@ -6802,7 +6802,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_double_column_index(PyObject *SWIGUNUSEDPA
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_double_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_double_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< double > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_double__v_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< double > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< double > * >(argp1);
   {
@@ -6821,7 +6821,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_double_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_double__v_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< double > *arg1 = (GeoCal::IbisColumn< double > *) 0 ;
   void *argp1 = 0 ;
@@ -6833,7 +6833,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_double_size_byte(PyObject *SWIGUNUSEDPARM(
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_double_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_double_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< double > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_double__v_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< double > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< double > * >(argp1);
   {
@@ -7058,7 +7058,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_string_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_string__v_column_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< std::string > *arg1 = (GeoCal::IbisColumn< std::string > *) 0 ;
   void *argp1 = 0 ;
@@ -7070,7 +7070,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_string_column_index(PyObject *SWIGUNUSEDPA
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_std__string_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_string_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< std::string > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_string__v_column_index" "', argument " "1"" of type '" "GeoCal::IbisColumn< std::string > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< std::string > * >(argp1);
   {
@@ -7089,7 +7089,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IbisColumn_string_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IbisColumn_string__v_size_byte(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisColumn< std::string > *arg1 = (GeoCal::IbisColumn< std::string > *) 0 ;
   void *argp1 = 0 ;
@@ -7101,7 +7101,7 @@ SWIGINTERN PyObject *_wrap_IbisColumn_string_size_byte(PyObject *SWIGUNUSEDPARM(
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__IbisColumnT_std__string_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_string_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< std::string > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisColumn_string__v_size_byte" "', argument " "1"" of type '" "GeoCal::IbisColumn< std::string > const *""'"); 
   }
   arg1 = reinterpret_cast< GeoCal::IbisColumn< std::string > * >(argp1);
   {
@@ -8341,14 +8341,14 @@ static PyMethodDef SwigMethods[] = {
 		"const IbisFile& GeoCal::IbisColumnBase::ibis_file() const\n"
 		"IbisFile that this column is for. \n"
 		""},
-	 { (char *)"IbisColumn_byte_column_index", (PyCFunction)_wrap_IbisColumn_byte_column_index, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_byte__v_column_index", (PyCFunction)_wrap_IbisColumn_byte__v_column_index, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"Column index.\n"
 		"\n"
 		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
 		"\n"
 		""},
-	 { (char *)"IbisColumn_byte_size_byte", (PyCFunction)_wrap_IbisColumn_byte_size_byte, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_byte__v_size_byte", (PyCFunction)_wrap_IbisColumn_byte__v_size_byte, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"Size in bytes of column element.\n"
 		"\n"
@@ -8369,14 +8369,14 @@ static PyMethodDef SwigMethods[] = {
 		"const IbisFile& GeoCal::IbisColumnBase::ibis_file() const\n"
 		"IbisFile that this column is for. \n"
 		""},
-	 { (char *)"IbisColumn_half_column_index", (PyCFunction)_wrap_IbisColumn_half_column_index, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_half__v_column_index", (PyCFunction)_wrap_IbisColumn_half__v_column_index, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"Column index.\n"
 		"\n"
 		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
 		"\n"
 		""},
-	 { (char *)"IbisColumn_half_size_byte", (PyCFunction)_wrap_IbisColumn_half_size_byte, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_half__v_size_byte", (PyCFunction)_wrap_IbisColumn_half__v_size_byte, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"Size in bytes of column element.\n"
 		"\n"
@@ -8397,14 +8397,14 @@ static PyMethodDef SwigMethods[] = {
 		"const IbisFile& GeoCal::IbisColumnBase::ibis_file() const\n"
 		"IbisFile that this column is for. \n"
 		""},
-	 { (char *)"IbisColumn_full_column_index", (PyCFunction)_wrap_IbisColumn_full_column_index, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_full__v_column_index", (PyCFunction)_wrap_IbisColumn_full__v_column_index, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"Column index.\n"
 		"\n"
 		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
 		"\n"
 		""},
-	 { (char *)"IbisColumn_full_size_byte", (PyCFunction)_wrap_IbisColumn_full_size_byte, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_full__v_size_byte", (PyCFunction)_wrap_IbisColumn_full__v_size_byte, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"Size in bytes of column element.\n"
 		"\n"
@@ -8425,14 +8425,14 @@ static PyMethodDef SwigMethods[] = {
 		"const IbisFile& GeoCal::IbisColumnBase::ibis_file() const\n"
 		"IbisFile that this column is for. \n"
 		""},
-	 { (char *)"IbisColumn_float_column_index", (PyCFunction)_wrap_IbisColumn_float_column_index, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_float__v_column_index", (PyCFunction)_wrap_IbisColumn_float__v_column_index, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"Column index.\n"
 		"\n"
 		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
 		"\n"
 		""},
-	 { (char *)"IbisColumn_float_size_byte", (PyCFunction)_wrap_IbisColumn_float_size_byte, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_float__v_size_byte", (PyCFunction)_wrap_IbisColumn_float__v_size_byte, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"Size in bytes of column element.\n"
 		"\n"
@@ -8453,14 +8453,14 @@ static PyMethodDef SwigMethods[] = {
 		"const IbisFile& GeoCal::IbisColumnBase::ibis_file() const\n"
 		"IbisFile that this column is for. \n"
 		""},
-	 { (char *)"IbisColumn_double_column_index", (PyCFunction)_wrap_IbisColumn_double_column_index, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_double__v_column_index", (PyCFunction)_wrap_IbisColumn_double__v_column_index, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"Column index.\n"
 		"\n"
 		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
 		"\n"
 		""},
-	 { (char *)"IbisColumn_double_size_byte", (PyCFunction)_wrap_IbisColumn_double_size_byte, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_double__v_size_byte", (PyCFunction)_wrap_IbisColumn_double__v_size_byte, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"Size in bytes of column element.\n"
 		"\n"
@@ -8481,14 +8481,14 @@ static PyMethodDef SwigMethods[] = {
 		"const IbisFile& GeoCal::IbisColumnBase::ibis_file() const\n"
 		"IbisFile that this column is for. \n"
 		""},
-	 { (char *)"IbisColumn_string_column_index", (PyCFunction)_wrap_IbisColumn_string_column_index, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_string__v_column_index", (PyCFunction)_wrap_IbisColumn_string__v_column_index, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"Column index.\n"
 		"\n"
 		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
 		"\n"
 		""},
-	 { (char *)"IbisColumn_string_size_byte", (PyCFunction)_wrap_IbisColumn_string_size_byte, METH_O, (char *)"\n"
+	 { (char *)"IbisColumn_string__v_size_byte", (PyCFunction)_wrap_IbisColumn_string__v_size_byte, METH_O, (char *)"\n"
 		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"Size in bytes of column element.\n"
 		"\n"

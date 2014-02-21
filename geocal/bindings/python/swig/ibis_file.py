@@ -141,7 +141,7 @@ class IbisColumn_byte(object):
         """
         return _ibis_file.IbisColumn_byte_ibis_file(self)
 
-    def column_index(self):
+    def _v_column_index(self):
         """
         int GeoCal::IbisColumnBase::column_index() const
         Column index.
@@ -149,9 +149,13 @@ class IbisColumn_byte(object):
         This is 0-based rather than the 1-based used by some VICAR routines.
 
         """
-        return _ibis_file.IbisColumn_byte_column_index(self)
+        return _ibis_file.IbisColumn_byte__v_column_index(self)
 
-    def size_byte(self):
+    @property
+    def column_index(self):
+        return self._v_column_index()
+
+    def _v_size_byte(self):
         """
         int GeoCal::IbisColumnBase::size_byte() const
         Size in bytes of column element.
@@ -159,14 +163,26 @@ class IbisColumn_byte(object):
         This is mostly only interesting for the VICAR_ASCII types, since the
         other types are just the size of the underlying type. 
         """
-        return _ibis_file.IbisColumn_byte_size_byte(self)
+        return _ibis_file.IbisColumn_byte__v_size_byte(self)
+
+    @property
+    def size_byte(self):
+        return self._v_size_byte()
 
     data = _swig_property(_ibis_file.IbisColumn_byte_data_get, _ibis_file.IbisColumn_byte_data_set)
     update = _swig_property(_ibis_file.IbisColumn_byte_update_get, _ibis_file.IbisColumn_byte_update_set)
+    def __getitem__(self, i):
+      return self.data[i]
+
+    def __setitem__(self, i, v):
+      self.update = True
+      self.data[i] = v
+
+      
     __swig_destroy__ = _ibis_file.delete_IbisColumn_byte
 IbisColumn_byte.ibis_file = new_instancemethod(_ibis_file.IbisColumn_byte_ibis_file,None,IbisColumn_byte)
-IbisColumn_byte.column_index = new_instancemethod(_ibis_file.IbisColumn_byte_column_index,None,IbisColumn_byte)
-IbisColumn_byte.size_byte = new_instancemethod(_ibis_file.IbisColumn_byte_size_byte,None,IbisColumn_byte)
+IbisColumn_byte._v_column_index = new_instancemethod(_ibis_file.IbisColumn_byte__v_column_index,None,IbisColumn_byte)
+IbisColumn_byte._v_size_byte = new_instancemethod(_ibis_file.IbisColumn_byte__v_size_byte,None,IbisColumn_byte)
 IbisColumn_byte.__str__ = new_instancemethod(_ibis_file.IbisColumn_byte___str__,None,IbisColumn_byte)
 IbisColumn_byte_swigregister = _ibis_file.IbisColumn_byte_swigregister
 IbisColumn_byte_swigregister(IbisColumn_byte)
@@ -191,7 +207,7 @@ class IbisColumn_half(object):
         """
         return _ibis_file.IbisColumn_half_ibis_file(self)
 
-    def column_index(self):
+    def _v_column_index(self):
         """
         int GeoCal::IbisColumnBase::column_index() const
         Column index.
@@ -199,9 +215,13 @@ class IbisColumn_half(object):
         This is 0-based rather than the 1-based used by some VICAR routines.
 
         """
-        return _ibis_file.IbisColumn_half_column_index(self)
+        return _ibis_file.IbisColumn_half__v_column_index(self)
 
-    def size_byte(self):
+    @property
+    def column_index(self):
+        return self._v_column_index()
+
+    def _v_size_byte(self):
         """
         int GeoCal::IbisColumnBase::size_byte() const
         Size in bytes of column element.
@@ -209,14 +229,26 @@ class IbisColumn_half(object):
         This is mostly only interesting for the VICAR_ASCII types, since the
         other types are just the size of the underlying type. 
         """
-        return _ibis_file.IbisColumn_half_size_byte(self)
+        return _ibis_file.IbisColumn_half__v_size_byte(self)
+
+    @property
+    def size_byte(self):
+        return self._v_size_byte()
 
     data = _swig_property(_ibis_file.IbisColumn_half_data_get, _ibis_file.IbisColumn_half_data_set)
     update = _swig_property(_ibis_file.IbisColumn_half_update_get, _ibis_file.IbisColumn_half_update_set)
+    def __getitem__(self, i):
+      return self.data[i]
+
+    def __setitem__(self, i, v):
+      self.update = True
+      self.data[i] = v
+
+      
     __swig_destroy__ = _ibis_file.delete_IbisColumn_half
 IbisColumn_half.ibis_file = new_instancemethod(_ibis_file.IbisColumn_half_ibis_file,None,IbisColumn_half)
-IbisColumn_half.column_index = new_instancemethod(_ibis_file.IbisColumn_half_column_index,None,IbisColumn_half)
-IbisColumn_half.size_byte = new_instancemethod(_ibis_file.IbisColumn_half_size_byte,None,IbisColumn_half)
+IbisColumn_half._v_column_index = new_instancemethod(_ibis_file.IbisColumn_half__v_column_index,None,IbisColumn_half)
+IbisColumn_half._v_size_byte = new_instancemethod(_ibis_file.IbisColumn_half__v_size_byte,None,IbisColumn_half)
 IbisColumn_half.__str__ = new_instancemethod(_ibis_file.IbisColumn_half___str__,None,IbisColumn_half)
 IbisColumn_half_swigregister = _ibis_file.IbisColumn_half_swigregister
 IbisColumn_half_swigregister(IbisColumn_half)
@@ -241,7 +273,7 @@ class IbisColumn_full(object):
         """
         return _ibis_file.IbisColumn_full_ibis_file(self)
 
-    def column_index(self):
+    def _v_column_index(self):
         """
         int GeoCal::IbisColumnBase::column_index() const
         Column index.
@@ -249,9 +281,13 @@ class IbisColumn_full(object):
         This is 0-based rather than the 1-based used by some VICAR routines.
 
         """
-        return _ibis_file.IbisColumn_full_column_index(self)
+        return _ibis_file.IbisColumn_full__v_column_index(self)
 
-    def size_byte(self):
+    @property
+    def column_index(self):
+        return self._v_column_index()
+
+    def _v_size_byte(self):
         """
         int GeoCal::IbisColumnBase::size_byte() const
         Size in bytes of column element.
@@ -259,14 +295,26 @@ class IbisColumn_full(object):
         This is mostly only interesting for the VICAR_ASCII types, since the
         other types are just the size of the underlying type. 
         """
-        return _ibis_file.IbisColumn_full_size_byte(self)
+        return _ibis_file.IbisColumn_full__v_size_byte(self)
+
+    @property
+    def size_byte(self):
+        return self._v_size_byte()
 
     data = _swig_property(_ibis_file.IbisColumn_full_data_get, _ibis_file.IbisColumn_full_data_set)
     update = _swig_property(_ibis_file.IbisColumn_full_update_get, _ibis_file.IbisColumn_full_update_set)
+    def __getitem__(self, i):
+      return self.data[i]
+
+    def __setitem__(self, i, v):
+      self.update = True
+      self.data[i] = v
+
+      
     __swig_destroy__ = _ibis_file.delete_IbisColumn_full
 IbisColumn_full.ibis_file = new_instancemethod(_ibis_file.IbisColumn_full_ibis_file,None,IbisColumn_full)
-IbisColumn_full.column_index = new_instancemethod(_ibis_file.IbisColumn_full_column_index,None,IbisColumn_full)
-IbisColumn_full.size_byte = new_instancemethod(_ibis_file.IbisColumn_full_size_byte,None,IbisColumn_full)
+IbisColumn_full._v_column_index = new_instancemethod(_ibis_file.IbisColumn_full__v_column_index,None,IbisColumn_full)
+IbisColumn_full._v_size_byte = new_instancemethod(_ibis_file.IbisColumn_full__v_size_byte,None,IbisColumn_full)
 IbisColumn_full.__str__ = new_instancemethod(_ibis_file.IbisColumn_full___str__,None,IbisColumn_full)
 IbisColumn_full_swigregister = _ibis_file.IbisColumn_full_swigregister
 IbisColumn_full_swigregister(IbisColumn_full)
@@ -291,7 +339,7 @@ class IbisColumn_float(object):
         """
         return _ibis_file.IbisColumn_float_ibis_file(self)
 
-    def column_index(self):
+    def _v_column_index(self):
         """
         int GeoCal::IbisColumnBase::column_index() const
         Column index.
@@ -299,9 +347,13 @@ class IbisColumn_float(object):
         This is 0-based rather than the 1-based used by some VICAR routines.
 
         """
-        return _ibis_file.IbisColumn_float_column_index(self)
+        return _ibis_file.IbisColumn_float__v_column_index(self)
 
-    def size_byte(self):
+    @property
+    def column_index(self):
+        return self._v_column_index()
+
+    def _v_size_byte(self):
         """
         int GeoCal::IbisColumnBase::size_byte() const
         Size in bytes of column element.
@@ -309,14 +361,26 @@ class IbisColumn_float(object):
         This is mostly only interesting for the VICAR_ASCII types, since the
         other types are just the size of the underlying type. 
         """
-        return _ibis_file.IbisColumn_float_size_byte(self)
+        return _ibis_file.IbisColumn_float__v_size_byte(self)
+
+    @property
+    def size_byte(self):
+        return self._v_size_byte()
 
     data = _swig_property(_ibis_file.IbisColumn_float_data_get, _ibis_file.IbisColumn_float_data_set)
     update = _swig_property(_ibis_file.IbisColumn_float_update_get, _ibis_file.IbisColumn_float_update_set)
+    def __getitem__(self, i):
+      return self.data[i]
+
+    def __setitem__(self, i, v):
+      self.update = True
+      self.data[i] = v
+
+      
     __swig_destroy__ = _ibis_file.delete_IbisColumn_float
 IbisColumn_float.ibis_file = new_instancemethod(_ibis_file.IbisColumn_float_ibis_file,None,IbisColumn_float)
-IbisColumn_float.column_index = new_instancemethod(_ibis_file.IbisColumn_float_column_index,None,IbisColumn_float)
-IbisColumn_float.size_byte = new_instancemethod(_ibis_file.IbisColumn_float_size_byte,None,IbisColumn_float)
+IbisColumn_float._v_column_index = new_instancemethod(_ibis_file.IbisColumn_float__v_column_index,None,IbisColumn_float)
+IbisColumn_float._v_size_byte = new_instancemethod(_ibis_file.IbisColumn_float__v_size_byte,None,IbisColumn_float)
 IbisColumn_float.__str__ = new_instancemethod(_ibis_file.IbisColumn_float___str__,None,IbisColumn_float)
 IbisColumn_float_swigregister = _ibis_file.IbisColumn_float_swigregister
 IbisColumn_float_swigregister(IbisColumn_float)
@@ -341,7 +405,7 @@ class IbisColumn_double(object):
         """
         return _ibis_file.IbisColumn_double_ibis_file(self)
 
-    def column_index(self):
+    def _v_column_index(self):
         """
         int GeoCal::IbisColumnBase::column_index() const
         Column index.
@@ -349,9 +413,13 @@ class IbisColumn_double(object):
         This is 0-based rather than the 1-based used by some VICAR routines.
 
         """
-        return _ibis_file.IbisColumn_double_column_index(self)
+        return _ibis_file.IbisColumn_double__v_column_index(self)
 
-    def size_byte(self):
+    @property
+    def column_index(self):
+        return self._v_column_index()
+
+    def _v_size_byte(self):
         """
         int GeoCal::IbisColumnBase::size_byte() const
         Size in bytes of column element.
@@ -359,14 +427,26 @@ class IbisColumn_double(object):
         This is mostly only interesting for the VICAR_ASCII types, since the
         other types are just the size of the underlying type. 
         """
-        return _ibis_file.IbisColumn_double_size_byte(self)
+        return _ibis_file.IbisColumn_double__v_size_byte(self)
+
+    @property
+    def size_byte(self):
+        return self._v_size_byte()
 
     data = _swig_property(_ibis_file.IbisColumn_double_data_get, _ibis_file.IbisColumn_double_data_set)
     update = _swig_property(_ibis_file.IbisColumn_double_update_get, _ibis_file.IbisColumn_double_update_set)
+    def __getitem__(self, i):
+      return self.data[i]
+
+    def __setitem__(self, i, v):
+      self.update = True
+      self.data[i] = v
+
+      
     __swig_destroy__ = _ibis_file.delete_IbisColumn_double
 IbisColumn_double.ibis_file = new_instancemethod(_ibis_file.IbisColumn_double_ibis_file,None,IbisColumn_double)
-IbisColumn_double.column_index = new_instancemethod(_ibis_file.IbisColumn_double_column_index,None,IbisColumn_double)
-IbisColumn_double.size_byte = new_instancemethod(_ibis_file.IbisColumn_double_size_byte,None,IbisColumn_double)
+IbisColumn_double._v_column_index = new_instancemethod(_ibis_file.IbisColumn_double__v_column_index,None,IbisColumn_double)
+IbisColumn_double._v_size_byte = new_instancemethod(_ibis_file.IbisColumn_double__v_size_byte,None,IbisColumn_double)
 IbisColumn_double.__str__ = new_instancemethod(_ibis_file.IbisColumn_double___str__,None,IbisColumn_double)
 IbisColumn_double_swigregister = _ibis_file.IbisColumn_double_swigregister
 IbisColumn_double_swigregister(IbisColumn_double)
@@ -391,7 +471,7 @@ class IbisColumn_string(object):
         """
         return _ibis_file.IbisColumn_string_ibis_file(self)
 
-    def column_index(self):
+    def _v_column_index(self):
         """
         int GeoCal::IbisColumnBase::column_index() const
         Column index.
@@ -399,9 +479,13 @@ class IbisColumn_string(object):
         This is 0-based rather than the 1-based used by some VICAR routines.
 
         """
-        return _ibis_file.IbisColumn_string_column_index(self)
+        return _ibis_file.IbisColumn_string__v_column_index(self)
 
-    def size_byte(self):
+    @property
+    def column_index(self):
+        return self._v_column_index()
+
+    def _v_size_byte(self):
         """
         int GeoCal::IbisColumnBase::size_byte() const
         Size in bytes of column element.
@@ -409,14 +493,26 @@ class IbisColumn_string(object):
         This is mostly only interesting for the VICAR_ASCII types, since the
         other types are just the size of the underlying type. 
         """
-        return _ibis_file.IbisColumn_string_size_byte(self)
+        return _ibis_file.IbisColumn_string__v_size_byte(self)
+
+    @property
+    def size_byte(self):
+        return self._v_size_byte()
 
     data = _swig_property(_ibis_file.IbisColumn_string_data_get, _ibis_file.IbisColumn_string_data_set)
     update = _swig_property(_ibis_file.IbisColumn_string_update_get, _ibis_file.IbisColumn_string_update_set)
+    def __getitem__(self, i):
+      return self.data[i]
+
+    def __setitem__(self, i, v):
+      self.update = True
+      self.data[i] = v
+
+      
     __swig_destroy__ = _ibis_file.delete_IbisColumn_string
 IbisColumn_string.ibis_file = new_instancemethod(_ibis_file.IbisColumn_string_ibis_file,None,IbisColumn_string)
-IbisColumn_string.column_index = new_instancemethod(_ibis_file.IbisColumn_string_column_index,None,IbisColumn_string)
-IbisColumn_string.size_byte = new_instancemethod(_ibis_file.IbisColumn_string_size_byte,None,IbisColumn_string)
+IbisColumn_string._v_column_index = new_instancemethod(_ibis_file.IbisColumn_string__v_column_index,None,IbisColumn_string)
+IbisColumn_string._v_size_byte = new_instancemethod(_ibis_file.IbisColumn_string__v_size_byte,None,IbisColumn_string)
 IbisColumn_string.__str__ = new_instancemethod(_ibis_file.IbisColumn_string___str__,None,IbisColumn_string)
 IbisColumn_string_swigregister = _ibis_file.IbisColumn_string_swigregister
 IbisColumn_string_swigregister(IbisColumn_string)
@@ -570,28 +666,6 @@ class IbisFile(geocal.generic_object.GenericObject):
 
     def __reduce__(self):
       return _new_from_init, (self.__class__, 1, self.file_name,self.access)
-
-    def __getitem__(self, index):
-      return self.column(index[1])[index[0]]
-
-    def column(self, cindex):
-        '''This return a numpy.array of whatever type the given column is. This
-        reads all the data.'''
-        t = self.column_data_type(cindex)
-        if(t == IbisFile.VICAR_BYTE):
-            return np.array(self.column_byte(cindex).data)
-        elif(t == IbisFile.VICAR_HALF):
-            return np.array(self.column_half(cindex).data)
-        elif(t == IbisFile.VICAR_FULL):
-            return np.array(self.column_full(cindex).data)
-        elif(t == IbisFile.VICAR_FLOAT):
-            return np.array(self.column_float(cindex).data)
-        elif(t == IbisFile.VICAR_DOUBLE):
-            return np.array(self.column_double(cindex).data)
-        elif(t == IbisFile.VICAR_ASCII):
-            return np.array(self.column_string(cindex).data)
-        else:
-            raise "Unrecognized type %d" % t
 
     __swig_destroy__ = _ibis_file.delete_IbisFile
 IbisFile._v_access = new_instancemethod(_ibis_file.IbisFile__v_access,None,IbisFile)

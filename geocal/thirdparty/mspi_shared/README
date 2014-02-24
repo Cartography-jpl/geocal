@@ -1,6 +1,0 @@
-This is the MSPI-Shared code. We just copied out all the .h and .cc file.
-
-The version this comes from is r394.
-
-We may change this at some point to have this built externally, but for now
-we'll just put everything here to make it easier to build.

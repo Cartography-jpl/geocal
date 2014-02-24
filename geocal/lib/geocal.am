@@ -14,16 +14,6 @@ EXTRA_DIST+= @libgeocal@/swig_type_mapper.h
 EXTRA_DIST += @libgeocal@/dummy.pdf
 EXTRA_DIST += @libgeocal@/geocal_doxygen.h
 
-include afids_python/geocal/lib/GeoCalCore/geocal_core.am
-include afids_python/geocal/lib/CartLab/cart_lab.am
-include afids_python/geocal/lib/Misr/misr.am
-if HAVE_GTKGOO
-include afids_python/geocal/lib/Gtk/gtk.am
-endif
-if HAVE_MSPI
-include afids_python/geocal/lib/Mspi/mspi.am
-endif
-
 # Allow fils to be include in other directories
 AM_CPPFLAGS+= -I$(srcdir)/@libgeocal@
 

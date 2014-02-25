@@ -635,8 +635,21 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
-BUILD_AFIDS_PYTHON_FALSE
-BUILD_AFIDS_PYTHON_TRUE
+WITH_AFIDS_A_FALSE
+WITH_AFIDS_A_TRUE
+WITH_DOCUMENTATION_FALSE
+WITH_DOCUMENTATION_TRUE
+LIBM
+IS_MAC64_FALSE
+IS_MAC64_TRUE
+IS_MAC_FALSE
+IS_MAC_TRUE
+SWIG_PYTHON_CPPFLAGS
+SWIG_PYTHON_OPT
+HAVE_SWIG_FALSE
+HAVE_SWIG_TRUE
+SWIG_LIB
+SWIG
 installafidspythondir
 afidspythonvdevdir
 geocalpkgpyexecdir
@@ -644,12 +657,8 @@ geocalpkgpythondir
 afidspkgpythondir
 pythondocdir
 srcraw
-srcmspishared
 srcsdbx
 srcpythonscript
-srcgtk
-srcmspi
-srcmisr
 srccartlab
 srcinterface
 srcsupport
@@ -664,23 +673,6 @@ srcpythonbin
 srcpythonlib
 srcpython
 libgeocal
-WITH_AFIDS_A_FALSE
-WITH_AFIDS_A_TRUE
-WITH_DOCUMENTATION_FALSE
-WITH_DOCUMENTATION_TRUE
-HAVE_GTKGOO_FALSE
-HAVE_GTKGOO_TRUE
-LIBM
-IS_MAC64_FALSE
-IS_MAC64_TRUE
-IS_MAC_FALSE
-IS_MAC_TRUE
-SWIG_PYTHON_CPPFLAGS
-SWIG_PYTHON_OPT
-HAVE_SWIG_FALSE
-HAVE_SWIG_TRUE
-SWIG_LIB
-SWIG
 BUILD_PYTHON_FALSE
 BUILD_PYTHON_TRUE
 SPHINXBUILD
@@ -705,28 +697,6 @@ BUILD_CARTO_TRUE
 CARTO_BUILD_DEPEND
 CARTO_LIBS
 CARTO_CFLAGS
-BUILD_HDFEOS5_FALSE
-BUILD_HDFEOS5_TRUE
-HAVE_HDFEOS5_FALSE
-HAVE_HDFEOS5_TRUE
-HDFEOS5_LIBS
-HDFEOS5_CFLAGS
-BUILD_HDFEOS_FALSE
-BUILD_HDFEOS_TRUE
-HAVE_HDFEOS_FALSE
-HAVE_HDFEOS_TRUE
-HDFEOS_LIBS
-HDFEOS_CFLAGS
-BUILD_HDF4_FALSE
-BUILD_HDF4_TRUE
-HAVE_HDF4_FALSE
-HAVE_HDF4_TRUE
-HDF4_LIBS
-HDF4_CFLAGS
-HAVE_MSPI_FALSE
-HAVE_MSPI_TRUE
-BUILD_MSPI_FALSE
-BUILD_MSPI_TRUE
 HAVE_AFIDS_FALSE
 HAVE_AFIDS_TRUE
 AFIDS_PREFIX
@@ -888,7 +858,6 @@ am__isrc
 INSTALL_DATA
 INSTALL_SCRIPT
 INSTALL_PROGRAM
-ifGNUmake
 HAVE_CSH
 HAVE_PATCH
 HAVE_PERL
@@ -985,9 +954,6 @@ with_geos
 with_ogdi
 with_vicar_gdalplugin
 with_afids
-with_hdfeos
-with_hdf4
-with_hdfeos5
 with_carto
 with_python
 with_swig
@@ -1034,12 +1000,6 @@ GEOS_CFLAGS
 GEOS_LIBS
 OGDI_CFLAGS
 OGDI_LIBS
-HDF4_CFLAGS
-HDF4_LIBS
-HDFEOS_CFLAGS
-HDFEOS_LIBS
-HDFEOS5_CFLAGS
-HDFEOS5_LIBS
 CARTO_CFLAGS
 CARTO_LIBS
 PYTHON
@@ -1722,14 +1682,6 @@ Optional Packages:
                           GDAL Plugin (optional).
   --with-afids[=DIR]      use AFIDS (default is yes if found) - it is possible
                           to specify the root directory for AFIDS (optional).
-  --with-hdfeos[=DIR]     use Hdfeos library (default is yes if found) - it is
-                          possible to specify the root directory for Hdfeos
-                          library (optional).
-  --with-hdf4[=DIR]       use HDF 4 (default is yes if found) - it is possible
-                          to specify the root directory for HDF 4 (optional).
-  --with-hdfeos5[=DIR]    use Hdfeos5 library (default is yes if found) - it
-                          is possible to specify the root directory for
-                          Hdfeos5 library (optional).
   --with-carto[=DIR]      use Carto (default is yes if found) - it is possible
                           to specify the root directory for Carto (optional).
   --with-python[=DIR]     use Python (default is yes if found) - it is
@@ -1798,15 +1750,6 @@ Some influential environment variables:
   GEOS_LIBS   linker flags for GEOS, overriding pkg-config
   OGDI_CFLAGS C compiler flags for OGDI, overriding pkg-config
   OGDI_LIBS   linker flags for OGDI, overriding pkg-config
-  HDF4_CFLAGS C compiler flags for HDF4, overriding pkg-config
-  HDF4_LIBS   linker flags for HDF4, overriding pkg-config
-  HDFEOS_CFLAGS
-              C compiler flags for HDFEOS, overriding pkg-config
-  HDFEOS_LIBS linker flags for HDFEOS, overriding pkg-config
-  HDFEOS5_CFLAGS
-              C compiler flags for HDFEOS5, overriding pkg-config
-  HDFEOS5_LIBS
-              linker flags for HDFEOS5, overriding pkg-config
   CARTO_CFLAGS
               C compiler flags for CARTO, overriding pkg-config
   CARTO_LIBS  linker flags for CARTO, overriding pkg-config
@@ -2919,9 +2862,14 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 
 
 
-ac_config_files="$ac_config_files afids_python/script/setup_afids_python.csh afids_python/script/setup_afids_python.sh"
+ac_config_files="$ac_config_files script/setup_afids_python.csh script/setup_afids_python.sh"
 
-ac_config_files="$ac_config_files afids_python/geocal/lib/GeoCalCore/Support/global_fixture_default.cc"
+ac_config_files="$ac_config_files geocal/lib/GeoCalCore/Support/global_fixture_default.cc"
+
+# We have the top directory for GeoCal as a variable. This allows the
+# full AFIDS system to include this in a subdirectory. For this standalone
+# build, this is just "." relative to srcdir.
+geocal_topdir=.
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
@@ -9404,32 +9352,7 @@ if test "$HAVE_CSH" = "no"; then
 fi
 
 # We use a few GNU make specific things, so make sure we have gnu make
- { $as_echo "$as_me:${as_lineno-$LINENO}: checking for GNU make" >&5
-$as_echo_n "checking for GNU make... " >&6; }
-if ${_cv_gnu_make_command+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  _cv_gnu_make_command='' ;
-                for a in "$MAKE" make gmake gnumake ; do
-                        if test -z "$a" ; then continue ; fi ;
-                        if  ( sh -c "$a --version" 2> /dev/null | grep GNU  2>&1 > /dev/null ) ;  then
-                                _cv_gnu_make_command=$a ;
-                                break;
-                        fi
-                done ;
-
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $_cv_gnu_make_command" >&5
-$as_echo "$_cv_gnu_make_command" >&6; } ;
-        if test  "x$_cv_gnu_make_command" != "x"  ; then
-                ifGNUmake='' ;
-        else
-                ifGNUmake='#' ;
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: \"Not found\"" >&5
-$as_echo "\"Not found\"" >&6; };
-        fi
-
-
+AX_CHECK_GNU_MAKE()
 if test "$_cv_gnu_make_command" = "" ; then
    as_fn_error $? "Could not find a gnu version of make" "$LINENO" 5;
 fi
@@ -27140,1256 +27063,6 @@ fi
 
 
 #=================================================================
-# Right now, always include MSPI. We may make this optional later
-
-# Not actually ready for this, so turn off for now
-#with_mspi=yes
-with_mspi=no
- if  test x$with_mspi = xyes ; then
-  BUILD_MSPI_TRUE=
-  BUILD_MSPI_FALSE='#'
-else
-  BUILD_MSPI_TRUE='#'
-  BUILD_MSPI_FALSE=
-fi
-
- if  test x$with_mspi = xyes ; then
-  HAVE_MSPI_TRUE=
-  HAVE_MSPI_FALSE='#'
-else
-  HAVE_MSPI_TRUE='#'
-  HAVE_MSPI_FALSE=
-fi
-
-
-#=================================================================
-# Libraries needed by MSPI.
-if test x$with_mspi = xyes; then
-
-
-have_hdfeos="no"
-build_hdfeos="no"
-
-# Check whether --with-hdfeos was given.
-if test "${with_hdfeos+set}" = set; then :
-  withval=$with_hdfeos;
-    if test "$withval" = "no"; then
-        want_hdfeos="no"
-    elif test "$withval" = "yes"; then
-        want_hdfeos="yes"
-        ac_hdfeos_path=""
-    elif test "$withval" = "build"; then
-        if test "cannot_build" != "can_build"; then
-            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-hdfeos" "$LINENO" 5
-        fi
-        want_hdfeos="yes"
-        build_hdfeos="yes"
-        if test "x$prefix" = xNONE; then
-           ac_hdfeos_path="$ac_default_prefix"
-        else
-           ac_hdfeos_path="$prefix"
-        fi
-    else
-        want_hdfeos="yes"
-        ac_hdfeos_path="$withval"
-    fi
-
-else
-
-    want_hdfeos="yes"
-    if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
-        want_hdfeos="yes"
-        build_hdfeos="yes"
-        if test "x$prefix" = xNONE; then
-           ac_hdfeos_path="$ac_default_prefix"
-        else
-           ac_hdfeos_path="$prefix"
-        fi
-      fi
-    fi
-
-fi
-
-
-if test "x$want_hdfeos" = "xyes"; then
-
-
-have_hdf4="no"
-build_hdf4="no"
-
-# Check whether --with-hdf4 was given.
-if test "${with_hdf4+set}" = set; then :
-  withval=$with_hdf4;
-    if test "$withval" = "no"; then
-        want_hdf4="no"
-    elif test "$withval" = "yes"; then
-        want_hdf4="yes"
-        ac_hdf4_path=""
-    elif test "$withval" = "build"; then
-        if test "cannot_build" != "can_build"; then
-            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-hdf4" "$LINENO" 5
-        fi
-        want_hdf4="yes"
-        build_hdf4="yes"
-        if test "x$prefix" = xNONE; then
-           ac_hdf4_path="$ac_default_prefix"
-        else
-           ac_hdf4_path="$prefix"
-        fi
-    else
-        want_hdf4="yes"
-        ac_hdf4_path="$withval"
-    fi
-
-else
-
-    want_hdf4="yes"
-    if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
-        want_hdf4="yes"
-        build_hdf4="yes"
-        if test "x$prefix" = xNONE; then
-           ac_hdf4_path="$ac_default_prefix"
-        else
-           ac_hdf4_path="$prefix"
-        fi
-      fi
-    fi
-
-fi
-
-
-if test "x$want_hdf4" = "xyes"; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDF4 library" >&5
-$as_echo_n "checking for HDF4 library... " >&6; }
-        succeeded=no
-        if test "$ac_hdf4_path" != ""; then
-            HDF4HOME=$ac_hdf4_path
-            HDF4_LIBS="-L$ac_hdf4_path/lib -lmfhdf -ldf"
-            HDF4_CFLAGS="-I$ac_hdf4_path/include"
-            succeeded=yes
-        else
-            # Hdf headers go into a couple of places depending on how
-            # they were installed. First check the various include directories,
-            # and then check include/hdf directories
-
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDF4" >&5
-$as_echo_n "checking for HDF4... " >&6; }
-
-if test -n "$HDF4_CFLAGS"; then
-    pkg_cv_HDF4_CFLAGS="$HDF4_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf4\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdf4") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDF4_CFLAGS=`$PKG_CONFIG --cflags "hdf4" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$HDF4_LIBS"; then
-    pkg_cv_HDF4_LIBS="$HDF4_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf4\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdf4") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDF4_LIBS=`$PKG_CONFIG --libs "hdf4" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        HDF4_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdf4" 2>&1`
-        else
-	        HDF4_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdf4" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDF4_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	HDF4_CFLAGS=$pkg_cv_HDF4_CFLAGS
-	HDF4_LIBS=$pkg_cv_HDF4_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
-  if test "$succeeded" = "yes"; then
-     HDF4_PREFIX=`$PKG_CONFIG --variable=prefix "hdf4" 2>/dev/null`
-  fi
-  if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
-       if test -e "$ac_path_tmp/include/hdf.h" && test -r "$ac_path_tmp/include/hdf.h"; then
-          HDF4_PREFIX=$ac_path_tmp
-          HDF4_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libmfhdf.la"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lmfhdf -ldf"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libmfhdf.so"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lmfhdf -ldf"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libmfhdf.dylib"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lmfhdf -ldf"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libmfhdf.la"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lmfhdf -ldf"
-              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libmfhdf.so"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lmfhdf -ldf"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libmfhdf.dylib"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lmfhdf -ldf"
-             succeeded=yes
-             break;
-          fi
-       fi
-     done
-  fi
-
-            if test "$succeeded" != "yes" ; then
-
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDF4" >&5
-$as_echo_n "checking for HDF4... " >&6; }
-
-if test -n "$HDF4_CFLAGS"; then
-    pkg_cv_HDF4_CFLAGS="$HDF4_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf4\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdf4") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDF4_CFLAGS=`$PKG_CONFIG --cflags "hdf4" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$HDF4_LIBS"; then
-    pkg_cv_HDF4_LIBS="$HDF4_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf4\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdf4") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDF4_LIBS=`$PKG_CONFIG --libs "hdf4" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        HDF4_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdf4" 2>&1`
-        else
-	        HDF4_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdf4" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDF4_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	HDF4_CFLAGS=$pkg_cv_HDF4_CFLAGS
-	HDF4_LIBS=$pkg_cv_HDF4_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
-  if test "$succeeded" = "yes"; then
-     HDF4_PREFIX=`$PKG_CONFIG --variable=prefix "hdf4" 2>/dev/null`
-  fi
-  if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
-       if test -e "$ac_path_tmp/include/hdf/hdf.h" && test -r "$ac_path_tmp/include/hdf/hdf.h"; then
-          HDF4_PREFIX=$ac_path_tmp
-          HDF4_CFLAGS="-I$ac_path_tmp/include/hdf/"
-          if test -e "$ac_path_tmp/lib/hdf/libmfhdf.la"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib/hdf/ -L$ac_path_tmp/lib/hdf/ -lmfhdf -ldf"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/hdf/libmfhdf.so"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib/hdf/ -L$ac_path_tmp/lib/hdf/ -lmfhdf -ldf"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/hdf/libmfhdf.dylib"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib/hdf/ -L$ac_path_tmp/lib/hdf/ -lmfhdf -ldf"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/hdf/libmfhdf.la"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib64/hdf/ -L$ac_path_tmp/lib64/hdf/ -lmfhdf -ldf"
-              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/hdf/libmfhdf.so"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib64/hdf/ -L$ac_path_tmp/lib64/hdf/ -lmfhdf -ldf"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/hdf/libmfhdf.dylib"; then
-             HDF4_LIBS="-R$ac_path_tmp/lib64/hdf/ -L$ac_path_tmp/lib64/hdf/ -lmfhdf -ldf"
-             succeeded=yes
-             break;
-          fi
-       fi
-     done
-  fi
-
-            fi
-        fi
-
-        if test "$succeeded" != "yes" ; then
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-        else
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-
-
-
-$as_echo "#define HAVE_HDF4 /**/" >>confdefs.h
-
-                have_hdf4="yes"
-        fi
-fi
- if test "$have_hdf4" = "yes"; then
-  HAVE_HDF4_TRUE=
-  HAVE_HDF4_FALSE='#'
-else
-  HAVE_HDF4_TRUE='#'
-  HAVE_HDF4_FALSE=
-fi
-
- if test "$build_hdf4" = "yes"; then
-  BUILD_HDF4_TRUE=
-  BUILD_HDF4_FALSE='#'
-else
-  BUILD_HDF4_TRUE='#'
-  BUILD_HDF4_FALSE=
-fi
-
-
-
-if test "required" = "required"; then
-  if test "$have_hdf4" = "no"; then
-     as_fn_error $? "
-The HDF 4 library is required by AFIDS. Try specifying
-location using --with-hdf4 if configure could't find the
-library. " "$LINENO" 5
-  fi
-fi
-
-
-
-        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Hdfeos library" >&5
-$as_echo_n "checking for Hdfeos library... " >&6; }
-        succeeded=no
-        if test "$build_hdfeos" == "yes"; then
-            HDFEOS_LIBS="libhdfeos.la"
-            HDFEOS_CFLAGS="-I$srcdir/hdfeos/external/HDF-EOS/v2.14/include"
-            succeeded=yes
-        elif test "$ac_hdfeos_path" != ""; then
-            HDFEOS_LIBS="-R$ac_hdfeos_path/lib -L$ac_hdfeos_path/lib -lhdfeos $(VICAR_RTL_LIBS) $(GSL_LIBS)"
-            HDFEOS_CFLAGS="-I$ac_hdfeos_path/include/hdfeos"
-            succeeded=yes
-        else
-
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDFEOS" >&5
-$as_echo_n "checking for HDFEOS... " >&6; }
-
-if test -n "$HDFEOS_CFLAGS"; then
-    pkg_cv_HDFEOS_CFLAGS="$HDFEOS_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdfeos") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDFEOS_CFLAGS=`$PKG_CONFIG --cflags "hdfeos" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$HDFEOS_LIBS"; then
-    pkg_cv_HDFEOS_LIBS="$HDFEOS_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdfeos") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDFEOS_LIBS=`$PKG_CONFIG --libs "hdfeos" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        HDFEOS_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdfeos" 2>&1`
-        else
-	        HDFEOS_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdfeos" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDFEOS_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	HDFEOS_CFLAGS=$pkg_cv_HDFEOS_CFLAGS
-	HDFEOS_LIBS=$pkg_cv_HDFEOS_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
-  if test "$succeeded" = "yes"; then
-     HDFEOS_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos" 2>/dev/null`
-  fi
-  if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
-       if test -e "$ac_path_tmp/include/hdfeos/HdfEosDef.h" && test -r "$ac_path_tmp/include/hdfeos/HdfEosDef.h"; then
-          HDFEOS_PREFIX=$ac_path_tmp
-          HDFEOS_CFLAGS="-I$ac_path_tmp/include/hdfeos/"
-          if test -e "$ac_path_tmp/lib/libhdfeos.la"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhdfeos.so"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhdfeos.dylib"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhdfeos.la"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdfeos"
-              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhdfeos.so"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhdfeos.dylib"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdfeos"
-             succeeded=yes
-             break;
-          fi
-       fi
-     done
-  fi
-
-            if test "$succeeded" != "yes" ; then
-
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDFEOS" >&5
-$as_echo_n "checking for HDFEOS... " >&6; }
-
-if test -n "$HDFEOS_CFLAGS"; then
-    pkg_cv_HDFEOS_CFLAGS="$HDFEOS_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdfeos") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDFEOS_CFLAGS=`$PKG_CONFIG --cflags "hdfeos" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$HDFEOS_LIBS"; then
-    pkg_cv_HDFEOS_LIBS="$HDFEOS_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdfeos") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDFEOS_LIBS=`$PKG_CONFIG --libs "hdfeos" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        HDFEOS_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdfeos" 2>&1`
-        else
-	        HDFEOS_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdfeos" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDFEOS_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	HDFEOS_CFLAGS=$pkg_cv_HDFEOS_CFLAGS
-	HDFEOS_LIBS=$pkg_cv_HDFEOS_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
-  if test "$succeeded" = "yes"; then
-     HDFEOS_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos" 2>/dev/null`
-  fi
-  if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
-       if test -e "$ac_path_tmp/include/HdfEosDef.h" && test -r "$ac_path_tmp/include/HdfEosDef.h"; then
-          HDFEOS_PREFIX=$ac_path_tmp
-          HDFEOS_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libhdfeos.la"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhdfeos.so"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhdfeos.dylib"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhdfeos.la"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdfeos"
-              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhdfeos.so"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhdfeos.dylib"; then
-             HDFEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdfeos"
-             succeeded=yes
-             break;
-          fi
-       fi
-     done
-  fi
-
-            fi
-        fi
-
-        if test "$succeeded" != "yes" ; then
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-        else
-                HDFEOS_CFLAGS="$HDFEOS_CFLAGS $HDF4_CFLAGS"
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-
-
-                have_hdfeos="yes"
-        fi
-fi
- if test "$have_hdfeos" = "yes"; then
-  HAVE_HDFEOS_TRUE=
-  HAVE_HDFEOS_FALSE='#'
-else
-  HAVE_HDFEOS_TRUE='#'
-  HAVE_HDFEOS_FALSE=
-fi
-
- if test "$build_hdfeos" = "yes"; then
-  BUILD_HDFEOS_TRUE=
-  BUILD_HDFEOS_FALSE='#'
-else
-  BUILD_HDFEOS_TRUE='#'
-  BUILD_HDFEOS_FALSE=
-fi
-
-
-
-if test "required" = "required"; then
-  if test "$have_hdfeos" = "no"; then
-     as_fn_error $? "
-The Hdfeos library library is required by AFIDS. Try specifying
-location using --with-hdfeos if configure could't find the
-library. " "$LINENO" 5
-  fi
-fi
-
-
-
-
-
-have_hdfeos5="no"
-build_hdfeos5="no"
-
-# Check whether --with-hdfeos5 was given.
-if test "${with_hdfeos5+set}" = set; then :
-  withval=$with_hdfeos5;
-    if test "$withval" = "no"; then
-        want_hdfeos5="no"
-    elif test "$withval" = "yes"; then
-        want_hdfeos5="yes"
-        ac_hdfeos5_path=""
-    elif test "$withval" = "build"; then
-        if test "cannot_build" != "can_build"; then
-            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-hdfeos5" "$LINENO" 5
-        fi
-        want_hdfeos5="yes"
-        build_hdfeos5="yes"
-        if test "x$prefix" = xNONE; then
-           ac_hdfeos5_path="$ac_default_prefix"
-        else
-           ac_hdfeos5_path="$prefix"
-        fi
-    else
-        want_hdfeos5="yes"
-        ac_hdfeos5_path="$withval"
-    fi
-
-else
-
-    want_hdfeos5="yes"
-    if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
-        want_hdfeos5="yes"
-        build_hdfeos5="yes"
-        if test "x$prefix" = xNONE; then
-           ac_hdfeos5_path="$ac_default_prefix"
-        else
-           ac_hdfeos5_path="$prefix"
-        fi
-      fi
-    fi
-
-fi
-
-
-if test "x$want_hdfeos5" = "xyes"; then
-
-
-have_hdf5="no"
-build_hdf5="no"
-
-# Check whether --with-hdf5 was given.
-if test "${with_hdf5+set}" = set; then :
-  withval=$with_hdf5;
-    if test "$withval" = "no"; then
-        want_hdf5="no"
-    elif test "$withval" = "yes"; then
-        want_hdf5="yes"
-        ac_hdf5_path=""
-    elif test "$withval" = "build"; then
-        if test "cannot_build" != "can_build"; then
-            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-hdf5" "$LINENO" 5
-        fi
-        want_hdf5="yes"
-        build_hdf5="yes"
-        if test "x$prefix" = xNONE; then
-           ac_hdf5_path="$ac_default_prefix"
-        else
-           ac_hdf5_path="$prefix"
-        fi
-    else
-        want_hdf5="yes"
-        ac_hdf5_path="$withval"
-    fi
-
-else
-
-    want_hdf5="yes"
-    if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
-        want_hdf5="yes"
-        build_hdf5="yes"
-        if test "x$prefix" = xNONE; then
-           ac_hdf5_path="$ac_default_prefix"
-        else
-           ac_hdf5_path="$prefix"
-        fi
-      fi
-    fi
-
-fi
-
-
-
-if test "x$want_hdf5" = "xyes"; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDF5 library" >&5
-$as_echo_n "checking for HDF5 library... " >&6; }
-        succeeded=no
-        if test "$ac_hdf5_path" != ""; then
-            HDF5HOME=$ac_hdf5_path
-            HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5_hl.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
-            HDF5_CFLAGS="-I$ac_hdf5_path/include"
-            succeeded=yes
-        else
-
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDF5" >&5
-$as_echo_n "checking for HDF5... " >&6; }
-
-if test -n "$HDF5_CFLAGS"; then
-    pkg_cv_HDF5_CFLAGS="$HDF5_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf5\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdf5") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDF5_CFLAGS=`$PKG_CONFIG --cflags "hdf5" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$HDF5_LIBS"; then
-    pkg_cv_HDF5_LIBS="$HDF5_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf5\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdf5") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDF5_LIBS=`$PKG_CONFIG --libs "hdf5" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdf5" 2>&1`
-        else
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdf5" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDF5_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	HDF5_CFLAGS=$pkg_cv_HDF5_CFLAGS
-	HDF5_LIBS=$pkg_cv_HDF5_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
-  if test "$succeeded" = "yes"; then
-     HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
-  fi
-  if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
-       if test -e "$ac_path_tmp/include/hdf5.h" && test -r "$ac_path_tmp/include/hdf5.h"; then
-          HDF5_PREFIX=$ac_path_tmp
-          HDF5_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libhdf5_cpp.la"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhdf5_cpp.so"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhdf5_cpp.dylib"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.la"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
-              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.so"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.dylib"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
-             succeeded=yes
-             break;
-          fi
-       fi
-     done
-  fi
-
-            HDF5HOME=$HDF5_PREFIX
-        fi
-
-        if test "$succeeded" != "yes" ; then
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-        else
-                HDF5_BIN=$HDF5HOME/bin
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-
-
-
-
-
-$as_echo "#define HAVE_HDF5 /**/" >>confdefs.h
-
-                have_hdf5="yes"
-        fi
-fi
- if test "$have_hdf5" = "yes"; then
-  HAVE_HDF5_TRUE=
-  HAVE_HDF5_FALSE='#'
-else
-  HAVE_HDF5_TRUE='#'
-  HAVE_HDF5_FALSE=
-fi
-
- if test "$build_hdf5" = "yes"; then
-  BUILD_HDF5_TRUE=
-  BUILD_HDF5_FALSE='#'
-else
-  BUILD_HDF5_TRUE='#'
-  BUILD_HDF5_FALSE=
-fi
-
-
-
-if test "required" = "required"; then
-  if test "$have_hdf5" = "no"; then
-     as_fn_error $? "
-The HDF 5 library is required by AFIDS. Try specifying
-location using --with-hdf5 if configure could't find the
-library. " "$LINENO" 5
-  fi
-fi
-
-
-
-        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Hdfeos5 library" >&5
-$as_echo_n "checking for Hdfeos5 library... " >&6; }
-        succeeded=no
-        if test "$build_hdfeos5" == "yes"; then
-            HDFEOS5_LIBS="libhe5_hdfeos.la"
-            HDFEOS5_CFLAGS="-I$srcdir/hdfeos/external/HDF-EOS/v5.1.14/include"
-            succeeded=yes
-        elif test "$ac_hdfeos5_path" != ""; then
-            HDFEOS5_LIBS="-R$ac_hdfeos5_path/lib -L$ac_hdfeos5_path/lib -lhe5_hdfeos "
-            HDFEOS5_CFLAGS="-I$ac_hdfeos5_path/include/hdfeos5"
-            succeeded=yes
-        else
-
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDFEOS5" >&5
-$as_echo_n "checking for HDFEOS5... " >&6; }
-
-if test -n "$HDFEOS5_CFLAGS"; then
-    pkg_cv_HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDFEOS5_CFLAGS=`$PKG_CONFIG --cflags "hdfeos5" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$HDFEOS5_LIBS"; then
-    pkg_cv_HDFEOS5_LIBS="$HDFEOS5_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDFEOS5_LIBS=`$PKG_CONFIG --libs "hdfeos5" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdfeos5" 2>&1`
-        else
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdfeos5" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDFEOS5_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	HDFEOS5_CFLAGS=$pkg_cv_HDFEOS5_CFLAGS
-	HDFEOS5_LIBS=$pkg_cv_HDFEOS5_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
-  if test "$succeeded" = "yes"; then
-     HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
-  fi
-  if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
-       if test -e "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h"; then
-          HDFEOS5_PREFIX=$ac_path_tmp
-          HDFEOS5_CFLAGS="-I$ac_path_tmp/include/hdfeos5/"
-          if test -e "$ac_path_tmp/lib/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos"
-              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos"
-             succeeded=yes
-             break;
-          fi
-       fi
-     done
-  fi
-
-            if test "$succeeded" != "yes" ; then
-
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDFEOS5" >&5
-$as_echo_n "checking for HDFEOS5... " >&6; }
-
-if test -n "$HDFEOS5_CFLAGS"; then
-    pkg_cv_HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDFEOS5_CFLAGS=`$PKG_CONFIG --cflags "hdfeos5" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$HDFEOS5_LIBS"; then
-    pkg_cv_HDFEOS5_LIBS="$HDFEOS5_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDFEOS5_LIBS=`$PKG_CONFIG --libs "hdfeos5" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdfeos5" 2>&1`
-        else
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdfeos5" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDFEOS5_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	HDFEOS5_CFLAGS=$pkg_cv_HDFEOS5_CFLAGS
-	HDFEOS5_LIBS=$pkg_cv_HDFEOS5_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
-  if test "$succeeded" = "yes"; then
-     HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
-  fi
-  if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
-       if test -e "$ac_path_tmp/include/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/HE5_HdfEosDef.h"; then
-          HDFEOS5_PREFIX=$ac_path_tmp
-          HDFEOS5_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos"
-              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos"
-             succeeded=yes
-             break;
-          fi
-       fi
-     done
-  fi
-
-            fi
-        fi
-
-        if test "$succeeded" != "yes" ; then
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-        else
-                HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS $HDF5_CFLAGS"
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-
-
-                have_hdfeos5="yes"
-        fi
-fi
- if test "$have_hdfeos5" = "yes"; then
-  HAVE_HDFEOS5_TRUE=
-  HAVE_HDFEOS5_FALSE='#'
-else
-  HAVE_HDFEOS5_TRUE='#'
-  HAVE_HDFEOS5_FALSE=
-fi
-
- if test "$build_hdfeos5" = "yes"; then
-  BUILD_HDFEOS5_TRUE=
-  BUILD_HDFEOS5_FALSE='#'
-else
-  BUILD_HDFEOS5_TRUE='#'
-  BUILD_HDFEOS5_FALSE=
-fi
-
-
-
-if test "required" = "required"; then
-  if test "$have_hdfeos5" = "no"; then
-     as_fn_error $? "
-The Hdfeos5 library library is required by AFIDS. Try specifying
-location using --with-hdfeos5 if configure could't find the
-library. " "$LINENO" 5
-  fi
-fi
-
-
-
-else
-    if false; then
-  HAVE_HDFEOS_TRUE=
-  HAVE_HDFEOS_FALSE='#'
-else
-  HAVE_HDFEOS_TRUE='#'
-  HAVE_HDFEOS_FALSE=
-fi
-
-    if false; then
-  BUILD_HDFEOS_TRUE=
-  BUILD_HDFEOS_FALSE='#'
-else
-  BUILD_HDFEOS_TRUE='#'
-  BUILD_HDFEOS_FALSE=
-fi
-
-    if false; then
-  HAVE_HDFEOS5_TRUE=
-  HAVE_HDFEOS5_FALSE='#'
-else
-  HAVE_HDFEOS5_TRUE='#'
-  HAVE_HDFEOS5_FALSE=
-fi
-
-    if false; then
-  BUILD_HDFEOS5_TRUE=
-  BUILD_HDFEOS5_FALSE='#'
-else
-  BUILD_HDFEOS5_TRUE='#'
-  BUILD_HDFEOS5_FALSE=
-fi
-
-    if false; then
-  HAVE_HDF4_TRUE=
-  HAVE_HDF4_FALSE='#'
-else
-  HAVE_HDF4_TRUE='#'
-  HAVE_HDF4_FALSE=
-fi
-
-    if false; then
-  BUILD_HDF4_TRUE=
-  BUILD_HDF4_FALSE='#'
-else
-  BUILD_HDF4_TRUE='#'
-  BUILD_HDF4_FALSE=
-fi
-
-fi
-
-#=================================================================
 # Need to find carto library. (Need to have this after VICAR_RTL
 # and GSL, because it uses variables from those functions)
 
@@ -29388,6 +28061,57 @@ fi
 
 
 #=================================================================
+# Location of all the source code directories
+
+libgeocal=${geocal_topdir}/geocal/lib
+
+srcpython=${geocal_topdir}/python
+
+srcpythonlib=${srcpython}/lib
+
+srcpythonbin=${srcpython}/bin
+
+docpythonsrc=${srcpython}/doc
+
+geocalunittestdata=${geocal_topdir}/geocal/unit_test_data
+
+pythonunittestdata=${geocal_topdir}/python/unit_test_data
+
+srcgeocalcore=$libgeocal/GeoCalCore
+
+srcimplementation=$srcgeocalcore/Implementation
+
+pythonswigsrc=${geocal_topdir}/geocal/bindings/python
+
+swigsrc=${geocal_topdir}/geocal/bindings/python/swig
+
+srcsupport=$srcgeocalcore/Support
+
+srcinterface=$srcgeocalcore/Interface
+
+srccartlab=$libgeocal/CartLab
+
+srcpythonscript=${geocal_topdir}/script
+
+srcsdbx=${geocal_topdir}/geocal/thirdparty/libsdbx
+
+srcraw=${geocal_topdir}/geocal/thirdparty/libraw
+
+pythondocdir=${prefix}/share/doc/afids/python
+
+afidspkgpythondir=${pythondir}/afids
+
+geocalpkgpythondir=${platpythondir}/geocal
+
+geocalpkgpyexecdir=${platpythondir}/geocal
+
+afidspythonvdevdir=${prefix}/afids/vdev
+
+installafidspythondir=${prefix}
+
+
+
+#=================================================================
 # Option to bypass running SWIG to update SWIG wrappers. The SWIG
 # wrappers can take a bit of time to create and compile, so if you
 # aren't working directly with them it can be useful to turn off during
@@ -29750,22 +28474,6 @@ done
 
 
 #=================================================================
-# Check for goocanvas.
-# Doesn't work yet outside of my Mac.
-# This is likely to go away, but leave this in place for now.
-#=================================================================
-#PKG_CHECK_MODULES([GTKGOO], [goocanvas], [have_gtkgoo=yes], [have_gtkgoo=no])
-have_gtkgoo=no
- if test x$have_gtkgoo = xyes; then
-  HAVE_GTKGOO_TRUE=
-  HAVE_GTKGOO_FALSE='#'
-else
-  HAVE_GTKGOO_TRUE='#'
-  HAVE_GTKGOO_FALSE=
-fi
-
-
-#=================================================================
 # Option to bypass running doxygen to update documentation. This is useful
 # for a build environment that is used for development, but you'll want all
 # of your "real" build environments to also update the documentation.
@@ -29814,80 +28522,11 @@ if test x$with_afids_a = xyes; then
 
 fi
 
-# This set up all the source directories. Source for this is found in
-# config/m4/afids_source_directory.m4 so we can include this in multiple
-# configuration files.
-
-libgeocal=afids_python/geocal/lib
-
-srcpython=afids_python/python
-
-srcpythonlib=${srcpython}/lib
-
-srcpythonbin=${srcpython}/bin
-
-docpythonsrc=${srcpython}/doc
-
-geocalunittestdata=afids_python/geocal/unit_test_data
-
-pythonunittestdata=afids_python/python/unit_test_data
-
-srcgeocalcore=$libgeocal/GeoCalCore
-
-srcimplementation=$srcgeocalcore/Implementation
-
-pythonswigsrc=afids_python/geocal/bindings/python
-
-swigsrc=afids_python/geocal/bindings/python/swig
-
-srcsupport=$srcgeocalcore/Support
-
-srcinterface=$srcgeocalcore/Interface
-
-srccartlab=$libgeocal/CartLab
-
-srcmisr=$libgeocal/Misr
-
-srcmspi=$libgeocal/Mspi
-
-srcgtk=$libgeocal/Gtk
-
-srcpythonscript=afids_python/script
-
-srcsdbx=afids_python/geocal/thirdparty/libsdbx
-
-srcmspishared=afids_python/geocal/thirdparty/mspi_shared
-
-srcraw=afids_python/geocal/thirdparty/libraw
-
-pythondocdir=${prefix}/share/doc/afids/python
-
-afidspkgpythondir=${pythondir}/afids
-
-geocalpkgpythondir=${platpythondir}/geocal
-
-geocalpkgpyexecdir=${platpythondir}/geocal
-
-afidspythonvdevdir=${prefix}/afids/vdev
-
-installafidspythondir=${prefix}
-
-
-
 if test "$have_swig" = "yes" -a "$USE_MAINTAINER_MODE" != "no"; then
   generate_swig="yes"
 else
   generate_swig="no"
 fi
-
- if true; then
-  BUILD_AFIDS_PYTHON_TRUE=
-  BUILD_AFIDS_PYTHON_FALSE='#'
-else
-  BUILD_AFIDS_PYTHON_TRUE='#'
-  BUILD_AFIDS_PYTHON_FALSE=
-fi
-
 
 ac_config_files="$ac_config_files Makefile"
 
@@ -30200,70 +28839,6 @@ if test -z "${HAVE_AFIDS_TRUE}" && test -z "${HAVE_AFIDS_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_AFIDS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${BUILD_MSPI_TRUE}" && test -z "${BUILD_MSPI_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_MSPI\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${HAVE_MSPI_TRUE}" && test -z "${HAVE_MSPI_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_MSPI\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${HAVE_HDF4_TRUE}" && test -z "${HAVE_HDF4_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_HDF4\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${BUILD_HDF4_TRUE}" && test -z "${BUILD_HDF4_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_HDF4\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${HAVE_HDFEOS_TRUE}" && test -z "${HAVE_HDFEOS_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_HDFEOS\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${BUILD_HDFEOS_TRUE}" && test -z "${BUILD_HDFEOS_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_HDFEOS\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${HAVE_HDF5_TRUE}" && test -z "${HAVE_HDF5_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_HDF5\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${BUILD_HDF5_TRUE}" && test -z "${BUILD_HDF5_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_HDF5\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${HAVE_HDFEOS5_TRUE}" && test -z "${HAVE_HDFEOS5_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_HDFEOS5\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${BUILD_HDFEOS5_TRUE}" && test -z "${BUILD_HDFEOS5_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_HDFEOS5\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${HAVE_HDFEOS_TRUE}" && test -z "${HAVE_HDFEOS_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_HDFEOS\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${BUILD_HDFEOS_TRUE}" && test -z "${BUILD_HDFEOS_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_HDFEOS\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${HAVE_HDFEOS5_TRUE}" && test -z "${HAVE_HDFEOS5_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_HDFEOS5\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${BUILD_HDFEOS5_TRUE}" && test -z "${BUILD_HDFEOS5_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_HDFEOS5\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${HAVE_HDF4_TRUE}" && test -z "${HAVE_HDF4_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_HDF4\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${BUILD_HDF4_TRUE}" && test -z "${BUILD_HDF4_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_HDF4\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
 if test -z "${BUILD_CARTO_TRUE}" && test -z "${BUILD_CARTO_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_CARTO\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -30296,20 +28871,12 @@ if test -z "${IS_MAC64_TRUE}" && test -z "${IS_MAC64_FALSE}"; then
   as_fn_error $? "conditional \"IS_MAC64\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${HAVE_GTKGOO_TRUE}" && test -z "${HAVE_GTKGOO_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_GTKGOO\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
 if test -z "${WITH_DOCUMENTATION_TRUE}" && test -z "${WITH_DOCUMENTATION_FALSE}"; then
   as_fn_error $? "conditional \"WITH_DOCUMENTATION\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${WITH_AFIDS_A_TRUE}" && test -z "${WITH_AFIDS_A_FALSE}"; then
   as_fn_error $? "conditional \"WITH_AFIDS_A\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${BUILD_AFIDS_PYTHON_TRUE}" && test -z "${BUILD_AFIDS_PYTHON_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_AFIDS_PYTHON\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 
@@ -31437,9 +30004,9 @@ cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
 for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
-    "afids_python/script/setup_afids_python.csh") CONFIG_FILES="$CONFIG_FILES afids_python/script/setup_afids_python.csh" ;;
-    "afids_python/script/setup_afids_python.sh") CONFIG_FILES="$CONFIG_FILES afids_python/script/setup_afids_python.sh" ;;
-    "afids_python/geocal/lib/GeoCalCore/Support/global_fixture_default.cc") CONFIG_FILES="$CONFIG_FILES afids_python/geocal/lib/GeoCalCore/Support/global_fixture_default.cc" ;;
+    "script/setup_afids_python.csh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_python.csh" ;;
+    "script/setup_afids_python.sh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_python.sh" ;;
+    "geocal/lib/GeoCalCore/Support/global_fixture_default.cc") CONFIG_FILES="$CONFIG_FILES geocal/lib/GeoCalCore/Support/global_fixture_default.cc" ;;
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
@@ -33160,9 +31727,6 @@ echo "  Install documentation:         ${with_documentation}"
 
 
 echo "  Include AFIDS A configuration: ${with_afids_a}"
-
-
-echo "  Include MSPI:                  ${with_mspi}"
 
 
 echo "  Include AFIDS Tests:           ${have_afids}"

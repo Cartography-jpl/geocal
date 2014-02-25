@@ -744,8 +744,7 @@ am_libraw_la_OBJECTS = @srcraw@/libraw_la-dcraw_common.lo \
 	@srcraw@/libraw_la-libraw_cxx.lo
 libraw_la_OBJECTS = $(am_libraw_la_OBJECTS)
 PROGRAMS = $(bin_PROGRAMS)
-am__geocal_test_all_SOURCES_DIST =  \
-	afids_python/geocal/lib/test_all.cc \
+am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
 	@srcsupport@/global_fixture_default.cc \
 	@srcsupport@/geocal_exception_test.cc \
@@ -851,7 +850,7 @@ am__geocal_test_all_SOURCES_DIST =  \
 @HAVE_HDF5_TRUE@am__objects_10 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT)
 @HAVE_GDAL_TRUE@am__objects_11 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
 am_geocal_test_all_OBJECTS =  \
-	afids_python/geocal/lib/geocal_test_all-test_all.$(OBJEXT) \
+	@libgeocal@/geocal_test_all-test_all.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-global_fixture.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-global_fixture_default.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-geocal_exception_test.$(OBJEXT) \
@@ -1642,19 +1641,13 @@ AM_LDFLAGS =
 # This is needed by unit tests that work with VICAR files. VICAR
 # wants to find a PDF file.
 BUILT_SOURCES = complain_if_afids dummy.pdf test_out/vicar_copy.img \
-	test_out/dummy_copy $(am__append_23)
+	$(am__append_23)
 include_HEADERS = 
-
-# Make sure that we have created the test_out directory for use with unit 
-# tests (note dummy_copy isn't used for anything, this is just a trick to
-# make surce test_out directory is created).
 # Test files
 
 # Test files
-EXTRA_DIST = afids_python/geocal/lib/test_all.sh \
-	afids_python/geocal/lib/dummy.pdf \
-	afids_python/geocal/test_out/dummy $(am__append_5) \
-	@srcsdbx@/README @srcsdbx@/StorageConcepts.txt \
+EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
+	$(am__append_5) @srcsdbx@/README @srcsdbx@/StorageConcepts.txt \
 	$(srcdir)/$(libgeocal)/*.i @libgeocal@/swig_to_python.h \
 	@libgeocal@/swig_type_mapper_base.h \
 	@libgeocal@/swig_type_mapper.h @libgeocal@/dummy.pdf \
@@ -1751,7 +1744,7 @@ INSTALL_DATA_HOOK = $(am__append_6)
 UNINSTALL_HOOK = $(am__append_7) clean_install_python_doc
 CLEAN_HOOK = clean_unit_test $(am__append_8)
 INSTALLCHECK_HOOK = python_check
-TESTS = afids_python/geocal/lib/test_all.sh
+TESTS = @libgeocal@/test_all.sh
 check_PROGRAM = 
 check_DATA = 
 
@@ -2051,7 +2044,7 @@ geocalinc_HEADERS = @srcsupport@/constant.h \
 	@srccartlab@/doughnut_average.h @srccartlab@/material_detect.h \
 	@srccartlab@/paint_class.h $(am__append_20)
 # Test files
-geocal_test_all_SOURCES = afids_python/geocal/lib/test_all.cc \
+geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
 	@srcsupport@/global_fixture_default.cc \
 	@srcsupport@/geocal_exception_test.cc \
@@ -2152,8 +2145,7 @@ geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) \
 	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
 	$(GDAL_CFLAGS) $(HDF5_CFLAGS)
 @BUILD_VICAR_GDALPLUGIN_TRUE@EXTRA_geocal_test_all_DEPENDENCIES = install_vicar_gdalplugin_early
-MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img \
-	test_out/dummy_copy
+MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img 
 @WITH_DOCUMENTATION_TRUE@geocaldocdir = ${datarootdir}/doc/geocal
 @WITH_DOCUMENTATION_TRUE@geocaldocsearchdir = ${geocaldocdir}/html/search
 sdbxdocdir = ${datarootdir}/doc/libsdbx
@@ -3040,15 +3032,15 @@ clean-checkPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-afids_python/geocal/lib/$(am__dirstamp):
-	@$(MKDIR_P) afids_python/geocal/lib
-	@: > afids_python/geocal/lib/$(am__dirstamp)
-afids_python/geocal/lib/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) afids_python/geocal/lib/$(DEPDIR)
-	@: > afids_python/geocal/lib/$(DEPDIR)/$(am__dirstamp)
-afids_python/geocal/lib/geocal_test_all-test_all.$(OBJEXT):  \
-	afids_python/geocal/lib/$(am__dirstamp) \
-	afids_python/geocal/lib/$(DEPDIR)/$(am__dirstamp)
+@libgeocal@/$(am__dirstamp):
+	@$(MKDIR_P) @libgeocal@
+	@: > @libgeocal@/$(am__dirstamp)
+@libgeocal@/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @libgeocal@/$(DEPDIR)
+	@: > @libgeocal@/$(DEPDIR)/$(am__dirstamp)
+@libgeocal@/geocal_test_all-test_all.$(OBJEXT):  \
+	@libgeocal@/$(am__dirstamp) \
+	@libgeocal@/$(DEPDIR)/$(am__dirstamp)
 @srcsupport@/geocal_test_all-global_fixture.$(OBJEXT):  \
 	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
@@ -3422,6 +3414,7 @@ uninstall-dist_binSCRIPTS:
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f @libgeocal@/*.$(OBJEXT)
 	-rm -f @srccartlab@/*.$(OBJEXT)
 	-rm -f @srccartlab@/*.lo
 	-rm -f @srcimplementation@/*.$(OBJEXT)
@@ -3436,11 +3429,11 @@ mostlyclean-compile:
 	-rm -f @srcsupport@/boost/*.lo
 	-rm -f @swigsrc@/*.$(OBJEXT)
 	-rm -f @swigsrc@/*.lo
-	-rm -f afids_python/geocal/lib/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@@libgeocal@/$(DEPDIR)/geocal_test_all-test_all.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/geocal_test_all-argus_camera_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/geocal_test_all-argus_orbit_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/geocal_test_all-datum_geoid96_test.Po@am__quote@
@@ -3773,7 +3766,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_raster_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Po@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -5430,19 +5422,19 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcraw@/libraw_la-libraw_cxx.lo `test -f '@srcraw@/libraw_cxx.cpp' || echo '$(srcdir)/'`@srcraw@/libraw_cxx.cpp
 
-afids_python/geocal/lib/geocal_test_all-test_all.o: afids_python/geocal/lib/test_all.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT afids_python/geocal/lib/geocal_test_all-test_all.o -MD -MP -MF afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Tpo -c -o afids_python/geocal/lib/geocal_test_all-test_all.o `test -f 'afids_python/geocal/lib/test_all.cc' || echo '$(srcdir)/'`afids_python/geocal/lib/test_all.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Tpo afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='afids_python/geocal/lib/test_all.cc' object='afids_python/geocal/lib/geocal_test_all-test_all.o' libtool=no @AMDEPBACKSLASH@
+@libgeocal@/geocal_test_all-test_all.o: @libgeocal@/test_all.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @libgeocal@/geocal_test_all-test_all.o -MD -MP -MF @libgeocal@/$(DEPDIR)/geocal_test_all-test_all.Tpo -c -o @libgeocal@/geocal_test_all-test_all.o `test -f '@libgeocal@/test_all.cc' || echo '$(srcdir)/'`@libgeocal@/test_all.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @libgeocal@/$(DEPDIR)/geocal_test_all-test_all.Tpo @libgeocal@/$(DEPDIR)/geocal_test_all-test_all.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@libgeocal@/test_all.cc' object='@libgeocal@/geocal_test_all-test_all.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o afids_python/geocal/lib/geocal_test_all-test_all.o `test -f 'afids_python/geocal/lib/test_all.cc' || echo '$(srcdir)/'`afids_python/geocal/lib/test_all.cc
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @libgeocal@/geocal_test_all-test_all.o `test -f '@libgeocal@/test_all.cc' || echo '$(srcdir)/'`@libgeocal@/test_all.cc
 
-afids_python/geocal/lib/geocal_test_all-test_all.obj: afids_python/geocal/lib/test_all.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT afids_python/geocal/lib/geocal_test_all-test_all.obj -MD -MP -MF afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Tpo -c -o afids_python/geocal/lib/geocal_test_all-test_all.obj `if test -f 'afids_python/geocal/lib/test_all.cc'; then $(CYGPATH_W) 'afids_python/geocal/lib/test_all.cc'; else $(CYGPATH_W) '$(srcdir)/afids_python/geocal/lib/test_all.cc'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Tpo afids_python/geocal/lib/$(DEPDIR)/geocal_test_all-test_all.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='afids_python/geocal/lib/test_all.cc' object='afids_python/geocal/lib/geocal_test_all-test_all.obj' libtool=no @AMDEPBACKSLASH@
+@libgeocal@/geocal_test_all-test_all.obj: @libgeocal@/test_all.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @libgeocal@/geocal_test_all-test_all.obj -MD -MP -MF @libgeocal@/$(DEPDIR)/geocal_test_all-test_all.Tpo -c -o @libgeocal@/geocal_test_all-test_all.obj `if test -f '@libgeocal@/test_all.cc'; then $(CYGPATH_W) '@libgeocal@/test_all.cc'; else $(CYGPATH_W) '$(srcdir)/@libgeocal@/test_all.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @libgeocal@/$(DEPDIR)/geocal_test_all-test_all.Tpo @libgeocal@/$(DEPDIR)/geocal_test_all-test_all.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@libgeocal@/test_all.cc' object='@libgeocal@/geocal_test_all-test_all.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o afids_python/geocal/lib/geocal_test_all-test_all.obj `if test -f 'afids_python/geocal/lib/test_all.cc'; then $(CYGPATH_W) 'afids_python/geocal/lib/test_all.cc'; else $(CYGPATH_W) '$(srcdir)/afids_python/geocal/lib/test_all.cc'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @libgeocal@/geocal_test_all-test_all.obj `if test -f '@libgeocal@/test_all.cc'; then $(CYGPATH_W) '@libgeocal@/test_all.cc'; else $(CYGPATH_W) '$(srcdir)/@libgeocal@/test_all.cc'; fi`
 
 @srcsupport@/geocal_test_all-global_fixture.o: @srcsupport@/global_fixture.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-global_fixture.o -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-global_fixture.Tpo -c -o @srcsupport@/geocal_test_all-global_fixture.o `test -f '@srcsupport@/global_fixture.cc' || echo '$(srcdir)/'`@srcsupport@/global_fixture.cc
@@ -7418,9 +7410,9 @@ recheck: all $(check_PROGRAMS) $(check_DATA)
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
-afids_python/geocal/lib/test_all.sh.log: afids_python/geocal/lib/test_all.sh
-	@p='afids_python/geocal/lib/test_all.sh'; \
-	b='afids_python/geocal/lib/test_all.sh'; \
+@libgeocal@/test_all.sh.log: @libgeocal@/test_all.sh
+	@p='@libgeocal@/test_all.sh'; \
+	b='@libgeocal@/test_all.sh'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -7640,6 +7632,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f @libgeocal@/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @libgeocal@/$(am__dirstamp)
 	-rm -f @srccartlab@/$(DEPDIR)/$(am__dirstamp)
 	-rm -f @srccartlab@/$(am__dirstamp)
 	-rm -f @srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -7654,8 +7648,6 @@ distclean-generic:
 	-rm -f @srcsupport@/boost/$(am__dirstamp)
 	-rm -f @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 	-rm -f @swigsrc@/$(am__dirstamp)
-	-rm -f afids_python/geocal/lib/$(DEPDIR)/$(am__dirstamp)
-	-rm -f afids_python/geocal/lib/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -7670,7 +7662,7 @@ clean-am: clean-binPROGRAMS clean-checkPROGRAMS clean-generic \
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf @srccartlab@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR) afids_python/geocal/lib/$(DEPDIR)
+	-rm -rf @libgeocal@/$(DEPDIR) @srccartlab@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-libtool distclean-tags
@@ -7729,7 +7721,7 @@ installcheck-am: installcheck-local
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf @srccartlab@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR) afids_python/geocal/lib/$(DEPDIR)
+	-rm -rf @libgeocal@/$(DEPDIR) @srccartlab@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -7856,16 +7848,13 @@ geocal_check-am: geocal_test_all
 	@echo "====================================================="
 	$(srcdir)/$(libgeocal)/test_all.sh
 
-dummy.pdf : afids_python/geocal/lib/dummy.pdf
+dummy.pdf : @libgeocal@/dummy.pdf
 	cp $^ dummy.pdf
 
-test_out/vicar_copy.img : afids_python/geocal/unit_test_data/vicar.img
+test_out/vicar_copy.img : @geocalunittestdata@/vicar.img
 	mkdir -p test_out
 	cp $^ $@
 	chmod +w $@ 
-test_out/dummy_copy : afids_python/geocal/test_out/dummy
-	mkdir -p test_out
-	cp $^ $@
 
 clean_unit_test:
 	-rm -rf test_out

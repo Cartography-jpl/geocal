@@ -61,7 +61,7 @@ libgeocal_la_LIBADD += $(MSPI_SHARED_LIBS)
 # Unit test
 
 check_PROGRAMS = geocal_test_all
-geocal_test_all_SOURCES += afids_python/geocal/lib/test_all.cc
+geocal_test_all_SOURCES += @libgeocal@/test_all.cc
 geocal_test_all_LDADD = libgeocal.la 
 geocal_test_all_LDADD += $(CARTO_LIBS) libraw.la $(VICAR_RTL_LIBS) $(SPICE_LIBS)
 geocal_test_all_LDADD += $(GDAL_LIBS)
@@ -70,8 +70,8 @@ geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS)
 geocal_test_all_CPPFLAGS+=  $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) 
 geocal_test_all_CPPFLAGS+= $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw)
 geocal_test_all_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS)
-TESTS+= afids_python/geocal/lib/test_all.sh
-EXTRA_DIST+= afids_python/geocal/lib/test_all.sh
+TESTS+= @libgeocal@/test_all.sh
+EXTRA_DIST+= @libgeocal@/test_all.sh
 # Variables used in testing
 export abs_top_srcdir 
 export run_test = *
@@ -105,27 +105,17 @@ geocal_check-am: geocal_test_all
 # wants to find a PDF file.
 
 BUILT_SOURCES += dummy.pdf test_out/vicar_copy.img 
-BUILT_SOURCES += test_out/dummy_copy
 MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img 
-MOSTLYCLEANFILES += test_out/dummy_copy
 
-EXTRA_DIST+= afids_python/geocal/lib/dummy.pdf
+EXTRA_DIST+= @libgeocal@/dummy.pdf
 
-dummy.pdf : afids_python/geocal/lib/dummy.pdf
+dummy.pdf : @libgeocal@/dummy.pdf
 	cp $^ dummy.pdf
 
-test_out/vicar_copy.img : afids_python/geocal/unit_test_data/vicar.img
+test_out/vicar_copy.img : @geocalunittestdata@/vicar.img
 	mkdir -p test_out
 	cp $^ $@
 	chmod +w $@ 
-
-# Make sure that we have created the test_out directory for use with unit 
-# tests (note dummy_copy isn't used for anything, this is just a trick to
-# make surce test_out directory is created).
-EXTRA_DIST+= afids_python/geocal/test_out/dummy
-test_out/dummy_copy : afids_python/geocal/test_out/dummy
-	mkdir -p test_out
-	cp $^ $@
 
 CLEAN_HOOK+= clean_unit_test
 

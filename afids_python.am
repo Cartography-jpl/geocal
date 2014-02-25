@@ -1,5 +1,0 @@
-if BUILD_AFIDS_PYTHON
-include afids_python/geocal/geocal.am
-include afids_python/python/python.am
-include afids_python/script/script.am
-endif

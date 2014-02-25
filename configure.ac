@@ -3,8 +3,13 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT(afids-python, 1.05)
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([config/m4])
-AC_CONFIG_FILES([afids_python/script/setup_afids_python.csh afids_python/script/setup_afids_python.sh])
-AC_CONFIG_FILES([afids_python/geocal/lib/GeoCalCore/Support/global_fixture_default.cc])
+AC_CONFIG_FILES([script/setup_afids_python.csh script/setup_afids_python.sh])
+AC_CONFIG_FILES([geocal/lib/GeoCalCore/Support/global_fixture_default.cc])
+# We have the top directory for GeoCal as a variable. This allows the
+# full AFIDS system to include this in a subdirectory. For this standalone
+# build, this is just "." relative to srcdir.
+geocal_topdir=.
+
 AFIDS_COMMON
 MP_WITH_CURSES
 
@@ -43,29 +48,6 @@ AC_VICAR_GDALPLUGIN(required, cannot_build, default_search)
 AC_AFIDS(notrequired, cannot_build, default_search)
 
 #=================================================================
-# Right now, always include MSPI. We may make this optional later
-
-# Not actually ready for this, so turn off for now
-#with_mspi=yes
-with_mspi=no
-AM_CONDITIONAL([BUILD_MSPI], [ test x$with_mspi = xyes ])
-AM_CONDITIONAL([HAVE_MSPI], [ test x$with_mspi = xyes ])
-
-#=================================================================
-# Libraries needed by MSPI.
-if test x$with_mspi = xyes; then
-   AC_HDFEOS(required, cannot_build, default_search)
-   AC_HDFEOS5(required, cannot_build, default_search)
-else
-   AM_CONDITIONAL([HAVE_HDFEOS], [false])
-   AM_CONDITIONAL([BUILD_HDFEOS], [false])
-   AM_CONDITIONAL([HAVE_HDFEOS5], [false])
-   AM_CONDITIONAL([BUILD_HDFEOS5], [false])
-   AM_CONDITIONAL([HAVE_HDF4], [false])
-   AM_CONDITIONAL([BUILD_HDF4], [false])
-fi
-
-#=================================================================
 # Need to find carto library. (Need to have this after VICAR_RTL 
 # and GSL, because it uses variables from those functions)
 AC_CARTO(required, cannot_build, default_search)
@@ -74,6 +56,10 @@ AC_CARTO(required, cannot_build, default_search)
 # Build or find python
 
 AFIDS_PYTHON(required, can_build, default_search)
+
+#=================================================================
+# Location of all the source code directories
+GEOCAL_SOURCE_DIRECTORY
 
 #=================================================================
 # Option to bypass running SWIG to update SWIG wrappers. The SWIG
@@ -114,15 +100,6 @@ LIBS="$LIBS $LIBM"
 AC_CHECK_FUNCS(sincos)
 
 #=================================================================
-# Check for goocanvas.
-# Doesn't work yet outside of my Mac.
-# This is likely to go away, but leave this in place for now.
-#=================================================================
-#PKG_CHECK_MODULES([GTKGOO], [goocanvas], [have_gtkgoo=yes], [have_gtkgoo=no])
-[have_gtkgoo=no]
-AM_CONDITIONAL([HAVE_GTKGOO], [test x$have_gtkgoo = xyes])
-
-#=================================================================
 # Option to bypass running doxygen to update documentation. This is useful
 # for a build environment that is used for development, but you'll want all
 # of your "real" build environments to also update the documentation.
@@ -140,18 +117,11 @@ if test x$with_afids_a = xyes; then
   AC_DEFINE(INCLUDE_AFIDS_A)
 fi
 
-# This set up all the source directories. Source for this is found in
-# config/m4/afids_source_directory.m4 so we can include this in multiple
-# configuration files.
-AFIDS_PYTHON_SOURCE_DIRECTORY
-
 if test "$have_swig" = "yes" -a "$USE_MAINTAINER_MODE" != "no"; then
   generate_swig="yes"
 else
   generate_swig="no" 
 fi
-
-AM_CONDITIONAL([BUILD_AFIDS_PYTHON], [true])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
@@ -173,5 +143,4 @@ LOC_MSG()
 LOC_MSG([  Generate SWIG wrappers:        ${generate_swig}])
 LOC_MSG([  Install documentation:         ${with_documentation}])
 LOC_MSG([  Include AFIDS A configuration: ${with_afids_a}])
-LOC_MSG([  Include MSPI:                  ${with_mspi}])
 LOC_MSG([  Include AFIDS Tests:           ${have_afids}])

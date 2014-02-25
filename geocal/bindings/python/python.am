@@ -1,5 +1,4 @@
 SWIG_FLAG += -O
-if BUILD_AFIDS_PYTHON
 pkgpythonswigdir = @pythondir@/geocal
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py
 pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC))
@@ -18,19 +17,13 @@ _swig_wrap_la_LIBADD = libgeocal.la
 _swig_wrap_la_SOURCES = $(SWIG_SRC)
 _swig_wrap_la_SOURCES+= @swigsrc@/swig_wrap.cc
 
-endif BUILD_AFIDS_PYTHON
 EXTRA_DIST+= $(srcdir)/$(swigsrc)/*_wrap.h
 
 install-python-2: install-libLTLIBRARIES install-python-afids install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
 	$(noop)
 
-if BUILD_AFIDS_PYTHON
 install-python: all
 	$(MAKE) -j 1 install-python-2 
-else
-install-python: 
-	$(noop)
-endif
 
 # Only generate these files in maintainer mode, otherwise consider them
 # as input.

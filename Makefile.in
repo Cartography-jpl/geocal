@@ -215,7 +215,8 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_31 = $(addprefix \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, $(SWIG_SRC)) \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
-@WITH_AFIDS_A_TRUE@am__append_32 = @srcpythonlib@/tre_amt_struct.py
+@HAVE_HDF5_TRUE@am__append_32 = @srcpythonlib@/air_mspi_igc.py
+@WITH_AFIDS_A_TRUE@am__append_33 = @srcpythonlib@/tre_amt_struct.py
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -2233,8 +2234,8 @@ afidspkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/mmap_file.py @srcpythonlib@/raster_tile.py \
 	@srcpythonlib@/pleides_rpc.py \
 	@srcpythonlib@/parallel_process.py \
-	@srcpythonlib@/raster_image_multi_band.py \
-	@srcpythonlib@/air_mspi_igc.py $(am__append_32)
+	@srcpythonlib@/raster_image_multi_band.py $(am__append_32) \
+	$(am__append_33)
 @HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${PATH}
 @HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}
 dist_afidspythonvdev_SCRIPTS =  \

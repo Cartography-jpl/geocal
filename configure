@@ -25839,7 +25839,7 @@ fi
 
 
 
-if test "required" = "required"; then
+if test "optional" = "required"; then
   if test "$have_hdf5" = "no"; then
      as_fn_error $? "
 The HDF 5 library is required by GeoCal. Try specifying
@@ -31734,6 +31734,9 @@ echo "  Install documentation:         ${with_documentation}"
 
 
 echo "  Have FFTW:                     ${have_fftw}"
+
+
+echo "  Have HDF5:                     ${have_hdf5}"
 
 
 echo "  Include AFIDS A configuration: ${with_afids_a}"

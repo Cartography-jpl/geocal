@@ -137,6 +137,13 @@ the VICAR shell. Note that even without this library, there is a more
 limited set of classes for reading and writing VICAR format (the
 VicarLiteFile). See http://www-mipl.jpl/external/vicar.html for details.
 
+HDF5 (Optional)
+---------------
+HDF5 library. You can read HDF5 through GDAL, or directly using the HDF5
+library. A handful of file formats depend on having access to HDF 5 (e.g.
+HdfOrbit, a HDF 5 version of an orbit file). Without this library we just
+don't build these classes. See http://www.hdfgroup.org/HDF5
+
 Libsdx (Included)
 -----------------
 
@@ -148,6 +155,15 @@ http://www.virtualroadside.com/blog/index.php/2008/10/04/r-tree-implementation-f
 
 This library can be replaced with a R*-tree library if we happen to find 
 one (e.g., a library gets added to boost).
+
+LibRaw (Included)
+-----------------
+This is the LibRaw version 0.8.2 available from http://www.libraw.org. This
+is used to read the Raw digital camera format (see 
+http://en.wikipedia.org/wiki/Raw_image_format). We include the source for this 
+library because it is small, and this is a somewhat obscure library that isn't
+likely to be available as a system library. There are a handful of image file
+formats that depend on this (e.g., RawRasterImage).
 
 Autotools
 =================

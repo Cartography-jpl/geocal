@@ -5,7 +5,14 @@ from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
-orb_uncorr = HdfOrbit_EciTod_TimeAcs(test_data + "sample_orbit.h5")
+try:
+    # Depending on the options used when building, this class might
+    # not be available. If not, then just skip this test.
+    HdfOrbit_EciTod_TimeAcs
+    orb_uncorr = HdfOrbit_EciTod_TimeAcs(test_data + "sample_orbit.h5")
+except NameError:
+    orb_uncorr = None
+
 cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                        3375, 3648,
                        1.0 / 2500000,
@@ -28,6 +35,8 @@ def test_time():
 def test_orbit_offset_unchanged():
     '''Test orbit where we just forward everything. This makes sure that
     passing through python and C++ works correctly'''
+    if(orb_uncorr is None):
+        raise SkipTest
     orb = OrbitOffsetCorrection(orb_uncorr)
     t = Time.time_acs(215077459.472);
     pt = orb.reference_surface_intersect_approximate(t, cam, 
@@ -37,6 +46,8 @@ def test_orbit_offset_unchanged():
     assert distance(pt, pt2) < 0.01
 
 def test_orbit_offset_pos():
+    if(orb_uncorr is None):
+        raise SkipTest
     t2 = Time.time_acs(215077459.472);
     t1 = t2 - 10
     t3 = t2 + 10
@@ -56,6 +67,8 @@ def test_orbit_offset_pos():
     assert_almost_equal(pdiff[2], 300, 4)
 
 def test_orbit_quaternion_correction():
+    if(orb_uncorr is None):
+        raise SkipTest
     t2 = Time.time_acs(215077459.472);
     t1 = t2 - 10
     t3 = t2 + 10
@@ -73,6 +86,8 @@ def test_orbit_quaternion_correction():
     orb.quaternion_correction(t3)
 
 def test_insert_time_point():
+    if(orb_uncorr is None):
+        raise SkipTest
     t2 = Time.time_acs(215077459.472);
     t1 = t2 - 10
     t3 = t2 + 10
@@ -101,6 +116,8 @@ def test_insert_time_point():
     orb.quaternion_correction(t3)
 
 def test_image_coordinate():
+    if(orb_uncorr is None):
+        raise SkipTest
     t2 = Time.time_acs(215077459.472);
     t1 = t2 - 10
     t3 = t2 + 10

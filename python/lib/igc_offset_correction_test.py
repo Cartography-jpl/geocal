@@ -3,7 +3,7 @@ import cPickle
 from geocal import *
 from igc_offset_correction import *
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 orb_uncorr = HdfOrbit_EciTod_TimeAcs(test_data + "../sample_orbit.h5")
 cam = QuaternionCamera(Quaternion_double(1,0,0,0),

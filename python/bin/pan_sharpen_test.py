@@ -2,9 +2,9 @@ from afids import *
 from nose.tools import *
 import subprocess
 import os
-test_data1 = os.path.dirname(__file__) + "/../unit_test_data/shiva_test_case/"
-test_data2 = os.path.dirname(__file__) + "/../unit_test_data/"
-expected_dir = os.path.dirname(__file__) + "/../unit_test_data/expected_results/pan_sharpen/"
+test_data1 = os.path.dirname(__file__) + "/../../unit_test_data/shiva_test_case/"
+test_data2 = os.path.dirname(__file__) + "/../../unit_test_data/"
+expected_dir = os.path.dirname(__file__) + "/../../unit_test_data/expected_results/pan_sharpen/"
 
 def test_pan_sharpen_map_projected():
     '''Test the pan_sharpen PDF. This test is for already map projected data'''

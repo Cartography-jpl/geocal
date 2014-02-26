@@ -4,7 +4,7 @@ import os
 import numpy as np
 import numpy.testing as nptest
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 qb = QuickBirdReflectance(test_data + 
                          "07JUN08184839-M1BS-005616921010_01_P001.IMD",

@@ -49,10 +49,10 @@ BOOST_AUTO_TEST_CASE(rotated_image)
   std::string f = test_data_dir() + "rpc.ntf";
   GdalRasterImage g(f);
   MapInfo m = g.map_info();
-  BOOST_CHECK_CLOSE(m.ulc_x(), 44.8264539, 1e-7);
-  BOOST_CHECK_CLOSE(m.ulc_y(), 35.8819477, 1e-7);
-  BOOST_CHECK_CLOSE(m.lrc_x(), 44.8265424, 1e-7);
-  BOOST_CHECK_CLOSE(m.lrc_y(), 35.8818829, 1e-7);
+  BOOST_CHECK_CLOSE(m.ulc_x(), 44.826373456790115, 1e-7);
+  BOOST_CHECK_CLOSE(m.ulc_y(), 35.881944444444443, 1e-7);
+  BOOST_CHECK_CLOSE(m.lrc_x(), 44.826682098765467, 1e-7);
+  BOOST_CHECK_CLOSE(m.lrc_y(), 35.881944444444443, 1e-7);
 }
 
 BOOST_AUTO_TEST_CASE(create)

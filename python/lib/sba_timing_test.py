@@ -7,7 +7,7 @@ from simultaneous_bundle_adjustment import *
 from lm_optimize import *
 from nose.plugins.skip import Skip, SkipTest
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_time():
     raise SkipTest

@@ -1,6 +1,6 @@
 import subprocess
 import os
-test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_shelve_igccol():
     '''Create a simple GDAL based Igc, and then make sure we can list it'''

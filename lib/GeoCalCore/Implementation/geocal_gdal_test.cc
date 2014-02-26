@@ -55,9 +55,9 @@ BOOST_AUTO_TEST_CASE(geocal_gdal_test)
   BOOST_CHECK(gdal_band_type(fname) ==GDT_Byte);
   
   Gdal<GUInt16> qbird(fname2);
-  BOOST_CHECK_EQUAL(qbird.metadata<int>("RPC_LINE_OFF"), 2881);
-  BOOST_CHECK_CLOSE(qbird.metadata<double>("RPC_LONG_OFF"), 44.9534, 1e-4);
-  BOOST_CHECK_EQUAL(qbird.metadata<std::string>("RPC_LINE_OFF"), "2881");
+  BOOST_CHECK_EQUAL(qbird.metadata<int>("LINE_OFF", "Rpc"), 2881);
+  BOOST_CHECK_CLOSE(qbird.metadata<double>("LONG_OFF", "Rpc"), 44.9534, 1e-4);
+  BOOST_CHECK_EQUAL(qbird.metadata<std::string>("LINE_OFF", "Rpc"), "2881");
   boost::array<double, 20> texpect = 
     {{ 0.0132748, -0.14751, -1.13465, -0.0138959, 0.0020018,
       6.35242e-05, 0.000115861, -0.00286551, -0.00778726, 
@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_CASE(geocal_gdal_test)
       3.65929e-05, 2.32154e-06, -2.25421e-05, -2.08933e-05, 
        1.8091e-05, 3.6393e-07, -9.39815e-07, -4.31269e-08 }};
   boost::array<double, 20> t = 
-    qbird.metadata<boost::array<double, 20> >("RPC_LINE_NUM_COEFF");
+    qbird.metadata<boost::array<double, 20> >("LINE_NUM_COEFF", "Rpc");
   for(int i = 0; i < 20; ++i)
     BOOST_CHECK_CLOSE(texpect[i], t[i], 1e-4);
   

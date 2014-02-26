@@ -9,7 +9,7 @@ import cPickle
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
 igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", demin)
 igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)

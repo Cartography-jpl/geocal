@@ -3,8 +3,8 @@ from nose.tools import *
 from tre_struct import *
 import subprocess
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
-test_data2 = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
+test_data2 = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 # Basic test of tre_struct
 def test_tre_struct():

@@ -1,7 +1,7 @@
 from afids import *
 import subprocess
 import os
-test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_sba():
     '''Create a simple GDAL based Igc, collect tie points on it, and run an 

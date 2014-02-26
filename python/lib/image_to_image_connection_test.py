@@ -4,7 +4,7 @@ from geocal import *
 import os
 import cPickle
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 # Basic test of Rpc
 def test_rpc_image_ground_connection():

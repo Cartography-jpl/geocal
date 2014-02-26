@@ -5,7 +5,7 @@ import os
 import numpy as np
 import numpy.testing as nptest
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 sr = SpotReflectance(test_data + 
                          "spot6_multi_meta.xml", 

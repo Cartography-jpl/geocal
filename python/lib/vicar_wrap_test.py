@@ -5,7 +5,7 @@ import math
 from nose.plugins.skip import Skip, SkipTest
 import os
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 EciTodBurl.set_delta_ut1(0.1128609)
 
 # Simple test to see if we have VICAR available. We check for the presence of

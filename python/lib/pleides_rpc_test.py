@@ -1,7 +1,7 @@
 from nose.tools import *
 from pleides_rpc import *
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 xml_fname = test_data + "RPC_PHR1B_P_201307191703469_SEN_646065101-001.XML"
 def test_pleides_rpc():
     rpc = pleides_rpc(xml_fname)

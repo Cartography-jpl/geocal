@@ -1,7 +1,7 @@
 from nose.tools import *
 from image_ground_connection import *
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_igc_write():
     dem = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)

@@ -25,5 +25,4 @@ include python/python.am
 include python/bin/bin.am
 include python/lib/lib.am
 include python/doc/doc_python.am
-include python/unit_test_data/unit_test_data.am
 

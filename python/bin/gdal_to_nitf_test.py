@@ -2,7 +2,7 @@ from afids import *
 from nose.tools import *
 import subprocess
 import os
-test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_gdal_to_nitf():
     '''Create a simple NITF from gdal_to_nitf, and check that everything is

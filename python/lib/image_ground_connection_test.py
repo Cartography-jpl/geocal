@@ -2,7 +2,7 @@ from nose.tools import *
 from image_ground_connection import *
 import cPickle
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 dem = SimpleDem()
 
 def test_rpc_image_ground_pickle():

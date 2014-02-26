@@ -19,11 +19,9 @@ include afids_python/geocal/lib/GeoCalCore/Interface/interface.am
 include afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am
 include afids_python/geocal/lib/CartLab/cart_lab.am
 include afids_python/bindings/python/python.am
-include afids_python/unit_test_data/unit_test_data.am
 include afids_python/script/script.am
 include afids_python/python/python.am
 include afids_python/python/bin/bin.am
 include afids_python/python/lib/lib.am
 include afids_python/python/doc/doc_python.am
-include afids_python/python/unit_test_data/unit_test_data.am
 

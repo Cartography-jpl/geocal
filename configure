@@ -666,7 +666,6 @@ swigsrc
 pythonswigsrc
 srcimplementation
 srcgeocalcore
-pythonunittestdata
 geocalunittestdata
 docpythonsrc
 srcpythonbin
@@ -28074,8 +28073,6 @@ srcpythonbin=${srcpython}/bin
 docpythonsrc=${srcpython}/doc
 
 geocalunittestdata=${geocal_topdir}/unit_test_data
-
-pythonunittestdata=${geocal_topdir}/python/unit_test_data
 
 srcgeocalcore=$libgeocal/GeoCalCore
 

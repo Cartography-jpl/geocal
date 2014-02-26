@@ -4,7 +4,7 @@ import cPickle
 from geocal import *
 from nose.tools import *
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 # Test picking of Time
 def test_time_pickle():

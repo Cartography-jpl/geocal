@@ -1,7 +1,7 @@
 from afids import *
 import subprocess
 import os
-test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_tp_collection():
     '''Create a simple GDAL based Igc, and then collect tie points on it'''

@@ -3,7 +3,7 @@ from shape_file import *
 import os
 import shutil
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 def test_read():
     '''Test basic reading'''

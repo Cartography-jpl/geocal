@@ -122,11 +122,9 @@ DIST_COMMON = $(srcdir)/common.am $(srcdir)/include.am \
 	$(srcdir)/unit_test_data/unit_test_data.am \
 	$(srcdir)/script/script.am $(srcdir)/python/python.am \
 	$(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am \
-	$(srcdir)/python/doc/doc_python.am \
-	$(srcdir)/python/unit_test_data/unit_test_data.am INSTALL NEWS \
-	README AUTHORS ChangeLog $(srcdir)/Makefile.in \
-	$(srcdir)/Makefile.am $(top_srcdir)/configure \
-	$(am__configure_deps) \
+	$(srcdir)/python/doc/doc_python.am INSTALL NEWS README AUTHORS \
+	ChangeLog $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
+	$(top_srcdir)/configure $(am__configure_deps) \
 	$(top_srcdir)/script/setup_afids_python.csh.in \
 	$(top_srcdir)/script/setup_afids_python.sh.in \
 	$(top_srcdir)/geocal/lib/GeoCalCore/Support/global_fixture_default.cc.in \
@@ -1572,7 +1570,6 @@ pyexecdir = @pyexecdir@
 pythondir = @pythondir@
 pythondocdir = @pythondocdir@
 pythonswigsrc = @pythonswigsrc@
-pythonunittestdata = @pythonunittestdata@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srccartlab = @srccartlab@
@@ -1652,28 +1649,44 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@libgeocal@/swig_type_mapper.h @libgeocal@/dummy.pdf \
 	@libgeocal@/geocal_doxygen.h @srcsupport@/unit_test_support.h \
 	@srcsupport@/global_fixture.h @srcinterface@/matcher_fixture.h \
-	$(srcdir)/$(swigsrc)/*_wrap.h @geocalunittestdata@/PCF \
-	@geocalunittestdata@/cib_sample.img \
-	@geocalunittestdata@/matcher_test_newimage.bin \
-	@geocalunittestdata@/matcher_test_refimage.bin \
-	@geocalunittestdata@/rpc.ntf @geocalunittestdata@/vicar.img \
-	@geocalunittestdata@/spice/geocal.ker \
-	@geocalunittestdata@/spice/fk/planets/earth_assoc_itrf93.tf \
-	@geocalunittestdata@/spice/fk/planets/eci_tod.tf \
-	@geocalunittestdata@/spice/lsk/naif0007.tls \
-	@geocalunittestdata@/spice/lsk/naif0008.tls \
-	@geocalunittestdata@/spice/pck/earth_000101_120424_120201.bpc \
-	@geocalunittestdata@/spice/pck/earth_720101_070426.bpc \
-	@geocalunittestdata@/spice/pck/pck00008.tpc \
+	$(srcdir)/$(swigsrc)/*_wrap.h \
 	@geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.ATT \
 	@geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.EPH \
 	@geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.IMD \
-	@geocalunittestdata@/argus_camera6.jpg \
+	@geocalunittestdata@/07JUN08184839-M1BS-005616921010_01_P001.IMD \
+	@geocalunittestdata@/07JUN08184839-P1BS-005616921010_01_P001.IMD \
+	@geocalunittestdata@/10MAY07185751-M1BS-052360785020_01_P001.IMD \
+	@geocalunittestdata@/10MAY07185751-P1BS-052360785020_01_P001.IMD \
+	@geocalunittestdata@/418524_meta.txt \
+	@geocalunittestdata@/5V090727M0003172424A222000100202M_001535172.pvl \
+	@geocalunittestdata@/FRST_POIof090514.shp \
+	@geocalunittestdata@/PCF @geocalunittestdata@/cib_sample.img \
+	@geocalunittestdata@/Stereo/10MAY21-1.img \
+	@geocalunittestdata@/Stereo/10MAY21-1_projected.tif \
+	@geocalunittestdata@/Stereo/10MAY21-2.img \
+	@geocalunittestdata@/Stereo/10MAY21-2_projected.tif \
+	@geocalunittestdata@/Stereo/10MAY21-3.img \
+	@geocalunittestdata@/Stereo/README \
+	@geocalunittestdata@/Stereo/aoi.img \
+	@geocalunittestdata@/Stereo/generate_proj.py \
+	@geocalunittestdata@/Stereo/nevada_elv_aoi.img \
+	@geocalunittestdata@/Stereo/rpc_sba.pkl \
 	@geocalunittestdata@/argus.csv @geocalunittestdata@/argus.ibis \
+	@geocalunittestdata@/argus_camera6.jpg \
 	@geocalunittestdata@/cannon_raw.cr2 \
-	@geocalunittestdata@/mul.tif @geocalunittestdata@/pan.tif \
+	@geocalunittestdata@/dem_foot.tif \
 	@geocalunittestdata@/egm96.img \
+	@geocalunittestdata@/expected_results \
+	@geocalunittestdata@/leapsecond.dat \
+	@geocalunittestdata@/matcher_test_newimage.bin \
+	@geocalunittestdata@/matcher_test_refimage.bin \
+	@geocalunittestdata@/mul.tif @geocalunittestdata@/pan.tif \
+	@geocalunittestdata@/rpc.ntf @geocalunittestdata@/rpc.tif \
+	@geocalunittestdata@/rpc_example.pkl \
 	@geocalunittestdata@/s251_sbet_subset.txt \
+	@geocalunittestdata@/sample_orbit.h5 \
+	@geocalunittestdata@/shiva_test_case \
+	@geocalunittestdata@/shiva_test_case/README \
 	@geocalunittestdata@/shiva_test_case/cvdnorm_sub.img \
 	@geocalunittestdata@/shiva_test_case/material_sub.img \
 	@geocalunittestdata@/shiva_test_case/pandif_sub.img \
@@ -1688,39 +1701,19 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/shiva_test_case/post_b8.img \
 	@geocalunittestdata@/shiva_test_case/post_pan_sub.img \
 	@geocalunittestdata@/shiva_test_case/pre_pan_sub.img \
-	@geocalunittestdata@/shiva_test_case/README \
 	@geocalunittestdata@/shiva_test_case/subset_test.py \
-	@geocalunittestdata@/Stereo \
-	@geocalunittestdata@/sample_orbit.h5 \
-	@geocalunittestdata@/test_pixel_is_point.img \
+	@geocalunittestdata@/spice/fk/planets/earth_assoc_itrf93.tf \
+	@geocalunittestdata@/spice/fk/planets/eci_tod.tf \
+	@geocalunittestdata@/spice/geocal.ker \
+	@geocalunittestdata@/spice/lsk/naif0007.tls \
+	@geocalunittestdata@/spice/lsk/naif0008.tls \
+	@geocalunittestdata@/spice/pck/earth_000101_120424_120201.bpc \
+	@geocalunittestdata@/spice/pck/earth_720101_070426.bpc \
+	@geocalunittestdata@/spice/pck/pck00008.tpc \
 	@geocalunittestdata@/test_pixel_is_area.img \
-	@geocalunittestdata@/dem_foot.tif @docpythonsrc@ \
-	@pythonunittestdata@/07JUN08184839-M1BS-005616921010_01_P001.IMD \
-	@pythonunittestdata@/07JUN08184839-P1BS-005616921010_01_P001.IMD \
-	@pythonunittestdata@/10MAY07185751-M1BS-052360785020_01_P001.IMD \
-	@pythonunittestdata@/10MAY07185751-P1BS-052360785020_01_P001.IMD \
-	@pythonunittestdata@/418524_meta.txt \
-	@pythonunittestdata@/5V090727M0003172424A222000100202M_001535172.pvl \
-	@pythonunittestdata@/leapsecond.dat \
-	@pythonunittestdata@/rpc_example.pkl \
-	@pythonunittestdata@/rpc.ntf @pythonunittestdata@/rpc.tif \
-	@pythonunittestdata@/sample_orbit.h5 \
-	@pythonunittestdata@/test_use00a.ntf \
-	@pythonunittestdata@/vicar.img \
-	@pythonunittestdata@/Stereo/10MAY21-1.img \
-	@pythonunittestdata@/Stereo/10MAY21-1_projected.tif \
-	@pythonunittestdata@/Stereo/10MAY21-2.img \
-	@pythonunittestdata@/Stereo/10MAY21-2_projected.tif \
-	@pythonunittestdata@/Stereo/10MAY21-3.img \
-	@pythonunittestdata@/Stereo/aoi.img \
-	@pythonunittestdata@/Stereo/generate_proj.py \
-	@pythonunittestdata@/Stereo/nevada_elv_aoi.img \
-	@pythonunittestdata@/Stereo/README \
-	@pythonunittestdata@/Stereo/rpc_sba.pkl \
-	@pythonunittestdata@/FRST_POIof090514.shp \
-	@pythonunittestdata@/expected_results \
-	@pythonunittestdata@/shiva_test_case \
-	@pythonunittestdata@/mul.tif @pythonunittestdata@/pan.tif
+	@geocalunittestdata@/test_pixel_is_point.img \
+	@geocalunittestdata@/test_use00a.ntf \
+	@geocalunittestdata@/vicar.img @docpythonsrc@
 pkgconfig_DATA = 
 
 # Allow fils to be include in other directories
@@ -2253,7 +2246,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/geocal/lib/geocal.am $(srcdir)/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/geocal/lib/CartLab/cart_lab.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/unit_test_data/unit_test_data.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/geocal/lib/geocal.am $(srcdir)/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/geocal/lib/CartLab/cart_lab.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -2276,7 +2269,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
-$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/geocal/lib/geocal.am $(srcdir)/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/geocal/lib/CartLab/cart_lab.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/unit_test_data/unit_test_data.am:
+$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/geocal/lib/geocal.am $(srcdir)/geocal/lib/GeoCalCore/geocal_core.am $(srcdir)/geocal/lib/GeoCalCore/Support/support.am $(srcdir)/geocal/lib/GeoCalCore/Interface/interface.am $(srcdir)/geocal/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/geocal/lib/CartLab/cart_lab.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am:
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck

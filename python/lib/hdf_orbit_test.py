@@ -4,7 +4,7 @@ import os
 from geocal import *
 import cPickle
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 def create_sample_file():
     '''This create a HDF 5 file that contains orbit information. We can use

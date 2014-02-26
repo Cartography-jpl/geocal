@@ -4,7 +4,7 @@ import os
 import numpy as np
 import numpy.testing as nptest
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 ge1 = Geoeye1Reflectance(test_data + 
                          "5V090727M0003172424A222000100202M_001535172.pvl")

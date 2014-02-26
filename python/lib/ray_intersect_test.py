@@ -4,7 +4,7 @@ from ray_intersect import *
 from image_ground_connection import *
 from tie_point import *
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_ray_intersect():
     initial_height = 1291

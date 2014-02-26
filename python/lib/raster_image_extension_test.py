@@ -5,7 +5,7 @@ from nose.plugins.skip import Skip, SkipTest
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 img = VicarRasterImage(test_data + "vicar.img")
 d = img.read(0, 0, 10, 10)
 

@@ -3,7 +3,7 @@ from geocal import *
 from orbit_offset_correction import *
 from nose.plugins.skip import Skip, SkipTest
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 orb_uncorr = HdfOrbit_EciTod_TimeAcs(test_data + "sample_orbit.h5")
 cam = QuaternionCamera(Quaternion_double(1,0,0,0),

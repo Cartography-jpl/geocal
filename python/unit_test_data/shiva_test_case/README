@@ -1,9 +1,0 @@
-This data was extracted from the version 2.2b of Shiva, the Port Gaston test
-case. This used The pre image of 10MAY21184840-P1BS-052366905020_01_P001.NTF
-and the post image of 10MAY16183214-P1BS-052366900030_01_P001.NTF and
-10MAY16183214-M1BS-052366900030_01_P001.NTF.
-
-We have extracted the data from the run, both to use as input and to compare
-replacement code we are writing for the 2.2 software. The data was extracted
-using the script subset_test.py, and extracts a 200x300 area around the test
-targets.

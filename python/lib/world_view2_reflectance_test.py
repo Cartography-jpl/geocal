@@ -4,7 +4,7 @@ import os
 import numpy as np
 import numpy.testing as nptest
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 wv2 = WorldView2Reflectance(test_data + 
                          "10MAY07185751-M1BS-052360785020_01_P001.IMD",

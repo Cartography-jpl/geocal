@@ -4,7 +4,7 @@ from image_ground_connection import *
 from igc_collection import *
 from nose.plugins.skip import Skip, SkipTest
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/Stereo/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_connection_igc():
     '''Note that this also tests the inheritance in python of a C++ class

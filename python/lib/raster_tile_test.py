@@ -3,7 +3,7 @@ from raster_tile import *
 from nose.tools import *
 import os
 
-test_data = os.path.dirname(__file__) + "/../unit_test_data/"
+test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 # Nothing special about this data, it is just a reasonable size for
 # stepping through

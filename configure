@@ -2863,7 +2863,7 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 
 ac_config_files="$ac_config_files script/setup_afids_python.csh script/setup_afids_python.sh"
 
-ac_config_files="$ac_config_files geocal/lib/GeoCalCore/Support/global_fixture_default.cc"
+ac_config_files="$ac_config_files lib/GeoCalCore/Support/global_fixture_default.cc"
 
 # We have the top directory for GeoCal as a variable. This allows the
 # full AFIDS system to include this in a subdirectory. For this standalone
@@ -28062,7 +28062,7 @@ fi
 #=================================================================
 # Location of all the source code directories
 
-libgeocal=${geocal_topdir}/geocal/lib
+libgeocal=${geocal_topdir}/lib
 
 srcpython=${geocal_topdir}/python
 
@@ -28074,19 +28074,19 @@ docpythonsrc=${srcpython}/doc
 
 geocalunittestdata=${geocal_topdir}/unit_test_data
 
-srcgeocalcore=$libgeocal/GeoCalCore
+srcgeocalcore=${libgeocal}/GeoCalCore
 
-srcimplementation=$srcgeocalcore/Implementation
+srcimplementation=${srcgeocalcore}/Implementation
 
 pythonswigsrc=${geocal_topdir}/bindings/python
 
 swigsrc=${geocal_topdir}/bindings/python/swig
 
-srcsupport=$srcgeocalcore/Support
+srcsupport=${srcgeocalcore}/Support
 
-srcinterface=$srcgeocalcore/Interface
+srcinterface=${srcgeocalcore}/Interface
 
-srccartlab=$libgeocal/CartLab
+srccartlab=${libgeocal}/CartLab
 
 srcpythonscript=${geocal_topdir}/script
 
@@ -30003,7 +30003,7 @@ do
   case $ac_config_target in
     "script/setup_afids_python.csh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_python.csh" ;;
     "script/setup_afids_python.sh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_python.sh" ;;
-    "geocal/lib/GeoCalCore/Support/global_fixture_default.cc") CONFIG_FILES="$CONFIG_FILES geocal/lib/GeoCalCore/Support/global_fixture_default.cc" ;;
+    "lib/GeoCalCore/Support/global_fixture_default.cc") CONFIG_FILES="$CONFIG_FILES lib/GeoCalCore/Support/global_fixture_default.cc" ;;
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;

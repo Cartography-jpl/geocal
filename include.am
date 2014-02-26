@@ -8,16 +8,16 @@
 # If you change include.am, make sure to change include_afids.am and
 # vice versa.
 
-include geocal/geocal.am
+include geocal.am
 include thirdparty/thirdparty.am
 include thirdparty/libsdbx/sdbx.am
 include thirdparty/libraw/libraw.am
-include geocal/lib/geocal.am
-include geocal/lib/GeoCalCore/geocal_core.am
-include geocal/lib/GeoCalCore/Support/support.am
-include geocal/lib/GeoCalCore/Interface/interface.am
-include geocal/lib/GeoCalCore/Implementation/implementation.am
-include geocal/lib/CartLab/cart_lab.am
+include lib/lib.am
+include lib/GeoCalCore/geocal_core.am
+include lib/GeoCalCore/Support/support.am
+include lib/GeoCalCore/Interface/interface.am
+include lib/GeoCalCore/Implementation/implementation.am
+include lib/CartLab/cart_lab.am
 include bindings/python/python.am
 include unit_test_data/unit_test_data.am
 include script/script.am

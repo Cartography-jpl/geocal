@@ -28073,7 +28073,7 @@ srcpythonbin=${srcpython}/bin
 
 docpythonsrc=${srcpython}/doc
 
-geocalunittestdata=${geocal_topdir}/geocal/unit_test_data
+geocalunittestdata=${geocal_topdir}/unit_test_data
 
 pythonunittestdata=${geocal_topdir}/python/unit_test_data
 

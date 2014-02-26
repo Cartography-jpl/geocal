@@ -16,11 +16,17 @@ def test_call_sample_vicar_python():
     # We may or may not have vicarb. If not, we just skip this test.
     if(not cmd_exists("vicarb")):
         raise SkipTest()
-    os.path.dirname(__file__)
-    # This should return the string "ret=101", along with the normal VICAR
-    # verbage
-    res = subprocess.check_output(["vicarb", 
-                             os.path.dirname(__file__) + "/call_sample_vicar_python.pdf"])
-    assert string.find(res, "ret=101") != -1
+    try:
+        curdir = os.getcwd()
+        os.chdir(os.path.dirname(__file__))
+        # This should return the string "ret=101", along with the normal VICAR
+        # verbage
+        res = subprocess.check_output(["vicarb", 
+                                       "call_sample_vicar_python.pdf"])
+        assert string.find(res, "ret=101") != -1
+    finally:
+        if(curdir):
+            os.chdir(curdir)
+        
 
 

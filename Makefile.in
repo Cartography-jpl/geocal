@@ -7865,7 +7865,7 @@ clean_unit_test:
 @WITH_DOCUMENTATION_TRUE@	-rm -f doc/geocal/xml/*
 @WITH_DOCUMENTATION_TRUE@	export PATH=$(bindir):$$PATH && \
 @WITH_DOCUMENTATION_TRUE@        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
-@WITH_DOCUMENTATION_TRUE@        srcdir=$(srcdir)/afids_python/geocal DOCDIR=doc/geocal $(DOXYGEN) $(srcdir)/config/doxygen.cfg
+@WITH_DOCUMENTATION_TRUE@        srcdir=$(srcdir)/@libgeocal@ DOCDIR=doc/geocal $(DOXYGEN) $(srcdir)/config/doxygen.cfg
 
 @WITH_DOCUMENTATION_TRUE@install_doxygen_doc: doc/geocal.tag
 @WITH_DOCUMENTATION_TRUE@	@COPY_DIRECTORY@ doc/geocal/html "$(DESTDIR)$(geocaldocdir)"
@@ -7966,7 +7966,7 @@ python_check:
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         source $(AFIDS_DATA)/setup_afids_data.sh && \
         export PATH=$(PYTHON_CHECK_PATH) && \
-        nosetests $(srcdir)/afids_python/python/*/ 
+        nosetests $(srcdir)/@srcpython@/*/ 
 # Used to short circuit tests that would otherwise run.
 @WITH_AFIDS_A_FALSE@export NO_AFIDS_A_TEST=t
 

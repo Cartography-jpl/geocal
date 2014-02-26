@@ -14,6 +14,6 @@ python_check:
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         source $(AFIDS_DATA)/setup_afids_data.sh && \
         export PATH=$(PYTHON_CHECK_PATH) && \
-        nosetests $(srcdir)/afids_python/python/*/ 
+        nosetests $(srcdir)/@srcpython@/*/ 
 
 INSTALLCHECK_HOOK+= python_check

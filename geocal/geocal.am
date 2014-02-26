@@ -136,7 +136,7 @@ doc/geocal.tag: $(geocalinc_HEADERS) $(libgeocal_la_SOURCES) config/doxygen.cfg 
 	-rm -f doc/geocal/xml/*
 	export PATH=$(bindir):$$PATH && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
-        srcdir=$(srcdir)/afids_python/geocal DOCDIR=doc/geocal $(DOXYGEN) $(srcdir)/config/doxygen.cfg
+        srcdir=$(srcdir)/@libgeocal@ DOCDIR=doc/geocal $(DOXYGEN) $(srcdir)/config/doxygen.cfg
 
 geocaldocdir = ${datarootdir}/doc/geocal
 geocaldocsearchdir = ${geocaldocdir}/html/search

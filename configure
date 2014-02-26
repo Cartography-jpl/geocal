@@ -28081,9 +28081,9 @@ srcgeocalcore=$libgeocal/GeoCalCore
 
 srcimplementation=$srcgeocalcore/Implementation
 
-pythonswigsrc=${geocal_topdir}/geocal/bindings/python
+pythonswigsrc=${geocal_topdir}/bindings/python
 
-swigsrc=${geocal_topdir}/geocal/bindings/python/swig
+swigsrc=${geocal_topdir}/bindings/python/swig
 
 srcsupport=$srcgeocalcore/Support
 
@@ -28093,9 +28093,9 @@ srccartlab=$libgeocal/CartLab
 
 srcpythonscript=${geocal_topdir}/script
 
-srcsdbx=${geocal_topdir}/geocal/thirdparty/libsdbx
+srcsdbx=${geocal_topdir}/thirdparty/libsdbx
 
-srcraw=${geocal_topdir}/geocal/thirdparty/libraw
+srcraw=${geocal_topdir}/thirdparty/libraw
 
 pythondocdir=${prefix}/share/doc/afids/python
 

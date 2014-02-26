@@ -9,16 +9,16 @@
 # vice versa.
 
 include afids_python/geocal/geocal.am
-include afids_python/geocal/thirdparty/thirdparty.am
-include afids_python/geocal/thirdparty/libsdbx/sdbx.am
-include afids_python/geocal/thirdparty/libraw/libraw.am
+include afids_python/thirdparty/thirdparty.am
+include afids_python/thirdparty/libsdbx/sdbx.am
+include afids_python/thirdparty/libraw/libraw.am
 include afids_python/geocal/lib/geocal.am
 include afids_python/geocal/lib/GeoCalCore/geocal_core.am
 include afids_python/geocal/lib/GeoCalCore/Support/support.am
 include afids_python/geocal/lib/GeoCalCore/Interface/interface.am
 include afids_python/geocal/lib/GeoCalCore/Implementation/implementation.am
 include afids_python/geocal/lib/CartLab/cart_lab.am
-include afids_python/geocal/bindings/python/python.am
+include afids_python/bindings/python/python.am
 include afids_python/geocal/unit_test_data/unit_test_data.am
 include afids_python/script/script.am
 include afids_python/python/python.am

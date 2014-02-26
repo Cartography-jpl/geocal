@@ -26184,7 +26184,7 @@ fi
 
 
 
-if test "required" = "required"; then
+if test "optional" = "required"; then
   if test "$have_fftw" = "no"; then
      as_fn_error $? "
 The fftw library is required by AFIDS. Try specifying
@@ -31721,6 +31721,9 @@ echo "  Generate SWIG wrappers:        ${generate_swig}"
 
 
 echo "  Install documentation:         ${with_documentation}"
+
+
+echo "  Have FFTW:                     ${have_fftw}"
 
 
 echo "  Include AFIDS A configuration: ${with_afids_a}"

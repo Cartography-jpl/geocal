@@ -71,8 +71,10 @@ geocalinc_HEADERS+= @srcimplementation@/ray_intersect.h
 libgeocal_la_SOURCES+= @srcimplementation@/ray_intersect.cc
 geocalinc_HEADERS+= @srcimplementation@/dem_match.h
 libgeocal_la_SOURCES+= @srcimplementation@/dem_match.cc
+if HAVE_FFTW
 geocalinc_HEADERS+= @srcimplementation@/phase_correlation_matcher.h
 libgeocal_la_SOURCES+= @srcimplementation@/phase_correlation_matcher.cc
+endif
 geocalinc_HEADERS+= @srcimplementation@/quadratic_geometric_model.h
 libgeocal_la_SOURCES+= @srcimplementation@/quadratic_geometric_model.cc
 geocalinc_HEADERS+= @srcimplementation@/geometric_model_image.h
@@ -146,7 +148,9 @@ SWIG_SRC += @swigsrc@/surface_image_to_image_match_wrap.cc
 SWIG_SRC += @swigsrc@/location_to_file_wrap.cc
 SWIG_SRC += @swigsrc@/ray_intersect_wrap.cc
 SWIG_SRC += @swigsrc@/dem_match_wrap.cc
+if HAVE_FFTW
 SWIG_SRC += @swigsrc@/phase_correlation_matcher_wrap.cc
+endif
 SWIG_SRC += @swigsrc@/quadratic_geometric_model_wrap.cc
 SWIG_SRC += @swigsrc@/geometric_model_image_wrap.cc
 if HAVE_GDAL
@@ -204,7 +208,9 @@ geocal_test_all_SOURCES+= @srcimplementation@/ray_intersect_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_image_to_image_match_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/surface_image_to_image_match_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_match_test.cc
+if HAVE_FFTW
 geocal_test_all_SOURCES+= @srcimplementation@/phase_correlation_matcher_test.cc
+endif
 geocal_test_all_SOURCES+= @srcimplementation@/quadratic_geometric_model_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/geometric_model_image_test.cc
 

@@ -37,7 +37,7 @@ AC_SPICE(required, cannot_build, default_search)
 AC_BLITZ(required, cannot_build, default_search)
 AC_GSL(required, cannot_build, default_search)
 AC_HDF5(required, cannot_build, default_search)
-AC_DOXYGEN(required, cannot_build, default_search)
+AC_DOXYGEN(optional, cannot_build, default_search)
 AC_FFTW(optional, cannot_build, default_search)
 AC_GDAL(required, cannot_build, default_search)
 AC_VICAR_GDALPLUGIN(required, cannot_build, default_search)
@@ -108,6 +108,9 @@ AC_ARG_WITH([documentation],
              [Bypass running doxygen to update documentation. This is useful for a build environment that is used for development, but you'll want all of your "real" build environments to also update the documentation.])],
            [],
            [with_documentation=yes])
+if test "$have_doxygen" != "yes"; then
+   with_documentation=no
+fi
 AM_CONDITIONAL([WITH_DOCUMENTATION], [test x$with_documentation = xyes])
 
 #=================================================================
@@ -123,6 +126,13 @@ else
   generate_swig="no" 
 fi
 
+if test "$generate_swig" = "yes" -a "$have_doxygen" != "yes"; then
+     AC_MSG_ERROR([
+GeoCal requires doxygen if you are also generating SWIG python bindings.
+You can try specifying the location using --with-doxygen if configure
+couldn't find this. Or you can turn off the use of swig using 
+--without-swig.])
+fi
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 

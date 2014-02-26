@@ -24742,7 +24742,7 @@ fi
 if test "required" = "required"; then
   if test "$have_vicar_rtl" = "no"; then
      as_fn_error $? "
-The VICAR RTL library is required by AFIDS. Try specifying
+The VICAR RTL library is required by GeoCal. Try specifying
 location using --with-vicar-rtl if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -24848,7 +24848,7 @@ fi
 if test "required" = "required"; then
   if test "$have_afids_data" = "no"; then
      as_fn_error $? "
-The AFIDS Data library is required by AFIDS. Try specifying
+The AFIDS Data library is required by GeoCal. Try specifying
 location using --with-afids-data if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -25000,7 +25000,7 @@ fi
 if test "required" = "required"; then
   if test "$have_boost" = "no"; then
      as_fn_error $? "
-The BOOST library is required by AFIDS. Try specifying
+The BOOST library is required by GeoCal. Try specifying
 location using --with-boost if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -25212,7 +25212,7 @@ fi
 if test "required" = "required"; then
   if test "$have_spice" = "no"; then
      as_fn_error $? "
-The SPICE library is required by AFIDS. Try specifying
+The SPICE library is required by GeoCal. Try specifying
 location using --with-spice if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -25420,7 +25420,7 @@ fi
 if test "required" = "required"; then
   if test "$have_blitz" = "no"; then
      as_fn_error $? "
-The Blitz++ library is required by AFIDS. Try specifying
+The Blitz++ library is required by GeoCal. Try specifying
 location using --with-blitz if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -25628,7 +25628,7 @@ fi
 if test "required" = "required"; then
   if test "$have_gsl" = "no"; then
      as_fn_error $? "
-The GSL library is required by AFIDS. Try specifying
+The GSL library is required by GeoCal. Try specifying
 location using --with-gsl if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -25842,7 +25842,7 @@ fi
 if test "required" = "required"; then
   if test "$have_hdf5" = "no"; then
      as_fn_error $? "
-The HDF 5 library is required by AFIDS. Try specifying
+The HDF 5 library is required by GeoCal. Try specifying
 location using --with-hdf5 if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -25979,10 +25979,10 @@ fi
 
 
 
-if test "required" = "required"; then
+if test "optional" = "required"; then
   if test "$have_doxygen" = "no"; then
      as_fn_error $? "
-The Doxygen library is required by AFIDS. Try specifying
+The Doxygen library is required by GeoCal. Try specifying
 location using --with-doxygen if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -26187,7 +26187,7 @@ fi
 if test "optional" = "required"; then
   if test "$have_fftw" = "no"; then
      as_fn_error $? "
-The fftw library is required by AFIDS. Try specifying
+The fftw library is required by GeoCal. Try specifying
 location using --with-fftw if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -26576,7 +26576,7 @@ fi
 if test "required" = "required"; then
   if test "$have_geos" = "no"; then
      as_fn_error $? "
-The Geos library is required by AFIDS. Try specifying
+The Geos library is required by GeoCal. Try specifying
 location using --with-geos if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -26783,7 +26783,7 @@ fi
 if test "required" = "required"; then
   if test "$have_ogdi" = "no"; then
      as_fn_error $? "
-The ogdi library is required by AFIDS. Try specifying
+The ogdi library is required by GeoCal. Try specifying
 location using --with-ogdi if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -26847,7 +26847,7 @@ fi
 if test "required" = "required"; then
   if test "$have_gdal" = "no"; then
      as_fn_error $? "
-The Gdal library is required by AFIDS. Try specifying
+The Gdal library is required by GeoCal. Try specifying
 location using --with-gdal if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -26951,7 +26951,7 @@ fi
 if test "required" = "required"; then
   if test "$have_vicar_gdalplugin" = "no"; then
      as_fn_error $? "
-The VICAR GDAL Plugin library is required by AFIDS. Try specifying
+The VICAR GDAL Plugin library is required by GeoCal. Try specifying
 location using --with-vicar-gdalplugin if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -27053,7 +27053,7 @@ fi
 if test "notrequired" = "required"; then
   if test "$have_afids" = "no"; then
      as_fn_error $? "
-The AFIDS library is required by AFIDS. Try specifying
+The AFIDS library is required by GeoCal. Try specifying
 location using --with-afids if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -27261,7 +27261,7 @@ fi
 if test "required" = "required"; then
   if test "$have_carto" = "no"; then
      as_fn_error $? "
-The Carto library is required by AFIDS. Try specifying
+The Carto library is required by GeoCal. Try specifying
 location using --with-carto if configure could't find the
 library. " "$LINENO" 5
   fi
@@ -28045,7 +28045,7 @@ fi
 if test "required" = "required"; then
   if test "$have_python" = "no"; then
      as_fn_error $? "
-The Python library is required by AFIDS. Try specifying
+The Python library is required by GeoCal. Try specifying
 location using --with-python if configure could't find the
 library. You can specify --with-python=build if you want to build your
 own local copy of Python.
@@ -28482,6 +28482,9 @@ else
   with_documentation=yes
 fi
 
+if test "$have_doxygen" != "yes"; then
+   with_documentation=no
+fi
  if test x$with_documentation = xyes; then
   WITH_DOCUMENTATION_TRUE=
   WITH_DOCUMENTATION_FALSE='#'
@@ -28525,6 +28528,13 @@ else
   generate_swig="no"
 fi
 
+if test "$generate_swig" = "yes" -a "$have_doxygen" != "yes"; then
+     as_fn_error $? "
+GeoCal requires doxygen if you are also generating SWIG python bindings.
+You can try specifying the location using --with-doxygen if configure
+couldn't find this. Or you can turn off the use of swig using
+--without-swig." "$LINENO" 5
+fi
 ac_config_files="$ac_config_files Makefile"
 
 cat >confcache <<\_ACEOF

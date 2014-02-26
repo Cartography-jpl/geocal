@@ -25,6 +25,7 @@ extern "C" {
   void init_geocal_gsl_root(void);
   void init_geocal_time(void);
   void init_tiled_file(void);
+  void init_geocal_fftw(void);
   void init_hdf_file(void);
   void init_image_coordinate(void);
   void init_look_vector(void);
@@ -87,6 +88,7 @@ extern "C" {
   void init_location_to_file(void);
   void init_ray_intersect(void);
   void init_dem_match(void);
+  void init_phase_correlation_matcher(void);
   void init_quadratic_geometric_model(void);
   void init_geometric_model_image(void);
   void init_geocal_gdal(void);
@@ -212,6 +214,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_gsl_root", init_geocal_gsl_root);
   init_extension_module(package, "_geocal_time", init_geocal_time);
   init_extension_module(package, "_tiled_file", init_tiled_file);
+  init_extension_module(package, "_geocal_fftw", init_geocal_fftw);
   init_extension_module(package, "_hdf_file", init_hdf_file);
   init_extension_module(package, "_image_coordinate", init_image_coordinate);
   init_extension_module(package, "_look_vector", init_look_vector);
@@ -274,6 +277,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_location_to_file", init_location_to_file);
   init_extension_module(package, "_ray_intersect", init_ray_intersect);
   init_extension_module(package, "_dem_match", init_dem_match);
+  init_extension_module(package, "_phase_correlation_matcher", init_phase_correlation_matcher);
   init_extension_module(package, "_quadratic_geometric_model", init_quadratic_geometric_model);
   init_extension_module(package, "_geometric_model_image", init_geometric_model_image);
   init_extension_module(package, "_geocal_gdal", init_geocal_gdal);

@@ -94,6 +94,15 @@ GNU Scientific Library. This is a very complete scientific library. It is
 a standard library, widely used and well maintained. See 
 http://www.gnu.org/software/gsl for details.
 
+doxygen (Optional)
+------------------
+This is used to generate documentation describing the C++ code. It is also
+used to add documentation to the python library if you are generating SWIG.
+The program is optional. If it isn't found, then we don't generate 
+documentation. Note however this is required if you are generating SWIG 
+wrappers (not just compiling for use in python, but actually generating
+the SWIG wrappers). See http://www.stack.nl/~dimitri/doxygen/.
+
 CSPICE (Optional)
 -----------------
 This is used for doing time conversions and changing from inertial to

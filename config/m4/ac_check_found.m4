@@ -22,7 +22,7 @@ AC_DEFUN([AC_CHECK_FOUND],
 if test "$4" = "required"; then
   if test "[$have_][$1]" = "no"; then
      AC_MSG_ERROR([
-The ][$3][ library is required by AFIDS. Try specifying
+The ][$3][ library is required by GeoCal. Try specifying
 location using --with-][$2][ if configure could't find the
 library.] m4_bmatch([$5],[can_build], [You can specify --with-][$2][=build if you want to build your
 own local copy of ][$3][.

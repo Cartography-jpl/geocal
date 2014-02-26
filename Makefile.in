@@ -1680,6 +1680,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/matcher_test_newimage.bin \
 	@geocalunittestdata@/matcher_test_refimage.bin \
 	@geocalunittestdata@/mul.tif @geocalunittestdata@/pan.tif \
+	@geocalunittestdata@/phase_correlation/xxim1 \
+	@geocalunittestdata@/phase_correlation/xxim2 \
 	@geocalunittestdata@/rpc.ntf @geocalunittestdata@/rpc.tif \
 	@geocalunittestdata@/rpc_example.pkl \
 	@geocalunittestdata@/s251_sbet_subset.txt \

@@ -72,7 +72,9 @@ It is likely that some of the boost library we are using will end up
 in future version of C++. When that occurs, we'll need to modify our
 software to use the C++ standard version. Since boost is the basis of
 the C++ standard, this will likely be little more than changing which
-name space and include file we get the class from.
+name space to use and include file we get the class from.
+
+License is the BOOST Software license, which is BSD like
 
 Blitz++ (Mandatory)
 -------------------
@@ -88,11 +90,21 @@ development. It is possible we'll need to replace this with something else
 in the future, but for now there are things offered by the library we can't
 find elsewhere.
 
+Blitz has the LGPL license.
+
 GSL (Mandatory)
 ---------------
 GNU Scientific Library. This is a very complete scientific library. It is
 a standard library, widely used and well maintained. See 
 http://www.gnu.org/software/gsl for details.
+
+Note that GSL is GPL, not LGPL - so it has the so called "viral" effect. 
+This may or may not be an issue depending on your application. This only
+matters once we are "distributing" the code, so there should be no issue
+for internal JPL use.
+
+There are only a few places in the code (search for what includes "gsl/gsl*"),
+and could be replaced if needed.
 
 doxygen (Optional)
 ------------------
@@ -111,6 +123,8 @@ another library, there are only a few places where we directly call CSPICE
 routines. Right now, all of the SPICE calls are centralized in the class 
 SpiceHelper.
 
+Copyright by JPL/Caltech
+
 SDP Toolkit (Optional)
 ---------------------
 This serves much the same function as CSPICE, but is the toolkit that was 
@@ -123,11 +137,18 @@ This supplies a fast Fourier transform, it is used to implement the
 phase correlation image matcher. See http://www.fftw.org for details on the
 library.
 
+Note that FFTW is GPL, not LGPL - so it has the so called "viral" effect. 
+This may or may not be an issue depending on your application. This only
+matters once we are "distributing" the code, so there should be no issue
+for internal JPL use.
+
 Gdal (Optional)
 ---------------
 This is used to read and write a wide variety of image formats. It wraps
 a number of other libraries and gives a common interface to reading these
 formats. See http://www.gdal.org for details.
+
+The license is X11/MIT
 
 VICAR (Optional)
 ----------------
@@ -137,12 +158,16 @@ the VICAR shell. Note that even without this library, there is a more
 limited set of classes for reading and writing VICAR format (the
 VicarLiteFile). See http://www-mipl.jpl/external/vicar.html for details.
 
+Copyright by JPL/Caltech
+
 HDF5 (Optional)
 ---------------
 HDF5 library. You can read HDF5 through GDAL, or directly using the HDF5
 library. A handful of file formats depend on having access to HDF 5 (e.g.
 HdfOrbit, a HDF 5 version of an orbit file). Without this library we just
 don't build these classes. See http://www.hdfgroup.org/HDF5
+
+License for this is a HDF 5 specific license, which is BSD like.
 
 Libsdx (Included)
 -----------------
@@ -156,6 +181,8 @@ http://www.virtualroadside.com/blog/index.php/2008/10/04/r-tree-implementation-f
 This library can be replaced with a R*-tree library if we happen to find 
 one (e.g., a library gets added to boost).
 
+The library is LGPL
+
 LibRaw (Included)
 -----------------
 This is the LibRaw version 0.8.2 available from http://www.libraw.org. This
@@ -164,6 +191,8 @@ http://en.wikipedia.org/wiki/Raw_image_format). We include the source for this
 library because it is small, and this is a somewhat obscure library that isn't
 likely to be available as a system library. There are a handful of image file
 formats that depend on this (e.g., RawRasterImage).
+
+The library is LGPL
 
 Autotools
 =================

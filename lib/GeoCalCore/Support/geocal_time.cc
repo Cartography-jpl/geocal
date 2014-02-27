@@ -9,7 +9,9 @@ extern "C" {
 #include "sdp_helper.h"
 #endif
 #include "boost/date_time/posix_time/posix_time.hpp"
+#include <boost/lexical_cast.hpp>
 #include <boost/regex.hpp>
+#include <boost/foreach.hpp>
 using namespace GeoCal;
 
 const Time Time::min_valid_time = Time::time_pgs(-1009843218.0);
@@ -20,20 +22,108 @@ const Time Time::max_valid_time = Time::time_pgs(252676368006.0);
 *******************************************************************/
 class UnixToolkitTimeInterface : public ToolkitTimeInterface {
 public:
+  UnixToolkitTimeInterface()
+  {
+    // This is a hardcoded leapseconds file, used in converting to and
+    // from CCSDS strings. This is only going forward from 1993, I
+    // suppose we could extend this backwards if we ever need that
+    // (but at that point we should really just be using SDP or SPICE)
+    leapsecond_table[0.0] = 0;
+    double one_yr = 365 * 24 * 60 * 60;
+    // June 30, 1993
+    leapsecond_table[0.5 * one_yr] = 0.0;
+    // June 30, 1994
+    leapsecond_table[1.5 * one_yr] = 1.0;
+    // Dec 31, 1995
+    leapsecond_table[3.0 * one_yr] = 2.0;
+    // June 30, 1997
+    leapsecond_table[4.5 * one_yr] = 3.0;
+    // Dec 31, 1998
+    leapsecond_table[6.0 * one_yr] = 4.0;
+    // Dec 31, 2005
+    leapsecond_table[13.0 * one_yr] = 5.0;
+    // Dec 31, 2008
+    leapsecond_table[16.0 * one_yr] = 6.0;
+    // June 30, 2012
+    leapsecond_table[19.5 * one_yr] = 7.0;
+    // Far in the future, as an easy endpoint
+    leapsecond_table[1e6 * one_yr] = 8.0;
+    typedef std::pair<double, int> ptype;
+    BOOST_FOREACH(ptype i, leapsecond_table) {
+      unleapsecond_table[i.first + i.second] = -i.second;
+    }
+
+    // Unix epoch in std::time_t.
+    tm t;
+    t.tm_sec = 0;
+    t.tm_min = 0;
+    t.tm_hour = 0;
+    t.tm_mday = 1;
+    t.tm_mon = 1;
+    t.tm_year = 1970;
+    t.tm_wday = 0;
+    t.tm_yday = 0;
+    t.tm_isdst = 0;
+    unix_ep = mktime(&t);
+  }
   virtual ~UnixToolkitTimeInterface() {}
   virtual Time parse_time(const std::string Time_string) const
   {
     using namespace boost::posix_time;
-    ptime t = time_from_string(Time_string);
-    tm t_tm = to_tm(t);
-    return Time::time_unix(mktime(&t_tm));
+    // Only handle CCSDS time format.
+    boost::smatch m;
+    if(!boost::regex_match(Time_string, m,
+     boost::regex("(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2}(\\.\\d+)?)Z"))) {
+      Exception e;
+      e << "The UnixToolkitTimeInterface is limited to only parsing CCSDS format time strings. The string \"" << Time_string << "\" does not match this format. If you need better parsing, use one of the other time toolkits (e.g, SPICE or SDP toolkit";
+      throw e;
+    }
+    double sec_d = boost::lexical_cast<double>(m[6]);
+    int sec_i = (int) floor(sec_d);
+    double frac_sec = sec_d - sec_i;
+    tm t;
+    t.tm_sec = sec_i;
+    t.tm_min = boost::lexical_cast<double>(m[5]);
+    t.tm_hour = boost::lexical_cast<double>(m[4]);
+    t.tm_mday = boost::lexical_cast<double>(m[3]);
+    t.tm_mon = boost::lexical_cast<double>(m[2]);
+    t.tm_year = boost::lexical_cast<double>(m[1]);
+    t.tm_wday = 0;
+    t.tm_yday = 0;
+    t.tm_isdst = 0;
+    std::time_t r = mktime(&t);
+    Time res = Time::time_unix(r - unix_ep + frac_sec);
+    if(res.pgs() < 0)
+      throw Exception("We can't handle leapseconds before 1993. If you need earlier dates, install one of the other time toolkits");
+    res += leapsecond_table.lower_bound(res.pgs())->second;
+    return res;
   }
   virtual std::string to_string(const Time& T) const
   {
+    if(T.pgs() < 0)
+      throw Exception("We can't handle leapseconds before 1993. If you need earlier dates, install one of the other time toolkits");
     using namespace boost::posix_time;
-    ptime t = from_time_t(T.unix_time());
-    return to_iso_extended_string(t);
+    Time tadjust = T;
+    tadjust += unleapsecond_table.lower_bound(tadjust.pgs())->second;
+    // Doesn't handle fractional seconds, so we add that in.
+    double frac_sec = tadjust.unix_time_double() - 
+      floor(tadjust.unix_time_double());
+    ptime t = from_time_t(tadjust.unix_time() - frac_sec);
+    std::string res = to_iso_extended_string(t);
+    std::ostringstream ss;
+    ss << std::fixed << std::setprecision(6) << frac_sec;
+    boost::smatch m;
+    if(boost::regex_search(ss.str(), m, boost::regex("(\\.\\d+)")))
+      res += m[1];
+    else
+      res += ".000000";
+    return  res + "Z";
   }
+private:
+  std::map<double, int> leapsecond_table;
+  std::map<double, int> unleapsecond_table;
+  // Unix epoch. This accounts for any handling of time zone information.
+  std::time_t unix_ep;
 };
 
 //-----------------------------------------------------------------------
@@ -138,4 +228,7 @@ ToolkitTimeInterface* Time::toolkit_time_interface =
   new UnixToolkitTimeInterface();
   #endif
 #endif
-
+// This is just used by the unit test, so we can always 
+// test the default unix case.
+ToolkitTimeInterface* Time::_unix_toolkit_time_interface =
+  new UnixToolkitTimeInterface();

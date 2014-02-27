@@ -33,9 +33,9 @@ AC_AFIDS_DATA(required, cannot_build, default_search)
 # Various thirdparty libraries.
 
 AC_BOOST(required, cannot_build, default_search)
-AC_SPICE(required, cannot_build, default_search)
 AC_BLITZ(required, cannot_build, default_search)
 AC_GSL(required, cannot_build, default_search)
+AC_SPICE(optional, cannot_build, default_search)
 AC_HDF5(optional, cannot_build, default_search)
 AC_DOXYGEN(optional, cannot_build, default_search)
 AC_FFTW(optional, cannot_build, default_search)
@@ -45,7 +45,7 @@ AC_VICAR_GDALPLUGIN(required, cannot_build, default_search)
 #=================================================================
 # We have some unit tests that make use of vicarb if it is available.
 # It is fine if it isn't, we just skip these tests.
-AC_AFIDS(notrequired, cannot_build, default_search)
+AC_AFIDS(optional, cannot_build, default_search)
 
 #=================================================================
 # Need to find carto library. (Need to have this after VICAR_RTL 
@@ -154,5 +154,6 @@ LOC_MSG([  Generate SWIG wrappers:        ${generate_swig}])
 LOC_MSG([  Install documentation:         ${with_documentation}])
 LOC_MSG([  Have FFTW:                     ${have_fftw}])
 LOC_MSG([  Have HDF5:                     ${have_hdf5}])
+LOC_MSG([  Have SPICE:                    ${have_spice}])
 LOC_MSG([  Include AFIDS A configuration: ${with_afids_a}])
 LOC_MSG([  Include AFIDS Tests:           ${have_afids}])

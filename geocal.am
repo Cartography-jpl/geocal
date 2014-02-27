@@ -75,8 +75,10 @@ EXTRA_DIST+= @libgeocal@/test_all.sh
 # Variables used in testing
 export abs_top_srcdir 
 export run_test = *
+if HAVE_AFIDS_DATA
 export AFIDS_VDEV_DATA = $(AFIDS_DATA)/vdev
 export ELEV_ROOT = $(AFIDS_DATA)/srtmL2_filled
+endif
 export VICAR_GDALPLUGIN_HOME
 export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
 
@@ -96,7 +98,7 @@ geocal_check-am: geocal_test_all
 	@echo "====================================================="
 	@echo "This just builds and runs the geocal unit tests (useful"
 	@echo "during development). It does not build the executables"
-	@echo "and run the AFIDS unit tests, 'make check' for that."
+	@echo "and run the GeoCal unit tests, 'make check' for that."
 	@echo "====================================================="
 	$(srcdir)/$(libgeocal)/test_all.sh
 

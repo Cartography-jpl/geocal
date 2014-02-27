@@ -230,12 +230,10 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/ac_enable_debug.m4 \
 	$(top_srcdir)/config/m4/ac_fftw.m4 \
 	$(top_srcdir)/config/m4/ac_gdal.m4 \
-	$(top_srcdir)/config/m4/ac_geos.m4 \
 	$(top_srcdir)/config/m4/ac_gsl.m4 \
 	$(top_srcdir)/config/m4/ac_handle_with_arg.m4 \
 	$(top_srcdir)/config/m4/ac_hdf5.m4 \
 	$(top_srcdir)/config/m4/ac_is_mac.m4 \
-	$(top_srcdir)/config/m4/ac_ogdi.m4 \
 	$(top_srcdir)/config/m4/ac_pkg_swig.m4 \
 	$(top_srcdir)/config/m4/ac_python.m4 \
 	$(top_srcdir)/config/m4/ac_python_module_with_version.m4 \
@@ -1442,8 +1440,6 @@ FGREP = @FGREP@
 FLIBS = @FLIBS@
 GDAL_CFLAGS = @GDAL_CFLAGS@
 GDAL_LIBS = @GDAL_LIBS@
-GEOS_CFLAGS = @GEOS_CFLAGS@
-GEOS_LIBS = @GEOS_LIBS@
 GREP = @GREP@
 GSL_CFLAGS = @GSL_CFLAGS@
 GSL_LIBS = @GSL_LIBS@
@@ -1477,8 +1473,6 @@ NM = @NM@
 NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
-OGDI_CFLAGS = @OGDI_CFLAGS@
-OGDI_LIBS = @OGDI_LIBS@
 OTOOL = @OTOOL@
 OTOOL64 = @OTOOL64@
 PACKAGE = @PACKAGE@
@@ -2238,6 +2232,10 @@ afidspkgpython_PYTHON = @srcpython@/init/__init__.py \
 	$(am__append_33)
 @HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${PATH}
 @HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}
+@HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
+@HAVE_AFIDS_DATA_TRUE@setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
+@HAVE_SPICE_FALSE@setup_spice = :
+@HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice
 dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen
@@ -7828,8 +7826,8 @@ geocal_install: install-geocalincHEADERS install-geocalpkgpyexecLTLIBRARIES inst
 # Variables used in testing
 export abs_top_srcdir 
 export run_test = *
-export AFIDS_VDEV_DATA = $(AFIDS_DATA)/vdev
-export ELEV_ROOT = $(AFIDS_DATA)/srtmL2_filled
+@HAVE_AFIDS_DATA_TRUE@export AFIDS_VDEV_DATA = $(AFIDS_DATA)/vdev
+@HAVE_AFIDS_DATA_TRUE@export ELEV_ROOT = $(AFIDS_DATA)/srtmL2_filled
 export VICAR_GDALPLUGIN_HOME
 export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
 
@@ -7845,7 +7843,7 @@ geocal_check-am: geocal_test_all
 	@echo "====================================================="
 	@echo "This just builds and runs the geocal unit tests (useful"
 	@echo "during development). It does not build the executables"
-	@echo "and run the AFIDS unit tests, 'make check' for that."
+	@echo "and run the GeoCal unit tests, 'make check' for that."
 	@echo "====================================================="
 	$(srcdir)/$(libgeocal)/test_all.sh
 
@@ -7961,11 +7959,11 @@ install-python: all
 
 # Backdoor rule to do a quick install when we are just varying python
 install-python-afids: install-afidspkgpythonPYTHON install-dist_afidspkgpythonDATA install-dist_binSCRIPTS
-
 python_check:
 	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
-        source $(AFIDS_DATA)/setup_afids_data.sh && \
+        $(setup_afids_data) && \
+        $(setup_spice) && \
         export PATH=$(PYTHON_CHECK_PATH) && \
         nosetests $(srcdir)/@srcpython@/*/ 
 # Used to short circuit tests that would otherwise run.

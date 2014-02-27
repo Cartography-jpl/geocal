@@ -710,16 +710,12 @@ HAVE_GDAL_FALSE
 HAVE_GDAL_TRUE
 BUILD_OGDI_FALSE
 BUILD_OGDI_TRUE
-HAVE_OGDI_FALSE
-HAVE_OGDI_TRUE
-OGDI_LIBS
-OGDI_CFLAGS
 BUILD_GEOS_FALSE
 BUILD_GEOS_TRUE
+HAVE_OGDI_FALSE
+HAVE_OGDI_TRUE
 HAVE_GEOS_FALSE
 HAVE_GEOS_TRUE
-GEOS_LIBS
-GEOS_CFLAGS
 GDAL_LIBS
 GDAL_CFLAGS
 BUILD_FFTW_FALSE
@@ -949,8 +945,6 @@ with_hdf5
 with_doxygen
 with_fftw
 with_gdal
-with_geos
-with_ogdi
 with_vicar_gdalplugin
 with_afids
 with_carto
@@ -995,10 +989,6 @@ FFTW_CFLAGS
 FFTW_LIBS
 GDAL_CFLAGS
 GDAL_LIBS
-GEOS_CFLAGS
-GEOS_LIBS
-OGDI_CFLAGS
-OGDI_LIBS
 CARTO_CFLAGS
 CARTO_LIBS
 PYTHON
@@ -1671,10 +1661,6 @@ Optional Packages:
                           to specify the root directory for fftw (optional).
   --with-gdal[=DIR]       use GDAL (default is yes if found) - it is possible
                           to specify the root directory for GDAL (optional).
-  --with-geos[=DIR]       use Geos (default is yes if found) - it is possible
-                          to specify the root directory for Geos (optional).
-  --with-ogdi[=DIR]       use ogdi (default is yes if found) - it is possible
-                          to specify the root directory for ogdi (optional).
   --with-vicar-gdalplugin[=DIR]
                           use VICAR GDAL Plugin (default is yes if found) - it
                           is possible to specify the root directory for VICAR
@@ -1745,10 +1731,6 @@ Some influential environment variables:
   FFTW_LIBS   linker flags for FFTW, overriding pkg-config
   GDAL_CFLAGS C compiler flags for GDAL, overriding pkg-config
   GDAL_LIBS   linker flags for GDAL, overriding pkg-config
-  GEOS_CFLAGS C compiler flags for GEOS, overriding pkg-config
-  GEOS_LIBS   linker flags for GEOS, overriding pkg-config
-  OGDI_CFLAGS C compiler flags for OGDI, overriding pkg-config
-  OGDI_LIBS   linker flags for OGDI, overriding pkg-config
   CARTO_CFLAGS
               C compiler flags for CARTO, overriding pkg-config
   CARTO_LIBS  linker flags for CARTO, overriding pkg-config
@@ -24845,7 +24827,7 @@ fi
 
 
 
-if test "required" = "required"; then
+if test "optional" = "required"; then
   if test "$have_afids_data" = "no"; then
      as_fn_error $? "
 The AFIDS Data library is required by GeoCal. Try specifying
@@ -25424,6 +25406,7 @@ fi
 
 
 
+# We'll make this optional at some point, but for now this is still required
 
 
 have_spice="no"
@@ -25626,7 +25609,7 @@ fi
 
 
 
-if test "optional" = "required"; then
+if test "required" = "required"; then
   if test "$have_spice" = "no"; then
      as_fn_error $? "
 The SPICE library is required by GeoCal. Try specifying
@@ -26375,422 +26358,12 @@ $as_echo "#define HAVE_GDAL /**/" >>confdefs.h
                 have_gdal="yes"
         fi
 fi
-if test "$build_gdal" = "yes"; then
-
-
-have_geos="no"
-build_geos="no"
-
-# Check whether --with-geos was given.
-if test "${with_geos+set}" = set; then :
-  withval=$with_geos;
-    if test "$withval" = "no"; then
-        want_geos="no"
-    elif test "$withval" = "yes"; then
-        want_geos="yes"
-        ac_geos_path=""
-    elif test "$withval" = "build"; then
-        if test "cannot_build" != "can_build"; then
-            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-geos" "$LINENO" 5
-        fi
-        want_geos="yes"
-        build_geos="yes"
-        if test "x$prefix" = xNONE; then
-           ac_geos_path="$ac_default_prefix"
-        else
-           ac_geos_path="$prefix"
-        fi
-    else
-        want_geos="yes"
-        ac_geos_path="$withval"
-    fi
-
-else
-
-    want_geos="yes"
-    if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
-        want_geos="yes"
-        build_geos="yes"
-        if test "x$prefix" = xNONE; then
-           ac_geos_path="$ac_default_prefix"
-        else
-           ac_geos_path="$prefix"
-        fi
-      fi
-    fi
-
-fi
-
-
-if test "x$want_geos" = "xyes"; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for GEOS library" >&5
-$as_echo_n "checking for GEOS library... " >&6; }
-        succeeded=no
-        if test "$ac_geos_path" != ""; then
-            GEOS_CFLAGS="-I$ac_geos_path/include"
-            GEOS_LIBS="-R$ac_geos_path/lib -L$ac_geos_path/lib -lgeos"
-            succeeded=yes
-        else
-
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for GEOS" >&5
-$as_echo_n "checking for GEOS... " >&6; }
-
-if test -n "$GEOS_CFLAGS"; then
-    pkg_cv_GEOS_CFLAGS="$GEOS_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"geos\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "geos") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_GEOS_CFLAGS=`$PKG_CONFIG --cflags "geos" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$GEOS_LIBS"; then
-    pkg_cv_GEOS_LIBS="$GEOS_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"geos\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "geos") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_GEOS_LIBS=`$PKG_CONFIG --libs "geos" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        GEOS_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "geos" 2>&1`
-        else
-	        GEOS_PKG_ERRORS=`$PKG_CONFIG --print-errors "geos" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$GEOS_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	GEOS_CFLAGS=$pkg_cv_GEOS_CFLAGS
-	GEOS_LIBS=$pkg_cv_GEOS_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
-  if test "$succeeded" = "yes"; then
-     GEOS_PREFIX=`$PKG_CONFIG --variable=prefix "geos" 2>/dev/null`
-  fi
-  if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
-       if test -e "$ac_path_tmp/include/geos.h" && test -r "$ac_path_tmp/include/geos.h"; then
-          GEOS_PREFIX=$ac_path_tmp
-          GEOS_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libgeos.la"; then
-             GEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libgeos.so"; then
-             GEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libgeos.dylib"; then
-             GEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libgeos.la"; then
-             GEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lgeos"
-              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libgeos.so"; then
-             GEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lgeos"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libgeos.dylib"; then
-             GEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lgeos"
-             succeeded=yes
-             break;
-          fi
-       fi
-     done
-  fi
-
-        fi
-
-        if test "$succeeded" != "yes" ; then
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-        else
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-
-
-
-$as_echo "#define HAVE_GEOS /**/" >>confdefs.h
-
-                have_geos="yes"
-        fi
-fi
- if test "$have_geos" = "yes"; then
-  HAVE_GEOS_TRUE=
-  HAVE_GEOS_FALSE='#'
-else
-  HAVE_GEOS_TRUE='#'
-  HAVE_GEOS_FALSE=
-fi
-
- if test "$build_geos" = "yes"; then
-  BUILD_GEOS_TRUE=
-  BUILD_GEOS_FALSE='#'
-else
-  BUILD_GEOS_TRUE='#'
-  BUILD_GEOS_FALSE=
-fi
-
-
-
-if test "required" = "required"; then
-  if test "$have_geos" = "no"; then
-     as_fn_error $? "
-The Geos library is required by GeoCal. Try specifying
-location using --with-geos if configure could't find the
-library. " "$LINENO" 5
-  fi
-fi
-
-
-
-
-have_ogdi="no"
-build_ogdi="no"
-
-# Check whether --with-ogdi was given.
-if test "${with_ogdi+set}" = set; then :
-  withval=$with_ogdi;
-    if test "$withval" = "no"; then
-        want_ogdi="no"
-    elif test "$withval" = "yes"; then
-        want_ogdi="yes"
-        ac_ogdi_path=""
-    elif test "$withval" = "build"; then
-        if test "cannot_build" != "can_build"; then
-            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-ogdi" "$LINENO" 5
-        fi
-        want_ogdi="yes"
-        build_ogdi="yes"
-        if test "x$prefix" = xNONE; then
-           ac_ogdi_path="$ac_default_prefix"
-        else
-           ac_ogdi_path="$prefix"
-        fi
-    else
-        want_ogdi="yes"
-        ac_ogdi_path="$withval"
-    fi
-
-else
-
-    want_ogdi="yes"
-    if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
-        want_ogdi="yes"
-        build_ogdi="yes"
-        if test "x$prefix" = xNONE; then
-           ac_ogdi_path="$ac_default_prefix"
-        else
-           ac_ogdi_path="$prefix"
-        fi
-      fi
-    fi
-
-fi
-
-
-if test "x$want_ogdi" = "xyes"; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Ogdi library" >&5
-$as_echo_n "checking for Ogdi library... " >&6; }
-        succeeded=no
-        if test "$ac_ogdi_path" != ""; then
-            OGDI_LIBS="-L$ac_ogdi_path/lib -logdi"
-            OGDI_CFLAGS="-I$ac_ogdi_path/include"
-            succeeded=yes
-        else
-
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for OGDI" >&5
-$as_echo_n "checking for OGDI... " >&6; }
-
-if test -n "$OGDI_CFLAGS"; then
-    pkg_cv_OGDI_CFLAGS="$OGDI_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ogdi\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "ogdi") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_OGDI_CFLAGS=`$PKG_CONFIG --cflags "ogdi" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$OGDI_LIBS"; then
-    pkg_cv_OGDI_LIBS="$OGDI_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ogdi\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "ogdi") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_OGDI_LIBS=`$PKG_CONFIG --libs "ogdi" 2>/dev/null`
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        OGDI_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "ogdi" 2>&1`
-        else
-	        OGDI_PKG_ERRORS=`$PKG_CONFIG --print-errors "ogdi" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$OGDI_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	OGDI_CFLAGS=$pkg_cv_OGDI_CFLAGS
-	OGDI_LIBS=$pkg_cv_OGDI_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
-  if test "$succeeded" = "yes"; then
-     OGDI_PREFIX=`$PKG_CONFIG --variable=prefix "ogdi" 2>/dev/null`
-  fi
-  if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
-       if test -e "$ac_path_tmp/include/ecs.h" && test -r "$ac_path_tmp/include/ecs.h"; then
-          OGDI_PREFIX=$ac_path_tmp
-          OGDI_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libogdi.la"; then
-             OGDI_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -logdi"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libogdi.so"; then
-             OGDI_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -logdi"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libogdi.dylib"; then
-             OGDI_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -logdi"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libogdi.la"; then
-             OGDI_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -logdi"
-              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libogdi.so"; then
-             OGDI_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -logdi"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libogdi.dylib"; then
-             OGDI_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -logdi"
-             succeeded=yes
-             break;
-          fi
-       fi
-     done
-  fi
-
-        fi
-
-        if test "$succeeded" != "yes" ; then
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-        else
-                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-
-
-
-$as_echo "#define HAVE_OGDI /**/" >>confdefs.h
-
-                have_ogdi="yes"
-        fi
-fi
- if test "$have_ogdi" = "yes"; then
-  HAVE_OGDI_TRUE=
-  HAVE_OGDI_FALSE='#'
-else
-  HAVE_OGDI_TRUE='#'
-  HAVE_OGDI_FALSE=
-fi
-
- if test "$build_ogdi" = "yes"; then
-  BUILD_OGDI_TRUE=
-  BUILD_OGDI_FALSE='#'
-else
-  BUILD_OGDI_TRUE='#'
-  BUILD_OGDI_FALSE=
-fi
-
-
-
-if test "required" = "required"; then
-  if test "$have_ogdi" = "no"; then
-     as_fn_error $? "
-The ogdi library is required by GeoCal. Try specifying
-location using --with-ogdi if configure could't find the
-library. " "$LINENO" 5
-  fi
-fi
-
-
-else # Not building GDAL
+# We never build this in GeoCal, so leave this out so the configure
+# message isn't confusing
+#if test "$build_gdal" = "yes"; then
+#  AC_GEOS(required, cannot_build, default_search)
+#  AC_OGDI(required, cannot_build, default_search)
+#else # Not building GDAL
    if false; then
   HAVE_GEOS_TRUE=
   HAVE_GEOS_FALSE='#'
@@ -26825,7 +26398,7 @@ fi
 
   build_geos="no"
   build_ogdi="no"
-fi # End if/else building GDAL
+#fi # End if/else building GDAL
  if test "$have_gdal" = "yes"; then
   HAVE_GDAL_TRUE=
   HAVE_GDAL_FALSE='#'
@@ -28792,22 +28365,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_FFTW_TRUE}" && test -z "${BUILD_FFTW_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_FFTW\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${HAVE_GEOS_TRUE}" && test -z "${HAVE_GEOS_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_GEOS\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${BUILD_GEOS_TRUE}" && test -z "${BUILD_GEOS_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_GEOS\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${HAVE_OGDI_TRUE}" && test -z "${HAVE_OGDI_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_OGDI\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${BUILD_OGDI_TRUE}" && test -z "${BUILD_OGDI_FALSE}"; then
-  as_fn_error $? "conditional \"BUILD_OGDI\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_GEOS_TRUE}" && test -z "${HAVE_GEOS_FALSE}"; then
@@ -31733,6 +31290,15 @@ echo "  Generate SWIG wrappers:        ${generate_swig}"
 echo "  Install documentation:         ${with_documentation}"
 
 
+echo "  Have AFIDS Data:               ${have_afids_data}"
+
+
+echo "  Have AFIDS:                    ${have_afids}"
+
+
+echo "  Have Carto library:            ${have_carto}"
+
+
 echo "  Have FFTW:                     ${have_fftw}"
 
 
@@ -31740,6 +31306,12 @@ echo "  Have HDF5:                     ${have_hdf5}"
 
 
 echo "  Have SPICE:                    ${have_spice}"
+
+
+echo "  Have VICAR GDAL Plugin:        ${have_vicar_gdalplugin}"
+
+
+echo "  Have VICAR Run Time Library:   ${have_vicar_rtl}"
 
 
 echo "  Include AFIDS A configuration: ${with_afids_a}"

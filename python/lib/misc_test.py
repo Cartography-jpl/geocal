@@ -1,6 +1,12 @@
 from misc import *
 import os.path
 from nose.tools import *
+from nose.plugins.skip import Skip, SkipTest
+
+# Simple test to see if we have AFIDS data available. We check for the
+# presence of one of the AFIDS environment variables, and if there
+# assume we have the data
+have_afid_data = "AFIDS_VDEV_DATA" in os.environ 
 
 # Test makedirs_p by creating a directory and checking that it actually
 # gets created.
@@ -25,6 +31,8 @@ def test_makedirs_p():
         os.removedirs("makedirs_test_dir_a/foo/bar")
 
 def test_cib01_data():
+    if(not have_afid_data):
+        raise SkipTest()
     cib01 = cib01_data()
     assert cib01.number_line == 8795732
     assert cib01.number_sample == 27109425

@@ -27,7 +27,7 @@ AC_VICAR_RTL(required, cannot_build, default_search)
 
 #=================================================================
 # Need to have AFIDS data
-AC_AFIDS_DATA(required, cannot_build, default_search)
+AC_AFIDS_DATA(optional, cannot_build, default_search)
 
 #=================================================================
 # Various thirdparty libraries.
@@ -35,7 +35,8 @@ AC_AFIDS_DATA(required, cannot_build, default_search)
 AC_BOOST(required, cannot_build, default_search)
 AC_BLITZ(required, cannot_build, default_search)
 AC_GSL(required, cannot_build, default_search)
-AC_SPICE(optional, cannot_build, default_search)
+# We'll make this optional at some point, but for now this is still required
+AC_SPICE(required, cannot_build, default_search)
 AC_HDF5(optional, cannot_build, default_search)
 AC_DOXYGEN(optional, cannot_build, default_search)
 AC_FFTW(optional, cannot_build, default_search)
@@ -152,8 +153,13 @@ LOC_MSG([  CXX compiler:                  ${CXX} ${CXXFLAGS}])
 LOC_MSG()
 LOC_MSG([  Generate SWIG wrappers:        ${generate_swig}])
 LOC_MSG([  Install documentation:         ${with_documentation}])
+LOC_MSG([  Have AFIDS Data:               ${have_afids_data}])
+LOC_MSG([  Have AFIDS:                    ${have_afids}])
+LOC_MSG([  Have Carto library:            ${have_carto}])
 LOC_MSG([  Have FFTW:                     ${have_fftw}])
 LOC_MSG([  Have HDF5:                     ${have_hdf5}])
 LOC_MSG([  Have SPICE:                    ${have_spice}])
+LOC_MSG([  Have VICAR GDAL Plugin:        ${have_vicar_gdalplugin}])
+LOC_MSG([  Have VICAR Run Time Library:   ${have_vicar_rtl}])
 LOC_MSG([  Include AFIDS A configuration: ${with_afids_a}])
 LOC_MSG([  Include AFIDS Tests:           ${have_afids}])

@@ -3,8 +3,14 @@
 import cPickle
 from geocal import *
 from nose.tools import *
+from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
+
+# Simple test to see if we have AFIDS data available. We check for the
+# presence of one of the AFIDS environment variables, and if there
+# assume we have the data
+have_afid_data = "AFIDS_VDEV_DATA" in os.environ 
 
 # Test picking of Time
 def test_time_pickle():
@@ -201,6 +207,8 @@ def test_vicar_raster_image():
     assert f.vicar_file.file_name == x.vicar_file.file_name
 
 def test_srtm():
+    if(not have_afid_data):
+        raise SkipTest()
     dem = SrtmDem()
     t = cPickle.dumps(dem)
     dem2 = cPickle.loads(t)

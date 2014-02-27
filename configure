@@ -31316,6 +31316,3 @@ echo "  Have VICAR Run Time Library:   ${have_vicar_rtl}"
 
 echo "  Include AFIDS A configuration: ${with_afids_a}"
 
-
-echo "  Include AFIDS Tests:           ${have_afids}"
-

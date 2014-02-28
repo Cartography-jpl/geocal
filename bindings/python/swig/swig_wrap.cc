@@ -109,10 +109,12 @@ extern "C" {
   void init_rpc_image_ground_connection(void);
   void init_ipi_image_ground_connection(void);
   void init_eci_tod(void);
+  void init_eci_tod_burl(void);
   void init_quaternion_camera(void);
   void init_refraction(void);
   void init_orbit_data_image_ground_connection(void);
   void init_hdf_orbit(void);
+  void init_hdf_orbit_carto(void);
   void init_argus_camera(void);
   void init_argus_orbit(void);
   void init_ibis_file(void);
@@ -297,10 +299,12 @@ void init_swig_wrap(void)
   init_extension_module(package, "_rpc_image_ground_connection", init_rpc_image_ground_connection);
   init_extension_module(package, "_ipi_image_ground_connection", init_ipi_image_ground_connection);
   init_extension_module(package, "_eci_tod", init_eci_tod);
+  init_extension_module(package, "_eci_tod_burl", init_eci_tod_burl);
   init_extension_module(package, "_quaternion_camera", init_quaternion_camera);
   init_extension_module(package, "_refraction", init_refraction);
   init_extension_module(package, "_orbit_data_image_ground_connection", init_orbit_data_image_ground_connection);
   init_extension_module(package, "_hdf_orbit", init_hdf_orbit);
+  init_extension_module(package, "_hdf_orbit_carto", init_hdf_orbit_carto);
   init_extension_module(package, "_argus_camera", init_argus_camera);
   init_extension_module(package, "_argus_orbit", init_argus_orbit);
   init_extension_module(package, "_ibis_file", init_ibis_file);

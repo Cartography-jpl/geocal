@@ -1,10 +1,15 @@
 from afids import *
 import subprocess
 import os
+from nose.plugins.skip import Skip, SkipTest
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_shelve_image():
     '''Create simple GDAL based image.'''
+    try:
+        VicarRasterImage
+    except NameError:
+        raise SkipTest
     try:
         os.remove("sqlite_shelf.db")
     except OSError as exc:

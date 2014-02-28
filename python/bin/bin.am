@@ -28,4 +28,6 @@ dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/call_sample_vicar_python.
 dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/pair_ortho.pdf
 dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/pair_ortho2.pdf
 dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
+if HAVE_VICAR_RTL
 dist_afidspythonvdev_SCRIPTS += $(srcdir)/$(srcpythonbin)/pan_sharpen
+endif

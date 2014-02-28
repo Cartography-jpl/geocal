@@ -201,6 +201,12 @@ def test_vicar_lite_dem():
 
 # Test pickle of VicarRasterImage
 def test_vicar_raster_image():
+    try:
+        # Depending on the options used when building, this class might
+        # not be available. If not, then just skip this test.
+        VicarRasterImage
+    except NameError:
+        raise SkipTest
     f = VicarRasterImage(test_data + "vicar.img")
     t = cPickle.dumps(f)
     x = cPickle.loads(t)
@@ -208,6 +214,10 @@ def test_vicar_raster_image():
 
 def test_srtm():
     if(not have_afid_data):
+        raise SkipTest
+    try:
+        SrtmDem
+    except NameError:
         raise SkipTest
     dem = SrtmDem()
     t = cPickle.dumps(dem)

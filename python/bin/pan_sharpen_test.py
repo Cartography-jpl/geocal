@@ -12,6 +12,10 @@ def test_pan_sharpen_map_projected():
     # Skip we GDAL can't read VICAR.
     if(os.environ.get("NO_VICAR_GDALPLUGIN")):
         raise SkipTest
+    try:
+        VicarRasterImage
+    except NameError:
+        raise SkipTest
     subprocess.check_call(["pan_sharpen", 
                            "inp=(%spost_pan_sub.img, \"%spost_b1:8.img\")" %
                            (test_data1, test_data1),
@@ -33,6 +37,10 @@ def test_pan_sharpen_rpc():
     '''Test the pan_sharpen PDF. This test is for data with an RPC'''
     # Skip we GDAL can't read VICAR.
     if(os.environ.get("NO_VICAR_GDALPLUGIN")):
+        raise SkipTest
+    try:
+        VicarRasterImage
+    except NameError:
         raise SkipTest
     subprocess.check_call(["pan_sharpen", 
                            "inp=(%span.tif, %smul.tif)" %

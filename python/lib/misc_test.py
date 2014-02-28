@@ -33,6 +33,10 @@ def test_makedirs_p():
 def test_cib01_data():
     if(not have_afid_data):
         raise SkipTest
+    try:
+        VicarMultiFile
+    except NameError:
+        raise SkipTest
     cib01 = cib01_data()
     assert cib01.number_line == 8795732
     assert cib01.number_sample == 27109425

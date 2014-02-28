@@ -6,7 +6,7 @@ import safe_matplotlib_import
 import matplotlib.pyplot as plt
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
-img = VicarRasterImage(test_data + "vicar.img")
+img = VicarLiteRasterImage(test_data + "vicar.img")
 d = img.read(0, 0, 10, 10)
 
 def test_past_edge():

@@ -14,7 +14,6 @@ afidspkgpython_PYTHON+= @srcpythonlib@/ray_intersect.py
 afidspkgpython_PYTHON+= @srcpythonlib@/simultaneous_bundle_adjustment.py
 afidspkgpython_PYTHON+= @srcpythonlib@/tie_point_collect.py
 afidspkgpython_PYTHON+= @srcpythonlib@/raster_image_extension.py
-afidspkgpython_PYTHON+= @srcpythonlib@/ibis_file_extension.py
 afidspkgpython_PYTHON+= @srcpythonlib@/lm_optimize.py
 afidspkgpython_PYTHON+= @srcpythonlib@/vicar_wrap.py
 afidspkgpython_PYTHON+= @srcpythonlib@/orbit_offset_correction.py
@@ -39,6 +38,7 @@ afidspkgpython_PYTHON+= @srcpythonlib@/raster_tile.py
 afidspkgpython_PYTHON+= @srcpythonlib@/pleides_rpc.py
 afidspkgpython_PYTHON+= @srcpythonlib@/parallel_process.py
 afidspkgpython_PYTHON+= @srcpythonlib@/raster_image_multi_band.py
+afidspkgpython_PYTHON+= @srcpythonlib@/ibis_file_extension.py
 if HAVE_HDF5
 afidspkgpython_PYTHON+= @srcpythonlib@/air_mspi_igc.py
 endif

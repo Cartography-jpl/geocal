@@ -88,9 +88,9 @@ class VicarImageGroundConnection(geocal.RpcImageGroundConnection):
             base = m.group(1)
             baseend = m.group(4)
             i = int(m.group(2))
-            return VicarFile.is_vicar_file("%s%d%s" % (base, i, baseend))
+            return VicarLiteFile.is_vicar_file("%s%d%s" % (base, i, baseend))
         else:
-            return VicarFile.is_vicar_file(fname)
+            return VicarLiteFile.is_vicar_file(fname)
         
     @classmethod
     def pickle_format_version(cls):

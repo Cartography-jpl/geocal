@@ -1,9 +1,11 @@
 #include "unit_test_support.h"
 #include "igc_map_projected.h"
 #include "vicar_lite_file.h"
-#include "vicar_raster_image.h"
 #include "gdal_raster_image.h"
 #include "rpc_image_ground_connection.h"
+#ifdef HAVE_VICAR_RTL
+#include "vicar_raster_image.h"
+#endif
 
 using namespace GeoCal;
 
@@ -37,8 +39,10 @@ BOOST_AUTO_TEST_CASE(full_res)
 		    394.18319143107396, 1e-4);
   // Optionally write this out for manual inspection
   if(false) {
+#ifdef HAVE_VICAR_RTL
     VicarRasterImage out("full_res.img", mp.map_info(), "HALF");
     copy(mp, out);
+#endif
   }
 }
 
@@ -71,8 +75,10 @@ BOOST_AUTO_TEST_CASE(averaged_res)
 		    448.04033680543279, 1e-4);
   // Optionally write this out for manual inspection
   if(false) {
+#ifdef HAVE_VICAR_RTL
     VicarRasterImage out("averaged_res.img", mp.map_info(), "HALF");
     copy(mp, out);
+#endif
   }
 }
 
@@ -106,8 +112,10 @@ BOOST_AUTO_TEST_CASE(grid_res)
 
   // Optionally write this out for manual inspection
   if(false) {
+#ifdef HAVE_VICAR_RTL
     VicarRasterImage out("grid_res.img", mp.map_info(), "HALF");
     copy(mp, out);
+#endif
   }
 }
 

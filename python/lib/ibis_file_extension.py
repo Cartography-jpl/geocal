@@ -2,6 +2,13 @@
 # IbisFile.
 from geocal import *
 
+# We might not have IbisFile defined
+try:
+    IbisFile
+    have_ibis_file = True
+except NameError:
+    have_ibis_file = False
+
 def _column(self, cindex):
     '''Return the proper IbisColumn<T> type for the given column index.'''
     t = self.column_data_type(cindex)
@@ -20,30 +27,36 @@ def _column(self, cindex):
     else:
         raise "Unrecognized type %d" % t
 
-IbisFile.column = _column
+if have_ibis_file:
+    IbisFile.column = _column
 
 def _getitem(self, index):
     return self.column(index[1])[index[0]]
 
-IbisFile.__getitem__ = _getitem
+if have_ibis_file:
+    IbisFile.__getitem__ = _getitem
 
 def _setitem(self, index, value):
     self.column(index[1])[index[0]] = value
 
-IbisFile.__setitem__ = _setitem
+if have_ibis_file:
+    IbisFile.__setitem__ = _setitem
 
 def _shape(self):
     return (self.number_row, self.number_col)
 
-IbisFile.shape = property(_shape)
+if have_ibis_file:
+    IbisFile.shape = property(_shape)
 
 def _enter(self):
     return self
 
-IbisFile.__enter__ = _enter
+if have_ibis_file:
+    IbisFile.__enter__ = _enter
 
 def _exit(self, type, value, traceback):
     self.close()
 
-IbisFile.__exit__ = _exit
+if have_ibis_file:
+    IbisFile.__exit__ = _exit
 

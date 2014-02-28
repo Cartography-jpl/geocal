@@ -127,7 +127,7 @@ DIST_COMMON = $(srcdir)/common.am $(srcdir)/include.am \
 	$(top_srcdir)/script/setup_afids_python.csh.in \
 	$(top_srcdir)/script/setup_afids_python.sh.in \
 	$(top_srcdir)/lib/GeoCalCore/Support/global_fixture_default.cc.in \
-	$(dist_afidspythonvdev_SCRIPTS) $(dist_bin_SCRIPTS) \
+	$(am__dist_afidspythonvdev_SCRIPTS_DIST) $(dist_bin_SCRIPTS) \
 	$(top_srcdir)/config/depcomp $(am__afidspkgpython_PYTHON_DIST) \
 	$(am__pkgpythonswig_PYTHON_DIST) \
 	$(top_srcdir)/config/py-compile $(dist_afidspkgpython_DATA) \
@@ -254,8 +254,9 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_GDAL_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_49 = $(addprefix $(srcdir)/, $(SWIG_SRC_GDAL))
 @HAVE_SWIG_TRUE@@HAVE_VICAR_RTL_TRUE@@MAINTAINER_MODE_TRUE@am__append_50 = $(addprefix $(srcdir)/, $(SWIG_SRC_VICAR_RTL))
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_51 = $(srcdir)/$(swigsrc)/swig_wrap.cc
-@HAVE_HDF5_TRUE@am__append_52 = @srcpythonlib@/air_mspi_igc.py
-@WITH_AFIDS_A_TRUE@am__append_53 = @srcpythonlib@/tre_amt_struct.py
+@HAVE_VICAR_RTL_TRUE@am__append_52 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@HAVE_HDF5_TRUE@am__append_53 = @srcpythonlib@/air_mspi_igc.py
+@WITH_AFIDS_A_TRUE@am__append_54 = @srcpythonlib@/tre_amt_struct.py
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -428,8 +429,9 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/pos_export_orbit_wrap.cc \
 	@swigsrc@/worldview2_cloudmask_wrap.cc \
 	@swigsrc@/doughnut_average_wrap.cc \
-	@swigsrc@/paint_class_wrap.cc @swigsrc@/eci_tod_burl_wrap.cc \
-	@swigsrc@/geocal_fftw_wrap.cc \
+	@swigsrc@/paint_class_wrap.cc \
+	@swigsrc@/vicar_lite_file_wrap.cc \
+	@swigsrc@/eci_tod_burl_wrap.cc @swigsrc@/geocal_fftw_wrap.cc \
 	@swigsrc@/phase_correlation_matcher_wrap.cc \
 	@swigsrc@/hdf_file_wrap.cc @swigsrc@/hdf_orbit_wrap.cc \
 	@swigsrc@/hdf_orbit_carto_wrap.cc \
@@ -440,9 +442,8 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/image_point_display_wrap.cc \
 	@swigsrc@/ogr_coordinate_wrap.cc \
 	@swigsrc@/material_detect_wrap.cc @swigsrc@/ibis_file_wrap.cc \
-	@swigsrc@/vicar_lite_file_wrap.cc @swigsrc@/vicar_file_wrap.cc \
-	@swigsrc@/vicar_argument_wrap.cc @swigsrc@/vicar_dem_wrap.cc \
-	@swigsrc@/vicar_multi_file_wrap.cc \
+	@swigsrc@/vicar_file_wrap.cc @swigsrc@/vicar_argument_wrap.cc \
+	@swigsrc@/vicar_dem_wrap.cc @swigsrc@/vicar_multi_file_wrap.cc \
 	@swigsrc@/datum_geoid96_wrap.cc @swigsrc@/srtm_dem_wrap.cc \
 	@swigsrc@/vicar_raster_image_wrap.cc @swigsrc@/swig_wrap.cc
 am__dirstamp = $(am__leading_dot)dirstamp
@@ -549,7 +550,8 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-pos_export_orbit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-worldview2_cloudmask_wrap.lo \
 	@swigsrc@/_swig_wrap_la-doughnut_average_wrap.lo \
-	@swigsrc@/_swig_wrap_la-paint_class_wrap.lo
+	@swigsrc@/_swig_wrap_la-paint_class_wrap.lo \
+	@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo
 am__objects_2 = @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo
 @HAVE_CARTO_TRUE@am__objects_3 = $(am__objects_2)
 am__objects_4 = @swigsrc@/_swig_wrap_la-geocal_fftw_wrap.lo \
@@ -570,7 +572,6 @@ am__objects_10 = @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo \
 @HAVE_GDAL_TRUE@am__objects_11 = $(am__objects_10)
 am__objects_12 = @swigsrc@/_swig_wrap_la-material_detect_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ibis_file_wrap.lo \
-	@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo \
 	@swigsrc@/_swig_wrap_la-vicar_file_wrap.lo \
 	@swigsrc@/_swig_wrap_la-vicar_argument_wrap.lo \
 	@swigsrc@/_swig_wrap_la-vicar_dem_wrap.lo \
@@ -1003,6 +1004,9 @@ geocal_test_all_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(geocal_test_all_LDFLAGS) \
 	$(LDFLAGS) -o $@
+am__dist_afidspythonvdev_SCRIPTS_DIST =  \
+	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
+	$(srcdir)/$(srcpythonbin)/pan_sharpen
 SCRIPTS = $(dist_afidspythonvdev_SCRIPTS) $(dist_bin_SCRIPTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -1079,7 +1083,6 @@ am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/simultaneous_bundle_adjustment.py \
 	@srcpythonlib@/tie_point_collect.py \
 	@srcpythonlib@/raster_image_extension.py \
-	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/lm_optimize.py @srcpythonlib@/vicar_wrap.py \
 	@srcpythonlib@/orbit_offset_correction.py \
 	@srcpythonlib@/igc_offset_correction.py \
@@ -1100,6 +1103,7 @@ am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/pleides_rpc.py \
 	@srcpythonlib@/parallel_process.py \
 	@srcpythonlib@/raster_image_multi_band.py \
+	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/air_mspi_igc.py \
 	@srcpythonlib@/tre_amt_struct.py
 am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
@@ -1962,7 +1966,8 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/pos_export_orbit_wrap.cc \
 	@swigsrc@/worldview2_cloudmask_wrap.cc \
 	@swigsrc@/doughnut_average_wrap.cc \
-	@swigsrc@/paint_class_wrap.cc
+	@swigsrc@/paint_class_wrap.cc \
+	@swigsrc@/vicar_lite_file_wrap.cc
 SWIG_SRC_CARTO = @swigsrc@/eci_tod_burl_wrap.cc
 SWIG_SRC_FFTW = @swigsrc@/geocal_fftw_wrap.cc \
 	@swigsrc@/phase_correlation_matcher_wrap.cc
@@ -1975,9 +1980,9 @@ SWIG_SRC_GDAL = @swigsrc@/geocal_gdal_wrap.cc \
 	@swigsrc@/image_point_display_wrap.cc \
 	@swigsrc@/ogr_coordinate_wrap.cc
 SWIG_SRC_VICAR_RTL = @swigsrc@/material_detect_wrap.cc \
-	@swigsrc@/ibis_file_wrap.cc @swigsrc@/vicar_lite_file_wrap.cc \
-	@swigsrc@/vicar_file_wrap.cc @swigsrc@/vicar_argument_wrap.cc \
-	@swigsrc@/vicar_dem_wrap.cc @swigsrc@/vicar_multi_file_wrap.cc \
+	@swigsrc@/ibis_file_wrap.cc @swigsrc@/vicar_file_wrap.cc \
+	@swigsrc@/vicar_argument_wrap.cc @swigsrc@/vicar_dem_wrap.cc \
+	@swigsrc@/vicar_multi_file_wrap.cc \
 	@swigsrc@/datum_geoid96_wrap.cc @swigsrc@/srtm_dem_wrap.cc \
 	@swigsrc@/vicar_raster_image_wrap.cc
 
@@ -2253,7 +2258,6 @@ afidspkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/simultaneous_bundle_adjustment.py \
 	@srcpythonlib@/tie_point_collect.py \
 	@srcpythonlib@/raster_image_extension.py \
-	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/lm_optimize.py @srcpythonlib@/vicar_wrap.py \
 	@srcpythonlib@/orbit_offset_correction.py \
 	@srcpythonlib@/igc_offset_correction.py \
@@ -2273,8 +2277,9 @@ afidspkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/mmap_file.py @srcpythonlib@/raster_tile.py \
 	@srcpythonlib@/pleides_rpc.py \
 	@srcpythonlib@/parallel_process.py \
-	@srcpythonlib@/raster_image_multi_band.py $(am__append_52) \
-	$(am__append_53)
+	@srcpythonlib@/raster_image_multi_band.py \
+	@srcpythonlib@/ibis_file_extension.py $(am__append_53) \
+	$(am__append_54)
 @HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${PATH}
 @HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
@@ -2282,8 +2287,7 @@ afidspkgpython_PYTHON = @srcpython@/init/__init__.py \
 @HAVE_SPICE_FALSE@setup_spice = :
 @HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice
 dist_afidspythonvdev_SCRIPTS =  \
-	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
-	$(srcdir)/$(srcpythonbin)/pan_sharpen
+	$(srcdir)/$(srcpythonbin)/sample_vicar_python $(am__append_52)
 dist_afidspythonvdev_DATA =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
@@ -2632,6 +2636,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-paint_class_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-geocal_fftw_wrap.lo:  \
@@ -2662,8 +2668,6 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-ibis_file_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
-@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo:  \
-	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-vicar_file_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-vicar_argument_wrap.lo:  \
@@ -4566,6 +4570,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-paint_class_wrap.lo `test -f '@swigsrc@/paint_class_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/paint_class_wrap.cc
 
+@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo: @swigsrc@/vicar_lite_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_lite_file_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo `test -f '@swigsrc@/vicar_lite_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_lite_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_lite_file_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_lite_file_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/vicar_lite_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo `test -f '@swigsrc@/vicar_lite_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_lite_file_wrap.cc
+
 @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo: @swigsrc@/eci_tod_burl_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_tod_burl_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo `test -f '@swigsrc@/eci_tod_burl_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/eci_tod_burl_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_tod_burl_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_tod_burl_wrap.Plo
@@ -4670,13 +4681,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/ibis_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-ibis_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-ibis_file_wrap.lo `test -f '@swigsrc@/ibis_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ibis_file_wrap.cc
-
-@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo: @swigsrc@/vicar_lite_file_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_lite_file_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo `test -f '@swigsrc@/vicar_lite_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_lite_file_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_lite_file_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_lite_file_wrap.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/vicar_lite_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo `test -f '@swigsrc@/vicar_lite_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_lite_file_wrap.cc
 
 @swigsrc@/_swig_wrap_la-vicar_file_wrap.lo: @swigsrc@/vicar_file_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vicar_file_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_file_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vicar_file_wrap.lo `test -f '@swigsrc@/vicar_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_file_wrap.cc

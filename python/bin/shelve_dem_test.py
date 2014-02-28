@@ -18,8 +18,12 @@ def test_shelve_dem():
                            test_data + "nevada_elv_aoi.img",
                            "sqlite_shelf.db:dem_initial"])
     if(have_afid_data):
-        subprocess.check_call(["shelve_dem", "--srtm",
-                               "sqlite_shelf.db:dem_srtm"])
+        try:
+            SrtmDem
+            subprocess.check_call(["shelve_dem", "--srtm",
+                                   "sqlite_shelf.db:dem_srtm"])
+        except NameError:
+            pass                # Skip test if we don't have SrtmDem
     subprocess.check_call(["shelve_dem", "--constant-dem=10",
                            "sqlite_shelf.db:dem_constant"])
 

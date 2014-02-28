@@ -1,8 +1,15 @@
 from geocal import *
 from ibis_file_extension import *
+from nose.plugins.skip import Skip, SkipTest
 
 def test_ibis():
     '''Basic test of reading and writing an ibis file.'''
+    try:
+        # Depending on the options used when building, this class might
+        # not be available. If not, then just skip this test.
+        IbisFile
+    except NameError:
+        raise SkipTest
     
     with IbisFile("ibis.img", 10, 
                   ["BYTE", "HALF", "FULL", "REAL", "DOUB", "A10"]) as f:

@@ -113,6 +113,7 @@ extern "C" {
   void init_worldview2_cloudmask(void);
   void init_doughnut_average(void);
   void init_paint_class(void);
+  void init_vicar_lite_file(void);
 #ifdef HAVE_CARTO
   void init_eci_tod_burl(void);
 #endif
@@ -141,7 +142,6 @@ extern "C" {
 #ifdef HAVE_VICAR_RTL
   void init_material_detect(void);
   void init_ibis_file(void);
-  void init_vicar_lite_file(void);
   void init_vicar_file(void);
   void init_vicar_argument(void);
   void init_vicar_dem(void);
@@ -317,6 +317,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_worldview2_cloudmask", init_worldview2_cloudmask);
   init_extension_module(package, "_doughnut_average", init_doughnut_average);
   init_extension_module(package, "_paint_class", init_paint_class);
+  init_extension_module(package, "_vicar_lite_file", init_vicar_lite_file);
 #ifdef HAVE_CARTO
   init_extension_module(package, "_eci_tod_burl", init_eci_tod_burl);
 #endif
@@ -345,7 +346,6 @@ void init_swig_wrap(void)
 #ifdef HAVE_VICAR_RTL
   init_extension_module(package, "_material_detect", init_material_detect);
   init_extension_module(package, "_ibis_file", init_ibis_file);
-  init_extension_module(package, "_vicar_lite_file", init_vicar_lite_file);
   init_extension_module(package, "_vicar_file", init_vicar_file);
   init_extension_module(package, "_vicar_argument", init_vicar_argument);
   init_extension_module(package, "_vicar_dem", init_vicar_dem);

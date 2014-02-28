@@ -1,5 +1,6 @@
 from mmap_file import *
 from nose.tools import *
+from nose.plugins.skip import Skip, SkipTest
 import cPickle
 
 def test_read_write():
@@ -8,6 +9,12 @@ def test_read_write():
     # stepping through
         
     # Dummy MapInfo
+    try:
+        # Depending on the options used when building, this class might
+        # not be available. If not, then just skip this test.
+        VicarRasterImage
+    except NameError:
+        raise SkipTest
     ulc_x = 50
     ulc_y = 60
     x_pixel_res = 0.25

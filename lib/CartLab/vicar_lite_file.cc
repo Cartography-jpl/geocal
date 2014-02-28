@@ -3,12 +3,15 @@
 #include <boost/foreach.hpp>
 #define BOOST_LEXICAL_CAST_ASSUME_C_LOCALE
 #include <boost/lexical_cast.hpp>
+#ifdef HAVE_VICAR_RTL
 #ifdef HAVE_GDAL
+#define USE_VICAR_OGR /**/
+#endif
 #include "vicar_ogr.h"
 #endif
 using namespace GeoCal;
 
-#ifdef HAVE_GDAL
+#ifdef USE_VICAR_OGR
 static VicarOgr vlogr;
 #endif
 
@@ -277,7 +280,7 @@ MapInfo VicarLiteFile::map_info() const
   int projection_id;
   isp >> projection_id;
   if(projection_id != 2)
-#ifdef HAVE_GDAL
+#ifdef USE_VICAR_OGR
     return vlogr.from_vicar(*this);
 #else
     throw Exception("Right now, only Geographic projections are supported. File "
@@ -289,7 +292,7 @@ MapInfo VicarLiteFile::map_info() const
     int ellipsoid_id;
     ise >> ellipsoid_id;
     if(ellipsoid_id != 7030)
-#ifdef HAVE_GDAL
+#ifdef USE_VICAR_OGR
       return vlogr.from_vicar(*this);
 #else
       throw Exception("Right now, only WGS-84 reference ellipsoid is supported. File "
@@ -301,7 +304,7 @@ MapInfo VicarLiteFile::map_info() const
     int geo_id;
     ise >> geo_id;
     if(geo_id != 4326)
-#ifdef HAVE_GDAL
+#ifdef USE_VICAR_OGR
       return vlogr.from_vicar(*this);
 #else
       throw Exception("Right now, only WGS-84 reference ellipsoid is supported. File "

@@ -693,6 +693,8 @@ PYTHON_VERSION
 PYTHON
 BUILD_CARTO_FALSE
 BUILD_CARTO_TRUE
+HAVE_CARTO_FALSE
+HAVE_CARTO_TRUE
 CARTO_BUILD_DEPEND
 CARTO_LIBS
 CARTO_CFLAGS
@@ -26823,9 +26825,20 @@ $as_echo "yes" >&6; }
 
 
 
+
+$as_echo "#define HAVE_CARTO /**/" >>confdefs.h
+
                 have_carto="yes"
         fi
 fi
+ if test "$have_carto" = "yes"; then
+  HAVE_CARTO_TRUE=
+  HAVE_CARTO_FALSE='#'
+else
+  HAVE_CARTO_TRUE='#'
+  HAVE_CARTO_FALSE=
+fi
+
  if test "$build_carto" = "yes"; then
   BUILD_CARTO_TRUE=
   BUILD_CARTO_FALSE='#'
@@ -26836,7 +26849,7 @@ fi
 
 
 
-if test "required" = "required"; then
+if test "optional" = "required"; then
   if test "$have_carto" = "no"; then
      as_fn_error $? "
 The Carto library is required by GeoCal. Try specifying
@@ -28406,6 +28419,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_AFIDS_TRUE}" && test -z "${HAVE_AFIDS_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_AFIDS\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_CARTO_TRUE}" && test -z "${HAVE_CARTO_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_CARTO\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_CARTO_TRUE}" && test -z "${BUILD_CARTO_FALSE}"; then

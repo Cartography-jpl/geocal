@@ -54,7 +54,7 @@ AC_AFIDS(optional, cannot_build, default_search)
 #=================================================================
 # Need to find carto library. (Need to have this after VICAR_RTL 
 # and GSL, because it uses variables from those functions)
-AC_CARTO(required, cannot_build, default_search)
+AC_CARTO(optional, cannot_build, default_search)
 
 #=================================================================
 # Build or find python

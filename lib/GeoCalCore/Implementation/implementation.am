@@ -60,8 +60,10 @@ libgeocal_la_SOURCES+= @srcimplementation@/rpc_image_ground_connection.cc
 geocalinc_HEADERS+= @srcimplementation@/ipi_image_ground_connection.h
 geocalinc_HEADERS+= @srcimplementation@/eci_tod.h
 libgeocal_la_SOURCES+= @srcimplementation@/eci_tod.cc
+if HAVE_CARTO
 geocalinc_HEADERS+= @srcimplementation@/eci_tod_burl.h
 libgeocal_la_SOURCES+= @srcimplementation@/eci_tod_burl.cc
+endif
 geocalinc_HEADERS+= @srcimplementation@/quaternion_camera.h
 libgeocal_la_SOURCES+= @srcimplementation@/quaternion_camera.cc
 geocalinc_HEADERS+= @srcimplementation@/refraction.h
@@ -174,12 +176,17 @@ SWIG_SRC += @swigsrc@/apply_mask_wrap.cc
 SWIG_SRC += @swigsrc@/rpc_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/ipi_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/eci_tod_wrap.cc
+if HAVE_CARTO
 SWIG_SRC += @swigsrc@/eci_tod_burl_wrap.cc
+endif
 SWIG_SRC += @swigsrc@/quaternion_camera_wrap.cc
 SWIG_SRC += @swigsrc@/refraction_wrap.cc
 SWIG_SRC += @swigsrc@/orbit_data_image_ground_connection_wrap.cc
 if HAVE_HDF5
 SWIG_SRC += @swigsrc@/hdf_orbit_wrap.cc
+if HAVE_CARTO
+SWIG_SRC += @swigsrc@/hdf_orbit_carto_wrap.cc
+endif
 endif 
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
@@ -200,7 +207,9 @@ geocal_test_all_SOURCES+= @srcimplementation@/pan_sharpen_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rpc_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/ipi_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_test.cc
+if HAVE_CARTO
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_burl_test.cc
+endif
 geocal_test_all_SOURCES+= @srcimplementation@/quaternion_camera_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/refraction_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_data_image_ground_connection_test.cc

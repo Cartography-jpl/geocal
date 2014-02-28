@@ -8,7 +8,7 @@
 
 from sys import version_info
 if version_info >= (3,0,0):
-    new_instancemethod = lambda func, inst, cls: _hdf_orbit.SWIG_PyInstanceMethod_New(func)
+    new_instancemethod = lambda func, inst, cls: _hdf_orbit_carto.SWIG_PyInstanceMethod_New(func)
 else:
     from new import instancemethod as new_instancemethod
 if version_info >= (2,6,0):
@@ -17,20 +17,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_hdf_orbit', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_hdf_orbit_carto', [dirname(__file__)])
         except ImportError:
-            import _hdf_orbit
-            return _hdf_orbit
+            import _hdf_orbit_carto
+            return _hdf_orbit_carto
         if fp is not None:
             try:
-                _mod = imp.load_module('_hdf_orbit', fp, pathname, description)
+                _mod = imp.load_module('_hdf_orbit_carto', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _hdf_orbit = swig_import_helper()
+    _hdf_orbit_carto = swig_import_helper()
     del swig_import_helper
 else:
-    import _hdf_orbit
+    import _hdf_orbit_carto
 del version_info
 try:
     _swig_property = property
@@ -88,7 +88,7 @@ except:
     weakref_proxy = lambda x: x
 
 
-SHARED_PTR_DISOWN = _hdf_orbit.SHARED_PTR_DISOWN
+SHARED_PTR_DISOWN = _hdf_orbit_carto.SHARED_PTR_DISOWN
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -120,59 +120,14 @@ def _new_from_set(cls, version, *args):
 
 import geocal.orbit
 import geocal.generic_object
-class HdfOrbit_EciTod_TimeAcs(geocal.orbit.Orbit):
-    """
-    This is an implementation of an Orbit that reads position, velocity,
-    and attitude quaternion from an HDF file.
-
-    For times that fall between the values given in the file, we
-    interpolate to get the OrbitData.
-
-    The file should have the following fields:
-
-    <Base group>="">/Attitude/Time - natt in size, time of attitude
-    measurement as doubles. <Base group>="">/Attitude/Quaternion - natt
-    x 4 in size, quaternion to take same coordinate system as Position
-    (e.g., ECI) <Base group>="">/Ephemeris/Time - neph in size, time of
-    ephemeris measurement as doubles <Base group>="">/Ephemeris/Position
-    - neph x 3 in size, position measurement as doubles in meters <Base
-    group>="">/Ephemeris/Velocity - neph x 3 in size, velocity
-    measurement as doubles in meter/second
-
-    Because it is useful, we allow the type of position measurement and
-    time to be changed. The measurement class is passed in, e.g., Eci, as
-    is a small wrapper to give the conversion to Time.
-
-    C++ includes: hdf_orbit.h 
-    """
+class HdfOrbit_EciTodBurl_TimeAcs(geocal.orbit.Orbit):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        """
-        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit")
-        Read the given orbit data file.
-
-        You can optional pass the base group of the HDF file, the default is
-        "/Orbit" 
-        """
-        _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swiginit(self,_hdf_orbit.new_HdfOrbit_EciTod_TimeAcs(*args))
-    def _v_file_name(self):
-        """
-        const std::string& GeoCal::HdfOrbit< PositionType, TimeCreatorType >::file_name() const
-        Return the file name. 
-        """
-        return _hdf_orbit.HdfOrbit_EciTod_TimeAcs__v_file_name(self)
-
+        _hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs_swiginit(self,_hdf_orbit_carto.new_HdfOrbit_EciTodBurl_TimeAcs(*args))
     @property
     def file_name(self):
         return self._v_file_name()
-
-    def _v_base_group(self):
-        """
-        const std::string& GeoCal::HdfOrbit< PositionType, TimeCreatorType >::base_group() const
-        Return the base group. 
-        """
-        return _hdf_orbit.HdfOrbit_EciTod_TimeAcs__v_base_group(self)
 
     @property
     def base_group(self):
@@ -185,11 +140,11 @@ class HdfOrbit_EciTod_TimeAcs(geocal.orbit.Orbit):
     def __reduce__(self):
       return _new_from_init, (self.__class__, 1, self.file_name,self.base_group)
 
-    __swig_destroy__ = _hdf_orbit.delete_HdfOrbit_EciTod_TimeAcs
-HdfOrbit_EciTod_TimeAcs._v_file_name = new_instancemethod(_hdf_orbit.HdfOrbit_EciTod_TimeAcs__v_file_name,None,HdfOrbit_EciTod_TimeAcs)
-HdfOrbit_EciTod_TimeAcs._v_base_group = new_instancemethod(_hdf_orbit.HdfOrbit_EciTod_TimeAcs__v_base_group,None,HdfOrbit_EciTod_TimeAcs)
-HdfOrbit_EciTod_TimeAcs_swigregister = _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swigregister
-HdfOrbit_EciTod_TimeAcs_swigregister(HdfOrbit_EciTod_TimeAcs)
+    __swig_destroy__ = _hdf_orbit_carto.delete_HdfOrbit_EciTodBurl_TimeAcs
+HdfOrbit_EciTodBurl_TimeAcs._v_file_name = new_instancemethod(_hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs__v_file_name,None,HdfOrbit_EciTodBurl_TimeAcs)
+HdfOrbit_EciTodBurl_TimeAcs._v_base_group = new_instancemethod(_hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs__v_base_group,None,HdfOrbit_EciTodBurl_TimeAcs)
+HdfOrbit_EciTodBurl_TimeAcs_swigregister = _hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs_swigregister
+HdfOrbit_EciTodBurl_TimeAcs_swigregister(HdfOrbit_EciTodBurl_TimeAcs)
 
 
 

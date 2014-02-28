@@ -48,6 +48,10 @@ else
 # Used to short circuit tests that would otherwise run.
 export NO_AFIDS_A_TEST=t
 endif
-
+if HAVE_VICAR_GDALPLUGIN
+else
+# Used to short circuit tests that would otherwise run.
+export NO_VICAR_GDALPLUGIN=t
+endif
 
 

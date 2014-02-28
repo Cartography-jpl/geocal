@@ -703,6 +703,7 @@ BUILD_VICAR_GDALPLUGIN_FALSE
 BUILD_VICAR_GDALPLUGIN_TRUE
 HAVE_VICAR_GDALPLUGIN_FALSE
 HAVE_VICAR_GDALPLUGIN_TRUE
+HAVE_VICAR_GDALPLUGIN
 VICAR_GDALPLUGIN_HOME
 BUILD_GDAL_FALSE
 BUILD_GDAL_TRUE
@@ -26178,6 +26179,9 @@ fi
 
 
 
+# We might make this optional at some point, but right now a lot of
+# unit tests depend on this. We could switch to having most tests use
+# VicarLite files, but we won't do that yet.
 
 
 have_gdal="no"
@@ -26500,6 +26504,7 @@ $as_echo "no" >&6; }
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 
+
                 have_vicar_gdalplugin="yes"
         fi
 fi
@@ -26521,7 +26526,7 @@ fi
 
 
 
-if test "required" = "required"; then
+if test "optional" = "required"; then
   if test "$have_vicar_gdalplugin" = "no"; then
      as_fn_error $? "
 The VICAR GDAL Plugin library is required by GeoCal. Try specifying

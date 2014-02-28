@@ -9,6 +9,11 @@ BOOST_FIXTURE_TEST_SUITE(material_detect, GlobalFixture)
 // Compare with test data from a previous Shiva run.
 BOOST_AUTO_TEST_CASE(shiva)
 {
+#ifndef HAVE_VICAR_GDALPLUGIN
+  // We can perhaps set this up to work without the VICAR gdalplugin
+  // at some point, but for now just punt if we don't have this.
+  return;
+#endif
   boost::shared_ptr<GdalMultiBand> mul
     (new GdalMultiBand(shiva_test_data_dir() + "post_b1:8.img"));
   boost::shared_ptr<VicarLiteRasterImage> pandata

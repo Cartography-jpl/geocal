@@ -208,7 +208,7 @@ def test_vicar_raster_image():
 
 def test_srtm():
     if(not have_afid_data):
-        raise SkipTest()
+        raise SkipTest
     dem = SrtmDem()
     t = cPickle.dumps(dem)
     dem2 = cPickle.loads(t)
@@ -245,7 +245,7 @@ def test_forstner_feature_detector():
     
 def test_gdal_dem():
     # Datum is nonsense, but we want to make sure it gets restored correctly
-    d = GdalDem(test_data + "vicar.img", SimpleDatum(10.0))
+    d = GdalDem(test_data + "dem_foot.tif", SimpleDatum(10.0))
     t = cPickle.dumps(d)
     d2 = cPickle.loads(t)
     assert d.file_name == d2.file_name

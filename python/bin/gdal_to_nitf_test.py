@@ -2,11 +2,15 @@ from afids import *
 from nose.tools import *
 import subprocess
 import os
+from nose.plugins.skip import Skip, SkipTest
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_gdal_to_nitf():
     '''Create a simple NITF from gdal_to_nitf, and check that everything is
     ok'''
+    # Skip we GDAL can't read VICAR.
+    if(os.environ.get("NO_VICAR_GDALPLUGIN")):
+        raise SkipTest
     try:
         os.remove("gdal_to_nitf.ntf")
     except OSError as exc:
@@ -49,6 +53,9 @@ def test_gdal_to_nitf():
 def test_gdal_to_nitf_a():
     '''Create a simple NITF from gdal_to_nitf, and check that everything is
     ok'''
+    # Skip we GDAL can't read VICAR.
+    if(os.environ.get("NO_VICAR_GDALPLUGIN")):
+        raise SkipTest
     try:
         os.remove("gdal_to_nitf.ntf")
     except OSError as exc:

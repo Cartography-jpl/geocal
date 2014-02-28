@@ -1447,6 +1447,7 @@ HAVE_CSH = @HAVE_CSH@
 HAVE_CXX = @HAVE_CXX@
 HAVE_PATCH = @HAVE_PATCH@
 HAVE_PERL = @HAVE_PERL@
+HAVE_VICAR_GDALPLUGIN = @HAVE_VICAR_GDALPLUGIN@
 HDF5HOME = @HDF5HOME@
 HDF5_BIN = @HDF5_BIN@
 HDF5_CFLAGS = @HDF5_CFLAGS@
@@ -7968,6 +7969,8 @@ python_check:
         nosetests $(srcdir)/@srcpython@/*/ 
 # Used to short circuit tests that would otherwise run.
 @WITH_AFIDS_A_FALSE@export NO_AFIDS_A_TEST=t
+# Used to short circuit tests that would otherwise run.
+@HAVE_VICAR_GDALPLUGIN_FALSE@export NO_VICAR_GDALPLUGIN=t
 
 install_python_doc: 
 	export PATH=$(bindir):$$PATH && \

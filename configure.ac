@@ -40,8 +40,11 @@ AC_SPICE(required, cannot_build, default_search)
 AC_HDF5(optional, cannot_build, default_search)
 AC_DOXYGEN(optional, cannot_build, default_search)
 AC_FFTW(optional, cannot_build, default_search)
+# We might make this optional at some point, but right now a lot of
+# unit tests depend on this. We could switch to having most tests use
+# VicarLite files, but we won't do that yet.
 AC_GDAL(required, cannot_build, default_search)
-AC_VICAR_GDALPLUGIN(required, cannot_build, default_search)
+AC_VICAR_GDALPLUGIN(optional, cannot_build, default_search)
 
 #=================================================================
 # We have some unit tests that make use of vicarb if it is available.

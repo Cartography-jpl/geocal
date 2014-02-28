@@ -43,6 +43,39 @@ BOOST_AUTO_TEST_CASE(basic_test)
   
 }
 
+BOOST_AUTO_TEST_CASE(unix_time_interface)
+{
+  // Even if we have a different toolkit available, good to test the
+  // unix interface to make sure it is working.
+  ToolkitTimeInterface* original_toolkit = Time::toolkit_time_interface;  
+  try {
+    Time::toolkit_time_interface = Time::_unix_toolkit_time_interface;
+    Time t = Time::time_pgs(100.0);
+    BOOST_CHECK_CLOSE(t.pgs(), 100.0, 1e-6);
+    BOOST_CHECK_CLOSE((t + 200.0).pgs(), 100.0 + 200.0, 1e-6);
+    BOOST_CHECK_CLOSE((t - 200.0).pgs(), 100.0 - 200.0, 1e-6);
+    t = Time::time_gps(100.0);
+    BOOST_CHECK_CLOSE(t.gps(), 100.0, 1e-6);
+    Time  t2 = t;
+    t2 += 10;
+    BOOST_CHECK(t < t2);
+    BOOST_CHECK(t2 > t);
+    BOOST_CHECK(t2 <= t2);
+    BOOST_CHECK(t2 >= t2);
+    BOOST_CHECK_CLOSE(t2 - t, 10.0, 1e-6);
+    Time r = Time::parse_time("1996-07-03T04:13:57.987654Z");
+    BOOST_CHECK_CLOSE(r.pgs(), 110520840.987654, 1e-6);
+    BOOST_CHECK_EQUAL(r.to_string(), "1996-07-03T04:13:57.987654Z");
+    r += 2.0 * 365 * 24 * 60 * 60; // This goes through a leapsecond
+    BOOST_CHECK_EQUAL(r.to_string(), 
+		      std::string("1998-07-03T04:13:56.987654Z"));
+  } catch(...) {
+    Time::toolkit_time_interface = original_toolkit;
+    throw;
+  }
+  Time::toolkit_time_interface = original_toolkit;
+}
+
 BOOST_AUTO_TEST_CASE(timing_test)
 {
   Time t;

@@ -60,7 +60,7 @@ else:
         datum = GdalDatum(args.datum_file, args.datum_band)
     else:
         datum = SimpleDatum(args.constant_datum)
-    if VicarFile.is_vicar_file(args.dem_file):
+    if VicarLiteFile.is_vicar_file(args.dem_file):
         # -1 in band is because VicarLiteDem uses 0-based band, rather
         # than 1-based we use in this program.
         dem = VicarLiteDem(args.dem_file, not args.outside_dem_not_error, 

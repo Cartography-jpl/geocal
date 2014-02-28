@@ -35,17 +35,19 @@ if test "x$want_gdal" = "xyes"; then
                 have_gdal="yes"
         fi
 fi
-if test "$build_gdal" = "yes"; then
-  AC_GEOS(required, $2, default_search)
-  AC_OGDI(required, $2, default_search)
-else # Not building GDAL
+# We never build this in GeoCal, so leave this out so the configure
+# message isn't confusing
+#if test "$build_gdal" = "yes"; then
+#  AC_GEOS(required, $2, default_search)
+#  AC_OGDI(required, $2, default_search)
+#else # Not building GDAL
   AM_CONDITIONAL([HAVE_GEOS], [false])
   AM_CONDITIONAL([HAVE_OGDI], [false])
   AM_CONDITIONAL([BUILD_GEOS], [false])
   AM_CONDITIONAL([BUILD_OGDI], [false])
   build_geos="no"
   build_ogdi="no"
-fi # End if/else building GDAL
+#fi # End if/else building GDAL
 AM_CONDITIONAL([HAVE_GDAL], [test "$have_gdal" = "yes"])
 AM_CONDITIONAL([BUILD_GDAL], [test "$build_gdal" = "yes"])
 

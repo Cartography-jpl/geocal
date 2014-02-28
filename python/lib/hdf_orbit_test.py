@@ -2,6 +2,7 @@ import h5py
 import numpy as np
 import os
 from geocal import *
+from nose.plugins.skip import Skip, SkipTest
 import cPickle
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
@@ -55,6 +56,13 @@ def test_sc2rpc():
     sc2rpc gets. This was tracked down to what I believe is a more
     accurate calculation the spice toolkit for J2000 to ECEF.  We allow
     a 10 meter error in comparing to sc2rpc.'''
+    try:
+        # Depending on the options used when building, this class might
+        # not be available. If not, then just skip this test.
+        HdfOrbit_EciTod_TimeAcs
+    except NameError:
+        raise SkipTest
+
     orb = HdfOrbit_EciTod_TimeAcs(test_data + "sample_orbit.h5")
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,
@@ -70,6 +78,13 @@ def test_sc2rpc():
     
     
 def test_pickle():
+    try:
+        # Depending on the options used when building, this class might
+        # not be available. If not, then just skip this test.
+        HdfOrbit_EciTod_TimeAcs
+    except NameError:
+        raise SkipTest
+
     orb = HdfOrbit_EciTod_TimeAcs(test_data + "sample_orbit.h5")
     t = cPickle.dumps(orb, cPickle.HIGHEST_PROTOCOL)
     orb2 = cPickle.loads(t)

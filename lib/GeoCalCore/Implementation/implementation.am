@@ -60,8 +60,10 @@ libgeocal_la_SOURCES+= @srcimplementation@/rpc_image_ground_connection.cc
 geocalinc_HEADERS+= @srcimplementation@/ipi_image_ground_connection.h
 geocalinc_HEADERS+= @srcimplementation@/eci_tod.h
 libgeocal_la_SOURCES+= @srcimplementation@/eci_tod.cc
+if HAVE_CARTO
 geocalinc_HEADERS+= @srcimplementation@/eci_tod_burl.h
 libgeocal_la_SOURCES+= @srcimplementation@/eci_tod_burl.cc
+endif
 geocalinc_HEADERS+= @srcimplementation@/quaternion_camera.h
 libgeocal_la_SOURCES+= @srcimplementation@/quaternion_camera.cc
 geocalinc_HEADERS+= @srcimplementation@/refraction.h
@@ -71,8 +73,10 @@ geocalinc_HEADERS+= @srcimplementation@/ray_intersect.h
 libgeocal_la_SOURCES+= @srcimplementation@/ray_intersect.cc
 geocalinc_HEADERS+= @srcimplementation@/dem_match.h
 libgeocal_la_SOURCES+= @srcimplementation@/dem_match.cc
+if HAVE_FFTW
 geocalinc_HEADERS+= @srcimplementation@/phase_correlation_matcher.h
 libgeocal_la_SOURCES+= @srcimplementation@/phase_correlation_matcher.cc
+endif
 geocalinc_HEADERS+= @srcimplementation@/quadratic_geometric_model.h
 libgeocal_la_SOURCES+= @srcimplementation@/quadratic_geometric_model.cc
 geocalinc_HEADERS+= @srcimplementation@/geometric_model_image.h
@@ -146,19 +150,17 @@ SWIG_SRC += @swigsrc@/surface_image_to_image_match_wrap.cc
 SWIG_SRC += @swigsrc@/location_to_file_wrap.cc
 SWIG_SRC += @swigsrc@/ray_intersect_wrap.cc
 SWIG_SRC += @swigsrc@/dem_match_wrap.cc
-SWIG_SRC += @swigsrc@/phase_correlation_matcher_wrap.cc
+SWIG_SRC_FFTW += @swigsrc@/phase_correlation_matcher_wrap.cc
 SWIG_SRC += @swigsrc@/quadratic_geometric_model_wrap.cc
 SWIG_SRC += @swigsrc@/geometric_model_image_wrap.cc
-if HAVE_GDAL
-  SWIG_SRC += @swigsrc@/geocal_gdal_wrap.cc
-  SWIG_SRC += @swigsrc@/gdal_raster_image_wrap.cc
-  SWIG_SRC += @swigsrc@/gdal_datum_wrap.cc
-  SWIG_SRC += @swigsrc@/gdal_dem_wrap.cc
-  SWIG_SRC += @swigsrc@/gdal_multi_band_wrap.cc
-  SWIG_SRC += @swigsrc@/image_point_display_wrap.cc
-  SWIG_SRC += @swigsrc@/ogr_coordinate_wrap.cc
-#  SWIG_SRC += @swigsrc@/gdal_multi_file_wrap.cc
-endif
+SWIG_SRC_GDAL += @swigsrc@/geocal_gdal_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/gdal_raster_image_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/gdal_datum_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/gdal_dem_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/gdal_multi_band_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/image_point_display_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/ogr_coordinate_wrap.cc
+#  SWIG_SRC_GDAL += @swigsrc@/gdal_multi_file_wrap.cc
 SWIG_SRC += @swigsrc@/memory_multi_band_wrap.cc
 SWIG_SRC += @swigsrc@/spice_helper_wrap.cc
 SWIG_SRC += @swigsrc@/raw_raster_image_wrap.cc
@@ -170,13 +172,12 @@ SWIG_SRC += @swigsrc@/apply_mask_wrap.cc
 SWIG_SRC += @swigsrc@/rpc_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/ipi_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/eci_tod_wrap.cc
-SWIG_SRC += @swigsrc@/eci_tod_burl_wrap.cc
+SWIG_SRC_CARTO += @swigsrc@/eci_tod_burl_wrap.cc
 SWIG_SRC += @swigsrc@/quaternion_camera_wrap.cc
 SWIG_SRC += @swigsrc@/refraction_wrap.cc
 SWIG_SRC += @swigsrc@/orbit_data_image_ground_connection_wrap.cc
-if HAVE_HDF5
-SWIG_SRC += @swigsrc@/hdf_orbit_wrap.cc
-endif 
+SWIG_SRC_HDF5 += @swigsrc@/hdf_orbit_wrap.cc
+SWIG_SRC_HDF5_CARTO += @swigsrc@/hdf_orbit_carto_wrap.cc
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_map_info_offset_test.cc
@@ -196,7 +197,9 @@ geocal_test_all_SOURCES+= @srcimplementation@/pan_sharpen_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rpc_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/ipi_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_test.cc
+if HAVE_CARTO
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_burl_test.cc
+endif
 geocal_test_all_SOURCES+= @srcimplementation@/quaternion_camera_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/refraction_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_data_image_ground_connection_test.cc
@@ -204,7 +207,9 @@ geocal_test_all_SOURCES+= @srcimplementation@/ray_intersect_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_image_to_image_match_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/surface_image_to_image_match_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_match_test.cc
+if HAVE_FFTW
 geocal_test_all_SOURCES+= @srcimplementation@/phase_correlation_matcher_test.cc
+endif
 geocal_test_all_SOURCES+= @srcimplementation@/quadratic_geometric_model_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/geometric_model_image_test.cc
 

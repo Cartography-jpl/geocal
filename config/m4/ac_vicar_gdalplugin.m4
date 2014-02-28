@@ -51,6 +51,7 @@ if test "x$want_vicar_gdalplugin" = "xyes"; then
         else
                 AC_MSG_RESULT([yes])
                 AC_SUBST(VICAR_GDALPLUGIN_HOME)
+		AC_SUBST([HAVE_VICAR_GDALPLUGIN],,[Defined if we have VICAR GDAL plugin])
                 have_vicar_gdalplugin="yes"
         fi
 fi

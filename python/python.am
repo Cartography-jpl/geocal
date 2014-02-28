@@ -9,10 +9,21 @@ else
 PYTHON_CHECK_PATH=$(bindir):$(afidspythonvdevdir):${PATH}
 endif
 
+if HAVE_AFIDS_DATA
+setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
+else
+setup_afids_data = :
+endif
+if HAVE_SPICE
+setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice
+else
+setup_spice = :
+endif
 python_check:
 	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
-        source $(AFIDS_DATA)/setup_afids_data.sh && \
+        $(setup_afids_data) && \
+        $(setup_spice) && \
         export PATH=$(PYTHON_CHECK_PATH) && \
         nosetests $(srcdir)/@srcpython@/*/ 
 

@@ -6,17 +6,28 @@ from nose.plugins.skip import Skip, SkipTest
 import os
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
-EciTodBurl.set_delta_ut1(0.1128609)
+try:
+    # Depending on the options used when building, this class might not
+    # be available. If not, just skip the tests
+    EciTodBurl
+    have_carto = True
+except NameError:
+    have_carto = False
 
-# Simple test to see if we have VICAR available. We check for the presence of
-# one of the AFIDS environment variables, and if there assume we have VICAR
-have_vicar = "AFIDS_ROOT" in os.environ 
+try:
+    VicarRasterImage
+    have_vicar_rtl = True
+except NameError:
+    have_vicar_rtl = False
+
+if(have_carto):
+    EciTodBurl.set_delta_ut1(0.1128609)
 
 def test_scinterp():
     '''This was pulled from tstscinterp.pdf. This isn't actually a very
     good test, since we don't actually interpolate anything. But we want
     to include this test since it is what the underlying pdf file uses.'''
-    if(not have_vicar):
+    if(not have_carto or not have_vicar_rtl):
         raise SkipTest
     pos = EciTodBurl(3722048.0,4126137.9,3955545.4)
     tpos = Time.time_acs(31556737.5)
@@ -38,7 +49,7 @@ def test_scinterp():
 
 def test_sc2rpc():
     '''Test data from devsc2rpc'''
-    if(not have_vicar):
+    if(not have_carto or not have_vicar_rtl):
         raise SkipTest
     od = QuaternionOrbitData(Time.time_acs(215077459.471879),
                              EciTodBurl(3435100.496, 945571.538, -6053387.573),
@@ -54,7 +65,7 @@ def test_sc2rpc():
 
 def test_compare_sc2rpc():
     '''Calculate using my code, and see how close we are to sc2rpc'''
-    if(not have_vicar):
+    if(not have_carto or not have_vicar_rtl):
         raise SkipTest
     od = QuaternionOrbitData(Time.time_acs(215077459.471879),
                              EciTodBurl(3435100.496, 945571.538, -6053387.573),

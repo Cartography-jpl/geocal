@@ -168,6 +168,13 @@ public:
   static ToolkitTimeInterface* toolkit_time_interface;
 
 //-----------------------------------------------------------------------
+/// Stash a copy of a UnixToolkitTimeInterface, this is just used for
+/// testing.
+//-----------------------------------------------------------------------
+
+  static ToolkitTimeInterface* _unix_toolkit_time_interface;
+
+//-----------------------------------------------------------------------
 /// Parse string to get a Time. Uses interface supplied by
 /// toolkit_time_interface. 
 //-----------------------------------------------------------------------

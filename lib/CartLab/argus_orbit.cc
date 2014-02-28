@@ -1,7 +1,6 @@
 #include "argus_orbit.h"
 #include "gdal_raster_image.h"
 #include "gdal_raster_image.h"
-#include "vicar_raster_image.h"
 #include "memory_raster_image.h"
 #include "sub_raster_image.h"
 #include <fstream>
@@ -11,6 +10,9 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/foreach.hpp>
+#ifdef HAVE_VICAR_RTL
+#include "vicar_raster_image.h"
+#endif
 
 using namespace GeoCal;
 
@@ -145,12 +147,16 @@ void ArgusOrbitData::save_to_file(const std::string& Fname,
 				GdalRasterImage::Byte, 
 				"PHOTOMETRIC=RGB TILED=YES COMPRESS=JPEG", true);
   } else if(Type == "vicar") {
+#ifdef HAVE_VICAR_RTL
     VicarRasterImage v1(Fname + "_r.img", m1.map_info());
     copy(m1, v1);
     VicarRasterImage v2(Fname + "_g.img", m1.map_info());
     copy(m2, v2);
     VicarRasterImage v3(Fname + "_b.img", m1.map_info());
     copy(m3, v3);
+#else
+    throw Exception("Wasn't compiled with support for VICAR RTL. If you need thsi functionality, install the VICAR RTL and rebuild GeoCal");
+#endif
   } else {
     throw Exception("Unrecognized type. Should be img, tif or vicar");
   }

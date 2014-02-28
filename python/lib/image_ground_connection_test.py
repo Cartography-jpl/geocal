@@ -35,12 +35,12 @@ def test_vicar_image_ground_connection():
     assert_almost_equal(igc2.rpc.sample_numerator[0], 2)
 
 def test_gdal_image_ground_connection():
-    igc1 = GdalImageGroundConnection(test_data + "10MAY21-1.img", dem)
+    igc1 = GdalImageGroundConnection(test_data + "10MAY21-1.tif", dem)
     t = cPickle.dumps(igc1)
     igc2 = cPickle.loads(t)
 
 def test_view_angle():
-    igc1 = GdalImageGroundConnection(test_data + "10MAY21-1.img", dem)
+    igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", dem)
     ic = ImageCoordinate(igc1.image.number_line / 2.0,
                          igc1.image.number_sample / 2.0)
     zen, azm = igc1.view_angle(ic)
@@ -48,7 +48,7 @@ def test_view_angle():
     assert_almost_equal(azm, 7.2390, 2)
 
 def test_footprint_geometry():
-    igc1 = GdalImageGroundConnection(test_data + "10MAY21-1.img", dem)
+    igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", dem)
     g = igc1.footprint_geometry()
     assert g.IsValid()
 

@@ -35,8 +35,10 @@ libgeocal_la_SOURCES+= @srcsupport@/covariance.cc
 geocalinc_HEADERS+= @srcsupport@/covariance.h
 libgeocal_la_SOURCES+= @srcsupport@/statistic.cc
 geocalinc_HEADERS+= @srcsupport@/statistic.h
+if HAVE_FFTW
 geocalinc_HEADERS+= @srcsupport@/geocal_fftw.h
 libgeocal_la_SOURCES+= @srcsupport@/geocal_fftw.cc
+endif
 if HAVE_HDF5
 geocalinc_HEADERS+= @srcsupport@/hdf_file.h
 libgeocal_la_SOURCES+= @srcsupport@/hdf_file.cc
@@ -55,10 +57,8 @@ SWIG_SRC += @swigsrc@/geocal_gsl_fit_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_gsl_root_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_time_wrap.cc
 SWIG_SRC += @swigsrc@/tiled_file_wrap.cc
-SWIG_SRC += @swigsrc@/geocal_fftw_wrap.cc
-if HAVE_HDF5
-SWIG_SRC += @swigsrc@/hdf_file_wrap.cc
-endif
+SWIG_SRC_FFTW += @swigsrc@/geocal_fftw_wrap.cc
+SWIG_SRC_HDF5 += @swigsrc@/hdf_file_wrap.cc
 # Test files
 EXTRA_DIST += @srcsupport@/unit_test_support.h
 EXTRA_DIST += @srcsupport@/global_fixture.h
@@ -77,7 +77,9 @@ geocal_test_all_SOURCES+= @srcsupport@/geocal_gsl_fit_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_gsl_root_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/covariance_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/statistic_test.cc 
+if HAVE_FFTW
 geocal_test_all_SOURCES+= @srcsupport@/geocal_fftw_test.cc 
+endif
 if HAVE_HDF5
 geocal_test_all_SOURCES+= @srcsupport@/hdf_file_test.cc 
 endif

@@ -55,9 +55,11 @@ if test "x$want_carto" = "xyes"; then
                 AC_SUBST(CARTO_CFLAGS)
                 AC_SUBST(CARTO_BUILD_DEPEND)
                 AC_SUBST(CARTO_LIBS)
+                AC_DEFINE(HAVE_CARTO,,[Defined if we have Carto library])
                 have_carto="yes"
         fi
 fi
+AM_CONDITIONAL([HAVE_CARTO], [test "$have_carto" = "yes"])
 AM_CONDITIONAL([BUILD_CARTO], [test "$build_carto" = "yes"])
 
 AC_CHECK_FOUND([carto], [carto],[Carto],$1,$2)

@@ -3,8 +3,14 @@
 import cPickle
 from geocal import *
 from nose.tools import *
+from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
+
+# Simple test to see if we have AFIDS data available. We check for the
+# presence of one of the AFIDS environment variables, and if there
+# assume we have the data
+have_afid_data = "AFIDS_VDEV_DATA" in os.environ 
 
 # Test picking of Time
 def test_time_pickle():
@@ -195,12 +201,24 @@ def test_vicar_lite_dem():
 
 # Test pickle of VicarRasterImage
 def test_vicar_raster_image():
+    try:
+        # Depending on the options used when building, this class might
+        # not be available. If not, then just skip this test.
+        VicarRasterImage
+    except NameError:
+        raise SkipTest
     f = VicarRasterImage(test_data + "vicar.img")
     t = cPickle.dumps(f)
     x = cPickle.loads(t)
     assert f.vicar_file.file_name == x.vicar_file.file_name
 
 def test_srtm():
+    if(not have_afid_data):
+        raise SkipTest
+    try:
+        SrtmDem
+    except NameError:
+        raise SkipTest
     dem = SrtmDem()
     t = cPickle.dumps(dem)
     dem2 = cPickle.loads(t)
@@ -237,7 +255,7 @@ def test_forstner_feature_detector():
     
 def test_gdal_dem():
     # Datum is nonsense, but we want to make sure it gets restored correctly
-    d = GdalDem(test_data + "vicar.img", SimpleDatum(10.0))
+    d = GdalDem(test_data + "dem_foot.tif", SimpleDatum(10.0))
     t = cPickle.dumps(d)
     d2 = cPickle.loads(t)
     assert d.file_name == d2.file_name

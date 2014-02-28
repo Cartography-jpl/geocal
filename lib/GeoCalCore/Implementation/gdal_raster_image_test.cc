@@ -106,6 +106,10 @@ BOOST_AUTO_TEST_CASE(create)
 
 BOOST_AUTO_TEST_CASE(nitf_corner)
 {
+#ifndef HAVE_VICAR_GDALPLUGIN
+  // Test requires VICAR gdalplugin, so skip if we don't have this.
+  return;
+#endif
   // File without NITF corner, should return null pointer.
   std::string f = test_data_dir() + "rpc.ntf";
   GdalRasterImage g(f);

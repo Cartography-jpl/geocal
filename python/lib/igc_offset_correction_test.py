@@ -2,10 +2,10 @@ from nose.tools import *
 import cPickle
 from geocal import *
 from igc_offset_correction import *
+from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
-orb_uncorr = HdfOrbit_EciTod_TimeAcs(test_data + "../sample_orbit.h5")
 cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                        3375, 3648,
                        1.0 / 2500000,
@@ -19,6 +19,14 @@ img2 = VicarLiteRasterImage(test_data + "10MAY21-2.img")
 img3 = VicarLiteRasterImage(test_data + "10MAY21-3.img")
 
 def test_igc():
+    try:
+        # Depending on the options used when building, this class might
+        # not be available. If not, then just skip this test.
+        HdfOrbit_EciTod_TimeAcs
+    except NameError:
+        raise SkipTest
+
+    orb_uncorr = HdfOrbit_EciTod_TimeAcs(test_data + "../sample_orbit.h5")
     t2 = Time.time_acs(215077459.472);
     t1 = t2 - 10
     t3 = t2 + 10

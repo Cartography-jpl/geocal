@@ -2,6 +2,7 @@ from geocal import *
 from nose.tools import *
 from tre_struct import *
 import subprocess
+from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 test_data2 = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
@@ -53,6 +54,9 @@ sun_az        : 131.3"""
 
 def test_nitf_use00a_create():
     '''Create a nitf from existing VICAR data, adding a TRE for use00a'''
+    # Skip if we don't have support for VICAR in GDAL
+    if(os.environ.get("NO_VICAR_GDALPLUGIN")):
+        raise SkipTest
     try:
         os.remove("use00a.vrt")
     except OSError as exc:
@@ -112,7 +116,7 @@ def test_gdal_raster():
 
 def test_tre_rpc():
     '''Test reading and writing a RPC'''
-    rpc = GdalRasterImage(test_data2 + "10MAY21-1.img").rpc
+    rpc = VicarLiteRasterImage(test_data2 + "10MAY21-1.img").rpc
     rpc_a = rpc.rpc_type_a()
     tb = TreRPC00B()
     ta = TreRPC00A()

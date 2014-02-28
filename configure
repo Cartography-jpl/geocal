@@ -773,6 +773,8 @@ HAVE_AFIDS_DATA_TRUE
 AFIDS_DATA
 BUILD_VICAR_RTL_FALSE
 BUILD_VICAR_RTL_TRUE
+HAVE_VICAR_RTL_FALSE
+HAVE_VICAR_RTL_TRUE
 VICAR_RTL_BUILD_DEPEND
 VICAR_RTL_LIBS
 VICAR_RTL_CFLAGS
@@ -24705,13 +24707,21 @@ else
 
    have_vicar_rtl=no
    build_vicar_rtl=no
-   if test "required" = "required"; then
+   if test "optional" = "required"; then
       as_fn_error $? "Could not find term.h, which is required to build the required Vicar RTL. This is found in ncurses_devel on Redhat" "$LINENO" 5
    fi
 
 fi
 
 
+fi
+
+ if test "$have_vicar_rtl" = "yes"; then
+  HAVE_VICAR_RTL_TRUE=
+  HAVE_VICAR_RTL_FALSE='#'
+else
+  HAVE_VICAR_RTL_TRUE='#'
+  HAVE_VICAR_RTL_FALSE=
 fi
 
  if test "$build_vicar_rtl" = "yes"; then
@@ -24724,7 +24734,7 @@ fi
 
 
 
-if test "required" = "required"; then
+if test "optional" = "required"; then
   if test "$have_vicar_rtl" = "no"; then
      as_fn_error $? "
 The VICAR RTL library is required by GeoCal. Try specifying
@@ -26148,6 +26158,9 @@ $as_echo "no" >&6; }
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 
+
+
+$as_echo "#define HAVE_FFTW /**/" >>confdefs.h
 
                 have_fftw="yes"
         fi
@@ -28315,6 +28328,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_CURSES_TRUE}" && test -z "${HAVE_CURSES_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_CURSES\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_VICAR_RTL_TRUE}" && test -z "${HAVE_VICAR_RTL_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_VICAR_RTL\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_VICAR_RTL_TRUE}" && test -z "${BUILD_VICAR_RTL_FALSE}"; then

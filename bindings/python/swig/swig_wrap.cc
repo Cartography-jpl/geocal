@@ -104,24 +104,14 @@ extern "C" {
   void init_orbit_data_image_ground_connection(void);
   void init_argus_camera(void);
   void init_argus_orbit(void);
-  void init_ibis_file(void);
   void init_quickbird_camera(void);
   void init_spot_camera(void);
   void init_spot_orbit(void);
   void init_quickbird_orbit(void);
   void init_quickbird_time_table(void);
-  void init_vicar_file(void);
-  void init_vicar_argument(void);
-  void init_vicar_dem(void);
-  void init_vicar_lite_file(void);
-  void init_vicar_multi_file(void);
-  void init_datum_geoid96(void);
-  void init_srtm_dem(void);
-  void init_vicar_raster_image(void);
   void init_pos_export_orbit(void);
   void init_worldview2_cloudmask(void);
   void init_doughnut_average(void);
-  void init_material_detect(void);
   void init_paint_class(void);
 #ifdef HAVE_CARTO
   void init_eci_tod_burl(void);
@@ -147,6 +137,18 @@ extern "C" {
   void init_gdal_multi_band(void);
   void init_image_point_display(void);
   void init_ogr_coordinate(void);
+#endif
+#ifdef HAVE_VICAR_RTL
+  void init_material_detect(void);
+  void init_ibis_file(void);
+  void init_vicar_lite_file(void);
+  void init_vicar_file(void);
+  void init_vicar_argument(void);
+  void init_vicar_dem(void);
+  void init_vicar_multi_file(void);
+  void init_datum_geoid96(void);
+  void init_srtm_dem(void);
+  void init_vicar_raster_image(void);
 #endif
 }
 
@@ -306,24 +308,14 @@ void init_swig_wrap(void)
   init_extension_module(package, "_orbit_data_image_ground_connection", init_orbit_data_image_ground_connection);
   init_extension_module(package, "_argus_camera", init_argus_camera);
   init_extension_module(package, "_argus_orbit", init_argus_orbit);
-  init_extension_module(package, "_ibis_file", init_ibis_file);
   init_extension_module(package, "_quickbird_camera", init_quickbird_camera);
   init_extension_module(package, "_spot_camera", init_spot_camera);
   init_extension_module(package, "_spot_orbit", init_spot_orbit);
   init_extension_module(package, "_quickbird_orbit", init_quickbird_orbit);
   init_extension_module(package, "_quickbird_time_table", init_quickbird_time_table);
-  init_extension_module(package, "_vicar_file", init_vicar_file);
-  init_extension_module(package, "_vicar_argument", init_vicar_argument);
-  init_extension_module(package, "_vicar_dem", init_vicar_dem);
-  init_extension_module(package, "_vicar_lite_file", init_vicar_lite_file);
-  init_extension_module(package, "_vicar_multi_file", init_vicar_multi_file);
-  init_extension_module(package, "_datum_geoid96", init_datum_geoid96);
-  init_extension_module(package, "_srtm_dem", init_srtm_dem);
-  init_extension_module(package, "_vicar_raster_image", init_vicar_raster_image);
   init_extension_module(package, "_pos_export_orbit", init_pos_export_orbit);
   init_extension_module(package, "_worldview2_cloudmask", init_worldview2_cloudmask);
   init_extension_module(package, "_doughnut_average", init_doughnut_average);
-  init_extension_module(package, "_material_detect", init_material_detect);
   init_extension_module(package, "_paint_class", init_paint_class);
 #ifdef HAVE_CARTO
   init_extension_module(package, "_eci_tod_burl", init_eci_tod_burl);
@@ -349,5 +341,17 @@ void init_swig_wrap(void)
   init_extension_module(package, "_gdal_multi_band", init_gdal_multi_band);
   init_extension_module(package, "_image_point_display", init_image_point_display);
   init_extension_module(package, "_ogr_coordinate", init_ogr_coordinate);
+#endif
+#ifdef HAVE_VICAR_RTL
+  init_extension_module(package, "_material_detect", init_material_detect);
+  init_extension_module(package, "_ibis_file", init_ibis_file);
+  init_extension_module(package, "_vicar_lite_file", init_vicar_lite_file);
+  init_extension_module(package, "_vicar_file", init_vicar_file);
+  init_extension_module(package, "_vicar_argument", init_vicar_argument);
+  init_extension_module(package, "_vicar_dem", init_vicar_dem);
+  init_extension_module(package, "_vicar_multi_file", init_vicar_multi_file);
+  init_extension_module(package, "_datum_geoid96", init_datum_geoid96);
+  init_extension_module(package, "_srtm_dem", init_srtm_dem);
+  init_extension_module(package, "_vicar_raster_image", init_vicar_raster_image);
 #endif
 }

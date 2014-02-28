@@ -17,6 +17,9 @@ endif
 if HAVE_GDAL
 pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_GDAL))
 endif
+if HAVE_VICAR_RTL
+pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_VICAR_RTL))
+endif
 pkgpythonswig_LTLIBRARIES = _swig_wrap.la
 
 _swig_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) 
@@ -44,6 +47,9 @@ endif
 endif
 if HAVE_GDAL
 _swig_wrap_la_SOURCES+= $(SWIG_SRC_GDAL)
+endif
+if HAVE_VICAR_RTL
+_swig_wrap_la_SOURCES+= $(SWIG_SRC_VICAR_RTL)
 endif
 _swig_wrap_la_SOURCES+= @swigsrc@/swig_wrap.cc
 
@@ -79,7 +85,7 @@ $(swigsrc)/%_wrap.Pcc : %.i
 	rm $@.tmp
 
 $(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile
-	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_CARTO $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL)))
+	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_CARTO $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL)))
 
 $(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc
 	mkdir -p $*_doc
@@ -118,6 +124,9 @@ endif
 if HAVE_GDAL
 BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_GDAL))
 endif
+if HAVE_VICAR_RTL
+BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_VICAR_RTL))
+endif
 BUILT_SOURCES+= $(srcdir)/$(swigsrc)/swig_wrap.cc
 
 -include $(patsubst %.cc, %.Pcc, $(SWIG_SRC))
@@ -135,6 +144,9 @@ endif
 endif
 if HAVE_GDAL
 -include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_GDAL))
+endif
+if HAVE_VICAR_RTL
+-include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_VICAR_RTL))
 endif
 endif HAVE_SWIG
 endif MAINTAINER_MODE

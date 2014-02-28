@@ -74,6 +74,7 @@ if test "$build_vicar_rtl" = "yes"; then
    ])
 fi
 
+AM_CONDITIONAL([HAVE_VICAR_RTL], [test "$have_vicar_rtl" = "yes"])
 AM_CONDITIONAL([BUILD_VICAR_RTL], [test "$build_vicar_rtl" = "yes"])
 
 AC_CHECK_FOUND([vicar_rtl], [vicar-rtl],[VICAR RTL],$1,$2)

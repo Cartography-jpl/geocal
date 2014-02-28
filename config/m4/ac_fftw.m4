@@ -45,6 +45,7 @@ if test "x$want_fftw" = "xyes"; then
                 AC_MSG_RESULT([yes])
                 AC_SUBST(FFTW_CFLAGS)
                 AC_SUBST(FFTW_LIBS)
+                AC_DEFINE(HAVE_FFTW,,[Defined if we have FFTW])
                 have_fftw="yes"
         fi
 fi

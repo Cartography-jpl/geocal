@@ -23,7 +23,7 @@ the third party library checks.
 
 #=================================================================
 # Need to find VICAR RTL library
-AC_VICAR_RTL(required, cannot_build, default_search)
+AC_VICAR_RTL(optional, cannot_build, default_search)
 
 #=================================================================
 # Need to have AFIDS data

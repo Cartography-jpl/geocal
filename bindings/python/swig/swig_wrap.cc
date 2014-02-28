@@ -139,9 +139,14 @@ extern "C" {
   void init_hdf_orbit_carto(void);
 #endif
 #endif
-#ifdef HAVE_FFTW
-  void init_geocal_fftw(void);
-  void init_phase_correlation_matcher(void);
+#ifdef HAVE_GDAL
+  void init_geocal_gdal(void);
+  void init_gdal_raster_image(void);
+  void init_gdal_datum(void);
+  void init_gdal_dem(void);
+  void init_gdal_multi_band(void);
+  void init_image_point_display(void);
+  void init_ogr_coordinate(void);
 #endif
 }
 
@@ -336,8 +341,13 @@ void init_swig_wrap(void)
   init_extension_module(package, "_hdf_orbit_carto", init_hdf_orbit_carto);
 #endif
 #endif
-#ifdef HAVE_FFTW
-  init_extension_module(package, "_geocal_fftw", init_geocal_fftw);
-  init_extension_module(package, "_phase_correlation_matcher", init_phase_correlation_matcher);
+#ifdef HAVE_GDAL
+  init_extension_module(package, "_geocal_gdal", init_geocal_gdal);
+  init_extension_module(package, "_gdal_raster_image", init_gdal_raster_image);
+  init_extension_module(package, "_gdal_datum", init_gdal_datum);
+  init_extension_module(package, "_gdal_dem", init_gdal_dem);
+  init_extension_module(package, "_gdal_multi_band", init_gdal_multi_band);
+  init_extension_module(package, "_image_point_display", init_image_point_display);
+  init_extension_module(package, "_ogr_coordinate", init_ogr_coordinate);
 #endif
 }

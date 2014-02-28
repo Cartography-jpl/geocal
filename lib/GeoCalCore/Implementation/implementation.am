@@ -150,21 +150,17 @@ SWIG_SRC += @swigsrc@/surface_image_to_image_match_wrap.cc
 SWIG_SRC += @swigsrc@/location_to_file_wrap.cc
 SWIG_SRC += @swigsrc@/ray_intersect_wrap.cc
 SWIG_SRC += @swigsrc@/dem_match_wrap.cc
-if HAVE_FFTW
-SWIG_SRC += @swigsrc@/phase_correlation_matcher_wrap.cc
-endif
+SWIG_SRC_FFTW += @swigsrc@/phase_correlation_matcher_wrap.cc
 SWIG_SRC += @swigsrc@/quadratic_geometric_model_wrap.cc
 SWIG_SRC += @swigsrc@/geometric_model_image_wrap.cc
-if HAVE_GDAL
-  SWIG_SRC += @swigsrc@/geocal_gdal_wrap.cc
-  SWIG_SRC += @swigsrc@/gdal_raster_image_wrap.cc
-  SWIG_SRC += @swigsrc@/gdal_datum_wrap.cc
-  SWIG_SRC += @swigsrc@/gdal_dem_wrap.cc
-  SWIG_SRC += @swigsrc@/gdal_multi_band_wrap.cc
-  SWIG_SRC += @swigsrc@/image_point_display_wrap.cc
-  SWIG_SRC += @swigsrc@/ogr_coordinate_wrap.cc
-#  SWIG_SRC += @swigsrc@/gdal_multi_file_wrap.cc
-endif
+SWIG_SRC_GDAL += @swigsrc@/geocal_gdal_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/gdal_raster_image_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/gdal_datum_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/gdal_dem_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/gdal_multi_band_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/image_point_display_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/ogr_coordinate_wrap.cc
+#  SWIG_SRC_GDAL += @swigsrc@/gdal_multi_file_wrap.cc
 SWIG_SRC += @swigsrc@/memory_multi_band_wrap.cc
 SWIG_SRC += @swigsrc@/spice_helper_wrap.cc
 SWIG_SRC += @swigsrc@/raw_raster_image_wrap.cc
@@ -176,18 +172,12 @@ SWIG_SRC += @swigsrc@/apply_mask_wrap.cc
 SWIG_SRC += @swigsrc@/rpc_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/ipi_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/eci_tod_wrap.cc
-if HAVE_CARTO
-SWIG_SRC += @swigsrc@/eci_tod_burl_wrap.cc
-endif
+SWIG_SRC_CARTO += @swigsrc@/eci_tod_burl_wrap.cc
 SWIG_SRC += @swigsrc@/quaternion_camera_wrap.cc
 SWIG_SRC += @swigsrc@/refraction_wrap.cc
 SWIG_SRC += @swigsrc@/orbit_data_image_ground_connection_wrap.cc
-if HAVE_HDF5
-SWIG_SRC += @swigsrc@/hdf_orbit_wrap.cc
-if HAVE_CARTO
-SWIG_SRC += @swigsrc@/hdf_orbit_carto_wrap.cc
-endif
-endif 
+SWIG_SRC_HDF5 += @swigsrc@/hdf_orbit_wrap.cc
+SWIG_SRC_HDF5_CARTO += @swigsrc@/hdf_orbit_carto_wrap.cc
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_map_info_offset_test.cc

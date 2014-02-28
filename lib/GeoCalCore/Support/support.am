@@ -57,12 +57,8 @@ SWIG_SRC += @swigsrc@/geocal_gsl_fit_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_gsl_root_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_time_wrap.cc
 SWIG_SRC += @swigsrc@/tiled_file_wrap.cc
-if HAVE_FFTW
-SWIG_SRC += @swigsrc@/geocal_fftw_wrap.cc
-endif
-if HAVE_HDF5
-SWIG_SRC += @swigsrc@/hdf_file_wrap.cc
-endif
+SWIG_SRC_FFTW += @swigsrc@/geocal_fftw_wrap.cc
+SWIG_SRC_HDF5 += @swigsrc@/hdf_file_wrap.cc
 # Test files
 EXTRA_DIST += @srcsupport@/unit_test_support.h
 EXTRA_DIST += @srcsupport@/global_fixture.h

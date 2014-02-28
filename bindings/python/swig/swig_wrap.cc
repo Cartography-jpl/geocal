@@ -25,8 +25,6 @@ extern "C" {
   void init_geocal_gsl_root(void);
   void init_geocal_time(void);
   void init_tiled_file(void);
-  void init_geocal_fftw(void);
-  void init_hdf_file(void);
   void init_image_coordinate(void);
   void init_look_vector(void);
   void init_ground_coordinate(void);
@@ -88,16 +86,8 @@ extern "C" {
   void init_location_to_file(void);
   void init_ray_intersect(void);
   void init_dem_match(void);
-  void init_phase_correlation_matcher(void);
   void init_quadratic_geometric_model(void);
   void init_geometric_model_image(void);
-  void init_geocal_gdal(void);
-  void init_gdal_raster_image(void);
-  void init_gdal_datum(void);
-  void init_gdal_dem(void);
-  void init_gdal_multi_band(void);
-  void init_image_point_display(void);
-  void init_ogr_coordinate(void);
   void init_memory_multi_band(void);
   void init_spice_helper(void);
   void init_raw_raster_image(void);
@@ -109,12 +99,9 @@ extern "C" {
   void init_rpc_image_ground_connection(void);
   void init_ipi_image_ground_connection(void);
   void init_eci_tod(void);
-  void init_eci_tod_burl(void);
   void init_quaternion_camera(void);
   void init_refraction(void);
   void init_orbit_data_image_ground_connection(void);
-  void init_hdf_orbit(void);
-  void init_hdf_orbit_carto(void);
   void init_argus_camera(void);
   void init_argus_orbit(void);
   void init_ibis_file(void);
@@ -136,6 +123,26 @@ extern "C" {
   void init_doughnut_average(void);
   void init_material_detect(void);
   void init_paint_class(void);
+#ifdef HAVE_CARTO
+  void init_eci_tod_burl(void);
+#endif
+#ifdef HAVE_FFTW
+  void init_geocal_fftw(void);
+  void init_phase_correlation_matcher(void);
+#endif
+#ifdef HAVE_HDF5
+  void init_hdf_file(void);
+  void init_hdf_orbit(void);
+#endif
+#ifdef HAVE_HDF5
+#ifdef HAVE_CARTO
+  void init_hdf_orbit_carto(void);
+#endif
+#endif
+#ifdef HAVE_FFTW
+  void init_geocal_fftw(void);
+  void init_phase_correlation_matcher(void);
+#endif
 }
 
 // Used throughout SWIG wrapper, define here because it is convenient.
@@ -215,8 +222,6 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_gsl_root", init_geocal_gsl_root);
   init_extension_module(package, "_geocal_time", init_geocal_time);
   init_extension_module(package, "_tiled_file", init_tiled_file);
-  init_extension_module(package, "_geocal_fftw", init_geocal_fftw);
-  init_extension_module(package, "_hdf_file", init_hdf_file);
   init_extension_module(package, "_image_coordinate", init_image_coordinate);
   init_extension_module(package, "_look_vector", init_look_vector);
   init_extension_module(package, "_ground_coordinate", init_ground_coordinate);
@@ -278,16 +283,8 @@ void init_swig_wrap(void)
   init_extension_module(package, "_location_to_file", init_location_to_file);
   init_extension_module(package, "_ray_intersect", init_ray_intersect);
   init_extension_module(package, "_dem_match", init_dem_match);
-  init_extension_module(package, "_phase_correlation_matcher", init_phase_correlation_matcher);
   init_extension_module(package, "_quadratic_geometric_model", init_quadratic_geometric_model);
   init_extension_module(package, "_geometric_model_image", init_geometric_model_image);
-  init_extension_module(package, "_geocal_gdal", init_geocal_gdal);
-  init_extension_module(package, "_gdal_raster_image", init_gdal_raster_image);
-  init_extension_module(package, "_gdal_datum", init_gdal_datum);
-  init_extension_module(package, "_gdal_dem", init_gdal_dem);
-  init_extension_module(package, "_gdal_multi_band", init_gdal_multi_band);
-  init_extension_module(package, "_image_point_display", init_image_point_display);
-  init_extension_module(package, "_ogr_coordinate", init_ogr_coordinate);
   init_extension_module(package, "_memory_multi_band", init_memory_multi_band);
   init_extension_module(package, "_spice_helper", init_spice_helper);
   init_extension_module(package, "_raw_raster_image", init_raw_raster_image);
@@ -299,12 +296,9 @@ void init_swig_wrap(void)
   init_extension_module(package, "_rpc_image_ground_connection", init_rpc_image_ground_connection);
   init_extension_module(package, "_ipi_image_ground_connection", init_ipi_image_ground_connection);
   init_extension_module(package, "_eci_tod", init_eci_tod);
-  init_extension_module(package, "_eci_tod_burl", init_eci_tod_burl);
   init_extension_module(package, "_quaternion_camera", init_quaternion_camera);
   init_extension_module(package, "_refraction", init_refraction);
   init_extension_module(package, "_orbit_data_image_ground_connection", init_orbit_data_image_ground_connection);
-  init_extension_module(package, "_hdf_orbit", init_hdf_orbit);
-  init_extension_module(package, "_hdf_orbit_carto", init_hdf_orbit_carto);
   init_extension_module(package, "_argus_camera", init_argus_camera);
   init_extension_module(package, "_argus_orbit", init_argus_orbit);
   init_extension_module(package, "_ibis_file", init_ibis_file);
@@ -326,4 +320,24 @@ void init_swig_wrap(void)
   init_extension_module(package, "_doughnut_average", init_doughnut_average);
   init_extension_module(package, "_material_detect", init_material_detect);
   init_extension_module(package, "_paint_class", init_paint_class);
+#ifdef HAVE_CARTO
+  init_extension_module(package, "_eci_tod_burl", init_eci_tod_burl);
+#endif
+#ifdef HAVE_FFTW
+  init_extension_module(package, "_geocal_fftw", init_geocal_fftw);
+  init_extension_module(package, "_phase_correlation_matcher", init_phase_correlation_matcher);
+#endif
+#ifdef HAVE_HDF5
+  init_extension_module(package, "_hdf_file", init_hdf_file);
+  init_extension_module(package, "_hdf_orbit", init_hdf_orbit);
+#endif
+#ifdef HAVE_HDF5
+#ifdef HAVE_CARTO
+  init_extension_module(package, "_hdf_orbit_carto", init_hdf_orbit_carto);
+#endif
+#endif
+#ifdef HAVE_FFTW
+  init_extension_module(package, "_geocal_fftw", init_geocal_fftw);
+  init_extension_module(package, "_phase_correlation_matcher", init_phase_correlation_matcher);
+#endif
 }

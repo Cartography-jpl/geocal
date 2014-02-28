@@ -2,6 +2,21 @@ SWIG_FLAG += -O
 pkgpythonswigdir = @pythondir@/geocal
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py
 pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC))
+if HAVE_CARTO
+pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_CARTO))
+endif
+if HAVE_FFTW
+pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_FFTW))
+endif
+if HAVE_HDF5
+pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_HDF5))
+if HAVE_CARTO
+pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_HDF5_CARTO))
+endif
+endif
+if HAVE_GDAL
+pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_GDAL))
+endif
 pkgpythonswig_LTLIBRARIES = _swig_wrap.la
 
 _swig_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) 
@@ -15,6 +30,21 @@ _swig_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
 _swig_wrap_la_LDFLAGS = -module -avoid-version
 _swig_wrap_la_LIBADD = libgeocal.la
 _swig_wrap_la_SOURCES = $(SWIG_SRC)
+if HAVE_CARTO
+_swig_wrap_la_SOURCES+= $(SWIG_SRC_CARTO)
+endif
+if HAVE_FFTW
+_swig_wrap_la_SOURCES+= $(SWIG_SRC_FFTW)
+endif
+if HAVE_HDF5
+_swig_wrap_la_SOURCES+= $(SWIG_SRC_HDF5)
+if HAVE_CARTO
+_swig_wrap_la_SOURCES+= $(SWIG_SRC_HDF5_CARTO)
+endif
+endif
+if HAVE_GDAL
+_swig_wrap_la_SOURCES+= $(SWIG_SRC_GDAL)
+endif
 _swig_wrap_la_SOURCES+= @swigsrc@/swig_wrap.cc
 
 EXTRA_DIST+= $(srcdir)/$(swigsrc)/*_wrap.h
@@ -49,7 +79,7 @@ $(swigsrc)/%_wrap.Pcc : %.i
 	rm $@.tmp
 
 $(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile
-	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC)))
+	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_CARTO $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW)))
 
 $(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc
 	mkdir -p $*_doc
@@ -73,9 +103,38 @@ $(srcdir)/$(swigsrc)/%_wrap.cc: %.i
 	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
 
 BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC))
+if HAVE_CARTO
+BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_CARTO))
+endif
+if HAVE_FFTW
+BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_FFTW))
+endif
+if HAVE_HDF5
+BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_HDF5))
+if HAVE_CARTO
+BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_HDF5_CARTO))
+endif
+endif
+if HAVE_GDAL
+BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_GDAL))
+endif
 BUILT_SOURCES+= $(srcdir)/$(swigsrc)/swig_wrap.cc
 
 -include $(patsubst %.cc, %.Pcc, $(SWIG_SRC))
-
+if HAVE_CARTO
+-include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_CARTO))
+endif
+if HAVE_FFTW
+-include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_FFTW))
+endif
+if HAVE_HDF5
+-include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_HDF5))
+if HAVE_CARTO
+-include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_HDF5_CARTO))
+endif
+endif
+if HAVE_GDAL
+-include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_GDAL))
+endif
 endif HAVE_SWIG
 endif MAINTAINER_MODE

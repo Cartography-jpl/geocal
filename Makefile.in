@@ -287,6 +287,7 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/afids_a_option.m4 \
 	$(top_srcdir)/config/m4/afids_common.m4 \
 	$(top_srcdir)/config/m4/afids_python.m4 \
+	$(top_srcdir)/config/m4/ax_compare_version.m4 \
 	$(top_srcdir)/config/m4/ax_python_module.m4 \
 	$(top_srcdir)/config/m4/geocal_source_directory.m4 \
 	$(top_srcdir)/config/m4/libtool.m4 \

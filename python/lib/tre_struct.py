@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 import re
 
 class _GdalRasterImageHelper(object):

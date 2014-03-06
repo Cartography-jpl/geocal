@@ -1,5 +1,5 @@
 from nose.tools import *
-from geocal import *
+from geocal_swig import *
 from tie_point import *
 from image_ground_connection import *
 from igc_offset_correction import *

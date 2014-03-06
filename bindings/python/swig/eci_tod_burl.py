@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.ground_coordinate
-import geocal.generic_object
-class EciTodBurl(geocal.ground_coordinate.CartesianInertial):
+import geocal_swig.ground_coordinate
+import geocal_swig.generic_object
+class EciTodBurl(geocal_swig.ground_coordinate.CartesianInertial):
     """
     This is a ECI true of date coordinate.
 

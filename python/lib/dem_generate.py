@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 import math
 import scipy.interpolate
 from image_to_image_connection import *
@@ -21,7 +21,7 @@ def _new_from_init(cls, version, *args):
     inst.__init__(*args)
     return inst
 
-class DemGenerateMB(geocal.CalcRasterMultiBand):
+class DemGenerateMB(geocal_swig.CalcRasterMultiBand):
     '''This is an adapter than makes the more complicated DemGenerate 
     class look like just a CalcRasterMultiBand. We may eventually just
     merge this functionality into DemGenerate, but for now keeping this

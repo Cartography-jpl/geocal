@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-import geocal.geocal_exception
-class GdalBase(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+import geocal_swig.geocal_exception
+class GdalBase(geocal_swig.generic_object.GenericObject):
     """
     Base class of Gdal<T>.
 

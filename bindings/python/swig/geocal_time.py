@@ -143,14 +143,14 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
+import geocal_swig.generic_object
 import datetime
 import time
 
 def _new_time(pgs):
   return Time.time_pgs(pgs)
 
-class Time(geocal.generic_object.GenericObject):
+class Time(geocal_swig.generic_object.GenericObject):
     """
     There are a few reasonable choices for expressing time information.
 
@@ -158,9 +158,9 @@ class Time(geocal.generic_object.GenericObject):
     be related to the other by a constant, since the only difference is
     the Epoch that time is measure against.
 
-    Note that for accurate work we do *not* want to use something like
-    Unix time, because this does not account for leapseconds (POSIX unix
-    time is the number of seconds since January 1, 1970 *not* including
+    Note that for accurate work we do not want to use something like Unix
+    time, because this does not account for leapseconds (POSIX unix time
+    is the number of seconds since January 1, 1970 not including
     leapseconds).
 
     Most code doesn't care what the underlying time representation is, we

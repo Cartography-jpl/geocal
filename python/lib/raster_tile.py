@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 
 def tile_iterator(data):
     """

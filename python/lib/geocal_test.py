@@ -1,5 +1,5 @@
 from nose.tools import *
-from geocal import *
+from geocal_swig import *
 import datetime
 
 # Unit tests for geocal python code

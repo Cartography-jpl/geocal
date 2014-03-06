@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from vicar_wrap import *
 from nose.tools import *
 import math

@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from nose.tools import *
 from tre_struct import *
 import subprocess

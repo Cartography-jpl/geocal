@@ -118,10 +118,10 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.dem_map_info
-import geocal.dem
-import geocal.generic_object
-class DemMapInfoOffset(geocal.dem_map_info.DemMapInfo):
+import geocal_swig.dem_map_info
+import geocal_swig.dem
+import geocal_swig.generic_object
+class DemMapInfoOffset(geocal_swig.dem_map_info.DemMapInfo):
     """
     This applies a fixed height offset to a DemMapInfo.
 

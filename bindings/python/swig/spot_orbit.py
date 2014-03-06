@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.orbit
-import geocal.generic_object
-class SpotOrbit(geocal.orbit.Orbit):
+import geocal_swig.orbit
+import geocal_swig.generic_object
+class SpotOrbit(geocal_swig.orbit.Orbit):
     """
     This class models the SPOT orbit.
 

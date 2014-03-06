@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from itertools import chain
 import multiprocessing
 import time

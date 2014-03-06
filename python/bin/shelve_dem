@@ -2,7 +2,7 @@
 #
 # This sets up a DEM into a shelve.
 
-from afids import *
+from geocal import *
 
 version = "February 4, 2013"
 usage='''Usage: 

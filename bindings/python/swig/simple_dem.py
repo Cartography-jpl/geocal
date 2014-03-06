@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.dem
-import geocal.generic_object
-class SimpleDem(geocal.dem.Dem):
+import geocal_swig.dem
+import geocal_swig.generic_object
+class SimpleDem(geocal_swig.dem.Dem):
     """
     This is a simple implementation of a Dem, intended primarily for use
     during testing.

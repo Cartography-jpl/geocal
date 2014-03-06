@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 import subprocess
 
 def gdal_to_erdas_file(infname, outfname):

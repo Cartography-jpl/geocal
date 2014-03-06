@@ -118,10 +118,10 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-class RasterImageTiledFile(geocal.raster_image_variable.RasterImageVariable):
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+class RasterImageTiledFile(geocal_swig.raster_image_variable.RasterImageVariable):
     """
     This is a RasterImage that is implemented as a TiledFile<T, 2>.
 

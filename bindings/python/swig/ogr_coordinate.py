@@ -118,10 +118,10 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-import geocal.ground_coordinate
-import geocal.coordinate_converter
-class OgrWrapper(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+import geocal_swig.ground_coordinate
+import geocal_swig.coordinate_converter
+class OgrWrapper(geocal_swig.generic_object.GenericObject):
     """
     This is a wrapper around the OGRSpatialReference class.
 
@@ -282,7 +282,7 @@ def OgrWrapper_from_proj4(*args):
     """
   return _ogr_coordinate.OgrWrapper_from_proj4(*args)
 
-class OgrCoordinate(geocal.ground_coordinate.GroundCoordinate):
+class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
     """
     This is a ground coordinate, implemented by the OGRSpatialReference
     class supplied with GDAL.
@@ -365,7 +365,7 @@ def OgrCoordinate_to_utm(*args):
     """
   return _ogr_coordinate.OgrCoordinate_to_utm(*args)
 
-class OgrCoordinateConverter(geocal.coordinate_converter.CoordinateConverter):
+class OgrCoordinateConverter(geocal_swig.coordinate_converter.CoordinateConverter):
     """
     This is a CoordinateConverter for working with OgrCoordinates.
 

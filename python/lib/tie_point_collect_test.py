@@ -1,5 +1,5 @@
 from nose.tools import *
-from geocal import *
+from geocal_swig import *
 from tie_point_collect import *
 from image_ground_connection import *
 import multiprocessing

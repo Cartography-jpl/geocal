@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from nose.tools import *
 
 def test_odgc():

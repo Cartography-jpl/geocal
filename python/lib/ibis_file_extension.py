@@ -1,6 +1,6 @@
 # This contains extensions to give a more python like interface to 
 # IbisFile.
-from geocal import *
+from geocal_swig import *
 
 # We might not have IbisFile defined
 try:

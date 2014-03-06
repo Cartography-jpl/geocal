@@ -1,7 +1,7 @@
 import h5py
 import numpy as np
 import os
-from geocal import *
+from geocal_swig import *
 from nose.plugins.skip import Skip, SkipTest
 import cPickle
 

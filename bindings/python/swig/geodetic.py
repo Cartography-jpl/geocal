@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.ground_coordinate
-import geocal.generic_object
-class Geodetic(geocal.ground_coordinate.GroundCoordinate):
+import geocal_swig.ground_coordinate
+import geocal_swig.generic_object
+class Geodetic(geocal_swig.ground_coordinate.GroundCoordinate):
     """
     This is a ground coordinate, represented in Geodetic coordinates.
 
@@ -145,7 +145,7 @@ class Geodetic(geocal.ground_coordinate.GroundCoordinate):
 Geodetic_swigregister = _geodetic.Geodetic_swigregister
 Geodetic_swigregister(Geodetic)
 
-class Geocentric(geocal.ground_coordinate.GroundCoordinate):
+class Geocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     """
     This is a ground coordinate, represented in Geocentric coordinates.
 

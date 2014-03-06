@@ -5,7 +5,7 @@
 # may contains fill values). For those GCPs we find the CE90 error to the
 # reference for each of the igcs.
 
-from afids import *
+from geocal import *
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 

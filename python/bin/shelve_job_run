@@ -2,7 +2,7 @@
 #
 # This runs a job from a shelf file.
 
-from afids import *
+from geocal import *
 
 version = "February 6, 2013"
 usage='''Usage: 

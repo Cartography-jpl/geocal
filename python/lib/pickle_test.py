@@ -1,7 +1,7 @@
 # This contains various tests to make sure pickling of low level GeoCal objects
 # work correctly.
 import cPickle
-from geocal import *
+from geocal_swig import *
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 

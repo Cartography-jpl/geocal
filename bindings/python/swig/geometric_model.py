@@ -143,8 +143,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class GeometricModel(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class GeometricModel(geocal_swig.generic_object.GenericObject):
     """
     This supplies a geometric model that can be used to deform an image,
     e.g., resample an image to match to geometry of another reference
@@ -168,7 +168,7 @@ GeometricModel.__str__ = new_instancemethod(_geometric_model.GeometricModel___st
 GeometricModel_swigregister = _geometric_model.GeometricModel_swigregister
 GeometricModel_swigregister(GeometricModel)
 
-class GeometricTiePoints(geocal.generic_object.GenericObject):
+class GeometricTiePoints(geocal_swig.generic_object.GenericObject):
     """
     Often GeometricModels are created by fitting a set of points tieing
     the image together.

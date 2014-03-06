@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.image_matcher
-import geocal.generic_object
-class CcorrMatcher(geocal.image_matcher.ImageMatcher):
+import geocal_swig.image_matcher
+import geocal_swig.generic_object
+class CcorrMatcher(geocal_swig.image_matcher.ImageMatcher):
     """
     This class performs image matching.
 

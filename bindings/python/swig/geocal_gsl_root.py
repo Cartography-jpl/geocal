@@ -118,7 +118,7 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
+import geocal_swig.generic_object
 
 def gsl_root(*args):
   """

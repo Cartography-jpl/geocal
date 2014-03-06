@@ -118,8 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class RasterImageMultiBand(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class RasterImageMultiBand(geocal_swig.generic_object.GenericObject):
     """
     This is a set of RasterImages, one for each band.
 

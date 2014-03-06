@@ -118,8 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class Ipi(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class Ipi(geocal_swig.generic_object.GenericObject):
     """
     This performs an image point intersection (IPI), finding the time or
     image coordinates that a given ground point is seen by a camera.

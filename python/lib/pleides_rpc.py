@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from xml.etree.cElementTree import parse
 
 def pleides_rpc(fname):

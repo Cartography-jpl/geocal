@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.raster_image
-import geocal.generic_object
-class RawRasterImage(geocal.raster_image.RasterImage):
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+class RawRasterImage(geocal_swig.raster_image.RasterImage):
     """
     This uses libraw to read RAW format.
 

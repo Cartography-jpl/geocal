@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.camera
-import geocal.generic_object
-class ArgusCamera(geocal.camera.Camera):
+import geocal_swig.camera
+import geocal_swig.generic_object
+class ArgusCamera(geocal_swig.camera.Camera):
     """
     A model of the ARGUS camera.
 

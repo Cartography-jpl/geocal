@@ -118,12 +118,12 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.raster_image_tiled_file
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-import geocal.geocal_exception
-class VicarRasterImage(geocal.raster_image_tiled_file.RasterImageTiledFile):
+import geocal_swig.raster_image_tiled_file
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+import geocal_swig.geocal_exception
+class VicarRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
     """
     This wraps a VicarTiledFile<T> to make a RasterImage.
 

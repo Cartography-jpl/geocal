@@ -4,7 +4,7 @@
 # a image ground connnection collection to more closely fit a given set o
 # tiepoints.
 
-from afids import *
+from geocal import *
 import numpy as np
 import logging
 
@@ -76,10 +76,10 @@ if(args.log_file):
         console = logging.StreamHandler(stream=sys.stdout)
         console.setLevel(logging.INFO)
         console.setFormatter(logging.Formatter('%(levelname)s:%(name)s:%(message)s'))
-        logging.getLogger("afids-python").addHandler(console)
+        logging.getLogger("geocal-python").addHandler(console)
 elif(args.verbose):
     logging.basicConfig(level = logging.INFO)
-log = logging.getLogger("afids-python.sba")
+log = logging.getLogger("geocal-python.sba")
 
 igc = read_shelve(args.igc_in)
 tpcol = read_shelve(args.tpcol_in)

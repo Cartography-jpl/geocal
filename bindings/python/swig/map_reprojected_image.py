@@ -118,25 +118,25 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-class MapReprojectedImage(geocal.raster_image_variable.RasterImageVariable):
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+class MapReprojectedImage(geocal_swig.raster_image_variable.RasterImageVariable):
     """
     This is a RasterImage that has been resampled to a different map
     projection and/or a different resolution.
 
     To do this we do two steps:
 
-    1. We calculate roughly what the difference in resolution is between
-    the original and final MapInfo. We do this by looking at the center
-    pixel of the original data and the pixel +1 in line and sample. We
-    then use RasterAveraged to average the original data to roughly the
-    resolution of the final MapInfo. If the final MapInfo is near the same
-    resolution as the original, or if it has a higher resolution, then we
-    don't do any averaging.
+    We calculate roughly what the difference in resolution is between the
+    original and final MapInfo. We do this by looking at the center pixel
+    of the original data and the pixel +1 in line and sample. We then use
+    RasterAveraged to average the original data to roughly the resolution
+    of the final MapInfo. If the final MapInfo is near the same resolution
+    as the original, or if it has a higher resolution, then we don't do
+    any averaging.
 
-    2. We then interpolate the possibly averaged data to the final
+    We then interpolate the possibly averaged data to the final
     projection.
 
     It is ok if the final MapInfo contains areas outside of the original

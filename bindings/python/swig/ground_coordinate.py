@@ -143,8 +143,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class GroundCoordinate(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class GroundCoordinate(geocal_swig.generic_object.GenericObject):
     """
     This represents a location on the ground.
 
@@ -225,7 +225,7 @@ GroundCoordinate.__str__ = new_instancemethod(_ground_coordinate.GroundCoordinat
 GroundCoordinate_swigregister = _ground_coordinate.GroundCoordinate_swigregister
 GroundCoordinate_swigregister(GroundCoordinate)
 
-class CartesianInertial(geocal.generic_object.GenericObject):
+class CartesianInertial(geocal_swig.generic_object.GenericObject):
     """
     This gives the location in a Cartesian inertial coordinate system
     (.e.g., ECI).

@@ -1,6 +1,6 @@
 from nose.tools import *
 import cPickle
-from geocal import *
+from geocal_swig import *
 from igc_offset_correction import *
 from nose.plugins.skip import Skip, SkipTest
 

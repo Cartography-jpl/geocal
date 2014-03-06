@@ -1,5 +1,5 @@
 from nose.tools import *
-from geocal import *
+from geocal_swig import *
 from image_ground_connection import *
 from igc_collection import *
 from nose.plugins.skip import Skip, SkipTest

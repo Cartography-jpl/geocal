@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.image_mask
-import geocal.generic_object
-class ImageMaskImage(geocal.image_mask.ImageMask):
+import geocal_swig.image_mask
+import geocal_swig.generic_object
+class ImageMaskImage(geocal_swig.image_mask.ImageMask):
     """
     This provides a ImageMask where the underlying data is a RasterImage.
 

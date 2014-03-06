@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-import geocal.orbit
-class QuickBirdEphemeris(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+import geocal_swig.orbit
+class QuickBirdEphemeris(geocal_swig.generic_object.GenericObject):
     """
     This is a low level class that reads a Quickbird ephemeris file.
 
@@ -215,7 +215,7 @@ QuickBirdEphemeris.__str__ = new_instancemethod(_quickbird_orbit.QuickBirdEpheme
 QuickBirdEphemeris_swigregister = _quickbird_orbit.QuickBirdEphemeris_swigregister
 QuickBirdEphemeris_swigregister(QuickBirdEphemeris)
 
-class QuickBirdAttitude(geocal.generic_object.GenericObject):
+class QuickBirdAttitude(geocal_swig.generic_object.GenericObject):
     """
     This is a low level class that reads a Quickbird attitude file.
 
@@ -224,8 +224,8 @@ class QuickBirdAttitude(geocal.generic_object.GenericObject):
 
     Note a possible source of confusion. There are a few different
     conventions about the ordering of the quaternion coefficients. The
-    boost library places the real part at the front, so we have a + b i +
-    c j + d k and the quaternion is 4-tuple (a, b, c, d). The convention
+    boost library places the real part at the front, so we have a + b i c
+    j + d k and the quaternion is 4-tuple (a, b, c, d). The convention
     used by quickbird data is q1 i + q2 j + q3 k + q4 with the 4-tuple is
     (q1, q2, q3, q4). That means when we bring this over to the boost
     library, we need to reorder this to the 4-tuple (q4, q1, q2, q3).
@@ -324,7 +324,7 @@ QuickBirdAttitude.__str__ = new_instancemethod(_quickbird_orbit.QuickBirdAttitud
 QuickBirdAttitude_swigregister = _quickbird_orbit.QuickBirdAttitude_swigregister
 QuickBirdAttitude_swigregister(QuickBirdAttitude)
 
-class QuickBirdOrbit(geocal.orbit.Orbit):
+class QuickBirdOrbit(geocal_swig.orbit.Orbit):
     """
     This is a Quickbird Orbit.
 

@@ -118,13 +118,13 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.calc_raster_multi_band
-import geocal.raster_image_multi_band_variable
-import geocal.raster_image_multi_band
-import geocal.generic_object
-import geocal.calc_raster
-import geocal.raster_image_variable
-class DoughnutAverage(geocal.calc_raster_multi_band.CalcRasterMultiBand):
+import geocal_swig.calc_raster_multi_band
+import geocal_swig.raster_image_multi_band_variable
+import geocal_swig.raster_image_multi_band
+import geocal_swig.generic_object
+import geocal_swig.calc_raster
+import geocal_swig.raster_image_variable
+class DoughnutAverage(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     """
     This class does a "doughnut average" of an underlying RasterImage.
 
@@ -261,7 +261,7 @@ DoughnutAverage._v_underlying_image = new_instancemethod(_doughnut_average.Dough
 DoughnutAverage_swigregister = _doughnut_average.DoughnutAverage_swigregister
 DoughnutAverage_swigregister(DoughnutAverage)
 
-class RasterImageWrapCvdNorm(geocal.calc_raster.CalcRaster):
+class RasterImageWrapCvdNorm(geocal_swig.calc_raster.CalcRaster):
     """
     C++ includes: doughnut_average.h
 
@@ -309,7 +309,7 @@ RasterImageWrapCvdNorm._v_davg = new_instancemethod(_doughnut_average.RasterImag
 RasterImageWrapCvdNorm_swigregister = _doughnut_average.RasterImageWrapCvdNorm_swigregister
 RasterImageWrapCvdNorm_swigregister(RasterImageWrapCvdNorm)
 
-class RasterImageWrapPandif(geocal.calc_raster.CalcRaster):
+class RasterImageWrapPandif(geocal_swig.calc_raster.CalcRaster):
     """
     C++ includes: doughnut_average.h
 

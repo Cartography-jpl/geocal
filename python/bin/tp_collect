@@ -2,7 +2,7 @@
 #
 # This collects tie points.
 
-from afids import *
+from geocal import *
 from multiprocessing import Pool
 import logging
 

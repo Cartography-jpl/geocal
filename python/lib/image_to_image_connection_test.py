@@ -1,6 +1,6 @@
 from nose.tools import *
 from image_to_image_connection import *
-from geocal import *
+from geocal_swig import *
 import os
 import cPickle
 

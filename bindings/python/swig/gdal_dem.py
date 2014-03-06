@@ -118,11 +118,11 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.dem_tiled_file
-import geocal.dem_map_info
-import geocal.dem
-import geocal.generic_object
-class GdalDem(geocal.dem_tiled_file.DemTiledFile):
+import geocal_swig.dem_tiled_file
+import geocal_swig.dem_map_info
+import geocal_swig.dem
+import geocal_swig.generic_object
+class GdalDem(geocal_swig.dem_tiled_file.DemTiledFile):
     """
     This uses a Gdal<T> as a DEM.
 

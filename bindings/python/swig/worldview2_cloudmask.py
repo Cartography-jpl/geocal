@@ -118,19 +118,20 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.calc_raster
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-class WorldView2CloudMask(geocal.calc_raster.CalcRaster):
+import geocal_swig.calc_raster
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+class WorldView2CloudMask(geocal_swig.calc_raster.CalcRaster):
     """
     This create a cloud mask using WorldView2 mulispectral data.
 
     This cloud mask has two parts:
 
-    1. A simple threshold on the coastal blue band to detect clouds. 2. A
-    ratio comparision of (band 8 - band 1) / band 1 < threshold to detect
-    cloud shadows.
+    A simple threshold on the coastal blue band to detect clouds.
+
+    A ratio comparision of (band 8 - band 1) / band 1 < threshold to
+    detect cloud shadows.
 
     To help with false positives, we have a minimum cloud size. This is
     used to average the data, and only if the lower resolution data shows

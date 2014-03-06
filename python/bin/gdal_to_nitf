@@ -4,7 +4,7 @@
 # gdal_translate already found in GDAL, but this adds handling of TREs
 # in NITF for things like RPC and igeolo information.
 
-from afids import *
+from geocal import *
 from tempfile import NamedTemporaryFile
 import subprocess
 import os

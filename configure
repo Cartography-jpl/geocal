@@ -652,9 +652,7 @@ SWIG_LIB
 SWIG
 installafidspythondir
 afidspythonvdevdir
-geocalpkgpyexecdir
 geocalpkgpythondir
-afidspkgpythondir
 pythondocdir
 srcraw
 srcsdbx
@@ -27973,13 +27971,9 @@ srcsdbx=${geocal_topdir}/thirdparty/libsdbx
 
 srcraw=${geocal_topdir}/thirdparty/libraw
 
-pythondocdir=${prefix}/share/doc/afids/python
+pythondocdir=${prefix}/share/doc/geocal/python
 
-afidspkgpythondir=${pythondir}/afids
-
-geocalpkgpythondir=${platpythondir}/geocal
-
-geocalpkgpyexecdir=${platpythondir}/geocal
+geocalpkgpythondir=${pythondir}/geocal
 
 afidspythonvdevdir=${prefix}/afids/vdev
 

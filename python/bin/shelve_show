@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 #
 # This short program prints out the value found in a SQLiteShelf.
-from afids import *
+from geocal import *
 
 version = "February 4, 2013"
 usage="""Usage: 

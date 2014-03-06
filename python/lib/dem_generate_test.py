@@ -1,6 +1,6 @@
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
-from geocal import *
+from geocal_swig import *
 from dem_generate import *
 from image_ground_connection import *
 import multiprocessing

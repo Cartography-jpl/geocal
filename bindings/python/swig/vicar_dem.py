@@ -118,12 +118,12 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.dem_tiled_file
-import geocal.dem_map_info
-import geocal.dem
-import geocal.generic_object
-import geocal.geocal_exception
-class VicarDem(geocal.dem_tiled_file.DemTiledFile):
+import geocal_swig.dem_tiled_file
+import geocal_swig.dem_map_info
+import geocal_swig.dem
+import geocal_swig.generic_object
+import geocal_swig.geocal_exception
+class VicarDem(geocal_swig.dem_tiled_file.DemTiledFile):
     """
     This uses a VicarTiledFile<T> as a DEM.
 

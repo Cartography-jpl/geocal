@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from math import *
 import numpy as np
 import scipy.optimize

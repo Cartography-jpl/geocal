@@ -128,17 +128,18 @@ DIST_COMMON = $(srcdir)/common.am $(srcdir)/include.am \
 	$(top_srcdir)/script/setup_afids_python.sh.in \
 	$(top_srcdir)/lib/GeoCalCore/Support/global_fixture_default.cc.in \
 	$(am__dist_afidspythonvdev_SCRIPTS_DIST) $(dist_bin_SCRIPTS) \
-	$(top_srcdir)/config/depcomp $(am__afidspkgpython_PYTHON_DIST) \
-	$(pkgpythonswig_PYTHON) $(top_srcdir)/config/py-compile \
-	$(dist_afidspkgpython_DATA) $(dist_afidspythonvdev_DATA) \
-	$(dist_sdbxdoc_DATA) $(am__geocalinc_HEADERS_DIST) \
-	$(include_HEADERS) $(libraw_HEADERS) $(sdbx_HEADERS) \
-	$(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
-	$(sdbxsupport_HEADERS) $(top_srcdir)/config/test-driver \
-	COPYING config/compile config/config.guess config/config.sub \
-	config/depcomp config/install-sh config/missing \
-	config/py-compile config/ltmain.sh \
-	$(top_srcdir)/config/compile $(top_srcdir)/config/config.guess \
+	$(top_srcdir)/config/depcomp \
+	$(am__geocalpkgpython_PYTHON_DIST) $(pkgpythonswig_PYTHON) \
+	$(top_srcdir)/config/py-compile $(dist_afidspythonvdev_DATA) \
+	$(dist_geocalpkgpython_DATA) $(dist_sdbxdoc_DATA) \
+	$(am__geocalinc_HEADERS_DIST) $(include_HEADERS) \
+	$(libraw_HEADERS) $(sdbx_HEADERS) $(sdbxbtree_HEADERS) \
+	$(sdbxrtree_HEADERS) $(sdbxsupport_HEADERS) \
+	$(top_srcdir)/config/test-driver COPYING config/compile \
+	config/config.guess config/config.sub config/depcomp \
+	config/install-sh config/missing config/py-compile \
+	config/ltmain.sh $(top_srcdir)/config/compile \
+	$(top_srcdir)/config/config.guess \
 	$(top_srcdir)/config/config.sub \
 	$(top_srcdir)/config/install-sh $(top_srcdir)/config/ltmain.sh \
 	$(top_srcdir)/config/missing
@@ -328,10 +329,10 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)" \
 	"$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(afidspkgpythondir)" \
+	"$(DESTDIR)$(geocalpkgpythondir)" \
 	"$(DESTDIR)$(pkgpythonswigdir)" \
-	"$(DESTDIR)$(afidspkgpythondir)" \
-	"$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" \
+	"$(DESTDIR)$(afidspythonvdevdir)" \
+	"$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(sdbxdocdir)" \
 	"$(DESTDIR)$(installafidspythondir)" \
 	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" \
 	"$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" \
@@ -1063,7 +1064,7 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-am__afidspkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
+am__geocalpkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/job_handle.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py @srcpythonlib@/igc_collection.py \
@@ -1102,7 +1103,7 @@ am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 am__pep3147_tweak = \
   sed -e 's|\.py$$||' -e 's|[^/]*$$|__pycache__/&.*.py|'
 py_compile = $(top_srcdir)/config/py-compile
-DATA = $(dist_afidspkgpython_DATA) $(dist_afidspythonvdev_DATA) \
+DATA = $(dist_afidspythonvdev_DATA) $(dist_geocalpkgpython_DATA) \
 	$(dist_sdbxdoc_DATA) $(installafidspython_DATA) \
 	$(pkgconfig_DATA)
 am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
@@ -1566,7 +1567,6 @@ ac_ct_CXX = @ac_ct_CXX@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
 ac_ct_F77 = @ac_ct_F77@
 ac_ct_FC = @ac_ct_FC@
-afidspkgpythondir = @afidspkgpythondir@
 afidspythonvdevdir = @afidspythonvdevdir@
 am__include = @am__include@
 am__leading_dot = @am__leading_dot@
@@ -1586,7 +1586,6 @@ docdir = @docdir@
 docpythonsrc = @docpythonsrc@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
-geocalpkgpyexecdir = @geocalpkgpyexecdir@
 geocalpkgpythondir = @geocalpkgpythondir@
 geocalunittestdata = @geocalunittestdata@
 host = @host@
@@ -2214,7 +2213,7 @@ libraw_la_SOURCES = @srcraw@/dcraw_common.cpp \
 	@srcraw@/libraw_c_api.cpp @srcraw@/libraw_cxx.cpp \
 	@srcraw@/libraw_defines.h @srcraw@/var_defines.h
 libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
-pkgpythonswigdir = @pythondir@/geocal
+pkgpythonswigdir = @pythondir@/geocal_swig
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py $(patsubst \
 	%_wrap.cc, %.py, $(INCLUDE_SWIG_SRC))
 INCLUDE_SWIG_SRC = $(SWIG_SRC) $(am__append_32) $(am__append_33) \
@@ -2234,7 +2233,7 @@ _swig_wrap_la_LDFLAGS = -module -avoid-version
 _swig_wrap_la_LIBADD = libgeocal.la
 _swig_wrap_la_SOURCES = $(INCLUDE_SWIG_SRC) @swigsrc@/swig_wrap.cc
 installafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
-afidspkgpython_PYTHON = @srcpython@/init/__init__.py \
+geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/job_handle.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py @srcpythonlib@/igc_collection.py \
@@ -2282,7 +2281,7 @@ dist_afidspythonvdev_DATA =  \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
-dist_afidspkgpython_DATA = @srcpythonlib@/cib01_mapinfo.dat
+dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.dat
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -6907,12 +6906,12 @@ clean-libtool:
 
 distclean-libtool:
 	-rm -f libtool config.lt
-install-afidspkgpythonPYTHON: $(afidspkgpython_PYTHON)
+install-geocalpkgpythonPYTHON: $(geocalpkgpython_PYTHON)
 	@$(NORMAL_INSTALL)
-	@list='$(afidspkgpython_PYTHON)'; dlist=; list2=; test -n "$(afidspkgpythondir)" || list=; \
+	@list='$(geocalpkgpython_PYTHON)'; dlist=; list2=; test -n "$(geocalpkgpythondir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(afidspkgpythondir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(afidspkgpythondir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(geocalpkgpythondir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(geocalpkgpythondir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then b=; else b="$(srcdir)/"; fi; \
@@ -6924,20 +6923,20 @@ install-afidspkgpythonPYTHON: $(afidspkgpython_PYTHON)
 	done; \
 	for file in $$list2; do echo $$file; done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(afidspkgpythondir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(afidspkgpythondir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(geocalpkgpythondir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(geocalpkgpythondir)" || exit $$?; \
 	done || exit $$?; \
 	if test -n "$$dlist"; then \
 	  $(am__py_compile) --destdir "$(DESTDIR)" \
-	                    --basedir "$(afidspkgpythondir)" $$dlist; \
+	                    --basedir "$(geocalpkgpythondir)" $$dlist; \
 	else :; fi
 
-uninstall-afidspkgpythonPYTHON:
+uninstall-geocalpkgpythonPYTHON:
 	@$(NORMAL_UNINSTALL)
-	@list='$(afidspkgpython_PYTHON)'; test -n "$(afidspkgpythondir)" || list=; \
+	@list='$(geocalpkgpython_PYTHON)'; test -n "$(geocalpkgpythondir)" || list=; \
 	py_files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	test -n "$$py_files" || exit 0; \
-	dir='$(DESTDIR)$(afidspkgpythondir)'; \
+	dir='$(DESTDIR)$(geocalpkgpythondir)'; \
 	pyc_files=`echo "$$py_files" | sed 's|$$|c|'`; \
 	pyo_files=`echo "$$py_files" | sed 's|$$|o|'`; \
 	py_files_pep3147=`echo "$$py_files" | $(am__pep3147_tweak)`; \
@@ -7003,27 +7002,6 @@ uninstall-pkgpythonswigPYTHON:
 	  $(am__uninstall_files_from_dir) || st=$$?; \
 	done; \
 	exit $$st
-install-dist_afidspkgpythonDATA: $(dist_afidspkgpython_DATA)
-	@$(NORMAL_INSTALL)
-	@list='$(dist_afidspkgpython_DATA)'; test -n "$(afidspkgpythondir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(afidspkgpythondir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(afidspkgpythondir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(afidspkgpythondir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(afidspkgpythondir)" || exit $$?; \
-	done
-
-uninstall-dist_afidspkgpythonDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(dist_afidspkgpython_DATA)'; test -n "$(afidspkgpythondir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(afidspkgpythondir)'; $(am__uninstall_files_from_dir)
 install-dist_afidspythonvdevDATA: $(dist_afidspythonvdev_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(dist_afidspythonvdev_DATA)'; test -n "$(afidspythonvdevdir)" || list=; \
@@ -7045,6 +7023,27 @@ uninstall-dist_afidspythonvdevDATA:
 	@list='$(dist_afidspythonvdev_DATA)'; test -n "$(afidspythonvdevdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(afidspythonvdevdir)'; $(am__uninstall_files_from_dir)
+install-dist_geocalpkgpythonDATA: $(dist_geocalpkgpython_DATA)
+	@$(NORMAL_INSTALL)
+	@list='$(dist_geocalpkgpython_DATA)'; test -n "$(geocalpkgpythondir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(geocalpkgpythondir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(geocalpkgpythondir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(geocalpkgpythondir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(geocalpkgpythondir)" || exit $$?; \
+	done
+
+uninstall-dist_geocalpkgpythonDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(dist_geocalpkgpython_DATA)'; test -n "$(geocalpkgpythondir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(geocalpkgpythondir)'; $(am__uninstall_files_from_dir)
 install-dist_sdbxdocDATA: $(dist_sdbxdoc_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(dist_sdbxdoc_DATA)'; test -n "$(sdbxdocdir)" || list=; \
@@ -7644,7 +7643,7 @@ all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspkgpythondir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspkgpythondir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -7725,16 +7724,15 @@ info: info-am
 
 info-am:
 
-install-data-am: install-afidspkgpythonPYTHON \
-	install-dist_afidspkgpythonDATA \
-	install-dist_afidspythonvdevDATA \
-	install-dist_afidspythonvdevSCRIPTS install-dist_sdbxdocDATA \
-	install-geocalincHEADERS install-includeHEADERS \
-	install-installafidspythonDATA install-librawHEADERS \
-	install-pkgconfigDATA install-pkgpythonswigLTLIBRARIES \
-	install-pkgpythonswigPYTHON install-sdbxHEADERS \
-	install-sdbxbtreeHEADERS install-sdbxrtreeHEADERS \
-	install-sdbxsupportHEADERS
+install-data-am: install-dist_afidspythonvdevDATA \
+	install-dist_afidspythonvdevSCRIPTS \
+	install-dist_geocalpkgpythonDATA install-dist_sdbxdocDATA \
+	install-geocalincHEADERS install-geocalpkgpythonPYTHON \
+	install-includeHEADERS install-installafidspythonDATA \
+	install-librawHEADERS install-pkgconfigDATA \
+	install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON \
+	install-sdbxHEADERS install-sdbxbtreeHEADERS \
+	install-sdbxrtreeHEADERS install-sdbxsupportHEADERS
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
 install-dvi: install-dvi-am
@@ -7784,12 +7782,11 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-afidspkgpythonPYTHON uninstall-binPROGRAMS \
-	uninstall-dist_afidspkgpythonDATA \
-	uninstall-dist_afidspythonvdevDATA \
+uninstall-am: uninstall-binPROGRAMS uninstall-dist_afidspythonvdevDATA \
 	uninstall-dist_afidspythonvdevSCRIPTS \
-	uninstall-dist_binSCRIPTS uninstall-dist_sdbxdocDATA \
-	uninstall-geocalincHEADERS uninstall-includeHEADERS \
+	uninstall-dist_binSCRIPTS uninstall-dist_geocalpkgpythonDATA \
+	uninstall-dist_sdbxdocDATA uninstall-geocalincHEADERS \
+	uninstall-geocalpkgpythonPYTHON uninstall-includeHEADERS \
 	uninstall-installafidspythonDATA uninstall-libLTLIBRARIES \
 	uninstall-librawHEADERS uninstall-pkgconfigDATA \
 	uninstall-pkgpythonswigLTLIBRARIES \
@@ -7810,14 +7807,13 @@ uninstall-am: uninstall-afidspkgpythonPYTHON uninstall-binPROGRAMS \
 	dist-shar dist-tarZ dist-xz dist-zip distcheck distclean \
 	distclean-compile distclean-generic distclean-libtool \
 	distclean-tags distcleancheck distdir distuninstallcheck dvi \
-	dvi-am html html-am info info-am install \
-	install-afidspkgpythonPYTHON install-am install-binPROGRAMS \
-	install-data install-data-am install-data-hook \
-	install-dist_afidspkgpythonDATA \
-	install-dist_afidspythonvdevDATA \
+	dvi-am html html-am info info-am install install-am \
+	install-binPROGRAMS install-data install-data-am \
+	install-data-hook install-dist_afidspythonvdevDATA \
 	install-dist_afidspythonvdevSCRIPTS install-dist_binSCRIPTS \
-	install-dist_sdbxdocDATA install-dvi install-dvi-am \
-	install-exec install-exec-am install-geocalincHEADERS \
+	install-dist_geocalpkgpythonDATA install-dist_sdbxdocDATA \
+	install-dvi install-dvi-am install-exec install-exec-am \
+	install-geocalincHEADERS install-geocalpkgpythonPYTHON \
 	install-html install-html-am install-includeHEADERS \
 	install-info install-info-am install-installafidspythonDATA \
 	install-libLTLIBRARIES install-librawHEADERS install-man \
@@ -7830,12 +7826,12 @@ uninstall-am: uninstall-afidspkgpythonPYTHON uninstall-binPROGRAMS \
 	maintainer-clean maintainer-clean-generic mostlyclean \
 	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
 	pdf pdf-am ps ps-am recheck tags tags-am uninstall \
-	uninstall-afidspkgpythonPYTHON uninstall-am \
-	uninstall-binPROGRAMS uninstall-dist_afidspkgpythonDATA \
+	uninstall-am uninstall-binPROGRAMS \
 	uninstall-dist_afidspythonvdevDATA \
 	uninstall-dist_afidspythonvdevSCRIPTS \
-	uninstall-dist_binSCRIPTS uninstall-dist_sdbxdocDATA \
-	uninstall-geocalincHEADERS uninstall-hook \
+	uninstall-dist_binSCRIPTS uninstall-dist_geocalpkgpythonDATA \
+	uninstall-dist_sdbxdocDATA uninstall-geocalincHEADERS \
+	uninstall-geocalpkgpythonPYTHON uninstall-hook \
 	uninstall-includeHEADERS uninstall-installafidspythonDATA \
 	uninstall-libLTLIBRARIES uninstall-librawHEADERS \
 	uninstall-pkgconfigDATA uninstall-pkgpythonswigLTLIBRARIES \
@@ -7951,7 +7947,7 @@ vpath %.cc $(srcdir)/@srccartlab@
 vpath %.h $(srcdir)/@srccartlab@
 vpath %.i $(srcdir)/@srccartlab@
 
-install-python-2: install-libLTLIBRARIES install-python-afids install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
+install-python-2: install-libLTLIBRARIES install-python-geocal install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
 	$(noop)
 
 install-python: all
@@ -8005,7 +8001,7 @@ install-python: all
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@-include $(patsubst %.cc, %.Pcc, $(INCLUDE_SWIG_SRC))
 
 # Backdoor rule to do a quick install when we are just varying python
-install-python-afids: install-afidspkgpythonPYTHON install-dist_afidspkgpythonDATA install-dist_binSCRIPTS
+install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
 python_check:
 	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \

@@ -118,13 +118,13 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.calc_raster
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-import geocal.image_ground_connection
-import geocal.geocal_exception
-class MagnifyBilinear(geocal.calc_raster.CalcRaster):
+import geocal_swig.calc_raster
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+import geocal_swig.image_ground_connection
+import geocal_swig.geocal_exception
+class MagnifyBilinear(geocal_swig.calc_raster.CalcRaster):
     """
     This creates a magnified image of a RasterImage.
 
@@ -145,7 +145,7 @@ class MagnifyBilinear(geocal.calc_raster.CalcRaster):
 MagnifyBilinear_swigregister = _magnify_bilinear.MagnifyBilinear_swigregister
 MagnifyBilinear_swigregister(MagnifyBilinear)
 
-class MagnifyBilinearImageGroundConnection(geocal.image_ground_connection.ImageGroundConnection):
+class MagnifyBilinearImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
     """
     This create an ImageGroundConnection that is magnified the same way
     MagnifyBilinear does.

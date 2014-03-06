@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.geocal_datum
-import geocal.generic_object
-class DatumGeoid96(geocal.geocal_datum.Datum):
+import geocal_swig.geocal_datum
+import geocal_swig.generic_object
+class DatumGeoid96(geocal_swig.geocal_datum.Datum):
     """
     This class read the EGM 96 geoid data to provide a Datum.
 

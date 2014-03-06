@@ -3,7 +3,7 @@ import shutil
 import tempfile
 import subprocess
 import time
-import geocal
+import geocal_swig
 from misc import makedirs_p
 
 class VicarInterface:
@@ -207,7 +207,7 @@ class __VicarToNarray(VicarInterface):
         self.output_name = output_name
 
     def post_run(self):
-        t = geocal.VicarRasterImage(self.output_name)
+        t = geocal_swig.VicarRasterImage(self.output_name)
         self.res = t.read(0, 0, t.number_line, t.number_sample)
 
 def vicar_to_numpy(cmd, output_name = "out"):

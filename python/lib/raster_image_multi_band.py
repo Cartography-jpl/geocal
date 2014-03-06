@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 
 def _new_from_init(cls, version, *args):
     if(cls.pickle_format_version() < version):
@@ -7,12 +7,12 @@ def _new_from_init(cls, version, *args):
     inst.__init__(*args)
     return inst
 
-class RasterImageMB(geocal.RasterImageMultiBandVariable):
+class RasterImageMB(geocal_swig.RasterImageMultiBandVariable):
     '''This is a thin wrapper around RasterImageMultiBandVariable that gives
     a cleaner interface for python. In particular, we add support for
     pickling.'''
     def __init__(self, *img_list):
-        geocal.RasterImageMultiBandVariable.__init__(self)
+        geocal_swig.RasterImageMultiBandVariable.__init__(self)
         for img in img_list:
             self.add_raster_image(img)
     

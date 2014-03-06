@@ -118,10 +118,10 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-class MemoryRasterImage(geocal.raster_image_variable.RasterImageVariable):
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+class MemoryRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
     """
     This is a simple implementation of a RasterImage, where the data is
     just stored in a 2D array.

@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from with_parameter import *
 import math
 import bisect

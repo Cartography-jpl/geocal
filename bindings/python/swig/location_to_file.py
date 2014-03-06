@@ -118,8 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class LocationToFile(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class LocationToFile(geocal_swig.generic_object.GenericObject):
     """
     A common implementation of MapProjectedMultifile is to have some sort
     of a look up table that gives the file name for a particular location.

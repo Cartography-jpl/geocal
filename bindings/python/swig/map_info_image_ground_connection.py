@@ -118,10 +118,10 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.image_ground_connection
-import geocal.generic_object
-import geocal.geocal_exception
-class MapInfoImageGroundConnection(geocal.image_ground_connection.ImageGroundConnection):
+import geocal_swig.image_ground_connection
+import geocal_swig.generic_object
+import geocal_swig.geocal_exception
+class MapInfoImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
     """
     This class creates an ImageGroundConnection that simply maps map
     registered image to the ground.

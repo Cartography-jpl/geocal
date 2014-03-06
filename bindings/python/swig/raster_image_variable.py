@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.raster_image
-import geocal.generic_object
-class RasterImageVariable(geocal.raster_image.RasterImage):
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+class RasterImageVariable(geocal_swig.raster_image.RasterImage):
     """
     Much of the time the constructor for a RasterImage determine the size,
     map_info, and tile size.

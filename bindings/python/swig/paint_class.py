@@ -118,11 +118,11 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.calc_raster_multi_band
-import geocal.raster_image_multi_band_variable
-import geocal.raster_image_multi_band
-import geocal.generic_object
-class PaintClass(geocal.calc_raster_multi_band.CalcRasterMultiBand):
+import geocal_swig.calc_raster_multi_band
+import geocal_swig.raster_image_multi_band_variable
+import geocal_swig.raster_image_multi_band
+import geocal_swig.generic_object
+class PaintClass(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     """
     This takes two images, a image with the class ID and a pan band.
 

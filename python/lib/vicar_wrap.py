@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from vicar_interface import *
 import numpy as np
 import math
@@ -87,10 +87,10 @@ def scinterp(time, pos_previous, t_pos_previous, att_previous, t_att_previous,
     HdfOrbit). But for comparison with older VICAR programs it is useful
     to be able to call this routine.
 
-    This takes the time as a geocal.Time, along with the 
+    This takes the time as a geocal_swig.Time, along with the 
     position and attitude from before and after this time 
-    (as a geocal.CartesianInertial and geocal.Quaternion_double).
-    This returns a geocal.QuaternionOrbitData.
+    (as a geocal_swig.CartesianInertial and geocal_swig.Quaternion_double).
+    This returns a geocal_swig.QuaternionOrbitData.
 
     The ephemeris is linearly interpolated, and the attitude has a 
     spherical linear interpolation done between the two rotation quaternions.
@@ -172,7 +172,7 @@ def sc2rpc(orbit_data, delta_ut1, leapsecond_file, image_coordinate,
     create a RPC. Rather it finds the ground location for a particular
     image location.
 
-    This takes in the orbit data as a geocal.QuaternionOrbitData. We take
+    This takes in the orbit data as a geocal_swig.QuaternionOrbitData. We take
     Delta_ut1 and leapseconds file to use (these are passed in rather than
     looked up). The height is in meters.
 

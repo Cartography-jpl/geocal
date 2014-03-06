@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.geocal_datum
-import geocal.generic_object
-class DidDatum(geocal.geocal_datum.Datum):
+import geocal_swig.geocal_datum
+import geocal_swig.generic_object
+class DidDatum(geocal_swig.geocal_datum.Datum):
     """
     This is a Datum used for the the DID.
 

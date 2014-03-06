@@ -118,10 +118,10 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-class RasterMultifile(geocal.raster_image_variable.RasterImageVariable):
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+class RasterMultifile(geocal_swig.raster_image_variable.RasterImageVariable):
     """
     There are certain larger data sets that are made up of a number of
     separate files all in the same map projection that cover a large area.

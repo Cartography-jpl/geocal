@@ -1,5 +1,5 @@
 from abc import *
-from geocal import *
+from geocal_swig import *
 from with_parameter import *
 import numpy as np
 import scipy.sparse

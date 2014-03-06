@@ -118,21 +118,21 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class Refraction(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class Refraction(geocal_swig.generic_object.GenericObject):
     """
     This calculates refraction.
 
     The algorithm used was take from the SDP toolkit. The original code
     was written by Peter Noerdlinger as the SDP toolkit function
     PGS_CSC_SpaceRefract. The algorithm is described in detail in
-    "Theoretical Basis of the SDP Toolkit   Geolocation Package for the
+    "Theoretical Basis of the SDP Toolkit Geolocation Package for the
     ECS".
 
     This depends on the index of refraction of air at the surface. We
     don't actually know this. There are various approximations, and the
     toolkit uses one described in the "Theoretical Basis of the SDP
-    Toolkit   Geolocation Package for the ECS".
+    Toolkit Geolocation Package for the ECS".
 
     This class allows the index of refraction to simple be given. This
     allows us to just fit for this unknown using something like a

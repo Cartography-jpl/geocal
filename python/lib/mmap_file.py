@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 import numpy as np
 
 def _new_memmap(version, args, kwargs):

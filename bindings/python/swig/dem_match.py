@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-import geocal.geocal_exception
-class DemMatch(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+import geocal_swig.geocal_exception
+class DemMatch(geocal_swig.generic_object.GenericObject):
     """
     This class does matching between two images, and then finds the
     intersection of these two images.

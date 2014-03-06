@@ -143,8 +143,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class InterestPoint(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class InterestPoint(geocal_swig.generic_object.GenericObject):
     """
     This is an interest point, determined by a FeatureDetector.
 
@@ -173,7 +173,7 @@ InterestPoint.compare = new_instancemethod(_feature_detector.InterestPoint_compa
 InterestPoint_swigregister = _feature_detector.InterestPoint_swigregister
 InterestPoint_swigregister(InterestPoint)
 
-class FeatureDetector(geocal.generic_object.GenericObject):
+class FeatureDetector(geocal_swig.generic_object.GenericObject):
     """
     This class detects interest points in an image.
 

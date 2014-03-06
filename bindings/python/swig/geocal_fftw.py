@@ -118,8 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class Fftw2dForward(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class Fftw2dForward(geocal_swig.generic_object.GenericObject):
     """
     This is a light wrapper around the FFTW library.
 
@@ -154,7 +154,7 @@ Fftw2dForward.__str__ = new_instancemethod(_geocal_fftw.Fftw2dForward___str__,No
 Fftw2dForward_swigregister = _geocal_fftw.Fftw2dForward_swigregister
 Fftw2dForward_swigregister(Fftw2dForward)
 
-class Fftw2dBackward(geocal.generic_object.GenericObject):
+class Fftw2dBackward(geocal_swig.generic_object.GenericObject):
     """
     This is a light wrapper around the FFTW library.
 

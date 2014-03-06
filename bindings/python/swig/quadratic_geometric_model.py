@@ -143,9 +143,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.geometric_model
-import geocal.generic_object
-class QuadraticGeometricModel(geocal.geometric_model.GeometricModel):
+import geocal_swig.geometric_model
+import geocal_swig.generic_object
+class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     """
     This is a GeometricModel that provides a quadratic polynomial
     geometric model.

@@ -118,8 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class VicarArgument(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class VicarArgument(geocal_swig.generic_object.GenericObject):
     """
     This provides access to arguments passed by VICAR.
 

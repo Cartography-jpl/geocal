@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.orbit
-import geocal.generic_object
-class HdfOrbit_EciTodBurl_TimeAcs(geocal.orbit.Orbit):
+import geocal_swig.orbit
+import geocal_swig.generic_object
+class HdfOrbit_EciTodBurl_TimeAcs(geocal_swig.orbit.Orbit):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     def __init__(self, *args): 

@@ -118,14 +118,14 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.calc_raster
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-import geocal.calc_raster_multi_band
-import geocal.raster_image_multi_band_variable
-import geocal.raster_image_multi_band
-class ScaleImage(geocal.calc_raster.CalcRaster):
+import geocal_swig.calc_raster
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+import geocal_swig.calc_raster_multi_band
+import geocal_swig.raster_image_multi_band_variable
+import geocal_swig.raster_image_multi_band
+class ScaleImage(geocal_swig.calc_raster.CalcRaster):
     """
     This is a simple adapter that multiples a underlying image by a scale
     factor.
@@ -175,7 +175,7 @@ ScaleImage._v_scale_factor = new_instancemethod(_scale_image.ScaleImage__v_scale
 ScaleImage_swigregister = _scale_image.ScaleImage_swigregister
 ScaleImage_swigregister(ScaleImage)
 
-class ScaleImageMultiBand(geocal.calc_raster_multi_band.CalcRasterMultiBand):
+class ScaleImageMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     """
     This is a simple adapter that multiples a underlying image by a scale
     factor.

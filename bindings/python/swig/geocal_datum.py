@@ -118,8 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class Datum(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class Datum(geocal_swig.generic_object.GenericObject):
     """
     This is a Datum, which returns the distance from mean sea level to a
     reference ellipsoid.

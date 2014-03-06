@@ -118,8 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class TimeTable(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class TimeTable(geocal_swig.generic_object.GenericObject):
     """
     This class is used to relate time to image line number and vice versa.
 

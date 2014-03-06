@@ -2,7 +2,7 @@
 #
 # This sets up a RasterImage into a shelve.
 
-from afids import *
+from geocal import *
 
 version = "October 29, 2013"
 usage='''Usage: 

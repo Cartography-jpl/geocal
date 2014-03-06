@@ -1,4 +1,4 @@
-from afids import *
+from geocal import *
 import subprocess
 import os
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"

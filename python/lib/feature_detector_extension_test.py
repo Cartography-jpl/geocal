@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from feature_detector_extension import *
 from pprint import *
 from multiprocessing import Pool

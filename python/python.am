@@ -1,7 +1,7 @@
-afidspkgpython_PYTHON = @srcpython@/init/__init__.py
+geocalpkgpython_PYTHON = @srcpython@/init/__init__.py
 
 # Backdoor rule to do a quick install when we are just varying python
-install-python-afids: install-afidspkgpythonPYTHON install-dist_afidspkgpythonDATA install-dist_binSCRIPTS
+install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
 
 if HAVE_AFIDS
 PYTHON_CHECK_PATH=$(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}

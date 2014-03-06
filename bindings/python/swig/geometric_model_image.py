@@ -118,11 +118,11 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.calc_raster
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-class GeometricModelImage(geocal.calc_raster.CalcRaster):
+import geocal_swig.calc_raster
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+class GeometricModelImage(geocal_swig.calc_raster.CalcRaster):
     """
     This is a simple adapter that applies a geometric model to an
     underlying image.

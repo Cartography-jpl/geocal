@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.camera
-import geocal.generic_object
-class SpotCamera(geocal.camera.PushBroomCamera):
+import geocal_swig.camera
+import geocal_swig.generic_object
+class SpotCamera(geocal_swig.camera.PushBroomCamera):
     """
     This class models the SPOT camera.
 

@@ -143,8 +143,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class ImageCoordinate(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class ImageCoordinate(geocal_swig.generic_object.GenericObject):
     """
     This describes an image coordinate.
 
@@ -181,7 +181,7 @@ ImageCoordinate.__str__ = new_instancemethod(_image_coordinate.ImageCoordinate__
 ImageCoordinate_swigregister = _image_coordinate.ImageCoordinate_swigregister
 ImageCoordinate_swigregister(ImageCoordinate)
 
-class VicarImageCoordinate(geocal.generic_object.GenericObject):
+class VicarImageCoordinate(geocal_swig.generic_object.GenericObject):
     """
     VICAR programs use a different convention than our ImageCoordinate.
 

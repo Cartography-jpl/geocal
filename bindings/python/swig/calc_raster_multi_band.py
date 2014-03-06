@@ -118,10 +118,10 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.raster_image_multi_band_variable
-import geocal.raster_image_multi_band
-import geocal.generic_object
-class CalcRasterMultiBand(geocal.raster_image_multi_band_variable.RasterImageMultiBandVariable):
+import geocal_swig.raster_image_multi_band_variable
+import geocal_swig.raster_image_multi_band
+import geocal_swig.generic_object
+class CalcRasterMultiBand(geocal_swig.raster_image_multi_band_variable.RasterImageMultiBandVariable):
     """
     Some classes most naturally generate a RasterImageMultiBand by
     calculating a results for an array of data (e.g., a tile).

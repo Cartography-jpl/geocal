@@ -2,7 +2,7 @@
 #
 # This creates a IgcCollection that uses GDAL data files for the DEM, 
 # image, and RPC.
-from afids import *
+from geocal import *
 
 version = "October 11, 2013"
 usage='''Usage: 

@@ -3,7 +3,7 @@
 # This converts a GDAL file to ERDAS, including calculating statistics and
 # an image pyramid.
 
-from afids import *
+from geocal import *
 import subprocess
 
 version = "May 10,2013"

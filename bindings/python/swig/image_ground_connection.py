@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-import geocal.geocal_exception
-class ImageGroundConnectionFailed(geocal.geocal_exception.Exception):
+import geocal_swig.generic_object
+import geocal_swig.geocal_exception
+class ImageGroundConnectionFailed(geocal_swig.geocal_exception.Exception):
     """
     Exception thrown if ImageGroundConnection fails to calculate a image
     coordinate.
@@ -141,7 +141,7 @@ class ImageGroundConnectionFailed(geocal.geocal_exception.Exception):
 ImageGroundConnectionFailed_swigregister = _image_ground_connection.ImageGroundConnectionFailed_swigregister
 ImageGroundConnectionFailed_swigregister(ImageGroundConnectionFailed)
 
-class ImageGroundConnection(geocal.generic_object.GenericObject):
+class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
     """
     Depending on the the data we are using, we may connect a location in
     an image to a ground location in one of several ways.

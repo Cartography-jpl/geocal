@@ -1,4 +1,4 @@
-from afids import *
+from geocal import *
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 import subprocess

@@ -118,31 +118,31 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.calc_raster
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-import geocal.calc_raster_multi_band
-import geocal.raster_image_multi_band_variable
-import geocal.raster_image_multi_band
-import geocal.geocal_exception
-class IgcMapProjected(geocal.calc_raster.CalcRaster):
+import geocal_swig.calc_raster
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+import geocal_swig.calc_raster_multi_band
+import geocal_swig.raster_image_multi_band_variable
+import geocal_swig.raster_image_multi_band
+import geocal_swig.geocal_exception
+class IgcMapProjected(geocal_swig.calc_raster.CalcRaster):
     """
     This is a RasterImage that has been map projected using an
     ImageGroundConnection.
 
     To do this we do two steps:
 
-    1. We calculate roughly what the difference in resolution is between
-    the original data and final MapInfo. We do this by looking at the
-    center pixel of the original data and the pixel +1 in line and sample.
-    We then use RasterAveraged to average the original data to roughly the
+    We calculate roughly what the difference in resolution is between the
+    original data and final MapInfo. We do this by looking at the center
+    pixel of the original data and the pixel +1 in line and sample. We
+    then use RasterAveraged to average the original data to roughly the
     resolution of the final MapInfo. If the final MapInfo is near the same
     resolution as the original, or if it has a higher resolution, then we
     don't do any averaging. Alternatively, you can pass in the averaging
     factor (include a value of 1 which turns this behavior off).
 
-    2. We then interpolate the possibly averaged data to the final
+    We then interpolate the possibly averaged data to the final
     projection.
 
     It is ok if the final MapInfo contains areas outside of the original
@@ -247,23 +247,23 @@ IgcMapProjected._v_read_into_memory = new_instancemethod(_igc_map_projected.IgcM
 IgcMapProjected_swigregister = _igc_map_projected.IgcMapProjected_swigregister
 IgcMapProjected_swigregister(IgcMapProjected)
 
-class IgcMapProjectedMultiBand(geocal.calc_raster_multi_band.CalcRasterMultiBand):
+class IgcMapProjectedMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     """
     This is a RasterImageMultiBand that has been map projected using an
     ImageGroundConnection.
 
     To do this we do two steps:
 
-    1. We calculate roughly what the difference in resolution is between
-    the original data and final MapInfo. We do this by looking at the
-    center pixel of the original data and the pixel +1 in line and sample.
-    We then use RasterAveraged to average the original data to roughly the
+    We calculate roughly what the difference in resolution is between the
+    original data and final MapInfo. We do this by looking at the center
+    pixel of the original data and the pixel +1 in line and sample. We
+    then use RasterAveraged to average the original data to roughly the
     resolution of the final MapInfo. If the final MapInfo is near the same
     resolution as the original, or if it has a higher resolution, then we
     don't do any averaging. Alternatively, you can pass in the averaging
     factor (include a value of 1 which turns this behavior off).
 
-    2. We then interpolate the possibly averaged data to the final
+    We then interpolate the possibly averaged data to the final
     projection.
 
     It is ok if the final MapInfo contains areas outside of the original

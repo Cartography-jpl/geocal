@@ -118,8 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class ImageMatcher(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class ImageMatcher(geocal_swig.generic_object.GenericObject):
     """
     This class performs image matching, finding the location of a point in
     a reference image in a new image.

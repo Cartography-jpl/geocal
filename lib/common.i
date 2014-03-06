@@ -32,7 +32,7 @@ public:
 
 // Short cut for ingesting a base class
 %define %base_import(NAME)
-%import(module="geocal.NAME") "NAME.i"
+%import(module="geocal_swig.NAME") "NAME.i"
 %enddef
 
 // Map std::string to and from the native string type

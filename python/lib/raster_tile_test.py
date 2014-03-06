@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from raster_tile import *
 from nose.tools import *
 import os

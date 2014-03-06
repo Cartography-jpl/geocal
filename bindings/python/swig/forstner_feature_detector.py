@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.feature_detector
-import geocal.generic_object
-class ForstnerFeatureDetector(geocal.feature_detector.FeatureDetector):
+import geocal_swig.feature_detector
+import geocal_swig.generic_object
+class ForstnerFeatureDetector(geocal_swig.feature_detector.FeatureDetector):
     """
     This class detects interest points in an image using Forstner feature
     detection.

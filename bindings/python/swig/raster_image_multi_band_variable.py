@@ -118,8 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.raster_image_multi_band
-import geocal.generic_object
+import geocal_swig.raster_image_multi_band
+import geocal_swig.generic_object
 def _create_rimb(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -131,7 +131,7 @@ def _create_rimb(cls, version, *args):
         inst.add_raster_image(i)
     return inst
 
-class RasterImageMultiBandVariable(geocal.raster_image_multi_band.RasterImageMultiBand):
+class RasterImageMultiBandVariable(geocal_swig.raster_image_multi_band.RasterImageMultiBand):
     """
     A common implementation of RasterImageMultiBand is to just store a
     vector of RasterImage.

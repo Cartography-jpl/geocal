@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 import numpy as np
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
@@ -43,7 +43,7 @@ def _read_with_pad(self, Lstart, Sstart, Number_line, Number_sample):
         self.read(rline, rsamp, nlind, nsind)
     return res
 
-geocal.RasterImage.read_with_pad = _read_with_pad
+geocal_swig.RasterImage.read_with_pad = _read_with_pad
 
 def _display(self, ic, sz, cross_hair = True):
     '''This executes plt.imshow for the image centered as the given
@@ -69,9 +69,9 @@ def _display(self, ic, sz, cross_hair = True):
                vmin = min, vmax = max, 
                extent = [smp, smp + nsamp, ln + nline, ln])
 
-geocal.RasterImage.display = _display
+geocal_swig.RasterImage.display = _display
 
-def _footprint_geometry(self, cconver = geocal.GeodeticConverter()):
+def _footprint_geometry(self, cconver = geocal_swig.GeodeticConverter()):
     '''Return a ogr Geometry object describing the footprint of the 
     RasterImage. This includes the 4 corners of the image.
 
@@ -80,17 +80,17 @@ def _footprint_geometry(self, cconver = geocal.GeodeticConverter()):
 
     This can then be used to write information to a ShapeFile.'''
     corners = []
-    for pt in [geocal.ImageCoordinate(0,0), 
-               geocal.ImageCoordinate(self.number_line, 0), 
-               geocal.ImageCoordinate(self.number_line, 
+    for pt in [geocal_swig.ImageCoordinate(0,0), 
+               geocal_swig.ImageCoordinate(self.number_line, 0), 
+               geocal_swig.ImageCoordinate(self.number_line, 
                                       self.number_sample), 
-               geocal.ImageCoordinate(0, self.number_sample)]:
+               geocal_swig.ImageCoordinate(0, self.number_sample)]:
         x, y, z = cconver.convert_to_coordinate(self.ground_coordinate(pt))
         corners.append((x, y))
     return ShapeLayer.polygon_2d(corners)
 
 if(have_shape_file):
-    geocal.RasterImage.footprint_geometry = _footprint_geometry
+    geocal_swig.RasterImage.footprint_geometry = _footprint_geometry
 
 
 

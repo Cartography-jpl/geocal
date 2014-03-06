@@ -3,7 +3,7 @@
 from sqlite_shelf import write_shelve
 from functools import partial
 import numpy as np
-import geocal
+import geocal_swig
 from multiprocessing import Pool
 import logging
 
@@ -54,7 +54,7 @@ def parallel_process_image(img_in, out, process_nline, process_nsamp,
     the jobs.'''
     process_list =  [ ] 
     job_index = 0
-    if(isinstance(img_in, geocal.RasterImageMultiBand)):
+    if(isinstance(img_in, geocal_swig.RasterImageMultiBand)):
         nline = img_in.raster_image(0).number_line
         nsamp = img_in.raster_image(0).number_sample
         func = parallel_process_tile2

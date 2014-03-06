@@ -1,6 +1,6 @@
 import os
 import errno
-from geocal import *
+from geocal_swig import *
 import cPickle
 
 # This contains miscellenous routines that don't really belong anywhere else.
@@ -25,6 +25,7 @@ def _write_cib01_mapinfo():
     '''Write out cib01 map info for when we don't have CIB 1 data available'''
     with open("cib01_mapinfo.dat", "w") as f:
         cPickle.dump(cib01_data().map_info, f, cPickle.HIGHEST_PROTOCOL)
+
 
 def cib01_mapinfo():
     '''This gets the CIB 1 meter MapInfo. This is useful when we don't

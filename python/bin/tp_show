@@ -3,7 +3,7 @@
 # This is used to display a tie point, to see how good the quality of it is
 # visually.
 
-from afids import *
+from geocal import *
 import matplotlib.pyplot as plt
 
 version = "June 25, 2013"

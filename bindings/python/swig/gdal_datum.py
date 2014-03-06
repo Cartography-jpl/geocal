@@ -118,13 +118,13 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.geocal_datum
-import geocal.generic_object
-import geocal.raster_image_tiled_file
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.geocal_exception
-class GdalDatum(geocal.geocal_datum.Datum):
+import geocal_swig.geocal_datum
+import geocal_swig.generic_object
+import geocal_swig.raster_image_tiled_file
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.geocal_exception
+class GdalDatum(geocal_swig.geocal_datum.Datum):
     """
     This uses a GdalRasterImage to provide a datum.
 

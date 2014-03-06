@@ -118,17 +118,17 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.calc_raster
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-import geocal.calc_raster_multi_band
-import geocal.raster_image_multi_band_variable
-import geocal.raster_image_multi_band
-import geocal.image_mask
-import geocal.image_ground_connection
-import geocal.geocal_exception
-class RasterAveraged(geocal.calc_raster.CalcRaster):
+import geocal_swig.calc_raster
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+import geocal_swig.calc_raster_multi_band
+import geocal_swig.raster_image_multi_band_variable
+import geocal_swig.raster_image_multi_band
+import geocal_swig.image_mask
+import geocal_swig.image_ground_connection
+import geocal_swig.geocal_exception
+class RasterAveraged(geocal_swig.calc_raster.CalcRaster):
     """
     This averages a higher resolution RasterImage into a lower resolution
     one.
@@ -219,7 +219,7 @@ RasterAveraged._v_ignore_zero = new_instancemethod(_raster_averaged.RasterAverag
 RasterAveraged_swigregister = _raster_averaged.RasterAveraged_swigregister
 RasterAveraged_swigregister(RasterAveraged)
 
-class RasterAveragedMultiBand(geocal.calc_raster_multi_band.CalcRasterMultiBand):
+class RasterAveragedMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     """
     This averages a higher resolution RasterImageMultiBand into a lower
     resolution one.
@@ -310,7 +310,7 @@ RasterAveragedMultiBand._v_ignore_zero = new_instancemethod(_raster_averaged.Ras
 RasterAveragedMultiBand_swigregister = _raster_averaged.RasterAveragedMultiBand_swigregister
 RasterAveragedMultiBand_swigregister(RasterAveragedMultiBand)
 
-class ImageMaskAveraged(geocal.image_mask.ImageMask):
+class ImageMaskAveraged(geocal_swig.image_mask.ImageMask):
     """
     Take an existing image mask, and averages it like RasterAveraged.
 
@@ -377,7 +377,7 @@ ImageMaskAveraged._v_number_sample_per_pixel = new_instancemethod(_raster_averag
 ImageMaskAveraged_swigregister = _raster_averaged.ImageMaskAveraged_swigregister
 ImageMaskAveraged_swigregister(ImageMaskAveraged)
 
-class AveragedImageGroundConnection(geocal.image_ground_connection.ImageGroundConnection):
+class AveragedImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
     """
     This takes an existing ImageGroundConnection and it averages the
     raster image, accounting for this in the ground/image calculation.

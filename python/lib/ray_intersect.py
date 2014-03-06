@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 import numpy as np
 import numpy.linalg as la
 import math

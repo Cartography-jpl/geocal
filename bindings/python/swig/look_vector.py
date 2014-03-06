@@ -118,8 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class LookVector(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class LookVector(geocal_swig.generic_object.GenericObject):
     """
     This is a look vector in an unspecified coordinate system.
 

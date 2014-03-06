@@ -1,5 +1,5 @@
 SWIG_FLAG += -O
-pkgpythonswigdir = @pythondir@/geocal
+pkgpythonswigdir = @pythondir@/geocal_swig
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py
 INCLUDE_SWIG_SRC = $(SWIG_SRC)
 FULL_SWIG_SRC = $(SWIG_SRC)
@@ -47,7 +47,7 @@ _swig_wrap_la_SOURCES+= @swigsrc@/swig_wrap.cc
 EXTRA_DIST+= $(FULL_SWIG_SRC)
 EXTRA_DIST+= $(srcdir)/$(swigsrc)/*_wrap.h
 
-install-python-2: install-libLTLIBRARIES install-python-afids install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
+install-python-2: install-libLTLIBRARIES install-python-geocal install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
 	$(noop)
 
 install-python: all

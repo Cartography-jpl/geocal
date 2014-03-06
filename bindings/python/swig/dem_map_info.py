@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.dem
-import geocal.generic_object
-class DemMapInfo(geocal.dem.Dem):
+import geocal_swig.dem
+import geocal_swig.generic_object
+class DemMapInfo(geocal_swig.dem.Dem):
     """
     C++ includes: dem_map_info.h
 

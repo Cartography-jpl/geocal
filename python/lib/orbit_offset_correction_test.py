@@ -1,5 +1,5 @@
 from nose.tools import *
-from geocal import *
+from geocal_swig import *
 from orbit_offset_correction import *
 from nose.plugins.skip import Skip, SkipTest
 

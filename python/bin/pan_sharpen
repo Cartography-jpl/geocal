@@ -3,7 +3,7 @@
 #
 # This runs the pan sharpening algorithm.
 
-from afids import *
+from geocal import *
 import sys
 
 va = VicarArgument(sys.argv)

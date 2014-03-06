@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from raster_image_extension import *
 import numpy as np
 from nose.plugins.skip import Skip, SkipTest

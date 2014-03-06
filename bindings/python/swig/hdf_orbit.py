@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.orbit
-import geocal.generic_object
-class HdfOrbit_EciTod_TimeAcs(geocal.orbit.Orbit):
+import geocal_swig.orbit
+import geocal_swig.generic_object
+class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit.Orbit):
     """
     This is an implementation of an Orbit that reads position, velocity,
     and attitude quaternion from an HDF file.

@@ -118,9 +118,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.camera
-import geocal.generic_object
-class QuaternionCamera(geocal.camera.Camera):
+import geocal_swig.camera
+import geocal_swig.generic_object
+class QuaternionCamera(geocal_swig.camera.Camera):
     """
     This is a simple frame camera.
 

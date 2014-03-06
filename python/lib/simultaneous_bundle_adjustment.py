@@ -1,5 +1,5 @@
 import numpy as np
-from geocal import *
+from geocal_swig import *
 import scipy
 
 class _coo_helper(object):

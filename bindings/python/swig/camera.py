@@ -143,8 +143,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class Camera(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class Camera(geocal_swig.generic_object.GenericObject):
     """
     This class models a frame camera.
 

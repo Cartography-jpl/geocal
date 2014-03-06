@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from igc_collection import *
 from tie_point import *
 from ray_intersect import *

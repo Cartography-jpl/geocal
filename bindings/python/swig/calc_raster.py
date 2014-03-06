@@ -118,10 +118,10 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-class CalcRaster(geocal.raster_image_variable.RasterImageVariable):
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+class CalcRaster(geocal_swig.raster_image_variable.RasterImageVariable):
     """
     Some classes most naturally generate a RasterImage by calculating a
     results for an array of data (e.g., a tile).

@@ -118,10 +118,10 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.image_to_image_match
-import geocal.generic_object
-import geocal.geocal_exception
-class SurfaceImageToImageMatch(geocal.image_to_image_match.ImageToImageMatch):
+import geocal_swig.image_to_image_match
+import geocal_swig.generic_object
+import geocal_swig.geocal_exception
+class SurfaceImageToImageMatch(geocal_swig.image_to_image_match.ImageToImageMatch):
     """
     This is an ImageToImageMatch that takes two image ground connections
     along with a MapInfo to project to.

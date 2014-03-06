@@ -143,15 +143,15 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.orbit_quaternion_list
-import geocal.orbit
-import geocal.generic_object
-import geocal.aircraft_orbit_data
-import geocal.raster_image_tiled_file
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.geocal_exception
-class ArgusOrbitData(geocal.aircraft_orbit_data.AircraftOrbitData):
+import geocal_swig.orbit_quaternion_list
+import geocal_swig.orbit
+import geocal_swig.generic_object
+import geocal_swig.aircraft_orbit_data
+import geocal_swig.raster_image_tiled_file
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.geocal_exception
+class ArgusOrbitData(geocal_swig.aircraft_orbit_data.AircraftOrbitData):
     """
     This is a single ARGUS navigation file record.
 
@@ -292,7 +292,7 @@ def ArgusOrbitData_mosaic(*args):
     """
   return _argus_orbit.ArgusOrbitData_mosaic(*args)
 
-class ArgusOrbit(geocal.orbit_quaternion_list.OrbitQuaternionList):
+class ArgusOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     """
     This read a CSV navigation file and uses it to generate a Orbit.
 

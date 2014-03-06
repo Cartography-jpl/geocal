@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-from afids import *
+from geocal import *
 
 version = "October 11, 2013"
 usage='''Usage: 

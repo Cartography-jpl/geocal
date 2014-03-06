@@ -3,7 +3,7 @@
 
 import os
 import glob
-from geocal import *
+from geocal_swig import *
 
 # Make sure we can safely import matplotlib without getting an error
 # (see this module for details on this)

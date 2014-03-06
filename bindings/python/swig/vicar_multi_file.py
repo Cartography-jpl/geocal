@@ -118,11 +118,11 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.raster_multifile
-import geocal.raster_image_variable
-import geocal.raster_image
-import geocal.generic_object
-class VicarMultiFile(geocal.raster_multifile.RasterMultifile):
+import geocal_swig.raster_multifile
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+import geocal_swig.generic_object
+class VicarMultiFile(geocal_swig.raster_multifile.RasterMultifile):
     """
     This gives read access to some of the larger AFIDS datasets, such as
     CIB and SRTM.

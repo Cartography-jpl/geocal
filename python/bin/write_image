@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from afids import *
+from geocal import *
 import os
 import logging
 import math
@@ -91,10 +91,10 @@ if(args.log_file):
         console = logging.StreamHandler(stream=sys.stdout)
         console.setLevel(logging.INFO)
         console.setFormatter(logging.Formatter('%(levelname)s:%(name)s:%(message)s'))
-        logging.getLogger("afids-python").addHandler(console)
+        logging.getLogger("geocal-python").addHandler(console)
 elif(args.verbose):
     logging.basicConfig(level = logging.INFO)
-log = logging.getLogger("afids-python.write_image")
+log = logging.getLogger("geocal-python.write_image")
 
 img_in = read_shelve(args.input_image)
 if(args.start_line):

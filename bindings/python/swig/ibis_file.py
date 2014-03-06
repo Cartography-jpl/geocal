@@ -120,7 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import numpy as np
 
-import geocal.generic_object
+import geocal_swig.generic_object
 class IbisColumn_byte(object):
     """
     This class handles reading and writing a single column of a IBIS file.
@@ -517,7 +517,7 @@ IbisColumn_string.__str__ = new_instancemethod(_ibis_file.IbisColumn_string___st
 IbisColumn_string_swigregister = _ibis_file.IbisColumn_string_swigregister
 IbisColumn_string_swigregister(IbisColumn_string)
 
-class IbisFile(geocal.generic_object.GenericObject):
+class IbisFile(geocal_swig.generic_object.GenericObject):
     """
     This provides read and write for a IBIS file.
 

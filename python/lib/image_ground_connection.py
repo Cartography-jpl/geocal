@@ -1,4 +1,4 @@
-from geocal import *
+from geocal_swig import *
 from math import *
 import numpy as np
 import os.path
@@ -24,7 +24,7 @@ def _new_from_init(cls, version, *args):
         inst.__init__(*args)
     return inst
 
-class GdalImageGroundConnection(geocal.RpcImageGroundConnection):
+class GdalImageGroundConnection(geocal_swig.RpcImageGroundConnection):
     '''This is a convenience class that both reads a GDAL image, and
     creates a RPC based ground connection. Note that you can edit
     the RPC if desired, just change the values of the attribute
@@ -39,7 +39,7 @@ class GdalImageGroundConnection(geocal.RpcImageGroundConnection):
             img = img.gdal_raster_image(0)
         if(not title):
             title = os.path.basename(fname)
-        geocal.RpcImageGroundConnection.__init__(self, rpc, dem, img, title, 
+        geocal_swig.RpcImageGroundConnection.__init__(self, rpc, dem, img, title, 
                                                  image_mask, ground_mask, 
                                                  fit_height_offset)
 
@@ -58,7 +58,7 @@ class GdalImageGroundConnection(geocal.RpcImageGroundConnection):
                                 self.image_mask, self.ground_mask, 
                                 self.fit_height_offset)
 
-class VicarImageGroundConnection(geocal.RpcImageGroundConnection):
+class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
     '''This is a convenience class that both reads a VICAR image, and
     creates a RPC based ground connection. Note that you can edit
     the RPC if desired, just change the values of the attribute
@@ -82,7 +82,7 @@ class VicarImageGroundConnection(geocal.RpcImageGroundConnection):
                 rpc = img.rpc
         if(not title):
             title = os.path.basename(fname)
-        geocal.RpcImageGroundConnection.__init__(self, rpc, dem, img, title, 
+        geocal_swig.RpcImageGroundConnection.__init__(self, rpc, dem, img, title, 
                                                  image_mask, ground_mask, 
                                                  fit_height_offset)
 
@@ -155,9 +155,9 @@ def _view_angle(self, image_coordinate, delta_h = 100):
     zen = 180 - degrees(acos(lc_dir[2] / sqrt(np.dot(lc_dir, lc_dir))))
     return zen, az
 
-geocal.ImageGroundConnection.view_angle = _view_angle
+geocal_swig.ImageGroundConnection.view_angle = _view_angle
 
-def _footprint_geometry(self, cconver = geocal.GeodeticConverter()):
+def _footprint_geometry(self, cconver = geocal_swig.GeodeticConverter()):
     '''Return a ogr Geometry object describing the footprint of the 
     ImageGroundConnection. This includes the 4 corners of the image 
     projected to the surface.
@@ -167,14 +167,14 @@ def _footprint_geometry(self, cconver = geocal.GeodeticConverter()):
 
     This can then be used to write information to a ShapeFile.'''
     corners = []
-    for pt in [geocal.ImageCoordinate(0,0), 
-               geocal.ImageCoordinate(self.image.number_line, 0), 
-               geocal.ImageCoordinate(self.image.number_line, 
+    for pt in [geocal_swig.ImageCoordinate(0,0), 
+               geocal_swig.ImageCoordinate(self.image.number_line, 0), 
+               geocal_swig.ImageCoordinate(self.image.number_line, 
                                       self.image.number_sample), 
-               geocal.ImageCoordinate(0, self.image.number_sample)]:
+               geocal_swig.ImageCoordinate(0, self.image.number_sample)]:
         x, y, z = cconver.convert_to_coordinate(self.ground_coordinate(pt))
         corners.append((x, y))
     return ShapeLayer.polygon_2d(corners)
 
 if(have_shape_file):
-    geocal.ImageGroundConnection.footprint_geometry = _footprint_geometry
+    geocal_swig.ImageGroundConnection.footprint_geometry = _footprint_geometry

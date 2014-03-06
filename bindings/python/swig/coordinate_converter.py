@@ -118,8 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class CoordinateConverter(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class CoordinateConverter(geocal_swig.generic_object.GenericObject):
     """
     This class is used to convert from and to a particular coordinate
     system.

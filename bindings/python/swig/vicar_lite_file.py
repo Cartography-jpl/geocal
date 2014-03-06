@@ -118,12 +118,12 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-import geocal.raster_image
-import geocal.dem_map_info
-import geocal.dem
-import geocal.geocal_exception
-class VicarLiteFile(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+import geocal_swig.raster_image
+import geocal_swig.dem_map_info
+import geocal_swig.dem
+import geocal_swig.geocal_exception
+class VicarLiteFile(geocal_swig.generic_object.GenericObject):
     """
     This handles opening and closing a Vicar file.
 
@@ -136,7 +136,7 @@ class VicarLiteFile(geocal.generic_object.GenericObject):
     RTL library, or don't want to be constrained to running in the Vicar
     environment.
 
-    This class does *not* handle new VICAR features such as compression.
+    This class does not handle new VICAR features such as compression.
 
     C++ includes: vicar_lite_file.h 
     """
@@ -347,7 +347,7 @@ def VicarLiteFile_is_vicar_file(*args):
     """
   return _vicar_lite_file.VicarLiteFile_is_vicar_file(*args)
 
-class VicarLiteRasterImage(geocal.raster_image.RasterImage):
+class VicarLiteRasterImage(geocal_swig.raster_image.RasterImage):
     """
     This uses VicarLiteFile to implement a RasterImage.
 
@@ -422,7 +422,7 @@ VicarLiteRasterImage._v_band = new_instancemethod(_vicar_lite_file.VicarLiteRast
 VicarLiteRasterImage_swigregister = _vicar_lite_file.VicarLiteRasterImage_swigregister
 VicarLiteRasterImage_swigregister(VicarLiteRasterImage)
 
-class VicarLiteDem(geocal.dem_map_info.DemMapInfo):
+class VicarLiteDem(geocal_swig.dem_map_info.DemMapInfo):
     """
     This uses VicarLiteFile to implement a Dem.
 

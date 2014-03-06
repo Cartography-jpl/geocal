@@ -143,8 +143,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal.generic_object
-class OrbitData(geocal.generic_object.GenericObject):
+import geocal_swig.generic_object
+class OrbitData(geocal_swig.generic_object.GenericObject):
     """
     This class is used to convert ScLookVector,
     CartesianInertialLookVector and CartesianFixedLookVector to and from
@@ -294,7 +294,7 @@ class QuaternionOrbitData(OrbitData):
     the planet, as well as the aberration of light (a small correction due
     to the movement of the spacecraft relative to the planet).
 
-    This does *not* account for atmospheric refraction. Depending on the
+    This does not account for atmospheric refraction. Depending on the
     zenith angle, this can be somewhat important for satellites. From the
     approximate atmospheric model described in "Theoretical Basis of the
     SDP Toolkit Geolocation package for the ECS", Table 6-5 the linear
@@ -396,7 +396,7 @@ QuaternionOrbitData._velocity_cf = new_instancemethod(_orbit.QuaternionOrbitData
 QuaternionOrbitData_swigregister = _orbit.QuaternionOrbitData_swigregister
 QuaternionOrbitData_swigregister(QuaternionOrbitData)
 
-class Orbit(geocal.generic_object.GenericObject):
+class Orbit(geocal_swig.generic_object.GenericObject):
     """
     This class is used to model orbit data, allowing conversions from
     spacecraft coordinates to CartesianInertial and CartesianFixed

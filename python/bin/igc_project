@@ -3,7 +3,7 @@
 # This map projects a ImageGroundConnection to the surface, generating
 # a map projected image.
 
-from afids import *
+from geocal import *
 from functools import partial
 from multiprocessing import Pool
 

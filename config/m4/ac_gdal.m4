@@ -18,7 +18,7 @@ if test "x$want_gdal" = "xyes"; then
         AC_MSG_CHECKING([for GDAL library])
         succeeded=no
         if test "$ac_gdal_path" != ""; then
-            GDAL_LIBS="-R$ac_gdal_path/lib -L$ac_gdal_path/lib -lgdal -logdi -lgeos -lopenjpeg"
+            GDAL_LIBS="-R$ac_gdal_path/lib -L$ac_gdal_path/lib -lgdal"
             GDAL_CFLAGS="-I$ac_gdal_path/include"
             succeeded=yes
         else

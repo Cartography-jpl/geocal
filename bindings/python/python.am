@@ -1,25 +1,34 @@
 SWIG_FLAG += -O
 pkgpythonswigdir = @pythondir@/geocal
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py
-pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC))
+INCLUDE_SWIG_SRC = $(SWIG_SRC)
+FULL_SWIG_SRC = $(SWIG_SRC)
 if HAVE_CARTO
-pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_CARTO))
+INCLUDE_SWIG_SRC += $(SWIG_SRC_CARTO)
 endif
+FULL_SWIG_SRC += $(SWIG_SRC_CARTO)
 if HAVE_FFTW
-pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_FFTW))
+INCLUDE_SWIG_SRC += $(SWIG_SRC_FFTW)
 endif
+FULL_SWIG_SRC += $(SWIG_SRC_FFTW)
 if HAVE_HDF5
-pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_HDF5))
+INCLUDE_SWIG_SRC += $(SWIG_SRC_HDF5)
 if HAVE_CARTO
-pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_HDF5_CARTO))
+INCLUDE_SWIG_SRC += $(SWIG_SRC_HDF5_CARTO)
 endif
 endif
+FULL_SWIG_SRC += $(SWIG_SRC_HDF5)
+FULL_SWIG_SRC += $(SWIG_SRC_HDF5_CARTO)
 if HAVE_GDAL
-pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_GDAL))
+INCLUDE_SWIG_SRC += $(SWIG_SRC_GDAL)
 endif
+FULL_SWIG_SRC += $(SWIG_SRC_GDAL)
 if HAVE_VICAR_RTL
-pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(SWIG_SRC_VICAR_RTL))
+INCLUDE_SWIG_SRC += $(SWIG_SRC_VICAR_RTL)
 endif
+FULL_SWIG_SRC += $(SWIG_SRC_VICAR_RTL)
+EXTRA_DIST+= $(patsubst %_wrap.cc, %.py, $(FULL_SWIG_SRC))
+pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(INCLUDE_SWIG_SRC))
 pkgpythonswig_LTLIBRARIES = _swig_wrap.la
 
 _swig_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) 
@@ -32,27 +41,10 @@ _swig_wrap_la_CPPFLAGS+= -DSWIG_TYPE_TABLE=geocal
 _swig_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
 _swig_wrap_la_LDFLAGS = -module -avoid-version
 _swig_wrap_la_LIBADD = libgeocal.la
-_swig_wrap_la_SOURCES = $(SWIG_SRC)
-if HAVE_CARTO
-_swig_wrap_la_SOURCES+= $(SWIG_SRC_CARTO)
-endif
-if HAVE_FFTW
-_swig_wrap_la_SOURCES+= $(SWIG_SRC_FFTW)
-endif
-if HAVE_HDF5
-_swig_wrap_la_SOURCES+= $(SWIG_SRC_HDF5)
-if HAVE_CARTO
-_swig_wrap_la_SOURCES+= $(SWIG_SRC_HDF5_CARTO)
-endif
-endif
-if HAVE_GDAL
-_swig_wrap_la_SOURCES+= $(SWIG_SRC_GDAL)
-endif
-if HAVE_VICAR_RTL
-_swig_wrap_la_SOURCES+= $(SWIG_SRC_VICAR_RTL)
-endif
+_swig_wrap_la_SOURCES = $(INCLUDE_SWIG_SRC)
 _swig_wrap_la_SOURCES+= @swigsrc@/swig_wrap.cc
 
+EXTRA_DIST+= $(FULL_SWIG_SRC)
 EXTRA_DIST+= $(srcdir)/$(swigsrc)/*_wrap.h
 
 install-python-2: install-libLTLIBRARIES install-python-afids install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
@@ -108,45 +100,9 @@ $(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h
 $(srcdir)/$(swigsrc)/%_wrap.cc: %.i
 	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
 
-BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC))
-if HAVE_CARTO
-BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_CARTO))
-endif
-if HAVE_FFTW
-BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_FFTW))
-endif
-if HAVE_HDF5
-BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_HDF5))
-if HAVE_CARTO
-BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_HDF5_CARTO))
-endif
-endif
-if HAVE_GDAL
-BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_GDAL))
-endif
-if HAVE_VICAR_RTL
-BUILT_SOURCES+= $(addprefix $(srcdir)/, $(SWIG_SRC_VICAR_RTL))
-endif
+BUILT_SOURCES+= $(addprefix $(srcdir)/, $(INCLUDE_SWIG_SRC))
 BUILT_SOURCES+= $(srcdir)/$(swigsrc)/swig_wrap.cc
 
--include $(patsubst %.cc, %.Pcc, $(SWIG_SRC))
-if HAVE_CARTO
--include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_CARTO))
-endif
-if HAVE_FFTW
--include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_FFTW))
-endif
-if HAVE_HDF5
--include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_HDF5))
-if HAVE_CARTO
--include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_HDF5_CARTO))
-endif
-endif
-if HAVE_GDAL
--include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_GDAL))
-endif
-if HAVE_VICAR_RTL
--include $(patsubst %.cc, %.Pcc, $(SWIG_SRC_VICAR_RTL))
-endif
+-include $(patsubst %.cc, %.Pcc, $(INCLUDE_SWIG_SRC))
 endif HAVE_SWIG
 endif MAINTAINER_MODE

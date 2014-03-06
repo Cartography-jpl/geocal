@@ -2,7 +2,13 @@ from geocal import *
 import numpy as np
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
-from shape_file import *
+try:
+    # Depending of the build options, this might be missing. Just skip stuff
+    # depending on ShapeFile if we don't have this.
+    from shape_file import *
+    have_shape_file = True
+except ImportError:
+    have_shape_file = False
 
 # Add some useful functions to RasterImage
 def _read_with_pad(self, Lstart, Sstart, Number_line, Number_sample):
@@ -83,7 +89,9 @@ def _footprint_geometry(self, cconver = geocal.GeodeticConverter()):
         corners.append((x, y))
     return ShapeLayer.polygon_2d(corners)
 
-geocal.RasterImage.footprint_geometry = _footprint_geometry
+if(have_shape_file):
+    geocal.RasterImage.footprint_geometry = _footprint_geometry
+
 
 
 

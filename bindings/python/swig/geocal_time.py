@@ -158,9 +158,9 @@ class Time(geocal.generic_object.GenericObject):
     be related to the other by a constant, since the only difference is
     the Epoch that time is measure against.
 
-    Note that for accurate work we do not want to use something like Unix
-    time, because this does not account for leapseconds (POSIX unix time
-    is the number of seconds since January 1, 1970 not including
+    Note that for accurate work we do *not* want to use something like
+    Unix time, because this does not account for leapseconds (POSIX unix
+    time is the number of seconds since January 1, 1970 *not* including
     leapseconds).
 
     Most code doesn't care what the underlying time representation is, we

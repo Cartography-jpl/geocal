@@ -31,7 +31,6 @@ afidspkgpython_PYTHON+= @srcpythonlib@/ply_file.py
 afidspkgpython_PYTHON+= @srcpythonlib@/docopt_simple.py
 afidspkgpython_PYTHON+= @srcpythonlib@/docopt.py
 afidspkgpython_PYTHON+= @srcpythonlib@/tempdir.py
-afidspkgpython_PYTHON+= @srcpythonlib@/shape_file.py
 afidspkgpython_PYTHON+= @srcpythonlib@/gdal_to_erdas_file.py
 afidspkgpython_PYTHON+= @srcpythonlib@/mmap_file.py
 afidspkgpython_PYTHON+= @srcpythonlib@/raster_tile.py
@@ -39,6 +38,9 @@ afidspkgpython_PYTHON+= @srcpythonlib@/pleides_rpc.py
 afidspkgpython_PYTHON+= @srcpythonlib@/parallel_process.py
 afidspkgpython_PYTHON+= @srcpythonlib@/raster_image_multi_band.py
 afidspkgpython_PYTHON+= @srcpythonlib@/ibis_file_extension.py
+if HAVE_PYTHON_OGR
+afidspkgpython_PYTHON+= @srcpythonlib@/shape_file.py
+endif
 if HAVE_HDF5
 afidspkgpython_PYTHON+= @srcpythonlib@/air_mspi_igc.py
 endif

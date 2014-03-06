@@ -1,5 +1,10 @@
 from nose.tools import *
-from shape_file import *
+from nose.plugins.skip import Skip, SkipTest
+try:
+    from shape_file import *
+except ImportError:
+    pass                        # Let this fail, it just means we can't 
+                                # run the unit test
 import os
 import shutil
 
@@ -7,6 +12,10 @@ test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 def test_read():
     '''Test basic reading'''
+    try:
+        ShapeFile
+    except NameError:
+        raise SkipTest
     sf = ShapeFile(test_data + "FRST_POIof090514.shp")
     assert sf.file_name, test_data + "FRST_POIof090514.shp"
     assert sf.keys() == ["FRST_POIof090514"]
@@ -17,6 +26,10 @@ def test_read():
 
 def test_footprint_poi_intersect():
     '''Test finding footprints that match a particular POI set.'''
+    try:
+        ShapeFile
+    except NameError:
+        raise SkipTest
     sh = ShapeFile(test_data + "poi.shp")
     fp = ShapeFile(test_data + "footprint.shp")
     ly = fp["footprint"]
@@ -27,6 +40,10 @@ def test_footprint_poi_intersect():
 
 def test_write():
     '''Test basic writing'''
+    try:
+        ShapeFile
+    except NameError:
+        raise SkipTest
     shutil.rmtree("test_dir", True)
     with ShapeFile("test_dir", "w") as f:
         lay = f.add_layer("test", ogr.wkbPolygon,

@@ -157,7 +157,7 @@ $$1_PKG_ERRORS
 Consider adjusting the PKG_CONFIG_PATH environment variable if you
 installed software in a non-standard prefix.
 
-_PKG_TEXT])dnl
+_PKG_TEXT])
         ])
 elif test $pkg_failed = untried; then
      	AC_MSG_RESULT([no])
@@ -168,7 +168,7 @@ path to pkg-config.
 
 _PKG_TEXT
 
-To get pkg-config, see <http://pkg-config.freedesktop.org/>.])dnl
+To get pkg-config, see <http://pkg-config.freedesktop.org/>.])
         ])
 else
 	$1[]_CFLAGS=$pkg_cv_[]$1[]_CFLAGS
@@ -1495,6 +1495,7 @@ m4_include([config/m4/ac_is_mac.m4])
 m4_include([config/m4/ac_pkg_swig.m4])
 m4_include([config/m4/ac_python.m4])
 m4_include([config/m4/ac_python_module_with_version.m4])
+m4_include([config/m4/ac_python_ogr.m4])
 m4_include([config/m4/ac_python_sphinx.m4])
 m4_include([config/m4/ac_search_lib.m4])
 m4_include([config/m4/ac_spice.m4])
@@ -1503,6 +1504,7 @@ m4_include([config/m4/ac_vicar_rtl.m4])
 m4_include([config/m4/afids_a_option.m4])
 m4_include([config/m4/afids_common.m4])
 m4_include([config/m4/afids_python.m4])
+m4_include([config/m4/ax_compare_version.m4])
 m4_include([config/m4/ax_python_module.m4])
 m4_include([config/m4/geocal_source_directory.m4])
 m4_include([config/m4/libtool.m4])

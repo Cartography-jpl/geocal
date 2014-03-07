@@ -116,7 +116,7 @@ DIST_COMMON = $(srcdir)/common.am $(srcdir)/include.am \
 	$(srcdir)/lib/GeoCalCore/Support/support.am \
 	$(srcdir)/lib/GeoCalCore/Interface/interface.am \
 	$(srcdir)/lib/GeoCalCore/Implementation/implementation.am \
-	$(srcdir)/lib/CartLab/cart_lab.am \
+	$(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am \
 	$(srcdir)/bindings/python/python.am \
 	$(srcdir)/unit_test_data/unit_test_data.am \
 	$(srcdir)/script/script.am $(srcdir)/python/python.am \
@@ -669,7 +669,8 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srccartlab@/vicar_argument.cc @srccartlab@/vicar_dem.cc \
 	@srccartlab@/vicar_file.cc @srccartlab@/vicar_raster_image.cc \
 	@srccartlab@/vicar_multi_file.cc @srccartlab@/datum_geoid96.cc \
-	@srccartlab@/srtm_dem.cc @srccartlab@/vicar_ogr.cc
+	@srccartlab@/srtm_dem.cc @srccartlab@/vicar_ogr.cc \
+	@srcmspi@/ifstream_cs.cc
 @HAVE_FFTW_TRUE@am__objects_15 =  \
 @HAVE_FFTW_TRUE@	@srcsupport@/libgeocal_la-geocal_fftw.lo
 @HAVE_HDF5_TRUE@am__objects_16 =  \
@@ -776,7 +777,7 @@ am_libgeocal_la_OBJECTS =  \
 	@srccartlab@/libgeocal_la-worldview2_cloudmask.lo \
 	@srccartlab@/libgeocal_la-doughnut_average.lo \
 	@srccartlab@/libgeocal_la-paint_class.lo $(am__objects_20) \
-	$(am__objects_21)
+	$(am__objects_21) @srcmspi@/libgeocal_la-ifstream_cs.lo
 libgeocal_la_OBJECTS = $(am_libgeocal_la_OBJECTS)
 libgeocal_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
@@ -882,7 +883,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srccartlab@/vicar_tiled_file_test.cc \
 	@srccartlab@/vicar_multi_file_test.cc \
 	@srccartlab@/datum_geoid96_test.cc \
-	@srccartlab@/srtm_dem_test.cc
+	@srccartlab@/srtm_dem_test.cc @srcmspi@/ifstream_cs_test.cc
 @HAVE_FFTW_TRUE@am__objects_22 = @srcsupport@/geocal_test_all-geocal_fftw_test.$(OBJEXT)
 @HAVE_HDF5_TRUE@am__objects_23 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
 @HAVE_GDAL_TRUE@am__objects_24 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
@@ -989,7 +990,8 @@ am_geocal_test_all_OBJECTS =  \
 	@srccartlab@/geocal_test_all-vicar_lite_file_test.$(OBJEXT) \
 	@srccartlab@/geocal_test_all-pos_export_orbit_test.$(OBJEXT) \
 	@srccartlab@/geocal_test_all-doughnut_average_test.$(OBJEXT) \
-	$(am__objects_29)
+	$(am__objects_29) \
+	@srcmspi@/geocal_test_all-ifstream_cs_test.$(OBJEXT)
 geocal_test_all_OBJECTS = $(am_geocal_test_all_OBJECTS)
 geocal_test_all_DEPENDENCIES = libgeocal.la $(am__DEPENDENCIES_1) \
 	libraw.la $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
@@ -1212,7 +1214,8 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srccartlab@/vicar_file.h @srccartlab@/vicar_tiled_file.h \
 	@srccartlab@/vicar_raster_image.h \
 	@srccartlab@/vicar_multi_file.h @srccartlab@/datum_geoid96.h \
-	@srccartlab@/srtm_dem.h @srccartlab@/vicar_ogr.h
+	@srccartlab@/srtm_dem.h @srccartlab@/vicar_ogr.h \
+	@srcmspi@/filtering_fstream.h @srcmspi@/ifstream_cs.h
 HEADERS = $(geocalinc_HEADERS) $(include_HEADERS) $(libraw_HEADERS) \
 	$(sdbx_HEADERS) $(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
 	$(sdbxsupport_HEADERS)
@@ -1444,6 +1447,7 @@ BLITZ_CFLAGS = @BLITZ_CFLAGS@
 BLITZ_LIBS = @BLITZ_LIBS@
 BOOST_CPPFLAGS = @BOOST_CPPFLAGS@
 BOOST_DATETIME_LIB = @BOOST_DATETIME_LIB@
+BOOST_IOSTREAMS_LIB = @BOOST_IOSTREAMS_LIB@
 BOOST_LIBDIR = @BOOST_LIBDIR@
 BOOST_REGEX_LIB = @BOOST_REGEX_LIB@
 CARTO_BUILD_DEPEND = @CARTO_BUILD_DEPEND@
@@ -1625,6 +1629,7 @@ srcdir = @srcdir@
 srcgeocalcore = @srcgeocalcore@
 srcimplementation = @srcimplementation@
 srcinterface = @srcinterface@
+srcmspi = @srcmspi@
 srcpython = @srcpython@
 srcpythonbin = @srcpythonbin@
 srcpythonlib = @srcpythonlib@
@@ -1699,6 +1704,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcsupport@/global_fixture.h @srcinterface@/matcher_fixture.h \
 	$(patsubst %_wrap.cc, %.py, $(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
 	$(srcdir)/$(swigsrc)/*_wrap.h \
+	@geocalunittestdata@/ifstream_cs_test.txt \
+	@geocalunittestdata@/ifstream_cs_test.compressed.txt.gz \
 	@geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.ATT \
 	@geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.EPH \
 	@geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.IMD \
@@ -1771,7 +1778,7 @@ pkgconfig_DATA =
 AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 	-I$(srcdir)/@srcsupport@ -I$(srcdir)/@srcsupport@/boost \
 	-I$(srcdir)/@srcinterface@ -I$(srcdir)/@srcimplementation@ \
-	-I$(srcdir)/@srccartlab@
+	-I$(srcdir)/@srccartlab@ -I$(srcdir)/@srcmspi@
 
 #=================================================================
 # Some flags needed for GCC compilers.
@@ -1860,7 +1867,7 @@ libgeocal_la_SOURCES = @srcsupport@/boost/backtrace.cpp \
 	@srccartlab@/pos_export_orbit.cc \
 	@srccartlab@/worldview2_cloudmask.cc \
 	@srccartlab@/doughnut_average.cc @srccartlab@/paint_class.cc \
-	$(am__append_27) $(am__append_29)
+	$(am__append_27) $(am__append_29) @srcmspi@/ifstream_cs.cc
 
 # Files that contain SWIG wrapper information.
 
@@ -1983,8 +1990,8 @@ SWIG_SRC_VICAR_RTL = @swigsrc@/material_detect_wrap.cc \
 # Include SDP toolkit
 libgeocal_la_LDFLAGS = $(am__append_1) -R $(BOOST_LIBDIR) \
 	-L$(BOOST_LIBDIR) $(BOOST_REGEX_LIB) $(BOOST_DATETIME_LIB) \
-	$(BLITZ_LIBS) $(am__append_3) $(GSL_LIBS) $(FFTW_LIBS) \
-	$(SDP_LDFLAGS)
+	$(BOOST_IOSTREAMS_LIB) $(BLITZ_LIBS) $(am__append_3) \
+	$(GSL_LIBS) $(FFTW_LIBS) $(SDP_LDFLAGS)
 SWIG_FLAG = -O
 geocalincdir = @includedir@/geocal
 
@@ -2079,8 +2086,11 @@ geocalinc_HEADERS = @srcsupport@/constant.h \
 	@srccartlab@/vicar_lite_file.h @srccartlab@/pos_export_orbit.h \
 	@srccartlab@/worldview2_cloudmask.h \
 	@srccartlab@/doughnut_average.h @srccartlab@/paint_class.h \
-	$(am__append_26) $(am__append_28)
+	$(am__append_26) $(am__append_28) \
+	@srcmspi@/filtering_fstream.h @srcmspi@/ifstream_cs.h
 # Test files
+
+#SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
 geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
 	@srcsupport@/global_fixture_default.cc \
@@ -2155,7 +2165,8 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srccartlab@/quickbird_time_table_test.cc \
 	@srccartlab@/vicar_lite_file_test.cc \
 	@srccartlab@/pos_export_orbit_test.cc \
-	@srccartlab@/doughnut_average_test.cc $(am__append_31)
+	@srccartlab@/doughnut_average_test.cc $(am__append_31) \
+	@srcmspi@/ifstream_cs_test.cc
 libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) \
 	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) \
 	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
@@ -2289,7 +2300,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -2312,7 +2323,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
-$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am:
+$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am:
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -2991,6 +3002,14 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
 @srccartlab@/libgeocal_la-vicar_ogr.lo: @srccartlab@/$(am__dirstamp) \
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspi@
+	@: > @srcmspi@/$(am__dirstamp)
+@srcmspi@/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcmspi@/$(DEPDIR)
+	@: > @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/libgeocal_la-ifstream_cs.lo: @srcmspi@/$(am__dirstamp) \
+	@srcmspi@/$(DEPDIR)/$(am__dirstamp)
 libgeocal.la: $(libgeocal_la_OBJECTS) $(libgeocal_la_DEPENDENCIES) $(EXTRA_libgeocal_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libgeocal_la_LINK) -rpath $(libdir) $(libgeocal_la_OBJECTS) $(libgeocal_la_LIBADD) $(LIBS)
 @srcraw@/$(am__dirstamp):
@@ -3375,6 +3394,8 @@ clean-checkPROGRAMS:
 @srccartlab@/geocal_test_all-srtm_dem_test.$(OBJEXT):  \
 	@srccartlab@/$(am__dirstamp) \
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/geocal_test_all-ifstream_cs_test.$(OBJEXT):  \
+	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
 geocal_test_all$(EXEEXT): $(geocal_test_all_OBJECTS) $(geocal_test_all_DEPENDENCIES) $(EXTRA_geocal_test_all_DEPENDENCIES) 
 	@rm -f geocal_test_all$(EXEEXT)
 	$(AM_V_CXXLD)$(geocal_test_all_LINK) $(geocal_test_all_OBJECTS) $(geocal_test_all_LDADD) $(LIBS)
@@ -3458,6 +3479,8 @@ mostlyclean-compile:
 	-rm -f @srcimplementation@/*.lo
 	-rm -f @srcinterface@/*.$(OBJEXT)
 	-rm -f @srcinterface@/*.lo
+	-rm -f @srcmspi@/*.$(OBJEXT)
+	-rm -f @srcmspi@/*.lo
 	-rm -f @srcraw@/*.$(OBJEXT)
 	-rm -f @srcraw@/*.lo
 	-rm -f @srcsupport@/*.$(OBJEXT)
@@ -3645,6 +3668,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image_multi_band.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-time_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-ifstream_cs_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-ifstream_cs.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-dcraw_fileio.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-foveon.Plo@am__quote@
@@ -5432,6 +5457,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srccartlab@/libgeocal_la-vicar_ogr.lo `test -f '@srccartlab@/vicar_ogr.cc' || echo '$(srcdir)/'`@srccartlab@/vicar_ogr.cc
 
+@srcmspi@/libgeocal_la-ifstream_cs.lo: @srcmspi@/ifstream_cs.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/libgeocal_la-ifstream_cs.lo -MD -MP -MF @srcmspi@/$(DEPDIR)/libgeocal_la-ifstream_cs.Tpo -c -o @srcmspi@/libgeocal_la-ifstream_cs.lo `test -f '@srcmspi@/ifstream_cs.cc' || echo '$(srcdir)/'`@srcmspi@/ifstream_cs.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/libgeocal_la-ifstream_cs.Tpo @srcmspi@/$(DEPDIR)/libgeocal_la-ifstream_cs.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/ifstream_cs.cc' object='@srcmspi@/libgeocal_la-ifstream_cs.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/libgeocal_la-ifstream_cs.lo `test -f '@srcmspi@/ifstream_cs.cc' || echo '$(srcdir)/'`@srcmspi@/ifstream_cs.cc
+
 @srcraw@/libraw_la-dcraw_common.lo: @srcraw@/dcraw_common.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcraw@/libraw_la-dcraw_common.lo -MD -MP -MF @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Tpo -c -o @srcraw@/libraw_la-dcraw_common.lo `test -f '@srcraw@/dcraw_common.cpp' || echo '$(srcdir)/'`@srcraw@/dcraw_common.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Tpo @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Plo
@@ -6867,6 +6899,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srccartlab@/geocal_test_all-srtm_dem_test.obj `if test -f '@srccartlab@/srtm_dem_test.cc'; then $(CYGPATH_W) '@srccartlab@/srtm_dem_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srccartlab@/srtm_dem_test.cc'; fi`
 
+@srcmspi@/geocal_test_all-ifstream_cs_test.o: @srcmspi@/ifstream_cs_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-ifstream_cs_test.o -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-ifstream_cs_test.Tpo -c -o @srcmspi@/geocal_test_all-ifstream_cs_test.o `test -f '@srcmspi@/ifstream_cs_test.cc' || echo '$(srcdir)/'`@srcmspi@/ifstream_cs_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/geocal_test_all-ifstream_cs_test.Tpo @srcmspi@/$(DEPDIR)/geocal_test_all-ifstream_cs_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/ifstream_cs_test.cc' object='@srcmspi@/geocal_test_all-ifstream_cs_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-ifstream_cs_test.o `test -f '@srcmspi@/ifstream_cs_test.cc' || echo '$(srcdir)/'`@srcmspi@/ifstream_cs_test.cc
+
+@srcmspi@/geocal_test_all-ifstream_cs_test.obj: @srcmspi@/ifstream_cs_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-ifstream_cs_test.obj -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-ifstream_cs_test.Tpo -c -o @srcmspi@/geocal_test_all-ifstream_cs_test.obj `if test -f '@srcmspi@/ifstream_cs_test.cc'; then $(CYGPATH_W) '@srcmspi@/ifstream_cs_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/ifstream_cs_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/geocal_test_all-ifstream_cs_test.Tpo @srcmspi@/$(DEPDIR)/geocal_test_all-ifstream_cs_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/ifstream_cs_test.cc' object='@srcmspi@/geocal_test_all-ifstream_cs_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-ifstream_cs_test.obj `if test -f '@srcmspi@/ifstream_cs_test.cc'; then $(CYGPATH_W) '@srcmspi@/ifstream_cs_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/ifstream_cs_test.cc'; fi`
+
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
@@ -6899,6 +6945,7 @@ clean-libtool:
 	-rm -rf @srccartlab@/.libs @srccartlab@/_libs
 	-rm -rf @srcimplementation@/.libs @srcimplementation@/_libs
 	-rm -rf @srcinterface@/.libs @srcinterface@/_libs
+	-rm -rf @srcmspi@/.libs @srcmspi@/_libs
 	-rm -rf @srcraw@/.libs @srcraw@/_libs
 	-rm -rf @srcsupport@/.libs @srcsupport@/_libs
 	-rm -rf @srcsupport@/boost/.libs @srcsupport@/boost/_libs
@@ -7685,6 +7732,8 @@ distclean-generic:
 	-rm -f @srcimplementation@/$(am__dirstamp)
 	-rm -f @srcinterface@/$(DEPDIR)/$(am__dirstamp)
 	-rm -f @srcinterface@/$(am__dirstamp)
+	-rm -f @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcmspi@/$(am__dirstamp)
 	-rm -f @srcraw@/$(DEPDIR)/$(am__dirstamp)
 	-rm -f @srcraw@/$(am__dirstamp)
 	-rm -f @srcsupport@/$(DEPDIR)/$(am__dirstamp)
@@ -7707,7 +7756,7 @@ clean-am: clean-binPROGRAMS clean-checkPROGRAMS clean-generic \
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf @libgeocal@/$(DEPDIR) @srccartlab@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR)
+	-rm -rf @libgeocal@/$(DEPDIR) @srccartlab@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcmspi@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-libtool distclean-tags
@@ -7765,7 +7814,7 @@ installcheck-am: installcheck-local
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf @libgeocal@/$(DEPDIR) @srccartlab@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR)
+	-rm -rf @libgeocal@/$(DEPDIR) @srccartlab@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcmspi@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -7946,6 +7995,11 @@ vpath %.i $(srcdir)/@srcimplementation@
 vpath %.cc $(srcdir)/@srccartlab@
 vpath %.h $(srcdir)/@srccartlab@
 vpath %.i $(srcdir)/@srccartlab@
+
+# Allow searchs for .i, .h. and .cc files in this directory
+vpath %.cc $(srcdir)/@srcmspi@
+vpath %.h $(srcdir)/@srcmspi@
+vpath %.i $(srcdir)/@srcmspi@
 
 install-python-2: install-libLTLIBRARIES install-python-geocal install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
 	$(noop)

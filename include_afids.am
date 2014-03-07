@@ -18,6 +18,7 @@ include geocal/lib/GeoCalCore/Support/support.am
 include geocal/lib/GeoCalCore/Interface/interface.am
 include geocal/lib/GeoCalCore/Implementation/implementation.am
 include geocal/lib/CartLab/cart_lab.am
+include geocal/lib/Mspi/mspi.am
 include geocal/bindings/python/python.am
 include geocal/script/script.am
 include geocal/python/python.am

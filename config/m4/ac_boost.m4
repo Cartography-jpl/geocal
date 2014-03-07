@@ -57,6 +57,7 @@ if test "x$want_boost" = "xyes"; then
                BOOST_LIBDIR="$ac_boost_path/lib"
                BOOST_REGEX_LIB="-lboost_regex"
                BOOST_DATETIME_LIB="-lboost_date_time"
+               BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                boost_done=yes
             fi
             for ac_boost_lib_base in "$ac_boost_path/lib" "$ac_boost_path/lib64"; do
@@ -66,6 +67,7 @@ if test "x$want_boost" = "xyes"; then
                        BOOST_LIBDIR="$ac_boost_lib_base"
                        BOOST_REGEX_LIB="-lboost_regex"
                        BOOST_DATETIME_LIB="-lboost_date_time"
+		       BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                        boost_done=yes
                        break;
                    fi
@@ -77,6 +79,7 @@ if test "x$want_boost" = "xyes"; then
                        BOOST_LIBDIR="$ac_boost_lib_base"
                        BOOST_REGEX_LIB="-lboost_regex-mt"
                        BOOST_DATETIME_LIB="-lboost_date_time-mt"
+                       BOOST_IOSTREAMS_LIB="-lboost_iostreams-mt"
                        boost_done=yes
                        break;
                    fi
@@ -97,6 +100,7 @@ if test "x$want_boost" = "xyes"; then
                 AC_SUBST(BOOST_LIBDIR)
 		AC_SUBST(BOOST_REGEX_LIB)
 		AC_SUBST(BOOST_DATETIME_LIB)
+		AC_SUBST(BOOST_IOSTREAMS_LIB)
                 AC_DEFINE(HAVE_BOOST,,[Defined if we have BOOST])
                 have_boost="yes"
         fi

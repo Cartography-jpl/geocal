@@ -1,0 +1,14 @@
+geocalinc_HEADERS+= @srcmspi@/filtering_fstream.h
+geocalinc_HEADERS+= @srcmspi@/ifstream_cs.h
+libgeocal_la_SOURCES+= @srcmspi@/ifstream_cs.cc
+
+#SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
+
+geocal_test_all_SOURCES+= @srcmspi@/ifstream_cs_test.cc
+
+AM_CPPFLAGS+= -I$(srcdir)/@srcmspi@
+
+# Allow searchs for .i, .h. and .cc files in this directory
+vpath %.cc $(srcdir)/@srcmspi@
+vpath %.h $(srcdir)/@srcmspi@
+vpath %.i $(srcdir)/@srcmspi@

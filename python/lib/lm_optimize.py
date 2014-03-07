@@ -24,7 +24,7 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
     x = x0
     t1 = time.clock()
     res = eq_func(x)
-    log = logging.getLogger("afids-python.lm_optimize")
+    log = logging.getLogger("geocal-python.lm_optimize")
     log.info("Done with residual.")
     log.info("  Total time: %f " % (time.clock() - start_time))
     log.info("  Delta time: %f" % (time.clock() - t1))

@@ -106,7 +106,7 @@ class TiePointCollect(object):
         distributed on that. If not, then we find relative to the first 
         image in the image list'''
         tstart = time.time()
-        log = logging.getLogger("afids-python.tie_point_collect")
+        log = logging.getLogger("geocal-python.tie_point_collect")
         if(aoi):
             nline = aoi.number_y_pixel
             nsamp = aoi.number_x_pixel

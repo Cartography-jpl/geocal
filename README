@@ -1,4 +1,4 @@
-This supplies the python AFIDS library.
+This supplies the python GeoCal library.
 
 Note that the python is code is tested by "installcheck". This is because
 we need to install the python module before we can test it. You can also

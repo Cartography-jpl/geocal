@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(afids-python, 1.05)
+AC_INIT(geocal, 1.05)
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([config/m4])
 AC_CONFIG_FILES([script/setup_afids_python.csh script/setup_afids_python.sh])
@@ -121,13 +121,6 @@ if test "$have_doxygen" != "yes"; then
 fi
 AM_CONDITIONAL([WITH_DOCUMENTATION], [test x$with_documentation = xyes])
 
-#=================================================================
-# Option to include "AFIDS configuration A" stuff.
-AFIDS_A_OPTION
-if test x$with_afids_a = xyes; then
-  AC_DEFINE(INCLUDE_AFIDS_A)
-fi
-
 if test "$have_swig" = "yes" -a "$USE_MAINTAINER_MODE" != "no"; then
   generate_swig="yes"
 else
@@ -150,7 +143,7 @@ AC_OUTPUT
 #======================================================================
 
 LOC_MSG()
-LOC_MSG([AFIDS is now configured])
+LOC_MSG([GeoCal is now configured])
 LOC_MSG()
 LOC_MSG([  Installation directory:        ${prefix}])
 LOC_MSG([  Build debug version:           ${enable_debug}])
@@ -169,4 +162,3 @@ LOC_MSG([  Have Python OGR Module:        ${have_python_ogr}])
 LOC_MSG([  Have SPICE:                    ${have_spice}])
 LOC_MSG([  Have VICAR GDAL Plugin:        ${have_vicar_gdalplugin}])
 LOC_MSG([  Have VICAR Run Time Library:   ${have_vicar_rtl}])
-LOC_MSG([  Include AFIDS A configuration: ${with_afids_a}])

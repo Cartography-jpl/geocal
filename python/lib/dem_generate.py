@@ -161,7 +161,7 @@ class DemGenerate:
             r = self.dem_match.surface_point(mi, include_image)
         else:
             raise RuntimeError("Wrong number of arguments to surface_point")
-        log = logging.getLogger("afids-python.dem_generate")
+        log = logging.getLogger("geocal-python.dem_generate")
         log.info("Number point:   %d" %(self.dem_match.number_point))
         log.info("Number match:   %d" %(self.dem_match.number_match))
         log.info("Number success: %d" %(self.dem_match.number_success))

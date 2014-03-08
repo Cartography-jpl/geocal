@@ -114,6 +114,7 @@ extern "C" {
   void init_doughnut_average(void);
   void init_paint_class(void);
   void init_vicar_lite_file(void);
+  void init_mspi_config_file(void);
 #ifdef HAVE_CARTO
   void init_eci_tod_burl(void);
 #endif
@@ -318,6 +319,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_doughnut_average", init_doughnut_average);
   init_extension_module(package, "_paint_class", init_paint_class);
   init_extension_module(package, "_vicar_lite_file", init_vicar_lite_file);
+  init_extension_module(package, "_mspi_config_file", init_mspi_config_file);
 #ifdef HAVE_CARTO
   init_extension_module(package, "_eci_tod_burl", init_eci_tod_burl);
 #endif

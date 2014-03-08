@@ -1,10 +1,13 @@
 geocalinc_HEADERS+= @srcmspi@/filtering_fstream.h
 geocalinc_HEADERS+= @srcmspi@/ifstream_cs.h
 libgeocal_la_SOURCES+= @srcmspi@/ifstream_cs.cc
+geocalinc_HEADERS+= @srcmspi@/mspi_config_file.h
+libgeocal_la_SOURCES+= @srcmspi@/mspi_config_file.cc
 
-#SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
+SWIG_SRC += @swigsrc@/mspi_config_file_wrap.cc
 
 geocal_test_all_SOURCES+= @srcmspi@/ifstream_cs_test.cc
+geocal_test_all_SOURCES+= @srcmspi@/mspi_config_file_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcmspi@
 

@@ -635,8 +635,6 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
-WITH_AFIDS_A_FALSE
-WITH_AFIDS_A_TRUE
 WITH_DOCUMENTATION_FALSE
 WITH_DOCUMENTATION_TRUE
 LIBM
@@ -961,7 +959,6 @@ with_python
 with_python_ogr
 with_swig
 with_documentation
-with_afids_a
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1695,9 +1692,6 @@ Optional Packages:
                           is useful for a build environment that is used for
                           development, but you'll want all of your "real"
                           build environments to also update the documentation.
-  --with-afids-a          Include "AFIDS configuration A" code. If this isn't
-                          selected, portions of AFIDS code are excluding from
-                          the install.
 
 Some influential environment variables:
   CC          C compiler command
@@ -24313,6 +24307,7 @@ fi
 
 
 
+
 if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then
 	if test -n "$ac_tool_prefix"; then
   # Extract the first word of "${ac_tool_prefix}pkg-config", so it can be a program name with args.
@@ -24639,6 +24634,7 @@ if test -n "$VICAR_RTL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_VICAR_RTL_CFLAGS=`$PKG_CONFIG --cflags "vicar-rtl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -24655,6 +24651,7 @@ if test -n "$VICAR_RTL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_VICAR_RTL_LIBS=`$PKG_CONFIG --libs "vicar-rtl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -24674,9 +24671,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "vicar-rtl" 2>&1`
+	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "vicar-rtl" 2>&1`
         else
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --print-errors "vicar-rtl" 2>&1`
+	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "vicar-rtl" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$VICAR_RTL_PKG_ERRORS" >&5
@@ -25129,6 +25126,7 @@ if test -n "$BLITZ_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_BLITZ_CFLAGS=`$PKG_CONFIG --cflags "blitz" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25145,6 +25143,7 @@ if test -n "$BLITZ_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_BLITZ_LIBS=`$PKG_CONFIG --libs "blitz" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25164,9 +25163,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "blitz" 2>&1`
+	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "blitz" 2>&1`
         else
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --print-errors "blitz" 2>&1`
+	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "blitz" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$BLITZ_PKG_ERRORS" >&5
@@ -25337,6 +25336,7 @@ if test -n "$GSL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GSL_CFLAGS=`$PKG_CONFIG --cflags "gsl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25353,6 +25353,7 @@ if test -n "$GSL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GSL_LIBS=`$PKG_CONFIG --libs "gsl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25372,9 +25373,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "gsl" 2>&1`
+	        GSL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gsl" 2>&1`
         else
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --print-errors "gsl" 2>&1`
+	        GSL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gsl" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$GSL_PKG_ERRORS" >&5
@@ -25551,6 +25552,7 @@ if test -n "$SPICE_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_SPICE_CFLAGS=`$PKG_CONFIG --cflags "spice" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25567,6 +25569,7 @@ if test -n "$SPICE_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_SPICE_LIBS=`$PKG_CONFIG --libs "spice" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25586,9 +25589,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "spice" 2>&1`
+	        SPICE_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "spice" 2>&1`
         else
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --print-errors "spice" 2>&1`
+	        SPICE_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "spice" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$SPICE_PKG_ERRORS" >&5
@@ -25760,6 +25763,7 @@ if test -n "$HDF5_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_CFLAGS=`$PKG_CONFIG --cflags "hdf5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25776,6 +25780,7 @@ if test -n "$HDF5_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_LIBS=`$PKG_CONFIG --libs "hdf5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -25795,9 +25800,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdf5" 2>&1`
         else
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdf5" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$HDF5_PKG_ERRORS" >&5
@@ -26112,6 +26117,7 @@ if test -n "$FFTW_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_FFTW_CFLAGS=`$PKG_CONFIG --cflags "fftw3" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26128,6 +26134,7 @@ if test -n "$FFTW_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_FFTW_LIBS=`$PKG_CONFIG --libs "fftw3" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26147,9 +26154,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "fftw3" 2>&1`
+	        FFTW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "fftw3" 2>&1`
         else
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --print-errors "fftw3" 2>&1`
+	        FFTW_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "fftw3" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$FFTW_PKG_ERRORS" >&5
@@ -26324,6 +26331,7 @@ if test -n "$GDAL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GDAL_CFLAGS=`$PKG_CONFIG --cflags "gdal" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26340,6 +26348,7 @@ if test -n "$GDAL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GDAL_LIBS=`$PKG_CONFIG --libs "gdal" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26359,9 +26368,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "gdal" 2>&1`
+	        GDAL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gdal" 2>&1`
         else
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --print-errors "gdal" 2>&1`
+	        GDAL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gdal" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$GDAL_PKG_ERRORS" >&5
@@ -26892,6 +26901,7 @@ if test -n "$CARTO_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_CARTO_CFLAGS=`$PKG_CONFIG --cflags "carto" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26908,6 +26918,7 @@ if test -n "$CARTO_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_CARTO_LIBS=`$PKG_CONFIG --libs "carto" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -26927,9 +26938,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "carto" 2>&1`
+	        CARTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "carto" 2>&1`
         else
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --print-errors "carto" 2>&1`
+	        CARTO_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "carto" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$CARTO_PKG_ERRORS" >&5
@@ -28375,34 +28386,6 @@ else
 fi
 
 
-#=================================================================
-# Option to include "AFIDS configuration A" stuff.
-
-#=================================================================
-# Option to include "AFIDS configuration A" stuff.
-
-# Check whether --with-afids-a was given.
-if test "${with_afids_a+set}" = set; then :
-  withval=$with_afids_a; with_afids_a=yes
-else
-  with_afids_a=no
-fi
-
- if test x$with_afids_a = xyes; then
-  WITH_AFIDS_A_TRUE=
-  WITH_AFIDS_A_FALSE='#'
-else
-  WITH_AFIDS_A_TRUE='#'
-  WITH_AFIDS_A_FALSE=
-fi
-
-
-
-if test x$with_afids_a = xyes; then
-  $as_echo "#define INCLUDE_AFIDS_A 1" >>confdefs.h
-
-fi
-
 if test "$have_swig" = "yes" -a "$USE_MAINTAINER_MODE" != "no"; then
   generate_swig="yes"
 else
@@ -28761,10 +28744,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${WITH_DOCUMENTATION_TRUE}" && test -z "${WITH_DOCUMENTATION_FALSE}"; then
   as_fn_error $? "conditional \"WITH_DOCUMENTATION\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${WITH_AFIDS_A_TRUE}" && test -z "${WITH_AFIDS_A_FALSE}"; then
-  as_fn_error $? "conditional \"WITH_AFIDS_A\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 
@@ -31639,7 +31618,4 @@ echo "  Have VICAR GDAL Plugin:        ${have_vicar_gdalplugin}"
 
 
 echo "  Have VICAR Run Time Library:   ${have_vicar_rtl}"
-
-
-echo "  Include AFIDS A configuration: ${with_afids_a}"
 

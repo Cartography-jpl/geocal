@@ -121,13 +121,6 @@ if test "$have_doxygen" != "yes"; then
 fi
 AM_CONDITIONAL([WITH_DOCUMENTATION], [test x$with_documentation = xyes])
 
-#=================================================================
-# Option to include "AFIDS configuration A" stuff.
-AFIDS_A_OPTION
-if test x$with_afids_a = xyes; then
-  AC_DEFINE(INCLUDE_AFIDS_A)
-fi
-
 if test "$have_swig" = "yes" -a "$USE_MAINTAINER_MODE" != "no"; then
   generate_swig="yes"
 else
@@ -169,4 +162,3 @@ LOC_MSG([  Have Python OGR Module:        ${have_python_ogr}])
 LOC_MSG([  Have SPICE:                    ${have_spice}])
 LOC_MSG([  Have VICAR GDAL Plugin:        ${have_vicar_gdalplugin}])
 LOC_MSG([  Have VICAR Run Time Library:   ${have_vicar_rtl}])
-LOC_MSG([  Include AFIDS A configuration: ${with_afids_a}])

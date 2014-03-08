@@ -247,7 +247,6 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_VICAR_RTL_TRUE@am__append_39 = $(srcdir)/$(srcpythonbin)/pan_sharpen
 @HAVE_PYTHON_OGR_TRUE@am__append_40 = @srcpythonlib@/shape_file.py
 @HAVE_HDF5_TRUE@am__append_41 = @srcpythonlib@/air_mspi_igc.py
-@WITH_AFIDS_A_TRUE@am__append_42 = @srcpythonlib@/tre_amt_struct.py
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -274,7 +273,6 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/ac_spice.m4 \
 	$(top_srcdir)/config/m4/ac_vicar_gdalplugin.m4 \
 	$(top_srcdir)/config/m4/ac_vicar_rtl.m4 \
-	$(top_srcdir)/config/m4/afids_a_option.m4 \
 	$(top_srcdir)/config/m4/afids_common.m4 \
 	$(top_srcdir)/config/m4/afids_python.m4 \
 	$(top_srcdir)/config/m4/ax_compare_version.m4 \
@@ -1104,8 +1102,7 @@ am__geocalpkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/parallel_process.py \
 	@srcpythonlib@/raster_image_multi_band.py \
 	@srcpythonlib@/ibis_file_extension.py \
-	@srcpythonlib@/shape_file.py @srcpythonlib@/air_mspi_igc.py \
-	@srcpythonlib@/tre_amt_struct.py
+	@srcpythonlib@/shape_file.py @srcpythonlib@/air_mspi_igc.py
 am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 am__pep3147_tweak = \
   sed -e 's|\.py$$||' -e 's|[^/]*$$|__pycache__/&.*.py|'
@@ -2286,7 +2283,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/parallel_process.py \
 	@srcpythonlib@/raster_image_multi_band.py \
 	@srcpythonlib@/ibis_file_extension.py $(am__append_40) \
-	$(am__append_41) $(am__append_42)
+	$(am__append_41)
 @HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${PATH}
 @HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
@@ -8109,8 +8106,6 @@ python_check:
         $(setup_spice) && \
         export PATH=$(PYTHON_CHECK_PATH) && \
         nosetests $(srcdir)/@srcpython@/*/ 
-# Used to short circuit tests that would otherwise run.
-@WITH_AFIDS_A_FALSE@export NO_AFIDS_A_TEST=t
 # Used to short circuit tests that would otherwise run.
 @HAVE_VICAR_GDALPLUGIN_FALSE@export NO_VICAR_GDALPLUGIN=t
 

@@ -44,12 +44,6 @@ endif
 if HAVE_HDF5
 geocalpkgpython_PYTHON+= @srcpythonlib@/air_mspi_igc.py
 endif
-if WITH_AFIDS_A
-geocalpkgpython_PYTHON+= @srcpythonlib@/tre_amt_struct.py
-else
-# Used to short circuit tests that would otherwise run.
-export NO_AFIDS_A_TEST=t
-endif
 if HAVE_VICAR_GDALPLUGIN
 else
 # Used to short circuit tests that would otherwise run.

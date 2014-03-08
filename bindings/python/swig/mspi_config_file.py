@@ -126,13 +126,13 @@ class MspiConfigFile(geocal_swig.generic_object.GenericObject):
     The files can contain comments, which start with a "#" and go to the
     end of the line.
 
-    Everything else should be in a form like: <value 1> <value 2> ... :
-    <keyword name>="">
+    Everything else should be in a form like: value_1 value_2 ... :
+    keyword_name
 
     It is perfectly ok for there to be multiple lines before the variable
     name, so something like:
 
-    <value 1> <value 2> <value 3> <value 4> : <keyword name>="">
+    value_1 value_2 value_3 value_4 : keyword_name
 
     Anything at the end of the file is ignored.
 

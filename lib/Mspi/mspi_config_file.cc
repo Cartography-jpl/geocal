@@ -1,9 +1,6 @@
 #include "mspi_config_file.h"
 #include "ifstream_cs.h"
 #include <sstream>
-#include <iostream>
-#include <boost/regex.hpp>
-#include <boost/algorithm/string.hpp>
 
 using namespace GeoCal;
 
@@ -16,8 +13,8 @@ MspiConfigFile::MspiConfigFile(const std::string& Fname)
   : fname(Fname)
 {
   // Read in the whole file. We could do this line by line, but these
-  // files tend to be shorter and it is easier just to read
-  // everything. This class strips off all the comments, so we don't
+  // files tend to be short and it is easier just to read
+  // everything. IfstreamCs strips off all the comments, so we don't
   // need to worry about them.
 
   IfstreamCs in(Fname);
@@ -25,23 +22,23 @@ MspiConfigFile::MspiConfigFile(const std::string& Fname)
   buf << in.rdbuf();
 
   // Now break up into keyword/value pairs
-  boost::regex rex("\\`((?:[^:]|\\n)*):\\s*(\\w+)\\s*$");
   std::string s = buf.str();
-  boost::smatch m;
-  while(boost::regex_search(s, m, rex)) {
-    std::string key = m[2];
-    std::string val = m[1];
+  boost::sregex_iterator i(s.begin(), s.end(), 
+			   boost::regex("^((?:[^:]|\\n)*):\\s*(\\w+)\\s*$"));
+  boost::sregex_iterator iend;
+  for(; i != iend; ++i) {
+    std::string key = (*i)[2];
+    std::string val = (*i)[1];
     boost::trim(val);
     // Check to see if this is a duplicate. By convention, this is
     // treated as an error.
-    if(key_to_value.count(key) != 0) {
+    if(have_key(key)) {
       Exception e;
       e << "Duplicate key '" << key << "' found in file '"
 	<< Fname << "'";
       throw e;
     }
     key_to_value[key] = val;
-    s = s.substr(m[0].str().size());
   }
 }
 
@@ -52,7 +49,7 @@ MspiConfigFile::MspiConfigFile(const std::string& Fname)
 const std::string& MspiConfigFile::value_string
 (const std::string& Keyword) const
 {
-  if(key_to_value.count(Keyword) == 0)
+  if(!have_key(Keyword))
     throw Exception("The keyword is not found in the file");
   return key_to_value.find(Keyword)->second;
 }

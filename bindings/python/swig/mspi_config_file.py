@@ -149,7 +149,34 @@ class MspiConfigFile(geocal_swig.generic_object.GenericObject):
 
         """
         _mspi_config_file.MspiConfigFile_swiginit(self,_mspi_config_file.new_MspiConfigFile(*args))
+    def _v_file_name(self):
+        """
+        const std::string& GeoCal::MspiConfigFile::file_name() const
+        File name for MspiConfigFile. 
+        """
+        return _mspi_config_file.MspiConfigFile__v_file_name(self)
+
+    @property
+    def file_name(self):
+        return self._v_file_name()
+
+    def have_key(self, *args):
+        """
+        bool GeoCal::MspiConfigFile::have_key(const std::string &K) const
+        True if we have a value for the given keyword. 
+        """
+        return _mspi_config_file.MspiConfigFile_have_key(self, *args)
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.file_name)
+
     __swig_destroy__ = _mspi_config_file.delete_MspiConfigFile
+MspiConfigFile._v_file_name = new_instancemethod(_mspi_config_file.MspiConfigFile__v_file_name,None,MspiConfigFile)
+MspiConfigFile.have_key = new_instancemethod(_mspi_config_file.MspiConfigFile_have_key,None,MspiConfigFile)
 MspiConfigFile.__str__ = new_instancemethod(_mspi_config_file.MspiConfigFile___str__,None,MspiConfigFile)
 MspiConfigFile_swigregister = _mspi_config_file.MspiConfigFile_swigregister
 MspiConfigFile_swigregister(MspiConfigFile)

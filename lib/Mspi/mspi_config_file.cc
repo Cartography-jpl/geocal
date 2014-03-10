@@ -1,6 +1,5 @@
 #include "mspi_config_file.h"
 #include "ifstream_cs.h"
-#include "geocal_exception.h"
 #include <sstream>
 #include <iostream>
 #include <boost/regex.hpp>
@@ -53,11 +52,8 @@ MspiConfigFile::MspiConfigFile(const std::string& Fname)
 const std::string& MspiConfigFile::value_string
 (const std::string& Keyword) const
 {
-  if(key_to_value.count(Keyword) == 0) {
-    Exception e;
-    e << "The keyword '" << Keyword << "' is not found in the file '"
-      << fname << "\n";
-  }
+  if(key_to_value.count(Keyword) == 0)
+    throw Exception("The keyword is not found in the file");
   return key_to_value.find(Keyword)->second;
 }
 

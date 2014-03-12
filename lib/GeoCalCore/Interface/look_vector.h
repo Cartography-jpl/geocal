@@ -47,6 +47,17 @@ protected:
 //-----------------------------------------------------------------------
 
   LookVector() {}
+  
+  LookVector(const boost::array<double, 3>& Lv) 
+  {look_vector = Lv;}
+
+  LookVector(double x, double y, double z) 
+  {look_vector[0] = x; look_vector[1] = y; look_vector[2] = z;}
+
+  LookVector(const boost::math::quaternion<double>& V)
+  { look_vector[0] = V.R_component_2(); look_vector[1] = V.R_component_3();
+    look_vector[2] = V.R_component_4(); }
+
 };
 
 /****************************************************************//**
@@ -65,14 +76,19 @@ public:
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  ScLookVector(const boost::array<double, 3>& Lv) {look_vector = Lv;}
+  ScLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
 
 //-----------------------------------------------------------------------
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  ScLookVector(double x, double y, double z) 
-  {look_vector[0] = x; look_vector[1] = y; look_vector[2] = z;}
+  ScLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor using quaternion
+//-----------------------------------------------------------------------
+  ScLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+
   virtual ~ScLookVector() {}
   virtual void print(std::ostream& Os) const;
 };
@@ -93,15 +109,18 @@ public:
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  CartesianInertialLookVector(const boost::array<double, 3>& Lv) 
-  {look_vector = Lv;}
+  CartesianInertialLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
 
 //-----------------------------------------------------------------------
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  CartesianInertialLookVector(double x, double y, double z) 
-  {look_vector[0] = x; look_vector[1] = y; look_vector[2] = z;}
+  CartesianInertialLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor using quaternion
+//-----------------------------------------------------------------------
+  CartesianInertialLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
 
   virtual ~CartesianInertialLookVector() {}
   virtual void print(std::ostream& Os) const;
@@ -123,15 +142,19 @@ public:
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  CartesianFixedLookVector(const boost::array<double, 3>& Lv) 
-  {look_vector = Lv;}
+  CartesianFixedLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
 
 //-----------------------------------------------------------------------
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  CartesianFixedLookVector(double x, double y, double z) 
-  {look_vector[0] = x; look_vector[1] = y; look_vector[2] = z;}
+  CartesianFixedLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor using quaternion
+//-----------------------------------------------------------------------
+  CartesianFixedLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+
   virtual ~CartesianFixedLookVector() {}
   virtual void print(std::ostream& Os) const;
 };

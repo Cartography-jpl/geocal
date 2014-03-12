@@ -6047,8 +6047,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"LookVector_swigregister", LookVector_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_ScLookVector", _wrap_new_ScLookVector, METH_VARARGS, (char *)"\n"
-		"GeoCal::ScLookVector::ScLookVector(double x, double y, double z)\n"
-		"Constructor. \n"
+		"GeoCal::ScLookVector::ScLookVector(const boost::math::quaternion< double > &V)\n"
+		"Constructor using quaternion. \n"
 		""},
 	 { (char *)"ScLookVector___str__", (PyCFunction)_wrap_ScLookVector___str__, METH_O, NULL},
 	 { (char *)"delete_ScLookVector", (PyCFunction)_wrap_delete_ScLookVector, METH_O, (char *)"\n"
@@ -6058,8 +6058,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ScLookVector_swigregister", ScLookVector_swigregister, METH_VARARGS, NULL},
 	 { (char *)"ScLookVector_swiginit", ScLookVector_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_CartesianInertialLookVector", _wrap_new_CartesianInertialLookVector, METH_VARARGS, (char *)"\n"
-		"GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(double x, double y, double z)\n"
-		"Constructor. \n"
+		"GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(const boost::math::quaternion< double > &V)\n"
+		"Constructor using quaternion. \n"
 		""},
 	 { (char *)"CartesianInertialLookVector___str__", (PyCFunction)_wrap_CartesianInertialLookVector___str__, METH_O, NULL},
 	 { (char *)"delete_CartesianInertialLookVector", (PyCFunction)_wrap_delete_CartesianInertialLookVector, METH_O, (char *)"\n"
@@ -6069,8 +6069,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CartesianInertialLookVector_swigregister", CartesianInertialLookVector_swigregister, METH_VARARGS, NULL},
 	 { (char *)"CartesianInertialLookVector_swiginit", CartesianInertialLookVector_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_CartesianFixedLookVector", _wrap_new_CartesianFixedLookVector, METH_VARARGS, (char *)"\n"
-		"GeoCal::CartesianFixedLookVector::CartesianFixedLookVector(double x, double y, double z)\n"
-		"Constructor. \n"
+		"GeoCal::CartesianFixedLookVector::CartesianFixedLookVector(const boost::math::quaternion< double > &V)\n"
+		"Constructor using quaternion. \n"
 		""},
 	 { (char *)"CartesianFixedLookVector___str__", (PyCFunction)_wrap_CartesianFixedLookVector___str__, METH_O, NULL},
 	 { (char *)"delete_CartesianFixedLookVector", (PyCFunction)_wrap_delete_CartesianFixedLookVector, METH_O, (char *)"\n"

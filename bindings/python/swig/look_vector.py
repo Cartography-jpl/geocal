@@ -178,8 +178,8 @@ class ScLookVector(LookVector):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::ScLookVector::ScLookVector(double x, double y, double z)
-        Constructor. 
+        GeoCal::ScLookVector::ScLookVector(const boost::math::quaternion< double > &V)
+        Constructor using quaternion. 
         """
         _look_vector.ScLookVector_swiginit(self,_look_vector.new_ScLookVector(*args))
     @classmethod
@@ -204,8 +204,8 @@ class CartesianInertialLookVector(LookVector):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(double x, double y, double z)
-        Constructor. 
+        GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(const boost::math::quaternion< double > &V)
+        Constructor using quaternion. 
         """
         _look_vector.CartesianInertialLookVector_swiginit(self,_look_vector.new_CartesianInertialLookVector(*args))
     @classmethod
@@ -230,8 +230,8 @@ class CartesianFixedLookVector(LookVector):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::CartesianFixedLookVector::CartesianFixedLookVector(double x, double y, double z)
-        Constructor. 
+        GeoCal::CartesianFixedLookVector::CartesianFixedLookVector(const boost::math::quaternion< double > &V)
+        Constructor using quaternion. 
         """
         _look_vector.CartesianFixedLookVector_swiginit(self,_look_vector.new_CartesianFixedLookVector(*args))
     @classmethod

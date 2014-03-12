@@ -6,7 +6,7 @@
 #include <sstream>
 #include <boost/math/quaternion.hpp>
 #include <blitz/array.h>
-#include "geocal_matrix.h"
+#include "geocal_quaternion.h"
 #include "geocal_exception.h"
 %}
 
@@ -30,24 +30,13 @@ namespace boost {
          quaternion<T> __div__(const quaternion<T>& x) {return (boost::math::quaternion<T>(*$self) /= x); }
 	 quaternion<T> conj() { return conj(*$self); }
 	 blitz::Array<double, 2> to_matrix() const
-	   { blitz::Array<double, 2> res(3,3);
-	     double d[3][3];
-	     GeoCal::quaternion_to_matrix(*$self, d);
-	     for(int i = 0; i < 3; ++i)
-	       for(int j = 0; j < 3; ++j)
-		 res(i,j) = d[i][j];
-	     return res;
+	   { 
+	     return GeoCal::quaternion_to_matrix(*$self);
 	   }
 	 static quaternion<double> 
 	   from_matrix(const blitz::Array<double, 2>& Mat) const
 	 {
-	   if(Mat.rows() != 3 || Mat.cols() != 3)
-	     throw GeoCal::Exception("Matrix must be 3x3");
-	   double d[3][3];
-	     for(int i = 0; i < 3; ++i)
-	       for(int j = 0; j < 3; ++j)
-		 d[i][j] = Mat(i,j);
-	   return GeoCal::matrix_to_quaternion(d);
+	   return GeoCal::matrix_to_quaternion(Mat);
 	 }
          std::string print_to_string() const
          { 

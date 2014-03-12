@@ -1,4 +1,5 @@
 #include "ray_intersect.h"
+#include "geocal_matrix.h"
 using namespace GeoCal;
 
 void RayIntersect::two_look_vector_intersect

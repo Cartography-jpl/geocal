@@ -19,6 +19,7 @@ geocalinc_HEADERS+= @srcsupport@/tiled_file.h
 geocalinc_HEADERS+= @srcsupport@/memory_map_array.h
 geocalinc_HEADERS+= @srcsupport@/geocal_gsl_matrix.h
 geocalinc_HEADERS+= @srcsupport@/geocal_matrix.h
+geocalinc_HEADERS+= @srcsupport@/geocal_quaternion.h
 geocalinc_HEADERS+= @srcsupport@/boost/backtrace.hpp
 libgeocal_la_SOURCES+= @srcsupport@/boost/backtrace.cpp
 libgeocal_la_SOURCES+= @srcsupport@/geocal_gsl_matrix.cc
@@ -47,6 +48,7 @@ endif
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/constant_wrap.cc
 SWIG_SRC += @swigsrc@/generic_object_wrap.cc
+SWIG_SRC += @swigsrc@/geocal_quaternion_wrap.cc
 SWIG_SRC += @swigsrc@/covariance_wrap.cc
 SWIG_SRC += @swigsrc@/wgs84_constant_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_exception_wrap.cc
@@ -73,6 +75,7 @@ geocal_test_all_SOURCES+= @srcsupport@/tiled_file_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/memory_map_array_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/geocal_gsl_matrix_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_matrix_test.cc
+geocal_test_all_SOURCES+= @srcsupport@/geocal_quaternion_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_gsl_fit_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_gsl_root_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/covariance_test.cc 

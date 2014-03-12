@@ -215,6 +215,32 @@ class Camera(geocal_swig.generic_object.GenericObject):
         """
         return _camera.Camera_number_sample(self, *args)
 
+    def _v_parameter(self, *args):
+        """
+        virtual void GeoCal::Camera::parameter(const blitz::Array< double, 1 > &Parm)
+        Set the value of the parameters. 
+        """
+        return _camera.Camera__v_parameter(self, *args)
+
+    @property
+    def parameter(self):
+        return self._v_parameter()
+
+    @parameter.setter
+    def parameter(self, value):
+      self._v_parameter(value)
+
+    def _v_parameter_name(self):
+        """
+        virtual std::vector<std::string> GeoCal::Camera::parameter_name() const
+        Descriptive name of each parameter. 
+        """
+        return _camera.Camera__v_parameter_name(self)
+
+    @property
+    def parameter_name(self):
+        return self._v_parameter_name()
+
     def frame_coordinate(self, *args):
         """
         virtual FrameCoordinate GeoCal::Camera::frame_coordinate(const ScLookVector &Sl, int Band) const =0
@@ -262,6 +288,8 @@ Camera._v_direction = new_instancemethod(_camera.Camera__v_direction,None,Camera
 Camera._v_number_band = new_instancemethod(_camera.Camera__v_number_band,None,Camera)
 Camera.number_line = new_instancemethod(_camera.Camera_number_line,None,Camera)
 Camera.number_sample = new_instancemethod(_camera.Camera_number_sample,None,Camera)
+Camera._v_parameter = new_instancemethod(_camera.Camera__v_parameter,None,Camera)
+Camera._v_parameter_name = new_instancemethod(_camera.Camera__v_parameter_name,None,Camera)
 Camera.frame_coordinate = new_instancemethod(_camera.Camera_frame_coordinate,None,Camera)
 Camera.frame_line_coordinate = new_instancemethod(_camera.Camera_frame_line_coordinate,None,Camera)
 Camera.sc_look_vector = new_instancemethod(_camera.Camera_sc_look_vector,None,Camera)

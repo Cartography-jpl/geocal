@@ -4,7 +4,7 @@
 #include "geocal_time.h"
 #include "toolkit_coordinate_interface.h"
 #include "look_vector.h"
-#include "geocal_matrix.h"
+#include "geocal_quaternion.h"
 #include <ostream>
 #include <sstream>
 #include <boost/array.hpp>

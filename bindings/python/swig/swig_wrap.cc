@@ -15,6 +15,7 @@ extern "C" {
   void init_swig_quaternion(void);
   void init_constant(void);
   void init_generic_object(void);
+  void init_geocal_quaternion(void);
   void init_covariance(void);
   void init_wgs84_constant(void);
   void init_geocal_exception(void);
@@ -116,6 +117,7 @@ extern "C" {
   void init_vicar_lite_file(void);
   void init_mspi_config_file(void);
   void init_mspi_paraxial_transform(void);
+  void init_mspi_camera(void);
 #ifdef HAVE_CARTO
   void init_eci_tod_burl(void);
 #endif
@@ -221,6 +223,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_swig_quaternion", init_swig_quaternion);
   init_extension_module(package, "_constant", init_constant);
   init_extension_module(package, "_generic_object", init_generic_object);
+  init_extension_module(package, "_geocal_quaternion", init_geocal_quaternion);
   init_extension_module(package, "_covariance", init_covariance);
   init_extension_module(package, "_wgs84_constant", init_wgs84_constant);
   init_extension_module(package, "_geocal_exception", init_geocal_exception);
@@ -322,6 +325,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_vicar_lite_file", init_vicar_lite_file);
   init_extension_module(package, "_mspi_config_file", init_mspi_config_file);
   init_extension_module(package, "_mspi_paraxial_transform", init_mspi_paraxial_transform);
+  init_extension_module(package, "_mspi_camera", init_mspi_camera);
 #ifdef HAVE_CARTO
   init_extension_module(package, "_eci_tod_burl", init_eci_tod_burl);
 #endif

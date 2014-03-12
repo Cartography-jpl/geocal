@@ -3,6 +3,7 @@
 #include "constant.h"
 #include "wgs84_constant.h"
 #include "geodetic.h"
+#include "geocal_matrix.h"
 #include <cmath>
 using namespace GeoCal;
 

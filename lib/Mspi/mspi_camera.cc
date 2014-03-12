@@ -1,21 +1,9 @@
 #include "mspi_camera.h"
 #include "mspi_config_file.h"
-#include "geocal_matrix.h"
+#include "geocal_quaternion.h"
 #include "constant.h"
 using namespace GeoCal;
 using namespace blitz;
-
-// Temporary
-inline void qprint(const boost::math::quaternion<double>& q)
-{
-  double m[3][3];
-  quaternion_to_matrix(q, m);
-  for(int i = 0; i < 3; ++i) {
-    for(int j = 0; j < 3; ++j)
-      std::cerr << m[i][j] << " ";
-    std::cerr << "\n";
-  } 
-}
 
 //-----------------------------------------------------------------------
 /// Constructor, which creates a MspiCamera from the given
@@ -39,6 +27,8 @@ MspiCamera::MspiCamera(const std::string& File_name)
   double epsilon = 0;
   double psi = 0;
   double theta = 0;
+  // Confirmed that old code had these angles negative. We need to
+  // verify that this is actually what is intended
   det_to_cam = conj(quat_rot("ZYX", -epsilon, -psi, -theta));
 
   // Temp - By changing epsilon, psi, theta to nonzero and comparing
@@ -68,6 +58,7 @@ void MspiCamera::parameter(const Array<double, 1>& Parm)
   camera_roll = Parm(2);
   det_to_station = conj(quat_rot("ZYXY", -camera_yaw, -camera_pitch, 
 				 -camera_roll, -boresight_angle)) * det_to_cam;
+  std::cerr << quaternion_to_matrix(quat_rot_z(-camera_yaw));
 }
 
 // See base class for description

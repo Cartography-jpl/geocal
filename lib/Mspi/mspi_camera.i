@@ -13,14 +13,7 @@
 namespace GeoCal {
 class MspiCamera : public Camera {
 public:
-  MspiParaxialTransform(const std::string& Fname);
-  void paraxial_to_real(int Row_number, double Paraxial_x,
-			double Paraxial_y, double& OUTPUT,
-			double& OUTPUT);
-  void real_to_paraxial(int Row_number, double Real_x,
-			double Real_y, double& OUTPUT,
-			double& OUTPUT);
-  bool has_row(int Row_number) const;
+  MspiCamera(const std::string& Fname);
   virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 

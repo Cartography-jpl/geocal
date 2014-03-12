@@ -23,6 +23,8 @@ public:
   %python_attribute(number_band, virtual int)
   virtual int number_line(int Band) const = 0;
   virtual int number_sample(int Band) const = 0;
+  %python_attribute_with_set(parameter, blitz::Array<double, 1>)
+  %python_attribute(parameter_name, virtual std::vector<std::string>)
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const = 0;
   virtual double frame_line_coordinate(const ScLookVector& Sl, int Band) 

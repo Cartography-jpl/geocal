@@ -1,6 +1,7 @@
 #ifndef MSPI_CAMERA_H
 #define MSPI_CAMERA_H
 #include "camera.h"
+#include <boost/math/quaternion.hpp>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -40,13 +41,25 @@ public:
 
   virtual int number_sample(int Band) const { return 1; }
 
+  virtual blitz::Array<double, 1> parameter() const;
+  virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual std::vector<std::string> parameter_name() const;
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
   virtual void print(std::ostream& Os) const;
-private:
+  // This should go away
+  boost::math::quaternion<double> detector_look(const ScLookVector& Sl) const
+  { return conj(det_to_station) * Sl.look_quaternion(); }
+//private:
   std::string fname;
+  // Camera angles, in radians
+  double camera_yaw, camera_pitch, camera_roll, boresight_angle;
+  // Go from detector to camera coordinates
+  boost::math::quaternion<double> det_to_cam;
+  // Go from detector to station coordinates
+  boost::math::quaternion<double> det_to_station;
 };
 }
 #endif

@@ -1,5 +1,6 @@
 #ifndef GEOCAL_MATRIX_H
 #define GEOCAL_MATRIX_H
+#include "geocal_exception.h"
 #include <boost/array.hpp>
 #include <boost/math/quaternion.hpp>
 #include <cmath>
@@ -62,6 +63,58 @@ inline boost::math::quaternion<double> quat_rot_z(double A)
 					 0,
 					 0,
 					 sin(A / 2));
+}
+
+//-----------------------------------------------------------------------
+/// Take a character to indicate which direction we rotate about.
+//-----------------------------------------------------------------------
+
+inline boost::math::quaternion<double> quat_rot_i(double A, char C)
+{
+  switch(C) {
+  case '1':
+  case 'X':
+  case 'x':
+    return quat_rot_x(A);
+  case '2':
+  case 'Y':
+  case 'y':
+    return quat_rot_y(A);
+  case '3':
+  case 'Z':
+  case 'z':
+    return quat_rot_z(A);
+  default:
+    Exception e;
+    e << "Unrecognized axis character '" << C << "'";
+    throw e;
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Do a rotation about the three axis given.
+//-----------------------------------------------------------------------
+
+inline boost::math::quaternion<double> quat_rot(const std::string& Rot, 
+						double A1, double A2, double A3)
+{
+  if(Rot.size() != 3) 
+    throw Exception("Rotation string must be 3 characters long");
+  return quat_rot_i(A1, Rot[0]) * quat_rot_i(A2, Rot[1]) * 
+    quat_rot_i(A3, Rot[2]);
+}
+
+//-----------------------------------------------------------------------
+/// Do a rotation about the four axis given.
+//-----------------------------------------------------------------------
+
+inline boost::math::quaternion<double> quat_rot(const std::string& Rot, 
+			double A1, double A2, double A3, double A4)
+{
+  if(Rot.size() != 4) 
+    throw Exception("Rotation string must be 4 characters long");
+  return quat_rot_i(A1, Rot[0]) * quat_rot_i(A2, Rot[1]) * 
+    quat_rot_i(A3, Rot[2]) * quat_rot_i(A4, Rot[3]);
 }
 
 //-----------------------------------------------------------------------

@@ -3,6 +3,8 @@
 #include "constant.h"
 #include "frame_coordinate.h"
 #include "look_vector.h"
+#include <blitz/array.h>
+#include <vector>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -73,6 +75,36 @@ public:
 //-----------------------------------------------------------------------
 
   virtual int number_sample(int Band) const = 0;
+
+//-----------------------------------------------------------------------
+/// A camera model might depend on a set of parameters, which can by
+/// modified (e.g., during a simultaneous bundle adjustment). This
+/// returns those parameters.
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<double, 1> parameter() const
+  { // Default is no parameters.
+    return blitz::Array<double, 1>(0); 
+  }
+
+//-----------------------------------------------------------------------
+/// Set the value of the parameters.
+//-----------------------------------------------------------------------
+
+  virtual void parameter(const blitz::Array<double, 1>& Parm)
+  {
+    // Default is do nothing
+  }
+
+//-----------------------------------------------------------------------
+/// Descriptive name of each parameter.
+//-----------------------------------------------------------------------
+
+  virtual std::vector<std::string> parameter_name() const
+  {
+    std::vector<std::string> res;
+    return res;
+  }
 
 //-----------------------------------------------------------------------
 /// This converts from ScLookVector to FrameCoordinate for a given

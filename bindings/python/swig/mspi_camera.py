@@ -136,7 +136,9 @@ class MspiCamera(geocal_swig.camera.Camera):
         """
         MspiCamera::MspiCamera(const std::string &File_name)
         Constructor, which creates a MspiCamera from the given configuration
-        file. 
+        file.
+
+        Get mapping from band to row number 
         """
         _mspi_camera.MspiCamera_swiginit(self,_mspi_camera.new_MspiCamera(*args))
     def _v_file_name(self):
@@ -150,6 +152,165 @@ class MspiCamera(geocal_swig.camera.Camera):
     def file_name(self):
         return self._v_file_name()
 
+    def _v_epsilon(self):
+        """
+        double GeoCal::MspiCamera::epsilon() const
+        Epsilon angle, in radians. 
+        """
+        return _mspi_camera.MspiCamera__v_epsilon(self)
+
+    @property
+    def epsilon(self):
+        return self._v_epsilon()
+
+    def _v_psi(self):
+        """
+        double GeoCal::MspiCamera::psi() const
+        Psi angle, in radians. 
+        """
+        return _mspi_camera.MspiCamera__v_psi(self)
+
+    @property
+    def psi(self):
+        return self._v_psi()
+
+    def _v_theta(self):
+        """
+        double GeoCal::MspiCamera::theta() const
+        Theta angle, in radians. 
+        """
+        return _mspi_camera.MspiCamera__v_theta(self)
+
+    @property
+    def theta(self):
+        return self._v_theta()
+
+    def _v_yaw(self):
+        """
+        double GeoCal::MspiCamera::yaw() const
+        Yaw angle, in radians. 
+        """
+        return _mspi_camera.MspiCamera__v_yaw(self)
+
+    @property
+    def yaw(self):
+        return self._v_yaw()
+
+    def _v_pitch(self):
+        """
+        double GeoCal::MspiCamera::pitch() const
+        Pitch angle, in radians. 
+        """
+        return _mspi_camera.MspiCamera__v_pitch(self)
+
+    @property
+    def pitch(self):
+        return self._v_pitch()
+
+    def _v_roll(self):
+        """
+        double GeoCal::MspiCamera::roll() const
+        Roll angle, in radians. 
+        """
+        return _mspi_camera.MspiCamera__v_roll(self)
+
+    @property
+    def roll(self):
+        return self._v_roll()
+
+    def _v_boresight_angle(self):
+        """
+        double GeoCal::MspiCamera::boresight_angle() const
+        Boresight angle, in radians. 
+        """
+        return _mspi_camera.MspiCamera__v_boresight_angle(self)
+
+    @property
+    def boresight_angle(self):
+        return self._v_boresight_angle()
+
+    def _v_focal_length(self):
+        """
+        double GeoCal::MspiCamera::focal_length() const
+        Focal length, in millimeters. 
+        """
+        return _mspi_camera.MspiCamera__v_focal_length(self)
+
+    @property
+    def focal_length(self):
+        return self._v_focal_length()
+
+    def _v_dx(self):
+        """
+        double GeoCal::MspiCamera::dx() const
+        Center-to-center sample spacing (millimeters) 
+        """
+        return _mspi_camera.MspiCamera__v_dx(self)
+
+    @property
+    def dx(self):
+        return self._v_dx()
+
+    def _v_dy(self):
+        """
+        double GeoCal::MspiCamera::dy() const
+        Center-to-center line spacing. 
+        """
+        return _mspi_camera.MspiCamera__v_dy(self)
+
+    @property
+    def dy(self):
+        return self._v_dy()
+
+    def _v_ypitch(self):
+        """
+        double GeoCal::MspiCamera::ypitch() const
+        Pixel size in along row axis (millimeters) 
+        """
+        return _mspi_camera.MspiCamera__v_ypitch(self)
+
+    @property
+    def ypitch(self):
+        return self._v_ypitch()
+
+    def _v_s_origin(self):
+        """
+        double GeoCal::MspiCamera::s_origin() const
+        Sample origin.
+
+        In principle this could depend on the row/band number, for now this is
+        constant. 
+        """
+        return _mspi_camera.MspiCamera__v_s_origin(self)
+
+    @property
+    def s_origin(self):
+        return self._v_s_origin()
+
+    def _v_line_direction(self):
+        """
+        int GeoCal::MspiCamera::line_direction() const
+        Line direction.
+
+        +1 is from horizon to zenith, -1 from zenith down to horizon. 
+        """
+        return _mspi_camera.MspiCamera__v_line_direction(self)
+
+    @property
+    def line_direction(self):
+        return self._v_line_direction()
+
+    def _v_pixel_order(self):
+        """
+        int GeoCal::MspiCamera::pixel_order() const
+        Pixel order in sample direction, +1 or -1 depending on orientation. 
+        """
+        return _mspi_camera.MspiCamera__v_pixel_order(self)
+
+    @property
+    def pixel_order(self):
+        return self._v_pixel_order()
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -159,6 +320,20 @@ class MspiCamera(geocal_swig.camera.Camera):
 
     __swig_destroy__ = _mspi_camera.delete_MspiCamera
 MspiCamera._v_file_name = new_instancemethod(_mspi_camera.MspiCamera__v_file_name,None,MspiCamera)
+MspiCamera._v_epsilon = new_instancemethod(_mspi_camera.MspiCamera__v_epsilon,None,MspiCamera)
+MspiCamera._v_psi = new_instancemethod(_mspi_camera.MspiCamera__v_psi,None,MspiCamera)
+MspiCamera._v_theta = new_instancemethod(_mspi_camera.MspiCamera__v_theta,None,MspiCamera)
+MspiCamera._v_yaw = new_instancemethod(_mspi_camera.MspiCamera__v_yaw,None,MspiCamera)
+MspiCamera._v_pitch = new_instancemethod(_mspi_camera.MspiCamera__v_pitch,None,MspiCamera)
+MspiCamera._v_roll = new_instancemethod(_mspi_camera.MspiCamera__v_roll,None,MspiCamera)
+MspiCamera._v_boresight_angle = new_instancemethod(_mspi_camera.MspiCamera__v_boresight_angle,None,MspiCamera)
+MspiCamera._v_focal_length = new_instancemethod(_mspi_camera.MspiCamera__v_focal_length,None,MspiCamera)
+MspiCamera._v_dx = new_instancemethod(_mspi_camera.MspiCamera__v_dx,None,MspiCamera)
+MspiCamera._v_dy = new_instancemethod(_mspi_camera.MspiCamera__v_dy,None,MspiCamera)
+MspiCamera._v_ypitch = new_instancemethod(_mspi_camera.MspiCamera__v_ypitch,None,MspiCamera)
+MspiCamera._v_s_origin = new_instancemethod(_mspi_camera.MspiCamera__v_s_origin,None,MspiCamera)
+MspiCamera._v_line_direction = new_instancemethod(_mspi_camera.MspiCamera__v_line_direction,None,MspiCamera)
+MspiCamera._v_pixel_order = new_instancemethod(_mspi_camera.MspiCamera__v_pixel_order,None,MspiCamera)
 MspiCamera.__str__ = new_instancemethod(_mspi_camera.MspiCamera___str__,None,MspiCamera)
 MspiCamera_swigregister = _mspi_camera.MspiCamera_swigregister
 MspiCamera_swigregister(MspiCamera)

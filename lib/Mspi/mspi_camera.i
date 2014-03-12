@@ -14,6 +14,8 @@ namespace GeoCal {
 class MspiCamera : public Camera {
 public:
   MspiCamera(const std::string& Fname);
+  MspiCamera(const std::string& Fname, const blitz::Array<double, 1>& Param);
+  void read_config_file(const std::string& File_name);
   virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
@@ -36,6 +38,6 @@ public:
   %python_attribute(line_direction, int);
   %python_attribute(pixel_order, int);
   std::string print_to_string() const;
-  %pickle_init(1, self.file_name);
+  %pickle_init(1, self.file_name, self.parameter);
 };
 }

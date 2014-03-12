@@ -134,13 +134,20 @@ class MspiCamera(geocal_swig.camera.Camera):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        MspiCamera::MspiCamera(const std::string &File_name)
+        GeoCal::MspiCamera::MspiCamera(const std::string &File_name, const blitz::Array< double, 1 > &Parm)
         Constructor, which creates a MspiCamera from the given configuration
-        file.
+        file and then updates the parameters to the given value. 
+        """
+        _mspi_camera.MspiCamera_swiginit(self,_mspi_camera.new_MspiCamera(*args))
+    def read_config_file(self, *args):
+        """
+        void MspiCamera::read_config_file(const std::string &File_name)
+        Read in the given configuration file.
 
         Get mapping from band to row number 
         """
-        _mspi_camera.MspiCamera_swiginit(self,_mspi_camera.new_MspiCamera(*args))
+        return _mspi_camera.MspiCamera_read_config_file(self, *args)
+
     def _v_file_name(self):
         """
         const std::string& GeoCal::MspiCamera::file_name() const
@@ -316,9 +323,10 @@ class MspiCamera(geocal_swig.camera.Camera):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name)
+      return _new_from_init, (self.__class__, 1, self.file_name,self.parameter)
 
     __swig_destroy__ = _mspi_camera.delete_MspiCamera
+MspiCamera.read_config_file = new_instancemethod(_mspi_camera.MspiCamera_read_config_file,None,MspiCamera)
 MspiCamera._v_file_name = new_instancemethod(_mspi_camera.MspiCamera__v_file_name,None,MspiCamera)
 MspiCamera._v_epsilon = new_instancemethod(_mspi_camera.MspiCamera__v_epsilon,None,MspiCamera)
 MspiCamera._v_psi = new_instancemethod(_mspi_camera.MspiCamera__v_psi,None,MspiCamera)

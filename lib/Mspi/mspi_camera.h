@@ -17,8 +17,25 @@ namespace GeoCal {
 
 class MspiCamera: public Camera {
 public:
-  MspiCamera(const std::string& File_name);
+//-----------------------------------------------------------------------
+/// Constructor, which creates a MspiCamera from the given
+/// configuration file.
+//-----------------------------------------------------------------------
+
+  MspiCamera(const std::string& File_name)
+  { read_config_file(File_name); }
+
+//-----------------------------------------------------------------------
+/// Constructor, which creates a MspiCamera from the given
+/// configuration file and then updates the parameters to the given value.
+//-----------------------------------------------------------------------
+
+  MspiCamera(const std::string& File_name, const blitz::Array<double, 1>& Parm)
+  { read_config_file(File_name); parameter(Parm);}
+
   virtual ~MspiCamera() {}
+
+  void read_config_file(const std::string& File_name);
 
 //-----------------------------------------------------------------------
 /// File name for MspiConfigFile.
@@ -154,6 +171,7 @@ public:
 				      int Band) const;
   virtual void print(std::ostream& Os) const;
 private:
+  void calc_cam_to_det();
 
 //-----------------------------------------------------------------------
 /// Return row origin in the real focal plane, for the given band.

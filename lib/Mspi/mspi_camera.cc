@@ -8,13 +8,12 @@ using namespace GeoCal;
 using namespace blitz;
 
 //-----------------------------------------------------------------------
-/// Constructor, which creates a MspiCamera from the given
-/// configuration file.
+/// Read in the given configuration file.
 //-----------------------------------------------------------------------
 
-MspiCamera::MspiCamera(const std::string& File_name)
-  :fname(File_name)
+void MspiCamera::read_config_file(const std::string& File_name)
 {
+  fname = File_name;
   MspiConfigFile c(File_name);
 
   //-------------------------------------------------------
@@ -159,6 +158,29 @@ ScLookVector MspiCamera::sc_look_vector
 (const FrameCoordinate& F, int Band) const
 {
   range_check(Band, 0, number_band());
+
+//-------------------------------------------------------------------------
+/// Convert to real focal plane coordinate (in millimeters)
+//-------------------------------------------------------------------------
+
+  double xf_prime = dx_ * pixel_order_ * (F.sample - s_origin_);
+  double yf_prime = row_origin(Band) - F.line * ypitch_ / line_direction_;
+
+//-------------------------------------------------------------------------
+/// Then to paraxial coordinates.
+//-------------------------------------------------------------------------
+
+  double xf, yf;
+  paraxial_transform_->real_to_paraxial(row_number[Band], xf_prime, yf_prime,
+					xf, yf);
+
+//-------------------------------------------------------------------------
+/// Then to spacecraft coordinates.
+//-------------------------------------------------------------------------
+
+  boost::math::quaternion<double> dcs(0, -yf, xf, focal_length_);
+  dcs /= sqrt(yf * yf + xf * xf + focal_length_ * focal_length_);
+  return ScLookVector(conj(station_to_det) * dcs * station_to_det);
 }
 
 //-----------------------------------------------------------------------

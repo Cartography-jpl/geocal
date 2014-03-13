@@ -19,7 +19,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
 		       1.0 / 2500000,
 		       1.0,
 		       FrameCoordinate(1688.0, 1824.5),
-		       1.0, 1.0, QuaternionCamera::LINE_IS_Y);
+		       QuaternionCamera::LINE_IS_Y);
   BOOST_CHECK_CLOSE(cam.focal_length(), 1.0, 1e-4);
   BOOST_CHECK_CLOSE(cam.line_pitch(),   1.0 / 2500000, 1e-4);
   BOOST_CHECK_CLOSE(cam.sample_pitch(), 1.0 / 2500000, 1e-4);
@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(sc2rpc)
 		       1.0 / 2500000,
 		       1.0,
 		       FrameCoordinate(1688.0, 1824.5),
-		       1.0, 1.0, QuaternionCamera::LINE_IS_Y);
+		       QuaternionCamera::LINE_IS_Y);
   boost::shared_ptr<CartesianFixed> pt =
     od.reference_surface_intersect_approximate(cam, FrameCoordinate(3375, 3648));
   Ecr pt_ecr(*pt);

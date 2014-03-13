@@ -20,20 +20,16 @@ FrameCoordinate QuaternionCamera::frame_coordinate(const ScLookVector& Sl,
   FrameCoordinate fc;
   if(frame_convention_ == LINE_IS_Y) {
     fc.sample = pp_.sample +
-      sample_scale() * 
       focal_length() * (fv.R_component_2() / fv.R_component_4()) / 
       sample_pitch();
     fc.line = pp_.line +
-      line_scale() * 
       focal_length() * (fv.R_component_3() / fv.R_component_4()) / 
       line_pitch();
   } else {
     fc.sample = pp_.sample +
-      sample_scale() * 
       focal_length() * (fv.R_component_3() / fv.R_component_4()) / 
       sample_pitch();
     fc.line = pp_.line +
-      line_scale() * 
       focal_length() * (fv.R_component_2() / fv.R_component_4()) / 
       line_pitch();
   }
@@ -53,15 +49,15 @@ ScLookVector QuaternionCamera::sc_look_vector(const FrameCoordinate& F,
 {
   range_check(Band, 0, number_band());
   if(frame_convention_ == LINE_IS_Y) {
-    ScLookVector sl((F.sample - pp_.sample) * sample_pitch() / sample_scale(),
-		    (F.line - pp_.line) * line_pitch() / line_scale(),
+    ScLookVector sl((F.sample - pp_.sample) * sample_pitch(),
+		    (F.line - pp_.line) * line_pitch(),
 		    focal_length());
     sl.look_quaternion(frame_to_sc_ * sl.look_quaternion() * 
 		       conj(frame_to_sc_));
     return sl;
   } else {
-    ScLookVector sl((F.line - pp_.line) * line_pitch() / line_scale(),
-		    (F.sample - pp_.sample) * sample_pitch() / sample_scale(),
+    ScLookVector sl((F.line - pp_.line) * line_pitch(),
+		    (F.sample - pp_.sample) * sample_pitch(),
 		    focal_length());
     sl.look_quaternion(frame_to_sc_ * sl.look_quaternion() * 
 		       conj(frame_to_sc_));
@@ -81,8 +77,6 @@ void QuaternionCamera::print(std::ostream& Os) const
      << "   Focal length:    " << focal_length() << " mm\n"
      << "   Line pitch:      " << line_pitch() << " mm\n"
      << "   Sample pitch:    " << sample_pitch() << " mm\n"
-     << "   Line scale:      " << line_scale() << "\n"
-     << "   Sample scale:    " << sample_scale() << "\n"
      << "   Principal point: " << principal_point() << "\n"
      << "   Frame convention: " << (frame_convention() == LINE_IS_X ?
 				    "LINE_IS_X\n" : "LINE_IS_Y\n")

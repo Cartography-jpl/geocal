@@ -18,8 +18,6 @@ public:
 		   double Line_pitch, double Sample_pitch,
 		   double Focal_length, 
 		   const FrameCoordinate& Principal_point,
-		   double Line_scale = 1.0,
-		   double Sample_scale = 1.0,
 		   FrameConvention Frame_convention = LINE_IS_X);
   virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
@@ -27,8 +25,6 @@ public:
   %python_attribute_with_set(principal_point, FrameCoordinate)
   %python_attribute_with_set(line_pitch, double)
   %python_attribute_with_set(sample_pitch, double)
-  %python_attribute_with_set(line_scale, double)
-  %python_attribute_with_set(sample_scale, double)  
   %python_attribute_with_set(frame_convention, FrameConvention)  
   %python_attribute_with_set(frame_to_sc, boost::math::quaternion<double>)
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
@@ -37,7 +33,7 @@ public:
 				      int Band) const;
   %pickle_init(1, self.frame_to_sc, self.number_line(0), self.number_sample(0), 
 	       self.line_pitch, self.sample_pitch, self.focal_length, 
-	       self.principal_point, self.line_scale, self.sample_scale,
+	       self.principal_point, 
 	       self.frame_convention)
 };
 }

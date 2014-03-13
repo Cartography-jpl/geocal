@@ -49,16 +49,12 @@ public:
 		   double Line_pitch, double Sample_pitch,
 		   double Focal_length, 
 		   const FrameCoordinate& Principal_point,
-		   double Line_scale = 1.0,
-		   double Sample_scale = 1.0,
 		   FrameConvention Frame_convention = LINE_IS_X)
     : focal_length_(Focal_length),
       nline_(Number_line),
       nsamp_(Number_sample),
       line_pitch_(Line_pitch),
       sample_pitch_(Sample_pitch),
-      line_scale_(Line_scale),
-      sample_scale_(Sample_scale),
       pp_(Principal_point),
       frame_to_sc_(Frame_to_sc_q),
       frame_convention_(Frame_convention)
@@ -143,20 +139,6 @@ public:
   void sample_pitch(double Sp) {sample_pitch_ = Sp;}
 
 //-----------------------------------------------------------------------
-/// Scaling of line.
-//-----------------------------------------------------------------------
-
-  double line_scale() const { return line_scale_;}
-  void line_scale(double Line_scale) { line_scale_ = Line_scale; }
-
-//-----------------------------------------------------------------------
-/// Scaling of sample.
-//-----------------------------------------------------------------------
-
-  double sample_scale() const { return sample_scale_;}
-  void sample_scale(double Sample_scale) { sample_scale_ = Sample_scale; }
-
-//-----------------------------------------------------------------------
 /// Frame to spacecraft quaternion.
 //-----------------------------------------------------------------------
 
@@ -193,8 +175,6 @@ private:
   int nsamp_;			// Number of samples in camera.
   double line_pitch_;		// CCD pitch, in mm
   double sample_pitch_;		// CCD pitch, in mm
-  double line_scale_, sample_scale_;
-                                // Scaling of line and sample.
   FrameCoordinate pp_;		// Principal point
   boost::math::quaternion<double> frame_to_sc_;
   FrameConvention frame_convention_;

@@ -19,17 +19,17 @@ FrameCoordinate QuaternionCamera::frame_coordinate(const ScLookVector& Sl,
     conj(frame_to_sc_) * Sl.look_quaternion() * frame_to_sc_;
   FrameCoordinate fc;
   if(frame_convention_ == LINE_IS_Y) {
-    fc.sample = principal_point_.sample +
+    fc.sample = principal_point(Band).sample +
       focal_length() * (fv.R_component_2() / fv.R_component_4()) / 
       sample_pitch() * samp_dir();
-    fc.line = principal_point_.line +
+    fc.line = principal_point(Band).line +
       focal_length() * (fv.R_component_3() / fv.R_component_4()) / 
       line_pitch() * line_dir();
   } else {
-    fc.sample = principal_point_.sample +
+    fc.sample = principal_point(Band).sample +
       focal_length() * (fv.R_component_3() / fv.R_component_4()) / 
       sample_pitch() * samp_dir();
-    fc.line = principal_point_.line +
+    fc.line = principal_point(Band).line +
       focal_length() * (fv.R_component_2() / fv.R_component_4()) / 
       line_pitch() * line_dir();
   }
@@ -49,19 +49,19 @@ ScLookVector QuaternionCamera::sc_look_vector(const FrameCoordinate& F,
 {
   range_check(Band, 0, number_band());
   if(frame_convention_ == LINE_IS_Y) {
-    ScLookVector sl((F.sample - principal_point_.sample) * sample_pitch() * 
-		    samp_dir(),
-		    (F.line - principal_point_.line) * line_pitch() *
-		    line_dir(),
+    ScLookVector sl((F.sample - principal_point(Band).sample) * sample_pitch()  
+		    * samp_dir(),
+		    (F.line - principal_point(Band).line) * line_pitch()
+		    * line_dir(),
 		    focal_length());
     sl.look_quaternion(frame_to_sc_ * sl.look_quaternion() * 
 		       conj(frame_to_sc_));
     return sl;
   } else {
-    ScLookVector sl((F.line - principal_point_.line) * line_pitch() * 
-		    line_dir(),
-		    (F.sample - principal_point_.sample) * sample_pitch() *
-		    samp_dir(),
+    ScLookVector sl((F.line - principal_point(Band).line) * line_pitch() 
+		    * line_dir(),
+		    (F.sample - principal_point(Band).sample) * sample_pitch() 
+		    * samp_dir(),
 		    focal_length());
     sl.look_quaternion(frame_to_sc_ * sl.look_quaternion() * 
 		       conj(frame_to_sc_));
@@ -81,7 +81,7 @@ void QuaternionCamera::print(std::ostream& Os) const
      << "   Focal length:    " << focal_length() << " mm\n"
      << "   Line pitch:      " << line_pitch() << " mm\n"
      << "   Sample pitch:    " << sample_pitch() << " mm\n"
-     << "   Principal point: " << principal_point() << "\n"
+     << "   Principal point: " << principal_point(0) << "\n"
      << "   Frame convention: " << (frame_convention() == LINE_IS_X ?
 				    "LINE_IS_X\n" : "LINE_IS_Y\n")
      << "   Frame to spacecraft: " << frame_to_sc() << "\n";

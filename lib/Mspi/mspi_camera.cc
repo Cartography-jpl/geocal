@@ -33,8 +33,8 @@ void MspiCamera::read_config_file(const std::string& File_name)
 
   sample_pitch_ = 0.010; // center-to-center sample spacing (millimeters)
   line_pitch_ = 0.010;  // pixel size in along row axis (millimeters)
-  dy_ = 0.016;      // center-to-center row spacing (millimeters)
-  nrow = 64;	    // Number of rows in CCD
+  double dy = 0.016;    // center-to-center row spacing (millimeters)
+  int nrow = 64;	// Number of rows in CCD
 
   //-------------------------------------------------------
   // Value we read from the configuration file.
@@ -45,7 +45,7 @@ void MspiCamera::read_config_file(const std::string& File_name)
   pitch_ = c.value<double>("camera_pitch") * Constant::deg_to_rad;
   roll_ = c.value<double>("camera_roll") * Constant::deg_to_rad;
   focal_length_ = c.value<double>("focal_length");
-  s_origin_ = c.value<double>("origin");
+  double s_origin = c.value<double>("origin");
   nline_ = 1;
   nsamp_ = c.value<int>("number_sample");
   nband_ = c.value<int>("number_band");
@@ -55,7 +55,6 @@ void MspiCamera::read_config_file(const std::string& File_name)
   sample_direction_ = (c.value<int>("pixel_order") == 1 ? 
 		       QuaternionCamera::INCREASE_IS_POSITIVE :
 		       QuaternionCamera::INCREASE_IS_NEGATIVE);
-
   // This doesn't get used for anything yet, so don't bother reading this.
   // inversion_ = c.value<int>("inversion")),
 
@@ -66,6 +65,18 @@ void MspiCamera::read_config_file(const std::string& File_name)
   for(int b = 0; b < number_band(); ++b)
     row_number.push_back(c.value<int>
 			 ("band" + boost::lexical_cast<std::string>(b)));
+
+//--------------------------------------------------------------------------
+// Set up principal point for each band. Row origin is given by
+// MSPI L1B2 ATB (equation 1.1)
+//--------------------------------------------------------------------------
+
+  for(int b = 0; b < number_band(); ++b) {
+    double l_origin = line_dir() * dy * 
+      (row_number[b] + 0.5 - (nrow / 2.0)) / line_pitch_;
+    principal_point_.push_back(FrameCoordinate(l_origin,
+					       s_origin));
+  }
   
 //--------------------------------------------------------------------------
 // Set up transformation to and from paraxial coordinates.
@@ -161,9 +172,10 @@ FrameCoordinate MspiCamera::frame_coordinate
 //-------------------------------------------------------------------------
   
   FrameCoordinate res;
-  res.sample = s_origin_ + xf_prime / sample_pitch_ * samp_dir();
-  res.line = line_dir() * (-row_origin(Band) / line_pitch_) + 
-    line_dir() * yf_prime / line_pitch_;
+  res.sample = principal_point(Band).sample + 
+    xf_prime / sample_pitch_ * samp_dir();
+  res.line = principal_point(Band).line + 
+    yf_prime / line_pitch_ * line_dir();
   return res;
 }
 
@@ -177,8 +189,9 @@ ScLookVector MspiCamera::sc_look_vector
 /// Convert to real focal plane coordinate (in millimeters)
 //-------------------------------------------------------------------------
 
-  double xf_prime = (F.sample - s_origin_) * sample_pitch() * samp_dir();
-  double yf_prime = (F.line - line_dir() * (-row_origin(Band) / line_pitch_)) *
+  double xf_prime = (F.sample - principal_point(Band).sample) * 
+    sample_pitch() * samp_dir();
+  double yf_prime = (F.line - principal_point(Band).line) *
     line_pitch() * line_dir();
 
 //-------------------------------------------------------------------------

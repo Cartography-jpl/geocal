@@ -22,8 +22,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(cam.focal_length(), 1.0, 1e-4);
   BOOST_CHECK_CLOSE(cam.line_pitch(),   1.0 / 2500000, 1e-4);
   BOOST_CHECK_CLOSE(cam.sample_pitch(), 1.0 / 2500000, 1e-4);
-  BOOST_CHECK_CLOSE(cam.principal_point().line, 1688, 1e-4);
-  BOOST_CHECK_CLOSE(cam.principal_point().sample, 1824.5, 1e-4);
+  BOOST_CHECK_CLOSE(cam.principal_point(0).line, 1688, 1e-4);
+  BOOST_CHECK_CLOSE(cam.principal_point(0).sample, 1824.5, 1e-4);
   BOOST_CHECK_EQUAL(cam.number_line(0), 3375);
   BOOST_CHECK_EQUAL(cam.number_sample(0), 3648);
   BOOST_CHECK_EQUAL(cam.number_band(), 1);

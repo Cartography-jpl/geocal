@@ -86,19 +86,6 @@ public:
   double roll() const {return roll_;}
 
 //-----------------------------------------------------------------------
-/// Center-to-center line spacing
-//-----------------------------------------------------------------------
-
-  double dy() const {return dy_;}
-
-//-----------------------------------------------------------------------
-/// Sample origin. In principle this could depend on the row/band
-/// number, for now this is constant.
-//-----------------------------------------------------------------------
-
-  double s_origin() const {return s_origin_;}
-
-//-----------------------------------------------------------------------
 /// This is the integration time in seconds.
 ///
 /// The integration time is how long it takes the camera to collect
@@ -121,23 +108,7 @@ public:
 				      int Band) const;
   virtual void print(std::ostream& Os) const;
 private:
-//-----------------------------------------------------------------------
-/// Return row origin in the real focal plane, for the given band.
-/// (MSPI L1B2 ATB equation 1.1)
-//-----------------------------------------------------------------------
-
-  double row_origin(int Band) const
-  { return -dy_ * (row_number[Band] + 0.5 - (nrow / 2.0)); }
-
   std::string fname;
-  // Center-to-center sample spacing
-  double dy_;
-  // Sample origin. In principle this could depend on the row/band
-  // number, for now this is constant.
-  double s_origin_;
-  // Number of samples. In principle this could depend on the row/band
-  // number, for now this is constant.
-  int nrow;
   // Camera angles, in radians
   double epsilon_, psi_, theta_, boresight_angle_, yaw_, pitch_, roll_;
   // Give the row number for each band.

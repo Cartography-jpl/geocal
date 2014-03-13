@@ -22,8 +22,8 @@ ArgusCamera::ArgusCamera(double Yaw, double Pitch, double Roll,
   nline_ = 3744;
   nsamp_ = 5616;
   frame_convention_ = QuaternionCamera::LINE_IS_X;
-  principal_point_.line = nline_ / 2.0;
-  principal_point_.sample = nsamp_ / 2.0;
+  principal_point_.push_back(FrameCoordinate(nline_ / 2.0,
+					     nsamp_ / 2.0));
   line_direction_ = QuaternionCamera::INCREASE_IS_NEGATIVE;
   sample_direction_ = QuaternionCamera::INCREASE_IS_POSITIVE;
 

@@ -27,8 +27,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(cam.focal_length(), 27.825088, 1e-8);
   BOOST_CHECK_CLOSE(cam.line_pitch(), 0.010, 1e-8);
   BOOST_CHECK_CLOSE(cam.sample_pitch(), 0.010, 1e-8);
-  BOOST_CHECK_CLOSE(cam.dy(), 0.016, 1e-8);
-  BOOST_CHECK_CLOSE(cam.s_origin(), 767.5, 1e-8);
+  BOOST_CHECK_CLOSE(cam.principal_point(0).sample, 767.5, 1e-8);
   BOOST_CHECK(cam.line_direction() == QuaternionCamera::INCREASE_IS_NEGATIVE);
   BOOST_CHECK(cam.sample_direction() == QuaternionCamera::INCREASE_IS_POSITIVE);
   BOOST_CHECK(cam.number_band() == 7);

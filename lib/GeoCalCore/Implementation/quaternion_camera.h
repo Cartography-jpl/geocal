@@ -3,6 +3,7 @@
 #include "printable.h"
 #include "camera.h"
 #include "geocal_exception.h"
+#include <vector>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -55,12 +56,13 @@ public:
       nsamp_(Number_sample),
       line_pitch_(Line_pitch),
       sample_pitch_(Sample_pitch),
-      principal_point_(Principal_point),
       frame_to_sc_(Frame_to_sc_q),
       frame_convention_(Frame_convention),
       line_direction_(Line_direction),
       sample_direction_(Sample_direction)
-  { }
+  { 
+    principal_point_.push_back(Principal_point);
+  }
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -103,17 +105,19 @@ public:
   void focal_length(double V) { focal_length_ = V; }
 
 //-----------------------------------------------------------------------
-/// Principal point of camera
+/// Principal point of camera for band B.
 //-----------------------------------------------------------------------
 
-  const FrameCoordinate& principal_point() const {return principal_point_;}
+  const FrameCoordinate& principal_point(int B) const 
+  {range_check(B, 0, number_band()); return principal_point_[B];}
 
 
 //-----------------------------------------------------------------------
 /// Set principal point of camera
 //-----------------------------------------------------------------------
 
-  void principal_point(const FrameCoordinate& Fc) {principal_point_ = Fc;}
+  void principal_point(int B, const FrameCoordinate& Fc) 
+  {range_check(B, 0, number_band());principal_point_[B] = Fc;}
 
 //-----------------------------------------------------------------------
 /// CCD pitch, in mm
@@ -214,8 +218,8 @@ protected:
   int nsamp_;			// Number of samples in camera.
   double line_pitch_;		// CCD pitch, in mm
   double sample_pitch_;		// CCD pitch, in mm
-  FrameCoordinate principal_point_;
-				// Principal point
+  std::vector<FrameCoordinate> principal_point_;
+				// Principal point, indexed by band.
   boost::math::quaternion<double> frame_to_sc_;
   FrameConvention frame_convention_;
                                 // Indicates if X or Y is the line

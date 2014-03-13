@@ -9,10 +9,11 @@
 %base_import(camera)
 %geocal_shared_ptr(GeoCal::SpotCamera);
 namespace GeoCal {
-class SpotCamera : public PushBroomCamera {
+class SpotCamera : public Camera {
 public:
   SpotCamera(const std::vector<double>& Psi_x, 
 	     const std::vector<double>& Psi_y);
+  virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;

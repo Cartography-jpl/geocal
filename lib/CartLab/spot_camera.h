@@ -21,7 +21,7 @@ namespace GeoCal {
   http://www.spotimage.com/automne_modules_files/standard/public/p229_0b9c0d94a22e77aac09df2b360c73073SPOT_Geometry_Handbook.pdf
 *******************************************************************/
 
-class SpotCamera : public PushBroomCamera {
+class SpotCamera : public Camera {
 public: 
   SpotCamera(const std::vector<double>& Psi_x, 
 	     const std::vector<double>& Psi_y);

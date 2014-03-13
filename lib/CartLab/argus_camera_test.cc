@@ -20,12 +20,20 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(fc1.sample, 
 		    cam.frame_coordinate(cam.sc_look_vector(fc1, 0), 
 					 0).sample, 1e-4);
+  ScLookVector slv = cam.sc_look_vector(fc1, 0);
+  BOOST_CHECK_CLOSE(slv.direction()[0], 0.0,1e-4);
+  BOOST_CHECK_CLOSE(slv.direction()[1], 0.0,1e-4);
+  BOOST_CHECK_CLOSE(slv.direction()[2], 1.0,1e-4);
   FrameCoordinate fc2(1, 1);
   BOOST_CHECK_CLOSE(fc2.line, cam.frame_coordinate(cam.sc_look_vector(fc2, 0), 
 						   0).line, 1e-4);
   BOOST_CHECK_CLOSE(fc2.sample, 
 		    cam.frame_coordinate(cam.sc_look_vector(fc2, 0), 
 					 0).sample, 1e-4);
+  slv = cam.sc_look_vector(fc2, 0);
+  BOOST_CHECK_CLOSE(slv.direction()[0], 0.0372854, 1e-4);
+  BOOST_CHECK_CLOSE(slv.direction()[1], -0.0390369, 1e-4);
+  BOOST_CHECK_CLOSE(slv.direction()[2], 0.998542, 1e-4);
 }
 
 

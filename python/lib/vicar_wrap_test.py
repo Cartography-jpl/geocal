@@ -79,7 +79,7 @@ def test_compare_sc2rpc():
                                  0.0, sc_to_cam, 2500000, 2500000)
     cam = QuaternionCamera(sc_to_cam, 3376, 3649, 1.0 / 2500000, 
                            1.0 / 2500000, 1.0, FrameCoordinate(1688.0,1824.5),
-                           1.0, 1.0, QuaternionCamera.LINE_IS_Y)
+                           QuaternionCamera.LINE_IS_Y)
     ic = ImageCoordinate(1, 1)
     gc_sc2rpc = sc2calc(ic)
     gc_cam = od.surface_intersect(cam, FrameCoordinate(ic.line, ic.sample),

@@ -43,8 +43,6 @@ public:
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
 
-  virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
-				      int Band) const;
   virtual void print(std::ostream& Os) const;
 private:
   double roll_; 		// Roll angle, in degrees.

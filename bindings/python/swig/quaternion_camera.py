@@ -138,15 +138,12 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     other convention, it is both a rotation and a reflection (so the
     chirality is different).
 
+    In addition to either x or y direction for line, we can have
+    increasing line go in the positive direction or negative direction.
+    Likewise for sample.
+
     We support both conventions, depending on the setting of the
     frame_convention.
-
-    Note that in addition to the line and sample pitch, we supply a line
-    and sample scale. You could achieve exactly the same behavior either
-    changing the scale, or just directly changing pitch. The scale is
-    supplied as a convenience, it is a more natural thing to vary if you
-    are calibrating the camera. If you wish, you can leave the scale fixed
-    at 1.0 and ignore it if you don't want to use it.
 
     C++ includes: quaternion_camera.h 
     """
@@ -154,13 +151,16 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     __repr__ = _swig_repr
     LINE_IS_X = _quaternion_camera.QuaternionCamera_LINE_IS_X
     LINE_IS_Y = _quaternion_camera.QuaternionCamera_LINE_IS_Y
+    INCREASE_IS_POSITIVE = _quaternion_camera.QuaternionCamera_INCREASE_IS_POSITIVE
+    INCREASE_IS_NEGATIVE = _quaternion_camera.QuaternionCamera_INCREASE_IS_NEGATIVE
     def __init__(self, *args): 
         """
         GeoCal::QuaternionCamera::QuaternionCamera(boost::math::quaternion< double > Frame_to_sc_q, double Number_line,
         double Number_sample, double Line_pitch, double Sample_pitch, double
-        Focal_length, const FrameCoordinate &Principal_point, double
-        Line_scale=1.0, double Sample_scale=1.0, FrameConvention
-        Frame_convention=LINE_IS_X)
+        Focal_length, const FrameCoordinate &Principal_point, FrameConvention
+        Frame_convention=LINE_IS_X, FrameDirection
+        Line_direction=INCREASE_IS_POSITIVE, FrameDirection
+        Sample_direction=INCREASE_IS_POSITIVE)
         Create a QuaternionCamera.
 
         The orientation of the camera to the spacecraft to given by the
@@ -230,36 +230,6 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def sample_pitch(self, value):
       self._v_sample_pitch(value)
 
-    def _v_line_scale(self, *args):
-        """
-        void GeoCal::QuaternionCamera::line_scale(double Line_scale)
-
-        """
-        return _quaternion_camera.QuaternionCamera__v_line_scale(self, *args)
-
-    @property
-    def line_scale(self):
-        return self._v_line_scale()
-
-    @line_scale.setter
-    def line_scale(self, value):
-      self._v_line_scale(value)
-
-    def _v_sample_scale(self, *args):
-        """
-        void GeoCal::QuaternionCamera::sample_scale(double Sample_scale)
-
-        """
-        return _quaternion_camera.QuaternionCamera__v_sample_scale(self, *args)
-
-    @property
-    def sample_scale(self):
-        return self._v_sample_scale()
-
-    @sample_scale.setter
-    def sample_scale(self, value):
-      self._v_sample_scale(value)
-
     def _v_frame_convention(self, *args):
         """
         void GeoCal::QuaternionCamera::frame_convention(FrameConvention Frame_convention)
@@ -274,6 +244,36 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     @frame_convention.setter
     def frame_convention(self, value):
       self._v_frame_convention(value)
+
+    def _v_line_direction(self, *args):
+        """
+        void GeoCal::QuaternionCamera::line_direction(FrameDirection Line_direction)
+        Set line direction. 
+        """
+        return _quaternion_camera.QuaternionCamera__v_line_direction(self, *args)
+
+    @property
+    def line_direction(self):
+        return self._v_line_direction()
+
+    @line_direction.setter
+    def line_direction(self, value):
+      self._v_line_direction(value)
+
+    def _v_sample_direction(self, *args):
+        """
+        void GeoCal::QuaternionCamera::sample_direction(FrameDirection Sample_direction)
+        Set sample direction. 
+        """
+        return _quaternion_camera.QuaternionCamera__v_sample_direction(self, *args)
+
+    @property
+    def sample_direction(self):
+        return self._v_sample_direction()
+
+    @sample_direction.setter
+    def sample_direction(self, value):
+      self._v_sample_direction(value)
 
     def _v_frame_to_sc(self, *args):
         """
@@ -295,16 +295,16 @@ class QuaternionCamera(geocal_swig.camera.Camera):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.frame_to_sc,self.number_line(0),self.number_sample(0),self.line_pitch,self.sample_pitch,self.focal_length,self.principal_point,self.line_scale,self.sample_scale,self.frame_convention)
+      return _new_from_init, (self.__class__, 1, self.frame_to_sc,self.number_line(0),self.number_sample(0),self.line_pitch,self.sample_pitch,self.focal_length,self.principal_point,self.frame_convention,self.line_direction,self.sample_direction)
 
     __swig_destroy__ = _quaternion_camera.delete_QuaternionCamera
 QuaternionCamera._v_focal_length = new_instancemethod(_quaternion_camera.QuaternionCamera__v_focal_length,None,QuaternionCamera)
 QuaternionCamera._v_principal_point = new_instancemethod(_quaternion_camera.QuaternionCamera__v_principal_point,None,QuaternionCamera)
 QuaternionCamera._v_line_pitch = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_pitch,None,QuaternionCamera)
 QuaternionCamera._v_sample_pitch = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_pitch,None,QuaternionCamera)
-QuaternionCamera._v_line_scale = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_scale,None,QuaternionCamera)
-QuaternionCamera._v_sample_scale = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_scale,None,QuaternionCamera)
 QuaternionCamera._v_frame_convention = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_convention,None,QuaternionCamera)
+QuaternionCamera._v_line_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_direction,None,QuaternionCamera)
+QuaternionCamera._v_sample_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_direction,None,QuaternionCamera)
 QuaternionCamera._v_frame_to_sc = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_to_sc,None,QuaternionCamera)
 QuaternionCamera_swigregister = _quaternion_camera.QuaternionCamera_swigregister
 QuaternionCamera_swigregister(QuaternionCamera)

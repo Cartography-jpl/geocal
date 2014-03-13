@@ -14,14 +14,18 @@ using namespace GeoCal;
 ArgusCamera::ArgusCamera(double Yaw, double Pitch, double Roll, 
 			 double Focal_length)
 : roll_(Roll),
-    pitch_(Pitch),
-    yaw_(Yaw)
+  pitch_(Pitch),
+  yaw_(Yaw)
 {
   focal_length_ = Focal_length;
   nline_ = 3744;
   nsamp_ = 5616;
   frame_convention_ = QuaternionCamera::LINE_IS_X;
-  
+  principal_point_.line = nline_ / 2.0;
+  principal_point_.sample = nsamp_ / 2.0;
+  line_direction_ = QuaternionCamera::INCREASE_IS_NEGATIVE;
+  sample_direction_ = QuaternionCamera::INCREASE_IS_POSITIVE;
+
   // For now, hardwire this to fit a sensor size of 36.0 x 24.0 mm.
   // This is the actual image sensor size according to canon, and may
   // be more accurate than what we are reading from the jpeg. We'll
@@ -56,30 +60,6 @@ FrameCoordinate ArgusCamera::frame_coordinate(const ScLookVector& Sl,
   fc.sample = number_sample(0) / 2.0 +
     focal_length() * (fv.R_component_3() / fv.R_component_4()) / sample_pitch();
   return fc;
-}
-
-//-----------------------------------------------------------------------
-/// Convert from FrameCoordinate to ScLookVector. It is perfectly
-/// allowable for F.line to be outside the range (0, number_line(band)
-/// - 1) or for F.sample to be outside the range (0,
-/// number_sample(band) - 1). The conversion will just act as if the
-/// camera has infinite extent.
-//-----------------------------------------------------------------------
-
-ScLookVector ArgusCamera::sc_look_vector(const FrameCoordinate& F, 
-					 int Band) const
-{
-  range_check(Band, 0, 1);
-
-  // We assume a principal point at the center of the camera. Also,
-  // these are actually body coordinates, but we use the ScLookVector
-  // because this is essentially the same thing.
-
-  ScLookVector sl(-(F.line - number_line(0) / 2.0) * line_pitch(),
-		  (F.sample - number_sample(0) / 2.0) * sample_pitch(),
-		  focal_length());
-  sl.look_quaternion(frame_to_sc_ * sl.look_quaternion() * conj(frame_to_sc_));
-  return sl;
 }
 
 //-----------------------------------------------------------------------

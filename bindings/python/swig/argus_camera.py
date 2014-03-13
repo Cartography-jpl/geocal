@@ -118,9 +118,10 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.quaternion_camera
 import geocal_swig.camera
 import geocal_swig.generic_object
-class ArgusCamera(geocal_swig.camera.Camera):
+class ArgusCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     """
     A model of the ARGUS camera.
 
@@ -141,39 +142,6 @@ class ArgusCamera(geocal_swig.camera.Camera):
         is in mm. 
         """
         _argus_camera.ArgusCamera_swiginit(self,_argus_camera.new_ArgusCamera(Yaw, Pitch, Roll, Focal_length))
-    def _v_focal_length(self):
-        """
-        double GeoCal::ArgusCamera::focal_length() const
-        Focal length, in mm. 
-        """
-        return _argus_camera.ArgusCamera__v_focal_length(self)
-
-    @property
-    def focal_length(self):
-        return self._v_focal_length()
-
-    def _v_line_pitch(self):
-        """
-        double GeoCal::ArgusCamera::line_pitch() const
-        CCD pitch, in mm. 
-        """
-        return _argus_camera.ArgusCamera__v_line_pitch(self)
-
-    @property
-    def line_pitch(self):
-        return self._v_line_pitch()
-
-    def _v_sample_pitch(self):
-        """
-        double GeoCal::ArgusCamera::sample_pitch() const
-        CCD pitch, in mm. 
-        """
-        return _argus_camera.ArgusCamera__v_sample_pitch(self)
-
-    @property
-    def sample_pitch(self):
-        return self._v_sample_pitch()
-
     def _v_roll(self):
         """
         double GeoCal::ArgusCamera::roll() const
@@ -215,9 +183,6 @@ class ArgusCamera(geocal_swig.camera.Camera):
       return _new_from_init, (self.__class__, 1, self.yaw,self.pitch,self.roll,self.focal_length)
 
     __swig_destroy__ = _argus_camera.delete_ArgusCamera
-ArgusCamera._v_focal_length = new_instancemethod(_argus_camera.ArgusCamera__v_focal_length,None,ArgusCamera)
-ArgusCamera._v_line_pitch = new_instancemethod(_argus_camera.ArgusCamera__v_line_pitch,None,ArgusCamera)
-ArgusCamera._v_sample_pitch = new_instancemethod(_argus_camera.ArgusCamera__v_sample_pitch,None,ArgusCamera)
 ArgusCamera._v_roll = new_instancemethod(_argus_camera.ArgusCamera__v_roll,None,ArgusCamera)
 ArgusCamera._v_pitch = new_instancemethod(_argus_camera.ArgusCamera__v_pitch,None,ArgusCamera)
 ArgusCamera._v_yaw = new_instancemethod(_argus_camera.ArgusCamera__v_yaw,None,ArgusCamera)

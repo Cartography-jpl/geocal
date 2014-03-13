@@ -13,12 +13,15 @@ namespace GeoCal {
 class QuaternionCamera : public Camera {
 public:
   enum FrameConvention { LINE_IS_X, LINE_IS_Y};
+  enum FrameDirection { INCREASE_IS_POSITIVE, INCREASE_IS_NEGATIVE};
   QuaternionCamera(boost::math::quaternion<double> frame_to_sc_q, 
 		   double Number_line, double Number_sample,
 		   double Line_pitch, double Sample_pitch,
 		   double Focal_length, 
 		   const FrameCoordinate& Principal_point,
-		   FrameConvention Frame_convention = LINE_IS_X);
+		   FrameConvention Frame_convention = LINE_IS_X,
+		   FrameDirection Line_direction = INCREASE_IS_POSITIVE,
+		   FrameDirection Sample_direction = INCREASE_IS_NEGATIVE);
   virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
   %python_attribute_with_set(focal_length, double)
@@ -26,6 +29,8 @@ public:
   %python_attribute_with_set(line_pitch, double)
   %python_attribute_with_set(sample_pitch, double)
   %python_attribute_with_set(frame_convention, FrameConvention)  
+  %python_attribute_with_set(line_direction, FrameDirection)  
+  %python_attribute_with_set(sample_direction, FrameDirection)  
   %python_attribute_with_set(frame_to_sc, boost::math::quaternion<double>)
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
@@ -34,7 +39,8 @@ public:
   %pickle_init(1, self.frame_to_sc, self.number_line(0), self.number_sample(0), 
 	       self.line_pitch, self.sample_pitch, self.focal_length, 
 	       self.principal_point, 
-	       self.frame_convention)
+	       self.frame_convention, self.line_direction, 
+	       self.sample_direction)
 };
 }
 

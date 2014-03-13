@@ -12,7 +12,7 @@ cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                        1.0 / 2500000,
                        1.0,
                        FrameCoordinate(1688.0, 1824.5),
-                       1.0, 1.0, QuaternionCamera.LINE_IS_Y)
+                       QuaternionCamera.LINE_IS_Y)
 demin = SimpleDem()
 img1 = VicarLiteRasterImage(test_data + "10MAY21-1.img")
 img2 = VicarLiteRasterImage(test_data + "10MAY21-2.img")

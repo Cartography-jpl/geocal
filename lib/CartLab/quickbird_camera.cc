@@ -22,10 +22,18 @@ QuickBirdCamera::QuickBirdCamera()
   // None of this is present in the GEO file we are using as input, so
   // we haven't implemented this.
 
-  focal_length = 8836.202;
-  det_origin_x = 9.5468399999999995;
-  det_origin_y = 164.0277299999999900;
-  det_pitch = 0.0119139600000000;
+  focal_length_ = 8836.202;
+  nline_ = 1;
+  nsamp_ = 27552;
+  line_pitch_ = 0.0119139600000000;
+  sample_pitch_ = line_pitch_;
+  double det_origin_x = 9.5468399999999995;
+  double det_origin_y = 164.0277299999999900;
+  principal_point_.sample = +det_origin_y / sample_pitch_;
+  principal_point_.line = -det_origin_x / line_pitch_;
+  frame_convention_ = QuaternionCamera::LINE_IS_X;
+  line_direction_ = QuaternionCamera::INCREASE_IS_POSITIVE;
+  sample_direction_ = QuaternionCamera::INCREASE_IS_NEGATIVE;
 
   // Note that there are a few different conventions about the
   // ordering of the quaternion coefficients. The boost library places
@@ -35,87 +43,87 @@ QuickBirdCamera::QuickBirdCamera()
   // (q1, q2, q3, q4). That means when we bring this over to the boost
   // library, we need to reorder this to the 4-tuple (q4, q1, q2, q3).
 
-  cam_to_sc = quaternion<double>(0.9999806843019142,
-				 -0.0037369299279122,
-				 -0.0046602381421084,
-				 0.0017171366422757);
+  frame_to_sc_ = quaternion<double>(0.9999806843019142,
+				    -0.0037369299279122,
+				    -0.0046602381421084,
+				    0.0017171366422757);
 }
 
-//-----------------------------------------------------------------------
-/// This converts from ScLookVector to FrameCoordinate for a given
-/// band. Note that the FrameCoordinate may be outside of the range
-/// (0, number_line(band) - 1), (0, number_sample(band) - 1), this
-/// just means the look vector is not with the active portion of the
-/// camera (i.e., it is not seen).
-//-----------------------------------------------------------------------
+// //-----------------------------------------------------------------------
+// /// This converts from ScLookVector to FrameCoordinate for a given
+// /// band. Note that the FrameCoordinate may be outside of the range
+// /// (0, number_line(band) - 1), (0, number_sample(band) - 1), this
+// /// just means the look vector is not with the active portion of the
+// /// camera (i.e., it is not seen).
+// //-----------------------------------------------------------------------
 
-FrameCoordinate QuickBirdCamera::frame_coordinate(const ScLookVector& Sl, 
-						  int Band) const
-{
-  range_check(Band, 0, number_band());
+// FrameCoordinate QuickBirdCamera::frame_coordinate(const ScLookVector& Sl, 
+// 						  int Band) const
+// {
+//   range_check(Band, 0, number_band());
 
-//-----------------------------------------------------------------------
-// Convert from space craft coordinates to camera coordinates. 
-//-----------------------------------------------------------------------
+// //-----------------------------------------------------------------------
+// // Convert from space craft coordinates to camera coordinates. 
+// //-----------------------------------------------------------------------
 
-  quaternion<double> sc_coor = Sl.look_quaternion();
+//   quaternion<double> sc_coor = Sl.look_quaternion();
 
-//-----------------------------------------------------------------------
-// Rotate to camera coordinates.
-//-----------------------------------------------------------------------
+// //-----------------------------------------------------------------------
+// // Rotate to camera coordinates.
+// //-----------------------------------------------------------------------
 
-  quaternion<double> cam_coor = conj(cam_to_sc) * sc_coor * cam_to_sc;
+//   quaternion<double> cam_coor = conj(frame_to_sc_) * sc_coor * frame_to_sc_;
   
-//-----------------------------------------------------------------------
-// Convert from camera coordinates to detector coordinates.
-//-----------------------------------------------------------------------
+// //-----------------------------------------------------------------------
+// // Convert from camera coordinates to detector coordinates.
+// //-----------------------------------------------------------------------
 
-  FrameCoordinate fc;
-  fc.line = ((focal_length * cam_coor.R_component_2() / 
-	      cam_coor.R_component_4()) - det_origin_x) / det_pitch;
-  fc.sample = -((focal_length * cam_coor.R_component_3() / 
-		 cam_coor.R_component_4()) - det_origin_y) / det_pitch;
-  return fc;
-}
+//   FrameCoordinate fc;
+//   fc.line = ((focal_length_ * cam_coor.R_component_2() / 
+// 	      cam_coor.R_component_4()) - det_origin_x) / line_pitch_;
+//   fc.sample = -((focal_length_ * cam_coor.R_component_3() / 
+// 		 cam_coor.R_component_4()) - det_origin_y) / sample_pitch_;
+//   return fc;
+// }
 
-//-----------------------------------------------------------------------
-/// Convert from FrameCoordinate to ScLookVector. It is perfectly
-/// allowable for F.line to be outside the range (0, number_line(band)
-/// - 1) or for F.sample to be outside the range (0,
-/// number_sample(band) - 1). The conversion will just act as if the
-/// camera has infinite extent.
-//-----------------------------------------------------------------------
+// //-----------------------------------------------------------------------
+// /// Convert from FrameCoordinate to ScLookVector. It is perfectly
+// /// allowable for F.line to be outside the range (0, number_line(band)
+// /// - 1) or for F.sample to be outside the range (0,
+// /// number_sample(band) - 1). The conversion will just act as if the
+// /// camera has infinite extent.
+// //-----------------------------------------------------------------------
 
-ScLookVector QuickBirdCamera::sc_look_vector(const FrameCoordinate& F, 
-					     int Band) const
-{
-  range_check(Band, 0, number_band());
+// ScLookVector QuickBirdCamera::sc_look_vector(const FrameCoordinate& F, 
+// 					     int Band) const
+// {
+//   range_check(Band, 0, number_band());
 
-//-----------------------------------------------------------------------
-// First convert from FrameCoordinates (same thing as detector
-// coordinates) to camera coordinates. Note that in general there can
-// be a rotation, however this isn't implemented since it isn't used in
-// the GEO files we have.
-//
-// We pack the vector into a quaternion, so we can rotate it in the
-// next step.
-//-----------------------------------------------------------------------
+// //-----------------------------------------------------------------------
+// // First convert from FrameCoordinates (same thing as detector
+// // coordinates) to camera coordinates. Note that in general there can
+// // be a rotation, however this isn't implemented since it isn't used in
+// // the GEO files we have.
+// //
+// // We pack the vector into a quaternion, so we can rotate it in the
+// // next step.
+// //-----------------------------------------------------------------------
 
-  quaternion<double> cam_coor(0,
-			      F.line * det_pitch + det_origin_x,
-			      -F.sample * det_pitch + det_origin_y,
-			      focal_length);
+//   quaternion<double> cam_coor(0,
+// 			      F.line * line_pitch_ + det_origin_x,
+// 			      -F.sample * sample_pitch_ + det_origin_y,
+// 			      focal_length_);
 
-//-----------------------------------------------------------------------
-// This rotates cam_coor with the inverse of sc_to_cam.
-//-----------------------------------------------------------------------
+// //-----------------------------------------------------------------------
+// // This rotates cam_coor with the inverse of sc_to_cam.
+// //-----------------------------------------------------------------------
 
-  quaternion<double> sc_coor = cam_to_sc * cam_coor * conj(cam_to_sc);
+//   quaternion<double> sc_coor = frame_to_sc_ * cam_coor * conj(frame_to_sc_);
 
-  ScLookVector res;
-  res.look_quaternion(sc_coor);
-  return res;
-}
+//   ScLookVector res;
+//   res.look_quaternion(sc_coor);
+//   return res;
+// }
 
 //-----------------------------------------------------------------------
 /// Print to a stream.

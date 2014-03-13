@@ -1,7 +1,6 @@
 #ifndef QUICKBIRD_CAMERA_H
 #define QUICKBIRD_CAMERA_H
-#include "camera.h"
-#include <boost/math/quaternion.hpp>
+#include "quaternion_camera.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -24,7 +23,7 @@ namespace GeoCal {
   Panchromatic data.
 *******************************************************************/
 
-class QuickBirdCamera : public PushBroomCamera {
+class QuickBirdCamera : public QuaternionCamera {
 public:
   QuickBirdCamera();
 
@@ -34,30 +33,7 @@ public:
 
   virtual ~QuickBirdCamera() {}
 
-//-----------------------------------------------------------------------
-/// Number of bands in camera.
-//-----------------------------------------------------------------------
-
-  virtual int number_band() const { return 1; }
-
-//-----------------------------------------------------------------------
-/// Number of samples in camera for given band.
-//-----------------------------------------------------------------------
-
-  virtual int number_sample(int Band) const { return 27552; }
-  virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
-					   int Band) const;
-  virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
-				      int Band) const;
   virtual void print(std::ostream& Os) const;
-private:
-  double det_pitch;		///< Detector pitch in mm
-  double det_origin_x;		///< Detector origin in mm
-  double det_origin_y;		///< Detector origin in mm
-  double focal_length;		///< Detector focal length in mm
-  boost::math::quaternion<double> cam_to_sc;
-				/// Rotate from camera
-				/// coordinates to spacecraft coordinates.
 };
 
 }

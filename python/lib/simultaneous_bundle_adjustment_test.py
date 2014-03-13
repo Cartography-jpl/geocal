@@ -9,8 +9,12 @@ import cPickle
 import numpy as np
 from nose.plugins.skip import Skip, SkipTest
 import logging
+import sys
 
-logging.basicConfig(level = logging.INFO)
+console = logging.StreamHandler(stream=sys.stdout)
+console.setLevel(logging.INFO)
+logging.getLogger("geocal-python").addHandler(console)
+
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)

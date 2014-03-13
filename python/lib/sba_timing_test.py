@@ -6,6 +6,12 @@ from igc_offset_correction import *
 from simultaneous_bundle_adjustment import *
 from lm_optimize import *
 from nose.plugins.skip import Skip, SkipTest
+import logging
+import sys
+
+console = logging.StreamHandler(stream=sys.stdout)
+console.setLevel(logging.INFO)
+logging.getLogger("geocal-python").addHandler(console)
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
@@ -67,8 +73,7 @@ def test_time():
                                        demin)
 #    res = sba.sba_jacobian(sba.parameter)
 #    print res.tolil()
-    parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian, 
-                       diagnostic = True)
+    parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     print len(igc_coll.parameter_subset)
     print igc_coll.parameter_subset
     print igc_coll.parameter_subset_mask

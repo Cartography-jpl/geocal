@@ -8,10 +8,10 @@ from multiprocessing import Pool
 import logging
 
 def parallel_process_tile(img_in, lstart, sstart, nline, nsamp, out):
-    log = logging.getLogger("afids-python.parallel_process")
+    log = logging.getLogger("geocal-python.parallel_process")
     log.info("Processing (%d, %d) to (%d, %d)" % \
                  (lstart, sstart, lstart + nline, sstart + nsamp))
-    for h in logging.getLogger("afids-python").handlers:
+    for h in logging.getLogger("geocal-python").handlers:
         h.flush()
     if(out.dtype == np.float32 or out.dtype == np.float64):
         out[lstart:(lstart + nline), sstart:(sstart + nsamp)] = \
@@ -19,15 +19,15 @@ def parallel_process_tile(img_in, lstart, sstart, nline, nsamp, out):
     else:
         out[lstart:(lstart + nline), sstart:(sstart + nsamp)] = \
             img_in.read(lstart, sstart, nline, nsamp)
-    for h in logging.getLogger("afids-python").handlers:
+    for h in logging.getLogger("geocal-python").handlers:
         h.flush()
 
 # Variation where img_in in a RasterImageMultiBand.
 def parallel_process_tile2(img_in, lstart, sstart, nline, nsamp, out):
-    log = logging.getLogger("afids-python.parallel_process")
+    log = logging.getLogger("geocal-python.parallel_process")
     log.info("Processing (%d, %d) to (%d, %d)" % \
                  (lstart, sstart, lstart + nline, sstart + nsamp))
-    for h in logging.getLogger("afids-python").handlers:
+    for h in logging.getLogger("geocal-python").handlers:
         h.flush()
     if(out[0].dtype == np.float32 or out[0].dtype == np.float64):
         t = img_in.read_double(lstart, sstart, nline, nsamp)
@@ -35,7 +35,7 @@ def parallel_process_tile2(img_in, lstart, sstart, nline, nsamp, out):
         t = img_in.read(lstart, sstart, nline, nsamp)
     for i in range(img_in.number_band):
         out[i][lstart:(lstart + nline), sstart:(sstart + nsamp)] = t[i, :, :]
-    for h in logging.getLogger("afids-python").handlers:
+    for h in logging.getLogger("geocal-python").handlers:
         h.flush()
 
 def do_parallel_process(p):

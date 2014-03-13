@@ -50,7 +50,6 @@ class IgcOffsetCorrection(IgcCollection):
         self._igc_cache = [None] * self.number_image
         self._jac_cache = [None] * self.number_image
         self.fit_refraction = False
-        self.fit_scale = False
 
     @property
     def fit_position(self):
@@ -101,8 +100,7 @@ class IgcOffsetCorrection(IgcCollection):
     def parameter(self):
         '''Value of parameters controlling mapping to and from image 
         coordinates'''
-        par = [self.cam.line_scale, self.cam.sample_scale, 
-               (self.refraction.index_refraction_surface - 1.00027) * 1e5]
+        par = [(self.refraction.index_refraction_surface - 1.00027) * 1e5]
         return np.append(self.orbit.parameter, par) 
 
     @parameter.setter
@@ -110,11 +108,8 @@ class IgcOffsetCorrection(IgcCollection):
         '''Value of parameters controlling mapping to and from image 
         coordinates'''
         self._igc_cache = [None] * self.number_image
-        self.orbit.parameter = value[0:-3]
-        scale_par = [value[-3], value[-2]]
+        self.orbit.parameter = value[0:-1]
         ref_par = value[-1]
-        self.cam.line_scale = scale_par[0]
-        self.cam.sample_scale = scale_par[1]
         self.refraction.index_refraction_surface = 1.00027 + 1e-5 * ref_par
 
     @property
@@ -131,8 +126,7 @@ class IgcOffsetCorrection(IgcCollection):
     def parameter_subset_mask(self):
         '''This returns a list of flags indicating which parameters should
         be included in the parameter_subset values.'''
-        mask = [self.fit_scale, self.fit_scale,
-                self.fit_refraction]
+        mask = [self.fit_refraction]
         return np.append(self.orbit.parameter_subset_mask, mask)
 
     @property
@@ -227,35 +221,7 @@ class IgcOffsetCorrection(IgcCollection):
                                           self.refraction),
                                          att_eps))
             orb.parameter = p0
-            line_scale_index = len(p0) + 0
-            sample_scale_index = len(p0) + 1
-            ref_index = len(p0) + 2
-            j = self.parameter_index_to_subset_index(line_scale_index)
-            if(j is not None):
-                scale_eps = 0.01
-                # Duplicate camera through pickling
-                cam = cPickle.loads(cPickle.dumps(self.cam))
-                cam.line_scale = cam.line_scale + scale_eps
-                cache["igc"].append((j,OrbitDataImageGroundConnection
-                                     (orb.orbit_data(tm), cam, 
-                                      self.demv,
-                                      self.image(image_index),
-                                      self.image_title(image_index),
-                                      self.refraction),
-                                     scale_eps))
-            j = self.parameter_index_to_subset_index(sample_scale_index)
-            if(j is not None):
-                scale_eps = 0.01
-                # Duplicate camera through pickling
-                cam = cPickle.loads(cPickle.dumps(self.cam))
-                cam.sample_scale = cam.sample_scale + scale_eps
-                cache["igc"].append((j,OrbitDataImageGroundConnection
-                                     (orb.orbit_data(tm), cam, 
-                                      self.demv,
-                                      self.image(image_index),
-                                      self.image_title(image_index),
-                                      self.refraction),
-                                     scale_eps))
+            ref_index = len(p0) + 0
             j = self.parameter_index_to_subset_index(ref_index)
             if(j is not None):
                 ref_eps = 0.1

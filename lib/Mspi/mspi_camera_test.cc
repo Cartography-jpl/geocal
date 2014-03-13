@@ -8,6 +8,13 @@ using namespace GeoCal;
 BOOST_FIXTURE_TEST_SUITE(mspi_camera, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
+  // Note that this test data *does* not have the backward and forward
+  // calculation calculation the same. Doing something like
+  // frame_coordinate(sc_look_vector(FC,b),b) gives differences on the
+  // order of 2 pixels. This is an artifact of the test data, and do
+  // not indicate a problem with the code. But this data matches the
+  // unit tests from the original code, so we want to use this to make
+  // sure we match.
   MspiCamera cam(test_data_dir() + "mspi_camera_test.config");
   BOOST_CHECK(cam.file_name() == test_data_dir() + "mspi_camera_test.config");
   BOOST_CHECK_CLOSE(cam.epsilon(), 0, 1e-8);
@@ -50,15 +57,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
   
   for(int b = 0; b < cam.number_band(); ++b) {
     FrameCoordinate fc = cam.frame_coordinate(slv, b);
-    ScLookVector slv2 = cam.sc_look_vector(fc, b);
     BOOST_CHECK_CLOSE(fc.line, line_expect[b], 1e-8);
     BOOST_CHECK_CLOSE(fc.sample, sample_expect[b], 1e-8);
-    // Because the paraxial inversion is only approximately a full
-    // inversion, we don't get back exactly what we put in. Not sure
-    // how much of a problem this might be, but it is what we have.
-    BOOST_CHECK_CLOSE(slv2.direction()[0], slv.direction()[0], 1.5);
-    BOOST_CHECK_CLOSE(slv2.direction()[1], slv.direction()[1], 1.5);
-    BOOST_CHECK_CLOSE(slv2.direction()[2], slv.direction()[2], 1.5);
   }
 
   // Results from old code unit test.
@@ -91,9 +91,6 @@ BOOST_AUTO_TEST_CASE(basic_test)
     ScLookVector slv = cam.sc_look_vector(fc, b);
     for(int i = 0; i < 3; ++i)
       BOOST_CHECK_CLOSE(slv.direction()[i], direction_expect[b][i], 1e-8);
-    // FrameCoordinate fc2 = cam.frame_coordinate(slv, b);
-    // BOOST_CHECK(fabs(fc2.line - fc.line) < 0.01);
-    // BOOST_CHECK(fabs(fc2.sample - fc.sample) < 0.01);
   }
 
   double direction_expect2[nband][3] = {
@@ -125,9 +122,6 @@ BOOST_AUTO_TEST_CASE(basic_test)
     ScLookVector slv = cam.sc_look_vector(fc, b);
     for(int i = 0; i < 3; ++i)
       BOOST_CHECK_CLOSE(slv.direction()[i], direction_expect2[b][i], 1e-8);
-    // FrameCoordinate fc2 = cam.frame_coordinate(slv, b);
-    // BOOST_CHECK(fabs(fc2.line - fc.line) < 0.01);
-    // BOOST_CHECK(fabs(fc2.sample - fc.sample) < 0.01);
   }
 
   double direction_expect3[nband][3] = {
@@ -158,18 +152,21 @@ BOOST_AUTO_TEST_CASE(basic_test)
     ScLookVector slv = cam.sc_look_vector(fc, b);
     for(int i = 0; i < 3; ++i)
       BOOST_CHECK_CLOSE(slv.direction()[i], direction_expect3[b][i], 1e-8);
-    // FrameCoordinate fc2 = cam.frame_coordinate(slv, b);
-    // BOOST_CHECK(fabs(fc2.line - fc.line) < 0.01);
-    // BOOST_CHECK(fabs(fc2.sample - fc.sample) < 0.01);
   }
-
-
-  // std::cerr << cam.frame_coordinate(cam.sc_look_vector(FrameCoordinate(0,0), 0), 0) << "\n";
 }
 
 BOOST_AUTO_TEST_CASE(line_direction_reversed_test)
 {
+  // Note that this test data *does* not have the backward and forward
+  // calculation calculation the same. Doing something like
+  // frame_coordinate(sc_look_vector(FC,b),b) gives differences on the
+  // order of 2 pixels. This is an artifact of the test data, and do
+  // not indicate a problem with the code. But this data matches the
+  // unit tests from the original code, so we want to use this to make
+  // sure we match.
+
   // This is like mspi_camera_test.config, but line direction is reversed.
+
   MspiCamera cam(test_data_dir() + "mspi_camera_test.config2");
   const int nband = 7;
 
@@ -203,6 +200,38 @@ BOOST_AUTO_TEST_CASE(line_direction_reversed_test)
     for(int i = 0; i < 3; ++i)
       BOOST_CHECK_CLOSE(slv.direction()[i], direction_expect[b][i], 1e-8);
   }
+}
+
+BOOST_AUTO_TEST_CASE(airmisr_roundtrip_test)
+{
+  // Unlike the test data in mspi_camera_test.config, this is a real
+  // camera model and we expect the round trip to work.
+  MspiCamera cam(test_data_dir() + "AIRMSPI_CONFIG_CAMERA_MODEL_0003.config");
+  for(int b = 0; b < cam.number_band(); ++b)
+    for(double ln = -1.0; ln < 1.05; ln += 0.5) {
+      for(int smp = 0; smp < cam.number_sample(b); smp += 10) {
+	FrameCoordinate fc(ln, smp);
+	FrameCoordinate fc2 = cam.frame_coordinate(cam.sc_look_vector(fc, b), b);
+	BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
+	BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
+      }
+    }
+}
+
+BOOST_AUTO_TEST_CASE(gndmisr_roundtrip_test)
+{
+  // Unlike the test data in mspi_camera_test.config, this is a real
+  // camera model and we expect the round trip to work.
+  MspiCamera cam(test_data_dir() + "GndMSPI_CONFIG_CAMERA_MODEL_V004.config");
+  for(int b = 0; b < cam.number_band(); ++b)
+    for(double ln = -1.0; ln < 1.05; ln += 0.5) {
+      for(int smp = 0; smp < cam.number_sample(b); smp += 10) {
+	FrameCoordinate fc(ln, smp);
+	FrameCoordinate fc2 = cam.frame_coordinate(cam.sc_look_vector(fc, b), b);
+	BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
+	BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
+      }
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

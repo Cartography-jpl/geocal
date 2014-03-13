@@ -160,7 +160,7 @@ class Ipi(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args): 
         """
         Ipi::Ipi(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
-        PushBroomCamera > &Cam, int Band, Time Tmin, Time Tmax, const
+        Camera > &Cam, int Band, Time Tmin, Time Tmax, const
         boost::shared_ptr< TimeTable > &Tt=boost::shared_ptr< TimeTable >(),
         double Local_time_window_size=5.0, double Root_min_separation=30.0,
         double Time_tolerance=40.8e-3 *1.0/16)
@@ -261,7 +261,7 @@ class Ipi(geocal_swig.generic_object.GenericObject):
 
     def _v_camera(self):
         """
-        boost::shared_ptr<PushBroomCamera> GeoCal::Ipi::camera_ptr() const
+        boost::shared_ptr<Camera> GeoCal::Ipi::camera_ptr() const
 
         """
         return _ipi.Ipi__v_camera(self)

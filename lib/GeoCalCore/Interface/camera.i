@@ -10,8 +10,7 @@
 %import "frame_coordinate.i"
 %import "look_vector.i"
 %geocal_shared_ptr(GeoCal::Camera);
-%geocal_shared_ptr(GeoCal::PushBroomCamera);
-%geocal_shared_ptr(GeoCal::SimplePushBroomCamera);
+%geocal_shared_ptr(GeoCal::SimpleCamera);
 
 namespace GeoCal {
 class Camera : public GenericObject {
@@ -34,17 +33,14 @@ public:
   std::string print_to_string() const;
 };
 
-class PushBroomCamera : public Camera {
+class SimpleCamera : public Camera {
 public:
-  virtual int number_line(int Band) const;
-};
-
-class SimplePushBroomCamera : public PushBroomCamera {
-public:
-  SimplePushBroomCamera(double Beta=58*Constant::deg_to_rad, double
+  SimpleCamera(double Beta=58*Constant::deg_to_rad, double
      Delta=-2.7*Constant::deg_to_rad, double Epsilon=0, 
      double Focal=123.8e-3, double
-     Pitch_line=18e-6, double Pitch_sample=21e-6, int Number_sample=1504);
+	       Pitch_line=18e-6, double Pitch_sample=21e-6, int Number_line = 1,
+	       int Number_sample=1504);
+  virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
@@ -57,7 +53,8 @@ public:
   %python_attribute(line_pitch, double)
   %python_attribute(sample_pitch, double)
   %pickle_init(1, self.beta, self.delta, self.epsilon, self.focal_length,
-	       self.line_pitch, self.sample_pitch, self.number_sample(0))
+	       self.line_pitch, self.sample_pitch, 
+	       self.number_line(0), self.number_sample(0))
 };
 }
 %template(Vector_Camera) std::vector<boost::shared_ptr<GeoCal::Camera> >;

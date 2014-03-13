@@ -10,7 +10,7 @@ BOOST_AUTO_TEST_CASE(basic)
   Time tmin = Time::parse_time("2003-01-01T11:11:00Z");
   KeplerOrbit orb;
   boost::shared_ptr<OrbitData> od = orb.orbit_data(tmin);
-  boost::shared_ptr<Camera> cam(new SimplePushBroomCamera);
+  boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
   boost::shared_ptr<RasterImage> img(new MemoryRasterImage(cam->number_line(0),
 						   cam->number_sample(0)));
@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(include_refraction)
   Time tmin = Time::parse_time("2003-01-01T11:11:00Z");
   KeplerOrbit orb;
   boost::shared_ptr<OrbitData> od = orb.orbit_data(tmin);
-  boost::shared_ptr<Camera> cam(new SimplePushBroomCamera);
+  boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
   boost::shared_ptr<RasterImage> img(new MemoryRasterImage(cam->number_line(0),
 						   cam->number_sample(0)));

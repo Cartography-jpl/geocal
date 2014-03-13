@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   Time tmin = Time::parse_time("2003-01-01T11:00:00Z");
   Time tmax = tmin + 10000 * 40.8e-3;
   boost::shared_ptr<Orbit> orb(new KeplerOrbit);
-  boost::shared_ptr<PushBroomCamera> cam(new SimplePushBroomCamera);
+  boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<TimeTable> tt(new ConstantSpacingTimeTable(tmin, tmax));
   int band = 0;
   boost::shared_ptr<Ipi> ipi(new Ipi(orb, cam, band, tmin, tmax, tt));

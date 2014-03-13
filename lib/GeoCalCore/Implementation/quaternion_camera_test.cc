@@ -72,7 +72,7 @@ BOOST_AUTO_TEST_CASE(sc2rpc)
 BOOST_AUTO_TEST_CASE(compare_simple_camera)
 {
   // Make sure we duplicate what a SimpleCamera generates.
-  SimplePushBroomCamera cam1;
+  SimpleCamera cam1;
   QuaternionCamera cam2(quat_rot_z(cam1.epsilon()) *
 			quat_rot_y(cam1.beta()) *
 			quat_rot_x(cam1.delta()),

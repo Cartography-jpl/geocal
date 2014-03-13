@@ -3455,57 +3455,55 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__FrameCoordinate swig_types[3]
 #define SWIGTYPE_p_GeoCal__GenericObject swig_types[4]
 #define SWIGTYPE_p_GeoCal__LookVector swig_types[5]
-#define SWIGTYPE_p_GeoCal__PushBroomCamera swig_types[6]
-#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[7]
-#define SWIGTYPE_p_GeoCal__SimplePushBroomCamera swig_types[8]
-#define SWIGTYPE_p_allocator_type swig_types[9]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[11]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[12]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[13]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[14]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[15]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[16]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[17]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[18]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[19]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[20]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[21]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t swig_types[22]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[23]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[24]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[25]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[26]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVector_t swig_types[27]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PushBroomCamera_t swig_types[28]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[29]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t swig_types[30]
-#define SWIGTYPE_p_char swig_types[31]
-#define SWIGTYPE_p_char_type swig_types[32]
-#define SWIGTYPE_p_difference_type swig_types[33]
-#define SWIGTYPE_p_fmtflags swig_types[34]
-#define SWIGTYPE_p_int_type swig_types[35]
-#define SWIGTYPE_p_iostate swig_types[36]
-#define SWIGTYPE_p_off_type swig_types[37]
-#define SWIGTYPE_p_openmode swig_types[38]
-#define SWIGTYPE_p_p_PyObject swig_types[39]
-#define SWIGTYPE_p_pos_type swig_types[40]
-#define SWIGTYPE_p_seekdir swig_types[41]
-#define SWIGTYPE_p_size_t swig_types[42]
-#define SWIGTYPE_p_size_type swig_types[43]
-#define SWIGTYPE_p_state_type swig_types[44]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Camera_t_t swig_types[45]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[46]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[47]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[48]
-#define SWIGTYPE_p_std__invalid_argument swig_types[49]
-#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[50]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Camera_t_std__allocatorT_boost__shared_ptrT_GeoCal__Camera_t_t_t swig_types[51]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[52]
-#define SWIGTYPE_p_traits_type swig_types[53]
-#define SWIGTYPE_p_value_type swig_types[54]
-static swig_type_info *swig_types[56];
-static swig_module_info swig_module = {swig_types, 55, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[6]
+#define SWIGTYPE_p_GeoCal__SimpleCamera swig_types[7]
+#define SWIGTYPE_p_allocator_type swig_types[8]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[9]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[10]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[11]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[12]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[16]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[17]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[18]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[19]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[20]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t swig_types[21]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[22]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[23]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[24]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[25]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVector_t swig_types[26]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[27]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t swig_types[28]
+#define SWIGTYPE_p_char swig_types[29]
+#define SWIGTYPE_p_char_type swig_types[30]
+#define SWIGTYPE_p_difference_type swig_types[31]
+#define SWIGTYPE_p_fmtflags swig_types[32]
+#define SWIGTYPE_p_int_type swig_types[33]
+#define SWIGTYPE_p_iostate swig_types[34]
+#define SWIGTYPE_p_off_type swig_types[35]
+#define SWIGTYPE_p_openmode swig_types[36]
+#define SWIGTYPE_p_p_PyObject swig_types[37]
+#define SWIGTYPE_p_pos_type swig_types[38]
+#define SWIGTYPE_p_seekdir swig_types[39]
+#define SWIGTYPE_p_size_t swig_types[40]
+#define SWIGTYPE_p_size_type swig_types[41]
+#define SWIGTYPE_p_state_type swig_types[42]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Camera_t_t swig_types[43]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[44]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[45]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[46]
+#define SWIGTYPE_p_std__invalid_argument swig_types[47]
+#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[48]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Camera_t_std__allocatorT_boost__shared_ptrT_GeoCal__Camera_t_t_t swig_types[49]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[50]
+#define SWIGTYPE_p_traits_type swig_types[51]
+#define SWIGTYPE_p_value_type swig_types[52]
+static swig_type_info *swig_types[54];
+static swig_module_info swig_module = {swig_types, 53, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -7140,56 +7138,95 @@ SWIGINTERN PyObject *Camera_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObjec
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_delete_PushBroomCamera(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::PushBroomCamera *arg1 = (GeoCal::PushBroomCamera *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::PushBroomCamera > tempshared1 ;
-  boost::shared_ptr< GeoCal::PushBroomCamera > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  double arg5 ;
+  double arg6 ;
+  int arg7 ;
+  int arg8 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  int val8 ;
+  int ecode8 = 0 ;
+  GeoCal::SimpleCamera *result = 0 ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PushBroomCamera_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_PushBroomCamera" "', argument " "1"" of type '" "GeoCal::PushBroomCamera *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PushBroomCamera > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::PushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::PushBroomCamera * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::PushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::PushBroomCamera * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimpleCamera" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimpleCamera" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SimpleCamera" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SimpleCamera" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_SimpleCamera" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_SimpleCamera" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_SimpleCamera" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_SimpleCamera" "', argument " "8"" of type '" "int""'");
+  } 
+  arg8 = static_cast< int >(val8);
   {
     try {
-      (void)arg1; delete smartarg1;
+      result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<  GeoCal::SimpleCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimpleCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *PushBroomCamera_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__PushBroomCamera_t, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
-
-SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   double arg1 ;
   double arg2 ;
@@ -7212,47 +7249,47 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_0(PyObject *SWIGUNUSE
   int ecode6 = 0 ;
   int val7 ;
   int ecode7 = 0 ;
-  GeoCal::SimplePushBroomCamera *result = 0 ;
+  GeoCal::SimpleCamera *result = 0 ;
   
   if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimplePushBroomCamera" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimpleCamera" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
   ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimplePushBroomCamera" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimpleCamera" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
   ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SimplePushBroomCamera" "', argument " "3"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SimpleCamera" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
   ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SimplePushBroomCamera" "', argument " "4"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SimpleCamera" "', argument " "4"" of type '" "double""'");
   } 
   arg4 = static_cast< double >(val4);
   ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_SimplePushBroomCamera" "', argument " "5"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_SimpleCamera" "', argument " "5"" of type '" "double""'");
   } 
   arg5 = static_cast< double >(val5);
   ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
   if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_SimplePushBroomCamera" "', argument " "6"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_SimpleCamera" "', argument " "6"" of type '" "double""'");
   } 
   arg6 = static_cast< double >(val6);
   ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
   if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_SimplePushBroomCamera" "', argument " "7"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_SimpleCamera" "', argument " "7"" of type '" "int""'");
   } 
   arg7 = static_cast< int >(val7);
   {
     try {
-      result = (GeoCal::SimplePushBroomCamera *)new GeoCal::SimplePushBroomCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
+      result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7260,8 +7297,8 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_0(PyObject *SWIGUNUSE
     }
   }
   {
-    boost::shared_ptr<  GeoCal::SimplePushBroomCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimplePushBroomCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::SimpleCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimpleCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -7269,7 +7306,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   double arg1 ;
   double arg2 ;
@@ -7289,42 +7326,42 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_1(PyObject *SWIGUNUSE
   int ecode5 = 0 ;
   double val6 ;
   int ecode6 = 0 ;
-  GeoCal::SimplePushBroomCamera *result = 0 ;
+  GeoCal::SimpleCamera *result = 0 ;
   
   if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimplePushBroomCamera" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimpleCamera" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
   ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimplePushBroomCamera" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimpleCamera" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
   ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SimplePushBroomCamera" "', argument " "3"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SimpleCamera" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
   ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SimplePushBroomCamera" "', argument " "4"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SimpleCamera" "', argument " "4"" of type '" "double""'");
   } 
   arg4 = static_cast< double >(val4);
   ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_SimplePushBroomCamera" "', argument " "5"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_SimpleCamera" "', argument " "5"" of type '" "double""'");
   } 
   arg5 = static_cast< double >(val5);
   ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
   if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_SimplePushBroomCamera" "', argument " "6"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_SimpleCamera" "', argument " "6"" of type '" "double""'");
   } 
   arg6 = static_cast< double >(val6);
   {
     try {
-      result = (GeoCal::SimplePushBroomCamera *)new GeoCal::SimplePushBroomCamera(arg1,arg2,arg3,arg4,arg5,arg6);
+      result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3,arg4,arg5,arg6);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7332,8 +7369,8 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_1(PyObject *SWIGUNUSE
     }
   }
   {
-    boost::shared_ptr<  GeoCal::SimplePushBroomCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimplePushBroomCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::SimpleCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimpleCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -7341,7 +7378,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   double arg1 ;
   double arg2 ;
@@ -7358,37 +7395,37 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_2(PyObject *SWIGUNUSE
   int ecode4 = 0 ;
   double val5 ;
   int ecode5 = 0 ;
-  GeoCal::SimplePushBroomCamera *result = 0 ;
+  GeoCal::SimpleCamera *result = 0 ;
   
   if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimplePushBroomCamera" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimpleCamera" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
   ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimplePushBroomCamera" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimpleCamera" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
   ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SimplePushBroomCamera" "', argument " "3"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SimpleCamera" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
   ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SimplePushBroomCamera" "', argument " "4"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SimpleCamera" "', argument " "4"" of type '" "double""'");
   } 
   arg4 = static_cast< double >(val4);
   ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_SimplePushBroomCamera" "', argument " "5"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_SimpleCamera" "', argument " "5"" of type '" "double""'");
   } 
   arg5 = static_cast< double >(val5);
   {
     try {
-      result = (GeoCal::SimplePushBroomCamera *)new GeoCal::SimplePushBroomCamera(arg1,arg2,arg3,arg4,arg5);
+      result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3,arg4,arg5);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7396,8 +7433,8 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_2(PyObject *SWIGUNUSE
     }
   }
   {
-    boost::shared_ptr<  GeoCal::SimplePushBroomCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimplePushBroomCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::SimpleCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimpleCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -7405,7 +7442,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   double arg1 ;
   double arg2 ;
@@ -7419,32 +7456,32 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_3(PyObject *SWIGUNUSE
   int ecode3 = 0 ;
   double val4 ;
   int ecode4 = 0 ;
-  GeoCal::SimplePushBroomCamera *result = 0 ;
+  GeoCal::SimpleCamera *result = 0 ;
   
   if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimplePushBroomCamera" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimpleCamera" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
   ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimplePushBroomCamera" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimpleCamera" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
   ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SimplePushBroomCamera" "', argument " "3"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SimpleCamera" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
   ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SimplePushBroomCamera" "', argument " "4"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SimpleCamera" "', argument " "4"" of type '" "double""'");
   } 
   arg4 = static_cast< double >(val4);
   {
     try {
-      result = (GeoCal::SimplePushBroomCamera *)new GeoCal::SimplePushBroomCamera(arg1,arg2,arg3,arg4);
+      result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3,arg4);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7452,8 +7489,8 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_3(PyObject *SWIGUNUSE
     }
   }
   {
-    boost::shared_ptr<  GeoCal::SimplePushBroomCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimplePushBroomCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::SimpleCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimpleCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -7461,7 +7498,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   double arg1 ;
   double arg2 ;
@@ -7472,27 +7509,27 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_4(PyObject *SWIGUNUSE
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
-  GeoCal::SimplePushBroomCamera *result = 0 ;
+  GeoCal::SimpleCamera *result = 0 ;
   
   if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimplePushBroomCamera" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimpleCamera" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
   ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimplePushBroomCamera" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimpleCamera" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
   ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SimplePushBroomCamera" "', argument " "3"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SimpleCamera" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
   {
     try {
-      result = (GeoCal::SimplePushBroomCamera *)new GeoCal::SimplePushBroomCamera(arg1,arg2,arg3);
+      result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7500,8 +7537,8 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_4(PyObject *SWIGUNUSE
     }
   }
   {
-    boost::shared_ptr<  GeoCal::SimplePushBroomCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimplePushBroomCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::SimpleCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimpleCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -7509,7 +7546,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   double arg1 ;
   double arg2 ;
@@ -7517,22 +7554,22 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_5(PyObject *SWIGUNUSE
   int ecode1 = 0 ;
   double val2 ;
   int ecode2 = 0 ;
-  GeoCal::SimplePushBroomCamera *result = 0 ;
+  GeoCal::SimpleCamera *result = 0 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimplePushBroomCamera" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimpleCamera" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
   ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimplePushBroomCamera" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SimpleCamera" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
   {
     try {
-      result = (GeoCal::SimplePushBroomCamera *)new GeoCal::SimplePushBroomCamera(arg1,arg2);
+      result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7540,8 +7577,8 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_5(PyObject *SWIGUNUSE
     }
   }
   {
-    boost::shared_ptr<  GeoCal::SimplePushBroomCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimplePushBroomCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::SimpleCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimpleCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -7549,22 +7586,22 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   double arg1 ;
   double val1 ;
   int ecode1 = 0 ;
-  GeoCal::SimplePushBroomCamera *result = 0 ;
+  GeoCal::SimpleCamera *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimplePushBroomCamera" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_SimpleCamera" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
   {
     try {
-      result = (GeoCal::SimplePushBroomCamera *)new GeoCal::SimplePushBroomCamera(arg1);
+      result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7572,8 +7609,8 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_6(PyObject *SWIGUNUSE
     }
   }
   {
-    boost::shared_ptr<  GeoCal::SimplePushBroomCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimplePushBroomCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::SimpleCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimpleCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -7581,14 +7618,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
   PyObject *resultobj = 0;
-  GeoCal::SimplePushBroomCamera *result = 0 ;
+  GeoCal::SimpleCamera *result = 0 ;
   
   if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
   {
     try {
-      result = (GeoCal::SimplePushBroomCamera *)new GeoCal::SimplePushBroomCamera();
+      result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7596,8 +7633,8 @@ SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera__SWIG_7(PyObject *SWIGUNUSE
     }
   }
   {
-    boost::shared_ptr<  GeoCal::SimplePushBroomCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimplePushBroomCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::SimpleCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SimpleCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -7605,59 +7642,63 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SimplePushBroomCamera(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_SimpleCamera(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[8];
+  PyObject *argv[9];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_SimplePushBroomCamera",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_SimpleCamera",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
-    return _wrap_new_SimplePushBroomCamera__SWIG_7(self, argc, argv);
+    return _wrap_new_SimpleCamera__SWIG_8(self, argc, argv);
   }
   if (argc == 1) {
-    return _wrap_new_SimplePushBroomCamera__SWIG_6(self, argc, argv);
+    return _wrap_new_SimpleCamera__SWIG_7(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_new_SimplePushBroomCamera__SWIG_5(self, argc, argv);
+    return _wrap_new_SimpleCamera__SWIG_6(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_SimplePushBroomCamera__SWIG_4(self, argc, argv);
+    return _wrap_new_SimpleCamera__SWIG_5(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_new_SimplePushBroomCamera__SWIG_3(self, argc, argv);
+    return _wrap_new_SimpleCamera__SWIG_4(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_new_SimplePushBroomCamera__SWIG_2(self, argc, argv);
+    return _wrap_new_SimpleCamera__SWIG_3(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_SimplePushBroomCamera__SWIG_1(self, argc, argv);
+    return _wrap_new_SimpleCamera__SWIG_2(self, argc, argv);
   }
   if (argc == 7) {
-    return _wrap_new_SimplePushBroomCamera__SWIG_0(self, argc, argv);
+    return _wrap_new_SimpleCamera__SWIG_1(self, argc, argv);
+  }
+  if (argc == 8) {
+    return _wrap_new_SimpleCamera__SWIG_0(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_SimplePushBroomCamera'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_SimpleCamera'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::SimplePushBroomCamera::SimplePushBroomCamera(double,double,double,double,double,double,int)\n"
-    "    GeoCal::SimplePushBroomCamera::SimplePushBroomCamera(double,double,double,double,double,double)\n"
-    "    GeoCal::SimplePushBroomCamera::SimplePushBroomCamera(double,double,double,double,double)\n"
-    "    GeoCal::SimplePushBroomCamera::SimplePushBroomCamera(double,double,double,double)\n"
-    "    GeoCal::SimplePushBroomCamera::SimplePushBroomCamera(double,double,double)\n"
-    "    GeoCal::SimplePushBroomCamera::SimplePushBroomCamera(double,double)\n"
-    "    GeoCal::SimplePushBroomCamera::SimplePushBroomCamera(double)\n"
-    "    GeoCal::SimplePushBroomCamera::SimplePushBroomCamera()\n");
+    "    GeoCal::SimpleCamera::SimpleCamera(double,double,double,double,double,double,int,int)\n"
+    "    GeoCal::SimpleCamera::SimpleCamera(double,double,double,double,double,double,int)\n"
+    "    GeoCal::SimpleCamera::SimpleCamera(double,double,double,double,double,double)\n"
+    "    GeoCal::SimpleCamera::SimpleCamera(double,double,double,double,double)\n"
+    "    GeoCal::SimpleCamera::SimpleCamera(double,double,double,double)\n"
+    "    GeoCal::SimpleCamera::SimpleCamera(double,double,double)\n"
+    "    GeoCal::SimpleCamera::SimpleCamera(double,double)\n"
+    "    GeoCal::SimpleCamera::SimpleCamera(double)\n"
+    "    GeoCal::SimpleCamera::SimpleCamera()\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_beta(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SimpleCamera__v_beta(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::SimplePushBroomCamera *arg1 = (GeoCal::SimplePushBroomCamera *) 0 ;
+  GeoCal::SimpleCamera *arg1 = (GeoCal::SimpleCamera *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > tempshared1 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   double result;
   
@@ -7665,22 +7706,22 @@ SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_beta(PyObject *SWIGUNUSEDPAR
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimplePushBroomCamera__v_beta" "', argument " "1"" of type '" "GeoCal::SimplePushBroomCamera const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimpleCamera__v_beta" "', argument " "1"" of type '" "GeoCal::SimpleCamera const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = (double)((GeoCal::SimplePushBroomCamera const *)arg1)->beta();
+      result = (double)((GeoCal::SimpleCamera const *)arg1)->beta();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7694,13 +7735,13 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_delta(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SimpleCamera__v_delta(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::SimplePushBroomCamera *arg1 = (GeoCal::SimplePushBroomCamera *) 0 ;
+  GeoCal::SimpleCamera *arg1 = (GeoCal::SimpleCamera *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > tempshared1 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   double result;
   
@@ -7708,22 +7749,22 @@ SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_delta(PyObject *SWIGUNUSEDPA
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimplePushBroomCamera__v_delta" "', argument " "1"" of type '" "GeoCal::SimplePushBroomCamera const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimpleCamera__v_delta" "', argument " "1"" of type '" "GeoCal::SimpleCamera const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = (double)((GeoCal::SimplePushBroomCamera const *)arg1)->delta();
+      result = (double)((GeoCal::SimpleCamera const *)arg1)->delta();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7737,13 +7778,13 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_epsilon(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SimpleCamera__v_epsilon(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::SimplePushBroomCamera *arg1 = (GeoCal::SimplePushBroomCamera *) 0 ;
+  GeoCal::SimpleCamera *arg1 = (GeoCal::SimpleCamera *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > tempshared1 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   double result;
   
@@ -7751,22 +7792,22 @@ SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_epsilon(PyObject *SWIGUNUSED
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimplePushBroomCamera__v_epsilon" "', argument " "1"" of type '" "GeoCal::SimplePushBroomCamera const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimpleCamera__v_epsilon" "', argument " "1"" of type '" "GeoCal::SimpleCamera const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = (double)((GeoCal::SimplePushBroomCamera const *)arg1)->epsilon();
+      result = (double)((GeoCal::SimpleCamera const *)arg1)->epsilon();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7780,13 +7821,13 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_focal_length(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SimpleCamera__v_focal_length(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::SimplePushBroomCamera *arg1 = (GeoCal::SimplePushBroomCamera *) 0 ;
+  GeoCal::SimpleCamera *arg1 = (GeoCal::SimpleCamera *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > tempshared1 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   double result;
   
@@ -7794,22 +7835,22 @@ SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_focal_length(PyObject *SWIGU
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimplePushBroomCamera__v_focal_length" "', argument " "1"" of type '" "GeoCal::SimplePushBroomCamera const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimpleCamera__v_focal_length" "', argument " "1"" of type '" "GeoCal::SimpleCamera const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = (double)((GeoCal::SimplePushBroomCamera const *)arg1)->focal_length();
+      result = (double)((GeoCal::SimpleCamera const *)arg1)->focal_length();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7823,13 +7864,13 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_line_pitch(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SimpleCamera__v_line_pitch(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::SimplePushBroomCamera *arg1 = (GeoCal::SimplePushBroomCamera *) 0 ;
+  GeoCal::SimpleCamera *arg1 = (GeoCal::SimpleCamera *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > tempshared1 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   double result;
   
@@ -7837,22 +7878,22 @@ SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_line_pitch(PyObject *SWIGUNU
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimplePushBroomCamera__v_line_pitch" "', argument " "1"" of type '" "GeoCal::SimplePushBroomCamera const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimpleCamera__v_line_pitch" "', argument " "1"" of type '" "GeoCal::SimpleCamera const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = (double)((GeoCal::SimplePushBroomCamera const *)arg1)->line_pitch();
+      result = (double)((GeoCal::SimpleCamera const *)arg1)->line_pitch();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7866,13 +7907,13 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_sample_pitch(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SimpleCamera__v_sample_pitch(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::SimplePushBroomCamera *arg1 = (GeoCal::SimplePushBroomCamera *) 0 ;
+  GeoCal::SimpleCamera *arg1 = (GeoCal::SimpleCamera *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > tempshared1 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SimpleCamera const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   double result;
   
@@ -7880,22 +7921,22 @@ SWIGINTERN PyObject *_wrap_SimplePushBroomCamera__v_sample_pitch(PyObject *SWIGU
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimplePushBroomCamera__v_sample_pitch" "', argument " "1"" of type '" "GeoCal::SimplePushBroomCamera const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SimpleCamera__v_sample_pitch" "', argument " "1"" of type '" "GeoCal::SimpleCamera const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = (double)((GeoCal::SimplePushBroomCamera const *)arg1)->sample_pitch();
+      result = (double)((GeoCal::SimpleCamera const *)arg1)->sample_pitch();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7909,30 +7950,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_SimplePushBroomCamera(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_SimpleCamera(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::SimplePushBroomCamera *arg1 = (GeoCal::SimplePushBroomCamera *) 0 ;
+  GeoCal::SimpleCamera *arg1 = (GeoCal::SimpleCamera *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera > tempshared1 ;
-  boost::shared_ptr< GeoCal::SimplePushBroomCamera > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::SimpleCamera > tempshared1 ;
+  boost::shared_ptr< GeoCal::SimpleCamera > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SimplePushBroomCamera" "', argument " "1"" of type '" "GeoCal::SimplePushBroomCamera *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SimpleCamera" "', argument " "1"" of type '" "GeoCal::SimpleCamera *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::SimplePushBroomCamera > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::SimpleCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::SimplePushBroomCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::SimplePushBroomCamera * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::SimpleCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SimpleCamera * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
@@ -7951,14 +7992,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *SimplePushBroomCamera_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *SimpleCamera_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *SimplePushBroomCamera_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *SimpleCamera_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   return SWIG_Python_InitShadowInstance(args);
 }
 
@@ -10223,49 +10264,45 @@ static PyMethodDef SwigMethods[] = {
 		"Destructor. \n"
 		""},
 	 { (char *)"Camera_swigregister", Camera_swigregister, METH_VARARGS, NULL},
-	 { (char *)"delete_PushBroomCamera", (PyCFunction)_wrap_delete_PushBroomCamera, METH_O, (char *)"\n"
-		"virtual GeoCal::PushBroomCamera::~PushBroomCamera()\n"
-		"\n"
-		""},
-	 { (char *)"PushBroomCamera_swigregister", PushBroomCamera_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_SimplePushBroomCamera", _wrap_new_SimplePushBroomCamera, METH_VARARGS, (char *)"\n"
-		"SimplePushBroomCamera::SimplePushBroomCamera(double Beta=58 *Constant::deg_to_rad, double Delta=-2.7\n"
+	 { (char *)"new_SimpleCamera", _wrap_new_SimpleCamera, METH_VARARGS, (char *)"\n"
+		"SimpleCamera::SimpleCamera(double Beta=58 *Constant::deg_to_rad, double Delta=-2.7\n"
 		"*Constant::deg_to_rad, double Epsilon=0, double Focal=123.8e-3, double\n"
-		"line_pitch=18e-6, double sample_pitch=21e-6, int Number_sample=1504)\n"
-		"This creates SimplePushBroomCamera with the given data.\n"
+		"line_pitch=18e-6, double sample_pitch=21e-6, int Number_line=1, int\n"
+		"Number_sample=1504)\n"
+		"This creates SimpleCamera with the given data.\n"
 		"\n"
 		"The default data is for the nominal MISR DF, red band. \n"
 		""},
-	 { (char *)"SimplePushBroomCamera__v_beta", (PyCFunction)_wrap_SimplePushBroomCamera__v_beta, METH_O, (char *)"\n"
-		"double GeoCal::SimplePushBroomCamera::beta() const\n"
+	 { (char *)"SimpleCamera__v_beta", (PyCFunction)_wrap_SimpleCamera__v_beta, METH_O, (char *)"\n"
+		"double GeoCal::SimpleCamera::beta() const\n"
 		"\n"
 		""},
-	 { (char *)"SimplePushBroomCamera__v_delta", (PyCFunction)_wrap_SimplePushBroomCamera__v_delta, METH_O, (char *)"\n"
-		"double GeoCal::SimplePushBroomCamera::delta() const\n"
+	 { (char *)"SimpleCamera__v_delta", (PyCFunction)_wrap_SimpleCamera__v_delta, METH_O, (char *)"\n"
+		"double GeoCal::SimpleCamera::delta() const\n"
 		"\n"
 		""},
-	 { (char *)"SimplePushBroomCamera__v_epsilon", (PyCFunction)_wrap_SimplePushBroomCamera__v_epsilon, METH_O, (char *)"\n"
-		"double GeoCal::SimplePushBroomCamera::epsilon() const\n"
+	 { (char *)"SimpleCamera__v_epsilon", (PyCFunction)_wrap_SimpleCamera__v_epsilon, METH_O, (char *)"\n"
+		"double GeoCal::SimpleCamera::epsilon() const\n"
 		"\n"
 		""},
-	 { (char *)"SimplePushBroomCamera__v_focal_length", (PyCFunction)_wrap_SimplePushBroomCamera__v_focal_length, METH_O, (char *)"\n"
-		"double GeoCal::SimplePushBroomCamera::focal_length() const\n"
+	 { (char *)"SimpleCamera__v_focal_length", (PyCFunction)_wrap_SimpleCamera__v_focal_length, METH_O, (char *)"\n"
+		"double GeoCal::SimpleCamera::focal_length() const\n"
 		"\n"
 		""},
-	 { (char *)"SimplePushBroomCamera__v_line_pitch", (PyCFunction)_wrap_SimplePushBroomCamera__v_line_pitch, METH_O, (char *)"\n"
-		"double GeoCal::SimplePushBroomCamera::line_pitch() const\n"
+	 { (char *)"SimpleCamera__v_line_pitch", (PyCFunction)_wrap_SimpleCamera__v_line_pitch, METH_O, (char *)"\n"
+		"double GeoCal::SimpleCamera::line_pitch() const\n"
 		"\n"
 		""},
-	 { (char *)"SimplePushBroomCamera__v_sample_pitch", (PyCFunction)_wrap_SimplePushBroomCamera__v_sample_pitch, METH_O, (char *)"\n"
-		"double GeoCal::SimplePushBroomCamera::sample_pitch() const\n"
+	 { (char *)"SimpleCamera__v_sample_pitch", (PyCFunction)_wrap_SimpleCamera__v_sample_pitch, METH_O, (char *)"\n"
+		"double GeoCal::SimpleCamera::sample_pitch() const\n"
 		"\n"
 		""},
-	 { (char *)"delete_SimplePushBroomCamera", (PyCFunction)_wrap_delete_SimplePushBroomCamera, METH_O, (char *)"\n"
-		"virtual GeoCal::SimplePushBroomCamera::~SimplePushBroomCamera()\n"
+	 { (char *)"delete_SimpleCamera", (PyCFunction)_wrap_delete_SimpleCamera, METH_O, (char *)"\n"
+		"virtual GeoCal::SimpleCamera::~SimpleCamera()\n"
 		"\n"
 		""},
-	 { (char *)"SimplePushBroomCamera_swigregister", SimplePushBroomCamera_swigregister, METH_VARARGS, NULL},
-	 { (char *)"SimplePushBroomCamera_swiginit", SimplePushBroomCamera_swiginit, METH_VARARGS, NULL},
+	 { (char *)"SimpleCamera_swigregister", SimpleCamera_swigregister, METH_VARARGS, NULL},
+	 { (char *)"SimpleCamera_swiginit", SimpleCamera_swiginit, METH_VARARGS, NULL},
 	 { (char *)"Vector_Camera_iterator", (PyCFunction)_wrap_Vector_Camera_iterator, METH_O, NULL},
 	 { (char *)"Vector_Camera___nonzero__", (PyCFunction)_wrap_Vector_Camera___nonzero__, METH_O, NULL},
 	 { (char *)"Vector_Camera___bool__", (PyCFunction)_wrap_Vector_Camera___bool__, METH_O, NULL},
@@ -10328,26 +10365,12 @@ static void *_p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector(void 
 static void *_p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector *)  ((GeoCal::CartesianFixedLookVector *) x));
 }
-static void *_p_GeoCal__PushBroomCameraTo_p_GeoCal__Camera(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Camera *)  ((GeoCal::PushBroomCamera *) x));
+static void *_p_GeoCal__SimpleCameraTo_p_GeoCal__Camera(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::Camera *)  ((GeoCal::SimpleCamera *) x));
 }
-static void *_p_GeoCal__SimplePushBroomCameraTo_p_GeoCal__Camera(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Camera *) (GeoCal::PushBroomCamera *) ((GeoCal::SimplePushBroomCamera *) x));
-}
-static void *_p_GeoCal__SimplePushBroomCameraTo_p_GeoCal__PushBroomCamera(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::PushBroomCamera *)  ((GeoCal::SimplePushBroomCamera *) x));
-}
-static void *_p_boost__shared_ptrT_GeoCal__PushBroomCamera_tTo_p_boost__shared_ptrT_GeoCal__Camera_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__Camera_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Camera >(*(boost::shared_ptr< GeoCal::PushBroomCamera > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_tTo_p_boost__shared_ptrT_GeoCal__Camera_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Camera >(*(boost::shared_ptr< GeoCal::SimplePushBroomCamera > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_tTo_p_boost__shared_ptrT_GeoCal__PushBroomCamera_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::PushBroomCamera >(*(boost::shared_ptr< GeoCal::SimplePushBroomCamera > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::Camera >(*(boost::shared_ptr< GeoCal::SimpleCamera > *)x);
 }
 static void *_p_GeoCal__LookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::LookVector *) x));
@@ -10367,11 +10390,8 @@ static void *_p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject(void *x, int *
 static void *_p_GeoCal__CameraTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::Camera *) x));
 }
-static void *_p_GeoCal__PushBroomCameraTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::Camera *) ((GeoCal::PushBroomCamera *) x));
-}
-static void *_p_GeoCal__SimplePushBroomCameraTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::Camera *)(GeoCal::PushBroomCamera *) ((GeoCal::SimplePushBroomCamera *) x));
+static void *_p_GeoCal__SimpleCameraTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::Camera *) ((GeoCal::SimpleCamera *) x));
 }
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_istream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
@@ -10391,13 +10411,9 @@ static void *_p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCa
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::Camera > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__PushBroomCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::PushBroomCamera > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::SimplePushBroomCamera > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::SimpleCamera > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__LookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -10417,9 +10433,8 @@ static swig_type_info _swigt__p_GeoCal__CartesianInertialLookVector = {"_p_GeoCa
 static swig_type_info _swigt__p_GeoCal__FrameCoordinate = {"_p_GeoCal__FrameCoordinate", "GeoCal::FrameCoordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObject", "GeoCal::GenericObject *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__LookVector = {"_p_GeoCal__LookVector", "GeoCal::LookVector *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__PushBroomCamera = {"_p_GeoCal__PushBroomCamera", "GeoCal::PushBroomCamera *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ScLookVector = {"_p_GeoCal__ScLookVector", "GeoCal::ScLookVector *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__SimplePushBroomCamera = {"_p_GeoCal__SimplePushBroomCamera", "GeoCal::SimplePushBroomCamera *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__SimpleCamera = {"_p_GeoCal__SimpleCamera", "GeoCal::SimpleCamera *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_2_t = {"_p_blitz__ArrayT_bool_2_t", "blitz::Array< bool,2 > *", 0, 0, (void*)0, 0};
@@ -10439,9 +10454,8 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLook
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t", "boost::shared_ptr< GeoCal::FrameCoordinate > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_p_boost__shared_ptrT_GeoCal__GenericObject_t", "boost::shared_ptr< GeoCal::GenericObject > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__LookVector_t = {"_p_boost__shared_ptrT_GeoCal__LookVector_t", "boost::shared_ptr< GeoCal::LookVector > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__PushBroomCamera_t = {"_p_boost__shared_ptrT_GeoCal__PushBroomCamera_t", "boost::shared_ptr< GeoCal::PushBroomCamera > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t = {"_p_boost__shared_ptrT_GeoCal__ScLookVector_t", "boost::shared_ptr< GeoCal::ScLookVector > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t = {"_p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t", "boost::shared_ptr< GeoCal::SimplePushBroomCamera > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t = {"_p_boost__shared_ptrT_GeoCal__SimpleCamera_t", "boost::shared_ptr< GeoCal::SimpleCamera > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
@@ -10474,9 +10488,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__FrameCoordinate,
   &_swigt__p_GeoCal__GenericObject,
   &_swigt__p_GeoCal__LookVector,
-  &_swigt__p_GeoCal__PushBroomCamera,
   &_swigt__p_GeoCal__ScLookVector,
-  &_swigt__p_GeoCal__SimplePushBroomCamera,
+  &_swigt__p_GeoCal__SimpleCamera,
   &_swigt__p_allocator_type,
   &_swigt__p_blitz__ArrayT_bool_1_t,
   &_swigt__p_blitz__ArrayT_bool_2_t,
@@ -10496,9 +10509,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__PushBroomCamera_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t,
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
@@ -10525,15 +10537,14 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_value_type,
 };
 
-static swig_cast_info _swigc__p_GeoCal__Camera[] = {  {&_swigt__p_GeoCal__Camera, 0, 0, 0},  {&_swigt__p_GeoCal__PushBroomCamera, _p_GeoCal__PushBroomCameraTo_p_GeoCal__Camera, 0, 0},  {&_swigt__p_GeoCal__SimplePushBroomCamera, _p_GeoCal__SimplePushBroomCameraTo_p_GeoCal__Camera, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__Camera[] = {  {&_swigt__p_GeoCal__Camera, 0, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__Camera, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianFixedLookVector[] = {  {&_swigt__p_GeoCal__CartesianFixedLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianInertialLookVector[] = {  {&_swigt__p_GeoCal__CartesianInertialLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__FrameCoordinate[] = {  {&_swigt__p_GeoCal__FrameCoordinate, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__LookVector, _p_GeoCal__LookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinate, _p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__PushBroomCamera, _p_GeoCal__PushBroomCameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__SimplePushBroomCamera, _p_GeoCal__SimplePushBroomCameraTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__LookVector, _p_GeoCal__LookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinate, _p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__LookVector[] = {  {&_swigt__p_GeoCal__LookVector, 0, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__PushBroomCamera[] = {  {&_swigt__p_GeoCal__PushBroomCamera, 0, 0, 0},  {&_swigt__p_GeoCal__SimplePushBroomCamera, _p_GeoCal__SimplePushBroomCameraTo_p_GeoCal__PushBroomCamera, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ScLookVector[] = {  {&_swigt__p_GeoCal__ScLookVector, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__SimplePushBroomCamera[] = {  {&_swigt__p_GeoCal__SimplePushBroomCamera, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__SimpleCamera[] = {  {&_swigt__p_GeoCal__SimpleCamera, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -10547,15 +10558,14 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_1_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_2_t[] = {  {&_swigt__p_blitz__ArrayT_int_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_3_t[] = {  {&_swigt__p_blitz__ArrayT_int_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_4_t[] = {  {&_swigt__p_blitz__ArrayT_int_4_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Camera_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, _p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_tTo_p_boost__shared_ptrT_GeoCal__Camera_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__PushBroomCamera_t, _p_boost__shared_ptrT_GeoCal__PushBroomCamera_tTo_p_boost__shared_ptrT_GeoCal__Camera_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Camera_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__Camera_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, _p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__PushBroomCamera_t, _p_boost__shared_ptrT_GeoCal__PushBroomCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t, _p_boost__shared_ptrT_GeoCal__LookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t, _p_boost__shared_ptrT_GeoCal__LookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__PushBroomCamera_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, _p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_tTo_p_boost__shared_ptrT_GeoCal__PushBroomCamera_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__PushBroomCamera_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__SimpleCamera_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -10588,9 +10598,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__FrameCoordinate,
   _swigc__p_GeoCal__GenericObject,
   _swigc__p_GeoCal__LookVector,
-  _swigc__p_GeoCal__PushBroomCamera,
   _swigc__p_GeoCal__ScLookVector,
-  _swigc__p_GeoCal__SimplePushBroomCamera,
+  _swigc__p_GeoCal__SimpleCamera,
   _swigc__p_allocator_type,
   _swigc__p_blitz__ArrayT_bool_1_t,
   _swigc__p_blitz__ArrayT_bool_2_t,
@@ -10610,9 +10619,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,
   _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   _swigc__p_boost__shared_ptrT_GeoCal__LookVector_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__PushBroomCamera_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__SimplePushBroomCamera_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__SimpleCamera_t,
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,
@@ -11327,12 +11335,8 @@ SWIG_init(void) {
   boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Camera >("boost::shared_ptr< GeoCal::Camera > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::PushBroomCamera))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::PushBroomCamera >("boost::shared_ptr< GeoCal::PushBroomCamera > *"));
-  
-  
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::SimplePushBroomCamera))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::SimplePushBroomCamera >("boost::shared_ptr< GeoCal::SimplePushBroomCamera > *"));
+  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::SimpleCamera))] =
+  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::SimpleCamera >("boost::shared_ptr< GeoCal::SimpleCamera > *"));
   
   SWIG_Python_SetConstant(d, "Camera_FORWARD",SWIG_From_int(static_cast< int >(GeoCal::Camera::FORWARD)));
   SWIG_Python_SetConstant(d, "Camera_AFTWARD",SWIG_From_int(static_cast< int >(GeoCal::Camera::AFTWARD)));

@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE(refraction_test)
   Time tmin = Time::parse_time("2003-01-01T11:11:00Z");
   KeplerOrbit orb;
   boost::shared_ptr<OrbitData> od = orb.orbit_data(tmin);
-  SimplePushBroomCamera cam;
+  SimpleCamera cam;
   FrameCoordinate fc(0, 1504 / 2);
   SimpleDem dem;
   boost::shared_ptr<GroundCoordinate> gc = od->surface_intersect(cam, fc, dem);

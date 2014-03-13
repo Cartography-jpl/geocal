@@ -5,7 +5,7 @@ def test_odgc():
     orb = KeplerOrbit()
     tm = Time.parse_time("2003-01-01T11:11:00Z")
     od = orb.orbit_data(tm)
-    cam = SimplePushBroomCamera()
+    cam = SimpleCamera()
     dem = SimpleDem(100)
     img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
     igc = OrbitDataImageGroundConnection(od, cam, dem, img)

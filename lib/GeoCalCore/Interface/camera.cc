@@ -6,15 +6,15 @@
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
-/// This creates SimplePushBroomCamera with the given data. The
+/// This creates SimpleCamera with the given data. The
 /// default data is for the nominal MISR DF, red band.
 //-----------------------------------------------------------------------
-SimplePushBroomCamera::SimplePushBroomCamera(double Beta, double
-     Delta, double Epsilon, 
-     double Focal, double
-     line_pitch, double sample_pitch, int Number_sample)
+SimpleCamera::SimpleCamera
+(double Beta, double Delta, double Epsilon, double Focal,
+ double line_pitch, double sample_pitch, int Number_line, int Number_sample)
   : beta_(Beta), delta_(Delta), epsilon_(Epsilon), focal_(Focal),
     line_pitch_(line_pitch), sample_pitch_(sample_pitch), 
+    nline(Number_line),
     nsample(Number_sample) 
 {
   blitz::Array<double, 2> rz(3, 3), rx(3, 3), ry(3, 3);
@@ -48,7 +48,7 @@ SimplePushBroomCamera::SimplePushBroomCamera(double Beta, double
 /// camera (i.e., it is not seen).
 //-----------------------------------------------------------------------
 
-FrameCoordinate SimplePushBroomCamera::frame_coordinate(const ScLookVector& Sl, 
+FrameCoordinate SimpleCamera::frame_coordinate(const ScLookVector& Sl, 
 							int Band) const
 {
   range_check(Band, 0, number_band());
@@ -70,7 +70,7 @@ FrameCoordinate SimplePushBroomCamera::frame_coordinate(const ScLookVector& Sl,
 /// camera has infinite extent.
 //-----------------------------------------------------------------------
 
-ScLookVector SimplePushBroomCamera::sc_look_vector(const FrameCoordinate& F, 
+ScLookVector SimpleCamera::sc_look_vector(const FrameCoordinate& F, 
 						   int Band) const
 {
   range_check(Band, 0, number_band());
@@ -87,14 +87,15 @@ ScLookVector SimplePushBroomCamera::sc_look_vector(const FrameCoordinate& F,
 /// Print to a stream.
 //-----------------------------------------------------------------------
 
-void SimplePushBroomCamera::print(std::ostream& Os) const
+void SimpleCamera::print(std::ostream& Os) const
 {
-  Os << "SimplePushBroomCamera:\n"
+  Os << "SimpleCamera:\n"
      << " beta:          " << beta_ * Constant::rad_to_deg << " deg\n"
      << " delta:         " << delta_ * Constant::rad_to_deg << " deg\n"
      << " epsilon:       " << epsilon_ * Constant::rad_to_deg << " deg\n"
      << " Focal Length:  " << focal_ / 1e-3 << " mm\n"
      << " Line Pitch:    " << line_pitch_ / 1e-6 << " micrometer\n"
      << " Sample Pitch:  " << sample_pitch_ / 1e-6 << " micrometer\n"
+     << " Number Line:   " << nline << "\n"
      << " Number Sample: " << nsample << "\n";
 }

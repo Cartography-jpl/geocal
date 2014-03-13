@@ -17,7 +17,7 @@ using namespace GeoCal;
 //-----------------------------------------------------------------------
 
 Ipi::Ipi(const boost::shared_ptr<Orbit>& Orb, const 
-	 boost::shared_ptr<PushBroomCamera>& Cam, int Band,
+	 boost::shared_ptr<Camera>& Cam, int Band,
 	 Time Tmin, Time Tmax, const boost::shared_ptr<TimeTable>& Tt,
 	 double Local_time_window_size,
 	 double Root_min_separation, 
@@ -27,6 +27,8 @@ Ipi::Ipi(const boost::shared_ptr<Orbit>& Orb, const
     root_min_separation_(Root_min_separation), 
     time_tolerance_(Time_tolerance)
 {
+  if(Cam->number_line(Band) != 1)
+    throw Exception("I think we only want to do an IPI with a pushbroom camera with 1 line. If this is wrong, you can remove this exception");
 }
 
 //-----------------------------------------------------------------------
@@ -115,7 +117,7 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 {
   class IpiEq: public DFunctor {
   public:
-    IpiEq(const boost::shared_ptr<PushBroomCamera>& Cam,
+    IpiEq(const boost::shared_ptr<Camera>& Cam,
 	  const boost::shared_ptr<Orbit>& Orb,
 	  const boost::shared_ptr<CartesianFixed> P,
 	  Time Tmin,
@@ -160,7 +162,7 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
       return lv;
     }
   private:
-    boost::shared_ptr<PushBroomCamera> cam;
+    boost::shared_ptr<Camera> cam;
     boost::shared_ptr<Orbit> orb;
     boost::shared_ptr<CartesianFixed> p;
     int band;

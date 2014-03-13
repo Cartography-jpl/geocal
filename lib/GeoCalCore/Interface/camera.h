@@ -152,33 +152,20 @@ public:
 };
 
 /****************************************************************//**
-  This is a camera specialized to 1 line per band.
-*******************************************************************/
-
-class PushBroomCamera : public Camera {
-public:
-  virtual ~PushBroomCamera() {}
-
-//-----------------------------------------------------------------------
-/// Number of lines in camera for given band.
-//-----------------------------------------------------------------------
-
-  virtual int number_line(int Band) const { return 1; }
-};
-
-/****************************************************************//**
-  This is a simple PushBroomCamera. It is not intended as a realistic
+  This is a simple Camera. It is not intended as a realistic
   camera model, but rather as supplying a simple class to use for
   testing. The defaults are for the nominal MISR DF camera, red band.
 *******************************************************************/
 
-class SimplePushBroomCamera : public PushBroomCamera {
+class SimpleCamera : public Camera {
 public:
-  SimplePushBroomCamera(double Beta=58*Constant::deg_to_rad, double
+  SimpleCamera(double Beta=58*Constant::deg_to_rad, double
      Delta=-2.7*Constant::deg_to_rad, double Epsilon=0, 
      double Focal=123.8e-3, double
-     line_pitch=18e-6, double sample_pitch=21e-6, int Number_sample=1504);
-  virtual ~SimplePushBroomCamera() {}
+     line_pitch=18e-6, double sample_pitch=21e-6, 
+     int Number_line = 1, 
+     int Number_sample=1504);
+  virtual ~SimpleCamera() {}
 
 //-----------------------------------------------------------------------
 /// This gives the camera direction. 
@@ -192,6 +179,12 @@ public:
 //-----------------------------------------------------------------------
 
   virtual int number_band() const {return 1;}
+
+//-----------------------------------------------------------------------
+/// Number of lines in camera for given band.
+//-----------------------------------------------------------------------
+
+  virtual int number_line(int Band) const {return nline;}
 
 //-----------------------------------------------------------------------
 /// Number of samples in camera for given band.
@@ -211,7 +204,7 @@ public:
   double sample_pitch() const {return sample_pitch_;}
 private:
   double beta_, delta_, epsilon_, focal_, line_pitch_, sample_pitch_;
-  int nsample;
+  int nline,nsample;
   double r[3][3];		///< Rotation matrix.
 };
 

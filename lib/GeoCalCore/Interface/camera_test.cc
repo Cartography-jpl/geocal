@@ -2,11 +2,11 @@
 #include "camera.h"
 using namespace GeoCal;
 
-BOOST_FIXTURE_TEST_SUITE(simple_pushbroom_camera, GlobalFixture)
+BOOST_FIXTURE_TEST_SUITE(simple_camera, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(basic_test)
 {
-  SimplePushBroomCamera c;
+  SimpleCamera c;
   FrameCoordinate f1(1, 2);
   ScLookVector sl = c.sc_look_vector(f1, 0);
   FrameCoordinate f2 = c.frame_coordinate(sl, 0);

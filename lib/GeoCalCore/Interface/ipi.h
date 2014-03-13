@@ -47,7 +47,7 @@ namespace GeoCal {
 class Ipi : public Printable<Ipi> {
 public:
   Ipi(const boost::shared_ptr<Orbit>& Orb, const 
-      boost::shared_ptr<PushBroomCamera>& Cam,
+      boost::shared_ptr<Camera>& Cam,
       int Band,
       Time Tmin, Time Tmax, 
       const boost::shared_ptr<TimeTable>& Tt = boost::shared_ptr<TimeTable>(),
@@ -79,9 +79,9 @@ public:
 /// Camera that we are using.
 //-----------------------------------------------------------------------
   
-  const PushBroomCamera& camera() const {return *cam;}
+  const Camera& camera() const {return *cam;}
 
-  boost::shared_ptr<PushBroomCamera> camera_ptr() const {return cam;}
+  boost::shared_ptr<Camera> camera_ptr() const {return cam;}
 
 //-----------------------------------------------------------------------
 /// TimeTable that we are using.
@@ -130,7 +130,7 @@ public:
 
 private:
   boost::shared_ptr<Orbit> orb;
-  boost::shared_ptr<PushBroomCamera> cam;
+  boost::shared_ptr<Camera> cam;
   int band_;			 ///< Camera band to use.
   boost::shared_ptr<TimeTable> tt;
   Time min_time_;		 ///< Minimum time we search around

@@ -297,22 +297,9 @@ Camera.__str__ = new_instancemethod(_camera.Camera___str__,None,Camera)
 Camera_swigregister = _camera.Camera_swigregister
 Camera_swigregister(Camera)
 
-class PushBroomCamera(Camera):
+class SimpleCamera(Camera):
     """
-    This is a camera specialized to 1 line per band.
-
-    C++ includes: camera.h 
-    """
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
-    __repr__ = _swig_repr
-    __swig_destroy__ = _camera.delete_PushBroomCamera
-PushBroomCamera_swigregister = _camera.PushBroomCamera_swigregister
-PushBroomCamera_swigregister(PushBroomCamera)
-
-class SimplePushBroomCamera(PushBroomCamera):
-    """
-    This is a simple PushBroomCamera.
+    This is a simple Camera.
 
     It is not intended as a realistic camera model, but rather as
     supplying a simple class to use for testing. The defaults are for the
@@ -324,20 +311,21 @@ class SimplePushBroomCamera(PushBroomCamera):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        SimplePushBroomCamera::SimplePushBroomCamera(double Beta=58 *Constant::deg_to_rad, double Delta=-2.7
+        SimpleCamera::SimpleCamera(double Beta=58 *Constant::deg_to_rad, double Delta=-2.7
         *Constant::deg_to_rad, double Epsilon=0, double Focal=123.8e-3, double
-        line_pitch=18e-6, double sample_pitch=21e-6, int Number_sample=1504)
-        This creates SimplePushBroomCamera with the given data.
+        line_pitch=18e-6, double sample_pitch=21e-6, int Number_line=1, int
+        Number_sample=1504)
+        This creates SimpleCamera with the given data.
 
         The default data is for the nominal MISR DF, red band. 
         """
-        _camera.SimplePushBroomCamera_swiginit(self,_camera.new_SimplePushBroomCamera(*args))
+        _camera.SimpleCamera_swiginit(self,_camera.new_SimpleCamera(*args))
     def _v_beta(self):
         """
-        double GeoCal::SimplePushBroomCamera::beta() const
+        double GeoCal::SimpleCamera::beta() const
 
         """
-        return _camera.SimplePushBroomCamera__v_beta(self)
+        return _camera.SimpleCamera__v_beta(self)
 
     @property
     def beta(self):
@@ -345,10 +333,10 @@ class SimplePushBroomCamera(PushBroomCamera):
 
     def _v_delta(self):
         """
-        double GeoCal::SimplePushBroomCamera::delta() const
+        double GeoCal::SimpleCamera::delta() const
 
         """
-        return _camera.SimplePushBroomCamera__v_delta(self)
+        return _camera.SimpleCamera__v_delta(self)
 
     @property
     def delta(self):
@@ -356,10 +344,10 @@ class SimplePushBroomCamera(PushBroomCamera):
 
     def _v_epsilon(self):
         """
-        double GeoCal::SimplePushBroomCamera::epsilon() const
+        double GeoCal::SimpleCamera::epsilon() const
 
         """
-        return _camera.SimplePushBroomCamera__v_epsilon(self)
+        return _camera.SimpleCamera__v_epsilon(self)
 
     @property
     def epsilon(self):
@@ -367,10 +355,10 @@ class SimplePushBroomCamera(PushBroomCamera):
 
     def _v_focal_length(self):
         """
-        double GeoCal::SimplePushBroomCamera::focal_length() const
+        double GeoCal::SimpleCamera::focal_length() const
 
         """
-        return _camera.SimplePushBroomCamera__v_focal_length(self)
+        return _camera.SimpleCamera__v_focal_length(self)
 
     @property
     def focal_length(self):
@@ -378,10 +366,10 @@ class SimplePushBroomCamera(PushBroomCamera):
 
     def _v_line_pitch(self):
         """
-        double GeoCal::SimplePushBroomCamera::line_pitch() const
+        double GeoCal::SimpleCamera::line_pitch() const
 
         """
-        return _camera.SimplePushBroomCamera__v_line_pitch(self)
+        return _camera.SimpleCamera__v_line_pitch(self)
 
     @property
     def line_pitch(self):
@@ -389,10 +377,10 @@ class SimplePushBroomCamera(PushBroomCamera):
 
     def _v_sample_pitch(self):
         """
-        double GeoCal::SimplePushBroomCamera::sample_pitch() const
+        double GeoCal::SimpleCamera::sample_pitch() const
 
         """
-        return _camera.SimplePushBroomCamera__v_sample_pitch(self)
+        return _camera.SimpleCamera__v_sample_pitch(self)
 
     @property
     def sample_pitch(self):
@@ -403,17 +391,17 @@ class SimplePushBroomCamera(PushBroomCamera):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.beta,self.delta,self.epsilon,self.focal_length,self.line_pitch,self.sample_pitch,self.number_sample(0))
+      return _new_from_init, (self.__class__, 1, self.beta,self.delta,self.epsilon,self.focal_length,self.line_pitch,self.sample_pitch,self.number_line(0),self.number_sample(0))
 
-    __swig_destroy__ = _camera.delete_SimplePushBroomCamera
-SimplePushBroomCamera._v_beta = new_instancemethod(_camera.SimplePushBroomCamera__v_beta,None,SimplePushBroomCamera)
-SimplePushBroomCamera._v_delta = new_instancemethod(_camera.SimplePushBroomCamera__v_delta,None,SimplePushBroomCamera)
-SimplePushBroomCamera._v_epsilon = new_instancemethod(_camera.SimplePushBroomCamera__v_epsilon,None,SimplePushBroomCamera)
-SimplePushBroomCamera._v_focal_length = new_instancemethod(_camera.SimplePushBroomCamera__v_focal_length,None,SimplePushBroomCamera)
-SimplePushBroomCamera._v_line_pitch = new_instancemethod(_camera.SimplePushBroomCamera__v_line_pitch,None,SimplePushBroomCamera)
-SimplePushBroomCamera._v_sample_pitch = new_instancemethod(_camera.SimplePushBroomCamera__v_sample_pitch,None,SimplePushBroomCamera)
-SimplePushBroomCamera_swigregister = _camera.SimplePushBroomCamera_swigregister
-SimplePushBroomCamera_swigregister(SimplePushBroomCamera)
+    __swig_destroy__ = _camera.delete_SimpleCamera
+SimpleCamera._v_beta = new_instancemethod(_camera.SimpleCamera__v_beta,None,SimpleCamera)
+SimpleCamera._v_delta = new_instancemethod(_camera.SimpleCamera__v_delta,None,SimpleCamera)
+SimpleCamera._v_epsilon = new_instancemethod(_camera.SimpleCamera__v_epsilon,None,SimpleCamera)
+SimpleCamera._v_focal_length = new_instancemethod(_camera.SimpleCamera__v_focal_length,None,SimpleCamera)
+SimpleCamera._v_line_pitch = new_instancemethod(_camera.SimpleCamera__v_line_pitch,None,SimpleCamera)
+SimpleCamera._v_sample_pitch = new_instancemethod(_camera.SimpleCamera__v_sample_pitch,None,SimpleCamera)
+SimpleCamera_swigregister = _camera.SimpleCamera_swigregister
+SimpleCamera_swigregister(SimpleCamera)
 
 class Vector_Camera(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')

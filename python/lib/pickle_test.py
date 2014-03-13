@@ -268,7 +268,7 @@ def test_ipi():
     tmin = Time.parse_time("2003-01-01T11:00:00Z")
     tmax = tmin + 10000 * 40.8e-3
     orb = KeplerOrbit()
-    cam = SimplePushBroomCamera()
+    cam = SimpleCamera()
     tt = ConstantSpacingTimeTable(tmin, tmax)
     ipi = Ipi(orb, cam, 0, tmin, tmax, tt)
     t = cPickle.dumps(ipi.orbit)
@@ -284,7 +284,7 @@ def test_ipi():
     ipi2 = cPickle.loads(t)
 
 def test_simple_camera():
-    c = SimplePushBroomCamera()
+    c = SimpleCamera()
     t = cPickle.dumps(c)
     c2 = cPickle.loads(t)
     assert_almost_equal(c.beta, c2.beta)

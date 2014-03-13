@@ -22,7 +22,7 @@ namespace GeoCal {
 class Ipi : public GenericObject {
 public:
   Ipi(const boost::shared_ptr<Orbit>& Orb, const 
-      boost::shared_ptr<PushBroomCamera>& Cam,
+      boost::shared_ptr<Camera>& Cam,
       int Band,
       Time Tmin, Time Tmax, 
       const boost::shared_ptr<TimeTable>& Tt = boost::shared_ptr<TimeTable>(),
@@ -41,7 +41,7 @@ public:
   %python_attribute(resolution_meter, double)
   std::string print_to_string() const;
   %python_attribute2(orbit, orbit_ptr, boost::shared_ptr<Orbit>)
-  %python_attribute2(camera, camera_ptr, boost::shared_ptr<PushBroomCamera>)
+  %python_attribute2(camera, camera_ptr, boost::shared_ptr<Camera>)
   %python_attribute2(time_table, time_table_ptr, boost::shared_ptr<TimeTable>)
   %python_attribute(band, int)
   %python_attribute(min_time, Time)

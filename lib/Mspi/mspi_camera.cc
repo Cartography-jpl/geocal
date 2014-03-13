@@ -16,12 +16,23 @@ void MspiCamera::read_config_file(const std::string& File_name)
   fname = File_name;
   MspiConfigFile c(File_name);
 
+  //focal_length_; Done
+  //nband_; Done
+  //nline_; Done
+  //nsamp_; Done
+  //line_pitch_; Done
+  //sample_pitch_; Done
+  //principal_point_;
+  frame_convention_ = QuaternionCamera::LINE_IS_Y;
+  //line_direction_; Done
+  //sample_direction_; Done
+
   //-------------------------------------------------------
   // Some hardcoded values that we don't expect to change.
   //-------------------------------------------------------
 
-  dx_ = 0.010;      // center-to-center sample spacing (millimeters)
-  ypitch_ = 0.010;  // pixel size in along row axis (millimeters)
+  sample_pitch_ = 0.010; // center-to-center sample spacing (millimeters)
+  line_pitch_ = 0.010;  // pixel size in along row axis (millimeters)
   dy_ = 0.016;      // center-to-center row spacing (millimeters)
   nrow = 64;	    // Number of rows in CCD
 
@@ -38,8 +49,13 @@ void MspiCamera::read_config_file(const std::string& File_name)
   nline_ = 1;
   nsamp_ = c.value<int>("number_sample");
   nband_ = c.value<int>("number_band");
-  line_direction_ = c.value<int>("direction");
-  pixel_order_ = c.value<int>("pixel_order");
+  line_direction_ = (c.value<int>("direction") == 1 ?
+		       QuaternionCamera::INCREASE_IS_NEGATIVE :
+		       QuaternionCamera::INCREASE_IS_POSITIVE);
+  sample_direction_ = (c.value<int>("pixel_order") == 1 ? 
+		       QuaternionCamera::INCREASE_IS_POSITIVE :
+		       QuaternionCamera::INCREASE_IS_NEGATIVE);
+
   // This doesn't get used for anything yet, so don't bother reading this.
   // inversion_ = c.value<int>("inversion")),
 
@@ -65,11 +81,6 @@ void MspiCamera::read_config_file(const std::string& File_name)
   epsilon_ = 0;
   psi_ = 0;
   theta_ = 0;
-
-  // Confirmed that old code had these angles negative. We need to
-  // verify that this is actually what is intended, but it does match
-  // the old code.
-  cam_to_det = quat_rot("ZYX", -epsilon(), -psi(), -theta());
 
 //--------------------------------------------------------------------------
 // Setup rotation matrix. This is a side effect of setting the parameters.
@@ -98,8 +109,9 @@ void MspiCamera::parameter(const blitz::Array<double, 1>& Parm)
   // Confirmed that old code had these angles negative. We need to
   // verify that this is actually what is intended, but it does match
   // the old code.
-  station_to_det = cam_to_det * conj(quat_rot("ZYXY", -yaw(), -pitch(), 
-					      -roll(), -boresight_angle()));
+  frame_to_sc_ = quat_rot("ZYXYXYZ", -yaw(), -pitch(), 
+			  -roll(), -boresight_angle(), theta(), psi(), 
+			  epsilon());
 }
 
 // See base class for description
@@ -123,7 +135,7 @@ FrameCoordinate MspiCamera::frame_coordinate
 //--------------------------------------------------------
 
   boost::math::quaternion<double> dcs = 
-    station_to_det * Sl.look_quaternion() * conj(station_to_det) / Sl.length();
+    conj(frame_to_sc_) * Sl.look_quaternion() * frame_to_sc_ / Sl.length();
 
 //---------------------------------------------------------
 // Then to paraxial focal plane. Units are millimeters.
@@ -149,8 +161,9 @@ FrameCoordinate MspiCamera::frame_coordinate
 //-------------------------------------------------------------------------
   
   FrameCoordinate res;
-  res.line = line_direction_ * (row_origin(Band) - yf_prime ) / ypitch_;
-  res.sample = (xf_prime / (dx_* pixel_order_) ) + s_origin_;
+  res.sample = s_origin_ + xf_prime / sample_pitch_ * samp_dir();
+  res.line = line_dir() * (-row_origin(Band) / line_pitch_) + 
+    line_dir() * yf_prime / line_pitch_;
   return res;
 }
 
@@ -164,8 +177,9 @@ ScLookVector MspiCamera::sc_look_vector
 /// Convert to real focal plane coordinate (in millimeters)
 //-------------------------------------------------------------------------
 
-  double xf_prime = dx_ * pixel_order_ * (F.sample - s_origin_);
-  double yf_prime = row_origin(Band) - F.line * ypitch_ / line_direction_;
+  double xf_prime = (F.sample - s_origin_) * sample_pitch() * samp_dir();
+  double yf_prime = (F.line - line_dir() * (-row_origin(Band) / line_pitch_)) *
+    line_pitch() * line_dir();
 
 //-------------------------------------------------------------------------
 /// Then to paraxial coordinates.
@@ -181,7 +195,7 @@ ScLookVector MspiCamera::sc_look_vector
 
   boost::math::quaternion<double> dcs(0, -yf, xf, focal_length_);
   dcs /= sqrt(yf * yf + xf * xf + focal_length_ * focal_length_);
-  return ScLookVector(conj(station_to_det) * dcs * station_to_det);
+  return ScLookVector(frame_to_sc_ * dcs * conj(frame_to_sc_));
 }
 
 //-----------------------------------------------------------------------

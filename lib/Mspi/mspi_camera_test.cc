@@ -25,12 +25,12 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(cam.pitch(), 90.0 * Constant::deg_to_rad, 1e-8);
   BOOST_CHECK_CLOSE(cam.roll(), 0, 1e-8);
   BOOST_CHECK_CLOSE(cam.focal_length(), 27.825088, 1e-8);
-  BOOST_CHECK_CLOSE(cam.dx(), 0.010, 1e-8);
-  BOOST_CHECK_CLOSE(cam.ypitch(), 0.010, 1e-8);
+  BOOST_CHECK_CLOSE(cam.line_pitch(), 0.010, 1e-8);
+  BOOST_CHECK_CLOSE(cam.sample_pitch(), 0.010, 1e-8);
   BOOST_CHECK_CLOSE(cam.dy(), 0.016, 1e-8);
   BOOST_CHECK_CLOSE(cam.s_origin(), 767.5, 1e-8);
-  BOOST_CHECK(cam.line_direction() == 1);
-  BOOST_CHECK(cam.pixel_order() == 1);
+  BOOST_CHECK(cam.line_direction() == QuaternionCamera::INCREASE_IS_NEGATIVE);
+  BOOST_CHECK(cam.sample_direction() == QuaternionCamera::INCREASE_IS_POSITIVE);
   BOOST_CHECK(cam.number_band() == 7);
   BOOST_CHECK(cam.number_line(0) == 1);
   BOOST_CHECK(cam.number_sample(0) == 1536);
@@ -54,7 +54,6 @@ BOOST_AUTO_TEST_CASE(basic_test)
 				 8.00175853880662771189e+02,
 				 8.00175853880662771189e+02,
 				 7.98416764444444424953e+02};
-  
   for(int b = 0; b < cam.number_band(); ++b) {
     FrameCoordinate fc = cam.frame_coordinate(slv, b);
     BOOST_CHECK_CLOSE(fc.line, line_expect[b], 1e-8);

@@ -224,7 +224,6 @@ protected:
 				// Indicate if increasing line or
 				// sample goes in positive or negative 
 				// direction.
-private:
   int line_dir() const 
   {return (line_direction_ == INCREASE_IS_POSITIVE ? 1 : -1);}
   int samp_dir() const 

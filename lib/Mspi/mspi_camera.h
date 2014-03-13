@@ -86,24 +86,6 @@ public:
   double roll() const {return roll_;}
 
 //-----------------------------------------------------------------------
-/// Focal length, in millimeters.
-//-----------------------------------------------------------------------
-
-  double focal_length() const {return focal_length_;}
-
-//-----------------------------------------------------------------------
-/// Center-to-center sample spacing (millimeters)
-//-----------------------------------------------------------------------
-
-  double dx() const {return dx_;}
-
-//-----------------------------------------------------------------------
-/// Pixel size in along row axis (millimeters)
-//-----------------------------------------------------------------------
-
-  double ypitch() const {return ypitch_;}
-
-//-----------------------------------------------------------------------
 /// Center-to-center line spacing
 //-----------------------------------------------------------------------
 
@@ -115,20 +97,6 @@ public:
 //-----------------------------------------------------------------------
 
   double s_origin() const {return s_origin_;}
-
-//-----------------------------------------------------------------------
-/// Line direction. +1 is from horizon to zenith, -1 from zenith down
-/// to horizon.
-//-----------------------------------------------------------------------
-
-  int line_direction() const {return line_direction_;}
-
-//-----------------------------------------------------------------------
-/// Pixel order in sample direction, +1 or -1 depending on
-/// orientation.
-//-----------------------------------------------------------------------
-
-  int pixel_order() const {return pixel_order_;}
 
 //-----------------------------------------------------------------------
 /// This is the integration time in seconds.
@@ -153,8 +121,6 @@ public:
 				      int Band) const;
   virtual void print(std::ostream& Os) const;
 private:
-  void calc_cam_to_det();
-
 //-----------------------------------------------------------------------
 /// Return row origin in the real focal plane, for the given band.
 /// (MSPI L1B2 ATB equation 1.1)
@@ -164,34 +130,18 @@ private:
   { return -dy_ * (row_number[Band] + 0.5 - (nrow / 2.0)); }
 
   std::string fname;
-  // Camera focal length, in millimeters.
-  double focal_length_;
   // Center-to-center sample spacing
-  double dx_;
-  // Center-to-center line spacing
   double dy_;
-  // Pixel size in along row axis (millimeters)
-  double ypitch_;
   // Sample origin. In principle this could depend on the row/band
   // number, for now this is constant.
   double s_origin_;
   // Number of samples. In principle this could depend on the row/band
   // number, for now this is constant.
   int nrow;
-  // Line direction. +1 is from horizon to zenith, -1 from zenith down
-  // to horizon.
-  int line_direction_;
-  // Pixel order in sample direction, +1 or -1 depending on
-  // orientation.
-  int pixel_order_;
   // Camera angles, in radians
   double epsilon_, psi_, theta_, boresight_angle_, yaw_, pitch_, roll_;
   // Give the row number for each band.
   std::vector<int> row_number;
-  // Go from detector to camera coordinates
-  boost::math::quaternion<double> cam_to_det;
-  // Go from detector to station coordinates
-  boost::math::quaternion<double> station_to_det;
   // Transformation to and from the paraxial coordinates
   boost::shared_ptr<MspiParaxialTransform> paraxial_transform_;
 };

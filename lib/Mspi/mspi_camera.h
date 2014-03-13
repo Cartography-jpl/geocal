@@ -1,6 +1,6 @@
 #ifndef MSPI_CAMERA_H
 #define MSPI_CAMERA_H
-#include "camera.h"
+#include "quaternion_camera.h"
 #include "mspi_paraxial_transform.h"
 #include <boost/math/quaternion.hpp>
 #include <boost/shared_ptr.hpp>
@@ -15,7 +15,7 @@ namespace GeoCal {
   process", Rev A.1, April 4, 2012.
 *******************************************************************/
 
-class MspiCamera: public Camera {
+class MspiCamera: public QuaternionCamera {
 public:
 //-----------------------------------------------------------------------
 /// Constructor, which creates a MspiCamera from the given
@@ -144,24 +144,6 @@ public:
     return 0.0355; 
   }
 
-//-----------------------------------------------------------------------
-/// Number of bands in camera. 
-//-----------------------------------------------------------------------
-
-  virtual int number_band() const { return nband; }
-
-//-----------------------------------------------------------------------
-/// Number of lines in camera for given band.
-//-----------------------------------------------------------------------
-
-  virtual int number_line(int Band) const { return 1; }
-
-//-----------------------------------------------------------------------
-/// Number of samples in camera for given band.
-//-----------------------------------------------------------------------
-
-  virtual int number_sample(int Band) const { return nsamp; }
-
   virtual blitz::Array<double, 1> parameter() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
@@ -195,10 +177,6 @@ private:
   double s_origin_;
   // Number of samples. In principle this could depend on the row/band
   // number, for now this is constant.
-  int nsamp;
-  // Number of bands
-  int nband;
-  // Number of rows
   int nrow;
   // Line direction. +1 is from horizon to zenith, -1 from zenith down
   // to horizon.

@@ -18,6 +18,7 @@ ArgusCamera::ArgusCamera(double Yaw, double Pitch, double Roll,
   yaw_(Yaw)
 {
   focal_length_ = Focal_length;
+  nband_ = 1;
   nline_ = 3744;
   nsamp_ = 5616;
   frame_convention_ = QuaternionCamera::LINE_IS_X;

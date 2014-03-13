@@ -35,8 +35,9 @@ void MspiCamera::read_config_file(const std::string& File_name)
   roll_ = c.value<double>("camera_roll") * Constant::deg_to_rad;
   focal_length_ = c.value<double>("focal_length");
   s_origin_ = c.value<double>("origin");
-  nsamp = c.value<int>("number_sample");
-  nband = c.value<int>("number_band");
+  nline_ = 1;
+  nsamp_ = c.value<int>("number_sample");
+  nband_ = c.value<int>("number_band");
   line_direction_ = c.value<int>("direction");
   pixel_order_ = c.value<int>("pixel_order");
   // This doesn't get used for anything yet, so don't bother reading this.

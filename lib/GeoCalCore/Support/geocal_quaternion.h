@@ -157,6 +157,20 @@ inline boost::math::quaternion<double> quat_rot(const std::string& Rot,
 }
 
 //-----------------------------------------------------------------------
+/// Do a rotation about the seven axis given.
+//-----------------------------------------------------------------------
+
+inline boost::math::quaternion<double> quat_rot(const std::string& Rot, 
+double A1, double A2, double A3, double A4, double A5, double A6, double A7)
+{
+  if(Rot.size() != 7) 
+    throw Exception("Rotation string must be 7 characters long");
+  return quat_rot_i(A1, Rot[0]) * quat_rot_i(A2, Rot[1]) * 
+    quat_rot_i(A3, Rot[2]) * quat_rot_i(A4, Rot[3]) * quat_rot_i(A5, Rot[4]) *
+    quat_rot_i(A6, Rot[5]) * quat_rot_i(A7, Rot[6]);
+}
+
+//-----------------------------------------------------------------------
 /// Convert a quaternion to a rotation matrix.
 //-----------------------------------------------------------------------
 

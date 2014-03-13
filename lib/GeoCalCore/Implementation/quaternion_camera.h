@@ -50,6 +50,7 @@ public:
 		   FrameDirection Line_direction = INCREASE_IS_POSITIVE,
 		   FrameDirection Sample_direction = INCREASE_IS_POSITIVE)
     : focal_length_(Focal_length),
+      nband_(1),
       nline_(Number_line),
       nsamp_(Number_sample),
       line_pitch_(Line_pitch),
@@ -72,21 +73,21 @@ public:
 /// least for now), so this is set to 1.
 //-----------------------------------------------------------------------
 
-  virtual int number_band() const { return 1; }
+  virtual int number_band() const { return nband_; }
 
 //-----------------------------------------------------------------------
 /// Number of lines in camera for given band.
 //-----------------------------------------------------------------------
 
   virtual int number_line(int Band) const
-  { range_check(Band, 0, 1); return nline_; }
+  { range_check(Band, 0, number_band()); return nline_; }
 
 //-----------------------------------------------------------------------
 /// Number of samples in camera for given band.
 //-----------------------------------------------------------------------
 
   virtual int number_sample(int Band) const
-  { range_check(Band, 0, 1); return nsamp_; }
+  { range_check(Band, 0, number_band()); return nsamp_; }
 
 //-----------------------------------------------------------------------
 /// Focal length, in mm.
@@ -208,6 +209,7 @@ protected:
 //-----------------------------------------------------------------------
   QuaternionCamera() {}
   double focal_length_;		// Focal length, in mm.
+  int nband_;			// Number of bands in camera.
   int nline_;			// Number of lines in camera.
   int nsamp_;			// Number of samples in camera.
   double line_pitch_;		// CCD pitch, in mm

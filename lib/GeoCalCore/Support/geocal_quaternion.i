@@ -27,5 +27,9 @@ namespace GeoCal {
   boost::math::quaternion<double> quat_rot(const std::string& Rot, 
 					   double A1, double A2, double A3, 
 					   double A4, double A5, double A6);
+  boost::math::quaternion<double> quat_rot(const std::string& Rot, 
+					   double A1, double A2, double A3, 
+					   double A4, double A5, double A6,
+					   double A7);
  }
 

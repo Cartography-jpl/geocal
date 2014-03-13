@@ -13,13 +13,15 @@ using namespace GeoCal;
 
 ArgusCamera::ArgusCamera(double Yaw, double Pitch, double Roll, 
 			 double Focal_length)
-  : focal_length_(Focal_length),
-    nline_(3744),
-    nsamp_(5616),
-    roll_(Roll),
+: roll_(Roll),
     pitch_(Pitch),
     yaw_(Yaw)
 {
+  focal_length_ = Focal_length;
+  nline_ = 3744;
+  nsamp_ = 5616;
+  frame_convention_ = QuaternionCamera::LINE_IS_X;
+  
   // For now, hardwire this to fit a sensor size of 36.0 x 24.0 mm.
   // This is the actual image sensor size according to canon, and may
   // be more accurate than what we are reading from the jpeg. We'll
@@ -28,23 +30,9 @@ ArgusCamera::ArgusCamera(double Yaw, double Pitch, double Roll,
   line_pitch_ = 24.0 / number_line(0);
   sample_pitch_ = 36.0 / number_sample(0);
 
-// If you don't happen to remember off the top of your head, you
-// rotate an angle a around and axis u by the quaternion cos(a / 2) +
-// sin(a / 2) * u.
-
-  boost::math::quaternion<double> rx(cos(Roll * Constant::deg_to_rad / 2),
-				     sin(Roll * Constant::deg_to_rad / 2),
-				     0,
-				     0);
-  boost::math::quaternion<double> ry(cos(Pitch * Constant::deg_to_rad / 2),
-				     0,
-				     sin(Pitch * Constant::deg_to_rad / 2),
-				     0);
-  boost::math::quaternion<double> rz(cos(Yaw * Constant::deg_to_rad / 2),
-				     0,
-				     0,
-				     sin(Yaw * Constant::deg_to_rad / 2));
-  frame_to_sc = rz * ry * rx;
+  frame_to_sc_ = quat_rot("ZYX", Yaw * Constant::deg_to_rad, 
+			  Pitch * Constant::deg_to_rad,
+			 Roll * Constant::deg_to_rad);
 }
 
 //-----------------------------------------------------------------------
@@ -61,7 +49,7 @@ FrameCoordinate ArgusCamera::frame_coordinate(const ScLookVector& Sl,
   range_check(Band, 0, 1);
 
   // Just reverse of sc_look_vector.
-  boost::math::quaternion<double> fv = conj(frame_to_sc) * Sl.look_quaternion() * frame_to_sc;
+  boost::math::quaternion<double> fv = conj(frame_to_sc_) * Sl.look_quaternion() * frame_to_sc_;
   FrameCoordinate fc;
   fc.line = number_line(0) / 2.0 -
     focal_length() * (fv.R_component_2() / fv.R_component_4()) / line_pitch();
@@ -90,7 +78,7 @@ ScLookVector ArgusCamera::sc_look_vector(const FrameCoordinate& F,
   ScLookVector sl(-(F.line - number_line(0) / 2.0) * line_pitch(),
 		  (F.sample - number_sample(0) / 2.0) * sample_pitch(),
 		  focal_length());
-  sl.look_quaternion(frame_to_sc * sl.look_quaternion() * conj(frame_to_sc));
+  sl.look_quaternion(frame_to_sc_ * sl.look_quaternion() * conj(frame_to_sc_));
   return sl;
 }
 

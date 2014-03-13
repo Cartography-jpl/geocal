@@ -1,6 +1,5 @@
 #include "orbit.h"
 #include "eci.h"
-#include "geocal_matrix.h"
 #include "functor.h"
 #include "geocal_gsl_root.h"
 #include "constant.h"

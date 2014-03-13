@@ -1,5 +1,5 @@
 #include "camera.h"
-#include "geocal_matrix.h"
+#include "geocal_quaternion.h"
 #include "geocal_exception.h"
 #include <blitz/array.h>
 
@@ -17,27 +17,7 @@ SimpleCamera::SimpleCamera
     nline(Number_line),
     nsample(Number_sample) 
 {
-  blitz::Array<double, 2> rz(3, 3), rx(3, 3), ry(3, 3);
-  blitz::Array<double, 2> rm(&r[0][0], blitz::shape(3, 3), 
-			     blitz::neverDeleteData);
-  double cbeta = cos(beta_);
-  double cdelta = cos(delta_);
-  double cepsilon = cos(epsilon_);
-  double sbeta = sin(beta_);
-  double sdelta = sin(delta_);
-  double sepsilon = sin(epsilon_);
-  rz =  cepsilon, sepsilon, 0,
-       -sepsilon, cepsilon, 0,
-               0,        0, 1;
-  rx = 1,       0,      0,
-       0,  cdelta, sdelta,
-       0, -sdelta, cdelta;
-  ry = cbeta, 0, -sbeta,
-           0, 1,      0,
-       sbeta, 0,  cbeta;
-  using namespace blitz::tensor;
-  blitz::Array<double, 2> t(sum(ry(i, k) * rz(k, j), k));
-  rm = sum(rx(i, k) * t(k, j), k);
+  frame_to_sc = quat_rot("ZYX", epsilon_, beta_, delta_);
 }
 
 //-----------------------------------------------------------------------
@@ -52,14 +32,16 @@ FrameCoordinate SimpleCamera::frame_coordinate(const ScLookVector& Sl,
 							int Band) const
 {
   range_check(Band, 0, number_band());
-  boost::array<double, 3> t;
-  mul(r, Sl.look_vector, t);
-  FrameCoordinate fres;
-  fres.line = (focal_ * t[0] / t[2]) / line_pitch_ + 
-    number_line(Band) / 2.0; 
-  fres.sample = (focal_ * t[1] / t[2]) / sample_pitch_ + 
-    number_sample(Band) / 2.0;
-  return fres;
+  boost::math::quaternion<double> fv = 
+    conj(frame_to_sc) * Sl.look_quaternion() * frame_to_sc;
+  FrameCoordinate fc;
+  fc.line = number_line(Band) / 2.0 +
+    focal_ * (fv.R_component_2() / fv.R_component_4()) / 
+    line_pitch_;
+  fc.sample = number_sample(Band) / 2.0 +
+    focal_ * (fv.R_component_3() / fv.R_component_4()) / 
+    sample_pitch_;
+  return fc;
 }
 
 //-----------------------------------------------------------------------
@@ -74,13 +56,12 @@ ScLookVector SimpleCamera::sc_look_vector(const FrameCoordinate& F,
 						   int Band) const
 {
   range_check(Band, 0, number_band());
-  boost::array<double, 3> t;
-  t[0] = (F.line - number_line(Band) / 2.0) * line_pitch_;
-  t[1] = (F.sample - number_sample(Band) / 2.0) * sample_pitch_;
-  t[2] = focal_;
-  ScLookVector res;
-  mul_t(r, t, res.look_vector);
-  return res;
+  ScLookVector sl((F.line - number_line(Band) / 2.0) * line_pitch_,
+		  (F.sample - number_sample(Band) / 2.0) * sample_pitch_,
+		  focal_);
+  sl.look_quaternion(frame_to_sc * sl.look_quaternion() * 
+		     conj(frame_to_sc));
+  return sl;
 }
 
 //-----------------------------------------------------------------------

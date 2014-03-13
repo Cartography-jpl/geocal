@@ -4,6 +4,7 @@
 #include "frame_coordinate.h"
 #include "look_vector.h"
 #include <blitz/array.h>
+#include <boost/math/quaternion.hpp>
 #include <vector>
 
 namespace GeoCal {
@@ -205,7 +206,7 @@ public:
 private:
   double beta_, delta_, epsilon_, focal_, line_pitch_, sample_pitch_;
   int nline,nsample;
-  double r[3][3];		///< Rotation matrix.
+  boost::math::quaternion<double> frame_to_sc;
 };
 
 }

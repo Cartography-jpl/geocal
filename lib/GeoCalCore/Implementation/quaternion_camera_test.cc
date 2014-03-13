@@ -4,7 +4,6 @@
 #include "geodetic.h"
 #include "eci_tod.h"
 #include "orbit.h"
-#include "geocal_matrix.h"
 using namespace GeoCal;
 
 BOOST_FIXTURE_TEST_SUITE(quaternion_camera, GlobalFixture)

@@ -22,14 +22,6 @@ namespace GeoCal {
 
   We support both conventions, depending on the setting of the
   frame_convention.
-
-  Note that in addition to the line and sample pitch, we supply a 
-  line and sample scale. You could achieve exactly the same behavior
-  either changing the scale, or just directly changing pitch. The
-  scale is supplied as a convenience, it is a more natural thing to
-  vary if you are calibrating the camera. If you wish, you can 
-  leave the scale fixed at 1.0 and ignore it if you don't want to use
-  it. 
 *******************************************************************/
 class QuaternionCamera : public Camera {
 public:
@@ -156,6 +148,7 @@ public:
 /// Frame convention, indicates if Line is in X or Y direction in
 /// frame coordinates.
 //-----------------------------------------------------------------------
+
   FrameConvention frame_convention() const { return frame_convention_; }
 
 //-----------------------------------------------------------------------
@@ -169,7 +162,12 @@ public:
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
   virtual void print(std::ostream& Os) const;
-private:
+protected:
+//-----------------------------------------------------------------------
+// Constructor for use by derived classes. Derived classes should make
+// sure to fill in all the values
+//-----------------------------------------------------------------------
+  QuaternionCamera() {}
   double focal_length_;		// Focal length, in mm.
   int nline_;			// Number of lines in camera.
   int nsamp_;			// Number of samples in camera.

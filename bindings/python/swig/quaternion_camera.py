@@ -122,15 +122,19 @@ import geocal_swig.camera
 import geocal_swig.generic_object
 class QuaternionCamera(geocal_swig.camera.Camera):
     """
-    This is a simple frame camera.
+    A lot of cameras follow the model of "rotate into the detector space,
+    do a nonlinear correction".
 
-    This doesn't account for any lens distortion, we model this as a
-    pinhole camera. The camera has an orientation to the spacecraft frame
-    by a given quaternion.
+    This class supports this by handling the rotation of a ScLookVector
+    and conversion to FrameCoordinate (and vice versa). This base class
+    doesn't model any nonlinear corrections - we just model a pinhole. But
+    derived classes can override the dcs_to_focal_plane and
+    focal_plane_to_xcs functions to put in whatever functionality is
+    desired.
 
     There are 2 conventions used for the frame coordinates. The convention
-    used by other Cameras we have implemented is that the line direction
-    is +x, and the sample direction is +y.
+    used by some cameras we have implemented is that the line direction is
+    +x, and the sample direction is +y.
 
     However, another convention is that line goes in the +y direction and
     sample goes in +x direction. This is what was used in the VICAR
@@ -138,12 +142,12 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     other convention, it is both a rotation and a reflection (so the
     chirality is different).
 
+    We support both conventions, depending on the setting of the
+    frame_convention.
+
     In addition to either x or y direction for line, we can have
     increasing line go in the positive direction or negative direction.
     Likewise for sample.
-
-    We support both conventions, depending on the setting of the
-    frame_convention.
 
     C++ includes: quaternion_camera.h 
     """
@@ -185,20 +189,12 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def focal_length(self, value):
       self._v_focal_length(value)
 
-    def _v_principal_point(self, *args):
+    def principal_point(self, *args):
         """
-        void GeoCal::QuaternionCamera::principal_point(const FrameCoordinate &Fc)
+        void GeoCal::QuaternionCamera::principal_point(int B, const FrameCoordinate &Fc)
         Set principal point of camera. 
         """
-        return _quaternion_camera.QuaternionCamera__v_principal_point(self, *args)
-
-    @property
-    def principal_point(self):
-        return self._v_principal_point()
-
-    @principal_point.setter
-    def principal_point(self, value):
-      self._v_principal_point(value)
+        return _quaternion_camera.QuaternionCamera_principal_point(self, *args)
 
     def _v_line_pitch(self, *args):
         """
@@ -295,11 +291,11 @@ class QuaternionCamera(geocal_swig.camera.Camera):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.frame_to_sc,self.number_line(0),self.number_sample(0),self.line_pitch,self.sample_pitch,self.focal_length,self.principal_point,self.frame_convention,self.line_direction,self.sample_direction)
+      return _new_from_init, (self.__class__, 1, self.frame_to_sc,self.number_line(0),self.number_sample(0),self.line_pitch,self.sample_pitch,self.focal_length,self.principal_point(0),self.frame_convention,self.line_direction,self.sample_direction)
 
     __swig_destroy__ = _quaternion_camera.delete_QuaternionCamera
 QuaternionCamera._v_focal_length = new_instancemethod(_quaternion_camera.QuaternionCamera__v_focal_length,None,QuaternionCamera)
-QuaternionCamera._v_principal_point = new_instancemethod(_quaternion_camera.QuaternionCamera__v_principal_point,None,QuaternionCamera)
+QuaternionCamera.principal_point = new_instancemethod(_quaternion_camera.QuaternionCamera_principal_point,None,QuaternionCamera)
 QuaternionCamera._v_line_pitch = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_pitch,None,QuaternionCamera)
 QuaternionCamera._v_sample_pitch = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_pitch,None,QuaternionCamera)
 QuaternionCamera._v_frame_convention = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_convention,None,QuaternionCamera)

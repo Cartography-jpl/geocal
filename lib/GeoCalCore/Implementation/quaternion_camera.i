@@ -25,7 +25,8 @@ public:
   virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
   %python_attribute_with_set(focal_length, double)
-  %python_attribute_with_set(principal_point, FrameCoordinate)
+  const FrameCoordinate& principal_point(int B) const;
+  void principal_point(int B, const FrameCoordinate& Fc);
   %python_attribute_with_set(line_pitch, double)
   %python_attribute_with_set(sample_pitch, double)
   %python_attribute_with_set(frame_convention, FrameConvention)  
@@ -36,9 +37,18 @@ public:
 					   int Band) const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
+protected:
+  QuaternionCamera();
+  virtual void dcs_to_focal_plane(int Band,
+				  const boost::math::quaternion<double>& Dcs,
+				  double& Xfp, double& Yfp) const;
+  virtual boost::math::quaternion<double> 
+  focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const;
+
+
   %pickle_init(1, self.frame_to_sc, self.number_line(0), self.number_sample(0), 
 	       self.line_pitch, self.sample_pitch, self.focal_length, 
-	       self.principal_point, 
+	       self.principal_point(0), 
 	       self.frame_convention, self.line_direction, 
 	       self.sample_direction)
 };

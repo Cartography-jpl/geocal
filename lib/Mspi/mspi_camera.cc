@@ -153,36 +153,24 @@ void MspiCamera::dcs_to_focal_plane(int Band,
 }
 
 // See base class for description
-
-ScLookVector MspiCamera::sc_look_vector
-(const FrameCoordinate& F, int Band) const
+boost::math::quaternion<double> 
+MspiCamera::focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const
 {
-  range_check(Band, 0, number_band());
-
 //-------------------------------------------------------------------------
-/// Convert to real focal plane coordinate (in millimeters)
-//-------------------------------------------------------------------------
-
-  double xf_prime = (F.sample - principal_point(Band).sample) * 
-    sample_pitch() * samp_dir();
-  double yf_prime = (F.line - principal_point(Band).line) *
-    line_pitch() * line_dir();
-
-//-------------------------------------------------------------------------
-/// Then to paraxial coordinates.
+/// Convert to paraxial coordinates.
 //-------------------------------------------------------------------------
 
   double xf, yf;
-  paraxial_transform_->real_to_paraxial(row_number[Band], xf_prime, yf_prime,
+  paraxial_transform_->real_to_paraxial(row_number[Band], Xfp, Yfp,
 					xf, yf);
 
 //-------------------------------------------------------------------------
-/// Then to spacecraft coordinates.
+/// Then to detector coordinates look vector.
 //-------------------------------------------------------------------------
 
-  boost::math::quaternion<double> dcs(0, -yf, xf, focal_length_);
-  return ScLookVector(frame_to_sc_ * dcs * conj(frame_to_sc_));
+  return boost::math::quaternion<double>(0, -yf, xf, focal_length());
 }
+
 
 //-----------------------------------------------------------------------
 /// Print to stream.

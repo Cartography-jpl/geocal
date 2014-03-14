@@ -180,8 +180,8 @@ def quat_rot_z(*args):
 def quat_rot(*args):
   """
     boost::math::quaternion<double> GeoCal::quat_rot(const std::string &Rot, double A1, double A2, double A3, double A4,
-    double A5, double A6)
-    Do a rotation about the six axis given. 
+    double A5, double A6, double A7)
+    Do a rotation about the seven axis given. 
     """
   return _geocal_quaternion.quat_rot(*args)
 

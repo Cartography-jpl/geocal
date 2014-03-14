@@ -2,6 +2,41 @@
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
+/// Go from a look vector in the detector coordinate system to X and Y
+/// coordinates in the focal plane.  X and Y should be given in
+/// millimeters.
+///
+/// Note that the look vector is not necessarily normalized (since
+/// some implementation don't depend on this being normalized). If you
+/// need it normalized, you need to do that yourself.
+///
+/// The default implementation is a pinhole camera, derived classed
+/// can override this to add any non-linearity correction.
+//-----------------------------------------------------------------------
+
+void QuaternionCamera::dcs_to_focal_plane
+(int Band, const boost::math::quaternion<double>& Dcs,
+ double& Xfp, double& Yfp) const
+{
+  Xfp = focal_length() * (Dcs.R_component_2() / Dcs.R_component_4());
+  Yfp = focal_length() * (Dcs.R_component_3() / Dcs.R_component_4());
+}
+
+//-----------------------------------------------------------------------
+/// Go from X and Y coordinates in the focal plane to a look vector in
+/// the detector coordinate system to.  X and Y are given in
+/// millimeters.
+///
+/// The default implementation is a pinhole camera, derived classed
+/// can override this to add any non-linearity correction.
+//-----------------------------------------------------------------------
+
+boost::math::quaternion<double> 
+QuaternionCamera::focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const
+{
+}
+
+//-----------------------------------------------------------------------
 /// This converts from ScLookVector to FrameCoordinate for a given
 /// band. Note that the FrameCoordinate may be outside of the range
 /// (0, number_line(band) - 1), (0, number_sample(band) - 1), this
@@ -15,23 +50,21 @@ FrameCoordinate QuaternionCamera::frame_coordinate(const ScLookVector& Sl,
   range_check(Band, 0, number_band());
 
   // Just reverse of sc_look_vector.
-  boost::math::quaternion<double> fv = 
+  boost::math::quaternion<double> dcs = 
     conj(frame_to_sc_) * Sl.look_quaternion() * frame_to_sc_;
+  double xfp, yfp;
+  dcs_to_focal_plane(Band, dcs, xfp, yfp);
   FrameCoordinate fc;
   if(frame_convention_ == LINE_IS_Y) {
-    fc.sample = principal_point(Band).sample +
-      focal_length() * (fv.R_component_2() / fv.R_component_4()) / 
-      sample_pitch() * samp_dir();
+    fc.sample = principal_point(Band).sample + 
+      xfp / sample_pitch() * samp_dir();
     fc.line = principal_point(Band).line +
-      focal_length() * (fv.R_component_3() / fv.R_component_4()) / 
-      line_pitch() * line_dir();
+      yfp / line_pitch() * line_dir();
   } else {
     fc.sample = principal_point(Band).sample +
-      focal_length() * (fv.R_component_3() / fv.R_component_4()) / 
-      sample_pitch() * samp_dir();
+      yfp / sample_pitch() * samp_dir();
     fc.line = principal_point(Band).line +
-      focal_length() * (fv.R_component_2() / fv.R_component_4()) / 
-      line_pitch() * line_dir();
+      xfp / line_pitch() * line_dir();
   }
   return fc;
 }

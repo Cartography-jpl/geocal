@@ -7,12 +7,16 @@
 
 namespace GeoCal {
 /****************************************************************//**
-  This is a simple frame camera. This doesn't account for any lens
-  distortion, we model this as a pinhole camera. The camera has 
-  an orientation to the spacecraft frame by a given quaternion.
+  A lot of cameras follow the model of "rotate into the detector
+  space, do a nonlinear correction". This class supports this by
+  handling the rotation of a ScLookVector and conversion to
+  FrameCoordinate (and vice versa). This base class doesn't model any
+  nonlinear corrections - we just model a pinhole. But derived classes
+  can override the dcs_to_focal_plane and focal_plane_to_xcs functions
+  to put in whatever functionality is desired.
 
   There are 2 conventions used for the frame coordinates. The
-  convention used by other Cameras we have implemented is that the
+  convention used by some cameras we have implemented is that the
   line direction is +x, and the sample direction is +y.
 
   However, another convention is that line goes in the +y direction
@@ -21,12 +25,12 @@ namespace GeoCal {
   rotation from the other convention, it is both a rotation and a
   reflection (so the chirality is different).
 
+  We support both conventions, depending on the setting of the
+  frame_convention.
+
   In addition to either x or y direction for line, we can have
   increasing line go in the positive direction or negative direction.
   Likewise for sample.
-
-  We support both conventions, depending on the setting of the
-  frame_convention.
 *******************************************************************/
 class QuaternionCamera : public Camera {
 public:
@@ -212,6 +216,11 @@ protected:
 // sure to fill in all the values
 //-----------------------------------------------------------------------
   QuaternionCamera() {}
+  virtual void dcs_to_focal_plane(int Band,
+				  const boost::math::quaternion<double>& Dcs,
+				  double& Xfp, double& Yfp) const;
+  virtual boost::math::quaternion<double> 
+  focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const;
   double focal_length_;		// Focal length, in mm.
   int nband_;			// Number of bands in camera.
   int nline_;			// Number of lines in camera.

@@ -34,6 +34,7 @@ void QuaternionCamera::dcs_to_focal_plane
 boost::math::quaternion<double> 
 QuaternionCamera::focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const
 {
+  return boost::math::quaternion<double>(0, Xfp, Yfp, focal_length());
 }
 
 //-----------------------------------------------------------------------
@@ -81,25 +82,20 @@ ScLookVector QuaternionCamera::sc_look_vector(const FrameCoordinate& F,
 					      int Band) const
 {
   range_check(Band, 0, number_band());
+  double xfp, yfp;
   if(frame_convention_ == LINE_IS_Y) {
-    ScLookVector sl((F.sample - principal_point(Band).sample) * sample_pitch()  
-		    * samp_dir(),
-		    (F.line - principal_point(Band).line) * line_pitch()
-		    * line_dir(),
-		    focal_length());
-    sl.look_quaternion(frame_to_sc_ * sl.look_quaternion() * 
-		       conj(frame_to_sc_));
-    return sl;
+    xfp = (F.sample - principal_point(Band).sample) * sample_pitch() * 
+      samp_dir();
+    yfp = (F.line - principal_point(Band).line) * line_pitch()
+      * line_dir();
   } else {
-    ScLookVector sl((F.line - principal_point(Band).line) * line_pitch() 
-		    * line_dir(),
-		    (F.sample - principal_point(Band).sample) * sample_pitch() 
-		    * samp_dir(),
-		    focal_length());
-    sl.look_quaternion(frame_to_sc_ * sl.look_quaternion() * 
-		       conj(frame_to_sc_));
-    return sl;
+    yfp = (F.sample - principal_point(Band).sample) * sample_pitch() * 
+      samp_dir();
+    xfp = (F.line - principal_point(Band).line) * line_pitch()
+      * line_dir();
   }
+  return ScLookVector(frame_to_sc_ * focal_plane_to_dcs(Band, xfp, yfp) *
+		      conj(frame_to_sc_));
 }
 
 //-----------------------------------------------------------------------

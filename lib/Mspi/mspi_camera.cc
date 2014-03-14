@@ -157,50 +157,6 @@ void MspiCamera::dcs_to_focal_plane(int Band,
 					Xfp, Yfp);
 }
 
-// // See base class for description
-// FrameCoordinate MspiCamera::frame_coordinate
-// (const ScLookVector& Sl, int Band) const
-// {
-//   range_check(Band, 0, number_band());
-  
-// //--------------------------------------------------------
-// // Go to detector coordinate space.
-// //--------------------------------------------------------
-
-//   boost::math::quaternion<double> dcs = 
-//     conj(frame_to_sc_) * Sl.look_quaternion() * frame_to_sc_ / Sl.length();
-
-// //---------------------------------------------------------
-// // Then to paraxial focal plane. Units are millimeters.
-// //---------------------------------------------------------
-
-//   double x = dcs.R_component_2();
-//   double y = dcs.R_component_3();
-//   double z = dcs.R_component_4();
-//   double yf = (focal_length() / z) * (-x);
-//   double xf = (focal_length() / z) * y;
-
-// //-------------------------------------------------------------------------
-// // Transform paraxial focal plane coordinate to real focal plane coordinate.
-// // Units are millimeters.
-// //-------------------------------------------------------------------------
-  
-//   double xf_prime, yf_prime;
-//   paraxial_transform_->paraxial_to_real(row_number[Band], xf, yf, 
-// 					xf_prime, yf_prime);
-  
-// //-------------------------------------------------------------------------
-// /// Then translate to frame coordinates.
-// //-------------------------------------------------------------------------
-  
-//   FrameCoordinate res;
-//   res.sample = principal_point(Band).sample + 
-//     xf_prime / sample_pitch_ * samp_dir();
-//   res.line = principal_point(Band).line + 
-//     yf_prime / line_pitch_ * line_dir();
-//   return res;
-// }
-
 // See base class for description
 ScLookVector MspiCamera::sc_look_vector
 (const FrameCoordinate& F, int Band) const
@@ -229,7 +185,6 @@ ScLookVector MspiCamera::sc_look_vector
 //-------------------------------------------------------------------------
 
   boost::math::quaternion<double> dcs(0, -yf, xf, focal_length_);
-  dcs /= sqrt(yf * yf + xf * xf + focal_length_ * focal_length_);
   return ScLookVector(frame_to_sc_ * dcs * conj(frame_to_sc_));
 }
 

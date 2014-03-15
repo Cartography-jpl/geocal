@@ -1725,6 +1725,10 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	$(patsubst %_wrap.cc, %.py, $(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
 	$(srcdir)/$(swigsrc)/*_wrap.h \
 	@geocalunittestdata@/mspi_config_file_test.txt \
+	@geocalunittestdata@/mspi_camera_test.config2 \
+	@geocalunittestdata@/mspi_camera_test.config \
+	@geocalunittestdata@/GndMSPI_CONFIG_CAMERA_MODEL_V004.config \
+	@geocalunittestdata@/AIRMSPI_CONFIG_CAMERA_MODEL_0003.config \
 	@geocalunittestdata@/ifstream_cs_test.txt \
 	@geocalunittestdata@/ifstream_cs_test.compressed.txt.gz \
 	@geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.ATT \

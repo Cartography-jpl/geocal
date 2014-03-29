@@ -639,12 +639,12 @@ public:
 /// just ignore this value.
 //-----------------------------------------------------------------------
 
-  VicarLiteRasterImage(const std::string& Fname, 
+  VicarLiteRasterImage(const std::string& Fname, int Band_id = 1,
 		       access_type Access = VicarLiteFile::READ,
-		       int Band = 0, int Number_tile_line = -1,
+		       int Number_tile_line = -1,
 		       int Number_tile_sample = -1,
 		       bool Force_area_pixel = false)
-    : band_(Band), f_(new VicarLiteFile(Fname, Access, Force_area_pixel))
+    : band_(Band_id - 1), f_(new VicarLiteFile(Fname, Access, Force_area_pixel))
   {
     range_check(band_, 0, f_->number_band());
     number_line_ = f_->number_line();
@@ -719,16 +719,16 @@ public:
   bool is_compressed() const { return f_->is_compressed(); }
 
 //-----------------------------------------------------------------------
-/// Return band number
+/// Return band number. This is 1 based (like GDAL).
 //-----------------------------------------------------------------------
-  int band() const { return band_; }
+  int band_id() const { return band_ + 1; }
 
   virtual void print(std::ostream& Os) const 
   {
     OstreamPad opad(Os, "    ");
     Os << "VicarLiteRasterImage:\n"
        << "  File:          " << f_->file_name() << "\n"
-       << "  Band:          " << band() << "\n"
+       << "  Band:          " << band_id() << "\n"
        << "  Number line:   " << number_line() << "\n"
        << "  Number sample: " << number_sample() << "\n";
     Os << "  Map Info:      ";
@@ -769,8 +769,8 @@ public:
 	       bool Outside_dem_is_error = false,
 	       const boost::shared_ptr<Datum>& D = 
 	       boost::shared_ptr<Datum>(new NoDatum()),
-	       int Band = 0)
-    : band_(Band), f_(new VicarLiteFile(Fname))
+	       int Band_id = 1)
+    : band_(Band_id - 1), f_(new VicarLiteFile(Fname))
   {
     initialize(D, f_->map_info(), Outside_dem_is_error);
     range_check(band_, 0, f_->number_band());
@@ -807,7 +807,7 @@ public:
     OstreamPad opad(Os, "    ");
     Os << "Vicar Lite Dem:\n"
        << "  File: " << f_->file_name() << "\n"
-       << "  Band: " << band_ << "\n"
+       << "  Band: " << band_ + 1 << "\n"
        << "  Map info:\n";
     opad << map_info();
     opad.strict_sync();
@@ -820,7 +820,7 @@ public:
 //-----------------------------------------------------------------------
 /// Return band number
 //-----------------------------------------------------------------------
-  int band() const { return band_; }
+  int band() const { return band_  + 1; }
 private:
   int band_;
   boost::shared_ptr<VicarLiteFile> f_;

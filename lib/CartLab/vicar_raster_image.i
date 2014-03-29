@@ -20,6 +20,9 @@ public:
 		   access_type Access = VicarFile::READ,
 		   int Number_line_per_tile = 100, int Number_tile = 4,
 		   bool Force_area_pixel = false);
+  VicarRasterImage(const boost::shared_ptr<VicarFile>& Vicar_file, 
+		   int Band_id = 1,
+		   int Number_line_per_tile = 100, int Number_tile = 4);
   VicarRasterImage(const std::string& Fname, 
 		   const std::string& Type,
 		   int Number_line, int Number_sample,

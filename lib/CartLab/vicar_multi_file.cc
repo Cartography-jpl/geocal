@@ -158,8 +158,8 @@ RasterMultifileTile VicarMultiFile::get_file(int Line, int Sample) const
   try {
     if(favor_memory_mapped_) {
       boost::shared_ptr<VicarLiteRasterImage> 
-	f2(new VicarLiteRasterImage(fname, VicarLiteFile::READ,
-				    0, -1, -1, force_area_pixel_));
+	f2(new VicarLiteRasterImage(fname, 1, VicarLiteFile::READ,
+				    -1, -1, force_area_pixel_));
       if(!f2->is_compressed())  // Can only use memory mapped for
 				// uncompressed files.
 	f = f2;

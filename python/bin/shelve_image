@@ -59,10 +59,8 @@ elif(args.multi_band):
     else:
         img = GdalMultiBand(args.image)
 elif VicarLiteFile.is_vicar_file(args.image):
-    # -1 in band is because VicarLiteRasterImage uses 0-based band, rather
-    # than 1-based we use in this program.
     img = VicarLiteRasterImage(args.image, VicarLiteFile.READ,
-                               args.band - 1)
+                               args.band)
 else:
     img = GdalRasterImage(args.image, args.band)
 if(args.start_line):

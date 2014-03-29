@@ -138,6 +138,8 @@ VicarFile::VicarFile(const std::string& Fname, int Number_line,
     number_sample_(Number_sample), number_band_(Number_band), access_(WRITE)
 {
 #ifdef HAVE_VICAR_RTL
+  if(Org == "BIP")
+    throw Exception("Note that BIP doesn't seem to currently work. This hasn't been worth fixing, so we'll need to fix it only if you actually need BIP");
   unit_ = file_name_to_unit(Fname);
   int status;
   switch(Compress) {
@@ -208,6 +210,8 @@ VicarFile::VicarFile(int Instance, int Number_line, int Number_sample,
     access_(WRITE)
 {
 #ifdef HAVE_VICAR_RTL
+  if(Org == "BIP")
+    throw Exception("Note that BIP doesn't seem to currently work. This hasn't been worth fixing, so we'll need to fix it only if you actually need BIP");
   int status = zvunit(&unit_, const_cast<char*>(Name.c_str()), Instance, 
 		      NULL);
   fname_ = Name + " Instance: " + boost::lexical_cast<std::string>(Instance);
@@ -747,14 +751,16 @@ void VicarFile::reopen_file() const
 int VicarFile::zvreadw(void* buffer, int Line, int Band) const
 {
 #ifdef HAVE_VICAR_RTL
-  int status = zvread(unit(), buffer, "LINE", Line, "BAND", Band, NULL);
+  int status = zvread(unit(), buffer, "LINE", Line, "BAND", Band, 
+		      "NBANDS", 1, NULL);
 
 // Vicar is odd about reading to the end of file. If we get this
 // error, then try closing and reopening file and then doing the read.
 
   if(status ==END_OF_FILE) {
     reopen_file();
-    status = zvread(unit(), buffer, "LINE", Line, "BAND", Band, NULL);
+    status = zvread(unit(), buffer, "LINE", Line, "BAND", Band, 
+		    "NBANDS", 1, NULL);
   }
   return status;
 #else
@@ -771,14 +777,14 @@ int VicarFile::zvreadw(void* buffer, int Line, int Band) const
 int VicarFile::zvreadw(void* buffer, int Band) const
 {
 #ifdef HAVE_VICAR_RTL
-  int status = zvread(unit(), buffer, "BAND", Band, NULL);
+  int status = zvread(unit(), buffer, "BAND", Band, "NBANDS", 1, NULL);
 
 // Vicar is odd about reading to the end of file. If we get this
 // error, then try closing and reopening file and then doing the read.
 
   if(status ==END_OF_FILE) {
     reopen_file();
-    status = zvread(unit(), buffer, "BAND", Band, NULL);
+    status = zvread(unit(), buffer, "BAND", Band, "NBANDS", 1, NULL);
   }
   return status;
 #else
@@ -795,7 +801,7 @@ int VicarFile::zvreadw(void* buffer, int Band) const
 int VicarFile::zvwritw(int unit, void* buffer, int Band)
 {
 #ifdef HAVE_VICAR_RTL
-  return zvwrit(unit, buffer, "BAND", Band, NULL);
+  return zvwrit(unit, buffer, "BAND", Band, "NBANDS", 1, NULL);
 #else
   throw VicarNotAvailableException();
 #endif

@@ -37,6 +37,18 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Open a VicarRasterImage from an already open VicarFile
+//-----------------------------------------------------------------------
+
+  VicarRasterImage(const boost::shared_ptr<VicarFile>& Vicar_file, 
+		   int Band_id = 1,
+		   int Number_line_per_tile = 100, int Number_tile = 4)
+    : vicar_file_(Vicar_file)
+  {
+    initialize(Band_id, Number_line_per_tile, Number_tile);
+  }
+  
+//-----------------------------------------------------------------------
 /// Create a new VICAR file with the given size.
 //-----------------------------------------------------------------------
 
@@ -214,6 +226,7 @@ private:
 				      int Number_line_per_tile, 
 				      int Number_tile)
   {
+    range_check(Band_id, 1, number_band() + 1);
     band_id_ = Band_id;
     boost::shared_ptr<VicarTiledFile<T> > 
       t(new VicarTiledFile<T>(vicar_file_, band_id_,

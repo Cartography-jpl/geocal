@@ -102,13 +102,13 @@ public:
   virtual blitz::Array<double, 1> parameter() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
-  virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
-				      int Band) const;
   virtual void print(std::ostream& Os) const;
 protected:
   virtual void dcs_to_focal_plane(int Band,
 				  const boost::math::quaternion<double>& Dcs,
 				  double& Xfp, double& Yfp) const;
+  virtual boost::math::quaternion<double> 
+  focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const;
 private:
   std::string fname;
   // Camera angles, in radians

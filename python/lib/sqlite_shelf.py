@@ -3,8 +3,8 @@
 # databases will be available (e.g., not every system has berkely db).
 # Also the Shelve package is apparently deprecated in future version of python. 
 # I spent some time googling, and several places recommended using sqlite3
-# to implement this. In addition to being available (since we install this
-# already as part of afids) it is also faster.
+# to implement this. In addition to being available (we check this at as 
+# part of the configure script) it is also faster.
 #
 # This class gives a Shelve like interface to sqlite.
 

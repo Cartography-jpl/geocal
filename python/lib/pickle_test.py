@@ -102,8 +102,8 @@ def test_quaternion_camera_pickle():
     assert_almost_equal(cam.focal_length, 1.0, 4)
     assert_almost_equal(cam.line_pitch,   1.0 / 2500000, 4)
     assert_almost_equal(cam.sample_pitch,   1.0 / 2500000, 4)
-    assert_almost_equal(cam.principal_point.line, 1688, 4)
-    assert_almost_equal(cam.principal_point.sample, 1824.5, 4)
+    assert_almost_equal(cam.principal_point(0).line, 1688, 4)
+    assert_almost_equal(cam.principal_point(0).sample, 1824.5, 4)
     assert cam.number_line(0) == 3375
     assert cam.number_sample(0) == 3648
     assert cam.number_band == 1

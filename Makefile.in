@@ -33,11 +33,11 @@
 # We want to be able to generate both a stand alone Makefile for 
 # GeoCal, and an integrated one for AFIDS. Unfortunately, automake
 # doesn't let us use a variable in a "include" line, so as a work around
-# we have 2 files "include.am" and "include_afids.am". The only difference
-# is that include_afids.am adds a "afids_python/" directory in front of
+# we have 2 files "include.am" and "include_nested.am". The only difference
+# is that include_nested.am adds a "geocal/" directory in front of
 # everything.
 #
-# If you change include.am, make sure to change include_afids.am and
+# If you change include.am, make sure to change include_nested.am and
 # vice versa.
 
 # This gets included in the top makefile. This list files here that are
@@ -1725,6 +1725,10 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	$(patsubst %_wrap.cc, %.py, $(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
 	$(srcdir)/$(swigsrc)/*_wrap.h \
 	@geocalunittestdata@/mspi_config_file_test.txt \
+	@geocalunittestdata@/mspi_camera_test.config2 \
+	@geocalunittestdata@/mspi_camera_test.config \
+	@geocalunittestdata@/GndMSPI_CONFIG_CAMERA_MODEL_V004.config \
+	@geocalunittestdata@/AIRMSPI_CONFIG_CAMERA_MODEL_0003.config \
 	@geocalunittestdata@/ifstream_cs_test.txt \
 	@geocalunittestdata@/ifstream_cs_test.compressed.txt.gz \
 	@geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.ATT \

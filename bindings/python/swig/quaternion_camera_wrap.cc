@@ -5719,21 +5719,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_QuaternionCamera__v_principal_point__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_QuaternionCamera_principal_point__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::QuaternionCamera *arg1 = (GeoCal::QuaternionCamera *) 0 ;
+  int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::QuaternionCamera const > tempshared1 ;
   boost::shared_ptr< GeoCal::QuaternionCamera const > *smartarg1 = 0 ;
-  GeoCal::FrameCoordinate result;
+  int val2 ;
+  int ecode2 = 0 ;
+  GeoCal::FrameCoordinate *result = 0 ;
   
-  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionCamera__v_principal_point" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionCamera_principal_point" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
@@ -5744,9 +5747,14 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_principal_point__SWIG_0(PyObject 
       arg1 = const_cast< GeoCal::QuaternionCamera * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "QuaternionCamera_principal_point" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
   {
     try {
-      result = ((GeoCal::QuaternionCamera const *)arg1)->principal_point();
+      result = (GeoCal::FrameCoordinate *) &((GeoCal::QuaternionCamera const *)arg1)->principal_point(arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5754,7 +5762,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_principal_point__SWIG_0(PyObject 
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &)result));
+    boost::shared_ptr< const GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::FrameCoordinate >(result SWIG_NO_NULL_DELETER_0);
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -5763,24 +5771,27 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_QuaternionCamera__v_principal_point__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_QuaternionCamera_principal_point__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::QuaternionCamera *arg1 = (GeoCal::QuaternionCamera *) 0 ;
-  GeoCal::FrameCoordinate *arg2 = 0 ;
+  int arg2 ;
+  GeoCal::FrameCoordinate *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::QuaternionCamera > tempshared1 ;
   boost::shared_ptr< GeoCal::QuaternionCamera > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared3 ;
   
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionCamera__v_principal_point" "', argument " "1"" of type '" "GeoCal::QuaternionCamera *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionCamera_principal_point" "', argument " "1"" of type '" "GeoCal::QuaternionCamera *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionCamera > * >(argp1);
@@ -5791,34 +5802,39 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_principal_point__SWIG_1(PyObject 
       arg1 = const_cast< GeoCal::QuaternionCamera * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "QuaternionCamera_principal_point" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
   {
     int newmem = 0;
     // Added mms
     // First check to see if all ready pointer type
     GeoCal::FrameCoordinate *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
     } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionCamera__v_principal_point" "', argument " "2"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "QuaternionCamera_principal_point" "', argument " "3"" of type '" "GeoCal::FrameCoordinate const &""'"); 
       }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionCamera__v_principal_point" "', argument " "2"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionCamera_principal_point" "', argument " "3"" of type '" "GeoCal::FrameCoordinate const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp2);
-        arg2 = const_cast< GeoCal::FrameCoordinate * >(tempshared2.get());
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::FrameCoordinate * >(tempshared3.get());
       } else {
-        arg2 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp2)->get());
+        arg3 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3)->get());
       }
     }
   }
   {
     try {
-      (arg1)->principal_point((GeoCal::FrameCoordinate const &)*arg2);
+      (arg1)->principal_point(arg2,(GeoCal::FrameCoordinate const &)*arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5832,24 +5848,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_QuaternionCamera__v_principal_point(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_QuaternionCamera_principal_point(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[3];
+  PyObject *argv[4];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"QuaternionCamera__v_principal_point",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"QuaternionCamera_principal_point",0,3,argv))) SWIG_fail;
   --argc;
-  if (argc == 1) {
-    return _wrap_QuaternionCamera__v_principal_point__SWIG_0(self, argc, argv);
-  }
   if (argc == 2) {
-    return _wrap_QuaternionCamera__v_principal_point__SWIG_1(self, argc, argv);
+    return _wrap_QuaternionCamera_principal_point__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_QuaternionCamera_principal_point__SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuaternionCamera__v_principal_point'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuaternionCamera_principal_point'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::QuaternionCamera::principal_point() const\n"
-    "    GeoCal::QuaternionCamera::principal_point(GeoCal::FrameCoordinate const &)\n");
+    "    GeoCal::QuaternionCamera::principal_point(int) const\n"
+    "    GeoCal::QuaternionCamera::principal_point(int,GeoCal::FrameCoordinate const &)\n");
   return 0;
 }
 
@@ -6610,8 +6626,8 @@ static PyMethodDef SwigMethods[] = {
 		"void GeoCal::QuaternionCamera::focal_length(double V)\n"
 		"Set focal length, in mm. \n"
 		""},
-	 { (char *)"QuaternionCamera__v_principal_point", _wrap_QuaternionCamera__v_principal_point, METH_VARARGS, (char *)"\n"
-		"void GeoCal::QuaternionCamera::principal_point(const FrameCoordinate &Fc)\n"
+	 { (char *)"QuaternionCamera_principal_point", _wrap_QuaternionCamera_principal_point, METH_VARARGS, (char *)"\n"
+		"void GeoCal::QuaternionCamera::principal_point(int B, const FrameCoordinate &Fc)\n"
 		"Set principal point of camera. \n"
 		""},
 	 { (char *)"QuaternionCamera__v_line_pitch", _wrap_QuaternionCamera__v_line_pitch, METH_VARARGS, (char *)"\n"

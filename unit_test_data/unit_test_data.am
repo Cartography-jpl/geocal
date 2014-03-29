@@ -3,6 +3,10 @@
 
 
 EXTRA_DIST+= @geocalunittestdata@/mspi_config_file_test.txt
+EXTRA_DIST+= @geocalunittestdata@/mspi_camera_test.config2
+EXTRA_DIST+= @geocalunittestdata@/mspi_camera_test.config
+EXTRA_DIST+= @geocalunittestdata@/GndMSPI_CONFIG_CAMERA_MODEL_V004.config
+EXTRA_DIST+= @geocalunittestdata@/AIRMSPI_CONFIG_CAMERA_MODEL_0003.config
 EXTRA_DIST+= @geocalunittestdata@/ifstream_cs_test.txt
 EXTRA_DIST+= @geocalunittestdata@/ifstream_cs_test.compressed.txt.gz
 EXTRA_DIST+= @geocalunittestdata@/06JAN06033849-P1BS-005545519120_01_P001.ATT

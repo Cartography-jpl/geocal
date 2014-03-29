@@ -16,29 +16,20 @@ void MspiCamera::read_config_file(const std::string& File_name)
   fname = File_name;
   MspiConfigFile c(File_name);
 
-  //focal_length_; Done
-  //nband_; Done
-  //nline_; Done
-  //nsamp_; Done
-  //line_pitch_; Done
-  //sample_pitch_; Done
-  //principal_point_;
-  frame_convention_ = QuaternionCamera::LINE_IS_Y;
-  //line_direction_; Done
-  //sample_direction_; Done
 
-  //-------------------------------------------------------
-  // Some hardcoded values that we don't expect to change.
-  //-------------------------------------------------------
+//-------------------------------------------------------
+// Some hardcoded values that we don't expect to change.
+//-------------------------------------------------------
 
   sample_pitch_ = 0.010; // center-to-center sample spacing (millimeters)
   line_pitch_ = 0.010;  // pixel size in along row axis (millimeters)
   double dy = 0.016;    // center-to-center row spacing (millimeters)
   int nrow = 64;	// Number of rows in CCD
+  frame_convention_ = QuaternionCamera::LINE_IS_Y;
 
-  //-------------------------------------------------------
-  // Value we read from the configuration file.
-  //-------------------------------------------------------
+//-------------------------------------------------------
+// Value we read from the configuration file.
+//-------------------------------------------------------
 
   boresight_angle_ = c.value<double>("boresight_angle") * Constant::deg_to_rad;
   yaw_ = c.value<double>("camera_yaw") * Constant::deg_to_rad;
@@ -103,13 +94,16 @@ void MspiCamera::read_config_file(const std::string& File_name)
 }
 
 // See base class for description
+
 blitz::Array<double, 1> MspiCamera::parameter() const
 {
   Array<double, 1> res(3);
   res = yaw_, pitch_, roll_;
   return res;
 }
+
 // See base class for description
+
 void MspiCamera::parameter(const blitz::Array<double, 1>& Parm)
 {
   if(Parm.rows() != 3)
@@ -126,6 +120,7 @@ void MspiCamera::parameter(const blitz::Array<double, 1>& Parm)
 }
 
 // See base class for description
+
 std::vector<std::string> MspiCamera::parameter_name() const
 {
   std::vector<std::string> res;
@@ -158,35 +153,24 @@ void MspiCamera::dcs_to_focal_plane(int Band,
 }
 
 // See base class for description
-ScLookVector MspiCamera::sc_look_vector
-(const FrameCoordinate& F, int Band) const
+boost::math::quaternion<double> 
+MspiCamera::focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const
 {
-  range_check(Band, 0, number_band());
-
 //-------------------------------------------------------------------------
-/// Convert to real focal plane coordinate (in millimeters)
-//-------------------------------------------------------------------------
-
-  double xf_prime = (F.sample - principal_point(Band).sample) * 
-    sample_pitch() * samp_dir();
-  double yf_prime = (F.line - principal_point(Band).line) *
-    line_pitch() * line_dir();
-
-//-------------------------------------------------------------------------
-/// Then to paraxial coordinates.
+/// Convert to paraxial coordinates.
 //-------------------------------------------------------------------------
 
   double xf, yf;
-  paraxial_transform_->real_to_paraxial(row_number[Band], xf_prime, yf_prime,
+  paraxial_transform_->real_to_paraxial(row_number[Band], Xfp, Yfp,
 					xf, yf);
 
 //-------------------------------------------------------------------------
-/// Then to spacecraft coordinates.
+/// Then to detector coordinates look vector.
 //-------------------------------------------------------------------------
 
-  boost::math::quaternion<double> dcs(0, -yf, xf, focal_length_);
-  return ScLookVector(frame_to_sc_ * dcs * conj(frame_to_sc_));
+  return boost::math::quaternion<double>(0, -yf, xf, focal_length());
 }
+
 
 //-----------------------------------------------------------------------
 /// Print to stream.

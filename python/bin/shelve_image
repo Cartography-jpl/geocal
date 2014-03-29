@@ -59,8 +59,7 @@ elif(args.multi_band):
     else:
         img = GdalMultiBand(args.image)
 elif VicarLiteFile.is_vicar_file(args.image):
-    img = VicarLiteRasterImage(args.image, VicarLiteFile.READ,
-                               args.band)
+    img = VicarLiteRasterImage(args.image, args.band)
 else:
     img = GdalRasterImage(args.image, args.band)
 if(args.start_line):

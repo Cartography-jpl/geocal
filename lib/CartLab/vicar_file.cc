@@ -92,7 +92,7 @@ VicarFile::VicarFile(const std::string& Fname, int Number_line,
 		     compression Compress)
   : fname_(Fname), force_area_pixel_(false), 
     unit_(-1), number_line_(Number_line), 
-    number_sample_(Number_sample), access_(WRITE)
+    number_sample_(Number_sample), number_band_(1), access_(WRITE)
 {
 #ifdef HAVE_VICAR_RTL
   unit_ = file_name_to_unit(Fname);
@@ -111,6 +111,51 @@ VicarFile::VicarFile(const std::string& Fname, int Number_line,
   case BASIC2:
     status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
 		    Number_sample, "O_FORMAT", Type.c_str(), 
+		    "U_FORMAT", Type.c_str(), "COMPRESS", "BASIC2", NULL);
+    break;
+  default:
+    throw Exception("Unrecognized compression type");
+  }    
+  if(status != 1)
+    throw VicarException(status, "Call to zvopen failed for file " + fname_);
+  set_type(Type);
+#else
+  throw VicarNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Create a new VICAR file with the given size.
+//-----------------------------------------------------------------------
+
+VicarFile::VicarFile(const std::string& Fname, int Number_line, 
+		     int Number_sample, int Number_band,
+		     const std::string& Type,
+		     compression Compress)
+  : fname_(Fname), force_area_pixel_(false), 
+    unit_(-1), number_line_(Number_line), 
+    number_sample_(Number_sample), number_band_(Number_band), access_(WRITE)
+{
+#ifdef HAVE_VICAR_RTL
+  unit_ = file_name_to_unit(Fname);
+  int status;
+  switch(Compress) {
+  case NONE:
+    status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
+		    Number_sample, "U_NB", Number_band, "U_ORG", "BSQ",
+		    "O_FORMAT", Type.c_str(), 
+		    "U_FORMAT", Type.c_str(), NULL);
+    break;
+  case BASIC:
+    status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
+		    Number_sample, "U_NB", Number_band, "U_ORG", "BSQ",
+		    "O_FORMAT", Type.c_str(), 
+		    "U_FORMAT", Type.c_str(), "COMPRESS", "BASIC", NULL);
+    break;
+  case BASIC2:
+    status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
+		    Number_sample, "U_NB", Number_band, "U_ORG", "BSQ",
+		    "O_FORMAT", Type.c_str(), 
 		    "U_FORMAT", Type.c_str(), "COMPRESS", "BASIC2", NULL);
     break;
   default:
@@ -155,6 +200,7 @@ VicarFile::VicarFile(int Instance, int Number_line, int Number_sample,
 		     const std::string& Name, compression Compress)
   : force_area_pixel_(false),
     unit_(-1), number_line_(Number_line), number_sample_(Number_sample),
+    number_band_(1),
     access_(WRITE)
 {
 #ifdef HAVE_VICAR_RTL
@@ -286,6 +332,7 @@ void VicarFile::open_unit()
     throw VicarException(status, "zlninfo failed for file " + fname_);
   number_line_ = label<int>("NL");
   number_sample_ = label<int>("NS");
+  number_band_ = label<int>("NB");
   set_type(label<std::string>("FORMAT"));
 #else
   throw VicarNotAvailableException();

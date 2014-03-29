@@ -21,6 +21,7 @@ struct VicarFixture : public GlobalFixture {
   std::string fname3;
   std::string fname4;
   std::string fname5;
+  std::string fname6;
   static bool done;
   VicarFixture()
   {
@@ -31,6 +32,7 @@ struct VicarFixture : public GlobalFixture {
     fname3 = "test_out/vicar_write.img";
     fname4 = "test_out/vicar_write2.img";
     fname5 = "test_data/vicar_copy.img";
+    fname6 = "test_data/vicar_write3.img";
     
     if(done)
       return;
@@ -139,15 +141,28 @@ BOOST_AUTO_TEST_CASE(vicar_file)
 				// the destructor
     VicarFile f3(1, 10, 20);
     VicarFile f4(fname4, 4, 5, "HALF");
+    VicarFile f6(fname6, 4, 5, 3, "HALF");
   }
   VicarFile f3(fname3);
   VicarFile f4(fname4);
+  VicarFile f6(fname6);
   BOOST_CHECK_EQUAL(f3.label<int>("NL"), 10);
   BOOST_CHECK_EQUAL(f3.label<int>("NS"), 20);
   BOOST_CHECK_EQUAL(f3.label<std::string>("FORMAT"), "BYTE");
   BOOST_CHECK_EQUAL(f4.label<int>("NL"), 4);
   BOOST_CHECK_EQUAL(f4.label<int>("NS"), 5);
+  BOOST_CHECK_EQUAL(f4.label<int>("NB"), 1);
+  BOOST_CHECK_EQUAL(f4.number_line(), 4);
+  BOOST_CHECK_EQUAL(f4.number_sample(), 5);
+  BOOST_CHECK_EQUAL(f4.number_band(), 1);
   BOOST_CHECK_EQUAL(f4.label<std::string>("FORMAT"), "HALF");
+  BOOST_CHECK_EQUAL(f6.label<int>("NL"), 4);
+  BOOST_CHECK_EQUAL(f6.label<int>("NS"), 5);
+  BOOST_CHECK_EQUAL(f6.label<int>("NB"), 3);
+  BOOST_CHECK_EQUAL(f6.number_line(), 4);
+  BOOST_CHECK_EQUAL(f6.number_sample(), 5);
+  BOOST_CHECK_EQUAL(f6.number_band(), 3);
+  BOOST_CHECK_EQUAL(f6.label<std::string>("FORMAT"), "HALF");
 }
 
 BOOST_AUTO_TEST_CASE(ibis_file_create)

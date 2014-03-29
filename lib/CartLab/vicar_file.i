@@ -23,6 +23,9 @@ public:
   VicarFile(const std::string& Fname, access_type Access = READ);
   VicarFile(const std::string& Fname, int Number_line, int Number_sample,
 	    const std::string& Type = "BYTE");
+  VicarFile(const std::string& Fname, int Number_line, int Number_sample,
+	    int Number_band,
+	    const std::string& Type = "BYTE");
   VicarFile(int Instance, access_type Access = READ, 
 	    const std::string& Name = "INP");
   VicarFile(int Instance, int Number_line, int Number_sample,
@@ -35,6 +38,7 @@ public:
   %python_attribute(file_name, std::string)
   static bool is_vicar_file(const std::string& Fname);
   static int file_name_to_unit(const std::string& Fname);
+  %python_attribute(number_band, int)
   %python_attribute(number_line, int)
   %python_attribute(number_sample, int)
   %python_attribute(type, data_type)

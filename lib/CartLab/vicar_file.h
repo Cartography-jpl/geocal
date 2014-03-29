@@ -92,6 +92,10 @@ public:
   VicarFile(const std::string& Fname, int Number_line, int Number_sample,
 	    const std::string& Type = "BYTE",
 	    compression C = NONE);
+  VicarFile(const std::string& Fname, int Number_line, int Number_sample,
+	    int Number_band,
+	    const std::string& Type = "BYTE",
+	    compression C = NONE);
   VicarFile(int Instance, access_type Access = READ, 
 	    const std::string& Name = "INP");
   VicarFile(int Instance, int Number_line, int Number_sample,
@@ -190,6 +194,13 @@ public:
 
   int number_line() const {return number_line_;}
 
+
+//-----------------------------------------------------------------------
+/// Number of bands in file.
+//-----------------------------------------------------------------------
+
+  int number_band() const {return number_band_;}
+
 //-----------------------------------------------------------------------
 /// Number of samples in file.
 //-----------------------------------------------------------------------
@@ -264,6 +275,7 @@ private:
   int unit_;
   mutable int number_line_;
   mutable int number_sample_;
+  mutable int number_band_;
   access_type access_;
   data_type type_;
   std::map<std::string, int> label_type_;

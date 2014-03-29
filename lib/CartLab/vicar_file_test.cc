@@ -32,7 +32,7 @@ struct VicarFixture : public GlobalFixture {
     fname3 = "test_out/vicar_write.img";
     fname4 = "test_out/vicar_write2.img";
     fname5 = "test_data/vicar_copy.img";
-    fname6 = "test_data/vicar_write3.img";
+    fname6 = "test_out/vicar_write3.img";
     
     if(done)
       return;

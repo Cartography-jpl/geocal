@@ -5758,6 +5758,147 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  std::string *arg5 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
+  GeoCal::VicarFile *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarFile" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarFile" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarFile" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarFile" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarFile" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_VicarFile" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarFile" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::VicarFile *)new GeoCal::VicarFile((std::string const &)*arg1,arg2,arg3,arg4,(std::string const &)*arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  GeoCal::VicarFile *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarFile" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarFile" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarFile" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarFile" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarFile" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    try {
+      result = (GeoCal::VicarFile *)new GeoCal::VicarFile((std::string const &)*arg1,arg2,arg3,arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
   int arg1 ;
   GeoCal::VicarFile::access_type arg2 ;
   std::string *arg3 = 0 ;
@@ -5811,7 +5952,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   GeoCal::VicarFile::access_type arg2 ;
@@ -5851,7 +5992,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   int val1 ;
@@ -5883,7 +6024,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   int arg2 ;
@@ -5969,7 +6110,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   int arg2 ;
@@ -6047,7 +6188,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   int arg2 ;
@@ -6110,7 +6251,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_12(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   int arg2 ;
@@ -6173,7 +6314,7 @@ SWIGINTERN PyObject *_wrap_new_VicarFile(PyObject *self, PyObject *args) {
       }
     }
     if (!_v) goto check_1;
-    return _wrap_new_VicarFile__SWIG_6(self, argc, argv);
+    return _wrap_new_VicarFile__SWIG_8(self, argc, argv);
   }
 check_1:
   
@@ -6189,7 +6330,7 @@ check_1:
       }
     }
     if (!_v) goto check_3;
-    return _wrap_new_VicarFile__SWIG_5(self, argc, argv);
+    return _wrap_new_VicarFile__SWIG_7(self, argc, argv);
   }
 check_3:
   
@@ -6212,7 +6353,7 @@ check_3:
       }
     }
     if (!_v) goto check_5;
-    return _wrap_new_VicarFile__SWIG_10(self, argc, argv);
+    return _wrap_new_VicarFile__SWIG_12(self, argc, argv);
   }
 check_5:
   
@@ -6230,7 +6371,7 @@ check_5:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_6;
-    return _wrap_new_VicarFile__SWIG_4(self, argc, argv);
+    return _wrap_new_VicarFile__SWIG_6(self, argc, argv);
   }
 check_6:
   
@@ -6246,18 +6387,54 @@ check_6:
       }
     }
     if (!_v) goto check_8;
-    return _wrap_new_VicarFile__SWIG_9(self, argc, argv);
+    {
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_8;
+    return _wrap_new_VicarFile__SWIG_11(self, argc, argv);
   }
 check_8:
+  
+  if (argc == 4) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_9;
+    return _wrap_new_VicarFile__SWIG_5(self, argc, argv);
+  }
+check_9:
   
   if (argc == 4) {
     return _wrap_new_VicarFile__SWIG_2(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_new_VicarFile__SWIG_8(self, argc, argv);
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[0], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_11;
+    {
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_11;
+    return _wrap_new_VicarFile__SWIG_10(self, argc, argv);
+  }
+check_11:
+  
+  if (argc == 5) {
+    return _wrap_new_VicarFile__SWIG_4(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_VicarFile__SWIG_7(self, argc, argv);
+    return _wrap_new_VicarFile__SWIG_9(self, argc, argv);
   }
   
 fail:
@@ -6267,6 +6444,8 @@ fail:
     "    GeoCal::VicarFile::VicarFile(std::string const &)\n"
     "    GeoCal::VicarFile::VicarFile(std::string const &,int,int,std::string const &)\n"
     "    GeoCal::VicarFile::VicarFile(std::string const &,int,int)\n"
+    "    GeoCal::VicarFile::VicarFile(std::string const &,int,int,int,std::string const &)\n"
+    "    GeoCal::VicarFile::VicarFile(std::string const &,int,int,int)\n"
     "    GeoCal::VicarFile::VicarFile(int,GeoCal::VicarFile::access_type,std::string const &)\n"
     "    GeoCal::VicarFile::VicarFile(int,GeoCal::VicarFile::access_type)\n"
     "    GeoCal::VicarFile::VicarFile(int)\n"
@@ -6521,6 +6700,49 @@ SWIGINTERN PyObject *_wrap_VicarFile_file_name_to_unit(PyObject *SWIGUNUSEDPARM(
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarFile__v_number_band(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarFile *arg1 = (GeoCal::VicarFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarFile const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarFile__v_number_band" "', argument " "1"" of type '" "GeoCal::VicarFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::VicarFile const *)arg1)->number_band();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
   return NULL;
 }
 
@@ -8398,6 +8620,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"VicarFile_file_name_to_unit", (PyCFunction)_wrap_VicarFile_file_name_to_unit, METH_O, (char *)"\n"
 		"int VicarFile::file_name_to_unit(const std::string &Fname)\n"
 		"Return a VICAR unit number that is tied to the given file name. \n"
+		""},
+	 { (char *)"VicarFile__v_number_band", (PyCFunction)_wrap_VicarFile__v_number_band, METH_O, (char *)"\n"
+		"int GeoCal::VicarFile::number_band() const\n"
+		"Number of bands in file. \n"
 		""},
 	 { (char *)"VicarFile__v_number_line", (PyCFunction)_wrap_VicarFile__v_number_line, METH_O, (char *)"\n"
 		"int GeoCal::VicarFile::number_line() const\n"

@@ -95,6 +95,7 @@ public:
   VicarFile(const std::string& Fname, int Number_line, int Number_sample,
 	    int Number_band,
 	    const std::string& Type = "BYTE",
+	    const std::string& Org = "BSQ",
 	    compression C = NONE);
   VicarFile(int Instance, access_type Access = READ, 
 	    const std::string& Name = "INP");

@@ -131,6 +131,7 @@ VicarFile::VicarFile(const std::string& Fname, int Number_line,
 VicarFile::VicarFile(const std::string& Fname, int Number_line, 
 		     int Number_sample, int Number_band,
 		     const std::string& Type,
+		     const std::string& Org,
 		     compression Compress)
   : fname_(Fname), force_area_pixel_(false), 
     unit_(-1), number_line_(Number_line), 
@@ -142,19 +143,19 @@ VicarFile::VicarFile(const std::string& Fname, int Number_line,
   switch(Compress) {
   case NONE:
     status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
-		    Number_sample, "U_NB", Number_band, "U_ORG", "BSQ",
+		    Number_sample, "U_NB", Number_band, "U_ORG", Org.c_str(),
 		    "O_FORMAT", Type.c_str(), 
 		    "U_FORMAT", Type.c_str(), NULL);
     break;
   case BASIC:
     status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
-		    Number_sample, "U_NB", Number_band, "U_ORG", "BSQ",
+		    Number_sample, "U_NB", Number_band, "U_ORG", Org.c_str(),
 		    "O_FORMAT", Type.c_str(), 
 		    "U_FORMAT", Type.c_str(), "COMPRESS", "BASIC", NULL);
     break;
   case BASIC2:
     status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
-		    Number_sample, "U_NB", Number_band, "U_ORG", "BSQ",
+		    Number_sample, "U_NB", Number_band, "U_ORG", Org.c_str(),
 		    "O_FORMAT", Type.c_str(), 
 		    "U_FORMAT", Type.c_str(), "COMPRESS", "BASIC2", NULL);
     break;

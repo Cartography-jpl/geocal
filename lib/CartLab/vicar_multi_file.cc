@@ -102,7 +102,7 @@ VicarMultiFile::VicarMultiFile(const std::string& Db_name,
 //-----------------------------------------------------------------------
 
   VicarRasterImage m(Dirbase + "/" + ibf.data<std::string>(0,0) +
-		     Extension, VicarFile::READ, 100, 4, force_area_pixel_);
+		     Extension, 1, VicarFile::READ, 100, 4, force_area_pixel_);
   std::vector<boost::shared_ptr<GroundCoordinate> > gp;
   gp.push_back(m.map_info().coordinate_converter().
 	       convert_from_coordinate(lon_min, lat_max));
@@ -168,7 +168,7 @@ RasterMultifileTile VicarMultiFile::get_file(int Line, int Sample) const
     // Ignore errors, we drop down to using the Vicar routines below.
   }
   if(!f.get())
-    f.reset(new VicarRasterImage(fname, VicarFile::READ,
+    f.reset(new VicarRasterImage(fname, 1, VicarFile::READ,
 				 number_line_per_tile_, 
 				 number_tile_each_file_,
 				 force_area_pixel_));

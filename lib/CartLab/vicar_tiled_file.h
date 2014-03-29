@@ -22,8 +22,9 @@ public:
 //-----------------------------------------------------------------------
 
   VicarTiledFile(const boost::shared_ptr<VicarFile>& F, 
+		 int Band_id = 1,
 		 int Number_line_per_tile = 100, int Number_tile = 4)
-    : vicar_file_(F), last_max_index(0)
+    : vicar_file_(F), band_id(Band_id), last_max_index(0)
   {
     boost::array<index, 2> file_size = 
       {{F->number_line(), F->number_sample()}};
@@ -91,13 +92,13 @@ protected:
     std::vector<T> buf(this->size()[1]);
 // Line is 1 based for VICAR, so add 1 to our 0 based index.
 
-    int status = vicar_file().zvreadw(&buf[0], Min_index[0] + 1);
+    int status = vicar_file().zvreadw(&buf[0], Min_index[0] + 1, band_id);
     if(status != 1)
       throw VicarException(status,"zvread failed for " + 
 			   vicar_file().file_name());
     Res = std::copy(&buf[Min_index[1]], &buf[Max_index[1]], Res);
     for(int i = Min_index[0] + 1; i < Max_index[0]; ++i) {
-      status = vicar_file().zvreadw(&buf[0]);
+      status = vicar_file().zvreadw(&buf[0], i + 1, band_id);
       if(status != 1)
 	throw VicarException(status,"zvread failed for " + 
 			     vicar_file().file_name());
@@ -126,7 +127,7 @@ protected:
     for(int i = 0; i < Max_index[0] - Min_index[0]; ++i) {
       int status = VicarFile::zvwritw(vicar_file().unit(), 
 	      const_cast<T*>(V) + i * TiledFile<T, 2>::size()[1],
-	      i + Min_index[0] + 1);
+				      i + Min_index[0] + 1, band_id);
       if(status != 1)
 	throw VicarException(status,"zvwrite failed for " + 
 			     vicar_file().file_name());
@@ -134,6 +135,7 @@ protected:
   }
 private:
   boost::shared_ptr<VicarFile> vicar_file_;
+  int band_id;
   mutable int last_max_index;
 };
 }

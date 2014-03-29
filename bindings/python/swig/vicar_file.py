@@ -180,8 +180,9 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
     BASIC2 = _vicar_file.VicarFile_BASIC2
     def __init__(self, *args): 
         """
-        VicarFile::VicarFile(int Instance, int Number_line, int Number_sample, const std::string
-        &Type="BYTE", const std::string &Name="OUT", compression C=NONE)
+        VicarFile::VicarFile(int Instance, int Number_line, int Number_sample, int Number_band=1,
+        const std::string &Type="BYTE", const std::string &Name="OUT",
+        const std::string &Org="BSQ", compression C=NONE)
         Create a new VICAR file with the given size.
 
         Use the VICAR Name and Instance input (so for example, "INP" and 2

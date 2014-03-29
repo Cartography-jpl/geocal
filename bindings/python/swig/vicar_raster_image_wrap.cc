@@ -5289,10 +5289,11 @@ extern "C" {
 SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
-  GeoCal::VicarRasterImage::access_type arg2 ;
-  int arg3 ;
+  int arg2 ;
+  GeoCal::VicarRasterImage::access_type arg3 ;
   int arg4 ;
-  bool arg5 ;
+  int arg5 ;
+  bool arg6 ;
   int res1 = SWIG_OLDOBJ ;
   int val2 ;
   int ecode2 = 0 ;
@@ -5300,11 +5301,13 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_0(PyObject *SWIGUNUSEDPARM
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
-  bool val5 ;
+  int val5 ;
   int ecode5 = 0 ;
+  bool val6 ;
+  int ecode6 = 0 ;
   GeoCal::VicarRasterImage *result = 0 ;
   
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
@@ -5318,27 +5321,32 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_0(PyObject *SWIGUNUSEDPARM
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
   ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "GeoCal::VicarRasterImage::access_type""'");
   } 
-  arg3 = static_cast< int >(val3);
+  arg3 = static_cast< GeoCal::VicarRasterImage::access_type >(val3);
   ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "bool""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
   } 
-  arg5 = static_cast< bool >(val5);
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,arg2,arg3,arg4,arg5);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,arg2,arg3,arg4,arg5,arg6);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5360,8 +5368,79 @@ fail:
 SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
-  GeoCal::VicarRasterImage::access_type arg2 ;
-  int arg3 ;
+  int arg2 ;
+  GeoCal::VicarRasterImage::access_type arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  GeoCal::VicarRasterImage *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+  } 
+  arg3 = static_cast< GeoCal::VicarRasterImage::access_type >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    try {
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,arg2,arg3,arg4,arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  GeoCal::VicarRasterImage::access_type arg3 ;
   int arg4 ;
   int res1 = SWIG_OLDOBJ ;
   int val2 ;
@@ -5386,14 +5465,14 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_1(PyObject *SWIGUNUSEDPARM
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
   ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "GeoCal::VicarRasterImage::access_type""'");
   } 
-  arg3 = static_cast< int >(val3);
+  arg3 = static_cast< GeoCal::VicarRasterImage::access_type >(val3);
   ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
@@ -5420,11 +5499,11 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
-  GeoCal::VicarRasterImage::access_type arg2 ;
-  int arg3 ;
+  int arg2 ;
+  GeoCal::VicarRasterImage::access_type arg3 ;
   int res1 = SWIG_OLDOBJ ;
   int val2 ;
   int ecode2 = 0 ;
@@ -5446,14 +5525,14 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_2(PyObject *SWIGUNUSEDPARM
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
   ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "GeoCal::VicarRasterImage::access_type""'");
   } 
-  arg3 = static_cast< int >(val3);
+  arg3 = static_cast< GeoCal::VicarRasterImage::access_type >(val3);
   {
     try {
       result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,arg2,arg3);
@@ -5475,10 +5554,10 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
-  GeoCal::VicarRasterImage::access_type arg2 ;
+  int arg2 ;
   int res1 = SWIG_OLDOBJ ;
   int val2 ;
   int ecode2 = 0 ;
@@ -5498,9 +5577,9 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_3(PyObject *SWIGUNUSEDPARM
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
   {
     try {
       result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,arg2);
@@ -5522,7 +5601,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
@@ -5561,14 +5640,16 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
   int arg3 ;
   int arg4 ;
   int arg5 ;
-  GeoCal::VicarRasterImage::compression arg6 ;
+  std::string *arg6 = 0 ;
+  int arg7 ;
+  GeoCal::VicarRasterImage::compression arg8 ;
   int res1 = SWIG_OLDOBJ ;
   int res2 = SWIG_OLDOBJ ;
   int val3 ;
@@ -5577,8 +5658,215 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_5(PyObject *SWIGUNUSEDPARM
   int ecode4 = 0 ;
   int val5 ;
   int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
+  int res6 = SWIG_OLDOBJ ;
+  int val7 ;
+  int ecode7 = 0 ;
+  int val8 ;
+  int ecode8 = 0 ;
+  GeoCal::VicarRasterImage *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_VicarRasterImage" "', argument " "8"" of type '" "GeoCal::VicarRasterImage::compression""'");
+  } 
+  arg8 = static_cast< GeoCal::VicarRasterImage::compression >(val8);
+  {
+    try {
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,(std::string const &)*arg6,arg7,arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  std::string *arg6 = 0 ;
+  int arg7 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int res6 = SWIG_OLDOBJ ;
+  int val7 ;
+  int ecode7 = 0 ;
+  GeoCal::VicarRasterImage *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  {
+    try {
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,(std::string const &)*arg6,arg7);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  std::string *arg6 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int res6 = SWIG_OLDOBJ ;
   GeoCal::VicarRasterImage *result = 0 ;
   
   if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
@@ -5619,14 +5907,20 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_5(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
   } 
   arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "GeoCal::VicarRasterImage::compression""'");
-  } 
-  arg6 = static_cast< GeoCal::VicarRasterImage::compression >(val6);
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,(std::string const &)*arg6);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5639,15 +5933,17 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_5(PyObject *SWIGUNUSEDPARM
   }
   if (SWIG_IsNewObj(res1)) delete arg1;
   if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
   if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -5725,7 +6021,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -5795,13 +6091,15 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   GeoCal::MapInfo *arg2 = 0 ;
   std::string *arg3 = 0 ;
   int arg4 ;
-  GeoCal::VicarRasterImage::compression arg5 ;
+  std::string *arg5 = 0 ;
+  int arg6 ;
+  GeoCal::VicarRasterImage::compression arg7 ;
   int res1 = SWIG_OLDOBJ ;
   void *argp2 = 0 ;
   int res2 = 0 ;
@@ -5809,8 +6107,241 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_8(PyObject *SWIGUNUSEDPARM
   int res3 = SWIG_OLDOBJ ;
   int val4 ;
   int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  GeoCal::VicarRasterImage *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "GeoCal::VicarRasterImage::compression""'");
+  } 
+  arg7 = static_cast< GeoCal::VicarRasterImage::compression >(val7);
+  {
+    try {
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,arg4,(std::string const &)*arg5,arg6,arg7);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_12(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  int arg4 ;
+  std::string *arg5 = 0 ;
+  int arg6 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int res3 = SWIG_OLDOBJ ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
+  int val6 ;
+  int ecode6 = 0 ;
+  GeoCal::VicarRasterImage *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  {
+    try {
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,arg4,(std::string const &)*arg5,arg6);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_13(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  int arg4 ;
+  std::string *arg5 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int res3 = SWIG_OLDOBJ ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
   GeoCal::VicarRasterImage *result = 0 ;
   
   if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
@@ -5866,14 +6397,20 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_8(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "GeoCal::VicarRasterImage::compression""'");
-  } 
-  arg5 = static_cast< GeoCal::VicarRasterImage::compression >(val5);
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,arg4,arg5);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage((std::string const &)*arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,arg4,(std::string const &)*arg5);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5886,15 +6423,17 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_8(PyObject *SWIGUNUSEDPARM
   }
   if (SWIG_IsNewObj(res1)) delete arg1;
   if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
   if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_14(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   GeoCal::MapInfo *arg2 = 0 ;
@@ -5985,7 +6524,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_15(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   GeoCal::MapInfo *arg2 = 0 ;
@@ -6068,7 +6607,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_16(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   GeoCal::MapInfo *arg2 = 0 ;
@@ -6136,20 +6675,99 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_12(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_17(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
-  GeoCal::VicarRasterImage::access_type arg2 ;
-  std::string *arg3 = 0 ;
-  int arg4 ;
+  int arg2 ;
+  GeoCal::VicarRasterImage::access_type arg3 ;
+  std::string *arg4 = 0 ;
+  int arg5 ;
+  int arg6 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int res4 = SWIG_OLDOBJ ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  GeoCal::VicarRasterImage *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+  } 
+  arg3 = static_cast< GeoCal::VicarRasterImage::access_type >(val3);
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  {
+    try {
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,arg2,arg3,(std::string const &)*arg4,arg5,arg6);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_18(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  GeoCal::VicarRasterImage::access_type arg3 ;
+  std::string *arg4 = 0 ;
   int arg5 ;
   int val1 ;
   int ecode1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
-  int res3 = SWIG_OLDOBJ ;
-  int val4 ;
-  int ecode4 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int res4 = SWIG_OLDOBJ ;
   int val5 ;
   int ecode5 = 0 ;
   GeoCal::VicarRasterImage *result = 0 ;
@@ -6162,25 +6780,25 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_12(PyObject *SWIGUNUSEDPAR
   arg1 = static_cast< int >(val1);
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+  } 
+  arg3 = static_cast< GeoCal::VicarRasterImage::access_type >(val3);
   {
     std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
     }
-    arg3 = ptr;
+    arg4 = ptr;
   }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
   ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
@@ -6188,7 +6806,7 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_12(PyObject *SWIGUNUSEDPAR
   arg5 = static_cast< int >(val5);
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,arg2,(std::string const &)*arg3,arg4,arg5);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,arg2,arg3,(std::string const &)*arg4,arg5);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6199,27 +6817,27 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_12(PyObject *SWIGUNUSEDPAR
     boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_13(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_19(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
-  GeoCal::VicarRasterImage::access_type arg2 ;
-  std::string *arg3 = 0 ;
-  int arg4 ;
+  int arg2 ;
+  GeoCal::VicarRasterImage::access_type arg3 ;
+  std::string *arg4 = 0 ;
   int val1 ;
   int ecode1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
-  int res3 = SWIG_OLDOBJ ;
-  int val4 ;
-  int ecode4 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int res4 = SWIG_OLDOBJ ;
   GeoCal::VicarRasterImage *result = 0 ;
   
   if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
@@ -6230,28 +6848,28 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_13(PyObject *SWIGUNUSEDPAR
   arg1 = static_cast< int >(val1);
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+  } 
+  arg3 = static_cast< GeoCal::VicarRasterImage::access_type >(val3);
   {
     std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
     }
-    arg3 = ptr;
+    arg4 = ptr;
   }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,arg2,(std::string const &)*arg3,arg4);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,arg2,arg3,(std::string const &)*arg4);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6262,24 +6880,25 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_13(PyObject *SWIGUNUSEDPAR
     boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_14(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_20(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
-  GeoCal::VicarRasterImage::access_type arg2 ;
-  std::string *arg3 = 0 ;
+  int arg2 ;
+  GeoCal::VicarRasterImage::access_type arg3 ;
   int val1 ;
   int ecode1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
-  int res3 = SWIG_OLDOBJ ;
+  int val3 ;
+  int ecode3 = 0 ;
   GeoCal::VicarRasterImage *result = 0 ;
   
   if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
@@ -6290,23 +6909,17 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_14(PyObject *SWIGUNUSEDPAR
   arg1 = static_cast< int >(val1);
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarRasterImage::access_type >(val2);
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+  } 
+  arg3 = static_cast< GeoCal::VicarRasterImage::access_type >(val3);
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,arg2,(std::string const &)*arg3);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,arg2,arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6317,18 +6930,16 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_14(PyObject *SWIGUNUSEDPAR
     boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res3)) delete arg3;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res3)) delete arg3;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_15(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_21(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
-  GeoCal::VicarRasterImage::access_type arg2 ;
+  int arg2 ;
   int val1 ;
   int ecode1 = 0 ;
   int val2 ;
@@ -6343,9 +6954,9 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_15(PyObject *SWIGUNUSEDPAR
   arg1 = static_cast< int >(val1);
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::VicarRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
   {
     try {
       result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,arg2);
@@ -6365,7 +6976,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_16(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_22(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   int val1 ;
@@ -6397,15 +7008,17 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_17(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_23(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   std::string *arg2 = 0 ;
   int arg3 ;
   int arg4 ;
-  std::string *arg5 = 0 ;
-  int arg6 ;
-  GeoCal::VicarRasterImage::compression arg7 ;
+  int arg5 ;
+  std::string *arg6 = 0 ;
+  std::string *arg7 = 0 ;
+  int arg8 ;
+  GeoCal::VicarRasterImage::compression arg9 ;
   int val1 ;
   int ecode1 = 0 ;
   int res2 = SWIG_OLDOBJ ;
@@ -6413,11 +7026,234 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_17(PyObject *SWIGUNUSEDPAR
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
-  int res5 = SWIG_OLDOBJ ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int res6 = SWIG_OLDOBJ ;
+  int res7 = SWIG_OLDOBJ ;
+  int val8 ;
+  int ecode8 = 0 ;
+  int val9 ;
+  int ecode9 = 0 ;
+  GeoCal::VicarRasterImage *result = 0 ;
+  
+  if ((nobjs < 9) || (nobjs > 9)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res7 = SWIG_AsPtr_std_string(swig_obj[6], &ptr);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    arg7 = ptr;
+  }
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_VicarRasterImage" "', argument " "8"" of type '" "int""'");
+  } 
+  arg8 = static_cast< int >(val8);
+  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_VicarRasterImage" "', argument " "9"" of type '" "GeoCal::VicarRasterImage::compression""'");
+  } 
+  arg9 = static_cast< GeoCal::VicarRasterImage::compression >(val9);
+  {
+    try {
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(std::string const &)*arg2,arg3,arg4,arg5,(std::string const &)*arg6,(std::string const &)*arg7,arg8,arg9);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_24(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  std::string *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  std::string *arg6 = 0 ;
+  std::string *arg7 = 0 ;
+  int arg8 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int res6 = SWIG_OLDOBJ ;
+  int res7 = SWIG_OLDOBJ ;
+  int val8 ;
+  int ecode8 = 0 ;
+  GeoCal::VicarRasterImage *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res7 = SWIG_AsPtr_std_string(swig_obj[6], &ptr);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    arg7 = ptr;
+  }
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_VicarRasterImage" "', argument " "8"" of type '" "int""'");
+  } 
+  arg8 = static_cast< int >(val8);
+  {
+    try {
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(std::string const &)*arg2,arg3,arg4,arg5,(std::string const &)*arg6,(std::string const &)*arg7,arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_25(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  std::string *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  std::string *arg6 = 0 ;
+  std::string *arg7 = 0 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int res6 = SWIG_OLDOBJ ;
+  int res7 = SWIG_OLDOBJ ;
   GeoCal::VicarRasterImage *result = 0 ;
   
   if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
@@ -6447,30 +7283,36 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_17(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
   {
     std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
-    if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
     }
-    arg5 = ptr;
+    arg6 = ptr;
   }
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "GeoCal::VicarRasterImage::compression""'");
-  } 
-  arg7 = static_cast< GeoCal::VicarRasterImage::compression >(val7);
+  {
+    std::string *ptr = (std::string *)0;
+    res7 = SWIG_AsPtr_std_string(swig_obj[6], &ptr);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    arg7 = ptr;
+  }
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(std::string const &)*arg2,arg3,arg4,(std::string const &)*arg5,arg6,arg7);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(std::string const &)*arg2,arg3,arg4,arg5,(std::string const &)*arg6,(std::string const &)*arg7);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6482,23 +7324,25 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_17(PyObject *SWIGUNUSEDPAR
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_18(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_26(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   std::string *arg2 = 0 ;
   int arg3 ;
   int arg4 ;
-  std::string *arg5 = 0 ;
-  int arg6 ;
+  int arg5 ;
+  std::string *arg6 = 0 ;
   int val1 ;
   int ecode1 = 0 ;
   int res2 = SWIG_OLDOBJ ;
@@ -6506,9 +7350,9 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_18(PyObject *SWIGUNUSEDPAR
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
-  int res5 = SWIG_OLDOBJ ;
-  int val6 ;
-  int ecode6 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int res6 = SWIG_OLDOBJ ;
   GeoCal::VicarRasterImage *result = 0 ;
   
   if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
@@ -6538,25 +7382,25 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_18(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
   {
     std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
-    if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
     }
-    arg5 = ptr;
+    arg6 = ptr;
   }
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(std::string const &)*arg2,arg3,arg4,(std::string const &)*arg5,arg6);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(std::string const &)*arg2,arg3,arg4,arg5,(std::string const &)*arg6);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6568,22 +7412,22 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_18(PyObject *SWIGUNUSEDPAR
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_19(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_27(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   std::string *arg2 = 0 ;
   int arg3 ;
   int arg4 ;
-  std::string *arg5 = 0 ;
+  int arg5 ;
   int val1 ;
   int ecode1 = 0 ;
   int res2 = SWIG_OLDOBJ ;
@@ -6591,7 +7435,8 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_19(PyObject *SWIGUNUSEDPAR
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
-  int res5 = SWIG_OLDOBJ ;
+  int val5 ;
+  int ecode5 = 0 ;
   GeoCal::VicarRasterImage *result = 0 ;
   
   if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
@@ -6621,20 +7466,14 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_19(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
-  {
-    std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
-    if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
-    }
-    arg5 = ptr;
-  }
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(std::string const &)*arg2,arg3,arg4,(std::string const &)*arg5);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(std::string const &)*arg2,arg3,arg4,arg5);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6646,16 +7485,14 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_19(PyObject *SWIGUNUSEDPAR
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res5)) delete arg5;
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res5)) delete arg5;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_20(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_28(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   std::string *arg2 = 0 ;
@@ -6718,25 +7555,276 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_21(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_29(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   GeoCal::MapInfo *arg2 = 0 ;
   std::string *arg3 = 0 ;
-  std::string *arg4 = 0 ;
-  int arg5 ;
-  GeoCal::VicarRasterImage::compression arg6 ;
+  int arg4 ;
+  std::string *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  int arg7 ;
+  GeoCal::VicarRasterImage::compression arg8 ;
   int val1 ;
   int ecode1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
   int res3 = SWIG_OLDOBJ ;
-  int res4 = SWIG_OLDOBJ ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  int val7 ;
+  int ecode7 = 0 ;
+  int val8 ;
+  int ecode8 = 0 ;
+  GeoCal::VicarRasterImage *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_VicarRasterImage" "', argument " "8"" of type '" "GeoCal::VicarRasterImage::compression""'");
+  } 
+  arg8 = static_cast< GeoCal::VicarRasterImage::compression >(val8);
+  {
+    try {
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,arg4,(std::string const &)*arg5,(std::string const &)*arg6,arg7,arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_30(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  int arg4 ;
+  std::string *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  int arg7 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int res3 = SWIG_OLDOBJ ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  int val7 ;
+  int ecode7 = 0 ;
+  GeoCal::VicarRasterImage *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_VicarRasterImage" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarRasterImage" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  {
+    try {
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,arg4,(std::string const &)*arg5,(std::string const &)*arg6,arg7);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_31(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  int arg4 ;
+  std::string *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int res3 = SWIG_OLDOBJ ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
+  int res6 = SWIG_OLDOBJ ;
   GeoCal::VicarRasterImage *result = 0 ;
   
   if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
@@ -6781,30 +7869,36 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_21(PyObject *SWIGUNUSEDPAR
     }
     arg3 = ptr;
   }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
   {
     std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
     }
-    arg4 = ptr;
+    arg5 = ptr;
   }
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "GeoCal::VicarRasterImage::compression""'");
-  } 
-  arg6 = static_cast< GeoCal::VicarRasterImage::compression >(val6);
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,arg5,arg6);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,arg4,(std::string const &)*arg5,(std::string const &)*arg6);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6816,31 +7910,33 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_21(PyObject *SWIGUNUSEDPAR
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_22(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_32(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   GeoCal::MapInfo *arg2 = 0 ;
   std::string *arg3 = 0 ;
-  std::string *arg4 = 0 ;
-  int arg5 ;
+  int arg4 ;
+  std::string *arg5 = 0 ;
   int val1 ;
   int ecode1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
   int res3 = SWIG_OLDOBJ ;
-  int res4 = SWIG_OLDOBJ ;
-  int val5 ;
-  int ecode5 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
   GeoCal::VicarRasterImage *result = 0 ;
   
   if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
@@ -6885,25 +7981,25 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_22(PyObject *SWIGUNUSEDPAR
     }
     arg3 = ptr;
   }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
   {
     std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
     }
-    arg4 = ptr;
+    arg5 = ptr;
   }
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarRasterImage" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,arg5);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,arg4,(std::string const &)*arg5);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6915,28 +8011,29 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_22(PyObject *SWIGUNUSEDPAR
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_23(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_33(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   GeoCal::MapInfo *arg2 = 0 ;
   std::string *arg3 = 0 ;
-  std::string *arg4 = 0 ;
+  int arg4 ;
   int val1 ;
   int ecode1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
   int res3 = SWIG_OLDOBJ ;
-  int res4 = SWIG_OLDOBJ ;
+  int val4 ;
+  int ecode4 = 0 ;
   GeoCal::VicarRasterImage *result = 0 ;
   
   if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
@@ -6981,20 +8078,14 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_23(PyObject *SWIGUNUSEDPAR
     }
     arg3 = ptr;
   }
-  {
-    std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    arg4 = ptr;
-  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarRasterImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
   {
     try {
-      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4);
+      result = (GeoCal::VicarRasterImage *)new GeoCal::VicarRasterImage(arg1,(GeoCal::MapInfo const &)*arg2,(std::string const &)*arg3,arg4);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7006,16 +8097,14 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_23(PyObject *SWIGUNUSEDPAR
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_24(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_34(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   GeoCal::MapInfo *arg2 = 0 ;
@@ -7091,7 +8180,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_25(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarRasterImage__SWIG_35(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   GeoCal::MapInfo *arg2 = 0 ;
@@ -7154,9 +8243,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_VicarRasterImage(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[8];
+  PyObject *argv[10];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_VicarRasterImage",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_VicarRasterImage",0,9,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
     int _v = 0;
@@ -7167,12 +8256,12 @@ SWIGINTERN PyObject *_wrap_new_VicarRasterImage(PyObject *self, PyObject *args) 
       }
     }
     if (!_v) goto check_1;
-    return _wrap_new_VicarRasterImage__SWIG_16(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_22(self, argc, argv);
   }
 check_1:
   
   if (argc == 1) {
-    return _wrap_new_VicarRasterImage__SWIG_4(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_5(self, argc, argv);
   }
   if (argc == 2) {
     int _v = 0;
@@ -7188,7 +8277,7 @@ check_1:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_3;
-    return _wrap_new_VicarRasterImage__SWIG_25(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_35(self, argc, argv);
   }
 check_3:
   
@@ -7208,7 +8297,7 @@ check_3:
       }
     }
     if (!_v) goto check_4;
-    return _wrap_new_VicarRasterImage__SWIG_15(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_21(self, argc, argv);
   }
 check_4:
   
@@ -7219,12 +8308,12 @@ check_4:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_5;
-    return _wrap_new_VicarRasterImage__SWIG_11(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_16(self, argc, argv);
   }
 check_5:
   
   if (argc == 2) {
-    return _wrap_new_VicarRasterImage__SWIG_3(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_4(self, argc, argv);
   }
   if (argc == 3) {
     int _v = 0;
@@ -7245,7 +8334,7 @@ check_5:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_7;
-    return _wrap_new_VicarRasterImage__SWIG_24(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_34(self, argc, argv);
   }
 check_7:
   
@@ -7266,11 +8355,13 @@ check_7:
     }
     if (!_v) goto check_8;
     {
-      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
-      _v = SWIG_CheckState(res);
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
     }
     if (!_v) goto check_8;
-    return _wrap_new_VicarRasterImage__SWIG_14(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_20(self, argc, argv);
   }
 check_8:
   
@@ -7286,12 +8377,12 @@ check_8:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_9;
-    return _wrap_new_VicarRasterImage__SWIG_10(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_15(self, argc, argv);
   }
 check_9:
   
   if (argc == 3) {
-    return _wrap_new_VicarRasterImage__SWIG_2(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_3(self, argc, argv);
   }
   if (argc == 4) {
     int _v = 0;
@@ -7313,11 +8404,13 @@ check_9:
     }
     if (!_v) goto check_11;
     {
-      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
-      _v = SWIG_CheckState(res);
+      {
+        int res = SWIG_AsVal_int(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
     }
     if (!_v) goto check_11;
-    return _wrap_new_VicarRasterImage__SWIG_23(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_33(self, argc, argv);
   }
 check_11:
   
@@ -7338,11 +8431,18 @@ check_11:
     }
     if (!_v) goto check_12;
     {
-      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_12;
+    {
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_12;
-    return _wrap_new_VicarRasterImage__SWIG_13(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_19(self, argc, argv);
   }
 check_12:
   
@@ -7367,7 +8467,7 @@ check_12:
       }
     }
     if (!_v) goto check_13;
-    return _wrap_new_VicarRasterImage__SWIG_20(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_28(self, argc, argv);
   }
 check_13:
   
@@ -7383,7 +8483,7 @@ check_13:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_14;
-    return _wrap_new_VicarRasterImage__SWIG_9(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_14(self, argc, argv);
   }
 check_14:
   
@@ -7396,12 +8496,12 @@ check_14:
       }
     }
     if (!_v) goto check_15;
-    return _wrap_new_VicarRasterImage__SWIG_1(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_2(self, argc, argv);
   }
 check_15:
   
   if (argc == 4) {
-    return _wrap_new_VicarRasterImage__SWIG_7(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_10(self, argc, argv);
   }
   if (argc == 5) {
     int _v = 0;
@@ -7423,18 +8523,18 @@ check_15:
     }
     if (!_v) goto check_17;
     {
-      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_17;
-    {
       {
-        int res = SWIG_AsVal_int(argv[4], NULL);
+        int res = SWIG_AsVal_int(argv[3], NULL);
         _v = SWIG_CheckState(res);
       }
     }
     if (!_v) goto check_17;
-    return _wrap_new_VicarRasterImage__SWIG_22(self, argc, argv);
+    {
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_17;
+    return _wrap_new_VicarRasterImage__SWIG_32(self, argc, argv);
   }
 check_17:
   
@@ -7455,7 +8555,14 @@ check_17:
     }
     if (!_v) goto check_18;
     {
-      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_18;
+    {
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_18;
@@ -7466,7 +8573,7 @@ check_17:
       }
     }
     if (!_v) goto check_18;
-    return _wrap_new_VicarRasterImage__SWIG_12(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_18(self, argc, argv);
   }
 check_18:
   
@@ -7492,11 +8599,13 @@ check_18:
     }
     if (!_v) goto check_19;
     {
-      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
-      _v = SWIG_CheckState(res);
+      {
+        int res = SWIG_AsVal_int(argv[4], NULL);
+        _v = SWIG_CheckState(res);
+      }
     }
     if (!_v) goto check_19;
-    return _wrap_new_VicarRasterImage__SWIG_19(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_27(self, argc, argv);
   }
 check_19:
   
@@ -7513,13 +8622,11 @@ check_19:
     }
     if (!_v) goto check_20;
     {
-      {
-        int res = SWIG_AsVal_int(argv[4], NULL);
-        _v = SWIG_CheckState(res);
-      }
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_20;
-    return _wrap_new_VicarRasterImage__SWIG_8(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_13(self, argc, argv);
   }
 check_20:
   
@@ -7532,19 +8639,12 @@ check_20:
       }
     }
     if (!_v) goto check_21;
-    {
-      {
-        int res = SWIG_AsVal_bool(argv[4], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_21;
-    return _wrap_new_VicarRasterImage__SWIG_0(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_1(self, argc, argv);
   }
 check_21:
   
   if (argc == 5) {
-    return _wrap_new_VicarRasterImage__SWIG_6(self, argc, argv);
+    return _wrap_new_VicarRasterImage__SWIG_9(self, argc, argv);
   }
   if (argc == 6) {
     int _v = 0;
@@ -7566,18 +8666,23 @@ check_21:
     }
     if (!_v) goto check_23;
     {
-      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_23;
-    {
       {
-        int res = SWIG_AsVal_int(argv[4], NULL);
+        int res = SWIG_AsVal_int(argv[3], NULL);
         _v = SWIG_CheckState(res);
       }
     }
     if (!_v) goto check_23;
-    return _wrap_new_VicarRasterImage__SWIG_21(self, argc, argv);
+    {
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_23;
+    {
+      int res = SWIG_AsPtr_std_string(argv[5], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_23;
+    return _wrap_new_VicarRasterImage__SWIG_31(self, argc, argv);
   }
 check_23:
   
@@ -7591,48 +8696,340 @@ check_23:
     }
     if (!_v) goto check_24;
     {
-      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_24;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_24;
+    {
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_24;
-    return _wrap_new_VicarRasterImage__SWIG_18(self, argc, argv);
+    {
+      {
+        int res = SWIG_AsVal_int(argv[4], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_24;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[5], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_24;
+    return _wrap_new_VicarRasterImage__SWIG_17(self, argc, argv);
   }
 check_24:
   
   if (argc == 6) {
-    return _wrap_new_VicarRasterImage__SWIG_5(self, argc, argv);
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[0], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_25;
+    {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_25;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_25;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[4], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_25;
+    {
+      int res = SWIG_AsPtr_std_string(argv[5], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_25;
+    return _wrap_new_VicarRasterImage__SWIG_26(self, argc, argv);
+  }
+check_25:
+  
+  if (argc == 6) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_26;
+    {
+      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_26;
+    {
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_26;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[5], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_26;
+    return _wrap_new_VicarRasterImage__SWIG_12(self, argc, argv);
+  }
+check_26:
+  
+  if (argc == 6) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_27;
+    {
+      {
+        int res = SWIG_AsVal_bool(argv[5], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_27;
+    return _wrap_new_VicarRasterImage__SWIG_0(self, argc, argv);
+  }
+check_27:
+  
+  if (argc == 6) {
+    return _wrap_new_VicarRasterImage__SWIG_8(self, argc, argv);
   }
   if (argc == 7) {
-    return _wrap_new_VicarRasterImage__SWIG_17(self, argc, argv);
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[0], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_29;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_29;
+    {
+      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_29;
+    {
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_29;
+    {
+      int res = SWIG_AsPtr_std_string(argv[5], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_29;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[6], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_29;
+    return _wrap_new_VicarRasterImage__SWIG_30(self, argc, argv);
+  }
+check_29:
+  
+  if (argc == 7) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[0], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_30;
+    {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_30;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_30;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[4], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_30;
+    {
+      int res = SWIG_AsPtr_std_string(argv[5], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_30;
+    {
+      int res = SWIG_AsPtr_std_string(argv[6], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_30;
+    return _wrap_new_VicarRasterImage__SWIG_25(self, argc, argv);
+  }
+check_30:
+  
+  if (argc == 7) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_31;
+    {
+      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_31;
+    {
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_31;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[5], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_31;
+    return _wrap_new_VicarRasterImage__SWIG_11(self, argc, argv);
+  }
+check_31:
+  
+  if (argc == 7) {
+    return _wrap_new_VicarRasterImage__SWIG_7(self, argc, argv);
+  }
+  if (argc == 8) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[0], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_33;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_33;
+    {
+      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_33;
+    {
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_33;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[6], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_33;
+    return _wrap_new_VicarRasterImage__SWIG_29(self, argc, argv);
+  }
+check_33:
+  
+  if (argc == 8) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[0], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_34;
+    {
+      int res = SWIG_AsPtr_std_string(argv[6], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_34;
+    return _wrap_new_VicarRasterImage__SWIG_24(self, argc, argv);
+  }
+check_34:
+  
+  if (argc == 8) {
+    return _wrap_new_VicarRasterImage__SWIG_6(self, argc, argv);
+  }
+  if (argc == 9) {
+    return _wrap_new_VicarRasterImage__SWIG_23(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_VicarRasterImage'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,GeoCal::VicarRasterImage::access_type,int,int,bool)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,GeoCal::VicarRasterImage::access_type,int,int)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,GeoCal::VicarRasterImage::access_type,int)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,GeoCal::VicarRasterImage::access_type)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,int,GeoCal::VicarRasterImage::access_type,int,int,bool)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,int,GeoCal::VicarRasterImage::access_type,int,int)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,int,GeoCal::VicarRasterImage::access_type,int)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,int,GeoCal::VicarRasterImage::access_type)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,int)\n"
     "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,std::string const &,int,int,int,GeoCal::VicarRasterImage::compression)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,std::string const &,int,int,int,std::string const &,int,GeoCal::VicarRasterImage::compression)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,std::string const &,int,int,int,std::string const &,int)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,std::string const &,int,int,int,std::string const &)\n"
     "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,std::string const &,int,int,int)\n"
     "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,std::string const &,int,int)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,GeoCal::MapInfo const &,std::string const &,int,GeoCal::VicarRasterImage::compression)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,GeoCal::MapInfo const &,std::string const &,int,std::string const &,int,GeoCal::VicarRasterImage::compression)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,GeoCal::MapInfo const &,std::string const &,int,std::string const &,int)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,GeoCal::MapInfo const &,std::string const &,int,std::string const &)\n"
     "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,GeoCal::MapInfo const &,std::string const &,int)\n"
     "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,GeoCal::MapInfo const &,std::string const &)\n"
     "    GeoCal::VicarRasterImage::VicarRasterImage(std::string const &,GeoCal::MapInfo const &)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::VicarRasterImage::access_type,std::string const &,int,int)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::VicarRasterImage::access_type,std::string const &,int)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::VicarRasterImage::access_type,std::string const &)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::VicarRasterImage::access_type)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,int,GeoCal::VicarRasterImage::access_type,std::string const &,int,int)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,int,GeoCal::VicarRasterImage::access_type,std::string const &,int)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,int,GeoCal::VicarRasterImage::access_type,std::string const &)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,int,GeoCal::VicarRasterImage::access_type)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,int)\n"
     "    GeoCal::VicarRasterImage::VicarRasterImage(int)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(int,std::string const &,int,int,std::string const &,int,GeoCal::VicarRasterImage::compression)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(int,std::string const &,int,int,std::string const &,int)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(int,std::string const &,int,int,std::string const &)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,std::string const &,int,int,int,std::string const &,std::string const &,int,GeoCal::VicarRasterImage::compression)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,std::string const &,int,int,int,std::string const &,std::string const &,int)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,std::string const &,int,int,int,std::string const &,std::string const &)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,std::string const &,int,int,int,std::string const &)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,std::string const &,int,int,int)\n"
     "    GeoCal::VicarRasterImage::VicarRasterImage(int,std::string const &,int,int)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::MapInfo const &,std::string const &,std::string const &,int,GeoCal::VicarRasterImage::compression)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::MapInfo const &,std::string const &,std::string const &,int)\n"
-    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::MapInfo const &,std::string const &,std::string const &)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::MapInfo const &,std::string const &,int,std::string const &,std::string const &,int,GeoCal::VicarRasterImage::compression)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::MapInfo const &,std::string const &,int,std::string const &,std::string const &,int)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::MapInfo const &,std::string const &,int,std::string const &,std::string const &)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::MapInfo const &,std::string const &,int,std::string const &)\n"
+    "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::MapInfo const &,std::string const &,int)\n"
     "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::MapInfo const &,std::string const &)\n"
     "    GeoCal::VicarRasterImage::VicarRasterImage(int,GeoCal::MapInfo const &)\n");
   return 0;
@@ -7908,6 +9305,92 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_VicarRasterImage__v_number_band(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarRasterImage *arg1 = (GeoCal::VicarRasterImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarRasterImage__v_number_band" "', argument " "1"" of type '" "GeoCal::VicarRasterImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::VicarRasterImage const *)arg1)->number_band();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarRasterImage__v_band_id(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarRasterImage *arg1 = (GeoCal::VicarRasterImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarRasterImage__v_band_id" "', argument " "1"" of type '" "GeoCal::VicarRasterImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::VicarRasterImage const *)arg1)->band_id();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_VicarRasterImage__v_rpc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::VicarRasterImage *arg1 = (GeoCal::VicarRasterImage *) 0 ;
@@ -8056,9 +9539,10 @@ SWIGINTERN PyObject *VicarRasterImage_swiginit(PyObject *SWIGUNUSEDPARM(self), P
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_VicarRasterImage", _wrap_new_VicarRasterImage, METH_VARARGS, (char *)"\n"
-		"GeoCal::VicarRasterImage::VicarRasterImage(int Instance, const MapInfo &M, const std::string &Type=\"BYTE\",\n"
-		"const std::string &Name=\"OUT\", int Number_line_per_tile=100,\n"
-		"compression C=VicarFile::NONE)\n"
+		"GeoCal::VicarRasterImage::VicarRasterImage(int Instance, const MapInfo &M, const std::string &Type=\"BYTE\", int\n"
+		"Number_band=1, const std::string &Org=\"BSQ\", const std::string\n"
+		"&Name=\"OUT\", int Number_line_per_tile=100, compression\n"
+		"C=VicarFile::NONE)\n"
 		"Create a new VICAR file with the given size.\n"
 		"\n"
 		"Use the VICAR Name and Instance input (so for example, \"INP\" and 2\n"
@@ -8086,6 +9570,16 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"VicarRasterImage_set_map_info", _wrap_VicarRasterImage_set_map_info, METH_VARARGS, (char *)"\n"
 		"void GeoCal::VicarRasterImage::set_map_info(const MapInfo &Mi)\n"
 		"Set the Map Info. \n"
+		""},
+	 { (char *)"VicarRasterImage__v_number_band", (PyCFunction)_wrap_VicarRasterImage__v_number_band, METH_O, (char *)"\n"
+		"int GeoCal::VicarRasterImage::number_band() const\n"
+		"Number of bands in file. \n"
+		""},
+	 { (char *)"VicarRasterImage__v_band_id", (PyCFunction)_wrap_VicarRasterImage__v_band_id, METH_O, (char *)"\n"
+		"int GeoCal::VicarRasterImage::band_id() const\n"
+		"Band id we are reading.\n"
+		"\n"
+		"Note that following the GDAL convention, this is 1 based. \n"
 		""},
 	 { (char *)"VicarRasterImage__v_rpc", (PyCFunction)_wrap_VicarRasterImage__v_rpc, METH_O, NULL},
 	 { (char *)"VicarRasterImage__v_map_info", (PyCFunction)_wrap_VicarRasterImage__v_map_info, METH_O, NULL},

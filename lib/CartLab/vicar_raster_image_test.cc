@@ -58,7 +58,7 @@ BOOST_AUTO_TEST_CASE(vicar_label)
   if(!VicarFile::vicar_available())
     return;
   std::string fname = "test_out/vicar_copy.img";
-  VicarRasterImage r(fname, VicarFile::UPDATE);
+  VicarRasterImage r(fname, 1, VicarFile::UPDATE);
   Rpc rpc;
   rpc.rpc_type = Rpc::RPC_B;
   rpc.line_offset = 2881;
@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
   // marking the files as pixel is point when really it is pixel as
   // area, see Srtm class for details.
   VicarRasterImage fpixel_is_point_make_area
-    (pixel_is_point, VicarFile::READ, 100, 4, true);
+    (pixel_is_point, 1, VicarFile::READ, 100, 4, true);
   BOOST_CHECK_CLOSE
     (distance(*fpixel_is_point_make_area.ground_coordinate(-0.5, -0.5),
 	      ulc), 0, 1e-4);

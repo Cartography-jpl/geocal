@@ -131,30 +131,33 @@ VicarFile::VicarFile(const std::string& Fname, int Number_line,
 VicarFile::VicarFile(const std::string& Fname, int Number_line, 
 		     int Number_sample, int Number_band,
 		     const std::string& Type,
+		     const std::string& Org,
 		     compression Compress)
   : fname_(Fname), force_area_pixel_(false), 
     unit_(-1), number_line_(Number_line), 
     number_sample_(Number_sample), number_band_(Number_band), access_(WRITE)
 {
 #ifdef HAVE_VICAR_RTL
+  if(Org == "BIP")
+    throw Exception("Note that BIP doesn't seem to currently work. This hasn't been worth fixing, so we'll need to fix it only if you actually need BIP");
   unit_ = file_name_to_unit(Fname);
   int status;
   switch(Compress) {
   case NONE:
     status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
-		    Number_sample, "U_NB", Number_band, "U_ORG", "BSQ",
+		    Number_sample, "U_NB", Number_band, "U_ORG", Org.c_str(),
 		    "O_FORMAT", Type.c_str(), 
 		    "U_FORMAT", Type.c_str(), NULL);
     break;
   case BASIC:
     status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
-		    Number_sample, "U_NB", Number_band, "U_ORG", "BSQ",
+		    Number_sample, "U_NB", Number_band, "U_ORG", Org.c_str(),
 		    "O_FORMAT", Type.c_str(), 
 		    "U_FORMAT", Type.c_str(), "COMPRESS", "BASIC", NULL);
     break;
   case BASIC2:
     status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
-		    Number_sample, "U_NB", Number_band, "U_ORG", "BSQ",
+		    Number_sample, "U_NB", Number_band, "U_ORG", Org.c_str(),
 		    "O_FORMAT", Type.c_str(), 
 		    "U_FORMAT", Type.c_str(), "COMPRESS", "BASIC2", NULL);
     break;
@@ -196,14 +199,19 @@ void VicarFile::set_type(const std::string& Type)
 //-----------------------------------------------------------------------
 
 VicarFile::VicarFile(int Instance, int Number_line, int Number_sample,
+		     int Number_band,
 		     const std::string& Type,
-		     const std::string& Name, compression Compress)
+		     const std::string& Name, 
+		     const std::string& Org,
+		     compression Compress)
   : force_area_pixel_(false),
     unit_(-1), number_line_(Number_line), number_sample_(Number_sample),
-    number_band_(1),
+    number_band_(Number_band),
     access_(WRITE)
 {
 #ifdef HAVE_VICAR_RTL
+  if(Org == "BIP")
+    throw Exception("Note that BIP doesn't seem to currently work. This hasn't been worth fixing, so we'll need to fix it only if you actually need BIP");
   int status = zvunit(&unit_, const_cast<char*>(Name.c_str()), Instance, 
 		      NULL);
   fname_ = Name + " Instance: " + boost::lexical_cast<std::string>(Instance);
@@ -213,18 +221,21 @@ VicarFile::VicarFile(int Instance, int Number_line, int Number_sample,
   case NONE:
     status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
 		    Number_sample, "O_FORMAT", Type.c_str(), 
+		    "U_NB", Number_band, "U_ORG", Org.c_str(),
 		    "U_FORMAT", Type.c_str(), 
 		    NULL);
     break;
   case BASIC:
     status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
 		    Number_sample, "O_FORMAT", Type.c_str(), 
+		    "U_NB", Number_band, "U_ORG", Org.c_str(),
 		    "U_FORMAT", Type.c_str(), "COMPRESS", "BASIC", 
 		    NULL);
     break;
   case BASIC2:
     status = zvopen(unit(), "OP", "WRITE", "U_NL", Number_line, "U_NS",
 		    Number_sample, "O_FORMAT", Type.c_str(), 
+		    "U_NB", Number_band, "U_ORG", Org.c_str(),
 		    "U_FORMAT", Type.c_str(), "COMPRESS", "BASIC2", 
 		    NULL);
     break;
@@ -737,17 +748,19 @@ void VicarFile::reopen_file() const
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int VicarFile::zvreadw(void* buffer, int Line) const
+int VicarFile::zvreadw(void* buffer, int Line, int Band) const
 {
 #ifdef HAVE_VICAR_RTL
-  int status = zvread(unit(), buffer, "LINE", Line, NULL);
+  int status = zvread(unit(), buffer, "LINE", Line, "BAND", Band, 
+		      "NBANDS", 1, NULL);
 
 // Vicar is odd about reading to the end of file. If we get this
 // error, then try closing and reopening file and then doing the read.
 
   if(status ==END_OF_FILE) {
     reopen_file();
-    status = zvread(unit(), buffer, "LINE", Line, NULL);
+    status = zvread(unit(), buffer, "LINE", Line, "BAND", Band, 
+		    "NBANDS", 1, NULL);
   }
   return status;
 #else
@@ -761,17 +774,17 @@ int VicarFile::zvreadw(void* buffer, int Line) const
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int VicarFile::zvreadw(void* buffer) const
+int VicarFile::zvreadw(void* buffer, int Band) const
 {
 #ifdef HAVE_VICAR_RTL
-  int status = zvread(unit(), buffer, NULL);
+  int status = zvread(unit(), buffer, "BAND", Band, "NBANDS", 1, NULL);
 
 // Vicar is odd about reading to the end of file. If we get this
 // error, then try closing and reopening file and then doing the read.
 
   if(status ==END_OF_FILE) {
     reopen_file();
-    status = zvread(unit(), buffer, NULL);
+    status = zvread(unit(), buffer, "BAND", Band, "NBANDS", 1, NULL);
   }
   return status;
 #else
@@ -785,10 +798,10 @@ int VicarFile::zvreadw(void* buffer) const
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int VicarFile::zvwritw(int unit, void* buffer)
+int VicarFile::zvwritw(int unit, void* buffer, int Band)
 {
 #ifdef HAVE_VICAR_RTL
-  return zvwrit(unit, buffer, NULL);
+  return zvwrit(unit, buffer, "BAND", Band, "NBANDS", 1, NULL);
 #else
   throw VicarNotAvailableException();
 #endif
@@ -800,10 +813,10 @@ int VicarFile::zvwritw(int unit, void* buffer)
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int VicarFile::zvwritw(int unit, void* buffer, int Line)
+int VicarFile::zvwritw(int unit, void* buffer, int Line, int Band)
 {
 #ifdef HAVE_VICAR_RTL
-  return zvwrit(unit, buffer, "LINE", Line, NULL);
+  return zvwrit(unit, buffer, "LINE", Line, "BAND", Band, NULL);
 #else
   throw VicarNotAvailableException();
 #endif

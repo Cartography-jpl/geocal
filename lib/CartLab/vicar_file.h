@@ -95,12 +95,15 @@ public:
   VicarFile(const std::string& Fname, int Number_line, int Number_sample,
 	    int Number_band,
 	    const std::string& Type = "BYTE",
+	    const std::string& Org = "BSQ",
 	    compression C = NONE);
   VicarFile(int Instance, access_type Access = READ, 
 	    const std::string& Name = "INP");
   VicarFile(int Instance, int Number_line, int Number_sample,
+	    int Number_band = 1,
 	    const std::string& Type = "BYTE",
 	    const std::string& Name = "OUT",
+	    const std::string& Org = "BSQ",
 	    compression C = NONE);
   virtual ~VicarFile();
 
@@ -250,10 +253,10 @@ public:
        << "  Number sample: " << number_sample() << "\n";
   }
 
-  int zvreadw(void* buffer, int Line) const;
-  int zvreadw(void* buffer) const;
-  static int zvwritw(int unit, void* buffer);
-  static int zvwritw(int unit, void* buffer, int Line);
+  int zvreadw(void* buffer, int Line, int Band) const;
+  int zvreadw(void* buffer, int Band) const;
+  static int zvwritw(int unit, void* buffer, int Band);
+  static int zvwritw(int unit, void* buffer, int Line, int Band);
   static int zlgetw(int unit, const char* type, const char* key, char* value);
   static int zlgetsh(int unit, const char* key, char* value);
   static int zlgetsh(int unit, const char* key, char* value, int ulen);

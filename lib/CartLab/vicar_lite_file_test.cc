@@ -157,7 +157,7 @@ BOOST_AUTO_TEST_CASE(vicar_lite_point_vs_area)
   // marking the files as pixel is point when really it is pixel as
   // area, see Srtm class for details.
   VicarLiteRasterImage fpixel_is_point_make_area
-    (pixel_is_point, VicarLiteFile::READ, 0, -1, -1, true);
+    (pixel_is_point, 1, VicarLiteFile::READ, -1, -1, true);
   BOOST_CHECK_CLOSE
     (distance(*fpixel_is_point_make_area.ground_coordinate(-0.5, -0.5),
 	      ulc), 0, 1e-4);

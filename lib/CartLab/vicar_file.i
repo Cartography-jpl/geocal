@@ -25,12 +25,15 @@ public:
 	    const std::string& Type = "BYTE");
   VicarFile(const std::string& Fname, int Number_line, int Number_sample,
 	    int Number_band,
-	    const std::string& Type = "BYTE");
+	    const std::string& Type = "BYTE", 
+	    const std::string& Org = "BSQ");
   VicarFile(int Instance, access_type Access = READ, 
 	    const std::string& Name = "INP");
   VicarFile(int Instance, int Number_line, int Number_sample,
+	    int Number_band = 1,
 	    const std::string& Type = "BYTE",
 	    const std::string& Name = "OUT",
+	    const std::string& Org = "BSQ",
 	    compression C = NONE);
   ~VicarFile();
   %python_attribute(access, access_type)

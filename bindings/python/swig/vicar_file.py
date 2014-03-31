@@ -180,8 +180,9 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
     BASIC2 = _vicar_file.VicarFile_BASIC2
     def __init__(self, *args): 
         """
-        VicarFile::VicarFile(int Instance, int Number_line, int Number_sample, const std::string
-        &Type="BYTE", const std::string &Name="OUT", compression C=NONE)
+        VicarFile::VicarFile(int Instance, int Number_line, int Number_sample, int Number_band=1,
+        const std::string &Type="BYTE", const std::string &Name="OUT",
+        const std::string &Org="BSQ", compression C=NONE)
         Create a new VICAR file with the given size.
 
         Use the VICAR Name and Instance input (so for example, "INP" and 2
@@ -246,6 +247,17 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
         return _vicar_file.VicarFile_file_name_to_unit(*args)
 
     file_name_to_unit = staticmethod(file_name_to_unit)
+    def _v_number_band(self):
+        """
+        int GeoCal::VicarFile::number_band() const
+        Number of bands in file. 
+        """
+        return _vicar_file.VicarFile__v_number_band(self)
+
+    @property
+    def number_band(self):
+        return self._v_number_band()
+
     def _v_number_line(self):
         """
         int GeoCal::VicarFile::number_line() const
@@ -396,6 +408,7 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
 VicarFile._v_access = new_instancemethod(_vicar_file.VicarFile__v_access,None,VicarFile)
 VicarFile._v_force_area_pixel = new_instancemethod(_vicar_file.VicarFile__v_force_area_pixel,None,VicarFile)
 VicarFile._v_file_name = new_instancemethod(_vicar_file.VicarFile__v_file_name,None,VicarFile)
+VicarFile._v_number_band = new_instancemethod(_vicar_file.VicarFile__v_number_band,None,VicarFile)
 VicarFile._v_number_line = new_instancemethod(_vicar_file.VicarFile__v_number_line,None,VicarFile)
 VicarFile._v_number_sample = new_instancemethod(_vicar_file.VicarFile__v_number_sample,None,VicarFile)
 VicarFile._v_type = new_instancemethod(_vicar_file.VicarFile__v_type,None,VicarFile)

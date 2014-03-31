@@ -136,9 +136,10 @@ class VicarRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile)
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::VicarRasterImage::VicarRasterImage(int Instance, const MapInfo &M, const std::string &Type="BYTE",
-        const std::string &Name="OUT", int Number_line_per_tile=100,
-        compression C=VicarFile::NONE)
+        GeoCal::VicarRasterImage::VicarRasterImage(int Instance, const MapInfo &M, const std::string &Type="BYTE", int
+        Number_band=1, const std::string &Org="BSQ", const std::string
+        &Name="OUT", int Number_line_per_tile=100, compression
+        C=VicarFile::NONE)
         Create a new VICAR file with the given size.
 
         Use the VICAR Name and Instance input (so for example, "INP" and 2
@@ -187,6 +188,30 @@ class VicarRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile)
         """
         return _vicar_raster_image.VicarRasterImage_set_map_info(self, *args)
 
+    def _v_number_band(self):
+        """
+        int GeoCal::VicarRasterImage::number_band() const
+        Number of bands in file. 
+        """
+        return _vicar_raster_image.VicarRasterImage__v_number_band(self)
+
+    @property
+    def number_band(self):
+        return self._v_number_band()
+
+    def _v_band_id(self):
+        """
+        int GeoCal::VicarRasterImage::band_id() const
+        Band id we are reading.
+
+        Note that following the GDAL convention, this is 1 based. 
+        """
+        return _vicar_raster_image.VicarRasterImage__v_band_id(self)
+
+    @property
+    def band_id(self):
+        return self._v_band_id()
+
     @property
     def rpc(self):
         return self._v_rpc()
@@ -197,10 +222,10 @@ class VicarRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile)
 
     @classmethod
     def pickle_format_version(cls):
-      return 1
+      return 2
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.vicar_file.file_name,self.vicar_file.access,self.number_tile_line,self.number_tile,self.vicar_file.force_area_pixel)
+      return _new_from_init, (self.__class__, 2, self.vicar_file.file_name,self.band_id,self.vicar_file.access,self.number_tile_line,self.number_tile,self.vicar_file.force_area_pixel)
 
     @rpc.setter
     def rpc(self, val):
@@ -223,6 +248,8 @@ VicarRasterImage.flush = new_instancemethod(_vicar_raster_image.VicarRasterImage
 VicarRasterImage.close = new_instancemethod(_vicar_raster_image.VicarRasterImage_close,None,VicarRasterImage)
 VicarRasterImage.set_rpc = new_instancemethod(_vicar_raster_image.VicarRasterImage_set_rpc,None,VicarRasterImage)
 VicarRasterImage.set_map_info = new_instancemethod(_vicar_raster_image.VicarRasterImage_set_map_info,None,VicarRasterImage)
+VicarRasterImage._v_number_band = new_instancemethod(_vicar_raster_image.VicarRasterImage__v_number_band,None,VicarRasterImage)
+VicarRasterImage._v_band_id = new_instancemethod(_vicar_raster_image.VicarRasterImage__v_band_id,None,VicarRasterImage)
 VicarRasterImage._v_rpc = new_instancemethod(_vicar_raster_image.VicarRasterImage__v_rpc,None,VicarRasterImage)
 VicarRasterImage._v_map_info = new_instancemethod(_vicar_raster_image.VicarRasterImage__v_map_info,None,VicarRasterImage)
 VicarRasterImage_swigregister = _vicar_raster_image.VicarRasterImage_swigregister

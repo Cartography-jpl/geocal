@@ -63,15 +63,15 @@ public:
 class VicarLiteRasterImage : public RasterImage {
 public:
   typedef VicarLiteFile::access_type access_type;
-  VicarLiteRasterImage(const std::string& Fname, 
+  VicarLiteRasterImage(const std::string& Fname, int Band_id = 1,
 		       access_type Access = VicarLiteFile::READ,
-		       int Band = 0, int Number_tile_line = -1,
+		       int Number_tile_line = -1,
 		       int Number_tile_sample = -1,
 		       bool Force_area_pixel = false);
   %python_attribute2(file, file_ptr, boost::shared_ptr<VicarLiteFile>)
   %python_attribute(is_compressed, bool)
-  %python_attribute(band, int)
-  %pickle_init(1, self.file.file_name, self.file.access, self.band,
+  %python_attribute(band_id, int)
+  %pickle_init(2, self.file.file_name, self.band_id, self.file.access, 
 	       self.number_tile_line, self.number_tile_sample,
 	       self.file.force_area_pixel)
 };

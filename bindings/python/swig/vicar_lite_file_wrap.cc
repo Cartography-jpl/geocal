@@ -6613,8 +6613,8 @@ SWIGINTERN PyObject *VicarLiteFile_swiginit(PyObject *SWIGUNUSEDPARM(self), PyOb
 SWIGINTERN PyObject *_wrap_new_VicarLiteRasterImage__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
-  GeoCal::VicarLiteRasterImage::access_type arg2 ;
-  int arg3 ;
+  int arg2 ;
+  GeoCal::VicarLiteRasterImage::access_type arg3 ;
   int arg4 ;
   int arg5 ;
   bool arg6 ;
@@ -6645,14 +6645,14 @@ SWIGINTERN PyObject *_wrap_new_VicarLiteRasterImage__SWIG_0(PyObject *SWIGUNUSED
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarLiteRasterImage" "', argument " "2"" of type '" "GeoCal::VicarLiteRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarLiteRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarLiteRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
   ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarLiteRasterImage" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarLiteRasterImage" "', argument " "3"" of type '" "GeoCal::VicarLiteRasterImage::access_type""'");
   } 
-  arg3 = static_cast< int >(val3);
+  arg3 = static_cast< GeoCal::VicarLiteRasterImage::access_type >(val3);
   ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarLiteRasterImage" "', argument " "4"" of type '" "int""'");
@@ -6692,8 +6692,8 @@ fail:
 SWIGINTERN PyObject *_wrap_new_VicarLiteRasterImage__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
-  GeoCal::VicarLiteRasterImage::access_type arg2 ;
-  int arg3 ;
+  int arg2 ;
+  GeoCal::VicarLiteRasterImage::access_type arg3 ;
   int arg4 ;
   int arg5 ;
   int res1 = SWIG_OLDOBJ ;
@@ -6721,14 +6721,14 @@ SWIGINTERN PyObject *_wrap_new_VicarLiteRasterImage__SWIG_1(PyObject *SWIGUNUSED
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarLiteRasterImage" "', argument " "2"" of type '" "GeoCal::VicarLiteRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarLiteRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarLiteRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
   ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarLiteRasterImage" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarLiteRasterImage" "', argument " "3"" of type '" "GeoCal::VicarLiteRasterImage::access_type""'");
   } 
-  arg3 = static_cast< int >(val3);
+  arg3 = static_cast< GeoCal::VicarLiteRasterImage::access_type >(val3);
   ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarLiteRasterImage" "', argument " "4"" of type '" "int""'");
@@ -6763,8 +6763,8 @@ fail:
 SWIGINTERN PyObject *_wrap_new_VicarLiteRasterImage__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
-  GeoCal::VicarLiteRasterImage::access_type arg2 ;
-  int arg3 ;
+  int arg2 ;
+  GeoCal::VicarLiteRasterImage::access_type arg3 ;
   int arg4 ;
   int res1 = SWIG_OLDOBJ ;
   int val2 ;
@@ -6789,14 +6789,14 @@ SWIGINTERN PyObject *_wrap_new_VicarLiteRasterImage__SWIG_2(PyObject *SWIGUNUSED
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarLiteRasterImage" "', argument " "2"" of type '" "GeoCal::VicarLiteRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarLiteRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarLiteRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
   ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarLiteRasterImage" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarLiteRasterImage" "', argument " "3"" of type '" "GeoCal::VicarLiteRasterImage::access_type""'");
   } 
-  arg3 = static_cast< int >(val3);
+  arg3 = static_cast< GeoCal::VicarLiteRasterImage::access_type >(val3);
   ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarLiteRasterImage" "', argument " "4"" of type '" "int""'");
@@ -6826,8 +6826,8 @@ fail:
 SWIGINTERN PyObject *_wrap_new_VicarLiteRasterImage__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
-  GeoCal::VicarLiteRasterImage::access_type arg2 ;
-  int arg3 ;
+  int arg2 ;
+  GeoCal::VicarLiteRasterImage::access_type arg3 ;
   int res1 = SWIG_OLDOBJ ;
   int val2 ;
   int ecode2 = 0 ;
@@ -6849,14 +6849,14 @@ SWIGINTERN PyObject *_wrap_new_VicarLiteRasterImage__SWIG_3(PyObject *SWIGUNUSED
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarLiteRasterImage" "', argument " "2"" of type '" "GeoCal::VicarLiteRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarLiteRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarLiteRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
   ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarLiteRasterImage" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_VicarLiteRasterImage" "', argument " "3"" of type '" "GeoCal::VicarLiteRasterImage::access_type""'");
   } 
-  arg3 = static_cast< int >(val3);
+  arg3 = static_cast< GeoCal::VicarLiteRasterImage::access_type >(val3);
   {
     try {
       result = (GeoCal::VicarLiteRasterImage *)new GeoCal::VicarLiteRasterImage((std::string const &)*arg1,arg2,arg3);
@@ -6881,7 +6881,7 @@ fail:
 SWIGINTERN PyObject *_wrap_new_VicarLiteRasterImage__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
-  GeoCal::VicarLiteRasterImage::access_type arg2 ;
+  int arg2 ;
   int res1 = SWIG_OLDOBJ ;
   int val2 ;
   int ecode2 = 0 ;
@@ -6901,9 +6901,9 @@ SWIGINTERN PyObject *_wrap_new_VicarLiteRasterImage__SWIG_4(PyObject *SWIGUNUSED
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarLiteRasterImage" "', argument " "2"" of type '" "GeoCal::VicarLiteRasterImage::access_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarLiteRasterImage" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::VicarLiteRasterImage::access_type >(val2);
+  arg2 = static_cast< int >(val2);
   {
     try {
       result = (GeoCal::VicarLiteRasterImage *)new GeoCal::VicarLiteRasterImage((std::string const &)*arg1,arg2);
@@ -6992,11 +6992,11 @@ SWIGINTERN PyObject *_wrap_new_VicarLiteRasterImage(PyObject *self, PyObject *ar
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_VicarLiteRasterImage'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(std::string const &,GeoCal::VicarLiteRasterImage::access_type,int,int,int,bool)\n"
-    "    GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(std::string const &,GeoCal::VicarLiteRasterImage::access_type,int,int,int)\n"
-    "    GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(std::string const &,GeoCal::VicarLiteRasterImage::access_type,int,int)\n"
-    "    GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(std::string const &,GeoCal::VicarLiteRasterImage::access_type,int)\n"
-    "    GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(std::string const &,GeoCal::VicarLiteRasterImage::access_type)\n"
+    "    GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(std::string const &,int,GeoCal::VicarLiteRasterImage::access_type,int,int,bool)\n"
+    "    GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(std::string const &,int,GeoCal::VicarLiteRasterImage::access_type,int,int)\n"
+    "    GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(std::string const &,int,GeoCal::VicarLiteRasterImage::access_type,int)\n"
+    "    GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(std::string const &,int,GeoCal::VicarLiteRasterImage::access_type)\n"
+    "    GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(std::string const &,int)\n"
     "    GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(std::string const &)\n");
   return 0;
 }
@@ -7090,7 +7090,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_VicarLiteRasterImage__v_band(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_VicarLiteRasterImage__v_band_id(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::VicarLiteRasterImage *arg1 = (GeoCal::VicarLiteRasterImage *) 0 ;
   void *argp1 = 0 ;
@@ -7106,7 +7106,7 @@ SWIGINTERN PyObject *_wrap_VicarLiteRasterImage__v_band(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarLiteRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarLiteRasterImage__v_band" "', argument " "1"" of type '" "GeoCal::VicarLiteRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarLiteRasterImage__v_band_id" "', argument " "1"" of type '" "GeoCal::VicarLiteRasterImage const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarLiteRasterImage > * >(argp1);
@@ -7119,7 +7119,7 @@ SWIGINTERN PyObject *_wrap_VicarLiteRasterImage__v_band(PyObject *SWIGUNUSEDPARM
   }
   {
     try {
-      result = (int)((GeoCal::VicarLiteRasterImage const *)arg1)->band();
+      result = (int)((GeoCal::VicarLiteRasterImage const *)arg1)->band_id();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7742,9 +7742,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"VicarLiteFile_swigregister", VicarLiteFile_swigregister, METH_VARARGS, NULL},
 	 { (char *)"VicarLiteFile_swiginit", VicarLiteFile_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_VicarLiteRasterImage", _wrap_new_VicarLiteRasterImage, METH_VARARGS, (char *)"\n"
-		"GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, access_type Access=VicarLiteFile::READ, int\n"
-		"Band=0, int Number_tile_line=-1, int Number_tile_sample=-1, bool\n"
-		"Force_area_pixel=false)\n"
+		"GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, int Band_id=1, access_type\n"
+		"Access=VicarLiteFile::READ, int Number_tile_line=-1, int\n"
+		"Number_tile_sample=-1, bool Force_area_pixel=false)\n"
 		"Constructor.\n"
 		"\n"
 		"The Force_area_pixel forces the file to be treated as \"pixel as\n"
@@ -7765,9 +7765,9 @@ static PyMethodDef SwigMethods[] = {
 		"If it is, we can't actually read the data but we can still read all of\n"
 		"the labels. \n"
 		""},
-	 { (char *)"VicarLiteRasterImage__v_band", (PyCFunction)_wrap_VicarLiteRasterImage__v_band, METH_O, (char *)"\n"
-		"int GeoCal::VicarLiteRasterImage::band() const\n"
-		"Return band number. \n"
+	 { (char *)"VicarLiteRasterImage__v_band_id", (PyCFunction)_wrap_VicarLiteRasterImage__v_band_id, METH_O, (char *)"\n"
+		"int GeoCal::VicarLiteRasterImage::band_id() const\n"
+		"Return band number. This is 1 based (like GDAL). \n"
 		""},
 	 { (char *)"delete_VicarLiteRasterImage", (PyCFunction)_wrap_delete_VicarLiteRasterImage, METH_O, (char *)"\n"
 		"virtual GeoCal::VicarLiteRasterImage::~VicarLiteRasterImage()\n"
@@ -7778,7 +7778,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_VicarLiteDem", _wrap_new_VicarLiteDem, METH_VARARGS, (char *)"\n"
 		"GeoCal::VicarLiteDem::VicarLiteDem(const std::string &Fname, bool Outside_dem_is_error=false, const\n"
 		"boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new\n"
-		"NoDatum()), int Band=0)\n"
+		"NoDatum()), int Band_id=1)\n"
 		"Constructor.\n"
 		"\n"
 		"If Outside_dem_is_error is true, then calls for Dem data outside of\n"

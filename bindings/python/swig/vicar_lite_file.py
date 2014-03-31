@@ -359,9 +359,9 @@ class VicarLiteRasterImage(geocal_swig.raster_image.RasterImage):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, access_type Access=VicarLiteFile::READ, int
-        Band=0, int Number_tile_line=-1, int Number_tile_sample=-1, bool
-        Force_area_pixel=false)
+        GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, int Band_id=1, access_type
+        Access=VicarLiteFile::READ, int Number_tile_line=-1, int
+        Number_tile_sample=-1, bool Force_area_pixel=false)
         Constructor.
 
         The Force_area_pixel forces the file to be treated as "pixel as
@@ -397,28 +397,28 @@ class VicarLiteRasterImage(geocal_swig.raster_image.RasterImage):
     def is_compressed(self):
         return self._v_is_compressed()
 
-    def _v_band(self):
+    def _v_band_id(self):
         """
-        int GeoCal::VicarLiteRasterImage::band() const
-        Return band number. 
+        int GeoCal::VicarLiteRasterImage::band_id() const
+        Return band number. This is 1 based (like GDAL). 
         """
-        return _vicar_lite_file.VicarLiteRasterImage__v_band(self)
+        return _vicar_lite_file.VicarLiteRasterImage__v_band_id(self)
 
     @property
-    def band(self):
-        return self._v_band()
+    def band_id(self):
+        return self._v_band_id()
 
     @classmethod
     def pickle_format_version(cls):
-      return 1
+      return 2
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file.file_name,self.file.access,self.band,self.number_tile_line,self.number_tile_sample,self.file.force_area_pixel)
+      return _new_from_init, (self.__class__, 2, self.file.file_name,self.band_id,self.file.access,self.number_tile_line,self.number_tile_sample,self.file.force_area_pixel)
 
     __swig_destroy__ = _vicar_lite_file.delete_VicarLiteRasterImage
 VicarLiteRasterImage._v_file = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_file,None,VicarLiteRasterImage)
 VicarLiteRasterImage._v_is_compressed = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_is_compressed,None,VicarLiteRasterImage)
-VicarLiteRasterImage._v_band = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_band,None,VicarLiteRasterImage)
+VicarLiteRasterImage._v_band_id = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_band_id,None,VicarLiteRasterImage)
 VicarLiteRasterImage_swigregister = _vicar_lite_file.VicarLiteRasterImage_swigregister
 VicarLiteRasterImage_swigregister(VicarLiteRasterImage)
 
@@ -436,7 +436,7 @@ class VicarLiteDem(geocal_swig.dem_map_info.DemMapInfo):
         """
         GeoCal::VicarLiteDem::VicarLiteDem(const std::string &Fname, bool Outside_dem_is_error=false, const
         boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        NoDatum()), int Band=0)
+        NoDatum()), int Band_id=1)
         Constructor.
 
         If Outside_dem_is_error is true, then calls for Dem data outside of

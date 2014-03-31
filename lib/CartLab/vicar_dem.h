@@ -102,7 +102,7 @@ private:
 				      bool Outside_dem_is_error)
   {
     boost::shared_ptr<VicarTiledFile<T> > 
-      t(new VicarTiledFile<T>(vicar_file_, Number_line_per_tile, Number_tile));
+      t(new VicarTiledFile<T>(vicar_file_, 1, Number_line_per_tile, Number_tile));
     DemTiledFile::initialize(t, D, vicar_file_->map_info(), Outside_dem_is_error);
   }
 };

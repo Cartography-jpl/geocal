@@ -52,7 +52,7 @@ elif(args.multi_band):
     # Leverage off of VicarImageGroundConnection, even though we don't care
     # about the rpc.
     if(VicarImageGroundConnection.is_vicar_file(args.image)):
-        img = VicarImageGroundConnection(args.image, SrtmDem()).image_multi_band
+        img = VicarImageGroundConnection(args.image, SimpleDem()).image_multi_band
         if(not img):
             img = RasterImageMultiBandVariable()
             img.add_raster_image(VicarLiteRasterImage(args.image))

@@ -1,5 +1,6 @@
 #include "ipi.h"
 #include "geocal_gsl_root.h"
+#include "ostream_pad.h"
 #include <boost/foreach.hpp>
 
 using namespace GeoCal;
@@ -227,15 +228,22 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 
 void Ipi::print(std::ostream& Os) const
 {
+  OstreamPad opad(Os, "    ");
   Os << "Ipi\n"
-     << "  Band: " << band_
-     << "  Tmin: " << min_time_
-     << "  Tmax: " << max_time_
-     << "  Orbit:\n" << *orb
-     << "  Camera:\n" << *cam;
-  if(tt.get())
-    Os << "  Time Table:\n" << *tt;
-  else 
+     << "  Band: " << band_ << "\n"
+     << "  Tmin: " << min_time_ << "\n"
+     << "  Tmax: " << max_time_ << "\n"
+     << "  Orbit:\n";
+  opad << *orb;
+  opad.strict_sync();
+  Os << "  Camera:\n";
+  opad << *cam;
+  opad.strict_sync();
+  if(tt.get()) {
+    Os << "  Time Table:\n";
+    opad << *tt;
+    opad.strict_sync();
+  } else 
     Os << "  Time Table: None\n";
 }
 

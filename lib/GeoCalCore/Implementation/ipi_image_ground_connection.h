@@ -2,6 +2,7 @@
 #define IPI_IMAGE_GROUND_CONNECTION_H
 #include "image_ground_connection.h"
 #include "ipi.h"
+#include "ostream_pad.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -73,9 +74,11 @@ public:
   }
   virtual void print(std::ostream& Os) const \
   {
+    OstreamPad opad(Os, "    ");
     Os << "IpiImageGroundConnection" << "\n"
-       << "  Ipi: \n"
-       << *ipi_ << "\n";
+       << "  Ipi: \n";
+    opad << *ipi_;
+    opad.strict_sync();
   }
 
 //-----------------------------------------------------------------------

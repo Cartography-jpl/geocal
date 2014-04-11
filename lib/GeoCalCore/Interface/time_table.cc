@@ -1,6 +1,7 @@
 #include "time_table.h"
 #include "geocal_exception.h"
 #include <cmath>
+#include <algorithm>
 
 using namespace GeoCal;
 
@@ -60,3 +61,66 @@ void ConstantSpacingTimeTable::print(std::ostream& Os) const
 }
 
 
+//-----------------------------------------------------------------------
+/// Constructor.
+/// This gives the time for every line. This list should be strictly
+/// ordered. The first time is for the given Min_line (default of 0).
+//-----------------------------------------------------------------------
+
+MeasuredTimeTable::MeasuredTimeTable(const std::vector<Time>& Time_list,
+		    int Min_line)
+: min_line_(Min_line),
+  tlist(Time_list)
+{
+  for(int i = 0; i < (int) tlist.size() - 1; ++i) {
+    if(tlist[i + 1] <= tlist[i])
+      throw Exception("Time_list needs to be strictly ordered");
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Convert from Time and FrameCoordinate to ImageCoordinate.
+//-----------------------------------------------------------------------
+
+ImageCoordinate MeasuredTimeTable::image_coordinate(Time T, 
+const FrameCoordinate& F) const
+{
+  range_check(T, min_time(), max_time());
+  int i = (int)(std::lower_bound(tlist.begin(), tlist.end(), T)
+		- tlist.begin());
+  double line;
+  if(i == 0)
+    line = min_line_;
+  else {
+    line = (T - tlist[i - 1]) / (tlist[i] - tlist[i - 1]) + (i - 1) + 
+      min_line_;
+  }
+  return ImageCoordinate(line, F.sample);
+}
+
+//-----------------------------------------------------------------------
+/// Convert from ImageCoordinate to Time and FrameCoordinate.
+//-----------------------------------------------------------------------
+
+void MeasuredTimeTable::time(const ImageCoordinate& Ic, Time& T, 
+			     FrameCoordinate& F) const
+{
+  range_check(Ic.line, (double) min_line(), (double) max_line() + 0.5);
+  int i = (int) floor(Ic.line);
+  int j = i - min_line_;
+  T = tlist[j] + (tlist[j + 1] - tlist[j]) * (Ic.line - i);
+  F = FrameCoordinate(0, Ic.sample);
+}
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+void MeasuredTimeTable::print(std::ostream& Os) const
+{
+  Os << "Measured Time Table:\n"
+     << "  Min line:     " << min_line() << "\n"
+     << "  Max line:     " << max_line() << "\n"
+     << "  Min time:     " << min_time() << "\n"
+     << "  Max time:     " << max_time() << "\n";
+}

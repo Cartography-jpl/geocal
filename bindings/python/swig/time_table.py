@@ -88,6 +88,31 @@ except:
     weakref_proxy = lambda x: x
 
 
+class SwigPyIterator(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _time_table.delete_SwigPyIterator
+    def __iter__(self): return self
+SwigPyIterator.value = new_instancemethod(_time_table.SwigPyIterator_value,None,SwigPyIterator)
+SwigPyIterator.incr = new_instancemethod(_time_table.SwigPyIterator_incr,None,SwigPyIterator)
+SwigPyIterator.decr = new_instancemethod(_time_table.SwigPyIterator_decr,None,SwigPyIterator)
+SwigPyIterator.distance = new_instancemethod(_time_table.SwigPyIterator_distance,None,SwigPyIterator)
+SwigPyIterator.equal = new_instancemethod(_time_table.SwigPyIterator_equal,None,SwigPyIterator)
+SwigPyIterator.copy = new_instancemethod(_time_table.SwigPyIterator_copy,None,SwigPyIterator)
+SwigPyIterator.next = new_instancemethod(_time_table.SwigPyIterator_next,None,SwigPyIterator)
+SwigPyIterator.__next__ = new_instancemethod(_time_table.SwigPyIterator___next__,None,SwigPyIterator)
+SwigPyIterator.previous = new_instancemethod(_time_table.SwigPyIterator_previous,None,SwigPyIterator)
+SwigPyIterator.advance = new_instancemethod(_time_table.SwigPyIterator_advance,None,SwigPyIterator)
+SwigPyIterator.__eq__ = new_instancemethod(_time_table.SwigPyIterator___eq__,None,SwigPyIterator)
+SwigPyIterator.__ne__ = new_instancemethod(_time_table.SwigPyIterator___ne__,None,SwigPyIterator)
+SwigPyIterator.__iadd__ = new_instancemethod(_time_table.SwigPyIterator___iadd__,None,SwigPyIterator)
+SwigPyIterator.__isub__ = new_instancemethod(_time_table.SwigPyIterator___isub__,None,SwigPyIterator)
+SwigPyIterator.__add__ = new_instancemethod(_time_table.SwigPyIterator___add__,None,SwigPyIterator)
+SwigPyIterator.__sub__ = new_instancemethod(_time_table.SwigPyIterator___sub__,None,SwigPyIterator)
+SwigPyIterator_swigregister = _time_table.SwigPyIterator_swigregister
+SwigPyIterator_swigregister(SwigPyIterator)
+
 SHARED_PTR_DISOWN = _time_table.SHARED_PTR_DISOWN
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
@@ -242,6 +267,46 @@ class ConstantSpacingTimeTable(TimeTable):
 ConstantSpacingTimeTable._v_time_space = new_instancemethod(_time_table.ConstantSpacingTimeTable__v_time_space,None,ConstantSpacingTimeTable)
 ConstantSpacingTimeTable_swigregister = _time_table.ConstantSpacingTimeTable_swigregister
 ConstantSpacingTimeTable_swigregister(ConstantSpacingTimeTable)
+
+class MeasuredTimeTable(TimeTable):
+    """
+    This is a time table that has a time associated with each line.
+
+    C++ includes: time_table.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        MeasuredTimeTable::MeasuredTimeTable(const std::vector< Time > &Time_list, int Min_line=0)
+        Constructor.
+
+        This gives the time for every line. This list should be strictly
+        ordered. The first time is for the given Min_line (default of 0). 
+        """
+        _time_table.MeasuredTimeTable_swiginit(self,_time_table.new_MeasuredTimeTable(*args))
+    def _v_time_list(self):
+        """
+        const std::vector<Time>& GeoCal::MeasuredTimeTable::time_list() const
+        List of times. 
+        """
+        return _time_table.MeasuredTimeTable__v_time_list(self)
+
+    @property
+    def time_list(self):
+        return self._v_time_list()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.min_line,self.time_list)
+
+    __swig_destroy__ = _time_table.delete_MeasuredTimeTable
+MeasuredTimeTable._v_time_list = new_instancemethod(_time_table.MeasuredTimeTable__v_time_list,None,MeasuredTimeTable)
+MeasuredTimeTable_swigregister = _time_table.MeasuredTimeTable_swigregister
+MeasuredTimeTable_swigregister(MeasuredTimeTable)
 
 
 

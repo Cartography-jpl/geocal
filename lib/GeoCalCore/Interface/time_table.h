@@ -4,6 +4,7 @@
 #include "geocal_time.h"
 #include "frame_coordinate.h"
 #include "image_coordinate.h"
+#include <vector>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -110,6 +111,54 @@ private:
   Time min_t;
   int max_l;
   double tspace;
+};
+
+/****************************************************************//**
+  This is a time table that has a time associated with each line.
+*******************************************************************/
+
+class MeasuredTimeTable : public TimeTable {
+public:
+  MeasuredTimeTable(const std::vector<Time>& Time_list,
+		    int Min_line = 0);
+  virtual ~MeasuredTimeTable() {}
+  virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
+    const;
+  virtual void print(std::ostream& Os) const;
+  virtual void time(const ImageCoordinate& Ic, Time& T, FrameCoordinate& F)
+    const;
+
+//-----------------------------------------------------------------------
+/// Minimum line table is valid for.
+//-----------------------------------------------------------------------
+
+  virtual int min_line() const {return min_line_;}
+
+//-----------------------------------------------------------------------
+/// Maximum line table is valid for.
+//-----------------------------------------------------------------------
+
+  virtual int max_line() const {return min_line_ + (int) tlist.size() - 1;}
+
+//-----------------------------------------------------------------------
+/// Minimum time table is valid for.
+//-----------------------------------------------------------------------
+
+  virtual Time min_time() const {return tlist.front();}
+
+//-----------------------------------------------------------------------
+/// Maximum time table is valid for.
+//-----------------------------------------------------------------------
+
+  virtual Time max_time() const {return tlist.back();}
+
+//-----------------------------------------------------------------------
+/// List of times
+//-----------------------------------------------------------------------
+  const std::vector<Time>& time_list() const {return tlist;}
+private:
+  int min_line_;
+  std::vector<Time> tlist;
 };
 
 }

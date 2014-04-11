@@ -1,6 +1,7 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
+%include <std_vector.i>
 %include "common.i"
 
 %{
@@ -12,6 +13,7 @@
 %import "frame_coordinate.i"
 %geocal_shared_ptr(GeoCal::TimeTable);
 %geocal_shared_ptr(GeoCal::ConstantSpacingTimeTable);
+%geocal_shared_ptr(GeoCal::MeasuredTimeTable);
 
 namespace GeoCal {
 class TimeTable : public GenericObject {
@@ -37,5 +39,17 @@ public:
 		    FrameCoordinate &OUTPUT) const;
   %python_attribute(time_space, double)
   %pickle_init(1, self.min_time, self.max_time, self.time_space)
+};
+
+class MeasuredTimeTable : public TimeTable {
+public:
+   MeasuredTimeTable(const std::vector<Time>& Time_list,
+		    int Min_line = 0);
+  virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
+    const;
+  virtual void time(const ImageCoordinate& Ic, Time &OUTPUT, 
+		    FrameCoordinate &OUTPUT) const;
+  %python_attribute(time_list, std::vector<Time>)
+  %pickle_init(1, self.min_line, self.time_list)
 };
 }

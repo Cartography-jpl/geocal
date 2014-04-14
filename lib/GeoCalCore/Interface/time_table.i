@@ -22,7 +22,7 @@ public:
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
     const = 0;
   virtual void time(const ImageCoordinate& Ic, Time &OUTPUT, 
-		    FrameCoordinate &OUTPUT) const = 0;
+		    FrameCoordinate &OUTPUT) const;
   %python_attribute(min_line, virtual int)
   %python_attribute(max_line, virtual int)
   %python_attribute(min_time, virtual Time)
@@ -35,8 +35,6 @@ public:
 			   double Time_space = 40.8e-3);
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
     const;
-  virtual void time(const ImageCoordinate& Ic, Time &OUTPUT, 
-		    FrameCoordinate &OUTPUT) const;
   %python_attribute(time_space, double)
   %pickle_init(1, self.min_time, self.max_time, self.time_space)
 };
@@ -47,8 +45,6 @@ public:
 		    int Min_line = 0);
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
     const;
-  virtual void time(const ImageCoordinate& Ic, Time &OUTPUT, 
-		    FrameCoordinate &OUTPUT) const;
   %python_attribute(time_list, std::vector<Time>)
   %pickle_init(1, self.min_line, self.time_list)
 };

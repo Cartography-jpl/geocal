@@ -9730,7 +9730,7 @@ SWIGINTERN PyObject *ImageGroundConnectionCopy_swiginit(PyObject *SWIGUNUSEDPARM
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_ImageGroundConnectionFailed", (PyCFunction)_wrap_new_ImageGroundConnectionFailed, METH_O, (char *)"\n"
-		"GeoCal::ImageGroundConnectionFailed::ImageGroundConnectionFailed(const std::string &W=\"\")\n"
+		"GeoCal::ImageGroundConnectionFailed::ImageGroundConnectionFailed(const std::string &W=\"ImageGroundConnectionFailed\")\n"
 		"Default constructor.\n"
 		"\n"
 		"Can give an optional string describing the error. \n"

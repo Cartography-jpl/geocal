@@ -69,7 +69,7 @@ public:
     bool success;
     ipi_->image_coordinate_extended(Gc, res, success);
     if(!success)
-      throw ImageGroundConnectionFailed();
+      throw ImageGroundConnectionFailed("IPI failed");
     return res; 
   }
   virtual void print(std::ostream& Os) const \

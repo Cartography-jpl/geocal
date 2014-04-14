@@ -6238,15 +6238,17 @@ SWIGINTERN PyObject *_wrap_TimeTable_time(PyObject *SWIGUNUSEDPARM(self), PyObje
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::Time > tempshared3 ;
-  void *argp4 = 0 ;
-  int res4 = 0 ;
-  boost::shared_ptr< GeoCal::FrameCoordinate > tempshared4 ;
-  PyObject *swig_obj[4] ;
+  GeoCal::Time temp3 ;
+  GeoCal::FrameCoordinate temp4 ;
+  PyObject *swig_obj[2] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"TimeTable_time",4,4,swig_obj)) SWIG_fail;
+  {
+    arg3 = &temp3;
+  }
+  {
+    arg4 = &temp4;
+  }
+  if (!SWIG_Python_UnpackTuple(args,"TimeTable_time",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t, 0 |  0 , &newmem);
@@ -6288,56 +6290,6 @@ SWIGINTERN PyObject *_wrap_TimeTable_time(PyObject *SWIGUNUSEDPARM(self), PyObje
     }
   }
   {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::Time *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TimeTable_time" "', argument " "3"" of type '" "GeoCal::Time &""'"); 
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeTable_time" "', argument " "3"" of type '" "GeoCal::Time &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp3);
-        arg3 = const_cast< GeoCal::Time * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp3)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::FrameCoordinate *ptr;
-    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res4)) {
-      arg4 = ptr;
-    } else {
-      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "TimeTable_time" "', argument " "4"" of type '" "GeoCal::FrameCoordinate &""'"); 
-      }
-      if (!argp4) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeTable_time" "', argument " "4"" of type '" "GeoCal::FrameCoordinate &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared4 = *reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinate > * >(argp4);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinate > * >(argp4);
-        arg4 = const_cast< GeoCal::FrameCoordinate * >(tempshared4.get());
-      } else {
-        arg4 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinate > * >(argp4)->get());
-      }
-    }
-  }
-  {
     try {
       ((GeoCal::TimeTable const *)arg1)->time((GeoCal::ImageCoordinate const &)*arg2,*arg3,*arg4);
     } catch (const std::exception& e) {
@@ -6347,6 +6299,14 @@ SWIGINTERN PyObject *_wrap_TimeTable_time(PyObject *SWIGUNUSEDPARM(self), PyObje
     }
   }
   resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<GeoCal::Time> *smartresult = new boost::shared_ptr<GeoCal::Time>(new GeoCal::Time(*arg3));
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN));
+  }
+  {
+    boost::shared_ptr<GeoCal::FrameCoordinate> *smartresult = new boost::shared_ptr<GeoCal::FrameCoordinate>(new GeoCal::FrameCoordinate(*arg4));
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN));
+  }
   return resultobj;
 fail:
   return NULL;

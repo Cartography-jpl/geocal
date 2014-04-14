@@ -21,7 +21,7 @@ namespace GeoCal {
 
  %typemap(argout) ImageCoordinate &OUTPUT {
    SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
-   %set_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::ImageCoordinate> *), SWIG_POINTER_OWN));
+   %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::ImageCoordinate> *), SWIG_POINTER_OWN));
  }
 #endif
 

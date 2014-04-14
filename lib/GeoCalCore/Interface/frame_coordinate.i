@@ -12,6 +12,19 @@
 
 namespace GeoCal {
 
+// Handle returns as a argout
+
+#ifdef SWIGPYTHON
+ %typemap(in,numinputs=0) FrameCoordinate &OUTPUT (GeoCal::FrameCoordinate temp) {
+  $1 = &temp;
+ }
+
+ %typemap(argout) FrameCoordinate &OUTPUT {
+   SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
+   %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::FrameCoordinate> *), SWIG_POINTER_OWN));
+ }
+#endif
+
 class FrameCoordinate : public GenericObject {
 public:
   FrameCoordinate();

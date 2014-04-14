@@ -237,6 +237,16 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def boresight_angle(self):
         return self._v_boresight_angle()
 
+    def row_number(self, *args):
+        """
+        int GeoCal::MspiCamera::row_number(int Band) const
+        Return the camera row number for the given band.
+
+        This ends up being used in other places (e.g., the "Row Table" in
+        L1B1 files), so we make this available. 
+        """
+        return _mspi_camera.MspiCamera_row_number(self, *args)
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -254,6 +264,7 @@ MspiCamera._v_yaw = new_instancemethod(_mspi_camera.MspiCamera__v_yaw,None,MspiC
 MspiCamera._v_pitch = new_instancemethod(_mspi_camera.MspiCamera__v_pitch,None,MspiCamera)
 MspiCamera._v_roll = new_instancemethod(_mspi_camera.MspiCamera__v_roll,None,MspiCamera)
 MspiCamera._v_boresight_angle = new_instancemethod(_mspi_camera.MspiCamera__v_boresight_angle,None,MspiCamera)
+MspiCamera.row_number = new_instancemethod(_mspi_camera.MspiCamera_row_number,None,MspiCamera)
 MspiCamera.__str__ = new_instancemethod(_mspi_camera.MspiCamera___str__,None,MspiCamera)
 MspiCamera_swigregister = _mspi_camera.MspiCamera_swigregister
 MspiCamera_swigregister(MspiCamera)

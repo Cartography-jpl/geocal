@@ -5490,7 +5490,7 @@ SWIGINTERN PyObject *_wrap_MagnifyBilinearImageGroundConnection_cf_look_vector(P
   resultobj = SWIG_Py_Void();
   {
     boost::shared_ptr<GeoCal::CartesianFixedLookVector> *smartresult = new boost::shared_ptr<GeoCal::CartesianFixedLookVector>(new GeoCal::CartesianFixedLookVector(*arg3));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN));
   }
   {
     boost::shared_ptr<  GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixed >(*arg4);

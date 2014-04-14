@@ -5442,11 +5442,11 @@ SWIGINTERN PyObject *_wrap_SurfaceImageToImageMatch_match_surf(PyObject *SWIGUNU
   resultobj = SWIG_Py_Void();
   {
     boost::shared_ptr<GeoCal::ImageCoordinate> *smartresult = new boost::shared_ptr<GeoCal::ImageCoordinate>(new GeoCal::ImageCoordinate(*arg3));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN));
   }
   {
     boost::shared_ptr<GeoCal::ImageCoordinate> *smartresult = new boost::shared_ptr<GeoCal::ImageCoordinate>(new GeoCal::ImageCoordinate(*arg4));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN));
   }
   if (SWIG_IsTmpObj(res5)) {
     resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));

@@ -24,6 +24,7 @@ public:
   %python_attribute(pitch, double);
   %python_attribute(roll, double);
   %python_attribute(boresight_angle, double);
+  int row_number(int Band) const;
   std::string print_to_string() const;
   %pickle_init(1, self.file_name, self.parameter);
 };

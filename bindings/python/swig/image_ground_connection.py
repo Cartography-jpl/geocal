@@ -131,7 +131,7 @@ class ImageGroundConnectionFailed(geocal_swig.geocal_exception.Exception):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::ImageGroundConnectionFailed::ImageGroundConnectionFailed(const std::string &W="")
+        GeoCal::ImageGroundConnectionFailed::ImageGroundConnectionFailed(const std::string &W="ImageGroundConnectionFailed")
         Default constructor.
 
         Can give an optional string describing the error. 

@@ -28,7 +28,7 @@ public:
 /// the error.
 //-----------------------------------------------------------------------
 
-  ImageGroundConnectionFailed(const std::string& W = "") : Exception(W) {}
+  ImageGroundConnectionFailed(const std::string& W = "ImageGroundConnectionFailed") : Exception(W) {}
 
 //-----------------------------------------------------------------------
 /// Destructor.

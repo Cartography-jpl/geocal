@@ -235,13 +235,17 @@ void IgcMapProjected::calc_no_grid(int Lstart, int Sstart) const
       if(igc_->ground_mask()->mask(*gc))
 	data(i, j) = fill_value_;
       else {
-	ImageCoordinate ic = igc_->image_coordinate(*gc);
-	if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
-	   ic.sample < 0 || ic.sample >= igc_->number_sample() - 1 ||
-	   igc_->image_mask()->mask_ic(ic))
+	try {
+	  ImageCoordinate ic = igc_->image_coordinate(*gc);
+	  if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
+	     ic.sample < 0 || ic.sample >= igc_->number_sample() - 1 ||
+	     igc_->image_mask()->mask_ic(ic))
+	    data(i, j) =  fill_value_;	// Data outside of image, so fill_value.
+	  else
+	    data(i, j) = igc_->image()->unchecked_interpolate(ic.line, ic.sample);
+	} catch(const ImageGroundConnectionFailed& E) {
 	  data(i, j) =  fill_value_;	// Data outside of image, so fill_value.
-	else
-	  data(i, j) = igc_->image()->unchecked_interpolate(ic.line, ic.sample);
+	}
       }
     }
 }
@@ -257,19 +261,23 @@ void IgcMapProjectedMultiBand::calc_no_grid(int Lstart, int Sstart) const
     for(int j = 0; j < data.depth(); ++j) {
       boost::shared_ptr<GroundCoordinate> gc = 
 	mi.ground_coordinate(Sstart + j, Lstart + i, igc_->dem());
-      ImageCoordinate ic = igc_->image_coordinate(*gc);
-      if(igc_->ground_mask()->mask(*gc))
-	data(Range::all(), i, j) = fill_value_;
-      else {
-	if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
-	   ic.sample < 0 || ic.sample >= igc_->number_sample() - 1 ||
-	   igc_->image_mask()->mask_ic(ic))
-	  data(Range::all(), i, j) =  fill_value_;	
-	else
-	  for(int k = 0; k < data.rows(); ++k)
-	    data(k, i, j) = 
-	      igc_->image_multi_band()->raster_image(k).
-	      unchecked_interpolate(ic.line, ic.sample);
+      try {
+	ImageCoordinate ic = igc_->image_coordinate(*gc);
+	if(igc_->ground_mask()->mask(*gc))
+	  data(Range::all(), i, j) = fill_value_;
+	else {
+	  if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
+	     ic.sample < 0 || ic.sample >= igc_->number_sample() - 1 ||
+	     igc_->image_mask()->mask_ic(ic))
+	    data(Range::all(), i, j) =  fill_value_;	
+	  else
+	    for(int k = 0; k < data.rows(); ++k)
+	      data(k, i, j) = 
+		igc_->image_multi_band()->raster_image(k).
+		unchecked_interpolate(ic.line, ic.sample);
+	}
+      } catch(const ImageGroundConnectionFailed& E) {
+	data(i, j) =  fill_value_;	// Data outside of image, so fill_value.
       }
     }
 }

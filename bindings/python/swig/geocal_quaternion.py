@@ -185,4 +185,11 @@ def quat_rot(*args):
     """
   return _geocal_quaternion.quat_rot(*args)
 
+def quaternion_to_matrix(*args):
+  """
+    blitz::Array<double, 2> GeoCal::quaternion_to_matrix(const boost::math::quaternion< double > &q)
+    Convert a quaternion to a rotation matrix. 
+    """
+  return _geocal_quaternion.quaternion_to_matrix(*args)
+
 

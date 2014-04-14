@@ -54,7 +54,7 @@ void MspiCamera::read_config_file(const std::string& File_name)
 //--------------------------------------------------------------------------
 
   for(int b = 0; b < number_band(); ++b)
-    row_number.push_back(c.value<int>
+    row_number_.push_back(c.value<int>
 			 ("band" + boost::lexical_cast<std::string>(b)));
 
 //--------------------------------------------------------------------------
@@ -64,7 +64,7 @@ void MspiCamera::read_config_file(const std::string& File_name)
 
   for(int b = 0; b < number_band(); ++b) {
     double l_origin = line_dir() * dy * 
-      (row_number[b] + 0.5 - (nrow / 2.0)) / line_pitch_;
+      (row_number_[b] + 0.5 - (nrow / 2.0)) / line_pitch_;
     principal_point_.push_back(FrameCoordinate(l_origin,
 					       s_origin));
   }
@@ -148,7 +148,7 @@ void MspiCamera::dcs_to_focal_plane(int Band,
 // Units are millimeters.
 //-------------------------------------------------------------------------
   
-  paraxial_transform_->paraxial_to_real(row_number[Band], xf, yf, 
+  paraxial_transform_->paraxial_to_real(row_number_[Band], xf, yf, 
 					Xfp, Yfp);
 }
 
@@ -161,7 +161,7 @@ MspiCamera::focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const
 //-------------------------------------------------------------------------
 
   double xf, yf;
-  paraxial_transform_->real_to_paraxial(row_number[Band], Xfp, Yfp,
+  paraxial_transform_->real_to_paraxial(row_number_[Band], Xfp, Yfp,
 					xf, yf);
 
 //-------------------------------------------------------------------------

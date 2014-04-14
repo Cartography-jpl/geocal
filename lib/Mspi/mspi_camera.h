@@ -99,6 +99,16 @@ public:
     return 0.0355; 
   }
 
+//-----------------------------------------------------------------------
+/// Return the camera row number for the given band. This ends up
+/// being used in other places (e.g., the "Row Table" in L1B1 files),
+/// so we make this available. 
+//-----------------------------------------------------------------------
+  int row_number(int Band) const {
+    range_check(Band, 0, number_band());
+    return row_number_[Band];
+  }
+
   virtual blitz::Array<double, 1> parameter() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
@@ -114,7 +124,7 @@ private:
   // Camera angles, in radians
   double epsilon_, psi_, theta_, boresight_angle_, yaw_, pitch_, roll_;
   // Give the row number for each band.
-  std::vector<int> row_number;
+  std::vector<int> row_number_;
   // Transformation to and from the paraxial coordinates
   boost::shared_ptr<MspiParaxialTransform> paraxial_transform_;
 };

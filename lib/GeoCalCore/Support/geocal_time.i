@@ -10,6 +10,7 @@
 %base_import(generic_object)
 
 %geocal_shared_ptr(GeoCal::Time);
+
 %pythoncode {
 import datetime
 import time
@@ -19,6 +20,20 @@ def _new_time(pgs):
 }
 
 namespace GeoCal {
+
+// Handle returns as a argout
+
+#ifdef SWIGPYTHON
+ %typemap(in,numinputs=0) Time &OUTPUT (GeoCal::Time temp) {
+  $1 = &temp;
+ }
+
+ %typemap(argout) Time &OUTPUT {
+   SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
+   %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::Time> *), SWIG_POINTER_OWN));
+ }
+#endif
+
 class Time : public GenericObject {
 public:
   static Time time_et(double et);

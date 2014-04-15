@@ -133,8 +133,7 @@ class IpiImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundCo
         """
         GeoCal::IpiImageGroundConnection::IpiImageGroundConnection(const boost::shared_ptr< Ipi > &I, const boost::shared_ptr< Dem > &D,
         const boost::shared_ptr< RasterImage > &Img, const std::string
-        &Title="Image", double Resolution=30, int Band=0, double
-        Max_height=9000)
+        &Title="Image", double Resolution=30, double Max_height=9000)
 
         """
         _ipi_image_ground_connection.IpiImageGroundConnection_swiginit(self,_ipi_image_ground_connection.new_IpiImageGroundConnection(*args))
@@ -156,17 +155,6 @@ class IpiImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundCo
     @property
     def ipi(self):
         return self._v_ipi()
-
-    def _v_band(self):
-        """
-        int GeoCal::IpiImageGroundConnection::band() const
-        Band we are working with. 
-        """
-        return _ipi_image_ground_connection.IpiImageGroundConnection__v_band(self)
-
-    @property
-    def band(self):
-        return self._v_band()
 
     def _v_resolution(self):
         """
@@ -195,12 +183,11 @@ class IpiImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundCo
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.ipi,self.dem,self.image,self.title,self.resolution,self.band,self.maximum_height)
+      return _new_from_init, (self.__class__, 1, self.ipi,self.dem,self.image,self.title,self.resolution,self.maximum_height)
 
     __swig_destroy__ = _ipi_image_ground_connection.delete_IpiImageGroundConnection
 IpiImageGroundConnection.cf_look_vector = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection_cf_look_vector,None,IpiImageGroundConnection)
 IpiImageGroundConnection._v_ipi = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_ipi,None,IpiImageGroundConnection)
-IpiImageGroundConnection._v_band = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_band,None,IpiImageGroundConnection)
 IpiImageGroundConnection._v_resolution = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_resolution,None,IpiImageGroundConnection)
 IpiImageGroundConnection._v_maximum_height = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_maximum_height,None,IpiImageGroundConnection)
 IpiImageGroundConnection_swigregister = _ipi_image_ground_connection.IpiImageGroundConnection_swigregister

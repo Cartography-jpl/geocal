@@ -5156,107 +5156,6 @@ SWIG_AsVal_double (PyObject *obj, double *val)
 }
 
 
-#include <limits.h>
-#if !defined(SWIG_NO_LLONG_MAX)
-# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
-#   define LLONG_MAX __LONG_LONG_MAX__
-#   define LLONG_MIN (-LLONG_MAX - 1LL)
-#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
-# endif
-#endif
-
-
-#include <float.h>
-
-
-#include <math.h>
-
-
-SWIGINTERNINLINE int
-SWIG_CanCastAsInteger(double *d, double min, double max) {
-  double x = *d;
-  if ((min <= x && x <= max)) {
-   double fx = floor(x);
-   double cx = ceil(x);
-   double rd =  ((x - fx) < 0.5) ? fx : cx; /* simple rint */
-   if ((errno == EDOM) || (errno == ERANGE)) {
-     errno = 0;
-   } else {
-     double summ, reps, diff;
-     if (rd < x) {
-       diff = x - rd;
-     } else if (rd > x) {
-       diff = rd - x;
-     } else {
-       return 1;
-     }
-     summ = rd + x;
-     reps = diff/summ;
-     if (reps < 8*DBL_EPSILON) {
-       *d = rd;
-       return 1;
-     }
-   }
-  }
-  return 0;
-}
-
-
-SWIGINTERN int
-SWIG_AsVal_long (PyObject *obj, long* val)
-{
-  if (PyInt_Check(obj)) {
-    if (val) *val = PyInt_AsLong(obj);
-    return SWIG_OK;
-  } else if (PyLong_Check(obj)) {
-    long v = PyLong_AsLong(obj);
-    if (!PyErr_Occurred()) {
-      if (val) *val = v;
-      return SWIG_OK;
-    } else {
-      PyErr_Clear();
-    }
-  }
-#ifdef SWIG_PYTHON_CAST_MODE
-  {
-    int dispatch = 0;
-    long v = PyInt_AsLong(obj);
-    if (!PyErr_Occurred()) {
-      if (val) *val = v;
-      return SWIG_AddCast(SWIG_OK);
-    } else {
-      PyErr_Clear();
-    }
-    if (!dispatch) {
-      double d;
-      int res = SWIG_AddCast(SWIG_AsVal_double (obj,&d));
-      if (SWIG_IsOK(res) && SWIG_CanCastAsInteger(&d, LONG_MIN, LONG_MAX)) {
-	if (val) *val = (long)(d);
-	return res;
-      }
-    }
-  }
-#endif
-  return SWIG_TypeError;
-}
-
-
-SWIGINTERN int
-SWIG_AsVal_int (PyObject * obj, int *val)
-{
-  long v;
-  int res = SWIG_AsVal_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v < INT_MIN || v > INT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< int >(v);
-    }
-  }  
-  return res;
-}
-
-
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -5290,8 +5189,7 @@ SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_0(PyObject *SWIGUN
   boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
   std::string *arg4 = 0 ;
   double arg5 ;
-  int arg6 ;
-  double arg7 ;
+  double arg6 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Ipi > tempshared1 ;
@@ -5307,159 +5205,7 @@ SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_0(PyObject *SWIGUN
   int res4 = SWIG_OLDOBJ ;
   double val5 ;
   int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  double val7 ;
-  int ecode7 = 0 ;
-  GeoCal::IpiImageGroundConnection *result = 0 ;
-  
-  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ipi_t,  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_IpiImageGroundConnection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Ipi > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Ipi > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Ipi > * >(argp1);
-      arg1 = &tempshared1;
-    } else {
-      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Ipi > * >(argp1) : &tempshared1;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg1 = &temp2shared1;
-    }
-  }
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_IpiImageGroundConnection" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  {
-    int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_IpiImageGroundConnection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
-      arg3 = &tempshared3;
-    } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg3 = &temp2shared3;
-    }
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_IpiImageGroundConnection" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IpiImageGroundConnection" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    arg4 = ptr;
-  }
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IpiImageGroundConnection" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_IpiImageGroundConnection" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_IpiImageGroundConnection" "', argument " "7"" of type '" "double""'");
-  } 
-  arg7 = static_cast< double >(val7);
-  {
-    try {
-      result = (GeoCal::IpiImageGroundConnection *)new GeoCal::IpiImageGroundConnection((boost::shared_ptr< GeoCal::Ipi > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(std::string const &)*arg4,arg5,arg6,arg7);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::IpiImageGroundConnection > *smartresult = result ? new boost::shared_ptr<  GeoCal::IpiImageGroundConnection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IpiImageGroundConnection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  boost::shared_ptr< GeoCal::Ipi > *arg1 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
-  std::string *arg4 = 0 ;
-  double arg5 ;
-  int arg6 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Ipi > tempshared1 ;
-  boost::shared_ptr< GeoCal::Ipi > temp2shared1 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > tempshared2 ;
-  boost::shared_ptr< GeoCal::Dem > temp2shared2 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared3 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared3 ;
-  int res4 = SWIG_OLDOBJ ;
-  double val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
+  double val6 ;
   int ecode6 = 0 ;
   GeoCal::IpiImageGroundConnection *result = 0 ;
   
@@ -5555,11 +5301,11 @@ SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_1(PyObject *SWIGUN
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IpiImageGroundConnection" "', argument " "5"" of type '" "double""'");
   } 
   arg5 = static_cast< double >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
   if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_IpiImageGroundConnection" "', argument " "6"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_IpiImageGroundConnection" "', argument " "6"" of type '" "double""'");
   } 
-  arg6 = static_cast< int >(val6);
+  arg6 = static_cast< double >(val6);
   {
     try {
       result = (GeoCal::IpiImageGroundConnection *)new GeoCal::IpiImageGroundConnection((boost::shared_ptr< GeoCal::Ipi > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(std::string const &)*arg4,arg5,arg6);
@@ -5581,7 +5327,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Ipi > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::Dem > *arg2 = 0 ;
@@ -5718,7 +5464,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Ipi > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::Dem > *arg2 = 0 ;
@@ -5847,7 +5593,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Ipi > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::Dem > *arg2 = 0 ;
@@ -5963,31 +5709,27 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[8];
+  PyObject *argv[7];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IpiImageGroundConnection",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IpiImageGroundConnection",0,6,argv))) SWIG_fail;
   --argc;
   if (argc == 3) {
-    return _wrap_new_IpiImageGroundConnection__SWIG_4(self, argc, argv);
-  }
-  if (argc == 4) {
     return _wrap_new_IpiImageGroundConnection__SWIG_3(self, argc, argv);
   }
-  if (argc == 5) {
+  if (argc == 4) {
     return _wrap_new_IpiImageGroundConnection__SWIG_2(self, argc, argv);
   }
-  if (argc == 6) {
+  if (argc == 5) {
     return _wrap_new_IpiImageGroundConnection__SWIG_1(self, argc, argv);
   }
-  if (argc == 7) {
+  if (argc == 6) {
     return _wrap_new_IpiImageGroundConnection__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_IpiImageGroundConnection'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::IpiImageGroundConnection::IpiImageGroundConnection(boost::shared_ptr< GeoCal::Ipi > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const &,double,int,double)\n"
-    "    GeoCal::IpiImageGroundConnection::IpiImageGroundConnection(boost::shared_ptr< GeoCal::Ipi > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const &,double,int)\n"
+    "    GeoCal::IpiImageGroundConnection::IpiImageGroundConnection(boost::shared_ptr< GeoCal::Ipi > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const &,double,double)\n"
     "    GeoCal::IpiImageGroundConnection::IpiImageGroundConnection(boost::shared_ptr< GeoCal::Ipi > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const &,double)\n"
     "    GeoCal::IpiImageGroundConnection::IpiImageGroundConnection(boost::shared_ptr< GeoCal::Ipi > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const &)\n"
     "    GeoCal::IpiImageGroundConnection::IpiImageGroundConnection(boost::shared_ptr< GeoCal::Ipi > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &)\n");
@@ -6122,49 +5864,6 @@ SWIGINTERN PyObject *_wrap_IpiImageGroundConnection__v_ipi(PyObject *SWIGUNUSEDP
   {
     resultobj = GeoCal::swig_to_python(result);
   }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_IpiImageGroundConnection__v_band(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::IpiImageGroundConnection *arg1 = (GeoCal::IpiImageGroundConnection *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::IpiImageGroundConnection const > tempshared1 ;
-  boost::shared_ptr< GeoCal::IpiImageGroundConnection const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IpiImageGroundConnection_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IpiImageGroundConnection__v_band" "', argument " "1"" of type '" "GeoCal::IpiImageGroundConnection const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IpiImageGroundConnection > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IpiImageGroundConnection > * >(argp1);
-      arg1 = const_cast< GeoCal::IpiImageGroundConnection * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IpiImageGroundConnection > * >(argp1);
-      arg1 = const_cast< GeoCal::IpiImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::IpiImageGroundConnection const *)arg1)->band();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -6315,8 +6014,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_IpiImageGroundConnection", _wrap_new_IpiImageGroundConnection, METH_VARARGS, (char *)"\n"
 		"GeoCal::IpiImageGroundConnection::IpiImageGroundConnection(const boost::shared_ptr< Ipi > &I, const boost::shared_ptr< Dem > &D,\n"
 		"const boost::shared_ptr< RasterImage > &Img, const std::string\n"
-		"&Title=\"Image\", double Resolution=30, int Band=0, double\n"
-		"Max_height=9000)\n"
+		"&Title=\"Image\", double Resolution=30, double Max_height=9000)\n"
 		"\n"
 		""},
 	 { (char *)"IpiImageGroundConnection_cf_look_vector", _wrap_IpiImageGroundConnection_cf_look_vector, METH_VARARGS, (char *)"\n"
@@ -6327,10 +6025,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"IpiImageGroundConnection__v_ipi", (PyCFunction)_wrap_IpiImageGroundConnection__v_ipi, METH_O, (char *)"\n"
 		"const boost::shared_ptr<Ipi>& GeoCal::IpiImageGroundConnection::ipi_ptr() const\n"
 		"IPI that we are using. \n"
-		""},
-	 { (char *)"IpiImageGroundConnection__v_band", (PyCFunction)_wrap_IpiImageGroundConnection__v_band, METH_O, (char *)"\n"
-		"int GeoCal::IpiImageGroundConnection::band() const\n"
-		"Band we are working with. \n"
 		""},
 	 { (char *)"IpiImageGroundConnection__v_resolution", (PyCFunction)_wrap_IpiImageGroundConnection__v_resolution, METH_O, (char *)"\n"
 		"double GeoCal::IpiImageGroundConnection::resolution() const\n"

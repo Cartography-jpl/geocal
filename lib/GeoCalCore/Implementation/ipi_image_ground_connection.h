@@ -20,11 +20,11 @@ public:
 			   const boost::shared_ptr<Dem>& D,
 			   const boost::shared_ptr<RasterImage>& Img,
 			   const std::string& Title = "Image",
-			   double Resolution = 30, int Band = 0,
+			   double Resolution = 30, 
 			   double Max_height = 9000) 
     : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
 			    Title), ipi_(I), res(Resolution), 
-      max_h(Max_height), b(Band) {}
+      max_h(Max_height) {}
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -38,7 +38,7 @@ public:
     Time t;
     FrameCoordinate f;
     ipi_->time_table().time(Ic, t, f);
-    Lv = ipi_->orbit().cf_look_vector(t, ipi_->camera().sc_look_vector(f, b));
+    Lv = ipi_->orbit().cf_look_vector(t, ipi_->camera().sc_look_vector(f, ipi_->band()));
     P = ipi_->orbit().position_cf(t);
   }
   
@@ -50,7 +50,7 @@ public:
     FrameCoordinate f;
     ipi_->time_table().time(Ic, t, f);
     return ipi_->orbit().orbit_data(t)->
-      surface_intersect(ipi_->camera(), f, D, res, b, max_h);
+      surface_intersect(ipi_->camera(), f, D, res, ipi_->band(), max_h);
   }
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_approx_height(const ImageCoordinate& Ic,
@@ -60,7 +60,7 @@ public:
     FrameCoordinate f;
     ipi_->time_table().time(Ic, t, f);
     return ipi_->orbit().orbit_data(t)->
-      reference_surface_intersect_approximate(ipi_->camera(), f, b, H);
+      reference_surface_intersect_approximate(ipi_->camera(), f, ipi_->band(), H);
   }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const 
@@ -90,12 +90,6 @@ public:
   const Ipi& ipi() const { return *ipi_; }
 
 //-----------------------------------------------------------------------
-/// Band we are working with.
-//-----------------------------------------------------------------------
-  
-  int band() const {return b;}
-
-//-----------------------------------------------------------------------
 /// Resolution we step through Dem at, in meters.
 //-----------------------------------------------------------------------
 
@@ -108,11 +102,10 @@ public:
   double maximum_height() const {return max_h;}
   virtual int number_line() const { return ipi_->time_table().max_line(); }
   virtual int number_sample() const 
-  { return ipi_->camera().number_sample(b); }
+  { return ipi_->camera().number_sample(ipi_->band()); }
 private:
   boost::shared_ptr<Ipi> ipi_;
   double res, max_h;
-  int b;
 };
 
 }

@@ -18,7 +18,7 @@ public:
 			   const boost::shared_ptr<Dem>& D,
 			   const boost::shared_ptr<RasterImage>& Img,
 			   const std::string& Title = "Image",
-			   double Resolution = 30, int Band = 0,
+			   double Resolution = 30, 
 			   double Max_height = 9000);
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& OUTPUT,
@@ -28,11 +28,10 @@ public:
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
   %python_attribute2(ipi, ipi_ptr, boost::shared_ptr<Ipi>)
-  %python_attribute(band, int)
   %python_attribute(resolution, double)
   %python_attribute(maximum_height, double)
   %pickle_init(1, self.ipi, self.dem, self.image, self.title,
-	       self.resolution, self.band, self.maximum_height)
+	       self.resolution, self.maximum_height)
 };
 }
 

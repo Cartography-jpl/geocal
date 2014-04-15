@@ -84,7 +84,7 @@ public:
   virtual ScLookVector 
   sc_look_vector(const CartesianFixedLookVector& Cf) const;
   %python_attribute(sc_to_ci, boost::math::quaternion<double>)
-  %python_attribute(sc_to_cf, boost::math::quaternion<double>)
+  %python_attribute_with_set(sc_to_cf, boost::math::quaternion<double>)
   %python_attribute(from_cf, bool)
   %extend {
     blitz::Array<double, 1> _velocity_cf() const {

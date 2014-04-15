@@ -186,6 +186,13 @@ public:
   boost::math::quaternion<double> sc_to_cf() const { return sc_to_cf_; }
 
 //-----------------------------------------------------------------------
+/// Set the quaternion used to go from spacecraft to cartesian fixed.
+//-----------------------------------------------------------------------
+
+  void sc_to_cf(const boost::math::quaternion<double>& Sc_to_cf) 
+  { sc_to_cf_ = Sc_to_cf; }
+
+//-----------------------------------------------------------------------
 /// Was this created form the cartesian fixed version of the
 /// constructor? This is intended for use by python when we pickle
 /// this object so we know which constructor to call. It probably

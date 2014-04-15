@@ -20,6 +20,8 @@ namespace GeoCal {
 
 class AircraftOrbitData : public QuaternionOrbitData {
 public:
+  enum VerticalDefinition { GEODETIC_VERTICAL, GEOCENTRIC_VERTICAL };
+
 //-----------------------------------------------------------------------
 /// Constructor
 //-----------------------------------------------------------------------
@@ -28,16 +30,18 @@ public:
 		    const GroundCoordinate& Position, 
 		    const boost::array<double, 3>& Vel_fixed,
 		    double Roll, double Pitch,
-		    double Heading)
+		    double Heading,
+		    VerticalDefinition V = GEODETIC_VERTICAL)
   {
-    initialize(Tm, Position, Vel_fixed, Roll, Pitch, Heading);
+    initialize(Tm, Position, Vel_fixed, Roll, Pitch, Heading, V);
   }
   AircraftOrbitData(const Time& Tm,
 		    const GroundCoordinate& Position, 
 		    const Time& Tm2,
 		    const GroundCoordinate& Position2, 
 		    double Roll, double Pitch,
-		    double Heading);
+		    double Heading,
+		    VerticalDefinition V = GEODETIC_VERTICAL);
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -69,13 +73,24 @@ public:
 //-----------------------------------------------------------------------
 
   double heading() const {return heading_;}
+
+//-----------------------------------------------------------------------
+/// Vertical direction yaw, pitch, and heading are defined relative
+/// to.
+/// I'm pretty sure this should be GEODETIC_VERTICAL in most cases,
+/// but we allow this to be different.
+//-----------------------------------------------------------------------
+
+  VerticalDefinition vertical_definition() const {return vertical_definition_;}
 private:
   void initialize(const Time& Tm,
 		  const Geodetic& Position, 
 		  const boost::array<double, 3>& Vel_fixed,
 		  double Roll, double Pitch,
-		  double Heading);
+		  double Heading,
+		  VerticalDefinition V);
   double roll_, pitch_, heading_;
+  VerticalDefinition vertical_definition_;
   Geodetic position_geodetic_;
 };
 }

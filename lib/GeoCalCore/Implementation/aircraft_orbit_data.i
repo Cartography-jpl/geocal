@@ -12,23 +12,28 @@
 namespace GeoCal {
 class AircraftOrbitData : public QuaternionOrbitData {
 public:
+  enum VerticalDefinition { GEODETIC_VERTICAL, GEOCENTRIC_VERTICAL };
   AircraftOrbitData(const Time& Tm,
 		    const GroundCoordinate& Position, 
 		    const boost::array<double, 3>& Vel_fixed,
 		    double Roll, double Pitch,
-		    double Heading);
+		    double Heading,
+		    VerticalDefinition V = GEODETIC_VERTICAL);
   AircraftOrbitData(const Time& Tm,
 		    const GroundCoordinate& Position, 
 		    const Time& Tm2,
 		    const GroundCoordinate& Position2, 
 		    double Roll, double Pitch,
-		    double Heading);
+		    double Heading,
+		    VerticalDefinition V = GEODETIC_VERTICAL);
   %python_attribute(position_geodetic, Geodetic)
   %python_attribute(roll, double)
   %python_attribute(pitch, double)
   %python_attribute(heading, double)
+  %python_attribute(vertical_definition, VerticalDefinition)
   %pickle_init(1, self.time, self.position_geodetic, self.velocity_cf,
-	       self.roll, self.pitch, self.heading)
+	       self.roll, self.pitch, self.heading, 
+	       self.vertical_definition)
 };
 }
 

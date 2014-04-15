@@ -4987,6 +4987,107 @@ SWIG_AsVal_double (PyObject *obj, double *val)
 }
 
 
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
+
+
+#include <float.h>
+
+
+#include <math.h>
+
+
+SWIGINTERNINLINE int
+SWIG_CanCastAsInteger(double *d, double min, double max) {
+  double x = *d;
+  if ((min <= x && x <= max)) {
+   double fx = floor(x);
+   double cx = ceil(x);
+   double rd =  ((x - fx) < 0.5) ? fx : cx; /* simple rint */
+   if ((errno == EDOM) || (errno == ERANGE)) {
+     errno = 0;
+   } else {
+     double summ, reps, diff;
+     if (rd < x) {
+       diff = x - rd;
+     } else if (rd > x) {
+       diff = rd - x;
+     } else {
+       return 1;
+     }
+     summ = rd + x;
+     reps = diff/summ;
+     if (reps < 8*DBL_EPSILON) {
+       *d = rd;
+       return 1;
+     }
+   }
+  }
+  return 0;
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_long (PyObject *obj, long* val)
+{
+  if (PyInt_Check(obj)) {
+    if (val) *val = PyInt_AsLong(obj);
+    return SWIG_OK;
+  } else if (PyLong_Check(obj)) {
+    long v = PyLong_AsLong(obj);
+    if (!PyErr_Occurred()) {
+      if (val) *val = v;
+      return SWIG_OK;
+    } else {
+      PyErr_Clear();
+    }
+  }
+#ifdef SWIG_PYTHON_CAST_MODE
+  {
+    int dispatch = 0;
+    long v = PyInt_AsLong(obj);
+    if (!PyErr_Occurred()) {
+      if (val) *val = v;
+      return SWIG_AddCast(SWIG_OK);
+    } else {
+      PyErr_Clear();
+    }
+    if (!dispatch) {
+      double d;
+      int res = SWIG_AddCast(SWIG_AsVal_double (obj,&d));
+      if (SWIG_IsOK(res) && SWIG_CanCastAsInteger(&d, LONG_MIN, LONG_MAX)) {
+	if (val) *val = (long)(d);
+	return res;
+      }
+    }
+  }
+#endif
+  return SWIG_TypeError;
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -5014,6 +5115,130 @@ struct SWIG_null_deleter {
 extern "C" {
 #endif
 SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Time *arg1 = 0 ;
+  GeoCal::GroundCoordinate *arg2 = 0 ;
+  boost::array< double,3 > *arg3 = 0 ;
+  double arg4 ;
+  double arg5 ;
+  double arg6 ;
+  GeoCal::AircraftOrbitData::VerticalDefinition arg7 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
+  boost::array< double,3 > a3 ;
+  PythonObject numpy3 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  GeoCal::AircraftOrbitData *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+        arg1 = const_cast< GeoCal::Time * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    numpy3.obj = to_numpy<double>(swig_obj[2]);
+    if(!numpy3.obj)
+    return NULL;
+    a3 = to_boost_array<double, 3>(numpy3);
+    arg3 = &a3;
+  }
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_AircraftOrbitData" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_AircraftOrbitData" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_AircraftOrbitData" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_AircraftOrbitData" "', argument " "7"" of type '" "GeoCal::AircraftOrbitData::VerticalDefinition""'");
+  } 
+  arg7 = static_cast< GeoCal::AircraftOrbitData::VerticalDefinition >(val7);
+  {
+    try {
+      result = (GeoCal::AircraftOrbitData *)new GeoCal::AircraftOrbitData((GeoCal::Time const &)*arg1,(GeoCal::GroundCoordinate const &)*arg2,(boost::array< double,3 > const &)*arg3,arg4,arg5,arg6,arg7);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AircraftOrbitData > *smartresult = result ? new boost::shared_ptr<  GeoCal::AircraftOrbitData >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Time *arg1 = 0 ;
   GeoCal::GroundCoordinate *arg2 = 0 ;
@@ -5129,7 +5354,179 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Time *arg1 = 0 ;
+  GeoCal::GroundCoordinate *arg2 = 0 ;
+  GeoCal::Time *arg3 = 0 ;
+  GeoCal::GroundCoordinate *arg4 = 0 ;
+  double arg5 ;
+  double arg6 ;
+  double arg7 ;
+  GeoCal::AircraftOrbitData::VerticalDefinition arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared4 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  double val7 ;
+  int ecode7 = 0 ;
+  int val8 ;
+  int ecode8 = 0 ;
+  GeoCal::AircraftOrbitData *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+        arg1 = const_cast< GeoCal::Time * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AircraftOrbitData" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        arg3 = const_cast< GeoCal::Time * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AircraftOrbitData" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4)->get());
+      }
+    }
+  }
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_AircraftOrbitData" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_AircraftOrbitData" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_AircraftOrbitData" "', argument " "7"" of type '" "double""'");
+  } 
+  arg7 = static_cast< double >(val7);
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_AircraftOrbitData" "', argument " "8"" of type '" "GeoCal::AircraftOrbitData::VerticalDefinition""'");
+  } 
+  arg8 = static_cast< GeoCal::AircraftOrbitData::VerticalDefinition >(val8);
+  {
+    try {
+      result = (GeoCal::AircraftOrbitData *)new GeoCal::AircraftOrbitData((GeoCal::Time const &)*arg1,(GeoCal::GroundCoordinate const &)*arg2,(GeoCal::Time const &)*arg3,(GeoCal::GroundCoordinate const &)*arg4,arg5,arg6,arg7,arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AircraftOrbitData > *smartresult = result ? new boost::shared_ptr<  GeoCal::AircraftOrbitData >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Time *arg1 = 0 ;
   GeoCal::GroundCoordinate *arg2 = 0 ;
@@ -5295,21 +5692,51 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_AircraftOrbitData(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[8];
+  PyObject *argv[9];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_AircraftOrbitData",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_AircraftOrbitData",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 6) {
-    return _wrap_new_AircraftOrbitData__SWIG_0(self, argc, argv);
+    return _wrap_new_AircraftOrbitData__SWIG_1(self, argc, argv);
   }
   if (argc == 7) {
-    return _wrap_new_AircraftOrbitData__SWIG_1(self, argc, argv);
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__arrayT_double_3_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_2;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_2;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[6], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_2;
+    return _wrap_new_AircraftOrbitData__SWIG_0(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 7) {
+    return _wrap_new_AircraftOrbitData__SWIG_3(self, argc, argv);
+  }
+  if (argc == 8) {
+    return _wrap_new_AircraftOrbitData__SWIG_2(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_AircraftOrbitData'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::AircraftOrbitData::AircraftOrbitData(GeoCal::Time const &,GeoCal::GroundCoordinate const &,boost::array< double,3 > const &,double,double,double,GeoCal::AircraftOrbitData::VerticalDefinition)\n"
     "    GeoCal::AircraftOrbitData::AircraftOrbitData(GeoCal::Time const &,GeoCal::GroundCoordinate const &,boost::array< double,3 > const &,double,double,double)\n"
+    "    GeoCal::AircraftOrbitData::AircraftOrbitData(GeoCal::Time const &,GeoCal::GroundCoordinate const &,GeoCal::Time const &,GeoCal::GroundCoordinate const &,double,double,double,GeoCal::AircraftOrbitData::VerticalDefinition)\n"
     "    GeoCal::AircraftOrbitData::AircraftOrbitData(GeoCal::Time const &,GeoCal::GroundCoordinate const &,GeoCal::Time const &,GeoCal::GroundCoordinate const &,double,double,double)\n");
   return 0;
 }
@@ -5490,6 +5917,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_AircraftOrbitData__v_vertical_definition(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AircraftOrbitData *arg1 = (GeoCal::AircraftOrbitData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AircraftOrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AircraftOrbitData const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::AircraftOrbitData::VerticalDefinition result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_vertical_definition" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AircraftOrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AircraftOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::AircraftOrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AircraftOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::AircraftOrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (GeoCal::AircraftOrbitData::VerticalDefinition)((GeoCal::AircraftOrbitData const *)arg1)->vertical_definition();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_AircraftOrbitData(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::AircraftOrbitData *arg1 = (GeoCal::AircraftOrbitData *) 0 ;
@@ -5548,7 +6018,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_AircraftOrbitData", _wrap_new_AircraftOrbitData, METH_VARARGS, (char *)"\n"
 		"AircraftOrbitData::AircraftOrbitData(const Time &Tm, const GroundCoordinate &Position, const Time &Tm2,\n"
 		"const GroundCoordinate &Position2, double Roll, double Pitch, double\n"
-		"Heading)\n"
+		"Heading, VerticalDefinition V=GEODETIC_VERTICAL)\n"
 		"Often with Aircraft data we don't have a direct measure of velocity.\n"
 		"\n"
 		"This calculates a simple velocity by taking a second position and a\n"
@@ -5569,6 +6039,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"AircraftOrbitData__v_heading", (PyCFunction)_wrap_AircraftOrbitData__v_heading, METH_O, (char *)"\n"
 		"double GeoCal::AircraftOrbitData::heading() const\n"
 		"Heading, in degrees. \n"
+		""},
+	 { (char *)"AircraftOrbitData__v_vertical_definition", (PyCFunction)_wrap_AircraftOrbitData__v_vertical_definition, METH_O, (char *)"\n"
+		"VerticalDefinition GeoCal::AircraftOrbitData::vertical_definition() const\n"
+		"Vertical direction yaw, pitch, and heading are defined relative to.\n"
+		"\n"
+		"I'm pretty sure this should be GEODETIC_VERTICAL in most cases, but we\n"
+		"allow this to be different. \n"
 		""},
 	 { (char *)"delete_AircraftOrbitData", (PyCFunction)_wrap_delete_AircraftOrbitData, METH_O, (char *)"\n"
 		"virtual GeoCal::AircraftOrbitData::~AircraftOrbitData()\n"
@@ -6781,6 +7258,8 @@ SWIG_init(void) {
   GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::AircraftOrbitData))] =
   boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::AircraftOrbitData >("boost::shared_ptr< GeoCal::AircraftOrbitData > *"));
   
+  SWIG_Python_SetConstant(d, "AircraftOrbitData_GEODETIC_VERTICAL",SWIG_From_int(static_cast< int >(GeoCal::AircraftOrbitData::GEODETIC_VERTICAL)));
+  SWIG_Python_SetConstant(d, "AircraftOrbitData_GEOCENTRIC_VERTICAL",SWIG_From_int(static_cast< int >(GeoCal::AircraftOrbitData::GEOCENTRIC_VERTICAL)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

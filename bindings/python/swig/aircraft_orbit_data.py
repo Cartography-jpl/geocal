@@ -139,11 +139,13 @@ class AircraftOrbitData(geocal_swig.orbit.QuaternionOrbitData):
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    GEODETIC_VERTICAL = _aircraft_orbit_data.AircraftOrbitData_GEODETIC_VERTICAL
+    GEOCENTRIC_VERTICAL = _aircraft_orbit_data.AircraftOrbitData_GEOCENTRIC_VERTICAL
     def __init__(self, *args): 
         """
         AircraftOrbitData::AircraftOrbitData(const Time &Tm, const GroundCoordinate &Position, const Time &Tm2,
         const GroundCoordinate &Position2, double Roll, double Pitch, double
-        Heading)
+        Heading, VerticalDefinition V=GEODETIC_VERTICAL)
         Often with Aircraft data we don't have a direct measure of velocity.
 
         This calculates a simple velocity by taking a second position and a
@@ -194,18 +196,33 @@ class AircraftOrbitData(geocal_swig.orbit.QuaternionOrbitData):
     def heading(self):
         return self._v_heading()
 
+    def _v_vertical_definition(self):
+        """
+        VerticalDefinition GeoCal::AircraftOrbitData::vertical_definition() const
+        Vertical direction yaw, pitch, and heading are defined relative to.
+
+        I'm pretty sure this should be GEODETIC_VERTICAL in most cases, but we
+        allow this to be different. 
+        """
+        return _aircraft_orbit_data.AircraftOrbitData__v_vertical_definition(self)
+
+    @property
+    def vertical_definition(self):
+        return self._v_vertical_definition()
+
     @classmethod
     def pickle_format_version(cls):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.time,self.position_geodetic,self.velocity_cf,self.roll,self.pitch,self.heading)
+      return _new_from_init, (self.__class__, 1, self.time,self.position_geodetic,self.velocity_cf,self.roll,self.pitch,self.heading,self.vertical_definition)
 
     __swig_destroy__ = _aircraft_orbit_data.delete_AircraftOrbitData
 AircraftOrbitData._v_position_geodetic = new_instancemethod(_aircraft_orbit_data.AircraftOrbitData__v_position_geodetic,None,AircraftOrbitData)
 AircraftOrbitData._v_roll = new_instancemethod(_aircraft_orbit_data.AircraftOrbitData__v_roll,None,AircraftOrbitData)
 AircraftOrbitData._v_pitch = new_instancemethod(_aircraft_orbit_data.AircraftOrbitData__v_pitch,None,AircraftOrbitData)
 AircraftOrbitData._v_heading = new_instancemethod(_aircraft_orbit_data.AircraftOrbitData__v_heading,None,AircraftOrbitData)
+AircraftOrbitData._v_vertical_definition = new_instancemethod(_aircraft_orbit_data.AircraftOrbitData__v_vertical_definition,None,AircraftOrbitData)
 AircraftOrbitData_swigregister = _aircraft_orbit_data.AircraftOrbitData_swigregister
 AircraftOrbitData_swigregister(AircraftOrbitData)
 

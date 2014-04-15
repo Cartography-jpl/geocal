@@ -14,14 +14,14 @@ AircraftOrbitData::AircraftOrbitData(const Time& Tm,
 		    const Time& Tm2,
 		    const GroundCoordinate& Position2, 
 		    double Roll, double Pitch,
-		    double Heading)
+				     double Heading, VerticalDefinition V)
 {
   boost::array<double, 3> p1 = Position.convert_to_cf()->position;
   boost::array<double, 3> p2 = Position2.convert_to_cf()->position;
   boost::array<double, 3> vel;
   for(int i = 0; i < 3; ++i)
     vel[i] = (p2[i] - p1[i]) / (Tm2 - Tm);
-  initialize(Tm, Position, vel, Roll, Pitch, Heading);
+  initialize(Tm, Position, vel, Roll, Pitch, Heading, V);
 }
 
 //-----------------------------------------------------------------------
@@ -32,12 +32,13 @@ void AircraftOrbitData::initialize(const Time& Tm,
 				   const Geodetic& Position, 
 				   const boost::array<double, 3>& Vel_fixed,
 				   double Roll, double Pitch,
-				   double Heading)
+				   double Heading, VerticalDefinition V)
 {
   roll_ = Roll;
   pitch_ = Pitch;
   heading_ = Heading;
   position_geodetic_ = Position;
+  vertical_definition_ = V;
 
 //-----------------------------------------------------------------------
 // The transformations done in this function are documented in
@@ -89,15 +90,15 @@ void AircraftOrbitData::initialize(const Time& Tm,
 // in as an argument.
 //-----------------------------------------------------------------------
 
-#define GEODETIC_VERTICAL
-#ifdef GEODETIC_VERTICAL
-  double latitude = position_geodetic_.latitude();
-  double longitude = position_geodetic_.longitude();
-#else
-  Geocentric pos_geoc(Position);
-  double latitude = pos_geoc.latitude();
-  double longitude = pos_geoc.longitude();
-#endif
+  double latitude, longitude;
+  if(vertical_definition_ == GEODETIC_VERTICAL) {
+    latitude = position_geodetic_.latitude();
+    longitude = position_geodetic_.longitude();
+  } else {
+    Geocentric pos_geoc(Position);
+    latitude = pos_geoc.latitude();
+    longitude = pos_geoc.longitude();
+  }
   latitude *= Constant::deg_to_rad;
   longitude *= Constant::deg_to_rad;
   double sinlat = sin(latitude);
@@ -120,24 +121,11 @@ void AircraftOrbitData::initialize(const Time& Tm,
   boost::math::quaternion<double> local_north_to_ecr = matrix_to_quaternion(m);
 
 // Pretty sure about the order here, this seems to be the standard
-// order used by airaircrafts.
+// order used by aircrafts.
 
-// If you don't happen to remember off the top of your head, you
-// rotate an angle 'a' around an axis 'u' by the quaternion cos(a / 2) +
-// sin(a / 2) * u.
-  boost::math::quaternion<double> rx(cos(Roll * Constant::deg_to_rad / 2),
-				     sin(Roll * Constant::deg_to_rad / 2),
-				     0,
-				     0);
-  boost::math::quaternion<double> ry(cos(Pitch * Constant::deg_to_rad / 2),
-				     0,
-				     sin(Pitch * Constant::deg_to_rad / 2),
-				     0);
-  boost::math::quaternion<double> rz(cos(Heading * Constant::deg_to_rad / 2),
-				     0,
-				     0,
-				     sin(Heading * Constant::deg_to_rad / 2));
-  boost::math::quaternion<double> body_to_local_north = rz * ry * rx;
+  boost::math::quaternion<double> body_to_local_north = 
+    quat_rot("ZYX", Heading * Constant::deg_to_rad, 
+	     Pitch * Constant::deg_to_rad, Roll * Constant::deg_to_rad);
   boost::math::quaternion<double> body_to_ecr;
   body_to_ecr = local_north_to_ecr * body_to_local_north;
   

@@ -18,6 +18,7 @@ class LookVector : public GenericObject {
 public:
   %python_attribute_boost_array(look_vector, double, 3);
   %python_attribute(direction, boost::array<double, 3>)
+  %python_attribute_with_set(look_quaternion, boost::math::quaternion<double>)
   %python_attribute(length, double)
   std::string print_to_string() const = 0;
 };

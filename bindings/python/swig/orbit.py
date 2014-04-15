@@ -343,17 +343,20 @@ class QuaternionOrbitData(OrbitData):
     def sc_to_ci(self):
         return self._v_sc_to_ci()
 
-    def _v_sc_to_cf(self):
+    def _v_sc_to_cf(self, *args):
         """
-        boost::math::quaternion<double> GeoCal::QuaternionOrbitData::sc_to_cf() const
-        Return the quaternion used to go from spacecraft to cartesian fixed.
-
+        void GeoCal::QuaternionOrbitData::sc_to_cf(const boost::math::quaternion< double > &Sc_to_cf)
+        Set the quaternion used to go from spacecraft to cartesian fixed. 
         """
-        return _orbit.QuaternionOrbitData__v_sc_to_cf(self)
+        return _orbit.QuaternionOrbitData__v_sc_to_cf(self, *args)
 
     @property
     def sc_to_cf(self):
         return self._v_sc_to_cf()
+
+    @sc_to_cf.setter
+    def sc_to_cf(self, value):
+      self._v_sc_to_cf(value)
 
     def _v_from_cf(self):
         """

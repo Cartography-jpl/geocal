@@ -149,6 +149,21 @@ class LookVector(geocal_swig.generic_object.GenericObject):
     def direction(self):
         return self._v_direction()
 
+    def _v_look_quaternion(self, *args):
+        """
+        void GeoCal::LookVector::look_quaternion(const boost::math::quaternion< double > &V)
+        Set look vector using a quaternion. 
+        """
+        return _look_vector.LookVector__v_look_quaternion(self, *args)
+
+    @property
+    def look_quaternion(self):
+        return self._v_look_quaternion()
+
+    @look_quaternion.setter
+    def look_quaternion(self, value):
+      self._v_look_quaternion(value)
+
     def _v_length(self):
         """
         double LookVector::length() const
@@ -163,6 +178,7 @@ class LookVector(geocal_swig.generic_object.GenericObject):
     __swig_destroy__ = _look_vector.delete_LookVector
 LookVector._look_vector = new_instancemethod(_look_vector.LookVector__look_vector,None,LookVector)
 LookVector._v_direction = new_instancemethod(_look_vector.LookVector__v_direction,None,LookVector)
+LookVector._v_look_quaternion = new_instancemethod(_look_vector.LookVector__v_look_quaternion,None,LookVector)
 LookVector._v_length = new_instancemethod(_look_vector.LookVector__v_length,None,LookVector)
 LookVector.__str__ = new_instancemethod(_look_vector.LookVector___str__,None,LookVector)
 LookVector_swigregister = _look_vector.LookVector_swigregister

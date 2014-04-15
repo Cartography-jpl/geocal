@@ -226,6 +226,7 @@ def __reduce__(self):
 
 }
 
-namespace std {
-%template(Vector_Time) vector<GeoCal::Time>;
-}
+%template(Vector_Time) std::vector<GeoCal::Time>;
+%extend std::vector<GeoCal::Time> {
+  %pickle_vector()
+};

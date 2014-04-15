@@ -141,7 +141,26 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
         ingest the data. 
         """
         _orbit_quaternion_list.OrbitQuaternionList_swiginit(self,_orbit_quaternion_list.new_OrbitQuaternionList(*args))
+    def _v_quaternion_orbit_data(self):
+        """
+        std::vector< boost::shared_ptr< QuaternionOrbitData > > OrbitQuaternionList::quaternion_orbit_data() const
+        Return the list of QuaternionOrbitData. 
+        """
+        return _orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data(self)
+
+    @property
+    def quaternion_orbit_data(self):
+        return self._v_quaternion_orbit_data()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.quaternion_orbit_data)
+
     __swig_destroy__ = _orbit_quaternion_list.delete_OrbitQuaternionList
+OrbitQuaternionList._v_quaternion_orbit_data = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data,None,OrbitQuaternionList)
 OrbitQuaternionList_swigregister = _orbit_quaternion_list.OrbitQuaternionList_swigregister
 OrbitQuaternionList_swigregister(OrbitQuaternionList)
 

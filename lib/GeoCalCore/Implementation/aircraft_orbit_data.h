@@ -20,6 +20,10 @@ namespace GeoCal {
 
 class AircraftOrbitData : public QuaternionOrbitData {
 public:
+  /// I'm almost certain that this should always be
+  /// GEODETIC_VERTICAL. In particular, look at
+  /// http://en.wikipedia.org/wiki/Axes_conventions which seems to
+  /// indicate this.
   enum VerticalDefinition { GEODETIC_VERTICAL, GEOCENTRIC_VERTICAL };
 
 //-----------------------------------------------------------------------

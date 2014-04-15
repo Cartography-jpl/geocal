@@ -40,6 +40,9 @@ public:
 
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual void print(std::ostream& Os) const;
+
+  std::vector<boost::shared_ptr<QuaternionOrbitData> > 
+  quaternion_orbit_data() const;
 protected:
 //-----------------------------------------------------------------------
 /// Default Constructor. Derived classes should call initialize.

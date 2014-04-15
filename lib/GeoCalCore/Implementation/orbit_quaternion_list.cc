@@ -1,4 +1,5 @@
 #include "orbit_quaternion_list.h"
+#include <boost/foreach.hpp>
 
 using namespace GeoCal;
 
@@ -22,4 +23,18 @@ void OrbitQuaternionList::print(std::ostream& Os) const
      << "  Min time:      " << min_time() << "\n"
      << "  Max time:      " << max_time() << "\n"
      << "  Number points: " << orbit_data_map.size() << "\n";
+}
+
+//-----------------------------------------------------------------------
+/// Return the list of QuaternionOrbitData.
+//-----------------------------------------------------------------------
+
+std::vector<boost::shared_ptr<QuaternionOrbitData> > 
+OrbitQuaternionList::quaternion_orbit_data() const
+{
+  std::vector<boost::shared_ptr<QuaternionOrbitData> >  res;
+  res.reserve(orbit_data_map.size());
+  BOOST_FOREACH(time_map::value_type i, orbit_data_map)
+    res.push_back(i.second);
+  return res;
 }

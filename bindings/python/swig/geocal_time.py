@@ -432,6 +432,19 @@ class Vector_Time(object):
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal_time.Vector_Time_swiginit(self,_geocal_time.new_Vector_Time(*args))
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def to_list(self):
+       res = []
+       for i in range(self.size()):
+          res.append(self[i])
+       return res
+
+    def __reduce__(self):
+      return _new_vector, (self.__class__, 1, self.to_list())
+
     __swig_destroy__ = _geocal_time.delete_Vector_Time
 Vector_Time.iterator = new_instancemethod(_geocal_time.Vector_Time_iterator,None,Vector_Time)
 Vector_Time.__nonzero__ = new_instancemethod(_geocal_time.Vector_Time___nonzero__,None,Vector_Time)

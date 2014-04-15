@@ -193,3 +193,6 @@ public:
 }
 
 %template(Vector_QuaternionOrbitData) std::vector<boost::shared_ptr<GeoCal::QuaternionOrbitData> >;
+%extend std::vector<boost::shared_ptr<GeoCal::QuaternionOrbitData> > {
+  %pickle_vector()
+};

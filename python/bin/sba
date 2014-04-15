@@ -56,6 +56,13 @@ Options:
   --log-file=f
        File name to use as a log file.
 
+  --min-chisqr=f
+      The target chisqr we try to reach [default: 0.1]
+
+  --stopping-criteria=f
+      The stopping criteria we use, so change in chisq from one
+      iteration to the next is < this value. [default: 0.001]
+
   --tp-epsilon=v
        Epsilon to use during the calculation of the tie point Jacobian.
        [default: 1.0]
@@ -95,7 +102,9 @@ v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
 
 log.info("Initial Chisq: %f" % chisq)
-parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
+parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian,
+                   min_chisqr = args.min_chisqr, 
+                   stopping_criteria = args.stopping_criteria)
 sba.parameter = parm
 v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))

@@ -153,9 +153,16 @@ public:
   virtual Time max_time() const {return tlist.back();}
 
 //-----------------------------------------------------------------------
-/// List of times
+/// List of times. Note that std::vector<Time> doesn't play well with
+/// python for reasons I've not bothered to track down. So instead we
+/// just provide access to the underlying list and have python set
+/// this up.
 //-----------------------------------------------------------------------
-  const std::vector<Time>& time_list() const {return tlist;}
+  int size_time_list() const {return (int) tlist.size(); }
+  Time time_list(int i) const 
+  { range_check(i, i, size_time_list());
+    return tlist[i];
+  }
 private:
   int min_line_;
   std::vector<Time> tlist;

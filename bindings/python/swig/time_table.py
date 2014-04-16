@@ -144,6 +144,7 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
+import geocal_swig.geocal_time
 class TimeTable(geocal_swig.generic_object.GenericObject):
     """
     This class is used to relate time to image line number and vice versa.
@@ -285,26 +286,41 @@ class MeasuredTimeTable(TimeTable):
         ordered. The first time is for the given Min_line (default of 0). 
         """
         _time_table.MeasuredTimeTable_swiginit(self,_time_table.new_MeasuredTimeTable(*args))
-    def _v_time_list(self):
+    def _v_size_time_list(self):
         """
-        const std::vector<Time>& GeoCal::MeasuredTimeTable::time_list() const
-        List of times. 
+        int GeoCal::MeasuredTimeTable::size_time_list() const
+        List of times.
+
+        Note that std::vector<Time> doesn't play well with python for reasons
+        I've not bothered to track down. So instead we just provide access to
+        the underlying list and have python set this up. 
         """
-        return _time_table.MeasuredTimeTable__v_time_list(self)
+        return _time_table.MeasuredTimeTable__v_size_time_list(self)
 
     @property
-    def time_list(self):
-        return self._v_time_list()
+    def size_time_list(self):
+        return self._v_size_time_list()
+
+    def time_list(self, *args):
+        """
+        Time GeoCal::MeasuredTimeTable::time_list(int i) const
+
+        """
+        return _time_table.MeasuredTimeTable_time_list(self, *args)
 
     @classmethod
     def pickle_format_version(cls):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.min_line,self.time_list)
+      v = geocal_swig.geocal_time.Vector_Time()
+      for i in range(self.size_time_list):
+        v.push_back(self.time_list(i))
+      return _new_from_init, (self.__class__, 1, v, self.min_line)
 
     __swig_destroy__ = _time_table.delete_MeasuredTimeTable
-MeasuredTimeTable._v_time_list = new_instancemethod(_time_table.MeasuredTimeTable__v_time_list,None,MeasuredTimeTable)
+MeasuredTimeTable._v_size_time_list = new_instancemethod(_time_table.MeasuredTimeTable__v_size_time_list,None,MeasuredTimeTable)
+MeasuredTimeTable.time_list = new_instancemethod(_time_table.MeasuredTimeTable_time_list,None,MeasuredTimeTable)
 MeasuredTimeTable_swigregister = _time_table.MeasuredTimeTable_swigregister
 MeasuredTimeTable_swigregister(MeasuredTimeTable)
 

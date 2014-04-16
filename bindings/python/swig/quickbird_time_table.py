@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.time_table
 import geocal_swig.generic_object
+import geocal_swig.geocal_time
 class QuickBirdTimeTable(geocal_swig.time_table.TimeTable):
     """
     This reads a quickbird .IMD file to get time table information.

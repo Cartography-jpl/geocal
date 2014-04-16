@@ -6929,7 +6929,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MeasuredTimeTable__v_time_list(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MeasuredTimeTable__v_size_time_list(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MeasuredTimeTable *arg1 = (GeoCal::MeasuredTimeTable *) 0 ;
   void *argp1 = 0 ;
@@ -6937,7 +6937,7 @@ SWIGINTERN PyObject *_wrap_MeasuredTimeTable__v_time_list(PyObject *SWIGUNUSEDPA
   boost::shared_ptr< GeoCal::MeasuredTimeTable const > tempshared1 ;
   boost::shared_ptr< GeoCal::MeasuredTimeTable const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > result;
+  int result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -6945,7 +6945,7 @@ SWIGINTERN PyObject *_wrap_MeasuredTimeTable__v_time_list(PyObject *SWIGUNUSEDPA
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeasuredTimeTable__v_time_list" "', argument " "1"" of type '" "GeoCal::MeasuredTimeTable const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeasuredTimeTable__v_size_time_list" "', argument " "1"" of type '" "GeoCal::MeasuredTimeTable const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MeasuredTimeTable > * >(argp1);
@@ -6958,14 +6958,67 @@ SWIGINTERN PyObject *_wrap_MeasuredTimeTable__v_time_list(PyObject *SWIGUNUSEDPA
   }
   {
     try {
-      result = ((GeoCal::MeasuredTimeTable const *)arg1)->time_list();
+      result = (int)((GeoCal::MeasuredTimeTable const *)arg1)->size_time_list();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = swig::from(static_cast< std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > >(result));
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MeasuredTimeTable_time_list(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MeasuredTimeTable *arg1 = (GeoCal::MeasuredTimeTable *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MeasuredTimeTable const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MeasuredTimeTable const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  GeoCal::Time result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"MeasuredTimeTable_time_list",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MeasuredTimeTable_time_list" "', argument " "1"" of type '" "GeoCal::MeasuredTimeTable const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MeasuredTimeTable > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MeasuredTimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::MeasuredTimeTable * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MeasuredTimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::MeasuredTimeTable * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MeasuredTimeTable_time_list" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = ((GeoCal::MeasuredTimeTable const *)arg1)->time_list(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
+  }
   return resultobj;
 fail:
   return NULL;
@@ -7100,9 +7153,17 @@ static PyMethodDef SwigMethods[] = {
 		"This gives the time for every line. This list should be strictly\n"
 		"ordered. The first time is for the given Min_line (default of 0). \n"
 		""},
-	 { (char *)"MeasuredTimeTable__v_time_list", (PyCFunction)_wrap_MeasuredTimeTable__v_time_list, METH_O, (char *)"\n"
-		"const std::vector<Time>& GeoCal::MeasuredTimeTable::time_list() const\n"
-		"List of times. \n"
+	 { (char *)"MeasuredTimeTable__v_size_time_list", (PyCFunction)_wrap_MeasuredTimeTable__v_size_time_list, METH_O, (char *)"\n"
+		"int GeoCal::MeasuredTimeTable::size_time_list() const\n"
+		"List of times.\n"
+		"\n"
+		"Note that std::vector<Time> doesn't play well with python for reasons\n"
+		"I've not bothered to track down. So instead we just provide access to\n"
+		"the underlying list and have python set this up. \n"
+		""},
+	 { (char *)"MeasuredTimeTable_time_list", _wrap_MeasuredTimeTable_time_list, METH_VARARGS, (char *)"\n"
+		"Time GeoCal::MeasuredTimeTable::time_list(int i) const\n"
+		"\n"
 		""},
 	 { (char *)"delete_MeasuredTimeTable", (PyCFunction)_wrap_delete_MeasuredTimeTable, METH_O, (char *)"\n"
 		"virtual GeoCal::MeasuredTimeTable::~MeasuredTimeTable()\n"

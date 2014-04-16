@@ -9,7 +9,7 @@
 %}
 %base_import(generic_object)
 %import "image_coordinate.i"
-%import "geocal_time.i"
+%base_import(geocal_time)
 %import "frame_coordinate.i"
 %geocal_shared_ptr(GeoCal::TimeTable);
 %geocal_shared_ptr(GeoCal::ConstantSpacingTimeTable);
@@ -45,7 +45,18 @@ public:
 		    int Min_line = 0);
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
     const;
-  %python_attribute(time_list, std::vector<Time>)
-  %pickle_init(1, self.min_line, self.time_list)
+  %python_attribute(size_time_list, int)
+  Time time_list(int i) const;
+  %pythoncode {
+@classmethod
+def pickle_format_version(cls):
+  return 1
+
+def __reduce__(self):
+  v = geocal_swig.geocal_time.Vector_Time()
+  for i in range(self.size_time_list):
+    v.push_back(self.time_list(i))
+  return _new_from_init, (self.__class__, 1, v, self.min_line)
+}  
 };
 }

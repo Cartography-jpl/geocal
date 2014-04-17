@@ -456,7 +456,7 @@ class Rpc(geocal_swig.generic_object.GenericObject):
         """
         return _geocal_rpc.Rpc_rpc_type_b(self)
 
-    def __init__(self): 
+    def __init__(self, *args): 
         """
         Rpc::Rpc()
         Default constructor.
@@ -464,7 +464,7 @@ class Rpc(geocal_swig.generic_object.GenericObject):
         Initializes fit_line_numerator and fit_sample_numerator to all false.
 
         """
-        _geocal_rpc.Rpc_swiginit(self,_geocal_rpc.new_Rpc())
+        _geocal_rpc.Rpc_swiginit(self,_geocal_rpc.new_Rpc(*args))
     __swig_destroy__ = _geocal_rpc.delete_Rpc
 Rpc.__str__ = new_instancemethod(_geocal_rpc.Rpc___str__,None,Rpc)
 Rpc._line_denominator = new_instancemethod(_geocal_rpc.Rpc__line_denominator,None,Rpc)

@@ -9717,11 +9717,11 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Rpc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Rpc__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"new_Rpc",0,0,0)) SWIG_fail;
+  if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
   {
     try {
       result = (GeoCal::Rpc *)new GeoCal::Rpc();
@@ -9738,6 +9738,81 @@ SWIGINTERN PyObject *_wrap_new_Rpc(PyObject *SWIGUNUSEDPARM(self), PyObject *arg
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Rpc__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rpc *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rpc const > tempshared1 ;
+  GeoCal::Rpc *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Rpc *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Rpc,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Rpc" "', argument " "1"" of type '" "GeoCal::Rpc const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Rpc" "', argument " "1"" of type '" "GeoCal::Rpc const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+        arg1 = const_cast< GeoCal::Rpc * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Rpc * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (GeoCal::Rpc *)new GeoCal::Rpc((GeoCal::Rpc const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::Rpc > *smartresult = result ? new boost::shared_ptr<  GeoCal::Rpc >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Rpc(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_Rpc",0,1,argv))) SWIG_fail;
+  --argc;
+  if (argc == 0) {
+    return _wrap_new_Rpc__SWIG_0(self, argc, argv);
+  }
+  if (argc == 1) {
+    return _wrap_new_Rpc__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Rpc'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Rpc::Rpc()\n"
+    "    GeoCal::Rpc::Rpc(GeoCal::Rpc const &)\n");
+  return 0;
 }
 
 
@@ -9978,7 +10053,7 @@ static PyMethodDef SwigMethods[] = {
 		"If this rpc is already type RPC_B, then this is just a copy. Otherwise\n"
 		"we rearrange the coefficients to give a type RPC_B. \n"
 		""},
-	 { (char *)"new_Rpc", (PyCFunction)_wrap_new_Rpc, METH_NOARGS, (char *)"\n"
+	 { (char *)"new_Rpc", _wrap_new_Rpc, METH_VARARGS, (char *)"\n"
 		"Rpc::Rpc()\n"
 		"Default constructor.\n"
 		"\n"

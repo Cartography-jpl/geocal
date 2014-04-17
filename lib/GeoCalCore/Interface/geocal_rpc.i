@@ -51,6 +51,9 @@ def _new_rpc(cls, version, is_rpc_a, error_bias, error_random, height_offset,
 namespace GeoCal {
   class RasterImage;
   class ImageGroundConnection;
+
+  %copyctor Rpc;
+
   class Rpc : public GenericObject {
   public:
 %pythoncode {

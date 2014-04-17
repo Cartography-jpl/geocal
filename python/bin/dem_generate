@@ -86,9 +86,17 @@ igc2 = igc_col.image_ground_connection(args.index_image2)
 # Determine the coverage of the DEM.
 
 if(args.map_info):
-    midem = read_shelve(args.map_info).map_info
+    m = read_shelve(args.map_info)
+    if(isinstance(m, MapInfo)):
+        midem = m
+    else:
+        midem = m.map_info
 elif(args.map_info_cover):
-    midem = read_shelve(args.map_info_cover).map_info
+    m = read_shelve(args.map_info_cover)
+    if(isinstance(m, MapInfo)):
+        midem = m
+    else:
+        midem = m.map_info
     midem = igc1.cover(midem, args.boundary)
     midem = midem.intersection(igc2.cover(midem, args.boundary))
 else:

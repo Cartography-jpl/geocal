@@ -3,6 +3,7 @@ from geocal_swig import *
 from with_parameter import *
 import numpy as np
 import scipy.sparse
+import copy
 
 class IgcCollection(WithParameter):
     '''This class describes a collection of ImageGroundConnection. This
@@ -128,7 +129,7 @@ class IgcArray(IgcCollection):
     ImageGroundConnection class, but python classes such as 
     GdalImageGroundConnection and VicarImageGroundConnection do have these.'''
     def __init__(self, initial_data = []):
-        self.igc = initial_data
+        self.igc = copy.copy(initial_data)
         self._parameter_subset_mask = [True] * len(self.parameter)
 
     def __str__(self):

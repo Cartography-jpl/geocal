@@ -36,11 +36,15 @@ blitz::Array<double, 2> DemMatch::surface_point
 	match_->match(ic1, ic2, line_sigma, sample_sigma, 
 		      success, &diagnosticv);
 	process_match();
+      } catch(ImageGroundConnectionFailed& E) {
+	// Just treat like out of range error
+	success = false;
+	diagnosticv = IMAGE_GROUND_CONNECTION_FAILED;
+	process_match();
       } catch(Exception& E) {
 	E << "Error occurred in Dem Match at point (" << i << ", " << j << ")";
 	throw;
       }
-      
     }
   return process_res();
 }
@@ -68,7 +72,12 @@ blitz::Array<double, 2> DemMatch::surface_point(const MapInfo& Mi,
 	++npoint;
 	gc = Mi.ground_coordinate(i, j);
 	m->match_surf(*gc, ic1, ic2, line_sigma, sample_sigma, 
-			   success, &diagnosticv);
+		      success, &diagnosticv);
+	process_match();
+      } catch(ImageGroundConnectionFailed& E) {
+	// Just treat like out of range error
+	success = false;
+	diagnosticv = IMAGE_GROUND_CONNECTION_FAILED;
 	process_match();
       } catch(Exception& E) {
 	E << "\nError occurred in Dem Match at surface point (" << i << ", " << j << "), gc: " << *gc;

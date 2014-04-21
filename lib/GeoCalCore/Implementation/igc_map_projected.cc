@@ -291,27 +291,58 @@ void IgcMapProjected::calc_grid(int Lstart, int Sstart) const
   for(int i = -(Lstart % grid_spacing_); i < data.rows(); i += grid_spacing_)
     for(int j = -(Sstart % grid_spacing_); j < data.cols(); 
 	j += grid_spacing_) {
-      interpolate_ic(Lstart + i, Sstart + j); 
-      for(int ii = std::max(i, 0); 
-	  ii < std::min(i + grid_spacing_, data.rows()); ++ii)
-	for(int jj = std::max(j, 0); 
-	    jj < std::min(j + grid_spacing_, data.cols()); ++jj) {
-	  boost::shared_ptr<GroundCoordinate> gc = 
-	    ground_coordinate(ImageCoordinate(Lstart + ii, Sstart + jj), 
-			      igc_->dem());
-	  if(igc_->ground_mask()->mask(*gc)) {
-	    data(ii, jj) =  fill_value_;
-	  } else {
-	    double ln = ic_line(ii + Lstart, jj + Sstart);
-	    double smp = ic_sample(ii + Lstart, jj + Sstart);
-	    if(ln < 0 || ln >= igc_->number_line() - 1 ||
-	       smp < 0 || smp >= igc_->number_sample() - 1 ||
-	       igc_->image_mask()->mask(ln, smp))
+      try {
+	interpolate_ic(Lstart + i, Sstart + j); 
+	for(int ii = std::max(i, 0); 
+	    ii < std::min(i + grid_spacing_, data.rows()); ++ii)
+	  for(int jj = std::max(j, 0); 
+	      jj < std::min(j + grid_spacing_, data.cols()); ++jj) {
+	    boost::shared_ptr<GroundCoordinate> gc = 
+	      ground_coordinate(ImageCoordinate(Lstart + ii, Sstart + jj), 
+				igc_->dem());
+	    if(igc_->ground_mask()->mask(*gc)) {
 	      data(ii, jj) =  fill_value_;
-	    else
-	      data(ii, jj) = igc_->image()->unchecked_interpolate(ln, smp);
+	    } else {
+	      double ln = ic_line(ii + Lstart, jj + Sstart);
+	      double smp = ic_sample(ii + Lstart, jj + Sstart);
+	      if(ln < 0 || ln >= igc_->number_line() - 1 ||
+		 smp < 0 || smp >= igc_->number_sample() - 1 ||
+		 igc_->image_mask()->mask(ln, smp))
+		data(ii, jj) =  fill_value_;
+	      else
+		data(ii, jj) = igc_->image()->unchecked_interpolate(ln, smp);
+	    }
 	  }
-	}
+      } catch(const ImageGroundConnectionFailed& E) {
+	// Might not be able to interpolate, because one of the
+	// corners throws an ImageGroundConnectionFailed (e.g., we are
+	// near the edge of the IPI). Fall back to trying to do every
+	// pixel. 
+	for(int ii = std::max(i, 0); 
+	    ii < std::min(i + grid_spacing_, data.rows()); ++ii)
+	  for(int jj = std::max(j, 0); 
+	      jj < std::min(j + grid_spacing_, data.cols()); ++jj) {
+	    boost::shared_ptr<GroundCoordinate> gc = 
+	      mi.ground_coordinate(Sstart + jj, Lstart + ii, igc_->dem());
+	    try {
+	      ImageCoordinate ic = igc_->image_coordinate(*gc);
+	      if(igc_->ground_mask()->mask(*gc)) {
+		data(ii, jj) =  fill_value_;
+	      } else {
+		if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
+		   ic.sample < 0 || ic.sample >= igc_->number_sample() - 1 ||
+		   igc_->image_mask()->mask_ic(ic))
+		  data(ii, jj) =  fill_value_;
+		else
+		  data(ii, jj) = igc_->image()->
+		    unchecked_interpolate(ic.line, ic.sample);
+	      }
+	    } catch(const ImageGroundConnectionFailed& E) {
+	      data(ii, jj) =  fill_value_;
+				// Data outside of image, so fill_value.
+	    }
+	  }
+      }
     }
 }
 //-----------------------------------------------------------------------
@@ -323,29 +354,61 @@ void IgcMapProjectedMultiBand::calc_grid(int Lstart, int Sstart) const
   for(int i = -(Lstart % grid_spacing_); i < data.cols(); i += grid_spacing_)
     for(int j = -(Sstart % grid_spacing_); j < data.depth(); 
 	j += grid_spacing_) {
-      interpolate_ic(Lstart + i, Sstart + j); 
-      for(int ii = std::max(i, 0); 
-	  ii < std::min(i + grid_spacing_, data.cols()); ++ii)
-	for(int jj = std::max(j, 0); 
-	    jj < std::min(j + grid_spacing_, data.depth()); ++jj) {
-	  boost::shared_ptr<GroundCoordinate> gc = 
-	    mi.ground_coordinate(Sstart + jj, Lstart + ii, igc_->dem());
-	  if(igc_->ground_mask()->mask(*gc)) {
-	    data(Range::all(), ii, jj) =  fill_value_;
-	  } else {
-	    double ln = ic_line(ii + Lstart, jj + Sstart);
-	    double smp = ic_sample(ii + Lstart, jj + Sstart);
-	    if(ln < 0 || ln >= igc_->number_line() - 1 ||
-	       smp < 0 || smp >= igc_->number_sample() - 1 ||
-	       igc_->image_mask()->mask(ln, smp))
+      try {
+	interpolate_ic(Lstart + i, Sstart + j); 
+	for(int ii = std::max(i, 0); 
+	    ii < std::min(i + grid_spacing_, data.cols()); ++ii)
+	  for(int jj = std::max(j, 0); 
+	      jj < std::min(j + grid_spacing_, data.depth()); ++jj) {
+	    boost::shared_ptr<GroundCoordinate> gc = 
+	      mi.ground_coordinate(Sstart + jj, Lstart + ii, igc_->dem());
+	    if(igc_->ground_mask()->mask(*gc)) {
 	      data(Range::all(), ii, jj) =  fill_value_;
-	    else
-	      for(int k = 0; k < data.rows(); ++k)
-		data(k, ii, jj) = 
-		  igc_->image_multi_band()->raster_image(k).
-		  unchecked_interpolate(ln, smp);
+	    } else {
+	      double ln = ic_line(ii + Lstart, jj + Sstart);
+	      double smp = ic_sample(ii + Lstart, jj + Sstart);
+	      if(ln < 0 || ln >= igc_->number_line() - 1 ||
+		 smp < 0 || smp >= igc_->number_sample() - 1 ||
+		 igc_->image_mask()->mask(ln, smp))
+		data(Range::all(), ii, jj) =  fill_value_;
+	      else
+		for(int k = 0; k < data.rows(); ++k)
+		  data(k, ii, jj) = 
+		    igc_->image_multi_band()->raster_image(k).
+		    unchecked_interpolate(ln, smp);
+	    }
 	  }
-	}
+      } catch(const ImageGroundConnectionFailed& E) {
+	// Might not be able to interpolate, because one of the
+	// corners throws an ImageGroundConnectionFailed (e.g., we are
+	// near the edge of the IPI). Fall back to trying to do every
+	// pixel. 
+	for(int ii = std::max(i, 0); 
+	    ii < std::min(i + grid_spacing_, data.rows()); ++ii)
+	  for(int jj = std::max(j, 0); 
+	      jj < std::min(j + grid_spacing_, data.cols()); ++jj) {
+	    boost::shared_ptr<GroundCoordinate> gc = 
+	      mi.ground_coordinate(Sstart + jj, Lstart + ii, igc_->dem());
+	    try {
+	      ImageCoordinate ic = igc_->image_coordinate(*gc);
+	      if(igc_->ground_mask()->mask(*gc)) {
+		data(Range::all(), ii, jj) =  fill_value_;
+	      } else {
+		if(ic.line < 0 || ic.line >= igc_->number_line() - 1 ||
+		   ic.sample < 0 || ic.sample >= igc_->number_sample() - 1 ||
+		   igc_->image_mask()->mask_ic(ic))
+		  data(Range::all(), ii, jj) =  fill_value_;
+		else
+		  for(int k = 0; k < data.rows(); ++k)
+		    data(k, ii, jj) = 
+		      igc_->image_multi_band()->raster_image(k).
+		      unchecked_interpolate(ic.line, ic.sample);
+	      }
+	    } catch(const ImageGroundConnectionFailed& E) {
+		  data(Range::all(), ii, jj) =  fill_value_;
+	    }
+	  }
+      }
     }
 }
 

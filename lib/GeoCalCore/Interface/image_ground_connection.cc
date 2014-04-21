@@ -27,6 +27,30 @@ ImageGroundConnection::ImageGroundConnection
 }
 
 //-----------------------------------------------------------------------
+/// Return an array of look vector information. This is really
+/// intended for use with python. This is nline x nsamp x 2 x 3 in
+/// size, where we give the position first followed by the look vector.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 4> ImageGroundConnection::cf_look_vector_arr
+(int ln_start, int smp_start, 
+ int nline, int nsamp) const
+{
+  CartesianFixedLookVector lv;
+  boost::shared_ptr<CartesianFixed> pos;
+  blitz::Array<double, 4>  res(nline, nsamp, 2, 3);
+  for(int i = 0; i < nline; ++i)
+    for(int j = 0; j < nsamp; ++j) {
+      cf_look_vector(ImageCoordinate(i + ln_start, j + smp_start), lv, pos);
+      for(int k = 0; k < 3; ++k) {
+	res(i, j, 0, k) = pos->position[k];
+	res(i, j, 1, k) = lv.look_vector[k];
+      }
+    }
+  return res;
+}
+
+//-----------------------------------------------------------------------
 /// Find a MapInfo that covers the ground coordinate of this 
 /// ImageGroundConnection. We calculate the ground coordinate of the
 /// four corners, then find the MapInfo that covers those corners,

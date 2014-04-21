@@ -188,8 +188,10 @@ class DemGenerate:
             %(self.dem_match.diagnostic[9]))
         log.info("  Ray Intersect failed:         %d" \
             %(self.dem_match.diagnostic[10]))
-        log.info("  Unknown:                      %d" \
+        log.info("  ImageGroundConection failed:  %d" \
             %(self.dem_match.diagnostic[11]))
+        log.info("  Unknown:                      %d" \
+            %(self.dem_match.diagnostic[12]))
         return r
 
     def find_intersection(self, ic1, ic2):

@@ -65,6 +65,15 @@ public:
   MapInfo cover(const MapInfo& Mi, int boundary = 0) const;
 
 //-----------------------------------------------------------------------
+/// Return an array of look vector information. This is really
+/// intended for use with python. This is nline x nsamp x 2 x 3 in
+/// size, where we give the position first followed by the look vector.
+//-----------------------------------------------------------------------
+
+  blitz::Array<double, 4> cf_look_vector_arr(int ln_start, int smp_start, 
+					     int nline, int nsamp) const;
+
+//-----------------------------------------------------------------------
 /// Return look vector for given coordinate, along with a position
 /// that lies along the direction of the look vector (so position of
 /// satellite, or a position on the surface.

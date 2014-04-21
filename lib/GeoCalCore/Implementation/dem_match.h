@@ -18,9 +18,11 @@ namespace GeoCal {
 class DemMatch: public Printable<DemMatch> {
 public:
 // This comes from looking at CcorrMatcher and LsmMatcher, + 1 for 
-// RayIntersect failure we report here
-  enum {MAX_DIAGNOSTIC_VALUE = 9 + 1};
-  enum Diagnostic {RAY_INTERSECT_FAILED = 10};
+// RayIntersect failure we report here, and +1 for 
+// ImageGroundConectionFailed that we also report here
+  enum {MAX_DIAGNOSTIC_VALUE = 9 + 2};
+  enum Diagnostic {RAY_INTERSECT_FAILED = 10, 
+		   IMAGE_GROUND_CONNECTION_FAILED = 11};
 
 //-----------------------------------------------------------------------
 /// Constructor

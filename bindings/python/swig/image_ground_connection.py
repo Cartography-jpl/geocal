@@ -405,6 +405,17 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
         """
         return _image_ground_connection.ImageGroundConnection_resolution_meter(self, *args)
 
+    def cf_look_vector_arr(self, *args):
+        """
+        blitz::Array< double, 4 > ImageGroundConnection::cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp) const
+        Return an array of look vector information.
+
+        This is really intended for use with python. This is nline x nsamp x 2
+        x 3 in size, where we give the position first followed by the look
+        vector. 
+        """
+        return _image_ground_connection.ImageGroundConnection_cf_look_vector_arr(self, *args)
+
     def _v_dem(self):
         """
         const boost::shared_ptr<Dem>& GeoCal::ImageGroundConnection::dem_ptr() const
@@ -463,6 +474,7 @@ ImageGroundConnection.__str__ = new_instancemethod(_image_ground_connection.Imag
 ImageGroundConnection._v_parameter = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter,None,ImageGroundConnection)
 ImageGroundConnection._v_parameter_name = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_name,None,ImageGroundConnection)
 ImageGroundConnection.resolution_meter = new_instancemethod(_image_ground_connection.ImageGroundConnection_resolution_meter,None,ImageGroundConnection)
+ImageGroundConnection.cf_look_vector_arr = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_arr,None,ImageGroundConnection)
 ImageGroundConnection._v_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_dem,None,ImageGroundConnection)
 ImageGroundConnection.__dem = new_instancemethod(_image_ground_connection.ImageGroundConnection___dem,None,ImageGroundConnection)
 ImageGroundConnection_swigregister = _image_ground_connection.ImageGroundConnection_swigregister

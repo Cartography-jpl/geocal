@@ -151,7 +151,10 @@ def quat_rot_x(*args):
 
     If you don't happen to remember off the top of your head, you rotate
     an angle 'a' around an axis 'u' by the quaternion cos(a / 2) + sin(a /
-    2) * u. 
+    2) * u.
+
+    This is an "active" transformation. For "passive", just reverse
+    the sign of A 
     """
   return _geocal_quaternion.quat_rot_x(*args)
 
@@ -162,7 +165,10 @@ def quat_rot_y(*args):
 
     If you don't happen to remember off the top of your head, you rotate
     an angle 'a' around an axis 'u' by the quaternion cos(a / 2) + sin(a /
-    2) * u. 
+    2) * u.
+
+    This is an "active" transformation. For "passive", just reverse
+    the sign of A 
     """
   return _geocal_quaternion.quat_rot_y(*args)
 
@@ -173,7 +179,10 @@ def quat_rot_z(*args):
 
     If you don't happen to remember off the top of your head, you rotate
     an angle 'a' around an axis 'u' by the quaternion cos(a / 2) + sin(a /
-    2) * u. 
+    2) * u.
+
+    This is an "active" transformation. For "passive", just reverse
+    the sign of A 
     """
   return _geocal_quaternion.quat_rot_z(*args)
 
@@ -181,14 +190,20 @@ def quat_rot(*args):
   """
     boost::math::quaternion<double> GeoCal::quat_rot(const std::string &Rot, double A1, double A2, double A3, double A4,
     double A5, double A6, double A7)
-    Do a rotation about the seven axis given. 
+    Do a rotation about the seven axis given.
+
+    This is an "active" transformation. For "passive", just reverse
+    the sign of A 
     """
   return _geocal_quaternion.quat_rot(*args)
 
 def quaternion_to_matrix(*args):
   """
     blitz::Array<double, 2> GeoCal::quaternion_to_matrix(const boost::math::quaternion< double > &q)
-    Convert a quaternion to a rotation matrix. 
+    Convert a quaternion to a rotation matrix.
+
+    This is an "active" transformation. For "passive", just reverse
+    the sign of A 
     """
   return _geocal_quaternion.quaternion_to_matrix(*args)
 

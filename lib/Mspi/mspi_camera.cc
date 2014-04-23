@@ -114,6 +114,9 @@ void MspiCamera::parameter(const blitz::Array<double, 1>& Parm)
   // Confirmed that old code had these angles negative. We need to
   // verify that this is actually what is intended, but it does match
   // the old code.
+  // 
+  // The negative values give a passive rotation, vs. active rotation
+  // for positive values
   frame_to_sc_ = quat_rot("ZYXYXYZ", -yaw(), -pitch(), 
 			  -roll(), -boresight_angle(), theta(), psi(), 
 			  epsilon());

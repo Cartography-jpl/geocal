@@ -6726,7 +6726,10 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"If you don't happen to remember off the top of your head, you rotate\n"
 		"an angle 'a' around an axis 'u' by the quaternion cos(a / 2) + sin(a /\n"
-		"2) * u. \n"
+		"2) * u.\n"
+		"\n"
+		"This is an \"active\" transformation. For \"passive\", just reverse\n"
+		"the sign of A \n"
 		""},
 	 { (char *)"quat_rot_y", (PyCFunction)_wrap_quat_rot_y, METH_O, (char *)"\n"
 		"boost::math::quaternion<double> GeoCal::quat_rot_y(double A)\n"
@@ -6734,7 +6737,10 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"If you don't happen to remember off the top of your head, you rotate\n"
 		"an angle 'a' around an axis 'u' by the quaternion cos(a / 2) + sin(a /\n"
-		"2) * u. \n"
+		"2) * u.\n"
+		"\n"
+		"This is an \"active\" transformation. For \"passive\", just reverse\n"
+		"the sign of A \n"
 		""},
 	 { (char *)"quat_rot_z", (PyCFunction)_wrap_quat_rot_z, METH_O, (char *)"\n"
 		"boost::math::quaternion<double> GeoCal::quat_rot_z(double A)\n"
@@ -6742,16 +6748,25 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"If you don't happen to remember off the top of your head, you rotate\n"
 		"an angle 'a' around an axis 'u' by the quaternion cos(a / 2) + sin(a /\n"
-		"2) * u. \n"
+		"2) * u.\n"
+		"\n"
+		"This is an \"active\" transformation. For \"passive\", just reverse\n"
+		"the sign of A \n"
 		""},
 	 { (char *)"quat_rot", _wrap_quat_rot, METH_VARARGS, (char *)"\n"
 		"boost::math::quaternion<double> GeoCal::quat_rot(const std::string &Rot, double A1, double A2, double A3, double A4,\n"
 		"double A5, double A6, double A7)\n"
-		"Do a rotation about the seven axis given. \n"
+		"Do a rotation about the seven axis given.\n"
+		"\n"
+		"This is an \"active\" transformation. For \"passive\", just reverse\n"
+		"the sign of A \n"
 		""},
 	 { (char *)"quaternion_to_matrix", (PyCFunction)_wrap_quaternion_to_matrix, METH_O, (char *)"\n"
 		"blitz::Array<double, 2> GeoCal::quaternion_to_matrix(const boost::math::quaternion< double > &q)\n"
-		"Convert a quaternion to a rotation matrix. \n"
+		"Convert a quaternion to a rotation matrix.\n"
+		"\n"
+		"This is an \"active\" transformation. For \"passive\", just reverse\n"
+		"the sign of A \n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

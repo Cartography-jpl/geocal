@@ -84,10 +84,6 @@ void AircraftOrbitData::initialize(const Time& Tm,
 // For geocentric, we actually have exactly the same resulting
 // equations, except the latitude and longitude are the geocentric
 // latitude and longitude.
-//
-// Right now we hard code the Geodetic vertical choice. If we
-// encounter a Geocentric case, we can generalize this by passing this
-// in as an argument.
 //-----------------------------------------------------------------------
 
   double latitude, longitude;

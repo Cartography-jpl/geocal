@@ -110,7 +110,7 @@ IbisFile::IbisFile(const std::string& Fname, int Number_row,
 
 //-----------------------------------------------------------------------
 /// Close a file. You don't normally need to call this directly, it
-/// is done by the destructor. But it is useful to have for use by Ruby.
+/// is done by the destructor. But it is useful to have for use by python.
 //-----------------------------------------------------------------------
 
 void IbisFile::close() 
@@ -127,7 +127,8 @@ void IbisFile::close()
     }
   }
   ibis_fh_ = -1;
-  v2_deactivate_a_unit(unit_);	// Can't do this through IBIS close
+  if(unit_ != -1)
+    v2_deactivate_a_unit(unit_); // Can't do this through IBIS close
 				// like we can for a vicar file.
   unit_ = -1;
 #else

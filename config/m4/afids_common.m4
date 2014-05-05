@@ -4,8 +4,6 @@
 AC_DEFUN([AFIDS_COMMON],[
 AC_REQUIRE([AC_CONFIG_AUX_DIR_DEFAULT])
 AC_REQUIRE([AC_PROG_CC])
-AC_REQUIRE([AC_F77_LIBRARY_LDFLAGS])
-AC_REQUIRE([AC_PROG_FC])
 # For some bizarre reason, this doesn't fail if there isn't a C++ compiler.
 # This seems to be a bug, which had some discussion on the forums a while back
 # (see http://lists.gnu.org/archive/html/bug-autoconf/2010-05/msg00001.html),
@@ -55,10 +53,6 @@ AC_COPY_DIR
 
 #AC_PREFIX_DEFAULT([`pwd`/install])
 AC_PROG_CC
-AC_PROG_F77
-AC_PROG_FC
-AC_F77_LIBRARY_LDFLAGS
-AC_F77_WRAPPERS
 
 AM_PROG_CC_C_O
 AC_ENABLE_DEBUG
@@ -69,13 +63,6 @@ AC_ENABLE_DEBUG
 #=================================================================
 
 AM_CONDITIONAL([HAVE_GCC], [test "$GCC" = yes])
-
-#=================================================================
-# We have a small amount of code that gets different flags depending on
-# if we are using g77 or gfortran, so pass this to the Makefile.
-#=================================================================
-
-AM_CONDITIONAL([HAVE_G77], [test `expr "${F77}" : '.*g77'` != "0"])
 
 #=================================================================
 # Add prefix, THIRDPARTY, and /opt/afids_support for pkgconfig file

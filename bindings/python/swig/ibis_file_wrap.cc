@@ -8526,7 +8526,7 @@ static PyMethodDef SwigMethods[] = {
 		"Close a file.\n"
 		"\n"
 		"You don't normally need to call this directly, it is done by the\n"
-		"destructor. But it is useful to have for use by Ruby. \n"
+		"destructor. But it is useful to have for use by python. \n"
 		""},
 	 { (char *)"IbisFile_column_data_type", _wrap_IbisFile_column_data_type, METH_VARARGS, (char *)"\n"
 		"data_type GeoCal::IbisFile::column_data_type(int I) const\n"

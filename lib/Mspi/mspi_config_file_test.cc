@@ -42,17 +42,6 @@ BOOST_AUTO_TEST_CASE(basic_test)
     200, 201, 202, 203,
     300, 301, 302, 303;
   BOOST_CHECK_MATRIX_CLOSE(a1, a1_expect);
-  // The original unit test called this "signedlonglong". However this
-  // is actually unsigned, the value used it too large for
-  // signed. lexical_cast correctly gives an error when we try to
-  // convert to signed long long. I don't think this is actually
-  // needed any where other than Level 0 stuff (which isn't even read
-  // from a text file, so this probably doesn't matter. But we can
-  // revisit this if needed.
-  std::vector<unsigned long long> sll = config.value<std::vector<unsigned long long> >("signedlonglong");
-  BOOST_CHECK(sll[0] == 18446744073709551615ULL);
-  BOOST_CHECK(sll[1] == 0);
-  BOOST_CHECK(sll[2] == (unsigned long long) -2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

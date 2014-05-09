@@ -4,12 +4,15 @@
 # gdal_translate already found in GDAL, but this adds handling of TREs
 # in NITF for things like RPC and igeolo information.
 
-from geocal import *
+try:
+    from afids import *
+except ImportError:
+    from geocal import *
 from tempfile import NamedTemporaryFile
 import subprocess
 import os
 
-version="%prog May 22, 2013"
+version="%prog May 9, 2014"
 usage="""Usage: 
   gdal_to_nitf [options] <input_file> <output_nitf>
   gdal_to_nitf -h | --help
@@ -33,6 +36,9 @@ Options:
        store things that don't fit in the NITF file. Use this option to
        keep that file.
 
+  --unsigned-int16
+       Force output to unsigned int16.
+
   -q --quiet
        Don't print status message as we copy the data.
 
@@ -47,18 +53,14 @@ args = docopt_simple(usage, version=version)
 # treats this raster image we can later copy.
 
 with NamedTemporaryFile() as tmp:
-    subprocess.check_call(["gdal_translate", "-of", "VRT", "-q",
-                           args.input_file, tmp.name])
+    cmd = ["gdal_translate", "-of", "VRT", "-q"]
+    if(args.unsigned_int16):
+        cmd.extend(["-of", "UInt16"])
+    cmd.extend([args.input_file, tmp.name])
+    subprocess.check_call(cmd)
     fin = GdalMultiBand(args.input_file)
     fvrt = GdalRasterImage(tmp.name)
     creation_option = []
-    # Function is only optionally available, depending on options
-    # used at build time of AFIDS. If this isn't found then just
-    # continue without complaint
-    try:
-        tre_afid_a(fin, fvrt, creation_option)
-    except NameError as exc:
-        pass
     if(fin.raster_image(0).has_rpc):
         if(fin.raster_image(0).rpc.rpc_type == Rpc.RPC_A):
             tre = TreRPC00A()
@@ -82,6 +84,14 @@ with NamedTemporaryFile() as tmp:
     # of GDAL 1.9, it supports writing 2.10 only
     if("NITF_FHDR" in fvrt):
         fvrt["NITF_FHDR"] = "NITF02.10"
+
+    # Function is only optionally available, depending on options
+    # used at build time of AFIDS. If this isn't found then just
+    # continue without complaint
+    try:
+        tre_afid_a(fin, fvrt, creation_option)
+    except NameError as exc:
+        pass
     fvrt.close()
     cmd = ["gdal_translate", "-of", "NITF"]
     if(args.quiet):

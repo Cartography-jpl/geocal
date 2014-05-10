@@ -20,7 +20,7 @@ def test_tre_struct():
 mean_gsd      : 105.2
 dynamic_range : 2047
 obl_ang       : 34.12
-roll_angle    : -21.15
+roll_ang      : -21.15
 n_ref         : 0
 rev_num       : 3317
 n_seg         : 1
@@ -84,8 +84,8 @@ def test_nitf_use00a_create():
     t.use00a = tre
     assert t.has_use00a
     t.close()
-    subprocess.check_call(["gdal_translate", "-of", "NITF", "-q",
-                           "use00a.vrt", "use00a.ntf"])
+    subprocess.check_call(["gdal_to_nitf", "-q",
+                           test_data + "vicar.img", "use00a.ntf"])
     t = GdalRasterImage("use00a.ntf")
     tre = t.use00a
     assert tre.angle_to_north == 270
@@ -99,6 +99,11 @@ def test_nitf_use00a_create():
     assert tre.max_lp_seg == 6287
     assert tre.sun_el == 68.5
     assert tre.sun_az == 131.3
+    subprocess.check_call(["nitf_to_gdal", "-q",
+                           "use00a.ntf", "use00a.img"])
+    t = GdalRasterImage("use00a.ntf")
+    assert t["NITF_USE00A_ANGLE_TO_NORTH"] == 270
+
     
 # Check that GdalRasterImage got extended
 def test_gdal_raster():

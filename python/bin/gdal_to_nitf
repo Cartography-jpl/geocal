@@ -58,17 +58,17 @@ with NamedTemporaryFile() as tmp:
         cmd.extend(["-of", "UInt16"])
     cmd.extend([args.input_file, tmp.name])
     subprocess.check_call(cmd)
-    fin = GdalMultiBand(args.input_file)
+    fin = GdalRasterImage(args.input_file)
     fvrt = GdalRasterImage(tmp.name)
     creation_option = []
-    if(fin.raster_image(0).has_rpc):
-        if(fin.raster_image(0).rpc.rpc_type == Rpc.RPC_A):
+    if(fin.has_rpc):
+        if(fin.rpc.rpc_type == Rpc.RPC_A):
             tre = TreRPC00A()
-            tre.rpc = fin.raster_image(0).rpc
+            tre.rpc = fin.rpc
             fvrt.rpc00a = tre
         else:
             tre = TreRPC00B()
-            tre.rpc = fin.raster_image(0).rpc
+            tre.rpc = fin.rpc
             fvrt.rpc00b = tre
 
     # NITF creates its IGEOLO data structure from a map projection. If
@@ -84,6 +84,9 @@ with NamedTemporaryFile() as tmp:
     # of GDAL 1.9, it supports writing 2.10 only
     if("NITF_FHDR" in fvrt):
         fvrt["NITF_FHDR"] = "NITF02.10"
+
+    # Copy over use00a information, if found
+    tre_use00a(fin, fvrt, creation_option)
 
     # Function is only optionally available, depending on options
     # used at build time of AFIDS. If this isn't found then just

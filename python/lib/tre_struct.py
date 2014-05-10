@@ -1,4 +1,5 @@
 from geocal_swig import *
+import string
 import re
 
 class _GdalRasterImageHelper(object):
@@ -7,6 +8,8 @@ class _GdalRasterImageHelper(object):
         self.tre_class = tre_class
     def __get__(self, d):
         return self.tre_class(d["TRE", self.tre_name])
+    def exists(self, d):
+        return d.has_metadata(self.tre_name, "TRE")
     def __set__(self, d, val):
         d["TRE", self.tre_name] = val.string_value
     
@@ -28,13 +31,16 @@ class _TREVal(object):
             return None
         return self.ty(d._data[self.sl].rstrip())
     def __set__(self, d, v):
-        if(isinstance(self.frmt, str)):
-            t = self.fstring.format(self.frmt % v)
+        if(v is None):
+            d._data[self.sl] = ' ' * self.size
         else:
-            t = self.fstring.format(self.frmt(v))
-        if(len(t) > self.size):
-            raise RuntimeError("Formatting error. String '%s' is too long" % t)
-        d._data[self.sl] = t[0:self.size]
+            if(isinstance(self.frmt, str)):
+                t = self.fstring.format(self.frmt % v)
+            else:
+                t = self.fstring.format(self.frmt(v))
+            if(len(t) > self.size):
+                raise RuntimeError("Formatting error. String '%s' is too long" % t)
+            d._data[self.sl] = t[0:self.size]
 
 class _TREStruct(object):
     def __init__(self, value = None):
@@ -100,12 +106,14 @@ def create_tre(name, tre_name, raster_name, help_desc, description):
     d = dict()
     start = 0
     d["field_list"] = []
+    d["field_type"] = {}
     for field_name, len, ty, frmt in description:
         if(field_name):
             d[field_name] = _TREVal(slice(start, start + len), ty, frmt)
             d[field_name + "_string"] = _TREVal(slice(start, start + len), str,
                                                 frmt)
             d["field_list"].append(field_name)
+            d["field_type"][field_name] = ty
         start += len
     d['size'] = start
     res = type(name, (_TREStruct,), d)
@@ -116,6 +124,9 @@ def create_tre(name, tre_name, raster_name, help_desc, description):
     h = _GdalRasterImageHelper(tre_name, res)
     setattr(GdalRasterImage, raster_name, 
             property(h.__get__, h.__set__, None, help_desc))
+    setattr(GdalRasterImage, "has_" + raster_name, 
+            property(h.exists, None, None, help_desc))
+
     return res
 
 TreUSE00A = create_tre("TreUSE00A",
@@ -128,7 +139,7 @@ TreUSE00A = create_tre("TreUSE00A",
             [None, 1, str, "%s"],
             [None, 3, str, "%s"],
             ["obl_ang", 5, float, "%05.2lf"],
-            ["roll_angle", 6, float, "%+04.2lf"],
+            ["roll_ang", 6, float, "%+04.2lf"],
             [None, 12, str, "%s"],
             [None, 15, str, "%s"],
             [None, 4, str, "%s"],
@@ -146,6 +157,31 @@ TreUSE00A = create_tre("TreUSE00A",
             ["sun_az", 5, float, "%05.1lf"],
             ]
            )
+
+def _use00a_from_gdal(self, f):
+    '''Fill in TRE based on GDAL parameters. These are the metadata field
+    starting with "NITF_USE00A", for example "NITF_USE00A_SUN_EL"'''
+    for field in self.field_list:
+        # We might not have all the tags in an particular VICAR file.
+        # If not, then default to a blank value.
+        if(f.has_metadata("NITF_USE00A_" + string.upper(field))):
+            setattr(self, field, self.field_type[field](
+                    f["NITF_USE00A_" + string.upper(field)]))
+        else:
+            setattr(self, field, None)
+
+TreUSE00A.from_gdal = _use00a_from_gdal
+
+def tre_use00a(fin, fout, creation_option):
+    '''Function that copies the use00a structure from fin to a TRE in the
+    output file. Both of these should be GdalRasterImage objects. Note 
+    that some of the data needs to be passed as creation options (pretty much
+    anything in the file or image header). We fill in an array creation_option
+    with anything we need to add to this.'''
+    if("NITF_USE00A_ANGLE_TO_NORTH" in fin):
+        tre = TreUSE00A()
+        tre.from_gdal(fin)
+        fout.use00a = tre
 
 def tre_rpc_coeff_format(v):
     '''Convert to string for RPC coefficient for a TRE'''

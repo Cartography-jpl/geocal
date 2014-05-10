@@ -80,7 +80,9 @@ def test_nitf_use00a_create():
     tre.max_lp_seg = 6287
     tre.sun_el = 68.5
     tre.sun_az = 131.3
+    assert not t.has_use00a
     t.use00a = tre
+    assert t.has_use00a
     t.close()
     subprocess.check_call(["gdal_translate", "-of", "NITF", "-q",
                            "use00a.vrt", "use00a.ntf"])

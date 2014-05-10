@@ -1,0 +1,80 @@
+#! /usr/bin/env python
+#
+# This copies a NITF file to a new vicar file. This is very similar to
+# gdal_translate already found in GDAL, but this adds handling of TREs
+# in NITF for things like RPC and igeolo information.
+
+try:
+    from afids import *
+except ImportError:
+    from geocal import *
+from tempfile import NamedTemporaryFile
+import subprocess
+import os
+
+version="%prog May 9, 2014"
+usage="""Usage: 
+  nitf_to_gdal [options] <input_file> <output_vicar>
+  nitf_to_gdal -h | --help
+  nitf_to_gdal -v | --version
+
+This copies a NITF file to a new vicar file. This is very similar to
+gdal_translate already found in GDAL, but this adds handling of TREs
+in NITF for things like RPC and igeolo information.
+
+The input file can be any file supported by GDAL, although this only 
+really make sense to call for a NITF file.
+
+Note that this program should be a replacement for the old VICAR
+proc nvextract
+
+Options:
+  -h --help         
+       Print this message
+
+  -k --keep-aux
+       By default, we remove the .aux.xml file gdal_translate creates to
+       store things that don't fit in the VICAR file. Use this option to
+       keep that file.
+
+  -q --quiet
+       Don't print status message as we copy the data.
+
+  -v --version      
+       Print program version
+
+"""
+args = docopt_simple(usage, version=version)
+
+# Create a "virtual raster image". This is a text file that allows us to
+# set various metadata fields without changing the original file. GDAL then
+# treats this raster image we can later copy.
+
+with NamedTemporaryFile() as tmp:
+    subprocess.check_call(["gdal_translate", "-of", "VRT", "-q",
+                           args.input_file, tmp.name])
+    fin = GdalRasterImage(args.input_file)
+    fvrt = GdalRasterImage(tmp.name)
+    # No handling is needed for use00a, gdal already translates this to
+    # the NITF_USE00A tags that we depend on.
+
+    # Function is only optionally available, depending on options
+    # used at build time of AFIDS. If this isn't found then just
+    # continue without complaint
+    try:
+        tre_afid_a_to_gdal(fin, fvrt)
+    except NameError as exc:
+        pass
+    fvrt.close()
+    cmd = ["gdal_translate", "-of", "VICAR"]
+    if(args.quiet):
+        cmd.append("-q")
+    cmd.append(tmp.name)
+    cmd.append(args.output_vicar)
+    subprocess.check_call(cmd)
+    if(not args.keep_aux):
+        try:
+            os.remove(args.output_vicar + ".aux.xml")
+        except OSError:
+            # Ok if file doesn't exist
+            pass

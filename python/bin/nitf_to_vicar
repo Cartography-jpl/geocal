@@ -55,8 +55,8 @@ with NamedTemporaryFile() as tmp:
                            args.input_file, tmp.name])
     fin = GdalRasterImage(args.input_file)
     fvrt = GdalRasterImage(tmp.name)
-    # No handling is needed for use00a, gdal already translates this to
-    # the NITF_USE00A tags that we depend on.
+
+    tre_use00a_to_gdal(fin, fvrt)
 
     # Function is only optionally available, depending on options
     # used at build time of AFIDS. If this isn't found then just

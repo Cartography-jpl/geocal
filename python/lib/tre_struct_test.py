@@ -89,20 +89,20 @@ def test_nitf_use00a_create():
     t = GdalRasterImage("use00a.ntf")
     tre = t.use00a
     assert tre.angle_to_north == 270
-    assert tre.mean_gsd == 105.2
+    assert tre.mean_gsd == 29.8
     assert tre.dynamic_range ==2047
-    assert tre.obl_ang == 34.12
-    assert tre.roll_ang == -21.15
-    assert tre.n_ref == 0
-    assert tre.rev_num == 3317
-    assert tre.n_seg == 1
-    assert tre.max_lp_seg == 6287
-    assert tre.sun_el == 68.5
-    assert tre.sun_az == 131.3
-    subprocess.check_call(["nitf_to_gdal", "-q",
+    assert tre.obl_ang == 28.55
+    assert tre.roll_ang == -28.03
+    assert tre.n_ref == None
+    assert tre.rev_num == None
+    assert tre.n_seg == None
+    assert tre.max_lp_seg == None
+    assert tre.sun_el == 62.5
+    assert tre.sun_az == 129.6
+    subprocess.check_call(["nitf_to_vicar", "-q",
                            "use00a.ntf", "use00a.img"])
-    t = GdalRasterImage("use00a.ntf")
-    assert t["NITF_USE00A_ANGLE_TO_NORTH"] == 270
+    t = VicarRasterImage("use00a.img")
+    assert t["GEOTIFF", "NITF_USE00A_ANGLE_TO_NORTH"][0] == "270"
 
     
 # Check that GdalRasterImage got extended

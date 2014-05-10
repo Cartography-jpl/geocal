@@ -162,15 +162,42 @@ def _use00a_from_gdal(self, f):
     '''Fill in TRE based on GDAL parameters. These are the metadata field
     starting with "NITF_USE00A", for example "NITF_USE00A_SUN_EL"'''
     for field in self.field_list:
+        # The use00a stuff can appear either as NITF_USE00A_<blah>
+        # or as NITF_<blah>. Support both ways.
         # We might not have all the tags in an particular VICAR file.
         # If not, then default to a blank value.
         if(f.has_metadata("NITF_USE00A_" + string.upper(field))):
             setattr(self, field, self.field_type[field](
                     f["NITF_USE00A_" + string.upper(field)]))
+        elif(f.has_metadata("NITF_" + string.upper(field))):
+            setattr(self, field, self.field_type[field](
+                    f["NITF_" + string.upper(field)]))
         else:
             setattr(self, field, None)
 
+def _use00a_to_vicar(self, f):
+    '''Fill in VICAR metadata based on TRE. These are the metadata field
+    starting with "NITF_USE00A_"'''
+    for field in self.field_list:
+        # Special handling for this field, since we rename it to
+        # give a better interface for frame_packet_time.
+        f["GEOTIFF", "NITF_" + string.upper(field)] = getattr(self, field + "_string")
+
+def _use00a_to_gdal(self, f):
+    '''Fill in VICAR metadata based on TRE. These are the metadata field
+    starting with "NITF_USE00A_"'''
+    for field in self.field_list:
+        if(getattr(self, field + "_string")):
+            f["TRE_NITF_" + string.upper(field)] = getattr(self, field + "_string")
+
 TreUSE00A.from_gdal = _use00a_from_gdal
+TreUSE00A.to_vicar = _use00a_to_vicar
+TreUSE00A.to_gdal = _use00a_to_gdal
+
+def tre_use00a_to_gdal(fin, fout):
+    '''Function to copy use00a structure from TRE in input to output vicar file.'''
+    if(fin.has_use00a):
+        fin.use00a.to_gdal(fout)
 
 def tre_use00a(fin, fout, creation_option):
     '''Function that copies the use00a structure from fin to a TRE in the
@@ -178,7 +205,8 @@ def tre_use00a(fin, fout, creation_option):
     that some of the data needs to be passed as creation options (pretty much
     anything in the file or image header). We fill in an array creation_option
     with anything we need to add to this.'''
-    if("NITF_USE00A_ANGLE_TO_NORTH" in fin.raster_image(0)):
+    if("NITF_USE00A_ANGLE_TO_NORTH" in fin.raster_image(0) or
+       "NITF_ANGLE_TO_NORTH" in fin.raster_image(0)):
         tre = TreUSE00A()
         tre.from_gdal(fin.raster_image(0))
         fout.use00a = tre

@@ -55,7 +55,7 @@ args = docopt_simple(usage, version=version)
 with NamedTemporaryFile() as tmp:
     cmd = ["gdal_translate", "-of", "VRT", "-q"]
     if(args.unsigned_int16):
-        cmd.extend(["-of", "UInt16"])
+        cmd.extend(["-ot", "UInt16"])
     cmd.extend([args.input_file, tmp.name])
     subprocess.check_call(cmd)
     fin = GdalMultiBand(args.input_file)

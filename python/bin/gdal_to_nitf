@@ -58,17 +58,17 @@ with NamedTemporaryFile() as tmp:
         cmd.extend(["-of", "UInt16"])
     cmd.extend([args.input_file, tmp.name])
     subprocess.check_call(cmd)
-    fin = GdalRasterImage(args.input_file)
+    fin = GdalMultiBand(args.input_file)
     fvrt = GdalRasterImage(tmp.name)
     creation_option = []
-    if(fin.has_rpc):
-        if(fin.rpc.rpc_type == Rpc.RPC_A):
+    if(fin.raster_image(0).has_rpc):
+        if(fin.raster_image(0).rpc.rpc_type == Rpc.RPC_A):
             tre = TreRPC00A()
-            tre.rpc = fin.rpc
+            tre.rpc = fin.raster_image(0).rpc
             fvrt.rpc00a = tre
         else:
             tre = TreRPC00B()
-            tre.rpc = fin.rpc
+            tre.rpc = fin.raster_image(0).rpc
             fvrt.rpc00b = tre
 
     # NITF creates its IGEOLO data structure from a map projection. If

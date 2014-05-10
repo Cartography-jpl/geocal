@@ -178,9 +178,9 @@ def tre_use00a(fin, fout, creation_option):
     that some of the data needs to be passed as creation options (pretty much
     anything in the file or image header). We fill in an array creation_option
     with anything we need to add to this.'''
-    if("NITF_USE00A_ANGLE_TO_NORTH" in fin):
+    if("NITF_USE00A_ANGLE_TO_NORTH" in fin.raster_image(0)):
         tre = TreUSE00A()
-        tre.from_gdal(fin)
+        tre.from_gdal(fin.raster_image(0))
         fout.use00a = tre
 
 def tre_rpc_coeff_format(v):

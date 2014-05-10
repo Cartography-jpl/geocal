@@ -31,7 +31,7 @@ sun_az        : 131.3"""
     assert tre.mean_gsd == 105.2
     assert tre.dynamic_range ==2047
     assert tre.obl_ang == 34.12
-    assert tre.roll_angle == -21.15
+    assert tre.roll_ang == -21.15
     assert tre.n_ref == 0
     assert tre.rev_num == 3317
     assert tre.n_seg == 1
@@ -43,7 +43,7 @@ sun_az        : 131.3"""
     tre2.mean_gsd = 105.2
     tre2.dynamic_range = 2047
     tre2.obl_ang = 34.12
-    tre2.roll_angle = -21.15
+    tre2.roll_ang = -21.15
     tre2.n_ref= 0
     tre2.rev_num = 3317
     tre2.n_seg= 1
@@ -73,7 +73,7 @@ def test_nitf_use00a_create():
     tre.mean_gsd = 105.2
     tre.dynamic_range = 2047
     tre.obl_ang = 34.12
-    tre.roll_angle = -21.15
+    tre.roll_ang = -21.15
     tre.n_ref= 0
     tre.rev_num = 3317
     tre.n_seg= 1
@@ -92,7 +92,7 @@ def test_nitf_use00a_create():
     assert tre.mean_gsd == 105.2
     assert tre.dynamic_range ==2047
     assert tre.obl_ang == 34.12
-    assert tre.roll_angle == -21.15
+    assert tre.roll_ang == -21.15
     assert tre.n_ref == 0
     assert tre.rev_num == 3317
     assert tre.n_seg == 1
@@ -113,7 +113,7 @@ def test_gdal_raster():
     assert tre.mean_gsd == 105.2
     assert tre.dynamic_range ==2047
     assert tre.obl_ang == 34.12
-    assert tre.roll_angle == -21.15
+    assert tre.roll_ang == -21.15
     assert tre.n_ref == 0
     assert tre.rev_num == 3317
     assert tre.n_seg == 1

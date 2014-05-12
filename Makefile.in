@@ -2254,7 +2254,7 @@ libraw_la_SOURCES = @srcraw@/dcraw_common.cpp \
 	@srcraw@/libraw_c_api.cpp @srcraw@/libraw_cxx.cpp \
 	@srcraw@/libraw_defines.h @srcraw@/var_defines.h
 libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
-pkgpythonswigdir = @pythondir@/geocal_swig
+pkgpythonswigdir = $(prefix)/@pythondir@/geocal_swig
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py $(patsubst \
 	%_wrap.cc, %.py, $(INCLUDE_SWIG_SRC))
 INCLUDE_SWIG_SRC = $(SWIG_SRC) $(am__append_32) $(am__append_33) \
@@ -8226,7 +8226,7 @@ install-python: all
 # Backdoor rule to do a quick install when we are just varying python
 install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
 python_check:
-	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
+	export PYTHONPATH=$(prefix)/$(platpythondir):$(prefix)/$(pythondir):${PYTHONPATH} && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         $(setup_afids_data) && \
         $(setup_spice) && \

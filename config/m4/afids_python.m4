@@ -36,8 +36,8 @@ if test "x$want_python" = "xyes"; then
      PYTHON=`pwd`"/external/python_wrap.sh" 
      PYTHON_CPPFLAGS="-I${prefix}/include/python2.7"
      PYTHON_NUMPY_CPPFLAGS="-I${prefix}/lib/python2.7/site-packages/numpy/core/include"
-     pythondir="${prefix}/lib/python2.7/site-packages" 
-     platpythondir="${prefix}/lib/python2.7/site-packages" 
+     pythondir="lib/python2.7/site-packages" 
+     platpythondir="lib/python2.7/site-packages" 
      succeeded=yes
      have_python=yes
      AC_SUBST(PYTHON_CPPFLAGS)
@@ -54,13 +54,13 @@ if test "x$want_python" = "xyes"; then
      AC_PYTHON_MODULE(h5py, 1)
      AC_PYTHON_MODULE(sphinx, 1)
      AC_PYTHON_MODULE(sqlite3, 1)
-     pythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(False,False,'${prefix}')"`
-     platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(True,False,'${prefix}')"`
+     pythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(False,False,'')"`
+     platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(True,False,'')"`
      PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print '-I' + ' -I'.join(get_numpy_include_dirs())"`
      AC_SUBST([PYTHON_NUMPY_CPPFLAGS])
      AC_SUBST([platpythondir])
      AC_PROG_SPHINX
-     AC_SUBST([pkgpythondir], [\${pythondir}/$PACKAGE])
+     AC_SUBST([pkgpythondir], [\${prefix}/\${pythondir}/$PACKAGE])
      succeeded=yes
      have_python=yes
    fi

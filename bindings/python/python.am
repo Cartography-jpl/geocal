@@ -1,5 +1,5 @@
 SWIG_FLAG += -O
-pkgpythonswigdir = @pythondir@/geocal_swig
+pkgpythonswigdir = $(prefix)/@pythondir@/geocal_swig
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py
 INCLUDE_SWIG_SRC = $(SWIG_SRC)
 FULL_SWIG_SRC = $(SWIG_SRC)

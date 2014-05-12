@@ -6,6 +6,7 @@ dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/igc_project
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/gdal_to_erdas
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/gdal_to_nitf
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/nitf_to_vicar
+dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/nitfinfo
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/dem_generate
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/shelve_job_run
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/sba

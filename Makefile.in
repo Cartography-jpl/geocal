@@ -1680,6 +1680,7 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/gdal_to_erdas \
 	$(srcdir)/$(srcpythonbin)/gdal_to_nitf \
 	$(srcdir)/$(srcpythonbin)/nitf_to_vicar \
+	$(srcdir)/$(srcpythonbin)/nitfinfo \
 	$(srcdir)/$(srcpythonbin)/dem_generate \
 	$(srcdir)/$(srcpythonbin)/shelve_job_run \
 	$(srcdir)/$(srcpythonbin)/sba \

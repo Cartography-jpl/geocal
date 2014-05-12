@@ -199,6 +199,13 @@ def tre_use00a_to_gdal(fin, fout):
     if(fin.has_use00a):
         fin.use00a.to_gdal(fout)
 
+def tre_use00a_pretty_print(f):
+    '''Pretty print of TRE'''
+    if(f.has_use00a):
+        print "Use00A tre:"
+        s = re.sub(r"^", "  ",str(f.use00a),flags=re.M)
+        print s
+    
 def tre_use00a(fin, fout, creation_option):
     '''Function that copies the use00a structure from fin to a TRE in the
     output file. Both of these should be GdalRasterImage objects. Note 

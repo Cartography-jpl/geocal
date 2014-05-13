@@ -1,5 +1,6 @@
 if [ -z "$AFIDSPYTHONTOP" ]; then
     export AFIDSPYTHONTOP=@prefix@
+fi
 if [ -n "$PYTHONPATH" ]; then
   export PYTHONPATH=${AFIDSPYTHONTOP}/@pythondir@:${AFIDSPYTHONTOP}/@platpythondir@:${PYTHONPATH}
 else

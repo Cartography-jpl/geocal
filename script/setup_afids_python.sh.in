@@ -1,6 +1,9 @@
 if [ -z "$AFIDSPYTHONTOP" ]; then
     export AFIDSPYTHONTOP=@prefix@
 fi
+if [ "@build_python@" = "yes"; then
+    export PYTHONHOME=${AFIDSPYTHONTOP}
+fi
 if [ -n "$PYTHONPATH" ]; then
   export PYTHONPATH=${AFIDSPYTHONTOP}/@pythondir@:${AFIDSPYTHONTOP}/@platpythondir@:${PYTHONPATH}
 else

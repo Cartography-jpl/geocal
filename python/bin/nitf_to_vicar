@@ -32,6 +32,12 @@ Options:
   -h --help         
        Print this message
 
+  -b --band=b
+       Band of file to use (1 based). [default: 1]
+
+  -i --image=i
+       Image of file to use (1 based). [default: 1]
+
   -k --keep-aux
        By default, we remove the .aux.xml file gdal_translate creates to
        store things that don't fit in the VICAR file. Use this option to
@@ -51,9 +57,10 @@ args = docopt_simple(usage, version=version)
 # treats this raster image we can later copy.
 
 with NamedTemporaryFile() as tmp:
+    in_name = "NITF_IM:%d:%s" % (args.image - 1, args.input_file)
     subprocess.check_call(["gdal_translate", "-of", "VRT", "-q",
-                           args.input_file, tmp.name])
-    fin = GdalRasterImage(args.input_file)
+                           "-b", str(args.band), in_name, tmp.name])
+    fin = GdalRasterImage(in_name, args.band)
     fvrt = GdalRasterImage(tmp.name)
 
     tre_use00a_to_gdal(fin, fvrt)

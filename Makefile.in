@@ -8197,7 +8197,7 @@ install-python: all
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
 
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile $(PYTHON_TARGET)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_CARTO $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL)))
 
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc $(DOXYGEN_TARGET)

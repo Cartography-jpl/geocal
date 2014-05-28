@@ -357,7 +357,7 @@ void GdalRasterImage::set_map_info(const MapInfo& Mi)
 /// This return a null pointer if we don't have the NITF corner metadata.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<MapInfo> GdalRasterImage::map_info_from_nitf_corner() const
+boost::shared_ptr<MapInfo> GdalRasterImage::map_info_from_nitf_corner(bool Approx_ok) const
 {
   if(!has_metadata("NITF_CORNERLAT1") ||
      !has_metadata("NITF_CORNERLAT2") ||
@@ -388,7 +388,8 @@ boost::shared_ptr<MapInfo> GdalRasterImage::map_info_from_nitf_corner() const
   gcps[3].dfGCPX = atof(metadata<std::string>("NITF_CORNERLON4").c_str());
   gcps[3].dfGCPY = atof(metadata<std::string>("NITF_CORNERLAT4").c_str());
   blitz::Array<double, 1> parm(6);
-  int status = GDALGCPsToGeoTransform(ngcp, gcps, parm.data(), FALSE);
+  int status = GDALGCPsToGeoTransform(ngcp, gcps, parm.data(), 
+				      (Approx_ok ? TRUE : FALSE));
   if(!status)
     throw Exception("Call to GDALGCPsToGeoTransform failed");
   CPLFree(gcps);

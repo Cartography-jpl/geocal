@@ -394,7 +394,6 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def _v_has_map_info(self):
         """
         virtual bool GeoCal::RasterImage::has_map_info() const
-        *********************************************************************
         Functions available if we have MapInfo data.
 
         Indicate if we have MapInfo. The default is false, but derived classes
@@ -409,8 +408,7 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def _v_map_info(self):
         """
         virtual const MapInfo& GeoCal::RasterImage::map_info() const
-        ----------------------------------------------------------------------
-        - MapInfo for image. 
+        MapInfo for image. 
         """
         return _raster_image.RasterImage__v_map_info(self)
 
@@ -467,7 +465,6 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def _v_has_rpc(self):
         """
         virtual bool GeoCal::RasterImage::has_rpc() const
-        *********************************************************************
         Functions available if we have RPC
 
         Indicate if we have Rpc. The default is false, but derived classes can
@@ -482,10 +479,9 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def _v_rpc(self):
         """
         boost::shared_ptr<Rpc> GeoCal::RasterImage::rpc_ptr() const
-        ----------------------------------------------------------------------
-        - Pointer version of rpc(). This makes python happier.
-        -----------------------------------------
-        ------------------------------ 
+        Pointer version of rpc().
+
+        This makes python happier. 
         """
         return _raster_image.RasterImage__v_rpc(self)
 

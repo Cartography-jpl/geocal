@@ -9303,23 +9303,72 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_GdalRasterImage__v_map_info_from_nitf_corner(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_GdalRasterImage_map_info_from_nitf_corner__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::GdalRasterImage *arg1 = (GeoCal::GdalRasterImage *) 0 ;
+  bool arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > *smartarg1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_map_info_from_nitf_corner" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "GdalRasterImage_map_info_from_nitf_corner" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  {
+    try {
+      result = ((GeoCal::GdalRasterImage const *)arg1)->map_info_from_nitf_corner(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GdalRasterImage_map_info_from_nitf_corner__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::GdalRasterImage *arg1 = (GeoCal::GdalRasterImage *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::GdalRasterImage const > tempshared1 ;
   boost::shared_ptr< GeoCal::GdalRasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   boost::shared_ptr< GeoCal::MapInfo > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_map_info_from_nitf_corner" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_map_info_from_nitf_corner" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -9345,6 +9394,28 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_map_info_from_nitf_corner(PyObject
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GdalRasterImage_map_info_from_nitf_corner(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"GdalRasterImage_map_info_from_nitf_corner",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_GdalRasterImage_map_info_from_nitf_corner__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_GdalRasterImage_map_info_from_nitf_corner__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'GdalRasterImage_map_info_from_nitf_corner'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::GdalRasterImage::map_info_from_nitf_corner(bool) const\n"
+    "    GeoCal::GdalRasterImage::map_info_from_nitf_corner() const\n");
+  return 0;
 }
 
 
@@ -12118,8 +12189,8 @@ static PyMethodDef SwigMethods[] = {
 		"std::vector<std::string> GeoCal::GdalRasterImage::file_names() const\n"
 		"\n"
 		""},
-	 { (char *)"GdalRasterImage__v_map_info_from_nitf_corner", (PyCFunction)_wrap_GdalRasterImage__v_map_info_from_nitf_corner, METH_O, (char *)"\n"
-		"boost::shared_ptr< MapInfo > GdalRasterImage::map_info_from_nitf_corner() const\n"
+	 { (char *)"GdalRasterImage_map_info_from_nitf_corner", _wrap_GdalRasterImage_map_info_from_nitf_corner, METH_VARARGS, (char *)"\n"
+		"boost::shared_ptr< MapInfo > GdalRasterImage::map_info_from_nitf_corner(bool Approx_ok=false) const\n"
 		"In AFIDS, we calculate what is called the \"nitf corners\".\n"
 		"\n"
 		"This gives approximate corner coordinates for an image. Depending on\n"

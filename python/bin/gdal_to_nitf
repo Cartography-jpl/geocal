@@ -75,7 +75,7 @@ with NamedTemporaryFile() as tmp:
     # the input file doesn't already have map info, create an approximate
     # one if we can from the NITF corner metadata in the file
     if(not fvrt.has_map_info):
-        mi = fvrt.map_info_from_nitf_corner
+        mi = fvrt.map_info_from_nitf_corner(True)
         if(mi is not None):
             fvrt.set_map_info(mi)
 
@@ -92,7 +92,7 @@ with NamedTemporaryFile() as tmp:
     # used at build time of AFIDS. If this isn't found then just
     # continue without complaint
     try:
-        tre_afid_a(fin, fvrt, creation_option)
+        tre_afid_a(fin, fvrt, args.unsigned_int16, creation_option)
     except NameError as exc:
         pass
     fvrt.close()

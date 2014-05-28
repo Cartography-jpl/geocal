@@ -60,7 +60,7 @@ public:
       rpc_.reset(new Rpc(gdal_data_base_->rpc()));
   }
   void set_map_info(const MapInfo& Mi);
-  boost::shared_ptr<MapInfo> map_info_from_nitf_corner() const;
+  boost::shared_ptr<MapInfo> map_info_from_nitf_corner(bool Approx_ok = false) const;
   void set_rpc(const Rpc& R);
   std::vector<std::string> file_names() const 
   { return gdal_data_base().file_names(); }

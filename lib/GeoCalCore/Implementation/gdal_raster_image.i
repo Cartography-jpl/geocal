@@ -68,7 +68,7 @@ public:
   void set_metadata(const std::string& M, const std::string& Val,
 		    const std::string& Domain = "");
   %python_attribute(file_names, std::vector<std::string>)
-  %python_attribute(map_info_from_nitf_corner, boost::shared_ptr<MapInfo>)
+  boost::shared_ptr<MapInfo> map_info_from_nitf_corner(bool Approx_ok = false) const;
   %python_attribute(band_id, int)
   %python_attribute(update, bool)
   %python_attribute(rpc, Rpc)

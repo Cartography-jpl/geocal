@@ -243,9 +243,9 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
     def file_names(self):
         return self._v_file_names()
 
-    def _v_map_info_from_nitf_corner(self):
+    def map_info_from_nitf_corner(self, Approx_ok=False):
         """
-        boost::shared_ptr< MapInfo > GdalRasterImage::map_info_from_nitf_corner() const
+        boost::shared_ptr< MapInfo > GdalRasterImage::map_info_from_nitf_corner(bool Approx_ok=false) const
         In AFIDS, we calculate what is called the "nitf corners".
 
         This gives approximate corner coordinates for an image. Depending on
@@ -255,11 +255,7 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
         This return a null pointer if we don't have the NITF corner metadata.
 
         """
-        return _gdal_raster_image.GdalRasterImage__v_map_info_from_nitf_corner(self)
-
-    @property
-    def map_info_from_nitf_corner(self):
-        return self._v_map_info_from_nitf_corner()
+        return _gdal_raster_image.GdalRasterImage_map_info_from_nitf_corner(self, Approx_ok)
 
     def _v_band_id(self):
         """
@@ -382,7 +378,7 @@ GdalRasterImage.set_rpc = new_instancemethod(_gdal_raster_image.GdalRasterImage_
 GdalRasterImage.has_metadata = new_instancemethod(_gdal_raster_image.GdalRasterImage_has_metadata,None,GdalRasterImage)
 GdalRasterImage.set_metadata = new_instancemethod(_gdal_raster_image.GdalRasterImage_set_metadata,None,GdalRasterImage)
 GdalRasterImage._v_file_names = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_file_names,None,GdalRasterImage)
-GdalRasterImage._v_map_info_from_nitf_corner = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_map_info_from_nitf_corner,None,GdalRasterImage)
+GdalRasterImage.map_info_from_nitf_corner = new_instancemethod(_gdal_raster_image.GdalRasterImage_map_info_from_nitf_corner,None,GdalRasterImage)
 GdalRasterImage._v_band_id = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_band_id,None,GdalRasterImage)
 GdalRasterImage._v_update = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_update,None,GdalRasterImage)
 GdalRasterImage._v_rpc = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_rpc,None,GdalRasterImage)

@@ -583,7 +583,7 @@ class IbisFile(geocal_swig.generic_object.GenericObject):
         Close a file.
 
         You don't normally need to call this directly, it is done by the
-        destructor. But it is useful to have for use by Ruby. 
+        destructor. But it is useful to have for use by python. 
         """
         return _ibis_file.IbisFile_close(self)
 

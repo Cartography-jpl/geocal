@@ -53,6 +53,21 @@ def NAME(self):
 }
 %enddef
 
+%define %python_attribute2_with_set(NAME, NAME2, TYPE...)
+  %rename(_v_ ## NAME) NAME2;
+  TYPE NAME2() const;
+  void NAME2(const TYPE& V);
+%pythoncode {
+@property
+def NAME(self):
+    return self._v_ ## NAME()
+
+@NAME.setter
+def NAME(self, value):
+  self._v_ ## NAME(value)
+}
+%enddef
+
 %define %python_attribute2_nonconst(NAME, NAME2, TYPE...)
   %rename(_v_ ## NAME) NAME2;
   TYPE NAME2();

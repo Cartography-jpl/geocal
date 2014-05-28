@@ -74,6 +74,7 @@ public:
   const Orbit& orbit() const {return *orb;}
 
   boost::shared_ptr<Orbit> orbit_ptr() const {return orb;}
+  void orbit_ptr(const boost::shared_ptr<Orbit>& Orb) {orb = Orb;}
 
 //-----------------------------------------------------------------------
 /// Camera that we are using.
@@ -82,6 +83,7 @@ public:
   const Camera& camera() const {return *cam;}
 
   boost::shared_ptr<Camera> camera_ptr() const {return cam;}
+  void camera_ptr(const boost::shared_ptr<Camera>& Cam) {cam = Cam;}
 
 //-----------------------------------------------------------------------
 /// TimeTable that we are using.

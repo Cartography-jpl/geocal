@@ -248,27 +248,35 @@ class Ipi(geocal_swig.generic_object.GenericObject):
     def resolution_meter(self):
         return self._v_resolution_meter()
 
-    def _v_orbit(self):
+    def _v_orbit(self, *args):
         """
-        boost::shared_ptr<Orbit> GeoCal::Ipi::orbit_ptr() const
+        void GeoCal::Ipi::orbit_ptr(const boost::shared_ptr< Orbit > &Orb)
 
         """
-        return _ipi.Ipi__v_orbit(self)
+        return _ipi.Ipi__v_orbit(self, *args)
 
     @property
     def orbit(self):
         return self._v_orbit()
 
-    def _v_camera(self):
+    @orbit.setter
+    def orbit(self, value):
+      self._v_orbit(value)
+
+    def _v_camera(self, *args):
         """
-        boost::shared_ptr<Camera> GeoCal::Ipi::camera_ptr() const
+        void GeoCal::Ipi::camera_ptr(const boost::shared_ptr< Camera > &Cam)
 
         """
-        return _ipi.Ipi__v_camera(self)
+        return _ipi.Ipi__v_camera(self, *args)
 
     @property
     def camera(self):
         return self._v_camera()
+
+    @camera.setter
+    def camera(self, value):
+      self._v_camera(value)
 
     def _v_time_table(self):
         """

@@ -125,8 +125,7 @@ protected:
        Max_index[1] != TiledFile<T, 2>::size()[1])
       throw Exception("Right now, we require full lines to be written. This could be relaxed by updating the code, but that hasn't happened yet.");
     for(int i = 0; i < Max_index[0] - Min_index[0]; ++i) {
-      int status = VicarFile::zvwritw(vicar_file().unit(), 
-	      const_cast<T*>(V) + i * TiledFile<T, 2>::size()[1],
+      int status = VicarFile::zvwritw(const_cast<T*>(V) + i * TiledFile<T, 2>::size()[1],
 				      i + Min_index[0] + 1, band_id);
       if(status != 1)
 	throw VicarException(status,"zvwrite failed for " + 

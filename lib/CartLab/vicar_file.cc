@@ -798,10 +798,10 @@ int VicarFile::zvreadw(void* buffer, int Band) const
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int VicarFile::zvwritw(int unit, void* buffer, int Band)
+int VicarFile::zvwritw(void* buffer, int Band)
 {
 #ifdef HAVE_VICAR_RTL
-  return zvwrit(unit, buffer, "BAND", Band, "NBANDS", 1, NULL);
+  return zvwrit(unit(), buffer, "BAND", Band, "NBANDS", 1, NULL);
 #else
   throw VicarNotAvailableException();
 #endif
@@ -813,10 +813,10 @@ int VicarFile::zvwritw(int unit, void* buffer, int Band)
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int VicarFile::zvwritw(int unit, void* buffer, int Line, int Band)
+int VicarFile::zvwritw(void* buffer, int Line, int Band)
 {
 #ifdef HAVE_VICAR_RTL
-  return zvwrit(unit, buffer, "LINE", Line, "BAND", Band, NULL);
+  return zvwrit(unit(), buffer, "LINE", Line, "BAND", Band, NULL);
 #else
   throw VicarNotAvailableException();
 #endif

@@ -19612,8 +19612,8 @@ $as_echo "$am_cv_python_pyexecdir" >&6; }
      PYTHON=`pwd`"/external/python_wrap.sh"
      PYTHON_CPPFLAGS="-I${prefix}/include/python2.7"
      PYTHON_NUMPY_CPPFLAGS="-I${prefix}/lib/python2.7/site-packages/numpy/core/include"
-     pythondir="${prefix}/lib/python2.7/site-packages"
-     platpythondir="${prefix}/lib/python2.7/site-packages"
+     pythondir="lib/python2.7/site-packages"
+     platpythondir="lib/python2.7/site-packages"
      succeeded=yes
      have_python=yes
 
@@ -20028,8 +20028,8 @@ $as_echo "no" >&6; }
 		fi
 	fi
 
-     pythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(False,False,'${prefix}')"`
-     platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(True,False,'${prefix}')"`
+     pythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(False,False,'')"`
+     platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(True,False,'')"`
      PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print '-I' + ' -I'.join(get_numpy_include_dirs())"`
 
 
@@ -20095,7 +20095,7 @@ else
 fi
 
 
-     pkgpythondir=\${pythondir}/$PACKAGE
+     pkgpythondir=\${prefix}/\${pythondir}/$PACKAGE
 
      succeeded=yes
      have_python=yes
@@ -20288,13 +20288,13 @@ srcsdbx=${geocal_topdir}/thirdparty/libsdbx
 
 srcraw=${geocal_topdir}/thirdparty/libraw
 
-pythondocdir=${prefix}/share/doc/geocal/python
+pythondocdir=\${prefix}/share/doc/geocal/python
 
-geocalpkgpythondir=${pythondir}/geocal
+geocalpkgpythondir=\${prefix}/${pythondir}/geocal
 
-afidspythonvdevdir=${prefix}/afids/vdev
+afidspythonvdevdir=\${prefix}/afids/vdev
 
-installafidspythondir=${prefix}
+installafidspythondir=\${prefix}
 
 
 

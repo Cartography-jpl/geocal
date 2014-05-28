@@ -1679,6 +1679,8 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/igc_project \
 	$(srcdir)/$(srcpythonbin)/gdal_to_erdas \
 	$(srcdir)/$(srcpythonbin)/gdal_to_nitf \
+	$(srcdir)/$(srcpythonbin)/nitf_to_vicar \
+	$(srcdir)/$(srcpythonbin)/nitfinfo \
 	$(srcdir)/$(srcpythonbin)/dem_generate \
 	$(srcdir)/$(srcpythonbin)/shelve_job_run \
 	$(srcdir)/$(srcpythonbin)/sba \
@@ -2252,7 +2254,7 @@ libraw_la_SOURCES = @srcraw@/dcraw_common.cpp \
 	@srcraw@/libraw_c_api.cpp @srcraw@/libraw_cxx.cpp \
 	@srcraw@/libraw_defines.h @srcraw@/var_defines.h
 libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
-pkgpythonswigdir = @pythondir@/geocal_swig
+pkgpythonswigdir = $(prefix)/@pythondir@/geocal_swig
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py $(patsubst \
 	%_wrap.cc, %.py, $(INCLUDE_SWIG_SRC))
 INCLUDE_SWIG_SRC = $(SWIG_SRC) $(am__append_32) $(am__append_33) \
@@ -8195,10 +8197,10 @@ install-python: all
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
 
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile $(PYTHON_TARGET)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_CARTO $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL)))
 
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc $(DOXYGEN_TARGET)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	mkdir -p $*_doc
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	OUTDIR=$*_doc INPUT="$(<D)/$*.h $(<D)/$*.cc" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
@@ -8207,7 +8209,7 @@ install-python: all
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $*_doc.i
 
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h $(DOXYGEN_TARGET)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	mkdir -p $*_doc
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	OUTDIR=$*_doc INPUT="$(<D)/$*.h" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
@@ -8224,7 +8226,7 @@ install-python: all
 # Backdoor rule to do a quick install when we are just varying python
 install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
 python_check:
-	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
+	export PYTHONPATH=$(prefix)/$(platpythondir):$(prefix)/$(pythondir):${PYTHONPATH} && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         $(setup_afids_data) && \
         $(setup_spice) && \

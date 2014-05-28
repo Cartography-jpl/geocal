@@ -20,7 +20,7 @@ else
 setup_spice = :
 endif
 python_check:
-	export PYTHONPATH=$(platpythondir):$(pythondir):${PYTHONPATH} && \
+	export PYTHONPATH=$(prefix)/$(platpythondir):$(prefix)/$(pythondir):${PYTHONPATH} && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         $(setup_afids_data) && \
         $(setup_spice) && \

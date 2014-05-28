@@ -1,0 +1,49 @@
+#! /usr/bin/env python
+try:
+    from afids import *
+except ImportError:
+    from geocal import *
+import subprocess
+import os
+
+version="%prog May 12, 2014"
+usage="""Usage: 
+  nitfinfo [options] <input_file>
+  nitfinfo -h | --help
+  nitfinfo -v | --version
+
+This is like gdalinfo, but it includes formated information from various
+TREs that may be in the NITF file.
+
+The input file can be any GDAL readable file, although this really only
+makes sense to call this program with a NITF file (otherwise, just use
+gdalinfo directly).
+
+Options:
+  -h --help         
+       Print this message
+
+  -v --version      
+       Print program version
+
+"""
+args = docopt_simple(usage, version=version)
+t = subprocess.check_output(["gdalinfo", args.input_file])
+# Split string into before and after the "Corner Cordinates" section. Note
+# that it is perfectly ok for this to be missing, we just have t2 and t3 
+# as blank strings.
+t1, t2, t3 = t.partition("Corner Coordinates")
+
+f = GdalRasterImage(args.input_file)
+print t1,
+tre_use00a_pretty_print(f)
+# Function is only optionally available, depending on options
+# used at build time of AFIDS. If this isn't found then just
+# continue without complaint
+try:
+    tre_afid_a_pretty_print(f)
+except NameError as exc:
+    pass
+print t2,
+print t3
+

@@ -294,7 +294,7 @@ class QuaternionOrbitData(OrbitData):
     the planet, as well as the aberration of light (a small correction due
     to the movement of the spacecraft relative to the planet).
 
-    This does not account for atmospheric refraction. Depending on the
+    This does *not* account for atmospheric refraction. Depending on the
     zenith angle, this can be somewhat important for satellites. From the
     approximate atmospheric model described in "Theoretical Basis of the
     SDP Toolkit Geolocation package for the ECS", Table 6-5 the linear

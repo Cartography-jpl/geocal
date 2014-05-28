@@ -1,5 +1,5 @@
 SWIG_FLAG += -O
-pkgpythonswigdir = @pythondir@/geocal_swig
+pkgpythonswigdir = $(prefix)/@pythondir@/geocal_swig
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py
 INCLUDE_SWIG_SRC = $(SWIG_SRC)
 FULL_SWIG_SRC = $(SWIG_SRC)
@@ -76,10 +76,10 @@ $(swigsrc)/%_wrap.Pcc : %.i
 	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
 	rm $@.tmp
 
-$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile
+$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile $(PYTHON_TARGET)
 	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_CARTO $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL)))
 
-$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc
+$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc $(DOXYGEN_TARGET)
 	mkdir -p $*_doc
 	OUTDIR=$*_doc INPUT="$(<D)/$*.h $(<D)/$*.cc" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
 	$(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
@@ -88,7 +88,7 @@ $(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc
 	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
 	rm $*_doc.i
 
-$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h
+$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h $(DOXYGEN_TARGET)
 	mkdir -p $*_doc
 	OUTDIR=$*_doc INPUT="$(<D)/$*.h" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
 	$(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i

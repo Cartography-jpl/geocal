@@ -1,10 +1,17 @@
+if(! $?AFIDSPYTHONTOP) then
+    setenv AFIDSPYTHONTOP @prefix@
+endif
+if("@build_python@" == "yes") then
+    setenv PYTHONHOME ${AFIDSPYTHONTOP}
+endif
 if($?PYTHONPATH) then
-  setenv PYTHONPATH @pythondir@:@platpythondir@:${PYTHONPATH}
+  setenv PYTHONPATH ${AFIDSPYTHONTOP}/@pythondir@:${AFIDSPYTHONTOP}/@platpythondir@:${PYTHONPATH}
 else
-  setenv PYTHONPATH @pythondir@:@platpythondir@
+  setenv PYTHONPATH ${AFIDSPYTHONTOP}/@pythondir@:${AFIDSPYTHONTOP}/@platpythondir@
 endif
 if ($?PATH) then
-  setenv PATH @prefix@/bin:${PATH}
+  setenv PATH ${AFIDSPYTHONTOP}/bin:${PATH}
 else
-  setenv PATH @prefix@/bin
+  setenv PATH ${AFIDSPYTHONTOP}/bin
 endif
+

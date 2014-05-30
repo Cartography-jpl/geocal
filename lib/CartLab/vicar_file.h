@@ -255,8 +255,8 @@ public:
 
   int zvreadw(void* buffer, int Line, int Band) const;
   int zvreadw(void* buffer, int Band) const;
-  static int zvwritw(int unit, void* buffer, int Band);
-  static int zvwritw(int unit, void* buffer, int Line, int Band);
+  int zvwritw(void* buffer, int Band);
+  int zvwritw(void* buffer, int Line, int Band);
   static int zlgetw(int unit, const char* type, const char* key, char* value);
   static int zlgetsh(int unit, const char* key, char* value);
   static int zlgetsh(int unit, const char* key, char* value, int ulen);

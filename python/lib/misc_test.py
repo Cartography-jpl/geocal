@@ -37,6 +37,8 @@ def test_cib01_data():
         VicarMultiFile
     except NameError:
         raise SkipTest
+    if(not os.path.exists(os.environ["CIB1_ROOT"] + "/cib01_db.int")):
+        raise SkipTest
     cib01 = cib01_data()
     assert cib01.number_line == 8795732
     assert cib01.number_sample == 27109425

@@ -16918,7 +16918,7 @@ else
 
     want_vicar_rtl="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_vicar_rtl="yes"
         build_vicar_rtl="yes"
         if test "x$prefix" = xNONE; then
@@ -16944,7 +16944,7 @@ $as_echo_n "checking for VICAR RTL library... " >&6; }
             VICAR_RTL_CFLAGS="-I$srcdir/vicar_rtl/rtl/inc -I$srcdir/vicar_rtl/p1/inc -I$srcdir/vicar_rtl/p2/inc -I$srcdir/vicar_rtl/tae/inc"
             succeeded=yes
         elif test "$ac_vicar_rtl_path" != ""; then
-            VICAR_RTL_LIBS="-R$ac_vicar_rtl_path/lib -L$ac_vicar_rtl_path/lib -lvicar-rtl"
+            VICAR_RTL_LIBS="-R$ac_vicar_rtl_path/lib -L$ac_vicar_rtl_path/lib -lvicar_rtl"
             VICAR_RTL_CFLAGS="-I$ac_vicar_rtl_path/include/vicar_rtl"
             succeeded=yes
         else
@@ -17155,7 +17155,7 @@ else
 
     want_afids_data="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_afids_data="yes"
         build_afids_data="yes"
         if test "x$prefix" = xNONE; then
@@ -17263,7 +17263,7 @@ else
 
     want_boost="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_boost="yes"
         build_boost="yes"
         if test "x$prefix" = xNONE; then
@@ -17414,7 +17414,7 @@ else
 
     want_blitz="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_blitz="yes"
         build_blitz="yes"
         if test "x$prefix" = xNONE; then
@@ -17623,7 +17623,7 @@ else
 
     want_gsl="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_gsl="yes"
         build_gsl="yes"
         if test "x$prefix" = xNONE; then
@@ -17832,7 +17832,7 @@ else
 
     want_spice="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_spice="yes"
         build_spice="yes"
         if test "x$prefix" = xNONE; then
@@ -18044,7 +18044,7 @@ else
 
     want_hdf5="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_hdf5="yes"
         build_hdf5="yes"
         if test "x$prefix" = xNONE; then
@@ -18258,7 +18258,7 @@ else
 
     want_doxygen="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_doxygen="yes"
         build_doxygen="yes"
         if test "x$prefix" = xNONE; then
@@ -18398,7 +18398,7 @@ else
 
     want_fftw="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_fftw="yes"
         build_fftw="yes"
         if test "x$prefix" = xNONE; then
@@ -18609,7 +18609,7 @@ else
 
     want_gdal="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_gdal="yes"
         build_gdal="yes"
         if test "x$prefix" = xNONE; then
@@ -18953,7 +18953,7 @@ else
 
     want_vicar_gdalplugin="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_vicar_gdalplugin="yes"
         build_vicar_gdalplugin="yes"
         if test "x$prefix" = xNONE; then
@@ -19062,7 +19062,7 @@ else
 
     want_afids="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_afids="yes"
         build_afids="yes"
         if test "x$prefix" = xNONE; then
@@ -19163,7 +19163,7 @@ else
 
     want_carto="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_carto="yes"
         build_carto="yes"
         if test "x$prefix" = xNONE; then
@@ -19382,7 +19382,7 @@ else
 
     want_python="yes"
     if test "can_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_python="yes"
         build_python="yes"
         if test "x$prefix" = xNONE; then
@@ -20163,7 +20163,7 @@ else
 
     want_python_ogr="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
         want_python_ogr="yes"
         build_python_ogr="yes"
         if test "x$prefix" = xNONE; then
@@ -20432,7 +20432,7 @@ fi
 
 
 
-        test "x" != "xno" || swig_shadow=" -noproxy"
+        test "x" != "xno" -o swig_shadow=" -noproxy"
         SWIG_PYTHON_OPT=-python$swig_shadow
 
         SWIG_PYTHON_CPPFLAGS=$PYTHON_CPPFLAGS

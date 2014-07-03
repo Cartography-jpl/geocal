@@ -42,7 +42,7 @@ if test "x$want_vicar_rtl" = "xyes"; then
             VICAR_RTL_CFLAGS="-I$srcdir/vicar_rtl/rtl/inc -I$srcdir/vicar_rtl/p1/inc -I$srcdir/vicar_rtl/p2/inc -I$srcdir/vicar_rtl/tae/inc"
             succeeded=yes
         elif test "$ac_vicar_rtl_path" != ""; then
-            VICAR_RTL_LIBS="-R$ac_vicar_rtl_path/lib -L$ac_vicar_rtl_path/lib -lvicar-rtl"
+            VICAR_RTL_LIBS="-R$ac_vicar_rtl_path/lib -L$ac_vicar_rtl_path/lib -lvicar_rtl"
             VICAR_RTL_CFLAGS="-I$ac_vicar_rtl_path/include/vicar_rtl"
             succeeded=yes
         else

@@ -56,7 +56,7 @@ AC_ARG_WITH([$2],
     [
     [want_][$1]="yes"
     if test "$4" = "can_build"; then
-      if test "$5" = "default_build" || test "$THIRDPARTY" = "build"; then
+      if test "$5" = "default_build" -o test "$THIRDPARTY" = "build"; then
         [want_][$1]="yes"
         [build_][$1]="yes"
         if test "x$prefix" = xNONE; then

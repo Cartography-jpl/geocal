@@ -34,6 +34,9 @@ Options:
 
   -b --band=b
        Band of file to use (1 based). [default: 1]
+  
+  --dem=f
+       DEM file to use. If supplied, we generate NITF corners
 
   -i --image=i
        Image of file to use (1 based). [default: 1]
@@ -72,6 +75,20 @@ with NamedTemporaryFile() as tmp:
         tre_afid_a_to_gdal(fin, fvrt)
     except NameError as exc:
         pass
+
+    if(fin.has_rpc and args.dem):
+        dem = GdalDem(args.dem)
+        for i,ic in enumerate([ImageCoordinate(0.5,0.5),
+                               ImageCoordinate(0.5,fin.number_sample - 0.5),
+                               ImageCoordinate(fin.number_line - 0.5,
+                                               fin.number_sample - 0.5),
+                               ImageCoordinate(fin.number_line - 0.5, 0.5)]):
+            pt = fin.rpc.ground_coordinate(ic, dem)
+            fvrt["NITF_CORNERLON%d" % (i + 1)] = str(pt.longitude)
+            fvrt["NITF_CORNERLAT%d" % (i + 1)] = str(pt.latitude)
+        mi = fvrt.map_info_from_nitf_corner(True)
+        fvrt.set_map_info(mi)
+                               
     fvrt.close()
     cmd = ["gdal_translate", "-of", "VICAR"]
     if(args.quiet):

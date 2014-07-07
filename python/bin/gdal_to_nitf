@@ -41,8 +41,8 @@ Options:
        store things that don't fit in the NITF file. Use this option to
        keep that file.
 
-  --unsigned-int16
-       Force output to unsigned int16.
+  --unsigned
+       Force output to unsigned.
 
   -q --quiet
        Don't print status message as we copy the data.
@@ -58,12 +58,21 @@ args = docopt_simple(usage, version=version)
 # treats this raster image we can later copy.
 
 with NamedTemporaryFile() as tmp:
+    fin = GdalMultiBand(args.input_file)
     cmd = ["gdal_translate", "-of", "VRT", "-q"]
-    if(args.unsigned_int16):
-        cmd.extend(["-ot", "UInt16"])
+    if(args.unsigned):
+        t = fin.gdal_raster_image(0)
+        if(t.has_metadata("FORMAT") and
+           t["FORMAT"] == "BYTE"):
+            cmd.extend(["-ot", "Byte"])
+        elif(t.has_metadata("FORMAT") and
+             t["FORMAT"] == "FULL"):
+            cmd.extend(["-ot", "UInt32"])
+        else:
+            cmd.extend(["-ot", "UInt16"])
+
     cmd.extend([args.input_file, "foo.vrt"])
     subprocess.check_call(cmd)
-    fin = GdalMultiBand(args.input_file)
     fvrt = GdalRasterImage("foo.vrt")
     creation_option = []
     if(fin.raster_image(0).has_rpc):
@@ -80,8 +89,12 @@ with NamedTemporaryFile() as tmp:
     # the input file doesn't already have map info, create an approximate
     # one if we can from the NITF corner metadata in the file
     #
-    # If the file has map info, but also a RPC then by default we ignore
-    # the mapinfo and use the NITF corners found in the file.
+    # Note that the logic for this is a bit complicated, because metadata
+    # can lie. The logic we use is that if the file has an RPC, we believe
+    # the NITF corner metadata even if there is already map information
+    # in the VICAR file. However, since there might be cases that we want
+    # to believe the existing map information we have an option to override
+    # this.
     if(((not args.believe_map_info) and fvrt.has_rpc) or
        not fvrt.has_map_info):
         mi = fvrt.map_info_from_nitf_corner(True)
@@ -102,7 +115,7 @@ with NamedTemporaryFile() as tmp:
     # used at build time of AFIDS. If this isn't found then just
     # continue without complaint
     try:
-        tre_afid_a(fin, fvrt, args.unsigned_int16, creation_option)
+        tre_afid_a(fin, fvrt, args.unsigned, creation_option)
     except NameError as exc:
         pass
     fvrt.close()

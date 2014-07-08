@@ -46,13 +46,19 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(rotated_image)
 {
-  std::string f = test_data_dir() + "rpc.ntf";
-  GdalRasterImage g(f);
-  MapInfo m = g.map_info();
-  BOOST_CHECK_CLOSE(m.ulc_x(), 44.826373456790115, 1e-7);
-  BOOST_CHECK_CLOSE(m.ulc_y(), 35.881944444444443, 1e-7);
-  BOOST_CHECK_CLOSE(m.lrc_x(), 44.826682098765467, 1e-7);
-  BOOST_CHECK_CLOSE(m.lrc_y(), 35.881944444444443, 1e-7);
+  // Prior to GDAL 1.11, this had mapinfo. The new version of GDAL
+  // doesn't create a map, but rather has 4 GCPs for the 4
+  // corners. This is actually more correct, but it is
+  // different. Right now, I don't think this causes problem
+  // anywhere. But we'll leave this commented out to make it clear
+  // that this behavior has been changed.
+  // std::string f = test_data_dir() + "rpc.ntf";
+  // GdalRasterImage g(f);
+  // MapInfo m = g.map_info();
+  // BOOST_CHECK_CLOSE(m.ulc_x(), 44.826373456790115, 1e-7);
+  // BOOST_CHECK_CLOSE(m.ulc_y(), 35.881944444444443, 1e-7);
+  // BOOST_CHECK_CLOSE(m.lrc_x(), 44.826682098765467, 1e-7);
+  // BOOST_CHECK_CLOSE(m.lrc_y(), 35.881944444444443, 1e-7);
 }
 
 BOOST_AUTO_TEST_CASE(create)

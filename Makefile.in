@@ -1533,6 +1533,7 @@ MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
 NM = @NM@
 NMEDIT = @NMEDIT@
+NOSETESTS = @NOSETESTS@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OTOOL = @OTOOL@
@@ -8231,7 +8232,7 @@ python_check:
         $(setup_afids_data) && \
         $(setup_spice) && \
         export PATH=$(PYTHON_CHECK_PATH) && \
-        nosetests $(srcdir)/@srcpython@/*/ 
+        $(NOSETESTS) $(srcdir)/@srcpython@/*/ 
 # Used to short circuit tests that would otherwise run.
 @HAVE_VICAR_GDALPLUGIN_FALSE@export NO_VICAR_GDALPLUGIN=t
 

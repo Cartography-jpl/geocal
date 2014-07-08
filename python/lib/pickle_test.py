@@ -163,7 +163,7 @@ def create_rpc_sample():
 #create_rpc_sample()
 
 def test_mapinfo_pickle():
-    r = GdalRasterImage(test_data + "rpc.ntf")
+    r = GdalRasterImage(test_data + "dem_foot.tif")
     m = r.map_info
     cPickle.dumps(m.transform)
     cPickle.dumps(m.number_x_pixel)

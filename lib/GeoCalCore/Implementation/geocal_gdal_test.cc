@@ -9,7 +9,13 @@ BOOST_AUTO_TEST_CASE(geocal_gdal_test)
   std::string fname = test_data_dir() + "cib_sample.img";
   std::string fname2 = test_data_dir() + "rpc.ntf";
   BOOST_CHECK(gdal_has_map_info(fname));
-  BOOST_CHECK(gdal_has_map_info(fname2));
+  // Prior to GDAL 1.11, this had mapinfo. The new version of GDAL
+  // doesn't create a map, but rather has 4 GCPs for the 4
+  // corners. This is actually more correct, but it is
+  // different. Right now, I don't think this causes problem
+  // anywhere. But we'll leave this commented out to make it clear
+  // that this behavior has been changed.
+  // BOOST_CHECK(gdal_has_map_info(fname2));
   Gdal<GByte> g(fname.c_str());
   BOOST_CHECK(g.size()[0] ==200);
   BOOST_CHECK(g.size()[1] ==100);

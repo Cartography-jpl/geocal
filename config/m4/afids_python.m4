@@ -34,8 +34,8 @@ if test "x$want_python" = "xyes"; then
    if test "$build_python" == "yes"; then
      AM_PATH_PYTHON(,, [:])
      PYTHON=`pwd`"/external/python_wrap.sh" 
-     PYTHON_CPPFLAGS="-I${prefix}/include/python2.7"
-     PYTHON_NUMPY_CPPFLAGS="-I${prefix}/lib/python2.7/site-packages/numpy/core/include"
+     PYTHON_CPPFLAGS="-I\${prefix}/include/python2.7"
+     PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/python2.7/site-packages/numpy/core/include"
      pythondir="lib/python2.7/site-packages" 
      platpythondir="lib/python2.7/site-packages" 
      succeeded=yes
@@ -43,14 +43,19 @@ if test "x$want_python" = "xyes"; then
      AC_SUBST(PYTHON_CPPFLAGS)
      AC_SUBST(PYTHON_NUMPY_CPPFLAGS)
      AC_SUBST([platpythondir])
-     SPHINXBUILD="${prefix}/bin/sphinx-build"
+     SPHINXBUILD="\${prefix}/bin/sphinx-build"
+     NOSETESTS="\${prefix}/bin/nosetests"
      AM_CONDITIONAL([HAVE_SPHINX], [true])
    else
      AC_PYTHON_DEVEL([>= '2.6.1'])
      AC_PYTHON_MODULE_WITH_VERSION(numpy, [1.6.1], [numpy.version.version])
      AC_PYTHON_MODULE_WITH_VERSION(scipy, [0.10.1], [scipy.version.version])
      AC_PYTHON_MODULE_WITH_VERSION(matplotlib, [1.0.1], [matplotlib.__version__])
-     AC_PYTHON_MODULE(nose, 1)
+     AC_PATH_PROG([NOSETESTS], [nosetest])
+     if test -n "$NOSETESTS" ; then
+        AC_MSG_ERROR(required program nosetests not found)
+        exit 1
+     fi     
      AC_PYTHON_MODULE(h5py, 1)
      AC_PYTHON_MODULE(sphinx, 1)
      AC_PYTHON_MODULE(sqlite3, 1)

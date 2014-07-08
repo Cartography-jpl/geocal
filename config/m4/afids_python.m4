@@ -46,16 +46,12 @@ if test "x$want_python" = "xyes"; then
      SPHINXBUILD="\${prefix}/bin/sphinx-build"
      NOSETESTS="\${prefix}/bin/nosetests"
      AM_CONDITIONAL([HAVE_SPHINX], [true])
+     AM_CONDITIONAL([HAVE_NOSETESTS], [true])
    else
      AC_PYTHON_DEVEL([>= '2.6.1'])
      AC_PYTHON_MODULE_WITH_VERSION(numpy, [1.6.1], [numpy.version.version])
      AC_PYTHON_MODULE_WITH_VERSION(scipy, [0.10.1], [scipy.version.version])
      AC_PYTHON_MODULE_WITH_VERSION(matplotlib, [1.0.1], [matplotlib.__version__])
-     AC_PATH_PROG([NOSETESTS], [nosetest])
-     if test -n "$NOSETESTS" ; then
-        AC_MSG_ERROR(required program nosetests not found)
-        exit 1
-     fi     
      AC_PYTHON_MODULE(h5py, 1)
      AC_PYTHON_MODULE(sphinx, 1)
      AC_PYTHON_MODULE(sqlite3, 1)
@@ -65,7 +61,13 @@ if test "x$want_python" = "xyes"; then
      AC_SUBST([PYTHON_NUMPY_CPPFLAGS])
      AC_SUBST([platpythondir])
      AC_PROG_SPHINX
+     AC_PROG_NOSETESTS
+     if test -z "$NOSETESTS" ; then
+        AC_MSG_ERROR(required program nosetests not found)
+        exit 1
+     fi     
      AC_SUBST([pkgpythondir], [\${prefix}/\${pythondir}/$PACKAGE])
+     AC_SUBST(build_python)
      succeeded=yes
      have_python=yes
    fi

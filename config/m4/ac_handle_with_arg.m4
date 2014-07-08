@@ -43,11 +43,7 @@ AC_ARG_WITH([$2],
         fi
         [want_][$1]="yes"
         [build_][$1]="yes"
-        if test "x$prefix" = xNONE; then
-           [ac_][$1][_path]="$ac_default_prefix"
-        else
-           [ac_][$1][_path]="$prefix"
-        fi
+        [ac_][$1][_path]="\${prefix}"
     else
         [want_][$1]="yes"
         [ac_][$1][_path]="$withval"
@@ -56,14 +52,10 @@ AC_ARG_WITH([$2],
     [
     [want_][$1]="yes"
     if test "$4" = "can_build"; then
-      if test "$5" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "$5" = "default_build" -o "$THIRDPARTY" = "build"; then
         [want_][$1]="yes"
         [build_][$1]="yes"
-        if test "x$prefix" = xNONE; then
-           [ac_][$1][_path]="$ac_default_prefix"
-        else
-           [ac_][$1][_path]="$prefix"
-        fi
+        [ac_][$1][_path]="\${prefix}"
       fi
     fi
     ])

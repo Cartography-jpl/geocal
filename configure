@@ -677,10 +677,13 @@ HAVE_PYTHON_OGR_FALSE
 HAVE_PYTHON_OGR_TRUE
 BUILD_PYTHON_FALSE
 BUILD_PYTHON_TRUE
-SPHINXBUILD
+build_python
 NOSETESTS
+SPHINXBUILD
 PYTHON_LDFLAGS
 PYTHON_CONFIG
+HAVE_NOSETESTS_FALSE
+HAVE_NOSETESTS_TRUE
 HAVE_SPHINX_FALSE
 HAVE_SPHINX_TRUE
 platpythondir
@@ -710,15 +713,24 @@ BUILD_VICAR_GDALPLUGIN_TRUE
 HAVE_VICAR_GDALPLUGIN_FALSE
 HAVE_VICAR_GDALPLUGIN_TRUE
 HAVE_VICAR_GDALPLUGIN
+VICAR_GDALPLUGIN_HOME_ABS
 VICAR_GDALPLUGIN_HOME
 BUILD_GDAL_FALSE
 BUILD_GDAL_TRUE
 HAVE_GDAL_FALSE
 HAVE_GDAL_TRUE
+BUILD_OPENJPEG_FALSE
+BUILD_OPENJPEG_TRUE
+BUILD_EXPAT_FALSE
+BUILD_EXPAT_TRUE
 BUILD_OGDI_FALSE
 BUILD_OGDI_TRUE
 BUILD_GEOS_FALSE
 BUILD_GEOS_TRUE
+HAVE_OPENJPEG_FALSE
+HAVE_OPENJPEG_TRUE
+HAVE_EXPAT_FALSE
+HAVE_EXPAT_TRUE
 HAVE_OGDI_FALSE
 HAVE_OGDI_TRUE
 HAVE_GEOS_FALSE
@@ -775,6 +787,7 @@ BUILD_AFIDS_DATA_FALSE
 BUILD_AFIDS_DATA_TRUE
 HAVE_AFIDS_DATA_FALSE
 HAVE_AFIDS_DATA_TRUE
+AFIDS_DATA_ABS
 AFIDS_DATA
 BUILD_VICAR_RTL_FALSE
 BUILD_VICAR_RTL_TRUE
@@ -990,7 +1003,8 @@ CARTO_CFLAGS
 CARTO_LIBS
 PYTHON
 PYTHON_VERSION
-SPHINXBUILD'
+SPHINXBUILD
+NOSETESTS'
 
 
 # Initialize some variables set by options.
@@ -1734,6 +1748,8 @@ Some influential environment variables:
               name.
   SPHINXBUILD Override the Sphinx build executable to use, the default is just
               'sphinx-build'
+  NOSETESTS   Override the nosetests executable to use, the default is just
+              'nosetests'
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -16769,10 +16785,10 @@ $as_echo "no" >&6; }
 	fi
 fi
 
-if test "x$THIRDPARTY" = x; then
-  pkg_extra_path=$prefix/lib/pkgconfig:/opt/afids_support/lib/pkgconfig
+if test "x$THIRDPARTY" = x -o "$THIRDPARTY" = "build" ; then
+  pkg_extra_path=\${prefix}/lib/pkgconfig:/opt/afids_support/lib/pkgconfig
 else
-  pkg_extra_path=$prefix/lib/pkgconfig:$THIRDPARTY/lib/pkgconfig:/opt/afids_support/lib/pkgconfig
+  pkg_extra_path=\${prefix}/lib/pkgconfig:$THIRDPARTY/lib/pkgconfig:/opt/afids_support/lib/pkgconfig
 fi
 if test "x$PKG_CONFIG_PATH" = x; then
   PKG_CONFIG_PATH=$pkg_extra_path
@@ -16905,11 +16921,7 @@ if test "${with_vicar_rtl+set}" = set; then :
         fi
         want_vicar_rtl="yes"
         build_vicar_rtl="yes"
-        if test "x$prefix" = xNONE; then
-           ac_vicar_rtl_path="$ac_default_prefix"
-        else
-           ac_vicar_rtl_path="$prefix"
-        fi
+        ac_vicar_rtl_path="\${prefix}"
     else
         want_vicar_rtl="yes"
         ac_vicar_rtl_path="$withval"
@@ -16919,14 +16931,10 @@ else
 
     want_vicar_rtl="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_vicar_rtl="yes"
         build_vicar_rtl="yes"
-        if test "x$prefix" = xNONE; then
-           ac_vicar_rtl_path="$ac_default_prefix"
-        else
-           ac_vicar_rtl_path="$prefix"
-        fi
+        ac_vicar_rtl_path="\${prefix}"
       fi
     fi
 
@@ -17142,11 +17150,7 @@ if test "${with_afids_data+set}" = set; then :
         fi
         want_afids_data="yes"
         build_afids_data="yes"
-        if test "x$prefix" = xNONE; then
-           ac_afids_data_path="$ac_default_prefix"
-        else
-           ac_afids_data_path="$prefix"
-        fi
+        ac_afids_data_path="\${prefix}"
     else
         want_afids_data="yes"
         ac_afids_data_path="$withval"
@@ -17156,14 +17160,10 @@ else
 
     want_afids_data="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_afids_data="yes"
         build_afids_data="yes"
-        if test "x$prefix" = xNONE; then
-           ac_afids_data_path="$ac_default_prefix"
-        else
-           ac_afids_data_path="$prefix"
-        fi
+        ac_afids_data_path="\${prefix}"
       fi
     fi
 
@@ -17194,6 +17194,8 @@ $as_echo "no" >&6; }
         else
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
+		AFIDS_DATA_ABS=`eval echo ${AFIDS_DATA}`
+
 
                 have_afids_data="yes"
         fi
@@ -17250,11 +17252,7 @@ if test "${with_boost+set}" = set; then :
         fi
         want_boost="yes"
         build_boost="yes"
-        if test "x$prefix" = xNONE; then
-           ac_boost_path="$ac_default_prefix"
-        else
-           ac_boost_path="$prefix"
-        fi
+        ac_boost_path="\${prefix}"
     else
         want_boost="yes"
         ac_boost_path="$withval"
@@ -17264,14 +17262,10 @@ else
 
     want_boost="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_boost="yes"
         build_boost="yes"
-        if test "x$prefix" = xNONE; then
-           ac_boost_path="$ac_default_prefix"
-        else
-           ac_boost_path="$prefix"
-        fi
+        ac_boost_path="\${prefix}"
       fi
     fi
 
@@ -17401,11 +17395,7 @@ if test "${with_blitz+set}" = set; then :
         fi
         want_blitz="yes"
         build_blitz="yes"
-        if test "x$prefix" = xNONE; then
-           ac_blitz_path="$ac_default_prefix"
-        else
-           ac_blitz_path="$prefix"
-        fi
+        ac_blitz_path="\${prefix}"
     else
         want_blitz="yes"
         ac_blitz_path="$withval"
@@ -17415,14 +17405,10 @@ else
 
     want_blitz="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_blitz="yes"
         build_blitz="yes"
-        if test "x$prefix" = xNONE; then
-           ac_blitz_path="$ac_default_prefix"
-        else
-           ac_blitz_path="$prefix"
-        fi
+        ac_blitz_path="\${prefix}"
       fi
     fi
 
@@ -17610,11 +17596,7 @@ if test "${with_gsl+set}" = set; then :
         fi
         want_gsl="yes"
         build_gsl="yes"
-        if test "x$prefix" = xNONE; then
-           ac_gsl_path="$ac_default_prefix"
-        else
-           ac_gsl_path="$prefix"
-        fi
+        ac_gsl_path="\${prefix}"
     else
         want_gsl="yes"
         ac_gsl_path="$withval"
@@ -17624,14 +17606,10 @@ else
 
     want_gsl="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_gsl="yes"
         build_gsl="yes"
-        if test "x$prefix" = xNONE; then
-           ac_gsl_path="$ac_default_prefix"
-        else
-           ac_gsl_path="$prefix"
-        fi
+        ac_gsl_path="\${prefix}"
       fi
     fi
 
@@ -17819,11 +17797,7 @@ if test "${with_spice+set}" = set; then :
         fi
         want_spice="yes"
         build_spice="yes"
-        if test "x$prefix" = xNONE; then
-           ac_spice_path="$ac_default_prefix"
-        else
-           ac_spice_path="$prefix"
-        fi
+        ac_spice_path="\${prefix}"
     else
         want_spice="yes"
         ac_spice_path="$withval"
@@ -17833,14 +17807,10 @@ else
 
     want_spice="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_spice="yes"
         build_spice="yes"
-        if test "x$prefix" = xNONE; then
-           ac_spice_path="$ac_default_prefix"
-        else
-           ac_spice_path="$prefix"
-        fi
+        ac_spice_path="\${prefix}"
       fi
     fi
 
@@ -18031,11 +18001,7 @@ if test "${with_hdf5+set}" = set; then :
         fi
         want_hdf5="yes"
         build_hdf5="yes"
-        if test "x$prefix" = xNONE; then
-           ac_hdf5_path="$ac_default_prefix"
-        else
-           ac_hdf5_path="$prefix"
-        fi
+        ac_hdf5_path="\${prefix}"
     else
         want_hdf5="yes"
         ac_hdf5_path="$withval"
@@ -18045,14 +18011,10 @@ else
 
     want_hdf5="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_hdf5="yes"
         build_hdf5="yes"
-        if test "x$prefix" = xNONE; then
-           ac_hdf5_path="$ac_default_prefix"
-        else
-           ac_hdf5_path="$prefix"
-        fi
+        ac_hdf5_path="\${prefix}"
       fi
     fi
 
@@ -18245,11 +18207,7 @@ if test "${with_doxygen+set}" = set; then :
         fi
         want_doxygen="yes"
         build_doxygen="yes"
-        if test "x$prefix" = xNONE; then
-           ac_doxygen_path="$ac_default_prefix"
-        else
-           ac_doxygen_path="$prefix"
-        fi
+        ac_doxygen_path="\${prefix}"
     else
         want_doxygen="yes"
         ac_doxygen_path="$withval"
@@ -18259,14 +18217,10 @@ else
 
     want_doxygen="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_doxygen="yes"
         build_doxygen="yes"
-        if test "x$prefix" = xNONE; then
-           ac_doxygen_path="$ac_default_prefix"
-        else
-           ac_doxygen_path="$prefix"
-        fi
+        ac_doxygen_path="\${prefix}"
       fi
     fi
 
@@ -18385,11 +18339,7 @@ if test "${with_fftw+set}" = set; then :
         fi
         want_fftw="yes"
         build_fftw="yes"
-        if test "x$prefix" = xNONE; then
-           ac_fftw_path="$ac_default_prefix"
-        else
-           ac_fftw_path="$prefix"
-        fi
+        ac_fftw_path="\${prefix}"
     else
         want_fftw="yes"
         ac_fftw_path="$withval"
@@ -18399,14 +18349,10 @@ else
 
     want_fftw="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_fftw="yes"
         build_fftw="yes"
-        if test "x$prefix" = xNONE; then
-           ac_fftw_path="$ac_default_prefix"
-        else
-           ac_fftw_path="$prefix"
-        fi
+        ac_fftw_path="\${prefix}"
       fi
     fi
 
@@ -18596,11 +18542,7 @@ if test "${with_gdal+set}" = set; then :
         fi
         want_gdal="yes"
         build_gdal="yes"
-        if test "x$prefix" = xNONE; then
-           ac_gdal_path="$ac_default_prefix"
-        else
-           ac_gdal_path="$prefix"
-        fi
+        ac_gdal_path="\${prefix}"
     else
         want_gdal="yes"
         ac_gdal_path="$withval"
@@ -18610,14 +18552,10 @@ else
 
     want_gdal="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_gdal="yes"
         build_gdal="yes"
-        if test "x$prefix" = xNONE; then
-           ac_gdal_path="$ac_default_prefix"
-        else
-           ac_gdal_path="$prefix"
-        fi
+        ac_gdal_path="\${prefix}"
       fi
     fi
 
@@ -18856,6 +18794,8 @@ fi
 #if test "$build_gdal" = "yes"; then
 #  AC_GEOS(required, cannot_build, default_search)
 #  AC_OGDI(required, cannot_build, default_search)
+#  AC_EXPAT(required, cannot_build, default_search)
+#  AC_OPENJPEG(required, cannot_build, default_search)
 #else # Not building GDAL
    if false; then
   HAVE_GEOS_TRUE=
@@ -18874,6 +18814,22 @@ else
 fi
 
    if false; then
+  HAVE_EXPAT_TRUE=
+  HAVE_EXPAT_FALSE='#'
+else
+  HAVE_EXPAT_TRUE='#'
+  HAVE_EXPAT_FALSE=
+fi
+
+   if false; then
+  HAVE_OPENJPEG_TRUE=
+  HAVE_OPENJPEG_FALSE='#'
+else
+  HAVE_OPENJPEG_TRUE='#'
+  HAVE_OPENJPEG_FALSE=
+fi
+
+   if false; then
   BUILD_GEOS_TRUE=
   BUILD_GEOS_FALSE='#'
 else
@@ -18889,8 +18845,26 @@ else
   BUILD_OGDI_FALSE=
 fi
 
+   if false; then
+  BUILD_EXPAT_TRUE=
+  BUILD_EXPAT_FALSE='#'
+else
+  BUILD_EXPAT_TRUE='#'
+  BUILD_EXPAT_FALSE=
+fi
+
+   if false; then
+  BUILD_OPENJPEG_TRUE=
+  BUILD_OPENJPEG_FALSE='#'
+else
+  BUILD_OPENJPEG_TRUE='#'
+  BUILD_OPENJPEG_FALSE=
+fi
+
   build_geos="no"
   build_ogdi="no"
+  build_expat="no"
+  build_openjpeg="yes"
 #fi # End if/else building GDAL
  if test "$have_gdal" = "yes"; then
   HAVE_GDAL_TRUE=
@@ -18940,11 +18914,7 @@ if test "${with_vicar_gdalplugin+set}" = set; then :
         fi
         want_vicar_gdalplugin="yes"
         build_vicar_gdalplugin="yes"
-        if test "x$prefix" = xNONE; then
-           ac_vicar_gdalplugin_path="$ac_default_prefix"
-        else
-           ac_vicar_gdalplugin_path="$prefix"
-        fi
+        ac_vicar_gdalplugin_path="\${prefix}"
     else
         want_vicar_gdalplugin="yes"
         ac_vicar_gdalplugin_path="$withval"
@@ -18954,14 +18924,10 @@ else
 
     want_vicar_gdalplugin="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_vicar_gdalplugin="yes"
         build_vicar_gdalplugin="yes"
-        if test "x$prefix" = xNONE; then
-           ac_vicar_gdalplugin_path="$ac_default_prefix"
-        else
-           ac_vicar_gdalplugin_path="$prefix"
-        fi
+        ac_vicar_gdalplugin_path="\${prefix}"
       fi
     fi
 
@@ -18992,6 +18958,9 @@ $as_echo "no" >&6; }
         else
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
+
+		VICAR_GDALPLUGIN_HOME_ABS=`eval echo ${VICAR_GDALPLUGIN_HOME}`
+
 
 
                 have_vicar_gdalplugin="yes"
@@ -19049,11 +19018,7 @@ if test "${with_afids+set}" = set; then :
         fi
         want_afids="yes"
         build_afids="yes"
-        if test "x$prefix" = xNONE; then
-           ac_afids_path="$ac_default_prefix"
-        else
-           ac_afids_path="$prefix"
-        fi
+        ac_afids_path="\${prefix}"
     else
         want_afids="yes"
         ac_afids_path="$withval"
@@ -19063,14 +19028,10 @@ else
 
     want_afids="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_afids="yes"
         build_afids="yes"
-        if test "x$prefix" = xNONE; then
-           ac_afids_path="$ac_default_prefix"
-        else
-           ac_afids_path="$prefix"
-        fi
+        ac_afids_path="\${prefix}"
       fi
     fi
 
@@ -19150,11 +19111,7 @@ if test "${with_carto+set}" = set; then :
         fi
         want_carto="yes"
         build_carto="yes"
-        if test "x$prefix" = xNONE; then
-           ac_carto_path="$ac_default_prefix"
-        else
-           ac_carto_path="$prefix"
-        fi
+        ac_carto_path="\${prefix}"
     else
         want_carto="yes"
         ac_carto_path="$withval"
@@ -19164,14 +19121,10 @@ else
 
     want_carto="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_carto="yes"
         build_carto="yes"
-        if test "x$prefix" = xNONE; then
-           ac_carto_path="$ac_default_prefix"
-        else
-           ac_carto_path="$prefix"
-        fi
+        ac_carto_path="\${prefix}"
       fi
     fi
 
@@ -19369,11 +19322,7 @@ if test "${with_python+set}" = set; then :
         fi
         want_python="yes"
         build_python="yes"
-        if test "x$prefix" = xNONE; then
-           ac_python_path="$ac_default_prefix"
-        else
-           ac_python_path="$prefix"
-        fi
+        ac_python_path="\${prefix}"
     else
         want_python="yes"
         ac_python_path="$withval"
@@ -19383,14 +19332,10 @@ else
 
     want_python="yes"
     if test "can_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_python="yes"
         build_python="yes"
-        if test "x$prefix" = xNONE; then
-           ac_python_path="$ac_default_prefix"
-        else
-           ac_python_path="$prefix"
-        fi
+        ac_python_path="\${prefix}"
       fi
     fi
 
@@ -19628,6 +19573,14 @@ $as_echo "$am_cv_python_pyexecdir" >&6; }
 else
   HAVE_SPHINX_TRUE='#'
   HAVE_SPHINX_FALSE=
+fi
+
+      if true; then
+  HAVE_NOSETESTS_TRUE=
+  HAVE_NOSETESTS_FALSE='#'
+else
+  HAVE_NOSETESTS_TRUE='#'
+  HAVE_NOSETESTS_FALSE=
 fi
 
    else
@@ -19926,50 +19879,6 @@ $as_echo "no" >&6; }
 		exit 1
 	fi
 
-     # Extract the first word of "nosetest", so it can be a program name with args.
-set dummy nosetest; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_path_NOSETESTS+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  case $NOSETESTS in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_NOSETESTS="$NOSETESTS" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_path_NOSETESTS="$as_dir/$ac_word$ac_exec_ext"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-  ;;
-esac
-fi
-NOSETESTS=$ac_cv_path_NOSETESTS
-if test -n "$NOSETESTS"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $NOSETESTS" >&5
-$as_echo "$NOSETESTS" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-
-     if test -n "$NOSETESTS" ; then
-        as_fn_error $? "required program nosetests not found" "$LINENO" 5
-        exit 1
-     fi
 
     if test -z $PYTHON;
     then
@@ -20115,7 +20024,74 @@ else
 fi
 
 
+
+        have_nosetests=no
+
+        if test "$NOSETESTS" == ""; then
+           NOSETESTS=nosetests
+        fi
+        # Extract the first word of "$NOSETESTS", so it can be a program name with args.
+set dummy $NOSETESTS; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_NOSETESTS+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $NOSETESTS in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_NOSETESTS="$NOSETESTS" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_NOSETESTS="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+NOSETESTS=$ac_cv_path_NOSETESTS
+if test -n "$NOSETESTS"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $NOSETESTS" >&5
+$as_echo "$NOSETESTS" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+        if test -z "$NOSETESTS" ; then
+           { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: cannot find 'nosetests' program." >&5
+$as_echo "$as_me: WARNING: cannot find 'nosetests' program." >&2;}
+           NOSETESTS='echo "Error: nosetests is not installed. " ; false'
+        else
+          have_nosetests=yes
+        fi
+ if test "$have_nosetests" = "yes"; then
+  HAVE_NOSETESTS_TRUE=
+  HAVE_NOSETESTS_FALSE='#'
+else
+  HAVE_NOSETESTS_TRUE='#'
+  HAVE_NOSETESTS_FALSE=
+fi
+
+
+     if test -z "$NOSETESTS" ; then
+        as_fn_error $? "required program nosetests not found" "$LINENO" 5
+        exit 1
+     fi
      pkgpythondir=\${prefix}/\${pythondir}/$PACKAGE
+
 
      succeeded=yes
      have_python=yes
@@ -20169,11 +20145,7 @@ if test "${with_python_ogr+set}" = set; then :
         fi
         want_python_ogr="yes"
         build_python_ogr="yes"
-        if test "x$prefix" = xNONE; then
-           ac_python_ogr_path="$ac_default_prefix"
-        else
-           ac_python_ogr_path="$prefix"
-        fi
+        ac_python_ogr_path="\${prefix}"
     else
         want_python_ogr="yes"
         ac_python_ogr_path="$withval"
@@ -20183,14 +20155,10 @@ else
 
     want_python_ogr="yes"
     if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o test "$THIRDPARTY" = "build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_python_ogr="yes"
         build_python_ogr="yes"
-        if test "x$prefix" = xNONE; then
-           ac_python_ogr_path="$ac_default_prefix"
-        else
-           ac_python_ogr_path="$prefix"
-        fi
+        ac_python_ogr_path="\${prefix}"
       fi
     fi
 
@@ -20960,12 +20928,28 @@ if test -z "${HAVE_OGDI_TRUE}" && test -z "${HAVE_OGDI_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_OGDI\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${HAVE_EXPAT_TRUE}" && test -z "${HAVE_EXPAT_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_EXPAT\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_OPENJPEG_TRUE}" && test -z "${HAVE_OPENJPEG_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_OPENJPEG\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${BUILD_GEOS_TRUE}" && test -z "${BUILD_GEOS_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_GEOS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_OGDI_TRUE}" && test -z "${BUILD_OGDI_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_OGDI\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_EXPAT_TRUE}" && test -z "${BUILD_EXPAT_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_EXPAT\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_OPENJPEG_TRUE}" && test -z "${BUILD_OPENJPEG_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_OPENJPEG\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_GDAL_TRUE}" && test -z "${HAVE_GDAL_FALSE}"; then
@@ -21000,8 +20984,16 @@ if test -z "${HAVE_SPHINX_TRUE}" && test -z "${HAVE_SPHINX_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_SPHINX\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${HAVE_NOSETESTS_TRUE}" && test -z "${HAVE_NOSETESTS_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_NOSETESTS\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${HAVE_SPHINX_TRUE}" && test -z "${HAVE_SPHINX_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_SPHINX\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_NOSETESTS_TRUE}" && test -z "${HAVE_NOSETESTS_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_NOSETESTS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_PYTHON_TRUE}" && test -z "${BUILD_PYTHON_FALSE}"; then

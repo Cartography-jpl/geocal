@@ -267,6 +267,7 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/ac_pkg_swig.m4 \
 	$(top_srcdir)/config/m4/ac_python.m4 \
 	$(top_srcdir)/config/m4/ac_python_module_with_version.m4 \
+	$(top_srcdir)/config/m4/ac_python_nosetests.m4 \
 	$(top_srcdir)/config/m4/ac_python_ogr.m4 \
 	$(top_srcdir)/config/m4/ac_python_sphinx.m4 \
 	$(top_srcdir)/config/m4/ac_search_lib.m4 \
@@ -1454,6 +1455,7 @@ am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
 distcleancheck_listfiles = find . -type f -print
 ACLOCAL = @ACLOCAL@
 AFIDS_DATA = @AFIDS_DATA@
+AFIDS_DATA_ABS = @AFIDS_DATA_ABS@
 AFIDS_PREFIX = @AFIDS_PREFIX@
 AMTAR = @AMTAR@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
@@ -1573,6 +1575,7 @@ SWIG_PYTHON_OPT = @SWIG_PYTHON_OPT@
 THIRDPARTY = @THIRDPARTY@
 VERSION = @VERSION@
 VICAR_GDALPLUGIN_HOME = @VICAR_GDALPLUGIN_HOME@
+VICAR_GDALPLUGIN_HOME_ABS = @VICAR_GDALPLUGIN_HOME_ABS@
 VICAR_RTL_BUILD_DEPEND = @VICAR_RTL_BUILD_DEPEND@
 VICAR_RTL_CFLAGS = @VICAR_RTL_CFLAGS@
 VICAR_RTL_LIBS = @VICAR_RTL_LIBS@
@@ -1595,6 +1598,7 @@ build = @build@
 build_alias = @build_alias@
 build_cpu = @build_cpu@
 build_os = @build_os@
+build_python = @build_python@
 build_vendor = @build_vendor@
 builddir = @builddir@
 datadir = @datadir@

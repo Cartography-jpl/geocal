@@ -62,13 +62,21 @@ fi
 #if test "$build_gdal" = "yes"; then
 #  AC_GEOS(required, $2, default_search)
 #  AC_OGDI(required, $2, default_search)
+#  AC_EXPAT(required, $2, default_search)
+#  AC_OPENJPEG(required, $2, default_search)
 #else # Not building GDAL
   AM_CONDITIONAL([HAVE_GEOS], [false])
   AM_CONDITIONAL([HAVE_OGDI], [false])
+  AM_CONDITIONAL([HAVE_EXPAT], [false])
+  AM_CONDITIONAL([HAVE_OPENJPEG], [false])
   AM_CONDITIONAL([BUILD_GEOS], [false])
   AM_CONDITIONAL([BUILD_OGDI], [false])
+  AM_CONDITIONAL([BUILD_EXPAT], [false])
+  AM_CONDITIONAL([BUILD_OPENJPEG], [false])
   build_geos="no"
   build_ogdi="no"
+  build_expat="no"
+  build_openjpeg="yes"
 #fi # End if/else building GDAL
 AM_CONDITIONAL([HAVE_GDAL], [test "$have_gdal" = "yes"])
 AM_CONDITIONAL([BUILD_GDAL], [test "$build_gdal" = "yes"])

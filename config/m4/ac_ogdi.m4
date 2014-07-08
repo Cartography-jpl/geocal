@@ -19,6 +19,7 @@ if test "x$want_ogdi" = "xyes"; then
         if test "$ac_ogdi_path" != ""; then
             OGDI_LIBS="-L$ac_ogdi_path/lib -logdi"
             OGDI_CFLAGS="-I$ac_ogdi_path/include"
+	    OGDI_PREFIX="$ac_ogdi_path"
             succeeded=yes
         else
 	    AC_SEARCH_LIB([OGDI], [ogdi], , [ecs.h], ,
@@ -31,6 +32,7 @@ if test "x$want_ogdi" = "xyes"; then
                 AC_MSG_RESULT([yes])
                 AC_SUBST(OGDI_CFLAGS)
                 AC_SUBST(OGDI_LIBS)
+                AC_SUBST(OGDI_PREFIX)
                 AC_DEFINE(HAVE_OGDI,,[Defined if we have Ogdi])
                 have_ogdi="yes"
         fi

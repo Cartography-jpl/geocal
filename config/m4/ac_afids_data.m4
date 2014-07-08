@@ -48,7 +48,9 @@ if test "x$want_afids_data" = "xyes"; then
                 AC_MSG_RESULT([no])
         else
                 AC_MSG_RESULT([yes])
+		AFIDS_DATA_ABS=`eval echo ${AFIDS_DATA}`
                 AC_SUBST(AFIDS_DATA)
+                AC_SUBST(AFIDS_DATA_ABS)
                 have_afids_data="yes"
         fi
 fi

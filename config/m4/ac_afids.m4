@@ -39,7 +39,7 @@ if test "x$want_afids" = "xyes"; then
                 AC_MSG_RESULT([no])
         else
                 AC_MSG_RESULT([yes])
-                AC_SUBST(AFIDS_PREFIX)
+                AC_SUBST([AFIDS_PREFIX])
                 have_afids="yes"
         fi
 fi

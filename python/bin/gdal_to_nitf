@@ -71,9 +71,9 @@ with NamedTemporaryFile() as tmp:
         else:
             cmd.extend(["-ot", "UInt16"])
 
-    cmd.extend([args.input_file, "foo.vrt"])
+    cmd.extend([args.input_file, tmp.name])
     subprocess.check_call(cmd)
-    fvrt = GdalRasterImage("foo.vrt")
+    fvrt = GdalRasterImage(tmp.name)
     creation_option = []
     if(fin.raster_image(0).has_rpc):
         if(fin.raster_image(0).rpc.rpc_type == Rpc.RPC_A):
@@ -123,7 +123,7 @@ with NamedTemporaryFile() as tmp:
     if(args.quiet):
         cmd.append("-q")
     cmd.extend(creation_option)
-    cmd.append("foo.vrt")
+    cmd.append(tmp.name)
     cmd.append(args.output_nitf)
     subprocess.check_call(cmd)
     if(not args.keep_aux):

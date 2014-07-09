@@ -90,6 +90,10 @@ log = logging.getLogger("geocal-python.sba")
 
 igc = read_shelve(args.igc_in)
 tpcol = read_shelve(args.tpcol_in)
+
+if(len(tpcol) < 1):
+    raise RuntimeException("Need to have at least one tiepoint")
+
 if(args.dem):
     dem = read_shelve(args.dem)
 else:

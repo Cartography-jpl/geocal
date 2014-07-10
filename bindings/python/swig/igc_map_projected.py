@@ -133,16 +133,16 @@ class IgcMapProjected(geocal_swig.calc_raster.CalcRaster):
 
     To do this we do two steps:
 
-    1. We calculate roughly what the difference in resolution is between
-    the original data and final MapInfo. We do this by looking at the
-    center pixel of the original data and the pixel +1 in line and sample.
-    We then use RasterAveraged to average the original data to roughly the
+    We calculate roughly what the difference in resolution is between the
+    original data and final MapInfo. We do this by looking at the center
+    pixel of the original data and the pixel +1 in line and sample. We
+    then use RasterAveraged to average the original data to roughly the
     resolution of the final MapInfo. If the final MapInfo is near the same
     resolution as the original, or if it has a higher resolution, then we
     don't do any averaging. Alternatively, you can pass in the averaging
     factor (include a value of 1 which turns this behavior off).
 
-    2. We then interpolate the possibly averaged data to the final
+    We then interpolate the possibly averaged data to the final
     projection.
 
     It is ok if the final MapInfo contains areas outside of the original
@@ -254,16 +254,16 @@ class IgcMapProjectedMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMult
 
     To do this we do two steps:
 
-    1. We calculate roughly what the difference in resolution is between
-    the original data and final MapInfo. We do this by looking at the
-    center pixel of the original data and the pixel +1 in line and sample.
-    We then use RasterAveraged to average the original data to roughly the
+    We calculate roughly what the difference in resolution is between the
+    original data and final MapInfo. We do this by looking at the center
+    pixel of the original data and the pixel +1 in line and sample. We
+    then use RasterAveraged to average the original data to roughly the
     resolution of the final MapInfo. If the final MapInfo is near the same
     resolution as the original, or if it has a higher resolution, then we
     don't do any averaging. Alternatively, you can pass in the averaging
     factor (include a value of 1 which turns this behavior off).
 
-    2. We then interpolate the possibly averaged data to the final
+    We then interpolate the possibly averaged data to the final
     projection.
 
     It is ok if the final MapInfo contains areas outside of the original

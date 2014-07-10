@@ -39,9 +39,19 @@ Options:
        matching or get all the way down to full resolution data. Useful
        for difficult to match imagery. [default: 0]
 
+  --base-image-index=n
+       The image to consider the base image in matching. [default: 0]
+
   --gcp
        Create GCPs, which requires the additional arguments of a reference
        image.
+
+  --map-info=f
+       Use the supplied map information (either a MapInfo, or a RasterImage 
+       with a MapInfo). This is used to project to the surface before matching, 
+       useful for matching data that is from different enough angles or 
+       resolution that matching the raw images will fail. See also 
+       --project-surface that automatically finds the map info to use.
 
   --max-ground-sigma=d
        How far off the various matched points can miss when intersecting
@@ -66,6 +76,13 @@ Options:
        DEM to use with the reference image specified as file:key. 
        If not specified, we use the DEM from the first IGC.
 
+  --project-surface
+       This is used to project to the surface before matching, 
+       useful for matching data that is from different enough angles or 
+       resolution that matching the raw images will fail. We use a geographic
+       projection that matches the resolution of the center pixel of the 
+       base image. See also --map-info option.
+
   --verbose
        Print more information as we run.
 
@@ -81,6 +98,19 @@ if(args.number_process > 1):
     pool = Pool(args.number_process)
 
 igc = read_shelve(args.igc)
+if(args.map_info):
+    m = read_shelve(args.map_info)
+    if(isinstance(m, MapInfo)):
+        mi = m
+    else:
+        mi = m.map_info
+elif(args.project_surface):
+    ig_base = igc.image_ground_connection(args.base_image_index)
+    mibase = cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
+    mi = ig_base.cover(mibase)
+else:
+    mi = None
+
 if(args.gcp):
     if(args.reference_dem):
         dem = read_shelve(args.reference_dem)
@@ -91,6 +121,8 @@ if(args.gcp):
                                    avg_level = args.avg_level)
 else:
     tpcollect = TiePointCollect(igc, avg_level = args.avg_level,
+                                map_info = mi,
+                                base_image_index = args.base_image_index,
                                 max_ground_covariance = 
                                 args.max_ground_sigma ** 2)
 maxnumx = int(igc.image(0).number_line / args.min_grid_size)

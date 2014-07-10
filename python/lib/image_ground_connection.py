@@ -113,7 +113,7 @@ class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
                                 self.image_mask, self.ground_mask, 
                                 self.fit_height_offset)
 
-def _view_angle(self, image_coordinate, delta_h = 100):
+def _view_angle(self, image_coordinate = None, delta_h = 100):
     '''This return the zenith and azimuth view angles for a particular
     image coordinate as seen on the surface.
 
@@ -128,8 +128,13 @@ def _view_angle(self, image_coordinate, delta_h = 100):
     close to a straight line, meaning that in most cases the size of delta_h
     shouldn't change the results much.
 
+    The center of the image is used if you don't supply image coordinates.
+
     The zenith and azimuth angles are return in that order, in degrees.
     '''
+    if(image_coordinate is None):
+        image_coordinate = ImageCoordinate(self.number_line / 2.0,
+                                           self.number_sample / 2.0)
     gc1 = self.ground_coordinate(image_coordinate)
     h = gc1.height_reference_surface
     d = SimpleDem(h + delta_h)

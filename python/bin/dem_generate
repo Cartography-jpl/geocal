@@ -53,6 +53,9 @@ Options:
        The buffer to use between tiles, so we have enough data to interpolate
        at the edge of a tile. [default: 5]
 
+  --image-matcher=f
+       Use the supplied image matcher.
+
   --interpolation-method=s
        Interpolation method to use for filling in missing data. This should
        be one of nearest, linear, cubic. [default: linear]
@@ -100,11 +103,8 @@ elif(args.map_info_cover):
     midem = igc1.cover(midem, args.boundary)
     midem = midem.intersection(igc2.cover(midem, args.boundary))
 else:
-    mibase = cib01_mapinfo()
-    resbase = mibase.resolution_meter
-    miscale = mibase.scale(args.resolution / resbase,
-                           args.resolution / resbase)
-    midem = igc1.cover(miscale, args.boundary)
+    mibase = cib01_mapinfo(desired_resolution = args.resolution)
+    midem = igc1.cover(mibase, args.boundary)
     midem = midem.intersection(igc2.cover(midem, args.boundary))
 
 # Set up to read surface data, if we have it.
@@ -126,7 +126,9 @@ if(args.average):
                                         args.average)
 
 # Set up image matcher
-if(args.airmspi_image_match):
+if(args.image_matcher):
+    im = read_shelve(args.image_matcher)
+elif(args.airmspi_image_match):
     im = CcorrLsmMatcher(CcorrMatcher(), LsmMatcher(11, 11, 5, 0.3, 0.5, 2.0))
 else:
     im = CcorrLsmMatcher()

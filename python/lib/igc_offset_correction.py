@@ -100,7 +100,8 @@ class IgcOffsetCorrection(IgcCollection):
     def parameter(self):
         '''Value of parameters controlling mapping to and from image 
         coordinates'''
-        par = [(self.refraction.index_refraction_surface - 1.00027) * 1e5]
+        par = [ self.cam.line_pitch, self.cam.sample_pitch,
+                (self.refraction.index_refraction_surface - 1.00027) * 1e5]
         return np.append(self.orbit.parameter, par) 
 
     @parameter.setter
@@ -108,7 +109,9 @@ class IgcOffsetCorrection(IgcCollection):
         '''Value of parameters controlling mapping to and from image 
         coordinates'''
         self._igc_cache = [None] * self.number_image
-        self.orbit.parameter = value[0:-1]
+        self.orbit.parameter = value[0:-3]
+        self.cam.line_pitch = value[-3]
+        self.cam.sample_pitch = value[-2]
         ref_par = value[-1]
         self.refraction.index_refraction_surface = 1.00027 + 1e-5 * ref_par
 
@@ -221,7 +224,35 @@ class IgcOffsetCorrection(IgcCollection):
                                           self.refraction),
                                          att_eps))
             orb.parameter = p0
-            ref_index = len(p0) + 0
+            line_pitch_index = len(p0) + 0
+            sample_pitch_index = len(p0) + 1
+            ref_index = len(p0) + 2
+            j = self.parameter_index_to_subset_index(line_pitch_index)
+            if(j is not None):
+                line_pitch_eps = 0.01 * self.camera.line_pitch
+                cam = QuaternionCamera(self.cam)
+                cam.line_pitch = cam.line_pitch + line_pitch_eps
+                cache["igc"].append((j,OrbitDataImageGroundConnection
+                                     (orb.orbit_data(tm), cam, 
+                                      self.demv,
+                                      self.image(image_index),
+                                      self.image_title(image_index),
+                                      self.refraction),
+                                     line_pitch_eps))
+
+            j = self.parameter_index_to_subset_index(sample_pitch_index)
+            if(j is not None):
+                sample_pitch_eps = 0.01 * self.camera.sample_pitch
+                cam = QuaternionCamera(self.cam)
+                cam.sample_pitch = cam.sample_pitch + sample_pitch_eps
+                cache["igc"].append((j,OrbitDataImageGroundConnection
+                                     (orb.orbit_data(tm), cam, 
+                                      self.demv,
+                                      self.image(image_index),
+                                      self.image_title(image_index),
+                                      self.refraction),
+                                     sample_pitch_eps))
+            
             j = self.parameter_index_to_subset_index(ref_index)
             if(j is not None):
                 ref_eps = 0.1

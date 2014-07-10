@@ -27,11 +27,17 @@ def _write_cib01_mapinfo():
         cPickle.dump(cib01_data().map_info, f, cPickle.HIGHEST_PROTOCOL)
 
 
-def cib01_mapinfo():
+def cib01_mapinfo(desired_resolution = None):
     '''This gets the CIB 1 meter MapInfo. This is useful when we don't
     have the CIB 1 data available, but need a reasonable 1 meter
-    MapInfo'''
+    MapInfo. You can optionally supply a desired resolution, to scale the 
+    mapinfo. '''
     with open(os.path.dirname(__file__) + "/cib01_mapinfo.dat") as f:
-        return cPickle.load(f)
+        res = cPickle.load(f)
+    if(desired_resolution):
+        resbase = res.resolution_meter
+        res = res.scale(desired_resolution / resbase,
+                        desired_resolution / resbase)
+    return res
 
 

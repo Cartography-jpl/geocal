@@ -260,9 +260,7 @@ f = None
 d = mmap_file("dem_generated_%dm_nofill.img" % dem_resolution)
 h = np.median(d[d > -9999])
 dm = SimpleDem(float(h))
-mi = cib01_mapinfo()
-resbase = mi.resolution_meter
-mi = mi.scale(10.0 / resbase, 10.0 / resbase)
+mi = cib01_mapinfo(desired_resolution = 10.0)
 igc = read_shelve(igc_to_use)
 igc_initial = read_shelve(dbfile + "igc_initial")
 igc0 = igc.image_ground_connection(0)

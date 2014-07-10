@@ -102,10 +102,8 @@ elif(args.bounding_box):
         mi = mp.raster_image(0).map_info
     mp = None
 else:
-    mibase = cib01_mapinfo()
-    resbase = mibase.resolution_meter
-    miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
-    mi = igc.cover(miscale)
+    mibase = cib01_mapinfo(desired_resolution = args.resolution)
+    mi = igc.cover(mibase)
     if(igc.image):
         mp = IgcMapProjected(mi, igc, 1, -1, False)
         mi = mp.map_info

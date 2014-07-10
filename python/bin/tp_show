@@ -39,7 +39,7 @@ igc = read_shelve(args.igc)
 tpcol = read_shelve(args.tiepoint_col)
 tp = tpcol[args.tiepoint_index]
 if(args.ref_image):
-    ref_image = shelve_read(args.ref_image)
+    ref_image = read_shelve(args.ref_image)
 else:
     ref_image = None
 

@@ -103,11 +103,8 @@ elif(args.map_info_cover):
     midem = igc1.cover(midem, args.boundary)
     midem = midem.intersection(igc2.cover(midem, args.boundary))
 else:
-    mibase = cib01_mapinfo()
-    resbase = mibase.resolution_meter
-    miscale = mibase.scale(args.resolution / resbase,
-                           args.resolution / resbase)
-    midem = igc1.cover(miscale, args.boundary)
+    mibase = cib01_mapinfo(desired_resolution = args.resolution)
+    midem = igc1.cover(mibase, args.boundary)
     midem = midem.intersection(igc2.cover(midem, args.boundary))
 
 # Set up to read surface data, if we have it.

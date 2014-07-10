@@ -123,7 +123,7 @@ with NamedTemporaryFile() as tmp:
     if(args.quiet):
         cmd.append("-q")
     cmd.extend(creation_option)
-    cmd.append(tmp.name)
+    cmd.append("foo.vrt")
     cmd.append(args.output_nitf)
     subprocess.check_call(cmd)
     if(not args.keep_aux):

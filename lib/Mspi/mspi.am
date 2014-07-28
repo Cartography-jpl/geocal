@@ -7,6 +7,8 @@ geocalinc_HEADERS+= @srcmspi@/mspi_paraxial_transform.h
 libgeocal_la_SOURCES+= @srcmspi@/mspi_paraxial_transform.cc
 geocalinc_HEADERS+= @srcmspi@/mspi_camera.h
 libgeocal_la_SOURCES+= @srcmspi@/mspi_camera.cc
+geocalinc_HEADERS+= @srcmspi@/air_mspi_orbit.h
+libgeocal_la_SOURCES+= @srcmspi@/air_mspi_orbit.cc
 
 SWIG_SRC += @swigsrc@/mspi_config_file_wrap.cc
 SWIG_SRC += @swigsrc@/mspi_paraxial_transform_wrap.cc
@@ -16,6 +18,7 @@ geocal_test_all_SOURCES+= @srcmspi@/ifstream_cs_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/mspi_config_file_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/mspi_paraxial_transform_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/mspi_camera_test.cc
+geocal_test_all_SOURCES+= @srcmspi@/air_mspi_orbit_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcmspi@
 

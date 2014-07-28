@@ -228,7 +228,7 @@ void MapInfo::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");
   Os << "Coordinate: \n";
-  opad << coordinate_converter();
+  opad << coordinate_converter() << "\n";
   opad.strict_sync();
   Os << "ULC:       (" << ulc_x() << ", " << ulc_y() << ")\n"
      << "LRC:       (" << lrc_x() << ", " << lrc_y() << ")\n"

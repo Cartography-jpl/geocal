@@ -207,4 +207,11 @@ def quaternion_to_matrix(*args):
     """
   return _geocal_quaternion.quaternion_to_matrix(*args)
 
+def matrix_to_quaternion(*args):
+  """
+    boost::math::quaternion<double> GeoCal::matrix_to_quaternion(const double m[3][3])
+
+    """
+  return _geocal_quaternion.matrix_to_quaternion(*args)
+
 

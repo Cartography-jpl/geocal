@@ -6700,6 +6700,43 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_matrix_to_quaternion(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< boost::math::quaternion< double > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double>(swig_obj[0]);
+      if(!numpy1.obj)
+      return NULL;
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    try {
+      result = GeoCal::matrix_to_quaternion((blitz::Array< double,2 > const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< double >(static_cast< const boost::math::quaternion< double >& >(result))), SWIGTYPE_p_boost__math__quaternionT_double_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -6767,6 +6804,10 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This is an \"active\" transformation. For \"passive\", just reverse\n"
 		"the sign of A \n"
+		""},
+	 { (char *)"matrix_to_quaternion", (PyCFunction)_wrap_matrix_to_quaternion, METH_O, (char *)"\n"
+		"boost::math::quaternion<double> GeoCal::matrix_to_quaternion(const double m[3][3])\n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

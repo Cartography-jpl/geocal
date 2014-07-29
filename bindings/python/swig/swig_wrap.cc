@@ -119,6 +119,7 @@ extern "C" {
   void init_mspi_paraxial_transform(void);
   void init_mspi_camera(void);
   void init_air_mspi_orbit(void);
+  void init_ground_mspi_orbit(void);
 #ifdef HAVE_CARTO
   void init_eci_tod_burl(void);
 #endif
@@ -328,6 +329,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_mspi_paraxial_transform", init_mspi_paraxial_transform);
   init_extension_module(package, "_mspi_camera", init_mspi_camera);
   init_extension_module(package, "_air_mspi_orbit", init_air_mspi_orbit);
+  init_extension_module(package, "_ground_mspi_orbit", init_ground_mspi_orbit);
 #ifdef HAVE_CARTO
   init_extension_module(package, "_eci_tod_burl", init_eci_tod_burl);
 #endif

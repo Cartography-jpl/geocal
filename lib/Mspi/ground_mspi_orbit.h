@@ -4,6 +4,20 @@
 
 namespace GeoCal {
 /****************************************************************//**
+  This is a look vector in LocalNorth coordinates
+*******************************************************************/
+class LnLookVector : public LookVector {
+public:
+  LnLookVector() {}
+  LnLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
+  LnLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+  LnLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+
+  virtual ~LnLookVector() {}
+  virtual void print(std::ostream& Os) const;
+};
+
+/****************************************************************//**
   Minor adaption of QuaternionOrbitData to match GroundMspiOrbit. 
   The only change here is that we keep some of the intermediate
   quaternions to use in calculating view geometry.
@@ -14,7 +28,10 @@ public:
   GroundMspiOrbitData(const Time& Tm, const GroundCoordinate& Pos,
 		      double Azimuth, double Zenith);
   virtual ~GroundMspiOrbitData() {}
+  LnLookVector ln_look_vector(const ScLookVector& Sl) const;
   void print(std::ostream& Os) const;
+private:
+  boost::math::quaternion<double> sc_to_ln;
 };
 
 /****************************************************************//**

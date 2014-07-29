@@ -48,7 +48,8 @@ void MspiCamera::read_config_file(const std::string& File_name)
 		       QuaternionCamera::INCREASE_IS_NEGATIVE);
   // This doesn't get used for anything yet, so don't bother reading this.
   // inversion_ = c.value<int>("inversion")),
-
+  granule_id_ = c.value<std::string>("granule_id");
+  
 //--------------------------------------------------------------------------
 /// Get mapping from band to row number
 //--------------------------------------------------------------------------
@@ -185,3 +186,18 @@ void MspiCamera::print(std::ostream& Os) const
      << "  File name: " << file_name() << "\n";
 }
 
+//-----------------------------------------------------------------------
+/// Return the band number for the given row. 
+//-----------------------------------------------------------------------
+
+int MspiCamera::band_number(int Row_number) const
+{
+  std::vector<int>::const_iterator f = 
+    std::find(row_number_.begin(), row_number_.end(), Row_number);
+  if(f == row_number_.end()) {
+    Exception e("Row number not assigned to camera model band: ");
+    e << Row_number;
+    throw e;
+  }
+  return (int)(f - row_number_.begin());
+}

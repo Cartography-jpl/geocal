@@ -18,6 +18,13 @@ BOOST_AUTO_TEST_CASE(orbit_data_test)
   CartesianInertialLookVector lv = od.ci_look_vector(ScLookVector(0.1,0.2,0.3));
   for(int i = 0; i < 3; ++i)
     BOOST_CHECK_CLOSE(lv.direction()[i], lv_exp.direction()[i], 1e-4);
+  LnLookVector ln_lv_exp(-2.59612460458973348665e-01, 
+			 1.75068293787869477818e-03,
+			 2.69440727217859610221e-01);
+
+  LnLookVector ln_lv = od.ln_look_vector(ScLookVector(0.1,0.2,0.3));
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE(ln_lv.direction()[i], ln_lv_exp.direction()[i], 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(basic_test)

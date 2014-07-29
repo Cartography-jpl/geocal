@@ -120,6 +120,32 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.orbit
 import geocal_swig.generic_object
+class LnLookVector(object):
+    """
+    This is a look vector in LocalNorth coordinates.
+
+    C++ includes: ground_mspi_orbit.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::LnLookVector::LnLookVector(const boost::math::quaternion< double > &V)
+
+        """
+        _ground_mspi_orbit.LnLookVector_swiginit(self,_ground_mspi_orbit.new_LnLookVector(*args))
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+
+    __swig_destroy__ = _ground_mspi_orbit.delete_LnLookVector
+LnLookVector.__str__ = new_instancemethod(_ground_mspi_orbit.LnLookVector___str__,None,LnLookVector)
+LnLookVector_swigregister = _ground_mspi_orbit.LnLookVector_swigregister
+LnLookVector_swigregister(LnLookVector)
+
 class GroundMspiOrbitData(geocal_swig.orbit.QuaternionOrbitData):
     """
     Minor adaption of QuaternionOrbitData to match GroundMspiOrbit.
@@ -138,7 +164,15 @@ class GroundMspiOrbitData(geocal_swig.orbit.QuaternionOrbitData):
         Constructor. The azimuth and zenith angles should be in degrees. 
         """
         _ground_mspi_orbit.GroundMspiOrbitData_swiginit(self,_ground_mspi_orbit.new_GroundMspiOrbitData(*args))
+    def ln_look_vector(self, *args):
+        """
+        LnLookVector GroundMspiOrbitData::ln_look_vector(const ScLookVector &Sl) const
+        Convert from ScLookVector to LnLookVector. 
+        """
+        return _ground_mspi_orbit.GroundMspiOrbitData_ln_look_vector(self, *args)
+
     __swig_destroy__ = _ground_mspi_orbit.delete_GroundMspiOrbitData
+GroundMspiOrbitData.ln_look_vector = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbitData_ln_look_vector,None,GroundMspiOrbitData)
 GroundMspiOrbitData_swigregister = _ground_mspi_orbit.GroundMspiOrbitData_swigregister
 GroundMspiOrbitData_swigregister(GroundMspiOrbitData)
 

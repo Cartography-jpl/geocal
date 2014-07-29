@@ -2,6 +2,15 @@
 #include "constant.h"
 using namespace GeoCal;
 
+void LnLookVector::print(std::ostream& Os) const
+{
+  boost::array<double, 3> d = direction();
+  Os << "Look vector in local north: \n"
+     << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
+     << "  length: " << length() << " m\n";
+}
+
+
 //-----------------------------------------------------------------------
 /// Constructor. The azimuth and zenith angles should be in degrees.
 //-----------------------------------------------------------------------
@@ -11,8 +20,7 @@ GroundMspiOrbitData::GroundMspiOrbitData
  double Azimuth, double Zenith)
 {
   // Space craft to local north
-  boost::math::quaternion<double> sc_to_ln
-    = quat_rot("zy", (90 - Azimuth) * Constant::deg_to_rad,
+  sc_to_ln = quat_rot("zy", (90 - Azimuth) * Constant::deg_to_rad,
 	       -Zenith * Constant::deg_to_rad);
 
   // This is labeled in the old code as "local north to ECI". However
@@ -34,6 +42,16 @@ GroundMspiOrbitData::GroundMspiOrbitData
   boost::math::quaternion<double>  sc_to_cf = ln_to_cf * sc_to_ln;
   boost::array<double, 3> vel = {{0,0,0}};
   initialize(Tm, Pos.convert_to_cf(), vel, sc_to_cf);
+}
+
+//-----------------------------------------------------------------------
+/// Convert from ScLookVector to LnLookVector.
+//-----------------------------------------------------------------------
+
+LnLookVector GroundMspiOrbitData::ln_look_vector(const ScLookVector& Sl) const
+{
+  return LnLookVector(sc_to_ln * Sl.look_quaternion() *
+		      conj(sc_to_ln));
 }
 
 void GroundMspiOrbitData::print(std::ostream& Os) const {

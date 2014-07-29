@@ -5454,6 +5454,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MspiCamera__v_granule_id(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiCamera *arg1 = (GeoCal::MspiCamera *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiCamera const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiCamera__v_granule_id" "', argument " "1"" of type '" "GeoCal::MspiCamera const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::MspiCamera const *)arg1)->granule_id();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MspiCamera__v_epsilon(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiCamera *arg1 = (GeoCal::MspiCamera *) 0 ;
@@ -5805,6 +5848,56 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MspiCamera_band_number(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiCamera *arg1 = (GeoCal::MspiCamera *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiCamera const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  int result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"MspiCamera_band_number",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiCamera_band_number" "', argument " "1"" of type '" "GeoCal::MspiCamera const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MspiCamera_band_number" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = (int)((GeoCal::MspiCamera const *)arg1)->band_number(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MspiCamera___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiCamera *arg1 = (GeoCal::MspiCamera *) 0 ;
@@ -5918,6 +6011,10 @@ static PyMethodDef SwigMethods[] = {
 		"const std::string& GeoCal::MspiCamera::file_name() const\n"
 		"File name for MspiConfigFile. \n"
 		""},
+	 { (char *)"MspiCamera__v_granule_id", (PyCFunction)_wrap_MspiCamera__v_granule_id, METH_O, (char *)"\n"
+		"const std::string& GeoCal::MspiCamera::granule_id() const\n"
+		"Granule ID. This is metadata, found in the configuration file. \n"
+		""},
 	 { (char *)"MspiCamera__v_epsilon", (PyCFunction)_wrap_MspiCamera__v_epsilon, METH_O, (char *)"\n"
 		"double GeoCal::MspiCamera::epsilon() const\n"
 		"Epsilon angle, in radians. \n"
@@ -5952,6 +6049,10 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This ends up being used in other places (e.g., the \"Row Table\" in\n"
 		"L1B1 files), so we make this available. \n"
+		""},
+	 { (char *)"MspiCamera_band_number", _wrap_MspiCamera_band_number, METH_VARARGS, (char *)"\n"
+		"int MspiCamera::band_number(int Row_number) const\n"
+		"Return the band number for the given row. \n"
 		""},
 	 { (char *)"MspiCamera___str__", (PyCFunction)_wrap_MspiCamera___str__, METH_O, NULL},
 	 { (char *)"delete_MspiCamera", (PyCFunction)_wrap_delete_MspiCamera, METH_O, (char *)"\n"

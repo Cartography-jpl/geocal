@@ -8,14 +8,28 @@
 %}
 
 %base_import(orbit)
+%base_import(look_vector)
 
 %geocal_shared_ptr(GeoCal::GroundMspiOrbitData);
+%geocal_shared_ptr(GeoCal::LnLookVector);
 %geocal_shared_ptr(GeoCal::GroundMspiOrbit);
 namespace GeoCal {
+
+class LnLookVector : public LookVector {
+public:
+  LnLookVector();
+  LnLookVector(double x, double y, double z);
+  LnLookVector(const boost::array<double, 3>& Lv);
+  std::string print_to_string() const;
+  %pickle_init(1, self.look_vector[0], self.look_vector[1],
+	       self.look_vector[2])
+};
+
 class GroundMspiOrbitData : public QuaternionOrbitData {
 public:
   GroundMspiOrbitData(const Time& Tm, const GroundCoordinate& Pos,
 		      double Azimuth, double Zenith);
+  LnLookVector ln_look_vector(const ScLookVector& Sl) const;
 };
 
 class GroundMspiOrbit : public Orbit {

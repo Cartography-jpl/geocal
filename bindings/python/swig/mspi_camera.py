@@ -160,6 +160,17 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def file_name(self):
         return self._v_file_name()
 
+    def _v_granule_id(self):
+        """
+        const std::string& GeoCal::MspiCamera::granule_id() const
+        Granule ID. This is metadata, found in the configuration file. 
+        """
+        return _mspi_camera.MspiCamera__v_granule_id(self)
+
+    @property
+    def granule_id(self):
+        return self._v_granule_id()
+
     def _v_epsilon(self):
         """
         double GeoCal::MspiCamera::epsilon() const
@@ -247,6 +258,13 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         """
         return _mspi_camera.MspiCamera_row_number(self, *args)
 
+    def band_number(self, *args):
+        """
+        int MspiCamera::band_number(int Row_number) const
+        Return the band number for the given row. 
+        """
+        return _mspi_camera.MspiCamera_band_number(self, *args)
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -257,6 +275,7 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     __swig_destroy__ = _mspi_camera.delete_MspiCamera
 MspiCamera.read_config_file = new_instancemethod(_mspi_camera.MspiCamera_read_config_file,None,MspiCamera)
 MspiCamera._v_file_name = new_instancemethod(_mspi_camera.MspiCamera__v_file_name,None,MspiCamera)
+MspiCamera._v_granule_id = new_instancemethod(_mspi_camera.MspiCamera__v_granule_id,None,MspiCamera)
 MspiCamera._v_epsilon = new_instancemethod(_mspi_camera.MspiCamera__v_epsilon,None,MspiCamera)
 MspiCamera._v_psi = new_instancemethod(_mspi_camera.MspiCamera__v_psi,None,MspiCamera)
 MspiCamera._v_theta = new_instancemethod(_mspi_camera.MspiCamera__v_theta,None,MspiCamera)
@@ -265,6 +284,7 @@ MspiCamera._v_pitch = new_instancemethod(_mspi_camera.MspiCamera__v_pitch,None,M
 MspiCamera._v_roll = new_instancemethod(_mspi_camera.MspiCamera__v_roll,None,MspiCamera)
 MspiCamera._v_boresight_angle = new_instancemethod(_mspi_camera.MspiCamera__v_boresight_angle,None,MspiCamera)
 MspiCamera.row_number = new_instancemethod(_mspi_camera.MspiCamera_row_number,None,MspiCamera)
+MspiCamera.band_number = new_instancemethod(_mspi_camera.MspiCamera_band_number,None,MspiCamera)
 MspiCamera.__str__ = new_instancemethod(_mspi_camera.MspiCamera___str__,None,MspiCamera)
 MspiCamera_swigregister = _mspi_camera.MspiCamera_swigregister
 MspiCamera_swigregister(MspiCamera)

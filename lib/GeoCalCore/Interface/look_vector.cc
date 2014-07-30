@@ -65,3 +65,27 @@ void CartesianFixedLookVector::print(std::ostream& Os) const
      << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
      << "  length: " << length() << " m\n";
 }
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+void LnLookVector::print(std::ostream& Os) const
+{
+  boost::array<double, 3> d = direction();
+  Os << "Look vector in local north coordinates: \n"
+     << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
+     << "  length: " << length() << " m\n";
+}
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+void DcsLookVector::print(std::ostream& Os) const
+{
+  boost::array<double, 3> d = direction();
+  Os << "Look vector in Detector Coordinate System coordinates: \n"
+     << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
+     << "  length: " << length() << " m\n";
+}

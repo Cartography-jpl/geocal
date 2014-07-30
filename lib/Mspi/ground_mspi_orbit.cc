@@ -2,15 +2,6 @@
 #include "constant.h"
 using namespace GeoCal;
 
-void LnLookVector::print(std::ostream& Os) const
-{
-  boost::array<double, 3> d = direction();
-  Os << "Look vector in local north: \n"
-     << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
-     << "  length: " << length() << " m\n";
-}
-
-
 //-----------------------------------------------------------------------
 /// Constructor. The azimuth and zenith angles should be in degrees.
 //-----------------------------------------------------------------------

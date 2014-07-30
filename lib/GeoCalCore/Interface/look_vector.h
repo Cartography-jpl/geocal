@@ -159,6 +159,74 @@ public:
   virtual void print(std::ostream& Os) const;
 };
 
+/****************************************************************//**
+  This is a look vector in LocalNorth coordinates
+*******************************************************************/
+
+class LnLookVector : public LookVector {
+public:
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVector() {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+
+  virtual ~LnLookVector() {}
+  virtual void print(std::ostream& Os) const;
+};
+
+/****************************************************************//**
+  This is a look vector in Detector Coordinate System coordinates
+*******************************************************************/
+
+class DcsLookVector : public LookVector {
+public:
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  DcsLookVector() {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  DcsLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  DcsLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  DcsLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+
+  virtual ~DcsLookVector() {}
+  virtual void print(std::ostream& Os) const;
+};
+
 }
 
 #endif

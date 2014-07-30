@@ -207,6 +207,16 @@ public:
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
 
+//-----------------------------------------------------------------------
+/// Convert Spacecraft look vector to the look vector in Detector
+/// Coordinate System.
+//-----------------------------------------------------------------------
+
+  virtual DcsLookVector dcs_look_vector(const ScLookVector& Sl)
+    const 
+  { return DcsLookVector(conj(frame_to_sc_) * Sl.look_quaternion() *
+			 frame_to_sc_);
+  }
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
   virtual void print(std::ostream& Os) const;

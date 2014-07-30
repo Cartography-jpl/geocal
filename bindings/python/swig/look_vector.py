@@ -236,6 +236,58 @@ CartesianInertialLookVector.__str__ = new_instancemethod(_look_vector.CartesianI
 CartesianInertialLookVector_swigregister = _look_vector.CartesianInertialLookVector_swigregister
 CartesianInertialLookVector_swigregister(CartesianInertialLookVector)
 
+class LnLookVector(LookVector):
+    """
+    This is a look vector in LocalNorth coordinates.
+
+    C++ includes: look_vector.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::LnLookVector::LnLookVector(const boost::math::quaternion< double > &V)
+        Constructor. 
+        """
+        _look_vector.LnLookVector_swiginit(self,_look_vector.new_LnLookVector(*args))
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+
+    __swig_destroy__ = _look_vector.delete_LnLookVector
+LnLookVector.__str__ = new_instancemethod(_look_vector.LnLookVector___str__,None,LnLookVector)
+LnLookVector_swigregister = _look_vector.LnLookVector_swigregister
+LnLookVector_swigregister(LnLookVector)
+
+class DcsLookVector(LookVector):
+    """
+    This is a look vector in Detector Coordinate System coordinates.
+
+    C++ includes: look_vector.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::DcsLookVector::DcsLookVector(const boost::math::quaternion< double > &V)
+        Constructor. 
+        """
+        _look_vector.DcsLookVector_swiginit(self,_look_vector.new_DcsLookVector(*args))
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+
+    __swig_destroy__ = _look_vector.delete_DcsLookVector
+DcsLookVector.__str__ = new_instancemethod(_look_vector.DcsLookVector___str__,None,DcsLookVector)
+DcsLookVector_swigregister = _look_vector.DcsLookVector_swigregister
+DcsLookVector_swigregister(DcsLookVector)
+
 class CartesianFixedLookVector(LookVector):
     """
     This is a look vector in CartesianFixed coordinates.

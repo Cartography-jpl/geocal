@@ -12,6 +12,8 @@
 %geocal_shared_ptr(GeoCal::ScLookVector);
 %geocal_shared_ptr(GeoCal::CartesianInertialLookVector);
 %geocal_shared_ptr(GeoCal::CartesianFixedLookVector);
+%geocal_shared_ptr(GeoCal::LnLookVector);
+%geocal_shared_ptr(GeoCal::DcsLookVector);
 
 namespace GeoCal {
 class LookVector : public GenericObject {
@@ -42,6 +44,27 @@ public:
   %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])
 };
+
+class LnLookVector : public LookVector {
+public:
+  LnLookVector();
+  LnLookVector(double x, double y, double z);
+  LnLookVector(const boost::array<double, 3>& Lv);
+  std::string print_to_string() const;
+  %pickle_init(1, self.look_vector[0], self.look_vector[1],
+	       self.look_vector[2])
+};
+
+class DcsLookVector : public LookVector {
+public:
+  DcsLookVector();
+  DcsLookVector(double x, double y, double z);
+  DcsLookVector(const boost::array<double, 3>& Lv);
+  std::string print_to_string() const;
+  %pickle_init(1, self.look_vector[0], self.look_vector[1],
+	       self.look_vector[2])
+};
+
 
 // Handle returns as a argout
 

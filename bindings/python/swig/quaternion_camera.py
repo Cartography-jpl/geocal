@@ -286,6 +286,14 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def frame_to_sc(self, value):
       self._v_frame_to_sc(value)
 
+    def dcs_look_vector(self, *args):
+        """
+        virtual DcsLookVector GeoCal::QuaternionCamera::dcs_look_vector(const ScLookVector &Sl) const
+        Convert Spacecraft look vector to the look vector in Detector
+        Coordinate System. 
+        """
+        return _quaternion_camera.QuaternionCamera_dcs_look_vector(self, *args)
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -302,6 +310,7 @@ QuaternionCamera._v_frame_convention = new_instancemethod(_quaternion_camera.Qua
 QuaternionCamera._v_line_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_direction,None,QuaternionCamera)
 QuaternionCamera._v_sample_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_direction,None,QuaternionCamera)
 QuaternionCamera._v_frame_to_sc = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_to_sc,None,QuaternionCamera)
+QuaternionCamera.dcs_look_vector = new_instancemethod(_quaternion_camera.QuaternionCamera_dcs_look_vector,None,QuaternionCamera)
 QuaternionCamera_swigregister = _quaternion_camera.QuaternionCamera_swigregister
 QuaternionCamera_swigregister(QuaternionCamera)
 

@@ -220,8 +220,12 @@ public:
 
   virtual DcsLookVector dcs_look_vector(const FrameCoordinate& F, int Band) 
     const;
+  using Camera::sc_look_vector;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
+  virtual ScLookVector sc_look_vector(const DcsLookVector& Dlv) const
+  { return ScLookVector(frame_to_sc_ * Dlv.look_quaternion() * 
+			conj(frame_to_sc_));} 
   virtual void print(std::ostream& Os) const;
 protected:
 //-----------------------------------------------------------------------

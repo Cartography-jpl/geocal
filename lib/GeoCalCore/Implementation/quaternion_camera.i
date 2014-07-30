@@ -37,6 +37,7 @@ public:
 					   int Band) const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
+  virtual ScLookVector sc_look_vector(const DcsLookVector& Dlv) const;
   virtual DcsLookVector dcs_look_vector(const ScLookVector& Sl) const;
   virtual DcsLookVector dcs_look_vector(const FrameCoordinate& F, int Band) 
     const;

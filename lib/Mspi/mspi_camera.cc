@@ -46,8 +46,7 @@ void MspiCamera::read_config_file(const std::string& File_name)
   sample_direction_ = (c.value<int>("pixel_order") == 1 ? 
 		       QuaternionCamera::INCREASE_IS_POSITIVE :
 		       QuaternionCamera::INCREASE_IS_NEGATIVE);
-  // This doesn't get used for anything yet, so don't bother reading this.
-  // inversion_ = c.value<int>("inversion")),
+  inversion_ = c.value<int>("inversion");
   granule_id_ = c.value<std::string>("granule_id");
   
 //--------------------------------------------------------------------------

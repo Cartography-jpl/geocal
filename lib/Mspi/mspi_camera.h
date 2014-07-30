@@ -62,6 +62,13 @@ public:
   double psi() const {return psi_;}
 
 //-----------------------------------------------------------------------
+/// Indicate if the camera has "inversion" indicated in the
+/// configuration.
+//-----------------------------------------------------------------------
+
+  bool inversion() const { return inversion_ == -1; }
+
+//-----------------------------------------------------------------------
 /// Theta angle, in radians.
 //-----------------------------------------------------------------------
 
@@ -133,6 +140,7 @@ private:
   std::vector<int> row_number_;
   // Transformation to and from the paraxial coordinates
   boost::shared_ptr<MspiParaxialTransform> paraxial_transform_;
+  int inversion_;
 };
 }
 #endif

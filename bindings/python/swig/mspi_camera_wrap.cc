@@ -5090,6 +5090,13 @@ SWIG_From_std_string  (const std::string& s)
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
+SWIGINTERNINLINE PyObject*
+  SWIG_From_bool  (bool value)
+{
+  return PyBool_FromLong(value ? 1 : 0);
+}
+
+
 #include <limits.h>
 #if !defined(SWIG_NO_LLONG_MAX)
 # if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
@@ -5802,6 +5809,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MspiCamera__v_inversion(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiCamera *arg1 = (GeoCal::MspiCamera *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiCamera const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiCamera__v_inversion" "', argument " "1"" of type '" "GeoCal::MspiCamera const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::MspiCamera const *)arg1)->inversion();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MspiCamera_row_number(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiCamera *arg1 = (GeoCal::MspiCamera *) 0 ;
@@ -6046,6 +6096,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MspiCamera__v_boresight_angle", (PyCFunction)_wrap_MspiCamera__v_boresight_angle, METH_O, (char *)"\n"
 		"double GeoCal::MspiCamera::boresight_angle() const\n"
 		"Boresight angle, in radians. \n"
+		""},
+	 { (char *)"MspiCamera__v_inversion", (PyCFunction)_wrap_MspiCamera__v_inversion, METH_O, (char *)"\n"
+		"bool GeoCal::MspiCamera::inversion() const\n"
+		"Indicate if the camera has \"inversion\" indicated in the\n"
+		"configuration. \n"
 		""},
 	 { (char *)"MspiCamera_row_number", _wrap_MspiCamera_row_number, METH_VARARGS, (char *)"\n"
 		"int GeoCal::MspiCamera::row_number(int Band) const\n"

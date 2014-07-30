@@ -248,6 +248,18 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def boresight_angle(self):
         return self._v_boresight_angle()
 
+    def _v_inversion(self):
+        """
+        bool GeoCal::MspiCamera::inversion() const
+        Indicate if the camera has "inversion" indicated in the
+        configuration. 
+        """
+        return _mspi_camera.MspiCamera__v_inversion(self)
+
+    @property
+    def inversion(self):
+        return self._v_inversion()
+
     def row_number(self, *args):
         """
         int GeoCal::MspiCamera::row_number(int Band) const
@@ -283,6 +295,7 @@ MspiCamera._v_yaw = new_instancemethod(_mspi_camera.MspiCamera__v_yaw,None,MspiC
 MspiCamera._v_pitch = new_instancemethod(_mspi_camera.MspiCamera__v_pitch,None,MspiCamera)
 MspiCamera._v_roll = new_instancemethod(_mspi_camera.MspiCamera__v_roll,None,MspiCamera)
 MspiCamera._v_boresight_angle = new_instancemethod(_mspi_camera.MspiCamera__v_boresight_angle,None,MspiCamera)
+MspiCamera._v_inversion = new_instancemethod(_mspi_camera.MspiCamera__v_inversion,None,MspiCamera)
 MspiCamera.row_number = new_instancemethod(_mspi_camera.MspiCamera_row_number,None,MspiCamera)
 MspiCamera.band_number = new_instancemethod(_mspi_camera.MspiCamera_band_number,None,MspiCamera)
 MspiCamera.__str__ = new_instancemethod(_mspi_camera.MspiCamera___str__,None,MspiCamera)

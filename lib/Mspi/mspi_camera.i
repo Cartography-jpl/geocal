@@ -25,6 +25,7 @@ public:
   %python_attribute(pitch, double);
   %python_attribute(roll, double);
   %python_attribute(boresight_angle, double);
+  %python_attribute(inversion, bool);
   int row_number(int Band) const;
   int band_number(int Row_number) const;
   std::string print_to_string() const;

@@ -5113,7 +5113,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_GroundMspiOrbitData_ln_look_vector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_GroundMspiOrbitData_ln_look_vector__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::GroundMspiOrbitData *arg1 = (GeoCal::GroundMspiOrbitData *) 0 ;
   GeoCal::ScLookVector *arg2 = 0 ;
@@ -5124,10 +5124,9 @@ SWIGINTERN PyObject *_wrap_GroundMspiOrbitData_ln_look_vector(PyObject *SWIGUNUS
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::ScLookVector const > tempshared2 ;
-  PyObject *swig_obj[2] ;
   GeoCal::LnLookVector result;
   
-  if (!SWIG_Python_UnpackTuple(args,"GroundMspiOrbitData_ln_look_vector",2,2,swig_obj)) SWIG_fail;
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMspiOrbitData_t, 0 |  0 , &newmem);
@@ -5184,6 +5183,194 @@ SWIGINTERN PyObject *_wrap_GroundMspiOrbitData_ln_look_vector(PyObject *SWIGUNUS
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GroundMspiOrbitData_ln_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::GroundMspiOrbitData *arg1 = (GeoCal::GroundMspiOrbitData *) 0 ;
+  GeoCal::CartesianInertialLookVector *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GroundMspiOrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GroundMspiOrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertialLookVector const > tempshared2 ;
+  GeoCal::LnLookVector result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMspiOrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundMspiOrbitData_ln_look_vector" "', argument " "1"" of type '" "GeoCal::GroundMspiOrbitData const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMspiOrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMspiOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMspiOrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMspiOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMspiOrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianInertialLookVector *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianInertialLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GroundMspiOrbitData_ln_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GroundMspiOrbitData_ln_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVector > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVector > * >(argp2);
+        arg2 = const_cast< GeoCal::CartesianInertialLookVector * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::CartesianInertialLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVector > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::GroundMspiOrbitData const *)arg1)->ln_look_vector((GeoCal::CartesianInertialLookVector const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::LnLookVector > *smartresult = new boost::shared_ptr<  GeoCal::LnLookVector >(new GeoCal::LnLookVector((GeoCal::LnLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GroundMspiOrbitData_ln_look_vector__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::GroundMspiOrbitData *arg1 = (GeoCal::GroundMspiOrbitData *) 0 ;
+  GeoCal::CartesianFixedLookVector *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GroundMspiOrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GroundMspiOrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixedLookVector const > tempshared2 ;
+  GeoCal::LnLookVector result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMspiOrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundMspiOrbitData_ln_look_vector" "', argument " "1"" of type '" "GeoCal::GroundMspiOrbitData const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMspiOrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMspiOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMspiOrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMspiOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMspiOrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianFixedLookVector *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixedLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GroundMspiOrbitData_ln_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GroundMspiOrbitData_ln_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp2);
+        arg2 = const_cast< GeoCal::CartesianFixedLookVector * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::CartesianFixedLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::GroundMspiOrbitData const *)arg1)->ln_look_vector((GeoCal::CartesianFixedLookVector const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::LnLookVector > *smartresult = new boost::shared_ptr<  GeoCal::LnLookVector >(new GeoCal::LnLookVector((GeoCal::LnLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GroundMspiOrbitData_ln_look_vector(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"GroundMspiOrbitData_ln_look_vector",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_GroundMspiOrbitData_ln_look_vector__SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_2;
+    return _wrap_GroundMspiOrbitData_ln_look_vector__SWIG_1(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 2) {
+    return _wrap_GroundMspiOrbitData_ln_look_vector__SWIG_2(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'GroundMspiOrbitData_ln_look_vector'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::GroundMspiOrbitData::ln_look_vector(GeoCal::ScLookVector const &) const\n"
+    "    GeoCal::GroundMspiOrbitData::ln_look_vector(GeoCal::CartesianInertialLookVector const &) const\n"
+    "    GeoCal::GroundMspiOrbitData::ln_look_vector(GeoCal::CartesianFixedLookVector const &) const\n");
+  return 0;
 }
 
 
@@ -5890,8 +6077,8 @@ static PyMethodDef SwigMethods[] = {
 		"Constructor. The azimuth and zenith angles should be in degrees. \n"
 		""},
 	 { (char *)"GroundMspiOrbitData_ln_look_vector", _wrap_GroundMspiOrbitData_ln_look_vector, METH_VARARGS, (char *)"\n"
-		"LnLookVector GroundMspiOrbitData::ln_look_vector(const ScLookVector &Sl) const\n"
-		"Convert from ScLookVector to LnLookVector. \n"
+		"LnLookVector GeoCal::GroundMspiOrbitData::ln_look_vector(const CartesianFixedLookVector &Cf) const\n"
+		"\n"
 		""},
 	 { (char *)"GroundMspiOrbitData_sc_look_vector", _wrap_GroundMspiOrbitData_sc_look_vector, METH_VARARGS, (char *)"\n"
 		"ScLookVector GroundMspiOrbitData::sc_look_vector(const LnLookVector &Ln) const\n"

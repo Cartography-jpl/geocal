@@ -16,6 +16,10 @@ public:
 		      double Azimuth, double Zenith);
   virtual ~GroundMspiOrbitData() {}
   LnLookVector ln_look_vector(const ScLookVector& Sl) const;
+  LnLookVector ln_look_vector(const CartesianInertialLookVector& Ci) const
+  { return ln_look_vector(sc_look_vector(Ci)); } 
+  LnLookVector ln_look_vector(const CartesianFixedLookVector& Cf) const
+  { return ln_look_vector(sc_look_vector(Cf)); } 
   using QuaternionOrbitData::sc_look_vector;
   ScLookVector sc_look_vector(const LnLookVector& Ln) const;
   void print(std::ostream& Os) const;

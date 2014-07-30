@@ -140,8 +140,8 @@ class GroundMspiOrbitData(geocal_swig.orbit.QuaternionOrbitData):
         _ground_mspi_orbit.GroundMspiOrbitData_swiginit(self,_ground_mspi_orbit.new_GroundMspiOrbitData(*args))
     def ln_look_vector(self, *args):
         """
-        LnLookVector GroundMspiOrbitData::ln_look_vector(const ScLookVector &Sl) const
-        Convert from ScLookVector to LnLookVector. 
+        LnLookVector GeoCal::GroundMspiOrbitData::ln_look_vector(const CartesianFixedLookVector &Cf) const
+
         """
         return _ground_mspi_orbit.GroundMspiOrbitData_ln_look_vector(self, *args)
 

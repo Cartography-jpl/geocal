@@ -111,6 +111,17 @@ template<std::size_t D> inline double norm(const boost::array<double, D>& A)
   return sqrt(dot(A, A));
 }
 
+//-----------------------------------------------------------------------
+/// Normalize a vector so it has length of 1.
+//-----------------------------------------------------------------------
+
+template<std::size_t D> inline void normalize(boost::array<double, D>& A)
+{
+  double u = norm(A);
+  for(std::size_t i = 0; i < D; ++i)
+    A[i] /= u;
+}
+
 /** @} */
 }
 #endif

@@ -45,6 +45,16 @@ LnLookVector GroundMspiOrbitData::ln_look_vector(const ScLookVector& Sl) const
 		      conj(sc_to_ln));
 }
 
+//-----------------------------------------------------------------------
+/// Convert from LnLookVector to ScLookVector.
+//-----------------------------------------------------------------------
+
+ScLookVector GroundMspiOrbitData::sc_look_vector(const LnLookVector& Ln) const
+{
+  return ScLookVector(conj(sc_to_ln) * Ln.look_quaternion() *
+		      sc_to_ln);
+}
+
 void GroundMspiOrbitData::print(std::ostream& Os) const {
   Os << "GroundMspiOrbitData\n";
 }

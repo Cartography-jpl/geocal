@@ -16,6 +16,8 @@ public:
 		      double Azimuth, double Zenith);
   virtual ~GroundMspiOrbitData() {}
   LnLookVector ln_look_vector(const ScLookVector& Sl) const;
+  using QuaternionOrbitData::sc_look_vector;
+  ScLookVector sc_look_vector(const LnLookVector& Ln) const;
   void print(std::ostream& Os) const;
 private:
   boost::math::quaternion<double> sc_to_ln;

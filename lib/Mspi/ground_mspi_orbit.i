@@ -19,6 +19,11 @@ public:
   GroundMspiOrbitData(const Time& Tm, const GroundCoordinate& Pos,
 		      double Azimuth, double Zenith);
   LnLookVector ln_look_vector(const ScLookVector& Sl) const;
+  virtual ScLookVector 
+  sc_look_vector(const CartesianInertialLookVector& Ci) const;
+  virtual ScLookVector 
+  sc_look_vector(const CartesianFixedLookVector& Cf) const;
+  virtual ScLookVector sc_look_vector(const LnLookVector& Ln) const;
 };
 
 class GroundMspiOrbit : public Orbit {

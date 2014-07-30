@@ -145,8 +145,16 @@ class GroundMspiOrbitData(geocal_swig.orbit.QuaternionOrbitData):
         """
         return _ground_mspi_orbit.GroundMspiOrbitData_ln_look_vector(self, *args)
 
+    def sc_look_vector(self, *args):
+        """
+        ScLookVector GroundMspiOrbitData::sc_look_vector(const LnLookVector &Ln) const
+        Convert from LnLookVector to ScLookVector. 
+        """
+        return _ground_mspi_orbit.GroundMspiOrbitData_sc_look_vector(self, *args)
+
     __swig_destroy__ = _ground_mspi_orbit.delete_GroundMspiOrbitData
 GroundMspiOrbitData.ln_look_vector = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbitData_ln_look_vector,None,GroundMspiOrbitData)
+GroundMspiOrbitData.sc_look_vector = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbitData_sc_look_vector,None,GroundMspiOrbitData)
 GroundMspiOrbitData_swigregister = _ground_mspi_orbit.GroundMspiOrbitData_swigregister
 GroundMspiOrbitData_swigregister(GroundMspiOrbitData)
 

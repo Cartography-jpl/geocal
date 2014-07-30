@@ -288,9 +288,13 @@ class QuaternionCamera(geocal_swig.camera.Camera):
 
     def dcs_look_vector(self, *args):
         """
-        virtual DcsLookVector GeoCal::QuaternionCamera::dcs_look_vector(const ScLookVector &Sl) const
-        Convert Spacecraft look vector to the look vector in Detector
-        Coordinate System. 
+        DcsLookVector QuaternionCamera::dcs_look_vector(const FrameCoordinate &F, int Band) const
+        Convert from FrameCoordinate to DcsLookVector.
+
+        It is perfectly allowable for F.line to be outside the range (0,
+        number_line(band) 1) or for F.sample to be outside the range (0,
+        number_sample(band) - 1). The conversion will just act as if the
+        camera has infinite extent. 
         """
         return _quaternion_camera.QuaternionCamera_dcs_look_vector(self, *args)
 

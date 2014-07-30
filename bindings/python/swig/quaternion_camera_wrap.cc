@@ -6556,7 +6556,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_QuaternionCamera_dcs_look_vector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_QuaternionCamera_dcs_look_vector__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::QuaternionCamera *arg1 = (GeoCal::QuaternionCamera *) 0 ;
   GeoCal::ScLookVector *arg2 = 0 ;
@@ -6567,10 +6567,9 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera_dcs_look_vector(PyObject *SWIGUNUSED
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::ScLookVector const > tempshared2 ;
-  PyObject *swig_obj[2] ;
   GeoCal::DcsLookVector result;
   
-  if (!SWIG_Python_UnpackTuple(args,"QuaternionCamera_dcs_look_vector",2,2,swig_obj)) SWIG_fail;
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t, 0 |  0 , &newmem);
@@ -6627,6 +6626,109 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera_dcs_look_vector(PyObject *SWIGUNUSED
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuaternionCamera_dcs_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::QuaternionCamera *arg1 = (GeoCal::QuaternionCamera *) 0 ;
+  GeoCal::FrameCoordinate *arg2 = 0 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuaternionCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuaternionCamera const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::DcsLookVector result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionCamera_dcs_look_vector" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::FrameCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionCamera_dcs_look_vector" "', argument " "2"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionCamera_dcs_look_vector" "', argument " "2"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::FrameCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "QuaternionCamera_dcs_look_vector" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = ((GeoCal::QuaternionCamera const *)arg1)->dcs_look_vector((GeoCal::FrameCoordinate const &)*arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::DcsLookVector > *smartresult = new boost::shared_ptr<  GeoCal::DcsLookVector >(new GeoCal::DcsLookVector((GeoCal::DcsLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuaternionCamera_dcs_look_vector(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"QuaternionCamera_dcs_look_vector",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_QuaternionCamera_dcs_look_vector__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_QuaternionCamera_dcs_look_vector__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuaternionCamera_dcs_look_vector'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::QuaternionCamera::dcs_look_vector(GeoCal::ScLookVector const &) const\n"
+    "    GeoCal::QuaternionCamera::dcs_look_vector(GeoCal::FrameCoordinate const &,int) const\n");
+  return 0;
 }
 
 
@@ -6733,9 +6835,13 @@ static PyMethodDef SwigMethods[] = {
 		"Set frame to spacecraft quaternion. \n"
 		""},
 	 { (char *)"QuaternionCamera_dcs_look_vector", _wrap_QuaternionCamera_dcs_look_vector, METH_VARARGS, (char *)"\n"
-		"virtual DcsLookVector GeoCal::QuaternionCamera::dcs_look_vector(const ScLookVector &Sl) const\n"
-		"Convert Spacecraft look vector to the look vector in Detector\n"
-		"Coordinate System. \n"
+		"DcsLookVector QuaternionCamera::dcs_look_vector(const FrameCoordinate &F, int Band) const\n"
+		"Convert from FrameCoordinate to DcsLookVector.\n"
+		"\n"
+		"It is perfectly allowable for F.line to be outside the range (0,\n"
+		"number_line(band) 1) or for F.sample to be outside the range (0,\n"
+		"number_sample(band) - 1). The conversion will just act as if the\n"
+		"camera has infinite extent. \n"
 		""},
 	 { (char *)"delete_QuaternionCamera", (PyCFunction)_wrap_delete_QuaternionCamera, METH_O, (char *)"\n"
 		"virtual GeoCal::QuaternionCamera::~QuaternionCamera()\n"

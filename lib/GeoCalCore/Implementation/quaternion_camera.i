@@ -38,6 +38,8 @@ public:
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
   virtual DcsLookVector dcs_look_vector(const ScLookVector& Sl) const;
+  virtual DcsLookVector dcs_look_vector(const FrameCoordinate& F, int Band) 
+    const;
 protected:
   QuaternionCamera();
   virtual void dcs_to_focal_plane(int Band,

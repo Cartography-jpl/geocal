@@ -217,6 +217,9 @@ public:
   { return DcsLookVector(conj(frame_to_sc_) * Sl.look_quaternion() *
 			 frame_to_sc_);
   }
+
+  virtual DcsLookVector dcs_look_vector(const FrameCoordinate& F, int Band) 
+    const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
   virtual void print(std::ostream& Os) const;

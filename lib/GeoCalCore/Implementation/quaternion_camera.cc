@@ -71,15 +71,15 @@ FrameCoordinate QuaternionCamera::frame_coordinate(const ScLookVector& Sl,
 }
 
 //-----------------------------------------------------------------------
-/// Convert from FrameCoordinate to ScLookVector. It is perfectly
+/// Convert from FrameCoordinate to DcsLookVector. It is perfectly
 /// allowable for F.line to be outside the range (0, number_line(band)
 /// - 1) or for F.sample to be outside the range (0,
 /// number_sample(band) - 1). The conversion will just act as if the
 /// camera has infinite extent.
 //-----------------------------------------------------------------------
 
-ScLookVector QuaternionCamera::sc_look_vector(const FrameCoordinate& F, 
-					      int Band) const
+DcsLookVector QuaternionCamera::dcs_look_vector(const FrameCoordinate& F, 
+						int Band) const
 {
   range_check(Band, 0, number_band());
   double xfp, yfp;
@@ -94,7 +94,22 @@ ScLookVector QuaternionCamera::sc_look_vector(const FrameCoordinate& F,
     xfp = (F.line - principal_point(Band).line) * line_pitch()
       * line_dir();
   }
-  return ScLookVector(frame_to_sc_ * focal_plane_to_dcs(Band, xfp, yfp) *
+  return DcsLookVector(focal_plane_to_dcs(Band, xfp, yfp));
+}
+
+//-----------------------------------------------------------------------
+/// Convert from FrameCoordinate to ScLookVector. It is perfectly
+/// allowable for F.line to be outside the range (0, number_line(band)
+/// - 1) or for F.sample to be outside the range (0,
+/// number_sample(band) - 1). The conversion will just act as if the
+/// camera has infinite extent.
+//-----------------------------------------------------------------------
+
+ScLookVector QuaternionCamera::sc_look_vector(const FrameCoordinate& F, 
+					      int Band) const
+{
+  return ScLookVector(frame_to_sc_ * 
+		      dcs_look_vector(F, Band).look_quaternion() *
 		      conj(frame_to_sc_));
 }
 

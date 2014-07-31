@@ -136,12 +136,11 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        AirMspiOrbit::AirMspiOrbit(const std::string &Fname, const blitz::Array< double, 1 >
-        &Gimbal_angle, const blitz::Array< double, 1 > &Ypc_corr, const
-        boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        NoDatum()), AircraftOrbitData::VerticalDefinition
+        AirMspiOrbit::AirMspiOrbit(const std::string &Fname, const boost::shared_ptr< Datum >
+        &D=boost::shared_ptr< Datum >(new NoDatum()),
+        AircraftOrbitData::VerticalDefinition
         Def=AircraftOrbitData::GEODETIC_VERTICAL)
-        Read the given file. 
+
         """
         _air_mspi_orbit.AirMspiOrbit_swiginit(self,_air_mspi_orbit.new_AirMspiOrbit(*args))
     def _v_data_version(self):

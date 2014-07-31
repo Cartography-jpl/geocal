@@ -11,6 +11,7 @@ namespace GeoCal {
 *******************************************************************/
 class AirMspiNavData : public Printable<AirMspiNavData> {
 public:
+  AirMspiNavData() {}
   AirMspiNavData(const blitz::Array<double, 1>& Raw_data,
 		 const Datum& datum,
 		 bool Old_format);
@@ -26,6 +27,12 @@ public:
   // Gimbal velocity in radians/second
   double gimbal_vel;
   void print(std::ostream& Os) const;
+
+  static AirMspiNavData interpolate(const AirMspiNavData& N1, 
+				    const AirMspiNavData& N2,
+				    double f);
+private:
+  static double interpolate_angle(double v1, double v2, double f);
 };
 
 /****************************************************************//**
@@ -43,6 +50,18 @@ public:
   AirMspiOrbit(const std::string& Fname, 
 	       const blitz::Array<double, 1>& Gimbal_angle,
 	       const blitz::Array<double, 1>& Ypc_corr,
+	       const boost::shared_ptr<Datum>& D
+	       = boost::shared_ptr<Datum>(new NoDatum()),
+	       AircraftOrbitData::VerticalDefinition Def = 
+	       AircraftOrbitData::GEODETIC_VERTICAL);
+  AirMspiOrbit(const std::string& Fname, 
+	       const blitz::Array<double, 1>& Gimbal_angle,
+	       const boost::shared_ptr<Datum>& D
+	       = boost::shared_ptr<Datum>(new NoDatum()),
+	       AircraftOrbitData::VerticalDefinition Def = 
+	       AircraftOrbitData::GEODETIC_VERTICAL);
+
+  AirMspiOrbit(const std::string& Fname, 
 	       const boost::shared_ptr<Datum>& D
 	       = boost::shared_ptr<Datum>(new NoDatum()),
 	       AircraftOrbitData::VerticalDefinition Def = 
@@ -96,6 +115,7 @@ public:
   blitz::Array<double, 1> ypr_corr() const { return ypr_corr_;}
 
   AirMspiNavData nav_data(int Index) const;
+  AirMspiNavData nav_data(Time T) const;
   boost::shared_ptr<QuaternionOrbitData> orbit_data_index(int Index) const;
 
 //-----------------------------------------------------------------------
@@ -117,6 +137,7 @@ public:
 
   virtual void print(std::ostream& Os) const;
 private:
+  void initialize();
   boost::shared_ptr<GdalRasterImage> data;
   boost::shared_ptr<Datum> datum_;
   blitz::Array<double, 1> gimbal_angle_;

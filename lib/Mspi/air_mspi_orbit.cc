@@ -54,6 +54,46 @@ void AirMspiNavData::print(std::ostream& Os) const {
      << "  Gimbal vel: " << gimbal_vel << " radians/sec\n";
 }
 
+// This interpolation is used just for reporting data. We actually
+// interpolate the final quaternions in the orbit file. But this is
+// useful for some of the data dumping tools Mike Bull uses.
+
+AirMspiNavData AirMspiNavData::interpolate(const AirMspiNavData& n1, 
+					   const AirMspiNavData& n2,
+					   double f)
+{
+  AirMspiNavData res;
+  double lon_interp = 
+    interpolate_angle(n1.position.longitude() * Constant::deg_to_rad,
+		      n2.position.longitude() * Constant::deg_to_rad, f);
+  res.position = Geodetic(n1.position.latitude() +
+			  (n2.position.latitude() - n1.position.latitude()) * f,
+			  lon_interp * Constant::rad_to_deg,
+			  n1.position.height_reference_surface() +
+			  (n2.position.height_reference_surface() - 
+			   n1.position.height_reference_surface()) * f);
+  for(int i = 0; i < 3; ++i) {
+    res.velocity[i] = n1.velocity[i] + (n2.velocity[i] - n1.velocity[i]) * f;
+    res.ypr[i] = interpolate_angle(n1.ypr[i], n2.ypr[i], f);
+    res.ypr_rate[i] = n1.ypr_rate[i] + (n2.ypr_rate[i] - n1.ypr_rate[i]) * f;
+  }
+  res.gimbal_pos = n1.gimbal_pos + (n2.gimbal_pos - n1.gimbal_pos) * f;
+  res.gimbal_vel = n1.gimbal_vel + (n2.gimbal_vel - n1.gimbal_vel) * f;
+  return res;
+}
+
+
+double AirMspiNavData::interpolate_angle(double v1, double v2, double f)
+{
+  double v1x = cos(v1);
+  double v1y = sin(v1);
+  double v2x = cos(v2);
+  double v2y = sin(v2);
+  double newx = v1x + f * (v2x - v1x);
+  double newy = v1y + f * (v2y - v1y);
+  return atan2(newy, newx);
+}
+
 //-----------------------------------------------------------------------
 /// Read the given file.
 //-----------------------------------------------------------------------
@@ -69,9 +109,42 @@ AirMspiOrbit::AirMspiOrbit(const std::string& Fname,
     ypr_corr_(Ypr_corr.copy()),
     vdef_(Def)
 {
-  if(Gimbal_angle.rows() != 3)
+  initialize();
+}
+
+AirMspiOrbit::AirMspiOrbit(const std::string& Fname, 
+			   const blitz::Array<double, 1>& Gimbal_angle,
+			   const boost::shared_ptr<Datum>& D,
+			   AircraftOrbitData::VerticalDefinition Def)
+  : data(new GdalRasterImage(Fname)), 
+    datum_(D),
+    gimbal_angle_(Gimbal_angle.copy()),
+    ypr_corr_(3),
+    vdef_(Def)
+{
+  ypr_corr_ = 0;
+  initialize();
+}
+
+AirMspiOrbit::AirMspiOrbit(const std::string& Fname, 
+			   const boost::shared_ptr<Datum>& D,
+			   AircraftOrbitData::VerticalDefinition Def)
+  : data(new GdalRasterImage(Fname)), 
+    datum_(D),
+    gimbal_angle_(3),
+    ypr_corr_(3),
+    vdef_(Def)
+{
+  gimbal_angle_ = 0;
+  ypr_corr_ = 0;
+  initialize();
+}
+
+void AirMspiOrbit::initialize()
+{
+  if(gimbal_angle_.rows() != 3)
     throw Exception("Gimbal_angle needs to be size 3");
-  if(Ypr_corr.rows() != 3)
+  if(ypr_corr_.rows() != 3)
     throw Exception("Ypr_corr needs to be size 3");
   Time epoch = Time::parse_time(data->metadata<std::string>("epoch"));
   min_tm = epoch + data->metadata<double>("first_time");
@@ -81,9 +154,9 @@ AirMspiOrbit::AirMspiOrbit(const std::string& Fname,
   // Portion of quaternion that is constant.
   // Negative sign is because these are passive rotations 
   // (the quaternion definition is active)
-  m = quat_rot("zyx", -Gimbal_angle(0) * Constant::deg_to_rad, 
-	       -Gimbal_angle(1) * Constant::deg_to_rad, 
-	       -Gimbal_angle(2) * Constant::deg_to_rad);
+  m = quat_rot("zyx", -gimbal_angle_(0) * Constant::deg_to_rad, 
+	       -gimbal_angle_(1) * Constant::deg_to_rad, 
+	       -gimbal_angle_(2) * Constant::deg_to_rad);
 }
 
 //-----------------------------------------------------------------------
@@ -96,6 +169,22 @@ AirMspiNavData AirMspiOrbit::nav_data(int Index) const
   blitz::Array<double, 2> raw_data = 
     data->read_double(Index, 0, 1, data->number_sample());
   return AirMspiNavData(raw_data(0, blitz::Range::all()), *datum_, old_format);
+}
+
+//-----------------------------------------------------------------------
+/// Nav data at the given time. Note that we interpolate the nav data,
+/// in a way *different* than we do for the actual orbit_data. This is
+/// meant for use in various reporting tools Mike Bull uses, not for
+/// actually calculating the orbit data with.
+//-----------------------------------------------------------------------
+
+AirMspiNavData AirMspiOrbit::nav_data(Time T) const
+{
+  range_check(T, min_time(), max_time());
+  double x = (T - min_time()) / time_spacing();
+  int i = (int) floor(x);
+  double f = x - i;
+  return AirMspiNavData::interpolate(nav_data(i), nav_data(i + 1), f);
 }
 
 //-----------------------------------------------------------------------

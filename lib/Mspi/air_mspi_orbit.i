@@ -24,6 +24,18 @@ public:
                const boost::shared_ptr<Datum>& D,
 	       AircraftOrbitData::VerticalDefinition Def = 
 	       AircraftOrbitData::GEODETIC_VERTICAL);
+  AirMspiOrbit(const std::string& Fname, 
+	       const blitz::Array<double, 1>& Gimbal_angle);
+  AirMspiOrbit(const std::string& Fname, 
+	       const blitz::Array<double, 1>& Gimbal_angle,
+               const boost::shared_ptr<Datum>& D,
+	       AircraftOrbitData::VerticalDefinition Def = 
+	       AircraftOrbitData::GEODETIC_VERTICAL);
+  AirMspiOrbit(const std::string& Fname);
+  AirMspiOrbit(const std::string& Fname, 
+               const boost::shared_ptr<Datum>& D,
+	       AircraftOrbitData::VerticalDefinition Def = 
+	       AircraftOrbitData::GEODETIC_VERTICAL);
   %python_attribute(data_version, std::string);
   %python_attribute(file_name, std::string);
   %python_attribute(datum, boost::shared_ptr<Datum>);

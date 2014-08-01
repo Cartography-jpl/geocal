@@ -7,13 +7,11 @@
 #include "look_vector.h"
 %}
 %base_import(generic_object)
-%import "ground_coordinate.i"
 
 %geocal_shared_ptr(GeoCal::LookVector);
 %geocal_shared_ptr(GeoCal::ScLookVector);
 %geocal_shared_ptr(GeoCal::CartesianInertialLookVector);
 %geocal_shared_ptr(GeoCal::CartesianFixedLookVector);
-%geocal_shared_ptr(GeoCal::LnLookVector);
 %geocal_shared_ptr(GeoCal::DcsLookVector);
 
 namespace GeoCal {
@@ -46,22 +44,8 @@ public:
 	       self.look_vector[2])
 };
 
-class LnLookVector : public LookVector {
-public:
-  LnLookVector();
-  LnLookVector(const CartesianFixedLookVector& Lv, 
-	       const GroundCoordinate& Ref_pt);
-  LnLookVector(double x, double y, double z);
-  LnLookVector(const boost::array<double, 3>& Lv);
-  std::string print_to_string() const;
-  static boost::math::quaternion<double> 
-  cf_to_enu(const GroundCoordinate& Ref_pt);
-  static boost::math::quaternion<double> 
-      enu_to_cf(const GroundCoordinate& Ref_pt);
-  { return conj(enu_to_cf(Ref_pt); }
-  %pickle_init(1, self.look_vector[0], self.look_vector[1],
-	       self.look_vector[2])
-};
+// LnLookVector is in ground_coordinate.i instead of here, to break a
+// SWIG circular dependency.
 
 class DcsLookVector : public LookVector {
 public:

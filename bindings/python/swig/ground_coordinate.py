@@ -400,6 +400,33 @@ CartesianFixed._position = new_instancemethod(_ground_coordinate.CartesianFixed_
 CartesianFixed_swigregister = _ground_coordinate.CartesianFixed_swigregister
 CartesianFixed_swigregister(CartesianFixed)
 
+class LnLookVector(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _ground_coordinate.LnLookVector_swiginit(self,_ground_coordinate.new_LnLookVector(*args))
+    cf_to_enu = staticmethod(_ground_coordinate.LnLookVector_cf_to_enu)
+    enu_to_cf = staticmethod(_ground_coordinate.LnLookVector_enu_to_cf)
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+
+    __swig_destroy__ = _ground_coordinate.delete_LnLookVector
+LnLookVector.__str__ = new_instancemethod(_ground_coordinate.LnLookVector___str__,None,LnLookVector)
+LnLookVector_swigregister = _ground_coordinate.LnLookVector_swigregister
+LnLookVector_swigregister(LnLookVector)
+
+def LnLookVector_cf_to_enu(*args):
+  return _ground_coordinate.LnLookVector_cf_to_enu(*args)
+LnLookVector_cf_to_enu = _ground_coordinate.LnLookVector_cf_to_enu
+
+def LnLookVector_enu_to_cf(*args):
+  return _ground_coordinate.LnLookVector_enu_to_cf(*args)
+LnLookVector_enu_to_cf = _ground_coordinate.LnLookVector_enu_to_cf
+
 
 def distance(*args):
   """

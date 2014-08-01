@@ -3,8 +3,8 @@
 #include "printable.h"
 #include <boost/array.hpp>
 #include <boost/math/quaternion.hpp>
-
 namespace GeoCal {
+  class GroundCoordinate;	// Forward declaration.
 
 /****************************************************************//**
   This is a look vector in an unspecified coordinate system. Derived
@@ -160,11 +160,29 @@ public:
 };
 
 /****************************************************************//**
-  This is a look vector in LocalNorth coordinates
+  This is a look vector in LocalNorth coordinates. Note that there are
+  2 common local north coordinate. The first is ENU (for "East, North,
+  Up") where the local east axis is 'x', north is 'y' and up is Z. The
+  other is NED (for North, East, Down), where local north is 'x', east
+  is 'y' and 'z' is down. NED is used commonly for aircraft data
+  (see AircraftOrbitData), since you tend to look down. This class 
+  is for ENU, e.g., for calculating view zenith and azimuth angles.
 *******************************************************************/
 
 class LnLookVector : public LookVector {
 public:
+//-----------------------------------------------------------------------
+/// Constructor that translates a CartesianFixedLookVector to a
+/// LnLookVector, using the coordinate system at the given Ref_pt.
+//-----------------------------------------------------------------------
+
+  LnLookVector(const CartesianFixedLookVector& Lv, 
+	       const GroundCoordinate& Ref_pt)
+  {
+    boost::math::quaternion<double> to_ln = cf_to_enu(Ref_pt);
+    look_quaternion(to_ln * Lv.look_quaternion() * conj(to_ln));
+  }
+
 //-----------------------------------------------------------------------
 /// Constructor. 
 //-----------------------------------------------------------------------
@@ -191,6 +209,17 @@ public:
 
   virtual ~LnLookVector() {}
   virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Return quaternion to go from CartesianFixed to ENU coordinates for
+/// the given location.
+//-----------------------------------------------------------------------
+  static boost::math::quaternion<double> 
+  cf_to_enu(const GroundCoordinate& Ref_pt)
+  { return conj(enu_to_cf(Ref_pt)); }
+
+  static boost::math::quaternion<double> 
+  enu_to_cf(const GroundCoordinate& Ref_pt);
 };
 
 /****************************************************************//**

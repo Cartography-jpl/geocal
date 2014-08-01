@@ -7,6 +7,7 @@
 #include "look_vector.h"
 %}
 %base_import(generic_object)
+%import "ground_coordinate.i"
 
 %geocal_shared_ptr(GeoCal::LookVector);
 %geocal_shared_ptr(GeoCal::ScLookVector);
@@ -48,9 +49,16 @@ public:
 class LnLookVector : public LookVector {
 public:
   LnLookVector();
+  LnLookVector(const CartesianFixedLookVector& Lv, 
+	       const GroundCoordinate& Ref_pt);
   LnLookVector(double x, double y, double z);
   LnLookVector(const boost::array<double, 3>& Lv);
   std::string print_to_string() const;
+  static boost::math::quaternion<double> 
+  cf_to_enu(const GroundCoordinate& Ref_pt);
+  static boost::math::quaternion<double> 
+      enu_to_cf(const GroundCoordinate& Ref_pt);
+  { return conj(enu_to_cf(Ref_pt); }
   %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])
 };

@@ -1,5 +1,7 @@
 #include "look_vector.h"
 #include "geocal_exception.h"
+#include "ground_coordinate.h"
+#include "constant.h"
 #include <cmath>
 
 using namespace GeoCal;
@@ -79,6 +81,20 @@ void LnLookVector::print(std::ostream& Os) const
 }
 
 //-----------------------------------------------------------------------
+/// Return quaternion to go from ENU coordinates to CartesianFixed for
+/// the given location.
+//-----------------------------------------------------------------------
+
+boost::math::quaternion<double> 
+LnLookVector::enu_to_cf(const GroundCoordinate& Ref_pt)
+{
+  // This matrix is available from a variety of sources. See for
+  // example the GroundMSPI L1B2 ATB.
+  return quat_rot("zx", (Ref_pt.latitude() - 270) * Constant::deg_to_rad, 
+		  (90 - Ref_pt.longitude()) * Constant::deg_to_rad);
+}
+
+//-----------------------------------------------------------------------
 /// Print to given stream.
 //-----------------------------------------------------------------------
 
@@ -89,3 +105,4 @@ void DcsLookVector::print(std::ostream& Os) const
      << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
      << "  length: " << length() << " m\n";
 }
+

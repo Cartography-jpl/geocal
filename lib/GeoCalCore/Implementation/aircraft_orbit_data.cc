@@ -52,6 +52,10 @@ void AircraftOrbitData::initialize(const Time& Tm,
 // defines the local north coordinate system, which is X in S-N
 // direction, Y in W-E direction, and Z pointed downward.
 //
+// This is called "NED" for "Local north, east, down". Contrast this
+// with "ENU" for "Local east, north, up", which is used for
+// calculating things like zenith view and azimuth angles 
+//
 // The vertical can be defined one of three ways for the aircraft
 // coordinate system:
 //

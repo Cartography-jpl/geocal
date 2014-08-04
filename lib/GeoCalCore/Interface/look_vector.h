@@ -1,6 +1,7 @@
 #ifndef LOOK_VECTOR_H
 #define LOOK_VECTOR_H
 #include "printable.h"
+#include "constant.h"
 #include <boost/array.hpp>
 #include <boost/math/quaternion.hpp>
 namespace GeoCal {
@@ -209,6 +210,21 @@ public:
 
   virtual ~LnLookVector() {}
   virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Return view zenith angle in degrees.
+//-----------------------------------------------------------------------
+
+  double view_zenith() const
+  { return acos(direction()[2]) * Constant::rad_to_deg; }
+
+//-----------------------------------------------------------------------
+/// Return view azimuth angle in degrees.
+//-----------------------------------------------------------------------
+  
+  double view_azimuth() const
+  { return atan2(look_vector[0], look_vector[1]) * Constant::rad_to_deg +
+      180.0; }
 
 //-----------------------------------------------------------------------
 /// Return quaternion to go from CartesianFixed to ENU coordinates for

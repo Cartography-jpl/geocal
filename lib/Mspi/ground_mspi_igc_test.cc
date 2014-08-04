@@ -15,6 +15,14 @@ BOOST_AUTO_TEST_CASE(basic_test)
   time_tag.push_back(tstart + 2 * 5.1);
   GroundMspiIgc igc(tstart, p, 45.0, -10.0, 1.7, time_tag,
 		    test_data_dir() + "ground_mspi_camera_test.config", 2);
+  CartesianFixedLookVector lv;
+  boost::shared_ptr<CartesianFixed> p2;
+  igc.cf_look_vector(ImageCoordinate(0, 0), lv, p2);
+  LnLookVector ln(lv, *p2);
+  BOOST_CHECK_CLOSE(ln.view_zenith(), 1.75848329e+00 * Constant::rad_to_deg, 
+		    1e-4);
+  BOOST_CHECK_CLOSE(ln.view_azimuth(), 3.66389728e+00 * Constant::rad_to_deg,
+		    1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

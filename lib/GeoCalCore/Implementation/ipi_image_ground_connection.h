@@ -100,7 +100,7 @@ public:
 //-----------------------------------------------------------------------
 
   double maximum_height() const {return max_h;}
-  virtual int number_line() const { return ipi_->time_table().max_line(); }
+  virtual int number_line() const { return ipi_->time_table().max_line() + 1; }
   virtual int number_sample() const 
   { return ipi_->camera().number_sample(ipi_->band()); }
 protected:

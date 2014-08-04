@@ -5402,7 +5402,7 @@ struct SWIG_null_deleter {
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_new_GroundMspiIgc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_GroundMspiIgc__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Time *arg1 = 0 ;
   boost::shared_ptr< GeoCal::GroundCoordinate > *arg2 = 0 ;
@@ -5429,10 +5429,9 @@ SWIGINTERN PyObject *_wrap_new_GroundMspiIgc(PyObject *SWIGUNUSEDPARM(self), PyO
   int res7 = SWIG_OLDOBJ ;
   int val8 ;
   int ecode8 = 0 ;
-  PyObject *swig_obj[8] ;
   GeoCal::GroundMspiIgc *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"new_GroundMspiIgc",8,8,swig_obj)) SWIG_fail;
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
   {
     int newmem = 0;
     // Added mms
@@ -5548,6 +5547,196 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_GroundMspiIgc__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Time *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > *arg2 = 0 ;
+  double arg3 ;
+  double arg4 ;
+  double arg5 ;
+  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *arg6 = 0 ;
+  boost::shared_ptr< GeoCal::Camera > *arg7 = 0 ;
+  int arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > tempshared2 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > temp2shared2 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  int res6 = SWIG_OLDOBJ ;
+  void *argp7 ;
+  int res7 = 0 ;
+  boost::shared_ptr< GeoCal::Camera > tempshared7 ;
+  boost::shared_ptr< GeoCal::Camera > temp2shared7 ;
+  int val8 ;
+  int ecode8 = 0 ;
+  GeoCal::GroundMspiIgc *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GroundMspiIgc" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GroundMspiIgc" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+        arg1 = const_cast< GeoCal::Time * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_GroundMspiIgc" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::GroundCoordinate > &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::GroundCoordinate > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::GroundCoordinate > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::GroundCoordinate > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GroundMspiIgc" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_GroundMspiIgc" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_GroundMspiIgc" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  {
+    std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *ptr = (std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *)0;
+    res6 = swig::asptr(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_GroundMspiIgc" "', argument " "6"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GroundMspiIgc" "', argument " "6"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  {
+    int newmem = 0;
+    res7 = SWIG_ConvertPtrAndOwn(swig_obj[6], &argp7, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_GroundMspiIgc" "', argument " "7"" of type '" "boost::shared_ptr< GeoCal::Camera > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp7) tempshared7 = *reinterpret_cast< boost::shared_ptr< GeoCal::Camera > * >(argp7);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Camera > * >(argp7);
+      arg7 = &tempshared7;
+    } else {
+      arg7 = (argp7) ? reinterpret_cast< boost::shared_ptr< GeoCal::Camera > * >(argp7) : &tempshared7;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg7->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared7.reset(arg7->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg7 = &temp2shared7;
+    }
+  }
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_GroundMspiIgc" "', argument " "8"" of type '" "int""'");
+  } 
+  arg8 = static_cast< int >(val8);
+  {
+    try {
+      result = (GeoCal::GroundMspiIgc *)new GeoCal::GroundMspiIgc((GeoCal::Time const &)*arg1,*arg2,arg3,arg4,arg5,(std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &)*arg6,(boost::shared_ptr< GeoCal::Camera > const &)*arg7,arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GroundMspiIgc > *smartresult = result ? new boost::shared_ptr<  GeoCal::GroundMspiIgc >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMspiIgc_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GroundMspiIgc(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[9];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_GroundMspiIgc",0,8,argv))) SWIG_fail;
+  --argc;
+  if (argc == 8) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[6], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_new_GroundMspiIgc__SWIG_1(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 8) {
+    return _wrap_new_GroundMspiIgc__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_GroundMspiIgc'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::GroundMspiIgc::GroundMspiIgc(GeoCal::Time const &,boost::shared_ptr< GeoCal::GroundCoordinate > &,double,double,double,std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &,std::string const &,int)\n"
+    "    GeoCal::GroundMspiIgc::GroundMspiIgc(GeoCal::Time const &,boost::shared_ptr< GeoCal::GroundCoordinate > &,double,double,double,std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &,boost::shared_ptr< GeoCal::Camera > const &,int)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_GroundMspiIgc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GroundMspiIgc *arg1 = (GeoCal::GroundMspiIgc *) 0 ;
@@ -5606,11 +5795,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_GroundMspiIgc", _wrap_new_GroundMspiIgc, METH_VARARGS, (char *)"\n"
 		"GroundMspiIgc::GroundMspiIgc(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,\n"
 		"double Azimuth, double Start_elevation_angle, double Rotation_rate,\n"
-		"const std::vector< Time > &Time_tag, const std::string &Camera_config,\n"
-		"int Band)\n"
-		"Constructor.\n"
+		"const std::vector< Time > &Time_tag, const boost::shared_ptr< Camera >\n"
+		"&Cam, int Band)\n"
 		"\n"
-		"The angles are in degrees, and the rate is in degress per second. \n"
 		""},
 	 { (char *)"delete_GroundMspiIgc", (PyCFunction)_wrap_delete_GroundMspiIgc, METH_O, (char *)"\n"
 		"virtual GeoCal::GroundMspiIgc::~GroundMspiIgc()\n"

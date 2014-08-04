@@ -90,8 +90,8 @@ LnLookVector::enu_to_cf(const GroundCoordinate& Ref_pt)
 {
   // This matrix is available from a variety of sources. See for
   // example the GroundMSPI L1B2 ATB.
-  return quat_rot("zx", (Ref_pt.latitude() - 270) * Constant::deg_to_rad, 
-		  (90 - Ref_pt.longitude()) * Constant::deg_to_rad);
+  return quat_rot("zx", (Ref_pt.longitude() - 270) * Constant::deg_to_rad, 
+		  (90 - Ref_pt.latitude()) * Constant::deg_to_rad);
 }
 
 //-----------------------------------------------------------------------

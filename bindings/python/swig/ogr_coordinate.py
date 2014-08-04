@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.generic_object
 import geocal_swig.ground_coordinate
+import geocal_swig.look_vector
 import geocal_swig.coordinate_converter
 class OgrWrapper(geocal_swig.generic_object.GenericObject):
     """

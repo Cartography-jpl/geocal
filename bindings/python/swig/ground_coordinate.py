@@ -144,6 +144,7 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 class GroundCoordinate(geocal_swig.generic_object.GenericObject):
     """
     This represents a location on the ground.
@@ -400,7 +401,7 @@ CartesianFixed._position = new_instancemethod(_ground_coordinate.CartesianFixed_
 CartesianFixed_swigregister = _ground_coordinate.CartesianFixed_swigregister
 CartesianFixed_swigregister(CartesianFixed)
 
-class LnLookVector(object):
+class LnLookVector(geocal_swig.look_vector.LookVector):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     def __init__(self, *args): 

@@ -175,9 +175,8 @@ class GroundMspiOrbit(geocal_swig.orbit.Orbit):
         double Azimuth, double Start_elevation_angle, double Rotation_rate)
         Constructor.
 
-        The angles should be in degrees, and the rate is in degrees per second
-        (might make more sense to have degrees here, but for now match what
-        the old MSPI code did). 
+        The angles should be in degrees, and the rate is in degrees per
+        second. 
         """
         _ground_mspi_orbit.GroundMspiOrbit_swiginit(self,_ground_mspi_orbit.new_GroundMspiOrbit(*args))
     def _v_start_time(self):

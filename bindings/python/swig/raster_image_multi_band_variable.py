@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.raster_image_multi_band
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 def _create_rimb(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''

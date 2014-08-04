@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.generic_object
 import geocal_swig.geocal_exception
+import geocal_swig.look_vector
 class ImageGroundConnectionFailed(geocal_swig.geocal_exception.Exception):
     """
     Exception thrown if ImageGroundConnection fails to calculate a image

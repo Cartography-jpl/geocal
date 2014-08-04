@@ -144,6 +144,7 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 class RasterImageTileIterator(geocal_swig.generic_object.GenericObject):
     """
     It can be useful to step through a Raster Image in tiles.

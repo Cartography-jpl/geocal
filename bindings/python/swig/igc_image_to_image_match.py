@@ -121,6 +121,7 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.image_to_image_match
 import geocal_swig.generic_object
 import geocal_swig.geocal_exception
+import geocal_swig.look_vector
 class IgcImageToImageMatch(geocal_swig.image_to_image_match.ImageToImageMatch):
     """
     ImageToImageMatch where the images and prediction comes from

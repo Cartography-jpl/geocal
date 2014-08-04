@@ -121,6 +121,7 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 class RasterImageTiledFile(geocal_swig.raster_image_variable.RasterImageVariable):
     """
     This is a RasterImage that is implemented as a TiledFile<T, 2>.

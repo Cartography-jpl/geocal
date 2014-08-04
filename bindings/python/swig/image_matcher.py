@@ -119,6 +119,7 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 class ImageMatcher(geocal_swig.generic_object.GenericObject):
     """
     This class performs image matching, finding the location of a point in

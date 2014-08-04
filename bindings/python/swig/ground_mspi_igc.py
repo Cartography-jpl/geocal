@@ -8,7 +8,7 @@
 
 from sys import version_info
 if version_info >= (3,0,0):
-    new_instancemethod = lambda func, inst, cls: _calc_raster.SWIG_PyInstanceMethod_New(func)
+    new_instancemethod = lambda func, inst, cls: _ground_mspi_igc.SWIG_PyInstanceMethod_New(func)
 else:
     from new import instancemethod as new_instancemethod
 if version_info >= (2,6,0):
@@ -17,20 +17,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_calc_raster', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_ground_mspi_igc', [dirname(__file__)])
         except ImportError:
-            import _calc_raster
-            return _calc_raster
+            import _ground_mspi_igc
+            return _ground_mspi_igc
         if fp is not None:
             try:
-                _mod = imp.load_module('_calc_raster', fp, pathname, description)
+                _mod = imp.load_module('_ground_mspi_igc', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _calc_raster = swig_import_helper()
+    _ground_mspi_igc = swig_import_helper()
     del swig_import_helper
 else:
-    import _calc_raster
+    import _ground_mspi_igc
 del version_info
 try:
     _swig_property = property
@@ -88,7 +88,7 @@ except:
     weakref_proxy = lambda x: x
 
 
-SHARED_PTR_DISOWN = _calc_raster.SHARED_PTR_DISOWN
+SHARED_PTR_DISOWN = _ground_mspi_igc.SHARED_PTR_DISOWN
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -118,40 +118,33 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.raster_image_variable
-import geocal_swig.raster_image
+import geocal_swig.ipi_image_ground_connection
+import geocal_swig.image_ground_connection
 import geocal_swig.generic_object
+import geocal_swig.geocal_exception
 import geocal_swig.look_vector
-class CalcRaster(geocal_swig.raster_image_variable.RasterImageVariable):
+class GroundMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnection):
     """
-    Some classes most naturally generate a RasterImage by calculating a
-    results for an array of data (e.g., a tile).
+    This is an ImageGroundConnection for GroundMspi.
 
-    This class handles the common behavior for these classes.
-
-    C++ includes: calc_raster.h 
+    C++ includes: ground_mspi_igc.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
-    @property
-    def data(self):
-        return self._v_data()
-
     def __init__(self, *args): 
-        if self.__class__ == CalcRaster:
-            _self = None
-        else:
-            _self = self
-        _calc_raster.CalcRaster_swiginit(self,_calc_raster.new_CalcRaster(_self, *args))
-    __swig_destroy__ = _calc_raster.delete_CalcRaster
-    def __disown__(self):
-        self.this.disown()
-        _calc_raster.disown_CalcRaster(self)
-        return weakref_proxy(self)
-CalcRaster._v_data = new_instancemethod(_calc_raster.CalcRaster__v_data,None,CalcRaster)
-CalcRaster.calc = new_instancemethod(_calc_raster.CalcRaster_calc,None,CalcRaster)
-CalcRaster_swigregister = _calc_raster.CalcRaster_swigregister
-CalcRaster_swigregister(CalcRaster)
+        """
+        GroundMspiIgc::GroundMspiIgc(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,
+        double Azimuth, double Start_elevation_angle, double Rotation_rate,
+        const std::vector< Time > &Time_tag, const std::string &Camera_config,
+        int Band)
+        Constructor.
+
+        The angles are in degrees, and the rate is in degress per second. 
+        """
+        _ground_mspi_igc.GroundMspiIgc_swiginit(self,_ground_mspi_igc.new_GroundMspiIgc(*args))
+    __swig_destroy__ = _ground_mspi_igc.delete_GroundMspiIgc
+GroundMspiIgc_swigregister = _ground_mspi_igc.GroundMspiIgc_swigregister
+GroundMspiIgc_swigregister(GroundMspiIgc)
 
 
 

@@ -119,6 +119,7 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 import geocal_swig.geocal_exception
 def _new_rpc(cls, version, is_rpc_a, error_bias, error_random, height_offset, 
              height_scale, latitude_offset,

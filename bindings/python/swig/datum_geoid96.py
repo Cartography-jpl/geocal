@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.geocal_datum
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 class DatumGeoid96(geocal_swig.geocal_datum.Datum):
     """
     This class read the EGM 96 geoid data to provide a Datum.

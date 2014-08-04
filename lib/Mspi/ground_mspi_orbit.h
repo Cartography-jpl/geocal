@@ -36,8 +36,7 @@ class GroundMspiOrbit : public Orbit {
 public:
 //-----------------------------------------------------------------------
 /// Constructor. The angles should be in degrees, and the rate is in
-/// degrees per second (might make more sense to have degrees here,
-/// but for now match what the old MSPI code did).
+/// degrees per second.
 //-----------------------------------------------------------------------
 
   GroundMspiOrbit(const Time& Start_time,

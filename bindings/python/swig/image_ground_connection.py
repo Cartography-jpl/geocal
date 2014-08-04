@@ -453,6 +453,7 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
         self.this.disown()
         _image_ground_connection.disown_ImageGroundConnection(self)
         return weakref_proxy(self)
+ImageGroundConnection.initialize = new_instancemethod(_image_ground_connection.ImageGroundConnection_initialize,None,ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_lv = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_lv,None,ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_pos = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_pos,None,ImageGroundConnection)
 ImageGroundConnection.__ground_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection___ground_coordinate,None,ImageGroundConnection)

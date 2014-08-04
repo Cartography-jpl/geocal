@@ -6686,6 +6686,563 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ImageGroundConnection_initialize__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageGroundConnection *arg1 = (GeoCal::ImageGroundConnection *) 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImageMultiBand > *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared1 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared2 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared2 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > tempshared3 ;
+  boost::shared_ptr< GeoCal::RasterImage > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImageMultiBand > tempshared4 ;
+  boost::shared_ptr< GeoCal::RasterImageMultiBand > temp2shared4 ;
+  int res5 = SWIG_OLDOBJ ;
+  SwigDirector_ImageGroundConnection *darg = 0;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ImageGroundConnection_initialize" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::ImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ImageGroundConnection_initialize" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "ImageGroundConnection_initialize" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
+      arg3 = &tempshared3;
+    } else {
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
+    }
+  }
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "ImageGroundConnection_initialize" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::RasterImageMultiBand > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4) : &tempshared4;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "ImageGroundConnection_initialize" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageGroundConnection_initialize" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  darg = dynamic_cast<SwigDirector_ImageGroundConnection *>(arg1);
+  {
+    try {
+      (darg)->initialize((boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg4,(std::string const &)*arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ImageGroundConnection_initialize__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageGroundConnection *arg1 = (GeoCal::ImageGroundConnection *) 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImageMultiBand > *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  boost::shared_ptr< GeoCal::ImageMask > *arg6 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared1 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared2 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared2 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > tempshared3 ;
+  boost::shared_ptr< GeoCal::RasterImage > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImageMultiBand > tempshared4 ;
+  boost::shared_ptr< GeoCal::RasterImageMultiBand > temp2shared4 ;
+  int res5 = SWIG_OLDOBJ ;
+  void *argp6 ;
+  int res6 = 0 ;
+  boost::shared_ptr< GeoCal::ImageMask > tempshared6 ;
+  boost::shared_ptr< GeoCal::ImageMask > temp2shared6 ;
+  SwigDirector_ImageGroundConnection *darg = 0;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ImageGroundConnection_initialize" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::ImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ImageGroundConnection_initialize" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "ImageGroundConnection_initialize" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
+      arg3 = &tempshared3;
+    } else {
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
+    }
+  }
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "ImageGroundConnection_initialize" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::RasterImageMultiBand > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4) : &tempshared4;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "ImageGroundConnection_initialize" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageGroundConnection_initialize" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    int newmem = 0;
+    res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t,  0 , &newmem);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "ImageGroundConnection_initialize" "', argument " "6"" of type '" "boost::shared_ptr< GeoCal::ImageMask > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp6) tempshared6 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp6);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp6);
+      arg6 = &tempshared6;
+    } else {
+      arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp6) : &tempshared6;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg6->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared6.reset(arg6->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg6 = &temp2shared6;
+    }
+  }
+  darg = dynamic_cast<SwigDirector_ImageGroundConnection *>(arg1);
+  {
+    try {
+      (darg)->initialize((boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg4,(std::string const &)*arg5,(boost::shared_ptr< GeoCal::ImageMask > const &)*arg6);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ImageGroundConnection_initialize__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageGroundConnection *arg1 = (GeoCal::ImageGroundConnection *) 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImageMultiBand > *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  boost::shared_ptr< GeoCal::ImageMask > *arg6 = 0 ;
+  boost::shared_ptr< GeoCal::GroundMask > *arg7 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared1 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared2 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared2 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > tempshared3 ;
+  boost::shared_ptr< GeoCal::RasterImage > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImageMultiBand > tempshared4 ;
+  boost::shared_ptr< GeoCal::RasterImageMultiBand > temp2shared4 ;
+  int res5 = SWIG_OLDOBJ ;
+  void *argp6 ;
+  int res6 = 0 ;
+  boost::shared_ptr< GeoCal::ImageMask > tempshared6 ;
+  boost::shared_ptr< GeoCal::ImageMask > temp2shared6 ;
+  void *argp7 ;
+  int res7 = 0 ;
+  boost::shared_ptr< GeoCal::GroundMask > tempshared7 ;
+  boost::shared_ptr< GeoCal::GroundMask > temp2shared7 ;
+  SwigDirector_ImageGroundConnection *darg = 0;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ImageGroundConnection_initialize" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::ImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ImageGroundConnection_initialize" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "ImageGroundConnection_initialize" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
+      arg3 = &tempshared3;
+    } else {
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
+    }
+  }
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "ImageGroundConnection_initialize" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::RasterImageMultiBand > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4) : &tempshared4;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "ImageGroundConnection_initialize" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ImageGroundConnection_initialize" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    int newmem = 0;
+    res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t,  0 , &newmem);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "ImageGroundConnection_initialize" "', argument " "6"" of type '" "boost::shared_ptr< GeoCal::ImageMask > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp6) tempshared6 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp6);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp6);
+      arg6 = &tempshared6;
+    } else {
+      arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp6) : &tempshared6;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg6->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared6.reset(arg6->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg6 = &temp2shared6;
+    }
+  }
+  {
+    int newmem = 0;
+    res7 = SWIG_ConvertPtrAndOwn(swig_obj[6], &argp7, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t,  0 , &newmem);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "ImageGroundConnection_initialize" "', argument " "7"" of type '" "boost::shared_ptr< GeoCal::GroundMask > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp7) tempshared7 = *reinterpret_cast< boost::shared_ptr< GeoCal::GroundMask > * >(argp7);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::GroundMask > * >(argp7);
+      arg7 = &tempshared7;
+    } else {
+      arg7 = (argp7) ? reinterpret_cast< boost::shared_ptr< GeoCal::GroundMask > * >(argp7) : &tempshared7;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg7->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared7.reset(arg7->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg7 = &temp2shared7;
+    }
+  }
+  darg = dynamic_cast<SwigDirector_ImageGroundConnection *>(arg1);
+  {
+    try {
+      (darg)->initialize((boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg4,(std::string const &)*arg5,(boost::shared_ptr< GeoCal::ImageMask > const &)*arg6,(boost::shared_ptr< GeoCal::GroundMask > const &)*arg7);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ImageGroundConnection_initialize(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[8];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"ImageGroundConnection_initialize",0,7,argv))) SWIG_fail;
+  --argc;
+  if (argc == 5) {
+    return _wrap_ImageGroundConnection_initialize__SWIG_0(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_ImageGroundConnection_initialize__SWIG_1(self, argc, argv);
+  }
+  if (argc == 7) {
+    return _wrap_ImageGroundConnection_initialize__SWIG_2(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'ImageGroundConnection_initialize'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::ImageGroundConnection::initialize(boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,boost::shared_ptr< GeoCal::RasterImageMultiBand > const &,std::string const &)\n"
+    "    GeoCal::ImageGroundConnection::initialize(boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,boost::shared_ptr< GeoCal::RasterImageMultiBand > const &,std::string const &,boost::shared_ptr< GeoCal::ImageMask > const &)\n"
+    "    GeoCal::ImageGroundConnection::initialize(boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,boost::shared_ptr< GeoCal::RasterImageMultiBand > const &,std::string const &,boost::shared_ptr< GeoCal::ImageMask > const &,boost::shared_ptr< GeoCal::GroundMask > const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_ImageGroundConnection__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   PyObject *arg1 = (PyObject *) 0 ;
@@ -9835,6 +10392,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ImageGroundConnectionFailed_swigregister", ImageGroundConnectionFailed_swigregister, METH_VARARGS, NULL},
 	 { (char *)"ImageGroundConnectionFailed_swiginit", ImageGroundConnectionFailed_swiginit, METH_VARARGS, NULL},
+	 { (char *)"ImageGroundConnection_initialize", _wrap_ImageGroundConnection_initialize, METH_VARARGS, NULL},
 	 { (char *)"new_ImageGroundConnection", _wrap_new_ImageGroundConnection, METH_VARARGS, NULL},
 	 { (char *)"delete_ImageGroundConnection", (PyCFunction)_wrap_delete_ImageGroundConnection, METH_O, (char *)"\n"
 		"virtual GeoCal::ImageGroundConnection::~ImageGroundConnection()\n"

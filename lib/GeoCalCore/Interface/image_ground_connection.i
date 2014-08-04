@@ -65,6 +65,21 @@ protected:
 			const std::string& Title,
 			const boost::shared_ptr<ImageMask>& Img_mask,
 			const boost::shared_ptr<GroundMask>& Ground_mask);
+  void initialize(const boost::shared_ptr<Dem>& d, 
+			const boost::shared_ptr<RasterImage>& Img, 
+			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
+			const std::string& Title);
+  void initialize(const boost::shared_ptr<Dem>& d, 
+			const boost::shared_ptr<RasterImage>& Img, 
+			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
+			const std::string& Title,
+			const boost::shared_ptr<ImageMask>& Img_mask);
+  void initialize(const boost::shared_ptr<Dem>& d, 
+			const boost::shared_ptr<RasterImage>& Img, 
+			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
+			const std::string& Title,
+			const boost::shared_ptr<ImageMask>& Img_mask,
+			const boost::shared_ptr<GroundMask>& Ground_mask);
   ImageGroundConnection();
 public:
   virtual ~ImageGroundConnection();

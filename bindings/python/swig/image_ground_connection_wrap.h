@@ -37,6 +37,7 @@ public:
     virtual std::vector< std::string,std::allocator< std::string > > parameter_name() const;
     virtual double resolution_meter(GeoCal::ImageCoordinate const &Ic) const;
     virtual double resolution_meter() const;
+    using GeoCal::ImageGroundConnection::initialize;
 
 
 /* Internal Director utilities */

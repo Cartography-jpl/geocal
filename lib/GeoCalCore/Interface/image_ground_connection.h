@@ -309,6 +309,12 @@ public:
   const Dem& dem() const { return *dem_;}
 
 protected:
+//-----------------------------------------------------------------------
+/// Constructor. As a convenience, if Img_mask or Ground_mask are null
+/// pointer, we replace them with an empty CombinedImageMask or
+/// CombinedGroundMask.
+//-----------------------------------------------------------------------
+
   ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
 			const boost::shared_ptr<RasterImage>& Img, 
 			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
@@ -316,8 +322,17 @@ protected:
 			const boost::shared_ptr<ImageMask>& Img_mask = 
 			boost::shared_ptr<ImageMask>(),
 			const boost::shared_ptr<GroundMask>& Ground_mask =
-			boost::shared_ptr<GroundMask>());
+			boost::shared_ptr<GroundMask>())
+  { initialize(d, Img, Img_mb, Title, Img_mask, Ground_mask); }
   ImageGroundConnection() {}
+  void initialize(const boost::shared_ptr<Dem>& d, 
+		  const boost::shared_ptr<RasterImage>& Img, 
+		  const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
+		  const std::string& Title,
+		  const boost::shared_ptr<ImageMask>& Img_mask = 
+		  boost::shared_ptr<ImageMask>(),
+		  const boost::shared_ptr<GroundMask>& Ground_mask =
+		  boost::shared_ptr<GroundMask>());
   /// DEM to use, should be set by constructor.
   boost::shared_ptr<Dem> dem_;
   /// Raster image to use, should be set by constructor. This might be

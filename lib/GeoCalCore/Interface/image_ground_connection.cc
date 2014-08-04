@@ -5,21 +5,25 @@ using namespace GeoCal;
 using namespace blitz;
 
 //-----------------------------------------------------------------------
-/// Constructor. As a convenience, if Img_mask or Ground_mask are null
+/// Initializer. As a convenience, if Img_mask or Ground_mask are null
 /// pointer, we replace them with an empty CombinedImageMask or
 /// CombinedGroundMask.
 //-----------------------------------------------------------------------
-ImageGroundConnection::ImageGroundConnection
+
+void ImageGroundConnection::initialize
 (const boost::shared_ptr<Dem>& d, 
  const boost::shared_ptr<RasterImage>& Img, 
  const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
  const std::string& Title,
  const boost::shared_ptr<ImageMask>& Img_mask,
  const boost::shared_ptr<GroundMask>& Ground_mask)
-: dem_(d), image_(Img), image_mb_(Img_mb), title_(Title), 
-  image_mask_(Img_mask),
-  ground_mask_(Ground_mask)
 {
+  dem_ = d;
+  image_ = Img;
+  image_mb_ = Img_mb;
+  title_ = Title;
+  image_mask_ = Img_mask;
+  ground_mask_ = Ground_mask;
   if(!image_mask_)
     image_mask_.reset(new CombinedImageMask);
   if(!ground_mask_)

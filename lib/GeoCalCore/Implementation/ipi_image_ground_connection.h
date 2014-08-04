@@ -103,6 +103,20 @@ public:
   virtual int number_line() const { return ipi_->time_table().max_line(); }
   virtual int number_sample() const 
   { return ipi_->camera().number_sample(ipi_->band()); }
+protected:
+  IpiImageGroundConnection() {}
+  void initialize(const boost::shared_ptr<Ipi>& I, 
+		  const boost::shared_ptr<Dem>& D,
+		  const boost::shared_ptr<RasterImage>& Img,
+		  const std::string& Title = "Image",
+		  double Resolution = 30, 
+		  double Max_height = 9000)
+  { ImageGroundConnection::initialize(D, Img, 
+	      boost::shared_ptr<RasterImageMultiBand>(), Title);
+    ipi_ = I;
+    res = Resolution;
+    max_h = Max_height;
+  }
 private:
   boost::shared_ptr<Ipi> ipi_;
   double res, max_h;

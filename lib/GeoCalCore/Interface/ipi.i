@@ -43,7 +43,7 @@ public:
   %python_attribute2_with_set(orbit, orbit_ptr, boost::shared_ptr<Orbit>)
   %python_attribute2_with_set(camera, camera_ptr, boost::shared_ptr<Camera>)
   %python_attribute2(time_table, time_table_ptr, boost::shared_ptr<TimeTable>)
-  %python_attribute(band, int)
+  %python_attribute_with_set(band, int)
   %python_attribute(min_time, Time)
   %python_attribute(max_time, Time)
   %python_attribute(local_time_window_size, double)

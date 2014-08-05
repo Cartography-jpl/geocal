@@ -32,6 +32,20 @@ public:
   DcsLookVector solar_look(int Line_number) const;
   DcsLookVector normal_look(int Line_number) const;
   DcsLookVector pixel_look(int Sample_number) const;
+
+//-----------------------------------------------------------------------
+/// Band that we are using.
+//-----------------------------------------------------------------------
+
+  int band() const {return ipi().band(); }
+
+//-----------------------------------------------------------------------
+/// Set band that we are using.
+//-----------------------------------------------------------------------
+
+  void band(int B) { ipi_ptr()->band(B); }
+
+
 private:
   // This is a duplicate of what is passed to the base class. We have
   // a copy here because some things we do with this class requires a

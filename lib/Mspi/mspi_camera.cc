@@ -200,3 +200,20 @@ int MspiCamera::band_number(int Row_number) const
   }
   return (int)(f - row_number_.begin());
 }
+
+//-----------------------------------------------------------------------
+/// Return angular separation (in radians) between the given reference and
+/// target bands in the real focal plane.
+/// (MSPI L1B2 ATB equation 14 -- *modified* to use Forigin in place of b0)
+//-----------------------------------------------------------------------
+
+double MspiCamera::angular_separation
+(int Reference_band, int Target_band) const
+{
+  double res = 
+    atan(line_pitch() * principal_point(Target_band).line / focal_length()) -
+    atan(line_pitch() * principal_point(Reference_band).line / focal_length());
+  if(inversion())
+    res *= -1;
+  return res;
+}

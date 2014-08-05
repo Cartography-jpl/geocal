@@ -161,10 +161,26 @@ class GroundMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnec
         """
         return _ground_mspi_igc.GroundMspiIgc_pixel_look(self, *args)
 
+    def _v_band(self, *args):
+        """
+        void GeoCal::GroundMspiIgc::band(int B)
+        Set band that we are using. 
+        """
+        return _ground_mspi_igc.GroundMspiIgc__v_band(self, *args)
+
+    @property
+    def band(self):
+        return self._v_band()
+
+    @band.setter
+    def band(self, value):
+      self._v_band(value)
+
     __swig_destroy__ = _ground_mspi_igc.delete_GroundMspiIgc
 GroundMspiIgc.solar_look = new_instancemethod(_ground_mspi_igc.GroundMspiIgc_solar_look,None,GroundMspiIgc)
 GroundMspiIgc.normal_look = new_instancemethod(_ground_mspi_igc.GroundMspiIgc_normal_look,None,GroundMspiIgc)
 GroundMspiIgc.pixel_look = new_instancemethod(_ground_mspi_igc.GroundMspiIgc_pixel_look,None,GroundMspiIgc)
+GroundMspiIgc._v_band = new_instancemethod(_ground_mspi_igc.GroundMspiIgc__v_band,None,GroundMspiIgc)
 GroundMspiIgc_swigregister = _ground_mspi_igc.GroundMspiIgc_swigregister
 GroundMspiIgc_swigregister(GroundMspiIgc)
 

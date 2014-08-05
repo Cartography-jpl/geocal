@@ -121,6 +121,7 @@ public:
     range_check(Band, 0, number_band());
     return row_number_[Band];
   }
+  double angular_separation(int Reference_band, int Target_band) const;
   int band_number(int Row_number) const;
   virtual blitz::Array<double, 1> parameter() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);

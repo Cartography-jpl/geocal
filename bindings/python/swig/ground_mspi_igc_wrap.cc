@@ -5898,6 +5898,119 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GroundMspiIgc__v_band__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::GroundMspiIgc *arg1 = (GeoCal::GroundMspiIgc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GroundMspiIgc const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GroundMspiIgc const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMspiIgc_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundMspiIgc__v_band" "', argument " "1"" of type '" "GeoCal::GroundMspiIgc const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMspiIgc > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMspiIgc > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMspiIgc * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GroundMspiIgc > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMspiIgc * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::GroundMspiIgc const *)arg1)->band();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GroundMspiIgc__v_band__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::GroundMspiIgc *arg1 = (GeoCal::GroundMspiIgc *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GroundMspiIgc > tempshared1 ;
+  boost::shared_ptr< GeoCal::GroundMspiIgc > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMspiIgc_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundMspiIgc__v_band" "', argument " "1"" of type '" "GeoCal::GroundMspiIgc *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GroundMspiIgc > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::GroundMspiIgc > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMspiIgc * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::GroundMspiIgc > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundMspiIgc * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "GroundMspiIgc__v_band" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->band((int const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GroundMspiIgc__v_band(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"GroundMspiIgc__v_band",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_GroundMspiIgc__v_band__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_GroundMspiIgc__v_band__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'GroundMspiIgc__v_band'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::GroundMspiIgc::band() const\n"
+    "    GeoCal::GroundMspiIgc::band(int const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_GroundMspiIgc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GroundMspiIgc *arg1 = (GeoCal::GroundMspiIgc *) 0 ;
@@ -5971,6 +6084,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"GroundMspiIgc_pixel_look", _wrap_GroundMspiIgc_pixel_look, METH_VARARGS, (char *)"\n"
 		"DcsLookVector GroundMspiIgc::pixel_look(int Sample_number) const\n"
 		"Return pixel look vector to detector coordinates. \n"
+		""},
+	 { (char *)"GroundMspiIgc__v_band", _wrap_GroundMspiIgc__v_band, METH_VARARGS, (char *)"\n"
+		"void GeoCal::GroundMspiIgc::band(int B)\n"
+		"Set band that we are using. \n"
 		""},
 	 { (char *)"delete_GroundMspiIgc", (PyCFunction)_wrap_delete_GroundMspiIgc, METH_O, (char *)"\n"
 		"virtual GeoCal::GroundMspiIgc::~GroundMspiIgc()\n"

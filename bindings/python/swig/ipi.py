@@ -289,16 +289,20 @@ class Ipi(geocal_swig.generic_object.GenericObject):
     def time_table(self):
         return self._v_time_table()
 
-    def _v_band(self):
+    def _v_band(self, *args):
         """
-        int GeoCal::Ipi::band() const
-        Band that we are using. 
+        void GeoCal::Ipi::band(int B)
+        Set band that we are using. 
         """
-        return _ipi.Ipi__v_band(self)
+        return _ipi.Ipi__v_band(self, *args)
 
     @property
     def band(self):
         return self._v_band()
+
+    @band.setter
+    def band(self, value):
+      self._v_band(value)
 
     def _v_min_time(self):
         """

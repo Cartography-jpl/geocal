@@ -129,7 +129,7 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     and conversion to FrameCoordinate (and vice versa). This base class
     doesn't model any nonlinear corrections - we just model a pinhole. But
     derived classes can override the dcs_to_focal_plane and
-    focal_plane_to_xcs functions to put in whatever functionality is
+    focal_plane_to_dcs functions to put in whatever functionality is
     desired.
 
     There are 2 conventions used for the frame coordinates. The convention

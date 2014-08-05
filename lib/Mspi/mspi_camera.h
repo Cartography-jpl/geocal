@@ -122,6 +122,10 @@ public:
     return row_number_[Band];
   }
   double angular_separation(int Reference_band, int Target_band) const;
+  void paraxial_offset(int Band,
+		       const FrameCoordinate& F,
+		       double& Line_offset,
+		       double& Sample_offset) const;
   int band_number(int Row_number) const;
   virtual blitz::Array<double, 1> parameter() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);

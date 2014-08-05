@@ -163,6 +163,31 @@ BOOST_AUTO_TEST_CASE(basic_test)
   for(int b = 0; b < cam.number_band(); ++b)
     BOOST_CHECK_CLOSE(cam.angular_separation(1, b), 
 		      angular_separation_expect[b], 1e-8);
+
+  double loff_expect[nband] = 
+	{3.91114046925584588621e+01,
+	 3.93225488022550777600e+01,
+	 3.95515012995958485931e+01,
+	 3.91114046925584588621e+01,
+	 3.93225488022550777600e+01,
+	 3.95515012995958485931e+01,
+	 0.0};
+  double soff_expect[nband] = 
+	{3.12289783792453867761e+01,
+	 3.16220033730039595810e+01,
+	 3.20145509437610442660e+01,
+	 3.12289783792453867761e+01,
+	 3.16220033730039595810e+01,
+	 3.20145509437610442660e+01,
+	 0.0};
+
+  FrameCoordinate f(-0.3, 0.1);
+  for(int b = 0; b < cam.number_band(); ++b) {
+    double loff, soff;
+    cam.paraxial_offset(b, f, loff, soff);
+    BOOST_CHECK_CLOSE(loff, loff_expect[b], 1e-8);
+    BOOST_CHECK_CLOSE(soff, soff_expect[b], 1e-8);
+  }
 }
 
 BOOST_AUTO_TEST_CASE(line_direction_reversed_test)

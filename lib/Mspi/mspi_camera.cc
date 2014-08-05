@@ -210,10 +210,35 @@ int MspiCamera::band_number(int Row_number) const
 double MspiCamera::angular_separation
 (int Reference_band, int Target_band) const
 {
-  double res = 
+  return
     atan(line_pitch() * principal_point(Target_band).line / focal_length()) -
-    atan(line_pitch() * principal_point(Reference_band).line / focal_length());
-  if(inversion())
-    res *= -1;
-  return res;
+    atan(line_pitch() * principal_point(Reference_band).line / focal_length())
+    * inversion_;
+}
+
+//-----------------------------------------------------------------------
+/// Return paraxial displacement (in pixel units) for the given frame
+/// coordinate and band.  The paraxial transform equations are defined
+/// such that the frame line coordinate is always assumed to be zero
+/// (i.e. centered in the line for the given band).  Therefore values other
+/// than zero for frame line will not produce a different result.
+//-----------------------------------------------------------------------
+
+void MspiCamera::paraxial_offset
+(int Band,
+ const FrameCoordinate& F,
+ double& Line_offset,
+ double& Sample_offset) const
+{
+  double xf_prime = 
+    (F.sample - principal_point(Band).sample) * sample_pitch() * 
+    samp_dir();
+  double yf_prime = (F.line - principal_point(Band).line) * line_pitch()
+    * line_dir();
+  
+  double xf, yf;
+  paraxial_transform_->real_to_paraxial(row_number_[Band], xf_prime, yf_prime,
+					xf, yf);
+  Line_offset = inversion_ * (yf - yf_prime) / line_pitch();
+  Sample_offset = (xf - xf_prime) / sample_pitch();
 }

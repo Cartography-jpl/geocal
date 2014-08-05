@@ -3489,23 +3489,24 @@ namespace Swig {
 #define SWIGTYPE_p_char swig_types[37]
 #define SWIGTYPE_p_char_type swig_types[38]
 #define SWIGTYPE_p_difference_type swig_types[39]
-#define SWIGTYPE_p_fmtflags swig_types[40]
-#define SWIGTYPE_p_int_type swig_types[41]
-#define SWIGTYPE_p_iostate swig_types[42]
-#define SWIGTYPE_p_off_type swig_types[43]
-#define SWIGTYPE_p_openmode swig_types[44]
-#define SWIGTYPE_p_pos_type swig_types[45]
-#define SWIGTYPE_p_seekdir swig_types[46]
-#define SWIGTYPE_p_size_t swig_types[47]
-#define SWIGTYPE_p_size_type swig_types[48]
-#define SWIGTYPE_p_state_type swig_types[49]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[50]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[51]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[52]
-#define SWIGTYPE_p_traits_type swig_types[53]
-#define SWIGTYPE_p_value_type swig_types[54]
-static swig_type_info *swig_types[56];
-static swig_module_info swig_module = {swig_types, 55, 0, 0, 0, 0};
+#define SWIGTYPE_p_double swig_types[40]
+#define SWIGTYPE_p_fmtflags swig_types[41]
+#define SWIGTYPE_p_int_type swig_types[42]
+#define SWIGTYPE_p_iostate swig_types[43]
+#define SWIGTYPE_p_off_type swig_types[44]
+#define SWIGTYPE_p_openmode swig_types[45]
+#define SWIGTYPE_p_pos_type swig_types[46]
+#define SWIGTYPE_p_seekdir swig_types[47]
+#define SWIGTYPE_p_size_t swig_types[48]
+#define SWIGTYPE_p_size_type swig_types[49]
+#define SWIGTYPE_p_state_type swig_types[50]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[51]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[52]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[53]
+#define SWIGTYPE_p_traits_type swig_types[54]
+#define SWIGTYPE_p_value_type swig_types[55]
+static swig_type_info *swig_types[57];
+static swig_module_info swig_module = {swig_types, 56, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5911,6 +5912,104 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MspiCamera_paraxial_offset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiCamera *arg1 = (GeoCal::MspiCamera *) 0 ;
+  int arg2 ;
+  GeoCal::FrameCoordinate *arg3 = 0 ;
+  double *arg4 = 0 ;
+  double *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiCamera const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared3 ;
+  double temp4 ;
+  int res4 = SWIG_TMPOBJ ;
+  double temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[3] ;
+  
+  arg4 = &temp4;
+  arg5 = &temp5;
+  if (!SWIG_Python_UnpackTuple(args,"MspiCamera_paraxial_offset",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiCamera_paraxial_offset" "', argument " "1"" of type '" "GeoCal::MspiCamera const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MspiCamera_paraxial_offset" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::FrameCoordinate *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "MspiCamera_paraxial_offset" "', argument " "3"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiCamera_paraxial_offset" "', argument " "3"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::FrameCoordinate * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::MspiCamera const *)arg1)->paraxial_offset(arg2,(GeoCal::FrameCoordinate const &)*arg3,*arg4,*arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res4)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg4)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res4) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg4), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MspiCamera_row_number(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiCamera *arg1 = (GeoCal::MspiCamera *) 0 ;
@@ -6168,6 +6267,17 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"(MSPI L1B2 ATB equation 14 modified to use Forigin in place of b0) \n"
 		""},
+	 { (char *)"MspiCamera_paraxial_offset", _wrap_MspiCamera_paraxial_offset, METH_VARARGS, (char *)"\n"
+		"void MspiCamera::paraxial_offset(int Band, const FrameCoordinate &F, double &Line_offset, double\n"
+		"&Sample_offset) const\n"
+		"Return paraxial displacement (in pixel units) for the given frame\n"
+		"coordinate and band.\n"
+		"\n"
+		"The paraxial transform equations are defined such that the frame line\n"
+		"coordinate is always assumed to be zero (i.e. centered in the line for\n"
+		"the given band). Therefore values other than zero for frame line will\n"
+		"not produce a different result. \n"
+		""},
 	 { (char *)"MspiCamera_row_number", _wrap_MspiCamera_row_number, METH_VARARGS, (char *)"\n"
 		"int GeoCal::MspiCamera::row_number(int Band) const\n"
 		"Return the camera row number for the given band.\n"
@@ -6371,6 +6481,7 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Time_t = {"_p_boost__
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_fmtflags = {"_p_fmtflags", "fmtflags *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
@@ -6428,6 +6539,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
+  &_swigt__p_double,
   &_swigt__p_fmtflags,
   &_swigt__p_int_type,
   &_swigt__p_iostate,
@@ -6485,6 +6597,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swig
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_fmtflags[] = {  {&_swigt__p_fmtflags, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
@@ -6542,6 +6655,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,
+  _swigc__p_double,
   _swigc__p_fmtflags,
   _swigc__p_int_type,
   _swigc__p_iostate,

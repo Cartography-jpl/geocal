@@ -28,6 +28,10 @@ public:
   %python_attribute(boresight_angle, double);
   %python_attribute(inversion, bool);
   double angular_separation(int Reference_band, int Target_band) const;
+  void paraxial_offset(int Band,
+		       const FrameCoordinate& F,
+		       double& OUTPUT,
+		       double& OUTPUT) const;
   int row_number(int Band) const;
   int band_number(int Row_number) const;
   std::string print_to_string() const;

@@ -270,6 +270,20 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         """
         return _mspi_camera.MspiCamera_angular_separation(self, *args)
 
+    def paraxial_offset(self, *args):
+        """
+        void MspiCamera::paraxial_offset(int Band, const FrameCoordinate &F, double &Line_offset, double
+        &Sample_offset) const
+        Return paraxial displacement (in pixel units) for the given frame
+        coordinate and band.
+
+        The paraxial transform equations are defined such that the frame line
+        coordinate is always assumed to be zero (i.e. centered in the line for
+        the given band). Therefore values other than zero for frame line will
+        not produce a different result. 
+        """
+        return _mspi_camera.MspiCamera_paraxial_offset(self, *args)
+
     def row_number(self, *args):
         """
         int GeoCal::MspiCamera::row_number(int Band) const
@@ -307,6 +321,7 @@ MspiCamera._v_roll = new_instancemethod(_mspi_camera.MspiCamera__v_roll,None,Msp
 MspiCamera._v_boresight_angle = new_instancemethod(_mspi_camera.MspiCamera__v_boresight_angle,None,MspiCamera)
 MspiCamera._v_inversion = new_instancemethod(_mspi_camera.MspiCamera__v_inversion,None,MspiCamera)
 MspiCamera.angular_separation = new_instancemethod(_mspi_camera.MspiCamera_angular_separation,None,MspiCamera)
+MspiCamera.paraxial_offset = new_instancemethod(_mspi_camera.MspiCamera_paraxial_offset,None,MspiCamera)
 MspiCamera.row_number = new_instancemethod(_mspi_camera.MspiCamera_row_number,None,MspiCamera)
 MspiCamera.band_number = new_instancemethod(_mspi_camera.MspiCamera_band_number,None,MspiCamera)
 MspiCamera.__str__ = new_instancemethod(_mspi_camera.MspiCamera___str__,None,MspiCamera)

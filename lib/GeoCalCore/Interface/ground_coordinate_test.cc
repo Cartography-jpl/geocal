@@ -74,6 +74,21 @@ BOOST_AUTO_TEST_CASE(ecr)
   BOOST_CHECK_CLOSE(e_ecr->position[2], e_ecr_start->position[2], 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(solar_angle)
+{
+  Time t = Time::parse_time("1996-07-03T04:13:57.987654Z") + 10;
+  CartesianFixedLookVector lv(Ecr::sub_solar_point(t).position);
+  Geodetic p(50, 60, 1);
+  LnLookVector ln(lv, p);
+  // The results are from an old unit test in MSPI code. We don't
+  // expect this to exactly match because the MSPI code used the SDP
+  // toolkit. But should be close.
+  BOOST_CHECK_CLOSE(ln.view_zenith(), 9.06966388e-01 * Constant::rad_to_deg, 
+		    0.1);
+  BOOST_CHECK_CLOSE(ln.view_azimuth(), 4.87556601e+00 * Constant::rad_to_deg, 
+		    0.1);
+}
+
 BOOST_AUTO_TEST_CASE(geodetic)
 {
   Geodetic g(30, 40, 50);

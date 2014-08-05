@@ -72,6 +72,8 @@ public:
   cf_to_enu(const GroundCoordinate& Ref_pt);
   static boost::math::quaternion<double> 
       enu_to_cf(const GroundCoordinate& Ref_pt);
+  static LnLookVector solar_look_vector(const Time& T, 
+					const GroundCoordinate& Ref_pt);
   %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])
 };

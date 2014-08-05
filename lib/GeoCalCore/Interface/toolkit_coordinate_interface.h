@@ -42,6 +42,13 @@ public:
 			double Ci_to_cf[3][3]) = 0;
 
 
+//-----------------------------------------------------------------------
+/// Return the subsolar point on the given body for the give time.
+//-----------------------------------------------------------------------
+
+  virtual void 
+  sub_solar_point(int Body_id, const Time& T, CartesianFixed& P) = 0;
+
 };
 
 }

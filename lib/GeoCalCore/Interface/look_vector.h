@@ -6,6 +6,7 @@
 #include <boost/math/quaternion.hpp>
 namespace GeoCal {
   class GroundCoordinate;	// Forward declaration.
+  class Time;
 
 /****************************************************************//**
   This is a look vector in an unspecified coordinate system. Derived
@@ -236,6 +237,10 @@ public:
 
   static boost::math::quaternion<double> 
   enu_to_cf(const GroundCoordinate& Ref_pt);
+  
+  static LnLookVector solar_look_vector(const Time& T, 
+					const GroundCoordinate& Ref_pt);
+
 };
 
 /****************************************************************//**

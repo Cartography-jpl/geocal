@@ -188,3 +188,17 @@ Ecr::reference_surface_intersect_approximate(
   res[2] = (pci[2] + dirci[2] * dl) * bph;
   return create(res);
 }
+
+//-----------------------------------------------------------------------
+/// Return the subsolar point for the given time. This is the point on
+/// the surface of the reference ellipsoid that lies on the line
+/// from the center of the earth to the sun.
+//-----------------------------------------------------------------------
+
+Ecr Ecr::sub_solar_point(const Time& T)
+{
+  Ecr res;
+  CartesianFixed::toolkit_coordinate_interface->
+    sub_solar_point((int) EARTH_NAIF_CODE, T, res);
+  return res;
+}

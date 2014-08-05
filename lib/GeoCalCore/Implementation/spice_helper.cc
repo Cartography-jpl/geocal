@@ -178,6 +178,35 @@ void SpiceHelper::conversion(const std::string& From,
 }
 
 //-----------------------------------------------------------------------
+/// Calculate the sub solar point. We include the one way light travel
+/// time plus stellar aberration. 
+//-----------------------------------------------------------------------
+
+void SpiceHelper::sub_solar_point_calc(const std::string& Body,
+				       const std::string& Ref_frame,
+				       const Time& T,
+				       boost::array<double, 3>& pout)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  double trgepc, srfvec[3];
+  // Not sure if we should correct for light travel time. Leaving
+  // the correction out gives us angles very close to what MISR
+  // calculates with the SDP toolkit. We'll do that for now, and
+  // revisit this if needed.
+  subslr_c(const_cast<char*>("Intercept: ellipsoid"),
+	   const_cast<char*>(Body.c_str()), T.et(),
+	   const_cast<char*>(Ref_frame.c_str()),
+	   //const_cast<char*>("lt+s"),
+	   const_cast<char*>("NONE"),
+	   const_cast<char*>("SUN"), &pout[0], &trgepc, srfvec);
+  spice_error_check();
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Return matrix that converts between the two names coordinate
 /// system. To avoid making a second copy, we return the data in
 /// SpiceHelper::m. 
@@ -319,6 +348,30 @@ void SpiceToolkitCoordinateInterface::to_fixed(int Body_id,
 {
   SpiceHelper::cartesian_inertial_to_cartesian_fixed(Body_id, T);
   mat_copy(SpiceHelper::m, Ci_to_cf);
+}
+
+void
+SpiceToolkitCoordinateInterface::sub_solar_point(int Body_id, const Time& T, 
+						 CartesianFixed& P)
+{
+  switch(Body_id) {
+  case 399:			// Earth
+    SpiceHelper::sub_solar_point_calc("EARTH", "ITRF93", T, P.position);
+    break;
+  case 499:			// Mars
+    SpiceHelper::sub_solar_point_calc("MARS", "IAU_MARS", T, P.position);
+    break;
+  case 301:			// Moon
+    SpiceHelper::sub_solar_point_calc("MOON", "IAU_MOON", T, P.position);
+    break;
+  default:
+    throw Exception("Not yet implemented");
+  }
+  // sub_solar_point_calc returns km, *not* meter. Since
+  // CartesianFixed expected meter convert this.
+  P.position[0] *= 1000.0;
+  P.position[1] *= 1000.0;
+  P.position[2] *= 1000.0;
 }
 
 //-----------------------------------------------------------------------

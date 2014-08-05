@@ -79,6 +79,7 @@ public:
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0) 
   const;
   virtual void print(std::ostream& Os) const;
+  static Ecr sub_solar_point(const Time& T);
 };
 }
 #endif

@@ -1,6 +1,7 @@
 #include "look_vector.h"
 #include "geocal_exception.h"
 #include "ground_coordinate.h"
+#include "ecr.h"
 #include "constant.h"
 #include <cmath>
 
@@ -92,6 +93,21 @@ LnLookVector::enu_to_cf(const GroundCoordinate& Ref_pt)
   // example the GroundMSPI L1B2 ATB.
   return quat_rot("zx", (Ref_pt.longitude() - 270) * Constant::deg_to_rad, 
 		  (90 - Ref_pt.latitude()) * Constant::deg_to_rad);
+}
+
+
+//-----------------------------------------------------------------------
+/// Return the solar look vector, which points from the given
+/// reference point to the sun in the local north coordinates. Can
+/// calculate solar zenith and azimuth from this.
+//-----------------------------------------------------------------------
+
+LnLookVector LnLookVector::solar_look_vector
+(const Time& T, 
+ const GroundCoordinate& Ref_pt)
+{
+  CartesianFixedLookVector lv(Ecr::sub_solar_point(T).position);
+  return LnLookVector(lv, Ref_pt);
 }
 
 //-----------------------------------------------------------------------

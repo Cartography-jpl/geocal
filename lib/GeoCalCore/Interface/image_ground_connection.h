@@ -170,6 +170,22 @@ public:
   { ground_mask_ = Ground_mask; }
 
 //-----------------------------------------------------------------------
+/// Not all ImageGroundConnection has a time associated with each
+/// pixel (for example, one based on an underlying existing map). This
+/// indicates if we have the functionality.
+//-----------------------------------------------------------------------
+  
+  virtual bool has_time() const { return false; }
+
+//-----------------------------------------------------------------------
+/// Time associated with the given pixel. This will throw an exception
+/// if has_time is false.
+//-----------------------------------------------------------------------
+
+  virtual Time pixel_time(const ImageCoordinate& Ic) const
+  { throw Exception("pixel_time is not implemented"); }
+
+//-----------------------------------------------------------------------
 /// Title that we can use to describe the image. This can be any
 /// string that is useful as a label.
 //-----------------------------------------------------------------------

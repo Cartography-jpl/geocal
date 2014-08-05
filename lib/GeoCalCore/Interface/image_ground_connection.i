@@ -116,6 +116,7 @@ public:
   %python_attribute(number_sample, virtual int)
   %python_attribute(number_band, virtual int)
   %python_attribute_with_set(title, std::string)
+  %python_attribute_with_set(has_time, bool)
   std::string print_to_string() const;
   %python_attribute_with_set(parameter, blitz::Array<double, 1>)
   %python_attribute(parameter_name, virtual std::vector<std::string>)

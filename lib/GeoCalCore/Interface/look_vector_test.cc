@@ -15,7 +15,7 @@ BOOST_AUTO_TEST_CASE(sc_look_vector)
   BOOST_CHECK_CLOSE(lv.direction()[0], 1.0, 1e-4);
   BOOST_CHECK_CLOSE(lv.direction()[1], 0.0, 1e-4);
   BOOST_CHECK_CLOSE(lv.direction()[2], 0.0, 1e-4);
-  BOOST_CHECK_EQUAL(lv.print_to_string(), "Look vector in spacecraft coordinatesg: \n  dir:    (1, 0, 0)\n  length: 10 m\n");
+  BOOST_CHECK_EQUAL(lv.print_to_string(), "Look vector in spacecraft coordinates: \n  dir:    (1, 0, 0)\n  length: 10 m\n");
 }
 
 BOOST_AUTO_TEST_CASE(solar_angle)

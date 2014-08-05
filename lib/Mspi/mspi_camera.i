@@ -4,6 +4,7 @@
 %include "common.i"
 
 %{
+#include "geocal_time.h"
 #include "mspi_camera.h"
 %}
 

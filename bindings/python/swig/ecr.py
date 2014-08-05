@@ -158,6 +158,17 @@ class Ecr(geocal_swig.ground_coordinate.CartesianFixed):
         """
         return _ecr.Ecr_reference_surface_intersect_approximate(self, *args)
 
+    def sub_solar_point(*args):
+        """
+        Ecr Ecr::sub_solar_point(const Time &T)
+        Return the subsolar point for the given time.
+
+        This is the point on the surface of the reference ellipsoid that lies
+        on the line from the center of the earth to the sun. 
+        """
+        return _ecr.Ecr_sub_solar_point(*args)
+
+    sub_solar_point = staticmethod(sub_solar_point)
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -170,6 +181,16 @@ Ecr.convert_to_geodetic = new_instancemethod(_ecr.Ecr_convert_to_geodetic,None,E
 Ecr.reference_surface_intersect_approximate = new_instancemethod(_ecr.Ecr_reference_surface_intersect_approximate,None,Ecr)
 Ecr_swigregister = _ecr.Ecr_swigregister
 Ecr_swigregister(Ecr)
+
+def Ecr_sub_solar_point(*args):
+  """
+    Ecr Ecr::sub_solar_point(const Time &T)
+    Return the subsolar point for the given time.
+
+    This is the point on the surface of the reference ellipsoid that lies
+    on the line from the center of the earth to the sun. 
+    """
+  return _ecr.Ecr_sub_solar_point(*args)
 
 
 

@@ -6,26 +6,6 @@
 using namespace GeoCal;
 BOOST_FIXTURE_TEST_SUITE(ground_mspi_orbit, GlobalFixture)
 
-BOOST_AUTO_TEST_CASE(orbit_data_test)
-{
-  Time t = Time::parse_time("1996-07-03T04:13:57.987654Z") + 10;
-  Geodetic p(10, 20, 30);
-  GroundMspiOrbitData od(t, p, 40, 50);
-  // From the old unit test.
-  CartesianInertialLookVector lv_exp(2.86846356437898797331e-01,
-				     -2.35281822197117601592e-01,
-				     4.85966247995245070879e-02);
-  CartesianInertialLookVector lv = od.ci_look_vector(ScLookVector(0.1,0.2,0.3));
-  for(int i = 0; i < 3; ++i)
-    BOOST_CHECK_CLOSE(lv.direction()[i], lv_exp.direction()[i], 1e-4);
-  LnLookVector ln_lv_exp(-2.59612460458973348665e-01, 
-			 1.75068293787869477818e-03,
-			 2.69440727217859610221e-01);
-
-  LnLookVector ln_lv = od.ln_look_vector(ScLookVector(0.1,0.2,0.3));
-  for(int i = 0; i < 3; ++i)
-    BOOST_CHECK_CLOSE(ln_lv.direction()[i], ln_lv_exp.direction()[i], 1e-4);
-}
 
 BOOST_AUTO_TEST_CASE(basic_test)
 {

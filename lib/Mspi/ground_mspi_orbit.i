@@ -10,24 +10,8 @@
 %base_import(orbit)
 %import "look_vector.i"
 
-%geocal_shared_ptr(GeoCal::GroundMspiOrbitData);
 %geocal_shared_ptr(GeoCal::GroundMspiOrbit);
 namespace GeoCal {
-
-class GroundMspiOrbitData : public QuaternionOrbitData {
-public:
-  GroundMspiOrbitData(const Time& Tm, const GroundCoordinate& Pos,
-		      double Azimuth, double Zenith);
-  LnLookVector ln_look_vector(const ScLookVector& Sl) const;
-  LnLookVector ln_look_vector(const CartesianInertialLookVector& Ci) const;
-  LnLookVector ln_look_vector(const CartesianFixedLookVector& Cf) const;
-  virtual ScLookVector 
-  sc_look_vector(const CartesianInertialLookVector& Ci) const;
-  virtual ScLookVector 
-  sc_look_vector(const CartesianFixedLookVector& Cf) const;
-  virtual ScLookVector sc_look_vector(const LnLookVector& Ln) const;
-};
-
 class GroundMspiOrbit : public Orbit {
 public:
   GroundMspiOrbit(const Time& Start_time,

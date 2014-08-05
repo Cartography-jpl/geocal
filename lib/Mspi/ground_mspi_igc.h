@@ -2,6 +2,7 @@
 #define GROUND_MSPI_IGC_H
 #include "ipi_image_ground_connection.h" 
 				// Definition of IpiImageGroundConnection
+#include "quaternion_camera.h" 	// Definition of QuaternionCamera.
 
 namespace GeoCal {
 
@@ -25,9 +26,18 @@ public:
 		double Start_elevation_angle,
 		double Rotation_rate,
 		const std::vector<Time>& Time_tag,
-		const boost::shared_ptr<Camera>& Cam,
+		const boost::shared_ptr<QuaternionCamera>& Cam,
 		int Band);
   virtual ~GroundMspiIgc() {}
+  DcsLookVector solar_look(int Line_number) const;
+  DcsLookVector normal_look(int Line_number) const;
+  DcsLookVector pixel_look(int Sample_number) const;
+private:
+  // This is a duplicate of what is passed to the base class. We have
+  // a copy here because some things we do with this class requires a
+  // QuaternionCamera (which can convert to and from DcsLookVector,
+  // that a general camera can't.
+  boost::shared_ptr<QuaternionCamera> mspi_cam;
 };
 }
 #endif

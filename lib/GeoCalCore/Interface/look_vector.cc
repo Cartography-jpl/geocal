@@ -97,6 +97,17 @@ LnLookVector::enu_to_cf(const GroundCoordinate& Ref_pt)
 
 
 //-----------------------------------------------------------------------
+/// Return the solar look vector, which points from the center of the
+/// the earth to the sun.
+//-----------------------------------------------------------------------
+
+CartesianFixedLookVector CartesianFixedLookVector::solar_look_vector
+(const Time& T)
+{
+  return CartesianFixedLookVector(Ecr::sub_solar_point(T).position);
+}
+
+//-----------------------------------------------------------------------
 /// Return the solar look vector, which points from the given
 /// reference point to the sun in the local north coordinates. Can
 /// calculate solar zenith and azimuth from this.
@@ -106,8 +117,7 @@ LnLookVector LnLookVector::solar_look_vector
 (const Time& T, 
  const GroundCoordinate& Ref_pt)
 {
-  CartesianFixedLookVector lv(Ecr::sub_solar_point(T).position);
-  return LnLookVector(lv, Ref_pt);
+  return LnLookVector(CartesianFixedLookVector::solar_look_vector(T), Ref_pt);
 }
 
 //-----------------------------------------------------------------------

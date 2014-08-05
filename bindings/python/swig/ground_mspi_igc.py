@@ -135,12 +135,36 @@ class GroundMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnec
         """
         GroundMspiIgc::GroundMspiIgc(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,
         double Azimuth, double Start_elevation_angle, double Rotation_rate,
-        const std::vector< Time > &Time_tag, const boost::shared_ptr< Camera >
-        &Cam, int Band)
+        const std::vector< Time > &Time_tag, const boost::shared_ptr<
+        QuaternionCamera > &Cam, int Band)
 
         """
         _ground_mspi_igc.GroundMspiIgc_swiginit(self,_ground_mspi_igc.new_GroundMspiIgc(*args))
+    def solar_look(self, *args):
+        """
+        DcsLookVector GroundMspiIgc::solar_look(int Line_number) const
+        Return solar look vector to detector coordinates. 
+        """
+        return _ground_mspi_igc.GroundMspiIgc_solar_look(self, *args)
+
+    def normal_look(self, *args):
+        """
+        DcsLookVector GroundMspiIgc::normal_look(int Line_number) const
+        Return surface normal look vector to detector coordinates. 
+        """
+        return _ground_mspi_igc.GroundMspiIgc_normal_look(self, *args)
+
+    def pixel_look(self, *args):
+        """
+        DcsLookVector GroundMspiIgc::pixel_look(int Sample_number) const
+        Return pixel look vector to detector coordinates. 
+        """
+        return _ground_mspi_igc.GroundMspiIgc_pixel_look(self, *args)
+
     __swig_destroy__ = _ground_mspi_igc.delete_GroundMspiIgc
+GroundMspiIgc.solar_look = new_instancemethod(_ground_mspi_igc.GroundMspiIgc_solar_look,None,GroundMspiIgc)
+GroundMspiIgc.normal_look = new_instancemethod(_ground_mspi_igc.GroundMspiIgc_normal_look,None,GroundMspiIgc)
+GroundMspiIgc.pixel_look = new_instancemethod(_ground_mspi_igc.GroundMspiIgc_pixel_look,None,GroundMspiIgc)
 GroundMspiIgc_swigregister = _ground_mspi_igc.GroundMspiIgc_swigregister
 GroundMspiIgc_swigregister(GroundMspiIgc)
 

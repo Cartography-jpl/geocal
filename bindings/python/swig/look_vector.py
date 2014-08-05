@@ -276,6 +276,15 @@ class CartesianFixedLookVector(LookVector):
         Constructor using quaternion. 
         """
         _look_vector.CartesianFixedLookVector_swiginit(self,_look_vector.new_CartesianFixedLookVector(*args))
+    def solar_look_vector(*args):
+        """
+        CartesianFixedLookVector CartesianFixedLookVector::solar_look_vector(const Time &T)
+        Return the solar look vector, which points from the center of the the
+        earth to the sun. 
+        """
+        return _look_vector.CartesianFixedLookVector_solar_look_vector(*args)
+
+    solar_look_vector = staticmethod(solar_look_vector)
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -287,6 +296,14 @@ class CartesianFixedLookVector(LookVector):
 CartesianFixedLookVector.__str__ = new_instancemethod(_look_vector.CartesianFixedLookVector___str__,None,CartesianFixedLookVector)
 CartesianFixedLookVector_swigregister = _look_vector.CartesianFixedLookVector_swigregister
 CartesianFixedLookVector_swigregister(CartesianFixedLookVector)
+
+def CartesianFixedLookVector_solar_look_vector(*args):
+  """
+    CartesianFixedLookVector CartesianFixedLookVector::solar_look_vector(const Time &T)
+    Return the solar look vector, which points from the center of the the
+    earth to the sun. 
+    """
+  return _look_vector.CartesianFixedLookVector_solar_look_vector(*args)
 
 
 

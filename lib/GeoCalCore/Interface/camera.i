@@ -4,11 +4,13 @@
 %include "common.i"
 
 %{
+#include "geocal_time.h"
 #include "camera.h"
 %}
 %base_import(generic_object)
 %import "frame_coordinate.i"
 %import "look_vector.i"
+%import "geocal_time.i"
 %geocal_shared_ptr(GeoCal::Camera);
 %geocal_shared_ptr(GeoCal::SimpleCamera);
 

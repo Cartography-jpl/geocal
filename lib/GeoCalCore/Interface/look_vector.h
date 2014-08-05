@@ -159,6 +159,8 @@ public:
 
   virtual ~CartesianFixedLookVector() {}
   virtual void print(std::ostream& Os) const;
+
+  static CartesianFixedLookVector solar_look_vector(const Time& T);
 };
 
 /****************************************************************//**
@@ -183,6 +185,17 @@ public:
   {
     boost::math::quaternion<double> to_ln = cf_to_enu(Ref_pt);
     look_quaternion(to_ln * Lv.look_quaternion() * conj(to_ln));
+  }
+
+//-----------------------------------------------------------------------
+/// Translate from LnLookVector to CartesianFixedLookVector, using the
+/// coordinate system at the given Ref_pt.
+//-----------------------------------------------------------------------
+
+  CartesianFixedLookVector to_cf(const GroundCoordinate& Ref_pt) const
+  {
+    boost::math::quaternion<double> to_cf = enu_to_cf(Ref_pt);
+    return CartesianFixedLookVector(to_cf * look_quaternion() * conj(to_cf));
   }
 
 //-----------------------------------------------------------------------

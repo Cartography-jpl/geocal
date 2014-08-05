@@ -67,6 +67,7 @@ public:
 	       const GroundCoordinate& Ref_pt);
   LnLookVector(double x, double y, double z);
   LnLookVector(const boost::array<double, 3>& Lv);
+  CartesianFixedLookVector to_cf(const GroundCoordinate& Ref_pt) const;
   std::string print_to_string() const;
   static boost::math::quaternion<double> 
   cf_to_enu(const GroundCoordinate& Ref_pt);

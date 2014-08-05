@@ -120,44 +120,6 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.orbit
 import geocal_swig.generic_object
-class GroundMspiOrbitData(geocal_swig.orbit.QuaternionOrbitData):
-    """
-    Minor adaption of QuaternionOrbitData to match GroundMspiOrbit.
-
-    The only change here is that we keep some of the intermediate
-    quaternions to use in calculating view geometry.
-
-    C++ includes: ground_mspi_orbit.h 
-    """
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        """
-        GroundMspiOrbitData::GroundMspiOrbitData(const Time &Tm, const GroundCoordinate &Pos, double Azimuth, double
-        Zenith)
-        Constructor. The azimuth and zenith angles should be in degrees. 
-        """
-        _ground_mspi_orbit.GroundMspiOrbitData_swiginit(self,_ground_mspi_orbit.new_GroundMspiOrbitData(*args))
-    def ln_look_vector(self, *args):
-        """
-        LnLookVector GeoCal::GroundMspiOrbitData::ln_look_vector(const CartesianFixedLookVector &Cf) const
-
-        """
-        return _ground_mspi_orbit.GroundMspiOrbitData_ln_look_vector(self, *args)
-
-    def sc_look_vector(self, *args):
-        """
-        ScLookVector GroundMspiOrbitData::sc_look_vector(const LnLookVector &Ln) const
-        Convert from LnLookVector to ScLookVector. 
-        """
-        return _ground_mspi_orbit.GroundMspiOrbitData_sc_look_vector(self, *args)
-
-    __swig_destroy__ = _ground_mspi_orbit.delete_GroundMspiOrbitData
-GroundMspiOrbitData.ln_look_vector = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbitData_ln_look_vector,None,GroundMspiOrbitData)
-GroundMspiOrbitData.sc_look_vector = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbitData_sc_look_vector,None,GroundMspiOrbitData)
-GroundMspiOrbitData_swigregister = _ground_mspi_orbit.GroundMspiOrbitData_swigregister
-GroundMspiOrbitData_swigregister(GroundMspiOrbitData)
-
 class GroundMspiOrbit(geocal_swig.orbit.Orbit):
     """
     This models the MSPI ground orbit.

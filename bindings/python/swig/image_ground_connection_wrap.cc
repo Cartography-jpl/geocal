@@ -5427,6 +5427,13 @@ namespace swig {
       }
     
 
+SWIGINTERNINLINE PyObject*
+  SWIG_From_bool  (bool value)
+{
+  return PyBool_FromLong(value ? 1 : 0);
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -9089,6 +9096,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_has_time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageGroundConnection *arg1 = (GeoCal::ImageGroundConnection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ImageGroundConnection__v_has_time" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::ImageGroundConnection const *)arg1)->has_time();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ImageGroundConnection___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::ImageGroundConnection *arg1 = (GeoCal::ImageGroundConnection *) 0 ;
@@ -10496,6 +10546,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ImageGroundConnection__v_title", _wrap_ImageGroundConnection__v_title, METH_VARARGS, (char *)"\n"
 		"virtual void GeoCal::ImageGroundConnection::title(const std::string &Title)\n"
 		"Set image title. \n"
+		""},
+	 { (char *)"ImageGroundConnection__v_has_time", (PyCFunction)_wrap_ImageGroundConnection__v_has_time, METH_O, (char *)"\n"
+		"virtual bool GeoCal::ImageGroundConnection::has_time() const\n"
+		"Not all ImageGroundConnection has a time associated with each pixel\n"
+		"(for example, one based on an underlying existing map).\n"
+		"\n"
+		"This indicates if we have the functionality. \n"
 		""},
 	 { (char *)"ImageGroundConnection___str__", (PyCFunction)_wrap_ImageGroundConnection___str__, METH_O, NULL},
 	 { (char *)"ImageGroundConnection__v_parameter", _wrap_ImageGroundConnection__v_parameter, METH_VARARGS, (char *)"\n"

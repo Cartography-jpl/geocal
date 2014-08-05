@@ -3,30 +3,6 @@
 #include "orbit.h"		// Definition of Orbit
 
 namespace GeoCal {
-
-/****************************************************************//**
-  Minor adaption of QuaternionOrbitData to match GroundMspiOrbit. 
-  The only change here is that we keep some of the intermediate
-  quaternions to use in calculating view geometry.
-*******************************************************************/
-
-class GroundMspiOrbitData : public QuaternionOrbitData {
-public:
-  GroundMspiOrbitData(const Time& Tm, const GroundCoordinate& Pos,
-		      double Azimuth, double Zenith);
-  virtual ~GroundMspiOrbitData() {}
-  LnLookVector ln_look_vector(const ScLookVector& Sl) const;
-  LnLookVector ln_look_vector(const CartesianInertialLookVector& Ci) const
-  { return ln_look_vector(sc_look_vector(Ci)); } 
-  LnLookVector ln_look_vector(const CartesianFixedLookVector& Cf) const
-  { return ln_look_vector(sc_look_vector(Cf)); } 
-  using QuaternionOrbitData::sc_look_vector;
-  ScLookVector sc_look_vector(const LnLookVector& Ln) const;
-  void print(std::ostream& Os) const;
-private:
-  boost::math::quaternion<double> sc_to_ln;
-};
-
 /****************************************************************//**
   This models the MSPI ground orbit. We don't actually move, of
   course, but the zenith angle does change over time.
@@ -87,14 +63,7 @@ public:
 
   double rotation_rate() const {return rotation_rate_; }
 
-  virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const
-  {
-    return boost::shared_ptr<OrbitData>
-      (new GroundMspiOrbitData(T, *pos, azimuth_,
-			       (start_elevation_angle_ + 
-				(T - tstart) * rotation_rate_)));
-  }
-
+  virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual void print(std::ostream& Os) const;
 private:
   Time tstart;

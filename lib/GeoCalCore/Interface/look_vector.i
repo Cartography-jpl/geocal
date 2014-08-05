@@ -4,9 +4,11 @@
 %include "common.i"
 
 %{
+#include "geocal_time.h"
 #include "look_vector.h"
 %}
 %base_import(generic_object)
+%import "geocal_time.i"
 
 %geocal_shared_ptr(GeoCal::LookVector);
 %geocal_shared_ptr(GeoCal::ScLookVector);
@@ -86,6 +88,7 @@ public:
   CartesianFixedLookVector(const boost::array<double, 3>& Lv);
   CartesianFixedLookVector(double x, double y, double z);
   std::string print_to_string() const;
+  static CartesianFixedLookVector solar_look_vector(const Time& T);
   %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])
 };

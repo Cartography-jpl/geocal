@@ -35,6 +35,11 @@ libgeocal_la_LDFLAGS+= $(BOOST_IOSTREAMS_LIB)
 # Include blitz in builds
 libgeocal_la_LDFLAGS+= $(BLITZ_LIBS)
 
+if HAVE_MSPI_SHARED
+libgeocal_la_LDFLAGS+= $(MSPI_SHARED_LIBS)
+libgeocal_la_CPPFLAGS+= $(MSPI_SHARED_CFLAGS)
+endif
+
 if HAVE_HDF5
 libgeocal_la_LDFLAGS+= $(HDF5_LIBS)
 libgeocal_la_CPPFLAGS+= $(HDF5_CFLAGS)

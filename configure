@@ -783,6 +783,13 @@ BOOST_DATETIME_LIB
 BOOST_REGEX_LIB
 BOOST_LIBDIR
 BOOST_CPPFLAGS
+BUILD_MSPI_SHARED_FALSE
+BUILD_MSPI_SHARED_TRUE
+HAVE_MSPI_SHARED_FALSE
+HAVE_MSPI_SHARED_TRUE
+MSPI_SHARED_LIBS
+MSPI_SHARED_BUILD_DEPEND
+MSPI_SHARED_CFLAGS
 BUILD_AFIDS_DATA_FALSE
 BUILD_AFIDS_DATA_TRUE
 HAVE_AFIDS_DATA_FALSE
@@ -951,6 +958,7 @@ enable_debug
 with_ncurses
 with_vicar_rtl
 with_afids_data
+with_mspi_shared
 with_boost
 with_blitz
 with_gsl
@@ -1654,6 +1662,10 @@ Optional Packages:
   --with-afids-data[=DIR] use AFIDS data (default is yes if found) - it is
                           possible to specify the root directory for AFIDS
                           data (optional).
+  --with-mspi-shared[=DIR]
+                          use MSPI-Shared (default is yes if found) - it is
+                          possible to specify the root directory for
+                          MSPI-Shared (optional).
   --with-boost[=DIR]      use BOOST (default is yes if found) - it is possible
                           to specify the root directory for BOOST (optional).
   --with-blitz[=DIR]      use Blitz++ (default is yes if found) - it is
@@ -17231,6 +17243,112 @@ fi
 
 
 #=================================================================
+#  MSPI-Shared library
+
+
+have_mspi_shared="no"
+build_mspi_shared="no"
+
+# Check whether --with-mspi-shared was given.
+if test "${with_mspi_shared+set}" = set; then :
+  withval=$with_mspi_shared;
+    if test "$withval" = "no"; then
+        want_mspi_shared="no"
+    elif test "$withval" = "yes"; then
+        want_mspi_shared="yes"
+        ac_mspi_shared_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-mspi-shared" "$LINENO" 5
+        fi
+        want_mspi_shared="yes"
+        build_mspi_shared="yes"
+        ac_mspi_shared_path="\${prefix}"
+    else
+        want_mspi_shared="yes"
+        ac_mspi_shared_path="$withval"
+    fi
+
+else
+
+    want_mspi_shared="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_mspi_shared="yes"
+        build_mspi_shared="yes"
+        ac_mspi_shared_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+
+if test "x$want_mspi_shared" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for MSPI-Shared library" >&5
+$as_echo_n "checking for MSPI-Shared library... " >&6; }
+        succeeded=no
+        if test "$ac_mspi_shared_path" != ""; then
+            MSPI_SHARED_LIBS="-R$ac_mspi_shared_path -L$ac_mspi_shared_path -lMSPI-Shared"
+            MSPI_SHARED_CFLAGS="-I$ac_mspi_shared_path"
+            succeeded=yes
+        else
+          for ac_path_tmp in $prefix/MSPI-Shared $THIRDPARTY/MSPI-Shared /data/smyth/MSPI-Shared ; do
+             if test -e "$ac_path_tmp/libMSPI-Shared.la" && test -r "$ac_path_tmp/libMSPI-Shared.la"; then
+                MSPI_SHARED_LIBS="-R$ac_path_tmp -L$ac_path_tmp -lMSPI-Shared"
+                MSPI_SHARED_CFLAGS="-I$ac_path_tmp"
+                succeeded=yes
+                break
+             fi
+           done
+        fi
+
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+
+$as_echo "#define HAVE_MSPI_SHARED /**/" >>confdefs.h
+
+                have_mspi_shared="yes"
+        fi
+fi
+
+ if test "$have_mspi_shared" = "yes"; then
+  HAVE_MSPI_SHARED_TRUE=
+  HAVE_MSPI_SHARED_FALSE='#'
+else
+  HAVE_MSPI_SHARED_TRUE='#'
+  HAVE_MSPI_SHARED_FALSE=
+fi
+
+ if test "$build_mspi_shared" = "yes"; then
+  BUILD_MSPI_SHARED_TRUE=
+  BUILD_MSPI_SHARED_FALSE='#'
+else
+  BUILD_MSPI_SHARED_TRUE='#'
+  BUILD_MSPI_SHARED_FALSE=
+fi
+
+
+
+if test "optional" = "required"; then
+  if test "$have_mspi_shared" = "no"; then
+     as_fn_error $? "
+The MSPI-Shared library is required by GeoCal. Try specifying
+location using --with-mspi-shared if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+
+#=================================================================
 # Various thirdparty libraries.
 
 
@@ -20864,6 +20982,14 @@ if test -z "${BUILD_AFIDS_DATA_TRUE}" && test -z "${BUILD_AFIDS_DATA_FALSE}"; th
   as_fn_error $? "conditional \"BUILD_AFIDS_DATA\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${HAVE_MSPI_SHARED_TRUE}" && test -z "${HAVE_MSPI_SHARED_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_MSPI_SHARED\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_MSPI_SHARED_TRUE}" && test -z "${BUILD_MSPI_SHARED_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_MSPI_SHARED\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${HAVE_BOOST_TRUE}" && test -z "${HAVE_BOOST_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_BOOST\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -23398,6 +23524,9 @@ echo "  Have FFTW:                     ${have_fftw}"
 
 
 echo "  Have HDF5:                     ${have_hdf5}"
+
+
+echo "  Have MSPI-Shared:              ${have_mspi_shared}"
 
 
 echo "  Have Python OGR Module:        ${have_python_ogr}"

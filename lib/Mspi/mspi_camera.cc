@@ -211,8 +211,8 @@ double MspiCamera::angular_separation
 (int Reference_band, int Target_band) const
 {
   return
-    atan(line_pitch() * principal_point(Target_band).line / focal_length()) -
-    atan(line_pitch() * principal_point(Reference_band).line / focal_length())
+    (atan(line_pitch() * principal_point(Target_band).line / focal_length()) -
+     atan(line_pitch() * principal_point(Reference_band).line / focal_length()))
     * inversion_;
 }
 

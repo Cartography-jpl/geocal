@@ -1812,10 +1812,11 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/spice/fk/planets/eci_tod.tf \
 	@geocalunittestdata@/spice/geocal.ker \
 	@geocalunittestdata@/spice/lsk/naif0007.tls \
-	@geocalunittestdata@/spice/lsk/naif0008.tls \
-	@geocalunittestdata@/spice/pck/earth_000101_120424_120201.bpc \
+	@geocalunittestdata@/spice/lsk/naif0010.tls \
+	@geocalunittestdata@/spice/pck/earth_000101_140721_140429.bpc \
 	@geocalunittestdata@/spice/pck/earth_720101_070426.bpc \
-	@geocalunittestdata@/spice/pck/pck00008.tpc \
+	@geocalunittestdata@/spice/pck/pck00010.tpc \
+	@geocalunittestdata@/spice/spk/planets/de432s.bsp \
 	@geocalunittestdata@/test_pixel_is_area.img \
 	@geocalunittestdata@/test_pixel_is_point.img \
 	@geocalunittestdata@/test_use00a.ntf \

@@ -12,11 +12,11 @@ file to point to the updated versions.
 
 \begindata
 KERNELS_TO_LOAD = (
-  'lsk/naif0008.tls',
-  'pck/pck00008.tpc',
+  'lsk/naif0010.tls',
+  'pck/pck00010.tpc',
   'pck/earth_720101_070426.bpc',
-  'pck/earth_000101_120424_120201.bpc',
+  'pck/earth_000101_140721_140429.bpc',
   'fk/planets/earth_assoc_itrf93.tf',
   'fk/planets/eci_tod.tf',
-  'spk/planets/de421.bsp'
+  'spk/planets/de432s.bsp'
 )

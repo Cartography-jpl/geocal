@@ -1820,7 +1820,10 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/test_pixel_is_area.img \
 	@geocalunittestdata@/test_pixel_is_point.img \
 	@geocalunittestdata@/test_use00a.ntf \
-	@geocalunittestdata@/vicar.img @docpythonsrc@
+	@geocalunittestdata@/vicar.img \
+	@geocalunittestdata@/airmspi_orbit_file_test.hdf \
+	@geocalunittestdata@/ground_mspi_camera_test.config \
+	@docpythonsrc@ $(am__empty)
 pkgconfig_DATA = 
 
 # Allow fils to be include in other directories

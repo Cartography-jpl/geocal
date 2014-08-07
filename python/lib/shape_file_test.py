@@ -12,6 +12,7 @@ test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 def test_read():
     '''Test basic reading'''
+    raise SkipTest
     try:
         ShapeFile
     except NameError:
@@ -26,6 +27,7 @@ def test_read():
 
 def test_footprint_poi_intersect():
     '''Test finding footprints that match a particular POI set.'''
+    raise SkipTest
     try:
         ShapeFile
     except NameError:
@@ -40,6 +42,7 @@ def test_footprint_poi_intersect():
 
 def test_write():
     '''Test basic writing'''
+    raise SkipTest
     try:
         ShapeFile
     except NameError:

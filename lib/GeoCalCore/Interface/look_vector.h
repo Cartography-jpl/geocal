@@ -157,6 +157,9 @@ public:
 //-----------------------------------------------------------------------
   CartesianFixedLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
 
+  CartesianFixedLookVector(const GroundCoordinate& From,
+			   const GroundCoordinate& To);
+
   virtual ~CartesianFixedLookVector() {}
   virtual void print(std::ostream& Os) const;
 

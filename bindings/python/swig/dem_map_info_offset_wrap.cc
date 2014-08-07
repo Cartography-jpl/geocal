@@ -5277,11 +5277,11 @@ static void *_p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector(void 
 static void *_p_GeoCal__DcsLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector *)  ((GeoCal::DcsLookVector *) x));
 }
-static void *_p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::LookVector *)  ((GeoCal::CartesianFixedLookVector *) x));
-}
 static void *_p_GeoCal__LnLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector *)  ((GeoCal::LnLookVector *) x));
+}
+static void *_p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::LookVector *)  ((GeoCal::CartesianFixedLookVector *) x));
 }
 static void *_p_GeoCal__DemMapInfoOffsetTo_p_GeoCal__DemMapInfo(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::DemMapInfo *)  ((GeoCal::DemMapInfoOffset *) x));
@@ -5338,11 +5338,11 @@ static void *_p_GeoCal__TimeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDP
 static void *_p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::CartesianInertial *) x));
 }
-static void *_p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::LnLookVector *) x));
-}
 static void *_p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::CartesianFixedLookVector *) x));
+}
+static void *_p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::LnLookVector *) x));
 }
 static void *_p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::DcsLookVector *) x));
@@ -5602,11 +5602,11 @@ static swig_cast_info _swigc__p_GeoCal__DcsLookVector[] = {  {&_swigt__p_GeoCal_
 static swig_cast_info _swigc__p_GeoCal__Dem[] = {  {&_swigt__p_GeoCal__Dem, 0, 0, 0},  {&_swigt__p_GeoCal__DemMapInfo, _p_GeoCal__DemMapInfoTo_p_GeoCal__Dem, 0, 0},  {&_swigt__p_GeoCal__DemMapInfoOffset, _p_GeoCal__DemMapInfoOffsetTo_p_GeoCal__Dem, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__DemMapInfo[] = {  {&_swigt__p_GeoCal__DemMapInfo, 0, 0, 0},  {&_swigt__p_GeoCal__DemMapInfoOffset, _p_GeoCal__DemMapInfoOffsetTo_p_GeoCal__DemMapInfo, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__DemMapInfoOffset[] = {  {&_swigt__p_GeoCal__DemMapInfoOffset, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__Datum, _p_GeoCal__DatumTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DemMapInfoOffset, _p_GeoCal__DemMapInfoOffsetTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MapInfo, _p_GeoCal__MapInfoTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DemMapInfo, _p_GeoCal__DemMapInfoTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__SimpleDatum, _p_GeoCal__SimpleDatumTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Dem, _p_GeoCal__DemTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVector, _p_GeoCal__LookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__CoordinateConverter, _p_GeoCal__CoordinateConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticConverter, _p_GeoCal__GeodeticConverterTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__Datum, _p_GeoCal__DatumTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DemMapInfoOffset, _p_GeoCal__DemMapInfoOffsetTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MapInfo, _p_GeoCal__MapInfoTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DemMapInfo, _p_GeoCal__DemMapInfoTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__SimpleDatum, _p_GeoCal__SimpleDatumTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Dem, _p_GeoCal__DemTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVector, _p_GeoCal__LookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__CoordinateConverter, _p_GeoCal__CoordinateConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticConverter, _p_GeoCal__GeodeticConverterTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GeodeticConverter[] = {  {&_swigt__p_GeoCal__GeodeticConverter, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GroundCoordinate[] = {  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GroundCoordinate, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__LnLookVector[] = {  {&_swigt__p_GeoCal__LnLookVector, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__LookVector[] = {  {&_swigt__p_GeoCal__LookVector, 0, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__LookVector, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__LookVector[] = {  {&_swigt__p_GeoCal__LookVector, 0, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__MapInfo[] = {  {&_swigt__p_GeoCal__MapInfo, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ScLookVector[] = {  {&_swigt__p_GeoCal__ScLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__SimpleDatum[] = {  {&_swigt__p_GeoCal__SimpleDatum, 0, 0, 0},{0, 0, 0, 0}};

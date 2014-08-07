@@ -434,6 +434,28 @@ def LnLookVector_solar_look_vector(*args):
   return _ground_coordinate.LnLookVector_solar_look_vector(*args)
 LnLookVector_solar_look_vector = _ground_coordinate.LnLookVector_solar_look_vector
 
+class CartesianFixedLookVector(geocal_swig.look_vector.LookVector):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _ground_coordinate.CartesianFixedLookVector_swiginit(self,_ground_coordinate.new_CartesianFixedLookVector(*args))
+    solar_look_vector = staticmethod(_ground_coordinate.CartesianFixedLookVector_solar_look_vector)
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+
+    __swig_destroy__ = _ground_coordinate.delete_CartesianFixedLookVector
+CartesianFixedLookVector.__str__ = new_instancemethod(_ground_coordinate.CartesianFixedLookVector___str__,None,CartesianFixedLookVector)
+CartesianFixedLookVector_swigregister = _ground_coordinate.CartesianFixedLookVector_swigregister
+CartesianFixedLookVector_swigregister(CartesianFixedLookVector)
+
+def CartesianFixedLookVector_solar_look_vector(*args):
+  return _ground_coordinate.CartesianFixedLookVector_solar_look_vector(*args)
+CartesianFixedLookVector_solar_look_vector = _ground_coordinate.CartesianFixedLookVector_solar_look_vector
+
 
 def distance(*args):
   """

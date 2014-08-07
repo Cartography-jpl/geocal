@@ -82,6 +82,20 @@ void LnLookVector::print(std::ostream& Os) const
 }
 
 //-----------------------------------------------------------------------
+/// Constructor going from a GroundCoordinate to a GroundCoordinate.
+//-----------------------------------------------------------------------
+
+CartesianFixedLookVector::CartesianFixedLookVector
+(const GroundCoordinate& From,
+ const GroundCoordinate& To)
+{
+  boost::shared_ptr<CartesianFixed> from_cf = From.convert_to_cf();
+  boost::shared_ptr<CartesianFixed> to_cf = To.convert_to_cf();
+  for(int i = 0; i < 3; ++i)
+    look_vector[i] = to_cf->position[i] - from_cf->position[i];
+}
+
+//-----------------------------------------------------------------------
 /// Return quaternion to go from ENU coordinates to CartesianFixed for
 /// the given location.
 //-----------------------------------------------------------------------

@@ -262,48 +262,5 @@ DcsLookVector.__str__ = new_instancemethod(_look_vector.DcsLookVector___str__,No
 DcsLookVector_swigregister = _look_vector.DcsLookVector_swigregister
 DcsLookVector_swigregister(DcsLookVector)
 
-class CartesianFixedLookVector(LookVector):
-    """
-    This is a look vector in CartesianFixed coordinates.
-
-    C++ includes: look_vector.h 
-    """
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        """
-        GeoCal::CartesianFixedLookVector::CartesianFixedLookVector(const boost::math::quaternion< double > &V)
-        Constructor using quaternion. 
-        """
-        _look_vector.CartesianFixedLookVector_swiginit(self,_look_vector.new_CartesianFixedLookVector(*args))
-    def solar_look_vector(*args):
-        """
-        CartesianFixedLookVector CartesianFixedLookVector::solar_look_vector(const Time &T)
-        Return the solar look vector, which points from the center of the the
-        earth to the sun. 
-        """
-        return _look_vector.CartesianFixedLookVector_solar_look_vector(*args)
-
-    solar_look_vector = staticmethod(solar_look_vector)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
-    def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
-
-    __swig_destroy__ = _look_vector.delete_CartesianFixedLookVector
-CartesianFixedLookVector.__str__ = new_instancemethod(_look_vector.CartesianFixedLookVector___str__,None,CartesianFixedLookVector)
-CartesianFixedLookVector_swigregister = _look_vector.CartesianFixedLookVector_swigregister
-CartesianFixedLookVector_swigregister(CartesianFixedLookVector)
-
-def CartesianFixedLookVector_solar_look_vector(*args):
-  """
-    CartesianFixedLookVector CartesianFixedLookVector::solar_look_vector(const Time &T)
-    Return the solar look vector, which points from the center of the the
-    earth to the sun. 
-    """
-  return _look_vector.CartesianFixedLookVector_solar_look_vector(*args)
-
 
 

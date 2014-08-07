@@ -47,6 +47,7 @@ public:
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0) 
   const;
   static Ecr sub_solar_point(const Time& T);
+  static double solar_distance(const Time& T);
   %pickle_init(1, self.position[0], self.position[1], self.position[2])
 };
 

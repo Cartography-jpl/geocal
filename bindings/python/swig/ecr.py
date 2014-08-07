@@ -169,6 +169,16 @@ class Ecr(geocal_swig.ground_coordinate.CartesianFixed):
         return _ecr.Ecr_sub_solar_point(*args)
 
     sub_solar_point = staticmethod(sub_solar_point)
+    def solar_distance(*args):
+        """
+        double Ecr::solar_distance(const Time &T)
+        Solar distance at given time.
+
+        This is AU (which is defined to be exactly 149597870700 meter). 
+        """
+        return _ecr.Ecr_solar_distance(*args)
+
+    solar_distance = staticmethod(solar_distance)
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -191,6 +201,15 @@ def Ecr_sub_solar_point(*args):
     on the line from the center of the earth to the sun. 
     """
   return _ecr.Ecr_sub_solar_point(*args)
+
+def Ecr_solar_distance(*args):
+  """
+    double Ecr::solar_distance(const Time &T)
+    Solar distance at given time.
+
+    This is AU (which is defined to be exactly 149597870700 meter). 
+    """
+  return _ecr.Ecr_solar_distance(*args)
 
 
 

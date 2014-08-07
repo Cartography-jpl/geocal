@@ -202,3 +202,15 @@ Ecr Ecr::sub_solar_point(const Time& T)
     sub_solar_point((int) EARTH_NAIF_CODE, T, res);
   return res;
 }
+
+//-----------------------------------------------------------------------
+/// Solar distance at given time. This is AU (which is defined to be
+/// exactly 149597870700 meter).
+//-----------------------------------------------------------------------
+
+double Ecr::solar_distance(const Time& T)
+{
+  const double one_au = 149597870700;
+  return CartesianFixed::toolkit_coordinate_interface->
+    solar_distance((int) EARTH_NAIF_CODE, T) / one_au;
+}

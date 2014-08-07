@@ -49,6 +49,7 @@ public:
     const CartesianInertial& From, CartesianFixed& To);
   virtual void 
   sub_solar_point(int Body_id, const Time& T, CartesianFixed& P);
+  virtual double solar_distance(int Body_id, const Time& T);
 };
 
 }

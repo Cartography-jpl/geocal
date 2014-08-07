@@ -49,6 +49,12 @@ public:
   virtual void 
   sub_solar_point(int Body_id, const Time& T, CartesianFixed& P) = 0;
 
+//-----------------------------------------------------------------------
+/// Return distance from body to the sun, at the given time. Results
+/// in meters.
+//-----------------------------------------------------------------------
+
+  virtual double solar_distance(int Body_id, const Time& T) = 0;
 };
 
 }

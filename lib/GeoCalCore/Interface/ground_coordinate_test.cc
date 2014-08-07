@@ -89,6 +89,12 @@ BOOST_AUTO_TEST_CASE(solar_angle)
 		    0.1);
 }
 
+BOOST_AUTO_TEST_CASE(solar_distance)
+{
+  Time t = Time::parse_time("2010-10-07T19:11:24.500000Z");
+  BOOST_CHECK_CLOSE(Ecr::solar_distance(t), 0.99938745098726067, 1e-4);
+}
+
 BOOST_AUTO_TEST_CASE(geodetic)
 {
   Geodetic g(30, 40, 50);

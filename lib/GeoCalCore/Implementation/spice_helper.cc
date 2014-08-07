@@ -178,18 +178,19 @@ void SpiceHelper::conversion(const std::string& From,
 }
 
 //-----------------------------------------------------------------------
-/// Calculate the sub solar point. We include the one way light travel
-/// time plus stellar aberration. 
+/// Calculate the sub solar point, and also the vector from the Sun to
+/// the sub solar point.
 //-----------------------------------------------------------------------
 
 void SpiceHelper::sub_solar_point_calc(const std::string& Body,
 				       const std::string& Ref_frame,
 				       const Time& T,
-				       boost::array<double, 3>& pout)
+				       boost::array<double, 3>& pout,
+				       boost::array<double, 3>& pout2)
 {
 #ifdef HAVE_SPICE
   spice_setup();
-  double trgepc, srfvec[3];
+  double trgepc;
   // Not sure if we should correct for light travel time. Leaving
   // the correction out gives us angles very close to what MISR
   // calculates with the SDP toolkit. We'll do that for now, and
@@ -199,7 +200,7 @@ void SpiceHelper::sub_solar_point_calc(const std::string& Body,
 	   const_cast<char*>(Ref_frame.c_str()),
 	   //const_cast<char*>("lt+s"),
 	   const_cast<char*>("NONE"),
-	   const_cast<char*>("SUN"), &pout[0], &trgepc, srfvec);
+	   const_cast<char*>("SUN"), &pout[0], &trgepc, &pout2[0]);
   spice_error_check();
 #else
   throw SpiceNotAvailableException();
@@ -354,15 +355,16 @@ void
 SpiceToolkitCoordinateInterface::sub_solar_point(int Body_id, const Time& T, 
 						 CartesianFixed& P)
 {
+  boost::array<double, 3> ign;
   switch(Body_id) {
   case 399:			// Earth
-    SpiceHelper::sub_solar_point_calc("EARTH", "ITRF93", T, P.position);
+    SpiceHelper::sub_solar_point_calc("EARTH", "ITRF93", T, P.position, ign);
     break;
   case 499:			// Mars
-    SpiceHelper::sub_solar_point_calc("MARS", "IAU_MARS", T, P.position);
+    SpiceHelper::sub_solar_point_calc("MARS", "IAU_MARS", T, P.position, ign);
     break;
   case 301:			// Moon
-    SpiceHelper::sub_solar_point_calc("MOON", "IAU_MOON", T, P.position);
+    SpiceHelper::sub_solar_point_calc("MOON", "IAU_MOON", T, P.position, ign);
     break;
   default:
     throw Exception("Not yet implemented");
@@ -373,6 +375,31 @@ SpiceToolkitCoordinateInterface::sub_solar_point(int Body_id, const Time& T,
   P.position[1] *= 1000.0;
   P.position[2] *= 1000.0;
 }
+
+double
+SpiceToolkitCoordinateInterface::solar_distance(int Body_id, const Time& T)
+{
+  boost::array<double, 3> pout1, pout2;
+  switch(Body_id) {
+  case 399:			// Earth
+    SpiceHelper::sub_solar_point_calc("EARTH", "ITRF93", T, pout1, pout2);
+    break;
+  case 499:			// Mars
+    SpiceHelper::sub_solar_point_calc("MARS", "IAU_MARS", T, pout1, pout2);
+    break;
+  case 301:			// Moon
+    SpiceHelper::sub_solar_point_calc("MOON", "IAU_MOON", T, pout1, pout2);
+    break;
+  default:
+    throw Exception("Not yet implemented");
+  }
+  // pout1 takes us from the center of the body to the subsolar
+  // point, and then pout2 takes us to the sun. So together they are
+  // the distance from the center of body to the sun. This is in km,
+  // so we convert to meters.
+  return (norm(pout1) + norm(pout2)) * 1000.0;
+}
+
 
 //-----------------------------------------------------------------------
 /// This converts from CartesianInertial to CartesianFixed for the

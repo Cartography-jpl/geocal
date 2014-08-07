@@ -225,6 +225,11 @@ SdpToolkitCoordinateInterface::sub_solar_point(int Body_id, const Time& T,
   throw Exception("Not implemented for SDP toolkit");
 }
 
+double SdpToolkitCoordinateInterface::solar_distance(int Body_id, const Time& T)
+{
+  throw Exception("Not implemented for SDP toolkit");
+}
+
 //-----------------------------------------------------------------------
 /// Return true if we have SDP functionality available, false otherwise.
 //-----------------------------------------------------------------------

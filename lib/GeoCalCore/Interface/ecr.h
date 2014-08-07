@@ -80,6 +80,7 @@ public:
   const;
   virtual void print(std::ostream& Os) const;
   static Ecr sub_solar_point(const Time& T);
+  static double solar_distance(const Time& T);
 };
 }
 #endif

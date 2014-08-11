@@ -191,10 +191,23 @@ void SpiceHelper::sub_solar_point_calc(const std::string& Body,
 #ifdef HAVE_SPICE
   spice_setup();
   double trgepc;
-  // Not sure if we should correct for light travel time. Leaving
-  // the correction out gives us angles very close to what MISR
-  // calculates with the SDP toolkit. We'll do that for now, and
-  // revisit this if needed.
+  // Note that we really do *not* want to correct for light travel
+  // time and aberration. This is for the *observer*, or in this case
+  // the Sun. We don't want to correct the time we looking at the
+  // earth by when the Sun happens to see it.
+  //
+  // It is possible that if we were working with something in mid or
+  // high orbit we might care, but in that case we would need the
+  // satellite available through a spice kernel, and we would need to 
+  // make a different call. We just ignore the light travel time
+  // (which is small), and report the subsolar point at the instance
+  // in time at the surface.
+  //
+  // Note that we use the Sun here as the observer because we are also
+  // often interested in the sun distance. We can get that through pout
+  // (vector from center of earth to subsolar point) and pout2 (vector 
+  // from observer to subsolar point, or in this case sun to subsolar
+  // point).
   subslr_c(const_cast<char*>("Intercept: ellipsoid"),
 	   const_cast<char*>(Body.c_str()), T.et(),
 	   const_cast<char*>(Ref_frame.c_str()),

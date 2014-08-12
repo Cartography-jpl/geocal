@@ -122,6 +122,7 @@ extern "C" {
   void init_ground_mspi_orbit(void);
   void init_ground_mspi_igc(void);
   void init_usgs_dem(void);
+  void init_air_mspi_igc(void);
 #ifdef HAVE_CARTO
   void init_eci_tod_burl(void);
 #endif
@@ -334,6 +335,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_ground_mspi_orbit", init_ground_mspi_orbit);
   init_extension_module(package, "_ground_mspi_igc", init_ground_mspi_igc);
   init_extension_module(package, "_usgs_dem", init_usgs_dem);
+  init_extension_module(package, "_air_mspi_igc", init_air_mspi_igc);
 #ifdef HAVE_CARTO
   init_extension_module(package, "_eci_tod_burl", init_eci_tod_burl);
 #endif

@@ -15,6 +15,8 @@ geocalinc_HEADERS+= @srcmspi@/ground_mspi_igc.h
 libgeocal_la_SOURCES+= @srcmspi@/ground_mspi_igc.cc
 geocalinc_HEADERS+= @srcmspi@/usgs_dem.h
 libgeocal_la_SOURCES+= @srcmspi@/usgs_dem.cc
+geocalinc_HEADERS+= @srcmspi@/air_mspi_igc.h
+libgeocal_la_SOURCES+= @srcmspi@/air_mspi_igc.cc
 
 SWIG_SRC += @swigsrc@/mspi_config_file_wrap.cc
 SWIG_SRC += @swigsrc@/mspi_paraxial_transform_wrap.cc
@@ -23,6 +25,7 @@ SWIG_SRC += @swigsrc@/air_mspi_orbit_wrap.cc
 SWIG_SRC += @swigsrc@/ground_mspi_orbit_wrap.cc
 SWIG_SRC += @swigsrc@/ground_mspi_igc_wrap.cc
 SWIG_SRC += @swigsrc@/usgs_dem_wrap.cc
+SWIG_SRC += @swigsrc@/air_mspi_igc_wrap.cc
 
 geocal_test_all_SOURCES+= @srcmspi@/ifstream_cs_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/mspi_config_file_test.cc
@@ -32,6 +35,7 @@ geocal_test_all_SOURCES+= @srcmspi@/air_mspi_orbit_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/ground_mspi_orbit_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/ground_mspi_igc_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/usgs_dem_test.cc
+geocal_test_all_SOURCES+= @srcmspi@/air_mspi_igc_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcmspi@
 

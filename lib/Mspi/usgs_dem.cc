@@ -131,5 +131,41 @@ RasterMultifileTile UsgsDemData::get_file(int Line, int Sample) const
   return RasterMultifileTile(f, ln, smp);
 }
 
+//-----------------------------------------------------------------------
+/// Write to a stream.
+//-----------------------------------------------------------------------
 
+void UsgsDem::print(std::ostream& Os) const
+{     
+  OstreamPad opad(Os, "    ");
+  Os << "USGS DEM:\n"
+     << "  Datum:\n";
+  opad << datum();
+  opad.strict_sync();
+  Os << "  Data directory: " << directory_base() << "\n";
+  Os << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
+}
+
+
+//-----------------------------------------------------------------------
+/// Constructor. You can provide the directory to look for USGS DEM
+/// data, or if you leave this blank we use the value of environment
+/// variable USGSDATA.
+///
+/// We don't have USGS files that completely cover the area. If you
+/// ask for a point outside of the area this can either be treated as
+/// an error, or alternatively you can return a value of 0
+/// instead. This is controlled by Outside_dem_is_error.
+//-----------------------------------------------------------------------
+
+UsgsDem::UsgsDem
+(const std::string& Dir,
+ bool Outside_dem_is_error,
+ const boost::shared_ptr<Datum>& D
+)
+: 
+  f(new UsgsDemData(Dir, Outside_dem_is_error))
+{
+  initialize(D, f->map_info(), Outside_dem_is_error);
+}
 

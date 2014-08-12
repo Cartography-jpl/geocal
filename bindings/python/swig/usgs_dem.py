@@ -118,11 +118,13 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.dem_map_info
+import geocal_swig.dem
+import geocal_swig.generic_object
+import geocal_swig.look_vector
 import geocal_swig.raster_multifile
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
-import geocal_swig.generic_object
-import geocal_swig.look_vector
 class UsgsDemData(geocal_swig.raster_multifile.RasterMultifile):
     """
     This is used to read the USGS DEM data.
@@ -161,6 +163,61 @@ class UsgsDemData(geocal_swig.raster_multifile.RasterMultifile):
     __swig_destroy__ = _usgs_dem.delete_UsgsDemData
 UsgsDemData_swigregister = _usgs_dem.UsgsDemData_swigregister
 UsgsDemData_swigregister(UsgsDemData)
+
+class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
+    """
+    This class provides access to the USGS Dem.
+
+    C++ includes: usgs_dem.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        UsgsDem::UsgsDem(const std::string &Dir="", bool Outside_dem_is_error=true, const
+        boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
+        DatumGeoid96()))
+        Constructor.
+
+        You can provide the directory to look for USGS DEM data, or if you
+        leave this blank we use the value of environment variable USGSDATA.
+
+        We don't have USGS files that completely cover the area. If you ask
+        for a point outside of the area this can either be treated as an
+        error, or alternatively you can return a value of 0 instead. This is
+        controlled by Outside_dem_is_error. 
+        """
+        _usgs_dem.UsgsDem_swiginit(self,_usgs_dem.new_UsgsDem(*args))
+    def elevation(self, *args):
+        """
+        virtual double GeoCal::UsgsDem::elevation(int Y_index, int X_index) const
+        Return height in meters relative to datum(). 
+        """
+        return _usgs_dem.UsgsDem_elevation(self, *args)
+
+    def _v_directory_base(self):
+        """
+        const std::string& GeoCal::UsgsDem::directory_base() const
+        Database base directory. 
+        """
+        return _usgs_dem.UsgsDem__v_directory_base(self)
+
+    @property
+    def directory_base(self):
+        return self._v_directory_base()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.directory_base,self.outside_dem_is_error,self.datum)
+
+    __swig_destroy__ = _usgs_dem.delete_UsgsDem
+UsgsDem.elevation = new_instancemethod(_usgs_dem.UsgsDem_elevation,None,UsgsDem)
+UsgsDem._v_directory_base = new_instancemethod(_usgs_dem.UsgsDem__v_directory_base,None,UsgsDem)
+UsgsDem_swigregister = _usgs_dem.UsgsDem_swigregister
+UsgsDem_swigregister(UsgsDem)
 
 
 

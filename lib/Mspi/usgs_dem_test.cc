@@ -35,5 +35,27 @@ BOOST_AUTO_TEST_CASE(usgs_dem_data_real_database)
   }
 }
 
+BOOST_AUTO_TEST_CASE(usgs_dem)
+{
+  UsgsDem d(test_data_dir() + "usgs_dem", false);
+  BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(43.5, -68.5)),
+		    -25.3275, 1e-4);
+}
+
+
+BOOST_AUTO_TEST_CASE(usgs_dem_real_database)
+{
+  // Old unit test, requires that we have actual database. If we don't
+  // then just skip this test.
+  if(boost::filesystem::is_directory("/data/bank/anc/DEM/USA10M/database")) {
+    UsgsDem d("/data/bank/anc/DEM/USA10M/database", false);
+    double latitude = 34.904444;
+    double longitude = -119.263411;
+    double lat = (latitude + (1.0 / 10800.0));
+    double lon = (longitude + (.5 / 10800.0));
+    BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(lat, lon)),
+		      1417.716, 1e-2);
+  }
+}
 
 BOOST_AUTO_TEST_SUITE_END()

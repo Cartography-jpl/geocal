@@ -11,6 +11,7 @@ BOOST_AUTO_TEST_CASE(chain_test)
   // copy it, but for now grab from Mike's area
   AirMspiIgc 
     igc("/home/smyth/Local/MSPI-Ground/chain_test/input/3.master.config", 
+	"/home/smyth/Local/MSPI-Ground/chain_test/input/3.nav_gimbal.hdf4",
 	"/home/smyth/Local/MSPI-Ground");
 }
 

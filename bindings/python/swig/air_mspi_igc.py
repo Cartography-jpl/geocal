@@ -134,7 +134,7 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
     def __init__(self, *args): 
         """
         AirMspiIgc::AirMspiIgc(const std::string &Master_config_file, const std::string
-        &Base_directory=".")
+        &Orbit_file_name, const std::string &Base_directory=".")
         Constructor.
 
         This takes the master config file and uses it to create a AirMspiIgc.
@@ -167,9 +167,40 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
     def master_config_file(self):
         return self._v_master_config_file()
 
+    def _v_orbit(self):
+        """
+        boost::shared_ptr<AirMspiOrbit> GeoCal::AirMspiIgc::orbit() const
+        Orbit we are using. 
+        """
+        return _air_mspi_igc.AirMspiIgc__v_orbit(self)
+
+    @property
+    def orbit(self):
+        return self._v_orbit()
+
+    def _v_orbit_file_name(self):
+        """
+        std::string GeoCal::AirMspiIgc::orbit_file_name() const
+        The name of the orbit file. 
+        """
+        return _air_mspi_igc.AirMspiIgc__v_orbit_file_name(self)
+
+    @property
+    def orbit_file_name(self):
+        return self._v_orbit_file_name()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.master_config_file,self.orbit_file_name,self.base_directory)
+
     __swig_destroy__ = _air_mspi_igc.delete_AirMspiIgc
 AirMspiIgc._v_base_directory = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_base_directory,None,AirMspiIgc)
 AirMspiIgc._v_master_config_file = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_master_config_file,None,AirMspiIgc)
+AirMspiIgc._v_orbit = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_orbit,None,AirMspiIgc)
+AirMspiIgc._v_orbit_file_name = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_orbit_file_name,None,AirMspiIgc)
 AirMspiIgc_swigregister = _air_mspi_igc.AirMspiIgc_swigregister
 AirMspiIgc_swigregister(AirMspiIgc)
 

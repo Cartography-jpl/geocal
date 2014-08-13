@@ -30,7 +30,10 @@ AC_VICAR_RTL(optional, cannot_build, default_search)
 AC_AFIDS_DATA(optional, cannot_build, default_search)
 
 #=================================================================
-#  MSPI-Shared library
+# MSPI-Shared library. We can only use MSPI-Shared if we also have
+# HDFEOS5 which is depends on.
+AC_HDFEOS5(optional, cannot_build, default_search)
+
 AC_MSPI_SHARED(optional, cannot_build, default_search)
 
 #=================================================================
@@ -162,6 +165,7 @@ LOC_MSG([  Have AFIDS:                    ${have_afids}])
 LOC_MSG([  Have Carto library:            ${have_carto}])
 LOC_MSG([  Have FFTW:                     ${have_fftw}])
 LOC_MSG([  Have HDF5:                     ${have_hdf5}])
+LOC_MSG([  Have HDFEOS5:                  ${have_hdfeos5}])
 LOC_MSG([  Have MSPI-Shared:              ${have_mspi_shared}])
 LOC_MSG([  Have Python OGR Module:        ${have_python_ogr}])
 LOC_MSG([  Have SPICE:                    ${have_spice}])

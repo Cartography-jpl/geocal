@@ -12,6 +12,8 @@ BOOST_AUTO_TEST_CASE(chain_test)
   AirMspiIgc 
     igc("/home/smyth/Local/MSPI-Ground/chain_test/input/3.master.config", 
 	"/home/smyth/Local/MSPI-Ground/chain_test/input/3.nav_gimbal.hdf4",
+	"/home/smyth/Local/MSPI-Ground/chain_test/3.l1b1.hdf5",
+	1, 
 	"/home/smyth/Local/MSPI-Ground");
 }
 

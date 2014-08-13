@@ -23,19 +23,22 @@ if test "x$want_mspi_shared" = "xyes"; then
         succeeded=no
         if test "$ac_mspi_shared_path" != ""; then
             MSPI_SHARED_LIBS="-R$ac_mspi_shared_path -L$ac_mspi_shared_path -lMSPI-Shared"
-            MSPI_SHARED_CFLAGS="-I$ac_mspi_shared_path"
+            MSPI_SHARED_CFLAGS="-I$ac_mspi_shared_path -I$ac_mspi_shared_path/.."
             succeeded=yes
         else
           for ac_path_tmp in $prefix/MSPI-Shared $THIRDPARTY/MSPI-Shared /data/smyth/MSPI-Shared ; do
              if test -e "$ac_path_tmp/libMSPI-Shared.la" && test -r "$ac_path_tmp/libMSPI-Shared.la"; then
                 MSPI_SHARED_LIBS="-R$ac_path_tmp -L$ac_path_tmp -lMSPI-Shared"
-                MSPI_SHARED_CFLAGS="-I$ac_path_tmp"
+                MSPI_SHARED_CFLAGS="-I$ac_path_tmp -I$ac_path_tmp/.."
                 succeeded=yes
                 break
              fi
            done
         fi
-
+# We can only use MSPI shared if we also have HDFEOS5
+        if test "$have_hdfeos5" != "yes"; then
+	   succeeded=no
+	fi
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])
         else

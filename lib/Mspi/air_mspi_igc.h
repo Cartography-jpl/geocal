@@ -13,7 +13,15 @@ class AirMspiIgc : public IpiImageGroundConnection {
 public:
   AirMspiIgc(const std::string& Master_config_file,
 	     const std::string& Orbit_file_name,
+	     const std::string& L1b1_file_name,
+	     int Band,
 	     const std::string& Base_directory = ".");
+
+//-----------------------------------------------------------------------
+/// Return band number.
+//-----------------------------------------------------------------------
+
+  int band() const {return ipi().band();}
 
 //-----------------------------------------------------------------------
 /// The base directory that various files in the master config file
@@ -44,9 +52,20 @@ public:
   std::string orbit_file_name() const
   { return orbit()->file_name(); }
 
+//-----------------------------------------------------------------------
+/// The name of the l1b1 file
+//-----------------------------------------------------------------------
+
+  // We need to find out where this comes from. Possibly we will stash
+  // the name somewhere.
+  std::string l1b1_file_name() const
+  { return "fake_name"; }
+
   virtual void print(std::ostream& Os) const;
 private:
   std::string bdir, mconfig;
+
+  int reference_row(const std::string& Instrument_config_file_name) const;
 };
 }
 #endif

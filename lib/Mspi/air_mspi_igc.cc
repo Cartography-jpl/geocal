@@ -3,6 +3,9 @@
 #include "mspi_camera.h"
 #include "usgs_dem.h"
 #include "simple_dem.h"
+#ifdef HAVE_MSPI_SHARED
+#include "File/L1B1File/src/l1b1_reader.h"
+#endif
 
 using namespace GeoCal;
 
@@ -20,6 +23,8 @@ using namespace GeoCal;
 
 AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
 		       const std::string& Orbit_file_name,
+		       const std::string& L1b1_file_name,
+		       int Band,
 		       const std::string& Base_directory)
 : bdir(Base_directory),
   mconfig(Master_config_file)
@@ -47,19 +52,39 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
 
   // Get DEM set up
   boost::shared_ptr<Dem> dem;
+  double dem_resolution;
   if(c.value<std::string>("dem_type") == "usgs") {
     // Note that Mike used the DID datum. We'll use the DatumGeoid96
     // here, but we can change that if needed.
     dem.reset(new UsgsDem(c.value<std::string>("USGSDATA")));
+    dem_resolution = 10.0;
   } else {
     double h = (c.have_key("simple_dem_height") ?
 		c.value<double>("simple_dem_height") : 0);
     dem.reset(new SimpleDem(h));
+    dem_resolution = 10.0;
   }
 
+  // Get the time table and L1B1 data.
+#ifdef HAVE_MSPI_SHARED
+  MSPI::Shared::L1B1Reader l1b1(L1b1_file_name);
+  int refrow = reference_row(Base_directory + "/" + 
+			     c.value<std::string>("instrument_info_config"));
+  Time tepoch = Time::parse_time(l1b1.epoch());
+  std::vector<double> toffset = 
+    l1b1.read_time(refrow, 0, l1b1.number_frame(refrow));
+  std::vector<Time> tm;
+  BOOST_FOREACH(double toff, toffset)
+    tm.push_back(tepoch + toff);
+  boost::shared_ptr<MeasuredTimeTable> tt(new MeasuredTimeTable(tm));
+#else
+  throw Exception("This class requires that MSPI Shared library be available");
+#endif
+
+
   // Ready now to initialize ipi and Igc
-  //  boost::shared_ptr<Ipi> ipi(orb, cam, band, tmin, tmax, tt);
-  // initialize(ipi, dem, img, title, resolution);
+  //  boost::shared_ptr<Ipi> ipi(orb, cam, Band, tmin, tmax, tt);
+  // initialize(ipi, dem, img, title, dem_resolution);
 }
 
 void AirMspiIgc::print(std::ostream& Os) const 
@@ -68,4 +93,29 @@ void AirMspiIgc::print(std::ostream& Os) const
      << "  Master config file: " << master_config_file() << "\n"
      << "  Orbit file name:    " << orbit_file_name() << "\n"
      << "  Base directory:     " << base_directory() << "\n";
+}
+
+
+//-----------------------------------------------------------------------
+/// Determine the reference row to use for the time table. This comes
+/// from the 660nm I band. 
+/// Note that the band number used in the instrument config file is
+/// *not* the same as the band number used in the camera. Instead this
+/// is a spectral band number.
+//-----------------------------------------------------------------------
+
+int AirMspiIgc::reference_row(const std::string& Instrument_config_file_name) 
+  const
+{
+  // Determine mapping from instrument_band, row_type to row_number
+  MspiConfigFile iconfig(Instrument_config_file_name);
+  std::vector<int> rn = iconfig.value<std::vector<int> >("row_numbers");
+  std::vector<std::string> rt = 
+    iconfig.value<std::vector<std::string> >("row_types");
+  // Note that this is a spectral band, not the camera band.
+  std::vector<int> rb = iconfig.value<std::vector<int> >("band");
+  std::map<int, std::map<std::string, int> > inst_to_row;
+  for(int i = 0 ; i < (int) rn.size(); ++i)
+    inst_to_row[rb[i]][rt[i]]=rn[i];
+  return inst_to_row[6]["I"];
 }

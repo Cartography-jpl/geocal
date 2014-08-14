@@ -4,6 +4,7 @@
 				// Definition of
 				// IpiImageGroundConnection
 #include "air_mspi_orbit.h"	// Definition of AirMspiOrbit.
+#include "mspi_camera.h"	// Definition of MspiCamera.
 
 namespace GeoCal {
 /****************************************************************//**
@@ -24,11 +25,24 @@ public:
   int band() const {return ipi().band();}
 
 //-----------------------------------------------------------------------
+/// Set band that we are using.
+//-----------------------------------------------------------------------
+
+  void band(int B) { ipi_ptr()->band(B); }
+
+//-----------------------------------------------------------------------
 /// The base directory that various files in the master config file
 /// are relative to.
 //-----------------------------------------------------------------------
 
   const std::string& base_directory() const {return bdir; }
+
+//-----------------------------------------------------------------------
+/// Camera we are using.
+//-----------------------------------------------------------------------
+
+  boost::shared_ptr<MspiCamera> camera() const
+  { return boost::dynamic_pointer_cast<MspiCamera>(ipi().camera_ptr()); }
 
 //-----------------------------------------------------------------------
 /// The name of the master config file used to create this object.

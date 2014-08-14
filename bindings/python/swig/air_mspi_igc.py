@@ -123,6 +123,7 @@ import geocal_swig.image_ground_connection
 import geocal_swig.generic_object
 import geocal_swig.geocal_exception
 import geocal_swig.look_vector
+import geocal_swig.quaternion_camera
 class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnection):
     """
     This is an ImageGroundConnection for AirMspi.
@@ -145,16 +146,20 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
         directory. 
         """
         _air_mspi_igc.AirMspiIgc_swiginit(self,_air_mspi_igc.new_AirMspiIgc(*args))
-    def _v_band(self):
+    def _v_band(self, *args):
         """
-        int GeoCal::AirMspiIgc::band() const
-        Return band number. 
+        void GeoCal::AirMspiIgc::band(int B)
+        Set band that we are using. 
         """
-        return _air_mspi_igc.AirMspiIgc__v_band(self)
+        return _air_mspi_igc.AirMspiIgc__v_band(self, *args)
 
     @property
     def band(self):
         return self._v_band()
+
+    @band.setter
+    def band(self, value):
+      self._v_band(value)
 
     def _v_base_directory(self):
         """
@@ -201,6 +206,17 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
     def time_table(self):
         return self._v_time_table()
 
+    def _v_camera(self):
+        """
+        boost::shared_ptr<MspiCamera> GeoCal::AirMspiIgc::camera() const
+        Camera we are using. 
+        """
+        return _air_mspi_igc.AirMspiIgc__v_camera(self)
+
+    @property
+    def camera(self):
+        return self._v_camera()
+
     def _v_orbit_file_name(self):
         """
         std::string GeoCal::AirMspiIgc::orbit_file_name() const
@@ -236,6 +252,7 @@ AirMspiIgc._v_base_directory = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_ba
 AirMspiIgc._v_master_config_file = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_master_config_file,None,AirMspiIgc)
 AirMspiIgc._v_orbit = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_orbit,None,AirMspiIgc)
 AirMspiIgc._v_time_table = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_time_table,None,AirMspiIgc)
+AirMspiIgc._v_camera = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_camera,None,AirMspiIgc)
 AirMspiIgc._v_orbit_file_name = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_orbit_file_name,None,AirMspiIgc)
 AirMspiIgc._v_l1b1_file_name = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_l1b1_file_name,None,AirMspiIgc)
 AirMspiIgc_swigregister = _air_mspi_igc.AirMspiIgc_swigregister

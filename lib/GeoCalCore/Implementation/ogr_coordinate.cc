@@ -258,3 +258,18 @@ bool OgrCoordinateConverter::is_same(const CoordinateConverter& Conv) const
   return ogr().ogr().IsSame(&c->ogr().ogr());
 }
 
+//-----------------------------------------------------------------------
+/// Create a converter for UTM. The zone number should be positive for
+/// north, negative for south.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<OgrCoordinateConverter>
+OgrCoordinateConverter::utm_converter(int Zone)
+{
+  boost::shared_ptr<OGRSpatialReference> ogr(new OGRSpatialReference);
+  ogr->SetWellKnownGeogCS("WGS84");
+  ogr->SetUTM((Zone > 0 ? Zone  : -Zone), (Zone > 0));
+  boost::shared_ptr<OgrWrapper> ogrw(new OgrWrapper(ogr));
+  return boost::shared_ptr<OgrCoordinateConverter>
+    (new OgrCoordinateConverter(ogrw));
+}

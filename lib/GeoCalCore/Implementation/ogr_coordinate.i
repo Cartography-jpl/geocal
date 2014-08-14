@@ -58,6 +58,8 @@ public:
     convert_from_coordinate(double X, double Y, double Height = 0) const;
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
 			       double& Y, double& Height) const;
+  static boost::shared_ptr<OgrCoordinateConverter>
+  utm_converter(int Zone);
   %pickle_init(1, self.ogr)
 };
 

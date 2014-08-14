@@ -190,6 +190,17 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
     def orbit(self):
         return self._v_orbit()
 
+    def _v_time_table(self):
+        """
+        boost::shared_ptr<TimeTable> GeoCal::AirMspiIgc::time_table() const
+        TimeTable we are using. 
+        """
+        return _air_mspi_igc.AirMspiIgc__v_time_table(self)
+
+    @property
+    def time_table(self):
+        return self._v_time_table()
+
     def _v_orbit_file_name(self):
         """
         std::string GeoCal::AirMspiIgc::orbit_file_name() const
@@ -224,6 +235,7 @@ AirMspiIgc._v_band = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_band,None,Ai
 AirMspiIgc._v_base_directory = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_base_directory,None,AirMspiIgc)
 AirMspiIgc._v_master_config_file = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_master_config_file,None,AirMspiIgc)
 AirMspiIgc._v_orbit = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_orbit,None,AirMspiIgc)
+AirMspiIgc._v_time_table = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_time_table,None,AirMspiIgc)
 AirMspiIgc._v_orbit_file_name = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_orbit_file_name,None,AirMspiIgc)
 AirMspiIgc._v_l1b1_file_name = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_l1b1_file_name,None,AirMspiIgc)
 AirMspiIgc_swigregister = _air_mspi_igc.AirMspiIgc_swigregister

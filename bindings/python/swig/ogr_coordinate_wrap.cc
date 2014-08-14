@@ -6808,6 +6808,39 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OgrCoordinateConverter_utm_converter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::OgrCoordinateConverter > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "OgrCoordinateConverter_utm_converter" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    try {
+      result = GeoCal::OgrCoordinateConverter::utm_converter(arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_OgrCoordinateConverter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OgrCoordinateConverter *arg1 = (GeoCal::OgrCoordinateConverter *) 0 ;
@@ -6975,6 +7008,12 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"X, Y, and Height are in whatever X, Y, and Z are for the underlying\n"
 		"OgrWrapper projection. \n"
+		""},
+	 { (char *)"OgrCoordinateConverter_utm_converter", (PyCFunction)_wrap_OgrCoordinateConverter_utm_converter, METH_O, (char *)"\n"
+		"boost::shared_ptr< OgrCoordinateConverter > OgrCoordinateConverter::utm_converter(int Zone)\n"
+		"Create a converter for UTM.\n"
+		"\n"
+		"The zone number should be positive for north, negative for south. \n"
 		""},
 	 { (char *)"delete_OgrCoordinateConverter", (PyCFunction)_wrap_delete_OgrCoordinateConverter, METH_O, (char *)"\n"
 		"virtual GeoCal::OgrCoordinateConverter::~OgrCoordinateConverter()\n"

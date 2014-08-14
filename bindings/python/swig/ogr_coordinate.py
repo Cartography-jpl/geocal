@@ -416,6 +416,16 @@ class OgrCoordinateConverter(geocal_swig.coordinate_converter.CoordinateConverte
         """
         return _ogr_coordinate.OgrCoordinateConverter_convert_from_coordinate(self, *args)
 
+    def utm_converter(*args):
+        """
+        boost::shared_ptr< OgrCoordinateConverter > OgrCoordinateConverter::utm_converter(int Zone)
+        Create a converter for UTM.
+
+        The zone number should be positive for north, negative for south. 
+        """
+        return _ogr_coordinate.OgrCoordinateConverter_utm_converter(*args)
+
+    utm_converter = staticmethod(utm_converter)
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -428,6 +438,15 @@ OgrCoordinateConverter._v_ogr = new_instancemethod(_ogr_coordinate.OgrCoordinate
 OgrCoordinateConverter.convert_from_coordinate = new_instancemethod(_ogr_coordinate.OgrCoordinateConverter_convert_from_coordinate,None,OgrCoordinateConverter)
 OgrCoordinateConverter_swigregister = _ogr_coordinate.OgrCoordinateConverter_swigregister
 OgrCoordinateConverter_swigregister(OgrCoordinateConverter)
+
+def OgrCoordinateConverter_utm_converter(*args):
+  """
+    boost::shared_ptr< OgrCoordinateConverter > OgrCoordinateConverter::utm_converter(int Zone)
+    Create a converter for UTM.
+
+    The zone number should be positive for north, negative for south. 
+    """
+  return _ogr_coordinate.OgrCoordinateConverter_utm_converter(*args)
 
 
 

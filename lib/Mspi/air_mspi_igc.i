@@ -23,6 +23,7 @@ public:
   %python_attribute(base_directory, std::string);
   %python_attribute(master_config_file, std::string);
   %python_attribute(orbit, boost::shared_ptr<AirMspiOrbit>);
+  %python_attribute(time_table, boost::shared_ptr<TimeTable>);
   %python_attribute(orbit_file_name, std::string);
   %python_attribute(l1b1_file_name, std::string);
   %pickle_init(1, self.master_config_file, self.orbit_file_name,

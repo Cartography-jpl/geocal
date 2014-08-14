@@ -234,6 +234,8 @@ public:
     Height = c.z;
   }
   virtual void print(std::ostream& Os) const;
+  static boost::shared_ptr<OgrCoordinateConverter>
+  utm_converter(int Zone);
 private:
   boost::shared_ptr<OgrWrapper> ogr_;
 };

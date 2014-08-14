@@ -201,6 +201,21 @@ void OgrCoordinate::print(std::ostream& Os) const
 }
 
 //-----------------------------------------------------------------------
+/// Return the UTM zone number for the coordinate (positive for North,
+/// negative for South). If this isn't actually in UTM, then this just
+/// returns 0.
+//-----------------------------------------------------------------------
+
+int OgrCoordinate::utm_zone() const
+{
+  int is_north;
+  int zone = ogr_->ogr().GetUTMZone(&is_north);
+  if(!is_north)
+    zone = -zone;
+  return zone;
+}
+
+//-----------------------------------------------------------------------
 /// Convert a GroundCoordinate to UTM. If desired, you can pass in the
 /// zone number (use negative number for southern zones), or if left
 /// blank we determine the appropriate zone to use.

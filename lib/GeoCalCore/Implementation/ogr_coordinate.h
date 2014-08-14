@@ -157,6 +157,8 @@ public:
 
   double z;
 
+  int utm_zone() const;
+
   static OgrCoordinate to_utm(const Geodetic& Gc, int zone = -999);
 private:
   boost::shared_ptr<OgrWrapper> ogr_;

@@ -6107,6 +6107,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OgrCoordinate__v_utm_zone(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OgrCoordinate *arg1 = (GeoCal::OgrCoordinate *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OgrCoordinate const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OgrCoordinate const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OgrCoordinate_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OgrCoordinate__v_utm_zone" "', argument " "1"" of type '" "GeoCal::OgrCoordinate const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OgrCoordinate > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OgrCoordinate > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrCoordinate * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OgrCoordinate > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrCoordinate * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::OgrCoordinate const *)arg1)->utm_zone();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_OgrCoordinate_x_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OgrCoordinate *arg1 = (GeoCal::OgrCoordinate *) 0 ;
@@ -6890,6 +6933,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OgrCoordinate__v_ogr", (PyCFunction)_wrap_OgrCoordinate__v_ogr, METH_O, (char *)"\n"
 		"const boost::shared_ptr<OgrWrapper>& GeoCal::OgrCoordinate::ogr_ptr() const\n"
 		"Underlying OgrWrapper. \n"
+		""},
+	 { (char *)"OgrCoordinate__v_utm_zone", (PyCFunction)_wrap_OgrCoordinate__v_utm_zone, METH_O, (char *)"\n"
+		"int OgrCoordinate::utm_zone() const\n"
+		"Return the UTM zone number for the coordinate (positive for North,\n"
+		"negative for South).\n"
+		"\n"
+		"If this isn't actually in UTM, then this just returns 0. \n"
 		""},
 	 { (char *)"OgrCoordinate_x_set", _wrap_OgrCoordinate_x_set, METH_VARARGS, NULL},
 	 { (char *)"OgrCoordinate_x_get", (PyCFunction)_wrap_OgrCoordinate_x_get, METH_O, NULL},

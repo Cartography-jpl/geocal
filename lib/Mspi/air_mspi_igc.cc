@@ -2,6 +2,7 @@
 #include "mspi_config_file.h"
 #include "mspi_camera.h"
 #include "usgs_dem.h"
+#include "did_datum.h"
 #include "simple_dem.h"
 #ifdef HAVE_MSPI_SHARED
 #include "File/L1B1File/src/l1b1_reader.h"
@@ -54,9 +55,9 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
   boost::shared_ptr<Dem> dem;
   double dem_resolution;
   if(c.value<std::string>("dem_type") == "usgs") {
-    // Note that Mike used the DID datum. We'll use the DatumGeoid96
-    // here, but we can change that if needed.
-    dem.reset(new UsgsDem(c.value<std::string>("USGSDATA")));
+    boost::shared_ptr<Datum> 
+      datum(new DidDatum(c.value<std::string>("MSL_DATA")));
+    dem.reset(new UsgsDem(c.value<std::string>("USGSDATA"), true, datum));
     dem_resolution = 10.0;
   } else {
     double h = (c.have_key("simple_dem_height") ?
@@ -80,11 +81,16 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif
+  Time tmin = std::max(orb->min_time(), tt->min_time());
+  Time tmax = std::min(orb->max_time(), tt->max_time());
 
+  // Short term, have image empty.
+  boost::shared_ptr<RasterImage> img;
+  std::string title = "Image";
 
   // Ready now to initialize ipi and Igc
-  //  boost::shared_ptr<Ipi> ipi(orb, cam, Band, tmin, tmax, tt);
-  // initialize(ipi, dem, img, title, dem_resolution);
+  boost::shared_ptr<Ipi> ipi(new Ipi(orb, cam, Band, tmin, tmax, tt));
+  initialize(ipi, dem, img, title, dem_resolution);
 }
 
 void AirMspiIgc::print(std::ostream& Os) const 

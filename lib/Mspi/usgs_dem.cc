@@ -164,8 +164,12 @@ UsgsDem::UsgsDem
  const boost::shared_ptr<Datum>& D
 )
 : 
-  f(new UsgsDemData(Dir, Outside_dem_is_error))
+  f(new UsgsDemData(Dir, Outside_dem_is_error, 10812, 10812))
 {
+  // The 10812 up above is the size of the file, so we are reading all
+  // the data. Not sure if we really want this hardcoded, or if we
+  // really want all this data read. But for now, leave this like this
+  // and we can revisit if needed.
   initialize(D, f->map_info(), Outside_dem_is_error);
 }
 

@@ -8,6 +8,70 @@
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
+/// This code is from the paper D. K. Olson "Converting Earth-Centered,
+/// Earth-Fixed Coordinates to Geodetic Coordinates.", IEEE
+/// Transactions on Aerospace and Electronic Systems, 32 (1996)
+/// 473-476. 
+///
+/// The claim of the paper is that this runs faster than all the other
+/// methods he compared to. We have cut and pasted the code from that
+/// paper here, and then slightly adapted this.
+//-----------------------------------------------------------------------
+
+void latlon(double x, double y, double z, double& lat, double& lon, double& ht)
+{
+  const double a = Constant::wgs84_a;
+  const double e2 = Constant::wgs84_esq;
+  const double a1 = a * e2;
+  const double a2 = a1 * a1;
+  const double a3 = a1 * e2 / 2;
+  const double a4 = 2.5 * a2;
+  const double a5 = a1 + a3;
+  const double a6 = 1 - e2;
+  double zp = fabs(z);
+  double w2 = x * x + y * y;
+  double w = sqrt(w2);
+  double z2 = z * z;
+  double r2 = w2 + z2;
+  double r = sqrt(r2);
+  if(r < 1e5) {
+    lat = 0;
+    lon = 0;
+    ht = -1e7;
+    return;
+  }
+  lon = atan2(y, x);
+  double s2 = z2 / r2;
+  double c2 = w2 / r2;
+  double u = a2 / r;
+  double v = a3 - a4 / r;
+  double s, ss, c;
+  if(c2 > 0.3) {
+    s = (zp / r) * (1 + c2 * (a1 + u + s2 * v) / r);
+    lat = asin(s);
+    ss = s * s;
+    c = sqrt(1 - ss);
+  } else {
+    c = (w / r) * (1 - s2 * (a5 - u - c2 * v) / r);
+    lat = acos(c);
+    ss = 1 - c * c;
+    s = sqrt(ss);
+  }
+  double g = 1 - e2 * ss;
+  double rg = a / sqrt(g);
+  double rf = a6 * rg;
+  u = w - rg * c;
+  v = zp - rf * s;
+  double f = c * u + s * v;
+  double m = c * v - s * u;
+  double p = m / (rf / g + f);
+  lat = lat + p;
+  ht = f + m * p / 2;
+  if(z < 0)
+    lat = -lat;
+}
+
+//-----------------------------------------------------------------------
 /// Convert from GroundCoor.
 //-----------------------------------------------------------------------
 
@@ -40,59 +104,11 @@ boost::shared_ptr<CartesianInertial> Ecr::convert_to_ci(const Time& T) const
 
 Geodetic Ecr::convert_to_geodetic() const
 {
-//-----------------------------------------------------------------------
-// This is the equatorial radius of and eccentricity squared of the
-// WGS84 ellipsoid.
-//-----------------------------------------------------------------------
-
-  const double a = Constant::wgs84_a;
-  const double esq = Constant::wgs84_esq;
-
-//-----------------------------------------------------------------------
-// This is the tolerance for the calculation of Q. This gives a
-// accuracy of about 1mm.
-//-----------------------------------------------------------------------
-
-  const double q_tol = 1e-9;
-
-//-----------------------------------------------------------------------
-// We bypass the constructor of Geodetic, to avoid doing the range
-// checking (which is unnecessary for us and is pretty time
-// consuming. 
-//-----------------------------------------------------------------------
-
-  Geodetic res;			
-  double rho = sqrt(sqr(position[0]) +
-		    sqr(position[1]));
-  if(rho > 0.0)
-    res.lon_ = atan2(position[1], position[0]) * Constant::rad_to_deg;
-  else
-    res.lon_ = 0;
-  double normrho = rho / a;
-  double normz = position[2] / a;
-  double signn = ((sqr(normrho) + sqr(normz) / (1 - esq)) 
-		  > 1 ? 1 : -1);
-  double q  = 0.0;
-  double qold;
-  int n = 0;
-  double t1 = sqr(normz) * (1 - esq);
-  do {
-    qold = q;
-    q = esq  * (normrho - qold) / sqrt(sqr(normrho - qold) + t1);
-  } while (fabs(qold  - q) > q_tol &&
- 	   ++n < 10);
-  if(n ==10)
-    throw Exception("Number of iterations exceeded");
-  res.lat_ = atan2(normz, normrho - q) * Constant::rad_to_deg;
-  double t3 = normrho - q;
-  double r = sqrt(sqr(normz) + sqr(t3));
-  double coslat = t3 / r;
-  double sinlat = normz / r;
-  double t = 1.0 / sqrt(1 - esq * sinlat * sinlat);
-  double normrhofoot = coslat * t;
-  double normzfoot = (1 - esq) * sinlat * t;
-  res.height_ellipsoid_ = signn * 
-    sqrt(sqr(normrhofoot - normrho) + sqr(normzfoot - normz)) * a;
+  Geodetic res;
+  latlon(position[0], position[1], position[2], res.lat_, res.lon_,
+	 res.height_ellipsoid_);
+  res.lat_ *= Constant::rad_to_deg;
+  res.lon_ *= Constant::rad_to_deg;
   return res;
 }
 

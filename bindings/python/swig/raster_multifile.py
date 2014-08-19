@@ -121,6 +121,7 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 class RasterMultifile(geocal_swig.raster_image_variable.RasterImageVariable):
     """
     There are certain larger data sets that are made up of a number of

@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.geocal_datum
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 class DidDatum(geocal_swig.geocal_datum.Datum):
     """
     This is a Datum used for the the DID.

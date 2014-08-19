@@ -70,6 +70,11 @@ public:
 			 const std::string& To, const Time& T,
 			 const boost::array<double, 3>& pin, 
 			 boost::array<double, 3>& pout);
+  static void sub_solar_point_calc(const std::string& Body,
+				   const std::string& Ref_frame,
+				   const Time& T,
+				   boost::array<double, 3>& pout,
+				   boost::array<double, 3>& pout2);
 private:
   static std::string max_version_find(const std::string& D, 
 				      const boost::regex& F_reg);
@@ -91,6 +96,9 @@ public:
     double Ci_to_cf[3][3]);
   virtual void to_fixed(int Body_id, const Time& T,
     const CartesianInertial& From, CartesianFixed& To);
+  virtual void
+  sub_solar_point(int Body_id, const Time& T, CartesianFixed& P);
+  virtual double solar_distance(int Body_id, const Time& T);
 };
 
 }

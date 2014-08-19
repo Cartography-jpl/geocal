@@ -1,10 +1,12 @@
 #ifndef LOOK_VECTOR_H
 #define LOOK_VECTOR_H
 #include "printable.h"
+#include "constant.h"
 #include <boost/array.hpp>
 #include <boost/math/quaternion.hpp>
-
 namespace GeoCal {
+  class GroundCoordinate;	// Forward declaration.
+  class Time;
 
 /****************************************************************//**
   This is a look vector in an unspecified coordinate system. Derived
@@ -155,7 +157,139 @@ public:
 //-----------------------------------------------------------------------
   CartesianFixedLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
 
+  CartesianFixedLookVector(const GroundCoordinate& From,
+			   const GroundCoordinate& To);
+
   virtual ~CartesianFixedLookVector() {}
+  virtual void print(std::ostream& Os) const;
+
+  static CartesianFixedLookVector solar_look_vector(const Time& T);
+};
+
+/****************************************************************//**
+  This is a look vector in LocalNorth coordinates. Note that there are
+  2 common local north coordinate. The first is ENU (for "East, North,
+  Up") where the local east axis is 'x', north is 'y' and up is Z. The
+  other is NED (for North, East, Down), where local north is 'x', east
+  is 'y' and 'z' is down. NED is used commonly for aircraft data
+  (see AircraftOrbitData), since you tend to look down. This class 
+  is for ENU, e.g., for calculating view zenith and azimuth angles.
+*******************************************************************/
+
+class LnLookVector : public LookVector {
+public:
+//-----------------------------------------------------------------------
+/// Constructor that translates a CartesianFixedLookVector to a
+/// LnLookVector, using the coordinate system at the given Ref_pt.
+//-----------------------------------------------------------------------
+
+  LnLookVector(const CartesianFixedLookVector& Lv, 
+	       const GroundCoordinate& Ref_pt)
+  {
+    boost::math::quaternion<double> to_ln = cf_to_enu(Ref_pt);
+    look_quaternion(to_ln * Lv.look_quaternion() * conj(to_ln));
+  }
+
+//-----------------------------------------------------------------------
+/// Translate from LnLookVector to CartesianFixedLookVector, using the
+/// coordinate system at the given Ref_pt.
+//-----------------------------------------------------------------------
+
+  CartesianFixedLookVector to_cf(const GroundCoordinate& Ref_pt) const
+  {
+    boost::math::quaternion<double> to_cf = enu_to_cf(Ref_pt);
+    return CartesianFixedLookVector(to_cf * look_quaternion() * conj(to_cf));
+  }
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVector() {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+
+  virtual ~LnLookVector() {}
+  virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Return view zenith angle in degrees.
+//-----------------------------------------------------------------------
+
+  double view_zenith() const
+  { return acos(direction()[2]) * Constant::rad_to_deg; }
+
+//-----------------------------------------------------------------------
+/// Return view azimuth angle in degrees.
+//-----------------------------------------------------------------------
+  
+  double view_azimuth() const
+  { return atan2(look_vector[0], look_vector[1]) * Constant::rad_to_deg +
+      180.0; }
+
+//-----------------------------------------------------------------------
+/// Return quaternion to go from CartesianFixed to ENU coordinates for
+/// the given location.
+//-----------------------------------------------------------------------
+  static boost::math::quaternion<double> 
+  cf_to_enu(const GroundCoordinate& Ref_pt)
+  { return conj(enu_to_cf(Ref_pt)); }
+
+  static boost::math::quaternion<double> 
+  enu_to_cf(const GroundCoordinate& Ref_pt);
+  
+  static LnLookVector solar_look_vector(const Time& T, 
+					const GroundCoordinate& Ref_pt);
+
+};
+
+/****************************************************************//**
+  This is a look vector in Detector Coordinate System coordinates
+*******************************************************************/
+
+class DcsLookVector : public LookVector {
+public:
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  DcsLookVector() {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  DcsLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  DcsLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  DcsLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+
+  virtual ~DcsLookVector() {}
   virtual void print(std::ostream& Os) const;
 };
 

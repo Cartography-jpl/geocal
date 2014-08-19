@@ -66,7 +66,7 @@ template <class T> class MspiConfigFilePartialHelper {
 public:
   T parse_string(const std::string& S) const
   {
-    // Default is to sue lexical_cast
+    // Default is to use lexical_cast
     return boost::lexical_cast<T>(S);
   }
 };
@@ -165,7 +165,7 @@ public:
   std::vector<std::vector<T> > parse_string(const std::string& S) const
   {
     std::vector<std::vector<T> > res;
-    boost::sregex_token_iterator i(S.begin(), S.end(), boost::regex("\\n+"), 
+    boost::sregex_token_iterator i(S.begin(), S.end(), boost::regex("\\n+\\s*"), 
 				   -1);
     boost::sregex_token_iterator iend;
     if(i == iend || *i == "")  // Handle special case of an empty list

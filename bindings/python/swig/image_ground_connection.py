@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.generic_object
 import geocal_swig.geocal_exception
+import geocal_swig.look_vector
 class ImageGroundConnectionFailed(geocal_swig.geocal_exception.Exception):
     """
     Exception thrown if ImageGroundConnection fails to calculate a image
@@ -371,6 +372,20 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
     def title(self, value):
       self._v_title(value)
 
+    def _v_has_time(self):
+        """
+        virtual bool GeoCal::ImageGroundConnection::has_time() const
+        Not all ImageGroundConnection has a time associated with each pixel
+        (for example, one based on an underlying existing map).
+
+        This indicates if we have the functionality. 
+        """
+        return _image_ground_connection.ImageGroundConnection__v_has_time(self)
+
+    @property
+    def has_time(self):
+        return self._v_has_time()
+
     def _v_parameter(self, *args):
         """
         virtual void GeoCal::ImageGroundConnection::parameter(const blitz::Array< double, 1 > &Parm)
@@ -453,6 +468,7 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
         self.this.disown()
         _image_ground_connection.disown_ImageGroundConnection(self)
         return weakref_proxy(self)
+ImageGroundConnection.initialize = new_instancemethod(_image_ground_connection.ImageGroundConnection_initialize,None,ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_lv = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_lv,None,ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_pos = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_pos,None,ImageGroundConnection)
 ImageGroundConnection.__ground_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection___ground_coordinate,None,ImageGroundConnection)
@@ -470,6 +486,7 @@ ImageGroundConnection._v_number_line = new_instancemethod(_image_ground_connecti
 ImageGroundConnection._v_number_sample = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_number_sample,None,ImageGroundConnection)
 ImageGroundConnection._v_number_band = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_number_band,None,ImageGroundConnection)
 ImageGroundConnection._v_title = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_title,None,ImageGroundConnection)
+ImageGroundConnection._v_has_time = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_has_time,None,ImageGroundConnection)
 ImageGroundConnection.__str__ = new_instancemethod(_image_ground_connection.ImageGroundConnection___str__,None,ImageGroundConnection)
 ImageGroundConnection._v_parameter = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter,None,ImageGroundConnection)
 ImageGroundConnection._v_parameter_name = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_name,None,ImageGroundConnection)

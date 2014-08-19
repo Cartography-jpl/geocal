@@ -748,14 +748,6 @@ BUILD_DOXYGEN_TRUE
 HAVE_DOXYGEN_FALSE
 HAVE_DOXYGEN_TRUE
 DOXYGEN
-BUILD_HDF5_FALSE
-BUILD_HDF5_TRUE
-HAVE_HDF5_FALSE
-HAVE_HDF5_TRUE
-HDF5_BIN
-HDF5HOME
-HDF5_LIBS
-HDF5_CFLAGS
 BUILD_SPICE_FALSE
 BUILD_SPICE_TRUE
 HAVE_SPICE_FALSE
@@ -780,9 +772,31 @@ HAVE_BOOST_FALSE
 HAVE_BOOST_TRUE
 BOOST_IOSTREAMS_LIB
 BOOST_DATETIME_LIB
+BOOST_FILESYSTEM_LIB
 BOOST_REGEX_LIB
 BOOST_LIBDIR
 BOOST_CPPFLAGS
+BUILD_MSPI_SHARED_FALSE
+BUILD_MSPI_SHARED_TRUE
+HAVE_MSPI_SHARED_FALSE
+HAVE_MSPI_SHARED_TRUE
+MSPI_SHARED_LIBS
+MSPI_SHARED_BUILD_DEPEND
+MSPI_SHARED_CFLAGS
+BUILD_HDFEOS5_FALSE
+BUILD_HDFEOS5_TRUE
+HAVE_HDFEOS5_FALSE
+HAVE_HDFEOS5_TRUE
+HDFEOS5_LIBS
+HDFEOS5_CFLAGS
+BUILD_HDF5_FALSE
+BUILD_HDF5_TRUE
+HAVE_HDF5_FALSE
+HAVE_HDF5_TRUE
+HDF5_BIN
+HDF5HOME
+HDF5_LIBS
+HDF5_CFLAGS
 BUILD_AFIDS_DATA_FALSE
 BUILD_AFIDS_DATA_TRUE
 HAVE_AFIDS_DATA_FALSE
@@ -951,11 +965,13 @@ enable_debug
 with_ncurses
 with_vicar_rtl
 with_afids_data
+with_hdfeos5
+with_hdf5
+with_mspi_shared
 with_boost
 with_blitz
 with_gsl
 with_spice
-with_hdf5
 with_doxygen
 with_fftw
 with_gdal
@@ -987,14 +1003,16 @@ PKG_CONFIG_LIBDIR
 THIRDPARTY
 VICAR_RTL_CFLAGS
 VICAR_RTL_LIBS
+HDF5_CFLAGS
+HDF5_LIBS
+HDFEOS5_CFLAGS
+HDFEOS5_LIBS
 BLITZ_CFLAGS
 BLITZ_LIBS
 GSL_CFLAGS
 GSL_LIBS
 SPICE_CFLAGS
 SPICE_LIBS
-HDF5_CFLAGS
-HDF5_LIBS
 FFTW_CFLAGS
 FFTW_LIBS
 GDAL_CFLAGS
@@ -1654,6 +1672,15 @@ Optional Packages:
   --with-afids-data[=DIR] use AFIDS data (default is yes if found) - it is
                           possible to specify the root directory for AFIDS
                           data (optional).
+  --with-hdfeos5[=DIR]    use Hdfeos5 library (default is yes if found) - it
+                          is possible to specify the root directory for
+                          Hdfeos5 library (optional).
+  --with-hdf5[=DIR]       use HDF 5 (default is yes if found) - it is possible
+                          to specify the root directory for HDF 5 (optional).
+  --with-mspi-shared[=DIR]
+                          use MSPI-Shared (default is yes if found) - it is
+                          possible to specify the root directory for
+                          MSPI-Shared (optional).
   --with-boost[=DIR]      use BOOST (default is yes if found) - it is possible
                           to specify the root directory for BOOST (optional).
   --with-blitz[=DIR]      use Blitz++ (default is yes if found) - it is
@@ -1663,8 +1690,6 @@ Optional Packages:
                           to specify the root directory for GSL (optional).
   --with-spice[=DIR]      use SPICE (default is yes if found) - it is possible
                           to specify the root directory for SPICE (optional).
-  --with-hdf5[=DIR]       use HDF 5 (default is yes if found) - it is possible
-                          to specify the root directory for HDF 5 (optional).
   --with-doxygen[=DIR]    use Doxygen (default is yes if found) - it is
                           possible to specify the root directory for Doxygen
                           (optional).
@@ -1724,6 +1749,12 @@ Some influential environment variables:
               C compiler flags for VICAR_RTL, overriding pkg-config
   VICAR_RTL_LIBS
               linker flags for VICAR_RTL, overriding pkg-config
+  HDF5_CFLAGS C compiler flags for HDF5, overriding pkg-config
+  HDF5_LIBS   linker flags for HDF5, overriding pkg-config
+  HDFEOS5_CFLAGS
+              C compiler flags for HDFEOS5, overriding pkg-config
+  HDFEOS5_LIBS
+              linker flags for HDFEOS5, overriding pkg-config
   BLITZ_CFLAGS
               C compiler flags for BLITZ, overriding pkg-config
   BLITZ_LIBS  linker flags for BLITZ, overriding pkg-config
@@ -1732,8 +1763,6 @@ Some influential environment variables:
   SPICE_CFLAGS
               C compiler flags for SPICE, overriding pkg-config
   SPICE_LIBS  linker flags for SPICE, overriding pkg-config
-  HDF5_CFLAGS C compiler flags for HDF5, overriding pkg-config
-  HDF5_LIBS   linker flags for HDF5, overriding pkg-config
   FFTW_CFLAGS C compiler flags for FFTW, overriding pkg-config
   FFTW_LIBS   linker flags for FFTW, overriding pkg-config
   GDAL_CFLAGS C compiler flags for GDAL, overriding pkg-config
@@ -17231,6 +17260,634 @@ fi
 
 
 #=================================================================
+# MSPI-Shared library. We can only use MSPI-Shared if we also have
+# HDFEOS5 which is depends on.
+
+
+have_hdfeos5="no"
+build_hdfeos5="no"
+
+# Check whether --with-hdfeos5 was given.
+if test "${with_hdfeos5+set}" = set; then :
+  withval=$with_hdfeos5;
+    if test "$withval" = "no"; then
+        want_hdfeos5="no"
+    elif test "$withval" = "yes"; then
+        want_hdfeos5="yes"
+        ac_hdfeos5_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-hdfeos5" "$LINENO" 5
+        fi
+        want_hdfeos5="yes"
+        build_hdfeos5="yes"
+        ac_hdfeos5_path="\${prefix}"
+    else
+        want_hdfeos5="yes"
+        ac_hdfeos5_path="$withval"
+    fi
+
+else
+
+    want_hdfeos5="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_hdfeos5="yes"
+        build_hdfeos5="yes"
+        ac_hdfeos5_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+if test "x$want_hdfeos5" = "xyes"; then
+
+
+have_hdf5="no"
+build_hdf5="no"
+
+# Check whether --with-hdf5 was given.
+if test "${with_hdf5+set}" = set; then :
+  withval=$with_hdf5;
+    if test "$withval" = "no"; then
+        want_hdf5="no"
+    elif test "$withval" = "yes"; then
+        want_hdf5="yes"
+        ac_hdf5_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-hdf5" "$LINENO" 5
+        fi
+        want_hdf5="yes"
+        build_hdf5="yes"
+        ac_hdf5_path="\${prefix}"
+    else
+        want_hdf5="yes"
+        ac_hdf5_path="$withval"
+    fi
+
+else
+
+    want_hdf5="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_hdf5="yes"
+        build_hdf5="yes"
+        ac_hdf5_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+
+if test "x$want_hdf5" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDF5 library" >&5
+$as_echo_n "checking for HDF5 library... " >&6; }
+        succeeded=no
+        if test "$ac_hdf5_path" != ""; then
+            HDF5HOME=$ac_hdf5_path
+            HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5_hl.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
+            HDF5_CFLAGS="-I$ac_hdf5_path/include"
+            succeeded=yes
+        else
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDF5" >&5
+$as_echo_n "checking for HDF5... " >&6; }
+
+if test -n "$HDF5_CFLAGS"; then
+    pkg_cv_HDF5_CFLAGS="$HDF5_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdf5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDF5_CFLAGS=`$PKG_CONFIG --cflags "hdf5" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$HDF5_LIBS"; then
+    pkg_cv_HDF5_LIBS="$HDF5_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdf5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDF5_LIBS=`$PKG_CONFIG --libs "hdf5" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdf5" 2>&1`
+        else
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdf5" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$HDF5_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	HDF5_CFLAGS=$pkg_cv_HDF5_CFLAGS
+	HDF5_LIBS=$pkg_cv_HDF5_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+       if test -e "$ac_path_tmp/include/hdf5.h" && test -r "$ac_path_tmp/include/hdf5.h"; then
+          HDF5_PREFIX=$ac_path_tmp
+          HDF5_CFLAGS="-I$ac_path_tmp/include/"
+          if test -e "$ac_path_tmp/lib/libhdf5_cpp.la"; then
+             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libhdf5_cpp.so"; then
+             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libhdf5_cpp.dylib"; then
+             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.la"; then
+             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
+              succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.so"; then
+             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.dylib"; then
+             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+            HDF5HOME=$HDF5_PREFIX
+        fi
+
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                HDF5_BIN=$HDF5HOME/bin
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+
+
+$as_echo "#define HAVE_HDF5 /**/" >>confdefs.h
+
+                have_hdf5="yes"
+        fi
+fi
+ if test "$have_hdf5" = "yes"; then
+  HAVE_HDF5_TRUE=
+  HAVE_HDF5_FALSE='#'
+else
+  HAVE_HDF5_TRUE='#'
+  HAVE_HDF5_FALSE=
+fi
+
+ if test "$build_hdf5" = "yes"; then
+  BUILD_HDF5_TRUE=
+  BUILD_HDF5_FALSE='#'
+else
+  BUILD_HDF5_TRUE='#'
+  BUILD_HDF5_FALSE=
+fi
+
+
+
+if test "required" = "required"; then
+  if test "$have_hdf5" = "no"; then
+     as_fn_error $? "
+The HDF 5 library is required by GeoCal. Try specifying
+location using --with-hdf5 if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Hdfeos5 library" >&5
+$as_echo_n "checking for Hdfeos5 library... " >&6; }
+        succeeded=no
+        if test "$build_hdfeos5" == "yes"; then
+            HDFEOS5_LIBS="libhe5_hdfeos.la"
+            HDFEOS5_CFLAGS="-I$srcdir/hdfeos/external/HDF-EOS/v5.1.15/include"
+            succeeded=yes
+        elif test "$ac_hdfeos5_path" != ""; then
+            HDFEOS5_LIBS="-R$ac_hdfeos5_path/lib -L$ac_hdfeos5_path/lib -lhe5_hdfeos -lGctp"
+            HDFEOS5_CFLAGS="-I$ac_hdfeos5_path/include/hdfeos5"
+            succeeded=yes
+        else
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDFEOS5" >&5
+$as_echo_n "checking for HDFEOS5... " >&6; }
+
+if test -n "$HDFEOS5_CFLAGS"; then
+    pkg_cv_HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDFEOS5_CFLAGS=`$PKG_CONFIG --cflags "hdfeos5" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$HDFEOS5_LIBS"; then
+    pkg_cv_HDFEOS5_LIBS="$HDFEOS5_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDFEOS5_LIBS=`$PKG_CONFIG --libs "hdfeos5" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdfeos5" 2>&1`
+        else
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdfeos5" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$HDFEOS5_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	HDFEOS5_CFLAGS=$pkg_cv_HDFEOS5_CFLAGS
+	HDFEOS5_LIBS=$pkg_cv_HDFEOS5_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+       if test -e "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h"; then
+          HDFEOS5_PREFIX=$ac_path_tmp
+          HDFEOS5_CFLAGS="-I$ac_path_tmp/include/hdfeos5/"
+          if test -e "$ac_path_tmp/lib/libhe5_hdfeos.la"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.la"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+              succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+            if test "$succeeded" != "yes" ; then
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDFEOS5" >&5
+$as_echo_n "checking for HDFEOS5... " >&6; }
+
+if test -n "$HDFEOS5_CFLAGS"; then
+    pkg_cv_HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDFEOS5_CFLAGS=`$PKG_CONFIG --cflags "hdfeos5" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$HDFEOS5_LIBS"; then
+    pkg_cv_HDFEOS5_LIBS="$HDFEOS5_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDFEOS5_LIBS=`$PKG_CONFIG --libs "hdfeos5" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdfeos5" 2>&1`
+        else
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdfeos5" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$HDFEOS5_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	HDFEOS5_CFLAGS=$pkg_cv_HDFEOS5_CFLAGS
+	HDFEOS5_LIBS=$pkg_cv_HDFEOS5_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+       if test -e "$ac_path_tmp/include/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/HE5_HdfEosDef.h"; then
+          HDFEOS5_PREFIX=$ac_path_tmp
+          HDFEOS5_CFLAGS="-I$ac_path_tmp/include/"
+          if test -e "$ac_path_tmp/lib/libhe5_hdfeos.la"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.la"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+              succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+            fi
+        fi
+
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS $HDF5_CFLAGS"
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+                have_hdfeos5="yes"
+        fi
+fi
+ if test "$have_hdfeos5" = "yes"; then
+  HAVE_HDFEOS5_TRUE=
+  HAVE_HDFEOS5_FALSE='#'
+else
+  HAVE_HDFEOS5_TRUE='#'
+  HAVE_HDFEOS5_FALSE=
+fi
+
+ if test "$build_hdfeos5" = "yes"; then
+  BUILD_HDFEOS5_TRUE=
+  BUILD_HDFEOS5_FALSE='#'
+else
+  BUILD_HDFEOS5_TRUE='#'
+  BUILD_HDFEOS5_FALSE=
+fi
+
+
+
+if test "optional" = "required"; then
+  if test "$have_hdfeos5" = "no"; then
+     as_fn_error $? "
+The Hdfeos5 library library is required by GeoCal. Try specifying
+location using --with-hdfeos5 if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+
+
+
+
+have_mspi_shared="no"
+build_mspi_shared="no"
+
+# Check whether --with-mspi-shared was given.
+if test "${with_mspi_shared+set}" = set; then :
+  withval=$with_mspi_shared;
+    if test "$withval" = "no"; then
+        want_mspi_shared="no"
+    elif test "$withval" = "yes"; then
+        want_mspi_shared="yes"
+        ac_mspi_shared_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-mspi-shared" "$LINENO" 5
+        fi
+        want_mspi_shared="yes"
+        build_mspi_shared="yes"
+        ac_mspi_shared_path="\${prefix}"
+    else
+        want_mspi_shared="yes"
+        ac_mspi_shared_path="$withval"
+    fi
+
+else
+
+    want_mspi_shared="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_mspi_shared="yes"
+        build_mspi_shared="yes"
+        ac_mspi_shared_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+
+if test "x$want_mspi_shared" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for MSPI-Shared library" >&5
+$as_echo_n "checking for MSPI-Shared library... " >&6; }
+        succeeded=no
+        if test "$ac_mspi_shared_path" != ""; then
+            MSPI_SHARED_LIBS="-R$ac_mspi_shared_path -L$ac_mspi_shared_path -lMSPI-Shared"
+            MSPI_SHARED_CFLAGS="-I$ac_mspi_shared_path -I$ac_mspi_shared_path/.."
+            succeeded=yes
+        else
+          for ac_path_tmp in $prefix/MSPI-Shared $THIRDPARTY/MSPI-Shared /data/smyth/MSPI-Shared ; do
+             if test -e "$ac_path_tmp/libMSPI-Shared.la" && test -r "$ac_path_tmp/libMSPI-Shared.la"; then
+                MSPI_SHARED_LIBS="-R$ac_path_tmp -L$ac_path_tmp -lMSPI-Shared"
+                MSPI_SHARED_CFLAGS="-I$ac_path_tmp -I$ac_path_tmp/.."
+                succeeded=yes
+                break
+             fi
+           done
+        fi
+# We can only use MSPI shared if we also have HDFEOS5
+        if test "$have_hdfeos5" != "yes"; then
+	   succeeded=no
+	fi
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+
+$as_echo "#define HAVE_MSPI_SHARED /**/" >>confdefs.h
+
+                have_mspi_shared="yes"
+        fi
+fi
+
+ if test "$have_mspi_shared" = "yes"; then
+  HAVE_MSPI_SHARED_TRUE=
+  HAVE_MSPI_SHARED_FALSE='#'
+else
+  HAVE_MSPI_SHARED_TRUE='#'
+  HAVE_MSPI_SHARED_FALSE=
+fi
+
+ if test "$build_mspi_shared" = "yes"; then
+  BUILD_MSPI_SHARED_TRUE=
+  BUILD_MSPI_SHARED_FALSE='#'
+else
+  BUILD_MSPI_SHARED_TRUE='#'
+  BUILD_MSPI_SHARED_FALSE=
+fi
+
+
+
+if test "optional" = "required"; then
+  if test "$have_mspi_shared" = "no"; then
+     as_fn_error $? "
+The MSPI-Shared library is required by GeoCal. Try specifying
+location using --with-mspi-shared if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+
+#=================================================================
 # Various thirdparty libraries.
 
 
@@ -17295,6 +17952,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
             if test "$build_boost" = "yes"; then
                BOOST_LIBDIR="$ac_boost_path/lib"
                BOOST_REGEX_LIB="-lboost_regex"
+               BOOST_FILESYSTEM_LIB="-lboost_filesystem"
                BOOST_DATETIME_LIB="-lboost_date_time"
                BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                boost_done=yes
@@ -17305,6 +17963,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
                    if test -e "$ac_boost_lib_base/$ac_boost_lib"; then
                        BOOST_LIBDIR="$ac_boost_lib_base"
                        BOOST_REGEX_LIB="-lboost_regex"
+		       BOOST_FILESYSTEM_LIB="-lboost_filesystem"
                        BOOST_DATETIME_LIB="-lboost_date_time"
 		       BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                        boost_done=yes
@@ -17317,6 +17976,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
                    if test -e "$ac_boost_lib_base/$ac_boost_lib"; then
                        BOOST_LIBDIR="$ac_boost_lib_base"
                        BOOST_REGEX_LIB="-lboost_regex-mt"
+		       BOOST_FILESYSTEM_LIB="-lboost_filesystem-mt"
                        BOOST_DATETIME_LIB="-lboost_date_time-mt"
                        BOOST_IOSTREAMS_LIB="-lboost_iostreams-mt"
                        boost_done=yes
@@ -17337,6 +17997,7 @@ $as_echo "no" >&6; }
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 	        BOOST_CPPFLAGS="$BOOST_CPPFLAGS -DBOOST_TEST_DYN_LINK"
+
 
 
 
@@ -20864,6 +21525,30 @@ if test -z "${BUILD_AFIDS_DATA_TRUE}" && test -z "${BUILD_AFIDS_DATA_FALSE}"; th
   as_fn_error $? "conditional \"BUILD_AFIDS_DATA\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${HAVE_HDF5_TRUE}" && test -z "${HAVE_HDF5_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_HDF5\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_HDF5_TRUE}" && test -z "${BUILD_HDF5_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_HDF5\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_HDFEOS5_TRUE}" && test -z "${HAVE_HDFEOS5_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_HDFEOS5\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_HDFEOS5_TRUE}" && test -z "${BUILD_HDFEOS5_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_HDFEOS5\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_MSPI_SHARED_TRUE}" && test -z "${HAVE_MSPI_SHARED_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_MSPI_SHARED\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_MSPI_SHARED_TRUE}" && test -z "${BUILD_MSPI_SHARED_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_MSPI_SHARED\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${HAVE_BOOST_TRUE}" && test -z "${HAVE_BOOST_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_BOOST\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -23398,6 +24083,12 @@ echo "  Have FFTW:                     ${have_fftw}"
 
 
 echo "  Have HDF5:                     ${have_hdf5}"
+
+
+echo "  Have HDFEOS5:                  ${have_hdfeos5}"
+
+
+echo "  Have MSPI-Shared:              ${have_mspi_shared}"
 
 
 echo "  Have Python OGR Module:        ${have_python_ogr}"

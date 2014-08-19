@@ -33,5 +33,7 @@ namespace GeoCal {
 					   double A7);
   blitz::Array<double, 2> 
   quaternion_to_matrix(const boost::math::quaternion<double>& q);
+  boost::math::quaternion<double> 
+  matrix_to_quaternion(const blitz::Array<double, 2>& m);
  }
 

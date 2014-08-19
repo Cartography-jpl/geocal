@@ -178,6 +178,49 @@ void SpiceHelper::conversion(const std::string& From,
 }
 
 //-----------------------------------------------------------------------
+/// Calculate the sub solar point, and also the vector from the Sun to
+/// the sub solar point.
+//-----------------------------------------------------------------------
+
+void SpiceHelper::sub_solar_point_calc(const std::string& Body,
+				       const std::string& Ref_frame,
+				       const Time& T,
+				       boost::array<double, 3>& pout,
+				       boost::array<double, 3>& pout2)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  double trgepc;
+  // Note that we really do *not* want to correct for light travel
+  // time and aberration. This is for the *observer*, or in this case
+  // the Sun. We don't want to correct the time we looking at the
+  // earth by when the Sun happens to see it.
+  //
+  // It is possible that if we were working with something in mid or
+  // high orbit we might care, but in that case we would need the
+  // satellite available through a spice kernel, and we would need to 
+  // make a different call. We just ignore the light travel time
+  // (which is small), and report the subsolar point at the instance
+  // in time at the surface.
+  //
+  // Note that we use the Sun here as the observer because we are also
+  // often interested in the sun distance. We can get that through pout
+  // (vector from center of earth to subsolar point) and pout2 (vector 
+  // from observer to subsolar point, or in this case sun to subsolar
+  // point).
+  subslr_c(const_cast<char*>("Intercept: ellipsoid"),
+	   const_cast<char*>(Body.c_str()), T.et(),
+	   const_cast<char*>(Ref_frame.c_str()),
+	   //const_cast<char*>("lt+s"),
+	   const_cast<char*>("NONE"),
+	   const_cast<char*>("SUN"), &pout[0], &trgepc, &pout2[0]);
+  spice_error_check();
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Return matrix that converts between the two names coordinate
 /// system. To avoid making a second copy, we return the data in
 /// SpiceHelper::m. 
@@ -320,6 +363,56 @@ void SpiceToolkitCoordinateInterface::to_fixed(int Body_id,
   SpiceHelper::cartesian_inertial_to_cartesian_fixed(Body_id, T);
   mat_copy(SpiceHelper::m, Ci_to_cf);
 }
+
+void
+SpiceToolkitCoordinateInterface::sub_solar_point(int Body_id, const Time& T, 
+						 CartesianFixed& P)
+{
+  boost::array<double, 3> ign;
+  switch(Body_id) {
+  case 399:			// Earth
+    SpiceHelper::sub_solar_point_calc("EARTH", "ITRF93", T, P.position, ign);
+    break;
+  case 499:			// Mars
+    SpiceHelper::sub_solar_point_calc("MARS", "IAU_MARS", T, P.position, ign);
+    break;
+  case 301:			// Moon
+    SpiceHelper::sub_solar_point_calc("MOON", "IAU_MOON", T, P.position, ign);
+    break;
+  default:
+    throw Exception("Not yet implemented");
+  }
+  // sub_solar_point_calc returns km, *not* meter. Since
+  // CartesianFixed expected meter convert this.
+  P.position[0] *= 1000.0;
+  P.position[1] *= 1000.0;
+  P.position[2] *= 1000.0;
+}
+
+double
+SpiceToolkitCoordinateInterface::solar_distance(int Body_id, const Time& T)
+{
+  boost::array<double, 3> pout1, pout2;
+  switch(Body_id) {
+  case 399:			// Earth
+    SpiceHelper::sub_solar_point_calc("EARTH", "ITRF93", T, pout1, pout2);
+    break;
+  case 499:			// Mars
+    SpiceHelper::sub_solar_point_calc("MARS", "IAU_MARS", T, pout1, pout2);
+    break;
+  case 301:			// Moon
+    SpiceHelper::sub_solar_point_calc("MOON", "IAU_MOON", T, pout1, pout2);
+    break;
+  default:
+    throw Exception("Not yet implemented");
+  }
+  // pout1 takes us from the center of the body to the subsolar
+  // point, and then pout2 takes us to the sun. So together they are
+  // the distance from the center of body to the sun. This is in km,
+  // so we convert to meters.
+  return (norm(pout1) + norm(pout2)) * 1000.0;
+}
+
 
 //-----------------------------------------------------------------------
 /// This converts from CartesianInertial to CartesianFixed for the

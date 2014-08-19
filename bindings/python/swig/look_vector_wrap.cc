@@ -3449,51 +3449,53 @@ namespace Swig {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_GeoCal__CartesianFixedLookVector swig_types[0]
-#define SWIGTYPE_p_GeoCal__CartesianInertialLookVector swig_types[1]
+#define SWIGTYPE_p_GeoCal__CartesianInertialLookVector swig_types[0]
+#define SWIGTYPE_p_GeoCal__DcsLookVector swig_types[1]
 #define SWIGTYPE_p_GeoCal__GenericObject swig_types[2]
 #define SWIGTYPE_p_GeoCal__LookVector swig_types[3]
 #define SWIGTYPE_p_GeoCal__ScLookVector swig_types[4]
-#define SWIGTYPE_p_allocator_type swig_types[5]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[6]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[7]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[8]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[9]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[11]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[12]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[13]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[14]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[15]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[16]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[17]
-#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[18]
-#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[19]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[20]
+#define SWIGTYPE_p_GeoCal__Time swig_types[5]
+#define SWIGTYPE_p_allocator_type swig_types[6]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[7]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[8]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[9]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[10]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[11]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[12]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[16]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[17]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[18]
+#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[19]
+#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[20]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[21]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[22]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVector_t swig_types[23]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[24]
-#define SWIGTYPE_p_char swig_types[25]
-#define SWIGTYPE_p_char_type swig_types[26]
-#define SWIGTYPE_p_difference_type swig_types[27]
-#define SWIGTYPE_p_fmtflags swig_types[28]
-#define SWIGTYPE_p_int_type swig_types[29]
-#define SWIGTYPE_p_iostate swig_types[30]
-#define SWIGTYPE_p_off_type swig_types[31]
-#define SWIGTYPE_p_openmode swig_types[32]
-#define SWIGTYPE_p_pos_type swig_types[33]
-#define SWIGTYPE_p_seekdir swig_types[34]
-#define SWIGTYPE_p_size_t swig_types[35]
-#define SWIGTYPE_p_size_type swig_types[36]
-#define SWIGTYPE_p_state_type swig_types[37]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[38]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[39]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[40]
-#define SWIGTYPE_p_traits_type swig_types[41]
-#define SWIGTYPE_p_value_type swig_types[42]
-static swig_type_info *swig_types[44];
-static swig_module_info swig_module = {swig_types, 43, 0, 0, 0, 0};
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[22]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[23]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVector_t swig_types[24]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[25]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[26]
+#define SWIGTYPE_p_char swig_types[27]
+#define SWIGTYPE_p_char_type swig_types[28]
+#define SWIGTYPE_p_difference_type swig_types[29]
+#define SWIGTYPE_p_fmtflags swig_types[30]
+#define SWIGTYPE_p_int_type swig_types[31]
+#define SWIGTYPE_p_iostate swig_types[32]
+#define SWIGTYPE_p_off_type swig_types[33]
+#define SWIGTYPE_p_openmode swig_types[34]
+#define SWIGTYPE_p_pos_type swig_types[35]
+#define SWIGTYPE_p_seekdir swig_types[36]
+#define SWIGTYPE_p_size_t swig_types[37]
+#define SWIGTYPE_p_size_type swig_types[38]
+#define SWIGTYPE_p_state_type swig_types[39]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[40]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[41]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[42]
+#define SWIGTYPE_p_traits_type swig_types[43]
+#define SWIGTYPE_p_value_type swig_types[44]
+static swig_type_info *swig_types[46];
+static swig_module_info swig_module = {swig_types, 45, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -4911,6 +4913,7 @@ template<class T, int D> inline boost::array<T, D>
 }
 
 
+#include "geocal_time.h"
 #include "look_vector.h"
 
 SWIGINTERN blitz::Array< double,1 > GeoCal_LookVector__look_vector__SWIG_0(GeoCal::LookVector const *self){
@@ -5916,14 +5919,14 @@ SWIGINTERN PyObject *CartesianInertialLookVector_swiginit(PyObject *SWIGUNUSEDPA
   return SWIG_Python_InitShadowInstance(args);
 }
 
-SWIGINTERN PyObject *_wrap_new_CartesianFixedLookVector__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+SWIGINTERN PyObject *_wrap_new_DcsLookVector__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
   PyObject *resultobj = 0;
-  GeoCal::CartesianFixedLookVector *result = 0 ;
+  GeoCal::DcsLookVector *result = 0 ;
   
   if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
   {
     try {
-      result = (GeoCal::CartesianFixedLookVector *)new GeoCal::CartesianFixedLookVector();
+      result = (GeoCal::DcsLookVector *)new GeoCal::DcsLookVector();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5931,8 +5934,8 @@ SWIGINTERN PyObject *_wrap_new_CartesianFixedLookVector__SWIG_0(PyObject *SWIGUN
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = result ? new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::DcsLookVector > *smartresult = result ? new boost::shared_ptr<  GeoCal::DcsLookVector >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -5940,12 +5943,60 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_CartesianFixedLookVector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_DcsLookVector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  GeoCal::DcsLookVector *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_DcsLookVector" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_DcsLookVector" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_DcsLookVector" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      result = (GeoCal::DcsLookVector *)new GeoCal::DcsLookVector(arg1,arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::DcsLookVector > *smartresult = result ? new boost::shared_ptr<  GeoCal::DcsLookVector >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_DcsLookVector__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::array< double,3 > *arg1 = 0 ;
   boost::array< double,3 > a1 ;
   PythonObject numpy1 ;
-  GeoCal::CartesianFixedLookVector *result = 0 ;
+  GeoCal::DcsLookVector *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
@@ -5957,7 +6008,7 @@ SWIGINTERN PyObject *_wrap_new_CartesianFixedLookVector__SWIG_1(PyObject *SWIGUN
   }
   {
     try {
-      result = (GeoCal::CartesianFixedLookVector *)new GeoCal::CartesianFixedLookVector((boost::array< double,3 > const &)*arg1);
+      result = (GeoCal::DcsLookVector *)new GeoCal::DcsLookVector((boost::array< double,3 > const &)*arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5965,8 +6016,8 @@ SWIGINTERN PyObject *_wrap_new_CartesianFixedLookVector__SWIG_1(PyObject *SWIGUN
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = result ? new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::DcsLookVector > *smartresult = result ? new boost::shared_ptr<  GeoCal::DcsLookVector >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -5974,87 +6025,39 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_CartesianFixedLookVector__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  double arg1 ;
-  double arg2 ;
-  double arg3 ;
-  double val1 ;
-  int ecode1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  GeoCal::CartesianFixedLookVector *result = 0 ;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_CartesianFixedLookVector" "', argument " "1"" of type '" "double""'");
-  } 
-  arg1 = static_cast< double >(val1);
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CartesianFixedLookVector" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CartesianFixedLookVector" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  {
-    try {
-      result = (GeoCal::CartesianFixedLookVector *)new GeoCal::CartesianFixedLookVector(arg1,arg2,arg3);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = result ? new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_CartesianFixedLookVector(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_DcsLookVector(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[4];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_CartesianFixedLookVector",0,3,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_DcsLookVector",0,3,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
-    return _wrap_new_CartesianFixedLookVector__SWIG_0(self, argc, argv);
+    return _wrap_new_DcsLookVector__SWIG_0(self, argc, argv);
   }
   if (argc == 1) {
-    return _wrap_new_CartesianFixedLookVector__SWIG_1(self, argc, argv);
+    return _wrap_new_DcsLookVector__SWIG_2(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_CartesianFixedLookVector__SWIG_2(self, argc, argv);
+    return _wrap_new_DcsLookVector__SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_CartesianFixedLookVector'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_DcsLookVector'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::CartesianFixedLookVector::CartesianFixedLookVector()\n"
-    "    GeoCal::CartesianFixedLookVector::CartesianFixedLookVector(boost::array< double,3 > const &)\n"
-    "    GeoCal::CartesianFixedLookVector::CartesianFixedLookVector(double,double,double)\n");
+    "    GeoCal::DcsLookVector::DcsLookVector()\n"
+    "    GeoCal::DcsLookVector::DcsLookVector(double,double,double)\n"
+    "    GeoCal::DcsLookVector::DcsLookVector(boost::array< double,3 > const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_CartesianFixedLookVector___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_DcsLookVector___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::CartesianFixedLookVector *arg1 = (GeoCal::CartesianFixedLookVector *) 0 ;
+  GeoCal::DcsLookVector *arg1 = (GeoCal::DcsLookVector *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::CartesianFixedLookVector const > tempshared1 ;
-  boost::shared_ptr< GeoCal::CartesianFixedLookVector const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::DcsLookVector const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DcsLookVector const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   std::string result;
   
@@ -6062,22 +6065,22 @@ SWIGINTERN PyObject *_wrap_CartesianFixedLookVector___str__(PyObject *SWIGUNUSED
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixedLookVector___str__" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVector const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DcsLookVector___str__" "', argument " "1"" of type '" "GeoCal::DcsLookVector const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp1);
-      arg1 = const_cast< GeoCal::CartesianFixedLookVector * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DcsLookVector > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DcsLookVector > * >(argp1);
+      arg1 = const_cast< GeoCal::DcsLookVector * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp1);
-      arg1 = const_cast< GeoCal::CartesianFixedLookVector * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DcsLookVector > * >(argp1);
+      arg1 = const_cast< GeoCal::DcsLookVector * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = ((GeoCal::CartesianFixedLookVector const *)arg1)->print_to_string();
+      result = ((GeoCal::DcsLookVector const *)arg1)->print_to_string();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6091,30 +6094,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_CartesianFixedLookVector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_DcsLookVector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::CartesianFixedLookVector *arg1 = (GeoCal::CartesianFixedLookVector *) 0 ;
+  GeoCal::DcsLookVector *arg1 = (GeoCal::DcsLookVector *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::CartesianFixedLookVector > tempshared1 ;
-  boost::shared_ptr< GeoCal::CartesianFixedLookVector > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::DcsLookVector > tempshared1 ;
+  boost::shared_ptr< GeoCal::DcsLookVector > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CartesianFixedLookVector" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVector *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DcsLookVector" "', argument " "1"" of type '" "GeoCal::DcsLookVector *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVector > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVector > * >(argp1);
-      arg1 = const_cast< GeoCal::CartesianFixedLookVector * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::DcsLookVector > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::DcsLookVector > * >(argp1);
+      arg1 = const_cast< GeoCal::DcsLookVector * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVector > * >(argp1);
-      arg1 = const_cast< GeoCal::CartesianFixedLookVector * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::DcsLookVector > * >(argp1);
+      arg1 = const_cast< GeoCal::DcsLookVector * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
@@ -6133,14 +6136,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *CartesianFixedLookVector_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *DcsLookVector_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *CartesianFixedLookVector_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *DcsLookVector_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   return SWIG_Python_InitShadowInstance(args);
 }
 
@@ -6187,27 +6190,23 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"CartesianInertialLookVector_swigregister", CartesianInertialLookVector_swigregister, METH_VARARGS, NULL},
 	 { (char *)"CartesianInertialLookVector_swiginit", CartesianInertialLookVector_swiginit, METH_VARARGS, NULL},
-	 { (char *)"new_CartesianFixedLookVector", _wrap_new_CartesianFixedLookVector, METH_VARARGS, (char *)"\n"
-		"GeoCal::CartesianFixedLookVector::CartesianFixedLookVector(const boost::math::quaternion< double > &V)\n"
-		"Constructor using quaternion. \n"
+	 { (char *)"new_DcsLookVector", _wrap_new_DcsLookVector, METH_VARARGS, (char *)"\n"
+		"GeoCal::DcsLookVector::DcsLookVector(const boost::math::quaternion< double > &V)\n"
+		"Constructor. \n"
 		""},
-	 { (char *)"CartesianFixedLookVector___str__", (PyCFunction)_wrap_CartesianFixedLookVector___str__, METH_O, NULL},
-	 { (char *)"delete_CartesianFixedLookVector", (PyCFunction)_wrap_delete_CartesianFixedLookVector, METH_O, (char *)"\n"
-		"virtual GeoCal::CartesianFixedLookVector::~CartesianFixedLookVector()\n"
+	 { (char *)"DcsLookVector___str__", (PyCFunction)_wrap_DcsLookVector___str__, METH_O, NULL},
+	 { (char *)"delete_DcsLookVector", (PyCFunction)_wrap_delete_DcsLookVector, METH_O, (char *)"\n"
+		"virtual GeoCal::DcsLookVector::~DcsLookVector()\n"
 		"\n"
 		""},
-	 { (char *)"CartesianFixedLookVector_swigregister", CartesianFixedLookVector_swigregister, METH_VARARGS, NULL},
-	 { (char *)"CartesianFixedLookVector_swiginit", CartesianFixedLookVector_swiginit, METH_VARARGS, NULL},
+	 { (char *)"DcsLookVector_swigregister", DcsLookVector_swigregister, METH_VARARGS, NULL},
+	 { (char *)"DcsLookVector_swiginit", DcsLookVector_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::CartesianFixedLookVector > *)x);
-}
 static void *_p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::ScLookVector > *)x);
@@ -6216,14 +6215,18 @@ static void *_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boo
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::CartesianInertialLookVector > *)x);
 }
+static void *_p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::LookVector >(*(boost::shared_ptr< GeoCal::DcsLookVector > *)x);
+}
 static void *_p_GeoCal__ScLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector *)  ((GeoCal::ScLookVector *) x));
 }
 static void *_p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector *)  ((GeoCal::CartesianInertialLookVector *) x));
 }
-static void *_p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::LookVector *)  ((GeoCal::CartesianFixedLookVector *) x));
+static void *_p_GeoCal__DcsLookVectorTo_p_GeoCal__LookVector(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::LookVector *)  ((GeoCal::DcsLookVector *) x));
 }
 static void *_p_GeoCal__LookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::LookVector *) x));
@@ -6234,8 +6237,11 @@ static void *_p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWI
 static void *_p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::CartesianInertialLookVector *) x));
 }
-static void *_p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::CartesianFixedLookVector *) x));
+static void *_p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector *) ((GeoCal::DcsLookVector *) x));
+}
+static void *_p_GeoCal__TimeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::Time *) x));
 }
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_istream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
@@ -6243,9 +6249,9 @@ static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__ba
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_ostream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
 }
-static void *_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::CartesianFixedLookVector > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::Time > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__LookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -6259,11 +6265,16 @@ static void *_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boo
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::CartesianInertialLookVector > *)x);
 }
-static swig_type_info _swigt__p_GeoCal__CartesianFixedLookVector = {"_p_GeoCal__CartesianFixedLookVector", "GeoCal::CartesianFixedLookVector *", 0, 0, (void*)0, 0};
+static void *_p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::DcsLookVector > *)x);
+}
 static swig_type_info _swigt__p_GeoCal__CartesianInertialLookVector = {"_p_GeoCal__CartesianInertialLookVector", "GeoCal::CartesianInertialLookVector *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__DcsLookVector = {"_p_GeoCal__DcsLookVector", "GeoCal::DcsLookVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObject", "GeoCal::GenericObject *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__LookVector = {"_p_GeoCal__LookVector", "GeoCal::LookVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ScLookVector = {"_p_GeoCal__ScLookVector", "GeoCal::ScLookVector *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__Time = {"_p_GeoCal__Time", "GeoCal::Time *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_2_t = {"_p_blitz__ArrayT_bool_2_t", "blitz::Array< bool,2 > *", 0, 0, (void*)0, 0};
@@ -6279,11 +6290,12 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_3_t = {"_p_blitz__ArrayT_int_3
 static swig_type_info _swigt__p_blitz__ArrayT_int_4_t = {"_p_blitz__ArrayT_int_4_t", "blitz::Array< int,4 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__arrayT_double_3_t = {"_p_boost__arrayT_double_3_t", "boost::array< double,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__math__quaternionT_double_t = {"_p_boost__math__quaternionT_double_t", "boost::math::quaternion< double > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t = {"_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t", "boost::shared_ptr< GeoCal::CartesianFixedLookVector > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t = {"_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t", "boost::shared_ptr< GeoCal::CartesianInertialLookVector > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t = {"_p_boost__shared_ptrT_GeoCal__DcsLookVector_t", "boost::shared_ptr< GeoCal::DcsLookVector > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_p_boost__shared_ptrT_GeoCal__GenericObject_t", "boost::shared_ptr< GeoCal::GenericObject > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__LookVector_t = {"_p_boost__shared_ptrT_GeoCal__LookVector_t", "boost::shared_ptr< GeoCal::LookVector > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t = {"_p_boost__shared_ptrT_GeoCal__ScLookVector_t", "boost::shared_ptr< GeoCal::ScLookVector > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Time_t = {"_p_boost__shared_ptrT_GeoCal__Time_t", "boost::shared_ptr< GeoCal::Time > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
@@ -6304,11 +6316,12 @@ static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *"
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
-  &_swigt__p_GeoCal__CartesianFixedLookVector,
   &_swigt__p_GeoCal__CartesianInertialLookVector,
+  &_swigt__p_GeoCal__DcsLookVector,
   &_swigt__p_GeoCal__GenericObject,
   &_swigt__p_GeoCal__LookVector,
   &_swigt__p_GeoCal__ScLookVector,
+  &_swigt__p_GeoCal__Time,
   &_swigt__p_allocator_type,
   &_swigt__p_blitz__ArrayT_bool_1_t,
   &_swigt__p_blitz__ArrayT_bool_2_t,
@@ -6324,11 +6337,12 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_4_t,
   &_swigt__p_boost__arrayT_double_3_t,
   &_swigt__p_boost__math__quaternionT_double_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__Time_t,
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
@@ -6349,11 +6363,12 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_value_type,
 };
 
-static swig_cast_info _swigc__p_GeoCal__CartesianFixedLookVector[] = {  {&_swigt__p_GeoCal__CartesianFixedLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianInertialLookVector[] = {  {&_swigt__p_GeoCal__CartesianInertialLookVector, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__LookVector, _p_GeoCal__LookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__LookVector[] = {  {&_swigt__p_GeoCal__LookVector, 0, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVector, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__DcsLookVector[] = {  {&_swigt__p_GeoCal__DcsLookVector, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__LookVector, _p_GeoCal__LookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__LookVector[] = {  {&_swigt__p_GeoCal__LookVector, 0, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVector, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__LookVector, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ScLookVector[] = {  {&_swigt__p_GeoCal__ScLookVector, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__Time[] = {  {&_swigt__p_GeoCal__Time, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -6369,11 +6384,12 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_3_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_4_t[] = {  {&_swigt__p_blitz__ArrayT_int_4_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__arrayT_double_3_t[] = {  {&_swigt__p_boost__arrayT_double_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__math__quaternionT_double_t[] = {  {&_swigt__p_boost__math__quaternionT_double_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t, _p_boost__shared_ptrT_GeoCal__LookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__DcsLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t, _p_boost__shared_ptrT_GeoCal__LookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVector_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -6394,11 +6410,12 @@ static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
-  _swigc__p_GeoCal__CartesianFixedLookVector,
   _swigc__p_GeoCal__CartesianInertialLookVector,
+  _swigc__p_GeoCal__DcsLookVector,
   _swigc__p_GeoCal__GenericObject,
   _swigc__p_GeoCal__LookVector,
   _swigc__p_GeoCal__ScLookVector,
+  _swigc__p_GeoCal__Time,
   _swigc__p_allocator_type,
   _swigc__p_blitz__ArrayT_bool_1_t,
   _swigc__p_blitz__ArrayT_bool_2_t,
@@ -6414,11 +6431,12 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_4_t,
   _swigc__p_boost__arrayT_double_3_t,
   _swigc__p_boost__math__quaternionT_double_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,
   _swigc__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__DcsLookVector_t,
   _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   _swigc__p_boost__shared_ptrT_GeoCal__LookVector_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__Time_t,
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,
@@ -7135,8 +7153,8 @@ SWIG_init(void) {
   boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CartesianInertialLookVector >("boost::shared_ptr< GeoCal::CartesianInertialLookVector > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CartesianFixedLookVector))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CartesianFixedLookVector >("boost::shared_ptr< GeoCal::CartesianFixedLookVector > *"));
+  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::DcsLookVector))] =
+  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::DcsLookVector >("boost::shared_ptr< GeoCal::DcsLookVector > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

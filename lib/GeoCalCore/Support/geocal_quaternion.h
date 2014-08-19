@@ -233,7 +233,7 @@ quaternion_to_matrix(const boost::math::quaternion<double>& q)
 //-----------------------------------------------------------------------
 
 inline boost::math::quaternion<double> 
-matrix_to_quaternion(const blitz::Array<double, 2> m)
+matrix_to_quaternion(const blitz::Array<double, 2>& m)
 {
   if(m.rows() != 3 || m.cols() != 3)
     throw GeoCal::Exception("Matrix must be 3x3");

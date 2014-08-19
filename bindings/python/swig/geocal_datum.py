@@ -119,6 +119,7 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 class Datum(geocal_swig.generic_object.GenericObject):
     """
     This is a Datum, which returns the distance from mean sea level to a

@@ -8,8 +8,9 @@
 # conditional HAVE_BOOST. We as set BOOST_CPPFLAGS, and BOOST_LIBDIR.
 #
 # Because the libraries can have different names on different systems,
-# we also set BOOST_REGEX_LIB and BOOST_DATETIME_LIB that can be used
-# on a link line (e.g., it might be "-lboost_regex" on a number of linux
+# we also set BOOST_REGEX_LIB, BOOST_FILESYSTEM_LIB, BOOST_DATETIME_LIB, and
+# BOOST_IOSTREAMS_LIB that can be used on a link line (e.g., it might be 
+# "-lboost_regex" on a number of linux
 # systems). We can extend this with other boost libraries if needed, but
 # right now this is all we use.
 # 
@@ -56,6 +57,7 @@ if test "x$want_boost" = "xyes"; then
             if test "$build_boost" = "yes"; then
                BOOST_LIBDIR="$ac_boost_path/lib"
                BOOST_REGEX_LIB="-lboost_regex"
+               BOOST_FILESYSTEM_LIB="-lboost_filesystem"
                BOOST_DATETIME_LIB="-lboost_date_time"
                BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                boost_done=yes
@@ -66,6 +68,7 @@ if test "x$want_boost" = "xyes"; then
                    if test -e "$ac_boost_lib_base/$ac_boost_lib"; then
                        BOOST_LIBDIR="$ac_boost_lib_base"
                        BOOST_REGEX_LIB="-lboost_regex"
+		       BOOST_FILESYSTEM_LIB="-lboost_filesystem"
                        BOOST_DATETIME_LIB="-lboost_date_time"
 		       BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                        boost_done=yes
@@ -78,6 +81,7 @@ if test "x$want_boost" = "xyes"; then
                    if test -e "$ac_boost_lib_base/$ac_boost_lib"; then
                        BOOST_LIBDIR="$ac_boost_lib_base"
                        BOOST_REGEX_LIB="-lboost_regex-mt"
+		       BOOST_FILESYSTEM_LIB="-lboost_filesystem-mt"
                        BOOST_DATETIME_LIB="-lboost_date_time-mt"
                        BOOST_IOSTREAMS_LIB="-lboost_iostreams-mt"
                        boost_done=yes
@@ -99,6 +103,7 @@ if test "x$want_boost" = "xyes"; then
                 AC_SUBST(BOOST_CPPFLAGS)
                 AC_SUBST(BOOST_LIBDIR)
 		AC_SUBST(BOOST_REGEX_LIB)
+		AC_SUBST(BOOST_FILESYSTEM_LIB)
 		AC_SUBST(BOOST_DATETIME_LIB)
 		AC_SUBST(BOOST_IOSTREAMS_LIB)
                 AC_DEFINE(HAVE_BOOST,,[Defined if we have BOOST])

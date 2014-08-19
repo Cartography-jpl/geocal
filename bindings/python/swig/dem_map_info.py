@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.dem
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 class DemMapInfo(geocal_swig.dem.Dem):
     """
     C++ includes: dem_map_info.h

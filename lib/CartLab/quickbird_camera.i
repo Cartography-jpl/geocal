@@ -4,6 +4,7 @@
 %include "common.i"
 
 %{
+#include "geocal_time.h"
 #include "quickbird_camera.h"
 %}
 %base_import(quaternion_camera)

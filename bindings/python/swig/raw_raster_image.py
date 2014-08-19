@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.raster_image
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 class RawRasterImage(geocal_swig.raster_image.RasterImage):
     """
     This uses libraw to read RAW format.

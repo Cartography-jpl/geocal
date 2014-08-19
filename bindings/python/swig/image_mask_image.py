@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.image_mask
 import geocal_swig.generic_object
+import geocal_swig.look_vector
 class ImageMaskImage(geocal_swig.image_mask.ImageMask):
     """
     This provides a ImageMask where the underlying data is a RasterImage.

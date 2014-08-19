@@ -4,14 +4,16 @@
 %include "common.i"
 
 %{
+#include "geocal_time.h"
 #include "look_vector.h"
 %}
 %base_import(generic_object)
+%import "geocal_time.i"
 
 %geocal_shared_ptr(GeoCal::LookVector);
 %geocal_shared_ptr(GeoCal::ScLookVector);
 %geocal_shared_ptr(GeoCal::CartesianInertialLookVector);
-%geocal_shared_ptr(GeoCal::CartesianFixedLookVector);
+%geocal_shared_ptr(GeoCal::DcsLookVector);
 
 namespace GeoCal {
 class LookVector : public GenericObject {
@@ -43,35 +45,21 @@ public:
 	       self.look_vector[2])
 };
 
-// Handle returns as a argout
+// LnLookVector is in ground_coordinate.i instead of here, to break a
+// SWIG circular dependency.
 
-#ifdef SWIGPYTHON
- %typemap(in,numinputs=0) CartesianFixedLookVector &OUTPUT (GeoCal::CartesianFixedLookVector temp) {
-  $1 = &temp;
- }
-
- %typemap(argout) CartesianFixedLookVector &OUTPUT {
-   SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
-   %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::CartesianFixedLookVector> *), SWIG_POINTER_OWN));
- }
-
- %typemap(in,numinputs=0) CartesianFixedLookVector &OUTPUT2 (GeoCal::CartesianFixedLookVector temp) {
-  $1 = &temp;
- }
-
- %typemap(argout) CartesianFixedLookVector &OUTPUT2 {
-   SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
-   %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::CartesianFixedLookVector> *), SWIG_POINTER_OWN));
- }
-#endif
-
-class CartesianFixedLookVector : public LookVector {
+class DcsLookVector : public LookVector {
 public:
-  CartesianFixedLookVector();
-  CartesianFixedLookVector(const boost::array<double, 3>& Lv);
-  CartesianFixedLookVector(double x, double y, double z);
+  DcsLookVector();
+  DcsLookVector(double x, double y, double z);
+  DcsLookVector(const boost::array<double, 3>& Lv);
   std::string print_to_string() const;
   %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])
 };
+
+
+// CartesianFixedLookVector is in ground_coordinate.i instead of here,
+// to break a SWIG circular dependency.
+
 }

@@ -29,6 +29,7 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_CLOSE(c3.x, 719870.729943312, 1e-6);
   BOOST_CHECK_CLOSE(c3.y, 995452.6722696, 1e-6);
   BOOST_CHECK_CLOSE(c3.z, 0.0, 1e-6);
+  BOOST_CHECK(c3.utm_zone() == 29);
 }
 
 BOOST_AUTO_TEST_CASE(ogr_wrapper)
@@ -72,6 +73,12 @@ BOOST_AUTO_TEST_CASE(ogr_coordinate_converter)
   BOOST_CHECK(!cv.is_same(cv2));
   BOOST_CHECK(!cv2.is_same(cv));
   BOOST_CHECK(!cv.is_same(cv3));
+  boost::shared_ptr<OgrCoordinateConverter> cv4 =
+    OgrCoordinateConverter::utm_converter(29);
+  cv4->convert_to_coordinate(Geodetic(9, -7), x, y, z);
+  BOOST_CHECK_CLOSE(x, 719870.729943312, 1e-6);
+  BOOST_CHECK_CLOSE(y, 995452.6722696, 1e-6);
+  BOOST_CHECK_CLOSE(z, 0.0, 1e-6);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

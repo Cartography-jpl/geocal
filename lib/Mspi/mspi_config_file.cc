@@ -24,7 +24,7 @@ MspiConfigFile::MspiConfigFile(const std::string& Fname)
   // Now break up into keyword/value pairs
   std::string s = buf.str();
   boost::sregex_iterator i(s.begin(), s.end(), 
-			   boost::regex("^((?:[^:]|\\n)*):\\s*(\\w+)\\s*$"));
+			   boost::regex("^((?:[^:]|\\n)*):\\s*([[:word:]-]+)\\s*$"));
   boost::sregex_iterator iend;
   for(; i != iend; ++i) {
     std::string key = (*i)[2];

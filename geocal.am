@@ -30,10 +30,20 @@ endif
 # Include boost in builds
 libgeocal_la_LDFLAGS+= -R $(BOOST_LIBDIR) -L$(BOOST_LIBDIR)
 libgeocal_la_LDFLAGS+= $(BOOST_REGEX_LIB) $(BOOST_DATETIME_LIB)
-libgeocal_la_LDFLAGS+= $(BOOST_IOSTREAMS_LIB)
+libgeocal_la_LDFLAGS+= $(BOOST_IOSTREAMS_LIB) $(BOOST_FILESYSTEM_LIB)
 
 # Include blitz in builds
 libgeocal_la_LDFLAGS+= $(BLITZ_LIBS)
+
+if HAVE_MSPI_SHARED
+libgeocal_la_LDFLAGS+= $(MSPI_SHARED_LIBS)
+libgeocal_la_CPPFLAGS+= $(MSPI_SHARED_CFLAGS)
+endif
+
+if HAVE_HDFEOS5
+libgeocal_la_LDFLAGS+= $(HDFEOS5_LIB)
+libgeocal_la_CPPFLAGS+= $(HDFEOS5_CFLAGS)
+endif
 
 if HAVE_HDF5
 libgeocal_la_LDFLAGS+= $(HDF5_LIBS)

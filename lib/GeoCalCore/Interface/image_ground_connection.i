@@ -65,6 +65,21 @@ protected:
 			const std::string& Title,
 			const boost::shared_ptr<ImageMask>& Img_mask,
 			const boost::shared_ptr<GroundMask>& Ground_mask);
+  void initialize(const boost::shared_ptr<Dem>& d, 
+			const boost::shared_ptr<RasterImage>& Img, 
+			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
+			const std::string& Title);
+  void initialize(const boost::shared_ptr<Dem>& d, 
+			const boost::shared_ptr<RasterImage>& Img, 
+			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
+			const std::string& Title,
+			const boost::shared_ptr<ImageMask>& Img_mask);
+  void initialize(const boost::shared_ptr<Dem>& d, 
+			const boost::shared_ptr<RasterImage>& Img, 
+			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
+			const std::string& Title,
+			const boost::shared_ptr<ImageMask>& Img_mask,
+			const boost::shared_ptr<GroundMask>& Ground_mask);
   ImageGroundConnection();
 public:
   virtual ~ImageGroundConnection();
@@ -101,6 +116,7 @@ public:
   %python_attribute(number_sample, virtual int)
   %python_attribute(number_band, virtual int)
   %python_attribute_with_set(title, std::string)
+  %python_attribute(has_time, bool)
   std::string print_to_string() const;
   %python_attribute_with_set(parameter, blitz::Array<double, 1>)
   %python_attribute(parameter_name, virtual std::vector<std::string>)

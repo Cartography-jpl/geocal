@@ -12,7 +12,7 @@ namespace GeoCal {
   handling the rotation of a ScLookVector and conversion to
   FrameCoordinate (and vice versa). This base class doesn't model any
   nonlinear corrections - we just model a pinhole. But derived classes
-  can override the dcs_to_focal_plane and focal_plane_to_xcs functions
+  can override the dcs_to_focal_plane and focal_plane_to_dcs functions
   to put in whatever functionality is desired.
 
   There are 2 conventions used for the frame coordinates. The
@@ -207,8 +207,25 @@ public:
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
 
+//-----------------------------------------------------------------------
+/// Convert Spacecraft look vector to the look vector in Detector
+/// Coordinate System.
+//-----------------------------------------------------------------------
+
+  virtual DcsLookVector dcs_look_vector(const ScLookVector& Sl)
+    const 
+  { return DcsLookVector(conj(frame_to_sc_) * Sl.look_quaternion() *
+			 frame_to_sc_);
+  }
+
+  virtual DcsLookVector dcs_look_vector(const FrameCoordinate& F, int Band) 
+    const;
+  using Camera::sc_look_vector;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
+  virtual ScLookVector sc_look_vector(const DcsLookVector& Dlv) const
+  { return ScLookVector(frame_to_sc_ * Dlv.look_quaternion() * 
+			conj(frame_to_sc_));} 
   virtual void print(std::ostream& Os) const;
 protected:
 //-----------------------------------------------------------------------

@@ -157,6 +157,8 @@ public:
 
   double z;
 
+  int utm_zone() const;
+
   static OgrCoordinate to_utm(const Geodetic& Gc, int zone = -999);
 private:
   boost::shared_ptr<OgrWrapper> ogr_;
@@ -232,6 +234,8 @@ public:
     Height = c.z;
   }
   virtual void print(std::ostream& Os) const;
+  static boost::shared_ptr<OgrCoordinateConverter>
+  utm_converter(int Zone);
 private:
   boost::shared_ptr<OgrWrapper> ogr_;
 };

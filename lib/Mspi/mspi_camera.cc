@@ -46,9 +46,9 @@ void MspiCamera::read_config_file(const std::string& File_name)
   sample_direction_ = (c.value<int>("pixel_order") == 1 ? 
 		       QuaternionCamera::INCREASE_IS_POSITIVE :
 		       QuaternionCamera::INCREASE_IS_NEGATIVE);
-  // This doesn't get used for anything yet, so don't bother reading this.
-  // inversion_ = c.value<int>("inversion")),
-
+  inversion_ = c.value<int>("inversion");
+  granule_id_ = c.value<std::string>("granule_id");
+  
 //--------------------------------------------------------------------------
 /// Get mapping from band to row number
 //--------------------------------------------------------------------------
@@ -185,3 +185,60 @@ void MspiCamera::print(std::ostream& Os) const
      << "  File name: " << file_name() << "\n";
 }
 
+//-----------------------------------------------------------------------
+/// Return the band number for the given row. 
+//-----------------------------------------------------------------------
+
+int MspiCamera::band_number(int Row_number) const
+{
+  std::vector<int>::const_iterator f = 
+    std::find(row_number_.begin(), row_number_.end(), Row_number);
+  if(f == row_number_.end()) {
+    Exception e("Row number not assigned to camera model band: ");
+    e << Row_number;
+    throw e;
+  }
+  return (int)(f - row_number_.begin());
+}
+
+//-----------------------------------------------------------------------
+/// Return angular separation (in radians) between the given reference and
+/// target bands in the real focal plane.
+/// (MSPI L1B2 ATB equation 14 -- *modified* to use Forigin in place of b0)
+//-----------------------------------------------------------------------
+
+double MspiCamera::angular_separation
+(int Reference_band, int Target_band) const
+{
+  return
+    (atan(line_pitch() * principal_point(Target_band).line / focal_length()) -
+     atan(line_pitch() * principal_point(Reference_band).line / focal_length()))
+    * inversion_;
+}
+
+//-----------------------------------------------------------------------
+/// Return paraxial displacement (in pixel units) for the given frame
+/// coordinate and band.  The paraxial transform equations are defined
+/// such that the frame line coordinate is always assumed to be zero
+/// (i.e. centered in the line for the given band).  Therefore values other
+/// than zero for frame line will not produce a different result.
+//-----------------------------------------------------------------------
+
+void MspiCamera::paraxial_offset
+(int Band,
+ const FrameCoordinate& F,
+ double& Line_offset,
+ double& Sample_offset) const
+{
+  double xf_prime = 
+    (F.sample - principal_point(Band).sample) * sample_pitch() * 
+    samp_dir();
+  double yf_prime = (F.line - principal_point(Band).line) * line_pitch()
+    * line_dir();
+  
+  double xf, yf;
+  paraxial_transform_->real_to_paraxial(row_number_[Band], xf_prime, yf_prime,
+					xf, yf);
+  Line_offset = inversion_ * (yf - yf_prime) / line_pitch();
+  Sample_offset = (xf - xf_prime) / sample_pitch();
+}

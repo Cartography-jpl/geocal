@@ -44,6 +44,12 @@ public:
   const std::string& file_name() const {return fname;}
 
 //-----------------------------------------------------------------------
+/// Granule ID. This is metadata, found in the configuration file.
+//-----------------------------------------------------------------------
+
+  const std::string& granule_id() const {return granule_id_;}
+
+//-----------------------------------------------------------------------
 /// Epsilon angle, in radians.
 //-----------------------------------------------------------------------
 
@@ -54,6 +60,13 @@ public:
 //-----------------------------------------------------------------------
 
   double psi() const {return psi_;}
+
+//-----------------------------------------------------------------------
+/// Indicate if the camera has "inversion" indicated in the
+/// configuration.
+//-----------------------------------------------------------------------
+
+  bool inversion() const { return inversion_ == -1; }
 
 //-----------------------------------------------------------------------
 /// Theta angle, in radians.
@@ -108,7 +121,12 @@ public:
     range_check(Band, 0, number_band());
     return row_number_[Band];
   }
-
+  double angular_separation(int Reference_band, int Target_band) const;
+  void paraxial_offset(int Band,
+		       const FrameCoordinate& F,
+		       double& Line_offset,
+		       double& Sample_offset) const;
+  int band_number(int Row_number) const;
   virtual blitz::Array<double, 1> parameter() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
@@ -120,13 +138,14 @@ protected:
   virtual boost::math::quaternion<double> 
   focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const;
 private:
-  std::string fname;
+  std::string fname, granule_id_;
   // Camera angles, in radians
   double epsilon_, psi_, theta_, boresight_angle_, yaw_, pitch_, roll_;
   // Give the row number for each band.
   std::vector<int> row_number_;
   // Transformation to and from the paraxial coordinates
   boost::shared_ptr<MspiParaxialTransform> paraxial_transform_;
+  int inversion_;
 };
 }
 #endif

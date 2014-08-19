@@ -236,9 +236,9 @@ CartesianInertialLookVector.__str__ = new_instancemethod(_look_vector.CartesianI
 CartesianInertialLookVector_swigregister = _look_vector.CartesianInertialLookVector_swigregister
 CartesianInertialLookVector_swigregister(CartesianInertialLookVector)
 
-class CartesianFixedLookVector(LookVector):
+class DcsLookVector(LookVector):
     """
-    This is a look vector in CartesianFixed coordinates.
+    This is a look vector in Detector Coordinate System coordinates.
 
     C++ includes: look_vector.h 
     """
@@ -246,10 +246,10 @@ class CartesianFixedLookVector(LookVector):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::CartesianFixedLookVector::CartesianFixedLookVector(const boost::math::quaternion< double > &V)
-        Constructor using quaternion. 
+        GeoCal::DcsLookVector::DcsLookVector(const boost::math::quaternion< double > &V)
+        Constructor. 
         """
-        _look_vector.CartesianFixedLookVector_swiginit(self,_look_vector.new_CartesianFixedLookVector(*args))
+        _look_vector.DcsLookVector_swiginit(self,_look_vector.new_DcsLookVector(*args))
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -257,10 +257,10 @@ class CartesianFixedLookVector(LookVector):
     def __reduce__(self):
       return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
 
-    __swig_destroy__ = _look_vector.delete_CartesianFixedLookVector
-CartesianFixedLookVector.__str__ = new_instancemethod(_look_vector.CartesianFixedLookVector___str__,None,CartesianFixedLookVector)
-CartesianFixedLookVector_swigregister = _look_vector.CartesianFixedLookVector_swigregister
-CartesianFixedLookVector_swigregister(CartesianFixedLookVector)
+    __swig_destroy__ = _look_vector.delete_DcsLookVector
+DcsLookVector.__str__ = new_instancemethod(_look_vector.DcsLookVector___str__,None,DcsLookVector)
+DcsLookVector_swigregister = _look_vector.DcsLookVector_swigregister
+DcsLookVector_swigregister(DcsLookVector)
 
 
 

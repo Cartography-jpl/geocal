@@ -151,6 +151,43 @@ BOOST_AUTO_TEST_CASE(basic_test)
     for(int i = 0; i < 3; ++i)
       BOOST_CHECK_CLOSE(slv.direction()[i], direction_expect3[b][i], 1e-8);
   }
+  double angular_separation_expect[nband] = 
+    {-2.87509743311235464389e-03, 
+     0.0, 
+     2.87505465482229246102e-03,
+     -4.02513773725820221683e-03, 
+     -1.15003650156956832747e-03, 
+     1.72504096818234002250e-03,
+     -2.12735828800964844876e-02};
+
+  for(int b = 0; b < cam.number_band(); ++b)
+    BOOST_CHECK_CLOSE(cam.angular_separation(1, b), 
+		      angular_separation_expect[b], 1e-8);
+
+  double loff_expect[nband] = 
+	{3.91114046925584588621e+01,
+	 3.93225488022550777600e+01,
+	 3.95515012995958485931e+01,
+	 3.91114046925584588621e+01,
+	 3.93225488022550777600e+01,
+	 3.95515012995958485931e+01,
+	 0.0};
+  double soff_expect[nband] = 
+	{3.12289783792453867761e+01,
+	 3.16220033730039595810e+01,
+	 3.20145509437610442660e+01,
+	 3.12289783792453867761e+01,
+	 3.16220033730039595810e+01,
+	 3.20145509437610442660e+01,
+	 0.0};
+
+  FrameCoordinate f(-0.3, 0.1);
+  for(int b = 0; b < cam.number_band(); ++b) {
+    double loff, soff;
+    cam.paraxial_offset(b, f, loff, soff);
+    BOOST_CHECK_CLOSE(loff, loff_expect[b], 1e-8);
+    BOOST_CHECK_CLOSE(soff, soff_expect[b], 1e-8);
+  }
 }
 
 BOOST_AUTO_TEST_CASE(line_direction_reversed_test)
@@ -158,7 +195,7 @@ BOOST_AUTO_TEST_CASE(line_direction_reversed_test)
   // Note that this test data *does* not have the backward and forward
   // calculation calculation the same. Doing something like
   // frame_coordinate(sc_look_vector(FC,b),b) gives differences on the
-  // order of 2 pixels. This is an artifact of the test data, and do
+  // order of 2 pixels. This is an artifact of the test data, and does
   // not indicate a problem with the code. But this data matches the
   // unit tests from the original code, so we want to use this to make
   // sure we match.

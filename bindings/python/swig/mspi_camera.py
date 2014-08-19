@@ -160,6 +160,17 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def file_name(self):
         return self._v_file_name()
 
+    def _v_granule_id(self):
+        """
+        const std::string& GeoCal::MspiCamera::granule_id() const
+        Granule ID. This is metadata, found in the configuration file. 
+        """
+        return _mspi_camera.MspiCamera__v_granule_id(self)
+
+    @property
+    def granule_id(self):
+        return self._v_granule_id()
+
     def _v_epsilon(self):
         """
         double GeoCal::MspiCamera::epsilon() const
@@ -237,6 +248,42 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def boresight_angle(self):
         return self._v_boresight_angle()
 
+    def _v_inversion(self):
+        """
+        bool GeoCal::MspiCamera::inversion() const
+        Indicate if the camera has "inversion" indicated in the
+        configuration. 
+        """
+        return _mspi_camera.MspiCamera__v_inversion(self)
+
+    @property
+    def inversion(self):
+        return self._v_inversion()
+
+    def angular_separation(self, *args):
+        """
+        double MspiCamera::angular_separation(int Reference_band, int Target_band) const
+        Return angular separation (in radians) between the given reference and
+        target bands in the real focal plane.
+
+        (MSPI L1B2 ATB equation 14 modified to use Forigin in place of b0) 
+        """
+        return _mspi_camera.MspiCamera_angular_separation(self, *args)
+
+    def paraxial_offset(self, *args):
+        """
+        void MspiCamera::paraxial_offset(int Band, const FrameCoordinate &F, double &Line_offset, double
+        &Sample_offset) const
+        Return paraxial displacement (in pixel units) for the given frame
+        coordinate and band.
+
+        The paraxial transform equations are defined such that the frame line
+        coordinate is always assumed to be zero (i.e. centered in the line for
+        the given band). Therefore values other than zero for frame line will
+        not produce a different result. 
+        """
+        return _mspi_camera.MspiCamera_paraxial_offset(self, *args)
+
     def row_number(self, *args):
         """
         int GeoCal::MspiCamera::row_number(int Band) const
@@ -246,6 +293,13 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         L1B1 files), so we make this available. 
         """
         return _mspi_camera.MspiCamera_row_number(self, *args)
+
+    def band_number(self, *args):
+        """
+        int MspiCamera::band_number(int Row_number) const
+        Return the band number for the given row. 
+        """
+        return _mspi_camera.MspiCamera_band_number(self, *args)
 
     @classmethod
     def pickle_format_version(cls):
@@ -257,6 +311,7 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     __swig_destroy__ = _mspi_camera.delete_MspiCamera
 MspiCamera.read_config_file = new_instancemethod(_mspi_camera.MspiCamera_read_config_file,None,MspiCamera)
 MspiCamera._v_file_name = new_instancemethod(_mspi_camera.MspiCamera__v_file_name,None,MspiCamera)
+MspiCamera._v_granule_id = new_instancemethod(_mspi_camera.MspiCamera__v_granule_id,None,MspiCamera)
 MspiCamera._v_epsilon = new_instancemethod(_mspi_camera.MspiCamera__v_epsilon,None,MspiCamera)
 MspiCamera._v_psi = new_instancemethod(_mspi_camera.MspiCamera__v_psi,None,MspiCamera)
 MspiCamera._v_theta = new_instancemethod(_mspi_camera.MspiCamera__v_theta,None,MspiCamera)
@@ -264,7 +319,11 @@ MspiCamera._v_yaw = new_instancemethod(_mspi_camera.MspiCamera__v_yaw,None,MspiC
 MspiCamera._v_pitch = new_instancemethod(_mspi_camera.MspiCamera__v_pitch,None,MspiCamera)
 MspiCamera._v_roll = new_instancemethod(_mspi_camera.MspiCamera__v_roll,None,MspiCamera)
 MspiCamera._v_boresight_angle = new_instancemethod(_mspi_camera.MspiCamera__v_boresight_angle,None,MspiCamera)
+MspiCamera._v_inversion = new_instancemethod(_mspi_camera.MspiCamera__v_inversion,None,MspiCamera)
+MspiCamera.angular_separation = new_instancemethod(_mspi_camera.MspiCamera_angular_separation,None,MspiCamera)
+MspiCamera.paraxial_offset = new_instancemethod(_mspi_camera.MspiCamera_paraxial_offset,None,MspiCamera)
 MspiCamera.row_number = new_instancemethod(_mspi_camera.MspiCamera_row_number,None,MspiCamera)
+MspiCamera.band_number = new_instancemethod(_mspi_camera.MspiCamera_band_number,None,MspiCamera)
 MspiCamera.__str__ = new_instancemethod(_mspi_camera.MspiCamera___str__,None,MspiCamera)
 MspiCamera_swigregister = _mspi_camera.MspiCamera_swigregister
 MspiCamera_swigregister(MspiCamera)

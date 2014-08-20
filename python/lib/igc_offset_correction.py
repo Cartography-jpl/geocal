@@ -202,8 +202,9 @@ class IgcOffsetCorrection(IgcCollection):
             for i in range(3):
                 j = self.parameter_index_to_subset_index(i)
                 if(j is not None):
-                    orb.parameter = p0.copy()
-                    orb.parameter[i] += pos_eps
+                    p = p0.copy()
+                    p[i] += pos_eps
+                    orb.parameter = p
                     cache["igc"].append((j,OrbitDataImageGroundConnection
                                          (orb.orbit_data(tm), self.cam, 
                                           self.demv,
@@ -214,8 +215,9 @@ class IgcOffsetCorrection(IgcCollection):
             for i in orb.att_parameters_affect(tm):
                 j = self.parameter_index_to_subset_index(i)
                 if(j is not None):
-                    orb.parameter = p0.copy()
-                    orb.parameter[i] += att_eps
+                    p = p0.copy()
+                    p[i] += att_eps
+                    orb.parameter = p
                     cache["igc"].append((j,OrbitDataImageGroundConnection
                                          (orb.orbit_data(tm), self.cam, 
                                           self.demv,

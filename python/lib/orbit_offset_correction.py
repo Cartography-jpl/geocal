@@ -203,13 +203,4 @@ class OrbitOffsetCorrection(Orbit, WithParameter):
         yaw_rad = math.radians(yaw / (60.0 * 60.0))
         pitch_rad = math.radians(pitch / (60.0 * 60.0))
         roll_rad = math.radians(roll / (60.0 * 60.0))
-        # If you don't happen to remember off the top of your head, you
-        # rotate an angle 'a' around an axis 'u' by the quaternion cos(a / 2) +
-        # sin(a / 2) * u.
-        rx = Quaternion_double(math.cos(pitch_rad / 2), 
-                               math.sin(pitch_rad / 2), 0, 0)
-        ry = Quaternion_double(math.cos(roll_rad / 2), 0, 
-                               math.sin(roll_rad / 2), 0)
-        rz = Quaternion_double(math.cos(yaw_rad / 2), 0, 0,
-                               math.sin(yaw_rad / 2))
-        return rx * ry * rz
+        return quat_rot("xyz", pitch_rad, roll_rad, yaw_rad)

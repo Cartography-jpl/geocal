@@ -201,6 +201,37 @@ double A1, double A2, double A3, double A4, double A5, double A6, double A7)
 }
 
 //-----------------------------------------------------------------------
+/// Return the Euler angles that make up the quaternion rotation (epsilon,
+/// beta, delta so quat_rot("zyx", epsilon,beta, delta) = qin.
+//-----------------------------------------------------------------------
+
+inline void quat_to_euler(const boost::math::quaternion<double>& qin,
+			  double& epsilon, double& beta, double& delta)
+{
+  double q0 = qin.R_component_1();
+  double q1 = qin.R_component_2();
+  double q2 = qin.R_component_3();
+  double q3 = qin.R_component_4();
+  epsilon = atan2(2 * (q0 * q3 + q1 * q2), 1 - 2 * (q2 * q2 + q3 * q3));
+  beta = asin(2 * (q0 * q2 - q3 * q1));
+  delta = atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2));
+}
+
+//-----------------------------------------------------------------------
+/// Return the Euler angles that make up the quaternion rotation (yaw,
+/// pitch, roll, so quat_rot("xyz", pitch, roll, yaw) = qin.
+//-----------------------------------------------------------------------
+
+inline void quat_to_ypr(const boost::math::quaternion<double>& qin,
+			double& yaw, double& pitch, double& roll)
+{
+  quat_to_euler(conj(qin), yaw, roll, pitch);
+  pitch = -pitch;
+  roll = -roll;
+  yaw = -yaw;
+}
+
+//-----------------------------------------------------------------------
 /// Convert a quaternion to a rotation matrix.
 ///
 /// This is an "active" transformation. For "passive", just reverse

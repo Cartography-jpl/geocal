@@ -224,6 +224,6 @@ class SimultaneousBundleAdjustment(object):
         return np.array(self.parameter) / 10.0
     
     def __parameter_constraint_jacobian(self, res):
-        istart = (len(self.tpcol) + self.niloc * 2)
+        istart = (len(self.tpcol) + self.tpcol.number_gcp * 3 + self.niloc * 2)
         for i in range(len(self.parameter)):
             res[istart + i, i] = 1 / 10.0

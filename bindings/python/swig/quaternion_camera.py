@@ -286,6 +286,38 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def frame_to_sc(self, value):
       self._v_frame_to_sc(value)
 
+    def _v_ypr(self, *args):
+        """
+        void GeoCal::QuaternionCamera::ypr(const blitz::Array< double, 1 > &Ypr)
+        Update the frame_to_sc using the given yaw, pitch, roll angles in
+        radians. 
+        """
+        return _quaternion_camera.QuaternionCamera__v_ypr(self, *args)
+
+    @property
+    def ypr(self):
+        return self._v_ypr()
+
+    @ypr.setter
+    def ypr(self, value):
+      self._v_ypr(value)
+
+    def _v_euler(self, *args):
+        """
+        void GeoCal::QuaternionCamera::euler(const blitz::Array< double, 1 > &Euler)
+        Update the frame_to_sc using the given Euler angles epsilon, beta,
+        data in radians. 
+        """
+        return _quaternion_camera.QuaternionCamera__v_euler(self, *args)
+
+    @property
+    def euler(self):
+        return self._v_euler()
+
+    @euler.setter
+    def euler(self, value):
+      self._v_euler(value)
+
     def sc_look_vector(self, *args):
         """
         virtual ScLookVector GeoCal::QuaternionCamera::sc_look_vector(const DcsLookVector &Dlv) const
@@ -321,6 +353,8 @@ QuaternionCamera._v_frame_convention = new_instancemethod(_quaternion_camera.Qua
 QuaternionCamera._v_line_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_direction,None,QuaternionCamera)
 QuaternionCamera._v_sample_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_direction,None,QuaternionCamera)
 QuaternionCamera._v_frame_to_sc = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_to_sc,None,QuaternionCamera)
+QuaternionCamera._v_ypr = new_instancemethod(_quaternion_camera.QuaternionCamera__v_ypr,None,QuaternionCamera)
+QuaternionCamera._v_euler = new_instancemethod(_quaternion_camera.QuaternionCamera__v_euler,None,QuaternionCamera)
 QuaternionCamera.sc_look_vector = new_instancemethod(_quaternion_camera.QuaternionCamera_sc_look_vector,None,QuaternionCamera)
 QuaternionCamera.dcs_look_vector = new_instancemethod(_quaternion_camera.QuaternionCamera_dcs_look_vector,None,QuaternionCamera)
 QuaternionCamera_swigregister = _quaternion_camera.QuaternionCamera_swigregister

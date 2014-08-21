@@ -3,7 +3,9 @@
 #include "printable.h"
 #include "camera.h"
 #include "geocal_exception.h"
+#include "geocal_quaternion.h"
 #include <vector>
+#include <blitz/array.h>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -147,6 +149,54 @@ public:
 //-----------------------------------------------------------------------
 
   void sample_pitch(double Sp) {sample_pitch_ = Sp;}
+
+//-----------------------------------------------------------------------
+/// Return the equivalent yaw, pitch, roll angles for the
+/// frame_to_sc. These are in radians.
+//-----------------------------------------------------------------------
+
+  blitz::Array<double, 1> ypr() const
+  {
+    blitz::Array<double, 1> res(3);
+    quat_to_ypr(frame_to_sc(), res(0), res(1), res(2));
+    return res;
+  }
+
+//-----------------------------------------------------------------------
+/// Update the frame_to_sc using the given yaw, pitch, roll angles in
+/// radians.
+//-----------------------------------------------------------------------
+
+  void ypr(const blitz::Array<double, 1>& Ypr)
+  {
+    if(Ypr.rows() != 3)
+      throw Exception("Ypr must be size 3");
+    frame_to_sc(quat_rot("xyz", Ypr(1), Ypr(2), Ypr(0)));
+  }
+
+//-----------------------------------------------------------------------
+/// Return the equivalent Euler angles epsilon, beta, delta for the
+/// frame_to_sc. These are in radians.
+//-----------------------------------------------------------------------
+
+  blitz::Array<double, 1> euler() const
+  {
+    blitz::Array<double, 1> res(3);
+    quat_to_euler(frame_to_sc(), res(0), res(1), res(2));
+    return res;
+  }
+
+//-----------------------------------------------------------------------
+/// Update the frame_to_sc using the given Euler angles epsilon, beta,
+/// data in radians.
+//-----------------------------------------------------------------------
+
+  void euler(const blitz::Array<double, 1>& Euler)
+  {
+    if(Euler.rows() != 3)
+      throw Exception("Ypr must be size 3");
+    frame_to_sc(quat_rot("zyx", Euler(0), Euler(1), Euler(2)));
+  }
 
 //-----------------------------------------------------------------------
 /// Frame to spacecraft quaternion.

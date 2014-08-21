@@ -38,7 +38,7 @@ def test_igc():
     img3.title = "Image 3"
     igc_coll = IgcOffsetCorrection([img1, img2, img3], cam, demin,
                                    orb_uncorr, time_point = [t1, t2, t3])
-    igc_coll.parameter_subset = [100, 200, 300, 50, 20, 30, 20, 40, 60, -10, -20, -30]
+    igc_coll.parameter_subset = [100, 200, 300, 50, 20, 30, 20, 40, 60, -10, -20, -30, cam.euler[0], cam.euler[1], cam.euler[2], cam.line_pitch, cam.sample_pitch]
     assert igc_coll.number_image == 3
     igc1 = OrbitDataImageGroundConnection(igc_coll.orbit.orbit_data(img1.time), 
                                           cam, demin, img1, img1.title, 

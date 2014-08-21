@@ -214,4 +214,22 @@ def matrix_to_quaternion(*args):
     """
   return _geocal_quaternion.matrix_to_quaternion(*args)
 
+def quat_to_ypr(*args):
+  """
+    void GeoCal::quat_to_ypr(const boost::math::quaternion< double > &qin, double &yaw, double
+    &pitch, double &roll)
+    Return the Euler angles that make up the quaternion rotation (yaw,
+    pitch, roll, so quat_rot("xyz", pitch, roll, yaw) = qin. 
+    """
+  return _geocal_quaternion.quat_to_ypr(*args)
+
+def quat_to_euler(*args):
+  """
+    void GeoCal::quat_to_euler(const boost::math::quaternion< double > &qin, double &epsilon, double
+    &beta, double &delta)
+    Return the Euler angles that make up the quaternion rotation (epsilon,
+    beta, delta so quat_rot("zyx", epsilon,beta, delta) = qin. 
+    """
+  return _geocal_quaternion.quat_to_euler(*args)
+
 

@@ -53,5 +53,18 @@ BOOST_AUTO_TEST_CASE(quat_to_ypr_test)
   BOOST_CHECK_CLOSE(yaw * Constant::rad_to_deg, 3, 1e-8);
 }
 
+BOOST_AUTO_TEST_CASE(quat_to_euler_test)
+{
+  boost::math::quaternion<double> q = quat_rot("zyx", 
+					       1 * Constant::deg_to_rad, 
+					       2 * Constant::deg_to_rad, 
+					       3 * Constant::deg_to_rad);
+  double epsilon, beta, delta;
+  quat_to_euler(q, epsilon, beta, delta);
+  BOOST_CHECK_CLOSE(epsilon * Constant::rad_to_deg, 1, 1e-8);
+  BOOST_CHECK_CLOSE(beta * Constant::rad_to_deg, 2, 1e-8);
+  BOOST_CHECK_CLOSE(delta * Constant::rad_to_deg, 3, 1e-8);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

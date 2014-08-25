@@ -115,6 +115,7 @@ class IgcOffsetCorrection(IgcCollection):
         '''Value of parameters controlling mapping to and from image 
         coordinates'''
         self._igc_cache = [None] * self.number_image
+        self._jac_cache = [None] * self.number_image
         self.orbit.parameter = value[0:-6]
         self.cam.euler = value[-6:-3]
         self.cam.line_pitch = value[-3]
@@ -130,8 +131,8 @@ class IgcOffsetCorrection(IgcCollection):
         t.append("Camera Euler Epsilon")
         t.append("Camera Euler Beta")
         t.append("Camera Euler Delta")
-        t.append("Camera line scale")
-        t.append("Camera sample scale")
+        t.append("Camera line pitch")
+        t.append("Camera sample pitch")
         t.append("Refraction factor")
         return t
     

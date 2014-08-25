@@ -57,7 +57,15 @@ UsgsDemData::UsgsDemData
   BOOST_FOREACH(boost::filesystem::directory_entry d, 
    		std::make_pair(boost::filesystem::directory_iterator(dirbase),
 			       boost::filesystem::directory_iterator())) {
+    // Slightly different syntax depending on version of BOOST
+    // filesystem. We need to support both, at least for a while
+    // (version 2 is old and deprecated, but we need to support some
+    // old systems)
+#if defined(BOOST_FILESYSTEM_VERSION) && BOOST_FILESYSTEM_VERSION == 3
+    std::string fname = d.path().filename().string();
+#else
     std::string fname = d.path().filename();
+#endif
     // Ignore files that have names we don't recognize (e.g., a README
     // file or something like that with the data files. This also
     // breaks the files we do recognize into the pieces we need to

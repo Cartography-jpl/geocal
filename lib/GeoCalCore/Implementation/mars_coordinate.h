@@ -5,6 +5,37 @@
 namespace GeoCal {
 class MarsPlanetocentric;
 
+
+/****************************************************************//**
+  Constants for the planet. Note that if the planet is actually
+  described as triaxial we average the 2 equatorial radius. We don't
+  support triaxial model. We could extend the code for this if 
+  needed.
+*******************************************************************/
+class MarsConstant {
+public:
+  static double planet_a()
+  { fill_in_data(); return a; }
+  static double planet_b()
+  { fill_in_data(); return b; }
+  static double planet_esq()
+  { fill_in_data(); return esq; }
+private:
+  // Don't actually allow this class to instantiated, we only use
+  // class functions for this.
+  MarsConstant() {}
+  static void fill_in_data()
+  {
+    if(!filled_in) {
+      calc_data();
+      filled_in = true;
+    }
+  }
+  static void calc_data();
+  static bool filled_in;
+  static double a, b, esq;
+};
+
 /****************************************************************//**
   This is a ground coordinate, expressed in fixed Mars coordinates.
 *******************************************************************/
@@ -155,8 +186,10 @@ public:
 
 /****************************************************************//**
   This is Mars coordinates as Planetocentric latitude, longitude, and
-  height above the reference sphere. This is the planet equivalent 
-  of Geocentric (*not* Geodetic).
+  height above the reference ellipsoid. This is the planet equivalent 
+  of Geocentric (*not* Geodetic). Height is relative to the 
+  ellipsoid, but latitude is relative to center of planet rather than
+  normal of ellipsoid.
 *******************************************************************/
 
 class MarsPlanetocentric : public GroundCoordinate {
@@ -171,8 +204,8 @@ public:
 /// Longitude should be between -180 and 180 and latitude -90 and 90.
 //-----------------------------------------------------------------------
 
-  MarsPlanetocentric(double Latitude, double Longitude, double Height_sphere = 0)
-  : lat_(Latitude), lon_(Longitude), height_sphere_(Height_sphere)
+  MarsPlanetocentric(double Latitude, double Longitude, double Height_ellipsoid = 0)
+  : lat_(Latitude), lon_(Longitude), height_ellipsoid_(Height_ellipsoid)
   {
     range_check(lat_, -90.0, 90.0);
     range_check(lon_, -180.0, 180.0);
@@ -191,10 +224,10 @@ public:
   virtual ~MarsPlanetocentric() {}
 
 //-----------------------------------------------------------------------
-/// Height above sphere, in meters.
+/// Height above ellipsoid, in meters.
 //-----------------------------------------------------------------------
 
-  virtual double height_reference_surface() const {return height_sphere_;}
+  virtual double height_reference_surface() const {return height_ellipsoid_;}
     
 //-----------------------------------------------------------------------
 /// Return latitude in degrees. Latitude is -90 to 90.
@@ -207,10 +240,13 @@ public:
 //-----------------------------------------------------------------------
 
   virtual double longitude() const {return lon_;}
+
 private:
   double lat_;			///< Latitude, in degrees.
   double lon_;			///< Longitude, in degrees.
-  double height_sphere_;	///< Height above sphere, in meters.
+  double height_ellipsoid_;	///< Height above ellipsoid, in
+				///meters.
+  double planet_radius(double Latitude_radians) const;
 };
 
 }

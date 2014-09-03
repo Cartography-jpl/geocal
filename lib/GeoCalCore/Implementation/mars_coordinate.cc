@@ -5,13 +5,21 @@ using namespace GeoCal;
 // We probably want these in the class/template somehow, but for now
 // just put these here
 
-const double mars_a = 3396000.0;
-				// Equatorial radius in meters.
-const double mars_b = 3396000.0;
-				// Polar radius in meters.
-const double mars_esq = (mars_a * mars_a - mars_b * mars_b) / 
-                         (mars_a * mars_a);
+inline double sqr(double x) { return x * x; }
+
+bool MarsConstant::filled_in = false;
+double MarsConstant::a;
+double MarsConstant::b;
+double MarsConstant::esq;
+
+void MarsConstant::calc_data()
+{
+  MarsConstant::a = 3396000.0;
+  MarsConstant::b = 3396000.0;
+  MarsConstant::esq = (sqr(MarsConstant::a) - sqr(MarsConstant::b)) / 
+    sqr(MarsConstant::a);
 				// Eccentricity squared. From CRC.
+}
 
 //-----------------------------------------------------------------------
 /// Create MarsFixed from GroundCoordinate
@@ -19,6 +27,11 @@ const double mars_esq = (mars_a * mars_a - mars_b * mars_b) /
 
 MarsFixed::MarsFixed(const GroundCoordinate& Gc)
 {
+  if(const MarsFixed* g = 
+     dynamic_cast<const MarsFixed*>(&Gc)) {
+    *this = *g;
+    return;
+  }
   boost::shared_ptr<CartesianFixed> cf = Gc.convert_to_cf();
   boost::shared_ptr<MarsFixed> mf = 
     boost::dynamic_pointer_cast<MarsFixed>(cf);
@@ -40,21 +53,24 @@ MarsFixed::convert_to_ci(const Time& T) const
   return res;
 }
 
+//-----------------------------------------------------------------------
+/// Height above the reference ellipsoid.
+//-----------------------------------------------------------------------
+
 double MarsFixed::height_reference_surface() const
 {
-  // We use a reference sphere instead of ellipsoid. 
-  return norm(position) - mars_a;
+  return MarsPlanetocentric(*this).height_reference_surface();
 }
 
 double MarsFixed::min_radius_reference_surface() const
 {
-  return mars_a;
+  return std::min(MarsConstant::planet_a(), MarsConstant::planet_b());
 }
 
 //-----------------------------------------------------------------------
 /// Return latitude in degrees. This is the Planetocentric. This is 
-/// the planet equivalent of Geocentric, so relative to a reference
-/// sphere (*not* ellipsoid like Geodetic).
+/// the planet equivalent of Geocentric, so relative to the center
+/// (*not* normal to ellipsoid like Geodetic).
 //-----------------------------------------------------------------------
 
 double MarsFixed::latitude() const
@@ -65,9 +81,8 @@ double MarsFixed::latitude() const
 }
 
 //-----------------------------------------------------------------------
-/// Return longitude in degrees. This is the Planetocentric. This is 
-/// the planet equivalent of Geocentric, so relative to a reference
-/// sphere (*not* ellipsoid like Geodetic).
+/// Return longitude in degrees. This is the Planetocentric (which
+/// actually isn't any different than Planetographic for longitude).
 //-----------------------------------------------------------------------
 
 double MarsFixed::longitude() const
@@ -80,11 +95,8 @@ MarsFixed::reference_surface_intersect_approximate
 (const CartesianFixedLookVector& Cl, 
  double Height_reference_surface) const
 {
-  // Note that mars_a and mars_b are the same, we just keep these
-  // separate in case we change to working with an ellipsoid at some
-  // point. 
-  double aph = mars_a + Height_reference_surface;
-  double bph = mars_b + Height_reference_surface;
+  double aph = MarsConstant::planet_a() + Height_reference_surface;
+  double bph = MarsConstant::planet_b() + Height_reference_surface;
   boost::array<double, 3> dirci;
   dirci[0] = Cl.look_vector[0]/ aph;
   dirci[1] = Cl.look_vector[1]/ aph;
@@ -132,8 +144,8 @@ MarsInertial::reference_surface_intersect_approximate
 (const CartesianInertialLookVector& Cl, 
  double Height_reference_surface) const
 {
-  double aph = mars_a + Height_reference_surface;
-  double bph = mars_b + Height_reference_surface;
+  double aph = MarsConstant::planet_a() + Height_reference_surface;
+  double bph = MarsConstant::planet_b() + Height_reference_surface;
   boost::array<double, 3> dirci;
   dirci[0] = Cl.look_vector[0]/ aph;
   dirci[1] = Cl.look_vector[1]/ aph;
@@ -175,14 +187,15 @@ MarsPlanetocentric::MarsPlanetocentric(const GroundCoordinate& Gc)
   MarsFixed mf(Gc);
   lon_ = mf.longitude();
   lat_ = mf.latitude();
-  height_sphere_ = mf.height_reference_surface();
+  height_ellipsoid_ = 
+    norm(mf.position) - planet_radius(lat_ * Constant::deg_to_rad);
 }
 
 boost::shared_ptr<CartesianFixed> MarsPlanetocentric::convert_to_cf() const
 {
-  double r = mars_a + height_sphere_;
   double lat = lat_ * Constant::deg_to_rad;
   double lon = lon_ * Constant::deg_to_rad;
+  double r = planet_radius(lat) + height_ellipsoid_;
   return boost::shared_ptr<CartesianFixed>
     (new MarsFixed(r * cos(lat) * cos(lon),
 		   r * cos(lat) * sin(lon),
@@ -194,4 +207,15 @@ void MarsPlanetocentric::print(std::ostream& Os) const
   Os << "MarsPlanetocentric: (" << latitude() << " deg, " 
      << longitude() << " deg, "
      << height_reference_surface() << " m)";
+}
+
+//-----------------------------------------------------------------------
+/// Radius of planet in meters at given Planetocentric Latitude (in
+/// radians, since we've already converted.
+//-----------------------------------------------------------------------
+
+double MarsPlanetocentric::planet_radius(double Latitude_radians)const
+{
+  return MarsConstant::planet_b() / 
+    sqrt(1 - MarsConstant::planet_esq() * sqr(cos(Latitude_radians)));
 }

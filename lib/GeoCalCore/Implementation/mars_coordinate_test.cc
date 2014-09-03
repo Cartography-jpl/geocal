@@ -6,6 +6,13 @@ using namespace GeoCal;
 
 BOOST_FIXTURE_TEST_SUITE(mars_coordinate, GlobalFixture)
 
+BOOST_AUTO_TEST_CASE(mars_constant)
+{
+  BOOST_CHECK_CLOSE(MarsConstant::planet_a(), 3396000.0, 1e-8);
+  BOOST_CHECK_CLOSE(MarsConstant::planet_b(), 3396000.0, 1e-8);
+  BOOST_CHECK_CLOSE(MarsConstant::planet_esq(), 0.0, 1e-8);
+}
+
 BOOST_AUTO_TEST_CASE(mars_fixed)
 {
   MarsFixed mf(10, 20, 30);

@@ -3,6 +3,8 @@
 #include "ground_coordinate.h"
 
 namespace GeoCal {
+class MarsPlanetocentric;
+
 /****************************************************************//**
   This is a ground coordinate, expressed in fixed Mars coordinates.
 *******************************************************************/
@@ -69,6 +71,7 @@ public:
   virtual double min_radius_reference_surface() const;
   virtual double latitude() const;
   virtual double longitude() const;
+  MarsPlanetocentric convert_to_planetocentric() const;
   virtual boost::shared_ptr<CartesianFixed>
   reference_surface_intersect_approximate(
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0) 
@@ -148,6 +151,66 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const;
+};
+
+/****************************************************************//**
+  This is Mars coordinates as Planetocentric latitude, longitude, and
+  height above the reference sphere. This is the planet equivalent 
+  of Geocentric (*not* Geodetic).
+*******************************************************************/
+
+class MarsPlanetocentric : public GroundCoordinate {
+public:
+  MarsPlanetocentric(const GroundCoordinate& Gc);
+  virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
+  virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Make an MarsPlanetocentric with the given latitude, longitude, and height.
+/// Latitude and longitude are in degrees, height is in meters.
+/// Longitude should be between -180 and 180 and latitude -90 and 90.
+//-----------------------------------------------------------------------
+
+  MarsPlanetocentric(double Latitude, double Longitude, double Height_sphere = 0)
+  : lat_(Latitude), lon_(Longitude), height_sphere_(Height_sphere)
+  {
+    range_check(lat_, -90.0, 90.0);
+    range_check(lon_, -180.0, 180.0);
+  }
+
+//-----------------------------------------------------------------------
+/// Default constructor.
+//-----------------------------------------------------------------------
+
+  MarsPlanetocentric() {}
+
+//-----------------------------------------------------------------------
+/// Destructor.
+//-----------------------------------------------------------------------
+
+  virtual ~MarsPlanetocentric() {}
+
+//-----------------------------------------------------------------------
+/// Height above sphere, in meters.
+//-----------------------------------------------------------------------
+
+  virtual double height_reference_surface() const {return height_sphere_;}
+    
+//-----------------------------------------------------------------------
+/// Return latitude in degrees. Latitude is -90 to 90.
+//-----------------------------------------------------------------------
+
+  virtual double latitude() const {return lat_;}
+    
+//-----------------------------------------------------------------------
+/// Return longitude in degrees. Longitude is -180 to 180.
+//-----------------------------------------------------------------------
+
+  virtual double longitude() const {return lon_;}
+private:
+  double lat_;			///< Latitude, in degrees.
+  double lon_;			///< Longitude, in degrees.
+  double height_sphere_;	///< Height above sphere, in meters.
 };
 
 }

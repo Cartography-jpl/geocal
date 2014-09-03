@@ -28,9 +28,11 @@ BOOST_AUTO_TEST_CASE(mars_fixed)
   BOOST_CHECK_CLOSE(m3mi->position[1], -0.4738199, 1e-4);
   BOOST_CHECK_CLOSE(m3mi->position[2], 0.23946256, 1e-4);
 
-  // Need some data from MarsPlanetocentric to check
-  // height_reference_surface, latitude, longitude, and 
-  // reference_surface_intersect_approximate
+  MarsPlanetocentric mp(10, 20, 30);
+  MarsFixed mf4(mp);
+  BOOST_CHECK_CLOSE(mf4.latitude(), 10, 1e-8);
+  BOOST_CHECK_CLOSE(mf4.longitude(), 20, 1e-8);
+  BOOST_CHECK_CLOSE(mf4.height_reference_surface(), 30, 1e-8);
 }
 
 BOOST_AUTO_TEST_CASE(mars_inertial)
@@ -50,4 +52,16 @@ BOOST_AUTO_TEST_CASE(mars_inertial)
   BOOST_CHECK_CLOSE(m3mf->position[2], 0.636251, 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(mars_planetocentric)
+{
+  MarsPlanetocentric mp(10, 20, 30);
+  BOOST_CHECK_CLOSE(mp.height_reference_surface(), 30, 1e-8);
+  BOOST_CHECK_CLOSE(mp.latitude(), 10, 1e-8);
+  BOOST_CHECK_CLOSE(mp.longitude(), 20, 1e-8);
+  MarsFixed mf(mp);
+  MarsPlanetocentric mp2(mf);
+  MarsFixed mf2(mp2);
+  BOOST_CHECK(distance(mp, mp2) < 1e-8);
+  BOOST_CHECK(distance(mf, mf2) < 1e-8);
+}
 BOOST_AUTO_TEST_SUITE_END()

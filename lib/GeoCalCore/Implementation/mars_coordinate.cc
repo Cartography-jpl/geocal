@@ -42,8 +42,7 @@ MarsFixed::convert_to_ci(const Time& T) const
 
 double MarsFixed::height_reference_surface() const
 {
-  // We use a reference sphere instead of ellipsoid. We'll need to
-  // see if this needs to be generalized.
+  // We use a reference sphere instead of ellipsoid. 
   return norm(position) - mars_a;
 }
 
@@ -52,15 +51,28 @@ double MarsFixed::min_radius_reference_surface() const
   return mars_a;
 }
 
+//-----------------------------------------------------------------------
+/// Return latitude in degrees. This is the Planetocentric. This is 
+/// the planet equivalent of Geocentric, so relative to a reference
+/// sphere (*not* ellipsoid like Geodetic).
+//-----------------------------------------------------------------------
+
 double MarsFixed::latitude() const
 {
   return atan2(position[2],
-	       sqrt(position[0] * position[0] + position[1] * position[1]));
+	       sqrt(position[0] * position[0] + position[1] * position[1]))
+    * Constant::rad_to_deg;
 }
+
+//-----------------------------------------------------------------------
+/// Return longitude in degrees. This is the Planetocentric. This is 
+/// the planet equivalent of Geocentric, so relative to a reference
+/// sphere (*not* ellipsoid like Geodetic).
+//-----------------------------------------------------------------------
 
 double MarsFixed::longitude() const
 {
-  return atan2(position[1], position[0]);
+  return atan2(position[1], position[0]) * Constant::rad_to_deg;
 }
 
 boost::shared_ptr<CartesianFixed>
@@ -68,6 +80,9 @@ MarsFixed::reference_surface_intersect_approximate
 (const CartesianFixedLookVector& Cl, 
  double Height_reference_surface) const
 {
+  // Note that mars_a and mars_b are the same, we just keep these
+  // separate in case we change to working with an ellipsoid at some
+  // point. 
   double aph = mars_a + Height_reference_surface;
   double bph = mars_b + Height_reference_surface;
   boost::array<double, 3> dirci;
@@ -89,6 +104,12 @@ MarsFixed::reference_surface_intersect_approximate
   res[1] = (pci[1] + dirci[1] * dl) * aph;
   res[2] = (pci[2] + dirci[2] * dl) * bph;
   return create(res);
+}
+
+MarsPlanetocentric MarsFixed::convert_to_planetocentric() const
+{
+  return MarsPlanetocentric(latitude(), longitude(), 
+			    height_reference_surface());
 }
 
 void MarsFixed::print(std::ostream& Os) const
@@ -140,3 +161,37 @@ void MarsInertial::print(std::ostream& Os) const
      << position[2] << "m)";
 }
 
+//-----------------------------------------------------------------------
+/// Convert from GroundCoor.
+//-----------------------------------------------------------------------
+
+MarsPlanetocentric::MarsPlanetocentric(const GroundCoordinate& Gc)
+{
+  if(const MarsPlanetocentric* g = 
+     dynamic_cast<const MarsPlanetocentric*>(&Gc)) {
+    *this = *g;
+    return;
+  }
+  MarsFixed mf(Gc);
+  lon_ = mf.longitude();
+  lat_ = mf.latitude();
+  height_sphere_ = mf.height_reference_surface();
+}
+
+boost::shared_ptr<CartesianFixed> MarsPlanetocentric::convert_to_cf() const
+{
+  double r = mars_a + height_sphere_;
+  double lat = lat_ * Constant::deg_to_rad;
+  double lon = lon_ * Constant::deg_to_rad;
+  return boost::shared_ptr<CartesianFixed>
+    (new MarsFixed(r * cos(lat) * cos(lon),
+		   r * cos(lat) * sin(lon),
+		   r * sin(lat)));
+}
+
+void MarsPlanetocentric::print(std::ostream& Os) const
+{
+  Os << "MarsPlanetocentric: (" << latitude() << " deg, " 
+     << longitude() << " deg, "
+     << height_reference_surface() << " m)";
+}

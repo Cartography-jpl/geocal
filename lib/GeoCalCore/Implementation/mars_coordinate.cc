@@ -1,5 +1,12 @@
 #include "mars_coordinate.h"
 #include "geocal_matrix.h"
+#include "spice_helper.h"
+#include <boost/lexical_cast.hpp>
+#ifdef HAVE_SPICE
+extern "C" {
+#include "SpiceUsr.h"
+}
+#endif
 using namespace GeoCal;
 
 // We probably want these in the class/template somehow, but for now
@@ -14,11 +21,23 @@ double MarsConstant::esq;
 
 void MarsConstant::calc_data()
 {
-  MarsConstant::a = 3396000.0;
-  MarsConstant::b = 3396000.0;
+  SpiceHelper::spice_setup();
+#ifdef HAVE_SPICE
+  std::string bname = boost::lexical_cast<std::string>((int) NAIF_CODE);
+  int dim;
+  double values[3];
+  bodvrd_c(bname.c_str(), "RADII", 3, &dim, values);
+  SpiceHelper::spice_error_check();
+  if(dim != 3)
+    throw Exception("Call to bodvrd_c didn't returned expected values");
+  // 1000.0 is to convert from km returned by bodvrd_c and meter we
+  // use everywhere else.
+  MarsConstant::a = (values[0] + values[1]) / 2.0 * 1000.0;
+  MarsConstant::b = values[2] * 1000.0;
   MarsConstant::esq = (sqr(MarsConstant::a) - sqr(MarsConstant::b)) / 
     sqr(MarsConstant::a);
 				// Eccentricity squared. From CRC.
+#endif
 }
 
 //-----------------------------------------------------------------------
@@ -49,7 +68,7 @@ MarsFixed::convert_to_ci(const Time& T) const
 {
   boost::shared_ptr<CartesianInertial> res(new MarsInertial);
   CartesianFixed::toolkit_coordinate_interface->
-    to_inertial((int) MARS_NAIF_CODE, T, *this, *res);
+    to_inertial((int) NAIF_CODE, T, *this, *res);
   return res;
 }
 
@@ -135,7 +154,7 @@ boost::shared_ptr<CartesianFixed> MarsInertial::convert_to_cf
 {
   boost::shared_ptr<CartesianFixed> res(new MarsFixed);
   CartesianFixed::toolkit_coordinate_interface->
-    to_fixed(MARS_NAIF_CODE, T, *this, *res);
+    to_fixed(NAIF_CODE, T, *this, *res);
   return res;
 }
 

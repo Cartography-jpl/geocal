@@ -14,6 +14,7 @@ class MarsPlanetocentric;
 *******************************************************************/
 class MarsConstant {
 public:
+  enum { NAIF_CODE = 499 };
   static double planet_a()
   { fill_in_data(); return a; }
   static double planet_b()
@@ -41,7 +42,7 @@ private:
 *******************************************************************/
 class MarsFixed : public CartesianFixed {
 public:
-  enum { MARS_NAIF_CODE = 499 };
+  enum { NAIF_CODE = 499 };
   MarsFixed(const GroundCoordinate& Gc);
 
 //-----------------------------------------------------------------------
@@ -94,7 +95,7 @@ public:
 
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
   { 
-    CartesianFixed::toolkit_coordinate_interface->to_fixed(MARS_NAIF_CODE,
+    CartesianFixed::toolkit_coordinate_interface->to_fixed(NAIF_CODE,
 							   T, Ci_to_cf); 
   }
 
@@ -116,7 +117,7 @@ public:
 
 class MarsInertial : public CartesianInertial {
 public:
-  enum { MARS_NAIF_CODE = 499 };
+  enum { NAIF_CODE = 499 };
 
 //-----------------------------------------------------------------------
 /// Default constructor, doesn't initialize position.
@@ -160,7 +161,7 @@ public:
 
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
   { 
-    CartesianFixed::toolkit_coordinate_interface->to_fixed(MARS_NAIF_CODE,
+    CartesianFixed::toolkit_coordinate_interface->to_fixed(NAIF_CODE,
 							   T, Ci_to_cf); 
   }
 

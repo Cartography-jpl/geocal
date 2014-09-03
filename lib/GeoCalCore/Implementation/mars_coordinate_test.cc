@@ -1,6 +1,7 @@
 #include "unit_test_support.h"
 #include "mars_coordinate.h"
 #include "geocal_time.h"
+#include "spice_helper.h"
 
 using namespace GeoCal;
 
@@ -8,13 +9,21 @@ BOOST_FIXTURE_TEST_SUITE(mars_coordinate, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(mars_constant)
 {
-  BOOST_CHECK_CLOSE(MarsConstant::planet_a(), 3396000.0, 1e-8);
-  BOOST_CHECK_CLOSE(MarsConstant::planet_b(), 3396000.0, 1e-8);
-  BOOST_CHECK_CLOSE(MarsConstant::planet_esq(), 0.0, 1e-8);
+  if(!SpiceHelper::spice_available()) {
+    BOOST_WARN_MESSAGE(false, "Not configured to use SPICE library, so skipping Spice tests.");
+    return;
+  }
+  BOOST_CHECK_CLOSE(MarsConstant::planet_a(), 3396190.0, 1e-8);
+  BOOST_CHECK_CLOSE(MarsConstant::planet_b(), 3376200.0, 1e-8);
+  BOOST_CHECK_CLOSE(MarsConstant::planet_esq(), 0.0117373700261, 1e-8);
 }
 
 BOOST_AUTO_TEST_CASE(mars_fixed)
 {
+  if(!SpiceHelper::spice_available()) {
+    BOOST_WARN_MESSAGE(false, "Not configured to use SPICE library, so skipping Spice tests.");
+    return;
+  }
   MarsFixed mf(10, 20, 30);
   BOOST_CHECK_CLOSE(mf.position[0], 10.0, 1e-8);
   BOOST_CHECK_CLOSE(mf.position[1], 20.0, 1e-8);
@@ -24,7 +33,7 @@ BOOST_AUTO_TEST_CASE(mars_fixed)
   BOOST_CHECK_CLOSE(mf2.position[0], 10.0, 1e-8);
   BOOST_CHECK_CLOSE(mf2.position[1], 20.0, 1e-8);
   BOOST_CHECK_CLOSE(mf2.position[2], 30.0, 1e-8);
-  BOOST_CHECK_CLOSE(mf.min_radius_reference_surface(), 3396000.0, 1e-8);
+  BOOST_CHECK_CLOSE(mf.min_radius_reference_surface(), 3376200.0, 1e-8);
 
   // Results from an old unit test in the old version of GeoCal.
   MarsFixed e3mf(0.5, 0.75, 0.90);
@@ -44,6 +53,10 @@ BOOST_AUTO_TEST_CASE(mars_fixed)
 
 BOOST_AUTO_TEST_CASE(mars_inertial)
 {
+  if(!SpiceHelper::spice_available()) {
+    BOOST_WARN_MESSAGE(false, "Not configured to use SPICE library, so skipping Spice tests.");
+    return;
+  }
   MarsInertial mi(10, 20, 30);
   BOOST_CHECK_CLOSE(mi.position[0], 10.0, 1e-8);
   BOOST_CHECK_CLOSE(mi.position[1], 20.0, 1e-8);
@@ -61,6 +74,10 @@ BOOST_AUTO_TEST_CASE(mars_inertial)
 
 BOOST_AUTO_TEST_CASE(mars_planetocentric)
 {
+  if(!SpiceHelper::spice_available()) {
+    BOOST_WARN_MESSAGE(false, "Not configured to use SPICE library, so skipping Spice tests.");
+    return;
+  }
   MarsPlanetocentric mp(10, 20, 30);
   BOOST_CHECK_CLOSE(mp.height_reference_surface(), 30, 1e-8);
   BOOST_CHECK_CLOSE(mp.latitude(), 10, 1e-8);

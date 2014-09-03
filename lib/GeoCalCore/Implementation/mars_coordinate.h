@@ -76,5 +76,79 @@ public:
   virtual void print(std::ostream& Os) const;
 };
 
+/****************************************************************//**
+  This is a MarsIntertial coordinate (J2000)
+*******************************************************************/
+
+class MarsInertial : public CartesianInertial {
+public:
+  enum { MARS_NAIF_CODE = 499 };
+
+//-----------------------------------------------------------------------
+/// Default constructor, doesn't initialize position.
+//-----------------------------------------------------------------------
+
+  MarsInertial() {}
+
+//-----------------------------------------------------------------------
+/// Make an MarsInertial with the given position, in meters.
+//-----------------------------------------------------------------------
+
+  MarsInertial(double X, double Y, double Z)
+  {
+    position[0] = X;
+    position[1] = Y;
+    position[2] = Z;
+  }
+
+//-----------------------------------------------------------------------
+/// Create an MarsInertial with the given position in meters.
+//-----------------------------------------------------------------------
+
+  MarsInertial(const boost::array<double, 3>& Pos)
+  {
+    position = Pos;
+  }
+
+//-----------------------------------------------------------------------
+/// Destructor.
+//-----------------------------------------------------------------------
+
+  virtual ~MarsInertial() {}
+  virtual boost::shared_ptr<CartesianFixed> convert_to_cf(const Time& T) 
+    const;
+
+//-----------------------------------------------------------------------
+/// Matrix to convert MarsInertial to MarsFixed. The transpose of this
+/// will convert 
+/// MarsFixed to MarsInertial.
+//-----------------------------------------------------------------------
+
+  virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
+  { 
+    CartesianFixed::toolkit_coordinate_interface->to_fixed(MARS_NAIF_CODE,
+							   T, Ci_to_cf); 
+  }
+
+//-----------------------------------------------------------------------
+/// Create an instance of whatever type of CartesianInertial this is.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<CartesianInertial> 
+    create(boost::array<double, 3> P) const 
+  { return boost::shared_ptr<CartesianInertial>(new MarsInertial(P)); }
+
+  virtual boost::shared_ptr<CartesianInertial>
+  reference_surface_intersect_approximate(
+  const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
+  const;
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+  virtual void print(std::ostream& Os) const;
+};
+
 }
 #endif

@@ -34,6 +34,10 @@ MarsFixed::MarsFixed(const GroundCoordinate& Gc)
 boost::shared_ptr<CartesianInertial> 
 MarsFixed::convert_to_ci(const Time& T) const
 {
+  boost::shared_ptr<CartesianInertial> res(new MarsInertial);
+  CartesianFixed::toolkit_coordinate_interface->
+    to_inertial((int) MARS_NAIF_CODE, T, *this, *res);
+  return res;
 }
 
 double MarsFixed::height_reference_surface() const
@@ -90,6 +94,49 @@ MarsFixed::reference_surface_intersect_approximate
 void MarsFixed::print(std::ostream& Os) const
 {
   Os << "MarsFixed (" << position[0] << " m, " << position[1] << " m, "
+     << position[2] << "m)";
+}
+
+boost::shared_ptr<CartesianFixed> MarsInertial::convert_to_cf
+(const Time& T) const
+{
+  boost::shared_ptr<CartesianFixed> res(new MarsFixed);
+  CartesianFixed::toolkit_coordinate_interface->
+    to_fixed(MARS_NAIF_CODE, T, *this, *res);
+  return res;
+}
+
+boost::shared_ptr<CartesianInertial>
+MarsInertial::reference_surface_intersect_approximate
+(const CartesianInertialLookVector& Cl, 
+ double Height_reference_surface) const
+{
+  double aph = mars_a + Height_reference_surface;
+  double bph = mars_b + Height_reference_surface;
+  boost::array<double, 3> dirci;
+  dirci[0] = Cl.look_vector[0]/ aph;
+  dirci[1] = Cl.look_vector[1]/ aph;
+  dirci[2] = Cl.look_vector[2]/ bph;
+  double t = norm(dirci);
+  dirci[0] /= t;
+  dirci[1] /= t;
+  dirci[2] /= t;
+  boost::array<double, 3> pci;
+  pci[0] = position[0] / aph;
+  pci[1] = position[1] / aph;
+  pci[2] = position[2] / bph;
+  double ddotp = dot(dirci, pci);
+  double dl = -ddotp - sqrt(ddotp * ddotp + (1 - dot(pci, pci)));
+  boost::array<double, 3> res;
+  res[0] = (pci[0] + dirci[0] * dl) * aph;
+  res[1] = (pci[1] + dirci[1] * dl) * aph;
+  res[2] = (pci[2] + dirci[2] * dl) * bph;
+  return create(res);
+}
+
+void MarsInertial::print(std::ostream& Os) const
+{
+  Os << "MarsIntertial (" << position[0] << " m, " << position[1] << " m, "
      << position[2] << "m)";
 }
 

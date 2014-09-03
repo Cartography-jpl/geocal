@@ -18,9 +18,36 @@ BOOST_AUTO_TEST_CASE(mars_fixed)
   BOOST_CHECK_CLOSE(mf2.position[1], 20.0, 1e-8);
   BOOST_CHECK_CLOSE(mf2.position[2], 30.0, 1e-8);
   BOOST_CHECK_CLOSE(mf.min_radius_reference_surface(), 3396000.0, 1e-8);
+
+  // Results from an old unit test in the old version of GeoCal.
+  MarsFixed e3mf(0.5, 0.75, 0.90);
+  Time t = Time::parse_time("1991-01-01T11:29:30.123211Z") + 3600.0;
+  boost::shared_ptr<CartesianInertial> m3mi = e3mf.convert_to_ci(t);
+  BOOST_CHECK(boost::dynamic_pointer_cast<MarsInertial>(m3mi));
+  BOOST_CHECK_CLOSE(m3mi->position[0], 1.1578655, 1e-4);
+  BOOST_CHECK_CLOSE(m3mi->position[1], -0.4738199, 1e-4);
+  BOOST_CHECK_CLOSE(m3mi->position[2], 0.23946256, 1e-4);
+
   // Need some data from MarsPlanetocentric to check
   // height_reference_surface, latitude, longitude, and 
   // reference_surface_intersect_approximate
+}
+
+BOOST_AUTO_TEST_CASE(mars_inertial)
+{
+  MarsInertial mi(10, 20, 30);
+  BOOST_CHECK_CLOSE(mi.position[0], 10.0, 1e-8);
+  BOOST_CHECK_CLOSE(mi.position[1], 20.0, 1e-8);
+  BOOST_CHECK_CLOSE(mi.position[2], 30.0, 1e-8);
+
+  // Results from an old unit test in the old version of GeoCal.
+  MarsInertial m3mi(0.5, 0.75, 0.90);
+  Time t = Time::parse_time("1991-01-01T11:29:30.123211Z") + 3600.0;
+  boost::shared_ptr<CartesianFixed> m3mf = m3mi.convert_to_cf(t);
+  BOOST_CHECK(boost::dynamic_pointer_cast<MarsFixed>(m3mf));
+  BOOST_CHECK_CLOSE(m3mf->position[0], -0.992024, 1e-4);
+  BOOST_CHECK_CLOSE(m3mf->position[1], 0.48329419, 1e-4);
+  BOOST_CHECK_CLOSE(m3mf->position[2], 0.636251, 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

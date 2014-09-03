@@ -60,6 +60,10 @@ libgeocal_la_SOURCES+= @srcimplementation@/rpc_image_ground_connection.cc
 geocalinc_HEADERS+= @srcimplementation@/ipi_image_ground_connection.h
 geocalinc_HEADERS+= @srcimplementation@/eci_tod.h
 libgeocal_la_SOURCES+= @srcimplementation@/eci_tod.cc
+if HAVE_SPICE
+geocalinc_HEADERS+= @srcimplementation@/mars_coordinate.h
+libgeocal_la_SOURCES+= @srcimplementation@/mars_coordinate.cc
+endif
 if HAVE_CARTO
 geocalinc_HEADERS+= @srcimplementation@/eci_tod_burl.h
 libgeocal_la_SOURCES+= @srcimplementation@/eci_tod_burl.cc
@@ -197,6 +201,9 @@ geocal_test_all_SOURCES+= @srcimplementation@/pan_sharpen_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rpc_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/ipi_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_test.cc
+if HAVE_SPICE
+geocal_test_all_SOURCES+= @srcimplementation@/mars_coordinate_test.cc
+endif
 if HAVE_CARTO
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_burl_test.cc
 endif

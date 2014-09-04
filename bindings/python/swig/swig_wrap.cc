@@ -103,6 +103,7 @@ extern "C" {
   void init_quaternion_camera(void);
   void init_refraction(void);
   void init_orbit_data_image_ground_connection(void);
+  void init_planet_coordinate(void);
   void init_argus_camera(void);
   void init_argus_orbit(void);
   void init_quickbird_camera(void);
@@ -316,6 +317,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_quaternion_camera", init_quaternion_camera);
   init_extension_module(package, "_refraction", init_refraction);
   init_extension_module(package, "_orbit_data_image_ground_connection", init_orbit_data_image_ground_connection);
+  init_extension_module(package, "_planet_coordinate", init_planet_coordinate);
   init_extension_module(package, "_argus_camera", init_argus_camera);
   init_extension_module(package, "_argus_orbit", init_argus_orbit);
   init_extension_module(package, "_quickbird_camera", init_quickbird_camera);

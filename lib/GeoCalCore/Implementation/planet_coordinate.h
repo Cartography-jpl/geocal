@@ -7,6 +7,12 @@
 namespace GeoCal {
 template<int NAIF_CODE> class Planetocentric;
 
+/****************************************************************//**
+  Constants for a planet.
+
+  Note that "Planet" also includes "Moon of planet", basically 
+  anything with a NAIF_CODE
+*******************************************************************/
 template<int NCODE> class PlanetConstant {
 public:
   enum {NAIF_CODE = NCODE };
@@ -21,6 +27,9 @@ private:
 
 /****************************************************************//**
   This is a ground coordinate, expressed in fixed Planet coordinates.
+
+  Note that "Planet" also includes "Moon of planet", basically 
+  anything with a NAIF_CODE
 *******************************************************************/
 template<int NAIF_CODE> class PlanetFixed : public CartesianFixed {
 public:
@@ -176,6 +185,9 @@ public:
 
 /****************************************************************//**
   This is a Planet Intertial coordinate.
+
+  Note that "Planet" also includes "Moon of planet", basically 
+  anything with a NAIF_CODE
 *******************************************************************/
 
 template<int NAIF_CODE> class PlanetInertial : public CartesianInertial {
@@ -289,6 +301,9 @@ public:
   equivalent of Geocentric (*not* Geodetic). Height is relative to the
   ellipsoid, but latitude is relative to center of planet rather than
   normal of ellipsoid.
+
+  Note that "Planet" also includes "Moon of planet", basically 
+  anything with a NAIF_CODE
 *******************************************************************/
 
 template<int NAIF_CODE> class Planetocentric : public GroundCoordinate {
@@ -416,6 +431,10 @@ typedef Planetocentric<499> MarsPlanetocentric;
 typedef PlanetFixed<499> MarsFixed;
 typedef PlanetInertial<499> MarsInertial;
 
+typedef PlanetConstant<502> EuropaConstant;
+typedef Planetocentric<502> EuropaPlanetocentric;
+typedef PlanetFixed<502> EuropaFixed;
+typedef PlanetInertial<502> EuropaInertial;
 
 }
 #endif

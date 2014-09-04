@@ -259,6 +259,9 @@ void SpiceHelper::cartesian_inertial_to_cartesian_fixed(int Body_id,
   case 499:			// Mars
     conversion_matrix("J2000", "IAU_MARS", T);
     break;
+  case 502:			// Europa
+    conversion_matrix("J2000", "IAU_EUROPA", T);
+    break;
   case 301:			// Moon
     conversion_matrix("J2000", "IAU_MOON", T);
     break;
@@ -377,6 +380,10 @@ SpiceToolkitCoordinateInterface::sub_solar_point(int Body_id, const Time& T,
   case 499:			// Mars
     SpiceHelper::sub_solar_point_calc("MARS", "IAU_MARS", T, P.position, ign);
     break;
+  case 502:			// Europa
+    SpiceHelper::sub_solar_point_calc("EUROPA", "IAU_EUROPA", T, P.position, 
+				      ign);
+    break;
   case 301:			// Moon
     SpiceHelper::sub_solar_point_calc("MOON", "IAU_MOON", T, P.position, ign);
     break;
@@ -400,6 +407,9 @@ SpiceToolkitCoordinateInterface::solar_distance(int Body_id, const Time& T)
     break;
   case 499:			// Mars
     SpiceHelper::sub_solar_point_calc("MARS", "IAU_MARS", T, pout1, pout2);
+    break;
+  case 502:			// Europa
+    SpiceHelper::sub_solar_point_calc("EUROPA", "IAU_EUROPA", T, pout1, pout2);
     break;
   case 301:			// Moon
     SpiceHelper::sub_solar_point_calc("MOON", "IAU_MOON", T, pout1, pout2);

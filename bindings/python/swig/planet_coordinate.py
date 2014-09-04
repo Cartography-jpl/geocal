@@ -123,8 +123,12 @@ import geocal_swig.generic_object
 import geocal_swig.look_vector
 class MarsConstant(object):
     """
-    C++ includes: planet_coordinate.h
+    Constants for a planet.
 
+    Note that "Planet" also includes "Moon of planet", basically
+    anything with a NAIF_CODE
+
+    C++ includes: planet_coordinate.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
@@ -198,6 +202,9 @@ class MarsFixed(geocal_swig.ground_coordinate.CartesianFixed):
     """
     This is a ground coordinate, expressed in fixed Planet coordinates.
 
+    Note that "Planet" also includes "Moon of planet", basically
+    anything with a NAIF_CODE
+
     C++ includes: planet_coordinate.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -240,6 +247,9 @@ class MarsInertial(geocal_swig.ground_coordinate.CartesianInertial):
     """
     This is a Planet Intertial coordinate.
 
+    Note that "Planet" also includes "Moon of planet", basically
+    anything with a NAIF_CODE
+
     C++ includes: planet_coordinate.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -279,6 +289,9 @@ class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     relative to the ellipsoid, but latitude is relative to center of
     planet rather than normal of ellipsoid.
 
+    Note that "Planet" also includes "Moon of planet", basically
+    anything with a NAIF_CODE
+
     C++ includes: planet_coordinate.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -311,6 +324,210 @@ class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     __swig_destroy__ = _planet_coordinate.delete_MarsPlanetocentric
 MarsPlanetocentric_swigregister = _planet_coordinate.MarsPlanetocentric_swigregister
 MarsPlanetocentric_swigregister(MarsPlanetocentric)
+
+class EuropaConstant(object):
+    """
+    Constants for a planet.
+
+    Note that "Planet" also includes "Moon of planet", basically
+    anything with a NAIF_CODE
+
+    C++ includes: planet_coordinate.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def planet_a():
+        """
+        static double GeoCal::PlanetConstant< NCODE >::planet_a()
+
+        """
+        return _planet_coordinate.EuropaConstant_planet_a()
+
+    planet_a = staticmethod(planet_a)
+    def planet_b():
+        """
+        static double GeoCal::PlanetConstant< NCODE >::planet_b()
+
+        """
+        return _planet_coordinate.EuropaConstant_planet_b()
+
+    planet_b = staticmethod(planet_b)
+    def planet_esq():
+        """
+        static double GeoCal::PlanetConstant< NCODE >::planet_esq()
+
+        """
+        return _planet_coordinate.EuropaConstant_planet_esq()
+
+    planet_esq = staticmethod(planet_esq)
+    def planet_name():
+        """
+        static std::string GeoCal::PlanetConstant< NCODE >::planet_name()
+
+        """
+        return _planet_coordinate.EuropaConstant_planet_name()
+
+    planet_name = staticmethod(planet_name)
+    def __init__(self): 
+        _planet_coordinate.EuropaConstant_swiginit(self,_planet_coordinate.new_EuropaConstant())
+    __swig_destroy__ = _planet_coordinate.delete_EuropaConstant
+EuropaConstant_swigregister = _planet_coordinate.EuropaConstant_swigregister
+EuropaConstant_swigregister(EuropaConstant)
+
+def EuropaConstant_planet_a():
+  """
+    static double GeoCal::PlanetConstant< NCODE >::planet_a()
+
+    """
+  return _planet_coordinate.EuropaConstant_planet_a()
+
+def EuropaConstant_planet_b():
+  """
+    static double GeoCal::PlanetConstant< NCODE >::planet_b()
+
+    """
+  return _planet_coordinate.EuropaConstant_planet_b()
+
+def EuropaConstant_planet_esq():
+  """
+    static double GeoCal::PlanetConstant< NCODE >::planet_esq()
+
+    """
+  return _planet_coordinate.EuropaConstant_planet_esq()
+
+def EuropaConstant_planet_name():
+  """
+    static std::string GeoCal::PlanetConstant< NCODE >::planet_name()
+
+    """
+  return _planet_coordinate.EuropaConstant_planet_name()
+
+class EuropaFixed(geocal_swig.ground_coordinate.CartesianFixed):
+    """
+    This is a ground coordinate, expressed in fixed Planet coordinates.
+
+    Note that "Planet" also includes "Moon of planet", basically
+    anything with a NAIF_CODE
+
+    C++ includes: planet_coordinate.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::PlanetFixed< NAIF_CODE >::PlanetFixed()
+        Default constructor. 
+        """
+        _planet_coordinate.EuropaFixed_swiginit(self,_planet_coordinate.new_EuropaFixed(*args))
+    def convert_to_planetocentric(self):
+        """
+        Planetocentric< NAIF_CODE > GeoCal::PlanetFixed< NAIF_CODE >::convert_to_planetocentric() const
+
+        """
+        return _planet_coordinate.EuropaFixed_convert_to_planetocentric(self)
+
+    def reference_surface_intersect_approximate(self, *args):
+        """
+        virtual boost::shared_ptr<CartesianFixed> GeoCal::PlanetFixed< NAIF_CODE >::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double
+        Height_reference_surface=0) const
+
+        """
+        return _planet_coordinate.EuropaFixed_reference_surface_intersect_approximate(self, *args)
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.position[0],self.position[1],self.position[2])
+
+    __swig_destroy__ = _planet_coordinate.delete_EuropaFixed
+EuropaFixed.convert_to_planetocentric = new_instancemethod(_planet_coordinate.EuropaFixed_convert_to_planetocentric,None,EuropaFixed)
+EuropaFixed.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.EuropaFixed_reference_surface_intersect_approximate,None,EuropaFixed)
+EuropaFixed_swigregister = _planet_coordinate.EuropaFixed_swigregister
+EuropaFixed_swigregister(EuropaFixed)
+
+class EuropaInertial(geocal_swig.ground_coordinate.CartesianInertial):
+    """
+    This is a Planet Intertial coordinate.
+
+    Note that "Planet" also includes "Moon of planet", basically
+    anything with a NAIF_CODE
+
+    C++ includes: planet_coordinate.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::PlanetInertial< NAIF_CODE >::PlanetInertial(const boost::array< double, 3 > &Pos)
+        Create an PlanetInertial with the given position in meters. 
+        """
+        _planet_coordinate.EuropaInertial_swiginit(self,_planet_coordinate.new_EuropaInertial(*args))
+    def reference_surface_intersect_approximate(self, *args):
+        """
+        virtual boost::shared_ptr<CartesianInertial> GeoCal::PlanetInertial< NAIF_CODE >::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double
+        Height_reference_surface=0) const
+
+        """
+        return _planet_coordinate.EuropaInertial_reference_surface_intersect_approximate(self, *args)
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.position[0],self.position[1],self.position[2])
+
+    __swig_destroy__ = _planet_coordinate.delete_EuropaInertial
+EuropaInertial.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.EuropaInertial_reference_surface_intersect_approximate,None,EuropaInertial)
+EuropaInertial_swigregister = _planet_coordinate.EuropaInertial_swigregister
+EuropaInertial_swigregister(EuropaInertial)
+
+class EuropaPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
+    """
+    This is Planet coordinates as Planetocentric latitude, longitude, and
+    height above the reference ellipsoid.
+
+    This is the planet equivalent of Geocentric ( not Geodetic). Height is
+    relative to the ellipsoid, but latitude is relative to center of
+    planet rather than normal of ellipsoid.
+
+    Note that "Planet" also includes "Moon of planet", basically
+    anything with a NAIF_CODE
+
+    C++ includes: planet_coordinate.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::Planetocentric< NAIF_CODE >::Planetocentric()
+        Default constructor. 
+        """
+        _planet_coordinate.EuropaPlanetocentric_swiginit(self,_planet_coordinate.new_EuropaPlanetocentric(*args))
+    @property
+    def height_reference_surface(self):
+        return self._v_height_reference_surface()
+
+    @property
+    def latitude(self):
+        return self._v_latitude()
+
+    @property
+    def longitude(self):
+        return self._v_longitude()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.latitude,self.longitude,self.height_reference_surface)
+
+    __swig_destroy__ = _planet_coordinate.delete_EuropaPlanetocentric
+EuropaPlanetocentric_swigregister = _planet_coordinate.EuropaPlanetocentric_swigregister
+EuropaPlanetocentric_swigregister(EuropaPlanetocentric)
 
 
 

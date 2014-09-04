@@ -78,3 +78,12 @@ public:
 %template(MarsFixed) GeoCal::PlanetFixed<499>;
 %template(MarsInertial) GeoCal::PlanetInertial<499>;
 %template(MarsPlanetocentric) GeoCal::Planetocentric<499>;
+
+%geocal_shared_ptr(GeoCal::PlanetConstant<502>);
+%geocal_shared_ptr(GeoCal::PlanetFixed<502>);
+%geocal_shared_ptr(GeoCal::PlanetInertial<502>);
+%geocal_shared_ptr(GeoCal::Planetocentric<502>);
+%template(EuropaConstant) GeoCal::PlanetConstant<502>;
+%template(EuropaFixed) GeoCal::PlanetFixed<502>;
+%template(EuropaInertial) GeoCal::PlanetInertial<502>;
+%template(EuropaPlanetocentric) GeoCal::Planetocentric<502>;

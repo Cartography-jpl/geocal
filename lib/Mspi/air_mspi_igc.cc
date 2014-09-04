@@ -67,6 +67,7 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
   }
 
   // Get the time table and L1B1 data.
+  boost::shared_ptr<MeasuredTimeTable> tt;
 #ifdef HAVE_MSPI_SHARED
   MSPI::Shared::L1B1Reader l1b1(L1b1_file_name);
   int refrow = reference_row(Base_directory + "/" + 
@@ -77,7 +78,7 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
   std::vector<Time> tm;
   BOOST_FOREACH(double toff, toffset)
     tm.push_back(tepoch + toff);
-  boost::shared_ptr<MeasuredTimeTable> tt(new MeasuredTimeTable(tm));
+  tt.reset(new MeasuredTimeTable(tm));
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif

@@ -8256,96 +8256,87 @@ mkdir_p='$(MKDIR_P)'
 AMTAR='$${TAR-tar}'
 
 
-# We'll loop over all known methods to create a tar archive until one works.
-_am_tools='gnutar  pax cpio none'
-
-
-
-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking how to create a pax tar archive" >&5
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking how to create a pax tar archive" >&5
 $as_echo_n "checking how to create a pax tar archive... " >&6; }
-
-  # Go ahead even if we have the value already cached.  We do so because we
-  # need to set the values for the 'am__tar' and 'am__untar' variables.
-  _am_tools=${am_cv_prog_tar_pax-$_am_tools}
-
-  for _am_tool in $_am_tools; do
-    case $_am_tool in
-    gnutar)
-      for _am_tar in tar gnutar gtar; do
-        { echo "$as_me:$LINENO: $_am_tar --version" >&5
+# Loop over all known methods to create a tar archive until one works.
+_am_tools='gnutar  pax cpio none'
+_am_tools=${am_cv_prog_tar_pax-$_am_tools}
+# Do not fold the above two line into one, because Tru64 sh and
+# Solaris sh will not grok spaces in the rhs of '-'.
+for _am_tool in $_am_tools
+do
+  case $_am_tool in
+  gnutar)
+    for _am_tar in tar gnutar gtar;
+    do
+      { echo "$as_me:$LINENO: $_am_tar --version" >&5
    ($_am_tar --version) >&5 2>&5
    ac_status=$?
    echo "$as_me:$LINENO: \$? = $ac_status" >&5
    (exit $ac_status); } && break
-      done
-      am__tar="$_am_tar --format=posix -chf - "'"$$tardir"'
-      am__tar_="$_am_tar --format=posix -chf - "'"$tardir"'
-      am__untar="$_am_tar -xf -"
-      ;;
-    plaintar)
-      # Must skip GNU tar: if it does not support --format= it doesn't create
-      # ustar tarball either.
-      (tar --version) >/dev/null 2>&1 && continue
-      am__tar='tar chf - "$$tardir"'
-      am__tar_='tar chf - "$tardir"'
-      am__untar='tar xf -'
-      ;;
-    pax)
-      am__tar='pax -L -x pax -w "$$tardir"'
-      am__tar_='pax -L -x pax -w "$tardir"'
-      am__untar='pax -r'
-      ;;
-    cpio)
-      am__tar='find "$$tardir" -print | cpio -o -H pax -L'
-      am__tar_='find "$tardir" -print | cpio -o -H pax -L'
-      am__untar='cpio -i -H pax -d'
-      ;;
-    none)
-      am__tar=false
-      am__tar_=false
-      am__untar=false
-      ;;
-    esac
+    done
+    am__tar="$_am_tar --format=posix -chf - "'"$$tardir"'
+    am__tar_="$_am_tar --format=posix -chf - "'"$tardir"'
+    am__untar="$_am_tar -xf -"
+    ;;
+  plaintar)
+    # Must skip GNU tar: if it does not support --format= it doesn't create
+    # ustar tarball either.
+    (tar --version) >/dev/null 2>&1 && continue
+    am__tar='tar chf - "$$tardir"'
+    am__tar_='tar chf - "$tardir"'
+    am__untar='tar xf -'
+    ;;
+  pax)
+    am__tar='pax -L -x pax -w "$$tardir"'
+    am__tar_='pax -L -x pax -w "$tardir"'
+    am__untar='pax -r'
+    ;;
+  cpio)
+    am__tar='find "$$tardir" -print | cpio -o -H pax -L'
+    am__tar_='find "$tardir" -print | cpio -o -H pax -L'
+    am__untar='cpio -i -H pax -d'
+    ;;
+  none)
+    am__tar=false
+    am__tar_=false
+    am__untar=false
+    ;;
+  esac
 
-    # If the value was cached, stop now.  We just wanted to have am__tar
-    # and am__untar set.
-    test -n "${am_cv_prog_tar_pax}" && break
+  # If the value was cached, stop now.  We just wanted to have am__tar
+  # and am__untar set.
+  test -n "${am_cv_prog_tar_pax}" && break
 
-    # tar/untar a dummy directory, and stop if the command works.
-    rm -rf conftest.dir
-    mkdir conftest.dir
-    echo GrepMe > conftest.dir/file
-    { echo "$as_me:$LINENO: tardir=conftest.dir && eval $am__tar_ >conftest.tar" >&5
+  # tar/untar a dummy directory, and stop if the command works
+  rm -rf conftest.dir
+  mkdir conftest.dir
+  echo GrepMe > conftest.dir/file
+  { echo "$as_me:$LINENO: tardir=conftest.dir && eval $am__tar_ >conftest.tar" >&5
    (tardir=conftest.dir && eval $am__tar_ >conftest.tar) >&5 2>&5
    ac_status=$?
    echo "$as_me:$LINENO: \$? = $ac_status" >&5
    (exit $ac_status); }
-    rm -rf conftest.dir
-    if test -s conftest.tar; then
-      { echo "$as_me:$LINENO: $am__untar <conftest.tar" >&5
+  rm -rf conftest.dir
+  if test -s conftest.tar; then
+    { echo "$as_me:$LINENO: $am__untar <conftest.tar" >&5
    ($am__untar <conftest.tar) >&5 2>&5
    ac_status=$?
    echo "$as_me:$LINENO: \$? = $ac_status" >&5
    (exit $ac_status); }
-      { echo "$as_me:$LINENO: cat conftest.dir/file" >&5
-   (cat conftest.dir/file) >&5 2>&5
-   ac_status=$?
-   echo "$as_me:$LINENO: \$? = $ac_status" >&5
-   (exit $ac_status); }
-      grep GrepMe conftest.dir/file >/dev/null 2>&1 && break
-    fi
-  done
-  rm -rf conftest.dir
+    grep GrepMe conftest.dir/file >/dev/null 2>&1 && break
+  fi
+done
+rm -rf conftest.dir
 
-  if ${am_cv_prog_tar_pax+:} false; then :
+if ${am_cv_prog_tar_pax+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   am_cv_prog_tar_pax=$_am_tool
 fi
 
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $am_cv_prog_tar_pax" >&5
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $am_cv_prog_tar_pax" >&5
 $as_echo "$am_cv_prog_tar_pax" >&6; }
-
 
 
 
@@ -16709,7 +16700,6 @@ fi
 
 
 
-
 if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then
 	if test -n "$ac_tool_prefix"; then
   # Extract the first word of "${ac_tool_prefix}pkg-config", so it can be a program name with args.
@@ -17012,7 +17002,6 @@ if test -n "$VICAR_RTL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_VICAR_RTL_CFLAGS=`$PKG_CONFIG --cflags "vicar-rtl" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17029,7 +17018,6 @@ if test -n "$VICAR_RTL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_VICAR_RTL_LIBS=`$PKG_CONFIG --libs "vicar-rtl" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17049,9 +17037,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "vicar-rtl" 2>&1`
+	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "vicar-rtl" 2>&1`
         else
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "vicar-rtl" 2>&1`
+	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --print-errors "vicar-rtl" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$VICAR_RTL_PKG_ERRORS" >&5
@@ -17380,7 +17368,6 @@ if test -n "$HDF5_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_CFLAGS=`$PKG_CONFIG --cflags "hdf5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17397,7 +17384,6 @@ if test -n "$HDF5_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_LIBS=`$PKG_CONFIG --libs "hdf5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17417,9 +17403,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdf5" 2>&1`
         else
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdf5" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$HDF5_PKG_ERRORS" >&5
@@ -17550,7 +17536,6 @@ if test -n "$HDFEOS5_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDFEOS5_CFLAGS=`$PKG_CONFIG --cflags "hdfeos5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17567,7 +17552,6 @@ if test -n "$HDFEOS5_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDFEOS5_LIBS=`$PKG_CONFIG --libs "hdfeos5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17587,9 +17571,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdfeos5" 2>&1`
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdfeos5" 2>&1`
         else
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdfeos5" 2>&1`
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdfeos5" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$HDFEOS5_PKG_ERRORS" >&5
@@ -17660,7 +17644,6 @@ if test -n "$HDFEOS5_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDFEOS5_CFLAGS=`$PKG_CONFIG --cflags "hdfeos5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17677,7 +17660,6 @@ if test -n "$HDFEOS5_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDFEOS5_LIBS=`$PKG_CONFIG --libs "hdfeos5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17697,9 +17679,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdfeos5" 2>&1`
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdfeos5" 2>&1`
         else
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdfeos5" 2>&1`
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdfeos5" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$HDFEOS5_PKG_ERRORS" >&5
@@ -18120,7 +18102,6 @@ if test -n "$BLITZ_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_BLITZ_CFLAGS=`$PKG_CONFIG --cflags "blitz" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18137,7 +18118,6 @@ if test -n "$BLITZ_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_BLITZ_LIBS=`$PKG_CONFIG --libs "blitz" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18157,9 +18137,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "blitz" 2>&1`
+	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "blitz" 2>&1`
         else
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "blitz" 2>&1`
+	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --print-errors "blitz" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$BLITZ_PKG_ERRORS" >&5
@@ -18322,7 +18302,6 @@ if test -n "$GSL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GSL_CFLAGS=`$PKG_CONFIG --cflags "gsl" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18339,7 +18318,6 @@ if test -n "$GSL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GSL_LIBS=`$PKG_CONFIG --libs "gsl" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18359,9 +18337,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gsl" 2>&1`
+	        GSL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "gsl" 2>&1`
         else
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gsl" 2>&1`
+	        GSL_PKG_ERRORS=`$PKG_CONFIG --print-errors "gsl" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$GSL_PKG_ERRORS" >&5
@@ -18530,7 +18508,6 @@ if test -n "$SPICE_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_SPICE_CFLAGS=`$PKG_CONFIG --cflags "spice" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18547,7 +18524,6 @@ if test -n "$SPICE_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_SPICE_LIBS=`$PKG_CONFIG --libs "spice" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18567,9 +18543,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "spice" 2>&1`
+	        SPICE_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "spice" 2>&1`
         else
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "spice" 2>&1`
+	        SPICE_PKG_ERRORS=`$PKG_CONFIG --print-errors "spice" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$SPICE_PKG_ERRORS" >&5
@@ -18733,7 +18709,6 @@ if test -n "$HDF5_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_CFLAGS=`$PKG_CONFIG --cflags "hdf5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18750,7 +18725,6 @@ if test -n "$HDF5_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_LIBS=`$PKG_CONFIG --libs "hdf5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18770,9 +18744,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdf5" 2>&1`
         else
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdf5" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$HDF5_PKG_ERRORS" >&5
@@ -19071,7 +19045,6 @@ if test -n "$FFTW_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_FFTW_CFLAGS=`$PKG_CONFIG --cflags "fftw3" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19088,7 +19061,6 @@ if test -n "$FFTW_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_FFTW_LIBS=`$PKG_CONFIG --libs "fftw3" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19108,9 +19080,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "fftw3" 2>&1`
+	        FFTW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "fftw3" 2>&1`
         else
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "fftw3" 2>&1`
+	        FFTW_PKG_ERRORS=`$PKG_CONFIG --print-errors "fftw3" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$FFTW_PKG_ERRORS" >&5
@@ -19277,7 +19249,6 @@ if test -n "$GDAL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GDAL_CFLAGS=`$PKG_CONFIG --cflags "gdal" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19294,7 +19265,6 @@ if test -n "$GDAL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GDAL_LIBS=`$PKG_CONFIG --libs "gdal" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19314,9 +19284,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gdal" 2>&1`
+	        GDAL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "gdal" 2>&1`
         else
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gdal" 2>&1`
+	        GDAL_PKG_ERRORS=`$PKG_CONFIG --print-errors "gdal" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$GDAL_PKG_ERRORS" >&5
@@ -19854,7 +19824,6 @@ if test -n "$CARTO_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_CARTO_CFLAGS=`$PKG_CONFIG --cflags "carto" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19871,7 +19840,6 @@ if test -n "$CARTO_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_CARTO_LIBS=`$PKG_CONFIG --libs "carto" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19891,9 +19859,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "carto" 2>&1`
+	        CARTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "carto" 2>&1`
         else
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "carto" 2>&1`
+	        CARTO_PKG_ERRORS=`$PKG_CONFIG --print-errors "carto" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$CARTO_PKG_ERRORS" >&5
@@ -23181,7 +23149,7 @@ $as_echo X"$mf" |
     DEPDIR=`sed -n 's/^DEPDIR = //p' < "$mf"`
     test -z "$DEPDIR" && continue
     am__include=`sed -n 's/^am__include = //p' < "$mf"`
-    test -z "$am__include" && continue
+    test -z "am__include" && continue
     am__quote=`sed -n 's/^am__quote = //p' < "$mf"`
     # Find all dependency output files, they are included files with
     # $(DEPDIR) in their names.  We invoke sed twice because it is the

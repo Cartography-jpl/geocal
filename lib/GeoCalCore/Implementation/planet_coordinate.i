@@ -51,12 +51,30 @@ public:
   %pickle_init(1, self.latitude, self.longitude, self.height_reference_surface)
 };
 
+template<int NAIF_CODE> class PlanetInertial : public CartesianInertial {
+public:
+  PlanetInertial();
+  PlanetInertial(double X, double Y, double Z);
+  PlanetInertial(const boost::array<double, 3>& Pos);
+  virtual boost::shared_ptr<CartesianFixed> convert_to_cf(const Time& T) 
+    const;
+  virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const;
+  virtual boost::shared_ptr<CartesianInertial> 
+    create(boost::array<double, 3> P) const ;
+  virtual boost::shared_ptr<CartesianInertial>
+  reference_surface_intersect_approximate(
+  const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
+    const;
+  %pickle_init(1, self.position[0], self.position[1], self.position[2])
+};
 
 }
 
 %geocal_shared_ptr(GeoCal::PlanetConstant<499>);
 %geocal_shared_ptr(GeoCal::PlanetFixed<499>);
+%geocal_shared_ptr(GeoCal::PlanetInertial<499>);
 %geocal_shared_ptr(GeoCal::Planetocentric<499>);
 %template(MarsConstant) GeoCal::PlanetConstant<499>;
 %template(MarsFixed) GeoCal::PlanetFixed<499>;
+%template(MarsInertial) GeoCal::PlanetInertial<499>;
 %template(MarsPlanetocentric) GeoCal::Planetocentric<499>;

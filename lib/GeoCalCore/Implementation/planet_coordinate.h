@@ -178,21 +178,19 @@ public:
   This is a Planet Intertial coordinate.
 *******************************************************************/
 
-class MarsInertial : public CartesianInertial {
+template<int NAIF_CODE> class PlanetInertial : public CartesianInertial {
 public:
-  enum { NAIF_CODE = 499 };
-
 //-----------------------------------------------------------------------
 /// Default constructor, doesn't initialize position.
 //-----------------------------------------------------------------------
 
-  MarsInertial() {}
+  PlanetInertial() {}
 
 //-----------------------------------------------------------------------
-/// Make an MarsInertial with the given position, in meters.
+/// Make an PlanetInertial with the given position, in meters.
 //-----------------------------------------------------------------------
 
-  MarsInertial(double X, double Y, double Z)
+  PlanetInertial(double X, double Y, double Z)
   {
     position[0] = X;
     position[1] = Y;
@@ -200,10 +198,10 @@ public:
   }
 
 //-----------------------------------------------------------------------
-/// Create an MarsInertial with the given position in meters.
+/// Create an PlanetInertial with the given position in meters.
 //-----------------------------------------------------------------------
 
-  MarsInertial(const boost::array<double, 3>& Pos)
+  PlanetInertial(const boost::array<double, 3>& Pos)
   {
     position = Pos;
   }
@@ -212,7 +210,7 @@ public:
 /// Destructor.
 //-----------------------------------------------------------------------
 
-  virtual ~MarsInertial() {}
+  virtual ~PlanetInertial() {}
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf(const Time& T) 
     const
   {
@@ -240,7 +238,8 @@ public:
 
   virtual boost::shared_ptr<CartesianInertial> 
     create(boost::array<double, 3> P) const 
-  { return boost::shared_ptr<CartesianInertial>(new MarsInertial(P)); }
+  { return boost::shared_ptr<CartesianInertial>
+      (new PlanetInertial<NAIF_CODE>(P)); }
 
   virtual boost::shared_ptr<CartesianInertial>
   reference_surface_intersect_approximate(
@@ -394,7 +393,7 @@ private:
 template<int NAIF_CODE> inline boost::shared_ptr<CartesianInertial> 
 PlanetFixed<NAIF_CODE>::convert_to_ci(const Time& T) const
 {
-  boost::shared_ptr<CartesianInertial> res(new MarsInertial);
+  boost::shared_ptr<CartesianInertial> res(new PlanetInertial<NAIF_CODE>);
   CartesianFixed::toolkit_coordinate_interface->
     to_inertial((int) NAIF_CODE, T, *this, *res);
   return res;
@@ -415,6 +414,7 @@ PlanetFixed<NAIF_CODE>::convert_to_planetocentric() const
 typedef PlanetConstant<499> MarsConstant;
 typedef Planetocentric<499> MarsPlanetocentric;
 typedef PlanetFixed<499> MarsFixed;
+typedef PlanetInertial<499> MarsInertial;
 
 
 }

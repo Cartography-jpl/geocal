@@ -236,6 +236,40 @@ MarsFixed.reference_surface_intersect_approximate = new_instancemethod(_planet_c
 MarsFixed_swigregister = _planet_coordinate.MarsFixed_swigregister
 MarsFixed_swigregister(MarsFixed)
 
+class MarsInertial(geocal_swig.ground_coordinate.CartesianInertial):
+    """
+    This is a Planet Intertial coordinate.
+
+    C++ includes: planet_coordinate.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::PlanetInertial< NAIF_CODE >::PlanetInertial(const boost::array< double, 3 > &Pos)
+        Create an PlanetInertial with the given position in meters. 
+        """
+        _planet_coordinate.MarsInertial_swiginit(self,_planet_coordinate.new_MarsInertial(*args))
+    def reference_surface_intersect_approximate(self, *args):
+        """
+        virtual boost::shared_ptr<CartesianInertial> GeoCal::PlanetInertial< NAIF_CODE >::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double
+        Height_reference_surface=0) const
+
+        """
+        return _planet_coordinate.MarsInertial_reference_surface_intersect_approximate(self, *args)
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.position[0],self.position[1],self.position[2])
+
+    __swig_destroy__ = _planet_coordinate.delete_MarsInertial
+MarsInertial.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.MarsInertial_reference_surface_intersect_approximate,None,MarsInertial)
+MarsInertial_swigregister = _planet_coordinate.MarsInertial_swigregister
+MarsInertial_swigregister(MarsInertial)
+
 class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     """
     This is Planet coordinates as Planetocentric latitude, longitude, and

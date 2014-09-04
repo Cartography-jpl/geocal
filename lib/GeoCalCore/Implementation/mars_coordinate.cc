@@ -8,7 +8,8 @@ using namespace GeoCal;
 
 inline double sqr(double x) { return x * x; }
 
-SpicePlanetConstant MarsConstant::h(MarsConstant::NAIF_CODE);
+// Constants for mars
+template<> SpicePlanetConstant MarsConstant::h(MarsConstant::NAIF_CODE);
 
 //-----------------------------------------------------------------------
 /// Create MarsFixed from GroundCoordinate
@@ -53,7 +54,7 @@ double MarsFixed::height_reference_surface() const
 
 double MarsFixed::min_radius_reference_surface() const
 {
-  return std::min(MarsConstant::planet_a(), MarsConstant::planet_b());
+  return std::min(PlanetConstant<NAIF_CODE>::planet_a(), PlanetConstant<NAIF_CODE>::planet_b());
 }
 
 //-----------------------------------------------------------------------
@@ -84,8 +85,8 @@ MarsFixed::reference_surface_intersect_approximate
 (const CartesianFixedLookVector& Cl, 
  double Height_reference_surface) const
 {
-  double aph = MarsConstant::planet_a() + Height_reference_surface;
-  double bph = MarsConstant::planet_b() + Height_reference_surface;
+  double aph = PlanetConstant<NAIF_CODE>::planet_a() + Height_reference_surface;
+  double bph = PlanetConstant<NAIF_CODE>::planet_b() + Height_reference_surface;
   boost::array<double, 3> dirci;
   dirci[0] = Cl.look_vector[0]/ aph;
   dirci[1] = Cl.look_vector[1]/ aph;
@@ -133,8 +134,8 @@ MarsInertial::reference_surface_intersect_approximate
 (const CartesianInertialLookVector& Cl, 
  double Height_reference_surface) const
 {
-  double aph = MarsConstant::planet_a() + Height_reference_surface;
-  double bph = MarsConstant::planet_b() + Height_reference_surface;
+  double aph = PlanetConstant<NAIF_CODE>::planet_a() + Height_reference_surface;
+  double bph = PlanetConstant<NAIF_CODE>::planet_b() + Height_reference_surface;
   boost::array<double, 3> dirci;
   dirci[0] = Cl.look_vector[0]/ aph;
   dirci[1] = Cl.look_vector[1]/ aph;
@@ -205,6 +206,6 @@ void MarsPlanetocentric::print(std::ostream& Os) const
 
 double MarsPlanetocentric::planet_radius(double Latitude_radians)const
 {
-  return MarsConstant::planet_b() / 
-    sqrt(1 - MarsConstant::planet_esq() * sqr(cos(Latitude_radians)));
+  return PlanetConstant<NAIF_CODE>::planet_b() / 
+    sqrt(1 - PlanetConstant<NAIF_CODE>::planet_esq() * sqr(cos(Latitude_radians)));
 }

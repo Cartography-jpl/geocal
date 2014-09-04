@@ -6,22 +6,17 @@
 namespace GeoCal {
 class MarsPlanetocentric;
 
-
-/****************************************************************//**
-  Constants for the planet. Note that if the planet is actually
-  described as triaxial we average the 2 equatorial radius. We don't
-  support triaxial model. We could extend the code for this if 
-  needed.
-*******************************************************************/
-class MarsConstant {
+template<int NCODE> class PlanetConstant {
 public:
-  enum { NAIF_CODE = 499 };
+  enum {NAIF_CODE = NCODE };
   static double planet_a() {return h.planet_a();}
   static double planet_b() {return h.planet_b(); }
   static double planet_esq() {return h.planet_esq(); }
 private:
   static SpicePlanetConstant h;
 };
+
+typedef PlanetConstant<499> MarsConstant;
 
 /****************************************************************//**
   This is a ground coordinate, expressed in fixed Mars coordinates.
@@ -181,6 +176,7 @@ public:
 
 class MarsPlanetocentric : public GroundCoordinate {
 public:
+  enum { NAIF_CODE = 499 };
   MarsPlanetocentric(const GroundCoordinate& Gc);
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   virtual void print(std::ostream& Os) const;

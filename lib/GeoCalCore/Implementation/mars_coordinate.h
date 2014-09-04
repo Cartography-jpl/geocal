@@ -19,13 +19,38 @@ private:
   static const char* name;
 };
 
+class MarsInertial;
+
 /****************************************************************//**
   This is a ground coordinate, expressed in fixed Mars coordinates.
 *******************************************************************/
 class MarsFixed : public CartesianFixed {
 public:
   enum { NAIF_CODE = 499 };
-  MarsFixed(const GroundCoordinate& Gc);
+
+//-----------------------------------------------------------------------
+/// Create MarsFixed from GroundCoordinate
+//-----------------------------------------------------------------------
+
+  MarsFixed(const GroundCoordinate& Gc)
+  {
+    if(const MarsFixed* g = 
+       dynamic_cast<const MarsFixed*>(&Gc)) {
+      *this = *g;
+      return;
+    }
+    boost::shared_ptr<CartesianFixed> cf = Gc.convert_to_cf();
+    boost::shared_ptr<MarsFixed> mf = 
+      boost::dynamic_pointer_cast<MarsFixed>(cf);
+    if(!mf) {
+      Exception e;
+      e << "Cannot convert ground coordinate to "
+	<< PlanetConstant<NAIF_CODE>::planet_name()<< "Fixed\n"
+	<< "Coordinate: " << Gc << "\n";
+      throw e;
+    }
+    position = mf->position;
+  }
 
 //-----------------------------------------------------------------------
 /// Make an MarsFixed with the given position, in meters.
@@ -81,16 +106,76 @@ public:
 							   T, Ci_to_cf); 
   }
 
+//-----------------------------------------------------------------------
+/// Height above the reference ellipsoid.
+//-----------------------------------------------------------------------
   virtual double height_reference_surface() const;
-  virtual double min_radius_reference_surface() const;
-  virtual double latitude() const;
-  virtual double longitude() const;
+  virtual double min_radius_reference_surface() const
+  {
+    return std::min(PlanetConstant<NAIF_CODE>::planet_a(), 
+		    PlanetConstant<NAIF_CODE>::planet_b());
+  }
+
+//-----------------------------------------------------------------------
+/// Return latitude in degrees. This is the Planetocentric. This is 
+/// the planet equivalent of Geocentric, so relative to the center
+/// (*not* normal to ellipsoid like Geodetic).
+//-----------------------------------------------------------------------
+
+  virtual double latitude() const
+  {
+    return atan2(position[2],
+		 sqrt(position[0] * position[0] + position[1] * position[1]))
+      * Constant::rad_to_deg;
+  }
+
+//-----------------------------------------------------------------------
+/// Return longitude in degrees. This is the Planetocentric (which
+/// actually isn't any different than Planetographic for longitude).
+//-----------------------------------------------------------------------
+
+  virtual double longitude() const
+  {
+    return atan2(position[1], position[0]) * Constant::rad_to_deg;
+  }
+
   Planetocentric<NAIF_CODE> convert_to_planetocentric() const;
   virtual boost::shared_ptr<CartesianFixed>
   reference_surface_intersect_approximate(
-  const CartesianFixedLookVector& Cl, double Height_reference_surface = 0) 
-  const;
-  virtual void print(std::ostream& Os) const;
+  const CartesianFixedLookVector& Cl, double Height_reference_surface = 0)
+  const
+  {
+    double aph = PlanetConstant<NAIF_CODE>::planet_a() + 
+      Height_reference_surface;
+    double bph = PlanetConstant<NAIF_CODE>::planet_b() + 
+      Height_reference_surface;
+    boost::array<double, 3> dirci;
+    dirci[0] = Cl.look_vector[0]/ aph;
+    dirci[1] = Cl.look_vector[1]/ aph;
+    dirci[2] = Cl.look_vector[2]/ bph;
+    double t = norm(dirci);
+    dirci[0] /= t;
+    dirci[1] /= t;
+    dirci[2] /= t;
+    boost::array<double, 3> pci;
+    pci[0] = position[0] / aph;
+    pci[1] = position[1] / aph;
+    pci[2] = position[2] / bph;
+    double ddotp = dot(dirci, pci);
+    double dl = -ddotp - sqrt(ddotp * ddotp + (1 - dot(pci, pci)));
+    boost::array<double, 3> res;
+    res[0] = (pci[0] + dirci[0] * dl) * aph;
+    res[1] = (pci[1] + dirci[1] * dl) * aph;
+    res[2] = (pci[2] + dirci[2] * dl) * bph;
+    return create(res);
+  }
+
+  virtual void print(std::ostream& Os) const
+  {
+    Os << PlanetConstant<NAIF_CODE>::planet_name()
+       << "Fixed (" << position[0] << " m, " << position[1] << " m, "
+       << position[2] << "m)";
+  }
 };
 
 /****************************************************************//**
@@ -273,6 +358,26 @@ private:
       sqrt(1 - PlanetConstant<NAIF_CODE>::planet_esq() * clat * clat);
   }
 };
+
+inline boost::shared_ptr<CartesianInertial> 
+MarsFixed::convert_to_ci(const Time& T) const
+{
+  boost::shared_ptr<CartesianInertial> res(new MarsInertial);
+  CartesianFixed::toolkit_coordinate_interface->
+    to_inertial((int) NAIF_CODE, T, *this, *res);
+  return res;
+}
+
+inline double MarsFixed::height_reference_surface() const
+{
+  return Planetocentric<NAIF_CODE>(*this).height_reference_surface();
+}
+
+inline Planetocentric<MarsFixed::NAIF_CODE> MarsFixed::convert_to_planetocentric() const
+{
+  return Planetocentric<NAIF_CODE>(latitude(), longitude(), 
+				   height_reference_surface());
+}
 
 typedef PlanetConstant<499> MarsConstant;
 typedef Planetocentric<499> MarsPlanetocentric;

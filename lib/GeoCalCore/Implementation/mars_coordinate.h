@@ -24,24 +24,22 @@ class MarsInertial;
 /****************************************************************//**
   This is a ground coordinate, expressed in fixed Mars coordinates.
 *******************************************************************/
-class MarsFixed : public CartesianFixed {
+template<int NAIF_CODE> class PlanetFixed : public CartesianFixed {
 public:
-  enum { NAIF_CODE = 499 };
-
 //-----------------------------------------------------------------------
-/// Create MarsFixed from GroundCoordinate
+/// Create PlanetFixed from GroundCoordinate
 //-----------------------------------------------------------------------
 
-  MarsFixed(const GroundCoordinate& Gc)
+  PlanetFixed(const GroundCoordinate& Gc)
   {
-    if(const MarsFixed* g = 
-       dynamic_cast<const MarsFixed*>(&Gc)) {
+    if(const PlanetFixed<NAIF_CODE>* g = 
+       dynamic_cast<const PlanetFixed<NAIF_CODE>*>(&Gc)) {
       *this = *g;
       return;
     }
     boost::shared_ptr<CartesianFixed> cf = Gc.convert_to_cf();
-    boost::shared_ptr<MarsFixed> mf = 
-      boost::dynamic_pointer_cast<MarsFixed>(cf);
+    boost::shared_ptr<PlanetFixed<NAIF_CODE> > mf = 
+      boost::dynamic_pointer_cast<PlanetFixed<NAIF_CODE> >(cf);
     if(!mf) {
       Exception e;
       e << "Cannot convert ground coordinate to "
@@ -53,10 +51,10 @@ public:
   }
 
 //-----------------------------------------------------------------------
-/// Make an MarsFixed with the given position, in meters.
+/// Make an PlanetFixed with the given position, in meters.
 //-----------------------------------------------------------------------
 
-  MarsFixed(double X, double Y, double Z)
+  PlanetFixed(double X, double Y, double Z)
   {
     position[0] = X;
     position[1] = Y;
@@ -64,10 +62,10 @@ public:
   }
 
 //-----------------------------------------------------------------------
-/// Create an MarsFixed with the given position in meters.
+/// Create an PlanetFixed with the given position in meters.
 //-----------------------------------------------------------------------
 
-  MarsFixed(const boost::array<double, 3>& Pos)
+  PlanetFixed(const boost::array<double, 3>& Pos)
   {
     position = Pos;
   }
@@ -76,28 +74,28 @@ public:
 /// Default constructor.
 //-----------------------------------------------------------------------
 
-  MarsFixed() {}
+  PlanetFixed() {}
 
 //-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
 
-  virtual ~MarsFixed() {}
+  virtual ~PlanetFixed() {}
 
   virtual boost::shared_ptr<CartesianInertial> 
   convert_to_ci(const Time& T) const;
 
 //-----------------------------------------------------------------------
-/// Create an instance of MarsFixed.
+/// Create an instance of PlanetFixed.
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<CartesianFixed> 
   create(boost::array<double, 3> P) const
-  { return boost::shared_ptr<CartesianFixed>(new MarsFixed(P)); }
+  { return boost::shared_ptr<CartesianFixed>(new PlanetFixed<NAIF_CODE>(P)); }
 
 //-----------------------------------------------------------------------
-/// Matrix to convert MarsInertial to MarsFixed. The transpose of this
-/// will convert MarsFixed to MarsInertial.
+/// Matrix to convert PlanetInertial to PlanetFixed. The transpose of this
+/// will convert PlanetFixed to PlanetInertial.
 //-----------------------------------------------------------------------
 
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
@@ -221,9 +219,9 @@ public:
     const;
 
 //-----------------------------------------------------------------------
-/// Matrix to convert MarsInertial to MarsFixed. The transpose of this
+/// Matrix to convert PlanetInertial to PlanetFixed. The transpose of this
 /// will convert 
-/// MarsFixed to MarsInertial.
+/// PlanetFixed to PlanetInertial.
 //-----------------------------------------------------------------------
 
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
@@ -273,7 +271,7 @@ public:
       *this = *g;
       return;
     }
-    MarsFixed mf(Gc);
+    PlanetFixed<NAIF_CODE> mf(Gc);
     lon_ = mf.longitude();
     lat_ = mf.latitude();
     height_ellipsoid_ = 
@@ -285,9 +283,9 @@ public:
     double lon = lon_ * Constant::deg_to_rad;
     double r = planet_radius(lat) + height_ellipsoid_;
     return boost::shared_ptr<CartesianFixed>
-      (new MarsFixed(r * cos(lat) * cos(lon),
-		     r * cos(lat) * sin(lon),
-		     r * sin(lat)));
+      (new PlanetFixed<NAIF_CODE>(r * cos(lat) * cos(lon),
+				  r * cos(lat) * sin(lon),
+				  r * sin(lat)));
   }
   virtual void print(std::ostream& Os) const
   {
@@ -359,8 +357,8 @@ private:
   }
 };
 
-inline boost::shared_ptr<CartesianInertial> 
-MarsFixed::convert_to_ci(const Time& T) const
+template<int NAIF_CODE> inline boost::shared_ptr<CartesianInertial> 
+PlanetFixed<NAIF_CODE>::convert_to_ci(const Time& T) const
 {
   boost::shared_ptr<CartesianInertial> res(new MarsInertial);
   CartesianFixed::toolkit_coordinate_interface->
@@ -368,12 +366,13 @@ MarsFixed::convert_to_ci(const Time& T) const
   return res;
 }
 
-inline double MarsFixed::height_reference_surface() const
+template<int NAIF_CODE> inline double PlanetFixed<NAIF_CODE>::height_reference_surface() const
 {
   return Planetocentric<NAIF_CODE>(*this).height_reference_surface();
 }
 
-inline Planetocentric<MarsFixed::NAIF_CODE> MarsFixed::convert_to_planetocentric() const
+template<int NAIF_CODE> inline Planetocentric<NAIF_CODE> 
+PlanetFixed<NAIF_CODE>::convert_to_planetocentric() const
 {
   return Planetocentric<NAIF_CODE>(latitude(), longitude(), 
 				   height_reference_surface());
@@ -381,6 +380,7 @@ inline Planetocentric<MarsFixed::NAIF_CODE> MarsFixed::convert_to_planetocentric
 
 typedef PlanetConstant<499> MarsConstant;
 typedef Planetocentric<499> MarsPlanetocentric;
+typedef PlanetFixed<499> MarsFixed;
 
 
 }

@@ -57,7 +57,7 @@ if test "x$want_boost" = "xyes"; then
             if test "$build_boost" = "yes"; then
                BOOST_LIBDIR="$ac_boost_path/lib"
                BOOST_REGEX_LIB="-lboost_regex"
-               BOOST_FILESYSTEM_LIB="-lboost_filesystem"
+               BOOST_FILESYSTEM_LIB="-lboost_filesystem -lboost_system"
                BOOST_DATETIME_LIB="-lboost_date_time"
                BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                boost_done=yes
@@ -68,7 +68,7 @@ if test "x$want_boost" = "xyes"; then
                    if test -e "$ac_boost_lib_base/$ac_boost_lib"; then
                        BOOST_LIBDIR="$ac_boost_lib_base"
                        BOOST_REGEX_LIB="-lboost_regex"
-		       BOOST_FILESYSTEM_LIB="-lboost_filesystem"
+		       BOOST_FILESYSTEM_LIB="-lboost_filesystem -lboost_system"
                        BOOST_DATETIME_LIB="-lboost_date_time"
 		       BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                        boost_done=yes
@@ -81,7 +81,7 @@ if test "x$want_boost" = "xyes"; then
                    if test -e "$ac_boost_lib_base/$ac_boost_lib"; then
                        BOOST_LIBDIR="$ac_boost_lib_base"
                        BOOST_REGEX_LIB="-lboost_regex-mt"
-		       BOOST_FILESYSTEM_LIB="-lboost_filesystem-mt"
+		       BOOST_FILESYSTEM_LIB="-lboost_filesystem-mt -lboost_system_mt"
                        BOOST_DATETIME_LIB="-lboost_date_time-mt"
                        BOOST_IOSTREAMS_LIB="-lboost_iostreams-mt"
                        boost_done=yes

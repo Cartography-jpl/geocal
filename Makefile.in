@@ -690,7 +690,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srcimplementation@/pan_sharpen.cc \
 	@srcimplementation@/rpc_image_ground_connection.cc \
 	@srcimplementation@/eci_tod.cc \
-	@srcimplementation@/mars_coordinate.cc \
+	@srcimplementation@/planet_coordinate.cc \
 	@srcimplementation@/eci_tod_burl.cc \
 	@srcimplementation@/quaternion_camera.cc \
 	@srcimplementation@/refraction.cc \
@@ -809,7 +809,7 @@ am_libgeocal_la_OBJECTS =  \
 	@srcimplementation@/libgeocal_la-pan_sharpen.lo \
 	@srcimplementation@/libgeocal_la-rpc_image_ground_connection.lo \
 	@srcimplementation@/libgeocal_la-eci_tod.lo \
-	@srcimplementation@/libgeocal_la-mars_coordinate.lo \
+	@srcimplementation@/libgeocal_la-planet_coordinate.lo \
 	$(am__objects_17) \
 	@srcimplementation@/libgeocal_la-quaternion_camera.lo \
 	@srcimplementation@/libgeocal_la-refraction.lo \
@@ -919,7 +919,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/rpc_image_ground_connection_test.cc \
 	@srcimplementation@/ipi_image_ground_connection_test.cc \
 	@srcimplementation@/eci_tod_test.cc \
-	@srcimplementation@/mars_coordinate_test.cc \
+	@srcimplementation@/planet_coordinate_test.cc \
 	@srcimplementation@/eci_tod_burl_test.cc \
 	@srcimplementation@/quaternion_camera_test.cc \
 	@srcimplementation@/refraction_test.cc \
@@ -1041,7 +1041,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-rpc_image_ground_connection_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-ipi_image_ground_connection_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-eci_tod_test.$(OBJEXT) \
-	@srcimplementation@/geocal_test_all-mars_coordinate_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-planet_coordinate_test.$(OBJEXT) \
 	$(am__objects_26) \
 	@srcimplementation@/geocal_test_all-quaternion_camera_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-refraction_test.$(OBJEXT) \
@@ -1265,7 +1265,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcimplementation@/rpc_image_ground_connection.h \
 	@srcimplementation@/ipi_image_ground_connection.h \
 	@srcimplementation@/eci_tod.h \
-	@srcimplementation@/mars_coordinate.h \
+	@srcimplementation@/planet_coordinate.h \
 	@srcimplementation@/eci_tod_burl.h \
 	@srcimplementation@/quaternion_camera.h \
 	@srcimplementation@/refraction.h \
@@ -1953,7 +1953,7 @@ libgeocal_la_SOURCES = @srcsupport@/boost/backtrace.cpp \
 	@srcimplementation@/pan_sharpen.cc \
 	@srcimplementation@/rpc_image_ground_connection.cc \
 	@srcimplementation@/eci_tod.cc \
-	@srcimplementation@/mars_coordinate.cc $(am__append_20) \
+	@srcimplementation@/planet_coordinate.cc $(am__append_20) \
 	@srcimplementation@/quaternion_camera.cc \
 	@srcimplementation@/refraction.cc \
 	@srcimplementation@/ray_intersect.cc \
@@ -2188,7 +2188,7 @@ geocalinc_HEADERS = @srcsupport@/constant.h \
 	@srcimplementation@/rpc_image_ground_connection.h \
 	@srcimplementation@/ipi_image_ground_connection.h \
 	@srcimplementation@/eci_tod.h \
-	@srcimplementation@/mars_coordinate.h $(am__append_19) \
+	@srcimplementation@/planet_coordinate.h $(am__append_19) \
 	@srcimplementation@/quaternion_camera.h \
 	@srcimplementation@/refraction.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
@@ -2270,7 +2270,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/rpc_image_ground_connection_test.cc \
 	@srcimplementation@/ipi_image_ground_connection_test.cc \
 	@srcimplementation@/eci_tod_test.cc \
-	@srcimplementation@/mars_coordinate_test.cc $(am__append_28) \
+	@srcimplementation@/planet_coordinate_test.cc $(am__append_28) \
 	@srcimplementation@/quaternion_camera_test.cc \
 	@srcimplementation@/refraction_test.cc \
 	@srcimplementation@/orbit_data_image_ground_connection_test.cc \
@@ -3038,7 +3038,7 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcimplementation@/libgeocal_la-eci_tod.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
-@srcimplementation@/libgeocal_la-mars_coordinate.lo:  \
+@srcimplementation@/libgeocal_la-planet_coordinate.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-eci_tod_burl.lo:  \
@@ -3475,7 +3475,7 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-eci_tod_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
-@srcimplementation@/geocal_test_all-mars_coordinate_test.$(OBJEXT):  \
+@srcimplementation@/geocal_test_all-planet_coordinate_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-eci_tod_burl_test.$(OBJEXT):  \
@@ -3752,13 +3752,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-magnify_bilinear_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-magnify_replicate_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-map_reprojected_image_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-mars_coordinate_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-memory_dem_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ogr_coordinate_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_data_image_ground_connection_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-pan_sharpen_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-phase_correlation_matcher_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-quadratic_geometric_model_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-quaternion_camera_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_averaged_test.Po@am__quote@
@@ -3792,12 +3792,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-magnify_bilinear.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-magnify_replicate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-map_reprojected_image.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-mars_coordinate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-memory_multi_band.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ogr_coordinate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_quaternion_list.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-pan_sharpen.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-phase_correlation_matcher.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-planet_coordinate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-pyramid_image_matcher.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-quadratic_geometric_model.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-quaternion_camera.Plo@am__quote@
@@ -5476,12 +5476,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-eci_tod.lo `test -f '@srcimplementation@/eci_tod.cc' || echo '$(srcdir)/'`@srcimplementation@/eci_tod.cc
 
-@srcimplementation@/libgeocal_la-mars_coordinate.lo: @srcimplementation@/mars_coordinate.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-mars_coordinate.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-mars_coordinate.Tpo -c -o @srcimplementation@/libgeocal_la-mars_coordinate.lo `test -f '@srcimplementation@/mars_coordinate.cc' || echo '$(srcdir)/'`@srcimplementation@/mars_coordinate.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-mars_coordinate.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-mars_coordinate.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/mars_coordinate.cc' object='@srcimplementation@/libgeocal_la-mars_coordinate.lo' libtool=yes @AMDEPBACKSLASH@
+@srcimplementation@/libgeocal_la-planet_coordinate.lo: @srcimplementation@/planet_coordinate.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-planet_coordinate.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-planet_coordinate.Tpo -c -o @srcimplementation@/libgeocal_la-planet_coordinate.lo `test -f '@srcimplementation@/planet_coordinate.cc' || echo '$(srcdir)/'`@srcimplementation@/planet_coordinate.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-planet_coordinate.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-planet_coordinate.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/planet_coordinate.cc' object='@srcimplementation@/libgeocal_la-planet_coordinate.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-mars_coordinate.lo `test -f '@srcimplementation@/mars_coordinate.cc' || echo '$(srcdir)/'`@srcimplementation@/mars_coordinate.cc
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-planet_coordinate.lo `test -f '@srcimplementation@/planet_coordinate.cc' || echo '$(srcdir)/'`@srcimplementation@/planet_coordinate.cc
 
 @srcimplementation@/libgeocal_la-eci_tod_burl.lo: @srcimplementation@/eci_tod_burl.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-eci_tod_burl.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod_burl.Tpo -c -o @srcimplementation@/libgeocal_la-eci_tod_burl.lo `test -f '@srcimplementation@/eci_tod_burl.cc' || echo '$(srcdir)/'`@srcimplementation@/eci_tod_burl.cc
@@ -6827,19 +6827,19 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-eci_tod_test.obj `if test -f '@srcimplementation@/eci_tod_test.cc'; then $(CYGPATH_W) '@srcimplementation@/eci_tod_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/eci_tod_test.cc'; fi`
 
-@srcimplementation@/geocal_test_all-mars_coordinate_test.o: @srcimplementation@/mars_coordinate_test.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-mars_coordinate_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-mars_coordinate_test.Tpo -c -o @srcimplementation@/geocal_test_all-mars_coordinate_test.o `test -f '@srcimplementation@/mars_coordinate_test.cc' || echo '$(srcdir)/'`@srcimplementation@/mars_coordinate_test.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-mars_coordinate_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-mars_coordinate_test.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/mars_coordinate_test.cc' object='@srcimplementation@/geocal_test_all-mars_coordinate_test.o' libtool=no @AMDEPBACKSLASH@
+@srcimplementation@/geocal_test_all-planet_coordinate_test.o: @srcimplementation@/planet_coordinate_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-planet_coordinate_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Tpo -c -o @srcimplementation@/geocal_test_all-planet_coordinate_test.o `test -f '@srcimplementation@/planet_coordinate_test.cc' || echo '$(srcdir)/'`@srcimplementation@/planet_coordinate_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/planet_coordinate_test.cc' object='@srcimplementation@/geocal_test_all-planet_coordinate_test.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-mars_coordinate_test.o `test -f '@srcimplementation@/mars_coordinate_test.cc' || echo '$(srcdir)/'`@srcimplementation@/mars_coordinate_test.cc
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-planet_coordinate_test.o `test -f '@srcimplementation@/planet_coordinate_test.cc' || echo '$(srcdir)/'`@srcimplementation@/planet_coordinate_test.cc
 
-@srcimplementation@/geocal_test_all-mars_coordinate_test.obj: @srcimplementation@/mars_coordinate_test.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-mars_coordinate_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-mars_coordinate_test.Tpo -c -o @srcimplementation@/geocal_test_all-mars_coordinate_test.obj `if test -f '@srcimplementation@/mars_coordinate_test.cc'; then $(CYGPATH_W) '@srcimplementation@/mars_coordinate_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/mars_coordinate_test.cc'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-mars_coordinate_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-mars_coordinate_test.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/mars_coordinate_test.cc' object='@srcimplementation@/geocal_test_all-mars_coordinate_test.obj' libtool=no @AMDEPBACKSLASH@
+@srcimplementation@/geocal_test_all-planet_coordinate_test.obj: @srcimplementation@/planet_coordinate_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-planet_coordinate_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Tpo -c -o @srcimplementation@/geocal_test_all-planet_coordinate_test.obj `if test -f '@srcimplementation@/planet_coordinate_test.cc'; then $(CYGPATH_W) '@srcimplementation@/planet_coordinate_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/planet_coordinate_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/planet_coordinate_test.cc' object='@srcimplementation@/geocal_test_all-planet_coordinate_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-mars_coordinate_test.obj `if test -f '@srcimplementation@/mars_coordinate_test.cc'; then $(CYGPATH_W) '@srcimplementation@/mars_coordinate_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/mars_coordinate_test.cc'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-planet_coordinate_test.obj `if test -f '@srcimplementation@/planet_coordinate_test.cc'; then $(CYGPATH_W) '@srcimplementation@/planet_coordinate_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/planet_coordinate_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-eci_tod_burl_test.o: @srcimplementation@/eci_tod_burl_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-eci_tod_burl_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-eci_tod_burl_test.Tpo -c -o @srcimplementation@/geocal_test_all-eci_tod_burl_test.o `test -f '@srcimplementation@/eci_tod_burl_test.cc' || echo '$(srcdir)/'`@srcimplementation@/eci_tod_burl_test.cc

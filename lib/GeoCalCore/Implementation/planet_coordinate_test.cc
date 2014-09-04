@@ -1,5 +1,5 @@
 #include "unit_test_support.h"
-#include "mars_coordinate.h"
+#include "planet_coordinate.h"
 #include "geocal_time.h"
 #include "spice_helper.h"
 

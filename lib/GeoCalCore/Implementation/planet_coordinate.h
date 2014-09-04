@@ -1,5 +1,5 @@
-#ifndef MARS_COORDINATE_H
-#define MARS_COORDINATE_H
+#ifndef PLANET_COORDINATE_H
+#define PLANET_COORDINATE_H
 #include "ground_coordinate.h"
 #include "geocal_matrix.h"
 #include "spice_helper.h"
@@ -19,10 +19,8 @@ private:
   static const char* name;
 };
 
-class MarsInertial;
-
 /****************************************************************//**
-  This is a ground coordinate, expressed in fixed Mars coordinates.
+  This is a ground coordinate, expressed in fixed Planet coordinates.
 *******************************************************************/
 template<int NAIF_CODE> class PlanetFixed : public CartesianFixed {
 public:
@@ -177,7 +175,7 @@ public:
 };
 
 /****************************************************************//**
-  This is a MarsIntertial coordinate (J2000)
+  This is a Planet Intertial coordinate.
 *******************************************************************/
 
 class MarsInertial : public CartesianInertial {
@@ -216,7 +214,13 @@ public:
 
   virtual ~MarsInertial() {}
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf(const Time& T) 
-    const;
+    const
+  {
+    boost::shared_ptr<CartesianFixed> res(new PlanetFixed<NAIF_CODE>);
+    CartesianFixed::toolkit_coordinate_interface->
+      to_fixed(NAIF_CODE, T, *this, *res);
+    return res;
+  }
 
 //-----------------------------------------------------------------------
 /// Matrix to convert PlanetInertial to PlanetFixed. The transpose of this
@@ -241,13 +245,43 @@ public:
   virtual boost::shared_ptr<CartesianInertial>
   reference_surface_intersect_approximate(
   const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
-  const;
+  const
+  {
+    double aph = PlanetConstant<NAIF_CODE>::planet_a() + 
+      Height_reference_surface;
+    double bph = PlanetConstant<NAIF_CODE>::planet_b() + 
+      Height_reference_surface;
+    boost::array<double, 3> dirci;
+    dirci[0] = Cl.look_vector[0]/ aph;
+    dirci[1] = Cl.look_vector[1]/ aph;
+    dirci[2] = Cl.look_vector[2]/ bph;
+    double t = norm(dirci);
+    dirci[0] /= t;
+    dirci[1] /= t;
+    dirci[2] /= t;
+    boost::array<double, 3> pci;
+    pci[0] = position[0] / aph;
+    pci[1] = position[1] / aph;
+    pci[2] = position[2] / bph;
+    double ddotp = dot(dirci, pci);
+    double dl = -ddotp - sqrt(ddotp * ddotp + (1 - dot(pci, pci)));
+    boost::array<double, 3> res;
+    res[0] = (pci[0] + dirci[0] * dl) * aph;
+    res[1] = (pci[1] + dirci[1] * dl) * aph;
+    res[2] = (pci[2] + dirci[2] * dl) * bph;
+    return create(res);
+  }
 
 //-----------------------------------------------------------------------
 /// Print to given stream.
 //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const;
+  virtual void print(std::ostream& Os) const
+  {
+    Os << PlanetConstant<NAIF_CODE>::planet_name()
+       << "Inertial (" << position[0] << " m, " << position[1] << " m, "
+       << position[2] << "m)";
+  }
 };
 
 /****************************************************************//**

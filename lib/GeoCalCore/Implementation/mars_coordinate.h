@@ -1,10 +1,11 @@
 #ifndef MARS_COORDINATE_H
 #define MARS_COORDINATE_H
 #include "ground_coordinate.h"
+#include "geocal_matrix.h"
 #include "spice_helper.h"
 
 namespace GeoCal {
-class MarsPlanetocentric;
+template<int NAIF_CODE> class Planetocentric;
 
 template<int NCODE> class PlanetConstant {
 public:
@@ -12,11 +13,11 @@ public:
   static double planet_a() {return h.planet_a();}
   static double planet_b() {return h.planet_b(); }
   static double planet_esq() {return h.planet_esq(); }
+  static std::string planet_name() { return name;}
 private:
   static SpicePlanetConstant h;
+  static const char* name;
 };
-
-typedef PlanetConstant<499> MarsConstant;
 
 /****************************************************************//**
   This is a ground coordinate, expressed in fixed Mars coordinates.
@@ -84,7 +85,7 @@ public:
   virtual double min_radius_reference_surface() const;
   virtual double latitude() const;
   virtual double longitude() const;
-  MarsPlanetocentric convert_to_planetocentric() const;
+  Planetocentric<NAIF_CODE> convert_to_planetocentric() const;
   virtual boost::shared_ptr<CartesianFixed>
   reference_surface_intersect_approximate(
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0) 
@@ -167,27 +168,57 @@ public:
 };
 
 /****************************************************************//**
-  This is Mars coordinates as Planetocentric latitude, longitude, and
-  height above the reference ellipsoid. This is the planet equivalent 
-  of Geocentric (*not* Geodetic). Height is relative to the 
+  This is Planet coordinates as Planetocentric latitude, longitude,
+  and height above the reference ellipsoid. This is the planet
+  equivalent of Geocentric (*not* Geodetic). Height is relative to the
   ellipsoid, but latitude is relative to center of planet rather than
   normal of ellipsoid.
 *******************************************************************/
 
-class MarsPlanetocentric : public GroundCoordinate {
+template<int NAIF_CODE> class Planetocentric : public GroundCoordinate {
 public:
-  enum { NAIF_CODE = 499 };
-  MarsPlanetocentric(const GroundCoordinate& Gc);
-  virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
-  virtual void print(std::ostream& Os) const;
+//-----------------------------------------------------------------------
+/// Convert from GroundCoor.
+//-----------------------------------------------------------------------
+
+  Planetocentric(const GroundCoordinate& Gc)
+  {
+    if(const Planetocentric<NAIF_CODE>* g = 
+       dynamic_cast<const Planetocentric<NAIF_CODE>*>(&Gc)) {
+      *this = *g;
+      return;
+    }
+    MarsFixed mf(Gc);
+    lon_ = mf.longitude();
+    lat_ = mf.latitude();
+    height_ellipsoid_ = 
+      norm(mf.position) - planet_radius(lat_ * Constant::deg_to_rad);
+  }
+  virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const
+  {
+    double lat = lat_ * Constant::deg_to_rad;
+    double lon = lon_ * Constant::deg_to_rad;
+    double r = planet_radius(lat) + height_ellipsoid_;
+    return boost::shared_ptr<CartesianFixed>
+      (new MarsFixed(r * cos(lat) * cos(lon),
+		     r * cos(lat) * sin(lon),
+		     r * sin(lat)));
+  }
+  virtual void print(std::ostream& Os) const
+  {
+    Os << PlanetConstant<NAIF_CODE>::planet_name()
+       << "Planetocentric: (" << latitude() << " deg, " 
+       << longitude() << " deg, "
+       << height_reference_surface() << " m)";
+  }
 
 //-----------------------------------------------------------------------
-/// Make an MarsPlanetocentric with the given latitude, longitude, and height.
+/// Make an Planetocentric with the given latitude, longitude, and height.
 /// Latitude and longitude are in degrees, height is in meters.
 /// Longitude should be between -180 and 180 and latitude -90 and 90.
 //-----------------------------------------------------------------------
 
-  MarsPlanetocentric(double Latitude, double Longitude, double Height_ellipsoid = 0)
+  Planetocentric(double Latitude, double Longitude, double Height_ellipsoid = 0)
   : lat_(Latitude), lon_(Longitude), height_ellipsoid_(Height_ellipsoid)
   {
     range_check(lat_, -90.0, 90.0);
@@ -198,13 +229,13 @@ public:
 /// Default constructor.
 //-----------------------------------------------------------------------
 
-  MarsPlanetocentric() {}
+  Planetocentric() {}
 
 //-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
 
-  virtual ~MarsPlanetocentric() {}
+  virtual ~Planetocentric() {}
 
 //-----------------------------------------------------------------------
 /// Height above ellipsoid, in meters.
@@ -229,8 +260,23 @@ private:
   double lon_;			///< Longitude, in degrees.
   double height_ellipsoid_;	///< Height above ellipsoid, in
 				///meters.
-  double planet_radius(double Latitude_radians) const;
+
+//-----------------------------------------------------------------------
+/// Radius of planet in meters at given Planetocentric Latitude (in
+/// radians, since we've already converted.
+//-----------------------------------------------------------------------
+
+  double planet_radius(double Latitude_radians) const
+  {
+    double clat = cos(Latitude_radians);
+    return PlanetConstant<NAIF_CODE>::planet_b() / 
+      sqrt(1 - PlanetConstant<NAIF_CODE>::planet_esq() * clat * clat);
+  }
 };
+
+typedef PlanetConstant<499> MarsConstant;
+typedef Planetocentric<499> MarsPlanetocentric;
+
 
 }
 #endif

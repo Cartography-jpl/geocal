@@ -49,6 +49,7 @@ BOOST_AUTO_TEST_CASE(mars_fixed)
   BOOST_CHECK_CLOSE(mf4.latitude(), 10, 1e-8);
   BOOST_CHECK_CLOSE(mf4.longitude(), 20, 1e-8);
   BOOST_CHECK_CLOSE(mf4.height_reference_surface(), 30, 1e-8);
+  std::cerr << mf;
 }
 
 BOOST_AUTO_TEST_CASE(mars_inertial)
@@ -70,6 +71,7 @@ BOOST_AUTO_TEST_CASE(mars_inertial)
   BOOST_CHECK_CLOSE(m3mf->position[0], -0.992024, 1e-4);
   BOOST_CHECK_CLOSE(m3mf->position[1], 0.48329419, 1e-4);
   BOOST_CHECK_CLOSE(m3mf->position[2], 0.636251, 1e-4);
+  std::cerr << mi;
 }
 
 BOOST_AUTO_TEST_CASE(mars_planetocentric)
@@ -87,5 +89,6 @@ BOOST_AUTO_TEST_CASE(mars_planetocentric)
   MarsFixed mf2(mp2);
   BOOST_CHECK(distance(mp, mp2) < 1e-8);
   BOOST_CHECK(distance(mf, mf2) < 1e-8);
+  std::cerr << mp;
 }
 BOOST_AUTO_TEST_SUITE_END()

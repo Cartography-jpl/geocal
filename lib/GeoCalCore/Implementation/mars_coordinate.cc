@@ -1,6 +1,4 @@
 #include "mars_coordinate.h"
-#include "geocal_matrix.h"
-#include "spice_helper.h"
 using namespace GeoCal;
 
 // We probably want these in the class/template somehow, but for now
@@ -10,6 +8,7 @@ inline double sqr(double x) { return x * x; }
 
 // Constants for mars
 template<> SpicePlanetConstant MarsConstant::h(MarsConstant::NAIF_CODE);
+template<> const char* MarsConstant::name = "Mars";
 
 //-----------------------------------------------------------------------
 /// Create MarsFixed from GroundCoordinate
@@ -116,7 +115,8 @@ MarsPlanetocentric MarsFixed::convert_to_planetocentric() const
 
 void MarsFixed::print(std::ostream& Os) const
 {
-  Os << "MarsFixed (" << position[0] << " m, " << position[1] << " m, "
+  Os << PlanetConstant<NAIF_CODE>::planet_name()
+     << "Fixed (" << position[0] << " m, " << position[1] << " m, "
      << position[2] << "m)";
 }
 
@@ -159,53 +159,8 @@ MarsInertial::reference_surface_intersect_approximate
 
 void MarsInertial::print(std::ostream& Os) const
 {
-  Os << "MarsIntertial (" << position[0] << " m, " << position[1] << " m, "
+  Os << PlanetConstant<NAIF_CODE>::planet_name()
+     << "Inertial (" << position[0] << " m, " << position[1] << " m, "
      << position[2] << "m)";
 }
 
-//-----------------------------------------------------------------------
-/// Convert from GroundCoor.
-//-----------------------------------------------------------------------
-
-MarsPlanetocentric::MarsPlanetocentric(const GroundCoordinate& Gc)
-{
-  if(const MarsPlanetocentric* g = 
-     dynamic_cast<const MarsPlanetocentric*>(&Gc)) {
-    *this = *g;
-    return;
-  }
-  MarsFixed mf(Gc);
-  lon_ = mf.longitude();
-  lat_ = mf.latitude();
-  height_ellipsoid_ = 
-    norm(mf.position) - planet_radius(lat_ * Constant::deg_to_rad);
-}
-
-boost::shared_ptr<CartesianFixed> MarsPlanetocentric::convert_to_cf() const
-{
-  double lat = lat_ * Constant::deg_to_rad;
-  double lon = lon_ * Constant::deg_to_rad;
-  double r = planet_radius(lat) + height_ellipsoid_;
-  return boost::shared_ptr<CartesianFixed>
-    (new MarsFixed(r * cos(lat) * cos(lon),
-		   r * cos(lat) * sin(lon),
-		   r * sin(lat)));
-}
-
-void MarsPlanetocentric::print(std::ostream& Os) const
-{
-  Os << "MarsPlanetocentric: (" << latitude() << " deg, " 
-     << longitude() << " deg, "
-     << height_reference_surface() << " m)";
-}
-
-//-----------------------------------------------------------------------
-/// Radius of planet in meters at given Planetocentric Latitude (in
-/// radians, since we've already converted.
-//-----------------------------------------------------------------------
-
-double MarsPlanetocentric::planet_radius(double Latitude_radians)const
-{
-  return PlanetConstant<NAIF_CODE>::planet_b() / 
-    sqrt(1 - PlanetConstant<NAIF_CODE>::planet_esq() * sqr(cos(Latitude_radians)));
-}

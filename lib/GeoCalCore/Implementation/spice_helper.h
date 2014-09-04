@@ -101,5 +101,52 @@ public:
   virtual double solar_distance(int Body_id, const Time& T);
 };
 
+/****************************************************************//**
+  Constants for the planet. Note that if the planet is actually
+  described as triaxial we average the 2 equatorial radius. We don't
+  curently support triaxial models. We could extend the code for this if 
+  needed.
+  
+*******************************************************************/
+
+class SpicePlanetConstant {
+public:
+  SpicePlanetConstant(int Naif_code) 
+  : naif_code(Naif_code), filled_in(false) {}
+
+//-----------------------------------------------------------------------
+/// Planet equatorial radius, in meters
+//-----------------------------------------------------------------------
+
+  double planet_a() const 
+  { fill_in_data(); return a; }
+
+//-----------------------------------------------------------------------
+/// Planet polar radius, in meters
+//-----------------------------------------------------------------------
+
+  double planet_b() const 
+  { fill_in_data(); return b; }
+
+//-----------------------------------------------------------------------
+/// Planet eccentricity squared
+//-----------------------------------------------------------------------
+
+  double planet_esq() const
+  { fill_in_data(); return esq; }
+
+private:
+  int naif_code;
+  mutable bool filled_in;
+  mutable double a, b, esq;
+  void fill_in_data() const 
+  {
+    if(!filled_in) {
+      calc_data();
+      filled_in = true;
+    }
+  }
+  void calc_data() const;
+};
 }
 #endif

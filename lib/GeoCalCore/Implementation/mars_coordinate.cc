@@ -1,12 +1,6 @@
 #include "mars_coordinate.h"
 #include "geocal_matrix.h"
 #include "spice_helper.h"
-#include <boost/lexical_cast.hpp>
-#ifdef HAVE_SPICE
-extern "C" {
-#include "SpiceUsr.h"
-}
-#endif
 using namespace GeoCal;
 
 // We probably want these in the class/template somehow, but for now
@@ -14,31 +8,7 @@ using namespace GeoCal;
 
 inline double sqr(double x) { return x * x; }
 
-bool MarsConstant::filled_in = false;
-double MarsConstant::a;
-double MarsConstant::b;
-double MarsConstant::esq;
-
-void MarsConstant::calc_data()
-{
-  SpiceHelper::spice_setup();
-#ifdef HAVE_SPICE
-  std::string bname = boost::lexical_cast<std::string>((int) NAIF_CODE);
-  int dim;
-  double values[3];
-  bodvrd_c(bname.c_str(), "RADII", 3, &dim, values);
-  SpiceHelper::spice_error_check();
-  if(dim != 3)
-    throw Exception("Call to bodvrd_c didn't returned expected values");
-  // 1000.0 is to convert from km returned by bodvrd_c and meter we
-  // use everywhere else.
-  MarsConstant::a = (values[0] + values[1]) / 2.0 * 1000.0;
-  MarsConstant::b = values[2] * 1000.0;
-  MarsConstant::esq = (sqr(MarsConstant::a) - sqr(MarsConstant::b)) / 
-    sqr(MarsConstant::a);
-				// Eccentricity squared. From CRC.
-#endif
-}
+SpicePlanetConstant MarsConstant::h(MarsConstant::NAIF_CODE);
 
 //-----------------------------------------------------------------------
 /// Create MarsFixed from GroundCoordinate

@@ -5,6 +5,7 @@
 #include "ground_coordinate.h"
 #include "dir_change.h"
 #include <boost/regex.hpp>
+#include <boost/lexical_cast.hpp>
 #include <iostream>
 #include <sys/types.h>
 #include <dirent.h>
@@ -437,5 +438,29 @@ bool SpiceHelper::spice_available()
   return true;
 #else
   return false;
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Calculate planet data.
+//-----------------------------------------------------------------------
+
+void SpicePlanetConstant::calc_data() const
+{
+  SpiceHelper::spice_setup();
+#ifdef HAVE_SPICE
+  std::string bname = boost::lexical_cast<std::string>(naif_code);
+  int dim;
+  double values[3];
+  bodvrd_c(bname.c_str(), "RADII", 3, &dim, values);
+  SpiceHelper::spice_error_check();
+  if(dim != 3)
+    throw Exception("Call to bodvrd_c didn't returned expected values");
+  // 1000.0 is to convert from km returned by bodvrd_c and meter we
+  // use everywhere else.
+  a = (values[0] + values[1]) / 2.0 * 1000.0;
+  b = values[2] * 1000.0;
+  esq = (a * a - b * b) / (a * a);
+				// Eccentricity squared. From CRC.
 #endif
 }

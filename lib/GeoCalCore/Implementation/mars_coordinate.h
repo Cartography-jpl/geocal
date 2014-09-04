@@ -1,6 +1,7 @@
 #ifndef MARS_COORDINATE_H
 #define MARS_COORDINATE_H
 #include "ground_coordinate.h"
+#include "spice_helper.h"
 
 namespace GeoCal {
 class MarsPlanetocentric;
@@ -15,26 +16,11 @@ class MarsPlanetocentric;
 class MarsConstant {
 public:
   enum { NAIF_CODE = 499 };
-  static double planet_a()
-  { fill_in_data(); return a; }
-  static double planet_b()
-  { fill_in_data(); return b; }
-  static double planet_esq()
-  { fill_in_data(); return esq; }
+  static double planet_a() {return h.planet_a();}
+  static double planet_b() {return h.planet_b(); }
+  static double planet_esq() {return h.planet_esq(); }
 private:
-  // Don't actually allow this class to instantiated, we only use
-  // class functions for this.
-  MarsConstant() {}
-  static void fill_in_data()
-  {
-    if(!filled_in) {
-      calc_data();
-      filled_in = true;
-    }
-  }
-  static void calc_data();
-  static bool filled_in;
-  static double a, b, esq;
+  static SpicePlanetConstant h;
 };
 
 /****************************************************************//**

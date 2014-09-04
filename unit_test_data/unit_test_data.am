@@ -81,3 +81,4 @@ EXTRA_DIST+= @geocalunittestdata@/test_use00a.ntf
 EXTRA_DIST+= @geocalunittestdata@/vicar.img
 EXTRA_DIST+= @geocalunittestdata@/airmspi_orbit_file_test.hdf
 EXTRA_DIST+= @geocalunittestdata@/ground_mspi_camera_test.config
+EXTRA_DIST+= @geocalunittestdata@/usgs_dem/n44w069_10m.tif

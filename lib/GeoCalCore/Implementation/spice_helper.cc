@@ -45,6 +45,27 @@ SpiceException::SpiceException()
 }
 
 //-----------------------------------------------------------------------
+/// Add an additional kernel, after the one we automatically get
+/// (i.e., $SPICEDATA/geocal.ker).
+///
+/// We change to the given Kernel_dir, so you can use relative paths
+/// if desired for the kernel names.
+//-----------------------------------------------------------------------
+
+void SpiceHelper::add_kernel(const std::string& Kernel_dir, 
+			     const std::string& Kernel)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  DirChange dc(Kernel_dir);
+  furnsh_c(Kernel.c_str());
+  spice_error_check();
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Set SPICE errors to just return, rather than aborting.
 //-----------------------------------------------------------------------
 

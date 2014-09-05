@@ -89,3 +89,46 @@ BOOST_AUTO_TEST_CASE(mars_planetocentric)
   BOOST_CHECK(distance(mf, mf2) < 1e-8);
 }
 BOOST_AUTO_TEST_SUITE_END()
+
+#include "SpiceUsr.h"
+
+BOOST_FIXTURE_TEST_SUITE(galileo, GlobalFixture)
+BOOST_AUTO_TEST_CASE(basic)
+{
+  SpiceHelper::add_kernel(test_data_dir() + "/galileo_kernels",
+			  "galileo.ker");
+  double day_to_sec = 24 * 60 * 60;
+  // We can write a general conversion from the time given in VICAR
+  // to time. But this is "day 350". The -1 is because we start with
+  // day 1 (not 0), and the +1 is because we had a leapsecond in
+  // 1997. 
+  Time tm3800 = Time::parse_time("1997-01-01T12:18:20.130Z") + 
+    (350 - 1) * day_to_sec + 1;
+  Time tm2828 = Time::parse_time("1997-01-01T12:08:31.202Z") + 
+    (350 - 1) * day_to_sec + 1;
+  Time tm9400 = Time::parse_time("1996-01-01T19:50:52.696Z") + 
+    (311 - 1) * day_to_sec;
+  std::cerr << tm3800 << "\n";
+  std::cerr << tm2828 << "\n";
+  std::cerr << tm9400 << "\n";
+  double state[6], lt;
+  //spkezr_c("-77036", tm.et(), "IAU_EUROPA", "NONE", "EUROPA", state, &lt);
+  spkezr_c("-77", tm3800.et(), "IAU_EUROPA", "NONE", "EUROPA", state, &lt);
+  SpiceHelper::spice_error_check();
+  std::cerr << "Distance: " << sqrt(state[0] * state[0] + state[1] * state[1] + state[2] * state[2]) << "\n";
+  EuropaFixed p3800(state[0] * 1000.0, state[1] * 1000, state[2] * 1000);
+
+  spkezr_c("-77", tm2828.et(), "IAU_EUROPA", "NONE", "EUROPA", state, &lt);
+  SpiceHelper::spice_error_check();
+  std::cerr << "Distance: " << sqrt(state[0] * state[0] + state[1] * state[1] + state[2] * state[2]) << "\n";
+  EuropaFixed p2828(state[0] * 1000.0, state[1] * 1000, state[2] * 1000);
+
+  spkezr_c("-77", tm9400.et(), "IAU_EUROPA", "NONE", "EUROPA", state, &lt);
+  SpiceHelper::spice_error_check();
+  std::cerr << "Distance: " << sqrt(state[0] * state[0] + state[1] * state[1] + state[2] * state[2]) << "\n";
+  EuropaFixed p9400(state[0] * 1000.0, state[1] * 1000, state[2] * 1000);
+  std::cerr << EuropaPlanetocentric(p3800) << "\n"
+	    << EuropaPlanetocentric(p2828) << "\n"
+	    << EuropaPlanetocentric(p9400) << "\n";
+}
+BOOST_AUTO_TEST_SUITE_END()

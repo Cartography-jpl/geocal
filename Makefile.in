@@ -1847,7 +1847,12 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/vicar.img \
 	@geocalunittestdata@/airmspi_orbit_file_test.hdf \
 	@geocalunittestdata@/ground_mspi_camera_test.config \
-	@geocalunittestdata@/usgs_dem/n44w069_10m.tif @docpythonsrc@
+	@geocalunittestdata@/usgs_dem/n44w069_10m.tif \
+	@geocalunittestdata@/galileo_kernel/galileo.ker \
+	@geocalunittestdata@/galileo_kernel/ik/gll36001.ti \
+	@geocalunittestdata@/galileo_kernel/sclk/mk00062a.tsc \
+	@geocalunittestdata@/galileo_kernel/spk/gll_951120_021126_raj2007.bsp \
+	@docpythonsrc@ $(am__empty)
 pkgconfig_DATA = 
 
 # Allow fils to be include in other directories

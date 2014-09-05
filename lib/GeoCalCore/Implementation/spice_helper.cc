@@ -243,6 +243,36 @@ void SpiceHelper::sub_solar_point_calc(const std::string& Body,
 }
 
 //-----------------------------------------------------------------------
+/// Get the state vector (position and velocity, in meters), in the
+/// fixed coordinates for the given Body_id, and the given Time. The
+/// Target name can be anything spice recognizes.
+///
+/// Note we don't handle light travel time yet, or aberration. It
+/// isn't clear if we want to or not.
+//-----------------------------------------------------------------------
+
+void SpiceHelper::state_vector
+(int Body_id, const std::string& Target_name,
+ const Time& T, boost::array<double, 3>& Pos,
+ boost::array<double, 3>& Vel)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  double state[6], lt;
+  spkezr_c(Target_name.c_str(), T.et(), 
+	   fixed_frame_name(Body_id).c_str(), "NONE", 
+	   body_name(Body_id).c_str(), state, &lt);
+  spice_error_check();
+  for(int i = 0; i < 3; ++i) {
+    Pos[i] = state[i] * 1000.0;
+    Vel[i] = state[i + 3] * 1000.0;
+  }
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Return matrix that converts between the two names coordinate
 /// system. To avoid making a second copy, we return the data in
 /// SpiceHelper::m. 
@@ -262,6 +292,71 @@ void SpiceHelper::conversion_matrix(const std::string& From,
 }
 
 //-----------------------------------------------------------------------
+/// Return the body name for the given id.
+//-----------------------------------------------------------------------
+
+std::string SpiceHelper::body_name(int Body_id)
+{
+  // Handle some special cases for speed.
+  switch(Body_id) {
+  case 399:
+    return "EARTH";
+    break;
+  case 499:			// Mars
+    return "MARS";
+    break;
+  case 502:			// Europa
+    return "EUROPA";
+    break;
+  case 301:			// Moon
+    return "MOON";
+    break;
+  }
+#ifdef HAVE_SPICE
+  spice_setup();
+  const int maxlen = 100;
+  char name[maxlen];
+  SpiceBoolean found;
+  bodc2n_c(Body_id, maxlen, name, &found);
+  spice_error_check();
+  if(!found) {
+    Exception e;
+    e << "Could not find name for the Body id " << Body_id;
+    throw e;
+  }
+  return name;
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Return the fixed frame name for the given body. We pull this out
+/// so we don't have lots of switch statements elsewhere.
+//-----------------------------------------------------------------------
+
+std::string SpiceHelper::fixed_frame_name(int Body_id)
+{
+  // Handle some special cases for speed.
+  switch(Body_id) {
+  case 399:
+    return "ITRF93";
+    break;
+  case 499:			// Mars
+    return "IAU_MARS";
+    break;
+  case 502:			// Europa
+    return "IAU_EUROPA";
+    break;
+  case 301:			// Moon
+    return "IAU_MOON";
+    break;
+  }
+  // Default to IAU_ + the name of the body 
+  return "IAU_" + body_name(Body_id);
+}
+
+//-----------------------------------------------------------------------
 /// Return matrix that converts from CartesianInertial to
 /// CartesianFixed. To avoid making a second copy, we return the data
 /// in SpiceHelper::m. Since this is only called by
@@ -272,26 +367,7 @@ void SpiceHelper::conversion_matrix(const std::string& From,
 void SpiceHelper::cartesian_inertial_to_cartesian_fixed(int Body_id, 
 							const Time& T)
 {
-#ifdef HAVE_SPICE
-  switch(Body_id) {
-  case 399:			// Earth
-    conversion_matrix("J2000", "ITRF93", T);
-    break;
-  case 499:			// Mars
-    conversion_matrix("J2000", "IAU_MARS", T);
-    break;
-  case 502:			// Europa
-    conversion_matrix("J2000", "IAU_EUROPA", T);
-    break;
-  case 301:			// Moon
-    conversion_matrix("J2000", "IAU_MOON", T);
-    break;
-  default:
-    throw Exception("Not yet implemented");
-  }
-#else
-  throw SpiceNotAvailableException();
-#endif
+  conversion_matrix("J2000", fixed_frame_name(Body_id), T);
 }
 
 //-----------------------------------------------------------------------
@@ -394,23 +470,9 @@ SpiceToolkitCoordinateInterface::sub_solar_point(int Body_id, const Time& T,
 						 CartesianFixed& P)
 {
   boost::array<double, 3> ign;
-  switch(Body_id) {
-  case 399:			// Earth
-    SpiceHelper::sub_solar_point_calc("EARTH", "ITRF93", T, P.position, ign);
-    break;
-  case 499:			// Mars
-    SpiceHelper::sub_solar_point_calc("MARS", "IAU_MARS", T, P.position, ign);
-    break;
-  case 502:			// Europa
-    SpiceHelper::sub_solar_point_calc("EUROPA", "IAU_EUROPA", T, P.position, 
-				      ign);
-    break;
-  case 301:			// Moon
-    SpiceHelper::sub_solar_point_calc("MOON", "IAU_MOON", T, P.position, ign);
-    break;
-  default:
-    throw Exception("Not yet implemented");
-  }
+  SpiceHelper::sub_solar_point_calc(SpiceHelper::body_name(Body_id).c_str(), 
+			    SpiceHelper::fixed_frame_name(Body_id).c_str(), 
+			    T, P.position, ign);
   // sub_solar_point_calc returns km, *not* meter. Since
   // CartesianFixed expected meter convert this.
   P.position[0] *= 1000.0;
@@ -422,22 +484,9 @@ double
 SpiceToolkitCoordinateInterface::solar_distance(int Body_id, const Time& T)
 {
   boost::array<double, 3> pout1, pout2;
-  switch(Body_id) {
-  case 399:			// Earth
-    SpiceHelper::sub_solar_point_calc("EARTH", "ITRF93", T, pout1, pout2);
-    break;
-  case 499:			// Mars
-    SpiceHelper::sub_solar_point_calc("MARS", "IAU_MARS", T, pout1, pout2);
-    break;
-  case 502:			// Europa
-    SpiceHelper::sub_solar_point_calc("EUROPA", "IAU_EUROPA", T, pout1, pout2);
-    break;
-  case 301:			// Moon
-    SpiceHelper::sub_solar_point_calc("MOON", "IAU_MOON", T, pout1, pout2);
-    break;
-  default:
-    throw Exception("Not yet implemented");
-  }
+  SpiceHelper::sub_solar_point_calc(SpiceHelper::body_name(Body_id).c_str(), 
+			    SpiceHelper::fixed_frame_name(Body_id).c_str(), 
+			    T, pout1, pout2);
   // pout1 takes us from the center of the body to the subsolar
   // point, and then pout2 takes us to the sun. So together they are
   // the distance from the center of body to the sun. This is in km,

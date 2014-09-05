@@ -181,6 +181,20 @@ public:
        << "Fixed (" << position[0] << " m, " << position[1] << " m, "
        << position[2] << "m)";
   }
+
+//-----------------------------------------------------------------------
+/// Use spice to determine the position of the given body at the given
+/// time.
+//-----------------------------------------------------------------------
+
+  static PlanetFixed<NAIF_CODE> target_position
+  (const std::string& Target_name, const Time& T)
+  {
+    PlanetFixed<NAIF_CODE> res;
+    boost::array<double, 3> vel;
+    SpiceHelper::state_vector(NAIF_CODE, Target_name, T, res.position, vel);
+    return res;
+  }
 };
 
 /****************************************************************//**

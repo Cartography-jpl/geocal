@@ -36,6 +36,8 @@ public:
   reference_surface_intersect_approximate(
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0)
     const;
+  static PlanetFixed<NAIF_CODE> target_position
+  (const std::string& Target_name, const Time& T);
   %pickle_init(1, self.position[0], self.position[1], self.position[2])
 };
 

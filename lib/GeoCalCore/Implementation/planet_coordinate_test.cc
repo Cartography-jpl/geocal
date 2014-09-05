@@ -92,43 +92,52 @@ BOOST_AUTO_TEST_SUITE_END()
 
 #include "SpiceUsr.h"
 
-BOOST_FIXTURE_TEST_SUITE(galileo, GlobalFixture)
-BOOST_AUTO_TEST_CASE(basic)
+class GalileoFixture: public GlobalFixture {
+public:
+  GalileoFixture()
+    : galileo_name("-77")
+  {
+    SpiceHelper::add_kernel(test_data_dir() + "/galileo_kernels",
+			    "galileo.ker");
+    double day_to_sec = 24 * 60 * 60;
+    // We can write a general conversion from the time given in VICAR
+    // to time. But this is "day 350". The -1 is because we start with
+    // day 1 (not 0), and the +1 is because we had a leapsecond in
+    // 1997. 
+    tm3800 = Time::parse_time("1997-01-01T12:18:20.130Z") + 
+      (350 - 1) * day_to_sec + 1;
+    tm2828 = Time::parse_time("1997-01-01T12:08:31.202Z") + 
+      (350 - 1) * day_to_sec + 1;
+    // Don't have +1 because no leapsecond in 1996
+    tm9400 = Time::parse_time("1996-01-01T19:50:52.696Z") + 
+      (311 - 1) * day_to_sec;
+  }
+  // Note that 3800, 2828, 9400 refer to some VICAR data that we
+  // acquired at one point. This just provides some test data, we know 
+  // what the range, latitude, and longitude should be for this data.
+  Time tm3800, tm2828, tm9400;
+  std::string galileo_name;
+};
+
+BOOST_FIXTURE_TEST_SUITE(galileo, GalileoFixture)
+BOOST_AUTO_TEST_CASE(target_position)
 {
-  SpiceHelper::add_kernel(test_data_dir() + "/galileo_kernels",
-			  "galileo.ker");
-  double day_to_sec = 24 * 60 * 60;
-  // We can write a general conversion from the time given in VICAR
-  // to time. But this is "day 350". The -1 is because we start with
-  // day 1 (not 0), and the +1 is because we had a leapsecond in
-  // 1997. 
-  Time tm3800 = Time::parse_time("1997-01-01T12:18:20.130Z") + 
-    (350 - 1) * day_to_sec + 1;
-  Time tm2828 = Time::parse_time("1997-01-01T12:08:31.202Z") + 
-    (350 - 1) * day_to_sec + 1;
-  Time tm9400 = Time::parse_time("1996-01-01T19:50:52.696Z") + 
-    (311 - 1) * day_to_sec;
-  std::cerr << tm3800 << "\n";
-  std::cerr << tm2828 << "\n";
-  std::cerr << tm9400 << "\n";
-  double state[6], lt;
-  //spkezr_c("-77036", tm.et(), "IAU_EUROPA", "NONE", "EUROPA", state, &lt);
-  spkezr_c("-77", tm3800.et(), "IAU_EUROPA", "NONE", "EUROPA", state, &lt);
-  SpiceHelper::spice_error_check();
-  std::cerr << "Distance: " << sqrt(state[0] * state[0] + state[1] * state[1] + state[2] * state[2]) << "\n";
-  EuropaFixed p3800(state[0] * 1000.0, state[1] * 1000, state[2] * 1000);
-
-  spkezr_c("-77", tm2828.et(), "IAU_EUROPA", "NONE", "EUROPA", state, &lt);
-  SpiceHelper::spice_error_check();
-  std::cerr << "Distance: " << sqrt(state[0] * state[0] + state[1] * state[1] + state[2] * state[2]) << "\n";
-  EuropaFixed p2828(state[0] * 1000.0, state[1] * 1000, state[2] * 1000);
-
-  spkezr_c("-77", tm9400.et(), "IAU_EUROPA", "NONE", "EUROPA", state, &lt);
-  SpiceHelper::spice_error_check();
-  std::cerr << "Distance: " << sqrt(state[0] * state[0] + state[1] * state[1] + state[2] * state[2]) << "\n";
-  EuropaFixed p9400(state[0] * 1000.0, state[1] * 1000, state[2] * 1000);
-  std::cerr << EuropaPlanetocentric(p3800) << "\n"
-	    << EuropaPlanetocentric(p2828) << "\n"
-	    << EuropaPlanetocentric(p9400) << "\n";
+  EuropaFixed p3800 = EuropaFixed::target_position(galileo_name, tm3800);
+  EuropaFixed p2828 = EuropaFixed::target_position(galileo_name, tm2828);
+  EuropaFixed p9400 = EuropaFixed::target_position(galileo_name, tm9400);
+  BOOST_CHECK_CLOSE(norm(p3800.position), 5.79122e+06, 1e-4);
+  BOOST_CHECK_CLOSE(norm(p2828.position), 2.60614e+06, 1e-4);
+  BOOST_CHECK_CLOSE(norm(p9400.position), 4.29518e+07, 1e-4);
+  BOOST_CHECK_CLOSE(p3800.latitude(), -2.61439, 5e-4);
+  BOOST_CHECK_CLOSE(p3800.longitude(), -152.651, 5e-4);
+  BOOST_CHECK_CLOSE(p2828.latitude(), -5.94665, 5e-4);
+  BOOST_CHECK_CLOSE(p2828.longitude(), -177.516, 5e-4);
+  BOOST_CHECK_CLOSE(p9400.latitude(), 0.638369, 5e-4);
+  BOOST_CHECK_CLOSE(p9400.longitude(), 153.444, 5e-4);
 }
+
+BOOST_AUTO_TEST_CASE(camera_orientation)
+{
+}
+
 BOOST_AUTO_TEST_SUITE_END()

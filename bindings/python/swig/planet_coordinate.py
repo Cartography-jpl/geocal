@@ -230,6 +230,15 @@ class MarsFixed(geocal_swig.ground_coordinate.CartesianFixed):
         """
         return _planet_coordinate.MarsFixed_reference_surface_intersect_approximate(self, *args)
 
+    def target_position(*args):
+        """
+        static PlanetFixed<NAIF_CODE> GeoCal::PlanetFixed< NAIF_CODE >::target_position(const std::string &Target_name, const Time &T)
+        Use spice to determine the position of the given body at the given
+        time. 
+        """
+        return _planet_coordinate.MarsFixed_target_position(*args)
+
+    target_position = staticmethod(target_position)
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -242,6 +251,14 @@ MarsFixed.convert_to_planetocentric = new_instancemethod(_planet_coordinate.Mars
 MarsFixed.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.MarsFixed_reference_surface_intersect_approximate,None,MarsFixed)
 MarsFixed_swigregister = _planet_coordinate.MarsFixed_swigregister
 MarsFixed_swigregister(MarsFixed)
+
+def MarsFixed_target_position(*args):
+  """
+    static PlanetFixed<NAIF_CODE> GeoCal::PlanetFixed< NAIF_CODE >::target_position(const std::string &Target_name, const Time &T)
+    Use spice to determine the position of the given body at the given
+    time. 
+    """
+  return _planet_coordinate.MarsFixed_target_position(*args)
 
 class MarsInertial(geocal_swig.ground_coordinate.CartesianInertial):
     """
@@ -434,6 +451,15 @@ class EuropaFixed(geocal_swig.ground_coordinate.CartesianFixed):
         """
         return _planet_coordinate.EuropaFixed_reference_surface_intersect_approximate(self, *args)
 
+    def target_position(*args):
+        """
+        static PlanetFixed<NAIF_CODE> GeoCal::PlanetFixed< NAIF_CODE >::target_position(const std::string &Target_name, const Time &T)
+        Use spice to determine the position of the given body at the given
+        time. 
+        """
+        return _planet_coordinate.EuropaFixed_target_position(*args)
+
+    target_position = staticmethod(target_position)
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -446,6 +472,14 @@ EuropaFixed.convert_to_planetocentric = new_instancemethod(_planet_coordinate.Eu
 EuropaFixed.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.EuropaFixed_reference_surface_intersect_approximate,None,EuropaFixed)
 EuropaFixed_swigregister = _planet_coordinate.EuropaFixed_swigregister
 EuropaFixed_swigregister(EuropaFixed)
+
+def EuropaFixed_target_position(*args):
+  """
+    static PlanetFixed<NAIF_CODE> GeoCal::PlanetFixed< NAIF_CODE >::target_position(const std::string &Target_name, const Time &T)
+    Use spice to determine the position of the given body at the given
+    time. 
+    """
+  return _planet_coordinate.EuropaFixed_target_position(*args)
 
 class EuropaInertial(geocal_swig.ground_coordinate.CartesianInertial):
     """

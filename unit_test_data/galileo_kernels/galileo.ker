@@ -6,12 +6,10 @@ in before loading this top level kernel. That means that we can use
 relative paths from the file location to specify other kernels that
 should be loaded.
 
----- Temp, keep a coupld of kernel out. We can add these in a bit.
-  'ck/gll_plt_rec_1996_mav_v00.bc',
-  'ck/gll_plt_rec_1997_mav_v00.bc',
 \begindata
 KERNELS_TO_LOAD = (
   'ik/gll36001.ti',
+  'ck/gll_plt_rec_1997_mav_v00.bc',
   'sclk/mk00062a.tsc',
   'spk/gll_951120_021126_raj2007.bsp',
 )

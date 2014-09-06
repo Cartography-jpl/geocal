@@ -90,15 +90,13 @@ BOOST_AUTO_TEST_CASE(mars_planetocentric)
 }
 BOOST_AUTO_TEST_SUITE_END()
 
-#include "SpiceUsr.h"
-
 class GalileoFixture: public GlobalFixture {
 public:
   GalileoFixture()
-    : galileo_name("-77")
+    : galileo_name("GLL")
   {
     SpiceHelper::add_kernel(test_data_dir() + "/galileo_kernels",
-			    "galileo.ker");
+     			    "galileo.ker");
     double day_to_sec = 24 * 60 * 60;
     // We can write a general conversion from the time given in VICAR
     // to time. But this is "day 350". The -1 is because we start with
@@ -136,8 +134,26 @@ BOOST_AUTO_TEST_CASE(target_position)
   BOOST_CHECK_CLOSE(p9400.longitude(), 153.444, 5e-4);
 }
 
+#include "SpiceUsr.h"
+
 BOOST_AUTO_TEST_CASE(camera_orientation)
 {
+  // We'll put this into time.
+  double tsc;
+  sce2c_c(-77, tm3800.et(), &tsc);
+  double cmat[3][3];
+  double clkout;
+  SpiceBoolean found;
+  //  ckgp_c(-77036, tsc, 0, "IAU_EUROPA", cmat, &clkout, &found);
+  ckgp_c(-77001, tsc, 0, "IAU_EUROPA", cmat, &clkout, &found);
+  SpiceHelper::spice_error_check();
+  for(int i = 0; i < 3; ++i) {
+    for(int j = 0; j < 3; ++j)
+      std::cerr << cmat[i][j] << "  ";
+    std::cerr << "\n";
+  }
+  if(!found)
+    throw Exception("Didn't find cmatrix");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

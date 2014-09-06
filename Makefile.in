@@ -1852,6 +1852,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/galileo_kernel/ik/gll36001.ti \
 	@geocalunittestdata@/galileo_kernel/sclk/mk00062a.tsc \
 	@geocalunittestdata@/galileo_kernel/spk/gll_951120_021126_raj2007.bsp \
+	@geocalunittestdata@/galileo_kernel/ck/gll_plt_rec_1997_mav_v00.bc \
 	@docpythonsrc@ $(am__empty)
 pkgconfig_DATA = 
 

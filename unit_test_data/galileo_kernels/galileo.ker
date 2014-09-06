@@ -12,4 +12,5 @@ KERNELS_TO_LOAD = (
   'ck/gll_plt_rec_1997_mav_v00.bc',
   'sclk/mk00062a.tsc',
   'spk/gll_951120_021126_raj2007.bsp',
+  'fk/gll_scan_plane.tf'
 )

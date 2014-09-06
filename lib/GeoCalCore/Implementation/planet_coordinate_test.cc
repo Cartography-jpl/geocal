@@ -138,6 +138,13 @@ BOOST_AUTO_TEST_CASE(target_position)
 
 BOOST_AUTO_TEST_CASE(camera_orientation)
 {
+  SpiceHelper::conversion_matrix("GLL_SCAN_PLANE", "IAU_EUROPA", tm3800);
+  for(int i = 0; i < 3; ++i) {
+    for(int j = 0; j < 3; ++j)
+      std::cerr << SpiceHelper::m[i][j] << "  ";
+    std::cerr << "\n";
+  }
+
   // We'll put this into time.
   double tsc;
   sce2c_c(-77, tm3800.et(), &tsc);

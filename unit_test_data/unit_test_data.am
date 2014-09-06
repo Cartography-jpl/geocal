@@ -87,3 +87,4 @@ EXTRA_DIST+= @geocalunittestdata@/galileo_kernel/ik/gll36001.ti
 EXTRA_DIST+= @geocalunittestdata@/galileo_kernel/sclk/mk00062a.tsc
 EXTRA_DIST+= @geocalunittestdata@/galileo_kernel/spk/gll_951120_021126_raj2007.bsp
 EXTRA_DIST+= @geocalunittestdata@/galileo_kernel/ck/gll_plt_rec_1997_mav_v00.bc
+EXTRA_DIST+= @geocalunittestdata@/galileo_kernel/fk/gll_scan_plane.tf

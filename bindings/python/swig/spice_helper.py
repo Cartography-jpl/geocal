@@ -118,6 +118,7 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.generic_object
 class SpiceHelper(object):
     """
     This class centralizes all of the CSPICE calls from the CSPICE library
@@ -182,6 +183,15 @@ class SpiceHelper(object):
         return _spice_helper.SpiceHelper_add_kernel(*args)
 
     add_kernel = staticmethod(add_kernel)
+    def conversion_quaternion(*args):
+        """
+        boost::math::quaternion< double > SpiceHelper::conversion_quaternion(const std::string &From, const std::string &To, const Time &T)
+        Return quaternion that converts between the two named coordinate
+        systems. 
+        """
+        return _spice_helper.SpiceHelper_conversion_quaternion(*args)
+
+    conversion_quaternion = staticmethod(conversion_quaternion)
     def __init__(self): 
         _spice_helper.SpiceHelper_swiginit(self,_spice_helper.new_SpiceHelper())
     __swig_destroy__ = _spice_helper.delete_SpiceHelper
@@ -230,6 +240,14 @@ def SpiceHelper_add_kernel(*args):
     desired for the kernel names. 
     """
   return _spice_helper.SpiceHelper_add_kernel(*args)
+
+def SpiceHelper_conversion_quaternion(*args):
+  """
+    boost::math::quaternion< double > SpiceHelper::conversion_quaternion(const std::string &From, const std::string &To, const Time &T)
+    Return quaternion that converts between the two named coordinate
+    systems. 
+    """
+  return _spice_helper.SpiceHelper_conversion_quaternion(*args)
 
 
 

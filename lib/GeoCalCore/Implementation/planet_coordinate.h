@@ -3,6 +3,7 @@
 #include "ground_coordinate.h"
 #include "geocal_matrix.h"
 #include "spice_helper.h"
+#include "orbit.h"
 
 namespace GeoCal {
 template<int NAIF_CODE> class Planetocentric;
@@ -195,6 +196,12 @@ public:
     SpiceHelper::state_vector(NAIF_CODE, Target_name, T, res.position, vel);
     return res;
   }
+
+//-----------------------------------------------------------------------
+/// Return orbit data for the given target and spacecraft reference
+/// frame.
+//-----------------------------------------------------------------------
+
 };
 
 /****************************************************************//**

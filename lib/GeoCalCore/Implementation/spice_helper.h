@@ -5,7 +5,7 @@
 #include <string>
 #include <boost/regex.hpp>
 #include <boost/array.hpp>
-
+#include <boost/math/quaternion.hpp>
 namespace GeoCal {
   class Time;			// Forward declaration.
 
@@ -68,6 +68,9 @@ public:
   static void add_kernel(const std::string& Kernel_dir, 
 			 const std::string& Kernel);
   static void spice_error_check();
+  static boost::math::quaternion<double> 
+  conversion_quaternion(const std::string& From,
+			const std::string& To, const Time& T);
   static void conversion_matrix(const std::string& From,
 				const std::string& To, const Time& T);
   static void conversion(const std::string& From,

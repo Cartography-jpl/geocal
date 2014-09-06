@@ -2,6 +2,7 @@
 #include "geocal_time.h"
 #include "geocal_exception.h"
 #include "geocal_matrix.h"
+#include "geocal_quaternion.h"
 #include "ground_coordinate.h"
 #include "dir_change.h"
 #include <boost/regex.hpp>
@@ -273,7 +274,20 @@ void SpiceHelper::state_vector
 }
 
 //-----------------------------------------------------------------------
-/// Return matrix that converts between the two names coordinate
+/// Return quaternion that converts between the two named coordinate 
+/// systems.
+//-----------------------------------------------------------------------
+
+boost::math::quaternion<double> 
+SpiceHelper::conversion_quaternion(const std::string& From,
+				   const std::string& To, const Time& T)
+{
+  conversion_matrix(From, To, T);
+  return matrix_to_quaternion(m);
+}
+
+//-----------------------------------------------------------------------
+/// Return matrix that converts between the two named coordinate
 /// system. To avoid making a second copy, we return the data in
 /// SpiceHelper::m. 
 //-----------------------------------------------------------------------

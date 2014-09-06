@@ -144,7 +144,8 @@ BOOST_AUTO_TEST_CASE(camera_orientation)
       std::cerr << SpiceHelper::m[i][j] << "  ";
     std::cerr << "\n";
   }
-
+  std::cerr << SpiceHelper::conversion_quaternion("GLL_SCAN_PLANE", 
+						  "IAU_EUROPA", tm3800);
   // We'll put this into time.
   double tsc;
   sce2c_c(-77, tm3800.et(), &tsc);

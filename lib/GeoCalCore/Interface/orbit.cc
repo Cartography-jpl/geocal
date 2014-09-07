@@ -492,8 +492,8 @@ void QuaternionOrbitData::print(std::ostream& Os) const
 {
   Os << "Quaternion Orbit Data\n"
      << "Time:     " << time().to_string() << "\n"
-     << "Position (ECR): " << *pos << "\n"
-     << "Velocity(ECR): (" << vel_cf.R_component_2() << " m/s, " 
+     << "Position (CartesianFixed): " << *pos << "\n"
+     << "Velocity(CartesianFixed): (" << vel_cf.R_component_2() << " m/s, " 
      << vel_cf.R_component_3() <<  "m/s, "
      << vel_cf.R_component_4() << " m/s)\n"
      << "Spacecraft cartesian fixed: " << sc_to_cf_ << "\n";

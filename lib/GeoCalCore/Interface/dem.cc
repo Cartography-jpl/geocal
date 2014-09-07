@@ -1,6 +1,5 @@
 #include "dem.h"
 #include "geocal_matrix.h"
-#include "geodetic.h"
 
 using namespace GeoCal;
 
@@ -33,7 +32,7 @@ boost::shared_ptr<CartesianFixed> Dem::intersect(const CartesianFixed& Cf,
   t = cf2->position;
   for(int i = 0; i < 3; ++i)
     t[i] += Lv.direction()[i];
-  double d = distance(Geodetic(*cf2), Geodetic(*cf2->create(t)));
+  double d = distance(*cf2,*cf2->create(t));
   double step_size = Resolution / d;
 
   double hcurr = distance_to_surface(*cf2);

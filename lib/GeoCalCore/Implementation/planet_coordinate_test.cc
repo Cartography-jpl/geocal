@@ -3,6 +3,8 @@
 #include "geocal_time.h"
 #include "spice_helper.h"
 #include "vicar_lite_file.h"
+#include "quaternion_camera.h"
+#include "orbit_data_image_ground_connection.h"
 
 using namespace GeoCal;
 
@@ -146,7 +148,22 @@ BOOST_AUTO_TEST_CASE(orbit_data)
   boost::shared_ptr<Dem> dem(new EuropaSimpleDem());
   boost::shared_ptr<RasterImage> 
     img(new VicarLiteRasterImage(test_data_dir() + "3800r.img"));
-  // Need DEM and camera before we can check the intersection
+  // Note really have a twist angle that we should include. Rotation
+  // about z axis, I think. This is -0.0022797905 in radians,
+  // I have to think about if this a + or - rotation about z.
+  // We also have a small distortion, which we aren't including yet.
+  // A quick calculation shows that at the edges the distortion gives 
+  // about 0.4 pixel correction, so we probably want to include this.
+  // Pixel size and focal length are in mm, and come from gll360001.ti
+  // file. We don't bother getting this through spice, instead I just 
+  // manually read the file.
+  boost::shared_ptr<Camera> 
+    cam(new QuaternionCamera(boost::math::quaternion<double>(1,0,0,0),
+			     800, 800, 15.24e-3, 15.24e-3, 1501.039,
+			     FrameCoordinate(400,400),
+			     QuaternionCamera::LINE_IS_Y));
+  OrbitDataImageGroundConnection igc(od, cam, dem, img);
+  std::cerr << EuropaPlanetocentric(*igc.ground_coordinate(ImageCoordinate(400,400))) << "\n";
 }
 
 BOOST_AUTO_TEST_SUITE_END()

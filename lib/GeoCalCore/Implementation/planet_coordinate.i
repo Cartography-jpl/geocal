@@ -7,7 +7,10 @@
 #include "planet_coordinate.h"
 %}
 %base_import(ground_coordinate)
+%base_import(dem)
 %import "orbit.i"
+%import "simple_dem.i"
+
 namespace GeoCal {
 template<int NCODE> class PlanetConstant {
 public:
@@ -80,16 +83,20 @@ public:
 %geocal_shared_ptr(GeoCal::PlanetFixed<499>);
 %geocal_shared_ptr(GeoCal::PlanetInertial<499>);
 %geocal_shared_ptr(GeoCal::Planetocentric<499>);
+%geocal_shared_ptr(GeoCal::SimpleDemT<GeoCal::Planetocentric<499> >);
 %template(MarsConstant) GeoCal::PlanetConstant<499>;
 %template(MarsFixed) GeoCal::PlanetFixed<499>;
 %template(MarsInertial) GeoCal::PlanetInertial<499>;
 %template(MarsPlanetocentric) GeoCal::Planetocentric<499>;
+%template(MarsSimpleDem) GeoCal::SimpleDemT<GeoCal::Planetocentric<499> >;
 
 %geocal_shared_ptr(GeoCal::PlanetConstant<502>);
 %geocal_shared_ptr(GeoCal::PlanetFixed<502>);
 %geocal_shared_ptr(GeoCal::PlanetInertial<502>);
 %geocal_shared_ptr(GeoCal::Planetocentric<502>);
+%geocal_shared_ptr(GeoCal::SimpleDemT<GeoCal::Planetocentric<502> >);
 %template(EuropaConstant) GeoCal::PlanetConstant<502>;
 %template(EuropaFixed) GeoCal::PlanetFixed<502>;
 %template(EuropaInertial) GeoCal::PlanetInertial<502>;
 %template(EuropaPlanetocentric) GeoCal::Planetocentric<502>;
+%template(EuropaSimpleDem) GeoCal::SimpleDemT<GeoCal::Planetocentric<502> >;

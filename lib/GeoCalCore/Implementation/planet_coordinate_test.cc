@@ -2,6 +2,7 @@
 #include "planet_coordinate.h"
 #include "geocal_time.h"
 #include "spice_helper.h"
+#include "vicar_lite_file.h"
 
 using namespace GeoCal;
 
@@ -142,6 +143,9 @@ BOOST_AUTO_TEST_CASE(orbit_data)
     EuropaFixed::orbit_data(galileo_name, sc_frame_name, tm3800);
   BOOST_CHECK_CLOSE(od->position_cf()->latitude(), -2.61439, 5e-4);
   BOOST_CHECK_CLOSE(od->position_cf()->longitude(), -152.651, 5e-4);
+  boost::shared_ptr<Dem> dem(new EuropaSimpleDem());
+  boost::shared_ptr<RasterImage> 
+    img(new VicarLiteRasterImage(test_data_dir() + "3800r.img"));
   // Need DEM and camera before we can check the intersection
 }
 

@@ -121,6 +121,7 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.ground_coordinate
 import geocal_swig.generic_object
 import geocal_swig.look_vector
+import geocal_swig.dem
 class MarsConstant(object):
     """
     Constants for a planet.
@@ -361,6 +362,31 @@ class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
 MarsPlanetocentric_swigregister = _planet_coordinate.MarsPlanetocentric_swigregister
 MarsPlanetocentric_swigregister(MarsPlanetocentric)
 
+class MarsSimpleDem(geocal_swig.dem.Dem):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, H=0): 
+        _planet_coordinate.MarsSimpleDem_swiginit(self,_planet_coordinate.new_MarsSimpleDem(H))
+    @property
+    def h(self):
+        return self._v_h()
+
+    @h.setter
+    def h(self, value):
+      self._v_h(value)
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.h)
+
+    __swig_destroy__ = _planet_coordinate.delete_MarsSimpleDem
+MarsSimpleDem._v_h = new_instancemethod(_planet_coordinate.MarsSimpleDem__v_h,None,MarsSimpleDem)
+MarsSimpleDem_swigregister = _planet_coordinate.MarsSimpleDem_swigregister
+MarsSimpleDem_swigregister(MarsSimpleDem)
+
 class EuropaConstant(object):
     """
     Constants for a planet.
@@ -600,6 +626,31 @@ class EuropaPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     __swig_destroy__ = _planet_coordinate.delete_EuropaPlanetocentric
 EuropaPlanetocentric_swigregister = _planet_coordinate.EuropaPlanetocentric_swigregister
 EuropaPlanetocentric_swigregister(EuropaPlanetocentric)
+
+class EuropaSimpleDem(geocal_swig.dem.Dem):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, H=0): 
+        _planet_coordinate.EuropaSimpleDem_swiginit(self,_planet_coordinate.new_EuropaSimpleDem(H))
+    @property
+    def h(self):
+        return self._v_h()
+
+    @h.setter
+    def h(self, value):
+      self._v_h(value)
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.h)
+
+    __swig_destroy__ = _planet_coordinate.delete_EuropaSimpleDem
+EuropaSimpleDem._v_h = new_instancemethod(_planet_coordinate.EuropaSimpleDem__v_h,None,EuropaSimpleDem)
+EuropaSimpleDem_swigregister = _planet_coordinate.EuropaSimpleDem_swigregister
+EuropaSimpleDem_swigregister(EuropaSimpleDem)
 
 
 

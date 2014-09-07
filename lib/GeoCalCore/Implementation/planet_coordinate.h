@@ -4,6 +4,7 @@
 #include "geocal_matrix.h"
 #include "spice_helper.h"
 #include "orbit.h"
+#include "simple_dem.h"
 
 namespace GeoCal {
 template<int NAIF_CODE> class Planetocentric;
@@ -464,11 +465,13 @@ typedef PlanetConstant<499> MarsConstant;
 typedef Planetocentric<499> MarsPlanetocentric;
 typedef PlanetFixed<499> MarsFixed;
 typedef PlanetInertial<499> MarsInertial;
+typedef SimpleDemT<MarsPlanetocentric> MarsSimpleDem;
 
 typedef PlanetConstant<502> EuropaConstant;
 typedef Planetocentric<502> EuropaPlanetocentric;
 typedef PlanetFixed<502> EuropaFixed;
 typedef PlanetInertial<502> EuropaInertial;
+typedef SimpleDemT<EuropaPlanetocentric> EuropaSimpleDem;
 
 }
 #endif

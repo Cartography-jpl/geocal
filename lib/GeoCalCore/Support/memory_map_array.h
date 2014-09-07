@@ -69,7 +69,8 @@ public:
     if(M ==CREATE) {
       lseek(fd_, data().num_elements() * sizeof(T) + Offset - 1, SEEK_SET);
       char zero = 0;
-      write(fd_, &zero, 1);
+      if(write(fd_, &zero, 1) !=1)
+	throw Exception("Trouble creating file");
     } else {
 
 //-----------------------------------------------------------------------

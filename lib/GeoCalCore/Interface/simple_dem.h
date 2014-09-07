@@ -6,23 +6,23 @@
 namespace GeoCal {
 /****************************************************************//**
   This is a simple implementation of a Dem, intended primarily for use
-  during testing. It find the height of a given point above the WGS84
-  ellipsoid + fixed height, in geodetic coordinates.
+  during testing. It find the height of a given point above the reference
+  ellipsoid + fixed height, in the given coordinates.
 *******************************************************************/
 
-class SimpleDem : public Dem {
+template<class G> class SimpleDemT : public Dem {
 public:
 //-----------------------------------------------------------------------
 /// Default constructor.
 //-----------------------------------------------------------------------
 
-  SimpleDem(double H = 0) : h_(H) {}
+  SimpleDemT(double H = 0) : h_(H) {}
 
 //-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
 
-  virtual ~SimpleDem() {}
+  virtual ~SimpleDemT() {}
 
 //-----------------------------------------------------------------------
 /// Return height of surface above/below the reference surface (e.g.,
@@ -33,10 +33,23 @@ public:
   virtual double height_reference_surface(const GroundCoordinate& Gp) 
     const {return h_;}
 
+//-----------------------------------------------------------------------
+/// Return distance to surface directly above/below the given point.
+/// Distance is in meters. Positive means Gp is above the surface, 
+/// negative means below.
+//-----------------------------------------------------------------------
+
   virtual double distance_to_surface(const GroundCoordinate& Gp) 
-    const;
+    const
+  {   return Gp.height_reference_surface() - h_; }
+
   virtual boost::shared_ptr<GroundCoordinate> 
-    surface_point(const GroundCoordinate& Gp) const;
+    surface_point(const GroundCoordinate& Gp) const
+  {
+    G g(Gp);
+    return boost::shared_ptr<GroundCoordinate>(
+		       new G(g.latitude(), g.longitude(), h_));
+  }
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -59,5 +72,13 @@ public:
 private:
   double h_;
 };
+
+//-----------------------------------------------------------------------
+/// SimpleDem for WGS84. Note that we should probably call this 
+/// "SimpleDemWgs84", and the template SimpleDem. But historically we 
+/// only had SimpleDem based on WGS84, and there is a lot of code that uses
+/// this name. So we settle on leaving this in place.
+//-----------------------------------------------------------------------
+  typedef SimpleDemT<Geodetic> SimpleDem;
 }
 #endif

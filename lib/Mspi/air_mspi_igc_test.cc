@@ -1,12 +1,16 @@
 #include "air_mspi_igc.h"
 #include "unit_test_support.h"
 #include <iostream>
+#include <boost/filesystem.hpp>
 
 using namespace GeoCal;
 BOOST_FIXTURE_TEST_SUITE(air_mspi_igc, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(chain_test)
 {
+  // Skip test if data isn't available
+  if(!boost::filesystem::is_directory("/home/smyth/Local/MSPI-Ground/chain_test/input"))
+    return;
   // Grab data from Mike's chain test. We'll either modify this or
   // copy it, but for now grab from Mike's area
   AirMspiIgc 

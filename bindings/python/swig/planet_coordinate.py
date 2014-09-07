@@ -239,6 +239,16 @@ class MarsFixed(geocal_swig.ground_coordinate.CartesianFixed):
         return _planet_coordinate.MarsFixed_target_position(*args)
 
     target_position = staticmethod(target_position)
+    def orbit_data(*args):
+        """
+        static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed< NAIF_CODE >::orbit_data(const std::string &Target_name, const std::string
+        &Spacecraft_reference_frame_name, const Time &T)
+        Return orbit data for the given target and spacecraft reference frame.
+
+        """
+        return _planet_coordinate.MarsFixed_orbit_data(*args)
+
+    orbit_data = staticmethod(orbit_data)
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -259,6 +269,15 @@ def MarsFixed_target_position(*args):
     time. 
     """
   return _planet_coordinate.MarsFixed_target_position(*args)
+
+def MarsFixed_orbit_data(*args):
+  """
+    static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed< NAIF_CODE >::orbit_data(const std::string &Target_name, const std::string
+    &Spacecraft_reference_frame_name, const Time &T)
+    Return orbit data for the given target and spacecraft reference frame.
+
+    """
+  return _planet_coordinate.MarsFixed_orbit_data(*args)
 
 class MarsInertial(geocal_swig.ground_coordinate.CartesianInertial):
     """
@@ -460,6 +479,16 @@ class EuropaFixed(geocal_swig.ground_coordinate.CartesianFixed):
         return _planet_coordinate.EuropaFixed_target_position(*args)
 
     target_position = staticmethod(target_position)
+    def orbit_data(*args):
+        """
+        static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed< NAIF_CODE >::orbit_data(const std::string &Target_name, const std::string
+        &Spacecraft_reference_frame_name, const Time &T)
+        Return orbit data for the given target and spacecraft reference frame.
+
+        """
+        return _planet_coordinate.EuropaFixed_orbit_data(*args)
+
+    orbit_data = staticmethod(orbit_data)
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -480,6 +509,15 @@ def EuropaFixed_target_position(*args):
     time. 
     """
   return _planet_coordinate.EuropaFixed_target_position(*args)
+
+def EuropaFixed_orbit_data(*args):
+  """
+    static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed< NAIF_CODE >::orbit_data(const std::string &Target_name, const std::string
+    &Spacecraft_reference_frame_name, const Time &T)
+    Return orbit data for the given target and spacecraft reference frame.
+
+    """
+  return _planet_coordinate.EuropaFixed_orbit_data(*args)
 
 class EuropaInertial(geocal_swig.ground_coordinate.CartesianInertial):
     """

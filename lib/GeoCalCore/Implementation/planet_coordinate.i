@@ -7,6 +7,7 @@
 #include "planet_coordinate.h"
 %}
 %base_import(ground_coordinate)
+%import "orbit.i"
 namespace GeoCal {
 template<int NCODE> class PlanetConstant {
 public:
@@ -38,6 +39,9 @@ public:
     const;
   static PlanetFixed<NAIF_CODE> target_position
   (const std::string& Target_name, const Time& T);
+  static boost::shared_ptr<QuaternionOrbitData> orbit_data
+  (const std::string& Target_name, 
+   const std::string& Spacecraft_reference_frame_name, const Time& T);
   %pickle_init(1, self.position[0], self.position[1], self.position[2])
 };
 

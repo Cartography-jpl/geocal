@@ -93,7 +93,8 @@ BOOST_AUTO_TEST_SUITE_END()
 class GalileoFixture: public GlobalFixture {
 public:
   GalileoFixture()
-    : galileo_name("GLL")
+    : galileo_name("GLL"),
+      sc_frame_name("GLL_SCAN_PLANE")
   {
     SpiceHelper::add_kernel(test_data_dir() + "/galileo_kernels",
      			    "galileo.ker");
@@ -115,6 +116,7 @@ public:
   // what the range, latitude, and longitude should be for this data.
   Time tm3800, tm2828, tm9400;
   std::string galileo_name;
+  std::string sc_frame_name;
 };
 
 BOOST_FIXTURE_TEST_SUITE(galileo, GalileoFixture)
@@ -134,34 +136,13 @@ BOOST_AUTO_TEST_CASE(target_position)
   BOOST_CHECK_CLOSE(p9400.longitude(), 153.444, 5e-4);
 }
 
-#include "SpiceUsr.h"
-
-BOOST_AUTO_TEST_CASE(camera_orientation)
+BOOST_AUTO_TEST_CASE(orbit_data)
 {
-  SpiceHelper::conversion_matrix("GLL_SCAN_PLANE", "IAU_EUROPA", tm3800);
-  for(int i = 0; i < 3; ++i) {
-    for(int j = 0; j < 3; ++j)
-      std::cerr << SpiceHelper::m[i][j] << "  ";
-    std::cerr << "\n";
-  }
-  std::cerr << SpiceHelper::conversion_quaternion("GLL_SCAN_PLANE", 
-						  "IAU_EUROPA", tm3800);
-  // We'll put this into time.
-  double tsc;
-  sce2c_c(-77, tm3800.et(), &tsc);
-  double cmat[3][3];
-  double clkout;
-  SpiceBoolean found;
-  //  ckgp_c(-77036, tsc, 0, "IAU_EUROPA", cmat, &clkout, &found);
-  ckgp_c(-77001, tsc, 0, "IAU_EUROPA", cmat, &clkout, &found);
-  SpiceHelper::spice_error_check();
-  for(int i = 0; i < 3; ++i) {
-    for(int j = 0; j < 3; ++j)
-      std::cerr << cmat[i][j] << "  ";
-    std::cerr << "\n";
-  }
-  if(!found)
-    throw Exception("Didn't find cmatrix");
+  boost::shared_ptr<QuaternionOrbitData> od = 
+    EuropaFixed::orbit_data(galileo_name, sc_frame_name, tm3800);
+  BOOST_CHECK_CLOSE(od->position_cf()->latitude(), -2.61439, 5e-4);
+  BOOST_CHECK_CLOSE(od->position_cf()->longitude(), -152.651, 5e-4);
+  // Need DEM and camera before we can check the intersection
 }
 
 BOOST_AUTO_TEST_SUITE_END()

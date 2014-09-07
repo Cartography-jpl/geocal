@@ -202,6 +202,19 @@ public:
 /// frame.
 //-----------------------------------------------------------------------
 
+  static boost::shared_ptr<QuaternionOrbitData> orbit_data
+  (const std::string& Target_name, 
+   const std::string& Spacecraft_reference_frame_name, const Time& T)
+  {
+    boost::shared_ptr<PlanetFixed<NAIF_CODE> > 
+      pos(new PlanetFixed<NAIF_CODE>());
+    boost::array<double, 3> vel;
+    SpiceHelper::state_vector(NAIF_CODE, Target_name, T, pos->position, vel);
+    return boost::shared_ptr<QuaternionOrbitData>
+      (new QuaternionOrbitData(T, pos, vel, 
+          SpiceHelper::conversion_quaternion(Spacecraft_reference_frame_name, 
+	     SpiceHelper::fixed_frame_name(NAIF_CODE), T)));
+  }
 };
 
 /****************************************************************//**

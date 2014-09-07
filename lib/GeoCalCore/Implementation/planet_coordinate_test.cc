@@ -151,19 +151,42 @@ BOOST_AUTO_TEST_CASE(orbit_data)
   // Note really have a twist angle that we should include. Rotation
   // about z axis, I think. This is -0.0022797905 in radians,
   // I have to think about if this a + or - rotation about z.
+  // The correction for this is about 0.9 pixels at the edges.
+  //
   // We also have a small distortion, which we aren't including yet.
   // A quick calculation shows that at the edges the distortion gives 
   // about 0.4 pixel correction, so we probably want to include this.
   // Pixel size and focal length are in mm, and come from gll360001.ti
   // file. We don't bother getting this through spice, instead I just 
   // manually read the file.
+  //
+  // Note that the camera definition file uses 1 based indexing, where we
+  // use 0 based. So things are off by a pixel
   boost::shared_ptr<Camera> 
     cam(new QuaternionCamera(boost::math::quaternion<double>(1,0,0,0),
 			     800, 800, 15.24e-3, 15.24e-3, 1501.039,
-			     FrameCoordinate(400,400),
+			     FrameCoordinate(399,399),
 			     QuaternionCamera::LINE_IS_Y));
   OrbitDataImageGroundConnection igc(od, cam, dem, img);
-  std::cerr << EuropaPlanetocentric(*igc.ground_coordinate(ImageCoordinate(400,400))) << "\n";
+  EuropaPlanetocentric gp(*igc.ground_coordinate(ImageCoordinate(399,399)));
+  BOOST_CHECK_CLOSE(gp.latitude(), -15.8989, 1e-3);
+  BOOST_CHECK_CLOSE(gp.longitude(), 164.426, 1e-3);
+  
+  // This is close to what we get from MIPL, which is -7904.05,  21811.58
+  // (1 based, so expect to be 1 off from what we would get if we had the
+  // idential calculation).
+  // I think they may be modifying the spice pointing, so this might be 
+  // a good starting point. Problem might be twist angle, or nonlinear
+  // correction (which we don't need to care too much about for 
+  // actual imagery). Or MIPL may be updating the pointing. Since 
+  // line and sample are right, and have the right
+  // sign, I think we have the coordinate systems right.
+  VicarImageCoordinate ic_planet_center = 
+    igc.image_coordinate(*dem->surface_point(*od->position_cf()));
+				// Convert to VicarImageCoordinate, so can
+				// more directly compare
+  BOOST_CHECK_CLOSE(ic_planet_center.line, -7918.38, 1e-4);
+  BOOST_CHECK_CLOSE(ic_planet_center.sample, 21812.475, 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -101,6 +101,7 @@ extern "C" {
   void init_ipi_image_ground_connection(void);
   void init_eci_tod(void);
   void init_quaternion_camera(void);
+  void init_galileo_camera(void);
   void init_refraction(void);
   void init_orbit_data_image_ground_connection(void);
   void init_planet_coordinate(void);
@@ -315,6 +316,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_ipi_image_ground_connection", init_ipi_image_ground_connection);
   init_extension_module(package, "_eci_tod", init_eci_tod);
   init_extension_module(package, "_quaternion_camera", init_quaternion_camera);
+  init_extension_module(package, "_galileo_camera", init_galileo_camera);
   init_extension_module(package, "_refraction", init_refraction);
   init_extension_module(package, "_orbit_data_image_ground_connection", init_orbit_data_image_ground_connection);
   init_extension_module(package, "_planet_coordinate", init_planet_coordinate);

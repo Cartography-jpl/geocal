@@ -5,6 +5,7 @@
 #include "vicar_lite_file.h"
 #include "quaternion_camera.h"
 #include "orbit_data_image_ground_connection.h"
+#include "galileo_camera.h"
 
 using namespace GeoCal;
 
@@ -148,11 +149,12 @@ BOOST_AUTO_TEST_CASE(orbit_data)
   boost::shared_ptr<Dem> dem(new EuropaSimpleDem());
   boost::shared_ptr<RasterImage> 
     img(new VicarLiteRasterImage(test_data_dir() + "3800r.img"));
-  // Note really have a twist angle that we should include. Rotation
-  // about z axis, I think. This is -0.0022797905 in radians,
-  // I have to think about if this a + or - rotation about z.
-  // The correction for this is about 0.9 pixels at the edges.
-  //
+  // We include rotation about the z axis, called "twist" angle. This
+  // is -0.0022797905 radians (from gll360001.ti). We have an extra
+  // "-" sign here since the definition of twist goes from what we
+  // call spacecraft to frame. The camera constructor takes the
+  // quaternion for the other direction.
+  // 
   // We also have a small distortion, which we aren't including yet.
   // A quick calculation shows that at the edges the distortion gives 
   // about 0.4 pixel correction, so we probably want to include this.
@@ -162,11 +164,12 @@ BOOST_AUTO_TEST_CASE(orbit_data)
   //
   // Note that the camera definition file uses 1 based indexing, where we
   // use 0 based. So things are off by a pixel
-  boost::shared_ptr<Camera> 
-    cam(new QuaternionCamera(boost::math::quaternion<double>(1,0,0,0),
-			     800, 800, 15.24e-3, 15.24e-3, 1501.039,
-			     FrameCoordinate(399,399),
-			     QuaternionCamera::LINE_IS_Y));
+  // boost::shared_ptr<Camera> cam(
+  //   cam(new QuaternionCamera(quat_rot("z", -(-0.0022797905)),
+  // 			     800, 800, 15.24e-3, 15.24e-3, 1501.039,
+  // 			     FrameCoordinate(399,399),
+  // 			     QuaternionCamera::LINE_IS_Y));
+  boost::shared_ptr<Camera> cam(new GalileoCamera());
   OrbitDataImageGroundConnection igc(od, cam, dem, img);
   EuropaPlanetocentric gp(*igc.ground_coordinate(ImageCoordinate(399,399)));
   BOOST_CHECK_CLOSE(gp.latitude(), -15.8989, 1e-3);

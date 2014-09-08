@@ -68,6 +68,8 @@ libgeocal_la_SOURCES+= @srcimplementation@/eci_tod_burl.cc
 endif
 geocalinc_HEADERS+= @srcimplementation@/quaternion_camera.h
 libgeocal_la_SOURCES+= @srcimplementation@/quaternion_camera.cc
+geocalinc_HEADERS+= @srcimplementation@/galileo_camera.h
+libgeocal_la_SOURCES+= @srcimplementation@/galileo_camera.cc
 geocalinc_HEADERS+= @srcimplementation@/refraction.h
 libgeocal_la_SOURCES+= @srcimplementation@/refraction.cc
 geocalinc_HEADERS+= @srcimplementation@/orbit_data_image_ground_connection.h
@@ -176,6 +178,7 @@ SWIG_SRC += @swigsrc@/ipi_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/eci_tod_wrap.cc
 SWIG_SRC_CARTO += @swigsrc@/eci_tod_burl_wrap.cc
 SWIG_SRC += @swigsrc@/quaternion_camera_wrap.cc
+SWIG_SRC += @swigsrc@/galileo_camera_wrap.cc
 SWIG_SRC += @swigsrc@/refraction_wrap.cc
 SWIG_SRC += @swigsrc@/orbit_data_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/planet_coordinate_wrap.cc
@@ -205,6 +208,7 @@ if HAVE_CARTO
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_burl_test.cc
 endif
 geocal_test_all_SOURCES+= @srcimplementation@/quaternion_camera_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/galileo_camera_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/refraction_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_data_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/ray_intersect_test.cc

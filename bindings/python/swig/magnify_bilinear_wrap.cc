@@ -5302,6 +5302,94 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MagnifyBilinear__v_underlying_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MagnifyBilinear *arg1 = (GeoCal::MagnifyBilinear *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MagnifyBilinear const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MagnifyBilinear const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::RasterImage > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyBilinear_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyBilinear__v_underlying_data" "', argument " "1"" of type '" "GeoCal::MagnifyBilinear const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MagnifyBilinear > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MagnifyBilinear > * >(argp1);
+      arg1 = const_cast< GeoCal::MagnifyBilinear * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MagnifyBilinear > * >(argp1);
+      arg1 = const_cast< GeoCal::MagnifyBilinear * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::MagnifyBilinear const *)arg1)->underlying_data();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MagnifyBilinear__v_magnification_factor(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MagnifyBilinear *arg1 = (GeoCal::MagnifyBilinear *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MagnifyBilinear const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MagnifyBilinear const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyBilinear_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyBilinear__v_magnification_factor" "', argument " "1"" of type '" "GeoCal::MagnifyBilinear const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MagnifyBilinear > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MagnifyBilinear > * >(argp1);
+      arg1 = const_cast< GeoCal::MagnifyBilinear * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MagnifyBilinear > * >(argp1);
+      arg1 = const_cast< GeoCal::MagnifyBilinear * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::MagnifyBilinear const *)arg1)->magnification_factor();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_MagnifyBilinear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MagnifyBilinear *arg1 = (GeoCal::MagnifyBilinear *) 0 ;
@@ -5653,6 +5741,14 @@ static PyMethodDef SwigMethods[] = {
 		"MagnifyBilinear::MagnifyBilinear(const boost::shared_ptr< RasterImage > &Data, int Magfactor, int\n"
 		"Number_tile=4)\n"
 		"Constructor. \n"
+		""},
+	 { (char *)"MagnifyBilinear__v_underlying_data", (PyCFunction)_wrap_MagnifyBilinear__v_underlying_data, METH_O, (char *)"\n"
+		"const boost::shared_ptr<RasterImage>& GeoCal::MagnifyBilinear::underlying_data() const\n"
+		"\n"
+		""},
+	 { (char *)"MagnifyBilinear__v_magnification_factor", (PyCFunction)_wrap_MagnifyBilinear__v_magnification_factor, METH_O, (char *)"\n"
+		"int GeoCal::MagnifyBilinear::magnification_factor() const\n"
+		"\n"
 		""},
 	 { (char *)"delete_MagnifyBilinear", (PyCFunction)_wrap_delete_MagnifyBilinear, METH_O, (char *)"\n"
 		"virtual GeoCal::MagnifyBilinear::~MagnifyBilinear()\n"

@@ -142,7 +142,38 @@ class MagnifyBilinear(geocal_swig.calc_raster.CalcRaster):
         Constructor. 
         """
         _magnify_bilinear.MagnifyBilinear_swiginit(self,_magnify_bilinear.new_MagnifyBilinear(*args))
+    def _v_underlying_data(self):
+        """
+        const boost::shared_ptr<RasterImage>& GeoCal::MagnifyBilinear::underlying_data() const
+
+        """
+        return _magnify_bilinear.MagnifyBilinear__v_underlying_data(self)
+
+    @property
+    def underlying_data(self):
+        return self._v_underlying_data()
+
+    def _v_magnification_factor(self):
+        """
+        int GeoCal::MagnifyBilinear::magnification_factor() const
+
+        """
+        return _magnify_bilinear.MagnifyBilinear__v_magnification_factor(self)
+
+    @property
+    def magnification_factor(self):
+        return self._v_magnification_factor()
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.underlying_data,self.magnification_factor)
+
     __swig_destroy__ = _magnify_bilinear.delete_MagnifyBilinear
+MagnifyBilinear._v_underlying_data = new_instancemethod(_magnify_bilinear.MagnifyBilinear__v_underlying_data,None,MagnifyBilinear)
+MagnifyBilinear._v_magnification_factor = new_instancemethod(_magnify_bilinear.MagnifyBilinear__v_magnification_factor,None,MagnifyBilinear)
 MagnifyBilinear_swigregister = _magnify_bilinear.MagnifyBilinear_swigregister
 MagnifyBilinear_swigregister(MagnifyBilinear)
 

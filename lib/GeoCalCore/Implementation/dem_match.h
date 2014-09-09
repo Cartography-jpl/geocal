@@ -105,7 +105,9 @@ private:
   double max_dist;
 
   // Scratch variables used between functions.
-  mutable std::vector<Geodetic> res;
+  mutable std::vector<double> res_lat;
+  mutable std::vector<double> res_lon;
+  mutable std::vector<double> res_h;
   mutable std::vector<ImageCoordinate> ic1v, ic2v;
   mutable ImageCoordinate ic1, ic2;
   mutable double line_sigma, sample_sigma, dist;

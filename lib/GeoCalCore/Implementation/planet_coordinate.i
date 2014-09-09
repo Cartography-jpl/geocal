@@ -8,6 +8,7 @@
 %}
 %base_import(ground_coordinate)
 %base_import(dem)
+%base_import(coordinate_converter)
 %import "orbit.i"
 %import "simple_dem.i"
 
@@ -77,6 +78,15 @@ public:
   %pickle_init(1, self.position[0], self.position[1], self.position[2])
 };
 
+template<int NAIF_CODE> class PlanetocentricConverter : public CoordinateConverter {
+public:
+  virtual boost::shared_ptr<GroundCoordinate>
+    convert_from_coordinate(double X, double Y, double Height = 0) const;
+  virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
+  double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
+  %pickle_init(1);
+};
+
 }
 
 %geocal_shared_ptr(GeoCal::PlanetConstant<499>);
@@ -84,19 +94,23 @@ public:
 %geocal_shared_ptr(GeoCal::PlanetInertial<499>);
 %geocal_shared_ptr(GeoCal::Planetocentric<499>);
 %geocal_shared_ptr(GeoCal::SimpleDemT<GeoCal::Planetocentric<499> >);
+%geocal_shared_ptr(GeoCal::PlanetocentricConverter<499>);
 %template(MarsConstant) GeoCal::PlanetConstant<499>;
 %template(MarsFixed) GeoCal::PlanetFixed<499>;
 %template(MarsInertial) GeoCal::PlanetInertial<499>;
 %template(MarsPlanetocentric) GeoCal::Planetocentric<499>;
 %template(MarsSimpleDem) GeoCal::SimpleDemT<GeoCal::Planetocentric<499> >;
+%template(MarsPlanetocentricConverter) GeoCal::PlanetocentricConverter<499>;
 
 %geocal_shared_ptr(GeoCal::PlanetConstant<502>);
 %geocal_shared_ptr(GeoCal::PlanetFixed<502>);
 %geocal_shared_ptr(GeoCal::PlanetInertial<502>);
 %geocal_shared_ptr(GeoCal::Planetocentric<502>);
 %geocal_shared_ptr(GeoCal::SimpleDemT<GeoCal::Planetocentric<502> >);
+%geocal_shared_ptr(GeoCal::PlanetocentricConverter<502>);
 %template(EuropaConstant) GeoCal::PlanetConstant<502>;
 %template(EuropaFixed) GeoCal::PlanetFixed<502>;
 %template(EuropaInertial) GeoCal::PlanetInertial<502>;
 %template(EuropaPlanetocentric) GeoCal::Planetocentric<502>;
 %template(EuropaSimpleDem) GeoCal::SimpleDemT<GeoCal::Planetocentric<502> >;
+%template(EuropaPlanetocentricConverter) GeoCal::PlanetocentricConverter<502>;

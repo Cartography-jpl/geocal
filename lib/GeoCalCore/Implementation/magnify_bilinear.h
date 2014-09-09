@@ -18,6 +18,9 @@ public:
        << "  magfactor: " << magfactor << "\n"
        << "  underlying raster: \n" << *raw_data << "\n";
   }
+  const boost::shared_ptr<RasterImage>& underlying_data() const
+  { return raw_data;}
+  int magnification_factor() const {return magfactor; }
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 private:

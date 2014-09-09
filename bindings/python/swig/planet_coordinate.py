@@ -122,6 +122,7 @@ import geocal_swig.ground_coordinate
 import geocal_swig.generic_object
 import geocal_swig.look_vector
 import geocal_swig.dem
+import geocal_swig.coordinate_converter
 class MarsConstant(object):
     """
     Constants for a planet.
@@ -387,6 +388,38 @@ MarsSimpleDem._v_h = new_instancemethod(_planet_coordinate.MarsSimpleDem__v_h,No
 MarsSimpleDem_swigregister = _planet_coordinate.MarsSimpleDem_swigregister
 MarsSimpleDem_swigregister(MarsSimpleDem)
 
+class MarsPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateConverter):
+    """
+    CoordinateConverter that goes to and from Planetocentric coordinates.
+
+    C++ includes: planet_coordinate.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def convert_from_coordinate(self, *args):
+        """
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::PlanetocentricConverter< NAIF_CODE >::convert_from_coordinate(double X, double Y, double Height=0) const
+        Convert to Planetocentric.
+
+        X and Y are longitude and latitude in degrees, and height is in
+        meters. 
+        """
+        return _planet_coordinate.MarsPlanetocentricConverter_convert_from_coordinate(self, *args)
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, )
+
+    def __init__(self): 
+        _planet_coordinate.MarsPlanetocentricConverter_swiginit(self,_planet_coordinate.new_MarsPlanetocentricConverter())
+    __swig_destroy__ = _planet_coordinate.delete_MarsPlanetocentricConverter
+MarsPlanetocentricConverter.convert_from_coordinate = new_instancemethod(_planet_coordinate.MarsPlanetocentricConverter_convert_from_coordinate,None,MarsPlanetocentricConverter)
+MarsPlanetocentricConverter_swigregister = _planet_coordinate.MarsPlanetocentricConverter_swigregister
+MarsPlanetocentricConverter_swigregister(MarsPlanetocentricConverter)
+
 class EuropaConstant(object):
     """
     Constants for a planet.
@@ -651,6 +684,38 @@ class EuropaSimpleDem(geocal_swig.dem.Dem):
 EuropaSimpleDem._v_h = new_instancemethod(_planet_coordinate.EuropaSimpleDem__v_h,None,EuropaSimpleDem)
 EuropaSimpleDem_swigregister = _planet_coordinate.EuropaSimpleDem_swigregister
 EuropaSimpleDem_swigregister(EuropaSimpleDem)
+
+class EuropaPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateConverter):
+    """
+    CoordinateConverter that goes to and from Planetocentric coordinates.
+
+    C++ includes: planet_coordinate.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def convert_from_coordinate(self, *args):
+        """
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::PlanetocentricConverter< NAIF_CODE >::convert_from_coordinate(double X, double Y, double Height=0) const
+        Convert to Planetocentric.
+
+        X and Y are longitude and latitude in degrees, and height is in
+        meters. 
+        """
+        return _planet_coordinate.EuropaPlanetocentricConverter_convert_from_coordinate(self, *args)
+
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, )
+
+    def __init__(self): 
+        _planet_coordinate.EuropaPlanetocentricConverter_swiginit(self,_planet_coordinate.new_EuropaPlanetocentricConverter())
+    __swig_destroy__ = _planet_coordinate.delete_EuropaPlanetocentricConverter
+EuropaPlanetocentricConverter.convert_from_coordinate = new_instancemethod(_planet_coordinate.EuropaPlanetocentricConverter_convert_from_coordinate,None,EuropaPlanetocentricConverter)
+EuropaPlanetocentricConverter_swigregister = _planet_coordinate.EuropaPlanetocentricConverter_swigregister
+EuropaPlanetocentricConverter_swigregister(EuropaPlanetocentricConverter)
 
 
 

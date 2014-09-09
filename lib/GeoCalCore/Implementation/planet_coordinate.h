@@ -5,6 +5,7 @@
 #include "spice_helper.h"
 #include "orbit.h"
 #include "simple_dem.h"
+#include "coordinate_converter.h"
 
 namespace GeoCal {
 template<int NAIF_CODE> class Planetocentric;
@@ -461,17 +462,77 @@ PlanetFixed<NAIF_CODE>::convert_to_planetocentric() const
 				   height_reference_surface());
 }
 
+/****************************************************************//**
+  CoordinateConverter that goes to and from Planetocentric coordinates.
+*******************************************************************/
+
+template<int NAIF_CODE> class PlanetocentricConverter : 
+    public CoordinateConverter {
+public:
+//-----------------------------------------------------------------------
+/// Destructor.
+//-----------------------------------------------------------------------
+
+  virtual ~PlanetocentricConverter() {}
+
+//-----------------------------------------------------------------------
+/// Convert to Planetocentric. X and Y are longitude and latitude in
+/// degrees, and height is in meters.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<GroundCoordinate>
+    convert_from_coordinate(double X, double Y, double Height = 0) const
+  {
+    return boost::shared_ptr<GroundCoordinate>
+      (new Planetocentric<NAIF_CODE>(Y, X, Height));
+  }
+
+//-----------------------------------------------------------------------
+/// Test if two CoordinateConverters are the same coordinate system.
+//-----------------------------------------------------------------------
+
+  virtual bool is_same(const CoordinateConverter& Conv) const
+  {
+    return dynamic_cast<const PlanetocentricConverter<NAIF_CODE>*>(&Conv);
+  }
+
+
+//-----------------------------------------------------------------------
+/// Convert to Planetocentric. X and Y are longitude and latitude in
+/// degrees, and height is in meters.
+//-----------------------------------------------------------------------
+
+  virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
+			       double& Y, double& Height) const
+  {
+    Planetocentric<NAIF_CODE> gd(Gc);
+    X = gd.longitude();
+    Y = gd.latitude();
+    Height = gd.height_reference_surface();
+  }
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+  virtual void print(std::ostream& Os) const
+  { Os << PlanetConstant<NAIF_CODE>::planet_name()
+       << "Planetocentric Converter"; }
+};
+
 typedef PlanetConstant<499> MarsConstant;
 typedef Planetocentric<499> MarsPlanetocentric;
 typedef PlanetFixed<499> MarsFixed;
 typedef PlanetInertial<499> MarsInertial;
 typedef SimpleDemT<MarsPlanetocentric> MarsSimpleDem;
+typedef PlanetocentricConverter<499> MarsPlanetocentricConverter;
 
 typedef PlanetConstant<502> EuropaConstant;
 typedef Planetocentric<502> EuropaPlanetocentric;
 typedef PlanetFixed<502> EuropaFixed;
 typedef PlanetInertial<502> EuropaInertial;
 typedef SimpleDemT<EuropaPlanetocentric> EuropaSimpleDem;
+typedef PlanetocentricConverter<502> EuropaPlanetocentricConverter;
 
 }
 #endif

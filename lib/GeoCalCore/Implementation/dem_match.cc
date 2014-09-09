@@ -90,7 +90,9 @@ blitz::Array<double, 2> DemMatch::surface_point(const MapInfo& Mi,
 
 void DemMatch::process_setup() const
 {
-  res.clear();
+  res_lat.clear();
+  res_lon.clear();
+  res_h.clear();
   ic1v.clear();
   ic2v.clear();
   npoint = 0;
@@ -112,10 +114,18 @@ void DemMatch::process_match() const
       all_stat->add(dist);
       if(dist < max_dist) {
 	good_stat->add(dist);
+	// Optimization for Ecr
 	Ecr* ecr = dynamic_cast<Ecr*>(p.get());
-	if(!ecr)
-	  throw Exception("Must be Ecr");
-	res.push_back(ecr->convert_to_geodetic());
+	if(ecr) {
+	  Geodetic g = ecr->convert_to_geodetic();
+	  res_lat.push_back(g.latitude());
+	  res_lon.push_back(g.longitude());
+	  res_h.push_back(g.height_reference_surface());
+	} else {
+	  res_lat.push_back(p->latitude());
+	  res_lon.push_back(p->longitude());
+	  res_h.push_back(p->height_reference_surface());
+	}
 	if(include_ic) {
 	  ic1v.push_back(ic1);
 	  ic2v.push_back(ic2);
@@ -132,11 +142,11 @@ void DemMatch::process_match() const
 
 blitz::Array<double, 2> DemMatch::process_res() const
 {
-  blitz::Array<double, 2> res2((int) res.size(), (include_ic ? 3 + 4 : 3));
+  blitz::Array<double, 2> res2((int) res_lat.size(), (include_ic ? 3 + 4 : 3));
   for(int i = 0; i < res2.rows(); ++i) {
-    res2(i, 0) = res[i].latitude();
-    res2(i, 1) = res[i].longitude();
-    res2(i, 2) = res[i].height_reference_surface();
+    res2(i, 0) = res_lat[i];
+    res2(i, 1) = res_lon[i];
+    res2(i, 2) = res_h[i];
     if(include_ic) {
       res2(i, 3) = ic1v[i].line;
       res2(i, 4) = ic1v[i].sample;

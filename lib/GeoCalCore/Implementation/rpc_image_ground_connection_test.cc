@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_CLOSE(ig.parameter()(4), ig.rpc().height_offset, 1e-4);
   ig.parameter(p0);
   Ecr ecr(g);
-  blitz::Array<double, 2> jac = ig.image_coordinate_jac_ecr(ecr);
+  blitz::Array<double, 2> jac = ig.image_coordinate_jac_cf(ecr);
   ImageCoordinate ic0 = ig.image_coordinate(ecr);
   double eps = 10;
   ImageCoordinate ic2;

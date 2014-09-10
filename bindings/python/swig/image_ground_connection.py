@@ -215,7 +215,7 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
         coordinate (to igc.image_coordinate(res) = Ic up to roundoff errors),
         but it is approximate in the sense that the height might not be
         exactly the supplied height. This is similar to
-        Ecr::reference_surface_intersect_approximate. A particular
+        CartesianFixed::reference_surface_intersect_approximate. A particular
         implementation can be much faster than ground_coordinate_dem, since it
         doesn't need to do ray tracing. 
         """
@@ -235,13 +235,13 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
         """
         return _image_ground_connection.ImageGroundConnection_image_coordinate(self, *args)
 
-    def image_coordinate_jac_ecr(self, *args):
+    def image_coordinate_jac_cf(self, *args):
         """
-        blitz::Array< double, 2 > ImageGroundConnection::image_coordinate_jac_ecr(const Ecr &Gc) const
+        blitz::Array< double, 2 > ImageGroundConnection::image_coordinate_jac_cf(const CartesianFixed &Gc) const
         Return the Jacobian of the image coordinates with respect to the X, Y,
-        and Z components of the Ecr ground location. 
+        and Z components of the CartesianFixed ground location. 
         """
-        return _image_ground_connection.ImageGroundConnection_image_coordinate_jac_ecr(self, *args)
+        return _image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf(self, *args)
 
     def image_coordinate_jac_parm(self, *args):
         """
@@ -475,7 +475,7 @@ ImageGroundConnection.__ground_coordinate = new_instancemethod(_image_ground_con
 ImageGroundConnection.ground_coordinate_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_dem,None,ImageGroundConnection)
 ImageGroundConnection.ground_coordinate_approx_height = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_approx_height,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate,None,ImageGroundConnection)
-ImageGroundConnection.image_coordinate_jac_ecr = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_ecr,None,ImageGroundConnection)
+ImageGroundConnection.image_coordinate_jac_cf = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm,None,ImageGroundConnection)
 ImageGroundConnection.cover = new_instancemethod(_image_ground_connection.ImageGroundConnection_cover,None,ImageGroundConnection)
 ImageGroundConnection._v_image = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image,None,ImageGroundConnection)

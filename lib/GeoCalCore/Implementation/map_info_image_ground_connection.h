@@ -79,18 +79,18 @@ public:
     return image_multi_band()->raster_image(0).coordinate(Gc);
   }
 
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) const
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const
   {
     ImageCoordinate ic0 = image_coordinate(Gc);
-    Ecr gc2(Gc);
+    boost::shared_ptr<CartesianFixed> gc2 = Gc.convert_to_cf();
     blitz::Array<double, 2> res(2, 3);
     const double eps = 10;
     for(int i = 0; i < 3; ++i) {
-      gc2.position[i] += eps;
-      ImageCoordinate ic1 = image_coordinate(gc2);
+      gc2->position[i] += eps;
+      ImageCoordinate ic1 = image_coordinate(*gc2);
       res(0, i) = (ic1.line - ic0.line) / eps;
       res(1, i) = (ic1.sample - ic0.sample) / eps;
-      gc2.position[i] -= eps;
+      gc2->position[i] -= eps;
     }
     return res;
   }

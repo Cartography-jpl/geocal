@@ -190,12 +190,12 @@ class IgcOffsetCorrection(IgcCollection):
         '''Return image coordinates for the given ground point'''
         return self.image_ground_connection(image_index).image_coordinate(ground_point)
 
-    def image_coordinate_jac_ecr(self, image_index, ground_point):
+    def image_coordinate_jac_cf(self, image_index, ground_point):
         '''Return Jacobian for image coordinate with respect to change in 
-        the ECR coordinates of the ground point. This can either be a 
-        dense matrix or a scip.sparse matrix.'''
+        the CartesianFixed coordinates of the ground point. This can either 
+        be a dense matrix or a scip.sparse matrix.'''
         cache = self.__jacobian_cache(image_index)
-        return cache["igc0"].image_coordinate_jac_ecr(ground_point)
+        return cache["igc0"].image_coordinate_jac_cf(ground_point)
 
     def __jacobian_cache(self, image_index):
         '''Cache stuff we use for calculating the jacobian.'''

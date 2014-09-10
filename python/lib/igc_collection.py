@@ -36,10 +36,10 @@ class IgcCollection(WithParameter):
         '''Return image coordinates for the given ground point'''
         pass
     @abstractmethod
-    def image_coordinate_jac_ecr(self, image_index, ground_point):
+    def image_coordinate_jac_cf(self, image_index, ground_point):
         '''Return Jacobian for image coordinate with respect to change in 
-        the ECR coordinates of the ground point. This can either be a 
-        dense matrix or a scip.sparse matrix.'''
+        the CartesianFixed coordinates of the ground point. This can either 
+        be a dense matrix or a scip.sparse matrix.'''
         pass
     @abstractmethod
     def image_coordinate_jac_parm(self, image_index, ground_point, jac,
@@ -94,11 +94,11 @@ class ImageGroundConnectionIgc(ImageGroundConnection, WithParameter):
         return self.igc_collection.image_coordinate(self.image_index, 
                                                     ground_point)
         
-    def image_coordinate_jac_ecr(self, ground_point):
+    def image_coordinate_jac_cf(self, ground_point):
         '''Return Jacobian for image coordinate with respect to change in 
-        the ECR coordinates of the ground point. This can either be a 
-        dense matrix or a scip.sparse matrix.'''
-        return self.igc_collection.image_coordinate_jac_ecr(self.image_index, 
+        the CartesianFixed coordinates of the ground point. This can either 
+        be a dense matrix or a scip.sparse matrix.'''
+        return self.igc_collection.image_coordinate_jac_cf(self.image_index, 
                                                             ground_point)
 
     @property
@@ -236,11 +236,11 @@ class IgcArray(IgcCollection):
         return self._igc_or_coll_call(image_index, "image_coordinate", 
                                       ground_point)
 
-    def image_coordinate_jac_ecr(self, image_index, ground_point):
+    def image_coordinate_jac_cf(self, image_index, ground_point):
         '''Return Jacobian for image coordinate with respect to change in 
-        the ECR coordinates of the ground point. This can either be a 
-        dense matrix or a scip.sparse matrix.'''
-        return self._igc_or_coll_call(image_index, "image_coordinate_jac_ecr", 
+        the CartesianFixed coordinates of the ground point. This can either 
+        be a dense matrix or a scip.sparse matrix.'''
+        return self._igc_or_coll_call(image_index, "image_coordinate_jac_cf", 
                                       ground_point)
 
     def image_coordinate_jac_parm(self, image_index, ground_point, jac,

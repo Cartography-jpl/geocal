@@ -178,18 +178,16 @@ BOOST_AUTO_TEST_CASE(orbit_data)
   // This is close to what we get from MIPL, which is -7904.05,  21811.58
   // (1 based, so expect to be 1 off from what we would get if we had the
   // idential calculation).
-  // I think they may be modifying the spice pointing, so this might be 
-  // a good starting point. Problem might be twist angle, or nonlinear
-  // correction (which we don't need to care too much about for 
-  // actual imagery). Or MIPL may be updating the pointing. Since 
-  // line and sample are right, and have the right
-  // sign, I think we have the coordinate systems right.
+  // 
+  // Difference is much larger when we put the nonlinearity correction
+  // in for the GalileoCamera (I think MIPL wasn't including this).
+  
   VicarImageCoordinate ic_planet_center = 
     igc.image_coordinate(*dem->surface_point(*od->position_cf()));
 				// Convert to VicarImageCoordinate, so can
 				// more directly compare
-  BOOST_CHECK_CLOSE(ic_planet_center.line, -7918.38, 1e-4);
-  BOOST_CHECK_CLOSE(ic_planet_center.sample, 21812.475, 1e-4);
+  BOOST_CHECK_CLOSE(ic_planet_center.line, -3932.85756, 1e-4);
+  BOOST_CHECK_CLOSE(ic_planet_center.sample, 11478.387, 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

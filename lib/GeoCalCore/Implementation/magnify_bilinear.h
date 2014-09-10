@@ -93,16 +93,16 @@ public:
     return ic;
   }
 
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) const
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const
   { 
-    blitz::Array<double, 2> res = ig_->image_coordinate_jac_ecr(Gc); 
+    blitz::Array<double, 2> res = ig_->image_coordinate_jac_cf(Gc); 
     res *= magfactor_;
     return res;
   }
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const
   { 
-    blitz::Array<double, 2> res = ig_->image_coordinate_jac_ecr(Gc); 
+    blitz::Array<double, 2> res = ig_->image_coordinate_jac_parm(Gc); 
     res *= magfactor_;
     return res;
   }

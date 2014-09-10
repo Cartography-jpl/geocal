@@ -76,23 +76,23 @@ MapInfo ImageGroundConnection::cover(const MapInfo& Mi,
 
 //-----------------------------------------------------------------------
 /// Return the Jacobian of the image coordinates with respect to the
-/// X, Y, and Z components of the Ecr ground location. 
+/// X, Y, and Z components of the CartesianFixed ground location. 
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_ecr
-(const Ecr& Gc) const
+blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_cf
+(const CartesianFixed& Gc) const
 {
   // Default is just to do a numerical derivative.
   double eps = 0.1;
   blitz::Array<double, 2> res(2, 3);
   ImageCoordinate ic0 = image_coordinate(Gc);
-  Ecr gcx(Gc);
+  boost::shared_ptr<CartesianFixed> gcx = Gc.convert_to_cf();
   for(int i = 0; i < 3; ++i) {
-    gcx.position[i] += eps;
-    ImageCoordinate ic = image_coordinate(gcx);
+    gcx->position[i] += eps;
+    ImageCoordinate ic = image_coordinate(*gcx);
     res(0, i) = (ic.line - ic0.line) / eps;
     res(1, i) = (ic.sample - ic0.sample) / eps;
-    gcx.position[i] = Gc.position[i];
+    gcx->position[i] = Gc.position[i];
   }
   return res;
 }
@@ -104,7 +104,7 @@ blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_ecr
 /// igc.image_coordinate(res) = Ic up to roundoff errors), but it is
 /// approximate in the sense that the height might not be exactly
 /// the supplied height. This is similar to
-/// Ecr::reference_surface_intersect_approximate. A particular
+/// CartesianFixed::reference_surface_intersect_approximate. A particular
 /// implementation can be much faster than ground_coordinate_dem,
 /// since it doesn't need to do ray tracing.
 //-----------------------------------------------------------------------

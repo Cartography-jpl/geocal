@@ -60,8 +60,8 @@ def test_igc_array():
     gp = igc3.ground_coordinate(ic)
     assert abs(igc_coll.image_coordinate(2, gp).line - ic.line) < 0.1
     assert abs(igc_coll.image_coordinate(2, gp).sample - ic.sample) < 0.1
-    assert abs(igc_coll.image_coordinate_jac_ecr(2, Ecr(gp)) - 
-               igc3.image_coordinate_jac_ecr(Ecr(gp))).max() < 1e-6
+    assert abs(igc_coll.image_coordinate_jac_cf(2, Ecr(gp)) - 
+               igc3.image_coordinate_jac_cf(Ecr(gp))).max() < 1e-6
     igc_coll.parameter = [1,2,3,4,5,6]
     assert_almost_equal(igc1.parameter[0], 1, 10)
     assert_almost_equal(igc2.parameter[1], 4, 10)
@@ -96,8 +96,8 @@ def test_igc_array_with_igc_collection():
     gp = igc3.ground_coordinate(ic)
     assert abs(igc_coll.image_coordinate(2, gp).line - ic.line) < 0.1
     assert abs(igc_coll.image_coordinate(2, gp).sample - ic.sample) < 0.1
-    assert abs(igc_coll.image_coordinate_jac_ecr(2, Ecr(gp)) - 
-               igc3.image_coordinate_jac_ecr(Ecr(gp))).max() < 1e-6
+    assert abs(igc_coll.image_coordinate_jac_cf(2, Ecr(gp)) - 
+               igc3.image_coordinate_jac_cf(Ecr(gp))).max() < 1e-6
     igc_coll.parameter = [1,2,3,4,5,6]
     assert_almost_equal(igc1.parameter[0], 1, 10)
     assert_almost_equal(igc2.parameter[1], 4, 10)

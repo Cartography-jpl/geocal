@@ -85,23 +85,22 @@ void RpcImageGroundConnection::parameter(const Array<double, 1>& Parm)
     rpc_->height_offset = Parm(j++);
 }
 
-Array<double, 2> RpcImageGroundConnection::image_coordinate_jac_ecr
-(const Ecr& Gc) const
+Array<double, 2> RpcImageGroundConnection::image_coordinate_jac_cf
+(const CartesianFixed& Gc) const
 {
   firstIndex i1; secondIndex i2; thirdIndex i3;
   Array<double, 2> res(2, 3);
   Geodetic g0(Gc);
   Array<double, 2> dgeod_decr(3, 3);
-  Ecr gc2(Gc);
+  boost::shared_ptr<CartesianFixed> gc2 = Gc.convert_to_cf();
   const double eps = 10;
   for(int i = 0; i < 3; ++i) {
-    gc2.position[i] += eps;
-    Geodetic g1(gc2);
-    dgeod_decr(0, i) = (gc2.latitude() - g0.latitude()) / eps;
-    dgeod_decr(1, i) = (gc2.longitude() - g0.longitude()) / eps;
-    dgeod_decr(2, i) = (gc2.height_reference_surface() - 
+    gc2->position[i] += eps;
+    dgeod_decr(0, i) = (gc2->latitude() - g0.latitude()) / eps;
+    dgeod_decr(1, i) = (gc2->longitude() - g0.longitude()) / eps;
+    dgeod_decr(2, i) = (gc2->height_reference_surface() - 
 			g0.height_reference_surface()) / eps;
-    gc2.position[i] -= eps;
+    gc2->position[i] -= eps;
   }
   Array<double, 2> jac_geod = 
     rpc_->image_coordinate_jac(g0.latitude(), g0.longitude(), 

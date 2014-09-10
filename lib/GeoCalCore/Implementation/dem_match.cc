@@ -1,4 +1,5 @@
 #include "dem_match.h"
+#include "ecr.h"
 #include "surface_image_to_image_match.h"
 using namespace GeoCal;
 

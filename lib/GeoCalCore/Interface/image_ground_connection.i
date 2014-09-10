@@ -15,7 +15,6 @@
 %import "image_coordinate.i"
 %import "image_mask.i"
 %import "ground_mask.i"
-%import "ecr.i"
 %geocal_shared_ptr(GeoCal::ImageGroundConnection);
 %geocal_shared_ptr(GeoCal::OffsetImageGroundConnection);
 %geocal_shared_ptr(GeoCal::ImageGroundConnectionFailed);
@@ -102,7 +101,7 @@ public:
 				  double H) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const = 0;
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) 
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;

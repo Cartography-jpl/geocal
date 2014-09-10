@@ -43,8 +43,8 @@ class SimultaneousBundleAdjustment(object):
         Likewise, the GCP constraint is scaled by 1/gcp_sigma.
 
         We calculate the jacobians with respect to moving the tiepoint on
-        the surface numerically, the epsilon used for the Ecr coordinates
-        can be optionally supplied.
+        the surface numerically, the epsilon used for the CartesianFixed 
+        coordinates can be optionally supplied.
         '''
         self.igc_coll = igc_coll
         self.tpcol = tpcol
@@ -99,12 +99,13 @@ class SimultaneousBundleAdjustment(object):
         '''Using the current value of the parameters, determine
         the ground location of the given tie point'''
         # Note subtle memory problem here. We initially did not have
-        # gl_ecr. This mean Ecr went out of scope as was deleted before
-        # gl was used. Easy work around is to store this is a variable
-        gl_ecr = Ecr(self.tpcol[tp_index].ground_location)
-        gl = gl_ecr.position
+        # gl_cf. This mean CartesianFixed went out of scope as was 
+        # deleted before gl was used. Easy work around is to store 
+        # this is a variable
+        gp = self.tpcol[tp_index].ground_location
+        gl = gp.position
         t = self.index_to_tp_offset(tp_index)
-        pt = Ecr(gl[0] + t[0], gl[1] + t[1], gl[2] + t[2])
+        pt = gp.create([gl[0] + t[0], gl[1] + t[1], gl[2] + t[2]])
         return pt
 
     def sba_eq(self, parm):
@@ -205,7 +206,7 @@ class SimultaneousBundleAdjustment(object):
             for j, il in enumerate(tp.image_location):
                 if(il):
                     ictp, lsigma, ssigma = il
-                    jac = self.igc_coll.image_coordinate_jac_ecr(j, gp)
+                    jac = self.igc_coll.image_coordinate_jac_cf(j, gp)
                     # We have "-" because equation if measured - predicted
                     ts = self.tp_slice[i].start
                     for k in range(3):

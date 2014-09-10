@@ -4,7 +4,6 @@
 #include "dem.h"
 #include "image_coordinate.h"
 #include "printable.h"
-#include "ecr.h"
 #include "raster_image.h"
 #include "raster_image_multi_band.h"
 #include "raster_image_multi_band_variable.h"
@@ -213,7 +212,7 @@ public:
 
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const = 0;
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) 
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
 
 //-----------------------------------------------------------------------
@@ -434,8 +433,8 @@ public:
     ic.sample += sample_offset_;
     return ic;
   }
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) const
-  { return ig_->image_coordinate_jac_ecr(Gc); }
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const
+  { return ig_->image_coordinate_jac_cf(Gc); }
 
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
@@ -535,8 +534,8 @@ public:
   { return igc; }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const { return igc->image_coordinate(Gc); }
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) 
-    const { return igc->image_coordinate_jac_ecr(Gc); }
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
+    const { return igc->image_coordinate_jac_cf(Gc); }
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const
   { return igc->image_coordinate_jac_parm(Gc); }

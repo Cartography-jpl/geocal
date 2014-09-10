@@ -57,11 +57,11 @@ public:
       return gc_uncorr;
     boost::shared_ptr<GroundCoordinate> gc_corr =
       refraction_->refraction_apply(*od->position_cf(), *gc_uncorr);
-    Ecr gc_corr_ecr(*gc_corr);
+    boost::shared_ptr<CartesianFixed> gc_corr_cf = gc_corr->convert_to_cf();
     CartesianFixedLookVector lv
-      (gc_corr_ecr.position[0] - od->position_cf()->position[0],
-       gc_corr_ecr.position[1] - od->position_cf()->position[1],
-       gc_corr_ecr.position[2] - od->position_cf()->position[2]);
+      (gc_corr_cf->position[0] - od->position_cf()->position[0],
+       gc_corr_cf->position[1] - od->position_cf()->position[1],
+       gc_corr_cf->position[2] - od->position_cf()->position[2]);
     return D.intersect(*od->position_cf(), lv, res, max_h);
   }
   virtual boost::shared_ptr<GroundCoordinate> 
@@ -74,11 +74,11 @@ public:
       return gc_uncorr;
     boost::shared_ptr<GroundCoordinate> gc_corr =
       refraction_->refraction_apply(*od->position_cf(), *gc_uncorr);
-    Ecr gc_corr_ecr(*gc_corr);
+    boost::shared_ptr<CartesianFixed> gc_corr_cf = gc_corr->convert_to_cf();
     CartesianFixedLookVector lv
-      (gc_corr_ecr.position[0] - od->position_cf()->position[0],
-       gc_corr_ecr.position[1] - od->position_cf()->position[1],
-       gc_corr_ecr.position[2] - od->position_cf()->position[2]);
+      (gc_corr_cf->position[0] - od->position_cf()->position[0],
+       gc_corr_cf->position[1] - od->position_cf()->position[1],
+       gc_corr_cf->position[2] - od->position_cf()->position[2]);
     return od->position_cf()->reference_surface_intersect_approximate(lv, H);
   }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 

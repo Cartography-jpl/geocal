@@ -360,17 +360,13 @@ class VicarLiteRasterImage(geocal_swig.raster_image.RasterImage):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, int Band_id=1, access_type
-        Access=VicarLiteFile::READ, int Number_tile_line=-1, int
+        GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, const MapInfo &Mi, int Band_id=1,
+        access_type Access=VicarLiteFile::READ, int Number_tile_line=-1, int
         Number_tile_sample=-1, bool Force_area_pixel=false)
         Constructor.
 
-        The Force_area_pixel forces the file to be treated as "pixel as
-        area" rather than "pixel as point". This is really just meant as a
-        work around for the SRTM data, which incorrectly labels the data as
-        "point" rather than "area". Since this is a 15 meter difference,
-        it matters for many applications. Most users should just ignore this
-        value. 
+        We force the given map info to apply to the image. This is a
+        workaround for pickling mapinfo that VICAR doesn't support yet. 
         """
         _vicar_lite_file.VicarLiteRasterImage_swiginit(self,_vicar_lite_file.new_VicarLiteRasterImage(*args))
     def _v_file(self):
@@ -409,17 +405,41 @@ class VicarLiteRasterImage(geocal_swig.raster_image.RasterImage):
     def band_id(self):
         return self._v_band_id()
 
+    def _v_force_map_info(self):
+        """
+        bool GeoCal::VicarLiteRasterImage::force_map_info() const
+        Marker to force a map_info in python pickle.
+
+        This is a work around for map info that VICAR doesn't support writing.
+
+        """
+        return _vicar_lite_file.VicarLiteRasterImage__v_force_map_info(self)
+
+    @property
+    def force_map_info(self):
+        return self._v_force_map_info()
+
     @classmethod
     def pickle_format_version(cls):
       return 2
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 2, self.file.file_name,self.band_id,self.file.access,self.number_tile_line,self.number_tile_sample,self.file.force_area_pixel)
+      if(self.force_map_info):
+         return _new_from_init, (self.__class__, 2, self.file.file_name, 
+    		          self.map_info, self.band_id, self.file.access, 
+    			  self.number_tile_line, self.number_tile_sample,
+    			  self.file.force_area_pixel)
+      else:
+         return _new_from_init, (self.__class__, 2, self.file.file_name, 
+    			  self.band_id, self.file.access, 
+    			  self.number_tile_line, self.number_tile_sample,
+    			  self.file.force_area_pixel)
 
     __swig_destroy__ = _vicar_lite_file.delete_VicarLiteRasterImage
 VicarLiteRasterImage._v_file = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_file,None,VicarLiteRasterImage)
 VicarLiteRasterImage._v_is_compressed = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_is_compressed,None,VicarLiteRasterImage)
 VicarLiteRasterImage._v_band_id = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_band_id,None,VicarLiteRasterImage)
+VicarLiteRasterImage._v_force_map_info = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_force_map_info,None,VicarLiteRasterImage)
 VicarLiteRasterImage_swigregister = _vicar_lite_file.VicarLiteRasterImage_swigregister
 VicarLiteRasterImage_swigregister(VicarLiteRasterImage)
 

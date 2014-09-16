@@ -102,7 +102,8 @@ class DemGenerate:
                  max_dist_good_point = 0.5,
                  all_image = False):
         # Temporary here, we'll need to find a cleaner way to do this
-        self.coordinate_system = EuropaPlanetocentric
+        #self.coordinate_system = EuropaPlanetocentric
+        self.coordinate_system = Geodetic
         self.igc1 = image_ground_connnection1
         self.igc2 = image_ground_connnection2
         self.max_dist_good_point = max_dist_good_point
@@ -327,11 +328,19 @@ class DemGenerate:
             for j in range(self.aoi.number_y_pixel):
                 g[j,i,0] = self.aoi.ground_coordinate(i, j).latitude
                 g[j,i,1] = self.aoi.ground_coordinate(i, j).longitude
-        if len(self.r) > 0:
-            self.h_fill = scipy.interpolate.griddata(self.r[:,0:2], 
-                                          self.r[:, 2], g, 
-                                          method = interpolate_method,
-                                          fill_value = fill_value) 
+        if len(self.r) > 2:
+            try:
+                self.h_fill = scipy.interpolate.griddata(self.r[:,0:2], 
+                                                         self.r[:, 2], g, 
+                                                         method = interpolate_method,
+                                                         fill_value = fill_value) 
+            except RuntimeError:
+                # May fail because we have too few points, or they are in
+                # a line
+                self.h_fill = np.zeros((self.aoi.number_y_pixel,
+                                        self.aoi.number_x_pixel))
+                self.h_fill[:] = fill_value
+                
         else:
             self.h_fill = np.zeros((self.aoi.number_y_pixel,
                                     self.aoi.number_x_pixel))

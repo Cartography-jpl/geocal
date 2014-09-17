@@ -13,6 +13,7 @@ from ply_file import *
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
 import logging
+import re
 
 def _new_from_init(cls, version, *args):
     if(cls.pickle_format_version() < version):
@@ -334,7 +335,10 @@ class DemGenerate:
                                                          self.r[:, 2], g, 
                                                          method = interpolate_method,
                                                          fill_value = fill_value) 
-            except RuntimeError:
+            except RuntimeError as e:
+                print "Got exception %s" % e
+                if(not re.search("Qhull", str(e))):
+                    raise e
                 # May fail because we have too few points, or they are in
                 # a line
                 self.h_fill = np.zeros((self.aoi.number_y_pixel,

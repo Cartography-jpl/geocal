@@ -7,8 +7,8 @@
 #include "ground_mspi_orbit.h"
 %}
 
+%base_import(look_vector)
 %base_import(orbit)
-%import "look_vector.i"
 
 %geocal_shared_ptr(GeoCal::GroundMspiOrbit);
 namespace GeoCal {

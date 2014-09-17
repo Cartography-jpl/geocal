@@ -144,11 +144,40 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
-class Camera(geocal_swig.generic_object.GenericObject):
+import geocal_swig.observer
+class ObservableCamera(geocal_swig.generic_object.GenericObject):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _camera.delete_ObservableCamera
+ObservableCamera.add_observer_and_keep_reference = new_instancemethod(_camera.ObservableCamera_add_observer_and_keep_reference,None,ObservableCamera)
+ObservableCamera.add_observer = new_instancemethod(_camera.ObservableCamera_add_observer,None,ObservableCamera)
+ObservableCamera.remove_observer = new_instancemethod(_camera.ObservableCamera_remove_observer,None,ObservableCamera)
+ObservableCamera_swigregister = _camera.ObservableCamera_swigregister
+ObservableCamera_swigregister(ObservableCamera)
+
+class ObserverCamera(geocal_swig.generic_object.GenericObject):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self): 
+        _camera.ObserverCamera_swiginit(self,_camera.new_ObserverCamera())
+    __swig_destroy__ = _camera.delete_ObserverCamera
+ObserverCamera.notify_update = new_instancemethod(_camera.ObserverCamera_notify_update,None,ObserverCamera)
+ObserverCamera.notify_add = new_instancemethod(_camera.ObserverCamera_notify_add,None,ObserverCamera)
+ObserverCamera.notify_remove = new_instancemethod(_camera.ObserverCamera_notify_remove,None,ObserverCamera)
+ObserverCamera_swigregister = _camera.ObserverCamera_swigregister
+ObserverCamera_swigregister(ObserverCamera)
+
+class Camera(ObservableCamera):
     """
     This class models a frame camera.
 
     It is used to convert ScLookVector to FrameCoordinate and vice versa.
+
+    Other objects may depend on the Camera, and should be updated when the
+    Camera is updated. To facilitate that, this class in an Oberverable,
+    and objects can add themselves as Observers to be notified when the
+    Camera is updated.
 
     C++ includes: camera.h 
     """

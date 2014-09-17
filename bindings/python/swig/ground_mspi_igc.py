@@ -122,7 +122,7 @@ import geocal_swig.ipi_image_ground_connection
 import geocal_swig.image_ground_connection
 import geocal_swig.generic_object
 import geocal_swig.geocal_exception
-import geocal_swig.look_vector
+import geocal_swig.observer
 class GroundMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnection):
     """
     This is an ImageGroundConnection for GroundMspi.

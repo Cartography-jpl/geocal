@@ -3,6 +3,7 @@
 #include "constant.h"
 #include "frame_coordinate.h"
 #include "look_vector.h"
+#include "observer.h"
 #include <blitz/array.h>
 #include <boost/math/quaternion.hpp>
 #include <vector>
@@ -11,9 +12,15 @@ namespace GeoCal {
 /****************************************************************//**
   This class models a frame camera. It is used to convert ScLookVector
   to FrameCoordinate and vice versa.
+
+  Other objects may depend on the Camera, and should be updated
+  when the Camera is updated. To facilitate that, this class in
+  an Oberverable, and objects can add themselves as Observers to be
+  notified when the Camera is updated.
 *******************************************************************/
 
-class Camera : public Printable<Camera> {
+class Camera : public Printable<Camera>, 
+	       public Observable<Camera> {
 public:
 //-----------------------------------------------------------------------
 /// Direction camera is pointing.
@@ -26,6 +33,11 @@ public:
 //-----------------------------------------------------------------------
 
   Camera() {}
+
+  virtual void add_observer(Observer<Camera>& Obs) 
+  { add_observer_do(Obs, *this);}
+  virtual void remove_observer(Observer<Camera>& Obs) 
+  { remove_observer_do(Obs, *this);}
 
 //-----------------------------------------------------------------------
 /// Destructor.

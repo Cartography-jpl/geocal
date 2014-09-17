@@ -122,7 +122,6 @@ import geocal_swig.calc_raster_multi_band
 import geocal_swig.raster_image_multi_band_variable
 import geocal_swig.raster_image_multi_band
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 import geocal_swig.calc_raster
 import geocal_swig.raster_image_variable
 class DoughnutAverage(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):

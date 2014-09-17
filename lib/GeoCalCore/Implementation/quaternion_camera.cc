@@ -131,3 +131,40 @@ void QuaternionCamera::print(std::ostream& Os) const
      << "   Frame to spacecraft: " << frame_to_sc() << "\n";
 }
 
+//-----------------------------------------------------------------------
+/// Set parameter. Right now this is Euler epsilon, beta, delta, line
+/// pitch, sample pitch. We may well want to play with this in the
+/// future, turning individual things on an off. But for now we'll just
+/// have the set of values we've found useful to fit for.
+//-----------------------------------------------------------------------
+
+void QuaternionCamera::parameter(const blitz::Array<double, 1>& Parm)
+{
+  if(Parm.rows() != 5)
+    throw Exception("Wrong sized parameter passed.");
+  line_pitch_ = Parm(3);
+  sample_pitch_ = Parm(4);
+  // euler calls notify_update(), so we don't need to do that.
+  euler(Parm(blitz::Range(0,3)));
+}
+
+blitz::Array<double, 1> QuaternionCamera::parameter() const
+{
+  blitz::Array<double, 1> res(5);
+  res(blitz::Range(0,3)) = euler();
+  res(3) = line_pitch();
+  res(4) = sample_pitch();
+  return res;
+}
+
+std::vector<std::string> QuaternionCamera::parameter_name() const
+{
+  std::vector<std::string> res;
+  res.push_back("Camera Euler Epsilon");
+  res.push_back("Camera Euler Beta");
+  res.push_back("Camera Euler Delta");
+  res.push_back("Camera line pitch");
+  res.push_back("Camera sample pitch");
+  return res;
+}
+

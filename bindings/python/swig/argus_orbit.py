@@ -146,6 +146,7 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.orbit_quaternion_list
 import geocal_swig.orbit
 import geocal_swig.generic_object
+import geocal_swig.observer
 import geocal_swig.aircraft_orbit_data
 import geocal_swig.raster_image_tiled_file
 import geocal_swig.raster_image_variable

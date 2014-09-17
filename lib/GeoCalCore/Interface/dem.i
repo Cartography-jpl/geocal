@@ -8,6 +8,7 @@
 %}
 
 %base_import(generic_object)
+%import "look_vector.i"
 %import "ground_coordinate.i"
 
 %geocal_shared_ptr(GeoCal::Dem);

@@ -119,6 +119,7 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
+import geocal_swig.observer
 class Ipi(geocal_swig.generic_object.GenericObject):
     """
     This performs an image point intersection (IPI), finding the time or

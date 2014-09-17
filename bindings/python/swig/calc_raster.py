@@ -121,7 +121,6 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 class CalcRaster(geocal_swig.raster_image_variable.RasterImageVariable):
     """
     Some classes most naturally generate a RasterImage by calculating a

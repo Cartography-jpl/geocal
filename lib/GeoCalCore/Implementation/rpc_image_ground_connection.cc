@@ -59,7 +59,7 @@ RpcImageGroundConnection::cf_look_vector
   Lv.look_vector[2] = ec2->position[2] - P->position[2];
 }
 
-void RpcImageGroundConnection::parameter(const Array<double, 1>& Parm)
+void RpcImageGroundConnection::parameter(const blitz::Array<double, 1>& Parm)
 {
   int size = std::count(rpc_->fit_line_numerator.begin(), 
 			rpc_->fit_line_numerator.end(), true) +

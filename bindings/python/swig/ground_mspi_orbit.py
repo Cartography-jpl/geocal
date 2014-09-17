@@ -118,8 +118,10 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.orbit
+import geocal_swig.look_vector
 import geocal_swig.generic_object
+import geocal_swig.orbit
+import geocal_swig.observer
 class GroundMspiOrbit(geocal_swig.orbit.Orbit):
     """
     This models the MSPI ground orbit.

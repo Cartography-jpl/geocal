@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.orbit
 import geocal_swig.generic_object
+import geocal_swig.observer
 class AirMspiOrbit(geocal_swig.orbit.Orbit):
     """
     This reads the AirMSPI orbit file.

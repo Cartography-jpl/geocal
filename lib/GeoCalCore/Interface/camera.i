@@ -8,17 +8,29 @@
 #include "camera.h"
 %}
 %base_import(generic_object)
+%base_import(observer)
 %import "frame_coordinate.i"
 %import "look_vector.i"
 %import "geocal_time.i"
 %geocal_shared_ptr(GeoCal::Camera);
 %geocal_shared_ptr(GeoCal::SimpleCamera);
+namespace GeoCal {
+  class Camera;
+}
+
+%geocal_shared_ptr(GeoCal::Observable<GeoCal::Camera>);
+%geocal_shared_ptr(GeoCal::Observer<GeoCal::Camera>);
 
 namespace GeoCal {
-class Camera : public GenericObject {
+%template(ObservableCamera) GeoCal::Observable<GeoCal::Camera>;
+%template(ObserverCamera) GeoCal::Observer<GeoCal::Camera>;
+
+class Camera : public Observable<Camera> {
 public:
   enum Direction {FORWARD, AFTWARD};
   Camera();
+  virtual void add_observer(Observer<Camera>& Obs); 
+  virtual void remove_observer(Observer<Camera>& Obs);
   virtual double integration_time(int Band) const;
   %python_attribute(direction, virtual Direction)
   %python_attribute(number_band, virtual int)

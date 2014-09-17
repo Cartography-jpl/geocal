@@ -108,7 +108,7 @@ public:
 /// Set focal length, in mm.
 //-----------------------------------------------------------------------
 
-  void focal_length(double V) { focal_length_ = V; }
+  void focal_length(double V) { focal_length_ = V; notify_update(); }
 
 //-----------------------------------------------------------------------
 /// Principal point of camera for band B.
@@ -123,7 +123,7 @@ public:
 //-----------------------------------------------------------------------
 
   void principal_point(int B, const FrameCoordinate& Fc) 
-  {range_check(B, 0, number_band());principal_point_[B] = Fc;}
+  {range_check(B, 0, number_band());principal_point_[B] = Fc; notify_update(); }
 
 //-----------------------------------------------------------------------
 /// CCD pitch, in mm
@@ -136,7 +136,7 @@ public:
 /// Set CCD pitch, in mm
 //-----------------------------------------------------------------------
 
-  void line_pitch(double Lp) {line_pitch_ = Lp; }
+  void line_pitch(double Lp) {line_pitch_ = Lp; notify_update(); }
 
 //-----------------------------------------------------------------------
 /// CCD pitch, in mm
@@ -148,7 +148,7 @@ public:
 /// Set CCD pitch, in mm
 //-----------------------------------------------------------------------
 
-  void sample_pitch(double Sp) {sample_pitch_ = Sp;}
+  void sample_pitch(double Sp) {sample_pitch_ = Sp; notify_update(); }
 
 //-----------------------------------------------------------------------
 /// Return the equivalent yaw, pitch, roll angles for the
@@ -172,6 +172,7 @@ public:
     if(Ypr.rows() != 3)
       throw Exception("Ypr must be size 3");
     frame_to_sc(quat_rot("xyz", Ypr(1), Ypr(2), Ypr(0)));
+    notify_update();
   }
 
 //-----------------------------------------------------------------------
@@ -196,6 +197,7 @@ public:
     if(Euler.rows() != 3)
       throw Exception("Ypr must be size 3");
     frame_to_sc(quat_rot("zyx", Euler(0), Euler(1), Euler(2)));
+    notify_update();
   }
 
 //-----------------------------------------------------------------------
@@ -210,7 +212,7 @@ public:
 //-----------------------------------------------------------------------
 
   void frame_to_sc(const boost::math::quaternion<double>& frame_to_sc_q) 
-  { frame_to_sc_ = frame_to_sc_q; }
+  { frame_to_sc_ = frame_to_sc_q; notify_update(); }
 
 //-----------------------------------------------------------------------
 /// Frame convention, indicates if Line is in X or Y direction in
@@ -224,7 +226,7 @@ public:
 //-----------------------------------------------------------------------
 
   void frame_convention(FrameConvention Frame_convention)
-  { frame_convention_ = Frame_convention; }
+  { frame_convention_ = Frame_convention; notify_update(); }
 
 //-----------------------------------------------------------------------
 /// Line direction, indicates if increasing line is in positive or
@@ -238,7 +240,7 @@ public:
 //-----------------------------------------------------------------------
 
   void line_direction(FrameDirection Line_direction)
-  { line_direction_ = Line_direction; }
+  { line_direction_ = Line_direction; notify_update(); }
 
 //-----------------------------------------------------------------------
 /// Sample direction, indicates if increasing sample is in positive or
@@ -252,7 +254,7 @@ public:
 //-----------------------------------------------------------------------
 
   void sample_direction(FrameDirection Sample_direction)
-  { sample_direction_ = Sample_direction; }
+  { sample_direction_ = Sample_direction; notify_update(); }
 
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
@@ -277,6 +279,9 @@ public:
   { return ScLookVector(frame_to_sc_ * Dlv.look_quaternion() * 
 			conj(frame_to_sc_));} 
   virtual void print(std::ostream& Os) const;
+  virtual blitz::Array<double, 1> parameter() const;
+  virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual std::vector<std::string> parameter_name() const;
 protected:
 //-----------------------------------------------------------------------
 // Constructor for use by derived classes. Derived classes should make
@@ -308,6 +313,11 @@ protected:
   {return (line_direction_ == INCREASE_IS_POSITIVE ? 1 : -1);}
   int samp_dir() const 
   {return (sample_direction_ == INCREASE_IS_POSITIVE ? 1 : -1);}
+
+  virtual void notify_update()
+  {
+    notify_update_do(*this);
+  }
 };
 }
 #endif

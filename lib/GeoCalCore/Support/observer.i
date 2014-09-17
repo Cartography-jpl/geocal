@@ -10,7 +10,7 @@
 
 namespace GeoCal {
 template<class T> class Observable;
-template<class T> class Observer : public GenericObject {
+template<class T> class Observer : public GeoCal::GenericObject {
 public:
   Observer();
   virtual ~Observer();
@@ -19,7 +19,7 @@ public:
   virtual void notify_remove(T& Observed_object);
 };
 
-template<class T> class Observable : public GenericObject {
+template<class T> class Observable : public GeoCal::GenericObject {
 public:
   virtual ~Observable();
   void add_observer_and_keep_reference(boost::shared_ptr<Observer<T> >& Obs);

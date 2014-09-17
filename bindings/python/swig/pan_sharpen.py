@@ -122,7 +122,6 @@ import geocal_swig.calc_raster_multi_band
 import geocal_swig.raster_image_multi_band_variable
 import geocal_swig.raster_image_multi_band
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 class PanSharpen(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     """
     This create a set of pan sharpened images from a pan band and a set of

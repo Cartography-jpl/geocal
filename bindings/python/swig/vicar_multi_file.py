@@ -122,7 +122,6 @@ import geocal_swig.raster_multifile
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 class VicarMultiFile(geocal_swig.raster_multifile.RasterMultifile):
     """
     This gives read access to some of the larger AFIDS datasets, such as

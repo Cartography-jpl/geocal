@@ -118,9 +118,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.ground_coordinate
 import geocal_swig.generic_object
-import geocal_swig.look_vector
+import geocal_swig.ground_coordinate
 class Eci(geocal_swig.ground_coordinate.CartesianInertial):
     """
     This is a ECI coordinate (J2000)

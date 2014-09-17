@@ -8,6 +8,7 @@
 #include "geodetic.h"
 %}
 
+%import "look_vector.i"
 %base_import(ground_coordinate)
 
 %geocal_shared_ptr(GeoCal::Ecr);

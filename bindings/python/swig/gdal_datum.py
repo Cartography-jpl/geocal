@@ -120,7 +120,6 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.geocal_datum
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 import geocal_swig.raster_image_tiled_file
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image

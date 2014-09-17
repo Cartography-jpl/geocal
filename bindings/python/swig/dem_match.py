@@ -120,7 +120,6 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.generic_object
 import geocal_swig.geocal_exception
-import geocal_swig.look_vector
 class DemMatch(geocal_swig.generic_object.GenericObject):
     """
     This class does matching between two images, and then finds the

@@ -122,7 +122,6 @@ import geocal_swig.dem_tiled_file
 import geocal_swig.dem_map_info
 import geocal_swig.dem
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 class GdalDem(geocal_swig.dem_tiled_file.DemTiledFile):
     """
     This uses a Gdal<T> as a DEM.

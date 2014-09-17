@@ -161,6 +161,9 @@ void PhaseCorrelationMatcher::print(std::ostream& Os) const
 ///	peak, for use in subpixel refinement
 /// \param srchdim: input, int srchdim;
 ///	The current size of the search area in chip 2
+/// \param chip1: input
+///     The first chip
+/// \param asrch: input
 //-----------------------------------------------------------------------
 
 void PhaseCorrelationMatcher::rfit

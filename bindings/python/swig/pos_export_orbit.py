@@ -121,6 +121,7 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.orbit_quaternion_list
 import geocal_swig.orbit
 import geocal_swig.generic_object
+import geocal_swig.observer
 class PosExportOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     """
     This read a POS export file to supply an Orbit.

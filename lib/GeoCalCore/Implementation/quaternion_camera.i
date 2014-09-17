@@ -7,6 +7,8 @@
 #include "geocal_time.h"
 #include "quaternion_camera.h"
 %}
+%base_import(generic_object)
+%base_import(observer)
 %base_import(camera)
 %geocal_shared_ptr(GeoCal::QuaternionCamera);
 namespace GeoCal {

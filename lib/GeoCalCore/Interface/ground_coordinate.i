@@ -62,7 +62,7 @@ public:
 
   // Note this is from look_vector.h, but it is placed here to break
   // a circular dependency with swig.
-class LnLookVector : public LookVector {
+class LnLookVector : public GeoCal::LookVector {
 public:
   LnLookVector();
   LnLookVector(const CartesianFixedLookVector& Lv, 

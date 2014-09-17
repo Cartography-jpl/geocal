@@ -120,6 +120,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.orbit
 import geocal_swig.generic_object
+import geocal_swig.observer
 class OrbitQuaternionList(geocal_swig.orbit.Orbit):
     """
     This is an implementation of an Orbit that is a list of

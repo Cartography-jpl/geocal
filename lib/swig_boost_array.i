@@ -110,6 +110,3 @@ def NAME(self, value):
 %boost_array_template(Array_bool_20, bool, 20)
 }
 
-%template(Vector_Array_double_12) std::vector<boost::array<double, 12> >;
-%template(Vector_Array_double_14) std::vector<boost::array<double, 14> >;
-

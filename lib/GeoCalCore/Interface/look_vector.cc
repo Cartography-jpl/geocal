@@ -23,6 +23,18 @@ void ScLookVector::print(std::ostream& Os) const
 /// Print to given stream.
 //-----------------------------------------------------------------------
 
+void ScLookVectorWithDerivative::print(std::ostream& Os) const
+{
+  boost::array<AutoDerivative<double>, 3> d = direction();
+  Os << "Look vector in spacecraft coordinates: \n"
+     << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
+     << "  length: " << length() << " m\n";
+}
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
 void CartesianInertialLookVector::print(std::ostream& Os) const
 {
   boost::array<double, 3> d = direction();

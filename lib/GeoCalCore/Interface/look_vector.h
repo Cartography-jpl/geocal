@@ -1,6 +1,7 @@
 #ifndef LOOK_VECTOR_H
 #define LOOK_VECTOR_H
 #include "printable.h"
+#include "auto_derivative.h"
 #include "constant.h"
 #include <boost/array.hpp>
 #include <boost/math/quaternion.hpp>
@@ -60,9 +61,9 @@ public:
 
   T length() const
   {
-    return sqrt(look_vector[0] * look_vector[0] + 
-		look_vector[1] * look_vector[1] + 
-		look_vector[2] * look_vector[2]);
+    return std::sqrt(look_vector[0] * look_vector[0] + 
+		     look_vector[1] * look_vector[1] + 
+		     look_vector[2] * look_vector[2]);
   }
   
   virtual void print(std::ostream& Os) const = 0;
@@ -76,7 +77,7 @@ protected:
   LookVector(const boost::array<T, 3>& Lv) 
   {look_vector = Lv;}
 
-  LookVector(T x, T y, T z) 
+  LookVector(const T& x, const T& y, const T& z) 
   {look_vector[0] = x; look_vector[1] = y; look_vector[2] = z;}
 
   LookVector(const boost::math::quaternion<T>& V)
@@ -115,6 +116,43 @@ public:
   ScLookVector(const boost::math::quaternion<double>& V) : LookVector<double>(V) {}
 
   virtual ~ScLookVector() {}
+  virtual void print(std::ostream& Os) const;
+};
+
+/****************************************************************//**
+  This is a look vector in an spacecraft coordinates, including
+  derivatives 
+*******************************************************************/
+
+class ScLookVectorWithDerivative : public LookVector<AutoDerivative<double> > {
+public:
+//-----------------------------------------------------------------------
+/// Default constructor. Does not initialize look_vector.
+//-----------------------------------------------------------------------
+
+  ScLookVectorWithDerivative() {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  ScLookVectorWithDerivative(const boost::array<AutoDerivative<double> , 3>& Lv) : LookVector<AutoDerivative<double> >(Lv) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  ScLookVectorWithDerivative(const AutoDerivative<double>&  x, 
+			     const AutoDerivative<double>&  y, 
+			     const AutoDerivative<double>&  z) : 
+    LookVector<AutoDerivative<double> >(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor using quaternion
+//-----------------------------------------------------------------------
+  ScLookVectorWithDerivative(const boost::math::quaternion<AutoDerivative<double> >& V) : LookVector<AutoDerivative<double> >(V) {}
+
+  virtual ~ScLookVectorWithDerivative() {}
   virtual void print(std::ostream& Os) const;
 };
 

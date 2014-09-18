@@ -184,6 +184,71 @@ LookVectorDouble.__str__ = new_instancemethod(_look_vector.LookVectorDouble___st
 LookVectorDouble_swigregister = _look_vector.LookVectorDouble_swigregister
 LookVectorDouble_swigregister(LookVectorDouble)
 
+class LookVectorAutoDerivativeDouble(geocal_swig.generic_object.GenericObject):
+    """
+    This is a look vector in an unspecified coordinate system.
+
+    Derived classes specify the coordinate system.
+
+    C++ includes: look_vector.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    @property
+    def look_vector(self):
+        return self._look_vector()
+
+    @look_vector.setter
+    def look_vector(self, value):
+      self._look_vector(value)
+
+    def _v_direction(self):
+        """
+        boost::array<T, 3> GeoCal::LookVector< T >::direction() const
+        This is the direction, as a unit vector. 
+        """
+        return _look_vector.LookVectorAutoDerivativeDouble__v_direction(self)
+
+    @property
+    def direction(self):
+        return self._v_direction()
+
+    def _v_look_quaternion(self, *args):
+        """
+        void GeoCal::LookVector< T >::look_quaternion(const boost::math::quaternion< T > &V)
+        Set look vector using a quaternion. 
+        """
+        return _look_vector.LookVectorAutoDerivativeDouble__v_look_quaternion(self, *args)
+
+    @property
+    def look_quaternion(self):
+        return self._v_look_quaternion()
+
+    @look_quaternion.setter
+    def look_quaternion(self, value):
+      self._v_look_quaternion(value)
+
+    def _v_length(self):
+        """
+        T GeoCal::LookVector< T >::length() const
+        Length of look vector, in meters. 
+        """
+        return _look_vector.LookVectorAutoDerivativeDouble__v_length(self)
+
+    @property
+    def length(self):
+        return self._v_length()
+
+    __swig_destroy__ = _look_vector.delete_LookVectorAutoDerivativeDouble
+LookVectorAutoDerivativeDouble._look_vector = new_instancemethod(_look_vector.LookVectorAutoDerivativeDouble__look_vector,None,LookVectorAutoDerivativeDouble)
+LookVectorAutoDerivativeDouble._v_direction = new_instancemethod(_look_vector.LookVectorAutoDerivativeDouble__v_direction,None,LookVectorAutoDerivativeDouble)
+LookVectorAutoDerivativeDouble._v_look_quaternion = new_instancemethod(_look_vector.LookVectorAutoDerivativeDouble__v_look_quaternion,None,LookVectorAutoDerivativeDouble)
+LookVectorAutoDerivativeDouble._v_length = new_instancemethod(_look_vector.LookVectorAutoDerivativeDouble__v_length,None,LookVectorAutoDerivativeDouble)
+LookVectorAutoDerivativeDouble.__str__ = new_instancemethod(_look_vector.LookVectorAutoDerivativeDouble___str__,None,LookVectorAutoDerivativeDouble)
+LookVectorAutoDerivativeDouble_swigregister = _look_vector.LookVectorAutoDerivativeDouble_swigregister
+LookVectorAutoDerivativeDouble_swigregister(LookVectorAutoDerivativeDouble)
+
 class ScLookVector(LookVectorDouble):
     """
     This is a look vector in an spacecraft coordinates.
@@ -209,6 +274,33 @@ class ScLookVector(LookVectorDouble):
 ScLookVector.__str__ = new_instancemethod(_look_vector.ScLookVector___str__,None,ScLookVector)
 ScLookVector_swigregister = _look_vector.ScLookVector_swigregister
 ScLookVector_swigregister(ScLookVector)
+
+class ScLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
+    """
+    This is a look vector in an spacecraft coordinates, including
+    derivatives.
+
+    C++ includes: look_vector.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::ScLookVectorWithDerivative::ScLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)
+        Constructor using quaternion. 
+        """
+        _look_vector.ScLookVectorWithDerivative_swiginit(self,_look_vector.new_ScLookVectorWithDerivative(*args))
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+
+    __swig_destroy__ = _look_vector.delete_ScLookVectorWithDerivative
+ScLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.ScLookVectorWithDerivative___str__,None,ScLookVectorWithDerivative)
+ScLookVectorWithDerivative_swigregister = _look_vector.ScLookVectorWithDerivative_swigregister
+ScLookVectorWithDerivative_swigregister(ScLookVectorWithDerivative)
 
 class CartesianInertialLookVector(LookVectorDouble):
     """

@@ -259,14 +259,28 @@ class Camera(ObservableCamera):
     def parameter(self, value):
       self._v_parameter(value)
 
+    def _v_parameter_with_derivative(self, *args):
+        """
+        virtual void GeoCal::Camera::parameter_with_derivative(const ArrayAd< double, 1 > &Parm)
+        Set the value of the parameters, including derivatives of the
+        parameter.
+
+        Useful for doing Jacobian calculations. 
+        """
+        return _camera.Camera__v_parameter_with_derivative(self, *args)
+
+    @property
+    def parameter_with_derivative(self):
+        return self._v_parameter_with_derivative()
+
+    @parameter_with_derivative.setter
+    def parameter_with_derivative(self, value):
+      self._v_parameter_with_derivative(value)
+
     def _v_parameter_name(self):
         """
         virtual std::vector<std::string> GeoCal::Camera::parameter_name() const
-        Return parameters, including gradients.
-
-        Set the value of the parameters, including a gradient of the
-        parameter. Useful for doing Jacobian calculations. Descriptive name of
-        each parameter. 
+        Descriptive name of each parameter. 
         """
         return _camera.Camera__v_parameter_name(self)
 
@@ -322,6 +336,7 @@ Camera._v_number_band = new_instancemethod(_camera.Camera__v_number_band,None,Ca
 Camera.number_line = new_instancemethod(_camera.Camera_number_line,None,Camera)
 Camera.number_sample = new_instancemethod(_camera.Camera_number_sample,None,Camera)
 Camera._v_parameter = new_instancemethod(_camera.Camera__v_parameter,None,Camera)
+Camera._v_parameter_with_derivative = new_instancemethod(_camera.Camera__v_parameter_with_derivative,None,Camera)
 Camera._v_parameter_name = new_instancemethod(_camera.Camera__v_parameter_name,None,Camera)
 Camera.frame_coordinate = new_instancemethod(_camera.Camera_frame_coordinate,None,Camera)
 Camera.frame_line_coordinate = new_instancemethod(_camera.Camera_frame_line_coordinate,None,Camera)

@@ -4,7 +4,7 @@
 #include "frame_coordinate.h"
 #include "look_vector.h"
 #include "observer.h"
-#include "auto_derivative.h"
+#include "array_ad.h"
 #include <blitz/array.h>
 #include <boost/math/quaternion.hpp>
 #include <vector>
@@ -97,8 +97,9 @@ public:
 //-----------------------------------------------------------------------
 
   virtual blitz::Array<double, 1> parameter() const
-  { // Default is no parameters.
-    return blitz::Array<double, 1>(0); 
+  { // Default is to return parameter_with_derivative and strip off
+    // the jacobian.
+    return parameter_with_derivative().value(); 
   }
 
 //-----------------------------------------------------------------------
@@ -107,27 +108,31 @@ public:
 
   virtual void parameter(const blitz::Array<double, 1>& Parm)
   {
-    // Default is do nothing
+    // Default is to call parameter_with_derivative and set an
+    // empty Jacobian.
+    parameter_with_derivative(Parm);
   }
 
 //-----------------------------------------------------------------------
-/// Return parameters, including gradients
+/// Return parameters, including derivatives. The derivatives can be
+/// with respect to whatever variables you like, this class just
+/// handles propagating the derivatives.
 //-----------------------------------------------------------------------
 
-  // virtual blitz::Array<AutoDerivative<double>, 1> parameter_with_gradient() const
-  // { // Default is no parameters.
-  //   return blitz::Array<double, 1>(0); 
-  // }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { // Default is no parameters.
+    return blitz::Array<double, 1>(0); 
+  }
 
 //-----------------------------------------------------------------------
-/// Set the value of the parameters, including a gradient of the
+/// Set the value of the parameters, including derivatives of the
 /// parameter. Useful for doing Jacobian calculations.
 //-----------------------------------------------------------------------
 
-  // virtual void parameter_with_gradient(const blitz::Array<AutoDerivative<double>, 1>& Parm)
-  // {
-  //   // Default is do nothing
-  // }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+   {
+     // Default is do nothing
+   }
 
 //-----------------------------------------------------------------------
 /// Descriptive name of each parameter.

@@ -7,32 +7,6 @@
 
 using namespace GeoCal;
 
-
-//-----------------------------------------------------------------------
-/// This is the direction, as a unit vector.
-//-----------------------------------------------------------------------
-
-boost::array<double, 3> LookVector::direction() const 
-{
-  boost::array<double, 3> res;
-  double l = length();
-  res[0] = look_vector[0] / l;
-  res[1] = look_vector[1] / l;
-  res[2] = look_vector[2] / l;
-  return res;
-}
-
-
-//-----------------------------------------------------------------------
-/// Length of look vector, in meters.
-//-----------------------------------------------------------------------
-
-inline double sqr(double x) {return x * x;}
-double LookVector::length() const
-{
-  return sqrt(sqr(look_vector[0]) + sqr(look_vector[1]) + sqr(look_vector[2]));
-}
-
 //-----------------------------------------------------------------------
 /// Print to given stream.
 //-----------------------------------------------------------------------

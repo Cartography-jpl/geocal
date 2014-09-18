@@ -119,7 +119,7 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
-class LookVector(geocal_swig.generic_object.GenericObject):
+class LookVectorDouble(geocal_swig.generic_object.GenericObject):
     """
     This is a look vector in an unspecified coordinate system.
 
@@ -140,10 +140,10 @@ class LookVector(geocal_swig.generic_object.GenericObject):
 
     def _v_direction(self):
         """
-        boost::array< double, 3 > LookVector::direction() const
+        boost::array<T, 3> GeoCal::LookVector< T >::direction() const
         This is the direction, as a unit vector. 
         """
-        return _look_vector.LookVector__v_direction(self)
+        return _look_vector.LookVectorDouble__v_direction(self)
 
     @property
     def direction(self):
@@ -151,10 +151,10 @@ class LookVector(geocal_swig.generic_object.GenericObject):
 
     def _v_look_quaternion(self, *args):
         """
-        void GeoCal::LookVector::look_quaternion(const boost::math::quaternion< double > &V)
+        void GeoCal::LookVector< T >::look_quaternion(const boost::math::quaternion< T > &V)
         Set look vector using a quaternion. 
         """
-        return _look_vector.LookVector__v_look_quaternion(self, *args)
+        return _look_vector.LookVectorDouble__v_look_quaternion(self, *args)
 
     @property
     def look_quaternion(self):
@@ -166,25 +166,25 @@ class LookVector(geocal_swig.generic_object.GenericObject):
 
     def _v_length(self):
         """
-        double LookVector::length() const
-
+        T GeoCal::LookVector< T >::length() const
+        Length of look vector, in meters. 
         """
-        return _look_vector.LookVector__v_length(self)
+        return _look_vector.LookVectorDouble__v_length(self)
 
     @property
     def length(self):
         return self._v_length()
 
-    __swig_destroy__ = _look_vector.delete_LookVector
-LookVector._look_vector = new_instancemethod(_look_vector.LookVector__look_vector,None,LookVector)
-LookVector._v_direction = new_instancemethod(_look_vector.LookVector__v_direction,None,LookVector)
-LookVector._v_look_quaternion = new_instancemethod(_look_vector.LookVector__v_look_quaternion,None,LookVector)
-LookVector._v_length = new_instancemethod(_look_vector.LookVector__v_length,None,LookVector)
-LookVector.__str__ = new_instancemethod(_look_vector.LookVector___str__,None,LookVector)
-LookVector_swigregister = _look_vector.LookVector_swigregister
-LookVector_swigregister(LookVector)
+    __swig_destroy__ = _look_vector.delete_LookVectorDouble
+LookVectorDouble._look_vector = new_instancemethod(_look_vector.LookVectorDouble__look_vector,None,LookVectorDouble)
+LookVectorDouble._v_direction = new_instancemethod(_look_vector.LookVectorDouble__v_direction,None,LookVectorDouble)
+LookVectorDouble._v_look_quaternion = new_instancemethod(_look_vector.LookVectorDouble__v_look_quaternion,None,LookVectorDouble)
+LookVectorDouble._v_length = new_instancemethod(_look_vector.LookVectorDouble__v_length,None,LookVectorDouble)
+LookVectorDouble.__str__ = new_instancemethod(_look_vector.LookVectorDouble___str__,None,LookVectorDouble)
+LookVectorDouble_swigregister = _look_vector.LookVectorDouble_swigregister
+LookVectorDouble_swigregister(LookVectorDouble)
 
-class ScLookVector(LookVector):
+class ScLookVector(LookVectorDouble):
     """
     This is a look vector in an spacecraft coordinates.
 
@@ -210,7 +210,7 @@ ScLookVector.__str__ = new_instancemethod(_look_vector.ScLookVector___str__,None
 ScLookVector_swigregister = _look_vector.ScLookVector_swigregister
 ScLookVector_swigregister(ScLookVector)
 
-class CartesianInertialLookVector(LookVector):
+class CartesianInertialLookVector(LookVectorDouble):
     """
     This is a look vector in CartesianInertial coordinates.
 
@@ -236,7 +236,7 @@ CartesianInertialLookVector.__str__ = new_instancemethod(_look_vector.CartesianI
 CartesianInertialLookVector_swigregister = _look_vector.CartesianInertialLookVector_swigregister
 CartesianInertialLookVector_swigregister(CartesianInertialLookVector)
 
-class DcsLookVector(LookVector):
+class DcsLookVector(LookVectorDouble):
     """
     This is a look vector in Detector Coordinate System coordinates.
 

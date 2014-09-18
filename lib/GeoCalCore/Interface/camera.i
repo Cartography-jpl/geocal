@@ -12,7 +12,7 @@
 %import "frame_coordinate.i"
 %import "look_vector.i"
 %import "geocal_time.i"
-%import "auto_derivative.i"
+%import "array_ad.i"
 %geocal_shared_ptr(GeoCal::Camera);
 %geocal_shared_ptr(GeoCal::SimpleCamera);
 namespace GeoCal {
@@ -38,6 +38,7 @@ public:
   virtual int number_line(int Band) const = 0;
   virtual int number_sample(int Band) const = 0;
   %python_attribute_with_set(parameter, blitz::Array<double, 1>)
+  %python_attribute_with_set(parameter_with_derivative, ArrayAd<double, 1>)
   %python_attribute(parameter_name, virtual std::vector<std::string>)
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const = 0;

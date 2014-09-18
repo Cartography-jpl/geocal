@@ -10,22 +10,27 @@
 %base_import(generic_object)
 %import "geocal_time.i"
 
-%geocal_shared_ptr(GeoCal::LookVector);
 %geocal_shared_ptr(GeoCal::ScLookVector);
 %geocal_shared_ptr(GeoCal::CartesianInertialLookVector);
 %geocal_shared_ptr(GeoCal::DcsLookVector);
 
 namespace GeoCal {
-class LookVector : public GenericObject {
+template<class T> class LookVector : public GenericObject {
 public:
-  %python_attribute_boost_array(look_vector, double, 3);
-  %python_attribute(direction, boost::array<double, 3>)
-  %python_attribute_with_set(look_quaternion, boost::math::quaternion<double>)
-  %python_attribute(length, double)
+  %python_attribute_boost_array(look_vector, T, 3);
+  %python_attribute(direction, boost::array<T, 3>)
+  %python_attribute_with_set(look_quaternion, boost::math::quaternion<T>)
+  %python_attribute(length, T)
   std::string print_to_string() const = 0;
 };
+}
 
-class ScLookVector : public LookVector {
+%geocal_shared_ptr(GeoCal::LookVector<double>);
+
+namespace GeoCal {
+%template(LookVectorDouble) GeoCal::LookVector<double>;
+
+class ScLookVector : public LookVector<double> {
 public:
   ScLookVector();
   ScLookVector(double x, double y, double z);
@@ -35,7 +40,7 @@ public:
 	       self.look_vector[2])
 };
 
-class CartesianInertialLookVector : public LookVector {
+class CartesianInertialLookVector : public LookVector<double> {
 public:
   CartesianInertialLookVector();
   CartesianInertialLookVector(const boost::array<double, 3>& Lv);
@@ -48,7 +53,7 @@ public:
 // LnLookVector is in ground_coordinate.i instead of here, to break a
 // SWIG circular dependency.
 
-class DcsLookVector : public LookVector {
+class DcsLookVector : public LookVector<double> {
 public:
   DcsLookVector();
   DcsLookVector(double x, double y, double z);

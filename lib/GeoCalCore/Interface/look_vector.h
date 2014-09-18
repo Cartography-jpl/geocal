@@ -13,7 +13,7 @@ namespace GeoCal {
   classes specify the coordinate system.
 *******************************************************************/
 
-class LookVector : public Printable<LookVector> {
+template<class T> class LookVector : public Printable<LookVector<T> > {
 public:
   virtual ~LookVector() {}
 
@@ -22,26 +22,49 @@ public:
 /// and length.
 //-----------------------------------------------------------------------
 
-  boost::array<double, 3> look_vector;
+  boost::array<T, 3> look_vector;
 
 //-----------------------------------------------------------------------
 /// Look vector as a quaternion.
 //-----------------------------------------------------------------------
 
-  boost::math::quaternion<double> look_quaternion() const
-  { return boost::math::quaternion<double>(0, look_vector[0], look_vector[1],
+  boost::math::quaternion<T> look_quaternion() const
+  { return boost::math::quaternion<T>(0, look_vector[0], look_vector[1],
 					   look_vector[2]); }
 
 //-----------------------------------------------------------------------
 /// Set look vector using a quaternion.
 //-----------------------------------------------------------------------
   
-  void look_quaternion(const boost::math::quaternion<double>& V)
+  void look_quaternion(const boost::math::quaternion<T>& V)
   { look_vector[0] = V.R_component_2(); look_vector[1] = V.R_component_3();
     look_vector[2] = V.R_component_4(); }
   
-  boost::array<double, 3> direction() const;
-  double length() const;
+//-----------------------------------------------------------------------
+/// This is the direction, as a unit vector.
+//-----------------------------------------------------------------------
+
+  boost::array<T, 3> direction() const
+  {
+    boost::array<T, 3> res;
+    T l = length();
+    res[0] = look_vector[0] / l;
+    res[1] = look_vector[1] / l;
+    res[2] = look_vector[2] / l;
+    return res;
+  }
+
+//-----------------------------------------------------------------------
+/// Length of look vector, in meters.
+//-----------------------------------------------------------------------
+
+  T length() const
+  {
+    return sqrt(look_vector[0] * look_vector[0] + 
+		look_vector[1] * look_vector[1] + 
+		look_vector[2] * look_vector[2]);
+  }
+  
   virtual void print(std::ostream& Os) const = 0;
 protected:
 //-----------------------------------------------------------------------
@@ -50,13 +73,13 @@ protected:
 
   LookVector() {}
   
-  LookVector(const boost::array<double, 3>& Lv) 
+  LookVector(const boost::array<T, 3>& Lv) 
   {look_vector = Lv;}
 
-  LookVector(double x, double y, double z) 
+  LookVector(T x, T y, T z) 
   {look_vector[0] = x; look_vector[1] = y; look_vector[2] = z;}
 
-  LookVector(const boost::math::quaternion<double>& V)
+  LookVector(const boost::math::quaternion<T>& V)
   { look_vector[0] = V.R_component_2(); look_vector[1] = V.R_component_3();
     look_vector[2] = V.R_component_4(); }
 
@@ -66,7 +89,7 @@ protected:
   This is a look vector in an spacecraft coordinates.
 *******************************************************************/
 
-class ScLookVector : public LookVector {
+class ScLookVector : public LookVector<double> {
 public:
 //-----------------------------------------------------------------------
 /// Default constructor. Does not initialize look_vector.
@@ -78,18 +101,18 @@ public:
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  ScLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
+  ScLookVector(const boost::array<double, 3>& Lv) : LookVector<double>(Lv) {}
 
 //-----------------------------------------------------------------------
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  ScLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+  ScLookVector(double x, double y, double z) : LookVector<double>(x,y,z) {}
 
 //-----------------------------------------------------------------------
 /// Constructor using quaternion
 //-----------------------------------------------------------------------
-  ScLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+  ScLookVector(const boost::math::quaternion<double>& V) : LookVector<double>(V) {}
 
   virtual ~ScLookVector() {}
   virtual void print(std::ostream& Os) const;
@@ -99,7 +122,7 @@ public:
   This is a look vector in CartesianInertial coordinates.
 *******************************************************************/
 
-class CartesianInertialLookVector : public LookVector {
+class CartesianInertialLookVector : public LookVector<double> {
 public:
 //-----------------------------------------------------------------------
 /// Default constructor. Does not initialize look_vector.
@@ -111,18 +134,18 @@ public:
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  CartesianInertialLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
+  CartesianInertialLookVector(const boost::array<double, 3>& Lv) : LookVector<double>(Lv) {}
 
 //-----------------------------------------------------------------------
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  CartesianInertialLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+  CartesianInertialLookVector(double x, double y, double z) : LookVector<double>(x,y,z) {}
 
 //-----------------------------------------------------------------------
 /// Constructor using quaternion
 //-----------------------------------------------------------------------
-  CartesianInertialLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+  CartesianInertialLookVector(const boost::math::quaternion<double>& V) : LookVector<double>(V) {}
 
   virtual ~CartesianInertialLookVector() {}
   virtual void print(std::ostream& Os) const;
@@ -132,7 +155,7 @@ public:
   This is a look vector in CartesianFixed coordinates.
 *******************************************************************/
 
-class CartesianFixedLookVector : public LookVector {
+class CartesianFixedLookVector : public LookVector<double> {
 public:
 //-----------------------------------------------------------------------
 /// Default constructor. Does not initialize look_vector.
@@ -144,18 +167,18 @@ public:
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  CartesianFixedLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
+  CartesianFixedLookVector(const boost::array<double, 3>& Lv) : LookVector<double>(Lv) {}
 
 //-----------------------------------------------------------------------
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  CartesianFixedLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+  CartesianFixedLookVector(double x, double y, double z) : LookVector<double>(x,y,z) {}
 
 //-----------------------------------------------------------------------
 /// Constructor using quaternion
 //-----------------------------------------------------------------------
-  CartesianFixedLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+  CartesianFixedLookVector(const boost::math::quaternion<double>& V) : LookVector<double>(V) {}
 
   CartesianFixedLookVector(const GroundCoordinate& From,
 			   const GroundCoordinate& To);
@@ -176,7 +199,7 @@ public:
   is for ENU, e.g., for calculating view zenith and azimuth angles.
 *******************************************************************/
 
-class LnLookVector : public LookVector {
+class LnLookVector : public LookVector<double> {
 public:
 //-----------------------------------------------------------------------
 /// Constructor that translates a CartesianFixedLookVector to a
@@ -211,19 +234,19 @@ public:
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  LnLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
+  LnLookVector(const boost::array<double, 3>& Lv) : LookVector<double>(Lv) {}
 
 //-----------------------------------------------------------------------
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  LnLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+  LnLookVector(double x, double y, double z) : LookVector<double>(x,y,z) {}
 
 //-----------------------------------------------------------------------
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  LnLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+  LnLookVector(const boost::math::quaternion<double>& V) : LookVector<double>(V) {}
 
   virtual ~LnLookVector() {}
   virtual void print(std::ostream& Os) const;
@@ -263,7 +286,7 @@ public:
   This is a look vector in Detector Coordinate System coordinates
 *******************************************************************/
 
-class DcsLookVector : public LookVector {
+class DcsLookVector : public LookVector<double> {
 public:
 //-----------------------------------------------------------------------
 /// Constructor. 
@@ -275,19 +298,19 @@ public:
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  DcsLookVector(const boost::array<double, 3>& Lv) : LookVector(Lv) {}
+  DcsLookVector(const boost::array<double, 3>& Lv) : LookVector<double>(Lv) {}
 
 //-----------------------------------------------------------------------
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  DcsLookVector(double x, double y, double z) : LookVector(x,y,z) {}
+  DcsLookVector(double x, double y, double z) : LookVector<double>(x,y,z) {}
 
 //-----------------------------------------------------------------------
 /// Constructor. 
 //-----------------------------------------------------------------------
 
-  DcsLookVector(const boost::math::quaternion<double>& V) : LookVector(V) {}
+  DcsLookVector(const boost::math::quaternion<double>& V) : LookVector<double>(V) {}
 
   virtual ~DcsLookVector() {}
   virtual void print(std::ostream& Os) const;

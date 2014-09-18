@@ -62,7 +62,7 @@ public:
 
   // Note this is from look_vector.h, but it is placed here to break
   // a circular dependency with swig.
-class LnLookVector : public GeoCal::LookVector {
+class LnLookVector : public GeoCal::LookVector<double> {
 public:
   LnLookVector();
   LnLookVector(const CartesianFixedLookVector& Lv, 
@@ -103,7 +103,7 @@ public:
  }
 #endif
 
-class CartesianFixedLookVector : public LookVector {
+class CartesianFixedLookVector : public LookVector<double> {
 public:
   CartesianFixedLookVector();
   CartesianFixedLookVector(const boost::array<double, 3>& Lv);

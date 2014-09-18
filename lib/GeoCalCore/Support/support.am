@@ -7,6 +7,7 @@
 # Source files for library
 geocalinc_HEADERS+= @srcsupport@/constant.h
 geocalinc_HEADERS+= @srcsupport@/generic_object.h
+geocalinc_HEADERS+= @srcsupport@/auto_derivative.h
 geocalinc_HEADERS+= @srcsupport@/observer.h
 geocalinc_HEADERS+= @srcsupport@/geocal_type_index.h
 geocalinc_HEADERS+= @srcsupport@/dir_change.h
@@ -49,6 +50,7 @@ endif
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/constant_wrap.cc
 SWIG_SRC += @swigsrc@/generic_object_wrap.cc
+SWIG_SRC += @swigsrc@/auto_derivative_wrap.cc
 SWIG_SRC += @swigsrc@/observer_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_quaternion_wrap.cc
 SWIG_SRC += @swigsrc@/covariance_wrap.cc
@@ -69,6 +71,7 @@ EXTRA_DIST += @srcsupport@/global_fixture.h
 geocal_test_all_SOURCES += @srcsupport@/global_fixture.cc
 geocal_test_all_SOURCES += @srcsupport@/global_fixture_default.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_exception_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/auto_derivative_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/observer_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/geocal_time_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/printable_test.cc 

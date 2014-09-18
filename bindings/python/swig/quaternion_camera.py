@@ -158,23 +158,6 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     LINE_IS_Y = _quaternion_camera.QuaternionCamera_LINE_IS_Y
     INCREASE_IS_POSITIVE = _quaternion_camera.QuaternionCamera_INCREASE_IS_POSITIVE
     INCREASE_IS_NEGATIVE = _quaternion_camera.QuaternionCamera_INCREASE_IS_NEGATIVE
-    def __init__(self, *args): 
-        """
-        GeoCal::QuaternionCamera::QuaternionCamera(boost::math::quaternion< double > Frame_to_sc_q, double Number_line,
-        double Number_sample, double Line_pitch, double Sample_pitch, double
-        Focal_length, const FrameCoordinate &Principal_point, FrameConvention
-        Frame_convention=LINE_IS_X, FrameDirection
-        Line_direction=INCREASE_IS_POSITIVE, FrameDirection
-        Sample_direction=INCREASE_IS_POSITIVE)
-        Create a QuaternionCamera.
-
-        The orientation of the camera to the spacecraft to given by the
-        quaternion that takes frame coordinates to spacecraft coordinates. The
-        size of the camera and the line pitch, sample pitch, and focal length
-        are given. By convention, these are given in mm. Finally the
-        Principal_point (coordinates at center) are given. 
-        """
-        _quaternion_camera.QuaternionCamera_swiginit(self,_quaternion_camera.new_QuaternionCamera(*args))
     def _v_focal_length(self, *args):
         """
         void GeoCal::QuaternionCamera::focal_length(double V)
@@ -345,6 +328,23 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def __reduce__(self):
       return _new_from_init, (self.__class__, 1, self.frame_to_sc,self.number_line(0),self.number_sample(0),self.line_pitch,self.sample_pitch,self.focal_length,self.principal_point(0),self.frame_convention,self.line_direction,self.sample_direction)
 
+    def __init__(self, *args): 
+        """
+        GeoCal::QuaternionCamera::QuaternionCamera(boost::math::quaternion< double > Frame_to_sc_q, double Number_line,
+        double Number_sample, double Line_pitch, double Sample_pitch, double
+        Focal_length, const FrameCoordinate &Principal_point, FrameConvention
+        Frame_convention=LINE_IS_X, FrameDirection
+        Line_direction=INCREASE_IS_POSITIVE, FrameDirection
+        Sample_direction=INCREASE_IS_POSITIVE)
+        Create a QuaternionCamera.
+
+        The orientation of the camera to the spacecraft to given by the
+        quaternion that takes frame coordinates to spacecraft coordinates. The
+        size of the camera and the line pitch, sample pitch, and focal length
+        are given. By convention, these are given in mm. Finally the
+        Principal_point (coordinates at center) are given. 
+        """
+        _quaternion_camera.QuaternionCamera_swiginit(self,_quaternion_camera.new_QuaternionCamera(*args))
     __swig_destroy__ = _quaternion_camera.delete_QuaternionCamera
 QuaternionCamera._v_focal_length = new_instancemethod(_quaternion_camera.QuaternionCamera__v_focal_length,None,QuaternionCamera)
 QuaternionCamera.principal_point = new_instancemethod(_quaternion_camera.QuaternionCamera_principal_point,None,QuaternionCamera)

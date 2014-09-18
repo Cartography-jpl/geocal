@@ -105,10 +105,8 @@ class IgcOffsetCorrection(IgcCollection):
     def parameter(self):
         '''Value of parameters controlling mapping to and from image 
         coordinates'''
-        par = [ self.cam.euler[0], self.cam.euler[1], self.cam.euler[2], 
-                self.cam.line_pitch, self.cam.sample_pitch,
-                (self.refraction.index_refraction_surface - 1.00027) * 1e5]
-        return np.append(self.orbit.parameter, par) 
+        return np.append(np.append(self.orbit.parameter, self.cam.parameter),
+                        [(self.refraction.index_refraction_surface - 1.00027) * 1e5])
 
     @parameter.setter
     def parameter(self, value):
@@ -116,10 +114,10 @@ class IgcOffsetCorrection(IgcCollection):
         coordinates'''
         self._igc_cache = [None] * self.number_image
         self._jac_cache = [None] * self.number_image
-        self.orbit.parameter = value[0:-6]
-        self.cam.euler = value[-6:-3]
-        self.cam.line_pitch = value[-3]
-        self.cam.sample_pitch = value[-2]
+        olen = len(self.orbit.parameter)
+        self.orbit.parameter = value[0:olen]
+        clen = len(self.cam.parameter)
+        self.cam.parameter = value[olen:(olen+clen)]
         ref_par = value[-1]
         self.refraction.index_refraction_surface = 1.00027 + 1e-5 * ref_par
 
@@ -128,11 +126,7 @@ class IgcOffsetCorrection(IgcCollection):
         '''For longer parameter lists, it can be useful to have a description
         of what each parameter is. This function supplies this.'''
         t = self.orbit.parameter_name
-        t.append("Camera Euler Epsilon")
-        t.append("Camera Euler Beta")
-        t.append("Camera Euler Delta")
-        t.append("Camera line pitch")
-        t.append("Camera sample pitch")
+        t.extend(self.cam.parameter_name)
         t.append("Refraction factor")
         return t
     
@@ -247,11 +241,11 @@ class IgcOffsetCorrection(IgcCollection):
             ref_index = len(p0) + 5
 
             for i in range(3):
-                j = self.parameter_index_to_subset_index(epsilon_pitch_index + i)
+                j = self.parameter_index_to_subset_index(epsilon_index + i)
                 if(j is not None):
                     eps = 0.01 * deg_to_rad
                     cam = QuaternionCamera(self.cam)
-                    euler = cam.euler
+                    euler = cam.euler.copy()
                     euler[i] += eps
                     cam.euler = euler
                     cache["igc"].append((j,OrbitDataImageGroundConnection
@@ -264,7 +258,7 @@ class IgcOffsetCorrection(IgcCollection):
 
             j = self.parameter_index_to_subset_index(line_pitch_index)
             if(j is not None):
-                line_pitch_eps = 0.01 * self.camera.line_pitch
+                line_pitch_eps = 0.01 * self.cam.line_pitch
                 cam = QuaternionCamera(self.cam)
                 cam.line_pitch = cam.line_pitch + line_pitch_eps
                 cache["igc"].append((j,OrbitDataImageGroundConnection
@@ -277,7 +271,7 @@ class IgcOffsetCorrection(IgcCollection):
 
             j = self.parameter_index_to_subset_index(sample_pitch_index)
             if(j is not None):
-                sample_pitch_eps = 0.01 * self.camera.sample_pitch
+                sample_pitch_eps = 0.01 * self.cam.sample_pitch
                 cam = QuaternionCamera(self.cam)
                 cam.sample_pitch = cam.sample_pitch + sample_pitch_eps
                 cache["igc"].append((j,OrbitDataImageGroundConnection

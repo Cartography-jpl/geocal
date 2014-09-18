@@ -145,13 +145,13 @@ void QuaternionCamera::parameter(const blitz::Array<double, 1>& Parm)
   line_pitch_ = Parm(3);
   sample_pitch_ = Parm(4);
   // euler calls notify_update(), so we don't need to do that.
-  euler(Parm(blitz::Range(0,3)));
+  euler(Parm(blitz::Range(0,2)));
 }
 
 blitz::Array<double, 1> QuaternionCamera::parameter() const
 {
   blitz::Array<double, 1> res(5);
-  res(blitz::Range(0,3)) = euler();
+  res(blitz::Range(0,2)) = euler();
   res(3) = line_pitch();
   res(4) = sample_pitch();
   return res;

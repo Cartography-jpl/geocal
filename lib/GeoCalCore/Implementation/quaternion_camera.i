@@ -12,6 +12,7 @@
 %base_import(camera)
 %geocal_shared_ptr(GeoCal::QuaternionCamera);
 namespace GeoCal {
+  %copyctor QuaternionCamera;
 
 class QuaternionCamera : public Camera {
 public:

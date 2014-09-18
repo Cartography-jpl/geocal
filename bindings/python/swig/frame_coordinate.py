@@ -147,5 +147,33 @@ FrameCoordinate.__str__ = new_instancemethod(_frame_coordinate.FrameCoordinate__
 FrameCoordinate_swigregister = _frame_coordinate.FrameCoordinate_swigregister
 FrameCoordinate_swigregister(FrameCoordinate)
 
+class FrameCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
+    """
+    This is the coordinates of a frame camera, including derivatives.
+
+    C++ includes: frame_coordinate.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(const AutoDerivative< double > &L, const AutoDerivative< double > &S)
+        Create a FrameCoordinate with the given coordinates. 
+        """
+        _frame_coordinate.FrameCoordinateWithDerivative_swiginit(self,_frame_coordinate.new_FrameCoordinateWithDerivative(*args))
+    line = _swig_property(_frame_coordinate.FrameCoordinateWithDerivative_line_get, _frame_coordinate.FrameCoordinateWithDerivative_line_set)
+    sample = _swig_property(_frame_coordinate.FrameCoordinateWithDerivative_sample_get, _frame_coordinate.FrameCoordinateWithDerivative_sample_set)
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.line,self.sample)
+
+    __swig_destroy__ = _frame_coordinate.delete_FrameCoordinateWithDerivative
+FrameCoordinateWithDerivative.__str__ = new_instancemethod(_frame_coordinate.FrameCoordinateWithDerivative___str__,None,FrameCoordinateWithDerivative)
+FrameCoordinateWithDerivative_swigregister = _frame_coordinate.FrameCoordinateWithDerivative_swigregister
+FrameCoordinateWithDerivative_swigregister(FrameCoordinateWithDerivative)
+
 
 

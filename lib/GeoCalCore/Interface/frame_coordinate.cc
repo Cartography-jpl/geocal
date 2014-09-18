@@ -10,3 +10,12 @@ void FrameCoordinate::print(std::ostream& Os) const
 {
   Os << "Frame Coordinate: (" << line << ", " << sample << ")";
 }
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+void FrameCoordinateWithDerivative::print(std::ostream& Os) const
+{
+  Os << "Frame Coordinate: (" << line << ", " << sample << ")";
+}

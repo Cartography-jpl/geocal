@@ -262,7 +262,11 @@ class Camera(ObservableCamera):
     def _v_parameter_name(self):
         """
         virtual std::vector<std::string> GeoCal::Camera::parameter_name() const
-        Descriptive name of each parameter. 
+        Return parameters, including gradients.
+
+        Set the value of the parameters, including a gradient of the
+        parameter. Useful for doing Jacobian calculations. Descriptive name of
+        each parameter. 
         """
         return _camera.Camera__v_parameter_name(self)
 

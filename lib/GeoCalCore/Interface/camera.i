@@ -12,6 +12,7 @@
 %import "frame_coordinate.i"
 %import "look_vector.i"
 %import "geocal_time.i"
+%import "auto_derivative.i"
 %geocal_shared_ptr(GeoCal::Camera);
 %geocal_shared_ptr(GeoCal::SimpleCamera);
 namespace GeoCal {

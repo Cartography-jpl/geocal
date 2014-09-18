@@ -4,6 +4,7 @@
 #include "frame_coordinate.h"
 #include "look_vector.h"
 #include "observer.h"
+#include "auto_derivative.h"
 #include <blitz/array.h>
 #include <boost/math/quaternion.hpp>
 #include <vector>
@@ -108,6 +109,25 @@ public:
   {
     // Default is do nothing
   }
+
+//-----------------------------------------------------------------------
+/// Return parameters, including gradients
+//-----------------------------------------------------------------------
+
+  // virtual blitz::Array<AutoDerivative<double>, 1> parameter_with_gradient() const
+  // { // Default is no parameters.
+  //   return blitz::Array<double, 1>(0); 
+  // }
+
+//-----------------------------------------------------------------------
+/// Set the value of the parameters, including a gradient of the
+/// parameter. Useful for doing Jacobian calculations.
+//-----------------------------------------------------------------------
+
+  // virtual void parameter_with_gradient(const blitz::Array<AutoDerivative<double>, 1>& Parm)
+  // {
+  //   // Default is do nothing
+  // }
 
 //-----------------------------------------------------------------------
 /// Descriptive name of each parameter.

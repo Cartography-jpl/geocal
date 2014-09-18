@@ -200,8 +200,7 @@ private:
   AutoDerivative for use elsewhere.
 
   See also ArrayAd which work with this class for Arrays of 
-  AutoDerivative (not currently in GeoCal, available in OCO if 
-  needed).
+  AutoDerivative.
 *******************************************************************/
 template<class T> class AutoDerivative: 
 public Printable<AutoDerivative<T> >,

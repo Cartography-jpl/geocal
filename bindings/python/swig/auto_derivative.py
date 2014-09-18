@@ -175,7 +175,7 @@ class AutoDerivativeDouble(geocal_swig.generic_object.GenericObject):
     elsewhere.
 
     See also ArrayAd which work with this class for Arrays of
-    AutoDerivative (not currently in GeoCal, available in OCO if needed).
+    AutoDerivative.
 
     C++ includes: auto_derivative.h 
     """

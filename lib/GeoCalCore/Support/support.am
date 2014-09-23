@@ -8,7 +8,7 @@
 geocalinc_HEADERS+= @srcsupport@/constant.h
 geocalinc_HEADERS+= @srcsupport@/generic_object.h
 geocalinc_HEADERS+= @srcsupport@/auto_derivative.h
-geocalinc_HEADERS+= @srcsupport@/auto_derivative_boost.h
+geocalinc_HEADERS+= @srcsupport@/auto_derivative_quaternion.h
 geocalinc_HEADERS+= @srcsupport@/array_ad.h
 geocalinc_HEADERS+= @srcsupport@/observer.h
 geocalinc_HEADERS+= @srcsupport@/geocal_type_index.h

@@ -44,6 +44,24 @@ FrameCoordinate SimpleCamera::frame_coordinate(const ScLookVector& Sl,
   return fc;
 }
 
+FrameCoordinateWithDerivative 
+SimpleCamera::frame_coordinate_with_derivative
+(const ScLookVectorWithDerivative& Sl, 
+ int Band) const
+{
+  range_check(Band, 0, number_band());
+  boost::math::quaternion<AutoDerivative<double> > fv = 
+    conj(frame_to_sc) * Sl.look_quaternion() * frame_to_sc;
+  FrameCoordinateWithDerivative fc;
+  fc.line = number_line(Band) / 2.0 +
+    focal_ * (fv.R_component_2() / fv.R_component_4()) / 
+    line_pitch_;
+  fc.sample = number_sample(Band) / 2.0 +
+    focal_ * (fv.R_component_3() / fv.R_component_4()) / 
+    sample_pitch_;
+  return fc;
+}
+
 //-----------------------------------------------------------------------
 /// Convert from FrameCoordinate to ScLookVector. It is perfectly
 /// allowable for F.line to be outside the range (0, number_line(band)
@@ -59,6 +77,19 @@ ScLookVector SimpleCamera::sc_look_vector(const FrameCoordinate& F,
   ScLookVector sl((F.line - number_line(Band) / 2.0) * line_pitch_,
 		  (F.sample - number_sample(Band) / 2.0) * sample_pitch_,
 		  focal_);
+  sl.look_quaternion(frame_to_sc * sl.look_quaternion() * 
+		     conj(frame_to_sc));
+  return sl;
+}
+
+ScLookVectorWithDerivative SimpleCamera::sc_look_vector_with_derivative
+(const FrameCoordinateWithDerivative& F, int Band) const
+{
+  range_check(Band, 0, number_band());
+  ScLookVectorWithDerivative 
+    sl((F.line - number_line(Band) / 2.0) * line_pitch_,
+       (F.sample - number_sample(Band) / 2.0) * sample_pitch_,
+       focal_);
   sl.look_quaternion(frame_to_sc * sl.look_quaternion() * 
 		     conj(frame_to_sc));
   return sl;

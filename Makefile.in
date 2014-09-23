@@ -1177,12 +1177,13 @@ DATA = $(dist_afidspythonvdev_DATA) $(dist_geocalpkgpython_DATA) \
 	$(pkgconfig_DATA)
 am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcsupport@/generic_object.h @srcsupport@/auto_derivative.h \
-	@srcsupport@/array_ad.h @srcsupport@/observer.h \
-	@srcsupport@/geocal_type_index.h @srcsupport@/dir_change.h \
-	@srcsupport@/null_deleter.h @srcsupport@/ostream_pad.h \
-	@srcsupport@/wgs84_constant.h @srcsupport@/printable.h \
-	@srcsupport@/geocal_exception.h @srcsupport@/tile.h \
-	@srcsupport@/tiled_file.h @srcsupport@/memory_map_array.h \
+	@srcsupport@/auto_derivative_boost.h @srcsupport@/array_ad.h \
+	@srcsupport@/observer.h @srcsupport@/geocal_type_index.h \
+	@srcsupport@/dir_change.h @srcsupport@/null_deleter.h \
+	@srcsupport@/ostream_pad.h @srcsupport@/wgs84_constant.h \
+	@srcsupport@/printable.h @srcsupport@/geocal_exception.h \
+	@srcsupport@/tile.h @srcsupport@/tiled_file.h \
+	@srcsupport@/memory_map_array.h \
 	@srcsupport@/geocal_gsl_matrix.h @srcsupport@/geocal_matrix.h \
 	@srcsupport@/geocal_quaternion.h \
 	@srcsupport@/boost/backtrace.hpp @srcsupport@/geocal_gsl_fit.h \
@@ -2111,12 +2112,13 @@ geocalincdir = @includedir@/geocal
 # Source files for library
 geocalinc_HEADERS = @srcsupport@/constant.h \
 	@srcsupport@/generic_object.h @srcsupport@/auto_derivative.h \
-	@srcsupport@/array_ad.h @srcsupport@/observer.h \
-	@srcsupport@/geocal_type_index.h @srcsupport@/dir_change.h \
-	@srcsupport@/null_deleter.h @srcsupport@/ostream_pad.h \
-	@srcsupport@/wgs84_constant.h @srcsupport@/printable.h \
-	@srcsupport@/geocal_exception.h @srcsupport@/tile.h \
-	@srcsupport@/tiled_file.h @srcsupport@/memory_map_array.h \
+	@srcsupport@/auto_derivative_boost.h @srcsupport@/array_ad.h \
+	@srcsupport@/observer.h @srcsupport@/geocal_type_index.h \
+	@srcsupport@/dir_change.h @srcsupport@/null_deleter.h \
+	@srcsupport@/ostream_pad.h @srcsupport@/wgs84_constant.h \
+	@srcsupport@/printable.h @srcsupport@/geocal_exception.h \
+	@srcsupport@/tile.h @srcsupport@/tiled_file.h \
+	@srcsupport@/memory_map_array.h \
 	@srcsupport@/geocal_gsl_matrix.h @srcsupport@/geocal_matrix.h \
 	@srcsupport@/geocal_quaternion.h \
 	@srcsupport@/boost/backtrace.hpp @srcsupport@/geocal_gsl_fit.h \

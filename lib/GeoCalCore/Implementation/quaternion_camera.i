@@ -41,8 +41,14 @@ public:
   %python_attribute_with_set(euler, blitz::Array<double, 1>);
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
+  virtual FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
+		   int Band) const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
+				 int Band) const;
   virtual ScLookVector sc_look_vector(const DcsLookVector& Dlv) const;
   virtual DcsLookVector dcs_look_vector(const ScLookVector& Sl) const;
   virtual DcsLookVector dcs_look_vector(const FrameCoordinate& F, int Band) 

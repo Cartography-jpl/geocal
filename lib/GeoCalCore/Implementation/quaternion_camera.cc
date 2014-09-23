@@ -70,6 +70,13 @@ FrameCoordinate QuaternionCamera::frame_coordinate(const ScLookVector& Sl,
   return fc;
 }
 
+FrameCoordinateWithDerivative QuaternionCamera::frame_coordinate_with_derivative
+(const ScLookVectorWithDerivative& Sl, 
+ int Band) const
+{
+  throw Exception("Not implemented yet");
+}
+
 //-----------------------------------------------------------------------
 /// Convert from FrameCoordinate to DcsLookVector. It is perfectly
 /// allowable for F.line to be outside the range (0, number_line(band)
@@ -111,6 +118,13 @@ ScLookVector QuaternionCamera::sc_look_vector(const FrameCoordinate& F,
   return ScLookVector(frame_to_sc_ * 
 		      dcs_look_vector(F, Band).look_quaternion() *
 		      conj(frame_to_sc_));
+}
+
+ScLookVectorWithDerivative QuaternionCamera::sc_look_vector_with_derivative
+(const FrameCoordinateWithDerivative& F, 
+ int Band) const
+{
+  throw Exception("Not implemented yet");
 }
 
 //-----------------------------------------------------------------------

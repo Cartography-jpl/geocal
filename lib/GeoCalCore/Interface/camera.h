@@ -156,6 +156,16 @@ public:
 					   int Band) const = 0;
 
 //-----------------------------------------------------------------------
+/// Variation of frame_coordinate that both propagate derivative
+/// information in the ScLookVector and adds in any derivatives from
+/// the parameters.
+//-----------------------------------------------------------------------
+
+  virtual FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
+		   int Band) const = 0;
+
+//-----------------------------------------------------------------------
 /// This is similar to frame_coordinate, except it only calculates the
 /// line coordinate. For some camera models, it is more expensive to
 /// calculate the sample number than the line (e.g., MISR camera needs
@@ -181,6 +191,17 @@ public:
 
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const = 0;
+
+
+//-----------------------------------------------------------------------
+/// Variation of sc_look_vector that both propagate derivative
+/// information in the FrameCoordinate and adds in any derivatives from
+/// the parameters.
+//-----------------------------------------------------------------------
+
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
+				 int Band) const = 0;
 
 //-----------------------------------------------------------------------
 /// Print to a stream.
@@ -231,8 +252,14 @@ public:
   virtual int number_sample(int Band) const {return nsample;}
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
+  virtual FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
+				   int Band) const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
+				 int Band) const;
   virtual void print(std::ostream& Os) const;
   double beta() const {return beta_;}
   double delta() const {return delta_;}

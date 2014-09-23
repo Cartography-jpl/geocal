@@ -42,10 +42,16 @@ public:
   %python_attribute(parameter_name, virtual std::vector<std::string>)
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const = 0;
+  virtual FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
+		   int Band) const = 0;
   virtual double frame_line_coordinate(const ScLookVector& Sl, int Band) 
     const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
     int Band) const = 0;
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
+				 int Band) const = 0;
   std::string print_to_string() const;
 };
 

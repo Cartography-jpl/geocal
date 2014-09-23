@@ -2,6 +2,7 @@
 #define LOOK_VECTOR_H
 #include "printable.h"
 #include "auto_derivative.h"
+#include "auto_derivative_quaternion.h"
 #include "constant.h"
 #include <boost/array.hpp>
 #include <boost/math/quaternion.hpp>

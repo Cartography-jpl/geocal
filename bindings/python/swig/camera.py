@@ -300,6 +300,15 @@ class Camera(ObservableCamera):
         """
         return _camera.Camera_frame_coordinate(self, *args)
 
+    def frame_coordinate_with_derivative(self, *args):
+        """
+        virtual FrameCoordinateWithDerivative GeoCal::Camera::frame_coordinate_with_derivative(const ScLookVectorWithDerivative &Sl, int Band) const =0
+        Variation of frame_coordinate that both propagate derivative
+        information in the ScLookVector and adds in any derivatives from the
+        parameters. 
+        """
+        return _camera.Camera_frame_coordinate_with_derivative(self, *args)
+
     def frame_line_coordinate(self, *args):
         """
         virtual double GeoCal::Camera::frame_line_coordinate(const ScLookVector &Sl, int Band) const
@@ -329,6 +338,15 @@ class Camera(ObservableCamera):
         """
         return _camera.Camera_sc_look_vector(self, *args)
 
+    def sc_look_vector_with_derivative(self, *args):
+        """
+        virtual ScLookVectorWithDerivative GeoCal::Camera::sc_look_vector_with_derivative(const FrameCoordinateWithDerivative &F, int Band) const =0
+        Variation of sc_look_vector that both propagate derivative information
+        in the FrameCoordinate and adds in any derivatives from the
+        parameters. 
+        """
+        return _camera.Camera_sc_look_vector_with_derivative(self, *args)
+
     __swig_destroy__ = _camera.delete_Camera
 Camera.integration_time = new_instancemethod(_camera.Camera_integration_time,None,Camera)
 Camera._v_direction = new_instancemethod(_camera.Camera__v_direction,None,Camera)
@@ -339,8 +357,10 @@ Camera._v_parameter = new_instancemethod(_camera.Camera__v_parameter,None,Camera
 Camera._v_parameter_with_derivative = new_instancemethod(_camera.Camera__v_parameter_with_derivative,None,Camera)
 Camera._v_parameter_name = new_instancemethod(_camera.Camera__v_parameter_name,None,Camera)
 Camera.frame_coordinate = new_instancemethod(_camera.Camera_frame_coordinate,None,Camera)
+Camera.frame_coordinate_with_derivative = new_instancemethod(_camera.Camera_frame_coordinate_with_derivative,None,Camera)
 Camera.frame_line_coordinate = new_instancemethod(_camera.Camera_frame_line_coordinate,None,Camera)
 Camera.sc_look_vector = new_instancemethod(_camera.Camera_sc_look_vector,None,Camera)
+Camera.sc_look_vector_with_derivative = new_instancemethod(_camera.Camera_sc_look_vector_with_derivative,None,Camera)
 Camera.__str__ = new_instancemethod(_camera.Camera___str__,None,Camera)
 Camera_swigregister = _camera.Camera_swigregister
 Camera_swigregister(Camera)
@@ -356,18 +376,8 @@ class SimpleCamera(Camera):
     C++ includes: camera.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    def __init__(self, *args): 
-        """
-        SimpleCamera::SimpleCamera(double Beta=58 *Constant::deg_to_rad, double Delta=-2.7
-        *Constant::deg_to_rad, double Epsilon=0, double Focal=123.8e-3, double
-        line_pitch=18e-6, double sample_pitch=21e-6, int Number_line=1, int
-        Number_sample=1504)
-        This creates SimpleCamera with the given data.
-
-        The default data is for the nominal MISR DF, red band. 
-        """
-        _camera.SimpleCamera_swiginit(self,_camera.new_SimpleCamera(*args))
     def _v_beta(self):
         """
         double GeoCal::SimpleCamera::beta() const

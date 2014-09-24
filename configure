@@ -17512,11 +17512,11 @@ fi
 $as_echo_n "checking for Hdfeos5 library... " >&6; }
         succeeded=no
         if test "$build_hdfeos5" == "yes"; then
-            HDFEOS5_LIBS="libhe5_hdfeos.la"
+            HDFEOS5_LIBS="libhe5_hdfeos.la ${HDF5_LIBS}"
             HDFEOS5_CFLAGS="-I$srcdir/hdfeos/external/HDF-EOS/v5.1.15/include"
             succeeded=yes
         elif test "$ac_hdfeos5_path" != ""; then
-            HDFEOS5_LIBS="-R$ac_hdfeos5_path/lib -L$ac_hdfeos5_path/lib -lhe5_hdfeos -lGctp"
+            HDFEOS5_LIBS="-R$ac_hdfeos5_path/lib -L$ac_hdfeos5_path/lib -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
             HDFEOS5_CFLAGS="-I$ac_hdfeos5_path/include/hdfeos5"
             succeeded=yes
         else
@@ -17599,27 +17599,27 @@ fi
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/hdfeos5/"
           if test -e "$ac_path_tmp/lib/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
               succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
              break;
           fi
@@ -17707,27 +17707,27 @@ fi
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/"
           if test -e "$ac_path_tmp/lib/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
               succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
              break;
           fi

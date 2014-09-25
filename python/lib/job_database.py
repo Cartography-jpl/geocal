@@ -4,7 +4,7 @@ import sqlite3
 import time 
 import signal
 import subprocess
-from misc import pid_exists
+from misc import pid_exists, makedirs_p
 
 db_save = None
 job_id_save = None
@@ -121,10 +121,9 @@ job_start_time=null where job_id=?
 
         Return true if a job was run, false otherwise.
         '''
-        r = self.db.execute('''
+        for r in self.db.execute('''
 select job_id, pid from job_status where status = 'running'
-''').fetchone()
-        if(r is not None):
+'''):
             if(pid_exists(r["pid"])):
                 # Job running, so don't start another one
                 return False
@@ -136,8 +135,10 @@ pid=null,
 job_start_time=null where job_id=?
 ''', (r["job_id"],))
             self.db.commit()
+        # Find next job (if any) that can be run
         r = self.db.execute('''
-select job_id, job_to_run from job_status where status = 'queued' 
+select job_id, job_to_run, working_directory from job_status 
+where status = 'queued' 
 order by job_id
 ''').fetchone()
         if(r is None):
@@ -152,8 +153,11 @@ order by job_id
             for s in siglist:
                 old_signal[s] = signal.signal(s, _signal_handle)
             self.set_status(r["job_id"], "running")
-            subprocess.check_output(pickle.loads(r["job_to_run"]),
-                                    stderr=subprocess.STDOUT)
+            makedirs_p(r["working_directory"])
+            with open(r["working_directory"] + "/job.log", "w") as joblog:
+                subprocess.check_call(pickle.loads(r["job_to_run"]),
+                                      stdout=joblog,
+                                      stderr=subprocess.STDOUT)
             self.set_status(r["job_id"], "success")
         except subprocess.CalledProcessError:
             self.set_status(r["job_id"], "failure")

@@ -376,8 +376,18 @@ class SimpleCamera(Camera):
     C++ includes: camera.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        SimpleCamera::SimpleCamera(double Beta=58 *Constant::deg_to_rad, double Delta=-2.7
+        *Constant::deg_to_rad, double Epsilon=0, double Focal=123.8e-3, double
+        line_pitch=18e-6, double sample_pitch=21e-6, int Number_line=1, int
+        Number_sample=1504)
+        This creates SimpleCamera with the given data.
+
+        The default data is for the nominal MISR DF, red band. 
+        """
+        _camera.SimpleCamera_swiginit(self,_camera.new_SimpleCamera(*args))
     def _v_beta(self):
         """
         double GeoCal::SimpleCamera::beta() const

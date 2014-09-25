@@ -17979,7 +17979,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
                    if test -e "$ac_boost_lib_base/$ac_boost_lib"; then
                        BOOST_LIBDIR="$ac_boost_lib_base"
                        BOOST_REGEX_LIB="-lboost_regex-mt"
-		       BOOST_FILESYSTEM_LIB="-lboost_filesystem-mt -lboost_system_mt"
+		       BOOST_FILESYSTEM_LIB="-lboost_filesystem-mt -lboost_system-mt"
                        BOOST_DATETIME_LIB="-lboost_date_time-mt"
                        BOOST_IOSTREAMS_LIB="-lboost_iostreams-mt"
                        boost_done=yes

@@ -3,9 +3,7 @@
 #include "mspi_camera.h"
 #include "did_datum.h"
 #include "simple_dem.h"
-#ifdef HAVE_VICAR_RTL
 #include "usgs_dem.h"
-#endif
 #ifdef HAVE_MSPI_SHARED
 #include "File/L1B1File/src/l1b1_reader.h"
 #endif
@@ -57,16 +55,10 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
   boost::shared_ptr<Dem> dem;
   double dem_resolution;
   if(c.value<std::string>("dem_type") == "usgs") {
-#ifdef HAVE_VICAR_RTL
-    // We could probably relax the requirement on VICAR_RTL if needed,
-    // but for now require this
     boost::shared_ptr<Datum> 
       datum(new DidDatum(c.value<std::string>("MSL_DATA")));
     dem.reset(new UsgsDem(c.value<std::string>("USGSDATA"), true, datum));
     dem_resolution = 10.0;
-#else
-    throw Exception("UsgsDem wasn't included in the build");
-#endif
   } else {
     double h = (c.have_key("simple_dem_height") ?
 		c.value<double>("simple_dem_height") : 0);

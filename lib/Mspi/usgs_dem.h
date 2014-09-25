@@ -1,7 +1,6 @@
 #ifndef USGS_DEM_H
 #define USGS_DEM_H
 #include "dem_map_info.h"
-#include "datum_geoid96.h"
 #include "raster_multifile.h"
 #include "location_to_file.h"
 #include "ostream_pad.h"
@@ -51,7 +50,7 @@ public:
   UsgsDem(const std::string& Dir = "",
 	  bool Outside_dem_is_error = true,
 	  const boost::shared_ptr<Datum>& D = 
-	  boost::shared_ptr<Datum>(new DatumGeoid96()));
+	  boost::shared_ptr<Datum>());
   virtual ~UsgsDem() {}
 
 //-----------------------------------------------------------------------

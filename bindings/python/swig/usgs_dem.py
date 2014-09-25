@@ -174,8 +174,7 @@ class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
     def __init__(self, *args): 
         """
         UsgsDem::UsgsDem(const std::string &Dir="", bool Outside_dem_is_error=true, const
-        boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        DatumGeoid96()))
+        boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >())
         Constructor.
 
         You can provide the directory to look for USGS DEM data, or if you

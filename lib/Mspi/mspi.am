@@ -13,13 +13,8 @@ geocalinc_HEADERS+= @srcmspi@/ground_mspi_orbit.h
 libgeocal_la_SOURCES+= @srcmspi@/ground_mspi_orbit.cc
 geocalinc_HEADERS+= @srcmspi@/ground_mspi_igc.h
 libgeocal_la_SOURCES+= @srcmspi@/ground_mspi_igc.cc
-if HAVE_VICAR_RTL
-# This depends on DatumGeoid96, which in turn depends on having
-# VICAR. We could probably relax this if needed, but for
-# now just skip building if we don't have VICAR
 geocalinc_HEADERS+= @srcmspi@/usgs_dem.h
 libgeocal_la_SOURCES+= @srcmspi@/usgs_dem.cc
-endif
 geocalinc_HEADERS+= @srcmspi@/air_mspi_igc.h
 libgeocal_la_SOURCES+= @srcmspi@/air_mspi_igc.cc
 
@@ -29,7 +24,7 @@ SWIG_SRC += @swigsrc@/mspi_camera_wrap.cc
 SWIG_SRC += @swigsrc@/air_mspi_orbit_wrap.cc
 SWIG_SRC += @swigsrc@/ground_mspi_orbit_wrap.cc
 SWIG_SRC += @swigsrc@/ground_mspi_igc_wrap.cc
-SWIG_SRC_VICAR_RTL += @swigsrc@/usgs_dem_wrap.cc
+SWIG_SRC += @swigsrc@/usgs_dem_wrap.cc
 SWIG_SRC += @swigsrc@/air_mspi_igc_wrap.cc
 
 geocal_test_all_SOURCES+= @srcmspi@/ifstream_cs_test.cc
@@ -39,9 +34,7 @@ geocal_test_all_SOURCES+= @srcmspi@/mspi_camera_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/air_mspi_orbit_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/ground_mspi_orbit_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/ground_mspi_igc_test.cc
-if HAVE_VICAR_RTL
 geocal_test_all_SOURCES+= @srcmspi@/usgs_dem_test.cc
-endif
 geocal_test_all_SOURCES+= @srcmspi@/air_mspi_igc_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcmspi@

@@ -5,6 +5,9 @@
 #include <boost/foreach.hpp>
 #include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
+#ifdef VICAR_RTL
+#include "datum_geoid96.h"
+#endif
 
 using namespace GeoCal;
 
@@ -174,10 +177,18 @@ UsgsDem::UsgsDem
 : 
   f(new UsgsDemData(Dir, Outside_dem_is_error, 10812, 10812))
 {
+  boost::shared_ptr<Datum> d(D);
+  if(!d) {
+#ifdef VICAR_RTL    
+    d.reset(new DatumGeoid96());
+#else
+    throw Exception("DatumGeoid96 wasn't included in the build");
+#endif
+  }
   // The 10812 up above is the size of the file, so we are reading all
   // the data. Not sure if we really want this hardcoded, or if we
   // really want all this data read. But for now, leave this like this
   // and we can revisit if needed.
-  initialize(D, f->map_info(), Outside_dem_is_error);
+  initialize(d, f->map_info(), Outside_dem_is_error);
 }
 

@@ -6165,8 +6165,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"UsgsDemData_swiginit", UsgsDemData_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_UsgsDem", _wrap_new_UsgsDem, METH_VARARGS, (char *)"\n"
 		"UsgsDem::UsgsDem(const std::string &Dir=\"\", bool Outside_dem_is_error=true, const\n"
-		"boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new\n"
-		"DatumGeoid96()))\n"
+		"boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >())\n"
 		"Constructor.\n"
 		"\n"
 		"You can provide the directory to look for USGS DEM data, or if you\n"

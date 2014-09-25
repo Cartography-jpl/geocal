@@ -48,8 +48,19 @@ if test "x$want_carto" = "xyes"; then
                           [libcarto], [-lcarto $VICAR_RTL_CFLAGS])
         fi
 
+# We can only use the carto library if we also have vicar and gsl
+        if test "$have_gsl" != "yes"; then
+	   succeeded=no
+	fi
+        if test "$have_vicar_rtl" != "yes"; then
+	   succeeded=no
+	fi
+
         if test "$succeeded" != "yes" ; then
+                CARTO_CFLAGS=""
+		CARTO_LIBS=""
                 AC_MSG_RESULT([no])
+		have_carto="no"
         else
                 AC_MSG_RESULT([yes])
                 AC_SUBST(CARTO_CFLAGS)

@@ -17744,6 +17744,9 @@ fi
         if test "$succeeded" != "yes" ; then
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
+                HDFEOS5_CFLAGS=""
+		HDFEOS5_LIBS=""
+		have_hdfeos5="no"
         else
                 HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS $HDF5_CFLAGS"
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
@@ -17848,6 +17851,9 @@ $as_echo_n "checking for MSPI-Shared library... " >&6; }
         if test "$succeeded" != "yes" ; then
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
+		MSPI_SHARED_CFLAGS=""
+		MSPI_SHARED_LIBS=""
+		have_mspi_shared="no"
         else
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
@@ -19920,9 +19926,20 @@ fi
 
         fi
 
+# We can only use the carto library if we also have vicar and gsl
+        if test "$have_gsl" != "yes"; then
+	   succeeded=no
+	fi
+        if test "$have_vicar_rtl" != "yes"; then
+	   succeeded=no
+	fi
+
         if test "$succeeded" != "yes" ; then
+                CARTO_CFLAGS=""
+		CARTO_LIBS=""
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
+		have_carto="no"
         else
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }

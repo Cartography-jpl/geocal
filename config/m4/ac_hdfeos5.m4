@@ -55,6 +55,9 @@ if test "x$want_hdfeos5" = "xyes"; then
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])
+                HDFEOS5_CFLAGS=""
+		HDFEOS5_LIBS=""
+		have_hdfeos5="no"
         else
                 HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS $HDF5_CFLAGS"
                 AC_MSG_RESULT([yes])

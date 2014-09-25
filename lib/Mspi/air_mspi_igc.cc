@@ -65,7 +65,7 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
     dem.reset(new UsgsDem(c.value<std::string>("USGSDATA"), true, datum));
     dem_resolution = 10.0;
 #else
-    throw Exception("UsgsDem wasn't included in the build")
+    throw Exception("UsgsDem wasn't included in the build");
 #endif
   } else {
     double h = (c.have_key("simple_dem_height") ?

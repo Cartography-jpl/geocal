@@ -8,16 +8,22 @@ usage='''Usage:
   convert_reflectance -h | --help
   convert_reflectance -v | --version
 
-This program converts to reflectance units. Not sure about this program,
-we may need to rework how this works.
+This program converts to reflectance units.
+
+For world view 2, we prefer using the IMD file if available. If not, supply
+the NITF file. We use assumed constants for the absolute calibration factor
+and effective bandwidths (which are reported in the IMD file, but not the
+NITF file). The effective band widths appear to be constant over time,
+but the absolute calibration scale factor is *not*, so using NITF files
+will *not* give the same results as using a IMD file.
 
 Options:
   -h --help         
        Print this message
 
   --wv2-pan=f
-       Data is a WV-2 panchromatic band. We need to supply the IMD file for
-       this data.
+       Data is a WV-2 panchromatic band. We need to supply the IMD file or
+       NITF file for this data.
 
   -v --version      
        Print program version

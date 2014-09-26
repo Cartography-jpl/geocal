@@ -6,6 +6,7 @@ import signal
 import subprocess
 from misc import pid_exists, makedirs_p
 import logging
+import datetime
 
 db_save = None
 job_id_save = None
@@ -26,15 +27,13 @@ class JobDatabase(object):
     We may well replace this at some point in the future with actual
     job management software, this is primarily meant for use as a quick 
     an dirty system for use with the ABCD system.'''
-    def __init__(self, db_name = None):
-        '''This create a handle for the JobDatabase. You can pass in the 
-        name of the sqlite file to use, or if you leave this as 'None' we
-        look for the environment variable 'AFIDS_JOB_STATUS_DATABASE'.
+    def __init__(self, db_name):
+        '''This create a handle for the JobDatabase. You pass in the 
+        name of the sqlite file to use.
 
         If the database file doesn't already exist, we create it. If
         the table 'job_status' doesn't exist, we create it.'''
-        if(db_name is None):
-            db_name = os.environ["AFIDS_JOB_STATUS_DATABASE"]
+        self.db_name = db_name
         self.db = sqlite3.connect(db_name)
         self.db.row_factory = sqlite3.Row        
         self.db.execute('''
@@ -52,7 +51,8 @@ CREATE TABLE IF NOT EXISTS job_status
             self.db.close()
             self.db = None
 
-    def add_job(self, working_dir, job_to_run, start_if_available = True):
+    def add_job(self, working_dir, log_file, job_to_run, 
+                start_if_available = True):
         '''Submit a job to run. You supply the working directory (can
         be relative if desired, we call os.path.abspath on this), and
         a job to run. The job should be an array like what can be
@@ -70,13 +70,54 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)''',
                         (os.path.abspath(working_dir), 
                          pickle.dumps(job_to_run)))
         self.db.commit()
-        log = logging.getLogger("geocal-python.job_database")
-        log.info("Added job %d to the job queue" % cur.lastrowid)
+        with open(log_file, "a") as fh:
+            print >>fh, "%s INFO:geocal-python.job_database Added job %d to the job queue" % (datetime.datetime.now().isoformat(), cur.lastrowid)
+        if(start_if_available):
+            subprocess.call("job_database_check_and_run %s %s &" %
+                            (self.db_name, log_file), shell = True)
         return cur.lastrowid
 
-    def abcd_job(self, working_dir):
-        '''Submit an abachd job.'''
-        pass
+    def abcd_job(self, working_dir, log_file, 
+                 pre_pan, post_pan,
+                 pre_ms = None, post_ms = None, subset = None,
+                 resolution = 0.5, number_process=1, dem_file = None,
+                 start_if_available = True):
+        '''Submit an abachd job. 
+
+        You need to supply a working direction, and a pre and post 
+        panchromatic image. You can optionally also supply 
+        multispectral pre and/or post. You can optionally specify 
+        a subset to use, this should be an array of 4 values - start line, 
+        start sample, number line, number sample.
+
+        You can give the resolution (in meters) for the output. The default
+        is 0.5 meter. You can supply the number of processors to use,
+        the default is 1. You can supply a DEM file to use, the default is 
+        to use the SRTM.
+        '''
+        cmd = ["abachd"]
+        args = [ pre_pan ]
+        if(post_ms is not None):
+            args.extend([post_pan, post_ms])
+        elif(pre_ms is not None):
+            cmd.append("--pre-ms")
+            args.extend([pre_ms, post_pan])
+        else:
+            cmd.append("--no-ms")
+            args.append(post_pan)
+        if(subset is not None):
+            cmd.append(["--subset", str(subset[0]), str(subset[1]),
+                        str(subset[2]), str(subset[3])])
+        args.append(working_dir)
+        cmd.append("--diagnostic")
+        cmd.append("--verbose")
+        cmd.append("--resolution=%f" % resolution)
+        cmd.append("--number-process=%d" % number_process)
+        if(dem_file is not None):
+            cmd.append("--dem-file=%s" % dem_file)
+        cmd.extend(args)
+        return self.add_job(working_dir, log_file, cmd, 
+                            start_if_available = start_if_available)
 
     def __getitem__(self, job_id):
         '''Return information about a job with the given job_id.'''

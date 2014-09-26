@@ -1,0 +1,26 @@
+Jobs are queued and run by the JobDatabase.
+
+This class will put things to the logger "geocal-python", you can redirect
+this to a log file by:
+
+logging.basicConfig(level = logging.INFO,
+                    format = '%(asctime)s %(levelname)s:%(name)s:%(message)s',
+                    filename = "job_database_test.log")
+
+The database should be on a *local* disk. This is important because it
+handles multiple users trying to write to the database by doing file locking.
+This works fine on local disks, but is known not to work for NFS mounted
+disks (and I'm pretty sure doesn't work for windows disks either). Database
+isn't too large, so this can go into /var/www or someplace like that.
+
+If we have
+jdb = JobDatabase("/local_dir_path/job_status.db"), then
+The job database is available through jdb.db, this is a sqlite3 database.
+You can do whatever you like with this, including checking list of jobs,
+status, etc. You can retrieve a particular job by its id doing
+jdb[jid]. This is just a shortcut for retrieving a single row. Take a look
+at the unit tests to see basic usage.
+
+Generic jobs can be submitted through add_job, but we have a wrapper
+abcd_job for running abachd script (note mismatch in name, I'll need to
+rename abachd at some point but haven't yet).

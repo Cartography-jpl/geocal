@@ -5,6 +5,7 @@ import time
 import signal
 import subprocess
 from misc import pid_exists, makedirs_p
+import logging
 
 db_save = None
 job_id_save = None
@@ -69,7 +70,13 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)''',
                         (os.path.abspath(working_dir), 
                          pickle.dumps(job_to_run)))
         self.db.commit()
+        log = logging.getLogger("geocal-python.job_database")
+        log.info("Added job %d to the job queue" % cur.lastrowid)
         return cur.lastrowid
+
+    def abcd_job(self, working_dir):
+        '''Submit an abachd job.'''
+        pass
 
     def __getitem__(self, job_id):
         '''Return information about a job with the given job_id.'''
@@ -86,6 +93,8 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)''',
 
     def __delitem__(self, job_id):
         self.db.execute("DELETE FROM job_status WHERE job_id=?", [job_id])
+        log = logging.getLogger("geocal-python.job_database")
+        log.info("Removing job %d from the job queue" % job_id)
 
     def set_status(self, job_id, status):
         '''Set a job id to the given status.'''
@@ -121,12 +130,14 @@ job_start_time=null where job_id=?
 
         Return true if a job was run, false otherwise.
         '''
+        log = logging.getLogger("geocal-python.job_database")
         for r in self.db.execute('''
 select job_id, pid from job_status where status = 'running'
 '''):
             if(pid_exists(r["pid"])):
                 # Job running, so don't start another one
                 return False
+            log.info("Job %d had a run status, but the process %d is not on the system. Apparently this died, so marking job as 'interrupted" % (r["job_id"], r["pid"]))
         # We may have had the job disappear (e.g., a SIGKILL occurred).
             self.db.execute('''
 update job_status SET status='interrupted', 
@@ -135,6 +146,8 @@ pid=null,
 job_start_time=null where job_id=?
 ''', (r["job_id"],))
             self.db.commit()
+        
+            
         # Find next job (if any) that can be run
         r = self.db.execute('''
 select job_id, job_to_run, working_directory from job_status 
@@ -155,12 +168,15 @@ order by job_id
             self.set_status(r["job_id"], "running")
             makedirs_p(r["working_directory"])
             with open(r["working_directory"] + "/job.log", "w") as joblog:
+                log.info("Running job %d" % r["job_id"])
                 subprocess.check_call(pickle.loads(r["job_to_run"]),
                                       stdout=joblog,
                                       stderr=subprocess.STDOUT)
             self.set_status(r["job_id"], "success")
+            log.info("Job %d ran successfully" % r["job_id"])
         except subprocess.CalledProcessError:
             self.set_status(r["job_id"], "failure")
+            log.info("Job %d failed" % r["job_id"])
         finally:
             for s in siglist:
                 if(s in old_signal):

@@ -1,10 +1,19 @@
+from geocal_swig import *
 from instrument_reflectance import *
 import math
+import re
 
 class WorldView2Reflectance(InstrumentReflectance):
    '''This class does DN to TOA Reflectance conversion for WorldView 2'''
    def __init__(self, multimetafname, panmetafname):
-      '''Initialization of class'''
+      '''Initialization of class. The files can be IMD files, or 
+      alternatively a NITF file if the IMD isn't available. If it is 
+      NITF, then we have to assume the absolute calibration factors.
+
+      Note that the effectiveBandwidths appear to be constant, but
+      the absolute calibration factors are *not*. But we take an assumed
+      value which at least allows us to calculate things.
+      '''
 #      super(InstrumentReflectance, self).__init__()
       InstrumentReflectance.__init__(self);
       self.pan_year = -999.
@@ -26,10 +35,16 @@ class WorldView2Reflectance(InstrumentReflectance):
          self.absCalFactors.append(-999.)
          self.effectiveBandwidths.append(-999.)
       if multimetafname != None:
-         self.readMetaData(multimetafname)
+         if(re.search('.IMD', multimetafname)):
+            self.readMetaData(multimetafname)
+         else:
+            self.readNTFMetaData(multimetafname, ispan = False)
          self.calculateSolarDistance()
       if panmetafname != None:
-         self.readMetaData(panmetafname)
+         if(re.search('.IMD', panmetafname)):
+            self.readMetaData(panmetafname)
+         else:
+            self.readNTFMetaData(panmetafname, ispan = True)
          self.calculatePanSolarDistance()
 
    def pan_band(self):
@@ -128,6 +143,54 @@ class WorldView2Reflectance(InstrumentReflectance):
                self.pan_solarZenithAngle = 90. - self.pan_solarElevation
                self.pan_solarZenithAngleInRadians = self.pan_solarZenithAngle*(math.pi/180.)
             continue
+
+   def readNTFMetaData(self, fname, ispan = False):
+      f = GdalRasterImage(fname)
+      if(ispan):
+         # This value isn't really a constant
+         self.absCalFactors[8] = 5.678345e-02
+         self.effectiveBandwidths[8] = 2.846000e-01
+         self.pan_year = float(f["NITF_CSDIDA_TIME"][0:4])
+         self.pan_month = float(f["NITF_CSDIDA_TIME"][4:6])
+         self.pan_day = float(f["NITF_CSDIDA_TIME"][6:8])
+         self.pan_hh = float(f["NITF_CSDIDA_TIME"][8:10])
+         self.pan_mm = float(f["NITF_CSDIDA_TIME"][10:12])
+         self.pan_ssdd = float(f["NITF_CSDIDA_TIME"][12:])
+         t = float(f["NITF_CSEXRA_TIME_FIRST_LINE_IMAGE"])
+         self.pan_ssdd += t - math.floor(t)
+         self.pan_solarElevation = float(f["NITF_CSEXRA_SUN_ELEVATION"])
+         self.pan_solarZenithAngle = 90. - self.pan_solarElevation
+         self.pan_solarZenithAngleInRadians = self.pan_solarZenithAngle*(math.pi/180.)
+         
+      else:
+         # This value isn't really a constant
+         self.absCalFactors[0] = 9.295654e-03;
+         self.absCalFactors[1] = 1.783568e-02;
+         self.absCalFactors[2] = 1.364197e-02;
+         self.absCalFactors[3] = 6.810718e-03;
+         self.absCalFactors[4] = 1.851735e-02;
+         self.absCalFactors[5] = 6.063145e-03;
+         self.absCalFactors[6] = 2.050828e-02;
+         self.absCalFactors[7] = 9.042234e-03;
+         self.effectiveBandwidths[0] = 4.730000e-02;
+         self.effectiveBandwidths[1] = 5.430000e-02;
+         self.effectiveBandwidths[2] = 6.300000e-02;
+         self.effectiveBandwidths[3] = 3.740000e-02;
+         self.effectiveBandwidths[4] = 5.740000e-02;
+         self.effectiveBandwidths[5] = 3.930000e-02;
+         self.effectiveBandwidths[6] = 9.890000e-02;
+         self.effectiveBandwidths[7] = 9.960000e-02;
+         self.year = float(f["NITF_CSDIDA_TIME"][0:4])
+         self.month = float(f["NITF_CSDIDA_TIME"][4:6])
+         self.day = float(f["NITF_CSDIDA_TIME"][6:8])
+         self.hh = float(f["NITF_CSDIDA_TIME"][8:10])
+         self.mm = float(f["NITF_CSDIDA_TIME"][10:12])
+         self.ssdd = float(f["NITF_CSDIDA_TIME"][12:])
+         t = float(f["NITF_CSEXRA_TIME_FIRST_LINE_IMAGE"])
+         self.ssdd += t - math.floor(t)
+         self.solarElevation = float(f["NITF_CSEXRA_SUN_ELEVATION"])
+         self.solarZenithAngle = 90. - self.solarElevation
+         self.solarZenithAngleInRadians = self.solarZenithAngle*(math.pi/180.)         
 
    def calculatePanSolarDistance(self):
       '''Calculate the solar distance. Like calculateSolarDistance, but 

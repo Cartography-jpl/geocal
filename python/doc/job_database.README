@@ -1,11 +1,7 @@
 Jobs are queued and run by the JobDatabase.
 
-This class will put things to the logger "geocal-python", you can redirect
-this to a log file by:
-
-logging.basicConfig(level = logging.INFO,
-                    format = '%(asctime)s %(levelname)s:%(name)s:%(message)s',
-                    filename = "job_database_test.log")
+This class will print status message to a supplied log file, 
+e.g. job_database.log.
 
 The database should be on a *local* disk. This is important because it
 handles multiple users trying to write to the database by doing file locking.
@@ -24,3 +20,25 @@ at the unit tests to see basic usage.
 Generic jobs can be submitted through add_job, but we have a wrapper
 abcd_job for running abachd script (note mismatch in name, I'll need to
 rename abachd at some point but haven't yet).
+
+There are 2 programs that should be regularly run, presumably through
+a crontab. The first is just the normal logrotate script, run this once
+a day or so on the job_database.log file, just to keep it from getting
+too big. This takes a standard config file, you can just use whatever you
+already have for the apache logs. So perhaps something like:
+
+/<my path>/job_database.log {
+   rotate 5
+   weekly
+}
+
+The second is a program "job_database_check_and_run". This should be
+run at some regularly interval, say every 5 minutes or something like
+that. This checks if there are any jobs to run, and if so it runs the 
+job. Note that it is safe to have multiple instances of this program 
+running, it won't stomp on itself. So you don't need to check that a 
+previous version of this completed before running again. So a crontab of
+
+0,5,10,15,20,25,30,35,40,45,50,55 * * * *  <path>/job_database_check_and_run > /dev/null
+
+is fine.

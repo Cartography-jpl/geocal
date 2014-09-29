@@ -106,7 +106,7 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)''',
             cmd.append("--no-ms")
             args.append(post_pan)
         if(subset is not None):
-            cmd.append(["--subset", str(subset[0]), str(subset[1]),
+            cmd.extend(["--subset", str(subset[0]), str(subset[1]),
                         str(subset[2]), str(subset[3])])
         args.append(working_dir)
         cmd.append("--diagnostic")

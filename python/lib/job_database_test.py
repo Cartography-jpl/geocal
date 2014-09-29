@@ -2,6 +2,7 @@ from nose.tools import *
 from job_database import *
 from misc import *
 import logging
+from nose.plugins.skip import Skip, SkipTest
 
 def test_job_database():
     jdb = JobDatabase("test.db")
@@ -52,3 +53,24 @@ def test_handle_failed_job():
                       start_if_available = False)
     assert jdb.check_and_run()
     assert jdb[jid]["status"] == "failure"
+
+def test_abcd_job():
+    raise SkipTest
+    jdb = JobDatabase("test.db")
+    jdb.abcd_job("mali_cosi_sub", "job_database.log", 
+                 "/raid10/sba_gold/mali_cosi/12MAR10105443-P1BS-052683561010_04_P007.NTF", 
+                 "/raid10/sba_gold/mali_cosi/13FEB26104346-P1BS-500058150010_01_P002.NTF",
+                 number_process=24,
+                 subset = [10000,10000,1000,1000])
+
+def test_abcd_no_imd_job():
+    # copied data local, but don't have IMD file. Make sure we still work.
+    raise SkipTest
+    jdb = JobDatabase("test.db")
+    jdb.abcd_job("mali_cosi_sub", "job_database.log", 
+                 "12MAR10105443-P1BS-052683561010_04_P007.NTF", 
+                 "13FEB26104346-P1BS-500058150010_01_P002.NTF",
+                 number_process=24,
+                 subset = [10000,10000,1000,1000])
+
+    

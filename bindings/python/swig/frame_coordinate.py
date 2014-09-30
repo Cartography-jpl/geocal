@@ -158,11 +158,22 @@ class FrameCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args): 
         """
         GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(const AutoDerivative< double > &L, const AutoDerivative< double > &S)
-        Create a FrameCoordinate with the given coordinates. 
+        Create a FrameCoordinateWithDerivative with the given coordinates. 
         """
         _frame_coordinate.FrameCoordinateWithDerivative_swiginit(self,_frame_coordinate.new_FrameCoordinateWithDerivative(*args))
     line = _swig_property(_frame_coordinate.FrameCoordinateWithDerivative_line_get, _frame_coordinate.FrameCoordinateWithDerivative_line_set)
     sample = _swig_property(_frame_coordinate.FrameCoordinateWithDerivative_sample_get, _frame_coordinate.FrameCoordinateWithDerivative_sample_set)
+    def _v_value(self):
+        """
+        FrameCoordinate GeoCal::FrameCoordinateWithDerivative::value() const
+        Strip off derivative information and return FrameCoordinate. 
+        """
+        return _frame_coordinate.FrameCoordinateWithDerivative__v_value(self)
+
+    @property
+    def value(self):
+        return self._v_value()
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -172,6 +183,7 @@ class FrameCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _frame_coordinate.delete_FrameCoordinateWithDerivative
 FrameCoordinateWithDerivative.__str__ = new_instancemethod(_frame_coordinate.FrameCoordinateWithDerivative___str__,None,FrameCoordinateWithDerivative)
+FrameCoordinateWithDerivative._v_value = new_instancemethod(_frame_coordinate.FrameCoordinateWithDerivative__v_value,None,FrameCoordinateWithDerivative)
 FrameCoordinateWithDerivative_swigregister = _frame_coordinate.FrameCoordinateWithDerivative_swigregister
 FrameCoordinateWithDerivative_swigregister(FrameCoordinateWithDerivative)
 

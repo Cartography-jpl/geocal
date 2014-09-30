@@ -5437,6 +5437,59 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_FrameCoordinateWithDerivative__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::FrameCoordinate *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared1 ;
+  GeoCal::FrameCoordinateWithDerivative *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::FrameCoordinate *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_FrameCoordinateWithDerivative" "', argument " "1"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FrameCoordinateWithDerivative" "', argument " "1"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp1);
+        arg1 = const_cast< GeoCal::FrameCoordinate * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (GeoCal::FrameCoordinateWithDerivative *)new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinate const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = result ? new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_FrameCoordinateWithDerivative(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[3];
@@ -5446,6 +5499,9 @@ SWIGINTERN PyObject *_wrap_new_FrameCoordinateWithDerivative(PyObject *self, PyO
   if (argc == 0) {
     return _wrap_new_FrameCoordinateWithDerivative__SWIG_0(self, argc, argv);
   }
+  if (argc == 1) {
+    return _wrap_new_FrameCoordinateWithDerivative__SWIG_2(self, argc, argv);
+  }
   if (argc == 2) {
     return _wrap_new_FrameCoordinateWithDerivative__SWIG_1(self, argc, argv);
   }
@@ -5454,7 +5510,8 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_FrameCoordinateWithDerivative'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative()\n"
-    "    GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(GeoCal::AutoDerivative< double >,GeoCal::AutoDerivative< double >)\n");
+    "    GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(GeoCal::AutoDerivative< double >,GeoCal::AutoDerivative< double >)\n"
+    "    GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(GeoCal::FrameCoordinate const &)\n");
   return 0;
 }
 
@@ -5702,6 +5759,52 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_FrameCoordinateWithDerivative__v_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::FrameCoordinateWithDerivative *arg1 = (GeoCal::FrameCoordinateWithDerivative *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative const > tempshared1 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::FrameCoordinate result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FrameCoordinateWithDerivative__v_value" "', argument " "1"" of type '" "GeoCal::FrameCoordinateWithDerivative const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::FrameCoordinateWithDerivative const *)arg1)->value();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_FrameCoordinateWithDerivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::FrameCoordinateWithDerivative *arg1 = (GeoCal::FrameCoordinateWithDerivative *) 0 ;
@@ -5771,13 +5874,17 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"FrameCoordinate_swiginit", FrameCoordinate_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_FrameCoordinateWithDerivative", _wrap_new_FrameCoordinateWithDerivative, METH_VARARGS, (char *)"\n"
 		"GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(const AutoDerivative< double > &L, const AutoDerivative< double > &S)\n"
-		"Create a FrameCoordinate with the given coordinates. \n"
+		"Create a FrameCoordinateWithDerivative with the given coordinates. \n"
 		""},
 	 { (char *)"FrameCoordinateWithDerivative_line_set", _wrap_FrameCoordinateWithDerivative_line_set, METH_VARARGS, NULL},
 	 { (char *)"FrameCoordinateWithDerivative_line_get", (PyCFunction)_wrap_FrameCoordinateWithDerivative_line_get, METH_O, NULL},
 	 { (char *)"FrameCoordinateWithDerivative_sample_set", _wrap_FrameCoordinateWithDerivative_sample_set, METH_VARARGS, NULL},
 	 { (char *)"FrameCoordinateWithDerivative_sample_get", (PyCFunction)_wrap_FrameCoordinateWithDerivative_sample_get, METH_O, NULL},
 	 { (char *)"FrameCoordinateWithDerivative___str__", (PyCFunction)_wrap_FrameCoordinateWithDerivative___str__, METH_O, NULL},
+	 { (char *)"FrameCoordinateWithDerivative__v_value", (PyCFunction)_wrap_FrameCoordinateWithDerivative__v_value, METH_O, (char *)"\n"
+		"FrameCoordinate GeoCal::FrameCoordinateWithDerivative::value() const\n"
+		"Strip off derivative information and return FrameCoordinate. \n"
+		""},
 	 { (char *)"delete_FrameCoordinateWithDerivative", (PyCFunction)_wrap_delete_FrameCoordinateWithDerivative, METH_O, NULL},
 	 { (char *)"FrameCoordinateWithDerivative_swigregister", FrameCoordinateWithDerivative_swigregister, METH_VARARGS, NULL},
 	 { (char *)"FrameCoordinateWithDerivative_swiginit", FrameCoordinateWithDerivative_swiginit, METH_VARARGS, NULL},

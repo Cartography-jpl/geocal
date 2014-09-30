@@ -50,9 +50,11 @@ public:
   FrameCoordinateWithDerivative();
   FrameCoordinateWithDerivative(AutoDerivative<double> L, 
 				AutoDerivative<double> S);
+  FrameCoordinateWithDerivative(const FrameCoordinate& F);
   AutoDerivative<double> line;
   AutoDerivative<double> sample;
   std::string print_to_string() const;
+  %python_attribute(value, FrameCoordinate);
   %pickle_init(1, self.line, self.sample)
 };
 }

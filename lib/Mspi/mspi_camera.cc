@@ -64,7 +64,7 @@ void MspiCamera::read_config_file(const std::string& File_name)
 
   for(int b = 0; b < number_band(); ++b) {
     double l_origin = line_dir() * dy * 
-      (row_number_[b] + 0.5 - (nrow / 2.0)) / line_pitch_;
+      (row_number_[b] + 0.5 - (nrow / 2.0)) / line_pitch();
     principal_point_.push_back(FrameCoordinate(l_origin,
 					       s_origin));
   }

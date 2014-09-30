@@ -173,12 +173,34 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def focal_length(self, value):
       self._v_focal_length(value)
 
+    def _v_focal_length_with_derivative(self, *args):
+        """
+        void GeoCal::QuaternionCamera::focal_length_with_derivative(const AutoDerivative< double > &V)
+        Set focal length, in mm. 
+        """
+        return _quaternion_camera.QuaternionCamera__v_focal_length_with_derivative(self, *args)
+
+    @property
+    def focal_length_with_derivative(self):
+        return self._v_focal_length_with_derivative()
+
+    @focal_length_with_derivative.setter
+    def focal_length_with_derivative(self, value):
+      self._v_focal_length_with_derivative(value)
+
     def principal_point(self, *args):
         """
         void GeoCal::QuaternionCamera::principal_point(int B, const FrameCoordinate &Fc)
         Set principal point of camera. 
         """
         return _quaternion_camera.QuaternionCamera_principal_point(self, *args)
+
+    def principal_point_with_derivative(self, *args):
+        """
+        void GeoCal::QuaternionCamera::principal_point_with_derivative(int B, const FrameCoordinateWithDerivative &Fc)
+        Set principal point of camera. 
+        """
+        return _quaternion_camera.QuaternionCamera_principal_point_with_derivative(self, *args)
 
     def _v_line_pitch(self, *args):
         """
@@ -195,6 +217,21 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def line_pitch(self, value):
       self._v_line_pitch(value)
 
+    def _v_line_pitch_with_derivative(self, *args):
+        """
+        void GeoCal::QuaternionCamera::line_pitch_with_derivative(const AutoDerivative< double > &Lp)
+        Set CCD pitch, in mm. 
+        """
+        return _quaternion_camera.QuaternionCamera__v_line_pitch_with_derivative(self, *args)
+
+    @property
+    def line_pitch_with_derivative(self):
+        return self._v_line_pitch_with_derivative()
+
+    @line_pitch_with_derivative.setter
+    def line_pitch_with_derivative(self, value):
+      self._v_line_pitch_with_derivative(value)
+
     def _v_sample_pitch(self, *args):
         """
         void GeoCal::QuaternionCamera::sample_pitch(double Sp)
@@ -209,6 +246,21 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     @sample_pitch.setter
     def sample_pitch(self, value):
       self._v_sample_pitch(value)
+
+    def _v_sample_pitch_with_derivative(self, *args):
+        """
+        void GeoCal::QuaternionCamera::sample_pitch_with_derivative(const AutoDerivative< double > &Sp)
+        Set CCD pitch, in mm. 
+        """
+        return _quaternion_camera.QuaternionCamera__v_sample_pitch_with_derivative(self, *args)
+
+    @property
+    def sample_pitch_with_derivative(self):
+        return self._v_sample_pitch_with_derivative()
+
+    @sample_pitch_with_derivative.setter
+    def sample_pitch_with_derivative(self, value):
+      self._v_sample_pitch_with_derivative(value)
 
     def _v_frame_convention(self, *args):
         """
@@ -347,9 +399,13 @@ class QuaternionCamera(geocal_swig.camera.Camera):
         _quaternion_camera.QuaternionCamera_swiginit(self,_quaternion_camera.new_QuaternionCamera(*args))
     __swig_destroy__ = _quaternion_camera.delete_QuaternionCamera
 QuaternionCamera._v_focal_length = new_instancemethod(_quaternion_camera.QuaternionCamera__v_focal_length,None,QuaternionCamera)
+QuaternionCamera._v_focal_length_with_derivative = new_instancemethod(_quaternion_camera.QuaternionCamera__v_focal_length_with_derivative,None,QuaternionCamera)
 QuaternionCamera.principal_point = new_instancemethod(_quaternion_camera.QuaternionCamera_principal_point,None,QuaternionCamera)
+QuaternionCamera.principal_point_with_derivative = new_instancemethod(_quaternion_camera.QuaternionCamera_principal_point_with_derivative,None,QuaternionCamera)
 QuaternionCamera._v_line_pitch = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_pitch,None,QuaternionCamera)
+QuaternionCamera._v_line_pitch_with_derivative = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_pitch_with_derivative,None,QuaternionCamera)
 QuaternionCamera._v_sample_pitch = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_pitch,None,QuaternionCamera)
+QuaternionCamera._v_sample_pitch_with_derivative = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_pitch_with_derivative,None,QuaternionCamera)
 QuaternionCamera._v_frame_convention = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_convention,None,QuaternionCamera)
 QuaternionCamera._v_line_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_direction,None,QuaternionCamera)
 QuaternionCamera._v_sample_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_direction,None,QuaternionCamera)

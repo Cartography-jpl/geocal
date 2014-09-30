@@ -31,7 +31,8 @@ public:
   This is the coordinates of a frame camera, including derivatives.
 *******************************************************************/
 
-class FrameCoordinateWithDerivative : public Printable<FrameCoordinateWithDerivative> {
+class FrameCoordinateWithDerivative : 
+    public Printable<FrameCoordinateWithDerivative> {
 public:
 //-----------------------------------------------------------------------
 /// Default constructor.
@@ -40,7 +41,17 @@ public:
   FrameCoordinateWithDerivative() {}
 
 //-----------------------------------------------------------------------
-/// Create a FrameCoordinate with the given coordinates.
+/// Create FrameCoordinateWithDerivative from FrameCoordinate, so line
+/// and sample are constants rather than having a gradient.
+//-----------------------------------------------------------------------
+  FrameCoordinateWithDerivative(const FrameCoordinate& F)
+  {
+    line = F.line;
+    sample = F.sample;
+  }
+
+//-----------------------------------------------------------------------
+/// Create a FrameCoordinateWithDerivative with the given coordinates.
 //-----------------------------------------------------------------------
 
   FrameCoordinateWithDerivative(const AutoDerivative<double>& L, 
@@ -49,6 +60,12 @@ public:
   AutoDerivative<double> line;			///< Line number
   AutoDerivative<double> sample;		///< Sample number
   void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Strip off derivative information and return FrameCoordinate.
+//-----------------------------------------------------------------------
+  FrameCoordinate value() const
+  { return FrameCoordinate(line.value(), sample.value()); }
 };
 }
 

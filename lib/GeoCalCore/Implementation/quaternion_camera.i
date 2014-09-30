@@ -28,11 +28,20 @@ public:
 		   FrameDirection Sample_direction = INCREASE_IS_NEGATIVE);
   virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
-  %python_attribute_with_set(focal_length, double)
-  const FrameCoordinate& principal_point(int B) const;
+  %python_attribute_with_set(focal_length, double);
+  %python_attribute_with_set(focal_length_with_derivative, 
+			     AutoDerivative<double>);
+  FrameCoordinate principal_point(int B) const;
   void principal_point(int B, const FrameCoordinate& Fc);
+  const FrameCoordinate& principal_point_with_derivative(int B) const;
+  void principal_point_with_derivative(int B, 
+				       const FrameCoordinateWithDerivative& Fc);
   %python_attribute_with_set(line_pitch, double)
+  %python_attribute_with_set(line_pitch_with_derivative, 
+			     AutoDerivative<double>)
   %python_attribute_with_set(sample_pitch, double)
+  %python_attribute_with_set(sample_pitch_with_derivative, 
+			     AutoDerivative<double>)
   %python_attribute_with_set(frame_convention, FrameConvention)  
   %python_attribute_with_set(line_direction, FrameDirection)  
   %python_attribute_with_set(sample_direction, FrameDirection)  

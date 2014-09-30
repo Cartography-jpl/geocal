@@ -101,7 +101,7 @@ public:
 /// Focal length, in mm.
 //-----------------------------------------------------------------------
 
-  double focal_length() const {return focal_length_;}
+  double focal_length() const {return focal_length_.value();}
 
 
 //-----------------------------------------------------------------------
@@ -111,11 +111,26 @@ public:
   void focal_length(double V) { focal_length_ = V; notify_update(); }
 
 //-----------------------------------------------------------------------
+/// Focal length, in mm.
+//-----------------------------------------------------------------------
+
+  const AutoDerivative<double>& focal_length_with_derivative() const 
+  {return focal_length_;}
+
+
+//-----------------------------------------------------------------------
+/// Set focal length, in mm.
+//-----------------------------------------------------------------------
+
+  void focal_length_with_derivative(const AutoDerivative<double>& V) 
+  { focal_length_ = V; notify_update(); }
+
+//-----------------------------------------------------------------------
 /// Principal point of camera for band B.
 //-----------------------------------------------------------------------
 
-  const FrameCoordinate& principal_point(int B) const 
-  {range_check(B, 0, number_band()); return principal_point_[B];}
+  FrameCoordinate principal_point(int B) const 
+  {range_check(B, 0, number_band()); return principal_point_[B].value();}
 
 
 //-----------------------------------------------------------------------
@@ -125,11 +140,29 @@ public:
   void principal_point(int B, const FrameCoordinate& Fc) 
   {range_check(B, 0, number_band());principal_point_[B] = Fc; notify_update(); }
 
+
+//-----------------------------------------------------------------------
+/// Principal point of camera for band B.
+//-----------------------------------------------------------------------
+
+  const FrameCoordinateWithDerivative&
+  principal_point_with_derivative(int B) const 
+  {range_check(B, 0, number_band()); return principal_point_[B];}
+
+
+//-----------------------------------------------------------------------
+/// Set principal point of camera
+//-----------------------------------------------------------------------
+
+  void principal_point_with_derivative(int B, 
+				       const FrameCoordinateWithDerivative& Fc) 
+  {range_check(B, 0, number_band());principal_point_[B] = Fc; notify_update(); }
+
 //-----------------------------------------------------------------------
 /// CCD pitch, in mm
 //-----------------------------------------------------------------------
 
-  double line_pitch() const {return line_pitch_; }
+  double line_pitch() const {return line_pitch_.value(); }
 
 
 //-----------------------------------------------------------------------
@@ -138,17 +171,47 @@ public:
 
   void line_pitch(double Lp) {line_pitch_ = Lp; notify_update(); }
 
+
 //-----------------------------------------------------------------------
 /// CCD pitch, in mm
 //-----------------------------------------------------------------------
 
-  double sample_pitch() const {return sample_pitch_;}
+  const AutoDerivative<double>& line_pitch_with_derivative() const 
+  {return line_pitch_; }
+
+
+//-----------------------------------------------------------------------
+/// Set CCD pitch, in mm
+//-----------------------------------------------------------------------
+
+  void line_pitch_with_derivative(const AutoDerivative<double>& Lp) 
+  {line_pitch_ = Lp; notify_update(); }
+
+//-----------------------------------------------------------------------
+/// CCD pitch, in mm
+//-----------------------------------------------------------------------
+
+  double sample_pitch() const {return sample_pitch_.value();}
 
 //-----------------------------------------------------------------------
 /// Set CCD pitch, in mm
 //-----------------------------------------------------------------------
 
   void sample_pitch(double Sp) {sample_pitch_ = Sp; notify_update(); }
+
+//-----------------------------------------------------------------------
+/// CCD pitch, in mm
+//-----------------------------------------------------------------------
+
+  AutoDerivative<double> sample_pitch_with_derivative() const 
+  {return sample_pitch_;}
+
+//-----------------------------------------------------------------------
+/// Set CCD pitch, in mm
+//-----------------------------------------------------------------------
+
+  void sample_pitch_with_derivative(const AutoDerivative<double>& Sp) 
+  {sample_pitch_ = Sp; notify_update(); }
 
 //-----------------------------------------------------------------------
 /// Return the equivalent yaw, pitch, roll angles for the
@@ -299,13 +362,14 @@ protected:
 				  double& Xfp, double& Yfp) const;
   virtual boost::math::quaternion<double> 
   focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const;
-  double focal_length_;		// Focal length, in mm.
+  AutoDerivative<double> focal_length_;	
+				// Focal length, in mm.
   int nband_;			// Number of bands in camera.
   int nline_;			// Number of lines in camera.
   int nsamp_;			// Number of samples in camera.
-  double line_pitch_;		// CCD pitch, in mm
-  double sample_pitch_;		// CCD pitch, in mm
-  std::vector<FrameCoordinate> principal_point_;
+  AutoDerivative<double> line_pitch_;	// CCD pitch, in mm
+  AutoDerivative<double> sample_pitch_;	// CCD pitch, in mm
+  std::vector<FrameCoordinateWithDerivative> principal_point_;
 				// Principal point, indexed by band.
   boost::math::quaternion<double> frame_to_sc_;
   FrameConvention frame_convention_;

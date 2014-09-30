@@ -38,6 +38,15 @@ Options:
   --dem=f
        DEM file to use. If supplied, we generate NITF corners
 
+  --gdal-cache=d
+       The GDAL cache to use, in MB. This needs to be large enough that
+       we don't thrash while writing out data. VICAR needs to be written
+       a full line at a time, while NITF tends to be organized as tiles
+       (which are expensive to read if we are using JPEG 2000 compression).
+       So this cache needs to be enough to keep at least as many blocks as
+       needed to cover a full scanline.
+       [default: 10000]
+
   -i --image=i
        Image of file to use (1 based). [default: 1]
 
@@ -93,6 +102,7 @@ with NamedTemporaryFile() as tmp:
     cmd = ["gdal_translate", "-of", "VICAR"]
     if(args.quiet):
         cmd.append("-q")
+    cmd.extend(["--config", "GDAL_CACHEMAX", str(args.gdal_cache)])
     cmd.append(tmp.name)
     cmd.append(args.output_vicar)
     subprocess.check_call(cmd)

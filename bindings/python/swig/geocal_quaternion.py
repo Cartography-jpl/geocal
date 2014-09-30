@@ -146,7 +146,7 @@ def _new_from_set(cls, version, *args):
 
 def quat_rot_x(*args):
   """
-    boost::math::quaternion<double> GeoCal::quat_rot_x(double A)
+    boost::math::quaternion<T> GeoCal::quat_rot_x(const T &A)
     Quaternion that rotate about x.
 
     If you don't happen to remember off the top of your head, you rotate
@@ -160,7 +160,7 @@ def quat_rot_x(*args):
 
 def quat_rot_y(*args):
   """
-    boost::math::quaternion<double> GeoCal::quat_rot_y(double A)
+    boost::math::quaternion<T> GeoCal::quat_rot_y(const T &A)
     Quaternion that rotate about y.
 
     If you don't happen to remember off the top of your head, you rotate
@@ -174,7 +174,7 @@ def quat_rot_y(*args):
 
 def quat_rot_z(*args):
   """
-    boost::math::quaternion<double> GeoCal::quat_rot_z(double A)
+    boost::math::quaternion<T> GeoCal::quat_rot_z(const T &A)
     Quaternion that rotate about z.
 
     If you don't happen to remember off the top of your head, you rotate
@@ -188,8 +188,8 @@ def quat_rot_z(*args):
 
 def quat_rot(*args):
   """
-    boost::math::quaternion<double> GeoCal::quat_rot(const std::string &Rot, double A1, double A2, double A3, double A4,
-    double A5, double A6, double A7)
+    boost::math::quaternion<T> GeoCal::quat_rot(const std::string &Rot, const T &A1, const T &A2, const T &A3, const
+    T &A4, const T &A5, const T &A6, const T &A7)
     Do a rotation about the seven axis given.
 
     This is an "active" transformation. For "passive", just reverse
@@ -199,7 +199,7 @@ def quat_rot(*args):
 
 def quaternion_to_matrix(*args):
   """
-    blitz::Array<double, 2> GeoCal::quaternion_to_matrix(const boost::math::quaternion< double > &q)
+    blitz::Array<T, 2> GeoCal::quaternion_to_matrix(const boost::math::quaternion< T > &q)
     Convert a quaternion to a rotation matrix.
 
     This is an "active" transformation. For "passive", just reverse
@@ -209,15 +209,14 @@ def quaternion_to_matrix(*args):
 
 def matrix_to_quaternion(*args):
   """
-    boost::math::quaternion<double> GeoCal::matrix_to_quaternion(const double m[3][3])
+    boost::math::quaternion<T> GeoCal::matrix_to_quaternion(const T m[3][3])
 
     """
   return _geocal_quaternion.matrix_to_quaternion(*args)
 
 def quat_to_ypr(*args):
   """
-    void GeoCal::quat_to_ypr(const boost::math::quaternion< double > &qin, double &yaw, double
-    &pitch, double &roll)
+    void GeoCal::quat_to_ypr(const boost::math::quaternion< T > &qin, T &yaw, T &pitch, T &roll)
     Return the Euler angles that make up the quaternion rotation (yaw,
     pitch, roll, so quat_rot("xyz", pitch, roll, yaw) = qin. 
     """
@@ -225,8 +224,8 @@ def quat_to_ypr(*args):
 
 def quat_to_euler(*args):
   """
-    void GeoCal::quat_to_euler(const boost::math::quaternion< double > &qin, double &epsilon, double
-    &beta, double &delta)
+    void GeoCal::quat_to_euler(const boost::math::quaternion< T > &qin, T &epsilon, T &beta, T
+    &delta)
     Return the Euler angles that make up the quaternion rotation (epsilon,
     beta, delta so quat_rot("zyx", epsilon,beta, delta) = qin. 
     """

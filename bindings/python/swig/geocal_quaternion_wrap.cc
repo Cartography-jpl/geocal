@@ -6888,7 +6888,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"quat_rot_x", (PyCFunction)_wrap_quat_rot_x, METH_O, (char *)"\n"
-		"boost::math::quaternion<double> GeoCal::quat_rot_x(double A)\n"
+		"boost::math::quaternion<T> GeoCal::quat_rot_x(const T &A)\n"
 		"Quaternion that rotate about x.\n"
 		"\n"
 		"If you don't happen to remember off the top of your head, you rotate\n"
@@ -6899,7 +6899,7 @@ static PyMethodDef SwigMethods[] = {
 		"the sign of A \n"
 		""},
 	 { (char *)"quat_rot_y", (PyCFunction)_wrap_quat_rot_y, METH_O, (char *)"\n"
-		"boost::math::quaternion<double> GeoCal::quat_rot_y(double A)\n"
+		"boost::math::quaternion<T> GeoCal::quat_rot_y(const T &A)\n"
 		"Quaternion that rotate about y.\n"
 		"\n"
 		"If you don't happen to remember off the top of your head, you rotate\n"
@@ -6910,7 +6910,7 @@ static PyMethodDef SwigMethods[] = {
 		"the sign of A \n"
 		""},
 	 { (char *)"quat_rot_z", (PyCFunction)_wrap_quat_rot_z, METH_O, (char *)"\n"
-		"boost::math::quaternion<double> GeoCal::quat_rot_z(double A)\n"
+		"boost::math::quaternion<T> GeoCal::quat_rot_z(const T &A)\n"
 		"Quaternion that rotate about z.\n"
 		"\n"
 		"If you don't happen to remember off the top of your head, you rotate\n"
@@ -6921,33 +6921,32 @@ static PyMethodDef SwigMethods[] = {
 		"the sign of A \n"
 		""},
 	 { (char *)"quat_rot", _wrap_quat_rot, METH_VARARGS, (char *)"\n"
-		"boost::math::quaternion<double> GeoCal::quat_rot(const std::string &Rot, double A1, double A2, double A3, double A4,\n"
-		"double A5, double A6, double A7)\n"
+		"boost::math::quaternion<T> GeoCal::quat_rot(const std::string &Rot, const T &A1, const T &A2, const T &A3, const\n"
+		"T &A4, const T &A5, const T &A6, const T &A7)\n"
 		"Do a rotation about the seven axis given.\n"
 		"\n"
 		"This is an \"active\" transformation. For \"passive\", just reverse\n"
 		"the sign of A \n"
 		""},
 	 { (char *)"quaternion_to_matrix", (PyCFunction)_wrap_quaternion_to_matrix, METH_O, (char *)"\n"
-		"blitz::Array<double, 2> GeoCal::quaternion_to_matrix(const boost::math::quaternion< double > &q)\n"
+		"blitz::Array<T, 2> GeoCal::quaternion_to_matrix(const boost::math::quaternion< T > &q)\n"
 		"Convert a quaternion to a rotation matrix.\n"
 		"\n"
 		"This is an \"active\" transformation. For \"passive\", just reverse\n"
 		"the sign of A \n"
 		""},
 	 { (char *)"matrix_to_quaternion", (PyCFunction)_wrap_matrix_to_quaternion, METH_O, (char *)"\n"
-		"boost::math::quaternion<double> GeoCal::matrix_to_quaternion(const double m[3][3])\n"
+		"boost::math::quaternion<T> GeoCal::matrix_to_quaternion(const T m[3][3])\n"
 		"\n"
 		""},
 	 { (char *)"quat_to_ypr", (PyCFunction)_wrap_quat_to_ypr, METH_O, (char *)"\n"
-		"void GeoCal::quat_to_ypr(const boost::math::quaternion< double > &qin, double &yaw, double\n"
-		"&pitch, double &roll)\n"
+		"void GeoCal::quat_to_ypr(const boost::math::quaternion< T > &qin, T &yaw, T &pitch, T &roll)\n"
 		"Return the Euler angles that make up the quaternion rotation (yaw,\n"
 		"pitch, roll, so quat_rot(\"xyz\", pitch, roll, yaw) = qin. \n"
 		""},
 	 { (char *)"quat_to_euler", (PyCFunction)_wrap_quat_to_euler, METH_O, (char *)"\n"
-		"void GeoCal::quat_to_euler(const boost::math::quaternion< double > &qin, double &epsilon, double\n"
-		"&beta, double &delta)\n"
+		"void GeoCal::quat_to_euler(const boost::math::quaternion< T > &qin, T &epsilon, T &beta, T\n"
+		"&delta)\n"
 		"Return the Euler angles that make up the quaternion rotation (epsilon,\n"
 		"beta, delta so quat_rot(\"zyx\", epsilon,beta, delta) = qin. \n"
 		""},

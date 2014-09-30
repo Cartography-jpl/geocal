@@ -38,7 +38,7 @@ class JobDatabase(object):
         self.db.row_factory = sqlite3.Row        
         self.db.execute('''
 CREATE TABLE IF NOT EXISTS job_status
-(job_id INTEGER PRIMARY KEY ASC, working_directory text not null, creation_time datetime not null, modify_time datetime not null, status text not null, pid INTEGER, job_start_time datetime, job_to_run BLOB)
+(job_id INTEGER PRIMARY KEY ASC, working_directory text not null, user text not null, key test not null, creation_time datetime not null, modify_time datetime not null, status text not null, pid INTEGER, job_start_time datetime, job_to_run BLOB)
 ''')
         
     def __del__(self):
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS job_status
             self.db.close()
             self.db = None
 
-    def add_job(self, working_dir, log_file, job_to_run, 
+    def add_job(self, working_dir, user, key, log_file, job_to_run, 
                 start_if_available = True):
         '''Submit a job to run. You supply the working directory (can
         be relative if desired, we call os.path.abspath on this), and
@@ -65,9 +65,11 @@ CREATE TABLE IF NOT EXISTS job_status
 
         This return the job id of the submitted job.'''
         cur = self.db.execute('''
-INSERT INTO job_status VALUES(null, ?, strftime('%Y-%m-%d %H:%M:%f', 'now'),
+INSERT INTO job_status VALUES(null, ?, ?, ?, 
+strftime('%Y-%m-%d %H:%M:%f', 'now'),
 strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)''', 
                         (os.path.abspath(working_dir), 
+                         user, key,
                          pickle.dumps(job_to_run)))
         self.db.commit()
         with open(log_file, "a") as fh:
@@ -77,7 +79,7 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)''',
                             (self.db_name, log_file), shell = True)
         return cur.lastrowid
 
-    def abcd_job(self, working_dir, log_file, 
+    def abcd_job(self, working_dir, user, key, log_file, 
                  pre_pan, post_pan,
                  pre_ms = None, post_ms = None, subset = None,
                  resolution = 0.5, number_process=1, dem_file = None,
@@ -116,13 +118,21 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)''',
         if(dem_file is not None):
             cmd.append("--dem-file=%s" % dem_file)
         cmd.extend(args)
-        return self.add_job(working_dir, log_file, cmd, 
+        return self.add_job(working_dir, user, key, log_file, cmd, 
                             start_if_available = start_if_available)
 
     def __getitem__(self, job_id):
         '''Return information about a job with the given job_id.'''
         r = self.db.execute("select * from job_status where job_id=?",
                             (job_id,)).fetchone()
+        if(r is None):
+            raise KeyError(job_id)
+        return r
+
+    def get_by_key(self, key):
+        '''Return information about a job with the given key.'''
+        r = self.db.execute("select * from job_status where key=?",
+                            (key,)).fetchone()
         if(r is None):
             raise KeyError(job_id)
         return r

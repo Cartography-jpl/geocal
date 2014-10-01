@@ -24,6 +24,7 @@ geocalinc_HEADERS+= @srcsupport@/memory_map_array.h
 geocalinc_HEADERS+= @srcsupport@/geocal_gsl_matrix.h
 geocalinc_HEADERS+= @srcsupport@/geocal_matrix.h
 geocalinc_HEADERS+= @srcsupport@/geocal_quaternion.h
+geocalinc_HEADERS+= @srcsupport@/geocal_autoderivative_quaternion.h
 geocalinc_HEADERS+= @srcsupport@/boost/backtrace.hpp
 libgeocal_la_SOURCES+= @srcsupport@/boost/backtrace.cpp
 libgeocal_la_SOURCES+= @srcsupport@/geocal_gsl_matrix.cc

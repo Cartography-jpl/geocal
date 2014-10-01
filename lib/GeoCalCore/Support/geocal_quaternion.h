@@ -20,10 +20,10 @@ namespace GeoCal {
 //-----------------------------------------------------------------------
 template<class T> inline boost::math::quaternion<T> quat_rot_x(const T& A)
 {
-  return boost::math::quaternion<T>(cos(A / 2),
-					 sin(A / 2),
-					 0,
-					 0);
+  return boost::math::quaternion<T>(std::cos(A / 2),
+				    std::sin(A / 2),
+				    T(0),
+				    T(0));
 }
 
 //-----------------------------------------------------------------------
@@ -38,10 +38,10 @@ template<class T> inline boost::math::quaternion<T> quat_rot_x(const T& A)
 //-----------------------------------------------------------------------
 template<class T> inline boost::math::quaternion<T> quat_rot_y(const T& A)
 {
-  return boost::math::quaternion<T>(cos(A / 2),
-					 0,
-					 sin(A / 2),
-					 0);
+  return boost::math::quaternion<T>(std::cos(A / 2),
+				    T(0),
+				    std::sin(A / 2),
+				    T(0));
 }
 
 //-----------------------------------------------------------------------
@@ -56,10 +56,10 @@ template<class T> inline boost::math::quaternion<T> quat_rot_y(const T& A)
 //-----------------------------------------------------------------------
 template<class T> inline boost::math::quaternion<T> quat_rot_z(const T& A)
 {
-  return boost::math::quaternion<T>(cos(A / 2),
-					 0,
-					 0,
-					 sin(A / 2));
+  return boost::math::quaternion<T>(std::cos(A / 2),
+				    T(0),
+				    T(0),
+				    std::sin(A / 2));
 }
 
 //-----------------------------------------------------------------------
@@ -221,9 +221,9 @@ void quat_to_euler(const boost::math::quaternion<T>& qin,
   T q1 = qin.R_component_2();
   T q2 = qin.R_component_3();
   T q3 = qin.R_component_4();
-  epsilon = atan2(2 * (q0 * q3 + q1 * q2), 1 - 2 * (q2 * q2 + q3 * q3));
-  beta = asin(2 * (q0 * q2 - q3 * q1));
-  delta = atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2));
+  epsilon = std::atan2(2 * (q0 * q3 + q1 * q2), 1 - 2 * (q2 * q2 + q3 * q3));
+  beta = std::asin(2 * (q0 * q2 - q3 * q1));
+  delta = std::atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2));
 }
 
 //-----------------------------------------------------------------------

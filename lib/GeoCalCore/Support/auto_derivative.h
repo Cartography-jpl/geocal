@@ -33,6 +33,9 @@ tan(const GeoCal::AutoDerivative<double>& x);
 GeoCal::AutoDerivative<double> 
 atan(const GeoCal::AutoDerivative<double>& x);
 GeoCal::AutoDerivative<double> 
+atan2(const GeoCal::AutoDerivative<double>& y, 
+      const GeoCal::AutoDerivative<double>& x);
+GeoCal::AutoDerivative<double> 
 pow(const GeoCal::AutoDerivative<double>& x, const double y);
 GeoCal::AutoDerivative<double> 
 pow(const double x, const GeoCal::AutoDerivative<double>& y);
@@ -96,6 +99,8 @@ public:
     r*= -1;
     return r;
   }
+  friend AutoDerivative<T> operator+(const AutoDerivativeRef<T>& X)
+  { return AutoDerivative<T>(X);}
   friend AutoDerivative<T> operator*(const AutoDerivativeRef<T>& X, 
 				     const AutoDerivativeRef<T>& Y)
   { AutoDerivative<T> r(X);
@@ -409,6 +414,8 @@ public:
     r *= -1;
     return r;
   }
+  friend AutoDerivative<T> operator+(const AutoDerivative<T>& X)
+  { return X;}
   friend AutoDerivative<T> operator*(const AutoDerivative<T>& X, 
 				     const AutoDerivative<T>& Y)
   { AutoDerivative<T> r(X);
@@ -741,6 +748,20 @@ atan(const GeoCal::AutoDerivative<double>& x)
   else {
     return GeoCal::AutoDerivative<double>(::atan(x.value()),
      blitz::Array<double, 1>(x.gradient() / (x.value()*x.value() + 1) ));
+  }
+}
+
+inline GeoCal::AutoDerivative<double> 
+atan2(const GeoCal::AutoDerivative<double>& y,
+      const GeoCal::AutoDerivative<double>& x)
+{   
+  if(x.is_constant() && y.is_constant())
+    return GeoCal::AutoDerivative<double>(::atan2(y.value(), x.value()));
+  else {
+    return GeoCal::AutoDerivative<double>(::atan2(y.value(), x.value()),
+  blitz::Array<double, 1>((y.gradient() * x.value() - 
+			   x.gradient() * y.value())  / 
+			  (x.value()*x.value() +  y.value() * y.value()) ));
   }
 }
 

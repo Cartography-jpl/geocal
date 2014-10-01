@@ -46,8 +46,14 @@ public:
   %python_attribute_with_set(line_direction, FrameDirection)  
   %python_attribute_with_set(sample_direction, FrameDirection)  
   %python_attribute_with_set(frame_to_sc, boost::math::quaternion<double>)
+  %python_attribute_with_set(frame_to_sc_with_derivative, 
+			     boost::math::quaternion<AutoDerivative<double> >)
   %python_attribute_with_set(ypr, blitz::Array<double, 1>);
+  %python_attribute_with_set(ypr_with_derivative, 
+			     blitz::Array<AutoDerivative<double>, 1>);
   %python_attribute_with_set(euler, blitz::Array<double, 1>);
+  %python_attribute_with_set(euler_with_derivative, 
+			     blitz::Array<AutoDerivative<double>, 1>);
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
   virtual FrameCoordinateWithDerivative 

@@ -1187,6 +1187,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcsupport@/tiled_file.h @srcsupport@/memory_map_array.h \
 	@srcsupport@/geocal_gsl_matrix.h @srcsupport@/geocal_matrix.h \
 	@srcsupport@/geocal_quaternion.h \
+	@srcsupport@/geocal_autoderivative_quaternion.h \
 	@srcsupport@/boost/backtrace.hpp @srcsupport@/geocal_gsl_fit.h \
 	@srcsupport@/functor.h @srcsupport@/vfunctor_with_derivative.h \
 	@srcsupport@/geocal_gsl_root.h @srcsupport@/geocal_time.h \
@@ -2123,6 +2124,7 @@ geocalinc_HEADERS = @srcsupport@/constant.h \
 	@srcsupport@/tiled_file.h @srcsupport@/memory_map_array.h \
 	@srcsupport@/geocal_gsl_matrix.h @srcsupport@/geocal_matrix.h \
 	@srcsupport@/geocal_quaternion.h \
+	@srcsupport@/geocal_autoderivative_quaternion.h \
 	@srcsupport@/boost/backtrace.hpp @srcsupport@/geocal_gsl_fit.h \
 	@srcsupport@/functor.h @srcsupport@/vfunctor_with_derivative.h \
 	@srcsupport@/geocal_gsl_root.h @srcsupport@/geocal_time.h \

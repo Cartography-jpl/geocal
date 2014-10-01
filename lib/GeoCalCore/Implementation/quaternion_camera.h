@@ -4,6 +4,7 @@
 #include "camera.h"
 #include "geocal_exception.h"
 #include "geocal_quaternion.h"
+#include "geocal_autoderivative_quaternion.h"
 #include <vector>
 #include <blitz/array.h>
 
@@ -62,7 +63,7 @@ public:
       nsamp_(Number_sample),
       line_pitch_(Line_pitch),
       sample_pitch_(Sample_pitch),
-      frame_to_sc_(Frame_to_sc_q),
+      frame_to_sc_(to_autoderivative(Frame_to_sc_q)),
       frame_convention_(Frame_convention),
       line_direction_(Line_direction),
       sample_direction_(Sample_direction)
@@ -226,6 +227,18 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Return the equivalent yaw, pitch, roll angles for the
+/// frame_to_sc. These are in radians.
+//-----------------------------------------------------------------------
+
+  blitz::Array<AutoDerivative<double>, 1> ypr_with_derivative() const
+  {
+    blitz::Array<AutoDerivative<double>, 1> res(3);
+    quat_to_ypr(frame_to_sc_with_derivative(), res(0), res(1), res(2));
+    return res;
+  }
+
+//-----------------------------------------------------------------------
 /// Update the frame_to_sc using the given yaw, pitch, roll angles in
 /// radians.
 //-----------------------------------------------------------------------
@@ -239,6 +252,19 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Update the frame_to_sc using the given yaw, pitch, roll angles in
+/// radians.
+//-----------------------------------------------------------------------
+
+  void ypr_with_derivative(const blitz::Array<AutoDerivative<double>, 1>& Ypr)
+  {
+    if(Ypr.rows() != 3)
+      throw Exception("Ypr must be size 3");
+    frame_to_sc_with_derivative(quat_rot("xyz", Ypr(1), Ypr(2), Ypr(0)));
+    notify_update();
+  }
+
+//-----------------------------------------------------------------------
 /// Return the equivalent Euler angles epsilon, beta, delta for the
 /// frame_to_sc. These are in radians.
 //-----------------------------------------------------------------------
@@ -247,6 +273,18 @@ public:
   {
     blitz::Array<double, 1> res(3);
     quat_to_euler(frame_to_sc(), res(0), res(1), res(2));
+    return res;
+  }
+
+//-----------------------------------------------------------------------
+/// Return the equivalent Euler angles epsilon, beta, delta for the
+/// frame_to_sc. These are in radians.
+//-----------------------------------------------------------------------
+
+  blitz::Array<AutoDerivative<double>, 1> euler_with_derivative() const
+  {
+    blitz::Array<AutoDerivative<double>, 1> res(3);
+    quat_to_euler(frame_to_sc_with_derivative(), res(0), res(1), res(2));
     return res;
   }
 
@@ -264,10 +302,31 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Update the frame_to_sc using the given Euler angles epsilon, beta,
+/// data in radians.
+//-----------------------------------------------------------------------
+
+  void euler_with_derivative(const blitz::Array<AutoDerivative<double>, 1>& Euler)
+  {
+    if(Euler.rows() != 3)
+      throw Exception("Ypr must be size 3");
+    frame_to_sc_with_derivative(quat_rot("zyx", Euler(0), Euler(1), Euler(2)));
+    notify_update();
+  }
+
+//-----------------------------------------------------------------------
 /// Frame to spacecraft quaternion.
 //-----------------------------------------------------------------------
 
-  const boost::math::quaternion<double>& frame_to_sc() const
+  boost::math::quaternion<double> frame_to_sc() const
+  {return value(frame_to_sc_);}
+
+//-----------------------------------------------------------------------
+/// Frame to spacecraft quaternion.
+//-----------------------------------------------------------------------
+
+  boost::math::quaternion<AutoDerivative<double> > 
+  frame_to_sc_with_derivative() const
   {return frame_to_sc_;}
 
 //-----------------------------------------------------------------------
@@ -275,6 +334,14 @@ public:
 //-----------------------------------------------------------------------
 
   void frame_to_sc(const boost::math::quaternion<double>& frame_to_sc_q) 
+  { frame_to_sc_ = to_autoderivative(frame_to_sc_q); notify_update(); }
+
+
+//-----------------------------------------------------------------------
+/// Set frame to spacecraft quaternion.
+//-----------------------------------------------------------------------
+
+  void frame_to_sc_with_derivative(const boost::math::quaternion<AutoDerivative<double> >& frame_to_sc_q) 
   { frame_to_sc_ = frame_to_sc_q; notify_update(); }
 
 //-----------------------------------------------------------------------
@@ -332,8 +399,8 @@ public:
 
   virtual DcsLookVector dcs_look_vector(const ScLookVector& Sl)
     const 
-  { return DcsLookVector(conj(frame_to_sc_) * Sl.look_quaternion() *
-			 frame_to_sc_);
+  { return DcsLookVector(conj(frame_to_sc()) * Sl.look_quaternion() *
+			 frame_to_sc());
   }
 
   virtual DcsLookVector dcs_look_vector(const FrameCoordinate& F, int Band) 
@@ -345,8 +412,8 @@ public:
   sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
 				 int Band) const;
   virtual ScLookVector sc_look_vector(const DcsLookVector& Dlv) const
-  { return ScLookVector(frame_to_sc_ * Dlv.look_quaternion() * 
-			conj(frame_to_sc_));} 
+  { return ScLookVector(frame_to_sc() * Dlv.look_quaternion() * 
+			conj(frame_to_sc()));} 
   virtual void print(std::ostream& Os) const;
   virtual blitz::Array<double, 1> parameter() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);
@@ -371,7 +438,7 @@ protected:
   AutoDerivative<double> sample_pitch_;	// CCD pitch, in mm
   std::vector<FrameCoordinateWithDerivative> principal_point_;
 				// Principal point, indexed by band.
-  boost::math::quaternion<double> frame_to_sc_;
+  boost::math::quaternion<AutoDerivative<double> > frame_to_sc_;
   FrameConvention frame_convention_;
                                 // Indicates if X or Y is the line
                                 // direction.

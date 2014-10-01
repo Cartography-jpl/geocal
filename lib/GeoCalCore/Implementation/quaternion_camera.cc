@@ -52,7 +52,7 @@ FrameCoordinate QuaternionCamera::frame_coordinate(const ScLookVector& Sl,
 
   // Just reverse of sc_look_vector.
   boost::math::quaternion<double> dcs = 
-    conj(frame_to_sc_) * Sl.look_quaternion() * frame_to_sc_;
+    conj(frame_to_sc()) * Sl.look_quaternion() * frame_to_sc();
   double xfp, yfp;
   dcs_to_focal_plane(Band, dcs, xfp, yfp);
   FrameCoordinate fc;
@@ -115,9 +115,9 @@ DcsLookVector QuaternionCamera::dcs_look_vector(const FrameCoordinate& F,
 ScLookVector QuaternionCamera::sc_look_vector(const FrameCoordinate& F, 
 					      int Band) const
 {
-  return ScLookVector(frame_to_sc_ * 
+  return ScLookVector(frame_to_sc() * 
 		      dcs_look_vector(F, Band).look_quaternion() *
-		      conj(frame_to_sc_));
+		      conj(frame_to_sc()));
 }
 
 ScLookVectorWithDerivative QuaternionCamera::sc_look_vector_with_derivative

@@ -29,6 +29,69 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_EQUAL(cam.number_band(), 1);
 }
 
+BOOST_AUTO_TEST_CASE(jac_test)
+{
+  // Compare finite difference jacobian to what we calculate using
+  // AutoDerivative.
+  QuaternionCamera cam(quat_rot("zyx", 0.1, 0.2, 0.3),
+		       3375, 3648,
+		       1.0 / 2500000,
+		       1.0 / 2500000,
+		       1.0,
+		       FrameCoordinate(1688.0, 1824.5),
+		       QuaternionCamera::LINE_IS_Y);
+  // Print out parameter, useful if we are diagnosing and issue.
+  if(0)
+    for(int i = 0; i < cam.parameter().rows(); ++i)
+      std::cerr << i << ": " << cam.parameter()(i)
+		<< " " << cam.parameter_name()[i] << "\n";
+  ArrayAd<double, 1> p2(cam.parameter());
+  p2.resize_number_variable(p2.rows());
+  for(int i = 0; i < p2.rows(); ++i)
+    p2.jacobian()(i,i) = 1.0;
+  cam.parameter_with_derivative(p2);
+  FrameCoordinate fc(3375, 3648);
+  ScLookVector slv = cam.sc_look_vector(fc, 0);
+  ScLookVectorWithDerivative slvwd = 
+    cam.sc_look_vector_with_derivative(fc, 0);
+  FrameCoordinateWithDerivative fcwd = 
+    cam.frame_coordinate_with_derivative(slv, 0);
+  blitz::Array<double, 1> eps(8);
+  eps = 0.00001, 0.00001, 0.00001, 1e-9, 1e-9, 0.001, 0.1, 0.1;
+  blitz::Array<double, 2> jac_fd(3, 8);
+  blitz::Array<double, 2> jac_calc(3, 8);
+  jac_calc(0, blitz::Range::all()) = slvwd.look_vector[0].gradient();
+  jac_calc(1, blitz::Range::all()) = slvwd.look_vector[1].gradient();
+  jac_calc(2, blitz::Range::all()) = slvwd.look_vector[2].gradient();
+  blitz::Array<double, 2> jac2_fd(2, 8);
+  blitz::Array<double, 2> jac2_calc(2, 8);
+  jac2_calc(0, blitz::Range::all()) = fcwd.line.gradient();
+  jac2_calc(1, blitz::Range::all()) = fcwd.sample.gradient();
+  blitz::Array<double, 1> p0 = cam.parameter();
+  for(int i = 0; i < 8; ++i) {
+    blitz::Array<double, 1> p(p0.copy());
+    p(i) += eps(i);
+    cam.parameter(p);
+    ScLookVector slvp = cam.sc_look_vector(fc, 0);
+    for(int j = 0; j < 3; ++j)
+      jac_fd(j, i) = (slvp.look_vector[j] - slv.look_vector[j]) / eps(i);
+    FrameCoordinate fcp = cam.frame_coordinate(slv, 0);
+    jac2_fd(0, i) = (fcp.line - fc.line) / eps(i);
+    jac2_fd(1, i) = (fcp.sample - fc.sample) / eps(i);
+  }
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_calc, jac_fd, 1e-3);
+  // These are wildly different in scale, so check each item
+  // separately so it can be scaled.
+  for(int i = 0; i < 2; ++i)
+    for(int j = 0; j < 8; ++j)
+      if(fabs(jac2_calc(i,j)) > 0)
+	BOOST_CHECK_CLOSE(jac2_calc(i, j), jac2_fd(i, j), 1.0);
+      else {
+	BOOST_CHECK(fabs(jac2_fd(i, j)) < 2e-2);
+      }
+	
+}
+
 // This attempts to match the results of the sc2rpc unit tests.
 // **NOTE** We get results that are about 7 meters different than what
 // sc2rpc gets. This was tracked down to what I believe is a more

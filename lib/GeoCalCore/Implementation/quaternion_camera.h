@@ -314,6 +314,14 @@ public:
     notify_update();
   }
 
+  void euler_with_derivative(const ArrayAd<double, 1>& Euler)
+  {
+    if(Euler.rows() != 3)
+      throw Exception("Ypr must be size 3");
+    frame_to_sc_with_derivative(quat_rot("zyx", Euler(0), Euler(1), Euler(2)));
+    notify_update();
+  }
+
 //-----------------------------------------------------------------------
 /// Frame to spacecraft quaternion.
 //-----------------------------------------------------------------------
@@ -402,9 +410,18 @@ public:
   { return DcsLookVector(conj(frame_to_sc()) * Sl.look_quaternion() *
 			 frame_to_sc());
   }
+  virtual DcsLookVectorWithDerivative 
+  dcs_look_vector(const ScLookVectorWithDerivative& Sl)
+    const 
+  { return DcsLookVectorWithDerivative(conj(frame_to_sc_with_derivative()) * 
+			 Sl.look_quaternion() *
+			 frame_to_sc_with_derivative());
+  }
 
   virtual DcsLookVector dcs_look_vector(const FrameCoordinate& F, int Band) 
     const;
+  virtual DcsLookVectorWithDerivative 
+  dcs_look_vector(const FrameCoordinateWithDerivative& F, int Band) const;
   using Camera::sc_look_vector;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
@@ -417,6 +434,9 @@ public:
   virtual void print(std::ostream& Os) const;
   virtual blitz::Array<double, 1> parameter() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual ArrayAd<double, 1> parameter_with_derivative() const;
+  virtual void parameter_with_derivative
+  (const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
 protected:
 //-----------------------------------------------------------------------
@@ -427,8 +447,15 @@ protected:
   virtual void dcs_to_focal_plane(int Band,
 				  const boost::math::quaternion<double>& Dcs,
 				  double& Xfp, double& Yfp) const;
+  virtual void dcs_to_focal_plane(int Band,
+				  const boost::math::quaternion<AutoDerivative<double> >& Dcs,
+				  AutoDerivative<double>& Xfp, 
+				  AutoDerivative<double>& Yfp) const;
   virtual boost::math::quaternion<double> 
-  focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const;
+  focal_plane_to_dcs(int Band, double Xfp, double Yfp) const;
+  virtual boost::math::quaternion<AutoDerivative<double> > 
+  focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp, 
+		     const AutoDerivative<double>& Yfp) const;
   AutoDerivative<double> focal_length_;	
 				// Focal length, in mm.
   int nband_;			// Number of bands in camera.

@@ -132,3 +132,15 @@ void DcsLookVector::print(std::ostream& Os) const
      << "  length: " << length() << " m\n";
 }
 
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+void DcsLookVectorWithDerivative::print(std::ostream& Os) const
+{
+  boost::array<AutoDerivative<double>, 3> d = direction();
+  Os << "Look vector in Detector Coordinate System coordinates: \n"
+     << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
+     << "  length: " << length() << " m\n";
+}
+

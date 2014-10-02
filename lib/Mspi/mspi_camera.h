@@ -135,8 +135,19 @@ protected:
   virtual void dcs_to_focal_plane(int Band,
 				  const boost::math::quaternion<double>& Dcs,
 				  double& Xfp, double& Yfp) const;
+  virtual void dcs_to_focal_plane(int Band,
+				  const boost::math::quaternion<AutoDerivative<double> >& Dcs,
+				  AutoDerivative<double>& Xfp, 
+				  AutoDerivative<double>& Yfp) const
+  { throw Exception("No Implemented yet"); }
   virtual boost::math::quaternion<double> 
-  focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const;
+  focal_plane_to_dcs(int Band, double Xfp, double Yfp) const;
+  virtual boost::math::quaternion<AutoDerivative<double> > 
+  focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp, 
+		     const AutoDerivative<double>& Yfp) const
+  {
+    throw Exception("No Implemented yet");
+  }
 private:
   std::string fname, granule_id_;
   // Camera angles, in radians

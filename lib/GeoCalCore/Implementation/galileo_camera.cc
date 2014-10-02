@@ -75,9 +75,39 @@ void GalileoCamera::dcs_to_focal_plane
   }
 }
 
+void GalileoCamera::dcs_to_focal_plane
+(int Band, 
+ const boost::math::quaternion<AutoDerivative<double> >& Dcs,
+ AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const
+{
+  AutoDerivative<double> xfp_prime = 
+    focal_length_with_derivative() * 
+    (Dcs.R_component_2() / Dcs.R_component_4());
+  AutoDerivative<double> yfp_prime = 
+    focal_length_with_derivative() * 
+    (Dcs.R_component_3() / Dcs.R_component_4());
+  // Actual image distance from cneter of the field of view, in
+  // pixels.
+  AutoDerivative<double> R = 
+    std::sqrt(xfp_prime * xfp_prime + yfp_prime * yfp_prime) / 
+    gll_pixel_size;
+  // Special handling if R is very small, to avoid divide by zero
+  // error
+  if(R.value() < 0.01) {
+    Xfp = xfp_prime;
+    Yfp = yfp_prime;
+  } else {
+    F f(R.value());
+    // We will always have 0 <= r <= R
+    double r = gsl_root(f, 0, R.value());
+    Xfp = xfp_prime * r / R;
+    Yfp = yfp_prime * r / R;
+  }
+}
+
 // See base class for description of this function.
 boost::math::quaternion<double> GalileoCamera::focal_plane_to_dcs
-(int Band, double& Xfp, double& Yfp) const
+(int Band, double Xfp, double Yfp) const
 {
   // Ideal image distance from center of the field of view, in pixels;
   double r = sqrt(Xfp * Xfp + Yfp * Yfp) / gll_pixel_size;
@@ -90,6 +120,25 @@ boost::math::quaternion<double> GalileoCamera::focal_plane_to_dcs
   else 
     return boost::math::quaternion<double>(0, Xfp * R / r, Yfp * R / r, 
 					   focal_length());
+}
+
+// See base class for description of this function.
+boost::math::quaternion<AutoDerivative<double> > 
+GalileoCamera::focal_plane_to_dcs
+(int Band, const AutoDerivative<double>& Xfp, 
+ const AutoDerivative<double>& Yfp) const
+{
+  // Ideal image distance from center of the field of view, in pixels;
+  AutoDerivative<double> r = std::sqrt(Xfp * Xfp + Yfp * Yfp) / gll_pixel_size;
+  // Actual image distance from cneter of the field of view, in pixels.
+  AutoDerivative<double> R = r + gll_nonlinear_a * r * r *r;
+  // Special handling to avoid divide by zero id.
+  if(r.value() < 0.01)
+    return boost::math::quaternion<AutoDerivative<double> >(0, Xfp, Yfp, 
+					   focal_length_with_derivative());
+  else 
+    return boost::math::quaternion<AutoDerivative<double> >(0, Xfp * R / r, Yfp * R / r, 
+					   focal_length_with_derivative());
 }
 
 

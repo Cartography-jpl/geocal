@@ -153,6 +153,12 @@ public:
 //-----------------------------------------------------------------------
   ScLookVectorWithDerivative(const boost::math::quaternion<AutoDerivative<double> >& V) : LookVector<AutoDerivative<double> >(V) {}
 
+  ScLookVectorWithDerivative(const ScLookVector& Slv)
+    : LookVector<AutoDerivative<double> >(Slv.look_vector[0],
+					  Slv.look_vector[1],
+					  Slv.look_vector[2])
+  { } 
+
   virtual ~ScLookVectorWithDerivative() {}
   virtual void print(std::ostream& Os) const;
 };
@@ -352,6 +358,43 @@ public:
   DcsLookVector(const boost::math::quaternion<double>& V) : LookVector<double>(V) {}
 
   virtual ~DcsLookVector() {}
+  virtual void print(std::ostream& Os) const;
+};
+
+/****************************************************************//**
+  This is a look vector in Detector Coordinate System coordinates, 
+  including derivatives 
+*******************************************************************/
+
+class DcsLookVectorWithDerivative : public LookVector<AutoDerivative<double> > {
+public:
+//-----------------------------------------------------------------------
+/// Default constructor. Does not initialize look_vector.
+//-----------------------------------------------------------------------
+
+  DcsLookVectorWithDerivative() {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  DcsLookVectorWithDerivative(const boost::array<AutoDerivative<double> , 3>& Lv) : LookVector<AutoDerivative<double> >(Lv) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  DcsLookVectorWithDerivative(const AutoDerivative<double>&  x, 
+			     const AutoDerivative<double>&  y, 
+			     const AutoDerivative<double>&  z) : 
+    LookVector<AutoDerivative<double> >(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor using quaternion
+//-----------------------------------------------------------------------
+  DcsLookVectorWithDerivative(const boost::math::quaternion<AutoDerivative<double> >& V) : LookVector<AutoDerivative<double> >(V) {}
+
+  virtual ~DcsLookVectorWithDerivative() {}
   virtual void print(std::ostream& Os) const;
 };
 

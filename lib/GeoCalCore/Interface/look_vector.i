@@ -15,6 +15,7 @@
 %geocal_shared_ptr(GeoCal::ScLookVectorWithDerivative);
 %geocal_shared_ptr(GeoCal::CartesianInertialLookVector);
 %geocal_shared_ptr(GeoCal::DcsLookVector);
+%geocal_shared_ptr(GeoCal::DcsLookVectorWithDerivative);
 
 namespace GeoCal {
 template<class T> class LookVector : public GenericObject {
@@ -51,6 +52,7 @@ public:
 			     const AutoDerivative<double>&  y,
 			     const AutoDerivative<double>&  z);
   ScLookVectorWithDerivative(const boost::array<AutoDerivative<double> , 3>& Lv);
+  ScLookVectorWithDerivative(const ScLookVector& Slv);
   std::string print_to_string() const;
   %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])
@@ -74,6 +76,18 @@ public:
   DcsLookVector();
   DcsLookVector(double x, double y, double z);
   DcsLookVector(const boost::array<double, 3>& Lv);
+  std::string print_to_string() const;
+  %pickle_init(1, self.look_vector[0], self.look_vector[1],
+	       self.look_vector[2])
+};
+
+class DcsLookVectorWithDerivative : public LookVector<AutoDerivative<double> > {
+public:
+  DcsLookVectorWithDerivative();
+  DcsLookVectorWithDerivative(const AutoDerivative<double>& x, 
+			     const AutoDerivative<double>&  y,
+			     const AutoDerivative<double>&  z);
+  DcsLookVectorWithDerivative(const boost::array<AutoDerivative<double> , 3>& Lv);
   std::string print_to_string() const;
   %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])

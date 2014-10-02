@@ -157,7 +157,7 @@ void MspiCamera::dcs_to_focal_plane(int Band,
 
 // See base class for description
 boost::math::quaternion<double> 
-MspiCamera::focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const
+MspiCamera::focal_plane_to_dcs(int Band, double Xfp, double Yfp) const
 {
 //-------------------------------------------------------------------------
 /// Convert to paraxial coordinates.

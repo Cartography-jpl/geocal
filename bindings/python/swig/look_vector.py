@@ -286,8 +286,8 @@ class ScLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::ScLookVectorWithDerivative::ScLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)
-        Constructor using quaternion. 
+        GeoCal::ScLookVectorWithDerivative::ScLookVectorWithDerivative(const ScLookVector &Slv)
+
         """
         _look_vector.ScLookVectorWithDerivative_swiginit(self,_look_vector.new_ScLookVectorWithDerivative(*args))
     @classmethod
@@ -353,6 +353,33 @@ class DcsLookVector(LookVectorDouble):
 DcsLookVector.__str__ = new_instancemethod(_look_vector.DcsLookVector___str__,None,DcsLookVector)
 DcsLookVector_swigregister = _look_vector.DcsLookVector_swigregister
 DcsLookVector_swigregister(DcsLookVector)
+
+class DcsLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
+    """
+    This is a look vector in Detector Coordinate System coordinates,
+    including derivatives.
+
+    C++ includes: look_vector.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::DcsLookVectorWithDerivative::DcsLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)
+        Constructor using quaternion. 
+        """
+        _look_vector.DcsLookVectorWithDerivative_swiginit(self,_look_vector.new_DcsLookVectorWithDerivative(*args))
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+
+    __swig_destroy__ = _look_vector.delete_DcsLookVectorWithDerivative
+DcsLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.DcsLookVectorWithDerivative___str__,None,DcsLookVectorWithDerivative)
+DcsLookVectorWithDerivative_swigregister = _look_vector.DcsLookVectorWithDerivative_swigregister
+DcsLookVectorWithDerivative_swigregister(DcsLookVectorWithDerivative)
 
 
 

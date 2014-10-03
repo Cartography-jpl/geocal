@@ -71,6 +71,7 @@ public:
   %python_attribute(depth, int)
   %python_attribute(is_constant, bool)
   %python_attribute(number_variable, int)
+  std::string print_to_string() const;
   void reference(const GeoCal::ArrayAd<TYPE, DIM>& V);
   GeoCal::ArrayAd<TYPE, DIM> copy() const;
   // When we pass multiple items in, this gets set to one tuple

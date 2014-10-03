@@ -81,17 +81,24 @@ def test_igc_jac():
     jac = np.zeros((2, len(igc_coll.parameter_subset)))
     igc_coll.image_coordinate_jac_parm(0, gp, jac, 0, 0)
     ic0 = igc_coll.image_coordinate(0, gp)
-    eps = [1, 1, 1, 10, 10, 10, 10, 10, 10, 10, 10, 10, 0.01 * deg_to_rad,
-           0.01 * deg_to_rad, 0.01 * deg_to_rad, 0.01 * cam.line_pitch,
+    eps = [1, 1, 1, 10, 10, 10, 10, 10, 10, 10, 10, 10, 0.0001 * deg_to_rad,
+           0.0001 * deg_to_rad, 0.0001 * deg_to_rad, 0.01 * cam.line_pitch,
            0.01 * cam.sample_pitch]
     p0 = np.array(igc_coll.parameter_subset)
+    jac_fd = np.zeros((2, len(igc_coll.parameter_subset)))
     for i in range(len(igc_coll.parameter_subset)):
         p = p0.copy()
         p[i] += eps[i]
         igc_coll.parameter_subset = p
         ic = igc_coll.image_coordinate(0, gp)
-        assert_almost_equal(jac[0, i], (ic.line - ic0.line) / eps[i])
-        assert_almost_equal(jac[1, i], (ic.sample - ic0.sample) / eps[i])
+        jac_fd[0,i] = (ic.line - ic0.line) / eps[i]
+        jac_fd[1,i] = (ic.sample - ic0.sample) / eps[i]
         igc_coll.parameter_subset = p0
+    # Finite difference and real jacobian won't be the same, something
+    # like 1% would be a good value. So we check the scaled difference, 
+    # being careful not to divide by zero
+    scl = jac.copy()
+    scl[jac != 0] = 1 / jac[jac != 0]
+    assert abs((jac - jac_fd) * scl).max() < 1e-2
         
 

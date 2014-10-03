@@ -153,6 +153,17 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
         """
         return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_cf_look_vector(self, *args)
 
+    def image_coordinate_with_derivative(self, *args):
+        """
+        virtual ImageCoordinateWithDerivative GeoCal::OrbitDataImageGroundConnection::image_coordinate_with_derivative(const GroundCoordinate &Gc) const
+        This is image_coordinate, but include the derivative of this with
+        respect to the parameters of the Camera and OrbitData.
+
+        Not sure if we want this to be a general ImageGroundConnection
+        function, but for now we have this defined just for this class. 
+        """
+        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_image_coordinate_with_derivative(self, *args)
+
     def _v_orbit_data(self, *args):
         """
         void GeoCal::OrbitDataImageGroundConnection::orbit_data(const boost::shared_ptr< OrbitData > &Od)
@@ -257,6 +268,7 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
 
     __swig_destroy__ = _orbit_data_image_ground_connection.delete_OrbitDataImageGroundConnection
 OrbitDataImageGroundConnection.cf_look_vector = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection_cf_look_vector,None,OrbitDataImageGroundConnection)
+OrbitDataImageGroundConnection.image_coordinate_with_derivative = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection_image_coordinate_with_derivative,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_image = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_image,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_title = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_title,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_orbit_data = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_orbit_data,None,OrbitDataImageGroundConnection)

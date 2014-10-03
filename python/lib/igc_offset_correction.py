@@ -54,6 +54,9 @@ class IgcOffsetCorrection(IgcCollection):
         self.fit_delta = True
         self.fit_line_pitch = True
         self.fit_sample_pitch = True
+        self.fit_focal_length = False
+        self.fit_principal_point_line = False
+        self.fit_principal_point_sample = False
         self.fit_refraction = False
 
     @property
@@ -117,7 +120,15 @@ class IgcOffsetCorrection(IgcCollection):
         olen = len(self.orbit.parameter)
         self.orbit.parameter = value[0:olen]
         clen = len(self.cam.parameter)
-        self.cam.parameter = value[olen:(olen+clen)]
+        scol = np.count_nonzero(self.orbit.parameter_subset_mask)
+        ncol = self.camera_parameter_subset_mask.count(True)
+        j = np.zeros((clen, scol + ncol))
+        c = scol
+        for i,v  in enumerate(self.camera_parameter_subset_mask):
+            if(v):
+                j[i, c] = 1
+                c += 1
+        self.cam.parameter_with_derivative = ArrayAd_double_1(value[olen:(olen+clen)], j)
         ref_par = value[-1]
         self.refraction.index_refraction_surface = 1.00027 + 1e-5 * ref_par
 
@@ -129,15 +140,21 @@ class IgcOffsetCorrection(IgcCollection):
         t.extend(self.cam.parameter_name)
         t.append("Refraction factor")
         return t
+
+    @property
+    def camera_parameter_subset_mask(self):
+        return [self.fit_epsilon, self.fit_beta, self.fit_delta,
+                self.fit_line_pitch, self.fit_sample_pitch, 
+                self.fit_focal_length, self.fit_principal_point_line,
+                self.fit_principal_point_sample]
     
     @property
     def parameter_subset_mask(self):
         '''This returns a list of flags indicating which parameters should
         be included in the parameter_subset values.'''
-        mask = [self.fit_epsilon, self.fit_beta, self.fit_delta,
-                self.fit_line_pitch, self.fit_sample_pitch, 
-                self.fit_refraction]
-        return np.append(self.orbit.parameter_subset_mask, mask)
+        return np.append(np.append(self.orbit.parameter_subset_mask, 
+                                   self.camera_parameter_subset_mask), 
+                         [self.fit_refraction])
 
     @property
     def number_image(self):
@@ -233,55 +250,7 @@ class IgcOffsetCorrection(IgcCollection):
                                           self.refraction),
                                          att_eps))
             orb.parameter = p0
-            epsilon_index = len(p0) + 0
-            beta_index = len(p0) + 1
-            delta_index = len(p0) + 2
-            line_pitch_index = len(p0) + 3
-            sample_pitch_index = len(p0) + 4
             ref_index = len(p0) + 5
-
-            for i in range(3):
-                j = self.parameter_index_to_subset_index(epsilon_index + i)
-                if(j is not None):
-                    eps = 0.01 * deg_to_rad
-                    cam = QuaternionCamera(self.cam)
-                    euler = cam.euler.copy()
-                    euler[i] += eps
-                    cam.euler = euler
-                    cache["igc"].append((j,OrbitDataImageGroundConnection
-                                         (orb.orbit_data(tm), cam, 
-                                          self.demv,
-                                          self.image(image_index),
-                                          self.image_title(image_index),
-                                          self.refraction),
-                                         eps))
-
-            j = self.parameter_index_to_subset_index(line_pitch_index)
-            if(j is not None):
-                line_pitch_eps = 0.01 * self.cam.line_pitch
-                cam = QuaternionCamera(self.cam)
-                cam.line_pitch = cam.line_pitch + line_pitch_eps
-                cache["igc"].append((j,OrbitDataImageGroundConnection
-                                     (orb.orbit_data(tm), cam, 
-                                      self.demv,
-                                      self.image(image_index),
-                                      self.image_title(image_index),
-                                      self.refraction),
-                                     line_pitch_eps))
-
-            j = self.parameter_index_to_subset_index(sample_pitch_index)
-            if(j is not None):
-                sample_pitch_eps = 0.01 * self.cam.sample_pitch
-                cam = QuaternionCamera(self.cam)
-                cam.sample_pitch = cam.sample_pitch + sample_pitch_eps
-                cache["igc"].append((j,OrbitDataImageGroundConnection
-                                     (orb.orbit_data(tm), cam, 
-                                      self.demv,
-                                      self.image(image_index),
-                                      self.image_title(image_index),
-                                      self.refraction),
-                                     sample_pitch_eps))
-            
             j = self.parameter_index_to_subset_index(ref_index)
             if(j is not None):
                 ref_eps = 0.1
@@ -311,14 +280,20 @@ class IgcOffsetCorrection(IgcCollection):
         a bit odd, but this is what we have in the SimultaneousBundleAdjustment
         that uses this call.'''
         cache = self.__jacobian_cache(image_index)
-        ic0 = cache["igc0"].image_coordinate(ground_point)
+        ic0 = cache["igc0"].image_coordinate_with_derivative(ground_point)
+        jac[jac_row, jac_col:(jac_col + ic0.line.number_variable)] = \
+            ic0.line.gradient * line_scale
+        jac[jac_row + 1, jac_col:(jac_col + ic0.line.number_variable)] = \
+            ic0.sample.gradient * sample_scale
+        # We'll get the orbit and refraction stuff into igc at some
+        # point, for now just calculate this
         for i,igc,eps in cache["igc"]:
             ic = igc.image_coordinate(ground_point)
             jac[jac_row, jac_col + i] = \
-                (ic.line - ic0.line) / eps * line_scale
+                (ic.line - ic0.line.value) / eps * line_scale
             jac[jac_row + 1, jac_col + i] = \
-                (ic.sample - ic0.sample) / eps * sample_scale
-
+                (ic.sample - ic0.sample.value) / eps * sample_scale
+            
     def image_title(self, image_index):
         '''Title to use when displaying the given image'''
         return self.title[image_index]

@@ -215,6 +215,35 @@ VicarImageCoordinate.__str__ = new_instancemethod(_image_coordinate.VicarImageCo
 VicarImageCoordinate_swigregister = _image_coordinate.VicarImageCoordinate_swigregister
 VicarImageCoordinate_swigregister(VicarImageCoordinate)
 
+class ImageCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
+    """
+    This describes an image coordinate, including the gradient of the line
+    and sample.
+
+    C++ includes: image_coordinate.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::ImageCoordinateWithDerivative::ImageCoordinateWithDerivative()
+        Default constructor, line and sample aren't initialized. 
+        """
+        _image_coordinate.ImageCoordinateWithDerivative_swiginit(self,_image_coordinate.new_ImageCoordinateWithDerivative(*args))
+    line = _swig_property(_image_coordinate.ImageCoordinateWithDerivative_line_get, _image_coordinate.ImageCoordinateWithDerivative_line_set)
+    sample = _swig_property(_image_coordinate.ImageCoordinateWithDerivative_sample_get, _image_coordinate.ImageCoordinateWithDerivative_sample_set)
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.line,self.sample)
+
+    __swig_destroy__ = _image_coordinate.delete_ImageCoordinateWithDerivative
+ImageCoordinateWithDerivative.__str__ = new_instancemethod(_image_coordinate.ImageCoordinateWithDerivative___str__,None,ImageCoordinateWithDerivative)
+ImageCoordinateWithDerivative_swigregister = _image_coordinate.ImageCoordinateWithDerivative_swigregister
+ImageCoordinateWithDerivative_swigregister(ImageCoordinateWithDerivative)
+
 class Vector_ImageCoordinate(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr

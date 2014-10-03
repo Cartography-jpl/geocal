@@ -1,6 +1,7 @@
 #ifndef IMAGE_COORDINATE_H
 #define IMAGE_COORDINATE_H
 #include "printable.h"
+#include "auto_derivative.h"
 
 #include <iostream>		// Definition of ostream.
 namespace GeoCal {
@@ -132,6 +133,44 @@ inline ImageCoordinate::ImageCoordinate(const VicarImageCoordinate& Vic)
 
 inline VicarImageCoordinate::VicarImageCoordinate(const ImageCoordinate& Ic)
   : line(Ic.line + 1), sample(Ic.sample + 1) {}
+
+/****************************************************************//**
+    This describes an image coordinate, including the gradient of the 
+    line and sample.
+*******************************************************************/
+
+class ImageCoordinateWithDerivative : public Printable<ImageCoordinateWithDerivative> {
+public:
+//-----------------------------------------------------------------------
+/// Constructor
+//-----------------------------------------------------------------------
+
+  ImageCoordinateWithDerivative(const AutoDerivative<double>& Line, 
+				const AutoDerivative<double>& Sample) 
+  : line(Line), sample(Sample) {}
+
+//-----------------------------------------------------------------------
+/// Default constructor, line and sample aren't initialized.
+//-----------------------------------------------------------------------
+
+  ImageCoordinateWithDerivative() {}
+
+  virtual ~ImageCoordinateWithDerivative() {}
+
+//-----------------------------------------------------------------------
+///  Line number of image coordinate.
+//-----------------------------------------------------------------------
+
+  AutoDerivative<double> line;
+
+//-----------------------------------------------------------------------
+/// Sample number of image coordinate.
+//-----------------------------------------------------------------------
+
+  AutoDerivative<double> sample;
+  void print(std::ostream& Os) const;
+private:
+};
 
 }
 #endif

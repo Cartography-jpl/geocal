@@ -322,6 +322,22 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def frame_to_sc(self, value):
       self._v_frame_to_sc(value)
 
+    def _v_frame_to_sc_with_derivative(self, *args):
+        """
+        void GeoCal::QuaternionCamera::frame_to_sc_with_derivative(const boost::math::quaternion< AutoDerivative< double > >
+        &frame_to_sc_q)
+        Set frame to spacecraft quaternion. 
+        """
+        return _quaternion_camera.QuaternionCamera__v_frame_to_sc_with_derivative(self, *args)
+
+    @property
+    def frame_to_sc_with_derivative(self):
+        return self._v_frame_to_sc_with_derivative()
+
+    @frame_to_sc_with_derivative.setter
+    def frame_to_sc_with_derivative(self, value):
+      self._v_frame_to_sc_with_derivative(value)
+
     def _v_ypr(self, *args):
         """
         void GeoCal::QuaternionCamera::ypr(const blitz::Array< double, 1 > &Ypr)
@@ -337,6 +353,22 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     @ypr.setter
     def ypr(self, value):
       self._v_ypr(value)
+
+    def _v_ypr_with_derivative(self, *args):
+        """
+        void GeoCal::QuaternionCamera::ypr_with_derivative(const blitz::Array< AutoDerivative< double >, 1 > &Ypr)
+        Update the frame_to_sc using the given yaw, pitch, roll angles in
+        radians. 
+        """
+        return _quaternion_camera.QuaternionCamera__v_ypr_with_derivative(self, *args)
+
+    @property
+    def ypr_with_derivative(self):
+        return self._v_ypr_with_derivative()
+
+    @ypr_with_derivative.setter
+    def ypr_with_derivative(self, value):
+      self._v_ypr_with_derivative(value)
 
     def _v_euler(self, *args):
         """
@@ -354,6 +386,21 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def euler(self, value):
       self._v_euler(value)
 
+    def _v_euler_with_derivative(self, *args):
+        """
+        void GeoCal::QuaternionCamera::euler_with_derivative(const ArrayAd< double, 1 > &Euler)
+
+        """
+        return _quaternion_camera.QuaternionCamera__v_euler_with_derivative(self, *args)
+
+    @property
+    def euler_with_derivative(self):
+        return self._v_euler_with_derivative()
+
+    @euler_with_derivative.setter
+    def euler_with_derivative(self, value):
+      self._v_euler_with_derivative(value)
+
     def sc_look_vector(self, *args):
         """
         virtual ScLookVector GeoCal::QuaternionCamera::sc_look_vector(const DcsLookVector &Dlv) const
@@ -363,13 +410,8 @@ class QuaternionCamera(geocal_swig.camera.Camera):
 
     def dcs_look_vector(self, *args):
         """
-        DcsLookVector QuaternionCamera::dcs_look_vector(const FrameCoordinate &F, int Band) const
-        Convert from FrameCoordinate to DcsLookVector.
+        DcsLookVectorWithDerivative QuaternionCamera::dcs_look_vector(const FrameCoordinateWithDerivative &F, int Band) const
 
-        It is perfectly allowable for F.line to be outside the range (0,
-        number_line(band) 1) or for F.sample to be outside the range (0,
-        number_sample(band) - 1). The conversion will just act as if the
-        camera has infinite extent. 
         """
         return _quaternion_camera.QuaternionCamera_dcs_look_vector(self, *args)
 
@@ -410,8 +452,11 @@ QuaternionCamera._v_frame_convention = new_instancemethod(_quaternion_camera.Qua
 QuaternionCamera._v_line_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_direction,None,QuaternionCamera)
 QuaternionCamera._v_sample_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_direction,None,QuaternionCamera)
 QuaternionCamera._v_frame_to_sc = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_to_sc,None,QuaternionCamera)
+QuaternionCamera._v_frame_to_sc_with_derivative = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_to_sc_with_derivative,None,QuaternionCamera)
 QuaternionCamera._v_ypr = new_instancemethod(_quaternion_camera.QuaternionCamera__v_ypr,None,QuaternionCamera)
+QuaternionCamera._v_ypr_with_derivative = new_instancemethod(_quaternion_camera.QuaternionCamera__v_ypr_with_derivative,None,QuaternionCamera)
 QuaternionCamera._v_euler = new_instancemethod(_quaternion_camera.QuaternionCamera__v_euler,None,QuaternionCamera)
+QuaternionCamera._v_euler_with_derivative = new_instancemethod(_quaternion_camera.QuaternionCamera__v_euler_with_derivative,None,QuaternionCamera)
 QuaternionCamera.sc_look_vector = new_instancemethod(_quaternion_camera.QuaternionCamera_sc_look_vector,None,QuaternionCamera)
 QuaternionCamera.dcs_look_vector = new_instancemethod(_quaternion_camera.QuaternionCamera_dcs_look_vector,None,QuaternionCamera)
 QuaternionCamera_swigregister = _quaternion_camera.QuaternionCamera_swigregister

@@ -107,6 +107,26 @@ FrameCoordinate OrbitData::frame_coordinate(const GroundCoordinate& Gc,
 }
 
 //-----------------------------------------------------------------------
+/// Give the frame coordinates that a particular point on the ground
+/// is seen, including derivatives wrt. the parameters of the Camera
+/// and this OrbitData.
+//-----------------------------------------------------------------------
+
+FrameCoordinateWithDerivative 
+OrbitData::frame_coordinate_with_derivative
+(const GroundCoordinate& Gc, const Camera& C, int Band) const
+{
+  boost::shared_ptr<CartesianFixed> p1 = position_cf();
+  boost::shared_ptr<CartesianFixed> p2 = Gc.convert_to_cf();
+  CartesianFixedLookVector lv;
+  for(int i = 0; i < 3; ++i)
+    lv.look_vector[i] = p2->position[i] - p1->position[i];
+  // Don't include orbit parameters yet, we'll need to add this.
+  ScLookVector sl = sc_look_vector(lv);
+  return C.frame_coordinate_with_derivative(sl, Band);
+}
+
+//-----------------------------------------------------------------------
 /// Return location on the reference surface that a particular frame 
 /// coordinate is seen. This is approximate, in the same way 
 /// CartesianFixed::reference_intersect_approximate is approximate.

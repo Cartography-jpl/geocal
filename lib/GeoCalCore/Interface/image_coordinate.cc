@@ -13,6 +13,17 @@ void ImageCoordinate::print(std::ostream& Os) const
 }
 
 //-----------------------------------------------------------------------
+///  Print an ImageCoordinateWithDerivative to a stream
+//-----------------------------------------------------------------------
+
+void ImageCoordinateWithDerivative::print(std::ostream& Os) const
+{
+  Os << "ImageCoordinateWithDerivative:\n"
+     << "  Line:   " << line
+     << "  Sample: " << sample;
+}
+
+//-----------------------------------------------------------------------
 /// \ingroup Miscellaneous
 /// Test for the equality between two ImageCoordinates. This is done
 /// with a tolerance, if the line and sample are with 0.01 of each

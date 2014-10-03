@@ -32,6 +32,9 @@ public:
   sc_look_vector(const CartesianFixedLookVector& Cf) const = 0;
   FrameCoordinate frame_coordinate(const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const;
+  FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const GroundCoordinate& Gc, 
+				   const Camera& C, int Band = 0) const;
   boost::shared_ptr<CartesianFixed> 
   reference_surface_intersect_approximate(const Camera& C, 
 		  const FrameCoordinate& Fc, int Band = 0, 

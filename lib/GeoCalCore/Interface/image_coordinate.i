@@ -8,7 +8,9 @@
 %}
 
 %base_import(generic_object)
+%import "auto_derivative.i"
 %geocal_shared_ptr(GeoCal::ImageCoordinate);
+%geocal_shared_ptr(GeoCal::ImageCoordinateWithDerivative);
 %geocal_shared_ptr(GeoCal::VicarImageCoordinate);
 namespace GeoCal {
 
@@ -46,7 +48,16 @@ namespace GeoCal {
     std::string print_to_string() const;
     %pickle_init(1, self.line, self.sample)
   };
-
+  class ImageCoordinateWithDerivative : public GenericObject {
+  public:
+    ImageCoordinateWithDerivative(const AutoDerivative<double>& Line, 
+				  const AutoDerivative<double>& Sample);
+    ImageCoordinateWithDerivative();
+    AutoDerivative<double> line;
+    AutoDerivative<double> sample;
+    std::string print_to_string() const;
+    %pickle_init(1, self.line, self.sample)
+  };
 }
 
 %template(Vector_ImageCoordinate) std::vector<GeoCal::ImageCoordinate>;

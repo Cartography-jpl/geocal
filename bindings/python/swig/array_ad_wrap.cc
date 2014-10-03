@@ -5079,6 +5079,47 @@ SWIGINTERNINLINE PyObject*
   return PyBool_FromLong(value ? 1 : 0);
 }
 
+
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
+#else
+      return PyString_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
 SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_ArrayAd_Sl_double_Sc_1_Sg__read__SWIG_0(GeoCal::ArrayAd< double,1 > const *self,int i1){ return (*self)(i1); }
 SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_ArrayAd_Sl_double_Sc_1_Sg__read__SWIG_1(GeoCal::ArrayAd< double,1 > const *self,int i1,int i2){ return (*self)(i1, i2); }
 SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_ArrayAd_Sl_double_Sc_1_Sg__read__SWIG_2(GeoCal::ArrayAd< double,1 > const *self,int i1,int i2,int i3){ return (*self)(i1, i2, i3); }
@@ -6269,6 +6310,37 @@ SWIGINTERN PyObject *_wrap_ArrayAd_double_1__v_number_variable(PyObject *SWIGUNU
     }
   }
   resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ArrayAd_double_1___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ArrayAd< double,1 > *arg1 = (GeoCal::ArrayAd< double,1 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__ArrayAdT_double_1_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ArrayAd_double_1___str__" "', argument " "1"" of type '" "GeoCal::ArrayAd< double,1 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< GeoCal::ArrayAd< double,1 > * >(argp1);
+  {
+    try {
+      result = ((GeoCal::ArrayAd< double,1 > const *)arg1)->print_to_string();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
   return NULL;
@@ -8116,6 +8188,37 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ArrayAd_double_2___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ArrayAd< double,2 > *arg1 = (GeoCal::ArrayAd< double,2 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__ArrayAdT_double_2_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ArrayAd_double_2___str__" "', argument " "1"" of type '" "GeoCal::ArrayAd< double,2 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< GeoCal::ArrayAd< double,2 > * >(argp1);
+  {
+    try {
+      result = ((GeoCal::ArrayAd< double,2 > const *)arg1)->print_to_string();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ArrayAd_double_2_reference(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::ArrayAd< double,2 > *arg1 = (GeoCal::ArrayAd< double,2 > *) 0 ;
@@ -9957,6 +10060,37 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ArrayAd_double_3___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ArrayAd< double,3 > *arg1 = (GeoCal::ArrayAd< double,3 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__ArrayAdT_double_3_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ArrayAd_double_3___str__" "', argument " "1"" of type '" "GeoCal::ArrayAd< double,3 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< GeoCal::ArrayAd< double,3 > * >(argp1);
+  {
+    try {
+      result = ((GeoCal::ArrayAd< double,3 > const *)arg1)->print_to_string();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ArrayAd_double_3_reference(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::ArrayAd< double,3 > *arg1 = (GeoCal::ArrayAd< double,3 > *) 0 ;
@@ -11778,6 +11912,37 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ArrayAd_double_4___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ArrayAd< double,4 > *arg1 = (GeoCal::ArrayAd< double,4 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__ArrayAdT_double_4_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ArrayAd_double_4___str__" "', argument " "1"" of type '" "GeoCal::ArrayAd< double,4 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< GeoCal::ArrayAd< double,4 > * >(argp1);
+  {
+    try {
+      result = ((GeoCal::ArrayAd< double,4 > const *)arg1)->print_to_string();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ArrayAd_double_4_reference(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::ArrayAd< double,4 > *arg1 = (GeoCal::ArrayAd< double,4 > *) 0 ;
@@ -12508,6 +12673,7 @@ static PyMethodDef SwigMethods[] = {
 		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"\n"
 		""},
+	 { (char *)"ArrayAd_double_1___str__", (PyCFunction)_wrap_ArrayAd_double_1___str__, METH_O, NULL},
 	 { (char *)"ArrayAd_double_1_reference", _wrap_ArrayAd_double_1_reference, METH_VARARGS, (char *)"\n"
 		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"\n"
@@ -12561,6 +12727,7 @@ static PyMethodDef SwigMethods[] = {
 		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"\n"
 		""},
+	 { (char *)"ArrayAd_double_2___str__", (PyCFunction)_wrap_ArrayAd_double_2___str__, METH_O, NULL},
 	 { (char *)"ArrayAd_double_2_reference", _wrap_ArrayAd_double_2_reference, METH_VARARGS, (char *)"\n"
 		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"\n"
@@ -12614,6 +12781,7 @@ static PyMethodDef SwigMethods[] = {
 		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"\n"
 		""},
+	 { (char *)"ArrayAd_double_3___str__", (PyCFunction)_wrap_ArrayAd_double_3___str__, METH_O, NULL},
 	 { (char *)"ArrayAd_double_3_reference", _wrap_ArrayAd_double_3_reference, METH_VARARGS, (char *)"\n"
 		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"\n"
@@ -12667,6 +12835,7 @@ static PyMethodDef SwigMethods[] = {
 		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"\n"
 		""},
+	 { (char *)"ArrayAd_double_4___str__", (PyCFunction)_wrap_ArrayAd_double_4___str__, METH_O, NULL},
 	 { (char *)"ArrayAd_double_4_reference", _wrap_ArrayAd_double_4_reference, METH_VARARGS, (char *)"\n"
 		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"\n"

@@ -37,6 +37,8 @@ public:
 			const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
+  virtual ImageCoordinateWithDerivative 
+  image_coordinate_with_derivative(const GroundCoordinate& Gc) const;
   virtual int number_line() const;
   virtual int number_sample() const;
   virtual boost::shared_ptr<RasterImage> image() const;

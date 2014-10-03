@@ -36,6 +36,9 @@ public:
 
   FrameCoordinate frame_coordinate(const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const;
+  FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const GroundCoordinate& Gc, 
+				   const Camera& C, int Band = 0) const;
   std::vector<boost::shared_ptr<GroundCoordinate> >
   footprint(const Camera& C, const Dem& D, 
 	    double Resolution = 30,

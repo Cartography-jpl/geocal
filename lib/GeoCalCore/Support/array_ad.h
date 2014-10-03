@@ -36,7 +36,7 @@ namespace GeoCal {
   
 *******************************************************************/
 
-template<class T, int D> class ArrayAd 
+  template<class T, int D> class ArrayAd : public Printable<ArrayAd<T, D> >
 {
 public:
   ArrayAd(const blitz::Array<AutoDerivative<T>, D>& V)
@@ -150,6 +150,12 @@ public:
     if(is_const)
       jac = 0;
   }
+  void print(std::ostream& Os) const
+  { Os << "ArrayAd\n"
+       << "  Value: " << value() << "\n"
+       << "  Jacobian:\n" << jacobian() << "\n";
+  }
+  
   void resize_number_variable(int nvar)
   {
     if(nvar == number_variable())
@@ -369,11 +375,6 @@ public:
       return jac.extent(D);
   }
   const blitz::TinyVector<int, D>& shape() const { return val.shape(); }
-  friend std::ostream& operator<<(std::ostream& os, 
-				  const ArrayAd<T, D>& V)
-  { os << V.val << "\n" << V.jac << "\n"; return os;}
-  friend std::istream& operator>>(std::istream& is, ArrayAd<T, D>& V)
-  { is >> V.val >> V.jac; return is; }
 private:
   blitz::Array<T, D> val;
   blitz::Array<T, D + 1> jac;

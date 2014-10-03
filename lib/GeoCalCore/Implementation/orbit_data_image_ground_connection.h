@@ -93,6 +93,25 @@ public:
       fc = od->frame_coordinate(Gc, *cam, b);
     return ImageCoordinate(fc.line, fc.sample);
   }
+//-----------------------------------------------------------------------
+/// This is image_coordinate, but include the derivative of this
+/// with respect to the parameters of the Camera and OrbitData. Not
+/// sure if we want this to be a general ImageGroundConnection
+/// function, but for now we have this defined just for this class.
+//-----------------------------------------------------------------------
+  
+  virtual ImageCoordinateWithDerivative 
+  image_coordinate_with_derivative(const GroundCoordinate& Gc) const 
+  { 
+    FrameCoordinateWithDerivative fc;
+    if(refraction_) {
+      boost::shared_ptr<GroundCoordinate> gc_uncorr =
+	refraction_->refraction_reverse(*od->position_cf(), Gc);
+      fc = od->frame_coordinate_with_derivative(*gc_uncorr, *cam, b);
+    } else
+      fc = od->frame_coordinate_with_derivative(Gc, *cam, b);
+    return ImageCoordinateWithDerivative(fc.line, fc.sample);
+  }
   virtual void print(std::ostream& Os) const \
   {
     OstreamPad opad(Os, "    ");

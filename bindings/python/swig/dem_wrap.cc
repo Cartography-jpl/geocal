@@ -5424,6 +5424,124 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Dem_intersect_start_length(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Dem *arg1 = (GeoCal::Dem *) 0 ;
+  GeoCal::CartesianFixed *arg2 = 0 ;
+  GeoCal::CartesianFixedLookVector *arg3 = 0 ;
+  double arg4 ;
+  double arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Dem const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Dem const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixedLookVector const > tempshared3 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  PyObject *swig_obj[5] ;
+  boost::shared_ptr< GeoCal::CartesianFixed > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Dem_intersect_start_length",5,5,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Dem_intersect_start_length" "', argument " "1"" of type '" "GeoCal::Dem const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp1);
+      arg1 = const_cast< GeoCal::Dem * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp1);
+      arg1 = const_cast< GeoCal::Dem * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianFixed *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixed,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Dem_intersect_start_length" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Dem_intersect_start_length" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp2);
+        arg2 = const_cast< GeoCal::CartesianFixed * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::CartesianFixed * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianFixedLookVector *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixedLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Dem_intersect_start_length" "', argument " "3"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Dem_intersect_start_length" "', argument " "3"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp3);
+        arg3 = const_cast< GeoCal::CartesianFixedLookVector * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::CartesianFixedLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Dem_intersect_start_length" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Dem_intersect_start_length" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  {
+    try {
+      result = ((GeoCal::Dem const *)arg1)->intersect_start_length((GeoCal::CartesianFixed const &)*arg2,(GeoCal::CartesianFixedLookVector const &)*arg3,arg4,arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Dem_surface_point(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Dem *arg1 = (GeoCal::Dem *) 0 ;
@@ -5618,6 +5736,19 @@ static PyMethodDef SwigMethods[] = {
 		"Resolution is the desired resolution in meters. Max_height is the\n"
 		"maximum height we will encounter in the Dem - the default of 9 km is\n"
 		"higher than the highest point in the world. \n"
+		""},
+	 { (char *)"Dem_intersect_start_length", _wrap_Dem_intersect_start_length, METH_VARARGS, (char *)"\n"
+		"boost::shared_ptr< CartesianFixed > Dem::intersect_start_length(const CartesianFixed &Cf, const CartesianFixedLookVector &Lv, double\n"
+		"Resolution, double Start_length) const\n"
+		"Determine the intersection along a look vector from a starting\n"
+		"position with the Dem (e.g., what point on the ground does a satellite\n"
+		"see).\n"
+		"\n"
+		"Resolution is the desired resolution in meters.\n"
+		"\n"
+		"The starting length along the look vector is given. This might come\n"
+		"from ray casting code, or it might come from the intersect function of\n"
+		"this class. \n"
 		""},
 	 { (char *)"Dem_surface_point", _wrap_Dem_surface_point, METH_VARARGS, (char *)"\n"
 		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::Dem::surface_point(const GroundCoordinate &Gp) const =0\n"

@@ -44,6 +44,11 @@ public:
       const CartesianFixedLookVector& Lv, double Resolution,
       double Max_height = 9000) const;
 
+  virtual boost::shared_ptr<CartesianFixed> 
+  intersect_start_length (const CartesianFixed& Cf,
+			  const CartesianFixedLookVector& Lv, 
+			  double Resolution, double Start_length) const;
+
 //-----------------------------------------------------------------------
 /// Return a GroundCoordinate on the surface directly above or below
 /// the given point.

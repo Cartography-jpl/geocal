@@ -27,17 +27,41 @@ boost::shared_ptr<CartesianFixed> Dem::intersect(const CartesianFixed& Cf,
   for(int i = 0; i < 3; ++i)
     t[i] -= Cf.position[i];
   double start_length = norm(t);
+  return intersect_start_length(Cf, Lv, Resolution, start_length);
+}
 
-  // Determine how far a unit move in Lv direction step along the earth.
-  t = cf2->position;
+//-----------------------------------------------------------------------
+/// Determine the intersection along a look vector from a starting
+/// position with the Dem (e.g., what point on the ground does a
+/// satellite see).
+///
+/// Resolution is the desired resolution in meters. 
+///
+/// The starting length along the look vector is given. This might
+/// come from ray casting code, or it might come from the intersect
+/// function of this class.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<CartesianFixed> 
+Dem::intersect_start_length 
+(const CartesianFixed& Cf,
+ const CartesianFixedLookVector& Lv, 
+ double Resolution, double Start_length) const
+{
+  boost::array<double, 3> ldir(Lv.direction());
+  boost::shared_ptr<CartesianFixed> cf2 = Cf.create(Cf.position);
   for(int i = 0; i < 3; ++i)
-    t[i] += Lv.direction()[i];
+    cf2->position[i] += Start_length * ldir[i];
+  // Determine how far a unit move in Lv direction step along the earth.
+  boost::array<double, 3> t = cf2->position;
+  for(int i = 0; i < 3; ++i)
+    t[i] += ldir[i];
   double d = distance(*cf2,*cf2->create(t));
   double step_size = Resolution / d;
 
   double hcurr = distance_to_surface(*cf2);
   double hlast;
-  double lcurr = start_length;
+  double lcurr = Start_length;
   double llast;
   int sign = (hcurr > 0 ? 1 : -1);
   do {
@@ -45,12 +69,13 @@ boost::shared_ptr<CartesianFixed> Dem::intersect(const CartesianFixed& Cf,
     lcurr += sign * step_size;
     hlast = hcurr;
     for(int i = 0; i < 3; ++i)
-      cf2->position[i] += sign * step_size * Lv.direction()[i];
+      cf2->position[i] += sign * step_size * ldir[i];
     hcurr = distance_to_surface(*cf2);
   } while (sign * hcurr > 0);
  
   double step_inter = (llast - lcurr) / (hlast - hcurr) * (0 - hcurr);
   for(int i = 0; i < 3; ++i)
-    cf2->position[i] += step_inter * Lv.direction()[i];
+    cf2->position[i] += step_inter * ldir[i];
   return cf2;
+
 }

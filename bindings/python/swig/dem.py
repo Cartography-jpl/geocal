@@ -165,6 +165,22 @@ class Dem(geocal_swig.generic_object.GenericObject):
         """
         return _dem.Dem_intersect(self, *args)
 
+    def intersect_start_length(self, *args):
+        """
+        boost::shared_ptr< CartesianFixed > Dem::intersect_start_length(const CartesianFixed &Cf, const CartesianFixedLookVector &Lv, double
+        Resolution, double Start_length) const
+        Determine the intersection along a look vector from a starting
+        position with the Dem (e.g., what point on the ground does a satellite
+        see).
+
+        Resolution is the desired resolution in meters.
+
+        The starting length along the look vector is given. This might come
+        from ray casting code, or it might come from the intersect function of
+        this class. 
+        """
+        return _dem.Dem_intersect_start_length(self, *args)
+
     def surface_point(self, *args):
         """
         virtual boost::shared_ptr<GroundCoordinate> GeoCal::Dem::surface_point(const GroundCoordinate &Gp) const =0
@@ -177,6 +193,7 @@ class Dem(geocal_swig.generic_object.GenericObject):
 Dem.distance_to_surface = new_instancemethod(_dem.Dem_distance_to_surface,None,Dem)
 Dem.height_reference_surface = new_instancemethod(_dem.Dem_height_reference_surface,None,Dem)
 Dem.intersect = new_instancemethod(_dem.Dem_intersect,None,Dem)
+Dem.intersect_start_length = new_instancemethod(_dem.Dem_intersect_start_length,None,Dem)
 Dem.surface_point = new_instancemethod(_dem.Dem_surface_point,None,Dem)
 Dem.__str__ = new_instancemethod(_dem.Dem___str__,None,Dem)
 Dem_swigregister = _dem.Dem_swigregister

@@ -121,8 +121,11 @@ public:
   %python_attribute(parameter_name, virtual std::vector<std::string>)
   virtual double resolution_meter(const ImageCoordinate& Ic) const;
   virtual double resolution_meter() const;
-  blitz::Array<double, 4> cf_look_vector_arr(int ln_start, int smp_start, 
-					     int nline, int nsamp) const;
+  virtual blitz::Array<double, 7> 
+  cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
+		     int nsubpixel_line = 1, 
+		     int nsubpixel_sample = 1,
+		     int nintegration_step = 1) const;
   %python_attribute2(dem, dem_ptr, boost::shared_ptr<Dem>)
   void dem(const boost::shared_ptr<Dem>& D);
 %pythoncode {

@@ -65,12 +65,28 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return an array of look vector information. This is really
-/// intended for use with python. This is nline x nsamp x 2 x 3 in
-/// size, where we give the position first followed by the look vector.
+/// intended for use with ray casting or with python, where calling
+/// cf_look_vector repeatedly is costly.
+/// This is nline x nsamp x x nsub_line x nsub_sample x
+/// nintegration_step x 2 x 3 in size, where we give the position first
+/// followed by the look vector. 
+///
+/// In general, the number of integration steps doesn't have any
+/// meaning and we just repeat the data if the number of integration
+/// steps is something other than 1. But for certain
+/// ImageGroundConnection, this may have meaning (e.g., anything where 
+/// we have a camera and orbit data).
+///
+/// The default implementation just calls cf_look_vector repeatedly,
+/// but a derived class can make any kind of optimization that is
+/// appropriate. 
 //-----------------------------------------------------------------------
 
-  blitz::Array<double, 4> cf_look_vector_arr(int ln_start, int smp_start, 
-					     int nline, int nsamp) const;
+  virtual blitz::Array<double, 7> 
+  cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
+		     int nsubpixel_line = 1, 
+		     int nsubpixel_sample = 1,
+		     int nintegration_step = 1) const;
 
 //-----------------------------------------------------------------------
 /// Return look vector for given coordinate, along with a position

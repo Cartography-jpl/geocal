@@ -36,21 +36,28 @@ void ImageGroundConnection::initialize
 /// size, where we give the position first followed by the look vector.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 4> ImageGroundConnection::cf_look_vector_arr
+blitz::Array<double, 7> ImageGroundConnection::cf_look_vector_arr
 (int ln_start, int smp_start, 
- int nline, int nsamp) const
+ int nline, int nsamp, int nsubpixel_line, int nsubpixel_sample, 
+ int nintegration_step) const
 {
   CartesianFixedLookVector lv;
   boost::shared_ptr<CartesianFixed> pos;
-  blitz::Array<double, 4>  res(nline, nsamp, 2, 3);
+  blitz::Array<double, 7>  res(nline, nsamp, nsubpixel_line, 
+			       nsubpixel_sample, nintegration_step, 2, 3);
   for(int i = 0; i < nline; ++i)
-    for(int j = 0; j < nsamp; ++j) {
-      cf_look_vector(ImageCoordinate(i + ln_start, j + smp_start), lv, pos);
-      for(int k = 0; k < 3; ++k) {
-	res(i, j, 0, k) = pos->position[k];
-	res(i, j, 1, k) = lv.look_vector[k];
-      }
-    }
+    for(int j = 0; j < nsamp; ++j) 
+      for(int i2 = 0; i2 < nsubpixel_line; ++i2)
+	for(int j2 = 0; j2 < nsubpixel_sample; ++j2) {
+	  ImageCoordinate ic(i + ln_start + ((double) i2 / nsubpixel_line),
+			     j + smp_start + ((double) j2 / nsubpixel_sample));
+	  cf_look_vector(ic, lv, pos);
+	  for(int k = 0; k < nintegration_step; ++k)
+	    for(int k2 = 0; k2 < 3; ++k2) {
+	      res(i, j, i2, j2, k, 0, k2) = pos->position[k2];
+	      res(i, j, i2, j2, k, 1, k2) = lv.look_vector[k2];
+	    }
+	}
   return res;
 }
 

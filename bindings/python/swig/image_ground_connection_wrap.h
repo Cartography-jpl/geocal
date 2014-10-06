@@ -37,6 +37,7 @@ public:
     virtual std::vector< std::string,std::allocator< std::string > > parameter_name() const;
     virtual double resolution_meter(GeoCal::ImageCoordinate const &Ic) const;
     virtual double resolution_meter() const;
+    virtual blitz::Array< double,7 > cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp, int nsubpixel_line = 1, int nsubpixel_sample = 1, int nintegration_step = 1) const;
     using GeoCal::ImageGroundConnection::initialize;
 
 
@@ -71,7 +72,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[14];
+    mutable swig::SwigVar_PyObject vtable[18];
 #endif
 
 };

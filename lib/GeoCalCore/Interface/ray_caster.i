@@ -15,7 +15,7 @@ public:
   %python_attribute(number_position, int);
   %python_attribute(last_position, bool);
   %python_attribute(current_position, int);
-  virtual blitz::Array<double, 6> next_position() const = 0;
+  virtual blitz::Array<double, 6> next_position() = 0;
   std::string print_to_string() const;
 };
 }

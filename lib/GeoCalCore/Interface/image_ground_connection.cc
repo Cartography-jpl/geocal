@@ -147,6 +147,35 @@ double ImageGroundConnection::resolution_meter
 }
 
 //-----------------------------------------------------------------------
+/// Footprint resolution in the line and sample direction. Note that
+/// in general the footprint on the ground of a particular line is
+/// *not* the same as the spacing between pixels in the
+/// image. resolution_meter returns the spacing in the acquired image,
+/// while this footprint is the size of a particular pixel on the
+/// ground, including any overlap or underlap with surrounding
+/// pixels.
+///
+/// Default implementation just returns the spacing between image
+/// pixels, but derived classes should give the correct implementation
+/// for what they are modeling.
+//-----------------------------------------------------------------------
+
+void ImageGroundConnection::footprint_resolution
+(int Line, int Sample, 
+ double &Line_resolution_meter, 
+ double &Sample_resolution_meter)
+{
+  ImageCoordinate ic(Line, Sample);
+  boost::shared_ptr<GroundCoordinate> gc1 = ground_coordinate(ic);
+  boost::shared_ptr<GroundCoordinate> gc2 = 
+    ground_coordinate(ImageCoordinate(ic.line + 1, ic.sample));
+  boost::shared_ptr<GroundCoordinate> gc3 = 
+    ground_coordinate(ImageCoordinate(ic.line, ic.sample + 1));
+  Line_resolution_meter = distance(*gc1, *gc2);
+  Sample_resolution_meter = distance(*gc1, *gc3);
+}
+
+//-----------------------------------------------------------------------
 /// Variation of resolution_meter that find the resolution of the
 /// center pixel.
 //-----------------------------------------------------------------------

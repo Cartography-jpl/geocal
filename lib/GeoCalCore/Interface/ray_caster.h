@@ -65,7 +65,7 @@ public:
 /// as a CartesianFixed coordinate (e.g., Ecr for the Earth)
 //-----------------------------------------------------------------------
   
-  virtual blitz::Array<double, 6> next_position() const = 0;
+  virtual blitz::Array<double, 6> next_position() = 0;
 
 //-----------------------------------------------------------------------
 /// Print to a stream.

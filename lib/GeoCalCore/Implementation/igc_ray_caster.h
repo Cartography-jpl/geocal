@@ -95,15 +95,16 @@ public:
     else
       return start_position_ + npos_ - 1 - ind;
   }
-  virtual blitz::Array<double, 6> next_position() const;
+  virtual blitz::Array<double, 6> next_position();
   virtual void print(std::ostream& Os) const
   {
     Os << "IgcRayCaster";
   }
 private:
   boost::shared_ptr<ImageGroundConnection> igc;
-  int start_position_, npos_, ind;
+  int start_position_, npos_, ind, nintegration_step, nsub_line, nsub_sample;
   bool is_forward;
+  double resolution, max_height;
 };
 }
 #endif

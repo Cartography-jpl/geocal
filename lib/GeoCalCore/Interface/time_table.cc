@@ -41,7 +41,7 @@ const FrameCoordinate& F) const
 void ConstantSpacingTimeTable::time(const ImageCoordinate& Ic, Time& T, 
 				    FrameCoordinate& F) const
 {
-  range_check(Ic.line, (double) min_line(), (double) max_line() + 0.5);
+  range_check(Ic.line, (double) min_line(), (double) max_line() + 1.0);
   T = min_time() + Ic.line * tspace;
   F = FrameCoordinate(0, Ic.sample);
 }

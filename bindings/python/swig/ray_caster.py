@@ -214,7 +214,7 @@ class RayCaster(geocal_swig.generic_object.GenericObject):
 
     def next_position(self):
         """
-        virtual blitz::Array<double, 6> GeoCal::RayCaster::next_position() const =0
+        virtual blitz::Array<double, 6> GeoCal::RayCaster::next_position()=0
         Return the ground locations seen at the next position.
 
         This is This is nline x nsamp x x nsub_line x nsub_sample x

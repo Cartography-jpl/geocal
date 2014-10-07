@@ -121,6 +121,11 @@ public:
   %python_attribute(parameter_name, virtual std::vector<std::string>)
   virtual double resolution_meter(const ImageCoordinate& Ic) const;
   virtual double resolution_meter() const;
+  // SWIG Director doesn't like this. For now, just don't pass this to
+  // python. If this ever becomes an issue we can split this up like
+  // we did with cf_look_vector_pos and cf_look_vector_lv.
+  // virtual void footprint_resolution(int Line, int Sample, 
+  //			    double &OUTPUT, double &OUTPUT);
   virtual blitz::Array<double, 7> 
   cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
 		     int nsubpixel_line = 1, 

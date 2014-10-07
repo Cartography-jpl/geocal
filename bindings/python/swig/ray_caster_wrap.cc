@@ -6143,8 +6143,8 @@ SWIGINTERN PyObject *_wrap_RayCaster_next_position(PyObject *SWIGUNUSEDPARM(self
   GeoCal::RayCaster *arg1 = (GeoCal::RayCaster *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RayCaster const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RayCaster const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::RayCaster > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCaster > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   SwigValueWrapper< blitz::Array< double,6 > > result;
   
@@ -6154,20 +6154,20 @@ SWIGINTERN PyObject *_wrap_RayCaster_next_position(PyObject *SWIGUNUSEDPARM(self
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCaster_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCaster_next_position" "', argument " "1"" of type '" "GeoCal::RayCaster const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCaster_next_position" "', argument " "1"" of type '" "GeoCal::RayCaster *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RayCaster > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RayCaster > * >(argp1);
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RayCaster > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RayCaster > * >(argp1);
       arg1 = const_cast< GeoCal::RayCaster * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RayCaster > * >(argp1);
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RayCaster > * >(argp1);
       arg1 = const_cast< GeoCal::RayCaster * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = ((GeoCal::RayCaster const *)arg1)->next_position();
+      result = (arg1)->next_position();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6311,7 +6311,7 @@ static PyMethodDef SwigMethods[] = {
 		"The position that was last returned by next_position. \n"
 		""},
 	 { (char *)"RayCaster_next_position", (PyCFunction)_wrap_RayCaster_next_position, METH_O, (char *)"\n"
-		"virtual blitz::Array<double, 6> GeoCal::RayCaster::next_position() const =0\n"
+		"virtual blitz::Array<double, 6> GeoCal::RayCaster::next_position()=0\n"
 		"Return the ground locations seen at the next position.\n"
 		"\n"
 		"This is This is nline x nsamp x x nsub_line x nsub_sample x\n"

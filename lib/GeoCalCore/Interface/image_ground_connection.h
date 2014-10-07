@@ -79,7 +79,19 @@ public:
 ///
 /// The default implementation just calls cf_look_vector repeatedly,
 /// but a derived class can make any kind of optimization that is
-/// appropriate. 
+/// appropriate.
+///
+/// Note a subtle difference between this and ground_coordinate. A
+/// camera may have a footprint that overlaps from one line to the
+/// next. For example, MISR has a pixel spacing of 275 meter, but the
+/// footprint may be as much as 700 meter on the ground (for D camera
+/// in line direction). The cf_look_vector_arr with the subpixels
+/// refer to the actual camera, i.e., the 750 meter footprint. This
+/// means that in general the results of calling ground_coordinate
+/// (which corresponds to the 275 meter pixel spacing) won't match the
+/// location you get from cf_look_vector_arr. This is intended, not a
+/// bug, and simple reflects that we are talking about 2 different
+/// things here.
 //-----------------------------------------------------------------------
 
   virtual blitz::Array<double, 7> 
@@ -320,6 +332,11 @@ public:
 
   virtual double resolution_meter(const ImageCoordinate& Ic) const;
   virtual double resolution_meter() const;
+
+  virtual void footprint_resolution(int Line, int Sample, 
+				    double &Line_resolution_meter, 
+				    double &Sample_resolution_meter);
+
 
 //-----------------------------------------------------------------------
 /// DEM used by ground_coordinate.

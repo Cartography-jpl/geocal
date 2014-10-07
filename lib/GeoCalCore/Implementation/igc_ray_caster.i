@@ -17,6 +17,6 @@ public:
 	       int Number_line = -1,
 	       int Number_integration_step = 2, double Resolution = 100,
 	       double Max_height = 10e3);
-  virtual blitz::Array<double, 6> next_position() const;
+  virtual blitz::Array<double, 6> next_position();
 };
 }

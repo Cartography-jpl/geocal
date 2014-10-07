@@ -226,7 +226,14 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
         IgcRayCaster::IgcRayCaster(const boost::shared_ptr< ImageGroundConnection > &Igc, int
         Start_line=0, int Number_line=-1, int Number_integration_step=2,
         double Resolution=100, double Max_height=10e3)
+        Constructor.
 
+        You can pass the starting line to use and the number of lines to
+        process, the default is to do the full range covered by the Igc. The
+        resolution is the desired accuracy, we use this both to figure out the
+        number of subpixels to use and the accuracy that we do the
+        intersection with the DEM. The Max_height should be larger than the
+        greatest height we will encounter in the Dem belonging to the Igc. 
         """
         _igc_ray_caster.IgcRayCaster_swiginit(self,_igc_ray_caster.new_IgcRayCaster(*args))
     __swig_destroy__ = _igc_ray_caster.delete_IgcRayCaster

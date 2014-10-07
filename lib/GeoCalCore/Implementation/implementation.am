@@ -88,6 +88,8 @@ libgeocal_la_SOURCES+= @srcimplementation@/geometric_model_image.cc
 if HAVE_HDF5
 geocalinc_HEADERS+= @srcimplementation@/hdf_orbit.h
 endif
+geocalinc_HEADERS+= @srcimplementation@/igc_ray_caster.h
+libgeocal_la_SOURCES+= @srcimplementation@/igc_ray_caster.cc
 
 # File only included if we have GDAL library
 if HAVE_GDAL
@@ -182,6 +184,7 @@ SWIG_SRC += @swigsrc@/galileo_camera_wrap.cc
 SWIG_SRC += @swigsrc@/refraction_wrap.cc
 SWIG_SRC += @swigsrc@/orbit_data_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/planet_coordinate_wrap.cc
+SWIG_SRC += @swigsrc@/igc_ray_caster_wrap.cc
 SWIG_SRC_HDF5 += @swigsrc@/hdf_orbit_wrap.cc
 SWIG_SRC_HDF5_CARTO += @swigsrc@/hdf_orbit_carto_wrap.cc
 # Test files
@@ -220,6 +223,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/phase_correlation_matcher_test.cc
 endif
 geocal_test_all_SOURCES+= @srcimplementation@/quadratic_geometric_model_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/geometric_model_image_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/igc_ray_caster_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 

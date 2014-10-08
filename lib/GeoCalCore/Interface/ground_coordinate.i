@@ -110,6 +110,10 @@ public:
   CartesianFixedLookVector(double x, double y, double z);
   CartesianFixedLookVector(const GroundCoordinate& From,
 			   const GroundCoordinate& To);
+  // This conflicts in python with the version that take a boost
+  // array. For now comment this out. We may want to investigate this
+  // at some point, not sure where the conflict comes from
+  // CartesianFixedLookVector(const boost::math::quaternion<double>& V);
   std::string print_to_string() const;
   static CartesianFixedLookVector solar_look_vector(const Time& T);
   %pickle_init(1, self.look_vector[0], self.look_vector[1],

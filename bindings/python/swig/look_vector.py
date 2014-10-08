@@ -328,6 +328,32 @@ CartesianInertialLookVector.__str__ = new_instancemethod(_look_vector.CartesianI
 CartesianInertialLookVector_swigregister = _look_vector.CartesianInertialLookVector_swigregister
 CartesianInertialLookVector_swigregister(CartesianInertialLookVector)
 
+class CartesianInertialLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
+    """
+    This is a look vector in CartesianInertial coordinates.
+
+    C++ includes: look_vector.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::CartesianInertialLookVectorWithDerivative::CartesianInertialLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)
+        Constructor using quaternion. 
+        """
+        _look_vector.CartesianInertialLookVectorWithDerivative_swiginit(self,_look_vector.new_CartesianInertialLookVectorWithDerivative(*args))
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+
+    __swig_destroy__ = _look_vector.delete_CartesianInertialLookVectorWithDerivative
+CartesianInertialLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.CartesianInertialLookVectorWithDerivative___str__,None,CartesianInertialLookVectorWithDerivative)
+CartesianInertialLookVectorWithDerivative_swigregister = _look_vector.CartesianInertialLookVectorWithDerivative_swigregister
+CartesianInertialLookVectorWithDerivative_swigregister(CartesianInertialLookVectorWithDerivative)
+
 class DcsLookVector(LookVectorDouble):
     """
     This is a look vector in Detector Coordinate System coordinates.
@@ -380,6 +406,32 @@ class DcsLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
 DcsLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.DcsLookVectorWithDerivative___str__,None,DcsLookVectorWithDerivative)
 DcsLookVectorWithDerivative_swigregister = _look_vector.DcsLookVectorWithDerivative_swigregister
 DcsLookVectorWithDerivative_swigregister(DcsLookVectorWithDerivative)
+
+class CartesianFixedLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
+    """
+    This is a look vector in CartesianFixed coordinates.
+
+    C++ includes: look_vector.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::CartesianFixedLookVectorWithDerivative::CartesianFixedLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)
+        Constructor using quaternion. 
+        """
+        _look_vector.CartesianFixedLookVectorWithDerivative_swiginit(self,_look_vector.new_CartesianFixedLookVectorWithDerivative(*args))
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+
+    __swig_destroy__ = _look_vector.delete_CartesianFixedLookVectorWithDerivative
+CartesianFixedLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.CartesianFixedLookVectorWithDerivative___str__,None,CartesianFixedLookVectorWithDerivative)
+CartesianFixedLookVectorWithDerivative_swigregister = _look_vector.CartesianFixedLookVectorWithDerivative_swigregister
+CartesianFixedLookVectorWithDerivative_swigregister(CartesianFixedLookVectorWithDerivative)
 
 
 

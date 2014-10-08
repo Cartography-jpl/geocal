@@ -47,9 +47,33 @@ void CartesianInertialLookVector::print(std::ostream& Os) const
 /// Print to given stream.
 //-----------------------------------------------------------------------
 
+void CartesianInertialLookVectorWithDerivative::print(std::ostream& Os) const
+{
+  boost::array<AutoDerivative<double>, 3> d = direction();
+  Os << "Look vector in Cartesian inertial coordinates: \n"
+     << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
+     << "  length: " << length() << " m\n";
+}
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
 void CartesianFixedLookVector::print(std::ostream& Os) const
 {
   boost::array<double, 3> d = direction();
+  Os << "Look vector in Cartesian fixed coordinates: \n"
+     << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
+     << "  length: " << length() << " m\n";
+}
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+void CartesianFixedLookVectorWithDerivative::print(std::ostream& Os) const
+{
+  boost::array<AutoDerivative<double>, 3> d = direction();
   Os << "Look vector in Cartesian fixed coordinates: \n"
      << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
      << "  length: " << length() << " m\n";

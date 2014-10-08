@@ -14,8 +14,10 @@
 %geocal_shared_ptr(GeoCal::ScLookVector);
 %geocal_shared_ptr(GeoCal::ScLookVectorWithDerivative);
 %geocal_shared_ptr(GeoCal::CartesianInertialLookVector);
+%geocal_shared_ptr(GeoCal::CartesianInertialLookVectorWithDerivative);
 %geocal_shared_ptr(GeoCal::DcsLookVector);
 %geocal_shared_ptr(GeoCal::DcsLookVectorWithDerivative);
+%geocal_shared_ptr(GeoCal::CartesianFixedLookVectorWithDerivative);
 
 namespace GeoCal {
 template<class T> class LookVector : public GenericObject {
@@ -63,6 +65,20 @@ public:
   CartesianInertialLookVector();
   CartesianInertialLookVector(const boost::array<double, 3>& Lv);
   CartesianInertialLookVector(double x, double y, double z);
+  CartesianInertialLookVector(const boost::math::quaternion<double>& V);
+  std::string print_to_string() const;
+  %pickle_init(1, self.look_vector[0], self.look_vector[1],
+	       self.look_vector[2])
+};
+
+class CartesianInertialLookVectorWithDerivative : public LookVector<AutoDerivative<double> > {
+public:
+  CartesianInertialLookVectorWithDerivative();
+  CartesianInertialLookVectorWithDerivative(const boost::array<AutoDerivative<double>, 3>& Lv);
+  CartesianInertialLookVectorWithDerivative(const AutoDerivative<double>& x, 
+					    const AutoDerivative<double>& y, 
+					    const AutoDerivative<double>& z);
+  CartesianInertialLookVectorWithDerivative(const boost::math::quaternion<AutoDerivative<double> >& V);
   std::string print_to_string() const;
   %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])
@@ -93,6 +109,19 @@ public:
 	       self.look_vector[2])
 };
 
+
+class CartesianFixedLookVectorWithDerivative : public LookVector<AutoDerivative<double> > {
+public:
+  CartesianFixedLookVectorWithDerivative();
+  CartesianFixedLookVectorWithDerivative(const boost::array<AutoDerivative<double>, 3>& Lv);
+  CartesianFixedLookVectorWithDerivative(const AutoDerivative<double>& x, 
+					 const AutoDerivative<double>& y, 
+					 const AutoDerivative<double>& z);
+  CartesianFixedLookVectorWithDerivative(const boost::math::quaternion<AutoDerivative<double> >& V);
+  std::string print_to_string() const;
+  %pickle_init(1, self.look_vector[0], self.look_vector[1],
+	       self.look_vector[2])
+};
 
 // CartesianFixedLookVector is in ground_coordinate.i instead of here,
 // to break a SWIG circular dependency.

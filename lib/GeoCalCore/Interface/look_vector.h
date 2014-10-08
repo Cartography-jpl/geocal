@@ -197,6 +197,42 @@ public:
 };
 
 /****************************************************************//**
+  This is a look vector in CartesianInertial coordinates.
+*******************************************************************/
+
+class CartesianInertialLookVectorWithDerivative : public LookVector<AutoDerivative<double> > {
+public:
+//-----------------------------------------------------------------------
+/// Default constructor. Does not initialize look_vector.
+//-----------------------------------------------------------------------
+
+  CartesianInertialLookVectorWithDerivative() {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  CartesianInertialLookVectorWithDerivative(const boost::array<AutoDerivative<double>, 3>& Lv) : LookVector<AutoDerivative<double> >(Lv) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  CartesianInertialLookVectorWithDerivative(const AutoDerivative<double>& x, 
+					    const AutoDerivative<double>& y, 
+					    const AutoDerivative<double>& z) 
+    : LookVector<AutoDerivative<double> >(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor using quaternion
+//-----------------------------------------------------------------------
+  CartesianInertialLookVectorWithDerivative(const boost::math::quaternion<AutoDerivative<double> >& V) : LookVector<AutoDerivative<double> >(V) {}
+
+  virtual ~CartesianInertialLookVectorWithDerivative() {}
+  virtual void print(std::ostream& Os) const;
+};
+
+/****************************************************************//**
   This is a look vector in CartesianFixed coordinates.
 *******************************************************************/
 
@@ -232,6 +268,43 @@ public:
   virtual void print(std::ostream& Os) const;
 
   static CartesianFixedLookVector solar_look_vector(const Time& T);
+};
+
+/****************************************************************//**
+  This is a look vector in CartesianFixed coordinates.
+*******************************************************************/
+
+class CartesianFixedLookVectorWithDerivative : public LookVector<AutoDerivative<double> > {
+public:
+//-----------------------------------------------------------------------
+/// Default constructor. Does not initialize look_vector.
+//-----------------------------------------------------------------------
+
+  CartesianFixedLookVectorWithDerivative() {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  CartesianFixedLookVectorWithDerivative(const boost::array<AutoDerivative<double>, 3>& Lv) : LookVector<AutoDerivative<double> >(Lv) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+
+  CartesianFixedLookVectorWithDerivative(const AutoDerivative<double>& x, 
+					 const AutoDerivative<double>& y, 
+					 const AutoDerivative<double>& z) 
+    : LookVector<AutoDerivative<double> >(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor using quaternion
+//-----------------------------------------------------------------------
+
+  CartesianFixedLookVectorWithDerivative(const boost::math::quaternion<AutoDerivative<double> >& V) : LookVector<AutoDerivative<double> >(V) {}
+  virtual ~CartesianFixedLookVectorWithDerivative() {}
+  virtual void print(std::ostream& Os) const;
 };
 
 /****************************************************************//**

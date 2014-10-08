@@ -122,6 +122,7 @@ import geocal_swig.quaternion_camera
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.camera
+import geocal_swig.with_parameter
 class GalileoCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     """
     This is the galileo camera, including the nonlinearity correction.

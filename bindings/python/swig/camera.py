@@ -145,6 +145,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.generic_object
 import geocal_swig.observer
+import geocal_swig.with_parameter
 class ObservableCamera(geocal_swig.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
@@ -168,7 +169,7 @@ ObserverCamera.notify_remove = new_instancemethod(_camera.ObserverCamera_notify_
 ObserverCamera_swigregister = _camera.ObserverCamera_swigregister
 ObserverCamera_swigregister(ObserverCamera)
 
-class Camera(ObservableCamera):
+class Camera(ObservableCamera,geocal_swig.with_parameter.WithParameter):
     """
     This class models a frame camera.
 
@@ -244,50 +245,6 @@ class Camera(ObservableCamera):
         """
         return _camera.Camera_number_sample(self, *args)
 
-    def _v_parameter(self, *args):
-        """
-        virtual void GeoCal::Camera::parameter(const blitz::Array< double, 1 > &Parm)
-        Set the value of the parameters. 
-        """
-        return _camera.Camera__v_parameter(self, *args)
-
-    @property
-    def parameter(self):
-        return self._v_parameter()
-
-    @parameter.setter
-    def parameter(self, value):
-      self._v_parameter(value)
-
-    def _v_parameter_with_derivative(self, *args):
-        """
-        virtual void GeoCal::Camera::parameter_with_derivative(const ArrayAd< double, 1 > &Parm)
-        Set the value of the parameters, including derivatives of the
-        parameter.
-
-        Useful for doing Jacobian calculations. 
-        """
-        return _camera.Camera__v_parameter_with_derivative(self, *args)
-
-    @property
-    def parameter_with_derivative(self):
-        return self._v_parameter_with_derivative()
-
-    @parameter_with_derivative.setter
-    def parameter_with_derivative(self, value):
-      self._v_parameter_with_derivative(value)
-
-    def _v_parameter_name(self):
-        """
-        virtual std::vector<std::string> GeoCal::Camera::parameter_name() const
-        Descriptive name of each parameter. 
-        """
-        return _camera.Camera__v_parameter_name(self)
-
-    @property
-    def parameter_name(self):
-        return self._v_parameter_name()
-
     def frame_coordinate(self, *args):
         """
         virtual FrameCoordinate GeoCal::Camera::frame_coordinate(const ScLookVector &Sl, int Band) const =0
@@ -353,9 +310,6 @@ Camera._v_direction = new_instancemethod(_camera.Camera__v_direction,None,Camera
 Camera._v_number_band = new_instancemethod(_camera.Camera__v_number_band,None,Camera)
 Camera.number_line = new_instancemethod(_camera.Camera_number_line,None,Camera)
 Camera.number_sample = new_instancemethod(_camera.Camera_number_sample,None,Camera)
-Camera._v_parameter = new_instancemethod(_camera.Camera__v_parameter,None,Camera)
-Camera._v_parameter_with_derivative = new_instancemethod(_camera.Camera__v_parameter_with_derivative,None,Camera)
-Camera._v_parameter_name = new_instancemethod(_camera.Camera__v_parameter_name,None,Camera)
 Camera.frame_coordinate = new_instancemethod(_camera.Camera_frame_coordinate,None,Camera)
 Camera.frame_coordinate_with_derivative = new_instancemethod(_camera.Camera_frame_coordinate_with_derivative,None,Camera)
 Camera.frame_line_coordinate = new_instancemethod(_camera.Camera_frame_line_coordinate,None,Camera)

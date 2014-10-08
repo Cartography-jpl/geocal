@@ -121,6 +121,7 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.camera
+import geocal_swig.with_parameter
 class QuaternionCamera(geocal_swig.camera.Camera):
     """
     A lot of cameras follow the model of "rotate into the detector space,

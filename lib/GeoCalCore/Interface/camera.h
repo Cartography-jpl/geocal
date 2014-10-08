@@ -5,6 +5,7 @@
 #include "look_vector.h"
 #include "observer.h"
 #include "array_ad.h"
+#include "with_parameter.h"
 #include <blitz/array.h>
 #include <boost/math/quaternion.hpp>
 #include <vector>
@@ -21,7 +22,8 @@ namespace GeoCal {
 *******************************************************************/
 
 class Camera : public Printable<Camera>, 
-	       public Observable<Camera> {
+	       public Observable<Camera>,
+	       public WithParameter {
 public:
 //-----------------------------------------------------------------------
 /// Direction camera is pointing.
@@ -89,60 +91,6 @@ public:
 //-----------------------------------------------------------------------
 
   virtual int number_sample(int Band) const = 0;
-
-//-----------------------------------------------------------------------
-/// A camera model might depend on a set of parameters, which can by
-/// modified (e.g., during a simultaneous bundle adjustment). This
-/// returns those parameters.
-//-----------------------------------------------------------------------
-
-  virtual blitz::Array<double, 1> parameter() const
-  { // Default is to return parameter_with_derivative and strip off
-    // the jacobian.
-    return parameter_with_derivative().value(); 
-  }
-
-//-----------------------------------------------------------------------
-/// Set the value of the parameters.
-//-----------------------------------------------------------------------
-
-  virtual void parameter(const blitz::Array<double, 1>& Parm)
-  {
-    // Default is to call parameter_with_derivative and set an
-    // empty Jacobian.
-    parameter_with_derivative(Parm);
-  }
-
-//-----------------------------------------------------------------------
-/// Return parameters, including derivatives. The derivatives can be
-/// with respect to whatever variables you like, this class just
-/// handles propagating the derivatives.
-//-----------------------------------------------------------------------
-
-  virtual ArrayAd<double, 1> parameter_with_derivative() const
-  { // Default is no parameters.
-    return blitz::Array<double, 1>(0); 
-  }
-
-//-----------------------------------------------------------------------
-/// Set the value of the parameters, including derivatives of the
-/// parameter. Useful for doing Jacobian calculations.
-//-----------------------------------------------------------------------
-
-  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
-   {
-     // Default is do nothing
-   }
-
-//-----------------------------------------------------------------------
-/// Descriptive name of each parameter.
-//-----------------------------------------------------------------------
-
-  virtual std::vector<std::string> parameter_name() const
-  {
-    std::vector<std::string> res;
-    return res;
-  }
 
 //-----------------------------------------------------------------------
 /// This converts from ScLookVector to FrameCoordinate for a given

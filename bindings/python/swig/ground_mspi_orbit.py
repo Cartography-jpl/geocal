@@ -122,6 +122,7 @@ import geocal_swig.look_vector
 import geocal_swig.generic_object
 import geocal_swig.orbit
 import geocal_swig.observer
+import geocal_swig.with_parameter
 class GroundMspiOrbit(geocal_swig.orbit.Orbit):
     """
     This models the MSPI ground orbit.

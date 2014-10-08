@@ -123,6 +123,7 @@ import geocal_swig.image_ground_connection
 import geocal_swig.generic_object
 import geocal_swig.geocal_exception
 import geocal_swig.observer
+import geocal_swig.with_parameter
 import geocal_swig.quaternion_camera
 class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnection):
     """

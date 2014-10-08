@@ -9,6 +9,7 @@
 %}
 %base_import(generic_object)
 %base_import(observer)
+%base_import(with_parameter)
 %import "frame_coordinate.i"
 %import "look_vector.i"
 %import "geocal_time.i"
@@ -26,7 +27,7 @@ namespace GeoCal {
 %template(ObservableCamera) GeoCal::Observable<GeoCal::Camera>;
 %template(ObserverCamera) GeoCal::Observer<GeoCal::Camera>;
 
-class Camera : public Observable<Camera> {
+class Camera : public Observable<Camera>, public WithParameter {
 public:
   enum Direction {FORWARD, AFTWARD};
   Camera();
@@ -37,9 +38,6 @@ public:
   %python_attribute(number_band, virtual int)
   virtual int number_line(int Band) const = 0;
   virtual int number_sample(int Band) const = 0;
-  %python_attribute_with_set(parameter, blitz::Array<double, 1>)
-  %python_attribute_with_set(parameter_with_derivative, ArrayAd<double, 1>)
-  %python_attribute(parameter_name, virtual std::vector<std::string>)
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const = 0;
   virtual FrameCoordinateWithDerivative 

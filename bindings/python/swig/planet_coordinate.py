@@ -124,6 +124,7 @@ import geocal_swig.look_vector
 import geocal_swig.dem
 import geocal_swig.coordinate_converter
 import geocal_swig.observer
+import geocal_swig.with_parameter
 class MarsConstant(object):
     """
     Constants for a planet.

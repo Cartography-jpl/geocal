@@ -78,6 +78,22 @@ public:
     }
     return *this;
   }
+  const AutoDerivativeRef<T>& operator=(const AutoDerivativeRef<T>& D) const
+  {
+    v = D.value();
+    if(D.gradient().rows())
+      grad = 0;
+    else if(grad.rows() == D.gradient().rows())
+      grad = D.gradient();
+    else {
+      Exception e;
+      e << "Size of gradient in AutoDerivative doesn't match value you "
+	<< "are trying to assign. Size of destination is " << grad.rows()
+	<< " and size of source is " << D.gradient().rows();
+      throw e;
+    }
+    return *this;
+  }
   T& value_ref() const {return v;}
   blitz::Array<T, 1>& gradient_ref() const {return grad; }
   T value() const {return v;}

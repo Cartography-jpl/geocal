@@ -30,6 +30,7 @@ extern "C" {
   void init_geocal_time(void);
   void init_tiled_file(void);
   void init_image_coordinate(void);
+  void init_with_parameter(void);
   void init_look_vector(void);
   void init_ground_coordinate(void);
   void init_coordinate_converter(void);
@@ -250,6 +251,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_time", init_geocal_time);
   init_extension_module(package, "_tiled_file", init_tiled_file);
   init_extension_module(package, "_image_coordinate", init_image_coordinate);
+  init_extension_module(package, "_with_parameter", init_with_parameter);
   init_extension_module(package, "_look_vector", init_look_vector);
   init_extension_module(package, "_ground_coordinate", init_ground_coordinate);
   init_extension_module(package, "_coordinate_converter", init_coordinate_converter);

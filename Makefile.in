@@ -360,7 +360,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/geocal_gsl_root_wrap.cc \
 	@swigsrc@/geocal_time_wrap.cc @swigsrc@/tiled_file_wrap.cc \
 	@swigsrc@/image_coordinate_wrap.cc \
-	@swigsrc@/look_vector_wrap.cc \
+	@swigsrc@/with_parameter_wrap.cc @swigsrc@/look_vector_wrap.cc \
 	@swigsrc@/ground_coordinate_wrap.cc \
 	@swigsrc@/coordinate_converter_wrap.cc @swigsrc@/ecr_wrap.cc \
 	@swigsrc@/eci_wrap.cc @swigsrc@/geodetic_wrap.cc \
@@ -477,6 +477,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geocal_time_wrap.lo \
 	@swigsrc@/_swig_wrap_la-tiled_file_wrap.lo \
 	@swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo \
+	@swigsrc@/_swig_wrap_la-with_parameter_wrap.lo \
 	@swigsrc@/_swig_wrap_la-look_vector_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ground_coordinate_wrap.lo \
 	@swigsrc@/_swig_wrap_la-coordinate_converter_wrap.lo \
@@ -629,6 +630,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/geocal_time.cc @srcsupport@/covariance.cc \
 	@srcsupport@/statistic.cc @srcsupport@/geocal_fftw.cc \
 	@srcsupport@/hdf_file.cc @srcinterface@/raster_image.cc \
+	@srcinterface@/with_parameter.cc \
 	@srcinterface@/sub_raster_image.cc \
 	@srcinterface@/raster_image_multi_band.cc \
 	@srcinterface@/sub_raster_image_multi_band.cc \
@@ -740,6 +742,7 @@ am_libgeocal_la_OBJECTS =  \
 	@srcsupport@/libgeocal_la-covariance.lo \
 	@srcsupport@/libgeocal_la-statistic.lo $(am__objects_15) \
 	$(am__objects_16) @srcinterface@/libgeocal_la-raster_image.lo \
+	@srcinterface@/libgeocal_la-with_parameter.lo \
 	@srcinterface@/libgeocal_la-sub_raster_image.lo \
 	@srcinterface@/libgeocal_la-raster_image_multi_band.lo \
 	@srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo \
@@ -1202,7 +1205,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcsupport@/toolkit_time_interface.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
 	@srcsupport@/geocal_fftw.h @srcsupport@/hdf_file.h \
-	@srcinterface@/raster_image.h \
+	@srcinterface@/raster_image.h @srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
 	@srcinterface@/sub_raster_image.h \
 	@srcinterface@/raster_image_multi_band.h \
@@ -1918,6 +1921,7 @@ libgeocal_la_SOURCES = @srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/geocal_time.cc @srcsupport@/covariance.cc \
 	@srcsupport@/statistic.cc $(am__append_14) $(am__append_16) \
 	@srcinterface@/raster_image.cc \
+	@srcinterface@/with_parameter.cc \
 	@srcinterface@/sub_raster_image.cc \
 	@srcinterface@/raster_image_multi_band.cc \
 	@srcinterface@/sub_raster_image_multi_band.cc \
@@ -2010,7 +2014,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/geocal_gsl_root_wrap.cc \
 	@swigsrc@/geocal_time_wrap.cc @swigsrc@/tiled_file_wrap.cc \
 	@swigsrc@/image_coordinate_wrap.cc \
-	@swigsrc@/look_vector_wrap.cc \
+	@swigsrc@/with_parameter_wrap.cc @swigsrc@/look_vector_wrap.cc \
 	@swigsrc@/ground_coordinate_wrap.cc \
 	@swigsrc@/coordinate_converter_wrap.cc @swigsrc@/ecr_wrap.cc \
 	@swigsrc@/eci_wrap.cc @swigsrc@/geodetic_wrap.cc \
@@ -2144,7 +2148,7 @@ geocalinc_HEADERS = @srcsupport@/constant.h \
 	@srcsupport@/toolkit_time_interface.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
 	$(am__append_13) $(am__append_15) \
-	@srcinterface@/raster_image.h \
+	@srcinterface@/raster_image.h @srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
 	@srcinterface@/sub_raster_image.h \
 	@srcinterface@/raster_image_multi_band.h \
@@ -2624,6 +2628,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-with_parameter_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-look_vector_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-ground_coordinate_wrap.lo:  \
@@ -2915,6 +2921,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@$(MKDIR_P) @srcinterface@/$(DEPDIR)
 	@: > @srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-raster_image.lo:  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/libgeocal_la-with_parameter.lo:  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-sub_raster_image.lo:  \
@@ -3920,6 +3929,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image_multi_band.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-time_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-with_parameter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_igc_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_orbit_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-ground_mspi_igc_test.Po@am__quote@
@@ -4116,6 +4126,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_multi_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_raster_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Plo@am__quote@
 
 .cc.o:
@@ -4288,6 +4299,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/image_coordinate_wrap.cc' object='@swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo `test -f '@swigsrc@/image_coordinate_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/image_coordinate_wrap.cc
+
+@swigsrc@/_swig_wrap_la-with_parameter_wrap.lo: @swigsrc@/with_parameter_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-with_parameter_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-with_parameter_wrap.lo `test -f '@swigsrc@/with_parameter_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/with_parameter_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/with_parameter_wrap.cc' object='@swigsrc@/_swig_wrap_la-with_parameter_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-with_parameter_wrap.lo `test -f '@swigsrc@/with_parameter_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/with_parameter_wrap.cc
 
 @swigsrc@/_swig_wrap_la-look_vector_wrap.lo: @swigsrc@/look_vector_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-look_vector_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-look_vector_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-look_vector_wrap.lo `test -f '@swigsrc@/look_vector_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/look_vector_wrap.cc
@@ -5219,6 +5237,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/raster_image.cc' object='@srcinterface@/libgeocal_la-raster_image.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-raster_image.lo `test -f '@srcinterface@/raster_image.cc' || echo '$(srcdir)/'`@srcinterface@/raster_image.cc
+
+@srcinterface@/libgeocal_la-with_parameter.lo: @srcinterface@/with_parameter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-with_parameter.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-with_parameter.Tpo -c -o @srcinterface@/libgeocal_la-with_parameter.lo `test -f '@srcinterface@/with_parameter.cc' || echo '$(srcdir)/'`@srcinterface@/with_parameter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/libgeocal_la-with_parameter.Tpo @srcinterface@/$(DEPDIR)/libgeocal_la-with_parameter.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/with_parameter.cc' object='@srcinterface@/libgeocal_la-with_parameter.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-with_parameter.lo `test -f '@srcinterface@/with_parameter.cc' || echo '$(srcdir)/'`@srcinterface@/with_parameter.cc
 
 @srcinterface@/libgeocal_la-sub_raster_image.lo: @srcinterface@/sub_raster_image.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-sub_raster_image.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Tpo -c -o @srcinterface@/libgeocal_la-sub_raster_image.lo `test -f '@srcinterface@/sub_raster_image.cc' || echo '$(srcdir)/'`@srcinterface@/sub_raster_image.cc

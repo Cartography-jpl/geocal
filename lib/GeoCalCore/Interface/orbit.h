@@ -28,11 +28,27 @@ public:
   ci_look_vector(const ScLookVector& Sl) const = 0;
 
 //-----------------------------------------------------------------------
+/// Convert from ScLookVector to CartesianInertialLookVector.
+//-----------------------------------------------------------------------
+
+  virtual CartesianInertialLookVectorWithDerivative 
+  ci_look_vector(const ScLookVectorWithDerivative& Sl) 
+    const = 0;
+
+//-----------------------------------------------------------------------
 /// Convert from ScLookVector to CartesianFixedLookVector.
 //-----------------------------------------------------------------------
 
   virtual CartesianFixedLookVector 
   cf_look_vector(const ScLookVector& Sl) const = 0;
+
+//-----------------------------------------------------------------------
+/// Convert from ScLookVector to CartesianFixedLookVector.
+//-----------------------------------------------------------------------
+
+  virtual CartesianFixedLookVectorWithDerivative
+  cf_look_vector(const ScLookVectorWithDerivative& Sl) 
+    const = 0;
 
   FrameCoordinate frame_coordinate(const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const;
@@ -66,11 +82,26 @@ public:
   sc_look_vector(const CartesianInertialLookVector& Ci) const = 0;
 
 //-----------------------------------------------------------------------
+/// Convert from CartesianInertialLookVector to ScLookVector.
+//-----------------------------------------------------------------------
+
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const = 0;
+
+//-----------------------------------------------------------------------
 /// Convert from CartesianFixedLookVector to ScLookVector.
 //-----------------------------------------------------------------------
 
   virtual ScLookVector 
   sc_look_vector(const CartesianFixedLookVector& Cf) const = 0;
+
+
+//-----------------------------------------------------------------------
+/// Convert from CartesianFixedLookVector to ScLookVector.
+//-----------------------------------------------------------------------
+
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const = 0;
 
 //-----------------------------------------------------------------------
 /// Return position as a pointer.
@@ -83,8 +114,22 @@ public:
 /// Return position as a pointer.
 //-----------------------------------------------------------------------
 
+  virtual boost::array<AutoDerivative<double>, 3>
+  position_ci_with_derivative() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return position as a pointer.
+//-----------------------------------------------------------------------
+
   virtual boost::shared_ptr<CartesianFixed> 
   position_cf() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return position as a pointer.
+//-----------------------------------------------------------------------
+
+  virtual boost::array<AutoDerivative<double>, 3>
+  position_cf_with_derivative() const = 0;
 
 //-----------------------------------------------------------------------
 /// Return velocity. This is in meters per second, in same
@@ -92,6 +137,14 @@ public:
 //-----------------------------------------------------------------------
 
   virtual boost::array<double, 3> velocity_ci() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return velocity. This is in meters per second, in same
+/// CartesianInertial coordinate system as position (e.g., ECI).
+//-----------------------------------------------------------------------
+
+  virtual boost::array<AutoDerivative<double>, 3> 
+  velocity_ci_with_derivative() const = 0;
 
 //-----------------------------------------------------------------------
 /// Return Time of OrbitData.
@@ -138,12 +191,22 @@ public:
 
   virtual CartesianInertialLookVector 
   ci_look_vector(const ScLookVector& Sl) const;
+  virtual CartesianInertialLookVectorWithDerivative 
+  ci_look_vector(const ScLookVectorWithDerivative& Sl) 
+    const;
   virtual CartesianFixedLookVector 
   cf_look_vector(const ScLookVector& Sl) const;
+  virtual CartesianFixedLookVectorWithDerivative
+  cf_look_vector(const ScLookVectorWithDerivative& Sl) 
+    const;
   virtual ScLookVector 
   sc_look_vector(const CartesianInertialLookVector& Ci) const;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const;
   virtual ScLookVector 
   sc_look_vector(const CartesianFixedLookVector& Cf) const;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
 
 //-----------------------------------------------------------------------
 /// Return position as a ptr.
@@ -156,14 +219,34 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Return position as a pointer.
+//-----------------------------------------------------------------------
+
+  virtual boost::array<AutoDerivative<double>, 3>
+  position_ci_with_derivative() const
+  {   throw Exception("Not implemented yet"); }
+
+//-----------------------------------------------------------------------
 /// Return position as a ptr.
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<CartesianFixed> position_cf() const
   { return pos; }
 
+//-----------------------------------------------------------------------
+/// Return position as a ptr.
+//-----------------------------------------------------------------------
+
+  virtual boost::array<AutoDerivative<double>, 3>
+  position_cf_with_derivative() const
+  {   throw Exception("Not implemented yet"); }
+
   virtual boost::array<double, 3> velocity_ci() const;
+  virtual boost::array<AutoDerivative<double>, 3> 
+  velocity_ci_with_derivative() const;
   boost::array<double, 3> velocity_cf() const;
+  virtual boost::array<AutoDerivative<double>, 3> 
+  velocity_cf_with_derivative() const;
 
 //-----------------------------------------------------------------------
 /// Return Time of OrbitData.

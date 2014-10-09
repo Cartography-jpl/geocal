@@ -440,6 +440,16 @@ QuaternionOrbitData::ci_look_vector(const ScLookVector& Sl) const
 }
 
 //-----------------------------------------------------------------------
+/// Convert to CartesianInertialLookVector.
+//-----------------------------------------------------------------------
+
+CartesianInertialLookVectorWithDerivative 
+QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative& Sl) const
+{
+  throw Exception("Not implemented yet");
+}
+
+//-----------------------------------------------------------------------
 /// Convert to CartesianFixedLookVector
 //-----------------------------------------------------------------------
 
@@ -453,6 +463,16 @@ QuaternionOrbitData::cf_look_vector(const ScLookVector& Sl) const
     conj(sc_to_cf_) - k * vel_cf;
   res.look_quaternion(cf);
   return res;
+}
+
+//-----------------------------------------------------------------------
+/// Convert to CartesianFixedLookVector
+//-----------------------------------------------------------------------
+
+CartesianFixedLookVectorWithDerivative
+QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative& Sl) const
+{
+  throw Exception("Not implemented yet");
 }
 
 //-----------------------------------------------------------------------
@@ -477,6 +497,17 @@ const
 /// Convert to ScLookVector.
 //-----------------------------------------------------------------------
 
+ScLookVectorWithDerivative 
+QuaternionOrbitData::sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) 
+const
+{
+  throw Exception("Not implemented yet");
+}
+
+//-----------------------------------------------------------------------
+/// Convert to ScLookVector.
+//-----------------------------------------------------------------------
+
 ScLookVector 
 QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVector& Cf) 
 const
@@ -488,6 +519,17 @@ const
     conj(sc_to_cf_) * (Cf.look_quaternion() + k * vel_cf) * sc_to_cf_;
   res.look_quaternion(sc);
   return res;
+}
+
+//-----------------------------------------------------------------------
+/// Convert to ScLookVector.
+//-----------------------------------------------------------------------
+
+ScLookVectorWithDerivative 
+QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) 
+const
+{
+  throw Exception("Not implemented yet");
 }
 
 //-----------------------------------------------------------------------
@@ -503,6 +545,17 @@ boost::array<double, 3> QuaternionOrbitData::velocity_ci() const
 				  vel_ci.R_component_4()}};
   return res;
 }
+
+//-----------------------------------------------------------------------
+/// Return velocity.
+//-----------------------------------------------------------------------
+
+boost::array<AutoDerivative<double>, 3> 
+QuaternionOrbitData::velocity_ci_with_derivative() const
+{
+  throw Exception("Not implemented yet");
+}
+
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -637,6 +690,15 @@ boost::array<double, 3> QuaternionOrbitData::velocity_cf() const
 				  vel_cf.R_component_3(),
 				  vel_cf.R_component_4()}};
   return res;
+}
+
+//-----------------------------------------------------------------------
+/// Velocity in CartisianFixed coordinates.
+//-----------------------------------------------------------------------
+
+boost::array<AutoDerivative<double>, 3> QuaternionOrbitData::velocity_cf_with_derivative() const
+{
+  throw Exception("Not implemented yet");
 }
 
 

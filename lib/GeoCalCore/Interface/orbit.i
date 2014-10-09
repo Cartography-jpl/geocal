@@ -11,6 +11,8 @@
 %import "ground_coordinate.i"
 %import "look_vector.i"
 %import "dem.i"
+%import "auto_derivative.i"
+%import "array_ad.i"
 %geocal_shared_ptr(GeoCal::OrbitData);
 %geocal_shared_ptr(GeoCal::QuaternionOrbitData);
 %geocal_shared_ptr(GeoCal::Orbit);
@@ -24,12 +26,22 @@ public:
 				     int Band) const;
   virtual CartesianInertialLookVector 
   ci_look_vector(const ScLookVector& Sl) const = 0;
+  virtual CartesianInertialLookVectorWithDerivative 
+  ci_look_vector(const ScLookVectorWithDerivative& Sl) 
+    const = 0;
   virtual CartesianFixedLookVector 
   cf_look_vector(const ScLookVector& Sl) const = 0;
+  virtual CartesianFixedLookVectorWithDerivative
+  cf_look_vector(const ScLookVectorWithDerivative& Sl) 
+    const = 0;
   virtual ScLookVector 
   sc_look_vector(const CartesianInertialLookVector& Ci) const = 0;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const = 0;
   virtual ScLookVector 
   sc_look_vector(const CartesianFixedLookVector& Cf) const = 0;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const = 0;
   FrameCoordinate frame_coordinate(const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const;
   FrameCoordinateWithDerivative 
@@ -60,10 +72,45 @@ public:
       return res;
     }
   }
+  %extend {
+    GeoCal::ArrayAd<double, 1> _velocity_ci_with_derivative() const {
+      blitz::Array<GeoCal::AutoDerivative<double>, 1> res(3);
+      boost::array<GeoCal::AutoDerivative<double>, 3> v = $self->velocity_ci_with_derivative();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return GeoCal::ArrayAd<double, 1>(res);
+    }
+    GeoCal::ArrayAd<double, 1> _position_ci_with_derivative() const {
+      blitz::Array<GeoCal::AutoDerivative<double>, 1> res(3);
+      boost::array<GeoCal::AutoDerivative<double>, 3> v = $self->position_ci_with_derivative();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return GeoCal::ArrayAd<double, 1>(res);
+    }
+    GeoCal::ArrayAd<double, 1> _position_cf_with_derivative() const {
+      blitz::Array<GeoCal::AutoDerivative<double>, 1> res(3);
+      boost::array<GeoCal::AutoDerivative<double>, 3> v = $self->position_cf_with_derivative();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return GeoCal::ArrayAd<double, 1>(res);
+    }
+  }
   %pythoncode {
 @property
 def velocity_ci(self):
     return self._velocity_ci()
+
+@property
+def velocity_ci_with_derivative(self):
+    return self._velocity_ci_with_derivative()
+
+@property
+def position_ci_with_derivative(self):
+    return self._position_ci_with_derivative()
+
+@property
+def position_cf_with_derivative(self):
+    return self._position_cf_with_derivative()
   }
   %python_attribute(time, virtual Time)
   std::string print_to_string() const;
@@ -80,12 +127,20 @@ public:
 		      const boost::math::quaternion<double>& sc_to_ci_q);
   virtual CartesianInertialLookVector 
   ci_look_vector(const ScLookVector& Sl) const;
+  virtual CartesianInertialLookVectorWithDerivative 
+  ci_look_vector(const ScLookVectorWithDerivative& Sl) const;
   virtual CartesianFixedLookVector 
   cf_look_vector(const ScLookVector& Sl) const;
+  virtual CartesianFixedLookVectorWithDerivative 
+  cf_look_vector(const ScLookVectorWithDerivative& Sl) const;
   virtual ScLookVector 
   sc_look_vector(const CartesianInertialLookVector& Ci) const;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const;
   virtual ScLookVector 
   sc_look_vector(const CartesianFixedLookVector& Cf) const;
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
   %python_attribute(sc_to_ci, boost::math::quaternion<double>)
   %python_attribute_with_set(sc_to_cf, boost::math::quaternion<double>)
   %python_attribute(from_cf, bool)
@@ -98,10 +153,23 @@ public:
       return res;
     }
   }
+  %extend {
+    GeoCal::ArrayAd<double, 1> _velocity_cf_with_derivative() const {
+      blitz::Array<GeoCal::AutoDerivative<double>, 1> res(3);
+      boost::array<GeoCal::AutoDerivative<double>, 3> v = $self->velocity_cf_with_derivative();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return GeoCal::ArrayAd<double, 1>(res);
+    }
+  }
   %pythoncode {
 @property
 def velocity_cf(self):
     return self._velocity_cf()
+
+@property
+def velocity_cf_with_derivative(self):
+    return self._velocity_cf_with_derivative()
   }
 %pythoncode {
 @classmethod

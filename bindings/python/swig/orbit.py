@@ -186,7 +186,7 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
 
     def sc_look_vector(self, *args):
         """
-        virtual ScLookVector GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVector &Cf) const =0
+        virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const =0
         Convert from CartesianFixedLookVector to ScLookVector. 
         """
         return _orbit.OrbitData_sc_look_vector(self, *args)
@@ -268,6 +268,18 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     @property
     def velocity_ci(self):
         return self._velocity_ci()
+
+    @property
+    def velocity_ci_with_derivative(self):
+        return self._velocity_ci_with_derivative()
+
+    @property
+    def position_ci_with_derivative(self):
+        return self._position_ci_with_derivative()
+
+    @property
+    def position_cf_with_derivative(self):
+        return self._position_cf_with_derivative()
       
     def _v_time(self):
         """
@@ -293,6 +305,9 @@ OrbitData._v_position_cf = new_instancemethod(_orbit.OrbitData__v_position_cf,No
 OrbitData.footprint = new_instancemethod(_orbit.OrbitData_footprint,None,OrbitData)
 OrbitData.surface_intersect = new_instancemethod(_orbit.OrbitData_surface_intersect,None,OrbitData)
 OrbitData._velocity_ci = new_instancemethod(_orbit.OrbitData__velocity_ci,None,OrbitData)
+OrbitData._velocity_ci_with_derivative = new_instancemethod(_orbit.OrbitData__velocity_ci_with_derivative,None,OrbitData)
+OrbitData._position_ci_with_derivative = new_instancemethod(_orbit.OrbitData__position_ci_with_derivative,None,OrbitData)
+OrbitData._position_cf_with_derivative = new_instancemethod(_orbit.OrbitData__position_cf_with_derivative,None,OrbitData)
 OrbitData._v_time = new_instancemethod(_orbit.OrbitData__v_time,None,OrbitData)
 OrbitData.__str__ = new_instancemethod(_orbit.OrbitData___str__,None,OrbitData)
 OrbitData_swigregister = _orbit.OrbitData_swigregister
@@ -337,9 +352,23 @@ class QuaternionOrbitData(OrbitData):
         coordinates). 
         """
         _orbit.QuaternionOrbitData_swiginit(self,_orbit.new_QuaternionOrbitData(*args))
+    def ci_look_vector(self, *args):
+        """
+        CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVector &Sl) const
+        Convert to CartesianInertialLookVector. 
+        """
+        return _orbit.QuaternionOrbitData_ci_look_vector(self, *args)
+
+    def cf_look_vector(self, *args):
+        """
+        CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVector &Sl) const
+        Convert to CartesianFixedLookVector. 
+        """
+        return _orbit.QuaternionOrbitData_cf_look_vector(self, *args)
+
     def sc_look_vector(self, *args):
         """
-        ScLookVector QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVector &Cf) const
+        ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const
         Convert to ScLookVector. 
         """
         return _orbit.QuaternionOrbitData_sc_look_vector(self, *args)
@@ -389,6 +418,10 @@ class QuaternionOrbitData(OrbitData):
     @property
     def velocity_cf(self):
         return self._velocity_cf()
+
+    @property
+    def velocity_cf_with_derivative(self):
+        return self._velocity_cf_with_derivative()
       
     @classmethod
     def pickle_format_version(cls):
@@ -404,11 +437,14 @@ class QuaternionOrbitData(OrbitData):
 
 
     __swig_destroy__ = _orbit.delete_QuaternionOrbitData
+QuaternionOrbitData.ci_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_ci_look_vector,None,QuaternionOrbitData)
+QuaternionOrbitData.cf_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_cf_look_vector,None,QuaternionOrbitData)
 QuaternionOrbitData.sc_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_sc_look_vector,None,QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_ci = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_ci,None,QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_cf = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_cf,None,QuaternionOrbitData)
 QuaternionOrbitData._v_from_cf = new_instancemethod(_orbit.QuaternionOrbitData__v_from_cf,None,QuaternionOrbitData)
 QuaternionOrbitData._velocity_cf = new_instancemethod(_orbit.QuaternionOrbitData__velocity_cf,None,QuaternionOrbitData)
+QuaternionOrbitData._velocity_cf_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__velocity_cf_with_derivative,None,QuaternionOrbitData)
 QuaternionOrbitData_swigregister = _orbit.QuaternionOrbitData_swigregister
 QuaternionOrbitData_swigregister(QuaternionOrbitData)
 

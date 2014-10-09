@@ -17424,8 +17424,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Orbit___str__", (PyCFunction)_wrap_Orbit___str__, METH_O, NULL},
 	 { (char *)"Orbit_interpolate", _wrap_Orbit_interpolate, METH_VARARGS, (char *)"\n"
-		"boost::math::quaternion<double> interpolate(const boost::math::quaternion< double > &Q1, const\n"
-		"boost::math::quaternion< double > &Q2, double toffset, double tspace)\n"
+		"boost::math::quaternion<T> interpolate(const boost::math::quaternion< T > &Q1, const\n"
+		"boost::math::quaternion< T > &Q2, const T &toffset, double tspace)\n"
 		"This is a utility function for use by derived classes.\n"
 		"\n"
 		"A common way of getting orbit data is to have discrete measurements of\n"

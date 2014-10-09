@@ -337,6 +337,12 @@ class QuaternionOrbitData(OrbitData):
     CartesianInertial. If you stick to working with CartesianFixed only,
     you can avoid the need of using one of these toolkits.
 
+    Note that we allow most pieces of this to be AutoDerivative, useful
+    for propagating jacobians. We do not support time being a
+    AutoDerivative, so supporting things like time offset isn't currently
+    in here. We probably could do this, we'd just need to think through
+    how to support this.
+
     C++ includes: orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -591,8 +597,8 @@ class Orbit(geocal_swig.generic_object.GenericObject):
 
     def interpolate(self, *args):
         """
-        boost::math::quaternion<double> interpolate(const boost::math::quaternion< double > &Q1, const
-        boost::math::quaternion< double > &Q2, double toffset, double tspace)
+        boost::math::quaternion<T> interpolate(const boost::math::quaternion< T > &Q1, const
+        boost::math::quaternion< T > &Q2, const T &toffset, double tspace)
         This is a utility function for use by derived classes.
 
         A common way of getting orbit data is to have discrete measurements of

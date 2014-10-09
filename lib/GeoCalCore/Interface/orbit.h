@@ -177,6 +177,12 @@ public:
   for the CartesianFixed coordinates used by this class to 
   CartesianInertial. If you stick to working with CartesianFixed only,
   you can avoid the need of using one of these toolkits.
+
+  Note that we allow most pieces of this to be AutoDerivative, useful
+  for propagating jacobians.   We do *not* support time being a
+  AutoDerivative, so supporting things like time offset isn't
+  currently in here. We probably could do this, we'd just need to
+  think through how to support this.
 *******************************************************************/
 
 class QuaternionOrbitData : public OrbitData {
@@ -304,7 +310,14 @@ public:
 //-----------------------------------------------------------------------
 
   void sc_to_cf(const boost::math::quaternion<double>& Sc_to_cf) 
-  { sc_to_cf_ = Sc_to_cf; }
+  { sc_to_cf_ = Sc_to_cf; sc_to_cf_with_der = sc_to_cf_; }
+
+//-----------------------------------------------------------------------
+/// Return the quaternion used to go from spacecraft to cartesian fixed.
+//-----------------------------------------------------------------------
+
+  boost::math::quaternion<AutoDerivative<double> > sc_to_cf_with_derivative() 
+    const { return sc_to_cf_with_der; }
 
 //-----------------------------------------------------------------------
 /// Was this created form the cartesian fixed version of the
@@ -569,10 +582,22 @@ protected:
 		   double toffset, double tspace,
 		   boost::array<double, 3>& Pres,
 		   boost::array<double, 3>& Vres) const;
+  void interpolate(const boost::array<AutoDerivative<double>, 3>& P1,
+		   const boost::array<AutoDerivative<double>, 3>& V1,
+		   const boost::array<AutoDerivative<double>, 3>& P2,
+		   const boost::array<AutoDerivative<double>, 3>& V2,
+		   const AutoDerivative<double>& toffset, 
+		   double tspace,
+		   boost::array<AutoDerivative<double>, 3>& Pres,
+		   boost::array<AutoDerivative<double>, 3>& Vres) const;
   boost::math::quaternion<double> interpolate(
               const boost::math::quaternion<double>& Q1, 
               const boost::math::quaternion<double>& Q2,
 	      double toffset, double tspace) const;
+  boost::math::quaternion<AutoDerivative<double> > interpolate(
+              const boost::math::quaternion<AutoDerivative<double> >& Q1, 
+              const boost::math::quaternion<AutoDerivative<double> >& Q2,
+	      const AutoDerivative<double>& toffset, double tspace) const;
   Time min_tm;			///< Minimum time that we have
 				///OrbitData for.
   Time max_tm;			///< Maximum time that we have

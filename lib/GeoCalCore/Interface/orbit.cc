@@ -699,22 +699,22 @@ void QuaternionOrbitData::print(std::ostream& Os) const
 /// t1. This function then returns Pres and Vres.
 //-----------------------------------------------------------------------
 
-inline void interpolate(const boost::array<double, 3>& P1,
-		   const boost::array<double, 3>& V1,
-		   const boost::array<double, 3>& P2,
-		   const boost::array<double, 3>& V2,
-		   double toffset, double tspace,
-		   boost::array<double, 3>& Pres,
-		   boost::array<double, 3>& Vres)
+template<class T> inline void interpolate(const boost::array<T, 3>& P1,
+		   const boost::array<T, 3>& V1,
+		   const boost::array<T, 3>& P2,
+		   const boost::array<T, 3>& V2,
+		   const T& toffset, double tspace,
+		   boost::array<T, 3>& Pres,
+		   boost::array<T, 3>& Vres)
 {
-  const boost::array<double, 3>& c0 = P1;
-  boost::array<double, 3> c1, c2, c3;
+  const boost::array<T, 3>& c0 = P1;
+  boost::array<T, 3> c1, c2, c3;
   for(int i = 0; i < 3; ++i) {
     c1[i] = V1[i] * tspace;
     c2[i] = (P2[i] - P1[i]) * 3 - (V2[i] + V1[i] * 2) * tspace;
     c3[i] = (P2[i] - P1[i]) * (-2) + (V2[i] + V1[i]) * tspace;
   }
-  double t = toffset / tspace;
+  T t = toffset / tspace;
   for(int i = 0; i < 3; ++i) {
     Pres[i] = c0[i] + (c1[i] + (c2[i] + c3[i] * t) * t) * t;
     Vres[i] = (c1[i] + (c2[i] * 2 + c3[i] * (3 * t)) * t) / tspace;
@@ -732,23 +732,23 @@ inline void interpolate(const boost::array<double, 3>& P1,
 /// a linear interpolation of that angle for the given time.
 //-----------------------------------------------------------------------
 
-inline boost::math::quaternion<double> interpolate(
-              const boost::math::quaternion<double>& Q1, 
-              const boost::math::quaternion<double>& Q2,
-	      double toffset, double tspace)
+template<class T> inline boost::math::quaternion<T> interpolate(
+              const boost::math::quaternion<T>& Q1, 
+              const boost::math::quaternion<T>& Q2,
+	      const T& toffset, double tspace)
 {
-  boost::math::quaternion<double> delta_quat = Q2 * conj(Q1);
-  double t = delta_quat.R_component_1();
+  boost::math::quaternion<T> delta_quat = Q2 * conj(Q1);
+  T t = delta_quat.R_component_1();
   t = (t > 1 ? 1 : (t < -1 ? -1 : t)); // Handle t being slightly
   // out of range due to round off.
-  double delta_ang = 2.0 * acos(t);
+  T delta_ang = 2.0 * std::acos(t);
   if(delta_ang < 1e-8)	// Handle degenerate case of Q1 and Q2
     // almost the same.
     return Q1;
-  double d_ang = delta_ang * toffset / tspace;
-  double sratio = sin(d_ang / 2.0) / sin(delta_ang / 2.0);
-  boost::math::quaternion<double> 
-    d_quat(cos(d_ang / 2.0),
+  T d_ang = delta_ang * toffset / tspace;
+  T sratio = std::sin(d_ang / 2.0) / std::sin(delta_ang / 2.0);
+  boost::math::quaternion<T> 
+    d_quat(std::cos(d_ang / 2.0),
 	   delta_quat.R_component_2() * sratio,
 	   delta_quat.R_component_3() * sratio,
 	   delta_quat.R_component_4() * sratio);
@@ -777,6 +777,17 @@ void Orbit::interpolate(const boost::array<double, 3>& P1,
   ::interpolate(P1, V1, P2, V2, toffset, tspace, Pres, Vres);
 }
 
+void Orbit::interpolate(const boost::array<AutoDerivative<double>, 3>& P1,
+		   const boost::array<AutoDerivative<double>, 3>& V1,
+		   const boost::array<AutoDerivative<double>, 3>& P2,
+		   const boost::array<AutoDerivative<double>, 3>& V2,
+		   const AutoDerivative<double>& toffset, double tspace,
+		   boost::array<AutoDerivative<double>, 3>& Pres,
+		   boost::array<AutoDerivative<double>, 3>& Vres) const
+{
+  ::interpolate(P1, V1, P2, V2, toffset, tspace, Pres, Vres);
+}
+
 //-----------------------------------------------------------------------
 /// This is a utility function for use by derived classes. A common
 /// way of getting orbit data is to have discrete measurements of the
@@ -792,6 +803,14 @@ boost::math::quaternion<double> Orbit::interpolate(
               const boost::math::quaternion<double>& Q1, 
               const boost::math::quaternion<double>& Q2,
 	      double toffset, double tspace) const
+{
+  return ::interpolate(Q1, Q2, toffset, tspace);
+}
+
+boost::math::quaternion<AutoDerivative<double> > Orbit::interpolate(
+              const boost::math::quaternion<AutoDerivative<double> >& Q1, 
+              const boost::math::quaternion<AutoDerivative<double> >& Q2,
+	      const AutoDerivative<double>& toffset, double tspace) const
 {
   return ::interpolate(Q1, Q2, toffset, tspace);
 }
@@ -834,18 +853,31 @@ boost::shared_ptr<QuaternionOrbitData>
   if(tm < t1.time() || tm > t2.time())
     throw Exception("tm needs to be between t1 and t2");
   double tspace = t2.time() - t1.time();
-  double toffset = tm - t1.time();
-  boost::math::quaternion<double> sc_to_cf_ = 
-    ::interpolate(t1.sc_to_cf(), t2.sc_to_cf(), toffset, tspace);
-  boost::array<double, 3> vel1, vel2, vel_cf, pos_cf;
-  vel1[0] = t1.vel_cf.R_component_2();
-  vel1[1] = t1.vel_cf.R_component_3();
-  vel1[2] = t1.vel_cf.R_component_4();
-  vel2[0] = t2.vel_cf.R_component_2();
-  vel2[1] = t2.vel_cf.R_component_3();
-  vel2[2] = t2.vel_cf.R_component_4();
-  ::interpolate(t1.pos->position, vel1, t2.pos->position, vel2, toffset, tspace,
+  AutoDerivative<double> toffset = tm - t1.time();
+  boost::math::quaternion<AutoDerivative<double> > sc_to_cf_ = 
+    ::interpolate(t1.sc_to_cf_with_derivative(), 
+		  t2.sc_to_cf_with_derivative(), toffset, tspace);
+  boost::array<AutoDerivative<double>, 3> pos1, pos2, vel1, vel2, 
+    vel_cf, pos_cf;
+  pos1[0] = t1.pos_with_der.R_component_2();
+  pos1[1] = t1.pos_with_der.R_component_3();
+  pos1[2] = t1.pos_with_der.R_component_4();
+  pos2[0] = t2.pos_with_der.R_component_2();
+  pos2[1] = t2.pos_with_der.R_component_3();
+  pos2[2] = t2.pos_with_der.R_component_4();
+  vel1[0] = t1.vel_cf_with_der.R_component_2();
+  vel1[1] = t1.vel_cf_with_der.R_component_3();
+  vel1[2] = t1.vel_cf_with_der.R_component_4();
+  vel2[0] = t2.vel_cf_with_der.R_component_2();
+  vel2[1] = t2.vel_cf_with_der.R_component_3();
+  vel2[2] = t2.vel_cf_with_der.R_component_4();
+  ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace,
 		pos_cf, vel_cf);
-  return boost::shared_ptr<QuaternionOrbitData>(new 
-     QuaternionOrbitData(tm, t1.pos->create(pos_cf), vel_cf, sc_to_cf_));
+  boost::array<double, 3> p;
+  p[0] = pos_cf[0].value();
+  p[1] = pos_cf[1].value();
+  p[2] = pos_cf[2].value();
+  return boost::shared_ptr<QuaternionOrbitData>
+    (new QuaternionOrbitData(tm, t1.pos->create(p), pos_cf, 
+			     vel_cf, sc_to_cf_));
 }

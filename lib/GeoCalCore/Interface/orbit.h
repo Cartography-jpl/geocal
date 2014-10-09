@@ -5,6 +5,7 @@
 #include "ground_coordinate.h"
 #include "camera.h"
 #include "dem.h"
+#include "geocal_autoderivative_quaternion.h"
 #include <boost/math/quaternion.hpp>
 #include <blitz/array.h>
 #include <vector>
@@ -183,10 +184,24 @@ public:
   QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<double, 3>& vel_fixed,
 		      const boost::math::quaternion<double>& sc_to_cf_q);
+  QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+		      const boost::array<AutoDerivative<double>, 3>&
+		      pos_cf_with_der,
+		      const boost::array<AutoDerivative<double>, 3>& vel_fixed,
+		      const boost::math::quaternion<AutoDerivative<double> >& 
+		      sc_to_cf_q);
   QuaternionOrbitData(Time Tm, 
 		      const boost::shared_ptr<CartesianInertial>& pos_ci,
 		      const boost::array<double, 3>& vel_inertial,
 		      const boost::math::quaternion<double>& sc_to_ci_q);
+  QuaternionOrbitData(Time Tm, 
+		      const boost::shared_ptr<CartesianInertial>& pos_ci,
+		      const boost::array<AutoDerivative<double>, 3>&
+		      pos_ci_with_der,
+		      const boost::array<AutoDerivative<double>, 3>& 
+		      vel_inertial,
+		      const boost::math::quaternion<AutoDerivative<double> >& 
+		      sc_to_ci_q);
   virtual ~QuaternionOrbitData() {}
 
   virtual CartesianInertialLookVector 
@@ -224,7 +239,14 @@ public:
 
   virtual boost::array<AutoDerivative<double>, 3>
   position_ci_with_derivative() const
-  {   throw Exception("Not implemented yet"); }
+  {    
+    fill_in_ci_to_cf();
+    boost::array<AutoDerivative<double>, 3> res = 
+      {{pos_ci_with_der.R_component_2(), 
+	pos_ci_with_der.R_component_3(),
+	pos_ci_with_der.R_component_4()}};
+    return res;
+  }
 
 //-----------------------------------------------------------------------
 /// Return position as a ptr.
@@ -239,7 +261,13 @@ public:
 
   virtual boost::array<AutoDerivative<double>, 3>
   position_cf_with_derivative() const
-  {   throw Exception("Not implemented yet"); }
+  { 
+    boost::array<AutoDerivative<double>, 3> res = 
+      {{pos_with_der.R_component_2(), 
+	pos_with_der.R_component_3(),
+	pos_with_der.R_component_4()}};
+    return res;
+  }
 
   virtual boost::array<double, 3> velocity_ci() const;
   virtual boost::array<AutoDerivative<double>, 3> 
@@ -296,20 +324,33 @@ protected:
   void initialize(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
     const boost::array<double, 3>& vel_fixed, const 
     boost::math::quaternion<double>& sc_to_cf_q);
+  void initialize(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+    const boost::array<AutoDerivative<double>, 3>& pos_cf_with_der,
+    const boost::array<AutoDerivative<double>, 3>& vel_fixed, const 
+    boost::math::quaternion<AutoDerivative<double> >& sc_to_cf_q);
   void initialize(Time Tm, const boost::shared_ptr<CartesianInertial>& pos_ci,
     const boost::array<double, 3>& vel_inertial, const 
     boost::math::quaternion<double>& sc_to_ci_q);
+  void initialize(Time Tm, const boost::shared_ptr<CartesianInertial>& pos_ci,
+    const boost::array<AutoDerivative<double>, 3>& pos_ci_with_der,
+    const boost::array<AutoDerivative<double>, 3>& vel_inertial, const 
+    boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q);
 
 
 private:
   Time tm;			///< Time of OrbitData.
   boost::shared_ptr<CartesianFixed> pos;
 				///< Position
+  boost::math::quaternion<AutoDerivative<double> > pos_with_der;
   boost::math::quaternion<double> vel_cf; ///< Velocity, in m/s
+  boost::math::quaternion<AutoDerivative<double> > 
+  vel_cf_with_der;			
   boost::math::quaternion<double> sc_to_cf_;
 				///< Quaternion to go from
 				///ScLookVector to
 				///CartesianFixed.
+  boost::math::quaternion<AutoDerivative<double> > sc_to_cf_with_der;
+
   bool from_cf_;
 
 //-----------------------------------------------------------------------
@@ -328,12 +369,14 @@ private:
     if(!have_ci_to_cf) {
       ci_to_cf_ = pos->ci_to_cf_quat(tm);
       pos_ci = pos->convert_to_ci(time());
+      pos_ci_with_der = conj(ci_to_cf_) * pos_with_der * ci_to_cf_;
     }
   }
   mutable bool have_ci_to_cf;
   mutable boost::math::quaternion<double> ci_to_cf_;
   mutable boost::shared_ptr<CartesianInertial> pos_ci;
 				///< Position
+  mutable boost::math::quaternion<AutoDerivative<double> > pos_ci_with_der;
 };
 
 /****************************************************************//**

@@ -121,10 +121,24 @@ public:
   QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<double, 3>& vel_fixed,
 		      const boost::math::quaternion<double>& sc_to_cf_q);
+  QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+		      const boost::array<AutoDerivative<double>, 3>&
+		      pos_cf_with_der,
+		      const boost::array<AutoDerivative<double>, 3>& vel_fixed,
+		      const boost::math::quaternion<AutoDerivative<double> >& 
+		      sc_to_cf_q);
   QuaternionOrbitData(Time Tm, 
 		      const boost::shared_ptr<CartesianInertial>& pos_ci,
 		      const boost::array<double, 3>& vel_inertial,
 		      const boost::math::quaternion<double>& sc_to_ci_q);
+  QuaternionOrbitData(Time Tm, 
+		      const boost::shared_ptr<CartesianInertial>& pos_ci,
+		      const boost::array<AutoDerivative<double>, 3>&
+		      pos_ci_with_der,
+		      const boost::array<AutoDerivative<double>, 3>& 
+		      vel_inertial,
+		      const boost::math::quaternion<AutoDerivative<double> >& 
+		      sc_to_ci_q);
   virtual CartesianInertialLookVector 
   ci_look_vector(const ScLookVector& Sl) const;
   virtual CartesianInertialLookVectorWithDerivative 
@@ -152,8 +166,6 @@ public:
 	res(i) = v[i];
       return res;
     }
-  }
-  %extend {
     GeoCal::ArrayAd<double, 1> _velocity_cf_with_derivative() const {
       blitz::Array<GeoCal::AutoDerivative<double>, 1> res(3);
       boost::array<GeoCal::AutoDerivative<double>, 3> v = $self->velocity_cf_with_derivative();

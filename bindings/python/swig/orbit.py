@@ -344,8 +344,9 @@ class QuaternionOrbitData(OrbitData):
     def __init__(self, *args): 
         """
         QuaternionOrbitData::QuaternionOrbitData(Time Tm, const boost::shared_ptr< CartesianInertial > &pos_ci, const
-        boost::array< double, 3 > &vel_inertial, const
-        boost::math::quaternion< double > &sc_to_ci_q)
+        boost::array< AutoDerivative< double >, 3 > &pos_ci_with_der, const
+        boost::array< AutoDerivative< double >, 3 > &vel_inertial, const
+        boost::math::quaternion< AutoDerivative< double > > &sc_to_ci_q)
         Construct QuaternionOrbitData.
 
         This takes data in a CartesianInertial coordinate system (e.g., Eci

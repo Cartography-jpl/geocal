@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_CASE(jac_test)
       if(fabs(jac2_calc(i,j)) > 0)
 	BOOST_CHECK_CLOSE(jac2_calc(i, j), jac2_fd(i, j), 1.0);
       else {
-	BOOST_CHECK(fabs(jac2_fd(i, j)) < 2e-2);
+	BOOST_CHECK(fabs(jac2_fd(i, j)) < 2e-1);
       }
 	
 }

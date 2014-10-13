@@ -5841,7 +5841,8 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::image_coordinate_ja
     }
   }
   {
-    c_result.reference(to_blitz_array<double, 2>(result).copy());
+    PythonObject t(to_numpy<double>(result));
+    c_result.reference(to_blitz_array<double, 2>(t).copy());
   }
   return (blitz::Array< double,2 >) c_result;
 }
@@ -5880,7 +5881,8 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::image_coordinate_ja
     }
   }
   {
-    c_result.reference(to_blitz_array<double, 2>(result).copy());
+    PythonObject t(to_numpy<double>(result));
+    c_result.reference(to_blitz_array<double, 2>(t).copy());
   }
   return (blitz::Array< double,2 >) c_result;
 }

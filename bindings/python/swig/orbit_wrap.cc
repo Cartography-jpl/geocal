@@ -5836,7 +5836,8 @@ blitz::Array< double,1 > SwigDirector_Orbit::parameter() const {
     }
   }
   {
-    c_result.reference(to_blitz_array<double, 1>(result).copy());
+    PythonObject t(to_numpy<double>(result));
+    c_result.reference(to_blitz_array<double, 1>(t).copy());
   }
   return (blitz::Array< double,1 >) c_result;
 }
@@ -5844,7 +5845,22 @@ blitz::Array< double,1 > SwigDirector_Orbit::parameter() const {
 
 void SwigDirector_Orbit::parameter(blitz::Array< double,1 > const &V) {
   swig::SwigVar_PyObject obj0;
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(&V), SWIGTYPE_p_blitz__ArrayT_double_1_t,  0 );
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&V)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&V)->stride(i) * sizeof(double);
+    }
+    PyObject* res = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double>(), 
+      stride, const_cast<double*>((&V)->data()), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(V);
+    PyArray_BASE(res) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+      SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      SWIG_POINTER_NEW | 0 );
+    obj0 = res;
+  }
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -6005,7 +6021,8 @@ blitz::Array< double,1 > SwigDirector_Orbit::parameter_subset() const {
     }
   }
   {
-    c_result.reference(to_blitz_array<double, 1>(result).copy());
+    PythonObject t(to_numpy<double>(result));
+    c_result.reference(to_blitz_array<double, 1>(t).copy());
   }
   return (blitz::Array< double,1 >) c_result;
 }
@@ -6013,7 +6030,22 @@ blitz::Array< double,1 > SwigDirector_Orbit::parameter_subset() const {
 
 void SwigDirector_Orbit::parameter_subset(blitz::Array< double,1 > const &V) {
   swig::SwigVar_PyObject obj0;
-  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(&V), SWIGTYPE_p_blitz__ArrayT_double_1_t,  0 );
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&V)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&V)->stride(i) * sizeof(double);
+    }
+    PyObject* res = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double>(), 
+      stride, const_cast<double*>((&V)->data()), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(V);
+    PyArray_BASE(res) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+      SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      SWIG_POINTER_NEW | 0 );
+    obj0 = res;
+  }
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }

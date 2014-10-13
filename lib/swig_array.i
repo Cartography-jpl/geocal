@@ -273,7 +273,26 @@ public:
 
 %typemap(directorout) blitz::Array<TYPE, DIM> (PythonObject numpy) 
 {
-  $result.reference(to_blitz_array<TYPE, DIM>($input).copy());
+  PythonObject t(to_numpy<TYPE>($input));
+  $result.reference(to_blitz_array<TYPE, DIM>(t).copy());
+}
+
+%typemap(directorin) const blitz::Array<TYPE, DIM>& 
+{
+  npy_intp dims[DIM], stride[DIM];
+  for(int i = 0; i < DIM; ++i) {
+    dims[i] = $1.extent(i);
+    // Note numpy stride is in terms of bytes, while blitz in in terms
+    // of type T.
+    stride[i] = $1.stride(i) * sizeof(TYPE);
+  }
+  PyObject* res = PyArray_New(&PyArray_Type, DIM, dims, type_to_npy<TYPE>(), 
+			      stride, const_cast<TYPE*>($1.data()), 0, 0, 0);
+  blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>($1);
+  PyArray_BASE(res) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+		     $descriptor(blitz::Array<TYPE, DIM>*), 
+	             SWIG_POINTER_NEW | 0 );
+  $input = res;
 }
 
 //--------------------------------------------------------------

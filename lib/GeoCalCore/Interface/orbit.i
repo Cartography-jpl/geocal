@@ -7,6 +7,8 @@
 #include "orbit.h"
 %}
 %base_import(generic_object)
+%base_import(observer)
+%base_import(with_parameter)
 %import "camera.i"
 %import "ground_coordinate.i"
 %import "look_vector.i"
@@ -17,6 +19,13 @@
 %geocal_shared_ptr(GeoCal::QuaternionOrbitData);
 %geocal_shared_ptr(GeoCal::Orbit);
 %geocal_shared_ptr(GeoCal::KeplerOrbit);
+
+namespace GeoCal {
+  class Orbit;
+}
+
+%geocal_shared_ptr(GeoCal::Observable<GeoCal::Orbit>);
+%geocal_shared_ptr(GeoCal::Observer<GeoCal::Orbit>);
 
 namespace GeoCal {
 class OrbitData : public GenericObject {
@@ -199,6 +208,10 @@ def __reduce__(self):
 }
 };
 
+
+%template(ObservableOrbit) GeoCal::Observable<GeoCal::Orbit>;
+%template(ObserverOrbit) GeoCal::Observer<GeoCal::Orbit>;
+
 // Allow this class to be derived from in Python.
 %feature("director") Orbit;
 
@@ -214,11 +227,14 @@ def __reduce__(self):
 // base class. But I'll keep this note here in case we are cutting
 // and pasting to make another class a director
 
-class Orbit : public GenericObject {
+class Orbit : public Observable<Orbit>, public WithParameter {
 public:
   Orbit(Time Min_time = Time::min_valid_time, 
 	Time Max_time = Time::max_valid_time);
   virtual ~Orbit();
+  virtual void add_observer(Observer<Orbit>& Obs);
+  virtual void remove_observer(Observer<Orbit>& Obs);
+    
   virtual CartesianInertialLookVector ci_look_vector(Time T, 
 					     const ScLookVector& Sl) const;
   virtual CartesianFixedLookVector cf_look_vector(Time T, 
@@ -239,6 +255,14 @@ public:
   %python_attribute(max_time, Time)
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;
   std::string print_to_string();
+  %python_attribute_with_set_virtual(parameter, blitz::Array<double, 1>);
+  %python_attribute_with_set_virtual(parameter_with_derivative, 
+			     ArrayAd<double, 1>);
+  %python_attribute(parameter_name, virtual std::vector<std::string>);
+  %python_attribute_with_set_virtual(parameter_subset, blitz::Array<double, 1>);
+  %python_attribute_with_set_virtual(parameter_with_derivative_subset, 
+			     ArrayAd<double, 1>);
+  %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
 protected:
   boost::math::quaternion<double> interpolate(
               const boost::math::quaternion<double>& Q1, 

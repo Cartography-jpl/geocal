@@ -5463,6 +5463,354 @@ struct SWIG_null_deleter {
 
 #include "with_parameter_wrap.h"
 
+SwigDirector_WithParameter::SwigDirector_WithParameter(PyObject *self): GeoCal::WithParameter(), Swig::Director(self) {
+  SWIG_DIRECTOR_RGTR((GeoCal::WithParameter *)this, this); 
+}
+
+
+
+
+SwigDirector_WithParameter::~SwigDirector_WithParameter() {
+}
+
+blitz::Array< double,1 > SwigDirector_WithParameter::parameter() const {
+  PythonObject numpy ;
+  
+  blitz::Array< double,1 > c_result;
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 0;
+  const char * const swig_method_name = "_v_parameter";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject args = PyTuple_New(0);
+  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject*) args, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  {
+    c_result.reference(to_blitz_array<double, 1>(result).copy());
+  }
+  return (blitz::Array< double,1 >) c_result;
+}
+
+
+void SwigDirector_WithParameter::parameter(blitz::Array< double,1 > const &V) {
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(&V), SWIGTYPE_p_blitz__ArrayT_double_1_t,  0 );
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 1;
+  const char * const swig_method_name = "_v_parameter";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+}
+
+
+GeoCal::ArrayAd< double,1 > SwigDirector_WithParameter::parameter_with_derivative() const {
+  void *swig_argp ;
+  int swig_res = 0 ;
+  
+  GeoCal::ArrayAd< double,1 > c_result;
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 2;
+  const char * const swig_method_name = "_v_parameter_with_derivative";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject args = PyTuple_New(0);
+  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject*) args, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter_with_derivative");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  swig_res = SWIG_ConvertPtr(result,&swig_argp,SWIGTYPE_p_GeoCal__ArrayAdT_double_1_t,  0  | 0);
+  if (!SWIG_IsOK(swig_res)) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
+  }
+  c_result = *(reinterpret_cast< GeoCal::ArrayAd< double,1 > * >(swig_argp));
+  if (SWIG_IsNewObj(swig_res)) delete reinterpret_cast< GeoCal::ArrayAd< double,1 > * >(swig_argp);
+  return (GeoCal::ArrayAd< double,1 >) c_result;
+}
+
+
+void SwigDirector_WithParameter::parameter_with_derivative(GeoCal::ArrayAd< double,1 > const &V) {
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(&V), SWIGTYPE_p_GeoCal__ArrayAdT_double_1_t,  0 );
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 3;
+  const char * const swig_method_name = "_v_parameter_with_derivative";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter_with_derivative");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+}
+
+
+std::vector< std::string,std::allocator< std::string > > SwigDirector_WithParameter::parameter_name() const {
+  std::vector< std::string,std::allocator< std::string > > c_result;
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 4;
+  const char * const swig_method_name = "_v_parameter_name";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject args = PyTuple_New(0);
+  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject*) args, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter_name");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  std::vector<std::string,std::allocator< std::string > > *swig_optr = 0;
+  int swig_ores = swig::asptr(result, &swig_optr);
+  if (!SWIG_IsOK(swig_ores) || !swig_optr) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError((swig_optr ? swig_ores : SWIG_TypeError))), "in output value of type '""std::vector< std::string,std::allocator< std::string > >""'");
+  }
+  c_result = *swig_optr;
+  if (SWIG_IsNewObj(swig_ores)) delete swig_optr;
+  return (std::vector< std::string,std::allocator< std::string > >) c_result;
+}
+
+
+blitz::Array< double,1 > SwigDirector_WithParameter::parameter_subset() const {
+  PythonObject numpy ;
+  
+  blitz::Array< double,1 > c_result;
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 5;
+  const char * const swig_method_name = "_v_parameter_subset";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject args = PyTuple_New(0);
+  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject*) args, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter_subset");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  {
+    c_result.reference(to_blitz_array<double, 1>(result).copy());
+  }
+  return (blitz::Array< double,1 >) c_result;
+}
+
+
+void SwigDirector_WithParameter::parameter_subset(blitz::Array< double,1 > const &V) {
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(&V), SWIGTYPE_p_blitz__ArrayT_double_1_t,  0 );
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 6;
+  const char * const swig_method_name = "_v_parameter_subset";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter_subset");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+}
+
+
+GeoCal::ArrayAd< double,1 > SwigDirector_WithParameter::parameter_with_derivative_subset() const {
+  void *swig_argp ;
+  int swig_res = 0 ;
+  
+  GeoCal::ArrayAd< double,1 > c_result;
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 7;
+  const char * const swig_method_name = "_v_parameter_with_derivative_subset";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject args = PyTuple_New(0);
+  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject*) args, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter_with_derivative_subset");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  swig_res = SWIG_ConvertPtr(result,&swig_argp,SWIGTYPE_p_GeoCal__ArrayAdT_double_1_t,  0  | 0);
+  if (!SWIG_IsOK(swig_res)) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
+  }
+  c_result = *(reinterpret_cast< GeoCal::ArrayAd< double,1 > * >(swig_argp));
+  if (SWIG_IsNewObj(swig_res)) delete reinterpret_cast< GeoCal::ArrayAd< double,1 > * >(swig_argp);
+  return (GeoCal::ArrayAd< double,1 >) c_result;
+}
+
+
+void SwigDirector_WithParameter::parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V) {
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(&V), SWIGTYPE_p_GeoCal__ArrayAdT_double_1_t,  0 );
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 8;
+  const char * const swig_method_name = "_v_parameter_with_derivative_subset";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter_with_derivative_subset");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+}
+
+
+std::vector< std::string,std::allocator< std::string > > SwigDirector_WithParameter::parameter_name_subset() const {
+  std::vector< std::string,std::allocator< std::string > > c_result;
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 9;
+  const char * const swig_method_name = "_v_parameter_name_subset";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject args = PyTuple_New(0);
+  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject*) args, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter_name_subset");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  std::vector<std::string,std::allocator< std::string > > *swig_optr = 0;
+  int swig_ores = swig::asptr(result, &swig_optr);
+  if (!SWIG_IsOK(swig_ores) || !swig_optr) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError((swig_optr ? swig_ores : SWIG_TypeError))), "in output value of type '""std::vector< std::string,std::allocator< std::string > >""'");
+  }
+  c_result = *swig_optr;
+  if (SWIG_IsNewObj(swig_ores)) delete swig_optr;
+  return (std::vector< std::string,std::allocator< std::string > >) c_result;
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -6243,6 +6591,8 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter__SWIG_0(PyObject *SWIGUNUS
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::WithParameter const > tempshared1 ;
   boost::shared_ptr< GeoCal::WithParameter const > *smartarg1 = 0 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   SwigValueWrapper< blitz::Array< double,1 > > result;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
@@ -6261,14 +6611,24 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter__SWIG_0(PyObject *SWIGUNUS
       arg1 = const_cast< GeoCal::WithParameter * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    try {
-      result = ((GeoCal::WithParameter const *)arg1)->parameter();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::WithParameter const *)arg1)->GeoCal::WithParameter::parameter();
+        } else {
+          result = ((GeoCal::WithParameter const *)arg1)->parameter();
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   {
     npy_intp dims[1], stride[1];
@@ -6301,6 +6661,8 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter__SWIG_1(PyObject *SWIGUNUS
   boost::shared_ptr< GeoCal::WithParameter > *smartarg1 = 0 ;
   blitz::Array< double,1 > a2 ;
   PythonObject numpy2 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
@@ -6329,14 +6691,24 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter__SWIG_1(PyObject *SWIGUNUS
       arg2 = &a2;
     }
   }
-  {
-    try {
-      (arg1)->parameter((blitz::Array< double,1 > const &)*arg2);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          (arg1)->GeoCal::WithParameter::parameter((blitz::Array< double,1 > const &)*arg2);
+        } else {
+          (arg1)->parameter((blitz::Array< double,1 > const &)*arg2);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -6374,6 +6746,8 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_with_derivative__SWIG_0(Py
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::WithParameter const > tempshared1 ;
   boost::shared_ptr< GeoCal::WithParameter const > *smartarg1 = 0 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   SwigValueWrapper< GeoCal::ArrayAd< double,1 > > result;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
@@ -6392,14 +6766,24 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_with_derivative__SWIG_0(Py
       arg1 = const_cast< GeoCal::WithParameter * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    try {
-      result = ((GeoCal::WithParameter const *)arg1)->parameter_with_derivative();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::WithParameter const *)arg1)->GeoCal::WithParameter::parameter_with_derivative();
+        } else {
+          result = ((GeoCal::WithParameter const *)arg1)->parameter_with_derivative();
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   resultobj = SWIG_NewPointerObj((new GeoCal::ArrayAd< double,1 >(static_cast< const GeoCal::ArrayAd< double,1 >& >(result))), SWIGTYPE_p_GeoCal__ArrayAdT_double_1_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
@@ -6418,6 +6802,8 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_with_derivative__SWIG_1(Py
   boost::shared_ptr< GeoCal::WithParameter > *smartarg1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
@@ -6443,14 +6829,24 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_with_derivative__SWIG_1(Py
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "WithParameter__v_parameter_with_derivative" "', argument " "2"" of type '" "GeoCal::ArrayAd< double,1 > const &""'"); 
   }
   arg2 = reinterpret_cast< GeoCal::ArrayAd< double,1 > * >(argp2);
-  {
-    try {
-      (arg1)->parameter_with_derivative((GeoCal::ArrayAd< double,1 > const &)*arg2);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          (arg1)->GeoCal::WithParameter::parameter_with_derivative((GeoCal::ArrayAd< double,1 > const &)*arg2);
+        } else {
+          (arg1)->parameter_with_derivative((GeoCal::ArrayAd< double,1 > const &)*arg2);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -6489,6 +6885,8 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_name(PyObject *SWIGUNUSEDP
   boost::shared_ptr< GeoCal::WithParameter const > tempshared1 ;
   boost::shared_ptr< GeoCal::WithParameter const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   std::vector< std::string,std::allocator< std::string > > result;
   
   if (!args) SWIG_fail;
@@ -6508,14 +6906,24 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_name(PyObject *SWIGUNUSEDP
       arg1 = const_cast< GeoCal::WithParameter * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    try {
-      result = ((GeoCal::WithParameter const *)arg1)->parameter_name();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::WithParameter const *)arg1)->GeoCal::WithParameter::parameter_name();
+        } else {
+          result = ((GeoCal::WithParameter const *)arg1)->parameter_name();
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   resultobj = swig::from(static_cast< std::vector<std::string,std::allocator< std::string > > >(result));
   return resultobj;
@@ -6531,6 +6939,8 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_subset__SWIG_0(PyObject *S
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::WithParameter const > tempshared1 ;
   boost::shared_ptr< GeoCal::WithParameter const > *smartarg1 = 0 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   SwigValueWrapper< blitz::Array< double,1 > > result;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
@@ -6549,14 +6959,24 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_subset__SWIG_0(PyObject *S
       arg1 = const_cast< GeoCal::WithParameter * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    try {
-      result = ((GeoCal::WithParameter const *)arg1)->parameter_subset();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::WithParameter const *)arg1)->GeoCal::WithParameter::parameter_subset();
+        } else {
+          result = ((GeoCal::WithParameter const *)arg1)->parameter_subset();
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   {
     npy_intp dims[1], stride[1];
@@ -6589,6 +7009,8 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_subset__SWIG_1(PyObject *S
   boost::shared_ptr< GeoCal::WithParameter > *smartarg1 = 0 ;
   blitz::Array< double,1 > a2 ;
   PythonObject numpy2 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
@@ -6617,14 +7039,24 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_subset__SWIG_1(PyObject *S
       arg2 = &a2;
     }
   }
-  {
-    try {
-      (arg1)->parameter_subset((blitz::Array< double,1 > const &)*arg2);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          (arg1)->GeoCal::WithParameter::parameter_subset((blitz::Array< double,1 > const &)*arg2);
+        } else {
+          (arg1)->parameter_subset((blitz::Array< double,1 > const &)*arg2);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -6662,6 +7094,8 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_with_derivative_subset__SW
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::WithParameter const > tempshared1 ;
   boost::shared_ptr< GeoCal::WithParameter const > *smartarg1 = 0 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   SwigValueWrapper< GeoCal::ArrayAd< double,1 > > result;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
@@ -6680,14 +7114,24 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_with_derivative_subset__SW
       arg1 = const_cast< GeoCal::WithParameter * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    try {
-      result = ((GeoCal::WithParameter const *)arg1)->parameter_with_derivative_subset();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::WithParameter const *)arg1)->GeoCal::WithParameter::parameter_with_derivative_subset();
+        } else {
+          result = ((GeoCal::WithParameter const *)arg1)->parameter_with_derivative_subset();
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   resultobj = SWIG_NewPointerObj((new GeoCal::ArrayAd< double,1 >(static_cast< const GeoCal::ArrayAd< double,1 >& >(result))), SWIGTYPE_p_GeoCal__ArrayAdT_double_1_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
@@ -6706,6 +7150,8 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_with_derivative_subset__SW
   boost::shared_ptr< GeoCal::WithParameter > *smartarg1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
@@ -6731,14 +7177,24 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_with_derivative_subset__SW
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "WithParameter__v_parameter_with_derivative_subset" "', argument " "2"" of type '" "GeoCal::ArrayAd< double,1 > const &""'"); 
   }
   arg2 = reinterpret_cast< GeoCal::ArrayAd< double,1 > * >(argp2);
-  {
-    try {
-      (arg1)->parameter_with_derivative_subset((GeoCal::ArrayAd< double,1 > const &)*arg2);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          (arg1)->GeoCal::WithParameter::parameter_with_derivative_subset((GeoCal::ArrayAd< double,1 > const &)*arg2);
+        } else {
+          (arg1)->parameter_with_derivative_subset((GeoCal::ArrayAd< double,1 > const &)*arg2);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -6777,6 +7233,8 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_name_subset(PyObject *SWIG
   boost::shared_ptr< GeoCal::WithParameter const > tempshared1 ;
   boost::shared_ptr< GeoCal::WithParameter const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   std::vector< std::string,std::allocator< std::string > > result;
   
   if (!args) SWIG_fail;
@@ -6796,14 +7254,24 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_name_subset(PyObject *SWIG
       arg1 = const_cast< GeoCal::WithParameter * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    try {
-      result = ((GeoCal::WithParameter const *)arg1)->parameter_name_subset();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::WithParameter const *)arg1)->GeoCal::WithParameter::parameter_name_subset();
+        } else {
+          result = ((GeoCal::WithParameter const *)arg1)->parameter_name_subset();
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   resultobj = swig::from(static_cast< std::vector<std::string,std::allocator< std::string > > >(result));
   return resultobj;
@@ -6945,12 +7413,22 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_WithParameter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  PyObject *arg1 = (PyObject *) 0 ;
+  PyObject *swig_obj[1] ;
   GeoCal::WithParameter *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"new_WithParameter",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  arg1 = swig_obj[0];
   {
     try {
-      result = (GeoCal::WithParameter *)new GeoCal::WithParameter();
+      if ( arg1 != Py_None ) {
+        /* subclassed */
+        result = (GeoCal::WithParameter *)new SwigDirector_WithParameter(arg1); 
+      } else {
+        result = (GeoCal::WithParameter *)new GeoCal::WithParameter(); 
+      }
+      
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7002,6 +7480,44 @@ SWIGINTERN PyObject *_wrap_delete_WithParameter(PyObject *SWIGUNUSEDPARM(self), 
       SWIG_fail; 
     }
   }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_disown_WithParameter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::WithParameter *arg1 = (GeoCal::WithParameter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::WithParameter > tempshared1 ;
+  boost::shared_ptr< GeoCal::WithParameter > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "disown_WithParameter" "', argument " "1"" of type '" "GeoCal::WithParameter *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::WithParameter > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::WithParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::WithParameter * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::WithParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::WithParameter * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    Swig::Director *director = SWIG_DIRECTOR_CAST(arg1);
+    if (director) director->swig_disown();
+  }
+  
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7071,11 +7587,12 @@ static PyMethodDef SwigMethods[] = {
 		"virtual void GeoCal::WithParameter::parameter_mask(const blitz::Array< bool, 1 > &M)\n"
 		"Set the parameter mask. \n"
 		""},
-	 { (char *)"new_WithParameter", (PyCFunction)_wrap_new_WithParameter, METH_NOARGS, NULL},
+	 { (char *)"new_WithParameter", (PyCFunction)_wrap_new_WithParameter, METH_O, NULL},
 	 { (char *)"delete_WithParameter", (PyCFunction)_wrap_delete_WithParameter, METH_O, (char *)"\n"
 		"virtual GeoCal::WithParameter::~WithParameter()\n"
 		"\n"
 		""},
+	 { (char *)"disown_WithParameter", (PyCFunction)_wrap_disown_WithParameter, METH_O, NULL},
 	 { (char *)"WithParameter_swigregister", WithParameter_swigregister, METH_VARARGS, NULL},
 	 { (char *)"WithParameter_swiginit", WithParameter_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

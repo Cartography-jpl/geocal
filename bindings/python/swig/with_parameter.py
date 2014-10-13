@@ -257,8 +257,16 @@ class WithParameter(geocal_swig.generic_object.GenericObject):
       self._v_parameter_mask(value)
 
     def __init__(self): 
-        _with_parameter.WithParameter_swiginit(self,_with_parameter.new_WithParameter())
+        if self.__class__ == WithParameter:
+            _self = None
+        else:
+            _self = self
+        _with_parameter.WithParameter_swiginit(self,_with_parameter.new_WithParameter(_self, ))
     __swig_destroy__ = _with_parameter.delete_WithParameter
+    def __disown__(self):
+        self.this.disown()
+        _with_parameter.disown_WithParameter(self)
+        return weakref_proxy(self)
 WithParameter._v_parameter = new_instancemethod(_with_parameter.WithParameter__v_parameter,None,WithParameter)
 WithParameter._v_parameter_with_derivative = new_instancemethod(_with_parameter.WithParameter__v_parameter_with_derivative,None,WithParameter)
 WithParameter._v_parameter_name = new_instancemethod(_with_parameter.WithParameter__v_parameter_name,None,WithParameter)

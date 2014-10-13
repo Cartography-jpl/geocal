@@ -20,6 +20,18 @@ class SwigDirector_Orbit : public GeoCal::Orbit, public Swig::Director {
 public:
     SwigDirector_Orbit(PyObject *self, GeoCal::Time Min_time = GeoCal::Time::min_valid_time, GeoCal::Time Max_time = GeoCal::Time::max_valid_time);
     virtual ~SwigDirector_Orbit();
+    virtual void add_observer(GeoCal::Observer< GeoCal::Orbit > &Obs);
+    virtual void remove_observer(GeoCal::Observer< GeoCal::Orbit > &Obs);
+    virtual blitz::Array< double,1 > parameter() const;
+    virtual void parameter(blitz::Array< double,1 > const &V);
+    virtual GeoCal::ArrayAd< double,1 > parameter_with_derivative() const;
+    virtual void parameter_with_derivative(GeoCal::ArrayAd< double,1 > const &V);
+    virtual std::vector< std::string,std::allocator< std::string > > parameter_name() const;
+    virtual blitz::Array< double,1 > parameter_subset() const;
+    virtual void parameter_subset(blitz::Array< double,1 > const &V);
+    virtual GeoCal::ArrayAd< double,1 > parameter_with_derivative_subset() const;
+    virtual void parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V);
+    virtual std::vector< std::string,std::allocator< std::string > > parameter_name_subset() const;
     virtual GeoCal::CartesianInertialLookVector ci_look_vector(GeoCal::Time T, GeoCal::ScLookVector const &Sl) const;
     virtual GeoCal::CartesianFixedLookVector cf_look_vector(GeoCal::Time T, GeoCal::ScLookVector const &Sl) const;
     virtual GeoCal::ScLookVector sc_look_vector(GeoCal::Time T, GeoCal::CartesianInertialLookVector const &Ci) const;
@@ -61,7 +73,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[7];
+    mutable swig::SwigVar_PyObject vtable[19];
 #endif
 
 };

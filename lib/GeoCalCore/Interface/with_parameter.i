@@ -10,15 +10,19 @@
 %import "array_ad.i"
 %geocal_shared_ptr(GeoCal::WithParameter);
 namespace GeoCal {
+// Allow this class to be derived from in Python.
+%feature("director") WithParameter;
+
 class WithParameter: public virtual GenericObject {
 public:
-  %python_attribute_with_set(parameter, blitz::Array<double, 1>);
-  %python_attribute_with_set(parameter_with_derivative, ArrayAd<double, 1>);
-  %python_attribute(parameter_name, std::vector<std::string>);
-  %python_attribute_with_set(parameter_subset, blitz::Array<double, 1>);
-  %python_attribute_with_set(parameter_with_derivative_subset, 
+  %python_attribute_with_set_virtual(parameter, blitz::Array<double, 1>);
+  %python_attribute_with_set_virtual(parameter_with_derivative, 
 			     ArrayAd<double, 1>);
-  %python_attribute(parameter_name_subset, std::vector<std::string>);
+  %python_attribute(parameter_name, virtual std::vector<std::string>);
+  %python_attribute_with_set_virtual(parameter_subset, blitz::Array<double, 1>);
+  %python_attribute_with_set_virtual(parameter_with_derivative_subset, 
+			     ArrayAd<double, 1>);
+  %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
   %python_attribute_with_set(parameter_mask, blitz::Array<bool, 1>);
 };
 }

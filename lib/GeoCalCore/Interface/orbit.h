@@ -3,6 +3,7 @@
 #include "printable.h"
 #include "look_vector.h"
 #include "ground_coordinate.h"
+#include "observer.h"
 #include "camera.h"
 #include "dem.h"
 #include "geocal_autoderivative_quaternion.h"
@@ -414,7 +415,9 @@ private:
    min_time() <= T < max_time().
 *******************************************************************/
 
-class Orbit : public Printable<Orbit> {
+class Orbit : public Printable<Orbit>, 
+	      public Observable<Orbit>, 
+	      public WithParameter {
 public:
 //-----------------------------------------------------------------------
 /// Constructor. The Orbit is valid for the given range of minimum to
@@ -424,6 +427,11 @@ public:
   Orbit(Time Min_time = Time::min_valid_time, 
 	Time Max_time = Time::max_valid_time)
     : min_tm(Min_time), max_tm(Max_time) {}
+
+  virtual void add_observer(Observer<Orbit>& Obs) 
+  { add_observer_do(Obs, *this);}
+  virtual void remove_observer(Observer<Orbit>& Obs) 
+  { remove_observer_do(Obs, *this);}
 
 //-----------------------------------------------------------------------
 /// Destructor.

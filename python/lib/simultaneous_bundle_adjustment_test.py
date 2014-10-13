@@ -48,7 +48,7 @@ sba = SimultaneousBundleAdjustment(igc_coll, tpcol, demin)
 parm0 = sba.parameter
 print igc_coll.parameter_mask
 print igc_coll.parameter_subset
-print igc_coll.parameter_subset_name
+print igc_coll.parameter_name_subset
 
 class TestClass:
     def setUp(self):

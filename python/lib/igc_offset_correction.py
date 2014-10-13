@@ -59,6 +59,7 @@ class IgcOffsetCorrection(IgcCollection):
         self.fit_principal_point_line = False
         self.fit_principal_point_sample = False
         self.fit_refraction = False
+        self.parameter_mask = self.parameter_subset_mask
 
     @property
     def fit_position(self):
@@ -105,15 +106,19 @@ class IgcOffsetCorrection(IgcCollection):
         self._igc_cache = [None] * self.number_image
         self._jac_cache = [None] * self.number_image
 
-    @property
-    def parameter(self):
+    def _v_parameter(self, *args):
         '''Value of parameters controlling mapping to and from image 
         coordinates'''
-        return np.append(np.append(self.orbit.parameter, self.cam.parameter),
-                        [(self.refraction.index_refraction_surface - 1.00027) * 1e5])
+        # Awkward interface, but this matches what the C++ needs. If we have
+        # no arguments, then we are returning the parameters. Otherwise,
+        # we are setting them.
+        if(len(args) == 0):
+            return np.append(np.append(self.orbit.parameter, self.cam.parameter),
+                             [(self.refraction.index_refraction_surface - 1.00027) * 1e5])
+        else:
+            self.parameter_set(args[0])
 
-    @parameter.setter
-    def parameter(self, value):
+    def parameter_set(self, value):
         '''Value of parameters controlling mapping to and from image 
         coordinates'''
         self._igc_cache = [None] * self.number_image
@@ -121,7 +126,7 @@ class IgcOffsetCorrection(IgcCollection):
         olen = len(self.orbit.parameter)
         self.orbit.parameter = value[0:olen]
         clen = len(self.cam.parameter)
-        scol = np.count_nonzero(self.orbit.parameter_subset_mask)
+        scol = np.count_nonzero(self.orbit.parameter_mask)
         ncol = self.camera_parameter_subset_mask.count(True)
         j = np.zeros((clen, scol + ncol))
         c = scol
@@ -153,7 +158,7 @@ class IgcOffsetCorrection(IgcCollection):
     def parameter_subset_mask(self):
         '''This returns a list of flags indicating which parameters should
         be included in the parameter_subset values.'''
-        return np.append(np.append(self.orbit.parameter_subset_mask, 
+        return np.append(np.append(self.orbit.parameter_mask, 
                                    self.camera_parameter_subset_mask), 
                          [self.fit_refraction])
 

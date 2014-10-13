@@ -45,6 +45,7 @@ class OrbitOffsetCorrection(Orbit):
             self.parameter = initial_parameter
         else:
             self.parameter = np.zeros(self.parameter.shape, np.double)
+        self.parameter_mask = [True] * len(self.parameter)
         self.fit_position = True
         self.fit_yaw = True
         self.fit_pitch = True
@@ -79,8 +80,9 @@ class OrbitOffsetCorrection(Orbit):
         # no arguments, then we are returning the parameters. Otherwise,
         # we are setting them.
         if(len(args) == 0):
-            return self._parameter
+            return self.__parameter
         else:
+            value = args[0]
             if(len(value) != 3 + 3 * len(self.time_point)):
                 raise ValueError("Parameter is the wrong length. It was length %d, but should have been %d" % (len(value), 3 + 3 * len(self.time_point)))
             self.__parameter = np.array(value, np.double)

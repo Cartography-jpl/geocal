@@ -24,7 +24,6 @@ geocalpkgpython_PYTHON+= @srcpythonlib@/ikonos_reflectance.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/quick_bird_reflectance.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/world_view2_reflectance.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/spot_reflectance.py
-geocalpkgpython_PYTHON+= @srcpythonlib@/with_parameter.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/sqlite_shelf.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/feature_detector_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/ply_file.py

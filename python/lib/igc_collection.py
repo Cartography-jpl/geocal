@@ -1,9 +1,17 @@
 from abc import *
 from geocal_swig import *
-from with_parameter import *
 import numpy as np
 import scipy.sparse
 import copy
+
+
+def _new_from_init(cls, version, *args):
+    '''Handle older versions'''
+    if(cls.pickle_format_version() < version):
+        raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
+    inst = cls.__new__(cls)
+    inst.__init__(*args)
+    return inst
 
 class IgcCollection(WithParameter):
     '''This class describes a collection of ImageGroundConnection. This
@@ -15,6 +23,9 @@ class IgcCollection(WithParameter):
 
     This is used by the SimultaneousBundleAdjustment class.
     '''
+
+    def __init__(self):
+        WithParameter.__init__(self)
 
     @abstractproperty
     def number_image(self):
@@ -101,18 +112,6 @@ class ImageGroundConnectionIgc(ImageGroundConnection, WithParameter):
         return self.igc_collection.image_coordinate_jac_cf(self.image_index, 
                                                             ground_point)
 
-    @property
-    def parameter(self):
-        return []
-
-    @parameter.setter
-    def parameter(self, value):
-        pass
-
-    @property
-    def parameter_subset_mask(self):
-        return np.array([True] * len(self.parameter))
-
     def image_coordinate_jac_parm(self, ground_point):
         '''Return Jacobian for image coordinate with respect to change in 
         the parameters of the ground point. This can either be a 
@@ -134,9 +133,22 @@ class IgcArray(IgcCollection):
     "title" filled in. This isn't present in the underlying C++ 
     ImageGroundConnection class, but python classes such as 
     GdalImageGroundConnection and VicarImageGroundConnection do have these.'''
-    def __init__(self, initial_data = []):
+    def __init__(self, initial_data = [], parameter_mask = None):
         self.igc = copy.copy(initial_data)
-        self._parameter_subset_mask = [True] * len(self.parameter)
+        IgcCollection.__init__(self)
+        if(parameter_mask is not None):
+            self.parameter_mask = copy.copy(parameter_mask)
+        else:
+            self.parameter_mask = [True] * len(self.parameter)
+
+    @classmethod
+    def pickle_format_version(cls):
+        return 1
+
+    def __reduce__(self):
+        return _new_from_init, (self.__class__,
+                                self.__class__.pickle_format_version(),
+                                self.igc, self.parameter_mask)
 
     def __str__(self):
         res =  "IgcArray\n"
@@ -149,41 +161,26 @@ class IgcArray(IgcCollection):
             res += "     %s: %f\n" % (self.parameter_name[i], self.parameter[i])
         return res
 
-    @property
-    def parameter(self):
+    def _v_parameter(self, *args):
         '''Value of parameters controlling mapping to and from image 
         coordinates'''
-        res = []
-        for v in self.igc:
-            res = np.append(res, v.parameter)
-        return res
+        # Awkward interface, but this matches what the C++ needs. If we have
+        # no arguments, then we are returning the parameters. Otherwise,
+        # we are setting them.
+        if(len(args) == 0):
+            res = []
+            for v in self.igc:
+                res = np.append(res, v.parameter)
+            return res
+        else:
+            value = args[0]
+            pstart = 0
+            for ig in self.igc:
+                pl = len(ig.parameter)
+                ig.parameter = value[pstart:(pstart + pl)]
+                pstart += pl
 
-    @parameter.setter
-    def parameter(self, value):
-        '''Value of parameters controlling mapping to and from image 
-        coordinates'''
-        pstart = 0
-        for ig in self.igc:
-            pl = len(ig.parameter)
-            ig.parameter = value[pstart:(pstart + pl)]
-            pstart += pl
-
-    @property
-    def parameter_subset_mask(self):
-        return self._parameter_subset_mask
-
-    @parameter_subset_mask.setter
-    def parameter_subset_mask(self, val):
-        self._parameter_subset_mask = val
-        pstart = 0
-        for ig in self.igc:
-            pl = len(ig.parameter)
-            if(not isinstance(ig, ImageGroundConnection)):
-                ig.parameter_subset_mask = val[pstart:(pstart + pl)]
-            pstart += pl
-
-    @property
-    def parameter_name(self):
+    def _v_parameter_name(self):
         res = []
         for i, igcv in enumerate(self.igc):
             for pn in igcv.parameter_name:
@@ -258,11 +255,11 @@ class IgcArray(IgcCollection):
         jparm = 0
         pstart = -1
         pend = -1
-        pm = self.parameter_subset_mask
+        pm = self.parameter_mask
         i = 0
         for ig in self.igc:
             pl = len(ig.parameter)
-            jl = pm[nparm:(nparm + pl)].count(True)
+            jl = np.count_nonzero(pm[nparm:(nparm + pl)])
             if(isinstance(ig, ImageGroundConnection)):
                 i += 1
             else:

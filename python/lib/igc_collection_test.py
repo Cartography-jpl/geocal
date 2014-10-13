@@ -4,6 +4,7 @@ from image_ground_connection import *
 from igc_collection import *
 from nose.plugins.skip import Skip, SkipTest
 import scipy
+import numpy.testing as npt
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
@@ -124,17 +125,12 @@ def test_igc_array_with_igc_collection():
     # We got the result we expect from running the igc_array test above
     assert_almost_equal(jac[0, 4], 15387.7492279, 2)
     assert_almost_equal(jac[1, 5], 17633.137014, 2)
-    assert igc_coll.parameter_subset_mask == \
-        [True, True, True, True, True, True]
-    assert igc_coll.igc[1].parameter_subset_mask == [ True, True, True, True]
-    igc_coll.parameter_subset_mask = [False, False, True, True, True, True]
-    assert igc_coll.parameter_subset_mask == \
-        [False, False, True, True, True, True]
-    assert igc_coll.igc[1].parameter_subset_mask == [ True, True, True, True]
-    igc_coll.parameter_subset_mask = [False, False, True, False, True, True]
-    assert igc_coll.parameter_subset_mask == \
-        [False, False, True, False, True, True]
-    assert igc_coll.igc[1].parameter_subset_mask == [ True, False, True, True]
+    npt.assert_almost_equal(igc_coll.parameter_mask,
+                            [True, True, True, True, True, True])
+    igc_coll.parameter_mask = [False, False, True, True, True, True]
+    npt.assert_almost_equal(igc_coll.parameter_mask,
+                            [False, False, True, True, True, True])
+    igc_coll.parameter_mask = [False, False, True, False, True, True]
+    npt.assert_almost_equal(igc_coll.parameter_mask,
+                            [False, False, True, False, True, True])
  
-
-    

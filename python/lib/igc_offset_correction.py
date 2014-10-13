@@ -23,6 +23,7 @@ class IgcOffsetCorrection(IgcCollection):
         The orbit is an OrbitOffsetCorrection. You can either pass the
         time points to use in the attitude correction to this constructor,
         or you can just edit self.orbit however you like.'''
+        IgcCollection.__init__(self)
         self.imglist = imglist
         self.cam = cam
         self.demv = dem

@@ -1,11 +1,10 @@
 from geocal_swig import *
-from with_parameter import *
 import math
 import bisect
 import scipy.sparse as sp
 import numpy as np
 
-class OrbitOffsetCorrection(Orbit, WithParameter):
+class OrbitOffsetCorrection(Orbit):
     '''This class gives an orbit that tries to correct errors in another
     underlying orbit. This uses a simple error model which captures a
     common set of orbit errors.
@@ -72,41 +71,26 @@ class OrbitOffsetCorrection(Orbit, WithParameter):
         self.fit_pitch = dict["fit_pitch"]
         self.fit_roll = dict["fit_roll"]
 
-    @property
-    def parameter(self):
+    def _v_parameter(self, *args):
         '''Parameters used in correction. This is the first the offset in
         position, followed by the yaw, pitch, roll correction at 
         time_point[0]; yaw, pitch roll at time_point[1], etc.'''
-        return self.__parameter
+        # Awkward interface, but this matches what the C++ needs. If we have
+        # no arguments, then we are returning the parameters. Otherwise,
+        # we are setting them.
+        if(len(args) == 0):
+            return self._parameter
+        else:
+            if(len(value) != 3 + 3 * len(self.time_point)):
+                raise ValueError("Parameter is the wrong length. It was length %d, but should have been %d" % (len(value), 3 + 3 * len(self.time_point)))
+            self.__parameter = np.array(value, np.double)
 
-    @parameter.setter
-    def parameter(self, value):
-        if(len(value) != 3 + 3 * len(self.time_point)):
-            raise ValueError("Parameter is the wrong length. It was length %d, but should have been %d" % (len(value), 3 + 3 * len(self.time_point)))
-        self.__parameter = np.array(value, np.double)
-
-    @property
-    def parameter_name(self):
+    def _v_parameter_name(self):
         res = ["Position X Offset", "Position Y Offset", "Position Z Offset"]
         for tm in self.time_point:
             res.append("Yaw correction time " + str(tm))
             res.append("Pitch correction time " + str(tm))
             res.append("Roll correction time " + str(tm))
-        return res
-
-    @property
-    def parameter_subset_mask(self):
-        '''This returns a list of flags indicating which parameters should
-        be included in the parameter_subset values.'''
-        res = np.array([True] * len(self.parameter))
-        if(not self.fit_position):
-            res[0:3] = False
-        if(not self.fit_yaw):
-            res[3::3] = False
-        if(not self.fit_pitch):
-            res[4::3] = False
-        if(not self.fit_roll):
-            res[5::3] = False
         return res
 
     @property

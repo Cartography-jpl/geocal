@@ -1167,7 +1167,6 @@ am__geocalpkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/quick_bird_reflectance.py \
 	@srcpythonlib@/world_view2_reflectance.py \
 	@srcpythonlib@/spot_reflectance.py \
-	@srcpythonlib@/with_parameter.py \
 	@srcpythonlib@/sqlite_shelf.py \
 	@srcpythonlib@/feature_detector_extension.py \
 	@srcpythonlib@/ply_file.py @srcpythonlib@/docopt_simple.py \
@@ -2425,7 +2424,6 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/quick_bird_reflectance.py \
 	@srcpythonlib@/world_view2_reflectance.py \
 	@srcpythonlib@/spot_reflectance.py \
-	@srcpythonlib@/with_parameter.py \
 	@srcpythonlib@/sqlite_shelf.py \
 	@srcpythonlib@/feature_detector_extension.py \
 	@srcpythonlib@/ply_file.py @srcpythonlib@/docopt_simple.py \

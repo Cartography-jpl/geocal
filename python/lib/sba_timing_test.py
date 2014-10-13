@@ -76,5 +76,5 @@ def test_time():
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     print len(igc_coll.parameter_subset)
     print igc_coll.parameter_subset
-    print igc_coll.parameter_subset_mask
+    print igc_coll.parameter_mask
 

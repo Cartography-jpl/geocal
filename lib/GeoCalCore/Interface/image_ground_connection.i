@@ -48,8 +48,7 @@ public:
 %rename("__dem") ImageGroundConnection::dem;
 %rename("__ground_coordinate") ImageGroundConnection::ground_coordinate;
 #endif
-class ImageGroundConnection: public GenericObject,
-			     public WithParameter{
+class ImageGroundConnection: public WithParameter {
 protected:
   ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
 			const boost::shared_ptr<RasterImage>& Img, 

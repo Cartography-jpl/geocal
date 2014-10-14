@@ -6729,7 +6729,7 @@ static void *_p_GeoCal__ConvergenceFailureTo_p_GeoCal__GenericObject(void *x, in
     return (void *)((GeoCal::GenericObject *) (GeoCal::Exception *) ((GeoCal::ConvergenceFailure *) x));
 }
 static void *_p_GeoCal__ImageGroundConnectionCopyTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::ImageGroundConnection *) ((GeoCal::ImageGroundConnectionCopy *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *)(GeoCal::ImageGroundConnection *) ((GeoCal::ImageGroundConnectionCopy *) x));
 }
 static void *_p_GeoCal__RasterImageMultiBandVariableTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::RasterImageMultiBand *) ((GeoCal::RasterImageMultiBandVariable *) x));
@@ -6798,10 +6798,10 @@ static void *_p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject(void *x, 
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::LookVector< double > *) x));
 }
 static void *_p_GeoCal__ImageGroundConnectionTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageGroundConnection *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *) ((GeoCal::ImageGroundConnection *) x));
 }
 static void *_p_GeoCal__OffsetImageGroundConnectionTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::ImageGroundConnection *) ((GeoCal::OffsetImageGroundConnection *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *)(GeoCal::ImageGroundConnection *) ((GeoCal::OffsetImageGroundConnection *) x));
 }
 static void *_p_GeoCal__MapInfoTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::MapInfo *) x));

@@ -142,7 +142,7 @@ class ImageGroundConnectionFailed(geocal_swig.geocal_exception.Exception):
 ImageGroundConnectionFailed_swigregister = _image_ground_connection.ImageGroundConnectionFailed_swigregister
 ImageGroundConnectionFailed_swigregister(ImageGroundConnectionFailed)
 
-class ImageGroundConnection(geocal_swig.generic_object.GenericObject,geocal_swig.with_parameter.WithParameter):
+class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     """
     Depending on the the data we are using, we may connect a location in
     an image to a ground location in one of several ways.
@@ -394,6 +394,13 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject,geocal_swig
         """
         return _image_ground_connection.ImageGroundConnection_resolution_meter(self, *args)
 
+    def _v_parameter(self, *args):
+        """
+        virtual void GeoCal::ImageGroundConnection::parameter(const blitz::Array< double, 1 > &P)
+
+        """
+        return _image_ground_connection.ImageGroundConnection__v_parameter(self, *args)
+
     @property
     def parameter(self):
         return self._v_parameter()
@@ -401,6 +408,13 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject,geocal_swig
     @parameter.setter
     def parameter(self, value):
       self._v_parameter(value)
+
+    def _v_parameter_with_derivative(self, *args):
+        """
+        virtual void GeoCal::ImageGroundConnection::parameter_with_derivative(const ArrayAd< double, 1 > &P)
+
+        """
+        return _image_ground_connection.ImageGroundConnection__v_parameter_with_derivative(self, *args)
 
     @property
     def parameter_with_derivative(self):

@@ -153,8 +153,9 @@ class IgcArray(IgcCollection):
         for i in range(self.number_image):
             res += "     %s\n" % self.image_title(i)
         res += "  Parameters:\n"
-        for i in range(len(self.parameter)):
-            res += "     %s: %f\n" % (self.parameter_name[i], self.parameter[i])
+        for i in range(len(self.parameter_subset)):
+            res += "     %s: %f\n" % (self.parameter_name_subset[i], 
+                                      self.parameter_subset[i])
         return res
 
     def _v_parameter_mask(self):
@@ -253,34 +254,25 @@ class IgcArray(IgcCollection):
         in a scaling for the line and sample entries. This interface may seem
         a bit odd, but this is what we have in the SimultaneousBundleAdjustment
         that uses this call.'''
-        nparm = 0
         jparm = 0
-        pstart = -1
-        pend = -1
-        pm = self.parameter_mask
         i = 0
         for ig in self.igc:
-            pl = len(ig.parameter)
-            jl = np.count_nonzero(pm[nparm:(nparm + pl)])
+            pl = len(ig.parameter_subset)
             if(isinstance(ig, ImageGroundConnection)):
                 i += 1
             else:
                 i += ig.number_image
             if(image_index < i):
                 pstart = jparm + jac_col
-                pmsub = pm[nparm:(nparm + pl)]
                 break
-            nparm += pl
-            jparm += jl
+            jparm += pl
         ig, i = self._igc_or_coll(image_index)
         if(i < 0):
-            jac_in = self.igc[image_index].image_coordinate_jac_parm(ground_point)
-            col = pstart
-            for (i, pmval) in enumerate(pmsub):
-                if(pmval):
-                    jac[jac_row, col] = jac_in[0, i] * line_scale
-                    jac[jac_row + 1, col] = jac_in[1, i] * sample_scale
-                    col += 1
+            jac_in = \
+                self.igc[image_index].image_coordinate_jac_parm(ground_point)
+            for j in range(jac_in.shape[1]):
+                jac[jac_row, pstart + j] = jac_in[0, j] * line_scale
+                jac[jac_row + 1, pstart + j] = jac_in[1, j] * sample_scale
         else:
             ig.image_coordinate_jac_parm(i, ground_point, jac, jac_row, pstart,
                                          line_scale, sample_scale)

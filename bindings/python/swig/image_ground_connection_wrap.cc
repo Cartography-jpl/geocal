@@ -11910,8 +11910,14 @@ static PyMethodDef SwigMethods[] = {
 		"Variation of resolution_meter that find the resolution of the center\n"
 		"pixel. \n"
 		""},
-	 { (char *)"ImageGroundConnection__v_parameter", _wrap_ImageGroundConnection__v_parameter, METH_VARARGS, NULL},
-	 { (char *)"ImageGroundConnection__v_parameter_with_derivative", _wrap_ImageGroundConnection__v_parameter_with_derivative, METH_VARARGS, NULL},
+	 { (char *)"ImageGroundConnection__v_parameter", _wrap_ImageGroundConnection__v_parameter, METH_VARARGS, (char *)"\n"
+		"virtual void GeoCal::ImageGroundConnection::parameter(const blitz::Array< double, 1 > &P)\n"
+		"\n"
+		""},
+	 { (char *)"ImageGroundConnection__v_parameter_with_derivative", _wrap_ImageGroundConnection__v_parameter_with_derivative, METH_VARARGS, (char *)"\n"
+		"virtual void GeoCal::ImageGroundConnection::parameter_with_derivative(const ArrayAd< double, 1 > &P)\n"
+		"\n"
+		""},
 	 { (char *)"ImageGroundConnection__v_parameter_name", (PyCFunction)_wrap_ImageGroundConnection__v_parameter_name, METH_O, NULL},
 	 { (char *)"ImageGroundConnection__v_parameter_subset", _wrap_ImageGroundConnection__v_parameter_subset, METH_VARARGS, NULL},
 	 { (char *)"ImageGroundConnection__v_parameter_with_derivative_subset", _wrap_ImageGroundConnection__v_parameter_with_derivative_subset, METH_VARARGS, NULL},
@@ -12226,7 +12232,7 @@ static void *_p_GeoCal__ConvergenceFailureTo_p_GeoCal__GenericObject(void *x, in
     return (void *)((GeoCal::GenericObject *) (GeoCal::Exception *) ((GeoCal::ConvergenceFailure *) x));
 }
 static void *_p_GeoCal__ImageGroundConnectionCopyTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::ImageGroundConnection *) ((GeoCal::ImageGroundConnectionCopy *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *)(GeoCal::ImageGroundConnection *) ((GeoCal::ImageGroundConnectionCopy *) x));
 }
 static void *_p_GeoCal__RasterImageMultiBandVariableTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::RasterImageMultiBand *) ((GeoCal::RasterImageMultiBandVariable *) x));
@@ -12292,10 +12298,10 @@ static void *_p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject(void *x, 
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::LookVector< double > *) x));
 }
 static void *_p_GeoCal__ImageGroundConnectionTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageGroundConnection *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *) ((GeoCal::ImageGroundConnection *) x));
 }
 static void *_p_GeoCal__OffsetImageGroundConnectionTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::ImageGroundConnection *) ((GeoCal::OffsetImageGroundConnection *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *)(GeoCal::ImageGroundConnection *) ((GeoCal::OffsetImageGroundConnection *) x));
 }
 static void *_p_GeoCal__MapInfoTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::MapInfo *) x));

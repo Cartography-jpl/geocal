@@ -328,6 +328,30 @@ public:
 
   const Dem& dem() const { return *dem_;}
 
+//-----------------------------------------------------------------------
+/// Default is that ImageGroundConnection ignores AutoDerivative
+/// information in the parameters. Derived classes can override this
+/// if they support this. This should mostly be an internal matter,
+/// the derived class can use the AutoDerivative in its implementation
+/// of image_coordinate_jac_parm, but it can also do this calculation
+/// in another manner if desired.
+//-----------------------------------------------------------------------
+
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return ArrayAd<double, 1>(parameter()); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& P) 
+  { parameter(P.value()); }
+
+//-----------------------------------------------------------------------
+/// Default it no parameters.
+//-----------------------------------------------------------------------
+  virtual blitz::Array<double, 1> parameter() const
+  { return blitz::Array<double, 1>(); }
+  virtual void parameter(const blitz::Array<double, 1>& P)
+  { 
+    if(P.rows() != 0)
+      throw Exception("No parameters supported");
+  }
 protected:
 //-----------------------------------------------------------------------
 /// Constructor. As a convenience, if Img_mask or Ground_mask are null

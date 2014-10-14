@@ -7,22 +7,14 @@ using namespace blitz;
 // See base class for description
 Array<double, 1> RpcImageGroundConnection::parameter() const
 {
-  int size = std::count(rpc_->fit_line_numerator.begin(), 
-			rpc_->fit_line_numerator.end(), true) +
-    std::count(rpc_->fit_sample_numerator.begin(), 
-	       rpc_->fit_sample_numerator.end(), true);
-  if(fit_height_offset())
-    size += 1;
-  Array<double, 1> res(size);
+  Array<double, 1> res(rpc_->line_numerator.size() +
+		       rpc_->sample_numerator.size() + 1);
   int j = 0;
   for(int i = 0; i < (int) rpc_->fit_line_numerator.size();  ++i)
-    if(rpc_->fit_line_numerator[i])
-      res(j++) = rpc_->line_numerator[i];
+    res(j++) = rpc_->line_numerator[i];
   for(int i = 0; i < (int) rpc_->fit_sample_numerator.size();  ++i)
-    if(rpc_->fit_sample_numerator[i])
-      res(j++) = rpc_->sample_numerator[i];
-  if(fit_height_offset())
-    res(j++) = rpc_->height_offset;
+    res(j++) = rpc_->sample_numerator[i];
+  res(j++) = rpc_->height_offset;
   return res;
 }
 
@@ -30,15 +22,25 @@ std::vector<std::string> RpcImageGroundConnection::parameter_name() const
 {
   std::vector<std::string> res;
   for(int i = 0; i < (int) rpc_->fit_line_numerator.size();  ++i)
-    if(rpc_->fit_line_numerator[i])
-      res.push_back("RPC Line Numerator Parameter " + 
-		    boost::lexical_cast<std::string>(i));
+    res.push_back("RPC Line Numerator Parameter " + 
+		  boost::lexical_cast<std::string>(i));
   for(int i = 0; i < (int) rpc_->fit_sample_numerator.size();  ++i)
-    if(rpc_->fit_sample_numerator[i])
-      res.push_back("RPC Sample Numerator Parameter " + 
-		    boost::lexical_cast<std::string>(i));
-  if(fit_height_offset())
-    res.push_back("RPC Height Offset");
+    res.push_back("RPC Sample Numerator Parameter " + 
+		  boost::lexical_cast<std::string>(i));
+  res.push_back("RPC Height Offset");
+  return res;
+}
+
+blitz::Array<bool, 1> RpcImageGroundConnection::parameter_mask() const
+{
+  Array<bool, 1> res(rpc_->fit_line_numerator.size() +
+		     rpc_->fit_sample_numerator.size() + 1);
+  int j = 0;
+  for(int i = 0; i < (int) rpc_->fit_line_numerator.size();  ++i)
+    res(j++) = rpc_->fit_line_numerator[i];
+  for(int i = 0; i < (int) rpc_->fit_sample_numerator.size();  ++i)
+    res(j++) = rpc_->fit_sample_numerator[i];
+  res(j++) = fit_height_offset();
   return res;
 }
 
@@ -61,12 +63,7 @@ RpcImageGroundConnection::cf_look_vector
 
 void RpcImageGroundConnection::parameter(const blitz::Array<double, 1>& Parm)
 {
-  int size = std::count(rpc_->fit_line_numerator.begin(), 
-			rpc_->fit_line_numerator.end(), true) +
-    std::count(rpc_->fit_sample_numerator.begin(), 
-	       rpc_->fit_sample_numerator.end(), true);
-  if(fit_height_offset())
-    size += 1;
+  int size = rpc_->line_numerator.size() + rpc_->sample_numerator.size() + 1;
   if(Parm.rows() != size) {
     Exception e;
     e << "Parm is the wrong size\n"
@@ -76,13 +73,10 @@ void RpcImageGroundConnection::parameter(const blitz::Array<double, 1>& Parm)
   }
   int j = 0;
   for(int i = 0; i < (int) rpc_->fit_line_numerator.size();  ++i)
-    if(rpc_->fit_line_numerator[i])
-      rpc_->line_numerator[i] = Parm(j++);
+    rpc_->line_numerator[i] = Parm(j++);
   for(int i = 0; i < (int) rpc_->fit_sample_numerator.size();  ++i)
-    if(rpc_->fit_sample_numerator[i])
-      rpc_->sample_numerator[i] = Parm(j++);
-  if(fit_height_offset())
-    rpc_->height_offset = Parm(j++);
+    rpc_->sample_numerator[i] = Parm(j++);
+  rpc_->height_offset = Parm(j++);
 }
 
 Array<double, 2> RpcImageGroundConnection::image_coordinate_jac_cf

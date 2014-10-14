@@ -266,8 +266,14 @@ public:
   { return ig_->parameter(); }
   virtual void parameter(const blitz::Array<double, 1>& Parm)
   { ig_->parameter(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return ig_->parameter_with_derivative(); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  { return ig_->parameter_with_derivative(Parm); }
   virtual std::vector<std::string> parameter_name() const
   { return ig_->parameter_name(); }
+  virtual blitz::Array<bool, 1> parameter_mask() const
+  { return ig_->parameter_mask(); }
 
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,

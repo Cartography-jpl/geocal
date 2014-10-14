@@ -24,13 +24,13 @@ def test_vicar_image_ground_connection():
     igc1.rpc.fit_sample_numerator = t
     t = cPickle.dumps(igc1)
     igc2 = cPickle.loads(t)
-    assert_almost_equal(igc2.parameter[0], 0.003954957)
-    assert_almost_equal(igc2.parameter[1], 0.0007519057)
+    assert_almost_equal(igc2.parameter_subset[0], 0.003954957)
+    assert_almost_equal(igc2.parameter_subset[1], 0.0007519057)
     assert_almost_equal(igc2.rpc.line_numerator[0], 0.003954957)
     assert_almost_equal(igc2.rpc.sample_numerator[0], 0.0007519057)
-    igc2.parameter = [1, 2]
-    assert_almost_equal(igc2.parameter[0], 1)
-    assert_almost_equal(igc2.parameter[1], 2)
+    igc2.parameter_subset = [1, 2]
+    assert_almost_equal(igc2.parameter_subset[0], 1)
+    assert_almost_equal(igc2.parameter_subset[1], 2)
     assert_almost_equal(igc2.rpc.line_numerator[0], 1)
     assert_almost_equal(igc2.rpc.sample_numerator[0], 2)
 

@@ -6396,7 +6396,7 @@ static void *_p_GeoCal__ConvergenceFailureTo_p_GeoCal__GenericObject(void *x, in
     return (void *)((GeoCal::GenericObject *) (GeoCal::Exception *) ((GeoCal::ConvergenceFailure *) x));
 }
 static void *_p_GeoCal__ImageGroundConnectionCopyTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::ImageGroundConnection *) ((GeoCal::ImageGroundConnectionCopy *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *)(GeoCal::ImageGroundConnection *) ((GeoCal::ImageGroundConnectionCopy *) x));
 }
 static void *_p_GeoCal__RasterImageMultiBandVariableTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::RasterImageMultiBand *) ((GeoCal::RasterImageMultiBandVariable *) x));
@@ -6483,13 +6483,13 @@ static void *_p_GeoCal__IpiTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPA
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::Ipi *) x));
 }
 static void *_p_GeoCal__ImageGroundConnectionTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageGroundConnection *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *) ((GeoCal::ImageGroundConnection *) x));
 }
 static void *_p_GeoCal__OffsetImageGroundConnectionTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::ImageGroundConnection *) ((GeoCal::OffsetImageGroundConnection *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *)(GeoCal::ImageGroundConnection *) ((GeoCal::OffsetImageGroundConnection *) x));
 }
 static void *_p_GeoCal__IpiImageGroundConnectionTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::ImageGroundConnection *) ((GeoCal::IpiImageGroundConnection *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *)(GeoCal::ImageGroundConnection *) ((GeoCal::IpiImageGroundConnection *) x));
 }
 static void *_p_GeoCal__MapInfoTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::MapInfo *) x));

@@ -23,6 +23,6 @@ public:
   %python_attribute_with_set_virtual(parameter_with_derivative_subset, 
 			     ArrayAd<double, 1>);
   %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
-  %python_attribute_with_set(parameter_mask, blitz::Array<bool, 1>);
+  %python_attribute(parameter_mask, virtual blitz::Array<bool, 1>);
 };
 }

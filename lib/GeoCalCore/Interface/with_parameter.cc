@@ -8,13 +8,14 @@ using namespace blitz;
 
 blitz::Array<double, 1> WithParameter::parameter_subset() const
 { 
-  blitz::Array<double, 1> p(blitz::count(parameter_mask_));
+  blitz::Array<bool, 1> pm(parameter_mask());
+  blitz::Array<double, 1> p(blitz::count(pm));
   blitz::Array<double, 1> pfull = parameter();
-  if(parameter_mask_.rows() != pfull.rows())
+  if(pm.rows() != pfull.rows())
     throw Exception("parameter_mask must be the same size as parameter");
   int j = 0;
   for(int i = 0; i < pfull.rows(); ++i)
-    if(parameter_mask_(i))
+    if(pm(i))
       p(j++) = pfull(i);
   return p;
 }
@@ -25,14 +26,15 @@ blitz::Array<double, 1> WithParameter::parameter_subset() const
 
 void WithParameter::parameter_subset(const blitz::Array<double, 1>& P)
 { 
-  if(P.rows() != blitz::count(parameter_mask_))
+  blitz::Array<bool, 1> pm(parameter_mask());
+  if(P.rows() != blitz::count(pm))
     throw Exception("P is not the size expected from the parameter_mask");
   blitz::Array<double, 1> pfull = parameter().copy();
-  if(parameter_mask_.rows() != pfull.rows())
+  if(pm.rows() != pfull.rows())
     throw Exception("parameter_mask must be the same size as parameter");
   int j = 0;
   for(int i = 0; i < pfull.rows(); ++i)
-    if(parameter_mask_(i))
+    if(pm(i))
       pfull(i) = P(j++);
   parameter(pfull);
 }
@@ -43,13 +45,14 @@ void WithParameter::parameter_subset(const blitz::Array<double, 1>& P)
 
 ArrayAd<double, 1> WithParameter::parameter_with_derivative_subset() const
 { 
+  blitz::Array<bool, 1> pm(parameter_mask());
   ArrayAd<double, 1> pfull = parameter_with_derivative();
-  ArrayAd<double, 1> p(blitz::count(parameter_mask_), pfull.number_variable());
+  ArrayAd<double, 1> p(blitz::count(pm), pfull.number_variable());
   int j = 0;
-  if(parameter_mask_.rows() != pfull.rows())
+  if(pm.rows() != pfull.rows())
     throw Exception("parameter_mask must be the same size as parameter");
   for(int i = 0; i < pfull.rows(); ++i)
-    if(parameter_mask_(i))
+    if(pm(i))
       p(j++) = pfull(i);
   return p;
 }
@@ -61,15 +64,16 @@ ArrayAd<double, 1> WithParameter::parameter_with_derivative_subset() const
 void WithParameter::parameter_with_derivative_subset
 (const ArrayAd<double, 1>& P)
 {
-  if(P.rows() != blitz::count(parameter_mask_))
+  blitz::Array<bool, 1> pm(parameter_mask());
+  if(P.rows() != blitz::count(pm))
     throw Exception("P is not the size expected from the parameter_mask");
   ArrayAd<double, 1> pfull = parameter().copy();
   pfull.resize_number_variable(P.number_variable());
   int j = 0;
-  if(parameter_mask_.rows() != pfull.rows())
+  if(pm.rows() != pfull.rows())
     throw Exception("parameter_mask must be the same size as parameter");
   for(int i = 0; i < pfull.rows(); ++i)
-    if(parameter_mask_(i))
+    if(pm(i))
       pfull(i) = P(j++);
   parameter_with_derivative_subset(pfull);
 }
@@ -80,12 +84,13 @@ void WithParameter::parameter_with_derivative_subset
 
 std::vector<std::string> WithParameter::parameter_name_subset() const
 {
+  blitz::Array<bool, 1> pm(parameter_mask());
   std::vector<std::string> res;
   std::vector<std::string> name_full = parameter_name();
-  if(parameter_mask_.rows() != (int) name_full.size())
+  if(pm.rows() != (int) name_full.size())
     throw Exception("parameter_mask must be the same size as parameter_name");
   for(int i = 0; i < (int) name_full.size(); ++i)
-    if(parameter_mask_(i))
+    if(pm(i))
       res.push_back(name_full[i]);
   return res;
 }

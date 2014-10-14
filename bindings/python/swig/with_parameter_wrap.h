@@ -30,6 +30,7 @@ public:
     virtual GeoCal::ArrayAd< double,1 > parameter_with_derivative_subset() const;
     virtual void parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V);
     virtual std::vector< std::string,std::allocator< std::string > > parameter_name_subset() const;
+    virtual blitz::Array< bool,1 > parameter_mask() const;
 
 
 /* Internal Director utilities */
@@ -63,7 +64,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[10];
+    mutable swig::SwigVar_PyObject vtable[11];
 #endif
 
 };

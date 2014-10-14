@@ -2,6 +2,7 @@
 #define WITH_PARAMETER_H
 #include "array_ad.h"
 #include <vector>
+#include <boost/lexical_cast.hpp>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -63,6 +64,8 @@ public:
   virtual std::vector<std::string> parameter_name() const
   {
     std::vector<std::string> res;
+    for(int i = 0; i < parameter().rows(); ++i)
+      res.push_back("Parameter " + boost::lexical_cast<std::string>(i));
     return res;
   }
 
@@ -71,33 +74,19 @@ public:
 /// parameter and "false" means don't.
 //-----------------------------------------------------------------------
 
-  virtual const blitz::Array<bool, 1>& parameter_mask() const 
+  virtual blitz::Array<bool, 1> parameter_mask() const 
   {
-    return parameter_mask_;
-  }
-
-  virtual blitz::Array<bool, 1>& parameter_mask()
-  {
-    return parameter_mask_;
-  }
-
-//-----------------------------------------------------------------------
-/// Set the parameter mask.
-//-----------------------------------------------------------------------
-
-  virtual void parameter_mask(const blitz::Array<bool, 1>& M) 
-  {
-    if(M.rows() != parameter().rows())
-      throw Exception("Mask does match the size of the full parameter.");
-    parameter_mask_.reference(M.copy());
+    // Default is to just return all Trues. Derived classes can
+    // override this.
+    blitz::Array<bool, 1> res(parameter().rows());
+    res = true;
+    return res;
   }
   virtual blitz::Array<double, 1> parameter_subset() const;
   virtual void parameter_subset(const blitz::Array<double, 1>& P);
   virtual ArrayAd<double, 1> parameter_with_derivative_subset() const;
   virtual void parameter_with_derivative_subset(const ArrayAd<double, 1>& P);
   virtual std::vector<std::string> parameter_name_subset() const;
-protected:
-  blitz::Array<bool, 1> parameter_mask_;
 };
 }
 #endif

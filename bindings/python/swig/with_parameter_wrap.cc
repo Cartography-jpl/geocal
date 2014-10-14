@@ -5843,6 +5843,42 @@ std::vector< std::string,std::allocator< std::string > > SwigDirector_WithParame
 }
 
 
+blitz::Array< bool,1 > SwigDirector_WithParameter::parameter_mask() const {
+  PythonObject numpy ;
+  
+  blitz::Array< bool,1 > c_result;
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 10;
+  const char * const swig_method_name = "_v_parameter_mask";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject args = PyTuple_New(0);
+  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject*) args, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"_v_parameter_mask");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  {
+    PythonObject t(to_numpy<bool>(result));
+    c_result.reference(to_blitz_array<bool, 1>(t).copy());
+  }
+  return (blitz::Array< bool,1 >) c_result;
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -7312,16 +7348,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_mask__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_mask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::WithParameter *arg1 = (GeoCal::WithParameter *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::WithParameter const > tempshared1 ;
   boost::shared_ptr< GeoCal::WithParameter const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   SwigValueWrapper< blitz::Array< bool,1 > > result;
   
-  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0 |  0 , &newmem);
@@ -7337,14 +7377,24 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_mask__SWIG_0(PyObject *SWI
       arg1 = const_cast< GeoCal::WithParameter * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    try {
-      result = ((GeoCal::WithParameter const *)arg1)->parameter_mask();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::WithParameter const *)arg1)->GeoCal::WithParameter::parameter_mask();
+        } else {
+          result = ((GeoCal::WithParameter const *)arg1)->parameter_mask();
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   {
     npy_intp dims[1], stride[1];
@@ -7364,82 +7414,6 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_mask__SWIG_0(PyObject *SWI
   return resultobj;
 fail:
   return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_mask__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::WithParameter *arg1 = (GeoCal::WithParameter *) 0 ;
-  blitz::Array< bool,1 > *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::WithParameter > tempshared1 ;
-  boost::shared_ptr< GeoCal::WithParameter > *smartarg1 = 0 ;
-  blitz::Array< bool,1 > a2 ;
-  PythonObject numpy2 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "WithParameter__v_parameter_mask" "', argument " "1"" of type '" "GeoCal::WithParameter *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::WithParameter > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::WithParameter > * >(argp1);
-      arg1 = const_cast< GeoCal::WithParameter * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::WithParameter > * >(argp1);
-      arg1 = const_cast< GeoCal::WithParameter * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_bool_1_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<bool>(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
-      a2.reference(to_blitz_array<bool, 1>(numpy2));
-      arg2 = &a2;
-    }
-  }
-  {
-    try {
-      (arg1)->parameter_mask((blitz::Array< bool,1 > const &)*arg2);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_mask(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[3];
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"WithParameter__v_parameter_mask",0,2,argv))) SWIG_fail;
-  --argc;
-  if (argc == 1) {
-    return _wrap_WithParameter__v_parameter_mask__SWIG_0(self, argc, argv);
-  }
-  if (argc == 2) {
-    return _wrap_WithParameter__v_parameter_mask__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'WithParameter__v_parameter_mask'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::WithParameter::parameter_mask() const\n"
-    "    GeoCal::WithParameter::parameter_mask(blitz::Array< bool,1 > const &)\n");
-  return 0;
 }
 
 
@@ -7615,9 +7589,10 @@ static PyMethodDef SwigMethods[] = {
 		"std::vector< std::string > WithParameter::parameter_name_subset() const\n"
 		"Return the part of the parameter name that passes the mask. \n"
 		""},
-	 { (char *)"WithParameter__v_parameter_mask", _wrap_WithParameter__v_parameter_mask, METH_VARARGS, (char *)"\n"
-		"virtual void GeoCal::WithParameter::parameter_mask(const blitz::Array< bool, 1 > &M)\n"
-		"Set the parameter mask. \n"
+	 { (char *)"WithParameter__v_parameter_mask", (PyCFunction)_wrap_WithParameter__v_parameter_mask, METH_O, (char *)"\n"
+		"virtual blitz::Array<bool, 1> GeoCal::WithParameter::parameter_mask() const\n"
+		"Return the parameter subset mask, where \"true\" means include the\n"
+		"parameter and \"false\" means don't. \n"
 		""},
 	 { (char *)"new_WithParameter", (PyCFunction)_wrap_new_WithParameter, METH_O, NULL},
 	 { (char *)"delete_WithParameter", (PyCFunction)_wrap_delete_WithParameter, METH_O, (char *)"\n"

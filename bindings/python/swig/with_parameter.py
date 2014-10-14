@@ -241,20 +241,17 @@ class WithParameter(geocal_swig.generic_object.GenericObject):
     def parameter_name_subset(self):
         return self._v_parameter_name_subset()
 
-    def _v_parameter_mask(self, *args):
+    def _v_parameter_mask(self):
         """
-        virtual void GeoCal::WithParameter::parameter_mask(const blitz::Array< bool, 1 > &M)
-        Set the parameter mask. 
+        virtual blitz::Array<bool, 1> GeoCal::WithParameter::parameter_mask() const
+        Return the parameter subset mask, where "true" means include the
+        parameter and "false" means don't. 
         """
-        return _with_parameter.WithParameter__v_parameter_mask(self, *args)
+        return _with_parameter.WithParameter__v_parameter_mask(self)
 
     @property
     def parameter_mask(self):
         return self._v_parameter_mask()
-
-    @parameter_mask.setter
-    def parameter_mask(self, value):
-      self._v_parameter_mask(value)
 
     def __init__(self): 
         if self.__class__ == WithParameter:

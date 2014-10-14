@@ -3129,14 +3129,14 @@ SWIG_AsVal_double (PyObject *obj, double *val)
 
   #define SWIG_From_double   PyFloat_FromDouble 
 
-SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____add____SWIG_0(boost::math::quaternion< double > *self,double x){return (boost::math::quaternion<double>(*self) += x); }
-SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____add____SWIG_1(boost::math::quaternion< double > *self,boost::math::quaternion< double > const &x){return (boost::math::quaternion<double>(*self) += x); }
-SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____sub____SWIG_0(boost::math::quaternion< double > *self,double x){return (boost::math::quaternion<double>(*self) -= x); }
-SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____sub____SWIG_1(boost::math::quaternion< double > *self,boost::math::quaternion< double > const &x){return (boost::math::quaternion<double>(*self) -= x); }
-SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____mul____SWIG_0(boost::math::quaternion< double > *self,double x){return (boost::math::quaternion<double>(*self) *= x); }
-SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____mul____SWIG_1(boost::math::quaternion< double > *self,boost::math::quaternion< double > const &x){return (boost::math::quaternion<double>(*self) *= x); }
-SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____div____SWIG_0(boost::math::quaternion< double > *self,double x){return (boost::math::quaternion<double>(*self) /= x); }
-SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____div____SWIG_1(boost::math::quaternion< double > *self,boost::math::quaternion< double > const &x){return (boost::math::quaternion<double>(*self) /= x); }
+SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____add____SWIG_0(boost::math::quaternion< double > *self,double x){return (boost::math::quaternion<double >(*self) += x); }
+SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____add____SWIG_1(boost::math::quaternion< double > *self,boost::math::quaternion< double > const &x){return (boost::math::quaternion<double >(*self) += x); }
+SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____sub____SWIG_0(boost::math::quaternion< double > *self,double x){return (boost::math::quaternion<double >(*self) -= x); }
+SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____sub____SWIG_1(boost::math::quaternion< double > *self,boost::math::quaternion< double > const &x){return (boost::math::quaternion<double >(*self) -= x); }
+SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____mul____SWIG_0(boost::math::quaternion< double > *self,double x){return (boost::math::quaternion<double >(*self) *= x); }
+SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____mul____SWIG_1(boost::math::quaternion< double > *self,boost::math::quaternion< double > const &x){return (boost::math::quaternion<double >(*self) *= x); }
+SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____div____SWIG_0(boost::math::quaternion< double > *self,double x){return (boost::math::quaternion<double >(*self) /= x); }
+SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg____div____SWIG_1(boost::math::quaternion< double > *self,boost::math::quaternion< double > const &x){return (boost::math::quaternion<double >(*self) /= x); }
 SWIGINTERN boost::math::quaternion< double > boost_math_quaternion_Sl_double_Sg__conj(boost::math::quaternion< double > *self){ return conj(*self); }
 SWIGINTERN blitz::Array< double,2 > boost_math_quaternion_Sl_double_Sg__to_matrix(boost::math::quaternion< double > const *self){ 
 	     return GeoCal::quaternion_to_matrix(*self);

@@ -6,7 +6,6 @@ import copy
 
 
 def _new_from_init(cls, version, *args):
-    '''Handle older versions'''
     if(cls.pickle_format_version() < version):
         raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
     inst = cls.__new__(cls)

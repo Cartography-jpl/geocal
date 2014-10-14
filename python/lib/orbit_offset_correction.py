@@ -4,6 +4,13 @@ import bisect
 import scipy.sparse as sp
 import numpy as np
 
+def _new_from_init(cls, version, *args):
+    if(cls.pickle_format_version() < version):
+        raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
+    inst = cls.__new__(cls)
+    inst.__init__(*args)
+    return inst
+
 class OrbitOffsetCorrection(Orbit):
     '''This class gives an orbit that tries to correct errors in another
     underlying orbit. This uses a simple error model which captures a
@@ -22,7 +29,9 @@ class OrbitOffsetCorrection(Orbit):
     The underlying orbit should return a QuaternionOrbitData orbit data, 
     since this is currently the only type supported.'''
     def __init__(self, uncorrected_orbit, time_point = [], 
-                 initial_parameter = None, outside_is_error = True):
+                 initial_parameter = None, outside_is_error = True,
+                 fit_position = True, fit_yaw = True, fit_pitch = True,
+                 fit_roll = True):
         '''Initialize orbit offset corrections. We pass in the 
         uncorrected orbit, which should return a QuaternionOrbitData 
         as orbit data. Optionally the time points to supply attitude 
@@ -39,40 +48,39 @@ class OrbitOffsetCorrection(Orbit):
                        uncorrected_orbit.max_time)
         self.outside_is_error = outside_is_error
         self.uncorrected_orbit = uncorrected_orbit
-        self.__parameter = np.array([0,0,0], np.double)
+        self.__parameter = ArrayAd_double_1(np.array([0,0,0], np.double))
         self.time_point = time_point
+        self.__parameter = ArrayAd_double_1(3 + 3 * len(self.time_point), 0) 
         if(initial_parameter is not None):
             self.parameter = initial_parameter
         else:
             self.parameter = np.zeros(self.parameter.shape, np.double)
-        self.parameter_mask = [True] * len(self.parameter)
-        self.fit_position = True
-        self.fit_yaw = True
-        self.fit_pitch = True
-        self.fit_roll = True
+        self.fit_position = fit_position
+        self.fit_yaw = fit_yaw
+        self.fit_pitch = fit_pitch
+        self.fit_roll = fit_roll
 
-    def __getstate__(self):
-        return { "uncorrected_orbit" : self.uncorrected_orbit,
-                 "parameter" : self.__parameter,
-                 "time_point" : self.__time_point,
-                 "outside_is_error" : self.outside_is_error,
-                 "fit_position" : self.fit_position,
-                 "fit_yaw" : self.fit_yaw,
-                 "fit_pitch" : self.fit_pitch,
-                 "fit_roll" : self.fit_roll,
-                 }
+    @classmethod
+    def pickle_format_version(cls):
+        return 1
 
-    def __setstate__(self, dict):
-        self.__init__(dict["uncorrected_orbit"], 
-                      time_point = dict["time_point"],
-                      initial_parameter = dict["parameter"],
-                      outside_is_error = dict["outside_is_error"])
-        self.fit_position = dict["fit_position"]
-        self.fit_yaw = dict["fit_yaw"]
-        self.fit_pitch = dict["fit_pitch"]
-        self.fit_roll = dict["fit_roll"]
+    def __reduce__(self):
+        return _new_from_init, (self.__class__,
+                                self.__class__.pickle_format_version(),
+                                self.uncorrected_orbit, self.__time_point,
+                                self.__parameter, self.outside_is_error,
+                                self.fit_position, self.fit_yaw, 
+                                self.fit_pitch, self.fit_roll)
 
-    def _v_parameter(self, *args):
+    def _v_parameter_mask(self):
+        res = np.empty((len(self._parameter)), dtype = np.bool)
+        res[0:3] = True if self.fit_position else False
+        res[3:-1:3] True if self.fit_yaw else False
+        res[4:-1:3] True if self.fit_pitch else False
+        res[5:-1:3] True if self.fit_roll else False
+        return res
+
+    def _v_parameter_with_derivative(self, *args):
         '''Parameters used in correction. This is the first the offset in
         position, followed by the yaw, pitch, roll correction at 
         time_point[0]; yaw, pitch roll at time_point[1], etc.'''
@@ -83,9 +91,9 @@ class OrbitOffsetCorrection(Orbit):
             return self.__parameter
         else:
             value = args[0]
-            if(len(value) != 3 + 3 * len(self.time_point)):
-                raise ValueError("Parameter is the wrong length. It was length %d, but should have been %d" % (len(value), 3 + 3 * len(self.time_point)))
-            self.__parameter = np.array(value, np.double)
+            if(value.rows != 3 + 3 * len(self.time_point)):
+                raise ValueError("Parameter is the wrong length. It was length %d, but should have been %d" % (value.rows(), 3 + 3 * len(self.time_point)))
+            self.__parameter = value
 
     def _v_parameter_name(self):
         res = ["Position X Offset", "Position Y Offset", "Position Z Offset"]
@@ -108,12 +116,12 @@ class OrbitOffsetCorrection(Orbit):
             self.time_point = [t]
         elif(t > self.__time_point[-1]):
             self.__time_point.append(t)
-            self.__parameter = np.append(self.__parameter, [0,0,0])
+            self.__parameter = ArrayAd_double_1(np.append(self.__parameter.value, [0,0,0]))
         else:
             inew = bisect.bisect_left(self.__time_point, t)
             self.__time_point.insert(inew, t)
             for i in range(3 + 3 * inew, 3 + 3 * inew + 3):
-                self.__parameter = np.insert(self.__parameter, i, 0)
+                self.__parameter = ArrayAd_double_1(np.insert(self.__parameter.value, i, 0))
 
     @time_point.setter
     def time_point(self, value):
@@ -121,7 +129,7 @@ class OrbitOffsetCorrection(Orbit):
             if(value[i - 1] >= value[i]):
                 raise "The list of times passed to time_point must be sorted"
         self.__time_point = value
-        self.__parameter.resize(3 + 3 * len(self.__time_point))
+        self.__parameter.resize(3 + 3 * len(self.__time_point), 0)
 
     def orbit_data(self, t):
         '''Return orbit data for given time'''
@@ -133,33 +141,11 @@ class OrbitOffsetCorrection(Orbit):
                                    od.velocity_ci, 
                                    od.sc_to_ci * self.quaternion_correction(t))
     
-    def image_coordinate(self, t, gc, cam, b = 0):
-        '''Return image coordinate for given time.'''
-        od = self.orbit_data(t)
-        fc = od.frame_coordinate(gc, cam, b)
-        return ImageCoordinate(fc.line, fc.sample)
-
-    def att_parameters_affect(self, t):
-        '''This return a range indicating which parameter affect things
-        at the given time. This allows IgcOffsetCorrection to create
-        a sparse jacobian by only looking at a subset of parameters'''
-        # bisect will find smallest i such that self.__time_point[i] >= t
-        tind = bisect.bisect_right(self.__time_point, t)
-        # These are the minimum and maximum parameter indexes that affect
-        # the image coordinate at all. Outside of this range the parameters
-        # have no effect.
-        pindmin = 3 + 3 * (tind - 1)
-        if(t == self.__time_point[tind - 1]):
-            pindmax = min(3 + 3 * tind, self.__parameter.shape[0])
-        else:
-            pindmax = min(3 + 3 * (tind + 1), self.__parameter.shape[0])
-        return range(pindmin, pindmax)
-
     def quaternion_correction(self, t):
         '''Return the quaternion correction for the given time t.'''
         # Special handling for no quaternion corrections
         if(len(self.__time_point) == 0):
-            return Quaternion_double(1, 0, 0, 0)
+            return Quaternion_AutoDerivative_double(1, 0, 0, 0)
         # Special handling for t = largest value
         if(t == self.__time_point[-1]):
             return self.__quat_i(len(self.__time_point) - 1)
@@ -169,7 +155,7 @@ class OrbitOffsetCorrection(Orbit):
             if(self.outside_is_error):
                 raise ValueError
             else:
-                return Quaternion_double(1,0,0,0)
+                return Quaternion_AutoDerivative_double(1,0,0,0)
         return self.interpolate(self.__quat_i(i - 1), self.__quat_i(i),
                                 t - self.__time_point[i - 1],
                                 self.__time_point[i] - self.__time_point[i - 1])
@@ -186,7 +172,7 @@ class OrbitOffsetCorrection(Orbit):
         '''This creates a quaternion for the given yaw, pitch, and roll.
         Right now, yaw pitch and roll should be in arcseconds (we may
         change this)'''
-        yaw_rad = math.radians(yaw / (60.0 * 60.0))
-        pitch_rad = math.radians(pitch / (60.0 * 60.0))
-        roll_rad = math.radians(roll / (60.0 * 60.0))
+        yaw_rad = yaw * math.radians(1.0 / (60.0 * 60.0))
+        pitch_rad = pitch * math.radians(1 / (60.0 * 60.0))
+        roll_rad = roll * math.radians(1 / (60.0 * 60.0))
         return quat_rot("xyz", pitch_rad, roll_rad, yaw_rad)

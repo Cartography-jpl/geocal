@@ -20,21 +20,21 @@ namespace boost {
       %python_attribute(R_component_3, T);
       %python_attribute(R_component_4, T);
       %extend {
-         quaternion<T> __add__(T x) {return (boost::math::quaternion<T>(*$self) += x); }
-         quaternion<T> __add__(const quaternion<T>& x) {return (boost::math::quaternion<T>(*$self) += x); }
-         quaternion<T> __sub__(T x) {return (boost::math::quaternion<T>(*$self) -= x); }
-         quaternion<T> __sub__(const quaternion<T>& x) {return (boost::math::quaternion<T>(*$self) -= x); }
-         quaternion<T> __mul__(T x) {return (boost::math::quaternion<T>(*$self) *= x); }
-         quaternion<T> __mul__(const quaternion<T>& x) {return (boost::math::quaternion<T>(*$self) *= x); }
-         quaternion<T> __div__(T x) {return (boost::math::quaternion<T>(*$self) /= x); }
-         quaternion<T> __div__(const quaternion<T>& x) {return (boost::math::quaternion<T>(*$self) /= x); }
-	 quaternion<T> conj() { return conj(*$self); }
-	 blitz::Array<double, 2> to_matrix() const
+         quaternion<T > __add__(T x) {return (boost::math::quaternion<T >(*$self) += x); }
+         quaternion<T > __add__(const quaternion<T >& x) {return (boost::math::quaternion<T >(*$self) += x); }
+         quaternion<T > __sub__(T x) {return (boost::math::quaternion<T >(*$self) -= x); }
+         quaternion<T > __sub__(const quaternion<T >& x) {return (boost::math::quaternion<T >(*$self) -= x); }
+         quaternion<T > __mul__(T x) {return (boost::math::quaternion<T >(*$self) *= x); }
+         quaternion<T > __mul__(const quaternion<T >& x) {return (boost::math::quaternion<T >(*$self) *= x); }
+         quaternion<T > __div__(T x) {return (boost::math::quaternion<T >(*$self) /= x); }
+         quaternion<T > __div__(const quaternion<T >& x) {return (boost::math::quaternion<T >(*$self) /= x); }
+	 quaternion<T > conj() { return conj(*$self); }
+	 blitz::Array<T, 2> to_matrix() const
 	   { 
 	     return GeoCal::quaternion_to_matrix(*$self);
 	   }
-	 static quaternion<double> 
-	   from_matrix(const blitz::Array<double, 2>& Mat) const
+	 static quaternion<T > 
+	   from_matrix(const blitz::Array<T, 2>& Mat) const
 	 {
 	   return GeoCal::matrix_to_quaternion(Mat);
 	 }

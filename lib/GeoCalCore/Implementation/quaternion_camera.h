@@ -56,7 +56,9 @@ public:
 		   const FrameCoordinate& Principal_point,
 		   FrameConvention Frame_convention = LINE_IS_X,
 		   FrameDirection Line_direction = INCREASE_IS_POSITIVE,
-		   FrameDirection Sample_direction = INCREASE_IS_POSITIVE)
+		   FrameDirection Sample_direction = INCREASE_IS_POSITIVE,
+		   const blitz::Array<bool, 1>& Parameter_mask = 
+		   blitz::Array<bool, 1>())
     : focal_length_(Focal_length),
       nband_(1),
       nline_(Number_line),
@@ -66,9 +68,13 @@ public:
       frame_to_sc_(to_autoderivative(Frame_to_sc_q)),
       frame_convention_(Frame_convention),
       line_direction_(Line_direction),
-      sample_direction_(Sample_direction)
+      sample_direction_(Sample_direction),
+      parameter_mask_(Parameter_mask.copy())
   { 
     principal_point_.push_back(Principal_point);
+    if(parameter_mask_.rows() < 6 + 2 * number_band())
+      parameter_mask_.resize(6 + 2 * number_band());
+    parameter_mask_ = true;
   }
 
 //-----------------------------------------------------------------------
@@ -438,6 +444,78 @@ public:
   virtual void parameter_with_derivative
   (const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
+
+//-----------------------------------------------------------------------
+/// Return the parameter subset mask, where "true" means include the
+/// parameter and "false" means don't.
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<bool, 1> parameter_mask() const 
+  { return parameter_mask_; }
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera euler epsilon.
+//-----------------------------------------------------------------------
+
+  bool fit_epsilon() const { return parameter_mask_(0); }
+  void fit_epsilon(bool V) {parameter_mask_(0) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera euler beta.
+//-----------------------------------------------------------------------
+
+  bool fit_beta() const { return parameter_mask_(1); }
+  void fit_beta(bool V) {parameter_mask_(1) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera euler delta.
+//-----------------------------------------------------------------------
+
+  bool fit_delta() const { return parameter_mask_(2); }
+  void fit_delta(bool V) {parameter_mask_(2) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera line pitch.
+//-----------------------------------------------------------------------
+
+  bool fit_line_pitch() const { return parameter_mask_(3); }
+  void fit_line_pitch(bool V) {parameter_mask_(3) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera sample pitch.
+//-----------------------------------------------------------------------
+
+  bool fit_sample_pitch() const { return parameter_mask_(4); }
+  void fit_sample_pitch(bool V) {parameter_mask_(4) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera focal length.
+//-----------------------------------------------------------------------
+
+  bool fit_focal_length() const { return parameter_mask_(5); }
+  void fit_focal_length(bool V) {parameter_mask_(5) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera principal point line.
+//-----------------------------------------------------------------------
+
+  bool fit_principal_point_line(int Band = 0) const 
+  { range_check(Band,0, number_band());
+    return parameter_mask_(6 + 2 * Band); }
+  void fit_principal_point_line(bool V, int Band = 0)
+  {range_check(Band,0, number_band());
+    parameter_mask_(6 + 2 * Band) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera principal point sample.
+//-----------------------------------------------------------------------
+
+  bool fit_principal_point_sample(int Band = 0) const 
+  { range_check(Band,0, number_band());
+    return parameter_mask_(7 + 2 * Band); }
+  void fit_principal_point_sample(bool V, int Band = 0)
+  {range_check(Band,0, number_band());
+    parameter_mask_(7 + 2 * Band) = V;}
 protected:
 //-----------------------------------------------------------------------
 // Constructor for use by derived classes. Derived classes should make
@@ -473,6 +551,8 @@ protected:
 				// Indicate if increasing line or
 				// sample goes in positive or negative 
 				// direction.
+  blitz::Array<bool, 1> parameter_mask_;
+				// Mask of parameters we are fitting for.
   int line_dir() const 
   {return (line_direction_ == INCREASE_IS_POSITIVE ? 1 : -1);}
   int samp_dir() const 

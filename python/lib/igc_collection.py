@@ -133,13 +133,9 @@ class IgcArray(IgcCollection):
     "title" filled in. This isn't present in the underlying C++ 
     ImageGroundConnection class, but python classes such as 
     GdalImageGroundConnection and VicarImageGroundConnection do have these.'''
-    def __init__(self, initial_data = [], parameter_mask = None):
+    def __init__(self, initial_data = []):
         self.igc = copy.copy(initial_data)
         IgcCollection.__init__(self)
-        if(parameter_mask is not None):
-            self.parameter_mask = copy.copy(parameter_mask)
-        else:
-            self.parameter_mask = [True] * len(self.parameter)
 
     @classmethod
     def pickle_format_version(cls):
@@ -148,7 +144,7 @@ class IgcArray(IgcCollection):
     def __reduce__(self):
         return _new_from_init, (self.__class__,
                                 self.__class__.pickle_format_version(),
-                                self.igc, self.parameter_mask)
+                                self.igc)
 
     def __str__(self):
         res =  "IgcArray\n"
@@ -161,6 +157,12 @@ class IgcArray(IgcCollection):
             res += "     %s: %f\n" % (self.parameter_name[i], self.parameter[i])
         return res
 
+    def _v_parameter_mask(self):
+            res = []
+            for v in self.igc:
+                res = np.append(res, v.parameter_mask)
+            return res
+        
     def _v_parameter(self, *args):
         '''Value of parameters controlling mapping to and from image 
         coordinates'''

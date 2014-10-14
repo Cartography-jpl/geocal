@@ -416,12 +416,116 @@ class QuaternionCamera(geocal_swig.camera.Camera):
         """
         return _quaternion_camera.QuaternionCamera_dcs_look_vector(self, *args)
 
+    def _v_fit_epsilon(self, *args):
+        """
+        void GeoCal::QuaternionCamera::fit_epsilon(bool V)
+
+        """
+        return _quaternion_camera.QuaternionCamera__v_fit_epsilon(self, *args)
+
+    @property
+    def fit_epsilon(self):
+        return self._v_fit_epsilon()
+
+    @fit_epsilon.setter
+    def fit_epsilon(self, value):
+      self._v_fit_epsilon(value)
+
+    def _v_fit_beta(self, *args):
+        """
+        void GeoCal::QuaternionCamera::fit_beta(bool V)
+
+        """
+        return _quaternion_camera.QuaternionCamera__v_fit_beta(self, *args)
+
+    @property
+    def fit_beta(self):
+        return self._v_fit_beta()
+
+    @fit_beta.setter
+    def fit_beta(self, value):
+      self._v_fit_beta(value)
+
+    def _v_fit_delta(self, *args):
+        """
+        void GeoCal::QuaternionCamera::fit_delta(bool V)
+
+        """
+        return _quaternion_camera.QuaternionCamera__v_fit_delta(self, *args)
+
+    @property
+    def fit_delta(self):
+        return self._v_fit_delta()
+
+    @fit_delta.setter
+    def fit_delta(self, value):
+      self._v_fit_delta(value)
+
+    def _v_fit_line_pitch(self, *args):
+        """
+        void GeoCal::QuaternionCamera::fit_line_pitch(bool V)
+
+        """
+        return _quaternion_camera.QuaternionCamera__v_fit_line_pitch(self, *args)
+
+    @property
+    def fit_line_pitch(self):
+        return self._v_fit_line_pitch()
+
+    @fit_line_pitch.setter
+    def fit_line_pitch(self, value):
+      self._v_fit_line_pitch(value)
+
+    def _v_fit_sample_pitch(self, *args):
+        """
+        void GeoCal::QuaternionCamera::fit_sample_pitch(bool V)
+
+        """
+        return _quaternion_camera.QuaternionCamera__v_fit_sample_pitch(self, *args)
+
+    @property
+    def fit_sample_pitch(self):
+        return self._v_fit_sample_pitch()
+
+    @fit_sample_pitch.setter
+    def fit_sample_pitch(self, value):
+      self._v_fit_sample_pitch(value)
+
+    def _v_fit_focal_length(self, *args):
+        """
+        void GeoCal::QuaternionCamera::fit_focal_length(bool V)
+
+        """
+        return _quaternion_camera.QuaternionCamera__v_fit_focal_length(self, *args)
+
+    @property
+    def fit_focal_length(self):
+        return self._v_fit_focal_length()
+
+    @fit_focal_length.setter
+    def fit_focal_length(self, value):
+      self._v_fit_focal_length(value)
+
+    def fit_principal_point_line(self, *args):
+        """
+        void GeoCal::QuaternionCamera::fit_principal_point_line(bool V, int Band=0)
+
+        """
+        return _quaternion_camera.QuaternionCamera_fit_principal_point_line(self, *args)
+
+    def fit_principal_point_sample(self, *args):
+        """
+        void GeoCal::QuaternionCamera::fit_principal_point_sample(bool V, int Band=0)
+
+        """
+        return _quaternion_camera.QuaternionCamera_fit_principal_point_sample(self, *args)
+
     @classmethod
     def pickle_format_version(cls):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.frame_to_sc,self.number_line(0),self.number_sample(0),self.line_pitch,self.sample_pitch,self.focal_length,self.principal_point(0),self.frame_convention,self.line_direction,self.sample_direction)
+      return _new_from_init, (self.__class__, 1, self.frame_to_sc,self.number_line(0),self.number_sample(0),self.line_pitch,self.sample_pitch,self.focal_length,self.principal_point(0),self.frame_convention,self.line_direction,self.sample_direction,self.parameter_mask)
 
     def __init__(self, *args): 
         """
@@ -430,7 +534,8 @@ class QuaternionCamera(geocal_swig.camera.Camera):
         Focal_length, const FrameCoordinate &Principal_point, FrameConvention
         Frame_convention=LINE_IS_X, FrameDirection
         Line_direction=INCREASE_IS_POSITIVE, FrameDirection
-        Sample_direction=INCREASE_IS_POSITIVE)
+        Sample_direction=INCREASE_IS_POSITIVE, const blitz::Array< bool, 1 >
+        &Parameter_mask=blitz::Array< bool, 1 >())
         Create a QuaternionCamera.
 
         The orientation of the camera to the spacecraft to given by the
@@ -460,6 +565,14 @@ QuaternionCamera._v_euler = new_instancemethod(_quaternion_camera.QuaternionCame
 QuaternionCamera._v_euler_with_derivative = new_instancemethod(_quaternion_camera.QuaternionCamera__v_euler_with_derivative,None,QuaternionCamera)
 QuaternionCamera.sc_look_vector = new_instancemethod(_quaternion_camera.QuaternionCamera_sc_look_vector,None,QuaternionCamera)
 QuaternionCamera.dcs_look_vector = new_instancemethod(_quaternion_camera.QuaternionCamera_dcs_look_vector,None,QuaternionCamera)
+QuaternionCamera._v_fit_epsilon = new_instancemethod(_quaternion_camera.QuaternionCamera__v_fit_epsilon,None,QuaternionCamera)
+QuaternionCamera._v_fit_beta = new_instancemethod(_quaternion_camera.QuaternionCamera__v_fit_beta,None,QuaternionCamera)
+QuaternionCamera._v_fit_delta = new_instancemethod(_quaternion_camera.QuaternionCamera__v_fit_delta,None,QuaternionCamera)
+QuaternionCamera._v_fit_line_pitch = new_instancemethod(_quaternion_camera.QuaternionCamera__v_fit_line_pitch,None,QuaternionCamera)
+QuaternionCamera._v_fit_sample_pitch = new_instancemethod(_quaternion_camera.QuaternionCamera__v_fit_sample_pitch,None,QuaternionCamera)
+QuaternionCamera._v_fit_focal_length = new_instancemethod(_quaternion_camera.QuaternionCamera__v_fit_focal_length,None,QuaternionCamera)
+QuaternionCamera.fit_principal_point_line = new_instancemethod(_quaternion_camera.QuaternionCamera_fit_principal_point_line,None,QuaternionCamera)
+QuaternionCamera.fit_principal_point_sample = new_instancemethod(_quaternion_camera.QuaternionCamera_fit_principal_point_sample,None,QuaternionCamera)
 QuaternionCamera_swigregister = _quaternion_camera.QuaternionCamera_swigregister
 QuaternionCamera_swigregister(QuaternionCamera)
 

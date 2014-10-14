@@ -26,6 +26,15 @@ public:
 		   FrameConvention Frame_convention = LINE_IS_X,
 		   FrameDirection Line_direction = INCREASE_IS_POSITIVE,
 		   FrameDirection Sample_direction = INCREASE_IS_NEGATIVE);
+  QuaternionCamera(boost::math::quaternion<double> frame_to_sc_q, 
+		   double Number_line, double Number_sample,
+		   double Line_pitch, double Sample_pitch,
+		   double Focal_length, 
+		   const FrameCoordinate& Principal_point,
+		   FrameConvention Frame_convention,
+		   FrameDirection Line_direction,
+		   FrameDirection Sample_direction,
+		   const blitz::Array<bool, 1>& Parameter_mask);
   virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
   %python_attribute_with_set(focal_length, double);
@@ -68,6 +77,16 @@ public:
   virtual DcsLookVector dcs_look_vector(const ScLookVector& Sl) const;
   virtual DcsLookVector dcs_look_vector(const FrameCoordinate& F, int Band) 
     const;
+  %python_attribute_with_set(fit_epsilon, bool);
+  %python_attribute_with_set(fit_beta, bool);
+  %python_attribute_with_set(fit_delta, bool);
+  %python_attribute_with_set(fit_line_pitch, bool);
+  %python_attribute_with_set(fit_sample_pitch, bool);
+  %python_attribute_with_set(fit_focal_length, bool);
+  bool fit_principal_point_line(int Band = 0) const;
+  void fit_principal_point_line(bool V, int Band = 0);
+  bool fit_principal_point_sample(int Band = 0) const;
+  void fit_principal_point_sample(bool V, int Band = 0);
 protected:
   QuaternionCamera();
   virtual void dcs_to_focal_plane(int Band,
@@ -88,7 +107,7 @@ protected:
 	       self.line_pitch, self.sample_pitch, self.focal_length, 
 	       self.principal_point(0), 
 	       self.frame_convention, self.line_direction, 
-	       self.sample_direction)
+	       self.sample_direction, self.parameter_mask)
 };
 }
 

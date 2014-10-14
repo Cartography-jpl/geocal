@@ -20,6 +20,17 @@ class WithParameterTest(WithParameter):
     def _v_parameter_name(self):
         return ["Parameter 0", "Parameter 1", "Parameter 2"]
 
+    def _v_parameter_mask(self):
+        return self.parameter_mask_
+
+    @property
+    def parameter_mask(self):
+        return self._v_parameter_mask()
+
+    @parameter_mask.setter
+    def parameter_mask(self, value):
+        self.parameter_mask_ = value
+
 def test_parameter_name():
     '''Test parameter_name.'''
     t = WithParameterTest()

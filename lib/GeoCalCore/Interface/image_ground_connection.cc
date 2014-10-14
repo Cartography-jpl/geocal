@@ -207,6 +207,19 @@ blitz::Array<double, 1> OffsetImageGroundConnection::parameter() const
 { 
   Array<double, 1> rest = ig_->parameter(); 
   Array<double, 1> res(2 + rest.rows());
+  res(0) = line_offset_.value();
+  res(1) = sample_offset_.value();
+  if(res.rows() > 2)
+    res(Range(2, toEnd)) = rest;
+  return res;
+}
+
+// See base class for description
+ArrayAd<double, 1> 
+OffsetImageGroundConnection::parameter_with_derivative() const 
+{ 
+  ArrayAd<double, 1> rest = ig_->parameter_with_derivative(); 
+  ArrayAd<double, 1> res(2 + rest.rows(), res.number_variable());
   res(0) = line_offset_;
   res(1) = sample_offset_;
   if(res.rows() > 2)
@@ -228,6 +241,32 @@ void OffsetImageGroundConnection::parameter
   sample_offset_ = Parm(1);
   if(Parm.rows() > 2)
     ig_->parameter(Parm(Range(2,toEnd)));
+}
+
+void OffsetImageGroundConnection::parameter_with_derivative
+(const ArrayAd<double, 1>& Parm)
+{ 
+  if(Parm.rows() != parameter().rows()) {
+    Exception e;
+    e << "Expected parameter to have " << parameter().rows() 
+      << " rows, but got " << Parm.rows();
+    throw e;
+  }
+  line_offset_ = Parm(0);
+  sample_offset_ = Parm(1);
+  if(Parm.rows() > 2)
+    ig_->parameter_with_derivative(Parm(Range(2,toEnd)));
+}
+
+blitz::Array<bool, 1> OffsetImageGroundConnection::parameter_mask() const
+{
+  Array<bool, 1> rest = ig_->parameter_mask(); 
+  Array<bool, 1> res(2 + rest.rows());
+  res(0) = true;
+  res(1) = true;
+  if(res.rows() > 2)
+    res(Range(2, toEnd)) = rest;
+  return res;
 }
 
 // See base class for description

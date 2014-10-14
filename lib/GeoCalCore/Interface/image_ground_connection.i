@@ -7,6 +7,7 @@
 #include "image_ground_connection.h"
 %}
 %base_import(generic_object)
+%base_import(with_parameter)
 %base_import(geocal_exception)
 %import "dem.i"
 %import "raster_image.i"
@@ -47,7 +48,8 @@ public:
 %rename("__dem") ImageGroundConnection::dem;
 %rename("__ground_coordinate") ImageGroundConnection::ground_coordinate;
 #endif
-class ImageGroundConnection: public GenericObject {
+class ImageGroundConnection: public GenericObject,
+			     public WithParameter{
 protected:
   ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
 			const boost::shared_ptr<RasterImage>& Img, 
@@ -117,10 +119,19 @@ public:
   %python_attribute_with_set(title, std::string)
   %python_attribute(has_time, bool)
   std::string print_to_string() const;
-  %python_attribute_with_set(parameter, blitz::Array<double, 1>)
-  %python_attribute(parameter_name, virtual std::vector<std::string>)
   virtual double resolution_meter(const ImageCoordinate& Ic) const;
   virtual double resolution_meter() const;
+
+  %python_attribute_with_set_virtual(parameter, blitz::Array<double, 1>);
+  %python_attribute_with_set_virtual(parameter_with_derivative, 
+			     ArrayAd<double, 1>);
+  %python_attribute(parameter_name, virtual std::vector<std::string>);
+  %python_attribute_with_set_virtual(parameter_subset, blitz::Array<double, 1>);
+  %python_attribute_with_set_virtual(parameter_with_derivative_subset, 
+			     ArrayAd<double, 1>);
+  %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
+  %python_attribute(parameter_mask, virtual blitz::Array<bool, 1>);
+
   // SWIG Director doesn't like this. For now, just don't pass this to
   // python. If this ever becomes an issue we can split this up like
   // we did with cf_look_vector_pos and cf_look_vector_lv.

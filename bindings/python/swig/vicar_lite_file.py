@@ -123,6 +123,7 @@ import geocal_swig.raster_image
 import geocal_swig.look_vector
 import geocal_swig.dem_map_info
 import geocal_swig.dem
+import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
 class VicarLiteFile(geocal_swig.generic_object.GenericObject):
     """

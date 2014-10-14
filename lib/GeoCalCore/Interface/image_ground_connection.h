@@ -9,6 +9,7 @@
 #include "raster_image_multi_band_variable.h"
 #include "ground_mask.h"
 #include "image_mask.h"
+#include "with_parameter.h"
 #include <blitz/array.h>
 
 namespace GeoCal {
@@ -53,7 +54,8 @@ public:
 
 *******************************************************************/
 
-class ImageGroundConnection : public Printable<ImageGroundConnection> {
+class ImageGroundConnection : public Printable<ImageGroundConnection>,
+			      public WithParameter {
 public:
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -231,7 +233,7 @@ public:
 ///
 /// For some types of ImageGroundConnection, we might not be able to
 /// calculate image_coordinate for all values (e.g., Ipi might fail).
-/// In those cases, we will through a ImageGroundConnectionFailed
+/// In those cases, we will throw a ImageGroundConnectionFailed
 /// exception. This means that nothing is wrong, other than that we
 /// can't calculate the image_coordinate. Callers can catch this
 /// exception if they have some way of handling no image coordinate
@@ -291,36 +293,6 @@ public:
     if(image_multi_band())
       return image_multi_band()->number_band();
     return 0;
-  }
-
-//-----------------------------------------------------------------------
-/// A image to ground connection may depend on a set of parameters,
-/// which can by modified (e.g., during a simultaneous bundle
-/// adjustment). This returns those parameters.
-//-----------------------------------------------------------------------
-
-  virtual blitz::Array<double, 1> parameter() const
-  { // Default is no parameters.
-    return blitz::Array<double, 1>(0); 
-  }
-
-//-----------------------------------------------------------------------
-/// Set the value of the parameters.
-//-----------------------------------------------------------------------
-
-  virtual void parameter(const blitz::Array<double, 1>& Parm)
-  {
-    // Default is do nothing
-  }
-
-//-----------------------------------------------------------------------
-/// Descriptive name of each parameter.
-//-----------------------------------------------------------------------
-
-  virtual std::vector<std::string> parameter_name() const
-  {
-    std::vector<std::string> res;
-    return res;
   }
 
 //-----------------------------------------------------------------------
@@ -435,7 +407,8 @@ public:
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
 		 boost::shared_ptr<CartesianFixed>& P) const
   {
-    ImageCoordinate ic2(Ic.line - line_offset_, Ic.sample - sample_offset_);
+    ImageCoordinate ic2(Ic.line - line_offset_.value(), 
+			Ic.sample - sample_offset_.value());
     ig_->cf_look_vector(ic2, Lv, P);
   }
 
@@ -445,13 +418,15 @@ public:
 
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const
-  { ImageCoordinate ic2(Ic.line - line_offset_, Ic.sample - sample_offset_);
+  { ImageCoordinate ic2(Ic.line - line_offset_.value(), 
+			Ic.sample - sample_offset_.value());
     return ig_->ground_coordinate_dem(ic2, D); 
   }
 
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
-  { ImageCoordinate ic2(Ic.line - line_offset_, Ic.sample - sample_offset_);
+  { ImageCoordinate ic2(Ic.line - line_offset_.value(), 
+			Ic.sample - sample_offset_.value());
     return ig_->ground_coordinate_approx_height(ic2, H); 
   }
 
@@ -462,8 +437,8 @@ public:
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const
   {
     ImageCoordinate ic = ig_->image_coordinate(Gc);
-    ic.line += line_offset_;
-    ic.sample += sample_offset_;
+    ic.line += line_offset_.value();
+    ic.sample += sample_offset_.value();
     return ic;
   }
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const
@@ -472,8 +447,11 @@ public:
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   virtual blitz::Array<double, 1> parameter() const;
+  virtual ArrayAd<double, 1> parameter_with_derivative() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
+  virtual blitz::Array<bool, 1> parameter_mask() const;
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -482,8 +460,8 @@ public:
   virtual void print(std::ostream& Os) const
   { 
     Os << "OffsetImageGroundConnection\n"
-       << "  Line offset:   " << line_offset_ << "\n"
-       << "  Sample offset: " << sample_offset_ << "\n"
+       << "  Line offset:   " << line_offset_.value() << "\n"
+       << "  Sample offset: " << sample_offset_.value() << "\n"
        << "  Original ImageGroundConnection:\n"
        << *ig_ << "\n";
   }
@@ -499,17 +477,17 @@ public:
 /// Return line offset.
 //-----------------------------------------------------------------------
 
-  double line_offset() const { return line_offset_;}
+  double line_offset() const { return line_offset_.value();}
 
 //-----------------------------------------------------------------------
 /// Return sample offset.
 //-----------------------------------------------------------------------
 
-  double sample_offset() const { return sample_offset_;}
+  double sample_offset() const { return sample_offset_.value();}
 private:
   boost::shared_ptr<ImageGroundConnection> ig_;
-  double line_offset_;
-  double sample_offset_;
+  AutoDerivative<double> line_offset_;
+  AutoDerivative<double> sample_offset_;
 };
 
 /****************************************************************//**
@@ -576,8 +554,14 @@ public:
   { return igc->parameter(); }
   virtual void parameter(const blitz::Array<double, 1>& Parm)
   { igc->parameter(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return igc->parameter_with_derivative(); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  { return igc->parameter_with_derivative(Parm); }
   virtual std::vector<std::string> parameter_name() const
   { return igc->parameter_name(); }
+  virtual blitz::Array<bool, 1> parameter_mask() const
+  { return igc->parameter_mask(); }
   virtual void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<ImageGroundConnection> igc;

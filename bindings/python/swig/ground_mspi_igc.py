@@ -121,9 +121,9 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.ipi_image_ground_connection
 import geocal_swig.image_ground_connection
 import geocal_swig.generic_object
+import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
 import geocal_swig.observer
-import geocal_swig.with_parameter
 class GroundMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnection):
     """
     This is an ImageGroundConnection for GroundMspi.

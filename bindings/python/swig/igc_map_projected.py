@@ -125,6 +125,7 @@ import geocal_swig.generic_object
 import geocal_swig.calc_raster_multi_band
 import geocal_swig.raster_image_multi_band_variable
 import geocal_swig.raster_image_multi_band
+import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
 class IgcMapProjected(geocal_swig.calc_raster.CalcRaster):
     """

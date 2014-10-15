@@ -755,6 +755,7 @@ Orbit._v_parameter_subset = new_instancemethod(_orbit.Orbit__v_parameter_subset,
 Orbit._v_parameter_with_derivative_subset = new_instancemethod(_orbit.Orbit__v_parameter_with_derivative_subset,None,Orbit)
 Orbit._v_parameter_name_subset = new_instancemethod(_orbit.Orbit__v_parameter_name_subset,None,Orbit)
 Orbit._v_parameter_mask = new_instancemethod(_orbit.Orbit__v_parameter_mask,None,Orbit)
+Orbit.notify_update_do = new_instancemethod(_orbit.Orbit_notify_update_do,None,Orbit)
 Orbit.interpolate = new_instancemethod(_orbit.Orbit_interpolate,None,Orbit)
 Orbit_swigregister = _orbit.Orbit_swigregister
 Orbit_swigregister(Orbit)

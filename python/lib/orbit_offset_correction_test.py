@@ -132,6 +132,28 @@ def test_frame_coordinate():
     assert_almost_equal(ic.line, i0.line, 4)
     assert_almost_equal(ic.sample, i0.sample, 4)
 
+def test_observer():
+    '''Check that we properly notify other objects when parameter changes'''
+    if(orb_uncorr is None):
+        raise SkipTest
+    t2 = Time.time_acs(215077459.472);
+    t1 = t2 - 10
+    t3 = t2 + 10
+    orb = OrbitOffsetCorrection(orb_uncorr, time_point = [t1, t2, t3])
+    orb.parameter = [100, 200, 300, 50, 20, 30, 20, 40, 60, -10, -20, -30]
+    img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
+    igc = OrbitDataImageGroundConnection(orb, t1 + 5, cam, SimpleDem(), img)
+    ic = ImageCoordinate(100, 200)
+    gp = igc.ground_coordinate(ic)
+    i0 = orb.frame_coordinate(t1 + 5, gp, cam)
+    assert_almost_equal(ic.line, i0.line, 4)
+    assert_almost_equal(ic.sample, i0.sample, 4)
+    orb.parameter = [100, 200, 300, 60, 30, 40, 20, 40, 60, -10, -20, -30]
+    gp = igc.ground_coordinate(ic)
+    i0 = orb.frame_coordinate(t1 + 5, gp, cam)
+    assert_almost_equal(ic.line, i0.line, 4)
+    assert_almost_equal(ic.sample, i0.sample, 4)
+    
 def test_frame_coordinate_with_der():
     if(orb_uncorr is None):
         raise SkipTest

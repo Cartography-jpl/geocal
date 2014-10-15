@@ -40,6 +40,7 @@ public:
     virtual boost::shared_ptr< GeoCal::CartesianInertial > position_ci(GeoCal::Time T) const;
     virtual boost::shared_ptr< GeoCal::CartesianFixed > position_cf(GeoCal::Time T) const;
     virtual boost::shared_ptr< GeoCal::OrbitData > orbit_data(GeoCal::Time T) const;
+    using GeoCal::Orbit::notify_update_do;
     using GeoCal::Orbit::interpolate;
 
 

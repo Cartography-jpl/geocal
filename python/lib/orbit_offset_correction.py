@@ -79,9 +79,6 @@ class OrbitOffsetCorrection(Orbit):
         res[5:-1:3] = True if self.fit_roll else False
         return res
 
-    def temp(self):
-        return self.__parameter
-
     def _v_parameter_with_derivative(self, *args):
         '''Parameters used in correction. This is the first the offset in
         position, followed by the yaw, pitch, roll correction at 
@@ -96,6 +93,7 @@ class OrbitOffsetCorrection(Orbit):
             if(value.rows != 3 + 3 * len(self.time_point)):
                 raise ValueError("Parameter is the wrong length. It was length %d, but should have been %d" % (value.rows(), 3 + 3 * len(self.time_point)))
             self.__parameter = value.copy()
+            self.notify_update_do(self)
 
     def _v_parameter_name(self):
         res = ["Position X Offset", "Position Y Offset", "Position Z Offset"]

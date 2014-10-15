@@ -134,16 +134,18 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(const boost::shared_ptr< OrbitData > &Od, const boost::shared_ptr<
-        Camera > &Cam, const boost::shared_ptr< Dem > &D, const
-        boost::shared_ptr< RasterImage > &Img, const std::string Title="",
-        const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<
-        Refraction >(), double Resolution=30, int Band=0, double
-        Max_height=9000)
-        Constructor.
+        GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(Orbit &Orb, const Time &Tm, const boost::shared_ptr< Camera > &Cam,
+        const boost::shared_ptr< Dem > &D, const boost::shared_ptr<
+        RasterImage > &Img, const std::string Title="", const
+        boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction
+        >(), double Resolution=30, int Band=0, double Max_height=9000)
+        Constructor that takes an Orbit and a time.
 
-        You can optionally include a approximate refraction correction, the
-        default is not to. 
+        We populate this using the OrbitData from the orbit for that time.
+        Moreover, we make this class an Observer of the underlying orbit. When
+        the orbit notifies us of changes, we regenerate the orbit data. This
+        means that this class will remain in sync with changes in the
+        underlying orbit. 
         """
         _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_swiginit(self,_orbit_data_image_ground_connection.new_OrbitDataImageGroundConnection(*args))
     def cf_look_vector(self, *args):

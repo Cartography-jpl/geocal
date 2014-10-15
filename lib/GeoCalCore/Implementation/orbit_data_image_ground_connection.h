@@ -11,7 +11,8 @@ namespace GeoCal {
   OrbitData and a Camera.
 *******************************************************************/
 
-class OrbitDataImageGroundConnection : public ImageGroundConnection {
+class OrbitDataImageGroundConnection : public ImageGroundConnection,
+				       public Observer<Orbit> {
 public:
 //-----------------------------------------------------------------------
 /// Constructor. You can optionally include a approximate refraction
@@ -33,10 +34,40 @@ public:
       res(Resolution), b(Band), max_h(Max_height) {}
 
 //-----------------------------------------------------------------------
+/// Constructor that takes an Orbit and a time. We populate this using
+/// the OrbitData from the orbit for that time. Moreover, we make this
+/// class an Observer of the underlying orbit. When the orbit
+/// notifies us of changes, we regenerate the orbit data. This means
+/// that this class will remain in sync with changes in the underlying
+/// orbit. 
+//-----------------------------------------------------------------------
+
+  OrbitDataImageGroundConnection(Orbit& Orb,
+  				 const Time& Tm,
+  				 const boost::shared_ptr<Camera>& Cam, 
+  				 const boost::shared_ptr<Dem>& D,
+  				 const boost::shared_ptr<RasterImage>& Img,
+  				 const std::string Title = "",
+  				 const boost::shared_ptr<Refraction>&
+  				 Ref = boost::shared_ptr<Refraction>(),
+  				 double Resolution=30, int Band=0, 
+  				 double Max_height=9000)
+    : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
+  			    Title), cam(Cam),
+      refraction_(Ref),
+      res(Resolution), b(Band), max_h(Max_height) 
+  {
+    od = Orb.orbit_data(Tm);
+    Orb.add_observer(*this);
+  }
+
+//-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
 
   virtual ~OrbitDataImageGroundConnection() {}
+  virtual void notify_update(const Orbit& Orb)
+  { od = Orb.orbit_data(od->time()); }
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
 		 boost::shared_ptr<CartesianFixed>& P) const
@@ -93,6 +124,28 @@ public:
       fc = od->frame_coordinate(Gc, *cam, b);
     return ImageCoordinate(fc.line, fc.sample);
   }
+
+//-----------------------------------------------------------------------
+/// Return the Jacobian of the image coordinates with respect to the
+/// parameters.
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<double, 2> 
+  image_coordinate_jac_parm(const GroundCoordinate& Gc) const
+  { // Default is no parameters
+    FrameCoordinateWithDerivative fc;
+    if(refraction_) {
+      boost::shared_ptr<GroundCoordinate> gc_uncorr =
+	refraction_->refraction_reverse(*od->position_cf(), Gc);
+      fc = od->frame_coordinate_with_derivative(*gc_uncorr, *cam, b);
+    } else
+      fc = od->frame_coordinate_with_derivative(Gc, *cam, b);
+    blitz::Array<double, 2> res(2, fc.line.gradient().rows());
+    res(0, blitz::Range::all()) = fc.line.gradient();
+    res(1, blitz::Range::all()) = fc.sample.gradient();
+    return res;
+  }
+
 //-----------------------------------------------------------------------
 /// This is image_coordinate, but include the derivative of this
 /// with respect to the parameters of the Camera and OrbitData. Not

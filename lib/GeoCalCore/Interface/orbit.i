@@ -271,6 +271,7 @@ public:
   %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
   %python_attribute(parameter_mask, virtual blitz::Array<bool, 1>);
 protected:
+  void notify_update_do(const Orbit& Self);
   boost::math::quaternion<double> interpolate(
               const boost::math::quaternion<double>& Q1, 
               const boost::math::quaternion<double>& Q2,

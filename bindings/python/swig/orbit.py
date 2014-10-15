@@ -590,6 +590,15 @@ class Orbit(ObservableOrbit,geocal_swig.with_parameter.WithParameter):
         """
         return _orbit.Orbit_frame_coordinate(self, *args)
 
+    def frame_coordinate_with_derivative(self, *args):
+        """
+        FrameCoordinateWithDerivative GeoCal::Orbit::frame_coordinate_with_derivative(Time T, const GroundCoordinate &Gc, const Camera &C, int Band=0)
+        const
+        Give the frame coordinates that a particular point on the ground is
+        seen. 
+        """
+        return _orbit.Orbit_frame_coordinate_with_derivative(self, *args)
+
     def reference_surface_intersect_approximate(self, *args):
         """
         boost::shared_ptr<CartesianFixed> GeoCal::Orbit::reference_surface_intersect_approximate(Time T, const Camera &C, const FrameCoordinate &Fc, int Band=0,
@@ -730,6 +739,7 @@ Orbit.remove_observer = new_instancemethod(_orbit.Orbit_remove_observer,None,Orb
 Orbit.ci_look_vector = new_instancemethod(_orbit.Orbit_ci_look_vector,None,Orbit)
 Orbit.cf_look_vector = new_instancemethod(_orbit.Orbit_cf_look_vector,None,Orbit)
 Orbit.frame_coordinate = new_instancemethod(_orbit.Orbit_frame_coordinate,None,Orbit)
+Orbit.frame_coordinate_with_derivative = new_instancemethod(_orbit.Orbit_frame_coordinate_with_derivative,None,Orbit)
 Orbit.reference_surface_intersect_approximate = new_instancemethod(_orbit.Orbit_reference_surface_intersect_approximate,None,Orbit)
 Orbit.sc_look_vector = new_instancemethod(_orbit.Orbit_sc_look_vector,None,Orbit)
 Orbit.position_ci = new_instancemethod(_orbit.Orbit_position_ci,None,Orbit)

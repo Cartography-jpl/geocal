@@ -460,6 +460,16 @@ public:
   { return orbit_data(T)->frame_coordinate(Gc, C, Band);}
 
 //-----------------------------------------------------------------------
+/// Give the frame coordinates that a particular point on the ground
+/// is seen.
+//-----------------------------------------------------------------------
+
+  FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(Time T, const GroundCoordinate& Gc, 
+				   const Camera& C, int Band = 0) const
+  { return orbit_data(T)->frame_coordinate_with_derivative(Gc, C, Band);}
+
+//-----------------------------------------------------------------------
 /// Return location on the reference surface that a particular frame 
 /// coordinate is seen. This is approximate, in the same way 
 /// CartesianFixed::reference_intersect_approximate is approximate.

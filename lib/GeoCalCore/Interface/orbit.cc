@@ -116,13 +116,12 @@ FrameCoordinateWithDerivative
 OrbitData::frame_coordinate_with_derivative
 (const GroundCoordinate& Gc, const Camera& C, int Band) const
 {
-  boost::shared_ptr<CartesianFixed> p1 = position_cf();
+  boost::array<AutoDerivative<double>, 3> p1 = position_cf_with_derivative();
   boost::shared_ptr<CartesianFixed> p2 = Gc.convert_to_cf();
-  CartesianFixedLookVector lv;
+  CartesianFixedLookVectorWithDerivative lv;
   for(int i = 0; i < 3; ++i)
-    lv.look_vector[i] = p2->position[i] - p1->position[i];
-  // Don't include orbit parameters yet, we'll need to add this.
-  ScLookVector sl = sc_look_vector(lv);
+    lv.look_vector[i] = p2->position[i] - p1[i];
+  ScLookVectorWithDerivative sl = sc_look_vector(lv);
   return C.frame_coordinate_with_derivative(sl, Band);
 }
 

@@ -129,5 +129,33 @@ def test_frame_coordinate():
     ic = ImageCoordinate(100, 200)
     gp = igc.ground_coordinate(ic)
     i0 = orb.frame_coordinate(t1 + 5, gp, cam)
+    assert_almost_equal(ic.line, i0.line, 4)
+    assert_almost_equal(ic.sample, i0.sample, 4)
 
+def test_frame_coordinate_with_der():
+    if(orb_uncorr is None):
+        raise SkipTest
+    t2 = Time.time_acs(215077459.472);
+    t1 = t2 - 10
+    t3 = t2 + 10
+    orb = OrbitOffsetCorrection(orb_uncorr, time_point = [t1, t2, t3])
+    orb.parameter = [100, 200, 300, 50, 20, 30, 20, 40, 60, -10, -20, -30]
+    img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
+    # We have 20 parameters, 8 in the camera 12 in orbit
+    cam_jac = np.zeros((8, 20))
+    orb_jac = np.zeros((12, 20))
+    for i in range(cam_jac.shape[0]):
+        cam_jac[i,i] = 1
+    for i in range(orb_jac.shape[0]):
+        orb_jac[i, i + cam_jac.shape[0]] = 1
+    cam.parameter_with_derivative = ArrayAd_double_1(cam.parameter, cam_jac)
+    orb.parameter_with_derivative = ArrayAd_double_1(orb.parameter, orb_jac)
+    igc = OrbitDataImageGroundConnection(orb.orbit_data(t1 + 5), 
+                                         cam, SimpleDem(), img)
+    ic = ImageCoordinate(100, 200)
+    gp = igc.ground_coordinate(ic)
+    i0 = orb.frame_coordinate_with_derivative(t1 + 5, gp, cam)
+    assert_almost_equal(ic.line, i0.line.value, 4)
+    assert_almost_equal(ic.sample, i0.sample.value, 4)
+    print i0
 

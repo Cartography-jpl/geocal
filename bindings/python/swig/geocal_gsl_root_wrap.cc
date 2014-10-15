@@ -4796,11 +4796,13 @@ namespace swig
 #endif
 #include <numpy/arrayobject.h>
 #include "geocal_exception.h"
+#include "auto_derivative.h"
 
 PyObject* numpy_module();
 PyObject* numpy_dot_float64();
 PyObject* numpy_dot_int32();
 PyObject* numpy_dot_bool();
+PyObject* numpy_dot_object();
 
 //--------------------------------------------------------------
 // Helper routines to map a template type to the code numpy uses
@@ -4811,6 +4813,7 @@ template<class T> int type_to_npy();
 template<> inline int type_to_npy<double>() {return NPY_DOUBLE;}
 template<> inline int type_to_npy<int>() {return NPY_INT;}
 template<> inline int type_to_npy<bool>() {return NPY_BOOL;}
+template<> inline int type_to_npy<GeoCal::AutoDerivative<double> >() {return NPY_OBJECT;}
 
 //--------------------------------------------------------------
 // Use the numpy command "asarray" to convert various python 
@@ -4844,6 +4847,15 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
 				    PyString_FromString("asarray"), 
 				    obj, numpy_dot_int32(), NULL);
+  PyErr_Clear();
+  return res;
+}
+
+template<> inline PyObject* to_numpy<GeoCal::AutoDerivative<double> >(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
+				    PyString_FromString("asarray"), 
+				    obj, numpy_dot_object(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -5137,7 +5149,7 @@ SWIGINTERN PyObject *_wrap_gsl_root__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int 
     int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
       0 );
     if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<double>(swig_obj[1]);
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj)
       return NULL;
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -5166,7 +5178,7 @@ SWIGINTERN PyObject *_wrap_gsl_root__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int 
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
-    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double>(), 
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -5220,7 +5232,7 @@ SWIGINTERN PyObject *_wrap_gsl_root__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int 
     int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
       0 );
     if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<double>(swig_obj[1]);
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj)
       return NULL;
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -5244,7 +5256,7 @@ SWIGINTERN PyObject *_wrap_gsl_root__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int 
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
-    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double>(), 
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -5497,7 +5509,7 @@ SWIGINTERN PyObject *_wrap_gsl_root(PyObject *self, PyObject *args) {
     if (!_v) goto check_2;
     {
       {
-        PythonObject t(to_numpy<double>(argv[1]));
+        PythonObject t(to_numpy<double >(argv[1]));
         _v = (t.obj && PyArray_NDIM(t.obj) ==1 ? 1 : 0);
       }
     }

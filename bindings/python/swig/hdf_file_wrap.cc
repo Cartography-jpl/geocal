@@ -4794,11 +4794,13 @@ namespace swig
 #endif
 #include <numpy/arrayobject.h>
 #include "geocal_exception.h"
+#include "auto_derivative.h"
 
 PyObject* numpy_module();
 PyObject* numpy_dot_float64();
 PyObject* numpy_dot_int32();
 PyObject* numpy_dot_bool();
+PyObject* numpy_dot_object();
 
 //--------------------------------------------------------------
 // Helper routines to map a template type to the code numpy uses
@@ -4809,6 +4811,7 @@ template<class T> int type_to_npy();
 template<> inline int type_to_npy<double>() {return NPY_DOUBLE;}
 template<> inline int type_to_npy<int>() {return NPY_INT;}
 template<> inline int type_to_npy<bool>() {return NPY_BOOL;}
+template<> inline int type_to_npy<GeoCal::AutoDerivative<double> >() {return NPY_OBJECT;}
 
 //--------------------------------------------------------------
 // Use the numpy command "asarray" to convert various python 
@@ -4842,6 +4845,15 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
 				    PyString_FromString("asarray"), 
 				    obj, numpy_dot_int32(), NULL);
+  PyErr_Clear();
+  return res;
+}
+
+template<> inline PyObject* to_numpy<GeoCal::AutoDerivative<double> >(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
+				    PyString_FromString("asarray"), 
+				    obj, numpy_dot_object(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -5567,7 +5579,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_1d(PyObject *SWIGUNUSEDPARM(self)
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
-    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double>(), 
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -5638,7 +5650,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_2d(PyObject *SWIGUNUSEDPARM(self)
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double>(), 
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -5709,7 +5721,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_3d(PyObject *SWIGUNUSEDPARM(self)
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
-    resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<double>(), 
+    resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 3>* t = new blitz::Array<double, 3>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -5780,7 +5792,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_4d(PyObject *SWIGUNUSEDPARM(self)
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
-    resultobj = PyArray_New(&PyArray_Type, 4, dims, type_to_npy<double>(), 
+    resultobj = PyArray_New(&PyArray_Type, 4, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 4>* t = new blitz::Array<double, 4>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -5851,7 +5863,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_1d(PyObject *SWIGUNUSEDPARM(self), P
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(int);
     }
-    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<int>(), 
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<int >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<int, 1>* t = new blitz::Array<int, 1>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -5922,7 +5934,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_2d(PyObject *SWIGUNUSEDPARM(self), P
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(int);
     }
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<int>(), 
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<int >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<int, 2>* t = new blitz::Array<int, 2>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -5993,7 +6005,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_3d(PyObject *SWIGUNUSEDPARM(self), P
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(int);
     }
-    resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<int>(), 
+    resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<int >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<int, 3>* t = new blitz::Array<int, 3>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -6064,7 +6076,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_4d(PyObject *SWIGUNUSEDPARM(self), P
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(int);
     }
-    resultobj = PyArray_New(&PyArray_Type, 4, dims, type_to_npy<int>(), 
+    resultobj = PyArray_New(&PyArray_Type, 4, dims, type_to_npy<int >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<int, 4>* t = new blitz::Array<int, 4>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 

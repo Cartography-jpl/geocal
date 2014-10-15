@@ -297,24 +297,6 @@ AutoDerivativeRefDouble.__str__ = new_instancemethod(_auto_derivative.AutoDeriva
 AutoDerivativeRefDouble_swigregister = _auto_derivative.AutoDerivativeRefDouble_swigregister
 AutoDerivativeRefDouble_swigregister(AutoDerivativeRefDouble)
 
-class ArrayAutoDerivative_double_1(object):
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        _auto_derivative.ArrayAutoDerivative_double_1_swiginit(self,_auto_derivative.new_ArrayAutoDerivative_double_1(*args))
-    __swig_destroy__ = _auto_derivative.delete_ArrayAutoDerivative_double_1
-ArrayAutoDerivative_double_1.data = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_data,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.size = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_size,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.read = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_read,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.write = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_write,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.datav = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_datav,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.shape0 = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_shape0,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.shape1 = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_shape1,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.shape2 = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_shape2,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.shape3 = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_shape3,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1_swigregister = _auto_derivative.ArrayAutoDerivative_double_1_swigregister
-ArrayAutoDerivative_double_1_swigregister(ArrayAutoDerivative_double_1)
-
 
 def sqrt(*args):
   """
@@ -425,6 +407,58 @@ vector_auto_derivative.reserve = new_instancemethod(_auto_derivative.vector_auto
 vector_auto_derivative.capacity = new_instancemethod(_auto_derivative.vector_auto_derivative_capacity,None,vector_auto_derivative)
 vector_auto_derivative_swigregister = _auto_derivative.vector_auto_derivative_swigregister
 vector_auto_derivative_swigregister(vector_auto_derivative)
+
+class BlitzArray_AutoDerivativeDouble_1(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _auto_derivative.BlitzArray_AutoDerivativeDouble_1_swiginit(self,_auto_derivative.new_BlitzArray_AutoDerivativeDouble_1(*args))
+    __swig_destroy__ = _auto_derivative.delete_BlitzArray_AutoDerivativeDouble_1
+BlitzArray_AutoDerivativeDouble_1.data = new_instancemethod(_auto_derivative.BlitzArray_AutoDerivativeDouble_1_data,None,BlitzArray_AutoDerivativeDouble_1)
+BlitzArray_AutoDerivativeDouble_1.size = new_instancemethod(_auto_derivative.BlitzArray_AutoDerivativeDouble_1_size,None,BlitzArray_AutoDerivativeDouble_1)
+BlitzArray_AutoDerivativeDouble_1.read = new_instancemethod(_auto_derivative.BlitzArray_AutoDerivativeDouble_1_read,None,BlitzArray_AutoDerivativeDouble_1)
+BlitzArray_AutoDerivativeDouble_1.write = new_instancemethod(_auto_derivative.BlitzArray_AutoDerivativeDouble_1_write,None,BlitzArray_AutoDerivativeDouble_1)
+BlitzArray_AutoDerivativeDouble_1.datav = new_instancemethod(_auto_derivative.BlitzArray_AutoDerivativeDouble_1_datav,None,BlitzArray_AutoDerivativeDouble_1)
+BlitzArray_AutoDerivativeDouble_1.shape0 = new_instancemethod(_auto_derivative.BlitzArray_AutoDerivativeDouble_1_shape0,None,BlitzArray_AutoDerivativeDouble_1)
+BlitzArray_AutoDerivativeDouble_1.shape1 = new_instancemethod(_auto_derivative.BlitzArray_AutoDerivativeDouble_1_shape1,None,BlitzArray_AutoDerivativeDouble_1)
+BlitzArray_AutoDerivativeDouble_1.shape2 = new_instancemethod(_auto_derivative.BlitzArray_AutoDerivativeDouble_1_shape2,None,BlitzArray_AutoDerivativeDouble_1)
+BlitzArray_AutoDerivativeDouble_1.shape3 = new_instancemethod(_auto_derivative.BlitzArray_AutoDerivativeDouble_1_shape3,None,BlitzArray_AutoDerivativeDouble_1)
+BlitzArray_AutoDerivativeDouble_1_swigregister = _auto_derivative.BlitzArray_AutoDerivativeDouble_1_swigregister
+BlitzArray_AutoDerivativeDouble_1_swigregister(BlitzArray_AutoDerivativeDouble_1)
+
+class Array_AutoDerivativeDouble_3(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    @property
+    def size(self):
+       return self._size()
+
+    def set(self, v):
+       '''Set the value to the given value. The value should be a container
+       that we can enumerate over to fill in the value of the array'''
+       for i, t in enumerate(v):
+          if(i >= self.size):
+              raise RuntimeError("Value must be exactly %d in size" % self.size)
+          self[i] = t
+       if(i != self.size - 1):
+           raise RuntimeError("Value must be exactly %d in size" % self.size)
+
+    def __iter__(self):
+       for i in range(self.size):
+           yield self[i]
+
+    def __reduce__(self):
+       return _new_from_set, (self.__class__, list(self))
+
+    def __init__(self): 
+        _auto_derivative.Array_AutoDerivativeDouble_3_swiginit(self,_auto_derivative.new_Array_AutoDerivativeDouble_3())
+    __swig_destroy__ = _auto_derivative.delete_Array_AutoDerivativeDouble_3
+Array_AutoDerivativeDouble_3._size = new_instancemethod(_auto_derivative.Array_AutoDerivativeDouble_3__size,None,Array_AutoDerivativeDouble_3)
+Array_AutoDerivativeDouble_3.__getitem__ = new_instancemethod(_auto_derivative.Array_AutoDerivativeDouble_3___getitem__,None,Array_AutoDerivativeDouble_3)
+Array_AutoDerivativeDouble_3.__setitem__ = new_instancemethod(_auto_derivative.Array_AutoDerivativeDouble_3___setitem__,None,Array_AutoDerivativeDouble_3)
+Array_AutoDerivativeDouble_3.__str__ = new_instancemethod(_auto_derivative.Array_AutoDerivativeDouble_3___str__,None,Array_AutoDerivativeDouble_3)
+Array_AutoDerivativeDouble_3_swigregister = _auto_derivative.Array_AutoDerivativeDouble_3_swigregister
+Array_AutoDerivativeDouble_3_swigregister(Array_AutoDerivativeDouble_3)
 
 
 

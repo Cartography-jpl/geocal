@@ -19,7 +19,6 @@ extern "C" {
   void init_array_ad(void);
   void init_observer(void);
   void init_geocal_quaternion(void);
-  void init_geocal_autoderivative_quaternion(void);
   void init_covariance(void);
   void init_wgs84_constant(void);
   void init_geocal_exception(void);
@@ -241,7 +240,6 @@ void init_swig_wrap(void)
   init_extension_module(package, "_array_ad", init_array_ad);
   init_extension_module(package, "_observer", init_observer);
   init_extension_module(package, "_geocal_quaternion", init_geocal_quaternion);
-  init_extension_module(package, "_geocal_autoderivative_quaternion", init_geocal_autoderivative_quaternion);
   init_extension_module(package, "_covariance", init_covariance);
   init_extension_module(package, "_wgs84_constant", init_wgs84_constant);
   init_extension_module(package, "_geocal_exception", init_geocal_exception);

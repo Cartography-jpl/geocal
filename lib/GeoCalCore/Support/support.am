@@ -57,7 +57,6 @@ SWIG_SRC += @swigsrc@/auto_derivative_wrap.cc
 SWIG_SRC += @swigsrc@/array_ad_wrap.cc
 SWIG_SRC += @swigsrc@/observer_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_quaternion_wrap.cc
-SWIG_SRC += @swigsrc@/geocal_autoderivative_quaternion_wrap.cc
 SWIG_SRC += @swigsrc@/covariance_wrap.cc
 SWIG_SRC += @swigsrc@/wgs84_constant_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_exception_wrap.cc

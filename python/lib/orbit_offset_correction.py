@@ -48,9 +48,8 @@ class OrbitOffsetCorrection(Orbit):
                        uncorrected_orbit.max_time)
         self.outside_is_error = outside_is_error
         self.uncorrected_orbit = uncorrected_orbit
-        self.__parameter = ArrayAd_double_1(np.array([0,0,0], np.double))
+        self.__parameter = ArrayAd_double_1(3, 0)
         self.time_point = time_point
-        self.__parameter = ArrayAd_double_1(3 + 3 * len(self.time_point), 0) 
         if(initial_parameter is not None):
             self.parameter = initial_parameter
         else:
@@ -75,10 +74,13 @@ class OrbitOffsetCorrection(Orbit):
     def _v_parameter_mask(self):
         res = np.empty((len(self._parameter)), dtype = np.bool)
         res[0:3] = True if self.fit_position else False
-        res[3:-1:3] True if self.fit_yaw else False
-        res[4:-1:3] True if self.fit_pitch else False
-        res[5:-1:3] True if self.fit_roll else False
+        res[3:-1:3] = True if self.fit_yaw else False
+        res[4:-1:3] = True if self.fit_pitch else False
+        res[5:-1:3] = True if self.fit_roll else False
         return res
+
+    def temp(self):
+        return self.__parameter
 
     def _v_parameter_with_derivative(self, *args):
         '''Parameters used in correction. This is the first the offset in
@@ -93,7 +95,7 @@ class OrbitOffsetCorrection(Orbit):
             value = args[0]
             if(value.rows != 3 + 3 * len(self.time_point)):
                 raise ValueError("Parameter is the wrong length. It was length %d, but should have been %d" % (value.rows(), 3 + 3 * len(self.time_point)))
-            self.__parameter = value
+            self.__parameter = value.copy()
 
     def _v_parameter_name(self):
         res = ["Position X Offset", "Position Y Offset", "Position Z Offset"]
@@ -135,11 +137,21 @@ class OrbitOffsetCorrection(Orbit):
         '''Return orbit data for given time'''
         od = self.uncorrected_orbit.orbit_data(t)
         pcorr = od.position_ci.position.copy()
+        pos = []
+        pos_with_der = []
         for i in range(3):
-            pcorr[i] += self.__parameter[i]
+            pos_with_der.append(pcorr[i] + self.__parameter[i])
+            pos.append(pos_with_der[i].value)
+        print od.time
+        print od.position_ci.create(pcorr)
+        print pos_with_der
+        print od.velocity_ci_with_derivative
+        print od.sc_to_ci_with_derivative * self.quaternion_correction(t)
         return QuaternionOrbitData(od.time, od.position_ci.create(pcorr),
-                                   od.velocity_ci, 
-                                   od.sc_to_ci * self.quaternion_correction(t))
+                                   pos_with_der,
+                                   od.velocity_ci_with_derivative, 
+                                   od.sc_to_ci_with_derivative * 
+                                   self.quaternion_correction(t))
     
     def quaternion_correction(self, t):
         '''Return the quaternion correction for the given time t.'''
@@ -157,7 +169,7 @@ class OrbitOffsetCorrection(Orbit):
             else:
                 return Quaternion_AutoDerivative_double(1,0,0,0)
         return self.interpolate(self.__quat_i(i - 1), self.__quat_i(i),
-                                t - self.__time_point[i - 1],
+                                AutoDerivativeDouble(t - self.__time_point[i - 1]),
                                 self.__time_point[i] - self.__time_point[i - 1])
 
     def __quat_i(self, i):

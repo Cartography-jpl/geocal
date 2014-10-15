@@ -1,11 +1,16 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
+%{
+  // Need this before blitz gets included.
+#include "auto_derivative.h"
+%}
 %include "common.i"
 
 %{
 #include "spice_helper.h"
 #include "geocal_time.h"
+#include "geocal_autoderivative_quaternion.h"
 %}
 %import "geocal_quaternion.i"
 %import "geocal_time.i"

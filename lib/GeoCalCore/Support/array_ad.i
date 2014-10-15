@@ -43,6 +43,7 @@ def np_to_array_ad(a):
     return res
 %}
 %define %array_ad_template(NAME, TYPE, DIM, DIMP1)
+%geocal_shared_ptr(GeoCal::ArrayAd<TYPE, DIM>)
 
 namespace GeoCal {
 template<> class ArrayAd<TYPE, DIM>

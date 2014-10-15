@@ -143,6 +143,89 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.generic_object
+class Quaternion_AutoDerivative_double(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _geocal_quaternion.Quaternion_AutoDerivative_double_swiginit(self,_geocal_quaternion.new_Quaternion_AutoDerivative_double(*args))
+    @property
+    def R_component_1(self):
+        return self._v_R_component_1()
+
+    @property
+    def R_component_2(self):
+        return self._v_R_component_2()
+
+    @property
+    def R_component_3(self):
+        return self._v_R_component_3()
+
+    @property
+    def R_component_4(self):
+        return self._v_R_component_4()
+
+    from_matrix = staticmethod(_geocal_quaternion.Quaternion_AutoDerivative_double_from_matrix)
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def __reduce__(self):
+      return _new_from_init, (self.__class__, 1, self.R_component_1,self.R_component_2,self.R_component_3,self.R_component_4)
+
+    __swig_destroy__ = _geocal_quaternion.delete_Quaternion_AutoDerivative_double
+Quaternion_AutoDerivative_double._v_R_component_1 = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double__v_R_component_1,None,Quaternion_AutoDerivative_double)
+Quaternion_AutoDerivative_double._v_R_component_2 = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double__v_R_component_2,None,Quaternion_AutoDerivative_double)
+Quaternion_AutoDerivative_double._v_R_component_3 = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double__v_R_component_3,None,Quaternion_AutoDerivative_double)
+Quaternion_AutoDerivative_double._v_R_component_4 = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double__v_R_component_4,None,Quaternion_AutoDerivative_double)
+Quaternion_AutoDerivative_double.__add__ = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double___add__,None,Quaternion_AutoDerivative_double)
+Quaternion_AutoDerivative_double.__sub__ = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double___sub__,None,Quaternion_AutoDerivative_double)
+Quaternion_AutoDerivative_double.__mul__ = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double___mul__,None,Quaternion_AutoDerivative_double)
+Quaternion_AutoDerivative_double.__div__ = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double___div__,None,Quaternion_AutoDerivative_double)
+Quaternion_AutoDerivative_double.conj = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double_conj,None,Quaternion_AutoDerivative_double)
+Quaternion_AutoDerivative_double.to_matrix = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double_to_matrix,None,Quaternion_AutoDerivative_double)
+Quaternion_AutoDerivative_double.__str__ = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double___str__,None,Quaternion_AutoDerivative_double)
+Quaternion_AutoDerivative_double_swigregister = _geocal_quaternion.Quaternion_AutoDerivative_double_swigregister
+Quaternion_AutoDerivative_double_swigregister(Quaternion_AutoDerivative_double)
+
+def Quaternion_AutoDerivative_double_from_matrix(*args):
+  return _geocal_quaternion.Quaternion_AutoDerivative_double_from_matrix(*args)
+Quaternion_AutoDerivative_double_from_matrix = _geocal_quaternion.Quaternion_AutoDerivative_double_from_matrix
+
+
+def quaternion_to_matrix(*args):
+  """
+    blitz::Array<T, 2> GeoCal::quaternion_to_matrix(const boost::math::quaternion< T > &q)
+    Convert a quaternion to a rotation matrix.
+
+    This is an "active" transformation. For "passive", just reverse
+    the sign of A 
+    """
+  return _geocal_quaternion.quaternion_to_matrix(*args)
+
+def matrix_to_quaternion(*args):
+  """
+    boost::math::quaternion<T> GeoCal::matrix_to_quaternion(const T m[3][3])
+
+    """
+  return _geocal_quaternion.matrix_to_quaternion(*args)
+
+def quat_to_ypr(*args):
+  """
+    void GeoCal::quat_to_ypr(const boost::math::quaternion< T > &qin, T &yaw, T &pitch, T &roll)
+    Return the Euler angles that make up the quaternion rotation (yaw,
+    pitch, roll, so quat_rot("xyz", pitch, roll, yaw) = qin. 
+    """
+  return _geocal_quaternion.quat_to_ypr(*args)
+
+def quat_to_euler(*args):
+  """
+    void GeoCal::quat_to_euler(const boost::math::quaternion< T > &qin, T &epsilon, T &beta, T
+    &delta)
+    Return the Euler angles that make up the quaternion rotation (epsilon,
+    beta, delta so quat_rot("zyx", epsilon,beta, delta) = qin. 
+    """
+  return _geocal_quaternion.quat_to_euler(*args)
 
 def quat_rot_x(*args):
   """
@@ -196,39 +279,5 @@ def quat_rot(*args):
     the sign of A 
     """
   return _geocal_quaternion.quat_rot(*args)
-
-def quaternion_to_matrix(*args):
-  """
-    blitz::Array<T, 2> GeoCal::quaternion_to_matrix(const boost::math::quaternion< T > &q)
-    Convert a quaternion to a rotation matrix.
-
-    This is an "active" transformation. For "passive", just reverse
-    the sign of A 
-    """
-  return _geocal_quaternion.quaternion_to_matrix(*args)
-
-def matrix_to_quaternion(*args):
-  """
-    boost::math::quaternion<T> GeoCal::matrix_to_quaternion(const T m[3][3])
-
-    """
-  return _geocal_quaternion.matrix_to_quaternion(*args)
-
-def quat_to_ypr(*args):
-  """
-    void GeoCal::quat_to_ypr(const boost::math::quaternion< T > &qin, T &yaw, T &pitch, T &roll)
-    Return the Euler angles that make up the quaternion rotation (yaw,
-    pitch, roll, so quat_rot("xyz", pitch, roll, yaw) = qin. 
-    """
-  return _geocal_quaternion.quat_to_ypr(*args)
-
-def quat_to_euler(*args):
-  """
-    void GeoCal::quat_to_euler(const boost::math::quaternion< T > &qin, T &epsilon, T &beta, T
-    &delta)
-    Return the Euler angles that make up the quaternion rotation (epsilon,
-    beta, delta so quat_rot("zyx", epsilon,beta, delta) = qin. 
-    """
-  return _geocal_quaternion.quat_to_euler(*args)
 
 

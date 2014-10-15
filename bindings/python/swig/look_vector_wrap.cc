@@ -4821,11 +4821,13 @@ namespace swig
 #endif
 #include <numpy/arrayobject.h>
 #include "geocal_exception.h"
+#include "auto_derivative.h"
 
 PyObject* numpy_module();
 PyObject* numpy_dot_float64();
 PyObject* numpy_dot_int32();
 PyObject* numpy_dot_bool();
+PyObject* numpy_dot_object();
 
 //--------------------------------------------------------------
 // Helper routines to map a template type to the code numpy uses
@@ -4836,6 +4838,7 @@ template<class T> int type_to_npy();
 template<> inline int type_to_npy<double>() {return NPY_DOUBLE;}
 template<> inline int type_to_npy<int>() {return NPY_INT;}
 template<> inline int type_to_npy<bool>() {return NPY_BOOL;}
+template<> inline int type_to_npy<GeoCal::AutoDerivative<double> >() {return NPY_OBJECT;}
 
 //--------------------------------------------------------------
 // Use the numpy command "asarray" to convert various python 
@@ -4869,6 +4872,15 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
 				    PyString_FromString("asarray"), 
 				    obj, numpy_dot_int32(), NULL);
+  PyErr_Clear();
+  return res;
+}
+
+template<> inline PyObject* to_numpy<GeoCal::AutoDerivative<double> >(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
+				    PyString_FromString("asarray"), 
+				    obj, numpy_dot_object(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -5111,7 +5123,7 @@ SWIGINTERN PyObject *_wrap_LookVectorDouble__look_vector__SWIG_0(PyObject *SWIGU
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
-    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double>(), 
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -5155,7 +5167,7 @@ SWIGINTERN PyObject *_wrap_LookVectorDouble__look_vector__SWIG_1(PyObject *SWIGU
     int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
       0 );
     if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<double>(swig_obj[1]);
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj)
       return NULL;
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -5526,7 +5538,21 @@ SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__look_vector__SWIG_0(P
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_NewPointerObj((new blitz::Array< GeoCal::AutoDerivative< double >,1 >(static_cast< const blitz::Array< GeoCal::AutoDerivative< double >,1 >& >(result))), SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, SWIG_POINTER_OWN |  0 );
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(GeoCal::AutoDerivative<double>);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<GeoCal::AutoDerivative<double> >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<GeoCal::AutoDerivative<double>, 1>* t = new blitz::Array<GeoCal::AutoDerivative<double>, 1>(result);
+    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+      SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, 
+      SWIG_POINTER_NEW | 0 );
+  }
   return resultobj;
 fail:
   return NULL;
@@ -5541,8 +5567,8 @@ SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__look_vector__SWIG_1(P
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::LookVector< GeoCal::AutoDerivative< double > > > tempshared1 ;
   boost::shared_ptr< GeoCal::LookVector< GeoCal::AutoDerivative< double > > > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
+  blitz::Array< GeoCal::AutoDerivative< double >,1 > a2 ;
+  PythonObject numpy2 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
@@ -5560,14 +5586,17 @@ SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__look_vector__SWIG_1(P
       arg1 = const_cast< GeoCal::LookVector< GeoCal::AutoDerivative< double > > * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LookVectorAutoDerivativeDouble__look_vector" "', argument " "2"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<GeoCal::AutoDerivative<double> >(swig_obj[1]);
+      if(!numpy2.obj)
+      return NULL;
+      a2.reference(to_blitz_array<GeoCal::AutoDerivative<double>, 1>(numpy2));
+      arg2 = &a2;
+    }
   }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LookVectorAutoDerivativeDouble__look_vector" "', argument " "2"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
-  }
-  arg2 = reinterpret_cast< blitz::Array< GeoCal::AutoDerivative< double >,1 > * >(argp2);
   {
     try {
       GeoCal_LookVector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg___look_vector__SWIG_1(arg1,(blitz::Array< GeoCal::AutoDerivative< double >,1 > const &)*arg2);
@@ -5614,7 +5643,7 @@ SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__v_direction(PyObject 
   boost::shared_ptr< GeoCal::LookVector< GeoCal::AutoDerivative< double > > const > tempshared1 ;
   boost::shared_ptr< GeoCal::LookVector< GeoCal::AutoDerivative< double > > const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  SwigValueWrapper< boost::array< GeoCal::AutoDerivative< double >,3 > > result;
+  boost::array< GeoCal::AutoDerivative< double >,3 > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -5982,7 +6011,7 @@ SWIGINTERN PyObject *_wrap_new_ScLookVector__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
-    numpy1.obj = to_numpy<double>(swig_obj[0]);
+    numpy1.obj = to_numpy<double >(swig_obj[0]);
     if(!numpy1.obj)
     return NULL;
     a1 = to_boost_array<double, 3>(numpy1);
@@ -6267,19 +6296,18 @@ fail:
 SWIGINTERN PyObject *_wrap_new_ScLookVectorWithDerivative__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::array< GeoCal::AutoDerivative< double >,3 > *arg1 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > a1 ;
+  PythonObject numpy1 ;
   GeoCal::ScLookVectorWithDerivative *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0  | 0);
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_ScLookVectorWithDerivative" "', argument " "1"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  {
+    numpy1.obj = to_numpy<GeoCal::AutoDerivative<double> >(swig_obj[0]);
+    if(!numpy1.obj)
+    return NULL;
+    a1 = to_boost_array<GeoCal::AutoDerivative<double>, 3>(numpy1);
+    arg1 = &a1;
   }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ScLookVectorWithDerivative" "', argument " "1"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
-  }
-  arg1 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp1);
   {
     try {
       result = (GeoCal::ScLookVectorWithDerivative *)new GeoCal::ScLookVectorWithDerivative((boost::array< GeoCal::AutoDerivative< double >,3 > const &)*arg1);
@@ -6519,7 +6547,7 @@ SWIGINTERN PyObject *_wrap_new_CartesianInertialLookVector__SWIG_1(PyObject *SWI
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
-    numpy1.obj = to_numpy<double>(swig_obj[0]);
+    numpy1.obj = to_numpy<double >(swig_obj[0]);
     if(!numpy1.obj)
     return NULL;
     a1 = to_boost_array<double, 3>(numpy1);
@@ -6788,19 +6816,18 @@ fail:
 SWIGINTERN PyObject *_wrap_new_CartesianInertialLookVectorWithDerivative__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::array< GeoCal::AutoDerivative< double >,3 > *arg1 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > a1 ;
+  PythonObject numpy1 ;
   GeoCal::CartesianInertialLookVectorWithDerivative *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0  | 0);
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CartesianInertialLookVectorWithDerivative" "', argument " "1"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  {
+    numpy1.obj = to_numpy<GeoCal::AutoDerivative<double> >(swig_obj[0]);
+    if(!numpy1.obj)
+    return NULL;
+    a1 = to_boost_array<GeoCal::AutoDerivative<double>, 3>(numpy1);
+    arg1 = &a1;
   }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CartesianInertialLookVectorWithDerivative" "', argument " "1"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
-  }
-  arg1 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp1);
   {
     try {
       result = (GeoCal::CartesianInertialLookVectorWithDerivative *)new GeoCal::CartesianInertialLookVectorWithDerivative((boost::array< GeoCal::AutoDerivative< double >,3 > const &)*arg1);
@@ -7181,7 +7208,7 @@ SWIGINTERN PyObject *_wrap_new_DcsLookVector__SWIG_2(PyObject *SWIGUNUSEDPARM(se
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
-    numpy1.obj = to_numpy<double>(swig_obj[0]);
+    numpy1.obj = to_numpy<double >(swig_obj[0]);
     if(!numpy1.obj)
     return NULL;
     a1 = to_boost_array<double, 3>(numpy1);
@@ -7466,19 +7493,18 @@ fail:
 SWIGINTERN PyObject *_wrap_new_DcsLookVectorWithDerivative__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::array< GeoCal::AutoDerivative< double >,3 > *arg1 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > a1 ;
+  PythonObject numpy1 ;
   GeoCal::DcsLookVectorWithDerivative *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0  | 0);
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_DcsLookVectorWithDerivative" "', argument " "1"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  {
+    numpy1.obj = to_numpy<GeoCal::AutoDerivative<double> >(swig_obj[0]);
+    if(!numpy1.obj)
+    return NULL;
+    a1 = to_boost_array<GeoCal::AutoDerivative<double>, 3>(numpy1);
+    arg1 = &a1;
   }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_DcsLookVectorWithDerivative" "', argument " "1"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
-  }
-  arg1 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp1);
   {
     try {
       result = (GeoCal::DcsLookVectorWithDerivative *)new GeoCal::DcsLookVectorWithDerivative((boost::array< GeoCal::AutoDerivative< double >,3 > const &)*arg1);
@@ -7647,19 +7673,18 @@ fail:
 SWIGINTERN PyObject *_wrap_new_CartesianFixedLookVectorWithDerivative__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::array< GeoCal::AutoDerivative< double >,3 > *arg1 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > a1 ;
+  PythonObject numpy1 ;
   GeoCal::CartesianFixedLookVectorWithDerivative *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0  | 0);
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CartesianFixedLookVectorWithDerivative" "', argument " "1"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  {
+    numpy1.obj = to_numpy<GeoCal::AutoDerivative<double> >(swig_obj[0]);
+    if(!numpy1.obj)
+    return NULL;
+    a1 = to_boost_array<GeoCal::AutoDerivative<double>, 3>(numpy1);
+    arg1 = &a1;
   }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CartesianFixedLookVectorWithDerivative" "', argument " "1"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
-  }
-  arg1 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp1);
   {
     try {
       result = (GeoCal::CartesianFixedLookVectorWithDerivative *)new GeoCal::CartesianFixedLookVectorWithDerivative((boost::array< GeoCal::AutoDerivative< double >,3 > const &)*arg1);

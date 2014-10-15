@@ -392,6 +392,18 @@ class QuaternionOrbitData(OrbitData):
     def sc_to_ci(self):
         return self._v_sc_to_ci()
 
+    def _v_sc_to_ci_with_derivative(self):
+        """
+        boost::math::quaternion<AutoDerivative<double> > GeoCal::QuaternionOrbitData::sc_to_ci_with_derivative() const
+        Return the quaternion used to go from spacecraft to cartesian
+        inertial. 
+        """
+        return _orbit.QuaternionOrbitData__v_sc_to_ci_with_derivative(self)
+
+    @property
+    def sc_to_ci_with_derivative(self):
+        return self._v_sc_to_ci_with_derivative()
+
     def _v_sc_to_cf(self, *args):
         """
         void GeoCal::QuaternionOrbitData::sc_to_cf(const boost::math::quaternion< double > &Sc_to_cf)
@@ -406,6 +418,21 @@ class QuaternionOrbitData(OrbitData):
     @sc_to_cf.setter
     def sc_to_cf(self, value):
       self._v_sc_to_cf(value)
+
+    def _v_sc_to_cf_with_derivative(self, *args):
+        """
+        void GeoCal::QuaternionOrbitData::sc_to_cf_with_derivative(const boost::math::quaternion< AutoDerivative< double > > &Sc_to_cf)
+
+        """
+        return _orbit.QuaternionOrbitData__v_sc_to_cf_with_derivative(self, *args)
+
+    @property
+    def sc_to_cf_with_derivative(self):
+        return self._v_sc_to_cf_with_derivative()
+
+    @sc_to_cf_with_derivative.setter
+    def sc_to_cf_with_derivative(self, value):
+      self._v_sc_to_cf_with_derivative(value)
 
     def _v_from_cf(self):
         """
@@ -448,7 +475,9 @@ QuaternionOrbitData.ci_look_vector = new_instancemethod(_orbit.QuaternionOrbitDa
 QuaternionOrbitData.cf_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_cf_look_vector,None,QuaternionOrbitData)
 QuaternionOrbitData.sc_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_sc_look_vector,None,QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_ci = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_ci,None,QuaternionOrbitData)
+QuaternionOrbitData._v_sc_to_ci_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_ci_with_derivative,None,QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_cf = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_cf,None,QuaternionOrbitData)
+QuaternionOrbitData._v_sc_to_cf_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_cf_with_derivative,None,QuaternionOrbitData)
 QuaternionOrbitData._v_from_cf = new_instancemethod(_orbit.QuaternionOrbitData__v_from_cf,None,QuaternionOrbitData)
 QuaternionOrbitData._velocity_cf = new_instancemethod(_orbit.QuaternionOrbitData__velocity_cf,None,QuaternionOrbitData)
 QuaternionOrbitData._velocity_cf_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__velocity_cf_with_derivative,None,QuaternionOrbitData)

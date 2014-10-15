@@ -165,7 +165,10 @@ public:
   virtual ScLookVectorWithDerivative 
   sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
   %python_attribute(sc_to_ci, boost::math::quaternion<double>)
+  %python_attribute(sc_to_ci_with_derivative, 
+		    boost::math::quaternion<AutoDerivative<double> >)
   %python_attribute_with_set(sc_to_cf, boost::math::quaternion<double>)
+  %python_attribute_with_set(sc_to_cf_with_derivative, boost::math::quaternion<AutoDerivative<double> >)
   %python_attribute(from_cf, bool)
   %extend {
     blitz::Array<double, 1> _velocity_cf() const {
@@ -269,6 +272,10 @@ protected:
               const boost::math::quaternion<double>& Q1, 
               const boost::math::quaternion<double>& Q2,
 	      double toffset, double tspace) const;
+  boost::math::quaternion<AutoDerivative<double> > interpolate(
+              const boost::math::quaternion<AutoDerivative<double> >& Q1, 
+              const boost::math::quaternion<AutoDerivative<double> >& Q2,
+	      const AutoDerivative<double>& toffset, double tspace) const;
 };
 
 class KeplerOrbit : public Orbit {

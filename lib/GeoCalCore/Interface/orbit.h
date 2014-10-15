@@ -301,6 +301,13 @@ public:
   { return conj(ci_to_cf()) * sc_to_cf_; }
   
 //-----------------------------------------------------------------------
+/// Return the quaternion used to go from spacecraft to cartesian inertial
+//-----------------------------------------------------------------------
+
+  boost::math::quaternion<AutoDerivative<double> > sc_to_ci_with_derivative() const 
+  { return conj(ci_to_cf()) * sc_to_cf_with_der; }
+  
+//-----------------------------------------------------------------------
 /// Return the quaternion used to go from spacecraft to cartesian fixed.
 //-----------------------------------------------------------------------
 
@@ -319,6 +326,10 @@ public:
 
   boost::math::quaternion<AutoDerivative<double> > sc_to_cf_with_derivative() 
     const { return sc_to_cf_with_der; }
+
+  void sc_to_cf_with_derivative
+  (const boost::math::quaternion<AutoDerivative<double> >& Sc_to_cf ) 
+  { sc_to_cf_ = value(Sc_to_cf); sc_to_cf_with_der = Sc_to_cf; }
 
 //-----------------------------------------------------------------------
 /// Was this created form the cartesian fixed version of the

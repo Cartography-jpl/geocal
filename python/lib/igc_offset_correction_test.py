@@ -14,6 +14,10 @@ cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                        1.0,
                        FrameCoordinate(1688.0, 1824.5),
                        QuaternionCamera.LINE_IS_Y)
+cam.fit_focal_length = False
+for i in range(cam.number_band):
+    cam.fit_principal_point_line(False, i)
+    cam.fit_principal_point_sample(False, i)
 demin = SimpleDem()
 img1 = VicarLiteRasterImage(test_data + "10MAY21-1.img")
 img2 = VicarLiteRasterImage(test_data + "10MAY21-2.img")
@@ -38,7 +42,7 @@ def test_igc():
     img3.time = t2 + 5
     img3.title = "Image 3"
     igc_coll = IgcOffsetCorrection([img1, img2, img3], cam, demin,
-                                   orb_uncorr, time_point = [t1, t2, t3])
+                                   OrbitOffsetCorrection(orb_uncorr, time_point = [t1, t2, t3]))
     igc_coll.parameter_subset = [100, 200, 300, 50, 20, 30, 20, 40, 60, -10, -20, -30, cam.euler[0], cam.euler[1], cam.euler[2], cam.line_pitch, cam.sample_pitch]
     npt.assert_almost_equal(igc_coll.parameter_subset, [100, 200, 300, 50, 20, 30, 20, 40, 60, -10, -20, -30, cam.euler[0], cam.euler[1], cam.euler[2], cam.line_pitch, cam.sample_pitch])
     assert igc_coll.number_image == 3
@@ -75,7 +79,7 @@ def test_igc_jac():
     img3.time = t2 + 5
     img3.title = "Image 3"
     igc_coll = IgcOffsetCorrection([img1, img2, img3], cam, demin,
-                                   orb_uncorr, time_point = [t1, t2, t3])
+                                   OrbitOffsetCorrection(orb_uncorr, time_point = [t1, t2, t3]))
     igc_coll.parameter_subset = [100, 200, 300, 50, 20, 30, 20, 40, 60, -10, -20, -30, cam.euler[0], cam.euler[1], cam.euler[2], cam.line_pitch, cam.sample_pitch]
 
     gp = igc_coll.ground_coordinate(0, ImageCoordinate(100, 100))

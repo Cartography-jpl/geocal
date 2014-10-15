@@ -67,16 +67,17 @@ class OrbitOffsetCorrection(Orbit):
         return _new_from_init, (self.__class__,
                                 self.__class__.pickle_format_version(),
                                 self.uncorrected_orbit, self.__time_point,
-                                self.__parameter, self.outside_is_error,
+                                self.parameter, self.outside_is_error,
                                 self.fit_position, self.fit_yaw, 
                                 self.fit_pitch, self.fit_roll)
 
     def _v_parameter_mask(self):
-        res = np.empty((len(self._parameter)), dtype = np.bool)
+        sz = self.__parameter.rows
+        res = np.empty((sz,), dtype = np.bool)
         res[0:3] = True if self.fit_position else False
-        res[3:-1:3] = True if self.fit_yaw else False
-        res[4:-1:3] = True if self.fit_pitch else False
-        res[5:-1:3] = True if self.fit_roll else False
+        res[3:sz:3] = True if self.fit_yaw else False
+        res[4:sz:3] = True if self.fit_pitch else False
+        res[5:sz:3] = True if self.fit_roll else False
         return res
 
     def _v_parameter_with_derivative(self, *args):

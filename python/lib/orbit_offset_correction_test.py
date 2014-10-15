@@ -204,10 +204,10 @@ def test_frame_coordinate_with_der():
         ic = orb.frame_coordinate(t1 + 5, gp, cam)
         jac_fd[0, 8 + i] = (ic.line - ic0.line.value) / eps[i]
         jac_fd[1, 8 + i] = (ic.sample - ic0.sample.value) / eps[i]
-    # This divides by 0, but we remove that in the next step
-    np.seterr(divide='ignore')
-    diff = (jac - jac_fd) / jac
-    diff[jac == 0] = 0
-    np.seterr(divide='warn')
-    assert abs(diff).max() < 1e-2
+    # Finite difference and real jacobian won't be the same, something
+    # like 1% would be a good value. So we check the scaled difference, 
+    # being careful not to divide by zero
+    scl = jac.copy()
+    scl[jac != 0] = 1 / jac[jac != 0]
+    assert abs((jac - jac_fd) * scl).max() < 1e-2
 

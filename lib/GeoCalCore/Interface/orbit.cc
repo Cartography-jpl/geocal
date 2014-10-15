@@ -556,7 +556,16 @@ QuaternionOrbitData::ci_look_vector(const ScLookVector& Sl) const
 CartesianInertialLookVectorWithDerivative 
 QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative& Sl) const
 {
-  throw Exception("Not implemented yet");
+  // Do abberation of light correction.
+  CartesianInertialLookVectorWithDerivative res;
+  AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
+  boost::math::quaternion<AutoDerivative<double> > ci = 
+    conj(ci_to_cf()) * 
+    (sc_to_cf_with_der * Sl.look_quaternion() * conj(sc_to_cf_with_der) - 
+     k * vel_cf_with_der)
+    * ci_to_cf();
+  res.look_quaternion(ci);
+  return res;
 }
 
 //-----------------------------------------------------------------------
@@ -582,7 +591,14 @@ QuaternionOrbitData::cf_look_vector(const ScLookVector& Sl) const
 CartesianFixedLookVectorWithDerivative
 QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative& Sl) const
 {
-  throw Exception("Not implemented yet");
+  // Do abberation of light correction.
+  CartesianFixedLookVectorWithDerivative res;
+  AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
+  boost::math::quaternion<AutoDerivative<double> > cf = 
+    sc_to_cf_with_der * Sl.look_quaternion() * 
+    conj(sc_to_cf_with_der) - k * vel_cf_with_der;
+  res.look_quaternion(cf);
+  return res;
 }
 
 //-----------------------------------------------------------------------
@@ -611,7 +627,15 @@ ScLookVectorWithDerivative
 QuaternionOrbitData::sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) 
 const
 {
-  throw Exception("Not implemented yet");
+  // Do abberation of light correction.
+  ScLookVectorWithDerivative res;
+  AutoDerivative<double> k = Ci.length() / Constant::speed_of_light;
+  boost::math::quaternion<AutoDerivative<double> > sc =
+    conj(sc_to_cf_with_der) * 
+    (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf()) + 
+     k * vel_cf_with_der) * sc_to_cf_with_der;
+  res.look_quaternion(sc);
+  return res;
 }
 
 //-----------------------------------------------------------------------
@@ -639,7 +663,14 @@ ScLookVectorWithDerivative
 QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) 
 const
 {
-  throw Exception("Not implemented yet");
+  // Do abberation of light correction.
+  ScLookVectorWithDerivative res;
+  AutoDerivative<double> k = Cf.length() / Constant::speed_of_light;
+  boost::math::quaternion<AutoDerivative<double> > sc =
+    conj(sc_to_cf_with_der) * (Cf.look_quaternion() + k * vel_cf_with_der) * 
+    sc_to_cf_with_der;
+  res.look_quaternion(sc);
+  return res;
 }
 
 //-----------------------------------------------------------------------

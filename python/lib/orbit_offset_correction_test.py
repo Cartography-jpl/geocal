@@ -154,8 +154,38 @@ def test_frame_coordinate_with_der():
                                          cam, SimpleDem(), img)
     ic = ImageCoordinate(100, 200)
     gp = igc.ground_coordinate(ic)
-    i0 = orb.frame_coordinate_with_derivative(t1 + 5, gp, cam)
-    assert_almost_equal(ic.line, i0.line.value, 4)
-    assert_almost_equal(ic.sample, i0.sample.value, 4)
-    print i0
+    ic0 = orb.frame_coordinate_with_derivative(t1 + 5, gp, cam)
+    assert_almost_equal(ic.line, ic0.line.value, 4)
+    assert_almost_equal(ic.sample, ic0.sample.value, 4)
+    # Do camera differences first. This checks correct propagation
+    # through the orbit.
+    jac = np.zeros((2, 20))
+    jac[0,:] = ic0.line.gradient
+    jac[1,:] = ic0.sample.gradient
+    jac_fd = np.zeros((2, 20))
+    eps = [0.00001, 0.00001, 0.00001, 1e-9, 1e-9, 0.001, 0.1, 0.1]
+    p0 = cam.parameter.copy()
+    for i in range(len(eps)):
+        pdelta = np.zeros((8,))
+        pdelta[i] = eps[i]
+        cam.parameter = p0 + pdelta
+        ic = orb.frame_coordinate(t1 + 5, gp, cam)
+        jac_fd[0, i] = (ic.line - ic0.line.value) / eps[i]
+        jac_fd[1, i] = (ic.sample - ic0.sample.value) / eps[i]
+    cam.parameter = p0
+    eps = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1]
+    p0 = orb.parameter.copy()
+    for i in range(len(eps)):
+        pdelta = np.zeros((12,))
+        pdelta[i] = eps[i]
+        orb.parameter = p0 + pdelta
+        ic = orb.frame_coordinate(t1 + 5, gp, cam)
+        jac_fd[0, 8 + i] = (ic.line - ic0.line.value) / eps[i]
+        jac_fd[1, 8 + i] = (ic.sample - ic0.sample.value) / eps[i]
+    # This divides by 0, but we remove that in the next step
+    np.seterr(divide='ignore')
+    diff = (jac - jac_fd) / jac
+    diff[jac == 0] = 0
+    np.seterr(divide='warn')
+    assert abs(diff).max() < 1e-2
 

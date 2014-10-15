@@ -529,7 +529,7 @@ void QuaternionOrbitData::initialize
   pos = pos_ci->convert_to_cf(Tm);
   pos_with_der = ci_to_cf() * pos_ci_with_der * conj(ci_to_cf());
   sc_to_cf_with_der = ci_to_cf() * sc_to_ci_q;
-  sc_to_cf_with_der = value(sc_to_cf_with_der);
+  sc_to_cf_ = value(sc_to_cf_with_der);
 }
 
 //-----------------------------------------------------------------------

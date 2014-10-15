@@ -131,7 +131,13 @@ class OrbitOffsetCorrection(Orbit):
             if(value[i - 1] >= value[i]):
                 raise "The list of times passed to time_point must be sorted"
         self.__time_point = value
+        t = [self.__parameter[i].value for i in range(3)]
         self.__parameter.resize(3 + 3 * len(self.__time_point), 0)
+        self.__parameter[0] = AutoDerivativeDouble(t[0])
+        self.__parameter[1] = AutoDerivativeDouble(t[1])
+        self.__parameter[2] = AutoDerivativeDouble(t[2])
+        for i in range(3, self.__parameter.rows):
+            self.__parameter[i] = AutoDerivativeDouble(0)
 
     def orbit_data(self, t):
         '''Return orbit data for given time'''
@@ -145,7 +151,7 @@ class OrbitOffsetCorrection(Orbit):
             pos_with_der[i] = pcorr[i] + self.__parameter[i]
             vel_with_dir[i] = v[i]
             pos.append(pos_with_der[i].value)
-        return QuaternionOrbitData(od.time, od.position_ci.create(pcorr),
+        return QuaternionOrbitData(od.time, od.position_ci.create(pos),
                                    pos_with_der,
                                    vel_with_dir, 
                                    od.sc_to_ci_with_derivative * 

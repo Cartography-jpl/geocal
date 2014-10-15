@@ -48,7 +48,7 @@ def test_orbit_offset_unchanged():
 def test_orbit_offset_pos():
     if(orb_uncorr is None):
         raise SkipTest
-    t2 = Time.time_acs(215077459.472);
+    t2 = Time.time_acs(215077459.472)
     t1 = t2 - 10
     t3 = t2 + 10
     orb = OrbitOffsetCorrection(orb_uncorr)
@@ -76,10 +76,10 @@ def test_orbit_quaternion_correction():
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 20, 40, 
                      60, -10, -20, -30]
     q = orb.quaternion_correction(t1 + 5)
-    assert_almost_equal(q.R_component_1, 0.959964, 4)
-    assert_almost_equal(q.R_component_2, 0.13533, 4)
-    assert_almost_equal(q.R_component_3, 0.0834714, 4)
-    assert_almost_equal(q.R_component_4, 0.230623, 4)
+    assert_almost_equal(q.R_component_1.value, 0.959964, 4)
+    assert_almost_equal(q.R_component_2.value, 0.13533, 4)
+    assert_almost_equal(q.R_component_3.value, 0.0834714, 4)
+    assert_almost_equal(q.R_component_4.value, 0.230623, 4)
     # Make sure we can call for each time
     orb.quaternion_correction(t1)
     orb.quaternion_correction(t2)
@@ -115,7 +115,7 @@ def test_insert_time_point():
     orb.quaternion_correction(t2)
     orb.quaternion_correction(t3)
 
-def test_image_coordinate():
+def test_frame_coordinate():
     if(orb_uncorr is None):
         raise SkipTest
     t2 = Time.time_acs(215077459.472);
@@ -128,6 +128,6 @@ def test_image_coordinate():
                                          cam, SimpleDem(), img)
     ic = ImageCoordinate(100, 200)
     gp = igc.ground_coordinate(ic)
-    i0 = orb.image_coordinate(t1 + 5, gp, cam)
+    i0 = orb.frame_coordinate(t1 + 5, gp, cam)
 
 

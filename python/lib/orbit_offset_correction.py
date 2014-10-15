@@ -138,18 +138,16 @@ class OrbitOffsetCorrection(Orbit):
         od = self.uncorrected_orbit.orbit_data(t)
         pcorr = od.position_ci.position.copy()
         pos = []
-        pos_with_der = []
+        pos_with_der = BoostArrayAutoDerivativeDouble_3()
+        vel_with_dir = BoostArrayAutoDerivativeDouble_3()
+        v = od.velocity_ci_with_derivative
         for i in range(3):
-            pos_with_der.append(pcorr[i] + self.__parameter[i])
+            pos_with_der[i] = pcorr[i] + self.__parameter[i]
+            vel_with_dir[i] = v[i]
             pos.append(pos_with_der[i].value)
-        print od.time
-        print od.position_ci.create(pcorr)
-        print pos_with_der
-        print od.velocity_ci_with_derivative
-        print od.sc_to_ci_with_derivative * self.quaternion_correction(t)
         return QuaternionOrbitData(od.time, od.position_ci.create(pcorr),
                                    pos_with_der,
-                                   od.velocity_ci_with_derivative, 
+                                   vel_with_dir, 
                                    od.sc_to_ci_with_derivative * 
                                    self.quaternion_correction(t))
     
@@ -157,7 +155,10 @@ class OrbitOffsetCorrection(Orbit):
         '''Return the quaternion correction for the given time t.'''
         # Special handling for no quaternion corrections
         if(len(self.__time_point) == 0):
-            return Quaternion_AutoDerivative_double(1, 0, 0, 0)
+            return Quaternion_AutoDerivative_double(AutoDerivativeDouble(1), 
+                                                    AutoDerivativeDouble(0), 
+                                                    AutoDerivativeDouble(0), 
+                                                    AutoDerivativeDouble(0))
         # Special handling for t = largest value
         if(t == self.__time_point[-1]):
             return self.__quat_i(len(self.__time_point) - 1)
@@ -167,7 +168,10 @@ class OrbitOffsetCorrection(Orbit):
             if(self.outside_is_error):
                 raise ValueError
             else:
-                return Quaternion_AutoDerivative_double(1,0,0,0)
+                return Quaternion_AutoDerivative_double(AutoDerivativeDouble(1),
+                                                        AutoDerivativeDouble(0),
+                                                        AutoDerivativeDouble(0),
+                                                        AutoDerivativeDouble(0))
         return self.interpolate(self.__quat_i(i - 1), self.__quat_i(i),
                                 AutoDerivativeDouble(t - self.__time_point[i - 1]),
                                 self.__time_point[i] - self.__time_point[i - 1])

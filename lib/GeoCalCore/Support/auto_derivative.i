@@ -107,7 +107,8 @@ def gradient(self,val):
 %geocal_shared_ptr(GeoCal::AutoDerivativeRef<double>)
 %template(AutoDerivativeDouble) GeoCal::AutoDerivative<double>;
 %template(AutoDerivativeRefDouble) GeoCal::AutoDerivativeRef<double>;
-%template(ArrayAutoDerivative_double_1) blitz::Array<GeoCal::AutoDerivative<double>, 1>;
+%template(ArrayAutoDerivativeDouble_1) blitz::Array<GeoCal::AutoDerivative<double>, 1>;
+%template(BoostArrayAutoDerivativeDouble_3) boost::array<GeoCal::AutoDerivative<double>, 3>;
 
 namespace std {
 GeoCal::AutoDerivative<double> sqrt(const GeoCal::AutoDerivative<double>& x);

@@ -297,23 +297,57 @@ AutoDerivativeRefDouble.__str__ = new_instancemethod(_auto_derivative.AutoDeriva
 AutoDerivativeRefDouble_swigregister = _auto_derivative.AutoDerivativeRefDouble_swigregister
 AutoDerivativeRefDouble_swigregister(AutoDerivativeRefDouble)
 
-class ArrayAutoDerivative_double_1(object):
+class ArrayAutoDerivativeDouble_1(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        _auto_derivative.ArrayAutoDerivative_double_1_swiginit(self,_auto_derivative.new_ArrayAutoDerivative_double_1(*args))
-    __swig_destroy__ = _auto_derivative.delete_ArrayAutoDerivative_double_1
-ArrayAutoDerivative_double_1.data = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_data,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.size = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_size,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.read = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_read,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.write = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_write,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.datav = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_datav,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.shape0 = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_shape0,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.shape1 = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_shape1,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.shape2 = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_shape2,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1.shape3 = new_instancemethod(_auto_derivative.ArrayAutoDerivative_double_1_shape3,None,ArrayAutoDerivative_double_1)
-ArrayAutoDerivative_double_1_swigregister = _auto_derivative.ArrayAutoDerivative_double_1_swigregister
-ArrayAutoDerivative_double_1_swigregister(ArrayAutoDerivative_double_1)
+        _auto_derivative.ArrayAutoDerivativeDouble_1_swiginit(self,_auto_derivative.new_ArrayAutoDerivativeDouble_1(*args))
+    __swig_destroy__ = _auto_derivative.delete_ArrayAutoDerivativeDouble_1
+ArrayAutoDerivativeDouble_1.data = new_instancemethod(_auto_derivative.ArrayAutoDerivativeDouble_1_data,None,ArrayAutoDerivativeDouble_1)
+ArrayAutoDerivativeDouble_1.size = new_instancemethod(_auto_derivative.ArrayAutoDerivativeDouble_1_size,None,ArrayAutoDerivativeDouble_1)
+ArrayAutoDerivativeDouble_1.read = new_instancemethod(_auto_derivative.ArrayAutoDerivativeDouble_1_read,None,ArrayAutoDerivativeDouble_1)
+ArrayAutoDerivativeDouble_1.write = new_instancemethod(_auto_derivative.ArrayAutoDerivativeDouble_1_write,None,ArrayAutoDerivativeDouble_1)
+ArrayAutoDerivativeDouble_1.datav = new_instancemethod(_auto_derivative.ArrayAutoDerivativeDouble_1_datav,None,ArrayAutoDerivativeDouble_1)
+ArrayAutoDerivativeDouble_1.shape0 = new_instancemethod(_auto_derivative.ArrayAutoDerivativeDouble_1_shape0,None,ArrayAutoDerivativeDouble_1)
+ArrayAutoDerivativeDouble_1.shape1 = new_instancemethod(_auto_derivative.ArrayAutoDerivativeDouble_1_shape1,None,ArrayAutoDerivativeDouble_1)
+ArrayAutoDerivativeDouble_1.shape2 = new_instancemethod(_auto_derivative.ArrayAutoDerivativeDouble_1_shape2,None,ArrayAutoDerivativeDouble_1)
+ArrayAutoDerivativeDouble_1.shape3 = new_instancemethod(_auto_derivative.ArrayAutoDerivativeDouble_1_shape3,None,ArrayAutoDerivativeDouble_1)
+ArrayAutoDerivativeDouble_1_swigregister = _auto_derivative.ArrayAutoDerivativeDouble_1_swigregister
+ArrayAutoDerivativeDouble_1_swigregister(ArrayAutoDerivativeDouble_1)
+
+class BoostArrayAutoDerivativeDouble_3(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    @property
+    def size(self):
+       return self._size()
+
+    def set(self, v):
+       '''Set the value to the given value. The value should be a container
+       that we can enumerate over to fill in the value of the array'''
+       for i, t in enumerate(v):
+          if(i >= self.size):
+              raise RuntimeError("Value must be exactly %d in size" % self.size)
+          self[i] = t
+       if(i != self.size - 1):
+           raise RuntimeError("Value must be exactly %d in size" % self.size)
+
+    def __iter__(self):
+       for i in range(self.size):
+           yield self[i]
+
+    def __reduce__(self):
+       return _new_from_set, (self.__class__, list(self))
+
+    def __init__(self): 
+        _auto_derivative.BoostArrayAutoDerivativeDouble_3_swiginit(self,_auto_derivative.new_BoostArrayAutoDerivativeDouble_3())
+    __swig_destroy__ = _auto_derivative.delete_BoostArrayAutoDerivativeDouble_3
+BoostArrayAutoDerivativeDouble_3._size = new_instancemethod(_auto_derivative.BoostArrayAutoDerivativeDouble_3__size,None,BoostArrayAutoDerivativeDouble_3)
+BoostArrayAutoDerivativeDouble_3.__getitem__ = new_instancemethod(_auto_derivative.BoostArrayAutoDerivativeDouble_3___getitem__,None,BoostArrayAutoDerivativeDouble_3)
+BoostArrayAutoDerivativeDouble_3.__setitem__ = new_instancemethod(_auto_derivative.BoostArrayAutoDerivativeDouble_3___setitem__,None,BoostArrayAutoDerivativeDouble_3)
+BoostArrayAutoDerivativeDouble_3.__str__ = new_instancemethod(_auto_derivative.BoostArrayAutoDerivativeDouble_3___str__,None,BoostArrayAutoDerivativeDouble_3)
+BoostArrayAutoDerivativeDouble_3_swigregister = _auto_derivative.BoostArrayAutoDerivativeDouble_3_swigregister
+BoostArrayAutoDerivativeDouble_3_swigregister(BoostArrayAutoDerivativeDouble_3)
 
 
 def sqrt(*args):

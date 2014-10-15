@@ -5614,7 +5614,7 @@ SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__v_direction(PyObject 
   boost::shared_ptr< GeoCal::LookVector< GeoCal::AutoDerivative< double > > const > tempshared1 ;
   boost::shared_ptr< GeoCal::LookVector< GeoCal::AutoDerivative< double > > const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  SwigValueWrapper< boost::array< GeoCal::AutoDerivative< double >,3 > > result;
+  boost::array< GeoCal::AutoDerivative< double >,3 > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;

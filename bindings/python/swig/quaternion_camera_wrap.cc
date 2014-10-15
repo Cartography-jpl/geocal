@@ -4843,13 +4843,11 @@ namespace swig
 #endif
 #include <numpy/arrayobject.h>
 #include "geocal_exception.h"
-#include "auto_derivative.h"
 
 PyObject* numpy_module();
 PyObject* numpy_dot_float64();
 PyObject* numpy_dot_int32();
 PyObject* numpy_dot_bool();
-PyObject* numpy_dot_object();
 
 //--------------------------------------------------------------
 // Helper routines to map a template type to the code numpy uses
@@ -4860,7 +4858,6 @@ template<class T> int type_to_npy();
 template<> inline int type_to_npy<double>() {return NPY_DOUBLE;}
 template<> inline int type_to_npy<int>() {return NPY_INT;}
 template<> inline int type_to_npy<bool>() {return NPY_BOOL;}
-template<> inline int type_to_npy<GeoCal::AutoDerivative<double> >() {return NPY_OBJECT;}
 
 //--------------------------------------------------------------
 // Use the numpy command "asarray" to convert various python 
@@ -4894,15 +4891,6 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
 				    PyString_FromString("asarray"), 
 				    obj, numpy_dot_int32(), NULL);
-  PyErr_Clear();
-  return res;
-}
-
-template<> inline PyObject* to_numpy<GeoCal::AutoDerivative<double> >(PyObject* obj)
-{
-  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-				    PyString_FromString("asarray"), 
-				    obj, numpy_dot_object(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -7569,21 +7557,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_ypr_with_derivative__SWIG_0(PyObj
       SWIG_fail; 
     }
   }
-  {
-    npy_intp dims[1], stride[1];
-    for(int i = 0; i < 1; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(GeoCal::AutoDerivative<double>);
-    }
-    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<GeoCal::AutoDerivative<double> >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<GeoCal::AutoDerivative<double>, 1>* t = new blitz::Array<GeoCal::AutoDerivative<double>, 1>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, 
-      SWIG_POINTER_NEW | 0 );
-  }
+  resultobj = SWIG_NewPointerObj((new blitz::Array< GeoCal::AutoDerivative< double >,1 >(static_cast< const blitz::Array< GeoCal::AutoDerivative< double >,1 >& >(result))), SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7598,8 +7572,8 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_ypr_with_derivative__SWIG_1(PyObj
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::QuaternionCamera > tempshared1 ;
   boost::shared_ptr< GeoCal::QuaternionCamera > *smartarg1 = 0 ;
-  blitz::Array< GeoCal::AutoDerivative< double >,1 > a2 ;
-  PythonObject numpy2 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
@@ -7617,17 +7591,14 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_ypr_with_derivative__SWIG_1(PyObj
       arg1 = const_cast< GeoCal::QuaternionCamera * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<GeoCal::AutoDerivative<double> >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
-      a2.reference(to_blitz_array<GeoCal::AutoDerivative<double>, 1>(numpy2));
-      arg2 = &a2;
-    }
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionCamera__v_ypr_with_derivative" "', argument " "2"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
   }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionCamera__v_ypr_with_derivative" "', argument " "2"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
+  }
+  arg2 = reinterpret_cast< blitz::Array< GeoCal::AutoDerivative< double >,1 > * >(argp2);
   {
     try {
       (arg1)->ypr_with_derivative((blitz::Array< GeoCal::AutoDerivative< double >,1 > const &)*arg2);
@@ -7831,21 +7802,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_euler_with_derivative__SWIG_0(PyO
       SWIG_fail; 
     }
   }
-  {
-    npy_intp dims[1], stride[1];
-    for(int i = 0; i < 1; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(GeoCal::AutoDerivative<double>);
-    }
-    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<GeoCal::AutoDerivative<double> >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<GeoCal::AutoDerivative<double>, 1>* t = new blitz::Array<GeoCal::AutoDerivative<double>, 1>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, 
-      SWIG_POINTER_NEW | 0 );
-  }
+  resultobj = SWIG_NewPointerObj((new blitz::Array< GeoCal::AutoDerivative< double >,1 >(static_cast< const blitz::Array< GeoCal::AutoDerivative< double >,1 >& >(result))), SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7860,8 +7817,8 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_euler_with_derivative__SWIG_1(PyO
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::QuaternionCamera > tempshared1 ;
   boost::shared_ptr< GeoCal::QuaternionCamera > *smartarg1 = 0 ;
-  blitz::Array< GeoCal::AutoDerivative< double >,1 > a2 ;
-  PythonObject numpy2 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
   
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
@@ -7879,17 +7836,14 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_euler_with_derivative__SWIG_1(PyO
       arg1 = const_cast< GeoCal::QuaternionCamera * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<GeoCal::AutoDerivative<double> >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
-      a2.reference(to_blitz_array<GeoCal::AutoDerivative<double>, 1>(numpy2));
-      arg2 = &a2;
-    }
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionCamera__v_euler_with_derivative" "', argument " "2"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
   }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionCamera__v_euler_with_derivative" "', argument " "2"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
+  }
+  arg2 = reinterpret_cast< blitz::Array< GeoCal::AutoDerivative< double >,1 > * >(argp2);
   {
     try {
       (arg1)->euler_with_derivative((blitz::Array< GeoCal::AutoDerivative< double >,1 > const &)*arg2);
@@ -9721,6 +9675,14 @@ static void *_p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVectorT_doub
 static void *_p_GeoCal__DcsLookVectorTo_p_GeoCal__LookVectorT_double_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector< double > *)  ((GeoCal::DcsLookVector *) x));
 }
+static void *_p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__Camera_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::Camera >(*(boost::shared_ptr< GeoCal::SimpleCamera > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__QuaternionCamera_tTo_p_boost__shared_ptrT_GeoCal__Camera_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::Camera >(*(boost::shared_ptr< GeoCal::QuaternionCamera > *)x);
+}
 static void *_p_GeoCal__CameraTo_p_GeoCal__ObservableT_GeoCal__Camera_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::Observable< GeoCal::Camera > *)  ((GeoCal::Camera *) x));
 }
@@ -9729,14 +9691,6 @@ static void *_p_GeoCal__QuaternionCameraTo_p_GeoCal__ObservableT_GeoCal__Camera_
 }
 static void *_p_GeoCal__SimpleCameraTo_p_GeoCal__ObservableT_GeoCal__Camera_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::Observable< GeoCal::Camera > *) (GeoCal::Camera *) ((GeoCal::SimpleCamera *) x));
-}
-static void *_p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__Camera_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Camera >(*(boost::shared_ptr< GeoCal::SimpleCamera > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__QuaternionCamera_tTo_p_boost__shared_ptrT_GeoCal__Camera_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Camera >(*(boost::shared_ptr< GeoCal::QuaternionCamera > *)x);
 }
 static void *_p_GeoCal__QuaternionCameraTo_p_GeoCal__Camera(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::Camera *)  ((GeoCal::QuaternionCamera *) x));

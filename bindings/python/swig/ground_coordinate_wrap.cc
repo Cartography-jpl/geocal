@@ -3469,65 +3469,64 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__Time swig_types[17]
 #define SWIGTYPE_p_a_3__double swig_types[18]
 #define SWIGTYPE_p_allocator_type swig_types[19]
-#define SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t swig_types[20]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[21]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[22]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[23]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[24]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[25]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[26]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[27]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[28]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[29]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[30]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[31]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[32]
-#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[33]
-#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[34]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[35]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[36]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[37]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[38]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[39]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[40]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[41]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[42]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[43]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[44]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[45]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[46]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[47]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[48]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[49]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[50]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[51]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[52]
-#define SWIGTYPE_p_char swig_types[53]
-#define SWIGTYPE_p_char_type swig_types[54]
-#define SWIGTYPE_p_difference_type swig_types[55]
-#define SWIGTYPE_p_fmtflags swig_types[56]
-#define SWIGTYPE_p_int_type swig_types[57]
-#define SWIGTYPE_p_iostate swig_types[58]
-#define SWIGTYPE_p_off_type swig_types[59]
-#define SWIGTYPE_p_openmode swig_types[60]
-#define SWIGTYPE_p_p_PyObject swig_types[61]
-#define SWIGTYPE_p_pos_type swig_types[62]
-#define SWIGTYPE_p_seekdir swig_types[63]
-#define SWIGTYPE_p_size_t swig_types[64]
-#define SWIGTYPE_p_size_type swig_types[65]
-#define SWIGTYPE_p_state_type swig_types[66]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t swig_types[67]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[68]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[69]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[70]
-#define SWIGTYPE_p_std__invalid_argument swig_types[71]
-#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[72]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t_t swig_types[73]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[74]
-#define SWIGTYPE_p_traits_type swig_types[75]
-#define SWIGTYPE_p_value_type swig_types[76]
-static swig_type_info *swig_types[78];
-static swig_module_info swig_module = {swig_types, 77, 0, 0, 0, 0};
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[20]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[25]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[26]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[27]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[28]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[29]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[30]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[31]
+#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[32]
+#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[33]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[34]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[35]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[36]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[37]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[38]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[39]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[40]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[41]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[42]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[43]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[44]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[45]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[46]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[47]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[48]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[49]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[50]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[51]
+#define SWIGTYPE_p_char swig_types[52]
+#define SWIGTYPE_p_char_type swig_types[53]
+#define SWIGTYPE_p_difference_type swig_types[54]
+#define SWIGTYPE_p_fmtflags swig_types[55]
+#define SWIGTYPE_p_int_type swig_types[56]
+#define SWIGTYPE_p_iostate swig_types[57]
+#define SWIGTYPE_p_off_type swig_types[58]
+#define SWIGTYPE_p_openmode swig_types[59]
+#define SWIGTYPE_p_p_PyObject swig_types[60]
+#define SWIGTYPE_p_pos_type swig_types[61]
+#define SWIGTYPE_p_seekdir swig_types[62]
+#define SWIGTYPE_p_size_t swig_types[63]
+#define SWIGTYPE_p_size_type swig_types[64]
+#define SWIGTYPE_p_state_type swig_types[65]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t swig_types[66]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[67]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[68]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[69]
+#define SWIGTYPE_p_std__invalid_argument swig_types[70]
+#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[71]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t_t swig_types[72]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[73]
+#define SWIGTYPE_p_traits_type swig_types[74]
+#define SWIGTYPE_p_value_type swig_types[75]
+static swig_type_info *swig_types[77];
+static swig_module_info swig_module = {swig_types, 76, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5072,13 +5071,11 @@ namespace swig
 #endif
 #include <numpy/arrayobject.h>
 #include "geocal_exception.h"
-#include "auto_derivative.h"
 
 PyObject* numpy_module();
 PyObject* numpy_dot_float64();
 PyObject* numpy_dot_int32();
 PyObject* numpy_dot_bool();
-PyObject* numpy_dot_object();
 
 //--------------------------------------------------------------
 // Helper routines to map a template type to the code numpy uses
@@ -5089,7 +5086,6 @@ template<class T> int type_to_npy();
 template<> inline int type_to_npy<double>() {return NPY_DOUBLE;}
 template<> inline int type_to_npy<int>() {return NPY_INT;}
 template<> inline int type_to_npy<bool>() {return NPY_BOOL;}
-template<> inline int type_to_npy<GeoCal::AutoDerivative<double> >() {return NPY_OBJECT;}
 
 //--------------------------------------------------------------
 // Use the numpy command "asarray" to convert various python 
@@ -5123,15 +5119,6 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
 				    PyString_FromString("asarray"), 
 				    obj, numpy_dot_int32(), NULL);
-  PyErr_Clear();
-  return res;
-}
-
-template<> inline PyObject* to_numpy<GeoCal::AutoDerivative<double> >(PyObject* obj)
-{
-  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-				    PyString_FromString("asarray"), 
-				    obj, numpy_dot_object(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -11476,7 +11463,6 @@ static swig_type_info _swigt__p_GeoCal__ScLookVectorWithDerivative = {"_p_GeoCal
 static swig_type_info _swigt__p_GeoCal__Time = {"_p_GeoCal__Time", "GeoCal::Time *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_a_3__double = {"_p_a_3__double", "double (*)[3]", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t = {"_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t", "blitz::Array< GeoCal::AutoDerivative< double >,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_2_t = {"_p_blitz__ArrayT_bool_2_t", "blitz::Array< bool,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_3_t = {"_p_blitz__ArrayT_bool_3_t", "blitz::Array< bool,3 > *", 0, 0, (void*)0, 0};
@@ -11555,7 +11541,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__Time,
   &_swigt__p_a_3__double,
   &_swigt__p_allocator_type,
-  &_swigt__p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t,
   &_swigt__p_blitz__ArrayT_bool_1_t,
   &_swigt__p_blitz__ArrayT_bool_2_t,
   &_swigt__p_blitz__ArrayT_bool_3_t,
@@ -11634,7 +11619,6 @@ static swig_cast_info _swigc__p_GeoCal__ScLookVectorWithDerivative[] = {  {&_swi
 static swig_cast_info _swigc__p_GeoCal__Time[] = {  {&_swigt__p_GeoCal__Time, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_a_3__double[] = {  {&_swigt__p_a_3__double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t[] = {  {&_swigt__p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_3_t[] = {  {&_swigt__p_blitz__ArrayT_bool_3_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11713,7 +11697,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__Time,
   _swigc__p_a_3__double,
   _swigc__p_allocator_type,
-  _swigc__p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t,
   _swigc__p_blitz__ArrayT_bool_1_t,
   _swigc__p_blitz__ArrayT_bool_2_t,
   _swigc__p_blitz__ArrayT_bool_3_t,

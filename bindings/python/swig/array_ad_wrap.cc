@@ -4809,13 +4809,11 @@ namespace swig
 #endif
 #include <numpy/arrayobject.h>
 #include "geocal_exception.h"
-#include "auto_derivative.h"
 
 PyObject* numpy_module();
 PyObject* numpy_dot_float64();
 PyObject* numpy_dot_int32();
 PyObject* numpy_dot_bool();
-PyObject* numpy_dot_object();
 
 //--------------------------------------------------------------
 // Helper routines to map a template type to the code numpy uses
@@ -4826,7 +4824,6 @@ template<class T> int type_to_npy();
 template<> inline int type_to_npy<double>() {return NPY_DOUBLE;}
 template<> inline int type_to_npy<int>() {return NPY_INT;}
 template<> inline int type_to_npy<bool>() {return NPY_BOOL;}
-template<> inline int type_to_npy<GeoCal::AutoDerivative<double> >() {return NPY_OBJECT;}
 
 //--------------------------------------------------------------
 // Use the numpy command "asarray" to convert various python 
@@ -4860,15 +4857,6 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
 				    PyString_FromString("asarray"), 
 				    obj, numpy_dot_int32(), NULL);
-  PyErr_Clear();
-  return res;
-}
-
-template<> inline PyObject* to_numpy<GeoCal::AutoDerivative<double> >(PyObject* obj)
-{
-  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-				    PyString_FromString("asarray"), 
-				    obj, numpy_dot_object(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -5195,22 +5183,19 @@ extern "C" {
 SWIGINTERN PyObject *_wrap_new_ArrayAd_double_1__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< GeoCal::AutoDerivative< double >,1 > *arg1 = 0 ;
-  blitz::Array< GeoCal::AutoDerivative< double >,1 > a1 ;
-  PythonObject numpy1 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
   GeoCal::ArrayAd< double,1 > *result = 0 ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  {
-    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy1.obj = to_numpy<GeoCal::AutoDerivative<double> >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
-      a1.reference(to_blitz_array<GeoCal::AutoDerivative<double>, 1>(numpy1));
-      arg1 = &a1;
-    }
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_ArrayAd_double_1" "', argument " "1"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
   }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ArrayAd_double_1" "', argument " "1"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< GeoCal::AutoDerivative< double >,1 > * >(argp1);
   {
     try {
       result = (GeoCal::ArrayAd< double,1 > *)new GeoCal::ArrayAd< double,1 >((blitz::Array< GeoCal::AutoDerivative< double >,1 > const &)*arg1);
@@ -5669,10 +5654,8 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_1(PyObject *self, PyObject *args) 
   if (argc == 1) {
     int _v = 0;
     {
-      {
-        PythonObject t(to_numpy<GeoCal::AutoDerivative<double> >(argv[0]));
-        _v = (t.obj && PyArray_NDIM(t.obj) ==1 ? 1 : 0);
-      }
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t, 0);
+      _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_1;
     return _wrap_new_ArrayAd_double_1__SWIG_0(self, argc, argv);

@@ -1,5 +1,4 @@
 from igc_collection import *
-from orbit_offset_correction import *
 import cPickle
 
 def _new_from_init(cls, version, *args):
@@ -10,8 +9,9 @@ def _new_from_init(cls, version, *args):
     return inst
 
 class IgcOffsetCorrection(IgcCollection):
-    '''This is a IgcCollection that uses a OrbitOffsetCorrection as the
-    underlying error model.'''
+    '''This is a IgcCollection that uses a OrbitDataImageGroundConnection. 
+    The orbit and camera can be anything that we want to use to model the
+    geometry and errors.'''
     def __init__(self, imglist, cam, dem, orbit, 
                  refraction = None,
                  image_time = None, image_title = None):

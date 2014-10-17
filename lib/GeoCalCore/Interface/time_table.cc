@@ -108,6 +108,13 @@ void MeasuredTimeTable::time(const ImageCoordinate& Ic, Time& T,
   range_check(Ic.line, (double) min_line(), (double) max_line() + 1.0);
   int i = (int) floor(Ic.line);
   int j = i - min_line_;
+  // Allow extrapolation by 1 line.
+  while(j + 1 >= tlist.size()) {
+    j = j - 1;
+    i = i - 1;
+  }
+  if(j < 0)
+    throw Exception("MeasuredTimeTable must have at least 2 lines");
   T = tlist[j] + (tlist[j + 1] - tlist[j]) * (Ic.line - i);
   F = FrameCoordinate(0, Ic.sample);
 }

@@ -138,7 +138,7 @@ public:
 /// Maximum line table is valid for.
 //-----------------------------------------------------------------------
 
-  virtual int max_line() const {return min_line_ + (int) tlist.size() - 2;}
+  virtual int max_line() const {return min_line_ + (int) tlist.size() - 1;}
 
 //-----------------------------------------------------------------------
 /// Minimum time table is valid for.

@@ -105,7 +105,7 @@ const FrameCoordinate& F) const
 void MeasuredTimeTable::time(const ImageCoordinate& Ic, Time& T, 
 			     FrameCoordinate& F) const
 {
-  range_check(Ic.line, (double) min_line(), (double) max_line() + 0.5);
+  range_check(Ic.line, (double) min_line(), (double) max_line() + 1.0);
   int i = (int) floor(Ic.line);
   int j = i - min_line_;
   T = tlist[j] + (tlist[j + 1] - tlist[j]) * (Ic.line - i);

@@ -83,6 +83,14 @@ UsgsDemData::UsgsDemData
       int lon = boost::lexical_cast<int>(m[4]) * (m[3] == "e" ? 1 : -1);
       if(flist.size() == 1) {
 	mi_ref = GdalRasterImage(flist[0]).map_info();
+	// The data is in latitude/longitude of NAD83. However this is
+	// extremely close to just WGS84. We go ahead and change to
+	// use the GeodeticConverter because this is faster than going
+	// through OGR.
+	mi_ref = MapInfo(boost::shared_ptr<CoordinateConverter>
+			 (new GeodeticConverter()),
+			 mi_ref.transform(),
+			 mi_ref.number_x_pixel(), mi_ref.number_y_pixel());
 	// If this is the first file, then initialize the mapinfo that we
 	// will calculate all the loffset and soffset against. We'll
 	// adjust this after going through all the files for the upper

@@ -59,6 +59,15 @@ public:
 
   const std::string& directory_base() const {return f->directory_base();}
 
+  virtual double height_reference_surface(const GroundCoordinate& Gp) 
+    const
+  {
+    // Faster to covert Gp to Geodetic and use in both undulation and
+    // file lookup.
+    Geodetic g(Gp);
+    return DemMapInfo::height_reference_surface(g);
+  }
+
 protected:
 //-----------------------------------------------------------------------
 /// Return height in meters relative to datum().

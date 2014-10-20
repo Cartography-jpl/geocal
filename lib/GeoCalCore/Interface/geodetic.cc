@@ -12,11 +12,7 @@ using namespace GeoCal;
 
 Geodetic::Geodetic(const GroundCoordinate& Gc)
 {
-  if(const Geodetic* g = dynamic_cast<const Geodetic*>(&Gc)) {
-    *this = *g;
-    return;
-  }
-  *this = Ecr(Gc).convert_to_geodetic();
+  Gc.lat_lon_height(lat_, lon_, height_ellipsoid_);
 }
 
 //-----------------------------------------------------------------------

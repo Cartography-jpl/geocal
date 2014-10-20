@@ -37,6 +37,16 @@ public:
   virtual ~GroundCoordinate() {}
 
 //-----------------------------------------------------------------------
+/// Convert to latitude, longitude, height_reference_surface in a
+/// single call. By default, just convert to CartesianFixed and then
+/// get latitude, longitude, and height_reference_surface. but derived
+/// classes can do something more efficient.
+//-----------------------------------------------------------------------
+
+  inline virtual void lat_lon_height(double& Latitude, double& Longitude, 
+			     double& Height_reference_surface) const; 
+
+//-----------------------------------------------------------------------
 /// Return latitude in degrees. By default we just convert to 
 /// CartesianFixed and then to latitude, but derived classes can supply
 /// more efficient versions of these if needed. Latitude is -90 to 90.
@@ -244,6 +254,14 @@ public:
 
 // These are defined here instead of up in the class above because
 // we need the declaration of CartesianFixed first.
+inline void GroundCoordinate::lat_lon_height
+(double& Latitude, double& Longitude, double& Height_reference_surface) const
+{
+  boost::shared_ptr<CartesianFixed> cf = convert_to_cf();
+  Latitude = cf->latitude();
+  Longitude = cf->longitude();
+  Height_reference_surface = cf->height_reference_surface(); 
+}
 inline double GroundCoordinate::latitude() const 
 { return convert_to_cf()->latitude(); }
 inline double GroundCoordinate::longitude() const 

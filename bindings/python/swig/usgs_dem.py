@@ -186,13 +186,6 @@ class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
         controlled by Outside_dem_is_error. 
         """
         _usgs_dem.UsgsDem_swiginit(self,_usgs_dem.new_UsgsDem(*args))
-    def elevation(self, *args):
-        """
-        virtual double GeoCal::UsgsDem::elevation(int Y_index, int X_index) const
-        Return height in meters relative to datum(). 
-        """
-        return _usgs_dem.UsgsDem_elevation(self, *args)
-
     def _v_directory_base(self):
         """
         const std::string& GeoCal::UsgsDem::directory_base() const
@@ -212,7 +205,6 @@ class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
       return _new_from_init, (self.__class__, 1, self.directory_base,self.outside_dem_is_error,self.datum)
 
     __swig_destroy__ = _usgs_dem.delete_UsgsDem
-UsgsDem.elevation = new_instancemethod(_usgs_dem.UsgsDem_elevation,None,UsgsDem)
 UsgsDem._v_directory_base = new_instancemethod(_usgs_dem.UsgsDem__v_directory_base,None,UsgsDem)
 UsgsDem_swigregister = _usgs_dem.UsgsDem_swigregister
 UsgsDem_swigregister(UsgsDem)

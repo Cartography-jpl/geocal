@@ -59,13 +59,14 @@ public:
 
   const std::string& directory_base() const {return f->directory_base();}
 
+protected:
 //-----------------------------------------------------------------------
 /// Return height in meters relative to datum().
 //-----------------------------------------------------------------------
 
   virtual double elevation(int Y_index, int X_index) const
   { 
-    return (*f)(Y_index, X_index);
+    return f->unchecked_read(Y_index, X_index);
   }
   virtual void print(std::ostream& Os) const;
 private:

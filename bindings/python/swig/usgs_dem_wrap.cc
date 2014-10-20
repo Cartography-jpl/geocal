@@ -5259,9 +5259,6 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
-  #define SWIG_From_double   PyFloat_FromDouble 
-
-
 SWIGINTERNINLINE PyObject *
 SWIG_FromCharPtrAndSize(const char* carray, size_t size)
 {
@@ -5990,64 +5987,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_UsgsDem_elevation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::UsgsDem *arg1 = (GeoCal::UsgsDem *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::UsgsDem const > tempshared1 ;
-  boost::shared_ptr< GeoCal::UsgsDem const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  PyObject *swig_obj[3] ;
-  double result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"UsgsDem_elevation",3,3,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__UsgsDem_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "UsgsDem_elevation" "', argument " "1"" of type '" "GeoCal::UsgsDem const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::UsgsDem > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::UsgsDem > * >(argp1);
-      arg1 = const_cast< GeoCal::UsgsDem * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::UsgsDem > * >(argp1);
-      arg1 = const_cast< GeoCal::UsgsDem * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "UsgsDem_elevation" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "UsgsDem_elevation" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  {
-    try {
-      result = (double)((GeoCal::UsgsDem const *)arg1)->elevation(arg2,arg3);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_UsgsDem__v_directory_base(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::UsgsDem *arg1 = (GeoCal::UsgsDem *) 0 ;
@@ -6183,10 +6122,6 @@ static PyMethodDef SwigMethods[] = {
 		"for a point outside of the area this can either be treated as an\n"
 		"error, or alternatively you can return a value of 0 instead. This is\n"
 		"controlled by Outside_dem_is_error. \n"
-		""},
-	 { (char *)"UsgsDem_elevation", _wrap_UsgsDem_elevation, METH_VARARGS, (char *)"\n"
-		"virtual double GeoCal::UsgsDem::elevation(int Y_index, int X_index) const\n"
-		"Return height in meters relative to datum(). \n"
 		""},
 	 { (char *)"UsgsDem__v_directory_base", (PyCFunction)_wrap_UsgsDem__v_directory_base, METH_O, (char *)"\n"
 		"const std::string& GeoCal::UsgsDem::directory_base() const\n"

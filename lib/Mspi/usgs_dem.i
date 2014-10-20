@@ -32,9 +32,11 @@ public:
   UsgsDem(const std::string& Dir,
 	  bool Outside_dem_is_error,
 	  const boost::shared_ptr<Datum>& D);
-  virtual double elevation(int Y_index, int X_index) const;
 
   %python_attribute(directory_base, std::string);
   %pickle_init(1, self.directory_base, self.outside_dem_is_error, self.datum);
+
+protected:
+  virtual double elevation(int Y_index, int X_index) const;
 };
 }

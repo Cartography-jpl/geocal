@@ -51,6 +51,8 @@ IgcRayCaster::IgcRayCaster
   igc->footprint_resolution(0, 0, line_res, samp_res);
   nsub_line = (int) ceil(line_res / Resolution);
   nsub_sample = (int) ceil(samp_res / Resolution);
+  result_cache.resize(1, igc->number_sample(), nsub_line, nsub_sample,
+		      nintegration_step,3);
 }
 
 //-----------------------------------------------------------------------
@@ -65,12 +67,10 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
   blitz::Array<double, 7> cf_lv = 
     igc->cf_look_vector_arr(current_position(), 0, 1, igc->number_sample(),
 			    nsub_line, nsub_sample, nintegration_step);
-  blitz::Array<double, 6> res(1, igc->number_sample(), nsub_line, nsub_sample,
-			      nintegration_step,3);
-  for(int i1 = 0; i1 < res.shape()[1]; ++i1)
-    for(int i2 = 0; i2 < res.shape()[2]; ++i2)
-      for(int i3 = 0; i3 < res.shape()[3]; ++i3)
-	for(int i4 = 0; i4 < res.shape()[4]; ++i4) {
+  for(int i1 = 0; i1 < result_cache.shape()[1]; ++i1)
+    for(int i2 = 0; i2 < result_cache.shape()[2]; ++i2)
+      for(int i3 = 0; i3 < result_cache.shape()[3]; ++i3)
+	for(int i4 = 0; i4 < result_cache.shape()[4]; ++i4) {
 	  Ecr cf(cf_lv(0,i1,i2,i3,i4,0,0), cf_lv(0,i1,i2,i3,i4,0,1),
 		 cf_lv(0,i1,i2,i3,i4,0,2));
 	  CartesianFixedLookVector lv(cf_lv(0,i1,i2,i3,i4,1,0), 
@@ -79,11 +79,11 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
 
 	  boost::shared_ptr<CartesianFixed> pt =
 	    igc->dem().intersect(cf, lv, resolution, max_height);
-	  res(0,i1,i2,i3,i4, 0) = pt->position[0];
-	  res(0,i1,i2,i3,i4, 1) = pt->position[1];
-	  res(0,i1,i2,i3,i4, 2) = pt->position[2];
+	  result_cache(0,i1,i2,i3,i4, 0) = pt->position[0];
+	  result_cache(0,i1,i2,i3,i4, 1) = pt->position[1];
+	  result_cache(0,i1,i2,i3,i4, 2) = pt->position[2];
 	}
-  return res;
+  return result_cache;
 }
 
 

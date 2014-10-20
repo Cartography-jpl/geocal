@@ -2,6 +2,7 @@
 #define IGC_RAY_CASTER_H
 #include "ray_caster.h"
 #include "image_ground_connection.h"
+#include <boost/utility.hpp>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -78,7 +79,9 @@ namespace GeoCal {
    orbit. Again, we could relax this if desired and calculate this for
    every line. But we don't do that right now.
 *******************************************************************/
-class IgcRayCaster : public RayCaster {
+class IgcRayCaster : public RayCaster, boost::noncopyable {
+// We can't copy this because of the result_cache. We could create a
+// copy constructor if this becomes an issue.
 public:
   IgcRayCaster(const boost::shared_ptr<ImageGroundConnection>& Igc,
 	       int Start_line = 0,
@@ -105,6 +108,10 @@ private:
   int start_position_, npos_, ind, nintegration_step, nsub_line, nsub_sample;
   bool is_forward;
   double resolution, max_height;
+  // Results from the last call to next_position. We save this both to 
+  // prevent allocating/freeing at every position, and for use in
+  // determining the starting point for the next position.
+  blitz::Array<double, 6> result_cache;
 };
 }
 #endif

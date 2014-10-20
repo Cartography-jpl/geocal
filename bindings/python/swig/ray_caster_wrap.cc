@@ -6316,7 +6316,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This is This is nline x nsamp x x nsub_line x nsub_sample x\n"
 		"nintegration_step x 3 in size, where we give the ground location as a\n"
-		"CartesianFixed coordinate (e.g., Ecr for the Earth) \n"
+		"CartesianFixed coordinate (e.g., Ecr for the Earth).\n"
+		"\n"
+		"Note that this array should be considered \"owned\" by this class,\n"
+		"code calling this class should copy this data if it wants to make any\n"
+		"modifications to the underlying data. \n"
 		""},
 	 { (char *)"RayCaster___str__", (PyCFunction)_wrap_RayCaster___str__, METH_O, NULL},
 	 { (char *)"delete_RayCaster", (PyCFunction)_wrap_delete_RayCaster, METH_O, (char *)"\n"

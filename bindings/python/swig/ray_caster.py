@@ -219,7 +219,11 @@ class RayCaster(geocal_swig.generic_object.GenericObject):
 
         This is This is nline x nsamp x x nsub_line x nsub_sample x
         nintegration_step x 3 in size, where we give the ground location as a
-        CartesianFixed coordinate (e.g., Ecr for the Earth) 
+        CartesianFixed coordinate (e.g., Ecr for the Earth).
+
+        Note that this array should be considered "owned" by this class,
+        code calling this class should copy this data if it wants to make any
+        modifications to the underlying data. 
         """
         return _ray_caster.RayCaster_next_position(self)
 

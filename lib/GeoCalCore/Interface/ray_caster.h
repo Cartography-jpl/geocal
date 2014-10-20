@@ -62,7 +62,11 @@ public:
 /// Return the ground locations seen at the next position. This is
 /// This is nline x nsamp x x nsub_line x nsub_sample x
 /// nintegration_step x 3 in size, where we give the ground location
-/// as a CartesianFixed coordinate (e.g., Ecr for the Earth)
+/// as a CartesianFixed coordinate (e.g., Ecr for the Earth).
+///
+/// Note that this array should be considered "owned" by this class,
+/// code calling this class should copy this data if it wants to make
+/// any modifications to the underlying data.
 //-----------------------------------------------------------------------
   
   virtual blitz::Array<double, 6> next_position() = 0;

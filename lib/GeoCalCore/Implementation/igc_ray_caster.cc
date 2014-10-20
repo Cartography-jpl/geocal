@@ -2,7 +2,9 @@
 #include "simple_dem.h"
 #include "ecr.h"
 using namespace GeoCal;
+using namespace blitz;
 
+inline double sqr(double x) { return x * x; }
 //-----------------------------------------------------------------------
 /// Constructor. You can pass the starting line to use and the number
 /// of lines to process, the default is to do the full range covered
@@ -64,9 +66,24 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
   if(last_position())
     throw Exception("next_position called when we have already reached the last position");
   ++ind;
-  blitz::Array<double, 7> cf_lv = 
+  Array<double, 7> cf_lv = 
     igc->cf_look_vector_arr(current_position(), 0, 1, igc->number_sample(),
 			    nsub_line, nsub_sample, nintegration_step);
+  Array<double, 4> dist(result_cache.shape()[1], result_cache.shape()[2],
+			result_cache.shape()[3], result_cache.shape()[4]);
+  if(ind != 0)
+    for(int i1 = 0; i1 < result_cache.shape()[1]; ++i1)
+      for(int i2 = 0; i2 < result_cache.shape()[2]; ++i2)
+	for(int i3 = 0; i3 < result_cache.shape()[3]; ++i3)
+	  for(int i4 = 0; i4 < result_cache.shape()[4]; ++i4)
+	    dist(i1, i2, i3, i4) = 
+	      sqrt(sqr(result_cache(0,i1,i2,i3,i4, 0) -
+		       cf_lv(0,i1,i2,i3,i4,0,0)) +
+		   sqr(result_cache(0,i1,i2,i3,i4, 1) -
+		       cf_lv(0,i1,i2,i3,i4,0,1)) +
+		   sqr(result_cache(0,i1,i2,i3,i4, 2) -
+		       cf_lv(0,i1,i2,i3,i4,0,2)));
+
   for(int i1 = 0; i1 < result_cache.shape()[1]; ++i1)
     for(int i2 = 0; i2 < result_cache.shape()[2]; ++i2)
       for(int i3 = 0; i3 < result_cache.shape()[3]; ++i3)
@@ -76,9 +93,17 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
 	  CartesianFixedLookVector lv(cf_lv(0,i1,i2,i3,i4,1,0), 
 				      cf_lv(0,i1,i2,i3,i4,1,1),
 				      cf_lv(0,i1,i2,i3,i4,1,2));
-
-	  boost::shared_ptr<CartesianFixed> pt =
-	    igc->dem().intersect(cf, lv, resolution, max_height);
+	  boost::shared_ptr<CartesianFixed> pt;
+	  if(ind != 0) {
+	    double start_dist = dist(i1, i2, i3, i4);
+	    if(i1-1 >= 0)
+	      start_dist = std::min(start_dist, dist(i1-1, i2, i3, i4));
+	    if(i1+1 < result_cache.shape()[1])
+	      start_dist = std::min(start_dist, dist(i1+1, i2, i3, i4));
+	    pt = igc->dem().intersect_start_length(cf, lv, resolution, 
+						   start_dist);
+	  } else 
+	    pt = igc->dem().intersect(cf, lv, resolution, max_height);
 	  result_cache(0,i1,i2,i3,i4, 0) = pt->position[0];
 	  result_cache(0,i1,i2,i3,i4, 1) = pt->position[1];
 	  result_cache(0,i1,i2,i3,i4, 2) = pt->position[2];

@@ -54,8 +54,8 @@ public:
 		    double Resolution=30, int Band=0, 
 		    double Max_height=9000)
   {
-    init(Orb, Time_table, Cam, D, Img, Roll_direction, Title, Ref, 
-	 Resolution, Band, Max_height);
+    initialize(Orb, Time_table, Cam, D, Img, Roll_direction, Title, Ref, 
+	       Resolution, Band, Max_height);
   }
 
 //-----------------------------------------------------------------------
@@ -198,7 +198,7 @@ protected:
 
   IgcRollingShutter() {}
 
-  void init(const boost::shared_ptr<Orbit>& Orb,
+  void initialize(const boost::shared_ptr<Orbit>& Orb,
 	    const boost::shared_ptr<TimeTable>& Time_table,
 	    const boost::shared_ptr<Camera>& Cam, 
 	    const boost::shared_ptr<Dem>& D,
@@ -218,7 +218,7 @@ private:
   double res;
   int b;
   double max_h;
-  
+  double time_tolerance_;
 };
 }
 #endif

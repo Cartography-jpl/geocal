@@ -77,6 +77,8 @@ geocalinc_HEADERS+= @srcimplementation@/ray_intersect.h
 libgeocal_la_SOURCES+= @srcimplementation@/ray_intersect.cc
 geocalinc_HEADERS+= @srcimplementation@/dem_match.h
 libgeocal_la_SOURCES+= @srcimplementation@/dem_match.cc
+geocalinc_HEADERS+= @srcimplementation@/igc_rolling_shutter.h
+libgeocal_la_SOURCES+= @srcimplementation@/igc_rolling_shutter.cc
 if HAVE_FFTW
 geocalinc_HEADERS+= @srcimplementation@/phase_correlation_matcher.h
 libgeocal_la_SOURCES+= @srcimplementation@/phase_correlation_matcher.cc
@@ -185,6 +187,7 @@ SWIG_SRC += @swigsrc@/refraction_wrap.cc
 SWIG_SRC += @swigsrc@/orbit_data_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/planet_coordinate_wrap.cc
 SWIG_SRC += @swigsrc@/igc_ray_caster_wrap.cc
+SWIG_SRC += @swigsrc@/igc_rolling_shutter_wrap.cc
 SWIG_SRC_HDF5 += @swigsrc@/hdf_orbit_wrap.cc
 SWIG_SRC_HDF5_CARTO += @swigsrc@/hdf_orbit_carto_wrap.cc
 # Test files
@@ -224,6 +227,7 @@ endif
 geocal_test_all_SOURCES+= @srcimplementation@/quadratic_geometric_model_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/geometric_model_image_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_ray_caster_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/igc_rolling_shutter_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 

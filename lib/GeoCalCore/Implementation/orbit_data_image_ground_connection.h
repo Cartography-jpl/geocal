@@ -132,7 +132,7 @@ public:
 
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const
-  { // Default is no parameters
+  { 
     FrameCoordinateWithDerivative fc;
     if(refraction_) {
       boost::shared_ptr<GroundCoordinate> gc_uncorr =

@@ -59,6 +59,14 @@ public:
 
   const std::string& directory_base() const {return f->directory_base();}
 
+  virtual double distance_to_surface(const GroundCoordinate& Gp) const
+  {
+    // Faster to covert Gp to Geodetic and use in both undulation and
+    // file lookup.
+    Geodetic g(Gp);
+    return g.height_reference_surface() - 
+      DemMapInfo::height_reference_surface(g);
+  }
   virtual double height_reference_surface(const GroundCoordinate& Gp) 
     const
   {

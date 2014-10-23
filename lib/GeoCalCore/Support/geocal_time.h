@@ -1,6 +1,7 @@
 #ifndef GEOCAL_TIME_H
 #define GEOCAL_TIME_H
 #include "toolkit_time_interface.h"
+#include "auto_derivative.h"
 #include "printable.h"
 #include <boost/operators.hpp>
 #include <math.h>
@@ -209,6 +210,50 @@ public:
   { return toolkit_time_interface->to_string(*this); }
 };
 
+class TimeWithDerivative : public TimeBase<AutoDerivative<double> >,
+   public Printable<TimeWithDerivative>,
+   private boost::addable<TimeWithDerivative, AutoDerivative<double> >,
+   private boost::subtractable<TimeWithDerivative, AutoDerivative<double> >,
+   private boost::less_than_comparable<TimeWithDerivative> 
+{
+public:
+//-----------------------------------------------------------------------
+/// Return time from given PGS toolkit time (epoch of 1993-01-01).
+//-----------------------------------------------------------------------
+  
+  static TimeWithDerivative time_pgs(const AutoDerivative<double> pgs) 
+  {TimeWithDerivative res; res.time_pgs_ = pgs; return res;}
+
+//-----------------------------------------------------------------------
+/// Return time from given J2000 time (epoch of 2000-01-01 12:00:00
+/// TT). Note that TT is different than UTC noon by about 64.184 seconds
+//-----------------------------------------------------------------------
+  
+  static TimeWithDerivative time_j2000(const AutoDerivative<double> j2000) 
+  {TimeWithDerivative res; 
+    // Constant here is from SPICE kernel, and is accurate to more
+    // digits than the 64.184
+    res.time_pgs_ = j2000 + 220881605.0 - 64.1839272778; 
+    return res;}
+
+//-----------------------------------------------------------------------
+/// Return time from given GPS time (epoch of 1980-01-06).
+//-----------------------------------------------------------------------
+  
+  static TimeWithDerivative 
+  time_gps(const AutoDerivative<double>& gps) 
+  {return time_pgs(gps - 409881608.0);}
+
+//-----------------------------------------------------------------------
+/// Print to stream.
+//-----------------------------------------------------------------------
+
+  void print(std::ostream& os) const 
+  { os << "TimeWithDerivative:\n"
+       << "  " << Time::time_pgs(pgs().value()) << "\n"
+       << "  Gradient: " << time_pgs_.gradient() << "\n"; }
+};
+
 //-----------------------------------------------------------------------
 /// \ingroup Miscellaneous
 ///
@@ -228,6 +273,16 @@ template<class T> inline T operator-(const TimeBase<T>& T1,
 
 inline bool operator<(const Time& T1, const Time& T2)
 { return T1 - T2 < 0; }
+
+//-----------------------------------------------------------------------
+/// \ingroup Miscellaneous
+/// Compare TimeWithDerivative
+///
+/// We define <=, >= and > in terms of this operator.
+//-----------------------------------------------------------------------
+
+inline bool operator<(const TimeWithDerivative& T1, const TimeWithDerivative& T2)
+{ return (T1 - T2).value() < 0; }
 
 /****************************************************************//**
   Small helper class to wrap creation of time in a common interface.

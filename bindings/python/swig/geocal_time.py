@@ -150,64 +150,13 @@ import time
 def _new_time(pgs):
   return Time.time_pgs(pgs)
 
+def _new_time_with_derivative(pgs):
+  return TimeWithDerivative.time_pgs(pgs)
+
 class Time(geocal_swig.generic_object.GenericObject):
     """
-    There are a few reasonable choices for expressing time information.
+    C++ includes: geocal_time.h
 
-    We could use TAI, GPS, the PGS toolkit. Each of these time system can
-    be related to the other by a constant, since the only difference is
-    the Epoch that time is measure against.
-
-    Note that for accurate work we do not want to use something like Unix
-    time, because this does not account for leapseconds (POSIX unix time
-    is the number of seconds since January 1, 1970 not including
-    leapseconds).
-
-    Most code doesn't care what the underlying time representation is, we
-    just need to be able to do functions such as comparing two times to
-    determine what is later, adding or subtracting a given number of
-    seconds to a time, or give the duration between two times.
-
-    This class abstracts out the representation we use for time. We supply
-    conversions to the specific time systems for use in the cases that a
-    specific system is needed (e.g., calling a PGS toolkit routine).
-
-    We also supply methods for converting to and from a string
-    representation of the time. The supported formats of the string
-    parsing depends on the underlying toolkit used, but all of them
-    support CCSDS format (e.g., "1996-07-03T04:13:57.987654Z").
-
-    If either SPICE or SDP is available, then that toolkit is the one used
-    for the conversion. If both are available, we default to SPICE. In
-    each case, you can change the default by updating the variable
-    Time::toolkit_time_interface.
-
-    If we don't have either SPICE or SDP, then we default to using unix
-    time (through the boost date_time library). This isn't ideal, but it
-    is better than not supporting time at all. For a number of purposes
-    the unix time is fine (e.g., indexing data in a orbit file).
-
-    As an implementation detail, we use PGS time, which has an epoch of
-    1993-01-01.
-
-    Note there is a subtle difference between time used for Terrestrial
-    uses (such as UTC) and for planetary use. There are two ways used for
-    measuring time - International atomic time (TAI) and Barycentric
-    Dynamic Time (TDB). The first is the time measured by an atomic clock
-    on the earth vs. the second which measures time at the barycenter of
-    the solar system. Due to relativistic effects, the two clocks vary by
-    something close to a periodic function with a size of about 1 ms over
-    the coarse of a year. We measure time durations (e.g., the difference
-    between 2 times) in TAI. For most purposes, you can ignore the
-    difference between the two systems.
-
-    When calling SPICE routines, we internally convert to and from TAI
-    time as needed. This is a bit less efficient than simply keeping
-    everything in TDB time, but it gives a cleaner interface. We can
-    revisit this if the computer time it takes to do the conversions start
-    becoming prohibitive.
-
-    C++ includes: geocal_time.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
@@ -281,7 +230,7 @@ class Time(geocal_swig.generic_object.GenericObject):
 
     def _v_pgs(self):
         """
-        double GeoCal::Time::pgs() const
+        double  GeoCal::TimeBase< double  >::pgs() const
         Give time in PGS toolkit time (epoch 1993-01-01). 
         """
         return _geocal_time.Time__v_pgs(self)
@@ -292,7 +241,7 @@ class Time(geocal_swig.generic_object.GenericObject):
 
     def _v_gps(self):
         """
-        double GeoCal::Time::gps() const
+        double  GeoCal::TimeBase< double  >::gps() const
         Give time in GPS. 
         """
         return _geocal_time.Time__v_gps(self)
@@ -303,7 +252,7 @@ class Time(geocal_swig.generic_object.GenericObject):
 
     def _v_j2000(self):
         """
-        double GeoCal::Time::j2000() const
+        double  GeoCal::TimeBase< double  >::j2000() const
         Give time in j2000. 
         """
         return _geocal_time.Time__v_j2000(self)
@@ -325,10 +274,8 @@ class Time(geocal_swig.generic_object.GenericObject):
 
     def parse_time(*args):
         """
-        static Time GeoCal::Time::parse_time(const std::string Time_string)
-        Parse string to get a Time.
+        static Time GeoCal::Time::parse_time(const std::string &Time_string)
 
-        Uses interface supplied by toolkit_time_interface. 
         """
         return _geocal_time.Time_parse_time(*args)
 
@@ -416,15 +363,120 @@ def Time_time_acs(*args):
 
 def Time_parse_time(*args):
   """
-    static Time GeoCal::Time::parse_time(const std::string Time_string)
-    Parse string to get a Time.
+    static Time GeoCal::Time::parse_time(const std::string &Time_string)
 
-    Uses interface supplied by toolkit_time_interface. 
     """
   return _geocal_time.Time_parse_time(*args)
 cvar = _geocal_time.cvar
 Time.min_valid_time = _geocal_time.cvar.Time_min_valid_time
 Time.max_valid_time = _geocal_time.cvar.Time_max_valid_time
+
+class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
+    """
+    C++ includes: geocal_time.h
+
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def time_pgs(*args):
+        """
+        static TimeWithDerivative GeoCal::TimeWithDerivative::time_pgs(const AutoDerivative< double > pgs)
+        Return time from given PGS toolkit time (epoch of 1993-01-01). 
+        """
+        return _geocal_time.TimeWithDerivative_time_pgs(*args)
+
+    time_pgs = staticmethod(time_pgs)
+    def time_j2000(*args):
+        """
+        static TimeWithDerivative GeoCal::TimeWithDerivative::time_j2000(const AutoDerivative< double > j2000)
+        Return time from given J2000 time (epoch of 2000-01-01 12:00:00 TT).
+
+        Note that TT is different than UTC noon by about 64.184 seconds 
+        """
+        return _geocal_time.TimeWithDerivative_time_j2000(*args)
+
+    time_j2000 = staticmethod(time_j2000)
+    def time_gps(*args):
+        """
+        static TimeWithDerivative GeoCal::TimeWithDerivative::time_gps(const AutoDerivative< double > &gps)
+        Return time from given GPS time (epoch of 1980-01-06). 
+        """
+        return _geocal_time.TimeWithDerivative_time_gps(*args)
+
+    time_gps = staticmethod(time_gps)
+    def _v_pgs(self):
+        """
+        AutoDerivative< double >  GeoCal::TimeBase< AutoDerivative< double >  >::pgs() const
+        Give time in PGS toolkit time (epoch 1993-01-01). 
+        """
+        return _geocal_time.TimeWithDerivative__v_pgs(self)
+
+    @property
+    def pgs(self):
+        return self._v_pgs()
+
+    def _v_gps(self):
+        """
+        AutoDerivative< double >  GeoCal::TimeBase< AutoDerivative< double >  >::gps() const
+        Give time in GPS. 
+        """
+        return _geocal_time.TimeWithDerivative__v_gps(self)
+
+    @property
+    def gps(self):
+        return self._v_gps()
+
+    def _v_j2000(self):
+        """
+        AutoDerivative< double >  GeoCal::TimeBase< AutoDerivative< double >  >::j2000() const
+        Give time in j2000. 
+        """
+        return _geocal_time.TimeWithDerivative__v_j2000(self)
+
+    @property
+    def j2000(self):
+        return self._v_j2000()
+
+    def __reduce__(self):
+      return _new_time_with_derivative, (self.pgs,)
+
+      
+    def __init__(self): 
+        _geocal_time.TimeWithDerivative_swiginit(self,_geocal_time.new_TimeWithDerivative())
+    __swig_destroy__ = _geocal_time.delete_TimeWithDerivative
+TimeWithDerivative._v_pgs = new_instancemethod(_geocal_time.TimeWithDerivative__v_pgs,None,TimeWithDerivative)
+TimeWithDerivative._v_gps = new_instancemethod(_geocal_time.TimeWithDerivative__v_gps,None,TimeWithDerivative)
+TimeWithDerivative._v_j2000 = new_instancemethod(_geocal_time.TimeWithDerivative__v_j2000,None,TimeWithDerivative)
+TimeWithDerivative.__str__ = new_instancemethod(_geocal_time.TimeWithDerivative___str__,None,TimeWithDerivative)
+TimeWithDerivative.__cmp__ = new_instancemethod(_geocal_time.TimeWithDerivative___cmp__,None,TimeWithDerivative)
+TimeWithDerivative.__add__ = new_instancemethod(_geocal_time.TimeWithDerivative___add__,None,TimeWithDerivative)
+TimeWithDerivative.__radd__ = new_instancemethod(_geocal_time.TimeWithDerivative___radd__,None,TimeWithDerivative)
+TimeWithDerivative.__sub__ = new_instancemethod(_geocal_time.TimeWithDerivative___sub__,None,TimeWithDerivative)
+TimeWithDerivative_swigregister = _geocal_time.TimeWithDerivative_swigregister
+TimeWithDerivative_swigregister(TimeWithDerivative)
+
+def TimeWithDerivative_time_pgs(*args):
+  """
+    static TimeWithDerivative GeoCal::TimeWithDerivative::time_pgs(const AutoDerivative< double > pgs)
+    Return time from given PGS toolkit time (epoch of 1993-01-01). 
+    """
+  return _geocal_time.TimeWithDerivative_time_pgs(*args)
+
+def TimeWithDerivative_time_j2000(*args):
+  """
+    static TimeWithDerivative GeoCal::TimeWithDerivative::time_j2000(const AutoDerivative< double > j2000)
+    Return time from given J2000 time (epoch of 2000-01-01 12:00:00 TT).
+
+    Note that TT is different than UTC noon by about 64.184 seconds 
+    """
+  return _geocal_time.TimeWithDerivative_time_j2000(*args)
+
+def TimeWithDerivative_time_gps(*args):
+  """
+    static TimeWithDerivative GeoCal::TimeWithDerivative::time_gps(const AutoDerivative< double > &gps)
+    Return time from given GPS time (epoch of 1980-01-06). 
+    """
+  return _geocal_time.TimeWithDerivative_time_gps(*args)
 
 class Vector_Time(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')

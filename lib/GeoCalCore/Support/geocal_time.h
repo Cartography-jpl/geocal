@@ -7,7 +7,6 @@
 #include <ctime>
 
 namespace GeoCal {
-
 /****************************************************************//**
   There are a few reasonable choices for expressing time information. 
   We could use TAI, GPS, the PGS toolkit. Each of these time system
@@ -65,14 +64,48 @@ namespace GeoCal {
   start becoming prohibitive. 
 *******************************************************************/
 
-class Time : public Printable<Time>,
-             private boost::less_than_comparable<Time>,
-	     private boost::addable<Time, double>,
-	     private boost::subtractable<Time, double> {
+template<class T> class TimeBase {
 public:
-  static Time time_et(double et);
-  double et() const;
+//-----------------------------------------------------------------------
+/// Add given number of seconds to Time.
+//-----------------------------------------------------------------------
 
+  TimeBase<T>& operator+=(const T& Toff) {time_pgs_ += Toff; return *this;}
+
+//-----------------------------------------------------------------------
+/// Subtract given number of seconds to Time.
+//-----------------------------------------------------------------------
+
+  TimeBase<T>& operator-=(const T& Toff) {time_pgs_ -= Toff; return *this;}
+
+//-----------------------------------------------------------------------
+/// Give time in PGS toolkit time (epoch 1993-01-01).
+//-----------------------------------------------------------------------
+  
+  T pgs() const {return time_pgs_;}
+
+//-----------------------------------------------------------------------
+/// Give time in GPS.
+//-----------------------------------------------------------------------
+  
+  T gps() const {return time_pgs_ + 409881608.0;}
+
+//-----------------------------------------------------------------------
+/// Give time in j2000.
+//-----------------------------------------------------------------------
+  
+  T j2000() const {return time_pgs_ - (220881605.0 - 64.1839272778);}
+
+protected:
+  T time_pgs_;
+};
+
+class Time : public TimeBase<double>, public Printable<Time>,
+	     private boost::addable<Time, double>,
+             private boost::subtractable<Time, double>,
+             private boost::less_than_comparable<Time> 
+{
+public:
 //-----------------------------------------------------------------------
 /// Return time from given PGS toolkit time (epoch of 1993-01-01).
 //-----------------------------------------------------------------------
@@ -92,59 +125,33 @@ public:
     res.time_pgs_ = j2000 + 220881605.0 - 64.1839272778; 
     return res;}
 
+//-----------------------------------------------------------------------
+/// Return time from given GPS time (epoch of 1980-01-06).
+//-----------------------------------------------------------------------
+  
+  static Time time_gps(double gps) {return time_pgs(gps - 409881608.0);}
+
+  static Time time_et(double et);
+  double et() const;
+
   static Time time_acs(double acs_time);
+  double acs() const;
 
 //-----------------------------------------------------------------------
 /// Return time from given Unix time (epoch of 1970-01-01).
 //-----------------------------------------------------------------------
   
   static Time time_unix(std::time_t unix_time) 
-  {Time res; res.time_pgs_ = (double)(unix_time - 725846400.0); return res;}
+  {Time res; 
+    res.time_pgs_ = (double)(unix_time - 725846400.0); return res;}
+
 
 //-----------------------------------------------------------------------
 /// Return time from given Unix time (epoch of 1970-01-01).
 //-----------------------------------------------------------------------
   
   static Time time_unix(double unix_time) 
-  {Time res; res.time_pgs_ = (double)(unix_time - 725846400.0); return res;}
-
-//-----------------------------------------------------------------------
-/// Return time from given GPS time (epoch of 1980-01-06).
-//-----------------------------------------------------------------------
-  
-  static Time time_gps(double gps) {return Time::time_pgs(gps - 409881608.0);}
-
-//-----------------------------------------------------------------------
-/// Add given number of seconds to Time.
-//-----------------------------------------------------------------------
-
-  Time& operator+=(double T) {time_pgs_ += T; return *this;}
-
-//-----------------------------------------------------------------------
-/// Subtract given number of seconds to Time.
-//-----------------------------------------------------------------------
-
-  Time& operator-=(double T) {time_pgs_ -= T; return *this;}
-
-  double acs() const;
-
-//-----------------------------------------------------------------------
-/// Give time in PGS toolkit time (epoch 1993-01-01).
-//-----------------------------------------------------------------------
-  
-  double pgs() const {return time_pgs_;}
-
-//-----------------------------------------------------------------------
-/// Give time in GPS.
-//-----------------------------------------------------------------------
-  
-  double gps() const {return time_pgs_ + 409881608.0;}
-
-//-----------------------------------------------------------------------
-/// Give time in j2000.
-//-----------------------------------------------------------------------
-  
-  double j2000() const {return time_pgs_ - (220881605.0 - 64.1839272778);}
+  {Time res; res.time_pgs_ = (unix_time - 725846400.0); return res;}
 
 //-----------------------------------------------------------------------
 /// Give time in unix time. Note that this is only accurate to the
@@ -162,42 +169,6 @@ public:
   { return time_pgs_ + 725846400; }
 
 //-----------------------------------------------------------------------
-/// Interface to use for converting times.
-//-----------------------------------------------------------------------
-
-  static ToolkitTimeInterface* toolkit_time_interface;
-
-//-----------------------------------------------------------------------
-/// Stash a copy of a UnixToolkitTimeInterface, this is just used for
-/// testing.
-//-----------------------------------------------------------------------
-
-  static ToolkitTimeInterface* _unix_toolkit_time_interface;
-
-//-----------------------------------------------------------------------
-/// Parse string to get a Time. Uses interface supplied by
-/// toolkit_time_interface. 
-//-----------------------------------------------------------------------
-
-  static Time parse_time(const std::string Time_string)
-  { return toolkit_time_interface->parse_time(Time_string);}
-
-//-----------------------------------------------------------------------
-/// Generate CCSDS format of time (e.g.,
-/// "1996-07-03T04:13:57.987654Z"). Uses interface supplied by
-/// toolkit_time_interface.
-//-----------------------------------------------------------------------
-
-  std::string to_string() const
-  { return toolkit_time_interface->to_string(*this); }
-
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
-
-  void print(std::ostream& os) const { os << to_string(); }
-
-//-----------------------------------------------------------------------
 /// Minimum valid time. This is 1961-01-01T00:00:00Z.
 //-----------------------------------------------------------------------
   
@@ -211,8 +182,31 @@ public:
 //-----------------------------------------------------------------------
 
   static const Time max_valid_time;
-private:
-  double time_pgs_;
+
+//-----------------------------------------------------------------------
+/// Print to stream.
+//-----------------------------------------------------------------------
+
+  void print(std::ostream& os) const { os << to_string(); }
+
+//-----------------------------------------------------------------------
+/// Interface to use for converting times.
+//-----------------------------------------------------------------------
+
+  static ToolkitTimeInterface* toolkit_time_interface;
+
+//-----------------------------------------------------------------------
+/// Stash a copy of a UnixToolkitTimeInterface, this is just used for
+/// testing.
+//-----------------------------------------------------------------------
+
+  static ToolkitTimeInterface* _unix_toolkit_time_interface;
+
+  static Time parse_time(const std::string& Time_string)
+  { return toolkit_time_interface->parse_time(Time_string);}
+
+  std::string to_string() const
+  { return toolkit_time_interface->to_string(*this); }
 };
 
 //-----------------------------------------------------------------------
@@ -221,7 +215,8 @@ private:
 /// Subtract two Times, giving the interval between them in seconds.
 //-----------------------------------------------------------------------
 
-inline double operator-(const Time& T1, const Time& T2) 
+template<class T> inline T operator-(const TimeBase<T>& T1, 
+				     const TimeBase<T>& T2) 
 { return T1.pgs() - T2.pgs(); }
 
 //-----------------------------------------------------------------------
@@ -280,5 +275,4 @@ struct TimeGpsCreator {
 };
 
 }
-
 #endif

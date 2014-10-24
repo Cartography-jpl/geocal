@@ -6235,6 +6235,96 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TimeTable_image_coordinate_with_derivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TimeTable *arg1 = (GeoCal::TimeTable *) 0 ;
+  GeoCal::TimeWithDerivative arg2 ;
+  GeoCal::FrameCoordinateWithDerivative *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TimeTable const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TimeTable const > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative const > tempshared3 ;
+  PyObject *swig_obj[3] ;
+  GeoCal::ImageCoordinateWithDerivative result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"TimeTable_image_coordinate_with_derivative",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeTable_image_coordinate_with_derivative" "', argument " "1"" of type '" "GeoCal::TimeTable const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeTable * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeTable * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TimeTable_image_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::TimeWithDerivative const""'"); 
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeTable_image_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::TimeWithDerivative const""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2);
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::FrameCoordinateWithDerivative *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinateWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TimeTable_image_coordinate_with_derivative" "', argument " "3"" of type '" "GeoCal::FrameCoordinateWithDerivative const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeTable_image_coordinate_with_derivative" "', argument " "3"" of type '" "GeoCal::FrameCoordinateWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp3);
+        arg3 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::TimeTable const *)arg1)->image_coordinate_with_derivative(arg2,(GeoCal::FrameCoordinateWithDerivative const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative >(new GeoCal::ImageCoordinateWithDerivative((GeoCal::ImageCoordinateWithDerivative &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TimeTable_time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::TimeTable *arg1 = (GeoCal::TimeTable *) 0 ;
@@ -6316,6 +6406,94 @@ SWIGINTERN PyObject *_wrap_TimeTable_time(PyObject *SWIGUNUSEDPARM(self), PyObje
   {
     boost::shared_ptr<GeoCal::FrameCoordinate> *smartresult = new boost::shared_ptr<GeoCal::FrameCoordinate>(new GeoCal::FrameCoordinate(*arg4));
     resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TimeTable_time_with_derivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TimeTable *arg1 = (GeoCal::TimeTable *) 0 ;
+  GeoCal::ImageCoordinateWithDerivative *arg2 = 0 ;
+  GeoCal::TimeWithDerivative *arg3 = 0 ;
+  GeoCal::FrameCoordinateWithDerivative *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TimeTable const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TimeTable const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative const > tempshared2 ;
+  GeoCal::TimeWithDerivative temp3 ;
+  GeoCal::FrameCoordinateWithDerivative temp4 ;
+  PyObject *swig_obj[2] ;
+  
+  {
+    arg3 = &temp3;
+  }
+  {
+    arg4 = &temp4;
+  }
+  if (!SWIG_Python_UnpackTuple(args,"TimeTable_time_with_derivative",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeTable_time_with_derivative" "', argument " "1"" of type '" "GeoCal::TimeTable const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeTable * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeTable * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinateWithDerivative *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TimeTable_time_with_derivative" "', argument " "2"" of type '" "GeoCal::ImageCoordinateWithDerivative const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeTable_time_with_derivative" "', argument " "2"" of type '" "GeoCal::ImageCoordinateWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinateWithDerivative > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinateWithDerivative > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinateWithDerivative * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinateWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinateWithDerivative > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::TimeTable const *)arg1)->time_with_derivative((GeoCal::ImageCoordinateWithDerivative const &)*arg2,*arg3,*arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<GeoCal::TimeWithDerivative> *smartresult = new boost::shared_ptr<GeoCal::TimeWithDerivative>(new GeoCal::TimeWithDerivative(*arg3));
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN));
+  }
+  {
+    boost::shared_ptr<GeoCal::FrameCoordinateWithDerivative> *smartresult = new boost::shared_ptr<GeoCal::FrameCoordinateWithDerivative>(new GeoCal::FrameCoordinateWithDerivative(*arg4));
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN));
   }
   return resultobj;
 fail:
@@ -7112,8 +7290,18 @@ static PyMethodDef SwigMethods[] = {
 		"virtual ImageCoordinate GeoCal::TimeTable::image_coordinate(Time T, const FrameCoordinate &F) const =0\n"
 		"Convert from Time and FrameCoordinate to ImageCoordinate. \n"
 		""},
+	 { (char *)"TimeTable_image_coordinate_with_derivative", _wrap_TimeTable_image_coordinate_with_derivative, METH_VARARGS, (char *)"\n"
+		"virtual ImageCoordinateWithDerivative GeoCal::TimeTable::image_coordinate_with_derivative(const TimeWithDerivative &T, const FrameCoordinateWithDerivative &F)\n"
+		"const =0\n"
+		"Convert from Time and FrameCoordinate to ImageCoordinate. \n"
+		""},
 	 { (char *)"TimeTable_time", _wrap_TimeTable_time, METH_VARARGS, (char *)"\n"
 		"virtual void GeoCal::TimeTable::time(const ImageCoordinate &Ic, Time &T, FrameCoordinate &F) const =0\n"
+		"Convert from ImageCoordinate to Time and FrameCoordinate. \n"
+		""},
+	 { (char *)"TimeTable_time_with_derivative", _wrap_TimeTable_time_with_derivative, METH_VARARGS, (char *)"\n"
+		"virtual void GeoCal::TimeTable::time_with_derivative(const ImageCoordinateWithDerivative &Ic, TimeWithDerivative &T,\n"
+		"FrameCoordinateWithDerivative &F) const =0\n"
 		"Convert from ImageCoordinate to Time and FrameCoordinate. \n"
 		""},
 	 { (char *)"TimeTable__v_min_line", (PyCFunction)_wrap_TimeTable__v_min_line, METH_O, (char *)"\n"

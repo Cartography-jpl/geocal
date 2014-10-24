@@ -34,10 +34,28 @@ public:
     const = 0;
 
 //-----------------------------------------------------------------------
+/// Convert from Time and FrameCoordinate to ImageCoordinate.
+//-----------------------------------------------------------------------
+
+  virtual ImageCoordinateWithDerivative 
+  image_coordinate_with_derivative(const TimeWithDerivative& T, 
+				   const FrameCoordinateWithDerivative& F)
+    const = 0;
+
+//-----------------------------------------------------------------------
 /// Convert from ImageCoordinate to Time and FrameCoordinate.
 //-----------------------------------------------------------------------
 
   virtual void time(const ImageCoordinate& Ic, Time& T, FrameCoordinate& F)
+    const = 0;
+
+//-----------------------------------------------------------------------
+/// Convert from ImageCoordinate to Time and FrameCoordinate.
+//-----------------------------------------------------------------------
+
+  virtual void time_with_derivative(const ImageCoordinateWithDerivative& Ic, 
+				    TimeWithDerivative& T, 
+				    FrameCoordinateWithDerivative& F)
     const = 0;
 
 //-----------------------------------------------------------------------
@@ -78,9 +96,16 @@ public:
   virtual ~ConstantSpacingTimeTable() {}
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
     const;
+  virtual ImageCoordinateWithDerivative 
+  image_coordinate_with_derivative(const TimeWithDerivative& T, 
+				   const FrameCoordinateWithDerivative& F)
+    const;
   virtual void print(std::ostream& Os) const;
   virtual void time(const ImageCoordinate& Ic, Time& T, FrameCoordinate& F)
     const;
+  virtual void time_with_derivative(const ImageCoordinateWithDerivative& Ic, 
+				    TimeWithDerivative& T, 
+				    FrameCoordinateWithDerivative& F) const;
 
 //-----------------------------------------------------------------------
 /// Minimum line table is valid for.
@@ -124,9 +149,16 @@ public:
   virtual ~MeasuredTimeTable() {}
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
     const;
+  virtual ImageCoordinateWithDerivative 
+  image_coordinate_with_derivative(const TimeWithDerivative& T, 
+				   const FrameCoordinateWithDerivative& F)
+    const;
   virtual void print(std::ostream& Os) const;
   virtual void time(const ImageCoordinate& Ic, Time& T, FrameCoordinate& F)
     const;
+  virtual void time_with_derivative(const ImageCoordinateWithDerivative& Ic, 
+				    TimeWithDerivative& T, 
+				    FrameCoordinateWithDerivative& F) const;
 
 //-----------------------------------------------------------------------
 /// Minimum line table is valid for.

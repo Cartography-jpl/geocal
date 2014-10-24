@@ -7554,6 +7554,52 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TimeWithDerivative__v_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TimeWithDerivative *arg1 = (GeoCal::TimeWithDerivative *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::Time result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeWithDerivative__v_value" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::TimeWithDerivative const *)arg1)->value();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TimeWithDerivative___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::TimeWithDerivative *arg1 = (GeoCal::TimeWithDerivative *) 0 ;
@@ -10340,12 +10386,19 @@ static PyMethodDef SwigMethods[] = {
 		"AutoDerivative< double >  GeoCal::TimeBase< AutoDerivative< double >  >::j2000() const\n"
 		"Give time in j2000. \n"
 		""},
+	 { (char *)"TimeWithDerivative__v_value", (PyCFunction)_wrap_TimeWithDerivative__v_value, METH_O, (char *)"\n"
+		"Time GeoCal::TimeWithDerivative::value() const\n"
+		"Strip off gradient to just give a time. \n"
+		""},
 	 { (char *)"TimeWithDerivative___str__", (PyCFunction)_wrap_TimeWithDerivative___str__, METH_O, NULL},
 	 { (char *)"TimeWithDerivative___cmp__", _wrap_TimeWithDerivative___cmp__, METH_VARARGS, NULL},
 	 { (char *)"TimeWithDerivative___add__", _wrap_TimeWithDerivative___add__, METH_VARARGS, NULL},
 	 { (char *)"TimeWithDerivative___radd__", _wrap_TimeWithDerivative___radd__, METH_VARARGS, NULL},
 	 { (char *)"TimeWithDerivative___sub__", _wrap_TimeWithDerivative___sub__, METH_VARARGS, NULL},
-	 { (char *)"new_TimeWithDerivative", (PyCFunction)_wrap_new_TimeWithDerivative, METH_NOARGS, NULL},
+	 { (char *)"new_TimeWithDerivative", (PyCFunction)_wrap_new_TimeWithDerivative, METH_NOARGS, (char *)"\n"
+		"GeoCal::TimeWithDerivative::TimeWithDerivative()\n"
+		"\n"
+		""},
 	 { (char *)"delete_TimeWithDerivative", (PyCFunction)_wrap_delete_TimeWithDerivative, METH_O, NULL},
 	 { (char *)"TimeWithDerivative_swigregister", TimeWithDerivative_swigregister, METH_VARARGS, NULL},
 	 { (char *)"TimeWithDerivative_swiginit", TimeWithDerivative_swiginit, METH_VARARGS, NULL},

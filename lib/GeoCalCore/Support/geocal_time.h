@@ -217,6 +217,12 @@ class TimeWithDerivative : public TimeBase<AutoDerivative<double> >,
    private boost::less_than_comparable<TimeWithDerivative> 
 {
 public:
+  TimeWithDerivative(const Time& T)
+  {
+    time_pgs_ = T.pgs();
+  }
+  TimeWithDerivative() {}
+
 //-----------------------------------------------------------------------
 /// Return time from given PGS toolkit time (epoch of 1993-01-01).
 //-----------------------------------------------------------------------
@@ -245,6 +251,12 @@ public:
   {return time_pgs(gps - 409881608.0);}
 
 //-----------------------------------------------------------------------
+/// Strip off gradient to just give a time.
+//-----------------------------------------------------------------------
+
+  Time value() const { return Time::time_pgs(pgs().value()); }
+
+//-----------------------------------------------------------------------
 /// Print to stream.
 //-----------------------------------------------------------------------
 
@@ -262,6 +274,18 @@ public:
 
 template<class T> inline T operator-(const TimeBase<T>& T1, 
 				     const TimeBase<T>& T2) 
+{ return T1.pgs() - T2.pgs(); }
+
+inline double operator-(const Time& T1, 
+			const Time& T2) 
+{ return T1.pgs() - T2.pgs(); }
+
+inline AutoDerivative<double> operator-(const TimeWithDerivative& T1, 
+					const Time& T2) 
+{ return T1.pgs() - T2.pgs(); }
+
+inline AutoDerivative<double> operator-(const Time& T1, 
+					const TimeWithDerivative& T2) 
 { return T1.pgs() - T2.pgs(); }
 
 //-----------------------------------------------------------------------

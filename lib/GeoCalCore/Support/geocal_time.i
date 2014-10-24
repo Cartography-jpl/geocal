@@ -33,10 +33,20 @@ namespace GeoCal {
   $1 = &temp;
  }
 
+ %typemap(in,numinputs=0) TimeWithDerivative &OUTPUT (GeoCal::TimeWithDerivative temp) {
+  $1 = &temp;
+ }
+
  %typemap(argout) Time &OUTPUT {
    SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
    %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::Time> *), SWIG_POINTER_OWN));
  }
+
+ %typemap(argout) TimeWithDerivative &OUTPUT {
+   SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
+   %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::TimeWithDerivative> *), SWIG_POINTER_OWN));
+ }
+
 #endif
 
 class Time : public GenericObject {
@@ -88,6 +98,7 @@ public:
   %python_attribute(pgs, AutoDerivative<double>)
   %python_attribute(gps, AutoDerivative<double>)
   %python_attribute(j2000, AutoDerivative<double>)
+  %python_attribute(value, Time)
   std::string print_to_string() const;
   
 #ifdef SWIGPYTHON

@@ -166,12 +166,28 @@ class TimeTable(geocal_swig.generic_object.GenericObject):
         """
         return _time_table.TimeTable_image_coordinate(self, *args)
 
+    def image_coordinate_with_derivative(self, *args):
+        """
+        virtual ImageCoordinateWithDerivative GeoCal::TimeTable::image_coordinate_with_derivative(const TimeWithDerivative &T, const FrameCoordinateWithDerivative &F)
+        const =0
+        Convert from Time and FrameCoordinate to ImageCoordinate. 
+        """
+        return _time_table.TimeTable_image_coordinate_with_derivative(self, *args)
+
     def time(self, *args):
         """
         virtual void GeoCal::TimeTable::time(const ImageCoordinate &Ic, Time &T, FrameCoordinate &F) const =0
         Convert from ImageCoordinate to Time and FrameCoordinate. 
         """
         return _time_table.TimeTable_time(self, *args)
+
+    def time_with_derivative(self, *args):
+        """
+        virtual void GeoCal::TimeTable::time_with_derivative(const ImageCoordinateWithDerivative &Ic, TimeWithDerivative &T,
+        FrameCoordinateWithDerivative &F) const =0
+        Convert from ImageCoordinate to Time and FrameCoordinate. 
+        """
+        return _time_table.TimeTable_time_with_derivative(self, *args)
 
     def _v_min_line(self):
         """
@@ -219,7 +235,9 @@ class TimeTable(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _time_table.delete_TimeTable
 TimeTable.image_coordinate = new_instancemethod(_time_table.TimeTable_image_coordinate,None,TimeTable)
+TimeTable.image_coordinate_with_derivative = new_instancemethod(_time_table.TimeTable_image_coordinate_with_derivative,None,TimeTable)
 TimeTable.time = new_instancemethod(_time_table.TimeTable_time,None,TimeTable)
+TimeTable.time_with_derivative = new_instancemethod(_time_table.TimeTable_time_with_derivative,None,TimeTable)
 TimeTable._v_min_line = new_instancemethod(_time_table.TimeTable__v_min_line,None,TimeTable)
 TimeTable._v_max_line = new_instancemethod(_time_table.TimeTable__v_max_line,None,TimeTable)
 TimeTable._v_min_time = new_instancemethod(_time_table.TimeTable__v_min_time,None,TimeTable)

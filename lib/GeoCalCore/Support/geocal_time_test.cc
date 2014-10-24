@@ -47,9 +47,9 @@ BOOST_AUTO_TEST_CASE(time_with_derivative)
 {
   AutoDerivative<double> tm(100.0, 0, 10);
   TimeWithDerivative t = TimeWithDerivative::time_pgs(tm);
-  BOOST_CHECK_CLOSE(t.pgs().value(), 100.0, 1e-6);
-  BOOST_CHECK_CLOSE((t + 200.0).pgs().value(), 100.0 + 200.0, 1e-6);
-  BOOST_CHECK_CLOSE((t - 200.0).pgs().value(), 100.0 - 200.0, 1e-6);
+  BOOST_CHECK_CLOSE(t.value().pgs(), 100.0, 1e-6);
+  BOOST_CHECK_CLOSE((t + 200.0).value().pgs(), 100.0 + 200.0, 1e-6);
+  BOOST_CHECK_CLOSE((t - 200.0).value().pgs(), 100.0 - 200.0, 1e-6);
   t = TimeWithDerivative::time_gps(tm);
   BOOST_CHECK_CLOSE(t.gps().value(), 100.0, 1e-6);
   TimeWithDerivative  t2 = t;

@@ -24,6 +24,14 @@ public:
     double line = (T  - min_time()) / tspace;
     return ImageCoordinate(line, F.sample);
   }
+  virtual ImageCoordinateWithDerivative 
+  image_coordinate_with_derivative(const TimeWithDerivative& T, 
+				   const FrameCoordinateWithDerivative& F)
+    const
+  {
+    AutoDerivative<double> line = (T  - min_time()) / tspace;
+    return ImageCoordinateWithDerivative(line, F.sample);
+  }
   virtual void print(std::ostream& Os) const
   { std::cerr << "RollingShutterConstantSpacingTimeTable\n"; }
   virtual void time(const ImageCoordinate& Ic, Time& T, FrameCoordinate& F)
@@ -32,6 +40,15 @@ public:
     range_check(Ic.line, (double) min_line(), (double) max_line() + 1.0);
     T = min_time() + Ic.line * tspace;
     F = FrameCoordinate(Ic.line, Ic.sample);
+  }
+  virtual void time_with_derivative(const ImageCoordinateWithDerivative& Ic, 
+				    TimeWithDerivative& T, 
+				    FrameCoordinateWithDerivative& F) const
+  {
+    range_check(Ic.line.value(), (double) min_line(), 
+		(double) max_line() + 1.0);
+    T = TimeWithDerivative(min_time()) + Ic.line * tspace;
+    F = FrameCoordinateWithDerivative(Ic.line, Ic.sample);
   }
   virtual int min_line() const {return 0;}
   virtual int max_line() const {return max_l;}

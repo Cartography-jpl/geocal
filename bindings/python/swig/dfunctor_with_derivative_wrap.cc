@@ -3519,16 +3519,16 @@ static swig_module_info swig_module = {swig_types, 43, 0, 0, 0, 0};
 #define SWIG_TypeQuery SWIG_Python_TypeQuery
 
 /*-----------------------------------------------
-              @(target):= _geocal_gsl_root.so
+              @(target):= _dfunctor_with_derivative.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__geocal_gsl_root
+#  define SWIG_init    PyInit__dfunctor_with_derivative
 
 #else
-#  define SWIG_init    init_geocal_gsl_root
+#  define SWIG_init    init_dfunctor_with_derivative
 
 #endif
-#define SWIG_name    "_geocal_gsl_root"
+#define SWIG_name    "_dfunctor_with_derivative"
 
 #define SWIGVERSION 0x020009 
 #define SWIG_VERSION SWIGVERSION
@@ -4911,7 +4911,7 @@ template<class T, int D> inline boost::array<T, D>
 }
 
 
-#include "geocal_gsl_root.h"
+#include "dfunctor_with_derivative.h"
 
 
 SWIGINTERN int
@@ -4961,648 +4961,103 @@ SWIG_AsVal_double (PyObject *obj, double *val)
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
-namespace swig {
-  template <> struct traits<double > {
-    typedef value_category category;
-    static const char* type_name() { return"double"; }
-  };  
-  template <>  struct traits_asval<double > {   
-    typedef double value_type;
-    static int asval(PyObject *obj, value_type *val) { 
-      return SWIG_AsVal_double (obj, val);
-    }
-  };
-  template <>  struct traits_from<double > {
-    typedef double value_type;
-    static PyObject *from(const value_type& val) {
-      return SWIG_From_double  (val);
-    }
-  };
-}
-
-
-namespace swig {
-  template <class SwigPySeq, class Seq>
-  inline void
-  assign(const SwigPySeq& swigpyseq, Seq* seq) {
-    // seq->assign(swigpyseq.begin(), swigpyseq.end()); // not used as not always implemented
-    typedef typename SwigPySeq::value_type value_type;
-    typename SwigPySeq::const_iterator it = swigpyseq.begin();
-    for (;it != swigpyseq.end(); ++it) {
-      seq->insert(seq->end(),(value_type)(*it));
-    }
-  }
-
-  template <class Seq, class T = typename Seq::value_type >
-  struct traits_asptr_stdseq {
-    typedef Seq sequence;
-    typedef T value_type;
-
-    static int asptr(PyObject *obj, sequence **seq) {
-      if (obj == Py_None || SWIG_Python_GetSwigThis(obj)) {
-	sequence *p;
-	if (::SWIG_ConvertPtr(obj,(void**)&p,
-			      swig::type_info<sequence>(),0) == SWIG_OK) {
-	  if (seq) *seq = p;
-	  return SWIG_OLDOBJ;
-	}
-      } else if (PySequence_Check(obj)) {
-	try {
-	  SwigPySequence_Cont<value_type> swigpyseq(obj);
-	  if (seq) {
-	    sequence *pseq = new sequence();
-	    assign(swigpyseq, pseq);
-	    *seq = pseq;
-	    return SWIG_NEWOBJ;
-	  } else {
-	    return swigpyseq.check() ? SWIG_OK : SWIG_ERROR;
-	  }
-	} catch (std::exception& e) {
-	  if (seq) {
-	    if (!PyErr_Occurred()) {
-	      PyErr_SetString(PyExc_TypeError, e.what());
-	    }
-	  }
-	  return SWIG_ERROR;
-	}
-      }
-      return SWIG_ERROR;
-    }
-  };
-
-  template <class Seq, class T = typename Seq::value_type >
-  struct traits_from_stdseq {
-    typedef Seq sequence;
-    typedef T value_type;
-    typedef typename Seq::size_type size_type;
-    typedef typename sequence::const_iterator const_iterator;
-
-    static PyObject *from(const sequence& seq) {
-#ifdef SWIG_PYTHON_EXTRA_NATIVE_CONTAINERS
-      swig_type_info *desc = swig::type_info<sequence>();
-      if (desc && desc->clientdata) {
-	return SWIG_NewPointerObj(new sequence(seq), desc, SWIG_POINTER_OWN);
-      }
-#endif
-      size_type size = seq.size();
-      if (size <= (size_type)INT_MAX) {
-	PyObject *obj = PyTuple_New((int)size);
-	int i = 0;
-	for (const_iterator it = seq.begin();
-	     it != seq.end(); ++it, ++i) {
-	  PyTuple_SetItem(obj,i,swig::from<value_type>(*it));
-	}
-	return obj;
-      } else {
-	PyErr_SetString(PyExc_OverflowError,"sequence size not valid in python");
-	return NULL;
-      }
-    }
-  };
-}
-
-
-  namespace swig {
-    template <class T>
-    struct traits_asptr<std::vector<T> >  {
-      static int asptr(PyObject *obj, std::vector<T> **vec) {
-	return traits_asptr_stdseq<std::vector<T> >::asptr(obj, vec);
-      }
-    };
-    
-    template <class T>
-    struct traits_from<std::vector<T> > {
-      static PyObject *from(const std::vector<T>& vec) {
-	return traits_from_stdseq<std::vector<T> >::from(vec);
-      }
-    };
-  }
-
-
-      namespace swig {
-	template <>  struct traits<std::vector<double, std::allocator< double > > > {
-	  typedef pointer_category category;
-	  static const char* type_name() {
-	    return "std::vector<" "double" "," "std::allocator< double >" " >";
-	  }
-	};
-      }
-    
-
 
 /* ---------------------------------------------------
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "geocal_gsl_root_wrap.h"
+#include "dfunctor_with_derivative_wrap.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_gsl_root__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_DFunctorWithDerivative_df(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::VFunctor *arg1 = 0 ;
-  blitz::Array< double,1 > *arg2 = 0 ;
-  double arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VFunctor const > tempshared1 ;
-  blitz::Array< double,1 > a2 ;
-  PythonObject numpy2 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  SwigValueWrapper< blitz::Array< double,1 > > result;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::VFunctor *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__VFunctor,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VFunctor_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gsl_root" "', argument " "1"" of type '" "GeoCal::VFunctor const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "gsl_root" "', argument " "1"" of type '" "GeoCal::VFunctor const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VFunctor > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::VFunctor > * >(argp1);
-        arg1 = const_cast< GeoCal::VFunctor * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::VFunctor * >(reinterpret_cast< boost::shared_ptr< const GeoCal::VFunctor > * >(argp1)->get());
-      }
-    }
-  }
-  {
-    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
-      a2.reference(to_blitz_array<double, 1>(numpy2));
-      arg2 = &a2;
-    }
-  }
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "gsl_root" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  {
-    try {
-      result = GeoCal::gsl_root((GeoCal::VFunctor const &)*arg1,(blitz::Array< double,1 > const &)*arg2,arg3);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    npy_intp dims[1], stride[1];
-    for(int i = 0; i < 1; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(double);
-    }
-    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_double_1_t, 
-      SWIG_POINTER_NEW | 0 );
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_gsl_root__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::VFunctor *arg1 = 0 ;
-  blitz::Array< double,1 > *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VFunctor const > tempshared1 ;
-  blitz::Array< double,1 > a2 ;
-  PythonObject numpy2 ;
-  SwigValueWrapper< blitz::Array< double,1 > > result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::VFunctor *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__VFunctor,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VFunctor_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gsl_root" "', argument " "1"" of type '" "GeoCal::VFunctor const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "gsl_root" "', argument " "1"" of type '" "GeoCal::VFunctor const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VFunctor > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::VFunctor > * >(argp1);
-        arg1 = const_cast< GeoCal::VFunctor * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::VFunctor * >(reinterpret_cast< boost::shared_ptr< const GeoCal::VFunctor > * >(argp1)->get());
-      }
-    }
-  }
-  {
-    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
-      a2.reference(to_blitz_array<double, 1>(numpy2));
-      arg2 = &a2;
-    }
-  }
-  {
-    try {
-      result = GeoCal::gsl_root((GeoCal::VFunctor const &)*arg1,(blitz::Array< double,1 > const &)*arg2);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    npy_intp dims[1], stride[1];
-    for(int i = 0; i < 1; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(double);
-    }
-    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_double_1_t, 
-      SWIG_POINTER_NEW | 0 );
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_gsl_root__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::DFunctor *arg1 = 0 ;
+  GeoCal::DFunctorWithDerivative *arg1 = (GeoCal::DFunctorWithDerivative *) 0 ;
   double arg2 ;
-  double arg3 ;
-  double arg4 ;
-  double arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::DFunctor const > tempshared1 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double val5 ;
-  int ecode5 = 0 ;
-  double result;
-  
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::DFunctor *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__DFunctor,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctor_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gsl_root" "', argument " "1"" of type '" "GeoCal::DFunctor const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "gsl_root" "', argument " "1"" of type '" "GeoCal::DFunctor const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1);
-        arg1 = const_cast< GeoCal::DFunctor * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::DFunctor * >(reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "gsl_root" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "gsl_root" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "gsl_root" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "gsl_root" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  {
-    try {
-      result = (double)GeoCal::gsl_root((GeoCal::DFunctor const &)*arg1,arg2,arg3,arg4,arg5);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_gsl_root__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::DFunctor *arg1 = 0 ;
-  double arg2 ;
-  double arg3 ;
-  double arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::DFunctor const > tempshared1 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double result;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::DFunctor *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__DFunctor,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctor_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gsl_root" "', argument " "1"" of type '" "GeoCal::DFunctor const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "gsl_root" "', argument " "1"" of type '" "GeoCal::DFunctor const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1);
-        arg1 = const_cast< GeoCal::DFunctor * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::DFunctor * >(reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "gsl_root" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "gsl_root" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "gsl_root" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  {
-    try {
-      result = (double)GeoCal::gsl_root((GeoCal::DFunctor const &)*arg1,arg2,arg3,arg4);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_gsl_root__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::DFunctor *arg1 = 0 ;
-  double arg2 ;
-  double arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::DFunctor const > tempshared1 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double result;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::DFunctor *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__DFunctor,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctor_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gsl_root" "', argument " "1"" of type '" "GeoCal::DFunctor const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "gsl_root" "', argument " "1"" of type '" "GeoCal::DFunctor const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1);
-        arg1 = const_cast< GeoCal::DFunctor * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::DFunctor * >(reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "gsl_root" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "gsl_root" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  {
-    try {
-      result = (double)GeoCal::gsl_root((GeoCal::DFunctor const &)*arg1,arg2,arg3);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_gsl_root(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[6];
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"gsl_root",0,5,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    return _wrap_gsl_root__SWIG_1(self, argc, argv);
-  }
-  if (argc == 3) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VFunctor_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    {
-      {
-        PythonObject t(to_numpy<double >(argv[1]));
-        _v = (t.obj && PyArray_NDIM(t.obj) ==1 ? 1 : 0);
-      }
-    }
-    if (!_v) goto check_2;
-    return _wrap_gsl_root__SWIG_0(self, argc, argv);
-  }
-check_2:
-  
-  if (argc == 3) {
-    return _wrap_gsl_root__SWIG_4(self, argc, argv);
-  }
-  if (argc == 4) {
-    return _wrap_gsl_root__SWIG_3(self, argc, argv);
-  }
-  if (argc == 5) {
-    return _wrap_gsl_root__SWIG_2(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'gsl_root'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::gsl_root(GeoCal::VFunctor const &,blitz::Array< double,1 > const &,double)\n"
-    "    GeoCal::gsl_root(GeoCal::VFunctor const &,blitz::Array< double,1 > const &)\n"
-    "    GeoCal::gsl_root(GeoCal::DFunctor const &,double,double,double,double)\n"
-    "    GeoCal::gsl_root(GeoCal::DFunctor const &,double,double,double)\n"
-    "    GeoCal::gsl_root(GeoCal::DFunctor const &,double,double)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_gsl_root_with_derivative__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::DFunctorWithDerivative *arg1 = 0 ;
-  double arg2 ;
-  double arg3 ;
-  double arg4 ;
-  double arg5 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::DFunctorWithDerivative const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DFunctorWithDerivative const > *smartarg1 = 0 ;
   double val2 ;
   int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double val5 ;
-  int ecode5 = 0 ;
-  GeoCal::AutoDerivative< double > result;
+  PyObject *swig_obj[2] ;
+  double result;
   
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"DFunctorWithDerivative_df",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::DFunctorWithDerivative *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__DFunctorWithDerivative,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctorWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DFunctorWithDerivative_df" "', argument " "1"" of type '" "GeoCal::DFunctorWithDerivative const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::DFunctorWithDerivative * >(tempshared1.get());
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctorWithDerivative_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gsl_root_with_derivative" "', argument " "1"" of type '" "GeoCal::DFunctorWithDerivative const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "gsl_root_with_derivative" "', argument " "1"" of type '" "GeoCal::DFunctorWithDerivative const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
-        arg1 = const_cast< GeoCal::DFunctorWithDerivative * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::DFunctorWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1)->get());
-      }
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::DFunctorWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "gsl_root_with_derivative" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DFunctorWithDerivative_df" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "gsl_root_with_derivative" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "gsl_root_with_derivative" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "gsl_root_with_derivative" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
   {
     try {
-      result = GeoCal::gsl_root_with_derivative((GeoCal::DFunctorWithDerivative const &)*arg1,arg2,arg3,arg4,arg5);
+      result = (double)((GeoCal::DFunctorWithDerivative const *)arg1)->df(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DFunctorWithDerivative_f_with_derivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DFunctorWithDerivative *arg1 = (GeoCal::DFunctorWithDerivative *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DFunctorWithDerivative const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DFunctorWithDerivative const > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  GeoCal::AutoDerivative< double > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"DFunctorWithDerivative_f_with_derivative",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctorWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DFunctorWithDerivative_f_with_derivative" "', argument " "1"" of type '" "GeoCal::DFunctorWithDerivative const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::DFunctorWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::DFunctorWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DFunctorWithDerivative_f_with_derivative" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  {
+    try {
+      result = ((GeoCal::DFunctorWithDerivative const *)arg1)->f_with_derivative(arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5619,399 +5074,67 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_gsl_root_with_derivative__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_delete_DFunctorWithDerivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::DFunctorWithDerivative *arg1 = 0 ;
-  double arg2 ;
-  double arg3 ;
-  double arg4 ;
+  GeoCal::DFunctorWithDerivative *arg1 = (GeoCal::DFunctorWithDerivative *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::DFunctorWithDerivative const > tempshared1 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  GeoCal::AutoDerivative< double > result;
+  boost::shared_ptr< GeoCal::DFunctorWithDerivative > tempshared1 ;
+  boost::shared_ptr< GeoCal::DFunctorWithDerivative > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
   
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
   {
     int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::DFunctorWithDerivative *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__DFunctorWithDerivative,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctorWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DFunctorWithDerivative" "', argument " "1"" of type '" "GeoCal::DFunctorWithDerivative *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::DFunctorWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::DFunctorWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::DFunctorWithDerivative * >(tempshared1.get());
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctorWithDerivative_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gsl_root_with_derivative" "', argument " "1"" of type '" "GeoCal::DFunctorWithDerivative const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "gsl_root_with_derivative" "', argument " "1"" of type '" "GeoCal::DFunctorWithDerivative const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
-        arg1 = const_cast< GeoCal::DFunctorWithDerivative * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::DFunctorWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1)->get());
-      }
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::DFunctorWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::DFunctorWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "gsl_root_with_derivative" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "gsl_root_with_derivative" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "gsl_root_with_derivative" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
   {
     try {
-      result = GeoCal::gsl_root_with_derivative((GeoCal::DFunctorWithDerivative const &)*arg1,arg2,arg3,arg4);
+      (void)arg1; delete smartarg1;
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
-  }
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_gsl_root_with_derivative__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::DFunctorWithDerivative *arg1 = 0 ;
-  double arg2 ;
-  double arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::DFunctorWithDerivative const > tempshared1 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  GeoCal::AutoDerivative< double > result;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::DFunctorWithDerivative *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__DFunctorWithDerivative,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctorWithDerivative_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gsl_root_with_derivative" "', argument " "1"" of type '" "GeoCal::DFunctorWithDerivative const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "gsl_root_with_derivative" "', argument " "1"" of type '" "GeoCal::DFunctorWithDerivative const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1);
-        arg1 = const_cast< GeoCal::DFunctorWithDerivative * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::DFunctorWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctorWithDerivative > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "gsl_root_with_derivative" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "gsl_root_with_derivative" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  {
-    try {
-      result = GeoCal::gsl_root_with_derivative((GeoCal::DFunctorWithDerivative const &)*arg1,arg2,arg3);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
+SWIGINTERN PyObject *DFunctorWithDerivative_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctorWithDerivative_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
 }
-
-
-SWIGINTERN PyObject *_wrap_gsl_root_with_derivative(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[6];
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"gsl_root_with_derivative",0,5,argv))) SWIG_fail;
-  --argc;
-  if (argc == 3) {
-    return _wrap_gsl_root_with_derivative__SWIG_2(self, argc, argv);
-  }
-  if (argc == 4) {
-    return _wrap_gsl_root_with_derivative__SWIG_1(self, argc, argv);
-  }
-  if (argc == 5) {
-    return _wrap_gsl_root_with_derivative__SWIG_0(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'gsl_root_with_derivative'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::gsl_root_with_derivative(GeoCal::DFunctorWithDerivative const &,double,double,double,double)\n"
-    "    GeoCal::gsl_root_with_derivative(GeoCal::DFunctorWithDerivative const &,double,double,double)\n"
-    "    GeoCal::gsl_root_with_derivative(GeoCal::DFunctorWithDerivative const &,double,double)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_root_list__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::DFunctor *arg1 = 0 ;
-  double arg2 ;
-  double arg3 ;
-  double arg4 ;
-  double arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::DFunctor const > tempshared1 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double val5 ;
-  int ecode5 = 0 ;
-  std::vector< double,std::allocator< double > > result;
-  
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::DFunctor *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__DFunctor,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctor_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "root_list" "', argument " "1"" of type '" "GeoCal::DFunctor const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "root_list" "', argument " "1"" of type '" "GeoCal::DFunctor const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1);
-        arg1 = const_cast< GeoCal::DFunctor * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::DFunctor * >(reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "root_list" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "root_list" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "root_list" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "root_list" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  {
-    try {
-      result = GeoCal::root_list((GeoCal::DFunctor const &)*arg1,arg2,arg3,arg4,arg5);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = swig::from(static_cast< std::vector<double,std::allocator< double > > >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_root_list__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::DFunctor *arg1 = 0 ;
-  double arg2 ;
-  double arg3 ;
-  double arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::DFunctor const > tempshared1 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  std::vector< double,std::allocator< double > > result;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::DFunctor *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__DFunctor,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DFunctor_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "root_list" "', argument " "1"" of type '" "GeoCal::DFunctor const &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "root_list" "', argument " "1"" of type '" "GeoCal::DFunctor const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1);
-        arg1 = const_cast< GeoCal::DFunctor * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::DFunctor * >(reinterpret_cast< boost::shared_ptr< const GeoCal::DFunctor > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "root_list" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "root_list" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "root_list" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  {
-    try {
-      result = GeoCal::root_list((GeoCal::DFunctor const &)*arg1,arg2,arg3,arg4);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = swig::from(static_cast< std::vector<double,std::allocator< double > > >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_root_list(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[6];
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"root_list",0,5,argv))) SWIG_fail;
-  --argc;
-  if (argc == 4) {
-    return _wrap_root_list__SWIG_1(self, argc, argv);
-  }
-  if (argc == 5) {
-    return _wrap_root_list__SWIG_0(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'root_list'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::root_list(GeoCal::DFunctor const &,double,double,double,double)\n"
-    "    GeoCal::root_list(GeoCal::DFunctor const &,double,double,double)\n");
-  return 0;
-}
-
 
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"gsl_root", _wrap_gsl_root, METH_VARARGS, (char *)"\n"
-		"double GeoCal::gsl_root(const DFunctor &F, double Xmin, double Xmax, double Eps=1e-6, double\n"
-		"Eps_abs=1e-8)\n"
-		"This finds the root of a Double -> Double function, without a\n"
-		"derivative available.\n"
-		"\n"
-		"The solution found is in the bracketed range Xmin <= X <= Xmax. We\n"
-		"find a solution when we have bracketed it within a range xlow, xhigh,\n"
-		"with xhigh - xlow < Eps.\n"
-		"\n"
-		"If we can't find a solution, we throw a ConvergenceFailure exception.\n"
-		"\n"
+	 { (char *)"DFunctorWithDerivative_df", _wrap_DFunctorWithDerivative_df, METH_VARARGS, (char *)"\n"
+		"virtual double GeoCal::DFunctorWithDerivative::df(double X) const =0\n"
+		"Return df / dx. \n"
 		""},
-	 { (char *)"gsl_root_with_derivative", _wrap_gsl_root_with_derivative, METH_VARARGS, (char *)"\n"
-		"AutoDerivative< double > GeoCal::gsl_root_with_derivative(const DFunctorWithDerivative &F, double Xmin, double Xmax, double\n"
-		"Eps=1e-6, double Eps_abs=1e-8)\n"
-		"This finds the root of a function, and propagates the derivative of\n"
-		"the solution with respect to any parameters in the function (i.e., we\n"
-		"aren't talking about the derivative wrt X here). \n"
+	 { (char *)"DFunctorWithDerivative_f_with_derivative", _wrap_DFunctorWithDerivative_f_with_derivative, METH_VARARGS, (char *)"\n"
+		"virtual AutoDerivative<double> GeoCal::DFunctorWithDerivative::f_with_derivative(double X) const =0\n"
+		"Return df / dp_i as a AutoDerivative. \n"
 		""},
-	 { (char *)"root_list", _wrap_root_list, METH_VARARGS, (char *)"\n"
-		"std::vector< double > GeoCal::root_list(const DFunctor &F, double Xmin, double Xmax, double\n"
-		"Root_minimum_spacing, double Eps=1e-6)\n"
-		"This will find a (possible empty) list of roots of a function, where\n"
-		"the roots have a seperation of at least the supplied minimum\n"
-		"separation.\n"
-		"\n"
-		"This function is useful for finding roots when you don't know how many\n"
-		"solutions there are in the given range. It will find all roots,\n"
-		"provided that they have a seperation larger then Root_minimum_spacing,\n"
-		"and return the list of solutions. This list is ordered from smallest\n"
-		"to greatest.\n"
-		"\n"
-		"This function works by sampling the Functor with a spacing of\n"
-		"Root_minimum_spacing. If the function changes sign between one spacing\n"
-		"and the next, the routine root is called between those spacings and\n"
-		"the results is added to the root list.\n"
-		"\n"
-		"This will not finds roots that are closer together then the supplied\n"
-		"minimum spacing. (Limitation) \n"
-		""},
+	 { (char *)"delete_DFunctorWithDerivative", (PyCFunction)_wrap_delete_DFunctorWithDerivative, METH_O, NULL},
+	 { (char *)"DFunctorWithDerivative_swigregister", DFunctorWithDerivative_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -6040,11 +5163,11 @@ static void *_p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject(vo
 static void *_p_GeoCal__DFunctorWithDerivativeTo_p_GeoCal__DFunctor(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::DFunctor *)  ((GeoCal::DFunctorWithDerivative *) x));
 }
-static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((std::basic_ostream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
-}
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_istream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
+}
+static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((std::basic_ostream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
 }
 static void *_p_boost__shared_ptrT_GeoCal__DFunctor_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -6929,6 +6052,10 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   SWIG_Python_SetConstant(d, "SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));
+  
+  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::DFunctorWithDerivative))] =
+  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::DFunctorWithDerivative >("boost::shared_ptr< GeoCal::DFunctorWithDerivative > *"));
+  
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

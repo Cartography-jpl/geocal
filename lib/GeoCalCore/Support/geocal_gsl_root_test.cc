@@ -4,6 +4,7 @@
 #include "geocal_gsl_matrix.h"
 
 using namespace GeoCal;
+using namespace blitz;
 
 BOOST_FIXTURE_TEST_SUITE(geocal_gsl_root, GlobalFixture)
 
@@ -55,6 +56,29 @@ public:
   { return (cos(x) - x) * (cos(x) - x) - 2; }
 };
 
+class Test2: public DFunctorWithDerivative {
+public:
+  Test2(double a, double b) : a_(a, 0, 2), b_(b, 1, 2) {}
+  virtual	   ~Test2() {}
+  virtual double   operator()(const double& x) const
+  { return f_with_derivative(x).value(); }
+  virtual AutoDerivative<double> f_with_derivative(double x) const
+  { return (std::cos(a_ * x) - a_ * b_ * x) * (std::cos(b_ * x) - x) - 2 * a_ * a_; }
+  virtual double df(double X) const
+  { 
+    AutoDerivative<double> x(X, 0, 1);
+    AutoDerivative<double> y =
+      (std::cos(a_.value() * x) - a_.value() * b_.value() * x) * 
+      (std::cos(b_.value() * x) - x) - 2 * a_.value() * a_.value(); 
+    return y.gradient()(0);
+  }
+  void a(double A) { a_ = AutoDerivative<double>(A, 0, 2); }
+  void b(double B) { b_ = AutoDerivative<double>(B, 1, 2); }
+private:
+  AutoDerivative<double> a_;
+  AutoDerivative<double> b_;
+};
+
 BOOST_AUTO_TEST_CASE(geocal_gsl_multi_root)
 {
   RosenbrockTest r(1.0, 10.0);
@@ -82,6 +106,25 @@ BOOST_AUTO_TEST_CASE(geocal_gsl_1d_root)
   Test t;
   double xroot = gsl_root(t, 0, 2);
   BOOST_CHECK_CLOSE(xroot, 1.492465, 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(derivative_calc)
+{
+  Test2 t(1, 1);
+  AutoDerivative<double> xroot = gsl_root_with_derivative(t, 0, 2);
+  BOOST_CHECK_CLOSE(xroot.value(), 1.492465, 1e-4);
+
+  Array<double, 1> grad_fd(2);
+  double eps = 1e-6;
+  t.a(1 + eps);
+  double xroot2 = gsl_root(t, 0, 2);
+  grad_fd(0) = (xroot2 - xroot.value()) / eps;
+  t.a(1);
+  t.b(1 + eps);
+  xroot2 = gsl_root(t, 0, 2);
+  grad_fd(1) = (xroot2 - xroot.value()) / eps;
+  BOOST_CHECK_CLOSE(xroot.gradient()(0), grad_fd(0), 1e-2);
+  BOOST_CHECK_CLOSE(xroot.gradient()(1), grad_fd(1), 1e-2);
 }
 
 class Ftest : public DFunctor {

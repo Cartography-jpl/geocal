@@ -24,6 +24,7 @@ extern "C" {
   void init_geocal_exception(void);
   void init_functor(void);
   void init_vfunctor_with_derivative(void);
+  void init_dfunctor_with_derivative(void);
   void init_statistic(void);
   void init_geocal_gsl_fit(void);
   void init_geocal_gsl_root(void);
@@ -246,6 +247,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_exception", init_geocal_exception);
   init_extension_module(package, "_functor", init_functor);
   init_extension_module(package, "_vfunctor_with_derivative", init_vfunctor_with_derivative);
+  init_extension_module(package, "_dfunctor_with_derivative", init_dfunctor_with_derivative);
   init_extension_module(package, "_statistic", init_statistic);
   init_extension_module(package, "_geocal_gsl_fit", init_geocal_gsl_fit);
   init_extension_module(package, "_geocal_gsl_root", init_geocal_gsl_root);

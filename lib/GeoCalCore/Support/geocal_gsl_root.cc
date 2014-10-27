@@ -192,6 +192,24 @@ GeoCal::gsl_root(const DFunctor& F, double Xmin, double Xmax,
 
 //-----------------------------------------------------------------------
 /// \ingroup GSL
+/// This finds the root of a function, and propagates the derivative
+/// of the solution with respect to any parameters in the function
+/// (i.e., we *aren't* talking about the derivative wrt X here).
+//-----------------------------------------------------------------------
+
+AutoDerivative<double> 
+GeoCal::gsl_root_with_derivative
+(const DFunctorWithDerivative& F, double Xmin, double Xmax, 
+ double Eps, double Eps_abs)
+{
+  double xroot = gsl_root(F, Xmin, Xmax, Eps, Eps_abs);
+  Array<double, 1> grad = F.f_with_derivative(xroot).gradient();
+  grad /= -F.df(xroot);
+  return AutoDerivative<double>(xroot, grad);
+}
+
+//-----------------------------------------------------------------------
+/// \ingroup GSL
 /// This will find a (possible empty) list of roots of a function,
 /// where the roots have a seperation of at least the supplied minimum
 /// separation. 

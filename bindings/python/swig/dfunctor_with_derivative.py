@@ -8,7 +8,7 @@
 
 from sys import version_info
 if version_info >= (3,0,0):
-    new_instancemethod = lambda func, inst, cls: _geocal_gsl_root.SWIG_PyInstanceMethod_New(func)
+    new_instancemethod = lambda func, inst, cls: _dfunctor_with_derivative.SWIG_PyInstanceMethod_New(func)
 else:
     from new import instancemethod as new_instancemethod
 if version_info >= (2,6,0):
@@ -17,20 +17,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_geocal_gsl_root', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_dfunctor_with_derivative', [dirname(__file__)])
         except ImportError:
-            import _geocal_gsl_root
-            return _geocal_gsl_root
+            import _dfunctor_with_derivative
+            return _dfunctor_with_derivative
         if fp is not None:
             try:
-                _mod = imp.load_module('_geocal_gsl_root', fp, pathname, description)
+                _mod = imp.load_module('_dfunctor_with_derivative', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _geocal_gsl_root = swig_import_helper()
+    _dfunctor_with_derivative = swig_import_helper()
     del swig_import_helper
 else:
-    import _geocal_gsl_root
+    import _dfunctor_with_derivative
 del version_info
 try:
     _swig_property = property
@@ -88,7 +88,7 @@ except:
     weakref_proxy = lambda x: x
 
 
-SHARED_PTR_DISOWN = _geocal_gsl_root.SHARED_PTR_DISOWN
+SHARED_PTR_DISOWN = _dfunctor_with_derivative.SHARED_PTR_DISOWN
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -118,56 +118,35 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.functor
 import geocal_swig.generic_object
-
-def gsl_root(*args):
-  """
-    double GeoCal::gsl_root(const DFunctor &F, double Xmin, double Xmax, double Eps=1e-6, double
-    Eps_abs=1e-8)
-    This finds the root of a Double -> Double function, without a
-    derivative available.
-
-    The solution found is in the bracketed range Xmin <= X <= Xmax. We
-    find a solution when we have bracketed it within a range xlow, xhigh,
-    with xhigh - xlow < Eps.
-
-    If we can't find a solution, we throw a ConvergenceFailure exception.
+class DFunctorWithDerivative(geocal_swig.functor.DFunctor):
+    """
+    C++ includes: dfunctor_with_derivative.h
 
     """
-  return _geocal_gsl_root.gsl_root(*args)
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    def df(self, *args):
+        """
+        virtual double GeoCal::DFunctorWithDerivative::df(double X) const =0
+        Return df / dx. 
+        """
+        return _dfunctor_with_derivative.DFunctorWithDerivative_df(self, *args)
 
-def gsl_root_with_derivative(*args):
-  """
-    AutoDerivative< double > GeoCal::gsl_root_with_derivative(const DFunctorWithDerivative &F, double Xmin, double Xmax, double
-    Eps=1e-6, double Eps_abs=1e-8)
-    This finds the root of a function, and propagates the derivative of
-    the solution with respect to any parameters in the function (i.e., we
-    aren't talking about the derivative wrt X here). 
-    """
-  return _geocal_gsl_root.gsl_root_with_derivative(*args)
+    def f_with_derivative(self, *args):
+        """
+        virtual AutoDerivative<double> GeoCal::DFunctorWithDerivative::f_with_derivative(double X) const =0
+        Return df / dp_i as a AutoDerivative. 
+        """
+        return _dfunctor_with_derivative.DFunctorWithDerivative_f_with_derivative(self, *args)
 
-def root_list(*args):
-  """
-    std::vector< double > GeoCal::root_list(const DFunctor &F, double Xmin, double Xmax, double
-    Root_minimum_spacing, double Eps=1e-6)
-    This will find a (possible empty) list of roots of a function, where
-    the roots have a seperation of at least the supplied minimum
-    separation.
+    __swig_destroy__ = _dfunctor_with_derivative.delete_DFunctorWithDerivative
+DFunctorWithDerivative.df = new_instancemethod(_dfunctor_with_derivative.DFunctorWithDerivative_df,None,DFunctorWithDerivative)
+DFunctorWithDerivative.f_with_derivative = new_instancemethod(_dfunctor_with_derivative.DFunctorWithDerivative_f_with_derivative,None,DFunctorWithDerivative)
+DFunctorWithDerivative_swigregister = _dfunctor_with_derivative.DFunctorWithDerivative_swigregister
+DFunctorWithDerivative_swigregister(DFunctorWithDerivative)
 
-    This function is useful for finding roots when you don't know how many
-    solutions there are in the given range. It will find all roots,
-    provided that they have a seperation larger then Root_minimum_spacing,
-    and return the list of solutions. This list is ordered from smallest
-    to greatest.
-
-    This function works by sampling the Functor with a spacing of
-    Root_minimum_spacing. If the function changes sign between one spacing
-    and the next, the routine root is called between those spacings and
-    the results is added to the root list.
-
-    This will not finds roots that are closer together then the supplied
-    minimum spacing. (Limitation) 
-    """
-  return _geocal_gsl_root.root_list(*args)
 
 

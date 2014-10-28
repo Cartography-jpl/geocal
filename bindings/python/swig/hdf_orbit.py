@@ -148,16 +148,8 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit.Orbit):
     C++ includes: hdf_orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    def __init__(self, *args): 
-        """
-        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit")
-        Read the given orbit data file.
-
-        You can optional pass the base group of the HDF file, the default is
-        "/Orbit" 
-        """
-        _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swiginit(self,_hdf_orbit.new_HdfOrbit_EciTod_TimeAcs(*args))
     def _v_file_name(self):
         """
         const std::string& GeoCal::HdfOrbit< PositionType, TimeCreatorType >::file_name() const

@@ -133,16 +133,8 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
     C++ includes: orbit_quaternion_list.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    def __init__(self, *args): 
-        """
-        GeoCal::OrbitQuaternionList::OrbitQuaternionList(iterator ibeg, iterator iend)
-        Constructor that takes a list of QuaternionOrbitData values.
-
-        Note that the data doesn't need to be sorted, we handle sorting as we
-        ingest the data. 
-        """
-        _orbit_quaternion_list.OrbitQuaternionList_swiginit(self,_orbit_quaternion_list.new_OrbitQuaternionList(*args))
     def _v_quaternion_orbit_data(self):
         """
         std::vector< boost::shared_ptr< QuaternionOrbitData > > OrbitQuaternionList::quaternion_orbit_data() const

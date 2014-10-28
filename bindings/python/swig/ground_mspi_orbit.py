@@ -133,17 +133,8 @@ class GroundMspiOrbit(geocal_swig.orbit.Orbit):
     C++ includes: ground_mspi_orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    def __init__(self, *args): 
-        """
-        GeoCal::GroundMspiOrbit::GroundMspiOrbit(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,
-        double Azimuth, double Start_elevation_angle, double Rotation_rate)
-        Constructor.
-
-        The angles should be in degrees, and the rate is in degrees per
-        second. 
-        """
-        _ground_mspi_orbit.GroundMspiOrbit_swiginit(self,_ground_mspi_orbit.new_GroundMspiOrbit(*args))
     def _v_start_time(self):
         """
         Time GeoCal::GroundMspiOrbit::start_time() const

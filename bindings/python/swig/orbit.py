@@ -292,6 +292,17 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def time(self):
         return self._v_time()
 
+    def _v_time_with_derivative(self):
+        """
+        virtual TimeWithDerivative GeoCal::OrbitData::time_with_derivative() const =0
+        Return TimeWithDerivative of OrbitData. 
+        """
+        return _orbit.OrbitData__v_time_with_derivative(self)
+
+    @property
+    def time_with_derivative(self):
+        return self._v_time_with_derivative()
+
     __swig_destroy__ = _orbit.delete_OrbitData
 OrbitData.resolution_meter = new_instancemethod(_orbit.OrbitData_resolution_meter,None,OrbitData)
 OrbitData.ci_look_vector = new_instancemethod(_orbit.OrbitData_ci_look_vector,None,OrbitData)
@@ -309,6 +320,7 @@ OrbitData._velocity_ci_with_derivative = new_instancemethod(_orbit.OrbitData__ve
 OrbitData._position_ci_with_derivative = new_instancemethod(_orbit.OrbitData__position_ci_with_derivative,None,OrbitData)
 OrbitData._position_cf_with_derivative = new_instancemethod(_orbit.OrbitData__position_cf_with_derivative,None,OrbitData)
 OrbitData._v_time = new_instancemethod(_orbit.OrbitData__v_time,None,OrbitData)
+OrbitData._v_time_with_derivative = new_instancemethod(_orbit.OrbitData__v_time_with_derivative,None,OrbitData)
 OrbitData.__str__ = new_instancemethod(_orbit.OrbitData___str__,None,OrbitData)
 OrbitData_swigregister = _orbit.OrbitData_swigregister
 OrbitData_swigregister(OrbitData)
@@ -349,10 +361,11 @@ class QuaternionOrbitData(OrbitData):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        QuaternionOrbitData::QuaternionOrbitData(Time Tm, const boost::shared_ptr< CartesianInertial > &pos_ci, const
-        boost::array< AutoDerivative< double >, 3 > &pos_ci_with_der, const
-        boost::array< AutoDerivative< double >, 3 > &vel_inertial, const
-        boost::math::quaternion< AutoDerivative< double > > &sc_to_ci_q)
+        QuaternionOrbitData::QuaternionOrbitData(const TimeWithDerivative &Tm, const boost::shared_ptr<
+        CartesianInertial > &pos_ci, const boost::array< AutoDerivative<
+        double >, 3 > &pos_ci_with_der, const boost::array< AutoDerivative<
+        double >, 3 > &vel_inertial, const boost::math::quaternion<
+        AutoDerivative< double > > &sc_to_ci_q)
         Construct QuaternionOrbitData.
 
         This takes data in a CartesianInertial coordinate system (e.g., Eci
@@ -660,10 +673,8 @@ class Orbit(ObservableOrbit,geocal_swig.with_parameter.WithParameter):
 
     def orbit_data(self, *args):
         """
-        virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(Time T) const =0
-        Return OrbitData for the given time.
+        virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const
 
-        We should have min_time() <= T < max_time(). 
         """
         return _orbit.Orbit_orbit_data(self, *args)
 
@@ -787,6 +798,13 @@ class KeplerOrbit(Orbit):
         nominal orbit for MISR. 
         """
         _orbit.KeplerOrbit_swiginit(self,_orbit.new_KeplerOrbit(*args))
+    def orbit_data(self, *args):
+        """
+        boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _orbit.KeplerOrbit_orbit_data(self, *args)
+
     def _v_epoch(self, *args):
         """
         void GeoCal::KeplerOrbit::epoch(const Time &Epoch)
@@ -911,6 +929,7 @@ class KeplerOrbit(Orbit):
       return _new_from_init, (self.__class__, 1, self.min_time,self.max_time,self.epoch,self.semimajor_axis,self.eccentricity,self.inclination,self.right_ascension,self.argument_of_perigee,self.mean_anomoly)
 
     __swig_destroy__ = _orbit.delete_KeplerOrbit
+KeplerOrbit.orbit_data = new_instancemethod(_orbit.KeplerOrbit_orbit_data,None,KeplerOrbit)
 KeplerOrbit._v_epoch = new_instancemethod(_orbit.KeplerOrbit__v_epoch,None,KeplerOrbit)
 KeplerOrbit._v_semimajor_axis = new_instancemethod(_orbit.KeplerOrbit__v_semimajor_axis,None,KeplerOrbit)
 KeplerOrbit._v_argument_of_perigee = new_instancemethod(_orbit.KeplerOrbit__v_argument_of_perigee,None,KeplerOrbit)

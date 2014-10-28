@@ -153,6 +153,13 @@ public:
 //-----------------------------------------------------------------------
   
   virtual Time time() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return TimeWithDerivative of OrbitData.
+//-----------------------------------------------------------------------
+
+  virtual TimeWithDerivative time_with_derivative() const = 0;
+
   virtual void print(std::ostream& Os) const = 0;
 };
 
@@ -191,7 +198,8 @@ public:
   QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<double, 3>& vel_fixed,
 		      const boost::math::quaternion<double>& sc_to_cf_q);
-  QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+  QuaternionOrbitData(const TimeWithDerivative& Tm, 
+		      const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<AutoDerivative<double>, 3>&
 		      pos_cf_with_der,
 		      const boost::array<AutoDerivative<double>, 3>& vel_fixed,
@@ -201,7 +209,7 @@ public:
 		      const boost::shared_ptr<CartesianInertial>& pos_ci,
 		      const boost::array<double, 3>& vel_inertial,
 		      const boost::math::quaternion<double>& sc_to_ci_q);
-  QuaternionOrbitData(Time Tm, 
+  QuaternionOrbitData(const TimeWithDerivative& Tm, 
 		      const boost::shared_ptr<CartesianInertial>& pos_ci,
 		      const boost::array<AutoDerivative<double>, 3>&
 		      pos_ci_with_der,
@@ -287,7 +295,8 @@ public:
 /// Return Time of OrbitData.
 //-----------------------------------------------------------------------
   
-  virtual Time time() const {return tm;}
+  virtual Time time() const {return tm.value();}
+  virtual TimeWithDerivative time_with_derivative() const {return tm;}
   virtual void print(std::ostream& Os) const;
   friend boost::shared_ptr<QuaternionOrbitData>
   GeoCal::interpolate(const QuaternionOrbitData& t1, 
@@ -349,21 +358,23 @@ protected:
   void initialize(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
     const boost::array<double, 3>& vel_fixed, const 
     boost::math::quaternion<double>& sc_to_cf_q);
-  void initialize(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+  void initialize(const TimeWithDerivative& Tm, 
+		  const boost::shared_ptr<CartesianFixed>& pos_cf,
     const boost::array<AutoDerivative<double>, 3>& pos_cf_with_der,
     const boost::array<AutoDerivative<double>, 3>& vel_fixed, const 
     boost::math::quaternion<AutoDerivative<double> >& sc_to_cf_q);
   void initialize(Time Tm, const boost::shared_ptr<CartesianInertial>& pos_ci,
     const boost::array<double, 3>& vel_inertial, const 
     boost::math::quaternion<double>& sc_to_ci_q);
-  void initialize(Time Tm, const boost::shared_ptr<CartesianInertial>& pos_ci,
+  void initialize(const TimeWithDerivative& Tm, 
+		  const boost::shared_ptr<CartesianInertial>& pos_ci,
     const boost::array<AutoDerivative<double>, 3>& pos_ci_with_der,
     const boost::array<AutoDerivative<double>, 3>& vel_inertial, const 
     boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q);
 
 
 private:
-  Time tm;			///< Time of OrbitData.
+  TimeWithDerivative tm;	///< Time of OrbitData.
   boost::shared_ptr<CartesianFixed> pos;
 				///< Position
   boost::math::quaternion<AutoDerivative<double> > pos_with_der;
@@ -392,7 +403,7 @@ private:
   }
   void fill_in_ci_to_cf() const {
     if(!have_ci_to_cf) {
-      ci_to_cf_ = pos->ci_to_cf_quat(tm);
+      ci_to_cf_ = pos->ci_to_cf_quat(time());
       pos_ci = pos->convert_to_ci(time());
       pos_ci_with_der = conj(ci_to_cf_) * pos_with_der * ci_to_cf_;
     }
@@ -575,6 +586,11 @@ public:
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;
+  virtual boost::shared_ptr<OrbitData> 
+  orbit_data(const TimeWithDerivative& T) const 
+  { // Temp
+    throw Exception("Not Implemented yet");
+  }
   virtual void print(std::ostream& Os) const { Os << "Orbit"; }
 protected:
 //-----------------------------------------------------------------------
@@ -671,6 +687,8 @@ public:
 	      double Mean_anomaly_at_epoch = 290.912925280);
   virtual ~KeplerOrbit() {}
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> 
+  orbit_data(const TimeWithDerivative& T) const;
   virtual void print(std::ostream& Os) const;
 
 //-----------------------------------------------------------------------

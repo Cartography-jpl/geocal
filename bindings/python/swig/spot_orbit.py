@@ -163,31 +163,8 @@ class SpotOrbit(geocal_swig.orbit.Orbit):
     C++ includes: spot_orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    def __init__(self, *args): 
-        """
-        SpotOrbit::SpotOrbit(const std::vector< Time > &Ephemeris_time, const blitz::Array<
-        double, 2 > &Ephemeris, const std::vector< Time > &Attitude_time,
-        const blitz::Array< double, 2 > &Ypr)
-        Constructor.
-
-        Parameters:
-        -----------
-
-        Ephemeris_time:  Time of each ephemeris point
-
-        Ephemeris:  Ephemeris at each time. This is a number_eph_time x 6
-        array. Each row has the position x, y, z and velocity x, y, z. This is
-        in meters and meter/second, in ECR coordinates.
-
-        Attitude_time:  Time of each attitude point.
-
-        Ypr:  Attitude. This is a number_att_time x 3 array. Each row has the
-        yaw, pitch and roll. This is in radians. This is YPR reported by SPOT
-        in the DIMAP file, and uses the conventions described in "SPOT
-        Geometry Handbook" 
-        """
-        _spot_orbit.SpotOrbit_swiginit(self,_spot_orbit.new_SpotOrbit(*args))
     __swig_destroy__ = _spot_orbit.delete_SpotOrbit
 SpotOrbit_swigregister = _spot_orbit.SpotOrbit_swigregister
 SpotOrbit_swigregister(SpotOrbit)

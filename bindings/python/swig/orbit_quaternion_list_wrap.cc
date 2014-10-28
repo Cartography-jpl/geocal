@@ -5094,19 +5094,6 @@ namespace swig {
       }
     
 
-struct SWIG_null_deleter {
-  void operator() (void const *) const {
-  }
-};
-#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
-#define SWIG_NO_NULL_DELETER_1
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
-
-
-#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
-
-
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -5117,47 +5104,6 @@ struct SWIG_null_deleter {
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_new_OrbitQuaternionList(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData >,std::allocator< boost::shared_ptr< GeoCal::QuaternionOrbitData > > > *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
-  GeoCal::OrbitQuaternionList *result = 0 ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    std::vector<boost::shared_ptr< GeoCal::QuaternionOrbitData >,std::allocator< boost::shared_ptr< GeoCal::QuaternionOrbitData > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::QuaternionOrbitData >,std::allocator< boost::shared_ptr< GeoCal::QuaternionOrbitData > > > *)0;
-    res1 = swig::asptr(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitQuaternionList" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData >,std::allocator< boost::shared_ptr< GeoCal::QuaternionOrbitData > > > const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OrbitQuaternionList" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData >,std::allocator< boost::shared_ptr< GeoCal::QuaternionOrbitData > > > const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    try {
-      result = (GeoCal::OrbitQuaternionList *)new GeoCal::OrbitQuaternionList((std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData >,std::allocator< boost::shared_ptr< GeoCal::QuaternionOrbitData > > > const &)*arg1);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::OrbitQuaternionList > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitQuaternionList >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_OrbitQuaternionList__v_quaternion_orbit_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitQuaternionList *arg1 = (GeoCal::OrbitQuaternionList *) 0 ;
@@ -5250,19 +5196,8 @@ SWIGINTERN PyObject *OrbitQuaternionList_swigregister(PyObject *SWIGUNUSEDPARM(s
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *OrbitQuaternionList_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  return SWIG_Python_InitShadowInstance(args);
-}
-
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"new_OrbitQuaternionList", (PyCFunction)_wrap_new_OrbitQuaternionList, METH_O, (char *)"\n"
-		"GeoCal::OrbitQuaternionList::OrbitQuaternionList(iterator ibeg, iterator iend)\n"
-		"Constructor that takes a list of QuaternionOrbitData values.\n"
-		"\n"
-		"Note that the data doesn't need to be sorted, we handle sorting as we\n"
-		"ingest the data. \n"
-		""},
 	 { (char *)"OrbitQuaternionList__v_quaternion_orbit_data", (PyCFunction)_wrap_OrbitQuaternionList__v_quaternion_orbit_data, METH_O, (char *)"\n"
 		"std::vector< boost::shared_ptr< QuaternionOrbitData > > OrbitQuaternionList::quaternion_orbit_data() const\n"
 		"Return the list of QuaternionOrbitData. \n"
@@ -5272,7 +5207,6 @@ static PyMethodDef SwigMethods[] = {
 		"Destructor. \n"
 		""},
 	 { (char *)"OrbitQuaternionList_swigregister", OrbitQuaternionList_swigregister, METH_VARARGS, NULL},
-	 { (char *)"OrbitQuaternionList_swiginit", OrbitQuaternionList_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

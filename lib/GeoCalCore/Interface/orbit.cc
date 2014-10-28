@@ -331,6 +331,12 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data(Time T) const
 		      matrix_to_quaternion(sc_to_ci)));
 }
 
+boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data
+(const TimeWithDerivative& T) const
+{
+  throw Exception("Not implemented yet");
+}
+
 //-----------------------------------------------------------------------
 /// Print out description of Orbit.
 //-----------------------------------------------------------------------
@@ -377,7 +383,7 @@ QuaternionOrbitData::QuaternionOrbitData(Time Tm,
 //-----------------------------------------------------------------------
 
 QuaternionOrbitData::QuaternionOrbitData
-(Time Tm, 
+(const TimeWithDerivative& Tm, 
  const boost::shared_ptr<CartesianFixed>& pos_cf,
  const boost::array<AutoDerivative<double>, 3>& pos_cf_with_der,
  const boost::array<AutoDerivative<double>, 3>& vel_fixed,
@@ -423,7 +429,7 @@ void QuaternionOrbitData::initialize(Time Tm,
 //-----------------------------------------------------------------------
 
 void QuaternionOrbitData::initialize
-(Time Tm, 
+(const TimeWithDerivative& Tm, 
  const boost::shared_ptr<CartesianFixed>& pos_cf,
  const boost::array<AutoDerivative<double>, 3>& pos_cf_with_der,
  const boost::array<AutoDerivative<double>, 3>& vel_fixed, const 
@@ -461,7 +467,7 @@ QuaternionOrbitData::QuaternionOrbitData(Time Tm,
 //-----------------------------------------------------------------------
 
 QuaternionOrbitData::QuaternionOrbitData
-(Time Tm, 
+(const TimeWithDerivative& Tm, 
  const boost::shared_ptr<CartesianInertial>& pos_ci,
  const boost::array<AutoDerivative<double>, 3>& pos_ci_with_der,
  const boost::array<AutoDerivative<double>, 3>& vel_inertial,
@@ -508,7 +514,7 @@ void QuaternionOrbitData::initialize(Time Tm,
 //-----------------------------------------------------------------------
 
 void QuaternionOrbitData::initialize
-(Time Tm, 
+(const TimeWithDerivative& Tm, 
  const boost::shared_ptr<CartesianInertial>& Pos_ci,
  const boost::array<AutoDerivative<double>, 3>& Pos_ci_with_der,
  const boost::array<AutoDerivative<double>, 3>& vel_inertial,
@@ -519,13 +525,13 @@ void QuaternionOrbitData::initialize
   pos_ci = Pos_ci;
   pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
     (0, Pos_ci_with_der[0], Pos_ci_with_der[1], Pos_ci_with_der[2]);
-  ci_to_cf_ = pos_ci->ci_to_cf_quat(Tm);
+  ci_to_cf_ = pos_ci->ci_to_cf_quat(Tm.value());
   have_ci_to_cf = true;
   boost::math::quaternion<AutoDerivative<double> >
     vel_ci(0, vel_inertial[0], vel_inertial[1], vel_inertial[2]);
   vel_cf_with_der = ci_to_cf() * vel_ci * conj(ci_to_cf());
   vel_cf = value(vel_cf_with_der);
-  pos = pos_ci->convert_to_cf(Tm);
+  pos = pos_ci->convert_to_cf(Tm.value());
   pos_with_der = ci_to_cf() * pos_ci_with_der * conj(ci_to_cf());
   sc_to_cf_with_der = ci_to_cf() * sc_to_ci_q;
   sc_to_cf_ = value(sc_to_cf_with_der);

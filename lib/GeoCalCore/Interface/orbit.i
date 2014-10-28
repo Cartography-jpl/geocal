@@ -122,6 +122,7 @@ def position_cf_with_derivative(self):
     return self._position_cf_with_derivative()
   }
   %python_attribute(time, virtual Time)
+  %python_attribute(time_with_derivative, virtual TimeWithDerivative)
   std::string print_to_string() const;
 };
 
@@ -130,7 +131,8 @@ public:
   QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<double, 3>& vel_fixed,
 		      const boost::math::quaternion<double>& sc_to_cf_q);
-  QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+  QuaternionOrbitData(const TimeWithDerivative& Tm, 
+		      const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<AutoDerivative<double>, 3>&
 		      pos_cf_with_der,
 		      const boost::array<AutoDerivative<double>, 3>& vel_fixed,
@@ -140,7 +142,7 @@ public:
 		      const boost::shared_ptr<CartesianInertial>& pos_ci,
 		      const boost::array<double, 3>& vel_inertial,
 		      const boost::math::quaternion<double>& sc_to_ci_q);
-  QuaternionOrbitData(Time Tm, 
+  QuaternionOrbitData(const TimeWithDerivative& Tm, 
 		      const boost::shared_ptr<CartesianInertial>& pos_ci,
 		      const boost::array<AutoDerivative<double>, 3>&
 		      pos_ci_with_der,
@@ -264,6 +266,8 @@ public:
   %python_attribute(min_time, Time)
   %python_attribute(max_time, Time)
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;
+  virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
+    const = 0;
   std::string print_to_string();
   %python_attribute_with_set_virtual(parameter, blitz::Array<double, 1>);
   %python_attribute_with_set_virtual(parameter_with_derivative, 
@@ -299,6 +303,7 @@ public:
 	      double Ap_at_epoch = 69.086962170, 
 	      double Mean_anomaly_at_epoch = 290.912925280);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) const;
   
   %python_attribute_with_set(epoch, Time)
   %python_attribute_with_set(semimajor_axis, double)

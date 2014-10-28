@@ -124,9 +124,8 @@ import geocal_swig.observer
 import geocal_swig.with_parameter
 class HdfOrbit_EciTodBurl_TimeAcs(geocal_swig.orbit.Orbit):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    def __init__(self, *args): 
-        _hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs_swiginit(self,_hdf_orbit_carto.new_HdfOrbit_EciTodBurl_TimeAcs(*args))
     @property
     def file_name(self):
         return self._v_file_name()

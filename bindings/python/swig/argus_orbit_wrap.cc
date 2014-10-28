@@ -8116,47 +8116,6 @@ SWIGINTERN PyObject *ArgusOrbitData_swiginit(PyObject *SWIGUNUSEDPARM(self), PyO
   return SWIG_Python_InitShadowInstance(args);
 }
 
-SWIGINTERN PyObject *_wrap_new_ArgusOrbit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
-  GeoCal::ArgusOrbit *result = 0 ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_ArgusOrbit" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ArgusOrbit" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    try {
-      result = (GeoCal::ArgusOrbit *)new GeoCal::ArgusOrbit((std::string const &)*arg1);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::ArgusOrbit > *smartresult = result ? new boost::shared_ptr<  GeoCal::ArgusOrbit >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArgusOrbit_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_ArgusOrbit_focal_length(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::ArgusOrbit *arg1 = (GeoCal::ArgusOrbit *) 0 ;
@@ -8400,10 +8359,6 @@ SWIGINTERN PyObject *ArgusOrbit_swigregister(PyObject *SWIGUNUSEDPARM(self), PyO
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
   SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArgusOrbit_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
-}
-
-SWIGINTERN PyObject *ArgusOrbit_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  return SWIG_Python_InitShadowInstance(args);
 }
 
 SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
@@ -10658,19 +10613,6 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ArgusOrbitData_swigregister", ArgusOrbitData_swigregister, METH_VARARGS, NULL},
 	 { (char *)"ArgusOrbitData_swiginit", ArgusOrbitData_swiginit, METH_VARARGS, NULL},
-	 { (char *)"new_ArgusOrbit", (PyCFunction)_wrap_new_ArgusOrbit, METH_O, (char *)"\n"
-		"ArgusOrbit::ArgusOrbit(const std::string &Fname)\n"
-		"Open the given file and use it to provide Orbit information.\n"
-		"\n"
-		"This file should be a CSV file containing one record per line, with\n"
-		"the fields \"File,Camera,Time,Lat,Lon,Alt,Roll,Pitch,Heading\". The\n"
-		"first line is assumed to be a header, and is discarded. The second\n"
-		"line is the epoch that the times are measured relative to.\n"
-		"\n"
-		"Orbit data, indexed by the Time. This is a multimap because it is\n"
-		"entirely possible to have multiple entries in the navigation file with\n"
-		"the same time, e.g., two cameras collect data at the same time. \n"
-		""},
 	 { (char *)"ArgusOrbit_focal_length", _wrap_ArgusOrbit_focal_length, METH_VARARGS, (char *)"\n"
 		"double ArgusOrbit::focal_length(int camera_num) const\n"
 		"This finds the first row with orbit and image data for the given\n"
@@ -10695,7 +10637,6 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"delete_ArgusOrbit", (PyCFunction)_wrap_delete_ArgusOrbit, METH_O, NULL},
 	 { (char *)"ArgusOrbit_swigregister", ArgusOrbit_swigregister, METH_VARARGS, NULL},
-	 { (char *)"ArgusOrbit_swiginit", ArgusOrbit_swiginit, METH_VARARGS, NULL},
 	 { (char *)"Vector_ArgusOrbitData_iterator", (PyCFunction)_wrap_Vector_ArgusOrbitData_iterator, METH_O, NULL},
 	 { (char *)"Vector_ArgusOrbitData___nonzero__", (PyCFunction)_wrap_Vector_ArgusOrbitData___nonzero__, METH_O, NULL},
 	 { (char *)"Vector_ArgusOrbitData___bool__", (PyCFunction)_wrap_Vector_ArgusOrbitData___bool__, METH_O, NULL},

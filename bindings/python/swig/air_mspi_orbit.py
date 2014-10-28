@@ -135,16 +135,8 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
     C++ includes: air_mspi_orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    def __init__(self, *args): 
-        """
-        AirMspiOrbit::AirMspiOrbit(const std::string &Fname, const boost::shared_ptr< Datum >
-        &D=boost::shared_ptr< Datum >(new NoDatum()),
-        AircraftOrbitData::VerticalDefinition
-        Def=AircraftOrbitData::GEODETIC_VERTICAL)
-
-        """
-        _air_mspi_orbit.AirMspiOrbit_swiginit(self,_air_mspi_orbit.new_AirMspiOrbit(*args))
     def _v_data_version(self):
         """
         std::string GeoCal::AirMspiOrbit::data_version() const

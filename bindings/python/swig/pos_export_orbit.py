@@ -139,17 +139,8 @@ class PosExportOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     C++ includes: pos_export_orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    def __init__(self, *args): 
-        """
-        PosExportOrbit::PosExportOrbit(const std::string &Fname, const Time &Epoch)
-        Read the given text file.
-
-        Note that the time in the Applanix file is in GPS seconds of the week,
-        but the actual week isn't in the file. This means we need to pass in
-        the Epoch that the times are relative to. 
-        """
-        _pos_export_orbit.PosExportOrbit_swiginit(self,_pos_export_orbit.new_PosExportOrbit(*args))
     def aircraft_orbit_data(self, *args):
         """
         const AircraftOrbitData & PosExportOrbit::aircraft_orbit_data(const Time &T) const

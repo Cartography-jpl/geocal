@@ -576,21 +576,17 @@ class Orbit(ObservableOrbit,geocal_swig.with_parameter.WithParameter):
 
     def ci_look_vector(self, *args):
         """
-        virtual CartesianInertialLookVector GeoCal::Orbit::ci_look_vector(Time T, const ScLookVector &Sl) const
-        Convert from ScLookVector to CartesianInertialLookVector for the given
-        time.
+        virtual CartesianInertialLookVectorWithDerivative GeoCal::Orbit::ci_look_vector(const TimeWithDerivative &T, const ScLookVectorWithDerivative &Sl)
+        const
 
-        We should have min_time() <= T < max_time(). 
         """
         return _orbit.Orbit_ci_look_vector(self, *args)
 
     def cf_look_vector(self, *args):
         """
-        virtual CartesianFixedLookVector GeoCal::Orbit::cf_look_vector(Time T, const ScLookVector &Sl) const
-        Convert from ScLookVector to CartesianFixedLookVector for the given
-        time.
+        virtual CartesianFixedLookVectorWithDerivative GeoCal::Orbit::cf_look_vector(const TimeWithDerivative &T, const ScLookVectorWithDerivative &Sl)
+        const
 
-        We should have min_time() <= T < max_time(). 
         """
         return _orbit.Orbit_cf_look_vector(self, *args)
 
@@ -626,7 +622,8 @@ class Orbit(ObservableOrbit,geocal_swig.with_parameter.WithParameter):
 
     def sc_look_vector(self, *args):
         """
-        virtual ScLookVectorWithDerivative GeoCal::Orbit::sc_look_vector(Time T, const CartesianFixedLookVectorWithDerivative &Cf) const
+        virtual ScLookVectorWithDerivative GeoCal::Orbit::sc_look_vector(const TimeWithDerivative &T, const
+        CartesianFixedLookVectorWithDerivative &Cf) const
 
         """
         return _orbit.Orbit_sc_look_vector(self, *args)

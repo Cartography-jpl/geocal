@@ -242,8 +242,14 @@ public:
     
   virtual CartesianInertialLookVector ci_look_vector(Time T, 
 					     const ScLookVector& Sl) const;
+  virtual CartesianInertialLookVectorWithDerivative 
+  ci_look_vector(const TimeWithDerivative& T, 
+		 const ScLookVectorWithDerivative& Sl) const;
   virtual CartesianFixedLookVector cf_look_vector(Time T, 
 					  const ScLookVector& Sl) const;
+  virtual CartesianFixedLookVectorWithDerivative 
+  cf_look_vector(const TimeWithDerivative& T, 
+		 const ScLookVectorWithDerivative& Sl) const;
   FrameCoordinate frame_coordinate(Time T, const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const;
   FrameCoordinateWithDerivative 
@@ -255,12 +261,14 @@ public:
                           double Height_reference_surface = 0.0) const;
   virtual ScLookVector sc_look_vector(Time T, 
 			      const CartesianInertialLookVector& Ci) const;
-  virtual ScLookVectorWithDerivative sc_look_vector(Time T, 
-	    const CartesianInertialLookVectorWithDerivative& Ci) const;
+  virtual ScLookVectorWithDerivative sc_look_vector
+  (const TimeWithDerivative& T, 
+   const CartesianInertialLookVectorWithDerivative& Ci) const;
   virtual ScLookVector sc_look_vector(Time T, 
 			      const CartesianFixedLookVector& Cf) const;
-  virtual ScLookVectorWithDerivative sc_look_vector(Time T, 
-	    const CartesianFixedLookVectorWithDerivative& Cf) const;
+  virtual ScLookVectorWithDerivative sc_look_vector
+  (const TimeWithDerivative& T, 
+   const CartesianFixedLookVectorWithDerivative& Cf) const;
   virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const;
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
   %python_attribute(min_time, Time)

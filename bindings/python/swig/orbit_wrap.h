@@ -34,11 +34,13 @@ public:
     virtual std::vector< std::string,std::allocator< std::string > > parameter_name_subset() const;
     virtual blitz::Array< bool,1 > parameter_mask() const;
     virtual GeoCal::CartesianInertialLookVector ci_look_vector(GeoCal::Time T, GeoCal::ScLookVector const &Sl) const;
+    virtual GeoCal::CartesianInertialLookVectorWithDerivative ci_look_vector(GeoCal::TimeWithDerivative const &T, GeoCal::ScLookVectorWithDerivative const &Sl) const;
     virtual GeoCal::CartesianFixedLookVector cf_look_vector(GeoCal::Time T, GeoCal::ScLookVector const &Sl) const;
+    virtual GeoCal::CartesianFixedLookVectorWithDerivative cf_look_vector(GeoCal::TimeWithDerivative const &T, GeoCal::ScLookVectorWithDerivative const &Sl) const;
     virtual GeoCal::ScLookVector sc_look_vector(GeoCal::Time T, GeoCal::CartesianInertialLookVector const &Ci) const;
-    virtual GeoCal::ScLookVectorWithDerivative sc_look_vector(GeoCal::Time T, GeoCal::CartesianInertialLookVectorWithDerivative const &Ci) const;
+    virtual GeoCal::ScLookVectorWithDerivative sc_look_vector(GeoCal::TimeWithDerivative const &T, GeoCal::CartesianInertialLookVectorWithDerivative const &Ci) const;
     virtual GeoCal::ScLookVector sc_look_vector(GeoCal::Time T, GeoCal::CartesianFixedLookVector const &Cf) const;
-    virtual GeoCal::ScLookVectorWithDerivative sc_look_vector(GeoCal::Time T, GeoCal::CartesianFixedLookVectorWithDerivative const &Cf) const;
+    virtual GeoCal::ScLookVectorWithDerivative sc_look_vector(GeoCal::TimeWithDerivative const &T, GeoCal::CartesianFixedLookVectorWithDerivative const &Cf) const;
     virtual boost::shared_ptr< GeoCal::CartesianInertial > position_ci(GeoCal::Time T) const;
     virtual boost::shared_ptr< GeoCal::CartesianFixed > position_cf(GeoCal::Time T) const;
     virtual boost::shared_ptr< GeoCal::OrbitData > orbit_data(GeoCal::Time T) const;
@@ -78,7 +80,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[23];
+    mutable swig::SwigVar_PyObject vtable[25];
 #endif
 
 };

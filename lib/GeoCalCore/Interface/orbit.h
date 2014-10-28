@@ -504,6 +504,11 @@ public:
 			     const ScLookVector& Sl) const
   { return orbit_data(T)->ci_look_vector(Sl); }
 
+  virtual CartesianInertialLookVectorWithDerivative 
+  ci_look_vector(const TimeWithDerivative& T, 
+		 const ScLookVectorWithDerivative& Sl) const
+  { return orbit_data(T)->ci_look_vector(Sl); }
+
 //-----------------------------------------------------------------------
 /// Convert from ScLookVector to CartesianFixedLookVector for the
 /// given time. We should have min_time() <= T < max_time(). 
@@ -511,6 +516,11 @@ public:
 
   virtual CartesianFixedLookVector cf_look_vector(Time T, 
 					  const ScLookVector& Sl) const
+  { return orbit_data(T)->cf_look_vector(Sl); }
+
+  virtual CartesianFixedLookVectorWithDerivative 
+  cf_look_vector(const TimeWithDerivative& T, 
+		 const ScLookVectorWithDerivative& Sl) const
   { return orbit_data(T)->cf_look_vector(Sl); }
 
 //-----------------------------------------------------------------------
@@ -521,9 +531,9 @@ public:
   virtual ScLookVector sc_look_vector(Time T, 
 			      const CartesianInertialLookVector& Ci) const
   { return orbit_data(T)->sc_look_vector(Ci); }
-
-  virtual ScLookVectorWithDerivative sc_look_vector(Time T, 
-	      const CartesianInertialLookVectorWithDerivative& Ci) const
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector(const TimeWithDerivative& T, 
+		 const CartesianInertialLookVectorWithDerivative& Ci) const
   { return orbit_data(T)->sc_look_vector(Ci); }
 
 //-----------------------------------------------------------------------
@@ -535,8 +545,9 @@ public:
 			      const CartesianFixedLookVector& Cf) const
   { return orbit_data(T)->sc_look_vector(Cf); }
 
-  virtual ScLookVectorWithDerivative sc_look_vector(Time T, 
-	      const CartesianFixedLookVectorWithDerivative& Cf) const
+  virtual ScLookVectorWithDerivative sc_look_vector
+  (const TimeWithDerivative& T, 
+   const CartesianFixedLookVectorWithDerivative& Cf) const
   { return orbit_data(T)->sc_look_vector(Cf); }
 //-----------------------------------------------------------------------
 /// Return position at given time. We should have min_time() <= T <

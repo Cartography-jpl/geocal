@@ -613,11 +613,8 @@ class Orbit(ObservableOrbit,geocal_swig.with_parameter.WithParameter):
 
     def sc_look_vector(self, *args):
         """
-        virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianFixedLookVector &Cf) const
-        Convert from CartesianFixedLookVector to ScLookVector for the given
-        time.
+        virtual ScLookVectorWithDerivative GeoCal::Orbit::sc_look_vector(Time T, const CartesianFixedLookVectorWithDerivative &Cf) const
 
-        We should have min_time() <= T < max_time(). 
         """
         return _orbit.Orbit_sc_look_vector(self, *args)
 

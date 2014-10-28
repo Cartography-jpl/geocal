@@ -2,7 +2,7 @@
 #include "ostream_pad.h"
 #include "geocal_gsl_root.h"
 using namespace GeoCal;
-
+using namespace blitz;
 //-----------------------------------------------------------------------
 /// Initialize object.
 //-----------------------------------------------------------------------
@@ -90,7 +90,7 @@ IgcRollingShutter::ground_coordinate_approx_height
 
 namespace GeoCal {
   namespace IgcRollingShutterHelper {
-class IcEq: public GeoCal::DFunctor {
+class IcEq: public GeoCal::DFunctorWithDerivative {
 public:
   IcEq(const boost::shared_ptr<Orbit>& Orb,
        const boost::shared_ptr<TimeTable>& Tt,
@@ -110,16 +110,52 @@ public:
     ImageCoordinate ic = tt->image_coordinate(t, fc);
     return ic.line - fc.line;
   }
+  virtual double df(double Toffset) const
+  {
+    // Right now just do a finite difference. We can revisit this if
+    // needed. 
+    double eps = 1e-3;
+    return ((*this)(Toffset + eps) - (*this)(Toffset)) / eps;
+  }
+  virtual AutoDerivative<double> f_with_derivative(double Toffset) const
+  {
+    Time t = tmin + Toffset;
+    FrameCoordinateWithDerivative fc = 
+      cam->frame_coordinate_with_derivative
+      (orb->sc_look_vector(t, look_vector_with_derivative(t)), 
+       band);
+    ImageCoordinateWithDerivative ic = 
+      tt->image_coordinate_with_derivative(t, fc);
+    return ic.line - fc.line;
+    
+  }
   ImageCoordinate image_coordinate(double Toffset) const
   {
     Time t = tmin + Toffset;
     return tt->image_coordinate(t, cam->frame_coordinate(orb->sc_look_vector(t, look_vector(t)), band));
+  }
+  ImageCoordinateWithDerivative image_coordinate_with_derivative
+  (const AutoDerivative<double>& Toffset) const
+  {
+    // Time t = tmin + Toffset;
+    // return tt->image_coordinate(t, cam->frame_coordinate(orb->sc_look_vector(t, look_vector(t)), band));
   }
   CartesianFixedLookVector look_vector(Time T) const
   {
     boost::array<double, 3> p1 = p->position;
     boost::array<double, 3> p2 = orb->position_cf(T)->position;
     CartesianFixedLookVector lv;
+    lv.look_vector[0] = p1[0] - p2[0];
+    lv.look_vector[1] = p1[1] - p2[1];
+    lv.look_vector[2] = p1[2] - p2[2];
+    return lv;
+  }
+  CartesianFixedLookVectorWithDerivative 
+  look_vector_with_derivative(Time T) const
+  {
+    boost::array<double, 3> p1 = p->position;
+    boost::array<AutoDerivative<double>, 3> p2 = orb->position_cf_with_derivative(T);
+    CartesianFixedLookVectorWithDerivative lv;
     lv.look_vector[0] = p1[0] - p2[0];
     lv.look_vector[1] = p1[1] - p2[1];
     lv.look_vector[2] = p1[2] - p2[2];
@@ -153,6 +189,23 @@ ImageCoordinate IgcRollingShutter::image_coordinate
 blitz::Array<double, 2> IgcRollingShutter::image_coordinate_jac_parm
 (const GroundCoordinate& Gc) const
 {
+  IgcRollingShutterHelper::IcEq 
+    eq(orbit_, time_table_, cam, Gc.convert_to_cf(), 
+       time_table_->min_time(), b);
+  AutoDerivative<double> t = 
+    gsl_root_with_derivative(eq, 0, time_table_->max_time() - 
+			     time_table_->min_time(), time_tolerance_);
+  ImageCoordinateWithDerivative ic = eq.image_coordinate_with_derivative(t);
+  Array<double, 2> jac(2, t.number_variable());
+  if(!ic.line.is_constant())
+    jac(0, Range::all()) = ic.line.gradient();
+  else
+    jac(0, Range::all()) = 0;
+  if(!ic.sample.is_constant())
+    jac(1, Range::all()) = ic.sample.gradient();
+  else
+    jac(1, Range::all()) = 0;
+  return jac;
 }
 
 // See base class for description

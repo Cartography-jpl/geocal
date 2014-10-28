@@ -509,6 +509,10 @@ public:
 			      const CartesianInertialLookVector& Ci) const
   { return orbit_data(T)->sc_look_vector(Ci); }
 
+  virtual ScLookVectorWithDerivative sc_look_vector(Time T, 
+	      const CartesianInertialLookVectorWithDerivative& Ci) const
+  { return orbit_data(T)->sc_look_vector(Ci); }
+
 //-----------------------------------------------------------------------
 /// Convert from CartesianFixedLookVector to ScLookVector for the
 /// given time. We should have min_time() <= T < max_time(). 
@@ -518,6 +522,9 @@ public:
 			      const CartesianFixedLookVector& Cf) const
   { return orbit_data(T)->sc_look_vector(Cf); }
 
+  virtual ScLookVectorWithDerivative sc_look_vector(Time T, 
+	      const CartesianFixedLookVectorWithDerivative& Cf) const
+  { return orbit_data(T)->sc_look_vector(Cf); }
 //-----------------------------------------------------------------------
 /// Return position at given time. We should have min_time() <= T <
 /// max_time(). 
@@ -526,6 +533,10 @@ public:
   virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const
   { return orbit_data(T)->position_ci(); }
 
+  virtual boost::array<AutoDerivative<double>, 3> 
+  position_ci_with_derivative(Time T) const
+  { return orbit_data(T)->position_ci_with_derivative(); }
+
 //-----------------------------------------------------------------------
 /// Return position at given time. We should have min_time() <= T <
 /// max_time(). 
@@ -533,6 +544,10 @@ public:
 
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const
   { return orbit_data(T)->position_cf(); }
+
+  virtual boost::array<AutoDerivative<double>, 3> 
+  position_cf_with_derivative(Time T) const
+  { return orbit_data(T)->position_cf_with_derivative(); }
 
 //-----------------------------------------------------------------------
 /// Return velocity at given time. This is in m/s, in same coordinate

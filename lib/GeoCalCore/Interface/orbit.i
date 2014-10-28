@@ -253,8 +253,12 @@ public:
                           double Height_reference_surface = 0.0) const;
   virtual ScLookVector sc_look_vector(Time T, 
 			      const CartesianInertialLookVector& Ci) const;
+  virtual ScLookVectorWithDerivative sc_look_vector(Time T, 
+	    const CartesianInertialLookVectorWithDerivative& Ci) const;
   virtual ScLookVector sc_look_vector(Time T, 
 			      const CartesianFixedLookVector& Cf) const;
+  virtual ScLookVectorWithDerivative sc_look_vector(Time T, 
+	    const CartesianFixedLookVectorWithDerivative& Cf) const;
   virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const;
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
   %python_attribute(min_time, Time)

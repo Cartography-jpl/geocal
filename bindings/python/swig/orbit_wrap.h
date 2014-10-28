@@ -36,7 +36,9 @@ public:
     virtual GeoCal::CartesianInertialLookVector ci_look_vector(GeoCal::Time T, GeoCal::ScLookVector const &Sl) const;
     virtual GeoCal::CartesianFixedLookVector cf_look_vector(GeoCal::Time T, GeoCal::ScLookVector const &Sl) const;
     virtual GeoCal::ScLookVector sc_look_vector(GeoCal::Time T, GeoCal::CartesianInertialLookVector const &Ci) const;
+    virtual GeoCal::ScLookVectorWithDerivative sc_look_vector(GeoCal::Time T, GeoCal::CartesianInertialLookVectorWithDerivative const &Ci) const;
     virtual GeoCal::ScLookVector sc_look_vector(GeoCal::Time T, GeoCal::CartesianFixedLookVector const &Cf) const;
+    virtual GeoCal::ScLookVectorWithDerivative sc_look_vector(GeoCal::Time T, GeoCal::CartesianFixedLookVectorWithDerivative const &Cf) const;
     virtual boost::shared_ptr< GeoCal::CartesianInertial > position_ci(GeoCal::Time T) const;
     virtual boost::shared_ptr< GeoCal::CartesianFixed > position_cf(GeoCal::Time T) const;
     virtual boost::shared_ptr< GeoCal::OrbitData > orbit_data(GeoCal::Time T) const;
@@ -75,7 +77,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[20];
+    mutable swig::SwigVar_PyObject vtable[22];
 #endif
 
 };

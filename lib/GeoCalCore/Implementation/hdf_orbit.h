@@ -36,6 +36,8 @@ public:
   virtual ~HdfOrbit() {}
 
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> 
+  orbit_data(const TimeWithDerivative& T) const;
 
 //-----------------------------------------------------------------------
 /// Print to stream
@@ -173,6 +175,59 @@ inline boost::shared_ptr<OrbitData> HdfOrbit<PositionType, TimeCreatorType>::orb
   }
   boost::shared_ptr<PositionType> pv(new PositionType(pos[0], pos[1], pos[2]));
   return boost::shared_ptr<OrbitData>(new QuaternionOrbitData(T, pv, vel, att));
+}
+
+template<class PositionType, class TimeCreatorType>
+inline boost::shared_ptr<OrbitData> HdfOrbit<PositionType, TimeCreatorType>::orbit_data(const TimeWithDerivative& T) const
+{
+  range_check(T.value(), min_time(), max_time());
+  time_attmap::const_iterator i = att_map.lower_bound(T.value());
+  boost::math::quaternion<AutoDerivative<double> > att;
+  if(i->first - T.value() == 0.0)
+    att = boost::math::quaternion<AutoDerivative<double> >
+      (i->second.R_component_1(), i->second.R_component_2(),
+       i->second.R_component_3(), i->second.R_component_4());
+  else {
+    boost::math::quaternion<AutoDerivative<double> > 
+      a2(i->second.R_component_1(), i->second.R_component_2(),
+	 i->second.R_component_3(), i->second.R_component_4());
+    Time t2 = i->first;
+    --i;
+    boost::math::quaternion<AutoDerivative<double> > 
+      a1(i->second.R_component_1(), i->second.R_component_2(),
+	 i->second.R_component_3(), i->second.R_component_4());
+    Time t1 = i->first;
+    att = interpolate(a1, a2, T - t1, t2 - t1);
+  }
+  boost::array<AutoDerivative<double>, 3> pos;
+  boost::array<AutoDerivative<double>, 3> vel;
+  typename time_posmap::const_iterator i2 = pos_map.lower_bound(T.value());
+  if(i2->first - T.value() == 0.0) {
+    for(int j = 0; j < 3; ++j) {
+      pos[j] = i2->second.first.position[j];
+      vel[j] = i2->second.second[j];
+    }
+  } else {
+    boost::array<AutoDerivative<double>, 3> p1, p2;
+    boost::array<AutoDerivative<double>, 3> v1, v2;
+    for(int j = 0; j < 3; ++j) {
+      p2[j] = i2->second.first.position[j];
+      v2[j] = i2->second.second[j];
+    }
+    Time t2 = i2->first;
+    --i2;
+    for(int j = 0; j < 3; ++j) {
+      p1[j] = i2->second.first.position[j];
+      v1[j] = i2->second.second[j];
+    }
+    Time t1 = i2->first;
+    interpolate(p1, v1, p2, v2, T - t1, t2 - t1, pos, vel);
+  }
+  boost::shared_ptr<PositionType> pv(new PositionType(pos[0].value(), 
+						      pos[1].value(), 
+						      pos[2].value()));
+  return boost::shared_ptr<OrbitData>(new QuaternionOrbitData(T, pv, pos, vel, 
+							      att));
 }
 
 }

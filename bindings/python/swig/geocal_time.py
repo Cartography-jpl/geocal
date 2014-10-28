@@ -448,6 +448,17 @@ class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
     def value(self):
         return self._v_value()
 
+    def _v_gradient(self):
+        """
+        blitz::Array<double, 1> GeoCal::TimeWithDerivative::gradient() const
+        Return gradient. 
+        """
+        return _geocal_time.TimeWithDerivative__v_gradient(self)
+
+    @property
+    def gradient(self):
+        return self._v_gradient()
+
     def __reduce__(self):
       return _new_time_with_derivative, (self.pgs,)
 
@@ -463,6 +474,7 @@ TimeWithDerivative._v_pgs = new_instancemethod(_geocal_time.TimeWithDerivative__
 TimeWithDerivative._v_gps = new_instancemethod(_geocal_time.TimeWithDerivative__v_gps,None,TimeWithDerivative)
 TimeWithDerivative._v_j2000 = new_instancemethod(_geocal_time.TimeWithDerivative__v_j2000,None,TimeWithDerivative)
 TimeWithDerivative._v_value = new_instancemethod(_geocal_time.TimeWithDerivative__v_value,None,TimeWithDerivative)
+TimeWithDerivative._v_gradient = new_instancemethod(_geocal_time.TimeWithDerivative__v_gradient,None,TimeWithDerivative)
 TimeWithDerivative.__str__ = new_instancemethod(_geocal_time.TimeWithDerivative___str__,None,TimeWithDerivative)
 TimeWithDerivative.__cmp__ = new_instancemethod(_geocal_time.TimeWithDerivative___cmp__,None,TimeWithDerivative)
 TimeWithDerivative.__add__ = new_instancemethod(_geocal_time.TimeWithDerivative___add__,None,TimeWithDerivative)

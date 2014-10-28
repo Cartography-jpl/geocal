@@ -35,8 +35,6 @@ public:
   %python_attribute(is_constant, bool)
   bool operator<(const AutoDerivative<T>& V) const;
   bool operator<(const T& V) const;
-  bool operator>(const AutoDerivative<T>& V) const;
-  bool operator>(const T& V) const;
   bool operator==(const AutoDerivative<T>& V) const;
   bool operator==(const T& V) const;
   AutoDerivative<T> operator+=(const AutoDerivative<T>& V);

@@ -99,6 +99,7 @@ public:
   %python_attribute(gps, AutoDerivative<double>)
   %python_attribute(j2000, AutoDerivative<double>)
   %python_attribute(value, Time)
+  %python_attribute(gradient, blitz::Array<double, 1>)
   std::string print_to_string() const;
   
 #ifdef SWIGPYTHON

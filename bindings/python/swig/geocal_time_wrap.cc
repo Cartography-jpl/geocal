@@ -7600,6 +7600,63 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TimeWithDerivative__v_gradient(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TimeWithDerivative *arg1 = (GeoCal::TimeWithDerivative *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< double,1 > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeWithDerivative__v_gradient" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::TimeWithDerivative const *)arg1)->gradient();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
+    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+      SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      SWIG_POINTER_NEW | 0 );
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TimeWithDerivative___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::TimeWithDerivative *arg1 = (GeoCal::TimeWithDerivative *) 0 ;
@@ -10389,6 +10446,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TimeWithDerivative__v_value", (PyCFunction)_wrap_TimeWithDerivative__v_value, METH_O, (char *)"\n"
 		"Time GeoCal::TimeWithDerivative::value() const\n"
 		"Strip off gradient to just give a time. \n"
+		""},
+	 { (char *)"TimeWithDerivative__v_gradient", (PyCFunction)_wrap_TimeWithDerivative__v_gradient, METH_O, (char *)"\n"
+		"blitz::Array<double, 1> GeoCal::TimeWithDerivative::gradient() const\n"
+		"Return gradient. \n"
 		""},
 	 { (char *)"TimeWithDerivative___str__", (PyCFunction)_wrap_TimeWithDerivative___str__, METH_O, NULL},
 	 { (char *)"TimeWithDerivative___cmp__", _wrap_TimeWithDerivative___cmp__, METH_VARARGS, NULL},

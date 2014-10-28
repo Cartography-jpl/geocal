@@ -65,14 +65,13 @@ BOOST_AUTO_TEST_CASE(kepler_orbit_data_derivative_cf)
   jac_fd(0,0) = (p1->position[0] - p0->position[0]) / eps;
   jac_fd(1,0) = (p1->position[1] - p0->position[1]) / eps;
   jac_fd(2,0) = (p1->position[2] - p0->position[2]) / eps;
-  std::cerr << jac_fd << "\n";
   Array<double, 2> jac_calc(3, 1);
   boost::array<AutoDerivative<double>, 3> p2 = 
     orb.position_cf_with_derivative(t2);
   jac_calc(0,Range::all()) = p2[0].gradient();
   jac_calc(1,Range::all()) = p2[1].gradient();
   jac_calc(2,Range::all()) = p2[2].gradient();
-  std::cerr << jac_calc << "\n";
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
 }
 
 class OrbitTest : public KeplerOrbit {

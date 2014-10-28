@@ -162,7 +162,7 @@ void MeasuredTimeTable::time(const ImageCoordinate& Ic, Time& T,
   int i = (int) floor(Ic.line);
   int j = i - min_line_;
   // Allow extrapolation by 1 line.
-  while(j + 1 >= tlist.size()) {
+  while(j + 1 >= (int) tlist.size()) {
     j = j - 1;
     i = i - 1;
   }
@@ -185,7 +185,7 @@ void MeasuredTimeTable::time_with_derivative
   int i = (int) floor(Ic.line.value());
   int j = i - min_line_;
   // Allow extrapolation by 1 line.
-  while(j + 1 >= tlist.size()) {
+  while(j + 1 >= (int) tlist.size()) {
     j = j - 1;
     i = i - 1;
   }

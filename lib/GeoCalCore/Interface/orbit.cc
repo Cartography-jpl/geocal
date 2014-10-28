@@ -596,15 +596,36 @@ void QuaternionOrbitData::initialize
   pos_ci = Pos_ci;
   pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
     (0, Pos_ci_with_der[0], Pos_ci_with_der[1], Pos_ci_with_der[2]);
+
   ci_to_cf_ = pos_ci->ci_to_cf_quat(Tm.value());
+  double eps = 1e-3;
+  boost::math::quaternion<double> ci_to_cf1 = 
+    pos_ci->ci_to_cf_quat(time() + eps);
+  Array<double,1> g(time_with_derivative().gradient());
+  Array<double, 1> 
+    g1((ci_to_cf1.R_component_1() - ci_to_cf_.R_component_1()) / eps * g);
+  Array<double, 1> 
+    g2((ci_to_cf1.R_component_2() - ci_to_cf_.R_component_2()) / eps * g);
+  Array<double, 1> 
+    g3((ci_to_cf1.R_component_3() - ci_to_cf_.R_component_3()) / eps * g);
+  Array<double, 1> 
+    g4((ci_to_cf1.R_component_4() - ci_to_cf_.R_component_4()) / eps * g);
+  AutoDerivative<double> v1(ci_to_cf_.R_component_1(), g1);
+  AutoDerivative<double> v2(ci_to_cf_.R_component_2(), g2);
+  AutoDerivative<double> v3(ci_to_cf_.R_component_3(), g3);
+  AutoDerivative<double> v4(ci_to_cf_.R_component_4(), g4);
+  ci_to_cf_der_ = 
+    boost::math::quaternion<AutoDerivative<double> >(v1,v2,v3,v4);
   have_ci_to_cf = true;
+
   boost::math::quaternion<AutoDerivative<double> >
     vel_ci(0, vel_inertial[0], vel_inertial[1], vel_inertial[2]);
   vel_cf_with_der = ci_to_cf() * vel_ci * conj(ci_to_cf());
   vel_cf = value(vel_cf_with_der);
   pos = pos_ci->convert_to_cf(Tm.value());
-  pos_with_der = ci_to_cf() * pos_ci_with_der * conj(ci_to_cf());
-  sc_to_cf_with_der = ci_to_cf() * sc_to_ci_q;
+  pos_with_der = ci_to_cf_with_derivative() * pos_ci_with_der * 
+    conj(ci_to_cf_with_derivative());
+  sc_to_cf_with_der = ci_to_cf_with_derivative() * sc_to_ci_q;
   sc_to_cf_ = value(sc_to_cf_with_der);
 }
 
@@ -947,6 +968,37 @@ boost::array<AutoDerivative<double>, 3> QuaternionOrbitData::velocity_cf_with_de
   return res;
 }
 
+
+//-----------------------------------------------------------------------
+/// Calculate ci_to_cf() on demand.
+//-----------------------------------------------------------------------
+
+void QuaternionOrbitData::fill_in_ci_to_cf() const 
+{
+    if(!have_ci_to_cf) {
+      ci_to_cf_ = pos->ci_to_cf_quat(time());
+      double eps = 1e-3;
+      boost::math::quaternion<double> ci_to_cf1 = 
+	pos->ci_to_cf_quat(time() + eps);
+      Array<double,1> g(time_with_derivative().gradient());
+      Array<double, 1> 
+	g1((ci_to_cf1.R_component_1() - ci_to_cf_.R_component_1()) / eps * g);
+      Array<double, 1> 
+	g2((ci_to_cf1.R_component_2() - ci_to_cf_.R_component_2()) / eps * g);
+      Array<double, 1> 
+	g3((ci_to_cf1.R_component_3() - ci_to_cf_.R_component_3()) / eps * g);
+      Array<double, 1> 
+	g4((ci_to_cf1.R_component_4() - ci_to_cf_.R_component_4()) / eps * g);
+      AutoDerivative<double> v1(ci_to_cf_.R_component_1(), g1);
+      AutoDerivative<double> v2(ci_to_cf_.R_component_2(), g2);
+      AutoDerivative<double> v3(ci_to_cf_.R_component_3(), g3);
+      AutoDerivative<double> v4(ci_to_cf_.R_component_4(), g4);
+      ci_to_cf_der_ = 
+	boost::math::quaternion<AutoDerivative<double> >(v1,v2,v3,v4);
+      pos_ci = pos->convert_to_ci(time());
+      pos_ci_with_der = conj(ci_to_cf_der_) * pos_with_der * ci_to_cf_der_;
+    }
+}
 
 //-----------------------------------------------------------------------
 /// \ingroup Miscellaneous

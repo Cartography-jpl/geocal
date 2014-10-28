@@ -300,7 +300,8 @@ public:
   virtual void print(std::ostream& Os) const;
   friend boost::shared_ptr<QuaternionOrbitData>
   GeoCal::interpolate(const QuaternionOrbitData& t1, 
-		const QuaternionOrbitData& t2, Time tm);
+		      const QuaternionOrbitData& t2, 
+		      const TimeWithDerivative& tm);
 
 //-----------------------------------------------------------------------
 /// Return the quaternion used to go from spacecraft to cartesian inertial
@@ -832,7 +833,8 @@ private:
 
   boost::shared_ptr<QuaternionOrbitData>
   interpolate(const QuaternionOrbitData& t1, 
-		const QuaternionOrbitData& t2, Time tm);
+	      const QuaternionOrbitData& t2, 
+	      const TimeWithDerivative& tm);
 }
 #endif
 

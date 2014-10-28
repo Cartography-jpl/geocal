@@ -1007,12 +1007,13 @@ void QuaternionOrbitData::fill_in_ci_to_cf() const
 
 boost::shared_ptr<QuaternionOrbitData>
  GeoCal::interpolate(const QuaternionOrbitData& t1, 
-		     const QuaternionOrbitData& t2, Time tm)
+		     const QuaternionOrbitData& t2,
+		     const TimeWithDerivative& tm)
 {
-  if(tm < t1.time() || tm > t2.time())
+  if(tm.value() < t1.time() || tm.value() > t2.time())
     throw Exception("tm needs to be between t1 and t2");
   double tspace = t2.time() - t1.time();
-  AutoDerivative<double> toffset = tm - t1.time();
+  AutoDerivative<double> toffset = tm - t1.time_with_derivative();
   boost::math::quaternion<AutoDerivative<double> > sc_to_cf_ = 
     ::interpolate(t1.sc_to_cf_with_derivative(), 
 		  t2.sc_to_cf_with_derivative(), toffset, tspace);
@@ -1040,3 +1041,4 @@ boost::shared_ptr<QuaternionOrbitData>
     (new QuaternionOrbitData(tm, t1.pos->create(p), pos_cf, 
 			     vel_cf, sc_to_cf_));
 }
+

@@ -7,6 +7,7 @@
 #include <cmath>
 
 using namespace GeoCal;
+using namespace blitz;
 
 //-----------------------------------------------------------------------
 /// Return the footprint on the ground for the given camera and dem. 
@@ -223,41 +224,49 @@ void KeplerOrbit::calc_r()
 /// for details.
 //-----------------------------------------------------------------------
 
-class KeplerEquation: public DFunctor {
+class KeplerEquation: public DFunctorWithDerivative {
 public:
-  KeplerEquation(double wt, double e) 
-    : wt_(fmod(wt, 2 * Constant::pi)), e_(e) 
+  KeplerEquation(const AutoDerivative<double>& wt, 
+		 const AutoDerivative<double>& e) 
+    : e_(e) 
   {
+    wt_ = AutoDerivative<double>(fmod(wt.value(), 2 * Constant::pi), 
+				 wt.gradient());
     if(wt_ < 0)
       wt_ += 2 * Constant::pi;
   }
   virtual ~KeplerEquation() {}
   virtual double operator()(const double& psi) const
-  { return wt_ - (psi - e_ * sin(psi));}
+  { return wt_.value() - (psi - e_.value() * sin(psi));}
+  virtual double df(double psi) const
+  { return -(1.0 - e_.value() * cos(psi));}
+  virtual AutoDerivative<double> f_with_derivative(double psi) const
+  { return wt_ - (psi - e_ * sin(psi)); }
 private:
-  double wt_;
-  double e_;
+  AutoDerivative<double> wt_;
+  AutoDerivative<double> e_;
 };
 
 //-----------------------------------------------------------------------
 /// Calculate OrbitData for KeplerOrbit.
 //-----------------------------------------------------------------------
 
-inline double dotb(const blitz::Array<double, 1>& x, 
-		  const blitz::Array<double, 1>& y)
+template<class T> inline T dotb(const blitz::Array<T, 1>& x, 
+				const blitz::Array<T, 1>& y)
 {
   return sum(x * y);
 }
 
-inline double normb(const blitz::Array<double, 1>& x)
+template<class T> inline T normb(const blitz::Array<T, 1>& x)
 {
-  return sqrt(dotb(x, x));
+  return std::sqrt(dotb(x, x));
 }
 
-inline blitz::Array<double, 1> cross2(const blitz::Array<double, 1>& x,
-				     const blitz::Array<double, 1>& y)
+template<class T> inline blitz::Array<T, 1> cross2
+(const blitz::Array<T, 1>& x,
+ const blitz::Array<T, 1>& y)
 {
-  blitz::Array<double, 1> res(3);
+  blitz::Array<T, 1> res(3);
   res(0) = x(1) * y(2) - x(2) * y(1);
   res(1) = x(2) * y(0) - x(0) * y(2);
   res(2) = x(0) * y(1) - x(1) * y(0);
@@ -266,7 +275,6 @@ inline blitz::Array<double, 1> cross2(const blitz::Array<double, 1>& x,
 
 boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data(Time T) const
 {
-  using blitz::Array;
   range_check(T, min_time(), max_time());
 
 //-----------------------------------------------------------------------
@@ -334,7 +342,70 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data(Time T) const
 boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data
 (const TimeWithDerivative& T) const
 {
-  throw Exception("Not implemented yet");
+  range_check(T.value(), min_time(), max_time());
+
+//-----------------------------------------------------------------------
+// Calculate r, theta, and their derivatives using Kepler's equations.
+//-----------------------------------------------------------------------
+
+  AutoDerivative<double> eccentric_anomaly = gsl_root_with_derivative
+    (KeplerEquation(freq_rev_ * (T - epoch_) + ma_, e_), 0, 2 * Constant::pi);
+
+  AutoDerivative<double> spsi = std::sin(eccentric_anomaly);
+  AutoDerivative<double> cpsi = std::cos(eccentric_anomaly);
+
+// This is in the range -pi to pi
+  AutoDerivative<double> theta = 
+    2 * std::atan(sqrt((1 + e_) / (1 - e_)) * std::tan(eccentric_anomaly / 2));
+  AutoDerivative<double> r = a_ * (1 - e_ * cpsi);
+  AutoDerivative<double> psidot = freq_rev_ / (1 - e_ * cpsi);
+  AutoDerivative<double> rdot = a_ * e_ * spsi * psidot;
+  AutoDerivative<double> thetadot = spsi * (1 - e_ * e_) / 
+    (std::sin(theta) * (1 - e_ * cpsi) * (1 - e_ * cpsi)) * psidot;
+
+//-----------------------------------------------------------------------
+// Get Cartesian coordinates of point & velocity
+//-----------------------------------------------------------------------
+
+  blitz::Array<AutoDerivative<double>, 1> pos(3), vel(3);
+  AutoDerivative<double> ctheta = std::cos(theta + ap_);
+  AutoDerivative<double> stheta = std::sin(theta + ap_);
+  pos(0) = r * ctheta;
+  pos(1) = r * stheta;
+  pos(2) = 0;
+  vel(0) = rdot * ctheta - r * stheta * thetadot;
+  vel(1) = rdot * stheta + r * ctheta * thetadot;
+  vel(2) = rdot * stheta + r * ctheta * thetadot;
+
+//-----------------------------------------------------------------------
+// Rotate to proper inclination and longitude of ascending node.
+//-----------------------------------------------------------------------
+  
+  blitz::firstIndex i1;
+  blitz::secondIndex i2;
+  Array<AutoDerivative<double>, 1> p(3), v(3);
+  p = sum(r_(i1, i2) * pos(i2), i2);
+  v = sum(r_(i1, i2) * vel(i2), i2);
+
+//-----------------------------------------------------------------------
+// Create matrix.
+//-----------------------------------------------------------------------
+
+  Array<AutoDerivative<double>, 1> x(3), y(3), z(3);
+  z = -p / normb(p);
+  x = v - z * dotb(v, z);
+  x /= normb(x);
+  y = cross2(z, x);
+  AutoDerivative<double> sc_to_ci[3][3] = {{x(0), y(0), z(0)},
+					   {x(1), y(1), z(1)},
+					   {x(2), y(2), z(2)}};
+  boost::shared_ptr<CartesianInertial> 
+    pci(new Eci(p(0).value(), p(1).value(), p(2).value())) ;
+  boost::array<AutoDerivative<double>, 3> pci_der = {{p(0), p(1), p(2)}};
+  boost::array<AutoDerivative<double>, 3> v2 = {{vel(0), vel(1), vel(2)}};
+  return boost::shared_ptr<OrbitData>(new QuaternionOrbitData(T, pci, pci_der,
+		      v2, 
+   		      matrix_to_quaternion(sc_to_ci)));
 }
 
 //-----------------------------------------------------------------------

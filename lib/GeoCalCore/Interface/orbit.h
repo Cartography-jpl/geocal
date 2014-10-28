@@ -545,7 +545,7 @@ public:
   { return orbit_data(T)->position_ci(); }
 
   virtual boost::array<AutoDerivative<double>, 3> 
-  position_ci_with_derivative(Time T) const
+  position_ci_with_derivative(const TimeWithDerivative& T) const
   { return orbit_data(T)->position_ci_with_derivative(); }
 
 //-----------------------------------------------------------------------
@@ -557,7 +557,7 @@ public:
   { return orbit_data(T)->position_cf(); }
 
   virtual boost::array<AutoDerivative<double>, 3> 
-  position_cf_with_derivative(Time T) const
+  position_cf_with_derivative(const TimeWithDerivative& T) const
   { return orbit_data(T)->position_cf_with_derivative(); }
 
 //-----------------------------------------------------------------------

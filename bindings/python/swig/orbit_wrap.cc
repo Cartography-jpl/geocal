@@ -21004,19 +21004,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Orbit__v_parameter_name_subset", (PyCFunction)_wrap_Orbit__v_parameter_name_subset, METH_O, NULL},
 	 { (char *)"Orbit__v_parameter_mask", (PyCFunction)_wrap_Orbit__v_parameter_mask, METH_O, NULL},
 	 { (char *)"Orbit_notify_update_do", _wrap_Orbit_notify_update_do, METH_VARARGS, NULL},
-	 { (char *)"Orbit_interpolate", _wrap_Orbit_interpolate, METH_VARARGS, (char *)"\n"
-		"boost::math::quaternion<T> interpolate(const boost::math::quaternion< T > &Q1, const\n"
-		"boost::math::quaternion< T > &Q2, const T &toffset, double tspace)\n"
-		"This is a utility function for use by derived classes.\n"
-		"\n"
-		"A common way of getting orbit data is to have discrete measurements of\n"
-		"the quaternion describing the rotation of the spacecraft. For a time t\n"
-		"between t1 and t2, we have Q1 as the quaternion at time t1, Q2 the\n"
-		"quaternion at time t2, tspace = t2 - t1, toffset = t - t1. This\n"
-		"function then returns Qres. We calculate this by determining the axis\n"
-		"and angle rotation that takes use from Q1 to Q2, and then do a linear\n"
-		"interpolation of that angle for the given time. \n"
-		""},
+	 { (char *)"Orbit_interpolate", _wrap_Orbit_interpolate, METH_VARARGS, NULL},
 	 { (char *)"disown_Orbit", (PyCFunction)_wrap_disown_Orbit, METH_O, NULL},
 	 { (char *)"Orbit_swigregister", Orbit_swigregister, METH_VARARGS, NULL},
 	 { (char *)"Orbit_swiginit", Orbit_swiginit, METH_VARARGS, NULL},

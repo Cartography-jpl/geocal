@@ -337,8 +337,6 @@ public:
 
   bool operator<(const AutoDerivative<T>& V) const {return val < V.val;}
   bool operator<(const T& V) const {return val < V;}
-  bool operator>(const AutoDerivative<T>& V) const {return val > V.val;}
-  bool operator>(const T& V) const {return val > V;}
   bool operator==(const AutoDerivative<T>& V) const {return val == V.val;}
   bool operator==(const T& V) const {return val == V;}
   AutoDerivative<T>& operator+=(const AutoDerivative<T>& V)

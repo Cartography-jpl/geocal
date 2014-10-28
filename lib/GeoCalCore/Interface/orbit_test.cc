@@ -3,6 +3,7 @@
 #include "geodetic.h"
 
 using namespace GeoCal;
+using namespace blitz;
 
 BOOST_FIXTURE_TEST_SUITE(orbit, GlobalFixture)
 
@@ -27,6 +28,51 @@ BOOST_AUTO_TEST_CASE(kepler_orbit_data)
   } catch(const Exception& e) {
     BOOST_CHECK(true);
   }
+}
+
+BOOST_AUTO_TEST_CASE(kepler_orbit_data_derivative_ci)
+{
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  KeplerOrbit orb(t, t + 100.0);
+  TimeWithDerivative t2 = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
+  double eps = 1e-3;
+  boost::shared_ptr<CartesianInertial> p0 = orb.position_ci(t2.value());
+  boost::shared_ptr<CartesianInertial> p1 = orb.position_ci(t2.value() + eps);
+  Array<double, 2> jac_fd(3,1);
+  jac_fd(0,0) = (p1->position[0] - p0->position[0]) / eps;
+  jac_fd(1,0) = (p1->position[1] - p0->position[1]) / eps;
+  jac_fd(2,0) = (p1->position[2] - p0->position[2]) / eps;
+  Array<double, 2> jac_calc(3, 1);
+  boost::array<AutoDerivative<double>, 3> p2 = 
+    orb.position_ci_with_derivative(t2);
+  jac_calc(0,Range::all()) = p2[0].gradient();
+  jac_calc(1,Range::all()) = p2[1].gradient();
+  jac_calc(2,Range::all()) = p2[2].gradient();
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
+}
+
+BOOST_AUTO_TEST_CASE(kepler_orbit_data_derivative_cf)
+{
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  KeplerOrbit orb(t, t + 100.0);
+  TimeWithDerivative t2 = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
+  double eps = 1e-3;
+  boost::shared_ptr<CartesianFixed> p0 = orb.position_cf(t2.value());
+  boost::shared_ptr<CartesianFixed> p1 = orb.position_cf(t2.value() + eps);
+  Array<double, 2> jac_fd(3,1);
+  jac_fd(0,0) = (p1->position[0] - p0->position[0]) / eps;
+  jac_fd(1,0) = (p1->position[1] - p0->position[1]) / eps;
+  jac_fd(2,0) = (p1->position[2] - p0->position[2]) / eps;
+  std::cerr << jac_fd << "\n";
+  Array<double, 2> jac_calc(3, 1);
+  boost::array<AutoDerivative<double>, 3> p2 = 
+    orb.position_cf_with_derivative(t2);
+  jac_calc(0,Range::all()) = p2[0].gradient();
+  jac_calc(1,Range::all()) = p2[1].gradient();
+  jac_calc(2,Range::all()) = p2[2].gradient();
+  std::cerr << jac_calc << "\n";
 }
 
 class OrbitTest : public KeplerOrbit {

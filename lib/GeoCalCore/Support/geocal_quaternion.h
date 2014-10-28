@@ -312,26 +312,26 @@ matrix_to_quaternion(const T m[3][3])
 {
   T t = m[0][0] + m[1][1] + m[2][2];
   if(t > 1e-8) {
-    T s = sqrt(t + 1) * 2;
+    T s = std::sqrt(t + 1) * 2;
     return boost::math::quaternion<T>(-s / 4.0,
 					   -(m[2][1] - m[1][2]) / s,
 					   -(m[0][2] - m[2][0]) / s,
 					   -(m[1][0] - m[0][1]) / s);
   }
   if(m[0][0] > m[1][1] && m[0][0] > m[2][2]) {
-    T s = sqrt(1.0 + m[0][0] - m[1][1] - m[2][2]) * 2;
+    T s = std::sqrt(1.0 + m[0][0] - m[1][1] - m[2][2]) * 2;
     return boost::math::quaternion<T>(-(m[2][1] - m[1][2]) / s,
 					   -s / 4.0,
 					   -(m[0][1] + m[1][0]) / s,
 					   -(m[0][2] + m[2][0]) / s);
   } else if(m[1][1] > m[2][2]) {
-    T s = sqrt(1.0 - m[0][0] + m[1][1] - m[2][2]) * 2;
+    T s = std::sqrt(1.0 - m[0][0] + m[1][1] - m[2][2]) * 2;
     return boost::math::quaternion<T>(-(m[0][2] - m[2][0]) / s,
 					   -(m[0][1] + m[1][0]) / s,
 					   -s / 4.0,
 					   -(m[1][2] + m[2][1]) / s);
   } else {
-    T s = sqrt(1.0 - m[0][0] - m[1][1] + m[2][2]) * 2;
+    T s = std::sqrt(1.0 - m[0][0] - m[1][1] + m[2][2]) * 2;
     return boost::math::quaternion<T>(-(m[1][0] - m[0][1]) / s,
 					   -(m[2][0] + m[0][2]) / s,
 					   -(m[1][2] + m[2][1]) / s,

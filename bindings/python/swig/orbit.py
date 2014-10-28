@@ -722,22 +722,6 @@ class Orbit(ObservableOrbit,geocal_swig.with_parameter.WithParameter):
     def parameter_mask(self):
         return self._v_parameter_mask()
 
-    def interpolate(self, *args):
-        """
-        boost::math::quaternion<T> interpolate(const boost::math::quaternion< T > &Q1, const
-        boost::math::quaternion< T > &Q2, const T &toffset, double tspace)
-        This is a utility function for use by derived classes.
-
-        A common way of getting orbit data is to have discrete measurements of
-        the quaternion describing the rotation of the spacecraft. For a time t
-        between t1 and t2, we have Q1 as the quaternion at time t1, Q2 the
-        quaternion at time t2, tspace = t2 - t1, toffset = t - t1. This
-        function then returns Qres. We calculate this by determining the axis
-        and angle rotation that takes use from Q1 to Q2, and then do a linear
-        interpolation of that angle for the given time. 
-        """
-        return _orbit.Orbit_interpolate(self, *args)
-
     def __disown__(self):
         self.this.disown()
         _orbit.disown_Orbit(self)

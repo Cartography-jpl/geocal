@@ -461,7 +461,7 @@ QuaternionOrbitData::QuaternionOrbitData
  const boost::math::quaternion<AutoDerivative<double> >& sc_to_cf_q
 )
 : tm(Tm), pos(pos_cf), 
-  pos_with_der(0, pos_cf_with_der[0], pos_cf_with_der[1], pos_cf_with_der[1]),
+  pos_with_der(0, pos_cf_with_der[0], pos_cf_with_der[1], pos_cf_with_der[2]),
   vel_cf(0, vel_fixed[0].value(), vel_fixed[1].value(), vel_fixed[2].value()), 
   vel_cf_with_der(0, vel_fixed[0], vel_fixed[1], vel_fixed[2]), 
   sc_to_cf_(value(sc_to_cf_q)), 

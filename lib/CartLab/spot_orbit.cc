@@ -143,6 +143,10 @@ boost::shared_ptr<OrbitData> SpotOrbit::orbit_data(Time T) const
 boost::shared_ptr<OrbitData> 
 SpotOrbit::orbit_data(const TimeWithDerivative& T) const
 {
+  // Not a high priority, since we aren't using the SpotOrbit for
+  // anything now. But if we end up needing this, we just need to
+  // extend the Lagrangian interpolation to support
+  // TimeWithDerivative, and pretty much cut and past the orbit above
   throw Exception("Not implemented yet");
 }
 

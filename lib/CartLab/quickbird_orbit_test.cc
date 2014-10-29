@@ -145,8 +145,6 @@ BOOST_AUTO_TEST_CASE(derivative_ci)
   jac_calc(0,Range::all()) = p2[0].gradient();
   jac_calc(1,Range::all()) = p2[1].gradient();
   jac_calc(2,Range::all()) = p2[2].gradient();
-  std::cerr << jac_fd << "\n"
-	    << jac_calc << "\n";
   BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
 }
 

@@ -39,6 +39,8 @@ public:
   virtual ~OrbitQuaternionList() {}
 
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> 
+  orbit_data(const TimeWithDerivative& T) const;
   virtual void print(std::ostream& Os) const;
 
   std::vector<boost::shared_ptr<QuaternionOrbitData> > 

@@ -8,7 +8,6 @@ BOOST_FIXTURE_TEST_SUITE(quickbird_time_table, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(basic_test)
 {
-#ifdef HAVE_TIME_TOOLKIT
   std::string fname = test_data_dir() + 
     "06JAN06033849-P1BS-005545519120_01_P001.IMD";
   QuickBirdTimeTable tt(fname);
@@ -25,7 +24,6 @@ BOOST_AUTO_TEST_CASE(basic_test)
   ImageCoordinate ic = tt.image_coordinate(tt.min_time() + (tt.max_time() - tt.min_time()) / 2, FrameCoordinate(0, 100));
   BOOST_CHECK_CLOSE(ic.line, 29224 / 2.0, 1e-4);
   BOOST_CHECK_CLOSE(ic.sample, 100.0, 1e-4);
-#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

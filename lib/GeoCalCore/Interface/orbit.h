@@ -601,10 +601,7 @@ public:
 
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;
   virtual boost::shared_ptr<OrbitData> 
-  orbit_data(const TimeWithDerivative& T) const 
-  { // Temp
-    throw Exception("Not Implemented yet");
-  }
+  orbit_data(const TimeWithDerivative& T) const  = 0;
   virtual void print(std::ostream& Os) const { Os << "Orbit"; }
 protected:
 //-----------------------------------------------------------------------

@@ -352,10 +352,8 @@ class QuickBirdOrbit(geocal_swig.orbit.Orbit):
     __repr__ = _swig_repr
     def orbit_data(self, *args):
         """
-        boost::shared_ptr< OrbitData > QuickBirdOrbit::orbit_data(Time T) const
-        Return OrbitData for the given time.
+        boost::shared_ptr< OrbitData > QuickBirdOrbit::orbit_data(const TimeWithDerivative &T) const
 
-        We should have min_time() <= T < max_time(). 
         """
         return _quickbird_orbit.QuickBirdOrbit_orbit_data(self, *args)
 

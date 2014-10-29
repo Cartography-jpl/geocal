@@ -21424,7 +21424,7 @@ static PyMethodDef SwigMethods[] = {
 		"Maximum time that we can return OrbitData for. \n"
 		""},
 	 { (char *)"Orbit_orbit_data", _wrap_Orbit_orbit_data, METH_VARARGS, (char *)"\n"
-		"virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const\n"
+		"virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const =0\n"
 		"\n"
 		""},
 	 { (char *)"Orbit___str__", (PyCFunction)_wrap_Orbit___str__, METH_O, NULL},

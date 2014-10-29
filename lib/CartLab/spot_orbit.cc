@@ -140,6 +140,12 @@ boost::shared_ptr<OrbitData> SpotOrbit::orbit_data(Time T) const
 			     v, sc_to_cf));
 }
 
+boost::shared_ptr<OrbitData> 
+SpotOrbit::orbit_data(const TimeWithDerivative& T) const
+{
+  throw Exception("Not implemented yet");
+}
+
 //-----------------------------------------------------------------------
 /// Print to a stream.
 //-----------------------------------------------------------------------

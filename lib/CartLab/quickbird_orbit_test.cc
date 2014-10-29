@@ -6,12 +6,24 @@
 #include <iostream>
 #include <cmath>
 using namespace GeoCal;
+using namespace blitz;
 
-BOOST_FIXTURE_TEST_SUITE(quickbird_orbit, GlobalFixture)
+class QuickbirdOrbitFixture : public GlobalFixture {
+public:
+  QuickbirdOrbitFixture()
+  {
+    std::string fname = test_data_dir() + 
+      "06JAN06033849-P1BS-005545519120_01_P001.EPH";
+    orb.reset(new QuickBirdOrbit(fname));
+    t = Time::parse_time("2006-01-06T03:38:49.805725Z") + 2.0;
+  }
+  boost::shared_ptr<Orbit> orb;
+  Time t;
+};
+BOOST_FIXTURE_TEST_SUITE(quickbird_orbit, QuickbirdOrbitFixture)
 
 BOOST_AUTO_TEST_CASE(ephemeris)
 {
-#ifdef HAVE_TIME_TOOLKIT
   std::string fname = test_data_dir() + 
     "06JAN06033849-P1BS-005545519120_01_P001.EPH";
   QuickBirdEphemeris e(fname);
@@ -50,12 +62,11 @@ BOOST_AUTO_TEST_CASE(ephemeris)
   BOOST_CHECK_CLOSE(e.ephemeris()[2521][9], 0.0025714731031000, 1e-4);
   BOOST_CHECK_CLOSE(e.ephemeris()[2521][10], -0.0025299288638000, 1e-4);
   BOOST_CHECK_CLOSE(e.ephemeris()[2521][11], 0.0052244878478000, 1e-4);
-#endif
+
 }
 
 BOOST_AUTO_TEST_CASE(attitude)
 {
-#ifdef HAVE_TIME_TOOLKIT
   std::string fname = test_data_dir() + 
     "06JAN06033849-P1BS-005545519120_01_P001.ATT";
   QuickBirdAttitude e(fname);
@@ -98,18 +109,13 @@ BOOST_AUTO_TEST_CASE(attitude)
   BOOST_CHECK_CLOSE(e.attitude()[2521][11], 0.0000000001060000, 1e-4);
   BOOST_CHECK_CLOSE(e.attitude()[2521][12], 0.0000000000233000, 1e-4);
   BOOST_CHECK_CLOSE(e.attitude()[2521][13], 0.0000000001340000, 1e-4);
-#endif
 }
 
 BOOST_AUTO_TEST_CASE(orbit)
 {
-#ifdef HAVE_TIME_TOOLKIT
-  std::string fname = test_data_dir() + 
-    "06JAN06033849-P1BS-005545519120_01_P001.EPH";
-  boost::shared_ptr<Orbit> orb(new QuickBirdOrbit(fname));
   BOOST_CHECK(fabs(orb->min_time() - 
 		   Time::parse_time("2006-01-06T03:38:26.790529Z")) < 1e-3);
-  boost::shared_ptr<PushBroomCamera> cam(new QuickBirdCamera);
+  boost::shared_ptr<Camera> cam(new QuickBirdCamera);
   Time tstart = Time::parse_time("2006-01-06T03:38:49.805725Z");
   Time tend = tstart + 4.235362;
   double tspace = 4.235362 / 29224;
@@ -120,7 +126,146 @@ BOOST_AUTO_TEST_CASE(orbit)
   bool success;
   ipi.image_coordinate(Geodetic(33.8007639, 111.9295833), ic, success);
   BOOST_CHECK(success);
-#endif  
+}
+
+BOOST_AUTO_TEST_CASE(derivative_ci)
+{
+  TimeWithDerivative t2 = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
+  double eps = 1e-3;
+  boost::shared_ptr<CartesianInertial> p0 = orb->position_ci(t2.value());
+  boost::shared_ptr<CartesianInertial> p1 = orb->position_ci(t2.value() + eps);
+  Array<double, 2> jac_fd(3,1);
+  jac_fd(0,0) = (p1->position[0] - p0->position[0]) / eps;
+  jac_fd(1,0) = (p1->position[1] - p0->position[1]) / eps;
+  jac_fd(2,0) = (p1->position[2] - p0->position[2]) / eps;
+  Array<double, 2> jac_calc(3, 1);
+  boost::array<AutoDerivative<double>, 3> p2 = 
+    orb->position_ci_with_derivative(t2);
+  jac_calc(0,Range::all()) = p2[0].gradient();
+  jac_calc(1,Range::all()) = p2[1].gradient();
+  jac_calc(2,Range::all()) = p2[2].gradient();
+  std::cerr << jac_fd << "\n"
+	    << jac_calc << "\n";
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
+}
+
+BOOST_AUTO_TEST_CASE(derivative_cf)
+{
+  TimeWithDerivative t2 = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
+  double eps = 1e-3;
+  boost::shared_ptr<CartesianFixed> p0 = orb->position_cf(t2.value());
+  boost::shared_ptr<CartesianFixed> p1 = orb->position_cf(t2.value() + eps);
+  Array<double, 2> jac_fd(3,1);
+  jac_fd(0,0) = (p1->position[0] - p0->position[0]) / eps;
+  jac_fd(1,0) = (p1->position[1] - p0->position[1]) / eps;
+  jac_fd(2,0) = (p1->position[2] - p0->position[2]) / eps;
+  Array<double, 2> jac_calc(3, 1);
+  boost::array<AutoDerivative<double>, 3> p2 = 
+    orb->position_cf_with_derivative(t2);
+  jac_calc(0,Range::all()) = p2[0].gradient();
+  jac_calc(1,Range::all()) = p2[1].gradient();
+  jac_calc(2,Range::all()) = p2[2].gradient();
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
+}
+
+BOOST_AUTO_TEST_CASE(derivative_ci_look)
+{
+  TimeWithDerivative t2 = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
+  double eps = 1e-3;
+  SimpleCamera cam;
+  ScLookVector sl = cam.sc_look_vector(FrameCoordinate(0,0), 0);
+  ScLookVectorWithDerivative sl_wd = 
+    cam.sc_look_vector_with_derivative(FrameCoordinateWithDerivative(0,0), 0);
+  CartesianInertialLookVector p0 = orb->ci_look_vector(t2.value(), sl);
+  CartesianInertialLookVector p1 = orb->ci_look_vector(t2.value() + eps, sl);
+  Array<double, 2> jac_fd(3,1);
+  jac_fd(0,0) = (p1.look_vector[0] - p0.look_vector[0]) / eps;
+  jac_fd(1,0) = (p1.look_vector[1] - p0.look_vector[1]) / eps;
+  jac_fd(2,0) = (p1.look_vector[2] - p0.look_vector[2]) / eps;
+  Array<double, 2> jac_calc(3, 1);
+  CartesianInertialLookVectorWithDerivative p2 = 
+    orb->ci_look_vector(t2, sl_wd);
+  jac_calc(0,Range::all()) = p2.look_vector[0].gradient();
+  jac_calc(1,Range::all()) = p2.look_vector[1].gradient();
+  jac_calc(2,Range::all()) = p2.look_vector[2].gradient();
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
+}
+
+BOOST_AUTO_TEST_CASE(derivative_cf_look)
+{
+  TimeWithDerivative t2 = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
+  double eps = 1e-3;
+  SimpleCamera cam;
+  ScLookVector sl = cam.sc_look_vector(FrameCoordinate(0,0), 0);
+  ScLookVectorWithDerivative sl_wd = 
+    cam.sc_look_vector_with_derivative(FrameCoordinateWithDerivative(0,0), 0);
+  CartesianFixedLookVector p0 = orb->cf_look_vector(t2.value(), sl);
+  CartesianFixedLookVector p1 = orb->cf_look_vector(t2.value() + eps, sl);
+  Array<double, 2> jac_fd(3,1);
+  jac_fd(0,0) = (p1.look_vector[0] - p0.look_vector[0]) / eps;
+  jac_fd(1,0) = (p1.look_vector[1] - p0.look_vector[1]) / eps;
+  jac_fd(2,0) = (p1.look_vector[2] - p0.look_vector[2]) / eps;
+  Array<double, 2> jac_calc(3, 1);
+  CartesianFixedLookVectorWithDerivative p2 = 
+    orb->cf_look_vector(t2, sl_wd);
+  jac_calc(0,Range::all()) = p2.look_vector[0].gradient();
+  jac_calc(1,Range::all()) = p2.look_vector[1].gradient();
+  jac_calc(2,Range::all()) = p2.look_vector[2].gradient();
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
+}
+
+BOOST_AUTO_TEST_CASE(derivative_sc_look1)
+{
+  TimeWithDerivative t2 = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
+  double eps = 1e-3;
+  SimpleCamera cam;
+  ScLookVector sl = cam.sc_look_vector(FrameCoordinate(0,0), 0);
+  CartesianInertialLookVector clv = orb->ci_look_vector(t2.value(), sl);
+  CartesianInertialLookVectorWithDerivative 
+    clv_wd(clv.look_vector[0],clv.look_vector[1],clv.look_vector[2]);
+  ScLookVector p0 = orb->sc_look_vector(t2.value(), clv);
+  ScLookVector p1 = orb->sc_look_vector(t2.value() + eps, clv);
+  Array<double, 2> jac_fd(3,1);
+  jac_fd(0,0) = (p1.look_vector[0] - p0.look_vector[0]) / eps;
+  jac_fd(1,0) = (p1.look_vector[1] - p0.look_vector[1]) / eps;
+  jac_fd(2,0) = (p1.look_vector[2] - p0.look_vector[2]) / eps;
+  Array<double, 2> jac_calc(3, 1);
+  ScLookVectorWithDerivative p2 = 
+    orb->sc_look_vector(t2, clv_wd);
+  jac_calc(0,Range::all()) = p2.look_vector[0].gradient();
+  jac_calc(1,Range::all()) = p2.look_vector[1].gradient();
+  jac_calc(2,Range::all()) = p2.look_vector[2].gradient();
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
+}
+
+BOOST_AUTO_TEST_CASE(derivative_sc_look2)
+{
+  TimeWithDerivative t2 = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
+  double eps = 1e-3;
+  SimpleCamera cam;
+  ScLookVector sl = cam.sc_look_vector(FrameCoordinate(0,0), 0);
+  CartesianFixedLookVector clv = orb->cf_look_vector(t2.value(), sl);
+  CartesianFixedLookVectorWithDerivative 
+    clv_wd(clv.look_vector[0],clv.look_vector[1],clv.look_vector[2]);
+  ScLookVector p0 = orb->sc_look_vector(t2.value(), clv);
+  ScLookVector p1 = orb->sc_look_vector(t2.value() + eps, clv);
+  Array<double, 2> jac_fd(3,1);
+  jac_fd(0,0) = (p1.look_vector[0] - p0.look_vector[0]) / eps;
+  jac_fd(1,0) = (p1.look_vector[1] - p0.look_vector[1]) / eps;
+  jac_fd(2,0) = (p1.look_vector[2] - p0.look_vector[2]) / eps;
+  Array<double, 2> jac_calc(3, 1);
+  ScLookVectorWithDerivative p2 = 
+    orb->sc_look_vector(t2, clv_wd);
+  jac_calc(0,Range::all()) = p2.look_vector[0].gradient();
+  jac_calc(1,Range::all()) = p2.look_vector[1].gradient();
+  jac_calc(2,Range::all()) = p2.look_vector[2].gradient();
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

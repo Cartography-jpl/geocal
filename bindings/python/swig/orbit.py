@@ -670,7 +670,7 @@ class Orbit(ObservableOrbit,geocal_swig.with_parameter.WithParameter):
 
     def orbit_data(self, *args):
         """
-        virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const
+        virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const =0
 
         """
         return _orbit.Orbit_orbit_data(self, *args)

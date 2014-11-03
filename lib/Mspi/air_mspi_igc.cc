@@ -32,9 +32,10 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
 {
   MspiConfigFile c(Master_config_file);
   // Get camera set up
-  boost::shared_ptr<MspiCamera> cam
-    (new MspiCamera(Base_directory + "/" + 
-		    c.value<std::string>("camera_model_config")));
+  std::string fname = c.value<std::string>("camera_model_config");
+  if(fname[0] != '/')
+    fname = Base_directory + "/" + fname;
+  boost::shared_ptr<MspiCamera> cam(new MspiCamera(fname));
 
   // Get orbit set up
 
@@ -70,8 +71,10 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
   boost::shared_ptr<MeasuredTimeTable> tt;
 #ifdef HAVE_MSPI_SHARED
   MSPI::Shared::L1B1Reader l1b1(L1b1_file_name);
-  int refrow = reference_row(Base_directory + "/" + 
-			     c.value<std::string>("instrument_info_config"));
+  fname = c.value<std::string>("instrument_info_config");
+  if(fname[0] != '/')
+    fname = Base_directory + "/" + fname;
+  int refrow = reference_row(fname);
   Time tepoch = Time::parse_time(l1b1.epoch());
   std::vector<double> toffset = 
     l1b1.read_time(refrow, 0, l1b1.number_frame(refrow));

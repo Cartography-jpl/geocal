@@ -27,7 +27,8 @@ namespace GeoCal {
   we need to expand this in the future).
 *******************************************************************/
 
-class IgcRollingShutter : public ImageGroundConnection {
+class IgcRollingShutter : public ImageGroundConnection, 
+			  public WithParameterNested {
 public:
   enum RollDirection { ROLL_LINE_DIRECTION , ROLL_SAMPLE_DIRECTION };
 
@@ -190,6 +191,15 @@ public:
 //-----------------------------------------------------------------------
 
   RollDirection roll_direction() const { return roll_direction_; }
+
+  virtual blitz::Array<double, 1> parameter() const
+  { return WithParameterNested::parameter(); }
+  virtual void parameter(const blitz::Array<double, 1>& Parm)
+  { WithParameterNested::parameter(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return WithParameterNested::parameter_with_derivative(); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  { WithParameterNested::parameter_with_derivative(Parm);}
 protected:
 
 //-----------------------------------------------------------------------

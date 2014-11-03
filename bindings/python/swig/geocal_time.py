@@ -378,6 +378,12 @@ class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::TimeWithDerivative::TimeWithDerivative()
+
+        """
+        _geocal_time.TimeWithDerivative_swiginit(self,_geocal_time.new_TimeWithDerivative(*args))
     def time_pgs(*args):
         """
         static TimeWithDerivative GeoCal::TimeWithDerivative::time_pgs(const AutoDerivative< double > pgs)
@@ -463,12 +469,6 @@ class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
       return _new_time_with_derivative, (self.pgs,)
 
       
-    def __init__(self): 
-        """
-        GeoCal::TimeWithDerivative::TimeWithDerivative()
-
-        """
-        _geocal_time.TimeWithDerivative_swiginit(self,_geocal_time.new_TimeWithDerivative())
     __swig_destroy__ = _geocal_time.delete_TimeWithDerivative
 TimeWithDerivative._v_pgs = new_instancemethod(_geocal_time.TimeWithDerivative__v_pgs,None,TimeWithDerivative)
 TimeWithDerivative._v_gps = new_instancemethod(_geocal_time.TimeWithDerivative__v_gps,None,TimeWithDerivative)

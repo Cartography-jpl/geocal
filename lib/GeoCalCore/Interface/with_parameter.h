@@ -3,6 +3,7 @@
 #include "array_ad.h"
 #include <vector>
 #include <boost/lexical_cast.hpp>
+#include <boost/shared_ptr.hpp>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -87,7 +88,34 @@ public:
   virtual ArrayAd<double, 1> parameter_with_derivative_subset() const;
   virtual void parameter_with_derivative_subset(const ArrayAd<double, 1>& P);
   virtual std::vector<std::string> parameter_name_subset() const;
+  void add_identity_gradient();
 };
+
+/****************************************************************//**
+  It is common for a class WithParameter to be made up of subobjects
+  an just string them together (e.g., a OrbitDataImageGroundConnection 
+  where the orbit and camera each have parameters). This handles this 
+  simple case.
+*******************************************************************/
+
+class WithParameterNested : public virtual WithParameter {
+public:
+  WithParameterNested() {}
+  virtual ~WithParameterNested() {}
+  void add_object(const boost::shared_ptr<WithParameter>& Obj)
+  { obj_list.push_back(Obj); }
+  virtual blitz::Array<double, 1> parameter() const;
+  virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual ArrayAd<double, 1> parameter_with_derivative() const;
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
+  virtual std::vector<std::string> parameter_name() const;
+  virtual blitz::Array<bool, 1> parameter_mask() const;
+private:
+  std::vector<boost::shared_ptr<WithParameter> > obj_list;
+  int total_size() const;
+  int max_num_var() const;
+};
+
 }
 #endif
 

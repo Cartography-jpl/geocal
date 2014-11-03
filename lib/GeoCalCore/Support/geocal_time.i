@@ -92,6 +92,8 @@ def __reduce__(self):
 
 class TimeWithDerivative : public GenericObject {
 public:
+  TimeWithDerivative(const Time& T);
+  TimeWithDerivative();
   static TimeWithDerivative time_pgs(double pgs);
   static TimeWithDerivative time_j2000(double j2000);
   static TimeWithDerivative time_gps(double gps);

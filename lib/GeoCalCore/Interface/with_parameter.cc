@@ -1,4 +1,5 @@
 #include "with_parameter.h"
+#include <boost/foreach.hpp>
 using namespace GeoCal;
 using namespace blitz;
 
@@ -75,7 +76,7 @@ void WithParameter::parameter_with_derivative_subset
   for(int i = 0; i < pfull.rows(); ++i)
     if(pm(i))
       pfull(i) = P(j++);
-  parameter_with_derivative_subset(pfull);
+  parameter_with_derivative(pfull);
 }
 
 //-----------------------------------------------------------------------
@@ -92,5 +93,125 @@ std::vector<std::string> WithParameter::parameter_name_subset() const
   for(int i = 0; i < (int) name_full.size(); ++i)
     if(pm(i))
       res.push_back(name_full[i]);
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// A very common thing is to want the gradient each of the active
+/// parameters (those returned by parameter_subset) to be the
+/// parameters the gradient is relative to, i.e. the first parameter
+/// has gradient of [1,0,0...], the second [0,1,0...] etc. This
+/// utility routine sets that up.
+//-----------------------------------------------------------------------
+
+void WithParameter::add_identity_gradient()
+{
+  ArrayAd<double, 1> p(parameter_with_derivative_subset());
+  p.resize_number_variable(p.rows());
+  p.jacobian() = 0;
+  for(int i = 0; i < p.rows(); ++i)
+    p.jacobian()(i,i) = 1.0;
+  parameter_with_derivative_subset(p);
+}
+
+int WithParameterNested::total_size() const
+{
+  int res = 0;
+  BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list)
+    res += obj->parameter().rows();
+  return res;
+}
+
+int WithParameterNested::max_num_var() const
+{
+  int res = 0;
+  BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list)
+    res = std::max(res, obj->parameter_with_derivative().number_variable());
+  return res;
+}
+
+blitz::Array<double, 1> WithParameterNested::parameter() const
+{
+  Array<double, 1> res(total_size());
+  int i = 0;
+  BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
+    Array<double, 1> p = obj->parameter();
+    if(p.rows() > 0) {
+      Range r(i, p.rows()-1);
+      res(r) = p;
+      i += p.rows();
+    }
+  }
+  return res;
+}
+
+void WithParameterNested::parameter(const blitz::Array<double, 1>& Parm)
+{
+  if(Parm.rows() != total_size())
+    throw Exception("Parm is not the right size");
+  int i = 0;
+  BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
+    Array<double, 1> p = obj->parameter();
+    if(p.rows() > 0) {
+      Range r(i, p.rows()-1);
+      obj->parameter(Parm(r));
+      i += p.rows();
+    }
+  }
+}
+
+ArrayAd<double, 1> WithParameterNested::parameter_with_derivative() const
+{
+  ArrayAd<double, 1> res(total_size(), max_num_var());
+  int i = 0;
+  BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
+    ArrayAd<double, 1> p = obj->parameter_with_derivative();
+    if(p.rows() > 0) {
+      Range r(i, p.rows()-1);
+      res(r) = p;
+      i += p.rows();
+    }
+  }
+  return res;
+}
+
+void WithParameterNested::parameter_with_derivative
+(const ArrayAd<double, 1>& Parm)
+{
+  if(Parm.rows() != total_size())
+    throw Exception("Parm is not the right size");
+  int i = 0;
+  BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
+    ArrayAd<double, 1> p = obj->parameter_with_derivative();
+    if(p.rows() > 0) {
+      Range r(i, p.rows()-1);
+      obj->parameter_with_derivative(Parm(r));
+      i += p.rows();
+    }
+  }
+}
+
+std::vector<std::string> WithParameterNested::parameter_name() const
+{
+  std::vector<std::string> res;
+  BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
+    std::vector<std::string> t = obj->parameter_name();
+    res.insert(res.end(), t.begin(), t.end());
+  }
+  return res;
+}
+
+blitz::Array<bool, 1> WithParameterNested::parameter_mask() const
+{
+  Array<bool, 1> res(total_size());
+  int i = 0;
+  BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
+    Array<bool, 1> p = obj->parameter_mask();
+    if(p.rows() > 0) {
+      Range r(i, p.rows()-1);
+      res(r) = p;
+      i += p.rows();
+    }
+  }
   return res;
 }

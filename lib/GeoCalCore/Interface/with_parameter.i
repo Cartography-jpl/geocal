@@ -9,6 +9,7 @@
 %base_import(generic_object)
 %import "array_ad.i"
 %geocal_shared_ptr(GeoCal::WithParameter);
+%geocal_shared_ptr(GeoCal::WithParameterNested);
 namespace GeoCal {
 // Allow this class to be derived from in Python.
 %feature("director") WithParameter;
@@ -24,5 +25,13 @@ public:
 			     ArrayAd<double, 1>);
   %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
   %python_attribute(parameter_mask, virtual blitz::Array<bool, 1>);
+  void add_identity_gradient();
 };
+
+class WithParameterNested: public WithParameter {
+public:
+  WithParameterNested();
+  void add_object(const boost::shared_ptr<WithParameter>& Obj);
+};
+
 }

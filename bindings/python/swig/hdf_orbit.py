@@ -148,8 +148,23 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit.Orbit):
     C++ includes: hdf_orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit")
+        Read the given orbit data file.
+
+        You can optional pass the base group of the HDF file, the default is
+        "/Orbit" 
+        """
+        _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swiginit(self,_hdf_orbit.new_HdfOrbit_EciTod_TimeAcs(*args))
+    def orbit_data(self, *args):
+        """
+        boost::shared_ptr< OrbitData > GeoCal::HdfOrbit< PositionType, TimeCreatorType >::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _hdf_orbit.HdfOrbit_EciTod_TimeAcs_orbit_data(self, *args)
+
     def _v_file_name(self):
         """
         const std::string& GeoCal::HdfOrbit< PositionType, TimeCreatorType >::file_name() const
@@ -180,6 +195,7 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit.Orbit):
       return _new_from_init, (self.__class__, 1, self.file_name,self.base_group)
 
     __swig_destroy__ = _hdf_orbit.delete_HdfOrbit_EciTod_TimeAcs
+HdfOrbit_EciTod_TimeAcs.orbit_data = new_instancemethod(_hdf_orbit.HdfOrbit_EciTod_TimeAcs_orbit_data,None,HdfOrbit_EciTod_TimeAcs)
 HdfOrbit_EciTod_TimeAcs._v_file_name = new_instancemethod(_hdf_orbit.HdfOrbit_EciTod_TimeAcs__v_file_name,None,HdfOrbit_EciTod_TimeAcs)
 HdfOrbit_EciTod_TimeAcs._v_base_group = new_instancemethod(_hdf_orbit.HdfOrbit_EciTod_TimeAcs__v_base_group,None,HdfOrbit_EciTod_TimeAcs)
 HdfOrbit_EciTod_TimeAcs_swigregister = _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swigregister

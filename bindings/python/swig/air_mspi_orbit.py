@@ -135,8 +135,16 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
     C++ includes: air_mspi_orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        AirMspiOrbit::AirMspiOrbit(const std::string &Fname, const boost::shared_ptr< Datum >
+        &D=boost::shared_ptr< Datum >(new NoDatum()),
+        AircraftOrbitData::VerticalDefinition
+        Def=AircraftOrbitData::GEODETIC_VERTICAL)
+
+        """
+        _air_mspi_orbit.AirMspiOrbit_swiginit(self,_air_mspi_orbit.new_AirMspiOrbit(*args))
     def _v_data_version(self):
         """
         std::string GeoCal::AirMspiOrbit::data_version() const
@@ -240,6 +248,13 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
         """
         return _air_mspi_orbit.AirMspiOrbit_orbit_data_index(self, *args)
 
+    def orbit_data(self, *args):
+        """
+        boost::shared_ptr< OrbitData > AirMspiOrbit::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _air_mspi_orbit.AirMspiOrbit_orbit_data(self, *args)
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -257,6 +272,7 @@ AirMspiOrbit._v_ypr_corr = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_yp
 AirMspiOrbit._v_time_spacing = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_time_spacing,None,AirMspiOrbit)
 AirMspiOrbit._v_vertical_def = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_vertical_def,None,AirMspiOrbit)
 AirMspiOrbit.orbit_data_index = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_data_index,None,AirMspiOrbit)
+AirMspiOrbit.orbit_data = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_data,None,AirMspiOrbit)
 AirMspiOrbit_swigregister = _air_mspi_orbit.AirMspiOrbit_swigregister
 AirMspiOrbit_swigregister(AirMspiOrbit)
 

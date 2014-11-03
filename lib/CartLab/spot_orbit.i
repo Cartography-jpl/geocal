@@ -16,5 +16,7 @@ public:
 	    const std::vector<Time>& Attitude_time,
 	    const blitz::Array<double, 2>& Ypr);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
+    const;
 };
 }

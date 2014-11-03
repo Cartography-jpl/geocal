@@ -150,11 +150,12 @@ class OrbitOffsetCorrection(Orbit):
             pos_with_der[i] = pcorr[i] + self.__parameter[i]
             vel_with_dir[i] = v[i]
             pos.append(pos_with_der[i].value)
-        return QuaternionOrbitData(od.time, od.position_ci.create(pos),
+        return QuaternionOrbitData(od.time_with_derivative, 
+                                   od.position_ci.create(pos),
                                    pos_with_der,
                                    vel_with_dir, 
                                    od.sc_to_ci_with_derivative * 
-                                   self.quaternion_correction(t))
+                         self.quaternion_correction(od.time_with_derivative))
     
     def quaternion_correction(self, t):
         '''Return the quaternion correction for the given time t.'''
@@ -165,10 +166,10 @@ class OrbitOffsetCorrection(Orbit):
                                                     AutoDerivativeDouble(0), 
                                                     AutoDerivativeDouble(0))
         # Special handling for t = largest value
-        if(t == self.__time_point[-1]):
+        if(t.value == self.__time_point[-1]):
             return self.__quat_i(len(self.__time_point) - 1)
         # bisect will find smallest i such that self.__time_point[i] >= t
-        i = bisect.bisect_right(self.__time_point, t)
+        i = bisect.bisect_right(self.__time_point, t.value)
         if(i < 1 or i >= len(self.__time_point)):
             if(self.outside_is_error):
                 raise ValueError
@@ -178,8 +179,8 @@ class OrbitOffsetCorrection(Orbit):
                                                         AutoDerivativeDouble(0),
                                                         AutoDerivativeDouble(0))
         return self.interpolate(self.__quat_i(i - 1), self.__quat_i(i),
-                                AutoDerivativeDouble(t - self.__time_point[i - 1]),
-                                self.__time_point[i] - self.__time_point[i - 1])
+                             t - TimeWithDerivative(self.__time_point[i - 1]),
+                             self.__time_point[i] - self.__time_point[i - 1])
 
     def __quat_i(self, i):
         '''Return quaternion correction for time point i. Right now we

@@ -55,7 +55,7 @@ public:
 *******************************************************************/
 
 class ImageGroundConnection : public Printable<ImageGroundConnection>,
-			      public WithParameter {
+			      public virtual WithParameter {
 public:
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -343,7 +343,7 @@ public:
   { parameter(P.value()); }
 
 //-----------------------------------------------------------------------
-/// Default it no parameters.
+/// Default is no parameters.
 //-----------------------------------------------------------------------
   virtual blitz::Array<double, 1> parameter() const
   { return blitz::Array<double, 1>(); }

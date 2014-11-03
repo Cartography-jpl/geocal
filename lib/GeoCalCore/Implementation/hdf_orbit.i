@@ -14,6 +14,8 @@ template<class PositionType, class TimeCreatorType> class HdfOrbit : public Orbi
 public:
   HdfOrbit(const std::string& Fname, const std::string& Base_group = "Orbit");
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
+    const;
   %python_attribute(file_name, std::string)
   %python_attribute(base_group, std::string)
   %pickle_init(1, self.file_name, self.base_group)

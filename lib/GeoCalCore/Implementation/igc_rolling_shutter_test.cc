@@ -188,17 +188,15 @@ BOOST_AUTO_TEST_CASE(jacobian)
   // make sure the propagation goes through correctly, the use of
   // orbit parameter jacobians is handled exactly the same way by the
   // code. 
-  ArrayAd<double, 1> p2(cam->parameter());
-  p2.resize_number_variable(p2.rows());
-  for(int i = 0; i < p2.rows(); ++i)
-    p2.jacobian()(i,i) = 1.0;
-  cam->parameter_with_derivative(p2);
+  igc->add_identity_gradient();
+  boost::shared_ptr<GroundCoordinate> gc = 
+    igc->ground_coordinate(ImageCoordinate(100,200));
+  Array<double, 2> jac_calc = igc->image_coordinate_jac_parm(*gc);
+
   blitz::Array<double, 1> eps(8);
   eps = 0.00001, 0.00001, 0.00001, 1e-9, 1e-9, 0.001, 0.1, 0.1;
   Array<double, 2> jac_fd(2, 8);
   Array<double, 1> p0(cam->parameter());
-  boost::shared_ptr<GroundCoordinate> gc = 
-    igc->ground_coordinate(ImageCoordinate(100,200));
   ImageCoordinate ic0 = igc->image_coordinate(*gc);
   for(int i = 0; i < eps.rows(); ++i) {
     Array<double, 1> p = p0.copy();
@@ -208,7 +206,15 @@ BOOST_AUTO_TEST_CASE(jacobian)
     jac_fd(0,i) = (ic.line - ic0.line) / eps(i);
     jac_fd(1,i) = (ic.sample - ic0.sample) / eps(i);
   }
-  std::cerr << jac_fd << "\n";
+  // These are wildly different in scale, so check each item
+  // separately so it can be scaled.
+  for(int i = 0; i < 2; ++i)
+    for(int j = 0; j < 8; ++j)
+      if(fabs(jac_calc(i,j)) > 0)
+	BOOST_CHECK_CLOSE(jac_calc(i, j), jac_fd(i, j), 1.5);
+      else {
+	BOOST_CHECK(fabs(jac_fd(i, j)) < 2e-1);
+      }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

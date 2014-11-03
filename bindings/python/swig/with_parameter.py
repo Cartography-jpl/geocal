@@ -253,6 +253,18 @@ class WithParameter(geocal_swig.generic_object.GenericObject):
     def parameter_mask(self):
         return self._v_parameter_mask()
 
+    def add_identity_gradient(self):
+        """
+        void WithParameter::add_identity_gradient()
+        A very common thing is to want the gradient each of the active
+        parameters (those returned by parameter_subset) to be the parameters
+        the gradient is relative to, i.e.
+
+        the first parameter has gradient of [1,0,0...], the second [0,1,0...]
+        etc. This utility routine sets that up. 
+        """
+        return _with_parameter.WithParameter_add_identity_gradient(self)
+
     def __init__(self): 
         if self.__class__ == WithParameter:
             _self = None
@@ -271,8 +283,39 @@ WithParameter._v_parameter_subset = new_instancemethod(_with_parameter.WithParam
 WithParameter._v_parameter_with_derivative_subset = new_instancemethod(_with_parameter.WithParameter__v_parameter_with_derivative_subset,None,WithParameter)
 WithParameter._v_parameter_name_subset = new_instancemethod(_with_parameter.WithParameter__v_parameter_name_subset,None,WithParameter)
 WithParameter._v_parameter_mask = new_instancemethod(_with_parameter.WithParameter__v_parameter_mask,None,WithParameter)
+WithParameter.add_identity_gradient = new_instancemethod(_with_parameter.WithParameter_add_identity_gradient,None,WithParameter)
 WithParameter_swigregister = _with_parameter.WithParameter_swigregister
 WithParameter_swigregister(WithParameter)
+
+class WithParameterNested(WithParameter):
+    """
+    It is common for a class WithParameter to be made up of subobjects an
+    just string them together (e.g., a OrbitDataImageGroundConnection
+    where the orbit and camera each have parameters).
+
+    This handles this simple case.
+
+    C++ includes: with_parameter.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self): 
+        """
+        GeoCal::WithParameterNested::WithParameterNested()
+
+        """
+        _with_parameter.WithParameterNested_swiginit(self,_with_parameter.new_WithParameterNested())
+    def add_object(self, *args):
+        """
+        void GeoCal::WithParameterNested::add_object(const boost::shared_ptr< WithParameter > &Obj)
+
+        """
+        return _with_parameter.WithParameterNested_add_object(self, *args)
+
+    __swig_destroy__ = _with_parameter.delete_WithParameterNested
+WithParameterNested.add_object = new_instancemethod(_with_parameter.WithParameterNested_add_object,None,WithParameterNested)
+WithParameterNested_swigregister = _with_parameter.WithParameterNested_swigregister
+WithParameterNested_swigregister(WithParameterNested)
 
 
 

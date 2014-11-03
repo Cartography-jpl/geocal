@@ -2,6 +2,7 @@ from nose.tools import *
 import cPickle
 from geocal_swig import *
 from igc_offset_correction import *
+from orbit_offset_correction import *
 from nose.plugins.skip import Skip, SkipTest
 import numpy.testing as npt
 

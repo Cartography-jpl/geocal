@@ -309,8 +309,22 @@ class ArgusOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     C++ includes: argus_orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        ArgusOrbit::ArgusOrbit(const std::string &Fname)
+        Open the given file and use it to provide Orbit information.
+
+        This file should be a CSV file containing one record per line, with
+        the fields "File,Camera,Time,Lat,Lon,Alt,Roll,Pitch,Heading". The
+        first line is assumed to be a header, and is discarded. The second
+        line is the epoch that the times are measured relative to.
+
+        Orbit data, indexed by the Time. This is a multimap because it is
+        entirely possible to have multiple entries in the navigation file with
+        the same time, e.g., two cameras collect data at the same time. 
+        """
+        _argus_orbit.ArgusOrbit_swiginit(self,_argus_orbit.new_ArgusOrbit(*args))
     def focal_length(self, *args):
         """
         double ArgusOrbit::focal_length(int camera_num) const

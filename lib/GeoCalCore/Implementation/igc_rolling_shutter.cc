@@ -48,6 +48,9 @@ void IgcRollingShutter::initialize
   // Make sure we don't get a ridiculous value due to some weirdness
   // in the time table.
   time_tolerance_ = std::max(time_tolerance_, 1e-8);
+
+  add_object(orbit_);
+  add_object(cam);
 }
 
 // See base class for description
@@ -137,8 +140,8 @@ public:
   ImageCoordinateWithDerivative image_coordinate_with_derivative
   (const AutoDerivative<double>& Toffset) const
   {
-    // Time t = tmin + Toffset;
-    // return tt->image_coordinate(t, cam->frame_coordinate(orb->sc_look_vector(t, look_vector(t)), band));
+    TimeWithDerivative t = TimeWithDerivative::time_pgs(tmin.pgs() + Toffset);
+    return tt->image_coordinate_with_derivative(t, cam->frame_coordinate_with_derivative(orb->sc_look_vector(t, look_vector_with_derivative(t)), band));
   }
   CartesianFixedLookVector look_vector(Time T) const
   {
@@ -151,7 +154,7 @@ public:
     return lv;
   }
   CartesianFixedLookVectorWithDerivative 
-  look_vector_with_derivative(Time T) const
+  look_vector_with_derivative(const TimeWithDerivative& T) const
   {
     boost::array<double, 3> p1 = p->position;
     boost::array<AutoDerivative<double>, 3> p2 = orb->position_cf_with_derivative(T);
@@ -197,14 +200,16 @@ blitz::Array<double, 2> IgcRollingShutter::image_coordinate_jac_parm
 			     time_table_->min_time(), time_tolerance_);
   ImageCoordinateWithDerivative ic = eq.image_coordinate_with_derivative(t);
   Array<double, 2> jac(2, t.number_variable());
-  if(!ic.line.is_constant())
-    jac(0, Range::all()) = ic.line.gradient();
-  else
-    jac(0, Range::all()) = 0;
-  if(!ic.sample.is_constant())
-    jac(1, Range::all()) = ic.sample.gradient();
-  else
-    jac(1, Range::all()) = 0;
+  if(t.number_variable() != 0) {
+    if(!ic.line.is_constant())
+      jac(0, Range::all()) = ic.line.gradient();
+    else
+      jac(0, Range::all()) = 0;
+    if(!ic.sample.is_constant())
+      jac(1, Range::all()) = ic.sample.gradient();
+    else
+      jac(1, Range::all()) = 0;
+  }
   return jac;
 }
 

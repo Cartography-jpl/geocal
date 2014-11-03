@@ -124,8 +124,9 @@ import geocal_swig.observer
 import geocal_swig.with_parameter
 class HdfOrbit_EciTodBurl_TimeAcs(geocal_swig.orbit.Orbit):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs_swiginit(self,_hdf_orbit_carto.new_HdfOrbit_EciTodBurl_TimeAcs(*args))
     @property
     def file_name(self):
         return self._v_file_name()
@@ -142,6 +143,7 @@ class HdfOrbit_EciTodBurl_TimeAcs(geocal_swig.orbit.Orbit):
       return _new_from_init, (self.__class__, 1, self.file_name,self.base_group)
 
     __swig_destroy__ = _hdf_orbit_carto.delete_HdfOrbit_EciTodBurl_TimeAcs
+HdfOrbit_EciTodBurl_TimeAcs.orbit_data = new_instancemethod(_hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs_orbit_data,None,HdfOrbit_EciTodBurl_TimeAcs)
 HdfOrbit_EciTodBurl_TimeAcs._v_file_name = new_instancemethod(_hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs__v_file_name,None,HdfOrbit_EciTodBurl_TimeAcs)
 HdfOrbit_EciTodBurl_TimeAcs._v_base_group = new_instancemethod(_hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs__v_base_group,None,HdfOrbit_EciTodBurl_TimeAcs)
 HdfOrbit_EciTodBurl_TimeAcs_swigregister = _hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs_swigregister

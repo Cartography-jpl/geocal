@@ -133,8 +133,17 @@ class GroundMspiOrbit(geocal_swig.orbit.Orbit):
     C++ includes: ground_mspi_orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::GroundMspiOrbit::GroundMspiOrbit(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,
+        double Azimuth, double Start_elevation_angle, double Rotation_rate)
+        Constructor.
+
+        The angles should be in degrees, and the rate is in degrees per
+        second. 
+        """
+        _ground_mspi_orbit.GroundMspiOrbit_swiginit(self,_ground_mspi_orbit.new_GroundMspiOrbit(*args))
     def _v_start_time(self):
         """
         Time GeoCal::GroundMspiOrbit::start_time() const
@@ -190,6 +199,13 @@ class GroundMspiOrbit(geocal_swig.orbit.Orbit):
     def rotation_rate(self):
         return self._v_rotation_rate()
 
+    def orbit_data(self, *args):
+        """
+        boost::shared_ptr< OrbitData > GroundMspiOrbit::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _ground_mspi_orbit.GroundMspiOrbit_orbit_data(self, *args)
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -203,6 +219,7 @@ GroundMspiOrbit._v_position = new_instancemethod(_ground_mspi_orbit.GroundMspiOr
 GroundMspiOrbit._v_azimuth = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbit__v_azimuth,None,GroundMspiOrbit)
 GroundMspiOrbit._v_start_elevation_angle = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbit__v_start_elevation_angle,None,GroundMspiOrbit)
 GroundMspiOrbit._v_rotation_rate = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbit__v_rotation_rate,None,GroundMspiOrbit)
+GroundMspiOrbit.orbit_data = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbit_orbit_data,None,GroundMspiOrbit)
 GroundMspiOrbit_swigregister = _ground_mspi_orbit.GroundMspiOrbit_swigregister
 GroundMspiOrbit_swigregister(GroundMspiOrbit)
 

@@ -565,6 +565,7 @@ void QuaternionOrbitData::initialize(Time Tm,
 						    pos_ci->position[1],
 						    pos_ci->position[2]);
   ci_to_cf_ = pos_ci->ci_to_cf_quat(Tm);
+  ci_to_cf_der_ = ci_to_cf_;
   have_ci_to_cf = true;
   boost::math::quaternion<double> vel_ci(0, vel_inertial[0], vel_inertial[1], 
 				      vel_inertial[2]);

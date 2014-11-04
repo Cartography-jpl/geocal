@@ -25,7 +25,6 @@ img2 = VicarLiteRasterImage(test_data + "10MAY21-2.img")
 img3 = VicarLiteRasterImage(test_data + "10MAY21-3.img")
 
 def test_igc():
-    raise SkipTest # Skip for now
     try:
         # Depending on the options used when building, this class might
         # not be available. If not, then just skip this test.
@@ -63,7 +62,6 @@ def test_igc():
     assert_almost_equal(igc_coll2.image_coordinate(0, gp).sample, ic.sample, 3)
 
 def test_igc_jac():
-    raise SkipTest # Skip for now
     try:
         # Depending on the options used when building, this class might
         # not be available. If not, then just skip this test.

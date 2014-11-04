@@ -1,9 +1,16 @@
 from abc import *
 from geocal_swig import *
-from with_parameter import *
 import numpy as np
 import scipy.sparse
 import copy
+
+
+def _new_from_init(cls, version, *args):
+    if(cls.pickle_format_version() < version):
+        raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
+    inst = cls.__new__(cls)
+    inst.__init__(*args)
+    return inst
 
 class IgcCollection(WithParameter):
     '''This class describes a collection of ImageGroundConnection. This
@@ -15,6 +22,9 @@ class IgcCollection(WithParameter):
 
     This is used by the SimultaneousBundleAdjustment class.
     '''
+
+    def __init__(self):
+        WithParameter.__init__(self)
 
     @abstractproperty
     def number_image(self):
@@ -36,10 +46,10 @@ class IgcCollection(WithParameter):
         '''Return image coordinates for the given ground point'''
         pass
     @abstractmethod
-    def image_coordinate_jac_ecr(self, image_index, ground_point):
+    def image_coordinate_jac_cf(self, image_index, ground_point):
         '''Return Jacobian for image coordinate with respect to change in 
-        the ECR coordinates of the ground point. This can either be a 
-        dense matrix or a scip.sparse matrix.'''
+        the CartesianFixed coordinates of the ground point. This can either 
+        be a dense matrix or a scip.sparse matrix.'''
         pass
     @abstractmethod
     def image_coordinate_jac_parm(self, image_index, ground_point, jac,
@@ -94,24 +104,12 @@ class ImageGroundConnectionIgc(ImageGroundConnection, WithParameter):
         return self.igc_collection.image_coordinate(self.image_index, 
                                                     ground_point)
         
-    def image_coordinate_jac_ecr(self, ground_point):
+    def image_coordinate_jac_cf(self, ground_point):
         '''Return Jacobian for image coordinate with respect to change in 
-        the ECR coordinates of the ground point. This can either be a 
-        dense matrix or a scip.sparse matrix.'''
-        return self.igc_collection.image_coordinate_jac_ecr(self.image_index, 
+        the CartesianFixed coordinates of the ground point. This can either 
+        be a dense matrix or a scip.sparse matrix.'''
+        return self.igc_collection.image_coordinate_jac_cf(self.image_index, 
                                                             ground_point)
-
-    @property
-    def parameter(self):
-        return []
-
-    @parameter.setter
-    def parameter(self, value):
-        pass
-
-    @property
-    def parameter_subset_mask(self):
-        return np.array([True] * len(self.parameter))
 
     def image_coordinate_jac_parm(self, ground_point):
         '''Return Jacobian for image coordinate with respect to change in 
@@ -136,7 +134,16 @@ class IgcArray(IgcCollection):
     GdalImageGroundConnection and VicarImageGroundConnection do have these.'''
     def __init__(self, initial_data = []):
         self.igc = copy.copy(initial_data)
-        self._parameter_subset_mask = [True] * len(self.parameter)
+        IgcCollection.__init__(self)
+
+    @classmethod
+    def pickle_format_version(cls):
+        return 1
+
+    def __reduce__(self):
+        return _new_from_init, (self.__class__,
+                                self.__class__.pickle_format_version(),
+                                self.igc)
 
     def __str__(self):
         res =  "IgcArray\n"
@@ -145,45 +152,37 @@ class IgcArray(IgcCollection):
         for i in range(self.number_image):
             res += "     %s\n" % self.image_title(i)
         res += "  Parameters:\n"
-        for i in range(len(self.parameter)):
-            res += "     %s: %f\n" % (self.parameter_name[i], self.parameter[i])
+        for i in range(len(self.parameter_subset)):
+            res += "     %s: %f\n" % (self.parameter_name_subset[i], 
+                                      self.parameter_subset[i])
         return res
 
-    @property
-    def parameter(self):
+    def _v_parameter_mask(self):
+            res = []
+            for v in self.igc:
+                res = np.append(res, v.parameter_mask)
+            return res
+        
+    def _v_parameter(self, *args):
         '''Value of parameters controlling mapping to and from image 
         coordinates'''
-        res = []
-        for v in self.igc:
-            res = np.append(res, v.parameter)
-        return res
+        # Awkward interface, but this matches what the C++ needs. If we have
+        # no arguments, then we are returning the parameters. Otherwise,
+        # we are setting them.
+        if(len(args) == 0):
+            res = []
+            for v in self.igc:
+                res = np.append(res, v.parameter)
+            return res
+        else:
+            value = args[0]
+            pstart = 0
+            for ig in self.igc:
+                pl = len(ig.parameter)
+                ig.parameter = value[pstart:(pstart + pl)]
+                pstart += pl
 
-    @parameter.setter
-    def parameter(self, value):
-        '''Value of parameters controlling mapping to and from image 
-        coordinates'''
-        pstart = 0
-        for ig in self.igc:
-            pl = len(ig.parameter)
-            ig.parameter = value[pstart:(pstart + pl)]
-            pstart += pl
-
-    @property
-    def parameter_subset_mask(self):
-        return self._parameter_subset_mask
-
-    @parameter_subset_mask.setter
-    def parameter_subset_mask(self, val):
-        self._parameter_subset_mask = val
-        pstart = 0
-        for ig in self.igc:
-            pl = len(ig.parameter)
-            if(not isinstance(ig, ImageGroundConnection)):
-                ig.parameter_subset_mask = val[pstart:(pstart + pl)]
-            pstart += pl
-
-    @property
-    def parameter_name(self):
+    def _v_parameter_name(self):
         res = []
         for i, igcv in enumerate(self.igc):
             for pn in igcv.parameter_name:
@@ -236,11 +235,11 @@ class IgcArray(IgcCollection):
         return self._igc_or_coll_call(image_index, "image_coordinate", 
                                       ground_point)
 
-    def image_coordinate_jac_ecr(self, image_index, ground_point):
+    def image_coordinate_jac_cf(self, image_index, ground_point):
         '''Return Jacobian for image coordinate with respect to change in 
-        the ECR coordinates of the ground point. This can either be a 
-        dense matrix or a scip.sparse matrix.'''
-        return self._igc_or_coll_call(image_index, "image_coordinate_jac_ecr", 
+        the CartesianFixed coordinates of the ground point. This can either 
+        be a dense matrix or a scip.sparse matrix.'''
+        return self._igc_or_coll_call(image_index, "image_coordinate_jac_cf", 
                                       ground_point)
 
     def image_coordinate_jac_parm(self, image_index, ground_point, jac,
@@ -254,34 +253,25 @@ class IgcArray(IgcCollection):
         in a scaling for the line and sample entries. This interface may seem
         a bit odd, but this is what we have in the SimultaneousBundleAdjustment
         that uses this call.'''
-        nparm = 0
         jparm = 0
-        pstart = -1
-        pend = -1
-        pm = self.parameter_subset_mask
         i = 0
         for ig in self.igc:
-            pl = len(ig.parameter)
-            jl = pm[nparm:(nparm + pl)].count(True)
+            pl = len(ig.parameter_subset)
             if(isinstance(ig, ImageGroundConnection)):
                 i += 1
             else:
                 i += ig.number_image
             if(image_index < i):
                 pstart = jparm + jac_col
-                pmsub = pm[nparm:(nparm + pl)]
                 break
-            nparm += pl
-            jparm += jl
+            jparm += pl
         ig, i = self._igc_or_coll(image_index)
         if(i < 0):
-            jac_in = self.igc[image_index].image_coordinate_jac_parm(ground_point)
-            col = pstart
-            for (i, pmval) in enumerate(pmsub):
-                if(pmval):
-                    jac[jac_row, col] = jac_in[0, i] * line_scale
-                    jac[jac_row + 1, col] = jac_in[1, i] * sample_scale
-                    col += 1
+            jac_in = \
+                self.igc[image_index].image_coordinate_jac_parm(ground_point)
+            for j in range(jac_in.shape[1]):
+                jac[jac_row, pstart + j] = jac_in[0, j] * line_scale
+                jac[jac_row + 1, pstart + j] = jac_in[1, j] * sample_scale
         else:
             ig.image_coordinate_jac_parm(i, ground_point, jac, jac_row, pstart,
                                          line_scale, sample_scale)

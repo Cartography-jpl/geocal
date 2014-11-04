@@ -401,7 +401,7 @@ CartesianFixed._position = new_instancemethod(_ground_coordinate.CartesianFixed_
 CartesianFixed_swigregister = _ground_coordinate.CartesianFixed_swigregister
 CartesianFixed_swigregister(CartesianFixed)
 
-class LnLookVector(geocal_swig.look_vector.LookVector):
+class LnLookVector(geocal_swig.look_vector.LookVectorDouble):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     def __init__(self, *args): 
@@ -434,7 +434,7 @@ def LnLookVector_solar_look_vector(*args):
   return _ground_coordinate.LnLookVector_solar_look_vector(*args)
 LnLookVector_solar_look_vector = _ground_coordinate.LnLookVector_solar_look_vector
 
-class CartesianFixedLookVector(geocal_swig.look_vector.LookVector):
+class CartesianFixedLookVector(geocal_swig.look_vector.LookVectorDouble):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     def __init__(self, *args): 

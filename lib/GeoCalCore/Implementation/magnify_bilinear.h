@@ -18,6 +18,9 @@ public:
        << "  magfactor: " << magfactor << "\n"
        << "  underlying raster: \n" << *raw_data << "\n";
   }
+  const boost::shared_ptr<RasterImage>& underlying_data() const
+  { return raw_data;}
+  int magnification_factor() const {return magfactor; }
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 private:
@@ -90,16 +93,16 @@ public:
     return ic;
   }
 
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) const
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const
   { 
-    blitz::Array<double, 2> res = ig_->image_coordinate_jac_ecr(Gc); 
+    blitz::Array<double, 2> res = ig_->image_coordinate_jac_cf(Gc); 
     res *= magfactor_;
     return res;
   }
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const
   { 
-    blitz::Array<double, 2> res = ig_->image_coordinate_jac_ecr(Gc); 
+    blitz::Array<double, 2> res = ig_->image_coordinate_jac_parm(Gc); 
     res *= magfactor_;
     return res;
   }
@@ -108,8 +111,14 @@ public:
   { return ig_->parameter(); }
   virtual void parameter(const blitz::Array<double, 1>& Parm)
   { ig_->parameter(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return ig_->parameter_with_derivative(); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  { return ig_->parameter_with_derivative(Parm); }
   virtual std::vector<std::string> parameter_name() const
   { return ig_->parameter_name(); }
+  virtual blitz::Array<bool, 1> parameter_mask() const
+  { return ig_->parameter_mask(); }
 
 //-----------------------------------------------------------------------
 /// Print to stream.

@@ -222,6 +222,8 @@ public:
 
   virtual ~QuickBirdOrbit() {}
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> 
+  orbit_data(const TimeWithDerivative& T) const;
   virtual void print(std::ostream& Os) const;
   std::string ephemeris_file_name() const {return eph->file_name();}
   std::string attitude_file_name() const {return att->file_name();}

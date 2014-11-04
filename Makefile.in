@@ -351,15 +351,17 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/swig_boost_array_wrap.cc \
 	@swigsrc@/swig_quaternion_wrap.cc @swigsrc@/constant_wrap.cc \
 	@swigsrc@/generic_object_wrap.cc \
-	@swigsrc@/geocal_quaternion_wrap.cc \
+	@swigsrc@/auto_derivative_wrap.cc @swigsrc@/array_ad_wrap.cc \
+	@swigsrc@/observer_wrap.cc @swigsrc@/geocal_quaternion_wrap.cc \
 	@swigsrc@/covariance_wrap.cc @swigsrc@/wgs84_constant_wrap.cc \
 	@swigsrc@/geocal_exception_wrap.cc @swigsrc@/functor_wrap.cc \
 	@swigsrc@/vfunctor_with_derivative_wrap.cc \
+	@swigsrc@/dfunctor_with_derivative_wrap.cc \
 	@swigsrc@/statistic_wrap.cc @swigsrc@/geocal_gsl_fit_wrap.cc \
 	@swigsrc@/geocal_gsl_root_wrap.cc \
 	@swigsrc@/geocal_time_wrap.cc @swigsrc@/tiled_file_wrap.cc \
 	@swigsrc@/image_coordinate_wrap.cc \
-	@swigsrc@/look_vector_wrap.cc \
+	@swigsrc@/with_parameter_wrap.cc @swigsrc@/look_vector_wrap.cc \
 	@swigsrc@/ground_coordinate_wrap.cc \
 	@swigsrc@/coordinate_converter_wrap.cc @swigsrc@/ecr_wrap.cc \
 	@swigsrc@/eci_wrap.cc @swigsrc@/geodetic_wrap.cc \
@@ -367,8 +369,9 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/geocal_rpc_wrap.cc @swigsrc@/raster_image_wrap.cc \
 	@swigsrc@/image_ground_connection_wrap.cc \
 	@swigsrc@/frame_coordinate_wrap.cc @swigsrc@/camera_wrap.cc \
-	@swigsrc@/orbit_wrap.cc @swigsrc@/time_table_wrap.cc \
-	@swigsrc@/ipi_wrap.cc @swigsrc@/raster_image_variable_wrap.cc \
+	@swigsrc@/ray_caster_wrap.cc @swigsrc@/orbit_wrap.cc \
+	@swigsrc@/time_table_wrap.cc @swigsrc@/ipi_wrap.cc \
+	@swigsrc@/raster_image_variable_wrap.cc \
 	@swigsrc@/sub_raster_image_wrap.cc \
 	@swigsrc@/raster_image_multi_band_wrap.cc \
 	@swigsrc@/raster_image_multi_band_variable_wrap.cc \
@@ -418,8 +421,11 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/rpc_image_ground_connection_wrap.cc \
 	@swigsrc@/ipi_image_ground_connection_wrap.cc \
 	@swigsrc@/eci_tod_wrap.cc @swigsrc@/quaternion_camera_wrap.cc \
-	@swigsrc@/refraction_wrap.cc \
+	@swigsrc@/galileo_camera_wrap.cc @swigsrc@/refraction_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
+	@swigsrc@/planet_coordinate_wrap.cc \
+	@swigsrc@/igc_ray_caster_wrap.cc \
+	@swigsrc@/igc_rolling_shutter_wrap.cc \
 	@swigsrc@/argus_camera_wrap.cc @swigsrc@/argus_orbit_wrap.cc \
 	@swigsrc@/quickbird_camera_wrap.cc \
 	@swigsrc@/spot_camera_wrap.cc @swigsrc@/spot_orbit_wrap.cc \
@@ -458,18 +464,23 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-constant_wrap.lo \
 	@swigsrc@/_swig_wrap_la-generic_object_wrap.lo \
+	@swigsrc@/_swig_wrap_la-auto_derivative_wrap.lo \
+	@swigsrc@/_swig_wrap_la-array_ad_wrap.lo \
+	@swigsrc@/_swig_wrap_la-observer_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geocal_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-covariance_wrap.lo \
 	@swigsrc@/_swig_wrap_la-wgs84_constant_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geocal_exception_wrap.lo \
 	@swigsrc@/_swig_wrap_la-functor_wrap.lo \
 	@swigsrc@/_swig_wrap_la-vfunctor_with_derivative_wrap.lo \
+	@swigsrc@/_swig_wrap_la-dfunctor_with_derivative_wrap.lo \
 	@swigsrc@/_swig_wrap_la-statistic_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geocal_gsl_fit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geocal_gsl_root_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geocal_time_wrap.lo \
 	@swigsrc@/_swig_wrap_la-tiled_file_wrap.lo \
 	@swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo \
+	@swigsrc@/_swig_wrap_la-with_parameter_wrap.lo \
 	@swigsrc@/_swig_wrap_la-look_vector_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ground_coordinate_wrap.lo \
 	@swigsrc@/_swig_wrap_la-coordinate_converter_wrap.lo \
@@ -483,6 +494,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-image_ground_connection_wrap.lo \
 	@swigsrc@/_swig_wrap_la-frame_coordinate_wrap.lo \
 	@swigsrc@/_swig_wrap_la-camera_wrap.lo \
+	@swigsrc@/_swig_wrap_la-ray_caster_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-time_table_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ipi_wrap.lo \
@@ -544,8 +556,12 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ipi_image_ground_connection_wrap.lo \
 	@swigsrc@/_swig_wrap_la-eci_tod_wrap.lo \
 	@swigsrc@/_swig_wrap_la-quaternion_camera_wrap.lo \
+	@swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo \
 	@swigsrc@/_swig_wrap_la-refraction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo \
+	@swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo \
+	@swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo \
+	@swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo \
 	@swigsrc@/_swig_wrap_la-argus_camera_wrap.lo \
 	@swigsrc@/_swig_wrap_la-argus_orbit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-quickbird_camera_wrap.lo \
@@ -618,6 +634,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/geocal_time.cc @srcsupport@/covariance.cc \
 	@srcsupport@/statistic.cc @srcsupport@/geocal_fftw.cc \
 	@srcsupport@/hdf_file.cc @srcinterface@/raster_image.cc \
+	@srcinterface@/with_parameter.cc \
 	@srcinterface@/sub_raster_image.cc \
 	@srcinterface@/raster_image_multi_band.cc \
 	@srcinterface@/sub_raster_image_multi_band.cc \
@@ -628,9 +645,8 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srcinterface@/time_table.cc @srcinterface@/camera.cc \
 	@srcinterface@/ecr.cc @srcinterface@/eci.cc \
 	@srcinterface@/look_vector.cc @srcinterface@/geodetic.cc \
-	@srcinterface@/dem.cc @srcinterface@/simple_dem.cc \
-	@srcinterface@/map_info.cc @srcinterface@/orbit.cc \
-	@srcinterface@/memory_raster_image.cc \
+	@srcinterface@/dem.cc @srcinterface@/map_info.cc \
+	@srcinterface@/orbit.cc @srcinterface@/memory_raster_image.cc \
 	@srcinterface@/dem_map_info.cc \
 	@srcinterface@/feature_detector.cc \
 	@srcinterface@/forstner_feature_detector.cc \
@@ -662,14 +678,18 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srcimplementation@/pan_sharpen.cc \
 	@srcimplementation@/rpc_image_ground_connection.cc \
 	@srcimplementation@/eci_tod.cc \
+	@srcimplementation@/planet_coordinate.cc \
 	@srcimplementation@/eci_tod_burl.cc \
 	@srcimplementation@/quaternion_camera.cc \
+	@srcimplementation@/galileo_camera.cc \
 	@srcimplementation@/refraction.cc \
 	@srcimplementation@/ray_intersect.cc \
 	@srcimplementation@/dem_match.cc \
+	@srcimplementation@/igc_rolling_shutter.cc \
 	@srcimplementation@/phase_correlation_matcher.cc \
 	@srcimplementation@/quadratic_geometric_model.cc \
 	@srcimplementation@/geometric_model_image.cc \
+	@srcimplementation@/igc_ray_caster.cc \
 	@srcimplementation@/geocal_gdal.cc \
 	@srcimplementation@/gdal_dem.cc \
 	@srcimplementation@/gdal_raster_image.cc \
@@ -727,6 +747,7 @@ am_libgeocal_la_OBJECTS =  \
 	@srcsupport@/libgeocal_la-covariance.lo \
 	@srcsupport@/libgeocal_la-statistic.lo $(am__objects_15) \
 	$(am__objects_16) @srcinterface@/libgeocal_la-raster_image.lo \
+	@srcinterface@/libgeocal_la-with_parameter.lo \
 	@srcinterface@/libgeocal_la-sub_raster_image.lo \
 	@srcinterface@/libgeocal_la-raster_image_multi_band.lo \
 	@srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo \
@@ -742,7 +763,6 @@ am_libgeocal_la_OBJECTS =  \
 	@srcinterface@/libgeocal_la-look_vector.lo \
 	@srcinterface@/libgeocal_la-geodetic.lo \
 	@srcinterface@/libgeocal_la-dem.lo \
-	@srcinterface@/libgeocal_la-simple_dem.lo \
 	@srcinterface@/libgeocal_la-map_info.lo \
 	@srcinterface@/libgeocal_la-orbit.lo \
 	@srcinterface@/libgeocal_la-memory_raster_image.lo \
@@ -779,14 +799,19 @@ am_libgeocal_la_OBJECTS =  \
 	@srcimplementation@/libgeocal_la-memory_multi_band.lo \
 	@srcimplementation@/libgeocal_la-pan_sharpen.lo \
 	@srcimplementation@/libgeocal_la-rpc_image_ground_connection.lo \
-	@srcimplementation@/libgeocal_la-eci_tod.lo $(am__objects_17) \
+	@srcimplementation@/libgeocal_la-eci_tod.lo \
+	@srcimplementation@/libgeocal_la-planet_coordinate.lo \
+	$(am__objects_17) \
 	@srcimplementation@/libgeocal_la-quaternion_camera.lo \
+	@srcimplementation@/libgeocal_la-galileo_camera.lo \
 	@srcimplementation@/libgeocal_la-refraction.lo \
 	@srcimplementation@/libgeocal_la-ray_intersect.lo \
 	@srcimplementation@/libgeocal_la-dem_match.lo \
+	@srcimplementation@/libgeocal_la-igc_rolling_shutter.lo \
 	$(am__objects_18) \
 	@srcimplementation@/libgeocal_la-quadratic_geometric_model.lo \
 	@srcimplementation@/libgeocal_la-geometric_model_image.lo \
+	@srcimplementation@/libgeocal_la-igc_ray_caster.lo \
 	$(am__objects_19) \
 	@srcimplementation@/libgeocal_la-spice_helper.lo \
 	@srcimplementation@/libgeocal_la-sdp_helper.lo \
@@ -827,6 +852,8 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
 	@srcsupport@/global_fixture_default.cc \
 	@srcsupport@/geocal_exception_test.cc \
+	@srcsupport@/auto_derivative_test.cc \
+	@srcsupport@/array_ad_test.cc @srcsupport@/observer_test.cc \
 	@srcsupport@/geocal_time_test.cc \
 	@srcsupport@/printable_test.cc \
 	@srcsupport@/ostream_pad_test.cc @srcsupport@/tile_test.cc \
@@ -888,8 +915,10 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/rpc_image_ground_connection_test.cc \
 	@srcimplementation@/ipi_image_ground_connection_test.cc \
 	@srcimplementation@/eci_tod_test.cc \
+	@srcimplementation@/planet_coordinate_test.cc \
 	@srcimplementation@/eci_tod_burl_test.cc \
 	@srcimplementation@/quaternion_camera_test.cc \
+	@srcimplementation@/galileo_camera_test.cc \
 	@srcimplementation@/refraction_test.cc \
 	@srcimplementation@/orbit_data_image_ground_connection_test.cc \
 	@srcimplementation@/ray_intersect_test.cc \
@@ -899,6 +928,8 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/phase_correlation_matcher_test.cc \
 	@srcimplementation@/quadratic_geometric_model_test.cc \
 	@srcimplementation@/geometric_model_image_test.cc \
+	@srcimplementation@/igc_ray_caster_test.cc \
+	@srcimplementation@/igc_rolling_shutter_test.cc \
 	@srccartlab@/vicar_ogr_test.cc \
 	@srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
@@ -952,6 +983,9 @@ am_geocal_test_all_OBJECTS =  \
 	@srcsupport@/geocal_test_all-global_fixture.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-global_fixture_default.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-geocal_exception_test.$(OBJEXT) \
+	@srcsupport@/geocal_test_all-auto_derivative_test.$(OBJEXT) \
+	@srcsupport@/geocal_test_all-array_ad_test.$(OBJEXT) \
+	@srcsupport@/geocal_test_all-observer_test.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-geocal_time_test.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-printable_test.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-ostream_pad_test.$(OBJEXT) \
@@ -1009,8 +1043,10 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-rpc_image_ground_connection_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-ipi_image_ground_connection_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-eci_tod_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-planet_coordinate_test.$(OBJEXT) \
 	$(am__objects_26) \
 	@srcimplementation@/geocal_test_all-quaternion_camera_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-galileo_camera_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-refraction_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-ray_intersect_test.$(OBJEXT) \
@@ -1020,6 +1056,8 @@ am_geocal_test_all_OBJECTS =  \
 	$(am__objects_27) \
 	@srcimplementation@/geocal_test_all-quadratic_geometric_model_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-geometric_model_image_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-igc_ray_caster_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-igc_rolling_shutter_test.$(OBJEXT) \
 	$(am__objects_28) \
 	@srccartlab@/geocal_test_all-argus_camera_test.$(OBJEXT) \
 	@srccartlab@/geocal_test_all-argus_orbit_test.$(OBJEXT) \
@@ -1137,7 +1175,6 @@ am__geocalpkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/quick_bird_reflectance.py \
 	@srcpythonlib@/world_view2_reflectance.py \
 	@srcpythonlib@/spot_reflectance.py \
-	@srcpythonlib@/with_parameter.py \
 	@srcpythonlib@/sqlite_shelf.py \
 	@srcpythonlib@/feature_detector_extension.py \
 	@srcpythonlib@/ply_file.py @srcpythonlib@/docopt_simple.py \
@@ -1148,7 +1185,8 @@ am__geocalpkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/parallel_process.py \
 	@srcpythonlib@/raster_image_multi_band.py \
 	@srcpythonlib@/ibis_file_extension.py \
-	@srcpythonlib@/shape_file.py @srcpythonlib@/air_mspi_igc.py
+	@srcpythonlib@/job_database.py @srcpythonlib@/shape_file.py \
+	@srcpythonlib@/air_mspi_igc.py
 am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 am__pep3147_tweak = \
   sed -e 's|\.py$$||' -e 's|[^/]*$$|__pycache__/&.*.py|'
@@ -1157,21 +1195,25 @@ DATA = $(dist_afidspythonvdev_DATA) $(dist_geocalpkgpython_DATA) \
 	$(dist_sdbxdoc_DATA) $(installafidspython_DATA) \
 	$(pkgconfig_DATA)
 am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
-	@srcsupport@/generic_object.h @srcsupport@/geocal_type_index.h \
-	@srcsupport@/dir_change.h @srcsupport@/null_deleter.h \
-	@srcsupport@/ostream_pad.h @srcsupport@/wgs84_constant.h \
-	@srcsupport@/printable.h @srcsupport@/geocal_exception.h \
-	@srcsupport@/tile.h @srcsupport@/tiled_file.h \
-	@srcsupport@/memory_map_array.h \
+	@srcsupport@/generic_object.h @srcsupport@/auto_derivative.h \
+	@srcsupport@/auto_derivative_quaternion.h \
+	@srcsupport@/array_ad.h @srcsupport@/observer.h \
+	@srcsupport@/geocal_type_index.h @srcsupport@/dir_change.h \
+	@srcsupport@/null_deleter.h @srcsupport@/ostream_pad.h \
+	@srcsupport@/wgs84_constant.h @srcsupport@/printable.h \
+	@srcsupport@/geocal_exception.h @srcsupport@/tile.h \
+	@srcsupport@/tiled_file.h @srcsupport@/memory_map_array.h \
 	@srcsupport@/geocal_gsl_matrix.h @srcsupport@/geocal_matrix.h \
 	@srcsupport@/geocal_quaternion.h \
+	@srcsupport@/geocal_autoderivative_quaternion.h \
 	@srcsupport@/boost/backtrace.hpp @srcsupport@/geocal_gsl_fit.h \
 	@srcsupport@/functor.h @srcsupport@/vfunctor_with_derivative.h \
+	@srcsupport@/dfunctor_with_derivative.h \
 	@srcsupport@/geocal_gsl_root.h @srcsupport@/geocal_time.h \
 	@srcsupport@/toolkit_time_interface.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
 	@srcsupport@/geocal_fftw.h @srcsupport@/hdf_file.h \
-	@srcinterface@/raster_image.h \
+	@srcinterface@/raster_image.h @srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
 	@srcinterface@/sub_raster_image.h \
 	@srcinterface@/raster_image_multi_band.h \
@@ -1181,7 +1223,8 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcinterface@/ground_coordinate.h \
 	@srcinterface@/ground_mask.h @srcinterface@/image_mask.h \
 	@srcinterface@/frame_coordinate.h @srcinterface@/time_table.h \
-	@srcinterface@/camera.h @srcinterface@/ecr.h \
+	@srcinterface@/camera.h @srcinterface@/ray_caster.h \
+	@srcinterface@/ecr.h \
 	@srcinterface@/toolkit_coordinate_interface.h \
 	@srcinterface@/eci.h @srcinterface@/look_vector.h \
 	@srcinterface@/geodetic.h \
@@ -1232,16 +1275,20 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcimplementation@/rpc_image_ground_connection.h \
 	@srcimplementation@/ipi_image_ground_connection.h \
 	@srcimplementation@/eci_tod.h \
+	@srcimplementation@/planet_coordinate.h \
 	@srcimplementation@/eci_tod_burl.h \
 	@srcimplementation@/quaternion_camera.h \
+	@srcimplementation@/galileo_camera.h \
 	@srcimplementation@/refraction.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
 	@srcimplementation@/ray_intersect.h \
 	@srcimplementation@/dem_match.h \
+	@srcimplementation@/igc_rolling_shutter.h \
 	@srcimplementation@/phase_correlation_matcher.h \
 	@srcimplementation@/quadratic_geometric_model.h \
 	@srcimplementation@/geometric_model_image.h \
 	@srcimplementation@/hdf_orbit.h \
+	@srcimplementation@/igc_ray_caster.h \
 	@srcimplementation@/gdal_datum.h \
 	@srcimplementation@/geocal_gdal.h \
 	@srcimplementation@/gdal_dem.h \
@@ -1742,7 +1789,8 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/shelve_airmspi_igc \
 	$(srcdir)/$(srcpythonbin)/igc_to_rpc \
 	$(srcdir)/$(srcpythonbin)/airmspi_dem \
-	$(srcdir)/$(srcpythonbin)/pan_to_ms_igc
+	$(srcdir)/$(srcpythonbin)/pan_to_ms_igc \
+	$(srcdir)/$(srcpythonbin)/job_database_check_and_run
 AM_LDFLAGS = 
 
 #=================================================================
@@ -1839,6 +1887,19 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/vicar.img \
 	@geocalunittestdata@/airmspi_orbit_file_test.hdf \
 	@geocalunittestdata@/ground_mspi_camera_test.config \
+	@geocalunittestdata@/usgs_dem/n44w069_10m.tif \
+	@geocalunittestdata@/galileo_kernel/galileo.ker \
+	@geocalunittestdata@/galileo_kernel/ik/gll36001.ti \
+	@geocalunittestdata@/galileo_kernel/sclk/mk00062a.tsc \
+	@geocalunittestdata@/galileo_kernel/spk/gll_951120_021126_raj2007.bsp \
+	@geocalunittestdata@/galileo_kernel/ck/gll_plt_rec_1997_mav_v00.bc \
+	@geocalunittestdata@/galileo_kernel/fk/gll_scan_plane.tf \
+	@geocalunittestdata@/3800r.img \
+	@geocalunittestdata@/mspi/3.master.config \
+	@geocalunittestdata@/mspi/3.nav_gimbal.hdf4 \
+	@geocalunittestdata@/mspi/3.l1b1.hdf5 \
+	@geocalunittestdata@/mspi/3.mspi_camera_model.config \
+	@geocalunittestdata@/mspi/3.instrument_info.config \
 	@docpythonsrc@ $(am__empty)
 pkgconfig_DATA = 
 
@@ -1875,6 +1936,7 @@ libgeocal_la_SOURCES = @srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/geocal_time.cc @srcsupport@/covariance.cc \
 	@srcsupport@/statistic.cc $(am__append_14) $(am__append_16) \
 	@srcinterface@/raster_image.cc \
+	@srcinterface@/with_parameter.cc \
 	@srcinterface@/sub_raster_image.cc \
 	@srcinterface@/raster_image_multi_band.cc \
 	@srcinterface@/sub_raster_image_multi_band.cc \
@@ -1885,9 +1947,8 @@ libgeocal_la_SOURCES = @srcsupport@/boost/backtrace.cpp \
 	@srcinterface@/time_table.cc @srcinterface@/camera.cc \
 	@srcinterface@/ecr.cc @srcinterface@/eci.cc \
 	@srcinterface@/look_vector.cc @srcinterface@/geodetic.cc \
-	@srcinterface@/dem.cc @srcinterface@/simple_dem.cc \
-	@srcinterface@/map_info.cc @srcinterface@/orbit.cc \
-	@srcinterface@/memory_raster_image.cc \
+	@srcinterface@/dem.cc @srcinterface@/map_info.cc \
+	@srcinterface@/orbit.cc @srcinterface@/memory_raster_image.cc \
 	@srcinterface@/dem_map_info.cc \
 	@srcinterface@/feature_detector.cc \
 	@srcinterface@/forstner_feature_detector.cc \
@@ -1918,13 +1979,17 @@ libgeocal_la_SOURCES = @srcsupport@/boost/backtrace.cpp \
 	@srcimplementation@/memory_multi_band.cc \
 	@srcimplementation@/pan_sharpen.cc \
 	@srcimplementation@/rpc_image_ground_connection.cc \
-	@srcimplementation@/eci_tod.cc $(am__append_20) \
+	@srcimplementation@/eci_tod.cc \
+	@srcimplementation@/planet_coordinate.cc $(am__append_20) \
 	@srcimplementation@/quaternion_camera.cc \
+	@srcimplementation@/galileo_camera.cc \
 	@srcimplementation@/refraction.cc \
 	@srcimplementation@/ray_intersect.cc \
-	@srcimplementation@/dem_match.cc $(am__append_22) \
+	@srcimplementation@/dem_match.cc \
+	@srcimplementation@/igc_rolling_shutter.cc $(am__append_22) \
 	@srcimplementation@/quadratic_geometric_model.cc \
-	@srcimplementation@/geometric_model_image.cc $(am__append_25) \
+	@srcimplementation@/geometric_model_image.cc \
+	@srcimplementation@/igc_ray_caster.cc $(am__append_25) \
 	@srcimplementation@/spice_helper.cc \
 	@srcimplementation@/sdp_helper.cc @srccartlab@/argus_camera.cc \
 	@srccartlab@/argus_orbit.cc @srccartlab@/quickbird_camera.cc \
@@ -1956,15 +2021,17 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/swig_boost_array_wrap.cc \
 	@swigsrc@/swig_quaternion_wrap.cc @swigsrc@/constant_wrap.cc \
 	@swigsrc@/generic_object_wrap.cc \
-	@swigsrc@/geocal_quaternion_wrap.cc \
+	@swigsrc@/auto_derivative_wrap.cc @swigsrc@/array_ad_wrap.cc \
+	@swigsrc@/observer_wrap.cc @swigsrc@/geocal_quaternion_wrap.cc \
 	@swigsrc@/covariance_wrap.cc @swigsrc@/wgs84_constant_wrap.cc \
 	@swigsrc@/geocal_exception_wrap.cc @swigsrc@/functor_wrap.cc \
 	@swigsrc@/vfunctor_with_derivative_wrap.cc \
+	@swigsrc@/dfunctor_with_derivative_wrap.cc \
 	@swigsrc@/statistic_wrap.cc @swigsrc@/geocal_gsl_fit_wrap.cc \
 	@swigsrc@/geocal_gsl_root_wrap.cc \
 	@swigsrc@/geocal_time_wrap.cc @swigsrc@/tiled_file_wrap.cc \
 	@swigsrc@/image_coordinate_wrap.cc \
-	@swigsrc@/look_vector_wrap.cc \
+	@swigsrc@/with_parameter_wrap.cc @swigsrc@/look_vector_wrap.cc \
 	@swigsrc@/ground_coordinate_wrap.cc \
 	@swigsrc@/coordinate_converter_wrap.cc @swigsrc@/ecr_wrap.cc \
 	@swigsrc@/eci_wrap.cc @swigsrc@/geodetic_wrap.cc \
@@ -1972,8 +2039,9 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/geocal_rpc_wrap.cc @swigsrc@/raster_image_wrap.cc \
 	@swigsrc@/image_ground_connection_wrap.cc \
 	@swigsrc@/frame_coordinate_wrap.cc @swigsrc@/camera_wrap.cc \
-	@swigsrc@/orbit_wrap.cc @swigsrc@/time_table_wrap.cc \
-	@swigsrc@/ipi_wrap.cc @swigsrc@/raster_image_variable_wrap.cc \
+	@swigsrc@/ray_caster_wrap.cc @swigsrc@/orbit_wrap.cc \
+	@swigsrc@/time_table_wrap.cc @swigsrc@/ipi_wrap.cc \
+	@swigsrc@/raster_image_variable_wrap.cc \
 	@swigsrc@/sub_raster_image_wrap.cc \
 	@swigsrc@/raster_image_multi_band_wrap.cc \
 	@swigsrc@/raster_image_multi_band_variable_wrap.cc \
@@ -2023,8 +2091,11 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/rpc_image_ground_connection_wrap.cc \
 	@swigsrc@/ipi_image_ground_connection_wrap.cc \
 	@swigsrc@/eci_tod_wrap.cc @swigsrc@/quaternion_camera_wrap.cc \
-	@swigsrc@/refraction_wrap.cc \
+	@swigsrc@/galileo_camera_wrap.cc @swigsrc@/refraction_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
+	@swigsrc@/planet_coordinate_wrap.cc \
+	@swigsrc@/igc_ray_caster_wrap.cc \
+	@swigsrc@/igc_rolling_shutter_wrap.cc \
 	@swigsrc@/argus_camera_wrap.cc @swigsrc@/argus_orbit_wrap.cc \
 	@swigsrc@/quickbird_camera_wrap.cc \
 	@swigsrc@/spot_camera_wrap.cc @swigsrc@/spot_orbit_wrap.cc \
@@ -2078,21 +2149,25 @@ geocalincdir = @includedir@/geocal
 
 # Source files for library
 geocalinc_HEADERS = @srcsupport@/constant.h \
-	@srcsupport@/generic_object.h @srcsupport@/geocal_type_index.h \
-	@srcsupport@/dir_change.h @srcsupport@/null_deleter.h \
-	@srcsupport@/ostream_pad.h @srcsupport@/wgs84_constant.h \
-	@srcsupport@/printable.h @srcsupport@/geocal_exception.h \
-	@srcsupport@/tile.h @srcsupport@/tiled_file.h \
-	@srcsupport@/memory_map_array.h \
+	@srcsupport@/generic_object.h @srcsupport@/auto_derivative.h \
+	@srcsupport@/auto_derivative_quaternion.h \
+	@srcsupport@/array_ad.h @srcsupport@/observer.h \
+	@srcsupport@/geocal_type_index.h @srcsupport@/dir_change.h \
+	@srcsupport@/null_deleter.h @srcsupport@/ostream_pad.h \
+	@srcsupport@/wgs84_constant.h @srcsupport@/printable.h \
+	@srcsupport@/geocal_exception.h @srcsupport@/tile.h \
+	@srcsupport@/tiled_file.h @srcsupport@/memory_map_array.h \
 	@srcsupport@/geocal_gsl_matrix.h @srcsupport@/geocal_matrix.h \
 	@srcsupport@/geocal_quaternion.h \
+	@srcsupport@/geocal_autoderivative_quaternion.h \
 	@srcsupport@/boost/backtrace.hpp @srcsupport@/geocal_gsl_fit.h \
 	@srcsupport@/functor.h @srcsupport@/vfunctor_with_derivative.h \
+	@srcsupport@/dfunctor_with_derivative.h \
 	@srcsupport@/geocal_gsl_root.h @srcsupport@/geocal_time.h \
 	@srcsupport@/toolkit_time_interface.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
 	$(am__append_13) $(am__append_15) \
-	@srcinterface@/raster_image.h \
+	@srcinterface@/raster_image.h @srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
 	@srcinterface@/sub_raster_image.h \
 	@srcinterface@/raster_image_multi_band.h \
@@ -2102,7 +2177,8 @@ geocalinc_HEADERS = @srcsupport@/constant.h \
 	@srcinterface@/ground_coordinate.h \
 	@srcinterface@/ground_mask.h @srcinterface@/image_mask.h \
 	@srcinterface@/frame_coordinate.h @srcinterface@/time_table.h \
-	@srcinterface@/camera.h @srcinterface@/ecr.h \
+	@srcinterface@/camera.h @srcinterface@/ray_caster.h \
+	@srcinterface@/ecr.h \
 	@srcinterface@/toolkit_coordinate_interface.h \
 	@srcinterface@/eci.h @srcinterface@/look_vector.h \
 	@srcinterface@/geodetic.h \
@@ -2152,15 +2228,19 @@ geocalinc_HEADERS = @srcsupport@/constant.h \
 	@srcimplementation@/apply_mask.h \
 	@srcimplementation@/rpc_image_ground_connection.h \
 	@srcimplementation@/ipi_image_ground_connection.h \
-	@srcimplementation@/eci_tod.h $(am__append_19) \
+	@srcimplementation@/eci_tod.h \
+	@srcimplementation@/planet_coordinate.h $(am__append_19) \
 	@srcimplementation@/quaternion_camera.h \
+	@srcimplementation@/galileo_camera.h \
 	@srcimplementation@/refraction.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
 	@srcimplementation@/ray_intersect.h \
-	@srcimplementation@/dem_match.h $(am__append_21) \
+	@srcimplementation@/dem_match.h \
+	@srcimplementation@/igc_rolling_shutter.h $(am__append_21) \
 	@srcimplementation@/quadratic_geometric_model.h \
 	@srcimplementation@/geometric_model_image.h $(am__append_23) \
-	$(am__append_24) @srcimplementation@/spice_helper.h \
+	@srcimplementation@/igc_ray_caster.h $(am__append_24) \
+	@srcimplementation@/spice_helper.h \
 	@srcimplementation@/sdp_helper.h @srccartlab@/argus_camera.h \
 	@srccartlab@/argus_orbit.h @srccartlab@/quickbird_camera.h \
 	@srccartlab@/spot_camera.h @srccartlab@/spot_orbit.h \
@@ -2181,6 +2261,8 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
 	@srcsupport@/global_fixture_default.cc \
 	@srcsupport@/geocal_exception_test.cc \
+	@srcsupport@/auto_derivative_test.cc \
+	@srcsupport@/array_ad_test.cc @srcsupport@/observer_test.cc \
 	@srcsupport@/geocal_time_test.cc \
 	@srcsupport@/printable_test.cc \
 	@srcsupport@/ostream_pad_test.cc @srcsupport@/tile_test.cc \
@@ -2233,8 +2315,10 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/pan_sharpen_test.cc \
 	@srcimplementation@/rpc_image_ground_connection_test.cc \
 	@srcimplementation@/ipi_image_ground_connection_test.cc \
-	@srcimplementation@/eci_tod_test.cc $(am__append_28) \
+	@srcimplementation@/eci_tod_test.cc \
+	@srcimplementation@/planet_coordinate_test.cc $(am__append_28) \
 	@srcimplementation@/quaternion_camera_test.cc \
+	@srcimplementation@/galileo_camera_test.cc \
 	@srcimplementation@/refraction_test.cc \
 	@srcimplementation@/orbit_data_image_ground_connection_test.cc \
 	@srcimplementation@/ray_intersect_test.cc \
@@ -2243,6 +2327,8 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/dem_match_test.cc $(am__append_29) \
 	@srcimplementation@/quadratic_geometric_model_test.cc \
 	@srcimplementation@/geometric_model_image_test.cc \
+	@srcimplementation@/igc_ray_caster_test.cc \
+	@srcimplementation@/igc_rolling_shutter_test.cc \
 	$(am__append_34) @srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
 	@srccartlab@/quickbird_camera_test.cc \
@@ -2360,7 +2446,6 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/quick_bird_reflectance.py \
 	@srcpythonlib@/world_view2_reflectance.py \
 	@srcpythonlib@/spot_reflectance.py \
-	@srcpythonlib@/with_parameter.py \
 	@srcpythonlib@/sqlite_shelf.py \
 	@srcpythonlib@/feature_detector_extension.py \
 	@srcpythonlib@/ply_file.py @srcpythonlib@/docopt_simple.py \
@@ -2370,7 +2455,8 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/pleides_rpc.py \
 	@srcpythonlib@/parallel_process.py \
 	@srcpythonlib@/raster_image_multi_band.py \
-	@srcpythonlib@/ibis_file_extension.py $(am__append_44) \
+	@srcpythonlib@/ibis_file_extension.py \
+	@srcpythonlib@/job_database.py $(am__append_44) \
 	$(am__append_45)
 @HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${PATH}
 @HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}
@@ -2532,6 +2618,12 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-generic_object_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-auto_derivative_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-array_ad_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-observer_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-geocal_quaternion_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-covariance_wrap.lo: @swigsrc@/$(am__dirstamp) \
@@ -2544,6 +2636,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-vfunctor_with_derivative_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-dfunctor_with_derivative_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-statistic_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-geocal_gsl_fit_wrap.lo:  \
@@ -2555,6 +2649,8 @@ clean-pkgpythonswigLTLIBRARIES:
 @swigsrc@/_swig_wrap_la-tiled_file_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-with_parameter_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-look_vector_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -2581,6 +2677,8 @@ clean-pkgpythonswigLTLIBRARIES:
 @swigsrc@/_swig_wrap_la-frame_coordinate_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-camera_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-ray_caster_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -2704,9 +2802,17 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-quaternion_camera_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-refraction_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-argus_camera_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -2841,6 +2947,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcinterface@/libgeocal_la-raster_image.lo:  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/libgeocal_la-with_parameter.lo:  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-sub_raster_image.lo:  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
@@ -2881,9 +2990,6 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-dem.lo: @srcinterface@/$(am__dirstamp) \
-	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
-@srcinterface@/libgeocal_la-simple_dem.lo:  \
-	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-map_info.lo:  \
 	@srcinterface@/$(am__dirstamp) \
@@ -3000,10 +3106,16 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcimplementation@/libgeocal_la-eci_tod.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-planet_coordinate.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-eci_tod_burl.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-quaternion_camera.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-galileo_camera.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-refraction.lo:  \
@@ -3015,6 +3127,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcimplementation@/libgeocal_la-dem_match.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-igc_rolling_shutter.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-phase_correlation_matcher.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -3022,6 +3137,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-geometric_model_image.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-igc_ray_caster.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-geocal_gdal.lo:  \
@@ -3234,6 +3352,15 @@ clean-checkPROGRAMS:
 @srcsupport@/geocal_test_all-geocal_exception_test.$(OBJEXT):  \
 	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcsupport@/geocal_test_all-auto_derivative_test.$(OBJEXT):  \
+	@srcsupport@/$(am__dirstamp) \
+	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcsupport@/geocal_test_all-array_ad_test.$(OBJEXT):  \
+	@srcsupport@/$(am__dirstamp) \
+	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcsupport@/geocal_test_all-observer_test.$(OBJEXT):  \
+	@srcsupport@/$(am__dirstamp) \
+	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
 @srcsupport@/geocal_test_all-geocal_time_test.$(OBJEXT):  \
 	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
@@ -3432,10 +3559,16 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-eci_tod_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-planet_coordinate_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-eci_tod_burl_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-quaternion_camera_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-galileo_camera_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-refraction_test.$(OBJEXT):  \
@@ -3463,6 +3596,12 @@ clean-checkPROGRAMS:
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-geometric_model_image_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-igc_ray_caster_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-igc_rolling_shutter_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT):  \
@@ -3689,6 +3828,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-did_datum_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-eci_tod_burl_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-eci_tod_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-galileo_camera_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-gdal_datum_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-gdal_dem_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-gdal_raster_image_test.Po@am__quote@
@@ -3698,6 +3838,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-hdf_orbit_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_image_to_image_match_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_rolling_shutter_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_simulated_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-image_point_display_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ipi_image_ground_connection_test.Po@am__quote@
@@ -3711,6 +3853,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-pan_sharpen_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-phase_correlation_matcher_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-quadratic_geometric_model_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-quaternion_camera_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_averaged_test.Po@am__quote@
@@ -3730,6 +3873,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-did_datum.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod_burl.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-galileo_camera.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_dem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_multi_band.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_raster_image.Plo@am__quote@
@@ -3738,6 +3882,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ground_mask_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_image_to_image_match.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_map_projected.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_rolling_shutter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_simulated.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-image_mask_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-image_point_display.Plo@am__quote@
@@ -3749,6 +3895,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_quaternion_list.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-pan_sharpen.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-phase_correlation_matcher.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-planet_coordinate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-pyramid_image_matcher.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-quadratic_geometric_model.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-quaternion_camera.Plo@am__quote@
@@ -3811,10 +3958,10 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-raster_image_multi_band.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-raster_multifile.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-rpc_image.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image_multi_band.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-time_table.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-with_parameter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_igc_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_orbit_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-ground_mspi_igc_test.Po@am__quote@
@@ -3838,6 +3985,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-foveon.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-libraw_c_api.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-libraw_cxx.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-covariance_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_exception_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_fftw_test.Po@am__quote@
@@ -3851,6 +4000,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-global_fixture_default.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-hdf_file_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-memory_map_array_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-observer_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-ostream_pad_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-printable_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-statistic_test.Po@am__quote@
@@ -3871,6 +4021,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-apply_mask_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_camera_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_orbit_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-array_ad_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-auto_derivative_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_wrap.Plo@am__quote@
@@ -3885,6 +4037,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_match_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_tiled_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dfunctor_with_derivative_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-did_datum_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-doughnut_average_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_tod_burl_wrap.Plo@am__quote@
@@ -3895,6 +4048,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-forstner_feature_detector_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-frame_coordinate_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-functor_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-galileo_camera_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-gdal_datum_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-gdal_dem_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-gdal_multi_band_wrap.Plo@am__quote@
@@ -3923,6 +4077,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ibis_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_image_to_image_match_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_map_projected_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_ray_caster_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_rolling_shutter_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_simulated_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_coordinate_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_ground_connection_wrap.Plo@am__quote@
@@ -3948,6 +4104,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_camera_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_config_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_paraxial_transform_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ogr_coordinate_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_data_image_ground_connection_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_wrap.Plo@am__quote@
@@ -3955,6 +4112,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-paint_class_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-pan_sharpen_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-phase_correlation_matcher_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-planet_coordinate_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-pos_export_orbit_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-pyramid_image_matcher_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-quadratic_geometric_model_wrap.Plo@am__quote@
@@ -3971,6 +4129,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_multifile_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_subsample_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-rpc_image_ground_connection_wrap.Plo@am__quote@
@@ -4001,6 +4160,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_multi_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_raster_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Plo@am__quote@
 
 .cc.o:
@@ -4069,6 +4229,27 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-generic_object_wrap.lo `test -f '@swigsrc@/generic_object_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/generic_object_wrap.cc
 
+@swigsrc@/_swig_wrap_la-auto_derivative_wrap.lo: @swigsrc@/auto_derivative_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-auto_derivative_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-auto_derivative_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-auto_derivative_wrap.lo `test -f '@swigsrc@/auto_derivative_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/auto_derivative_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-auto_derivative_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-auto_derivative_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/auto_derivative_wrap.cc' object='@swigsrc@/_swig_wrap_la-auto_derivative_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-auto_derivative_wrap.lo `test -f '@swigsrc@/auto_derivative_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/auto_derivative_wrap.cc
+
+@swigsrc@/_swig_wrap_la-array_ad_wrap.lo: @swigsrc@/array_ad_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-array_ad_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-array_ad_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-array_ad_wrap.lo `test -f '@swigsrc@/array_ad_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/array_ad_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-array_ad_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-array_ad_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/array_ad_wrap.cc' object='@swigsrc@/_swig_wrap_la-array_ad_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-array_ad_wrap.lo `test -f '@swigsrc@/array_ad_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/array_ad_wrap.cc
+
+@swigsrc@/_swig_wrap_la-observer_wrap.lo: @swigsrc@/observer_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-observer_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-observer_wrap.lo `test -f '@swigsrc@/observer_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/observer_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/observer_wrap.cc' object='@swigsrc@/_swig_wrap_la-observer_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-observer_wrap.lo `test -f '@swigsrc@/observer_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/observer_wrap.cc
+
 @swigsrc@/_swig_wrap_la-geocal_quaternion_wrap.lo: @swigsrc@/geocal_quaternion_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-geocal_quaternion_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_quaternion_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-geocal_quaternion_wrap.lo `test -f '@swigsrc@/geocal_quaternion_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_quaternion_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_quaternion_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_quaternion_wrap.Plo
@@ -4111,6 +4292,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vfunctor_with_derivative_wrap.lo `test -f '@swigsrc@/vfunctor_with_derivative_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vfunctor_with_derivative_wrap.cc
 
+@swigsrc@/_swig_wrap_la-dfunctor_with_derivative_wrap.lo: @swigsrc@/dfunctor_with_derivative_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-dfunctor_with_derivative_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-dfunctor_with_derivative_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-dfunctor_with_derivative_wrap.lo `test -f '@swigsrc@/dfunctor_with_derivative_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/dfunctor_with_derivative_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-dfunctor_with_derivative_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-dfunctor_with_derivative_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/dfunctor_with_derivative_wrap.cc' object='@swigsrc@/_swig_wrap_la-dfunctor_with_derivative_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-dfunctor_with_derivative_wrap.lo `test -f '@swigsrc@/dfunctor_with_derivative_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/dfunctor_with_derivative_wrap.cc
+
 @swigsrc@/_swig_wrap_la-statistic_wrap.lo: @swigsrc@/statistic_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-statistic_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-statistic_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-statistic_wrap.lo `test -f '@swigsrc@/statistic_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/statistic_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-statistic_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-statistic_wrap.Plo
@@ -4152,6 +4340,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/image_coordinate_wrap.cc' object='@swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo `test -f '@swigsrc@/image_coordinate_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/image_coordinate_wrap.cc
+
+@swigsrc@/_swig_wrap_la-with_parameter_wrap.lo: @swigsrc@/with_parameter_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-with_parameter_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-with_parameter_wrap.lo `test -f '@swigsrc@/with_parameter_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/with_parameter_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/with_parameter_wrap.cc' object='@swigsrc@/_swig_wrap_la-with_parameter_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-with_parameter_wrap.lo `test -f '@swigsrc@/with_parameter_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/with_parameter_wrap.cc
 
 @swigsrc@/_swig_wrap_la-look_vector_wrap.lo: @swigsrc@/look_vector_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-look_vector_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-look_vector_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-look_vector_wrap.lo `test -f '@swigsrc@/look_vector_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/look_vector_wrap.cc
@@ -4243,6 +4438,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/camera_wrap.cc' object='@swigsrc@/_swig_wrap_la-camera_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-camera_wrap.lo `test -f '@swigsrc@/camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/camera_wrap.cc
+
+@swigsrc@/_swig_wrap_la-ray_caster_wrap.lo: @swigsrc@/ray_caster_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-ray_caster_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-ray_caster_wrap.lo `test -f '@swigsrc@/ray_caster_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ray_caster_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/ray_caster_wrap.cc' object='@swigsrc@/_swig_wrap_la-ray_caster_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-ray_caster_wrap.lo `test -f '@swigsrc@/ray_caster_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ray_caster_wrap.cc
 
 @swigsrc@/_swig_wrap_la-orbit_wrap.lo: @swigsrc@/orbit_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-orbit_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-orbit_wrap.lo `test -f '@swigsrc@/orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_wrap.cc
@@ -4671,6 +4873,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-quaternion_camera_wrap.lo `test -f '@swigsrc@/quaternion_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/quaternion_camera_wrap.cc
 
+@swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo: @swigsrc@/galileo_camera_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-galileo_camera_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo `test -f '@swigsrc@/galileo_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/galileo_camera_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-galileo_camera_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-galileo_camera_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/galileo_camera_wrap.cc' object='@swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo `test -f '@swigsrc@/galileo_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/galileo_camera_wrap.cc
+
 @swigsrc@/_swig_wrap_la-refraction_wrap.lo: @swigsrc@/refraction_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-refraction_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-refraction_wrap.lo `test -f '@swigsrc@/refraction_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/refraction_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo
@@ -4684,6 +4893,27 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/orbit_data_image_ground_connection_wrap.cc' object='@swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo `test -f '@swigsrc@/orbit_data_image_ground_connection_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_data_image_ground_connection_wrap.cc
+
+@swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo: @swigsrc@/planet_coordinate_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-planet_coordinate_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo `test -f '@swigsrc@/planet_coordinate_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/planet_coordinate_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-planet_coordinate_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-planet_coordinate_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/planet_coordinate_wrap.cc' object='@swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo `test -f '@swigsrc@/planet_coordinate_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/planet_coordinate_wrap.cc
+
+@swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo: @swigsrc@/igc_ray_caster_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_ray_caster_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo `test -f '@swigsrc@/igc_ray_caster_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_ray_caster_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_ray_caster_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_ray_caster_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/igc_ray_caster_wrap.cc' object='@swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo `test -f '@swigsrc@/igc_ray_caster_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_ray_caster_wrap.cc
+
+@swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo: @swigsrc@/igc_rolling_shutter_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_rolling_shutter_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo `test -f '@swigsrc@/igc_rolling_shutter_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_rolling_shutter_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_rolling_shutter_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_rolling_shutter_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/igc_rolling_shutter_wrap.cc' object='@swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo `test -f '@swigsrc@/igc_rolling_shutter_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_rolling_shutter_wrap.cc
 
 @swigsrc@/_swig_wrap_la-argus_camera_wrap.lo: @swigsrc@/argus_camera_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-argus_camera_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_camera_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-argus_camera_wrap.lo `test -f '@swigsrc@/argus_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/argus_camera_wrap.cc
@@ -5056,6 +5286,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-raster_image.lo `test -f '@srcinterface@/raster_image.cc' || echo '$(srcdir)/'`@srcinterface@/raster_image.cc
 
+@srcinterface@/libgeocal_la-with_parameter.lo: @srcinterface@/with_parameter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-with_parameter.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-with_parameter.Tpo -c -o @srcinterface@/libgeocal_la-with_parameter.lo `test -f '@srcinterface@/with_parameter.cc' || echo '$(srcdir)/'`@srcinterface@/with_parameter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/libgeocal_la-with_parameter.Tpo @srcinterface@/$(DEPDIR)/libgeocal_la-with_parameter.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/with_parameter.cc' object='@srcinterface@/libgeocal_la-with_parameter.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-with_parameter.lo `test -f '@srcinterface@/with_parameter.cc' || echo '$(srcdir)/'`@srcinterface@/with_parameter.cc
+
 @srcinterface@/libgeocal_la-sub_raster_image.lo: @srcinterface@/sub_raster_image.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-sub_raster_image.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Tpo -c -o @srcinterface@/libgeocal_la-sub_raster_image.lo `test -f '@srcinterface@/sub_raster_image.cc' || echo '$(srcdir)/'`@srcinterface@/sub_raster_image.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Tpo @srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo
@@ -5160,13 +5397,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/dem.cc' object='@srcinterface@/libgeocal_la-dem.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-dem.lo `test -f '@srcinterface@/dem.cc' || echo '$(srcdir)/'`@srcinterface@/dem.cc
-
-@srcinterface@/libgeocal_la-simple_dem.lo: @srcinterface@/simple_dem.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-simple_dem.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Tpo -c -o @srcinterface@/libgeocal_la-simple_dem.lo `test -f '@srcinterface@/simple_dem.cc' || echo '$(srcdir)/'`@srcinterface@/simple_dem.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Tpo @srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/simple_dem.cc' object='@srcinterface@/libgeocal_la-simple_dem.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-simple_dem.lo `test -f '@srcinterface@/simple_dem.cc' || echo '$(srcdir)/'`@srcinterface@/simple_dem.cc
 
 @srcinterface@/libgeocal_la-map_info.lo: @srcinterface@/map_info.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-map_info.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-map_info.Tpo -c -o @srcinterface@/libgeocal_la-map_info.lo `test -f '@srcinterface@/map_info.cc' || echo '$(srcdir)/'`@srcinterface@/map_info.cc
@@ -5427,6 +5657,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-eci_tod.lo `test -f '@srcimplementation@/eci_tod.cc' || echo '$(srcdir)/'`@srcimplementation@/eci_tod.cc
 
+@srcimplementation@/libgeocal_la-planet_coordinate.lo: @srcimplementation@/planet_coordinate.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-planet_coordinate.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-planet_coordinate.Tpo -c -o @srcimplementation@/libgeocal_la-planet_coordinate.lo `test -f '@srcimplementation@/planet_coordinate.cc' || echo '$(srcdir)/'`@srcimplementation@/planet_coordinate.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-planet_coordinate.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-planet_coordinate.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/planet_coordinate.cc' object='@srcimplementation@/libgeocal_la-planet_coordinate.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-planet_coordinate.lo `test -f '@srcimplementation@/planet_coordinate.cc' || echo '$(srcdir)/'`@srcimplementation@/planet_coordinate.cc
+
 @srcimplementation@/libgeocal_la-eci_tod_burl.lo: @srcimplementation@/eci_tod_burl.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-eci_tod_burl.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod_burl.Tpo -c -o @srcimplementation@/libgeocal_la-eci_tod_burl.lo `test -f '@srcimplementation@/eci_tod_burl.cc' || echo '$(srcdir)/'`@srcimplementation@/eci_tod_burl.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod_burl.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod_burl.Plo
@@ -5440,6 +5677,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/quaternion_camera.cc' object='@srcimplementation@/libgeocal_la-quaternion_camera.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-quaternion_camera.lo `test -f '@srcimplementation@/quaternion_camera.cc' || echo '$(srcdir)/'`@srcimplementation@/quaternion_camera.cc
+
+@srcimplementation@/libgeocal_la-galileo_camera.lo: @srcimplementation@/galileo_camera.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-galileo_camera.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-galileo_camera.Tpo -c -o @srcimplementation@/libgeocal_la-galileo_camera.lo `test -f '@srcimplementation@/galileo_camera.cc' || echo '$(srcdir)/'`@srcimplementation@/galileo_camera.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-galileo_camera.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-galileo_camera.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/galileo_camera.cc' object='@srcimplementation@/libgeocal_la-galileo_camera.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-galileo_camera.lo `test -f '@srcimplementation@/galileo_camera.cc' || echo '$(srcdir)/'`@srcimplementation@/galileo_camera.cc
 
 @srcimplementation@/libgeocal_la-refraction.lo: @srcimplementation@/refraction.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-refraction.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Tpo -c -o @srcimplementation@/libgeocal_la-refraction.lo `test -f '@srcimplementation@/refraction.cc' || echo '$(srcdir)/'`@srcimplementation@/refraction.cc
@@ -5462,6 +5706,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-dem_match.lo `test -f '@srcimplementation@/dem_match.cc' || echo '$(srcdir)/'`@srcimplementation@/dem_match.cc
 
+@srcimplementation@/libgeocal_la-igc_rolling_shutter.lo: @srcimplementation@/igc_rolling_shutter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-igc_rolling_shutter.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_rolling_shutter.Tpo -c -o @srcimplementation@/libgeocal_la-igc_rolling_shutter.lo `test -f '@srcimplementation@/igc_rolling_shutter.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_rolling_shutter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_rolling_shutter.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_rolling_shutter.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_rolling_shutter.cc' object='@srcimplementation@/libgeocal_la-igc_rolling_shutter.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-igc_rolling_shutter.lo `test -f '@srcimplementation@/igc_rolling_shutter.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_rolling_shutter.cc
+
 @srcimplementation@/libgeocal_la-phase_correlation_matcher.lo: @srcimplementation@/phase_correlation_matcher.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-phase_correlation_matcher.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-phase_correlation_matcher.Tpo -c -o @srcimplementation@/libgeocal_la-phase_correlation_matcher.lo `test -f '@srcimplementation@/phase_correlation_matcher.cc' || echo '$(srcdir)/'`@srcimplementation@/phase_correlation_matcher.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-phase_correlation_matcher.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-phase_correlation_matcher.Plo
@@ -5482,6 +5733,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/geometric_model_image.cc' object='@srcimplementation@/libgeocal_la-geometric_model_image.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-geometric_model_image.lo `test -f '@srcimplementation@/geometric_model_image.cc' || echo '$(srcdir)/'`@srcimplementation@/geometric_model_image.cc
+
+@srcimplementation@/libgeocal_la-igc_ray_caster.lo: @srcimplementation@/igc_ray_caster.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-igc_ray_caster.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Tpo -c -o @srcimplementation@/libgeocal_la-igc_ray_caster.lo `test -f '@srcimplementation@/igc_ray_caster.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_ray_caster.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_ray_caster.cc' object='@srcimplementation@/libgeocal_la-igc_ray_caster.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-igc_ray_caster.lo `test -f '@srcimplementation@/igc_ray_caster.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_ray_caster.cc
 
 @srcimplementation@/libgeocal_la-geocal_gdal.lo: @srcimplementation@/geocal_gdal.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-geocal_gdal.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-geocal_gdal.Tpo -c -o @srcimplementation@/libgeocal_la-geocal_gdal.lo `test -f '@srcimplementation@/geocal_gdal.cc' || echo '$(srcdir)/'`@srcimplementation@/geocal_gdal.cc
@@ -5846,6 +6104,48 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/geocal_exception_test.cc' object='@srcsupport@/geocal_test_all-geocal_exception_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-geocal_exception_test.obj `if test -f '@srcsupport@/geocal_exception_test.cc'; then $(CYGPATH_W) '@srcsupport@/geocal_exception_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/geocal_exception_test.cc'; fi`
+
+@srcsupport@/geocal_test_all-auto_derivative_test.o: @srcsupport@/auto_derivative_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-auto_derivative_test.o -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Tpo -c -o @srcsupport@/geocal_test_all-auto_derivative_test.o `test -f '@srcsupport@/auto_derivative_test.cc' || echo '$(srcdir)/'`@srcsupport@/auto_derivative_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Tpo @srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/auto_derivative_test.cc' object='@srcsupport@/geocal_test_all-auto_derivative_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-auto_derivative_test.o `test -f '@srcsupport@/auto_derivative_test.cc' || echo '$(srcdir)/'`@srcsupport@/auto_derivative_test.cc
+
+@srcsupport@/geocal_test_all-auto_derivative_test.obj: @srcsupport@/auto_derivative_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-auto_derivative_test.obj -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Tpo -c -o @srcsupport@/geocal_test_all-auto_derivative_test.obj `if test -f '@srcsupport@/auto_derivative_test.cc'; then $(CYGPATH_W) '@srcsupport@/auto_derivative_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/auto_derivative_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Tpo @srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/auto_derivative_test.cc' object='@srcsupport@/geocal_test_all-auto_derivative_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-auto_derivative_test.obj `if test -f '@srcsupport@/auto_derivative_test.cc'; then $(CYGPATH_W) '@srcsupport@/auto_derivative_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/auto_derivative_test.cc'; fi`
+
+@srcsupport@/geocal_test_all-array_ad_test.o: @srcsupport@/array_ad_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-array_ad_test.o -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Tpo -c -o @srcsupport@/geocal_test_all-array_ad_test.o `test -f '@srcsupport@/array_ad_test.cc' || echo '$(srcdir)/'`@srcsupport@/array_ad_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Tpo @srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/array_ad_test.cc' object='@srcsupport@/geocal_test_all-array_ad_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-array_ad_test.o `test -f '@srcsupport@/array_ad_test.cc' || echo '$(srcdir)/'`@srcsupport@/array_ad_test.cc
+
+@srcsupport@/geocal_test_all-array_ad_test.obj: @srcsupport@/array_ad_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-array_ad_test.obj -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Tpo -c -o @srcsupport@/geocal_test_all-array_ad_test.obj `if test -f '@srcsupport@/array_ad_test.cc'; then $(CYGPATH_W) '@srcsupport@/array_ad_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/array_ad_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Tpo @srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/array_ad_test.cc' object='@srcsupport@/geocal_test_all-array_ad_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-array_ad_test.obj `if test -f '@srcsupport@/array_ad_test.cc'; then $(CYGPATH_W) '@srcsupport@/array_ad_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/array_ad_test.cc'; fi`
+
+@srcsupport@/geocal_test_all-observer_test.o: @srcsupport@/observer_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-observer_test.o -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-observer_test.Tpo -c -o @srcsupport@/geocal_test_all-observer_test.o `test -f '@srcsupport@/observer_test.cc' || echo '$(srcdir)/'`@srcsupport@/observer_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/geocal_test_all-observer_test.Tpo @srcsupport@/$(DEPDIR)/geocal_test_all-observer_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/observer_test.cc' object='@srcsupport@/geocal_test_all-observer_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-observer_test.o `test -f '@srcsupport@/observer_test.cc' || echo '$(srcdir)/'`@srcsupport@/observer_test.cc
+
+@srcsupport@/geocal_test_all-observer_test.obj: @srcsupport@/observer_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-observer_test.obj -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-observer_test.Tpo -c -o @srcsupport@/geocal_test_all-observer_test.obj `if test -f '@srcsupport@/observer_test.cc'; then $(CYGPATH_W) '@srcsupport@/observer_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/observer_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/geocal_test_all-observer_test.Tpo @srcsupport@/$(DEPDIR)/geocal_test_all-observer_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/observer_test.cc' object='@srcsupport@/geocal_test_all-observer_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-observer_test.obj `if test -f '@srcsupport@/observer_test.cc'; then $(CYGPATH_W) '@srcsupport@/observer_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/observer_test.cc'; fi`
 
 @srcsupport@/geocal_test_all-geocal_time_test.o: @srcsupport@/geocal_time_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-geocal_time_test.o -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_time_test.Tpo -c -o @srcsupport@/geocal_test_all-geocal_time_test.o `test -f '@srcsupport@/geocal_time_test.cc' || echo '$(srcdir)/'`@srcsupport@/geocal_time_test.cc
@@ -6771,6 +7071,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-eci_tod_test.obj `if test -f '@srcimplementation@/eci_tod_test.cc'; then $(CYGPATH_W) '@srcimplementation@/eci_tod_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/eci_tod_test.cc'; fi`
 
+@srcimplementation@/geocal_test_all-planet_coordinate_test.o: @srcimplementation@/planet_coordinate_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-planet_coordinate_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Tpo -c -o @srcimplementation@/geocal_test_all-planet_coordinate_test.o `test -f '@srcimplementation@/planet_coordinate_test.cc' || echo '$(srcdir)/'`@srcimplementation@/planet_coordinate_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/planet_coordinate_test.cc' object='@srcimplementation@/geocal_test_all-planet_coordinate_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-planet_coordinate_test.o `test -f '@srcimplementation@/planet_coordinate_test.cc' || echo '$(srcdir)/'`@srcimplementation@/planet_coordinate_test.cc
+
+@srcimplementation@/geocal_test_all-planet_coordinate_test.obj: @srcimplementation@/planet_coordinate_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-planet_coordinate_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Tpo -c -o @srcimplementation@/geocal_test_all-planet_coordinate_test.obj `if test -f '@srcimplementation@/planet_coordinate_test.cc'; then $(CYGPATH_W) '@srcimplementation@/planet_coordinate_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/planet_coordinate_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/planet_coordinate_test.cc' object='@srcimplementation@/geocal_test_all-planet_coordinate_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-planet_coordinate_test.obj `if test -f '@srcimplementation@/planet_coordinate_test.cc'; then $(CYGPATH_W) '@srcimplementation@/planet_coordinate_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/planet_coordinate_test.cc'; fi`
+
 @srcimplementation@/geocal_test_all-eci_tod_burl_test.o: @srcimplementation@/eci_tod_burl_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-eci_tod_burl_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-eci_tod_burl_test.Tpo -c -o @srcimplementation@/geocal_test_all-eci_tod_burl_test.o `test -f '@srcimplementation@/eci_tod_burl_test.cc' || echo '$(srcdir)/'`@srcimplementation@/eci_tod_burl_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-eci_tod_burl_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-eci_tod_burl_test.Po
@@ -6798,6 +7112,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/quaternion_camera_test.cc' object='@srcimplementation@/geocal_test_all-quaternion_camera_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-quaternion_camera_test.obj `if test -f '@srcimplementation@/quaternion_camera_test.cc'; then $(CYGPATH_W) '@srcimplementation@/quaternion_camera_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/quaternion_camera_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-galileo_camera_test.o: @srcimplementation@/galileo_camera_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-galileo_camera_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-galileo_camera_test.Tpo -c -o @srcimplementation@/geocal_test_all-galileo_camera_test.o `test -f '@srcimplementation@/galileo_camera_test.cc' || echo '$(srcdir)/'`@srcimplementation@/galileo_camera_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-galileo_camera_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-galileo_camera_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/galileo_camera_test.cc' object='@srcimplementation@/geocal_test_all-galileo_camera_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-galileo_camera_test.o `test -f '@srcimplementation@/galileo_camera_test.cc' || echo '$(srcdir)/'`@srcimplementation@/galileo_camera_test.cc
+
+@srcimplementation@/geocal_test_all-galileo_camera_test.obj: @srcimplementation@/galileo_camera_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-galileo_camera_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-galileo_camera_test.Tpo -c -o @srcimplementation@/geocal_test_all-galileo_camera_test.obj `if test -f '@srcimplementation@/galileo_camera_test.cc'; then $(CYGPATH_W) '@srcimplementation@/galileo_camera_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/galileo_camera_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-galileo_camera_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-galileo_camera_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/galileo_camera_test.cc' object='@srcimplementation@/geocal_test_all-galileo_camera_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-galileo_camera_test.obj `if test -f '@srcimplementation@/galileo_camera_test.cc'; then $(CYGPATH_W) '@srcimplementation@/galileo_camera_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/galileo_camera_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-refraction_test.o: @srcimplementation@/refraction_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-refraction_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Tpo -c -o @srcimplementation@/geocal_test_all-refraction_test.o `test -f '@srcimplementation@/refraction_test.cc' || echo '$(srcdir)/'`@srcimplementation@/refraction_test.cc
@@ -6924,6 +7252,34 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/geometric_model_image_test.cc' object='@srcimplementation@/geocal_test_all-geometric_model_image_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-geometric_model_image_test.obj `if test -f '@srcimplementation@/geometric_model_image_test.cc'; then $(CYGPATH_W) '@srcimplementation@/geometric_model_image_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/geometric_model_image_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-igc_ray_caster_test.o: @srcimplementation@/igc_ray_caster_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_ray_caster_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_ray_caster_test.o `test -f '@srcimplementation@/igc_ray_caster_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_ray_caster_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_ray_caster_test.cc' object='@srcimplementation@/geocal_test_all-igc_ray_caster_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_ray_caster_test.o `test -f '@srcimplementation@/igc_ray_caster_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_ray_caster_test.cc
+
+@srcimplementation@/geocal_test_all-igc_ray_caster_test.obj: @srcimplementation@/igc_ray_caster_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_ray_caster_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_ray_caster_test.obj `if test -f '@srcimplementation@/igc_ray_caster_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_ray_caster_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_ray_caster_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_ray_caster_test.cc' object='@srcimplementation@/geocal_test_all-igc_ray_caster_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_ray_caster_test.obj `if test -f '@srcimplementation@/igc_ray_caster_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_ray_caster_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_ray_caster_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-igc_rolling_shutter_test.o: @srcimplementation@/igc_rolling_shutter_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_rolling_shutter_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_rolling_shutter_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_rolling_shutter_test.o `test -f '@srcimplementation@/igc_rolling_shutter_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_rolling_shutter_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_rolling_shutter_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_rolling_shutter_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_rolling_shutter_test.cc' object='@srcimplementation@/geocal_test_all-igc_rolling_shutter_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_rolling_shutter_test.o `test -f '@srcimplementation@/igc_rolling_shutter_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_rolling_shutter_test.cc
+
+@srcimplementation@/geocal_test_all-igc_rolling_shutter_test.obj: @srcimplementation@/igc_rolling_shutter_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_rolling_shutter_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_rolling_shutter_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_rolling_shutter_test.obj `if test -f '@srcimplementation@/igc_rolling_shutter_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_rolling_shutter_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_rolling_shutter_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_rolling_shutter_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_rolling_shutter_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_rolling_shutter_test.cc' object='@srcimplementation@/geocal_test_all-igc_rolling_shutter_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_rolling_shutter_test.obj `if test -f '@srcimplementation@/igc_rolling_shutter_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_rolling_shutter_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_rolling_shutter_test.cc'; fi`
 
 @srccartlab@/geocal_test_all-vicar_ogr_test.o: @srccartlab@/vicar_ogr_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srccartlab@/geocal_test_all-vicar_ogr_test.o -MD -MP -MF @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_ogr_test.Tpo -c -o @srccartlab@/geocal_test_all-vicar_ogr_test.o `test -f '@srccartlab@/vicar_ogr_test.cc' || echo '$(srcdir)/'`@srccartlab@/vicar_ogr_test.cc

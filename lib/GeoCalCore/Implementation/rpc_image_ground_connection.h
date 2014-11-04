@@ -102,7 +102,8 @@ public:
   virtual blitz::Array<double, 1> parameter() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) const;
+  virtual blitz::Array<bool, 1> parameter_mask() const;
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const;
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
 

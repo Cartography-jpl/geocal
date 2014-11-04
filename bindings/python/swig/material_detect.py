@@ -122,7 +122,6 @@ import geocal_swig.calc_raster
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 class MaterialDetect(geocal_swig.calc_raster.CalcRaster):
     """
     This class is used to do change detection and identify the material

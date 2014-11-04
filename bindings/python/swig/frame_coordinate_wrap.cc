@@ -3449,43 +3449,49 @@ namespace Swig {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_GeoCal__FrameCoordinate swig_types[0]
-#define SWIGTYPE_p_GeoCal__GenericObject swig_types[1]
-#define SWIGTYPE_p_allocator_type swig_types[2]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[3]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[4]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[5]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[6]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[7]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[8]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[9]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[11]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[12]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[13]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[14]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[15]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[16]
-#define SWIGTYPE_p_char swig_types[17]
-#define SWIGTYPE_p_char_type swig_types[18]
-#define SWIGTYPE_p_difference_type swig_types[19]
-#define SWIGTYPE_p_fmtflags swig_types[20]
-#define SWIGTYPE_p_int_type swig_types[21]
-#define SWIGTYPE_p_iostate swig_types[22]
-#define SWIGTYPE_p_off_type swig_types[23]
-#define SWIGTYPE_p_openmode swig_types[24]
-#define SWIGTYPE_p_pos_type swig_types[25]
-#define SWIGTYPE_p_seekdir swig_types[26]
-#define SWIGTYPE_p_size_t swig_types[27]
-#define SWIGTYPE_p_size_type swig_types[28]
-#define SWIGTYPE_p_state_type swig_types[29]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[30]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[31]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[32]
-#define SWIGTYPE_p_traits_type swig_types[33]
-#define SWIGTYPE_p_value_type swig_types[34]
-static swig_type_info *swig_types[36];
-static swig_module_info swig_module = {swig_types, 35, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__AutoDerivativeRefT_double_t swig_types[0]
+#define SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t swig_types[1]
+#define SWIGTYPE_p_GeoCal__FrameCoordinate swig_types[2]
+#define SWIGTYPE_p_GeoCal__FrameCoordinateWithDerivative swig_types[3]
+#define SWIGTYPE_p_GeoCal__GenericObject swig_types[4]
+#define SWIGTYPE_p_allocator_type swig_types[5]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[6]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[7]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[8]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[9]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[10]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[11]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[12]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[16]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[17]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[18]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[19]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t swig_types[20]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[21]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[22]
+#define SWIGTYPE_p_char swig_types[23]
+#define SWIGTYPE_p_char_type swig_types[24]
+#define SWIGTYPE_p_difference_type swig_types[25]
+#define SWIGTYPE_p_fmtflags swig_types[26]
+#define SWIGTYPE_p_int_type swig_types[27]
+#define SWIGTYPE_p_iostate swig_types[28]
+#define SWIGTYPE_p_off_type swig_types[29]
+#define SWIGTYPE_p_openmode swig_types[30]
+#define SWIGTYPE_p_pos_type swig_types[31]
+#define SWIGTYPE_p_seekdir swig_types[32]
+#define SWIGTYPE_p_size_t swig_types[33]
+#define SWIGTYPE_p_size_type swig_types[34]
+#define SWIGTYPE_p_state_type swig_types[35]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[36]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[37]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[38]
+#define SWIGTYPE_p_traits_type swig_types[39]
+#define SWIGTYPE_p_value_type swig_types[40]
+static swig_type_info *swig_types[42];
+static swig_module_info swig_module = {swig_types, 41, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5351,6 +5357,507 @@ SWIGINTERN PyObject *FrameCoordinate_swiginit(PyObject *SWIGUNUSEDPARM(self), Py
   return SWIG_Python_InitShadowInstance(args);
 }
 
+SWIGINTERN PyObject *_wrap_new_FrameCoordinateWithDerivative__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+  PyObject *resultobj = 0;
+  GeoCal::FrameCoordinateWithDerivative *result = 0 ;
+  
+  if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
+  {
+    try {
+      result = (GeoCal::FrameCoordinateWithDerivative *)new GeoCal::FrameCoordinateWithDerivative();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = result ? new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_FrameCoordinateWithDerivative__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::AutoDerivative< double > arg1 ;
+  GeoCal::AutoDerivative< double > arg2 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  GeoCal::FrameCoordinateWithDerivative *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_FrameCoordinateWithDerivative" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+    }
+    if (!argp1) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FrameCoordinateWithDerivative" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double >""'");
+    } else {
+      arg1 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_FrameCoordinateWithDerivative" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FrameCoordinateWithDerivative" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2);
+    }
+  }
+  {
+    try {
+      result = (GeoCal::FrameCoordinateWithDerivative *)new GeoCal::FrameCoordinateWithDerivative(arg1,arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = result ? new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_FrameCoordinateWithDerivative__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::FrameCoordinate *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared1 ;
+  GeoCal::FrameCoordinateWithDerivative *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::FrameCoordinate *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_FrameCoordinateWithDerivative" "', argument " "1"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FrameCoordinateWithDerivative" "', argument " "1"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp1);
+        arg1 = const_cast< GeoCal::FrameCoordinate * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (GeoCal::FrameCoordinateWithDerivative *)new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinate const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = result ? new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_FrameCoordinateWithDerivative(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_FrameCoordinateWithDerivative",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 0) {
+    return _wrap_new_FrameCoordinateWithDerivative__SWIG_0(self, argc, argv);
+  }
+  if (argc == 1) {
+    return _wrap_new_FrameCoordinateWithDerivative__SWIG_2(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_FrameCoordinateWithDerivative__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_FrameCoordinateWithDerivative'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative()\n"
+    "    GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(GeoCal::AutoDerivative< double >,GeoCal::AutoDerivative< double >)\n"
+    "    GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(GeoCal::FrameCoordinate const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_FrameCoordinateWithDerivative_line_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::FrameCoordinateWithDerivative *arg1 = (GeoCal::FrameCoordinateWithDerivative *) 0 ;
+  GeoCal::AutoDerivative< double > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > tempshared1 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"FrameCoordinateWithDerivative_line_set",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FrameCoordinateWithDerivative_line_set" "', argument " "1"" of type '" "GeoCal::FrameCoordinateWithDerivative *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "FrameCoordinateWithDerivative_line_set" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FrameCoordinateWithDerivative_line_set" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      }
+    }
+  }
+  if (arg1) (arg1)->line = *arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FrameCoordinateWithDerivative_line_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::FrameCoordinateWithDerivative *arg1 = (GeoCal::FrameCoordinateWithDerivative *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > tempshared1 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::AutoDerivative< double > *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FrameCoordinateWithDerivative_line_get" "', argument " "1"" of type '" "GeoCal::FrameCoordinateWithDerivative *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  result = (GeoCal::AutoDerivative< double > *) & ((arg1)->line);
+  {
+    boost::shared_ptr< const GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr< const GeoCal::AutoDerivative<double> >(result SWIG_NO_NULL_DELETER_0);
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FrameCoordinateWithDerivative_sample_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::FrameCoordinateWithDerivative *arg1 = (GeoCal::FrameCoordinateWithDerivative *) 0 ;
+  GeoCal::AutoDerivative< double > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > tempshared1 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"FrameCoordinateWithDerivative_sample_set",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FrameCoordinateWithDerivative_sample_set" "', argument " "1"" of type '" "GeoCal::FrameCoordinateWithDerivative *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "FrameCoordinateWithDerivative_sample_set" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FrameCoordinateWithDerivative_sample_set" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      }
+    }
+  }
+  if (arg1) (arg1)->sample = *arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FrameCoordinateWithDerivative_sample_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::FrameCoordinateWithDerivative *arg1 = (GeoCal::FrameCoordinateWithDerivative *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > tempshared1 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::AutoDerivative< double > *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FrameCoordinateWithDerivative_sample_get" "', argument " "1"" of type '" "GeoCal::FrameCoordinateWithDerivative *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  result = (GeoCal::AutoDerivative< double > *) & ((arg1)->sample);
+  {
+    boost::shared_ptr< const GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr< const GeoCal::AutoDerivative<double> >(result SWIG_NO_NULL_DELETER_0);
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FrameCoordinateWithDerivative___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::FrameCoordinateWithDerivative *arg1 = (GeoCal::FrameCoordinateWithDerivative *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative const > tempshared1 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FrameCoordinateWithDerivative___str__" "', argument " "1"" of type '" "GeoCal::FrameCoordinateWithDerivative const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::FrameCoordinateWithDerivative const *)arg1)->print_to_string();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FrameCoordinateWithDerivative__v_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::FrameCoordinateWithDerivative *arg1 = (GeoCal::FrameCoordinateWithDerivative *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative const > tempshared1 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::FrameCoordinate result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FrameCoordinateWithDerivative__v_value" "', argument " "1"" of type '" "GeoCal::FrameCoordinateWithDerivative const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::FrameCoordinateWithDerivative const *)arg1)->value();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_FrameCoordinateWithDerivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::FrameCoordinateWithDerivative *arg1 = (GeoCal::FrameCoordinateWithDerivative *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > tempshared1 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_FrameCoordinateWithDerivative" "', argument " "1"" of type '" "GeoCal::FrameCoordinateWithDerivative *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::FrameCoordinateWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (void)arg1; delete smartarg1;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *FrameCoordinateWithDerivative_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *FrameCoordinateWithDerivative_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_FrameCoordinate", _wrap_new_FrameCoordinate, METH_VARARGS, (char *)"\n"
@@ -5365,14 +5872,39 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_FrameCoordinate", (PyCFunction)_wrap_delete_FrameCoordinate, METH_O, NULL},
 	 { (char *)"FrameCoordinate_swigregister", FrameCoordinate_swigregister, METH_VARARGS, NULL},
 	 { (char *)"FrameCoordinate_swiginit", FrameCoordinate_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_FrameCoordinateWithDerivative", _wrap_new_FrameCoordinateWithDerivative, METH_VARARGS, (char *)"\n"
+		"GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(const AutoDerivative< double > &L, const AutoDerivative< double > &S)\n"
+		"Create a FrameCoordinateWithDerivative with the given coordinates. \n"
+		""},
+	 { (char *)"FrameCoordinateWithDerivative_line_set", _wrap_FrameCoordinateWithDerivative_line_set, METH_VARARGS, NULL},
+	 { (char *)"FrameCoordinateWithDerivative_line_get", (PyCFunction)_wrap_FrameCoordinateWithDerivative_line_get, METH_O, NULL},
+	 { (char *)"FrameCoordinateWithDerivative_sample_set", _wrap_FrameCoordinateWithDerivative_sample_set, METH_VARARGS, NULL},
+	 { (char *)"FrameCoordinateWithDerivative_sample_get", (PyCFunction)_wrap_FrameCoordinateWithDerivative_sample_get, METH_O, NULL},
+	 { (char *)"FrameCoordinateWithDerivative___str__", (PyCFunction)_wrap_FrameCoordinateWithDerivative___str__, METH_O, NULL},
+	 { (char *)"FrameCoordinateWithDerivative__v_value", (PyCFunction)_wrap_FrameCoordinateWithDerivative__v_value, METH_O, (char *)"\n"
+		"FrameCoordinate GeoCal::FrameCoordinateWithDerivative::value() const\n"
+		"Strip off derivative information and return FrameCoordinate. \n"
+		""},
+	 { (char *)"delete_FrameCoordinateWithDerivative", (PyCFunction)_wrap_delete_FrameCoordinateWithDerivative, METH_O, NULL},
+	 { (char *)"FrameCoordinateWithDerivative_swigregister", FrameCoordinateWithDerivative_swigregister, METH_VARARGS, NULL},
+	 { (char *)"FrameCoordinateWithDerivative_swiginit", FrameCoordinateWithDerivative_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
+static void *_p_GeoCal__FrameCoordinateWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::FrameCoordinateWithDerivative *) x));
+}
 static void *_p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::FrameCoordinate *) x));
+}
+static void *_p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivative< double > *) x));
+}
+static void *_p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivativeRef< double > *) x));
 }
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_istream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
@@ -5384,7 +5916,22 @@ static void *_p_boost__shared_ptrT_GeoCal__FrameCoordinate_tTo_p_boost__shared_p
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::FrameCoordinate > *)x);
 }
+static void *_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AutoDerivative< double > > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > *)x);
+}
+static swig_type_info _swigt__p_GeoCal__AutoDerivativeRefT_double_t = {"_p_GeoCal__AutoDerivativeRefT_double_t", "GeoCal::AutoDerivativeRef< double > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__AutoDerivativeT_double_t = {"_p_GeoCal__AutoDerivativeT_double_t", "GeoCal::AutoDerivative< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__FrameCoordinate = {"_p_GeoCal__FrameCoordinate", "GeoCal::FrameCoordinate *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__FrameCoordinateWithDerivative = {"_p_GeoCal__FrameCoordinateWithDerivative", "GeoCal::FrameCoordinateWithDerivative *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObject", "GeoCal::GenericObject *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
@@ -5399,6 +5946,9 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_1_t = {"_p_blitz__ArrayT_int_1
 static swig_type_info _swigt__p_blitz__ArrayT_int_2_t = {"_p_blitz__ArrayT_int_2_t", "blitz::Array< int,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_3_t = {"_p_blitz__ArrayT_int_3_t", "blitz::Array< int,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_4_t = {"_p_blitz__ArrayT_int_4_t", "blitz::Array< int,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivative< double > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t", "boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t", "boost::shared_ptr< GeoCal::FrameCoordinate > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_p_boost__shared_ptrT_GeoCal__GenericObject_t", "boost::shared_ptr< GeoCal::GenericObject > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
@@ -5421,7 +5971,10 @@ static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *"
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__p_GeoCal__AutoDerivativeRefT_double_t,
+  &_swigt__p_GeoCal__AutoDerivativeT_double_t,
   &_swigt__p_GeoCal__FrameCoordinate,
+  &_swigt__p_GeoCal__FrameCoordinateWithDerivative,
   &_swigt__p_GeoCal__GenericObject,
   &_swigt__p_allocator_type,
   &_swigt__p_blitz__ArrayT_bool_1_t,
@@ -5436,6 +5989,9 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_2_t,
   &_swigt__p_blitz__ArrayT_int_3_t,
   &_swigt__p_blitz__ArrayT_int_4_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   &_swigt__p_char,
@@ -5458,8 +6014,11 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_value_type,
 };
 
+static swig_cast_info _swigc__p_GeoCal__AutoDerivativeRefT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__AutoDerivativeT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__FrameCoordinate[] = {  {&_swigt__p_GeoCal__FrameCoordinate, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__FrameCoordinate, _p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__FrameCoordinateWithDerivative[] = {  {&_swigt__p_GeoCal__FrameCoordinateWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__FrameCoordinateWithDerivative, _p_GeoCal__FrameCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinate, _p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -5473,8 +6032,11 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_1_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_2_t[] = {  {&_swigt__p_blitz__ArrayT_int_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_3_t[] = {  {&_swigt__p_blitz__ArrayT_int_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_4_t[] = {  {&_swigt__p_blitz__ArrayT_int_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -5495,7 +6057,10 @@ static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__p_GeoCal__AutoDerivativeRefT_double_t,
+  _swigc__p_GeoCal__AutoDerivativeT_double_t,
   _swigc__p_GeoCal__FrameCoordinate,
+  _swigc__p_GeoCal__FrameCoordinateWithDerivative,
   _swigc__p_GeoCal__GenericObject,
   _swigc__p_allocator_type,
   _swigc__p_blitz__ArrayT_bool_1_t,
@@ -5510,6 +6075,9 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_2_t,
   _swigc__p_blitz__ArrayT_int_3_t,
   _swigc__p_blitz__ArrayT_int_4_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,
   _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   _swigc__p_char,
@@ -6218,6 +6786,10 @@ SWIG_init(void) {
   
   GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::FrameCoordinate))] =
   boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::FrameCoordinate >("boost::shared_ptr< GeoCal::FrameCoordinate > *"));
+  
+  
+  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::FrameCoordinateWithDerivative))] =
+  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::FrameCoordinateWithDerivative >("boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

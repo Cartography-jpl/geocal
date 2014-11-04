@@ -4953,7 +4953,7 @@ SWIGINTERN PyObject *_wrap_VFunctorWithDerivative_df(PyObject *SWIGUNUSEDPARM(se
     int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
       0 );
     if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<double>(swig_obj[1]);
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj)
       return NULL;
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -4977,7 +4977,7 @@ SWIGINTERN PyObject *_wrap_VFunctorWithDerivative_df(PyObject *SWIGUNUSEDPARM(se
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double>(), 
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -5028,7 +5028,7 @@ SWIGINTERN PyObject *_wrap_VFunctorWithDerivative_f_and_df(PyObject *SWIGUNUSEDP
     int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
       0 );
     if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<double>(swig_obj[1]);
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj)
       return NULL;
       a2.reference(to_blitz_array<double, 1>(numpy2));

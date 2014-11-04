@@ -120,6 +120,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.orbit
 import geocal_swig.generic_object
+import geocal_swig.observer
+import geocal_swig.with_parameter
 class AirMspiOrbit(geocal_swig.orbit.Orbit):
     """
     This reads the AirMSPI orbit file.
@@ -246,6 +248,13 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
         """
         return _air_mspi_orbit.AirMspiOrbit_orbit_data_index(self, *args)
 
+    def orbit_data(self, *args):
+        """
+        boost::shared_ptr< OrbitData > AirMspiOrbit::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _air_mspi_orbit.AirMspiOrbit_orbit_data(self, *args)
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -263,6 +272,7 @@ AirMspiOrbit._v_ypr_corr = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_yp
 AirMspiOrbit._v_time_spacing = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_time_spacing,None,AirMspiOrbit)
 AirMspiOrbit._v_vertical_def = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_vertical_def,None,AirMspiOrbit)
 AirMspiOrbit.orbit_data_index = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_data_index,None,AirMspiOrbit)
+AirMspiOrbit.orbit_data = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_data,None,AirMspiOrbit)
 AirMspiOrbit_swigregister = _air_mspi_orbit.AirMspiOrbit_swigregister
 AirMspiOrbit_swigregister(AirMspiOrbit)
 

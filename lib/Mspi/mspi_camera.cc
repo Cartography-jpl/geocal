@@ -64,7 +64,7 @@ void MspiCamera::read_config_file(const std::string& File_name)
 
   for(int b = 0; b < number_band(); ++b) {
     double l_origin = line_dir() * dy * 
-      (row_number_[b] + 0.5 - (nrow / 2.0)) / line_pitch_;
+      (row_number_[b] + 0.5 - (nrow / 2.0)) / line_pitch();
     principal_point_.push_back(FrameCoordinate(l_origin,
 					       s_origin));
   }
@@ -157,7 +157,7 @@ void MspiCamera::dcs_to_focal_plane(int Band,
 
 // See base class for description
 boost::math::quaternion<double> 
-MspiCamera::focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const
+MspiCamera::focal_plane_to_dcs(int Band, double Xfp, double Yfp) const
 {
 //-------------------------------------------------------------------------
 /// Convert to paraxial coordinates.

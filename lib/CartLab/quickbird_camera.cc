@@ -30,8 +30,8 @@ QuickBirdCamera::QuickBirdCamera()
   sample_pitch_ = line_pitch_;
   double det_origin_x = 9.5468399999999995;
   double det_origin_y = 164.0277299999999900;
-  principal_point_.push_back(FrameCoordinate(-det_origin_x / line_pitch_,
-					     +det_origin_y / sample_pitch_));
+  principal_point_.push_back(FrameCoordinate(-det_origin_x / line_pitch(),
+					     +det_origin_y / sample_pitch()));
   frame_convention_ = QuaternionCamera::LINE_IS_X;
   line_direction_ = QuaternionCamera::INCREASE_IS_POSITIVE;
   sample_direction_ = QuaternionCamera::INCREASE_IS_NEGATIVE;

@@ -118,8 +118,11 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.orbit
+import geocal_swig.look_vector
 import geocal_swig.generic_object
+import geocal_swig.orbit
+import geocal_swig.observer
+import geocal_swig.with_parameter
 class GroundMspiOrbit(geocal_swig.orbit.Orbit):
     """
     This models the MSPI ground orbit.
@@ -196,6 +199,13 @@ class GroundMspiOrbit(geocal_swig.orbit.Orbit):
     def rotation_rate(self):
         return self._v_rotation_rate()
 
+    def orbit_data(self, *args):
+        """
+        boost::shared_ptr< OrbitData > GroundMspiOrbit::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _ground_mspi_orbit.GroundMspiOrbit_orbit_data(self, *args)
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -209,6 +219,7 @@ GroundMspiOrbit._v_position = new_instancemethod(_ground_mspi_orbit.GroundMspiOr
 GroundMspiOrbit._v_azimuth = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbit__v_azimuth,None,GroundMspiOrbit)
 GroundMspiOrbit._v_start_elevation_angle = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbit__v_start_elevation_angle,None,GroundMspiOrbit)
 GroundMspiOrbit._v_rotation_rate = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbit__v_rotation_rate,None,GroundMspiOrbit)
+GroundMspiOrbit.orbit_data = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbit_orbit_data,None,GroundMspiOrbit)
 GroundMspiOrbit_swigregister = _ground_mspi_orbit.GroundMspiOrbit_swigregister
 GroundMspiOrbit_swigregister(GroundMspiOrbit)
 

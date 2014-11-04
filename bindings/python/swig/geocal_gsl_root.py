@@ -122,7 +122,8 @@ import geocal_swig.generic_object
 
 def gsl_root(*args):
   """
-    double GeoCal::gsl_root(const DFunctor &F, double Xmin, double Xmax, double Eps=1e-6)
+    double GeoCal::gsl_root(const DFunctor &F, double Xmin, double Xmax, double Eps=1e-6, double
+    Eps_abs=1e-8)
     This finds the root of a Double -> Double function, without a
     derivative available.
 
@@ -134,6 +135,16 @@ def gsl_root(*args):
 
     """
   return _geocal_gsl_root.gsl_root(*args)
+
+def gsl_root_with_derivative(*args):
+  """
+    AutoDerivative< double > GeoCal::gsl_root_with_derivative(const DFunctorWithDerivative &F, double Xmin, double Xmax, double
+    Eps=1e-6, double Eps_abs=1e-8)
+    This finds the root of a function, and propagates the derivative of
+    the solution with respect to any parameters in the function (i.e., we
+    aren't talking about the derivative wrt X here). 
+    """
+  return _geocal_gsl_root.gsl_root_with_derivative(*args)
 
 def root_list(*args):
   """

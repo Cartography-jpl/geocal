@@ -120,6 +120,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.orbit
 import geocal_swig.generic_object
+import geocal_swig.observer
+import geocal_swig.with_parameter
 class OrbitQuaternionList(geocal_swig.orbit.Orbit):
     """
     This is an implementation of an Orbit that is a list of
@@ -141,6 +143,13 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
         ingest the data. 
         """
         _orbit_quaternion_list.OrbitQuaternionList_swiginit(self,_orbit_quaternion_list.new_OrbitQuaternionList(*args))
+    def orbit_data(self, *args):
+        """
+        boost::shared_ptr< OrbitData > OrbitQuaternionList::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _orbit_quaternion_list.OrbitQuaternionList_orbit_data(self, *args)
+
     def _v_quaternion_orbit_data(self):
         """
         std::vector< boost::shared_ptr< QuaternionOrbitData > > OrbitQuaternionList::quaternion_orbit_data() const
@@ -160,6 +169,7 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
       return _new_from_init, (self.__class__, 1, self.quaternion_orbit_data)
 
     __swig_destroy__ = _orbit_quaternion_list.delete_OrbitQuaternionList
+OrbitQuaternionList.orbit_data = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList_orbit_data,None,OrbitQuaternionList)
 OrbitQuaternionList._v_quaternion_orbit_data = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data,None,OrbitQuaternionList)
 OrbitQuaternionList_swigregister = _orbit_quaternion_list.OrbitQuaternionList_swigregister
 OrbitQuaternionList_swigregister(OrbitQuaternionList)

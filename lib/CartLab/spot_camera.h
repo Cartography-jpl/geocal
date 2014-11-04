@@ -47,8 +47,14 @@ public:
 
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl,
 					   int Band) const;
+  virtual FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
+		   int Band) const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
+				 int Band) const;
   virtual void print(std::ostream& Os) const;
   const std::vector<double> psi_x() const {return psi_x_;}
   const std::vector<double> psi_y() const {return psi_y_;}

@@ -51,6 +51,8 @@ public:
 	    const blitz::Array<double, 2>& Ypr);
   virtual ~SpotOrbit() {}
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> 
+  orbit_data(const TimeWithDerivative& T) const;
   virtual void print(std::ostream& Os) const;
 private:
   std::vector<Time> teph;

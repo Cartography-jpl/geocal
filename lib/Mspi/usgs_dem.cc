@@ -5,6 +5,9 @@
 #include <boost/foreach.hpp>
 #include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
+#ifdef VICAR_RTL
+#include "datum_geoid96.h"
+#endif
 
 using namespace GeoCal;
 
@@ -57,7 +60,15 @@ UsgsDemData::UsgsDemData
   BOOST_FOREACH(boost::filesystem::directory_entry d, 
    		std::make_pair(boost::filesystem::directory_iterator(dirbase),
 			       boost::filesystem::directory_iterator())) {
+    // Slightly different syntax depending on version of BOOST
+    // filesystem. We need to support both, at least for a while
+    // (version 2 is old and deprecated, but we need to support some
+    // old systems)
+#if defined(BOOST_FILESYSTEM_VERSION) && BOOST_FILESYSTEM_VERSION == 3
+    std::string fname = d.path().filename().string();
+#else
     std::string fname = d.path().filename();
+#endif
     // Ignore files that have names we don't recognize (e.g., a README
     // file or something like that with the data files. This also
     // breaks the files we do recognize into the pieces we need to
@@ -72,6 +83,14 @@ UsgsDemData::UsgsDemData
       int lon = boost::lexical_cast<int>(m[4]) * (m[3] == "e" ? 1 : -1);
       if(flist.size() == 1) {
 	mi_ref = GdalRasterImage(flist[0]).map_info();
+	// The data is in latitude/longitude of NAD83. However this is
+	// extremely close to just WGS84. We go ahead and change to
+	// use the GeodeticConverter because this is faster than going
+	// through OGR.
+	mi_ref = MapInfo(boost::shared_ptr<CoordinateConverter>
+			 (new GeodeticConverter()),
+			 mi_ref.transform(),
+			 mi_ref.number_x_pixel(), mi_ref.number_y_pixel());
 	// If this is the first file, then initialize the mapinfo that we
 	// will calculate all the loffset and soffset against. We'll
 	// adjust this after going through all the files for the upper
@@ -98,6 +117,12 @@ UsgsDemData::UsgsDemData
       }
     }
   }
+  if(flist.size() == 0) {
+    Exception e;
+    e << "No USGS DEM data found at " << dirbase;
+    throw e;
+  }
+
   // Calculate the map_info that fill cover all the data.
   map_info_.reset(new MapInfo(mi_ref.subset(smin, lmin, 
 		    smax - smin + mi_ref.number_x_pixel(),
@@ -166,10 +191,18 @@ UsgsDem::UsgsDem
 : 
   f(new UsgsDemData(Dir, Outside_dem_is_error, 10812, 10812))
 {
+  boost::shared_ptr<Datum> d(D);
+  if(!d) {
+#ifdef VICAR_RTL    
+    d.reset(new DatumGeoid96());
+#else
+    throw Exception("DatumGeoid96 wasn't included in the build");
+#endif
+  }
   // The 10812 up above is the size of the file, so we are reading all
   // the data. Not sure if we really want this hardcoded, or if we
   // really want all this data read. But for now, leave this like this
   // and we can revisit if needed.
-  initialize(D, f->map_info(), Outside_dem_is_error);
+  initialize(d, f->map_info(), Outside_dem_is_error);
 }
 

@@ -3,8 +3,10 @@
 #include "printable.h"
 #include "look_vector.h"
 #include "ground_coordinate.h"
+#include "observer.h"
 #include "camera.h"
 #include "dem.h"
+#include "geocal_autoderivative_quaternion.h"
 #include <boost/math/quaternion.hpp>
 #include <blitz/array.h>
 #include <vector>
@@ -28,13 +30,32 @@ public:
   ci_look_vector(const ScLookVector& Sl) const = 0;
 
 //-----------------------------------------------------------------------
+/// Convert from ScLookVector to CartesianInertialLookVector.
+//-----------------------------------------------------------------------
+
+  virtual CartesianInertialLookVectorWithDerivative 
+  ci_look_vector(const ScLookVectorWithDerivative& Sl) 
+    const = 0;
+
+//-----------------------------------------------------------------------
 /// Convert from ScLookVector to CartesianFixedLookVector.
 //-----------------------------------------------------------------------
 
   virtual CartesianFixedLookVector 
   cf_look_vector(const ScLookVector& Sl) const = 0;
 
+//-----------------------------------------------------------------------
+/// Convert from ScLookVector to CartesianFixedLookVector.
+//-----------------------------------------------------------------------
+
+  virtual CartesianFixedLookVectorWithDerivative
+  cf_look_vector(const ScLookVectorWithDerivative& Sl) 
+    const = 0;
+
   FrameCoordinate frame_coordinate(const GroundCoordinate& Gc, 
+				   const Camera& C, int Band = 0) const;
+  FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const;
   std::vector<boost::shared_ptr<GroundCoordinate> >
   footprint(const Camera& C, const Dem& D, 
@@ -63,11 +84,26 @@ public:
   sc_look_vector(const CartesianInertialLookVector& Ci) const = 0;
 
 //-----------------------------------------------------------------------
+/// Convert from CartesianInertialLookVector to ScLookVector.
+//-----------------------------------------------------------------------
+
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const = 0;
+
+//-----------------------------------------------------------------------
 /// Convert from CartesianFixedLookVector to ScLookVector.
 //-----------------------------------------------------------------------
 
   virtual ScLookVector 
   sc_look_vector(const CartesianFixedLookVector& Cf) const = 0;
+
+
+//-----------------------------------------------------------------------
+/// Convert from CartesianFixedLookVector to ScLookVector.
+//-----------------------------------------------------------------------
+
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const = 0;
 
 //-----------------------------------------------------------------------
 /// Return position as a pointer.
@@ -80,8 +116,22 @@ public:
 /// Return position as a pointer.
 //-----------------------------------------------------------------------
 
+  virtual boost::array<AutoDerivative<double>, 3>
+  position_ci_with_derivative() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return position as a pointer.
+//-----------------------------------------------------------------------
+
   virtual boost::shared_ptr<CartesianFixed> 
   position_cf() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return position as a pointer.
+//-----------------------------------------------------------------------
+
+  virtual boost::array<AutoDerivative<double>, 3>
+  position_cf_with_derivative() const = 0;
 
 //-----------------------------------------------------------------------
 /// Return velocity. This is in meters per second, in same
@@ -91,10 +141,25 @@ public:
   virtual boost::array<double, 3> velocity_ci() const = 0;
 
 //-----------------------------------------------------------------------
+/// Return velocity. This is in meters per second, in same
+/// CartesianInertial coordinate system as position (e.g., ECI).
+//-----------------------------------------------------------------------
+
+  virtual boost::array<AutoDerivative<double>, 3> 
+  velocity_ci_with_derivative() const = 0;
+
+//-----------------------------------------------------------------------
 /// Return Time of OrbitData.
 //-----------------------------------------------------------------------
   
   virtual Time time() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return TimeWithDerivative of OrbitData.
+//-----------------------------------------------------------------------
+
+  virtual TimeWithDerivative time_with_derivative() const = 0;
+
   virtual void print(std::ostream& Os) const = 0;
 };
 
@@ -120,6 +185,12 @@ public:
   for the CartesianFixed coordinates used by this class to 
   CartesianInertial. If you stick to working with CartesianFixed only,
   you can avoid the need of using one of these toolkits.
+
+  Note that we allow most pieces of this to be AutoDerivative, useful
+  for propagating jacobians.   We do *not* support time being a
+  AutoDerivative, so supporting things like time offset isn't
+  currently in here. We probably could do this, we'd just need to
+  think through how to support this.
 *******************************************************************/
 
 class QuaternionOrbitData : public OrbitData {
@@ -127,20 +198,45 @@ public:
   QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<double, 3>& vel_fixed,
 		      const boost::math::quaternion<double>& sc_to_cf_q);
+  QuaternionOrbitData(const TimeWithDerivative& Tm, 
+		      const boost::shared_ptr<CartesianFixed>& pos_cf,
+		      const boost::array<AutoDerivative<double>, 3>&
+		      pos_cf_with_der,
+		      const boost::array<AutoDerivative<double>, 3>& vel_fixed,
+		      const boost::math::quaternion<AutoDerivative<double> >& 
+		      sc_to_cf_q);
   QuaternionOrbitData(Time Tm, 
 		      const boost::shared_ptr<CartesianInertial>& pos_ci,
 		      const boost::array<double, 3>& vel_inertial,
 		      const boost::math::quaternion<double>& sc_to_ci_q);
+  QuaternionOrbitData(const TimeWithDerivative& Tm, 
+		      const boost::shared_ptr<CartesianInertial>& pos_ci,
+		      const boost::array<AutoDerivative<double>, 3>&
+		      pos_ci_with_der,
+		      const boost::array<AutoDerivative<double>, 3>& 
+		      vel_inertial,
+		      const boost::math::quaternion<AutoDerivative<double> >& 
+		      sc_to_ci_q);
   virtual ~QuaternionOrbitData() {}
 
   virtual CartesianInertialLookVector 
   ci_look_vector(const ScLookVector& Sl) const;
+  virtual CartesianInertialLookVectorWithDerivative 
+  ci_look_vector(const ScLookVectorWithDerivative& Sl) 
+    const;
   virtual CartesianFixedLookVector 
   cf_look_vector(const ScLookVector& Sl) const;
+  virtual CartesianFixedLookVectorWithDerivative
+  cf_look_vector(const ScLookVectorWithDerivative& Sl) 
+    const;
   virtual ScLookVector 
   sc_look_vector(const CartesianInertialLookVector& Ci) const;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const;
   virtual ScLookVector 
   sc_look_vector(const CartesianFixedLookVector& Cf) const;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
 
 //-----------------------------------------------------------------------
 /// Return position as a ptr.
@@ -153,24 +249,59 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Return position as a pointer.
+//-----------------------------------------------------------------------
+
+  virtual boost::array<AutoDerivative<double>, 3>
+  position_ci_with_derivative() const
+  {    
+    fill_in_ci_to_cf();
+    boost::array<AutoDerivative<double>, 3> res = 
+      {{pos_ci_with_der.R_component_2(), 
+	pos_ci_with_der.R_component_3(),
+	pos_ci_with_der.R_component_4()}};
+    return res;
+  }
+
+//-----------------------------------------------------------------------
 /// Return position as a ptr.
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<CartesianFixed> position_cf() const
   { return pos; }
 
+//-----------------------------------------------------------------------
+/// Return position as a ptr.
+//-----------------------------------------------------------------------
+
+  virtual boost::array<AutoDerivative<double>, 3>
+  position_cf_with_derivative() const
+  { 
+    boost::array<AutoDerivative<double>, 3> res = 
+      {{pos_with_der.R_component_2(), 
+	pos_with_der.R_component_3(),
+	pos_with_der.R_component_4()}};
+    return res;
+  }
+
   virtual boost::array<double, 3> velocity_ci() const;
+  virtual boost::array<AutoDerivative<double>, 3> 
+  velocity_ci_with_derivative() const;
   boost::array<double, 3> velocity_cf() const;
+  virtual boost::array<AutoDerivative<double>, 3> 
+  velocity_cf_with_derivative() const;
 
 //-----------------------------------------------------------------------
 /// Return Time of OrbitData.
 //-----------------------------------------------------------------------
   
-  virtual Time time() const {return tm;}
+  virtual Time time() const {return tm.value();}
+  virtual TimeWithDerivative time_with_derivative() const {return tm;}
   virtual void print(std::ostream& Os) const;
   friend boost::shared_ptr<QuaternionOrbitData>
   GeoCal::interpolate(const QuaternionOrbitData& t1, 
-		const QuaternionOrbitData& t2, Time tm);
+		      const QuaternionOrbitData& t2, 
+		      const TimeWithDerivative& tm);
 
 //-----------------------------------------------------------------------
 /// Return the quaternion used to go from spacecraft to cartesian inertial
@@ -178,6 +309,13 @@ public:
 
   boost::math::quaternion<double> sc_to_ci() const 
   { return conj(ci_to_cf()) * sc_to_cf_; }
+  
+//-----------------------------------------------------------------------
+/// Return the quaternion used to go from spacecraft to cartesian inertial
+//-----------------------------------------------------------------------
+
+  boost::math::quaternion<AutoDerivative<double> > sc_to_ci_with_derivative() const 
+  { return conj(ci_to_cf_with_derivative()) * sc_to_cf_with_der; }
   
 //-----------------------------------------------------------------------
 /// Return the quaternion used to go from spacecraft to cartesian fixed.
@@ -190,7 +328,18 @@ public:
 //-----------------------------------------------------------------------
 
   void sc_to_cf(const boost::math::quaternion<double>& Sc_to_cf) 
-  { sc_to_cf_ = Sc_to_cf; }
+  { sc_to_cf_ = Sc_to_cf; sc_to_cf_with_der = sc_to_cf_; }
+
+//-----------------------------------------------------------------------
+/// Return the quaternion used to go from spacecraft to cartesian fixed.
+//-----------------------------------------------------------------------
+
+  boost::math::quaternion<AutoDerivative<double> > sc_to_cf_with_derivative() 
+    const { return sc_to_cf_with_der; }
+
+  void sc_to_cf_with_derivative
+  (const boost::math::quaternion<AutoDerivative<double> >& Sc_to_cf ) 
+  { sc_to_cf_ = value(Sc_to_cf); sc_to_cf_with_der = Sc_to_cf; }
 
 //-----------------------------------------------------------------------
 /// Was this created form the cartesian fixed version of the
@@ -210,20 +359,35 @@ protected:
   void initialize(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
     const boost::array<double, 3>& vel_fixed, const 
     boost::math::quaternion<double>& sc_to_cf_q);
+  void initialize(const TimeWithDerivative& Tm, 
+		  const boost::shared_ptr<CartesianFixed>& pos_cf,
+    const boost::array<AutoDerivative<double>, 3>& pos_cf_with_der,
+    const boost::array<AutoDerivative<double>, 3>& vel_fixed, const 
+    boost::math::quaternion<AutoDerivative<double> >& sc_to_cf_q);
   void initialize(Time Tm, const boost::shared_ptr<CartesianInertial>& pos_ci,
     const boost::array<double, 3>& vel_inertial, const 
     boost::math::quaternion<double>& sc_to_ci_q);
+  void initialize(const TimeWithDerivative& Tm, 
+		  const boost::shared_ptr<CartesianInertial>& pos_ci,
+    const boost::array<AutoDerivative<double>, 3>& pos_ci_with_der,
+    const boost::array<AutoDerivative<double>, 3>& vel_inertial, const 
+    boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q);
 
 
 private:
-  Time tm;			///< Time of OrbitData.
+  TimeWithDerivative tm;	///< Time of OrbitData.
   boost::shared_ptr<CartesianFixed> pos;
 				///< Position
+  boost::math::quaternion<AutoDerivative<double> > pos_with_der;
   boost::math::quaternion<double> vel_cf; ///< Velocity, in m/s
+  boost::math::quaternion<AutoDerivative<double> > 
+  vel_cf_with_der;			
   boost::math::quaternion<double> sc_to_cf_;
 				///< Quaternion to go from
 				///ScLookVector to
 				///CartesianFixed.
+  boost::math::quaternion<AutoDerivative<double> > sc_to_cf_with_der;
+
   bool from_cf_;
 
 //-----------------------------------------------------------------------
@@ -238,16 +402,20 @@ private:
     fill_in_ci_to_cf();
     return ci_to_cf_;
   }
-  void fill_in_ci_to_cf() const {
-    if(!have_ci_to_cf) {
-      ci_to_cf_ = pos->ci_to_cf_quat(tm);
-      pos_ci = pos->convert_to_ci(time());
-    }
+
+  boost::math::quaternion<AutoDerivative<double> >& 
+  ci_to_cf_with_derivative() const
+  {
+    fill_in_ci_to_cf();
+    return ci_to_cf_der_;
   }
+  void fill_in_ci_to_cf() const;
   mutable bool have_ci_to_cf;
   mutable boost::math::quaternion<double> ci_to_cf_;
+  mutable boost::math::quaternion<AutoDerivative<double> > ci_to_cf_der_;
   mutable boost::shared_ptr<CartesianInertial> pos_ci;
 				///< Position
+  mutable boost::math::quaternion<AutoDerivative<double> > pos_ci_with_der;
 };
 
 /****************************************************************//**
@@ -272,7 +440,9 @@ private:
    min_time() <= T < max_time().
 *******************************************************************/
 
-class Orbit : public Printable<Orbit> {
+class Orbit : public Printable<Orbit>, 
+	      public Observable<Orbit>, 
+	      public WithParameter {
 public:
 //-----------------------------------------------------------------------
 /// Constructor. The Orbit is valid for the given range of minimum to
@@ -282,6 +452,11 @@ public:
   Orbit(Time Min_time = Time::min_valid_time, 
 	Time Max_time = Time::max_valid_time)
     : min_tm(Min_time), max_tm(Max_time) {}
+
+  virtual void add_observer(Observer<Orbit>& Obs) 
+  { add_observer_do(Obs, *this);}
+  virtual void remove_observer(Observer<Orbit>& Obs) 
+  { remove_observer_do(Obs, *this);}
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -297,6 +472,16 @@ public:
   FrameCoordinate frame_coordinate(Time T, const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const
   { return orbit_data(T)->frame_coordinate(Gc, C, Band);}
+
+//-----------------------------------------------------------------------
+/// Give the frame coordinates that a particular point on the ground
+/// is seen.
+//-----------------------------------------------------------------------
+
+  FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(Time T, const GroundCoordinate& Gc, 
+				   const Camera& C, int Band = 0) const
+  { return orbit_data(T)->frame_coordinate_with_derivative(Gc, C, Band);}
 
 //-----------------------------------------------------------------------
 /// Return location on the reference surface that a particular frame 
@@ -320,6 +505,11 @@ public:
 			     const ScLookVector& Sl) const
   { return orbit_data(T)->ci_look_vector(Sl); }
 
+  virtual CartesianInertialLookVectorWithDerivative 
+  ci_look_vector(const TimeWithDerivative& T, 
+		 const ScLookVectorWithDerivative& Sl) const
+  { return orbit_data(T)->ci_look_vector(Sl); }
+
 //-----------------------------------------------------------------------
 /// Convert from ScLookVector to CartesianFixedLookVector for the
 /// given time. We should have min_time() <= T < max_time(). 
@@ -329,6 +519,11 @@ public:
 					  const ScLookVector& Sl) const
   { return orbit_data(T)->cf_look_vector(Sl); }
 
+  virtual CartesianFixedLookVectorWithDerivative 
+  cf_look_vector(const TimeWithDerivative& T, 
+		 const ScLookVectorWithDerivative& Sl) const
+  { return orbit_data(T)->cf_look_vector(Sl); }
+
 //-----------------------------------------------------------------------
 /// Convert from CartesianInertialLookVector to ScLookVector for the
 /// given time. We should have min_time() <= T < max_time(). 
@@ -336,6 +531,10 @@ public:
 
   virtual ScLookVector sc_look_vector(Time T, 
 			      const CartesianInertialLookVector& Ci) const
+  { return orbit_data(T)->sc_look_vector(Ci); }
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector(const TimeWithDerivative& T, 
+		 const CartesianInertialLookVectorWithDerivative& Ci) const
   { return orbit_data(T)->sc_look_vector(Ci); }
 
 //-----------------------------------------------------------------------
@@ -347,6 +546,10 @@ public:
 			      const CartesianFixedLookVector& Cf) const
   { return orbit_data(T)->sc_look_vector(Cf); }
 
+  virtual ScLookVectorWithDerivative sc_look_vector
+  (const TimeWithDerivative& T, 
+   const CartesianFixedLookVectorWithDerivative& Cf) const
+  { return orbit_data(T)->sc_look_vector(Cf); }
 //-----------------------------------------------------------------------
 /// Return position at given time. We should have min_time() <= T <
 /// max_time(). 
@@ -355,6 +558,10 @@ public:
   virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const
   { return orbit_data(T)->position_ci(); }
 
+  virtual boost::array<AutoDerivative<double>, 3> 
+  position_ci_with_derivative(const TimeWithDerivative& T) const
+  { return orbit_data(T)->position_ci_with_derivative(); }
+
 //-----------------------------------------------------------------------
 /// Return position at given time. We should have min_time() <= T <
 /// max_time(). 
@@ -362,6 +569,10 @@ public:
 
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const
   { return orbit_data(T)->position_cf(); }
+
+  virtual boost::array<AutoDerivative<double>, 3> 
+  position_cf_with_derivative(const TimeWithDerivative& T) const
+  { return orbit_data(T)->position_cf_with_derivative(); }
 
 //-----------------------------------------------------------------------
 /// Return velocity at given time. This is in m/s, in same coordinate
@@ -389,6 +600,8 @@ public:
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;
+  virtual boost::shared_ptr<OrbitData> 
+  orbit_data(const TimeWithDerivative& T) const  = 0;
   virtual void print(std::ostream& Os) const { Os << "Orbit"; }
 protected:
 //-----------------------------------------------------------------------
@@ -440,10 +653,22 @@ protected:
 		   double toffset, double tspace,
 		   boost::array<double, 3>& Pres,
 		   boost::array<double, 3>& Vres) const;
+  void interpolate(const boost::array<AutoDerivative<double>, 3>& P1,
+		   const boost::array<AutoDerivative<double>, 3>& V1,
+		   const boost::array<AutoDerivative<double>, 3>& P2,
+		   const boost::array<AutoDerivative<double>, 3>& V2,
+		   const AutoDerivative<double>& toffset, 
+		   double tspace,
+		   boost::array<AutoDerivative<double>, 3>& Pres,
+		   boost::array<AutoDerivative<double>, 3>& Vres) const;
   boost::math::quaternion<double> interpolate(
               const boost::math::quaternion<double>& Q1, 
               const boost::math::quaternion<double>& Q2,
 	      double toffset, double tspace) const;
+  boost::math::quaternion<AutoDerivative<double> > interpolate(
+              const boost::math::quaternion<AutoDerivative<double> >& Q1, 
+              const boost::math::quaternion<AutoDerivative<double> >& Q2,
+	      const AutoDerivative<double>& toffset, double tspace) const;
   Time min_tm;			///< Minimum time that we have
 				///OrbitData for.
   Time max_tm;			///< Maximum time that we have
@@ -473,6 +698,8 @@ public:
 	      double Mean_anomaly_at_epoch = 290.912925280);
   virtual ~KeplerOrbit() {}
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> 
+  orbit_data(const TimeWithDerivative& T) const;
   virtual void print(std::ostream& Os) const;
 
 //-----------------------------------------------------------------------
@@ -603,7 +830,8 @@ private:
 
   boost::shared_ptr<QuaternionOrbitData>
   interpolate(const QuaternionOrbitData& t1, 
-		const QuaternionOrbitData& t2, Time tm);
+	      const QuaternionOrbitData& t2, 
+	      const TimeWithDerivative& tm);
 }
 #endif
 

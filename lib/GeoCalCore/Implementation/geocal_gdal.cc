@@ -1,5 +1,6 @@
 #include "geocal_gdal.h"
 #include "ogr_coordinate.h"
+#include "planet_coordinate.h"
 #include "simple_dem.h"
 #include <gdal_priv.h>
 using namespace GeoCal;
@@ -124,11 +125,18 @@ void GeoCal::gdal_map_info(GDALDataset& D, const MapInfo& M)
     if(status != OGRERR_NONE)
       throw Exception("Call to SetWellKnownGeogCS failed");
   }
-  else if(const OgrCoordinateConverter* ogrconv =
+  // Right now we don't support planetary coordinate systems. I think 
+  // GDAL actually can, it has some support for PDS. But for now, just
+  // skip the mapinfo if it is for a planet.
+  else if(const EuropaPlanetocentricConverter* pc =
+	  dynamic_cast<const EuropaPlanetocentricConverter*>(&M.coordinate_converter())) {
+    std::cerr << "Warning, skipping EuropaPlanetocentric map info writing because we don't currently support this.";
+    return;
+  } else if(const OgrCoordinateConverter* ogrconv =
       dynamic_cast<const OgrCoordinateConverter*>(&M.coordinate_converter()))
     ogr = ogrconv->ogr().ogr();
   else
-    throw "Unrecognized coordinate converter in MapInfo";
+    throw Exception("Unrecognized coordinate converter in MapInfo");
   char* d;
   ogr.exportToWkt(&d);
   int status = D.SetProjection(d);

@@ -120,8 +120,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.image_to_image_match
 import geocal_swig.generic_object
+import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
-import geocal_swig.look_vector
 class SurfaceImageToImageMatch(geocal_swig.image_to_image_match.ImageToImageMatch):
     """
     This is an ImageToImageMatch that takes two image ground connections

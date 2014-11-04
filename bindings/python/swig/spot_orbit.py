@@ -120,6 +120,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.orbit
 import geocal_swig.generic_object
+import geocal_swig.observer
+import geocal_swig.with_parameter
 class SpotOrbit(geocal_swig.orbit.Orbit):
     """
     This class models the SPOT orbit.
@@ -186,7 +188,15 @@ class SpotOrbit(geocal_swig.orbit.Orbit):
         Geometry Handbook" 
         """
         _spot_orbit.SpotOrbit_swiginit(self,_spot_orbit.new_SpotOrbit(*args))
+    def orbit_data(self, *args):
+        """
+        boost::shared_ptr< OrbitData > SpotOrbit::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _spot_orbit.SpotOrbit_orbit_data(self, *args)
+
     __swig_destroy__ = _spot_orbit.delete_SpotOrbit
+SpotOrbit.orbit_data = new_instancemethod(_spot_orbit.SpotOrbit_orbit_data,None,SpotOrbit)
 SpotOrbit_swigregister = _spot_orbit.SpotOrbit_swigregister
 SpotOrbit_swigregister(SpotOrbit)
 

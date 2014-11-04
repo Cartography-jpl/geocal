@@ -3449,43 +3449,51 @@ namespace Swig {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_allocator_type swig_types[0]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[1]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[2]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[3]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[4]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[5]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[6]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[7]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[8]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[9]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[11]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[12]
-#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[13]
-#define SWIGTYPE_p_char swig_types[14]
-#define SWIGTYPE_p_char_type swig_types[15]
-#define SWIGTYPE_p_difference_type swig_types[16]
-#define SWIGTYPE_p_double swig_types[17]
-#define SWIGTYPE_p_fmtflags swig_types[18]
-#define SWIGTYPE_p_int_type swig_types[19]
-#define SWIGTYPE_p_iostate swig_types[20]
-#define SWIGTYPE_p_off_type swig_types[21]
-#define SWIGTYPE_p_openmode swig_types[22]
-#define SWIGTYPE_p_pos_type swig_types[23]
-#define SWIGTYPE_p_seekdir swig_types[24]
-#define SWIGTYPE_p_size_t swig_types[25]
-#define SWIGTYPE_p_size_type swig_types[26]
-#define SWIGTYPE_p_state_type swig_types[27]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[28]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[29]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[30]
-#define SWIGTYPE_p_std__invalid_argument swig_types[31]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[32]
-#define SWIGTYPE_p_traits_type swig_types[33]
-#define SWIGTYPE_p_value_type swig_types[34]
-static swig_type_info *swig_types[36];
-static swig_module_info swig_module = {swig_types, 35, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__AutoDerivativeRefT_double_t swig_types[0]
+#define SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t swig_types[1]
+#define SWIGTYPE_p_GeoCal__GenericObject swig_types[2]
+#define SWIGTYPE_p_allocator_type swig_types[3]
+#define SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_2_t swig_types[4]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[5]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[6]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[7]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[8]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[9]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[10]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[11]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[12]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[16]
+#define SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t swig_types[17]
+#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[18]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[19]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[20]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[21]
+#define SWIGTYPE_p_char swig_types[22]
+#define SWIGTYPE_p_char_type swig_types[23]
+#define SWIGTYPE_p_difference_type swig_types[24]
+#define SWIGTYPE_p_double swig_types[25]
+#define SWIGTYPE_p_fmtflags swig_types[26]
+#define SWIGTYPE_p_int_type swig_types[27]
+#define SWIGTYPE_p_iostate swig_types[28]
+#define SWIGTYPE_p_off_type swig_types[29]
+#define SWIGTYPE_p_openmode swig_types[30]
+#define SWIGTYPE_p_pos_type swig_types[31]
+#define SWIGTYPE_p_seekdir swig_types[32]
+#define SWIGTYPE_p_size_t swig_types[33]
+#define SWIGTYPE_p_size_type swig_types[34]
+#define SWIGTYPE_p_state_type swig_types[35]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[36]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[37]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[38]
+#define SWIGTYPE_p_std__invalid_argument swig_types[39]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[40]
+#define SWIGTYPE_p_traits_type swig_types[41]
+#define SWIGTYPE_p_value_type swig_types[42]
+static swig_type_info *swig_types[44];
+static swig_module_info swig_module = {swig_types, 43, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3593,6 +3601,10 @@ namespace swig {
     }
   };
 }
+
+
+  // Need this before blitz gets included.
+#include "auto_derivative.h"
 
 
 #include <iostream>
@@ -5139,8 +5151,30 @@ template<class T, int D> inline boost::array<T, D>
 }
 
 
-#include "geocal_quaternion.h"
+#include "geocal_autoderivative_quaternion.h"
 
+SWIGINTERN boost::math::quaternion< GeoCal::AutoDerivative< double > > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____add____SWIG_0(boost::math::quaternion< GeoCal::AutoDerivative< double > > *self,GeoCal::AutoDerivative< double > x){return (boost::math::quaternion<GeoCal::AutoDerivative< double > >(*self) += x); }
+SWIGINTERN boost::math::quaternion< GeoCal::AutoDerivative< double > > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____add____SWIG_1(boost::math::quaternion< GeoCal::AutoDerivative< double > > *self,boost::math::quaternion< GeoCal::AutoDerivative< double > > const &x){return (boost::math::quaternion<GeoCal::AutoDerivative< double > >(*self) += x); }
+SWIGINTERN boost::math::quaternion< GeoCal::AutoDerivative< double > > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____sub____SWIG_0(boost::math::quaternion< GeoCal::AutoDerivative< double > > *self,GeoCal::AutoDerivative< double > x){return (boost::math::quaternion<GeoCal::AutoDerivative< double > >(*self) -= x); }
+SWIGINTERN boost::math::quaternion< GeoCal::AutoDerivative< double > > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____sub____SWIG_1(boost::math::quaternion< GeoCal::AutoDerivative< double > > *self,boost::math::quaternion< GeoCal::AutoDerivative< double > > const &x){return (boost::math::quaternion<GeoCal::AutoDerivative< double > >(*self) -= x); }
+SWIGINTERN boost::math::quaternion< GeoCal::AutoDerivative< double > > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____mul____SWIG_0(boost::math::quaternion< GeoCal::AutoDerivative< double > > *self,GeoCal::AutoDerivative< double > x){return (boost::math::quaternion<GeoCal::AutoDerivative< double > >(*self) *= x); }
+SWIGINTERN boost::math::quaternion< GeoCal::AutoDerivative< double > > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____mul____SWIG_1(boost::math::quaternion< GeoCal::AutoDerivative< double > > *self,boost::math::quaternion< GeoCal::AutoDerivative< double > > const &x){return (boost::math::quaternion<GeoCal::AutoDerivative< double > >(*self) *= x); }
+SWIGINTERN boost::math::quaternion< GeoCal::AutoDerivative< double > > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____div____SWIG_0(boost::math::quaternion< GeoCal::AutoDerivative< double > > *self,GeoCal::AutoDerivative< double > x){return (boost::math::quaternion<GeoCal::AutoDerivative< double > >(*self) /= x); }
+SWIGINTERN boost::math::quaternion< GeoCal::AutoDerivative< double > > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____div____SWIG_1(boost::math::quaternion< GeoCal::AutoDerivative< double > > *self,boost::math::quaternion< GeoCal::AutoDerivative< double > > const &x){return (boost::math::quaternion<GeoCal::AutoDerivative< double > >(*self) /= x); }
+SWIGINTERN boost::math::quaternion< GeoCal::AutoDerivative< double > > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__conj(boost::math::quaternion< GeoCal::AutoDerivative< double > > *self){ return conj(*self); }
+SWIGINTERN blitz::Array< GeoCal::AutoDerivative< double >,2 > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__to_matrix(boost::math::quaternion< GeoCal::AutoDerivative< double > > const *self){ 
+	     return GeoCal::quaternion_to_matrix(*self);
+	   }
+SWIGINTERN boost::math::quaternion< GeoCal::AutoDerivative< double > > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__from_matrix(blitz::Array< GeoCal::AutoDerivative< double >,2 > const &Mat){
+	   return GeoCal::matrix_to_quaternion(Mat);
+	 }
+SWIGINTERN std::string boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__print_to_string(boost::math::quaternion< GeoCal::AutoDerivative< double > > const *self){ 
+           std::string buf("blah");
+           buf.reserve(1000);
+           std::ostringstream os(buf);
+           os << *self;
+           return os.str();
+         }
 
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
@@ -5152,6 +5186,34 @@ SWIG_pchar_descriptor(void)
     init = 1;
   }
   return info;
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
+#else
+      return PyString_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
 }
 
 
@@ -6045,16 +6107,852 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_quat_rot_x(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Quaternion_AutoDerivative_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AutoDerivative< double > arg1 ;
+  GeoCal::AutoDerivative< double > arg2 ;
+  GeoCal::AutoDerivative< double > arg3 ;
+  GeoCal::AutoDerivative< double > arg4 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  PyObject *swig_obj[4] ;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *result = 0 ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"new_Quaternion_AutoDerivative_double",4,4,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Quaternion_AutoDerivative_double" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+    }
+    if (!argp1) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Quaternion_AutoDerivative_double" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double >""'");
+    } else {
+      arg1 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_Quaternion_AutoDerivative_double" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Quaternion_AutoDerivative_double" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2);
+    }
+  }
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Quaternion_AutoDerivative_double" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+    }
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Quaternion_AutoDerivative_double" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double >""'");
+    } else {
+      arg3 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp3)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp3);
+    }
+  }
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_Quaternion_AutoDerivative_double" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+    }
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Quaternion_AutoDerivative_double" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double >""'");
+    } else {
+      arg4 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp4)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp4);
+    }
+  }
+  {
+    try {
+      result = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *)new boost::math::quaternion< GeoCal::AutoDerivative< double > >(arg1,arg2,arg3,arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double__v_R_component_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::AutoDerivative< double > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double__v_R_component_1" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    try {
+      result = ((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1)->R_component_1();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double__v_R_component_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::AutoDerivative< double > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double__v_R_component_2" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    try {
+      result = ((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1)->R_component_2();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double__v_R_component_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::AutoDerivative< double > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double__v_R_component_3" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    try {
+      result = ((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1)->R_component_3();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double__v_R_component_4(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::AutoDerivative< double > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double__v_R_component_4" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    try {
+      result = ((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1)->R_component_4();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___add____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  GeoCal::AutoDerivative< double > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double___add__" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Quaternion_AutoDerivative_double___add__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Quaternion_AutoDerivative_double___add__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2);
+    }
+  }
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____add____SWIG_0(arg1,arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___add____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double___add__" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Quaternion_AutoDerivative_double___add__" "', argument " "2"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Quaternion_AutoDerivative_double___add__" "', argument " "2"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const &""'"); 
+  }
+  arg2 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp2);
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____add____SWIG_1(arg1,(boost::math::quaternion< GeoCal::AutoDerivative< double > > const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___add__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Quaternion_AutoDerivative_double___add__",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_Quaternion_AutoDerivative_double___add____SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    return _wrap_Quaternion_AutoDerivative_double___add____SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  Py_INCREF(Py_NotImplemented);
+  return Py_NotImplemented;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___sub____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  GeoCal::AutoDerivative< double > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double___sub__" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Quaternion_AutoDerivative_double___sub__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Quaternion_AutoDerivative_double___sub__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2);
+    }
+  }
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____sub____SWIG_0(arg1,arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___sub____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double___sub__" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Quaternion_AutoDerivative_double___sub__" "', argument " "2"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Quaternion_AutoDerivative_double___sub__" "', argument " "2"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const &""'"); 
+  }
+  arg2 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp2);
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____sub____SWIG_1(arg1,(boost::math::quaternion< GeoCal::AutoDerivative< double > > const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___sub__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Quaternion_AutoDerivative_double___sub__",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_Quaternion_AutoDerivative_double___sub____SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    return _wrap_Quaternion_AutoDerivative_double___sub____SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  Py_INCREF(Py_NotImplemented);
+  return Py_NotImplemented;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___mul____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  GeoCal::AutoDerivative< double > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double___mul__" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Quaternion_AutoDerivative_double___mul__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Quaternion_AutoDerivative_double___mul__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2);
+    }
+  }
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____mul____SWIG_0(arg1,arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___mul____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double___mul__" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Quaternion_AutoDerivative_double___mul__" "', argument " "2"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Quaternion_AutoDerivative_double___mul__" "', argument " "2"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const &""'"); 
+  }
+  arg2 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp2);
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____mul____SWIG_1(arg1,(boost::math::quaternion< GeoCal::AutoDerivative< double > > const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___mul__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Quaternion_AutoDerivative_double___mul__",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_Quaternion_AutoDerivative_double___mul____SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    return _wrap_Quaternion_AutoDerivative_double___mul____SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  Py_INCREF(Py_NotImplemented);
+  return Py_NotImplemented;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___div____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  GeoCal::AutoDerivative< double > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double___div__" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Quaternion_AutoDerivative_double___div__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Quaternion_AutoDerivative_double___div__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double >""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp2);
+    }
+  }
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____div____SWIG_0(arg1,arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___div____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double___div__" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Quaternion_AutoDerivative_double___div__" "', argument " "2"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Quaternion_AutoDerivative_double___div__" "', argument " "2"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const &""'"); 
+  }
+  arg2 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp2);
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____div____SWIG_1(arg1,(boost::math::quaternion< GeoCal::AutoDerivative< double > > const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___div__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Quaternion_AutoDerivative_double___div__",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_Quaternion_AutoDerivative_double___div____SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    return _wrap_Quaternion_AutoDerivative_double___div____SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  Py_INCREF(Py_NotImplemented);
+  return Py_NotImplemented;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double_conj(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double_conj" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__conj(arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double_to_matrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< GeoCal::AutoDerivative< double >,2 > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double_to_matrix" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__to_matrix((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new blitz::Array< GeoCal::AutoDerivative< double >,2 >(static_cast< const blitz::Array< GeoCal::AutoDerivative< double >,2 >& >(result))), SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_2_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double_from_matrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< GeoCal::AutoDerivative< double >,2 > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_2_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double_from_matrix" "', argument " "1"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,2 > const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Quaternion_AutoDerivative_double_from_matrix" "', argument " "1"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,2 > const &""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< GeoCal::AutoDerivative< double >,2 > * >(argp1);
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__from_matrix((blitz::Array< GeoCal::AutoDerivative< double >,2 > const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_AutoDerivative_double___str__" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    try {
+      result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__print_to_string((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_Quaternion_AutoDerivative_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg1 = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Quaternion_AutoDerivative_double" "', argument " "1"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp1);
+  {
+    try {
+      delete arg1;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *Quaternion_AutoDerivative_double_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *Quaternion_AutoDerivative_double_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_quat_rot_x__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   double arg1 ;
   double val1 ;
   int ecode1 = 0 ;
-  PyObject *swig_obj[1] ;
   SwigValueWrapper< boost::math::quaternion< double > > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "quat_rot_x" "', argument " "1"" of type '" "double""'");
@@ -6076,16 +6974,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_quat_rot_y(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_quat_rot_y__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   double arg1 ;
   double val1 ;
   int ecode1 = 0 ;
-  PyObject *swig_obj[1] ;
   SwigValueWrapper< boost::math::quaternion< double > > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "quat_rot_y" "', argument " "1"" of type '" "double""'");
@@ -6107,16 +7003,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_quat_rot_z(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_quat_rot_z__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   double arg1 ;
   double val1 ;
   int ecode1 = 0 ;
-  PyObject *swig_obj[1] ;
   SwigValueWrapper< boost::math::quaternion< double > > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "quat_rot_z" "', argument " "1"" of type '" "double""'");
@@ -6614,48 +7508,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_quat_rot(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[9];
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"quat_rot",0,8,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    return _wrap_quat_rot__SWIG_0(self, argc, argv);
-  }
-  if (argc == 3) {
-    return _wrap_quat_rot__SWIG_1(self, argc, argv);
-  }
-  if (argc == 4) {
-    return _wrap_quat_rot__SWIG_2(self, argc, argv);
-  }
-  if (argc == 5) {
-    return _wrap_quat_rot__SWIG_3(self, argc, argv);
-  }
-  if (argc == 6) {
-    return _wrap_quat_rot__SWIG_4(self, argc, argv);
-  }
-  if (argc == 7) {
-    return _wrap_quat_rot__SWIG_5(self, argc, argv);
-  }
-  if (argc == 8) {
-    return _wrap_quat_rot__SWIG_6(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'quat_rot'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::quat_rot(std::string const &,double)\n"
-    "    GeoCal::quat_rot(std::string const &,double,double)\n"
-    "    GeoCal::quat_rot(std::string const &,double,double,double)\n"
-    "    GeoCal::quat_rot(std::string const &,double,double,double,double)\n"
-    "    GeoCal::quat_rot(std::string const &,double,double,double,double,double)\n"
-    "    GeoCal::quat_rot(std::string const &,double,double,double,double,double,double)\n"
-    "    GeoCal::quat_rot(std::string const &,double,double,double,double,double,double,double)\n");
-  return 0;
-}
-
-
 SWIGINTERN PyObject *_wrap_quaternion_to_matrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   boost::math::quaternion< double > *arg1 = 0 ;
@@ -6691,7 +7543,7 @@ SWIGINTERN PyObject *_wrap_quaternion_to_matrix(PyObject *SWIGUNUSEDPARM(self), 
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double>(), 
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
     PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -6718,7 +7570,7 @@ SWIGINTERN PyObject *_wrap_matrix_to_quaternion(PyObject *SWIGUNUSEDPARM(self), 
     int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
       0 );
     if(!SWIG_IsOK(res)) {
-      numpy1.obj = to_numpy<double>(swig_obj[0]);
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
       if(!numpy1.obj)
       return NULL;
       a1.reference(to_blitz_array<double, 2>(numpy1));
@@ -6867,6 +7719,1541 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_quat_rot_x__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::AutoDerivative< double > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared1 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quat_rot_x" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot_x" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::quat_rot_x((GeoCal::AutoDerivative< double > const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot_x(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"quat_rot_x",0,1,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_quat_rot_x__SWIG_1(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 1) {
+    return _wrap_quat_rot_x__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'quat_rot_x'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::quat_rot_x(double)\n"
+    "    GeoCal::quat_rot_x(GeoCal::AutoDerivative< double > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot_y__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::AutoDerivative< double > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared1 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quat_rot_y" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot_y" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::quat_rot_y((GeoCal::AutoDerivative< double > const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot_y(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"quat_rot_y",0,1,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_quat_rot_y__SWIG_1(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 1) {
+    return _wrap_quat_rot_y__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'quat_rot_y'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::quat_rot_y(double)\n"
+    "    GeoCal::quat_rot_y(GeoCal::AutoDerivative< double > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot_z__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::AutoDerivative< double > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared1 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quat_rot_z" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot_z" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::quat_rot_z((GeoCal::AutoDerivative< double > const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot_z(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"quat_rot_z",0,1,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_quat_rot_z__SWIG_1(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 1) {
+    return _wrap_quat_rot_z__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'quat_rot_z'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::quat_rot_z(double)\n"
+    "    GeoCal::quat_rot_z(GeoCal::AutoDerivative< double > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  GeoCal::AutoDerivative< double > *arg2 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared2 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  GeoCal::AutoDerivative< double > *arg2 = 0 ;
+  GeoCal::AutoDerivative< double > *arg3 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared3 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  GeoCal::AutoDerivative< double > *arg2 = 0 ;
+  GeoCal::AutoDerivative< double > *arg3 = 0 ;
+  GeoCal::AutoDerivative< double > *arg4 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared4 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "quat_rot" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  GeoCal::AutoDerivative< double > *arg2 = 0 ;
+  GeoCal::AutoDerivative< double > *arg3 = 0 ;
+  GeoCal::AutoDerivative< double > *arg4 = 0 ;
+  GeoCal::AutoDerivative< double > *arg5 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared4 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared5 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "quat_rot" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res5)) {
+      arg5 = ptr;
+    } else {
+      res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res5)) {
+        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "quat_rot" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp5) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared5 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5);
+        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared5.get());
+      } else {
+        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4,(GeoCal::AutoDerivative< double > const &)*arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  GeoCal::AutoDerivative< double > *arg2 = 0 ;
+  GeoCal::AutoDerivative< double > *arg3 = 0 ;
+  GeoCal::AutoDerivative< double > *arg4 = 0 ;
+  GeoCal::AutoDerivative< double > *arg5 = 0 ;
+  GeoCal::AutoDerivative< double > *arg6 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared4 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared5 ;
+  void *argp6 = 0 ;
+  int res6 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared6 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "quat_rot" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res5)) {
+      arg5 = ptr;
+    } else {
+      res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res5)) {
+        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "quat_rot" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp5) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared5 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5);
+        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared5.get());
+      } else {
+        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res6)) {
+      arg6 = ptr;
+    } else {
+      res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res6)) {
+        SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "quat_rot" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp6) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared6 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp6);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp6);
+        arg6 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared6.get());
+      } else {
+        arg6 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp6)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4,(GeoCal::AutoDerivative< double > const &)*arg5,(GeoCal::AutoDerivative< double > const &)*arg6);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot__SWIG_12(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  GeoCal::AutoDerivative< double > *arg2 = 0 ;
+  GeoCal::AutoDerivative< double > *arg3 = 0 ;
+  GeoCal::AutoDerivative< double > *arg4 = 0 ;
+  GeoCal::AutoDerivative< double > *arg5 = 0 ;
+  GeoCal::AutoDerivative< double > *arg6 = 0 ;
+  GeoCal::AutoDerivative< double > *arg7 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared4 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared5 ;
+  void *argp6 = 0 ;
+  int res6 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared6 ;
+  void *argp7 = 0 ;
+  int res7 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared7 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "quat_rot" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res5)) {
+      arg5 = ptr;
+    } else {
+      res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res5)) {
+        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "quat_rot" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp5) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared5 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5);
+        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared5.get());
+      } else {
+        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res6)) {
+      arg6 = ptr;
+    } else {
+      res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res6)) {
+        SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "quat_rot" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp6) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared6 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp6);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp6);
+        arg6 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared6.get());
+      } else {
+        arg6 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp6)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res7 = SWIG_ConvertPtrAndOwn(swig_obj[6], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res7)) {
+      arg7 = ptr;
+    } else {
+      res7 = SWIG_ConvertPtrAndOwn(swig_obj[6], &argp7, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res7)) {
+        SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "quat_rot" "', argument " "7"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp7) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "7"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared7 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp7);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp7);
+        arg7 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared7.get());
+      } else {
+        arg7 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp7)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4,(GeoCal::AutoDerivative< double > const &)*arg5,(GeoCal::AutoDerivative< double > const &)*arg6,(GeoCal::AutoDerivative< double > const &)*arg7);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot__SWIG_13(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  GeoCal::AutoDerivative< double > *arg2 = 0 ;
+  GeoCal::AutoDerivative< double > *arg3 = 0 ;
+  GeoCal::AutoDerivative< double > *arg4 = 0 ;
+  GeoCal::AutoDerivative< double > *arg5 = 0 ;
+  GeoCal::AutoDerivative< double > *arg6 = 0 ;
+  GeoCal::AutoDerivative< double > *arg7 = 0 ;
+  GeoCal::AutoDerivative< double > *arg8 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared4 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared5 ;
+  void *argp6 = 0 ;
+  int res6 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared6 ;
+  void *argp7 = 0 ;
+  int res7 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared7 ;
+  void *argp8 = 0 ;
+  int res8 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared8 ;
+  SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "quat_rot" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res5)) {
+      arg5 = ptr;
+    } else {
+      res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res5)) {
+        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "quat_rot" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp5) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared5 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5);
+        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared5.get());
+      } else {
+        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp5)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res6)) {
+      arg6 = ptr;
+    } else {
+      res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res6)) {
+        SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "quat_rot" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp6) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared6 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp6);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp6);
+        arg6 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared6.get());
+      } else {
+        arg6 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp6)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res7 = SWIG_ConvertPtrAndOwn(swig_obj[6], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res7)) {
+      arg7 = ptr;
+    } else {
+      res7 = SWIG_ConvertPtrAndOwn(swig_obj[6], &argp7, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res7)) {
+        SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "quat_rot" "', argument " "7"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp7) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "7"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared7 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp7);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp7);
+        arg7 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared7.get());
+      } else {
+        arg7 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp7)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res8 = SWIG_ConvertPtrAndOwn(swig_obj[7], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res8)) {
+      arg8 = ptr;
+    } else {
+      res8 = SWIG_ConvertPtrAndOwn(swig_obj[7], &argp8, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res8)) {
+        SWIG_exception_fail(SWIG_ArgError(res8), "in method '" "quat_rot" "', argument " "8"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp8) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_rot" "', argument " "8"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared8 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp8);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp8);
+        arg8 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared8.get());
+      } else {
+        arg8 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp8)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4,(GeoCal::AutoDerivative< double > const &)*arg5,(GeoCal::AutoDerivative< double > const &)*arg6,(GeoCal::AutoDerivative< double > const &)*arg7,(GeoCal::AutoDerivative< double > const &)*arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< GeoCal::AutoDerivative< double > >(static_cast< const boost::math::quaternion< GeoCal::AutoDerivative< double > >& >(result))), SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_rot(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[9];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"quat_rot",0,8,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_quat_rot__SWIG_7(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    return _wrap_quat_rot__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_quat_rot__SWIG_8(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_quat_rot__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_quat_rot__SWIG_9(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_quat_rot__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_7;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_7;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_7;
+    {
+      int res = SWIG_ConvertPtr(argv[4], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_7;
+    return _wrap_quat_rot__SWIG_10(self, argc, argv);
+  }
+check_7:
+  
+  if (argc == 5) {
+    return _wrap_quat_rot__SWIG_3(self, argc, argv);
+  }
+  if (argc == 6) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_9;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_9;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_9;
+    {
+      int res = SWIG_ConvertPtr(argv[4], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_9;
+    {
+      int res = SWIG_ConvertPtr(argv[5], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_9;
+    return _wrap_quat_rot__SWIG_11(self, argc, argv);
+  }
+check_9:
+  
+  if (argc == 6) {
+    return _wrap_quat_rot__SWIG_4(self, argc, argv);
+  }
+  if (argc == 7) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_11;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_11;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_11;
+    {
+      int res = SWIG_ConvertPtr(argv[4], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_11;
+    {
+      int res = SWIG_ConvertPtr(argv[5], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_11;
+    {
+      int res = SWIG_ConvertPtr(argv[6], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_11;
+    return _wrap_quat_rot__SWIG_12(self, argc, argv);
+  }
+check_11:
+  
+  if (argc == 7) {
+    return _wrap_quat_rot__SWIG_5(self, argc, argv);
+  }
+  if (argc == 8) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_13;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_13;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_13;
+    {
+      int res = SWIG_ConvertPtr(argv[4], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_13;
+    {
+      int res = SWIG_ConvertPtr(argv[5], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_13;
+    {
+      int res = SWIG_ConvertPtr(argv[6], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_13;
+    {
+      int res = SWIG_ConvertPtr(argv[7], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_13;
+    return _wrap_quat_rot__SWIG_13(self, argc, argv);
+  }
+check_13:
+  
+  if (argc == 8) {
+    return _wrap_quat_rot__SWIG_6(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'quat_rot'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::quat_rot(std::string const &,double)\n"
+    "    GeoCal::quat_rot(std::string const &,double,double)\n"
+    "    GeoCal::quat_rot(std::string const &,double,double,double)\n"
+    "    GeoCal::quat_rot(std::string const &,double,double,double,double)\n"
+    "    GeoCal::quat_rot(std::string const &,double,double,double,double,double)\n"
+    "    GeoCal::quat_rot(std::string const &,double,double,double,double,double,double)\n"
+    "    GeoCal::quat_rot(std::string const &,double,double,double,double,double,double,double)\n"
+    "    GeoCal::quat_rot(std::string const &,GeoCal::AutoDerivative< double > const &)\n"
+    "    GeoCal::quat_rot(std::string const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &)\n"
+    "    GeoCal::quat_rot(std::string const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &)\n"
+    "    GeoCal::quat_rot(std::string const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &)\n"
+    "    GeoCal::quat_rot(std::string const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &)\n"
+    "    GeoCal::quat_rot(std::string const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &)\n"
+    "    GeoCal::quat_rot(std::string const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &)\n");
+  return 0;
+}
+
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -6887,8 +9274,46 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
-	 { (char *)"quat_rot_x", (PyCFunction)_wrap_quat_rot_x, METH_O, (char *)"\n"
-		"boost::math::quaternion<double> GeoCal::quat_rot_x(double A)\n"
+	 { (char *)"new_Quaternion_AutoDerivative_double", _wrap_new_Quaternion_AutoDerivative_double, METH_VARARGS, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double__v_R_component_1", (PyCFunction)_wrap_Quaternion_AutoDerivative_double__v_R_component_1, METH_O, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double__v_R_component_2", (PyCFunction)_wrap_Quaternion_AutoDerivative_double__v_R_component_2, METH_O, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double__v_R_component_3", (PyCFunction)_wrap_Quaternion_AutoDerivative_double__v_R_component_3, METH_O, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double__v_R_component_4", (PyCFunction)_wrap_Quaternion_AutoDerivative_double__v_R_component_4, METH_O, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double___add__", _wrap_Quaternion_AutoDerivative_double___add__, METH_VARARGS, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double___sub__", _wrap_Quaternion_AutoDerivative_double___sub__, METH_VARARGS, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double___mul__", _wrap_Quaternion_AutoDerivative_double___mul__, METH_VARARGS, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double___div__", _wrap_Quaternion_AutoDerivative_double___div__, METH_VARARGS, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double_conj", (PyCFunction)_wrap_Quaternion_AutoDerivative_double_conj, METH_O, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double_to_matrix", (PyCFunction)_wrap_Quaternion_AutoDerivative_double_to_matrix, METH_O, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double_from_matrix", (PyCFunction)_wrap_Quaternion_AutoDerivative_double_from_matrix, METH_O, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double___str__", (PyCFunction)_wrap_Quaternion_AutoDerivative_double___str__, METH_O, NULL},
+	 { (char *)"delete_Quaternion_AutoDerivative_double", (PyCFunction)_wrap_delete_Quaternion_AutoDerivative_double, METH_O, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double_swigregister", Quaternion_AutoDerivative_double_swigregister, METH_VARARGS, NULL},
+	 { (char *)"Quaternion_AutoDerivative_double_swiginit", Quaternion_AutoDerivative_double_swiginit, METH_VARARGS, NULL},
+	 { (char *)"quaternion_to_matrix", (PyCFunction)_wrap_quaternion_to_matrix, METH_O, (char *)"\n"
+		"blitz::Array<T, 2> GeoCal::quaternion_to_matrix(const boost::math::quaternion< T > &q)\n"
+		"Convert a quaternion to a rotation matrix.\n"
+		"\n"
+		"This is an \"active\" transformation. For \"passive\", just reverse\n"
+		"the sign of A \n"
+		""},
+	 { (char *)"matrix_to_quaternion", (PyCFunction)_wrap_matrix_to_quaternion, METH_O, (char *)"\n"
+		"boost::math::quaternion<T> GeoCal::matrix_to_quaternion(const T m[3][3])\n"
+		"\n"
+		""},
+	 { (char *)"quat_to_ypr", (PyCFunction)_wrap_quat_to_ypr, METH_O, (char *)"\n"
+		"void GeoCal::quat_to_ypr(const boost::math::quaternion< T > &qin, T &yaw, T &pitch, T &roll)\n"
+		"Return the Euler angles that make up the quaternion rotation (yaw,\n"
+		"pitch, roll, so quat_rot(\"xyz\", pitch, roll, yaw) = qin. \n"
+		""},
+	 { (char *)"quat_to_euler", (PyCFunction)_wrap_quat_to_euler, METH_O, (char *)"\n"
+		"void GeoCal::quat_to_euler(const boost::math::quaternion< T > &qin, T &epsilon, T &beta, T\n"
+		"&delta)\n"
+		"Return the Euler angles that make up the quaternion rotation (epsilon,\n"
+		"beta, delta so quat_rot(\"zyx\", epsilon,beta, delta) = qin. \n"
+		""},
+	 { (char *)"quat_rot_x", _wrap_quat_rot_x, METH_VARARGS, (char *)"\n"
+		"boost::math::quaternion<T> GeoCal::quat_rot_x(const T &A)\n"
 		"Quaternion that rotate about x.\n"
 		"\n"
 		"If you don't happen to remember off the top of your head, you rotate\n"
@@ -6898,8 +9323,8 @@ static PyMethodDef SwigMethods[] = {
 		"This is an \"active\" transformation. For \"passive\", just reverse\n"
 		"the sign of A \n"
 		""},
-	 { (char *)"quat_rot_y", (PyCFunction)_wrap_quat_rot_y, METH_O, (char *)"\n"
-		"boost::math::quaternion<double> GeoCal::quat_rot_y(double A)\n"
+	 { (char *)"quat_rot_y", _wrap_quat_rot_y, METH_VARARGS, (char *)"\n"
+		"boost::math::quaternion<T> GeoCal::quat_rot_y(const T &A)\n"
 		"Quaternion that rotate about y.\n"
 		"\n"
 		"If you don't happen to remember off the top of your head, you rotate\n"
@@ -6909,8 +9334,8 @@ static PyMethodDef SwigMethods[] = {
 		"This is an \"active\" transformation. For \"passive\", just reverse\n"
 		"the sign of A \n"
 		""},
-	 { (char *)"quat_rot_z", (PyCFunction)_wrap_quat_rot_z, METH_O, (char *)"\n"
-		"boost::math::quaternion<double> GeoCal::quat_rot_z(double A)\n"
+	 { (char *)"quat_rot_z", _wrap_quat_rot_z, METH_VARARGS, (char *)"\n"
+		"boost::math::quaternion<T> GeoCal::quat_rot_z(const T &A)\n"
 		"Quaternion that rotate about z.\n"
 		"\n"
 		"If you don't happen to remember off the top of your head, you rotate\n"
@@ -6921,35 +9346,12 @@ static PyMethodDef SwigMethods[] = {
 		"the sign of A \n"
 		""},
 	 { (char *)"quat_rot", _wrap_quat_rot, METH_VARARGS, (char *)"\n"
-		"boost::math::quaternion<double> GeoCal::quat_rot(const std::string &Rot, double A1, double A2, double A3, double A4,\n"
-		"double A5, double A6, double A7)\n"
+		"boost::math::quaternion<T> GeoCal::quat_rot(const std::string &Rot, const T &A1, const T &A2, const T &A3, const\n"
+		"T &A4, const T &A5, const T &A6, const T &A7)\n"
 		"Do a rotation about the seven axis given.\n"
 		"\n"
 		"This is an \"active\" transformation. For \"passive\", just reverse\n"
 		"the sign of A \n"
-		""},
-	 { (char *)"quaternion_to_matrix", (PyCFunction)_wrap_quaternion_to_matrix, METH_O, (char *)"\n"
-		"blitz::Array<double, 2> GeoCal::quaternion_to_matrix(const boost::math::quaternion< double > &q)\n"
-		"Convert a quaternion to a rotation matrix.\n"
-		"\n"
-		"This is an \"active\" transformation. For \"passive\", just reverse\n"
-		"the sign of A \n"
-		""},
-	 { (char *)"matrix_to_quaternion", (PyCFunction)_wrap_matrix_to_quaternion, METH_O, (char *)"\n"
-		"boost::math::quaternion<double> GeoCal::matrix_to_quaternion(const double m[3][3])\n"
-		"\n"
-		""},
-	 { (char *)"quat_to_ypr", (PyCFunction)_wrap_quat_to_ypr, METH_O, (char *)"\n"
-		"void GeoCal::quat_to_ypr(const boost::math::quaternion< double > &qin, double &yaw, double\n"
-		"&pitch, double &roll)\n"
-		"Return the Euler angles that make up the quaternion rotation (yaw,\n"
-		"pitch, roll, so quat_rot(\"xyz\", pitch, roll, yaw) = qin. \n"
-		""},
-	 { (char *)"quat_to_euler", (PyCFunction)_wrap_quat_to_euler, METH_O, (char *)"\n"
-		"void GeoCal::quat_to_euler(const boost::math::quaternion< double > &qin, double &epsilon, double\n"
-		"&beta, double &delta)\n"
-		"Return the Euler angles that make up the quaternion rotation (epsilon,\n"
-		"beta, delta so quat_rot(\"zyx\", epsilon,beta, delta) = qin. \n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };
@@ -6957,13 +9359,31 @@ static PyMethodDef SwigMethods[] = {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
+static void *_p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivative< double > *) x));
+}
+static void *_p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivativeRef< double > *) x));
+}
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_istream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
 }
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_ostream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
 }
+static void *_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AutoDerivative< double > > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *)x);
+}
+static swig_type_info _swigt__p_GeoCal__AutoDerivativeRefT_double_t = {"_p_GeoCal__AutoDerivativeRefT_double_t", "GeoCal::AutoDerivativeRef< double > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__AutoDerivativeT_double_t = {"_p_GeoCal__AutoDerivativeT_double_t", "GeoCal::AutoDerivative< double > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObject", "GeoCal::GenericObject *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_2_t = {"_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_2_t", "blitz::Array< GeoCal::AutoDerivative< double >,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_2_t = {"_p_blitz__ArrayT_bool_2_t", "blitz::Array< bool,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_3_t = {"_p_blitz__ArrayT_bool_3_t", "blitz::Array< bool,3 > *", 0, 0, (void*)0, 0};
@@ -6976,7 +9396,11 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_1_t = {"_p_blitz__ArrayT_int_1
 static swig_type_info _swigt__p_blitz__ArrayT_int_2_t = {"_p_blitz__ArrayT_int_2_t", "blitz::Array< int,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_3_t = {"_p_blitz__ArrayT_int_3_t", "blitz::Array< int,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_4_t = {"_p_blitz__ArrayT_int_4_t", "blitz::Array< int,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t = {"_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t", "boost::math::quaternion< GeoCal::AutoDerivative< double > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__math__quaternionT_double_t = {"_p_boost__math__quaternionT_double_t", "boost::math::quaternion< double > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivative< double > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_p_boost__shared_ptrT_GeoCal__GenericObject_t", "boost::shared_ptr< GeoCal::GenericObject > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
@@ -7000,7 +9424,11 @@ static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *"
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__p_GeoCal__AutoDerivativeRefT_double_t,
+  &_swigt__p_GeoCal__AutoDerivativeT_double_t,
+  &_swigt__p_GeoCal__GenericObject,
   &_swigt__p_allocator_type,
+  &_swigt__p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_2_t,
   &_swigt__p_blitz__ArrayT_bool_1_t,
   &_swigt__p_blitz__ArrayT_bool_2_t,
   &_swigt__p_blitz__ArrayT_bool_3_t,
@@ -7013,7 +9441,11 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_2_t,
   &_swigt__p_blitz__ArrayT_int_3_t,
   &_swigt__p_blitz__ArrayT_int_4_t,
+  &_swigt__p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t,
   &_swigt__p_boost__math__quaternionT_double_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
@@ -7037,7 +9469,11 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_value_type,
 };
 
+static swig_cast_info _swigc__p_GeoCal__AutoDerivativeRefT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__AutoDerivativeT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_2_t[] = {  {&_swigt__p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_3_t[] = {  {&_swigt__p_blitz__ArrayT_bool_3_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -7050,7 +9486,11 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_1_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_2_t[] = {  {&_swigt__p_blitz__ArrayT_int_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_3_t[] = {  {&_swigt__p_blitz__ArrayT_int_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_4_t[] = {  {&_swigt__p_blitz__ArrayT_int_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__math__quaternionT_double_t[] = {  {&_swigt__p_boost__math__quaternionT_double_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -7074,7 +9514,11 @@ static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__p_GeoCal__AutoDerivativeRefT_double_t,
+  _swigc__p_GeoCal__AutoDerivativeT_double_t,
+  _swigc__p_GeoCal__GenericObject,
   _swigc__p_allocator_type,
+  _swigc__p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_2_t,
   _swigc__p_blitz__ArrayT_bool_1_t,
   _swigc__p_blitz__ArrayT_bool_2_t,
   _swigc__p_blitz__ArrayT_bool_3_t,
@@ -7087,7 +9531,11 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_2_t,
   _swigc__p_blitz__ArrayT_int_3_t,
   _swigc__p_blitz__ArrayT_int_4_t,
+  _swigc__p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t,
   _swigc__p_boost__math__quaternionT_double_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,

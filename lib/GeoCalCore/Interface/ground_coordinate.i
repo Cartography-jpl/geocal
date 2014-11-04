@@ -62,7 +62,7 @@ public:
 
   // Note this is from look_vector.h, but it is placed here to break
   // a circular dependency with swig.
-class LnLookVector : public LookVector {
+class LnLookVector : public GeoCal::LookVector<double> {
 public:
   LnLookVector();
   LnLookVector(const CartesianFixedLookVector& Lv, 
@@ -103,13 +103,17 @@ public:
  }
 #endif
 
-class CartesianFixedLookVector : public LookVector {
+class CartesianFixedLookVector : public LookVector<double> {
 public:
   CartesianFixedLookVector();
   CartesianFixedLookVector(const boost::array<double, 3>& Lv);
   CartesianFixedLookVector(double x, double y, double z);
   CartesianFixedLookVector(const GroundCoordinate& From,
 			   const GroundCoordinate& To);
+  // This conflicts in python with the version that take a boost
+  // array. For now comment this out. We may want to investigate this
+  // at some point, not sure where the conflict comes from
+  // CartesianFixedLookVector(const boost::math::quaternion<double>& V);
   std::string print_to_string() const;
   static CartesianFixedLookVector solar_look_vector(const Time& T);
   %pickle_init(1, self.look_vector[0], self.look_vector[1],

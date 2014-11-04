@@ -22,7 +22,6 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK(t2 <= t2);
   BOOST_CHECK(t2 >= t2);
   BOOST_CHECK_CLOSE(t2 - t, 10.0, 1e-6);
-#ifdef HAVE_TIME_TOOLKIT
   Time r = Time::parse_time("1996-07-03T04:13:57.987654Z");
   BOOST_CHECK_CLOSE(r.pgs(), 110520840.987654, 1e-6);
   r += 2.0 * 365 * 24 * 60 * 60; // This goes through a leapsecond
@@ -39,8 +38,24 @@ BOOST_AUTO_TEST_CASE(basic_test)
   // these agree
   BOOST_CHECK_CLOSE(Time::time_j2000(1).et(), 1.0, 1e-6);
   BOOST_CHECK_CLOSE(Time::time_et(100).j2000(), 100.0, 1e-6);
-#endif
-  
+}
+
+BOOST_AUTO_TEST_CASE(time_with_derivative)
+{
+  AutoDerivative<double> tm(100.0, 0, 10);
+  TimeWithDerivative t = TimeWithDerivative::time_pgs(tm);
+  BOOST_CHECK_CLOSE(t.value().pgs(), 100.0, 1e-6);
+  BOOST_CHECK_CLOSE((t + 200.0).value().pgs(), 100.0 + 200.0, 1e-6);
+  BOOST_CHECK_CLOSE((t - 200.0).value().pgs(), 100.0 - 200.0, 1e-6);
+  t = TimeWithDerivative::time_gps(tm);
+  BOOST_CHECK_CLOSE(t.gps().value(), 100.0, 1e-6);
+  TimeWithDerivative  t2 = t;
+  t2 += 10;
+  BOOST_CHECK(t < t2);
+  BOOST_CHECK(t2 > t);
+  BOOST_CHECK(t2 <= t2);
+  BOOST_CHECK(t2 >= t2);
+  BOOST_CHECK_CLOSE((t2 - t).value(), 10.0, 1e-6);
 }
 
 BOOST_AUTO_TEST_CASE(unix_time_interface)

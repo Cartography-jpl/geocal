@@ -8,6 +8,7 @@
 %}
 
 %base_import(generic_object)
+%import "look_vector.i"
 %import "ground_coordinate.i"
 
 %geocal_shared_ptr(GeoCal::Dem);
@@ -17,9 +18,13 @@ public:
   virtual double distance_to_surface(const GroundCoordinate& Gp) const = 0;
   virtual double height_reference_surface(const GroundCoordinate& Gp) 
     const = 0;
-  boost::shared_ptr<CartesianFixed> intersect(const CartesianFixed& Cf,
+  virtual boost::shared_ptr<CartesianFixed> intersect(const CartesianFixed& Cf,
       const CartesianFixedLookVector& Lv, double Resolution,
       double Max_height = 9000) const;
+  virtual boost::shared_ptr<CartesianFixed> 
+  intersect_start_length (const CartesianFixed& Cf,
+			  const CartesianFixedLookVector& Lv, 
+			  double Resolution, double Start_length) const;
   virtual boost::shared_ptr<GroundCoordinate> 
   surface_point(const GroundCoordinate& Gp) const = 0;
   std::string print_to_string() const;

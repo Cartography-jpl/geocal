@@ -3449,57 +3449,67 @@ namespace Swig {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_GeoCal__ConstantSpacingTimeTable swig_types[0]
-#define SWIGTYPE_p_GeoCal__FrameCoordinate swig_types[1]
-#define SWIGTYPE_p_GeoCal__GenericObject swig_types[2]
-#define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[3]
-#define SWIGTYPE_p_GeoCal__MeasuredTimeTable swig_types[4]
-#define SWIGTYPE_p_GeoCal__Time swig_types[5]
-#define SWIGTYPE_p_GeoCal__TimeTable swig_types[6]
-#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[7]
-#define SWIGTYPE_p_allocator_type swig_types[8]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[9]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[11]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[12]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[13]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[14]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[15]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[16]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[17]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[18]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[19]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[20]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t swig_types[21]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[22]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[23]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[24]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t swig_types[25]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t swig_types[26]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[27]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[28]
-#define SWIGTYPE_p_char swig_types[29]
-#define SWIGTYPE_p_char_type swig_types[30]
-#define SWIGTYPE_p_difference_type swig_types[31]
-#define SWIGTYPE_p_fmtflags swig_types[32]
-#define SWIGTYPE_p_int_type swig_types[33]
-#define SWIGTYPE_p_iostate swig_types[34]
-#define SWIGTYPE_p_off_type swig_types[35]
-#define SWIGTYPE_p_openmode swig_types[36]
-#define SWIGTYPE_p_pos_type swig_types[37]
-#define SWIGTYPE_p_seekdir swig_types[38]
-#define SWIGTYPE_p_size_t swig_types[39]
-#define SWIGTYPE_p_size_type swig_types[40]
-#define SWIGTYPE_p_state_type swig_types[41]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[42]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[43]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[44]
-#define SWIGTYPE_p_std__invalid_argument swig_types[45]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[46]
-#define SWIGTYPE_p_traits_type swig_types[47]
-#define SWIGTYPE_p_value_type swig_types[48]
-static swig_type_info *swig_types[50];
-static swig_module_info swig_module = {swig_types, 49, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__AutoDerivativeRefT_double_t swig_types[0]
+#define SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t swig_types[1]
+#define SWIGTYPE_p_GeoCal__ConstantSpacingTimeTable swig_types[2]
+#define SWIGTYPE_p_GeoCal__FrameCoordinate swig_types[3]
+#define SWIGTYPE_p_GeoCal__FrameCoordinateWithDerivative swig_types[4]
+#define SWIGTYPE_p_GeoCal__GenericObject swig_types[5]
+#define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[6]
+#define SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative swig_types[7]
+#define SWIGTYPE_p_GeoCal__MeasuredTimeTable swig_types[8]
+#define SWIGTYPE_p_GeoCal__Time swig_types[9]
+#define SWIGTYPE_p_GeoCal__TimeTable swig_types[10]
+#define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[11]
+#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[12]
+#define SWIGTYPE_p_allocator_type swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[16]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[17]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[18]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[19]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[20]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[25]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[26]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[27]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t swig_types[28]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t swig_types[29]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[30]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[31]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[32]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[33]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t swig_types[34]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t swig_types[35]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[36]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[37]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[38]
+#define SWIGTYPE_p_char swig_types[39]
+#define SWIGTYPE_p_char_type swig_types[40]
+#define SWIGTYPE_p_difference_type swig_types[41]
+#define SWIGTYPE_p_fmtflags swig_types[42]
+#define SWIGTYPE_p_int_type swig_types[43]
+#define SWIGTYPE_p_iostate swig_types[44]
+#define SWIGTYPE_p_off_type swig_types[45]
+#define SWIGTYPE_p_openmode swig_types[46]
+#define SWIGTYPE_p_pos_type swig_types[47]
+#define SWIGTYPE_p_seekdir swig_types[48]
+#define SWIGTYPE_p_size_t swig_types[49]
+#define SWIGTYPE_p_size_type swig_types[50]
+#define SWIGTYPE_p_state_type swig_types[51]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[52]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[53]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[54]
+#define SWIGTYPE_p_std__invalid_argument swig_types[55]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[56]
+#define SWIGTYPE_p_traits_type swig_types[57]
+#define SWIGTYPE_p_value_type swig_types[58]
+static swig_type_info *swig_types[60];
+static swig_module_info swig_module = {swig_types, 59, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -6225,6 +6235,96 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TimeTable_image_coordinate_with_derivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TimeTable *arg1 = (GeoCal::TimeTable *) 0 ;
+  GeoCal::TimeWithDerivative arg2 ;
+  GeoCal::FrameCoordinateWithDerivative *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TimeTable const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TimeTable const > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative const > tempshared3 ;
+  PyObject *swig_obj[3] ;
+  GeoCal::ImageCoordinateWithDerivative result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"TimeTable_image_coordinate_with_derivative",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeTable_image_coordinate_with_derivative" "', argument " "1"" of type '" "GeoCal::TimeTable const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeTable * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeTable * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TimeTable_image_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::TimeWithDerivative const""'"); 
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeTable_image_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::TimeWithDerivative const""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2);
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::FrameCoordinateWithDerivative *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinateWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TimeTable_image_coordinate_with_derivative" "', argument " "3"" of type '" "GeoCal::FrameCoordinateWithDerivative const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeTable_image_coordinate_with_derivative" "', argument " "3"" of type '" "GeoCal::FrameCoordinateWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp3);
+        arg3 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::FrameCoordinateWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::TimeTable const *)arg1)->image_coordinate_with_derivative(arg2,(GeoCal::FrameCoordinateWithDerivative const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative >(new GeoCal::ImageCoordinateWithDerivative((GeoCal::ImageCoordinateWithDerivative &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TimeTable_time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::TimeTable *arg1 = (GeoCal::TimeTable *) 0 ;
@@ -6306,6 +6406,94 @@ SWIGINTERN PyObject *_wrap_TimeTable_time(PyObject *SWIGUNUSEDPARM(self), PyObje
   {
     boost::shared_ptr<GeoCal::FrameCoordinate> *smartresult = new boost::shared_ptr<GeoCal::FrameCoordinate>(new GeoCal::FrameCoordinate(*arg4));
     resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TimeTable_time_with_derivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TimeTable *arg1 = (GeoCal::TimeTable *) 0 ;
+  GeoCal::ImageCoordinateWithDerivative *arg2 = 0 ;
+  GeoCal::TimeWithDerivative *arg3 = 0 ;
+  GeoCal::FrameCoordinateWithDerivative *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TimeTable const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TimeTable const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative const > tempshared2 ;
+  GeoCal::TimeWithDerivative temp3 ;
+  GeoCal::FrameCoordinateWithDerivative temp4 ;
+  PyObject *swig_obj[2] ;
+  
+  {
+    arg3 = &temp3;
+  }
+  {
+    arg4 = &temp4;
+  }
+  if (!SWIG_Python_UnpackTuple(args,"TimeTable_time_with_derivative",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeTable_time_with_derivative" "', argument " "1"" of type '" "GeoCal::TimeTable const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeTable * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeTable * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinateWithDerivative *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TimeTable_time_with_derivative" "', argument " "2"" of type '" "GeoCal::ImageCoordinateWithDerivative const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeTable_time_with_derivative" "', argument " "2"" of type '" "GeoCal::ImageCoordinateWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinateWithDerivative > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinateWithDerivative > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinateWithDerivative * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinateWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinateWithDerivative > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::TimeTable const *)arg1)->time_with_derivative((GeoCal::ImageCoordinateWithDerivative const &)*arg2,*arg3,*arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<GeoCal::TimeWithDerivative> *smartresult = new boost::shared_ptr<GeoCal::TimeWithDerivative>(new GeoCal::TimeWithDerivative(*arg3));
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN));
+  }
+  {
+    boost::shared_ptr<GeoCal::FrameCoordinateWithDerivative> *smartresult = new boost::shared_ptr<GeoCal::FrameCoordinateWithDerivative>(new GeoCal::FrameCoordinateWithDerivative(*arg4));
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN));
   }
   return resultobj;
 fail:
@@ -7102,8 +7290,18 @@ static PyMethodDef SwigMethods[] = {
 		"virtual ImageCoordinate GeoCal::TimeTable::image_coordinate(Time T, const FrameCoordinate &F) const =0\n"
 		"Convert from Time and FrameCoordinate to ImageCoordinate. \n"
 		""},
+	 { (char *)"TimeTable_image_coordinate_with_derivative", _wrap_TimeTable_image_coordinate_with_derivative, METH_VARARGS, (char *)"\n"
+		"virtual ImageCoordinateWithDerivative GeoCal::TimeTable::image_coordinate_with_derivative(const TimeWithDerivative &T, const FrameCoordinateWithDerivative &F)\n"
+		"const =0\n"
+		"Convert from Time and FrameCoordinate to ImageCoordinate. \n"
+		""},
 	 { (char *)"TimeTable_time", _wrap_TimeTable_time, METH_VARARGS, (char *)"\n"
 		"virtual void GeoCal::TimeTable::time(const ImageCoordinate &Ic, Time &T, FrameCoordinate &F) const =0\n"
+		"Convert from ImageCoordinate to Time and FrameCoordinate. \n"
+		""},
+	 { (char *)"TimeTable_time_with_derivative", _wrap_TimeTable_time_with_derivative, METH_VARARGS, (char *)"\n"
+		"virtual void GeoCal::TimeTable::time_with_derivative(const ImageCoordinateWithDerivative &Ic, TimeWithDerivative &T,\n"
+		"FrameCoordinateWithDerivative &F) const =0\n"
 		"Convert from ImageCoordinate to Time and FrameCoordinate. \n"
 		""},
 	 { (char *)"TimeTable__v_min_line", (PyCFunction)_wrap_TimeTable__v_min_line, METH_O, (char *)"\n"
@@ -7183,6 +7381,15 @@ static void *_p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__TimeTable(void *x, 
 static void *_p_GeoCal__MeasuredTimeTableTo_p_GeoCal__TimeTable(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::TimeTable *)  ((GeoCal::MeasuredTimeTable *) x));
 }
+static void *_p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageCoordinateWithDerivative *) x));
+}
+static void *_p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::TimeWithDerivative *) x));
+}
+static void *_p_GeoCal__FrameCoordinateWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::FrameCoordinateWithDerivative *) x));
+}
 static void *_p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageCoordinate *) x));
 }
@@ -7203,6 +7410,12 @@ static void *_p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__GenericObject(void 
 }
 static void *_p_GeoCal__MeasuredTimeTableTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::TimeTable *) ((GeoCal::MeasuredTimeTable *) x));
+}
+static void *_p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivative< double > *) x));
+}
+static void *_p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivativeRef< double > *) x));
 }
 static void *_p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_tTo_p_boost__shared_ptrT_GeoCal__TimeTable_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -7246,13 +7459,38 @@ static void *_p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_tTo_p_boost_
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::ConstantSpacingTimeTable > *)x);
 }
+static void *_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AutoDerivative< double > > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::TimeWithDerivative > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > *)x);
+}
+static swig_type_info _swigt__p_GeoCal__AutoDerivativeRefT_double_t = {"_p_GeoCal__AutoDerivativeRefT_double_t", "GeoCal::AutoDerivativeRef< double > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__AutoDerivativeT_double_t = {"_p_GeoCal__AutoDerivativeT_double_t", "GeoCal::AutoDerivative< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ConstantSpacingTimeTable = {"_p_GeoCal__ConstantSpacingTimeTable", "GeoCal::ConstantSpacingTimeTable *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__FrameCoordinate = {"_p_GeoCal__FrameCoordinate", "GeoCal::FrameCoordinate *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__FrameCoordinateWithDerivative = {"_p_GeoCal__FrameCoordinateWithDerivative", "GeoCal::FrameCoordinateWithDerivative *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObject", "GeoCal::GenericObject *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ImageCoordinate = {"_p_GeoCal__ImageCoordinate", "GeoCal::ImageCoordinate *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__ImageCoordinateWithDerivative = {"_p_GeoCal__ImageCoordinateWithDerivative", "GeoCal::ImageCoordinateWithDerivative *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__MeasuredTimeTable = {"_p_GeoCal__MeasuredTimeTable", "GeoCal::MeasuredTimeTable *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__Time = {"_p_GeoCal__Time", "GeoCal::Time *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__TimeTable = {"_p_GeoCal__TimeTable", "GeoCal::TimeTable *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__TimeWithDerivative = {"_p_GeoCal__TimeWithDerivative", "GeoCal::TimeWithDerivative *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__VicarImageCoordinate = {"_p_GeoCal__VicarImageCoordinate", "GeoCal::VicarImageCoordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
@@ -7267,12 +7505,17 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_1_t = {"_p_blitz__ArrayT_int_1
 static swig_type_info _swigt__p_blitz__ArrayT_int_2_t = {"_p_blitz__ArrayT_int_2_t", "blitz::Array< int,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_3_t = {"_p_blitz__ArrayT_int_3_t", "blitz::Array< int,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_4_t = {"_p_blitz__ArrayT_int_4_t", "blitz::Array< int,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivative< double > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t = {"_p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t", "boost::shared_ptr< GeoCal::ConstantSpacingTimeTable > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t", "boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t", "boost::shared_ptr< GeoCal::FrameCoordinate > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_p_boost__shared_ptrT_GeoCal__GenericObject_t", "boost::shared_ptr< GeoCal::GenericObject > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t", "boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t", "boost::shared_ptr< GeoCal::ImageCoordinate > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t = {"_p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t", "boost::shared_ptr< GeoCal::MeasuredTimeTable > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__TimeTable_t = {"_p_boost__shared_ptrT_GeoCal__TimeTable_t", "boost::shared_ptr< GeoCal::TimeTable > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t", "boost::shared_ptr< GeoCal::TimeWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Time_t = {"_p_boost__shared_ptrT_GeoCal__Time_t", "boost::shared_ptr< GeoCal::Time > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t", "boost::shared_ptr< GeoCal::VicarImageCoordinate > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
@@ -7297,13 +7540,18 @@ static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *"
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__p_GeoCal__AutoDerivativeRefT_double_t,
+  &_swigt__p_GeoCal__AutoDerivativeT_double_t,
   &_swigt__p_GeoCal__ConstantSpacingTimeTable,
   &_swigt__p_GeoCal__FrameCoordinate,
+  &_swigt__p_GeoCal__FrameCoordinateWithDerivative,
   &_swigt__p_GeoCal__GenericObject,
   &_swigt__p_GeoCal__ImageCoordinate,
+  &_swigt__p_GeoCal__ImageCoordinateWithDerivative,
   &_swigt__p_GeoCal__MeasuredTimeTable,
   &_swigt__p_GeoCal__Time,
   &_swigt__p_GeoCal__TimeTable,
+  &_swigt__p_GeoCal__TimeWithDerivative,
   &_swigt__p_GeoCal__VicarImageCoordinate,
   &_swigt__p_allocator_type,
   &_swigt__p_blitz__ArrayT_bool_1_t,
@@ -7318,12 +7566,17 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_2_t,
   &_swigt__p_blitz__ArrayT_int_3_t,
   &_swigt__p_blitz__ArrayT_int_4_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__TimeTable_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__Time_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,
   &_swigt__p_char,
@@ -7348,13 +7601,18 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_value_type,
 };
 
+static swig_cast_info _swigc__p_GeoCal__AutoDerivativeRefT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__AutoDerivativeT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ConstantSpacingTimeTable[] = {  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__FrameCoordinate[] = {  {&_swigt__p_GeoCal__FrameCoordinate, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinate, _p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeTable, _p_GeoCal__TimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, _p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MeasuredTimeTable, _p_GeoCal__MeasuredTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__FrameCoordinateWithDerivative[] = {  {&_swigt__p_GeoCal__FrameCoordinateWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeWithDerivative, _p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinateWithDerivative, _p_GeoCal__FrameCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinate, _p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeTable, _p_GeoCal__TimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, _p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MeasuredTimeTable, _p_GeoCal__MeasuredTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ImageCoordinate[] = {  {&_swigt__p_GeoCal__ImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__ImageCoordinateWithDerivative[] = {  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__MeasuredTimeTable[] = {  {&_swigt__p_GeoCal__MeasuredTimeTable, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Time[] = {  {&_swigt__p_GeoCal__Time, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__TimeTable[] = {  {&_swigt__p_GeoCal__TimeTable, 0, 0, 0},  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, _p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__TimeTable, 0, 0},  {&_swigt__p_GeoCal__MeasuredTimeTable, _p_GeoCal__MeasuredTimeTableTo_p_GeoCal__TimeTable, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__TimeWithDerivative[] = {  {&_swigt__p_GeoCal__TimeWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__VicarImageCoordinate[] = {  {&_swigt__p_GeoCal__VicarImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -7369,12 +7627,17 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_1_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_2_t[] = {  {&_swigt__p_blitz__ArrayT_int_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_3_t[] = {  {&_swigt__p_blitz__ArrayT_int_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_4_t[] = {  {&_swigt__p_blitz__ArrayT_int_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t, _p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeTable_t, _p_boost__shared_ptrT_GeoCal__TimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, _p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t, _p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, _p_boost__shared_ptrT_GeoCal__TimeWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeTable_t, _p_boost__shared_ptrT_GeoCal__TimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, _p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__TimeTable_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t, _p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_tTo_p_boost__shared_ptrT_GeoCal__TimeTable_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeTable_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, _p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_tTo_p_boost__shared_ptrT_GeoCal__TimeTable_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
@@ -7399,13 +7662,18 @@ static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__p_GeoCal__AutoDerivativeRefT_double_t,
+  _swigc__p_GeoCal__AutoDerivativeT_double_t,
   _swigc__p_GeoCal__ConstantSpacingTimeTable,
   _swigc__p_GeoCal__FrameCoordinate,
+  _swigc__p_GeoCal__FrameCoordinateWithDerivative,
   _swigc__p_GeoCal__GenericObject,
   _swigc__p_GeoCal__ImageCoordinate,
+  _swigc__p_GeoCal__ImageCoordinateWithDerivative,
   _swigc__p_GeoCal__MeasuredTimeTable,
   _swigc__p_GeoCal__Time,
   _swigc__p_GeoCal__TimeTable,
+  _swigc__p_GeoCal__TimeWithDerivative,
   _swigc__p_GeoCal__VicarImageCoordinate,
   _swigc__p_allocator_type,
   _swigc__p_blitz__ArrayT_bool_1_t,
@@ -7420,12 +7688,17 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_2_t,
   _swigc__p_blitz__ArrayT_int_3_t,
   _swigc__p_blitz__ArrayT_int_4_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,
   _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,
   _swigc__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t,
   _swigc__p_boost__shared_ptrT_GeoCal__TimeTable_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__Time_t,
   _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,
   _swigc__p_char,

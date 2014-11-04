@@ -2,6 +2,7 @@
 #include "orbit_data_image_ground_connection.h"
 #include "simple_dem.h"
 #include "memory_raster_image.h"
+#include "ecr.h"
 using namespace GeoCal;
 
 BOOST_FIXTURE_TEST_SUITE(orbit_data_image_ground_connection, GlobalFixture)
@@ -28,7 +29,7 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_CLOSE(ic_calc.line, ic.line, 1e-2);
   BOOST_CHECK_CLOSE(ic_calc.sample, ic.sample, 1e-2);
   Ecr ecr(g);
-  blitz::Array<double, 2> jac = igc.image_coordinate_jac_ecr(ecr);
+  blitz::Array<double, 2> jac = igc.image_coordinate_jac_cf(ecr);
   ImageCoordinate ic0 = igc.image_coordinate(ecr);
   double eps = 10;
   ImageCoordinate ic2;
@@ -65,7 +66,7 @@ BOOST_AUTO_TEST_CASE(include_refraction)
   BOOST_CHECK_CLOSE(ic_calc.line, ic.line, 1e-2);
   BOOST_CHECK_CLOSE(ic_calc.sample, ic.sample, 1e-2);
   Ecr ecr(g);
-  blitz::Array<double, 2> jac = igc.image_coordinate_jac_ecr(ecr);
+  blitz::Array<double, 2> jac = igc.image_coordinate_jac_cf(ecr);
   ImageCoordinate ic0 = igc.image_coordinate(ecr);
   double eps = 0.1;
   ImageCoordinate ic2;

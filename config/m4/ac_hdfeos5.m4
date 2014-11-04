@@ -30,28 +30,34 @@ AC_DEFUN([AC_HDFEOS5],
 [
 AC_HANDLE_WITH_ARG([hdfeos5], [hdfeos5], [Hdfeos5 library], $2, $3)
 if test "x$want_hdfeos5" = "xyes"; then
-        AC_HDF5(required, $2, default_search)
+        AC_HDF5($1, $2, default_search)
         AC_MSG_CHECKING([for Hdfeos5 library])
         succeeded=no
         if test "$build_hdfeos5" == "yes"; then
-            HDFEOS5_LIBS="libhe5_hdfeos.la"
+            HDFEOS5_LIBS="libhe5_hdfeos.la ${HDF5_LIBS}"
             HDFEOS5_CFLAGS="-I$srcdir/hdfeos/external/HDF-EOS/v5.1.15/include"
             succeeded=yes
         elif test "$ac_hdfeos5_path" != ""; then
-            HDFEOS5_LIBS="-R$ac_hdfeos5_path/lib -L$ac_hdfeos5_path/lib -lhe5_hdfeos -lGctp"
+            HDFEOS5_LIBS="-R$ac_hdfeos5_path/lib -L$ac_hdfeos5_path/lib -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
             HDFEOS5_CFLAGS="-I$ac_hdfeos5_path/include/hdfeos5"
             succeeded=yes
         else
 	    AC_SEARCH_LIB([HDFEOS5], [hdfeos5], [hdfeos5/], [HE5_HdfEosDef.h], ,
-                          [libhe5_hdfeos], [-lhe5_hdfeos -lGctp])
+                          [libhe5_hdfeos], [-lhe5_hdfeos -lGctp ${HDF5_LIBS} ])
             if test "$succeeded" != "yes" ; then
  	       AC_SEARCH_LIB([HDFEOS5], [hdfeos5], , [HE5_HdfEosDef.h], ,
-                             [libhe5_hdfeos], [-lhe5_hdfeos -lGctp])
+                             [libhe5_hdfeos], [-lhe5_hdfeos -lGctp ${HDF5_LIBS}])
             fi
+        fi
+	if test "$have_hdf5" == "no"; then
+            succeeded=no
         fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])
+                HDFEOS5_CFLAGS=""
+		HDFEOS5_LIBS=""
+		have_hdfeos5="no"
         else
                 HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS $HDF5_CFLAGS"
                 AC_MSG_RESULT([yes])

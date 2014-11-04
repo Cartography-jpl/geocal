@@ -8,8 +8,10 @@
 %}
 
 %base_import(generic_object)
+%import "auto_derivative.i"
 
 %geocal_shared_ptr(GeoCal::Time);
+%geocal_shared_ptr(GeoCal::TimeWithDerivative);
 
 %pythoncode {
 import datetime
@@ -17,6 +19,9 @@ import time
 
 def _new_time(pgs):
   return Time.time_pgs(pgs)
+
+def _new_time_with_derivative(pgs):
+  return TimeWithDerivative.time_pgs(pgs)
 }
 
 namespace GeoCal {
@@ -28,10 +33,20 @@ namespace GeoCal {
   $1 = &temp;
  }
 
+ %typemap(in,numinputs=0) TimeWithDerivative &OUTPUT (GeoCal::TimeWithDerivative temp) {
+  $1 = &temp;
+ }
+
  %typemap(argout) Time &OUTPUT {
    SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
    %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::Time> *), SWIG_POINTER_OWN));
  }
+
+ %typemap(argout) TimeWithDerivative &OUTPUT {
+   SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
+   %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::TimeWithDerivative> *), SWIG_POINTER_OWN));
+ }
+
 #endif
 
 class Time : public GenericObject {
@@ -70,6 +85,45 @@ public:
   %pythoncode {
 def __reduce__(self):
   return _new_time, (self.pgs,)
+
+  }
+#endif
+};
+
+class TimeWithDerivative : public GenericObject {
+public:
+  TimeWithDerivative(const Time& T);
+  TimeWithDerivative();
+  static TimeWithDerivative time_pgs(double pgs);
+  static TimeWithDerivative time_j2000(double j2000);
+  static TimeWithDerivative time_gps(double gps);
+  %python_attribute(pgs, AutoDerivative<double>)
+  %python_attribute(gps, AutoDerivative<double>)
+  %python_attribute(j2000, AutoDerivative<double>)
+  %python_attribute(value, Time)
+  %python_attribute(gradient, blitz::Array<double, 1>)
+  std::string print_to_string() const;
+  
+#ifdef SWIGPYTHON
+  %extend {
+     int __cmp__(const TimeWithDerivative& T2) {
+        if(*$self < T2)
+         return -1;
+        if(T2 < *$self)
+         return 1;
+        return 0;
+     }
+     TimeWithDerivative __add__(const AutoDerivative<double>& T) 
+     { return *$self + T; }
+     TimeWithDerivative __radd__(const AutoDerivative<double>& T) 
+     { return *$self + T; }
+     TimeWithDerivative __sub__(const AutoDerivative<double>& T) 
+     { return *$self - T; }
+     AutoDerivative<double> __sub__(const TimeWithDerivative& T2) { return *$self - T2; }
+  }
+  %pythoncode {
+def __reduce__(self):
+  return _new_time_with_derivative, (self.pgs,)
 
   }
 #endif

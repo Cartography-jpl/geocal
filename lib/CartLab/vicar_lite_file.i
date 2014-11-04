@@ -68,12 +68,34 @@ public:
 		       int Number_tile_line = -1,
 		       int Number_tile_sample = -1,
 		       bool Force_area_pixel = false);
+  VicarLiteRasterImage(const std::string& Fname, 
+		       const MapInfo& Mi,
+		       int Band_id = 1,
+		       access_type Access = VicarLiteFile::READ,
+		       int Number_tile_line = -1,
+		       int Number_tile_sample = -1,
+		       bool Force_area_pixel = false);
   %python_attribute2(file, file_ptr, boost::shared_ptr<VicarLiteFile>)
   %python_attribute(is_compressed, bool)
   %python_attribute(band_id, int)
-  %pickle_init(2, self.file.file_name, self.band_id, self.file.access, 
-	       self.number_tile_line, self.number_tile_sample,
-	       self.file.force_area_pixel)
+  %python_attribute(force_map_info, bool)
+  %pythoncode {
+@classmethod
+def pickle_format_version(cls):
+  return 2
+
+def __reduce__(self):
+  if(self.force_map_info):
+     return _new_from_init, (self.__class__, 2, self.file.file_name, 
+		          self.map_info, self.band_id, self.file.access, 
+			  self.number_tile_line, self.number_tile_sample,
+			  self.file.force_area_pixel)
+  else:
+     return _new_from_init, (self.__class__, 2, self.file.file_name, 
+			  self.band_id, self.file.access, 
+			  self.number_tile_line, self.number_tile_sample,
+			  self.file.force_area_pixel)
+}
 };
 
 class VicarLiteDem : public DemMapInfo {

@@ -144,6 +144,8 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
+import geocal_swig.observer
+import geocal_swig.with_parameter
 class OrbitData(geocal_swig.generic_object.GenericObject):
     """
     This class is used to convert ScLookVector,
@@ -184,7 +186,7 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
 
     def sc_look_vector(self, *args):
         """
-        virtual ScLookVector GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVector &Cf) const =0
+        virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const =0
         Convert from CartesianFixedLookVector to ScLookVector. 
         """
         return _orbit.OrbitData_sc_look_vector(self, *args)
@@ -196,6 +198,16 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
         seen. 
         """
         return _orbit.OrbitData_frame_coordinate(self, *args)
+
+    def frame_coordinate_with_derivative(self, *args):
+        """
+        FrameCoordinateWithDerivative OrbitData::frame_coordinate_with_derivative(const GroundCoordinate &Gc, const Camera &C, int Band=0) const
+        Give the frame coordinates that a particular point on the ground is
+        seen, including derivatives wrt.
+
+        the parameters of the Camera and this OrbitData. 
+        """
+        return _orbit.OrbitData_frame_coordinate_with_derivative(self, *args)
 
     def reference_surface_intersect_approximate(self, *args):
         """
@@ -256,6 +268,18 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     @property
     def velocity_ci(self):
         return self._velocity_ci()
+
+    @property
+    def velocity_ci_with_derivative(self):
+        return self._velocity_ci_with_derivative()
+
+    @property
+    def position_ci_with_derivative(self):
+        return self._position_ci_with_derivative()
+
+    @property
+    def position_cf_with_derivative(self):
+        return self._position_cf_with_derivative()
       
     def _v_time(self):
         """
@@ -268,19 +292,35 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def time(self):
         return self._v_time()
 
+    def _v_time_with_derivative(self):
+        """
+        virtual TimeWithDerivative GeoCal::OrbitData::time_with_derivative() const =0
+        Return TimeWithDerivative of OrbitData. 
+        """
+        return _orbit.OrbitData__v_time_with_derivative(self)
+
+    @property
+    def time_with_derivative(self):
+        return self._v_time_with_derivative()
+
     __swig_destroy__ = _orbit.delete_OrbitData
 OrbitData.resolution_meter = new_instancemethod(_orbit.OrbitData_resolution_meter,None,OrbitData)
 OrbitData.ci_look_vector = new_instancemethod(_orbit.OrbitData_ci_look_vector,None,OrbitData)
 OrbitData.cf_look_vector = new_instancemethod(_orbit.OrbitData_cf_look_vector,None,OrbitData)
 OrbitData.sc_look_vector = new_instancemethod(_orbit.OrbitData_sc_look_vector,None,OrbitData)
 OrbitData.frame_coordinate = new_instancemethod(_orbit.OrbitData_frame_coordinate,None,OrbitData)
+OrbitData.frame_coordinate_with_derivative = new_instancemethod(_orbit.OrbitData_frame_coordinate_with_derivative,None,OrbitData)
 OrbitData.reference_surface_intersect_approximate = new_instancemethod(_orbit.OrbitData_reference_surface_intersect_approximate,None,OrbitData)
 OrbitData._v_position_ci = new_instancemethod(_orbit.OrbitData__v_position_ci,None,OrbitData)
 OrbitData._v_position_cf = new_instancemethod(_orbit.OrbitData__v_position_cf,None,OrbitData)
 OrbitData.footprint = new_instancemethod(_orbit.OrbitData_footprint,None,OrbitData)
 OrbitData.surface_intersect = new_instancemethod(_orbit.OrbitData_surface_intersect,None,OrbitData)
 OrbitData._velocity_ci = new_instancemethod(_orbit.OrbitData__velocity_ci,None,OrbitData)
+OrbitData._velocity_ci_with_derivative = new_instancemethod(_orbit.OrbitData__velocity_ci_with_derivative,None,OrbitData)
+OrbitData._position_ci_with_derivative = new_instancemethod(_orbit.OrbitData__position_ci_with_derivative,None,OrbitData)
+OrbitData._position_cf_with_derivative = new_instancemethod(_orbit.OrbitData__position_cf_with_derivative,None,OrbitData)
 OrbitData._v_time = new_instancemethod(_orbit.OrbitData__v_time,None,OrbitData)
+OrbitData._v_time_with_derivative = new_instancemethod(_orbit.OrbitData__v_time_with_derivative,None,OrbitData)
 OrbitData.__str__ = new_instancemethod(_orbit.OrbitData___str__,None,OrbitData)
 OrbitData_swigregister = _orbit.OrbitData_swigregister
 OrbitData_swigregister(OrbitData)
@@ -309,24 +349,46 @@ class QuaternionOrbitData(OrbitData):
     CartesianInertial. If you stick to working with CartesianFixed only,
     you can avoid the need of using one of these toolkits.
 
+    Note that we allow most pieces of this to be AutoDerivative, useful
+    for propagating jacobians. We do not support time being a
+    AutoDerivative, so supporting things like time offset isn't currently
+    in here. We probably could do this, we'd just need to think through
+    how to support this.
+
     C++ includes: orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        QuaternionOrbitData::QuaternionOrbitData(Time Tm, const boost::shared_ptr< CartesianInertial > &pos_ci, const
-        boost::array< double, 3 > &vel_inertial, const
-        boost::math::quaternion< double > &sc_to_ci_q)
+        QuaternionOrbitData::QuaternionOrbitData(const TimeWithDerivative &Tm, const boost::shared_ptr<
+        CartesianInertial > &pos_ci, const boost::array< AutoDerivative<
+        double >, 3 > &pos_ci_with_der, const boost::array< AutoDerivative<
+        double >, 3 > &vel_inertial, const boost::math::quaternion<
+        AutoDerivative< double > > &sc_to_ci_q)
         Construct QuaternionOrbitData.
 
         This takes data in a CartesianInertial coordinate system (e.g., Eci
         coordinates). 
         """
         _orbit.QuaternionOrbitData_swiginit(self,_orbit.new_QuaternionOrbitData(*args))
+    def ci_look_vector(self, *args):
+        """
+        CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVector &Sl) const
+        Convert to CartesianInertialLookVector. 
+        """
+        return _orbit.QuaternionOrbitData_ci_look_vector(self, *args)
+
+    def cf_look_vector(self, *args):
+        """
+        CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVector &Sl) const
+        Convert to CartesianFixedLookVector. 
+        """
+        return _orbit.QuaternionOrbitData_cf_look_vector(self, *args)
+
     def sc_look_vector(self, *args):
         """
-        ScLookVector QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVector &Cf) const
+        ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const
         Convert to ScLookVector. 
         """
         return _orbit.QuaternionOrbitData_sc_look_vector(self, *args)
@@ -343,6 +405,18 @@ class QuaternionOrbitData(OrbitData):
     def sc_to_ci(self):
         return self._v_sc_to_ci()
 
+    def _v_sc_to_ci_with_derivative(self):
+        """
+        boost::math::quaternion<AutoDerivative<double> > GeoCal::QuaternionOrbitData::sc_to_ci_with_derivative() const
+        Return the quaternion used to go from spacecraft to cartesian
+        inertial. 
+        """
+        return _orbit.QuaternionOrbitData__v_sc_to_ci_with_derivative(self)
+
+    @property
+    def sc_to_ci_with_derivative(self):
+        return self._v_sc_to_ci_with_derivative()
+
     def _v_sc_to_cf(self, *args):
         """
         void GeoCal::QuaternionOrbitData::sc_to_cf(const boost::math::quaternion< double > &Sc_to_cf)
@@ -357,6 +431,21 @@ class QuaternionOrbitData(OrbitData):
     @sc_to_cf.setter
     def sc_to_cf(self, value):
       self._v_sc_to_cf(value)
+
+    def _v_sc_to_cf_with_derivative(self, *args):
+        """
+        void GeoCal::QuaternionOrbitData::sc_to_cf_with_derivative(const boost::math::quaternion< AutoDerivative< double > > &Sc_to_cf)
+
+        """
+        return _orbit.QuaternionOrbitData__v_sc_to_cf_with_derivative(self, *args)
+
+    @property
+    def sc_to_cf_with_derivative(self):
+        return self._v_sc_to_cf_with_derivative()
+
+    @sc_to_cf_with_derivative.setter
+    def sc_to_cf_with_derivative(self, value):
+      self._v_sc_to_cf_with_derivative(value)
 
     def _v_from_cf(self):
         """
@@ -376,6 +465,10 @@ class QuaternionOrbitData(OrbitData):
     @property
     def velocity_cf(self):
         return self._velocity_cf()
+
+    @property
+    def velocity_cf_with_derivative(self):
+        return self._velocity_cf_with_derivative()
       
     @classmethod
     def pickle_format_version(cls):
@@ -391,15 +484,43 @@ class QuaternionOrbitData(OrbitData):
 
 
     __swig_destroy__ = _orbit.delete_QuaternionOrbitData
+QuaternionOrbitData.ci_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_ci_look_vector,None,QuaternionOrbitData)
+QuaternionOrbitData.cf_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_cf_look_vector,None,QuaternionOrbitData)
 QuaternionOrbitData.sc_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_sc_look_vector,None,QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_ci = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_ci,None,QuaternionOrbitData)
+QuaternionOrbitData._v_sc_to_ci_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_ci_with_derivative,None,QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_cf = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_cf,None,QuaternionOrbitData)
+QuaternionOrbitData._v_sc_to_cf_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_cf_with_derivative,None,QuaternionOrbitData)
 QuaternionOrbitData._v_from_cf = new_instancemethod(_orbit.QuaternionOrbitData__v_from_cf,None,QuaternionOrbitData)
 QuaternionOrbitData._velocity_cf = new_instancemethod(_orbit.QuaternionOrbitData__velocity_cf,None,QuaternionOrbitData)
+QuaternionOrbitData._velocity_cf_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__velocity_cf_with_derivative,None,QuaternionOrbitData)
 QuaternionOrbitData_swigregister = _orbit.QuaternionOrbitData_swigregister
 QuaternionOrbitData_swigregister(QuaternionOrbitData)
 
-class Orbit(geocal_swig.generic_object.GenericObject):
+class ObservableOrbit(geocal_swig.generic_object.GenericObject):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _orbit.delete_ObservableOrbit
+ObservableOrbit.add_observer_and_keep_reference = new_instancemethod(_orbit.ObservableOrbit_add_observer_and_keep_reference,None,ObservableOrbit)
+ObservableOrbit.add_observer = new_instancemethod(_orbit.ObservableOrbit_add_observer,None,ObservableOrbit)
+ObservableOrbit.remove_observer = new_instancemethod(_orbit.ObservableOrbit_remove_observer,None,ObservableOrbit)
+ObservableOrbit_swigregister = _orbit.ObservableOrbit_swigregister
+ObservableOrbit_swigregister(ObservableOrbit)
+
+class ObserverOrbit(geocal_swig.generic_object.GenericObject):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self): 
+        _orbit.ObserverOrbit_swiginit(self,_orbit.new_ObserverOrbit())
+    __swig_destroy__ = _orbit.delete_ObserverOrbit
+ObserverOrbit.notify_update = new_instancemethod(_orbit.ObserverOrbit_notify_update,None,ObserverOrbit)
+ObserverOrbit.notify_add = new_instancemethod(_orbit.ObserverOrbit_notify_add,None,ObserverOrbit)
+ObserverOrbit.notify_remove = new_instancemethod(_orbit.ObserverOrbit_notify_remove,None,ObserverOrbit)
+ObserverOrbit_swigregister = _orbit.ObserverOrbit_swigregister
+ObserverOrbit_swigregister(ObserverOrbit)
+
+class Orbit(ObservableOrbit,geocal_swig.with_parameter.WithParameter):
     """
     This class is used to model orbit data, allowing conversions from
     spacecraft coordinates to CartesianInertial and CartesianFixed
@@ -439,23 +560,33 @@ class Orbit(geocal_swig.generic_object.GenericObject):
             _self = self
         _orbit.Orbit_swiginit(self,_orbit.new_Orbit(_self, *args))
     __swig_destroy__ = _orbit.delete_Orbit
+    def add_observer(self, *args):
+        """
+        virtual void GeoCal::Orbit::add_observer(Observer< Orbit > &Obs)
+
+        """
+        return _orbit.Orbit_add_observer(self, *args)
+
+    def remove_observer(self, *args):
+        """
+        virtual void GeoCal::Orbit::remove_observer(Observer< Orbit > &Obs)
+
+        """
+        return _orbit.Orbit_remove_observer(self, *args)
+
     def ci_look_vector(self, *args):
         """
-        virtual CartesianInertialLookVector GeoCal::Orbit::ci_look_vector(Time T, const ScLookVector &Sl) const
-        Convert from ScLookVector to CartesianInertialLookVector for the given
-        time.
+        virtual CartesianInertialLookVectorWithDerivative GeoCal::Orbit::ci_look_vector(const TimeWithDerivative &T, const ScLookVectorWithDerivative &Sl)
+        const
 
-        We should have min_time() <= T < max_time(). 
         """
         return _orbit.Orbit_ci_look_vector(self, *args)
 
     def cf_look_vector(self, *args):
         """
-        virtual CartesianFixedLookVector GeoCal::Orbit::cf_look_vector(Time T, const ScLookVector &Sl) const
-        Convert from ScLookVector to CartesianFixedLookVector for the given
-        time.
+        virtual CartesianFixedLookVectorWithDerivative GeoCal::Orbit::cf_look_vector(const TimeWithDerivative &T, const ScLookVectorWithDerivative &Sl)
+        const
 
-        We should have min_time() <= T < max_time(). 
         """
         return _orbit.Orbit_cf_look_vector(self, *args)
 
@@ -467,6 +598,15 @@ class Orbit(geocal_swig.generic_object.GenericObject):
         seen. 
         """
         return _orbit.Orbit_frame_coordinate(self, *args)
+
+    def frame_coordinate_with_derivative(self, *args):
+        """
+        FrameCoordinateWithDerivative GeoCal::Orbit::frame_coordinate_with_derivative(Time T, const GroundCoordinate &Gc, const Camera &C, int Band=0)
+        const
+        Give the frame coordinates that a particular point on the ground is
+        seen. 
+        """
+        return _orbit.Orbit_frame_coordinate_with_derivative(self, *args)
 
     def reference_surface_intersect_approximate(self, *args):
         """
@@ -482,11 +622,9 @@ class Orbit(geocal_swig.generic_object.GenericObject):
 
     def sc_look_vector(self, *args):
         """
-        virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianFixedLookVector &Cf) const
-        Convert from CartesianFixedLookVector to ScLookVector for the given
-        time.
+        virtual ScLookVectorWithDerivative GeoCal::Orbit::sc_look_vector(const TimeWithDerivative &T, const
+        CartesianFixedLookVectorWithDerivative &Cf) const
 
-        We should have min_time() <= T < max_time(). 
         """
         return _orbit.Orbit_sc_look_vector(self, *args)
 
@@ -532,36 +670,65 @@ class Orbit(geocal_swig.generic_object.GenericObject):
 
     def orbit_data(self, *args):
         """
-        virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(Time T) const =0
-        Return OrbitData for the given time.
+        virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const =0
 
-        We should have min_time() <= T < max_time(). 
         """
         return _orbit.Orbit_orbit_data(self, *args)
 
-    def interpolate(self, *args):
-        """
-        boost::math::quaternion<double> interpolate(const boost::math::quaternion< double > &Q1, const
-        boost::math::quaternion< double > &Q2, double toffset, double tspace)
-        This is a utility function for use by derived classes.
+    @property
+    def parameter(self):
+        return self._v_parameter()
 
-        A common way of getting orbit data is to have discrete measurements of
-        the quaternion describing the rotation of the spacecraft. For a time t
-        between t1 and t2, we have Q1 as the quaternion at time t1, Q2 the
-        quaternion at time t2, tspace = t2 - t1, toffset = t - t1. This
-        function then returns Qres. We calculate this by determining the axis
-        and angle rotation that takes use from Q1 to Q2, and then do a linear
-        interpolation of that angle for the given time. 
-        """
-        return _orbit.Orbit_interpolate(self, *args)
+    @parameter.setter
+    def parameter(self, value):
+      self._v_parameter(value)
+
+    @property
+    def parameter_with_derivative(self):
+        return self._v_parameter_with_derivative()
+
+    @parameter_with_derivative.setter
+    def parameter_with_derivative(self, value):
+      self._v_parameter_with_derivative(value)
+
+    @property
+    def parameter_name(self):
+        return self._v_parameter_name()
+
+    @property
+    def parameter_subset(self):
+        return self._v_parameter_subset()
+
+    @parameter_subset.setter
+    def parameter_subset(self, value):
+      self._v_parameter_subset(value)
+
+    @property
+    def parameter_with_derivative_subset(self):
+        return self._v_parameter_with_derivative_subset()
+
+    @parameter_with_derivative_subset.setter
+    def parameter_with_derivative_subset(self, value):
+      self._v_parameter_with_derivative_subset(value)
+
+    @property
+    def parameter_name_subset(self):
+        return self._v_parameter_name_subset()
+
+    @property
+    def parameter_mask(self):
+        return self._v_parameter_mask()
 
     def __disown__(self):
         self.this.disown()
         _orbit.disown_Orbit(self)
         return weakref_proxy(self)
+Orbit.add_observer = new_instancemethod(_orbit.Orbit_add_observer,None,Orbit)
+Orbit.remove_observer = new_instancemethod(_orbit.Orbit_remove_observer,None,Orbit)
 Orbit.ci_look_vector = new_instancemethod(_orbit.Orbit_ci_look_vector,None,Orbit)
 Orbit.cf_look_vector = new_instancemethod(_orbit.Orbit_cf_look_vector,None,Orbit)
 Orbit.frame_coordinate = new_instancemethod(_orbit.Orbit_frame_coordinate,None,Orbit)
+Orbit.frame_coordinate_with_derivative = new_instancemethod(_orbit.Orbit_frame_coordinate_with_derivative,None,Orbit)
 Orbit.reference_surface_intersect_approximate = new_instancemethod(_orbit.Orbit_reference_surface_intersect_approximate,None,Orbit)
 Orbit.sc_look_vector = new_instancemethod(_orbit.Orbit_sc_look_vector,None,Orbit)
 Orbit.position_ci = new_instancemethod(_orbit.Orbit_position_ci,None,Orbit)
@@ -570,6 +737,14 @@ Orbit._v_min_time = new_instancemethod(_orbit.Orbit__v_min_time,None,Orbit)
 Orbit._v_max_time = new_instancemethod(_orbit.Orbit__v_max_time,None,Orbit)
 Orbit.orbit_data = new_instancemethod(_orbit.Orbit_orbit_data,None,Orbit)
 Orbit.__str__ = new_instancemethod(_orbit.Orbit___str__,None,Orbit)
+Orbit._v_parameter = new_instancemethod(_orbit.Orbit__v_parameter,None,Orbit)
+Orbit._v_parameter_with_derivative = new_instancemethod(_orbit.Orbit__v_parameter_with_derivative,None,Orbit)
+Orbit._v_parameter_name = new_instancemethod(_orbit.Orbit__v_parameter_name,None,Orbit)
+Orbit._v_parameter_subset = new_instancemethod(_orbit.Orbit__v_parameter_subset,None,Orbit)
+Orbit._v_parameter_with_derivative_subset = new_instancemethod(_orbit.Orbit__v_parameter_with_derivative_subset,None,Orbit)
+Orbit._v_parameter_name_subset = new_instancemethod(_orbit.Orbit__v_parameter_name_subset,None,Orbit)
+Orbit._v_parameter_mask = new_instancemethod(_orbit.Orbit__v_parameter_mask,None,Orbit)
+Orbit.notify_update_do = new_instancemethod(_orbit.Orbit_notify_update_do,None,Orbit)
 Orbit.interpolate = new_instancemethod(_orbit.Orbit_interpolate,None,Orbit)
 Orbit_swigregister = _orbit.Orbit_swigregister
 Orbit_swigregister(Orbit)
@@ -604,6 +779,13 @@ class KeplerOrbit(Orbit):
         nominal orbit for MISR. 
         """
         _orbit.KeplerOrbit_swiginit(self,_orbit.new_KeplerOrbit(*args))
+    def orbit_data(self, *args):
+        """
+        boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _orbit.KeplerOrbit_orbit_data(self, *args)
+
     def _v_epoch(self, *args):
         """
         void GeoCal::KeplerOrbit::epoch(const Time &Epoch)
@@ -728,6 +910,7 @@ class KeplerOrbit(Orbit):
       return _new_from_init, (self.__class__, 1, self.min_time,self.max_time,self.epoch,self.semimajor_axis,self.eccentricity,self.inclination,self.right_ascension,self.argument_of_perigee,self.mean_anomoly)
 
     __swig_destroy__ = _orbit.delete_KeplerOrbit
+KeplerOrbit.orbit_data = new_instancemethod(_orbit.KeplerOrbit_orbit_data,None,KeplerOrbit)
 KeplerOrbit._v_epoch = new_instancemethod(_orbit.KeplerOrbit__v_epoch,None,KeplerOrbit)
 KeplerOrbit._v_semimajor_axis = new_instancemethod(_orbit.KeplerOrbit__v_semimajor_axis,None,KeplerOrbit)
 KeplerOrbit._v_argument_of_perigee = new_instancemethod(_orbit.KeplerOrbit__v_argument_of_perigee,None,KeplerOrbit)

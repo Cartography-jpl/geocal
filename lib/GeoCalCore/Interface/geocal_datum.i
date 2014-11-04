@@ -7,6 +7,7 @@
 #include "geocal_datum.h"
 %}
 %base_import(generic_object)
+%import "look_vector.i"
 %import "ground_coordinate.i"
 %geocal_shared_ptr(GeoCal::Datum);
 %geocal_shared_ptr(GeoCal::SimpleDatum);

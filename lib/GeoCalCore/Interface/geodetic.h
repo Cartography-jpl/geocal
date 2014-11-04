@@ -41,6 +41,13 @@ public:
 
   virtual ~Geodetic() {}
 
+
+  virtual void lat_lon_height(double& Latitude, double& Longitude, 
+		      double& Height_reference_surface) const
+  { Latitude = latitude(); Longitude = longitude(); 
+    Height_reference_surface = height_reference_surface();
+  }
+
 //-----------------------------------------------------------------------
 /// Height above ellipsoid, in meters.
 //-----------------------------------------------------------------------

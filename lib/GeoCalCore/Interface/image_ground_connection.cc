@@ -36,21 +36,28 @@ void ImageGroundConnection::initialize
 /// size, where we give the position first followed by the look vector.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 4> ImageGroundConnection::cf_look_vector_arr
+blitz::Array<double, 7> ImageGroundConnection::cf_look_vector_arr
 (int ln_start, int smp_start, 
- int nline, int nsamp) const
+ int nline, int nsamp, int nsubpixel_line, int nsubpixel_sample, 
+ int nintegration_step) const
 {
   CartesianFixedLookVector lv;
   boost::shared_ptr<CartesianFixed> pos;
-  blitz::Array<double, 4>  res(nline, nsamp, 2, 3);
+  blitz::Array<double, 7>  res(nline, nsamp, nsubpixel_line, 
+			       nsubpixel_sample, nintegration_step, 2, 3);
   for(int i = 0; i < nline; ++i)
-    for(int j = 0; j < nsamp; ++j) {
-      cf_look_vector(ImageCoordinate(i + ln_start, j + smp_start), lv, pos);
-      for(int k = 0; k < 3; ++k) {
-	res(i, j, 0, k) = pos->position[k];
-	res(i, j, 1, k) = lv.look_vector[k];
-      }
-    }
+    for(int j = 0; j < nsamp; ++j) 
+      for(int i2 = 0; i2 < nsubpixel_line; ++i2)
+	for(int j2 = 0; j2 < nsubpixel_sample; ++j2) {
+	  ImageCoordinate ic(i + ln_start + ((double) i2 / nsubpixel_line),
+			     j + smp_start + ((double) j2 / nsubpixel_sample));
+	  cf_look_vector(ic, lv, pos);
+	  for(int k = 0; k < nintegration_step; ++k)
+	    for(int k2 = 0; k2 < 3; ++k2) {
+	      res(i, j, i2, j2, k, 0, k2) = pos->position[k2];
+	      res(i, j, i2, j2, k, 1, k2) = lv.look_vector[k2];
+	    }
+	}
   return res;
 }
 
@@ -76,23 +83,23 @@ MapInfo ImageGroundConnection::cover(const MapInfo& Mi,
 
 //-----------------------------------------------------------------------
 /// Return the Jacobian of the image coordinates with respect to the
-/// X, Y, and Z components of the Ecr ground location. 
+/// X, Y, and Z components of the CartesianFixed ground location. 
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_ecr
-(const Ecr& Gc) const
+blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_cf
+(const CartesianFixed& Gc) const
 {
   // Default is just to do a numerical derivative.
   double eps = 0.1;
   blitz::Array<double, 2> res(2, 3);
   ImageCoordinate ic0 = image_coordinate(Gc);
-  Ecr gcx(Gc);
+  boost::shared_ptr<CartesianFixed> gcx = Gc.convert_to_cf();
   for(int i = 0; i < 3; ++i) {
-    gcx.position[i] += eps;
-    ImageCoordinate ic = image_coordinate(gcx);
+    gcx->position[i] += eps;
+    ImageCoordinate ic = image_coordinate(*gcx);
     res(0, i) = (ic.line - ic0.line) / eps;
     res(1, i) = (ic.sample - ic0.sample) / eps;
-    gcx.position[i] = Gc.position[i];
+    gcx->position[i] = Gc.position[i];
   }
   return res;
 }
@@ -104,7 +111,7 @@ blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_ecr
 /// igc.image_coordinate(res) = Ic up to roundoff errors), but it is
 /// approximate in the sense that the height might not be exactly
 /// the supplied height. This is similar to
-/// Ecr::reference_surface_intersect_approximate. A particular
+/// CartesianFixed::reference_surface_intersect_approximate. A particular
 /// implementation can be much faster than ground_coordinate_dem,
 /// since it doesn't need to do ray tracing.
 //-----------------------------------------------------------------------
@@ -140,6 +147,35 @@ double ImageGroundConnection::resolution_meter
 }
 
 //-----------------------------------------------------------------------
+/// Footprint resolution in the line and sample direction. Note that
+/// in general the footprint on the ground of a particular line is
+/// *not* the same as the spacing between pixels in the
+/// image. resolution_meter returns the spacing in the acquired image,
+/// while this footprint is the size of a particular pixel on the
+/// ground, including any overlap or underlap with surrounding
+/// pixels.
+///
+/// Default implementation just returns the spacing between image
+/// pixels, but derived classes should give the correct implementation
+/// for what they are modeling.
+//-----------------------------------------------------------------------
+
+void ImageGroundConnection::footprint_resolution
+(int Line, int Sample, 
+ double &Line_resolution_meter, 
+ double &Sample_resolution_meter)
+{
+  ImageCoordinate ic(Line, Sample);
+  boost::shared_ptr<GroundCoordinate> gc1 = ground_coordinate(ic);
+  boost::shared_ptr<GroundCoordinate> gc2 = 
+    ground_coordinate(ImageCoordinate(ic.line + 1, ic.sample));
+  boost::shared_ptr<GroundCoordinate> gc3 = 
+    ground_coordinate(ImageCoordinate(ic.line, ic.sample + 1));
+  Line_resolution_meter = distance(*gc1, *gc2);
+  Sample_resolution_meter = distance(*gc1, *gc3);
+}
+
+//-----------------------------------------------------------------------
 /// Variation of resolution_meter that find the resolution of the
 /// center pixel.
 //-----------------------------------------------------------------------
@@ -171,6 +207,19 @@ blitz::Array<double, 1> OffsetImageGroundConnection::parameter() const
 { 
   Array<double, 1> rest = ig_->parameter(); 
   Array<double, 1> res(2 + rest.rows());
+  res(0) = line_offset_.value();
+  res(1) = sample_offset_.value();
+  if(res.rows() > 2)
+    res(Range(2, toEnd)) = rest;
+  return res;
+}
+
+// See base class for description
+ArrayAd<double, 1> 
+OffsetImageGroundConnection::parameter_with_derivative() const 
+{ 
+  ArrayAd<double, 1> rest = ig_->parameter_with_derivative(); 
+  ArrayAd<double, 1> res(2 + rest.rows(), res.number_variable());
   res(0) = line_offset_;
   res(1) = sample_offset_;
   if(res.rows() > 2)
@@ -192,6 +241,32 @@ void OffsetImageGroundConnection::parameter
   sample_offset_ = Parm(1);
   if(Parm.rows() > 2)
     ig_->parameter(Parm(Range(2,toEnd)));
+}
+
+void OffsetImageGroundConnection::parameter_with_derivative
+(const ArrayAd<double, 1>& Parm)
+{ 
+  if(Parm.rows() != parameter().rows()) {
+    Exception e;
+    e << "Expected parameter to have " << parameter().rows() 
+      << " rows, but got " << Parm.rows();
+    throw e;
+  }
+  line_offset_ = Parm(0);
+  sample_offset_ = Parm(1);
+  if(Parm.rows() > 2)
+    ig_->parameter_with_derivative(Parm(Range(2,toEnd)));
+}
+
+blitz::Array<bool, 1> OffsetImageGroundConnection::parameter_mask() const
+{
+  Array<bool, 1> rest = ig_->parameter_mask(); 
+  Array<bool, 1> res(2 + rest.rows());
+  res(0) = true;
+  res(1) = true;
+  if(res.rows() > 2)
+    res(Range(2, toEnd)) = rest;
+  return res;
 }
 
 // See base class for description

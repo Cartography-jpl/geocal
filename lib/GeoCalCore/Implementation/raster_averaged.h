@@ -266,8 +266,14 @@ public:
   { return ig_->parameter(); }
   virtual void parameter(const blitz::Array<double, 1>& Parm)
   { ig_->parameter(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return ig_->parameter_with_derivative(); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  { return ig_->parameter_with_derivative(Parm); }
   virtual std::vector<std::string> parameter_name() const
   { return ig_->parameter_name(); }
+  virtual blitz::Array<bool, 1> parameter_mask() const
+  { return ig_->parameter_mask(); }
 
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
@@ -298,9 +304,9 @@ public:
     ic.sample = (ic.sample + 0.5) / number_sample_per_pixel_ - 0.5;
     return ic;
   }
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) const
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const
   { 
-    blitz::Array<double, 2> res = ig_->image_coordinate_jac_ecr(Gc); 
+    blitz::Array<double, 2> res = ig_->image_coordinate_jac_cf(Gc); 
     res(0) /= number_line_per_pixel_;
     res(1) /= number_sample_per_pixel_;
     return res;
@@ -308,7 +314,7 @@ public:
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const
   { 
-    blitz::Array<double, 2> res = ig_->image_coordinate_jac_ecr(Gc); 
+    blitz::Array<double, 2> res = ig_->image_coordinate_jac_parm(Gc); 
     res(0) /= number_line_per_pixel_;
     res(1) /= number_sample_per_pixel_;
     return res;

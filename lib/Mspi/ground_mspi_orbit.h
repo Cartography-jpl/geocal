@@ -64,6 +64,8 @@ public:
   double rotation_rate() const {return rotation_rate_; }
 
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> 
+  orbit_data(const TimeWithDerivative& T) const;
   virtual void print(std::ostream& Os) const;
 private:
   Time tstart;

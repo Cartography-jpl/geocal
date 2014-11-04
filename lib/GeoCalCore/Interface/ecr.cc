@@ -99,17 +99,27 @@ boost::shared_ptr<CartesianInertial> Ecr::convert_to_ci(const Time& T) const
 }
 
 //-----------------------------------------------------------------------
+/// Convert to latitude, longitude, and height.
+//-----------------------------------------------------------------------
+
+void Ecr::lat_lon_height(double& Latitude, double& Longitude, 
+			      double& Height_reference_surface) const
+{
+  latlon(position[0], position[1], position[2], Latitude, Longitude,
+	 Height_reference_surface);
+  Latitude *= Constant::rad_to_deg;
+  Longitude *= Constant::rad_to_deg;
+}
+
+//-----------------------------------------------------------------------
 /// Convert to Geodetic coordinates.
 //-----------------------------------------------------------------------
 
 Geodetic Ecr::convert_to_geodetic() const
 {
-  Geodetic res;
-  latlon(position[0], position[1], position[2], res.lat_, res.lon_,
-	 res.height_ellipsoid_);
-  res.lat_ *= Constant::rad_to_deg;
-  res.lon_ *= Constant::rad_to_deg;
-  return res;
+  Geodetic g;
+  lat_lon_height(g.lat_, g.lon_, g.height_ellipsoid_);
+  return g;
 }
 
 //-----------------------------------------------------------------------

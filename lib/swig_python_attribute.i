@@ -33,6 +33,21 @@ def NAME(self, value):
 }
 %enddef
 
+%define %python_attribute_with_set_virtual(NAME, TYPE...)
+  %rename(_v_ ## NAME) NAME;
+  virtual TYPE NAME() const;
+  virtual void NAME(const TYPE& V);
+%pythoncode {
+@property
+def NAME(self):
+    return self._v_ ## NAME()
+
+@NAME.setter
+def NAME(self, value):
+  self._v_ ## NAME(value)
+}
+%enddef
+
 %define %python_attribute_nonconst(NAME, TYPE...)
   %rename(_v_ ## NAME) NAME;
   TYPE NAME();

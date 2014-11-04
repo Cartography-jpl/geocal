@@ -118,6 +118,7 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.generic_object
 class SpiceHelper(object):
     """
     This class centralizes all of the CSPICE calls from the CSPICE library
@@ -134,6 +135,25 @@ class SpiceHelper(object):
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    def body_name(*args):
+        """
+        std::string SpiceHelper::body_name(int Body_id)
+        Return the body name for the given id. 
+        """
+        return _spice_helper.SpiceHelper_body_name(*args)
+
+    body_name = staticmethod(body_name)
+    def fixed_frame_name(*args):
+        """
+        std::string SpiceHelper::fixed_frame_name(int Body_id)
+        Return the fixed frame name for the given body.
+
+        We pull this out so we don't have lots of switch statements elsewhere.
+
+        """
+        return _spice_helper.SpiceHelper_fixed_frame_name(*args)
+
+    fixed_frame_name = staticmethod(fixed_frame_name)
     def spice_available():
         """
         bool SpiceHelper::spice_available()
@@ -151,11 +171,49 @@ class SpiceHelper(object):
         return _spice_helper.SpiceHelper_spice_setup(Kernel)
 
     spice_setup = staticmethod(spice_setup)
+    def add_kernel(*args):
+        """
+        void SpiceHelper::add_kernel(const std::string &Kernel_dir, const std::string &Kernel)
+        Add an additional kernel, after the one we automatically get (i.e.,
+        $SPICEDATA/geocal.ker).
+
+        We change to the given Kernel_dir, so you can use relative paths if
+        desired for the kernel names. 
+        """
+        return _spice_helper.SpiceHelper_add_kernel(*args)
+
+    add_kernel = staticmethod(add_kernel)
+    def conversion_quaternion(*args):
+        """
+        boost::math::quaternion< double > SpiceHelper::conversion_quaternion(const std::string &From, const std::string &To, const Time &T)
+        Return quaternion that converts between the two named coordinate
+        systems. 
+        """
+        return _spice_helper.SpiceHelper_conversion_quaternion(*args)
+
+    conversion_quaternion = staticmethod(conversion_quaternion)
     def __init__(self): 
         _spice_helper.SpiceHelper_swiginit(self,_spice_helper.new_SpiceHelper())
     __swig_destroy__ = _spice_helper.delete_SpiceHelper
 SpiceHelper_swigregister = _spice_helper.SpiceHelper_swigregister
 SpiceHelper_swigregister(SpiceHelper)
+
+def SpiceHelper_body_name(*args):
+  """
+    std::string SpiceHelper::body_name(int Body_id)
+    Return the body name for the given id. 
+    """
+  return _spice_helper.SpiceHelper_body_name(*args)
+
+def SpiceHelper_fixed_frame_name(*args):
+  """
+    std::string SpiceHelper::fixed_frame_name(int Body_id)
+    Return the fixed frame name for the given body.
+
+    We pull this out so we don't have lots of switch statements elsewhere.
+
+    """
+  return _spice_helper.SpiceHelper_fixed_frame_name(*args)
 
 def SpiceHelper_spice_available():
   """
@@ -171,6 +229,25 @@ def SpiceHelper_spice_setup(Kernel="geocal.ker"):
     Set SPICE errors to just return, rather than aborting. 
     """
   return _spice_helper.SpiceHelper_spice_setup(Kernel)
+
+def SpiceHelper_add_kernel(*args):
+  """
+    void SpiceHelper::add_kernel(const std::string &Kernel_dir, const std::string &Kernel)
+    Add an additional kernel, after the one we automatically get (i.e.,
+    $SPICEDATA/geocal.ker).
+
+    We change to the given Kernel_dir, so you can use relative paths if
+    desired for the kernel names. 
+    """
+  return _spice_helper.SpiceHelper_add_kernel(*args)
+
+def SpiceHelper_conversion_quaternion(*args):
+  """
+    boost::math::quaternion< double > SpiceHelper::conversion_quaternion(const std::string &From, const std::string &To, const Time &T)
+    Return quaternion that converts between the two named coordinate
+    systems. 
+    """
+  return _spice_helper.SpiceHelper_conversion_quaternion(*args)
 
 
 

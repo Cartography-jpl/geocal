@@ -7,8 +7,9 @@
 #include "frame_coordinate.h"
 %}
 %base_import(generic_object)
-
+%import "auto_derivative.i"
 %geocal_shared_ptr(GeoCal::FrameCoordinate);
+%geocal_shared_ptr(GeoCal::FrameCoordinateWithDerivative);
 
 namespace GeoCal {
 
@@ -19,9 +20,18 @@ namespace GeoCal {
   $1 = &temp;
  }
 
+ %typemap(in,numinputs=0) FrameCoordinateWithDerivative &OUTPUT (GeoCal::FrameCoordinateWithDerivative temp) {
+  $1 = &temp;
+ }
+
  %typemap(argout) FrameCoordinate &OUTPUT {
    SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
    %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::FrameCoordinate> *), SWIG_POINTER_OWN));
+ }
+
+ %typemap(argout) FrameCoordinateWithDerivative &OUTPUT {
+   SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
+   %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::FrameCoordinateWithDerivative> *), SWIG_POINTER_OWN));
  }
 #endif
 
@@ -32,6 +42,19 @@ public:
   double line;
   double sample;
   std::string print_to_string() const;
+  %pickle_init(1, self.line, self.sample)
+};
+
+class FrameCoordinateWithDerivative : public GenericObject {
+public:
+  FrameCoordinateWithDerivative();
+  FrameCoordinateWithDerivative(AutoDerivative<double> L, 
+				AutoDerivative<double> S);
+  FrameCoordinateWithDerivative(const FrameCoordinate& F);
+  AutoDerivative<double> line;
+  AutoDerivative<double> sample;
+  std::string print_to_string() const;
+  %python_attribute(value, FrameCoordinate);
   %pickle_init(1, self.line, self.sample)
 };
 }

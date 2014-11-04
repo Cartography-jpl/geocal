@@ -118,9 +118,11 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.generic_object
+import geocal_swig.observer
 import geocal_swig.quaternion_camera
 import geocal_swig.camera
-import geocal_swig.generic_object
+import geocal_swig.with_parameter
 class ArgusCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     """
     A model of the ARGUS camera.

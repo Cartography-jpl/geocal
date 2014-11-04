@@ -15,6 +15,8 @@ public:
   OrbitQuaternionList(const 
   std::vector<boost::shared_ptr<QuaternionOrbitData> >& Data);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
+    const;
   %python_attribute(quaternion_orbit_data, std::vector<boost::shared_ptr<QuaternionOrbitData> >)
   %pickle_init(1, self.quaternion_orbit_data);
 };

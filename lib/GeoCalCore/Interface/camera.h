@@ -3,6 +3,9 @@
 #include "constant.h"
 #include "frame_coordinate.h"
 #include "look_vector.h"
+#include "observer.h"
+#include "array_ad.h"
+#include "with_parameter.h"
 #include <blitz/array.h>
 #include <boost/math/quaternion.hpp>
 #include <vector>
@@ -11,9 +14,16 @@ namespace GeoCal {
 /****************************************************************//**
   This class models a frame camera. It is used to convert ScLookVector
   to FrameCoordinate and vice versa.
+
+  Other objects may depend on the Camera, and should be updated
+  when the Camera is updated. To facilitate that, this class in
+  an Oberverable, and objects can add themselves as Observers to be
+  notified when the Camera is updated.
 *******************************************************************/
 
-class Camera : public Printable<Camera> {
+class Camera : public Printable<Camera>, 
+	       public Observable<Camera>,
+	       public WithParameter {
 public:
 //-----------------------------------------------------------------------
 /// Direction camera is pointing.
@@ -26,6 +36,11 @@ public:
 //-----------------------------------------------------------------------
 
   Camera() {}
+
+  virtual void add_observer(Observer<Camera>& Obs) 
+  { add_observer_do(Obs, *this);}
+  virtual void remove_observer(Observer<Camera>& Obs) 
+  { remove_observer_do(Obs, *this);}
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -78,36 +93,6 @@ public:
   virtual int number_sample(int Band) const = 0;
 
 //-----------------------------------------------------------------------
-/// A camera model might depend on a set of parameters, which can by
-/// modified (e.g., during a simultaneous bundle adjustment). This
-/// returns those parameters.
-//-----------------------------------------------------------------------
-
-  virtual blitz::Array<double, 1> parameter() const
-  { // Default is no parameters.
-    return blitz::Array<double, 1>(0); 
-  }
-
-//-----------------------------------------------------------------------
-/// Set the value of the parameters.
-//-----------------------------------------------------------------------
-
-  virtual void parameter(const blitz::Array<double, 1>& Parm)
-  {
-    // Default is do nothing
-  }
-
-//-----------------------------------------------------------------------
-/// Descriptive name of each parameter.
-//-----------------------------------------------------------------------
-
-  virtual std::vector<std::string> parameter_name() const
-  {
-    std::vector<std::string> res;
-    return res;
-  }
-
-//-----------------------------------------------------------------------
 /// This converts from ScLookVector to FrameCoordinate for a given
 /// band. Note that the FrameCoordinate may be outside of the range
 /// (0, number_line(band) - 1), (0, number_sample(band) - 1), this
@@ -117,6 +102,16 @@ public:
 
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const = 0;
+
+//-----------------------------------------------------------------------
+/// Variation of frame_coordinate that both propagate derivative
+/// information in the ScLookVector and adds in any derivatives from
+/// the parameters.
+//-----------------------------------------------------------------------
+
+  virtual FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
+		   int Band) const = 0;
 
 //-----------------------------------------------------------------------
 /// This is similar to frame_coordinate, except it only calculates the
@@ -144,6 +139,17 @@ public:
 
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const = 0;
+
+
+//-----------------------------------------------------------------------
+/// Variation of sc_look_vector that both propagate derivative
+/// information in the FrameCoordinate and adds in any derivatives from
+/// the parameters.
+//-----------------------------------------------------------------------
+
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
+				 int Band) const = 0;
 
 //-----------------------------------------------------------------------
 /// Print to a stream.
@@ -194,8 +200,14 @@ public:
   virtual int number_sample(int Band) const {return nsample;}
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
+  virtual FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
+				   int Band) const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
+				 int Band) const;
   virtual void print(std::ostream& Os) const;
   double beta() const {return beta_;}
   double delta() const {return delta_;}

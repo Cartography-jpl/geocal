@@ -121,7 +121,6 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.dem_map_info
 import geocal_swig.dem
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 import geocal_swig.raster_multifile
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
@@ -175,8 +174,7 @@ class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
     def __init__(self, *args): 
         """
         UsgsDem::UsgsDem(const std::string &Dir="", bool Outside_dem_is_error=true, const
-        boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        DatumGeoid96()))
+        boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >())
         Constructor.
 
         You can provide the directory to look for USGS DEM data, or if you
@@ -188,13 +186,6 @@ class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
         controlled by Outside_dem_is_error. 
         """
         _usgs_dem.UsgsDem_swiginit(self,_usgs_dem.new_UsgsDem(*args))
-    def elevation(self, *args):
-        """
-        virtual double GeoCal::UsgsDem::elevation(int Y_index, int X_index) const
-        Return height in meters relative to datum(). 
-        """
-        return _usgs_dem.UsgsDem_elevation(self, *args)
-
     def _v_directory_base(self):
         """
         const std::string& GeoCal::UsgsDem::directory_base() const
@@ -214,7 +205,6 @@ class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
       return _new_from_init, (self.__class__, 1, self.directory_base,self.outside_dem_is_error,self.datum)
 
     __swig_destroy__ = _usgs_dem.delete_UsgsDem
-UsgsDem.elevation = new_instancemethod(_usgs_dem.UsgsDem_elevation,None,UsgsDem)
 UsgsDem._v_directory_base = new_instancemethod(_usgs_dem.UsgsDem__v_directory_base,None,UsgsDem)
 UsgsDem_swigregister = _usgs_dem.UsgsDem_swigregister
 UsgsDem_swigregister(UsgsDem)

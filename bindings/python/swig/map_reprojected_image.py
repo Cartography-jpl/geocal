@@ -121,7 +121,6 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 class MapReprojectedImage(geocal_swig.raster_image_variable.RasterImageVariable):
     """
     This is a RasterImage that has been resampled to a different map

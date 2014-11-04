@@ -69,6 +69,8 @@ public:
 							   T, Ci_to_cf); 
   }
 
+  virtual void lat_lon_height(double& Latitude, double& Longitude, 
+			      double& Height_reference_surface) const;
   virtual double height_reference_surface() const;
   Geodetic convert_to_geodetic() const;
   virtual double min_radius_reference_surface() const;

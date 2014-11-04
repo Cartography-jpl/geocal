@@ -120,8 +120,9 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.image_ground_connection
 import geocal_swig.generic_object
+import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
-import geocal_swig.look_vector
+import geocal_swig.observer
 class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
     """
     This is a ImageGroundConnection where the connection is made by
@@ -133,16 +134,18 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(const boost::shared_ptr< OrbitData > &Od, const boost::shared_ptr<
-        Camera > &Cam, const boost::shared_ptr< Dem > &D, const
-        boost::shared_ptr< RasterImage > &Img, const std::string Title="",
-        const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<
-        Refraction >(), double Resolution=30, int Band=0, double
-        Max_height=9000)
-        Constructor.
+        GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(Orbit &Orb, const Time &Tm, const boost::shared_ptr< Camera > &Cam,
+        const boost::shared_ptr< Dem > &D, const boost::shared_ptr<
+        RasterImage > &Img, const std::string Title="", const
+        boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction
+        >(), double Resolution=30, int Band=0, double Max_height=9000)
+        Constructor that takes an Orbit and a time.
 
-        You can optionally include a approximate refraction correction, the
-        default is not to. 
+        We populate this using the OrbitData from the orbit for that time.
+        Moreover, we make this class an Observer of the underlying orbit. When
+        the orbit notifies us of changes, we regenerate the orbit data. This
+        means that this class will remain in sync with changes in the
+        underlying orbit. 
         """
         _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_swiginit(self,_orbit_data_image_ground_connection.new_OrbitDataImageGroundConnection(*args))
     def cf_look_vector(self, *args):
@@ -152,6 +155,17 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
 
         """
         return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_cf_look_vector(self, *args)
+
+    def image_coordinate_with_derivative(self, *args):
+        """
+        virtual ImageCoordinateWithDerivative GeoCal::OrbitDataImageGroundConnection::image_coordinate_with_derivative(const GroundCoordinate &Gc) const
+        This is image_coordinate, but include the derivative of this with
+        respect to the parameters of the Camera and OrbitData.
+
+        Not sure if we want this to be a general ImageGroundConnection
+        function, but for now we have this defined just for this class. 
+        """
+        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_image_coordinate_with_derivative(self, *args)
 
     def _v_orbit_data(self, *args):
         """
@@ -257,6 +271,7 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
 
     __swig_destroy__ = _orbit_data_image_ground_connection.delete_OrbitDataImageGroundConnection
 OrbitDataImageGroundConnection.cf_look_vector = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection_cf_look_vector,None,OrbitDataImageGroundConnection)
+OrbitDataImageGroundConnection.image_coordinate_with_derivative = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection_image_coordinate_with_derivative,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_image = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_image,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_title = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_title,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_orbit_data = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_orbit_data,None,OrbitDataImageGroundConnection)

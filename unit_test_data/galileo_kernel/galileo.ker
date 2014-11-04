@@ -1,0 +1,16 @@
+List of kernels we need for working with galileo data. This came from
+the spice toolkit area, they have a section for galileo data.
+
+As a convention, we always change to the directory this file is located
+in before loading this top level kernel. That means that we can use
+relative paths from the file location to specify other kernels that
+should be loaded.
+
+\begindata
+KERNELS_TO_LOAD = (
+  'ik/gll36001.ti',
+  'ck/gll_plt_rec_1997_mav_v00.bc',
+  'sclk/mk00062a.tsc',
+  'spk/gll_951120_021126_raj2007.bsp',
+  'fk/gll_scan_plane.tf'
+)

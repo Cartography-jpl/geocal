@@ -5,7 +5,7 @@
 #include <string>
 #include <boost/regex.hpp>
 #include <boost/array.hpp>
-
+#include <boost/math/quaternion.hpp>
 namespace GeoCal {
   class Time;			// Forward declaration.
 
@@ -56,6 +56,8 @@ public:
 class SpiceHelper {
 public:
   static double m[3][3];
+  static std::string body_name(int Body_id);
+  static std::string fixed_frame_name(int Body_id);
   static void cartesian_inertial_to_cartesian_fixed(int Body_id, const Time& T);
   static Time parse_time(const std::string& Time_string);
   static double geocal_to_et(const Time& T);
@@ -63,7 +65,12 @@ public:
   static std::string to_string(const Time& T);
   static bool spice_available();
   static void spice_setup(const std::string& Kernel = "geocal.ker");
+  static void add_kernel(const std::string& Kernel_dir, 
+			 const std::string& Kernel);
   static void spice_error_check();
+  static boost::math::quaternion<double> 
+  conversion_quaternion(const std::string& From,
+			const std::string& To, const Time& T);
   static void conversion_matrix(const std::string& From,
 				const std::string& To, const Time& T);
   static void conversion(const std::string& From,
@@ -75,6 +82,9 @@ public:
 				   const Time& T,
 				   boost::array<double, 3>& pout,
 				   boost::array<double, 3>& pout2);
+  static void state_vector(int Body_id, const std::string& Target_name,
+			   const Time& T, boost::array<double, 3>& Pos,
+			   boost::array<double, 3>& Vel);
 private:
   static std::string max_version_find(const std::string& D, 
 				      const boost::regex& F_reg);
@@ -101,5 +111,52 @@ public:
   virtual double solar_distance(int Body_id, const Time& T);
 };
 
+/****************************************************************//**
+  Constants for the planet. Note that if the planet is actually
+  described as triaxial we average the 2 equatorial radius. We don't
+  curently support triaxial models. We could extend the code for this if 
+  needed.
+  
+*******************************************************************/
+
+class SpicePlanetConstant {
+public:
+  SpicePlanetConstant(int Naif_code) 
+  : naif_code(Naif_code), filled_in(false) {}
+
+//-----------------------------------------------------------------------
+/// Planet equatorial radius, in meters
+//-----------------------------------------------------------------------
+
+  double planet_a() const 
+  { fill_in_data(); return a; }
+
+//-----------------------------------------------------------------------
+/// Planet polar radius, in meters
+//-----------------------------------------------------------------------
+
+  double planet_b() const 
+  { fill_in_data(); return b; }
+
+//-----------------------------------------------------------------------
+/// Planet eccentricity squared
+//-----------------------------------------------------------------------
+
+  double planet_esq() const
+  { fill_in_data(); return esq; }
+
+private:
+  int naif_code;
+  mutable bool filled_in;
+  mutable double a, b, esq;
+  void fill_in_data() const 
+  {
+    if(!filled_in) {
+      calc_data();
+      filled_in = true;
+    }
+  }
+  void calc_data() const;
+};
 }
 #endif

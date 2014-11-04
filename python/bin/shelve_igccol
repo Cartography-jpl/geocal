@@ -110,7 +110,6 @@ else:
         a.append(t)
 
 igc_coll = IgcArray(a)
-igc_coll.parameter_subset_mask = [True] * len(igc_coll.parameter)
 if(args.image_ground_connection):
     write_shelve(args.output, a[0])
 else:

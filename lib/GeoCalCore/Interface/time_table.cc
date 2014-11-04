@@ -35,15 +35,45 @@ const FrameCoordinate& F) const
 }
 
 //-----------------------------------------------------------------------
+/// Convert from TimeWithDerivative and FrameCoordinateWithDerivative 
+/// to ImageCoordinateWithDerivative.
+//-----------------------------------------------------------------------
+
+ImageCoordinateWithDerivative 
+ConstantSpacingTimeTable::image_coordinate_with_derivative
+(const TimeWithDerivative& T, 
+ const FrameCoordinateWithDerivative& F) const
+{
+  range_check(T.value(), min_time(), max_time());
+  AutoDerivative<double> line = (T  - min_time()) / tspace + F.line;
+  return ImageCoordinateWithDerivative(line, F.sample);
+}
+
+//-----------------------------------------------------------------------
 /// Convert from ImageCoordinate to Time and FrameCoordinate.
 //-----------------------------------------------------------------------
 
 void ConstantSpacingTimeTable::time(const ImageCoordinate& Ic, Time& T, 
 				    FrameCoordinate& F) const
 {
-  range_check(Ic.line, (double) min_line(), (double) max_line() + 0.5);
+  range_check(Ic.line, (double) min_line(), (double) max_line() + 1.0);
   T = min_time() + Ic.line * tspace;
   F = FrameCoordinate(0, Ic.sample);
+}
+
+
+//-----------------------------------------------------------------------
+/// Convert from ImageCoordinateWithDerivative to TimeWithDerivative 
+/// and FrameCoordinateWithDerivative.
+//-----------------------------------------------------------------------
+
+void ConstantSpacingTimeTable::time_with_derivative
+(const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T, 
+ FrameCoordinateWithDerivative& F) const
+{
+  range_check(Ic.line.value(), (double) min_line(), (double) max_line() + 1.0);
+  T = TimeWithDerivative(min_time()) + Ic.line * tspace;
+  F = FrameCoordinateWithDerivative(0, Ic.sample);
 }
 
 //-----------------------------------------------------------------------
@@ -99,17 +129,70 @@ const FrameCoordinate& F) const
 }
 
 //-----------------------------------------------------------------------
+/// Convert from TimeWithDerivative and FrameCoordinateWithDerivative
+/// to ImageCoordinateWithDerivative.
+//-----------------------------------------------------------------------
+
+ImageCoordinateWithDerivative 
+MeasuredTimeTable::image_coordinate_with_derivative
+(const TimeWithDerivative& T, 
+const FrameCoordinateWithDerivative& F) const
+{
+  range_check(T.value(), min_time(), max_time());
+  int i = (int)(std::lower_bound(tlist.begin(), tlist.end(), T.value())
+		- tlist.begin());
+  AutoDerivative<double> line;
+  if(i == 0)
+    line = min_line_;
+  else {
+    line = (T - tlist[i - 1]) / (tlist[i] - tlist[i - 1]) + (i - 1) + 
+      min_line_;
+  }
+  return ImageCoordinateWithDerivative(line, F.sample);
+}
+
+//-----------------------------------------------------------------------
 /// Convert from ImageCoordinate to Time and FrameCoordinate.
 //-----------------------------------------------------------------------
 
 void MeasuredTimeTable::time(const ImageCoordinate& Ic, Time& T, 
 			     FrameCoordinate& F) const
 {
-  range_check(Ic.line, (double) min_line(), (double) max_line() + 0.5);
+  range_check(Ic.line, (double) min_line(), (double) max_line() + 1.0);
   int i = (int) floor(Ic.line);
   int j = i - min_line_;
+  // Allow extrapolation by 1 line.
+  while(j + 1 >= (int) tlist.size()) {
+    j = j - 1;
+    i = i - 1;
+  }
+  if(j < 0)
+    throw Exception("MeasuredTimeTable must have at least 2 lines");
   T = tlist[j] + (tlist[j + 1] - tlist[j]) * (Ic.line - i);
   F = FrameCoordinate(0, Ic.sample);
+}
+
+//-----------------------------------------------------------------------
+/// Convert from ImageCoordinateWithDerivative to TimeWithDerivative
+/// and FrameCoordinateWithDerivative.
+//-----------------------------------------------------------------------
+
+void MeasuredTimeTable::time_with_derivative
+(const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T, 
+ FrameCoordinateWithDerivative& F) const
+{
+  range_check(Ic.line.value(), (double) min_line(), (double) max_line() + 1.0);
+  int i = (int) floor(Ic.line.value());
+  int j = i - min_line_;
+  // Allow extrapolation by 1 line.
+  while(j + 1 >= (int) tlist.size()) {
+    j = j - 1;
+    i = i - 1;
+  }
+  if(j < 0)
+    throw Exception("MeasuredTimeTable must have at least 2 lines");
+  T = TimeWithDerivative(tlist[j]) + (tlist[j + 1] - tlist[j]) * (Ic.line - i);
+  F = FrameCoordinateWithDerivative(0, Ic.sample);
 }
 
 //-----------------------------------------------------------------------

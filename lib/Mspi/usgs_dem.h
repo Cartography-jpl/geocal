@@ -1,7 +1,6 @@
 #ifndef USGS_DEM_H
 #define USGS_DEM_H
 #include "dem_map_info.h"
-#include "datum_geoid96.h"
 #include "raster_multifile.h"
 #include "location_to_file.h"
 #include "ostream_pad.h"
@@ -51,7 +50,7 @@ public:
   UsgsDem(const std::string& Dir = "",
 	  bool Outside_dem_is_error = true,
 	  const boost::shared_ptr<Datum>& D = 
-	  boost::shared_ptr<Datum>(new DatumGeoid96()));
+	  boost::shared_ptr<Datum>());
   virtual ~UsgsDem() {}
 
 //-----------------------------------------------------------------------
@@ -60,13 +59,31 @@ public:
 
   const std::string& directory_base() const {return f->directory_base();}
 
+  virtual double distance_to_surface(const GroundCoordinate& Gp) const
+  {
+    // Faster to covert Gp to Geodetic and use in both undulation and
+    // file lookup.
+    Geodetic g(Gp);
+    return g.height_reference_surface() - 
+      DemMapInfo::height_reference_surface(g);
+  }
+  virtual double height_reference_surface(const GroundCoordinate& Gp) 
+    const
+  {
+    // Faster to covert Gp to Geodetic and use in both undulation and
+    // file lookup.
+    Geodetic g(Gp);
+    return DemMapInfo::height_reference_surface(g);
+  }
+
+protected:
 //-----------------------------------------------------------------------
 /// Return height in meters relative to datum().
 //-----------------------------------------------------------------------
 
   virtual double elevation(int Y_index, int X_index) const
   { 
-    return (*f)(Y_index, X_index);
+    return f->unchecked_read(Y_index, X_index);
   }
   virtual void print(std::ostream& Os) const;
 private:

@@ -9,6 +9,7 @@
 %}
 %base_import(generic_object)
 %import "dem.i"
+%import "look_vector.i"
 %import "ground_coordinate.i"
 %import "image_coordinate.i"
 %import "image_ground_connection.i"

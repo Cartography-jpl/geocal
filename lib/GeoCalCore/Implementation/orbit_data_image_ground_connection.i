@@ -29,6 +29,20 @@ public:
 				 const boost::shared_ptr<Refraction>& Ref,
 				 double Resolution=30, int Band=0, 
 				 double Max_height=9000);
+  OrbitDataImageGroundConnection(Orbit& Orb, const Time& Tm,
+				 const boost::shared_ptr<Camera>& Cam, 
+				 const boost::shared_ptr<Dem>& D,
+				 const boost::shared_ptr<RasterImage>& Img,
+				 const std::string Title = "");
+  OrbitDataImageGroundConnection(Orbit& Orb, const Time& Tm,
+				 const boost::shared_ptr<Camera>& Cam, 
+				 const boost::shared_ptr<Dem>& D,
+				 const boost::shared_ptr<RasterImage>& Img,
+				 const std::string Title,
+				 const boost::shared_ptr<Refraction>& Ref,
+				 double Resolution=30, int Band=0, 
+				 double Max_height=9000);
+
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& OUTPUT,
 		 boost::shared_ptr<CartesianFixed>& OUTPUT) const;
@@ -37,6 +51,8 @@ public:
 			const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
+  virtual ImageCoordinateWithDerivative 
+  image_coordinate_with_derivative(const GroundCoordinate& Gc) const;
   virtual int number_line() const;
   virtual int number_sample() const;
   virtual boost::shared_ptr<RasterImage> image() const;

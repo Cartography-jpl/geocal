@@ -1,4 +1,4 @@
-from with_parameter import *
+from geocal_swig import *
 import bisect
 
 class CubicSpline(WithParameter):
@@ -7,6 +7,7 @@ class CubicSpline(WithParameter):
         self.knot = []
         self.y = []
         self.dy = []
+        WithParameter.__init__(self)
 
     def add_knot(self, x):
         if(len(self.knot) ==0):
@@ -23,40 +24,38 @@ class CubicSpline(WithParameter):
             self.y.insert(inew, 0)
             self.dy.insert(inew, 0)
 
-    @property
-    def parameter(self):
-        res = []
-        for i in range(len(self.y)):
-            res.append(self.y[i])
-            if(i != 0 and i != len(self.y) - 1):
-                res.append(self.dy[i])
-    
-    @parameter.setter
-    def parameter(self, value):
-        if(len(value) != len(self.y) * 2 - 2):
-            raise ValueError("Length of value needs to be 2 * number knots - 2")
-        j = 0
-        for i in range(len(self.y)):
-            self.y[i] = value[j]
-            j += 1
-            if(i != 0 and i != len(self.y) - 1):
-                self.dy[i] = value[j]
+    def _v_parameter(self, *args):
+        # Awkward interface, but this matches what the C++ needs. If we have
+        # no arguments, then we are returning the parameters. Otherwise,
+        # we are setting them.
+        if(len(args) == 0):
+            res = []
+            for i in range(len(self.y)):
+                res.append(self.y[i])
+                if(i != 0 and i != len(self.y) - 1):
+                    res.append(self.dy[i])
+            return res
+        else:
+            value = args[0]
+            if(len(value) != len(self.y) * 2 - 2):
+                raise ValueError("Length of value needs to be 2 * number knots - 2")
+            j = 0
+            for i in range(len(self.y)):
+                self.y[i] = value[j]
                 j += 1
-            else:
-                self.dy[i] = 0
-    
-    @property
-    def parameter_name(self):
+                if(i != 0 and i != len(self.y) - 1):
+                    self.dy[i] = value[j]
+                    j += 1
+                else:
+                    self.dy[i] = 0
+
+    def _v_parameter_name(self):
         res = []
         for i in range(len(self.y)):
             res.append("Value at knot %f" % self.knot[i])
             if(i != 0 and i != len(self.y) - 1):
                 res.append("dy/dx at knot %f" % self.knot[i])
         return res
-
-    @property
-    def parameter_subset_mask(self):
-        return np.array([True] * len(self.parameter))
 
     def value(self, x):
         '''Value at x. Note that if x is behind the first or last knot we

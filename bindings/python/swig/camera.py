@@ -144,11 +144,41 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
-class Camera(geocal_swig.generic_object.GenericObject):
+import geocal_swig.observer
+import geocal_swig.with_parameter
+class ObservableCamera(geocal_swig.generic_object.GenericObject):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _camera.delete_ObservableCamera
+ObservableCamera.add_observer_and_keep_reference = new_instancemethod(_camera.ObservableCamera_add_observer_and_keep_reference,None,ObservableCamera)
+ObservableCamera.add_observer = new_instancemethod(_camera.ObservableCamera_add_observer,None,ObservableCamera)
+ObservableCamera.remove_observer = new_instancemethod(_camera.ObservableCamera_remove_observer,None,ObservableCamera)
+ObservableCamera_swigregister = _camera.ObservableCamera_swigregister
+ObservableCamera_swigregister(ObservableCamera)
+
+class ObserverCamera(geocal_swig.generic_object.GenericObject):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self): 
+        _camera.ObserverCamera_swiginit(self,_camera.new_ObserverCamera())
+    __swig_destroy__ = _camera.delete_ObserverCamera
+ObserverCamera.notify_update = new_instancemethod(_camera.ObserverCamera_notify_update,None,ObserverCamera)
+ObserverCamera.notify_add = new_instancemethod(_camera.ObserverCamera_notify_add,None,ObserverCamera)
+ObserverCamera.notify_remove = new_instancemethod(_camera.ObserverCamera_notify_remove,None,ObserverCamera)
+ObserverCamera_swigregister = _camera.ObserverCamera_swigregister
+ObserverCamera_swigregister(ObserverCamera)
+
+class Camera(ObservableCamera,geocal_swig.with_parameter.WithParameter):
     """
     This class models a frame camera.
 
     It is used to convert ScLookVector to FrameCoordinate and vice versa.
+
+    Other objects may depend on the Camera, and should be updated when the
+    Camera is updated. To facilitate that, this class in an Oberverable,
+    and objects can add themselves as Observers to be notified when the
+    Camera is updated.
 
     C++ includes: camera.h 
     """
@@ -215,32 +245,6 @@ class Camera(geocal_swig.generic_object.GenericObject):
         """
         return _camera.Camera_number_sample(self, *args)
 
-    def _v_parameter(self, *args):
-        """
-        virtual void GeoCal::Camera::parameter(const blitz::Array< double, 1 > &Parm)
-        Set the value of the parameters. 
-        """
-        return _camera.Camera__v_parameter(self, *args)
-
-    @property
-    def parameter(self):
-        return self._v_parameter()
-
-    @parameter.setter
-    def parameter(self, value):
-      self._v_parameter(value)
-
-    def _v_parameter_name(self):
-        """
-        virtual std::vector<std::string> GeoCal::Camera::parameter_name() const
-        Descriptive name of each parameter. 
-        """
-        return _camera.Camera__v_parameter_name(self)
-
-    @property
-    def parameter_name(self):
-        return self._v_parameter_name()
-
     def frame_coordinate(self, *args):
         """
         virtual FrameCoordinate GeoCal::Camera::frame_coordinate(const ScLookVector &Sl, int Band) const =0
@@ -252,6 +256,15 @@ class Camera(geocal_swig.generic_object.GenericObject):
         is not seen). 
         """
         return _camera.Camera_frame_coordinate(self, *args)
+
+    def frame_coordinate_with_derivative(self, *args):
+        """
+        virtual FrameCoordinateWithDerivative GeoCal::Camera::frame_coordinate_with_derivative(const ScLookVectorWithDerivative &Sl, int Band) const =0
+        Variation of frame_coordinate that both propagate derivative
+        information in the ScLookVector and adds in any derivatives from the
+        parameters. 
+        """
+        return _camera.Camera_frame_coordinate_with_derivative(self, *args)
 
     def frame_line_coordinate(self, *args):
         """
@@ -282,17 +295,26 @@ class Camera(geocal_swig.generic_object.GenericObject):
         """
         return _camera.Camera_sc_look_vector(self, *args)
 
+    def sc_look_vector_with_derivative(self, *args):
+        """
+        virtual ScLookVectorWithDerivative GeoCal::Camera::sc_look_vector_with_derivative(const FrameCoordinateWithDerivative &F, int Band) const =0
+        Variation of sc_look_vector that both propagate derivative information
+        in the FrameCoordinate and adds in any derivatives from the
+        parameters. 
+        """
+        return _camera.Camera_sc_look_vector_with_derivative(self, *args)
+
     __swig_destroy__ = _camera.delete_Camera
 Camera.integration_time = new_instancemethod(_camera.Camera_integration_time,None,Camera)
 Camera._v_direction = new_instancemethod(_camera.Camera__v_direction,None,Camera)
 Camera._v_number_band = new_instancemethod(_camera.Camera__v_number_band,None,Camera)
 Camera.number_line = new_instancemethod(_camera.Camera_number_line,None,Camera)
 Camera.number_sample = new_instancemethod(_camera.Camera_number_sample,None,Camera)
-Camera._v_parameter = new_instancemethod(_camera.Camera__v_parameter,None,Camera)
-Camera._v_parameter_name = new_instancemethod(_camera.Camera__v_parameter_name,None,Camera)
 Camera.frame_coordinate = new_instancemethod(_camera.Camera_frame_coordinate,None,Camera)
+Camera.frame_coordinate_with_derivative = new_instancemethod(_camera.Camera_frame_coordinate_with_derivative,None,Camera)
 Camera.frame_line_coordinate = new_instancemethod(_camera.Camera_frame_line_coordinate,None,Camera)
 Camera.sc_look_vector = new_instancemethod(_camera.Camera_sc_look_vector,None,Camera)
+Camera.sc_look_vector_with_derivative = new_instancemethod(_camera.Camera_sc_look_vector_with_derivative,None,Camera)
 Camera.__str__ = new_instancemethod(_camera.Camera___str__,None,Camera)
 Camera_swigregister = _camera.Camera_swigregister
 Camera_swigregister(Camera)

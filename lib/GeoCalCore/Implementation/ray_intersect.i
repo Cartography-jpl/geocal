@@ -8,7 +8,6 @@
 %}
 %base_import(generic_object)
 %import "image_ground_connection.i"
-%import "ecr.i"
 %import "ground_coordinate.i"
 %geocal_shared_ptr(GeoCal::RayIntersect);
 namespace GeoCal {
@@ -16,9 +15,9 @@ class RayIntersect : public GenericObject {
 public:
   RayIntersect(const boost::shared_ptr<ImageGroundConnection> Igc1,
 	       const boost::shared_ptr<ImageGroundConnection> Igc2);
-  static void two_look_vector_intersect(const Ecr& P1,
+  static void two_look_vector_intersect(const CartesianFixed& P1,
 				       const CartesianFixedLookVector& L1,
-				       const Ecr& P2,
+				       const CartesianFixed& P2,
 				       const CartesianFixedLookVector& L2,
 				       boost::shared_ptr<CartesianFixed>& 
 				       OUTPUT, double& OUTPUT);

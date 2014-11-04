@@ -37,6 +37,10 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK(fabs(ic3.line - ic.line) < 1.0 / 16);
   BOOST_CHECK(fabs(ic3.sample - ic.sample) < 1.0 / 16);
   BOOST_CHECK_CLOSE(gc2->height_reference_surface(), 100.0, 1e-2);
+  double line_res, samp_res;
+  igc.footprint_resolution(0, 0, line_res, samp_res);
+  BOOST_CHECK_CLOSE(line_res, 711.43, 1e-2);
+  BOOST_CHECK_CLOSE(samp_res, 276.297, 1e-2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

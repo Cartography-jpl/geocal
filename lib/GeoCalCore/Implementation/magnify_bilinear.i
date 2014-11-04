@@ -16,6 +16,9 @@ class MagnifyBilinear : public CalcRaster {
 public:
   MagnifyBilinear(const boost::shared_ptr<RasterImage>& Data,
 		  int Magfactor, int Number_tile = 4);
+  %python_attribute(underlying_data, boost::shared_ptr<RasterImage>);
+  %python_attribute(magnification_factor, int);
+  %pickle_init(1, self.underlying_data, self.magnification_factor);
 protected:
   virtual void calc(int Lstart, int Sstart) const; 
 };

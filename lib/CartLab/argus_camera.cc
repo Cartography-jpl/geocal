@@ -54,7 +54,7 @@ FrameCoordinate ArgusCamera::frame_coordinate(const ScLookVector& Sl,
   range_check(Band, 0, 1);
 
   // Just reverse of sc_look_vector.
-  boost::math::quaternion<double> fv = conj(frame_to_sc_) * Sl.look_quaternion() * frame_to_sc_;
+  boost::math::quaternion<double> fv = conj(frame_to_sc()) * Sl.look_quaternion() * frame_to_sc();
   FrameCoordinate fc;
   fc.line = number_line(0) / 2.0 -
     focal_length() * (fv.R_component_2() / fv.R_component_4()) / line_pitch();

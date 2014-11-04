@@ -41,6 +41,9 @@ if test "x$want_mspi_shared" = "xyes"; then
 	fi
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])
+		MSPI_SHARED_CFLAGS=""
+		MSPI_SHARED_LIBS=""
+		have_mspi_shared="no"
         else
                 AC_MSG_RESULT([yes])
                 AC_SUBST(MSPI_SHARED_CFLAGS)

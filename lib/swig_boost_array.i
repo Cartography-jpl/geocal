@@ -54,11 +54,11 @@ public:
 #ifdef SWIGPYTHON
 
 %define %boost_array_template(NAME,TYPE, LEN)
-   %template(NAME) array<TYPE, LEN>;
+%template(NAME) boost::array<TYPE, LEN>;
 
 %typemap(in) const boost::array<TYPE, LEN>& (boost::array<TYPE, LEN> a, PythonObject numpy) 
 {
-  numpy.obj = to_numpy<TYPE>($input);
+  numpy.obj = to_numpy<TYPE >($input);
   if(!numpy.obj)
     return NULL;
   a = to_boost_array<TYPE, LEN>(numpy);
@@ -67,7 +67,7 @@ public:
 
 %typemap(in) boost::array<TYPE, LEN> (PythonObject numpy) 
 {
-  numpy.obj = to_numpy<TYPE>($input);
+  numpy.obj = to_numpy<TYPE >($input);
   if(!numpy.obj)
     return NULL;
   $1 = to_boost_array<TYPE, LEN>(numpy);
@@ -102,14 +102,11 @@ def NAME(self, value):
 %enddef
 
 #endif
-
+}
 %boost_array_template(Array_double_20, double, 20)
 %boost_array_template(Array_double_12, double, 12)
 %boost_array_template(Array_double_14, double, 14)
 %boost_array_template(Array_double_3, double, 3)
 %boost_array_template(Array_bool_20, bool, 20)
-}
 
-%template(Vector_Array_double_12) std::vector<boost::array<double, 12> >;
-%template(Vector_Array_double_14) std::vector<boost::array<double, 14> >;
 

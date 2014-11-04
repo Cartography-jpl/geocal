@@ -18,12 +18,12 @@ namespace GeoCal {
 /// This is an "active" transformation. For "passive", just reverse
 /// the sign of A
 //-----------------------------------------------------------------------
-inline boost::math::quaternion<double> quat_rot_x(double A)
+template<class T> inline boost::math::quaternion<T> quat_rot_x(const T& A)
 {
-  return boost::math::quaternion<double>(cos(A / 2),
-					 sin(A / 2),
-					 0,
-					 0);
+  return boost::math::quaternion<T>(std::cos(A / 2),
+				    std::sin(A / 2),
+				    T(0),
+				    T(0));
 }
 
 //-----------------------------------------------------------------------
@@ -36,12 +36,12 @@ inline boost::math::quaternion<double> quat_rot_x(double A)
 /// This is an "active" transformation. For "passive", just reverse
 /// the sign of A
 //-----------------------------------------------------------------------
-inline boost::math::quaternion<double> quat_rot_y(double A)
+template<class T> inline boost::math::quaternion<T> quat_rot_y(const T& A)
 {
-  return boost::math::quaternion<double>(cos(A / 2),
-					 0,
-					 sin(A / 2),
-					 0);
+  return boost::math::quaternion<T>(std::cos(A / 2),
+				    T(0),
+				    std::sin(A / 2),
+				    T(0));
 }
 
 //-----------------------------------------------------------------------
@@ -54,19 +54,19 @@ inline boost::math::quaternion<double> quat_rot_y(double A)
 /// This is an "active" transformation. For "passive", just reverse
 /// the sign of A
 //-----------------------------------------------------------------------
-inline boost::math::quaternion<double> quat_rot_z(double A)
+template<class T> inline boost::math::quaternion<T> quat_rot_z(const T& A)
 {
-  return boost::math::quaternion<double>(cos(A / 2),
-					 0,
-					 0,
-					 sin(A / 2));
+  return boost::math::quaternion<T>(std::cos(A / 2),
+				    T(0),
+				    T(0),
+				    std::sin(A / 2));
 }
 
 //-----------------------------------------------------------------------
 /// Take a character to indicate which direction we rotate about.
 //-----------------------------------------------------------------------
 
-inline boost::math::quaternion<double> quat_rot_i(double A, char C)
+template<class T> inline boost::math::quaternion<T> quat_rot_i(const T& A, char C)
 {
   switch(C) {
   case '1':
@@ -95,8 +95,9 @@ inline boost::math::quaternion<double> quat_rot_i(double A, char C)
 /// the sign of A
 //-----------------------------------------------------------------------
 
-inline boost::math::quaternion<double> quat_rot(const std::string& Rot, 
-						double A1)
+template<class T> inline boost::math::quaternion<T> 
+quat_rot(const std::string& Rot, 
+	 const T& A1)
 {
   if(Rot.size() != 1) 
     throw Exception("Rotation string must be 1 characters long");
@@ -110,8 +111,9 @@ inline boost::math::quaternion<double> quat_rot(const std::string& Rot,
 /// the sign of A
 //-----------------------------------------------------------------------
 
-inline boost::math::quaternion<double> quat_rot(const std::string& Rot, 
-						double A1, double A2)
+template<class T> inline 
+boost::math::quaternion<T> quat_rot(const std::string& Rot, 
+					 const T& A1, const T& A2)
 {
   if(Rot.size() != 2) 
     throw Exception("Rotation string must be 2 characters long");
@@ -125,8 +127,9 @@ inline boost::math::quaternion<double> quat_rot(const std::string& Rot,
 /// the sign of A
 //-----------------------------------------------------------------------
 
-inline boost::math::quaternion<double> quat_rot(const std::string& Rot, 
-						double A1, double A2, double A3)
+template<class T> inline 
+boost::math::quaternion<T> quat_rot(const std::string& Rot, 
+					 const T& A1, const T& A2, const T& A3)
 {
   if(Rot.size() != 3) 
     throw Exception("Rotation string must be 3 characters long");
@@ -141,8 +144,9 @@ inline boost::math::quaternion<double> quat_rot(const std::string& Rot,
 /// the sign of A
 //-----------------------------------------------------------------------
 
-inline boost::math::quaternion<double> quat_rot(const std::string& Rot, 
-			double A1, double A2, double A3, double A4)
+template<class T> inline 
+boost::math::quaternion<T> quat_rot(const std::string& Rot, 
+			const T& A1, const T& A2, const T& A3, const T& A4)
 {
   if(Rot.size() != 4) 
     throw Exception("Rotation string must be 4 characters long");
@@ -157,8 +161,9 @@ inline boost::math::quaternion<double> quat_rot(const std::string& Rot,
 /// the sign of A
 //-----------------------------------------------------------------------
 
-inline boost::math::quaternion<double> quat_rot(const std::string& Rot, 
-		double A1, double A2, double A3, double A4, double A5)
+template<class T> inline 
+boost::math::quaternion<T> quat_rot(const std::string& Rot, 
+		const T& A1, const T& A2, const T& A3, const T& A4, const T& A5)
 {
   if(Rot.size() != 5) 
     throw Exception("Rotation string must be 5 characters long");
@@ -173,8 +178,9 @@ inline boost::math::quaternion<double> quat_rot(const std::string& Rot,
 /// the sign of A
 //-----------------------------------------------------------------------
 
-inline boost::math::quaternion<double> quat_rot(const std::string& Rot, 
-	double A1, double A2, double A3, double A4, double A5, double A6)
+template<class T> inline 
+boost::math::quaternion<T> quat_rot(const std::string& Rot, 
+	const T& A1, const T& A2, const T& A3, const T& A4, const T& A5, const T& A6)
 {
   if(Rot.size() != 6) 
     throw Exception("Rotation string must be 6 characters long");
@@ -190,8 +196,10 @@ inline boost::math::quaternion<double> quat_rot(const std::string& Rot,
 /// the sign of A
 //-----------------------------------------------------------------------
 
-inline boost::math::quaternion<double> quat_rot(const std::string& Rot, 
-double A1, double A2, double A3, double A4, double A5, double A6, double A7)
+template<class T> inline 
+boost::math::quaternion<T> quat_rot(const std::string& Rot, 
+const T& A1, const T& A2, const T& A3, const T& A4, const T& A5, const T& A6, 
+const T& A7)
 {
   if(Rot.size() != 7) 
     throw Exception("Rotation string must be 7 characters long");
@@ -205,16 +213,17 @@ double A1, double A2, double A3, double A4, double A5, double A6, double A7)
 /// beta, delta so quat_rot("zyx", epsilon,beta, delta) = qin.
 //-----------------------------------------------------------------------
 
-inline void quat_to_euler(const boost::math::quaternion<double>& qin,
-			  double& epsilon, double& beta, double& delta)
+template<class T> inline 
+void quat_to_euler(const boost::math::quaternion<T>& qin,
+		   T& epsilon, T& beta, T& delta)
 {
-  double q0 = qin.R_component_1();
-  double q1 = qin.R_component_2();
-  double q2 = qin.R_component_3();
-  double q3 = qin.R_component_4();
-  epsilon = atan2(2 * (q0 * q3 + q1 * q2), 1 - 2 * (q2 * q2 + q3 * q3));
-  beta = asin(2 * (q0 * q2 - q3 * q1));
-  delta = atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2));
+  T q0 = qin.R_component_1();
+  T q1 = qin.R_component_2();
+  T q2 = qin.R_component_3();
+  T q3 = qin.R_component_4();
+  epsilon = std::atan2(2 * (q0 * q3 + q1 * q2), 1 - 2 * (q2 * q2 + q3 * q3));
+  beta = std::asin(2 * (q0 * q2 - q3 * q1));
+  delta = std::atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2));
 }
 
 //-----------------------------------------------------------------------
@@ -222,8 +231,9 @@ inline void quat_to_euler(const boost::math::quaternion<double>& qin,
 /// pitch, roll, so quat_rot("xyz", pitch, roll, yaw) = qin.
 //-----------------------------------------------------------------------
 
-inline void quat_to_ypr(const boost::math::quaternion<double>& qin,
-			double& yaw, double& pitch, double& roll)
+template<class T> inline void 
+quat_to_ypr(const boost::math::quaternion<T>& qin,
+	    T& yaw, T& pitch, T& roll)
 {
   quat_to_euler(conj(qin), yaw, roll, pitch);
   pitch = -pitch;
@@ -238,14 +248,14 @@ inline void quat_to_ypr(const boost::math::quaternion<double>& qin,
 /// the sign of A
 //-----------------------------------------------------------------------
 
-inline blitz::Array<double, 2> 
-quaternion_to_matrix(const boost::math::quaternion<double>& q)
+template<class T> inline blitz::Array<T, 2> 
+quaternion_to_matrix(const boost::math::quaternion<T>& q)
 {
-  double q0 = q.R_component_1();
-  double q1 = q.R_component_2();
-  double q2 = q.R_component_3();
-  double q3 = q.R_component_4();
-  blitz::Array<double, 2> m(3,3);
+  T q0 = q.R_component_1();
+  T q1 = q.R_component_2();
+  T q2 = q.R_component_3();
+  T q3 = q.R_component_4();
+  blitz::Array<T, 2> m(3,3);
   m(0, 0) = q0 * q0 + q1 * q1 - q2 * q2 - q3 * q3;
   m(0, 1) = 2 * (q1 * q2 - q0 * q3);
   m(0, 2) = 2 * (q0 * q2 + q1 * q3);
@@ -263,66 +273,66 @@ quaternion_to_matrix(const boost::math::quaternion<double>& q)
 /// http://www.j3d.org/matrix_faq/matrfaq_latest.html for this algorithm. 
 //-----------------------------------------------------------------------
 
-inline boost::math::quaternion<double> 
-matrix_to_quaternion(const blitz::Array<double, 2>& m)
+template<class T> inline boost::math::quaternion<T> 
+matrix_to_quaternion(const blitz::Array<T, 2>& m)
 {
   if(m.rows() != 3 || m.cols() != 3)
     throw GeoCal::Exception("Matrix must be 3x3");
-  double t = m(0, 0) + m(1, 1) + m(2, 2);
+  T t = m(0, 0) + m(1, 1) + m(2, 2);
   if(t > 1e-8) {
-    double s = sqrt(t + 1) * 2;
-    return boost::math::quaternion<double>(-s / 4.0,
+    T s = std::sqrt(t + 1) * 2;
+    return boost::math::quaternion<T>(-s / 4.0,
 					   -(m(2, 1) - m(1, 2)) / s,
 					   -(m(0, 2) - m(2, 0)) / s,
 					   -(m(1, 0) - m(0, 1)) / s);
   }
   if(m(0, 0) > m(1, 1) && m(0, 0) > m(2, 2)) {
-    double s = sqrt(1.0 + m(0, 0) - m(1, 1) - m(2, 2)) * 2;
-    return boost::math::quaternion<double>(-(m(2, 1) - m(1, 2)) / s,
+    T s = std::sqrt(1.0 + m(0, 0) - m(1, 1) - m(2, 2)) * 2;
+    return boost::math::quaternion<T>(-(m(2, 1) - m(1, 2)) / s,
 					   -s / 4.0,
 					   -(m(0, 1) + m(1, 0)) / s,
 					   -(m(0, 2) + m(2, 0)) / s);
   } else if(m(1, 1) > m(2, 2)) {
-    double s = sqrt(1.0 - m(0, 0) + m(1, 1) - m(2, 2)) * 2;
-    return boost::math::quaternion<double>(-(m(0, 2) - m(2, 0)) / s,
+    T s = std::sqrt(1.0 - m(0, 0) + m(1, 1) - m(2, 2)) * 2;
+    return boost::math::quaternion<T>(-(m(0, 2) - m(2, 0)) / s,
 					   -(m(0, 1) + m(1, 0)) / s,
 					   -s / 4.0,
 					   -(m(1, 2) + m(2, 1)) / s);
   } else {
-    double s = sqrt(1.0 - m(0, 0) - m(1, 1) + m(2, 2)) * 2;
-    return boost::math::quaternion<double>(-(m(1, 0) - m(0, 1)) / s,
+    T s = std::sqrt(1.0 - m(0, 0) - m(1, 1) + m(2, 2)) * 2;
+    return boost::math::quaternion<T>(-(m(1, 0) - m(0, 1)) / s,
 					   -(m(2, 0) + m(0, 2)) / s,
 					   -(m(1, 2) + m(2, 1)) / s,
 					   -s / 4.0);
   }
 }
 
-inline boost::math::quaternion<double> 
-matrix_to_quaternion(const double m[3][3])
+template<class T> inline boost::math::quaternion<T> 
+matrix_to_quaternion(const T m[3][3])
 {
-  double t = m[0][0] + m[1][1] + m[2][2];
+  T t = m[0][0] + m[1][1] + m[2][2];
   if(t > 1e-8) {
-    double s = sqrt(t + 1) * 2;
-    return boost::math::quaternion<double>(-s / 4.0,
+    T s = std::sqrt(t + 1) * 2;
+    return boost::math::quaternion<T>(-s / 4.0,
 					   -(m[2][1] - m[1][2]) / s,
 					   -(m[0][2] - m[2][0]) / s,
 					   -(m[1][0] - m[0][1]) / s);
   }
   if(m[0][0] > m[1][1] && m[0][0] > m[2][2]) {
-    double s = sqrt(1.0 + m[0][0] - m[1][1] - m[2][2]) * 2;
-    return boost::math::quaternion<double>(-(m[2][1] - m[1][2]) / s,
+    T s = std::sqrt(1.0 + m[0][0] - m[1][1] - m[2][2]) * 2;
+    return boost::math::quaternion<T>(-(m[2][1] - m[1][2]) / s,
 					   -s / 4.0,
 					   -(m[0][1] + m[1][0]) / s,
 					   -(m[0][2] + m[2][0]) / s);
   } else if(m[1][1] > m[2][2]) {
-    double s = sqrt(1.0 - m[0][0] + m[1][1] - m[2][2]) * 2;
-    return boost::math::quaternion<double>(-(m[0][2] - m[2][0]) / s,
+    T s = std::sqrt(1.0 - m[0][0] + m[1][1] - m[2][2]) * 2;
+    return boost::math::quaternion<T>(-(m[0][2] - m[2][0]) / s,
 					   -(m[0][1] + m[1][0]) / s,
 					   -s / 4.0,
 					   -(m[1][2] + m[2][1]) / s);
   } else {
-    double s = sqrt(1.0 - m[0][0] - m[1][1] + m[2][2]) * 2;
-    return boost::math::quaternion<double>(-(m[1][0] - m[0][1]) / s,
+    T s = std::sqrt(1.0 - m[0][0] - m[1][1] + m[2][2]) * 2;
+    return boost::math::quaternion<T>(-(m[1][0] - m[0][1]) / s,
 					   -(m[2][0] + m[0][2]) / s,
 					   -(m[1][2] + m[2][1]) / s,
 					   -s / 4.0);

@@ -120,8 +120,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.image_ground_connection
 import geocal_swig.generic_object
+import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
-import geocal_swig.look_vector
 class MapInfoImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
     """
     This class creates an ImageGroundConnection that simply maps map

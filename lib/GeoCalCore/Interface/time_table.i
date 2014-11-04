@@ -21,8 +21,15 @@ public:
   TimeTable();
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
     const = 0;
+  virtual ImageCoordinateWithDerivative 
+  image_coordinate_with_derivative(const TimeWithDerivative T, 
+				   const FrameCoordinateWithDerivative& F)
+    const;
   virtual void time(const ImageCoordinate& Ic, Time &OUTPUT, 
 		    FrameCoordinate &OUTPUT) const;
+  virtual void time_with_derivative(const ImageCoordinateWithDerivative& Ic, 
+			    TimeWithDerivative &OUTPUT, 
+			    FrameCoordinateWithDerivative &OUTPUT) const;
   %python_attribute(min_line, virtual int)
   %python_attribute(max_line, virtual int)
   %python_attribute(min_time, virtual Time)

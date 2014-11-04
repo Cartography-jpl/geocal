@@ -119,7 +119,6 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 class RasterImageMultiBand(geocal_swig.generic_object.GenericObject):
     """
     This is a set of RasterImages, one for each band.

@@ -31,6 +31,10 @@ Options:
        This should be in a "file:key" format. This might be useful if
        you use further options such as --subset.
 
+  --force-map-info=f
+        Force the given mapinfo to be applied to the image. Only works
+        for VICAR files.
+
   --multi-band
         Specify this is the image is actually multiple bands.  
 
@@ -59,7 +63,11 @@ elif(args.multi_band):
     else:
         img = GdalMultiBand(args.image)
 elif VicarLiteFile.is_vicar_file(args.image):
-    img = VicarLiteRasterImage(args.image, args.band)
+    if(args.force_map_info):
+        mi = read_shelve(args.force_map_info)
+        img = VicarLiteRasterImage(args.image, mi, args.band)
+    else:
+        img = VicarLiteRasterImage(args.image, args.band)
 else:
     img = GdalRasterImage(args.image, args.band)
 if(args.start_line):

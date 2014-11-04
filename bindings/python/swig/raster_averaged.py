@@ -122,12 +122,12 @@ import geocal_swig.calc_raster
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 import geocal_swig.calc_raster_multi_band
 import geocal_swig.raster_image_multi_band_variable
 import geocal_swig.raster_image_multi_band
 import geocal_swig.image_mask
 import geocal_swig.image_ground_connection
+import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
 class RasterAveraged(geocal_swig.calc_raster.CalcRaster):
     """

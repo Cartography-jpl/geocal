@@ -120,7 +120,6 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.image_matcher
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 class PyramidImageMatcher(geocal_swig.image_matcher.ImageMatcher):
     """
     This takes an existing ImageMatcher, and it uses it on images in a

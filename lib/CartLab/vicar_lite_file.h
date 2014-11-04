@@ -644,7 +644,9 @@ public:
 		       int Number_tile_line = -1,
 		       int Number_tile_sample = -1,
 		       bool Force_area_pixel = false)
-    : band_(Band_id - 1), f_(new VicarLiteFile(Fname, Access, Force_area_pixel))
+    : band_(Band_id - 1), 
+      f_(new VicarLiteFile(Fname, Access, Force_area_pixel)),
+      force_map_info_(false)
   {
     range_check(band_, 0, f_->number_band());
     number_line_ = f_->number_line();
@@ -659,6 +661,37 @@ public:
       rpc_.reset(new Rpc(f_->rpc()));
     if(f_->has_map_info())
       map_info_.reset(new MapInfo(f_->map_info()));
+  }
+
+//-----------------------------------------------------------------------
+/// Constructor. We force the given map info to apply to the image.
+/// This is a workaround for pickling mapinfo that VICAR doesn't
+/// support yet.
+//-----------------------------------------------------------------------
+
+  VicarLiteRasterImage(const std::string& Fname, 
+		       const MapInfo& Mi,
+		       int Band_id = 1,
+		       access_type Access = VicarLiteFile::READ,
+		       int Number_tile_line = -1,
+		       int Number_tile_sample = -1,
+		       bool Force_area_pixel = false)
+    : band_(Band_id - 1), 
+      f_(new VicarLiteFile(Fname, Access, Force_area_pixel)),
+      force_map_info_(true)
+  {
+    range_check(band_, 0, f_->number_band());
+    number_line_ = f_->number_line();
+    number_sample_ = f_->number_sample();
+    number_tile_line_ = Number_tile_line;
+    number_tile_sample_ = Number_tile_sample;
+    if(number_tile_line_ < 0)
+      number_tile_line_ = number_line_;
+    if(number_tile_sample_ < 0)
+      number_tile_sample_ = number_sample_;
+    if(f_->has_rpc())
+      rpc_.reset(new Rpc(f_->rpc()));
+    map_info_.reset(new MapInfo(Mi));
   }
   virtual ~VicarLiteRasterImage() {}
 
@@ -675,6 +708,13 @@ public:
   VicarLiteFile& file() { return *f_; }
 
   boost::shared_ptr<VicarLiteFile> file_ptr() const { return f_;}
+
+//-----------------------------------------------------------------------
+/// Marker to force a map_info in python pickle. This is a work around
+/// for map info that VICAR doesn't support writing.
+//-----------------------------------------------------------------------
+  
+  bool force_map_info() const { return force_map_info_;}
 
 //-----------------------------------------------------------------------
 /// Return pixel value at given line and sample.
@@ -749,6 +789,7 @@ public:
 private:
   int band_;
   boost::shared_ptr<VicarLiteFile> f_;
+  bool force_map_info_;
 };
 
 /****************************************************************//**

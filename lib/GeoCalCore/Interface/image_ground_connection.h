@@ -4,12 +4,12 @@
 #include "dem.h"
 #include "image_coordinate.h"
 #include "printable.h"
-#include "ecr.h"
 #include "raster_image.h"
 #include "raster_image_multi_band.h"
 #include "raster_image_multi_band_variable.h"
 #include "ground_mask.h"
 #include "image_mask.h"
+#include "with_parameter.h"
 #include <blitz/array.h>
 
 namespace GeoCal {
@@ -54,7 +54,8 @@ public:
 
 *******************************************************************/
 
-class ImageGroundConnection : public Printable<ImageGroundConnection> {
+class ImageGroundConnection : public Printable<ImageGroundConnection>,
+			      public virtual WithParameter {
 public:
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -66,12 +67,40 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return an array of look vector information. This is really
-/// intended for use with python. This is nline x nsamp x 2 x 3 in
-/// size, where we give the position first followed by the look vector.
+/// intended for use with ray casting or with python, where calling
+/// cf_look_vector repeatedly is costly.
+/// This is nline x nsamp x x nsub_line x nsub_sample x
+/// nintegration_step x 2 x 3 in size, where we give the position first
+/// followed by the look vector. 
+///
+/// In general, the number of integration steps doesn't have any
+/// meaning and we just repeat the data if the number of integration
+/// steps is something other than 1. But for certain
+/// ImageGroundConnection, this may have meaning (e.g., anything where 
+/// we have a camera and orbit data).
+///
+/// The default implementation just calls cf_look_vector repeatedly,
+/// but a derived class can make any kind of optimization that is
+/// appropriate.
+///
+/// Note a subtle difference between this and ground_coordinate. A
+/// camera may have a footprint that overlaps from one line to the
+/// next. For example, MISR has a pixel spacing of 275 meter, but the
+/// footprint may be as much as 700 meter on the ground (for D camera
+/// in line direction). The cf_look_vector_arr with the subpixels
+/// refer to the actual camera, i.e., the 750 meter footprint. This
+/// means that in general the results of calling ground_coordinate
+/// (which corresponds to the 275 meter pixel spacing) won't match the
+/// location you get from cf_look_vector_arr. This is intended, not a
+/// bug, and simple reflects that we are talking about 2 different
+/// things here.
 //-----------------------------------------------------------------------
 
-  blitz::Array<double, 4> cf_look_vector_arr(int ln_start, int smp_start, 
-					     int nline, int nsamp) const;
+  virtual blitz::Array<double, 7> 
+  cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
+		     int nsubpixel_line = 1, 
+		     int nsubpixel_sample = 1,
+		     int nintegration_step = 1) const;
 
 //-----------------------------------------------------------------------
 /// Return look vector for given coordinate, along with a position
@@ -204,7 +233,7 @@ public:
 ///
 /// For some types of ImageGroundConnection, we might not be able to
 /// calculate image_coordinate for all values (e.g., Ipi might fail).
-/// In those cases, we will through a ImageGroundConnectionFailed
+/// In those cases, we will throw a ImageGroundConnectionFailed
 /// exception. This means that nothing is wrong, other than that we
 /// can't calculate the image_coordinate. Callers can catch this
 /// exception if they have some way of handling no image coordinate
@@ -213,7 +242,7 @@ public:
 
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const = 0;
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) 
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
 
 //-----------------------------------------------------------------------
@@ -267,36 +296,6 @@ public:
   }
 
 //-----------------------------------------------------------------------
-/// A image to ground connection may depend on a set of parameters,
-/// which can by modified (e.g., during a simultaneous bundle
-/// adjustment). This returns those parameters.
-//-----------------------------------------------------------------------
-
-  virtual blitz::Array<double, 1> parameter() const
-  { // Default is no parameters.
-    return blitz::Array<double, 1>(0); 
-  }
-
-//-----------------------------------------------------------------------
-/// Set the value of the parameters.
-//-----------------------------------------------------------------------
-
-  virtual void parameter(const blitz::Array<double, 1>& Parm)
-  {
-    // Default is do nothing
-  }
-
-//-----------------------------------------------------------------------
-/// Descriptive name of each parameter.
-//-----------------------------------------------------------------------
-
-  virtual std::vector<std::string> parameter_name() const
-  {
-    std::vector<std::string> res;
-    return res;
-  }
-
-//-----------------------------------------------------------------------
 /// Print to stream.
 //-----------------------------------------------------------------------
 
@@ -305,6 +304,11 @@ public:
 
   virtual double resolution_meter(const ImageCoordinate& Ic) const;
   virtual double resolution_meter() const;
+
+  virtual void footprint_resolution(int Line, int Sample, 
+				    double &Line_resolution_meter, 
+				    double &Sample_resolution_meter);
+
 
 //-----------------------------------------------------------------------
 /// DEM used by ground_coordinate.
@@ -324,6 +328,30 @@ public:
 
   const Dem& dem() const { return *dem_;}
 
+//-----------------------------------------------------------------------
+/// Default is that ImageGroundConnection ignores AutoDerivative
+/// information in the parameters. Derived classes can override this
+/// if they support this. This should mostly be an internal matter,
+/// the derived class can use the AutoDerivative in its implementation
+/// of image_coordinate_jac_parm, but it can also do this calculation
+/// in another manner if desired.
+//-----------------------------------------------------------------------
+
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return ArrayAd<double, 1>(parameter()); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& P) 
+  { parameter(P.value()); }
+
+//-----------------------------------------------------------------------
+/// Default is no parameters.
+//-----------------------------------------------------------------------
+  virtual blitz::Array<double, 1> parameter() const
+  { return blitz::Array<double, 1>(); }
+  virtual void parameter(const blitz::Array<double, 1>& P)
+  { 
+    if(P.rows() != 0)
+      throw Exception("No parameters supported");
+  }
 protected:
 //-----------------------------------------------------------------------
 /// Constructor. As a convenience, if Img_mask or Ground_mask are null
@@ -403,7 +431,8 @@ public:
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
 		 boost::shared_ptr<CartesianFixed>& P) const
   {
-    ImageCoordinate ic2(Ic.line - line_offset_, Ic.sample - sample_offset_);
+    ImageCoordinate ic2(Ic.line - line_offset_.value(), 
+			Ic.sample - sample_offset_.value());
     ig_->cf_look_vector(ic2, Lv, P);
   }
 
@@ -413,13 +442,15 @@ public:
 
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const
-  { ImageCoordinate ic2(Ic.line - line_offset_, Ic.sample - sample_offset_);
+  { ImageCoordinate ic2(Ic.line - line_offset_.value(), 
+			Ic.sample - sample_offset_.value());
     return ig_->ground_coordinate_dem(ic2, D); 
   }
 
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
-  { ImageCoordinate ic2(Ic.line - line_offset_, Ic.sample - sample_offset_);
+  { ImageCoordinate ic2(Ic.line - line_offset_.value(), 
+			Ic.sample - sample_offset_.value());
     return ig_->ground_coordinate_approx_height(ic2, H); 
   }
 
@@ -430,18 +461,21 @@ public:
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const
   {
     ImageCoordinate ic = ig_->image_coordinate(Gc);
-    ic.line += line_offset_;
-    ic.sample += sample_offset_;
+    ic.line += line_offset_.value();
+    ic.sample += sample_offset_.value();
     return ic;
   }
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) const
-  { return ig_->image_coordinate_jac_ecr(Gc); }
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const
+  { return ig_->image_coordinate_jac_cf(Gc); }
 
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   virtual blitz::Array<double, 1> parameter() const;
+  virtual ArrayAd<double, 1> parameter_with_derivative() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
+  virtual blitz::Array<bool, 1> parameter_mask() const;
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -450,8 +484,8 @@ public:
   virtual void print(std::ostream& Os) const
   { 
     Os << "OffsetImageGroundConnection\n"
-       << "  Line offset:   " << line_offset_ << "\n"
-       << "  Sample offset: " << sample_offset_ << "\n"
+       << "  Line offset:   " << line_offset_.value() << "\n"
+       << "  Sample offset: " << sample_offset_.value() << "\n"
        << "  Original ImageGroundConnection:\n"
        << *ig_ << "\n";
   }
@@ -467,17 +501,17 @@ public:
 /// Return line offset.
 //-----------------------------------------------------------------------
 
-  double line_offset() const { return line_offset_;}
+  double line_offset() const { return line_offset_.value();}
 
 //-----------------------------------------------------------------------
 /// Return sample offset.
 //-----------------------------------------------------------------------
 
-  double sample_offset() const { return sample_offset_;}
+  double sample_offset() const { return sample_offset_.value();}
 private:
   boost::shared_ptr<ImageGroundConnection> ig_;
-  double line_offset_;
-  double sample_offset_;
+  AutoDerivative<double> line_offset_;
+  AutoDerivative<double> sample_offset_;
 };
 
 /****************************************************************//**
@@ -535,8 +569,8 @@ public:
   { return igc; }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const { return igc->image_coordinate(Gc); }
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) 
-    const { return igc->image_coordinate_jac_ecr(Gc); }
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
+    const { return igc->image_coordinate_jac_cf(Gc); }
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const
   { return igc->image_coordinate_jac_parm(Gc); }
@@ -544,8 +578,14 @@ public:
   { return igc->parameter(); }
   virtual void parameter(const blitz::Array<double, 1>& Parm)
   { igc->parameter(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return igc->parameter_with_derivative(); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  { return igc->parameter_with_derivative(Parm); }
   virtual std::vector<std::string> parameter_name() const
   { return igc->parameter_name(); }
+  virtual blitz::Array<bool, 1> parameter_mask() const
+  { return igc->parameter_mask(); }
   virtual void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<ImageGroundConnection> igc;

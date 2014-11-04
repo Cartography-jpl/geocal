@@ -120,6 +120,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.orbit
 import geocal_swig.generic_object
+import geocal_swig.observer
+import geocal_swig.with_parameter
 class AircraftOrbitData(geocal_swig.orbit.QuaternionOrbitData):
     """
     This is a single navigation file record for aircraft data.

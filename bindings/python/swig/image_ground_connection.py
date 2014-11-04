@@ -119,8 +119,8 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
+import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
-import geocal_swig.look_vector
 class ImageGroundConnectionFailed(geocal_swig.geocal_exception.Exception):
     """
     Exception thrown if ImageGroundConnection fails to calculate a image
@@ -142,7 +142,7 @@ class ImageGroundConnectionFailed(geocal_swig.geocal_exception.Exception):
 ImageGroundConnectionFailed_swigregister = _image_ground_connection.ImageGroundConnectionFailed_swigregister
 ImageGroundConnectionFailed_swigregister(ImageGroundConnectionFailed)
 
-class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
+class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     """
     Depending on the the data we are using, we may connect a location in
     an image to a ground location in one of several ways.
@@ -215,7 +215,7 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
         coordinate (to igc.image_coordinate(res) = Ic up to roundoff errors),
         but it is approximate in the sense that the height might not be
         exactly the supplied height. This is similar to
-        Ecr::reference_surface_intersect_approximate. A particular
+        CartesianFixed::reference_surface_intersect_approximate. A particular
         implementation can be much faster than ground_coordinate_dem, since it
         doesn't need to do ray tracing. 
         """
@@ -228,20 +228,20 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
 
         For some types of ImageGroundConnection, we might not be able to
         calculate image_coordinate for all values (e.g., Ipi might fail). In
-        those cases, we will through a ImageGroundConnectionFailed exception.
+        those cases, we will throw a ImageGroundConnectionFailed exception.
         This means that nothing is wrong, other than that we can't calculate
         the image_coordinate. Callers can catch this exception if they have
         some way of handling no image coordinate data. 
         """
         return _image_ground_connection.ImageGroundConnection_image_coordinate(self, *args)
 
-    def image_coordinate_jac_ecr(self, *args):
+    def image_coordinate_jac_cf(self, *args):
         """
-        blitz::Array< double, 2 > ImageGroundConnection::image_coordinate_jac_ecr(const Ecr &Gc) const
+        blitz::Array< double, 2 > ImageGroundConnection::image_coordinate_jac_cf(const CartesianFixed &Gc) const
         Return the Jacobian of the image coordinates with respect to the X, Y,
-        and Z components of the Ecr ground location. 
+        and Z components of the CartesianFixed ground location. 
         """
-        return _image_ground_connection.ImageGroundConnection_image_coordinate_jac_ecr(self, *args)
+        return _image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf(self, *args)
 
     def image_coordinate_jac_parm(self, *args):
         """
@@ -386,10 +386,18 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
     def has_time(self):
         return self._v_has_time()
 
+    def resolution_meter(self, *args):
+        """
+        double ImageGroundConnection::resolution_meter() const
+        Variation of resolution_meter that find the resolution of the center
+        pixel. 
+        """
+        return _image_ground_connection.ImageGroundConnection_resolution_meter(self, *args)
+
     def _v_parameter(self, *args):
         """
-        virtual void GeoCal::ImageGroundConnection::parameter(const blitz::Array< double, 1 > &Parm)
-        Set the value of the parameters. 
+        virtual void GeoCal::ImageGroundConnection::parameter(const blitz::Array< double, 1 > &P)
+
         """
         return _image_ground_connection.ImageGroundConnection__v_parameter(self, *args)
 
@@ -401,29 +409,80 @@ class ImageGroundConnection(geocal_swig.generic_object.GenericObject):
     def parameter(self, value):
       self._v_parameter(value)
 
-    def _v_parameter_name(self):
+    def _v_parameter_with_derivative(self, *args):
         """
-        virtual std::vector<std::string> GeoCal::ImageGroundConnection::parameter_name() const
-        Descriptive name of each parameter. 
+        virtual void GeoCal::ImageGroundConnection::parameter_with_derivative(const ArrayAd< double, 1 > &P)
+
         """
-        return _image_ground_connection.ImageGroundConnection__v_parameter_name(self)
+        return _image_ground_connection.ImageGroundConnection__v_parameter_with_derivative(self, *args)
+
+    @property
+    def parameter_with_derivative(self):
+        return self._v_parameter_with_derivative()
+
+    @parameter_with_derivative.setter
+    def parameter_with_derivative(self, value):
+      self._v_parameter_with_derivative(value)
 
     @property
     def parameter_name(self):
         return self._v_parameter_name()
 
-    def resolution_meter(self, *args):
-        """
-        double ImageGroundConnection::resolution_meter() const
-        Variation of resolution_meter that find the resolution of the center
-        pixel. 
-        """
-        return _image_ground_connection.ImageGroundConnection_resolution_meter(self, *args)
+    @property
+    def parameter_subset(self):
+        return self._v_parameter_subset()
+
+    @parameter_subset.setter
+    def parameter_subset(self, value):
+      self._v_parameter_subset(value)
+
+    @property
+    def parameter_with_derivative_subset(self):
+        return self._v_parameter_with_derivative_subset()
+
+    @parameter_with_derivative_subset.setter
+    def parameter_with_derivative_subset(self, value):
+      self._v_parameter_with_derivative_subset(value)
+
+    @property
+    def parameter_name_subset(self):
+        return self._v_parameter_name_subset()
+
+    @property
+    def parameter_mask(self):
+        return self._v_parameter_mask()
 
     def cf_look_vector_arr(self, *args):
         """
-        blitz::Array< double, 4 > ImageGroundConnection::cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp) const
+        blitz::Array< double, 7 > ImageGroundConnection::cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp, int
+        nsubpixel_line=1, int nsubpixel_sample=1, int nintegration_step=1)
+        const
         Return an array of look vector information.
+
+        This is really intended for use with ray casting or with python, where
+        calling cf_look_vector repeatedly is costly. This is nline x nsamp x x
+        nsub_line x nsub_sample x nintegration_step x 2 x 3 in size, where we
+        give the position first followed by the look vector.
+
+        In general, the number of integration steps doesn't have any meaning
+        and we just repeat the data if the number of integration steps is
+        something other than 1. But for certain ImageGroundConnection, this
+        may have meaning (e.g., anything where we have a camera and orbit
+        data).
+
+        The default implementation just calls cf_look_vector repeatedly, but a
+        derived class can make any kind of optimization that is appropriate.
+
+        Note a subtle difference between this and ground_coordinate. A camera
+        may have a footprint that overlaps from one line to the next. For
+        example, MISR has a pixel spacing of 275 meter, but the footprint may
+        be as much as 700 meter on the ground (for D camera in line
+        direction). The cf_look_vector_arr with the subpixels refer to the
+        actual camera, i.e., the 750 meter footprint. This means that in
+        general the results of calling ground_coordinate (which corresponds to
+        the 275 meter pixel spacing) won't match the location you get from
+        cf_look_vector_arr. This is intended, not a bug, and simple reflects
+        that we are talking about 2 different things here.
 
         This is really intended for use with python. This is nline x nsamp x 2
         x 3 in size, where we give the position first followed by the look
@@ -475,7 +534,7 @@ ImageGroundConnection.__ground_coordinate = new_instancemethod(_image_ground_con
 ImageGroundConnection.ground_coordinate_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_dem,None,ImageGroundConnection)
 ImageGroundConnection.ground_coordinate_approx_height = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_approx_height,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate,None,ImageGroundConnection)
-ImageGroundConnection.image_coordinate_jac_ecr = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_ecr,None,ImageGroundConnection)
+ImageGroundConnection.image_coordinate_jac_cf = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm,None,ImageGroundConnection)
 ImageGroundConnection.cover = new_instancemethod(_image_ground_connection.ImageGroundConnection_cover,None,ImageGroundConnection)
 ImageGroundConnection._v_image = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image,None,ImageGroundConnection)
@@ -488,9 +547,14 @@ ImageGroundConnection._v_number_band = new_instancemethod(_image_ground_connecti
 ImageGroundConnection._v_title = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_title,None,ImageGroundConnection)
 ImageGroundConnection._v_has_time = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_has_time,None,ImageGroundConnection)
 ImageGroundConnection.__str__ = new_instancemethod(_image_ground_connection.ImageGroundConnection___str__,None,ImageGroundConnection)
-ImageGroundConnection._v_parameter = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter,None,ImageGroundConnection)
-ImageGroundConnection._v_parameter_name = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_name,None,ImageGroundConnection)
 ImageGroundConnection.resolution_meter = new_instancemethod(_image_ground_connection.ImageGroundConnection_resolution_meter,None,ImageGroundConnection)
+ImageGroundConnection._v_parameter = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter,None,ImageGroundConnection)
+ImageGroundConnection._v_parameter_with_derivative = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_with_derivative,None,ImageGroundConnection)
+ImageGroundConnection._v_parameter_name = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_name,None,ImageGroundConnection)
+ImageGroundConnection._v_parameter_subset = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_subset,None,ImageGroundConnection)
+ImageGroundConnection._v_parameter_with_derivative_subset = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_with_derivative_subset,None,ImageGroundConnection)
+ImageGroundConnection._v_parameter_name_subset = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_name_subset,None,ImageGroundConnection)
+ImageGroundConnection._v_parameter_mask = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_mask,None,ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_arr = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_arr,None,ImageGroundConnection)
 ImageGroundConnection._v_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_dem,None,ImageGroundConnection)
 ImageGroundConnection.__dem = new_instancemethod(_image_ground_connection.ImageGroundConnection___dem,None,ImageGroundConnection)

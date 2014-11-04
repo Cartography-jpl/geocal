@@ -33,11 +33,13 @@ void RasterMultifile::read_ptr(int Lstart, int Sstart, int Number_line,
 RasterMultifileTile& RasterMultifile::swap(int Line, 
 						       int Sample) const
 {
-  range_check(Line, 0, number_line());
-  range_check(Sample, 0, number_sample());
   BOOST_FOREACH(RasterMultifileTile& mt, tile)
     if(mt.in_tile(Line, Sample))
       return mt;
+  // Avoid range check unless we need to get a new file, since in_tile
+  // works fine with out of range data (just returning false)
+  range_check(Line, 0, number_line());
+  range_check(Sample, 0, number_sample());
   mt_scratch = get_file(Line, Sample);
   if(mt_scratch.data.get()) {
     *next_swap = mt_scratch;

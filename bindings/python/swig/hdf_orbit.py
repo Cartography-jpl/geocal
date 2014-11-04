@@ -120,6 +120,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.orbit
 import geocal_swig.generic_object
+import geocal_swig.observer
+import geocal_swig.with_parameter
 class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit.Orbit):
     """
     This is an implementation of an Orbit that reads position, velocity,
@@ -156,6 +158,13 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit.Orbit):
         "/Orbit" 
         """
         _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swiginit(self,_hdf_orbit.new_HdfOrbit_EciTod_TimeAcs(*args))
+    def orbit_data(self, *args):
+        """
+        boost::shared_ptr< OrbitData > GeoCal::HdfOrbit< PositionType, TimeCreatorType >::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _hdf_orbit.HdfOrbit_EciTod_TimeAcs_orbit_data(self, *args)
+
     def _v_file_name(self):
         """
         const std::string& GeoCal::HdfOrbit< PositionType, TimeCreatorType >::file_name() const
@@ -186,6 +195,7 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit.Orbit):
       return _new_from_init, (self.__class__, 1, self.file_name,self.base_group)
 
     __swig_destroy__ = _hdf_orbit.delete_HdfOrbit_EciTod_TimeAcs
+HdfOrbit_EciTod_TimeAcs.orbit_data = new_instancemethod(_hdf_orbit.HdfOrbit_EciTod_TimeAcs_orbit_data,None,HdfOrbit_EciTod_TimeAcs)
 HdfOrbit_EciTod_TimeAcs._v_file_name = new_instancemethod(_hdf_orbit.HdfOrbit_EciTod_TimeAcs__v_file_name,None,HdfOrbit_EciTod_TimeAcs)
 HdfOrbit_EciTod_TimeAcs._v_base_group = new_instancemethod(_hdf_orbit.HdfOrbit_EciTod_TimeAcs__v_base_group,None,HdfOrbit_EciTod_TimeAcs)
 HdfOrbit_EciTod_TimeAcs_swigregister = _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swigregister

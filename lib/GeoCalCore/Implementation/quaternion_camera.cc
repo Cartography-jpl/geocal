@@ -1,4 +1,5 @@
 #include "quaternion_camera.h"
+#include <boost/lexical_cast.hpp>
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
@@ -22,6 +23,16 @@ void QuaternionCamera::dcs_to_focal_plane
   Yfp = focal_length() * (Dcs.R_component_3() / Dcs.R_component_4());
 }
 
+void QuaternionCamera::dcs_to_focal_plane
+(int Band, const boost::math::quaternion<AutoDerivative<double> >& Dcs,
+ AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const
+{
+  Xfp = focal_length_with_derivative() * 
+    (Dcs.R_component_2() / Dcs.R_component_4());
+  Yfp = focal_length_with_derivative() * 
+    (Dcs.R_component_3() / Dcs.R_component_4());
+}
+
 //-----------------------------------------------------------------------
 /// Go from X and Y coordinates in the focal plane to a look vector in
 /// the detector coordinate system to.  X and Y are given in
@@ -32,9 +43,18 @@ void QuaternionCamera::dcs_to_focal_plane
 //-----------------------------------------------------------------------
 
 boost::math::quaternion<double> 
-QuaternionCamera::focal_plane_to_dcs(int Band, double& Xfp, double& Yfp) const
+QuaternionCamera::focal_plane_to_dcs(int Band, double Xfp, double Yfp) const
 {
   return boost::math::quaternion<double>(0, Xfp, Yfp, focal_length());
+}
+
+boost::math::quaternion<AutoDerivative<double>  >
+QuaternionCamera::focal_plane_to_dcs
+(int Band,const AutoDerivative<double>& Xfp, 
+ const AutoDerivative<double>& Yfp) const
+{
+  return boost::math::quaternion<AutoDerivative<double> >(0, Xfp, Yfp, 
+				  focal_length_with_derivative());
 }
 
 //-----------------------------------------------------------------------
@@ -52,7 +72,7 @@ FrameCoordinate QuaternionCamera::frame_coordinate(const ScLookVector& Sl,
 
   // Just reverse of sc_look_vector.
   boost::math::quaternion<double> dcs = 
-    conj(frame_to_sc_) * Sl.look_quaternion() * frame_to_sc_;
+    conj(frame_to_sc()) * Sl.look_quaternion() * frame_to_sc();
   double xfp, yfp;
   dcs_to_focal_plane(Band, dcs, xfp, yfp);
   FrameCoordinate fc;
@@ -66,6 +86,33 @@ FrameCoordinate QuaternionCamera::frame_coordinate(const ScLookVector& Sl,
       yfp / sample_pitch() * samp_dir();
     fc.line = principal_point(Band).line +
       xfp / line_pitch() * line_dir();
+  }
+  return fc;
+}
+
+FrameCoordinateWithDerivative QuaternionCamera::frame_coordinate_with_derivative
+(const ScLookVectorWithDerivative& Sl, 
+ int Band) const
+{
+  range_check(Band, 0, number_band());
+
+  // Just reverse of sc_look_vector.
+  boost::math::quaternion<AutoDerivative<double> > dcs = 
+    conj(frame_to_sc_with_derivative()) * Sl.look_quaternion() * 
+    frame_to_sc_with_derivative();
+  AutoDerivative<double> xfp, yfp;
+  dcs_to_focal_plane(Band, dcs, xfp, yfp);
+  FrameCoordinateWithDerivative fc;
+  if(frame_convention_ == LINE_IS_Y) {
+    fc.sample = principal_point_with_derivative(Band).sample + 
+      xfp / sample_pitch_with_derivative() * samp_dir();
+    fc.line = principal_point_with_derivative(Band).line +
+      yfp / line_pitch_with_derivative() * line_dir();
+  } else {
+    fc.sample = principal_point_with_derivative(Band).sample +
+      yfp / sample_pitch_with_derivative() * samp_dir();
+    fc.line = principal_point_with_derivative(Band).line +
+      xfp / line_pitch_with_derivative() * line_dir();
   }
   return fc;
 }
@@ -97,6 +144,26 @@ DcsLookVector QuaternionCamera::dcs_look_vector(const FrameCoordinate& F,
   return DcsLookVector(focal_plane_to_dcs(Band, xfp, yfp));
 }
 
+DcsLookVectorWithDerivative 
+QuaternionCamera::dcs_look_vector(const FrameCoordinateWithDerivative& F, 
+				  int Band) const
+{
+  range_check(Band, 0, number_band());
+  AutoDerivative<double> xfp, yfp;
+  if(frame_convention_ == LINE_IS_Y) {
+    xfp = (F.sample - principal_point_with_derivative(Band).sample) * 
+      sample_pitch_with_derivative() * samp_dir();
+    yfp = (F.line - principal_point_with_derivative(Band).line) * 
+      line_pitch_with_derivative() * line_dir();
+  } else {
+    yfp = (F.sample - principal_point_with_derivative(Band).sample) * 
+      sample_pitch_with_derivative() * samp_dir();
+    xfp = (F.line - principal_point_with_derivative(Band).line) * 
+      line_pitch_with_derivative() * line_dir();
+  }
+  return DcsLookVectorWithDerivative(focal_plane_to_dcs(Band, xfp, yfp));
+}
+
 //-----------------------------------------------------------------------
 /// Convert from FrameCoordinate to ScLookVector. It is perfectly
 /// allowable for F.line to be outside the range (0, number_line(band)
@@ -108,9 +175,18 @@ DcsLookVector QuaternionCamera::dcs_look_vector(const FrameCoordinate& F,
 ScLookVector QuaternionCamera::sc_look_vector(const FrameCoordinate& F, 
 					      int Band) const
 {
-  return ScLookVector(frame_to_sc_ * 
+  return ScLookVector(frame_to_sc() * 
 		      dcs_look_vector(F, Band).look_quaternion() *
-		      conj(frame_to_sc_));
+		      conj(frame_to_sc()));
+}
+
+ScLookVectorWithDerivative QuaternionCamera::sc_look_vector_with_derivative
+(const FrameCoordinateWithDerivative& F, 
+ int Band) const
+{
+  return ScLookVectorWithDerivative(frame_to_sc_with_derivative() * 
+		      dcs_look_vector(F, Band).look_quaternion() *
+		      conj(frame_to_sc_with_derivative()));
 }
 
 //-----------------------------------------------------------------------
@@ -129,5 +205,84 @@ void QuaternionCamera::print(std::ostream& Os) const
      << "   Frame convention: " << (frame_convention() == LINE_IS_X ?
 				    "LINE_IS_X\n" : "LINE_IS_Y\n")
      << "   Frame to spacecraft: " << frame_to_sc() << "\n";
+}
+
+//-----------------------------------------------------------------------
+/// Set parameter. Right now this is Euler epsilon, beta, delta, line
+/// pitch, sample pitch. We may well want to play with this in the
+/// future, turning individual things on an off. But for now we'll just
+/// have the set of values we've found useful to fit for.
+//-----------------------------------------------------------------------
+
+void QuaternionCamera::parameter(const blitz::Array<double, 1>& Parm)
+{
+  if(Parm.rows() != 6 + 2 * number_band())
+    throw Exception("Wrong sized parameter passed.");
+  line_pitch_ = Parm(3);
+  sample_pitch_ = Parm(4);
+  focal_length_ = Parm(5);
+  for(int b = 0; b < number_band(); ++b)
+    principal_point(b, FrameCoordinate(Parm(6 + b * 2), Parm(7 + b * 2)));
+  // euler calls notify_update(), so we don't need to do that.
+  euler(Parm(blitz::Range(0,2)));
+}
+
+void QuaternionCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+{
+  if(Parm.rows() != 8)
+    throw Exception("Wrong sized parameter passed.");
+  line_pitch_ = Parm(3);
+  sample_pitch_ = Parm(4);
+  focal_length_ = Parm(5);
+  for(int b = 0; b < number_band(); ++b)
+    principal_point_with_derivative(b, FrameCoordinateWithDerivative(Parm(6 + b * 2), Parm(7 + b * 2)));
+  // euler calls notify_update(), so we don't need to do that.
+  euler_with_derivative(Parm(blitz::Range(0,2)));
+}
+
+blitz::Array<double, 1> QuaternionCamera::parameter() const
+{
+  blitz::Array<double, 1> res(6 + 2 * number_band());
+  res(blitz::Range(0,2)) = euler();
+  res(3) = line_pitch();
+  res(4) = sample_pitch();
+  res(5) = focal_length();
+  for(int b = 0; b < number_band(); ++b) {
+    res(6 + b * 2) = principal_point(b).line;
+    res(7 + b * 2) = principal_point(b).sample;
+  }
+  return res;
+}
+
+ArrayAd<double, 1> QuaternionCamera::parameter_with_derivative() const
+{
+  blitz::Array<AutoDerivative<double>, 1> res(8);
+  res(blitz::Range(0,2)) = euler_with_derivative();
+  res(3) = line_pitch_with_derivative();
+  res(4) = sample_pitch_with_derivative();
+  res(5) = focal_length_with_derivative();
+  for(int b = 0; b < number_band(); ++b) {
+    res(6 + b * 2) = principal_point_with_derivative(b).line;
+    res(7 + b * 2) = principal_point_with_derivative(b).sample;
+  }
+  return ArrayAd<double, 1>(res);
+}
+
+std::vector<std::string> QuaternionCamera::parameter_name() const
+{
+  std::vector<std::string> res;
+  res.push_back("Camera Euler Epsilon");
+  res.push_back("Camera Euler Beta");
+  res.push_back("Camera Euler Delta");
+  res.push_back("Camera line pitch");
+  res.push_back("Camera sample pitch");
+  res.push_back("Camera focal length");
+  for(int b = 0; b < number_band(); ++b) {
+    res.push_back("Camera band " + boost::lexical_cast<std::string>(b) +
+		  " principal point line");
+    res.push_back("Camera band " + boost::lexical_cast<std::string>(b) +
+		  " principal point sample");
+  }
+  return res;
 }
 

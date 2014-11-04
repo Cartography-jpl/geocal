@@ -42,6 +42,8 @@ public:
   QuickBirdOrbit(const std::string& Ephemeris_file,
 		 const std::string& Attitude_file = "");
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
+    const;
   %python_attribute(ephemeris_file_name, std::string)
   %python_attribute(attitude_file_name, std::string)
   %pickle_init(1, self.ephemeris_file_name, self.attitude_file_name)

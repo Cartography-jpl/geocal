@@ -17497,7 +17497,7 @@ fi
 
 
 
-if test "required" = "required"; then
+if test "optional" = "required"; then
   if test "$have_hdf5" = "no"; then
      as_fn_error $? "
 The HDF 5 library is required by GeoCal. Try specifying
@@ -17512,11 +17512,11 @@ fi
 $as_echo_n "checking for Hdfeos5 library... " >&6; }
         succeeded=no
         if test "$build_hdfeos5" == "yes"; then
-            HDFEOS5_LIBS="libhe5_hdfeos.la"
+            HDFEOS5_LIBS="libhe5_hdfeos.la ${HDF5_LIBS}"
             HDFEOS5_CFLAGS="-I$srcdir/hdfeos/external/HDF-EOS/v5.1.15/include"
             succeeded=yes
         elif test "$ac_hdfeos5_path" != ""; then
-            HDFEOS5_LIBS="-R$ac_hdfeos5_path/lib -L$ac_hdfeos5_path/lib -lhe5_hdfeos -lGctp"
+            HDFEOS5_LIBS="-R$ac_hdfeos5_path/lib -L$ac_hdfeos5_path/lib -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
             HDFEOS5_CFLAGS="-I$ac_hdfeos5_path/include/hdfeos5"
             succeeded=yes
         else
@@ -17599,27 +17599,27 @@ fi
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/hdfeos5/"
           if test -e "$ac_path_tmp/lib/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
               succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
              break;
           fi
@@ -17707,27 +17707,27 @@ fi
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/"
           if test -e "$ac_path_tmp/lib/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
               succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
              break;
           fi
@@ -17737,10 +17737,16 @@ fi
 
             fi
         fi
+	if test "$have_hdf5" == "no"; then
+            succeeded=no
+        fi
 
         if test "$succeeded" != "yes" ; then
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
+                HDFEOS5_CFLAGS=""
+		HDFEOS5_LIBS=""
+		have_hdfeos5="no"
         else
                 HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS $HDF5_CFLAGS"
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
@@ -17845,6 +17851,9 @@ $as_echo_n "checking for MSPI-Shared library... " >&6; }
         if test "$succeeded" != "yes" ; then
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
+		MSPI_SHARED_CFLAGS=""
+		MSPI_SHARED_LIBS=""
+		have_mspi_shared="no"
         else
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
@@ -17952,7 +17961,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
             if test "$build_boost" = "yes"; then
                BOOST_LIBDIR="$ac_boost_path/lib"
                BOOST_REGEX_LIB="-lboost_regex"
-               BOOST_FILESYSTEM_LIB="-lboost_filesystem"
+               BOOST_FILESYSTEM_LIB="-lboost_filesystem -lboost_system"
                BOOST_DATETIME_LIB="-lboost_date_time"
                BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                boost_done=yes
@@ -17963,7 +17972,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
                    if test -e "$ac_boost_lib_base/$ac_boost_lib"; then
                        BOOST_LIBDIR="$ac_boost_lib_base"
                        BOOST_REGEX_LIB="-lboost_regex"
-		       BOOST_FILESYSTEM_LIB="-lboost_filesystem"
+		       BOOST_FILESYSTEM_LIB="-lboost_filesystem -lboost_system"
                        BOOST_DATETIME_LIB="-lboost_date_time"
 		       BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                        boost_done=yes
@@ -17976,7 +17985,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
                    if test -e "$ac_boost_lib_base/$ac_boost_lib"; then
                        BOOST_LIBDIR="$ac_boost_lib_base"
                        BOOST_REGEX_LIB="-lboost_regex-mt"
-		       BOOST_FILESYSTEM_LIB="-lboost_filesystem-mt"
+		       BOOST_FILESYSTEM_LIB="-lboost_filesystem-mt -lboost_system-mt"
                        BOOST_DATETIME_LIB="-lboost_date_time-mt"
                        BOOST_IOSTREAMS_LIB="-lboost_iostreams-mt"
                        boost_done=yes
@@ -19917,9 +19926,20 @@ fi
 
         fi
 
+# We can only use the carto library if we also have vicar and gsl
+        if test "$have_gsl" != "yes"; then
+	   succeeded=no
+	fi
+        if test "$have_vicar_rtl" != "yes"; then
+	   succeeded=no
+	fi
+
         if test "$succeeded" != "yes" ; then
+                CARTO_CFLAGS=""
+		CARTO_LIBS=""
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
+		have_carto="no"
         else
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }

@@ -167,7 +167,7 @@ GeoCal::gsl_root(const VFunctorWithDerivative& F,
 
 double
 GeoCal::gsl_root(const DFunctor& F, double Xmin, double Xmax, 
-		 double Eps)
+		 double Eps, double Eps_abs)
 {
   GslFsolver w;
   gsl_function gf;
@@ -179,12 +179,33 @@ GeoCal::gsl_root(const DFunctor& F, double Xmin, double Xmax,
     status = gsl_root_fsolver_iterate(w.fsolver);
     status = gsl_root_test_interval(gsl_root_fsolver_x_lower(w.fsolver),
 				    gsl_root_fsolver_x_upper(w.fsolver),
-				    0, Eps);
+				    Eps_abs, Eps);
   }
-  if(status != GSL_SUCCESS)
-    throw 
-      ConvergenceFailure("gsl_root exceeded the maximum number of iterations");
+  if(status != GSL_SUCCESS) {
+    ConvergenceFailure e;
+    e << "gsl_root exceeded the maximum number of iterations\n"
+      << "status: " << status << "\n";
+    throw e;
+  }
   return gsl_root_fsolver_root(w.fsolver);
+}
+
+//-----------------------------------------------------------------------
+/// \ingroup GSL
+/// This finds the root of a function, and propagates the derivative
+/// of the solution with respect to any parameters in the function
+/// (i.e., we *aren't* talking about the derivative wrt X here).
+//-----------------------------------------------------------------------
+
+AutoDerivative<double> 
+GeoCal::gsl_root_with_derivative
+(const DFunctorWithDerivative& F, double Xmin, double Xmax, 
+ double Eps, double Eps_abs)
+{
+  double xroot = gsl_root(F, Xmin, Xmax, Eps, Eps_abs);
+  Array<double, 1> grad = F.f_with_derivative(xroot).gradient();
+  grad /= -F.df(xroot);
+  return AutoDerivative<double>(xroot, grad);
 }
 
 //-----------------------------------------------------------------------

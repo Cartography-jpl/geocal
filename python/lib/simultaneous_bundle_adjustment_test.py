@@ -27,18 +27,14 @@ igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
 igc2.rpc.fit_line_numerator = t
 t2 = [False] * 20
 t2[0] = True
-t2[3] = True
 igc2.rpc.fit_sample_numerator = t2
 igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
 igc3.rpc.fit_line_numerator = t
 t2 = [False] * 20
 t2[0] = True
-t2[1] = True
 igc3.rpc.fit_sample_numerator = t2
 gaoi = VicarLiteRasterImage(test_data + "aoi.img").map_info
 igc_coll = IgcArray([igc1, igc2, igc3])
-igc_coll.parameter_subset_mask = [True, True, True, True, False, True, True, 
-                                  False]
 tp_collect = TiePointCollect(igc_coll)
 tpcol = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin)
 # Arbitrarily pick 2 points and pretend like they are GCPs
@@ -46,9 +42,9 @@ tpcol[0].is_gcp = True
 tpcol[5].is_gcp = True
 sba = SimultaneousBundleAdjustment(igc_coll, tpcol, demin)
 parm0 = sba.parameter
-print igc_coll.parameter_subset_mask
+print igc_coll.parameter_mask
 print igc_coll.parameter_subset
-print igc_coll.parameter_subset_name
+print igc_coll.parameter_name_subset
 
 class TestClass:
     def setUp(self):

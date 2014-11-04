@@ -120,14 +120,13 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.dem
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 class SimpleDem(geocal_swig.dem.Dem):
     """
     This is a simple implementation of a Dem, intended primarily for use
     during testing.
 
-    It find the height of a given point above the WGS84 ellipsoid + fixed
-    height, in geodetic coordinates.
+    It find the height of a given point above the reference ellipsoid +
+    fixed height, in the given coordinates.
 
     C++ includes: simple_dem.h 
     """
@@ -135,13 +134,13 @@ class SimpleDem(geocal_swig.dem.Dem):
     __repr__ = _swig_repr
     def __init__(self, H=0): 
         """
-        GeoCal::SimpleDem::SimpleDem(double H=0)
+        GeoCal::SimpleDemT< G >::SimpleDemT(double H=0)
         Default constructor. 
         """
         _simple_dem.SimpleDem_swiginit(self,_simple_dem.new_SimpleDem(H))
     def _v_h(self, *args):
         """
-        void GeoCal::SimpleDem::h(double Hnew)
+        void GeoCal::SimpleDemT< G >::h(double Hnew)
         Set height value used by this object. 
         """
         return _simple_dem.SimpleDem__v_h(self, *args)

@@ -2,16 +2,16 @@
 // (Not really c++, but closest emacs mode)
 
 %include "common.i"
-
 %{
 #include "simple_dem.h"
 %}
 %base_import(dem)
-%geocal_shared_ptr(GeoCal::SimpleDem);
+%import "geodetic.i"
+
 namespace GeoCal {
-class SimpleDem : public Dem {
+template<class G> class SimpleDemT : public Dem {
 public:
-  SimpleDem(double H = 0);
+  SimpleDemT(double H = 0);
   virtual double distance_to_surface(const GroundCoordinate& Gp) const;
   virtual double height_reference_surface(const GroundCoordinate& Gp) 
     const;
@@ -21,3 +21,5 @@ public:
   %pickle_init(1, self.h)
 };
 }
+%geocal_shared_ptr(GeoCal::SimpleDemT<GeoCal::Geodetic>);
+%template(SimpleDem) GeoCal::SimpleDemT<GeoCal::Geodetic>;

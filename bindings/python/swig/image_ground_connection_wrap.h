@@ -23,20 +23,31 @@ public:
     SwigDirector_ImageGroundConnection(PyObject *self, boost::shared_ptr< GeoCal::Dem > const &d, boost::shared_ptr< GeoCal::RasterImage > const &Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const &Img_mb, std::string const &Title, boost::shared_ptr< GeoCal::ImageMask > const &Img_mask, boost::shared_ptr< GeoCal::GroundMask > const &Ground_mask);
     SwigDirector_ImageGroundConnection(PyObject *self);
     virtual ~SwigDirector_ImageGroundConnection();
+    virtual blitz::Array< double,1 > parameter() const;
+    virtual void parameter(blitz::Array< double,1 > const &V);
+    virtual GeoCal::ArrayAd< double,1 > parameter_with_derivative() const;
+    virtual void parameter_with_derivative(GeoCal::ArrayAd< double,1 > const &V);
+    virtual std::vector< std::string,std::allocator< std::string > > parameter_name() const;
+    virtual blitz::Array< double,1 > parameter_subset() const;
+    virtual void parameter_subset(blitz::Array< double,1 > const &V);
+    virtual GeoCal::ArrayAd< double,1 > parameter_with_derivative_subset() const;
+    virtual void parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V);
+    virtual std::vector< std::string,std::allocator< std::string > > parameter_name_subset() const;
+    virtual blitz::Array< bool,1 > parameter_mask() const;
     virtual boost::shared_ptr< GeoCal::CartesianFixedLookVector > cf_look_vector_lv(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::CartesianFixed > cf_look_vector_pos(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate_dem(GeoCal::ImageCoordinate const &Ic, GeoCal::Dem const &D) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate_approx_height(GeoCal::ImageCoordinate const &Ic, double H) const;
     virtual GeoCal::ImageCoordinate image_coordinate(GeoCal::GroundCoordinate const &Gc) const;
-    virtual blitz::Array< double,2 > image_coordinate_jac_ecr(GeoCal::Ecr const &Gc) const;
+    virtual blitz::Array< double,2 > image_coordinate_jac_cf(GeoCal::CartesianFixed const &Gc) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_parm(GeoCal::GroundCoordinate const &Gc) const;
     virtual int number_line() const;
     virtual int number_sample() const;
     virtual int number_band() const;
-    virtual std::vector< std::string,std::allocator< std::string > > parameter_name() const;
     virtual double resolution_meter(GeoCal::ImageCoordinate const &Ic) const;
     virtual double resolution_meter() const;
+    virtual blitz::Array< double,7 > cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp, int nsubpixel_line = 1, int nsubpixel_sample = 1, int nintegration_step = 1) const;
     using GeoCal::ImageGroundConnection::initialize;
 
 
@@ -71,7 +82,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[14];
+    mutable swig::SwigVar_PyObject vtable[28];
 #endif
 
 };

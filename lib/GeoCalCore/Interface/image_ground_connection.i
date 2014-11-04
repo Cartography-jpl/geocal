@@ -7,6 +7,7 @@
 #include "image_ground_connection.h"
 %}
 %base_import(generic_object)
+%base_import(with_parameter)
 %base_import(geocal_exception)
 %import "dem.i"
 %import "raster_image.i"
@@ -15,7 +16,6 @@
 %import "image_coordinate.i"
 %import "image_mask.i"
 %import "ground_mask.i"
-%import "ecr.i"
 %geocal_shared_ptr(GeoCal::ImageGroundConnection);
 %geocal_shared_ptr(GeoCal::OffsetImageGroundConnection);
 %geocal_shared_ptr(GeoCal::ImageGroundConnectionFailed);
@@ -48,7 +48,7 @@ public:
 %rename("__dem") ImageGroundConnection::dem;
 %rename("__ground_coordinate") ImageGroundConnection::ground_coordinate;
 #endif
-class ImageGroundConnection: public GenericObject {
+class ImageGroundConnection: public WithParameter {
 protected:
   ImageGroundConnection(const boost::shared_ptr<Dem>& d, 
 			const boost::shared_ptr<RasterImage>& Img, 
@@ -102,7 +102,7 @@ public:
 				  double H) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const = 0;
-  virtual blitz::Array<double, 2> image_coordinate_jac_ecr(const Ecr& Gc) 
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
@@ -118,12 +118,29 @@ public:
   %python_attribute_with_set(title, std::string)
   %python_attribute(has_time, bool)
   std::string print_to_string() const;
-  %python_attribute_with_set(parameter, blitz::Array<double, 1>)
-  %python_attribute(parameter_name, virtual std::vector<std::string>)
   virtual double resolution_meter(const ImageCoordinate& Ic) const;
   virtual double resolution_meter() const;
-  blitz::Array<double, 4> cf_look_vector_arr(int ln_start, int smp_start, 
-					     int nline, int nsamp) const;
+
+  %python_attribute_with_set_virtual(parameter, blitz::Array<double, 1>);
+  %python_attribute_with_set_virtual(parameter_with_derivative, 
+			     ArrayAd<double, 1>);
+  %python_attribute(parameter_name, virtual std::vector<std::string>);
+  %python_attribute_with_set_virtual(parameter_subset, blitz::Array<double, 1>);
+  %python_attribute_with_set_virtual(parameter_with_derivative_subset, 
+			     ArrayAd<double, 1>);
+  %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
+  %python_attribute(parameter_mask, virtual blitz::Array<bool, 1>);
+
+  // SWIG Director doesn't like this. For now, just don't pass this to
+  // python. If this ever becomes an issue we can split this up like
+  // we did with cf_look_vector_pos and cf_look_vector_lv.
+  // virtual void footprint_resolution(int Line, int Sample, 
+  //			    double &OUTPUT, double &OUTPUT);
+  virtual blitz::Array<double, 7> 
+  cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
+		     int nsubpixel_line = 1, 
+		     int nsubpixel_sample = 1,
+		     int nintegration_step = 1) const;
   %python_attribute2(dem, dem_ptr, boost::shared_ptr<Dem>)
   void dem(const boost::shared_ptr<Dem>& D);
 %pythoncode {

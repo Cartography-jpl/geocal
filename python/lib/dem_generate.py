@@ -13,6 +13,7 @@ from ply_file import *
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
 import logging
+import re
 
 def _new_from_init(cls, version, *args):
     if(cls.pickle_format_version() < version):
@@ -101,6 +102,9 @@ class DemGenerate:
                  surface_image1 = None, surface_image2 = None,
                  max_dist_good_point = 0.5,
                  all_image = False):
+        # Temporary here, we'll need to find a cleaner way to do this
+        #self.coordinate_system = EuropaPlanetocentric
+        self.coordinate_system = Geodetic
         self.igc1 = image_ground_connnection1
         self.igc2 = image_ground_connnection2
         self.max_dist_good_point = max_dist_good_point
@@ -199,7 +203,7 @@ class DemGenerate:
         Note that in general the points don't actually intersect, this finds
         the value that is closest to both points.'''
         p, dist = self.ri.two_ray_intersect(ic1, ic2)
-        gres = Geodetic(p)
+        gres = self.coordinate_system(p)
         if(dist > 1.0): 
             raise ValueError("Failure of epipolar constraint")
         return gres
@@ -216,7 +220,7 @@ class DemGenerate:
             fh.vertex[:,2] = self.r[:,2] / self.aoi.resolution_meter * scale_z
             for i in range(self.r.shape[0]):
                 fh.vertex[i,1], fh.vertex[i,0] = \
-                    self.aoi.coordinate(Geodetic(self.r[i,0], self.r[i,1]))
+                    self.aoi.coordinate(self.coordinate_system(self.r[i,0], self.r[i,1]))
         
         
     def height_all(self, pool = None, include_image = False, buffer_size = 5):
@@ -306,7 +310,7 @@ class DemGenerate:
             self.img1_h[:] = fill_value
             self.img2_h[:] = fill_value
         for i in range(self.r.shape[0]):
-            gp = Geodetic(self.r[i,0], self.r[i,1])
+            gp = self.coordinate_system(self.r[i,0], self.r[i,1])
             sample,line = self.aoi.coordinate(gp)
             if(line >= 0 and line < self.h.shape[0] and
                sample >= 0 and sample < self.h.shape[1]):
@@ -325,11 +329,22 @@ class DemGenerate:
             for j in range(self.aoi.number_y_pixel):
                 g[j,i,0] = self.aoi.ground_coordinate(i, j).latitude
                 g[j,i,1] = self.aoi.ground_coordinate(i, j).longitude
-        if len(self.r) > 0:
-            self.h_fill = scipy.interpolate.griddata(self.r[:,0:2], 
-                                          self.r[:, 2], g, 
-                                          method = interpolate_method,
-                                          fill_value = fill_value) 
+        if len(self.r) > 2:
+            try:
+                self.h_fill = scipy.interpolate.griddata(self.r[:,0:2], 
+                                                         self.r[:, 2], g, 
+                                                         method = interpolate_method,
+                                                         fill_value = fill_value) 
+            except RuntimeError as e:
+                print "Got exception %s" % e
+                if(not re.search("Qhull", str(e))):
+                    raise e
+                # May fail because we have too few points, or they are in
+                # a line
+                self.h_fill = np.zeros((self.aoi.number_y_pixel,
+                                        self.aoi.number_x_pixel))
+                self.h_fill[:] = fill_value
+                
         else:
             self.h_fill = np.zeros((self.aoi.number_y_pixel,
                                     self.aoi.number_x_pixel))
@@ -383,7 +398,7 @@ class DemGenerate:
             x = []
             y = []
             for i in range(self.r.shape[0]):
-                ic = aoi_img.coordinate(Geodetic(self.r[i, 0], 
+                ic = aoi_img.coordinate(self.coordinate_system(self.r[i, 0], 
                                                  self.r[i, 1]))
                 if(ic.line >= 0 and ic.line < aoi_img.number_line and
                    ic.sample >= 0 and ic.sample < aoi_img.number_sample):

@@ -34,6 +34,18 @@ but with ".NTF" replaced with ".IMD". We generally have that. We can allow
 more complicated arguments to specify this is more detail if needed, but 
 for now just assume that.
 
+If the IMD files are not available, then we can work with just the
+NITF files.  We use assumed constants for the absolute calibration
+factor and effective bandwidths (which are reported in the IMD file,
+but not the NITF file). The effective band widths appear to be
+constant over time, but the absolute calibration scale factor is
+*not*, so using NITF files will *not* give the same results as using a
+IMD file.
+
+You don't need to do anything special if the IMD file isn't available, this
+script just looks for the file and if it doesn't find it then it uses the
+NITF files.
+
 Options:
   -h --help         
        Print this message
@@ -354,11 +366,20 @@ if(post_ms_raw):
 
 
 # 10. Convert to reflectance and generate normdiff image.
-pre_pan_imd = os.path.splitext(pre_pan_raw)[0] + ".IMD"
-post_pan_imd = os.path.splitext(post_pan_raw)[0] + ".IMD"
-subprocess.check_call(["convert_reflectance", "--wv2-pan=" + pre_pan_imd,
+pre_pan_imd_or_ntf = os.path.splitext(pre_pan_raw)[0] + ".IMD"
+post_pan_imd_or_ntf = os.path.splitext(post_pan_raw)[0] + ".IMD"
+
+# If IMD files aren't available, use the NITF file instead
+if(not os.path.exists(pre_pan_imd_or_ntf)):
+    pre_pan_imd_or_ntf = pre_pan_raw
+if(not os.path.exists(post_pan_imd_or_ntf)):
+    post_pan_imd_or_ntf = post_pan_raw
+
+subprocess.check_call(["convert_reflectance", 
+                       "--wv2-pan=" + pre_pan_imd_or_ntf,
                        dbfile + ":pre_reg", dbfile + ":refl1"])
-subprocess.check_call(["convert_reflectance", "--wv2-pan=" + post_pan_imd,
+subprocess.check_call(["convert_reflectance", 
+                       "--wv2-pan=" + post_pan_imd_or_ntf,
                        dbfile + ":post_reg", dbfile + ":refl2"])
 subprocess.check_call(["doughnut_diff", dbfile + ":refl1", 
                        dbfile + ":refl2", dbfile + ":normdiff",

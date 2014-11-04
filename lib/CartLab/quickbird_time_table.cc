@@ -72,6 +72,26 @@ QuickBirdTimeTable::image_coordinate(Time T, const FrameCoordinate& F) const
 }
 
 //-----------------------------------------------------------------------
+/// Convert from TimeWithDerivative and FrameCoordinateWithDerivative 
+/// to ImageCoordinateWithDerivative.
+//-----------------------------------------------------------------------
+
+ImageCoordinateWithDerivative
+QuickBirdTimeTable::image_coordinate_with_derivative
+(const TimeWithDerivative& T, const FrameCoordinateWithDerivative& F) const
+{
+  range_check(T.value(), mint, maxt);
+  std::map<Time, Interval>::const_iterator i = time_to_line.lower_bound(T.value());
+  if(i == time_to_line.end())
+    throw Exception("This should be impossible");
+  const Interval& intv = (*i).second;
+  ImageCoordinateWithDerivative res;
+  res.sample = F.sample;
+  res.line = (T - intv.tstart) / intv.tspace + intv.lstart + F.line;
+  return res;
+}
+
+//-----------------------------------------------------------------------
 /// Convert from ImageCoordinate to Time and FrameCoordinate.
 //-----------------------------------------------------------------------
 
@@ -87,6 +107,26 @@ void QuickBirdTimeTable::time(const ImageCoordinate& Ic, Time& T,
   F.line = 0;
   F.sample = Ic.sample;
   T = intv.tstart + (Ic.line - intv.lstart) * intv.tspace;
+}
+
+//-----------------------------------------------------------------------
+/// Convert from ImageCoordinateWithDerivative to TimeWithDerivative 
+/// and FrameCoordinateWithDerivative.
+//-----------------------------------------------------------------------
+
+void QuickBirdTimeTable::time_with_derivative
+(const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T, 
+ FrameCoordinateWithDerivative& F) const
+{
+  range_check(Ic.line.value(), (double) minl, maxl + 0.5);
+  std::map<int, Interval>::const_iterator i = 
+    line_to_time.lower_bound((int) floor(Ic.line.value() + 0.5));
+  if(i == line_to_time.end())
+    throw Exception("This should be impossible");
+  const Interval& intv = (*i).second;
+  F.line = 0;
+  F.sample = Ic.sample;
+  T = TimeWithDerivative(intv.tstart) + (Ic.line - intv.lstart) * intv.tspace;
 }
 
 //-----------------------------------------------------------------------

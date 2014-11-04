@@ -27,7 +27,7 @@ BOOST_AUTO_TEST_CASE(full_res)
   // value. If this fails, you may want to enable writing out the full
   // output and seeing what is going on.
   BOOST_CHECK_CLOSE(igc_sim.read_double(473, 1000, 5, 5)(0, 0),
-  		    378.45949734573293, 1e-4);
+  		    378.45949734573293, 1e-2);
   // Optionally write this out for manual inspection
   if(false) {
 #ifdef HAVE_VICAR_RTL

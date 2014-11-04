@@ -17,6 +17,21 @@ boost::shared_ptr<OrbitData> OrbitQuaternionList::orbit_data(Time T) const
 }
 
 // See base class for description.
+boost::shared_ptr<OrbitData> 
+OrbitQuaternionList::orbit_data(const TimeWithDerivative& T) const
+{
+  range_check(T.value(), min_time(), max_time());
+  time_map::const_iterator i = orbit_data_map.lower_bound(T.value());
+  // Special handling if we are looking at the very first point
+  if(i == orbit_data_map.begin() && i->first - T == 0.0)
+    ++i;
+  const QuaternionOrbitData& q2 = *(i->second);
+  --i;
+  const QuaternionOrbitData& q1 = *(i->second);
+  return GeoCal::interpolate(q1, q2, T);
+}
+
+// See base class for description.
 void OrbitQuaternionList::print(std::ostream& Os) const
 {
   Os << "OrbitQuaternionList:\n"

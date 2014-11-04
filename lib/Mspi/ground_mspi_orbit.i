@@ -7,8 +7,8 @@
 #include "ground_mspi_orbit.h"
 %}
 
+%base_import(look_vector)
 %base_import(orbit)
-%import "look_vector.i"
 
 %geocal_shared_ptr(GeoCal::GroundMspiOrbit);
 namespace GeoCal {
@@ -25,6 +25,8 @@ public:
   %python_attribute(start_elevation_angle, double);
   %python_attribute(rotation_rate, double);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
+    const;
   %pickle_init(1, self.start_time, self.position, self.azimuth,
 	       self.start_elevation_angle, self.rotation_rate);
 };

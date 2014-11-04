@@ -69,7 +69,6 @@ def test_orbit_offset_pos():
     assert_almost_equal(pdiff[2], 300, 4)
 
 def test_orbit_quaternion_correction():
-    raise SkipTest # Skip for now
     if(orb_uncorr is None):
         raise SkipTest
     t2 = Time.time_acs(215077459.472);
@@ -78,18 +77,17 @@ def test_orbit_quaternion_correction():
     orb = OrbitOffsetCorrection(orb_uncorr, time_point = [t1, t2, t3])
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 20, 40, 
                      60, -10, -20, -30]
-    q = orb.quaternion_correction(t1 + 5)
+    q = orb.quaternion_correction(TimeWithDerivative(t1 + 5))
     assert_almost_equal(q.R_component_1.value, 0.959964, 4)
     assert_almost_equal(q.R_component_2.value, 0.13533, 4)
     assert_almost_equal(q.R_component_3.value, 0.0834714, 4)
     assert_almost_equal(q.R_component_4.value, 0.230623, 4)
     # Make sure we can call for each time
-    orb.quaternion_correction(t1)
-    orb.quaternion_correction(t2)
-    orb.quaternion_correction(t3)
+    orb.quaternion_correction(TimeWithDerivative(t1))
+    orb.quaternion_correction(TimeWithDerivative(t2))
+    orb.quaternion_correction(TimeWithDerivative(t3))
 
 def test_insert_time_point():
-    raise SkipTest # Skip for now
     if(orb_uncorr is None):
         raise SkipTest
     t2 = Time.time_acs(215077459.472);
@@ -109,15 +107,15 @@ def test_insert_time_point():
                               -10, -20, -30]).all()
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 20, 40, 
                      60, -10, -20, -30]
-    q = orb.quaternion_correction(t1 + 5)
+    q = orb.quaternion_correction(TimeWithDerivative(t1 + 5))
     assert_almost_equal(q.R_component_1.value, 0.959964, 4)
     assert_almost_equal(q.R_component_2.value, 0.13533, 4)
     assert_almost_equal(q.R_component_3.value, 0.0834714, 4)
     assert_almost_equal(q.R_component_4.value, 0.230623, 4)
     # Make sure we can call for each time
-    orb.quaternion_correction(t1)
-    orb.quaternion_correction(t2)
-    orb.quaternion_correction(t3)
+    orb.quaternion_correction(TimeWithDerivative(t1))
+    orb.quaternion_correction(TimeWithDerivative(t2))
+    orb.quaternion_correction(TimeWithDerivative(t3))
 
 def test_frame_coordinate():
     raise SkipTest # Skip for now

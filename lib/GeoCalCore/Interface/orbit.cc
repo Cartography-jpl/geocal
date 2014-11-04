@@ -662,6 +662,7 @@ QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative& Sl) const
     (sc_to_cf_with_der * Sl.look_quaternion() * conj(sc_to_cf_with_der) - 
      k * vel_cf_with_der)
     * ci_to_cf_with_derivative();
+  res.look_quaternion(ci);
   return res;
 }
 

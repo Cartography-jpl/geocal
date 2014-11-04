@@ -117,6 +117,12 @@ UsgsDemData::UsgsDemData
       }
     }
   }
+  if(flist.size() == 0) {
+    Exception e;
+    e << "No USGS DEM data found at " << dirbase;
+    throw e;
+  }
+
   // Calculate the map_info that fill cover all the data.
   map_info_.reset(new MapInfo(mi_ref.subset(smin, lmin, 
 		    smax - smin + mi_ref.number_x_pixel(),

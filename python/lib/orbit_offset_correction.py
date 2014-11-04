@@ -144,16 +144,16 @@ class OrbitOffsetCorrection(Orbit):
         pcorr = od.position_ci.position.copy()
         pos = []
         pos_with_der = BoostArrayAutoDerivativeDouble_3()
-        vel_with_dir = BoostArrayAutoDerivativeDouble_3()
+        vel_with_der = BoostArrayAutoDerivativeDouble_3()
         v = od.velocity_ci_with_derivative
         for i in range(3):
             pos_with_der[i] = pcorr[i] + self.__parameter[i]
-            vel_with_dir[i] = v[i]
+            vel_with_der[i] = v[i]
             pos.append(pos_with_der[i].value)
         return QuaternionOrbitData(od.time_with_derivative, 
                                    od.position_ci.create(pos),
                                    pos_with_der,
-                                   vel_with_dir, 
+                                   vel_with_der, 
                                    od.sc_to_ci_with_derivative * 
                          self.quaternion_correction(od.time_with_derivative))
     

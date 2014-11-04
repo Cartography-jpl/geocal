@@ -22,7 +22,6 @@ cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                        QuaternionCamera.LINE_IS_Y)
 
 def test_time():
-    raise SkipTest
     t = Time.time_acs(215077459.472);
     img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
     igc = OrbitDataImageGroundConnection(orb_uncorr.orbit_data(t),
@@ -35,7 +34,6 @@ def test_time():
 def test_orbit_offset_unchanged():
     '''Test orbit where we just forward everything. This makes sure that
     passing through python and C++ works correctly'''
-    raise SkipTest # Skip for now
     if(orb_uncorr is None):
         raise SkipTest
     orb = OrbitOffsetCorrection(orb_uncorr)
@@ -47,7 +45,6 @@ def test_orbit_offset_unchanged():
     assert distance(pt, pt2) < 0.01
 
 def test_orbit_offset_pos():
-    raise SkipTest # Skip for now
     if(orb_uncorr is None):
         raise SkipTest
     t2 = Time.time_acs(215077459.472)
@@ -118,7 +115,6 @@ def test_insert_time_point():
     orb.quaternion_correction(TimeWithDerivative(t3))
 
 def test_frame_coordinate():
-    raise SkipTest # Skip for now
     if(orb_uncorr is None):
         raise SkipTest
     t2 = Time.time_acs(215077459.472);
@@ -137,8 +133,6 @@ def test_frame_coordinate():
 
 def test_observer():
     '''Check that we properly notify other objects when parameter changes'''
-    print "Need to fix this"
-    raise SkipTest
     if(orb_uncorr is None):
         raise SkipTest
     t2 = Time.time_acs(215077459.472);
@@ -160,7 +154,6 @@ def test_observer():
     assert_almost_equal(ic.sample, i0.sample, 4)
     
 def test_frame_coordinate_with_der():
-    raise SkipTest # Skip for now
     if(orb_uncorr is None):
         raise SkipTest
     t2 = Time.time_acs(215077459.472);

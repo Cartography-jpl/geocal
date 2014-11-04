@@ -1894,7 +1894,13 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/galileo_kernel/spk/gll_951120_021126_raj2007.bsp \
 	@geocalunittestdata@/galileo_kernel/ck/gll_plt_rec_1997_mav_v00.bc \
 	@geocalunittestdata@/galileo_kernel/fk/gll_scan_plane.tf \
-	@geocalunittestdata@/3800r.img @docpythonsrc@
+	@geocalunittestdata@/3800r.img \
+	@geocalunittestdata@/mspi/3.master.config \
+	@geocalunittestdata@/mspi/3.nav_gimbal.hdf4 \
+	@geocalunittestdata@/mspi/3.l1b1.hdf5 \
+	@geocalunittestdata@/mspi/3.mspi_camera_model.config \
+	@geocalunittestdata@/mspi/3.instrument_info.config \
+	@docpythonsrc@ $(am__empty)
 pkgconfig_DATA = 
 
 # Allow fils to be include in other directories

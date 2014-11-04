@@ -89,3 +89,9 @@ EXTRA_DIST+= @geocalunittestdata@/galileo_kernel/spk/gll_951120_021126_raj2007.b
 EXTRA_DIST+= @geocalunittestdata@/galileo_kernel/ck/gll_plt_rec_1997_mav_v00.bc
 EXTRA_DIST+= @geocalunittestdata@/galileo_kernel/fk/gll_scan_plane.tf
 EXTRA_DIST+= @geocalunittestdata@/3800r.img
+EXTRA_DIST+= @geocalunittestdata@/mspi/3.master.config
+EXTRA_DIST+= @geocalunittestdata@/mspi/3.nav_gimbal.hdf4
+EXTRA_DIST+= @geocalunittestdata@/mspi/3.l1b1.hdf5
+EXTRA_DIST+= @geocalunittestdata@/mspi/3.mspi_camera_model.config
+EXTRA_DIST+= @geocalunittestdata@/mspi/3.instrument_info.config
+

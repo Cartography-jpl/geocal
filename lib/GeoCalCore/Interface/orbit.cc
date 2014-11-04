@@ -658,11 +658,10 @@ QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative& Sl) const
   CartesianInertialLookVectorWithDerivative res;
   AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
   boost::math::quaternion<AutoDerivative<double> > ci = 
-    conj(ci_to_cf()) * 
+    conj(ci_to_cf_with_derivative()) * 
     (sc_to_cf_with_der * Sl.look_quaternion() * conj(sc_to_cf_with_der) - 
      k * vel_cf_with_der)
-    * ci_to_cf();
-  res.look_quaternion(ci);
+    * ci_to_cf_with_derivative();
   return res;
 }
 
@@ -730,7 +729,7 @@ const
   AutoDerivative<double> k = Ci.length() / Constant::speed_of_light;
   boost::math::quaternion<AutoDerivative<double> > sc =
     conj(sc_to_cf_with_der) * 
-    (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf()) + 
+    (ci_to_cf_with_derivative() * Ci.look_quaternion() * conj(ci_to_cf_with_derivative()) + 
      k * vel_cf_with_der) * sc_to_cf_with_der;
   res.look_quaternion(sc);
   return res;
@@ -793,7 +792,8 @@ boost::array<AutoDerivative<double>, 3>
 QuaternionOrbitData::velocity_ci_with_derivative() const
 {
   boost::math::quaternion<AutoDerivative<double> > vel_ci = 
-    conj(ci_to_cf()) * vel_cf_with_der * ci_to_cf();
+    conj(ci_to_cf_with_derivative()) * vel_cf_with_der * 
+    ci_to_cf_with_derivative();
   boost::array<AutoDerivative<double>, 3> res = 
     {{vel_ci.R_component_2(), 
       vel_ci.R_component_3(),

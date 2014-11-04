@@ -232,10 +232,14 @@ public:
   typedef T value_type;
 
 //-----------------------------------------------------------------------
-/// Default constructor, data is uninitialized.
+/// Default constructor, data is initialized to zero. Note that this
+/// initialization to 0 is *required* for this to work correctly with
+/// boost::math::quaternion. This is because the constructor that
+/// takes a single AutoDerivative<T> (used by various operators)
+/// relies on T() being initialized to 0.
 //-----------------------------------------------------------------------
 
-  AutoDerivative() {}
+  AutoDerivative() : val(0) {}
 
 //-----------------------------------------------------------------------
 /// Constructor that takes a value and a gradient. This makes a shallow

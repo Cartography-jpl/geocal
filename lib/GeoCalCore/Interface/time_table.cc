@@ -29,7 +29,7 @@ ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Min_time,
 ImageCoordinate ConstantSpacingTimeTable::image_coordinate(Time T, 
 const FrameCoordinate& F) const
 {
-  range_check(T, min_time(), max_time());
+  range_check_inclusive(T, min_time(), max_time());
   double line = (T  - min_time()) / tspace + F.line;
   return ImageCoordinate(line, F.sample);
 }
@@ -44,7 +44,7 @@ ConstantSpacingTimeTable::image_coordinate_with_derivative
 (const TimeWithDerivative& T, 
  const FrameCoordinateWithDerivative& F) const
 {
-  range_check(T.value(), min_time(), max_time());
+  range_check_inclusive(T.value(), min_time(), max_time());
   AutoDerivative<double> line = (T  - min_time()) / tspace + F.line;
   return ImageCoordinateWithDerivative(line, F.sample);
 }
@@ -115,7 +115,7 @@ MeasuredTimeTable::MeasuredTimeTable(const std::vector<Time>& Time_list,
 ImageCoordinate MeasuredTimeTable::image_coordinate(Time T, 
 const FrameCoordinate& F) const
 {
-  range_check(T, min_time(), max_time());
+  range_check_inclusive(T, min_time(), max_time());
   int i = (int)(std::lower_bound(tlist.begin(), tlist.end(), T)
 		- tlist.begin());
   double line;
@@ -138,7 +138,7 @@ MeasuredTimeTable::image_coordinate_with_derivative
 (const TimeWithDerivative& T, 
 const FrameCoordinateWithDerivative& F) const
 {
-  range_check(T.value(), min_time(), max_time());
+  range_check_inclusive(T.value(), min_time(), max_time());
   int i = (int)(std::lower_bound(tlist.begin(), tlist.end(), T.value())
 		- tlist.begin());
   AutoDerivative<double> line;

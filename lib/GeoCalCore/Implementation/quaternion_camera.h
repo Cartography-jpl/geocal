@@ -72,9 +72,10 @@ public:
       parameter_mask_(Parameter_mask.copy())
   { 
     principal_point_.push_back(Principal_point);
-    if(parameter_mask_.rows() < 6 + 2 * number_band())
+    if(parameter_mask_.rows() < 6 + 2 * number_band()) {
       parameter_mask_.resize(6 + 2 * number_band());
-    parameter_mask_ = true;
+      parameter_mask_ = true;
+    }
   }
 
 //-----------------------------------------------------------------------

@@ -112,6 +112,15 @@ public:
   inline const boost::shared_ptr<GDALDataset>& data_set() const 
   { return gdal_data_base_->data_set(); }
 
+
+//-----------------------------------------------------------------------
+/// Return true if we have GCPs.
+//-----------------------------------------------------------------------
+
+  bool has_gcps() const
+  { return data_set()->GetGCPCount() > 0; }
+  blitz::Array<double, 2> gcps() const;
+
 //-----------------------------------------------------------------------
 /// The underlying GDALRasterBand object.
 //-----------------------------------------------------------------------

@@ -349,6 +349,29 @@ void GdalRasterImage::set_map_info(const MapInfo& Mi)
 }
 
 //-----------------------------------------------------------------------
+/// GCPs. This is an array of Line, Sample, GCP X, GCP y, GCP z.
+/// We should probably clean this up into a set of ImageCoordinate and
+/// GroundCoordinate, but for now we'll just use this simpler interface.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2> GdalRasterImage::gcps() const
+{
+  if(!has_gcps())
+    throw Exception("No gcps");
+  int ngcp = data_set()->GetGCPCount();
+  blitz::Array<double, 2> res(ngcp, 5);
+  const GDAL_GCP* gcp = data_set()->GetGCPs();
+  for(int i = 0; i < ngcp; ++i) {
+    res(i, 0) = gcp[i].dfGCPLine;
+    res(i, 1) = gcp[i].dfGCPPixel;
+    res(i, 2) = gcp[i].dfGCPX;
+    res(i, 3) = gcp[i].dfGCPY;
+    res(i, 4) = gcp[i].dfGCPZ;
+  }
+  return res;
+}
+
+//-----------------------------------------------------------------------
 /// In AFIDS, we calculate what is called the "nitf corners". This
 /// gives approximate corner coordinates for an image. Depending on
 /// the application, it can be useful to treat this as an approximate

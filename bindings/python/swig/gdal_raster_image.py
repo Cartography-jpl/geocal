@@ -295,6 +295,33 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
     def map_info(self):
         return self._v_map_info()
 
+    def _v_has_gcps(self):
+        """
+        bool GeoCal::GdalRasterImage::has_gcps() const
+        Return true if we have GCPs. 
+        """
+        return _gdal_raster_image.GdalRasterImage__v_has_gcps(self)
+
+    @property
+    def has_gcps(self):
+        return self._v_has_gcps()
+
+    def _v_gcps(self):
+        """
+        blitz::Array< double, 2 > GdalRasterImage::gcps() const
+        GCPs.
+
+        This is an array of Line, Sample, GCP X, GCP y, GCP z. We should
+        probably clean this up into a set of ImageCoordinate and
+        GroundCoordinate, but for now we'll just use this simpler interface.
+
+        """
+        return _gdal_raster_image.GdalRasterImage__v_gcps(self)
+
+    @property
+    def gcps(self):
+        return self._v_gcps()
+
     @rpc.setter
     def rpc(self, val):
        self.set_rpc(val)
@@ -384,6 +411,8 @@ GdalRasterImage._v_band_id = new_instancemethod(_gdal_raster_image.GdalRasterIma
 GdalRasterImage._v_update = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_update,None,GdalRasterImage)
 GdalRasterImage._v_rpc = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_rpc,None,GdalRasterImage)
 GdalRasterImage._v_map_info = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_map_info,None,GdalRasterImage)
+GdalRasterImage._v_has_gcps = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_has_gcps,None,GdalRasterImage)
+GdalRasterImage._v_gcps = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_gcps,None,GdalRasterImage)
 GdalRasterImage.metadata = new_instancemethod(_gdal_raster_image.GdalRasterImage_metadata,None,GdalRasterImage)
 GdalRasterImage_swigregister = _gdal_raster_image.GdalRasterImage_swigregister
 GdalRasterImage_swigregister(GdalRasterImage)

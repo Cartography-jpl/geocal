@@ -9631,6 +9631,106 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GdalRasterImage__v_has_gcps(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GdalRasterImage *arg1 = (GeoCal::GdalRasterImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_has_gcps" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::GdalRasterImage const *)arg1)->has_gcps();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GdalRasterImage__v_gcps(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GdalRasterImage *arg1 = (GeoCal::GdalRasterImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_gcps" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::GdalRasterImage const *)arg1)->gcps();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+      SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      SWIG_POINTER_NEW | 0 );
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GdalRasterImage_metadata__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::GdalRasterImage *arg1 = (GeoCal::GdalRasterImage *) 0 ;
@@ -12247,6 +12347,19 @@ static PyMethodDef SwigMethods[] = {
 		"Return Rpc for image. \n"
 		""},
 	 { (char *)"GdalRasterImage__v_map_info", (PyCFunction)_wrap_GdalRasterImage__v_map_info, METH_O, NULL},
+	 { (char *)"GdalRasterImage__v_has_gcps", (PyCFunction)_wrap_GdalRasterImage__v_has_gcps, METH_O, (char *)"\n"
+		"bool GeoCal::GdalRasterImage::has_gcps() const\n"
+		"Return true if we have GCPs. \n"
+		""},
+	 { (char *)"GdalRasterImage__v_gcps", (PyCFunction)_wrap_GdalRasterImage__v_gcps, METH_O, (char *)"\n"
+		"blitz::Array< double, 2 > GdalRasterImage::gcps() const\n"
+		"GCPs.\n"
+		"\n"
+		"This is an array of Line, Sample, GCP X, GCP y, GCP z. We should\n"
+		"probably clean this up into a set of ImageCoordinate and\n"
+		"GroundCoordinate, but for now we'll just use this simpler interface.\n"
+		"\n"
+		""},
 	 { (char *)"GdalRasterImage_metadata", _wrap_GdalRasterImage_metadata, METH_VARARGS, (char *)"\n"
 		"S GeoCal::GdalRasterImage::metadata(const std::string &Metadata_item, const std::string &Domain=\"\")\n"
 		"const\n"

@@ -279,31 +279,31 @@ void IgcRollingShutter::footprint_resolution
 void IgcRollingShutter::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");
-    Os << "OrbitDataImageGroundConnection" << "\n"
-       << "  Title:      " << title() << "\n"
-       << "  Resolution: " << resolution() << "\n"
-       << "  Band:       " << band() << "\n"
-       << "  Max height: " << max_height() << "\n"
-       << "  Orbit: \n";
-    opad << *orbit_;
-    opad.strict_sync();
-    Os << "  Time table:\n";
-    opad << *time_table_;
-    opad.strict_sync();
-    Os << "  Camera: \n";
-    opad << *cam;
-    opad.strict_sync();
-    Os << "  Dem: \n";
-    opad << dem();
-    opad.strict_sync();
-    Os << "  Image: \n";
-    opad << *image();
-    opad.strict_sync();
-    Os << "  Refraction\n";
-    if(!refraction())
-      opad << "No refraction model included\n";
-    else
-      opad << *refraction();
-    opad.strict_sync();
+  Os << "IgcRollingShutter" << "\n"
+     << "  Title:      " << title() << "\n"
+     << "  Resolution: " << resolution() << "\n"
+     << "  Band:       " << band() << "\n"
+     << "  Max height: " << max_height() << "\n"
+     << "  Orbit: \n";
+  opad << *orbit_;
+  opad.strict_sync();
+  Os << "  Time table:\n";
+  opad << *time_table_;
+  opad.strict_sync();
+  Os << "  Camera: \n";
+  opad << *cam;
+  opad.strict_sync();
+  Os << "  Dem: \n";
+  opad << dem();
+  opad.strict_sync();
+  Os << "  Image: \n";
+  opad << *image();
+  opad.strict_sync();
+  Os << "  Refraction\n";
+  if(!refraction())
+    opad << "No refraction model included\n";
+  else
+    opad << *refraction();
+  opad.strict_sync();
 }
 

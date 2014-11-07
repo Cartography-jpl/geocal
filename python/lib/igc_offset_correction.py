@@ -178,10 +178,9 @@ class IgcOffsetCorrection(IgcCollection):
         that uses this call.'''
         igc = self.image_ground_connection(image_index)
         jac_igc = igc.image_coordinate_jac_parm(ground_point)
-        jac[jac_row, jac_col:(jac_col + jac_igc.shape[1])] = \
-            jac_igc[0,:] * line_scale
-        jac[jac_row+1, jac_col:(jac_col + jac_igc.shape[1])] = \
-            jac_igc[1,:] * sample_scale
+        for j in range(jac_igc.shape[1]):
+            jac[jac_row, jac_col + j] = jac_igc[0,j] * line_scale
+            jac[jac_row+1, jac_col + j] = jac_igc[1,j] * sample_scale
             
     def image_title(self, image_index):
         '''Title to use when displaying the given image'''

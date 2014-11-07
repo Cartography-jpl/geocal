@@ -83,6 +83,14 @@ Options:
        projection that matches the resolution of the center pixel of the 
        base image. See also --map-info option.
 
+  --use-intersection 
+       This only applies to gcps. There is a trade off between getting
+       the largest coverage (by taking a union of all the igc on the
+       surface} and the strongest points (by looking at places seen by
+       all the cameras). You may want to do both - so generate a set
+       of GCPs using the largest coverage first and then the
+       intersection second.
+
   --verbose
        Print more information as we run.
 
@@ -118,7 +126,8 @@ if(args.gcp):
         dem = igc.dem(0)
     refimg = read_shelve(args.reference_image)
     tpcollect = GcpTiePointCollect(refimg, dem, igc, 
-                                   avg_level = args.avg_level)
+                                   avg_level = args.avg_level,
+                                   use_intersection = args.use_intersection)
 else:
     tpcollect = TiePointCollect(igc, avg_level = args.avg_level,
                                 map_info = mi,
@@ -132,8 +141,12 @@ numy = min(args.number_y, maxnumy)
 
 tparr = tpcollect.tie_point_grid(numx, numy, pool = pool)
 
-if(args.add_tp):
-    tparr.extend(read_shelve(args.output))
+try:
+    # Ok if this fails, it just means args.output doesn't exist yet
+    if(args.add_tp):
+        tparr.extend(read_shelve(args.output))
+except KeyError:
+    pass
 
 write_shelve(args.output, tparr)
 

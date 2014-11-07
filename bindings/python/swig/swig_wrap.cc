@@ -113,6 +113,7 @@ extern "C" {
   void init_planet_coordinate(void);
   void init_igc_ray_caster(void);
   void init_igc_rolling_shutter(void);
+  void init_rolling_shutter_constant_time_table(void);
   void init_argus_camera(void);
   void init_argus_orbit(void);
   void init_quickbird_camera(void);
@@ -336,6 +337,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_planet_coordinate", init_planet_coordinate);
   init_extension_module(package, "_igc_ray_caster", init_igc_ray_caster);
   init_extension_module(package, "_igc_rolling_shutter", init_igc_rolling_shutter);
+  init_extension_module(package, "_rolling_shutter_constant_time_table", init_rolling_shutter_constant_time_table);
   init_extension_module(package, "_argus_camera", init_argus_camera);
   init_extension_module(package, "_argus_orbit", init_argus_orbit);
   init_extension_module(package, "_quickbird_camera", init_quickbird_camera);

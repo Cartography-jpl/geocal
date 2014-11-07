@@ -1,65 +1,12 @@
 #include "unit_test_support.h"
 #include "igc_rolling_shutter.h"
+#include "rolling_shutter_constant_time_table.h"
 #include "quaternion_camera.h"
 #include "simple_dem.h"
 #include "memory_raster_image.h"
 #include "ecr.h"
 using namespace GeoCal;
 using namespace blitz;
-// Don't have a TimeTable like this yet, so we create here.
-
-class RollingShutterConstantSpacingTimeTable : public TimeTable {
-public:
-  RollingShutterConstantSpacingTimeTable(Time Min_time, Time Max_time, 
-			   double Time_space = 40.8e-3)
-  : min_t(Min_time),
-    tspace(Time_space)
-  {
-    max_l = (int) round((Max_time - Min_time) / tspace);
-  }
-  virtual ~RollingShutterConstantSpacingTimeTable() {}
-  virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
-    const
-  {
-    double line = (T  - min_time()) / tspace;
-    return ImageCoordinate(line, F.sample);
-  }
-  virtual ImageCoordinateWithDerivative 
-  image_coordinate_with_derivative(const TimeWithDerivative& T, 
-				   const FrameCoordinateWithDerivative& F)
-    const
-  {
-    AutoDerivative<double> line = (T  - min_time()) / tspace;
-    return ImageCoordinateWithDerivative(line, F.sample);
-  }
-  virtual void print(std::ostream& Os) const
-  { std::cerr << "RollingShutterConstantSpacingTimeTable\n"; }
-  virtual void time(const ImageCoordinate& Ic, Time& T, FrameCoordinate& F)
-    const
-  {
-    range_check(Ic.line, (double) min_line(), (double) max_line() + 1.0);
-    T = min_time() + Ic.line * tspace;
-    F = FrameCoordinate(Ic.line, Ic.sample);
-  }
-  virtual void time_with_derivative(const ImageCoordinateWithDerivative& Ic, 
-				    TimeWithDerivative& T, 
-				    FrameCoordinateWithDerivative& F) const
-  {
-    range_check(Ic.line.value(), (double) min_line(), 
-		(double) max_line() + 1.0);
-    T = TimeWithDerivative(min_time()) + Ic.line * tspace;
-    F = FrameCoordinateWithDerivative(Ic.line, Ic.sample);
-  }
-  virtual int min_line() const {return 0;}
-  virtual int max_line() const {return max_l;}
-  virtual Time min_time() const {return min_t;}
-  virtual Time max_time() const {return min_t + tspace * max_l;}
-  double time_space() const {return tspace;}
-private:
-  Time min_t;
-  int max_l;
-  double tspace;
-};
 
 class IgcRollingShutterFixture : public GlobalFixture {
 public:
@@ -76,7 +23,7 @@ public:
       img(new MemoryRasterImage(cam->number_line(0),
 				cam->number_sample(0)));
     tspace = 1e-3;
-    tt.reset(new RollingShutterConstantSpacingTimeTable(tmin, 
+    tt.reset(new RollingShutterConstantTimeTable(tmin, 
 	tmin + cam->number_line(0) * tspace, tspace));
     igc.reset(new IgcRollingShutter(orb, tt, cam, dem, img));
   }

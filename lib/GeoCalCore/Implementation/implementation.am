@@ -79,6 +79,7 @@ geocalinc_HEADERS+= @srcimplementation@/dem_match.h
 libgeocal_la_SOURCES+= @srcimplementation@/dem_match.cc
 geocalinc_HEADERS+= @srcimplementation@/igc_rolling_shutter.h
 libgeocal_la_SOURCES+= @srcimplementation@/igc_rolling_shutter.cc
+geocalinc_HEADERS+= @srcimplementation@/rolling_shutter_constant_time_table.h
 if HAVE_FFTW
 geocalinc_HEADERS+= @srcimplementation@/phase_correlation_matcher.h
 libgeocal_la_SOURCES+= @srcimplementation@/phase_correlation_matcher.cc
@@ -188,6 +189,7 @@ SWIG_SRC += @swigsrc@/orbit_data_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/planet_coordinate_wrap.cc
 SWIG_SRC += @swigsrc@/igc_ray_caster_wrap.cc
 SWIG_SRC += @swigsrc@/igc_rolling_shutter_wrap.cc
+SWIG_SRC += @swigsrc@/rolling_shutter_constant_time_table_wrap.cc
 SWIG_SRC_HDF5 += @swigsrc@/hdf_orbit_wrap.cc
 SWIG_SRC_HDF5_CARTO += @swigsrc@/hdf_orbit_carto_wrap.cc
 # Test files

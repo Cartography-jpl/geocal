@@ -11,8 +11,9 @@ except ImportError:
 from tempfile import NamedTemporaryFile
 import subprocess
 import os
+import re
 
-version="%prog May 9, 2014"
+version="%prog November 6, 2014"
 usage="""Usage: 
   gdal_to_nitf [options] <input_file> <output_nitf>
   gdal_to_nitf -h | --help
@@ -53,6 +54,21 @@ Options:
 """
 args = docopt_simple(usage, version=version)
 
+# Special handling for a unsuccessful RPC. We'll add support for the
+# success flag at some point in geocal, but for now have a work around since
+# we don't currently support this.
+failed_rpc = False
+vfname = re.sub("1:\\d+", "1", args.input_file)
+if(VicarFile.is_vicar_file(vfname)):
+    f = VicarFile(vfname)
+    try:
+        success = int(f["GEOTIFF", "RPC_FIELD1"][0])
+        if(success == 0):
+            failed_rpc = True
+    except RuntimeError:
+        # Ok if this fails, we just don't have this metadata field
+        pass
+
 # Create a "virtual raster image". This is a text file that allows us to
 # set various metadata fields without changing the original file. GDAL then
 # treats this raster image we can later copy.
@@ -75,7 +91,7 @@ with NamedTemporaryFile() as tmp:
     subprocess.check_call(cmd)
     fvrt = GdalRasterImage(tmp.name)
     creation_option = []
-    if(fin.raster_image(0).has_rpc):
+    if(fin.raster_image(0).has_rpc and not failed_rpc):
         if(fin.raster_image(0).rpc.rpc_type == Rpc.RPC_A):
             tre = TreRPC00A()
             tre.rpc = fin.raster_image(0).rpc

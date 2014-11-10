@@ -19,5 +19,8 @@ public:
     const;
   %python_attribute(quaternion_orbit_data, std::vector<boost::shared_ptr<QuaternionOrbitData> >)
   %pickle_init(1, self.quaternion_orbit_data);
+protected:
+  virtual boost::shared_ptr<QuaternionOrbitData> orbit_data_create(Time T) 
+    const;
 };
 }

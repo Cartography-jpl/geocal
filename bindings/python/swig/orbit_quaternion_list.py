@@ -130,6 +130,16 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
     For times that fall between these values, we interpolate to get the
     OrbitData.
 
+    Note that for some classes the calculation of the full list of
+    QuaternionOrbitData might not be needed, for example an Orbit file
+    covering a full day of which we are only using a subset of the data.
+    To support this, we allow a lazy evaluation of the
+    QuaternionOrbitData. It can initially be supplied as a null
+    boost::shared_ptr, and when we encounter a null we call the function
+    orbit_data_create. This function should be overriden by a derived
+    class to supply the calculation of a QuaternionOrbitData for a
+    particular time on demand.
+
     C++ includes: orbit_quaternion_list.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -140,7 +150,10 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
         Constructor that takes a list of QuaternionOrbitData values.
 
         Note that the data doesn't need to be sorted, we handle sorting as we
-        ingest the data. 
+        ingest the data.
+
+        QuaternionOrbitData pointer can be null if we want to do a lazy
+        evaluation of the data (see description of class for details). 
         """
         _orbit_quaternion_list.OrbitQuaternionList_swiginit(self,_orbit_quaternion_list.new_OrbitQuaternionList(*args))
     def orbit_data(self, *args):

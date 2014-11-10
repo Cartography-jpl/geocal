@@ -4,6 +4,34 @@
 
 using namespace GeoCal;
 using namespace blitz;
+
+class OrbitQuaternionListLazyTest: public OrbitQuaternionList {
+public:
+  OrbitQuaternionListLazyTest()
+  {
+    boost::shared_ptr<QuaternionOrbitData> null;
+    Time t1 = Time::time_pgs(100.0);
+    Time t2 = Time::time_pgs(102.0);
+    Geodetic p1(10, 20, 200);
+    Geodetic p2(12, 22, 400);
+    od1.reset(new AircraftOrbitData(t1, p1, t2, p2, 10, 20, 30));
+    od2.reset(new AircraftOrbitData(t2, p2, t1, p1, 20, 30, 20));
+    orbit_data_map[t1] = null;
+    orbit_data_map[t2] = null;
+    initialize();
+  }
+  virtual ~OrbitQuaternionListLazyTest() {}
+  virtual boost::shared_ptr<QuaternionOrbitData> orbit_data_create(Time T) const
+  {
+    if(fabs(T - od1->time())  < 1e-4)
+      return od1;
+    else
+      return od2;
+  }
+private:
+  boost::shared_ptr<QuaternionOrbitData> od1, od2;
+};
+
 class OrbitQuaternionListFixture : public GlobalFixture {
 public:
   OrbitQuaternionListFixture()  {
@@ -18,11 +46,14 @@ public:
     v.push_back(od1);
     orb.reset(new OrbitQuaternionList(v));
     t = Time::time_pgs(101);
+    orb_lazy.reset(new OrbitQuaternionListLazyTest());
   }
   boost::shared_ptr<OrbitQuaternionList> orb;
+  boost::shared_ptr<OrbitQuaternionList> orb_lazy;
   boost::shared_ptr<AircraftOrbitData> od1, od2;
   Time t;
 };
+
 
 BOOST_FIXTURE_TEST_SUITE(orbit_quaternion_list, OrbitQuaternionListFixture)
 
@@ -39,6 +70,19 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_CLOSE(orb->orbit_data(Time::time_pgs(101))->position_cf()->
 		    latitude(), 11.0, 1.0);
   BOOST_CHECK_CLOSE(orb->orbit_data(Time::time_pgs(101))->position_cf()->
+		    longitude(), 21.0, 1.0);
+
+  BOOST_CHECK_CLOSE(orb_lazy->min_time().pgs(), 100.0, 1e-6);
+  BOOST_CHECK_CLOSE(orb_lazy->max_time().pgs(), 102.0, 1e-6);
+  BOOST_CHECK(distance(*orb_lazy->orbit_data(Time::time_pgs(100.0))->position_cf(),
+		       od1->position_geodetic()) < 10);
+  g1 = Geodetic(*orb_lazy->orbit_data(Time::time_pgs(101.999))->position_cf());
+  BOOST_CHECK(distance(*orb_lazy->orbit_data(Time::time_pgs(101.99999))->position_cf(),
+		       od2->position_geodetic()) < 10);
+  g2 = Geodetic(*orb_lazy->orbit_data(Time::time_pgs(101))->position_cf());
+  BOOST_CHECK_CLOSE(orb_lazy->orbit_data(Time::time_pgs(101))->position_cf()->
+		    latitude(), 11.0, 1.0);
+  BOOST_CHECK_CLOSE(orb_lazy->orbit_data(Time::time_pgs(101))->position_cf()->
 		    longitude(), 21.0, 1.0);
 }
 

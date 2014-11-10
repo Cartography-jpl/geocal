@@ -5436,7 +5436,10 @@ static PyMethodDef SwigMethods[] = {
 		"Constructor that takes a list of QuaternionOrbitData values.\n"
 		"\n"
 		"Note that the data doesn't need to be sorted, we handle sorting as we\n"
-		"ingest the data. \n"
+		"ingest the data.\n"
+		"\n"
+		"QuaternionOrbitData pointer can be null if we want to do a lazy\n"
+		"evaluation of the data (see description of class for details). \n"
 		""},
 	 { (char *)"OrbitQuaternionList_orbit_data", _wrap_OrbitQuaternionList_orbit_data, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr< OrbitData > OrbitQuaternionList::orbit_data(const TimeWithDerivative &T) const\n"

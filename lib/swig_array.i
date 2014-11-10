@@ -321,14 +321,26 @@ public:
 %array_template(BlitzArray_double_2, double, 2);
 %array_template(BlitzArray_double_3, double, 3);
 %array_template(BlitzArray_double_4, double, 4);
+%array_template(BlitzArray_double_5, double, 5);
+%array_template(BlitzArray_double_6, double, 6);
+%array_template(BlitzArray_double_7, double, 7);
+%array_template(BlitzArray_double_8, double, 8);
 %array_template(BlitzArray_bool_1, bool, 1);
 %array_template(BlitzArray_bool_2, bool, 2);
 %array_template(BlitzArray_bool_3, bool, 3);
 %array_template(BlitzArray_bool_4, bool, 4);
+%array_template(BlitzArray_bool_5, bool, 5);
+%array_template(BlitzArray_bool_6, bool, 6);
+%array_template(BlitzArray_bool_7, bool, 7);
+%array_template(BlitzArray_bool_8, bool, 8);
 %array_template(BlitzArray_int_1, int, 1);
 %array_template(BlitzArray_int_2, int, 2);
 %array_template(BlitzArray_int_3, int, 3);
 %array_template(BlitzArray_int_4, int, 4);
+%array_template(BlitzArray_int_5, int, 5);
+%array_template(BlitzArray_int_6, int, 6);
+%array_template(BlitzArray_int_7, int, 7);
+%array_template(BlitzArray_int_8, int, 8);
 #endif  // end SWIGPYTHON
 
 

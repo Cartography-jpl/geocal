@@ -184,6 +184,78 @@ BlitzArray_double_4.shape3 = new_instancemethod(_swig_array.BlitzArray_double_4_
 BlitzArray_double_4_swigregister = _swig_array.BlitzArray_double_4_swigregister
 BlitzArray_double_4_swigregister(BlitzArray_double_4)
 
+class BlitzArray_double_5(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_double_5_swiginit(self,_swig_array.new_BlitzArray_double_5(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_double_5
+BlitzArray_double_5.data = new_instancemethod(_swig_array.BlitzArray_double_5_data,None,BlitzArray_double_5)
+BlitzArray_double_5.size = new_instancemethod(_swig_array.BlitzArray_double_5_size,None,BlitzArray_double_5)
+BlitzArray_double_5.read = new_instancemethod(_swig_array.BlitzArray_double_5_read,None,BlitzArray_double_5)
+BlitzArray_double_5.write = new_instancemethod(_swig_array.BlitzArray_double_5_write,None,BlitzArray_double_5)
+BlitzArray_double_5.datav = new_instancemethod(_swig_array.BlitzArray_double_5_datav,None,BlitzArray_double_5)
+BlitzArray_double_5.shape0 = new_instancemethod(_swig_array.BlitzArray_double_5_shape0,None,BlitzArray_double_5)
+BlitzArray_double_5.shape1 = new_instancemethod(_swig_array.BlitzArray_double_5_shape1,None,BlitzArray_double_5)
+BlitzArray_double_5.shape2 = new_instancemethod(_swig_array.BlitzArray_double_5_shape2,None,BlitzArray_double_5)
+BlitzArray_double_5.shape3 = new_instancemethod(_swig_array.BlitzArray_double_5_shape3,None,BlitzArray_double_5)
+BlitzArray_double_5_swigregister = _swig_array.BlitzArray_double_5_swigregister
+BlitzArray_double_5_swigregister(BlitzArray_double_5)
+
+class BlitzArray_double_6(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_double_6_swiginit(self,_swig_array.new_BlitzArray_double_6(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_double_6
+BlitzArray_double_6.data = new_instancemethod(_swig_array.BlitzArray_double_6_data,None,BlitzArray_double_6)
+BlitzArray_double_6.size = new_instancemethod(_swig_array.BlitzArray_double_6_size,None,BlitzArray_double_6)
+BlitzArray_double_6.read = new_instancemethod(_swig_array.BlitzArray_double_6_read,None,BlitzArray_double_6)
+BlitzArray_double_6.write = new_instancemethod(_swig_array.BlitzArray_double_6_write,None,BlitzArray_double_6)
+BlitzArray_double_6.datav = new_instancemethod(_swig_array.BlitzArray_double_6_datav,None,BlitzArray_double_6)
+BlitzArray_double_6.shape0 = new_instancemethod(_swig_array.BlitzArray_double_6_shape0,None,BlitzArray_double_6)
+BlitzArray_double_6.shape1 = new_instancemethod(_swig_array.BlitzArray_double_6_shape1,None,BlitzArray_double_6)
+BlitzArray_double_6.shape2 = new_instancemethod(_swig_array.BlitzArray_double_6_shape2,None,BlitzArray_double_6)
+BlitzArray_double_6.shape3 = new_instancemethod(_swig_array.BlitzArray_double_6_shape3,None,BlitzArray_double_6)
+BlitzArray_double_6_swigregister = _swig_array.BlitzArray_double_6_swigregister
+BlitzArray_double_6_swigregister(BlitzArray_double_6)
+
+class BlitzArray_double_7(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_double_7_swiginit(self,_swig_array.new_BlitzArray_double_7(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_double_7
+BlitzArray_double_7.data = new_instancemethod(_swig_array.BlitzArray_double_7_data,None,BlitzArray_double_7)
+BlitzArray_double_7.size = new_instancemethod(_swig_array.BlitzArray_double_7_size,None,BlitzArray_double_7)
+BlitzArray_double_7.read = new_instancemethod(_swig_array.BlitzArray_double_7_read,None,BlitzArray_double_7)
+BlitzArray_double_7.write = new_instancemethod(_swig_array.BlitzArray_double_7_write,None,BlitzArray_double_7)
+BlitzArray_double_7.datav = new_instancemethod(_swig_array.BlitzArray_double_7_datav,None,BlitzArray_double_7)
+BlitzArray_double_7.shape0 = new_instancemethod(_swig_array.BlitzArray_double_7_shape0,None,BlitzArray_double_7)
+BlitzArray_double_7.shape1 = new_instancemethod(_swig_array.BlitzArray_double_7_shape1,None,BlitzArray_double_7)
+BlitzArray_double_7.shape2 = new_instancemethod(_swig_array.BlitzArray_double_7_shape2,None,BlitzArray_double_7)
+BlitzArray_double_7.shape3 = new_instancemethod(_swig_array.BlitzArray_double_7_shape3,None,BlitzArray_double_7)
+BlitzArray_double_7_swigregister = _swig_array.BlitzArray_double_7_swigregister
+BlitzArray_double_7_swigregister(BlitzArray_double_7)
+
+class BlitzArray_double_8(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_double_8_swiginit(self,_swig_array.new_BlitzArray_double_8(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_double_8
+BlitzArray_double_8.data = new_instancemethod(_swig_array.BlitzArray_double_8_data,None,BlitzArray_double_8)
+BlitzArray_double_8.size = new_instancemethod(_swig_array.BlitzArray_double_8_size,None,BlitzArray_double_8)
+BlitzArray_double_8.read = new_instancemethod(_swig_array.BlitzArray_double_8_read,None,BlitzArray_double_8)
+BlitzArray_double_8.write = new_instancemethod(_swig_array.BlitzArray_double_8_write,None,BlitzArray_double_8)
+BlitzArray_double_8.datav = new_instancemethod(_swig_array.BlitzArray_double_8_datav,None,BlitzArray_double_8)
+BlitzArray_double_8.shape0 = new_instancemethod(_swig_array.BlitzArray_double_8_shape0,None,BlitzArray_double_8)
+BlitzArray_double_8.shape1 = new_instancemethod(_swig_array.BlitzArray_double_8_shape1,None,BlitzArray_double_8)
+BlitzArray_double_8.shape2 = new_instancemethod(_swig_array.BlitzArray_double_8_shape2,None,BlitzArray_double_8)
+BlitzArray_double_8.shape3 = new_instancemethod(_swig_array.BlitzArray_double_8_shape3,None,BlitzArray_double_8)
+BlitzArray_double_8_swigregister = _swig_array.BlitzArray_double_8_swigregister
+BlitzArray_double_8_swigregister(BlitzArray_double_8)
+
 class BlitzArray_bool_1(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
@@ -256,6 +328,78 @@ BlitzArray_bool_4.shape3 = new_instancemethod(_swig_array.BlitzArray_bool_4_shap
 BlitzArray_bool_4_swigregister = _swig_array.BlitzArray_bool_4_swigregister
 BlitzArray_bool_4_swigregister(BlitzArray_bool_4)
 
+class BlitzArray_bool_5(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_bool_5_swiginit(self,_swig_array.new_BlitzArray_bool_5(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_bool_5
+BlitzArray_bool_5.data = new_instancemethod(_swig_array.BlitzArray_bool_5_data,None,BlitzArray_bool_5)
+BlitzArray_bool_5.size = new_instancemethod(_swig_array.BlitzArray_bool_5_size,None,BlitzArray_bool_5)
+BlitzArray_bool_5.read = new_instancemethod(_swig_array.BlitzArray_bool_5_read,None,BlitzArray_bool_5)
+BlitzArray_bool_5.write = new_instancemethod(_swig_array.BlitzArray_bool_5_write,None,BlitzArray_bool_5)
+BlitzArray_bool_5.datav = new_instancemethod(_swig_array.BlitzArray_bool_5_datav,None,BlitzArray_bool_5)
+BlitzArray_bool_5.shape0 = new_instancemethod(_swig_array.BlitzArray_bool_5_shape0,None,BlitzArray_bool_5)
+BlitzArray_bool_5.shape1 = new_instancemethod(_swig_array.BlitzArray_bool_5_shape1,None,BlitzArray_bool_5)
+BlitzArray_bool_5.shape2 = new_instancemethod(_swig_array.BlitzArray_bool_5_shape2,None,BlitzArray_bool_5)
+BlitzArray_bool_5.shape3 = new_instancemethod(_swig_array.BlitzArray_bool_5_shape3,None,BlitzArray_bool_5)
+BlitzArray_bool_5_swigregister = _swig_array.BlitzArray_bool_5_swigregister
+BlitzArray_bool_5_swigregister(BlitzArray_bool_5)
+
+class BlitzArray_bool_6(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_bool_6_swiginit(self,_swig_array.new_BlitzArray_bool_6(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_bool_6
+BlitzArray_bool_6.data = new_instancemethod(_swig_array.BlitzArray_bool_6_data,None,BlitzArray_bool_6)
+BlitzArray_bool_6.size = new_instancemethod(_swig_array.BlitzArray_bool_6_size,None,BlitzArray_bool_6)
+BlitzArray_bool_6.read = new_instancemethod(_swig_array.BlitzArray_bool_6_read,None,BlitzArray_bool_6)
+BlitzArray_bool_6.write = new_instancemethod(_swig_array.BlitzArray_bool_6_write,None,BlitzArray_bool_6)
+BlitzArray_bool_6.datav = new_instancemethod(_swig_array.BlitzArray_bool_6_datav,None,BlitzArray_bool_6)
+BlitzArray_bool_6.shape0 = new_instancemethod(_swig_array.BlitzArray_bool_6_shape0,None,BlitzArray_bool_6)
+BlitzArray_bool_6.shape1 = new_instancemethod(_swig_array.BlitzArray_bool_6_shape1,None,BlitzArray_bool_6)
+BlitzArray_bool_6.shape2 = new_instancemethod(_swig_array.BlitzArray_bool_6_shape2,None,BlitzArray_bool_6)
+BlitzArray_bool_6.shape3 = new_instancemethod(_swig_array.BlitzArray_bool_6_shape3,None,BlitzArray_bool_6)
+BlitzArray_bool_6_swigregister = _swig_array.BlitzArray_bool_6_swigregister
+BlitzArray_bool_6_swigregister(BlitzArray_bool_6)
+
+class BlitzArray_bool_7(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_bool_7_swiginit(self,_swig_array.new_BlitzArray_bool_7(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_bool_7
+BlitzArray_bool_7.data = new_instancemethod(_swig_array.BlitzArray_bool_7_data,None,BlitzArray_bool_7)
+BlitzArray_bool_7.size = new_instancemethod(_swig_array.BlitzArray_bool_7_size,None,BlitzArray_bool_7)
+BlitzArray_bool_7.read = new_instancemethod(_swig_array.BlitzArray_bool_7_read,None,BlitzArray_bool_7)
+BlitzArray_bool_7.write = new_instancemethod(_swig_array.BlitzArray_bool_7_write,None,BlitzArray_bool_7)
+BlitzArray_bool_7.datav = new_instancemethod(_swig_array.BlitzArray_bool_7_datav,None,BlitzArray_bool_7)
+BlitzArray_bool_7.shape0 = new_instancemethod(_swig_array.BlitzArray_bool_7_shape0,None,BlitzArray_bool_7)
+BlitzArray_bool_7.shape1 = new_instancemethod(_swig_array.BlitzArray_bool_7_shape1,None,BlitzArray_bool_7)
+BlitzArray_bool_7.shape2 = new_instancemethod(_swig_array.BlitzArray_bool_7_shape2,None,BlitzArray_bool_7)
+BlitzArray_bool_7.shape3 = new_instancemethod(_swig_array.BlitzArray_bool_7_shape3,None,BlitzArray_bool_7)
+BlitzArray_bool_7_swigregister = _swig_array.BlitzArray_bool_7_swigregister
+BlitzArray_bool_7_swigregister(BlitzArray_bool_7)
+
+class BlitzArray_bool_8(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_bool_8_swiginit(self,_swig_array.new_BlitzArray_bool_8(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_bool_8
+BlitzArray_bool_8.data = new_instancemethod(_swig_array.BlitzArray_bool_8_data,None,BlitzArray_bool_8)
+BlitzArray_bool_8.size = new_instancemethod(_swig_array.BlitzArray_bool_8_size,None,BlitzArray_bool_8)
+BlitzArray_bool_8.read = new_instancemethod(_swig_array.BlitzArray_bool_8_read,None,BlitzArray_bool_8)
+BlitzArray_bool_8.write = new_instancemethod(_swig_array.BlitzArray_bool_8_write,None,BlitzArray_bool_8)
+BlitzArray_bool_8.datav = new_instancemethod(_swig_array.BlitzArray_bool_8_datav,None,BlitzArray_bool_8)
+BlitzArray_bool_8.shape0 = new_instancemethod(_swig_array.BlitzArray_bool_8_shape0,None,BlitzArray_bool_8)
+BlitzArray_bool_8.shape1 = new_instancemethod(_swig_array.BlitzArray_bool_8_shape1,None,BlitzArray_bool_8)
+BlitzArray_bool_8.shape2 = new_instancemethod(_swig_array.BlitzArray_bool_8_shape2,None,BlitzArray_bool_8)
+BlitzArray_bool_8.shape3 = new_instancemethod(_swig_array.BlitzArray_bool_8_shape3,None,BlitzArray_bool_8)
+BlitzArray_bool_8_swigregister = _swig_array.BlitzArray_bool_8_swigregister
+BlitzArray_bool_8_swigregister(BlitzArray_bool_8)
+
 class BlitzArray_int_1(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
@@ -327,6 +471,78 @@ BlitzArray_int_4.shape2 = new_instancemethod(_swig_array.BlitzArray_int_4_shape2
 BlitzArray_int_4.shape3 = new_instancemethod(_swig_array.BlitzArray_int_4_shape3,None,BlitzArray_int_4)
 BlitzArray_int_4_swigregister = _swig_array.BlitzArray_int_4_swigregister
 BlitzArray_int_4_swigregister(BlitzArray_int_4)
+
+class BlitzArray_int_5(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_int_5_swiginit(self,_swig_array.new_BlitzArray_int_5(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_int_5
+BlitzArray_int_5.data = new_instancemethod(_swig_array.BlitzArray_int_5_data,None,BlitzArray_int_5)
+BlitzArray_int_5.size = new_instancemethod(_swig_array.BlitzArray_int_5_size,None,BlitzArray_int_5)
+BlitzArray_int_5.read = new_instancemethod(_swig_array.BlitzArray_int_5_read,None,BlitzArray_int_5)
+BlitzArray_int_5.write = new_instancemethod(_swig_array.BlitzArray_int_5_write,None,BlitzArray_int_5)
+BlitzArray_int_5.datav = new_instancemethod(_swig_array.BlitzArray_int_5_datav,None,BlitzArray_int_5)
+BlitzArray_int_5.shape0 = new_instancemethod(_swig_array.BlitzArray_int_5_shape0,None,BlitzArray_int_5)
+BlitzArray_int_5.shape1 = new_instancemethod(_swig_array.BlitzArray_int_5_shape1,None,BlitzArray_int_5)
+BlitzArray_int_5.shape2 = new_instancemethod(_swig_array.BlitzArray_int_5_shape2,None,BlitzArray_int_5)
+BlitzArray_int_5.shape3 = new_instancemethod(_swig_array.BlitzArray_int_5_shape3,None,BlitzArray_int_5)
+BlitzArray_int_5_swigregister = _swig_array.BlitzArray_int_5_swigregister
+BlitzArray_int_5_swigregister(BlitzArray_int_5)
+
+class BlitzArray_int_6(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_int_6_swiginit(self,_swig_array.new_BlitzArray_int_6(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_int_6
+BlitzArray_int_6.data = new_instancemethod(_swig_array.BlitzArray_int_6_data,None,BlitzArray_int_6)
+BlitzArray_int_6.size = new_instancemethod(_swig_array.BlitzArray_int_6_size,None,BlitzArray_int_6)
+BlitzArray_int_6.read = new_instancemethod(_swig_array.BlitzArray_int_6_read,None,BlitzArray_int_6)
+BlitzArray_int_6.write = new_instancemethod(_swig_array.BlitzArray_int_6_write,None,BlitzArray_int_6)
+BlitzArray_int_6.datav = new_instancemethod(_swig_array.BlitzArray_int_6_datav,None,BlitzArray_int_6)
+BlitzArray_int_6.shape0 = new_instancemethod(_swig_array.BlitzArray_int_6_shape0,None,BlitzArray_int_6)
+BlitzArray_int_6.shape1 = new_instancemethod(_swig_array.BlitzArray_int_6_shape1,None,BlitzArray_int_6)
+BlitzArray_int_6.shape2 = new_instancemethod(_swig_array.BlitzArray_int_6_shape2,None,BlitzArray_int_6)
+BlitzArray_int_6.shape3 = new_instancemethod(_swig_array.BlitzArray_int_6_shape3,None,BlitzArray_int_6)
+BlitzArray_int_6_swigregister = _swig_array.BlitzArray_int_6_swigregister
+BlitzArray_int_6_swigregister(BlitzArray_int_6)
+
+class BlitzArray_int_7(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_int_7_swiginit(self,_swig_array.new_BlitzArray_int_7(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_int_7
+BlitzArray_int_7.data = new_instancemethod(_swig_array.BlitzArray_int_7_data,None,BlitzArray_int_7)
+BlitzArray_int_7.size = new_instancemethod(_swig_array.BlitzArray_int_7_size,None,BlitzArray_int_7)
+BlitzArray_int_7.read = new_instancemethod(_swig_array.BlitzArray_int_7_read,None,BlitzArray_int_7)
+BlitzArray_int_7.write = new_instancemethod(_swig_array.BlitzArray_int_7_write,None,BlitzArray_int_7)
+BlitzArray_int_7.datav = new_instancemethod(_swig_array.BlitzArray_int_7_datav,None,BlitzArray_int_7)
+BlitzArray_int_7.shape0 = new_instancemethod(_swig_array.BlitzArray_int_7_shape0,None,BlitzArray_int_7)
+BlitzArray_int_7.shape1 = new_instancemethod(_swig_array.BlitzArray_int_7_shape1,None,BlitzArray_int_7)
+BlitzArray_int_7.shape2 = new_instancemethod(_swig_array.BlitzArray_int_7_shape2,None,BlitzArray_int_7)
+BlitzArray_int_7.shape3 = new_instancemethod(_swig_array.BlitzArray_int_7_shape3,None,BlitzArray_int_7)
+BlitzArray_int_7_swigregister = _swig_array.BlitzArray_int_7_swigregister
+BlitzArray_int_7_swigregister(BlitzArray_int_7)
+
+class BlitzArray_int_8(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _swig_array.BlitzArray_int_8_swiginit(self,_swig_array.new_BlitzArray_int_8(*args))
+    __swig_destroy__ = _swig_array.delete_BlitzArray_int_8
+BlitzArray_int_8.data = new_instancemethod(_swig_array.BlitzArray_int_8_data,None,BlitzArray_int_8)
+BlitzArray_int_8.size = new_instancemethod(_swig_array.BlitzArray_int_8_size,None,BlitzArray_int_8)
+BlitzArray_int_8.read = new_instancemethod(_swig_array.BlitzArray_int_8_read,None,BlitzArray_int_8)
+BlitzArray_int_8.write = new_instancemethod(_swig_array.BlitzArray_int_8_write,None,BlitzArray_int_8)
+BlitzArray_int_8.datav = new_instancemethod(_swig_array.BlitzArray_int_8_datav,None,BlitzArray_int_8)
+BlitzArray_int_8.shape0 = new_instancemethod(_swig_array.BlitzArray_int_8_shape0,None,BlitzArray_int_8)
+BlitzArray_int_8.shape1 = new_instancemethod(_swig_array.BlitzArray_int_8_shape1,None,BlitzArray_int_8)
+BlitzArray_int_8.shape2 = new_instancemethod(_swig_array.BlitzArray_int_8_shape2,None,BlitzArray_int_8)
+BlitzArray_int_8.shape3 = new_instancemethod(_swig_array.BlitzArray_int_8_shape3,None,BlitzArray_int_8)
+BlitzArray_int_8_swigregister = _swig_array.BlitzArray_int_8_swigregister
+BlitzArray_int_8_swigregister(BlitzArray_int_8)
 
 
 

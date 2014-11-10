@@ -30,6 +30,23 @@ def test_time():
     gp = igc.ground_coordinate(ic)
     for i in range(100000):
         t = igc.image_coordinate(gp)
+
+def test_time_rolling():
+    '''Test that uses a rolling shutter. This hits the orbit data much more
+    than a OrbitDataImageGroundConnection, so we'll check the timing for 
+    this.'''
+    orb = OrbitOffsetCorrection(orb_uncorr)
+    t = Time.time_acs(215077459.472);
+    tspace = 1e-3
+    tt = RollingShutterConstantTimeTable(t, t + cam.number_line(0) * tspace,
+                                         tspace)
+    img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
+    igc = IgcRollingShutter(orb, tt, cam, SimpleDem(), img, 
+                            IgcRollingShutter.ROLL_LINE_DIRECTION, "Image 1")
+    ic = ImageCoordinate(100, 200)
+    gp = igc.ground_coordinate(ic)
+    for i in range(1000):
+        t = igc.image_coordinate(gp)
     
 def test_orbit_offset_unchanged():
     '''Test orbit where we just forward everything. This makes sure that

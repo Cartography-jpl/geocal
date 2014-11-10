@@ -5,6 +5,8 @@
 #include "simple_dem.h"
 #include "memory_raster_image.h"
 #include "ecr.h"
+#include "hdf_orbit.h"
+#include "eci_tod.h"
 using namespace GeoCal;
 using namespace blitz;
 
@@ -12,8 +14,11 @@ class IgcRollingShutterFixture : public GlobalFixture {
 public:
   IgcRollingShutterFixture() 
   {
-    tmin = Time::parse_time("2003-01-01T11:11:00Z");
-    orb.reset(new KeplerOrbit());
+    // tmin = Time::parse_time("2003-01-01T11:11:00Z");
+    // orb.reset(new KeplerOrbit());
+    std::string fname = test_data_dir() + "sample_orbit.h5";
+    orb.reset(new HdfOrbit<EciTod, TimeAcsCreator>(fname));
+    tmin = Time::time_acs(215077459.472);
     cam.reset(new QuaternionCamera(quat_rot("zyx", 0.1, 0.2, 0.3),
 				   3375, 3648, 1.0 / 2500000, 1.0 / 2500000,
 				   1.0, FrameCoordinate(1688.0, 1824.5),
@@ -162,6 +167,15 @@ BOOST_AUTO_TEST_CASE(jacobian)
       else {
 	BOOST_CHECK(fabs(jac_fd(i, j)) < 2e-1);
       }
+}
+
+BOOST_AUTO_TEST_CASE(image_coordinate_timing)
+{
+  // Run image_coordinate a number of times to check the timing.
+  ImageCoordinate ic(100, 200);
+  boost::shared_ptr<GroundCoordinate> gc = igc->ground_coordinate(ic);
+  for(int i = 0; i < 1000; ++i)
+    ImageCoordinate ic = igc->image_coordinate(*gc);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

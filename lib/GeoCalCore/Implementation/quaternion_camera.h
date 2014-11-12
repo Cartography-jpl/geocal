@@ -56,9 +56,32 @@ public:
 		   const FrameCoordinate& Principal_point,
 		   FrameConvention Frame_convention = LINE_IS_X,
 		   FrameDirection Line_direction = INCREASE_IS_POSITIVE,
-		   FrameDirection Sample_direction = INCREASE_IS_POSITIVE,
-		   const blitz::Array<bool, 1>& Parameter_mask = 
-		   blitz::Array<bool, 1>())
+		   FrameDirection Sample_direction = INCREASE_IS_POSITIVE)
+    : focal_length_(Focal_length),
+      nband_(1),
+      nline_(Number_line),
+      nsamp_(Number_sample),
+      line_pitch_(Line_pitch),
+      sample_pitch_(Sample_pitch),
+      frame_to_sc_(to_autoderivative(Frame_to_sc_q)),
+      frame_convention_(Frame_convention),
+      line_direction_(Line_direction),
+      sample_direction_(Sample_direction)
+  { 
+    principal_point_.push_back(Principal_point);
+    parameter_mask_.resize(6 + 2 * number_band());
+    parameter_mask_ = true;
+  }
+
+  QuaternionCamera(boost::math::quaternion<double> Frame_to_sc_q, 
+		   double Number_line, double Number_sample,
+		   double Line_pitch, double Sample_pitch,
+		   double Focal_length, 
+		   const FrameCoordinate& Principal_point,
+		   FrameConvention Frame_convention,
+		   FrameDirection Line_direction,
+		   FrameDirection Sample_direction,
+		   const blitz::Array<bool, 1>& Parameter_mask)
     : focal_length_(Focal_length),
       nband_(1),
       nline_(Number_line),

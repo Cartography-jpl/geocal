@@ -532,17 +532,9 @@ class QuaternionCamera(geocal_swig.camera.Camera):
         GeoCal::QuaternionCamera::QuaternionCamera(boost::math::quaternion< double > Frame_to_sc_q, double Number_line,
         double Number_sample, double Line_pitch, double Sample_pitch, double
         Focal_length, const FrameCoordinate &Principal_point, FrameConvention
-        Frame_convention=LINE_IS_X, FrameDirection
-        Line_direction=INCREASE_IS_POSITIVE, FrameDirection
-        Sample_direction=INCREASE_IS_POSITIVE, const blitz::Array< bool, 1 >
-        &Parameter_mask=blitz::Array< bool, 1 >())
-        Create a QuaternionCamera.
+        Frame_convention, FrameDirection Line_direction, FrameDirection
+        Sample_direction, const blitz::Array< bool, 1 > &Parameter_mask)
 
-        The orientation of the camera to the spacecraft to given by the
-        quaternion that takes frame coordinates to spacecraft coordinates. The
-        size of the camera and the line pitch, sample pitch, and focal length
-        are given. By convention, these are given in mm. Finally the
-        Principal_point (coordinates at center) are given. 
         """
         _quaternion_camera.QuaternionCamera_swiginit(self,_quaternion_camera.new_QuaternionCamera(*args))
     __swig_destroy__ = _quaternion_camera.delete_QuaternionCamera

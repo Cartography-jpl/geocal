@@ -679,6 +679,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/boost/backtrace.cpp \
 	@srcimplementation@/memory_multi_band.cc \
 	@srcimplementation@/pan_sharpen.cc \
 	@srcimplementation@/rpc_image_ground_connection.cc \
+	@srcimplementation@/ipi_image_ground_connection.cc \
 	@srcimplementation@/eci_tod.cc \
 	@srcimplementation@/planet_coordinate.cc \
 	@srcimplementation@/eci_tod_burl.cc \
@@ -801,6 +802,7 @@ am_libgeocal_la_OBJECTS =  \
 	@srcimplementation@/libgeocal_la-memory_multi_band.lo \
 	@srcimplementation@/libgeocal_la-pan_sharpen.lo \
 	@srcimplementation@/libgeocal_la-rpc_image_ground_connection.lo \
+	@srcimplementation@/libgeocal_la-ipi_image_ground_connection.lo \
 	@srcimplementation@/libgeocal_la-eci_tod.lo \
 	@srcimplementation@/libgeocal_la-planet_coordinate.lo \
 	$(am__objects_17) \
@@ -1982,6 +1984,7 @@ libgeocal_la_SOURCES = @srcsupport@/boost/backtrace.cpp \
 	@srcimplementation@/memory_multi_band.cc \
 	@srcimplementation@/pan_sharpen.cc \
 	@srcimplementation@/rpc_image_ground_connection.cc \
+	@srcimplementation@/ipi_image_ground_connection.cc \
 	@srcimplementation@/eci_tod.cc \
 	@srcimplementation@/planet_coordinate.cc $(am__append_20) \
 	@srcimplementation@/quaternion_camera.cc \
@@ -3111,6 +3114,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcimplementation@/libgeocal_la-rpc_image_ground_connection.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-ipi_image_ground_connection.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-eci_tod.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -3895,6 +3901,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_simulated.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-image_mask_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-image_point_display.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ipi_image_ground_connection.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-magnify_bilinear.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-magnify_replicate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-map_reprojected_image.Plo@am__quote@
@@ -5665,6 +5672,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/rpc_image_ground_connection.cc' object='@srcimplementation@/libgeocal_la-rpc_image_ground_connection.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-rpc_image_ground_connection.lo `test -f '@srcimplementation@/rpc_image_ground_connection.cc' || echo '$(srcdir)/'`@srcimplementation@/rpc_image_ground_connection.cc
+
+@srcimplementation@/libgeocal_la-ipi_image_ground_connection.lo: @srcimplementation@/ipi_image_ground_connection.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-ipi_image_ground_connection.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-ipi_image_ground_connection.Tpo -c -o @srcimplementation@/libgeocal_la-ipi_image_ground_connection.lo `test -f '@srcimplementation@/ipi_image_ground_connection.cc' || echo '$(srcdir)/'`@srcimplementation@/ipi_image_ground_connection.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-ipi_image_ground_connection.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-ipi_image_ground_connection.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/ipi_image_ground_connection.cc' object='@srcimplementation@/libgeocal_la-ipi_image_ground_connection.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-ipi_image_ground_connection.lo `test -f '@srcimplementation@/ipi_image_ground_connection.cc' || echo '$(srcdir)/'`@srcimplementation@/ipi_image_ground_connection.cc
 
 @srcimplementation@/libgeocal_la-eci_tod.lo: @srcimplementation@/eci_tod.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-eci_tod.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod.Tpo -c -o @srcimplementation@/libgeocal_la-eci_tod.lo `test -f '@srcimplementation@/eci_tod.cc' || echo '$(srcdir)/'`@srcimplementation@/eci_tod.cc

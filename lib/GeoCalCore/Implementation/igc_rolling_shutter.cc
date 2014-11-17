@@ -257,7 +257,7 @@ blitz::Array<double, 7> IgcRollingShutter::cf_look_vector_arr
 
 void IgcRollingShutter::footprint_resolution
 (int Line, int Sample, double &Line_resolution_meter, 
- double &Sample_resolution_meter)
+ double &Sample_resolution_meter) const
 {
   Time t;
   FrameCoordinate f;

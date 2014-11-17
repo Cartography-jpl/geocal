@@ -83,7 +83,7 @@ public:
 		     int nintegration_step = 1) const;
   virtual void footprint_resolution(int Line, int Sample, 
 				    double &Line_resolution_meter, 
-				    double &Sample_resolution_meter);
+				    double &Sample_resolution_meter) const;
   virtual bool has_time() const { return true; }
   virtual Time pixel_time(const ImageCoordinate& Ic) const
   { Time t; FrameCoordinate fc; time_table_->time(Ic, t, fc);

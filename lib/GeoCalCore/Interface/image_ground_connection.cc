@@ -163,7 +163,7 @@ double ImageGroundConnection::resolution_meter
 void ImageGroundConnection::footprint_resolution
 (int Line, int Sample, 
  double &Line_resolution_meter, 
- double &Sample_resolution_meter)
+ double &Sample_resolution_meter) const
 {
   ImageCoordinate ic(Line, Sample);
   boost::shared_ptr<GroundCoordinate> gc1 = ground_coordinate(ic);

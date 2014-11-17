@@ -157,6 +157,35 @@ void AirMspiOrbit::initialize()
   m = quat_rot("zyx", -gimbal_angle_(0) * Constant::deg_to_rad, 
 	       -gimbal_angle_(1) * Constant::deg_to_rad, 
 	       -gimbal_angle_(2) * Constant::deg_to_rad);
+  // Right now, just hardcode the number of lines to keep in a tile.
+  // We can revisit this if needed.
+  blitz::Array<double, 2> empty;
+  for(int i = 0; i < 2; ++i)
+    data_cache_.push_back(empty);
+  next_swap_ = data_cache_.begin();
+  tile_number_line = 10000;
+}
+
+//-----------------------------------------------------------------------
+/// Get the raw data, updating our cache if needed.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 1> AirMspiOrbit::raw_data(int Index) const
+{
+  for(int i = 0; i < (int) data_cache_.size(); ++i)
+    if(data_cache_[i].lbound(0) <= Index &&
+       Index <= data_cache_[i].ubound(0))
+      return data_cache_[i](Index, blitz::Range::all());
+  int lstart = (Index / tile_number_line) * tile_number_line;
+  int lend = std::min(lstart + tile_number_line, data->number_line());
+  (*next_swap_).reference(data->read_double(lstart, 0, lend - lstart,
+					  data->number_sample()));
+  (*next_swap_).reindexSelf(blitz::shape(lstart, 0));
+  blitz::Array<double, 1> res = (*next_swap_)(Index, blitz::Range::all());
+  ++next_swap_;
+  if(next_swap_ == data_cache_.end())
+    next_swap_ = data_cache_.begin();
+  return res;
 }
 
 //-----------------------------------------------------------------------
@@ -166,9 +195,7 @@ void AirMspiOrbit::initialize()
 AirMspiNavData AirMspiOrbit::nav_data(int Index) const
 {
   range_check(Index, 0, data->number_line());
-  blitz::Array<double, 2> raw_data = 
-    data->read_double(Index, 0, 1, data->number_sample());
-  return AirMspiNavData(raw_data(0, blitz::Range::all()), *datum_, old_format);
+  return AirMspiNavData(raw_data(Index), *datum_, old_format);
 }
 
 //-----------------------------------------------------------------------

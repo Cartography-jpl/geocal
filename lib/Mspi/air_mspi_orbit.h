@@ -139,8 +139,12 @@ public:
 
   virtual void print(std::ostream& Os) const;
 private:
+  blitz::Array<double, 1> raw_data(int Index) const;
   void initialize();
   boost::shared_ptr<GdalRasterImage> data;
+  mutable std::vector<blitz::Array<double, 2> > data_cache_;
+  mutable std::vector<blitz::Array<double, 2> >::iterator next_swap_;
+  int tile_number_line;
   boost::shared_ptr<Datum> datum_;
   blitz::Array<double, 1> gimbal_angle_;
   blitz::Array<double, 1> ypr_corr_;

@@ -13,6 +13,7 @@ class DidDatum : public Datum {
 public:
   DidDatum(const std::string& Fname);
   virtual double undulation(const GroundCoordinate& Gc) const;
+  virtual double undulation(const Geodetic& Gc) const;
 
 //-----------------------------------------------------------------------
 /// Destructor

@@ -131,11 +131,11 @@ class Datum(geocal_swig.generic_object.GenericObject):
     __repr__ = _swig_repr
     def undulation(self, *args):
         """
-        virtual double GeoCal::Datum::undulation(const GroundCoordinate &Gc) const =0
-        Undulation, which is the distance form mean sea level to the reference
-        ellipsoid, for the given ground location.
+        virtual double GeoCal::Datum::undulation(const Geodetic &Gc) const =0
+        Specialization for Gc being Geodetic.
 
-        This is in meters. 
+        Since many of our Datums are in geodetic coordinates, this is an
+        important specialization for performance. 
         """
         return _geocal_datum.Datum_undulation(self, *args)
 

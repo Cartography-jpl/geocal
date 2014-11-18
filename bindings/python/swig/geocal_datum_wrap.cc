@@ -5407,11 +5407,11 @@ SWIGINTERN PyObject *SimpleDatum_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObje
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"Datum_undulation", _wrap_Datum_undulation, METH_VARARGS, (char *)"\n"
-		"virtual double GeoCal::Datum::undulation(const GroundCoordinate &Gc) const =0\n"
-		"Undulation, which is the distance form mean sea level to the reference\n"
-		"ellipsoid, for the given ground location.\n"
+		"virtual double GeoCal::Datum::undulation(const Geodetic &Gc) const =0\n"
+		"Specialization for Gc being Geodetic.\n"
 		"\n"
-		"This is in meters. \n"
+		"Since many of our Datums are in geodetic coordinates, this is an\n"
+		"important specialization for performance. \n"
 		""},
 	 { (char *)"Datum___str__", (PyCFunction)_wrap_Datum___str__, METH_O, NULL},
 	 { (char *)"delete_Datum", (PyCFunction)_wrap_delete_Datum, METH_O, (char *)"\n"

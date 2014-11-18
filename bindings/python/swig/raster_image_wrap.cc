@@ -11103,8 +11103,8 @@ static PyMethodDef SwigMethods[] = {
 		"Shortcut to calling mapinfo().ground_coordinate. \n"
 		""},
 	 { (char *)"RasterImage_coordinate", _wrap_RasterImage_coordinate, METH_VARARGS, (char *)"\n"
-		"ImageCoordinate GeoCal::RasterImage::coordinate(const GroundCoordinate &Gc) const\n"
-		"Shortcut to calling mapinfo().coordinate. \n"
+		"ImageCoordinate GeoCal::RasterImage::coordinate(const Geodetic &Gc) const\n"
+		"\n"
 		""},
 	 { (char *)"RasterImage__v_grid_center_line_resolution", (PyCFunction)_wrap_RasterImage__v_grid_center_line_resolution, METH_O, (char *)"\n"
 		"double RasterImage::grid_center_line_resolution() const\n"

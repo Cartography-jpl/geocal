@@ -159,13 +159,11 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
 
     def convert_to_coordinate(self, *args):
         """
-        virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const GroundCoordinate &Gc, double &X, double &Y, double &Height)
-        const =0
-        This converts from a ground coordinate to a particular coordinate
-        system.
+        virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const Geodetic &Gc, double &X, double &Y, double &Height) const =0
+        Specialization that converts from Geodetic.
 
-        The specific meaning and units of X, Y, and height depend on which
-        coordinates system is used by a specialization of this class. 
+        Because much of our data is in Geodetic coordinates this is an
+        important performance specialization. 
         """
         return _coordinate_converter.CoordinateConverter_convert_to_coordinate(self, *args)
 

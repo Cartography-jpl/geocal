@@ -41,6 +41,8 @@ public:
 
   virtual double undulation(const GroundCoordinate& Gc) const
   { return map_file_->interpolate(map_file_->coordinate(Gc)); }
+  virtual double undulation(const Geodetic& Gc) const
+  { return map_file_->interpolate(map_file_->coordinate(Gc)); }
 
 //-----------------------------------------------------------------------
 /// Print to stream.

@@ -220,7 +220,6 @@ blitz::Array<double, 7> IgcRollingShutter::cf_look_vector_arr
  int nsubpixel_sample, int nintegration_step) const
 {
   CartesianFixedLookVector lv;
-  boost::shared_ptr<CartesianFixed> pos;
   blitz::Array<double, 7>  res(nline, nsamp, nsubpixel_line, 
 			       nsubpixel_sample, nintegration_step, 2, 3);
   for(int i = 0; i < nline; ++i) {
@@ -228,11 +227,13 @@ blitz::Array<double, 7> IgcRollingShutter::cf_look_vector_arr
     FrameCoordinate f;
     time_table_->time(ImageCoordinate(i + ln_start, 0), t, f);
     std::vector<boost::shared_ptr<OrbitData> > od;
+    std::vector<boost::shared_ptr<CartesianFixed> > pos;
     for(int k = 0; k < nintegration_step; ++k) {
       double tint = 0;
       if(k != 0)
 	tint = cam->integration_time(b) / (nintegration_step - 1) * k;
       od.push_back(orbit_->orbit_data(t + tint));
+      pos.push_back(od[k]->position_cf());
     }
     for(int j = 0; j < nsamp; ++j) 
       for(int i2 = 0; i2 < nsubpixel_line; ++i2)
@@ -242,9 +243,8 @@ blitz::Array<double, 7> IgcRollingShutter::cf_look_vector_arr
 	  ScLookVector slv = cam->sc_look_vector(fc, b);
 	  for(int k = 0; k < nintegration_step; ++k) {
 	    lv = od[k]->cf_look_vector(slv);
-	    pos = od[k]->position_cf();
 	    for(int k2 = 0; k2 < 3; ++k2) {
-	      res(i, j, i2, j2, k, 0, k2) = pos->position[k2];
+	      res(i, j, i2, j2, k, 0, k2) = pos[k]->position[k2];
 	      res(i, j, i2, j2, k, 1, k2) = lv.look_vector[k2];
 	    }
 	  }

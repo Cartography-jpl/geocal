@@ -13,6 +13,7 @@ public:
   virtual ~DatumGeoid96() {}
   const std::string& file_name() const {return fname;}
   virtual double undulation(const GroundCoordinate& Gc) const;
+  virtual double undulation(const Geodetic& Gc) const;
   virtual void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<VicarRasterImage> data;

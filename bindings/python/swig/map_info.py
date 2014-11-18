@@ -169,13 +169,9 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
 
     def coordinate(self, *args):
         """
-        void MapInfo::coordinate(const GroundCoordinate &Gc, double &Pixel_x_index, double
-        &Pixel_y_index) const
-        Determine pixel coordinates for the given ground coordinates.
+        void MapInfo::coordinate(const Geodetic &Gc, double &Pixel_x_index, double &Pixel_y_index)
+        const
 
-        Note that this routine can be called with ground coordiantes outside
-        of the bounding box of the map, it just returns pixel coordinates
-        outside of the map in that case. 
         """
         return _map_info.MapInfo_coordinate(self, *args)
 

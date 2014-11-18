@@ -66,9 +66,17 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
   if(last_position())
     throw Exception("next_position called when we have already reached the last position");
   ++ind;
+  if(ind == 0) {
+    std::cerr << "Starting ray casting for " << current_position() << "\n";
+    std::cerr << "Starting to get look vector\n";
+  }
   Array<double, 7> cf_lv = 
     igc->cf_look_vector_arr(current_position(), 0, 1, igc->number_sample(),
 			    nsub_line, nsub_sample, nintegration_step);
+  if(ind == 0) {
+    std::cerr << "Done getting look vector\n";
+    std::cerr << "Starting distance cache\n";
+  }
   Array<double, 4> dist(result_cache.shape()[1], result_cache.shape()[2],
 			result_cache.shape()[3], result_cache.shape()[4]);
   if(ind != 0)
@@ -83,8 +91,12 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
 		       cf_lv(0,i1,i2,i3,i4,0,1)) +
 		   sqr(result_cache(0,i1,i2,i3,i4, 2) -
 		       cf_lv(0,i1,i2,i3,i4,0,2)));
-
-  for(int i1 = 0; i1 < result_cache.shape()[1]; ++i1)
+  if(ind == 0)
+    std::cerr << "Done with distance cache\n";
+  for(int i1 = 0; i1 < result_cache.shape()[1]; ++i1) {
+    if(ind == 0)
+      if(i1 % 100 == 0)
+	std::cerr << "Doing sample " << i1 << "\n";
     for(int i2 = 0; i2 < result_cache.shape()[2]; ++i2)
       for(int i3 = 0; i3 < result_cache.shape()[3]; ++i3)
 	for(int i4 = 0; i4 < result_cache.shape()[4]; ++i4) {
@@ -108,6 +120,8 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
 	  result_cache(0,i1,i2,i3,i4, 1) = pt->position[1];
 	  result_cache(0,i1,i2,i3,i4, 2) = pt->position[2];
 	}
+  }
+  std::cerr << "Done ray casting for " << current_position() << "\n";
   return result_cache;
 }
 

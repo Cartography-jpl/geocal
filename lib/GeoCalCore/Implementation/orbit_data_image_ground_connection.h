@@ -68,6 +68,14 @@ public:
   virtual ~OrbitDataImageGroundConnection() {}
   virtual void notify_update(const Orbit& Orb)
   { od = Orb.orbit_data(od->time()); }
+  virtual blitz::Array<double, 7> 
+  cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
+		     int nsubpixel_line = 1, 
+		     int nsubpixel_sample = 1,
+		     int nintegration_step = 1) const
+  {
+    throw Exception("Need to implement this.\n");
+  }
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
 		 boost::shared_ptr<CartesianFixed>& P) const

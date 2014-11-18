@@ -57,7 +57,10 @@ public:
 
   virtual double distance_to_surface(const GroundCoordinate& Gp) const;
   double height_datum(const GroundCoordinate& Gp) const;
+  double height_datum(const Geodetic& Gp) const;
   virtual double height_reference_surface(const GroundCoordinate& Gp) 
+    const;
+  double height_reference_surface(const Geodetic& Gp) 
     const;
 
   virtual boost::shared_ptr<CartesianFixed> intersect(const CartesianFixed& Cf,

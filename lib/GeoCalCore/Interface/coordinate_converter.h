@@ -57,6 +57,15 @@ public:
 			       double& Y, double& Height) const = 0;
 
 //-----------------------------------------------------------------------
+/// Specialization that converts from Geodetic. Because much of our
+/// data is in Geodetic coordinates this is an important performance
+/// specialization.  
+//-----------------------------------------------------------------------
+
+  virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
+			       double& Y, double& Height) const = 0;
+
+//-----------------------------------------------------------------------
 /// Test if two CoordinateConverters are the same coordinate system.
 //-----------------------------------------------------------------------
 
@@ -114,6 +123,14 @@ public:
     X = gd.longitude();
     Y = gd.latitude();
     Height = gd.height_reference_surface();
+  }
+
+  virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
+			       double& Y, double& Height) const
+  {
+    X = Gc.longitude();
+    Y = Gc.latitude();
+    Height = Gc.height_reference_surface();
   }
 
 //-----------------------------------------------------------------------

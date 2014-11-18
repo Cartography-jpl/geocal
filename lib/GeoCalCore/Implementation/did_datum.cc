@@ -46,3 +46,25 @@ double DidDatum::undulation(const GroundCoordinate& Gc) const
   int res = ((int) msl_.data()[row][col][0]) << 8 | msl_.data()[row][col][1];
   return res;
 }
+
+double DidDatum::undulation(const Geodetic& Gc) const
+{
+
+//-----------------------------------------------------------------------
+// We find the data point closest to the given coordinate. We don't do
+// any interpolation.
+//-----------------------------------------------------------------------
+
+  double x, y;
+  mi_.coordinate(Gc, x, y);
+  int row = (int) floor(y + 0.5);
+  int col = (int) floor(x + 0.5);
+
+//-----------------------------------------------------------------------
+// We assemble the results from the byte level, so there isn't any
+// endian problems.
+//-----------------------------------------------------------------------
+
+  int res = ((int) msl_.data()[row][col][0]) << 8 | msl_.data()[row][col][1];
+  return res;
+}

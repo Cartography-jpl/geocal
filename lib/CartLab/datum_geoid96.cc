@@ -31,6 +31,13 @@ double DatumGeoid96::undulation(const GroundCoordinate& Gc) const
   return data->interpolate(data->coordinate(Gc)) * 0.01;
 }
 
+double DatumGeoid96::undulation(const Geodetic& Gc) const
+{
+  // Data is scaled by 100 to fit into a integer. So we multiple by
+  // 0.01 to get back the orginal data.
+  return data->interpolate(data->coordinate(Gc)) * 0.01;
+}
+
 //-----------------------------------------------------------------------
 /// Print a description of the class.
 //-----------------------------------------------------------------------

@@ -425,8 +425,8 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
 
     def coordinate(self, *args):
         """
-        ImageCoordinate GeoCal::RasterImage::coordinate(const GroundCoordinate &Gc) const
-        Shortcut to calling mapinfo().coordinate. 
+        ImageCoordinate GeoCal::RasterImage::coordinate(const Geodetic &Gc) const
+
         """
         return _raster_image.RasterImage_coordinate(self, *args)
 

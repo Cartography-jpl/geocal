@@ -6892,13 +6892,9 @@ static PyMethodDef SwigMethods[] = {
 		"Pointer to Coordinate converter used by map projection. \n"
 		""},
 	 { (char *)"MapInfo_coordinate", _wrap_MapInfo_coordinate, METH_VARARGS, (char *)"\n"
-		"void MapInfo::coordinate(const GroundCoordinate &Gc, double &Pixel_x_index, double\n"
-		"&Pixel_y_index) const\n"
-		"Determine pixel coordinates for the given ground coordinates.\n"
+		"void MapInfo::coordinate(const Geodetic &Gc, double &Pixel_x_index, double &Pixel_y_index)\n"
+		"const\n"
 		"\n"
-		"Note that this routine can be called with ground coordiantes outside\n"
-		"of the bounding box of the map, it just returns pixel coordinates\n"
-		"outside of the map in that case. \n"
 		""},
 	 { (char *)"MapInfo_cover", _wrap_MapInfo_cover, METH_VARARGS, (char *)"\n"
 		"MapInfo MapInfo::cover(const std::vector< boost::shared_ptr< GroundCoordinate > > &Pt, int\n"

@@ -45,6 +45,33 @@ double DemMapInfo::height_datum(const GroundCoordinate& Gp) const
   return t1 + (t2 - t1) * (y - yi);
 }
 
+double DemMapInfo::height_datum(const Geodetic& Gp) const
+{
+  double x, y;
+  map_info_.coordinate(Gp, x, y);
+  int xi = (int) floor(x);
+  int yi = (int) floor(y);
+  if(xi < 0 || xi + 1 >= map_info_.number_x_pixel() ||
+     yi < 0 || yi + 1 >= map_info_.number_y_pixel()) {
+    if(outside_dem_is_error_) {
+      Exception e;
+      e << "Height requested outside of the range of the Dem data "
+	<< "xindex: " << xi << " (max " << map_info_.number_x_pixel() - 1
+	<< ") yindex: " << yi << " (max " << map_info_.number_y_pixel() - 1
+	<< ")";
+      throw e;
+    } else
+      return -datum().undulation(Gp);
+  }
+  double e1 = elevation(yi, xi);
+  double e2 = elevation(yi, xi + 1);
+  double e3 = elevation(yi + 1, xi);
+  double e4 = elevation(yi + 1, xi + 1);
+  double t1 = e1 + (e2 - e1) * (x - xi);
+  double t2 = e3 + (e4 - e3) * (x - xi);
+  return t1 + (t2 - t1) * (y - yi);
+}
+
 //-----------------------------------------------------------------------
 /// Return height of surface above/below the reference surface (e.g.,
 /// WGS-84 for the earth). Positive means above, negative below. This is 
@@ -55,6 +82,18 @@ double DemMapInfo::height_reference_surface(const GroundCoordinate& Gp) const
 {
   return height_datum(Gp) + datum().undulation(Gp);
 }
+
+//-----------------------------------------------------------------------
+/// Specialization of height_reference_surface if GroundCoordinate is 
+/// already a Geodetic. Since many of our DEMS are in geodetic
+/// coordinate, this means that this can often be faster.
+//-----------------------------------------------------------------------
+
+double DemMapInfo::height_reference_surface(const Geodetic& Gp) const
+{
+  return height_datum(Gp) + datum().undulation(Gp);
+}
+
 
 // See base class for description
 boost::shared_ptr<CartesianFixed> DemMapInfo::intersect

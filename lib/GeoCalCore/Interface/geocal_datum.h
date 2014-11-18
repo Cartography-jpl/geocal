@@ -1,6 +1,7 @@
 #ifndef DATUM_H
 #define DATUM_H
 #include "ground_coordinate.h"
+#include "geodetic.h"
 #include "printable.h"
 
 namespace GeoCal {
@@ -24,6 +25,14 @@ public:
 //-----------------------------------------------------------------------
 
   virtual double undulation(const GroundCoordinate& Gc) const = 0;
+
+//-----------------------------------------------------------------------
+/// Specialization for Gc being Geodetic. Since many of our Datums are
+/// in geodetic coordinates, this is an important specialization for
+/// performance.
+//-----------------------------------------------------------------------
+
+  virtual double undulation(const Geodetic& Gc) const = 0;
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -65,6 +74,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual double undulation(const GroundCoordinate& Gc) const { return u_; }
+  virtual double undulation(const Geodetic& Gc) const { return u_; }
 
 //-----------------------------------------------------------------------
 /// Print to stream.

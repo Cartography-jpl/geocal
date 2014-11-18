@@ -83,6 +83,14 @@ void MapInfo::coordinate(const GroundCoordinate& Gc, double& Pixel_x_index,
   coordinate_to_index(x, y, Pixel_x_index, Pixel_y_index);
 }
 
+void MapInfo::coordinate(const Geodetic& Gc, double& Pixel_x_index, 
+		double& Pixel_y_index) const
+{
+  double x, y, height;
+  conv_->convert_to_coordinate(Gc, x, y, height);
+  coordinate_to_index(x, y, Pixel_x_index, Pixel_y_index);
+}
+
 //-----------------------------------------------------------------------
 /// Create a MapInfo that has the same map projection and pixel
 /// resolution as this one, but covers the given set of points. An

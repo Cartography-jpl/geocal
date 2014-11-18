@@ -510,6 +510,14 @@ public:
     Y = gd.latitude();
     Height = gd.height_reference_surface();
   }
+  virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
+			       double& Y, double& Height) const
+  {
+    Planetocentric<NAIF_CODE> gd(Gc);
+    X = gd.longitude();
+    Y = gd.latitude();
+    Height = gd.height_reference_surface();
+  }
 
 //-----------------------------------------------------------------------
 /// Print to given stream.

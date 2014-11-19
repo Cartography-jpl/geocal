@@ -217,7 +217,7 @@ class RayCaster(geocal_swig.generic_object.GenericObject):
         virtual blitz::Array<double, 6> GeoCal::RayCaster::next_position()=0
         Return the ground locations seen at the next position.
 
-        This is This is nline x nsamp x x nsub_line x nsub_sample x
+        This is This is nline x nsamp x nsub_line x nsub_sample x
         nintegration_step x 3 in size, where we give the ground location as a
         CartesianFixed coordinate (e.g., Ecr for the Earth).
 

@@ -60,7 +60,7 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return the ground locations seen at the next position. This is
-/// This is nline x nsamp x x nsub_line x nsub_sample x
+/// This is nline x nsamp x nsub_line x nsub_sample x
 /// nintegration_step x 3 in size, where we give the ground location
 /// as a CartesianFixed coordinate (e.g., Ecr for the Earth).
 ///

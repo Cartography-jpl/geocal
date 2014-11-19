@@ -1,3 +1,7 @@
+// This is gcc specific, but turns on fast math for this class. This
+// is important because the latlon function here is a bit of a
+// bottleneck, and it math intensive
+#define _FAST_MATH_
 #include "ecr.h"
 #include "eci.h"
 #include "constant.h"

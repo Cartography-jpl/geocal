@@ -6339,7 +6339,7 @@ static PyMethodDef SwigMethods[] = {
 		"virtual blitz::Array<double, 6> GeoCal::RayCaster::next_position()=0\n"
 		"Return the ground locations seen at the next position.\n"
 		"\n"
-		"This is This is nline x nsamp x x nsub_line x nsub_sample x\n"
+		"This is This is nline x nsamp x nsub_line x nsub_sample x\n"
 		"nintegration_step x 3 in size, where we give the ground location as a\n"
 		"CartesianFixed coordinate (e.g., Ecr for the Earth).\n"
 		"\n"

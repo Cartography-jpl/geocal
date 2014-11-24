@@ -8,9 +8,9 @@
 # conditional HAVE_BOOST. We as set BOOST_CPPFLAGS, and BOOST_LIBDIR.
 #
 # Because the libraries can have different names on different systems,
-# we also set BOOST_REGEX_LIB, BOOST_FILESYSTEM_LIB, BOOST_DATETIME_LIB, and
-# BOOST_IOSTREAMS_LIB that can be used on a link line (e.g., it might be 
-# "-lboost_regex" on a number of linux
+# we also set BOOST_REGEX_LIB, BOOST_FILESYSTEM_LIB, BOOST_DATETIME_LIB, 
+# BOOST_IOSTREAMS_LIB, and BOOST_SERIALIZATION_LIB that can be used on 
+# a link line (e.g., it might be "-lboost_regex" on a number of linux
 # systems). We can extend this with other boost libraries if needed, but
 # right now this is all we use.
 # 
@@ -60,6 +60,7 @@ if test "x$want_boost" = "xyes"; then
                BOOST_FILESYSTEM_LIB="-lboost_filesystem -lboost_system"
                BOOST_DATETIME_LIB="-lboost_date_time"
                BOOST_IOSTREAMS_LIB="-lboost_iostreams"
+               BOOST_SERIALIZATION_LIB="-lboost_serialization"
                boost_done=yes
             fi
             for ac_boost_lib_base in "$ac_boost_path/lib" "$ac_boost_path/lib64"; do
@@ -71,6 +72,7 @@ if test "x$want_boost" = "xyes"; then
 		       BOOST_FILESYSTEM_LIB="-lboost_filesystem -lboost_system"
                        BOOST_DATETIME_LIB="-lboost_date_time"
 		       BOOST_IOSTREAMS_LIB="-lboost_iostreams"
+                       BOOST_SERIALIZATION_LIB="-lboost_serialization"
                        boost_done=yes
                        break;
                    fi
@@ -84,6 +86,7 @@ if test "x$want_boost" = "xyes"; then
 		       BOOST_FILESYSTEM_LIB="-lboost_filesystem-mt -lboost_system-mt"
                        BOOST_DATETIME_LIB="-lboost_date_time-mt"
                        BOOST_IOSTREAMS_LIB="-lboost_iostreams-mt"
+                       BOOST_SERIALIZATION_LIB="-lboost_serialization-mt"
                        boost_done=yes
                        break;
                    fi
@@ -106,6 +109,7 @@ if test "x$want_boost" = "xyes"; then
 		AC_SUBST(BOOST_FILESYSTEM_LIB)
 		AC_SUBST(BOOST_DATETIME_LIB)
 		AC_SUBST(BOOST_IOSTREAMS_LIB)
+		AC_SUBST(BOOST_SERIALIZATION_LIB)
                 AC_DEFINE(HAVE_BOOST,,[Defined if we have BOOST])
                 have_boost="yes"
         fi

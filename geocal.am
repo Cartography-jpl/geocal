@@ -31,6 +31,7 @@ endif
 libgeocal_la_LDFLAGS+= -R $(BOOST_LIBDIR) -L$(BOOST_LIBDIR)
 libgeocal_la_LDFLAGS+= $(BOOST_REGEX_LIB) $(BOOST_DATETIME_LIB)
 libgeocal_la_LDFLAGS+= $(BOOST_IOSTREAMS_LIB) $(BOOST_FILESYSTEM_LIB)
+libgeocal_la_LDFLAGS+= $(BOOST_SERIALIZATION_LIB)
 
 # Include blitz in builds
 libgeocal_la_LDFLAGS+= $(BLITZ_LIBS)

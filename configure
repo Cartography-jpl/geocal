@@ -770,6 +770,7 @@ BUILD_BOOST_FALSE
 BUILD_BOOST_TRUE
 HAVE_BOOST_FALSE
 HAVE_BOOST_TRUE
+BOOST_SERIALIZATION_LIB
 BOOST_IOSTREAMS_LIB
 BOOST_DATETIME_LIB
 BOOST_FILESYSTEM_LIB
@@ -17964,6 +17965,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
                BOOST_FILESYSTEM_LIB="-lboost_filesystem -lboost_system"
                BOOST_DATETIME_LIB="-lboost_date_time"
                BOOST_IOSTREAMS_LIB="-lboost_iostreams"
+               BOOST_SERIALIZATION_LIB="-lboost_serialization"
                boost_done=yes
             fi
             for ac_boost_lib_base in "$ac_boost_path/lib" "$ac_boost_path/lib64"; do
@@ -17975,6 +17977,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
 		       BOOST_FILESYSTEM_LIB="-lboost_filesystem -lboost_system"
                        BOOST_DATETIME_LIB="-lboost_date_time"
 		       BOOST_IOSTREAMS_LIB="-lboost_iostreams"
+                       BOOST_SERIALIZATION_LIB="-lboost_serialization"
                        boost_done=yes
                        break;
                    fi
@@ -17988,6 +17991,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
 		       BOOST_FILESYSTEM_LIB="-lboost_filesystem-mt -lboost_system-mt"
                        BOOST_DATETIME_LIB="-lboost_date_time-mt"
                        BOOST_IOSTREAMS_LIB="-lboost_iostreams-mt"
+                       BOOST_SERIALIZATION_LIB="-lboost_serialization-mt"
                        boost_done=yes
                        break;
                    fi
@@ -18006,6 +18010,7 @@ $as_echo "no" >&6; }
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 	        BOOST_CPPFLAGS="$BOOST_CPPFLAGS -DBOOST_TEST_DYN_LINK"
+
 
 
 

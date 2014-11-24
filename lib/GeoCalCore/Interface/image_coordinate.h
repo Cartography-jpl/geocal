@@ -2,6 +2,8 @@
 #define IMAGE_COORDINATE_H
 #include "printable.h"
 #include "auto_derivative.h"
+#include <boost/serialization/access.hpp>
+#include <boost/serialization/nvp.hpp>
 
 #include <iostream>		// Definition of ostream.
 namespace GeoCal {
@@ -55,6 +57,12 @@ public:
   double sample;
   void print(std::ostream& Os) const;
 private:
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version)
+  {
+    ar & BOOST_SERIALIZATION_NVP(line) & BOOST_SERIALIZATION_NVP(sample);
+  }
 };
 
 bool operator==(const ImageCoordinate& C1, const ImageCoordinate& C2);

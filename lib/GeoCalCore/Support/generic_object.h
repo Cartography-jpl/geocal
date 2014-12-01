@@ -1,7 +1,10 @@
 #ifndef GENERIC_OBJECT_H
 #define GENERIC_OBJECT_H
+#include <boost/archive/xml_iarchive.hpp>
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -21,5 +24,8 @@ public:
     // Nothing to do
   }
 };
+
 }
+
+BOOST_CLASS_EXPORT_KEY(GeoCal::GenericObject);
 #endif

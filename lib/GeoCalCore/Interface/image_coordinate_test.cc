@@ -5,13 +5,8 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/shared_ptr.hpp>
-#include <boost/serialization/export.hpp>
 #include <boost/serialization/map.hpp>
 using namespace GeoCal;
-
-BOOST_CLASS_EXPORT_KEY(GenericObject)
-BOOST_CLASS_EXPORT_KEY(ImageCoordinate)
 
 BOOST_FIXTURE_TEST_SUITE(image_coordinate, GlobalFixture)
 

@@ -26,12 +26,6 @@ class Camera : public Printable<Camera>,
 	       public WithParameter {
 public:
 //-----------------------------------------------------------------------
-/// Direction camera is pointing.
-//-----------------------------------------------------------------------
-
-  enum Direction {FORWARD, AFTWARD};
-
-//-----------------------------------------------------------------------
 /// Default constructor.
 //-----------------------------------------------------------------------
 
@@ -47,17 +41,6 @@ public:
 //-----------------------------------------------------------------------
 
   virtual ~Camera() {}
-
-//-----------------------------------------------------------------------
-/// This gives the camera direction. This is intended for use with
-/// steep camera angles (e.g., MISR AF camera). For cameras that are
-/// near nadir looking, we can just arbitrarily pick a direction for
-/// it. 
-///
-/// The default version returns FORWARD.
-//-----------------------------------------------------------------------
-
-  virtual Direction direction() const { return FORWARD; }
 
 //-----------------------------------------------------------------------
 /// This is the integration time in seconds.
@@ -173,13 +156,6 @@ public:
      int Number_line = 1, 
      int Number_sample=1504);
   virtual ~SimpleCamera() {}
-
-//-----------------------------------------------------------------------
-/// This gives the camera direction. 
-//-----------------------------------------------------------------------
-
-  virtual Camera::Direction direction() const 
-  { return (beta_ >= 0 ? Camera::FORWARD : Camera::AFTWARD); }
 
 //-----------------------------------------------------------------------
 /// Number of bands in camera.

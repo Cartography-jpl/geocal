@@ -67,13 +67,9 @@ BOOST_AUTO_TEST_CASE(serialization_save)
   std::ofstream os("image_coordinate_test.xml");
   boost::archive::xml_oarchive oa(os);
 
-  //  boost::shared_ptr<ImageCoordinate> ic1(new ImageCoordinate(4, 5));
-  // boost::shared_ptr<ImageCoordinate> ic2(new ImageCoordinate(6,
-  // 7));
-  std::map<std::string, boost::shared_ptr<GenericObject> > m;
-  m["ic1"] = boost::shared_ptr<GenericObject>(new ImageCoordinate(4, 5));
-  m["ic2"] = boost::shared_ptr<GenericObject>(new ImageCoordinate(6, 7));
-  oa << BOOST_SERIALIZATION_NVP(m);
+  boost::shared_ptr<ImageCoordinate> ic1(new ImageCoordinate(4, 5));
+  boost::shared_ptr<ImageCoordinate> ic2(new ImageCoordinate(6, 7));
+  oa << BOOST_SERIALIZATION_NVP(ic1) << BOOST_SERIALIZATION_NVP(ic2);
 }
 
 BOOST_AUTO_TEST_CASE(serialization_load)
@@ -85,16 +81,11 @@ BOOST_AUTO_TEST_CASE(serialization_load)
 
   std::ifstream is("image_coordinate_test.xml");
   boost::archive::xml_iarchive ia(is);
-  // boost::shared_ptr<ImageCoordinate> ic1;
-  // boost::shared_ptr<ImageCoordinate> ic2;
-  boost::shared_ptr<GenericObject> ic1;
-  boost::shared_ptr<GenericObject> ic2;
-  std::map<std::string, boost::shared_ptr<GenericObject> > m;
-  ia >> BOOST_SERIALIZATION_NVP(m);
-  //BOOST_CHECK(*ic1 ==ImageCoordinate(4, 5));
-  boost::shared_ptr<ImageCoordinate> ic2r =
-    boost::dynamic_pointer_cast<ImageCoordinate>(m["ic2"]);
-  BOOST_CHECK(*ic2r == ImageCoordinate(6,7));
+  boost::shared_ptr<ImageCoordinate> ic1;
+  boost::shared_ptr<ImageCoordinate> ic2;
+  ia >> BOOST_SERIALIZATION_NVP(ic1) >> BOOST_SERIALIZATION_NVP(ic2);
+  BOOST_CHECK(*ic1 ==ImageCoordinate(4, 5));
+  BOOST_CHECK(*ic2 == ImageCoordinate(6,7));
 }
 
 BOOST_AUTO_TEST_CASE(serialization_text)

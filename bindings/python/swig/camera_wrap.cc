@@ -6884,49 +6884,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Camera__v_direction(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::Camera *arg1 = (GeoCal::Camera *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Camera const > tempshared1 ;
-  boost::shared_ptr< GeoCal::Camera const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  GeoCal::Camera::Direction result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Camera__v_direction" "', argument " "1"" of type '" "GeoCal::Camera const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
-      arg1 = const_cast< GeoCal::Camera * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
-      arg1 = const_cast< GeoCal::Camera * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (GeoCal::Camera::Direction)((GeoCal::Camera const *)arg1)->direction();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_Camera__v_number_band(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Camera *arg1 = (GeoCal::Camera *) 0 ;
@@ -10639,16 +10596,6 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"The default version returns 0.0. \n"
 		""},
-	 { (char *)"Camera__v_direction", (PyCFunction)_wrap_Camera__v_direction, METH_O, (char *)"\n"
-		"virtual Direction GeoCal::Camera::direction() const\n"
-		"This gives the camera direction.\n"
-		"\n"
-		"This is intended for use with steep camera angles (e.g., MISR AF\n"
-		"camera). For cameras that are near nadir looking, we can just\n"
-		"arbitrarily pick a direction for it.\n"
-		"\n"
-		"The default version returns FORWARD. \n"
-		""},
 	 { (char *)"Camera__v_number_band", (PyCFunction)_wrap_Camera__v_number_band, METH_O, (char *)"\n"
 		"virtual int GeoCal::Camera::number_band() const =0\n"
 		"Number of bands in camera. \n"
@@ -12146,8 +12093,6 @@ SWIG_init(void) {
   GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Observer<GeoCal::Camera>))] =
   boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Observer<GeoCal::Camera> >("boost::shared_ptr< GeoCal::Observer<GeoCal::Camera> > *"));
   
-  SWIG_Python_SetConstant(d, "Camera_FORWARD",SWIG_From_int(static_cast< int >(GeoCal::Camera::FORWARD)));
-  SWIG_Python_SetConstant(d, "Camera_AFTWARD",SWIG_From_int(static_cast< int >(GeoCal::Camera::AFTWARD)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

@@ -29,12 +29,10 @@ namespace GeoCal {
 
 class Camera : public Observable<Camera>, public WithParameter {
 public:
-  enum Direction {FORWARD, AFTWARD};
   Camera();
   virtual void add_observer(Observer<Camera>& Obs); 
   virtual void remove_observer(Observer<Camera>& Obs);
   virtual double integration_time(int Band) const;
-  %python_attribute(direction, virtual Direction)
   %python_attribute(number_band, virtual int)
   virtual int number_line(int Band) const = 0;
   virtual int number_sample(int Band) const = 0;

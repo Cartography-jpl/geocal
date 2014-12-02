@@ -8,8 +8,9 @@
 #endif
 #include "generic_object.h"
 #include "image_coordinate.h"
+#include "geocal_quaternion.h"
 
 BOOST_CLASS_EXPORT(GeoCal::GenericObject);
 BOOST_CLASS_EXPORT(GeoCal::ImageCoordinate);
-
+BOOST_CLASS_EXPORT(boost::math::quaternion<double>);
 #endif

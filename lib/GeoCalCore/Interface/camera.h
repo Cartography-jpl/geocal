@@ -141,12 +141,14 @@ public:
   virtual void print(std::ostream& Os) const = 0;
 
 private:
-  // friend class boost::serialization::access;
-  //  template<class Archive>
-  //  void serialize(Archive & ar, const unsigned int version)
-  // {
-  //   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-  // }
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version)
+  {
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
+  }
+#endif
 };
 
 /****************************************************************//**
@@ -204,22 +206,24 @@ private:
   int nline,nsample;
   boost::math::quaternion<double> frame_to_sc;
 
-  // friend class boost::serialization::access;
-  //  template<class Archive>
-  //  void serialize(Archive & ar, const unsigned int version)
-  // {
-  //   using boost::serialization::make_nvp;
-  //   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Camera);
-  //   ar & make_nvp("beta", beta_) 
-  //     & make_nvp("delta", delta_) 
-  //     & make_nvp("epsilon", epsilon_) 
-  //     & make_nvp("focal", focal_) 
-  //     & make_nvp("line_pitch", line_pitch_) 
-  //     & make_nvp("sample_pitch", sample_pitch_)
-  //     & make_nvp("number_line", nline)
-  //     & make_nvp("number_sample", nsample);
-  //   frame_to_sc = quat_rot("ZYX", epsilon_, beta_, delta_);
-  // }
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    using boost::serialization::make_nvp;
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Camera);
+    ar & make_nvp("beta", beta_) 
+      & make_nvp("delta", delta_) 
+      & make_nvp("epsilon", epsilon_) 
+      & make_nvp("focal", focal_) 
+      & make_nvp("line_pitch", line_pitch_) 
+      & make_nvp("sample_pitch", sample_pitch_)
+      & make_nvp("number_line", nline)
+      & make_nvp("number_sample", nsample);
+    frame_to_sc = quat_rot("ZYX", epsilon_, beta_, delta_);
+  }
+#endif
 };
 }
 #endif

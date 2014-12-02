@@ -1,0 +1,16 @@
+# This gets included in the top makefile. This list files here that are
+# used to make up libgeocal.la.
+
+# The various srcxxx are set in configure.in in the top directory, in case
+# you need to modify these.
+
+# Source files for library
+geocalinc_HEADERS+= @srcserialize@/geocal_serialize.h
+geocalinc_HEADERS+= @srcserialize@/geocal_serialize_common.h
+
+AM_CPPFLAGS+= -I$(srcdir)/@srcserialize@ 
+
+# Allow searchs for .i, .h. and .cc files in this directory
+vpath %.cc $(srcdir)/@srcserialize@
+vpath %.h $(srcdir)/@srcserialize@
+vpath %.i $(srcdir)/@srcserialize@

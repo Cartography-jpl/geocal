@@ -55,6 +55,7 @@ public:
   double sample;
   void print(std::ostream& Os) const;
 private:
+#ifdef USE_BOOST_SERIALIZATON
   friend class boost::serialization::access;
    template<class Archive>
    void serialize(Archive & ar, const unsigned int version)
@@ -62,6 +63,7 @@ private:
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
     ar & BOOST_SERIALIZATION_NVP(line) & BOOST_SERIALIZATION_NVP(sample);
   }
+#endif
 };
 
 bool operator==(const ImageCoordinate& C1, const ImageCoordinate& C2);
@@ -120,6 +122,7 @@ public:
   double sample;
   void print(std::ostream& Os) const;
 private:
+#ifdef USE_BOOST_SERIALIZATON
   friend class boost::serialization::access;
    template<class Archive>
    void serialize(Archive & ar, const unsigned int version)
@@ -127,6 +130,7 @@ private:
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
     ar & BOOST_SERIALIZATION_NVP(line) & BOOST_SERIALIZATION_NVP(sample);
   }
+#endif
 };
 
 bool operator==(const VicarImageCoordinate& C1, const VicarImageCoordinate& C2);
@@ -187,8 +191,4 @@ private:
 };
 
 }
-
-BOOST_CLASS_EXPORT_KEY(GeoCal::ImageCoordinate);
-BOOST_CLASS_EXPORT_KEY(GeoCal::VicarImageCoordinate);
-
 #endif

@@ -1,11 +1,13 @@
-#include "unit_test_support.h"
-#include "image_coordinate.h"
-#include <fstream>
+// Must include archives before geocal serialization stuff
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/map.hpp>
+// A few common objects that we can serialize
+#include "geocal_serialize_common.h"
+#include "unit_test_support.h"
+#include "image_coordinate.h"
+#include <fstream>
 using namespace GeoCal;
 
 BOOST_FIXTURE_TEST_SUITE(image_coordinate, GlobalFixture)
@@ -43,7 +45,9 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<GenericObject> ic4(new ImageCoordinate(6, 7));
   oa << BOOST_SERIALIZATION_NVP(ic) << BOOST_SERIALIZATION_NVP(ic2)
      << BOOST_SERIALIZATION_NVP(ic3) << BOOST_SERIALIZATION_NVP(ic4);
-  std::cerr << os.str();
+  if(false)
+    // Can dump to screen, if we want to see the text
+    std::cerr << os.str();
   std::istringstream is(os.str());
   boost::archive::xml_iarchive ia(is);
   ImageCoordinate icr, ic2r;
@@ -63,27 +67,37 @@ BOOST_AUTO_TEST_CASE(serialization_save)
 {
   // Test where we write out the XML file, and then read this in 
   // a separate test. We use this to make sure the registration occurs
-  // correctly for this.
-  std::ofstream os("image_coordinate_test.xml");
+  // correctly for this, and format doesn't change.
+  //
+  // We write this out using a the base class "GenericObject", just so
+  // we can test proper handling of derived classes. We wouldn't
+  // normally use this general of a class type.
+  //
+  // We only need to run this test to regenerate the xml code, the
+  // load test can then run every time.
+  if(true)
+    return;
+  std::string fname = test_data_dir() + "image_coordinate_test.xml";
+  std::ofstream os(fname.c_str());
   boost::archive::xml_oarchive oa(os);
 
-  boost::shared_ptr<ImageCoordinate> ic1(new ImageCoordinate(4, 5));
-  boost::shared_ptr<ImageCoordinate> ic2(new ImageCoordinate(6, 7));
+  boost::shared_ptr<GenericObject> ic1(new ImageCoordinate(4, 5));
+  boost::shared_ptr<GenericObject> ic2(new ImageCoordinate(6, 7));
   oa << BOOST_SERIALIZATION_NVP(ic1) << BOOST_SERIALIZATION_NVP(ic2);
 }
 
 BOOST_AUTO_TEST_CASE(serialization_load)
 {
-  // std::ostringstream os;
-  // boost::archive::xml_oarchive oa(os);
-  // boost::shared_ptr<ImageCoordinate> dummy(new ImageCoordinate(10, 20));
-  // oa << BOOST_SERIALIZATION_NVP(dummy);
-
-  std::ifstream is("image_coordinate_test.xml");
+  std::string fname = test_data_dir() + "image_coordinate_test.xml";
+  std::ifstream is(fname.c_str());
   boost::archive::xml_iarchive ia(is);
-  boost::shared_ptr<ImageCoordinate> ic1;
-  boost::shared_ptr<ImageCoordinate> ic2;
-  ia >> BOOST_SERIALIZATION_NVP(ic1) >> BOOST_SERIALIZATION_NVP(ic2);
+  boost::shared_ptr<GenericObject> ic1r;
+  boost::shared_ptr<GenericObject> ic2r;
+  ia >> BOOST_SERIALIZATION_NVP(ic1r) >> BOOST_SERIALIZATION_NVP(ic2r);
+  boost::shared_ptr<ImageCoordinate> ic1 = 
+    boost::dynamic_pointer_cast<ImageCoordinate>(ic1r);
+  boost::shared_ptr<ImageCoordinate> ic2 = 
+    boost::dynamic_pointer_cast<ImageCoordinate>(ic2r);
   BOOST_CHECK(*ic1 ==ImageCoordinate(4, 5));
   BOOST_CHECK(*ic2 == ImageCoordinate(6,7));
 }
@@ -98,7 +112,9 @@ BOOST_AUTO_TEST_CASE(serialization_text)
   ImageCoordinate ic(1, 2);
   ImageCoordinate ic2(2, 3);
   oa << BOOST_SERIALIZATION_NVP(ic) << BOOST_SERIALIZATION_NVP(ic2);
-  //std::cerr << os.str();
+  if(false)
+    // Can dump to screen, if we want to see the text
+    std::cerr << os.str();
   std::istringstream is(os.str());
   boost::archive::text_iarchive ia(is);
   ImageCoordinate icr, ic2r;

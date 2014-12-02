@@ -5,6 +5,34 @@
 #include <blitz/array.h>
 #include <cmath>
 
+#ifdef USE_BOOST_SERIALIZATON
+#include <boost/serialization/split_free.hpp>
+// Add serialization for boost::math::quaternion
+namespace boost {
+  namespace serialization {
+    template<class Archive, class T>
+    void save(Archive& ar, const boost::math::quaternion<T>& q, 
+	      const unsigned version) {
+      T q1 = q.R_component_1();
+      T q2 = q.R_component_2();
+      T q3 = q.R_component_3();
+      T q4 = q.R_component_4();
+      ar & BOOST_SERIALIZATION_NVP(q1) & BOOST_SERIALIZATION_NVP(q2)
+	& BOOST_SERIALIZATION_NVP(q3) & BOOST_SERIALIZATION_NVP(q4);
+    }
+    template<typename Archive, class T>
+    void load(Archive& ar, boost::math::quaternion<T>& q, 
+	      const unsigned version) {
+      T a, b, c, d;
+      ar & BOOST_SERIALIZATION_NVP(a) & BOOST_SERIALIZATION_NVP(b)
+	& BOOST_SERIALIZATION_NVP(c) & BOOST_SERIALIZATION_NVP(d);
+      q = boost::math::quaternion<T>(a, b, c, d);
+    }
+  }
+}
+BOOST_SERIALIZATION_SPLIT_FREE(boost::math::quaternion<double>);
+#endif
+
 namespace GeoCal {
   // Various support routines for working with quaternions. 
 

@@ -61,6 +61,18 @@ public:
 private:
   std::vector<double> psi_x_;
   std::vector<double> psi_y_;
+#ifdef USE_BOOST_SERIALIZATON
+  SpotCamera() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    using boost::serialization::make_nvp;
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Camera);
+    ar & make_nvp("psi_x", psi_x_) 
+      & make_nvp("psi_y", psi_y_);
+  }
+#endif
 };
 }
 #endif

@@ -6,6 +6,7 @@
 #ifndef USE_BOOST_SERIALIZATON
 #define USE_BOOST_SERIALIZATON
 #endif
+#include <boost/serialization/vector.hpp>
 #include "generic_object.h"
 #include "image_coordinate.h"
 #include "geocal_quaternion.h"
@@ -13,4 +14,5 @@
 BOOST_CLASS_EXPORT(GeoCal::GenericObject);
 BOOST_CLASS_EXPORT(GeoCal::ImageCoordinate);
 BOOST_CLASS_EXPORT(boost::math::quaternion<double>);
+BOOST_CLASS_EXPORT(std::vector<double>);
 #endif

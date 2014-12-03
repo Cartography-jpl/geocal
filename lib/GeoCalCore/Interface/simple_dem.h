@@ -71,6 +71,15 @@ public:
   void h(double Hnew) {h_ = Hnew;}
 private:
   double h_;
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version)
+  {
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Dem);
+    ar & BOOST_SERIALIZATION_NVP(h_);
+  }
+#endif
 };
 
 //-----------------------------------------------------------------------

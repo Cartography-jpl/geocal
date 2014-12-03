@@ -8,6 +8,7 @@
 geocalinc_HEADERS+= @srcserialize@/geocal_serialize.h
 geocalinc_HEADERS+= @srcserialize@/geocal_serialize_common.h
 geocalinc_HEADERS+= @srcserialize@/geocal_serialize_camera.h
+geocalinc_HEADERS+= @srcserialize@/geocal_serialize_dem.h
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcserialize@ 
 

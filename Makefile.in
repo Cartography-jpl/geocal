@@ -1330,7 +1330,8 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcmspi@/ground_mspi_igc.h @srcmspi@/usgs_dem.h \
 	@srcmspi@/air_mspi_igc.h @srcserialize@/geocal_serialize.h \
 	@srcserialize@/geocal_serialize_common.h \
-	@srcserialize@/geocal_serialize_camera.h
+	@srcserialize@/geocal_serialize_camera.h \
+	@srcserialize@/geocal_serialize_dem.h
 HEADERS = $(geocalinc_HEADERS) $(include_HEADERS) $(libraw_HEADERS) \
 	$(sdbx_HEADERS) $(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
 	$(sdbxsupport_HEADERS)
@@ -2281,7 +2282,8 @@ geocalinc_HEADERS = @srcsupport@/constant.h \
 	@srcmspi@/ground_mspi_igc.h @srcmspi@/usgs_dem.h \
 	@srcmspi@/air_mspi_igc.h @srcserialize@/geocal_serialize.h \
 	@srcserialize@/geocal_serialize_common.h \
-	@srcserialize@/geocal_serialize_camera.h
+	@srcserialize@/geocal_serialize_camera.h \
+	@srcserialize@/geocal_serialize_dem.h
 # Test files
 geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \

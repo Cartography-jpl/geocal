@@ -3,6 +3,10 @@
 #include "auto_derivative.h"
 #include "geocal_quaternion.h"
 
+#ifdef USE_BOOST_SERIALIZATON
+BOOST_SERIALIZATION_SPLIT_FREE(boost::math::quaternion<GeoCal::AutoDerivative<double> >);
+#endif
+
 namespace GeoCal {
   // Useful to be able to convert to and from a
   // boost::math::quaternion<AutoDerivative<double> > and

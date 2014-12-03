@@ -147,7 +147,7 @@ BOOST_AUTO_TEST_CASE(serialize)
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
   oa << BOOST_SERIALIZATION_NVP(x) << BOOST_SERIALIZATION_NVP(y);
-  if(true)
+  if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << os.str();
 
@@ -169,7 +169,7 @@ BOOST_AUTO_TEST_CASE(serialize_blitz_array)
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
   oa << BOOST_SERIALIZATION_NVP(d);
-  if(true)
+  if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << os.str();
 

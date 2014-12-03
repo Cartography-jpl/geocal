@@ -873,6 +873,8 @@ namespace boost {
 }
 typedef blitz::Array<double, 1> blitz_double_array_1d;
 BOOST_SERIALIZATION_SPLIT_FREE(blitz_double_array_1d);
+typedef blitz::Array<bool, 1> blitz_bool_array_1d;
+BOOST_SERIALIZATION_SPLIT_FREE(blitz_bool_array_1d);
 #endif
 
 #endif

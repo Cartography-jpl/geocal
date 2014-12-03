@@ -157,6 +157,28 @@ private:
   // Transformation to and from the paraxial coordinates
   boost::shared_ptr<MspiParaxialTransform> paraxial_transform_;
   int inversion_;
+
+#ifdef USE_BOOST_SERIALIZATON
+  MspiCamera() {}
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version)
+  {
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
+    ar & BOOST_SERIALIZATION_NVP(fname) 
+      & BOOST_SERIALIZATION_NVP(granule_id_)
+      & BOOST_SERIALIZATION_NVP(epsilon_)
+      & BOOST_SERIALIZATION_NVP(psi_)
+      & BOOST_SERIALIZATION_NVP(theta_)
+      & BOOST_SERIALIZATION_NVP(boresight_angle_)
+      & BOOST_SERIALIZATION_NVP(yaw_)
+      & BOOST_SERIALIZATION_NVP(pitch_)
+      & BOOST_SERIALIZATION_NVP(roll_)
+      & BOOST_SERIALIZATION_NVP(row_number_)
+      & BOOST_SERIALIZATION_NVP(paraxial_transform_)
+      & BOOST_SERIALIZATION_NVP(inversion_);
+  }
+#endif
 };
 }
 #endif

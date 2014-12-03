@@ -1,9 +1,16 @@
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include "geocal_serialize_common.h"
 #include "mspi_camera.h"
 #include "unit_test_support.h"
 #include "constant.h"
 #include <iostream>
 
 using namespace GeoCal;
+BOOST_CLASS_EXPORT(GeoCal::Camera);
+BOOST_CLASS_EXPORT(GeoCal::QuaternionCamera);
+BOOST_CLASS_EXPORT(GeoCal::MspiCamera);
+BOOST_CLASS_EXPORT(GeoCal::MspiParaxialTransform);
 
 BOOST_FIXTURE_TEST_SUITE(mspi_camera, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
@@ -267,6 +274,40 @@ BOOST_AUTO_TEST_CASE(gndmisr_roundtrip_test)
 	BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
       }
     }
+}
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  std::ostringstream os;
+  boost::archive::xml_oarchive oa(os);
+
+  boost::shared_ptr<Camera> cam(new MspiCamera(test_data_dir() + "AIRMSPI_CONFIG_CAMERA_MODEL_0003.config"));
+  oa << BOOST_SERIALIZATION_NVP(cam);
+  if(false)
+    std::cerr << os.str();
+  
+  std::istringstream is(os.str());
+  boost::archive::xml_iarchive ia(is);
+  boost::shared_ptr<Camera> camr;
+  ia >> BOOST_SERIALIZATION_NVP(camr);
+
+  BOOST_CHECK_EQUAL(cam->number_band(), camr->number_band());
+  for(int b = 0; b < cam->number_band(); ++b) {
+    BOOST_CHECK_EQUAL(cam->number_sample(b), camr->number_sample(b));
+    for(double ln = -1.0; ln < 1.05; ln += 0.5) {
+      for(int smp = 0; smp < cam->number_sample(b); smp += 10) {
+	FrameCoordinate fc(ln, smp);
+	FrameCoordinate fc2 = 
+	  camr->frame_coordinate(cam->sc_look_vector(fc, b), b);
+	BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
+	BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
+	FrameCoordinate fc3 = 
+	  cam->frame_coordinate(camr->sc_look_vector(fc, b), b);
+	BOOST_CHECK(fabs(fc.line - fc3.line) < 0.1);
+	BOOST_CHECK(fabs(fc.sample - fc3.sample) < 0.1);
+      }
+    }
+  }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

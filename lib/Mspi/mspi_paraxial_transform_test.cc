@@ -29,7 +29,7 @@ BOOST_AUTO_TEST_CASE(serialization)
 
   boost::shared_ptr<GenericObject> p(new MspiParaxialTransform(test_data_dir() + "mspi_camera_test.config"));
   oa << BOOST_SERIALIZATION_NVP(p);
-  if(true)
+  if(false)
     std::cerr << os.str();
 
   std::istringstream is(os.str());

@@ -39,6 +39,17 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
+
+private:
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version)
+  {
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
+  }
+#endif
+
 };
 
 /****************************************************************//**
@@ -84,6 +95,16 @@ public:
   { Os << "Simple Datum, undulation " << u_ << "m \n"; }
 private:
   double u_;			///< Value to return everywhere.
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version)
+  {
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Datum);
+    ar & BOOST_SERIALIZATION_NVP(u_);
+  }
+#endif
+
 };
 
 typedef SimpleDatum NoDatum;	///< More descriptive name in some cases

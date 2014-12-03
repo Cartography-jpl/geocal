@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   }
   if(!d)
     return;
-    oa << BOOST_SERIALIZATION_NVP(d);
+  oa << BOOST_SERIALIZATION_NVP(d);
   if(false)
     std::cerr << os.str();
 

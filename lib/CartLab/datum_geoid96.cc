@@ -9,8 +9,8 @@ using namespace GeoCal;
 //-----------------------------------------------------------------------
 
 DatumGeoid96::DatumGeoid96(const std::string& Fname)
- : fname(Fname)
 {
+  std::string fname = Fname;
   if(fname == "") {
     char* t = getenv("AFIDS_VDEV_DATA");
     if(!t)
@@ -45,7 +45,7 @@ double DatumGeoid96::undulation(const Geodetic& Gc) const
 void DatumGeoid96::print(std::ostream& Os) const
 {
   Os << "Geoid 96 Datum\n"
-     << "  File: " << fname << "\n";
+     << "  File: " << file_name() << "\n";
 }
 
 

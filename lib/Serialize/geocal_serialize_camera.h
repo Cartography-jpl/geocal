@@ -5,8 +5,13 @@
 #include "camera.h"
 #include "spot_camera.h"
 #include "quaternion_camera.h"
+#include "argus_camera.h"
+#include "galileo_camera.h"
+
 BOOST_CLASS_EXPORT(GeoCal::Camera);
 BOOST_CLASS_EXPORT(GeoCal::SimpleCamera);
 BOOST_CLASS_EXPORT(GeoCal::SpotCamera);
 BOOST_CLASS_EXPORT(GeoCal::QuaternionCamera);
+BOOST_CLASS_EXPORT(GeoCal::ArgusCamera);
+BOOST_CLASS_EXPORT(GeoCal::GalileoCamera);
 #endif

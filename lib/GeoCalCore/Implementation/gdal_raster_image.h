@@ -344,6 +344,60 @@ private:
     if(gdal_data_base_->has_rpc())
       rpc_.reset(new Rpc(gdal_data_base_->rpc()));
   }
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+  template<class Archive>
+   void serialize(Archive & ar, const unsigned int version)
+  {
+    // Nothing to do here, since save_construct_data and
+    // load_construct_data handles everything
+  }
+#endif
 };
 }
+
+#ifdef USE_BOOST_SERIALIZATON
+// This is a little more complicated, because we can't really
+// construct a object using a default constructor. So we need to
+// directly handle the object construction.
+namespace boost { namespace serialization {
+template<class Archive> 
+inline void save_construct_data(Archive & ar, const GeoCal::GdalRasterImage* d, 
+			 const unsigned int version)
+{
+  detail::base_register<GeoCal::RasterImage, GeoCal::GdalRasterImage>::invoke();
+  std::string file_name = d->file_names()[0];
+  int band_id = d->band_id();
+  bool update = d->update();
+  int number_tile = d->number_tile();
+  int number_tile_line = d->number_tile_line();
+  int number_tile_sample = d->number_tile_sample();
+  ar << BOOST_SERIALIZATION_NVP(file_name)
+     << BOOST_SERIALIZATION_NVP(band_id)
+     << BOOST_SERIALIZATION_NVP(number_tile)
+     << BOOST_SERIALIZATION_NVP(update)
+     << BOOST_SERIALIZATION_NVP(number_tile_line)
+     << BOOST_SERIALIZATION_NVP(number_tile_sample);
+}
+template<class Archive>
+inline void load_construct_data(Archive & ar, GeoCal::GdalRasterImage* d,
+				const unsigned int version)
+{
+  detail::base_register<GeoCal::RasterImage, GeoCal::GdalRasterImage>::invoke();
+  std::string file_name;
+  int band_id, number_tile, number_tile_line, number_tile_sample;
+  bool update;
+  ar >> BOOST_SERIALIZATION_NVP(file_name)
+     >> BOOST_SERIALIZATION_NVP(band_id)
+     >> BOOST_SERIALIZATION_NVP(number_tile)
+     >> BOOST_SERIALIZATION_NVP(update)
+     >> BOOST_SERIALIZATION_NVP(number_tile_line)
+     >> BOOST_SERIALIZATION_NVP(number_tile_sample);
+  ::new(d)GeoCal::GdalRasterImage(file_name, band_id, number_tile, update,
+				  number_tile_line, number_tile_sample);
+}
+  }
+}
+#endif
+
 #endif

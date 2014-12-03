@@ -1,3 +1,6 @@
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include "geocal_serialize_common.h"
 #include "auto_derivative.h"
 #include "unit_test_support.h"
 
@@ -135,6 +138,47 @@ BOOST_AUTO_TEST_CASE(array_assignment)
   a = 2;
   a = a + b;
   a = cast<AutoDerivative<double> >(b);
+}
+
+BOOST_AUTO_TEST_CASE(serialize)
+{
+  AutoDerivative<double> x(3, 0, 2);
+  AutoDerivative<double> y(11);
+  std::ostringstream os;
+  boost::archive::xml_oarchive oa(os);
+  oa << BOOST_SERIALIZATION_NVP(x) << BOOST_SERIALIZATION_NVP(y);
+  if(true)
+    // Can dump to screen, if we want to see the text
+    std::cerr << os.str();
+
+  std::istringstream is(os.str());
+  boost::archive::xml_iarchive ia(is);
+  AutoDerivative<double> xr, yr;
+  ia >> BOOST_SERIALIZATION_NVP(xr) >> BOOST_SERIALIZATION_NVP(yr);
+  BOOST_CHECK_CLOSE(xr.value(), x.value(), 1e-8);
+  BOOST_CHECK_CLOSE(yr.value(), y.value(), 1e-8);
+  BOOST_CHECK(yr.is_constant());
+  BOOST_CHECK_EQUAL(xr.number_variable(), x.number_variable());
+  BOOST_CHECK_MATRIX_CLOSE(xr.gradient(), x.gradient());
+}
+
+BOOST_AUTO_TEST_CASE(serialize_blitz_array)
+{
+  blitz::Array<double, 1> d(3);
+  d = 1, 2, 3;
+  std::ostringstream os;
+  boost::archive::xml_oarchive oa(os);
+  oa << BOOST_SERIALIZATION_NVP(d);
+  if(true)
+    // Can dump to screen, if we want to see the text
+    std::cerr << os.str();
+
+  std::istringstream is(os.str());
+  boost::archive::xml_iarchive ia(is);
+  blitz::Array<double, 1> dr;
+  ia >> BOOST_SERIALIZATION_NVP(dr);
+  BOOST_CHECK_EQUAL(d.rows(), dr.rows());
+  BOOST_CHECK_MATRIX_CLOSE(d, dr);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

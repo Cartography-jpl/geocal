@@ -586,6 +586,15 @@ protected:
   {
     notify_update_do(*this);
   }
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    using boost::serialization::make_nvp;
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Camera);
+  }
+#endif
 };
 }
 #endif

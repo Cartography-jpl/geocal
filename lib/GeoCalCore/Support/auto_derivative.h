@@ -497,7 +497,15 @@ public:
 private:
   T val;
   blitz::Array<T, 1> grad;
-  bool keep_grad;
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version)
+  {
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
+    ar & BOOST_SERIALIZATION_NVP(val) & BOOST_SERIALIZATION_NVP(grad);
+  }
+#endif
 };
 
 //-----------------------------------------------------------------------
@@ -833,4 +841,38 @@ pow2(const GeoCal::AutoDerivative<double>& base)
   }
 }
 }
+
+#ifdef USE_BOOST_SERIALIZATON
+#include <boost/serialization/array.hpp>
+
+// Add serialization of blitz::Array<T, 1>
+namespace boost {
+  namespace serialization {
+    template<class Archive, class T>
+    void save(Archive& ar, const blitz::Array<T, 1>& A, 
+	      const unsigned version) {
+      if(A.size() > 0 && !A.isStorageContiguous())
+	throw GeoCal::Exception("We can only save contiguous matrix data");
+      using boost::serialization::make_nvp;
+      int size = A.rows();
+      ar << BOOST_SERIALIZATION_NVP(size);
+      if(size > 0)
+	ar << make_nvp("data", make_array(A.data(), A.size()));
+    }
+    template<typename Archive, class T>
+    void load(Archive& ar, blitz::Array<T, 1>& A, 
+	      const unsigned version) {
+      using boost::serialization::make_nvp;
+      int size;
+      ar >> BOOST_SERIALIZATION_NVP(size);
+      A.resize(size);
+      if(size > 0)
+	ar >> make_nvp("data", make_array(A.data(), A.size()));
+    }
+  }
+}
+typedef blitz::Array<double, 1> blitz_double_array_1d;
+BOOST_SERIALIZATION_SPLIT_FREE(blitz_double_array_1d);
+#endif
+
 #endif

@@ -8,6 +8,7 @@
 #include "argus_camera.h"
 #include "galileo_camera.h"
 #include "quickbird_camera.h"
+#include "mspi_camera.h"
 
 BOOST_CLASS_EXPORT(GeoCal::Camera);
 BOOST_CLASS_EXPORT(GeoCal::SimpleCamera);
@@ -16,4 +17,5 @@ BOOST_CLASS_EXPORT(GeoCal::QuaternionCamera);
 BOOST_CLASS_EXPORT(GeoCal::ArgusCamera);
 BOOST_CLASS_EXPORT(GeoCal::GalileoCamera);
 BOOST_CLASS_EXPORT(GeoCal::QuickBirdCamera);
+BOOST_CLASS_EXPORT(GeoCal::MspiParaxialTransform);
 #endif

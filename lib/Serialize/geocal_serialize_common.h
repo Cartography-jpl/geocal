@@ -24,6 +24,7 @@ BOOST_CLASS_EXPORT(boost::math::quaternion<double>);
 BOOST_CLASS_EXPORT(boost::math::quaternion<GeoCal::AutoDerivative<double> >);
 BOOST_CLASS_EXPORT(std::vector<double>);
 BOOST_CLASS_EXPORT(blitz_double_array_1d);
+BOOST_CLASS_EXPORT(blitz_double_array_2d);
 BOOST_CLASS_EXPORT(blitz_bool_array_1d);
 BOOST_CLASS_EXPORT(GeoCal::AutoDerivative<double>);
 

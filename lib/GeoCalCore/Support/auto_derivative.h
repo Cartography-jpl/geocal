@@ -845,7 +845,7 @@ pow2(const GeoCal::AutoDerivative<double>& base)
 #ifdef USE_BOOST_SERIALIZATON
 #include <boost/serialization/array.hpp>
 
-// Add serialization of blitz::Array<T, 1>
+// Add serialization of blitz::Array<T, 1> and blitz::Array<T, 2>
 namespace boost {
   namespace serialization {
     template<class Archive, class T>
@@ -869,11 +869,36 @@ namespace boost {
       if(size > 0)
 	ar >> make_nvp("data", make_array(A.data(), A.size()));
     }
+
+    template<class Archive, class T>
+    void save(Archive& ar, const blitz::Array<T, 2>& A, 
+	      const unsigned version) {
+      if(A.size() > 0 && !A.isStorageContiguous())
+	throw GeoCal::Exception("We can only save contiguous matrix data");
+      using boost::serialization::make_nvp;
+      int rows = A.rows();
+      int cols = A.cols();
+      ar << BOOST_SERIALIZATION_NVP(rows) << BOOST_SERIALIZATION_NVP(cols);
+      if(A.size() > 0)
+	ar << make_nvp("data", make_array(A.data(), A.size()));
+    }
+    template<typename Archive, class T>
+    void load(Archive& ar, blitz::Array<T, 2>& A, 
+	      const unsigned version) {
+      using boost::serialization::make_nvp;
+      int rows, cols;
+      ar >> BOOST_SERIALIZATION_NVP(rows) >> BOOST_SERIALIZATION_NVP(cols);
+      A.resize(rows, cols);
+      if(A.size() > 0)
+	ar >> make_nvp("data", make_array(A.data(), A.size()));
+    }
   }
 }
 typedef blitz::Array<double, 1> blitz_double_array_1d;
-BOOST_SERIALIZATION_SPLIT_FREE(blitz_double_array_1d);
+typedef blitz::Array<double, 2> blitz_double_array_2d;
 typedef blitz::Array<bool, 1> blitz_bool_array_1d;
+BOOST_SERIALIZATION_SPLIT_FREE(blitz_double_array_1d);
+BOOST_SERIALIZATION_SPLIT_FREE(blitz_double_array_2d);
 BOOST_SERIALIZATION_SPLIT_FREE(blitz_bool_array_1d);
 #endif
 

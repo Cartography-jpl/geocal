@@ -13,10 +13,15 @@ const int msl_number_col = 4320;
 //-----------------------------------------------------------------------
 
 DidDatum::DidDatum(const std::string& Fname)
-: mi_(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter),
-      -180, 90, 180, -90, msl_number_col, msl_number_row),
-  msl_(Fname, boost::extents[msl_number_row][msl_number_col][2])
 {
+  initialize(Fname);
+}
+
+void DidDatum::initialize(const std::string& Fname) 
+{
+  mi_ = MapInfo(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter),
+		-180, 90, 180, -90, msl_number_col, msl_number_row);
+  msl_.reset(new MemoryMapArray<char, 3>(Fname, boost::extents[msl_number_row][msl_number_col][2]));
 }
 
 //-----------------------------------------------------------------------
@@ -43,7 +48,7 @@ double DidDatum::undulation(const GroundCoordinate& Gc) const
 // endian problems.
 //-----------------------------------------------------------------------
 
-  int res = ((int) msl_.data()[row][col][0]) << 8 | msl_.data()[row][col][1];
+  int res = ((int) msl_->data()[row][col][0]) << 8 | msl_->data()[row][col][1];
   return res;
 }
 
@@ -65,6 +70,6 @@ double DidDatum::undulation(const Geodetic& Gc) const
 // endian problems.
 //-----------------------------------------------------------------------
 
-  int res = ((int) msl_.data()[row][col][0]) << 8 | msl_.data()[row][col][1];
+  int res = ((int) msl_->data()[row][col][0]) << 8 | msl_->data()[row][col][1];
   return res;
 }

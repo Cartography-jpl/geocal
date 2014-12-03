@@ -23,10 +23,10 @@ namespace boost {
     template<typename Archive, class T>
     void load(Archive& ar, boost::math::quaternion<T>& q, 
 	      const unsigned version) {
-      T a, b, c, d;
-      ar & BOOST_SERIALIZATION_NVP(a) & BOOST_SERIALIZATION_NVP(b)
-	& BOOST_SERIALIZATION_NVP(c) & BOOST_SERIALIZATION_NVP(d);
-      q = boost::math::quaternion<T>(a, b, c, d);
+      T q1, q2, q3, q4;
+      ar & BOOST_SERIALIZATION_NVP(q1) & BOOST_SERIALIZATION_NVP(q2)
+	& BOOST_SERIALIZATION_NVP(q3) & BOOST_SERIALIZATION_NVP(q4);
+      q = boost::math::quaternion<T>(q1, q2, q3, q4);
     }
   }
 }

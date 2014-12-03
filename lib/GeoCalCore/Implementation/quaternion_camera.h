@@ -593,6 +593,18 @@ protected:
   {
     using boost::serialization::make_nvp;
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Camera);
+    ar & make_nvp("focal_length", focal_length_)
+      & make_nvp("number_band", nband_)
+      & make_nvp("number_line", nline_)
+      & make_nvp("number_sample", nsamp_)
+      & make_nvp("line_pitch", line_pitch_)
+      & make_nvp("sample_pitch", sample_pitch_)
+      & make_nvp("principal_point", principal_point_)
+      & make_nvp("frame_to_sc", frame_to_sc_)
+      & make_nvp("frame_convention", frame_convention_)
+      & make_nvp("line_direction", line_direction_)
+      & make_nvp("sample_direction", sample_direction_)
+      & make_nvp("parameter_mask", parameter_mask_);
   }
 #endif
 };

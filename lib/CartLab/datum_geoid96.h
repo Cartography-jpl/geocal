@@ -38,15 +38,17 @@ template<class Archive>
 inline void save_construct_data(Archive & ar, const GeoCal::DatumGeoid96* d, 
 			 const unsigned int version)
 {
+  void_cast_register(static_cast<GeoCal::DatumGeoid96*>(0),
+		     static_cast<GeoCal::Datum*>(0));
   std::string file_name = d->file_name();
-  detail::base_register<GeoCal::Datum, GeoCal::DatumGeoid96>::invoke();
   ar << GEOCAL_NVP(file_name);
 }
 template<class Archive>
 inline void load_construct_data(Archive & ar, GeoCal::DatumGeoid96* d,
 				const unsigned int version)
 {
-  detail::base_register<GeoCal::Datum, GeoCal::DatumGeoid96>::invoke();
+  void_cast_register(static_cast<GeoCal::DatumGeoid96*>(0),
+		     static_cast<GeoCal::Datum*>(0));
   std::string file_name;
   ar >> GEOCAL_NVP(file_name);
   ::new(d)GeoCal::DatumGeoid96(file_name);

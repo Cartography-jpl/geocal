@@ -349,8 +349,7 @@ private:
   template<class Archive>
    void serialize(Archive & ar, const unsigned int version)
   {
-    // Nothing to do here, since save_construct_data and
-    // load_construct_data handles everything
+    // Nothing to do
   }
 #endif
 };
@@ -365,8 +364,8 @@ template<class Archive>
 inline void save_construct_data(Archive & ar, const GeoCal::GdalRasterImage* d, 
 			 const unsigned int version)
 {
-  boost::serialization::base_object<GeoCal::RasterImage>(d);
-  detail::base_register<GeoCal::RasterImage, GeoCal::GdalRasterImage>::invoke();
+  void_cast_register(static_cast<GeoCal::GdalRasterImage*>(0),
+		     static_cast<GeoCal::RasterImage*>(0));
   std::string file_name = d->file_names()[0];
   int band_id = d->band_id();
   bool update = d->update();
@@ -384,7 +383,8 @@ template<class Archive>
 inline void load_construct_data(Archive & ar, GeoCal::GdalRasterImage* d,
 				const unsigned int version)
 {
-  detail::base_register<GeoCal::RasterImage, GeoCal::GdalRasterImage>::invoke();
+  void_cast_register(static_cast<GeoCal::GdalRasterImage*>(0),
+		     static_cast<GeoCal::RasterImage*>(0));
   std::string file_name;
   int band_id, number_tile, number_tile_line, number_tile_sample;
   bool update;

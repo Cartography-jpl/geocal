@@ -152,7 +152,6 @@ BOOST_AUTO_TEST_CASE(serialization)
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
 
-  std::cerr << BOOST_IS_ABSTRACT(GeoCal::GdalRasterImage) << "\n";
   std::string fname = test_data_dir() + "cib_sample.img";
   boost::shared_ptr<RasterImage> img(new GdalRasterImage(fname));
   oa << GEOCAL_NVP(img);

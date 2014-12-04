@@ -27,7 +27,7 @@
 
 // Do this a lot, so give a shortcut for this
 #define GEOCAL_NVP(x) BOOST_SERIALIZATION_NVP(x)
-#define GEOCAL_NVP_(x) boost::serialization::make_nvp("x", x ## _)
+#define GEOCAL_NVP_(x) boost::serialization::make_nvp(BOOST_PP_STRINGIZE(x), x ## _)
 
 #endif
 

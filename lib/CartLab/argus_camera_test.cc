@@ -1,13 +1,7 @@
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include "geocal_serialize_common.h"
 #include "unit_test_support.h"
 #include "argus_camera.h"
 #include "ecr.h"
 using namespace GeoCal;
-BOOST_CLASS_EXPORT(GeoCal::Camera);
-BOOST_CLASS_EXPORT(GeoCal::QuaternionCamera);
-BOOST_CLASS_EXPORT(GeoCal::ArgusCamera);
 
 BOOST_FIXTURE_TEST_SUITE(argus_camera, GlobalFixture)
 
@@ -45,6 +39,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
 
@@ -70,6 +65,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_CHECK_CLOSE(camr2->line_pitch(),   0.00641026, 1e-4);
   BOOST_CHECK_CLOSE(camr2->sample_pitch(), 0.00641026, 1e-4);
   BOOST_CHECK_EQUAL(camr2->number_band(), 1);
+#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -1,10 +1,3 @@
-// Must include archives before geocal serialization stuff
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-// A few common objects that we can serialize
-#include "geocal_serialize_common.h"
 #include "unit_test_support.h"
 #include "image_coordinate.h"
 #include <fstream>
@@ -36,6 +29,7 @@ BOOST_AUTO_TEST_CASE(vicar_image_coordinate)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
 
@@ -61,10 +55,12 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<ImageCoordinate> ic4r2 =
     boost::dynamic_pointer_cast<ImageCoordinate>(ic4r);
   BOOST_CHECK(*ic4r2 == ImageCoordinate(6,7));
+#endif
 }
 
 BOOST_AUTO_TEST_CASE(serialization_save)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   // Test where we write out the XML file, and then read this in 
   // a separate test. We use this to make sure the registration occurs
   // correctly for this, and format doesn't change.
@@ -84,10 +80,12 @@ BOOST_AUTO_TEST_CASE(serialization_save)
   boost::shared_ptr<GenericObject> ic1(new ImageCoordinate(4, 5));
   boost::shared_ptr<GenericObject> ic2(new ImageCoordinate(6, 7));
   oa << GEOCAL_NVP(ic1) << GEOCAL_NVP(ic2);
+#endif
 }
 
 BOOST_AUTO_TEST_CASE(serialization_load)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   std::string fname = test_data_dir() + "image_coordinate_test.xml";
   std::ifstream is(fname.c_str());
   boost::archive::xml_iarchive ia(is);
@@ -100,10 +98,12 @@ BOOST_AUTO_TEST_CASE(serialization_load)
     boost::dynamic_pointer_cast<ImageCoordinate>(ic2r);
   BOOST_CHECK(*ic1 ==ImageCoordinate(4, 5));
   BOOST_CHECK(*ic2 == ImageCoordinate(6,7));
+#endif
 }
 
 BOOST_AUTO_TEST_CASE(serialization_text)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   // Don't normally need a separate text serialization test, but this
   // is our first serialization so make sure everything works ok.
   std::ostringstream os;
@@ -121,6 +121,7 @@ BOOST_AUTO_TEST_CASE(serialization_text)
   ia >> GEOCAL_NVP(icr) >> GEOCAL_NVP(ic2r);
   BOOST_CHECK(ic ==icr);
   BOOST_CHECK(ic2 ==ic2r);
+#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

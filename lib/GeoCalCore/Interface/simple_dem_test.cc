@@ -1,17 +1,9 @@
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include "geocal_serialize_common.h"
 #include "unit_test_support.h"
 #include "simple_dem.h"
 #include "geocal_datum.h"
 #include <cmath>
 
 using namespace GeoCal;
-
-BOOST_CLASS_EXPORT(GeoCal::Dem);
-BOOST_CLASS_EXPORT(GeoCal::SimpleDem);
-BOOST_CLASS_EXPORT(GeoCal::Datum);
-BOOST_CLASS_EXPORT(GeoCal::SimpleDatum);
 
 BOOST_FIXTURE_TEST_SUITE(simple_dem, GlobalFixture)
 
@@ -34,6 +26,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
 
@@ -53,6 +46,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   Geodetic g2(60, 30, height2);
   BOOST_CHECK_CLOSE(dr->distance_to_surface(g1), height1, 1e-4);
   BOOST_CHECK_CLOSE(dr->distance_to_surface(g2), height2, 1e-4);
+#endif
 }
 
 

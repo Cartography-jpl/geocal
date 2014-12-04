@@ -1,12 +1,7 @@
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include "geocal_serialize_common.h"
 #include "unit_test_support.h"
 #include "vicar_raster_image.h"
 
 using namespace GeoCal;
-BOOST_CLASS_EXPORT(GeoCal::RasterImage);
-BOOST_CLASS_EXPORT(GeoCal::VicarRasterImage);
 
 BOOST_FIXTURE_TEST_SUITE(vicar_raster_image, GlobalFixture)
 
@@ -154,6 +149,7 @@ BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
 
@@ -171,6 +167,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_CHECK_EQUAL(imgr->number_sample(), 10);
   BOOST_CHECK_EQUAL(imgr->number_tile_line(), 10);
   BOOST_CHECK_EQUAL(imgr->number_tile_sample(), 10);
+#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -31,6 +31,7 @@
 
 #endif
 
+
 namespace GeoCal {
 /****************************************************************//**
   For use with SWIG, it is useful to have a base class that 

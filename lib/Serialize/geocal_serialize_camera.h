@@ -18,4 +18,5 @@ BOOST_CLASS_EXPORT(GeoCal::ArgusCamera);
 BOOST_CLASS_EXPORT(GeoCal::GalileoCamera);
 BOOST_CLASS_EXPORT(GeoCal::QuickBirdCamera);
 BOOST_CLASS_EXPORT(GeoCal::MspiParaxialTransform);
+BOOST_CLASS_EXPORT(GeoCal::MspiCamera);
 #endif

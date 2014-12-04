@@ -1,8 +1,5 @@
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include "geocal_serialize_common.h"
-#include "auto_derivative.h"
 #include "unit_test_support.h"
+#include "auto_derivative.h"
 
 using namespace GeoCal;
 using namespace blitz;
@@ -142,6 +139,7 @@ BOOST_AUTO_TEST_CASE(array_assignment)
 
 BOOST_AUTO_TEST_CASE(serialize)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   AutoDerivative<double> x(3, 0, 2);
   AutoDerivative<double> y(11);
   std::ostringstream os;
@@ -160,10 +158,12 @@ BOOST_AUTO_TEST_CASE(serialize)
   BOOST_CHECK(yr.is_constant());
   BOOST_CHECK_EQUAL(xr.number_variable(), x.number_variable());
   BOOST_CHECK_MATRIX_CLOSE(xr.gradient(), x.gradient());
+#endif
 }
 
 BOOST_AUTO_TEST_CASE(serialize_blitz_array)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   blitz::Array<double, 1> d(3);
   d = 1, 2, 3;
   std::ostringstream os;
@@ -179,6 +179,7 @@ BOOST_AUTO_TEST_CASE(serialize_blitz_array)
   ia >> GEOCAL_NVP(dr);
   BOOST_CHECK_EQUAL(d.rows(), dr.rows());
   BOOST_CHECK_MATRIX_CLOSE(d, dr);
+#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

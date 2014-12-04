@@ -1,11 +1,6 @@
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include "geocal_serialize_common.h"
 #include "unit_test_support.h"
 #include "datum_geoid96.h"
 using namespace GeoCal;
-BOOST_CLASS_EXPORT(GeoCal::Datum);
-BOOST_CLASS_EXPORT(GeoCal::DatumGeoid96);
 
 BOOST_FIXTURE_TEST_SUITE(datum_geoid96, GlobalFixture)
 
@@ -26,6 +21,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   if(!VicarFile::vicar_available())
     return;
   std::ostringstream os;
@@ -49,6 +45,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   ia >> GEOCAL_NVP(dr);
 
   BOOST_CHECK_CLOSE(dr->undulation(Geodetic(34.2,-118.03)), -33.3435, 1e-4);
+#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

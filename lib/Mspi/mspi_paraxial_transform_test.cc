@@ -1,12 +1,7 @@
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include "geocal_serialize_common.h"
-#include "mspi_paraxial_transform.h"
 #include "unit_test_support.h"
+#include "mspi_paraxial_transform.h"
 #include <iostream>
 using namespace GeoCal;
-
-BOOST_CLASS_EXPORT(GeoCal::MspiParaxialTransform);
 
 BOOST_FIXTURE_TEST_SUITE(mspi_paraxial_transform, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
@@ -24,6 +19,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
 
@@ -47,6 +43,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   pr2->real_to_paraxial(32, real_x, real_y, paraxial_x, paraxial_y);
   BOOST_CHECK(fabs(paraxial_x -  0.1) < 0.01);
   BOOST_CHECK(fabs(paraxial_y - -0.2) < 0.01);
+#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

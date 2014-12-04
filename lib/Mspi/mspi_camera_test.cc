@@ -1,16 +1,9 @@
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include "geocal_serialize_common.h"
-#include "mspi_camera.h"
 #include "unit_test_support.h"
+#include "mspi_camera.h"
 #include "constant.h"
 #include <iostream>
 
 using namespace GeoCal;
-BOOST_CLASS_EXPORT(GeoCal::Camera);
-BOOST_CLASS_EXPORT(GeoCal::QuaternionCamera);
-BOOST_CLASS_EXPORT(GeoCal::MspiCamera);
-BOOST_CLASS_EXPORT(GeoCal::MspiParaxialTransform);
 
 BOOST_FIXTURE_TEST_SUITE(mspi_camera, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
@@ -278,6 +271,7 @@ BOOST_AUTO_TEST_CASE(gndmisr_roundtrip_test)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
 
@@ -308,6 +302,7 @@ BOOST_AUTO_TEST_CASE(serialization)
       }
     }
   }
+#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

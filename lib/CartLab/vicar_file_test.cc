@@ -1,6 +1,3 @@
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include "geocal_serialize_common.h"
 #include "unit_test_support.h"
 #include "vicar_file.h"
 #include "vicar_tiled_file.h"
@@ -11,7 +8,6 @@
 #include <iostream>
 
 using namespace GeoCal;
-BOOST_CLASS_EXPORT(GeoCal::VicarFile);
 
 // All the VICAR tests that use the PDF file parsing need to be done
 // here, because we can only initialize the VICAR interface once.
@@ -228,6 +224,7 @@ BOOST_AUTO_TEST_CASE(ibis_file_create)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
 
@@ -243,6 +240,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<VicarFile> fr2 = boost::dynamic_pointer_cast<VicarFile>(fr);
 
   BOOST_CHECK_EQUAL(fr2->file_name(), fname);
+#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

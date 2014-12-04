@@ -1,11 +1,6 @@
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include "geocal_serialize_common.h"
 #include "unit_test_support.h"
 #include "gdal_raster_image.h"    
 using namespace GeoCal;
-BOOST_CLASS_EXPORT(GeoCal::RasterImage);
-BOOST_CLASS_EXPORT(GeoCal::GdalRasterImage);
 
 BOOST_FIXTURE_TEST_SUITE(gdal_raster_image, GlobalFixture)
 
@@ -153,26 +148,27 @@ BOOST_AUTO_TEST_CASE(nitf_corner)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
 
+  std::cerr << BOOST_IS_ABSTRACT(GeoCal::GdalRasterImage) << "\n";
   std::string fname = test_data_dir() + "cib_sample.img";
   boost::shared_ptr<RasterImage> img(new GdalRasterImage(fname));
-  oa.register_type<GdalRasterImage>();
   oa << GEOCAL_NVP(img);
-  if(true)
+  if(false)
     std::cerr << os.str();
   
   std::istringstream is(os.str());
   boost::archive::xml_iarchive ia(is);
   boost::shared_ptr<RasterImage> imgr;
-  ia.register_type<GdalRasterImage>();
   ia >> GEOCAL_NVP(imgr);
   BOOST_CHECK_EQUAL(imgr->number_tile_line(), 64);
   BOOST_CHECK_EQUAL(imgr->number_tile_sample(), 64);
   BOOST_CHECK_EQUAL(imgr->number_line(), 200);
   BOOST_CHECK_EQUAL(imgr->number_sample(), 100);
   BOOST_CHECK_EQUAL((*imgr)(10, 20), 58);
+#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

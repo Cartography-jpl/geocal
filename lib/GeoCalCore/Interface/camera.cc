@@ -5,9 +5,6 @@
 
 using namespace GeoCal;
 
-//BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal::Camera);
-//BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal::SimpleCamera);
-
 //-----------------------------------------------------------------------
 /// This creates SimpleCamera with the given data. The
 /// default data is for the nominal MISR DF, red band.

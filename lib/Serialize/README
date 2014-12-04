@@ -14,6 +14,12 @@ Users of this class that want Boost serializations should:
    geocal_serialize.h for everything, geocal_serialize_camera.h for
    Camera and derived classes, etc.
 
+**Note** The header file or export should *only* be included in one
+file. If you include multiple copies than boost will create multiple
+copies of some symbols. Kind of a pain, but the boost serialization
+code has some serious template stuff happening, and this is just the
+way it works.
+
 See the image_coordinate_test.cc unit test for an example of this,
 we use this particularly simple class as a test of the
 serialization. 

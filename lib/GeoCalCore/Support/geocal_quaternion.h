@@ -11,7 +11,7 @@
 namespace boost {
   namespace serialization {
     template<class Archive, class T>
-    void save(Archive& ar, const boost::math::quaternion<T>& q, 
+    inline void save(Archive& ar, const boost::math::quaternion<T>& q, 
 	      const unsigned version) {
       T q1 = q.R_component_1();
       T q2 = q.R_component_2();
@@ -21,7 +21,7 @@ namespace boost {
 	& GEOCAL_NVP(q3) & GEOCAL_NVP(q4);
     }
     template<typename Archive, class T>
-    void load(Archive& ar, boost::math::quaternion<T>& q, 
+    inline void load(Archive& ar, boost::math::quaternion<T>& q, 
 	      const unsigned version) {
       T q1, q2, q3, q4;
       ar & GEOCAL_NVP(q1) & GEOCAL_NVP(q2)

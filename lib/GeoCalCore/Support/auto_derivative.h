@@ -849,7 +849,7 @@ pow2(const GeoCal::AutoDerivative<double>& base)
 namespace boost {
   namespace serialization {
     template<class Archive, class T>
-    void save(Archive& ar, const blitz::Array<T, 1>& A, 
+    inline void save(Archive& ar, const blitz::Array<T, 1>& A, 
 	      const unsigned version) {
       if(A.size() > 0 && !A.isStorageContiguous())
 	throw GeoCal::Exception("We can only save contiguous matrix data");
@@ -860,7 +860,7 @@ namespace boost {
 	ar << make_nvp("data", make_array(A.data(), A.size()));
     }
     template<typename Archive, class T>
-    void load(Archive& ar, blitz::Array<T, 1>& A, 
+    inline void load(Archive& ar, blitz::Array<T, 1>& A, 
 	      const unsigned version) {
       using boost::serialization::make_nvp;
       int size;
@@ -871,7 +871,7 @@ namespace boost {
     }
 
     template<class Archive, class T>
-    void save(Archive& ar, const blitz::Array<T, 2>& A, 
+    inline void save(Archive& ar, const blitz::Array<T, 2>& A, 
 	      const unsigned version) {
       if(A.size() > 0 && !A.isStorageContiguous())
 	throw GeoCal::Exception("We can only save contiguous matrix data");
@@ -883,7 +883,7 @@ namespace boost {
 	ar << make_nvp("data", make_array(A.data(), A.size()));
     }
     template<typename Archive, class T>
-    void load(Archive& ar, blitz::Array<T, 2>& A, 
+    inline void load(Archive& ar, blitz::Array<T, 2>& A, 
 	      const unsigned version) {
       using boost::serialization::make_nvp;
       int rows, cols;

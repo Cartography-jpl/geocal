@@ -165,18 +165,18 @@ private:
    void serialize(Archive & ar, const unsigned int version)
   {
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
-    ar & BOOST_SERIALIZATION_NVP(fname) 
-      & BOOST_SERIALIZATION_NVP(granule_id_)
-      & BOOST_SERIALIZATION_NVP(epsilon_)
-      & BOOST_SERIALIZATION_NVP(psi_)
-      & BOOST_SERIALIZATION_NVP(theta_)
-      & BOOST_SERIALIZATION_NVP(boresight_angle_)
-      & BOOST_SERIALIZATION_NVP(yaw_)
-      & BOOST_SERIALIZATION_NVP(pitch_)
-      & BOOST_SERIALIZATION_NVP(roll_)
-      & BOOST_SERIALIZATION_NVP(row_number_)
-      & BOOST_SERIALIZATION_NVP(paraxial_transform_)
-      & BOOST_SERIALIZATION_NVP(inversion_);
+    ar & GEOCAL_NVP(fname) 
+      & GEOCAL_NVP_(granule_id)
+      & GEOCAL_NVP_(epsilon)
+      & GEOCAL_NVP_(psi)
+      & GEOCAL_NVP_(theta)
+      & GEOCAL_NVP_(boresight_angle)
+      & GEOCAL_NVP_(yaw)
+      & GEOCAL_NVP_(pitch)
+      & GEOCAL_NVP_(roll)
+      & GEOCAL_NVP_(row_number)
+      & GEOCAL_NVP_(paraxial_transform)
+      & GEOCAL_NVP_(inversion);
   }
 #endif
 };

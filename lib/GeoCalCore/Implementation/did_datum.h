@@ -43,14 +43,14 @@ private:
   {
     ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(Datum);
     std::string fname = file_name();
-    ar << BOOST_SERIALIZATION_NVP(fname);
+    ar << GEOCAL_NVP(fname);
   }
   template<class Archive>
   void load(Archive & ar, const unsigned int version)
   {
     ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(Datum);
     std::string fname;
-    ar >> BOOST_SERIALIZATION_NVP(fname);
+    ar >> GEOCAL_NVP(fname);
     initialize(fname);
   }
   BOOST_SERIALIZATION_SPLIT_MEMBER();

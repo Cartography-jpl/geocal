@@ -146,7 +146,7 @@ BOOST_AUTO_TEST_CASE(serialize)
   AutoDerivative<double> y(11);
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
-  oa << BOOST_SERIALIZATION_NVP(x) << BOOST_SERIALIZATION_NVP(y);
+  oa << GEOCAL_NVP(x) << GEOCAL_NVP(y);
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << os.str();
@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE(serialize)
   std::istringstream is(os.str());
   boost::archive::xml_iarchive ia(is);
   AutoDerivative<double> xr, yr;
-  ia >> BOOST_SERIALIZATION_NVP(xr) >> BOOST_SERIALIZATION_NVP(yr);
+  ia >> GEOCAL_NVP(xr) >> GEOCAL_NVP(yr);
   BOOST_CHECK_CLOSE(xr.value(), x.value(), 1e-8);
   BOOST_CHECK_CLOSE(yr.value(), y.value(), 1e-8);
   BOOST_CHECK(yr.is_constant());
@@ -168,7 +168,7 @@ BOOST_AUTO_TEST_CASE(serialize_blitz_array)
   d = 1, 2, 3;
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
-  oa << BOOST_SERIALIZATION_NVP(d);
+  oa << GEOCAL_NVP(d);
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << os.str();
@@ -176,7 +176,7 @@ BOOST_AUTO_TEST_CASE(serialize_blitz_array)
   std::istringstream is(os.str());
   boost::archive::xml_iarchive ia(is);
   blitz::Array<double, 1> dr;
-  ia >> BOOST_SERIALIZATION_NVP(dr);
+  ia >> GEOCAL_NVP(dr);
   BOOST_CHECK_EQUAL(d.rows(), dr.rows());
   BOOST_CHECK_MATRIX_CLOSE(d, dr);
 }

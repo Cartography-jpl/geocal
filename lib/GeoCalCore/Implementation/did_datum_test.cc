@@ -38,14 +38,14 @@ BOOST_AUTO_TEST_CASE(serialization)
   }
   if(!d)
     return;
-  oa << BOOST_SERIALIZATION_NVP(d);
+  oa << GEOCAL_NVP(d);
   if(false)
     std::cerr << os.str();
 
   std::istringstream is(os.str());
   boost::archive::xml_iarchive ia(is);
   boost::shared_ptr<Datum> dr;
-  ia >> BOOST_SERIALIZATION_NVP(dr);
+  ia >> GEOCAL_NVP(dr);
 
   BOOST_CHECK_CLOSE(dr->undulation(Geodetic(40, -100, 0)), -25.0, 1e-4);
   BOOST_CHECK_CLOSE(dr->undulation(Geodetic(40, -89.9, 0)), -34.0, 1e-4);

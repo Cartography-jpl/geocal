@@ -77,7 +77,7 @@ private:
    void serialize(Archive & ar, const unsigned int version)
   {
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Dem);
-    ar & BOOST_SERIALIZATION_NVP(h_);
+    ar & GEOCAL_NVP_(h);
   }
 #endif
 };

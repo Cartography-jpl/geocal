@@ -40,7 +40,7 @@ inline void save_construct_data(Archive & ar, const GeoCal::DatumGeoid96* d,
 {
   std::string file_name = d->file_name();
   detail::base_register<GeoCal::Datum, GeoCal::DatumGeoid96>::invoke();
-  ar << BOOST_SERIALIZATION_NVP(file_name);
+  ar << GEOCAL_NVP(file_name);
 }
 template<class Archive>
 inline void load_construct_data(Archive & ar, GeoCal::DatumGeoid96* d,
@@ -48,7 +48,7 @@ inline void load_construct_data(Archive & ar, GeoCal::DatumGeoid96* d,
 {
   detail::base_register<GeoCal::Datum, GeoCal::DatumGeoid96>::invoke();
   std::string file_name;
-  ar >> BOOST_SERIALIZATION_NVP(file_name);
+  ar >> GEOCAL_NVP(file_name);
   ::new(d)GeoCal::DatumGeoid96(file_name);
 }
   }

@@ -43,8 +43,8 @@ BOOST_AUTO_TEST_CASE(serialization)
   ImageCoordinate ic2(2, 3);
   boost::shared_ptr<ImageCoordinate> ic3(new ImageCoordinate(4, 5));
   boost::shared_ptr<GenericObject> ic4(new ImageCoordinate(6, 7));
-  oa << BOOST_SERIALIZATION_NVP(ic) << BOOST_SERIALIZATION_NVP(ic2)
-     << BOOST_SERIALIZATION_NVP(ic3) << BOOST_SERIALIZATION_NVP(ic4);
+  oa << GEOCAL_NVP(ic) << GEOCAL_NVP(ic2)
+     << GEOCAL_NVP(ic3) << GEOCAL_NVP(ic4);
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << os.str();
@@ -53,8 +53,8 @@ BOOST_AUTO_TEST_CASE(serialization)
   ImageCoordinate icr, ic2r;
   boost::shared_ptr<ImageCoordinate> ic3r;
   boost::shared_ptr<GenericObject> ic4r;
-  ia >> BOOST_SERIALIZATION_NVP(icr) >> BOOST_SERIALIZATION_NVP(ic2r)
-     >> BOOST_SERIALIZATION_NVP(ic3r) >> BOOST_SERIALIZATION_NVP(ic4r);
+  ia >> GEOCAL_NVP(icr) >> GEOCAL_NVP(ic2r)
+     >> GEOCAL_NVP(ic3r) >> GEOCAL_NVP(ic4r);
   BOOST_CHECK(ic ==icr);
   BOOST_CHECK(ic2 ==ic2r);
   BOOST_CHECK(*ic3 ==*ic3r);
@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE(serialization_save)
 
   boost::shared_ptr<GenericObject> ic1(new ImageCoordinate(4, 5));
   boost::shared_ptr<GenericObject> ic2(new ImageCoordinate(6, 7));
-  oa << BOOST_SERIALIZATION_NVP(ic1) << BOOST_SERIALIZATION_NVP(ic2);
+  oa << GEOCAL_NVP(ic1) << GEOCAL_NVP(ic2);
 }
 
 BOOST_AUTO_TEST_CASE(serialization_load)
@@ -93,7 +93,7 @@ BOOST_AUTO_TEST_CASE(serialization_load)
   boost::archive::xml_iarchive ia(is);
   boost::shared_ptr<GenericObject> ic1r;
   boost::shared_ptr<GenericObject> ic2r;
-  ia >> BOOST_SERIALIZATION_NVP(ic1r) >> BOOST_SERIALIZATION_NVP(ic2r);
+  ia >> GEOCAL_NVP(ic1r) >> GEOCAL_NVP(ic2r);
   boost::shared_ptr<ImageCoordinate> ic1 = 
     boost::dynamic_pointer_cast<ImageCoordinate>(ic1r);
   boost::shared_ptr<ImageCoordinate> ic2 = 
@@ -111,15 +111,14 @@ BOOST_AUTO_TEST_CASE(serialization_text)
 
   ImageCoordinate ic(1, 2);
   ImageCoordinate ic2(2, 3);
-  oa << BOOST_SERIALIZATION_NVP(ic) << BOOST_SERIALIZATION_NVP(ic2);
+  oa << GEOCAL_NVP(ic) << GEOCAL_NVP(ic2);
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << os.str();
   std::istringstream is(os.str());
   boost::archive::text_iarchive ia(is);
   ImageCoordinate icr, ic2r;
-  ia >> boost::serialization::make_nvp("ic", icr) 
-     >> boost::serialization::make_nvp("ic2", ic2r);
+  ia >> GEOCAL_NVP(icr) >> GEOCAL_NVP(ic2r);
   BOOST_CHECK(ic ==icr);
   BOOST_CHECK(ic2 ==ic2r);
 }

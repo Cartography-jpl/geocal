@@ -43,14 +43,14 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<Camera> cam(new QuickBirdCamera());
   FrameCoordinate f1(1, 2);
   ScLookVector sl = cam->sc_look_vector(f1, 0);
-  oa << BOOST_SERIALIZATION_NVP(cam);
+  oa << GEOCAL_NVP(cam);
   if(false)
     std::cerr << os.str();
 
   std::istringstream is(os.str());
   boost::archive::xml_iarchive ia(is);
   boost::shared_ptr<Camera> camr;
-  ia >> BOOST_SERIALIZATION_NVP(camr);
+  ia >> GEOCAL_NVP(camr);
   FrameCoordinate f2 = camr->frame_coordinate(sl, 0);
   FrameCoordinate f3 = cam->frame_coordinate(sl, 0);
   BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);

@@ -101,7 +101,7 @@ private:
    void serialize(Archive & ar, const unsigned int version)
   {
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Datum);
-    ar & BOOST_SERIALIZATION_NVP(u_);
+    ar & GEOCAL_NVP_(u);
   }
 #endif
 

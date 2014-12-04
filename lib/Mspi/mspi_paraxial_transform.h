@@ -58,12 +58,12 @@ private:
    void serialize(Archive & ar, const unsigned int version)
   {
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    ar & BOOST_SERIALIZATION_NVP(fname) 
-      & BOOST_SERIALIZATION_NVP(row_to_index)
-      & BOOST_SERIALIZATION_NVP(a)
-      & BOOST_SERIALIZATION_NVP(b)
-      & BOOST_SERIALIZATION_NVP(c)
-      & BOOST_SERIALIZATION_NVP(d);
+    ar & GEOCAL_NVP(fname) 
+      & GEOCAL_NVP(row_to_index)
+      & GEOCAL_NVP(a)
+      & GEOCAL_NVP(b)
+      & GEOCAL_NVP(c)
+      & GEOCAL_NVP(d);
   }
 #endif
 };

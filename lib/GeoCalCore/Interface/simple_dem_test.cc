@@ -38,14 +38,14 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::archive::xml_oarchive oa(os);
 
   boost::shared_ptr<Dem> d(new SimpleDem());
-  oa << BOOST_SERIALIZATION_NVP(d);
+  oa << GEOCAL_NVP(d);
   if(false)
     std::cerr << os.str();
 
   std::istringstream is(os.str());
   boost::archive::xml_iarchive ia(is);
   boost::shared_ptr<Dem> dr;
-  ia >> BOOST_SERIALIZATION_NVP(dr);
+  ia >> GEOCAL_NVP(dr);
 
   double height1 = 120;
   double height2 = -230;
@@ -69,14 +69,14 @@ BOOST_AUTO_TEST_CASE(serialization_datum)
   boost::archive::xml_oarchive oa(os);
 
   boost::shared_ptr<Datum> d(new SimpleDatum());
-  oa << BOOST_SERIALIZATION_NVP(d);
+  oa << GEOCAL_NVP(d);
   if(false)
     std::cerr << os.str();
 
   std::istringstream is(os.str());
   boost::archive::xml_iarchive ia(is);
   boost::shared_ptr<Datum> dr;
-  ia >> BOOST_SERIALIZATION_NVP(dr);
+  ia >> GEOCAL_NVP(dr);
 
   Geodetic g(60, 30, 100);
   BOOST_CHECK(fabs(dr->undulation(g) - 0) < 1e-4);

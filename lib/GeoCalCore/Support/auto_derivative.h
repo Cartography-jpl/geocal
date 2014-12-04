@@ -503,7 +503,7 @@ private:
    void serialize(Archive & ar, const unsigned int version)
   {
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    ar & BOOST_SERIALIZATION_NVP(val) & BOOST_SERIALIZATION_NVP(grad);
+    ar & GEOCAL_NVP(val) & GEOCAL_NVP(grad);
   }
 #endif
 };
@@ -855,7 +855,7 @@ namespace boost {
 	throw GeoCal::Exception("We can only save contiguous matrix data");
       using boost::serialization::make_nvp;
       int size = A.rows();
-      ar << BOOST_SERIALIZATION_NVP(size);
+      ar << GEOCAL_NVP(size);
       if(size > 0)
 	ar << make_nvp("data", make_array(A.data(), A.size()));
     }
@@ -864,7 +864,7 @@ namespace boost {
 	      const unsigned version) {
       using boost::serialization::make_nvp;
       int size;
-      ar >> BOOST_SERIALIZATION_NVP(size);
+      ar >> GEOCAL_NVP(size);
       A.resize(size);
       if(size > 0)
 	ar >> make_nvp("data", make_array(A.data(), A.size()));
@@ -878,7 +878,7 @@ namespace boost {
       using boost::serialization::make_nvp;
       int rows = A.rows();
       int cols = A.cols();
-      ar << BOOST_SERIALIZATION_NVP(rows) << BOOST_SERIALIZATION_NVP(cols);
+      ar << GEOCAL_NVP(rows) << GEOCAL_NVP(cols);
       if(A.size() > 0)
 	ar << make_nvp("data", make_array(A.data(), A.size()));
     }
@@ -887,7 +887,7 @@ namespace boost {
 	      const unsigned version) {
       using boost::serialization::make_nvp;
       int rows, cols;
-      ar >> BOOST_SERIALIZATION_NVP(rows) >> BOOST_SERIALIZATION_NVP(cols);
+      ar >> GEOCAL_NVP(rows) >> GEOCAL_NVP(cols);
       A.resize(rows, cols);
       if(A.size() > 0)
 	ar >> make_nvp("data", make_array(A.data(), A.size()));

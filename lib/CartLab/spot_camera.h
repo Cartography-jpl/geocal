@@ -67,10 +67,9 @@ private:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version)
   {
-    using boost::serialization::make_nvp;
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Camera);
-    ar & make_nvp("psi_x", psi_x_) 
-      & make_nvp("psi_y", psi_y_);
+    ar & GEOCAL_NVP_(psi_x)
+      & GEOCAL_NVP_(psi_y);
   }
 #endif
 };

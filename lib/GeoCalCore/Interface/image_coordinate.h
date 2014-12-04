@@ -61,7 +61,7 @@ private:
    void serialize(Archive & ar, const unsigned int version)
   {
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    ar & BOOST_SERIALIZATION_NVP(line) & BOOST_SERIALIZATION_NVP(sample);
+    ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
   }
 #endif
 };
@@ -128,7 +128,7 @@ private:
    void serialize(Archive & ar, const unsigned int version)
   {
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    ar & BOOST_SERIALIZATION_NVP(line) & BOOST_SERIALIZATION_NVP(sample);
+    ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
   }
 #endif
 };
@@ -194,7 +194,7 @@ private:
    void serialize(Archive & ar, const unsigned int version)
   {
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    ar & BOOST_SERIALIZATION_NVP(line) & BOOST_SERIALIZATION_NVP(sample);
+    ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
   }
 #endif
 };

@@ -53,11 +53,10 @@ private:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version)
   {
-    using boost::serialization::make_nvp;
     ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
-    ar & make_nvp("roll", roll_) 
-      & make_nvp("pitch", pitch_)
-      & make_nvp("yaw", yaw_);
+    ar & GEOCAL_NVP_(roll)
+      & GEOCAL_NVP_(pitch)
+      & GEOCAL_NVP_(yaw);
   }
 #endif
 };

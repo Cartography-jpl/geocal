@@ -28,14 +28,14 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::archive::xml_oarchive oa(os);
 
   boost::shared_ptr<GenericObject> p(new MspiParaxialTransform(test_data_dir() + "mspi_camera_test.config"));
-  oa << BOOST_SERIALIZATION_NVP(p);
+  oa << GEOCAL_NVP(p);
   if(false)
     std::cerr << os.str();
 
   std::istringstream is(os.str());
   boost::archive::xml_iarchive ia(is);
   boost::shared_ptr<GenericObject> pr;
-  ia >> BOOST_SERIALIZATION_NVP(pr);
+  ia >> GEOCAL_NVP(pr);
   boost::shared_ptr<MspiParaxialTransform> pr2 =
     boost::dynamic_pointer_cast<MspiParaxialTransform>(pr);
 

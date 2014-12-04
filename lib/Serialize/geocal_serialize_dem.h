@@ -12,6 +12,7 @@
 
 #include "dem.h"
 #include "simple_dem.h"
+#include "dem_map_info.h"
 
 BOOST_CLASS_EXPORT(GeoCal::Datum);
 BOOST_CLASS_EXPORT(GeoCal::SimpleDatum);
@@ -21,4 +22,5 @@ BOOST_CLASS_EXPORT(GeoCal::GdalDatum);
 
 BOOST_CLASS_EXPORT(GeoCal::Dem);
 BOOST_CLASS_EXPORT(GeoCal::SimpleDem);
+BOOST_CLASS_EXPORT(GeoCal::DemMapInfo);
 #endif

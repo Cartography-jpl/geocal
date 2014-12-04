@@ -365,6 +365,7 @@ template<class Archive>
 inline void save_construct_data(Archive & ar, const GeoCal::GdalRasterImage* d, 
 			 const unsigned int version)
 {
+  boost::serialization::base_object<GeoCal::RasterImage>(d);
   detail::base_register<GeoCal::RasterImage, GeoCal::GdalRasterImage>::invoke();
   std::string file_name = d->file_names()[0];
   int band_id = d->band_id();
@@ -372,12 +373,12 @@ inline void save_construct_data(Archive & ar, const GeoCal::GdalRasterImage* d,
   int number_tile = d->number_tile();
   int number_tile_line = d->number_tile_line();
   int number_tile_sample = d->number_tile_sample();
-  ar << BOOST_SERIALIZATION_NVP(file_name)
-     << BOOST_SERIALIZATION_NVP(band_id)
-     << BOOST_SERIALIZATION_NVP(number_tile)
-     << BOOST_SERIALIZATION_NVP(update)
-     << BOOST_SERIALIZATION_NVP(number_tile_line)
-     << BOOST_SERIALIZATION_NVP(number_tile_sample);
+  ar << GEOCAL_NVP(file_name)
+     << GEOCAL_NVP(band_id)
+     << GEOCAL_NVP(number_tile)
+     << GEOCAL_NVP(update)
+     << GEOCAL_NVP(number_tile_line)
+     << GEOCAL_NVP(number_tile_sample);
 }
 template<class Archive>
 inline void load_construct_data(Archive & ar, GeoCal::GdalRasterImage* d,
@@ -387,12 +388,12 @@ inline void load_construct_data(Archive & ar, GeoCal::GdalRasterImage* d,
   std::string file_name;
   int band_id, number_tile, number_tile_line, number_tile_sample;
   bool update;
-  ar >> BOOST_SERIALIZATION_NVP(file_name)
-     >> BOOST_SERIALIZATION_NVP(band_id)
-     >> BOOST_SERIALIZATION_NVP(number_tile)
-     >> BOOST_SERIALIZATION_NVP(update)
-     >> BOOST_SERIALIZATION_NVP(number_tile_line)
-     >> BOOST_SERIALIZATION_NVP(number_tile_sample);
+  ar >> GEOCAL_NVP(file_name)
+     >> GEOCAL_NVP(band_id)
+     >> GEOCAL_NVP(number_tile)
+     >> GEOCAL_NVP(update)
+     >> GEOCAL_NVP(number_tile_line)
+     >> GEOCAL_NVP(number_tile_sample);
   ::new(d)GeoCal::GdalRasterImage(file_name, band_id, number_tile, update,
 				  number_tile_line, number_tile_sample);
 }

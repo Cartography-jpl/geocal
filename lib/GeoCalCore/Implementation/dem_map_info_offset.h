@@ -16,11 +16,7 @@ public:
 
   DemMapInfoOffset(const boost::shared_ptr<DemMapInfo>& Dem_underlying,
 		   double Height_offset)
-    : DemMapInfo(Dem_underlying->datum_ptr(), Dem_underlying->map_info(),
-		 Dem_underlying->outside_dem_is_error()),
-      dem_(Dem_underlying),
-      height_offset_(Height_offset)
-  { }
+  { initialize(Dem_underlying, Height_offset); }
 
 //-----------------------------------------------------------------------
 /// Underlying DEM.
@@ -45,8 +41,30 @@ protected:
   virtual double elevation(int Y_index, int X_index) const
   { return dem_->elevation(Y_index, X_index) + height_offset_; }
 private:
+  void initialize(const boost::shared_ptr<DemMapInfo>& Dem_underlying,
+		   double Height_offset)
+  {
+    DemMapInfo::initialize(Dem_underlying->datum_ptr(), 
+			   Dem_underlying->map_info(),
+			   Dem_underlying->outside_dem_is_error());
+    dem_ = Dem_underlying;
+    height_offset_ = Height_offset;
+  }
   boost::shared_ptr<DemMapInfo> dem_;
   double height_offset_;
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version)
+  {
+    using boost::serialization::make_nvp;
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo);
+    ar & make_nvp("dem_underlying", dem_)
+      & GEOCAL_NVP_(height_offset);
+  }
+#endif
+
+  
 };
 }
 #endif

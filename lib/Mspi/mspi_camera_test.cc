@@ -282,14 +282,14 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::archive::xml_oarchive oa(os);
 
   boost::shared_ptr<Camera> cam(new MspiCamera(test_data_dir() + "AIRMSPI_CONFIG_CAMERA_MODEL_0003.config"));
-  oa << BOOST_SERIALIZATION_NVP(cam);
+  oa << GEOCAL_NVP(cam);
   if(false)
     std::cerr << os.str();
   
   std::istringstream is(os.str());
   boost::archive::xml_iarchive ia(is);
   boost::shared_ptr<Camera> camr;
-  ia >> BOOST_SERIALIZATION_NVP(camr);
+  ia >> GEOCAL_NVP(camr);
 
   BOOST_CHECK_EQUAL(cam->number_band(), camr->number_band());
   for(int b = 0; b < cam->number_band(); ++b) {

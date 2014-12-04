@@ -158,14 +158,14 @@ BOOST_AUTO_TEST_CASE(serialization)
 
   std::string fname = test_data_dir() + "cib_sample.img";
   boost::shared_ptr<RasterImage> img(new GdalRasterImage(fname));
-  oa << BOOST_SERIALIZATION_NVP(img);
+  oa << GEOCAL_NVP(img);
   if(false)
     std::cerr << os.str();
   
   std::istringstream is(os.str());
   boost::archive::xml_iarchive ia(is);
   boost::shared_ptr<RasterImage> imgr;
-  ia >> BOOST_SERIALIZATION_NVP(imgr);
+  ia >> GEOCAL_NVP(imgr);
   BOOST_CHECK_EQUAL(imgr->number_tile_line(), 64);
   BOOST_CHECK_EQUAL(imgr->number_tile_sample(), 64);
   BOOST_CHECK_EQUAL(imgr->number_line(), 200);

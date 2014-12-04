@@ -1,7 +1,12 @@
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include "geocal_serialize_common.h"
 #include "unit_test_support.h"
 #include "vicar_raster_image.h"
 
 using namespace GeoCal;
+BOOST_CLASS_EXPORT(GeoCal::RasterImage);
+BOOST_CLASS_EXPORT(GeoCal::VicarRasterImage);
 
 BOOST_FIXTURE_TEST_SUITE(vicar_raster_image, GlobalFixture)
 
@@ -145,6 +150,27 @@ BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
   BOOST_CHECK_CLOSE
     (distance(*fpixel_is_point_make_area.ground_coordinate(-0.5, -0.5),
 	      ulc), 0, 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  std::ostringstream os;
+  boost::archive::xml_oarchive oa(os);
+
+  std::string fname = test_data_dir() + "vicar.img";
+  boost::shared_ptr<RasterImage> img(new VicarRasterImage(fname));
+  oa << GEOCAL_NVP(img);
+  if(false)
+    std::cerr << os.str();
+  
+  std::istringstream is(os.str());
+  boost::archive::xml_iarchive ia(is);
+  boost::shared_ptr<RasterImage> imgr;
+  ia >> GEOCAL_NVP(imgr);
+  BOOST_CHECK_EQUAL(imgr->number_line(), 10);
+  BOOST_CHECK_EQUAL(imgr->number_sample(), 10);
+  BOOST_CHECK_EQUAL(imgr->number_tile_line(), 10);
+  BOOST_CHECK_EQUAL(imgr->number_tile_sample(), 10);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

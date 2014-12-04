@@ -9,5 +9,6 @@
 BOOST_CLASS_EXPORT(GeoCal::RasterImage);
 BOOST_CLASS_EXPORT(GeoCal::GdalRasterImage);
 BOOST_CLASS_EXPORT(GeoCal::VicarFile);
+BOOST_CLASS_EXPORT(GeoCal::VicarRasterImage);
 
 #endif

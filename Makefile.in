@@ -449,8 +449,9 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/mspi_camera_wrap.cc @swigsrc@/air_mspi_orbit_wrap.cc \
 	@swigsrc@/ground_mspi_orbit_wrap.cc \
 	@swigsrc@/ground_mspi_igc_wrap.cc @swigsrc@/usgs_dem_wrap.cc \
-	@swigsrc@/air_mspi_igc_wrap.cc @swigsrc@/eci_tod_burl_wrap.cc \
-	@swigsrc@/geocal_fftw_wrap.cc \
+	@swigsrc@/air_mspi_igc_wrap.cc \
+	@swigsrc@/geocal_serialize_function_wrap.cc \
+	@swigsrc@/eci_tod_burl_wrap.cc @swigsrc@/geocal_fftw_wrap.cc \
 	@swigsrc@/phase_correlation_matcher_wrap.cc \
 	@swigsrc@/hdf_file_wrap.cc @swigsrc@/hdf_orbit_wrap.cc \
 	@swigsrc@/hdf_orbit_carto_wrap.cc \
@@ -590,7 +591,8 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ground_mspi_orbit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ground_mspi_igc_wrap.lo \
 	@swigsrc@/_swig_wrap_la-usgs_dem_wrap.lo \
-	@swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo
+	@swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo \
+	@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo
 am__objects_2 = @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo
 @HAVE_CARTO_TRUE@am__objects_3 = $(am__objects_2)
 am__objects_4 = @swigsrc@/_swig_wrap_la-geocal_fftw_wrap.lo \
@@ -2038,6 +2040,8 @@ libgeocal_la_SOURCES = @srcsupport@/boost/backtrace.cpp \
 
 # Files that contain SWIG wrapper information.
 #  SWIG_SRC_GDAL += @swigsrc@/gdal_multi_file_wrap.cc
+
+# Files that contain SWIG wrapper information.
 SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/swig_boost_array_wrap.cc \
 	@swigsrc@/swig_quaternion_wrap.cc @swigsrc@/constant_wrap.cc \
@@ -2133,7 +2137,8 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/mspi_camera_wrap.cc @swigsrc@/air_mspi_orbit_wrap.cc \
 	@swigsrc@/ground_mspi_orbit_wrap.cc \
 	@swigsrc@/ground_mspi_igc_wrap.cc @swigsrc@/usgs_dem_wrap.cc \
-	@swigsrc@/air_mspi_igc_wrap.cc
+	@swigsrc@/air_mspi_igc_wrap.cc \
+	@swigsrc@/geocal_serialize_function_wrap.cc
 SWIG_SRC_CARTO = @swigsrc@/eci_tod_burl_wrap.cc
 SWIG_SRC_FFTW = @swigsrc@/geocal_fftw_wrap.cc \
 	@swigsrc@/phase_correlation_matcher_wrap.cc
@@ -2887,6 +2892,8 @@ clean-pkgpythonswigLTLIBRARIES:
 @swigsrc@/_swig_wrap_la-usgs_dem_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -4100,6 +4107,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_gsl_root_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_quaternion_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_rpc_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_serialize_function_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_time_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geodetic_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_image_wrap.Plo@am__quote@
@@ -5100,6 +5108,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/air_mspi_igc_wrap.cc' object='@swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo `test -f '@swigsrc@/air_mspi_igc_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/air_mspi_igc_wrap.cc
+
+@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo: @swigsrc@/geocal_serialize_function_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_serialize_function_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo `test -f '@swigsrc@/geocal_serialize_function_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_serialize_function_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_serialize_function_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_serialize_function_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/geocal_serialize_function_wrap.cc' object='@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo `test -f '@swigsrc@/geocal_serialize_function_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_serialize_function_wrap.cc
 
 @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo: @swigsrc@/eci_tod_burl_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_tod_burl_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo `test -f '@swigsrc@/eci_tod_burl_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/eci_tod_burl_wrap.cc

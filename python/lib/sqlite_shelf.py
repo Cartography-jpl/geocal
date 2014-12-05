@@ -12,6 +12,7 @@ import UserDict
 import pickle
 import sqlite3
 import os.path
+import geocal_swig
 
 def to_db_type(value):
     """If value's type is supported natively in SQLite, return value.
@@ -34,6 +35,11 @@ def read_shelve(f):
     be of the form file_name:key. We open the given file, and read the
     value for the given key.
 
+    A problem with the shelve files is that it can't communicate directly 
+    with a C++ program, and also the files aren't human readable or portable.
+    So we also support xml files, we key off of the file name and if it 
+    is something like "foo.xml" we read that rather than a shelve file.
+
     Note that it can be useful to execute python code before using
     a shelve file, e.g., we are using python modules not already 
     included in AFIDS. If the special key "_extra_python_init" is 
@@ -44,6 +50,8 @@ def read_shelve(f):
     the same directory as the database file (if different than the current
     one). We change back to the current directory when done.
     '''
+    if(os.path.splitext(f)[1] == ".xml"):
+        return geocal_swig.serialize_read_generic(f)
     fname, key = f.split(':')
     dirn, f = os.path.split(fname)
     curdir = os.getcwd()
@@ -87,7 +95,16 @@ def write_shelve(f, val):
     '''This handles writing a value to a shelve file, possibly creating the
     file is it doesn't exist. The string f should be of the form
     file_name:key. We open/create the given file and write the value for
-    the given key.'''
+    the given key.
+
+    A problem with the shelve files is that it can't communicate directly 
+    with a C++ program, and also the files aren't human readable or portable.
+    So we also support xml files, we key off of the file name and if it 
+    is something like "foo.xml" we write that rather than a shelve file.
+    '''
+    if(os.path.splitext(f)[1] == ".xml"):
+        geocal_swig.serialize_write(f, val)
+        return
     fname, key = f.split(':')
     d = SQLiteShelf(fname)
     d[key] = val

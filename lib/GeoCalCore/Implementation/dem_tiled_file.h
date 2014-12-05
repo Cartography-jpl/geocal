@@ -84,6 +84,17 @@ protected:
   boost::shared_ptr<TiledFileBase<2> > data_; ///< Underlying data.
   double scale_;			      ///< Scale to apply to
 					      ///data to get meters.
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version)
+  {
+    // Don't fill in any of the member variables here. Pretty much all 
+    // derived classes need to call the initialization function for 
+    // this class anyways.
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo);
+  }
+#endif
 };
 }
 #endif

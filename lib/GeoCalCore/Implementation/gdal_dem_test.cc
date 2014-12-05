@@ -52,7 +52,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   ia >> GEOCAL_NVP(dr);
 
   Geodetic g1(35.895, 44.800, 100);
-    BOOST_CHECK_CLOSE(dr->height_reference_surface(g1), 69.6 + 10.0, 1e-4);
+  BOOST_CHECK_CLOSE(dr->height_reference_surface(g1), 69.6 + 10.0, 1e-4);
 #endif
 }
 

@@ -113,7 +113,7 @@ private:
   void save(Archive & ar, const unsigned int version) const
   {
     using boost::serialization::make_nvp;
-    ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(Dem);
+    ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemTiledFile);
     int ntile = number_tile();
     int number_tile_line = number_line_per_tile();
     bool oerror = outside_dem_is_error();
@@ -128,7 +128,7 @@ private:
   void load(Archive & ar, const unsigned int version)
   {
     using boost::serialization::make_nvp;
-    ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(Dem);
+    ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemTiledFile);
     int ntile, number_tile_line;
     bool oerror;
     boost::shared_ptr<Datum> d;

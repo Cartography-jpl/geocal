@@ -1329,6 +1329,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/constant.h \
 	@srcmspi@/air_mspi_orbit.h @srcmspi@/ground_mspi_orbit.h \
 	@srcmspi@/ground_mspi_igc.h @srcmspi@/usgs_dem.h \
 	@srcmspi@/air_mspi_igc.h @srcserialize@/geocal_serialize.h \
+	@srcserialize@/geocal_serialize_function.h \
 	@srcserialize@/geocal_serialize_common.h \
 	@srcserialize@/geocal_serialize_camera.h \
 	@srcserialize@/geocal_serialize_dem.h \
@@ -2282,6 +2283,7 @@ geocalinc_HEADERS = @srcsupport@/constant.h \
 	@srcmspi@/air_mspi_orbit.h @srcmspi@/ground_mspi_orbit.h \
 	@srcmspi@/ground_mspi_igc.h @srcmspi@/usgs_dem.h \
 	@srcmspi@/air_mspi_igc.h @srcserialize@/geocal_serialize.h \
+	@srcserialize@/geocal_serialize_function.h \
 	@srcserialize@/geocal_serialize_common.h \
 	@srcserialize@/geocal_serialize_camera.h \
 	@srcserialize@/geocal_serialize_dem.h \

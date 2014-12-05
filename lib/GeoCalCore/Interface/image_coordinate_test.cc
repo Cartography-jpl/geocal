@@ -1,5 +1,6 @@
 #include "unit_test_support.h"
 #include "image_coordinate.h"
+#include "geocal_serialize_function.h"
 #include <fstream>
 using namespace GeoCal;
 
@@ -25,6 +26,16 @@ BOOST_AUTO_TEST_CASE(vicar_image_coordinate)
   VicarImageCoordinate ic4expect(5, 6);
   BOOST_CHECK(ic3 ==ic3expect);
   BOOST_CHECK(ic4 ==ic4expect);
+}
+
+BOOST_AUTO_TEST_CASE(serialize_function)
+{
+  // Test the generic interface for reading and writing
+  boost::shared_ptr<ImageCoordinate> ic(new ImageCoordinate(10, 20));
+  serialize_write("image_coordinate_test.xml", ic);
+  boost::shared_ptr<ImageCoordinate> ic2 = 
+    serialize_read<ImageCoordinate>("image_coordinate_test.xml");
+  BOOST_CHECK(*ic == *ic2);
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

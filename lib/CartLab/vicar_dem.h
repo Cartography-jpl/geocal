@@ -105,6 +105,43 @@ private:
       t(new VicarTiledFile<T>(vicar_file_, 1, Number_line_per_tile, Number_tile));
     DemTiledFile::initialize(t, D, vicar_file_->map_info(), Outside_dem_is_error);
   }
+
+#ifdef USE_BOOST_SERIALIZATON
+  VicarDem() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const
+  {
+    using boost::serialization::make_nvp;
+    ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(Dem);
+    int ntile = number_tile();
+    int number_tile_line = number_line_per_tile();
+    bool oerror = outside_dem_is_error();
+    boost::shared_ptr<Datum> d = datum_ptr();
+    ar << GEOCAL_NVP_(vicar_file)
+       << GEOCAL_NVP(number_tile_line)
+       << make_nvp("number_tile", ntile)
+       << make_nvp("datum", d)
+       << make_nvp("outside_dem_is_error", oerror);
+  }
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version)
+  {
+    using boost::serialization::make_nvp;
+    ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(Dem);
+    int ntile, number_tile_line;
+    bool oerror;
+    boost::shared_ptr<Datum> d;
+    ar >> GEOCAL_NVP_(vicar_file) 
+       >> GEOCAL_NVP(number_tile_line)
+       >> make_nvp("number_tile", ntile)
+       >> make_nvp("datum", d)
+       >> make_nvp("outside_dem_is_error", oerror);
+    initialize(number_tile_line, ntile, d, oerror);
+  }
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
+#endif  
+
 };
 }
 #endif

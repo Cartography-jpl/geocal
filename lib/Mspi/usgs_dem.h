@@ -88,7 +88,53 @@ protected:
   virtual void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<UsgsDemData> f;
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    // Nothing to do
+  }
+#endif
 };
 }
+
+#ifdef USE_BOOST_SERIALIZATON
+// This is a little more complicated, because we can't really
+// construct a object using a default constructor. So we need to
+// directly handle the object construction.
+namespace boost { namespace serialization {
+template<class Archive> 
+inline void save_construct_data(Archive & ar, const GeoCal::UsgsDem* d, 
+			 const unsigned int version)
+{
+  void_cast_register(static_cast<GeoCal::UsgsDem*>(0),
+		     static_cast<GeoCal::DemMapInfo*>(0));
+  std::string directory_base = d->directory_base();
+  bool outside_dem_is_error = d->outside_dem_is_error();
+  boost::shared_ptr<GeoCal::Datum> datum = d->datum_ptr();
+  ar << GEOCAL_NVP(directory_base)
+     << GEOCAL_NVP(outside_dem_is_error)
+     << GEOCAL_NVP(datum);
+}
+template<class Archive>
+inline void load_construct_data(Archive & ar, GeoCal::UsgsDem* d,
+				const unsigned int version)
+{
+  void_cast_register(static_cast<GeoCal::UsgsDem*>(0),
+		     static_cast<GeoCal::DemMapInfo*>(0));
+  std::string directory_base;
+  bool outside_dem_is_error;
+  boost::shared_ptr<GeoCal::Datum> datum;
+  ar >> GEOCAL_NVP(directory_base)
+     >> GEOCAL_NVP(outside_dem_is_error)
+     >> GEOCAL_NVP(datum);
+  ::new(d)GeoCal::UsgsDem(directory_base, outside_dem_is_error,
+			  datum);
+}
+  }
+}
+#endif
+
 #endif
 

@@ -17,6 +17,7 @@
 #include "vicar_dem.h"
 #include "dem_map_info_offset.h"
 #include "srtm_dem.h"
+#include "usgs_dem.h"
 
 BOOST_CLASS_EXPORT(GeoCal::Datum);
 BOOST_CLASS_EXPORT(GeoCal::SimpleDatum);
@@ -32,4 +33,5 @@ BOOST_CLASS_EXPORT(GeoCal::GdalDem);
 BOOST_CLASS_EXPORT(GeoCal::VicarDem);
 BOOST_CLASS_EXPORT(GeoCal::DemMapInfoOffset);
 BOOST_CLASS_EXPORT(GeoCal::SrtmDem);
+BOOST_CLASS_EXPORT(GeoCal::UsgsDem);
 #endif

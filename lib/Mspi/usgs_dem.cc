@@ -41,7 +41,7 @@ UsgsDemData::UsgsDemData
   number_sample_per_tile(Number_sample_per_tile),
   number_tile_each_file(Number_tile_each_file)
 {
-  std::string dirbase = Dir;
+  dirbase = Dir;
   if(dirbase == "") {
     char *t = getenv("USGSDATA");
     if(!t)

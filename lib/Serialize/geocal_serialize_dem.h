@@ -16,14 +16,12 @@
 #include "gdal_dem.h"
 #include "vicar_dem.h"
 #include "dem_map_info_offset.h"
-#include "srtm_dem.h"
 #include "usgs_dem.h"
 #include "vicar_lite_file.h"
 
 BOOST_CLASS_EXPORT(GeoCal::Datum);
 BOOST_CLASS_EXPORT(GeoCal::SimpleDatum);
 BOOST_CLASS_EXPORT(GeoCal::DidDatum);
-BOOST_CLASS_EXPORT(GeoCal::DatumGeoid96);
 BOOST_CLASS_EXPORT(GeoCal::GdalDatum);
 
 BOOST_CLASS_EXPORT(GeoCal::Dem);
@@ -33,7 +31,13 @@ BOOST_CLASS_EXPORT(GeoCal::DemTiledFile);
 BOOST_CLASS_EXPORT(GeoCal::GdalDem);
 BOOST_CLASS_EXPORT(GeoCal::VicarDem);
 BOOST_CLASS_EXPORT(GeoCal::DemMapInfoOffset);
-BOOST_CLASS_EXPORT(GeoCal::SrtmDem);
 BOOST_CLASS_EXPORT(GeoCal::UsgsDem);
 BOOST_CLASS_EXPORT(GeoCal::VicarLiteDem);
+
+#ifdef HAVE_VICAR_RTL
+#include "srtm_dem.h"
+BOOST_CLASS_EXPORT(GeoCal::DatumGeoid96);
+BOOST_CLASS_EXPORT(GeoCal::SrtmDem);
+#endif
+
 #endif

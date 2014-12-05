@@ -74,10 +74,10 @@ MapInfo ImageGroundConnection::cover(const MapInfo& Mi,
 				     int Boundary) const {
   std::vector<boost::shared_ptr<GroundCoordinate> > pt;
   pt.push_back(ground_coordinate(ImageCoordinate(0, 0)));
-  pt.push_back(ground_coordinate(ImageCoordinate(0, number_sample())));
-  pt.push_back(ground_coordinate(ImageCoordinate(number_line(), 
-						 number_sample())));
-  pt.push_back(ground_coordinate(ImageCoordinate(number_line(), 0)));
+  pt.push_back(ground_coordinate(ImageCoordinate(0, number_sample() - 1)));
+  pt.push_back(ground_coordinate(ImageCoordinate(number_line() - 1, 
+						 number_sample() - 1)));
+  pt.push_back(ground_coordinate(ImageCoordinate(number_line() - 1, 0)));
   return Mi.cover(pt, Boundary);
 }
 

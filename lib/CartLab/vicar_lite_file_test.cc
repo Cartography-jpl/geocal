@@ -99,6 +99,29 @@ BOOST_AUTO_TEST_CASE(vicar_lite_file)
   f.do_test();			// Test protected members.
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+#ifdef HAVE_BOOST_SERIALIZATON
+  std::ostringstream os;
+  boost::archive::xml_oarchive oa(os);
+
+  boost::shared_ptr<GenericObject> d(new VicarLiteFile(fname));
+  oa << GEOCAL_NVP(d);
+  if(false)
+    std::cerr << os.str();
+
+  std::istringstream is(os.str());
+  boost::archive::xml_iarchive ia(is);
+  boost::shared_ptr<GenericObject> dr;
+  ia >> GEOCAL_NVP(dr);
+  boost::shared_ptr<VicarLiteFile> dr2 = 
+    boost::dynamic_pointer_cast<VicarLiteFile>(dr);
+  BOOST_CHECK_EQUAL(dr2->number_band(), 1);
+  BOOST_CHECK_EQUAL(dr2->number_line(), 10);
+  BOOST_CHECK_EQUAL(dr2->number_sample(), 10);
+#endif
+}
+
 
 BOOST_AUTO_TEST_CASE(vicar_lite_raster_image)
 {
@@ -125,12 +148,67 @@ BOOST_AUTO_TEST_CASE(vicar_lite_raster_image)
   BOOST_CHECK_EQUAL(rpc.image_coordinate(g), ic_expect);
 }
 
+BOOST_AUTO_TEST_CASE(serialization_raster_image)
+{
+#ifdef HAVE_BOOST_SERIALIZATON
+  std::ostringstream os;
+  boost::archive::xml_oarchive oa(os);
+
+  boost::shared_ptr<RasterImage> img(new VicarLiteRasterImage(fname));
+  oa << GEOCAL_NVP(img);
+  if(false)
+    std::cerr << os.str();
+
+  std::istringstream is(os.str());
+  boost::archive::xml_iarchive ia(is);
+  boost::shared_ptr<RasterImage> imgr;
+  ia >> GEOCAL_NVP(imgr);
+  BOOST_CHECK_EQUAL(imgr->number_line(), 10);
+  BOOST_CHECK_EQUAL(imgr->number_sample(), 10);
+  BOOST_CHECK(imgr->has_map_info());
+  BOOST_CHECK_EQUAL(imgr->map_info().number_x_pixel(), 10);
+  BOOST_CHECK_EQUAL(imgr->map_info().number_y_pixel(), 10);
+  BOOST_CHECK_CLOSE(imgr->map_info().ulc_x(), 44.799913294865902, 1e-4);
+  BOOST_CHECK_CLOSE(imgr->map_info().ulc_y(), 35.900027777778142, 1e-4);
+  for(int i = 0; i < 10; ++i)
+    for(int j = 0; j < 10; ++j)
+      BOOST_CHECK_EQUAL((*imgr)(i, j), (i + j));
+  BOOST_CHECK(imgr->has_rpc());
+  Rpc rpc = imgr->rpc();
+  ImageCoordinate ic_expect(5729.22, 27561.36);
+  Geodetic g(35.8399968, 45.0770183, 1017);
+  BOOST_CHECK_EQUAL(rpc.image_coordinate(g), ic_expect);
+#endif
+}
+
 BOOST_AUTO_TEST_CASE(vicar_lite_dem)
 {
   VicarLiteDem d(fname);
   Geodetic g1(35.9, 44.800, 100);
   BOOST_CHECK_CLOSE(d.height_reference_surface(g1), 1.0, 1e-4);
 }
+
+BOOST_AUTO_TEST_CASE(serialization_dem)
+{
+#ifdef HAVE_BOOST_SERIALIZATON
+  std::ostringstream os;
+  boost::archive::xml_oarchive oa(os);
+
+  boost::shared_ptr<Dem> d(new VicarLiteDem(fname));
+  oa << GEOCAL_NVP(d);
+  if(false)
+    std::cerr << os.str();
+  
+  std::istringstream is(os.str());
+  boost::archive::xml_iarchive ia(is);
+  boost::shared_ptr<Dem> dr;
+  ia >> GEOCAL_NVP(dr);
+
+  Geodetic g1(35.9, 44.800, 100);
+  BOOST_CHECK_CLOSE(dr->height_reference_surface(g1), 1.0, 1e-4);
+#endif
+}
+
 
 BOOST_AUTO_TEST_CASE(vicar_lite_point_vs_area)
 {

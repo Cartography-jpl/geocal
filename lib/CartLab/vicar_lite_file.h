@@ -220,6 +220,14 @@ private:
   std::map<std::string, std::string> label_;
   std::string read_label(int& lblsize);
   void process_label(const std::string& label);
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    // Nothing to do
+  }
+#endif
 };
 
 //-----------------------------------------------------------------------
@@ -648,19 +656,9 @@ public:
       f_(new VicarLiteFile(Fname, Access, Force_area_pixel)),
       force_map_info_(false)
   {
-    range_check(band_, 0, f_->number_band());
-    number_line_ = f_->number_line();
-    number_sample_ = f_->number_sample();
     number_tile_line_ = Number_tile_line;
     number_tile_sample_ = Number_tile_sample;
-    if(number_tile_line_ < 0)
-      number_tile_line_ = number_line_;
-    if(number_tile_sample_ < 0)
-      number_tile_sample_ = number_sample_;
-    if(f_->has_rpc())
-      rpc_.reset(new Rpc(f_->rpc()));
-    if(f_->has_map_info())
-      map_info_.reset(new MapInfo(f_->map_info()));
+    initialize();
   }
 
 //-----------------------------------------------------------------------
@@ -787,9 +785,51 @@ public:
       Os << "None\n";
   }
 private:
+  void initialize() 
+  {
+    range_check(band_, 0, f_->number_band());
+    number_line_ = f_->number_line();
+    number_sample_ = f_->number_sample();
+    if(number_tile_line_ < 0)
+      number_tile_line_ = number_line_;
+    if(number_tile_sample_ < 0)
+      number_tile_sample_ = number_sample_;
+    if(f_->has_rpc())
+      rpc_.reset(new Rpc(f_->rpc()));
+    if(f_->has_map_info())
+      map_info_.reset(new MapInfo(f_->map_info()));
+  }
+
   int band_;
   boost::shared_ptr<VicarLiteFile> f_;
   bool force_map_info_;
+#ifdef USE_BOOST_SERIALIZATON
+  VicarLiteRasterImage() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const
+  {
+    ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImage);
+    ar << GEOCAL_NVP_(band)
+       << GEOCAL_NVP_(f)
+       << GEOCAL_NVP_(force_map_info)
+       << GEOCAL_NVP_(number_tile_line)
+       << GEOCAL_NVP_(number_tile_sample);
+  }
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version)
+  {
+    ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImage);
+    ar >> GEOCAL_NVP_(band)
+       >> GEOCAL_NVP_(f)
+       >> GEOCAL_NVP_(force_map_info)
+       >> GEOCAL_NVP_(number_tile_line)
+       >> GEOCAL_NVP_(number_tile_sample);
+    initialize();
+  }
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
+#endif
+
 };
 
 /****************************************************************//**
@@ -865,8 +905,75 @@ public:
 private:
   int band_;
   boost::shared_ptr<VicarLiteFile> f_;
+#ifdef USE_BOOST_SERIALIZATON
+  VicarLiteDem() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const
+  {
+    using boost::serialization::make_nvp;
+    boost::shared_ptr<Datum> d = datum_ptr();
+    bool oerr = outside_dem_is_error();
+    ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo);
+    ar << GEOCAL_NVP_(band)
+       << GEOCAL_NVP_(f)
+       << make_nvp("datum", d)
+       << make_nvp("outside_dem_is_error", oerr);
+  }
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version)
+  {
+    using boost::serialization::make_nvp;
+    boost::shared_ptr<Datum> d;
+    bool oerr;
+    ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo);
+    ar >> GEOCAL_NVP_(band)
+       >> GEOCAL_NVP_(f)
+       >> make_nvp("datum", d)
+       >> make_nvp("outside_dem_is_error", oerr);
+    initialize(d, f_->map_info(), oerr);
+  }
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
+#endif
 };
 
 
 }  
+
+#ifdef USE_BOOST_SERIALIZATON
+// This is a little more complicated, because we can't really
+// construct a object using a default constructor. So we need to
+// directly handle the object construction.
+namespace boost { namespace serialization {
+template<class Archive> 
+inline void save_construct_data(Archive & ar, const GeoCal::VicarLiteFile* d, 
+			 const unsigned int version)
+{
+  void_cast_register(static_cast<GeoCal::VicarLiteFile*>(0),
+		     static_cast<GeoCal::GenericObject*>(0));
+  std::string file_name = d->file_name();
+  GeoCal::VicarLiteFile::access_type access_type = d->access();
+  bool force_area_pixel = d->force_area_pixel();
+  ar << GEOCAL_NVP(file_name)
+     << GEOCAL_NVP(access_type)
+     << GEOCAL_NVP(force_area_pixel);
+}
+template<class Archive>
+inline void load_construct_data(Archive & ar, GeoCal::VicarLiteFile* d,
+				const unsigned int version)
+{
+  void_cast_register(static_cast<GeoCal::VicarLiteFile*>(0),
+		     static_cast<GeoCal::GenericObject*>(0));
+  std::string file_name;
+  GeoCal::VicarLiteFile::access_type access_type;
+  bool force_area_pixel;
+  ar >> GEOCAL_NVP(file_name)
+     >> GEOCAL_NVP(access_type)
+     >> GEOCAL_NVP(force_area_pixel);
+  ::new(d)GeoCal::VicarLiteFile(file_name, access_type, force_area_pixel);
+}
+  }
+}
+#endif
+
 #endif

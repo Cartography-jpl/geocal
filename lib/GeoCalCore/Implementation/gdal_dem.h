@@ -101,6 +101,10 @@ inline void save_construct_data(Archive & ar, const GeoCal::GdalDem* d,
 {
   void_cast_register(static_cast<GeoCal::GdalDem*>(0),
 		     static_cast<GeoCal::DemTiledFile*>(0));
+  void_cast_register(static_cast<GeoCal::DemTiledFile*>(0),
+		     static_cast<GeoCal::DemMapInfo*>(0));
+  void_cast_register(static_cast<GeoCal::DemMapInfo*>(0),
+		     static_cast<GeoCal::Dem*>(0));
   std::string file_name = d->file_name();
   boost::shared_ptr<GeoCal::Datum> datum = d->datum_ptr();
   int band_id = d->band_id();
@@ -122,6 +126,10 @@ inline void load_construct_data(Archive & ar, GeoCal::GdalDem* d,
 {
   void_cast_register(static_cast<GeoCal::GdalDem*>(0),
 		     static_cast<GeoCal::DemTiledFile*>(0));
+  void_cast_register(static_cast<GeoCal::DemTiledFile*>(0),
+		     static_cast<GeoCal::DemMapInfo*>(0));
+  void_cast_register(static_cast<GeoCal::DemMapInfo*>(0),
+		     static_cast<GeoCal::Dem*>(0));
   std::string file_name;
   int band_id, number_tile, number_tile_line, number_tile_sample;
   bool outside_dem_is_error;

@@ -17,7 +17,9 @@ public:
     // tmin = Time::parse_time("2003-01-01T11:11:00Z");
     // orb.reset(new KeplerOrbit());
     std::string fname = test_data_dir() + "sample_orbit.h5";
+#ifdef HAVE_HDF5
     orb.reset(new HdfOrbit<EciTod, TimeAcsCreator>(fname));
+#endif
     tmin = Time::time_acs(215077459.472);
     cam.reset(new QuaternionCamera(quat_rot("zyx", 0.1, 0.2, 0.3),
 				   3375, 3648, 1.0 / 2500000, 1.0 / 2500000,
@@ -45,6 +47,9 @@ BOOST_FIXTURE_TEST_SUITE(igc_rolling_shutter, IgcRollingShutterFixture)
 
 BOOST_AUTO_TEST_CASE(resolution)
 {
+#ifndef HAVE_HDF5
+  return;  // Skip test if we can't read the test data.
+#endif
   // **************** Broken *****************8
   return;
   // Check resolution calculation. We just compare to expected results
@@ -55,6 +60,9 @@ BOOST_AUTO_TEST_CASE(resolution)
 
 BOOST_AUTO_TEST_CASE(footprint_resolution)
 {
+#ifndef HAVE_HDF5
+  return;  // Skip test if we can't read the test data.
+#endif
   // **************** Broken *****************8
   return;
 
@@ -70,6 +78,9 @@ BOOST_AUTO_TEST_CASE(footprint_resolution)
 
 BOOST_AUTO_TEST_CASE(ground_position)
 {
+#ifndef HAVE_HDF5
+  return;  // Skip test if we can't read the test data.
+#endif
   // Check ground and spacecraft position by directly calculating
   ImageCoordinate ic(100, 200);
   boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + 100 * tspace);
@@ -81,6 +92,9 @@ BOOST_AUTO_TEST_CASE(ground_position)
 
 BOOST_AUTO_TEST_CASE(image_coordinate)
 {
+#ifndef HAVE_HDF5
+  return;  // Skip test if we can't read the test data.
+#endif
 
   // Check we get back to the original image_coordinate. Note that ==
   // is already done with a tolerance for ImageCoordinate
@@ -90,6 +104,9 @@ BOOST_AUTO_TEST_CASE(image_coordinate)
 
 BOOST_AUTO_TEST_CASE(cf_look_vector)
 {
+#ifndef HAVE_HDF5
+  return;  // Skip test if we can't read the test data.
+#endif
   // Check look vector and spacecraft position by directly calculating
   ImageCoordinate ic(100, 200);
   boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + 100 * tspace);
@@ -107,6 +124,9 @@ BOOST_AUTO_TEST_CASE(cf_look_vector)
 
 BOOST_AUTO_TEST_CASE(cf_look_vector_arr)
 {
+#ifndef HAVE_HDF5
+  return;  // Skip test if we can't read the test data.
+#endif
   // Test cf_look_vector_lv by comparing a point of the array with a
   // direct calculation.
   int lstart = 10;
@@ -141,6 +161,9 @@ BOOST_AUTO_TEST_CASE(cf_look_vector_arr)
 
 BOOST_AUTO_TEST_CASE(jacobian)
 {
+#ifndef HAVE_HDF5
+  return;  // Skip test if we can't read the test data.
+#endif
   // **************** Broken *****************8
   return;
 
@@ -179,6 +202,9 @@ BOOST_AUTO_TEST_CASE(jacobian)
 
 BOOST_AUTO_TEST_CASE(image_coordinate_timing)
 {
+#ifndef HAVE_HDF5
+  return;  // Skip test if we can't read the test data.
+#endif
   // Run image_coordinate a number of times to check the timing.
   ImageCoordinate ic(100, 200);
   boost::shared_ptr<GroundCoordinate> gc = igc->ground_coordinate(ic);

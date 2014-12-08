@@ -59,15 +59,22 @@ args = docopt_simple(usage, version=version)
 # we don't currently support this.
 failed_rpc = False
 vfname = re.sub("1:\\d+", "1", args.input_file)
-if(VicarFile.is_vicar_file(vfname)):
-    f = VicarFile(vfname)
-    try:
-        success = int(f["GEOTIFF", "RPC_FIELD1"][0])
-        if(success == 0):
-            failed_rpc = True
-    except RuntimeError:
-        # Ok if this fails, we just don't have this metadata field
-        pass
+try:
+    # Depending on the options used when building, this class might
+    # not be available. If not, then just skip this test.
+    if(VicarFile.is_vicar_file(vfname)):
+        f = VicarFile(vfname)
+        try:
+            success = int(f["GEOTIFF", "RPC_FIELD1"][0])
+            if(success == 0):
+                failed_rpc = True
+        except RuntimeError:
+            # Ok if this fails, we just don't have this metadata field
+            pass
+
+except NameError:
+    # Ok of VicarFile isn't available
+    pass
 
 # Create a "virtual raster image". This is a text file that allows us to
 # set various metadata fields without changing the original file. GDAL then

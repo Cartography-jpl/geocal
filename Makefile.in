@@ -1921,7 +1921,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/mspi/3.l1b1.hdf5 \
 	@geocalunittestdata@/mspi/3.mspi_camera_model.config \
 	@geocalunittestdata@/mspi/3.instrument_info.config \
-	@docpythonsrc@ $(am__empty)
+	@geocalunittestdata@/image_coordinate_test.xml @docpythonsrc@
 pkgconfig_DATA = 
 
 # Allow fils to be include in other directories

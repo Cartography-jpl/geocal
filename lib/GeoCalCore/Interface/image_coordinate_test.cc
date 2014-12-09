@@ -36,6 +36,8 @@ BOOST_AUTO_TEST_CASE(serialize_function)
   boost::shared_ptr<ImageCoordinate> ic2 = 
     serialize_read<ImageCoordinate>("image_coordinate_test.xml");
   BOOST_CHECK(*ic == *ic2);
+  int status = unlink("image_coordinate_test.xml");
+  // Ignore status, ok if deleting fails.
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

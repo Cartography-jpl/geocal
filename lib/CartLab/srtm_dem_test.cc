@@ -26,10 +26,17 @@ BOOST_AUTO_TEST_CASE(serialization)
 #ifdef HAVE_BOOST_SERIALIZATON
   if(!VicarFile::vicar_available())
     return;
+  boost::shared_ptr<Dem> d;
+  try {
+    d.reset(new SrtmDem());
+  } catch(const Exception&) {
+    // Don't worry if we can't find the data, just skip test.
+    BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
+    return;
+  } 
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
 
-  boost::shared_ptr<Dem> d(new SrtmDem());
   oa << GEOCAL_NVP(d);
   if(false)
     std::cerr << os.str();

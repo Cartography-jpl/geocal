@@ -6,8 +6,9 @@
 
 // Also set up the serialization stuff we need for testing. This
 // *has* to be done once - not in each test. So we do that here.
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include "geocal_serialize.h"
+
+// #include <boost/archive/xml_iarchive.hpp>
+// #include <boost/archive/xml_oarchive.hpp>
+// #include <boost/archive/text_iarchive.hpp>
+// #include <boost/archive/text_oarchive.hpp>
+// #include "geocal_serialize.h"

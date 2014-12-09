@@ -6,14 +6,12 @@
 
 // Stuff needed for testing serialization.
 // Have this in place in case we want to make this conditional
-#define HAVE_BOOST_SERIALIZATON 
+//#define HAVE_BOOST_SERIALIZATON 
 #ifdef HAVE_BOOST_SERIALIZATON
 #define USE_BOOST_SERIALIZATON
 
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/shared_ptr.hpp>
 

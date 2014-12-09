@@ -59,6 +59,7 @@ BOOST_AUTO_TEST_CASE(simple_datum)
 
 BOOST_AUTO_TEST_CASE(serialization_datum)
 {
+#ifdef HAVE_BOOST_SERIALIZATON
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);
 
@@ -74,6 +75,7 @@ BOOST_AUTO_TEST_CASE(serialization_datum)
 
   Geodetic g(60, 30, 100);
   BOOST_CHECK(fabs(dr->undulation(g) - 0) < 1e-4);
+#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

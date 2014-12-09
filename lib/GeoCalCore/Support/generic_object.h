@@ -1,25 +1,20 @@
 #ifndef GENERIC_OBJECT_H
 #define GENERIC_OBJECT_H
-// Optional boost serialization information. This is entirely done
-// through header files, so code using geocal can decide to use this
-// or not.
-//
-// Users of this class that want Boost serializations should:
-// 1. Define "USE_BOOST_SERIALIZATON" before including headers
-// 2. Include all supported archive types before including any
-//    GeoCal headers.
-// 3. Either directly use BOOST_CLASS_EXPORT for supported classes,
-//    or the appropriate header files that define this (e.g.,
-//    geocal_serialize.h for everything, geocal_serialize_camera.h for
-//    Camera and derived classes, etc.).
-//
-// See the image_coordinate_test.cc unit test for an example of this,
-// we use this particularly simple class as a test of the
-// serialization. 
-//
-// Note that if you add serialization to a class, you should make sure
-// it gets added to one of the files in Serialize directory.
-#ifdef USE_BOOST_SERIALIZATON
+// Add boost serialization, if available. We support the polymorphic
+// archives only, so you need to use an archive derived from
+// this. Note that all the standard boost archives supplied by boost
+// have polymorphic versions.
+// Temp
+//#define HAVE_BOOST_SERIALIZATON2
+#ifdef HAVE_BOOST_SERIALIZATON2
+namespace boost {
+namespace archive {
+
+class polymorphic_iarchive;
+class polymorphic_oarchive;
+
+} // namespace archive
+} // namespace boost
 #include <boost/serialization/export.hpp>
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/nvp.hpp>
@@ -28,6 +23,7 @@
 // Do this a lot, so give a shortcut for this
 #define GEOCAL_NVP(x) BOOST_SERIALIZATION_NVP(x)
 #define GEOCAL_NVP_(x) boost::serialization::make_nvp(BOOST_PP_STRINGIZE(x), x ## _)
+#define GEOCAL_NVP2(x, y) boost::serialization::make_nvp(BOOST_PP_STRINGIZE(x), y)
 
 #endif
 
@@ -43,7 +39,7 @@ public:
   // Have a virtual member function, which forces RTTI information to
   // be available.
   virtual ~GenericObject() {}
-#ifdef USE_BOOST_SERIALIZATON
+#ifdef HAVE_BOOST_SERIALIZATON2
   friend class boost::serialization::access;
    template<class Archive>
    void serialize(Archive & ar, const unsigned int version)
@@ -54,4 +50,9 @@ public:
 };
 
 }
+
+#ifdef HAVE_BOOST_SERIALIZATON2
+BOOST_CLASS_EXPORT_KEY(GeoCal::GenericObject)
+#endif
+
 #endif

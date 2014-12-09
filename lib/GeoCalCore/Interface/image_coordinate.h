@@ -55,7 +55,7 @@ public:
   double sample;
   void print(std::ostream& Os) const;
 private:
-#ifdef USE_BOOST_SERIALIZATON
+#ifdef HAVE_BOOST_SERIALIZATON2
   friend class boost::serialization::access;
    template<class Archive>
    void serialize(Archive & ar, const unsigned int version)
@@ -122,7 +122,7 @@ public:
   double sample;
   void print(std::ostream& Os) const;
 private:
-#ifdef USE_BOOST_SERIALIZATON
+#ifdef HAVE_BOOST_SERIALIZATON2
   friend class boost::serialization::access;
    template<class Archive>
    void serialize(Archive & ar, const unsigned int version)
@@ -200,4 +200,10 @@ private:
 };
 
 }
+
+#ifdef HAVE_BOOST_SERIALIZATON2
+BOOST_CLASS_EXPORT_KEY(GeoCal::ImageCoordinate)
+BOOST_CLASS_EXPORT_KEY(GeoCal::VicarImageCoordinate)
+#endif
+
 #endif

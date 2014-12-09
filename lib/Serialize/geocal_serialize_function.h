@@ -1,8 +1,8 @@
 #ifndef GEOCAL_SERIALIZE_FUNCTION_H
 #define GEOCAL_SERIALIZE_FUNCTION_H
 
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/polymorphic_xml_iarchive.hpp>
+#include <boost/archive/polymorphic_xml_oarchive.hpp>
 #include <fstream>
 
 namespace GeoCal {
@@ -19,7 +19,7 @@ inline void serialize_write(const std::string& Fname,
 		     const boost::shared_ptr<GenericObject>& Obj)
 {
   std::ofstream os(Fname.c_str());
-  boost::archive::xml_oarchive oa(os);
+  boost::archive::polymorphic_xml_oarchive oa(os);
   oa << boost::serialization::make_nvp("geocal_object", Obj);
 }
 
@@ -27,7 +27,7 @@ inline boost::shared_ptr<GenericObject>
 serialize_read_generic(const std::string& Fname)
 {
   std::ifstream is(Fname.c_str());
-  boost::archive::xml_iarchive ia(is);
+  boost::archive::polymorphic_xml_iarchive ia(is);
   boost::shared_ptr<GenericObject> obj;
   ia >> boost::serialization::make_nvp("geocal_object", obj);
   return obj;

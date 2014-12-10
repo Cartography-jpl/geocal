@@ -64,12 +64,6 @@
 # you need to modify these.
 
 # This gets included in the top makefile. This list files here that are
-# used to make up libgeocal.la.
-
-# The various srcxxx are set in configure.in in the top directory, in case
-# you need to modify these.
-
-# This gets included in the top makefile. This list files here that are
 # used to run unit tests.
 
 # Sphinx python documentation
@@ -123,7 +117,6 @@ DIST_COMMON = $(srcdir)/common.am $(srcdir)/include.am \
 	$(srcdir)/lib/GeoCalCore/Interface/interface.am \
 	$(srcdir)/lib/GeoCalCore/Implementation/implementation.am \
 	$(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am \
-	$(srcdir)/lib/Serialize/serialize.am \
 	$(srcdir)/bindings/python/python.am \
 	$(srcdir)/unit_test_data/unit_test_data.am \
 	$(srcdir)/script/script.am $(srcdir)/python/python.am \
@@ -1344,11 +1337,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcmspi@/mspi_paraxial_transform.h @srcmspi@/mspi_camera.h \
 	@srcmspi@/air_mspi_orbit.h @srcmspi@/ground_mspi_orbit.h \
 	@srcmspi@/ground_mspi_igc.h @srcmspi@/usgs_dem.h \
-	@srcmspi@/air_mspi_igc.h @srcserialize@/geocal_serialize.h \
-	@srcserialize@/geocal_serialize_common.h \
-	@srcserialize@/geocal_serialize_camera.h \
-	@srcserialize@/geocal_serialize_dem.h \
-	@srcserialize@/geocal_serialize_raster_image.h
+	@srcmspi@/air_mspi_igc.h
 HEADERS = $(geocalinc_HEADERS) $(include_HEADERS) $(libraw_HEADERS) \
 	$(sdbx_HEADERS) $(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
 	$(sdbxsupport_HEADERS)
@@ -1945,7 +1934,7 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 	-I$(srcdir)/@srcsupport@ -I$(srcdir)/@srcsupport@/boost \
 	-I@srcsupport@ -I$(srcdir)/@srcinterface@ \
 	-I$(srcdir)/@srcimplementation@ -I$(srcdir)/@srccartlab@ \
-	-I$(srcdir)/@srcmspi@ -I$(srcdir)/@srcserialize@
+	-I$(srcdir)/@srcmspi@
 
 #=================================================================
 # Some flags needed for GCC compilers.
@@ -2192,8 +2181,6 @@ SWIG_FLAG = -O
 geocalincdir = @includedir@/geocal
 
 # Source files for library
-
-# Source files for library
 geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcsupport@/constant.h @srcsupport@/generic_object.h \
 	@srcsupport@/auto_derivative.h \
@@ -2305,11 +2292,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcmspi@/mspi_paraxial_transform.h @srcmspi@/mspi_camera.h \
 	@srcmspi@/air_mspi_orbit.h @srcmspi@/ground_mspi_orbit.h \
 	@srcmspi@/ground_mspi_igc.h @srcmspi@/usgs_dem.h \
-	@srcmspi@/air_mspi_igc.h @srcserialize@/geocal_serialize.h \
-	@srcserialize@/geocal_serialize_common.h \
-	@srcserialize@/geocal_serialize_camera.h \
-	@srcserialize@/geocal_serialize_dem.h \
-	@srcserialize@/geocal_serialize_raster_image.h
+	@srcmspi@/air_mspi_igc.h
 # Test files
 geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
@@ -2535,7 +2518,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Serialize/serialize.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -2558,7 +2541,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
-$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Serialize/serialize.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am:
+$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am:
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -8924,11 +8907,6 @@ vpath %.i $(srcdir)/@srccartlab@
 vpath %.cc $(srcdir)/@srcmspi@
 vpath %.h $(srcdir)/@srcmspi@
 vpath %.i $(srcdir)/@srcmspi@
-
-# Allow searchs for .i, .h. and .cc files in this directory
-vpath %.cc $(srcdir)/@srcserialize@
-vpath %.h $(srcdir)/@srcserialize@
-vpath %.i $(srcdir)/@srcserialize@
 
 install-python-2: install-libLTLIBRARIES install-python-geocal install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
 	$(noop)

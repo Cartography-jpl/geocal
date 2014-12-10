@@ -25,7 +25,7 @@
    SPICE */
 #undef HAVE_SDP
 
-/* True if we have the FFTW library available *
+/* True if we have the FFTW library available */
 #undef HAVE_FFTW
 
 /* True if we have the cartography library available */

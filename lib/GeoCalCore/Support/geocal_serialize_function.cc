@@ -1,5 +1,6 @@
 #include "geocal_serialize_function.h"
 #include "geocal_serialize_support.h"
+#include "geocal_exception.h"
 #include <fstream>
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 #include <boost/archive/polymorphic_xml_iarchive.hpp>

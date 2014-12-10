@@ -6,14 +6,10 @@
 
 # Source files for library
 geocalinc_HEADERS+= @srcserialize@/geocal_serialize.h
-geocalinc_HEADERS+= @srcserialize@/geocal_serialize_function.h
 geocalinc_HEADERS+= @srcserialize@/geocal_serialize_common.h
 geocalinc_HEADERS+= @srcserialize@/geocal_serialize_camera.h
 geocalinc_HEADERS+= @srcserialize@/geocal_serialize_dem.h
 geocalinc_HEADERS+= @srcserialize@/geocal_serialize_raster_image.h
-
-# Files that contain SWIG wrapper information.
-SWIG_SRC += @swigsrc@/geocal_serialize_function_wrap.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcserialize@ 
 

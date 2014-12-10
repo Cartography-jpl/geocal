@@ -3605,11 +3605,6 @@ namespace swig {
 }
 
 
-  // Need this before anything else, so we get all the serialization
-  // code
-#define USE_BOOST_SERIALIZATON
-
-
 #include <boost/shared_ptr.hpp>
 #include <boost/rational.hpp>
 
@@ -4918,7 +4913,6 @@ template<class T, int D> inline boost::array<T, D>
 }
 
 
-#include "geocal_serialize.h"
 #include "geocal_serialize_function.h"
 
 
@@ -5163,7 +5157,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"serialize_write", _wrap_serialize_write, METH_VARARGS, (char *)"\n"
 		"void GeoCal::serialize_write(const std::string &Fname, const boost::shared_ptr< GenericObject >\n"
 		"&Obj)\n"
-		"Simple function that wraps around a xml archive.\n"
+		"Simple function that wraps around writing a boost::serialization to a\n"
+		"xml archive.\n"
 		"\n"
 		"We abstract this away to give a slightly cleaner interface, but mostly\n"
 		"so we can later have the option of changing the underlying\n"
@@ -5174,7 +5169,16 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { (char *)"serialize_read_generic", (PyCFunction)_wrap_serialize_read_generic, METH_O, (char *)"\n"
-		"boost::shared_ptr<GenericObject> GeoCal::serialize_read_generic(const std::string &Fname)\n"
+		"boost::shared_ptr< GenericObject > GeoCal::serialize_read_generic(const std::string &Fname)\n"
+		"Simple function that wraps around reading a boost::serialization to a\n"
+		"xml archive.\n"
+		"\n"
+		"We abstract this away to give a slightly cleaner interface, but mostly\n"
+		"so we can later have the option of changing the underlying\n"
+		"serialization. This is a more limited interface, we can only write or\n"
+		"read a single object. But this is what we primarily do anyways, and we\n"
+		"can easily create higher level container objects if we end up needing\n"
+		"multiple objects (e.g., can have a std::map if we end up needing it).\n"
 		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }

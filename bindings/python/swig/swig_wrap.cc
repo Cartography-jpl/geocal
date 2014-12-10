@@ -30,6 +30,7 @@ extern "C" {
   void init_geocal_gsl_root(void);
   void init_geocal_time(void);
   void init_tiled_file(void);
+  void init_geocal_serialize_function(void);
   void init_image_coordinate(void);
   void init_with_parameter(void);
   void init_look_vector(void);
@@ -134,7 +135,6 @@ extern "C" {
   void init_ground_mspi_igc(void);
   void init_usgs_dem(void);
   void init_air_mspi_igc(void);
-  void init_geocal_serialize_function(void);
 #ifdef HAVE_CARTO
   void init_eci_tod_burl(void);
 #endif
@@ -255,6 +255,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_gsl_root", init_geocal_gsl_root);
   init_extension_module(package, "_geocal_time", init_geocal_time);
   init_extension_module(package, "_tiled_file", init_tiled_file);
+  init_extension_module(package, "_geocal_serialize_function", init_geocal_serialize_function);
   init_extension_module(package, "_image_coordinate", init_image_coordinate);
   init_extension_module(package, "_with_parameter", init_with_parameter);
   init_extension_module(package, "_look_vector", init_look_vector);
@@ -359,7 +360,6 @@ void init_swig_wrap(void)
   init_extension_module(package, "_ground_mspi_igc", init_ground_mspi_igc);
   init_extension_module(package, "_usgs_dem", init_usgs_dem);
   init_extension_module(package, "_air_mspi_igc", init_air_mspi_igc);
-  init_extension_module(package, "_geocal_serialize_function", init_geocal_serialize_function);
 #ifdef HAVE_CARTO
   init_extension_module(package, "_eci_tod_burl", init_eci_tod_burl);
 #endif

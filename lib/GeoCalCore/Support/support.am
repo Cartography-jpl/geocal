@@ -44,6 +44,8 @@ libgeocal_la_SOURCES+= @srcsupport@/covariance.cc
 geocalinc_HEADERS+= @srcsupport@/covariance.h
 libgeocal_la_SOURCES+= @srcsupport@/statistic.cc
 geocalinc_HEADERS+= @srcsupport@/statistic.h
+geocalinc_HEADERS+=@srcsupport@/geocal_serialize_function.h
+libgeocal_la_SOURCES+= @srcsupport@/geocal_serialize_function.cc
 if HAVE_FFTW
 geocalinc_HEADERS+= @srcsupport@/geocal_fftw.h
 libgeocal_la_SOURCES+= @srcsupport@/geocal_fftw.cc
@@ -71,6 +73,7 @@ SWIG_SRC += @swigsrc@/geocal_gsl_fit_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_gsl_root_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_time_wrap.cc
 SWIG_SRC += @swigsrc@/tiled_file_wrap.cc
+SWIG_SRC += @swigsrc@/geocal_serialize_function_wrap.cc
 SWIG_SRC_FFTW += @swigsrc@/geocal_fftw_wrap.cc
 SWIG_SRC_HDF5 += @swigsrc@/hdf_file_wrap.cc
 # Test files

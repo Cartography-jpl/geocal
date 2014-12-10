@@ -372,6 +372,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/statistic_wrap.cc @swigsrc@/geocal_gsl_fit_wrap.cc \
 	@swigsrc@/geocal_gsl_root_wrap.cc \
 	@swigsrc@/geocal_time_wrap.cc @swigsrc@/tiled_file_wrap.cc \
+	@swigsrc@/geocal_serialize_function_wrap.cc \
 	@swigsrc@/image_coordinate_wrap.cc \
 	@swigsrc@/with_parameter_wrap.cc @swigsrc@/look_vector_wrap.cc \
 	@swigsrc@/ground_coordinate_wrap.cc \
@@ -454,9 +455,8 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/mspi_camera_wrap.cc @swigsrc@/air_mspi_orbit_wrap.cc \
 	@swigsrc@/ground_mspi_orbit_wrap.cc \
 	@swigsrc@/ground_mspi_igc_wrap.cc @swigsrc@/usgs_dem_wrap.cc \
-	@swigsrc@/air_mspi_igc_wrap.cc \
-	@swigsrc@/geocal_serialize_function_wrap.cc \
-	@swigsrc@/eci_tod_burl_wrap.cc @swigsrc@/geocal_fftw_wrap.cc \
+	@swigsrc@/air_mspi_igc_wrap.cc @swigsrc@/eci_tod_burl_wrap.cc \
+	@swigsrc@/geocal_fftw_wrap.cc \
 	@swigsrc@/phase_correlation_matcher_wrap.cc \
 	@swigsrc@/hdf_file_wrap.cc @swigsrc@/hdf_orbit_wrap.cc \
 	@swigsrc@/hdf_orbit_carto_wrap.cc \
@@ -493,6 +493,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geocal_gsl_root_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geocal_time_wrap.lo \
 	@swigsrc@/_swig_wrap_la-tiled_file_wrap.lo \
+	@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo \
 	@swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo \
 	@swigsrc@/_swig_wrap_la-with_parameter_wrap.lo \
 	@swigsrc@/_swig_wrap_la-look_vector_wrap.lo \
@@ -596,8 +597,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ground_mspi_orbit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ground_mspi_igc_wrap.lo \
 	@swigsrc@/_swig_wrap_la-usgs_dem_wrap.lo \
-	@swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo \
-	@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo
+	@swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo
 am__objects_2 = @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo
 @HAVE_CARTO_TRUE@am__objects_3 = $(am__objects_2)
 am__objects_4 = @swigsrc@/_swig_wrap_la-geocal_fftw_wrap.lo \
@@ -649,8 +649,10 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcsupport@/geocal_gsl_matrix.cc \
 	@srcsupport@/geocal_gsl_fit.cc @srcsupport@/geocal_gsl_root.cc \
 	@srcsupport@/geocal_time.cc @srcsupport@/covariance.cc \
-	@srcsupport@/statistic.cc @srcsupport@/geocal_fftw.cc \
-	@srcsupport@/hdf_file.cc @srcinterface@/raster_image.cc \
+	@srcsupport@/statistic.cc \
+	@srcsupport@/geocal_serialize_function.cc \
+	@srcsupport@/geocal_fftw.cc @srcsupport@/hdf_file.cc \
+	@srcinterface@/raster_image.cc \
 	@srcinterface@/with_parameter.cc \
 	@srcinterface@/sub_raster_image.cc \
 	@srcinterface@/raster_image_multi_band.cc \
@@ -763,8 +765,10 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcsupport@/libgeocal_la-geocal_gsl_root.lo \
 	@srcsupport@/libgeocal_la-geocal_time.lo \
 	@srcsupport@/libgeocal_la-covariance.lo \
-	@srcsupport@/libgeocal_la-statistic.lo $(am__objects_15) \
-	$(am__objects_16) @srcinterface@/libgeocal_la-raster_image.lo \
+	@srcsupport@/libgeocal_la-statistic.lo \
+	@srcsupport@/libgeocal_la-geocal_serialize_function.lo \
+	$(am__objects_15) $(am__objects_16) \
+	@srcinterface@/libgeocal_la-raster_image.lo \
 	@srcinterface@/libgeocal_la-with_parameter.lo \
 	@srcinterface@/libgeocal_la-sub_raster_image.lo \
 	@srcinterface@/libgeocal_la-raster_image_multi_band.lo \
@@ -1232,6 +1236,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcsupport@/geocal_gsl_root.h @srcsupport@/geocal_time.h \
 	@srcsupport@/toolkit_time_interface.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
+	@srcsupport@/geocal_serialize_function.h \
 	@srcsupport@/geocal_fftw.h @srcsupport@/hdf_file.h \
 	@srcinterface@/raster_image.h @srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
@@ -1338,7 +1343,6 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcmspi@/air_mspi_orbit.h @srcmspi@/ground_mspi_orbit.h \
 	@srcmspi@/ground_mspi_igc.h @srcmspi@/usgs_dem.h \
 	@srcmspi@/air_mspi_igc.h @srcserialize@/geocal_serialize.h \
-	@srcserialize@/geocal_serialize_function.h \
 	@srcserialize@/geocal_serialize_common.h \
 	@srcserialize@/geocal_serialize_camera.h \
 	@srcserialize@/geocal_serialize_dem.h \
@@ -1967,8 +1971,9 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcsupport@/geocal_gsl_matrix.cc \
 	@srcsupport@/geocal_gsl_fit.cc @srcsupport@/geocal_gsl_root.cc \
 	@srcsupport@/geocal_time.cc @srcsupport@/covariance.cc \
-	@srcsupport@/statistic.cc $(am__append_14) $(am__append_16) \
-	@srcinterface@/raster_image.cc \
+	@srcsupport@/statistic.cc \
+	@srcsupport@/geocal_serialize_function.cc $(am__append_14) \
+	$(am__append_16) @srcinterface@/raster_image.cc \
 	@srcinterface@/with_parameter.cc \
 	@srcinterface@/sub_raster_image.cc \
 	@srcinterface@/raster_image_multi_band.cc \
@@ -2051,8 +2056,6 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 
 # Files that contain SWIG wrapper information.
 #  SWIG_SRC_GDAL += @swigsrc@/gdal_multi_file_wrap.cc
-
-# Files that contain SWIG wrapper information.
 SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/swig_boost_array_wrap.cc \
 	@swigsrc@/swig_quaternion_wrap.cc @swigsrc@/constant_wrap.cc \
@@ -2066,6 +2069,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/statistic_wrap.cc @swigsrc@/geocal_gsl_fit_wrap.cc \
 	@swigsrc@/geocal_gsl_root_wrap.cc \
 	@swigsrc@/geocal_time_wrap.cc @swigsrc@/tiled_file_wrap.cc \
+	@swigsrc@/geocal_serialize_function_wrap.cc \
 	@swigsrc@/image_coordinate_wrap.cc \
 	@swigsrc@/with_parameter_wrap.cc @swigsrc@/look_vector_wrap.cc \
 	@swigsrc@/ground_coordinate_wrap.cc \
@@ -2148,8 +2152,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/mspi_camera_wrap.cc @swigsrc@/air_mspi_orbit_wrap.cc \
 	@swigsrc@/ground_mspi_orbit_wrap.cc \
 	@swigsrc@/ground_mspi_igc_wrap.cc @swigsrc@/usgs_dem_wrap.cc \
-	@swigsrc@/air_mspi_igc_wrap.cc \
-	@swigsrc@/geocal_serialize_function_wrap.cc
+	@swigsrc@/air_mspi_igc_wrap.cc
 SWIG_SRC_CARTO = @swigsrc@/eci_tod_burl_wrap.cc
 SWIG_SRC_FFTW = @swigsrc@/geocal_fftw_wrap.cc \
 	@swigsrc@/phase_correlation_matcher_wrap.cc
@@ -2208,8 +2211,9 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcsupport@/geocal_gsl_root.h @srcsupport@/geocal_time.h \
 	@srcsupport@/toolkit_time_interface.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
-	$(am__append_13) $(am__append_15) \
-	@srcinterface@/raster_image.h @srcinterface@/with_parameter.h \
+	@srcsupport@/geocal_serialize_function.h $(am__append_13) \
+	$(am__append_15) @srcinterface@/raster_image.h \
+	@srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
 	@srcinterface@/sub_raster_image.h \
 	@srcinterface@/raster_image_multi_band.h \
@@ -2300,7 +2304,6 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcmspi@/air_mspi_orbit.h @srcmspi@/ground_mspi_orbit.h \
 	@srcmspi@/ground_mspi_igc.h @srcmspi@/usgs_dem.h \
 	@srcmspi@/air_mspi_igc.h @srcserialize@/geocal_serialize.h \
-	@srcserialize@/geocal_serialize_function.h \
 	@srcserialize@/geocal_serialize_common.h \
 	@srcserialize@/geocal_serialize_camera.h \
 	@srcserialize@/geocal_serialize_dem.h \
@@ -2720,6 +2723,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-tiled_file_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-with_parameter_wrap.lo:  \
@@ -2928,8 +2933,6 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
-@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo:  \
-	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-geocal_fftw_wrap.lo:  \
@@ -3011,6 +3014,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcsupport@/libgeocal_la-covariance.lo: @srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
 @srcsupport@/libgeocal_la-statistic.lo: @srcsupport@/$(am__dirstamp) \
+	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcsupport@/libgeocal_la-geocal_serialize_function.lo:  \
+	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
 @srcsupport@/libgeocal_la-geocal_fftw.lo:  \
 	@srcsupport@/$(am__dirstamp) \
@@ -4095,6 +4101,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-geocal_gsl_fit.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-geocal_gsl_matrix.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-geocal_gsl_root.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-geocal_serialize_function.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-geocal_time.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-hdf_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-statistic.Plo@am__quote@
@@ -4419,6 +4426,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/tiled_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-tiled_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-tiled_file_wrap.lo `test -f '@swigsrc@/tiled_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/tiled_file_wrap.cc
+
+@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo: @swigsrc@/geocal_serialize_function_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_serialize_function_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo `test -f '@swigsrc@/geocal_serialize_function_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_serialize_function_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_serialize_function_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_serialize_function_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/geocal_serialize_function_wrap.cc' object='@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo `test -f '@swigsrc@/geocal_serialize_function_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_serialize_function_wrap.cc
 
 @swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo: @swigsrc@/image_coordinate_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-image_coordinate_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo `test -f '@swigsrc@/image_coordinate_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/image_coordinate_wrap.cc
@@ -5148,13 +5162,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo `test -f '@swigsrc@/air_mspi_igc_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/air_mspi_igc_wrap.cc
 
-@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo: @swigsrc@/geocal_serialize_function_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_serialize_function_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo `test -f '@swigsrc@/geocal_serialize_function_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_serialize_function_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_serialize_function_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-geocal_serialize_function_wrap.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/geocal_serialize_function_wrap.cc' object='@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo `test -f '@swigsrc@/geocal_serialize_function_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geocal_serialize_function_wrap.cc
-
 @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo: @swigsrc@/eci_tod_burl_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_tod_burl_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo `test -f '@swigsrc@/eci_tod_burl_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/eci_tod_burl_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_tod_burl_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_tod_burl_wrap.Plo
@@ -5371,6 +5378,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/statistic.cc' object='@srcsupport@/libgeocal_la-statistic.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/libgeocal_la-statistic.lo `test -f '@srcsupport@/statistic.cc' || echo '$(srcdir)/'`@srcsupport@/statistic.cc
+
+@srcsupport@/libgeocal_la-geocal_serialize_function.lo: @srcsupport@/geocal_serialize_function.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/libgeocal_la-geocal_serialize_function.lo -MD -MP -MF @srcsupport@/$(DEPDIR)/libgeocal_la-geocal_serialize_function.Tpo -c -o @srcsupport@/libgeocal_la-geocal_serialize_function.lo `test -f '@srcsupport@/geocal_serialize_function.cc' || echo '$(srcdir)/'`@srcsupport@/geocal_serialize_function.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/libgeocal_la-geocal_serialize_function.Tpo @srcsupport@/$(DEPDIR)/libgeocal_la-geocal_serialize_function.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/geocal_serialize_function.cc' object='@srcsupport@/libgeocal_la-geocal_serialize_function.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/libgeocal_la-geocal_serialize_function.lo `test -f '@srcsupport@/geocal_serialize_function.cc' || echo '$(srcdir)/'`@srcsupport@/geocal_serialize_function.cc
 
 @srcsupport@/libgeocal_la-geocal_fftw.lo: @srcsupport@/geocal_fftw.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/libgeocal_la-geocal_fftw.lo -MD -MP -MF @srcsupport@/$(DEPDIR)/libgeocal_la-geocal_fftw.Tpo -c -o @srcsupport@/libgeocal_la-geocal_fftw.lo `test -f '@srcsupport@/geocal_fftw.cc' || echo '$(srcdir)/'`@srcsupport@/geocal_fftw.cc

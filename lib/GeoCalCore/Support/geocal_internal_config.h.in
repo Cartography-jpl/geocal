@@ -28,13 +28,13 @@
 /* True if we have the FFTW library available *
 #undef HAVE_FFTW
 
-/* True if we have the cartography library available
+/* True if we have the cartography library available */
 #undef HAVE_CARTO
 
 /* True if we have the sincos function available */
 #undef HAVE_SINCOS
 
-/* True if we have the VICAR GDAL plugin available
+/* True if we have the VICAR GDAL plugin available */
 #undef HAVE_VICAR_GDALPLUGIN
 
    

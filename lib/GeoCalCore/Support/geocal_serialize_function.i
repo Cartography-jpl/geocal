@@ -1,15 +1,9 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
-%{
-  // Need this before anything else, so we get all the serialization
-  // code
-#define USE_BOOST_SERIALIZATON
-%}
 %include "common.i"
 
 %{
-#include "geocal_serialize.h"
 #include "geocal_serialize_function.h"
 %}
 %import "generic_object.i"

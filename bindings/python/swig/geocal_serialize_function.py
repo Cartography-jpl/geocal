@@ -123,7 +123,8 @@ def serialize_write(*args):
   """
     void GeoCal::serialize_write(const std::string &Fname, const boost::shared_ptr< GenericObject >
     &Obj)
-    Simple function that wraps around a xml archive.
+    Simple function that wraps around writing a boost::serialization to a
+    xml archive.
 
     We abstract this away to give a slightly cleaner interface, but mostly
     so we can later have the option of changing the underlying
@@ -137,7 +138,16 @@ def serialize_write(*args):
 
 def serialize_read_generic(*args):
   """
-    boost::shared_ptr<GenericObject> GeoCal::serialize_read_generic(const std::string &Fname)
+    boost::shared_ptr< GenericObject > GeoCal::serialize_read_generic(const std::string &Fname)
+    Simple function that wraps around reading a boost::serialization to a
+    xml archive.
+
+    We abstract this away to give a slightly cleaner interface, but mostly
+    so we can later have the option of changing the underlying
+    serialization. This is a more limited interface, we can only write or
+    read a single object. But this is what we primarily do anyways, and we
+    can easily create higher level container objects if we end up needing
+    multiple objects (e.g., can have a std::map if we end up needing it).
 
     """
   return _geocal_serialize_function.serialize_read_generic(*args)

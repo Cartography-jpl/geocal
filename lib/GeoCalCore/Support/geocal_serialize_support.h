@@ -14,11 +14,11 @@
 #define GEOCAL_NVP(x) BOOST_SERIALIZATION_NVP(x)
 #define GEOCAL_NVP_(x) boost::serialization::make_nvp(BOOST_PP_STRINGIZE(x), x ## _)
 #define GEOCAL_NVP2(x, y) boost::serialization::make_nvp(BOOST_PP_STRINGIZE(x), y)
-#define GEOCAL_IMPLEMENT(x) \
-BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal:: ## x); \
-template void x::serialize(boost::archive::polymorphic_oarchive& ar, \
+#define GEOCAL_IMPLEMENT(NAME) \
+BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal::NAME); \
+template void NAME::serialize(boost::archive::polymorphic_oarchive& ar, \
 				    const unsigned int version); \
-template void x::serialize(boost::archive::polymorphic_iarchive& ar, \
+template void NAME::serialize(boost::archive::polymorphic_iarchive& ar, \
 				    const unsigned int version);
 
 #endif

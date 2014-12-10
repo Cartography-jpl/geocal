@@ -13,7 +13,7 @@ void ImageCoordinate::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void ImageCoordinate::serialize(Archive & ar, const unsigned int version)
+void VicarImageCoordinate::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
   ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
@@ -21,7 +21,7 @@ void ImageCoordinate::serialize(Archive & ar, const unsigned int version)
 
 template<class Archive>
 void ImageCoordinateWithDerivative::serialize(Archive & ar, 
-					      const unsigned int version);
+					      const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
   //  ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);

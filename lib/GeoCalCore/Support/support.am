@@ -76,6 +76,7 @@ SWIG_SRC_HDF5 += @swigsrc@/hdf_file_wrap.cc
 # Test files
 EXTRA_DIST += @srcsupport@/unit_test_support.h
 EXTRA_DIST += @srcsupport@/global_fixture.h
+EXTRA_DIST += @srcsupport@/geocal_serialize_support.h
 geocal_test_all_SOURCES += @srcsupport@/global_fixture.cc
 geocal_test_all_SOURCES += @srcsupport@/global_fixture_default.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_exception_test.cc 

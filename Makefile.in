@@ -1836,8 +1836,10 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@libgeocal@/swig_type_mapper_base.h \
 	@libgeocal@/swig_type_mapper.h @libgeocal@/dummy.pdf \
 	@libgeocal@/geocal_doxygen.h @srcsupport@/unit_test_support.h \
-	@srcsupport@/global_fixture.h @srcinterface@/matcher_fixture.h \
-	$(patsubst %_wrap.cc, %.py, $(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
+	@srcsupport@/global_fixture.h \
+	@srcsupport@/geocal_serialize_support.h \
+	@srcinterface@/matcher_fixture.h $(patsubst %_wrap.cc, %.py, \
+	$(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
 	$(srcdir)/$(swigsrc)/*_wrap.h \
 	@geocalunittestdata@/mspi_config_file_test.txt \
 	@geocalunittestdata@/mspi_camera_test.config2 \

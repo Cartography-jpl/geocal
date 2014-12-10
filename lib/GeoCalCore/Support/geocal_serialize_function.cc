@@ -2,6 +2,7 @@
 #include "geocal_serialize_support.h"
 #include "geocal_exception.h"
 #include <fstream>
+#include <sstream>
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 #include <boost/archive/polymorphic_xml_iarchive.hpp>
 #include <boost/archive/polymorphic_xml_oarchive.hpp>
@@ -19,7 +20,6 @@ using namespace GeoCal;
 /// objects (e.g., can have a std::map if we end up needing it).
 //-----------------------------------------------------------------------
 
-
 void GeoCal::serialize_write(const std::string& Fname, 
 			     const boost::shared_ptr<GenericObject>& Obj)
 {
@@ -27,6 +27,23 @@ void GeoCal::serialize_write(const std::string& Fname,
   std::ofstream os(Fname.c_str());
   boost::archive::polymorphic_xml_oarchive oa(os);
   oa << boost::serialization::make_nvp("geocal_object", Obj);
+#else
+  throw Exception("GeoCal was not built with boost::serialization support");
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Variation of serialize_write that writes to a string instead of a file.
+//-----------------------------------------------------------------------
+
+std::string GeoCal::serialize_write_string
+(const boost::shared_ptr<GenericObject>& Obj)
+{
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  std::ostringstream os;
+  boost::archive::polymorphic_xml_oarchive oa(os);
+  oa << boost::serialization::make_nvp("geocal_object", Obj);
+  return os.str();
 #else
   throw Exception("GeoCal was not built with boost::serialization support");
 #endif
@@ -48,6 +65,25 @@ GeoCal::serialize_read_generic(const std::string& Fname)
 {
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
   std::ifstream is(Fname.c_str());
+  boost::archive::polymorphic_xml_iarchive ia(is);
+  boost::shared_ptr<GenericObject> obj;
+  ia >> boost::serialization::make_nvp("geocal_object", obj);
+  return obj;
+#else
+  throw Exception("GeoCal was not built with boost::serialization support");
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Variation of serialize_read_generic that takes a string rather
+/// than reading a file.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<GenericObject> 
+GeoCal::serialize_read_generic_string(const std::string& Data)
+{
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  std::istringstream is(Data);
   boost::archive::polymorphic_xml_iarchive ia(is);
   boost::shared_ptr<GenericObject> obj;
   ia >> boost::serialization::make_nvp("geocal_object", obj);

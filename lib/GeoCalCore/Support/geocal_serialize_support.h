@@ -21,6 +21,9 @@ template void NAME::serialize(boost::archive::polymorphic_oarchive& ar, \
 template void NAME::serialize(boost::archive::polymorphic_iarchive& ar, \
 				    const unsigned int version);
 
+#define GEOCAL_BASE(NAME,BASE) boost::serialization::void_cast_register<GeoCal::NAME, GeoCal::BASE>();
+#define GEOCAL_GENERIC_BASE(NAME) GEOCAL_BASE(NAME, GenericObject);
+
 #endif
 
 #endif

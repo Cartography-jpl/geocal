@@ -1,13 +1,12 @@
-#include <boost/archive/polymorphic_xml_iarchive.hpp>
-#include <boost/archive/polymorphic_xml_oarchive.hpp>
+// These inclusions are not generally needed to test serialization,
+// but we have extra tests for this particular class since we used
+// this for developing the serialization code
 #include <boost/archive/polymorphic_text_iarchive.hpp>
 #include <boost/archive/polymorphic_text_oarchive.hpp>
+#include "geocal_serialize_support.h"
+
 #include "unit_test_support.h"
 #include "image_coordinate.h"
-
-#ifdef HAVE_BOOST_SERIALIZATON
-#include "geocal_serialize_function.h"
-#endif
 #include <fstream>
 using namespace GeoCal;
 
@@ -35,21 +34,40 @@ BOOST_AUTO_TEST_CASE(vicar_image_coordinate)
   BOOST_CHECK(ic4 ==ic4expect);
 }
 
-BOOST_AUTO_TEST_CASE(serialize_function)
+BOOST_AUTO_TEST_CASE(serialize_function_file)
 {
-#ifdef HAVE_BOOST_SERIALIZATON
-  // Test the generic interface for reading and writing
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  // Test the generic interface for reading and writing a file. Note
+  // that most unit tests don't need to do this, we just have this
+  // here since ImageCoordinate is our first serialization test and we
+  // want to check everything.
   boost::shared_ptr<ImageCoordinate> ic(new ImageCoordinate(10, 20));
   serialize_write("image_coordinate_test.xml", ic);
   boost::shared_ptr<ImageCoordinate> ic2 = 
     serialize_read<ImageCoordinate>("image_coordinate_test.xml");
   BOOST_CHECK(*ic == *ic2);
-  //  int status = unlink("image_coordinate_test.xml");
+  int status = unlink("image_coordinate_test.xml");
   // Ignore status, ok if deleting fails.
 #endif
 }
 
 BOOST_AUTO_TEST_CASE(serialization)
+{
+  // This is the form that most classes should have for testing
+  // serialization.
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  boost::shared_ptr<ImageCoordinate> ic(new ImageCoordinate(10, 20));
+  std::string d = serialize_write_string(ic);
+  if(false)
+    // Can dump to screen, if we want to see the text
+    std::cerr << d;
+  boost::shared_ptr<ImageCoordinate> ic2 = 
+    serialize_read_string<ImageCoordinate>(d);
+  BOOST_CHECK(*ic == *ic2);
+#endif  
+}
+
+BOOST_AUTO_TEST_CASE(serialization2)
 {
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
   std::ostringstream os;
@@ -61,7 +79,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<GenericObject> ic4(new ImageCoordinate(6, 7));
   oa << GEOCAL_NVP(ic) << GEOCAL_NVP(ic2)
      << GEOCAL_NVP(ic3) << GEOCAL_NVP(ic4);
-  if(true)
+  if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << os.str();
   std::istringstream is(os.str());

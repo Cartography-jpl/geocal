@@ -6,7 +6,7 @@
 #include "geocal_internal_config.h"
 
 // Stuff needed for testing serialization.
-#include "geocal_serialize_support.h"
+#include "geocal_serialize_function.h"
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 #include <boost/archive/polymorphic_xml_iarchive.hpp>
 #include <boost/archive/polymorphic_xml_oarchive.hpp>

@@ -93,7 +93,7 @@ BOOST_AUTO_TEST_CASE(serialization_save)
   //
   // We only need to run this test to regenerate the xml code, the
   // load test can then run every time.
-  if(false)
+  if(true)
     return;
   std::string fname = test_data_dir() + "image_coordinate_test.xml";
   std::ofstream os(fname.c_str());

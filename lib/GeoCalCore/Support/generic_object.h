@@ -42,10 +42,7 @@ public:
 #ifdef HAVE_BOOST_SERIALIZATON2
   friend class boost::serialization::access;
    template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    // Nothing to do
-  }
+   void serialize(Archive & ar, const unsigned int version);
 #endif
 };
 

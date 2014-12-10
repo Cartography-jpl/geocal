@@ -5,6 +5,7 @@
 # you need to modify these.
 
 # Source files for library
+geocalinc_HEADERS+= @srcsupport@/geocal_config.h
 geocalinc_HEADERS+= @srcsupport@/constant.h
 geocalinc_HEADERS+= @srcsupport@/generic_object.h
 libgeocal_la_SOURCES+= @srcsupport@/generic_object.cc

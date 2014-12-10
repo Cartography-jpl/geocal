@@ -6,8 +6,20 @@
 #include <sstream>		
 using namespace GeoCal;
 
+template<class Archive>
+void ImageCoordinate::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
+  ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
+}
+
 BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal::ImageCoordinate);
 BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal::VicarImageCoordinate);
+
+template void ImageCoordinate::serialize(boost::archive::polymorphic_oarchive& ar, 
+				    const unsigned int version);
+template void ImageCoordinate::serialize(boost::archive::polymorphic_iarchive& ar, 
+				    const unsigned int version);
 
 //-----------------------------------------------------------------------
 ///  Print an ImageCoordinate to a stream

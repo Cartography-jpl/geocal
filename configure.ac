@@ -5,6 +5,7 @@ AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([config/m4])
 AC_CONFIG_FILES([script/setup_afids_python.csh script/setup_afids_python.sh])
 AC_CONFIG_FILES([lib/GeoCalCore/Support/global_fixture_default.cc])
+AC_CONFIG_HEADERS([lib/GeoCalCore/Support/geocal_config.h])
 # We have the top directory for GeoCal as a variable. This allows the
 # full AFIDS system to include this in a subdirectory. For this standalone
 # build, this is just "." relative to srcdir.
@@ -39,7 +40,10 @@ AC_MSPI_SHARED(optional, cannot_build, default_search)
 #=================================================================
 # Various thirdparty libraries.
 
-AC_BOOST(required, cannot_build, default_search)
+# There is a a series of bugs in older version of the boost serialization
+# library. So we require at least 1.46. This is the version we currently
+# distribute with afids.
+AC_BOOST(required, can_build, default_search, 1.46.0)
 AC_BLITZ(required, cannot_build, default_search)
 AC_GSL(required, cannot_build, default_search)
 # We'll make this optional at some point, but for now this is still required
@@ -115,6 +119,20 @@ LIBS="$LIBS $LIBM"
 AC_CHECK_FUNCS(sincos)
 
 #=================================================================
+# Turn off use of boost serialization of desired. Don't have a use
+# case for this yet, but it is easier to put in and not use than
+# to not have it and find we need it.
+
+AC_ARG_WITH([boost-serialization],
+            [AS_HELP_STRING([--without-boost-serialization],
+	      [Do not include code to support doing boost serialization with GeoCal objects])],
+	      [with_boost_serialization=no],
+              [with_boost_serialization=yes])
+if test "$with_boost_serialization" = "yes"; then
+    AC_DEFINE(GEOCAL_HAVE_BOOST_SERIALIZATION,,[Defined if we have boost serialization])
+fi
+
+#=================================================================
 # Option to bypass running doxygen to update documentation. This is useful
 # for a build environment that is used for development, but you'll want all
 # of your "real" build environments to also update the documentation.
@@ -160,6 +178,7 @@ LOC_MSG([  CXX compiler:                  ${CXX} ${CXXFLAGS}])
 LOC_MSG()
 LOC_MSG([  Generate SWIG wrappers:        ${generate_swig}])
 LOC_MSG([  Install documentation:         ${with_documentation}])
+LOC_MSG([  Include boost serialization:   ${with_boost_serialization}])
 LOC_MSG([  Have AFIDS Data:               ${have_afids_data}])
 LOC_MSG([  Have AFIDS:                    ${have_afids}])
 LOC_MSG([  Have Carto library:            ${have_carto}])

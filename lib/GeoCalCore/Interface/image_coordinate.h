@@ -58,11 +58,7 @@ private:
 #ifdef HAVE_BOOST_SERIALIZATON2
   friend class boost::serialization::access;
    template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
-  }
+   void serialize(Archive & ar, const unsigned int version);
 #endif
 };
 

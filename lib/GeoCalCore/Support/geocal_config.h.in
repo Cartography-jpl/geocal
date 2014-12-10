@@ -1,0 +1,2 @@
+/* Defined if we have boost serialization support built into GeoCal. */
+#undef GEOCAL_HAVE_BOOST_SERIALIZATION

@@ -983,6 +983,7 @@ with_carto
 with_python
 with_python_ogr
 with_swig
+with_boost_serialization
 with_documentation
 '
       ac_precious_vars='build_alias
@@ -1685,6 +1686,9 @@ Optional Packages:
                           MSPI-Shared (optional).
   --with-boost[=DIR]      use BOOST (default is yes if found) - it is possible
                           to specify the root directory for BOOST (optional).
+                          You can also specify "build" if you want to build
+                          your own local copy. See also THIRDPARTY variable
+                          described below.
   --with-blitz[=DIR]      use Blitz++ (default is yes if found) - it is
                           possible to specify the root directory for Blitz++
                           (optional).
@@ -1719,6 +1723,9 @@ Optional Packages:
                           SWIG wrappers can take a bit of time to create and
                           compile, so if you aren't working directly with them
                           it can be useful to turn off during development.
+  --without-boost-serialization
+                          Do not include code to support doing boost
+                          serialization with GeoCal objects
   --without-documentation Bypass running doxygen to update documentation. This
                           is useful for a build environment that is used for
                           development, but you'll want all of your "real"
@@ -2760,6 +2767,8 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 ac_config_files="$ac_config_files script/setup_afids_python.csh script/setup_afids_python.sh"
 
 ac_config_files="$ac_config_files lib/GeoCalCore/Support/global_fixture_default.cc"
+
+ac_config_headers="$ac_config_headers lib/GeoCalCore/Support/geocal_config.h"
 
 # We have the top directory for GeoCal as a variable. This allows the
 # full AFIDS system to include this in a subdirectory. For this standalone
@@ -17901,6 +17910,9 @@ fi
 #=================================================================
 # Various thirdparty libraries.
 
+# There is a a series of bugs in older version of the boost serialization
+# library. So we require at least 1.46. This is the version we currently
+# distribute with afids.
 
 
 have_boost="no"
@@ -17915,7 +17927,7 @@ if test "${with_boost+set}" = set; then :
         want_boost="yes"
         ac_boost_path=""
     elif test "$withval" = "build"; then
-        if test "cannot_build" != "can_build"; then
+        if test "can_build" != "can_build"; then
             as_fn_error $? "The \"build\" option is not supported in this particular package for --with-boost" "$LINENO" 5
         fi
         want_boost="yes"
@@ -17929,7 +17941,7 @@ if test "${with_boost+set}" = set; then :
 else
 
     want_boost="yes"
-    if test "cannot_build" = "can_build"; then
+    if test "can_build" = "can_build"; then
       if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
         want_boost="yes"
         build_boost="yes"
@@ -17942,8 +17954,18 @@ fi
 
 
 if test "x$want_boost" = "xyes"; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for BOOST library" >&5
-$as_echo_n "checking for BOOST library... " >&6; }
+        boost_lib_version_req=1.46.0
+        boost_lib_version_req_shorten=`expr $boost_lib_version_req : '\([0-9]*\.[0-9]*\)'`
+        boost_lib_version_req_major=`expr $boost_lib_version_req : '\([0-9]*\)'`
+        boost_lib_version_req_minor=`expr $boost_lib_version_req : '[0-9]*\.\([0-9]*\)'`
+        boost_lib_version_req_sub_minor=`expr $boost_lib_version_req : '[0-9]*\.[0-9]*\.\([0-9]*\)'`
+        if test "x$boost_lib_version_req_sub_minor" = "x" ; then
+           boost_lib_version_req_sub_minor="0"
+           fi
+        WANT_BOOST_VERSION=`expr $boost_lib_version_req_major \* 100000 \+  $boost_lib_version_req_minor \* 100 \+ $boost_lib_version_req_sub_minor`
+
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for BOOST library >= $boost_lib_version_req" >&5
+$as_echo_n "checking for BOOST library >= $boost_lib_version_req... " >&6; }
         succeeded=no
         if test "$ac_boost_path" != ""; then
             BOOST_CPPFLAGS="-I$ac_boost_path/include"
@@ -17958,6 +17980,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
                   fi
             done
         fi
+        boost_version_check_needed=no
         if test "$succeeded" = "yes" ; then
             boost_done=no
             if test "$build_boost" = "yes"; then
@@ -17979,6 +18002,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
                        BOOST_DATETIME_LIB="-lboost_date_time"
 		       BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                        BOOST_SERIALIZATION_LIB="-lboost_serialization"
+		       boost_version_check_needed=yes
                        boost_done=yes
                        break;
                    fi
@@ -17993,6 +18017,7 @@ $as_echo_n "checking for BOOST library... " >&6; }
                        BOOST_DATETIME_LIB="-lboost_date_time-mt"
                        BOOST_IOSTREAMS_LIB="-lboost_iostreams-mt"
                        BOOST_SERIALIZATION_LIB="-lboost_serialization-mt"
+		       boost_version_check_needed=yes
                        boost_done=yes
                        break;
                    fi
@@ -18000,8 +18025,63 @@ $as_echo_n "checking for BOOST library... " >&6; }
               fi
             done
             if test "$boost_done" = "no"; then
+	        boost_version_check_needed=no
                 succeeded=no
             fi
+        fi
+        if test "$boost_version_check_needed" = "yes"; then
+	   CPPFLAGS_SAVED="$CPPFLAGS"
+	   CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
+	   export CPPFLAGS
+
+ 	   LDFLAGS_SAVED="$LDFLAGS"
+ 	   LDFLAGS="$LDFLAGS $BOOST_LDFLAGS"
+ 	   export LDFLAGS
+
+
+ 	   ac_ext=cpp
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+ 	   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+ 	   #include <boost/version.hpp>
+
+int
+main ()
+{
+
+ 	   #if BOOST_VERSION >= $WANT_BOOST_VERSION
+ 	   // Everything is okay
+ 	   #else
+ 	   #  error Boost version is too old
+ 	   #endif
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+
+ 	   succeeded=yes
+
+else
+
+ 	   succeeded=no
+	   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: We found boost, but the version is too old" >&5
+$as_echo "$as_me: WARNING: We found boost, but the version is too old" >&2;}
+
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ 	   ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
         fi
 
         if test "$succeeded" != "yes" ; then
@@ -18047,7 +18127,12 @@ if test "required" = "required"; then
      as_fn_error $? "
 The BOOST library is required by GeoCal. Try specifying
 location using --with-boost if configure could't find the
-library. " "$LINENO" 5
+library. You can specify --with-boost=build if you want to build your
+own local copy of BOOST.
+
+You can also specify THIRDPARTY=build if you want to build a local
+copy of all the libraries/programs.
+" "$LINENO" 5
   fi
 fi
 
@@ -21314,6 +21399,25 @@ done
 
 
 #=================================================================
+# Turn off use of boost serialization of desired. Don't have a use
+# case for this yet, but it is easier to put in and not use than
+# to not have it and find we need it.
+
+
+# Check whether --with-boost-serialization was given.
+if test "${with_boost_serialization+set}" = set; then :
+  withval=$with_boost_serialization; with_boost_serialization=no
+else
+  with_boost_serialization=yes
+fi
+
+if test "$with_boost_serialization" = "yes"; then
+
+$as_echo "#define GEOCAL_HAVE_BOOST_SERIALIZATION /**/" >>confdefs.h
+
+fi
+
+#=================================================================
 # Option to bypass running doxygen to update documentation. This is useful
 # for a build environment that is used for development, but you'll want all
 # of your "real" build environments to also update the documentation.
@@ -21442,43 +21546,7 @@ test "x$prefix" = xNONE && prefix=$ac_default_prefix
 # Let make expand exec_prefix.
 test "x$exec_prefix" = xNONE && exec_prefix='${prefix}'
 
-# Transform confdefs.h into DEFS.
-# Protect against shell expansion while executing Makefile rules.
-# Protect against Makefile macro expansion.
-#
-# If the first sed substitution is executed (which looks for macros that
-# take arguments), then branch to the quote section.  Otherwise,
-# look for a macro that doesn't take arguments.
-ac_script='
-:mline
-/\\$/{
- N
- s,\\\n,,
- b mline
-}
-t clear
-:clear
-s/^[	 ]*#[	 ]*define[	 ][	 ]*\([^	 (][^	 (]*([^)]*)\)[	 ]*\(.*\)/-D\1=\2/g
-t quote
-s/^[	 ]*#[	 ]*define[	 ][	 ]*\([^	 ][^	 ]*\)[	 ]*\(.*\)/-D\1=\2/g
-t quote
-b any
-:quote
-s/[	 `~#$^&*(){}\\|;'\''"<>?]/\\&/g
-s/\[/\\&/g
-s/\]/\\&/g
-s/\$/$$/g
-H
-:any
-${
-	g
-	s/^\n//
-	s/\n/ /g
-	p
-}
-'
-DEFS=`sed -n "$ac_script" confdefs.h`
-
+DEFS=-DHAVE_CONFIG_H
 
 ac_libobjs=
 ac_ltlibobjs=
@@ -22156,11 +22224,15 @@ case $ac_config_files in *"
 "*) set x $ac_config_files; shift; ac_config_files=$*;;
 esac
 
+case $ac_config_headers in *"
+"*) set x $ac_config_headers; shift; ac_config_headers=$*;;
+esac
 
 
 cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
 # Files that config.status was made for.
 config_files="$ac_config_files"
+config_headers="$ac_config_headers"
 config_commands="$ac_config_commands"
 
 _ACEOF
@@ -22182,9 +22254,14 @@ Usage: $0 [OPTION]... [TAG]...
       --recheck    update $as_me by reconfiguring in the same conditions
       --file=FILE[:TEMPLATE]
                    instantiate the configuration file FILE
+      --header=FILE[:TEMPLATE]
+                   instantiate the configuration header FILE
 
 Configuration files:
 $config_files
+
+Configuration headers:
+$config_headers
 
 Configuration commands:
 $config_commands
@@ -22252,7 +22329,18 @@ do
     esac
     as_fn_append CONFIG_FILES " '$ac_optarg'"
     ac_need_defaults=false;;
-  --he | --h |  --help | --hel | -h )
+  --header | --heade | --head | --hea )
+    $ac_shift
+    case $ac_optarg in
+    *\'*) ac_optarg=`$as_echo "$ac_optarg" | sed "s/'/'\\\\\\\\''/g"` ;;
+    esac
+    as_fn_append CONFIG_HEADERS " '$ac_optarg'"
+    ac_need_defaults=false;;
+  --he | --h)
+    # Conflict between --help and --header
+    as_fn_error $? "ambiguous option: \`$1'
+Try \`$0 --help' for more information.";;
+  --help | --hel | -h )
     $as_echo "$ac_cs_usage"; exit ;;
   -q | -quiet | --quiet | --quie | --qui | --qu | --q \
   | -silent | --silent | --silen | --sile | --sil | --si | --s)
@@ -22693,6 +22781,7 @@ do
     "script/setup_afids_python.csh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_python.csh" ;;
     "script/setup_afids_python.sh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_python.sh" ;;
     "lib/GeoCalCore/Support/global_fixture_default.cc") CONFIG_FILES="$CONFIG_FILES lib/GeoCalCore/Support/global_fixture_default.cc" ;;
+    "lib/GeoCalCore/Support/geocal_config.h") CONFIG_HEADERS="$CONFIG_HEADERS lib/GeoCalCore/Support/geocal_config.h" ;;
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
@@ -22708,6 +22797,7 @@ done
 # bizarre bug on SunOS 4.1.3.
 if $ac_need_defaults; then
   test "${CONFIG_FILES+set}" = set || CONFIG_FILES=$config_files
+  test "${CONFIG_HEADERS+set}" = set || CONFIG_HEADERS=$config_headers
   test "${CONFIG_COMMANDS+set}" = set || CONFIG_COMMANDS=$config_commands
 fi
 
@@ -22896,8 +22986,116 @@ fi
 cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
 fi # test -n "$CONFIG_FILES"
 
+# Set up the scripts for CONFIG_HEADERS section.
+# No need to generate them if there are no CONFIG_HEADERS.
+# This happens for instance with `./config.status Makefile'.
+if test -n "$CONFIG_HEADERS"; then
+cat >"$ac_tmp/defines.awk" <<\_ACAWK ||
+BEGIN {
+_ACEOF
 
-eval set X "  :F $CONFIG_FILES      :C $CONFIG_COMMANDS"
+# Transform confdefs.h into an awk script `defines.awk', embedded as
+# here-document in config.status, that substitutes the proper values into
+# config.h.in to produce config.h.
+
+# Create a delimiter string that does not exist in confdefs.h, to ease
+# handling of long lines.
+ac_delim='%!_!# '
+for ac_last_try in false false :; do
+  ac_tt=`sed -n "/$ac_delim/p" confdefs.h`
+  if test -z "$ac_tt"; then
+    break
+  elif $ac_last_try; then
+    as_fn_error $? "could not make $CONFIG_HEADERS" "$LINENO" 5
+  else
+    ac_delim="$ac_delim!$ac_delim _$ac_delim!! "
+  fi
+done
+
+# For the awk script, D is an array of macro values keyed by name,
+# likewise P contains macro parameters if any.  Preserve backslash
+# newline sequences.
+
+ac_word_re=[_$as_cr_Letters][_$as_cr_alnum]*
+sed -n '
+s/.\{148\}/&'"$ac_delim"'/g
+t rset
+:rset
+s/^[	 ]*#[	 ]*define[	 ][	 ]*/ /
+t def
+d
+:def
+s/\\$//
+t bsnl
+s/["\\]/\\&/g
+s/^ \('"$ac_word_re"'\)\(([^()]*)\)[	 ]*\(.*\)/P["\1"]="\2"\
+D["\1"]=" \3"/p
+s/^ \('"$ac_word_re"'\)[	 ]*\(.*\)/D["\1"]=" \2"/p
+d
+:bsnl
+s/["\\]/\\&/g
+s/^ \('"$ac_word_re"'\)\(([^()]*)\)[	 ]*\(.*\)/P["\1"]="\2"\
+D["\1"]=" \3\\\\\\n"\\/p
+t cont
+s/^ \('"$ac_word_re"'\)[	 ]*\(.*\)/D["\1"]=" \2\\\\\\n"\\/p
+t cont
+d
+:cont
+n
+s/.\{148\}/&'"$ac_delim"'/g
+t clear
+:clear
+s/\\$//
+t bsnlc
+s/["\\]/\\&/g; s/^/"/; s/$/"/p
+d
+:bsnlc
+s/["\\]/\\&/g; s/^/"/; s/$/\\\\\\n"\\/p
+b cont
+' <confdefs.h | sed '
+s/'"$ac_delim"'/"\\\
+"/g' >>$CONFIG_STATUS || ac_write_fail=1
+
+cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
+  for (key in D) D_is_set[key] = 1
+  FS = ""
+}
+/^[\t ]*#[\t ]*(define|undef)[\t ]+$ac_word_re([\t (]|\$)/ {
+  line = \$ 0
+  split(line, arg, " ")
+  if (arg[1] == "#") {
+    defundef = arg[2]
+    mac1 = arg[3]
+  } else {
+    defundef = substr(arg[1], 2)
+    mac1 = arg[2]
+  }
+  split(mac1, mac2, "(") #)
+  macro = mac2[1]
+  prefix = substr(line, 1, index(line, defundef) - 1)
+  if (D_is_set[macro]) {
+    # Preserve the white space surrounding the "#".
+    print prefix "define", macro P[macro] D[macro]
+    next
+  } else {
+    # Replace #undef with comments.  This is necessary, for example,
+    # in the case of _POSIX_SOURCE, which is predefined and required
+    # on some systems where configure will not decide to define it.
+    if (defundef == "undef") {
+      print "/*", prefix defundef, macro, "*/"
+      next
+    }
+  }
+}
+{ print }
+_ACAWK
+_ACEOF
+cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
+  as_fn_error $? "could not setup config headers machinery" "$LINENO" 5
+fi # test -n "$CONFIG_HEADERS"
+
+
+eval set X "  :F $CONFIG_FILES  :H $CONFIG_HEADERS    :C $CONFIG_COMMANDS"
 shift
 for ac_tag
 do
@@ -23116,7 +23314,64 @@ which seems to be undefined.  Please make sure it is defined" >&2;}
   esac \
   || as_fn_error $? "could not create $ac_file" "$LINENO" 5
  ;;
-
+  :H)
+  #
+  # CONFIG_HEADER
+  #
+  if test x"$ac_file" != x-; then
+    {
+      $as_echo "/* $configure_input  */" \
+      && eval '$AWK -f "$ac_tmp/defines.awk"' "$ac_file_inputs"
+    } >"$ac_tmp/config.h" \
+      || as_fn_error $? "could not create $ac_file" "$LINENO" 5
+    if diff "$ac_file" "$ac_tmp/config.h" >/dev/null 2>&1; then
+      { $as_echo "$as_me:${as_lineno-$LINENO}: $ac_file is unchanged" >&5
+$as_echo "$as_me: $ac_file is unchanged" >&6;}
+    else
+      rm -f "$ac_file"
+      mv "$ac_tmp/config.h" "$ac_file" \
+	|| as_fn_error $? "could not create $ac_file" "$LINENO" 5
+    fi
+  else
+    $as_echo "/* $configure_input  */" \
+      && eval '$AWK -f "$ac_tmp/defines.awk"' "$ac_file_inputs" \
+      || as_fn_error $? "could not create -" "$LINENO" 5
+  fi
+# Compute "$ac_file"'s index in $config_headers.
+_am_arg="$ac_file"
+_am_stamp_count=1
+for _am_header in $config_headers :; do
+  case $_am_header in
+    $_am_arg | $_am_arg:* )
+      break ;;
+    * )
+      _am_stamp_count=`expr $_am_stamp_count + 1` ;;
+  esac
+done
+echo "timestamp for $_am_arg" >`$as_dirname -- "$_am_arg" ||
+$as_expr X"$_am_arg" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
+	 X"$_am_arg" : 'X\(//\)[^/]' \| \
+	 X"$_am_arg" : 'X\(//\)$' \| \
+	 X"$_am_arg" : 'X\(/\)' \| . 2>/dev/null ||
+$as_echo X"$_am_arg" |
+    sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)[^/].*/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\).*/{
+	    s//\1/
+	    q
+	  }
+	  s/.*/./; q'`/stamp-h$_am_stamp_count
+ ;;
 
   :C)  { $as_echo "$as_me:${as_lineno-$LINENO}: executing $ac_file commands" >&5
 $as_echo "$as_me: executing $ac_file commands" >&6;}
@@ -24096,6 +24351,9 @@ echo "  Generate SWIG wrappers:        ${generate_swig}"
 
 
 echo "  Install documentation:         ${with_documentation}"
+
+
+echo "  Include boost serialization:   ${with_boost_serialization}"
 
 
 echo "  Have AFIDS Data:               ${have_afids_data}"

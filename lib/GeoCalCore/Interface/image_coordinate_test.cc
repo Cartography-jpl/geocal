@@ -129,7 +129,7 @@ BOOST_AUTO_TEST_CASE(serialization_text)
   // Don't normally need a separate text serialization test, but this
   // is our first serialization so make sure everything works ok.
   std::ostringstream os;
-  boost::archive::text_oarchive oa(os);
+  boost::archive::polymorphic_text_oarchive oa(os);
 
   ImageCoordinate ic(1, 2);
   ImageCoordinate ic2(2, 3);
@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_CASE(serialization_text)
     // Can dump to screen, if we want to see the text
     std::cerr << os.str();
   std::istringstream is(os.str());
-  boost::archive::text_iarchive ia(is);
+  boost::archive::polymorphic_text_iarchive ia(is);
   ImageCoordinate icr, ic2r;
   ia >> GEOCAL_NVP(icr) >> GEOCAL_NVP(ic2r);
   BOOST_CHECK(ic ==icr);

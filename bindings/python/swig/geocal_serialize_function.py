@@ -119,6 +119,14 @@ def _new_from_set(cls, version, *args):
     return inst
 
 
+def have_serialize_supported():
+  """
+    bool GeoCal::have_serialize_supported()
+    Return true if we were built with serialization support, false
+    otherwise. 
+    """
+  return _geocal_serialize_function.have_serialize_supported()
+
 def serialize_write(*args):
   """
     void GeoCal::serialize_write(const std::string &Fname, const boost::shared_ptr< GenericObject >
@@ -136,6 +144,14 @@ def serialize_write(*args):
     """
   return _geocal_serialize_function.serialize_write(*args)
 
+def serialize_write_string(*args):
+  """
+    std::string GeoCal::serialize_write_string(const boost::shared_ptr< GenericObject > &Obj)
+    Variation of serialize_write that writes to a string instead of a
+    file. 
+    """
+  return _geocal_serialize_function.serialize_write_string(*args)
+
 def serialize_read_generic(*args):
   """
     boost::shared_ptr< GenericObject > GeoCal::serialize_read_generic(const std::string &Fname)
@@ -151,5 +167,13 @@ def serialize_read_generic(*args):
 
     """
   return _geocal_serialize_function.serialize_read_generic(*args)
+
+def serialize_read_generic_string(*args):
+  """
+    boost::shared_ptr< GenericObject > GeoCal::serialize_read_generic_string(const std::string &Data)
+    Variation of serialize_read_generic that takes a string rather than
+    reading a file. 
+    """
+  return _geocal_serialize_function.serialize_read_generic_string(*args)
 
 

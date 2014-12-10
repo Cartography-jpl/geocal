@@ -1,16 +1,9 @@
 #ifndef UNIT_TEST_SUPPORT_H
 #define UNIT_TEST_SUPPORT_H
 #include "global_fixture.h"
+#include "geocal_serialize_function.h"
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
-#include "geocal_internal_config.h"
-
-// Stuff needed for testing serialization.
-#include "geocal_serialize_function.h"
-#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-#include <boost/archive/polymorphic_xml_iarchive.hpp>
-#include <boost/archive/polymorphic_xml_oarchive.hpp>
-#endif
 
 //-----------------------------------------------------------------------
 /// Check for two matrixes being equal

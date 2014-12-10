@@ -5,6 +5,7 @@
 #include <boost/shared_ptr.hpp>
 
 namespace GeoCal {
+bool have_serialize_supported();
 void serialize_write(const std::string& Fname, 
 		     const boost::shared_ptr<GenericObject>& Obj);
 

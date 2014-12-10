@@ -10,6 +10,20 @@
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
+/// Return true if we were built with serialization support, false
+/// otherwise. 
+//-----------------------------------------------------------------------
+
+bool GeoCal::have_serialize_supported()
+{
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  return true;
+#else
+  return false;
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Simple function that wraps around writing a boost::serialization
 /// to a xml archive. We abstract this
 /// away to give a slightly cleaner interface, but mostly so we can 

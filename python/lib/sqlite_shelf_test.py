@@ -2,7 +2,7 @@ from nose.tools import *
 from sqlite_shelf import *
 import os
 import time
-from geocal_swig import ImageCoordinate
+from geocal_swig import ImageCoordinate, have_serialize_supported
 
 def test_sqlite_shelf():
     try:
@@ -52,6 +52,8 @@ def test_read_write_shelf():
     assert read_shelve("sqlite_shelf.db:value2") == [1, 2, 3, "blah"]
 
 def test_read_write_xml():
+    if(not have_serialize_supported()):
+        raise SkipTest
     try:
         os.remove("sqlite_shelf_test.xml")
     except OSError as exc:

@@ -135,6 +135,7 @@ geocal_test_all_SOURCES+= @srcinterface@/frame_coordinate_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/time_table_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/camera_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/image_coordinate_test.cc
+geocal_test_all_SOURCES+= @srcinterface@/image_coordinate_test_support.cc
 geocal_test_all_SOURCES+= @srcinterface@/coordinate_converter_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/simple_dem_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/look_vector_test.cc

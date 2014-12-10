@@ -3,12 +3,32 @@
 // this for developing the serialization code
 #include <boost/archive/polymorphic_text_iarchive.hpp>
 #include <boost/archive/polymorphic_text_oarchive.hpp>
+#include <boost/archive/polymorphic_xml_iarchive.hpp>
+#include <boost/archive/polymorphic_xml_oarchive.hpp>
 #include "geocal_serialize_support.h"
 
 #include "unit_test_support.h"
 #include "image_coordinate.h"
 #include <fstream>
 using namespace GeoCal;
+
+// Create a new object to serialize, and make sure this gets
+// registered in.
+namespace GeoCal {
+class FakeClass : public GeoCal::GenericObject {
+public:
+  FakeClass(int I1, int I2) : i1(I1), i2(I2) {}
+  virtual ~FakeClass() {}
+  int i1, i2;
+private:
+  FakeClass() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
+}
+
+GEOCAL_EXPORT_KEY(FakeClass);
 
 BOOST_FIXTURE_TEST_SUITE(image_coordinate, GlobalFixture)
 
@@ -64,6 +84,23 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<ImageCoordinate> ic2 = 
     serialize_read_string<ImageCoordinate>(d);
   BOOST_CHECK(*ic == *ic2);
+#endif  
+}
+
+BOOST_AUTO_TEST_CASE(serialization_new_class)
+{
+  // Check that we can register and use a class defined outside of
+  // the GeoCal library
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  boost::shared_ptr<FakeClass> fc(new FakeClass(10, 20));
+  std::string d = serialize_write_string(fc);
+  if(false)
+    // Can dump to screen, if we want to see the text
+    std::cerr << d;
+  boost::shared_ptr<FakeClass> fc2 = 
+    serialize_read_string<FakeClass>(d);
+  BOOST_CHECK_EQUAL(fc->i1, fc2->i1);
+  BOOST_CHECK_EQUAL(fc->i2, fc2->i2);
 #endif  
 }
 

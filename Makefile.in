@@ -898,6 +898,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcinterface@/time_table_test.cc \
 	@srcinterface@/camera_test.cc \
 	@srcinterface@/image_coordinate_test.cc \
+	@srcinterface@/image_coordinate_test_support.cc \
 	@srcinterface@/coordinate_converter_test.cc \
 	@srcinterface@/simple_dem_test.cc \
 	@srcinterface@/look_vector_test.cc \
@@ -1032,6 +1033,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcinterface@/geocal_test_all-time_table_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-camera_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-image_coordinate_test.$(OBJEXT) \
+	@srcinterface@/geocal_test_all-image_coordinate_test_support.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-coordinate_converter_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-simple_dem_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-look_vector_test.$(OBJEXT) \
@@ -2336,6 +2338,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcinterface@/time_table_test.cc \
 	@srcinterface@/camera_test.cc \
 	@srcinterface@/image_coordinate_test.cc \
+	@srcinterface@/image_coordinate_test_support.cc \
 	@srcinterface@/coordinate_converter_test.cc \
 	@srcinterface@/simple_dem_test.cc \
 	@srcinterface@/look_vector_test.cc \
@@ -3521,6 +3524,9 @@ clean-checkPROGRAMS:
 @srcinterface@/geocal_test_all-image_coordinate_test.$(OBJEXT):  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/geocal_test_all-image_coordinate_test_support.$(OBJEXT):  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/geocal_test_all-coordinate_converter_test.$(OBJEXT):  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
@@ -4009,6 +4015,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-ground_coordinate_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-ground_mask_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-image_coordinate_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-image_coordinate_test_support.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-image_mask_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-ipi_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-look_vector_test.Po@am__quote@
@@ -6610,6 +6617,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/image_coordinate_test.cc' object='@srcinterface@/geocal_test_all-image_coordinate_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/geocal_test_all-image_coordinate_test.obj `if test -f '@srcinterface@/image_coordinate_test.cc'; then $(CYGPATH_W) '@srcinterface@/image_coordinate_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcinterface@/image_coordinate_test.cc'; fi`
+
+@srcinterface@/geocal_test_all-image_coordinate_test_support.o: @srcinterface@/image_coordinate_test_support.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/geocal_test_all-image_coordinate_test_support.o -MD -MP -MF @srcinterface@/$(DEPDIR)/geocal_test_all-image_coordinate_test_support.Tpo -c -o @srcinterface@/geocal_test_all-image_coordinate_test_support.o `test -f '@srcinterface@/image_coordinate_test_support.cc' || echo '$(srcdir)/'`@srcinterface@/image_coordinate_test_support.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/geocal_test_all-image_coordinate_test_support.Tpo @srcinterface@/$(DEPDIR)/geocal_test_all-image_coordinate_test_support.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/image_coordinate_test_support.cc' object='@srcinterface@/geocal_test_all-image_coordinate_test_support.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/geocal_test_all-image_coordinate_test_support.o `test -f '@srcinterface@/image_coordinate_test_support.cc' || echo '$(srcdir)/'`@srcinterface@/image_coordinate_test_support.cc
+
+@srcinterface@/geocal_test_all-image_coordinate_test_support.obj: @srcinterface@/image_coordinate_test_support.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/geocal_test_all-image_coordinate_test_support.obj -MD -MP -MF @srcinterface@/$(DEPDIR)/geocal_test_all-image_coordinate_test_support.Tpo -c -o @srcinterface@/geocal_test_all-image_coordinate_test_support.obj `if test -f '@srcinterface@/image_coordinate_test_support.cc'; then $(CYGPATH_W) '@srcinterface@/image_coordinate_test_support.cc'; else $(CYGPATH_W) '$(srcdir)/@srcinterface@/image_coordinate_test_support.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/geocal_test_all-image_coordinate_test_support.Tpo @srcinterface@/$(DEPDIR)/geocal_test_all-image_coordinate_test_support.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/image_coordinate_test_support.cc' object='@srcinterface@/geocal_test_all-image_coordinate_test_support.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/geocal_test_all-image_coordinate_test_support.obj `if test -f '@srcinterface@/image_coordinate_test_support.cc'; then $(CYGPATH_W) '@srcinterface@/image_coordinate_test_support.cc'; else $(CYGPATH_W) '$(srcdir)/@srcinterface@/image_coordinate_test_support.cc'; fi`
 
 @srcinterface@/geocal_test_all-coordinate_converter_test.o: @srcinterface@/coordinate_converter_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/geocal_test_all-coordinate_converter_test.o -MD -MP -MF @srcinterface@/$(DEPDIR)/geocal_test_all-coordinate_converter_test.Tpo -c -o @srcinterface@/geocal_test_all-coordinate_converter_test.o `test -f '@srcinterface@/coordinate_converter_test.cc' || echo '$(srcdir)/'`@srcinterface@/coordinate_converter_test.cc

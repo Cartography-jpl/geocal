@@ -1,3 +1,4 @@
+#include "geocal_internal_config.h"
 #include "geocal_time.h"
 #ifdef HAVE_SPICE
 #include "spice_helper.h"

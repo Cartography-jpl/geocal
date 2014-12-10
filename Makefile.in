@@ -132,6 +132,7 @@ DIST_COMMON = $(srcdir)/common.am $(srcdir)/include.am \
 	ChangeLog $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
 	$(top_srcdir)/lib/GeoCalCore/Support/geocal_config.h.in \
+	$(top_srcdir)/lib/GeoCalCore/Support/geocal_internal_config.h.in \
 	$(top_srcdir)/script/setup_afids_python.csh.in \
 	$(top_srcdir)/script/setup_afids_python.sh.in \
 	$(top_srcdir)/lib/GeoCalCore/Support/global_fixture_default.cc.in \
@@ -309,7 +310,8 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER =  \
-	$(top_builddir)/lib/GeoCalCore/Support/geocal_config.h
+	$(top_builddir)/lib/GeoCalCore/Support/geocal_config.h \
+	$(top_builddir)/lib/GeoCalCore/Support/geocal_internal_config.h
 CONFIG_CLEAN_FILES = script/setup_afids_python.csh \
 	script/setup_afids_python.sh \
 	lib/GeoCalCore/Support/global_fixture_default.cc
@@ -1930,11 +1932,12 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 pkgconfig_DATA = 
 
 # Allow fils to be include in other directories
+# To pick up generated geocal_config.h file
 AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 	-I$(srcdir)/@srcsupport@ -I$(srcdir)/@srcsupport@/boost \
-	-I$(srcdir)/@srcinterface@ -I$(srcdir)/@srcimplementation@ \
-	-I$(srcdir)/@srccartlab@ -I$(srcdir)/@srcmspi@ \
-	-I$(srcdir)/@srcserialize@
+	-I@srcsupport@ -I$(srcdir)/@srcinterface@ \
+	-I$(srcdir)/@srcimplementation@ -I$(srcdir)/@srccartlab@ \
+	-I$(srcdir)/@srcmspi@ -I$(srcdir)/@srcserialize@
 
 #=================================================================
 # Some flags needed for GCC compilers.
@@ -2570,8 +2573,16 @@ $(top_srcdir)/lib/GeoCalCore/Support/geocal_config.h.in: @MAINTAINER_MODE_TRUE@ 
 	rm -f lib/GeoCalCore/Support/stamp-h1
 	touch $@
 
+lib/GeoCalCore/Support/geocal_internal_config.h: lib/GeoCalCore/Support/stamp-h2
+	@if test ! -f $@; then rm -f lib/GeoCalCore/Support/stamp-h2; else :; fi
+	@if test ! -f $@; then $(MAKE) $(AM_MAKEFLAGS) lib/GeoCalCore/Support/stamp-h2; else :; fi
+
+lib/GeoCalCore/Support/stamp-h2: $(top_srcdir)/lib/GeoCalCore/Support/geocal_internal_config.h.in $(top_builddir)/config.status
+	@rm -f lib/GeoCalCore/Support/stamp-h2
+	cd $(top_builddir) && $(SHELL) ./config.status lib/GeoCalCore/Support/geocal_internal_config.h
+
 distclean-hdr:
-	-rm -f lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/stamp-h1
+	-rm -f lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/stamp-h1 lib/GeoCalCore/Support/geocal_internal_config.h lib/GeoCalCore/Support/stamp-h2
 script/setup_afids_python.csh: $(top_builddir)/config.status $(top_srcdir)/script/setup_afids_python.csh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 script/setup_afids_python.sh: $(top_builddir)/config.status $(top_srcdir)/script/setup_afids_python.sh.in

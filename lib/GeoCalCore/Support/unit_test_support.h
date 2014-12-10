@@ -3,18 +3,13 @@
 #include "global_fixture.h"
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
+#include "geocal_internal_config.h"
 
 // Stuff needed for testing serialization.
-// Have this in place in case we want to make this conditional
-//#define HAVE_BOOST_SERIALIZATON 
-#ifdef HAVE_BOOST_SERIALIZATON
-#define USE_BOOST_SERIALIZATON
-
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/shared_ptr.hpp>
-
+#include "geocal_serialize_support.h"
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+#include <boost/archive/polymorphic_xml_iarchive.hpp>
+#include <boost/archive/polymorphic_xml_oarchive.hpp>
 #endif
 
 //-----------------------------------------------------------------------

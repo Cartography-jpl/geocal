@@ -1,30 +1,18 @@
 #ifndef GENERIC_OBJECT_H
 #define GENERIC_OBJECT_H
-// Add boost serialization, if available. We support the polymorphic
-// archives only, so you need to use an archive derived from
-// this. Note that all the standard boost archives supplied by boost
-// have polymorphic versions.
-// Temp
-//#define HAVE_BOOST_SERIALIZATON2
-#ifdef HAVE_BOOST_SERIALIZATON2
+#include "geocal_config.h"
+
 namespace boost {
-namespace archive {
+  namespace serialization {
+    class access;
+  }
+}
 
-class polymorphic_iarchive;
-class polymorphic_oarchive;
-
-} // namespace archive
-} // namespace boost
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 #include <boost/serialization/export.hpp>
-#include <boost/serialization/access.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/shared_ptr.hpp>
-
-// Do this a lot, so give a shortcut for this
-#define GEOCAL_NVP(x) BOOST_SERIALIZATION_NVP(x)
-#define GEOCAL_NVP_(x) boost::serialization::make_nvp(BOOST_PP_STRINGIZE(x), x ## _)
-#define GEOCAL_NVP2(x, y) boost::serialization::make_nvp(BOOST_PP_STRINGIZE(x), y)
-
+#define GEOCAL_EXPORT_KEY(x) BOOST_CLASS_EXPORT_KEY(GeoCal:: ## x)
+#else
+#define GEOCAL_EXPORT_KEY(x) /* Noop */
 #endif
 
 
@@ -39,17 +27,14 @@ public:
   // Have a virtual member function, which forces RTTI information to
   // be available.
   virtual ~GenericObject() {}
-#ifdef HAVE_BOOST_SERIALIZATON2
+private:
   friend class boost::serialization::access;
    template<class Archive>
    void serialize(Archive & ar, const unsigned int version);
-#endif
 };
 
 }
 
-#ifdef HAVE_BOOST_SERIALIZATON2
-BOOST_CLASS_EXPORT_KEY(GeoCal::GenericObject)
-#endif
+GEOCAL_EXPORT_KEY(GenericObject);
 
 #endif

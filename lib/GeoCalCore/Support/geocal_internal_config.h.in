@@ -1,0 +1,40 @@
+// Internal defines, used to control compilation. This shouldn't be
+// included by external programs.
+
+/* Defined if we have GDAL. We actually currently *require* GDAL,
+   because lots of our unit tests depend on this library. But there
+   are various hooks in place to make this optional if we ever decide
+   that we need to do that. */
+#undef HAVE_GDAL
+
+/* Defined if have the VICAR Run Time Library available. Even without
+   this we can read most VICAR format files using the VicarLiteFile
+   that implements a simpler reading of these files. */
+#undef HAVE_VICAR_RTL
+
+/* True if we have HDF 5 available */
+#undef HAVE_HDF5
+
+/* True if we have the MSPI Shared library available */
+#undef HAVE_MSPI_SHARED
+
+/* True if we have the SPICE library available */
+#undef HAVE_SPICE
+
+/* True if we have the SDP toolkit available as an alternative to
+   SPICE */
+#undef HAVE_SDP
+
+/* True if we have the FFTW library available *
+#undef HAVE_FFTW
+
+/* True if we have the cartography library available
+#undef HAVE_CARTO
+
+/* True if we have the sincos function available */
+#undef HAVE_SINCOS
+
+/* True if we have the VICAR GDAL plugin available
+#undef HAVE_VICAR_GDALPLUGIN
+
+   

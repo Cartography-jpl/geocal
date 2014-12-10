@@ -1,3 +1,4 @@
+#include "geocal_internal_config.h"
 #include "air_mspi_igc.h"
 #include "mspi_config_file.h"
 #include "mspi_camera.h"

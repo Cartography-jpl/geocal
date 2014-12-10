@@ -2768,7 +2768,7 @@ ac_config_files="$ac_config_files script/setup_afids_python.csh script/setup_afi
 
 ac_config_files="$ac_config_files lib/GeoCalCore/Support/global_fixture_default.cc"
 
-ac_config_headers="$ac_config_headers lib/GeoCalCore/Support/geocal_config.h"
+ac_config_headers="$ac_config_headers lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/geocal_internal_config.h"
 
 # We have the top directory for GeoCal as a variable. This allows the
 # full AFIDS system to include this in a subdirectory. For this standalone
@@ -22782,6 +22782,7 @@ do
     "script/setup_afids_python.sh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_python.sh" ;;
     "lib/GeoCalCore/Support/global_fixture_default.cc") CONFIG_FILES="$CONFIG_FILES lib/GeoCalCore/Support/global_fixture_default.cc" ;;
     "lib/GeoCalCore/Support/geocal_config.h") CONFIG_HEADERS="$CONFIG_HEADERS lib/GeoCalCore/Support/geocal_config.h" ;;
+    "lib/GeoCalCore/Support/geocal_internal_config.h") CONFIG_HEADERS="$CONFIG_HEADERS lib/GeoCalCore/Support/geocal_internal_config.h" ;;
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;

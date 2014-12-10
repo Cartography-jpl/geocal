@@ -102,7 +102,8 @@ if HAVE_HDF5
 geocal_test_all_SOURCES+= @srcsupport@/hdf_file_test.cc 
 endif
 AM_CPPFLAGS+= -I$(srcdir)/@srcsupport@ -I$(srcdir)/@srcsupport@/boost
-
+# To pick up generated geocal_config.h file
+AM_CPPFLAGS+= -I@srcsupport@
 
 # Allow searchs for .i, .h. and .cc files in this directory
 vpath %.cc $(srcdir)/@srcsupport@

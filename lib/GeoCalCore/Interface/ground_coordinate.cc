@@ -1,3 +1,4 @@
+#include "geocal_internal_config.h"
 #include "ground_coordinate.h"
 #include <cmath>
 #ifdef HAVE_SPICE

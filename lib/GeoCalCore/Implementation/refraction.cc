@@ -1,3 +1,4 @@
+#include "geocal_internal_config.h"
 #include "refraction.h"
 #include "constant.h"
 #include "ecr.h"

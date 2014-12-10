@@ -1,10 +1,16 @@
-#define HAVE_BOOST_SERIALIZATON2
-#include <boost/archive/polymorphic_iarchive.hpp>
-#include <boost/archive/polymorphic_oarchive.hpp>
+#include "geocal_serialize_support.h"
 #include "image_coordinate.h"	
 #include <cmath>		
 #include <sstream>		
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void ImageCoordinate::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
+  ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
+}
 
 template<class Archive>
 void ImageCoordinate::serialize(Archive & ar, const unsigned int version)
@@ -13,13 +19,18 @@ void ImageCoordinate::serialize(Archive & ar, const unsigned int version)
   ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
 }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal::ImageCoordinate);
-BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal::VicarImageCoordinate);
+template<class Archive>
+void ImageCoordinateWithDerivative::serialize(Archive & ar, 
+					      const unsigned int version);
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
+  //  ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
+}
 
-template void ImageCoordinate::serialize(boost::archive::polymorphic_oarchive& ar, 
-				    const unsigned int version);
-template void ImageCoordinate::serialize(boost::archive::polymorphic_iarchive& ar, 
-				    const unsigned int version);
+GEOCAL_IMPLEMENT(ImageCoordinate);
+GEOCAL_IMPLEMENT(VicarImageCoordinate);
+GEOCAL_IMPLEMENT(ImageCoordinateWithDerivative);
+#endif
 
 //-----------------------------------------------------------------------
 ///  Print an ImageCoordinate to a stream

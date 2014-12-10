@@ -2,8 +2,8 @@
 #define IMAGE_COORDINATE_H
 #include "printable.h"
 #include "auto_derivative.h"
-
 #include <iostream>		// Definition of ostream.
+
 namespace GeoCal {
   class VicarImageCoordinate;
 
@@ -55,11 +55,9 @@ public:
   double sample;
   void print(std::ostream& Os) const;
 private:
-#ifdef HAVE_BOOST_SERIALIZATON2
   friend class boost::serialization::access;
    template<class Archive>
    void serialize(Archive & ar, const unsigned int version);
-#endif
 };
 
 bool operator==(const ImageCoordinate& C1, const ImageCoordinate& C2);
@@ -118,15 +116,9 @@ public:
   double sample;
   void print(std::ostream& Os) const;
 private:
-#ifdef HAVE_BOOST_SERIALIZATON2
   friend class boost::serialization::access;
    template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
-  }
-#endif
+   void serialize(Archive & ar, const unsigned int version);
 };
 
 bool operator==(const VicarImageCoordinate& C1, const VicarImageCoordinate& C2);
@@ -184,22 +176,15 @@ public:
   AutoDerivative<double> sample;
   void print(std::ostream& Os) const;
 private:
-#ifdef USE_BOOST_SERIALIZATON
   friend class boost::serialization::access;
    template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
-  }
-#endif
+   void serialize(Archive & ar, const unsigned int version);
 };
 
 }
 
-#ifdef HAVE_BOOST_SERIALIZATON2
-BOOST_CLASS_EXPORT_KEY(GeoCal::ImageCoordinate)
-BOOST_CLASS_EXPORT_KEY(GeoCal::VicarImageCoordinate)
-#endif
+GEOCAL_EXPORT_KEY(ImageCoordinate);
+GEOCAL_EXPORT_KEY(VicarImageCoordinate);
+GEOCAL_EXPORT_KEY(ImageCoordinateWithDerivative);
 
 #endif

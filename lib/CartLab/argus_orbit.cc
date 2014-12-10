@@ -3,6 +3,7 @@
 #include "gdal_raster_image.h"
 #include "memory_raster_image.h"
 #include "sub_raster_image.h"
+#include "geocal_internal_config.h"
 #include <fstream>
 #include <sstream>
 #include <vector>

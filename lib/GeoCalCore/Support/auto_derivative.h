@@ -842,56 +842,23 @@ pow2(const GeoCal::AutoDerivative<double>& base)
 }
 }
 
-#ifdef USE_BOOST_SERIALIZATON
-#include <boost/serialization/array.hpp>
-
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+#include <boost/serialization/split_free.hpp>
 // Add serialization of blitz::Array<T, 1> and blitz::Array<T, 2>
 namespace boost {
   namespace serialization {
     template<class Archive, class T>
-    inline void save(Archive& ar, const blitz::Array<T, 1>& A, 
-	      const unsigned version) {
-      if(A.size() > 0 && !A.isStorageContiguous())
-	throw GeoCal::Exception("We can only save contiguous matrix data");
-      using boost::serialization::make_nvp;
-      int size = A.rows();
-      ar << GEOCAL_NVP(size);
-      if(size > 0)
-	ar << make_nvp("data", make_array(A.data(), A.size()));
-    }
+    void save(Archive& ar, const blitz::Array<T, 1>& A, 
+	      const unsigned version);
     template<typename Archive, class T>
-    inline void load(Archive& ar, blitz::Array<T, 1>& A, 
-	      const unsigned version) {
-      using boost::serialization::make_nvp;
-      int size;
-      ar >> GEOCAL_NVP(size);
-      A.resize(size);
-      if(size > 0)
-	ar >> make_nvp("data", make_array(A.data(), A.size()));
-    }
-
+    void load(Archive& ar, blitz::Array<T, 1>& A, 
+	      const unsigned version);
     template<class Archive, class T>
-    inline void save(Archive& ar, const blitz::Array<T, 2>& A, 
-	      const unsigned version) {
-      if(A.size() > 0 && !A.isStorageContiguous())
-	throw GeoCal::Exception("We can only save contiguous matrix data");
-      using boost::serialization::make_nvp;
-      int rows = A.rows();
-      int cols = A.cols();
-      ar << GEOCAL_NVP(rows) << GEOCAL_NVP(cols);
-      if(A.size() > 0)
-	ar << make_nvp("data", make_array(A.data(), A.size()));
-    }
+    void save(Archive& ar, const blitz::Array<T, 2>& A, 
+	      const unsigned version);
     template<typename Archive, class T>
-    inline void load(Archive& ar, blitz::Array<T, 2>& A, 
-	      const unsigned version) {
-      using boost::serialization::make_nvp;
-      int rows, cols;
-      ar >> GEOCAL_NVP(rows) >> GEOCAL_NVP(cols);
-      A.resize(rows, cols);
-      if(A.size() > 0)
-	ar >> make_nvp("data", make_array(A.data(), A.size()));
-    }
+    void load(Archive& ar, blitz::Array<T, 2>& A, 
+	      const unsigned version);
   }
 }
 typedef blitz::Array<double, 1> blitz_double_array_1d;

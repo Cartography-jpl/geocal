@@ -1,3 +1,6 @@
+#include <boost/archive/polymorphic_xml_iarchive.hpp>
+#include <boost/archive/polymorphic_xml_oarchive.hpp>
+#include "geocal_serialize_support.h"
 #include "unit_test_support.h"
 #include "auto_derivative.h"
 
@@ -163,18 +166,18 @@ BOOST_AUTO_TEST_CASE(serialize)
 
 BOOST_AUTO_TEST_CASE(serialize_blitz_array)
 {
-#ifdef HAVE_BOOST_SERIALIZATON
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
   blitz::Array<double, 1> d(3);
   d = 1, 2, 3;
   std::ostringstream os;
-  boost::archive::xml_oarchive oa(os);
+  boost::archive::polymorphic_xml_oarchive oa(os);
   oa << GEOCAL_NVP(d);
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << os.str();
 
   std::istringstream is(os.str());
-  boost::archive::xml_iarchive ia(is);
+  boost::archive::polymorphic_xml_iarchive ia(is);
   blitz::Array<double, 1> dr;
   ia >> GEOCAL_NVP(dr);
   BOOST_CHECK_EQUAL(d.rows(), dr.rows());

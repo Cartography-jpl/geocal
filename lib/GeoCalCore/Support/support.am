@@ -10,6 +10,7 @@ geocalinc_HEADERS+= @srcsupport@/constant.h
 geocalinc_HEADERS+= @srcsupport@/generic_object.h
 libgeocal_la_SOURCES+= @srcsupport@/generic_object.cc
 geocalinc_HEADERS+= @srcsupport@/auto_derivative.h
+libgeocal_la_SOURCES+= @srcsupport@/auto_derivative.cc
 geocalinc_HEADERS+= @srcsupport@/auto_derivative_quaternion.h
 geocalinc_HEADERS+= @srcsupport@/array_ad.h
 geocalinc_HEADERS+= @srcsupport@/observer.h

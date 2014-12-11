@@ -3,7 +3,7 @@
 #include "auto_derivative.h"
 #include "geocal_quaternion.h"
 
-#ifdef USE_BOOST_SERIALIZATON
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 BOOST_SERIALIZATION_SPLIT_FREE(boost::math::quaternion<GeoCal::AutoDerivative<double> >);
 #endif
 

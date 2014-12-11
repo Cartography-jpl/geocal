@@ -1,33 +1,22 @@
 #ifndef GEOCAL_QUATERNION_H
 #define GEOCAL_QUATERNION_H
 #include "geocal_exception.h"
+#include "geocal_config.h"
 #include <boost/math/quaternion.hpp>
 #include <blitz/array.h>
 #include <cmath>
 
-#ifdef USE_BOOST_SERIALIZATON
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 #include <boost/serialization/split_free.hpp>
 // Add serialization for boost::math::quaternion
 namespace boost {
   namespace serialization {
     template<class Archive, class T>
-    inline void save(Archive& ar, const boost::math::quaternion<T>& q, 
-	      const unsigned version) {
-      T q1 = q.R_component_1();
-      T q2 = q.R_component_2();
-      T q3 = q.R_component_3();
-      T q4 = q.R_component_4();
-      ar & GEOCAL_NVP(q1) & GEOCAL_NVP(q2)
-	& GEOCAL_NVP(q3) & GEOCAL_NVP(q4);
-    }
+    void save(Archive& ar, const boost::math::quaternion<T>& q, 
+		     const unsigned version);
     template<typename Archive, class T>
-    inline void load(Archive& ar, boost::math::quaternion<T>& q, 
-	      const unsigned version) {
-      T q1, q2, q3, q4;
-      ar & GEOCAL_NVP(q1) & GEOCAL_NVP(q2)
-	& GEOCAL_NVP(q3) & GEOCAL_NVP(q4);
-      q = boost::math::quaternion<T>(q1, q2, q3, q4);
-    }
+    void load(Archive& ar, boost::math::quaternion<T>& q, 
+	      const unsigned version);
   }
 }
 BOOST_SERIALIZATION_SPLIT_FREE(boost::math::quaternion<double>);

@@ -142,18 +142,18 @@ BOOST_AUTO_TEST_CASE(array_assignment)
 
 BOOST_AUTO_TEST_CASE(serialize)
 {
-#ifdef HAVE_BOOST_SERIALIZATON
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
   AutoDerivative<double> x(3, 0, 2);
   AutoDerivative<double> y(11);
   std::ostringstream os;
-  boost::archive::xml_oarchive oa(os);
+  boost::archive::polymorphic_xml_oarchive oa(os);
   oa << GEOCAL_NVP(x) << GEOCAL_NVP(y);
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << os.str();
 
   std::istringstream is(os.str());
-  boost::archive::xml_iarchive ia(is);
+  boost::archive::polymorphic_xml_iarchive ia(is);
   AutoDerivative<double> xr, yr;
   ia >> GEOCAL_NVP(xr) >> GEOCAL_NVP(yr);
   BOOST_CHECK_CLOSE(xr.value(), x.value(), 1e-8);

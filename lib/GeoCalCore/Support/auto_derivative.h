@@ -497,15 +497,9 @@ public:
 private:
   T val;
   blitz::Array<T, 1> grad;
-#ifdef USE_BOOST_SERIALIZATON
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    ar & GEOCAL_NVP(val) & GEOCAL_NVP(grad);
-  }
-#endif
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 //-----------------------------------------------------------------------
@@ -867,6 +861,11 @@ typedef blitz::Array<bool, 1> blitz_bool_array_1d;
 BOOST_SERIALIZATION_SPLIT_FREE(blitz_double_array_1d);
 BOOST_SERIALIZATION_SPLIT_FREE(blitz_double_array_2d);
 BOOST_SERIALIZATION_SPLIT_FREE(blitz_bool_array_1d);
+
+#include <boost/serialization/export.hpp>
+typedef GeoCal::AutoDerivative<double> auto_derivative_double;
+BOOST_CLASS_EXPORT_KEY(auto_derivative_double);
+
 #endif
 
 #endif

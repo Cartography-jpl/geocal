@@ -1,14 +1,27 @@
 #include "auto_derivative.h"
 #include "geocal_serialize_support.h"
 #include <boost/serialization/array.hpp>
-
+using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 
+template<class T> template<class Archive> 
+void AutoDerivative<T>::serialize(Archive& ar, const unsigned int version)
+{
+  boost::serialization::void_cast_register<AutoDerivative<T>, GenericObject>();
+  ar & GEOCAL_NVP(val) & GEOCAL_NVP(grad);
+}
+
+template 
+void AutoDerivative<double>::serialize(boost::archive::polymorphic_oarchive& ar,
+				       const unsigned int version);
+template 
+void AutoDerivative<double>::serialize(boost::archive::polymorphic_iarchive& ar,
+				       const unsigned int version);
+							 
 template<class Archive, class T>
 void boost::serialization::save(Archive& ar, const blitz::Array<T, 1>& A, 
 			      const unsigned version) 
 {
-  std::cerr << "hi there\n";
   using boost::serialization::make_array;
   if(A.size() > 0 && !A.isStorageContiguous())
     throw GeoCal::Exception("We can only save contiguous matrix data");

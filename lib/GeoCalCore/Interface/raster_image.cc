@@ -5,6 +5,7 @@
 using namespace GeoCal;
 using namespace blitz;
 
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
 void RasterImage::serialize(Archive & ar, const unsigned int version)
 {
@@ -12,6 +13,7 @@ void RasterImage::serialize(Archive & ar, const unsigned int version)
 }
 
 GEOCAL_IMPLEMENT(RasterImage);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor

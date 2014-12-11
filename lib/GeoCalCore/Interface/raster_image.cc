@@ -1,8 +1,17 @@
 #include "raster_image.h"
 #include <iostream>
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
 using namespace blitz;
+
+template<class Archive>
+void RasterImage::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(RasterImage);
+}
+
+GEOCAL_IMPLEMENT(RasterImage);
 
 //-----------------------------------------------------------------------
 /// Constructor

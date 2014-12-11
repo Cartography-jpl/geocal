@@ -333,15 +333,11 @@ public:
 
   boost::shared_ptr<Rpc> rpc_ptr() const
   { return boost::shared_ptr<Rpc>(new Rpc(rpc())); }
+
 private:
-#ifdef USE_BOOST_SERIALIZATON
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-  }
-#endif
+  template<class Archive>
+   void serialize(Archive & ar, const unsigned int version);
 };
 
 
@@ -391,5 +387,7 @@ private:
 };
 
 }
+
+GEOCAL_EXPORT_KEY(RasterImage);
 #endif
 

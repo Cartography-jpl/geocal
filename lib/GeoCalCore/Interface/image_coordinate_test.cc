@@ -1,10 +1,13 @@
 // These inclusions are not generally needed to test serialization,
 // but we have extra tests for this particular class since we used
 // this for developing the serialization code
+#include "geocal_config.h"
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 #include <boost/archive/polymorphic_text_iarchive.hpp>
 #include <boost/archive/polymorphic_text_oarchive.hpp>
 #include <boost/archive/polymorphic_xml_iarchive.hpp>
 #include <boost/archive/polymorphic_xml_oarchive.hpp>
+#endif
 #include "geocal_serialize_support.h"
 
 #include "unit_test_support.h"
@@ -56,11 +59,12 @@ BOOST_AUTO_TEST_CASE(vicar_image_coordinate)
 
 BOOST_AUTO_TEST_CASE(serialize_function_file)
 {
-#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
   // Test the generic interface for reading and writing a file. Note
   // that most unit tests don't need to do this, we just have this
   // here since ImageCoordinate is our first serialization test and we
   // want to check everything.
+  if(!have_serialize_supported())
+    return;
   boost::shared_ptr<ImageCoordinate> ic(new ImageCoordinate(10, 20));
   serialize_write("image_coordinate_test.xml", ic);
   boost::shared_ptr<ImageCoordinate> ic2 = 
@@ -68,14 +72,14 @@ BOOST_AUTO_TEST_CASE(serialize_function_file)
   BOOST_CHECK(*ic == *ic2);
   int status = unlink("image_coordinate_test.xml");
   // Ignore status, ok if deleting fails.
-#endif
 }
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
   // This is the form that most classes should have for testing
   // serialization.
-#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  if(!have_serialize_supported())
+    return;
   boost::shared_ptr<ImageCoordinate> ic(new ImageCoordinate(10, 20));
   std::string d = serialize_write_string(ic);
   if(false)
@@ -84,14 +88,14 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<ImageCoordinate> ic2 = 
     serialize_read_string<ImageCoordinate>(d);
   BOOST_CHECK(*ic == *ic2);
-#endif  
 }
 
 BOOST_AUTO_TEST_CASE(serialization_new_class)
 {
   // Check that we can register and use a class defined outside of
   // the GeoCal library
-#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  if(!have_serialize_supported())
+    return;
   boost::shared_ptr<FakeClass> fc(new FakeClass(10, 20));
   std::string d = serialize_write_string(fc);
   if(false)
@@ -101,7 +105,6 @@ BOOST_AUTO_TEST_CASE(serialization_new_class)
     serialize_read_string<FakeClass>(d);
   BOOST_CHECK_EQUAL(fc->i1, fc2->i1);
   BOOST_CHECK_EQUAL(fc->i2, fc2->i2);
-#endif  
 }
 
 BOOST_AUTO_TEST_CASE(serialization2)

@@ -1,7 +1,67 @@
 #include "gdal_raster_image.h"
 #include "memory_raster_image.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+
+template<class Archive>
+void GdalRasterImage::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_BASE(GdalRasterImage, RasterImage);
+  GEOCAL_GENERIC_BASE(RasterImage);
+  // Nothing more to do.
+}
+
+GEOCAL_IMPLEMENT(GdalRasterImage);
+
+template<class Archive> 
+void boost::serialization::save_construct_data
+(Archive & ar, const GdalRasterImage* d, const unsigned int version)
+{
+  std::string file_name = d->file_names()[0];
+  int band_id = d->band_id();
+  bool update = d->update();
+  int number_tile = d->number_tile();
+  int number_tile_line = d->number_tile_line();
+  int number_tile_sample = d->number_tile_sample();
+  ar << GEOCAL_NVP(file_name)
+     << GEOCAL_NVP(band_id)
+     << GEOCAL_NVP(number_tile)
+     << GEOCAL_NVP(update)
+     << GEOCAL_NVP(number_tile_line)
+     << GEOCAL_NVP(number_tile_sample);
+}
+
+template<class Archive>
+void boost::serialization::load_construct_data
+(Archive & ar, GdalRasterImage* d, const unsigned int version)
+{
+  std::string file_name;
+  int band_id, number_tile, number_tile_line, number_tile_sample;
+  bool update;
+  ar >> GEOCAL_NVP(file_name)
+     >> GEOCAL_NVP(band_id)
+     >> GEOCAL_NVP(number_tile)
+     >> GEOCAL_NVP(update)
+     >> GEOCAL_NVP(number_tile_line)
+     >> GEOCAL_NVP(number_tile_sample);
+  ::new(d)GdalRasterImage(file_name, band_id, number_tile, update,
+			  number_tile_line, number_tile_sample);
+}
+
+
+template
+void boost::serialization::save_construct_data
+(polymorphic_oarchive & ar, const GdalRasterImage* d, 
+ const unsigned int version);
+
+template
+void boost::serialization::load_construct_data
+(polymorphic_iarchive & ar, GdalRasterImage* d, const unsigned int version);
+
+#endif
 
 /****************************************************************//**
   This is a simple class that has a number of bands all in memory. 

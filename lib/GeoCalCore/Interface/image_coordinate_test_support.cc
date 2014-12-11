@@ -8,6 +8,7 @@
 #include "generic_object.h"
 using namespace GeoCal;
 
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 namespace GeoCal {
 class FakeClass : public GeoCal::GenericObject {
 public:
@@ -33,4 +34,4 @@ void FakeClass::serialize(Archive & ar, const unsigned int version)
 
 GEOCAL_IMPLEMENT(FakeClass);
 
-
+#endif

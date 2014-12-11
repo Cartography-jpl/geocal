@@ -862,10 +862,7 @@ BOOST_SERIALIZATION_SPLIT_FREE(blitz_double_array_1d);
 BOOST_SERIALIZATION_SPLIT_FREE(blitz_double_array_2d);
 BOOST_SERIALIZATION_SPLIT_FREE(blitz_bool_array_1d);
 
-#include <boost/serialization/export.hpp>
-typedef GeoCal::AutoDerivative<double> auto_derivative_double;
-BOOST_CLASS_EXPORT_KEY(auto_derivative_double);
-
 #endif
 
+GEOCAL_EXPORT_KEY(AutoDerivative<double>);
 #endif

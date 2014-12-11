@@ -7,6 +7,7 @@
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/shared_ptr.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 
@@ -23,6 +24,9 @@ template void NAME::serialize(boost::archive::polymorphic_iarchive& ar, \
 
 #define GEOCAL_BASE(NAME,BASE) boost::serialization::void_cast_register<GeoCal::NAME, GeoCal::BASE>();
 #define GEOCAL_GENERIC_BASE(NAME) GEOCAL_BASE(NAME, GenericObject);
+
+using boost::archive::polymorphic_iarchive;
+using boost::archive::polymorphic_oarchive;
 
 #endif
 

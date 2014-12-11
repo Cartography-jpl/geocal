@@ -7,16 +7,11 @@ using namespace GeoCal;
 template<class T> template<class Archive> 
 void AutoDerivative<T>::serialize(Archive& ar, const unsigned int version)
 {
-  boost::serialization::void_cast_register<AutoDerivative<T>, GenericObject>();
+  GEOCAL_GENERIC_BASE(AutoDerivative<T>);
   ar & GEOCAL_NVP(val) & GEOCAL_NVP(grad);
 }
 
-template 
-void AutoDerivative<double>::serialize(boost::archive::polymorphic_oarchive& ar,
-				       const unsigned int version);
-template 
-void AutoDerivative<double>::serialize(boost::archive::polymorphic_iarchive& ar,
-				       const unsigned int version);
+GEOCAL_IMPLEMENT(AutoDerivative<double>);
 							 
 template<class Archive, class T>
 void boost::serialization::save(Archive& ar, const blitz::Array<T, 1>& A, 
@@ -69,8 +64,6 @@ void boost::serialization::load(Archive& ar, blitz::Array<T, 2>& A,
     ar >> GEOCAL_NVP2("data", make_array(A.data(), A.size()));
 }
 
-using boost::archive::polymorphic_iarchive;
-using boost::archive::polymorphic_oarchive;
 template void boost::serialization::load(polymorphic_iarchive& ar, 
 					 blitz::Array<double, 1>& A, 
 					 const unsigned version);

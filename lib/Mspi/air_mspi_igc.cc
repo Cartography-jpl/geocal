@@ -5,11 +5,25 @@
 #include "did_datum.h"
 #include "simple_dem.h"
 #include "usgs_dem.h"
+#include "geocal_serialize_support.h"
 #ifdef HAVE_MSPI_SHARED
 #include "File/L1B1File/src/l1b1_reader.h"
 #endif
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void AirMspiIgc::serialize(Archive & ar, const unsigned int version)
+{
+  // May change this to ipi base class, we'll see
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar & GEOCAL_NVP2("base_directory", bdir) 
+    & GEOCAL_NVP2("master_config_file", mconfig);
+}
+
+GEOCAL_IMPLEMENT(AirMspiIgc);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor. This takes the master config file and uses it to

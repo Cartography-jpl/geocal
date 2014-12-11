@@ -10,7 +10,7 @@ namespace GeoCal {
 /****************************************************************//**
   This is an ImageGroundConnection for AirMspi.
 *******************************************************************/
-class AirMspiIgc : public IpiImageGroundConnection {
+class AirMspiIgc : public virtual IpiImageGroundConnection {
 public:
   AirMspiIgc(const std::string& Master_config_file,
 	     const std::string& Orbit_file_name,
@@ -87,9 +87,14 @@ public:
   virtual void print(std::ostream& Os) const;
 private:
   std::string bdir, mconfig;
-
+  AirMspiIgc() {}
   int reference_row(const std::string& Instrument_config_file_name) const;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(AirMspiIgc);
 #endif
 

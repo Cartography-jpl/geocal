@@ -11,7 +11,7 @@ namespace GeoCal {
   Ipi.
 *******************************************************************/
 
-class IpiImageGroundConnection : public ImageGroundConnection, 
+class IpiImageGroundConnection : public virtual ImageGroundConnection, 
 				 public Observer<Camera> {
 public:
 //-----------------------------------------------------------------------

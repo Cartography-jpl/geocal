@@ -52,6 +52,17 @@ public:
   This class gives a generic interface that can be used for any kind
   of a connection between the ground and an image.
 
+  An important implementation issue, because of the way the templates
+  work in the boost serialization library if you derive from this
+  class and want to use boost serialize on it, make sure to derive
+  virtual, e.g 
+
+  class Foo : public virtual ImageGroundConnection {
+    blah blah
+  };
+
+  This doesn't hurt anything, for other code and because of how boost
+  deals with multiple inheritance is required.
 *******************************************************************/
 
 class ImageGroundConnection : public Printable<ImageGroundConnection>,
@@ -393,6 +404,10 @@ protected:
   /// Ground mask to use, should be set by constructor (can set to
   /// empty CombinedGroundMask if there is no mask).
   boost::shared_ptr<GroundMask> ground_mask_;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -402,7 +417,7 @@ protected:
   subsetted image.
 *******************************************************************/
 
-class OffsetImageGroundConnection : public ImageGroundConnection {
+class OffsetImageGroundConnection : public virtual ImageGroundConnection {
 public:
 //-----------------------------------------------------------------------
 /// Constructor.
@@ -512,6 +527,10 @@ private:
   boost::shared_ptr<ImageGroundConnection> ig_;
   AutoDerivative<double> line_offset_;
   AutoDerivative<double> sample_offset_;
+  OffsetImageGroundConnection() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -522,7 +541,7 @@ private:
   underlying ImageGroundConnection.
 *******************************************************************/
 
-class ImageGroundConnectionCopy: public ImageGroundConnection
+class ImageGroundConnectionCopy: public virtual ImageGroundConnection
 {
 public:
   ImageGroundConnectionCopy
@@ -589,7 +608,15 @@ public:
   virtual void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<ImageGroundConnection> igc;
+  ImageGroundConnectionCopy() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(ImageGroundConnection);
+GEOCAL_EXPORT_KEY(OffsetImageGroundConnection);
+GEOCAL_EXPORT_KEY(ImageGroundConnectionCopy);
 #endif

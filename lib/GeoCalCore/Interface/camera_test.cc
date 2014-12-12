@@ -51,7 +51,6 @@ BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())
     return;
-
   boost::shared_ptr<Camera> cam(new SimpleCamera());
   std::string d = serialize_write_string(cam);
   if(false)

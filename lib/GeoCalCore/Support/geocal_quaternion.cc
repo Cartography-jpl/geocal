@@ -29,19 +29,19 @@ void boost::serialization::load
 using boost::archive::polymorphic_iarchive;
 using boost::archive::polymorphic_oarchive;
 template void boost::serialization::load
-(polymorphic_oarchive& ar, boost::math::quaternion<double>& q, 
+(polymorphic_iarchive& ar, boost::math::quaternion<double>& q, 
  const unsigned version);
 
 template void boost::serialization::save
-(polymorphic_iarchive& ar, const boost::math::quaternion<double>& q, 
+(polymorphic_oarchive& ar, const boost::math::quaternion<double>& q, 
  const unsigned version);
 
 template void boost::serialization::load
-(polymorphic_oarchive& ar, boost::math::quaternion<GeoCal::AutoDerivative<double> >& q, 
+(polymorphic_iarchive& ar, boost::math::quaternion<GeoCal::AutoDerivative<double> >& q, 
  const unsigned version);
 
 template void boost::serialization::save
-(polymorphic_iarchive& ar, const boost::math::quaternion<GeoCal::AutoDerivative<double> >& q, 
+(polymorphic_oarchive& ar, const boost::math::quaternion<GeoCal::AutoDerivative<double> >& q, 
  const unsigned version);
 
 #endif

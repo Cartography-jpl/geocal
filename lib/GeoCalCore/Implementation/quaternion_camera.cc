@@ -1,6 +1,31 @@
 #include "quaternion_camera.h"
+#include "geocal_serialize_support.h"
 #include <boost/lexical_cast.hpp>
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+#include <boost/serialization/vector.hpp>
+template<class Archive>
+void QuaternionCamera::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Camera);
+  GEOCAL_BASE(QuaternionCamera, Camera);
+  ar & GEOCAL_NVP_(focal_length)
+    & GEOCAL_NVP2("number_band", nband_)
+    & GEOCAL_NVP2("number_line", nline_)
+    & GEOCAL_NVP2("number_sample", nsamp_)
+    & GEOCAL_NVP_(line_pitch)
+    & GEOCAL_NVP_(sample_pitch)
+    & GEOCAL_NVP_(principal_point)
+    & GEOCAL_NVP_(frame_to_sc)
+    & GEOCAL_NVP_(frame_convention)
+    & GEOCAL_NVP_(line_direction)
+    & GEOCAL_NVP_(sample_direction)
+    & GEOCAL_NVP_(parameter_mask);
+}
+
+GEOCAL_IMPLEMENT(QuaternionCamera);
+#endif
 
 //-----------------------------------------------------------------------
 /// Go from a look vector in the detector coordinate system to X and Y

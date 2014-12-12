@@ -202,10 +202,8 @@ BOOST_AUTO_TEST_CASE(compare_simple_camera)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
-#ifdef HAVE_BOOST_SERIALIZATON
-  std::ostringstream os;
-  boost::archive::xml_oarchive oa(os);
-
+  if(!have_serialize_supported())
+    return;
   boost::shared_ptr<Camera> cam
     (new QuaternionCamera(boost::math::quaternion<double>(1,0,0,0),
 			  3375, 3648,
@@ -214,32 +212,25 @@ BOOST_AUTO_TEST_CASE(serialization)
 			  1.0,
 			  FrameCoordinate(1688.0, 1824.5),
 			  QuaternionCamera::LINE_IS_Y));
+  std::string d = serialize_write_string(cam);
+  if(true)
+    std::cerr << d;
+  boost::shared_ptr<QuaternionCamera> camr = 
+    serialize_read_string<QuaternionCamera>(d);
   FrameCoordinate f1(1, 2);
   ScLookVector sl = cam->sc_look_vector(f1, 0);
-  oa << GEOCAL_NVP(cam);
-  if(false)
-    std::cerr << os.str();
-
-  std::istringstream is(os.str());
-  boost::archive::xml_iarchive ia(is);
-  boost::shared_ptr<Camera> camr;
-  ia >> GEOCAL_NVP(camr);
   FrameCoordinate f2 = camr->frame_coordinate(sl, 0);
   FrameCoordinate f3 = cam->frame_coordinate(sl, 0);
   BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);
   BOOST_CHECK_CLOSE(f2.sample, f1.sample, 1e-4);
-  boost::shared_ptr<QuaternionCamera> camr2 = 
-    boost::dynamic_pointer_cast<QuaternionCamera>(camr);
-  
-  BOOST_CHECK_CLOSE(camr2->focal_length(), 1.0, 1e-4);
-  BOOST_CHECK_CLOSE(camr2->line_pitch(),   1.0 / 2500000, 1e-4);
-  BOOST_CHECK_CLOSE(camr2->sample_pitch(), 1.0 / 2500000, 1e-4);
-  BOOST_CHECK_CLOSE(camr2->principal_point(0).line, 1688, 1e-4);
-  BOOST_CHECK_CLOSE(camr2->principal_point(0).sample, 1824.5, 1e-4);
-  BOOST_CHECK_EQUAL(camr2->number_line(0), 3375);
-  BOOST_CHECK_EQUAL(camr2->number_sample(0), 3648);
-  BOOST_CHECK_EQUAL(camr2->number_band(), 1);
-#endif
+  BOOST_CHECK_CLOSE(camr->focal_length(), 1.0, 1e-4);
+  BOOST_CHECK_CLOSE(camr->line_pitch(),   1.0 / 2500000, 1e-4);
+  BOOST_CHECK_CLOSE(camr->sample_pitch(), 1.0 / 2500000, 1e-4);
+  BOOST_CHECK_CLOSE(camr->principal_point(0).line, 1688, 1e-4);
+  BOOST_CHECK_CLOSE(camr->principal_point(0).sample, 1824.5, 1e-4);
+  BOOST_CHECK_EQUAL(camr->number_line(0), 3375);
+  BOOST_CHECK_EQUAL(camr->number_sample(0), 3648);
+  BOOST_CHECK_EQUAL(camr->number_band(), 1);
 }
 BOOST_AUTO_TEST_SUITE_END()
 

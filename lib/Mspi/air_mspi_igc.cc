@@ -16,8 +16,7 @@ using namespace GeoCal;
 template<class Archive>
 void AirMspiIgc::serialize(Archive & ar, const unsigned int version)
 {
-  // May change this to ipi base class, we'll see
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IpiImageGroundConnection);
   ar & GEOCAL_NVP2("base_directory", bdir) 
     & GEOCAL_NVP2("master_config_file", mconfig);
 }

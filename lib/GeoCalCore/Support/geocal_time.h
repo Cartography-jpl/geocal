@@ -208,6 +208,10 @@ public:
 
   std::string to_string() const
   { return toolkit_time_interface->to_string(*this); }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 class TimeWithDerivative : public TimeBase<AutoDerivative<double> >,
@@ -360,4 +364,7 @@ struct TimeGpsCreator {
 };
 
 }
+
+GEOCAL_EXPORT_KEY(Time);
+
 #endif

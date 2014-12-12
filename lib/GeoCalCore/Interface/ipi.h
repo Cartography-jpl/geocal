@@ -174,8 +174,15 @@ private:
     return std::min(max_time_ - time_tolerance_ / 2, 
 		    last_time + local_time_window_size_ / 2);
   }
+
+  Ipi() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(Ipi);
 #endif
 

@@ -149,12 +149,18 @@ protected:
     ipi_ = I;
     res = Resolution;
     max_h = Max_height;
+    ipi_->camera_ptr()->add_observer(*this);
   }
 private:
   boost::shared_ptr<Ipi> ipi_;
   double res, max_h;
   mutable boost::multi_array<ScLookVector, 3> sc_look_vector_cache;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(IpiImageGroundConnection);
 #endif

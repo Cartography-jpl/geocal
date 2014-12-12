@@ -51,21 +51,12 @@ private:
   std::string fname;
   std::map<int, int> row_to_index;
   blitz::Array<double, 2> a, b, c, d;
-#ifdef USE_BOOST_SERIALIZATON
   MspiParaxialTransform() {}
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    ar & GEOCAL_NVP(fname) 
-      & GEOCAL_NVP(row_to_index)
-      & GEOCAL_NVP(a)
-      & GEOCAL_NVP(b)
-      & GEOCAL_NVP(c)
-      & GEOCAL_NVP(d);
-  }
-#endif
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(MspiParaxialTransform);
 #endif

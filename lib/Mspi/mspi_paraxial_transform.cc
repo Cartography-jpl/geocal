@@ -1,7 +1,28 @@
 #include "mspi_paraxial_transform.h"
 #include "mspi_config_file.h"
+#include "auto_derivative.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
+
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+#include <boost/serialization/map.hpp>
+
+template<class Archive>
+void MspiParaxialTransform::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(MspiParaxialTransform);
+  ar & GEOCAL_NVP(fname) 
+    & GEOCAL_NVP(row_to_index)
+    & GEOCAL_NVP(a)
+    & GEOCAL_NVP(b)
+    & GEOCAL_NVP(c)
+    & GEOCAL_NVP(d);
+}
+
+GEOCAL_IMPLEMENT(MspiParaxialTransform);
+#endif
 
 const int number_a_parameter = 4;
 const int number_c_parameter = 12;

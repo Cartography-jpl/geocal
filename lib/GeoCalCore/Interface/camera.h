@@ -141,14 +141,9 @@ public:
   virtual void print(std::ostream& Os) const = 0;
 
 private:
-#ifdef USE_BOOST_SERIALIZATON
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-  }
-#endif
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -206,24 +201,12 @@ private:
   int nline,nsample;
   boost::math::quaternion<double> frame_to_sc;
 
-#ifdef USE_BOOST_SERIALIZATON
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version)
-  {
-    using boost::serialization::make_nvp;
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Camera);
-    ar & GEOCAL_NVP_(beta)
-      & GEOCAL_NVP_(delta)
-      & GEOCAL_NVP_(epsilon)
-      & GEOCAL_NVP_(focal)
-      & GEOCAL_NVP_(line_pitch)
-      & GEOCAL_NVP_(sample_pitch)
-      & make_nvp("number_line", nline)
-      & make_nvp("number_sample", nsample);
-    frame_to_sc = quat_rot("ZYX", epsilon_, beta_, delta_);
-  }
-#endif
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(Camera);
+GEOCAL_EXPORT_KEY(SimpleCamera);
 #endif

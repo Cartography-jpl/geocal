@@ -271,20 +271,13 @@ BOOST_AUTO_TEST_CASE(gndmisr_roundtrip_test)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
-#ifdef HAVE_BOOST_SERIALIZATON
-  std::ostringstream os;
-  boost::archive::xml_oarchive oa(os);
-
+  if(!have_serialize_supported())
+    return;
   boost::shared_ptr<Camera> cam(new MspiCamera(test_data_dir() + "AIRMSPI_CONFIG_CAMERA_MODEL_0003.config"));
-  oa << GEOCAL_NVP(cam);
+  std::string d = serialize_write_string(cam);
   if(false)
-    std::cerr << os.str();
-  
-  std::istringstream is(os.str());
-  boost::archive::xml_iarchive ia(is);
-  boost::shared_ptr<Camera> camr;
-  ia >> GEOCAL_NVP(camr);
-
+    std::cerr << d;
+  boost::shared_ptr<Camera> camr = serialize_read_string<Camera>(d);
   BOOST_CHECK_EQUAL(cam->number_band(), camr->number_band());
   for(int b = 0; b < cam->number_band(); ++b) {
     BOOST_CHECK_EQUAL(cam->number_sample(b), camr->number_sample(b));
@@ -302,7 +295,6 @@ BOOST_AUTO_TEST_CASE(serialization)
       }
     }
   }
-#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

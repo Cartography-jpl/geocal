@@ -8,14 +8,11 @@ template<class Archive>
 void IpiImageGroundConnection::serialize(Archive & ar, 
 					 const unsigned int version)
 {
-  // May change this to ipi base class, we'll see
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
   ar & GEOCAL_NVP_(ipi) 
     & GEOCAL_NVP(res)
     & GEOCAL_NVP(max_h);
-  // Temp until we get ipi working
-  std::cerr << "Skipping Ipi observer setup for now";
-  //ipi_->camera_ptr()->add_observer(*this);
+  ipi_->camera_ptr()->add_observer(*this);
 }
 
 GEOCAL_IMPLEMENT(IpiImageGroundConnection);

@@ -7,7 +7,6 @@ using namespace blitz;
 
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-#include <boost/serialization/map.hpp>
 
 template<class Archive>
 void MspiParaxialTransform::serialize(Archive & ar, const unsigned int version)

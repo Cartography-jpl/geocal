@@ -4,7 +4,6 @@
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-#include <boost/serialization/vector.hpp>
 template<class Archive>
 void QuaternionCamera::serialize(Archive & ar, const unsigned int version)
 {

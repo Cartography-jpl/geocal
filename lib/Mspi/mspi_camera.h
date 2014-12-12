@@ -158,27 +158,12 @@ private:
   boost::shared_ptr<MspiParaxialTransform> paraxial_transform_;
   int inversion_;
 
-#ifdef USE_BOOST_SERIALIZATON
   MspiCamera() {}
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
-    ar & GEOCAL_NVP(fname) 
-      & GEOCAL_NVP_(granule_id)
-      & GEOCAL_NVP_(epsilon)
-      & GEOCAL_NVP_(psi)
-      & GEOCAL_NVP_(theta)
-      & GEOCAL_NVP_(boresight_angle)
-      & GEOCAL_NVP_(yaw)
-      & GEOCAL_NVP_(pitch)
-      & GEOCAL_NVP_(roll)
-      & GEOCAL_NVP_(row_number)
-      & GEOCAL_NVP_(paraxial_transform)
-      & GEOCAL_NVP_(inversion);
-  }
-#endif
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(MspiCamera);
 #endif

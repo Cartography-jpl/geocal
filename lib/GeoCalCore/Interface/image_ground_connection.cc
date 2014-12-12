@@ -12,18 +12,13 @@ void ImageGroundConnection::serialize(Archive & ar, const unsigned int version)
   GEOCAL_GENERIC_BASE(ImageGroundConnection);
   // Temp, break this up so we can see exactly what fails. We can join
   // this when all done.
-  // std::cerr << "Doing DEM\n";
+  std::cerr << "Skipping DEM\n";
   // ar & GEOCAL_NVP_(dem);
-  std::cerr << "Doing image\n";
-  ar & GEOCAL_NVP_(image);
-  std::cerr << "Doing image_mb\n";
-  ar & GEOCAL_NVP_(image_mb);
-  std::cerr << "Doing title\n";
-  ar & GEOCAL_NVP_(title);
-  // std::cerr << "Doing image_mask\n";
-  // ar & GEOCAL_NVP_(image_mask);
-  // std::cerr << "Doing ground_mask\n";
-  // ar & GEOCAL_NVP_(ground_mask);
+  ar & GEOCAL_NVP_(image)
+    & GEOCAL_NVP_(image_mb)
+    & GEOCAL_NVP_(title)
+    & GEOCAL_NVP_(image_mask)
+    & GEOCAL_NVP_(ground_mask);
 }
 
 template<class Archive>

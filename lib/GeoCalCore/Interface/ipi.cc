@@ -14,24 +14,17 @@ void Ipi::serialize(Archive & ar, const unsigned int version)
   // Temp, break this up so we can see exactly what fails. We can join
   // this when all done.
   std::cerr << "In ipi\n";
-  // std::cerr << "Doing orb\n";
+  std::cerr << "Skipping orb\n";
   // ar & GEOCAL_NVP(orb);
-  // std::cerr << "Doing cam\n";
-  // ar & GEOCAL_NVP(cam);
-  std::cerr << "Doing band\n";
-  ar & GEOCAL_NVP_(band);
-  std::cerr << "Doing tt\n";
+  ar & GEOCAL_NVP(cam)
+    & GEOCAL_NVP_(band);
+  std::cerr << "Skipping tt\n";
   // ar & GEOCAL_NVP(tt);
-  // std::cerr << "Doing min_time\n";
-  ar & GEOCAL_NVP_(min_time);
-  std::cerr << "Doing max_time\n";
-  ar & GEOCAL_NVP_(max_time);
-  std::cerr << "Doing local_time_window_size\n";
-  ar & GEOCAL_NVP_(local_time_window_size);
-  std::cerr << "Doing root_min_separation\n";
-  ar & GEOCAL_NVP_(root_min_separation);
-  std::cerr << "Doing time_tolerancen";
-  ar & GEOCAL_NVP_(time_tolerance);
+  ar & GEOCAL_NVP_(min_time)
+    & GEOCAL_NVP_(max_time)
+    & GEOCAL_NVP_(local_time_window_size)
+    & GEOCAL_NVP_(root_min_separation)
+    & GEOCAL_NVP_(time_tolerance);
   last_time = min_time_;
 }
 

@@ -159,6 +159,16 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     This class gives a generic interface that can be used for any kind of
     a connection between the ground and an image.
 
+    An important implementation issue, because of the way the templates
+    work in the boost serialization library if you derive from this class
+    and want to use boost serialize on it, make sure to derive virtual,
+    e.g
+
+    class Foo : public virtual ImageGroundConnection { blah blah };
+
+    This doesn't hurt anything, for other code and because of how boost
+    deals with multiple inheritance is required.
+
     C++ includes: image_ground_connection.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')

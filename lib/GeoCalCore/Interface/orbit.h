@@ -673,6 +673,10 @@ protected:
 				///OrbitData for.
   Time max_tm;			///< Maximum time that we have
 				///OrbitData for.
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -833,5 +837,6 @@ private:
 	      const QuaternionOrbitData& t2, 
 	      const TimeWithDerivative& tm);
 }
+GEOCAL_EXPORT_KEY(Orbit);
 #endif
 

@@ -2,7 +2,46 @@
 #include "ostream_pad.h"
 #include "constant.h"
 #include "aircraft_orbit_data.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void AirMspiOrbit::save(Archive & ar, const unsigned int version) const
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP(data)
+    & GEOCAL_NVP(tile_number_line)
+    & GEOCAL_NVP_(datum)
+    & GEOCAL_NVP_(gimbal_angle)
+    & GEOCAL_NVP_(ypr_corr)
+    & GEOCAL_NVP(m)
+    & GEOCAL_NVP_(vdef)
+    & GEOCAL_NVP_(tspace)
+    & GEOCAL_NVP(old_format);
+}
+
+template<class Archive>
+void AirMspiOrbit::load(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP(data)
+    & GEOCAL_NVP(tile_number_line)
+    & GEOCAL_NVP_(datum)
+    & GEOCAL_NVP_(gimbal_angle)
+    & GEOCAL_NVP_(ypr_corr)
+    & GEOCAL_NVP(m)
+    & GEOCAL_NVP_(vdef)
+    & GEOCAL_NVP_(tspace)
+    & GEOCAL_NVP(old_format);
+  blitz::Array<double, 2> empty;
+  for(int i = 0; i < 2; ++i)
+    data_cache_.push_back(empty);
+  next_swap_ = data_cache_.begin();
+}
+
+GEOCAL_SPLIT_IMPLEMENT(AirMspiOrbit);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor, that takes raw data and create AirMspiNavData from

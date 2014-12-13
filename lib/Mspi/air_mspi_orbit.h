@@ -152,7 +152,15 @@ private:
   AircraftOrbitData::VerticalDefinition vdef_;
   double tspace_;
   bool old_format;
+  AirMspiOrbit() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 }
+GEOCAL_EXPORT_KEY(AirMspiOrbit);
 #endif
 

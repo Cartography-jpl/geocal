@@ -3,11 +3,23 @@
 #include "functor.h"
 #include "geocal_gsl_root.h"
 #include "constant.h"
+#include "geocal_serialize_support.h"
 #include <blitz/array.h>
 #include <cmath>
 
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void Orbit::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Orbit);
+  ar & GEOCAL_NVP(min_tm) & GEOCAL_NVP(max_tm);
+}
+
+GEOCAL_IMPLEMENT(Orbit);
+#endif
 
 //-----------------------------------------------------------------------
 /// Return the footprint on the ground for the given camera and dem. 

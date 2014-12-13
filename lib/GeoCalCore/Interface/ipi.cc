@@ -14,9 +14,8 @@ void Ipi::serialize(Archive & ar, const unsigned int version)
   // Temp, break this up so we can see exactly what fails. We can join
   // this when all done.
   std::cerr << "In ipi\n";
-  std::cerr << "Skipping orb\n";
-  // ar & GEOCAL_NVP(orb);
-  ar & GEOCAL_NVP(cam)
+  ar & GEOCAL_NVP(orb)
+    & GEOCAL_NVP(cam)
     & GEOCAL_NVP_(band);
   std::cerr << "Skipping tt\n";
   // ar & GEOCAL_NVP(tt);

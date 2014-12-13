@@ -62,14 +62,11 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
-#ifdef USE_BOOST_SERIALIZATON
+private:
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-  }
-#endif
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+GEOCAL_EXPORT_KEY(Dem);
 #endif

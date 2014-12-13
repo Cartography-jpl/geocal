@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE(serialization)
 		       1, 
 		       test_data_dir() + "/mspi"));
   std::string d = serialize_write_string(igc);
-  if(false)
+  if(true)
     std::cerr << d;
   boost::shared_ptr<AirMspiIgc> igcr = 
     serialize_read_string<AirMspiIgc>(d);

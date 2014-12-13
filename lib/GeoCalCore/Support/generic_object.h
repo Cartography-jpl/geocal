@@ -11,8 +11,10 @@ namespace boost {
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 #include <boost/serialization/export.hpp>
 #define GEOCAL_EXPORT_KEY(NAME) BOOST_CLASS_EXPORT_KEY(GeoCal::NAME)
+#define GEOCAL_EXPORT_KEY2(NAME, KEY) BOOST_CLASS_EXPORT_KEY2(GeoCal::NAME, KEY)
 #else
-#define GEOCAL_EXPORT_KEY(x) /* Noop */
+#define GEOCAL_EXPORT_KEY(NAME) /* Noop */
+#define GEOCAL_EXPORT_KEY2(NAME,KEY) /* Noop */
 #endif
 
 

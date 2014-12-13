@@ -1,7 +1,18 @@
 #include "dem.h"
 #include "geocal_matrix.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void Dem::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Dem);
+}
+
+GEOCAL_IMPLEMENT(Dem);
+#endif
 
 //-----------------------------------------------------------------------
 /// Determine the intersection along a look vector from a starting

@@ -195,9 +195,10 @@ public:
   { range_check(i, i, size_time_list());
     return tlist[i];
   }
-private:
+protected:
   int min_line_;
   std::vector<Time> tlist;
+  MeasuredTimeTable() { }
 };
 
 }

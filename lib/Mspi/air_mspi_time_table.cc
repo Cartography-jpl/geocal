@@ -28,6 +28,18 @@ AirMspiTimeTable::AirMspiTimeTable
 (const std::string& L1b1_file_name, 
  const std::string& Instrument_config_file_name)
 {
+#ifdef HAVE_MSPI_SHARED
+  MSPI::Shared::L1B1Reader l1b1(L1b1_file_name);
+  refrow = reference_row(Instrument_config_file_name);
+  Time tepoch = Time::parse_time(l1b1.epoch());
+  std::vector<double> toffset = 
+    l1b1.read_time(refrow, 0, l1b1.number_frame(refrow));
+  min_line_ = 0;
+  BOOST_FOREACH(double toff, toffset)
+    tlist.push_back(tepoch + toff);
+#else
+  throw Exception("This class requires that MSPI Shared library be available");
+#endif
 }
 
 void AirMspiTimeTable::print(std::ostream& Os) const 

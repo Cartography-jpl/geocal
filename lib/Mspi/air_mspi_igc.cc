@@ -1,14 +1,11 @@
-#include "geocal_internal_config.h"
 #include "air_mspi_igc.h"
+#include "air_mspi_time_table.h"
 #include "mspi_config_file.h"
 #include "mspi_camera.h"
 #include "did_datum.h"
 #include "simple_dem.h"
 #include "usgs_dem.h"
 #include "geocal_serialize_support.h"
-#ifdef HAVE_MSPI_SHARED
-#include "File/L1B1File/src/l1b1_reader.h"
-#endif
 
 using namespace GeoCal;
 
@@ -82,23 +79,11 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
   }
 
   // Get the time table and L1B1 data.
-  boost::shared_ptr<MeasuredTimeTable> tt;
-#ifdef HAVE_MSPI_SHARED
-  MSPI::Shared::L1B1Reader l1b1(L1b1_file_name);
   fname = c.value<std::string>("instrument_info_config");
   if(fname[0] != '/')
     fname = Base_directory + "/" + fname;
-  int refrow = reference_row(fname);
-  Time tepoch = Time::parse_time(l1b1.epoch());
-  std::vector<double> toffset = 
-    l1b1.read_time(refrow, 0, l1b1.number_frame(refrow));
-  std::vector<Time> tm;
-  BOOST_FOREACH(double toff, toffset)
-    tm.push_back(tepoch + toff);
-  tt.reset(new MeasuredTimeTable(tm));
-#else
-  throw Exception("This class requires that MSPI Shared library be available");
-#endif
+  boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name,
+						       fname));
   Time tmin = std::max(orb->min_time(), tt->min_time());
   Time tmax = std::min(orb->max_time(), tt->max_time());
 
@@ -120,26 +105,3 @@ void AirMspiIgc::print(std::ostream& Os) const
 }
 
 
-//-----------------------------------------------------------------------
-/// Determine the reference row to use for the time table. This comes
-/// from the 660nm I band. 
-/// Note that the band number used in the instrument config file is
-/// *not* the same as the band number used in the camera. Instead this
-/// is a spectral band number.
-//-----------------------------------------------------------------------
-
-int AirMspiIgc::reference_row(const std::string& Instrument_config_file_name) 
-  const
-{
-  // Determine mapping from instrument_band, row_type to row_number
-  MspiConfigFile iconfig(Instrument_config_file_name);
-  std::vector<int> rn = iconfig.value<std::vector<int> >("row_numbers");
-  std::vector<std::string> rt = 
-    iconfig.value<std::vector<std::string> >("row_types");
-  // Note that this is a spectral band, not the camera band.
-  std::vector<int> rb = iconfig.value<std::vector<int> >("band");
-  std::map<int, std::map<std::string, int> > inst_to_row;
-  for(int i = 0 ; i < (int) rn.size(); ++i)
-    inst_to_row[rb[i]][rt[i]]=rn[i];
-  return inst_to_row[6]["I"];
-}

@@ -11,15 +11,11 @@ template<class Archive>
 void Ipi::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Ipi);
-  // Temp, break this up so we can see exactly what fails. We can join
-  // this when all done.
-  std::cerr << "In ipi\n";
   ar & GEOCAL_NVP(orb)
     & GEOCAL_NVP(cam)
-    & GEOCAL_NVP_(band);
-  std::cerr << "Skipping tt\n";
-  // ar & GEOCAL_NVP(tt);
-  ar & GEOCAL_NVP_(min_time)
+    & GEOCAL_NVP_(band)
+    & GEOCAL_NVP(tt)
+    & GEOCAL_NVP_(min_time)
     & GEOCAL_NVP_(max_time)
     & GEOCAL_NVP_(local_time_window_size)
     & GEOCAL_NVP_(root_min_separation)

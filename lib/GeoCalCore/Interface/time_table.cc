@@ -2,8 +2,19 @@
 #include "geocal_exception.h"
 #include <cmath>
 #include <algorithm>
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void TimeTable::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(TimeTable);
+}
+
+GEOCAL_IMPLEMENT(TimeTable);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor, creates time table from Min_time to Max_time with

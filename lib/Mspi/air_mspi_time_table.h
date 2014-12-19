@@ -18,6 +18,14 @@ private:
   int refrow;
   int reference_row(const std::string& Instrument_config_file_name) const;
   void read_data();
+  AirMspiTimeTable() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 }
+GEOCAL_EXPORT_KEY(AirMspiTimeTable);
 #endif

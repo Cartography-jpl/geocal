@@ -9,15 +9,26 @@
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-// template<class Archive>
-// void AirMspiIgc::serialize(Archive & ar, const unsigned int version)
-// {
-//   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IpiImageGroundConnection);
-//   ar & GEOCAL_NVP2("base_directory", bdir) 
-//     & GEOCAL_NVP2("master_config_file", mconfig);
-// }
+template<class Archive>
+void AirMspiTimeTable::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(TimeTable);
+  GEOCAL_BASE(AirMspiTimeTable, TimeTable);
+  ar & GEOCAL_NVP(l1b1_file_name)
+    & GEOCAL_NVP(refrow);
+}
 
-// GEOCAL_IMPLEMENT(AirMspiIgc);
+template<class Archive>
+void AirMspiTimeTable::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(TimeTable);
+  GEOCAL_BASE(AirMspiTimeTable, TimeTable);
+  ar & GEOCAL_NVP(l1b1_file_name)
+    & GEOCAL_NVP(refrow);
+  read_data();
+}
+
+GEOCAL_SPLIT_IMPLEMENT(AirMspiTimeTable);
 #endif
 
 //-----------------------------------------------------------------------
@@ -27,10 +38,16 @@ using namespace GeoCal;
 AirMspiTimeTable::AirMspiTimeTable
 (const std::string& L1b1_file_name, 
  const std::string& Instrument_config_file_name)
+  : l1b1_file_name(L1b1_file_name)
+{
+  refrow = reference_row(Instrument_config_file_name);
+  read_data();
+}
+
+void AirMspiTimeTable::read_data()
 {
 #ifdef HAVE_MSPI_SHARED
-  MSPI::Shared::L1B1Reader l1b1(L1b1_file_name);
-  refrow = reference_row(Instrument_config_file_name);
+  MSPI::Shared::L1B1Reader l1b1(l1b1_file_name);
   Time tepoch = Time::parse_time(l1b1.epoch());
   std::vector<double> toffset = 
     l1b1.read_time(refrow, 0, l1b1.number_frame(refrow));

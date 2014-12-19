@@ -83,6 +83,10 @@ public:
   virtual Time max_time() const = 0;
 
   virtual void print(std::ostream& Os) const = 0;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -202,5 +206,7 @@ protected:
 };
 
 }
+
+GEOCAL_EXPORT_KEY(TimeTable);
 #endif
 

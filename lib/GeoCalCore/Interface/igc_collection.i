@@ -47,15 +47,15 @@ public:
     ground_coordinate(int Image_index, const ImageCoordinate& Ic) const;
   virtual boost::shared_ptr<GroundCoordinate> 
     ground_coordinate_dem(int Image_index, const ImageCoordinate& Ic, 
-			  const Dem& D) const = 0;
-  virtual boost::shared_ptr<Dem> dem(int Image_index) const  = 0;
+			  const Dem& D) const;
+  virtual boost::shared_ptr<Dem> dem(int Image_index) const;
   virtual ImageCoordinate image_coordinate(int Image_index,
 					   const GroundCoordinate& Gc) 
-    const = 0;
+    const;
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(int Image_index,
 					  const CartesianFixed& Gc) const;
-  virtual std::string title(int Image_index) const = 0;
-  virtual boost::shared_ptr<RasterImage> image(int Image_index) const  = 0;
+  virtual std::string title(int Image_index) const;
+  virtual boost::shared_ptr<RasterImage> image(int Image_index) const;
   virtual boost::shared_ptr<ImageGroundConnection> 
   image_ground_connection(int Image_index) const = 0;
   virtual boost::shared_ptr<IgcCollection> 

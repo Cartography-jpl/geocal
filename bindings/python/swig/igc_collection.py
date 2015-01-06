@@ -132,7 +132,7 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
     __swig_destroy__ = _igc_collection.delete_IgcCollection
     def _v_number_image(self):
         """
-        virtual int GeoCal::IgcCollection::number_image() const =0
+        virtual int GeoCal::IgcCollection::number_image() const
 
         """
         return _igc_collection.IgcCollection__v_number_image(self)
@@ -151,7 +151,7 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
 
     def ground_coordinate_dem(self, *args):
         """
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::IgcCollection::ground_coordinate_dem(int Image_index, const ImageCoordinate &Ic, const Dem &D) const =0
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::IgcCollection::ground_coordinate_dem(int Image_index, const ImageCoordinate &Ic, const Dem &D) const
         Return ground coordinate that goes with a particular image coordinate.
 
         This version supplies a Dem to use. 
@@ -160,14 +160,14 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
 
     def dem(self, *args):
         """
-        virtual boost::shared_ptr<Dem> GeoCal::IgcCollection::dem(int Image_index) const =0
+        virtual boost::shared_ptr<Dem> GeoCal::IgcCollection::dem(int Image_index) const
         Dem used by ground_coordinate. 
         """
         return _igc_collection.IgcCollection_dem(self, *args)
 
     def image_coordinate(self, *args):
         """
-        virtual ImageCoordinate GeoCal::IgcCollection::image_coordinate(int Image_index, const GroundCoordinate &Gc) const =0
+        virtual ImageCoordinate GeoCal::IgcCollection::image_coordinate(int Image_index, const GroundCoordinate &Gc) const
         Return image coordinate that goes with a particular GroundCoordinate.
 
         For some types of ImageGroundConnection, we might not be able to
@@ -181,7 +181,7 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
 
     def title(self, *args):
         """
-        virtual std::string GeoCal::IgcCollection::title(int Image_index) const =0
+        virtual std::string GeoCal::IgcCollection::title(int Image_index) const
         Title that we can use to describe the image.
 
         This can be any string that is useful as a label. 
@@ -190,7 +190,7 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
 
     def image(self, *args):
         """
-        virtual boost::shared_ptr<RasterImage> GeoCal::IgcCollection::image(int Image_index) const =0
+        virtual boost::shared_ptr<RasterImage> GeoCal::IgcCollection::image(int Image_index) const
         Underlying image (if present) 
         """
         return _igc_collection.IgcCollection_image(self, *args)

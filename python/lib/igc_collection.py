@@ -12,76 +12,22 @@ def _new_from_init(cls, version, *args):
     inst.__init__(*args)
     return inst
 
-class IgcCollection(WithParameter):
-    '''This class describes a collection of ImageGroundConnection. This
-    particular class is a abstract base class. This is used to describe
-    what needs to be in the interface. Our python code uses duck typing, 
-    so as long as you supply the interface given in this class is it not
-    necessary to actually inherit from this class (although you can if
-    that is useful).
+# Add image_coordinate_jac to IgcCollection. We can't define this in C++
+# because we want to use the python sparse matrix which isn't available in C++
+def _image_coordinate_jac_parm(self, image_index, ground_point, jac,
+                               jac_row, jac_col, line_scale = 1, 
+                               sample_scale = 1):
+    '''Update Jacobian for image coordinate with respect to change in 
+    the parameters of the ground point. 
 
-    This is used by the SimultaneousBundleAdjustment class.
-    '''
+    We pass in the Jacobian to fill in along with the row and column for
+    the start of the submatrix we are filling in. We also optionally pass
+    in a scaling for the line and sample entries. This interface may seem
+    a bit odd, but this is what we have in the SimultaneousBundleAdjustment
+    that uses this call.'''
+    raise NotImplementedError("Subclass should implement this method")
 
-    def __init__(self):
-        WithParameter.__init__(self)
-
-    @abstractproperty
-    def number_image(self):
-        '''Number of images in this collection.'''
-        pass
-
-    @abstractmethod
-    def ground_coordinate(self, image_index, ic, dem = None):
-        '''Return ground coordinates for the given point'''
-        pass
-    
-    @abstractmethod
-    def dem(self, image_index):
-        '''Return DEM use for given image index'''
-        pass
-
-    @abstractmethod
-    def image_coordinate(self, image_index, ground_point):
-        '''Return image coordinates for the given ground point'''
-        pass
-    @abstractmethod
-    def image_coordinate_jac_cf(self, image_index, ground_point):
-        '''Return Jacobian for image coordinate with respect to change in 
-        the CartesianFixed coordinates of the ground point. This can either 
-        be a dense matrix or a scip.sparse matrix.'''
-        pass
-    @abstractmethod
-    def image_coordinate_jac_parm(self, image_index, ground_point, jac,
-                                  jac_row, jac_col, line_scale = 1, 
-                                  sample_scale = 1):
-        '''Update Jacobian for image coordinate with respect to change in 
-        the parameters of the ground point. 
-
-        We pass in the Jacobian to fill in along with the row and column for
-        the start of the submatrix we are filling in. We also optionally pass
-        in a scaling for the line and sample entries. This interface may seem
-        a bit odd, but this is what we have in the SimultaneousBundleAdjustment
-        that uses this call.'''
-        pass
-    @abstractmethod
-    def image_title(self, image_index):
-        '''Title to use when displaying the given image'''
-        pass
-
-    @abstractmethod
-    def image(self, image_index):
-        '''Image corresponding to the given image index.'''
-        pass
-
-    @abstractmethod
-    def image_ground_connection(self, image_index):
-        '''Return ImageGroundConnection for the given image'''
-
-    @abstractmethod
-    def subset(self, *indexset):
-        '''Return IgcCollection that contains just the selected 
-        image indices'''
+IgcCollection.image_coordinate_jac_parm = _image_coordinate_jac_parm
 
 class ImageGroundConnectionIgc(ImageGroundConnection, WithParameter):
     '''This wraps a IgcCollection with a particular image index into
@@ -90,7 +36,7 @@ class ImageGroundConnectionIgc(ImageGroundConnection, WithParameter):
         ImageGroundConnection.__init__(self, igc_collection.dem(image_index),
                                        igc_collection.image(image_index),
                                        None,
-                                       igc_collection.image_title(image_index))
+                                       igc_collection.title(image_index))
         self.igc_collection = igc_collection
         self.image_index = image_index
 
@@ -150,7 +96,7 @@ class IgcArray(IgcCollection):
         res += "  Number of images: %d\n" % self.number_image
         res += "  Images:\n"
         for i in range(self.number_image):
-            res += "     %s\n" % self.image_title(i)
+            res += "     %s\n" % self.title(i)
         res += "  Parameters:\n"
         for i in range(len(self.parameter_subset)):
             res += "     %s: %f\n" % (self.parameter_name_subset[i], 
@@ -276,12 +222,12 @@ class IgcArray(IgcCollection):
             ig.image_coordinate_jac_parm(i, ground_point, jac, jac_row, pstart,
                                          line_scale, sample_scale)
 
-    def image_title(self, image_index):
+    def title(self, image_index):
         '''Title to use when displaying the given image'''
         ig, i = self._igc_or_coll(image_index)
         if(i < 0):
             return ig.title
-        return ig.image_title(i)
+        return ig.title(i)
 
     def image(self, image_index):
         '''Image corresponding to the given image index.'''

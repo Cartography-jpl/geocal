@@ -11,7 +11,7 @@ class IgcCollection : public Printable<IgcCollection>,
 		      public virtual WithParameter {
 public:
   virtual ~IgcCollection() {}
-  virtual int number_image() const = 0;
+  virtual int number_image() const { return 0; }
 
 //-----------------------------------------------------------------------
 /// Return ground coordinate that goes with a particular image
@@ -29,13 +29,15 @@ public:
 
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(int Image_index, const ImageCoordinate& Ic,
-			const Dem& D) const = 0;
+			const Dem& D) const
+  { return image_ground_connection(Image_index)->ground_coordinate_dem(Ic, D); }
 
 //-----------------------------------------------------------------------
 /// Dem used by ground_coordinate
 //-----------------------------------------------------------------------
 
-  virtual boost::shared_ptr<Dem> dem(int Image_index) const  = 0;
+  virtual boost::shared_ptr<Dem> dem(int Image_index) const
+  { return image_ground_connection(Image_index)->dem_ptr(); }
 
 //-----------------------------------------------------------------------
 /// Return image coordinate that goes with a particular
@@ -52,7 +54,8 @@ public:
 
   virtual ImageCoordinate image_coordinate(int Image_index,
 					   const GroundCoordinate& Gc) 
-    const = 0;
+    const
+  { return image_ground_connection(Image_index)->image_coordinate(Gc); }
 
 //-----------------------------------------------------------------------
 /// Return the Jacobian of the image coordinates with respect to the
@@ -61,20 +64,23 @@ public:
 
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_cf(int Image_index, const CartesianFixed& Gc) 
-    const = 0;
+    const
+  { return image_ground_connection(Image_index)->image_coordinate_jac_cf(Gc); }
 
 //-----------------------------------------------------------------------
 /// Title that we can use to describe the image. This can be any
 /// string that is useful as a label.
 //-----------------------------------------------------------------------
 
-  virtual std::string title(int Image_index) const = 0;
+  virtual std::string title(int Image_index) const 
+  { return image_ground_connection(Image_index)->title(); }
 
 //-----------------------------------------------------------------------
 /// Underlying image (if present)
 //-----------------------------------------------------------------------
 
-  virtual boost::shared_ptr<RasterImage> image(int Image_index) const  = 0;
+  virtual boost::shared_ptr<RasterImage> image(int Image_index) const
+  { return image_ground_connection(Image_index)->image(); }
 
 //-----------------------------------------------------------------------
 /// Image ground connection for given image index.

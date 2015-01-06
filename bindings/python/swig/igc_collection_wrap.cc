@@ -6703,7 +6703,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_ground_coordinate_dem(PyObject *SWIGUNU
     {
       try {
         if (upcall) {
-          Swig::DirectorPureVirtualException::raise("GeoCal::IgcCollection::ground_coordinate_dem");
+          result = ((GeoCal::IgcCollection const *)arg1)->GeoCal::IgcCollection::ground_coordinate_dem(arg2,(GeoCal::ImageCoordinate const &)*arg3,(GeoCal::Dem const &)*arg4);
         } else {
           result = ((GeoCal::IgcCollection const *)arg1)->ground_coordinate_dem(arg2,(GeoCal::ImageCoordinate const &)*arg3,(GeoCal::Dem const &)*arg4);
         }
@@ -6767,7 +6767,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_dem(PyObject *SWIGUNUSEDPARM(self), PyO
     {
       try {
         if (upcall) {
-          Swig::DirectorPureVirtualException::raise("GeoCal::IgcCollection::dem");
+          result = ((GeoCal::IgcCollection const *)arg1)->GeoCal::IgcCollection::dem(arg2);
         } else {
           result = ((GeoCal::IgcCollection const *)arg1)->dem(arg2);
         }
@@ -6860,7 +6860,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_image_coordinate(PyObject *SWIGUNUSEDPA
     {
       try {
         if (upcall) {
-          Swig::DirectorPureVirtualException::raise("GeoCal::IgcCollection::image_coordinate");
+          result = ((GeoCal::IgcCollection const *)arg1)->GeoCal::IgcCollection::image_coordinate(arg2,(GeoCal::GroundCoordinate const &)*arg3);
         } else {
           result = ((GeoCal::IgcCollection const *)arg1)->image_coordinate(arg2,(GeoCal::GroundCoordinate const &)*arg3);
         }
@@ -7030,7 +7030,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_title(PyObject *SWIGUNUSEDPARM(self), P
     {
       try {
         if (upcall) {
-          Swig::DirectorPureVirtualException::raise("GeoCal::IgcCollection::title");
+          result = ((GeoCal::IgcCollection const *)arg1)->GeoCal::IgcCollection::title(arg2);
         } else {
           result = ((GeoCal::IgcCollection const *)arg1)->title(arg2);
         }
@@ -7092,7 +7092,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_image(PyObject *SWIGUNUSEDPARM(self), P
     {
       try {
         if (upcall) {
-          Swig::DirectorPureVirtualException::raise("GeoCal::IgcCollection::image");
+          result = ((GeoCal::IgcCollection const *)arg1)->GeoCal::IgcCollection::image(arg2);
         } else {
           result = ((GeoCal::IgcCollection const *)arg1)->image(arg2);
         }
@@ -8185,7 +8185,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { (char *)"IgcCollection__v_number_image", (PyCFunction)_wrap_IgcCollection__v_number_image, METH_O, (char *)"\n"
-		"virtual int GeoCal::IgcCollection::number_image() const =0\n"
+		"virtual int GeoCal::IgcCollection::number_image() const\n"
 		"\n"
 		""},
 	 { (char *)"IgcCollection___ground_coordinate", _wrap_IgcCollection___ground_coordinate, METH_VARARGS, (char *)"\n"
@@ -8194,17 +8194,17 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { (char *)"IgcCollection_ground_coordinate_dem", _wrap_IgcCollection_ground_coordinate_dem, METH_VARARGS, (char *)"\n"
-		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::IgcCollection::ground_coordinate_dem(int Image_index, const ImageCoordinate &Ic, const Dem &D) const =0\n"
+		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::IgcCollection::ground_coordinate_dem(int Image_index, const ImageCoordinate &Ic, const Dem &D) const\n"
 		"Return ground coordinate that goes with a particular image coordinate.\n"
 		"\n"
 		"This version supplies a Dem to use. \n"
 		""},
 	 { (char *)"IgcCollection_dem", _wrap_IgcCollection_dem, METH_VARARGS, (char *)"\n"
-		"virtual boost::shared_ptr<Dem> GeoCal::IgcCollection::dem(int Image_index) const =0\n"
+		"virtual boost::shared_ptr<Dem> GeoCal::IgcCollection::dem(int Image_index) const\n"
 		"Dem used by ground_coordinate. \n"
 		""},
 	 { (char *)"IgcCollection_image_coordinate", _wrap_IgcCollection_image_coordinate, METH_VARARGS, (char *)"\n"
-		"virtual ImageCoordinate GeoCal::IgcCollection::image_coordinate(int Image_index, const GroundCoordinate &Gc) const =0\n"
+		"virtual ImageCoordinate GeoCal::IgcCollection::image_coordinate(int Image_index, const GroundCoordinate &Gc) const\n"
 		"Return image coordinate that goes with a particular GroundCoordinate.\n"
 		"\n"
 		"For some types of ImageGroundConnection, we might not be able to\n"
@@ -8216,13 +8216,13 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"IgcCollection_image_coordinate_jac_cf", _wrap_IgcCollection_image_coordinate_jac_cf, METH_VARARGS, NULL},
 	 { (char *)"IgcCollection_title", _wrap_IgcCollection_title, METH_VARARGS, (char *)"\n"
-		"virtual std::string GeoCal::IgcCollection::title(int Image_index) const =0\n"
+		"virtual std::string GeoCal::IgcCollection::title(int Image_index) const\n"
 		"Title that we can use to describe the image.\n"
 		"\n"
 		"This can be any string that is useful as a label. \n"
 		""},
 	 { (char *)"IgcCollection_image", _wrap_IgcCollection_image, METH_VARARGS, (char *)"\n"
-		"virtual boost::shared_ptr<RasterImage> GeoCal::IgcCollection::image(int Image_index) const =0\n"
+		"virtual boost::shared_ptr<RasterImage> GeoCal::IgcCollection::image(int Image_index) const\n"
 		"Underlying image (if present) \n"
 		""},
 	 { (char *)"IgcCollection_image_ground_connection", _wrap_IgcCollection_image_ground_connection, METH_VARARGS, (char *)"\n"

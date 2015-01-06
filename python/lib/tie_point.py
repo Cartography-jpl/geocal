@@ -65,7 +65,7 @@ class TiePoint(object):
         plt.clf()
         for i in range(self.number_camera):
             plt.subplot(number_row, number_col, i + 1)
-            plt.title(igc_coll.image_title(i))
+            plt.title(igc_coll.title(i))
             if(map_info):
                 igc_proj = IgcMapProjected(map_info, 
                                            igc_coll.image_ground_connection(i))

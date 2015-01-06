@@ -106,9 +106,9 @@ def test_igc_array_with_igc_collection():
     igc_coll.parameter_subset = [1,2,3,4,5,6]
     assert_almost_equal(igc1.parameter_subset[0], 1, 10)
     assert_almost_equal(igc2.parameter_subset[1], 4, 10)
-    assert igc_coll.image_title(0) == "10MAY21-1.img"
-    assert igc_coll.image_title(1) == "10MAY21-2.img"
-    assert igc_coll.image_title(2) == "10MAY21-3.img"
+    assert igc_coll.title(0) == "10MAY21-1.img"
+    assert igc_coll.title(1) == "10MAY21-2.img"
+    assert igc_coll.title(2) == "10MAY21-3.img"
     assert os.path.basename(igc_coll.image(0).file.file_name) == \
         "10MAY21-1.img"
     assert os.path.basename(igc_coll.image(1).file.file_name) == \

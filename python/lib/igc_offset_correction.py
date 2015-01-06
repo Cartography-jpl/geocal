@@ -37,9 +37,9 @@ class IgcOffsetCorrection(IgcCollection):
         else:
             self.time = image_time
         if(image_title is None):
-            self.title = map(lambda x : x.title, self.imglist)
+            self._title = map(lambda x : x.title, self.imglist)
         else:
-            self.title = image_title
+            self._title = image_title
         self.orbit = orbit
         if(refraction):
             self.refraction = refraction
@@ -48,7 +48,7 @@ class IgcOffsetCorrection(IgcCollection):
             t2 = OrbitDataImageGroundConnection(self.orbit.orbit_data(t),
                                                 self.cam, self.demv,
                                                 self.image(0), 
-                                                self.image_title(0))
+                                                self.title(0))
             gc = t2.ground_coordinate(ImageCoordinate(cam.number_line(0) / 2.0,
                                                     cam.number_sample(0) / 2.0))
             self.refraction = Refraction(gc.height_reference_surface,
@@ -68,7 +68,7 @@ class IgcOffsetCorrection(IgcCollection):
                                 self.orbit,
                                 self.refraction,
                                 self.time,
-                                self.title)
+                                self._title)
 
     def _v_parameter_mask(self):
         return np.append(self.orbit.parameter_mask, self.cam.parameter_mask)
@@ -126,7 +126,7 @@ class IgcOffsetCorrection(IgcCollection):
             res = OrbitDataImageGroundConnection(self.orbit, t,
                                                  self.cam, self.demv, 
                                                  self.image(image_index),
-                                                 self.image_title(image_index),
+                                                 self.title(image_index),
                                                  self.refraction)
             self._igc_cache[image_index] = res
         return self._igc_cache[image_index]
@@ -137,7 +137,7 @@ class IgcOffsetCorrection(IgcCollection):
         imglist = []
         for i in indexset:
             img = self.image(i)
-            img.title = self.image_title(i)
+            img.title = self.title(i)
             img.time = self.time[i]
             imglist.append(img)
         res = IgcOffsetCorrection(imglist, self.cam, self.demv, 
@@ -182,9 +182,9 @@ class IgcOffsetCorrection(IgcCollection):
             jac[jac_row, jac_col + j] = jac_igc[0,j] * line_scale
             jac[jac_row+1, jac_col + j] = jac_igc[1,j] * sample_scale
             
-    def image_title(self, image_index):
+    def title(self, image_index):
         '''Title to use when displaying the given image'''
-        return self.title[image_index]
+        return self._title[image_index]
 
     def image(self, image_index):
         '''Image corresponding to the given image index.'''

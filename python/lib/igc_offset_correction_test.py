@@ -57,7 +57,7 @@ def test_igc():
     assert_almost_equal(igc_coll.image_coordinate(0, gp).sample, ic.sample, 3)
     t = cPickle.dumps(igc_coll, cPickle.HIGHEST_PROTOCOL)
     igc_coll2 = cPickle.loads(t)
-    assert igc_coll2.image_title(1) == igc_coll.image_title(1)
+    assert igc_coll2.title(1) == igc_coll.title(1)
     assert_almost_equal(igc_coll2.image_coordinate(0, gp).line, ic.line, 4)
     assert_almost_equal(igc_coll2.image_coordinate(0, gp).sample, ic.sample, 3)
 

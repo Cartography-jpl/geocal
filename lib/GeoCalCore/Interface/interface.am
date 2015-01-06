@@ -79,6 +79,7 @@ geocalinc_HEADERS+= @srcinterface@/raster_multifile.h
 libgeocal_la_SOURCES+= @srcinterface@/raster_multifile.cc
 geocalinc_HEADERS+= @srcinterface@/image_ground_connection.h
 libgeocal_la_SOURCES+= @srcinterface@/image_ground_connection.cc
+geocalinc_HEADERS+= @srcinterface@/igc_collection.h
 geocalinc_HEADERS+= @srcinterface@/geometric_model.h
 
 # Files that contain SWIG wrapper information.
@@ -95,6 +96,7 @@ SWIG_SRC += @swigsrc@/map_info_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_rpc_wrap.cc
 SWIG_SRC += @swigsrc@/raster_image_wrap.cc
 SWIG_SRC += @swigsrc@/image_ground_connection_wrap.cc
+SWIG_SRC += @swigsrc@/igc_collection_wrap.cc
 SWIG_SRC += @swigsrc@/frame_coordinate_wrap.cc
 SWIG_SRC += @swigsrc@/camera_wrap.cc
 SWIG_SRC += @swigsrc@/ray_caster_wrap.cc

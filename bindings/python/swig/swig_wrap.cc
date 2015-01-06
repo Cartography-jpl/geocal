@@ -44,6 +44,7 @@ extern "C" {
   void init_geocal_rpc(void);
   void init_raster_image(void);
   void init_image_ground_connection(void);
+  void init_igc_collection(void);
   void init_frame_coordinate(void);
   void init_camera(void);
   void init_ray_caster(void);
@@ -270,6 +271,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_rpc", init_geocal_rpc);
   init_extension_module(package, "_raster_image", init_raster_image);
   init_extension_module(package, "_image_ground_connection", init_image_ground_connection);
+  init_extension_module(package, "_igc_collection", init_igc_collection);
   init_extension_module(package, "_frame_coordinate", init_frame_coordinate);
   init_extension_module(package, "_camera", init_camera);
   init_extension_module(package, "_ray_caster", init_ray_caster);

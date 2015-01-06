@@ -21,6 +21,8 @@ public:
   %extend {
     double value_double(const std::string& Key) const
     { return $self->value<double>(Key); }
+    std::string value_string(const std::string& Key) const
+    { return $self->value<std::string>(Key); }
   }
   std::string print_to_string() const;
   %pickle_init(1, self.file_name);

@@ -65,12 +65,24 @@ public:
   virtual void print(std::ostream& Os) const
   { Os << "MspiConfigTable"; }
   int number_row() const { return data.rows(); }
+  bool has_column(const std::string& Column) const
+  {
+    return column_to_index_.count(Column) != 0;
+  }
   template<class T> T value(int Index, const std::string& Column) const;
+  template<class T> std::vector<T> value_column(const std::string& Column) 
+    const
+  {
+    std::vector<T> res;
+    for(int i = 0; i < number_row(); ++i)
+      res.push_back(value<T>(i, Column));
+    return res;
+  }
 private:
   std::map<std::string, int> column_to_index_;
   int column_to_index(const std::string& Column) const
   {
-    if(column_to_index_.count(Column) != 1)
+    if(!has_column(Column))
       throw Exception(Column + " is not found in table");
     return column_to_index_.find(Column)->second;
   }

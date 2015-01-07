@@ -6359,7 +6359,7 @@ boost::shared_ptr< GeoCal::ImageGroundConnection > SwigDirector_IgcCollection::i
 }
 
 
-boost::shared_ptr< GeoCal::IgcCollection > SwigDirector_IgcCollection::subset(std::vector< int,std::allocator< int > > const Index_set) const {
+boost::shared_ptr< GeoCal::IgcCollection > SwigDirector_IgcCollection::subset(std::vector< int,std::allocator< int > > const &Index_set) const {
   void *swig_argp ;
   int swig_res = 0 ;
   
@@ -7181,11 +7181,12 @@ fail:
 SWIGINTERN PyObject *_wrap_IgcCollection_subset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IgcCollection *arg1 = (GeoCal::IgcCollection *) 0 ;
-  std::vector< int,std::allocator< int > > arg2 ;
+  std::vector< int,std::allocator< int > > *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::IgcCollection const > tempshared1 ;
   boost::shared_ptr< GeoCal::IgcCollection const > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
   PyObject *swig_obj[2] ;
   Swig::Director *director = 0;
   bool upcall = false;
@@ -7209,12 +7210,14 @@ SWIGINTERN PyObject *_wrap_IgcCollection_subset(PyObject *SWIGUNUSEDPARM(self), 
   }
   {
     std::vector<int,std::allocator< int > > *ptr = (std::vector<int,std::allocator< int > > *)0;
-    int res = swig::asptr(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "IgcCollection_subset" "', argument " "2"" of type '" "std::vector< int,std::allocator< int > > const""'"); 
+    res2 = swig::asptr(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "IgcCollection_subset" "', argument " "2"" of type '" "std::vector< int,std::allocator< int > > const &""'"); 
     }
-    arg2 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcCollection_subset" "', argument " "2"" of type '" "std::vector< int,std::allocator< int > > const &""'"); 
+    }
+    arg2 = ptr;
   }
   director = SWIG_DIRECTOR_CAST(arg1);
   upcall = (director && (director->swig_get_self()==swig_obj[0]));
@@ -7224,7 +7227,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_subset(PyObject *SWIGUNUSEDPARM(self), 
         if (upcall) {
           Swig::DirectorPureVirtualException::raise("GeoCal::IgcCollection::subset");
         } else {
-          result = ((GeoCal::IgcCollection const *)arg1)->subset(arg2);
+          result = ((GeoCal::IgcCollection const *)arg1)->subset((std::vector< int,std::allocator< int > > const &)*arg2);
         }
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7238,8 +7241,10 @@ SWIGINTERN PyObject *_wrap_IgcCollection_subset(PyObject *SWIGUNUSEDPARM(self), 
   {
     resultobj = GeoCal::swig_to_python(result);
   }
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
 }
 
@@ -8230,7 +8235,7 @@ static PyMethodDef SwigMethods[] = {
 		"Image ground connection for given image index. \n"
 		""},
 	 { (char *)"IgcCollection_subset", _wrap_IgcCollection_subset, METH_VARARGS, (char *)"\n"
-		"virtual boost::shared_ptr<IgcCollection> GeoCal::IgcCollection::subset(const std::vector< int > Index_set) const =0\n"
+		"virtual boost::shared_ptr<IgcCollection> GeoCal::IgcCollection::subset(const std::vector< int > &Index_set) const =0\n"
 		"Return IgcCollection for a subset of the data. \n"
 		""},
 	 { (char *)"IgcCollection___str__", (PyCFunction)_wrap_IgcCollection___str__, METH_O, NULL},

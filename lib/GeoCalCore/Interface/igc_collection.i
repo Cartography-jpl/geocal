@@ -59,7 +59,7 @@ public:
   virtual boost::shared_ptr<ImageGroundConnection> 
   image_ground_connection(int Image_index) const = 0;
   virtual boost::shared_ptr<IgcCollection> 
-  subset(const std::vector<int> Index_set) const = 0;
+  subset(const std::vector<int>& Index_set) const = 0;
   std::string print_to_string() const;
 
   %python_attribute_with_set_virtual(parameter, blitz::Array<double, 1>);

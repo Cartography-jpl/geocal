@@ -5742,6 +5742,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MspiConfigTable__v_number_row(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiConfigTable *arg1 = (GeoCal::MspiConfigTable *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiConfigTable const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiConfigTable const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiConfigTable_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiConfigTable__v_number_row" "', argument " "1"" of type '" "GeoCal::MspiConfigTable const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigTable > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigTable > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigTable * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigTable > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigTable * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::MspiConfigTable const *)arg1)->number_row();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MspiConfigTable_value_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiConfigTable *arg1 = (GeoCal::MspiConfigTable *) 0 ;
@@ -6064,6 +6107,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_MspiConfigTable", _wrap_new_MspiConfigTable, METH_VARARGS, (char *)"\n"
 		"MspiConfigTable::MspiConfigTable(const MspiConfigFile &Config, const std::string &Table_name)\n"
 		"Create a MspiConfigTable for the given table name in the given file.\n"
+		"\n"
+		""},
+	 { (char *)"MspiConfigTable__v_number_row", (PyCFunction)_wrap_MspiConfigTable__v_number_row, METH_O, (char *)"\n"
+		"int GeoCal::MspiConfigTable::number_row() const\n"
 		"\n"
 		""},
 	 { (char *)"MspiConfigTable_value_double", _wrap_MspiConfigTable_value_double, METH_VARARGS, NULL},

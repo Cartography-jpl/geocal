@@ -5294,6 +5294,37 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
+#else
+      return PyString_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -5304,7 +5335,91 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  GeoCal::AirMspiIgcCollection *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AirMspiIgcCollection" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AirMspiIgcCollection" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AirMspiIgcCollection > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiIgcCollection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -5312,10 +5427,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection(PyObject *SWIGUNUSEDPARM(sel
   int res1 = SWIG_OLDOBJ ;
   int res2 = SWIG_OLDOBJ ;
   int res3 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[3] ;
   GeoCal::AirMspiIgcCollection *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"new_AirMspiIgcCollection",3,3,swig_obj)) SWIG_fail;
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
@@ -5374,6 +5488,28 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_AirMspiIgcCollection",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_new_AirMspiIgcCollection__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_new_AirMspiIgcCollection__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_AirMspiIgcCollection'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(std::string const &,std::string const &,std::string const &,std::string const &)\n"
+    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(std::string const &,std::string const &,std::string const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_image_ground_connection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
@@ -5420,6 +5556,635 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_image_ground_connection(PyObject
   {
     resultobj = GeoCal::swig_to_python(result);
   }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_view_number(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  int result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_view_number",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_view_number" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_view_number" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = (int)((GeoCal::AirMspiIgcCollection const *)arg1)->view_number(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_view_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  std::string result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_view_name",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_view_name" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_view_name" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = ((GeoCal::AirMspiIgcCollection const *)arg1)->view_name(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_view_time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  std::string result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_view_time",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_view_time" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_view_time" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = ((GeoCal::AirMspiIgcCollection const *)arg1)->view_time(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_l1b1_file_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  std::string result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_l1b1_file_name",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_l1b1_file_name" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_l1b1_file_name" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = ((GeoCal::AirMspiIgcCollection const *)arg1)->l1b1_file_name(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_l1b1_granule_id(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  std::string result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_l1b1_granule_id",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_l1b1_granule_id" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_l1b1_granule_id" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = ((GeoCal::AirMspiIgcCollection const *)arg1)->l1b1_granule_id(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_geolocation_stage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  std::string result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_geolocation_stage",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_geolocation_stage" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_geolocation_stage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = ((GeoCal::AirMspiIgcCollection const *)arg1)->geolocation_stage(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_target_type(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  std::string result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_target_type",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_target_type" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_target_type" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = ((GeoCal::AirMspiIgcCollection const *)arg1)->target_type(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_min_l1b1_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  int result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_min_l1b1_line",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_min_l1b1_line" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_min_l1b1_line" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = (int)((GeoCal::AirMspiIgcCollection const *)arg1)->min_l1b1_line(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_max_l1b1_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  int result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_max_l1b1_line",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_max_l1b1_line" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_max_l1b1_line" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = (int)((GeoCal::AirMspiIgcCollection const *)arg1)->max_l1b1_line(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_view_resolution(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_view_resolution",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_view_resolution" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_view_resolution" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = (double)((GeoCal::AirMspiIgcCollection const *)arg1)->view_resolution(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection__v_max_view_resolution(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection__v_max_view_resolution" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::AirMspiIgcCollection const *)arg1)->max_view_resolution();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection__v_l1b2_hdf_chunk_size_x(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection__v_l1b2_hdf_chunk_size_x" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::AirMspiIgcCollection const *)arg1)->l1b2_hdf_chunk_size_x();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection__v_l1b2_hdf_chunk_size_y(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection__v_l1b2_hdf_chunk_size_y" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::AirMspiIgcCollection const *)arg1)->l1b2_hdf_chunk_size_y();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -5482,12 +6247,75 @@ SWIGINTERN PyObject *AirMspiIgcCollection_swiginit(PyObject *SWIGUNUSEDPARM(self
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_AirMspiIgcCollection", _wrap_new_AirMspiIgcCollection, METH_VARARGS, (char *)"\n"
-		"GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(const std::string &Master_config_file, const std::string\n"
-		"&Orbit_file_name, const std::string &L1b1_table)\n"
+		"AirMspiIgcCollection::AirMspiIgcCollection(const std::string &Master_config_file, const std::string\n"
+		"&Orbit_file_name, const std::string &L1b1_table, const std::string\n"
+		"&Base_directory=\".\")\n"
+		"This creates a AirMspiIgcCollection by reading the given master config\n"
+		"file.\n"
 		"\n"
+		"Various files found in the input files can have relative paths. You\n"
+		"can specify the base directory these paths are relative to, the\n"
+		"default is the current directory. \n"
 		""},
 	 { (char *)"AirMspiIgcCollection_image_ground_connection", _wrap_AirMspiIgcCollection_image_ground_connection, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr< ImageGroundConnection > AirMspiIgcCollection::image_ground_connection(int Image_index) const\n"
+		"\n"
+		""},
+	 { (char *)"AirMspiIgcCollection_view_number", _wrap_AirMspiIgcCollection_view_number, METH_VARARGS, (char *)"\n"
+		"int GeoCal::AirMspiIgcCollection::view_number(int Index) const\n"
+		"Return view number. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_view_name", _wrap_AirMspiIgcCollection_view_name, METH_VARARGS, (char *)"\n"
+		"std::string GeoCal::AirMspiIgcCollection::view_name(int Index) const\n"
+		"Return view name. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_view_time", _wrap_AirMspiIgcCollection_view_time, METH_VARARGS, (char *)"\n"
+		"std::string GeoCal::AirMspiIgcCollection::view_time(int Index) const\n"
+		"Return view name. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_l1b1_file_name", _wrap_AirMspiIgcCollection_l1b1_file_name, METH_VARARGS, (char *)"\n"
+		"std::string AirMspiIgcCollection::l1b1_file_name(int Index) const\n"
+		"Return L1B1 file name. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_l1b1_granule_id", _wrap_AirMspiIgcCollection_l1b1_granule_id, METH_VARARGS, (char *)"\n"
+		"std::string GeoCal::AirMspiIgcCollection::l1b1_granule_id(int Index) const\n"
+		"Return l1b1 granule id. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_geolocation_stage", _wrap_AirMspiIgcCollection_geolocation_stage, METH_VARARGS, (char *)"\n"
+		"std::string GeoCal::AirMspiIgcCollection::geolocation_stage(int Index) const\n"
+		"Return geolocation stage. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_target_type", _wrap_AirMspiIgcCollection_target_type, METH_VARARGS, (char *)"\n"
+		"std::string GeoCal::AirMspiIgcCollection::target_type(int Index) const\n"
+		"Return target type. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_min_l1b1_line", _wrap_AirMspiIgcCollection_min_l1b1_line, METH_VARARGS, (char *)"\n"
+		"int GeoCal::AirMspiIgcCollection::min_l1b1_line(int Index) const\n"
+		"Return min L1B1 line. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_max_l1b1_line", _wrap_AirMspiIgcCollection_max_l1b1_line, METH_VARARGS, (char *)"\n"
+		"int GeoCal::AirMspiIgcCollection::max_l1b1_line(int Index) const\n"
+		"Return max L1B1 line. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_view_resolution", _wrap_AirMspiIgcCollection_view_resolution, METH_VARARGS, (char *)"\n"
+		"double GeoCal::AirMspiIgcCollection::view_resolution(int Index) const\n"
+		"Return view resolution.\n"
+		"\n"
+		"Note this is metadata passed in as a configuration, not the actual\n"
+		"resolution of the l1b1 data on the ground (use ImageGroundConnection\n"
+		"resolution_meter or footprint_resolution for that). \n"
+		""},
+	 { (char *)"AirMspiIgcCollection__v_max_view_resolution", (PyCFunction)_wrap_AirMspiIgcCollection__v_max_view_resolution, METH_O, (char *)"\n"
+		"double GeoCal::AirMspiIgcCollection::max_view_resolution() const\n"
+		"Return maximum view resolution. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection__v_l1b2_hdf_chunk_size_x", (PyCFunction)_wrap_AirMspiIgcCollection__v_l1b2_hdf_chunk_size_x, METH_O, (char *)"\n"
+		"int GeoCal::AirMspiIgcCollection::l1b2_hdf_chunk_size_x() const\n"
+		"Return HDF chunk size that we've been requested to use for the L1B2.\n"
+		"\n"
+		""},
+	 { (char *)"AirMspiIgcCollection__v_l1b2_hdf_chunk_size_y", (PyCFunction)_wrap_AirMspiIgcCollection__v_l1b2_hdf_chunk_size_y, METH_O, (char *)"\n"
+		"int GeoCal::AirMspiIgcCollection::l1b2_hdf_chunk_size_y() const\n"
 		"\n"
 		""},
 	 { (char *)"delete_AirMspiIgcCollection", (PyCFunction)_wrap_delete_AirMspiIgcCollection, METH_O, (char *)"\n"

@@ -204,7 +204,7 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
 
     def subset(self, *args):
         """
-        virtual boost::shared_ptr<IgcCollection> GeoCal::IgcCollection::subset(const std::vector< int > Index_set) const =0
+        virtual boost::shared_ptr<IgcCollection> GeoCal::IgcCollection::subset(const std::vector< int > &Index_set) const =0
         Return IgcCollection for a subset of the data. 
         """
         return _igc_collection.IgcCollection_subset(self, *args)

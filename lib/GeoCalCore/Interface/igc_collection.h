@@ -94,7 +94,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<IgcCollection> 
-  subset(const std::vector<int> Index_set) const = 0;
+  subset(const std::vector<int>& Index_set) const = 0;
 
 //-----------------------------------------------------------------------
 /// Default is that ImageGroundConnection ignores AutoDerivative

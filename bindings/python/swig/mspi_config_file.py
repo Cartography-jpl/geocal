@@ -194,11 +194,19 @@ class MspiConfigTable(geocal_swig.generic_object.GenericObject):
 
         """
         _mspi_config_file.MspiConfigTable_swiginit(self,_mspi_config_file.new_MspiConfigTable(*args))
+    def _v_number_row(self):
+        """
+        int GeoCal::MspiConfigTable::number_row() const
+
+        """
+        return _mspi_config_file.MspiConfigTable__v_number_row(self)
+
     @property
     def number_row(self):
         return self._v_number_row()
 
     __swig_destroy__ = _mspi_config_file.delete_MspiConfigTable
+MspiConfigTable._v_number_row = new_instancemethod(_mspi_config_file.MspiConfigTable__v_number_row,None,MspiConfigTable)
 MspiConfigTable.value_double = new_instancemethod(_mspi_config_file.MspiConfigTable_value_double,None,MspiConfigTable)
 MspiConfigTable.value_int = new_instancemethod(_mspi_config_file.MspiConfigTable_value_int,None,MspiConfigTable)
 MspiConfigTable.value_string = new_instancemethod(_mspi_config_file.MspiConfigTable_value_string,None,MspiConfigTable)

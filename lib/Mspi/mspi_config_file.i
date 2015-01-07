@@ -36,7 +36,7 @@ public:
 class MspiConfigTable : public GenericObject {
 public:
   MspiConfigTable(const MspiConfigFile& Config, const std::string& Table_name);
-  %python_attribute(number_row);
+  %python_attribute(number_row, int);
   // Just have the types we happen to have needed. We can extend this
   // as needed.
   %extend {

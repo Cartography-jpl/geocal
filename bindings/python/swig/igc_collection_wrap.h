@@ -40,7 +40,7 @@ public:
     virtual std::string title(int Image_index) const;
     virtual boost::shared_ptr< GeoCal::RasterImage > image(int Image_index) const;
     virtual boost::shared_ptr< GeoCal::ImageGroundConnection > image_ground_connection(int Image_index) const;
-    virtual boost::shared_ptr< GeoCal::IgcCollection > subset(std::vector< int,std::allocator< int > > const Index_set) const;
+    virtual boost::shared_ptr< GeoCal::IgcCollection > subset(std::vector< int,std::allocator< int > > const &Index_set) const;
 
 
 /* Internal Director utilities */

@@ -132,9 +132,15 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(const std::string &Master_config_file, const std::string
-        &Orbit_file_name, const std::string &L1b1_table)
+        AirMspiIgcCollection::AirMspiIgcCollection(const std::string &Master_config_file, const std::string
+        &Orbit_file_name, const std::string &L1b1_table, const std::string
+        &Base_directory=".")
+        This creates a AirMspiIgcCollection by reading the given master config
+        file.
 
+        Various files found in the input files can have relative paths. You
+        can specify the base directory these paths are relative to, the
+        default is the current directory. 
         """
         _air_mspi_igc_collection.AirMspiIgcCollection_swiginit(self,_air_mspi_igc_collection.new_AirMspiIgcCollection(*args))
     @property
@@ -148,8 +154,129 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_image_ground_connection(self, *args)
 
+    def view_number(self, *args):
+        """
+        int GeoCal::AirMspiIgcCollection::view_number(int Index) const
+        Return view number. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_view_number(self, *args)
+
+    def view_name(self, *args):
+        """
+        std::string GeoCal::AirMspiIgcCollection::view_name(int Index) const
+        Return view name. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_view_name(self, *args)
+
+    def view_time(self, *args):
+        """
+        std::string GeoCal::AirMspiIgcCollection::view_time(int Index) const
+        Return view name. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_view_time(self, *args)
+
+    def l1b1_file_name(self, *args):
+        """
+        std::string AirMspiIgcCollection::l1b1_file_name(int Index) const
+        Return L1B1 file name. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_l1b1_file_name(self, *args)
+
+    def l1b1_granule_id(self, *args):
+        """
+        std::string GeoCal::AirMspiIgcCollection::l1b1_granule_id(int Index) const
+        Return l1b1 granule id. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_l1b1_granule_id(self, *args)
+
+    def geolocation_stage(self, *args):
+        """
+        std::string GeoCal::AirMspiIgcCollection::geolocation_stage(int Index) const
+        Return geolocation stage. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_geolocation_stage(self, *args)
+
+    def target_type(self, *args):
+        """
+        std::string GeoCal::AirMspiIgcCollection::target_type(int Index) const
+        Return target type. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_target_type(self, *args)
+
+    def min_l1b1_line(self, *args):
+        """
+        int GeoCal::AirMspiIgcCollection::min_l1b1_line(int Index) const
+        Return min L1B1 line. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_min_l1b1_line(self, *args)
+
+    def max_l1b1_line(self, *args):
+        """
+        int GeoCal::AirMspiIgcCollection::max_l1b1_line(int Index) const
+        Return max L1B1 line. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_max_l1b1_line(self, *args)
+
+    def view_resolution(self, *args):
+        """
+        double GeoCal::AirMspiIgcCollection::view_resolution(int Index) const
+        Return view resolution.
+
+        Note this is metadata passed in as a configuration, not the actual
+        resolution of the l1b1 data on the ground (use ImageGroundConnection
+        resolution_meter or footprint_resolution for that). 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_view_resolution(self, *args)
+
+    def _v_max_view_resolution(self):
+        """
+        double GeoCal::AirMspiIgcCollection::max_view_resolution() const
+        Return maximum view resolution. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection__v_max_view_resolution(self)
+
+    @property
+    def max_view_resolution(self):
+        return self._v_max_view_resolution()
+
+    def _v_l1b2_hdf_chunk_size_x(self):
+        """
+        int GeoCal::AirMspiIgcCollection::l1b2_hdf_chunk_size_x() const
+        Return HDF chunk size that we've been requested to use for the L1B2.
+
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection__v_l1b2_hdf_chunk_size_x(self)
+
+    @property
+    def l1b2_hdf_chunk_size_x(self):
+        return self._v_l1b2_hdf_chunk_size_x()
+
+    def _v_l1b2_hdf_chunk_size_y(self):
+        """
+        int GeoCal::AirMspiIgcCollection::l1b2_hdf_chunk_size_y() const
+
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection__v_l1b2_hdf_chunk_size_y(self)
+
+    @property
+    def l1b2_hdf_chunk_size_y(self):
+        return self._v_l1b2_hdf_chunk_size_y()
+
     __swig_destroy__ = _air_mspi_igc_collection.delete_AirMspiIgcCollection
 AirMspiIgcCollection.image_ground_connection = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_image_ground_connection,None,AirMspiIgcCollection)
+AirMspiIgcCollection.view_number = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_view_number,None,AirMspiIgcCollection)
+AirMspiIgcCollection.view_name = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_view_name,None,AirMspiIgcCollection)
+AirMspiIgcCollection.view_time = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_view_time,None,AirMspiIgcCollection)
+AirMspiIgcCollection.l1b1_file_name = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_l1b1_file_name,None,AirMspiIgcCollection)
+AirMspiIgcCollection.l1b1_granule_id = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_l1b1_granule_id,None,AirMspiIgcCollection)
+AirMspiIgcCollection.geolocation_stage = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_geolocation_stage,None,AirMspiIgcCollection)
+AirMspiIgcCollection.target_type = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_target_type,None,AirMspiIgcCollection)
+AirMspiIgcCollection.min_l1b1_line = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_min_l1b1_line,None,AirMspiIgcCollection)
+AirMspiIgcCollection.max_l1b1_line = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_max_l1b1_line,None,AirMspiIgcCollection)
+AirMspiIgcCollection.view_resolution = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_view_resolution,None,AirMspiIgcCollection)
+AirMspiIgcCollection._v_max_view_resolution = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection__v_max_view_resolution,None,AirMspiIgcCollection)
+AirMspiIgcCollection._v_l1b2_hdf_chunk_size_x = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection__v_l1b2_hdf_chunk_size_x,None,AirMspiIgcCollection)
+AirMspiIgcCollection._v_l1b2_hdf_chunk_size_y = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection__v_l1b2_hdf_chunk_size_y,None,AirMspiIgcCollection)
 AirMspiIgcCollection_swigregister = _air_mspi_igc_collection.AirMspiIgcCollection_swigregister
 AirMspiIgcCollection_swigregister(AirMspiIgcCollection)
 

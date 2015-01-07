@@ -95,4 +95,5 @@ EXTRA_DIST+= @geocalunittestdata@/mspi/3.nav_gimbal.hdf4
 EXTRA_DIST+= @geocalunittestdata@/mspi/3.l1b1.hdf5
 EXTRA_DIST+= @geocalunittestdata@/mspi/3.mspi_camera_model.config
 EXTRA_DIST+= @geocalunittestdata@/mspi/3.instrument_info.config
+EXTRA_DIST+= @geocalunittestdata@/mspi/3.l1b1_table
 EXTRA_DIST+= @geocalunittestdata@/image_coordinate_test.xml

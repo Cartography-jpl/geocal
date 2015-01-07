@@ -1859,6 +1859,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	$(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
 	$(srcdir)/$(swigsrc)/*_wrap.h \
 	@geocalunittestdata@/mspi_config_file_test.txt \
+	@geocalunittestdata@/mspi_config_file_test2.txt \
 	@geocalunittestdata@/mspi_camera_test.config2 \
 	@geocalunittestdata@/mspi_camera_test.config \
 	@geocalunittestdata@/GndMSPI_CONFIG_CAMERA_MODEL_V004.config \

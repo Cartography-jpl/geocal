@@ -14,7 +14,9 @@
 namespace GeoCal {
 class AirMspiIgcCollection : public IgcCollection {
 public:
-  AirMspiIgcCollection();
+  AirMspiIgcCollection(const std::string& Master_config_file,
+		       const std::string& Orbit_file_name,
+		       const std::string& L1b1_table);
   %python_attribute(number_image, virtual int);
   virtual boost::shared_ptr<ImageGroundConnection> 
   image_ground_connection(int Image_index) const;

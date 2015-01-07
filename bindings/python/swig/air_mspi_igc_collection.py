@@ -130,12 +130,13 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self, *args): 
         """
-        GeoCal::AirMspiIgcCollection::AirMspiIgcCollection()
+        GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(const std::string &Master_config_file, const std::string
+        &Orbit_file_name, const std::string &L1b1_table)
 
         """
-        _air_mspi_igc_collection.AirMspiIgcCollection_swiginit(self,_air_mspi_igc_collection.new_AirMspiIgcCollection())
+        _air_mspi_igc_collection.AirMspiIgcCollection_swiginit(self,_air_mspi_igc_collection.new_AirMspiIgcCollection(*args))
     @property
     def number_image(self):
         return self._v_number_image()

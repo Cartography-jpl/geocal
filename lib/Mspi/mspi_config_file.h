@@ -35,12 +35,6 @@ public:
   explicit MspiConfigFile(const std::string& Fname);
   virtual ~MspiConfigFile() {}
 
-//-----------------------------------------------------------------------
-/// File name for MspiConfigFile.
-//-----------------------------------------------------------------------
-
-  const std::string& file_name() const {return fname;}
-
   template<class T> T value(const std::string& Keyword) const;
 
 //-----------------------------------------------------------------------
@@ -49,12 +43,39 @@ public:
   bool have_key(const std::string& K) const
   { return key_to_value.count(K) != 0; }
   virtual void print(std::ostream& Os) const;
+
+  void add_file(const std::string& Fname);
 private:
   const std::string& value_string(const std::string& Keyword) const;
   std::map<std::string, std::string> key_to_value;
-  std::string fname;
 };
 
+
+/****************************************************************//**
+  Small adapter that lets you refer to a table by column name. The
+  convention is that the table "FOO" has a config entry of FOO.columns
+  giving the column names, and FOO.table giving the actual values. We 
+  look of a value by doing "value<Type>(index, column_name)".
+*******************************************************************/
+
+class MspiConfigTable: public Printable<MspiConfigTable>  {
+public:
+  MspiConfigTable(const MspiConfigFile& Config, const std::string& Table_name);
+  virtual ~MspiConfigTable() {}
+  virtual void print(std::ostream& Os) const
+  { Os << "MspiConfigTable"; }
+  int number_row() const { return data.rows(); }
+  template<class T> T value(int Index, const std::string& Column) const;
+private:
+  std::map<std::string, int> column_to_index_;
+  int column_to_index(const std::string& Column) const
+  {
+    if(column_to_index_.count(Column) != 1)
+      throw Exception(Column + " is not found in table");
+    return column_to_index_.find(Column)->second;
+  }
+  blitz::Array<std::string, 2> data;
+};
 
 /****************************************************************//**
   C++ doesn't allow function partial specialization. We introduce a 
@@ -86,7 +107,28 @@ T MspiConfigFile::value(const std::string& Keyword) const
     Exception e;
     e << "Error occurred while trying to parse a keyword in MspiConfigFile.\n"
       << "  Keyword: " << Keyword << "\n"
-      << "  File:    " << file_name() << "\n"
+      << "  Error:\n"
+      << eoriginal.what() << "\n";
+    throw e;
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Return value for index and column
+//-----------------------------------------------------------------------
+
+template<class T> inline 
+T MspiConfigTable::value(int Index, const std::string& Column) const
+{
+  try {
+    range_check(Index, 0, number_row());
+    // Forward to helper class
+    return MspiConfigFilePartialHelper<T>().parse_string(data(Index, column_to_index(Column)));
+  } catch(std::exception& eoriginal) {
+    Exception e;
+    e << "Error occurred while trying to parse a table in MspiConfigTable.\n"
+      << "  Index:  " << Index << "\n"
+      << "  Column: " << Column << "\n"
       << "  Error:\n"
       << eoriginal.what() << "\n";
     throw e;

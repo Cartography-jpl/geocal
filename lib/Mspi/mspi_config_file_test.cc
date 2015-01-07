@@ -42,6 +42,25 @@ BOOST_AUTO_TEST_CASE(basic_test)
     200, 201, 202, 203,
     300, 301, 302, 303;
   BOOST_CHECK_MATRIX_CLOSE(a1, a1_expect);
+
+
+  // Test adding to file
+  BOOST_CHECK_CLOSE(config.value<double>("parameter6"), 1.00000001, 1e-8);
+  BOOST_CHECK(!config.have_key("parameter10"));
+  config.add_file(test_data_dir() + "mspi_config_file_test2.txt");
+  BOOST_CHECK_CLOSE(config.value<double>("parameter6"), 2.00000001, 1e-8);
+  BOOST_CHECK_EQUAL(config.value<int>("parameter10"), 3);
+  BOOST_CHECK_EQUAL(config.value<int>("parameter10-11"), 4);
 }
 
+BOOST_AUTO_TEST_CASE(table_test)
+{
+  MspiConfigFile config(test_data_dir() + "mspi_config_file_test.txt");
+  config.add_file(test_data_dir() + "mspi_config_file_test2.txt");
+  MspiConfigTable tab(config, "L1B1");
+  BOOST_CHECK_EQUAL(tab.value<int>(0, "view_number"), 6);
+  BOOST_CHECK_EQUAL(tab.value<int>(1, "view_number"), 7);
+  BOOST_CHECK_EQUAL(tab.value<std::string>(0, "l1b1_file"), "file1.hdf");
+  BOOST_CHECK_EQUAL(tab.value<std::string>(1, "l1b1_file"), "file2.hdf");
+}
 BOOST_AUTO_TEST_SUITE_END()

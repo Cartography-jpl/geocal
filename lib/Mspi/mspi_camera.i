@@ -14,7 +14,8 @@
 namespace GeoCal {
 class MspiCamera : public QuaternionCamera {
 public:
-  MspiCamera(const std::string& Fname);
+  MspiCamera(const std::string& Fname, 
+	     const std::string& Extra_config_file = "");
   MspiCamera(const std::string& Fname, const blitz::Array<double, 1>& Param);
   void read_config_file(const std::string& File_name);
   %python_attribute(file_name, std::string);

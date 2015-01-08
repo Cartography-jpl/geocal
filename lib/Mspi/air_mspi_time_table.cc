@@ -14,7 +14,7 @@ void AirMspiTimeTable::save(Archive & ar, const unsigned int version) const
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_BASE(AirMspiTimeTable, TimeTable);
-  ar & GEOCAL_NVP(l1b1_file_name)
+  ar & GEOCAL_NVP_(l1b1_file_name)
     & GEOCAL_NVP(refrow);
 }
 
@@ -23,7 +23,7 @@ void AirMspiTimeTable::load(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_BASE(AirMspiTimeTable, TimeTable);
-  ar & GEOCAL_NVP(l1b1_file_name)
+  ar & GEOCAL_NVP_(l1b1_file_name)
     & GEOCAL_NVP(refrow);
   read_data();
 }
@@ -38,16 +38,31 @@ GEOCAL_SPLIT_IMPLEMENT(AirMspiTimeTable);
 AirMspiTimeTable::AirMspiTimeTable
 (const std::string& L1b1_file_name, 
  const std::string& Instrument_config_file_name)
-  : l1b1_file_name(L1b1_file_name)
+  : l1b1_file_name_(L1b1_file_name)
 {
-  refrow = reference_row(Instrument_config_file_name);
+  refrow = reference_row_calc(Instrument_config_file_name);
+  read_data();
+}
+
+//-----------------------------------------------------------------------
+/// Variation of constructor that takes the reference row to use.
+//-----------------------------------------------------------------------
+
+AirMspiTimeTable::AirMspiTimeTable
+(const std::string& L1b1_file_name, 
+ int Reference_row
+)
+: l1b1_file_name_(L1b1_file_name),
+  refrow(Reference_row)
+{
   read_data();
 }
 
 void AirMspiTimeTable::read_data()
 {
 #ifdef HAVE_MSPI_SHARED
-  MSPI::Shared::L1B1Reader l1b1(l1b1_file_name);
+  MSPI::Shared::L1B1Reader l1b1(l1b1_file_name_);
+  l1b1_granule_id_ = l1b1.granule_id();
   Time tepoch = Time::parse_time(l1b1.epoch());
   std::vector<double> toffset = 
     l1b1.read_time(refrow, 0, l1b1.number_frame(refrow));
@@ -62,7 +77,7 @@ void AirMspiTimeTable::read_data()
 void AirMspiTimeTable::print(std::ostream& Os) const 
 {
   Os << "AirMspiTimeTable:\n"
-     << "  L1b1 file name: " << l1b1_file_name << "\n"
+     << "  L1b1 file name: " << l1b1_file_name_ << "\n"
      << "  Reference row:  " << refrow << "\n";
 }
 
@@ -75,7 +90,7 @@ void AirMspiTimeTable::print(std::ostream& Os) const
 /// is a spectral band number.
 //-----------------------------------------------------------------------
 
-int AirMspiTimeTable::reference_row
+int AirMspiTimeTable::reference_row_calc
 (const std::string& Instrument_config_file_name) const
 {
   // Determine mapping from instrument_band, row_type to row_number

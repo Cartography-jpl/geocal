@@ -35,11 +35,13 @@ GEOCAL_IMPLEMENT(MspiCamera);
 /// Read in the given configuration file.
 //-----------------------------------------------------------------------
 
-void MspiCamera::read_config_file(const std::string& File_name)
+void MspiCamera::read_config_file(const std::string& File_name,
+				  const std::string& Extra_config_file)
 {
   fname = File_name;
   MspiConfigFile c(File_name);
-
+  if(Extra_config_file != "")
+    c.add_file(Extra_config_file);
 
 //-------------------------------------------------------
 // Some hardcoded values that we don't expect to change.

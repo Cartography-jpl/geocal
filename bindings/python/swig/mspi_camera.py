@@ -144,7 +144,8 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         _mspi_camera.MspiCamera_swiginit(self,_mspi_camera.new_MspiCamera(*args))
     def read_config_file(self, *args):
         """
-        void MspiCamera::read_config_file(const std::string &File_name)
+        void MspiCamera::read_config_file(const std::string &File_name, const std::string
+        &Extra_config_file="")
         Read in the given configuration file.
 
         Get mapping from band to row number 

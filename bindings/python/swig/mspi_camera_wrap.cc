@@ -5301,6 +5301,60 @@ extern "C" {
 SWIGINTERN PyObject *_wrap_new_MspiCamera__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  GeoCal::MspiCamera *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MspiCamera" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MspiCamera" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_MspiCamera" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MspiCamera" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::MspiCamera *)new GeoCal::MspiCamera((std::string const &)*arg1,(std::string const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::MspiCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::MspiCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MspiCamera__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   GeoCal::MspiCamera *result = 0 ;
   
@@ -5337,7 +5391,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_MspiCamera__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_MspiCamera__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -5397,15 +5451,29 @@ SWIGINTERN PyObject *_wrap_new_MspiCamera(PyObject *self, PyObject *args) {
   if (!(argc = SWIG_Python_UnpackTuple(args,"new_MspiCamera",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_new_MspiCamera__SWIG_0(self, argc, argv);
+    return _wrap_new_MspiCamera__SWIG_1(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_new_MspiCamera__SWIG_1(self, argc, argv);
+    int _v = 0;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[1]));
+        _v = (t.obj && PyArray_NDIM(t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_2;
+    return _wrap_new_MspiCamera__SWIG_2(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 2) {
+    return _wrap_new_MspiCamera__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_MspiCamera'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::MspiCamera::MspiCamera(std::string const &,std::string const &)\n"
     "    GeoCal::MspiCamera::MspiCamera(std::string const &)\n"
     "    GeoCal::MspiCamera::MspiCamera(std::string const &,blitz::Array< double,1 > const &)\n");
   return 0;
@@ -6258,7 +6326,8 @@ static PyMethodDef SwigMethods[] = {
 		"file and then updates the parameters to the given value. \n"
 		""},
 	 { (char *)"MspiCamera_read_config_file", _wrap_MspiCamera_read_config_file, METH_VARARGS, (char *)"\n"
-		"void MspiCamera::read_config_file(const std::string &File_name)\n"
+		"void MspiCamera::read_config_file(const std::string &File_name, const std::string\n"
+		"&Extra_config_file=\"\")\n"
 		"Read in the given configuration file.\n"
 		"\n"
 		"Get mapping from band to row number \n"

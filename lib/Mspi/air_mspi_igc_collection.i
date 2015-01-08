@@ -44,5 +44,8 @@ public:
   int number_band(int Index);
   int band(int Index);
   void band(int Index, int B);
+  int min_l1b1_line(int Index) const;
+  int max_l1b1_line(int Index) const;
+  int view_number_to_image_index(int View_number) const;
 };
 }

@@ -103,6 +103,38 @@ public:
     return file_name(config_value<std::string>(Index, "l1b1_file"));
   }
 
+//-----------------------------------------------------------------------
+/// Return the minimum line in the l1b1 file that we have all the data
+/// to process. This looks at the both the l1b1 file itself and also
+/// the coverage of the navigation file. It can also be shrunk by the
+/// user supplying the range in the configuration files.
+//-----------------------------------------------------------------------
+
+  int min_l1b1_line(int Index) const
+  {
+    range_check(Index, 0, number_image());
+    return min_l1b1_line_[Index];
+  }
+
+//-----------------------------------------------------------------------
+/// Return the maximum line in the l1b1 file that we have all the data
+/// to process. This looks at the both the l1b1 file itself and also
+/// the coverage of the navigation file. It can also be shrunk by the
+/// user supplying the range in the configuration files.
+//-----------------------------------------------------------------------
+
+  int max_l1b1_line(int Index) const
+  {
+    range_check(Index, 0, number_image());
+    return max_l1b1_line_[Index];
+  }
+
+  int view_number_to_image_index(int View_number) const;
+//-----------------------------------------------------------------------
+/// Go from view number (found in the l1b1 table file) to the index
+/// number matching it.
+//-----------------------------------------------------------------------
+
   // We'll mess with parameter in a bit, for now leave this out.
 private:
   // We do lazy evaluation, so allow this to be changed by 
@@ -111,11 +143,12 @@ private:
   boost::shared_ptr<Dem> dem;
   double dem_resolution;
   std::vector<MspiConfigFile> view_config_;
+  // Reference row time table to use.
+  int reference_row_;
   std::vector<int> min_l1b1_line_, max_l1b1_line_;
   std::string base_directory;
   AirMspiIgcCollection(const AirMspiIgcCollection& Original, 
 		       const std::vector<int>& Index_set);
-  int reference_row(const std::string& Instrument_config_file_name) const;
 
 //-----------------------------------------------------------------------
 /// Get a file name, possibly adding the base_directory if it is a

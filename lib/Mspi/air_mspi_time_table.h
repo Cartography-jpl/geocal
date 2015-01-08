@@ -11,12 +11,29 @@ class AirMspiTimeTable : public MeasuredTimeTable {
 public:
   AirMspiTimeTable(const std::string& L1b1_file_name, 
 		   const std::string& Instrument_config_file_name);
+  AirMspiTimeTable(const std::string& L1b1_file_name, 
+		   int Reference_row);
   virtual ~AirMspiTimeTable() {}
   virtual void print(std::ostream& Os) const;
+  int reference_row() const { return refrow; }
+
+//-----------------------------------------------------------------------
+/// The file name we are using.
+//-----------------------------------------------------------------------
+
+  const std::string& l1b1_file_name() const { return l1b1_file_name_; }
+
+//-----------------------------------------------------------------------
+/// The file granule id we are using.
+//-----------------------------------------------------------------------
+
+  const std::string& l1b1_granule_id() const { return l1b1_granule_id_; }
+ 
 private:
-  std::string l1b1_file_name;
+  std::string l1b1_file_name_;
+  std::string l1b1_granule_id_;
   int refrow;
-  int reference_row(const std::string& Instrument_config_file_name) const;
+  int reference_row_calc(const std::string& Instrument_config_file_name) const;
   void read_data();
   AirMspiTimeTable() {}
   friend class boost::serialization::access;

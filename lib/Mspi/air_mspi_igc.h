@@ -4,6 +4,7 @@
 				// Definition of
 				// IpiImageGroundConnection
 #include "air_mspi_orbit.h"	// Definition of AirMspiOrbit.
+#include "air_mspi_time_table.h" // Definition of AirMspiTimeTable.
 #include "mspi_camera.h"	// Definition of MspiCamera.
 
 namespace GeoCal {
@@ -63,9 +64,9 @@ public:
 /// TimeTable we are using.
 //-----------------------------------------------------------------------
 
-  boost::shared_ptr<TimeTable> time_table() const
+  boost::shared_ptr<AirMspiTimeTable> time_table() const
   {
-    return ipi().time_table_ptr();
+    return boost::dynamic_pointer_cast<AirMspiTimeTable>(ipi().time_table_ptr());
   }
 
 //-----------------------------------------------------------------------

@@ -5075,6 +5075,34 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
+#else
+      return PyString_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -5140,6 +5168,135 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_AirMspiTimeTable__v_reference_row(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiTimeTable *arg1 = (GeoCal::AirMspiTimeTable *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiTimeTable const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiTimeTable const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiTimeTable_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiTimeTable__v_reference_row" "', argument " "1"" of type '" "GeoCal::AirMspiTimeTable const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiTimeTable > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiTimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiTimeTable * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiTimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiTimeTable * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::AirMspiTimeTable const *)arg1)->reference_row();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiTimeTable__v_l1b1_file_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiTimeTable *arg1 = (GeoCal::AirMspiTimeTable *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiTimeTable const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiTimeTable const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiTimeTable_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiTimeTable__v_l1b1_file_name" "', argument " "1"" of type '" "GeoCal::AirMspiTimeTable const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiTimeTable > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiTimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiTimeTable * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiTimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiTimeTable * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::AirMspiTimeTable const *)arg1)->l1b1_file_name();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiTimeTable__v_l1b1_granule_id(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiTimeTable *arg1 = (GeoCal::AirMspiTimeTable *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiTimeTable const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiTimeTable const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiTimeTable_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiTimeTable__v_l1b1_granule_id" "', argument " "1"" of type '" "GeoCal::AirMspiTimeTable const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiTimeTable > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiTimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiTimeTable * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiTimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiTimeTable * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::AirMspiTimeTable const *)arg1)->l1b1_granule_id();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_AirMspiTimeTable(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::AirMspiTimeTable *arg1 = (GeoCal::AirMspiTimeTable *) 0 ;
@@ -5196,9 +5353,20 @@ SWIGINTERN PyObject *AirMspiTimeTable_swiginit(PyObject *SWIGUNUSEDPARM(self), P
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_AirMspiTimeTable", _wrap_new_AirMspiTimeTable, METH_VARARGS, (char *)"\n"
-		"AirMspiTimeTable::AirMspiTimeTable(const std::string &L1b1_file_name, const std::string\n"
-		"&Instrument_config_file_name)\n"
-		"Constructor. \n"
+		"AirMspiTimeTable::AirMspiTimeTable(const std::string &L1b1_file_name, int Reference_row)\n"
+		"Variation of constructor that takes the reference row to use. \n"
+		""},
+	 { (char *)"AirMspiTimeTable__v_reference_row", (PyCFunction)_wrap_AirMspiTimeTable__v_reference_row, METH_O, (char *)"\n"
+		"int GeoCal::AirMspiTimeTable::reference_row() const\n"
+		"\n"
+		""},
+	 { (char *)"AirMspiTimeTable__v_l1b1_file_name", (PyCFunction)_wrap_AirMspiTimeTable__v_l1b1_file_name, METH_O, (char *)"\n"
+		"const std::string& GeoCal::AirMspiTimeTable::l1b1_file_name() const\n"
+		"The file name we are using. \n"
+		""},
+	 { (char *)"AirMspiTimeTable__v_l1b1_granule_id", (PyCFunction)_wrap_AirMspiTimeTable__v_l1b1_granule_id, METH_O, (char *)"\n"
+		"const std::string& GeoCal::AirMspiTimeTable::l1b1_granule_id() const\n"
+		"The file granule id we are using. \n"
 		""},
 	 { (char *)"delete_AirMspiTimeTable", (PyCFunction)_wrap_delete_AirMspiTimeTable, METH_O, (char *)"\n"
 		"virtual GeoCal::AirMspiTimeTable::~AirMspiTimeTable()\n"

@@ -198,7 +198,7 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
 
     def _v_time_table(self):
         """
-        boost::shared_ptr<TimeTable> GeoCal::AirMspiIgc::time_table() const
+        boost::shared_ptr<AirMspiTimeTable> GeoCal::AirMspiIgc::time_table() const
         TimeTable we are using. 
         """
         return _air_mspi_igc.AirMspiIgc__v_time_table(self)

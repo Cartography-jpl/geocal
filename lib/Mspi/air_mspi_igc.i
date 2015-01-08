@@ -9,6 +9,7 @@
 
 %base_import(ipi_image_ground_connection)
 %import "air_mspi_orbit.i"
+%import "air_mspi_time_table.i"
 %import "mspi_camera.i"
 
 %geocal_shared_ptr(GeoCal::AirMspiIgc);
@@ -24,7 +25,7 @@ public:
   %python_attribute(base_directory, std::string);
   %python_attribute(master_config_file, std::string);
   %python_attribute(orbit, boost::shared_ptr<AirMspiOrbit>);
-  %python_attribute(time_table, boost::shared_ptr<TimeTable>);
+  %python_attribute(time_table, boost::shared_ptr<AirMspiTimeTable>);
   %python_attribute(camera, boost::shared_ptr<MspiCamera>);
   %python_attribute(orbit_file_name, std::string);
   %python_attribute(l1b1_file_name, std::string);

@@ -4,9 +4,6 @@
 #include "did_datum.h"
 #include "usgs_dem.h"
 #include "simple_dem.h"
-#ifdef HAVE_MSPI_SHARED
-#include "File/L1B1File/src/l1b1_reader.h"
-#endif
 #include "geocal_serialize_support.h"
 
 using namespace GeoCal;
@@ -21,6 +18,7 @@ void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
   //  ar & GEOCAL_NVP(dem) & GEOCAL_NVP(dem_resolution) &
   //  GEOCAL_NVP_(view_config)
   ar & GEOCAL_NVP_(view_config)
+    & GEOCAL_NVP_(reference_row)
     & GEOCAL_NVP_(min_l1b1_line) & GEOCAL_NVP_(max_l1b1_line)
     & GEOCAL_NVP(base_directory)
     & GEOCAL_NVP_(config_filename)
@@ -48,6 +46,10 @@ AirMspiIgcCollection::AirMspiIgcCollection
 {
   MspiConfigFile c(Master_config_file);
 
+  // Temp
+  config_filename_ = Master_config_file;
+  orbit_filename_ = Orbit_file_name;
+
   // Get DEM set up
   if(c.value<std::string>("dem_type") == "usgs") {
     boost::shared_ptr<Datum> 
@@ -60,9 +62,6 @@ AirMspiIgcCollection::AirMspiIgcCollection
     dem.reset(new SimpleDem(h));
     dem_resolution = 10.0;
   }
-
-  int ref_row = 
-    reference_row(file_name(c.value<std::string>("instrument_info_config")));
 
   // Set up view information
   MspiConfigFile vconfig(L1b1_table);
@@ -86,13 +85,27 @@ AirMspiIgcCollection::AirMspiIgcCollection
   }
   // Go through and fill in some data that we need to read the l1b1
   // file for.
+  AirMspiIgc igcscratch(config_filename_,
+			orbit_filename_,
+			l1b1_file_name(0), 0,
+			base_directory);
+  reference_row_ = igcscratch.time_table()->reference_row();
+  boost::shared_ptr<AirMspiOrbit> orb = igcscratch.orbit();
 
-#ifdef HAVE_MSPI_SHARED
   for(int i = 0; i < number_image(); ++i) {
-    MSPI::Shared::L1B1Reader l1b1(l1b1_file_name(i));
-    view_config_[i].add("l1b1_granule_id", l1b1.granule_id());
-    int min_ln = 0;
-    int max_ln = l1b1.number_frame(ref_row) - 1;
+    AirMspiTimeTable tt(l1b1_file_name(i), reference_row_);
+    view_config_[i].add("l1b1_granule_id", tt.l1b1_granule_id());
+    int min_ln = tt.min_line();
+    int max_ln = tt.max_line();
+    // Trim time if orbit doesn't cover the full range the time table does.
+    if(orb->min_time() > tt.min_time())
+      min_ln = std::max(min_ln,
+			(int) ceil(tt.image_coordinate(orb->min_time(), 
+		       FrameCoordinate(0,0)).line) + 2);
+    if(orb->max_time() < tt.max_time())
+      max_ln = std::min(max_ln,
+			(int) floor(tt.image_coordinate(orb->max_time(), 
+		       FrameCoordinate(0,0)).line) - 2);
     if(have_config(i, "min_l1b1_line"))
       min_ln = std::max(min_ln, config_value<int>(i, "min_l1b1_line"));
     if(have_config(i, "max_l1b1_line"))
@@ -100,13 +113,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
     min_l1b1_line_.push_back(min_ln);
     max_l1b1_line_.push_back(max_ln);
   }
-#else
-  throw Exception("This class requires that MSPI Shared library be available");
-#endif
 
-  // Temp
-  config_filename_ = Master_config_file;
-  orbit_filename_ = Orbit_file_name;
 }
 
 // see base class for description.
@@ -166,28 +173,16 @@ AirMspiIgcCollection::AirMspiIgcCollection
 }
 
 //-----------------------------------------------------------------------
-/// This is a duplicate of code found in AirMpsiTimeTable. We should
-/// fix this at some point, but for now we'll just copy the code here.
-//
-/// Determine the reference row to use for the time table. This comes
-/// from the 660nm I band. 
-/// Note that the band number used in the instrument config file is
-/// *not* the same as the band number used in the camera. Instead this
-/// is a spectral band number.
+/// Go from view number (found in the l1b1 table file) to the index
+/// number matching it.
 //-----------------------------------------------------------------------
 
-int AirMspiIgcCollection::reference_row
-(const std::string& Instrument_config_file_name) const
+int AirMspiIgcCollection::view_number_to_image_index(int View_number) const
 {
-  // Determine mapping from instrument_band, row_type to row_number
-  MspiConfigFile iconfig(Instrument_config_file_name);
-  std::vector<int> rn = iconfig.value<std::vector<int> >("row_numbers");
-  std::vector<std::string> rt = 
-    iconfig.value<std::vector<std::string> >("row_types");
-  // Note that this is a spectral band, not the camera band.
-  std::vector<int> rb = iconfig.value<std::vector<int> >("band");
-  std::map<int, std::map<std::string, int> > inst_to_row;
-  for(int i = 0 ; i < (int) rn.size(); ++i)
-    inst_to_row[rb[i]][rt[i]]=rn[i];
-  return inst_to_row[6]["I"];
+  for(int i = 0; i < number_image(); ++i)
+    if(config_value<int>(i, "view_number") == View_number)
+      return i;
+  Exception e;
+  e << "The view number " << View_number 
+    << " is not found in the AirMspiIgcCollection";
 }

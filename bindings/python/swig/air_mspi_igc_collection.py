@@ -202,6 +202,38 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_band(self, *args)
 
+    def min_l1b1_line(self, *args):
+        """
+        int GeoCal::AirMspiIgcCollection::min_l1b1_line(int Index) const
+        Return the minimum line in the l1b1 file that we have all the data to
+        process.
+
+        This looks at the both the l1b1 file itself and also the coverage of
+        the navigation file. It can also be shrunk by the user supplying the
+        range in the configuration files. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_min_l1b1_line(self, *args)
+
+    def max_l1b1_line(self, *args):
+        """
+        int GeoCal::AirMspiIgcCollection::max_l1b1_line(int Index) const
+        Return the maximum line in the l1b1 file that we have all the data to
+        process.
+
+        This looks at the both the l1b1 file itself and also the coverage of
+        the navigation file. It can also be shrunk by the user supplying the
+        range in the configuration files. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_max_l1b1_line(self, *args)
+
+    def view_number_to_image_index(self, *args):
+        """
+        int AirMspiIgcCollection::view_number_to_image_index(int View_number) const
+        Go from view number (found in the l1b1 table file) to the index number
+        matching it. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_view_number_to_image_index(self, *args)
+
     __swig_destroy__ = _air_mspi_igc_collection.delete_AirMspiIgcCollection
 AirMspiIgcCollection.image_ground_connection = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_image_ground_connection,None,AirMspiIgcCollection)
 AirMspiIgcCollection.have_config = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_have_config,None,AirMspiIgcCollection)
@@ -213,6 +245,9 @@ AirMspiIgcCollection.camera = new_instancemethod(_air_mspi_igc_collection.AirMsp
 AirMspiIgcCollection.time_table = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_time_table,None,AirMspiIgcCollection)
 AirMspiIgcCollection.number_band = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_number_band,None,AirMspiIgcCollection)
 AirMspiIgcCollection.band = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_band,None,AirMspiIgcCollection)
+AirMspiIgcCollection.min_l1b1_line = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_min_l1b1_line,None,AirMspiIgcCollection)
+AirMspiIgcCollection.max_l1b1_line = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_max_l1b1_line,None,AirMspiIgcCollection)
+AirMspiIgcCollection.view_number_to_image_index = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_view_number_to_image_index,None,AirMspiIgcCollection)
 AirMspiIgcCollection_swigregister = _air_mspi_igc_collection.AirMspiIgcCollection_swigregister
 AirMspiIgcCollection_swigregister(AirMspiIgcCollection)
 

@@ -131,12 +131,47 @@ class AirMspiTimeTable(geocal_swig.time_table.MeasuredTimeTable):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        AirMspiTimeTable::AirMspiTimeTable(const std::string &L1b1_file_name, const std::string
-        &Instrument_config_file_name)
-        Constructor. 
+        AirMspiTimeTable::AirMspiTimeTable(const std::string &L1b1_file_name, int Reference_row)
+        Variation of constructor that takes the reference row to use. 
         """
         _air_mspi_time_table.AirMspiTimeTable_swiginit(self,_air_mspi_time_table.new_AirMspiTimeTable(*args))
+    def _v_reference_row(self):
+        """
+        int GeoCal::AirMspiTimeTable::reference_row() const
+
+        """
+        return _air_mspi_time_table.AirMspiTimeTable__v_reference_row(self)
+
+    @property
+    def reference_row(self):
+        return self._v_reference_row()
+
+    def _v_l1b1_file_name(self):
+        """
+        const std::string& GeoCal::AirMspiTimeTable::l1b1_file_name() const
+        The file name we are using. 
+        """
+        return _air_mspi_time_table.AirMspiTimeTable__v_l1b1_file_name(self)
+
+    @property
+    def l1b1_file_name(self):
+        return self._v_l1b1_file_name()
+
+    def _v_l1b1_granule_id(self):
+        """
+        const std::string& GeoCal::AirMspiTimeTable::l1b1_granule_id() const
+        The file granule id we are using. 
+        """
+        return _air_mspi_time_table.AirMspiTimeTable__v_l1b1_granule_id(self)
+
+    @property
+    def l1b1_granule_id(self):
+        return self._v_l1b1_granule_id()
+
     __swig_destroy__ = _air_mspi_time_table.delete_AirMspiTimeTable
+AirMspiTimeTable._v_reference_row = new_instancemethod(_air_mspi_time_table.AirMspiTimeTable__v_reference_row,None,AirMspiTimeTable)
+AirMspiTimeTable._v_l1b1_file_name = new_instancemethod(_air_mspi_time_table.AirMspiTimeTable__v_l1b1_file_name,None,AirMspiTimeTable)
+AirMspiTimeTable._v_l1b1_granule_id = new_instancemethod(_air_mspi_time_table.AirMspiTimeTable__v_l1b1_granule_id,None,AirMspiTimeTable)
 AirMspiTimeTable_swigregister = _air_mspi_time_table.AirMspiTimeTable_swigregister
 AirMspiTimeTable_swigregister(AirMspiTimeTable)
 

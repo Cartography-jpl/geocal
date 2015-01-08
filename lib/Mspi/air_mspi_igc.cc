@@ -46,16 +46,23 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
   std::string fname = c.value<std::string>("camera_model_config");
   if(fname[0] != '/')
     fname = Base_directory + "/" + fname;
-  boost::shared_ptr<MspiCamera> cam(new MspiCamera(fname));
+  std::string extra_config = "";
+  if(c.have_key("extra_camera_model_config")) {
+    extra_config = c.value<std::string>("extra_camera_model_config");
+    if(extra_config[0] != '/')
+      extra_config = Base_directory + "/" + extra_config;
+  }
+  boost::shared_ptr<MspiCamera> cam(new MspiCamera(fname, extra_config));
 
   // Get orbit set up
-
   // Not sure if we still need the "static gimbal", but we don't
   // currently support this. So check, and issue an error if this is
   // requested. We can modify the code to support this if needed.
   if(c.value<bool>("use_static_gimbal"))
     throw Exception("We don't currently support static gimbals");
-  MspiConfigFile cam_config(cam->file_name());
+  MspiConfigFile cam_config(fname);
+  if(extra_config != "")
+    cam_config.add_file(extra_config);
   blitz::Array<double, 1> gimbal_angle(3);
   gimbal_angle = cam_config.value<double>("gimbal_epsilon"),
     cam_config.value<double>("gimbal_psi"),

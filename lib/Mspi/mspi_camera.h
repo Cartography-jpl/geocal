@@ -22,8 +22,9 @@ public:
 /// configuration file.
 //-----------------------------------------------------------------------
 
-  MspiCamera(const std::string& File_name)
-  { read_config_file(File_name); }
+  MspiCamera(const std::string& File_name, 
+	     const std::string& Extra_config_file = "")
+  { read_config_file(File_name, Extra_config_file); }
 
 //-----------------------------------------------------------------------
 /// Constructor, which creates a MspiCamera from the given
@@ -35,7 +36,8 @@ public:
 
   virtual ~MspiCamera() {}
 
-  void read_config_file(const std::string& File_name);
+  void read_config_file(const std::string& File_name,
+			const std::string& Extra_config_file = "");
 
 //-----------------------------------------------------------------------
 /// File name for MspiConfigFile.

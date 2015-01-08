@@ -5063,7 +5063,7 @@ SWIGINTERN double GeoCal_MspiConfigFile_value_double(GeoCal::MspiConfigFile cons
 
   #define SWIG_From_double   PyFloat_FromDouble 
 
-SWIGINTERN double GeoCal_MspiConfigFile_value_int(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<int>(Key); }
+SWIGINTERN int GeoCal_MspiConfigFile_value_int(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<int>(Key); }
 SWIGINTERN std::string GeoCal_MspiConfigFile_value_string(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<std::string>(Key); }
 
 SWIGINTERNINLINE PyObject *
@@ -5239,7 +5239,7 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 SWIGINTERN double GeoCal_MspiConfigTable_value_double(GeoCal::MspiConfigTable const *self,int Index,std::string const &Column){ return self->value<double>(Index, Column); }
-SWIGINTERN double GeoCal_MspiConfigTable_value_int(GeoCal::MspiConfigTable const *self,int Index,std::string const &Column){ return self->value<int>(Index, Column); }
+SWIGINTERN int GeoCal_MspiConfigTable_value_int(GeoCal::MspiConfigTable const *self,int Index,std::string const &Column){ return self->value<int>(Index, Column); }
 SWIGINTERN std::string GeoCal_MspiConfigTable_value_string(GeoCal::MspiConfigTable const *self,int Index,std::string const &Column){ return self->value<std::string>(Index, Column); }
 
 
@@ -5345,6 +5345,77 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_add_file(PyObject *SWIGUNUSEDPARM(self
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MspiConfigFile_add(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiConfigFile *arg1 = (GeoCal::MspiConfigFile *) 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"MspiConfigFile_add",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiConfigFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiConfigFile_add" "', argument " "1"" of type '" "GeoCal::MspiConfigFile *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MspiConfigFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MspiConfigFile_add" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiConfigFile_add" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "MspiConfigFile_add" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiConfigFile_add" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    try {
+      (arg1)->add((std::string const &)*arg2,(std::string const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
   return NULL;
 }
 
@@ -5473,7 +5544,7 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_int(PyObject *SWIGUNUSEDPARM(sel
   boost::shared_ptr< GeoCal::MspiConfigFile const > *smartarg1 = 0 ;
   int res2 = SWIG_OLDOBJ ;
   PyObject *swig_obj[2] ;
-  double result;
+  int result;
   
   if (!SWIG_Python_UnpackTuple(args,"MspiConfigFile_value_int",2,2,swig_obj)) SWIG_fail;
   {
@@ -5504,14 +5575,14 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_int(PyObject *SWIGUNUSEDPARM(sel
   }
   {
     try {
-      result = (double)GeoCal_MspiConfigFile_value_int((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
+      result = (int)GeoCal_MspiConfigFile_value_int((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_From_double(static_cast< double >(result));
+  resultobj = SWIG_From_int(static_cast< int >(result));
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
@@ -5863,7 +5934,7 @@ SWIGINTERN PyObject *_wrap_MspiConfigTable_value_int(PyObject *SWIGUNUSEDPARM(se
   int ecode2 = 0 ;
   int res3 = SWIG_OLDOBJ ;
   PyObject *swig_obj[3] ;
-  double result;
+  int result;
   
   if (!SWIG_Python_UnpackTuple(args,"MspiConfigTable_value_int",3,3,swig_obj)) SWIG_fail;
   {
@@ -5899,14 +5970,14 @@ SWIGINTERN PyObject *_wrap_MspiConfigTable_value_int(PyObject *SWIGUNUSEDPARM(se
   }
   {
     try {
-      result = (double)GeoCal_MspiConfigTable_value_int((GeoCal::MspiConfigTable const *)arg1,arg2,(std::string const &)*arg3);
+      result = (int)GeoCal_MspiConfigTable_value_int((GeoCal::MspiConfigTable const *)arg1,arg2,(std::string const &)*arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_From_double(static_cast< double >(result));
+  resultobj = SWIG_From_int(static_cast< int >(result));
   if (SWIG_IsNewObj(res3)) delete arg3;
   return resultobj;
 fail:
@@ -6089,6 +6160,10 @@ static PyMethodDef SwigMethods[] = {
 		"void MspiConfigFile::add_file(const std::string &Fname)\n"
 		"Add a file, replacing any keywords already in this class from earlier\n"
 		"files. \n"
+		""},
+	 { (char *)"MspiConfigFile_add", _wrap_MspiConfigFile_add, METH_VARARGS, (char *)"\n"
+		"void GeoCal::MspiConfigFile::add(const std::string &Keyword, const std::string &Value)\n"
+		"Add or replace a value. \n"
 		""},
 	 { (char *)"MspiConfigFile_have_key", _wrap_MspiConfigFile_have_key, METH_VARARGS, (char *)"\n"
 		"bool GeoCal::MspiConfigFile::have_key(const std::string &K) const\n"

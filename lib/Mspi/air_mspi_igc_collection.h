@@ -1,6 +1,8 @@
 #ifndef AIRMSPI_IGC_COLLECTION_H
 #define AIRMSPI_IGC_COLLECTION_H
 #include "igc_collection.h"
+#include "air_mspi_igc.h"
+#include "mspi_config_file.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -15,114 +17,91 @@ public:
 		       const std::string& Base_directory = ".");
   virtual ~AirMspiIgcCollection() {}
   virtual void print(std::ostream& Os) const;
-  virtual int number_image() const { return (int) view_number_.size(); }
+  virtual int number_image() const { return (int) view_config_.size(); }
   virtual boost::shared_ptr<ImageGroundConnection> 
   image_ground_connection(int Image_index) const;
   virtual boost::shared_ptr<IgcCollection> 
   subset(const std::vector<int>& Index_set) const;
 
-//-----------------------------------------------------------------------
-/// Return view number.
-//-----------------------------------------------------------------------
-
-  int view_number(int Index) const
-  { range_check(Index, 0, number_image()); 
-    return view_number_[Index];
-  }
 
 //-----------------------------------------------------------------------
-/// Return view name.
+/// Return specific orbit we are using, needed for some routines that
+/// depend on the details of AirMspiOrbit.
 //-----------------------------------------------------------------------
 
-  std::string view_name(int Index) const
-  { range_check(Index, 0, number_image()); 
-    return view_name_[Index];
-  }
-
-//-----------------------------------------------------------------------
-/// Return view name.
-//-----------------------------------------------------------------------
-
-  std::string view_time(int Index) const
-  { range_check(Index, 0, number_image()); 
-    return view_time_[Index];
-  }
-
-  std::string l1b1_file_name(int Index) const;
-
-//-----------------------------------------------------------------------
-/// Return l1b1 granule id.
-//-----------------------------------------------------------------------
-
-  std::string l1b1_granule_id(int Index) const
-  { range_check(Index, 0, number_image()); 
-    return l1b1_granule_id_[Index];
-  }
-
-//-----------------------------------------------------------------------
-/// Return geolocation stage.
-//-----------------------------------------------------------------------
-
-  std::string geolocation_stage(int Index) const
-  { range_check(Index, 0, number_image()); 
-    return geolocation_stage_[Index];
-  }
-
-//-----------------------------------------------------------------------
-/// Return target type.
-//-----------------------------------------------------------------------
-
-  std::string target_type(int Index) const
-  { range_check(Index, 0, number_image()); 
-    return target_type_[Index];
-  }
-
-//-----------------------------------------------------------------------
-/// Return min L1B1 line.
-//-----------------------------------------------------------------------
-
-  int min_l1b1_line(int Index) const
-  { range_check(Index, 0, number_image()); 
-    return min_l1b1_line_[Index];
-  }
-
-//-----------------------------------------------------------------------
-/// Return max L1B1 line.
-//-----------------------------------------------------------------------
-
-  int max_l1b1_line(int Index) const
-  { range_check(Index, 0, number_image()); 
-    return max_l1b1_line_[Index];
-  }
-
-//-----------------------------------------------------------------------
-/// Return view resolution. Note this is *metadata* passed in as a 
-/// configuration, *not* the actual resolution of the l1b1 data on the
-/// ground (use ImageGroundConnection resolution_meter or
-/// footprint_resolution for that).
-//-----------------------------------------------------------------------
-
-  double view_resolution(int Index) const
-  { range_check(Index, 0, number_image()); 
-    return view_resolution_[Index];
-  }
-
-//-----------------------------------------------------------------------
-/// Return maximum view resolution.
-//-----------------------------------------------------------------------
-
-  double max_view_resolution() const
+  boost::shared_ptr<AirMspiOrbit> orbit(int Index) const
   {
-    return *(std::max_element(view_resolution_.begin(), 
-			      view_resolution_.end()));
+    return air_mspi_igc(Index)->orbit();
   }
 
 //-----------------------------------------------------------------------
-/// Return HDF chunk size that we've been requested to use for the L1B2
+/// Return specific camera we are using, needed for some routines that
+/// depend on the details of MspiCamera.
 //-----------------------------------------------------------------------
 
-  int l1b2_hdf_chunk_size_x() const { return l1b2_hdf_chunk_size_x_ ;}
-  int l1b2_hdf_chunk_size_y() const { return l1b2_hdf_chunk_size_y_ ;}
+  boost::shared_ptr<MspiCamera> camera(int Index) const
+  {
+    return air_mspi_igc(Index)->camera();
+  }
+
+//-----------------------------------------------------------------------
+/// Return specific time table we are using, needed for some routines that
+/// depend on the details of the time table..
+//-----------------------------------------------------------------------
+
+  boost::shared_ptr<TimeTable> time_table(int Index) const
+  {
+    return air_mspi_igc(Index)->time_table();
+  }
+
+//-----------------------------------------------------------------------
+/// Return number of bands.
+//-----------------------------------------------------------------------
+
+  int number_band(int Index) const {return camera(Index)->number_band(); }
+
+//-----------------------------------------------------------------------
+/// Return band number.
+//-----------------------------------------------------------------------
+
+  int band(int Index) const {return air_mspi_igc(Index)->band();}
+
+//-----------------------------------------------------------------------
+/// Set band that we are using.
+//-----------------------------------------------------------------------
+
+  void band(int Index, int B) { air_mspi_igc(Index)->band(B); }
+
+
+//-----------------------------------------------------------------------
+/// Do we have keyword in configuration value given view number?
+//-----------------------------------------------------------------------
+
+  bool have_config(int Index, const std::string& Keyword) const
+  {
+    range_check(Index, 0, number_image());
+    return view_config_[Index].have_key(Keyword);
+  }
+
+//-----------------------------------------------------------------------
+/// Configuration value for given view number.
+//-----------------------------------------------------------------------
+
+  template<class T> T config_value(int Index, const std::string& Keyword) const
+  {
+    range_check(Index, 0, number_image());
+    return view_config_[Index].value<T>(Keyword);
+  }
+
+//-----------------------------------------------------------------------
+/// Return L1B1 file name.
+//-----------------------------------------------------------------------
+
+  std::string l1b1_file_name(int Index) const
+  {
+    range_check(Index, 0, number_image()); 
+    return file_name(config_value<std::string>(Index, "l1b1_file"));
+  }
 
   // We'll mess with parameter in a bit, for now leave this out.
 private:
@@ -131,20 +110,33 @@ private:
   mutable std::vector<boost::shared_ptr<ImageGroundConnection> > igc;
   boost::shared_ptr<Dem> dem;
   double dem_resolution;
-  std::vector<int> view_number_;
-  std::vector<std::string> view_name_, view_time_, l1b1_file_name_,
-    l1b1_granule_id_, target_type_, geolocation_stage_;
-  std::vector<double> view_resolution_;
+  std::vector<MspiConfigFile> view_config_;
   std::vector<int> min_l1b1_line_, max_l1b1_line_;
   std::string base_directory;
-  int l1b2_hdf_chunk_size_x_;
-  int l1b2_hdf_chunk_size_y_;
   AirMspiIgcCollection(const AirMspiIgcCollection& Original, 
 		       const std::vector<int>& Index_set);
   int reference_row(const std::string& Instrument_config_file_name) const;
 
+//-----------------------------------------------------------------------
+/// Get a file name, possibly adding the base_directory if it is a
+/// relative path.
+//-----------------------------------------------------------------------
+
+  std::string file_name(const std::string& F) const
+  {
+    std::string res = F;
+    if(res[0] != '/')
+      res = base_directory + "/" + res;
+    return res;
+  }
+
   // Temp stuff, we'll remove this in a bit.
   std::string config_filename_, orbit_filename_;
+  // Probably temporary
+  boost::shared_ptr<AirMspiIgc> air_mspi_igc(int Index) const
+  {
+    return boost::dynamic_pointer_cast<AirMspiIgc>(image_ground_connection(Index));
+  }
 };
 }
 

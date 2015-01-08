@@ -9,6 +9,9 @@
 
 %base_import(igc_collection)
 %import "image_ground_connection.i"
+%import "air_mspi_orbit.i"
+%import "mspi_camera.i"
+%import "time_table.i"
 
 %geocal_shared_ptr(GeoCal::AirMspiIgcCollection);
 namespace GeoCal {
@@ -23,18 +26,23 @@ public:
   image_ground_connection(int Image_index) const;
   virtual boost::shared_ptr<IgcCollection> 
   subset(const std::vector<int>& Index_set) const;
-  int view_number(int Index) const;
-  std::string view_name(int Index) const;
-  std::string view_time(int Index) const;
-  std::string l1b1_file_name(int Index) const;
-  std::string l1b1_granule_id(int Index) const;
-  std::string geolocation_stage(int Index) const;
-  std::string target_type(int Index) const;
-  int min_l1b1_line(int Index) const;
-  int max_l1b1_line(int Index) const;
-  double view_resolution(int Index) const;
-  %python_attribute(max_view_resolution, double);
-  %python_attribute(l1b2_hdf_chunk_size_x, int);
-  %python_attribute(l1b2_hdf_chunk_size_y, int);
+
+  bool have_config(int Index, const std::string& Keyword) const;
+  // Just have the types we happen to have needed. We can extend this
+  // as needed.
+  %extend {
+    double config_value_double(int Index, const std::string& Key) const
+    { return $self->config_value<double>(Index,Key); }
+    int config_value_int(int Index, const std::string& Key) const
+    { return $self->config_value<int>(Index, Key); }
+    std::string config_value_string(int Index, const std::string& Key) const
+    { return $self->config_value<std::string>(Index, Key); }
+  }
+  boost::shared_ptr<AirMspiOrbit> orbit(int Index) const;
+  boost::shared_ptr<MspiCamera> camera(int Index) const;
+  boost::shared_ptr<TimeTable> time_table(int Index) const;
+  int number_band(int Index);
+  int band(int Index);
+  void band(int Index, int B);
 };
 }

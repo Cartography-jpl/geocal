@@ -157,6 +157,13 @@ class MspiConfigFile(geocal_swig.generic_object.GenericObject):
         """
         return _mspi_config_file.MspiConfigFile_add_file(self, *args)
 
+    def add(self, *args):
+        """
+        void GeoCal::MspiConfigFile::add(const std::string &Keyword, const std::string &Value)
+        Add or replace a value. 
+        """
+        return _mspi_config_file.MspiConfigFile_add(self, *args)
+
     def have_key(self, *args):
         """
         bool GeoCal::MspiConfigFile::have_key(const std::string &K) const
@@ -166,6 +173,7 @@ class MspiConfigFile(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _mspi_config_file.delete_MspiConfigFile
 MspiConfigFile.add_file = new_instancemethod(_mspi_config_file.MspiConfigFile_add_file,None,MspiConfigFile)
+MspiConfigFile.add = new_instancemethod(_mspi_config_file.MspiConfigFile_add,None,MspiConfigFile)
 MspiConfigFile.have_key = new_instancemethod(_mspi_config_file.MspiConfigFile_have_key,None,MspiConfigFile)
 MspiConfigFile.value_double = new_instancemethod(_mspi_config_file.MspiConfigFile_value_double,None,MspiConfigFile)
 MspiConfigFile.value_int = new_instancemethod(_mspi_config_file.MspiConfigFile_value_int,None,MspiConfigFile)

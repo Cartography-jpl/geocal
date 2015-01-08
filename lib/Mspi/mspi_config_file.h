@@ -32,10 +32,22 @@ namespace GeoCal {
 
 class MspiConfigFile: public Printable<MspiConfigFile>  {
 public:
+//-----------------------------------------------------------------------
+/// Create empty object, which we can then add files and values to.
+//-----------------------------------------------------------------------
+
+  MspiConfigFile() {}
   explicit MspiConfigFile(const std::string& Fname);
   virtual ~MspiConfigFile() {}
 
   template<class T> T value(const std::string& Keyword) const;
+
+//-----------------------------------------------------------------------
+/// Add or replace a value.
+//-----------------------------------------------------------------------
+
+  void add(const std::string& Keyword, const std::string& Value)
+  { key_to_value[Keyword] = Value; }
 
 //-----------------------------------------------------------------------
 /// True if we have a value for the given keyword.

@@ -28,8 +28,6 @@ AirMspiIgcCollection::AirMspiIgcCollection
   : base_directory(Base_directory)
 {
   MspiConfigFile c(Master_config_file);
-  l1b2_hdf_chunk_size_x_ = c.value<int>("l1b2_hdf_chunk_size_x");
-  l1b2_hdf_chunk_size_y_ = c.value<int>("l1b2_hdf_chunk_size_y");
 
   // Get DEM set up
   if(c.value<std::string>("dem_type") == "usgs") {
@@ -44,44 +42,44 @@ AirMspiIgcCollection::AirMspiIgcCollection
     dem_resolution = 10.0;
   }
 
+  int ref_row = 
+    reference_row(file_name(c.value<std::string>("instrument_info_config")));
+
   // Set up view information
   MspiConfigFile vconfig(L1b1_table);
   MspiConfigTable vtab(vconfig, "L1B1");
-  view_number_ = vtab.value_column<int>("view_number");
-  view_name_ = vtab.value_column<std::string>("view_name");
-  view_time_ = vtab.value_column<std::string>("view_time");
-  view_resolution_ = vtab.value_column<double>("resolution");
-  l1b1_file_name_ = vtab.value_column<std::string>("l1b1_file");
-
-  // Go through and fill in some data that we need to read the l1b1
-  // file for.
-  std::string fname = c.value<std::string>("instrument_info_config");
-  if(fname[0] != '/')
-    fname = base_directory + "/" + fname;
-#ifdef HAVE_MSPI_SHARED
-  int ref_row = reference_row(fname);
-  for(int i = 0; i < number_image(); ++i) {
-    MSPI::Shared::L1B1Reader l1b1(l1b1_file_name(i));
-    l1b1_granule_id_.push_back(l1b1.granule_id());
-    MspiConfigFile view_config(Master_config_file);
+  for(int i = 0; i < vtab.number_row(); ++i) {
+    MspiConfigFile vc(c);
     if(vtab.has_column("extra_config_file")) {
       std::string fname = vtab.value<std::string>(i, "extra_config_file");
       if(fname != "-") {
 	if(fname[0] != '/')
 	  fname = base_directory + "/" + fname;
-	view_config.add_file(fname);
+	vc.add_file(fname);
       }
     }
+    vc.add("view_number", vtab.value<std::string>(i, "view_number"));
+    vc.add("view_name", vtab.value<std::string>(i, "view_name"));
+    vc.add("view_time", vtab.value<std::string>(i, "view_time"));
+    vc.add("l1b1_file", vtab.value<std::string>(i, "l1b1_file"));
+    vc.add("resolution", vtab.value<std::string>(i, "resolution"));
+    view_config_.push_back(vc);
+  }
+  // Go through and fill in some data that we need to read the l1b1
+  // file for.
+
+#ifdef HAVE_MSPI_SHARED
+  for(int i = 0; i < number_image(); ++i) {
+    MSPI::Shared::L1B1Reader l1b1(l1b1_file_name(i));
+    view_config_[i].add("l1b1_granule_id", l1b1.granule_id());
     int min_ln = 0;
     int max_ln = l1b1.number_frame(ref_row) - 1;
-    if(view_config.have_key("min_l1b1_line"))
-      min_ln = std::max(min_ln, view_config.value<int>("min_l1b1_line"));
-    if(view_config.have_key("max_l1b1_line"))
-      max_ln = std::min(max_ln, view_config.value<int>("max_l1b1_line"));
+    if(have_config(i, "min_l1b1_line"))
+      min_ln = std::max(min_ln, config_value<int>(i, "min_l1b1_line"));
+    if(have_config(i, "max_l1b1_line"))
+      max_ln = std::min(max_ln, config_value<int>(i, "max_l1b1_line"));
     min_l1b1_line_.push_back(min_ln);
     max_l1b1_line_.push_back(max_ln);
-    target_type_.push_back(view_config.value<std::string>("target_type"));
-    geolocation_stage_.push_back(view_config.value<std::string>("geolocation_stage"));
   }
 #else
   throw Exception("This class requires that MSPI Shared library be available");
@@ -90,18 +88,6 @@ AirMspiIgcCollection::AirMspiIgcCollection
   // Temp
   config_filename_ = Master_config_file;
   orbit_filename_ = Orbit_file_name;
-}
-
-//-----------------------------------------------------------------------
-/// Return L1B1 file name.
-//-----------------------------------------------------------------------
-
-std::string AirMspiIgcCollection::l1b1_file_name(int Index) const
-{ range_check(Index, 0, number_image()); 
-  std::string fname = l1b1_file_name_[Index];
-  if(fname[0] != '/')
-    fname = base_directory + "/" + fname;
-  return fname;
 }
 
 // see base class for description.

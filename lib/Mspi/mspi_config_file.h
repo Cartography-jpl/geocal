@@ -1,6 +1,10 @@
 #ifndef MSPI_CONFIG_FILE_H
 #define MSPI_CONFIG_FILE_H
 #include "geocal_exception.h"
+#include "auto_derivative.h"	// We don't actually use
+				// AutoDerivative here, but this has
+				// the serialization for blitz arrays
+				// that we need.
 #include "printable.h"
 #include <iterator> 
 #include <boost/lexical_cast.hpp>
@@ -60,6 +64,9 @@ public:
 private:
   const std::string& value_string(const std::string& Keyword) const;
   std::map<std::string, std::string> key_to_value;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 
@@ -99,6 +106,10 @@ private:
     return column_to_index_.find(Column)->second;
   }
   blitz::Array<std::string, 2> data;
+  MspiConfigTable() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -276,4 +287,8 @@ public:
 };
     
 }
+
+GEOCAL_EXPORT_KEY(MspiConfigFile);
+GEOCAL_EXPORT_KEY(MspiConfigTable);
+
 #endif

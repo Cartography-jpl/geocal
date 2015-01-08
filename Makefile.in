@@ -676,6 +676,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcinterface@/geocal_rpc.cc @srcinterface@/rpc_image.cc \
 	@srcinterface@/ipi.cc @srcinterface@/raster_multifile.cc \
 	@srcinterface@/image_ground_connection.cc \
+	@srcinterface@/igc_collection.cc \
 	@srcimplementation@/did_datum.cc \
 	@srcimplementation@/ground_mask_image.cc \
 	@srcimplementation@/image_mask_image.cc \
@@ -806,6 +807,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcinterface@/libgeocal_la-ipi.lo \
 	@srcinterface@/libgeocal_la-raster_multifile.lo \
 	@srcinterface@/libgeocal_la-image_ground_connection.lo \
+	@srcinterface@/libgeocal_la-igc_collection.lo \
 	@srcimplementation@/libgeocal_la-did_datum.lo \
 	@srcimplementation@/libgeocal_la-ground_mask_image.lo \
 	@srcimplementation@/libgeocal_la-image_mask_image.lo \
@@ -2013,6 +2015,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcinterface@/geocal_rpc.cc @srcinterface@/rpc_image.cc \
 	@srcinterface@/ipi.cc @srcinterface@/raster_multifile.cc \
 	@srcinterface@/image_ground_connection.cc \
+	@srcinterface@/igc_collection.cc \
 	@srcimplementation@/did_datum.cc \
 	@srcimplementation@/ground_mask_image.cc \
 	@srcimplementation@/image_mask_image.cc \
@@ -3155,6 +3158,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcinterface@/libgeocal_la-image_ground_connection.lo:  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/libgeocal_la-igc_collection.lo:  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/$(am__dirstamp):
 	@$(MKDIR_P) @srcimplementation@
 	@: > @srcimplementation@/$(am__dirstamp)
@@ -4086,6 +4092,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-geodetic.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-ground_coordinate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-ground_mask.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-igc_collection.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-image_coordinate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-image_ground_connection.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-image_mask.Plo@am__quote@
@@ -5727,6 +5734,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/image_ground_connection.cc' object='@srcinterface@/libgeocal_la-image_ground_connection.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-image_ground_connection.lo `test -f '@srcinterface@/image_ground_connection.cc' || echo '$(srcdir)/'`@srcinterface@/image_ground_connection.cc
+
+@srcinterface@/libgeocal_la-igc_collection.lo: @srcinterface@/igc_collection.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-igc_collection.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-igc_collection.Tpo -c -o @srcinterface@/libgeocal_la-igc_collection.lo `test -f '@srcinterface@/igc_collection.cc' || echo '$(srcdir)/'`@srcinterface@/igc_collection.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/libgeocal_la-igc_collection.Tpo @srcinterface@/$(DEPDIR)/libgeocal_la-igc_collection.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/igc_collection.cc' object='@srcinterface@/libgeocal_la-igc_collection.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-igc_collection.lo `test -f '@srcinterface@/igc_collection.cc' || echo '$(srcdir)/'`@srcinterface@/igc_collection.cc
 
 @srcimplementation@/libgeocal_la-did_datum.lo: @srcimplementation@/did_datum.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-did_datum.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-did_datum.Tpo -c -o @srcimplementation@/libgeocal_la-did_datum.lo `test -f '@srcimplementation@/did_datum.cc' || echo '$(srcdir)/'`@srcimplementation@/did_datum.cc

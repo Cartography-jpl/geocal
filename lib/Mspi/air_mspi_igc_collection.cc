@@ -7,9 +7,25 @@
 #ifdef HAVE_MSPI_SHARED
 #include "File/L1B1File/src/l1b1_reader.h"
 #endif
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
 
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(IgcCollection);
+  GEOCAL_BASE(AirMspiIgcCollection, IgcCollection);
+  ar & GEOCAL_NVP(dem) & GEOCAL_NVP(dem_resolution) & GEOCAL_NVP_(view_config)
+    & GEOCAL_NVP_(min_l1b1_line) & GEOCAL_NVP_(max_l1b1_line)
+    & GEOCAL_NVP(base_directory)
+    & GEOCAL_NVP_(config_filename)
+    & GEOCAL_NVP_(orbit_filename);
+}
+
+GEOCAL_IMPLEMENT(AirMspiIgcCollection);
+#endif
 
 //-----------------------------------------------------------------------
 /// This creates a AirMspiIgcCollection by reading the given master
@@ -105,7 +121,8 @@ AirMspiIgcCollection::image_ground_connection(int Image_index) const
     // Temp, we'll clean this up in a bit.
     igc[Image_index].reset(new AirMspiIgc(config_filename_,
 					  orbit_filename_,
-					  l1b1_file_name(Image_index), 0));
+					  l1b1_file_name(Image_index), 0,
+					  base_directory));
   }
   return igc[Image_index];
 }

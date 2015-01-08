@@ -3,8 +3,28 @@
 #include <sstream>
 #include <set>
 #include <boost/foreach.hpp>
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void MspiConfigFile::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(MspiConfigFile);
+  ar & GEOCAL_NVP(key_to_value);
+}
+
+template<class Archive>
+void MspiConfigTable::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(MspiConfigTable);
+  ar & GEOCAL_NVP_(column_to_index) & GEOCAL_NVP(data);
+}
+
+GEOCAL_IMPLEMENT(MspiConfigFile);
+GEOCAL_IMPLEMENT(MspiConfigTable);
+#endif
 
 //-----------------------------------------------------------------------
 /// Read the given configuration file. See the class comments for the
@@ -32,8 +52,12 @@ void MspiConfigFile::add_file(const std::string& Fname)
   // need to worry about them.
 
   IfstreamCs in(Fname);
+  if(!in.good())
+    throw Exception("Trouble reading file " + Fname);
   std::stringstream buf;
   buf << in.rdbuf();
+  if(!in.good())
+    throw Exception("Trouble reading file " + Fname);
 
   // Now break up into keyword/value pairs
   std::string s = buf.str();

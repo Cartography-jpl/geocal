@@ -63,4 +63,39 @@ BOOST_AUTO_TEST_CASE(table_test)
   BOOST_CHECK_EQUAL(tab.value<std::string>(0, "l1b1_file"), "file1.hdf");
   BOOST_CHECK_EQUAL(tab.value<std::string>(1, "l1b1_file"), "file2.hdf");
 }
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<MspiConfigFile> config(new MspiConfigFile(test_data_dir() + "mspi_config_file_test.txt"));
+  std::string d = serialize_write_string(config);
+  if(false)
+    // Can dump to screen, if we want to see the text
+    std::cerr << d;
+  boost::shared_ptr<MspiConfigFile> config2 = 
+    serialize_read_string<MspiConfigFile>(d);
+  BOOST_CHECK_CLOSE(config2->value<double>("parameter1"), 1.1, 1e-8);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_table)
+{
+
+  MspiConfigFile config(test_data_dir() + "mspi_config_file_test.txt");
+  config.add_file(test_data_dir() + "mspi_config_file_test2.txt");
+  boost::shared_ptr<MspiConfigTable> tab(new MspiConfigTable(config, "L1B1"));
+  std::string d = serialize_write_string(tab);
+  if(false)
+    // Can dump to screen, if we want to see the text
+    std::cerr << d;
+  boost::shared_ptr<MspiConfigTable> tab2 = 
+    serialize_read_string<MspiConfigTable>(d);
+
+  BOOST_CHECK_EQUAL(tab2->value<int>(0, "view_number"), 6);
+  BOOST_CHECK_EQUAL(tab2->value<int>(1, "view_number"), 7);
+  BOOST_CHECK_EQUAL(tab2->value<std::string>(0, "l1b1_file"), "file1.hdf");
+  BOOST_CHECK_EQUAL(tab2->value<std::string>(1, "l1b1_file"), "file2.hdf");
+
+}
+
 BOOST_AUTO_TEST_SUITE_END()

@@ -1,4 +1,5 @@
 #include "air_mspi_igc_collection.h"
+#include "air_mspi_igc.h"
 #include "mspi_config_file.h"
 #include "did_datum.h"
 #include "usgs_dem.h"
@@ -85,6 +86,10 @@ AirMspiIgcCollection::AirMspiIgcCollection
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif
+
+  // Temp
+  config_filename_ = Master_config_file;
+  orbit_filename_ = Orbit_file_name;
 }
 
 //-----------------------------------------------------------------------
@@ -111,7 +116,10 @@ AirMspiIgcCollection::image_ground_connection(int Image_index) const
     igc.insert(igc.end(), number_image(), null_ptr);
   }
   if(!igc[Image_index]) {
-    // Fill this in.
+    // Temp, we'll clean this up in a bit.
+    igc[Image_index].reset(new AirMspiIgc(config_filename_,
+					  orbit_filename_,
+					  l1b1_file_name(Image_index), 0));
   }
   return igc[Image_index];
 }

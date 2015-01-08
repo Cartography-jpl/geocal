@@ -142,6 +142,9 @@ private:
   AirMspiIgcCollection(const AirMspiIgcCollection& Original, 
 		       const std::vector<int>& Index_set);
   int reference_row(const std::string& Instrument_config_file_name) const;
+
+  // Temp stuff, we'll remove this in a bit.
+  std::string config_filename_, orbit_filename_;
 };
 }
 

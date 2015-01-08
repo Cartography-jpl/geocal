@@ -17,7 +17,10 @@ void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(IgcCollection);
   GEOCAL_BASE(AirMspiIgcCollection, IgcCollection);
-  ar & GEOCAL_NVP(dem) & GEOCAL_NVP(dem_resolution) & GEOCAL_NVP_(view_config)
+  // Temp, leave DEM out since we don't have ugsdem serialized yet.
+  //  ar & GEOCAL_NVP(dem) & GEOCAL_NVP(dem_resolution) &
+  //  GEOCAL_NVP_(view_config)
+  ar & GEOCAL_NVP_(view_config)
     & GEOCAL_NVP_(min_l1b1_line) & GEOCAL_NVP_(max_l1b1_line)
     & GEOCAL_NVP(base_directory)
     & GEOCAL_NVP_(config_filename)

@@ -185,4 +185,5 @@ int AirMspiIgcCollection::view_number_to_image_index(int View_number) const
   Exception e;
   e << "The view number " << View_number 
     << " is not found in the AirMspiIgcCollection";
+  throw e;
 }

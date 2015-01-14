@@ -80,7 +80,8 @@ BOOST_AUTO_TEST_CASE(serialization)
 
 BOOST_AUTO_TEST_CASE(serialization_table)
 {
-
+  if(!have_serialize_supported())
+    return;
   MspiConfigFile config(test_data_dir() + "mspi_config_file_test.txt");
   config.add_file(test_data_dir() + "mspi_config_file_test2.txt");
   boost::shared_ptr<MspiConfigTable> tab(new MspiConfigTable(config, "L1B1"));

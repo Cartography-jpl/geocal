@@ -467,6 +467,22 @@ void SpiceToolkitCoordinateInterface::to_inertial(int Body_id,
   mul_t(SpiceHelper::m, From.position, To.position);
 }
 
+
+//-----------------------------------------------------------------------
+/// This converts from CartesianFixed to CartesianInertial for the
+/// given body, including velocity. We use the NAIF coding for the
+/// bodies (see the SPICE documentation for details). We use this
+/// because it is a unique  coding, the underlying toolkit doesn't
+/// need to be SPICE. 
+//-----------------------------------------------------------------------
+
+void SpiceToolkitCoordinateInterface::to_inertial
+(int Body_id, const Time& T, 
+ const CartesianFixed& From, const boost::array<double, 3>& Vel_cf,
+ CartesianInertial& To, boost::array<double, 3>& Vel_ci)
+{
+}
+
 //-----------------------------------------------------------------------
 /// This calculates a matrix from converting from CartesianInertial to
 /// CartesianFixed for the  given body. We use the NAIF coding for
@@ -521,6 +537,21 @@ void SpiceToolkitCoordinateInterface::to_fixed(int Body_id,
 {
   SpiceHelper::cartesian_inertial_to_cartesian_fixed(Body_id, T);
   mul(SpiceHelper::m, From.position, To.position);
+}
+
+//-----------------------------------------------------------------------
+/// This converts from CartesianInertial to CartesianFixed for the
+/// given body, including velocity. We use the NAIF coding for the
+/// bodies (see the SPICE documentation for details). We use this
+/// because it is a unique  coding, the underlying toolkit doesn't
+/// need to be SPICE. 
+//-----------------------------------------------------------------------
+
+void SpiceToolkitCoordinateInterface::to_fixed
+(int Body_id, const Time& T, 
+ const CartesianInertial& From, const boost::array<double, 3>& Vel_ci,
+ CartesianFixed& To, boost::array<double, 3>& Vel_cc)
+{
 }
 
 //-----------------------------------------------------------------------

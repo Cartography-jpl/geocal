@@ -189,6 +189,22 @@ void SdpToolkitCoordinateInterface::to_inertial(int Body_id,
 }
 
 //-----------------------------------------------------------------------
+/// This converts from CartesianFixed to CartesianInertial for the
+/// given body, including velocity. We use the NAIF coding for the
+/// bodies (see the SPICE documentation for details). We use this
+/// because it is a unique  coding, the underlying toolkit doesn't
+/// need to be SPICE. 
+//-----------------------------------------------------------------------
+
+void SdpToolkitCoordinateInterface::to_inertial
+(int Body_id, const Time& T, 
+ const CartesianFixed& From, const boost::array<double, 3>& Vel_cf,
+ CartesianInertial& To, boost::array<double, 3>& Vel_ci)
+{
+  throw Exception("Not implemented for SDP toolkit");
+}
+
+//-----------------------------------------------------------------------
 /// Calculate matrix to  converts from CartesianInertial to
 /// CartesianFixed for the given body. We use the NAIF coding for
 /// the bodies (see the SPICE  documentation for details). Note that
@@ -217,6 +233,22 @@ void SdpToolkitCoordinateInterface::to_fixed(int Body_id,
   if(Body_id != 399)		// Are we Earth?
     throw Exception("The SDP toolkit only supports the Earth for converting to and from inertial coordinates");
   SdpHelper::convert_to_ecr(T, From, To);
+}
+
+//-----------------------------------------------------------------------
+/// This converts from CartesianInertial to CartesianFixed for the
+/// given body, including velocity. We use the NAIF coding for the
+/// bodies (see the SPICE documentation for details). We use this
+/// because it is a unique  coding, the underlying toolkit doesn't
+/// need to be SPICE. 
+//-----------------------------------------------------------------------
+
+void SdpToolkitCoordinateInterface::to_fixed
+(int Body_id, const Time& T, 
+ const CartesianInertial& From, const boost::array<double, 3>& Vel_ci,
+ CartesianFixed& To, boost::array<double, 3>& Vel_cc)
+{
+  throw Exception("Not implemented for SDP toolkit");
 }
 
 void

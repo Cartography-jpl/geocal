@@ -1,5 +1,6 @@
 #ifndef TOOLKIT_COORDINATE_INTERFACE_H
 #define TOOLKIT_COORDINATE_INTERFACE_H
+#include <boost/array.hpp>	// Definition of boost::array
 
 namespace GeoCal {
 class CartesianInertial;
@@ -24,6 +25,18 @@ public:
      const CartesianFixed& From, CartesianInertial& To) = 0;
 
 //-----------------------------------------------------------------------
+/// This converts from CartesianFixed to CartesianInertial for the
+/// given body, including velocity. We use the NAIF coding for the
+/// bodies (see the SPICE documentation for details). We use this
+/// because it is a unique  coding, the underlying toolkit doesn't
+/// need to be SPICE. 
+//-----------------------------------------------------------------------
+
+  virtual void to_inertial(int Body_id, const Time& T, 
+   const CartesianFixed& From, const boost::array<double, 3>& Vel_cf,
+   CartesianInertial& To, boost::array<double, 3>& Vel_ci) = 0;
+
+//-----------------------------------------------------------------------
 /// This converts from CartesianInertial to CartesianFixed for the
 /// given body. We use the NAIF coding for the bodies (see the SPICE
 /// documentation for details). We use this because it is a unique
@@ -32,6 +45,18 @@ public:
 
   virtual void to_fixed(int Body_id, const Time& T,
      const CartesianInertial& From, CartesianFixed& To) = 0;
+
+//-----------------------------------------------------------------------
+/// This converts from CartesianInertial to CartesianFixed for the
+/// given body, including velocity. We use the NAIF coding for the
+/// bodies (see the SPICE documentation for details). We use this
+/// because it is a unique  coding, the underlying toolkit doesn't
+/// need to be SPICE. 
+//-----------------------------------------------------------------------
+
+  virtual void to_fixed(int Body_id, const Time& T, 
+   const CartesianInertial& From, const boost::array<double, 3>& Vel_ci,
+   CartesianFixed& To, boost::array<double, 3>& Vel_cc) = 0;
 
 //-----------------------------------------------------------------------
 /// Return a matrix for converting from CartesianInertial to

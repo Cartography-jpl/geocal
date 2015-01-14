@@ -113,6 +113,16 @@ public:
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const = 0;
 
 //-----------------------------------------------------------------------
+/// Calculate matrix that can be used to convert CartesianFixed to
+/// CartesianInertial at the given Time, including velocity. The
+/// matrix for going from 
+/// CartesianInertial to CartesianFixed is the transpose of this matrix.
+//-----------------------------------------------------------------------
+
+  virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) 
+    const = 0;
+
+//-----------------------------------------------------------------------
 /// Calculate quaternion that can be used to convert CartesianFixed to
 /// CartesianInertial at the given Time.
 //-----------------------------------------------------------------------
@@ -185,6 +195,16 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const = 0;
+
+//-----------------------------------------------------------------------
+/// Calculate matrix that can be used to convert CartesianFixed to
+/// CartesianInertial at the given Time, including velocity. The
+/// matrix for going from 
+/// CartesianInertial to CartesianFixed is the transpose of this matrix.
+//-----------------------------------------------------------------------
+
+  virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) 
+    const = 0;
 
 //-----------------------------------------------------------------------
 /// Calculate quaternion that can be used to convert CartesianFixed to

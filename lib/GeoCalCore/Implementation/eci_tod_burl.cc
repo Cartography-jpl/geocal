@@ -35,6 +35,16 @@ void EciTodBurl::ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
 }
 
 //-----------------------------------------------------------------------
+/// Matrix to convert EciTodBurl to Ecr. The transpose of this will convert
+/// Ecr to EciTodBurl.
+//-----------------------------------------------------------------------
+
+void EciTodBurl::ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const
+{ 
+  throw Exception("Function not implemented for EciTodBurl");
+}
+
+//-----------------------------------------------------------------------
 /// Print to given stream.
 //-----------------------------------------------------------------------
 

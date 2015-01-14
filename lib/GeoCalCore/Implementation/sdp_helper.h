@@ -48,11 +48,13 @@ public:
    CartesianInertial& To, boost::array<double, 3>& Vel_ci);
   virtual void to_fixed(int Body_id, const Time& T,
     double Ci_to_cf[3][3]);
+  virtual void to_fixed_with_vel(int Body_id, const Time& T,
+    double Ci_to_cf[6][6]);
   virtual void to_fixed(int Body_id, const Time& T,
     const CartesianInertial& From, CartesianFixed& To);
   virtual void to_fixed(int Body_id, const Time& T, 
    const CartesianInertial& From, const boost::array<double, 3>& Vel_ci,
-   CartesianFixed& To, boost::array<double, 3>& Vel_cc);
+   CartesianFixed& To, boost::array<double, 3>& Vel_cf);
   virtual void 
   sub_solar_point(int Body_id, const Time& T, CartesianFixed& P);
   virtual double solar_distance(int Body_id, const Time& T);

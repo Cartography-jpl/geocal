@@ -3469,78 +3469,79 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__Time swig_types[17]
 #define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[18]
 #define SWIGTYPE_p_a_3__double swig_types[19]
-#define SWIGTYPE_p_allocator_type swig_types[20]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[21]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[22]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[23]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[24]
-#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[25]
-#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[26]
-#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[27]
-#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[28]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[29]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[30]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[31]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[32]
-#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[33]
-#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[34]
-#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[35]
-#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[36]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[37]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[38]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[39]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[40]
-#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[41]
-#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[42]
-#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[43]
-#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[44]
-#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[45]
-#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[46]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[47]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[48]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[49]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[50]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[51]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[52]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[53]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[54]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[55]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[56]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[57]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[58]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[59]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[60]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[61]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[62]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[63]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[64]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[65]
-#define SWIGTYPE_p_char swig_types[66]
-#define SWIGTYPE_p_char_type swig_types[67]
-#define SWIGTYPE_p_difference_type swig_types[68]
-#define SWIGTYPE_p_fmtflags swig_types[69]
-#define SWIGTYPE_p_int_type swig_types[70]
-#define SWIGTYPE_p_iostate swig_types[71]
-#define SWIGTYPE_p_off_type swig_types[72]
-#define SWIGTYPE_p_openmode swig_types[73]
-#define SWIGTYPE_p_p_PyObject swig_types[74]
-#define SWIGTYPE_p_pos_type swig_types[75]
-#define SWIGTYPE_p_seekdir swig_types[76]
-#define SWIGTYPE_p_size_t swig_types[77]
-#define SWIGTYPE_p_size_type swig_types[78]
-#define SWIGTYPE_p_state_type swig_types[79]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t swig_types[80]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[81]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[82]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[83]
-#define SWIGTYPE_p_std__invalid_argument swig_types[84]
-#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[85]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t_t swig_types[86]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[87]
-#define SWIGTYPE_p_traits_type swig_types[88]
-#define SWIGTYPE_p_value_type swig_types[89]
-static swig_type_info *swig_types[91];
-static swig_module_info swig_module = {swig_types, 90, 0, 0, 0, 0};
+#define SWIGTYPE_p_a_6__double swig_types[20]
+#define SWIGTYPE_p_allocator_type swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[25]
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[26]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[27]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[28]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[29]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[30]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[31]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[32]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[33]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[34]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[35]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[36]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[37]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[38]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[39]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[40]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[41]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[42]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[43]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[44]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[45]
+#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[46]
+#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[47]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[48]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[49]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[50]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[51]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[52]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[53]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[54]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[55]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[56]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[57]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[58]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[59]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[60]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[61]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[62]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[63]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[64]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[65]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[66]
+#define SWIGTYPE_p_char swig_types[67]
+#define SWIGTYPE_p_char_type swig_types[68]
+#define SWIGTYPE_p_difference_type swig_types[69]
+#define SWIGTYPE_p_fmtflags swig_types[70]
+#define SWIGTYPE_p_int_type swig_types[71]
+#define SWIGTYPE_p_iostate swig_types[72]
+#define SWIGTYPE_p_off_type swig_types[73]
+#define SWIGTYPE_p_openmode swig_types[74]
+#define SWIGTYPE_p_p_PyObject swig_types[75]
+#define SWIGTYPE_p_pos_type swig_types[76]
+#define SWIGTYPE_p_seekdir swig_types[77]
+#define SWIGTYPE_p_size_t swig_types[78]
+#define SWIGTYPE_p_size_type swig_types[79]
+#define SWIGTYPE_p_state_type swig_types[80]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t swig_types[81]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[82]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[83]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[84]
+#define SWIGTYPE_p_std__invalid_argument swig_types[85]
+#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[86]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t_t swig_types[87]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[88]
+#define SWIGTYPE_p_traits_type swig_types[89]
+#define SWIGTYPE_p_value_type swig_types[90]
+static swig_type_info *swig_types[92];
+static swig_module_info swig_module = {swig_types, 91, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -6690,6 +6691,84 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CartesianInertial_ci_to_cf_with_vel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CartesianInertial *arg1 = (GeoCal::CartesianInertial *) 0 ;
+  GeoCal::Time *arg2 = 0 ;
+  double (*arg3)[6] ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::CartesianInertial const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"CartesianInertial_ci_to_cf_with_vel",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_ci_to_cf_with_vel" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
+      arg1 = const_cast< GeoCal::CartesianInertial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
+      arg1 = const_cast< GeoCal::CartesianInertial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_ci_to_cf_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianInertial_ci_to_cf_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  res3 = SWIG_ConvertPtr(swig_obj[2], &argp3,SWIGTYPE_p_a_6__double, 0 |  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CartesianInertial_ci_to_cf_with_vel" "', argument " "3"" of type '" "double [6][6]""'"); 
+  } 
+  arg3 = reinterpret_cast< double (*)[6] >(argp3);
+  {
+    try {
+      ((GeoCal::CartesianInertial const *)arg1)->ci_to_cf_with_vel((GeoCal::Time const &)*arg2,(double (*)[6])arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_CartesianInertial_ci_to_cf_quat(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::CartesianInertial *arg1 = (GeoCal::CartesianInertial *) 0 ;
@@ -7400,6 +7479,84 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_ci_to_cf(PyObject *SWIGUNUSEDPARM(self
   {
     try {
       ((GeoCal::CartesianFixed const *)arg1)->ci_to_cf((GeoCal::Time const &)*arg2,(double (*)[3])arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CartesianFixed_ci_to_cf_with_vel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CartesianFixed *arg1 = (GeoCal::CartesianFixed *) 0 ;
+  GeoCal::Time *arg2 = 0 ;
+  double (*arg3)[6] ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed const > tempshared1 ;
+  boost::shared_ptr< GeoCal::CartesianFixed const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"CartesianFixed_ci_to_cf_with_vel",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_ci_to_cf_with_vel" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
+      arg1 = const_cast< GeoCal::CartesianFixed * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
+      arg1 = const_cast< GeoCal::CartesianFixed * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_ci_to_cf_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianFixed_ci_to_cf_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  res3 = SWIG_ConvertPtr(swig_obj[2], &argp3,SWIGTYPE_p_a_6__double, 0 |  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CartesianFixed_ci_to_cf_with_vel" "', argument " "3"" of type '" "double [6][6]""'"); 
+  } 
+  arg3 = reinterpret_cast< double (*)[6] >(argp3);
+  {
+    try {
+      ((GeoCal::CartesianFixed const *)arg1)->ci_to_cf_with_vel((GeoCal::Time const &)*arg2,(double (*)[6])arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -11132,6 +11289,14 @@ static PyMethodDef SwigMethods[] = {
 		"The matrix for going from CartesianInertial to CartesianFixed is the\n"
 		"transpose of this matrix. \n"
 		""},
+	 { (char *)"CartesianInertial_ci_to_cf_with_vel", _wrap_CartesianInertial_ci_to_cf_with_vel, METH_VARARGS, (char *)"\n"
+		"virtual void GeoCal::CartesianInertial::ci_to_cf_with_vel(const Time &T, double Ci_to_cf[6][6]) const =0\n"
+		"Calculate matrix that can be used to convert CartesianFixed to\n"
+		"CartesianInertial at the given Time, including velocity.\n"
+		"\n"
+		"The matrix for going from CartesianInertial to CartesianFixed is the\n"
+		"transpose of this matrix. \n"
+		""},
 	 { (char *)"CartesianInertial_ci_to_cf_quat", _wrap_CartesianInertial_ci_to_cf_quat, METH_VARARGS, (char *)"\n"
 		"boost::math::quaternion<double> GeoCal::CartesianInertial::ci_to_cf_quat(const Time &T) const\n"
 		"Calculate quaternion that can be used to convert CartesianFixed to\n"
@@ -11169,6 +11334,14 @@ static PyMethodDef SwigMethods[] = {
 		"virtual void GeoCal::CartesianFixed::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const =0\n"
 		"Calculate matrix that can be used to convert CartesianFixed to\n"
 		"CartesianInertial at the given Time.\n"
+		"\n"
+		"The matrix for going from CartesianInertial to CartesianFixed is the\n"
+		"transpose of this matrix. \n"
+		""},
+	 { (char *)"CartesianFixed_ci_to_cf_with_vel", _wrap_CartesianFixed_ci_to_cf_with_vel, METH_VARARGS, (char *)"\n"
+		"virtual void GeoCal::CartesianFixed::ci_to_cf_with_vel(const Time &T, double Ci_to_cf[6][6]) const =0\n"
+		"Calculate matrix that can be used to convert CartesianFixed to\n"
+		"CartesianInertial at the given Time, including velocity.\n"
 		"\n"
 		"The matrix for going from CartesianInertial to CartesianFixed is the\n"
 		"transpose of this matrix. \n"
@@ -11484,6 +11657,7 @@ static swig_type_info _swigt__p_GeoCal__ScLookVectorWithDerivative = {"_p_GeoCal
 static swig_type_info _swigt__p_GeoCal__Time = {"_p_GeoCal__Time", "GeoCal::Time *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__TimeWithDerivative = {"_p_GeoCal__TimeWithDerivative", "GeoCal::TimeWithDerivative *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_a_3__double = {"_p_a_3__double", "double (*)[3]", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_a_6__double = {"_p_a_6__double", "double (*)[6]", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_2_t = {"_p_blitz__ArrayT_bool_2_t", "blitz::Array< bool,2 > *", 0, 0, (void*)0, 0};
@@ -11576,6 +11750,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__Time,
   &_swigt__p_GeoCal__TimeWithDerivative,
   &_swigt__p_a_3__double,
+  &_swigt__p_a_6__double,
   &_swigt__p_allocator_type,
   &_swigt__p_blitz__ArrayT_bool_1_t,
   &_swigt__p_blitz__ArrayT_bool_2_t,
@@ -11668,6 +11843,7 @@ static swig_cast_info _swigc__p_GeoCal__ScLookVectorWithDerivative[] = {  {&_swi
 static swig_cast_info _swigc__p_GeoCal__Time[] = {  {&_swigt__p_GeoCal__Time, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__TimeWithDerivative[] = {  {&_swigt__p_GeoCal__TimeWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_a_3__double[] = {  {&_swigt__p_a_3__double, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_a_6__double[] = {  {&_swigt__p_a_6__double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11760,6 +11936,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__Time,
   _swigc__p_GeoCal__TimeWithDerivative,
   _swigc__p_a_3__double,
+  _swigc__p_a_6__double,
   _swigc__p_allocator_type,
   _swigc__p_blitz__ArrayT_bool_1_t,
   _swigc__p_blitz__ArrayT_bool_2_t,

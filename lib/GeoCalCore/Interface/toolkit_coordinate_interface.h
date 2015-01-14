@@ -56,7 +56,7 @@ public:
 
   virtual void to_fixed(int Body_id, const Time& T, 
    const CartesianInertial& From, const boost::array<double, 3>& Vel_ci,
-   CartesianFixed& To, boost::array<double, 3>& Vel_cc) = 0;
+   CartesianFixed& To, boost::array<double, 3>& Vel_cf) = 0;
 
 //-----------------------------------------------------------------------
 /// Return a matrix for converting from CartesianInertial to
@@ -66,6 +66,13 @@ public:
   virtual void to_fixed(int Body_id, const Time& T, 
 			double Ci_to_cf[3][3]) = 0;
 
+//-----------------------------------------------------------------------
+/// Return a matrix for converting from CartesianInertial to
+/// CartesianFixed with velocity.
+//-----------------------------------------------------------------------
+
+  virtual void to_fixed_with_vel(int Body_id, const Time& T, 
+				 double Ci_to_cf[6][6]) = 0;
 
 //-----------------------------------------------------------------------
 /// Return the subsolar point on the given body for the give time.

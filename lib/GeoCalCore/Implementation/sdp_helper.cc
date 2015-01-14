@@ -220,6 +220,12 @@ const Time& T, double Ci_to_cf[3][3])
   SdpHelper::convert_to_ecr(T, Ci_to_cf);
 }
 
+void SdpToolkitCoordinateInterface::to_fixed_with_vel(int Body_id, 
+const Time& T, double Ci_to_cf[6][6])
+{
+  throw Exception("Not implemented for SDP toolkit");
+}
+
 //-----------------------------------------------------------------------
 /// This converts from CartesianInertial to CartesianFixed for the
 /// given body. We use the NAIF coding for the bodies (see the SPICE
@@ -246,7 +252,7 @@ void SdpToolkitCoordinateInterface::to_fixed(int Body_id,
 void SdpToolkitCoordinateInterface::to_fixed
 (int Body_id, const Time& T, 
  const CartesianInertial& From, const boost::array<double, 3>& Vel_ci,
- CartesianFixed& To, boost::array<double, 3>& Vel_cc)
+ CartesianFixed& To, boost::array<double, 3>& Vel_cf)
 {
   throw Exception("Not implemented for SDP toolkit");
 }

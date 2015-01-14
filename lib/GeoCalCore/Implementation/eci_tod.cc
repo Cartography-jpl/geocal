@@ -38,6 +38,17 @@ void EciTod::ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
 }
 
 //-----------------------------------------------------------------------
+/// Matrix to convert EciTod to Ecr with velocity. The transpose of
+/// this will convert Ecr to EciTod.
+//-----------------------------------------------------------------------
+
+void EciTod::ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const
+{ 
+  SpiceHelper::conversion_matrix2("ECI_TOD", "ITRF93", T);
+  mat_copy(SpiceHelper::m2, Ci_to_cf);
+}
+
+//-----------------------------------------------------------------------
 // Convert from EciTod to Eci.
 //-----------------------------------------------------------------------
 

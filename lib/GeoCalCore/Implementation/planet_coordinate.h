@@ -115,6 +115,18 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Matrix to convert PlanetInertial to PlanetFixed including
+/// velocity. The transpose of this
+/// will convert PlanetFixed to PlanetInertial.
+//-----------------------------------------------------------------------
+
+  virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const
+  { 
+    CartesianFixed::toolkit_coordinate_interface->to_fixed_with_vel
+      (NAIF_CODE, T, Ci_to_cf); 
+  }
+
+//-----------------------------------------------------------------------
 /// Height above the reference ellipsoid.
 //-----------------------------------------------------------------------
   virtual double height_reference_surface() const;
@@ -278,6 +290,18 @@ public:
   { 
     CartesianFixed::toolkit_coordinate_interface->to_fixed(NAIF_CODE,
 							   T, Ci_to_cf); 
+  }
+
+//-----------------------------------------------------------------------
+/// Matrix to convert PlanetInertial to PlanetFixed including
+/// velocity. The transpose of this
+/// will convert PlanetFixed to PlanetInertial.
+//-----------------------------------------------------------------------
+
+  virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const
+  { 
+    CartesianFixed::toolkit_coordinate_interface->to_fixed_with_vel
+      (NAIF_CODE, T, Ci_to_cf); 
   }
 
 //-----------------------------------------------------------------------

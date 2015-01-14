@@ -20,6 +20,7 @@ extern "C" {
 using namespace GeoCal;
 
 double SpiceHelper::m[3][3];
+double SpiceHelper::m2[6][6];
 
 //-----------------------------------------------------------------------
 /// Spice exception. This automatically gets the SPICE error message.
@@ -202,6 +203,19 @@ void SpiceHelper::conversion(const std::string& From,
 }
 
 //-----------------------------------------------------------------------
+/// Convert from the given coordinate to the given coordinate.
+//-----------------------------------------------------------------------
+
+void SpiceHelper::conversion(const std::string& From,
+			     const std::string& To, const Time& T,
+			     const boost::array<double, 6>& pin, 
+			     boost::array<double, 6>& pout)
+{
+  conversion_matrix2(From, To, T);
+  mul(m2, pin, pout);
+}
+
+//-----------------------------------------------------------------------
 /// Calculate the sub solar point, and also the vector from the Sun to
 /// the sub solar point.
 //-----------------------------------------------------------------------
@@ -307,6 +321,26 @@ void SpiceHelper::conversion_matrix(const std::string& From,
 }
 
 //-----------------------------------------------------------------------
+/// Return matrix that converts between the two named coordinate
+/// system, including velocify. To avoid making a second copy, we
+/// return the data in SpiceHelper::m2. 
+//-----------------------------------------------------------------------
+
+void SpiceHelper::conversion_matrix2(const std::string& From,
+				     const std::string& To, const Time& T)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  sxform_c(const_cast<char*>(From.c_str()), const_cast<char*>(To.c_str()), 
+	   T.et(), m2);
+  spice_error_check();
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+
+//-----------------------------------------------------------------------
 /// Return the body name for the given id.
 //-----------------------------------------------------------------------
 
@@ -383,6 +417,21 @@ void SpiceHelper::cartesian_inertial_to_cartesian_fixed(int Body_id,
 							const Time& T)
 {
   conversion_matrix("J2000", fixed_frame_name(Body_id), T);
+}
+
+//-----------------------------------------------------------------------
+/// Return matrix that converts from CartesianInertial to
+/// CartesianFixed including velocity. To avoid making a second copy,
+/// we return the data 
+/// in SpiceHelper::m2. Since this is only called by
+/// SpiceToolkitCoordinateInterface, this slightly awkward interface
+/// is worth the small performance advantage.
+//-----------------------------------------------------------------------
+
+void SpiceHelper::cartesian_inertial_to_cartesian_fixed2(int Body_id, 
+							const Time& T)
+{
+  conversion_matrix2("J2000", fixed_frame_name(Body_id), T);
 }
 
 //-----------------------------------------------------------------------
@@ -481,6 +530,21 @@ void SpiceToolkitCoordinateInterface::to_inertial
  const CartesianFixed& From, const boost::array<double, 3>& Vel_cf,
  CartesianInertial& To, boost::array<double, 3>& Vel_ci)
 {
+  SpiceHelper::cartesian_inertial_to_cartesian_fixed(Body_id, T);
+  boost::array<double, 6> from, to;
+  from[0] = From.position[0];
+  from[1] = From.position[1];
+  from[2] = From.position[2];
+  from[3] = Vel_cf[0];
+  from[4] = Vel_cf[1];
+  from[5] = Vel_cf[2];
+  mul_t(SpiceHelper::m2, from, to);
+  To.position[0] = to[0];
+  To.position[1] = to[1];
+  To.position[2] = to[2];
+  Vel_ci[0] = to[3];
+  Vel_ci[1] = to[4];
+  Vel_ci[2] = to[5];
 }
 
 //-----------------------------------------------------------------------
@@ -494,6 +558,19 @@ void SpiceToolkitCoordinateInterface::to_fixed(int Body_id,
 {
   SpiceHelper::cartesian_inertial_to_cartesian_fixed(Body_id, T);
   mat_copy(SpiceHelper::m, Ci_to_cf);
+}
+
+//-----------------------------------------------------------------------
+/// This calculates a matrix from converting from CartesianInertial to
+/// CartesianFixed with velocity for the  given body. We use the NAIF
+/// coding for the bodies (see the SPICE documentation for details). 
+//-----------------------------------------------------------------------
+
+void SpiceToolkitCoordinateInterface::to_fixed_with_vel(int Body_id, 
+  const Time& T, double Ci_to_cf[6][6])
+{
+  SpiceHelper::cartesian_inertial_to_cartesian_fixed2(Body_id, T);
+  mat_copy(SpiceHelper::m2, Ci_to_cf);
 }
 
 void
@@ -550,8 +627,23 @@ void SpiceToolkitCoordinateInterface::to_fixed(int Body_id,
 void SpiceToolkitCoordinateInterface::to_fixed
 (int Body_id, const Time& T, 
  const CartesianInertial& From, const boost::array<double, 3>& Vel_ci,
- CartesianFixed& To, boost::array<double, 3>& Vel_cc)
+ CartesianFixed& To, boost::array<double, 3>& Vel_cf)
 {
+  SpiceHelper::cartesian_inertial_to_cartesian_fixed(Body_id, T);
+  boost::array<double, 6> from, to;
+  from[0] = From.position[0];
+  from[1] = From.position[1];
+  from[2] = From.position[2];
+  from[3] = Vel_ci[0];
+  from[4] = Vel_ci[1];
+  from[5] = Vel_ci[2];
+  mul(SpiceHelper::m2, from, to);
+  To.position[0] = to[0];
+  To.position[1] = to[1];
+  To.position[2] = to[2];
+  Vel_cf[0] = to[3];
+  Vel_cf[1] = to[4];
+  Vel_cf[2] = to[5];
 }
 
 //-----------------------------------------------------------------------

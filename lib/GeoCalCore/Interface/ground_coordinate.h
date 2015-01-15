@@ -314,8 +314,26 @@ void convert_position_and_velocity
  const CartesianInertial& Ci,
  const boost::array<double, 3>& Vel_ci,
  boost::shared_ptr<CartesianFixed>& Cf,
- boost::array<double, 3>& Vel_cf
+ boost::array<double, 3>& Vel_cf,
+ boost::math::quaternion<double>& Ci_to_cf_q
  );
+
+//-----------------------------------------------------------------------
+/// \ingroup Miscellaneous
+/// Convert including velocity.
+//-----------------------------------------------------------------------
+
+inline void convert_position_and_velocity
+(const Time& T,
+ const CartesianInertial& Ci,
+ const boost::array<double, 3>& Vel_ci,
+ boost::shared_ptr<CartesianFixed>& Cf,
+ boost::array<double, 3>& Vel_cf
+ )
+{
+  boost::math::quaternion<double> junk;
+  convert_position_and_velocity(T, Ci, Vel_ci, Cf, Vel_cf, junk);
+}
 
 void convert_position_and_velocity
 (const TimeWithDerivative& T,

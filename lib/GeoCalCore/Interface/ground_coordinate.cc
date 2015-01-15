@@ -126,7 +126,8 @@ void GeoCal::convert_position_and_velocity
  const CartesianInertial& Ci,
  const boost::array<double, 3>& Vel_ci,
  boost::shared_ptr<CartesianFixed>& Cf,
- boost::array<double, 3>& Vel_cf
+ boost::array<double, 3>& Vel_cf,
+ boost::math::quaternion<double>& Ci_to_cf_q
  )
 {
   Cf = Ci.convert_to_cf(T);
@@ -143,6 +144,11 @@ void GeoCal::convert_position_and_velocity
   Vel_cf[0] = to[3];
   Vel_cf[1] = to[4];
   Vel_cf[2] = to[5];
+  double m2[3][3];
+  for(int i = 0; i < 3; ++i)
+    for(int j = 0; j < 3; ++j)
+      m2[i][j] = m[i][j];
+  Ci_to_cf_q = matrix_to_quaternion(m2);
 }
 
 //-----------------------------------------------------------------------

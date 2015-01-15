@@ -50,6 +50,8 @@ public:
     double Ci_to_cf[3][3]);
   virtual void to_fixed_with_vel(int Body_id, const Time& T,
     double Ci_to_cf[6][6]);
+  virtual void to_inertial_with_vel(int Body_id, const Time& T,
+    double Cf_to_ci[6][6]);
   virtual void to_fixed(int Body_id, const Time& T,
     const CartesianInertial& From, CartesianFixed& To);
   virtual void to_fixed(int Body_id, const Time& T, 

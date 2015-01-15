@@ -8024,7 +8024,12 @@ fi
 # but apparently hasn't been fixed. We work around this by checking if
 # the CXX program is actually on the system.
 
-# Extract the first word of "$CXX", so it can be a program name with args.
+# First check for CXX directly, in case the file path was given
+if test -f "$CXX" && test -x "$CXX"; then
+    HAVE_CXX=yes
+else
+   # Then check on path
+   # Extract the first word of "$CXX", so it can be a program name with args.
 set dummy $CXX; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
 $as_echo_n "checking for $ac_word... " >&6; }
@@ -8062,6 +8067,7 @@ $as_echo "no" >&6; }
 fi
 
 
+fi
 if test "$HAVE_CXX" = "no"; then
    as_fn_error $? "Could not find a c++ compiler" "$LINENO" 5;
 fi

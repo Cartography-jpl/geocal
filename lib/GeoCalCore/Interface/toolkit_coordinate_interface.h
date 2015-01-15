@@ -68,11 +68,21 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return a matrix for converting from CartesianInertial to
-/// CartesianFixed with velocity.
+/// CartesianFixed with velocity. Note unlike the 3x3 matrix this
+/// matrix is *not* orthogonal, so the inverse is not the
+/// transpose. Instead call to_inertial_with_vel for the inverse.
 //-----------------------------------------------------------------------
 
   virtual void to_fixed_with_vel(int Body_id, const Time& T, 
 				 double Ci_to_cf[6][6]) = 0;
+
+//-----------------------------------------------------------------------
+/// Return a matrix for converting from CartesianFixed to
+/// CartesianInertial with velocity.
+//-----------------------------------------------------------------------
+
+  virtual void to_inertial_with_vel(int Body_id, const Time& T, 
+				    double Cf_to_ci[6][6]) = 0;
 
 //-----------------------------------------------------------------------
 /// Return the subsolar point on the given body for the give time.

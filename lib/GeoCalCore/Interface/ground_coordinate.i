@@ -53,7 +53,7 @@ public:
   virtual boost::shared_ptr<CartesianFixed> 
     create(boost::array<double, 3> P) const = 0;
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const = 0;
-  virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) 
+  virtual void cf_to_ci_with_vel(const Time& T, double Cf_to_ci[6][6]) 
     const = 0;
   boost::math::quaternion<double> ci_to_cf_quat(const Time& T) const;
   virtual boost::shared_ptr<CartesianFixed>
@@ -126,6 +126,41 @@ public:
 
 double distance(const GroundCoordinate& G1, const GroundCoordinate& G2);
 
+void convert_position_and_velocity
+(const Time& T,
+ const CartesianFixed& Cf,
+ const boost::array<double, 3>& Vel_cf,
+ boost::shared_ptr<CartesianInertial>& Ci,
+ boost::array<double, 3>& Vel_ci
+ );
+
+void convert_position_and_velocity
+(const TimeWithDerivative& T,
+ const CartesianFixed& Cf,
+ const boost::array<AutoDerivative<double>, 3>& Cf_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_cf,
+ boost::shared_ptr<CartesianInertial>& Ci,
+ const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_ci
+ );
+
+void convert_position_and_velocity
+(const Time& T,
+ const CartesianInertial& Ci,
+ const boost::array<double, 3>& Vel_ci,
+ boost::shared_ptr<CartesianFixed>& Cf,
+ boost::array<double, 3>& Vel_cf
+ );
+
+void convert_position_and_velocity
+(const TimeWithDerivative& T,
+ const CartesianInertial& Ci,
+ const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_ci,
+ boost::shared_ptr<CartesianFixed>& Cf,
+ const boost::array<AutoDerivative<double>, 3>& Cf_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_cf
+ );
 }
 
 %template(Vector_GroundCoordinate) std::vector<boost::shared_ptr<GeoCal::GroundCoordinate> >;

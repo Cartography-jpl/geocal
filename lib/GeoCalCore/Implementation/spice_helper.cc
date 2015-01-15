@@ -434,6 +434,12 @@ void SpiceHelper::cartesian_inertial_to_cartesian_fixed2(int Body_id,
   conversion_matrix2("J2000", fixed_frame_name(Body_id), T);
 }
 
+void SpiceHelper::cartesian_fixed_to_cartesian_inertial2(int Body_id, 
+							const Time& T)
+{
+  conversion_matrix2(fixed_frame_name(Body_id), "J2000", T);
+}
+
 //-----------------------------------------------------------------------
 /// Convert from GeoCal::Time to Spice ET time.
 //-----------------------------------------------------------------------
@@ -571,6 +577,19 @@ void SpiceToolkitCoordinateInterface::to_fixed_with_vel(int Body_id,
 {
   SpiceHelper::cartesian_inertial_to_cartesian_fixed2(Body_id, T);
   mat_copy(SpiceHelper::m2, Ci_to_cf);
+}
+
+//-----------------------------------------------------------------------
+/// This calculates a matrix from converting from CartesianFixed to
+/// CartesianInertial with velocity for the  given body. We use the NAIF
+/// coding for the bodies (see the SPICE documentation for details). 
+//-----------------------------------------------------------------------
+
+void SpiceToolkitCoordinateInterface::to_inertial_with_vel(int Body_id, 
+  const Time& T, double Cf_to_ci[6][6])
+{
+  SpiceHelper::cartesian_fixed_to_cartesian_inertial2(Body_id, T);
+  mat_copy(SpiceHelper::m2, Cf_to_ci);
 }
 
 void

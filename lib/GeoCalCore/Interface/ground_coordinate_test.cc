@@ -127,4 +127,37 @@ BOOST_AUTO_TEST_CASE(geocentric)
   BOOST_CHECK_EQUAL(g.print_to_string(), "Geocentric: (30 deg, 40 deg, 50 m)");
 }
 
+BOOST_AUTO_TEST_CASE(pos_and_vel)
+{
+  Geodetic g(10, 20, 30);
+  Ecr e(g);
+  Time t = Time::parse_time("2003-01-01T10:30:00Z");
+  boost::array<double, 3> vel_cf = {100, 200, 300};
+  boost::array<double, 3> vel_ci;
+  boost::shared_ptr<CartesianInertial> ci;
+  convert_position_and_velocity(t, e, vel_cf, ci, vel_ci);
+  BOOST_CHECK_CLOSE(ci->position[0], 888551.27707691176, 1e-4);
+  BOOST_CHECK_CLOSE(ci->position[1], -6218769.7591331499, 1e-4);
+  BOOST_CHECK_CLOSE(ci->position[2], 1100106.8473076127, 1e-4);
+  BOOST_CHECK_CLOSE(vel_ci[0], 628.71130860798417, 1e-4);
+  BOOST_CHECK_CLOSE(vel_ci[1], -74.22614700738886, 1e-4);
+  BOOST_CHECK_CLOSE(vel_ci[2], 299.83611083221604, 1e-4);
+  boost::shared_ptr<CartesianFixed> cf;
+  convert_position_and_velocity(t, *ci, vel_ci, cf, vel_cf);
+  BOOST_CHECK(distance(e, *cf) < 1e-4);
+  BOOST_CHECK_CLOSE(vel_cf[0], 100, 1e-4);
+  BOOST_CHECK_CLOSE(vel_cf[1], 200, 1e-4);
+  BOOST_CHECK_CLOSE(vel_cf[2], 300, 1e-4);
+  // Sanity check, the earth equator rotation speed according to
+  // wikipedia 465.1 m/s.
+  Ecr e2(Geodetic(0, 0));
+  vel_cf[0] = 0;
+  vel_cf[1] = 0;
+  vel_cf[2] = 0;
+  convert_position_and_velocity(t, e, vel_cf, ci, vel_ci);
+  double speed = sqrt(vel_ci[0] * vel_ci[0] + vel_ci[1] * vel_ci[1] + 
+		      vel_ci[2] * vel_ci[2]);
+  BOOST_CHECK(fabs(speed - 465.1) < 10.0);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

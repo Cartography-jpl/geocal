@@ -113,10 +113,10 @@ public:
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const = 0;
 
 //-----------------------------------------------------------------------
-/// Calculate matrix that can be used to convert CartesianFixed to
-/// CartesianInertial at the given Time, including velocity. The
-/// matrix for going from 
-/// CartesianInertial to CartesianFixed is the transpose of this matrix.
+/// Calculate matrix that can be used to convert CartesianInertial to
+/// CartesianFixed at the given Time, including velocity. Note that
+/// unlike the 3x3 matrix, this is *not* orthogonal so the transpose
+/// is not the inverse.
 //-----------------------------------------------------------------------
 
   virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) 
@@ -198,12 +198,12 @@ public:
 
 //-----------------------------------------------------------------------
 /// Calculate matrix that can be used to convert CartesianFixed to
-/// CartesianInertial at the given Time, including velocity. The
-/// matrix for going from 
-/// CartesianInertial to CartesianFixed is the transpose of this matrix.
+/// CartesianInertial at the given Time, including velocity. Note that
+/// unlike the 3x3 matrix, this is *not* orthogonal so the transpose
+/// is not the inverse.
 //-----------------------------------------------------------------------
 
-  virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) 
+  virtual void cf_to_ci_with_vel(const Time& T, double Cf_to_ci[6][6]) 
     const = 0;
 
 //-----------------------------------------------------------------------
@@ -291,6 +291,42 @@ inline double GroundCoordinate::height_reference_surface() const
 
 double distance(const GroundCoordinate& G1, const GroundCoordinate& G2);
 
+void convert_position_and_velocity
+(const Time& T,
+ const CartesianFixed& Cf,
+ const boost::array<double, 3>& Vel_cf,
+ boost::shared_ptr<CartesianInertial>& Ci,
+ boost::array<double, 3>& Vel_ci
+ );
+
+void convert_position_and_velocity
+(const TimeWithDerivative& T,
+ const CartesianFixed& Cf,
+ const boost::array<AutoDerivative<double>,3>& Cf_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_cf,
+ boost::shared_ptr<CartesianInertial>& Ci,
+ const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_ci
+ );
+
+void convert_position_and_velocity
+(const Time& T,
+ const CartesianInertial& Ci,
+ const boost::array<double, 3>& Vel_ci,
+ boost::shared_ptr<CartesianFixed>& Cf,
+ boost::array<double, 3>& Vel_cf
+ );
+
+void convert_position_and_velocity
+(const TimeWithDerivative& T,
+ const CartesianInertial& Ci,
+ const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_ci,
+ boost::shared_ptr<CartesianFixed>& Cf,
+ const boost::array<AutoDerivative<double>, 3>& Cf_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_cf
+ );
+ 
 }
 #endif
 

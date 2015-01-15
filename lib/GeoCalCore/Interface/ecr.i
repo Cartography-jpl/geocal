@@ -35,7 +35,7 @@ public:
   Ecr(const boost::array<double, 3>& Pos);
   Ecr();
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const;
-  virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const;
+  virtual void cf_to_ci_with_vel(const Time& T, double Cf_to_ci[6][6]) const;
   virtual boost::shared_ptr<CartesianInertial> convert_to_ci(const Time& T) 
   const;
   virtual boost::shared_ptr<CartesianFixed> 

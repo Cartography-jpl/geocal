@@ -226,6 +226,12 @@ const Time& T, double Ci_to_cf[6][6])
   throw Exception("Not implemented for SDP toolkit");
 }
 
+void SdpToolkitCoordinateInterface::to_inertial_with_vel(int Body_id, 
+const Time& T, double Cf_to_ci[6][6])
+{
+  throw Exception("Not implemented for SDP toolkit");
+}
+
 //-----------------------------------------------------------------------
 /// This converts from CartesianInertial to CartesianFixed for the
 /// given body. We use the NAIF coding for the bodies (see the SPICE

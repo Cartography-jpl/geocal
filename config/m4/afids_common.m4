@@ -10,7 +10,13 @@ AC_REQUIRE([AC_PROG_CC])
 # but apparently hasn't been fixed. We work around this by checking if
 # the CXX program is actually on the system.
 AC_REQUIRE([AC_PROG_CXX])
-AC_CHECK_PROG(HAVE_CXX, $CXX, yes, no)
+# First check for CXX directly, in case the file path was given
+if test -f "$CXX" && test -x "$CXX"; then
+    HAVE_CXX=yes
+else
+   # Then check on path
+   AC_CHECK_PROG(HAVE_CXX, $CXX, yes, no)
+fi
 if test "$HAVE_CXX" = "no"; then
    AC_MSG_ERROR([Could not find a c++ compiler]);
 fi

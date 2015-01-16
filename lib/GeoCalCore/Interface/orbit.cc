@@ -576,15 +576,12 @@ void QuaternionOrbitData::initialize(Time Tm,
   pos_ci_with_der = boost::math::quaternion<double>(0, pos_ci->position[0],
 						    pos_ci->position[1],
 						    pos_ci->position[2]);
-  ci_to_cf_ = pos_ci->ci_to_cf_quat(Tm);
+  boost::array<double, 3> vcf;
+  convert_position_and_velocity(Tm, *Pos_ci, vel_inertial, pos, vcf, ci_to_cf_);
   ci_to_cf_der_ = ci_to_cf_;
   have_ci_to_cf = true;
-  boost::math::quaternion<double> vel_ci(0, vel_inertial[0], vel_inertial[1], 
-				      vel_inertial[2]);
-
-  vel_cf = ci_to_cf() * vel_ci * conj(ci_to_cf());
+  vel_cf = boost::math::quaternion<double>(0, vcf[0], vcf[1], vcf[2]);
   vel_cf_with_der = vel_cf;
-  pos = pos_ci->convert_to_cf(Tm);
   pos_with_der = boost::math::quaternion<double>(0, pos->position[0], 
 						 pos->position[1],
 						 pos->position[2]);
@@ -605,6 +602,7 @@ void QuaternionOrbitData::initialize
  const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q)
 { 
   from_cf_ = false;
+  // We need to modify this
   tm = Tm;
   pos_ci = Pos_ci;
   pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >

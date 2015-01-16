@@ -162,8 +162,43 @@ void GeoCal::convert_position_and_velocity
  const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
  const boost::array<AutoDerivative<double>, 3>& Vel_ci,
  boost::shared_ptr<CartesianFixed>& Cf,
- const boost::array<AutoDerivative<double>, 3>& Cf_with_der,
- const boost::array<AutoDerivative<double>, 3>& Vel_cf
+ boost::array<AutoDerivative<double>, 3>& Cf_with_der,
+ boost::array<AutoDerivative<double>, 3>& Vel_cf,
+ boost::math::quaternion<AutoDerivative<double> >& Ci_to_cf_q
  )
 {
+  Cf = Ci.convert_to_cf(T.value());
+  double m[6][6];
+  Ci.ci_to_cf_with_vel(T.value(), m);
+
+  const double eps = 1e-3;
+  double meps[6][6];
+  Ci.ci_to_cf_with_vel(T.value() + eps, meps);
+  blitz::Array<double,1> tmg(T.gradient());
+  AutoDerivative<double> mder[6][6];
+  for(int i = 0; i < 6; ++i)
+    for(int j = 0; j < 6; ++j) {
+      blitz::Array<double, 1> g((meps[i][j] - m[i][j]) / eps * tmg);
+      mder[i][j] = AutoDerivative<double>(m[i][j], g);
+    }
+  boost::array<AutoDerivative<double>, 6> from, to;
+  from[0] = Ci_with_der[0];
+  from[1] = Ci_with_der[1];
+  from[2] = Ci_with_der[2];
+  from[3] = Vel_ci[0];
+  from[4] = Vel_ci[1];
+  from[5] = Vel_ci[2];
+  mul(mder, from, to);
+  Cf_with_der[0] = to[0];
+  Cf_with_der[1] = to[1];
+  Cf_with_der[2] = to[2];
+  Vel_cf[0] = to[3];
+  Vel_cf[1] = to[4];
+  Vel_cf[2] = to[5];
+
+  AutoDerivative<double> m2[3][3];
+  for(int i = 0; i < 3; ++i)
+    for(int j = 0; j < 3; ++j)
+      m2[i][j] = m[i][j];
+  Ci_to_cf_q = matrix_to_quaternion(m2);
 }

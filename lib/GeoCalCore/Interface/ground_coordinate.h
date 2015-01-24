@@ -305,9 +305,30 @@ void convert_position_and_velocity
  const boost::array<AutoDerivative<double>,3>& Cf_with_der,
  const boost::array<AutoDerivative<double>, 3>& Vel_cf,
  boost::shared_ptr<CartesianInertial>& Ci,
- const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
- const boost::array<AutoDerivative<double>, 3>& Vel_ci
+ boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+ boost::array<AutoDerivative<double>, 3>& Vel_ci,
+ boost::math::quaternion<AutoDerivative<double> > Cf_to_ci_q
  );
+
+//-----------------------------------------------------------------------
+/// \ingroup Miscellaneous
+/// Convert including velocity.
+//-----------------------------------------------------------------------
+
+inline void convert_position_and_velocity
+(const TimeWithDerivative& T,
+ const CartesianFixed& Cf,
+ const boost::array<AutoDerivative<double>,3>& Cf_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_cf,
+ boost::shared_ptr<CartesianInertial>& Ci,
+ boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+ boost::array<AutoDerivative<double>, 3>& Vel_ci
+ )
+{
+  boost::math::quaternion<AutoDerivative<double> > junk;
+  convert_position_and_velocity(T, Cf, Cf_with_der, Vel_cf, Ci, Ci_with_der, 
+				Vel_ci, junk);
+}
 
 void convert_position_and_velocity
 (const Time& T,

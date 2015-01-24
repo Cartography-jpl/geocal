@@ -132,7 +132,7 @@ BOOST_AUTO_TEST_CASE(pos_and_vel)
   Geodetic g(10, 20, 30);
   Ecr e(g);
   Time t = Time::parse_time("2003-01-01T10:30:00Z");
-  boost::array<double, 3> vel_cf = {100, 200, 300};
+  boost::array<double, 3> vel_cf = {{100, 200, 300}};
   boost::array<double, 3> vel_ci;
   boost::shared_ptr<CartesianInertial> ci;
   convert_position_and_velocity(t, e, vel_cf, ci, vel_ci);
@@ -163,22 +163,21 @@ BOOST_AUTO_TEST_CASE(pos_and_vel)
 BOOST_AUTO_TEST_CASE(pos_and_vel_with_der)
 {
   Geodetic g(10, 20, 30);
-  // Need to check gradients here
   Ecr cf(g);
   Time t = Time::parse_time("2003-01-01T10:30:00Z");
   TimeWithDerivative tder = 
     TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 7));
   boost::array<AutoDerivative<double>, 3> cf_der = 
-    {AutoDerivative<double>(cf.position[0], 1, 7),
+    {{AutoDerivative<double>(cf.position[0], 1, 7),
      AutoDerivative<double>(cf.position[1], 2, 7),
-     AutoDerivative<double>(cf.position[2], 3, 7)};
+      AutoDerivative<double>(cf.position[2], 3, 7)}};
   boost::array<AutoDerivative<double>, 3> vel_cf = 
-    {AutoDerivative<double>(100.0, 4, 7), 
-     AutoDerivative<double>(200.0, 5, 7),
-     AutoDerivative<double>(300, 6, 7)};
+    {{AutoDerivative<double>(100.0, 4, 7), 
+      AutoDerivative<double>(200.0, 5, 7),
+      AutoDerivative<double>(300, 6, 7)}};
   boost::array<AutoDerivative<double>, 3> vel_ci, ci_der;
   boost::shared_ptr<CartesianInertial> ci;
-  convert_position_and_velocity(t, cf, cf_der, vel_cf, ci, ci_der, vel_ci);
+  convert_position_and_velocity(tder, cf, cf_der, vel_cf, ci, ci_der, vel_ci);
   BOOST_CHECK_CLOSE(ci->position[0], 888551.27707691176, 1e-4);
   BOOST_CHECK_CLOSE(ci->position[1], -6218769.7591331499, 1e-4);
   BOOST_CHECK_CLOSE(ci->position[2], 1100106.8473076127, 1e-4);
@@ -186,11 +185,73 @@ BOOST_AUTO_TEST_CASE(pos_and_vel_with_der)
   BOOST_CHECK_CLOSE(vel_ci[1].value(), -74.22614700738886, 1e-4);
   BOOST_CHECK_CLOSE(vel_ci[2].value(), 299.83611083221604, 1e-4);
   boost::shared_ptr<CartesianFixed> cf2;
-  convert_position_and_velocity(t, *ci, ci_der, vel_ci, cf2, cf_der, vel_cf);
+  convert_position_and_velocity(tder, *ci, ci_der, vel_ci, cf2, cf_der, vel_cf);
   BOOST_CHECK(distance(g, *cf2) < 1e-4);
   BOOST_CHECK_CLOSE(vel_cf[0].value(), 100, 1e-4);
   BOOST_CHECK_CLOSE(vel_cf[1].value(), 200, 1e-4);
   BOOST_CHECK_CLOSE(vel_cf[2].value(), 300, 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(pos_and_vel_with_der_check_grad)
+{
+  Geodetic g(10, 20, 30);
+  Ecr cf(g);
+  Time t = Time::parse_time("2003-01-01T10:30:00Z");
+  TimeWithDerivative tder = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 7));
+  boost::array<AutoDerivative<double>, 3> cf_der = 
+    {{AutoDerivative<double>(cf.position[0], 1, 7),
+     AutoDerivative<double>(cf.position[1], 2, 7),
+      AutoDerivative<double>(cf.position[2], 3, 7)}};
+  boost::array<AutoDerivative<double>, 3> vel_cf = 
+    {{AutoDerivative<double>(100.0, 4, 7), 
+      AutoDerivative<double>(200.0, 5, 7),
+      AutoDerivative<double>(300, 6, 7)}};
+  boost::array<AutoDerivative<double>, 3> vel_ci, ci_der;
+  boost::shared_ptr<CartesianInertial> ci;
+  convert_position_and_velocity(tder, cf, cf_der, vel_cf, ci, ci_der, vel_ci);
+
+  boost::array<double, 3> vel_cf2 = {{100, 200, 300}};
+  boost::array<double, 3> vel_ci2;
+  boost::shared_ptr<CartesianInertial> cieps;
+  double eps = 1e-3;
+  blitz::Array<double, 2> jac_fd(3, 7);
+  blitz::Array<double, 2> jac2_fd(3, 7);
+  blitz::Array<double, 2> jac_calc(3, 7);
+  blitz::Array<double, 2> jac2_calc(3, 7);
+  blitz::Range rall(blitz::Range::all());
+  for(int i = 0; i < 3; ++i) {
+    jac_calc(i, rall) = ci_der[i].gradient();
+    jac2_calc(i, rall) = vel_ci[i].gradient();
+  }
+  convert_position_and_velocity(t + eps, cf, vel_cf2, cieps, vel_ci2);
+  for(int i = 0; i < 3; ++i) {
+    jac_fd(i, 0) = (cieps->position[i] - ci->position[i]) / eps;
+    jac2_fd(i, 0) = (vel_ci2[i] - vel_ci[i].value()) /eps;
+  }
+  eps = 10.0;
+  for(int j = 0; j < 3; ++j) {
+    double old = cf.position[j];
+    cf.position[j] += eps;
+    convert_position_and_velocity(t, cf, vel_cf2, cieps, vel_ci2);
+    cf.position[j] = old;
+    for(int i = 0; i < 3; ++i) {
+      jac_fd(i, j + 1) = (cieps->position[i] - ci->position[i]) / eps;
+      jac2_fd(i, j + 1) = (vel_ci2[i] - vel_ci[i].value()) /eps;
+    }
+  }
+  for(int j = 0; j < 3; ++j) {
+    double old = vel_cf2[j];
+    vel_cf2[j] += eps;
+    convert_position_and_velocity(t, cf, vel_cf2, cieps, vel_ci2);
+    vel_cf2[j] = old;
+    for(int i = 0; i < 3; ++i) {
+      jac_fd(i, j + 4) = (cieps->position[i] - ci->position[i]) / eps;
+      jac2_fd(i, j + 4) = (vel_ci2[i] - vel_ci[i].value()) /eps;
+    }
+  }
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac2_fd, jac2_calc, 0.1);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

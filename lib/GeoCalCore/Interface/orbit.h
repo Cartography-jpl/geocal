@@ -416,6 +416,9 @@ private:
   mutable boost::shared_ptr<CartesianInertial> pos_ci;
 				///< Position
   mutable boost::math::quaternion<AutoDerivative<double> > pos_ci_with_der;
+  mutable boost::math::quaternion<double> vel_ci; 
+  mutable boost::math::quaternion<AutoDerivative<double> > 
+  vel_ci_with_der; 
 };
 
 /****************************************************************//**

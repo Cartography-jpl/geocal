@@ -112,7 +112,7 @@ void GeoCal::convert_position_and_velocity
  boost::shared_ptr<CartesianInertial>& Ci,
  boost::array<AutoDerivative<double>, 3>& Ci_with_der,
  boost::array<AutoDerivative<double>, 3>& Vel_ci,
- boost::math::quaternion<AutoDerivative<double> > Cf_to_ci_q
+ boost::math::quaternion<AutoDerivative<double> >& Cf_to_ci_q
  )
 {
   Ci = Cf.convert_to_ci(T.value());

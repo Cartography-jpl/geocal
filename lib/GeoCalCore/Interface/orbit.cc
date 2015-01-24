@@ -576,6 +576,9 @@ void QuaternionOrbitData::initialize(Time Tm,
   pos_ci_with_der = boost::math::quaternion<double>(0, pos_ci->position[0],
 						    pos_ci->position[1],
 						    pos_ci->position[2]);
+  vel_ci = boost::math::quaternion<double>(0, vel_inertial[0], vel_inertial[1],
+					   vel_inertial[2]);
+  vel_ci_with_der = vel_ci;
   boost::array<double, 3> vcf;
   convert_position_and_velocity(Tm, *Pos_ci, vel_inertial, pos, vcf, ci_to_cf_);
   ci_to_cf_der_ = ci_to_cf_;
@@ -602,42 +605,26 @@ void QuaternionOrbitData::initialize
  const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q)
 { 
   from_cf_ = false;
-  // We need to modify this
   tm = Tm;
   pos_ci = Pos_ci;
   pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
     (0, Pos_ci_with_der[0], Pos_ci_with_der[1], Pos_ci_with_der[2]);
+  vel_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
+    (0, vel_inertial[0], vel_inertial[1], vel_inertial[2]);
+  vel_ci = value(vel_ci_with_der);
 
-  ci_to_cf_ = pos_ci->ci_to_cf_quat(Tm.value());
-  double eps = 1e-3;
-  boost::math::quaternion<double> ci_to_cf1 = 
-    pos_ci->ci_to_cf_quat(time() + eps);
-  Array<double,1> g(time_with_derivative().gradient());
-  Array<double, 1> 
-    g1((ci_to_cf1.R_component_1() - ci_to_cf_.R_component_1()) / eps * g);
-  Array<double, 1> 
-    g2((ci_to_cf1.R_component_2() - ci_to_cf_.R_component_2()) / eps * g);
-  Array<double, 1> 
-    g3((ci_to_cf1.R_component_3() - ci_to_cf_.R_component_3()) / eps * g);
-  Array<double, 1> 
-    g4((ci_to_cf1.R_component_4() - ci_to_cf_.R_component_4()) / eps * g);
-  AutoDerivative<double> v1(ci_to_cf_.R_component_1(), g1);
-  AutoDerivative<double> v2(ci_to_cf_.R_component_2(), g2);
-  AutoDerivative<double> v3(ci_to_cf_.R_component_3(), g3);
-  AutoDerivative<double> v4(ci_to_cf_.R_component_4(), g4);
-  ci_to_cf_der_ = 
-    boost::math::quaternion<AutoDerivative<double> >(v1,v2,v3,v4);
-  have_ci_to_cf = true;
-
-  boost::math::quaternion<AutoDerivative<double> >
-    vel_ci(0, vel_inertial[0], vel_inertial[1], vel_inertial[2]);
-  vel_cf_with_der = ci_to_cf() * vel_ci * conj(ci_to_cf());
+  boost::array<AutoDerivative<double>, 3> pder, vcf;
+  convert_position_and_velocity(tm, *Pos_ci, Pos_ci_with_der, vel_inertial, 
+				pos, pder, vcf, ci_to_cf_der_);
+  ci_to_cf_ = value(ci_to_cf_der_);
+  vel_cf_with_der = boost::math::quaternion<AutoDerivative<double> >
+    (0, vcf[0], vcf[1], vcf[2]);
   vel_cf = value(vel_cf_with_der);
-  pos = pos_ci->convert_to_cf(Tm.value());
-  pos_with_der = ci_to_cf_with_derivative() * pos_ci_with_der * 
-    conj(ci_to_cf_with_derivative());
+  pos_with_der = boost::math::quaternion<AutoDerivative<double> >
+    (0, pder[0], pder[1], pder[2]);
   sc_to_cf_with_der = ci_to_cf_with_derivative() * sc_to_ci_q;
   sc_to_cf_ = value(sc_to_cf_with_der);
+  have_ci_to_cf = true;
 }
 
 //-----------------------------------------------------------------------
@@ -788,8 +775,7 @@ const
 
 boost::array<double, 3> QuaternionOrbitData::velocity_ci() const
 {
-  boost::math::quaternion<double> vel_ci = conj(ci_to_cf()) * vel_cf * 
-    ci_to_cf();
+  fill_in_ci_to_cf();
   boost::array<double, 3> res = {{vel_ci.R_component_2(), 
 				  vel_ci.R_component_3(),
 				  vel_ci.R_component_4()}};
@@ -803,13 +789,11 @@ boost::array<double, 3> QuaternionOrbitData::velocity_ci() const
 boost::array<AutoDerivative<double>, 3> 
 QuaternionOrbitData::velocity_ci_with_derivative() const
 {
-  boost::math::quaternion<AutoDerivative<double> > vel_ci = 
-    conj(ci_to_cf_with_derivative()) * vel_cf_with_der * 
-    ci_to_cf_with_derivative();
+  fill_in_ci_to_cf();
   boost::array<AutoDerivative<double>, 3> res = 
-    {{vel_ci.R_component_2(), 
-      vel_ci.R_component_3(),
-      vel_ci.R_component_4()}};
+    {{vel_ci_with_der.R_component_2(), 
+      vel_ci_with_der.R_component_3(),
+      vel_ci_with_der.R_component_4()}};
   return res;
 }
 
@@ -988,27 +972,28 @@ boost::array<AutoDerivative<double>, 3> QuaternionOrbitData::velocity_cf_with_de
 void QuaternionOrbitData::fill_in_ci_to_cf() const 
 {
     if(!have_ci_to_cf) {
-      ci_to_cf_ = pos->ci_to_cf_quat(time());
-      double eps = 1e-3;
-      boost::math::quaternion<double> ci_to_cf1 = 
-	pos->ci_to_cf_quat(time() + eps);
-      Array<double,1> g(time_with_derivative().gradient());
-      Array<double, 1> 
-	g1((ci_to_cf1.R_component_1() - ci_to_cf_.R_component_1()) / eps * g);
-      Array<double, 1> 
-	g2((ci_to_cf1.R_component_2() - ci_to_cf_.R_component_2()) / eps * g);
-      Array<double, 1> 
-	g3((ci_to_cf1.R_component_3() - ci_to_cf_.R_component_3()) / eps * g);
-      Array<double, 1> 
-	g4((ci_to_cf1.R_component_4() - ci_to_cf_.R_component_4()) / eps * g);
-      AutoDerivative<double> v1(ci_to_cf_.R_component_1(), g1);
-      AutoDerivative<double> v2(ci_to_cf_.R_component_2(), g2);
-      AutoDerivative<double> v3(ci_to_cf_.R_component_3(), g3);
-      AutoDerivative<double> v4(ci_to_cf_.R_component_4(), g4);
-      ci_to_cf_der_ = 
-	boost::math::quaternion<AutoDerivative<double> >(v1,v2,v3,v4);
-      pos_ci = pos->convert_to_ci(time());
-      pos_ci_with_der = conj(ci_to_cf_der_) * pos_with_der * ci_to_cf_der_;
+      boost::array<AutoDerivative<double>, 3> vci, cider;
+      boost::math::quaternion<AutoDerivative<double> > cf_to_ci_der;
+      boost::array<AutoDerivative<double>, 3> pder =
+	{{pos_with_der.R_component_2(),
+	  pos_with_der.R_component_3(),
+	  pos_with_der.R_component_4() 
+	  }};
+      boost::array<AutoDerivative<double>, 3> vcf = 
+	{{vel_cf_with_der.R_component_2(),
+	  vel_cf_with_der.R_component_3(),
+	  vel_cf_with_der.R_component_4()
+	  }};
+      convert_position_and_velocity(tm, *pos, pder, vcf, 
+				    pos_ci, cider, vci, cf_to_ci_der);
+      ci_to_cf_der_ = conj(cf_to_ci_der);
+      ci_to_cf_ = value(ci_to_cf_der_);
+      pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
+	(0, cider[0], cider[1], cider[2]);
+      vel_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
+	(0, vci[0], vci[1], vci[2]);
+      vel_ci = value(vel_ci_with_der);
+      have_ci_to_cf = true;
     }
 }
 

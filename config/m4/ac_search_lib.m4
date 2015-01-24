@@ -20,21 +20,13 @@ AC_DEFUN([AC_SEARCH_LIB],
        if test -e "$ac_path_tmp/include/$3$4" && test -r "$ac_path_tmp/include/$3$4"; then
           [$1][_PREFIX]=$ac_path_tmp
           [$1][_CFLAGS]="-I$ac_path_tmp/include/$3"
-          if test -e "$ac_path_tmp/lib/$5$6.la"; then
-             [$1][_LIBS]="-R$ac_path_tmp/lib/$5 -L$ac_path_tmp/lib/$5 $7"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/$5$6.so"; then
+          if test -e "$ac_path_tmp/lib/$5$6.so"; then
              [$1][_LIBS]="-R$ac_path_tmp/lib/$5 -L$ac_path_tmp/lib/$5 $7"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/$5$6.dylib"; then
              [$1][_LIBS]="-R$ac_path_tmp/lib/$5 -L$ac_path_tmp/lib/$5 $7"
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/$5$6.la"; then
-             [$1][_LIBS]="-R$ac_path_tmp/lib64/$5 -L$ac_path_tmp/lib64/$5 $7"
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/$5$6.so"; then
              [$1][_LIBS]="-R$ac_path_tmp/lib64/$5 -L$ac_path_tmp/lib64/$5 $7"

@@ -3495,53 +3495,54 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[43]
 #define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[44]
 #define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[45]
-#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[46]
-#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[47]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[48]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[49]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[50]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[51]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[52]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[53]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[54]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[55]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[56]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[57]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[58]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[59]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[60]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[61]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[62]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[63]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[64]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[65]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[66]
-#define SWIGTYPE_p_char swig_types[67]
-#define SWIGTYPE_p_char_type swig_types[68]
-#define SWIGTYPE_p_difference_type swig_types[69]
-#define SWIGTYPE_p_fmtflags swig_types[70]
-#define SWIGTYPE_p_int_type swig_types[71]
-#define SWIGTYPE_p_iostate swig_types[72]
-#define SWIGTYPE_p_off_type swig_types[73]
-#define SWIGTYPE_p_openmode swig_types[74]
-#define SWIGTYPE_p_p_PyObject swig_types[75]
-#define SWIGTYPE_p_pos_type swig_types[76]
-#define SWIGTYPE_p_seekdir swig_types[77]
-#define SWIGTYPE_p_size_t swig_types[78]
-#define SWIGTYPE_p_size_type swig_types[79]
-#define SWIGTYPE_p_state_type swig_types[80]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t swig_types[81]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[82]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[83]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[84]
-#define SWIGTYPE_p_std__invalid_argument swig_types[85]
-#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[86]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t_t swig_types[87]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[88]
-#define SWIGTYPE_p_traits_type swig_types[89]
-#define SWIGTYPE_p_value_type swig_types[90]
-static swig_type_info *swig_types[92];
-static swig_module_info swig_module = {swig_types, 91, 0, 0, 0, 0};
+#define SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t swig_types[46]
+#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[47]
+#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[48]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[49]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[50]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[51]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[52]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[53]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[54]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[55]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[56]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[57]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[58]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[59]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[60]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[61]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[62]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[63]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[64]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[65]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[66]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[67]
+#define SWIGTYPE_p_char swig_types[68]
+#define SWIGTYPE_p_char_type swig_types[69]
+#define SWIGTYPE_p_difference_type swig_types[70]
+#define SWIGTYPE_p_fmtflags swig_types[71]
+#define SWIGTYPE_p_int_type swig_types[72]
+#define SWIGTYPE_p_iostate swig_types[73]
+#define SWIGTYPE_p_off_type swig_types[74]
+#define SWIGTYPE_p_openmode swig_types[75]
+#define SWIGTYPE_p_p_PyObject swig_types[76]
+#define SWIGTYPE_p_pos_type swig_types[77]
+#define SWIGTYPE_p_seekdir swig_types[78]
+#define SWIGTYPE_p_size_t swig_types[79]
+#define SWIGTYPE_p_size_type swig_types[80]
+#define SWIGTYPE_p_state_type swig_types[81]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t swig_types[82]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[83]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[84]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[85]
+#define SWIGTYPE_p_std__invalid_argument swig_types[86]
+#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[87]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t_t swig_types[88]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[89]
+#define SWIGTYPE_p_traits_type swig_types[90]
+#define SWIGTYPE_p_value_type swig_types[91]
+static swig_type_info *swig_types[93];
+static swig_module_info swig_module = {swig_types, 92, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -7492,7 +7493,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CartesianFixed_ci_to_cf_with_vel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CartesianFixed_cf_to_ci_with_vel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::CartesianFixed *arg1 = (GeoCal::CartesianFixed *) 0 ;
   GeoCal::Time *arg2 = 0 ;
@@ -7508,12 +7509,12 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_ci_to_cf_with_vel(PyObject *SWIGUNUSED
   int res3 = 0 ;
   PyObject *swig_obj[3] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"CartesianFixed_ci_to_cf_with_vel",3,3,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"CartesianFixed_cf_to_ci_with_vel",3,3,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_ci_to_cf_with_vel" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_cf_to_ci_with_vel" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
@@ -7535,10 +7536,10 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_ci_to_cf_with_vel(PyObject *SWIGUNUSED
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_ci_to_cf_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_cf_to_ci_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianFixed_ci_to_cf_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianFixed_cf_to_ci_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
@@ -7551,12 +7552,12 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_ci_to_cf_with_vel(PyObject *SWIGUNUSED
   }
   res3 = SWIG_ConvertPtr(swig_obj[2], &argp3,SWIGTYPE_p_a_6__double, 0 |  0 );
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CartesianFixed_ci_to_cf_with_vel" "', argument " "3"" of type '" "double [6][6]""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CartesianFixed_cf_to_ci_with_vel" "', argument " "3"" of type '" "double [6][6]""'"); 
   } 
   arg3 = reinterpret_cast< double (*)[6] >(argp3);
   {
     try {
-      ((GeoCal::CartesianFixed const *)arg1)->ci_to_cf_with_vel((GeoCal::Time const &)*arg2,(double (*)[6])arg3);
+      ((GeoCal::CartesianFixed const *)arg1)->cf_to_ci_with_vel((GeoCal::Time const &)*arg2,(double (*)[6])arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -9059,6 +9060,624 @@ SWIGINTERN PyObject *_wrap_distance(PyObject *SWIGUNUSEDPARM(self), PyObject *ar
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Time *arg1 = 0 ;
+  GeoCal::CartesianFixed *arg2 = 0 ;
+  boost::array< double,3 > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertial > *arg4 = 0 ;
+  boost::array< double,3 > *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed const > tempshared2 ;
+  boost::array< double,3 > a3 ;
+  PythonObject numpy3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertial > tempshared4 ;
+  boost::shared_ptr< GeoCal::CartesianInertial > temp2shared4 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+        arg1 = const_cast< GeoCal::Time * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianFixed *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixed,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp2);
+        arg2 = const_cast< GeoCal::CartesianFixed * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::CartesianFixed * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    numpy3.obj = to_numpy<double >(swig_obj[2]);
+    if(!numpy3.obj)
+    return NULL;
+    a3 = to_boost_array<double, 3>(numpy3);
+    arg3 = &a3;
+  }
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "convert_position_and_velocity" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::CartesianInertial > &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(argp4) : &tempshared4;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
+  }
+  res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_boost__arrayT_double_3_t,  0 );
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "convert_position_and_velocity" "', argument " "5"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  if (!argp5) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "5"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  arg5 = reinterpret_cast< boost::array< double,3 > * >(argp5);
+  {
+    try {
+      GeoCal::convert_position_and_velocity((GeoCal::Time const &)*arg1,(GeoCal::CartesianFixed const &)*arg2,(boost::array< double,3 > const &)*arg3,*arg4,*arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::TimeWithDerivative *arg1 = 0 ;
+  GeoCal::CartesianFixed *arg2 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > *arg3 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > *arg4 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertial > *arg5 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > *arg6 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > *arg7 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > tempshared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertial > tempshared5 ;
+  boost::shared_ptr< GeoCal::CartesianInertial > temp2shared5 ;
+  void *argp6 = 0 ;
+  int res6 = 0 ;
+  void *argp7 = 0 ;
+  int res7 = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::TimeWithDerivative *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__TimeWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+        arg1 = const_cast< GeoCal::TimeWithDerivative * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::TimeWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianFixed *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixed,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp2);
+        arg2 = const_cast< GeoCal::CartesianFixed * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::CartesianFixed * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp2)->get());
+      }
+    }
+  }
+  res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "convert_position_and_velocity" "', argument " "3"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "3"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  }
+  arg3 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp3);
+  res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0  | 0);
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "convert_position_and_velocity" "', argument " "4"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "4"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  }
+  arg4 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp4);
+  {
+    int newmem = 0;
+    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t,  0 , &newmem);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "convert_position_and_velocity" "', argument " "5"" of type '" "boost::shared_ptr< GeoCal::CartesianInertial > &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp5) tempshared5 = *reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(argp5);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(argp5);
+      arg5 = &tempshared5;
+    } else {
+      arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(argp5) : &tempshared5;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg5->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared5.reset(arg5->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg5 = &temp2shared5;
+    }
+  }
+  res6 = SWIG_ConvertPtr(swig_obj[5], &argp6, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0 );
+  if (!SWIG_IsOK(res6)) {
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "convert_position_and_velocity" "', argument " "6"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > &""'"); 
+  }
+  if (!argp6) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "6"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > &""'"); 
+  }
+  arg6 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp6);
+  res7 = SWIG_ConvertPtr(swig_obj[6], &argp7, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0 );
+  if (!SWIG_IsOK(res7)) {
+    SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "convert_position_and_velocity" "', argument " "7"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > &""'"); 
+  }
+  if (!argp7) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "7"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > &""'"); 
+  }
+  arg7 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp7);
+  {
+    try {
+      GeoCal::convert_position_and_velocity((GeoCal::TimeWithDerivative const &)*arg1,(GeoCal::CartesianFixed const &)*arg2,(boost::array< GeoCal::AutoDerivative< double >,3 > const &)*arg3,(boost::array< GeoCal::AutoDerivative< double >,3 > const &)*arg4,*arg5,*arg6,*arg7);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Time *arg1 = 0 ;
+  GeoCal::CartesianInertial *arg2 = 0 ;
+  boost::array< double,3 > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > *arg4 = 0 ;
+  boost::array< double,3 > *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertial const > tempshared2 ;
+  boost::array< double,3 > a3 ;
+  PythonObject numpy3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > tempshared4 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > temp2shared4 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+        arg1 = const_cast< GeoCal::Time * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianInertial *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianInertial,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianInertial const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianInertial const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp2);
+        arg2 = const_cast< GeoCal::CartesianInertial * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::CartesianInertial * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    numpy3.obj = to_numpy<double >(swig_obj[2]);
+    if(!numpy3.obj)
+    return NULL;
+    a3 = to_boost_array<double, 3>(numpy3);
+    arg3 = &a3;
+  }
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "convert_position_and_velocity" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::CartesianFixed > &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(argp4) : &tempshared4;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
+  }
+  res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_boost__arrayT_double_3_t,  0 );
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "convert_position_and_velocity" "', argument " "5"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  if (!argp5) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "5"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  arg5 = reinterpret_cast< boost::array< double,3 > * >(argp5);
+  {
+    try {
+      GeoCal::convert_position_and_velocity((GeoCal::Time const &)*arg1,(GeoCal::CartesianInertial const &)*arg2,(boost::array< double,3 > const &)*arg3,*arg4,*arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::TimeWithDerivative *arg1 = 0 ;
+  GeoCal::CartesianInertial *arg2 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > *arg3 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > *arg4 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > *arg5 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > *arg6 = 0 ;
+  boost::array< GeoCal::AutoDerivative< double >,3 > *arg7 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > tempshared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertial const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > tempshared5 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > temp2shared5 ;
+  void *argp6 = 0 ;
+  int res6 = 0 ;
+  void *argp7 = 0 ;
+  int res7 = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::TimeWithDerivative *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__TimeWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+        arg1 = const_cast< GeoCal::TimeWithDerivative * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::TimeWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianInertial *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianInertial,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianInertial const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianInertial const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp2);
+        arg2 = const_cast< GeoCal::CartesianInertial * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::CartesianInertial * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp2)->get());
+      }
+    }
+  }
+  res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "convert_position_and_velocity" "', argument " "3"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "3"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  }
+  arg3 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp3);
+  res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0  | 0);
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "convert_position_and_velocity" "', argument " "4"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "4"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > const &""'"); 
+  }
+  arg4 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp4);
+  {
+    int newmem = 0;
+    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "convert_position_and_velocity" "', argument " "5"" of type '" "boost::shared_ptr< GeoCal::CartesianFixed > &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp5) tempshared5 = *reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(argp5);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(argp5);
+      arg5 = &tempshared5;
+    } else {
+      arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(argp5) : &tempshared5;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg5->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared5.reset(arg5->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg5 = &temp2shared5;
+    }
+  }
+  res6 = SWIG_ConvertPtr(swig_obj[5], &argp6, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0 );
+  if (!SWIG_IsOK(res6)) {
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "convert_position_and_velocity" "', argument " "6"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > &""'"); 
+  }
+  if (!argp6) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "6"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > &""'"); 
+  }
+  arg6 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp6);
+  res7 = SWIG_ConvertPtr(swig_obj[6], &argp7, SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,  0 );
+  if (!SWIG_IsOK(res7)) {
+    SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "convert_position_and_velocity" "', argument " "7"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > &""'"); 
+  }
+  if (!argp7) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "7"" of type '" "boost::array< GeoCal::AutoDerivative< double >,3 > &""'"); 
+  }
+  arg7 = reinterpret_cast< boost::array< GeoCal::AutoDerivative< double >,3 > * >(argp7);
+  {
+    try {
+      GeoCal::convert_position_and_velocity((GeoCal::TimeWithDerivative const &)*arg1,(GeoCal::CartesianInertial const &)*arg2,(boost::array< GeoCal::AutoDerivative< double >,3 > const &)*arg3,(boost::array< GeoCal::AutoDerivative< double >,3 > const &)*arg4,*arg5,*arg6,*arg7);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_convert_position_and_velocity(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[8];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"convert_position_and_velocity",0,7,argv))) SWIG_fail;
+  --argc;
+  if (argc == 5) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_convert_position_and_velocity__SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 5) {
+    return _wrap_convert_position_and_velocity__SWIG_2(self, argc, argv);
+  }
+  if (argc == 7) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    {
+      int res = SWIG_ConvertPtr(argv[4], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_convert_position_and_velocity__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 7) {
+    return _wrap_convert_position_and_velocity__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'convert_position_and_velocity'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::convert_position_and_velocity(GeoCal::Time const &,GeoCal::CartesianFixed const &,boost::array< double,3 > const &,boost::shared_ptr< GeoCal::CartesianInertial > &,boost::array< double,3 > &)\n"
+    "    GeoCal::convert_position_and_velocity(GeoCal::TimeWithDerivative const &,GeoCal::CartesianFixed const &,boost::array< GeoCal::AutoDerivative< double >,3 > const &,boost::array< GeoCal::AutoDerivative< double >,3 > const &,boost::shared_ptr< GeoCal::CartesianInertial > &,boost::array< GeoCal::AutoDerivative< double >,3 > &,boost::array< GeoCal::AutoDerivative< double >,3 > &)\n"
+    "    GeoCal::convert_position_and_velocity(GeoCal::Time const &,GeoCal::CartesianInertial const &,boost::array< double,3 > const &,boost::shared_ptr< GeoCal::CartesianFixed > &,boost::array< double,3 > &)\n"
+    "    GeoCal::convert_position_and_velocity(GeoCal::TimeWithDerivative const &,GeoCal::CartesianInertial const &,boost::array< GeoCal::AutoDerivative< double >,3 > const &,boost::array< GeoCal::AutoDerivative< double >,3 > const &,boost::shared_ptr< GeoCal::CartesianFixed > &,boost::array< GeoCal::AutoDerivative< double >,3 > &,boost::array< GeoCal::AutoDerivative< double >,3 > &)\n");
+  return 0;
 }
 
 
@@ -11291,11 +11910,11 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"CartesianInertial_ci_to_cf_with_vel", _wrap_CartesianInertial_ci_to_cf_with_vel, METH_VARARGS, (char *)"\n"
 		"virtual void GeoCal::CartesianInertial::ci_to_cf_with_vel(const Time &T, double Ci_to_cf[6][6]) const =0\n"
-		"Calculate matrix that can be used to convert CartesianFixed to\n"
-		"CartesianInertial at the given Time, including velocity.\n"
+		"Calculate matrix that can be used to convert CartesianInertial to\n"
+		"CartesianFixed at the given Time, including velocity.\n"
 		"\n"
-		"The matrix for going from CartesianInertial to CartesianFixed is the\n"
-		"transpose of this matrix. \n"
+		"Note that unlike the 3x3 matrix, this is not orthogonal so the\n"
+		"transpose is not the inverse. \n"
 		""},
 	 { (char *)"CartesianInertial_ci_to_cf_quat", _wrap_CartesianInertial_ci_to_cf_quat, METH_VARARGS, (char *)"\n"
 		"boost::math::quaternion<double> GeoCal::CartesianInertial::ci_to_cf_quat(const Time &T) const\n"
@@ -11338,13 +11957,13 @@ static PyMethodDef SwigMethods[] = {
 		"The matrix for going from CartesianInertial to CartesianFixed is the\n"
 		"transpose of this matrix. \n"
 		""},
-	 { (char *)"CartesianFixed_ci_to_cf_with_vel", _wrap_CartesianFixed_ci_to_cf_with_vel, METH_VARARGS, (char *)"\n"
-		"virtual void GeoCal::CartesianFixed::ci_to_cf_with_vel(const Time &T, double Ci_to_cf[6][6]) const =0\n"
+	 { (char *)"CartesianFixed_cf_to_ci_with_vel", _wrap_CartesianFixed_cf_to_ci_with_vel, METH_VARARGS, (char *)"\n"
+		"virtual void GeoCal::CartesianFixed::cf_to_ci_with_vel(const Time &T, double Cf_to_ci[6][6]) const =0\n"
 		"Calculate matrix that can be used to convert CartesianFixed to\n"
 		"CartesianInertial at the given Time, including velocity.\n"
 		"\n"
-		"The matrix for going from CartesianInertial to CartesianFixed is the\n"
-		"transpose of this matrix. \n"
+		"Note that unlike the 3x3 matrix, this is not orthogonal so the\n"
+		"transpose is not the inverse. \n"
 		""},
 	 { (char *)"CartesianFixed_ci_to_cf_quat", _wrap_CartesianFixed_ci_to_cf_quat, METH_VARARGS, (char *)"\n"
 		"boost::math::quaternion<double> GeoCal::CartesianFixed::ci_to_cf_quat(const Time &T) const\n"
@@ -11393,6 +12012,15 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This is the distance of the points in 3 space, i.e. it is not distance\n"
 		"along a geodesic or anything like that. \n"
+		""},
+	 { (char *)"convert_position_and_velocity", _wrap_convert_position_and_velocity, METH_VARARGS, (char *)"\n"
+		"void GeoCal::convert_position_and_velocity(const TimeWithDerivative &T, const CartesianInertial &Ci, const\n"
+		"boost::array< AutoDerivative< double >, 3 > &Ci_with_der, const\n"
+		"boost::array< AutoDerivative< double >, 3 > &Vel_ci,\n"
+		"boost::shared_ptr< CartesianFixed > &Cf, boost::array< AutoDerivative<\n"
+		"double >, 3 > &Cf_with_der, boost::array< AutoDerivative< double >, 3\n"
+		"> &Vel_cf)\n"
+		"Convert including velocity. \n"
 		""},
 	 { (char *)"Vector_GroundCoordinate_iterator", (PyCFunction)_wrap_Vector_GroundCoordinate_iterator, METH_O, NULL},
 	 { (char *)"Vector_GroundCoordinate___nonzero__", (PyCFunction)_wrap_Vector_GroundCoordinate___nonzero__, METH_O, NULL},
@@ -11683,6 +12311,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_5_t = {"_p_blitz__ArrayT_int_5
 static swig_type_info _swigt__p_blitz__ArrayT_int_6_t = {"_p_blitz__ArrayT_int_6_t", "blitz::Array< int,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_7_t = {"_p_blitz__ArrayT_int_7_t", "blitz::Array< int,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_8_t = {"_p_blitz__ArrayT_int_8_t", "blitz::Array< int,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t = {"_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t", "boost::array< GeoCal::AutoDerivative< double >,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__arrayT_double_3_t = {"_p_boost__arrayT_double_3_t", "boost::array< double,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__math__quaternionT_double_t = {"_p_boost__math__quaternionT_double_t", "boost::math::quaternion< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *", 0, 0, (void*)0, 0};
@@ -11776,6 +12405,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_6_t,
   &_swigt__p_blitz__ArrayT_int_7_t,
   &_swigt__p_blitz__ArrayT_int_8_t,
+  &_swigt__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,
   &_swigt__p_boost__arrayT_double_3_t,
   &_swigt__p_boost__math__quaternionT_double_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
@@ -11869,6 +12499,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_5_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_6_t[] = {  {&_swigt__p_blitz__ArrayT_int_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_7_t[] = {  {&_swigt__p_blitz__ArrayT_int_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t[] = {  {&_swigt__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__arrayT_double_3_t[] = {  {&_swigt__p_boost__arrayT_double_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__math__quaternionT_double_t[] = {  {&_swigt__p_boost__math__quaternionT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11962,6 +12593,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_6_t,
   _swigc__p_blitz__ArrayT_int_7_t,
   _swigc__p_blitz__ArrayT_int_8_t,
+  _swigc__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,
   _swigc__p_boost__arrayT_double_3_t,
   _swigc__p_boost__math__quaternionT_double_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,

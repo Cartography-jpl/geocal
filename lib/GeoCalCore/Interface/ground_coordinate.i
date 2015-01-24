@@ -140,8 +140,8 @@ void convert_position_and_velocity
  const boost::array<AutoDerivative<double>, 3>& Cf_with_der,
  const boost::array<AutoDerivative<double>, 3>& Vel_cf,
  boost::shared_ptr<CartesianInertial>& Ci,
- const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
- const boost::array<AutoDerivative<double>, 3>& Vel_ci
+ boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+ boost::array<AutoDerivative<double>, 3>& Vel_ci
  );
 
 void convert_position_and_velocity
@@ -158,8 +158,8 @@ void convert_position_and_velocity
  const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
  const boost::array<AutoDerivative<double>, 3>& Vel_ci,
  boost::shared_ptr<CartesianFixed>& Cf,
- const boost::array<AutoDerivative<double>, 3>& Cf_with_der,
- const boost::array<AutoDerivative<double>, 3>& Vel_cf
+ boost::array<AutoDerivative<double>, 3>& Cf_with_der,
+ boost::array<AutoDerivative<double>, 3>& Vel_cf
  );
 }
 

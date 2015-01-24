@@ -17081,21 +17081,13 @@ fi
        if test -e "$ac_path_tmp/include/vicar_rtl/zvproto.h" && test -r "$ac_path_tmp/include/vicar_rtl/zvproto.h"; then
           VICAR_RTL_PREFIX=$ac_path_tmp
           VICAR_RTL_CFLAGS="-I$ac_path_tmp/include/vicar_rtl/"
-          if test -e "$ac_path_tmp/lib/libvicar_rtl.la"; then
-             VICAR_RTL_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lvicar_rtl"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libvicar_rtl.so"; then
+          if test -e "$ac_path_tmp/lib/libvicar_rtl.so"; then
              VICAR_RTL_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lvicar_rtl"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libvicar_rtl.dylib"; then
              VICAR_RTL_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lvicar_rtl"
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libvicar_rtl.la"; then
-             VICAR_RTL_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lvicar_rtl"
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libvicar_rtl.so"; then
              VICAR_RTL_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lvicar_rtl"
@@ -17447,21 +17439,13 @@ fi
        if test -e "$ac_path_tmp/include/hdf5.h" && test -r "$ac_path_tmp/include/hdf5.h"; then
           HDF5_PREFIX=$ac_path_tmp
           HDF5_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libhdf5_cpp.la"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhdf5_cpp.so"; then
+          if test -e "$ac_path_tmp/lib/libhdf5_cpp.so"; then
              HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhdf5_cpp.dylib"; then
              HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.la"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.so"; then
              HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
@@ -17615,21 +17599,13 @@ fi
        if test -e "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h"; then
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/hdfeos5/"
-          if test -e "$ac_path_tmp/lib/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
+          if test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
              HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
              HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
              HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
@@ -17723,21 +17699,13 @@ fi
        if test -e "$ac_path_tmp/include/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/HE5_HdfEosDef.h"; then
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
+          if test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
              HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
              HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.la"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
              HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
@@ -18270,21 +18238,13 @@ fi
        if test -e "$ac_path_tmp/include/blitz/blitz.h" && test -r "$ac_path_tmp/include/blitz/blitz.h"; then
           BLITZ_PREFIX=$ac_path_tmp
           BLITZ_CFLAGS="-I$ac_path_tmp/include/blitz/"
-          if test -e "$ac_path_tmp/lib/libblitz.la"; then
-             BLITZ_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lblitz"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libblitz.so"; then
+          if test -e "$ac_path_tmp/lib/libblitz.so"; then
              BLITZ_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lblitz"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libblitz.dylib"; then
              BLITZ_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lblitz"
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libblitz.la"; then
-             BLITZ_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lblitz"
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libblitz.so"; then
              BLITZ_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lblitz"
@@ -18470,21 +18430,13 @@ fi
        if test -e "$ac_path_tmp/include/gsl/gsl_blas.h" && test -r "$ac_path_tmp/include/gsl/gsl_blas.h"; then
           GSL_PREFIX=$ac_path_tmp
           GSL_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libgsl.la"; then
-             GSL_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgsl -lgslcblas"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libgsl.so"; then
+          if test -e "$ac_path_tmp/lib/libgsl.so"; then
              GSL_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgsl -lgslcblas"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libgsl.dylib"; then
              GSL_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgsl -lgslcblas"
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libgsl.la"; then
-             GSL_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lgsl -lgslcblas"
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libgsl.so"; then
              GSL_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lgsl -lgslcblas"
@@ -18676,21 +18628,13 @@ fi
        if test -e "$ac_path_tmp/include/SpiceCK.h" && test -r "$ac_path_tmp/include/SpiceCK.h"; then
           SPICE_PREFIX=$ac_path_tmp
           SPICE_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libcspice.la"; then
-             SPICE_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lcspice"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libcspice.so"; then
+          if test -e "$ac_path_tmp/lib/libcspice.so"; then
              SPICE_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lcspice"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libcspice.dylib"; then
              SPICE_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lcspice"
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libcspice.la"; then
-             SPICE_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lcspice"
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libcspice.so"; then
              SPICE_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lcspice"
@@ -18877,21 +18821,13 @@ fi
        if test -e "$ac_path_tmp/include/hdf5.h" && test -r "$ac_path_tmp/include/hdf5.h"; then
           HDF5_PREFIX=$ac_path_tmp
           HDF5_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libhdf5_cpp.la"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhdf5_cpp.so"; then
+          if test -e "$ac_path_tmp/lib/libhdf5_cpp.so"; then
              HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhdf5_cpp.dylib"; then
              HDF5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.la"; then
-             HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhdf5_cpp.so"; then
              HDF5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhdf5_cpp -lhdf5_hl -lhdf5 -lz"
@@ -19213,21 +19149,13 @@ fi
        if test -e "$ac_path_tmp/include/fftw3.h" && test -r "$ac_path_tmp/include/fftw3.h"; then
           FFTW_PREFIX=$ac_path_tmp
           FFTW_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libfftw3.la"; then
-             FFTW_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lfftw3"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libfftw3.so"; then
+          if test -e "$ac_path_tmp/lib/libfftw3.so"; then
              FFTW_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lfftw3"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libfftw3.dylib"; then
              FFTW_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lfftw3"
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libfftw3.la"; then
-             FFTW_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lfftw3"
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libfftw3.so"; then
              FFTW_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lfftw3"
@@ -19417,21 +19345,13 @@ fi
        if test -e "$ac_path_tmp/include/gdal.h" && test -r "$ac_path_tmp/include/gdal.h"; then
           GDAL_PREFIX=$ac_path_tmp
           GDAL_CFLAGS="-I$ac_path_tmp/include/"
-          if test -e "$ac_path_tmp/lib/libgdal.la"; then
-             GDAL_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgdal"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libgdal.so"; then
+          if test -e "$ac_path_tmp/lib/libgdal.so"; then
              GDAL_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgdal"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libgdal.dylib"; then
              GDAL_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgdal"
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libgdal.la"; then
-             GDAL_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lgdal"
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libgdal.so"; then
              GDAL_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lgdal"
@@ -19992,21 +19912,13 @@ fi
        if test -e "$ac_path_tmp/include/carto/burl.h" && test -r "$ac_path_tmp/include/carto/burl.h"; then
           CARTO_PREFIX=$ac_path_tmp
           CARTO_CFLAGS="-I$ac_path_tmp/include/carto/"
-          if test -e "$ac_path_tmp/lib/libcarto.la"; then
-             CARTO_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lcarto $VICAR_RTL_CFLAGS"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libcarto.so"; then
+          if test -e "$ac_path_tmp/lib/libcarto.so"; then
              CARTO_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lcarto $VICAR_RTL_CFLAGS"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libcarto.dylib"; then
              CARTO_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lcarto $VICAR_RTL_CFLAGS"
              succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libcarto.la"; then
-             CARTO_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lcarto $VICAR_RTL_CFLAGS"
-              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libcarto.so"; then
              CARTO_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lcarto $VICAR_RTL_CFLAGS"

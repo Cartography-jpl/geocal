@@ -114,6 +114,7 @@ void GeoCal::convert_position_and_velocity
  const boost::array<AutoDerivative<double>, 3>& Vel_ci
  )
 {
+  throw Exception("Need to fill me in");
 }
 
 //-----------------------------------------------------------------------

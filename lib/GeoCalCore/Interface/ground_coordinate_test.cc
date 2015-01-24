@@ -160,4 +160,32 @@ BOOST_AUTO_TEST_CASE(pos_and_vel)
   BOOST_CHECK(fabs(speed - 465.1) < 10.0);
 }
 
+BOOST_AUTO_TEST_CASE(pos_and_vel_with_der)
+{
+  Geodetic g(10, 20, 30);
+  // Need to add check for other way here.
+  Eci ci(888551.27707691176,
+	 -6218769.7591331499,
+	 1100106.8473076127);
+  Time t = Time::parse_time("2003-01-01T10:30:00Z");
+  TimeWithDerivative tder = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 7));
+  boost::array<AutoDerivative<double>, 3> ci_der = 
+    {AutoDerivative<double>(ci.position[0], 1, 7),
+     AutoDerivative<double>(ci.position[1], 2, 7),
+     AutoDerivative<double>(ci.position[2], 3, 7)};
+  boost::array<AutoDerivative<double>, 3> vel_ci = 
+    {AutoDerivative<double>(628.71130860798417, 4, 7), 
+     AutoDerivative<double>(-74.22614700738886, 5, 7),
+     AutoDerivative<double>(299.83611083221604, 6, 7)};
+  boost::array<AutoDerivative<double>, 3> vel_cf, cf_der;
+  boost::shared_ptr<CartesianFixed> cf;
+  convert_position_and_velocity(t, ci, ci_der, vel_ci, cf, cf_der, vel_cf);
+  BOOST_CHECK(distance(g, *cf) < 1);
+  BOOST_CHECK_CLOSE(vel_cf[0].value(), 100, 1e-4);
+  BOOST_CHECK_CLOSE(vel_cf[1].value(), 200, 1e-4);
+  BOOST_CHECK_CLOSE(vel_cf[2].value(), 300, 1e-4);
+  // Need to check gradients here
+}
+
 BOOST_AUTO_TEST_SUITE_END()

@@ -637,10 +637,9 @@ QuaternionOrbitData::ci_look_vector(const ScLookVector& Sl) const
   // Do abberation of light correction.
   CartesianInertialLookVector res;
   double k = Sl.length() / Constant::speed_of_light;
+  fill_in_ci_to_cf();
   boost::math::quaternion<double> ci = 
-    conj(ci_to_cf()) * 
-    (sc_to_cf_ * Sl.look_quaternion() * conj(sc_to_cf_) - k * vel_cf)
-    * ci_to_cf();
+    conj(ci_to_cf()) * sc_to_cf_ * Sl.look_quaternion() * conj(sc_to_cf_) * ci_to_cf() - k * vel_ci;
   res.look_quaternion(ci);
   return res;
 }
@@ -655,11 +654,12 @@ QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative& Sl) const
   // Do abberation of light correction.
   CartesianInertialLookVectorWithDerivative res;
   AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
+  fill_in_ci_to_cf();
   boost::math::quaternion<AutoDerivative<double> > ci = 
     conj(ci_to_cf_with_derivative()) * 
-    (sc_to_cf_with_der * Sl.look_quaternion() * conj(sc_to_cf_with_der) - 
-     k * vel_cf_with_der)
-    * ci_to_cf_with_derivative();
+    sc_to_cf_with_der * Sl.look_quaternion() * conj(sc_to_cf_with_der)
+    * ci_to_cf_with_derivative()
+    - k * vel_ci_with_der;
   res.look_quaternion(ci);
   return res;
 }
@@ -673,6 +673,10 @@ QuaternionOrbitData::cf_look_vector(const ScLookVector& Sl) const
 {
   // Do abberation of light correction.
   CartesianFixedLookVector res;
+  // Note that we ignore the motion of the earth here in the
+  // aberration correctoin. I think we
+  // really should be using vel_ci_with_der, but the difference is
+  // really pretty small
   double k = Sl.length() / Constant::speed_of_light;
   boost::math::quaternion<double> cf = sc_to_cf_ * Sl.look_quaternion() * 
     conj(sc_to_cf_) - k * vel_cf;
@@ -689,6 +693,10 @@ QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative& Sl) const
 {
   // Do abberation of light correction.
   CartesianFixedLookVectorWithDerivative res;
+  // Note that we ignore the motion of the earth here in the
+  // aberration correctoin. I think we
+  // really should be using vel_ci_with_der, but the difference is
+  // really pretty small
   AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
   boost::math::quaternion<AutoDerivative<double> > cf = 
     sc_to_cf_with_der * Sl.look_quaternion() * 

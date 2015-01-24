@@ -61,7 +61,7 @@ void ImageCoordinateWithDerivative::print(std::ostream& Os) const
 
 bool GeoCal::operator==(const ImageCoordinate& C1, const ImageCoordinate& C2)
 {
-  const double coor_tol = 0.01;
+  const double coor_tol = 0.02;
   return (fabs(C1.line   - C2.line)   < coor_tol &&
 	  fabs(C1.sample - C2.sample) < coor_tol);
 }
@@ -84,7 +84,7 @@ void VicarImageCoordinate::print(std::ostream& Os) const
 
 bool GeoCal::operator==(const VicarImageCoordinate& C1, const VicarImageCoordinate& C2)
 {
-  const double coor_tol = 0.01;
+  const double coor_tol = 0.02;
   return (fabs(C1.line   - C2.line)   < coor_tol &&
 	  fabs(C1.sample - C2.sample) < coor_tol);
 }

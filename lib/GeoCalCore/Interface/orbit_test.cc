@@ -234,4 +234,42 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK(l1(qres - q2) < 1e-8);
 }
 
+BOOST_AUTO_TEST_CASE(orbit_data_offset)
+{
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  KeplerOrbit orb(t, t + 100.0);
+  boost::shared_ptr<QuaternionOrbitData> od = 
+    boost::dynamic_pointer_cast<QuaternionOrbitData>(orb.orbit_data(t + 50));
+  boost::array<AutoDerivative<double>, 3> poff =
+    {{AutoDerivative<double>(10, 0, 6),
+      AutoDerivative<double>(20, 1, 6),
+      AutoDerivative<double>(30, 2, 6)}};
+  boost::math::quaternion<AutoDerivative<double> > sc_corr =
+    quat_rot("xyz", AutoDerivative<double>(0.01, 3, 6),
+	     AutoDerivative<double>(0.02, 4, 6),
+	     AutoDerivative<double>(0.03, 5, 6));
+  QuaternionOrbitData od2(*od, poff, sc_corr);
+  BOOST_CHECK_CLOSE(od->position_ci()->position[0] + 10,
+		    od2.position_ci()->position[0], 1e-4);
+  BOOST_CHECK_CLOSE(od->position_ci()->position[1] + 20,
+		    od2.position_ci()->position[1], 1e-4);
+  BOOST_CHECK_CLOSE(od->position_ci()->position[2] + 30,
+		    od2.position_ci()->position[2], 1e-4);
+  BOOST_CHECK_CLOSE(od->position_ci_with_derivative()[0].value() + 10,
+		    od2.position_ci_with_derivative()[0], 1e-4);
+  BOOST_CHECK_CLOSE(od->position_ci_with_derivative()[1].value() + 20,
+		    od2.position_ci_with_derivative()[1], 1e-4);
+  BOOST_CHECK_CLOSE(od->position_ci_with_derivative()[2].value() + 30,
+		    od2.position_ci_with_derivative()[2], 1e-4);
+  BOOST_CHECK_CLOSE(od2.position_cf()->position[0] - 
+		    od->position_cf()->position[0],
+		    21.272, 1e-2);
+  BOOST_CHECK_CLOSE(od2.position_cf()->position[1] - 
+		    od->position_cf()->position[1],
+		    -6.90276, 1e-2);
+  BOOST_CHECK_CLOSE(od2.position_cf()->position[2] - 
+		    od->position_cf()->position[2],
+		    29.9975, 1e-2);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

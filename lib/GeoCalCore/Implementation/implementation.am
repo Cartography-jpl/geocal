@@ -91,6 +91,7 @@ geocalinc_HEADERS+= @srcimplementation@/geometric_model_image.h
 libgeocal_la_SOURCES+= @srcimplementation@/geometric_model_image.cc
 if HAVE_HDF5
 geocalinc_HEADERS+= @srcimplementation@/hdf_orbit.h
+libgeocal_la_SOURCES+= @srcimplementation@/hdf_orbit.cc
 endif
 geocalinc_HEADERS+= @srcimplementation@/igc_ray_caster.h
 libgeocal_la_SOURCES+= @srcimplementation@/igc_ray_caster.cc

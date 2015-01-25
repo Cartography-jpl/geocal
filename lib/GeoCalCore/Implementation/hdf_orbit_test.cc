@@ -194,5 +194,18 @@ BOOST_AUTO_TEST_CASE(derivative_sc_look2)
 }
 
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  std::string d = serialize_write_string(orb);
+  if(true)
+    std::cerr << d;
+  boost::shared_ptr<Orbit> orbr = 
+    serialize_read_string<Orbit>(d);
+  BOOST_CHECK(fabs(orb->min_time() - orbr->min_time()) < 1e-3);
+  BOOST_CHECK(fabs(orb->max_time() - orbr->max_time()) < 1e-3);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

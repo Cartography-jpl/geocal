@@ -1,6 +1,7 @@
 #ifndef HDF_ORBIT_H
 #define HDF_ORBIT_H
 #include "orbit_quaternion_list.h"
+#include "eci_tod.h"
 #include "hdf_file.h"
 #include <map>
 
@@ -33,7 +34,15 @@ template<class PositionType, class TimeCreatorType> class HdfOrbit :
     public OrbitQuaternionList {
 public:
 
-  HdfOrbit(const std::string& Fname, const std::string& Base_group = "Orbit");
+//-----------------------------------------------------------------------
+/// Read the given orbit data file. You can optional pass the base
+/// group of the HDF file, the default is "/Orbit"
+//-----------------------------------------------------------------------
+
+  HdfOrbit(const std::string& Fname, const std::string& Base_group = "Orbit")
+    : fname(Fname),
+      bgroup(Base_group)
+  { init(); }
   virtual ~HdfOrbit() {}
 
 //-----------------------------------------------------------------------
@@ -63,6 +72,8 @@ protected:
   virtual boost::shared_ptr<QuaternionOrbitData> 
   orbit_data_create(Time T) const;
 private:
+  // Separate out initialization to make serialization a little easier
+  void init();
   std::string fname;
   std::string bgroup;
   typedef std::map<Time, boost::math::quaternion<double> > 
@@ -71,17 +82,21 @@ private:
   typedef typename std::pair<PositionType, boost::array<double, 3> > posvel;
   typedef std::map<Time,  posvel> time_posmap;
   time_posmap pos_map;
+  HdfOrbit() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 //-----------------------------------------------------------------------
-/// Read the given orbit data file. You can optional pass the base
-/// group of the HDF file, the default is "/Orbit"
+/// Separate out initialization to make serialization a little easier
 //-----------------------------------------------------------------------
 
 template<class PositionType, class TimeCreatorType> inline 
-HdfOrbit<PositionType, TimeCreatorType>::HdfOrbit(const std::string& Fname, const std::string& Base_group)
-  :fname(Fname),
-   bgroup(Base_group)
+void HdfOrbit<PositionType, TimeCreatorType>::init()
 {
   using namespace blitz;
   TimeCreatorType tc;
@@ -181,5 +196,8 @@ inline boost::shared_ptr<QuaternionOrbitData> HdfOrbit<PositionType, TimeCreator
   return boost::shared_ptr<QuaternionOrbitData>(new QuaternionOrbitData(T, pv, vel, att));
 }
 
+typedef HdfOrbit<EciTod, TimeAcsCreator> HdfOrbit_EciTod_TimeAcs;
 }
+
+GEOCAL_EXPORT_KEY(HdfOrbit_EciTod_TimeAcs);
 #endif

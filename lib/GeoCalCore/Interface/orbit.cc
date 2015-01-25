@@ -1042,8 +1042,43 @@ boost::shared_ptr<QuaternionOrbitData>
   p[0] = pos_cf[0].value();
   p[1] = pos_cf[1].value();
   p[2] = pos_cf[2].value();
-  return boost::shared_ptr<QuaternionOrbitData>
+  boost::shared_ptr<QuaternionOrbitData> res
     (new QuaternionOrbitData(tm, t1.pos->create(p), pos_cf, 
 			     vel_cf, sc_to_cf_));
+  res->from_cf_ = t1.from_cf_;
+  if(t1.have_ci_to_cf) {
+    t2.fill_in_ci_to_cf();
+    res->have_ci_to_cf = true;
+    res->ci_to_cf_der_ = ::interpolate(t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
+    res->ci_to_cf_ = value(res->ci_to_cf_der_);
+    
+    boost::array<AutoDerivative<double>, 3> pos1, pos2, vel1, vel2, 
+      vel_ci, pos_ci;
+    pos1[0] = t1.pos_ci_with_der.R_component_2();
+    pos1[1] = t1.pos_ci_with_der.R_component_3();
+    pos1[2] = t1.pos_ci_with_der.R_component_4();
+    pos2[0] = t2.pos_ci_with_der.R_component_2();
+    pos2[1] = t2.pos_ci_with_der.R_component_3();
+    pos2[2] = t2.pos_ci_with_der.R_component_4();
+    vel1[0] = t1.vel_ci_with_der.R_component_2();
+    vel1[1] = t1.vel_ci_with_der.R_component_3();
+    vel1[2] = t1.vel_ci_with_der.R_component_4();
+    vel2[0] = t2.vel_ci_with_der.R_component_2();
+    vel2[1] = t2.vel_ci_with_der.R_component_3();
+    vel2[2] = t2.vel_ci_with_der.R_component_4();
+    ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace,
+		  pos_ci, vel_ci);
+    boost::array<double, 3> p;
+    p[0] = pos_ci[0].value();
+    p[1] = pos_ci[1].value();
+    p[2] = pos_cf[2].value();
+    res->pos_ci = t1.pos_ci->create(p);
+    res->pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
+      (0,pos_ci[0], pos_ci[1], pos_ci[2]);
+    res->vel_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
+      (0,vel_ci[0], vel_ci[1], vel_ci[2]);
+    res->vel_ci = value(res->vel_ci_with_der);
+  }
+  return res;
 }
 

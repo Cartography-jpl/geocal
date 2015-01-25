@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   if(!have_serialize_supported())
     return;
   std::string d = serialize_write_string(orb);
-  if(true)
+  if(false)
     std::cerr << d;
   boost::shared_ptr<Orbit> orbr = 
     serialize_read_string<Orbit>(d);

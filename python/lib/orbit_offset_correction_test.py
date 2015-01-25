@@ -39,7 +39,8 @@ def test_time_rolling():
     this.'''
     if orb_uncorr is None:
         raise SkipTest
-    orb = OrbitOffsetCorrection(orb_uncorr)
+    #orb = OrbitOffsetCorrection(orb_uncorr)
+    orb = orb_uncorr
     t = Time.time_acs(215077459.472);
     tspace = 1e-3
     tt = RollingShutterConstantTimeTable(t, t + cam.number_line(0) * tspace,

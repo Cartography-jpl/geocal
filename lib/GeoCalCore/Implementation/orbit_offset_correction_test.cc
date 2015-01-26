@@ -27,6 +27,7 @@ BOOST_AUTO_TEST_CASE(basic)
   if(!orb_uncorr)
     return;
   OrbitOffsetCorrection orb(orb_uncorr);
+  std::cerr << orb << "\n";
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

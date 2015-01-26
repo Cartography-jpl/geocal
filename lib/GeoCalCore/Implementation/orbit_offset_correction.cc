@@ -1,5 +1,6 @@
 #include "orbit_offset_correction.h"
 #include "geocal_serialize_support.h"
+#include "ostream_pad.h"
 #include <boost/foreach.hpp>
 using namespace GeoCal;
 
@@ -94,5 +95,22 @@ blitz::Array<bool, 1> OrbitOffsetCorrection::parameter_mask() const
 // See base class for description
 void OrbitOffsetCorrection::print(std::ostream& Os) const
 {
+  OstreamPad opad(Os, "    ");
+  Os << "OrbitOffsetCorrection\n"
+     << "  Underlying orbit:\n";
+  opad << *orbit_uncorrected() << "\n";
+  opad.strict_sync();
+  Os << "  Fit position: " << (fit_position() ? "True" : "False") << "\n"
+     << "  Fit yaw:      " << (fit_yaw() ? "True" : "False") << "\n"
+     << "  Fit pitch:    " << (fit_pitch() ? "True" : "False") << "\n"
+     << "  Fit roll:     " << (fit_roll() ? "True" : "False") << "\n";
+  Os << "  Parameter:\n";
+  std::vector<std::string> pname = parameter_name();
+  blitz::Array<double, 1> parm = parameter();
+  const static int sv_num_width = 17;
+  for(int i = 0; i < parm.rows(); ++i)
+    Os << "     " << std::setprecision(sv_num_width - 7) 
+       << std::setw(sv_num_width) << parm(i) << "  "
+       << pname[i] << "\n";
 }
 

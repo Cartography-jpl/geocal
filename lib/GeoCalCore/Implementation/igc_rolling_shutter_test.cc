@@ -47,9 +47,9 @@ BOOST_FIXTURE_TEST_SUITE(igc_rolling_shutter, IgcRollingShutterFixture)
 
 BOOST_AUTO_TEST_CASE(resolution)
 {
-#ifndef HAVE_HDF5
-  return;  // Skip test if we can't read the test data.
-#endif
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   // **************** Broken *****************8
   return;
   // Check resolution calculation. We just compare to expected results
@@ -60,9 +60,9 @@ BOOST_AUTO_TEST_CASE(resolution)
 
 BOOST_AUTO_TEST_CASE(footprint_resolution)
 {
-#ifndef HAVE_HDF5
-  return;  // Skip test if we can't read the test data.
-#endif
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   // **************** Broken *****************8
   return;
 
@@ -78,9 +78,9 @@ BOOST_AUTO_TEST_CASE(footprint_resolution)
 
 BOOST_AUTO_TEST_CASE(ground_position)
 {
-#ifndef HAVE_HDF5
-  return;  // Skip test if we can't read the test data.
-#endif
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   // Check ground and spacecraft position by directly calculating
   ImageCoordinate ic(100, 200);
   boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + 100 * tspace);
@@ -92,9 +92,9 @@ BOOST_AUTO_TEST_CASE(ground_position)
 
 BOOST_AUTO_TEST_CASE(image_coordinate)
 {
-#ifndef HAVE_HDF5
-  return;  // Skip test if we can't read the test data.
-#endif
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
 
   // Check we get back to the original image_coordinate. Note that ==
   // is already done with a tolerance for ImageCoordinate
@@ -104,9 +104,9 @@ BOOST_AUTO_TEST_CASE(image_coordinate)
 
 BOOST_AUTO_TEST_CASE(cf_look_vector)
 {
-#ifndef HAVE_HDF5
-  return;  // Skip test if we can't read the test data.
-#endif
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   // Check look vector and spacecraft position by directly calculating
   ImageCoordinate ic(100, 200);
   boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + 100 * tspace);
@@ -124,9 +124,9 @@ BOOST_AUTO_TEST_CASE(cf_look_vector)
 
 BOOST_AUTO_TEST_CASE(cf_look_vector_arr)
 {
-#ifndef HAVE_HDF5
-  return;  // Skip test if we can't read the test data.
-#endif
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   // Test cf_look_vector_lv by comparing a point of the array with a
   // direct calculation.
   int lstart = 10;
@@ -161,9 +161,9 @@ BOOST_AUTO_TEST_CASE(cf_look_vector_arr)
 
 BOOST_AUTO_TEST_CASE(jacobian)
 {
-#ifndef HAVE_HDF5
-  return;  // Skip test if we can't read the test data.
-#endif
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   // **************** Broken *****************8
   return;
 
@@ -202,9 +202,9 @@ BOOST_AUTO_TEST_CASE(jacobian)
 
 BOOST_AUTO_TEST_CASE(image_coordinate_timing)
 {
-#ifndef HAVE_HDF5
-  return;  // Skip test if we can't read the test data.
-#endif
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   // Run image_coordinate a number of times to check the timing.
   ImageCoordinate ic(100, 200);
   boost::shared_ptr<GroundCoordinate> gc = igc->ground_coordinate(ic);

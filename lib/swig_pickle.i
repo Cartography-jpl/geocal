@@ -5,6 +5,9 @@
 // Support for writing the __reduce__ function needed for pickling.
 //--------------------------------------------------------------
 
+%{
+#include "geocal_serialize_function.h"
+%}
 //--------------------------------------------------------------
 // Code to support the python side.
 //--------------------------------------------------------------
@@ -18,6 +21,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -48,6 +54,13 @@ def pickle_format_version(cls):
 
 def __reduce__(self):
   return _new_from_init, (self.__class__, VER, ARG)
+}
+%enddef
+
+%define %pickle_serialization()
+  %pythoncode {
+def __reduce__(self):
+  return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 }
 %enddef
 

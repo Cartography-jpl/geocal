@@ -6,6 +6,8 @@
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 #include <boost/archive/polymorphic_xml_iarchive.hpp>
 #include <boost/archive/polymorphic_xml_oarchive.hpp>
+#include <boost/archive/polymorphic_binary_iarchive.hpp>
+#include <boost/archive/polymorphic_binary_oarchive.hpp>
 #endif
 using namespace GeoCal;
 
@@ -58,6 +60,43 @@ std::string GeoCal::serialize_write_string
   boost::archive::polymorphic_xml_oarchive oa(os);
   oa << boost::serialization::make_nvp("geocal_object", Obj);
   return os.str();
+#else
+  throw Exception("GeoCal was not built with boost::serialization support");
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Variation of serialize_write that writes to a binary string
+/// instead of xml
+//-----------------------------------------------------------------------
+
+std::string GeoCal::serialize_write_binary
+(const boost::shared_ptr<GenericObject>& Obj)
+{
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  std::ostringstream os;
+  boost::archive::polymorphic_binary_oarchive oa(os);
+  oa << boost::serialization::make_nvp("geocal_object", Obj);
+  return os.str();
+#else
+  throw Exception("GeoCal was not built with boost::serialization support");
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Variation of serialize_read_generic that takes a binary string rather
+/// than xml
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<GenericObject> 
+GeoCal::serialize_read_binary(const std::string& Data)
+{
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  std::istringstream is(Data);
+  boost::archive::polymorphic_binary_iarchive ia(is);
+  boost::shared_ptr<GenericObject> obj;
+  ia >> boost::serialization::make_nvp("geocal_object", obj);
+  return obj;
 #else
   throw Exception("GeoCal was not built with boost::serialization support");
 #endif

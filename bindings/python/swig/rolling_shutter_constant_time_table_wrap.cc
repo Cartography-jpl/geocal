@@ -4045,6 +4045,9 @@ SWIGINTERNINLINE PyObject*
   std::string parse_python_exception();
 
 
+#include "geocal_serialize_function.h"
+
+
 namespace swig {  
   template <class Type>
   struct noconst_traits {

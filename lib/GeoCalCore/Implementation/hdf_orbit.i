@@ -16,7 +16,7 @@ public:
   HdfOrbit(const std::string& Fname, const std::string& Base_group = "Orbit");
   %python_attribute(file_name, std::string)
   %python_attribute(base_group, std::string)
-  %pickle_init(1, self.file_name, self.base_group)
+  %pickle_serialization()
 };
 }
 

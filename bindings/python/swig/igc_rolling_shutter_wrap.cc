@@ -3781,6 +3781,9 @@ SWIGINTERNINLINE PyObject*
   std::string parse_python_exception();
 
 
+#include "geocal_serialize_function.h"
+
+
   #include <stddef.h>
 
 

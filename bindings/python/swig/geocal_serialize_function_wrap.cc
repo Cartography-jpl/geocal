@@ -3651,6 +3651,9 @@ SWIGINTERNINLINE PyObject*
   std::string parse_python_exception();
 
 
+#include "geocal_serialize_function.h"
+
+
   #include <stddef.h>
 
 
@@ -5301,6 +5304,99 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_serialize_write_binary(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::GenericObject > *arg1 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GenericObject > tempshared1 ;
+  boost::shared_ptr< GeoCal::GenericObject > temp2shared1 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "serialize_write_binary" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::GenericObject > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::GenericObject > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::GenericObject > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::GenericObject > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    try {
+      result = GeoCal::serialize_write_binary((boost::shared_ptr< GeoCal::GenericObject > const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_serialize_read_binary(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::GenericObject > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "serialize_read_binary" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "serialize_read_binary" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = GeoCal::serialize_read_binary((std::string const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python_or_none(result);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"have_serialize_supported", (PyCFunction)_wrap_have_serialize_supported, METH_NOARGS, (char *)"\n"
@@ -5344,6 +5440,16 @@ static PyMethodDef SwigMethods[] = {
 		"boost::shared_ptr< GenericObject > GeoCal::serialize_read_generic_string(const std::string &Data)\n"
 		"Variation of serialize_read_generic that takes a string rather than\n"
 		"reading a file. \n"
+		""},
+	 { (char *)"serialize_write_binary", (PyCFunction)_wrap_serialize_write_binary, METH_O, (char *)"\n"
+		"std::string GeoCal::serialize_write_binary(const boost::shared_ptr< GenericObject > &Obj)\n"
+		"Variation of serialize_write that writes to a binary string instead of\n"
+		"xml. \n"
+		""},
+	 { (char *)"serialize_read_binary", (PyCFunction)_wrap_serialize_read_binary, METH_O, (char *)"\n"
+		"boost::shared_ptr< GenericObject > GeoCal::serialize_read_binary(const std::string &Data)\n"
+		"Variation of serialize_read_generic that takes a binary string rather\n"
+		"than xml. \n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

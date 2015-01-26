@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -136,12 +139,8 @@ class HdfOrbit_EciTodBurl_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuatern
     def base_group(self):
         return self._v_base_group()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name,self.base_group)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _hdf_orbit_carto.delete_HdfOrbit_EciTodBurl_TimeAcs
 HdfOrbit_EciTodBurl_TimeAcs._v_file_name = new_instancemethod(_hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs__v_file_name,None,HdfOrbit_EciTodBurl_TimeAcs)

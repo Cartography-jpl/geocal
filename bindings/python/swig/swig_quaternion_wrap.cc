@@ -3076,6 +3076,9 @@ namespace swig {
 }
 
 
+#include "geocal_serialize_function.h"
+
+
 #include <sstream>
 #include <boost/math/quaternion.hpp>
 #include <blitz/array.h>

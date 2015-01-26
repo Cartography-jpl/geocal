@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -175,5 +178,21 @@ def serialize_read_generic_string(*args):
     reading a file. 
     """
   return _geocal_serialize_function.serialize_read_generic_string(*args)
+
+def serialize_write_binary(*args):
+  """
+    std::string GeoCal::serialize_write_binary(const boost::shared_ptr< GenericObject > &Obj)
+    Variation of serialize_write that writes to a binary string instead of
+    xml. 
+    """
+  return _geocal_serialize_function.serialize_write_binary(*args)
+
+def serialize_read_binary(*args):
+  """
+    boost::shared_ptr< GenericObject > GeoCal::serialize_read_binary(const std::string &Data)
+    Variation of serialize_read_generic that takes a binary string rather
+    than xml. 
+    """
+  return _geocal_serialize_function.serialize_read_binary(*args)
 
 

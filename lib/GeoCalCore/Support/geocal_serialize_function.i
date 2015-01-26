@@ -20,4 +20,8 @@ serialize_read_generic(const std::string& Fname);
 boost::shared_ptr<GenericObject> 
 serialize_read_generic_string(const std::string& Data);
 
+std::string serialize_write_binary(const boost::shared_ptr<GenericObject>& Obj);
+
+boost::shared_ptr<GenericObject> 
+serialize_read_binary(const std::string& Data);
 }

@@ -2,11 +2,22 @@
 #include "ecr.h"
 #include "wgs84_constant.h"
 #include "geocal_matrix.h"
+#include "geocal_serialize_support.h"
 extern "C" {
 #include "carto/eos_coords.h"
 }
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void EciTodBurl::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianInertial);
+}
+
+GEOCAL_IMPLEMENT(EciTodBurl);
+#endif
 
 double EciTodBurl::delta_ut1 = 0;
 

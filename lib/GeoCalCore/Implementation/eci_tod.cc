@@ -3,8 +3,19 @@
 #include "wgs84_constant.h"
 #include "geocal_matrix.h"
 #include "spice_helper.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void EciTod::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianInertial);
+}
+
+GEOCAL_IMPLEMENT(EciTod);
+#endif
 
 //-----------------------------------------------------------------------
 // Convert from Eci to EciTod.

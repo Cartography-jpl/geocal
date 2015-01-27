@@ -28,6 +28,6 @@ public:
     static void set_delta_ut1(double v) {GeoCal::EciTodBurl::delta_ut1 = v;}
     static double get_delta_ut1() { return GeoCal::EciTodBurl::delta_ut1; }
   }
-  %pickle_init(1, self.position[0], self.position[1], self.position[2])
+  %pickle_serialization();
 };
 }

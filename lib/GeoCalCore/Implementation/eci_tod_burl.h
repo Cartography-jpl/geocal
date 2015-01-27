@@ -76,7 +76,12 @@ public:
 //-----------------------------------------------------------------------
 
   static double delta_ut1;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
 
+GEOCAL_EXPORT_KEY(EciTodBurl);
 #endif

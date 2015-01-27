@@ -27,6 +27,6 @@ public:
     const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
     const;
   Eci to_eci(const Time& T);
-  %pickle_init(1, self.position[0], self.position[1], self.position[2])
+  %pickle_serialization();
 };
 }

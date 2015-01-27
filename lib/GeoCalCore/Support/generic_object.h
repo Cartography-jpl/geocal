@@ -10,14 +10,17 @@ namespace boost {
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 #include <boost/serialization/export.hpp>
+#include <boost/serialization/tracking.hpp>
 #include <boost/serialization/split_member.hpp>
 #define GEOCAL_EXPORT_KEY(NAME) BOOST_CLASS_EXPORT_KEY(GeoCal::NAME)
 #define GEOCAL_EXPORT_KEY2(NAME, KEY) BOOST_CLASS_EXPORT_KEY2(GeoCal::NAME, KEY)
 #define GEOCAL_SPLIT_MEMBER() BOOST_SERIALIZATION_SPLIT_MEMBER()
+#define GEOCAL_DONT_TRACK(NAME) BOOST_CLASS_TRACKING(GeoCal::NAME, boost::serialization::track_never)
 #else
 #define GEOCAL_EXPORT_KEY(NAME) /* Noop */
 #define GEOCAL_EXPORT_KEY2(NAME,KEY) /* Noop */
 #define GEOCAL_SPLIT_MEMBER() /* Noop */
+#define GEOCAL_DONT_TRACK() /* Noop */
 #endif
 
 

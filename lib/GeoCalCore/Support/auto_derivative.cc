@@ -12,7 +12,7 @@ void AutoDerivative<T>::serialize(Archive& ar, const unsigned int version)
 }
 
 GEOCAL_IMPLEMENT(AutoDerivative<double>);
-							 
+
 template<class Archive, class T>
 void boost::serialization::save(Archive& ar, const blitz::Array<T, 1>& A, 
 			      const unsigned version) 

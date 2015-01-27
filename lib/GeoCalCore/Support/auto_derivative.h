@@ -869,4 +869,7 @@ BOOST_SERIALIZATION_SPLIT_FREE(blitz_bool_array_1d);
 #endif
 
 GEOCAL_EXPORT_KEY(AutoDerivative<double>);
+// Treat autoderivatives as primative, so we don't track multiple pointer
+// to same object.
+GEOCAL_DONT_TRACK(AutoDerivative<double>);
 #endif

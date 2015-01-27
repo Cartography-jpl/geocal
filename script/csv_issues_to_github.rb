@@ -1,13 +1,12 @@
 #!/usr/local/bin/ruby
 #
-# **NOTE** These don't actually work yet, but we'll save this work so we can
-# come back to this.
-#
 # Note this comes from https://github.com/controlgroup/CSV-GitHub-import-export,
 # we just copied the script into here.
 #
 # See the README for how to use this.
 
+# Override where we look, default is the public github
+ENV['OCTOKIT_API_ENDPOINT'] =  "https://github.jpl.nasa.gov/api/v3"
 require 'rubygems'
 require 'octokit'
 require 'faraday'
@@ -16,11 +15,11 @@ require 'csv'
 # BEGIN INTERACTIVE SECTION
 # Comment out this section (from here down to where the end is marked) if you want to use this interactively
 
-puts "Username:"
-username = gets.chomp  
-if username == ""
-	abort("You need to supply a username. Thank you, come again.")
-end
+# puts "Username:"
+# username = gets.chomp  
+# if username == ""
+# 	abort("You need to supply a username. Thank you, come again.")
+# end
 
 puts "Password:"
 password = gets.chomp  
@@ -28,23 +27,23 @@ if password == ""
 	abort("You need to supply a password. Thank you, come again.")
 end
 
-puts "Path for the CSV file you want to use?"
-input_file = gets.chomp  
-if input_file == ""
-	abort("You need to supply a CSV file. Thank you, come again.")
-end
+# puts "Path for the CSV file you want to use?"
+# input_file = gets.chomp  
+# if input_file == ""
+# 	abort("You need to supply a CSV file. Thank you, come again.")
+# end
 
-puts "Organization?"
-org = gets.chomp  
-if org == ""
-	abort("You need to supply an organization. Thank you, come again.")
-end
+# puts "Organization?"
+# org = gets.chomp  
+# if org == ""
+# 	abort("You need to supply an organization. Thank you, come again.")
+# end
 
-puts "Repository?"
-repo = gets.chomp  
-if repo == ""
-	abort("You need to supply a repository. Thank you, come again.")
-end
+# puts "Repository?"
+# repo = gets.chomp  
+# if repo == ""
+# 	abort("You need to supply a repository. Thank you, come again.")
+# end
 
 # END INTERACTIVE SECTION
 
@@ -52,13 +51,13 @@ end
 # BEGIN HARD-CODED SECTION
 # Un-comment out this section (from here down to where the end is marked) if you want to use this without any interaction
 # All of these need to be filled out in order for it to work
-=begin
-input_file = ""
-username = ""
+#=begin
+input_file = "../issues"
+username = "smyth"
 password = ""
-org = "" 
-repo = ""
-=end  # END HARD-CODED SECTION
+org = "Cartography" 
+repo = "geocal"
+#=end  # END HARD-CODED SECTION
 
 org_repo = org + "/" + repo
 

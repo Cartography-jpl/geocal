@@ -1,13 +1,10 @@
 #!/opt/local/bin/ruby1.9
 #
-# **NOTE** These don't actually work yet, but we'll save this work so we can
-# come back to this.
-#
 # Note this comes from https://github.com/controlgroup/CSV-GitHub-import-export,
 # we just copied the script into here.
 #
 # Override where we look, default is the public github
-ENV['OCTOKIT_API_ENDPOINT'] =  "https://api.github.jpl.nasa.gov"
+ENV['OCTOKIT_API_ENDPOINT'] =  "https://github.jpl.nasa.gov/api/v3"
 require 'octokit'
 require 'csv'
 require 'date'
@@ -135,8 +132,8 @@ issues.each do |issue|
       issue['number'],
       issue['title'],
       issue['body'],
-      DateTime.parse(issue['created_at']).new_offset(TIMEZONE_OFFSET).strftime("%d/%b/%y %l:%M %p"),
-      DateTime.parse(issue['updated_at']).new_offset(TIMEZONE_OFFSET).strftime("%d/%b/%y %l:%M %p"),
+      DateTime.parse(issue['created_at'].to_s).new_offset(TIMEZONE_OFFSET).strftime("%d/%b/%y %l:%M %p"),
+      DateTime.parse(issue['updated_at'].to_s).new_offset(TIMEZONE_OFFSET).strftime("%d/%b/%y %l:%M %p"),
       labels,
       milestone,
       issue['state'],

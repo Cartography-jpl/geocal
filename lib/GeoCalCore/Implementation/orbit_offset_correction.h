@@ -76,7 +76,7 @@ public:
 //-----------------------------------------------------------------------
 /// Add a time pointer where we are going to do an attitude correction.
 //-----------------------------------------------------------------------
-  void insert_time_point(Time& T_pt)
+  void insert_time_point(Time T_pt)
   {
     att_corr[T_pt] = boost::math::quaternion<AutoDerivative<double> >(1,0,0,0);
   }

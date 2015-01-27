@@ -27,6 +27,11 @@ BOOST_AUTO_TEST_CASE(basic)
   if(!orb_uncorr)
     return;
   OrbitOffsetCorrection orb(orb_uncorr);
+  orb.insert_time_point(t);
+  orb.insert_time_point(t + 10);
+  blitz::Array<double, 1> parm(9);
+  parm = 1, 2, 3, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06;
+  orb.parameter(parm);
   std::cerr << orb << "\n";
 }
 

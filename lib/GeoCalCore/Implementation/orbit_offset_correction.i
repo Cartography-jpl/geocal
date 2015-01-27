@@ -24,7 +24,7 @@ public:
   %python_attribute_with_set(fit_pitch, bool);
   %python_attribute_with_set(fit_roll, bool);
   %python_attribute(orbit_uncorrected, boost::shared_ptr<Orbit>);
-  void insert_time_point(Time& T_pt);
+  void insert_time_point(Time T_pt);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const;

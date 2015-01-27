@@ -279,7 +279,7 @@ BOOST_AUTO_TEST_CASE(serialization_quaternion_orbit_data)
   boost::shared_ptr<QuaternionOrbitData> od = 
     boost::dynamic_pointer_cast<QuaternionOrbitData>(orb.orbit_data(t + 50));
   std::string d = serialize_write_string(od);
-  if(true)
+  if(false)
     std::cerr << d;
   boost::shared_ptr<QuaternionOrbitData> odr = 
     serialize_read_string<QuaternionOrbitData>(d);

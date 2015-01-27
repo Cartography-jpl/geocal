@@ -8,8 +8,19 @@
 #include "wgs84_constant.h"
 #include "geodetic.h"
 #include "geocal_matrix.h"
+#include "geocal_serialize_support.h"
 #include <cmath>
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void Ecr::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianFixed);
+}
+
+GEOCAL_IMPLEMENT(Ecr);
+#endif
 
 //-----------------------------------------------------------------------
 /// This code is from the paper D. K. Olson "Converting Earth-Centered,

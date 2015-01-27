@@ -93,6 +93,12 @@ public:
   virtual void print(std::ostream& Os) const;
   static Ecr sub_solar_point(const Time& T);
   static double solar_distance(const Time& T);
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(Ecr);
 #endif

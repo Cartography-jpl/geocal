@@ -63,12 +63,28 @@ std::vector<Time> OrbitOffsetCorrection::time_point() const
 // See base class for description
 boost::shared_ptr<OrbitData> OrbitOffsetCorrection::orbit_data(Time T) const
 {
+  boost::shared_ptr<QuaternionOrbitData> oc_uncorr = 
+    boost::dynamic_pointer_cast<QuaternionOrbitData>(orb_uncorr->orbit_data(T));
+  if(!oc_uncorr)
+    throw Exception("OrbitOffsetCorrection only works with orbits that return a QuaternionOrbitData");
+  boost::array<AutoDerivative<double>, 3> poff = 
+    {{pos_corr[0].value(), pos_corr[1].value(), pos_corr[2].value() }};
+  boost::math::quaternion<AutoDerivative<double> > acorr(1,0,0,0);
+  return boost::shared_ptr<OrbitData>
+    (new QuaternionOrbitData(*oc_uncorr, poff, acorr));
 }
 
 // See base class for description
 boost::shared_ptr<OrbitData> 
 OrbitOffsetCorrection::orbit_data(const TimeWithDerivative& T) const
 {
+  boost::shared_ptr<QuaternionOrbitData> oc_uncorr = 
+    boost::dynamic_pointer_cast<QuaternionOrbitData>(orb_uncorr->orbit_data(T));
+  if(!oc_uncorr)
+    throw Exception("OrbitOffsetCorrection only works with orbits that return a QuaternionOrbitData");
+  boost::math::quaternion<AutoDerivative<double> > acorr(1,0,0,0);
+  return boost::shared_ptr<OrbitData>
+    (new QuaternionOrbitData(*oc_uncorr, pos_corr, acorr));
 }
 
 // See base class for description
@@ -124,9 +140,9 @@ blitz::Array<bool, 1> OrbitOffsetCorrection::parameter_mask() const
   res(1) = fit_position();
   res(2) = fit_position();
   for(int i = 0; i < (int) att_corr.size(); ++i) {
-    res(i * 3 + 0) = fit_yaw();
-    res(i * 3 + 1) = fit_pitch();
-    res(i * 3 + 2) = fit_roll();
+    res(3 + i * 3 + 0) = fit_yaw();
+    res(3 + i * 3 + 1) = fit_pitch();
+    res(3 + i * 3 + 2) = fit_roll();
   }
   return res;
 }

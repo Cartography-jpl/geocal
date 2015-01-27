@@ -254,4 +254,16 @@ BOOST_AUTO_TEST_CASE(pos_and_vel_with_der_check_grad)
   BOOST_CHECK_MATRIX_CLOSE_TOL(jac2_fd, jac2_calc, 0.1);
 }
 
+BOOST_AUTO_TEST_CASE(serialization_eci)
+{
+  boost::shared_ptr<Eci> eci(new Eci(100, 200, 300));
+  std::string d = serialize_write_string(eci);
+  if(true)
+    std::cerr << d;
+  boost::shared_ptr<Eci> ecir = 
+    serialize_read_string<Eci>(d);
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE(eci->position[i], ecir->position[i], 1e-4);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

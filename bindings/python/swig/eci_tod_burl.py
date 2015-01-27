@@ -138,8 +138,13 @@ class EciTodBurl(geocal_swig.ground_coordinate.CartesianInertial):
     C++ includes: eci_tod_burl.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::EciTodBurl::EciTodBurl(const boost::array< double, 3 > &Pos)
+        Create an Eci with the given position in meters. 
+        """
+        _eci_tod_burl.EciTodBurl_swiginit(self,_eci_tod_burl.new_EciTodBurl(*args))
     def reference_surface_intersect_approximate(self, *args):
         """
         boost::shared_ptr< CartesianInertial > EciTodBurl::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double

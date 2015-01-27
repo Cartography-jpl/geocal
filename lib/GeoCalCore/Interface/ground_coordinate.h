@@ -82,6 +82,10 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -164,6 +168,10 @@ public:
 //-----------------------------------------------------------------------
   
   boost::array<double, 3> position;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -270,6 +278,11 @@ public:
 //-----------------------------------------------------------------------
 
   static ToolkitCoordinateInterface* toolkit_coordinate_interface;
+
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 // These are defined here instead of up in the class above because
@@ -389,5 +402,9 @@ inline void convert_position_and_velocity
 
  
 }
+
+GEOCAL_EXPORT_KEY(GroundCoordinate);
+GEOCAL_EXPORT_KEY(CartesianFixed);
+GEOCAL_EXPORT_KEY(CartesianInertial);
 #endif
 

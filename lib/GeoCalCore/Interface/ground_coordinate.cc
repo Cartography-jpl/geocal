@@ -1,6 +1,7 @@
 #include "geocal_internal_config.h"
 #include "ground_coordinate.h"
 #include "geocal_matrix.h"
+#include "geocal_serialize_support.h"
 #include <cmath>
 #ifdef HAVE_SPICE
 #include "spice_helper.h"
@@ -10,6 +11,33 @@
 #endif
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void GroundCoordinate::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(GroundCoordinate);
+}
+
+template<class Archive>
+void CartesianFixed::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(GroundCoordinate);
+  GEOCAL_BASE(CartesianFixed, GroundCoordinate);
+  ar & GEOCAL_NVP(position);
+}
+
+template<class Archive>
+void CartesianInertial::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(CartesianInertial);
+  ar & GEOCAL_NVP(position);
+}
+
+GEOCAL_IMPLEMENT(GroundCoordinate);
+GEOCAL_IMPLEMENT(CartesianFixed);
+GEOCAL_IMPLEMENT(CartesianInertial);
+#endif
 
 inline double sqr(double x) { return x * x; }
 

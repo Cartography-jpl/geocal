@@ -40,14 +40,23 @@ BOOST_AUTO_TEST_CASE(serialization)
   // Skip test if we don't have HDF5 or serialization support
   if(!orb_uncorr || !have_serialize_supported())
     return;
-  boost::shared_ptr<Orbit> orb(new OrbitOffsetCorrection(orb_uncorr));
+  boost::shared_ptr<OrbitOffsetCorrection> 
+    orb(new OrbitOffsetCorrection(orb_uncorr));
+  orb->insert_time_point(t);
+  orb->insert_time_point(t + 10);
+  blitz::Array<double, 1> parm(9);
+  parm = 1, 2, 3, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06;
+  orb->parameter(parm);
   std::string d = serialize_write_string(orb);
-  if(false)
+  if(true)
     std::cerr << d;
   boost::shared_ptr<Orbit> orbr = 
-    serialize_read_string<Orbit>(d);
+    serialize_read_string<OrbitOffsetCorrection>(d);
   BOOST_CHECK(fabs(orb->min_time() - orbr->min_time()) < 1e-3);
   BOOST_CHECK(fabs(orb->max_time() - orbr->max_time()) < 1e-3);
+  std::cerr << orb->parameter() << "\n"
+	    << orbr->parameter() << "\n";
+  BOOST_CHECK_MATRIX_CLOSE_TOL(orb->parameter(), orbr->parameter(), 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

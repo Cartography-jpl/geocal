@@ -53,9 +53,8 @@ bool Fit_roll)
 
 std::vector<Time> OrbitOffsetCorrection::time_point() const
 {
-  std::pair<Time, boost::math::quaternion<AutoDerivative<double> > > e;
   std::vector<Time> res;
-  BOOST_FOREACH(e, att_corr)
+  BOOST_FOREACH(map_pair_type e, att_corr)
     res.push_back(e.first);
   return res;
 }
@@ -69,7 +68,31 @@ boost::shared_ptr<OrbitData> OrbitOffsetCorrection::orbit_data(Time T) const
     throw Exception("OrbitOffsetCorrection only works with orbits that return a QuaternionOrbitData");
   boost::array<AutoDerivative<double>, 3> poff = 
     {{pos_corr[0].value(), pos_corr[1].value(), pos_corr[2].value() }};
-  boost::math::quaternion<AutoDerivative<double> > acorr(1,0,0,0);
+  boost::math::quaternion<AutoDerivative<double> > acorr;
+  if(att_corr.size() == 0) {
+    if(outside_is_error_)
+      throw Exception("Can interpolate because we have no time points");
+    else
+      acorr = boost::math::quaternion<AutoDerivative<double> >(1,0,0,0);
+  } else {
+    map_type::const_iterator i = att_corr.lower_bound(T);
+    if(i == att_corr.end()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << T << " is outside of range of time points";
+	throw e;
+      } else {
+	acorr = value(att_corr.rbegin()->second);
+      }
+    } else {
+      boost::math::quaternion<AutoDerivative<double> > q2 = i->second;
+      Time t2 = i->first;
+      --i;
+      boost::math::quaternion<AutoDerivative<double> > q1 = i->second;
+      Time t1 = i->first;
+      acorr = value(interpolate(q1, q2, T - t1, t2 - t1));
+    }
+  }
   return boost::shared_ptr<OrbitData>
     (new QuaternionOrbitData(*oc_uncorr, poff, acorr));
 }
@@ -82,7 +105,31 @@ OrbitOffsetCorrection::orbit_data(const TimeWithDerivative& T) const
     boost::dynamic_pointer_cast<QuaternionOrbitData>(orb_uncorr->orbit_data(T));
   if(!oc_uncorr)
     throw Exception("OrbitOffsetCorrection only works with orbits that return a QuaternionOrbitData");
-  boost::math::quaternion<AutoDerivative<double> > acorr(1,0,0,0);
+  boost::math::quaternion<AutoDerivative<double> > acorr;
+  if(att_corr.size() == 0) {
+    if(outside_is_error_)
+      throw Exception("Can interpolate because we have no time points");
+    else
+      acorr = boost::math::quaternion<AutoDerivative<double> >(1,0,0,0);
+  } else {
+    map_type::const_iterator i = att_corr.lower_bound(T.value());
+    if(i == att_corr.end()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << T.value() << " is outside of range of time points";
+	throw e;
+      } else {
+	acorr = att_corr.rbegin()->second;
+      }
+    } else {
+      boost::math::quaternion<AutoDerivative<double> > q2 = i->second;
+      Time t2 = i->first;
+      --i;
+      boost::math::quaternion<AutoDerivative<double> > q1 = i->second;
+      Time t1 = i->first;
+      acorr = interpolate(q1, q2, T - t1, t2 - t1);
+    }
+  }
   return boost::shared_ptr<OrbitData>
     (new QuaternionOrbitData(*oc_uncorr, pos_corr, acorr));
 }
@@ -94,9 +141,8 @@ ArrayAd<double, 1> OrbitOffsetCorrection::parameter_with_derivative() const
   res(0) = pos_corr[0];
   res(1) = pos_corr[1];
   res(2) = pos_corr[2];
-  std::pair<Time, boost::math::quaternion<AutoDerivative<double> > > e;
   int i = 3;
-  BOOST_FOREACH(e, att_corr) {
+  BOOST_FOREACH(map_pair_type e, att_corr) {
     quat_to_ypr(e.second, res(i + 0), res(i + 1), res(i + 2));
     i += 3;
   }
@@ -111,7 +157,7 @@ void OrbitOffsetCorrection::parameter_with_derivative
   pos_corr[1] = Parm(1);
   pos_corr[2] = Parm(2);
   int i = 3;
-  std::map<Time, boost::math::quaternion<AutoDerivative<double> > >::iterator e;
+  map_type::iterator e;
   for(e = att_corr.begin(); e != att_corr.end(); ++e, i += 3)
     e->second = quat_rot("xyz", Parm(i + 1), Parm(i + 2), Parm(i + 0));
 }
@@ -123,8 +169,7 @@ std::vector<std::string> OrbitOffsetCorrection::parameter_name() const
   res.push_back("Position X Offset");
   res.push_back("Position Y Offset");
   res.push_back("Position Z Offset");
-  std::pair<Time, boost::math::quaternion<AutoDerivative<double> > > e;
-  BOOST_FOREACH(e, att_corr) {
+  BOOST_FOREACH(map_pair_type e, att_corr) {
     res.push_back("Yaw correction time " + e.first.to_string());
     res.push_back("Pitch correction time " + e.first.to_string());
     res.push_back("Yaw correction time " + e.first.to_string());

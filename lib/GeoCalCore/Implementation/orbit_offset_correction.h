@@ -90,7 +90,9 @@ public:
   virtual void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<Orbit> orb_uncorr;
-  std::map<Time, boost::math::quaternion<AutoDerivative<double> > > att_corr;
+  typedef std::map<Time, boost::math::quaternion<AutoDerivative<double> > > map_type;
+  typedef std::pair<Time, boost::math::quaternion<AutoDerivative<double> > > map_pair_type;
+  map_type att_corr;
   boost::array<AutoDerivative<double>, 3> pos_corr;
   bool outside_is_error_;
   bool fit_position_, fit_yaw_, fit_pitch_, fit_roll_;

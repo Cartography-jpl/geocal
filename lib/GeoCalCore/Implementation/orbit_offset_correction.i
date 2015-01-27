@@ -13,7 +13,7 @@ namespace GeoCal {
 class OrbitOffsetCorrection: public Orbit {
 public:
   OrbitOffsetCorrection(const boost::shared_ptr<Orbit> Orb_uncorr,
-			bool Outside_is_error = true,
+			bool Outside_is_error = false,
 			bool Fit_position = true,
 			bool Fit_yaw = true,
 			bool Fit_pitch = true,

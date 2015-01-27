@@ -84,6 +84,14 @@ boost::shared_ptr<OrbitData> OrbitOffsetCorrection::orbit_data(Time T) const
       } else {
 	acorr = value(att_corr.rbegin()->second);
       }
+    } else if(i == att_corr.begin()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << T << " is outside of range of time points";
+	throw e;
+      } else {
+	acorr = value(i->second);
+      }
     } else {
       boost::math::quaternion<AutoDerivative<double> > q2 = i->second;
       Time t2 = i->first;
@@ -120,6 +128,14 @@ OrbitOffsetCorrection::orbit_data(const TimeWithDerivative& T) const
 	throw e;
       } else {
 	acorr = att_corr.rbegin()->second;
+      }
+    } else if(i == att_corr.begin()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << T << " is outside of range of time points";
+	throw e;
+      } else {
+	acorr = i->second;
       }
     } else {
       boost::math::quaternion<AutoDerivative<double> > q2 = i->second;

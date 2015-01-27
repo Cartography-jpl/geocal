@@ -6474,8 +6474,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_OrbitOffsetCorrection", _wrap_new_OrbitOffsetCorrection, METH_VARARGS, (char *)"\n"
 		"OrbitOffsetCorrection::OrbitOffsetCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, bool\n"
-		"Outside_is_error=true, bool Fit_position=true, bool Fit_yaw=true, bool\n"
-		"Fit_pitch=true, bool Fit_roll=true)\n"
+		"Outside_is_error=false, bool Fit_position=true, bool Fit_yaw=true,\n"
+		"bool Fit_pitch=true, bool Fit_roll=true)\n"
 		"Constructor.\n"
 		"\n"
 		"This has no time points for doing corrections, but you can add those\n"

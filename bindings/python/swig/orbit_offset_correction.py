@@ -153,8 +153,8 @@ class OrbitOffsetCorrection(geocal_swig.orbit.Orbit):
     def __init__(self, *args): 
         """
         OrbitOffsetCorrection::OrbitOffsetCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, bool
-        Outside_is_error=true, bool Fit_position=true, bool Fit_yaw=true, bool
-        Fit_pitch=true, bool Fit_roll=true)
+        Outside_is_error=false, bool Fit_position=true, bool Fit_yaw=true,
+        bool Fit_pitch=true, bool Fit_roll=true)
         Constructor.
 
         This has no time points for doing corrections, but you can add those

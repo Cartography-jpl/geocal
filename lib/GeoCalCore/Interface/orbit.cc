@@ -462,7 +462,7 @@ QuaternionOrbitData::QuaternionOrbitData
   pos_with_der = Start.pos_with_der;
   vel_cf = Start.vel_cf;
   vel_cf_with_der = Start.vel_cf_with_der;
-  sc_to_cf_with_der = conj(Sc_to_sc_corr) * Start.sc_to_cf_with_der;
+  sc_to_cf_with_der = Start.sc_to_cf_with_der * conj(Sc_to_sc_corr);
   sc_to_cf_ = value(sc_to_cf_with_der);
   from_cf_ = Start.from_cf_;
   have_ci_to_cf = Start.have_ci_to_cf;
@@ -932,28 +932,6 @@ template<class T> inline void interpolate(const boost::array<T, 3>& P1,
 /// a linear interpolation of that angle for the given time.
 //-----------------------------------------------------------------------
 
-template<class T> inline boost::math::quaternion<T> interpolate(
-              const boost::math::quaternion<T>& Q1, 
-              const boost::math::quaternion<T>& Q2,
-	      const T& toffset, double tspace)
-{
-  boost::math::quaternion<T> delta_quat = Q2 * conj(Q1);
-  T t = delta_quat.R_component_1();
-  t = (t > 1 ? 1 : (t < -1 ? -1 : t)); // Handle t being slightly
-  // out of range due to round off.
-  T delta_ang = 2.0 * std::acos(t);
-  if(delta_ang < 1e-8)	// Handle degenerate case of Q1 and Q2
-    // almost the same.
-    return Q1;
-  T d_ang = delta_ang * toffset / tspace;
-  T sratio = std::sin(d_ang / 2.0) / std::sin(delta_ang / 2.0);
-  boost::math::quaternion<T> 
-    d_quat(std::cos(d_ang / 2.0),
-	   delta_quat.R_component_2() * sratio,
-	   delta_quat.R_component_3() * sratio,
-	   delta_quat.R_component_4() * sratio);
-  return d_quat * Q1;
-}
 
 //-----------------------------------------------------------------------
 /// This is a utility function for use by derived classes. A common
@@ -1004,7 +982,7 @@ boost::math::quaternion<double> Orbit::interpolate(
               const boost::math::quaternion<double>& Q2,
 	      double toffset, double tspace) const
 {
-  return ::interpolate(Q1, Q2, toffset, tspace);
+  return interpolate_quaternion(Q1, Q2, toffset, tspace);
 }
 
 boost::math::quaternion<AutoDerivative<double> > Orbit::interpolate(
@@ -1012,7 +990,7 @@ boost::math::quaternion<AutoDerivative<double> > Orbit::interpolate(
               const boost::math::quaternion<AutoDerivative<double> >& Q2,
 	      const AutoDerivative<double>& toffset, double tspace) const
 {
-  return ::interpolate(Q1, Q2, toffset, tspace);
+  return interpolate_quaternion(Q1, Q2, toffset, tspace);
 }
 
 //-----------------------------------------------------------------------
@@ -1088,8 +1066,8 @@ boost::shared_ptr<QuaternionOrbitData>
   double tspace = t2.time() - t1.time();
   AutoDerivative<double> toffset = tm - t1.time_with_derivative();
   boost::math::quaternion<AutoDerivative<double> > sc_to_cf_ = 
-    ::interpolate(t1.sc_to_cf_with_derivative(), 
-		  t2.sc_to_cf_with_derivative(), toffset, tspace);
+    interpolate_quaternion(t1.sc_to_cf_with_derivative(), 
+			   t2.sc_to_cf_with_derivative(), toffset, tspace);
   boost::array<AutoDerivative<double>, 3> pos1, pos2, vel1, vel2, 
     vel_cf, pos_cf;
   pos1[0] = t1.pos_with_der.R_component_2();
@@ -1117,7 +1095,7 @@ boost::shared_ptr<QuaternionOrbitData>
   if(t1.have_ci_to_cf) {
     t2.fill_in_ci_to_cf();
     res->have_ci_to_cf = true;
-    res->ci_to_cf_der_ = ::interpolate(t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
+    res->ci_to_cf_der_ = interpolate_quaternion(t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
     res->ci_to_cf_ = value(res->ci_to_cf_der_);
     
     boost::array<AutoDerivative<double>, 3> pos1, pos2, vel1, vel2, 

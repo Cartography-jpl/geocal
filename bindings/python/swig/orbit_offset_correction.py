@@ -249,7 +249,7 @@ class OrbitOffsetCorrection(geocal_swig.orbit.Orbit):
 
     def insert_time_point(self, *args):
         """
-        void GeoCal::OrbitOffsetCorrection::insert_time_point(Time &T_pt)
+        void GeoCal::OrbitOffsetCorrection::insert_time_point(Time T_pt)
         Add a time pointer where we are going to do an attitude correction. 
         """
         return _orbit_offset_correction.OrbitOffsetCorrection_insert_time_point(self, *args)

@@ -84,6 +84,6 @@ def test_compare_sc2rpc():
     gc_sc2rpc = sc2calc(ic)
     gc_cam = od.surface_intersect(cam, FrameCoordinate(ic.line, ic.sample),
                           SimpleDem(gc_sc2rpc.height_reference_surface))
-    assert distance(gc_sc2rpc, gc_cam) < 0.1
+    assert distance(gc_sc2rpc, gc_cam) < 1.0
 
 

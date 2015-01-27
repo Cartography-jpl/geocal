@@ -487,6 +487,7 @@ QuaternionOrbitData::QuaternionOrbitData
   vel_cf = Start.vel_cf;
   vel_cf_with_der = Start.vel_cf_with_der;
   sc_to_cf_with_der = Start.sc_to_cf_with_der * conj(Sc_to_sc_corr);
+  sc_to_cf_with_der /= abs(value(sc_to_cf_with_der));
   sc_to_cf_ = value(sc_to_cf_with_der);
   from_cf_ = Start.from_cf_;
   have_ci_to_cf = Start.have_ci_to_cf;
@@ -549,6 +550,8 @@ QuaternionOrbitData::QuaternionOrbitData(Time Tm,
     sc_to_cf_with_der(sc_to_cf_q), 
     from_cf_(true), have_ci_to_cf(false)
 { 
+  sc_to_cf_ /= abs(sc_to_cf_);
+  sc_to_cf_with_der /= abs(value(sc_to_cf_with_der));
 }
 
 //-----------------------------------------------------------------------
@@ -571,6 +574,8 @@ QuaternionOrbitData::QuaternionOrbitData
   sc_to_cf_with_der(sc_to_cf_q), 
   from_cf_(true), have_ci_to_cf(false)
 { 
+  sc_to_cf_ /= abs(sc_to_cf_);
+  sc_to_cf_with_der /= abs(value(sc_to_cf_with_der));
 }
 
 //-----------------------------------------------------------------------
@@ -594,6 +599,8 @@ void QuaternionOrbitData::initialize(Time Tm,
   vel_cf_with_der = vel_cf;
   sc_to_cf_ = sc_to_cf_q;
   sc_to_cf_with_der = sc_to_cf_q;
+  sc_to_cf_ /= abs(sc_to_cf_);
+  sc_to_cf_with_der /= abs(value(sc_to_cf_with_der));
   have_ci_to_cf = false;
 }
 
@@ -619,6 +626,8 @@ void QuaternionOrbitData::initialize
   vel_cf = value(vel_cf_with_der);
   sc_to_cf_ = value(sc_to_cf_q);
   sc_to_cf_with_der = sc_to_cf_q;
+  sc_to_cf_ /= abs(sc_to_cf_);
+  sc_to_cf_with_der /= abs(value(sc_to_cf_with_der));
   have_ci_to_cf = false;
 }
 
@@ -681,6 +690,8 @@ void QuaternionOrbitData::initialize(Time Tm,
 						 pos->position[2]);
   sc_to_cf_ = ci_to_cf() * sc_to_ci_q;
   sc_to_cf_with_der = sc_to_cf_;
+  sc_to_cf_ /= abs(sc_to_cf_);
+  sc_to_cf_with_der /= abs(value(sc_to_cf_with_der));
 }
 
 //-----------------------------------------------------------------------
@@ -716,6 +727,8 @@ void QuaternionOrbitData::initialize
   sc_to_cf_with_der = ci_to_cf_with_derivative() * sc_to_ci_q;
   sc_to_cf_ = value(sc_to_cf_with_der);
   have_ci_to_cf = true;
+  sc_to_cf_ /= abs(sc_to_cf_);
+  sc_to_cf_with_der /= abs(value(sc_to_cf_with_der));
 }
 
 //-----------------------------------------------------------------------

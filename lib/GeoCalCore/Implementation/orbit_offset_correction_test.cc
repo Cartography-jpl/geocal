@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE(basic)
   orb->insert_time_point(t);
   orb->insert_time_point(t + 10);
   blitz::Array<double, 1> parm(9);
-  parm = 1, 2, 3, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06;
+  parm = 1, 2, 3, 4, 5, 6, 7, 8, 9;
   orb->parameter(parm);
   orb->add_identity_gradient();
   BOOST_CHECK_MATRIX_CLOSE_TOL(orb->parameter(), parm, 1e-4);
@@ -104,16 +104,22 @@ BOOST_AUTO_TEST_CASE(check_attitude)
   orb->insert_time_point(t);
   orb->insert_time_point(t + 10);
   blitz::Array<double, 1> parm(9);
-  parm = 1, 2, 3, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06;
+  parm = 1, 2, 3, 4, 5, 6, 7, 8, 9;
   orb->parameter(parm);
   orb->add_identity_gradient();
   double yaw, pitch, roll;
   // Check past edge cases
   quat_to_ypr(sc_to_sc_corr(t - 5), yaw, pitch, roll);
+  yaw /= Constant::arcsecond_to_rad; 
+  pitch /= Constant::arcsecond_to_rad; 
+  roll /= Constant::arcsecond_to_rad; 
   BOOST_CHECK_CLOSE(yaw, parm(3 + 0),1e-4);
   BOOST_CHECK_CLOSE(pitch, parm(3 + 1),1e-4);
   BOOST_CHECK_CLOSE(roll, parm(3 + 2),1e-4);
   quat_to_ypr(sc_to_sc_corr(t + 15), yaw, pitch, roll);
+  yaw /= Constant::arcsecond_to_rad; 
+  pitch /= Constant::arcsecond_to_rad; 
+  roll /= Constant::arcsecond_to_rad; 
   BOOST_CHECK_CLOSE(yaw, parm(6 + 0),1e-4);
   BOOST_CHECK_CLOSE(pitch, parm(6 + 1),1e-4);
   BOOST_CHECK_CLOSE(roll, parm(6 + 2),1e-4);
@@ -125,7 +131,13 @@ BOOST_AUTO_TEST_CASE(check_attitude)
 			   10.0);
   AutoDerivative<double> yaw_expect, pitch_expect, roll_expect;
   quat_to_ypr(qexpect, yaw_expect, pitch_expect, roll_expect);
+  yaw_expect /= Constant::arcsecond_to_rad; 
+  pitch_expect /= Constant::arcsecond_to_rad; 
+  roll_expect /= Constant::arcsecond_to_rad; 
   quat_to_ypr(sc_to_sc_corr(t + 3), yaw, pitch, roll);
+  yaw /= Constant::arcsecond_to_rad; 
+  pitch /= Constant::arcsecond_to_rad; 
+  roll /= Constant::arcsecond_to_rad; 
   BOOST_CHECK_CLOSE(yaw, yaw_expect.value(), 1e-4);
   BOOST_CHECK_CLOSE(pitch, pitch_expect.value(), 1e-4);
   BOOST_CHECK_CLOSE(roll, roll_expect.value(), 1e-4);
@@ -134,6 +146,9 @@ BOOST_AUTO_TEST_CASE(check_attitude)
   AutoDerivative<double> yawd, pitchd, rolld;
   blitz::Array<double, 1> gexp(9);
   quat_to_ypr(sc_to_sc_corr_with_derivative(t - 5), yawd, pitchd, rolld);
+  yawd /= Constant::arcsecond_to_rad; 
+  pitchd /= Constant::arcsecond_to_rad; 
+  rolld /= Constant::arcsecond_to_rad; 
   BOOST_CHECK_CLOSE(yawd.value(), parm(3 + 0),1e-4);
   BOOST_CHECK_CLOSE(pitchd.value(), parm(3 + 1),1e-4);
   BOOST_CHECK_CLOSE(rolld.value(), parm(3 + 2),1e-4);
@@ -148,6 +163,9 @@ BOOST_AUTO_TEST_CASE(check_attitude)
   BOOST_CHECK_MATRIX_CLOSE_TOL(rolld.gradient(), gexp, 1e-4);
   
   quat_to_ypr(sc_to_sc_corr_with_derivative(t + 15), yawd, pitchd, rolld);
+  yawd /= Constant::arcsecond_to_rad; 
+  pitchd /= Constant::arcsecond_to_rad; 
+  rolld /= Constant::arcsecond_to_rad; 
   BOOST_CHECK_CLOSE(yawd.value(), parm(6 + 0),1e-4);
   BOOST_CHECK_CLOSE(pitchd.value(), parm(6 + 1),1e-4);
   BOOST_CHECK_CLOSE(rolld.value(), parm(6 + 2),1e-4);
@@ -162,6 +180,9 @@ BOOST_AUTO_TEST_CASE(check_attitude)
   BOOST_CHECK_MATRIX_CLOSE_TOL(rolld.gradient(), gexp, 1e-4);
 
   quat_to_ypr(sc_to_sc_corr_with_derivative(t + 3), yawd, pitchd, rolld);
+  yawd /= Constant::arcsecond_to_rad; 
+  pitchd /= Constant::arcsecond_to_rad; 
+  rolld /= Constant::arcsecond_to_rad; 
   BOOST_CHECK_CLOSE(yawd.value(), yaw_expect.value(), 1e-4);
   BOOST_CHECK_CLOSE(pitchd.value(), pitch_expect.value(), 1e-4);
   BOOST_CHECK_CLOSE(rolld.value(), roll_expect.value(), 1e-4);
@@ -178,7 +199,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   orb->insert_time_point(t);
   orb->insert_time_point(t + 10);
   blitz::Array<double, 1> parm(9);
-  parm = 1, 2, 3, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06;
+  parm = 1, 2, 3, 4, 5, 6, 7, 8, 9;
   orb->parameter(parm);
   std::string d = serialize_write_string(orb);
   if(false)

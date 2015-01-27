@@ -1,6 +1,7 @@
 #include "geocal_internal_config.h"
 #include "ground_coordinate.h"
 #include "geocal_matrix.h"
+#include "geocal_autoderivative_quaternion.h"
 #include "geocal_serialize_support.h"
 #include <cmath>
 #ifdef HAVE_SPICE
@@ -177,6 +178,7 @@ void GeoCal::convert_position_and_velocity
     for(int j = 0; j < 3; ++j)
       m2[i][j] = m[i][j];
   Cf_to_ci_q = matrix_to_quaternion(m2);
+  Cf_to_ci_q /= abs(value(Cf_to_ci_q));
 }
 
 //-----------------------------------------------------------------------
@@ -212,6 +214,7 @@ void GeoCal::convert_position_and_velocity
     for(int j = 0; j < 3; ++j)
       m2[i][j] = m[i][j];
   Ci_to_cf_q = matrix_to_quaternion(m2);
+  Ci_to_cf_q /= abs(Ci_to_cf_q);
 }
 
 //-----------------------------------------------------------------------
@@ -264,4 +267,5 @@ void GeoCal::convert_position_and_velocity
     for(int j = 0; j < 3; ++j)
       m2[i][j] = m[i][j];
   Ci_to_cf_q = matrix_to_quaternion(m2);
+  Ci_to_cf_q /= abs(value(Ci_to_cf_q));
 }

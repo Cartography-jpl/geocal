@@ -1,6 +1,7 @@
 #include "orbit_offset_correction.h"
 #include "geocal_serialize_support.h"
 #include "ostream_pad.h"
+#include "constant.h"
 #include <boost/foreach.hpp>
 using namespace GeoCal;
 
@@ -160,6 +161,9 @@ ArrayAd<double, 1> OrbitOffsetCorrection::parameter_with_derivative() const
   int i = 3;
   BOOST_FOREACH(map_pair_type e, att_corr) {
     quat_to_ypr(e.second, res(i + 0), res(i + 1), res(i + 2));
+    res(i + 0) /=  Constant::arcsecond_to_rad;
+    res(i + 1) /=  Constant::arcsecond_to_rad;
+    res(i + 2) /=  Constant::arcsecond_to_rad;
     i += 3;
   }
   return res;
@@ -175,20 +179,25 @@ void OrbitOffsetCorrection::parameter_with_derivative
   int i = 3;
   map_type::iterator e;
   for(e = att_corr.begin(); e != att_corr.end(); ++e, i += 3)
-    e->second = quat_rot("xyz", Parm(i + 1), Parm(i + 2), Parm(i + 0));
+    e->second = quat_rot("xyz", Parm(i + 1) * Constant::arcsecond_to_rad, 
+			 Parm(i + 2) * Constant::arcsecond_to_rad, 
+			 Parm(i + 0) * Constant::arcsecond_to_rad);
 }
 
 // See base class for description
 std::vector<std::string> OrbitOffsetCorrection::parameter_name() const
 {
   std::vector<std::string> res;
-  res.push_back("Position X Offset");
-  res.push_back("Position Y Offset");
-  res.push_back("Position Z Offset");
+  res.push_back("Position X Offset (meter)");
+  res.push_back("Position Y Offset (meter)");
+  res.push_back("Position Z Offset (meter)");
   BOOST_FOREACH(map_pair_type e, att_corr) {
-    res.push_back("Yaw correction time " + e.first.to_string());
-    res.push_back("Pitch correction time " + e.first.to_string());
-    res.push_back("Yaw correction time " + e.first.to_string());
+    res.push_back("Yaw correction time " + e.first.to_string() + 
+		  " (arcseconds)");
+    res.push_back("Pitch correction time " + e.first.to_string() +
+		  " (arcseconds)");
+    res.push_back("Yaw correction time " + e.first.to_string() +
+		  " (arcseconds)");
   }
   return res;
 }

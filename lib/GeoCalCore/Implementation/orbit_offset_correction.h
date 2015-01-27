@@ -17,6 +17,9 @@ namespace GeoCal {
   correction at fixed time values. For times in between we interpolate
   the quaternion correction.
 
+  The position offset is in meters. Right now, the attitude correction
+  is in arcseconds. We may change that.
+
   The velocity is left unchanged.
 
   The underlying orbit should return a QuaternionOrbitData orbit data, 

@@ -272,4 +272,18 @@ BOOST_AUTO_TEST_CASE(orbit_data_offset)
 		    29.9975, 1e-2);
 }
 
+BOOST_AUTO_TEST_CASE(serialization_quaternion_orbit_data)
+{
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  KeplerOrbit orb(t, t + 100.0);
+  boost::shared_ptr<QuaternionOrbitData> od = 
+    boost::dynamic_pointer_cast<QuaternionOrbitData>(orb.orbit_data(t + 50));
+  std::string d = serialize_write_string(od);
+  if(true)
+    std::cerr << d;
+  boost::shared_ptr<QuaternionOrbitData> odr = 
+    serialize_read_string<QuaternionOrbitData>(d);
+}
+
+
 BOOST_AUTO_TEST_SUITE_END()

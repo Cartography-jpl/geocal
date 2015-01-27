@@ -161,6 +161,10 @@ public:
   virtual TimeWithDerivative time_with_derivative() const = 0;
 
   virtual void print(std::ostream& Os) const = 0;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -423,6 +427,10 @@ private:
   mutable boost::math::quaternion<double> vel_ci; 
   mutable boost::math::quaternion<AutoDerivative<double> > 
   vel_ci_with_der; 
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -686,6 +694,7 @@ private:
   void serialize(Archive & ar, const unsigned int version);
 };
 
+
 /****************************************************************//**
   This is a simple implementation of an Orbit. It just uses Kepler's
   equations. This is intended primarily for easy testing of other
@@ -844,6 +853,9 @@ private:
 	      const QuaternionOrbitData& t2, 
 	      const TimeWithDerivative& tm);
 }
+
+GEOCAL_EXPORT_KEY(QuaternionOrbitData);
+GEOCAL_EXPORT_KEY(OrbitData);
 GEOCAL_EXPORT_KEY(Orbit);
 #endif
 

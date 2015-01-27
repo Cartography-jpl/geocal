@@ -201,20 +201,7 @@ def velocity_cf(self):
 def velocity_cf_with_derivative(self):
     return self._velocity_cf_with_derivative()
   }
-%pythoncode {
-@classmethod
-def pickle_format_version(cls):
-  return 1
-
-def __reduce__(self):
-  if(self.from_cf):
-    return _new_from_init, (self.__class__, 1, self.time, self.position_cf, 
-			    self.velocity_cf, self.sc_to_cf)
-  else:
-    return _new_from_init, (self.__class__, 1, self.time, self.position_ci, 
-			    self.velocity_ci, self.sc_to_ci)
-
-}
+  %pickle_serialization();
 };
 
 

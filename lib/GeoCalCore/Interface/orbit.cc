@@ -12,12 +12,36 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
+void OrbitData::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(OrbitData);
+}
+
+template<class Archive>
 void Orbit::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Orbit);
   ar & GEOCAL_NVP(min_tm) & GEOCAL_NVP(max_tm);
 }
 
+template<class Archive>
+void QuaternionOrbitData::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(OrbitData);
+  GEOCAL_BASE(QuaternionOrbitData, OrbitData);
+  ar & GEOCAL_NVP(tm) & GEOCAL_NVP(pos) & GEOCAL_NVP(pos_with_der)
+    & GEOCAL_NVP(vel_cf) & GEOCAL_NVP(vel_cf_with_der) 
+    & GEOCAL_NVP_(sc_to_cf) & GEOCAL_NVP(sc_to_cf_with_der)
+    & GEOCAL_NVP_(from_cf)
+    & GEOCAL_NVP(have_ci_to_cf)
+    & GEOCAL_NVP_(ci_to_cf)
+    & GEOCAL_NVP_(ci_to_cf_der)
+    & GEOCAL_NVP(pos_ci) & GEOCAL_NVP(pos_ci_with_der) & GEOCAL_NVP(vel_ci)
+    & GEOCAL_NVP(vel_ci_with_der);
+}
+
+GEOCAL_IMPLEMENT(OrbitData);
+GEOCAL_IMPLEMENT(QuaternionOrbitData);
 GEOCAL_IMPLEMENT(Orbit);
 #endif
 
@@ -491,7 +515,6 @@ QuaternionOrbitData::QuaternionOrbitData
       pos_ci = pos_ci->create(p);
     }
   } else {
-    double t = pos_ci->position[0];
     pos_ci->position[0] += Pos_off[0].value();
     pos_ci->position[1] += Pos_off[1].value();
     pos_ci->position[2] += Pos_off[2].value();

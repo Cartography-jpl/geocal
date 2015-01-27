@@ -48,14 +48,12 @@ BOOST_AUTO_TEST_CASE(serialization)
   parm = 1, 2, 3, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06;
   orb->parameter(parm);
   std::string d = serialize_write_string(orb);
-  if(true)
+  if(false)
     std::cerr << d;
   boost::shared_ptr<Orbit> orbr = 
     serialize_read_string<OrbitOffsetCorrection>(d);
   BOOST_CHECK(fabs(orb->min_time() - orbr->min_time()) < 1e-3);
   BOOST_CHECK(fabs(orb->max_time() - orbr->max_time()) < 1e-3);
-  std::cerr << orb->parameter() << "\n"
-	    << orbr->parameter() << "\n";
   BOOST_CHECK_MATRIX_CLOSE_TOL(orb->parameter(), orbr->parameter(), 1e-4);
 }
 

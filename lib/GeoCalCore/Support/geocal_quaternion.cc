@@ -7,6 +7,12 @@ template<class Archive, class T>
 void boost::serialization::save
 (Archive& ar, const boost::math::quaternion<T>& q, const unsigned version) 
 {
+  // Note a subtle issue here. Since we are copying the data, the
+  // object tracking boost does will be these *local* values, not the
+  // values actually in the quaternion. To keep this from causing
+  // problems, T *must* be a type that does not have object tracking
+  // turned on (either a primative type like double, or something
+  // marked using GEOCAL_DONT_TRACK like AutoDerivative<double>. 
   T q1 = q.R_component_1();
   T q2 = q.R_component_2();
   T q3 = q.R_component_3();
@@ -20,6 +26,12 @@ void boost::serialization::load
 (Archive& ar, boost::math::quaternion<T>& q, 
  const unsigned version) 
 {
+  // Note a subtle issue here. Since we are copying the data, the
+  // object tracking boost does will be these *local* values, not the
+  // values actually in the quaternion. To keep this from causing
+  // problems, T *must* be a type that does not have object tracking
+  // turned on (either a primative type like double, or something
+  // marked using GEOCAL_DONT_TRACK like AutoDerivative<double>. 
   T q1, q2, q3, q4;
   ar & GEOCAL_NVP(q1) & GEOCAL_NVP(q2)
     & GEOCAL_NVP(q3) & GEOCAL_NVP(q4);

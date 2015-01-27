@@ -20,6 +20,9 @@ template<class Archive>
 void boost::serialization::save_construct_data
 (Archive & ar, const GdalRasterImage* d, const unsigned int version)
 {
+  // Note although we are using local variables, we don't run into the
+  // object serialization tracking problem because all these types are
+  // primitive so they aren't tracked.
   std::string file_name = d->file_names()[0];
   int band_id = d->band_id();
   bool update = d->update();
@@ -38,6 +41,9 @@ template<class Archive>
 void boost::serialization::load_construct_data
 (Archive & ar, GdalRasterImage* d, const unsigned int version)
 {
+  // Note although we are using local variables, we don't run into the
+  // object serialization tracking problem because all these types are
+  // primitive so they aren't tracked.
   std::string file_name;
   int band_id, number_tile, number_tile_line, number_tile_sample;
   bool update;

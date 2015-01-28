@@ -256,6 +256,8 @@ BOOST_AUTO_TEST_CASE(pos_and_vel_with_der_check_grad)
 
 BOOST_AUTO_TEST_CASE(serialization_eci)
 {
+  if(!have_serialize_supported())
+    return;
   boost::shared_ptr<Eci> eci(new Eci(100, 200, 300));
   std::string d = serialize_write_string(eci);
   if(false)
@@ -268,6 +270,8 @@ BOOST_AUTO_TEST_CASE(serialization_eci)
 
 BOOST_AUTO_TEST_CASE(serialization_ecr)
 {
+  if(!have_serialize_supported())
+    return;
   boost::shared_ptr<Ecr> ecr(new Ecr(100, 200, 300));
   std::string d = serialize_write_string(ecr);
   if(false)

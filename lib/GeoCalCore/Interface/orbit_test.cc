@@ -274,6 +274,8 @@ BOOST_AUTO_TEST_CASE(orbit_data_offset)
 
 BOOST_AUTO_TEST_CASE(serialization_quaternion_orbit_data)
 {
+  if(!have_serialize_supported())
+    return;
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
   KeplerOrbit orb(t, t + 100.0);
   boost::shared_ptr<QuaternionOrbitData> od = 

@@ -20,7 +20,7 @@ namespace boost {
 #define GEOCAL_EXPORT_KEY(NAME) /* Noop */
 #define GEOCAL_EXPORT_KEY2(NAME,KEY) /* Noop */
 #define GEOCAL_SPLIT_MEMBER() /* Noop */
-#define GEOCAL_DONT_TRACK() /* Noop */
+#define GEOCAL_DONT_TRACK(NAME) /* Noop */
 #endif
 
 

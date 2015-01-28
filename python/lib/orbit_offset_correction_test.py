@@ -1,6 +1,7 @@
 from nose.tools import *
 from geocal_swig import *
 from nose.plugins.skip import Skip, SkipTest
+import numpy.testing as npt
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
@@ -100,23 +101,16 @@ def test_insert_time_point():
     assert (orb.parameter == [0, 0, 0, 0, 0, 0]).all()
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600]
     orb.insert_time_point(t3)
-    assert (orb.parameter == [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600,
-                              0, 0, 0]).all()
+    npt.assert_almost_equal(orb.parameter,
+                           [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600,
+                            0, 0, 0])
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, -10, -20, -30]
     orb.insert_time_point(t2)
-    assert (orb.parameter == [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 0, 0, 0,
-                              -10, -20, -30]).all()
+    npt.assert_almost_equal(orb.parameter,
+                           [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 0, 0, 0,
+                            -10, -20, -30])
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 20, 40, 
                      60, -10, -20, -30]
-    q = orb.quaternion_correction(TimeWithDerivative(t1 + 5))
-    assert_almost_equal(q.R_component_1.value, 0.959964, 4)
-    assert_almost_equal(q.R_component_2.value, 0.13533, 4)
-    assert_almost_equal(q.R_component_3.value, 0.0834714, 4)
-    assert_almost_equal(q.R_component_4.value, 0.230623, 4)
-    # Make sure we can call for each time
-    orb.quaternion_correction(TimeWithDerivative(t1))
-    orb.quaternion_correction(TimeWithDerivative(t2))
-    orb.quaternion_correction(TimeWithDerivative(t3))
 
 def test_frame_coordinate():
     if(orb_uncorr is None):

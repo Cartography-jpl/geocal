@@ -91,6 +91,11 @@ public:
   virtual std::vector<std::string> parameter_name() const;
   virtual blitz::Array<bool, 1> parameter_mask() const;
   virtual void print(std::ostream& Os) const;
+protected:
+  virtual void notify_update()
+  {
+    notify_update_do(*this);
+  }
 private:
   boost::shared_ptr<Orbit> orb_uncorr;
   typedef std::map<Time, boost::math::quaternion<AutoDerivative<double> > > map_type;

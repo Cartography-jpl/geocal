@@ -182,6 +182,7 @@ void OrbitOffsetCorrection::parameter_with_derivative
     e->second = quat_rot("xyz", Parm(i + 1) * Constant::arcsecond_to_rad, 
 			 Parm(i + 2) * Constant::arcsecond_to_rad, 
 			 Parm(i + 0) * Constant::arcsecond_to_rad);
+  notify_update();
 }
 
 // See base class for description

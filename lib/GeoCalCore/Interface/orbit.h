@@ -688,6 +688,10 @@ protected:
 				///OrbitData for.
   Time max_tm;			///< Maximum time that we have
 				///OrbitData for.
+  virtual void notify_update()
+  {
+    notify_update_do(*this);
+  }
 private:
   friend class boost::serialization::access;
   template<class Archive>

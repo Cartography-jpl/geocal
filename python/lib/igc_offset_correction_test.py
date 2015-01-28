@@ -57,6 +57,37 @@ def test_igc():
     assert distance(gp, igc_coll.ground_coordinate(0, ic)) < 0.01
     assert_almost_equal(igc_coll.image_coordinate(0, gp).line, ic.line, 4)
     assert_almost_equal(igc_coll.image_coordinate(0, gp).sample, ic.sample, 3)
+
+def test_igc_pickle():
+    # Only run if we have serialization support in geocal
+    if(!have_serialize_supported()):
+        raise SkipTest
+    
+    try:
+        # Depending on the options used when building, this class might
+        # not be available. If not, then just skip this test.
+        HdfOrbit_EciTod_TimeAcs
+    except NameError:
+        raise SkipTest
+
+    orb_uncorr = HdfOrbit_EciTod_TimeAcs(test_data + "../sample_orbit.h5")
+    t2 = Time.time_acs(215077459.472);
+    t1 = t2 - 10
+    t3 = t2 + 10
+    img1.time = t1 + 5
+    img1.title = "Image 1"
+    img2.time = t2
+    img2.title = "Image 2"
+    img3.time = t2 + 5
+    img3.title = "Image 3"
+    orb = OrbitOffsetCorrection(orb_uncorr)
+    orb.insert_time_point(t1)
+    orb.insert_time_point(t2)
+    orb.insert_time_point(t3)
+    igc_coll = IgcOffsetCorrection([img1, img2, img3], cam, demin, orb)
+    igc_coll.parameter_subset = [100, 200, 300, 50, 20, 30, 20, 40, 60, -10, -20, -30, cam.euler[0], cam.euler[1], cam.euler[2], cam.line_pitch, cam.sample_pitch]
+    ic = ImageCoordinate(100, 200)
+    gp = igc_coll.ground_coordinate(0, ic)
     t = cPickle.dumps(igc_coll, cPickle.HIGHEST_PROTOCOL)
     igc_coll2 = cPickle.loads(t)
     assert igc_coll2.title(1) == igc_coll.title(1)

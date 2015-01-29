@@ -60,7 +60,7 @@ def test_igc():
 
 def test_igc_pickle():
     # Only run if we have serialization support in geocal
-    if(!have_serialize_supported()):
+    if(not have_serialize_supported()):
         raise SkipTest
     
     try:

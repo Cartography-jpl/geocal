@@ -25,6 +25,15 @@ void Orbit::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
+void KeplerOrbit::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP_(epoch) & GEOCAL_NVP_(a) & GEOCAL_NVP_(ap)
+    & GEOCAL_NVP_(e) & GEOCAL_NVP_(freq_rev) & GEOCAL_NVP_(ma)
+    & GEOCAL_NVP_(inc) & GEOCAL_NVP_(ra) & GEOCAL_NVP_(r);
+}
+
+template<class Archive>
 void QuaternionOrbitData::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(OrbitData);
@@ -42,6 +51,7 @@ void QuaternionOrbitData::serialize(Archive & ar, const unsigned int version)
 
 GEOCAL_IMPLEMENT(OrbitData);
 GEOCAL_IMPLEMENT(QuaternionOrbitData);
+GEOCAL_IMPLEMENT(KeplerOrbit);
 GEOCAL_IMPLEMENT(Orbit);
 #endif
 

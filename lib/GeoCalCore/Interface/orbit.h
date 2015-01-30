@@ -850,6 +850,10 @@ private:
 				/// ascending node. 
   void calc_freq_rev();
   void calc_r();
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
   boost::shared_ptr<QuaternionOrbitData>
@@ -860,6 +864,7 @@ private:
 
 GEOCAL_EXPORT_KEY(QuaternionOrbitData);
 GEOCAL_EXPORT_KEY(OrbitData);
+GEOCAL_EXPORT_KEY(KeplerOrbit);
 GEOCAL_EXPORT_KEY(Orbit);
 #endif
 

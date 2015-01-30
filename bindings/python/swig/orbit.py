@@ -895,12 +895,8 @@ class KeplerOrbit(Orbit):
     def period(self):
         return self._v_period()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.min_time,self.max_time,self.epoch,self.semimajor_axis,self.eccentricity,self.inclination,self.right_ascension,self.argument_of_perigee,self.mean_anomoly)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit.delete_KeplerOrbit
 KeplerOrbit.orbit_data = new_instancemethod(_orbit.KeplerOrbit_orbit_data,None,KeplerOrbit)

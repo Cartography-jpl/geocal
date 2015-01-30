@@ -312,10 +312,7 @@ public:
   %python_attribute_with_set(inclination, double)
   %python_attribute_with_set(right_ascension, double)
   %python_attribute(period, double)
-  %pickle_init(1, self.min_time, self.max_time, self.epoch,
-	       self.semimajor_axis, self.eccentricity,
-	       self.inclination, self.right_ascension,
-	       self.argument_of_perigee, self.mean_anomoly)
+  %pickle_serialization();
 };
 }
 

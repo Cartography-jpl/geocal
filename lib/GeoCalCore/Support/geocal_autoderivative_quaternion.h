@@ -69,5 +69,39 @@ matrix_to_quaternion(const blitz::Array<AutoDerivative<double> , 2>& m)
   }
 }
 
+inline boost::math::quaternion<AutoDerivative<double> > interpolate_quaternion
+(const boost::math::quaternion<AutoDerivative<double> >& Q1, 
+ const boost::math::quaternion<AutoDerivative<double> >& Q2,
+ const AutoDerivative<double>& toffset, double tspace)
+{
+  boost::math::quaternion<AutoDerivative<double> > delta_quat = Q2 * conj(Q1);
+  AutoDerivative<double> t = delta_quat.R_component_1();
+  // Handle t being slightly out of range due to round off.
+  t.value() = (t.value() > 1 ? 1 : (t.value() < -1 ? -1 : t.value())); 
+  AutoDerivative<double> delta_ang = 2.0 * std::acos(t);
+  AutoDerivative<double> d_ang = delta_ang * toffset / tspace;
+  // Handle degenerate case of Q1 and Q2 almost the same.
+  // Note unlike the quaternion<double> case, we can't just return Q1
+  // because this doesn't have the right derivatives. Instead, we use
+  // the small angle approximation to avoid doing a divide by zero.
+  if(delta_ang < 1e-8)	{
+    AutoDerivative<double> sratio = toffset / tspace;
+    boost::math::quaternion<AutoDerivative<double> >
+      d_quat(1 - (sratio * sratio) / 2.0,
+	     delta_quat.R_component_2() * sratio,
+	     delta_quat.R_component_3() * sratio,
+	     delta_quat.R_component_4() * sratio);
+    return d_quat * Q1;
+  }
+  AutoDerivative<double> sratio = 
+    std::sin(d_ang / 2.0) / std::sin(delta_ang / 2.0);
+  boost::math::quaternion<AutoDerivative<double> >
+    d_quat(std::cos(d_ang / 2.0),
+	   delta_quat.R_component_2() * sratio,
+	   delta_quat.R_component_3() * sratio,
+	   delta_quat.R_component_4() * sratio);
+  return d_quat * Q1;
+}
+
 }
 #endif

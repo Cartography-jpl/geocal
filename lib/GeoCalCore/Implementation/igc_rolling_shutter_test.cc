@@ -7,6 +7,7 @@
 #include "ecr.h"
 #include "hdf_orbit.h"
 #include "eci_tod.h"
+#include "orbit_offset_correction.h"
 using namespace GeoCal;
 using namespace blitz;
 
@@ -17,10 +18,13 @@ public:
     // tmin = Time::parse_time("2003-01-01T11:11:00Z");
     // orb.reset(new KeplerOrbit());
     std::string fname = test_data_dir() + "sample_orbit.h5";
-#ifdef HAVE_HDF5
-    orb.reset(new HdfOrbit<EciTod, TimeAcsCreator>(fname));
-#endif
     tmin = Time::time_acs(215077459.472);
+#ifdef HAVE_HDF5
+    boost::shared_ptr<Orbit> orb_uncorr(new HdfOrbit<EciTod, TimeAcsCreator>(fname));
+    orb.reset(new OrbitOffsetCorrection(orb_uncorr));
+    orb->insert_time_point(tmin);
+    orb->insert_time_point(tmin + 10);
+#endif
     cam.reset(new QuaternionCamera(quat_rot("zyx", 0.1, 0.2, 0.3),
 				   3375, 3648, 1.0 / 2500000, 1.0 / 2500000,
 				   1.0, FrameCoordinate(1688.0, 1824.5),
@@ -35,7 +39,7 @@ public:
     igc.reset(new IgcRollingShutter(orb, tt, cam, dem, img));
   }
   Time tmin;
-  boost::shared_ptr<Orbit> orb;
+  boost::shared_ptr<OrbitOffsetCorrection> orb;
   boost::shared_ptr<QuaternionCamera> cam;
   boost::shared_ptr<Dem> dem;
   double tspace;
@@ -164,40 +168,32 @@ BOOST_AUTO_TEST_CASE(jacobian)
   // Skip test if we don't have HDF5 support
   if(!orb)
     return;
-  // **************** Broken *****************8
-  return;
-
-  // Note we only check the camera jacobian. However this is enough to
-  // make sure the propagation goes through correctly, the use of
-  // orbit parameter jacobians is handled exactly the same way by the
-  // code. 
   igc->add_identity_gradient();
   boost::shared_ptr<GroundCoordinate> gc = 
     igc->ground_coordinate(ImageCoordinate(100,200));
   Array<double, 2> jac_calc = igc->image_coordinate_jac_parm(*gc);
 
-  blitz::Array<double, 1> eps(8);
-  eps = 0.00001, 0.00001, 0.00001, 1e-9, 1e-9, 0.001, 0.1, 0.1;
-  Array<double, 2> jac_fd(2, 8);
-  Array<double, 1> p0(cam->parameter());
+  blitz::Array<double, 1> eps(17);
+  eps = 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.00001, 0.00001, 0.00001, 1e-9, 1e-9, 0.001, 0.1, 0.1;
+  Array<double, 2> jac_fd(2, eps.rows());
+  Array<double, 1> p0(igc->parameter_subset());
   ImageCoordinate ic0 = igc->image_coordinate(*gc);
   for(int i = 0; i < eps.rows(); ++i) {
     Array<double, 1> p = p0.copy();
     p(i) += eps(i);
-    cam->parameter(p);
+    igc->parameter_subset(p);
     ImageCoordinate ic = igc->image_coordinate(*gc);
     jac_fd(0,i) = (ic.line - ic0.line) / eps(i);
     jac_fd(1,i) = (ic.sample - ic0.sample) / eps(i);
   }
   // These are wildly different in scale, so check each item
   // separately so it can be scaled.
-  for(int i = 0; i < 2; ++i)
-    for(int j = 0; j < 8; ++j)
+  for(int i = 0; i < jac_fd.rows(); ++i)
+    for(int j = 0; j < jac_fd.cols(); ++j)
       if(fabs(jac_calc(i,j)) > 0)
-	BOOST_CHECK_CLOSE(jac_calc(i, j), jac_fd(i, j), 1.5);
-      else {
+	BOOST_CHECK_CLOSE(jac_calc(i, j), jac_fd(i, j), 3.6);
+      else
 	BOOST_CHECK(fabs(jac_fd(i, j)) < 2e-1);
-      }
 }
 
 BOOST_AUTO_TEST_CASE(image_coordinate_timing)

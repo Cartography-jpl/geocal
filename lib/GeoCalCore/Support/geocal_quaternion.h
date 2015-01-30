@@ -360,22 +360,22 @@ matrix_to_quaternion(const T m[3][3])
 /// Interpolate between 2 quaternions.
 //-----------------------------------------------------------------------
 
-template<class T> inline boost::math::quaternion<T> interpolate_quaternion(
-              const boost::math::quaternion<T>& Q1, 
-              const boost::math::quaternion<T>& Q2,
-	      const T& toffset, double tspace)
+inline boost::math::quaternion<double> interpolate_quaternion
+(const boost::math::quaternion<double>& Q1, 
+ const boost::math::quaternion<double>& Q2,
+ const double& toffset, double tspace)
 {
-  boost::math::quaternion<T> delta_quat = Q2 * conj(Q1);
-  T t = delta_quat.R_component_1();
+  boost::math::quaternion<double> delta_quat = Q2 * conj(Q1);
+  double t = delta_quat.R_component_1();
   t = (t > 1 ? 1 : (t < -1 ? -1 : t)); // Handle t being slightly
   // out of range due to round off.
-  T delta_ang = 2.0 * std::acos(t);
+  double delta_ang = 2.0 * std::acos(t);
   if(delta_ang < 1e-8)	// Handle degenerate case of Q1 and Q2
     // almost the same.
     return Q1;
-  T d_ang = delta_ang * toffset / tspace;
-  T sratio = std::sin(d_ang / 2.0) / std::sin(delta_ang / 2.0);
-  boost::math::quaternion<T> 
+  double d_ang = delta_ang * toffset / tspace;
+  double sratio = std::sin(d_ang / 2.0) / std::sin(delta_ang / 2.0);
+  boost::math::quaternion<double> 
     d_quat(std::cos(d_ang / 2.0),
 	   delta_quat.R_component_2() * sratio,
 	   delta_quat.R_component_3() * sratio,

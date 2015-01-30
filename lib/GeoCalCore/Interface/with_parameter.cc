@@ -137,7 +137,7 @@ blitz::Array<double, 1> WithParameterNested::parameter() const
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     Array<double, 1> p = obj->parameter();
     if(p.rows() > 0) {
-      Range r(i, p.rows()-1);
+      Range r(i, i + p.rows()-1);
       res(r) = p;
       i += p.rows();
     }
@@ -153,7 +153,7 @@ void WithParameterNested::parameter(const blitz::Array<double, 1>& Parm)
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     Array<double, 1> p = obj->parameter();
     if(p.rows() > 0) {
-      Range r(i, p.rows()-1);
+      Range r(i, i + p.rows()-1);
       obj->parameter(Parm(r));
       i += p.rows();
     }
@@ -167,7 +167,7 @@ ArrayAd<double, 1> WithParameterNested::parameter_with_derivative() const
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     ArrayAd<double, 1> p = obj->parameter_with_derivative();
     if(p.rows() > 0) {
-      Range r(i, p.rows()-1);
+      Range r(i, i + p.rows()-1);
       res(r) = p;
       i += p.rows();
     }
@@ -184,7 +184,7 @@ void WithParameterNested::parameter_with_derivative
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     ArrayAd<double, 1> p = obj->parameter_with_derivative();
     if(p.rows() > 0) {
-      Range r(i, p.rows()-1);
+      Range r(i, i + p.rows()-1);
       obj->parameter_with_derivative(Parm(r));
       i += p.rows();
     }
@@ -208,7 +208,7 @@ blitz::Array<bool, 1> WithParameterNested::parameter_mask() const
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     Array<bool, 1> p = obj->parameter_mask();
     if(p.rows() > 0) {
-      Range r(i, p.rows()-1);
+      Range r(i, i + p.rows()-1);
       res(r) = p;
       i += p.rows();
     }

@@ -54,9 +54,7 @@ public:
   %python_attribute_with_set(refraction, boost::shared_ptr<Refraction>)
   %python_attribute_with_set(band, int)
   %python_attribute_with_set(max_height, double)
-  %pickle_init(1, self.orbit, self.time_table, self.camera, self.dem,
-	       self.image, self.title, self.refraction,
-	       self.resolution, self.band, self.max_height)
+  %pickle_serialization()
 };
 }
 

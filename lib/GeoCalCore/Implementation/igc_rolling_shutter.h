@@ -27,8 +27,8 @@ namespace GeoCal {
   we need to expand this in the future).
 *******************************************************************/
 
-class IgcRollingShutter : public ImageGroundConnection, 
-			  public WithParameterNested {
+class IgcRollingShutter : public virtual ImageGroundConnection, 
+			  public virtual WithParameterNested {
 public:
   enum RollDirection { ROLL_LINE_DIRECTION , ROLL_SAMPLE_DIRECTION };
 
@@ -229,7 +229,12 @@ private:
   int b;
   double max_h;
   double time_tolerance_;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(IgcRollingShutter);
 #endif
 

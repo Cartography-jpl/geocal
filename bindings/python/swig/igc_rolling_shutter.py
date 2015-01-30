@@ -290,12 +290,8 @@ class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnectio
     def max_height(self, value):
       self._v_max_height(value)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.orbit,self.time_table,self.camera,self.dem,self.image,self.title,self.refraction,self.resolution,self.band,self.max_height)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _igc_rolling_shutter.delete_IgcRollingShutter
 IgcRollingShutter.cf_look_vector = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter_cf_look_vector,None,IgcRollingShutter)

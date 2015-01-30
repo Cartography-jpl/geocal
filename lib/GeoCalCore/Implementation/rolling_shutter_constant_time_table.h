@@ -67,7 +67,13 @@ private:
   Time min_t;
   int max_l;
   double tspace;
+  RollingShutterConstantTimeTable() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(RollingShutterConstantTimeTable);
 #endif

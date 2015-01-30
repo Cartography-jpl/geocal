@@ -30,9 +30,7 @@ public:
 				   1.0, FrameCoordinate(1688.0, 1824.5),
 				   QuaternionCamera::LINE_IS_Y));
     dem.reset(new SimpleDem(100));
-    boost::shared_ptr<RasterImage> 
-      img(new MemoryRasterImage(cam->number_line(0),
-				cam->number_sample(0)));
+    boost::shared_ptr<RasterImage> img;
     tspace = 1e-3;
     tt.reset(new RollingShutterConstantTimeTable(tmin, 
 	tmin + cam->number_line(0) * tspace, tspace));
@@ -69,7 +67,7 @@ BOOST_AUTO_TEST_CASE(footprint_resolution)
   double lres, sres;
   igc->footprint_resolution(igc->number_line() / 2, igc->number_sample() / 2,
 			    lres, sres);
-  BOOST_CHECK_CLOSE(lres, 0.27264270668848833, 1e-2);
+  BOOST_CHECK_CLOSE(lres, 0.27269241745720268, 1e-2);
   BOOST_CHECK_CLOSE(sres, 0.26963127284746102, 1e-2);
 }
 
@@ -199,6 +197,19 @@ BOOST_AUTO_TEST_CASE(image_coordinate_timing)
   boost::shared_ptr<GroundCoordinate> gc = igc->ground_coordinate(ic);
   for(int i = 0; i < 1000; ++i)
     ImageCoordinate ic = igc->image_coordinate(*gc);
+}
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported() || !orb)
+    return;
+  std::string d = serialize_write_string(igc);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<IgcRollingShutter> igcr = 
+    serialize_read_string<IgcRollingShutter>(d);
+  ImageCoordinate ic(100, 200);
+  BOOST_CHECK(igcr->image_coordinate(*igc->ground_coordinate(ic)) == ic);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

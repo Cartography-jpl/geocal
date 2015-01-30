@@ -81,6 +81,7 @@ libgeocal_la_SOURCES+= @srcimplementation@/dem_match.cc
 geocalinc_HEADERS+= @srcimplementation@/igc_rolling_shutter.h
 libgeocal_la_SOURCES+= @srcimplementation@/igc_rolling_shutter.cc
 geocalinc_HEADERS+= @srcimplementation@/rolling_shutter_constant_time_table.h
+libgeocal_la_SOURCES+= @srcimplementation@/rolling_shutter_constant_time_table.cc
 if HAVE_FFTW
 geocalinc_HEADERS+= @srcimplementation@/phase_correlation_matcher.h
 libgeocal_la_SOURCES+= @srcimplementation@/phase_correlation_matcher.cc

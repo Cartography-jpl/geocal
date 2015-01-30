@@ -1,8 +1,25 @@
 #include "igc_rolling_shutter.h"
 #include "ostream_pad.h"
 #include "geocal_gsl_root.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void IgcRollingShutter::serialize
+(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar & GEOCAL_NVP_(orbit) & GEOCAL_NVP_(time_table)
+    & GEOCAL_NVP(cam) & GEOCAL_NVP_(refraction)
+    & GEOCAL_NVP_(roll_direction) & GEOCAL_NVP(res)
+    & GEOCAL_NVP(b) & GEOCAL_NVP(max_h) & GEOCAL_NVP_(time_tolerance);
+}
+
+GEOCAL_IMPLEMENT(IgcRollingShutter);
+#endif
+
 //-----------------------------------------------------------------------
 /// Initialize object.
 //-----------------------------------------------------------------------

@@ -54,12 +54,7 @@ BOOST_AUTO_TEST_CASE(resolution)
   // Skip test if we don't have HDF5 support
   if(!orb)
     return;
-  // **************** Broken *****************8
-  return;
-  // Check resolution calculation. We just compare to expected results
-  // we previously verified by hand.
-
-  BOOST_CHECK_CLOSE(igc->resolution_meter(), 6.59975059, 1e-2);
+  BOOST_CHECK_CLOSE(igc->resolution_meter(), 0.26959054043292852, 1e-2);
 }
 
 BOOST_AUTO_TEST_CASE(footprint_resolution)
@@ -67,8 +62,6 @@ BOOST_AUTO_TEST_CASE(footprint_resolution)
   // Skip test if we don't have HDF5 support
   if(!orb)
     return;
-  // **************** Broken *****************8
-  return;
 
   // Check resolution calculation. We just compare to expected results
   // we previously verified by hand.
@@ -76,8 +69,8 @@ BOOST_AUTO_TEST_CASE(footprint_resolution)
   double lres, sres;
   igc->footprint_resolution(igc->number_line() / 2, igc->number_sample() / 2,
 			    lres, sres);
-  BOOST_CHECK_CLOSE(lres, 0.324327514, 1e-2);
-  BOOST_CHECK_CLOSE(sres, 0.314864123, 1e-2);
+  BOOST_CHECK_CLOSE(lres, 0.27264270668848833, 1e-2);
+  BOOST_CHECK_CLOSE(sres, 0.26963127284746102, 1e-2);
 }
 
 BOOST_AUTO_TEST_CASE(ground_position)

@@ -82,6 +82,12 @@ public:
 private:
   double alt, lat, index_ref;
   double k1, k2, dens_fac;
+  Refraction() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(Refraction);
 #endif

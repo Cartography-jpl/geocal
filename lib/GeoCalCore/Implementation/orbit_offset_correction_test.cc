@@ -100,6 +100,9 @@ BOOST_AUTO_TEST_CASE(basic)
 
 BOOST_AUTO_TEST_CASE(check_attitude)
 {
+  // Skip test if we don't have HDF5 support
+  if(!orb_uncorr)
+    return;
   // We have a separate test for the attitude, just because it is so long
   orb->insert_time_point(t);
   orb->insert_time_point(t + 10);

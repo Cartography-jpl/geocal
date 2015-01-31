@@ -151,6 +151,19 @@ class IgcArray(geocal_swig.igc_collection.IgcCollection):
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
+    def __init__(self, igc_list):
+        
+        
+        
+        if(isinstance(igc_list, geocal_swig.Vector_ImageGroundConnection)):
+            t = igc_list
+        else:
+            t = geocal_swig.Vector_ImageGroundConnection()
+            for igc in igc_list:
+                t.push_back(igc)
+        _igc_array.IgcArray_swiginit(self,_igc_array.new_IgcArray(t))
+      
+
     __swig_destroy__ = _igc_array.delete_IgcArray
 IgcArray.image_ground_connection = new_instancemethod(_igc_array.IgcArray_image_ground_connection,None,IgcArray)
 IgcArray_swigregister = _igc_array.IgcArray_swigregister

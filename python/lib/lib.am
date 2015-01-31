@@ -1,7 +1,7 @@
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_handle.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/safe_matplotlib_import.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/misc.py
-geocalpkgpython_PYTHON+= @srcpythonlib@/igc_collection.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/igc_collection_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/tie_point.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/vicar_interface.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/image_to_image_connection.py

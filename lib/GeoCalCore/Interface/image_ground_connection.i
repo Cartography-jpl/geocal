@@ -1,6 +1,7 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
+%include <std_vector.i>
 %include "common.i"
 
 %{
@@ -202,3 +203,4 @@ public:
 
 }
 
+%template(Vector_ImageGroundConnection) std::vector<boost::shared_ptr<GeoCal::ImageGroundConnection> >;

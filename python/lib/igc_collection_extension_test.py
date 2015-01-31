@@ -1,7 +1,7 @@
 from nose.tools import *
 from geocal_swig import *
 from image_ground_connection import *
-from igc_collection import *
+from igc_collection_extension import *
 from nose.plugins.skip import Skip, SkipTest
 import scipy
 import numpy.testing as npt
@@ -17,7 +17,7 @@ def test_connection_igc():
     igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
     igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
     igc_coll = IgcArray([igc1, igc2, igc3])
-    igc = ImageGroundConnectionIgc(igc_coll, 2)
+    igc = igc_coll.image_ground_connection(2)
     ic = ImageCoordinate(100, 200)
     gp = igc3.ground_coordinate(ic)
     assert distance(gp, igc.ground_coordinate(ic)) < 0.01
@@ -76,8 +76,11 @@ def test_igc_array():
         igc_coll.image_coordinate_jac_parm(2, gp, jac, 0, 0)
         print jac
 
+# We don't support this anymore. I don't think we actually need this, but
+# leave the test in place in case we need to come back to this.
 def test_igc_array_with_igc_collection():
     '''Test a IgcArray when one of the entries is a IgcCollection.'''
+    raise SkipTest
     demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
     igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", demin)
     t = [False] * 20

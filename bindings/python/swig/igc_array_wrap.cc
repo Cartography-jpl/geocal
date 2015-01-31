@@ -3592,11 +3592,10 @@ namespace Swig {
 #define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[140]
 #define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[141]
 #define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[142]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_std__allocatorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_t_t swig_types[143]
-#define SWIGTYPE_p_traits_type swig_types[144]
-#define SWIGTYPE_p_value_type swig_types[145]
-static swig_type_info *swig_types[147];
-static swig_module_info swig_module = {swig_types, 146, 0, 0, 0, 0};
+#define SWIGTYPE_p_traits_type swig_types[143]
+#define SWIGTYPE_p_value_type swig_types[144]
+static swig_type_info *swig_types[146];
+static swig_module_info swig_module = {swig_types, 145, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5020,6 +5019,122 @@ template<class T, int D> inline boost::array<T, D>
 #include "igc_array.h"
 
 
+  namespace swig {
+    template <>  struct traits<boost::shared_ptr< GeoCal::ImageGroundConnection > > {
+      typedef pointer_category category;
+      static const char* type_name() { return"boost::shared_ptr< GeoCal::ImageGroundConnection >"; }
+    };
+  }
+
+
+namespace swig {
+  template <class SwigPySeq, class Seq>
+  inline void
+  assign(const SwigPySeq& swigpyseq, Seq* seq) {
+    // seq->assign(swigpyseq.begin(), swigpyseq.end()); // not used as not always implemented
+    typedef typename SwigPySeq::value_type value_type;
+    typename SwigPySeq::const_iterator it = swigpyseq.begin();
+    for (;it != swigpyseq.end(); ++it) {
+      seq->insert(seq->end(),(value_type)(*it));
+    }
+  }
+
+  template <class Seq, class T = typename Seq::value_type >
+  struct traits_asptr_stdseq {
+    typedef Seq sequence;
+    typedef T value_type;
+
+    static int asptr(PyObject *obj, sequence **seq) {
+      if (obj == Py_None || SWIG_Python_GetSwigThis(obj)) {
+	sequence *p;
+	if (::SWIG_ConvertPtr(obj,(void**)&p,
+			      swig::type_info<sequence>(),0) == SWIG_OK) {
+	  if (seq) *seq = p;
+	  return SWIG_OLDOBJ;
+	}
+      } else if (PySequence_Check(obj)) {
+	try {
+	  SwigPySequence_Cont<value_type> swigpyseq(obj);
+	  if (seq) {
+	    sequence *pseq = new sequence();
+	    assign(swigpyseq, pseq);
+	    *seq = pseq;
+	    return SWIG_NEWOBJ;
+	  } else {
+	    return swigpyseq.check() ? SWIG_OK : SWIG_ERROR;
+	  }
+	} catch (std::exception& e) {
+	  if (seq) {
+	    if (!PyErr_Occurred()) {
+	      PyErr_SetString(PyExc_TypeError, e.what());
+	    }
+	  }
+	  return SWIG_ERROR;
+	}
+      }
+      return SWIG_ERROR;
+    }
+  };
+
+  template <class Seq, class T = typename Seq::value_type >
+  struct traits_from_stdseq {
+    typedef Seq sequence;
+    typedef T value_type;
+    typedef typename Seq::size_type size_type;
+    typedef typename sequence::const_iterator const_iterator;
+
+    static PyObject *from(const sequence& seq) {
+#ifdef SWIG_PYTHON_EXTRA_NATIVE_CONTAINERS
+      swig_type_info *desc = swig::type_info<sequence>();
+      if (desc && desc->clientdata) {
+	return SWIG_NewPointerObj(new sequence(seq), desc, SWIG_POINTER_OWN);
+      }
+#endif
+      size_type size = seq.size();
+      if (size <= (size_type)INT_MAX) {
+	PyObject *obj = PyTuple_New((int)size);
+	int i = 0;
+	for (const_iterator it = seq.begin();
+	     it != seq.end(); ++it, ++i) {
+	  PyTuple_SetItem(obj,i,swig::from<value_type>(*it));
+	}
+	return obj;
+      } else {
+	PyErr_SetString(PyExc_OverflowError,"sequence size not valid in python");
+	return NULL;
+      }
+    }
+  };
+}
+
+
+  namespace swig {
+    template <class T>
+    struct traits_asptr<std::vector<T> >  {
+      static int asptr(PyObject *obj, std::vector<T> **vec) {
+	return traits_asptr_stdseq<std::vector<T> >::asptr(obj, vec);
+      }
+    };
+    
+    template <class T>
+    struct traits_from<std::vector<T> > {
+      static PyObject *from(const std::vector<T>& vec) {
+	return traits_from_stdseq<std::vector<T> >::from(vec);
+      }
+    };
+  }
+
+
+      namespace swig {
+	template <>  struct traits<std::vector<boost::shared_ptr< GeoCal::ImageGroundConnection >, std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "boost::shared_ptr< GeoCal::ImageGroundConnection >" "," "std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > >" " >";
+	  }
+	};
+      }
+    
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -5191,21 +5306,23 @@ extern "C" {
 SWIGINTERN PyObject *_wrap_new_IgcArray(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > *arg1 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
   PyObject *swig_obj[1] ;
   GeoCal::IgcArray *result = 0 ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_std__allocatorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_t_t,  0  | 0);
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_IgcArray" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &""'"); 
+  {
+    std::vector<boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > *)0;
+    res1 = swig::asptr(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_IgcArray" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcArray" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &""'"); 
+    }
+    arg1 = ptr;
   }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcArray" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > * >(argp1);
   {
     try {
       result = (GeoCal::IgcArray *)new GeoCal::IgcArray((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &)*arg1);
@@ -5219,8 +5336,10 @@ SWIGINTERN PyObject *_wrap_new_IgcArray(PyObject *SWIGUNUSEDPARM(self), PyObject
     boost::shared_ptr<  GeoCal::IgcArray > *smartresult = result ? new boost::shared_ptr<  GeoCal::IgcArray >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcArray_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
+  if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
   return NULL;
 }
 
@@ -6020,7 +6139,6 @@ static swig_type_info _swigt__p_state_type = {"_p_state_type", "state_type *", 0
 static swig_type_info _swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t", "std::basic_iostream< char,std::char_traits< char > > *|std::iostream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_istreamT_char_std__char_traitsT_char_t_t", "std::basic_istream< char,std::char_traits< char > > *|std::istream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t", "std::basic_ostream< char,std::char_traits< char > > *|std::ostream *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_std__allocatorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_t_t = {"_p_std__vectorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_std__allocatorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_t_t", "std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
 
@@ -6168,7 +6286,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
-  &_swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_std__allocatorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_t_t,
   &_swigt__p_traits_type,
   &_swigt__p_value_type,
 };
@@ -6316,7 +6433,6 @@ static swig_cast_info _swigc__p_state_type[] = {  {&_swigt__p_state_type, 0, 0, 
 static swig_cast_info _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__vectorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_std__allocatorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_t_t[] = {  {&_swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_std__allocatorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
 
@@ -6464,7 +6580,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
-  _swigc__p_std__vectorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_std__allocatorT_boost__shared_ptrT_GeoCal__ImageGroundConnection_t_t_t,
   _swigc__p_traits_type,
   _swigc__p_value_type,
 };

@@ -1215,7 +1215,8 @@ am__can_run_installinfo = \
 am__geocalpkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/job_handle.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
-	@srcpythonlib@/misc.py @srcpythonlib@/igc_collection.py \
+	@srcpythonlib@/misc.py \
+	@srcpythonlib@/igc_collection_extension.py \
 	@srcpythonlib@/tie_point.py @srcpythonlib@/vicar_interface.py \
 	@srcpythonlib@/image_to_image_connection.py \
 	@srcpythonlib@/doc_inherit.py @srcpythonlib@/tre_struct.py \
@@ -2534,7 +2535,8 @@ installafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscr
 geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/job_handle.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
-	@srcpythonlib@/misc.py @srcpythonlib@/igc_collection.py \
+	@srcpythonlib@/misc.py \
+	@srcpythonlib@/igc_collection_extension.py \
 	@srcpythonlib@/tie_point.py @srcpythonlib@/vicar_interface.py \
 	@srcpythonlib@/image_to_image_connection.py \
 	@srcpythonlib@/doc_inherit.py @srcpythonlib@/tre_struct.py \

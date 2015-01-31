@@ -9,7 +9,7 @@ namespace GeoCal {
   Rpc.
 *******************************************************************/
 
-class RpcImageGroundConnection : public ImageGroundConnection {
+class RpcImageGroundConnection : virtual public ImageGroundConnection {
 public:
 //-----------------------------------------------------------------------
 // Constructor.
@@ -143,7 +143,12 @@ public:
 private:
   boost::shared_ptr<Rpc> rpc_;
   bool fit_height_offset_;
+  RpcImageGroundConnection() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+GEOCAL_EXPORT_KEY(RpcImageGroundConnection);
 #endif

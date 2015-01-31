@@ -1,8 +1,20 @@
 #include "rpc_image_ground_connection.h"
 #include "simple_dem.h"
 #include <boost/lexical_cast.hpp>
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void RpcImageGroundConnection::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar & GEOCAL_NVP_(rpc) & GEOCAL_NVP_(fit_height_offset);
+}
+
+GEOCAL_IMPLEMENT(RpcImageGroundConnection);
+#endif
 
 // See base class for description
 Array<double, 1> RpcImageGroundConnection::parameter() const

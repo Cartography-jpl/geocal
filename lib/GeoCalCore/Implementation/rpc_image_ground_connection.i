@@ -77,9 +77,7 @@ public:
     const;
   %python_attribute2(rpc, rpc_ptr, boost::shared_ptr<Rpc>)
   %python_attribute_with_set(fit_height_offset, bool)
-  %pickle_init(3, self.rpc, self.dem, self.image, self.image_multi_band,
-	       self.title, self.image_mask,
-	       self.ground_mask, self.fit_height_offset)
+  %pickle_serialization();
 };
 }
 

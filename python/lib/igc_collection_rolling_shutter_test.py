@@ -81,5 +81,8 @@ def test_igc_collection_rolling_shutter():
     for i in range(10):
         print igccol.image_coordinate(i, gp)
 
+    gp = igccol.ground_coordinate(4, ImageCoordinate(100, 200))
+    for i in range(10):
+        print igccol.image_coordinate(i, gp)
 
     

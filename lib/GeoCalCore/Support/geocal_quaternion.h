@@ -2,6 +2,7 @@
 #define GEOCAL_QUATERNION_H
 #include "geocal_exception.h"
 #include "geocal_config.h"
+#include "geocal_matrix.h"
 #include <boost/math/quaternion.hpp>
 #include <blitz/array.h>
 #include <cmath>
@@ -381,6 +382,30 @@ inline boost::math::quaternion<double> interpolate_quaternion
 	   delta_quat.R_component_3() * sratio,
 	   delta_quat.R_component_4() * sratio);
   return d_quat * Q1;
+}
+
+//-----------------------------------------------------------------------
+/// Normalize a quaternion
+//-----------------------------------------------------------------------
+inline void normalize(boost::math::quaternion<double>& Q)
+{
+  Q /= abs(Q);
+}
+
+//-----------------------------------------------------------------------
+/// Determine quaternion that will rotate a vector v1 to point at v2.
+/// Note that this isn't actually unique, but this is the 'shortest
+/// arc' solution.
+//-----------------------------------------------------------------------
+template<class T> inline boost::math::quaternion<T> 
+determine_quat_rot(const boost::array<T, 3>& V1, const boost::array<T, 3>& V2)
+{
+  boost::array<T, 3> a;
+  cross(V1, V2, a);
+  T w = norm(V1) * norm(V2) + dot(V1, V2);
+  boost::math::quaternion<T> res(w, a[0], a[1], a[2]);
+  normalize(res);
+  return res;
 }
 
 }

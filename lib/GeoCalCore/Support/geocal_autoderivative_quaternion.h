@@ -103,5 +103,14 @@ inline boost::math::quaternion<AutoDerivative<double> > interpolate_quaternion
   return d_quat * Q1;
 }
 
+//-----------------------------------------------------------------------
+/// Normalize a quaternion
+//-----------------------------------------------------------------------
+
+inline void normalize(boost::math::quaternion<AutoDerivative<double> >& Q)
+{
+  Q /= abs(value(Q));
+}
+
 }
 #endif

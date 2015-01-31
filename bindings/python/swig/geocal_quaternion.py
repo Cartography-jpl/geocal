@@ -226,6 +226,16 @@ def quat_to_euler(*args):
     """
   return _geocal_quaternion.quat_to_euler(*args)
 
+def determine_quat_rot(*args):
+  """
+    boost::math::quaternion<T> GeoCal::determine_quat_rot(const boost::array< T, 3 > &V1, const boost::array< T, 3 > &V2)
+    Determine quaternion that will rotate a vector v1 to point at v2.
+
+    Note that this isn't actually unique, but this is the 'shortest arc'
+    solution. 
+    """
+  return _geocal_quaternion.determine_quat_rot(*args)
+
 def quat_rot_x(*args):
   """
     boost::math::quaternion<T> GeoCal::quat_rot_x(const T &A)

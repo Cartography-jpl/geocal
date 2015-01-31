@@ -1,7 +1,28 @@
 #include "with_parameter.h"
+#include "geocal_serialize_support.h"
 #include <boost/foreach.hpp>
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void WithParameter::serialize
+(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(WithParameter);
+}
+
+template<class Archive>
+void WithParameterNested::serialize
+(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(WithParameterNested);
+  ar & GEOCAL_NVP(obj_list);
+}
+
+GEOCAL_IMPLEMENT(WithParameter);
+GEOCAL_IMPLEMENT(WithParameterNested);
+#endif
 
 //-----------------------------------------------------------------------
 /// Return the part of the parameter set that passes the mask.

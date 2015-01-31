@@ -89,6 +89,10 @@ public:
   virtual void parameter_with_derivative_subset(const ArrayAd<double, 1>& P);
   virtual std::vector<std::string> parameter_name_subset() const;
   void add_identity_gradient();
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -114,8 +118,13 @@ private:
   std::vector<boost::shared_ptr<WithParameter> > obj_list;
   int total_size() const;
   int max_num_var() const;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+GEOCAL_EXPORT_KEY(WithParameter);
+GEOCAL_EXPORT_KEY(WithParameterNested);
 #endif
 

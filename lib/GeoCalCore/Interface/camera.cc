@@ -11,12 +11,16 @@ template<class Archive>
 void Camera::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Camera);
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(Camera, WithParameter);
 }
 
 template<class Archive>
 void SimpleCamera::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Camera);
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(Camera, WithParameter);
   GEOCAL_BASE(SimpleCamera, Camera);
   ar & GEOCAL_NVP_(beta)
     & GEOCAL_NVP_(delta)

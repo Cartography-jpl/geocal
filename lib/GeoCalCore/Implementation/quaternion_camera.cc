@@ -8,6 +8,8 @@ template<class Archive>
 void QuaternionCamera::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Camera);
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(Camera, WithParameter);
   GEOCAL_BASE(QuaternionCamera, Camera);
   ar & GEOCAL_NVP_(focal_length)
     & GEOCAL_NVP2("number_band", nband_)

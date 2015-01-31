@@ -21,6 +21,8 @@ template<class Archive>
 void Orbit::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Orbit);
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(Orbit, WithParameter);
   ar & GEOCAL_NVP(min_tm) & GEOCAL_NVP(max_tm);
 }
 

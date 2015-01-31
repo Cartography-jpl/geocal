@@ -11,6 +11,7 @@ void IgcRollingShutter::serialize
 (Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested);
   ar & GEOCAL_NVP_(orbit) & GEOCAL_NVP_(time_table)
     & GEOCAL_NVP(cam) & GEOCAL_NVP_(refraction)
     & GEOCAL_NVP_(roll_direction) & GEOCAL_NVP(res)

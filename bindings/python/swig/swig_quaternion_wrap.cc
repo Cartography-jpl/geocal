@@ -3775,6 +3775,32 @@ SWIGINTERN PyObject *Quaternion_double_swiginit(PyObject *SWIGUNUSEDPARM(self), 
   return SWIG_Python_InitShadowInstance(args);
 }
 
+SWIGINTERN PyObject *_wrap_Quaternion_double_abs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< double > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__math__quaternionT_double_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Quaternion_double_abs" "', argument " "1"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Quaternion_double_abs" "', argument " "1"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
+  result = (double)boost::math::SWIGTEMPLATEDISAMBIGUATOR abs< double >((boost::math::quaternion< double > const &)*arg1);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_Quaternion_double", _wrap_new_Quaternion_double, METH_VARARGS, NULL},
@@ -3793,6 +3819,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_Quaternion_double", (PyCFunction)_wrap_delete_Quaternion_double, METH_O, NULL},
 	 { (char *)"Quaternion_double_swigregister", Quaternion_double_swigregister, METH_VARARGS, NULL},
 	 { (char *)"Quaternion_double_swiginit", Quaternion_double_swiginit, METH_VARARGS, NULL},
+	 { (char *)"Quaternion_double_abs", (PyCFunction)_wrap_Quaternion_double_abs, METH_O, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

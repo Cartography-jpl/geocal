@@ -135,12 +135,8 @@ class Quaternion_double(object):
         return self._v_R_component_4()
 
     from_matrix = staticmethod(_swig_quaternion.Quaternion_double_from_matrix)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.R_component_1,self.R_component_2,self.R_component_3,self.R_component_4)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _swig_quaternion.delete_Quaternion_double
 Quaternion_double._v_R_component_1 = new_instancemethod(_swig_quaternion.Quaternion_double__v_R_component_1,None,Quaternion_double)
@@ -161,5 +157,9 @@ def Quaternion_double_from_matrix(*args):
   return _swig_quaternion.Quaternion_double_from_matrix(*args)
 Quaternion_double_from_matrix = _swig_quaternion.Quaternion_double_from_matrix
 
+
+def Quaternion_double_abs(*args):
+  return _swig_quaternion.Quaternion_double_abs(*args)
+Quaternion_double_abs = _swig_quaternion.Quaternion_double_abs
 
 

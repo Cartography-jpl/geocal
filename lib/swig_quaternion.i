@@ -47,10 +47,10 @@ namespace boost {
            return os.str();
          }
       }
-      %pickle_init(1, self.R_component_1,
-		   self.R_component_2, self.R_component_3,
-		   self.R_component_4);
+      %pickle_serialization()
     };
+    template<class T> T abs(const boost::math::quaternion<T>&);
     %template(Quaternion_double) quaternion<double>;
+    %template(Quaternion_double_abs) abs<double>;
   }
 }

@@ -9,7 +9,8 @@ using namespace blitz;
 template<class Archive>
 void ImageGroundConnection::serialize(Archive & ar, const unsigned int version)
 {
-  GEOCAL_GENERIC_BASE(ImageGroundConnection);
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(ImageGroundConnection, WithParameter);
   ar & GEOCAL_NVP_(dem)
     & GEOCAL_NVP_(image)
     & GEOCAL_NVP_(image_mb)

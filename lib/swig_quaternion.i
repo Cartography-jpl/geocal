@@ -47,7 +47,9 @@ namespace boost {
            return os.str();
          }
       }
-      %pickle_serialization()
+      %pickle_init(1, self.R_component_1,
+		   self.R_component_2, self.R_component_3,
+		   self.R_component_4);
     };
     template<class T> T abs(const boost::math::quaternion<T>&);
     %template(Quaternion_double) quaternion<double>;

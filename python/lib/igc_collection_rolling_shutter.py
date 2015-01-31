@@ -1,4 +1,4 @@
-from igc_collection import *
+from igc_collection_extension import *
 import cPickle
 
 def _new_from_init(cls, version, *args, **kwargs):

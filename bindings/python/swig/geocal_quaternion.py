@@ -169,8 +169,12 @@ class Quaternion_AutoDerivative_double(object):
         return self._v_R_component_4()
 
     from_matrix = staticmethod(_geocal_quaternion.Quaternion_AutoDerivative_double_from_matrix)
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+      return _new_from_init, (self.__class__, 1, self.R_component_1,self.R_component_2,self.R_component_3,self.R_component_4)
 
     __swig_destroy__ = _geocal_quaternion.delete_Quaternion_AutoDerivative_double
 Quaternion_AutoDerivative_double._v_R_component_1 = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double__v_R_component_1,None,Quaternion_AutoDerivative_double)

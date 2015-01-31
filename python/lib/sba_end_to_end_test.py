@@ -1,6 +1,6 @@
 from nose.tools import *
 from geocal_swig import *
-from igc_collection import *
+from igc_collection_extension import *
 
 def test_sba_end_to_end():
     '''This is a more realistic sba end to end test. We use a IgcRollingShutter

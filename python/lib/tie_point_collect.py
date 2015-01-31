@@ -1,5 +1,5 @@
 from geocal_swig import *
-from igc_collection import *
+from igc_collection_extension import *
 from tie_point import *
 from ray_intersect import *
 from feature_detector_extension import *

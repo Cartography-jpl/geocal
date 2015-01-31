@@ -1,5 +1,5 @@
 from nose.tools import *
-from igc_collection import *
+from igc_collection_extension import *
 from ray_intersect import *
 from image_ground_connection import *
 from tie_point import *

@@ -8,7 +8,7 @@ import multiprocessing
 from multiprocessing import Pool
 import numpy as np
 import numpy.linalg as la
-from igc_collection import *
+from igc_collection_extension import *
 from ply_file import *
 import safe_matplotlib_import
 import matplotlib.pyplot as plt

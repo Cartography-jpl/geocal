@@ -7753,6 +7753,48 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_WithParameterNested_clear_object(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::WithParameterNested *arg1 = (GeoCal::WithParameterNested *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::WithParameterNested > tempshared1 ;
+  boost::shared_ptr< GeoCal::WithParameterNested > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "WithParameterNested_clear_object" "', argument " "1"" of type '" "GeoCal::WithParameterNested *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::WithParameterNested > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::WithParameterNested > * >(argp1);
+      arg1 = const_cast< GeoCal::WithParameterNested * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::WithParameterNested > * >(argp1);
+      arg1 = const_cast< GeoCal::WithParameterNested * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->clear_object();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_WithParameterNested(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::WithParameterNested *arg1 = (GeoCal::WithParameterNested *) 0 ;
@@ -7881,6 +7923,10 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"WithParameterNested_add_object", _wrap_WithParameterNested_add_object, METH_VARARGS, (char *)"\n"
 		"void GeoCal::WithParameterNested::add_object(const boost::shared_ptr< WithParameter > &Obj)\n"
+		"\n"
+		""},
+	 { (char *)"WithParameterNested_clear_object", (PyCFunction)_wrap_WithParameterNested_clear_object, METH_O, (char *)"\n"
+		"void GeoCal::WithParameterNested::clear_object()\n"
 		"\n"
 		""},
 	 { (char *)"delete_WithParameterNested", (PyCFunction)_wrap_delete_WithParameterNested, METH_O, (char *)"\n"

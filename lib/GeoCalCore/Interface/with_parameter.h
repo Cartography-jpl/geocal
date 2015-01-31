@@ -108,6 +108,7 @@ public:
   virtual ~WithParameterNested() {}
   void add_object(const boost::shared_ptr<WithParameter>& Obj)
   { obj_list.push_back(Obj); }
+  void clear_object() { obj_list.resize(0); }
   virtual blitz::Array<double, 1> parameter() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);
   virtual ArrayAd<double, 1> parameter_with_derivative() const;

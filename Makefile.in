@@ -435,6 +435,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/igc_ray_caster_wrap.cc \
 	@swigsrc@/igc_rolling_shutter_wrap.cc \
 	@swigsrc@/igc_array_wrap.cc \
+	@swigsrc@/igc_collection_rolling_shutter_wrap.cc \
 	@swigsrc@/rolling_shutter_constant_time_table_wrap.cc \
 	@swigsrc@/orbit_offset_correction_wrap.cc \
 	@swigsrc@/argus_camera_wrap.cc @swigsrc@/argus_orbit_wrap.cc \
@@ -578,6 +579,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo \
 	@swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo \
 	@swigsrc@/_swig_wrap_la-igc_array_wrap.lo \
+	@swigsrc@/_swig_wrap_la-igc_collection_rolling_shutter_wrap.lo \
 	@swigsrc@/_swig_wrap_la-rolling_shutter_constant_time_table_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_offset_correction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-argus_camera_wrap.lo \
@@ -715,6 +717,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/dem_match.cc \
 	@srcimplementation@/igc_rolling_shutter.cc \
 	@srcimplementation@/igc_array.cc \
+	@srcimplementation@/igc_collection_rolling_shutter.cc \
 	@srcimplementation@/rolling_shutter_constant_time_table.cc \
 	@srcimplementation@/phase_correlation_matcher.cc \
 	@srcimplementation@/quadratic_geometric_model.cc \
@@ -852,6 +855,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-dem_match.lo \
 	@srcimplementation@/libgeocal_la-igc_rolling_shutter.lo \
 	@srcimplementation@/libgeocal_la-igc_array.lo \
+	@srcimplementation@/libgeocal_la-igc_collection_rolling_shutter.lo \
 	@srcimplementation@/libgeocal_la-rolling_shutter_constant_time_table.lo \
 	$(am__objects_18) \
 	@srcimplementation@/libgeocal_la-quadratic_geometric_model.lo \
@@ -981,6 +985,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/igc_ray_caster_test.cc \
 	@srcimplementation@/igc_rolling_shutter_test.cc \
 	@srcimplementation@/igc_array_test.cc \
+	@srcimplementation@/igc_collection_rolling_shutter_test.cc \
 	@srcimplementation@/orbit_offset_correction_test.cc \
 	@srccartlab@/vicar_ogr_test.cc \
 	@srccartlab@/argus_camera_test.cc \
@@ -1114,6 +1119,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-igc_ray_caster_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-igc_rolling_shutter_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-igc_array_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_offset_correction_test.$(OBJEXT) \
 	$(am__objects_29) \
 	@srccartlab@/geocal_test_all-argus_camera_test.$(OBJEXT) \
@@ -1347,6 +1353,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/dem_match.h \
 	@srcimplementation@/igc_rolling_shutter.h \
 	@srcimplementation@/igc_array.h \
+	@srcimplementation@/igc_collection_rolling_shutter.h \
 	@srcimplementation@/rolling_shutter_constant_time_table.h \
 	@srcimplementation@/phase_correlation_matcher.h \
 	@srcimplementation@/quadratic_geometric_model.h \
@@ -2069,6 +2076,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/dem_match.cc \
 	@srcimplementation@/igc_rolling_shutter.cc \
 	@srcimplementation@/igc_array.cc \
+	@srcimplementation@/igc_collection_rolling_shutter.cc \
 	@srcimplementation@/rolling_shutter_constant_time_table.cc \
 	$(am__append_22) \
 	@srcimplementation@/quadratic_geometric_model.cc \
@@ -2185,6 +2193,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/igc_ray_caster_wrap.cc \
 	@swigsrc@/igc_rolling_shutter_wrap.cc \
 	@swigsrc@/igc_array_wrap.cc \
+	@swigsrc@/igc_collection_rolling_shutter_wrap.cc \
 	@swigsrc@/rolling_shutter_constant_time_table_wrap.cc \
 	@swigsrc@/orbit_offset_correction_wrap.cc \
 	@swigsrc@/argus_camera_wrap.cc @swigsrc@/argus_orbit_wrap.cc \
@@ -2335,6 +2344,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/dem_match.h \
 	@srcimplementation@/igc_rolling_shutter.h \
 	@srcimplementation@/igc_array.h \
+	@srcimplementation@/igc_collection_rolling_shutter.h \
 	@srcimplementation@/rolling_shutter_constant_time_table.h \
 	$(am__append_21) \
 	@srcimplementation@/quadratic_geometric_model.h \
@@ -2433,6 +2443,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/igc_ray_caster_test.cc \
 	@srcimplementation@/igc_rolling_shutter_test.cc \
 	@srcimplementation@/igc_array_test.cc \
+	@srcimplementation@/igc_collection_rolling_shutter_test.cc \
 	@srcimplementation@/orbit_offset_correction_test.cc \
 	$(am__append_35) @srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
@@ -2950,6 +2961,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-igc_array_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-igc_collection_rolling_shutter_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-rolling_shutter_constant_time_table_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_offset_correction_wrap.lo:  \
@@ -3299,6 +3312,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-igc_array.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-igc_collection_rolling_shutter.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-rolling_shutter_constant_time_table.lo:  \
@@ -3794,6 +3810,9 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-igc_array_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-orbit_offset_correction_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -4034,6 +4053,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-hdf_orbit_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_array_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_collection_rolling_shutter_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_image_to_image_match_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Po@am__quote@
@@ -4081,6 +4101,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ground_mask_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-hdf_orbit.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_array.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_collection_rolling_shutter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_image_to_image_match.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_map_projected.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Plo@am__quote@
@@ -4295,6 +4316,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-hdf_orbit_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ibis_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_array_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_collection_rolling_shutter_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_collection_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_image_to_image_match_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_map_projected_wrap.Plo@am__quote@
@@ -5158,6 +5180,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/igc_array_wrap.cc' object='@swigsrc@/_swig_wrap_la-igc_array_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-igc_array_wrap.lo `test -f '@swigsrc@/igc_array_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_array_wrap.cc
+
+@swigsrc@/_swig_wrap_la-igc_collection_rolling_shutter_wrap.lo: @swigsrc@/igc_collection_rolling_shutter_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-igc_collection_rolling_shutter_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_collection_rolling_shutter_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-igc_collection_rolling_shutter_wrap.lo `test -f '@swigsrc@/igc_collection_rolling_shutter_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_collection_rolling_shutter_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_collection_rolling_shutter_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_collection_rolling_shutter_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/igc_collection_rolling_shutter_wrap.cc' object='@swigsrc@/_swig_wrap_la-igc_collection_rolling_shutter_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-igc_collection_rolling_shutter_wrap.lo `test -f '@swigsrc@/igc_collection_rolling_shutter_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_collection_rolling_shutter_wrap.cc
 
 @swigsrc@/_swig_wrap_la-rolling_shutter_constant_time_table_wrap.lo: @swigsrc@/rolling_shutter_constant_time_table_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-rolling_shutter_constant_time_table_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-rolling_shutter_constant_time_table_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-rolling_shutter_constant_time_table_wrap.lo `test -f '@swigsrc@/rolling_shutter_constant_time_table_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/rolling_shutter_constant_time_table_wrap.cc
@@ -6047,6 +6076,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_array.cc' object='@srcimplementation@/libgeocal_la-igc_array.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-igc_array.lo `test -f '@srcimplementation@/igc_array.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_array.cc
+
+@srcimplementation@/libgeocal_la-igc_collection_rolling_shutter.lo: @srcimplementation@/igc_collection_rolling_shutter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-igc_collection_rolling_shutter.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_collection_rolling_shutter.Tpo -c -o @srcimplementation@/libgeocal_la-igc_collection_rolling_shutter.lo `test -f '@srcimplementation@/igc_collection_rolling_shutter.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_collection_rolling_shutter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_collection_rolling_shutter.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_collection_rolling_shutter.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_collection_rolling_shutter.cc' object='@srcimplementation@/libgeocal_la-igc_collection_rolling_shutter.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-igc_collection_rolling_shutter.lo `test -f '@srcimplementation@/igc_collection_rolling_shutter.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_collection_rolling_shutter.cc
 
 @srcimplementation@/libgeocal_la-rolling_shutter_constant_time_table.lo: @srcimplementation@/rolling_shutter_constant_time_table.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-rolling_shutter_constant_time_table.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-rolling_shutter_constant_time_table.Tpo -c -o @srcimplementation@/libgeocal_la-rolling_shutter_constant_time_table.lo `test -f '@srcimplementation@/rolling_shutter_constant_time_table.cc' || echo '$(srcdir)/'`@srcimplementation@/rolling_shutter_constant_time_table.cc
@@ -7678,6 +7714,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_array_test.cc' object='@srcimplementation@/geocal_test_all-igc_array_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_array_test.obj `if test -f '@srcimplementation@/igc_array_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_array_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_array_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.o: @srcimplementation@/igc_collection_rolling_shutter_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_collection_rolling_shutter_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.o `test -f '@srcimplementation@/igc_collection_rolling_shutter_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_collection_rolling_shutter_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_collection_rolling_shutter_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_collection_rolling_shutter_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_collection_rolling_shutter_test.cc' object='@srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.o `test -f '@srcimplementation@/igc_collection_rolling_shutter_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_collection_rolling_shutter_test.cc
+
+@srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.obj: @srcimplementation@/igc_collection_rolling_shutter_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_collection_rolling_shutter_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.obj `if test -f '@srcimplementation@/igc_collection_rolling_shutter_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_collection_rolling_shutter_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_collection_rolling_shutter_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_collection_rolling_shutter_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_collection_rolling_shutter_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_collection_rolling_shutter_test.cc' object='@srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_collection_rolling_shutter_test.obj `if test -f '@srcimplementation@/igc_collection_rolling_shutter_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_collection_rolling_shutter_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_collection_rolling_shutter_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-orbit_offset_correction_test.o: @srcimplementation@/orbit_offset_correction_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-orbit_offset_correction_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_offset_correction_test.Tpo -c -o @srcimplementation@/geocal_test_all-orbit_offset_correction_test.o `test -f '@srcimplementation@/orbit_offset_correction_test.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_offset_correction_test.cc

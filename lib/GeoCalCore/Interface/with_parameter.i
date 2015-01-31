@@ -32,6 +32,7 @@ class WithParameterNested: public WithParameter {
 public:
   WithParameterNested();
   void add_object(const boost::shared_ptr<WithParameter>& Obj);
+  void clear_object();
 };
 
 }

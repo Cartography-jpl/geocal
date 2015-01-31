@@ -315,8 +315,16 @@ class WithParameterNested(WithParameter):
         """
         return _with_parameter.WithParameterNested_add_object(self, *args)
 
+    def clear_object(self):
+        """
+        void GeoCal::WithParameterNested::clear_object()
+
+        """
+        return _with_parameter.WithParameterNested_clear_object(self)
+
     __swig_destroy__ = _with_parameter.delete_WithParameterNested
 WithParameterNested.add_object = new_instancemethod(_with_parameter.WithParameterNested_add_object,None,WithParameterNested)
+WithParameterNested.clear_object = new_instancemethod(_with_parameter.WithParameterNested_clear_object,None,WithParameterNested)
 WithParameterNested_swigregister = _with_parameter.WithParameterNested_swigregister
 WithParameterNested_swigregister(WithParameterNested)
 

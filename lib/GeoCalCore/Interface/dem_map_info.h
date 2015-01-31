@@ -108,7 +108,6 @@ protected:
 		  bool Outside_dem_is_error = false);
   friend class DemMapInfoOffset; // Allows this class access to the
 				 // protected member elevation.
-private:
   boost::shared_ptr<Datum> datum_; ///< Datum height is relative to.
   MapInfo map_info_;		   ///< Map info used to look up
 				   ///elevation values.
@@ -116,17 +115,17 @@ private:
 				   ///outside of underlying Dem will
 				   ///return 0, otherwise throw an
 				   ///exception. 
-#ifdef USE_BOOST_SERIALIZATON
+private:
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    // Don't fill in any of the member variables here. Pretty much all 
-    // derived classes need to call the initialization function for 
-    // this class anyways.
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Dem);
-  }
-#endif
+  // Note that we save the datum and outside_dem_is_error, but *not* 
+  // the map_info_. This is because generally the map_info_ is read
+  // from a file or something like that, and it doesn't make sense to
+  // store in the serialization. Derived classes should make sure
+  // to fill in map_info_.
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(DemMapInfo);
 #endif

@@ -43,8 +43,23 @@ public:
 //-----------------------------------------------------------------------
 
   enum access_type {READ, WRITE, UPDATE};
+
+//-----------------------------------------------------------------------
+/// Open an existing VICAR file for reading or update.
+///
+/// The Force_area_pixel forces the file to be treated as
+/// "pixel as area" rather than "pixel as point". This is really just
+/// meant as a work around for the SRTM data, which incorrectly labels
+/// the data as "point" rather than "area". Since this is a 15 meter
+/// difference, it matters for many applications. Most users should
+/// just ignore this value.
+//-----------------------------------------------------------------------
+
   VicarLiteFile(const std::string& Fname, access_type Access = READ,
-		bool Force_area_pixel = false);
+		bool Force_area_pixel = false)
+  {
+    initialize(Fname, Access, Force_area_pixel);
+  }
   VicarLiteFile(const std::string& Fname, int Number_line, int Number_sample,
 	    const std::string& Type = "BYTE");
   virtual ~VicarLiteFile() {}
@@ -220,14 +235,15 @@ private:
   std::map<std::string, std::string> label_;
   std::string read_label(int& lblsize);
   void process_label(const std::string& label);
-#ifdef USE_BOOST_SERIALIZATON
+  void initialize(const std::string& Fname, access_type Access = READ,
+	    bool Force_area_pixel = false);
+  VicarLiteFile() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version)
-  {
-    // Nothing to do
-  }
-#endif
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 //-----------------------------------------------------------------------
@@ -803,33 +819,13 @@ private:
   int band_;
   boost::shared_ptr<VicarLiteFile> f_;
   bool force_map_info_;
-#ifdef USE_BOOST_SERIALIZATON
   VicarLiteRasterImage() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void save(Archive & ar, const unsigned int version) const
-  {
-    ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImage);
-    ar << GEOCAL_NVP_(band)
-       << GEOCAL_NVP_(f)
-       << GEOCAL_NVP_(force_map_info)
-       << GEOCAL_NVP_(number_tile_line)
-       << GEOCAL_NVP_(number_tile_sample);
-  }
+  void save(Archive& Ar, const unsigned int version) const;
   template<class Archive>
-  void load(Archive & ar, const unsigned int version)
-  {
-    ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImage);
-    ar >> GEOCAL_NVP_(band)
-       >> GEOCAL_NVP_(f)
-       >> GEOCAL_NVP_(force_map_info)
-       >> GEOCAL_NVP_(number_tile_line)
-       >> GEOCAL_NVP_(number_tile_sample);
-    initialize();
-  }
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
-#endif
-
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 /****************************************************************//**
@@ -905,75 +901,18 @@ public:
 private:
   int band_;
   boost::shared_ptr<VicarLiteFile> f_;
-#ifdef USE_BOOST_SERIALIZATON
   VicarLiteDem() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void save(Archive & ar, const unsigned int version) const
-  {
-    using boost::serialization::make_nvp;
-    boost::shared_ptr<Datum> d = datum_ptr();
-    bool oerr = outside_dem_is_error();
-    ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo);
-    ar << GEOCAL_NVP_(band)
-       << GEOCAL_NVP_(f)
-       << make_nvp("datum", d)
-       << make_nvp("outside_dem_is_error", oerr);
-  }
+  void save(Archive& Ar, const unsigned int version) const;
   template<class Archive>
-  void load(Archive & ar, const unsigned int version)
-  {
-    using boost::serialization::make_nvp;
-    boost::shared_ptr<Datum> d;
-    bool oerr;
-    ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo);
-    ar >> GEOCAL_NVP_(band)
-       >> GEOCAL_NVP_(f)
-       >> make_nvp("datum", d)
-       >> make_nvp("outside_dem_is_error", oerr);
-    initialize(d, f_->map_info(), oerr);
-  }
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
-#endif
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
-
 
 }  
 
-#ifdef USE_BOOST_SERIALIZATON
-// This is a little more complicated, because we can't really
-// construct a object using a default constructor. So we need to
-// directly handle the object construction.
-namespace boost { namespace serialization {
-template<class Archive> 
-inline void save_construct_data(Archive & ar, const GeoCal::VicarLiteFile* d, 
-			 const unsigned int version)
-{
-  void_cast_register(static_cast<GeoCal::VicarLiteFile*>(0),
-		     static_cast<GeoCal::GenericObject*>(0));
-  std::string file_name = d->file_name();
-  GeoCal::VicarLiteFile::access_type access_type = d->access();
-  bool force_area_pixel = d->force_area_pixel();
-  ar << GEOCAL_NVP(file_name)
-     << GEOCAL_NVP(access_type)
-     << GEOCAL_NVP(force_area_pixel);
-}
-template<class Archive>
-inline void load_construct_data(Archive & ar, GeoCal::VicarLiteFile* d,
-				const unsigned int version)
-{
-  void_cast_register(static_cast<GeoCal::VicarLiteFile*>(0),
-		     static_cast<GeoCal::GenericObject*>(0));
-  std::string file_name;
-  GeoCal::VicarLiteFile::access_type access_type;
-  bool force_area_pixel;
-  ar >> GEOCAL_NVP(file_name)
-     >> GEOCAL_NVP(access_type)
-     >> GEOCAL_NVP(force_area_pixel);
-  ::new(d)GeoCal::VicarLiteFile(file_name, access_type, force_area_pixel);
-}
-  }
-}
-#endif
-
+GEOCAL_EXPORT_KEY(VicarLiteFile)
+GEOCAL_EXPORT_KEY(VicarLiteDem)
+GEOCAL_EXPORT_KEY(VicarLiteRasterImage)
 #endif

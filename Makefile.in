@@ -9122,8 +9122,8 @@ clean_unit_test:
 @WITH_DOCUMENTATION_TRUE@	export PATH=$(bindir):$$PATH && \
 @WITH_DOCUMENTATION_TRUE@        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
 @WITH_DOCUMENTATION_TRUE@        srcdir=$(srcdir)/@libgeocal@ DOCDIR=doc/geocal $(DOXYGEN) $(srcdir)/config/doxygen.cfg
-@WITH_DOCUMENTATION_TRUE@	cp README.developer doc/geocal/html
-@WITH_DOCUMENTATION_TRUE@	cp INSTALL doc/geocal/html
+@WITH_DOCUMENTATION_TRUE@	cp $(srcdir)/$(geocal_topdir)/README.developer doc/geocal/html
+@WITH_DOCUMENTATION_TRUE@	cp $(srcdir)/$(geocal_topdir)/INSTALL doc/geocal/html
 
 @WITH_DOCUMENTATION_TRUE@install_doxygen_doc: doc/geocal.tag
 @WITH_DOCUMENTATION_TRUE@	@COPY_DIRECTORY@ doc/geocal/html "$(DESTDIR)$(geocaldocdir)"

@@ -157,8 +157,8 @@ doc/geocal.tag: $(geocalinc_HEADERS) $(libgeocal_la_SOURCES) config/doxygen.cfg 
 	export PATH=$(bindir):$$PATH && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         srcdir=$(srcdir)/@libgeocal@ DOCDIR=doc/geocal $(DOXYGEN) $(srcdir)/config/doxygen.cfg
-	cp README.developer doc/geocal/html
-	cp INSTALL doc/geocal/html
+	cp $(srcdir)/$(geocal_topdir)/README.developer doc/geocal/html
+	cp $(srcdir)/$(geocal_topdir)/INSTALL doc/geocal/html
 
 geocaldocdir = ${datarootdir}/doc/geocal
 geocaldocsearchdir = ${geocaldocdir}/html/search

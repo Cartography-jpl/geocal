@@ -204,7 +204,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   if(!have_serialize_supported() || !orb)
     return;
   std::string d = serialize_write_string(igc);
-  if(true)
+  if(false)
     std::cerr << d;
   boost::shared_ptr<IgcRollingShutter> igcr = 
     serialize_read_string<IgcRollingShutter>(d);

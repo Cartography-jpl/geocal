@@ -80,6 +80,8 @@ geocalinc_HEADERS+= @srcimplementation@/dem_match.h
 libgeocal_la_SOURCES+= @srcimplementation@/dem_match.cc
 geocalinc_HEADERS+= @srcimplementation@/igc_rolling_shutter.h
 libgeocal_la_SOURCES+= @srcimplementation@/igc_rolling_shutter.cc
+geocalinc_HEADERS+= @srcimplementation@/igc_array.h
+libgeocal_la_SOURCES+= @srcimplementation@/igc_array.cc
 geocalinc_HEADERS+= @srcimplementation@/rolling_shutter_constant_time_table.h
 libgeocal_la_SOURCES+= @srcimplementation@/rolling_shutter_constant_time_table.cc
 if HAVE_FFTW
@@ -194,6 +196,7 @@ SWIG_SRC += @swigsrc@/orbit_data_image_ground_connection_wrap.cc
 SWIG_SRC += @swigsrc@/planet_coordinate_wrap.cc
 SWIG_SRC += @swigsrc@/igc_ray_caster_wrap.cc
 SWIG_SRC += @swigsrc@/igc_rolling_shutter_wrap.cc
+SWIG_SRC += @swigsrc@/igc_array_wrap.cc
 SWIG_SRC += @swigsrc@/rolling_shutter_constant_time_table_wrap.cc
 SWIG_SRC += @swigsrc@/orbit_offset_correction_wrap.cc
 SWIG_SRC_HDF5 += @swigsrc@/hdf_orbit_wrap.cc
@@ -236,6 +239,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/quadratic_geometric_model_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/geometric_model_image_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_ray_caster_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_rolling_shutter_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/igc_array_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_offset_correction_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@

@@ -1,6 +1,7 @@
 #include "igc_array.h"
 #include "geocal_serialize_support.h"
 using namespace GeoCal;
+
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
 void IgcArray::serialize(Archive & ar, const unsigned int version)
@@ -15,6 +16,18 @@ void IgcArray::serialize(Archive & ar, const unsigned int version)
 
 GEOCAL_IMPLEMENT(IgcArray);
 #endif
+
+//-----------------------------------------------------------------------
+/// Constructor
+//-----------------------------------------------------------------------
+
+IgcArray::IgcArray
+(const std::vector<boost::shared_ptr<ImageGroundConnection> >& Igc_list)
+    : igc_list(Igc_list) 
+{
+  BOOST_FOREACH(boost::shared_ptr<ImageGroundConnection> igc, igc_list)
+    add_object(igc);
+}
 
 // See base class for description.
 void IgcArray::print(std::ostream& Os) const

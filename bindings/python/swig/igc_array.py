@@ -136,9 +136,9 @@ class IgcArray(geocal_swig.igc_collection.IgcCollection):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::IgcArray::IgcArray(const std::vector< boost::shared_ptr< ImageGroundConnection > >
+        IgcArray::IgcArray(const std::vector< boost::shared_ptr< ImageGroundConnection > >
         &Igc_list)
-
+        Constructor. 
         """
         _igc_array.IgcArray_swiginit(self,_igc_array.new_IgcArray(*args))
     def image_ground_connection(self, *args):

@@ -5333,9 +5333,9 @@ SWIGINTERN PyObject *IgcArray_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject 
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_IgcArray", (PyCFunction)_wrap_new_IgcArray, METH_O, (char *)"\n"
-		"GeoCal::IgcArray::IgcArray(const std::vector< boost::shared_ptr< ImageGroundConnection > >\n"
+		"IgcArray::IgcArray(const std::vector< boost::shared_ptr< ImageGroundConnection > >\n"
 		"&Igc_list)\n"
-		"\n"
+		"Constructor. \n"
 		""},
 	 { (char *)"IgcArray_image_ground_connection", _wrap_IgcArray_image_ground_connection, METH_VARARGS, (char *)"\n"
 		"virtual boost::shared_ptr<ImageGroundConnection> GeoCal::IgcArray::image_ground_connection(int Image_index) const\n"

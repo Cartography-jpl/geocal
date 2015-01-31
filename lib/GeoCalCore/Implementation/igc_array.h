@@ -12,10 +12,7 @@ class IgcArray : public virtual IgcCollection,
 		 public virtual WithParameterNested {
 public:
   IgcArray(const std::vector<boost::shared_ptr<ImageGroundConnection> >& 
-	   Igc_list)
-    : igc_list(Igc_list) 
-  {
-  }
+	   Igc_list);
   virtual ~IgcArray() {}
   virtual int number_image() const { return (int) igc_list.size(); }
   virtual boost::shared_ptr<ImageGroundConnection> 

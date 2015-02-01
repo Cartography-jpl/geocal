@@ -6095,7 +6095,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"IgcCollectionRollingShutter_add_image", _wrap_IgcCollectionRollingShutter_add_image, METH_VARARGS, (char *)"\n"
 		"void GeoCal::IgcCollectionRollingShutter::add_image(const boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<\n"
-		"TimeTable > &Tt)\n"
+		"TimeTable > &Tt, const std::string &Title)\n"
 		"Add a image and time table to create a ImageGroundConnection to the\n"
 		"end of our collection. \n"
 		""},

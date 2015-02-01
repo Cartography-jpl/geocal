@@ -146,7 +146,7 @@ class IgcCollectionRollingShutter(geocal_swig.igc_collection.IgcCollection):
     def add_image(self, *args):
         """
         void GeoCal::IgcCollectionRollingShutter::add_image(const boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<
-        TimeTable > &Tt)
+        TimeTable > &Tt, const std::string &Title)
         Add a image and time table to create a ImageGroundConnection to the
         end of our collection. 
         """

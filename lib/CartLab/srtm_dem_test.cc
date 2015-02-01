@@ -23,32 +23,24 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
-#ifdef HAVE_BOOST_SERIALIZATON
-  if(!VicarFile::vicar_available())
+  if(!have_serialize_supported() || !VicarFile::vicar_available())
     return;
-  boost::shared_ptr<Dem> d;
+  boost::shared_ptr<Dem> dem;
   try {
-    d.reset(new SrtmDem());
+    dem.reset(new SrtmDem());
   } catch(const Exception&) {
     // Don't worry if we can't find the data, just skip test.
     BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
     return;
   } 
-  std::ostringstream os;
-  boost::archive::xml_oarchive oa(os);
-
-  oa << GEOCAL_NVP(d);
+  std::string d = serialize_write_string(dem);
   if(false)
-    std::cerr << os.str();
+    std::cerr << d;
+  boost::shared_ptr<SrtmDem> demr = 
+    serialize_read_string<SrtmDem>(d);
 
-  std::istringstream is(os.str());
-  boost::archive::xml_iarchive ia(is);
-  boost::shared_ptr<Dem> dr;
-  ia >> GEOCAL_NVP(dr);
-
-  BOOST_CHECK_CLOSE(dr->height_reference_surface(Geodetic(34.2,-118.03)),
+  BOOST_CHECK_CLOSE(demr->height_reference_surface(Geodetic(34.2,-118.03)),
 		    888.656, 1e-4);
-#endif
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -1,7 +1,30 @@
 #include "srtm_dem.h"
+#include "geocal_serialize_support.h"
 #include <stdlib.h>
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void SrtmDem::save(Archive & ar, const unsigned int version) const
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
+    & GEOCAL_NVP(dbname) & GEOCAL_NVP(dirbase);
+}
+
+template<class Archive>
+void SrtmDem::load(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
+    & GEOCAL_NVP(dbname) & GEOCAL_NVP(dirbase);
+  
+  f.reset(new VicarMultiFile(dbname, dirbase, "", 10000, 10000, 100000, 4, 4, 
+			      false, outside_dem_is_error_, 0, true));
+  map_info_ = f->map_info();
+}
+
+GEOCAL_SPLIT_IMPLEMENT(SrtmDem);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor. You can provide the database file to use and the 

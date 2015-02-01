@@ -1,7 +1,31 @@
 #include "datum_geoid96.h"
+#include "geocal_serialize_support.h"
 #include <stdlib.h>
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void DatumGeoid96::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(Datum);
+  GEOCAL_BASE(DatumGeoid96, Datum);
+  std::string fname = file_name();
+  ar & GEOCAL_NVP(fname);
+}
+
+template<class Archive>
+void DatumGeoid96::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Datum);
+  GEOCAL_BASE(DatumGeoid96, Datum);
+  std::string fname;
+  ar & GEOCAL_NVP(fname);
+  data.reset(new VicarRasterImage(fname));
+}
+
+GEOCAL_SPLIT_IMPLEMENT(DatumGeoid96);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor. You can pass the datum file to read, but if you leave

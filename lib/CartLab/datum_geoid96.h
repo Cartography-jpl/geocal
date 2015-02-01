@@ -17,44 +17,14 @@ public:
   virtual void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<VicarRasterImage> data;
-#ifdef USE_BOOST_SERIALIZATON
   friend class boost::serialization::access;
   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    // Nothing to do here, since save_construct_data and
-    // load_construct_data handles everything
-  }
-#endif
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 }
-#ifdef USE_BOOST_SERIALIZATON
-// This is a little more complicated, because we can't really
-// construct a object using a default constructor. So we need to
-// directly handle the object construction.
-namespace boost { namespace serialization {
-template<class Archive> 
-inline void save_construct_data(Archive & ar, const GeoCal::DatumGeoid96* d, 
-			 const unsigned int version)
-{
-  void_cast_register(static_cast<GeoCal::DatumGeoid96*>(0),
-		     static_cast<GeoCal::Datum*>(0));
-  std::string file_name = d->file_name();
-  ar << GEOCAL_NVP(file_name);
-}
-template<class Archive>
-inline void load_construct_data(Archive & ar, GeoCal::DatumGeoid96* d,
-				const unsigned int version)
-{
-  void_cast_register(static_cast<GeoCal::DatumGeoid96*>(0),
-		     static_cast<GeoCal::Datum*>(0));
-  std::string file_name;
-  ar >> GEOCAL_NVP(file_name);
-  ::new(d)GeoCal::DatumGeoid96(file_name);
-}
-  }
-}
-#endif
-
+GEOCAL_EXPORT_KEY(DatumGeoid96);
 #endif

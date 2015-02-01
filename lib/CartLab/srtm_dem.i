@@ -19,7 +19,6 @@ public:
   virtual double elevation(int Y_index, int X_index) const;
   %python_attribute(database_name, std::string)
   %python_attribute(directory_base, std::string)
-  %pickle_init(1, self.database_name, self.directory_base, 
-	       self.outside_dem_is_error, self.datum)
+  %pickle_serialization()
 };
 }

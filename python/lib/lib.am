@@ -16,7 +16,6 @@ geocalpkgpython_PYTHON+= @srcpythonlib@/tie_point_collect.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/raster_image_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/lm_optimize.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/vicar_wrap.py
-geocalpkgpython_PYTHON+= @srcpythonlib@/igc_collection_rolling_shutter.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/instrument_reflectance.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/geoeye1_reflectance.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/ikonos_reflectance.py

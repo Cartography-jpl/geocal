@@ -2,7 +2,6 @@ from nose.tools import *
 from geocal_swig import *
 from tie_point import *
 from image_ground_connection import *
-from igc_offset_correction import *
 from simultaneous_bundle_adjustment import *
 from lm_optimize import *
 from nose.plugins.skip import Skip, SkipTest

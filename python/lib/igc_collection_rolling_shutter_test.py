@@ -1,20 +1,10 @@
 from nose.tools import *
 import cPickle
 from geocal_swig import *
-from igc_collection_rolling_shutter import *
 from nose.plugins.skip import Skip, SkipTest
 import numpy.testing as npt
 import scipy.optimize
 import numpy as np
-
-def determine_quat_rot(v1, v2):
-    '''This finds the quaternion that rotates v1 to v2. Note that
-    this isn't actually unique, but this is the 'shortest arc' solution.'''
-    a = np.cross(v1, v2)
-    w = np.linalg.norm(v1) * np.linalg.norm(v1) + np.dot(v1, v2)
-    q = Quaternion_double(w, a[0], a[1], a[2])
-    q /= Quaternion_double_abs(q)
-    return q
 
 def determine_orbit_parm(gp, igccol, i):
     '''This adjusts the orbit parameters so that the given ground point
@@ -39,17 +29,6 @@ def determine_orbit_parm(gp, igccol, i):
         [y / arcsecond_to_rad, p / arcsecond_to_rad, r / arcsecond_to_rad]
     orb.parameter = parm
 
-def test_determine_quat_rot():
-    v1 = np.array([1.0,0.0,0.0])
-    v2 = np.array([0.5,0.6,0.7])
-    v2 /= np.linalg.norm(v2)
-    v1_q = Quaternion_double(0.0, v1[0], v1[1], v1[2])
-    q = determine_quat_rot(v1, v2)
-    v2_q = q * v1_q * q.conj()
-    v2_c = np.array([v2_q.R_component_2, v2_q.R_component_3, v2_q.R_component_4])
-    np.testing.assert_almost_equal(v2, v2_c)
-
-
 def test_igc_collection_rolling_shutter():
     tmin = Time.parse_time("1998-06-30T10:51:28.32Z");
     dem = SimpleDem()
@@ -59,17 +38,15 @@ def test_igc_collection_rolling_shutter():
                            QuaternionCamera.LINE_IS_Y)
     orb_uncorr = KeplerOrbit(tmin, tmin + 1000)
     orb = OrbitOffsetCorrection(orb_uncorr)
-    ttlist = []
-    imglist = []
+    igccol = IgcCollectionRollingShutter(orb, cam, dem)
     for i in range(10):
         t = tmin + 20 * i
         orb.insert_time_point(t)
         tspace = 1e-3;
-        ttlist.append(RollingShutterConstantTimeTable(t, 
-           t + cam.number_line(0) * tspace, tspace));
-        imglist.append(None)
-    igccol = IgcCollectionRollingShutter(imglist=imglist, ttlist=ttlist,
-                                        orbit=orb, cam=cam, dem=dem)
+        tt = RollingShutterConstantTimeTable(t, 
+           t + cam.number_line(0) * tspace, tspace);
+        title = "Image %d" % (i+1)
+        igccol.add_image(None, tt, title)
     t = cPickle.dumps(igccol)
     igccol2 = cPickle.loads(t)
     # Set things up so that all the igc point to the same location

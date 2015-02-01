@@ -18,20 +18,4 @@ def generate_igc():
                            QuaternionCamera.LINE_IS_Y)
     orb_uncorr = KeplerOrbit(tmin, tmin + 1000)
     orb = OrbitOffsetCorrection (orb_uncorr)
-    igcol = IgcArray()
-    for i in range(10):
-        t = tmin + 20 * i
-        orb.insert_time_point(t)
-        tspace = 1e-3;
-        tt = RollingShutterConstantTimeTable(t, 
-            t + cam.number_line(0) * tspace, tspace);
-        igcol.igc.append(IgcRollingShutter(orb, tt, cam, dem, None))
-        
-    ic = ImageCoordinate(100, 200)
-    gp = igcol.ground_coordinate(4, ic)
-    print gp
-    igc = igc
-    def f(x):
-        igcol.
-    g = lambda x: distance(igcol.ground_coo
         

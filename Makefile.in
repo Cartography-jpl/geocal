@@ -1233,7 +1233,6 @@ am__geocalpkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/tie_point_collect.py \
 	@srcpythonlib@/raster_image_extension.py \
 	@srcpythonlib@/lm_optimize.py @srcpythonlib@/vicar_wrap.py \
-	@srcpythonlib@/igc_collection_rolling_shutter.py \
 	@srcpythonlib@/instrument_reflectance.py \
 	@srcpythonlib@/geoeye1_reflectance.py \
 	@srcpythonlib@/ikonos_reflectance.py \
@@ -2557,7 +2556,6 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/tie_point_collect.py \
 	@srcpythonlib@/raster_image_extension.py \
 	@srcpythonlib@/lm_optimize.py @srcpythonlib@/vicar_wrap.py \
-	@srcpythonlib@/igc_collection_rolling_shutter.py \
 	@srcpythonlib@/instrument_reflectance.py \
 	@srcpythonlib@/geoeye1_reflectance.py \
 	@srcpythonlib@/ikonos_reflectance.py \

@@ -13,7 +13,8 @@ void IgcCollectionRollingShutter::serialize(Archive & ar, const unsigned int ver
   GEOCAL_BASE(IgcCollection, IgcCollection);
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested);
   ar & GEOCAL_NVP(orb) & GEOCAL_NVP(cam) & GEOCAL_NVP_(dem)
-    & GEOCAL_NVP(img_list) & GEOCAL_NVP(tt_list);
+    & GEOCAL_NVP(img_list) & GEOCAL_NVP(tt_list)
+    & GEOCAL_NVP(title_list);
 }
 
 GEOCAL_IMPLEMENT(IgcCollectionRollingShutter);
@@ -27,7 +28,9 @@ IgcCollectionRollingShutter::image_ground_connection(int Image_index) const
   if(!igc_cache[Image_index])
     igc_cache[Image_index].reset
       (new IgcRollingShutter(orb, tt_list[Image_index], cam, dem_,
-			     img_list[Image_index]));
+			     img_list[Image_index],
+			     IgcRollingShutter::ROLL_LINE_DIRECTION,
+			     title_list[Image_index]));
   return igc_cache[Image_index];
 }
 
@@ -50,11 +53,13 @@ IgcCollectionRollingShutter::subset(const std::vector<int>& Index_set) const
 {
   std::vector<boost::shared_ptr<RasterImage> > ilist;
   std::vector<boost::shared_ptr<TimeTable> > tlist;
+  std::vector<std::string> tllist;
   BOOST_FOREACH(int i, Index_set) {
     range_check(i, 0, number_image());
     ilist.push_back(img_list[i]);
     tlist.push_back(tt_list[i]);
+    tllist.push_back(title_list[i]);
   }
   return boost::shared_ptr<IgcCollection>
-    (new IgcCollectionRollingShutter(ilist, tlist, orb, cam, dem_));
+    (new IgcCollectionRollingShutter(ilist, tlist, tllist, orb, cam, dem_));
 }

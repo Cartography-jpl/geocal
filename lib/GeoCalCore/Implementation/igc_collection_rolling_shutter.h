@@ -15,13 +15,18 @@ public:
   IgcCollectionRollingShutter
   (const std::vector<boost::shared_ptr<RasterImage> >& Img_list, 
    const std::vector<boost::shared_ptr<TimeTable> >& Tt_list,
+   const std::vector<std::string>& Title_list,
    const boost::shared_ptr<Orbit>& Orb,
    const boost::shared_ptr<Camera>& Cam,
    const boost::shared_ptr<Dem>& D)
-    : orb(Orb), cam(Cam), dem_(D), img_list(Img_list), tt_list(Tt_list)
+    : orb(Orb), cam(Cam), dem_(D), img_list(Img_list), tt_list(Tt_list),
+      title_list(Title_list)
   {
     add_object(Orb);
     add_object(Cam);
+    if(img_list.size() != tt_list.size() ||
+       img_list.size() != title_list.size())
+      throw Exception("All the lists need to be the same size.");
   }
   IgcCollectionRollingShutter
   (const boost::shared_ptr<Orbit>& Orb,
@@ -38,8 +43,8 @@ public:
   virtual boost::shared_ptr<ImageGroundConnection> 
   image_ground_connection(int Image_index) const;
   virtual void print(std::ostream& Os) const;
-  virtual boost::shared_ptr<IgcCollection> 
-  subset(const std::vector<int>& Index_set) const;
+  virtual boost::shared_ptr<IgcCollection>  
+ subset(const std::vector<int>& Index_set) const;
 
 //-----------------------------------------------------------------------
 /// Add a image and time table to create a ImageGroundConnection to
@@ -47,10 +52,12 @@ public:
 //-----------------------------------------------------------------------
 
   void add_image(const boost::shared_ptr<RasterImage>& Img,
-		 const boost::shared_ptr<TimeTable>& Tt)
+		 const boost::shared_ptr<TimeTable>& Tt,
+		 const std::string& Title)
   {
     img_list.push_back(Img);
     tt_list.push_back(Tt);
+    title_list.push_back(Title);
   }
 
 //-----------------------------------------------------------------------
@@ -94,6 +101,7 @@ private:
   boost::shared_ptr<Dem> dem_;
   std::vector<boost::shared_ptr<RasterImage> > img_list;
   std::vector<boost::shared_ptr<TimeTable> > tt_list;
+  std::vector<std::string> title_list;
   mutable std::vector<boost::shared_ptr<ImageGroundConnection> > igc_cache;
   void clear_cache() const
   {

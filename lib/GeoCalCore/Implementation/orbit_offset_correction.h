@@ -77,6 +77,16 @@ public:
   std::vector<Time> time_point() const;
 
 //-----------------------------------------------------------------------
+/// Directly update the quaternion at time_point i. This is
+/// occasionally more convenient that updating the parameters.
+//-----------------------------------------------------------------------
+  void update_quaterion(int Ind, const boost::math::quaternion<double>& Q)
+  {
+    range_check(Ind, 0, (int) time_point().size());
+    att_corr[time_point()[Ind]] = Q;
+  }
+
+//-----------------------------------------------------------------------
 /// Add a time pointer where we are going to do an attitude correction.
 //-----------------------------------------------------------------------
   void insert_time_point(Time T_pt)

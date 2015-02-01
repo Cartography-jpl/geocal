@@ -250,6 +250,15 @@ class OrbitOffsetCorrection(geocal_swig.orbit.Orbit):
     def orbit_uncorrected(self):
         return self._v_orbit_uncorrected()
 
+    def update_quaterion(self, *args):
+        """
+        void GeoCal::OrbitOffsetCorrection::update_quaterion(int Ind, const boost::math::quaternion< double > &Q)
+        Directly update the quaternion at time_point i.
+
+        This is occasionally more convenient that updating the parameters. 
+        """
+        return _orbit_offset_correction.OrbitOffsetCorrection_update_quaterion(self, *args)
+
     def insert_time_point(self, *args):
         """
         void GeoCal::OrbitOffsetCorrection::insert_time_point(Time T_pt)
@@ -274,6 +283,7 @@ OrbitOffsetCorrection._v_fit_yaw = new_instancemethod(_orbit_offset_correction.O
 OrbitOffsetCorrection._v_fit_pitch = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_pitch,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection._v_fit_roll = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_roll,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection._v_orbit_uncorrected = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_orbit_uncorrected,None,OrbitOffsetCorrection)
+OrbitOffsetCorrection.update_quaterion = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_update_quaterion,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection.insert_time_point = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_insert_time_point,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection.orbit_data = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_orbit_data,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection_swigregister = _orbit_offset_correction.OrbitOffsetCorrection_swigregister

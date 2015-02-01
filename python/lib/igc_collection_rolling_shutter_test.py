@@ -22,12 +22,7 @@ def determine_orbit_parm(gp, igccol, i):
     v2 = np.array([t.direction[0], t.direction[1], t.direction[2]])
     
     # Quaternion that does that
-    q = determine_quat_rot(v2, v1)
-    y,p,r = quat_to_ypr(q)
-    parm = orb.parameter.copy()
-    parm[(3 + i * 3):(3 + i * 3 + 3)] = \
-        [y / arcsecond_to_rad, p / arcsecond_to_rad, r / arcsecond_to_rad]
-    orb.parameter = parm
+    orb.update_quaterion(i, determine_quat_rot(v2, v1))
 
 def test_igc_collection_rolling_shutter():
     tmin = Time.parse_time("1998-06-30T10:51:28.32Z");

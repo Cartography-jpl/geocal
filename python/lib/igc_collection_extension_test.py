@@ -133,4 +133,28 @@ def test_igc_array_with_igc_collection():
     # We got the result we expect from running the igc_array test above
     assert_almost_equal(jac[0, 4], 15387.7492279, 2)
     assert_almost_equal(jac[1, 5], 17633.137014, 2)
- 
+
+def test_igc_collection_rolling_shutter():
+    '''Test IgcCollectionRollingShutter.'''
+    tmin = Time.parse_time("1998-06-30T10:51:28.32Z");
+    dem = SimpleDem()
+    cam = QuaternionCamera(quat_rot("zyx", 0.1, 0.2, 0.3),
+                           3375, 3648, 1.0 / 2500000, 1.0 / 2500000,
+                           1.0, FrameCoordinate(1688.0, 1824.5),
+                           QuaternionCamera.LINE_IS_Y)
+    orb = KeplerOrbit(tmin, tmin + 1000)
+    igccol = IgcCollectionRollingShutter(orb, cam, dem)
+    for i in range(10):
+        t = tmin + 20 * i
+        tspace = 1e-3;
+        tt = RollingShutterConstantTimeTable(t, 
+           t + cam.number_line(0) * tspace, tspace);
+        title = "Image %d" % (i+1)
+        igccol.add_image(None, tt, title)
+    ic = ImageCoordinate(cam.number_line(0) / 2, cam.number_sample(0) / 2)
+    igccol.determine_orbit_to_match(ic, 4)
+    gp = igccol.ground_coordinate(4, ic)
+    for i in range(10):
+        assert abs(igccol.image_coordinate(i, gp).line - ic.line) < 0.1
+        assert abs(igccol.image_coordinate(i, gp).sample - ic.sample) < 0.1
+

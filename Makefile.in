@@ -162,7 +162,8 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 # Generate doxygen documentation
 @WITH_DOCUMENTATION_TRUE@am__append_9 = config/doxygen.cfg \
 @WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
-@WITH_DOCUMENTATION_TRUE@	config/doxy2swig.py
+@WITH_DOCUMENTATION_TRUE@	config/doxy2swig.py README.developer \
+@WITH_DOCUMENTATION_TRUE@	INSTALL
 @WITH_DOCUMENTATION_TRUE@am__append_10 = install_doxygen_doc \
 @WITH_DOCUMENTATION_TRUE@	install_python_doc
 @WITH_DOCUMENTATION_TRUE@am__append_11 = clean_doxygen_doc

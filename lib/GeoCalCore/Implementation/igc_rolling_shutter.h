@@ -90,6 +90,10 @@ public:
     return t; }
   virtual void print(std::ostream& Os) const;
 
+  virtual int number_line() { return cam->number_line(0); }
+  virtual int number_sample() { return cam->number_sample(0); }
+  virtual int number_band() { return cam->number_band(); }
+
 //-----------------------------------------------------------------------
 /// Orbit that we are using
 //-----------------------------------------------------------------------

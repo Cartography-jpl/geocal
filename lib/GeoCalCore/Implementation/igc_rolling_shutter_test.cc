@@ -67,8 +67,8 @@ BOOST_AUTO_TEST_CASE(footprint_resolution)
   double lres, sres;
   igc->footprint_resolution(igc->number_line() / 2, igc->number_sample() / 2,
 			    lres, sres);
-  BOOST_CHECK_CLOSE(lres, 0.27269241745720268, 1e-2);
-  BOOST_CHECK_CLOSE(sres, 0.26963127284746102, 1e-2);
+  BOOST_CHECK_CLOSE(lres, 0.27269241745720268, 1e-1);
+  BOOST_CHECK_CLOSE(sres, 0.26963127284746102, 1e-1);
 }
 
 BOOST_AUTO_TEST_CASE(ground_position)

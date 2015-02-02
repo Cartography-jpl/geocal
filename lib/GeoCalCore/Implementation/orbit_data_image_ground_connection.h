@@ -57,7 +57,7 @@ public:
       refraction_(Ref),
       res(Resolution), b(Band), max_h(Max_height) 
   {
-    od = Orb.orbit_data(Tm);
+    od = Orb.orbit_data(TimeWithDerivative(Tm));
     Orb.add_observer(*this);
   }
 
@@ -67,7 +67,7 @@ public:
 
   virtual ~OrbitDataImageGroundConnection() {}
   virtual void notify_update(const Orbit& Orb)
-  { od = Orb.orbit_data(od->time()); }
+  { od = Orb.orbit_data(od->time_with_derivative()); }
   virtual blitz::Array<double, 7> 
   cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
 		     int nsubpixel_line = 1, 

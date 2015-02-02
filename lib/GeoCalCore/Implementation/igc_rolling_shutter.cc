@@ -200,6 +200,8 @@ ImageCoordinate IgcRollingShutter::image_coordinate
   IgcRollingShutterHelper::IcEq 
     eq(orbit_, time_table_, cam, Gc.convert_to_cf(), 
        time_table_->min_time(), b);
+  if(eq(0) * eq(time_table_->max_time() - time_table_->min_time()) > 0)
+    throw ImageGroundConnectionFailed();
   double t = gsl_root(eq, 0, time_table_->max_time() - 
 		      time_table_->min_time(), time_tolerance_);
   return eq.image_coordinate(t);
@@ -213,6 +215,8 @@ blitz::Array<double, 2> IgcRollingShutter::image_coordinate_jac_parm
   IgcRollingShutterHelper::IcEq 
     eq(orbit_, time_table_, cam, Gc.convert_to_cf(), 
        time_table_->min_time(), b);
+  if(eq(0) * eq(time_table_->max_time() - time_table_->min_time()) > 0)
+    throw ImageGroundConnectionFailed();
   AutoDerivative<double> t = 
     gsl_root_with_derivative(eq, 0, time_table_->max_time() - 
 			     time_table_->min_time(), time_tolerance_);

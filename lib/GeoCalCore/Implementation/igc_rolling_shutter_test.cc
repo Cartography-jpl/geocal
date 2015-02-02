@@ -199,6 +199,23 @@ BOOST_AUTO_TEST_CASE(image_coordinate_timing)
     ImageCoordinate ic = igc->image_coordinate(*gc);
 }
 
+BOOST_AUTO_TEST_CASE(handling_outside_points)
+{
+  // Test handling ground points either before or after the coverage
+  // of the Igc
+  Time tmin = igc->time_table()->min_time();
+  boost::shared_ptr<OrbitData> od = igc->orbit()->orbit_data(tmin - 10.0);
+  boost::shared_ptr<GroundCoordinate> gc =
+    od->surface_intersect(*igc->camera(), FrameCoordinate(0,100), igc->dem());
+  BOOST_CHECK_THROW(igc->image_coordinate(*gc), ImageGroundConnectionFailed);
+  Time tmax = igc->time_table()->max_time();
+  od = igc->orbit()->orbit_data(tmin + 10.0);
+  gc = 
+    od->surface_intersect(*igc->camera(), FrameCoordinate(4000,100), 
+			  igc->dem());
+  BOOST_CHECK_THROW(igc->image_coordinate(*gc), ImageGroundConnectionFailed);
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported() || !orb)

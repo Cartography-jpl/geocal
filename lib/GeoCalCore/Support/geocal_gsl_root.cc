@@ -97,8 +97,10 @@ GeoCal::gsl_root(const VFunctor& F, const blitz::Array<double, 1>& Initial,
   gf.f = &vfunctor_adapter;
   gf.n = Initial.extent(0);
   gf.params = static_cast<void*>(const_cast<VFunctor*>(&F));
-  gsl_multiroot_fsolver_set(w.fsolver, &gf, x.gsl());
-  int status = GSL_CONTINUE;
+  int status;
+  status = gsl_multiroot_fsolver_set(w.fsolver, &gf, x.gsl());
+  gsl_check(status);
+  status = GSL_CONTINUE;
   for(int i = 0; i < 1000 && status ==GSL_CONTINUE; ++i) {
     status = gsl_multiroot_fsolver_iterate(w.fsolver);
     if(status)
@@ -137,8 +139,10 @@ GeoCal::gsl_root(const VFunctorWithDerivative& F,
   gf.fdf = &vdffunctor_adapter2;
   gf.n = Initial.extent(0);
   gf.params = static_cast<void*>(const_cast<VFunctorWithDerivative*>(&F));
-  gsl_multiroot_fdfsolver_set(w.fsolver, &gf, x.gsl());
-  int status = GSL_CONTINUE;
+  int status;
+  status = gsl_multiroot_fdfsolver_set(w.fsolver, &gf, x.gsl());
+  gsl_check(status);
+  status = GSL_CONTINUE;
   for(int i = 0; i < 1000 && status ==GSL_CONTINUE; ++i) {
     status = gsl_multiroot_fdfsolver_iterate(w.fsolver);
     if(status)
@@ -173,10 +177,13 @@ GeoCal::gsl_root(const DFunctor& F, double Xmin, double Xmax,
   gsl_function gf;
   gf.function = &dfunctor_adapter;
   gf.params = static_cast<void*>(const_cast<DFunctor*>(&F));
-  gsl_root_fsolver_set(w.fsolver, &gf, Xmin, Xmax);
-  int status = GSL_CONTINUE;
+  int status;
+  status = gsl_root_fsolver_set(w.fsolver, &gf, Xmin, Xmax);
+  gsl_check(status);
+  status = GSL_CONTINUE;
   for(int i = 0; i < 1000 && status ==GSL_CONTINUE; ++i) {
     status = gsl_root_fsolver_iterate(w.fsolver);
+    gsl_check(status);
     status = gsl_root_test_interval(gsl_root_fsolver_x_lower(w.fsolver),
 				    gsl_root_fsolver_x_upper(w.fsolver),
 				    Eps_abs, Eps);

@@ -188,6 +188,13 @@ class GcpTiePointCollect(object):
         You can optionally specify avg_level to use. If supplied, we
         use a PyramidImageMatcher on top of the CcorrLsmMatcher, useful for
         difficult to match imagery.
+
+        There is a trade off between getting the largest coverage (by
+        taking a union of all the igc on the surface} and the
+        strongest points (by looking at places seen by all the
+        cameras). You may want to do both - so generate a set of GCPs
+        using the largest coverage first and then the intersection
+        second.
         '''
         image_matcher = CcorrLsmMatcher()
         if(avg_level > 0):

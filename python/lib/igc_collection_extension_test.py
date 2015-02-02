@@ -5,6 +5,7 @@ from igc_collection_extension import *
 from nose.plugins.skip import Skip, SkipTest
 import scipy
 import numpy.testing as npt
+from sqlite_shelf import write_shelve
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
@@ -134,6 +135,32 @@ def test_igc_array_with_igc_collection():
     assert_almost_equal(jac[0, 4], 15387.7492279, 2)
     assert_almost_equal(jac[1, 5], 17633.137014, 2)
 
+def create_igc_collection_rolling_shutter():
+    '''Create a IgcCollectionRollingShutter that we can use for testing.'''
+    tmin = Time.parse_time("1998-06-30T10:51:28.32Z");
+    dem = SimpleDem()
+    cam = QuaternionCamera(quat_rot("zyx", 0.1, 0.2, 0.3),
+                           3375, 3648, 1.0 / 2500000, 1.0 / 2500000,
+                           1.0, FrameCoordinate(1688.0, 1824.5),
+                           QuaternionCamera.LINE_IS_Y)
+    orb = KeplerOrbit(tmin, tmin + 1000)
+    igccol = IgcCollectionRollingShutter(orb, cam, dem)
+    for i in range(10):
+        t = tmin + 20 * i
+        tspace = 1e-3;
+        tt = RollingShutterConstantTimeTable(t, 
+           t + cam.number_line(0) * tspace, tspace);
+        title = "Image %d" % (i+1)
+        igccol.add_image(None, tt, title)
+    ic = ImageCoordinate(cam.number_line(0) / 2, cam.number_sample(0) / 2)
+    igccol.determine_orbit_to_match(ic, 4)
+    orb = OrbitOffsetCorrection(igccol.orbit)
+    for i in range(10):
+        tm, fc = igccol.image_ground_connection(i).time_table.time(ic)
+        orb.insert_time_point(tm)
+    igccol.orbit = orb
+    write_shelve(test_data + "igccol_rolling_shutter.xml", igccol)
+    
 def test_igc_collection_rolling_shutter():
     '''Test IgcCollectionRollingShutter.'''
     tmin = Time.parse_time("1998-06-30T10:51:28.32Z");

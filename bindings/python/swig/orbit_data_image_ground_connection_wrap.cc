@@ -5321,31 +5321,10 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
-SWIGINTERNINLINE PyObject *
-SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+SWIGINTERNINLINE PyObject*
+  SWIG_From_bool  (bool value)
 {
-  if (carray) {
-    if (size > INT_MAX) {
-      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-      return pchar_descriptor ? 
-	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
-    } else {
-#if PY_VERSION_HEX >= 0x03000000
-      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
-#else
-      return PyString_FromStringAndSize(carray, static_cast< int >(size));
-#endif
-    }
-  } else {
-    return SWIG_Py_Void();
-  }
-}
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_std_string  (const std::string& s)
-{
-  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+  return PyBool_FromLong(value ? 1 : 0);
 }
 
 
@@ -8118,15 +8097,15 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitDataImageGroundConnection__v_image(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_OrbitDataImageGroundConnection__v_number_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitDataImageGroundConnection *arg1 = (GeoCal::OrbitDataImageGroundConnection *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection const > tempshared1 ;
-  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  boost::shared_ptr< GeoCal::RasterImage > result;
+  int result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -8134,44 +8113,42 @@ SWIGINTERN PyObject *_wrap_OrbitDataImageGroundConnection__v_image(PyObject *SWI
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitDataImageGroundConnection_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDataImageGroundConnection__v_image" "', argument " "1"" of type '" "GeoCal::OrbitDataImageGroundConnection const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDataImageGroundConnection__v_number_line" "', argument " "1"" of type '" "GeoCal::OrbitDataImageGroundConnection *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDataImageGroundConnection > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
       arg1 = const_cast< GeoCal::OrbitDataImageGroundConnection * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
       arg1 = const_cast< GeoCal::OrbitDataImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = ((GeoCal::OrbitDataImageGroundConnection const *)arg1)->image();
+      result = (int)(arg1)->number_line();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitDataImageGroundConnection__v_title(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_OrbitDataImageGroundConnection__v_number_sample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitDataImageGroundConnection *arg1 = (GeoCal::OrbitDataImageGroundConnection *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection const > tempshared1 ;
-  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::string result;
+  int result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -8179,27 +8156,113 @@ SWIGINTERN PyObject *_wrap_OrbitDataImageGroundConnection__v_title(PyObject *SWI
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitDataImageGroundConnection_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDataImageGroundConnection__v_title" "', argument " "1"" of type '" "GeoCal::OrbitDataImageGroundConnection const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDataImageGroundConnection__v_number_sample" "', argument " "1"" of type '" "GeoCal::OrbitDataImageGroundConnection *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDataImageGroundConnection > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
       arg1 = const_cast< GeoCal::OrbitDataImageGroundConnection * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
       arg1 = const_cast< GeoCal::OrbitDataImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = ((GeoCal::OrbitDataImageGroundConnection const *)arg1)->title();
+      result = (int)(arg1)->number_sample();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     }
   }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitDataImageGroundConnection__v_number_band(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitDataImageGroundConnection *arg1 = (GeoCal::OrbitDataImageGroundConnection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitDataImageGroundConnection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDataImageGroundConnection__v_number_band" "', argument " "1"" of type '" "GeoCal::OrbitDataImageGroundConnection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDataImageGroundConnection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDataImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)(arg1)->number_band();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitDataImageGroundConnection__v_has_time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitDataImageGroundConnection *arg1 = (GeoCal::OrbitDataImageGroundConnection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitDataImageGroundConnection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDataImageGroundConnection__v_has_time" "', argument " "1"" of type '" "GeoCal::OrbitDataImageGroundConnection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDataImageGroundConnection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDataImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)(arg1)->has_time();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
   return NULL;
@@ -9032,8 +9095,10 @@ static PyMethodDef SwigMethods[] = {
 		"Not sure if we want this to be a general ImageGroundConnection\n"
 		"function, but for now we have this defined just for this class. \n"
 		""},
-	 { (char *)"OrbitDataImageGroundConnection__v_image", (PyCFunction)_wrap_OrbitDataImageGroundConnection__v_image, METH_O, NULL},
-	 { (char *)"OrbitDataImageGroundConnection__v_title", (PyCFunction)_wrap_OrbitDataImageGroundConnection__v_title, METH_O, NULL},
+	 { (char *)"OrbitDataImageGroundConnection__v_number_line", (PyCFunction)_wrap_OrbitDataImageGroundConnection__v_number_line, METH_O, NULL},
+	 { (char *)"OrbitDataImageGroundConnection__v_number_sample", (PyCFunction)_wrap_OrbitDataImageGroundConnection__v_number_sample, METH_O, NULL},
+	 { (char *)"OrbitDataImageGroundConnection__v_number_band", (PyCFunction)_wrap_OrbitDataImageGroundConnection__v_number_band, METH_O, NULL},
+	 { (char *)"OrbitDataImageGroundConnection__v_has_time", (PyCFunction)_wrap_OrbitDataImageGroundConnection__v_has_time, METH_O, NULL},
 	 { (char *)"OrbitDataImageGroundConnection__v_orbit_data", _wrap_OrbitDataImageGroundConnection__v_orbit_data, METH_VARARGS, (char *)"\n"
 		"void GeoCal::OrbitDataImageGroundConnection::orbit_data(const boost::shared_ptr< OrbitData > &Od)\n"
 		"Set orbit data that we are using. \n"

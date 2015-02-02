@@ -43,10 +43,17 @@ public:
 			const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
-  virtual int number_line() const;
-  virtual int number_sample() const;
-  virtual boost::shared_ptr<RasterImage> image() const;
-  virtual std::string title() const;
+  // Note that this convoluted looking expression is necessary to 
+  // get SWIG to override correctly with use of director feature in
+  // the base class
+  %rename(_v_number_line) number_line;
+  %rename(_v_number_sample) number_sample;
+  %rename(_v_number_band) number_band;
+  %rename(_v_has_time) has_time;
+  virtual int number_line();
+  virtual int number_sample();
+  virtual int number_band();
+  virtual bool has_time();
   %python_attribute_with_set(orbit, boost::shared_ptr<Orbit>)
   %python_attribute_with_set(time_table, boost::shared_ptr<TimeTable>)
   %python_attribute_with_set(camera,boost::shared_ptr<Camera>)

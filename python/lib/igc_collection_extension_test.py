@@ -143,6 +143,14 @@ def create_igc_collection_rolling_shutter():
                            3375, 3648, 1.0 / 2500000, 1.0 / 2500000,
                            1.0, FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)
+    cam.fit_epsilon = False
+    cam.fit_beta = False
+    cam.fit_delta = False
+    cam.fit_line_pitch = False
+    cam.fit_sample_pitch = False
+    cam.fit_focal_length = False
+    cam.fit_principal_point_line(False, 0)
+    cam.fit_principal_point_sample(False, 0)
     orb = KeplerOrbit(tmin, tmin + 1000)
     igccol = IgcCollectionRollingShutter(orb, cam, dem)
     for i in range(10):

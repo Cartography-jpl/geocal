@@ -825,14 +825,14 @@
 						<parameter_mask class_id="22" tracking_level="0" version="0">
 							<size>8</size>
 							<data>
-								<item>1</item>
-								<item>1</item>
-								<item>1</item>
-								<item>1</item>
-								<item>1</item>
-								<item>1</item>
-								<item>1</item>
-								<item>1</item>
+								<item>0</item>
+								<item>0</item>
+								<item>0</item>
+								<item>0</item>
+								<item>0</item>
+								<item>0</item>
+								<item>0</item>
+								<item>0</item>
 							</data>
 						</parameter_mask>
 					</px>

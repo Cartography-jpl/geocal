@@ -50,8 +50,8 @@ Options:
        Use the supplied map information (either a MapInfo, or a RasterImage 
        with a MapInfo). This is used to project to the surface before matching, 
        useful for matching data that is from different enough angles or 
-       resolution that matching the raw images will fail. See also 
-       --project-surface that automatically finds the map info to use.
+       resolution that matching the raw images will fail. See
+       also --project-surface that automatically finds the map info to use.
 
   --max-ground-sigma=d
        How far off the various matched points can miss when intersecting

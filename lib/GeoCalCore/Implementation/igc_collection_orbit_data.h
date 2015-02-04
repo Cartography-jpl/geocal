@@ -20,6 +20,7 @@ public:
    const boost::shared_ptr<Camera>& Cam,
    const boost::shared_ptr<Dem>& D)
     : orb(Orb), cam(Cam), dem_(D), img_list(Img_list),
+      tm_list(Tm_list),
       title_list(Title_list)
   {
     add_object(Orb);

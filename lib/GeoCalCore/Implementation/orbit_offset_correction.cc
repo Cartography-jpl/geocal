@@ -197,7 +197,7 @@ std::vector<std::string> OrbitOffsetCorrection::parameter_name() const
 		  " (arcseconds)");
     res.push_back("Pitch correction time " + e.first.to_string() +
 		  " (arcseconds)");
-    res.push_back("Yaw correction time " + e.first.to_string() +
+    res.push_back("Roll correction time " + e.first.to_string() +
 		  " (arcseconds)");
   }
   return res;

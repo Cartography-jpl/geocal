@@ -173,6 +173,16 @@ class ScaleImage(geocal_swig.calc_raster.CalcRaster):
       return _new_from_init, (self.__class__, 1, self.raw_data,self.scale_factor)
 
     __swig_destroy__ = _scale_image.delete_ScaleImage
+ScaleImage._v_number_line = new_instancemethod(_scale_image.ScaleImage__v_number_line,None,ScaleImage)
+ScaleImage._v_number_sample = new_instancemethod(_scale_image.ScaleImage__v_number_sample,None,ScaleImage)
+ScaleImage._v_number_tile_line = new_instancemethod(_scale_image.ScaleImage__v_number_tile_line,None,ScaleImage)
+ScaleImage._v_number_tile_sample = new_instancemethod(_scale_image.ScaleImage__v_number_tile_sample,None,ScaleImage)
+ScaleImage._v_has_map_info = new_instancemethod(_scale_image.ScaleImage__v_has_map_info,None,ScaleImage)
+ScaleImage._v_map_info = new_instancemethod(_scale_image.ScaleImage__v_map_info,None,ScaleImage)
+ScaleImage._v_grid_center_line_resolution = new_instancemethod(_scale_image.ScaleImage__v_grid_center_line_resolution,None,ScaleImage)
+ScaleImage._v_grid_center_sample_resolution = new_instancemethod(_scale_image.ScaleImage__v_grid_center_sample_resolution,None,ScaleImage)
+ScaleImage._v_has_rpc = new_instancemethod(_scale_image.ScaleImage__v_has_rpc,None,ScaleImage)
+ScaleImage._v_rpc = new_instancemethod(_scale_image.ScaleImage__v_rpc,None,ScaleImage)
 ScaleImage._v_raw_data = new_instancemethod(_scale_image.ScaleImage__v_raw_data,None,ScaleImage)
 ScaleImage._v_scale_factor = new_instancemethod(_scale_image.ScaleImage__v_scale_factor,None,ScaleImage)
 ScaleImage_swigregister = _scale_image.ScaleImage_swigregister

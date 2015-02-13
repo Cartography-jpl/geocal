@@ -180,6 +180,16 @@ class SmoothImage(geocal_swig.calc_raster.CalcRaster):
       return _new_from_init, (self.__class__, 1, self.raw_data,self.number_half_size,self.number_tile)
 
     __swig_destroy__ = _smooth_image.delete_SmoothImage
+SmoothImage._v_number_line = new_instancemethod(_smooth_image.SmoothImage__v_number_line,None,SmoothImage)
+SmoothImage._v_number_sample = new_instancemethod(_smooth_image.SmoothImage__v_number_sample,None,SmoothImage)
+SmoothImage._v_number_tile_line = new_instancemethod(_smooth_image.SmoothImage__v_number_tile_line,None,SmoothImage)
+SmoothImage._v_number_tile_sample = new_instancemethod(_smooth_image.SmoothImage__v_number_tile_sample,None,SmoothImage)
+SmoothImage._v_has_map_info = new_instancemethod(_smooth_image.SmoothImage__v_has_map_info,None,SmoothImage)
+SmoothImage._v_map_info = new_instancemethod(_smooth_image.SmoothImage__v_map_info,None,SmoothImage)
+SmoothImage._v_grid_center_line_resolution = new_instancemethod(_smooth_image.SmoothImage__v_grid_center_line_resolution,None,SmoothImage)
+SmoothImage._v_grid_center_sample_resolution = new_instancemethod(_smooth_image.SmoothImage__v_grid_center_sample_resolution,None,SmoothImage)
+SmoothImage._v_has_rpc = new_instancemethod(_smooth_image.SmoothImage__v_has_rpc,None,SmoothImage)
+SmoothImage._v_rpc = new_instancemethod(_smooth_image.SmoothImage__v_rpc,None,SmoothImage)
 SmoothImage._v_raw_data = new_instancemethod(_smooth_image.SmoothImage__v_raw_data,None,SmoothImage)
 SmoothImage._v_number_half_size = new_instancemethod(_smooth_image.SmoothImage__v_number_half_size,None,SmoothImage)
 SmoothImage_swigregister = _smooth_image.SmoothImage_swigregister

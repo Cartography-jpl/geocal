@@ -243,6 +243,16 @@ class IgcMapProjected(geocal_swig.calc_raster.CalcRaster):
       return _new_from_init, (self.__class__, 2, self.map_info,self.igc_original,self.grid_spacing,self.avg_factor,self.read_into_memory,self.number_tile_line,self.number_tile_sample,self.fill_value)
 
     __swig_destroy__ = _igc_map_projected.delete_IgcMapProjected
+IgcMapProjected._v_number_line = new_instancemethod(_igc_map_projected.IgcMapProjected__v_number_line,None,IgcMapProjected)
+IgcMapProjected._v_number_sample = new_instancemethod(_igc_map_projected.IgcMapProjected__v_number_sample,None,IgcMapProjected)
+IgcMapProjected._v_number_tile_line = new_instancemethod(_igc_map_projected.IgcMapProjected__v_number_tile_line,None,IgcMapProjected)
+IgcMapProjected._v_number_tile_sample = new_instancemethod(_igc_map_projected.IgcMapProjected__v_number_tile_sample,None,IgcMapProjected)
+IgcMapProjected._v_has_map_info = new_instancemethod(_igc_map_projected.IgcMapProjected__v_has_map_info,None,IgcMapProjected)
+IgcMapProjected._v_map_info = new_instancemethod(_igc_map_projected.IgcMapProjected__v_map_info,None,IgcMapProjected)
+IgcMapProjected._v_grid_center_line_resolution = new_instancemethod(_igc_map_projected.IgcMapProjected__v_grid_center_line_resolution,None,IgcMapProjected)
+IgcMapProjected._v_grid_center_sample_resolution = new_instancemethod(_igc_map_projected.IgcMapProjected__v_grid_center_sample_resolution,None,IgcMapProjected)
+IgcMapProjected._v_has_rpc = new_instancemethod(_igc_map_projected.IgcMapProjected__v_has_rpc,None,IgcMapProjected)
+IgcMapProjected._v_rpc = new_instancemethod(_igc_map_projected.IgcMapProjected__v_rpc,None,IgcMapProjected)
 IgcMapProjected._v_igc_original = new_instancemethod(_igc_map_projected.IgcMapProjected__v_igc_original,None,IgcMapProjected)
 IgcMapProjected._v_avg_factor = new_instancemethod(_igc_map_projected.IgcMapProjected__v_avg_factor,None,IgcMapProjected)
 IgcMapProjected._v_grid_spacing = new_instancemethod(_igc_map_projected.IgcMapProjected__v_grid_spacing,None,IgcMapProjected)

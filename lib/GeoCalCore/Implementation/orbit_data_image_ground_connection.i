@@ -53,17 +53,6 @@ public:
     const;
   virtual ImageCoordinateWithDerivative 
   image_coordinate_with_derivative(const GroundCoordinate& Gc) const;
-  // Note that this convoluted looking expression is necessary to 
-  // get SWIG to override correctly with use of director feature in
-  // the base class
-  %rename(_v_number_line) number_line;
-  %rename(_v_number_sample) number_sample;
-  %rename(_v_number_band) number_band;
-  %rename(_v_has_time) has_time;
-  virtual int number_line();
-  virtual int number_sample();
-  virtual int number_band();
-  virtual bool has_time();
   %python_attribute_with_set(orbit_data, boost::shared_ptr<OrbitData>)
   %python_attribute_with_set(camera,boost::shared_ptr<Camera>)
   %python_attribute_with_set(resolution, double)

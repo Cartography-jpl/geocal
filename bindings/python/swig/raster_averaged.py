@@ -216,16 +216,6 @@ class RasterAveraged(geocal_swig.calc_raster.CalcRaster):
       return _new_from_init, (self.__class__, 1, self.high_resolution_image,self.number_line_per_pixel,self.number_sample_per_pixel,self.ignore_zero)
 
     __swig_destroy__ = _raster_averaged.delete_RasterAveraged
-RasterAveraged._v_number_line = new_instancemethod(_raster_averaged.RasterAveraged__v_number_line,None,RasterAveraged)
-RasterAveraged._v_number_sample = new_instancemethod(_raster_averaged.RasterAveraged__v_number_sample,None,RasterAveraged)
-RasterAveraged._v_number_tile_line = new_instancemethod(_raster_averaged.RasterAveraged__v_number_tile_line,None,RasterAveraged)
-RasterAveraged._v_number_tile_sample = new_instancemethod(_raster_averaged.RasterAveraged__v_number_tile_sample,None,RasterAveraged)
-RasterAveraged._v_has_map_info = new_instancemethod(_raster_averaged.RasterAveraged__v_has_map_info,None,RasterAveraged)
-RasterAveraged._v_map_info = new_instancemethod(_raster_averaged.RasterAveraged__v_map_info,None,RasterAveraged)
-RasterAveraged._v_grid_center_line_resolution = new_instancemethod(_raster_averaged.RasterAveraged__v_grid_center_line_resolution,None,RasterAveraged)
-RasterAveraged._v_grid_center_sample_resolution = new_instancemethod(_raster_averaged.RasterAveraged__v_grid_center_sample_resolution,None,RasterAveraged)
-RasterAveraged._v_has_rpc = new_instancemethod(_raster_averaged.RasterAveraged__v_has_rpc,None,RasterAveraged)
-RasterAveraged._v_rpc = new_instancemethod(_raster_averaged.RasterAveraged__v_rpc,None,RasterAveraged)
 RasterAveraged._v_high_resolution_image = new_instancemethod(_raster_averaged.RasterAveraged__v_high_resolution_image,None,RasterAveraged)
 RasterAveraged._v_number_line_per_pixel = new_instancemethod(_raster_averaged.RasterAveraged__v_number_line_per_pixel,None,RasterAveraged)
 RasterAveraged._v_number_sample_per_pixel = new_instancemethod(_raster_averaged.RasterAveraged__v_number_sample_per_pixel,None,RasterAveraged)

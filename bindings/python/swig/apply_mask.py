@@ -194,16 +194,6 @@ class ApplyMask(geocal_swig.calc_raster.CalcRaster):
       return _new_from_init, (self.__class__, 1, self.raw_data,self.mask,self.good_value)
 
     __swig_destroy__ = _apply_mask.delete_ApplyMask
-ApplyMask._v_number_line = new_instancemethod(_apply_mask.ApplyMask__v_number_line,None,ApplyMask)
-ApplyMask._v_number_sample = new_instancemethod(_apply_mask.ApplyMask__v_number_sample,None,ApplyMask)
-ApplyMask._v_number_tile_line = new_instancemethod(_apply_mask.ApplyMask__v_number_tile_line,None,ApplyMask)
-ApplyMask._v_number_tile_sample = new_instancemethod(_apply_mask.ApplyMask__v_number_tile_sample,None,ApplyMask)
-ApplyMask._v_has_map_info = new_instancemethod(_apply_mask.ApplyMask__v_has_map_info,None,ApplyMask)
-ApplyMask._v_map_info = new_instancemethod(_apply_mask.ApplyMask__v_map_info,None,ApplyMask)
-ApplyMask._v_grid_center_line_resolution = new_instancemethod(_apply_mask.ApplyMask__v_grid_center_line_resolution,None,ApplyMask)
-ApplyMask._v_grid_center_sample_resolution = new_instancemethod(_apply_mask.ApplyMask__v_grid_center_sample_resolution,None,ApplyMask)
-ApplyMask._v_has_rpc = new_instancemethod(_apply_mask.ApplyMask__v_has_rpc,None,ApplyMask)
-ApplyMask._v_rpc = new_instancemethod(_apply_mask.ApplyMask__v_rpc,None,ApplyMask)
 ApplyMask._v_raw_data = new_instancemethod(_apply_mask.ApplyMask__v_raw_data,None,ApplyMask)
 ApplyMask._v_mask = new_instancemethod(_apply_mask.ApplyMask__v_mask,None,ApplyMask)
 ApplyMask._v_good_value = new_instancemethod(_apply_mask.ApplyMask__v_good_value,None,ApplyMask)

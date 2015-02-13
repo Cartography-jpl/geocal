@@ -57,17 +57,20 @@ def _determine_orbit_parm(self, gp, ic, i):
     return an image coordinate of ic for igc i.'''
     # Vector that we have now
     igc = self.image_ground_connection(i)
-    tm, fc = igc.time_table.time(ic)
-    od = igc.orbit.orbit_data(tm)
-    t = od.sc_look_vector(igc.cf_look_vector_lv(ic))
-    v1 = np.array([t.direction[0], t.direction[1], t.direction[2]])
+    tmpt, fc = igc.time_table.time(ic)
+    tlist = [igc.time_table.min_time, tmpt, igc.time_table.max_time]
+    for j, tm in enumerate(tlist):
+        od = igc.orbit.orbit_data(tm)
+        t = od.sc_look_vector(od.cf_look_vector(igc.camera.sc_look_vector(FrameCoordinate(ic.line, ic.sample), igc.band)))
+        v1 = np.array([t.direction[0], t.direction[1], t.direction[2]])
 
-    # Vector that we want
-    t = od.sc_look_vector(CartesianFixedLookVector(igc.cf_look_vector_pos(ic), gp))
-    v2 = np.array([t.direction[0], t.direction[1], t.direction[2]])
+        # Vector that we want
+        t = od.sc_look_vector(CartesianFixedLookVector(od.position_cf, gp))
+        v2 = np.array([t.direction[0], t.direction[1], t.direction[2]])
 
-    # Quaternion that does that
-    self.orbit.update_quaterion(i, determine_quat_rot(v2, v1))
+        # Quaternion that does that
+        self.orbit.update_quaterion(i * len(tlist) + j, 
+                                    determine_quat_rot(v2, v1))
     
 def _determine_orbit_to_match(self, ic, ind):
     '''This adds an orbit model on top of the existing orbit. We adjust the
@@ -84,7 +87,9 @@ def _determine_orbit_to_match(self, ic, ind):
     for i in range(self.number_image):
         igc = self.image_ground_connection(i)
         tm, fc = igc.time_table.time(ic)
+        self.orbit.insert_time_point(igc.time_table.min_time)
         self.orbit.insert_time_point(tm)
+        self.orbit.insert_time_point(igc.time_table.max_time)
     for i in range(self.number_image):
         self._determine_orbit_parm(gp, ic, i)
 

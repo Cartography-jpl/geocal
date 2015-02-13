@@ -278,6 +278,9 @@ public:
 //-----------------------------------------------------------------------
   void refraction(const boost::shared_ptr<Refraction>& Ref) 
   {refraction_ = Ref;}
+
+  virtual int number_line() const { return cam->number_line(band()); }
+  virtual int number_sample() const { return cam->number_sample(band()); }
 private:
   boost::shared_ptr<OrbitData> od;
   boost::shared_ptr<Camera> cam;

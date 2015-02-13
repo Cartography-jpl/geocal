@@ -3531,32 +3531,31 @@ namespace Swig {
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[79]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t swig_types[80]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[81]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t swig_types[82]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[83]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[84]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[85]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[86]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[87]
-#define SWIGTYPE_p_char swig_types[88]
-#define SWIGTYPE_p_char_type swig_types[89]
-#define SWIGTYPE_p_difference_type swig_types[90]
-#define SWIGTYPE_p_fmtflags swig_types[91]
-#define SWIGTYPE_p_int_type swig_types[92]
-#define SWIGTYPE_p_iostate swig_types[93]
-#define SWIGTYPE_p_off_type swig_types[94]
-#define SWIGTYPE_p_openmode swig_types[95]
-#define SWIGTYPE_p_pos_type swig_types[96]
-#define SWIGTYPE_p_seekdir swig_types[97]
-#define SWIGTYPE_p_size_t swig_types[98]
-#define SWIGTYPE_p_size_type swig_types[99]
-#define SWIGTYPE_p_state_type swig_types[100]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[101]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[102]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[103]
-#define SWIGTYPE_p_traits_type swig_types[104]
-#define SWIGTYPE_p_value_type swig_types[105]
-static swig_type_info *swig_types[107];
-static swig_module_info swig_module = {swig_types, 106, 0, 0, 0, 0};
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[82]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[83]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[84]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[85]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[86]
+#define SWIGTYPE_p_char swig_types[87]
+#define SWIGTYPE_p_char_type swig_types[88]
+#define SWIGTYPE_p_difference_type swig_types[89]
+#define SWIGTYPE_p_fmtflags swig_types[90]
+#define SWIGTYPE_p_int_type swig_types[91]
+#define SWIGTYPE_p_iostate swig_types[92]
+#define SWIGTYPE_p_off_type swig_types[93]
+#define SWIGTYPE_p_openmode swig_types[94]
+#define SWIGTYPE_p_pos_type swig_types[95]
+#define SWIGTYPE_p_seekdir swig_types[96]
+#define SWIGTYPE_p_size_t swig_types[97]
+#define SWIGTYPE_p_size_type swig_types[98]
+#define SWIGTYPE_p_state_type swig_types[99]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[100]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[101]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[102]
+#define SWIGTYPE_p_traits_type swig_types[103]
+#define SWIGTYPE_p_value_type swig_types[104]
+static swig_type_info *swig_types[106];
+static swig_module_info swig_module = {swig_types, 105, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5138,16 +5137,6 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
-SWIGINTERNINLINE PyObject*
-  SWIG_From_bool  (bool value)
-{
-  return PyBool_FromLong(value ? 1 : 0);
-}
-
-
-  #define SWIG_From_double   PyFloat_FromDouble 
-
-
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -5312,439 +5301,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MagnifyReplicate__v_number_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MagnifyReplicate *arg1 = (GeoCal::MagnifyReplicate *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > tempshared1 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyReplicate__v_number_line" "', argument " "1"" of type '" "GeoCal::MagnifyReplicate *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)(arg1)->number_line();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MagnifyReplicate__v_number_sample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MagnifyReplicate *arg1 = (GeoCal::MagnifyReplicate *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > tempshared1 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyReplicate__v_number_sample" "', argument " "1"" of type '" "GeoCal::MagnifyReplicate *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)(arg1)->number_sample();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MagnifyReplicate__v_number_tile_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MagnifyReplicate *arg1 = (GeoCal::MagnifyReplicate *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > tempshared1 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyReplicate__v_number_tile_line" "', argument " "1"" of type '" "GeoCal::MagnifyReplicate *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)(arg1)->number_tile_line();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MagnifyReplicate__v_number_tile_sample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MagnifyReplicate *arg1 = (GeoCal::MagnifyReplicate *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > tempshared1 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyReplicate__v_number_tile_sample" "', argument " "1"" of type '" "GeoCal::MagnifyReplicate *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)(arg1)->number_tile_sample();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MagnifyReplicate__v_has_map_info(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MagnifyReplicate *arg1 = (GeoCal::MagnifyReplicate *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > tempshared1 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyReplicate__v_has_map_info" "', argument " "1"" of type '" "GeoCal::MagnifyReplicate *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (bool)(arg1)->has_map_info();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MagnifyReplicate__v_map_info(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MagnifyReplicate *arg1 = (GeoCal::MagnifyReplicate *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > tempshared1 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  GeoCal::MapInfo result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyReplicate__v_map_info" "', argument " "1"" of type '" "GeoCal::MagnifyReplicate *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (arg1)->map_info();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::MapInfo > *smartresult = new boost::shared_ptr<  GeoCal::MapInfo >(new GeoCal::MapInfo((GeoCal::MapInfo &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MagnifyReplicate__v_grid_center_line_resolution(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MagnifyReplicate *arg1 = (GeoCal::MagnifyReplicate *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > tempshared1 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  double result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyReplicate__v_grid_center_line_resolution" "', argument " "1"" of type '" "GeoCal::MagnifyReplicate *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (double)(arg1)->grid_center_line_resolution();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MagnifyReplicate__v_grid_center_sample_resolution(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MagnifyReplicate *arg1 = (GeoCal::MagnifyReplicate *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > tempshared1 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  double result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyReplicate__v_grid_center_sample_resolution" "', argument " "1"" of type '" "GeoCal::MagnifyReplicate *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (double)(arg1)->grid_center_sample_resolution();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MagnifyReplicate__v_has_rpc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MagnifyReplicate *arg1 = (GeoCal::MagnifyReplicate *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > tempshared1 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyReplicate__v_has_rpc" "', argument " "1"" of type '" "GeoCal::MagnifyReplicate *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (bool)(arg1)->has_rpc();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MagnifyReplicate__v_rpc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MagnifyReplicate *arg1 = (GeoCal::MagnifyReplicate *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > tempshared1 ;
-  boost::shared_ptr< GeoCal::MagnifyReplicate > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  SwigValueWrapper< boost::shared_ptr< GeoCal::Rpc > > result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MagnifyReplicate__v_rpc" "', argument " "1"" of type '" "GeoCal::MagnifyReplicate *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MagnifyReplicate > * >(argp1);
-      arg1 = const_cast< GeoCal::MagnifyReplicate * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (arg1)->rpc_ptr();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_NewPointerObj((new boost::shared_ptr< GeoCal::Rpc >(static_cast< const boost::shared_ptr< GeoCal::Rpc >& >(result))), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_MagnifyReplicate__v_raw_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MagnifyReplicate *arg1 = (GeoCal::MagnifyReplicate *) 0 ;
@@ -5893,16 +5449,6 @@ static PyMethodDef SwigMethods[] = {
 		"Number_tile=4)\n"
 		"Constructor. \n"
 		""},
-	 { (char *)"MagnifyReplicate__v_number_line", (PyCFunction)_wrap_MagnifyReplicate__v_number_line, METH_O, NULL},
-	 { (char *)"MagnifyReplicate__v_number_sample", (PyCFunction)_wrap_MagnifyReplicate__v_number_sample, METH_O, NULL},
-	 { (char *)"MagnifyReplicate__v_number_tile_line", (PyCFunction)_wrap_MagnifyReplicate__v_number_tile_line, METH_O, NULL},
-	 { (char *)"MagnifyReplicate__v_number_tile_sample", (PyCFunction)_wrap_MagnifyReplicate__v_number_tile_sample, METH_O, NULL},
-	 { (char *)"MagnifyReplicate__v_has_map_info", (PyCFunction)_wrap_MagnifyReplicate__v_has_map_info, METH_O, NULL},
-	 { (char *)"MagnifyReplicate__v_map_info", (PyCFunction)_wrap_MagnifyReplicate__v_map_info, METH_O, NULL},
-	 { (char *)"MagnifyReplicate__v_grid_center_line_resolution", (PyCFunction)_wrap_MagnifyReplicate__v_grid_center_line_resolution, METH_O, NULL},
-	 { (char *)"MagnifyReplicate__v_grid_center_sample_resolution", (PyCFunction)_wrap_MagnifyReplicate__v_grid_center_sample_resolution, METH_O, NULL},
-	 { (char *)"MagnifyReplicate__v_has_rpc", (PyCFunction)_wrap_MagnifyReplicate__v_has_rpc, METH_O, NULL},
-	 { (char *)"MagnifyReplicate__v_rpc", (PyCFunction)_wrap_MagnifyReplicate__v_rpc, METH_O, NULL},
 	 { (char *)"MagnifyReplicate__v_raw_data", (PyCFunction)_wrap_MagnifyReplicate__v_raw_data, METH_O, (char *)"\n"
 		"const boost::shared_ptr<RasterImage>& GeoCal::MagnifyReplicate::raw_data_ptr() const\n"
 		"\n"
@@ -6340,7 +5886,6 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t = {"_p_boos
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t = {"_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t", "boost::shared_ptr< GeoCal::RasterImageTileIterator > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t = {"_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t", "boost::shared_ptr< GeoCal::RasterImageVariable > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t = {"_p_boost__shared_ptrT_GeoCal__RasterImage_t", "boost::shared_ptr< GeoCal::RasterImage > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Rpc_t = {"_p_boost__shared_ptrT_GeoCal__Rpc_t", "boost::shared_ptr< GeoCal::Rpc > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t", "boost::shared_ptr< GeoCal::ScLookVectorWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t = {"_p_boost__shared_ptrT_GeoCal__ScLookVector_t", "boost::shared_ptr< GeoCal::ScLookVector > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t", "boost::shared_ptr< GeoCal::TimeWithDerivative > *", 0, 0, (void*)0, 0};
@@ -6448,7 +5993,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__Rpc_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,
@@ -6556,7 +6100,6 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__MapInfo_t[] = {  {&_s
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CalcRaster_t, _p_boost__shared_ptrT_GeoCal__CalcRaster_tTo_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, _p_boost__shared_ptrT_GeoCal__MagnifyReplicate_tTo_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImage_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, _p_boost__shared_ptrT_GeoCal__RasterImageVariable_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CalcRaster_t, _p_boost__shared_ptrT_GeoCal__CalcRaster_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MagnifyReplicate_t, _p_boost__shared_ptrT_GeoCal__MagnifyReplicate_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Rpc_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Rpc_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -6664,7 +6207,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t,
   _swigc__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t,
   _swigc__p_boost__shared_ptrT_GeoCal__RasterImage_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__Rpc_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t,
   _swigc__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,

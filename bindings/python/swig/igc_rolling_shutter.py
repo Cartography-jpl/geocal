@@ -180,34 +180,6 @@ class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnectio
         """
         return _igc_rolling_shutter.IgcRollingShutter_cf_look_vector(self, *args)
 
-    def _v_number_line(self):
-        """
-        virtual int GeoCal::IgcRollingShutter::number_line()
-
-        """
-        return _igc_rolling_shutter.IgcRollingShutter__v_number_line(self)
-
-    def _v_number_sample(self):
-        """
-        virtual int GeoCal::IgcRollingShutter::number_sample()
-
-        """
-        return _igc_rolling_shutter.IgcRollingShutter__v_number_sample(self)
-
-    def _v_number_band(self):
-        """
-        virtual int GeoCal::IgcRollingShutter::number_band()
-
-        """
-        return _igc_rolling_shutter.IgcRollingShutter__v_number_band(self)
-
-    def _v_has_time(self):
-        """
-        virtual bool GeoCal::IgcRollingShutter::has_time() const
-
-        """
-        return _igc_rolling_shutter.IgcRollingShutter__v_has_time(self)
-
     def _v_orbit(self, *args):
         """
         void GeoCal::IgcRollingShutter::orbit(const boost::shared_ptr< Orbit > &Orb)
@@ -323,10 +295,6 @@ class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnectio
 
     __swig_destroy__ = _igc_rolling_shutter.delete_IgcRollingShutter
 IgcRollingShutter.cf_look_vector = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter_cf_look_vector,None,IgcRollingShutter)
-IgcRollingShutter._v_number_line = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_number_line,None,IgcRollingShutter)
-IgcRollingShutter._v_number_sample = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_number_sample,None,IgcRollingShutter)
-IgcRollingShutter._v_number_band = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_number_band,None,IgcRollingShutter)
-IgcRollingShutter._v_has_time = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_has_time,None,IgcRollingShutter)
 IgcRollingShutter._v_orbit = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_orbit,None,IgcRollingShutter)
 IgcRollingShutter._v_time_table = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_time_table,None,IgcRollingShutter)
 IgcRollingShutter._v_camera = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_camera,None,IgcRollingShutter)

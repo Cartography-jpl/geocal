@@ -218,7 +218,9 @@ def create_igc_collection_rolling_shutter():
         ras = VicarLiteRasterImage(geocal_test_data + "igc_rolling_shutter_image%d.img" % i)
         igccol_final.add_image(ras, tt, title)
     write_shelve(geocal_test_data + "igccol_rolling_shutter.xml", igccol_final)
-    
+    print '''You should manually edit igccol_rolling_shutter.xml to use 
+relative paths. You can just edit the text file in emacs.
+'''
     
 def test_igc_collection_rolling_shutter():
     '''Test IgcCollectionRollingShutter.'''

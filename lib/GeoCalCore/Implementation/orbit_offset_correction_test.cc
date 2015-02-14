@@ -59,9 +59,6 @@ BOOST_AUTO_TEST_CASE(basic)
   parm = 1, 2, 3, 4, 5, 6, 7, 8, 9;
   orb->parameter(parm);
   orb->add_identity_gradient();
-  std::cerr << *(orb->orbit_data(t-1)) << "\n"
-	    << *(orb->orbit_data(t+5)) << "\n"
-	    << *(orb->orbit_data(t+11)) << "\n";
   BOOST_CHECK_MATRIX_CLOSE_TOL(orb->parameter(), parm, 1e-4);
   std::vector<Time> tp = orb->time_point();
   BOOST_CHECK(fabs(t - tp[0]) < 1e-4);

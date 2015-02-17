@@ -70,8 +70,8 @@ void MspiCamera::read_config_file(const std::string& File_name,
 		       QuaternionCamera::INCREASE_IS_NEGATIVE :
 		       QuaternionCamera::INCREASE_IS_POSITIVE);
   sample_direction_ = (c.value<int>("pixel_order") == 1 ? 
-		       QuaternionCamera::INCREASE_IS_POSITIVE :
-		       QuaternionCamera::INCREASE_IS_NEGATIVE);
+		       QuaternionCamera::INCREASE_IS_NEGATIVE :
+		       QuaternionCamera::INCREASE_IS_POSITIVE);
   inversion_ = c.value<int>("inversion");
   granule_id_ = c.value<std::string>("granule_id");
   

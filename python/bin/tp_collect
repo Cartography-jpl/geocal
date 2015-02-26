@@ -45,6 +45,12 @@ Options:
   --gcp
        Create GCPs, which requires the additional arguments of a reference
        image.
+   
+  --grid-spacing=f
+       If we are dong a surface projection, you can supply how frequently
+       to do the full ImageGroundConnection. Most of the time there is no
+       point in doing this calculation at a high resolution than the 
+       underlying DEM. [default: 1]
 
   --map-info=f
        Use the supplied map information (either a MapInfo, or a RasterImage 
@@ -126,11 +132,13 @@ if(args.gcp):
         dem = igc.dem(0)
     refimg = read_shelve(args.reference_image)
     tpcollect = GcpTiePointCollect(refimg, dem, igc, 
+                                   grid_spacing = args.grid_spacing,
                                    avg_level = args.avg_level,
                                    use_intersection = args.use_intersection)
 else:
     tpcollect = TiePointCollect(igc, avg_level = args.avg_level,
                                 map_info = mi,
+                                grid_spacing = args.grid_spacing,
                                 base_image_index = args.base_image_index,
                                 max_ground_covariance = 
                                 args.max_ground_sigma ** 2)

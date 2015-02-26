@@ -45,13 +45,20 @@ class TiePointCollect(object):
                  max_ground_covariance = 20 * 20,
                  start_image_index = 0,
                  end_image_index = None,
-                 avg_level = 0, use_intersection = False):
+                 avg_level = 0, use_intersection = False,
+                 grid_spacing = 1):
         '''This sets up for doing tie point collection. A IgcCollection
         needs to be supplied.
 
         You can optionally specify avg_level to use. If supplied, we
         use a PyramidImageMatcher on top of the CcorrLsmMatcher, useful for
         difficult to match imagery.
+
+        You can optionally pass in the grid spacing to use if we are
+        projecting to the surface. This has a significant effect on
+        how long this process takes. If the underlying DEM is coarse, 
+        there is no reason to do the ImageGroundConnection calculation 
+        at every point.
         
         There is a trade off between getting the largest coverage (by
         taking a union of all the igc on the surface) and the
@@ -88,7 +95,7 @@ class TiePointCollect(object):
                     image_matcher)
             else:
                 self.itoim[j] = SurfaceImageToImageMatch(img1, img2, 
-                                              map_info, image_matcher)
+                             map_info, image_matcher, grid_spacing)
 
     def __getstate__(self):
         return {"igc_collection": self.igc_collection,
@@ -181,13 +188,20 @@ class GcpTiePointCollect(object):
     '''Given a IgcCollection and a reference image, collect GCPs by 
     image matching.'''
     def __init__(self, ref_image, dem, igc_collection,
-                 avg_level = 0, use_intersection = False):
+                 avg_level = 0, use_intersection = False,
+                 grid_spacing = 1):
         '''This sets up for doing a tie point collection with a reference
         image. A IgcCollection and reference image needs to be supplied
 
         You can optionally specify avg_level to use. If supplied, we
         use a PyramidImageMatcher on top of the CcorrLsmMatcher, useful for
         difficult to match imagery.
+
+        You can optionally pass in the grid spacing to use if we are
+        projecting to the surface. This has a significant effect on
+        how long this process takes. If the underlying DEM is coarse, 
+        there is no reason to do the ImageGroundConnection calculation 
+        at every point.
 
         There is a trade off between getting the largest coverage (by
         taking a union of all the igc on the surface} and the
@@ -224,7 +238,8 @@ class GcpTiePointCollect(object):
         for j in range(self.igc_collection.number_image):
             igc2 = self.igc_collection.image_ground_connection(j)
             self.itoim[j] = SurfaceImageToImageMatch(self.ref_igc, igc2,
-                                                     mi, image_matcher)
+                                                     mi, image_matcher,
+                                                     grid_spacing)
 
     def __getstate__(self):
         return {"ref_image" : self.ref_image,

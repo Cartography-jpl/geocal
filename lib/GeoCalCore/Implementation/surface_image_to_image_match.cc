@@ -8,18 +8,24 @@ using namespace GeoCal;
 /// demand. Note that we only get the resolution and map projection
 /// from the Map_info, we adjust the cover to work over the full
 /// images Igc1 and Igc2.
+///
+/// You can optionally pass in the grid spacing to use in doing the
+/// full ImageGroundConnection calculation. This can have a
+/// significant effect on how long the matching takes. See
+/// IgcMapProjected for a discussion of this parameter.
 //-----------------------------------------------------------------------
 
 SurfaceImageToImageMatch::SurfaceImageToImageMatch
   (const boost::shared_ptr<ImageGroundConnection>& Igc1, 
    const boost::shared_ptr<ImageGroundConnection>& Igc2,
    const MapInfo& Map_info,
-   const boost::shared_ptr<ImageMatcher>& Matcher)
+   const boost::shared_ptr<ImageMatcher>& Matcher,
+   int Grid_spacing)
     : igc1(Igc1), igc2(Igc2), matcher_(Matcher), map_project_on_demand_(true)
 {
   MapInfo mi = igc1->cover(Map_info).map_union(igc2->cover(Map_info));
-  simg1.reset(new IgcMapProjected(mi, igc1, 1, -1, false));
-  simg2.reset(new IgcMapProjected(mi, igc2, 1, -1, false));
+  simg1.reset(new IgcMapProjected(mi, igc1, Grid_spacing, -1, false));
+  simg2.reset(new IgcMapProjected(mi, igc2, Grid_spacing, -1, false));
   pix_fact = mi.resolution_meter() / igc1->resolution_meter();
 }
 

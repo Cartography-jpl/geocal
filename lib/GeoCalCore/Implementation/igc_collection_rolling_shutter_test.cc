@@ -56,5 +56,19 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_CHECK_MATRIX_CLOSE(igccol->parameter(), igccolr->parameter());
 }
 
+BOOST_AUTO_TEST_CASE(timing)
+{
+  // This test looks at timing information, so we can speed the code
+  // up. We don't normally run this.
+  //return;
+  
+  boost::shared_ptr<IgcCollectionRollingShutter> igccol = 
+    serialize_read<IgcCollectionRollingShutter>("/data/geocal_test_data/igccol_rolling_shutter.xml");
+  boost::shared_ptr<ImageGroundConnection> igc = igccol->image_ground_connection(0);
+  boost::shared_ptr<GroundCoordinate> gc = igc->ground_coordinate(ImageCoordinate(100, 200));
+  for(int i = 0; i < 10000; ++i)
+    ImageCoordinate ic = igc->image_coordinate(*gc);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

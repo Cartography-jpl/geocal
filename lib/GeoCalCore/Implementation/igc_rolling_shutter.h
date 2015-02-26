@@ -28,7 +28,8 @@ namespace GeoCal {
 *******************************************************************/
 
 class IgcRollingShutter : public virtual ImageGroundConnection, 
-			  public virtual WithParameterNested {
+			  public virtual WithParameterNested,
+			  public Observer<Orbit> {
 public:
   enum RollDirection { ROLL_LINE_DIRECTION , ROLL_SAMPLE_DIRECTION };
 
@@ -65,6 +66,14 @@ public:
 
   virtual ~IgcRollingShutter() {}
 
+  virtual void notify_update(const Orbit& Orb)
+  {
+    od1 = boost::dynamic_pointer_cast<QuaternionOrbitData>
+      (orbit_->orbit_data(time_table_->min_time()));
+    od2 = boost::dynamic_pointer_cast<QuaternionOrbitData>
+      (orbit_->orbit_data(time_table_->max_time()));
+  }
+
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
 		 boost::shared_ptr<CartesianFixed>& P) const;
@@ -100,13 +109,7 @@ public:
 
   const boost::shared_ptr<Orbit>& orbit() const 
   { return orbit_; }
-
-//-----------------------------------------------------------------------
-/// Set orbit.
-//-----------------------------------------------------------------------
-
-  void orbit(const boost::shared_ptr<Orbit>& Orb) 
-  { orbit_ = Orb; }
+  void orbit(const boost::shared_ptr<Orbit>& Orb);
 
 //-----------------------------------------------------------------------
 /// Time table that we are using
@@ -128,12 +131,7 @@ public:
 //-----------------------------------------------------------------------
 
   const boost::shared_ptr<Camera>& camera() const {return cam; }
-
-//-----------------------------------------------------------------------
-/// Set Camera that we are using
-//-----------------------------------------------------------------------
-
-  void camera(const boost::shared_ptr<Camera>& C) { cam = C; }
+  void camera(const boost::shared_ptr<Camera>& C);
 
 //-----------------------------------------------------------------------
 /// Resolution in meters that we examine Dem out. This affects how
@@ -225,6 +223,11 @@ protected:
 	    double Max_height=9000);
 private:
   boost::shared_ptr<Orbit> orbit_;
+  boost::shared_ptr<QuaternionOrbitData> od1;
+  boost::shared_ptr<QuaternionOrbitData> od2;
+  boost::shared_ptr<QuaternionOrbitData> 
+  orbit_data(const Time& Tm) const
+  { return interpolate(*od1, *od2, Tm); }
   boost::shared_ptr<TimeTable> time_table_;
   boost::shared_ptr<Camera> cam;
   boost::shared_ptr<Refraction> refraction_;
@@ -235,7 +238,10 @@ private:
   double time_tolerance_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 }
 

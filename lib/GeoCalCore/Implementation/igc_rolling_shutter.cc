@@ -7,7 +7,19 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void IgcRollingShutter::serialize
+void IgcRollingShutter::save
+(Archive & ar, const unsigned int version) const
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested);
+  ar & GEOCAL_NVP_(orbit) & GEOCAL_NVP_(time_table)
+    & GEOCAL_NVP(cam) & GEOCAL_NVP_(refraction)
+    & GEOCAL_NVP_(roll_direction) & GEOCAL_NVP(res)
+    & GEOCAL_NVP(b) & GEOCAL_NVP(max_h) & GEOCAL_NVP_(time_tolerance);
+}
+
+template<class Archive>
+void IgcRollingShutter::load
 (Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
@@ -16,6 +28,7 @@ void IgcRollingShutter::serialize
     & GEOCAL_NVP(cam) & GEOCAL_NVP_(refraction)
     & GEOCAL_NVP_(roll_direction) & GEOCAL_NVP(res)
     & GEOCAL_NVP(b) & GEOCAL_NVP(max_h) & GEOCAL_NVP_(time_tolerance);
+  orbit(orbit_);
 }
 
 GEOCAL_IMPLEMENT(IgcRollingShutter);
@@ -42,7 +55,6 @@ void IgcRollingShutter::initialize
   ImageGroundConnection::initialize(D, Img, 
 				    boost::shared_ptr<RasterImageMultiBand>(),
 				    Title);
-  orbit_ = Orb;
   time_table_ = Time_table; 
   cam = Cam;
   refraction_ = Ref;
@@ -66,9 +78,7 @@ void IgcRollingShutter::initialize
   // Make sure we don't get a ridiculous value due to some weirdness
   // in the time table.
   time_tolerance_ = std::max(time_tolerance_, 1e-8);
-
-  add_object(orbit_);
-  add_object(cam);
+  orbit(Orb);
 }
 
 // See base class for description
@@ -80,8 +90,9 @@ void IgcRollingShutter::cf_look_vector
     Time t;
     FrameCoordinate f;
     time_table_->time(Ic, t, f);
-    Lv = orbit_->cf_look_vector(t, cam->sc_look_vector(f, b));
-    P = orbit_->position_cf(t);
+    boost::shared_ptr<QuaternionOrbitData> od = orbit_data(t);
+    Lv = od->cf_look_vector(cam->sc_look_vector(f, b));
+    P = od->position_cf();
 }
 
 // See base class for description
@@ -92,8 +103,7 @@ boost::shared_ptr<GroundCoordinate> IgcRollingShutter::ground_coordinate_dem
   Time t;
   FrameCoordinate f;
   time_table_->time(Ic, t, f);
-  return orbit_->orbit_data(t)->
-    surface_intersect(*cam, f, D, res, b, max_h);
+  return orbit_data(t)->surface_intersect(*cam, f, D, res, b, max_h);
 }
 
 // See base class for description
@@ -105,8 +115,7 @@ IgcRollingShutter::ground_coordinate_approx_height
   Time t;
   FrameCoordinate f;
   time_table_->time(Ic, t, f);
-  return orbit_->orbit_data(t)->
-    reference_surface_intersect_approximate(*cam, f, b, H);
+  return orbit_data(t)->reference_surface_intersect_approximate(*cam, f, b, H);
 }
 
 namespace GeoCal {
@@ -114,12 +123,15 @@ namespace GeoCal {
 class IcEq: public GeoCal::DFunctorWithDerivative {
 public:
   IcEq(const boost::shared_ptr<Orbit>& Orb,
+       const boost::shared_ptr<QuaternionOrbitData>& Od1,
+       const boost::shared_ptr<QuaternionOrbitData>& Od2,
        const boost::shared_ptr<TimeTable>& Tt,
        const boost::shared_ptr<Camera>& Cam,
        const boost::shared_ptr<CartesianFixed>& P,
        Time Tmin,
        int Band)
-    : orb(Orb), tt(Tt), cam(Cam), p(P), band(Band), tmin(Tmin)
+    : orb(Orb), od1(Od1), od2(Od2), tt(Tt), cam(Cam), p(P), band(Band), 
+      tmin(Tmin)
   { }
   virtual ~IcEq() {}
   virtual double operator()(const double& Toffset) const
@@ -184,6 +196,14 @@ public:
   }
 private:
   boost::shared_ptr<Orbit> orb;
+  boost::shared_ptr<QuaternionOrbitData> od1;
+  boost::shared_ptr<QuaternionOrbitData> od2;
+  //  boost::shared_ptr<QuaternionOrbitData> 
+  // orbit_data(const Time& Tm) const
+  //  { return interpolate(*od1, *od2, Tm); }
+  boost::shared_ptr<OrbitData> 
+  orbit_data(const Time& Tm) const
+  { return orb->orbit_data(Tm); }
   boost::shared_ptr<TimeTable> tt;
   boost::shared_ptr<Camera> cam;
   boost::shared_ptr<CartesianFixed> p;
@@ -198,7 +218,7 @@ ImageCoordinate IgcRollingShutter::image_coordinate
 (const GroundCoordinate& Gc) const
 {
   IgcRollingShutterHelper::IcEq 
-    eq(orbit_, time_table_, cam, Gc.convert_to_cf(), 
+    eq(orbit_, od1, od2, time_table_, cam, Gc.convert_to_cf(), 
        time_table_->min_time(), b);
   if(eq(0) * eq(time_table_->max_time() - time_table_->min_time()) > 0)
     throw ImageGroundConnectionFailed();
@@ -213,7 +233,7 @@ blitz::Array<double, 2> IgcRollingShutter::image_coordinate_jac_parm
 (const GroundCoordinate& Gc) const
 {
   IgcRollingShutterHelper::IcEq 
-    eq(orbit_, time_table_, cam, Gc.convert_to_cf(), 
+    eq(orbit_, od1, od2, time_table_, cam, Gc.convert_to_cf(), 
        time_table_->min_time(), b);
   if(eq(0) * eq(time_table_->max_time() - time_table_->min_time()) > 0)
     throw ImageGroundConnectionFailed();
@@ -254,7 +274,7 @@ blitz::Array<double, 7> IgcRollingShutter::cf_look_vector_arr
       double tint = 0;
       if(k != 0)
 	tint = cam->integration_time(b) / (nintegration_step - 1) * k;
-      od.push_back(orbit_->orbit_data(t + tint));
+      od.push_back(orbit_data(t + tint));
       pos.push_back(od[k]->position_cf());
     }
     for(int j = 0; j < nsamp; ++j) 
@@ -284,14 +304,14 @@ void IgcRollingShutter::footprint_resolution
   Time t;
   FrameCoordinate f;
   time_table_->time(ImageCoordinate(Line, Sample), t, f);
-  boost::shared_ptr<GroundCoordinate> gc = orbit_->orbit_data(t)->
+  boost::shared_ptr<GroundCoordinate> gc = orbit_data(t)->
     reference_surface_intersect_approximate(*cam, f, b);
   f.line += 1;
-  boost::shared_ptr<GroundCoordinate> gc1 = orbit_->orbit_data(t)->
+  boost::shared_ptr<GroundCoordinate> gc1 = orbit_data(t)->
     reference_surface_intersect_approximate(*cam, f, b);
   f.line -= 1;
   f.sample += 1;
-  boost::shared_ptr<GroundCoordinate> gc2 = orbit_->orbit_data(t)->
+  boost::shared_ptr<GroundCoordinate> gc2 = orbit_data(t)->
     reference_surface_intersect_approximate(*cam, f, b);
   Line_resolution_meter = distance(*gc, *gc1);
   Sample_resolution_meter = distance(*gc, *gc2);
@@ -329,3 +349,35 @@ void IgcRollingShutter::print(std::ostream& Os) const
   opad.strict_sync();
 }
 
+//-----------------------------------------------------------------------
+/// Set Camera that we are using
+//-----------------------------------------------------------------------
+
+void IgcRollingShutter::camera(const boost::shared_ptr<Camera>& C) 
+{ 
+  cam = C; 
+  clear_object();
+  add_object(orbit_);
+  add_object(cam);
+}
+
+//-----------------------------------------------------------------------
+/// Set orbit.
+//-----------------------------------------------------------------------
+
+void IgcRollingShutter::orbit(const boost::shared_ptr<Orbit>& Orb) 
+{ 
+  if(orbit_)
+    orbit_->remove_observer(*this);
+  orbit_ = Orb;
+  orbit_->add_observer(*this);
+  clear_object();
+  add_object(orbit_);
+  add_object(cam);
+  od1 = boost::dynamic_pointer_cast<QuaternionOrbitData>
+    (orbit_->orbit_data(time_table_->min_time()));
+  od2 = boost::dynamic_pointer_cast<QuaternionOrbitData>
+    (orbit_->orbit_data(time_table_->max_time()));
+  if(!od1 || !od2)
+    throw Exception("This class only works with QuaternionOrbitData");
+}

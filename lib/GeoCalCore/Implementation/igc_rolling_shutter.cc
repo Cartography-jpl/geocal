@@ -136,7 +136,7 @@ public:
   {
     Time t = tmin + Toffset;
     FrameCoordinate fc(cam->frame_line_coordinate
-		       (orbit_data(t)->sc_look_vector(look_vector(t)), 
+		       (sc_look_vector(t), 
 			band), 0);
     ImageCoordinate ic = tt->image_coordinate(t, fc);
     return ic.line - fc.line;
@@ -153,8 +153,7 @@ public:
     Time t = tmin + Toffset;
     FrameCoordinateWithDerivative fc = 
       cam->frame_coordinate_with_derivative
-      (igc.orbit_->sc_look_vector(t, look_vector_with_derivative(t)), 
-       band);
+      (sc_look_vector_with_derivative(t), band);
     ImageCoordinateWithDerivative ic = 
       tt->image_coordinate_with_derivative(t, fc);
     return ic.line - fc.line;
@@ -163,13 +162,30 @@ public:
   ImageCoordinate image_coordinate(double Toffset) const
   {
     Time t = tmin + Toffset;
-    return tt->image_coordinate(t, cam->frame_coordinate(orbit_data(t)->sc_look_vector(look_vector(t)), band));
+    return tt->image_coordinate(t, cam->frame_coordinate(sc_look_vector(t), band));
   }
   ImageCoordinateWithDerivative image_coordinate_with_derivative
   (const AutoDerivative<double>& Toffset) const
   {
     TimeWithDerivative t = TimeWithDerivative::time_pgs(tmin.pgs() + Toffset);
-    return tt->image_coordinate_with_derivative(t, cam->frame_coordinate_with_derivative(igc.orbit_->sc_look_vector(t, look_vector_with_derivative(t)), band));
+    return tt->image_coordinate_with_derivative(t, cam->frame_coordinate_with_derivative(sc_look_vector_with_derivative(t), band));
+  }
+  ScLookVector sc_look_vector(Time T) const
+  {
+    CartesianFixedLookVector cf = look_vector(T);
+    ScLookVector res;
+    double k = cf.length() / Constant::speed_of_light;
+    boost::shared_ptr<QuaternionOrbitData> od = orbit_data(T);
+    boost::math::quaternion<double> sc =
+      conj(od->sc_to_cf()) * (cf.look_quaternion() + k * igc.velocity_cf(T)) * 
+      od->sc_to_cf();
+    res.look_quaternion(sc);
+    return res;
+  }
+  ScLookVectorWithDerivative sc_look_vector_with_derivative
+  (const TimeWithDerivative& T) const
+  {
+    return igc.orbit_->sc_look_vector(T, look_vector_with_derivative(T));
   }
   CartesianFixedLookVector look_vector(Time T) const
   {

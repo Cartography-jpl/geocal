@@ -274,6 +274,12 @@ private:
     position_cf(Tm, p);
     return od1->position_cf()->create(p);
   }
+  boost::math::quaternion<double> velocity_cf(const Time& Tm) const
+  {
+    boost::array<double, 3> v;
+    pinterp.velocity(Tm, v);
+    return boost::math::quaternion<double>(0, v[0], v[1], v[2]);
+  }
   boost::shared_ptr<QuaternionOrbitData> 
   orbit_data(const Time& Tm) const
   { return interpolate(*od1, *od2, Tm); }

@@ -175,10 +175,9 @@ public:
     CartesianFixedLookVector cf = look_vector(T);
     ScLookVector res;
     double k = cf.length() / Constant::speed_of_light;
-    boost::shared_ptr<QuaternionOrbitData> od = orbit_data(T);
     boost::math::quaternion<double> sc =
-      conj(od->sc_to_cf()) * (cf.look_quaternion() + k * igc.velocity_cf(T)) * 
-      od->sc_to_cf();
+      conj(igc.sc_to_cf(T)) * (cf.look_quaternion() + k * igc.velocity_cf(T)) * 
+      igc.sc_to_cf(T);
     res.look_quaternion(sc);
     return res;
   }
@@ -401,6 +400,11 @@ void IgcRollingShutter::notify_update(const Orbit& Orb)
      od1->velocity_cf(),
      od2->position_cf()->position,
      od2->velocity_cf(),
+     od1->time(),
+     od2->time() - od1->time());
+  qinterp = IgcRollingShutterHelper::QuaternionInterpolate
+    (od1->sc_to_cf(),
+     od2->sc_to_cf(),
      od1->time(),
      od2->time() - od1->time());
 }

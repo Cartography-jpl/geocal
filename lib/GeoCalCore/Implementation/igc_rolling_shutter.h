@@ -50,6 +50,22 @@ namespace GeoCal {
       Time tmin;
       double tspace;
     };
+    // Helper class that does a fast interpolation of quaternion.
+    class QuaternionInterpolate {
+    public:
+      QuaternionInterpolate() {}
+      QuaternionInterpolate(const boost::math::quaternion<double>& Q1,
+			    const boost::math::quaternion<double>& Q2,
+			    const Time& Tmin,
+			    double Tspace)
+	: q1(Q1), q2(Q2), tmin(Tmin), tspace(Tspace) {}
+      boost::math::quaternion<double> operator()(const Time& Tm) const
+      { return interpolate_quaternion(q1, q2, Tm - tmin, tspace); }
+    private:
+      boost::math::quaternion<double> q1, q2;
+      Time tmin;
+      double tspace;
+    };
   }
 
 /****************************************************************//**
@@ -266,6 +282,7 @@ private:
   boost::shared_ptr<QuaternionOrbitData> od1;
   boost::shared_ptr<QuaternionOrbitData> od2;
   IgcRollingShutterHelper::PositionInterpolate pinterp;
+  IgcRollingShutterHelper::QuaternionInterpolate qinterp;
   void position_cf(const Time& Tm, boost::array<double, 3>& Pres) const
   { pinterp.position(Tm, Pres); }
   boost::shared_ptr<CartesianFixed> position_cf(const Time& Tm) const
@@ -279,6 +296,10 @@ private:
     boost::array<double, 3> v;
     pinterp.velocity(Tm, v);
     return boost::math::quaternion<double>(0, v[0], v[1], v[2]);
+  }
+  boost::math::quaternion<double> sc_to_cf(const Time& Tm) const
+  {
+    return qinterp(Tm);
   }
   boost::shared_ptr<QuaternionOrbitData> 
   orbit_data(const Time& Tm) const

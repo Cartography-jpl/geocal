@@ -92,7 +92,7 @@ void IgcRollingShutter::cf_look_vector
     time_table_->time(Ic, t, f);
     boost::shared_ptr<QuaternionOrbitData> od = orbit_data(t);
     Lv = od->cf_look_vector(cam->sc_look_vector(f, b));
-    P = od->position_cf();
+    P = position_cf(t);
 }
 
 // See base class for description
@@ -174,7 +174,8 @@ public:
   CartesianFixedLookVector look_vector(Time T) const
   {
     boost::array<double, 3> p1 = p->position;
-    boost::array<double, 3> p2 = orbit_data(T)->position_cf()->position;
+    boost::array<double, 3> p2;
+    igc.position_cf(T, p2);
     CartesianFixedLookVector lv;
     lv.look_vector[0] = p1[0] - p2[0];
     lv.look_vector[1] = p1[1] - p2[1];
@@ -268,7 +269,7 @@ blitz::Array<double, 7> IgcRollingShutter::cf_look_vector_arr
       if(k != 0)
 	tint = cam->integration_time(b) / (nintegration_step - 1) * k;
       od.push_back(orbit_data(t + tint));
-      pos.push_back(od[k]->position_cf());
+      pos.push_back(position_cf(t + tint));
     }
     for(int j = 0; j < nsamp; ++j) 
       for(int i2 = 0; i2 < nsubpixel_line; ++i2)
@@ -367,10 +368,24 @@ void IgcRollingShutter::orbit(const boost::shared_ptr<Orbit>& Orb)
   clear_object();
   add_object(orbit_);
   add_object(cam);
+  notify_update(*orbit_);
+}
+
+// Called when orbit has changed.
+void IgcRollingShutter::notify_update(const Orbit& Orb)
+{
   od1 = boost::dynamic_pointer_cast<QuaternionOrbitData>
     (orbit_->orbit_data(time_table_->min_time()));
   od2 = boost::dynamic_pointer_cast<QuaternionOrbitData>
     (orbit_->orbit_data(time_table_->max_time()));
   if(!od1 || !od2)
     throw Exception("This class only works with QuaternionOrbitData");
+  pinterp = IgcRollingShutterHelper::PositionInterpolate
+    (od1->position_cf()->position,
+     od1->velocity_cf(),
+     od2->position_cf()->position,
+     od2->velocity_cf(),
+     od1->time(),
+     od2->time() - od1->time());
 }
+

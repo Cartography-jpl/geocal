@@ -11,6 +11,45 @@ namespace GeoCal {
     class IcEq;			// Internally used class. We need to
 				// declare this because we need to
 				// make it a friend class.
+    // Helper class that does a fast interpolation of position. See
+    // interpolation of position in orbit.cc, this just caches some
+    // of the intermediate values to we can rapidly calculate position
+    // at different times.
+    class PositionInterpolate {
+    public:
+      PositionInterpolate() {}
+      PositionInterpolate(const boost::array<double, 3>& P1,
+			  const boost::array<double, 3>& V1,
+			  const boost::array<double, 3>& P2,
+			  const boost::array<double, 3>& V2,
+			  Time Tmin,
+			  double Tspace)
+	: tmin(Tmin), tspace(Tspace)
+      {
+	for(int i = 0; i < 3; ++i) {
+	  c0[i] = P1[i];
+	  c1[i] = V1[i] * tspace;
+	  c2[i] = (P2[i] - P1[i]) * 3 - (V2[i] + V1[i] * 2) * tspace;
+	  c3[i] = (P2[i] - P1[i]) * (-2) + (V2[i] + V1[i]) * tspace;
+	}
+      }
+      void position(Time T, boost::array<double, 3>& Pres) const
+      {
+	double t = (T - tmin) / tspace;
+	for(int i = 0; i < 3; ++i)
+	  Pres[i] = c0[i] + (c1[i] + (c2[i] + c3[i] * t) * t) * t;
+      }
+      void velocity(Time T, boost::array<double, 3>& Vres) const
+      {
+	double t = (T - tmin) / tspace;
+	for(int i = 0; i < 3; ++i)
+	  Vres[i] = (c1[i] + (c2[i] * 2 + c3[i] * (3 * t)) * t) / tspace;
+      }
+    private:
+      boost::array<double, 3> c0, c1, c2, c3;
+      Time tmin;
+      double tspace;
+    };
   }
 
 /****************************************************************//**
@@ -72,13 +111,7 @@ public:
 
   virtual ~IgcRollingShutter() {}
 
-  virtual void notify_update(const Orbit& Orb)
-  {
-    od1 = boost::dynamic_pointer_cast<QuaternionOrbitData>
-      (orbit_->orbit_data(time_table_->min_time()));
-    od2 = boost::dynamic_pointer_cast<QuaternionOrbitData>
-      (orbit_->orbit_data(time_table_->max_time()));
-  }
+  virtual void notify_update(const Orbit& Orb);
 
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
@@ -232,6 +265,15 @@ private:
   boost::shared_ptr<Orbit> orbit_;
   boost::shared_ptr<QuaternionOrbitData> od1;
   boost::shared_ptr<QuaternionOrbitData> od2;
+  IgcRollingShutterHelper::PositionInterpolate pinterp;
+  void position_cf(const Time& Tm, boost::array<double, 3>& Pres) const
+  { pinterp.position(Tm, Pres); }
+  boost::shared_ptr<CartesianFixed> position_cf(const Time& Tm) const
+  {
+    boost::array<double, 3> p;
+    position_cf(Tm, p);
+    return od1->position_cf()->create(p);
+  }
   boost::shared_ptr<QuaternionOrbitData> 
   orbit_data(const Time& Tm) const
   { return interpolate(*od1, *od2, Tm); }

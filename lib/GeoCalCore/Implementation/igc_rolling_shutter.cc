@@ -138,7 +138,7 @@ public:
   {
     Time t = tmin + Toffset;
     FrameCoordinate fc(cam->frame_line_coordinate
-		       (orb->sc_look_vector(t, look_vector(t)), 
+		       (orbit_data(t)->sc_look_vector(look_vector(t)), 
 			band), 0);
     ImageCoordinate ic = tt->image_coordinate(t, fc);
     return ic.line - fc.line;
@@ -165,7 +165,7 @@ public:
   ImageCoordinate image_coordinate(double Toffset) const
   {
     Time t = tmin + Toffset;
-    return tt->image_coordinate(t, cam->frame_coordinate(orb->sc_look_vector(t, look_vector(t)), band));
+    return tt->image_coordinate(t, cam->frame_coordinate(orbit_data(t)->sc_look_vector(look_vector(t)), band));
   }
   ImageCoordinateWithDerivative image_coordinate_with_derivative
   (const AutoDerivative<double>& Toffset) const
@@ -176,7 +176,7 @@ public:
   CartesianFixedLookVector look_vector(Time T) const
   {
     boost::array<double, 3> p1 = p->position;
-    boost::array<double, 3> p2 = orb->position_cf(T)->position;
+    boost::array<double, 3> p2 = orbit_data(T)->position_cf()->position;
     CartesianFixedLookVector lv;
     lv.look_vector[0] = p1[0] - p2[0];
     lv.look_vector[1] = p1[1] - p2[1];
@@ -198,12 +198,9 @@ private:
   boost::shared_ptr<Orbit> orb;
   boost::shared_ptr<QuaternionOrbitData> od1;
   boost::shared_ptr<QuaternionOrbitData> od2;
-  //  boost::shared_ptr<QuaternionOrbitData> 
-  // orbit_data(const Time& Tm) const
-  //  { return interpolate(*od1, *od2, Tm); }
-  boost::shared_ptr<OrbitData> 
+  boost::shared_ptr<QuaternionOrbitData> 
   orbit_data(const Time& Tm) const
-  { return orb->orbit_data(Tm); }
+  { return interpolate(*od1, *od2, Tm); }
   boost::shared_ptr<TimeTable> tt;
   boost::shared_ptr<Camera> cam;
   boost::shared_ptr<CartesianFixed> p;

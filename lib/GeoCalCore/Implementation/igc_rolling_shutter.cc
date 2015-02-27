@@ -122,15 +122,13 @@ namespace GeoCal {
   namespace IgcRollingShutterHelper {
 class IcEq: public GeoCal::DFunctorWithDerivative {
 public:
-  IcEq(const boost::shared_ptr<Orbit>& Orb,
-       const boost::shared_ptr<QuaternionOrbitData>& Od1,
-       const boost::shared_ptr<QuaternionOrbitData>& Od2,
+  IcEq(const IgcRollingShutter& Igc,
        const boost::shared_ptr<TimeTable>& Tt,
        const boost::shared_ptr<Camera>& Cam,
        const boost::shared_ptr<CartesianFixed>& P,
        Time Tmin,
        int Band)
-    : orb(Orb), od1(Od1), od2(Od2), tt(Tt), cam(Cam), p(P), band(Band), 
+    : igc(Igc), tt(Tt), cam(Cam), p(P), band(Band), 
       tmin(Tmin)
   { }
   virtual ~IcEq() {}
@@ -155,7 +153,7 @@ public:
     Time t = tmin + Toffset;
     FrameCoordinateWithDerivative fc = 
       cam->frame_coordinate_with_derivative
-      (orb->sc_look_vector(t, look_vector_with_derivative(t)), 
+      (igc.orbit_->sc_look_vector(t, look_vector_with_derivative(t)), 
        band);
     ImageCoordinateWithDerivative ic = 
       tt->image_coordinate_with_derivative(t, fc);
@@ -171,7 +169,7 @@ public:
   (const AutoDerivative<double>& Toffset) const
   {
     TimeWithDerivative t = TimeWithDerivative::time_pgs(tmin.pgs() + Toffset);
-    return tt->image_coordinate_with_derivative(t, cam->frame_coordinate_with_derivative(orb->sc_look_vector(t, look_vector_with_derivative(t)), band));
+    return tt->image_coordinate_with_derivative(t, cam->frame_coordinate_with_derivative(igc.orbit_->sc_look_vector(t, look_vector_with_derivative(t)), band));
   }
   CartesianFixedLookVector look_vector(Time T) const
   {
@@ -187,7 +185,7 @@ public:
   look_vector_with_derivative(const TimeWithDerivative& T) const
   {
     boost::array<double, 3> p1 = p->position;
-    boost::array<AutoDerivative<double>, 3> p2 = orb->position_cf_with_derivative(T);
+    boost::array<AutoDerivative<double>, 3> p2 = igc.orbit_->position_cf_with_derivative(T);
     CartesianFixedLookVectorWithDerivative lv;
     lv.look_vector[0] = p1[0] - p2[0];
     lv.look_vector[1] = p1[1] - p2[1];
@@ -195,12 +193,10 @@ public:
     return lv;
   }
 private:
-  boost::shared_ptr<Orbit> orb;
-  boost::shared_ptr<QuaternionOrbitData> od1;
-  boost::shared_ptr<QuaternionOrbitData> od2;
+  const IgcRollingShutter& igc;
   boost::shared_ptr<QuaternionOrbitData> 
   orbit_data(const Time& Tm) const
-  { return interpolate(*od1, *od2, Tm); }
+  { return igc.orbit_data(Tm); }
   boost::shared_ptr<TimeTable> tt;
   boost::shared_ptr<Camera> cam;
   boost::shared_ptr<CartesianFixed> p;
@@ -215,7 +211,7 @@ ImageCoordinate IgcRollingShutter::image_coordinate
 (const GroundCoordinate& Gc) const
 {
   IgcRollingShutterHelper::IcEq 
-    eq(orbit_, od1, od2, time_table_, cam, Gc.convert_to_cf(), 
+    eq(*this, time_table_, cam, Gc.convert_to_cf(), 
        time_table_->min_time(), b);
   if(eq(0) * eq(time_table_->max_time() - time_table_->min_time()) > 0)
     throw ImageGroundConnectionFailed();
@@ -230,7 +226,7 @@ blitz::Array<double, 2> IgcRollingShutter::image_coordinate_jac_parm
 (const GroundCoordinate& Gc) const
 {
   IgcRollingShutterHelper::IcEq 
-    eq(orbit_, od1, od2, time_table_, cam, Gc.convert_to_cf(), 
+    eq(*this, time_table_, cam, Gc.convert_to_cf(), 
        time_table_->min_time(), b);
   if(eq(0) * eq(time_table_->max_time() - time_table_->min_time()) > 0)
     throw ImageGroundConnectionFailed();

@@ -7,6 +7,12 @@
 #include "camera.h"
 
 namespace GeoCal {
+  namespace IgcRollingShutterHelper {
+    class IcEq;			// Internally used class. We need to
+				// declare this because we need to
+				// make it a friend class.
+  }
+
 /****************************************************************//**
   This is a ImageGroundConnection where the connection is made by
   OrbitData and a Camera. This is similar to
@@ -222,6 +228,7 @@ protected:
 	    double Resolution=30, int Band=0, 
 	    double Max_height=9000);
 private:
+  friend class IgcRollingShutterHelper::IcEq;
   boost::shared_ptr<Orbit> orbit_;
   boost::shared_ptr<QuaternionOrbitData> od1;
   boost::shared_ptr<QuaternionOrbitData> od2;

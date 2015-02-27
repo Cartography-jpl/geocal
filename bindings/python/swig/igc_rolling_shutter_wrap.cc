@@ -7912,7 +7912,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { (char *)"IgcRollingShutter__v_orbit", _wrap_IgcRollingShutter__v_orbit, METH_VARARGS, (char *)"\n"
-		"void GeoCal::IgcRollingShutter::orbit(const boost::shared_ptr< Orbit > &Orb)\n"
+		"void IgcRollingShutter::orbit(const boost::shared_ptr< Orbit > &Orb)\n"
 		"Set orbit. \n"
 		""},
 	 { (char *)"IgcRollingShutter__v_time_table", _wrap_IgcRollingShutter__v_time_table, METH_VARARGS, (char *)"\n"
@@ -7920,7 +7920,7 @@ static PyMethodDef SwigMethods[] = {
 		"Set time table. \n"
 		""},
 	 { (char *)"IgcRollingShutter__v_camera", _wrap_IgcRollingShutter__v_camera, METH_VARARGS, (char *)"\n"
-		"void GeoCal::IgcRollingShutter::camera(const boost::shared_ptr< Camera > &C)\n"
+		"void IgcRollingShutter::camera(const boost::shared_ptr< Camera > &C)\n"
 		"Set Camera that we are using. \n"
 		""},
 	 { (char *)"IgcRollingShutter__v_resolution", _wrap_IgcRollingShutter__v_resolution, METH_VARARGS, (char *)"\n"

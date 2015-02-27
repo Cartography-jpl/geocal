@@ -182,7 +182,7 @@ class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnectio
 
     def _v_orbit(self, *args):
         """
-        void GeoCal::IgcRollingShutter::orbit(const boost::shared_ptr< Orbit > &Orb)
+        void IgcRollingShutter::orbit(const boost::shared_ptr< Orbit > &Orb)
         Set orbit. 
         """
         return _igc_rolling_shutter.IgcRollingShutter__v_orbit(self, *args)
@@ -212,7 +212,7 @@ class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnectio
 
     def _v_camera(self, *args):
         """
-        void GeoCal::IgcRollingShutter::camera(const boost::shared_ptr< Camera > &C)
+        void IgcRollingShutter::camera(const boost::shared_ptr< Camera > &C)
         Set Camera that we are using. 
         """
         return _igc_rolling_shutter.IgcRollingShutter__v_camera(self, *args)

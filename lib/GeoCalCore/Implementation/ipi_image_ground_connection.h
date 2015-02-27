@@ -92,6 +92,12 @@ public:
       throw ImageGroundConnectionFailed("IPI failed");
     return res; 
   }
+  virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
+					    ImageCoordinate& Res,
+					    bool& Success) const
+  {
+    ipi_->image_coordinate_extended(Gc, Res, Success);
+  }
   virtual void print(std::ostream& Os) const \
   {
     OstreamPad opad(Os, "    ");

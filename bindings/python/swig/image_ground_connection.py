@@ -273,6 +273,23 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         """
         return _image_ground_connection.ImageGroundConnection_image_coordinate(self, *args)
 
+    def image_coordinate_with_status(self, *args):
+        """
+        virtual void GeoCal::ImageGroundConnection::image_coordinate_with_status(const GroundCoordinate &Gc, ImageCoordinate &Res, bool &Success)
+        const
+        Variation of image_coordinate that returns a status instead of
+        throwing an exception.
+
+        If there are many points calls that might throw an exception (e.g.,
+        looking at area near the edge of the image footprint on the ground)
+        the cost of setting up and catching the exceptions can be expensive.
+
+        The default implementation just catches any
+        ImageGroundConnectionFailed exceptions and set the status accordingly.
+        But derived classes can give a more efficient implementation. 
+        """
+        return _image_ground_connection.ImageGroundConnection_image_coordinate_with_status(self, *args)
+
     def image_coordinate_jac_cf(self, *args):
         """
         blitz::Array< double, 2 > ImageGroundConnection::image_coordinate_jac_cf(const CartesianFixed &Gc) const
@@ -572,6 +589,7 @@ ImageGroundConnection.__ground_coordinate = new_instancemethod(_image_ground_con
 ImageGroundConnection.ground_coordinate_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_dem,None,ImageGroundConnection)
 ImageGroundConnection.ground_coordinate_approx_height = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_approx_height,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate,None,ImageGroundConnection)
+ImageGroundConnection.image_coordinate_with_status = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_with_status,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_cf = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm,None,ImageGroundConnection)
 ImageGroundConnection.cover = new_instancemethod(_image_ground_connection.ImageGroundConnection_cover,None,ImageGroundConnection)

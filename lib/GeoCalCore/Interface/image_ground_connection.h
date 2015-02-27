@@ -253,6 +253,31 @@ public:
 
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const = 0;
+
+//-----------------------------------------------------------------------
+/// Variation of image_coordinate that returns a status instead of 
+/// throwing an exception. If there are many points calls that might
+/// throw an exception (e.g., looking at area near the edge of the
+/// image footprint on the ground) the cost of setting up and catching
+/// the exceptions can be expensive.
+///
+/// The default implementation just catches any
+/// ImageGroundConnectionFailed exceptions and set the status
+/// accordingly. But derived classes can give a more efficient
+/// implementation. 
+//-----------------------------------------------------------------------
+
+  virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
+					    ImageCoordinate& Res,
+					    bool& Success) const 
+  {
+    try {
+      Res = image_coordinate(Gc);
+      Success = true;
+    } catch(const ImageGroundConnectionFailed& E) {
+      Success = false;
+    }
+  }
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
 
@@ -480,6 +505,16 @@ public:
     ic.sample += sample_offset_.value();
     return ic;
   }
+  virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
+					    ImageCoordinate& Res,
+					    bool& Success) const
+  {
+    ig_->image_coordinate_with_status(Gc, Res, Success);
+    if(Success) {
+      Res.line += line_offset_.value();
+      Res.sample += sample_offset_.value();
+    }
+  }
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const
   { return ig_->image_coordinate_jac_cf(Gc); }
 
@@ -588,6 +623,12 @@ public:
   { return igc; }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const { return igc->image_coordinate(Gc); }
+  virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
+					    ImageCoordinate& Res,
+					    bool& Success) const
+  {
+    igc->image_coordinate_with_status(Gc, Res, Success);
+  }
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const { return igc->image_coordinate_jac_cf(Gc); }
   virtual blitz::Array<double, 2> 

@@ -92,6 +92,16 @@ public:
     ic.sample = (ic.sample + 0.5) * magfactor_ - 0.5;
     return ic;
   }
+  virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
+					    ImageCoordinate& Res,
+					    bool& Success) const
+  {
+    ig_->image_coordinate_with_status(Gc, Res, Success);
+    if(Success) {
+      Res.line = (Res.line + 0.5) * magfactor_ - 0.5;
+      Res.sample = (Res.sample + 0.5) * magfactor_ - 0.5;
+    }
+  }
 
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const
   { 

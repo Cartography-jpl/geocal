@@ -103,6 +103,9 @@ public:
 				  double H) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const = 0;
+  virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
+					    ImageCoordinate& OUTPUT,
+					    bool& OUTPUT) const;
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
   virtual blitz::Array<double, 2> 

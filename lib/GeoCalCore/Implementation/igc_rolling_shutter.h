@@ -138,6 +138,9 @@ public:
   ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
+  virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
+					    ImageCoordinate& Res,
+					    bool& Success) const;
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   virtual blitz::Array<double, 7> 

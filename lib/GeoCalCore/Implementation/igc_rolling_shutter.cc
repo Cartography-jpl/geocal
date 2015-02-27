@@ -226,14 +226,32 @@ private:
 ImageCoordinate IgcRollingShutter::image_coordinate
 (const GroundCoordinate& Gc) const
 {
+  bool success;
+  ImageCoordinate res;
+  image_coordinate_with_status(Gc, res, success);
+  if(!success)
+    throw ImageGroundConnectionFailed();
+  return res;
+}
+
+// See base class for description
+
+void IgcRollingShutter::image_coordinate_with_status
+(const GroundCoordinate& Gc,
+ ImageCoordinate& Res,
+ bool& Success) const
+{
   IgcRollingShutterHelper::IcEq 
     eq(*this, time_table_, cam, Gc.convert_to_cf(), 
        time_table_->min_time(), b);
-  if(eq(0) * eq(time_table_->max_time() - time_table_->min_time()) > 0)
-    throw ImageGroundConnectionFailed();
+  if(eq(0) * eq(time_table_->max_time() - time_table_->min_time()) > 0) {
+    Success = false;
+    return;
+  }
   double t = gsl_root(eq, 0, time_table_->max_time() - 
 		      time_table_->min_time(), time_tolerance_);
-  return eq.image_coordinate(t);
+  Res = eq.image_coordinate(t);
+  Success = true;
 }
 
 // See base class for description

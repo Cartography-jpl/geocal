@@ -6484,7 +6484,7 @@ GeoCal::ImageCoordinate SwigDirector_ImageGroundConnection::image_coordinate(Geo
 }
 
 
-void SwigDirector_ImageGroundConnection::image_coordinate_with_status(GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate &OUTPUT, bool &OUTPUT) const {
+void SwigDirector_ImageGroundConnection::image_coordinate_with_status(GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate &OUTPUT2, bool &OUTPUT) const {
   swig::SwigVar_PyObject obj0;
   {
     boost::shared_ptr< const GeoCal::GroundCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::GroundCoordinate >((GeoCal::GroundCoordinate *)&Gc, SWIG_null_deleter());

@@ -64,15 +64,16 @@ class TiePoint(object):
         number_col = int(math.ceil(nimg / float(number_row)))
         plt.clf()
         for i in range(self.number_camera):
-            plt.subplot(number_row, number_col, i + 1)
-            plt.title(igc_coll.title(i))
-            if(map_info):
-                igc_proj = IgcMapProjected(map_info, 
-                                           igc_coll.image_ground_connection(i))
-                pt = igc_proj.coordinate(igc_coll.ground_coordinate(i, self.image_location[i][O]))
-                igc_proj.display(pt, sz)
-            else:
-                igc_coll.image(i).display(self.image_location[i][0], sz)
+            if(self.image_location[i] is not None):
+                plt.subplot(number_row, number_col, i + 1)
+                plt.title(igc_coll.title(i))
+                if(map_info):
+                    igc_proj = IgcMapProjected(map_info, 
+                                               igc_coll.image_ground_connection(i))
+                    pt = igc_proj.coordinate(igc_coll.ground_coordinate(i, self.image_location[i][O]))
+                    igc_proj.display(pt, sz)
+                else:
+                    igc_coll.image(i).display(self.image_location[i][0], sz)
         if(ref_image is not None):
             plt.subplot(number_row, number_col, self.number_camera + 1)
             plt.title("Reference Image")

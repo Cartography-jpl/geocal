@@ -8,6 +8,14 @@
 #include "hdf_orbit.h"
 #include "eci_tod.h"
 #include "orbit_offset_correction.h"
+#include "igc_collection.h"
+#include <boost/filesystem.hpp>
+#include <fstream>
+#include "geocal_serialize_support.h"
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+#include <boost/archive/polymorphic_xml_iarchive.hpp>
+#include <boost/archive/polymorphic_xml_oarchive.hpp>
+#endif
 using namespace GeoCal;
 using namespace blitz;
 
@@ -228,6 +236,59 @@ BOOST_AUTO_TEST_CASE(serialization)
   ImageCoordinate ic(100, 200);
   BOOST_CHECK(igcr->image_coordinate(*igc->ground_coordinate(ic)) == ic);
   BOOST_CHECK_MATRIX_CLOSE(igc->parameter(), igcr->parameter());
+}
+
+BOOST_AUTO_TEST_CASE(expected_points)
+{
+  if(!have_serialize_supported())
+    return;
+  // Run only if we have the test data.
+  if(!boost::filesystem::exists("/data/geocal_test_data/igccol_rolling_shutter.xml"))
+    return;
+  boost::shared_ptr<IgcCollection> igccol = 
+    serialize_read<IgcCollection>("/data/geocal_test_data/igccol_rolling_shutter.xml");
+  boost::shared_ptr<ImageGroundConnection> igc = 
+    igccol->image_ground_connection(10);
+  // Generate expected results
+  if(false) {
+    std::vector<ImageCoordinate> iclist;
+    std::vector<boost::shared_ptr<GroundCoordinate> > gclist;
+    for(int i = 0; i < igc->number_line(); i += 10)
+      for(int j = 0; j < igc->number_sample(); j += 10) {
+	ImageCoordinate ic(i, j);
+	iclist.push_back(ic);
+	gclist.push_back(igc->ground_coordinate(ic));
+      }
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+    std::ofstream os("/data/geocal_test_data/igccol_rolling_shutter_test_expect.xml");
+    boost::archive::polymorphic_xml_oarchive oa(os);
+    oa << boost::serialization::make_nvp("iclist", iclist)
+       << boost::serialization::make_nvp("gclist", gclist);
+#else
+  throw Exception("GeoCal was not built with boost::serialization support");
+#endif
+  }
+  // Read previously generated test data.
+  std::vector<ImageCoordinate> iclist;
+  std::vector<boost::shared_ptr<GroundCoordinate> > gclist;
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+    std::ifstream is("/data/geocal_test_data/igccol_rolling_shutter_test_expect.xml");
+    boost::archive::polymorphic_xml_iarchive ia(is);
+    ia >> boost::serialization::make_nvp("iclist", iclist)
+       >> boost::serialization::make_nvp("gclist", gclist);
+#else
+  throw Exception("GeoCal was not built with boost::serialization support");
+#endif
+  for(int i = 0; i < (int) iclist.size(); ++i) {
+    try {
+      std::cerr << "Checking " << i << "\n";
+      BOOST_CHECK(igc->image_coordinate(*gclist[i]) == iclist[i]);
+      BOOST_CHECK(GeoCal::distance(*igc->ground_coordinate(iclist[i]), 
+				   *gclist[i]) < 0.1);
+    } catch(const ImageGroundConnectionFailed& E) {
+      std::cerr << "Test failed.\n";
+    }
+  }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

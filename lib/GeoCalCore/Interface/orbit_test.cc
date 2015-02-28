@@ -29,6 +29,12 @@ BOOST_AUTO_TEST_CASE(kepler_orbit_data)
   } catch(const Exception& e) {
     BOOST_CHECK(true);
   }
+  boost::array<double, 3> velci = orb.velocity_ci(t);
+  double tspace = 0.1;
+  boost::array<double, 3> p1 = orb.position_ci(t+tspace)->position;
+  boost::array<double, 3> p2 = orb.position_ci(t)->position;
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE((p1[i] - p2[i]) / tspace, velci[i], 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(kepler_orbit_data_derivative_ci)

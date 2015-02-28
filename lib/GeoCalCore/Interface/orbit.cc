@@ -357,7 +357,7 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data(Time T) const
   pos(2) = 0;
   vel(0) = rdot * ctheta - r * stheta * thetadot;
   vel(1) = rdot * stheta + r * ctheta * thetadot;
-  vel(2) = rdot * stheta + r * ctheta * thetadot;
+  vel(2) = 0;
 
 //-----------------------------------------------------------------------
 // Rotate to proper inclination and longitude of ascending node.
@@ -382,7 +382,7 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data(Time T) const
 			   {x(1), y(1), z(1)},
 			   {x(2), y(2), z(2)}};
   boost::shared_ptr<CartesianInertial> pci(new Eci(p(0), p(1), p(2)));
-  boost::array<double, 3> v2 = {{vel(0), vel(1), vel(2)}};
+  boost::array<double, 3> v2 = {{v(0), v(1), v(2)}};
   return boost::shared_ptr<OrbitData>(new QuaternionOrbitData(T, pci, v2, 
 		      matrix_to_quaternion(sc_to_ci)));
 }

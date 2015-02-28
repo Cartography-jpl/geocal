@@ -13,8 +13,8 @@
 #include <fstream>
 #include "geocal_serialize_support.h"
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-#include <boost/archive/polymorphic_xml_iarchive.hpp>
-#include <boost/archive/polymorphic_xml_oarchive.hpp>
+#include <boost/archive/polymorphic_binary_iarchive.hpp>
+#include <boost/archive/polymorphic_binary_oarchive.hpp>
 #endif
 using namespace GeoCal;
 using namespace blitz;
@@ -260,8 +260,8 @@ BOOST_AUTO_TEST_CASE(expected_points)
 	gclist.push_back(igc->ground_coordinate(ic));
       }
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-    std::ofstream os("/data/geocal_test_data/igccol_rolling_shutter_test_expect.xml");
-    boost::archive::polymorphic_xml_oarchive oa(os);
+    std::ofstream os("/data/geocal_test_data/igccol_rolling_shutter_test_expect.dat");
+    boost::archive::polymorphic_binary_oarchive oa(os);
     oa << boost::serialization::make_nvp("iclist", iclist)
        << boost::serialization::make_nvp("gclist", gclist);
 #else
@@ -272,8 +272,8 @@ BOOST_AUTO_TEST_CASE(expected_points)
   std::vector<ImageCoordinate> iclist;
   std::vector<boost::shared_ptr<GroundCoordinate> > gclist;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-    std::ifstream is("/data/geocal_test_data/igccol_rolling_shutter_test_expect.xml");
-    boost::archive::polymorphic_xml_iarchive ia(is);
+    std::ifstream is("/data/geocal_test_data/igccol_rolling_shutter_test_expect.dat");
+    boost::archive::polymorphic_binary_iarchive ia(is);
     ia >> boost::serialization::make_nvp("iclist", iclist)
        >> boost::serialization::make_nvp("gclist", gclist);
 #else
@@ -281,12 +281,13 @@ BOOST_AUTO_TEST_CASE(expected_points)
 #endif
   for(int i = 0; i < (int) iclist.size(); ++i) {
     try {
-      std::cerr << "Checking " << i << "\n";
-      BOOST_CHECK(igc->image_coordinate(*gclist[i]) == iclist[i]);
+      BOOST_CHECK(igc->image_coordinate(*gclist[i]) ==
+		  iclist[i]);
       BOOST_CHECK(GeoCal::distance(*igc->ground_coordinate(iclist[i]), 
 				   *gclist[i]) < 0.1);
     } catch(const ImageGroundConnectionFailed& E) {
-      std::cerr << "Test failed.\n";
+      std::cerr << "Failed for " << i << "\n";
+      BOOST_CHECK(false);
     }
   }
 }

@@ -86,6 +86,13 @@ namespace GeoCal {
   We currently only support the line roll direction, although we 
   have some interface support for sample roll direction (just in case 
   we need to expand this in the future).
+
+  Note that this class assumes that the orbit data varies smoothly 
+  over the time that the rolling shutter operates. We speed up the
+  class by taking the orbit data at the start and end of the rolling
+  shutter and interpolating. If this is *not* true of the orbit data,
+  then there will be significant errors in the calculations done by
+  this class.
 *******************************************************************/
 
 class IgcRollingShutter : public virtual ImageGroundConnection, 

@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(refraction)
   // correction should be about 58 meters (for space zenith angle of
   // 70.000). This particular test has a space zenith of 70.7622. We
   // get a distance of 63.5987, which seems like a reasonable result.
-  BOOST_CHECK_CLOSE(distance(*gc, *gc_corr), 63.5987, 1e-2);
+  BOOST_CHECK_CLOSE(distance(*gc, *gc_corr), 63.65053687018144, 1e-2);
 
   boost::shared_ptr<GroundCoordinate> gc_reverse = 
     ref.refraction_reverse(*od->position_cf(), *gc_corr);

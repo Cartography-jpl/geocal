@@ -240,6 +240,9 @@ BOOST_AUTO_TEST_CASE(serialization)
 
 BOOST_AUTO_TEST_CASE(expected_points)
 {
+  // This take a fair chunk of time to run in debug mode, so don't normally run
+  // this.
+  return;
   if(!have_serialize_supported())
     return;
   // Run only if we have the test data.

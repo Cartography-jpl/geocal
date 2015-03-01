@@ -15,7 +15,7 @@ BOOST_FIXTURE_TEST_SUITE(ipi_image_ground_connection, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   Time tmin = Time::parse_time("2003-01-01T11:00:00Z");
-  Time tmax = tmin + 10000 * 40.8e-3;
+  Time tmax = tmin + 1000 * 40.8e-3;
   boost::shared_ptr<Orbit> orb(new KeplerOrbit);
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<TimeTable> tt(new ConstantSpacingTimeTable(tmin, tmax));
@@ -39,8 +39,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(gc2->height_reference_surface(), 100.0, 1e-2);
   double line_res, samp_res;
   igc.footprint_resolution(0, 0, line_res, samp_res);
-  BOOST_CHECK_CLOSE(line_res, 711.43, 1e-2);
-  BOOST_CHECK_CLOSE(samp_res, 276.297, 1e-2);
+  BOOST_CHECK_CLOSE(line_res, 708.36177816238671, 1e-2);
+  BOOST_CHECK_CLOSE(samp_res, 275.98094050780151, 1e-2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -13,7 +13,7 @@ BOOST_FIXTURE_TEST_SUITE(ipi, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   Time tmin = Time::parse_time("2003-01-01T11:00:00Z");
-  Time tmax = tmin + 10000 * 40.8e-3;
+  Time tmax = tmin + 2000 * 40.8e-3;
   boost::shared_ptr<Orbit> orb(new KeplerOrbit);
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<TimeTable> tt(new ConstantSpacingTimeTable(tmin, tmax));

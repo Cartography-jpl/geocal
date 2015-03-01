@@ -3,7 +3,7 @@
 #include "mspi_config_file.h"
 #include "geocal_serialize_support.h"
 #ifdef HAVE_MSPI_SHARED
-#include "File/L1B1File/src/l1b1_reader.h"
+#include "MSPI-Shared/File/L1B1File/src/l1b1_reader.h"
 #endif
 
 using namespace GeoCal;

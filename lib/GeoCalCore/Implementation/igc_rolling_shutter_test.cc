@@ -253,9 +253,9 @@ BOOST_AUTO_TEST_CASE(expected_points)
   if(false) {
     std::vector<ImageCoordinate> iclist;
     std::vector<boost::shared_ptr<GroundCoordinate> > gclist;
-    for(int i = 0; i < igc->number_line(); i += 10)
+    for(int i = 0; i < igc->number_line() - 1; i += 10)
       for(int j = 0; j < igc->number_sample(); j += 10) {
-	ImageCoordinate ic(i, j);
+	ImageCoordinate ic(i + 0.5, j);
 	iclist.push_back(ic);
 	gclist.push_back(igc->ground_coordinate(ic));
       }
@@ -280,15 +280,10 @@ BOOST_AUTO_TEST_CASE(expected_points)
   throw Exception("GeoCal was not built with boost::serialization support");
 #endif
   for(int i = 0; i < (int) iclist.size(); ++i) {
-    try {
-      BOOST_CHECK(igc->image_coordinate(*gclist[i]) ==
-		  iclist[i]);
-      BOOST_CHECK(GeoCal::distance(*igc->ground_coordinate(iclist[i]), 
-				   *gclist[i]) < 0.1);
-    } catch(const ImageGroundConnectionFailed& E) {
-      std::cerr << "Failed for " << i << "\n";
-      BOOST_CHECK(false);
-    }
+    BOOST_CHECK(igc->image_coordinate(*gclist[i]) ==
+		iclist[i]);
+    BOOST_CHECK(GeoCal::distance(*igc->ground_coordinate(iclist[i]), 
+				 *gclist[i]) < 0.1);
   }
 }
 

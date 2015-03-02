@@ -60,7 +60,7 @@ BOOST_AUTO_TEST_CASE(timing)
 {
   // This test looks at timing information, so we can speed the code
   // up. We don't normally run this.
-  //return;
+  return;
   
   boost::shared_ptr<IgcCollectionRollingShutter> igccol = 
     serialize_read<IgcCollectionRollingShutter>("/data/geocal_test_data/igccol_rolling_shutter.xml");

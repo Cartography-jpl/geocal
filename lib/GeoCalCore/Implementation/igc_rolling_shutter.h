@@ -189,7 +189,7 @@ public:
 //-----------------------------------------------------------------------
 
   void time_table(const boost::shared_ptr<TimeTable>& Tt) 
-  { time_table_ = Tt; }
+  { time_table_ = Tt; notify_update(*orbit_); }
 
 //-----------------------------------------------------------------------
 /// Camera that we are using

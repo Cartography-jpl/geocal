@@ -388,6 +388,22 @@ subprocess.check_call(["doughnut_diff", dbfile + ":refl1",
 
 # 11. Generate diagnostic files.
 if(args.diagnostic):
+    with timing("Diagnostic pre_reg  file"):
+        subprocess.check_call(["write_image", "--vicar-type=HALF",
+                               "--scale=10000", 
+                               "--process-number-line=1000",
+                               "--process-number-sample=1000",
+                               nproc, 
+                               dbfile + ":refl1",
+                               "pre_reg_refl.hlf"])
+    with timing("Diagnostic post_reg  file"):
+        subprocess.check_call(["write_image", "--vicar-type=HALF",
+                               "--scale=10000", 
+                               "--process-number-line=1000",
+                               "--process-number-sample=1000",
+                               nproc, 
+                               dbfile + ":refl2",
+                               "post_reg_refl.hlf"])
     with timing("Diagnostic normdiff and cvdnorm file"):
         subprocess.check_call(["write_image", "--vicar-type=HALF",
                                "--scale=10000", 

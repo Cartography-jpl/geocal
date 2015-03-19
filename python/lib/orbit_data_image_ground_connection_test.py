@@ -13,5 +13,5 @@ def test_odgc():
     assert igc.band == 0
     assert_almost_equal(igc.max_height, 9000, 2)
     g = igc.ground_coordinate(ImageCoordinate(1, 1504 / 2))
-    assert_almost_equal(g.latitude, 0.4234604, 2)
-    assert_almost_equal(g.longitude, 157.656, 2)
+    assert_almost_equal(g.latitude, -4.840663932844596, 2)
+    assert_almost_equal(g.longitude, 165.5531678459437, 2)

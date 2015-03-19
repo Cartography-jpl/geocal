@@ -70,7 +70,7 @@ class TiePoint(object):
                 if(map_info):
                     igc_proj = IgcMapProjected(map_info, 
                                                igc_coll.image_ground_connection(i))
-                    pt = igc_proj.coordinate(igc_coll.ground_coordinate(i, self.image_location[i][O]))
+                    pt = igc_proj.coordinate(igc_coll.ground_coordinate(i, self.image_location[i][0]))
                     igc_proj.display(pt, sz)
                 else:
                     igc_coll.image(i).display(self.image_location[i][0], sz)

@@ -71,6 +71,13 @@ def _display(self, ic, sz, cross_hair = True):
 
 geocal_swig.RasterImage.display = _display
 
+def _read_all(self):
+    '''Do a read for the whole image. We do this often enough that it is
+    nice to have a function for this.'''
+    return self.read(0,0,self.number_line, self.number_sample)
+
+geocal_swig.RasterImage.read_all = _read_all
+
 def _footprint_geometry(self, cconver = geocal_swig.GeodeticConverter()):
     '''Return a ogr Geometry object describing the footprint of the 
     RasterImage. This includes the 4 corners of the image.

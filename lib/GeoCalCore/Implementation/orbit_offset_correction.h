@@ -84,6 +84,7 @@ public:
   {
     range_check(Ind, 0, (int) time_point().size());
     att_corr[time_point()[Ind]] = Q;
+    notify_update();
   }
 
 //-----------------------------------------------------------------------
@@ -92,6 +93,7 @@ public:
   void insert_time_point(Time T_pt)
   {
     att_corr[T_pt] = boost::math::quaternion<AutoDerivative<double> >(1,0,0,0);
+    notify_update();
   }
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> 

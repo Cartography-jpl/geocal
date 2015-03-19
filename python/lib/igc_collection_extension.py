@@ -54,7 +54,10 @@ IgcArray.image_coordinate_jac_parm = _igc_arr_image_coordinate_jac_parm
 
 def _determine_orbit_parm(self, gp, ic, i):
     '''This adjust the orbit parameters so that the given ground point
-    return an image coordinate of ic for igc i.'''
+    return an image coordinate of ic for igc i.
+
+    Note that this is only done approximately. See the discussion in the 
+    comments of _determine_orbit_to_match.'''
     # Vector that we have now
     igc = self.image_ground_connection(i)
     tmpt, fc = igc.time_table.time(ic)
@@ -80,6 +83,12 @@ def _determine_orbit_to_match(self, ic, ind):
 
     This is entirely used for generating test data, I don't think there is
     any reason you would want to do this with real data.
+
+    Note that seeing the point on the ground at the image coordinate ic is 
+    only done approximately. We could probably work at the logic to have this
+    match exactly, but there doesn't seem to be much point. What we really
+    want is just a bunch of images that are looking at about the same location
+    on the ground, the approximate calculation done here should be fine.
     '''
     self.orbit = OrbitOffsetCorrection(self.orbit, False, False, False, 
                                        False, False)

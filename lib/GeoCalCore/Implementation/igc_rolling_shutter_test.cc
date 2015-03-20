@@ -42,7 +42,8 @@ public:
     tspace = 1e-3;
     tt.reset(new RollingShutterConstantTimeTable(tmin, 
 	tmin + cam->number_line(0) * tspace, tspace));
-    igc.reset(new IgcRollingShutter(orb, tt, cam, dem, img));
+    if(orb)
+      igc.reset(new IgcRollingShutter(orb, tt, cam, dem, img));
   }
   Time tmin;
   boost::shared_ptr<OrbitOffsetCorrection> orb;
@@ -209,6 +210,9 @@ BOOST_AUTO_TEST_CASE(image_coordinate_timing)
 
 BOOST_AUTO_TEST_CASE(handling_outside_points)
 {
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   // Test handling ground points either before or after the coverage
   // of the Igc
   Time tmin = igc->time_table()->min_time();
@@ -226,6 +230,9 @@ BOOST_AUTO_TEST_CASE(handling_outside_points)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   if(!have_serialize_supported() || !orb)
     return;
   std::string d = serialize_write_string(igc);
@@ -243,6 +250,9 @@ BOOST_AUTO_TEST_CASE(expected_points)
   // This take a fair chunk of time to run in debug mode, so don't normally run
   // this.
   return;
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   if(!have_serialize_supported())
     return;
   // Run only if we have the test data.

@@ -4,13 +4,14 @@
 				// Definition of
 				// IpiImageGroundConnection
 #include "air_mspi_orbit.h"	// Definition of AirMspiOrbit.
+#include "air_mspi_time_table.h" // Definition of AirMspiTimeTable.
 #include "mspi_camera.h"	// Definition of MspiCamera.
 
 namespace GeoCal {
 /****************************************************************//**
   This is an ImageGroundConnection for AirMspi.
 *******************************************************************/
-class AirMspiIgc : public IpiImageGroundConnection {
+class AirMspiIgc : public virtual IpiImageGroundConnection {
 public:
   AirMspiIgc(const std::string& Master_config_file,
 	     const std::string& Orbit_file_name,
@@ -63,9 +64,9 @@ public:
 /// TimeTable we are using.
 //-----------------------------------------------------------------------
 
-  boost::shared_ptr<TimeTable> time_table() const
+  boost::shared_ptr<AirMspiTimeTable> time_table() const
   {
-    return ipi().time_table_ptr();
+    return boost::dynamic_pointer_cast<AirMspiTimeTable>(ipi().time_table_ptr());
   }
 
 //-----------------------------------------------------------------------
@@ -87,9 +88,13 @@ public:
   virtual void print(std::ostream& Os) const;
 private:
   std::string bdir, mconfig;
-
-  int reference_row(const std::string& Instrument_config_file_name) const;
+  AirMspiIgc() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(AirMspiIgc);
 #endif
 

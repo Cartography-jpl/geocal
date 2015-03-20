@@ -30,6 +30,7 @@ extern "C" {
   void init_geocal_gsl_root(void);
   void init_geocal_time(void);
   void init_tiled_file(void);
+  void init_geocal_serialize_function(void);
   void init_image_coordinate(void);
   void init_with_parameter(void);
   void init_look_vector(void);
@@ -43,6 +44,7 @@ extern "C" {
   void init_geocal_rpc(void);
   void init_raster_image(void);
   void init_image_ground_connection(void);
+  void init_igc_collection(void);
   void init_frame_coordinate(void);
   void init_camera(void);
   void init_ray_caster(void);
@@ -113,6 +115,11 @@ extern "C" {
   void init_planet_coordinate(void);
   void init_igc_ray_caster(void);
   void init_igc_rolling_shutter(void);
+  void init_igc_array(void);
+  void init_igc_collection_rolling_shutter(void);
+  void init_igc_collection_orbit_data(void);
+  void init_rolling_shutter_constant_time_table(void);
+  void init_orbit_offset_correction(void);
   void init_argus_camera(void);
   void init_argus_orbit(void);
   void init_quickbird_camera(void);
@@ -132,7 +139,9 @@ extern "C" {
   void init_ground_mspi_orbit(void);
   void init_ground_mspi_igc(void);
   void init_usgs_dem(void);
+  void init_air_mspi_time_table(void);
   void init_air_mspi_igc(void);
+  void init_air_mspi_igc_collection(void);
 #ifdef HAVE_CARTO
   void init_eci_tod_burl(void);
 #endif
@@ -253,6 +262,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_gsl_root", init_geocal_gsl_root);
   init_extension_module(package, "_geocal_time", init_geocal_time);
   init_extension_module(package, "_tiled_file", init_tiled_file);
+  init_extension_module(package, "_geocal_serialize_function", init_geocal_serialize_function);
   init_extension_module(package, "_image_coordinate", init_image_coordinate);
   init_extension_module(package, "_with_parameter", init_with_parameter);
   init_extension_module(package, "_look_vector", init_look_vector);
@@ -266,6 +276,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_rpc", init_geocal_rpc);
   init_extension_module(package, "_raster_image", init_raster_image);
   init_extension_module(package, "_image_ground_connection", init_image_ground_connection);
+  init_extension_module(package, "_igc_collection", init_igc_collection);
   init_extension_module(package, "_frame_coordinate", init_frame_coordinate);
   init_extension_module(package, "_camera", init_camera);
   init_extension_module(package, "_ray_caster", init_ray_caster);
@@ -336,6 +347,11 @@ void init_swig_wrap(void)
   init_extension_module(package, "_planet_coordinate", init_planet_coordinate);
   init_extension_module(package, "_igc_ray_caster", init_igc_ray_caster);
   init_extension_module(package, "_igc_rolling_shutter", init_igc_rolling_shutter);
+  init_extension_module(package, "_igc_array", init_igc_array);
+  init_extension_module(package, "_igc_collection_rolling_shutter", init_igc_collection_rolling_shutter);
+  init_extension_module(package, "_igc_collection_orbit_data", init_igc_collection_orbit_data);
+  init_extension_module(package, "_rolling_shutter_constant_time_table", init_rolling_shutter_constant_time_table);
+  init_extension_module(package, "_orbit_offset_correction", init_orbit_offset_correction);
   init_extension_module(package, "_argus_camera", init_argus_camera);
   init_extension_module(package, "_argus_orbit", init_argus_orbit);
   init_extension_module(package, "_quickbird_camera", init_quickbird_camera);
@@ -355,7 +371,9 @@ void init_swig_wrap(void)
   init_extension_module(package, "_ground_mspi_orbit", init_ground_mspi_orbit);
   init_extension_module(package, "_ground_mspi_igc", init_ground_mspi_igc);
   init_extension_module(package, "_usgs_dem", init_usgs_dem);
+  init_extension_module(package, "_air_mspi_time_table", init_air_mspi_time_table);
   init_extension_module(package, "_air_mspi_igc", init_air_mspi_igc);
+  init_extension_module(package, "_air_mspi_igc_collection", init_air_mspi_igc_collection);
 #ifdef HAVE_CARTO
   init_extension_module(package, "_eci_tod_burl", init_eci_tod_burl);
 #endif

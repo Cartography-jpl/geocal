@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -179,12 +182,8 @@ class RpcImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundCo
     def fit_height_offset(self, value):
       self._v_fit_height_offset(value)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 3
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 3, self.rpc,self.dem,self.image,self.image_multi_band,self.title,self.image_mask,self.ground_mask,self.fit_height_offset)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rpc_image_ground_connection.delete_RpcImageGroundConnection
 RpcImageGroundConnection.cf_look_vector = new_instancemethod(_rpc_image_ground_connection.RpcImageGroundConnection_cf_look_vector,None,RpcImageGroundConnection)

@@ -3458,42 +3458,55 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[6]
 #define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[7]
 #define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[8]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[9]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[11]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[12]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[13]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[14]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[15]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[16]
-#define SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t swig_types[17]
-#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[18]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[19]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[20]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[21]
-#define SWIGTYPE_p_char swig_types[22]
-#define SWIGTYPE_p_char_type swig_types[23]
-#define SWIGTYPE_p_difference_type swig_types[24]
-#define SWIGTYPE_p_double swig_types[25]
-#define SWIGTYPE_p_fmtflags swig_types[26]
-#define SWIGTYPE_p_int_type swig_types[27]
-#define SWIGTYPE_p_iostate swig_types[28]
-#define SWIGTYPE_p_off_type swig_types[29]
-#define SWIGTYPE_p_openmode swig_types[30]
-#define SWIGTYPE_p_pos_type swig_types[31]
-#define SWIGTYPE_p_seekdir swig_types[32]
-#define SWIGTYPE_p_size_t swig_types[33]
-#define SWIGTYPE_p_size_type swig_types[34]
-#define SWIGTYPE_p_state_type swig_types[35]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[36]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[37]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[38]
-#define SWIGTYPE_p_std__invalid_argument swig_types[39]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[40]
-#define SWIGTYPE_p_traits_type swig_types[41]
-#define SWIGTYPE_p_value_type swig_types[42]
-static swig_type_info *swig_types[44];
-static swig_module_info swig_module = {swig_types, 43, 0, 0, 0, 0};
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[9]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[10]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[11]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[12]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[16]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[17]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[18]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[19]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[20]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[25]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[26]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[27]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[28]
+#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[29]
+#define SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t swig_types[30]
+#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[31]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[32]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[33]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[34]
+#define SWIGTYPE_p_char swig_types[35]
+#define SWIGTYPE_p_char_type swig_types[36]
+#define SWIGTYPE_p_difference_type swig_types[37]
+#define SWIGTYPE_p_double swig_types[38]
+#define SWIGTYPE_p_fmtflags swig_types[39]
+#define SWIGTYPE_p_int_type swig_types[40]
+#define SWIGTYPE_p_iostate swig_types[41]
+#define SWIGTYPE_p_off_type swig_types[42]
+#define SWIGTYPE_p_openmode swig_types[43]
+#define SWIGTYPE_p_pos_type swig_types[44]
+#define SWIGTYPE_p_seekdir swig_types[45]
+#define SWIGTYPE_p_size_t swig_types[46]
+#define SWIGTYPE_p_size_type swig_types[47]
+#define SWIGTYPE_p_state_type swig_types[48]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[49]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[50]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[51]
+#define SWIGTYPE_p_std__invalid_argument swig_types[52]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[53]
+#define SWIGTYPE_p_traits_type swig_types[54]
+#define SWIGTYPE_p_value_type swig_types[55]
+static swig_type_info *swig_types[57];
+static swig_module_info swig_module = {swig_types, 56, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -4017,6 +4030,9 @@ SWIGINTERNINLINE PyObject*
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
   std::string parse_python_exception();
+
+
+#include "geocal_serialize_function.h"
 
 
 namespace swig {  
@@ -7719,6 +7735,48 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_determine_quat_rot(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::array< double,3 > *arg1 = 0 ;
+  boost::array< double,3 > *arg2 = 0 ;
+  boost::array< double,3 > a1 ;
+  PythonObject numpy1 ;
+  boost::array< double,3 > a2 ;
+  PythonObject numpy2 ;
+  PyObject *swig_obj[2] ;
+  SwigValueWrapper< boost::math::quaternion< double > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"determine_quat_rot",2,2,swig_obj)) SWIG_fail;
+  {
+    numpy1.obj = to_numpy<double >(swig_obj[0]);
+    if(!numpy1.obj)
+    return NULL;
+    a1 = to_boost_array<double, 3>(numpy1);
+    arg1 = &a1;
+  }
+  {
+    numpy2.obj = to_numpy<double >(swig_obj[1]);
+    if(!numpy2.obj)
+    return NULL;
+    a2 = to_boost_array<double, 3>(numpy2);
+    arg2 = &a2;
+  }
+  {
+    try {
+      result = GeoCal::determine_quat_rot((boost::array< double,3 > const &)*arg1,(boost::array< double,3 > const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< double >(static_cast< const boost::math::quaternion< double >& >(result))), SWIGTYPE_p_boost__math__quaternionT_double_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_quat_rot_x__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::AutoDerivative< double > *arg1 = 0 ;
@@ -9312,6 +9370,13 @@ static PyMethodDef SwigMethods[] = {
 		"Return the Euler angles that make up the quaternion rotation (epsilon,\n"
 		"beta, delta so quat_rot(\"zyx\", epsilon,beta, delta) = qin. \n"
 		""},
+	 { (char *)"determine_quat_rot", _wrap_determine_quat_rot, METH_VARARGS, (char *)"\n"
+		"boost::math::quaternion<T> GeoCal::determine_quat_rot(const boost::array< T, 3 > &V1, const boost::array< T, 3 > &V2)\n"
+		"Determine quaternion that will rotate a vector v1 to point at v2.\n"
+		"\n"
+		"Note that this isn't actually unique, but this is the 'shortest arc'\n"
+		"solution. \n"
+		""},
 	 { (char *)"quat_rot_x", _wrap_quat_rot_x, METH_VARARGS, (char *)"\n"
 		"boost::math::quaternion<T> GeoCal::quat_rot_x(const T &A)\n"
 		"Quaternion that rotate about x.\n"
@@ -9388,14 +9453,27 @@ static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool
 static swig_type_info _swigt__p_blitz__ArrayT_bool_2_t = {"_p_blitz__ArrayT_bool_2_t", "blitz::Array< bool,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_3_t = {"_p_blitz__ArrayT_bool_3_t", "blitz::Array< bool,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_4_t = {"_p_blitz__ArrayT_bool_4_t", "blitz::Array< bool,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_bool_5_t = {"_p_blitz__ArrayT_bool_5_t", "blitz::Array< bool,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_bool_6_t = {"_p_blitz__ArrayT_bool_6_t", "blitz::Array< bool,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_bool_7_t = {"_p_blitz__ArrayT_bool_7_t", "blitz::Array< bool,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_bool_8_t = {"_p_blitz__ArrayT_bool_8_t", "blitz::Array< bool,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_1_t = {"_p_blitz__ArrayT_double_1_t", "blitz::Array< double,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_2_t = {"_p_blitz__ArrayT_double_2_t", "blitz::Array< double,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_3_t = {"_p_blitz__ArrayT_double_3_t", "blitz::Array< double,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_4_t = {"_p_blitz__ArrayT_double_4_t", "blitz::Array< double,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_double_5_t = {"_p_blitz__ArrayT_double_5_t", "blitz::Array< double,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_double_6_t = {"_p_blitz__ArrayT_double_6_t", "blitz::Array< double,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_double_7_t = {"_p_blitz__ArrayT_double_7_t", "blitz::Array< double,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_double_8_t = {"_p_blitz__ArrayT_double_8_t", "blitz::Array< double,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_1_t = {"_p_blitz__ArrayT_int_1_t", "blitz::Array< int,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_2_t = {"_p_blitz__ArrayT_int_2_t", "blitz::Array< int,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_3_t = {"_p_blitz__ArrayT_int_3_t", "blitz::Array< int,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_4_t = {"_p_blitz__ArrayT_int_4_t", "blitz::Array< int,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_int_5_t = {"_p_blitz__ArrayT_int_5_t", "blitz::Array< int,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_int_6_t = {"_p_blitz__ArrayT_int_6_t", "blitz::Array< int,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_int_7_t = {"_p_blitz__ArrayT_int_7_t", "blitz::Array< int,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_int_8_t = {"_p_blitz__ArrayT_int_8_t", "blitz::Array< int,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__arrayT_double_3_t = {"_p_boost__arrayT_double_3_t", "boost::array< double,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t = {"_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t", "boost::math::quaternion< GeoCal::AutoDerivative< double > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__math__quaternionT_double_t = {"_p_boost__math__quaternionT_double_t", "boost::math::quaternion< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *", 0, 0, (void*)0, 0};
@@ -9433,14 +9511,27 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_bool_2_t,
   &_swigt__p_blitz__ArrayT_bool_3_t,
   &_swigt__p_blitz__ArrayT_bool_4_t,
+  &_swigt__p_blitz__ArrayT_bool_5_t,
+  &_swigt__p_blitz__ArrayT_bool_6_t,
+  &_swigt__p_blitz__ArrayT_bool_7_t,
+  &_swigt__p_blitz__ArrayT_bool_8_t,
   &_swigt__p_blitz__ArrayT_double_1_t,
   &_swigt__p_blitz__ArrayT_double_2_t,
   &_swigt__p_blitz__ArrayT_double_3_t,
   &_swigt__p_blitz__ArrayT_double_4_t,
+  &_swigt__p_blitz__ArrayT_double_5_t,
+  &_swigt__p_blitz__ArrayT_double_6_t,
+  &_swigt__p_blitz__ArrayT_double_7_t,
+  &_swigt__p_blitz__ArrayT_double_8_t,
   &_swigt__p_blitz__ArrayT_int_1_t,
   &_swigt__p_blitz__ArrayT_int_2_t,
   &_swigt__p_blitz__ArrayT_int_3_t,
   &_swigt__p_blitz__ArrayT_int_4_t,
+  &_swigt__p_blitz__ArrayT_int_5_t,
+  &_swigt__p_blitz__ArrayT_int_6_t,
+  &_swigt__p_blitz__ArrayT_int_7_t,
+  &_swigt__p_blitz__ArrayT_int_8_t,
+  &_swigt__p_boost__arrayT_double_3_t,
   &_swigt__p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t,
   &_swigt__p_boost__math__quaternionT_double_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
@@ -9478,14 +9569,27 @@ static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz_
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_3_t[] = {  {&_swigt__p_blitz__ArrayT_bool_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_4_t[] = {  {&_swigt__p_blitz__ArrayT_bool_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_bool_5_t[] = {  {&_swigt__p_blitz__ArrayT_bool_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_bool_6_t[] = {  {&_swigt__p_blitz__ArrayT_bool_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_bool_7_t[] = {  {&_swigt__p_blitz__ArrayT_bool_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_bool_8_t[] = {  {&_swigt__p_blitz__ArrayT_bool_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_1_t[] = {  {&_swigt__p_blitz__ArrayT_double_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_2_t[] = {  {&_swigt__p_blitz__ArrayT_double_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_3_t[] = {  {&_swigt__p_blitz__ArrayT_double_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_4_t[] = {  {&_swigt__p_blitz__ArrayT_double_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_double_5_t[] = {  {&_swigt__p_blitz__ArrayT_double_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_double_6_t[] = {  {&_swigt__p_blitz__ArrayT_double_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_double_7_t[] = {  {&_swigt__p_blitz__ArrayT_double_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_double_8_t[] = {  {&_swigt__p_blitz__ArrayT_double_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_1_t[] = {  {&_swigt__p_blitz__ArrayT_int_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_2_t[] = {  {&_swigt__p_blitz__ArrayT_int_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_3_t[] = {  {&_swigt__p_blitz__ArrayT_int_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_4_t[] = {  {&_swigt__p_blitz__ArrayT_int_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_int_5_t[] = {  {&_swigt__p_blitz__ArrayT_int_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_int_6_t[] = {  {&_swigt__p_blitz__ArrayT_int_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_int_7_t[] = {  {&_swigt__p_blitz__ArrayT_int_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__arrayT_double_3_t[] = {  {&_swigt__p_boost__arrayT_double_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__math__quaternionT_double_t[] = {  {&_swigt__p_boost__math__quaternionT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -9523,14 +9627,27 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_bool_2_t,
   _swigc__p_blitz__ArrayT_bool_3_t,
   _swigc__p_blitz__ArrayT_bool_4_t,
+  _swigc__p_blitz__ArrayT_bool_5_t,
+  _swigc__p_blitz__ArrayT_bool_6_t,
+  _swigc__p_blitz__ArrayT_bool_7_t,
+  _swigc__p_blitz__ArrayT_bool_8_t,
   _swigc__p_blitz__ArrayT_double_1_t,
   _swigc__p_blitz__ArrayT_double_2_t,
   _swigc__p_blitz__ArrayT_double_3_t,
   _swigc__p_blitz__ArrayT_double_4_t,
+  _swigc__p_blitz__ArrayT_double_5_t,
+  _swigc__p_blitz__ArrayT_double_6_t,
+  _swigc__p_blitz__ArrayT_double_7_t,
+  _swigc__p_blitz__ArrayT_double_8_t,
   _swigc__p_blitz__ArrayT_int_1_t,
   _swigc__p_blitz__ArrayT_int_2_t,
   _swigc__p_blitz__ArrayT_int_3_t,
   _swigc__p_blitz__ArrayT_int_4_t,
+  _swigc__p_blitz__ArrayT_int_5_t,
+  _swigc__p_blitz__ArrayT_int_6_t,
+  _swigc__p_blitz__ArrayT_int_7_t,
+  _swigc__p_blitz__ArrayT_int_8_t,
+  _swigc__p_boost__arrayT_double_3_t,
   _swigc__p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t,
   _swigc__p_boost__math__quaternionT_double_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,

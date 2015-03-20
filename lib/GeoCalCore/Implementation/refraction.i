@@ -26,6 +26,6 @@ public:
   refraction_reverse(const GroundCoordinate& Spacecraft_pos,
   		     const GroundCoordinate& Gc_with_refraction) const;
   std::string print_to_string() const;
-  %pickle_init(1, self.altitude, self.latitude, self.index_refraction_surface)
+  %pickle_serialization()
 };
 }

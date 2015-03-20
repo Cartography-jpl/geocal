@@ -13,10 +13,15 @@ const int msl_number_col = 4320;
 //-----------------------------------------------------------------------
 
 DidDatum::DidDatum(const std::string& Fname)
-: mi_(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter),
-      -180, 90, 180, -90, msl_number_col, msl_number_row),
-  msl_(Fname, boost::extents[msl_number_row][msl_number_col][2])
 {
+  initialize(Fname);
+}
+
+void DidDatum::initialize(const std::string& Fname) 
+{
+  mi_ = MapInfo(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter),
+		-180, 90, 180, -90, msl_number_col, msl_number_row);
+  msl_.reset(new MemoryMapArray<char, 3>(Fname, boost::extents[msl_number_row][msl_number_col][2]));
 }
 
 //-----------------------------------------------------------------------
@@ -43,6 +48,28 @@ double DidDatum::undulation(const GroundCoordinate& Gc) const
 // endian problems.
 //-----------------------------------------------------------------------
 
-  int res = ((int) msl_.data()[row][col][0]) << 8 | msl_.data()[row][col][1];
+  int res = ((int) msl_->data()[row][col][0]) << 8 | msl_->data()[row][col][1];
+  return res;
+}
+
+double DidDatum::undulation(const Geodetic& Gc) const
+{
+
+//-----------------------------------------------------------------------
+// We find the data point closest to the given coordinate. We don't do
+// any interpolation.
+//-----------------------------------------------------------------------
+
+  double x, y;
+  mi_.coordinate(Gc, x, y);
+  int row = (int) floor(y + 0.5);
+  int col = (int) floor(x + 0.5);
+
+//-----------------------------------------------------------------------
+// We assemble the results from the byte level, so there isn't any
+// endian problems.
+//-----------------------------------------------------------------------
+
+  int res = ((int) msl_->data()[row][col][0]) << 8 | msl_->data()[row][col][1];
   return res;
 }

@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -169,13 +172,9 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
 
     def coordinate(self, *args):
         """
-        void MapInfo::coordinate(const GroundCoordinate &Gc, double &Pixel_x_index, double
-        &Pixel_y_index) const
-        Determine pixel coordinates for the given ground coordinates.
+        void MapInfo::coordinate(const Geodetic &Gc, double &Pixel_x_index, double &Pixel_y_index)
+        const
 
-        Note that this routine can be called with ground coordiantes outside
-        of the bounding box of the map, it just returns pixel coordinates
-        outside of the map in that case. 
         """
         return _map_info.MapInfo_coordinate(self, *args)
 

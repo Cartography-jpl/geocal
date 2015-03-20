@@ -1,9 +1,42 @@
 #include "camera.h"
 #include "geocal_quaternion.h"
 #include "geocal_exception.h"
+#include "geocal_serialize_support.h"
 #include <blitz/array.h>
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void Camera::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Camera);
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(Camera, WithParameter);
+}
+
+template<class Archive>
+void SimpleCamera::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Camera);
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(Camera, WithParameter);
+  GEOCAL_BASE(SimpleCamera, Camera);
+  ar & GEOCAL_NVP_(beta)
+    & GEOCAL_NVP_(delta)
+    & GEOCAL_NVP_(epsilon)
+    & GEOCAL_NVP_(focal)
+    & GEOCAL_NVP_(line_pitch)
+    & GEOCAL_NVP_(sample_pitch)
+    & GEOCAL_NVP2("number_line", nline)
+    & GEOCAL_NVP2("number_sample", nsample);
+  frame_to_sc = quat_rot("ZYX", epsilon_, beta_, delta_);
+}
+
+
+GEOCAL_IMPLEMENT(Camera);
+GEOCAL_IMPLEMENT(SimpleCamera);
+#endif
 
 //-----------------------------------------------------------------------
 /// This creates SimpleCamera with the given data. The

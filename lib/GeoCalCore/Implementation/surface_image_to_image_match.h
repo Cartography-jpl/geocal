@@ -35,7 +35,8 @@ public:
   (const boost::shared_ptr<ImageGroundConnection>& Igc1, 
    const boost::shared_ptr<ImageGroundConnection>& Igc2,
    const MapInfo& Map_info,
-   const boost::shared_ptr<ImageMatcher>& Matcher);
+   const boost::shared_ptr<ImageMatcher>& Matcher,
+   int Grid_spacing = 1);
   SurfaceImageToImageMatch
   (const boost::shared_ptr<ImageGroundConnection>& Igc1, 
    const boost::shared_ptr<RasterImage>& Surface_image1,

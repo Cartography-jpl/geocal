@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -143,6 +146,12 @@ class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnectio
     some interface support for sample roll direction (just in case we need
     to expand this in the future).
 
+    Note that this class assumes that the orbit data varies smoothly over
+    the time that the rolling shutter operates. We speed up the class by
+    taking the orbit data at the start and end of the rolling shutter and
+    interpolating. If this is not true of the orbit data, then there will
+    be significant errors in the calculations done by this class.
+
     C++ includes: igc_rolling_shutter.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -179,7 +188,7 @@ class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnectio
 
     def _v_orbit(self, *args):
         """
-        void GeoCal::IgcRollingShutter::orbit(const boost::shared_ptr< Orbit > &Orb)
+        void IgcRollingShutter::orbit(const boost::shared_ptr< Orbit > &Orb)
         Set orbit. 
         """
         return _igc_rolling_shutter.IgcRollingShutter__v_orbit(self, *args)
@@ -209,7 +218,7 @@ class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnectio
 
     def _v_camera(self, *args):
         """
-        void GeoCal::IgcRollingShutter::camera(const boost::shared_ptr< Camera > &C)
+        void IgcRollingShutter::camera(const boost::shared_ptr< Camera > &C)
         Set Camera that we are using. 
         """
         return _igc_rolling_shutter.IgcRollingShutter__v_camera(self, *args)
@@ -287,17 +296,11 @@ class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnectio
     def max_height(self, value):
       self._v_max_height(value)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.orbit,self.time_table,self.camera,self.dem,self.image,self.title,self.refraction,self.resolution,self.band,self.max_height)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _igc_rolling_shutter.delete_IgcRollingShutter
 IgcRollingShutter.cf_look_vector = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter_cf_look_vector,None,IgcRollingShutter)
-IgcRollingShutter._v_image = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_image,None,IgcRollingShutter)
-IgcRollingShutter._v_title = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_title,None,IgcRollingShutter)
 IgcRollingShutter._v_orbit = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_orbit,None,IgcRollingShutter)
 IgcRollingShutter._v_time_table = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_time_table,None,IgcRollingShutter)
 IgcRollingShutter._v_camera = new_instancemethod(_igc_rolling_shutter.IgcRollingShutter__v_camera,None,IgcRollingShutter)

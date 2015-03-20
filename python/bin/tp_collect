@@ -42,16 +42,29 @@ Options:
   --base-image-index=n
        The image to consider the base image in matching. [default: 0]
 
+  --base-image-spacing=n
+       If supplied, rather than collecting tiepoints for one base image
+       step through all the images in the igc, with the given spacing. We
+       always do the edges. So if we have 11 images and spacing of 3, we
+       collect tiepoints with images 0, 3, 6, 9, 10 as the base image. If
+       you also specify "--gcp", we in addition collect gcps. [default: 0]
+
   --gcp
        Create GCPs, which requires the additional arguments of a reference
        image.
+   
+  --grid-spacing=f
+       If we are dong a surface projection, you can supply how frequently
+       to do the full ImageGroundConnection. Most of the time there is no
+       point in doing this calculation at a high resolution than the 
+       underlying DEM. [default: 1]
 
   --map-info=f
        Use the supplied map information (either a MapInfo, or a RasterImage 
        with a MapInfo). This is used to project to the surface before matching, 
        useful for matching data that is from different enough angles or 
-       resolution that matching the raw images will fail. See also 
-       --project-surface that automatically finds the map info to use.
+       resolution that matching the raw images will fail. See
+       also --project-surface that automatically finds the map info to use.
 
   --max-ground-sigma=d
        How far off the various matched points can miss when intersecting
@@ -83,6 +96,18 @@ Options:
        projection that matches the resolution of the center pixel of the 
        base image. See also --map-info option.
 
+  --use-intersection 
+       This only applies to gcps. There is a trade off between getting
+       the largest coverage (by taking a union of all the igc on the
+       surface} and the strongest points (by looking at places seen by
+       all the cameras). You may want to do both - so generate a set
+       of GCPs using the largest coverage first and then the
+       intersection second. See "--use-intersection-both" for this.
+
+  --use-intersection-both
+       Collect gcps once with the largest coverage, and a second time
+       for the strongest points (see "--use-intersection")
+
   --verbose
        Print more information as we run.
 
@@ -93,6 +118,7 @@ Options:
 args = docopt_simple(usage, version=version)
 if(args.verbose):
     logging.basicConfig(level = logging.INFO)
+log = logging.getLogger("geocal-python.tp_collect")
 pool = None
 if(args.number_process > 1):
     pool = Pool(args.number_process)
@@ -111,29 +137,70 @@ elif(args.project_surface):
 else:
     mi = None
 
+tpcollect = []
 if(args.gcp):
     if(args.reference_dem):
         dem = read_shelve(args.reference_dem)
     else:
         dem = igc.dem(0)
     refimg = read_shelve(args.reference_image)
-    tpcollect = GcpTiePointCollect(refimg, dem, igc, 
-                                   avg_level = args.avg_level)
-else:
-    tpcollect = TiePointCollect(igc, avg_level = args.avg_level,
-                                map_info = mi,
-                                base_image_index = args.base_image_index,
-                                max_ground_covariance = 
-                                args.max_ground_sigma ** 2)
+    if(args.use_intersection_both):
+        tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
+                                            grid_spacing = args.grid_spacing,
+                                            avg_level = args.avg_level,
+                                            use_intersection = False))
+        tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
+                                            grid_spacing = args.grid_spacing,
+                                            avg_level = args.avg_level,
+                                            use_intersection = True))
+        log.info("Adding 2 gcpcollect")
+    else:
+        tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
+                                            grid_spacing = args.grid_spacing,
+                                            avg_level = args.avg_level,
+                                            use_intersection = args.use_intersection))
+        log.info("Adding 1 gcpcollect")
+
+if(args.base_image_spacing):
+    for i in range(0, igc.number_image, args.base_image_spacing):
+        log.info("Adding base image %d" % i)
+        tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                         map_info = mi,
+                                         grid_spacing = args.grid_spacing,
+                                         base_image_index = i,
+                                         max_ground_covariance = 
+                                         args.max_ground_sigma ** 2))
+    if(not igc.number_image % args.base_image_spacing == 0):
+        log.info("Adding base image %d" % (igc.number_image - 1, ))
+        tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                         map_info = mi,
+                                         grid_spacing = args.grid_spacing,
+                                         base_image_index = igc.number_image - 1,
+                                         max_ground_covariance = 
+                                         args.max_ground_sigma ** 2))
+if(not args.gcp and not args.base_image_spacing):
+    log.info("Adding base image %d" % args.base_image_index)
+    tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                     map_info = mi,
+                                     grid_spacing = args.grid_spacing,
+                                     base_image_index = args.base_image_index,
+                                     max_ground_covariance = 
+                                     args.max_ground_sigma ** 2))
 maxnumx = int(igc.image(0).number_line / args.min_grid_size)
 maxnumy = int(igc.image(0).number_sample / args.min_grid_size)
 numx = min(args.number_x, maxnumx)
 numy = min(args.number_y, maxnumy)
+tparr = TiePointCollection()
 
-tparr = tpcollect.tie_point_grid(numx, numy, pool = pool)
+for tpcol in tpcollect:
+    tparr.extend(tpcol.tie_point_grid(numx, numy, pool = pool))
 
-if(args.add_tp):
-    tparr.extend(read_shelve(args.output))
+try:
+    # Ok if this fails, it just means args.output doesn't exist yet
+    if(args.add_tp):
+        tparr.extend(read_shelve(args.output))
+except KeyError:
+    pass
 
 write_shelve(args.output, tparr)
 

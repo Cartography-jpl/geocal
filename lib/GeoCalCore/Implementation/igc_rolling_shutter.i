@@ -43,10 +43,7 @@ public:
 			const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
-  virtual int number_line() const;
-  virtual int number_sample() const;
-  virtual boost::shared_ptr<RasterImage> image() const;
-  virtual std::string title() const;
+
   %python_attribute_with_set(orbit, boost::shared_ptr<Orbit>)
   %python_attribute_with_set(time_table, boost::shared_ptr<TimeTable>)
   %python_attribute_with_set(camera,boost::shared_ptr<Camera>)
@@ -54,9 +51,7 @@ public:
   %python_attribute_with_set(refraction, boost::shared_ptr<Refraction>)
   %python_attribute_with_set(band, int)
   %python_attribute_with_set(max_height, double)
-  %pickle_init(1, self.orbit, self.time_table, self.camera, self.dem,
-	       self.image, self.title, self.refraction,
-	       self.resolution, self.band, self.max_height)
+  %pickle_serialization()
 };
 }
 

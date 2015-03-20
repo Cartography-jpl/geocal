@@ -1,87 +1,52 @@
 #include "unit_test_support.h"
 #include "igc_rolling_shutter.h"
+#include "rolling_shutter_constant_time_table.h"
 #include "quaternion_camera.h"
 #include "simple_dem.h"
 #include "memory_raster_image.h"
 #include "ecr.h"
+#include "hdf_orbit.h"
+#include "eci_tod.h"
+#include "orbit_offset_correction.h"
+#include "igc_collection.h"
+#include <boost/filesystem.hpp>
+#include <fstream>
+#include "geocal_serialize_support.h"
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+#include <boost/archive/polymorphic_binary_iarchive.hpp>
+#include <boost/archive/polymorphic_binary_oarchive.hpp>
+#endif
 using namespace GeoCal;
 using namespace blitz;
-// Don't have a TimeTable like this yet, so we create here.
-
-class RollingShutterConstantSpacingTimeTable : public TimeTable {
-public:
-  RollingShutterConstantSpacingTimeTable(Time Min_time, Time Max_time, 
-			   double Time_space = 40.8e-3)
-  : min_t(Min_time),
-    tspace(Time_space)
-  {
-    max_l = (int) round((Max_time - Min_time) / tspace);
-  }
-  virtual ~RollingShutterConstantSpacingTimeTable() {}
-  virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
-    const
-  {
-    double line = (T  - min_time()) / tspace;
-    return ImageCoordinate(line, F.sample);
-  }
-  virtual ImageCoordinateWithDerivative 
-  image_coordinate_with_derivative(const TimeWithDerivative& T, 
-				   const FrameCoordinateWithDerivative& F)
-    const
-  {
-    AutoDerivative<double> line = (T  - min_time()) / tspace;
-    return ImageCoordinateWithDerivative(line, F.sample);
-  }
-  virtual void print(std::ostream& Os) const
-  { std::cerr << "RollingShutterConstantSpacingTimeTable\n"; }
-  virtual void time(const ImageCoordinate& Ic, Time& T, FrameCoordinate& F)
-    const
-  {
-    range_check(Ic.line, (double) min_line(), (double) max_line() + 1.0);
-    T = min_time() + Ic.line * tspace;
-    F = FrameCoordinate(Ic.line, Ic.sample);
-  }
-  virtual void time_with_derivative(const ImageCoordinateWithDerivative& Ic, 
-				    TimeWithDerivative& T, 
-				    FrameCoordinateWithDerivative& F) const
-  {
-    range_check(Ic.line.value(), (double) min_line(), 
-		(double) max_line() + 1.0);
-    T = TimeWithDerivative(min_time()) + Ic.line * tspace;
-    F = FrameCoordinateWithDerivative(Ic.line, Ic.sample);
-  }
-  virtual int min_line() const {return 0;}
-  virtual int max_line() const {return max_l;}
-  virtual Time min_time() const {return min_t;}
-  virtual Time max_time() const {return min_t + tspace * max_l;}
-  double time_space() const {return tspace;}
-private:
-  Time min_t;
-  int max_l;
-  double tspace;
-};
 
 class IgcRollingShutterFixture : public GlobalFixture {
 public:
   IgcRollingShutterFixture() 
   {
-    tmin = Time::parse_time("2003-01-01T11:11:00Z");
-    orb.reset(new KeplerOrbit());
+    // tmin = Time::parse_time("2003-01-01T11:11:00Z");
+    // orb.reset(new KeplerOrbit());
+    std::string fname = test_data_dir() + "sample_orbit.h5";
+    tmin = Time::time_acs(215077459.472);
+#ifdef HAVE_HDF5
+    boost::shared_ptr<Orbit> orb_uncorr(new HdfOrbit<EciTod, TimeAcsCreator>(fname));
+    orb.reset(new OrbitOffsetCorrection(orb_uncorr));
+    orb->insert_time_point(tmin);
+    orb->insert_time_point(tmin + 10);
+#endif
     cam.reset(new QuaternionCamera(quat_rot("zyx", 0.1, 0.2, 0.3),
 				   3375, 3648, 1.0 / 2500000, 1.0 / 2500000,
 				   1.0, FrameCoordinate(1688.0, 1824.5),
 				   QuaternionCamera::LINE_IS_Y));
     dem.reset(new SimpleDem(100));
-    boost::shared_ptr<RasterImage> 
-      img(new MemoryRasterImage(cam->number_line(0),
-				cam->number_sample(0)));
+    boost::shared_ptr<RasterImage> img;
     tspace = 1e-3;
-    tt.reset(new RollingShutterConstantSpacingTimeTable(tmin, 
+    tt.reset(new RollingShutterConstantTimeTable(tmin, 
 	tmin + cam->number_line(0) * tspace, tspace));
-    igc.reset(new IgcRollingShutter(orb, tt, cam, dem, img));
+    if(orb)
+      igc.reset(new IgcRollingShutter(orb, tt, cam, dem, img));
   }
   Time tmin;
-  boost::shared_ptr<Orbit> orb;
+  boost::shared_ptr<OrbitOffsetCorrection> orb;
   boost::shared_ptr<QuaternionCamera> cam;
   boost::shared_ptr<Dem> dem;
   double tspace;
@@ -93,26 +58,33 @@ BOOST_FIXTURE_TEST_SUITE(igc_rolling_shutter, IgcRollingShutterFixture)
 
 BOOST_AUTO_TEST_CASE(resolution)
 {
-  // Check resolution calculation. We just compare to expected results
-  // we previously verified by hand.
-  
-  BOOST_CHECK_CLOSE(igc->resolution_meter(), 6.59975059, 1e-2);
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
+  BOOST_CHECK_CLOSE(igc->resolution_meter(), 0.26959054043292852, 1e-2);
 }
 
 BOOST_AUTO_TEST_CASE(footprint_resolution)
 {
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
+
   // Check resolution calculation. We just compare to expected results
   // we previously verified by hand.
   
   double lres, sres;
   igc->footprint_resolution(igc->number_line() / 2, igc->number_sample() / 2,
 			    lres, sres);
-  BOOST_CHECK_CLOSE(lres, 0.324327514, 1e-2);
-  BOOST_CHECK_CLOSE(sres, 0.314864123, 1e-2);
+  BOOST_CHECK_CLOSE(lres, 0.27269241745720268, 1e-1);
+  BOOST_CHECK_CLOSE(sres, 0.26963127284746102, 1e-1);
 }
 
 BOOST_AUTO_TEST_CASE(ground_position)
 {
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   // Check ground and spacecraft position by directly calculating
   ImageCoordinate ic(100, 200);
   boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + 100 * tspace);
@@ -124,6 +96,9 @@ BOOST_AUTO_TEST_CASE(ground_position)
 
 BOOST_AUTO_TEST_CASE(image_coordinate)
 {
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
 
   // Check we get back to the original image_coordinate. Note that ==
   // is already done with a tolerance for ImageCoordinate
@@ -133,6 +108,9 @@ BOOST_AUTO_TEST_CASE(image_coordinate)
 
 BOOST_AUTO_TEST_CASE(cf_look_vector)
 {
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   // Check look vector and spacecraft position by directly calculating
   ImageCoordinate ic(100, 200);
   boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + 100 * tspace);
@@ -150,6 +128,9 @@ BOOST_AUTO_TEST_CASE(cf_look_vector)
 
 BOOST_AUTO_TEST_CASE(cf_look_vector_arr)
 {
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   // Test cf_look_vector_lv by comparing a point of the array with a
   // direct calculation.
   int lstart = 10;
@@ -184,37 +165,139 @@ BOOST_AUTO_TEST_CASE(cf_look_vector_arr)
 
 BOOST_AUTO_TEST_CASE(jacobian)
 {
-  // Note we only check the camera jacobian. However this is enough to
-  // make sure the propagation goes through correctly, the use of
-  // orbit parameter jacobians is handled exactly the same way by the
-  // code. 
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
   igc->add_identity_gradient();
   boost::shared_ptr<GroundCoordinate> gc = 
     igc->ground_coordinate(ImageCoordinate(100,200));
   Array<double, 2> jac_calc = igc->image_coordinate_jac_parm(*gc);
 
-  blitz::Array<double, 1> eps(8);
-  eps = 0.00001, 0.00001, 0.00001, 1e-9, 1e-9, 0.001, 0.1, 0.1;
-  Array<double, 2> jac_fd(2, 8);
-  Array<double, 1> p0(cam->parameter());
+  blitz::Array<double, 1> eps(17);
+  eps = 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.00001, 0.00001, 0.00001, 1e-9, 1e-9, 0.001, 0.1, 0.1;
+  Array<double, 2> jac_fd(2, eps.rows());
+  Array<double, 1> p0(igc->parameter_subset());
   ImageCoordinate ic0 = igc->image_coordinate(*gc);
   for(int i = 0; i < eps.rows(); ++i) {
     Array<double, 1> p = p0.copy();
     p(i) += eps(i);
-    cam->parameter(p);
+    igc->parameter_subset(p);
     ImageCoordinate ic = igc->image_coordinate(*gc);
     jac_fd(0,i) = (ic.line - ic0.line) / eps(i);
     jac_fd(1,i) = (ic.sample - ic0.sample) / eps(i);
   }
   // These are wildly different in scale, so check each item
   // separately so it can be scaled.
-  for(int i = 0; i < 2; ++i)
-    for(int j = 0; j < 8; ++j)
+  for(int i = 0; i < jac_fd.rows(); ++i)
+    for(int j = 0; j < jac_fd.cols(); ++j)
       if(fabs(jac_calc(i,j)) > 0)
-	BOOST_CHECK_CLOSE(jac_calc(i, j), jac_fd(i, j), 1.5);
-      else {
+	BOOST_CHECK_CLOSE(jac_calc(i, j), jac_fd(i, j), 3.6);
+      else
 	BOOST_CHECK(fabs(jac_fd(i, j)) < 2e-1);
+}
+
+BOOST_AUTO_TEST_CASE(image_coordinate_timing)
+{
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
+  // Run image_coordinate a number of times to check the timing.
+  ImageCoordinate ic(100, 200);
+  boost::shared_ptr<GroundCoordinate> gc = igc->ground_coordinate(ic);
+  for(int i = 0; i < 1000; ++i)
+    ImageCoordinate ic = igc->image_coordinate(*gc);
+}
+
+BOOST_AUTO_TEST_CASE(handling_outside_points)
+{
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
+  // Test handling ground points either before or after the coverage
+  // of the Igc
+  Time tmin = igc->time_table()->min_time();
+  boost::shared_ptr<OrbitData> od = igc->orbit()->orbit_data(tmin - 10.0);
+  boost::shared_ptr<GroundCoordinate> gc =
+    od->surface_intersect(*igc->camera(), FrameCoordinate(0,100), igc->dem());
+  BOOST_CHECK_THROW(igc->image_coordinate(*gc), ImageGroundConnectionFailed);
+  Time tmax = igc->time_table()->max_time();
+  od = igc->orbit()->orbit_data(tmin + 10.0);
+  gc = 
+    od->surface_intersect(*igc->camera(), FrameCoordinate(4000,100), 
+			  igc->dem());
+  BOOST_CHECK_THROW(igc->image_coordinate(*gc), ImageGroundConnectionFailed);
+}
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
+  if(!have_serialize_supported() || !orb)
+    return;
+  std::string d = serialize_write_string(igc);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<IgcRollingShutter> igcr = 
+    serialize_read_string<IgcRollingShutter>(d);
+  ImageCoordinate ic(100, 200);
+  BOOST_CHECK(igcr->image_coordinate(*igc->ground_coordinate(ic)) == ic);
+  BOOST_CHECK_MATRIX_CLOSE(igc->parameter(), igcr->parameter());
+}
+
+BOOST_AUTO_TEST_CASE(expected_points)
+{
+  // This take a fair chunk of time to run in debug mode, so don't normally run
+  // this.
+  return;
+  // Skip test if we don't have HDF5 support
+  if(!orb)
+    return;
+  if(!have_serialize_supported())
+    return;
+  // Run only if we have the test data.
+  if(!boost::filesystem::exists("/data/geocal_test_data/igccol_rolling_shutter.xml"))
+    return;
+  boost::shared_ptr<IgcCollection> igccol = 
+    serialize_read<IgcCollection>("/data/geocal_test_data/igccol_rolling_shutter.xml");
+  boost::shared_ptr<ImageGroundConnection> igc = 
+    igccol->image_ground_connection(10);
+  // Generate expected results
+  if(false) {
+    std::vector<ImageCoordinate> iclist;
+    std::vector<boost::shared_ptr<GroundCoordinate> > gclist;
+    for(int i = 0; i < igc->number_line() - 1; i += 10)
+      for(int j = 0; j < igc->number_sample(); j += 10) {
+	ImageCoordinate ic(i + 0.5, j);
+	iclist.push_back(ic);
+	gclist.push_back(igc->ground_coordinate(ic));
       }
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+    std::ofstream os("/data/geocal_test_data/igccol_rolling_shutter_test_expect.dat");
+    boost::archive::polymorphic_binary_oarchive oa(os);
+    oa << boost::serialization::make_nvp("iclist", iclist)
+       << boost::serialization::make_nvp("gclist", gclist);
+#else
+  throw Exception("GeoCal was not built with boost::serialization support");
+#endif
+  }
+  // Read previously generated test data.
+  std::vector<ImageCoordinate> iclist;
+  std::vector<boost::shared_ptr<GroundCoordinate> > gclist;
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+    std::ifstream is("/data/geocal_test_data/igccol_rolling_shutter_test_expect.dat");
+    boost::archive::polymorphic_binary_iarchive ia(is);
+    ia >> boost::serialization::make_nvp("iclist", iclist)
+       >> boost::serialization::make_nvp("gclist", gclist);
+#else
+  throw Exception("GeoCal was not built with boost::serialization support");
+#endif
+  for(int i = 0; i < (int) iclist.size(); ++i) {
+    BOOST_CHECK(igc->image_coordinate(*gclist[i]) ==
+		iclist[i]);
+    BOOST_CHECK(GeoCal::distance(*igc->ground_coordinate(iclist[i]), 
+				 *gclist[i]) < 0.1);
+  }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

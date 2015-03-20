@@ -1,5 +1,5 @@
-#include "usgs_dem.h"
 #include "unit_test_support.h"
+#include "usgs_dem.h"
 #include <boost/filesystem.hpp>
 #include <iostream>
 
@@ -43,6 +43,28 @@ BOOST_AUTO_TEST_CASE(usgs_dem)
   UsgsDem d(test_data_dir() + "usgs_dem", false, datum);
   BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(43.5, -68.5)),
 		    10, 1e-4);
+}
+BOOST_AUTO_TEST_CASE(serialization)
+{
+#ifdef HAVE_BOOST_SERIALIZATON
+  std::ostringstream os;
+  boost::archive::xml_oarchive oa(os);
+
+  boost::shared_ptr<Datum> datum(new SimpleDatum(10.0));
+  boost::shared_ptr<Dem> d(new UsgsDem(test_data_dir() + "usgs_dem", false, 
+				       datum));
+  oa << GEOCAL_NVP(d);
+  if(false)
+    std::cerr << os.str();
+
+  std::istringstream is(os.str());
+  boost::archive::xml_iarchive ia(is);
+  boost::shared_ptr<Dem> dr;
+  ia >> GEOCAL_NVP(dr);
+
+  BOOST_CHECK_CLOSE(dr->height_reference_surface(Geodetic(43.5, -68.5)),
+		    10, 1e-4);
+#endif
 }
 
 

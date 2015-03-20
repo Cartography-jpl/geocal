@@ -122,6 +122,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -425,8 +428,8 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
 
     def coordinate(self, *args):
         """
-        ImageCoordinate GeoCal::RasterImage::coordinate(const GroundCoordinate &Gc) const
-        Shortcut to calling mapinfo().coordinate. 
+        ImageCoordinate GeoCal::RasterImage::coordinate(const Geodetic &Gc) const
+
         """
         return _raster_image.RasterImage_coordinate(self, *args)
 

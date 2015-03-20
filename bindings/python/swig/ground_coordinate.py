@@ -122,6 +122,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -257,6 +260,17 @@ class CartesianInertial(geocal_swig.generic_object.GenericObject):
         """
         return _ground_coordinate.CartesianInertial_ci_to_cf(self, *args)
 
+    def ci_to_cf_with_vel(self, *args):
+        """
+        virtual void GeoCal::CartesianInertial::ci_to_cf_with_vel(const Time &T, double Ci_to_cf[6][6]) const =0
+        Calculate matrix that can be used to convert CartesianInertial to
+        CartesianFixed at the given Time, including velocity.
+
+        Note that unlike the 3x3 matrix, this is not orthogonal so the
+        transpose is not the inverse. 
+        """
+        return _ground_coordinate.CartesianInertial_ci_to_cf_with_vel(self, *args)
+
     def ci_to_cf_quat(self, *args):
         """
         boost::math::quaternion<double> GeoCal::CartesianInertial::ci_to_cf_quat(const Time &T) const
@@ -295,6 +309,7 @@ class CartesianInertial(geocal_swig.generic_object.GenericObject):
     __swig_destroy__ = _ground_coordinate.delete_CartesianInertial
 CartesianInertial.convert_to_cf = new_instancemethod(_ground_coordinate.CartesianInertial_convert_to_cf,None,CartesianInertial)
 CartesianInertial.ci_to_cf = new_instancemethod(_ground_coordinate.CartesianInertial_ci_to_cf,None,CartesianInertial)
+CartesianInertial.ci_to_cf_with_vel = new_instancemethod(_ground_coordinate.CartesianInertial_ci_to_cf_with_vel,None,CartesianInertial)
 CartesianInertial.ci_to_cf_quat = new_instancemethod(_ground_coordinate.CartesianInertial_ci_to_cf_quat,None,CartesianInertial)
 CartesianInertial.create = new_instancemethod(_ground_coordinate.CartesianInertial_create,None,CartesianInertial)
 CartesianInertial.reference_surface_intersect_approximate = new_instancemethod(_ground_coordinate.CartesianInertial_reference_surface_intersect_approximate,None,CartesianInertial)
@@ -349,6 +364,17 @@ class CartesianFixed(GroundCoordinate):
         """
         return _ground_coordinate.CartesianFixed_ci_to_cf(self, *args)
 
+    def cf_to_ci_with_vel(self, *args):
+        """
+        virtual void GeoCal::CartesianFixed::cf_to_ci_with_vel(const Time &T, double Cf_to_ci[6][6]) const =0
+        Calculate matrix that can be used to convert CartesianFixed to
+        CartesianInertial at the given Time, including velocity.
+
+        Note that unlike the 3x3 matrix, this is not orthogonal so the
+        transpose is not the inverse. 
+        """
+        return _ground_coordinate.CartesianFixed_cf_to_ci_with_vel(self, *args)
+
     def ci_to_cf_quat(self, *args):
         """
         boost::math::quaternion<double> GeoCal::CartesianFixed::ci_to_cf_quat(const Time &T) const
@@ -394,6 +420,7 @@ class CartesianFixed(GroundCoordinate):
 CartesianFixed.convert_to_ci = new_instancemethod(_ground_coordinate.CartesianFixed_convert_to_ci,None,CartesianFixed)
 CartesianFixed.create = new_instancemethod(_ground_coordinate.CartesianFixed_create,None,CartesianFixed)
 CartesianFixed.ci_to_cf = new_instancemethod(_ground_coordinate.CartesianFixed_ci_to_cf,None,CartesianFixed)
+CartesianFixed.cf_to_ci_with_vel = new_instancemethod(_ground_coordinate.CartesianFixed_cf_to_ci_with_vel,None,CartesianFixed)
 CartesianFixed.ci_to_cf_quat = new_instancemethod(_ground_coordinate.CartesianFixed_ci_to_cf_quat,None,CartesianFixed)
 CartesianFixed.reference_surface_intersect_approximate = new_instancemethod(_ground_coordinate.CartesianFixed_reference_surface_intersect_approximate,None,CartesianFixed)
 CartesianFixed._v_min_radius_reference_surface = new_instancemethod(_ground_coordinate.CartesianFixed__v_min_radius_reference_surface,None,CartesianFixed)
@@ -466,6 +493,18 @@ def distance(*args):
     along a geodesic or anything like that. 
     """
   return _ground_coordinate.distance(*args)
+
+def convert_position_and_velocity(*args):
+  """
+    void GeoCal::convert_position_and_velocity(const TimeWithDerivative &T, const CartesianInertial &Ci, const
+    boost::array< AutoDerivative< double >, 3 > &Ci_with_der, const
+    boost::array< AutoDerivative< double >, 3 > &Vel_ci,
+    boost::shared_ptr< CartesianFixed > &Cf, boost::array< AutoDerivative<
+    double >, 3 > &Cf_with_der, boost::array< AutoDerivative< double >, 3
+    > &Vel_cf)
+    Convert including velocity. 
+    """
+  return _ground_coordinate.convert_position_and_velocity(*args)
 class Vector_GroundCoordinate(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr

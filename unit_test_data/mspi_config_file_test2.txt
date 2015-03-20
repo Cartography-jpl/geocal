@@ -1,0 +1,11 @@
+# This is additional configuration information that we can add in
+2.00000001 : parameter6   # Override value
+3 : parameter10            # New value
+4 : parameter10-11         # Allow "-" in a name
+
+# Add in a table that we can test
+2 6                                                                  : L1B1.size
+view_number view_name view_time l1b1_file                 resolution  extra_config_file  : L1B1.columns
+6           660F      182924ZZ file1.hdf        10   -
+7           770F      182924ZZ file2.hdf        20   -
+                                                                     : L1B1.table

@@ -82,6 +82,10 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -111,6 +115,16 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const = 0;
+
+//-----------------------------------------------------------------------
+/// Calculate matrix that can be used to convert CartesianInertial to
+/// CartesianFixed at the given Time, including velocity. Note that
+/// unlike the 3x3 matrix, this is *not* orthogonal so the transpose
+/// is not the inverse.
+//-----------------------------------------------------------------------
+
+  virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) 
+    const = 0;
 
 //-----------------------------------------------------------------------
 /// Calculate quaternion that can be used to convert CartesianFixed to
@@ -154,6 +168,10 @@ public:
 //-----------------------------------------------------------------------
   
   boost::array<double, 3> position;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -185,6 +203,16 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const = 0;
+
+//-----------------------------------------------------------------------
+/// Calculate matrix that can be used to convert CartesianFixed to
+/// CartesianInertial at the given Time, including velocity. Note that
+/// unlike the 3x3 matrix, this is *not* orthogonal so the transpose
+/// is not the inverse.
+//-----------------------------------------------------------------------
+
+  virtual void cf_to_ci_with_vel(const Time& T, double Cf_to_ci[6][6]) 
+    const = 0;
 
 //-----------------------------------------------------------------------
 /// Calculate quaternion that can be used to convert CartesianFixed to
@@ -250,6 +278,11 @@ public:
 //-----------------------------------------------------------------------
 
   static ToolkitCoordinateInterface* toolkit_coordinate_interface;
+
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 // These are defined here instead of up in the class above because
@@ -271,6 +304,107 @@ inline double GroundCoordinate::height_reference_surface() const
 
 double distance(const GroundCoordinate& G1, const GroundCoordinate& G2);
 
+void convert_position_and_velocity
+(const Time& T,
+ const CartesianFixed& Cf,
+ const boost::array<double, 3>& Vel_cf,
+ boost::shared_ptr<CartesianInertial>& Ci,
+ boost::array<double, 3>& Vel_ci
+ );
+
+void convert_position_and_velocity
+(const TimeWithDerivative& T,
+ const CartesianFixed& Cf,
+ const boost::array<AutoDerivative<double>,3>& Cf_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_cf,
+ boost::shared_ptr<CartesianInertial>& Ci,
+ boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+ boost::array<AutoDerivative<double>, 3>& Vel_ci,
+ boost::math::quaternion<AutoDerivative<double> >& Cf_to_ci_q
+ );
+
+//-----------------------------------------------------------------------
+/// \ingroup Miscellaneous
+/// Convert including velocity.
+//-----------------------------------------------------------------------
+
+inline void convert_position_and_velocity
+(const TimeWithDerivative& T,
+ const CartesianFixed& Cf,
+ const boost::array<AutoDerivative<double>,3>& Cf_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_cf,
+ boost::shared_ptr<CartesianInertial>& Ci,
+ boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+ boost::array<AutoDerivative<double>, 3>& Vel_ci
+ )
+{
+  boost::math::quaternion<AutoDerivative<double> > junk;
+  convert_position_and_velocity(T, Cf, Cf_with_der, Vel_cf, Ci, Ci_with_der, 
+				Vel_ci, junk);
 }
+
+void convert_position_and_velocity
+(const Time& T,
+ const CartesianInertial& Ci,
+ const boost::array<double, 3>& Vel_ci,
+ boost::shared_ptr<CartesianFixed>& Cf,
+ boost::array<double, 3>& Vel_cf,
+ boost::math::quaternion<double>& Ci_to_cf_q
+ );
+
+//-----------------------------------------------------------------------
+/// \ingroup Miscellaneous
+/// Convert including velocity.
+//-----------------------------------------------------------------------
+
+inline void convert_position_and_velocity
+(const Time& T,
+ const CartesianInertial& Ci,
+ const boost::array<double, 3>& Vel_ci,
+ boost::shared_ptr<CartesianFixed>& Cf,
+ boost::array<double, 3>& Vel_cf
+ )
+{
+  boost::math::quaternion<double> junk;
+  convert_position_and_velocity(T, Ci, Vel_ci, Cf, Vel_cf, junk);
+}
+
+void convert_position_and_velocity
+(const TimeWithDerivative& T,
+ const CartesianInertial& Ci,
+ const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_ci,
+ boost::shared_ptr<CartesianFixed>& Cf,
+ boost::array<AutoDerivative<double>, 3>& Cf_with_der,
+ boost::array<AutoDerivative<double>, 3>& Vel_cf,
+ boost::math::quaternion<AutoDerivative<double> >& Ci_to_cf_q
+ );
+
+//-----------------------------------------------------------------------
+/// \ingroup Miscellaneous
+/// Convert including velocity.
+//-----------------------------------------------------------------------
+
+inline void convert_position_and_velocity
+(const TimeWithDerivative& T,
+ const CartesianInertial& Ci,
+ const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+ const boost::array<AutoDerivative<double>, 3>& Vel_ci,
+ boost::shared_ptr<CartesianFixed>& Cf,
+ boost::array<AutoDerivative<double>, 3>& Cf_with_der,
+ boost::array<AutoDerivative<double>, 3>& Vel_cf
+ )
+{
+  boost::math::quaternion<AutoDerivative<double> > junk;
+  convert_position_and_velocity(T, Ci, Ci_with_der, Vel_ci, Cf, Cf_with_der,
+				Vel_cf, junk);
+}
+
+ 
+}
+
+GEOCAL_EXPORT_KEY(GroundCoordinate);
+GEOCAL_EXPORT_KEY(CartesianFixed);
+GEOCAL_EXPORT_KEY(CartesianInertial);
 #endif
 

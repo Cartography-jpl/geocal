@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -149,16 +152,20 @@ class MspiConfigFile(geocal_swig.generic_object.GenericObject):
 
         """
         _mspi_config_file.MspiConfigFile_swiginit(self,_mspi_config_file.new_MspiConfigFile(*args))
-    def _v_file_name(self):
+    def add_file(self, *args):
         """
-        const std::string& GeoCal::MspiConfigFile::file_name() const
-        File name for MspiConfigFile. 
+        void MspiConfigFile::add_file(const std::string &Fname)
+        Add a file, replacing any keywords already in this class from earlier
+        files. 
         """
-        return _mspi_config_file.MspiConfigFile__v_file_name(self)
+        return _mspi_config_file.MspiConfigFile_add_file(self, *args)
 
-    @property
-    def file_name(self):
-        return self._v_file_name()
+    def add(self, *args):
+        """
+        void GeoCal::MspiConfigFile::add(const std::string &Keyword, const std::string &Value)
+        Add or replace a value. 
+        """
+        return _mspi_config_file.MspiConfigFile_add(self, *args)
 
     def have_key(self, *args):
         """
@@ -167,20 +174,56 @@ class MspiConfigFile(geocal_swig.generic_object.GenericObject):
         """
         return _mspi_config_file.MspiConfigFile_have_key(self, *args)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
-    def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name)
-
     __swig_destroy__ = _mspi_config_file.delete_MspiConfigFile
-MspiConfigFile._v_file_name = new_instancemethod(_mspi_config_file.MspiConfigFile__v_file_name,None,MspiConfigFile)
+MspiConfigFile.add_file = new_instancemethod(_mspi_config_file.MspiConfigFile_add_file,None,MspiConfigFile)
+MspiConfigFile.add = new_instancemethod(_mspi_config_file.MspiConfigFile_add,None,MspiConfigFile)
 MspiConfigFile.have_key = new_instancemethod(_mspi_config_file.MspiConfigFile_have_key,None,MspiConfigFile)
 MspiConfigFile.value_double = new_instancemethod(_mspi_config_file.MspiConfigFile_value_double,None,MspiConfigFile)
+MspiConfigFile.value_int = new_instancemethod(_mspi_config_file.MspiConfigFile_value_int,None,MspiConfigFile)
+MspiConfigFile.value_string = new_instancemethod(_mspi_config_file.MspiConfigFile_value_string,None,MspiConfigFile)
 MspiConfigFile.__str__ = new_instancemethod(_mspi_config_file.MspiConfigFile___str__,None,MspiConfigFile)
 MspiConfigFile_swigregister = _mspi_config_file.MspiConfigFile_swigregister
 MspiConfigFile_swigregister(MspiConfigFile)
+
+class MspiConfigTable(geocal_swig.generic_object.GenericObject):
+    """
+    Small adapter that lets you refer to a table by column name.
+
+    The convention is that the table "FOO" has a config entry of
+    FOO.columns giving the column names, and FOO.table giving the actual
+    values. We look of a value by doing "value<Type>(index,
+    column_name)".
+
+    C++ includes: mspi_config_file.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        MspiConfigTable::MspiConfigTable(const MspiConfigFile &Config, const std::string &Table_name)
+        Create a MspiConfigTable for the given table name in the given file.
+
+        """
+        _mspi_config_file.MspiConfigTable_swiginit(self,_mspi_config_file.new_MspiConfigTable(*args))
+    def _v_number_row(self):
+        """
+        int GeoCal::MspiConfigTable::number_row() const
+
+        """
+        return _mspi_config_file.MspiConfigTable__v_number_row(self)
+
+    @property
+    def number_row(self):
+        return self._v_number_row()
+
+    __swig_destroy__ = _mspi_config_file.delete_MspiConfigTable
+MspiConfigTable._v_number_row = new_instancemethod(_mspi_config_file.MspiConfigTable__v_number_row,None,MspiConfigTable)
+MspiConfigTable.value_double = new_instancemethod(_mspi_config_file.MspiConfigTable_value_double,None,MspiConfigTable)
+MspiConfigTable.value_int = new_instancemethod(_mspi_config_file.MspiConfigTable_value_int,None,MspiConfigTable)
+MspiConfigTable.value_string = new_instancemethod(_mspi_config_file.MspiConfigTable_value_string,None,MspiConfigTable)
+MspiConfigTable.__str__ = new_instancemethod(_mspi_config_file.MspiConfigTable___str__,None,MspiConfigTable)
+MspiConfigTable_swigregister = _mspi_config_file.MspiConfigTable_swigregister
+MspiConfigTable_swigregister(MspiConfigTable)
 
 
 

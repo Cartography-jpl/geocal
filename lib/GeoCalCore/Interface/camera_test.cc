@@ -47,4 +47,23 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_MATRIX_CLOSE(f2d.sample.gradient(), f1d.sample.gradient());
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<Camera> cam(new SimpleCamera());
+  std::string d = serialize_write_string(cam);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<Camera> camr = serialize_read_string<Camera>(d);
+  FrameCoordinate f1(1, 2);
+  ScLookVector sl = cam->sc_look_vector(f1, 0);
+  BOOST_CHECK_EQUAL(camr->number_band(), 1);
+  BOOST_CHECK_EQUAL(camr->number_line(0), 1);
+  BOOST_CHECK_EQUAL(camr->number_sample(0), 1504);
+  FrameCoordinate f2 = camr->frame_coordinate(sl, 0);
+  BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);
+  BOOST_CHECK_CLOSE(f2.sample, f1.sample, 1e-4);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

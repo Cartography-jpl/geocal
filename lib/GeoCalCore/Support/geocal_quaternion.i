@@ -46,6 +46,9 @@ namespace GeoCal {
 		   double& OUTPUT, double& OUTPUT, double& OUTPUT);
   void quat_to_euler(const boost::math::quaternion<double>& qin, 
 		     double& OUTPUT, double& OUTPUT, double& OUTPUT);
+  boost::math::quaternion<double> 
+  determine_quat_rot(const boost::array<double, 3>& V1, 
+		     const boost::array<double, 3>& V2);
 
 
   boost::math::quaternion<AutoDerivative<double> > quat_rot_x(const AutoDerivative<double>& A);
@@ -70,5 +73,5 @@ namespace GeoCal {
 					   const AutoDerivative<double>& A1, const AutoDerivative<double>& A2, const AutoDerivative<double>& A3, 
 					   const AutoDerivative<double>& A4, const AutoDerivative<double>& A5, const AutoDerivative<double>& A6,
 					   const AutoDerivative<double>& A7);
- }
+}
 

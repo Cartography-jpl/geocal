@@ -11,8 +11,9 @@ except ImportError:
 from tempfile import NamedTemporaryFile
 import subprocess
 import os
+import re
 
-version="%prog May 9, 2014"
+version="%prog November 6, 2014"
 usage="""Usage: 
   gdal_to_nitf [options] <input_file> <output_nitf>
   gdal_to_nitf -h | --help
@@ -53,6 +54,28 @@ Options:
 """
 args = docopt_simple(usage, version=version)
 
+# Special handling for a unsuccessful RPC. We'll add support for the
+# success flag at some point in geocal, but for now have a work around since
+# we don't currently support this.
+failed_rpc = False
+vfname = re.sub("1:\\d+", "1", args.input_file)
+try:
+    # Depending on the options used when building, this class might
+    # not be available. If not, then just skip this test.
+    if(VicarFile.is_vicar_file(vfname)):
+        f = VicarFile(vfname)
+        try:
+            success = int(f["GEOTIFF", "RPC_FIELD1"][0])
+            if(success == 0):
+                failed_rpc = True
+        except RuntimeError:
+            # Ok if this fails, we just don't have this metadata field
+            pass
+
+except NameError:
+    # Ok of VicarFile isn't available
+    pass
+
 # Create a "virtual raster image". This is a text file that allows us to
 # set various metadata fields without changing the original file. GDAL then
 # treats this raster image we can later copy.
@@ -75,15 +98,27 @@ with NamedTemporaryFile() as tmp:
     subprocess.check_call(cmd)
     fvrt = GdalRasterImage(tmp.name)
     creation_option = []
-    if(fin.raster_image(0).has_rpc):
+    # For historical reasons, we treat RPC TRE differently than other TREs. 
+    # There is some fairly old code that depends on the RPC TRE being the
+    # *first* TRE in the NITF file. This really shouldn't matter, it is a 
+    # defect of this old code that it depends on this. So for backwards
+    # compatibility we specify this TRE as a creation option on the 
+    # gdal_translate. It is a quirk of how GDAL is written that creation
+    # options TREs appear before ones copied from the virtual raster image
+    # we'll create shortly. This is at least a property of gdal 1.9.2, it is
+    # possibly this will break in the future. We can address that if the
+    # backwards compatibility is still needed then.
+    if(fin.raster_image(0).has_rpc and not failed_rpc):
         if(fin.raster_image(0).rpc.rpc_type == Rpc.RPC_A):
             tre = TreRPC00A()
             tre.rpc = fin.raster_image(0).rpc
-            fvrt.rpc00a = tre
+            creation_option.extend(["-co",
+                                    "TRE=RPC00A=%s" % tre.string_value])
         else:
             tre = TreRPC00B()
             tre.rpc = fin.raster_image(0).rpc
-            fvrt.rpc00b = tre
+            creation_option.extend(["-co",
+                                    "TRE=RPC00B=%s" % tre.string_value])
 
     # NITF creates its IGEOLO data structure from a map projection. If
     # the input file doesn't already have map info, create an approximate
@@ -100,7 +135,6 @@ with NamedTemporaryFile() as tmp:
         mi = fvrt.map_info_from_nitf_corner(True)
         if(mi is not None):
             fvrt.set_map_info(mi)
-        print mi
 
     # Quiet a warning message in case we have the wrong header version 
     # information (e.g., this was copied from an older NITF file). As

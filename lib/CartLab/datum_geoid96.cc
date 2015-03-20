@@ -1,7 +1,31 @@
 #include "datum_geoid96.h"
+#include "geocal_serialize_support.h"
 #include <stdlib.h>
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void DatumGeoid96::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(Datum);
+  GEOCAL_BASE(DatumGeoid96, Datum);
+  std::string fname = file_name();
+  ar & GEOCAL_NVP(fname);
+}
+
+template<class Archive>
+void DatumGeoid96::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Datum);
+  GEOCAL_BASE(DatumGeoid96, Datum);
+  std::string fname;
+  ar & GEOCAL_NVP(fname);
+  data.reset(new VicarRasterImage(fname));
+}
+
+GEOCAL_SPLIT_IMPLEMENT(DatumGeoid96);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor. You can pass the datum file to read, but if you leave
@@ -9,8 +33,8 @@ using namespace GeoCal;
 //-----------------------------------------------------------------------
 
 DatumGeoid96::DatumGeoid96(const std::string& Fname)
- : fname(Fname)
 {
+  std::string fname = Fname;
   if(fname == "") {
     char* t = getenv("AFIDS_VDEV_DATA");
     if(!t)
@@ -31,6 +55,13 @@ double DatumGeoid96::undulation(const GroundCoordinate& Gc) const
   return data->interpolate(data->coordinate(Gc)) * 0.01;
 }
 
+double DatumGeoid96::undulation(const Geodetic& Gc) const
+{
+  // Data is scaled by 100 to fit into a integer. So we multiple by
+  // 0.01 to get back the orginal data.
+  return data->interpolate(data->coordinate(Gc)) * 0.01;
+}
+
 //-----------------------------------------------------------------------
 /// Print a description of the class.
 //-----------------------------------------------------------------------
@@ -38,7 +69,7 @@ double DatumGeoid96::undulation(const GroundCoordinate& Gc) const
 void DatumGeoid96::print(std::ostream& Os) const
 {
   Os << "Geoid 96 Datum\n"
-     << "  File: " << fname << "\n";
+     << "  File: " << file_name() << "\n";
 }
 
 

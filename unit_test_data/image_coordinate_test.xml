@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="9">
+<ic1 class_id="0" tracking_level="0" version="1">
+	<px class_id="2" class_name="GeoCal::ImageCoordinate" tracking_level="1" version="0" object_id="_0">
+		<line>4</line>
+		<sample>5</sample>
+	</px>
+</ic1>
+<ic2>
+	<px class_id_reference="2" object_id="_1">
+		<line>6</line>
+		<sample>7</sample>
+	</px>
+</ic2>
+</boost_serialization>
+

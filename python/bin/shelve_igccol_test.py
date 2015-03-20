@@ -1,9 +1,13 @@
+from geocal import *
 import subprocess
 import os
+from nose.plugins.skip import Skip, SkipTest
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_shelve_igccol():
     '''Create a simple GDAL based Igc, and then make sure we can list it'''
+    if(not have_serialize_supported()):
+        raise SkipTest
     try:
         os.remove("sqlite_shelf.db")
     except OSError as exc:

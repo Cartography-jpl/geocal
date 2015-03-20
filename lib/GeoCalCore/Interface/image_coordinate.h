@@ -2,8 +2,8 @@
 #define IMAGE_COORDINATE_H
 #include "printable.h"
 #include "auto_derivative.h"
-
 #include <iostream>		// Definition of ostream.
+
 namespace GeoCal {
   class VicarImageCoordinate;
 
@@ -55,6 +55,9 @@ public:
   double sample;
   void print(std::ostream& Os) const;
 private:
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version);
 };
 
 bool operator==(const ImageCoordinate& C1, const ImageCoordinate& C2);
@@ -113,6 +116,9 @@ public:
   double sample;
   void print(std::ostream& Os) const;
 private:
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version);
 };
 
 bool operator==(const VicarImageCoordinate& C1, const VicarImageCoordinate& C2);
@@ -170,7 +176,15 @@ public:
   AutoDerivative<double> sample;
   void print(std::ostream& Os) const;
 private:
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(ImageCoordinate);
+GEOCAL_EXPORT_KEY(VicarImageCoordinate);
+GEOCAL_EXPORT_KEY(ImageCoordinateWithDerivative);
+
 #endif

@@ -25,6 +25,15 @@ namespace GeoCal {
    SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
    %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::ImageCoordinate> *), SWIG_POINTER_OWN));
  }
+
+ %typemap(in,numinputs=0) ImageCoordinate &OUTPUT2 (GeoCal::ImageCoordinate temp) {
+  $1 = &temp;
+ }
+
+ %typemap(argout) ImageCoordinate &OUTPUT2 {
+   SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
+   %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::ImageCoordinate> *), SWIG_POINTER_OWN));
+ }
 #endif
 
   class VicarImageCoordinate;

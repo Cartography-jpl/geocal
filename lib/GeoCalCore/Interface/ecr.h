@@ -69,6 +69,16 @@ public:
 							   T, Ci_to_cf); 
   }
 
+//-----------------------------------------------------------------------
+/// Matrix to convert Eci to Ecr, including velocity. 
+//-----------------------------------------------------------------------
+
+  virtual void cf_to_ci_with_vel(const Time& T, double Cf_to_ci[6][6]) const
+  { 
+    CartesianFixed::toolkit_coordinate_interface->to_inertial_with_vel
+      (EARTH_NAIF_CODE, T, Cf_to_ci); 
+  }
+
   virtual void lat_lon_height(double& Latitude, double& Longitude, 
 			      double& Height_reference_surface) const;
   virtual double height_reference_surface() const;
@@ -83,6 +93,12 @@ public:
   virtual void print(std::ostream& Os) const;
   static Ecr sub_solar_point(const Time& T);
   static double solar_distance(const Time& T);
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(Ecr);
 #endif

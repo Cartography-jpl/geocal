@@ -147,6 +147,29 @@ BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
 	      ulc), 0, 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+#ifdef HAVE_BOOST_SERIALIZATON
+  std::ostringstream os;
+  boost::archive::xml_oarchive oa(os);
+
+  std::string fname = test_data_dir() + "vicar.img";
+  boost::shared_ptr<RasterImage> img(new VicarRasterImage(fname));
+  oa << GEOCAL_NVP(img);
+  if(false)
+    std::cerr << os.str();
+  
+  std::istringstream is(os.str());
+  boost::archive::xml_iarchive ia(is);
+  boost::shared_ptr<RasterImage> imgr;
+  ia >> GEOCAL_NVP(imgr);
+  BOOST_CHECK_EQUAL(imgr->number_line(), 10);
+  BOOST_CHECK_EQUAL(imgr->number_sample(), 10);
+  BOOST_CHECK_EQUAL(imgr->number_tile_line(), 10);
+  BOOST_CHECK_EQUAL(imgr->number_tile_sample(), 10);
+#endif
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 

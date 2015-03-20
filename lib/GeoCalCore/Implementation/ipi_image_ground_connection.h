@@ -3,6 +3,7 @@
 #include "image_ground_connection.h"
 #include "ipi.h"
 #include "ostream_pad.h"
+#include <boost/multi_array.hpp>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -10,7 +11,8 @@ namespace GeoCal {
   Ipi.
 *******************************************************************/
 
-class IpiImageGroundConnection : public ImageGroundConnection {
+class IpiImageGroundConnection : public virtual ImageGroundConnection, 
+				 public Observer<Camera> {
 public:
 //-----------------------------------------------------------------------
 // Constructor.
@@ -24,7 +26,20 @@ public:
 			   double Max_height = 9000) 
     : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
 			    Title), ipi_(I), res(Resolution), 
-      max_h(Max_height) {}
+      max_h(Max_height) 
+  {
+    ipi_->camera_ptr()->add_observer(*this);
+  }
+
+
+//-----------------------------------------------------------------------
+/// Clear cache if camera changes.
+//-----------------------------------------------------------------------
+
+  virtual void notify_update(const Camera& Observed_object) 
+  {
+    sc_look_vector_cache.resize(boost::extents[0][0][0]);
+  }
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -41,6 +56,11 @@ public:
     Lv = ipi_->orbit().cf_look_vector(t, ipi_->camera().sc_look_vector(f, ipi_->band()));
     P = ipi_->orbit().position_cf(t);
   }
+  virtual blitz::Array<double, 7> 
+  cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
+		     int nsubpixel_line = 1, 
+		     int nsubpixel_sample = 1,
+		     int nintegration_step = 1) const;
   
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic,
@@ -72,6 +92,12 @@ public:
       throw ImageGroundConnectionFailed("IPI failed");
     return res; 
   }
+  virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
+					    ImageCoordinate& Res,
+					    bool& Success) const
+  {
+    ipi_->image_coordinate_extended(Gc, Res, Success);
+  }
   virtual void print(std::ostream& Os) const \
   {
     OstreamPad opad(Os, "    ");
@@ -97,23 +123,7 @@ public:
 
   virtual void footprint_resolution(int Line, int Sample, 
 				    double &Line_resolution_meter, 
-				    double &Sample_resolution_meter)
-  {
-    Time t;
-    FrameCoordinate f;
-    ipi_->time_table().time(ImageCoordinate(Line, Sample), t, f);
-    boost::shared_ptr<GroundCoordinate> gc = ipi_->orbit().orbit_data(t)->
-      reference_surface_intersect_approximate(ipi_->camera(), f, ipi_->band());
-    f.line += 1;
-    boost::shared_ptr<GroundCoordinate> gc1 = ipi_->orbit().orbit_data(t)->
-      reference_surface_intersect_approximate(ipi_->camera(), f, ipi_->band());
-    f.line -= 1;
-    f.sample += 1;
-    boost::shared_ptr<GroundCoordinate> gc2 = ipi_->orbit().orbit_data(t)->
-      reference_surface_intersect_approximate(ipi_->camera(), f, ipi_->band());
-    Line_resolution_meter = distance(*gc, *gc1);
-    Sample_resolution_meter = distance(*gc, *gc2);
-  }
+				    double &Sample_resolution_meter) const;
 
 //-----------------------------------------------------------------------
 /// Maximum height we look through Dem at.
@@ -145,11 +155,18 @@ protected:
     ipi_ = I;
     res = Resolution;
     max_h = Max_height;
+    ipi_->camera_ptr()->add_observer(*this);
   }
 private:
   boost::shared_ptr<Ipi> ipi_;
   double res, max_h;
+  mutable boost::multi_array<ScLookVector, 3> sc_look_vector_cache;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(IpiImageGroundConnection);
 #endif

@@ -1,5 +1,5 @@
-#include "mspi_camera.h"
 #include "unit_test_support.h"
+#include "mspi_camera.h"
 #include "constant.h"
 #include <iostream>
 
@@ -267,6 +267,34 @@ BOOST_AUTO_TEST_CASE(gndmisr_roundtrip_test)
 	BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
       }
     }
+}
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<Camera> cam(new MspiCamera(test_data_dir() + "AIRMSPI_CONFIG_CAMERA_MODEL_0003.config"));
+  std::string d = serialize_write_string(cam);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<Camera> camr = serialize_read_string<Camera>(d);
+  BOOST_CHECK_EQUAL(cam->number_band(), camr->number_band());
+  for(int b = 0; b < cam->number_band(); ++b) {
+    BOOST_CHECK_EQUAL(cam->number_sample(b), camr->number_sample(b));
+    for(double ln = -1.0; ln < 1.05; ln += 0.5) {
+      for(int smp = 0; smp < cam->number_sample(b); smp += 10) {
+	FrameCoordinate fc(ln, smp);
+	FrameCoordinate fc2 = 
+	  camr->frame_coordinate(cam->sc_look_vector(fc, b), b);
+	BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
+	BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
+	FrameCoordinate fc3 = 
+	  cam->frame_coordinate(camr->sc_look_vector(fc, b), b);
+	BOOST_CHECK(fabs(fc.line - fc3.line) < 0.1);
+	BOOST_CHECK(fabs(fc.sample - fc3.sample) < 0.1);
+      }
+    }
+  }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

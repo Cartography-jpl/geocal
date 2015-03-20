@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -152,8 +155,8 @@ class DemMapInfo(geocal_swig.dem.Dem):
 
     def height_datum(self, *args):
         """
-        double DemMapInfo::height_datum(const GroundCoordinate &Gp) const
-        Height relative to datum. 
+        double DemMapInfo::height_datum(const Geodetic &Gp) const
+
         """
         return _dem_map_info.DemMapInfo_height_datum(self, *args)
 

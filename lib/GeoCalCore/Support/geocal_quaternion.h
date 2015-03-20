@@ -1,9 +1,27 @@
 #ifndef GEOCAL_QUATERNION_H
 #define GEOCAL_QUATERNION_H
 #include "geocal_exception.h"
+#include "geocal_config.h"
+#include "geocal_matrix.h"
 #include <boost/math/quaternion.hpp>
 #include <blitz/array.h>
 #include <cmath>
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+#include <boost/serialization/split_free.hpp>
+// Add serialization for boost::math::quaternion
+namespace boost {
+  namespace serialization {
+    template<class Archive, class T>
+    void save(Archive& ar, const boost::math::quaternion<T>& q, 
+		     const unsigned version);
+    template<typename Archive, class T>
+    void load(Archive& ar, boost::math::quaternion<T>& q, 
+	      const unsigned version);
+  }
+}
+BOOST_SERIALIZATION_SPLIT_FREE(boost::math::quaternion<double>);
+#endif
 
 namespace GeoCal {
   // Various support routines for working with quaternions. 
@@ -339,6 +357,56 @@ matrix_to_quaternion(const T m[3][3])
   }
 }
 
+//-----------------------------------------------------------------------
+/// Interpolate between 2 quaternions.
+//-----------------------------------------------------------------------
+
+inline boost::math::quaternion<double> interpolate_quaternion
+(const boost::math::quaternion<double>& Q1, 
+ const boost::math::quaternion<double>& Q2,
+ const double& toffset, double tspace)
+{
+  boost::math::quaternion<double> delta_quat = Q2 * conj(Q1);
+  double t = delta_quat.R_component_1();
+  t = (t > 1 ? 1 : (t < -1 ? -1 : t)); // Handle t being slightly
+  // out of range due to round off.
+  double delta_ang = 2.0 * std::acos(t);
+  if(delta_ang < 1e-8)	// Handle degenerate case of Q1 and Q2
+    // almost the same.
+    return Q1;
+  double d_ang = delta_ang * toffset / tspace;
+  double sratio = std::sin(d_ang / 2.0) / std::sin(delta_ang / 2.0);
+  boost::math::quaternion<double> 
+    d_quat(std::cos(d_ang / 2.0),
+	   delta_quat.R_component_2() * sratio,
+	   delta_quat.R_component_3() * sratio,
+	   delta_quat.R_component_4() * sratio);
+  return d_quat * Q1;
+}
+
+//-----------------------------------------------------------------------
+/// Normalize a quaternion
+//-----------------------------------------------------------------------
+inline void normalize(boost::math::quaternion<double>& Q)
+{
+  Q /= abs(Q);
+}
+
+//-----------------------------------------------------------------------
+/// Determine quaternion that will rotate a vector v1 to point at v2.
+/// Note that this isn't actually unique, but this is the 'shortest
+/// arc' solution.
+//-----------------------------------------------------------------------
+template<class T> inline boost::math::quaternion<T> 
+determine_quat_rot(const boost::array<T, 3>& V1, const boost::array<T, 3>& V2)
+{
+  boost::array<T, 3> a;
+  cross(V1, V2, a);
+  T w = norm(V1) * norm(V2) + dot(V1, V2);
+  boost::math::quaternion<T> res(w, a[0], a[1], a[2]);
+  normalize(res);
+  return res;
+}
 
 }
 #endif

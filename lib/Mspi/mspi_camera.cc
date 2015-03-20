@@ -2,20 +2,46 @@
 #include "mspi_config_file.h"
 #include "geocal_quaternion.h"
 #include "constant.h"
+#include "geocal_serialize_support.h"
 #include <boost/lexical_cast.hpp>
 
 using namespace GeoCal;
 using namespace blitz;
 
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void MspiCamera::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
+  ar & GEOCAL_NVP(fname) 
+    & GEOCAL_NVP_(granule_id)
+    & GEOCAL_NVP_(epsilon)
+    & GEOCAL_NVP_(psi)
+    & GEOCAL_NVP_(theta)
+    & GEOCAL_NVP_(boresight_angle)
+    & GEOCAL_NVP_(yaw)
+    & GEOCAL_NVP_(pitch)
+    & GEOCAL_NVP_(roll)
+    & GEOCAL_NVP_(row_number)
+    & GEOCAL_NVP_(paraxial_transform)
+    & GEOCAL_NVP_(inversion);
+}
+
+
+GEOCAL_IMPLEMENT(MspiCamera);
+#endif
+
 //-----------------------------------------------------------------------
 /// Read in the given configuration file.
 //-----------------------------------------------------------------------
 
-void MspiCamera::read_config_file(const std::string& File_name)
+void MspiCamera::read_config_file(const std::string& File_name,
+				  const std::string& Extra_config_file)
 {
   fname = File_name;
   MspiConfigFile c(File_name);
-
+  if(Extra_config_file != "")
+    c.add_file(Extra_config_file);
 
 //-------------------------------------------------------
 // Some hardcoded values that we don't expect to change.
@@ -44,8 +70,8 @@ void MspiCamera::read_config_file(const std::string& File_name)
 		       QuaternionCamera::INCREASE_IS_NEGATIVE :
 		       QuaternionCamera::INCREASE_IS_POSITIVE);
   sample_direction_ = (c.value<int>("pixel_order") == 1 ? 
-		       QuaternionCamera::INCREASE_IS_POSITIVE :
-		       QuaternionCamera::INCREASE_IS_NEGATIVE);
+		       QuaternionCamera::INCREASE_IS_NEGATIVE :
+		       QuaternionCamera::INCREASE_IS_POSITIVE);
   inversion_ = c.value<int>("inversion");
   granule_id_ = c.value<std::string>("granule_id");
   

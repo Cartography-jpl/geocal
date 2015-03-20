@@ -1,8 +1,46 @@
 #include "image_ground_connection.h"
 #include "simple_dem.h"
 #include "ostream_pad.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void ImageGroundConnection::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(ImageGroundConnection, WithParameter);
+  ar & GEOCAL_NVP_(dem)
+    & GEOCAL_NVP_(image)
+    & GEOCAL_NVP_(image_mb)
+    & GEOCAL_NVP_(title)
+    & GEOCAL_NVP_(image_mask)
+    & GEOCAL_NVP_(ground_mask);
+}
+
+template<class Archive>
+void OffsetImageGroundConnection::serialize
+(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar & GEOCAL_NVP2("original_image_ground_connection", ig_)
+    & GEOCAL_NVP_(line_offset)
+    & GEOCAL_NVP_(sample_offset);
+}
+
+template<class Archive>
+void ImageGroundConnectionCopy::serialize
+(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar & GEOCAL_NVP2("original_image_ground_connection", igc);
+}
+
+GEOCAL_IMPLEMENT(ImageGroundConnection);
+GEOCAL_IMPLEMENT(OffsetImageGroundConnection);
+GEOCAL_IMPLEMENT(ImageGroundConnectionCopy);
+#endif
 
 //-----------------------------------------------------------------------
 /// Initializer. As a convenience, if Img_mask or Ground_mask are null
@@ -74,10 +112,10 @@ MapInfo ImageGroundConnection::cover(const MapInfo& Mi,
 				     int Boundary) const {
   std::vector<boost::shared_ptr<GroundCoordinate> > pt;
   pt.push_back(ground_coordinate(ImageCoordinate(0, 0)));
-  pt.push_back(ground_coordinate(ImageCoordinate(0, number_sample())));
-  pt.push_back(ground_coordinate(ImageCoordinate(number_line(), 
-						 number_sample())));
-  pt.push_back(ground_coordinate(ImageCoordinate(number_line(), 0)));
+  pt.push_back(ground_coordinate(ImageCoordinate(0, number_sample() - 1)));
+  pt.push_back(ground_coordinate(ImageCoordinate(number_line() - 1, 
+						 number_sample() - 1)));
+  pt.push_back(ground_coordinate(ImageCoordinate(number_line() - 1, 0)));
   return Mi.cover(pt, Boundary);
 }
 
@@ -163,7 +201,7 @@ double ImageGroundConnection::resolution_meter
 void ImageGroundConnection::footprint_resolution
 (int Line, int Sample, 
  double &Line_resolution_meter, 
- double &Sample_resolution_meter)
+ double &Sample_resolution_meter) const
 {
   ImageCoordinate ic(Line, Sample);
   boost::shared_ptr<GroundCoordinate> gc1 = ground_coordinate(ic);

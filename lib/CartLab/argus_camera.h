@@ -48,6 +48,17 @@ private:
   double roll_; 		// Roll angle, in degrees.
   double pitch_; 		// Pitch angle, in degrees.
   double yaw_; 	        	// Yaw angle, in degrees.
+#ifdef USE_BOOST_SERIALIZATON
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
+    ar & GEOCAL_NVP_(roll)
+      & GEOCAL_NVP_(pitch)
+      & GEOCAL_NVP_(yaw);
+  }
+#endif
 };
 }
 #endif

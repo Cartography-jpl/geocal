@@ -290,12 +290,33 @@ int                Line
   }
 }
 
+template <class T> inline void range_check_inclusive_template(
+const T&	   Val,		// Value to be checked.
+const T&	   Min,		// Minimum allowed value.
+const T&	   Max,		// Maximum allowed value.
+const char*        File,
+int                Line
+)
+{
+  if(Val < Min ||
+     Val > Max) {
+    Exception e;
+    e << "Out of range error in file " << File << " at line " << Line << "\n"
+      << "Value:           " << Val << "\n"
+      << "Minimum allowed: " << Min << "\n"
+      << "Maximum allowed: " << Max;
+    throw e;
+  }
+}
+
 //-----------------------------------------------------------------------
 /// Range check
 //-----------------------------------------------------------------------
 
 #define range_check(V, Min, Max) \
       GeoCal::range_check_template(V, Min, Max, __FILE__, __LINE__)
+#define range_check_inclusive(V, Min, Max) \
+      GeoCal::range_check_inclusive_template(V, Min, Max, __FILE__, __LINE__)
 
 //-----------------------------------------------------------------------
 /// Range check

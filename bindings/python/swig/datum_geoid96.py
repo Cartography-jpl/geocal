@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -148,12 +151,8 @@ class DatumGeoid96(geocal_swig.geocal_datum.Datum):
     def file_name(self):
         return self._v_file_name()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _datum_geoid96.delete_DatumGeoid96
 DatumGeoid96._v_file_name = new_instancemethod(_datum_geoid96.DatumGeoid96__v_file_name,None,DatumGeoid96)

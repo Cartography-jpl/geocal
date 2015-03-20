@@ -6,8 +6,8 @@
 #include "observer.h"
 #include "array_ad.h"
 #include "with_parameter.h"
+#include "geocal_quaternion.h"
 #include <blitz/array.h>
-#include <boost/math/quaternion.hpp>
 #include <vector>
 
 namespace GeoCal {
@@ -26,12 +26,6 @@ class Camera : public Printable<Camera>,
 	       public WithParameter {
 public:
 //-----------------------------------------------------------------------
-/// Direction camera is pointing.
-//-----------------------------------------------------------------------
-
-  enum Direction {FORWARD, AFTWARD};
-
-//-----------------------------------------------------------------------
 /// Default constructor.
 //-----------------------------------------------------------------------
 
@@ -47,17 +41,6 @@ public:
 //-----------------------------------------------------------------------
 
   virtual ~Camera() {}
-
-//-----------------------------------------------------------------------
-/// This gives the camera direction. This is intended for use with
-/// steep camera angles (e.g., MISR AF camera). For cameras that are
-/// near nadir looking, we can just arbitrarily pick a direction for
-/// it. 
-///
-/// The default version returns FORWARD.
-//-----------------------------------------------------------------------
-
-  virtual Direction direction() const { return FORWARD; }
 
 //-----------------------------------------------------------------------
 /// This is the integration time in seconds.
@@ -156,6 +139,11 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
+
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -173,13 +161,6 @@ public:
      int Number_line = 1, 
      int Number_sample=1504);
   virtual ~SimpleCamera() {}
-
-//-----------------------------------------------------------------------
-/// This gives the camera direction. 
-//-----------------------------------------------------------------------
-
-  virtual Camera::Direction direction() const 
-  { return (beta_ >= 0 ? Camera::FORWARD : Camera::AFTWARD); }
 
 //-----------------------------------------------------------------------
 /// Number of bands in camera.
@@ -219,7 +200,13 @@ private:
   double beta_, delta_, epsilon_, focal_, line_pitch_, sample_pitch_;
   int nline,nsample;
   boost::math::quaternion<double> frame_to_sc;
-};
 
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
 }
+
+GEOCAL_EXPORT_KEY(Camera);
+GEOCAL_EXPORT_KEY(SimpleCamera);
 #endif

@@ -122,6 +122,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -185,8 +188,6 @@ class Camera(ObservableCamera,geocal_swig.with_parameter.WithParameter):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    FORWARD = _camera.Camera_FORWARD
-    AFTWARD = _camera.Camera_AFTWARD
     def integration_time(self, *args):
         """
         virtual double GeoCal::Camera::integration_time(int Band) const
@@ -202,23 +203,6 @@ class Camera(ObservableCamera,geocal_swig.with_parameter.WithParameter):
         The default version returns 0.0. 
         """
         return _camera.Camera_integration_time(self, *args)
-
-    def _v_direction(self):
-        """
-        virtual Direction GeoCal::Camera::direction() const
-        This gives the camera direction.
-
-        This is intended for use with steep camera angles (e.g., MISR AF
-        camera). For cameras that are near nadir looking, we can just
-        arbitrarily pick a direction for it.
-
-        The default version returns FORWARD. 
-        """
-        return _camera.Camera__v_direction(self)
-
-    @property
-    def direction(self):
-        return self._v_direction()
 
     def _v_number_band(self):
         """
@@ -306,7 +290,6 @@ class Camera(ObservableCamera,geocal_swig.with_parameter.WithParameter):
 
     __swig_destroy__ = _camera.delete_Camera
 Camera.integration_time = new_instancemethod(_camera.Camera_integration_time,None,Camera)
-Camera._v_direction = new_instancemethod(_camera.Camera__v_direction,None,Camera)
 Camera._v_number_band = new_instancemethod(_camera.Camera__v_number_band,None,Camera)
 Camera.number_line = new_instancemethod(_camera.Camera_number_line,None,Camera)
 Camera.number_sample = new_instancemethod(_camera.Camera_number_sample,None,Camera)

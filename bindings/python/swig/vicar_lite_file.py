@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -315,12 +318,8 @@ class VicarLiteFile(geocal_swig.generic_object.GenericObject):
         """
         return _vicar_lite_file.VicarLiteFile_label_string(self, *args)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name,self.access,self.force_area_pixel)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
 VicarLiteFile._v_access = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_access,None,VicarLiteFile)
 VicarLiteFile._v_force_area_pixel = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_force_area_pixel,None,VicarLiteFile)
@@ -420,21 +419,8 @@ class VicarLiteRasterImage(geocal_swig.raster_image.RasterImage):
     def force_map_info(self):
         return self._v_force_map_info()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 2
-
     def __reduce__(self):
-      if(self.force_map_info):
-         return _new_from_init, (self.__class__, 2, self.file.file_name, 
-    		          self.map_info, self.band_id, self.file.access, 
-    			  self.number_tile_line, self.number_tile_sample,
-    			  self.file.force_area_pixel)
-      else:
-         return _new_from_init, (self.__class__, 2, self.file.file_name, 
-    			  self.band_id, self.file.access, 
-    			  self.number_tile_line, self.number_tile_sample,
-    			  self.file.force_area_pixel)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _vicar_lite_file.delete_VicarLiteRasterImage
 VicarLiteRasterImage._v_file = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_file,None,VicarLiteRasterImage)
@@ -495,12 +481,8 @@ class VicarLiteDem(geocal_swig.dem_map_info.DemMapInfo):
     def band(self):
         return self._v_band()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file.file_name,self.outside_dem_is_error,self.datum,self.band)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _vicar_lite_file.delete_VicarLiteDem
 VicarLiteDem._v_file = new_instancemethod(_vicar_lite_file.VicarLiteDem__v_file,None,VicarLiteDem)

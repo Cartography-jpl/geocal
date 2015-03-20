@@ -1,14 +1,25 @@
 #include "air_mspi_igc.h"
+#include "air_mspi_time_table.h"
 #include "mspi_config_file.h"
 #include "mspi_camera.h"
 #include "did_datum.h"
 #include "simple_dem.h"
 #include "usgs_dem.h"
-#ifdef HAVE_MSPI_SHARED
-#include "File/L1B1File/src/l1b1_reader.h"
-#endif
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void AirMspiIgc::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IpiImageGroundConnection);
+  ar & GEOCAL_NVP2("base_directory", bdir) 
+    & GEOCAL_NVP2("master_config_file", mconfig);
+}
+
+GEOCAL_IMPLEMENT(AirMspiIgc);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor. This takes the master config file and uses it to
@@ -35,16 +46,23 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
   std::string fname = c.value<std::string>("camera_model_config");
   if(fname[0] != '/')
     fname = Base_directory + "/" + fname;
-  boost::shared_ptr<MspiCamera> cam(new MspiCamera(fname));
+  std::string extra_config = "";
+  if(c.have_key("extra_camera_model_config")) {
+    extra_config = c.value<std::string>("extra_camera_model_config");
+    if(extra_config[0] != '/')
+      extra_config = Base_directory + "/" + extra_config;
+  }
+  boost::shared_ptr<MspiCamera> cam(new MspiCamera(fname, extra_config));
 
   // Get orbit set up
-
   // Not sure if we still need the "static gimbal", but we don't
   // currently support this. So check, and issue an error if this is
   // requested. We can modify the code to support this if needed.
   if(c.value<bool>("use_static_gimbal"))
     throw Exception("We don't currently support static gimbals");
-  MspiConfigFile cam_config(cam->file_name());
+  MspiConfigFile cam_config(fname);
+  if(extra_config != "")
+    cam_config.add_file(extra_config);
   blitz::Array<double, 1> gimbal_angle(3);
   gimbal_angle = cam_config.value<double>("gimbal_epsilon"),
     cam_config.value<double>("gimbal_psi"),
@@ -68,23 +86,11 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
   }
 
   // Get the time table and L1B1 data.
-  boost::shared_ptr<MeasuredTimeTable> tt;
-#ifdef HAVE_MSPI_SHARED
-  MSPI::Shared::L1B1Reader l1b1(L1b1_file_name);
   fname = c.value<std::string>("instrument_info_config");
   if(fname[0] != '/')
     fname = Base_directory + "/" + fname;
-  int refrow = reference_row(fname);
-  Time tepoch = Time::parse_time(l1b1.epoch());
-  std::vector<double> toffset = 
-    l1b1.read_time(refrow, 0, l1b1.number_frame(refrow));
-  std::vector<Time> tm;
-  BOOST_FOREACH(double toff, toffset)
-    tm.push_back(tepoch + toff);
-  tt.reset(new MeasuredTimeTable(tm));
-#else
-  throw Exception("This class requires that MSPI Shared library be available");
-#endif
+  boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name,
+						       fname));
   Time tmin = std::max(orb->min_time(), tt->min_time());
   Time tmax = std::min(orb->max_time(), tt->max_time());
 
@@ -106,26 +112,3 @@ void AirMspiIgc::print(std::ostream& Os) const
 }
 
 
-//-----------------------------------------------------------------------
-/// Determine the reference row to use for the time table. This comes
-/// from the 660nm I band. 
-/// Note that the band number used in the instrument config file is
-/// *not* the same as the band number used in the camera. Instead this
-/// is a spectral band number.
-//-----------------------------------------------------------------------
-
-int AirMspiIgc::reference_row(const std::string& Instrument_config_file_name) 
-  const
-{
-  // Determine mapping from instrument_band, row_type to row_number
-  MspiConfigFile iconfig(Instrument_config_file_name);
-  std::vector<int> rn = iconfig.value<std::vector<int> >("row_numbers");
-  std::vector<std::string> rt = 
-    iconfig.value<std::vector<std::string> >("row_types");
-  // Note that this is a spectral band, not the camera band.
-  std::vector<int> rb = iconfig.value<std::vector<int> >("band");
-  std::map<int, std::map<std::string, int> > inst_to_row;
-  for(int i = 0 ; i < (int) rn.size(); ++i)
-    inst_to_row[rb[i]][rt[i]]=rn[i];
-  return inst_to_row[6]["I"];
-}

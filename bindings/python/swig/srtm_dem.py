@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -189,12 +192,8 @@ class SrtmDem(geocal_swig.dem_map_info.DemMapInfo):
     def directory_base(self):
         return self._v_directory_base()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.database_name,self.directory_base,self.outside_dem_is_error,self.datum)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _srtm_dem.delete_SrtmDem
 SrtmDem.elevation = new_instancemethod(_srtm_dem.SrtmDem_elevation,None,SrtmDem)

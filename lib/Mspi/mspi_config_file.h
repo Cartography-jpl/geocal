@@ -1,6 +1,10 @@
 #ifndef MSPI_CONFIG_FILE_H
 #define MSPI_CONFIG_FILE_H
 #include "geocal_exception.h"
+#include "auto_derivative.h"	// We don't actually use
+				// AutoDerivative here, but this has
+				// the serialization for blitz arrays
+				// that we need.
 #include "printable.h"
 #include <iterator> 
 #include <boost/lexical_cast.hpp>
@@ -32,16 +36,22 @@ namespace GeoCal {
 
 class MspiConfigFile: public Printable<MspiConfigFile>  {
 public:
+//-----------------------------------------------------------------------
+/// Create empty object, which we can then add files and values to.
+//-----------------------------------------------------------------------
+
+  MspiConfigFile() {}
   explicit MspiConfigFile(const std::string& Fname);
   virtual ~MspiConfigFile() {}
 
-//-----------------------------------------------------------------------
-/// File name for MspiConfigFile.
-//-----------------------------------------------------------------------
-
-  const std::string& file_name() const {return fname;}
-
   template<class T> T value(const std::string& Keyword) const;
+
+//-----------------------------------------------------------------------
+/// Add or replace a value.
+//-----------------------------------------------------------------------
+
+  void add(const std::string& Keyword, const std::string& Value)
+  { key_to_value[Keyword] = Value; }
 
 //-----------------------------------------------------------------------
 /// True if we have a value for the given keyword.
@@ -49,12 +59,58 @@ public:
   bool have_key(const std::string& K) const
   { return key_to_value.count(K) != 0; }
   virtual void print(std::ostream& Os) const;
+
+  void add_file(const std::string& Fname);
 private:
   const std::string& value_string(const std::string& Keyword) const;
   std::map<std::string, std::string> key_to_value;
-  std::string fname;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
+
+/****************************************************************//**
+  Small adapter that lets you refer to a table by column name. The
+  convention is that the table "FOO" has a config entry of FOO.columns
+  giving the column names, and FOO.table giving the actual values. We 
+  look of a value by doing "value<Type>(index, column_name)".
+*******************************************************************/
+
+class MspiConfigTable: public Printable<MspiConfigTable>  {
+public:
+  MspiConfigTable(const MspiConfigFile& Config, const std::string& Table_name);
+  virtual ~MspiConfigTable() {}
+  virtual void print(std::ostream& Os) const
+  { Os << "MspiConfigTable"; }
+  int number_row() const { return data.rows(); }
+  bool has_column(const std::string& Column) const
+  {
+    return column_to_index_.count(Column) != 0;
+  }
+  template<class T> T value(int Index, const std::string& Column) const;
+  template<class T> std::vector<T> value_column(const std::string& Column) 
+    const
+  {
+    std::vector<T> res;
+    for(int i = 0; i < number_row(); ++i)
+      res.push_back(value<T>(i, Column));
+    return res;
+  }
+private:
+  std::map<std::string, int> column_to_index_;
+  int column_to_index(const std::string& Column) const
+  {
+    if(!has_column(Column))
+      throw Exception(Column + " is not found in table");
+    return column_to_index_.find(Column)->second;
+  }
+  blitz::Array<std::string, 2> data;
+  MspiConfigTable() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
 
 /****************************************************************//**
   C++ doesn't allow function partial specialization. We introduce a 
@@ -86,7 +142,28 @@ T MspiConfigFile::value(const std::string& Keyword) const
     Exception e;
     e << "Error occurred while trying to parse a keyword in MspiConfigFile.\n"
       << "  Keyword: " << Keyword << "\n"
-      << "  File:    " << file_name() << "\n"
+      << "  Error:\n"
+      << eoriginal.what() << "\n";
+    throw e;
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Return value for index and column
+//-----------------------------------------------------------------------
+
+template<class T> inline 
+T MspiConfigTable::value(int Index, const std::string& Column) const
+{
+  try {
+    range_check(Index, 0, number_row());
+    // Forward to helper class
+    return MspiConfigFilePartialHelper<T>().parse_string(data(Index, column_to_index(Column)));
+  } catch(std::exception& eoriginal) {
+    Exception e;
+    e << "Error occurred while trying to parse a table in MspiConfigTable.\n"
+      << "  Index:  " << Index << "\n"
+      << "  Column: " << Column << "\n"
       << "  Error:\n"
       << eoriginal.what() << "\n";
     throw e;
@@ -210,4 +287,8 @@ public:
 };
     
 }
+
+GEOCAL_EXPORT_KEY(MspiConfigFile);
+GEOCAL_EXPORT_KEY(MspiConfigTable);
+
 #endif

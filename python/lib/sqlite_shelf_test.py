@@ -2,6 +2,8 @@ from nose.tools import *
 from sqlite_shelf import *
 import os
 import time
+from geocal_swig import ImageCoordinate, have_serialize_supported
+from nose.plugins.skip import Skip, SkipTest
 
 def test_sqlite_shelf():
     try:
@@ -49,4 +51,18 @@ def test_read_write_shelf():
     write_shelve("sqlite_shelf.db:value2", [1, 2, 3, "blah"])
     assert read_shelve("sqlite_shelf.db:value1") == 3
     assert read_shelve("sqlite_shelf.db:value2") == [1, 2, 3, "blah"]
+
+def test_read_write_xml():
+    if(not have_serialize_supported()):
+        raise SkipTest
+    try:
+        os.remove("sqlite_shelf_test.xml")
+    except OSError as exc:
+        pass                    # Ok if doesn't exist
+
+    ic = ImageCoordinate(10, 20)
+    write_shelve("sqlite_shelf_test.xml", ic)
+    ic2 = read_shelve("sqlite_shelf_test.xml")
+    assert_almost_equal(ic.line, ic2.line)
+    assert_almost_equal(ic.sample, ic2.sample)
 

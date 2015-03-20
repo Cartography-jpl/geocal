@@ -146,4 +146,21 @@ BOOST_AUTO_TEST_CASE(nitf_corner)
   BOOST_CHECK(distance(gc_llc, *gc) < 0.5);
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  std::string fname = test_data_dir() + "cib_sample.img";
+  boost::shared_ptr<RasterImage> img(new GdalRasterImage(fname));
+  std::string d = serialize_write_string(img);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<RasterImage> imgr = serialize_read_string<RasterImage>(d);
+  BOOST_CHECK_EQUAL(imgr->number_tile_line(), 64);
+  BOOST_CHECK_EQUAL(imgr->number_tile_sample(), 64);
+  BOOST_CHECK_EQUAL(imgr->number_line(), 200);
+  BOOST_CHECK_EQUAL(imgr->number_sample(), 100);
+  BOOST_CHECK_EQUAL((*imgr)(10, 20), 58);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

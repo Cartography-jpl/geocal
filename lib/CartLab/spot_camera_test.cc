@@ -64,4 +64,38 @@ BOOST_AUTO_TEST_CASE(basic_test)
 		    (slv2.look_vector[2] - sl.look_vector[2]) / eps, 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+#ifdef HAVE_BOOST_SERIALIZATON
+  std::ostringstream os;
+  boost::archive::xml_oarchive oa(os);
+
+  std::vector<double> psi_x(3), psi_y(3);
+  psi_x[0] = -0.0095544910301;
+  psi_x[1] = -0.0095545017004;
+  psi_x[2] = -0.0095545133715;
+  psi_y[0] = 0.067955961852;
+  psi_y[1] = 0.067967964881;
+  psi_y[2] = 0.067979966909;  
+  boost::shared_ptr<Camera> cam(new SpotCamera(psi_x, psi_y));
+  FrameCoordinate f1(1, 1.5);
+  ScLookVector sl = cam->sc_look_vector(f1, 0);
+  oa << GEOCAL_NVP(cam);
+  if(false)
+    std::cerr << os.str();
+  
+  std::istringstream is(os.str());
+  boost::archive::xml_iarchive ia(is);
+  boost::shared_ptr<Camera> camr;
+  ia >> GEOCAL_NVP(camr);
+
+  BOOST_CHECK_EQUAL(camr->number_band(), 1);
+  BOOST_CHECK_EQUAL(camr->number_line(0), 1);
+  BOOST_CHECK_EQUAL(camr->number_sample(0), 3);
+  FrameCoordinate f2 = camr->frame_coordinate(sl, 0);
+  BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);
+  BOOST_CHECK_CLOSE(f2.sample, f1.sample, 1e-4);
+#endif
+}
+
 BOOST_AUTO_TEST_SUITE_END()

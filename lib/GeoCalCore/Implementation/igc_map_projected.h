@@ -35,7 +35,7 @@ protected:
   MapInfo mi;
   bool read_into_memory_;
   mutable blitz::Array<double, 2> ic_line, ic_sample;
-  void interpolate_ic(int Start_line, int Start_sample) const;
+  bool interpolate_ic(int Start_line, int Start_sample) const;
 };
 
 /****************************************************************//**

@@ -8,6 +8,7 @@ from nose.plugins.skip import Skip, SkipTest
 import cPickle
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
+from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
@@ -30,17 +31,23 @@ def test_tp():
                     -116.116742172, 1276.29944154)) < 0.1
 
 def test_tie_point_grid():
+    if(not have_serialize_supported()):
+        raise SkipTest
     pool = Pool()
     tpcol = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin,
                                       pool = pool)
     assert len(tpcol) == 95
 
 def test_gp_point_grid():
+    if(not have_serialize_supported()):
+        raise SkipTest
     pool = Pool()
     tpcol = gtp_collect.tie_point_grid(10, 10, pool = pool)
     assert len(tpcol) == 57
 
 def test_pickle():
+    if(not have_serialize_supported()):
+        raise SkipTest
     t = cPickle.dumps(tp_collect)
     t = cPickle.dumps(gtp_collect)
 

@@ -3,8 +3,19 @@
 #include "wgs84_constant.h"
 #include "geocal_matrix.h"
 #include "spice_helper.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void EciTod::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianInertial);
+}
+
+GEOCAL_IMPLEMENT(EciTod);
+#endif
 
 //-----------------------------------------------------------------------
 // Convert from Eci to EciTod.
@@ -35,6 +46,17 @@ void EciTod::ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
 { 
   SpiceHelper::conversion_matrix("ECI_TOD", "ITRF93", T);
   mat_copy(SpiceHelper::m, Ci_to_cf);
+}
+
+//-----------------------------------------------------------------------
+/// Matrix to convert EciTod to Ecr with velocity. The transpose of
+/// this will convert Ecr to EciTod.
+//-----------------------------------------------------------------------
+
+void EciTod::ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const
+{ 
+  SpiceHelper::conversion_matrix2("ECI_TOD", "ITRF93", T);
+  mat_copy(SpiceHelper::m2, Ci_to_cf);
 }
 
 //-----------------------------------------------------------------------

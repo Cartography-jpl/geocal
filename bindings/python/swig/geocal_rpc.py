@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -186,31 +189,6 @@ class Rpc(geocal_swig.generic_object.GenericObject):
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
-    def __reduce__(self):
-      return _new_rpc, (self.__class__, 1, self.rpc_type == Rpc.RPC_A,
-    		    self.error_bias,
-                        self.error_random,
-    		    self.height_offset,
-    		    self.height_scale,
-    		    self.latitude_offset,
-    		    self.latitude_scale,
-    		    self.longitude_offset,
-    		    self.longitude_scale,
-    		    self.line_offset,
-    		    self.line_scale,
-    		    self.sample_offset,
-    		    self.sample_scale,
-    		    list(self.line_denominator),
-    		    list(self.line_numerator),
-    		    list(self.sample_denominator),
-    		    list(self.sample_numerator),
-    		    list(self.fit_line_numerator),
-    		    list(self.fit_sample_numerator))
-
     RPC_A = _geocal_rpc.Rpc_RPC_A
     RPC_B = _geocal_rpc.Rpc_RPC_B
     rpc_type = _swig_property(_geocal_rpc.Rpc_rpc_type_get, _geocal_rpc.Rpc_rpc_type_set)
@@ -456,6 +434,9 @@ class Rpc(geocal_swig.generic_object.GenericObject):
         we rearrange the coefficients to give a type RPC_B. 
         """
         return _geocal_rpc.Rpc_rpc_type_b(self)
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     def __init__(self, *args): 
         """

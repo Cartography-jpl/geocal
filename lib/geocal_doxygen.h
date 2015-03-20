@@ -8,10 +8,9 @@ This code is used for geometric calibration and related tasks.
 
 The library is written in C++. It can be used as a C++ library,
 documented here. The library can also be used by higher level
-languages. There are bindings to call the library from Python and
-Ruby. Documentation for these are found in the normal locations for
-Python and Ruby documentation (e.g., /usr/share/rdoc/geocal for Ruby
-on a Linux system).
+languages. There are bindings to call the library from Python. 
+Documentation for these are found in the normal locations for
+Python documentation.
 
 \section installation Installation and Development
 

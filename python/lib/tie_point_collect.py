@@ -1,5 +1,5 @@
 from geocal_swig import *
-from igc_collection import *
+from igc_collection_extension import *
 from tie_point import *
 from ray_intersect import *
 from feature_detector_extension import *
@@ -17,14 +17,26 @@ class TiePointWrap(object):
     def __init__(self, tp_collect):
         self.tp_collect = tp_collect
     def __call__(self, ic):
+        log = logging.getLogger("geocal-python.tie_point_collect")
+        log.info("Processing point (%f, %f)" % (ic.line, ic.sample) )
+        for h in logging.getLogger("geocal-python").handlers:
+            h.flush()
         try:
-            return self.tp_collect.tie_point(ic)
+            tp = self.tp_collect.tie_point(ic)
+            if(tp is None):
+                log.info("Got 0 matches")
+            else:
+                log.info("Got %d matches" % tp.number_image_location)
+            return tp
         except RuntimeError:
         # We may try to find points that don't actually intersect
         # the ground (e.g., we are at a steep angle and above
         # the surface). In that case, just skip this point and
         # go to the next one
+            log.info("Got 0 matches")
             pass
+        for h in logging.getLogger("geoca1-python").handlers:
+            h.flush()
         return None
 
 class TiePointCollect(object):
@@ -33,13 +45,28 @@ class TiePointCollect(object):
                  max_ground_covariance = 20 * 20,
                  start_image_index = 0,
                  end_image_index = None,
-                 avg_level = 0):
+                 avg_level = 0, use_intersection = False,
+                 grid_spacing = 1):
         '''This sets up for doing tie point collection. A IgcCollection
         needs to be supplied.
 
         You can optionally specify avg_level to use. If supplied, we
         use a PyramidImageMatcher on top of the CcorrLsmMatcher, useful for
         difficult to match imagery.
+
+        You can optionally pass in the grid spacing to use if we are
+        projecting to the surface. This has a significant effect on
+        how long this process takes. If the underlying DEM is coarse, 
+        there is no reason to do the ImageGroundConnection calculation 
+        at every point.
+        
+        There is a trade off between getting the largest coverage (by
+        taking a union of all the igc on the surface) and the
+        strongest points (by looking at places seen by all the
+        cameras. You may want to do both - so generate a set of GCPs
+        using the largest coverage first and then the intersection
+        second.  which one is used is controlled by the option
+        "use_intersection"
         '''
         image_matcher = CcorrLsmMatcher()
         if(avg_level > 0):
@@ -68,7 +95,7 @@ class TiePointCollect(object):
                     image_matcher)
             else:
                 self.itoim[j] = SurfaceImageToImageMatch(img1, img2, 
-                                              map_info, image_matcher)
+                             map_info, image_matcher, grid_spacing)
 
     def __getstate__(self):
         return {"igc_collection": self.igc_collection,
@@ -161,13 +188,27 @@ class GcpTiePointCollect(object):
     '''Given a IgcCollection and a reference image, collect GCPs by 
     image matching.'''
     def __init__(self, ref_image, dem, igc_collection,
-                 avg_level = 0):
+                 avg_level = 0, use_intersection = False,
+                 grid_spacing = 1):
         '''This sets up for doing a tie point collection with a reference
         image. A IgcCollection and reference image needs to be supplied
 
         You can optionally specify avg_level to use. If supplied, we
         use a PyramidImageMatcher on top of the CcorrLsmMatcher, useful for
         difficult to match imagery.
+
+        You can optionally pass in the grid spacing to use if we are
+        projecting to the surface. This has a significant effect on
+        how long this process takes. If the underlying DEM is coarse, 
+        there is no reason to do the ImageGroundConnection calculation 
+        at every point.
+
+        There is a trade off between getting the largest coverage (by
+        taking a union of all the igc on the surface} and the
+        strongest points (by looking at places seen by all the
+        cameras). You may want to do both - so generate a set of GCPs
+        using the largest coverage first and then the intersection
+        second.
         '''
         image_matcher = CcorrLsmMatcher()
         if(avg_level > 0):
@@ -181,7 +222,10 @@ class GcpTiePointCollect(object):
             cover(ref_image.map_info)
         for i in range(igc_collection.number_image):
             igc = igc_collection.image_ground_connection(i)
-            mi = mi.map_union(igc.cover(mi))
+            if(use_intersection):
+                mi = mi.intersection(igc.cover(mi))
+            else:
+                mi = mi.map_union(igc.cover(mi))
         # Subset ref image to cover as much of that as possible
         mi = ref_image.map_info.intersection(mi)
         vg = Vector_GroundCoordinate()
@@ -194,7 +238,8 @@ class GcpTiePointCollect(object):
         for j in range(self.igc_collection.number_image):
             igc2 = self.igc_collection.image_ground_connection(j)
             self.itoim[j] = SurfaceImageToImageMatch(self.ref_igc, igc2,
-                                                     mi, image_matcher)
+                                                     mi, image_matcher,
+                                                     grid_spacing)
 
     def __getstate__(self):
         return {"ref_image" : self.ref_image,
@@ -212,15 +257,24 @@ class GcpTiePointCollect(object):
         return self.igc_collection.number_image
 
     def tie_point_grid(self, num_x, num_y, border = 100, pool = None):
+        tstart = time.time()
+        log = logging.getLogger("geocal-python.tie_point_collect")
+        log.info("Starting interest point")
+        log.info("Time: %f" % (time.time() - tstart))
         fd = ForstnerFeatureDetector()
         iplist = fd.interest_point_grid(self.sub_ref_image, num_y, num_x, 
                                         border, pool = pool)
+        log.info("Done with interest point")
+        log.info("Time: %f" % (time.time() - tstart))
+        log.info("Starting matching")
         func = TiePointWrap(self)
         if(pool):
             res = pool.map(func, iplist, 
                len(iplist) / multiprocessing.cpu_count())
         else:
             res = map(func, iplist)
+        log.info("Done with matching")
+        log.info("Time: %f" % (time.time() - tstart))
         return TiePointCollection(
             filter(lambda i : i is not None and i.number_image_location > 0,
                    res))

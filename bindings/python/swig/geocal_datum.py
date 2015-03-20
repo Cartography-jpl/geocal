@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -131,11 +134,11 @@ class Datum(geocal_swig.generic_object.GenericObject):
     __repr__ = _swig_repr
     def undulation(self, *args):
         """
-        virtual double GeoCal::Datum::undulation(const GroundCoordinate &Gc) const =0
-        Undulation, which is the distance form mean sea level to the reference
-        ellipsoid, for the given ground location.
+        virtual double GeoCal::Datum::undulation(const Geodetic &Gc) const =0
+        Specialization for Gc being Geodetic.
 
-        This is in meters. 
+        Since many of our Datums are in geodetic coordinates, this is an
+        important specialization for performance. 
         """
         return _geocal_datum.Datum_undulation(self, *args)
 

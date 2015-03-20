@@ -71,6 +71,9 @@ public:
   void h(double Hnew) {h_ = Hnew;}
 private:
   double h_;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 //-----------------------------------------------------------------------
@@ -81,4 +84,6 @@ private:
 //-----------------------------------------------------------------------
   typedef SimpleDemT<Geodetic> SimpleDem;
 }
+
+GEOCAL_EXPORT_KEY(SimpleDem);
 #endif

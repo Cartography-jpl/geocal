@@ -43,8 +43,23 @@ public:
 //-----------------------------------------------------------------------
 
   enum access_type {READ, WRITE, UPDATE};
+
+//-----------------------------------------------------------------------
+/// Open an existing VICAR file for reading or update.
+///
+/// The Force_area_pixel forces the file to be treated as
+/// "pixel as area" rather than "pixel as point". This is really just
+/// meant as a work around for the SRTM data, which incorrectly labels
+/// the data as "point" rather than "area". Since this is a 15 meter
+/// difference, it matters for many applications. Most users should
+/// just ignore this value.
+//-----------------------------------------------------------------------
+
   VicarLiteFile(const std::string& Fname, access_type Access = READ,
-		bool Force_area_pixel = false);
+		bool Force_area_pixel = false)
+  {
+    initialize(Fname, Access, Force_area_pixel);
+  }
   VicarLiteFile(const std::string& Fname, int Number_line, int Number_sample,
 	    const std::string& Type = "BYTE");
   virtual ~VicarLiteFile() {}
@@ -220,6 +235,15 @@ private:
   std::map<std::string, std::string> label_;
   std::string read_label(int& lblsize);
   void process_label(const std::string& label);
+  void initialize(const std::string& Fname, access_type Access = READ,
+	    bool Force_area_pixel = false);
+  VicarLiteFile() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 //-----------------------------------------------------------------------
@@ -648,19 +672,9 @@ public:
       f_(new VicarLiteFile(Fname, Access, Force_area_pixel)),
       force_map_info_(false)
   {
-    range_check(band_, 0, f_->number_band());
-    number_line_ = f_->number_line();
-    number_sample_ = f_->number_sample();
     number_tile_line_ = Number_tile_line;
     number_tile_sample_ = Number_tile_sample;
-    if(number_tile_line_ < 0)
-      number_tile_line_ = number_line_;
-    if(number_tile_sample_ < 0)
-      number_tile_sample_ = number_sample_;
-    if(f_->has_rpc())
-      rpc_.reset(new Rpc(f_->rpc()));
-    if(f_->has_map_info())
-      map_info_.reset(new MapInfo(f_->map_info()));
+    initialize();
   }
 
 //-----------------------------------------------------------------------
@@ -787,9 +801,31 @@ public:
       Os << "None\n";
   }
 private:
+  void initialize() 
+  {
+    range_check(band_, 0, f_->number_band());
+    number_line_ = f_->number_line();
+    number_sample_ = f_->number_sample();
+    if(number_tile_line_ < 0)
+      number_tile_line_ = number_line_;
+    if(number_tile_sample_ < 0)
+      number_tile_sample_ = number_sample_;
+    if(f_->has_rpc())
+      rpc_.reset(new Rpc(f_->rpc()));
+    if(f_->has_map_info())
+      map_info_.reset(new MapInfo(f_->map_info()));
+  }
+
   int band_;
   boost::shared_ptr<VicarLiteFile> f_;
   bool force_map_info_;
+  VicarLiteRasterImage() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 /****************************************************************//**
@@ -865,8 +901,18 @@ public:
 private:
   int band_;
   boost::shared_ptr<VicarLiteFile> f_;
+  VicarLiteDem() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
-
 }  
+
+GEOCAL_EXPORT_KEY(VicarLiteFile)
+GEOCAL_EXPORT_KEY(VicarLiteDem)
+GEOCAL_EXPORT_KEY(VicarLiteRasterImage)
 #endif

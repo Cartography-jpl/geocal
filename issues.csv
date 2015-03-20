@@ -1,0 +1,10 @@
+Issue number,Title,Description,Date created,Date modified,Labels,Milestone,Status,Assignee,Reporter
+1,Smyth develop,Merge in changes needed to get this building on the MISR computer. This includes making numerous libraries optional.,06/Mar/14  3:00 PM,04/Sep/14  2:47 PM,"",None,closed,None,smyth
+7,Add script to import and export issues,"Would be nice to be able to dump the issue database as CSV file, so we have a list where we don't have internet access.
+
+There is a set of script at https://github.com/controlgroup/CSV-GitHub-import-export, but this depends on having the github API available. It isn't clear if JPL has that, we'll need to track down that information.",27/Jan/15 12:39 PM,27/Jan/15 12:39 PM,"",None,open,None,smyth
+6,Look at copying over versioning James developed for OCO-2,"Might be nice to have the version information available in install directory, available using the -v option in docopt.",27/Jan/15 11:58 AM,27/Jan/15 11:58 AM,"",None,open,None,smyth
+5,"Remove ""USE_BOOST_SERIALIZATION"" from header files","This logic should actually be in the .cc files, see for example hdf_orbit.h",26/Jan/15  5:28 PM,26/Jan/15  5:28 PM,"",None,open,None,smyth
+4,nitf_to_vicar needs to hande format A RPCs,"GDAL always converts RPCs to format B before reporting. For nitf_to_vicar, we want to continue to use format A if the data is in that format. We can read the tre ourselves to determine this, and then use the correct format in vicar.",26/Jan/15  1:51 PM,26/Jan/15  1:51 PM,"",None,open,None,smyth
+3,Handle unsuccessful RPCs,"gdal_to_ntf and nitf_to_vicar should handle RPCs that are unsuccessful. We can try to do something with the RPC, and if it is a VICAR RPC we can check for the sucess flag",26/Jan/15  1:49 PM,26/Jan/15  1:49 PM,"",None,open,None,smyth
+2,Finish velocity conversion with autoderivates,"Left this in a half done state, have what we need immediately to get HDF orbit speed up.",23/Jan/15  5:27 PM,23/Jan/15  5:27 PM,"",None,open,None,smyth

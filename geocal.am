@@ -31,6 +31,7 @@ endif
 libgeocal_la_LDFLAGS+= -R $(BOOST_LIBDIR) -L$(BOOST_LIBDIR)
 libgeocal_la_LDFLAGS+= $(BOOST_REGEX_LIB) $(BOOST_DATETIME_LIB)
 libgeocal_la_LDFLAGS+= $(BOOST_IOSTREAMS_LIB) $(BOOST_FILESYSTEM_LIB)
+libgeocal_la_LDFLAGS+= $(BOOST_SERIALIZATION_LIB)
 
 # Include blitz in builds
 libgeocal_la_LDFLAGS+= $(BLITZ_LIBS)
@@ -149,6 +150,7 @@ if WITH_DOCUMENTATION
 EXTRA_DIST+= config/doxygen.cfg
 EXTRA_DIST+= config/doc_footer.html
 EXTRA_DIST+= config/doxy2swig.py
+EXTRA_DIST+= README.developer INSTALL
 doc/geocal.tag: $(geocalinc_HEADERS) $(libgeocal_la_SOURCES) config/doxygen.cfg $(DOXYGEN_TARGET)
 	$(MKDIR_P) doc/geocal
 	-rm -f doc/geocal/html/*
@@ -156,6 +158,8 @@ doc/geocal.tag: $(geocalinc_HEADERS) $(libgeocal_la_SOURCES) config/doxygen.cfg 
 	export PATH=$(bindir):$$PATH && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         srcdir=$(srcdir)/@libgeocal@ DOCDIR=doc/geocal $(DOXYGEN) $(srcdir)/config/doxygen.cfg
+	cp $(srcdir)/$(geocal_topdir)/README.developer doc/geocal/html
+	cp $(srcdir)/$(geocal_topdir)/INSTALL doc/geocal/html
 
 geocaldocdir = ${datarootdir}/doc/geocal
 geocaldocsearchdir = ${geocaldocdir}/html/search

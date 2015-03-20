@@ -2965,26 +2965,42 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[1]
 #define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[2]
 #define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[3]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[4]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[5]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[6]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[7]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[8]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[9]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[11]
-#define SWIGTYPE_p_blitz__GeneralArrayStorageT_1_t swig_types[12]
-#define SWIGTYPE_p_blitz__GeneralArrayStorageT_2_t swig_types[13]
-#define SWIGTYPE_p_blitz__GeneralArrayStorageT_3_t swig_types[14]
-#define SWIGTYPE_p_blitz__GeneralArrayStorageT_4_t swig_types[15]
-#define SWIGTYPE_p_blitz__Range swig_types[16]
-#define SWIGTYPE_p_bool swig_types[17]
-#define SWIGTYPE_p_char swig_types[18]
-#define SWIGTYPE_p_double swig_types[19]
-#define SWIGTYPE_p_int swig_types[20]
-#define SWIGTYPE_p_void swig_types[21]
-static swig_type_info *swig_types[23];
-static swig_module_info swig_module = {swig_types, 22, 0, 0, 0, 0};
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[4]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[5]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[6]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[7]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[8]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[9]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[10]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[11]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[12]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[16]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[17]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[18]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[19]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[20]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[23]
+#define SWIGTYPE_p_blitz__GeneralArrayStorageT_1_t swig_types[24]
+#define SWIGTYPE_p_blitz__GeneralArrayStorageT_2_t swig_types[25]
+#define SWIGTYPE_p_blitz__GeneralArrayStorageT_3_t swig_types[26]
+#define SWIGTYPE_p_blitz__GeneralArrayStorageT_4_t swig_types[27]
+#define SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t swig_types[28]
+#define SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t swig_types[29]
+#define SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t swig_types[30]
+#define SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t swig_types[31]
+#define SWIGTYPE_p_blitz__Range swig_types[32]
+#define SWIGTYPE_p_bool swig_types[33]
+#define SWIGTYPE_p_char swig_types[34]
+#define SWIGTYPE_p_double swig_types[35]
+#define SWIGTYPE_p_int swig_types[36]
+#define SWIGTYPE_p_void swig_types[37]
+static swig_type_info *swig_types[39];
+static swig_module_info swig_module = {swig_types, 38, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3667,6 +3683,58 @@ SWIGINTERN int blitz_Array_Sl_double_Sc_4_Sg__shape0(blitz::Array< double,4 > *s
 SWIGINTERN int blitz_Array_Sl_double_Sc_4_Sg__shape1(blitz::Array< double,4 > *self){ return self->shape()[1]; }
 SWIGINTERN int blitz_Array_Sl_double_Sc_4_Sg__shape2(blitz::Array< double,4 > *self){ return self->shape()[2]; }
 SWIGINTERN int blitz_Array_Sl_double_Sc_4_Sg__shape3(blitz::Array< double,4 > *self){ return self->shape()[3]; }
+SWIGINTERN double blitz_Array_Sl_double_Sc_5_Sg__read__SWIG_0(blitz::Array< double,5 > *self,int i1){return (*self)(i1);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_5_Sg__read__SWIG_1(blitz::Array< double,5 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_5_Sg__read__SWIG_2(blitz::Array< double,5 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_5_Sg__read__SWIG_3(blitz::Array< double,5 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_double_Sc_5_Sg__write__SWIG_0(blitz::Array< double,5 > *self,int i1,double val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_5_Sg__write__SWIG_1(blitz::Array< double,5 > *self,int i1,int i2,double val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_5_Sg__write__SWIG_2(blitz::Array< double,5 > *self,int i1,int i2,int i3,double val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_5_Sg__write__SWIG_3(blitz::Array< double,5 > *self,int i1,int i2,int i3,int i4,double val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_double_Sc_5_Sg__datav(blitz::Array< double,5 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_double_Sc_5_Sg__shape0(blitz::Array< double,5 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_5_Sg__shape1(blitz::Array< double,5 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_5_Sg__shape2(blitz::Array< double,5 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_5_Sg__shape3(blitz::Array< double,5 > *self){ return self->shape()[3]; }
+SWIGINTERN double blitz_Array_Sl_double_Sc_6_Sg__read__SWIG_0(blitz::Array< double,6 > *self,int i1){return (*self)(i1);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_6_Sg__read__SWIG_1(blitz::Array< double,6 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_6_Sg__read__SWIG_2(blitz::Array< double,6 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_6_Sg__read__SWIG_3(blitz::Array< double,6 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_double_Sc_6_Sg__write__SWIG_0(blitz::Array< double,6 > *self,int i1,double val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_6_Sg__write__SWIG_1(blitz::Array< double,6 > *self,int i1,int i2,double val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_6_Sg__write__SWIG_2(blitz::Array< double,6 > *self,int i1,int i2,int i3,double val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_6_Sg__write__SWIG_3(blitz::Array< double,6 > *self,int i1,int i2,int i3,int i4,double val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_double_Sc_6_Sg__datav(blitz::Array< double,6 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_double_Sc_6_Sg__shape0(blitz::Array< double,6 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_6_Sg__shape1(blitz::Array< double,6 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_6_Sg__shape2(blitz::Array< double,6 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_6_Sg__shape3(blitz::Array< double,6 > *self){ return self->shape()[3]; }
+SWIGINTERN double blitz_Array_Sl_double_Sc_7_Sg__read__SWIG_0(blitz::Array< double,7 > *self,int i1){return (*self)(i1);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_7_Sg__read__SWIG_1(blitz::Array< double,7 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_7_Sg__read__SWIG_2(blitz::Array< double,7 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_7_Sg__read__SWIG_3(blitz::Array< double,7 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_double_Sc_7_Sg__write__SWIG_0(blitz::Array< double,7 > *self,int i1,double val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_7_Sg__write__SWIG_1(blitz::Array< double,7 > *self,int i1,int i2,double val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_7_Sg__write__SWIG_2(blitz::Array< double,7 > *self,int i1,int i2,int i3,double val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_7_Sg__write__SWIG_3(blitz::Array< double,7 > *self,int i1,int i2,int i3,int i4,double val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_double_Sc_7_Sg__datav(blitz::Array< double,7 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_double_Sc_7_Sg__shape0(blitz::Array< double,7 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_7_Sg__shape1(blitz::Array< double,7 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_7_Sg__shape2(blitz::Array< double,7 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_7_Sg__shape3(blitz::Array< double,7 > *self){ return self->shape()[3]; }
+SWIGINTERN double blitz_Array_Sl_double_Sc_8_Sg__read__SWIG_0(blitz::Array< double,8 > *self,int i1){return (*self)(i1);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_8_Sg__read__SWIG_1(blitz::Array< double,8 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_8_Sg__read__SWIG_2(blitz::Array< double,8 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN double blitz_Array_Sl_double_Sc_8_Sg__read__SWIG_3(blitz::Array< double,8 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_double_Sc_8_Sg__write__SWIG_0(blitz::Array< double,8 > *self,int i1,double val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_8_Sg__write__SWIG_1(blitz::Array< double,8 > *self,int i1,int i2,double val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_8_Sg__write__SWIG_2(blitz::Array< double,8 > *self,int i1,int i2,int i3,double val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_double_Sc_8_Sg__write__SWIG_3(blitz::Array< double,8 > *self,int i1,int i2,int i3,int i4,double val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_double_Sc_8_Sg__datav(blitz::Array< double,8 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_double_Sc_8_Sg__shape0(blitz::Array< double,8 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_8_Sg__shape1(blitz::Array< double,8 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_8_Sg__shape2(blitz::Array< double,8 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_double_Sc_8_Sg__shape3(blitz::Array< double,8 > *self){ return self->shape()[3]; }
 SWIGINTERN bool blitz_Array_Sl_bool_Sc_1_Sg__read__SWIG_0(blitz::Array< bool,1 > *self,int i1){return (*self)(i1);}
 SWIGINTERN bool blitz_Array_Sl_bool_Sc_1_Sg__read__SWIG_1(blitz::Array< bool,1 > *self,int i1,int i2){return (*self)(i1,i2);}
 SWIGINTERN bool blitz_Array_Sl_bool_Sc_1_Sg__read__SWIG_2(blitz::Array< bool,1 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
@@ -3730,6 +3798,58 @@ SWIGINTERN int blitz_Array_Sl_bool_Sc_4_Sg__shape0(blitz::Array< bool,4 > *self)
 SWIGINTERN int blitz_Array_Sl_bool_Sc_4_Sg__shape1(blitz::Array< bool,4 > *self){ return self->shape()[1]; }
 SWIGINTERN int blitz_Array_Sl_bool_Sc_4_Sg__shape2(blitz::Array< bool,4 > *self){ return self->shape()[2]; }
 SWIGINTERN int blitz_Array_Sl_bool_Sc_4_Sg__shape3(blitz::Array< bool,4 > *self){ return self->shape()[3]; }
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_5_Sg__read__SWIG_0(blitz::Array< bool,5 > *self,int i1){return (*self)(i1);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_5_Sg__read__SWIG_1(blitz::Array< bool,5 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_5_Sg__read__SWIG_2(blitz::Array< bool,5 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_5_Sg__read__SWIG_3(blitz::Array< bool,5 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_5_Sg__write__SWIG_0(blitz::Array< bool,5 > *self,int i1,bool val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_5_Sg__write__SWIG_1(blitz::Array< bool,5 > *self,int i1,int i2,bool val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_5_Sg__write__SWIG_2(blitz::Array< bool,5 > *self,int i1,int i2,int i3,bool val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_5_Sg__write__SWIG_3(blitz::Array< bool,5 > *self,int i1,int i2,int i3,int i4,bool val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_bool_Sc_5_Sg__datav(blitz::Array< bool,5 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_5_Sg__shape0(blitz::Array< bool,5 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_5_Sg__shape1(blitz::Array< bool,5 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_5_Sg__shape2(blitz::Array< bool,5 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_5_Sg__shape3(blitz::Array< bool,5 > *self){ return self->shape()[3]; }
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_6_Sg__read__SWIG_0(blitz::Array< bool,6 > *self,int i1){return (*self)(i1);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_6_Sg__read__SWIG_1(blitz::Array< bool,6 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_6_Sg__read__SWIG_2(blitz::Array< bool,6 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_6_Sg__read__SWIG_3(blitz::Array< bool,6 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_6_Sg__write__SWIG_0(blitz::Array< bool,6 > *self,int i1,bool val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_6_Sg__write__SWIG_1(blitz::Array< bool,6 > *self,int i1,int i2,bool val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_6_Sg__write__SWIG_2(blitz::Array< bool,6 > *self,int i1,int i2,int i3,bool val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_6_Sg__write__SWIG_3(blitz::Array< bool,6 > *self,int i1,int i2,int i3,int i4,bool val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_bool_Sc_6_Sg__datav(blitz::Array< bool,6 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_6_Sg__shape0(blitz::Array< bool,6 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_6_Sg__shape1(blitz::Array< bool,6 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_6_Sg__shape2(blitz::Array< bool,6 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_6_Sg__shape3(blitz::Array< bool,6 > *self){ return self->shape()[3]; }
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_7_Sg__read__SWIG_0(blitz::Array< bool,7 > *self,int i1){return (*self)(i1);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_7_Sg__read__SWIG_1(blitz::Array< bool,7 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_7_Sg__read__SWIG_2(blitz::Array< bool,7 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_7_Sg__read__SWIG_3(blitz::Array< bool,7 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_7_Sg__write__SWIG_0(blitz::Array< bool,7 > *self,int i1,bool val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_7_Sg__write__SWIG_1(blitz::Array< bool,7 > *self,int i1,int i2,bool val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_7_Sg__write__SWIG_2(blitz::Array< bool,7 > *self,int i1,int i2,int i3,bool val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_7_Sg__write__SWIG_3(blitz::Array< bool,7 > *self,int i1,int i2,int i3,int i4,bool val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_bool_Sc_7_Sg__datav(blitz::Array< bool,7 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_7_Sg__shape0(blitz::Array< bool,7 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_7_Sg__shape1(blitz::Array< bool,7 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_7_Sg__shape2(blitz::Array< bool,7 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_7_Sg__shape3(blitz::Array< bool,7 > *self){ return self->shape()[3]; }
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_8_Sg__read__SWIG_0(blitz::Array< bool,8 > *self,int i1){return (*self)(i1);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_8_Sg__read__SWIG_1(blitz::Array< bool,8 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_8_Sg__read__SWIG_2(blitz::Array< bool,8 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN bool blitz_Array_Sl_bool_Sc_8_Sg__read__SWIG_3(blitz::Array< bool,8 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_8_Sg__write__SWIG_0(blitz::Array< bool,8 > *self,int i1,bool val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_8_Sg__write__SWIG_1(blitz::Array< bool,8 > *self,int i1,int i2,bool val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_8_Sg__write__SWIG_2(blitz::Array< bool,8 > *self,int i1,int i2,int i3,bool val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_bool_Sc_8_Sg__write__SWIG_3(blitz::Array< bool,8 > *self,int i1,int i2,int i3,int i4,bool val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_bool_Sc_8_Sg__datav(blitz::Array< bool,8 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_8_Sg__shape0(blitz::Array< bool,8 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_8_Sg__shape1(blitz::Array< bool,8 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_8_Sg__shape2(blitz::Array< bool,8 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_bool_Sc_8_Sg__shape3(blitz::Array< bool,8 > *self){ return self->shape()[3]; }
 SWIGINTERN int blitz_Array_Sl_int_Sc_1_Sg__read__SWIG_0(blitz::Array< int,1 > *self,int i1){return (*self)(i1);}
 SWIGINTERN int blitz_Array_Sl_int_Sc_1_Sg__read__SWIG_1(blitz::Array< int,1 > *self,int i1,int i2){return (*self)(i1,i2);}
 SWIGINTERN int blitz_Array_Sl_int_Sc_1_Sg__read__SWIG_2(blitz::Array< int,1 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
@@ -3782,6 +3902,58 @@ SWIGINTERN int blitz_Array_Sl_int_Sc_4_Sg__shape0(blitz::Array< int,4 > *self){ 
 SWIGINTERN int blitz_Array_Sl_int_Sc_4_Sg__shape1(blitz::Array< int,4 > *self){ return self->shape()[1]; }
 SWIGINTERN int blitz_Array_Sl_int_Sc_4_Sg__shape2(blitz::Array< int,4 > *self){ return self->shape()[2]; }
 SWIGINTERN int blitz_Array_Sl_int_Sc_4_Sg__shape3(blitz::Array< int,4 > *self){ return self->shape()[3]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_5_Sg__read__SWIG_0(blitz::Array< int,5 > *self,int i1){return (*self)(i1);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_5_Sg__read__SWIG_1(blitz::Array< int,5 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_5_Sg__read__SWIG_2(blitz::Array< int,5 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_5_Sg__read__SWIG_3(blitz::Array< int,5 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_int_Sc_5_Sg__write__SWIG_0(blitz::Array< int,5 > *self,int i1,int val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_5_Sg__write__SWIG_1(blitz::Array< int,5 > *self,int i1,int i2,int val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_5_Sg__write__SWIG_2(blitz::Array< int,5 > *self,int i1,int i2,int i3,int val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_5_Sg__write__SWIG_3(blitz::Array< int,5 > *self,int i1,int i2,int i3,int i4,int val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_int_Sc_5_Sg__datav(blitz::Array< int,5 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_int_Sc_5_Sg__shape0(blitz::Array< int,5 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_5_Sg__shape1(blitz::Array< int,5 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_5_Sg__shape2(blitz::Array< int,5 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_5_Sg__shape3(blitz::Array< int,5 > *self){ return self->shape()[3]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_6_Sg__read__SWIG_0(blitz::Array< int,6 > *self,int i1){return (*self)(i1);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_6_Sg__read__SWIG_1(blitz::Array< int,6 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_6_Sg__read__SWIG_2(blitz::Array< int,6 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_6_Sg__read__SWIG_3(blitz::Array< int,6 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_int_Sc_6_Sg__write__SWIG_0(blitz::Array< int,6 > *self,int i1,int val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_6_Sg__write__SWIG_1(blitz::Array< int,6 > *self,int i1,int i2,int val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_6_Sg__write__SWIG_2(blitz::Array< int,6 > *self,int i1,int i2,int i3,int val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_6_Sg__write__SWIG_3(blitz::Array< int,6 > *self,int i1,int i2,int i3,int i4,int val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_int_Sc_6_Sg__datav(blitz::Array< int,6 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_int_Sc_6_Sg__shape0(blitz::Array< int,6 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_6_Sg__shape1(blitz::Array< int,6 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_6_Sg__shape2(blitz::Array< int,6 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_6_Sg__shape3(blitz::Array< int,6 > *self){ return self->shape()[3]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_7_Sg__read__SWIG_0(blitz::Array< int,7 > *self,int i1){return (*self)(i1);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_7_Sg__read__SWIG_1(blitz::Array< int,7 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_7_Sg__read__SWIG_2(blitz::Array< int,7 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_7_Sg__read__SWIG_3(blitz::Array< int,7 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_int_Sc_7_Sg__write__SWIG_0(blitz::Array< int,7 > *self,int i1,int val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_7_Sg__write__SWIG_1(blitz::Array< int,7 > *self,int i1,int i2,int val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_7_Sg__write__SWIG_2(blitz::Array< int,7 > *self,int i1,int i2,int i3,int val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_7_Sg__write__SWIG_3(blitz::Array< int,7 > *self,int i1,int i2,int i3,int i4,int val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_int_Sc_7_Sg__datav(blitz::Array< int,7 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_int_Sc_7_Sg__shape0(blitz::Array< int,7 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_7_Sg__shape1(blitz::Array< int,7 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_7_Sg__shape2(blitz::Array< int,7 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_7_Sg__shape3(blitz::Array< int,7 > *self){ return self->shape()[3]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_8_Sg__read__SWIG_0(blitz::Array< int,8 > *self,int i1){return (*self)(i1);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_8_Sg__read__SWIG_1(blitz::Array< int,8 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_8_Sg__read__SWIG_2(blitz::Array< int,8 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN int blitz_Array_Sl_int_Sc_8_Sg__read__SWIG_3(blitz::Array< int,8 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_int_Sc_8_Sg__write__SWIG_0(blitz::Array< int,8 > *self,int i1,int val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_8_Sg__write__SWIG_1(blitz::Array< int,8 > *self,int i1,int i2,int val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_8_Sg__write__SWIG_2(blitz::Array< int,8 > *self,int i1,int i2,int i3,int val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_int_Sc_8_Sg__write__SWIG_3(blitz::Array< int,8 > *self,int i1,int i2,int i3,int i4,int val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_int_Sc_8_Sg__datav(blitz::Array< int,8 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_int_Sc_8_Sg__shape0(blitz::Array< int,8 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_8_Sg__shape1(blitz::Array< int,8 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_8_Sg__shape2(blitz::Array< int,8 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_int_Sc_8_Sg__shape3(blitz::Array< int,8 > *self){ return self->shape()[3]; }
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -8245,6 +8417,3842 @@ SWIGINTERN PyObject *BlitzArray_double_4_swiginit(PyObject *SWIGUNUSEDPARM(self)
   return SWIG_Python_InitShadowInstance(args);
 }
 
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_5__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< double,5 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< double,5 > *)new blitz::Array< double,5 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_5__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 5 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< double,5 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_double_5" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 5 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_5" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 5 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 5 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 5 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,5 > *)new blitz::Array< double,5 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_5__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< double,5 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< double,5 > *)new blitz::Array< double,5 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_5__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 5 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< double,5 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_double_5" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 5 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_5" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 5 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 5 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 5 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,5 > *)new blitz::Array< double,5 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_5__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< double,5 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< double,5 > *)new blitz::Array< double,5 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_5__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 5 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< double,5 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_double_5" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_double_5" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 5 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_5" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 5 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 5 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 5 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,5 > *)new blitz::Array< double,5 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_5__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< double,5 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_double_5" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< double,5 > *)new blitz::Array< double,5 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_5(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_double_5",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_double_5__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_double_5__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_double_5__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_double_5__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_double_5__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_double_5__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_double_5__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_double_5'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,5 >::Array(int)\n"
+    "    blitz::Array< double,5 >::Array(int,int,blitz::GeneralArrayStorage< 5 >)\n"
+    "    blitz::Array< double,5 >::Array(int,int)\n"
+    "    blitz::Array< double,5 >::Array(int,int,int,blitz::GeneralArrayStorage< 5 >)\n"
+    "    blitz::Array< double,5 >::Array(int,int,int)\n"
+    "    blitz::Array< double,5 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 5 >)\n"
+    "    blitz::Array< double,5 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_data" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  result = (double *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_double, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_size" "', argument " "1"" of type '" "blitz::Array< double,5 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  result = (int)((blitz::Array< double,5 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_read" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (double)blitz_Array_Sl_double_Sc_5_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_read" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_5_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (double)blitz_Array_Sl_double_Sc_5_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_read" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_5_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_5_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (double)blitz_Array_Sl_double_Sc_5_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  double result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_read" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_5_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_5_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_5_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (double)blitz_Array_Sl_double_Sc_5_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_double_5_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_double_5_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_double_5_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_double_5_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_double_5_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_double_5_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,5 >::read(int)\n"
+    "    blitz::Array< double,5 >::read(int,int)\n"
+    "    blitz::Array< double,5 >::read(int,int,int)\n"
+    "    blitz::Array< double,5 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  int arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_write" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_5_write" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  blitz_Array_Sl_double_Sc_5_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_write" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_5_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_5_write" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  blitz_Array_Sl_double_Sc_5_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  double arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_write" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_5_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_5_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_5_write" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  blitz_Array_Sl_double_Sc_5_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  double arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_write" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_5_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_5_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_5_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_double_5_write" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  blitz_Array_Sl_double_Sc_5_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_double_5_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_double_5_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_double_5_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_double_5_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_double_5_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_double_5_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,5 >::write(int,double)\n"
+    "    blitz::Array< double,5 >::write(int,int,double)\n"
+    "    blitz::Array< double,5 >::write(int,int,int,double)\n"
+    "    blitz::Array< double,5 >::write(int,int,int,int,double)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_datav" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  result = (void *)blitz_Array_Sl_double_Sc_5_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_shape0" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_5_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_shape1" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_5_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_shape2" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_5_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_5_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_5_shape3" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_5_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_double_5(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,5 > *arg1 = (blitz::Array< double,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_5_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_double_5" "', argument " "1"" of type '" "blitz::Array< double,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,5 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_double_5_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_double_5_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_double_5_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_6__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< double,6 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< double,6 > *)new blitz::Array< double,6 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_6__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 6 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< double,6 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_double_6" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 6 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_6" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 6 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 6 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 6 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,6 > *)new blitz::Array< double,6 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_6__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< double,6 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< double,6 > *)new blitz::Array< double,6 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_6__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 6 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< double,6 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_double_6" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 6 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_6" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 6 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 6 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 6 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,6 > *)new blitz::Array< double,6 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_6__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< double,6 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< double,6 > *)new blitz::Array< double,6 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_6__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 6 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< double,6 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_double_6" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_double_6" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 6 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_6" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 6 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 6 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 6 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,6 > *)new blitz::Array< double,6 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_6__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< double,6 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_double_6" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< double,6 > *)new blitz::Array< double,6 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_6(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_double_6",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_double_6__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_double_6__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_double_6__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_double_6__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_double_6__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_double_6__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_double_6__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_double_6'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,6 >::Array(int)\n"
+    "    blitz::Array< double,6 >::Array(int,int,blitz::GeneralArrayStorage< 6 >)\n"
+    "    blitz::Array< double,6 >::Array(int,int)\n"
+    "    blitz::Array< double,6 >::Array(int,int,int,blitz::GeneralArrayStorage< 6 >)\n"
+    "    blitz::Array< double,6 >::Array(int,int,int)\n"
+    "    blitz::Array< double,6 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 6 >)\n"
+    "    blitz::Array< double,6 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_data" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  result = (double *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_double, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_size" "', argument " "1"" of type '" "blitz::Array< double,6 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  result = (int)((blitz::Array< double,6 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_read" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (double)blitz_Array_Sl_double_Sc_6_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_read" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_6_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (double)blitz_Array_Sl_double_Sc_6_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_read" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_6_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_6_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (double)blitz_Array_Sl_double_Sc_6_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  double result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_read" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_6_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_6_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_6_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (double)blitz_Array_Sl_double_Sc_6_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_double_6_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_double_6_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_double_6_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_double_6_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_double_6_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_double_6_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,6 >::read(int)\n"
+    "    blitz::Array< double,6 >::read(int,int)\n"
+    "    blitz::Array< double,6 >::read(int,int,int)\n"
+    "    blitz::Array< double,6 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  int arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_write" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_6_write" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  blitz_Array_Sl_double_Sc_6_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_write" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_6_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_6_write" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  blitz_Array_Sl_double_Sc_6_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  double arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_write" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_6_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_6_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_6_write" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  blitz_Array_Sl_double_Sc_6_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  double arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_write" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_6_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_6_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_6_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_double_6_write" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  blitz_Array_Sl_double_Sc_6_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_double_6_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_double_6_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_double_6_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_double_6_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_double_6_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_double_6_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,6 >::write(int,double)\n"
+    "    blitz::Array< double,6 >::write(int,int,double)\n"
+    "    blitz::Array< double,6 >::write(int,int,int,double)\n"
+    "    blitz::Array< double,6 >::write(int,int,int,int,double)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_datav" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  result = (void *)blitz_Array_Sl_double_Sc_6_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_shape0" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_6_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_shape1" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_6_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_shape2" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_6_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_6_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_6_shape3" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_6_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_double_6(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,6 > *arg1 = (blitz::Array< double,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_6_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_double_6" "', argument " "1"" of type '" "blitz::Array< double,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,6 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_double_6_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_double_6_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_double_6_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_7__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< double,7 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< double,7 > *)new blitz::Array< double,7 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_7__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 7 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< double,7 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_double_7" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 7 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_7" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 7 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 7 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 7 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,7 > *)new blitz::Array< double,7 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_7__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< double,7 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< double,7 > *)new blitz::Array< double,7 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_7__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 7 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< double,7 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_double_7" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 7 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_7" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 7 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 7 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 7 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,7 > *)new blitz::Array< double,7 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_7__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< double,7 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< double,7 > *)new blitz::Array< double,7 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_7__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 7 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< double,7 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_double_7" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_double_7" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 7 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_7" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 7 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 7 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 7 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,7 > *)new blitz::Array< double,7 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_7__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< double,7 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_double_7" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< double,7 > *)new blitz::Array< double,7 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_7(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_double_7",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_double_7__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_double_7__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_double_7__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_double_7__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_double_7__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_double_7__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_double_7__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_double_7'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,7 >::Array(int)\n"
+    "    blitz::Array< double,7 >::Array(int,int,blitz::GeneralArrayStorage< 7 >)\n"
+    "    blitz::Array< double,7 >::Array(int,int)\n"
+    "    blitz::Array< double,7 >::Array(int,int,int,blitz::GeneralArrayStorage< 7 >)\n"
+    "    blitz::Array< double,7 >::Array(int,int,int)\n"
+    "    blitz::Array< double,7 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 7 >)\n"
+    "    blitz::Array< double,7 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_data" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  result = (double *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_double, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_size" "', argument " "1"" of type '" "blitz::Array< double,7 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  result = (int)((blitz::Array< double,7 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_read" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (double)blitz_Array_Sl_double_Sc_7_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_read" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_7_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (double)blitz_Array_Sl_double_Sc_7_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_read" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_7_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_7_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (double)blitz_Array_Sl_double_Sc_7_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  double result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_read" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_7_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_7_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_7_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (double)blitz_Array_Sl_double_Sc_7_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_double_7_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_double_7_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_double_7_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_double_7_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_double_7_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_double_7_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,7 >::read(int)\n"
+    "    blitz::Array< double,7 >::read(int,int)\n"
+    "    blitz::Array< double,7 >::read(int,int,int)\n"
+    "    blitz::Array< double,7 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  int arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_write" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_7_write" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  blitz_Array_Sl_double_Sc_7_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_write" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_7_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_7_write" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  blitz_Array_Sl_double_Sc_7_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  double arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_write" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_7_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_7_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_7_write" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  blitz_Array_Sl_double_Sc_7_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  double arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_write" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_7_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_7_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_7_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_double_7_write" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  blitz_Array_Sl_double_Sc_7_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_double_7_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_double_7_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_double_7_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_double_7_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_double_7_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_double_7_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,7 >::write(int,double)\n"
+    "    blitz::Array< double,7 >::write(int,int,double)\n"
+    "    blitz::Array< double,7 >::write(int,int,int,double)\n"
+    "    blitz::Array< double,7 >::write(int,int,int,int,double)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_datav" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  result = (void *)blitz_Array_Sl_double_Sc_7_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_shape0" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_7_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_shape1" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_7_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_shape2" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_7_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_7_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_7_shape3" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_7_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_double_7(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,7 > *arg1 = (blitz::Array< double,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_7_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_double_7" "', argument " "1"" of type '" "blitz::Array< double,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,7 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_double_7_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_double_7_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_double_7_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_8__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< double,8 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< double,8 > *)new blitz::Array< double,8 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_8__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 8 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< double,8 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_double_8" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 8 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_8" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 8 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 8 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 8 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,8 > *)new blitz::Array< double,8 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_8__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< double,8 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< double,8 > *)new blitz::Array< double,8 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_8__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 8 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< double,8 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_double_8" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 8 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_8" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 8 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 8 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 8 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,8 > *)new blitz::Array< double,8 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_8__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< double,8 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< double,8 > *)new blitz::Array< double,8 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_8__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 8 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< double,8 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_double_8" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_double_8" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 8 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_double_8" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 8 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 8 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 8 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< double,8 > *)new blitz::Array< double,8 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_8__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< double,8 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_double_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_double_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_double_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_double_8" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< double,8 > *)new blitz::Array< double,8 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_double_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_double_8(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_double_8",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_double_8__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_double_8__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_double_8__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_double_8__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_double_8__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_double_8__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_double_8__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_double_8'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,8 >::Array(int)\n"
+    "    blitz::Array< double,8 >::Array(int,int,blitz::GeneralArrayStorage< 8 >)\n"
+    "    blitz::Array< double,8 >::Array(int,int)\n"
+    "    blitz::Array< double,8 >::Array(int,int,int,blitz::GeneralArrayStorage< 8 >)\n"
+    "    blitz::Array< double,8 >::Array(int,int,int)\n"
+    "    blitz::Array< double,8 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 8 >)\n"
+    "    blitz::Array< double,8 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_data" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  result = (double *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_double, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_size" "', argument " "1"" of type '" "blitz::Array< double,8 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  result = (int)((blitz::Array< double,8 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_read" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (double)blitz_Array_Sl_double_Sc_8_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_read" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_8_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (double)blitz_Array_Sl_double_Sc_8_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_read" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_8_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_8_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (double)blitz_Array_Sl_double_Sc_8_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  double result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_read" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_8_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_8_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_8_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (double)blitz_Array_Sl_double_Sc_8_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_double_8_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_double_8_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_double_8_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_double_8_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_double_8_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_double_8_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,8 >::read(int)\n"
+    "    blitz::Array< double,8 >::read(int,int)\n"
+    "    blitz::Array< double,8 >::read(int,int,int)\n"
+    "    blitz::Array< double,8 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  int arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_write" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_8_write" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  blitz_Array_Sl_double_Sc_8_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_write" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_8_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_8_write" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  blitz_Array_Sl_double_Sc_8_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  double arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_write" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_8_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_8_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_8_write" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  blitz_Array_Sl_double_Sc_8_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  double arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_write" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_double_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_double_8_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_double_8_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_double_8_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_double_8_write" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  blitz_Array_Sl_double_Sc_8_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_double_8_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_double_8_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_double_8_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_double_8_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_double_8_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_double_8_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< double,8 >::write(int,double)\n"
+    "    blitz::Array< double,8 >::write(int,int,double)\n"
+    "    blitz::Array< double,8 >::write(int,int,int,double)\n"
+    "    blitz::Array< double,8 >::write(int,int,int,int,double)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_datav" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  result = (void *)blitz_Array_Sl_double_Sc_8_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_shape0" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_8_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_shape1" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_8_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_shape2" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_8_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_double_8_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_double_8_shape3" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_double_Sc_8_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_double_8(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,8 > *arg1 = (blitz::Array< double,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_double_8_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_double_8" "', argument " "1"" of type '" "blitz::Array< double,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< double,8 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_double_8_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_double_8_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_double_8_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_1__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
@@ -12078,6 +16086,3842 @@ SWIGINTERN PyObject *BlitzArray_bool_4_swigregister(PyObject *SWIGUNUSEDPARM(sel
 }
 
 SWIGINTERN PyObject *BlitzArray_bool_4_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_5__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< bool,5 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< bool,5 > *)new blitz::Array< bool,5 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_5__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 5 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< bool,5 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_bool_5" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 5 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_5" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 5 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 5 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 5 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,5 > *)new blitz::Array< bool,5 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_5__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< bool,5 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< bool,5 > *)new blitz::Array< bool,5 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_5__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 5 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< bool,5 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_bool_5" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 5 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_5" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 5 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 5 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 5 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,5 > *)new blitz::Array< bool,5 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_5__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< bool,5 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< bool,5 > *)new blitz::Array< bool,5 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_5__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 5 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< bool,5 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_bool_5" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_bool_5" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 5 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_5" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 5 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 5 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 5 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,5 > *)new blitz::Array< bool,5 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_5__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< bool,5 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_bool_5" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< bool,5 > *)new blitz::Array< bool,5 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_5(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_bool_5",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_bool_5__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_bool_5__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_bool_5__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_bool_5__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_bool_5__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_bool_5__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_bool_5__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_bool_5'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,5 >::Array(int)\n"
+    "    blitz::Array< bool,5 >::Array(int,int,blitz::GeneralArrayStorage< 5 >)\n"
+    "    blitz::Array< bool,5 >::Array(int,int)\n"
+    "    blitz::Array< bool,5 >::Array(int,int,int,blitz::GeneralArrayStorage< 5 >)\n"
+    "    blitz::Array< bool,5 >::Array(int,int,int)\n"
+    "    blitz::Array< bool,5 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 5 >)\n"
+    "    blitz::Array< bool,5 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_data" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  result = (bool *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_bool, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_size" "', argument " "1"" of type '" "blitz::Array< bool,5 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  result = (int)((blitz::Array< bool,5 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_read" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (bool)blitz_Array_Sl_bool_Sc_5_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  bool result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_read" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_5_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (bool)blitz_Array_Sl_bool_Sc_5_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_read" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_5_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_5_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (bool)blitz_Array_Sl_bool_Sc_5_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  bool result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_read" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_5_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_5_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_5_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (bool)blitz_Array_Sl_bool_Sc_5_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_bool_5_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_bool_5_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_bool_5_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_bool_5_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_bool_5_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_bool_5_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,5 >::read(int)\n"
+    "    blitz::Array< bool,5 >::read(int,int)\n"
+    "    blitz::Array< bool,5 >::read(int,int,int)\n"
+    "    blitz::Array< bool,5 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  int arg2 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_write" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_5_write" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  blitz_Array_Sl_bool_Sc_5_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  bool arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  bool val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_write" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_5_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_5_write" "', argument " "4"" of type '" "bool""'");
+  } 
+  arg4 = static_cast< bool >(val4);
+  blitz_Array_Sl_bool_Sc_5_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  bool arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_write" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_5_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_5_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_5_write" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  blitz_Array_Sl_bool_Sc_5_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  bool arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_write" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_5_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_5_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_5_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_bool_5_write" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  blitz_Array_Sl_bool_Sc_5_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_bool_5_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_bool_5_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_bool_5_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_bool_5_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_bool_5_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_bool_5_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,5 >::write(int,bool)\n"
+    "    blitz::Array< bool,5 >::write(int,int,bool)\n"
+    "    blitz::Array< bool,5 >::write(int,int,int,bool)\n"
+    "    blitz::Array< bool,5 >::write(int,int,int,int,bool)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_datav" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  result = (void *)blitz_Array_Sl_bool_Sc_5_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_shape0" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_5_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_shape1" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_5_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_shape2" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_5_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_5_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_5_shape3" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_5_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_bool_5(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,5 > *arg1 = (blitz::Array< bool,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_5_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_bool_5" "', argument " "1"" of type '" "blitz::Array< bool,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,5 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_bool_5_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_bool_5_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_bool_5_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_6__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< bool,6 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< bool,6 > *)new blitz::Array< bool,6 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_6__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 6 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< bool,6 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_bool_6" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 6 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_6" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 6 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 6 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 6 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,6 > *)new blitz::Array< bool,6 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_6__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< bool,6 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< bool,6 > *)new blitz::Array< bool,6 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_6__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 6 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< bool,6 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_bool_6" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 6 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_6" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 6 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 6 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 6 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,6 > *)new blitz::Array< bool,6 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_6__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< bool,6 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< bool,6 > *)new blitz::Array< bool,6 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_6__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 6 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< bool,6 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_bool_6" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_bool_6" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 6 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_6" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 6 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 6 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 6 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,6 > *)new blitz::Array< bool,6 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_6__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< bool,6 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_bool_6" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< bool,6 > *)new blitz::Array< bool,6 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_6(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_bool_6",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_bool_6__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_bool_6__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_bool_6__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_bool_6__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_bool_6__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_bool_6__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_bool_6__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_bool_6'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,6 >::Array(int)\n"
+    "    blitz::Array< bool,6 >::Array(int,int,blitz::GeneralArrayStorage< 6 >)\n"
+    "    blitz::Array< bool,6 >::Array(int,int)\n"
+    "    blitz::Array< bool,6 >::Array(int,int,int,blitz::GeneralArrayStorage< 6 >)\n"
+    "    blitz::Array< bool,6 >::Array(int,int,int)\n"
+    "    blitz::Array< bool,6 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 6 >)\n"
+    "    blitz::Array< bool,6 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_data" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  result = (bool *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_bool, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_size" "', argument " "1"" of type '" "blitz::Array< bool,6 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  result = (int)((blitz::Array< bool,6 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_read" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (bool)blitz_Array_Sl_bool_Sc_6_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  bool result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_read" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_6_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (bool)blitz_Array_Sl_bool_Sc_6_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_read" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_6_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_6_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (bool)blitz_Array_Sl_bool_Sc_6_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  bool result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_read" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_6_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_6_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_6_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (bool)blitz_Array_Sl_bool_Sc_6_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_bool_6_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_bool_6_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_bool_6_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_bool_6_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_bool_6_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_bool_6_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,6 >::read(int)\n"
+    "    blitz::Array< bool,6 >::read(int,int)\n"
+    "    blitz::Array< bool,6 >::read(int,int,int)\n"
+    "    blitz::Array< bool,6 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  int arg2 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_write" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_6_write" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  blitz_Array_Sl_bool_Sc_6_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  bool arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  bool val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_write" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_6_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_6_write" "', argument " "4"" of type '" "bool""'");
+  } 
+  arg4 = static_cast< bool >(val4);
+  blitz_Array_Sl_bool_Sc_6_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  bool arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_write" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_6_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_6_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_6_write" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  blitz_Array_Sl_bool_Sc_6_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  bool arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_write" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_6_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_6_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_6_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_bool_6_write" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  blitz_Array_Sl_bool_Sc_6_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_bool_6_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_bool_6_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_bool_6_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_bool_6_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_bool_6_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_bool_6_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,6 >::write(int,bool)\n"
+    "    blitz::Array< bool,6 >::write(int,int,bool)\n"
+    "    blitz::Array< bool,6 >::write(int,int,int,bool)\n"
+    "    blitz::Array< bool,6 >::write(int,int,int,int,bool)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_datav" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  result = (void *)blitz_Array_Sl_bool_Sc_6_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_shape0" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_6_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_shape1" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_6_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_shape2" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_6_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_6_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_6_shape3" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_6_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_bool_6(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,6 > *arg1 = (blitz::Array< bool,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_6_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_bool_6" "', argument " "1"" of type '" "blitz::Array< bool,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,6 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_bool_6_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_bool_6_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_bool_6_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_7__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< bool,7 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< bool,7 > *)new blitz::Array< bool,7 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_7__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 7 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< bool,7 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_bool_7" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 7 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_7" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 7 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 7 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 7 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,7 > *)new blitz::Array< bool,7 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_7__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< bool,7 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< bool,7 > *)new blitz::Array< bool,7 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_7__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 7 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< bool,7 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_bool_7" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 7 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_7" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 7 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 7 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 7 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,7 > *)new blitz::Array< bool,7 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_7__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< bool,7 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< bool,7 > *)new blitz::Array< bool,7 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_7__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 7 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< bool,7 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_bool_7" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_bool_7" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 7 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_7" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 7 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 7 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 7 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,7 > *)new blitz::Array< bool,7 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_7__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< bool,7 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_bool_7" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< bool,7 > *)new blitz::Array< bool,7 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_7(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_bool_7",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_bool_7__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_bool_7__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_bool_7__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_bool_7__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_bool_7__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_bool_7__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_bool_7__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_bool_7'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,7 >::Array(int)\n"
+    "    blitz::Array< bool,7 >::Array(int,int,blitz::GeneralArrayStorage< 7 >)\n"
+    "    blitz::Array< bool,7 >::Array(int,int)\n"
+    "    blitz::Array< bool,7 >::Array(int,int,int,blitz::GeneralArrayStorage< 7 >)\n"
+    "    blitz::Array< bool,7 >::Array(int,int,int)\n"
+    "    blitz::Array< bool,7 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 7 >)\n"
+    "    blitz::Array< bool,7 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_data" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  result = (bool *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_bool, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_size" "', argument " "1"" of type '" "blitz::Array< bool,7 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  result = (int)((blitz::Array< bool,7 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_read" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (bool)blitz_Array_Sl_bool_Sc_7_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  bool result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_read" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_7_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (bool)blitz_Array_Sl_bool_Sc_7_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_read" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_7_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_7_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (bool)blitz_Array_Sl_bool_Sc_7_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  bool result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_read" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_7_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_7_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_7_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (bool)blitz_Array_Sl_bool_Sc_7_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_bool_7_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_bool_7_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_bool_7_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_bool_7_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_bool_7_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_bool_7_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,7 >::read(int)\n"
+    "    blitz::Array< bool,7 >::read(int,int)\n"
+    "    blitz::Array< bool,7 >::read(int,int,int)\n"
+    "    blitz::Array< bool,7 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  int arg2 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_write" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_7_write" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  blitz_Array_Sl_bool_Sc_7_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  bool arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  bool val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_write" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_7_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_7_write" "', argument " "4"" of type '" "bool""'");
+  } 
+  arg4 = static_cast< bool >(val4);
+  blitz_Array_Sl_bool_Sc_7_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  bool arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_write" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_7_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_7_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_7_write" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  blitz_Array_Sl_bool_Sc_7_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  bool arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_write" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_7_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_7_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_7_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_bool_7_write" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  blitz_Array_Sl_bool_Sc_7_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_bool_7_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_bool_7_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_bool_7_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_bool_7_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_bool_7_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_bool_7_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,7 >::write(int,bool)\n"
+    "    blitz::Array< bool,7 >::write(int,int,bool)\n"
+    "    blitz::Array< bool,7 >::write(int,int,int,bool)\n"
+    "    blitz::Array< bool,7 >::write(int,int,int,int,bool)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_datav" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  result = (void *)blitz_Array_Sl_bool_Sc_7_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_shape0" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_7_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_shape1" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_7_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_shape2" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_7_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_7_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_7_shape3" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_7_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_bool_7(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,7 > *arg1 = (blitz::Array< bool,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_7_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_bool_7" "', argument " "1"" of type '" "blitz::Array< bool,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,7 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_bool_7_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_bool_7_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_bool_7_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_8__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< bool,8 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< bool,8 > *)new blitz::Array< bool,8 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_8__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 8 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< bool,8 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_bool_8" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 8 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_8" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 8 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 8 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 8 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,8 > *)new blitz::Array< bool,8 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_8__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< bool,8 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< bool,8 > *)new blitz::Array< bool,8 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_8__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 8 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< bool,8 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_bool_8" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 8 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_8" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 8 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 8 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 8 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,8 > *)new blitz::Array< bool,8 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_8__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< bool,8 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< bool,8 > *)new blitz::Array< bool,8 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_8__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 8 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< bool,8 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_bool_8" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_bool_8" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 8 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_bool_8" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 8 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 8 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 8 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< bool,8 > *)new blitz::Array< bool,8 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_8__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< bool,8 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_bool_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_bool_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_bool_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_bool_8" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< bool,8 > *)new blitz::Array< bool,8 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_bool_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_bool_8(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_bool_8",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_bool_8__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_bool_8__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_bool_8__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_bool_8__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_bool_8__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_bool_8__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_bool_8__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_bool_8'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,8 >::Array(int)\n"
+    "    blitz::Array< bool,8 >::Array(int,int,blitz::GeneralArrayStorage< 8 >)\n"
+    "    blitz::Array< bool,8 >::Array(int,int)\n"
+    "    blitz::Array< bool,8 >::Array(int,int,int,blitz::GeneralArrayStorage< 8 >)\n"
+    "    blitz::Array< bool,8 >::Array(int,int,int)\n"
+    "    blitz::Array< bool,8 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 8 >)\n"
+    "    blitz::Array< bool,8 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_data" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  result = (bool *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_bool, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_size" "', argument " "1"" of type '" "blitz::Array< bool,8 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  result = (int)((blitz::Array< bool,8 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_read" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (bool)blitz_Array_Sl_bool_Sc_8_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  bool result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_read" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_8_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (bool)blitz_Array_Sl_bool_Sc_8_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_read" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_8_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_8_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (bool)blitz_Array_Sl_bool_Sc_8_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  bool result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_read" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_8_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_8_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_8_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (bool)blitz_Array_Sl_bool_Sc_8_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_bool_8_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_bool_8_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_bool_8_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_bool_8_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_bool_8_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_bool_8_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,8 >::read(int)\n"
+    "    blitz::Array< bool,8 >::read(int,int)\n"
+    "    blitz::Array< bool,8 >::read(int,int,int)\n"
+    "    blitz::Array< bool,8 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  int arg2 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_write" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_8_write" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  blitz_Array_Sl_bool_Sc_8_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  bool arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  bool val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_write" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_8_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_8_write" "', argument " "4"" of type '" "bool""'");
+  } 
+  arg4 = static_cast< bool >(val4);
+  blitz_Array_Sl_bool_Sc_8_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  bool arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_write" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_8_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_8_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_8_write" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  blitz_Array_Sl_bool_Sc_8_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  bool arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_write" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_bool_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_bool_8_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_bool_8_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_bool_8_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_bool_8_write" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  blitz_Array_Sl_bool_Sc_8_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_bool_8_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_bool_8_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_bool_8_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_bool_8_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_bool_8_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_bool_8_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< bool,8 >::write(int,bool)\n"
+    "    blitz::Array< bool,8 >::write(int,int,bool)\n"
+    "    blitz::Array< bool,8 >::write(int,int,int,bool)\n"
+    "    blitz::Array< bool,8 >::write(int,int,int,int,bool)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_datav" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  result = (void *)blitz_Array_Sl_bool_Sc_8_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_shape0" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_8_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_shape1" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_8_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_shape2" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_8_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_bool_8_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_bool_8_shape3" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_bool_Sc_8_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_bool_8(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< bool,8 > *arg1 = (blitz::Array< bool,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_bool_8_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_bool_8" "', argument " "1"" of type '" "blitz::Array< bool,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< bool,8 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_bool_8_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_bool_8_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_bool_8_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   return SWIG_Python_InitShadowInstance(args);
 }
 
@@ -15917,6 +23761,3842 @@ SWIGINTERN PyObject *BlitzArray_int_4_swiginit(PyObject *SWIGUNUSEDPARM(self), P
   return SWIG_Python_InitShadowInstance(args);
 }
 
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_5__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< int,5 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< int,5 > *)new blitz::Array< int,5 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_5__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 5 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< int,5 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_int_5" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 5 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_5" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 5 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 5 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 5 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,5 > *)new blitz::Array< int,5 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_5__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< int,5 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< int,5 > *)new blitz::Array< int,5 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_5__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 5 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< int,5 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_int_5" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 5 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_5" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 5 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 5 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 5 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,5 > *)new blitz::Array< int,5 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_5__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< int,5 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< int,5 > *)new blitz::Array< int,5 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_5__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 5 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< int,5 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_int_5" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_int_5" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 5 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_5" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 5 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 5 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 5 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,5 > *)new blitz::Array< int,5 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_5__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< int,5 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_5" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_5" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_5" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_int_5" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< int,5 > *)new blitz::Array< int,5 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_5_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_5(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_int_5",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_int_5__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_int_5__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_int_5__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_int_5__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_5_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_int_5__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_int_5__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_int_5__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_int_5'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,5 >::Array(int)\n"
+    "    blitz::Array< int,5 >::Array(int,int,blitz::GeneralArrayStorage< 5 >)\n"
+    "    blitz::Array< int,5 >::Array(int,int)\n"
+    "    blitz::Array< int,5 >::Array(int,int,int,blitz::GeneralArrayStorage< 5 >)\n"
+    "    blitz::Array< int,5 >::Array(int,int,int)\n"
+    "    blitz::Array< int,5 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 5 >)\n"
+    "    blitz::Array< int,5 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_data" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  result = (int *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_int, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_size" "', argument " "1"" of type '" "blitz::Array< int,5 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  result = (int)((blitz::Array< int,5 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_read" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (int)blitz_Array_Sl_int_Sc_5_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_read" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_5_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (int)blitz_Array_Sl_int_Sc_5_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_read" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_5_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_5_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (int)blitz_Array_Sl_int_Sc_5_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_read" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_5_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_5_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_5_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_5_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (int)blitz_Array_Sl_int_Sc_5_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_int_5_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_int_5_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_int_5_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_int_5_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_int_5_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_int_5_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,5 >::read(int)\n"
+    "    blitz::Array< int,5 >::read(int,int)\n"
+    "    blitz::Array< int,5 >::read(int,int,int)\n"
+    "    blitz::Array< int,5 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_write" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_5_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  blitz_Array_Sl_int_Sc_5_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_write" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_5_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_5_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  blitz_Array_Sl_int_Sc_5_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_write" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_5_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_5_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_5_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  blitz_Array_Sl_int_Sc_5_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_write" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_5_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_5_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_5_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_5_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_int_5_write" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  blitz_Array_Sl_int_Sc_5_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_int_5_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_int_5_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_int_5_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_int_5_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_int_5_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_int_5_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,5 >::write(int,int)\n"
+    "    blitz::Array< int,5 >::write(int,int,int)\n"
+    "    blitz::Array< int,5 >::write(int,int,int,int)\n"
+    "    blitz::Array< int,5 >::write(int,int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_datav" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  result = (void *)blitz_Array_Sl_int_Sc_5_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_shape0" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_5_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_shape1" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_5_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_shape2" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_5_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_5_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_5_shape3" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_5_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_int_5(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,5 > *arg1 = (blitz::Array< int,5 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_5_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_int_5" "', argument " "1"" of type '" "blitz::Array< int,5 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,5 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_int_5_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_int_5_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_int_5_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_6__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< int,6 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< int,6 > *)new blitz::Array< int,6 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_6__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 6 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< int,6 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_int_6" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 6 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_6" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 6 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 6 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 6 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,6 > *)new blitz::Array< int,6 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_6__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< int,6 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< int,6 > *)new blitz::Array< int,6 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_6__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 6 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< int,6 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_int_6" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 6 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_6" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 6 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 6 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 6 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,6 > *)new blitz::Array< int,6 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_6__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< int,6 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< int,6 > *)new blitz::Array< int,6 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_6__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 6 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< int,6 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_int_6" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_int_6" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 6 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_6" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 6 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 6 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 6 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,6 > *)new blitz::Array< int,6 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_6__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< int,6 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_6" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_6" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_6" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_int_6" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< int,6 > *)new blitz::Array< int,6 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_6_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_6(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_int_6",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_int_6__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_int_6__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_int_6__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_int_6__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_6_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_int_6__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_int_6__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_int_6__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_int_6'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,6 >::Array(int)\n"
+    "    blitz::Array< int,6 >::Array(int,int,blitz::GeneralArrayStorage< 6 >)\n"
+    "    blitz::Array< int,6 >::Array(int,int)\n"
+    "    blitz::Array< int,6 >::Array(int,int,int,blitz::GeneralArrayStorage< 6 >)\n"
+    "    blitz::Array< int,6 >::Array(int,int,int)\n"
+    "    blitz::Array< int,6 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 6 >)\n"
+    "    blitz::Array< int,6 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_data" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  result = (int *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_int, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_size" "', argument " "1"" of type '" "blitz::Array< int,6 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  result = (int)((blitz::Array< int,6 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_read" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (int)blitz_Array_Sl_int_Sc_6_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_read" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_6_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (int)blitz_Array_Sl_int_Sc_6_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_read" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_6_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_6_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (int)blitz_Array_Sl_int_Sc_6_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_read" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_6_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_6_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_6_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_6_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (int)blitz_Array_Sl_int_Sc_6_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_int_6_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_int_6_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_int_6_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_int_6_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_int_6_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_int_6_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,6 >::read(int)\n"
+    "    blitz::Array< int,6 >::read(int,int)\n"
+    "    blitz::Array< int,6 >::read(int,int,int)\n"
+    "    blitz::Array< int,6 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_write" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_6_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  blitz_Array_Sl_int_Sc_6_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_write" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_6_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_6_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  blitz_Array_Sl_int_Sc_6_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_write" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_6_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_6_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_6_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  blitz_Array_Sl_int_Sc_6_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_write" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_6_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_6_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_6_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_6_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_int_6_write" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  blitz_Array_Sl_int_Sc_6_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_int_6_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_int_6_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_int_6_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_int_6_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_int_6_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_int_6_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,6 >::write(int,int)\n"
+    "    blitz::Array< int,6 >::write(int,int,int)\n"
+    "    blitz::Array< int,6 >::write(int,int,int,int)\n"
+    "    blitz::Array< int,6 >::write(int,int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_datav" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  result = (void *)blitz_Array_Sl_int_Sc_6_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_shape0" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_6_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_shape1" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_6_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_shape2" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_6_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_6_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_6_shape3" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_6_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_int_6(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,6 > *arg1 = (blitz::Array< int,6 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_6_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_int_6" "', argument " "1"" of type '" "blitz::Array< int,6 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,6 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_int_6_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_int_6_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_int_6_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_7__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< int,7 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< int,7 > *)new blitz::Array< int,7 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_7__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 7 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< int,7 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_int_7" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 7 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_7" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 7 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 7 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 7 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,7 > *)new blitz::Array< int,7 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_7__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< int,7 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< int,7 > *)new blitz::Array< int,7 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_7__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 7 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< int,7 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_int_7" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 7 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_7" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 7 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 7 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 7 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,7 > *)new blitz::Array< int,7 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_7__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< int,7 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< int,7 > *)new blitz::Array< int,7 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_7__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 7 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< int,7 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_int_7" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_int_7" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 7 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_7" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 7 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 7 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 7 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,7 > *)new blitz::Array< int,7 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_7__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< int,7 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_7" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_7" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_7" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_int_7" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< int,7 > *)new blitz::Array< int,7 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_7_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_7(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_int_7",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_int_7__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_int_7__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_int_7__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_int_7__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_7_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_int_7__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_int_7__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_int_7__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_int_7'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,7 >::Array(int)\n"
+    "    blitz::Array< int,7 >::Array(int,int,blitz::GeneralArrayStorage< 7 >)\n"
+    "    blitz::Array< int,7 >::Array(int,int)\n"
+    "    blitz::Array< int,7 >::Array(int,int,int,blitz::GeneralArrayStorage< 7 >)\n"
+    "    blitz::Array< int,7 >::Array(int,int,int)\n"
+    "    blitz::Array< int,7 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 7 >)\n"
+    "    blitz::Array< int,7 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_data" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  result = (int *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_int, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_size" "', argument " "1"" of type '" "blitz::Array< int,7 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  result = (int)((blitz::Array< int,7 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_read" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (int)blitz_Array_Sl_int_Sc_7_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_read" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_7_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (int)blitz_Array_Sl_int_Sc_7_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_read" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_7_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_7_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (int)blitz_Array_Sl_int_Sc_7_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_read" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_7_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_7_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_7_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_7_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (int)blitz_Array_Sl_int_Sc_7_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_int_7_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_int_7_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_int_7_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_int_7_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_int_7_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_int_7_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,7 >::read(int)\n"
+    "    blitz::Array< int,7 >::read(int,int)\n"
+    "    blitz::Array< int,7 >::read(int,int,int)\n"
+    "    blitz::Array< int,7 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_write" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_7_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  blitz_Array_Sl_int_Sc_7_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_write" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_7_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_7_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  blitz_Array_Sl_int_Sc_7_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_write" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_7_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_7_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_7_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  blitz_Array_Sl_int_Sc_7_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_write" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_7_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_7_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_7_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_7_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_int_7_write" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  blitz_Array_Sl_int_Sc_7_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_int_7_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_int_7_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_int_7_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_int_7_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_int_7_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_int_7_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,7 >::write(int,int)\n"
+    "    blitz::Array< int,7 >::write(int,int,int)\n"
+    "    blitz::Array< int,7 >::write(int,int,int,int)\n"
+    "    blitz::Array< int,7 >::write(int,int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_datav" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  result = (void *)blitz_Array_Sl_int_Sc_7_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_shape0" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_7_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_shape1" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_7_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_shape2" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_7_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_7_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_7_shape3" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_7_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_int_7(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,7 > *arg1 = (blitz::Array< int,7 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_7_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_int_7" "', argument " "1"" of type '" "blitz::Array< int,7 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,7 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_int_7_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_int_7_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_int_7_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_8__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  blitz::Array< int,8 > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (blitz::Array< int,8 > *)new blitz::Array< int,8 >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_8__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  blitz::GeneralArrayStorage< 8 > arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  blitz::Array< int,8 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_BlitzArray_int_8" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 8 >""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_8" "', argument " "3"" of type '" "blitz::GeneralArrayStorage< 8 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 8 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 8 > * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,8 > *)new blitz::Array< int,8 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_8__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  blitz::Array< int,8 > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (blitz::Array< int,8 > *)new blitz::Array< int,8 >(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_8__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::GeneralArrayStorage< 8 > arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  blitz::Array< int,8 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_BlitzArray_int_8" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 8 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_8" "', argument " "4"" of type '" "blitz::GeneralArrayStorage< 8 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 8 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 8 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,8 > *)new blitz::Array< int,8 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_8__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< int,8 > *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (blitz::Array< int,8 > *)new blitz::Array< int,8 >(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_8__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  blitz::GeneralArrayStorage< 8 > arg5 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  blitz::Array< int,8 > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_int_8" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t,  0  | 0);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_BlitzArray_int_8" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 8 >""'"); 
+    }  
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_BlitzArray_int_8" "', argument " "5"" of type '" "blitz::GeneralArrayStorage< 8 >""'");
+    } else {
+      blitz::GeneralArrayStorage< 8 > * temp = reinterpret_cast< blitz::GeneralArrayStorage< 8 > * >(argp5);
+      arg5 = *temp;
+      if (SWIG_IsNewObj(res5)) delete temp;
+    }
+  }
+  result = (blitz::Array< int,8 > *)new blitz::Array< int,8 >(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_8__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  blitz::Array< int,8 > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_BlitzArray_int_8" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BlitzArray_int_8" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_BlitzArray_int_8" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_BlitzArray_int_8" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (blitz::Array< int,8 > *)new blitz::Array< int,8 >(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_blitz__ArrayT_int_8_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_BlitzArray_int_8(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_BlitzArray_int_8",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_BlitzArray_int_8__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_BlitzArray_int_8__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_BlitzArray_int_8__SWIG_1(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_new_BlitzArray_int_8__SWIG_4(self, argc, argv);
+  }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_blitz__GeneralArrayStorageT_8_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_BlitzArray_int_8__SWIG_3(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 4) {
+    return _wrap_new_BlitzArray_int_8__SWIG_6(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_BlitzArray_int_8__SWIG_5(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_BlitzArray_int_8'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,8 >::Array(int)\n"
+    "    blitz::Array< int,8 >::Array(int,int,blitz::GeneralArrayStorage< 8 >)\n"
+    "    blitz::Array< int,8 >::Array(int,int)\n"
+    "    blitz::Array< int,8 >::Array(int,int,int,blitz::GeneralArrayStorage< 8 >)\n"
+    "    blitz::Array< int,8 >::Array(int,int,int)\n"
+    "    blitz::Array< int,8 >::Array(int,int,int,int,blitz::GeneralArrayStorage< 8 >)\n"
+    "    blitz::Array< int,8 >::Array(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_data" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  result = (int *)(arg1)->data();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_int, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_size" "', argument " "1"" of type '" "blitz::Array< int,8 > const *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  result = (int)((blitz::Array< int,8 > const *)arg1)->size();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_read" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (int)blitz_Array_Sl_int_Sc_8_Sg__read__SWIG_0(arg1,arg2);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_read" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_8_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  result = (int)blitz_Array_Sl_int_Sc_8_Sg__read__SWIG_1(arg1,arg2,arg3);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_read" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_8_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_8_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  result = (int)blitz_Array_Sl_int_Sc_8_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_read__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_read" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_8_read" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_8_read" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_8_read" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_8_read" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  result = (int)blitz_Array_Sl_int_Sc_8_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_read(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_int_8_read",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_BlitzArray_int_8_read__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_BlitzArray_int_8_read__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_int_8_read__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_int_8_read__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_int_8_read'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,8 >::read(int)\n"
+    "    blitz::Array< int,8 >::read(int,int)\n"
+    "    blitz::Array< int,8 >::read(int,int,int)\n"
+    "    blitz::Array< int,8 >::read(int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_write" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_8_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  blitz_Array_Sl_int_Sc_8_Sg__write__SWIG_0(arg1,arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_write" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_8_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_8_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  blitz_Array_Sl_int_Sc_8_Sg__write__SWIG_1(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_write__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_write" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_8_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_8_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_8_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  blitz_Array_Sl_int_Sc_8_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,arg5);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_write__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_write" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BlitzArray_int_8_write" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BlitzArray_int_8_write" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BlitzArray_int_8_write" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "BlitzArray_int_8_write" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "BlitzArray_int_8_write" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  blitz_Array_Sl_int_Sc_8_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,arg6);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_write(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[7];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"BlitzArray_int_8_write",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_BlitzArray_int_8_write__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_BlitzArray_int_8_write__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_BlitzArray_int_8_write__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_BlitzArray_int_8_write__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'BlitzArray_int_8_write'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    blitz::Array< int,8 >::write(int,int)\n"
+    "    blitz::Array< int,8 >::write(int,int,int)\n"
+    "    blitz::Array< int,8 >::write(int,int,int,int)\n"
+    "    blitz::Array< int,8 >::write(int,int,int,int,int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_datav(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  void *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_datav" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  result = (void *)blitz_Array_Sl_int_Sc_8_Sg__datav(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_void, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_shape0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_shape0" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_8_Sg__shape0(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_shape1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_shape1" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_8_Sg__shape1(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_shape2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_shape2" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_8_Sg__shape2(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_BlitzArray_int_8_shape3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BlitzArray_int_8_shape3" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  result = (int)blitz_Array_Sl_int_Sc_8_Sg__shape3(arg1);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_BlitzArray_int_8(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< int,8 > *arg1 = (blitz::Array< int,8 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_blitz__ArrayT_int_8_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BlitzArray_int_8" "', argument " "1"" of type '" "blitz::Array< int,8 > *""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< int,8 > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *BlitzArray_int_8_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_blitz__ArrayT_int_8_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *BlitzArray_int_8_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"cdata", _wrap_cdata, METH_VARARGS, NULL},
@@ -15985,6 +27665,58 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_BlitzArray_double_4", (PyCFunction)_wrap_delete_BlitzArray_double_4, METH_O, NULL},
 	 { (char *)"BlitzArray_double_4_swigregister", BlitzArray_double_4_swigregister, METH_VARARGS, NULL},
 	 { (char *)"BlitzArray_double_4_swiginit", BlitzArray_double_4_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_double_5", _wrap_new_BlitzArray_double_5, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_5_data", (PyCFunction)_wrap_BlitzArray_double_5_data, METH_O, NULL},
+	 { (char *)"BlitzArray_double_5_size", (PyCFunction)_wrap_BlitzArray_double_5_size, METH_O, NULL},
+	 { (char *)"BlitzArray_double_5_read", _wrap_BlitzArray_double_5_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_5_write", _wrap_BlitzArray_double_5_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_5_datav", (PyCFunction)_wrap_BlitzArray_double_5_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_double_5_shape0", (PyCFunction)_wrap_BlitzArray_double_5_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_double_5_shape1", (PyCFunction)_wrap_BlitzArray_double_5_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_double_5_shape2", (PyCFunction)_wrap_BlitzArray_double_5_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_double_5_shape3", (PyCFunction)_wrap_BlitzArray_double_5_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_double_5", (PyCFunction)_wrap_delete_BlitzArray_double_5, METH_O, NULL},
+	 { (char *)"BlitzArray_double_5_swigregister", BlitzArray_double_5_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_5_swiginit", BlitzArray_double_5_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_double_6", _wrap_new_BlitzArray_double_6, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_6_data", (PyCFunction)_wrap_BlitzArray_double_6_data, METH_O, NULL},
+	 { (char *)"BlitzArray_double_6_size", (PyCFunction)_wrap_BlitzArray_double_6_size, METH_O, NULL},
+	 { (char *)"BlitzArray_double_6_read", _wrap_BlitzArray_double_6_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_6_write", _wrap_BlitzArray_double_6_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_6_datav", (PyCFunction)_wrap_BlitzArray_double_6_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_double_6_shape0", (PyCFunction)_wrap_BlitzArray_double_6_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_double_6_shape1", (PyCFunction)_wrap_BlitzArray_double_6_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_double_6_shape2", (PyCFunction)_wrap_BlitzArray_double_6_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_double_6_shape3", (PyCFunction)_wrap_BlitzArray_double_6_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_double_6", (PyCFunction)_wrap_delete_BlitzArray_double_6, METH_O, NULL},
+	 { (char *)"BlitzArray_double_6_swigregister", BlitzArray_double_6_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_6_swiginit", BlitzArray_double_6_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_double_7", _wrap_new_BlitzArray_double_7, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_7_data", (PyCFunction)_wrap_BlitzArray_double_7_data, METH_O, NULL},
+	 { (char *)"BlitzArray_double_7_size", (PyCFunction)_wrap_BlitzArray_double_7_size, METH_O, NULL},
+	 { (char *)"BlitzArray_double_7_read", _wrap_BlitzArray_double_7_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_7_write", _wrap_BlitzArray_double_7_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_7_datav", (PyCFunction)_wrap_BlitzArray_double_7_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_double_7_shape0", (PyCFunction)_wrap_BlitzArray_double_7_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_double_7_shape1", (PyCFunction)_wrap_BlitzArray_double_7_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_double_7_shape2", (PyCFunction)_wrap_BlitzArray_double_7_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_double_7_shape3", (PyCFunction)_wrap_BlitzArray_double_7_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_double_7", (PyCFunction)_wrap_delete_BlitzArray_double_7, METH_O, NULL},
+	 { (char *)"BlitzArray_double_7_swigregister", BlitzArray_double_7_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_7_swiginit", BlitzArray_double_7_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_double_8", _wrap_new_BlitzArray_double_8, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_8_data", (PyCFunction)_wrap_BlitzArray_double_8_data, METH_O, NULL},
+	 { (char *)"BlitzArray_double_8_size", (PyCFunction)_wrap_BlitzArray_double_8_size, METH_O, NULL},
+	 { (char *)"BlitzArray_double_8_read", _wrap_BlitzArray_double_8_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_8_write", _wrap_BlitzArray_double_8_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_8_datav", (PyCFunction)_wrap_BlitzArray_double_8_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_double_8_shape0", (PyCFunction)_wrap_BlitzArray_double_8_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_double_8_shape1", (PyCFunction)_wrap_BlitzArray_double_8_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_double_8_shape2", (PyCFunction)_wrap_BlitzArray_double_8_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_double_8_shape3", (PyCFunction)_wrap_BlitzArray_double_8_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_double_8", (PyCFunction)_wrap_delete_BlitzArray_double_8, METH_O, NULL},
+	 { (char *)"BlitzArray_double_8_swigregister", BlitzArray_double_8_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_double_8_swiginit", BlitzArray_double_8_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_BlitzArray_bool_1", _wrap_new_BlitzArray_bool_1, METH_VARARGS, NULL},
 	 { (char *)"BlitzArray_bool_1_data", (PyCFunction)_wrap_BlitzArray_bool_1_data, METH_O, NULL},
 	 { (char *)"BlitzArray_bool_1_size", (PyCFunction)_wrap_BlitzArray_bool_1_size, METH_O, NULL},
@@ -16037,6 +27769,58 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_BlitzArray_bool_4", (PyCFunction)_wrap_delete_BlitzArray_bool_4, METH_O, NULL},
 	 { (char *)"BlitzArray_bool_4_swigregister", BlitzArray_bool_4_swigregister, METH_VARARGS, NULL},
 	 { (char *)"BlitzArray_bool_4_swiginit", BlitzArray_bool_4_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_bool_5", _wrap_new_BlitzArray_bool_5, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_5_data", (PyCFunction)_wrap_BlitzArray_bool_5_data, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_5_size", (PyCFunction)_wrap_BlitzArray_bool_5_size, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_5_read", _wrap_BlitzArray_bool_5_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_5_write", _wrap_BlitzArray_bool_5_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_5_datav", (PyCFunction)_wrap_BlitzArray_bool_5_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_5_shape0", (PyCFunction)_wrap_BlitzArray_bool_5_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_5_shape1", (PyCFunction)_wrap_BlitzArray_bool_5_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_5_shape2", (PyCFunction)_wrap_BlitzArray_bool_5_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_5_shape3", (PyCFunction)_wrap_BlitzArray_bool_5_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_bool_5", (PyCFunction)_wrap_delete_BlitzArray_bool_5, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_5_swigregister", BlitzArray_bool_5_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_5_swiginit", BlitzArray_bool_5_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_bool_6", _wrap_new_BlitzArray_bool_6, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_6_data", (PyCFunction)_wrap_BlitzArray_bool_6_data, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_6_size", (PyCFunction)_wrap_BlitzArray_bool_6_size, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_6_read", _wrap_BlitzArray_bool_6_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_6_write", _wrap_BlitzArray_bool_6_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_6_datav", (PyCFunction)_wrap_BlitzArray_bool_6_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_6_shape0", (PyCFunction)_wrap_BlitzArray_bool_6_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_6_shape1", (PyCFunction)_wrap_BlitzArray_bool_6_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_6_shape2", (PyCFunction)_wrap_BlitzArray_bool_6_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_6_shape3", (PyCFunction)_wrap_BlitzArray_bool_6_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_bool_6", (PyCFunction)_wrap_delete_BlitzArray_bool_6, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_6_swigregister", BlitzArray_bool_6_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_6_swiginit", BlitzArray_bool_6_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_bool_7", _wrap_new_BlitzArray_bool_7, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_7_data", (PyCFunction)_wrap_BlitzArray_bool_7_data, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_7_size", (PyCFunction)_wrap_BlitzArray_bool_7_size, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_7_read", _wrap_BlitzArray_bool_7_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_7_write", _wrap_BlitzArray_bool_7_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_7_datav", (PyCFunction)_wrap_BlitzArray_bool_7_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_7_shape0", (PyCFunction)_wrap_BlitzArray_bool_7_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_7_shape1", (PyCFunction)_wrap_BlitzArray_bool_7_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_7_shape2", (PyCFunction)_wrap_BlitzArray_bool_7_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_7_shape3", (PyCFunction)_wrap_BlitzArray_bool_7_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_bool_7", (PyCFunction)_wrap_delete_BlitzArray_bool_7, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_7_swigregister", BlitzArray_bool_7_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_7_swiginit", BlitzArray_bool_7_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_bool_8", _wrap_new_BlitzArray_bool_8, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_8_data", (PyCFunction)_wrap_BlitzArray_bool_8_data, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_8_size", (PyCFunction)_wrap_BlitzArray_bool_8_size, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_8_read", _wrap_BlitzArray_bool_8_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_8_write", _wrap_BlitzArray_bool_8_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_8_datav", (PyCFunction)_wrap_BlitzArray_bool_8_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_8_shape0", (PyCFunction)_wrap_BlitzArray_bool_8_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_8_shape1", (PyCFunction)_wrap_BlitzArray_bool_8_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_8_shape2", (PyCFunction)_wrap_BlitzArray_bool_8_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_8_shape3", (PyCFunction)_wrap_BlitzArray_bool_8_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_bool_8", (PyCFunction)_wrap_delete_BlitzArray_bool_8, METH_O, NULL},
+	 { (char *)"BlitzArray_bool_8_swigregister", BlitzArray_bool_8_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_bool_8_swiginit", BlitzArray_bool_8_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_BlitzArray_int_1", _wrap_new_BlitzArray_int_1, METH_VARARGS, NULL},
 	 { (char *)"BlitzArray_int_1_data", (PyCFunction)_wrap_BlitzArray_int_1_data, METH_O, NULL},
 	 { (char *)"BlitzArray_int_1_size", (PyCFunction)_wrap_BlitzArray_int_1_size, METH_O, NULL},
@@ -16089,6 +27873,58 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_BlitzArray_int_4", (PyCFunction)_wrap_delete_BlitzArray_int_4, METH_O, NULL},
 	 { (char *)"BlitzArray_int_4_swigregister", BlitzArray_int_4_swigregister, METH_VARARGS, NULL},
 	 { (char *)"BlitzArray_int_4_swiginit", BlitzArray_int_4_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_int_5", _wrap_new_BlitzArray_int_5, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_5_data", (PyCFunction)_wrap_BlitzArray_int_5_data, METH_O, NULL},
+	 { (char *)"BlitzArray_int_5_size", (PyCFunction)_wrap_BlitzArray_int_5_size, METH_O, NULL},
+	 { (char *)"BlitzArray_int_5_read", _wrap_BlitzArray_int_5_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_5_write", _wrap_BlitzArray_int_5_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_5_datav", (PyCFunction)_wrap_BlitzArray_int_5_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_int_5_shape0", (PyCFunction)_wrap_BlitzArray_int_5_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_int_5_shape1", (PyCFunction)_wrap_BlitzArray_int_5_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_int_5_shape2", (PyCFunction)_wrap_BlitzArray_int_5_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_int_5_shape3", (PyCFunction)_wrap_BlitzArray_int_5_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_int_5", (PyCFunction)_wrap_delete_BlitzArray_int_5, METH_O, NULL},
+	 { (char *)"BlitzArray_int_5_swigregister", BlitzArray_int_5_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_5_swiginit", BlitzArray_int_5_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_int_6", _wrap_new_BlitzArray_int_6, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_6_data", (PyCFunction)_wrap_BlitzArray_int_6_data, METH_O, NULL},
+	 { (char *)"BlitzArray_int_6_size", (PyCFunction)_wrap_BlitzArray_int_6_size, METH_O, NULL},
+	 { (char *)"BlitzArray_int_6_read", _wrap_BlitzArray_int_6_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_6_write", _wrap_BlitzArray_int_6_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_6_datav", (PyCFunction)_wrap_BlitzArray_int_6_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_int_6_shape0", (PyCFunction)_wrap_BlitzArray_int_6_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_int_6_shape1", (PyCFunction)_wrap_BlitzArray_int_6_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_int_6_shape2", (PyCFunction)_wrap_BlitzArray_int_6_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_int_6_shape3", (PyCFunction)_wrap_BlitzArray_int_6_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_int_6", (PyCFunction)_wrap_delete_BlitzArray_int_6, METH_O, NULL},
+	 { (char *)"BlitzArray_int_6_swigregister", BlitzArray_int_6_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_6_swiginit", BlitzArray_int_6_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_int_7", _wrap_new_BlitzArray_int_7, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_7_data", (PyCFunction)_wrap_BlitzArray_int_7_data, METH_O, NULL},
+	 { (char *)"BlitzArray_int_7_size", (PyCFunction)_wrap_BlitzArray_int_7_size, METH_O, NULL},
+	 { (char *)"BlitzArray_int_7_read", _wrap_BlitzArray_int_7_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_7_write", _wrap_BlitzArray_int_7_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_7_datav", (PyCFunction)_wrap_BlitzArray_int_7_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_int_7_shape0", (PyCFunction)_wrap_BlitzArray_int_7_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_int_7_shape1", (PyCFunction)_wrap_BlitzArray_int_7_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_int_7_shape2", (PyCFunction)_wrap_BlitzArray_int_7_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_int_7_shape3", (PyCFunction)_wrap_BlitzArray_int_7_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_int_7", (PyCFunction)_wrap_delete_BlitzArray_int_7, METH_O, NULL},
+	 { (char *)"BlitzArray_int_7_swigregister", BlitzArray_int_7_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_7_swiginit", BlitzArray_int_7_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_BlitzArray_int_8", _wrap_new_BlitzArray_int_8, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_8_data", (PyCFunction)_wrap_BlitzArray_int_8_data, METH_O, NULL},
+	 { (char *)"BlitzArray_int_8_size", (PyCFunction)_wrap_BlitzArray_int_8_size, METH_O, NULL},
+	 { (char *)"BlitzArray_int_8_read", _wrap_BlitzArray_int_8_read, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_8_write", _wrap_BlitzArray_int_8_write, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_8_datav", (PyCFunction)_wrap_BlitzArray_int_8_datav, METH_O, NULL},
+	 { (char *)"BlitzArray_int_8_shape0", (PyCFunction)_wrap_BlitzArray_int_8_shape0, METH_O, NULL},
+	 { (char *)"BlitzArray_int_8_shape1", (PyCFunction)_wrap_BlitzArray_int_8_shape1, METH_O, NULL},
+	 { (char *)"BlitzArray_int_8_shape2", (PyCFunction)_wrap_BlitzArray_int_8_shape2, METH_O, NULL},
+	 { (char *)"BlitzArray_int_8_shape3", (PyCFunction)_wrap_BlitzArray_int_8_shape3, METH_O, NULL},
+	 { (char *)"delete_BlitzArray_int_8", (PyCFunction)_wrap_delete_BlitzArray_int_8, METH_O, NULL},
+	 { (char *)"BlitzArray_int_8_swigregister", BlitzArray_int_8_swigregister, METH_VARARGS, NULL},
+	 { (char *)"BlitzArray_int_8_swiginit", BlitzArray_int_8_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -16099,18 +27935,34 @@ static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool
 static swig_type_info _swigt__p_blitz__ArrayT_bool_2_t = {"_p_blitz__ArrayT_bool_2_t", "blitz::Array< bool,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_3_t = {"_p_blitz__ArrayT_bool_3_t", "blitz::Array< bool,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_4_t = {"_p_blitz__ArrayT_bool_4_t", "blitz::Array< bool,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_bool_5_t = {"_p_blitz__ArrayT_bool_5_t", "blitz::Array< bool,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_bool_6_t = {"_p_blitz__ArrayT_bool_6_t", "blitz::Array< bool,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_bool_7_t = {"_p_blitz__ArrayT_bool_7_t", "blitz::Array< bool,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_bool_8_t = {"_p_blitz__ArrayT_bool_8_t", "blitz::Array< bool,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_1_t = {"_p_blitz__ArrayT_double_1_t", "blitz::Array< double,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_2_t = {"_p_blitz__ArrayT_double_2_t", "blitz::Array< double,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_3_t = {"_p_blitz__ArrayT_double_3_t", "blitz::Array< double,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_4_t = {"_p_blitz__ArrayT_double_4_t", "blitz::Array< double,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_double_5_t = {"_p_blitz__ArrayT_double_5_t", "blitz::Array< double,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_double_6_t = {"_p_blitz__ArrayT_double_6_t", "blitz::Array< double,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_double_7_t = {"_p_blitz__ArrayT_double_7_t", "blitz::Array< double,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_double_8_t = {"_p_blitz__ArrayT_double_8_t", "blitz::Array< double,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_1_t = {"_p_blitz__ArrayT_int_1_t", "blitz::Array< int,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_2_t = {"_p_blitz__ArrayT_int_2_t", "blitz::Array< int,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_3_t = {"_p_blitz__ArrayT_int_3_t", "blitz::Array< int,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_4_t = {"_p_blitz__ArrayT_int_4_t", "blitz::Array< int,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_int_5_t = {"_p_blitz__ArrayT_int_5_t", "blitz::Array< int,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_int_6_t = {"_p_blitz__ArrayT_int_6_t", "blitz::Array< int,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_int_7_t = {"_p_blitz__ArrayT_int_7_t", "blitz::Array< int,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_int_8_t = {"_p_blitz__ArrayT_int_8_t", "blitz::Array< int,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__GeneralArrayStorageT_1_t = {"_p_blitz__GeneralArrayStorageT_1_t", "blitz::GeneralArrayStorage< 1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__GeneralArrayStorageT_2_t = {"_p_blitz__GeneralArrayStorageT_2_t", "blitz::GeneralArrayStorage< 2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__GeneralArrayStorageT_3_t = {"_p_blitz__GeneralArrayStorageT_3_t", "blitz::GeneralArrayStorage< 3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__GeneralArrayStorageT_4_t = {"_p_blitz__GeneralArrayStorageT_4_t", "blitz::GeneralArrayStorage< 4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__GeneralArrayStorageT_5_t = {"_p_blitz__GeneralArrayStorageT_5_t", "blitz::GeneralArrayStorage< 5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__GeneralArrayStorageT_6_t = {"_p_blitz__GeneralArrayStorageT_6_t", "blitz::GeneralArrayStorage< 6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__GeneralArrayStorageT_7_t = {"_p_blitz__GeneralArrayStorageT_7_t", "blitz::GeneralArrayStorage< 7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__GeneralArrayStorageT_8_t = {"_p_blitz__GeneralArrayStorageT_8_t", "blitz::GeneralArrayStorage< 8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__Range = {"_p_blitz__Range", "blitz::Range *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_bool = {"_p_bool", "bool *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
@@ -16123,18 +27975,34 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_bool_2_t,
   &_swigt__p_blitz__ArrayT_bool_3_t,
   &_swigt__p_blitz__ArrayT_bool_4_t,
+  &_swigt__p_blitz__ArrayT_bool_5_t,
+  &_swigt__p_blitz__ArrayT_bool_6_t,
+  &_swigt__p_blitz__ArrayT_bool_7_t,
+  &_swigt__p_blitz__ArrayT_bool_8_t,
   &_swigt__p_blitz__ArrayT_double_1_t,
   &_swigt__p_blitz__ArrayT_double_2_t,
   &_swigt__p_blitz__ArrayT_double_3_t,
   &_swigt__p_blitz__ArrayT_double_4_t,
+  &_swigt__p_blitz__ArrayT_double_5_t,
+  &_swigt__p_blitz__ArrayT_double_6_t,
+  &_swigt__p_blitz__ArrayT_double_7_t,
+  &_swigt__p_blitz__ArrayT_double_8_t,
   &_swigt__p_blitz__ArrayT_int_1_t,
   &_swigt__p_blitz__ArrayT_int_2_t,
   &_swigt__p_blitz__ArrayT_int_3_t,
   &_swigt__p_blitz__ArrayT_int_4_t,
+  &_swigt__p_blitz__ArrayT_int_5_t,
+  &_swigt__p_blitz__ArrayT_int_6_t,
+  &_swigt__p_blitz__ArrayT_int_7_t,
+  &_swigt__p_blitz__ArrayT_int_8_t,
   &_swigt__p_blitz__GeneralArrayStorageT_1_t,
   &_swigt__p_blitz__GeneralArrayStorageT_2_t,
   &_swigt__p_blitz__GeneralArrayStorageT_3_t,
   &_swigt__p_blitz__GeneralArrayStorageT_4_t,
+  &_swigt__p_blitz__GeneralArrayStorageT_5_t,
+  &_swigt__p_blitz__GeneralArrayStorageT_6_t,
+  &_swigt__p_blitz__GeneralArrayStorageT_7_t,
+  &_swigt__p_blitz__GeneralArrayStorageT_8_t,
   &_swigt__p_blitz__Range,
   &_swigt__p_bool,
   &_swigt__p_char,
@@ -16147,18 +28015,34 @@ static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz_
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_3_t[] = {  {&_swigt__p_blitz__ArrayT_bool_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_4_t[] = {  {&_swigt__p_blitz__ArrayT_bool_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_bool_5_t[] = {  {&_swigt__p_blitz__ArrayT_bool_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_bool_6_t[] = {  {&_swigt__p_blitz__ArrayT_bool_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_bool_7_t[] = {  {&_swigt__p_blitz__ArrayT_bool_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_bool_8_t[] = {  {&_swigt__p_blitz__ArrayT_bool_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_1_t[] = {  {&_swigt__p_blitz__ArrayT_double_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_2_t[] = {  {&_swigt__p_blitz__ArrayT_double_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_3_t[] = {  {&_swigt__p_blitz__ArrayT_double_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_4_t[] = {  {&_swigt__p_blitz__ArrayT_double_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_double_5_t[] = {  {&_swigt__p_blitz__ArrayT_double_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_double_6_t[] = {  {&_swigt__p_blitz__ArrayT_double_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_double_7_t[] = {  {&_swigt__p_blitz__ArrayT_double_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_double_8_t[] = {  {&_swigt__p_blitz__ArrayT_double_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_1_t[] = {  {&_swigt__p_blitz__ArrayT_int_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_2_t[] = {  {&_swigt__p_blitz__ArrayT_int_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_3_t[] = {  {&_swigt__p_blitz__ArrayT_int_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_4_t[] = {  {&_swigt__p_blitz__ArrayT_int_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_int_5_t[] = {  {&_swigt__p_blitz__ArrayT_int_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_int_6_t[] = {  {&_swigt__p_blitz__ArrayT_int_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_int_7_t[] = {  {&_swigt__p_blitz__ArrayT_int_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__GeneralArrayStorageT_1_t[] = {  {&_swigt__p_blitz__GeneralArrayStorageT_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__GeneralArrayStorageT_2_t[] = {  {&_swigt__p_blitz__GeneralArrayStorageT_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__GeneralArrayStorageT_3_t[] = {  {&_swigt__p_blitz__GeneralArrayStorageT_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__GeneralArrayStorageT_4_t[] = {  {&_swigt__p_blitz__GeneralArrayStorageT_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__GeneralArrayStorageT_5_t[] = {  {&_swigt__p_blitz__GeneralArrayStorageT_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__GeneralArrayStorageT_6_t[] = {  {&_swigt__p_blitz__GeneralArrayStorageT_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__GeneralArrayStorageT_7_t[] = {  {&_swigt__p_blitz__GeneralArrayStorageT_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__GeneralArrayStorageT_8_t[] = {  {&_swigt__p_blitz__GeneralArrayStorageT_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__Range[] = {  {&_swigt__p_blitz__Range, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_bool[] = {  {&_swigt__p_bool, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
@@ -16171,18 +28055,34 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_bool_2_t,
   _swigc__p_blitz__ArrayT_bool_3_t,
   _swigc__p_blitz__ArrayT_bool_4_t,
+  _swigc__p_blitz__ArrayT_bool_5_t,
+  _swigc__p_blitz__ArrayT_bool_6_t,
+  _swigc__p_blitz__ArrayT_bool_7_t,
+  _swigc__p_blitz__ArrayT_bool_8_t,
   _swigc__p_blitz__ArrayT_double_1_t,
   _swigc__p_blitz__ArrayT_double_2_t,
   _swigc__p_blitz__ArrayT_double_3_t,
   _swigc__p_blitz__ArrayT_double_4_t,
+  _swigc__p_blitz__ArrayT_double_5_t,
+  _swigc__p_blitz__ArrayT_double_6_t,
+  _swigc__p_blitz__ArrayT_double_7_t,
+  _swigc__p_blitz__ArrayT_double_8_t,
   _swigc__p_blitz__ArrayT_int_1_t,
   _swigc__p_blitz__ArrayT_int_2_t,
   _swigc__p_blitz__ArrayT_int_3_t,
   _swigc__p_blitz__ArrayT_int_4_t,
+  _swigc__p_blitz__ArrayT_int_5_t,
+  _swigc__p_blitz__ArrayT_int_6_t,
+  _swigc__p_blitz__ArrayT_int_7_t,
+  _swigc__p_blitz__ArrayT_int_8_t,
   _swigc__p_blitz__GeneralArrayStorageT_1_t,
   _swigc__p_blitz__GeneralArrayStorageT_2_t,
   _swigc__p_blitz__GeneralArrayStorageT_3_t,
   _swigc__p_blitz__GeneralArrayStorageT_4_t,
+  _swigc__p_blitz__GeneralArrayStorageT_5_t,
+  _swigc__p_blitz__GeneralArrayStorageT_6_t,
+  _swigc__p_blitz__GeneralArrayStorageT_7_t,
+  _swigc__p_blitz__GeneralArrayStorageT_8_t,
   _swigc__p_blitz__Range,
   _swigc__p_bool,
   _swigc__p_char,

@@ -41,6 +41,20 @@ BOOST_AUTO_TEST_CASE(sc2rpc)
   BOOST_CHECK(distance(pt_geod, *pt) < 10.0);
 }
 
+BOOST_AUTO_TEST_CASE(basic)
+{
+  Geodetic gexpect(-59.6722, 45.2541, 661831);
+  BOOST_CHECK(distance(*orb->position_cf(t), gexpect) < 10);
+  boost::array<double, 3> p1 = orb->position_cf(t)->position;
+  double tdelta = 1.0;
+  boost::array<double, 3> p2 = orb->position_cf(t + tdelta)->position;
+  boost::shared_ptr<QuaternionOrbitData> od = 
+    boost::dynamic_pointer_cast<QuaternionOrbitData>(orb->orbit_data(t));
+  boost::array<double, 3> v = od->velocity_cf();
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK(fabs((p2[i] - p1[i]) / tdelta - v[i]) < 1.0);
+}
+
 BOOST_AUTO_TEST_CASE(derivative_ci)
 {
   TimeWithDerivative t2 = 
@@ -179,6 +193,19 @@ BOOST_AUTO_TEST_CASE(derivative_sc_look2)
   BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
 }
 
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  std::string d = serialize_write_string(orb);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<Orbit> orbr = 
+    serialize_read_string<Orbit>(d);
+  BOOST_CHECK(fabs(orb->min_time() - orbr->min_time()) < 1e-3);
+  BOOST_CHECK(fabs(orb->max_time() - orbr->max_time()) < 1e-3);
+}
 
 BOOST_AUTO_TEST_SUITE_END()
 

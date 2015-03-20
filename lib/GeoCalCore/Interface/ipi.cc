@@ -2,8 +2,29 @@
 #include "geocal_gsl_root.h"
 #include "ostream_pad.h"
 #include <boost/foreach.hpp>
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void Ipi::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Ipi);
+  ar & GEOCAL_NVP(orb)
+    & GEOCAL_NVP(cam)
+    & GEOCAL_NVP_(band)
+    & GEOCAL_NVP(tt)
+    & GEOCAL_NVP_(min_time)
+    & GEOCAL_NVP_(max_time)
+    & GEOCAL_NVP_(local_time_window_size)
+    & GEOCAL_NVP_(root_min_separation)
+    & GEOCAL_NVP_(time_tolerance);
+  last_time = min_time_;
+}
+
+GEOCAL_IMPLEMENT(Ipi);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor. If you only want to get the Time from the Ipi and not

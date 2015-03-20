@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -161,12 +164,8 @@ class EciTod(geocal_swig.ground_coordinate.CartesianInertial):
         """
         return _eci_tod.EciTod_to_eci(self, *args)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.position[0],self.position[1],self.position[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _eci_tod.delete_EciTod
 EciTod.reference_surface_intersect_approximate = new_instancemethod(_eci_tod.EciTod_reference_surface_intersect_approximate,None,EciTod)

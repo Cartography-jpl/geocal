@@ -1,6 +1,7 @@
 #ifndef HDF_ORBIT_H
 #define HDF_ORBIT_H
-#include "orbit.h"
+#include "orbit_quaternion_list.h"
+#include "eci_tod.h"
 #include "hdf_file.h"
 #include <map>
 
@@ -29,15 +30,20 @@ namespace GeoCal {
    Eci, as is a small wrapper to give the conversion to Time.
 *******************************************************************/
 
-template<class PositionType, class TimeCreatorType> class HdfOrbit : public Orbit {
+template<class PositionType, class TimeCreatorType> class HdfOrbit : 
+    public OrbitQuaternionList {
 public:
 
-  HdfOrbit(const std::string& Fname, const std::string& Base_group = "Orbit");
-  virtual ~HdfOrbit() {}
+//-----------------------------------------------------------------------
+/// Read the given orbit data file. You can optional pass the base
+/// group of the HDF file, the default is "/Orbit"
+//-----------------------------------------------------------------------
 
-  virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
-  virtual boost::shared_ptr<OrbitData> 
-  orbit_data(const TimeWithDerivative& T) const;
+  HdfOrbit(const std::string& Fname, const std::string& Base_group = "Orbit")
+    : fname(Fname),
+      bgroup(Base_group)
+  { init(); }
+  virtual ~HdfOrbit() {}
 
 //-----------------------------------------------------------------------
 /// Print to stream
@@ -62,7 +68,12 @@ public:
 //-----------------------------------------------------------------------
 
   const std::string& base_group() const {return bgroup;}
+protected:
+  virtual boost::shared_ptr<QuaternionOrbitData> 
+  orbit_data_create(Time T) const;
 private:
+  // Separate out initialization to make serialization a little easier
+  void init();
   std::string fname;
   std::string bgroup;
   typedef std::map<Time, boost::math::quaternion<double> > 
@@ -71,17 +82,21 @@ private:
   typedef typename std::pair<PositionType, boost::array<double, 3> > posvel;
   typedef std::map<Time,  posvel> time_posmap;
   time_posmap pos_map;
+  HdfOrbit() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 //-----------------------------------------------------------------------
-/// Read the given orbit data file. You can optional pass the base
-/// group of the HDF file, the default is "/Orbit"
+/// Separate out initialization to make serialization a little easier
 //-----------------------------------------------------------------------
 
 template<class PositionType, class TimeCreatorType> inline 
-HdfOrbit<PositionType, TimeCreatorType>::HdfOrbit(const std::string& Fname, const std::string& Base_group)
-  :fname(Fname),
-   bgroup(Base_group)
+void HdfOrbit<PositionType, TimeCreatorType>::init()
 {
   using namespace blitz;
   TimeCreatorType tc;
@@ -128,21 +143,25 @@ HdfOrbit<PositionType, TimeCreatorType>::HdfOrbit(const std::string& Fname, cons
       << "  Base group: " << bgroup << "\n";
     throw e;
   }
+  // Do lazy evaluation of orbit data, since orbit file may be much
+  // bigger than the times we are interested (e.g., a full day).
+  boost::shared_ptr<QuaternionOrbitData> null;
   for(int i = 0; i < tdouble2.rows(); ++i) {
     Time t = tc(tdouble2(i));
     att_map[t] = boost::math::quaternion<double>(quat(i, 0), quat(i, 1),
 						 quat(i, 2), quat(i, 3));
+    orbit_data_map[t] = null;
   }
   min_tm = std::max(att_map.begin()->first, pos_map.begin()->first);
   max_tm = std::min(att_map.rbegin()->first, pos_map.rbegin()->first);
 }
 
 //-----------------------------------------------------------------------
-/// Return orbit data for given time.
+/// Do full calculation to get orbit data
 //-----------------------------------------------------------------------
 
 template<class PositionType, class TimeCreatorType>
-inline boost::shared_ptr<OrbitData> HdfOrbit<PositionType, TimeCreatorType>::orbit_data(Time T) const
+inline boost::shared_ptr<QuaternionOrbitData> HdfOrbit<PositionType, TimeCreatorType>::orbit_data_create(Time T) const
 {
   range_check(T, min_time(), max_time());
   time_attmap::const_iterator i = att_map.lower_bound(T);
@@ -174,61 +193,11 @@ inline boost::shared_ptr<OrbitData> HdfOrbit<PositionType, TimeCreatorType>::orb
     interpolate(p1, v1, p2, v2, T - t1, t2 - t1, pos, vel);
   }
   boost::shared_ptr<PositionType> pv(new PositionType(pos[0], pos[1], pos[2]));
-  return boost::shared_ptr<OrbitData>(new QuaternionOrbitData(T, pv, vel, att));
+  return boost::shared_ptr<QuaternionOrbitData>(new QuaternionOrbitData(T, pv, vel, att));
 }
 
-template<class PositionType, class TimeCreatorType>
-inline boost::shared_ptr<OrbitData> HdfOrbit<PositionType, TimeCreatorType>::orbit_data(const TimeWithDerivative& T) const
-{
-  range_check(T.value(), min_time(), max_time());
-  time_attmap::const_iterator i = att_map.lower_bound(T.value());
-  boost::math::quaternion<AutoDerivative<double> > att;
-  if(i->first - T.value() == 0.0)
-    att = boost::math::quaternion<AutoDerivative<double> >
-      (i->second.R_component_1(), i->second.R_component_2(),
-       i->second.R_component_3(), i->second.R_component_4());
-  else {
-    boost::math::quaternion<AutoDerivative<double> > 
-      a2(i->second.R_component_1(), i->second.R_component_2(),
-	 i->second.R_component_3(), i->second.R_component_4());
-    Time t2 = i->first;
-    --i;
-    boost::math::quaternion<AutoDerivative<double> > 
-      a1(i->second.R_component_1(), i->second.R_component_2(),
-	 i->second.R_component_3(), i->second.R_component_4());
-    Time t1 = i->first;
-    att = interpolate(a1, a2, T - t1, t2 - t1);
-  }
-  boost::array<AutoDerivative<double>, 3> pos;
-  boost::array<AutoDerivative<double>, 3> vel;
-  typename time_posmap::const_iterator i2 = pos_map.lower_bound(T.value());
-  if(i2->first - T.value() == 0.0) {
-    for(int j = 0; j < 3; ++j) {
-      pos[j] = i2->second.first.position[j];
-      vel[j] = i2->second.second[j];
-    }
-  } else {
-    boost::array<AutoDerivative<double>, 3> p1, p2;
-    boost::array<AutoDerivative<double>, 3> v1, v2;
-    for(int j = 0; j < 3; ++j) {
-      p2[j] = i2->second.first.position[j];
-      v2[j] = i2->second.second[j];
-    }
-    Time t2 = i2->first;
-    --i2;
-    for(int j = 0; j < 3; ++j) {
-      p1[j] = i2->second.first.position[j];
-      v1[j] = i2->second.second[j];
-    }
-    Time t1 = i2->first;
-    interpolate(p1, v1, p2, v2, T - t1, t2 - t1, pos, vel);
-  }
-  boost::shared_ptr<PositionType> pv(new PositionType(pos[0].value(), 
-						      pos[1].value(), 
-						      pos[2].value()));
-  return boost::shared_ptr<OrbitData>(new QuaternionOrbitData(T, pv, pos, vel, 
-							      att));
+typedef HdfOrbit<EciTod, TimeAcsCreator> HdfOrbit_EciTod_TimeAcs;
 }
 
-}
+GEOCAL_EXPORT_KEY(HdfOrbit_EciTod_TimeAcs);
 #endif

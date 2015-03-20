@@ -18,7 +18,7 @@ public:
     gimbal_angle = 0, 0, 0;
     ypr_corr = 0, 0, 0;
     try {
-      // This might fail if GDAL doesn't support h
+      // This might fail if GDAL doesn't support hdf
       orb.reset(new AirMspiOrbit(test_data_dir() + "airmspi_orbit_file_test.hdf", 
 				 gimbal_angle, ypr_corr,
 				 datum));
@@ -107,6 +107,10 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(derivative_ci)
 {
+  // We might be missing orb if GDAL support wasn't built in. Silently
+  // skip test if we are missing orb.
+  if(!orb)
+    return;
   Time t = epoch + 10.5;
   TimeWithDerivative t2 = 
     TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
@@ -128,6 +132,10 @@ BOOST_AUTO_TEST_CASE(derivative_ci)
 
 BOOST_AUTO_TEST_CASE(derivative_cf)
 {
+  // We might be missing orb if GDAL support wasn't built in. Silently
+  // skip test if we are missing orb.
+  if(!orb)
+    return;
   Time t = epoch + 10.5;
   TimeWithDerivative t2 = 
     TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
@@ -149,6 +157,10 @@ BOOST_AUTO_TEST_CASE(derivative_cf)
 
 BOOST_AUTO_TEST_CASE(derivative_ci_look)
 {
+  // We might be missing orb if GDAL support wasn't built in. Silently
+  // skip test if we are missing orb.
+  if(!orb)
+    return;
   Time t = epoch + 10.5;
   TimeWithDerivative t2 = 
     TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
@@ -174,6 +186,10 @@ BOOST_AUTO_TEST_CASE(derivative_ci_look)
 
 BOOST_AUTO_TEST_CASE(derivative_cf_look)
 {
+  // We might be missing orb if GDAL support wasn't built in. Silently
+  // skip test if we are missing orb.
+  if(!orb)
+    return;
   Time t = epoch + 10.5;
   TimeWithDerivative t2 = 
     TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
@@ -199,6 +215,10 @@ BOOST_AUTO_TEST_CASE(derivative_cf_look)
 
 BOOST_AUTO_TEST_CASE(derivative_sc_look1)
 {
+  // We might be missing orb if GDAL support wasn't built in. Silently
+  // skip test if we are missing orb.
+  if(!orb)
+    return;
   Time t = epoch + 10.5;
   TimeWithDerivative t2 = 
     TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
@@ -225,6 +245,10 @@ BOOST_AUTO_TEST_CASE(derivative_sc_look1)
 
 BOOST_AUTO_TEST_CASE(derivative_sc_look2)
 {
+  // We might be missing orb if GDAL support wasn't built in. Silently
+  // skip test if we are missing orb.
+  if(!orb)
+    return;
   Time t = epoch + 10.5;
   TimeWithDerivative t2 = 
     TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));

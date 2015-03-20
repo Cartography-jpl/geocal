@@ -14,6 +14,8 @@ public:
   EciTodBurl(double X, double Y, double Z);
   EciTodBurl(const boost::array<double, 3>& Pos);
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const;
+  virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) 
+    const;
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf(const Time& T) 
     const;
   virtual boost::shared_ptr<CartesianInertial> 
@@ -26,6 +28,6 @@ public:
     static void set_delta_ut1(double v) {GeoCal::EciTodBurl::delta_ut1 = v;}
     static double get_delta_ut1() { return GeoCal::EciTodBurl::delta_ut1; }
   }
-  %pickle_init(1, self.position[0], self.position[1], self.position[2])
+  %pickle_serialization();
 };
 }

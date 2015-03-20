@@ -1,10 +1,25 @@
+#include "geocal_internal_config.h"
 #include "refraction.h"
 #include "constant.h"
 #include "ecr.h"
 #include "geodetic.h"
+#include "geocal_serialize_support.h"
 #include <blitz/array.h>
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void Refraction::serialize
+(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Refraction);
+  ar & GEOCAL_NVP(alt) & GEOCAL_NVP(lat) & GEOCAL_NVP(index_ref)
+    & GEOCAL_NVP(k1) &  GEOCAL_NVP(k2) & GEOCAL_NVP(dens_fac);
+}
+
+GEOCAL_IMPLEMENT(Refraction);
+#endif
 
 //-----------------------------------------------------------------------
 /// This sets up for a Refraction calculation. A representative

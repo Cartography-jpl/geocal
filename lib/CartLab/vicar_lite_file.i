@@ -56,8 +56,8 @@ public:
          k.push_back((*i).first);
        return k;
     }
-  }	
-  %pickle_init(1, self.file_name, self.access, self.force_area_pixel)
+  }
+  %pickle_serialization();
 };
 
 class VicarLiteRasterImage : public RasterImage {
@@ -79,23 +79,7 @@ public:
   %python_attribute(is_compressed, bool)
   %python_attribute(band_id, int)
   %python_attribute(force_map_info, bool)
-  %pythoncode {
-@classmethod
-def pickle_format_version(cls):
-  return 2
-
-def __reduce__(self):
-  if(self.force_map_info):
-     return _new_from_init, (self.__class__, 2, self.file.file_name, 
-		          self.map_info, self.band_id, self.file.access, 
-			  self.number_tile_line, self.number_tile_sample,
-			  self.file.force_area_pixel)
-  else:
-     return _new_from_init, (self.__class__, 2, self.file.file_name, 
-			  self.band_id, self.file.access, 
-			  self.number_tile_line, self.number_tile_sample,
-			  self.file.force_area_pixel)
-}
+  %pickle_serialization();
 };
 
 class VicarLiteDem : public DemMapInfo {
@@ -108,8 +92,7 @@ public:
   %python_attribute2(file, file_ptr, boost::shared_ptr<VicarLiteFile>)
   virtual double elevation(int Y_index, int X_index) const;
   %python_attribute(band, int)
-  %pickle_init(1, self.file.file_name, self.outside_dem_is_error,
-	       self.datum, self.band)
+  %pickle_serialization();
 };
 
 }

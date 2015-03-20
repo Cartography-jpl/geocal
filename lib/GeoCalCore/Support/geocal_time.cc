@@ -1,4 +1,6 @@
+#include "geocal_internal_config.h"
 #include "geocal_time.h"
+#include "geocal_serialize_support.h"
 #ifdef HAVE_SPICE
 #include "spice_helper.h"
 extern "C" {
@@ -12,7 +14,19 @@ extern "C" {
 #include <boost/lexical_cast.hpp>
 #include <boost/regex.hpp>
 #include <boost/foreach.hpp>
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void Time::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Time);
+  ar & GEOCAL_NVP_(time_pgs);
+}
+
+GEOCAL_IMPLEMENT(Time);
+#endif
 
 const Time Time::min_valid_time = Time::time_pgs(-1009843218.0);
 const Time Time::max_valid_time = Time::time_pgs(252676368006.0);

@@ -57,32 +57,6 @@ namespace GeoCal {
 
   class Rpc : public GenericObject {
   public:
-%pythoncode {
-@classmethod
-def pickle_format_version(cls):
-  return 1
-
-def __reduce__(self):
-  return _new_rpc, (self.__class__, 1, self.rpc_type == Rpc.RPC_A,
-		    self.error_bias,
-                    self.error_random,
-		    self.height_offset,
-		    self.height_scale,
-		    self.latitude_offset,
-		    self.latitude_scale,
-		    self.longitude_offset,
-		    self.longitude_scale,
-		    self.line_offset,
-		    self.line_scale,
-		    self.sample_offset,
-		    self.sample_scale,
-		    list(self.line_denominator),
-		    list(self.line_numerator),
-		    list(self.sample_denominator),
-		    list(self.sample_numerator),
-		    list(self.fit_line_numerator),
-		    list(self.fit_sample_numerator))
-}
     std::string print_to_string() const;
     enum RpcType {RPC_A, RPC_B};
     RpcType rpc_type;
@@ -142,5 +116,6 @@ def __reduce__(self):
 		      double Sample_scale = 1) const;
     Rpc rpc_type_a() const;
     Rpc rpc_type_b() const;
+    %pickle_serialization()
   };
 }

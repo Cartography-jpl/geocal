@@ -48,6 +48,7 @@ public:
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf(const Time& T) 
     const;
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const;
+  virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const;
 
 //-----------------------------------------------------------------------
 /// Create an instance of whatever type of CartesianInertial this is.
@@ -68,7 +69,12 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
 
+GEOCAL_EXPORT_KEY(EciTod);
 #endif

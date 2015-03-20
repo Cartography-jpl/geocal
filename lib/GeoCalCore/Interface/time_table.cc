@@ -2,8 +2,19 @@
 #include "geocal_exception.h"
 #include <cmath>
 #include <algorithm>
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void TimeTable::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(TimeTable);
+}
+
+GEOCAL_IMPLEMENT(TimeTable);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor, creates time table from Min_time to Max_time with
@@ -29,7 +40,7 @@ ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Min_time,
 ImageCoordinate ConstantSpacingTimeTable::image_coordinate(Time T, 
 const FrameCoordinate& F) const
 {
-  range_check(T, min_time(), max_time());
+  range_check_inclusive(T, min_time(), max_time());
   double line = (T  - min_time()) / tspace + F.line;
   return ImageCoordinate(line, F.sample);
 }
@@ -44,7 +55,7 @@ ConstantSpacingTimeTable::image_coordinate_with_derivative
 (const TimeWithDerivative& T, 
  const FrameCoordinateWithDerivative& F) const
 {
-  range_check(T.value(), min_time(), max_time());
+  range_check_inclusive(T.value(), min_time(), max_time());
   AutoDerivative<double> line = (T  - min_time()) / tspace + F.line;
   return ImageCoordinateWithDerivative(line, F.sample);
 }
@@ -115,7 +126,7 @@ MeasuredTimeTable::MeasuredTimeTable(const std::vector<Time>& Time_list,
 ImageCoordinate MeasuredTimeTable::image_coordinate(Time T, 
 const FrameCoordinate& F) const
 {
-  range_check(T, min_time(), max_time());
+  range_check_inclusive(T, min_time(), max_time());
   int i = (int)(std::lower_bound(tlist.begin(), tlist.end(), T)
 		- tlist.begin());
   double line;
@@ -138,7 +149,7 @@ MeasuredTimeTable::image_coordinate_with_derivative
 (const TimeWithDerivative& T, 
 const FrameCoordinateWithDerivative& F) const
 {
-  range_check(T.value(), min_time(), max_time());
+  range_check_inclusive(T.value(), min_time(), max_time());
   int i = (int)(std::lower_bound(tlist.begin(), tlist.end(), T.value())
 		- tlist.begin());
   AutoDerivative<double> line;

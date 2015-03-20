@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -233,6 +236,16 @@ class IgcSimulated(geocal_swig.calc_raster.CalcRaster):
       return _new_from_init, (self.__class__, 1, self.igc,self.map_projected_image,self.avg_factor,self.read_into_memory,self.number_tile_line,self.number_tile_sample,self.fill_value)
 
     __swig_destroy__ = _igc_simulated.delete_IgcSimulated
+IgcSimulated._v_number_line = new_instancemethod(_igc_simulated.IgcSimulated__v_number_line,None,IgcSimulated)
+IgcSimulated._v_number_sample = new_instancemethod(_igc_simulated.IgcSimulated__v_number_sample,None,IgcSimulated)
+IgcSimulated._v_number_tile_line = new_instancemethod(_igc_simulated.IgcSimulated__v_number_tile_line,None,IgcSimulated)
+IgcSimulated._v_number_tile_sample = new_instancemethod(_igc_simulated.IgcSimulated__v_number_tile_sample,None,IgcSimulated)
+IgcSimulated._v_has_map_info = new_instancemethod(_igc_simulated.IgcSimulated__v_has_map_info,None,IgcSimulated)
+IgcSimulated._v_map_info = new_instancemethod(_igc_simulated.IgcSimulated__v_map_info,None,IgcSimulated)
+IgcSimulated._v_grid_center_line_resolution = new_instancemethod(_igc_simulated.IgcSimulated__v_grid_center_line_resolution,None,IgcSimulated)
+IgcSimulated._v_grid_center_sample_resolution = new_instancemethod(_igc_simulated.IgcSimulated__v_grid_center_sample_resolution,None,IgcSimulated)
+IgcSimulated._v_has_rpc = new_instancemethod(_igc_simulated.IgcSimulated__v_has_rpc,None,IgcSimulated)
+IgcSimulated._v_rpc = new_instancemethod(_igc_simulated.IgcSimulated__v_rpc,None,IgcSimulated)
 IgcSimulated._v_igc = new_instancemethod(_igc_simulated.IgcSimulated__v_igc,None,IgcSimulated)
 IgcSimulated._v_avg_factor = new_instancemethod(_igc_simulated.IgcSimulated__v_avg_factor,None,IgcSimulated)
 IgcSimulated._v_fill_value = new_instancemethod(_igc_simulated.IgcSimulated__v_fill_value,None,IgcSimulated)

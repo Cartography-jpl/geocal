@@ -161,6 +161,10 @@ public:
   virtual TimeWithDerivative time_with_derivative() const = 0;
 
   virtual void print(std::ostream& Os) const = 0;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -195,6 +199,10 @@ public:
 
 class QuaternionOrbitData : public OrbitData {
 public:
+  QuaternionOrbitData(const QuaternionOrbitData& Start,
+		      const boost::array<AutoDerivative<double>, 3>& Pos_off,
+		      const boost::math::quaternion<AutoDerivative<double> >&
+		      Sc_to_sc_corr);
   QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<double, 3>& vel_fixed,
 		      const boost::math::quaternion<double>& sc_to_cf_q);
@@ -416,6 +424,13 @@ private:
   mutable boost::shared_ptr<CartesianInertial> pos_ci;
 				///< Position
   mutable boost::math::quaternion<AutoDerivative<double> > pos_ci_with_der;
+  mutable boost::math::quaternion<double> vel_ci; 
+  mutable boost::math::quaternion<AutoDerivative<double> > 
+  vel_ci_with_der; 
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -673,7 +688,16 @@ protected:
 				///OrbitData for.
   Time max_tm;			///< Maximum time that we have
 				///OrbitData for.
+  virtual void notify_update()
+  {
+    notify_update_do(*this);
+  }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
+
 
 /****************************************************************//**
   This is a simple implementation of an Orbit. It just uses Kepler's
@@ -826,6 +850,10 @@ private:
 				/// ascending node. 
   void calc_freq_rev();
   void calc_r();
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
   boost::shared_ptr<QuaternionOrbitData>
@@ -833,5 +861,10 @@ private:
 	      const QuaternionOrbitData& t2, 
 	      const TimeWithDerivative& tm);
 }
+
+GEOCAL_EXPORT_KEY(QuaternionOrbitData);
+GEOCAL_EXPORT_KEY(OrbitData);
+GEOCAL_EXPORT_KEY(KeplerOrbit);
+GEOCAL_EXPORT_KEY(Orbit);
 #endif
 

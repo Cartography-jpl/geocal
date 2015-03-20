@@ -2,11 +2,22 @@
 #include "ecr.h"
 #include "wgs84_constant.h"
 #include "geocal_matrix.h"
+#include "geocal_serialize_support.h"
 extern "C" {
 #include "carto/eos_coords.h"
 }
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void EciTodBurl::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianInertial);
+}
+
+GEOCAL_IMPLEMENT(EciTodBurl);
+#endif
 
 double EciTodBurl::delta_ut1 = 0;
 
@@ -32,6 +43,34 @@ void EciTodBurl::ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
 { 
   double ci_to_j2000[9];
   eos_coords(T.et(), T.acs() + delta_ut1, ci_to_j2000, &Ci_to_cf[0][0]);
+}
+
+//-----------------------------------------------------------------------
+/// Matrix to convert EciTodBurl to Ecr. The transpose of this will convert
+/// Ecr to EciTodBurl.
+//-----------------------------------------------------------------------
+
+void EciTodBurl::ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const
+{ 
+  // Mike burl doesn't actually implement this. But we can get the
+  // motion of the earth from spice, and then use the rotation matrix
+  // from Mike Burl.
+  for(int i = 0; i < 6; ++i)
+    for(int j = 0; j < 6; ++j)
+      Ci_to_cf[i][j] = 0;
+  double m[3][3];
+  ci_to_cf(T, m);
+  for(int i = 0; i < 3; ++i)
+    for(int j = 0; j < 3; ++j) {
+      Ci_to_cf[i][j] = m[i][j];
+      Ci_to_cf[i+3][j+3] = m[i][j];
+    }
+  Eci e(1,2,3);
+  double m2[6][6];
+  e.ci_to_cf_with_vel(T, m2);
+  for(int i = 3; i < 6; ++i)
+    for(int j = 0; j < 3; ++j)
+      Ci_to_cf[i][j] = m2[i][j];
 }
 
 //-----------------------------------------------------------------------

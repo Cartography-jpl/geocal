@@ -2,7 +2,7 @@ from nose.tools import *
 from geocal_swig import *
 from tie_point import *
 from image_ground_connection import *
-from igc_offset_correction import *
+from igc_collection_extension import *
 from simultaneous_bundle_adjustment import *
 from lm_optimize import *
 from nose.plugins.skip import Skip, SkipTest
@@ -18,6 +18,7 @@ test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 def test_time():
     raise SkipTest
     orb_uncorr = HdfOrbit_EciTod_TimeAcs(test_data + "../sample_orbit.h5")
+    orb = OrbitOffsetCorrection(orb_uncorr)
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,
                            1.0 / 2500000,
@@ -25,29 +26,30 @@ def test_time():
                            1.0,
                            FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)
+    cam.fit_epsilon = False
+    cam.fit_beta = False
+    cam.fit_delta = False
+    cam.fit_line_pitch = False
+    cam.fit_sample_pitch = False
+    cam.fit_focal_length = False
+    cam.fit_principal_point_line(False, 0)
+    cam.fit_principal_point_sample(False, 0)
     demin = SimpleDem()
-# Image not actually used for anything, but the SBA expects it
     t1 = Time.time_acs(215077459.472);
-    imglist = []
-    tmlist = []
     parameter_true = [0,0,0]
-    nimg = 88
-    #nimg = 6
+    #nimg = 88
+    nimg = 6
+    igc_coll = IgcCollectionOrbitData(orb, cam, demin)
     for i in range(nimg):
         tm = t1 + i * 0.2
-        img = VicarLiteRasterImage(test_data + "10MAY21-1.img")
-        img.time = tm
-        img.title = "Image %d" % i
-        imglist.append(img)
-        tmlist.append(tm)
+        igc_coll.add_image(None, tm, "Image %d" % i)
+        igc_coll.orbit.insert_time_point(tm)
         parameter_true.extend([100,4 + 0.1 * i, 3 - 0.1 * i])
 
-    igc_coll = IgcOffsetCorrection(imglist, cam, demin, orb_uncorr,
-                                   time_point = tmlist)
     igc_coll.fit_position = False
     igc_coll.fit_yaw = False
-    nl = igc_coll.cam.number_line(0)
-    ns = igc_coll.cam.number_sample(0)
+    nl = igc_coll.camera.number_line(0)
+    ns = igc_coll.camera.number_sample(0)
     border = 100
     parameter_start = igc_coll.parameter
     igc_coll.orbit.parameter = parameter_true

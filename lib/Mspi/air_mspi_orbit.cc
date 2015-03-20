@@ -2,7 +2,46 @@
 #include "ostream_pad.h"
 #include "constant.h"
 #include "aircraft_orbit_data.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void AirMspiOrbit::save(Archive & ar, const unsigned int version) const
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP(data)
+    & GEOCAL_NVP(tile_number_line)
+    & GEOCAL_NVP_(datum)
+    & GEOCAL_NVP_(gimbal_angle)
+    & GEOCAL_NVP_(ypr_corr)
+    & GEOCAL_NVP(m)
+    & GEOCAL_NVP_(vdef)
+    & GEOCAL_NVP_(tspace)
+    & GEOCAL_NVP(old_format);
+}
+
+template<class Archive>
+void AirMspiOrbit::load(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP(data)
+    & GEOCAL_NVP(tile_number_line)
+    & GEOCAL_NVP_(datum)
+    & GEOCAL_NVP_(gimbal_angle)
+    & GEOCAL_NVP_(ypr_corr)
+    & GEOCAL_NVP(m)
+    & GEOCAL_NVP_(vdef)
+    & GEOCAL_NVP_(tspace)
+    & GEOCAL_NVP(old_format);
+  blitz::Array<double, 2> empty;
+  for(int i = 0; i < 2; ++i)
+    data_cache_.push_back(empty);
+  next_swap_ = data_cache_.begin();
+}
+
+GEOCAL_SPLIT_IMPLEMENT(AirMspiOrbit);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor, that takes raw data and create AirMspiNavData from
@@ -157,6 +196,35 @@ void AirMspiOrbit::initialize()
   m = quat_rot("zyx", -gimbal_angle_(0) * Constant::deg_to_rad, 
 	       -gimbal_angle_(1) * Constant::deg_to_rad, 
 	       -gimbal_angle_(2) * Constant::deg_to_rad);
+  // Right now, just hardcode the number of lines to keep in a tile.
+  // We can revisit this if needed.
+  blitz::Array<double, 2> empty;
+  for(int i = 0; i < 2; ++i)
+    data_cache_.push_back(empty);
+  next_swap_ = data_cache_.begin();
+  tile_number_line = 10000;
+}
+
+//-----------------------------------------------------------------------
+/// Get the raw data, updating our cache if needed.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 1> AirMspiOrbit::raw_data(int Index) const
+{
+  for(int i = 0; i < (int) data_cache_.size(); ++i)
+    if(data_cache_[i].lbound(0) <= Index &&
+       Index <= data_cache_[i].ubound(0))
+      return data_cache_[i](Index, blitz::Range::all());
+  int lstart = (Index / tile_number_line) * tile_number_line;
+  int lend = std::min(lstart + tile_number_line, data->number_line());
+  (*next_swap_).reference(data->read_double(lstart, 0, lend - lstart,
+					  data->number_sample()));
+  (*next_swap_).reindexSelf(blitz::shape(lstart, 0));
+  blitz::Array<double, 1> res = (*next_swap_)(Index, blitz::Range::all());
+  ++next_swap_;
+  if(next_swap_ == data_cache_.end())
+    next_swap_ = data_cache_.begin();
+  return res;
 }
 
 //-----------------------------------------------------------------------
@@ -166,9 +234,7 @@ void AirMspiOrbit::initialize()
 AirMspiNavData AirMspiOrbit::nav_data(int Index) const
 {
   range_check(Index, 0, data->number_line());
-  blitz::Array<double, 2> raw_data = 
-    data->read_double(Index, 0, 1, data->number_sample());
-  return AirMspiNavData(raw_data(0, blitz::Range::all()), *datum_, old_format);
+  return AirMspiNavData(raw_data(Index), *datum_, old_format);
 }
 
 //-----------------------------------------------------------------------

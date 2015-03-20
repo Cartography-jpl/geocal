@@ -1,3 +1,4 @@
+#include "geocal_internal_config.h"
 #include "sdp_helper.h"
 #include "ground_coordinate.h"
 #include "geocal_exception.h"
@@ -188,6 +189,22 @@ void SdpToolkitCoordinateInterface::to_inertial(int Body_id,
 }
 
 //-----------------------------------------------------------------------
+/// This converts from CartesianFixed to CartesianInertial for the
+/// given body, including velocity. We use the NAIF coding for the
+/// bodies (see the SPICE documentation for details). We use this
+/// because it is a unique  coding, the underlying toolkit doesn't
+/// need to be SPICE. 
+//-----------------------------------------------------------------------
+
+void SdpToolkitCoordinateInterface::to_inertial
+(int Body_id, const Time& T, 
+ const CartesianFixed& From, const boost::array<double, 3>& Vel_cf,
+ CartesianInertial& To, boost::array<double, 3>& Vel_ci)
+{
+  throw Exception("Not implemented for SDP toolkit");
+}
+
+//-----------------------------------------------------------------------
 /// Calculate matrix to  converts from CartesianInertial to
 /// CartesianFixed for the given body. We use the NAIF coding for
 /// the bodies (see the SPICE  documentation for details). Note that
@@ -203,6 +220,18 @@ const Time& T, double Ci_to_cf[3][3])
   SdpHelper::convert_to_ecr(T, Ci_to_cf);
 }
 
+void SdpToolkitCoordinateInterface::to_fixed_with_vel(int Body_id, 
+const Time& T, double Ci_to_cf[6][6])
+{
+  throw Exception("Not implemented for SDP toolkit");
+}
+
+void SdpToolkitCoordinateInterface::to_inertial_with_vel(int Body_id, 
+const Time& T, double Cf_to_ci[6][6])
+{
+  throw Exception("Not implemented for SDP toolkit");
+}
+
 //-----------------------------------------------------------------------
 /// This converts from CartesianInertial to CartesianFixed for the
 /// given body. We use the NAIF coding for the bodies (see the SPICE
@@ -216,6 +245,22 @@ void SdpToolkitCoordinateInterface::to_fixed(int Body_id,
   if(Body_id != 399)		// Are we Earth?
     throw Exception("The SDP toolkit only supports the Earth for converting to and from inertial coordinates");
   SdpHelper::convert_to_ecr(T, From, To);
+}
+
+//-----------------------------------------------------------------------
+/// This converts from CartesianInertial to CartesianFixed for the
+/// given body, including velocity. We use the NAIF coding for the
+/// bodies (see the SPICE documentation for details). We use this
+/// because it is a unique  coding, the underlying toolkit doesn't
+/// need to be SPICE. 
+//-----------------------------------------------------------------------
+
+void SdpToolkitCoordinateInterface::to_fixed
+(int Body_id, const Time& T, 
+ const CartesianInertial& From, const boost::array<double, 3>& Vel_ci,
+ CartesianFixed& To, boost::array<double, 3>& Vel_cf)
+{
+  throw Exception("Not implemented for SDP toolkit");
 }
 
 void

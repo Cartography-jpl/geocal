@@ -233,6 +233,15 @@ public:
     Y = c.y; 
     Height = c.z;
   }
+  virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
+			       double& Y, double& Height) const
+  {
+    OgrCoordinate c(ogr_, Gc);
+    X = c.x; 
+    Y = c.y; 
+    Height = c.z;
+  }
+
   virtual void print(std::ostream& Os) const;
   static boost::shared_ptr<OgrCoordinateConverter>
   utm_converter(int Zone);

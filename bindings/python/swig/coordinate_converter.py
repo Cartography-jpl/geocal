@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -159,13 +162,11 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
 
     def convert_to_coordinate(self, *args):
         """
-        virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const GroundCoordinate &Gc, double &X, double &Y, double &Height)
-        const =0
-        This converts from a ground coordinate to a particular coordinate
-        system.
+        virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const Geodetic &Gc, double &X, double &Y, double &Height) const =0
+        Specialization that converts from Geodetic.
 
-        The specific meaning and units of X, Y, and height depend on which
-        coordinates system is used by a specialization of this class. 
+        Because much of our data is in Geodetic coordinates this is an
+        important performance specialization. 
         """
         return _coordinate_converter.CoordinateConverter_convert_to_coordinate(self, *args)
 

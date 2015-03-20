@@ -128,6 +128,10 @@ def position_cf_with_derivative(self):
 
 class QuaternionOrbitData : public OrbitData {
 public:
+  QuaternionOrbitData(const QuaternionOrbitData& Start,
+		      const boost::array<AutoDerivative<double>, 3>& Pos_off,
+		      const boost::math::quaternion<AutoDerivative<double> >&
+		      Sc_to_sc_corr);
   QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<double, 3>& vel_fixed,
 		      const boost::math::quaternion<double>& sc_to_cf_q);
@@ -197,20 +201,7 @@ def velocity_cf(self):
 def velocity_cf_with_derivative(self):
     return self._velocity_cf_with_derivative()
   }
-%pythoncode {
-@classmethod
-def pickle_format_version(cls):
-  return 1
-
-def __reduce__(self):
-  if(self.from_cf):
-    return _new_from_init, (self.__class__, 1, self.time, self.position_cf, 
-			    self.velocity_cf, self.sc_to_cf)
-  else:
-    return _new_from_init, (self.__class__, 1, self.time, self.position_ci, 
-			    self.velocity_ci, self.sc_to_ci)
-
-}
+  %pickle_serialization();
 };
 
 
@@ -321,10 +312,7 @@ public:
   %python_attribute_with_set(inclination, double)
   %python_attribute_with_set(right_ascension, double)
   %python_attribute(period, double)
-  %pickle_init(1, self.min_time, self.max_time, self.epoch,
-	       self.semimajor_axis, self.eccentricity,
-	       self.inclination, self.right_ascension,
-	       self.argument_of_perigee, self.mean_anomoly)
+  %pickle_serialization();
 };
 }
 

@@ -1,5 +1,28 @@
 #ifndef GENERIC_OBJECT_H
 #define GENERIC_OBJECT_H
+#include "geocal_config.h"
+
+namespace boost {
+  namespace serialization {
+    class access;
+  }
+}
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/tracking.hpp>
+#include <boost/serialization/split_member.hpp>
+#define GEOCAL_EXPORT_KEY(NAME) BOOST_CLASS_EXPORT_KEY(GeoCal::NAME)
+#define GEOCAL_EXPORT_KEY2(NAME, KEY) BOOST_CLASS_EXPORT_KEY2(GeoCal::NAME, KEY)
+#define GEOCAL_SPLIT_MEMBER() BOOST_SERIALIZATION_SPLIT_MEMBER()
+#define GEOCAL_DONT_TRACK(NAME) BOOST_CLASS_TRACKING(GeoCal::NAME, boost::serialization::track_never)
+#else
+#define GEOCAL_EXPORT_KEY(NAME) /* Noop */
+#define GEOCAL_EXPORT_KEY2(NAME,KEY) /* Noop */
+#define GEOCAL_SPLIT_MEMBER() /* Noop */
+#define GEOCAL_DONT_TRACK(NAME) /* Noop */
+#endif
+
 
 namespace GeoCal {
 /****************************************************************//**
@@ -12,6 +35,14 @@ public:
   // Have a virtual member function, which forces RTTI information to
   // be available.
   virtual ~GenericObject() {}
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
+
 }
+
+GEOCAL_EXPORT_KEY(GenericObject);
+
 #endif

@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -272,8 +275,6 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
     __swig_destroy__ = _orbit_data_image_ground_connection.delete_OrbitDataImageGroundConnection
 OrbitDataImageGroundConnection.cf_look_vector = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection_cf_look_vector,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection.image_coordinate_with_derivative = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection_image_coordinate_with_derivative,None,OrbitDataImageGroundConnection)
-OrbitDataImageGroundConnection._v_image = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_image,None,OrbitDataImageGroundConnection)
-OrbitDataImageGroundConnection._v_title = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_title,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_orbit_data = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_orbit_data,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_camera = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_camera,None,OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_resolution = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_resolution,None,OrbitDataImageGroundConnection)

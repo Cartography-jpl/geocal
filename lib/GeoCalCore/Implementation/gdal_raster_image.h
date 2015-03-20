@@ -112,6 +112,15 @@ public:
   inline const boost::shared_ptr<GDALDataset>& data_set() const 
   { return gdal_data_base_->data_set(); }
 
+
+//-----------------------------------------------------------------------
+/// Return true if we have GCPs.
+//-----------------------------------------------------------------------
+
+  bool has_gcps() const
+  { return data_set()->GetGCPCount() > 0; }
+  blitz::Array<double, 2> gcps() const;
+
 //-----------------------------------------------------------------------
 /// The underlying GDALRasterBand object.
 //-----------------------------------------------------------------------
@@ -335,6 +344,24 @@ private:
     if(gdal_data_base_->has_rpc())
       rpc_.reset(new Rpc(gdal_data_base_->rpc()));
   }
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+// This is a little more complicated, because we can't really
+// construct a object using a default constructor. So we need to
+// directly handle the object construction.
+namespace boost { namespace serialization {
+template<class Archive> 
+void save_construct_data(Archive & ar, const GeoCal::GdalRasterImage* d, 
+				const unsigned int version);
+template<class Archive>
+void load_construct_data(Archive & ar, GeoCal::GdalRasterImage* d,
+			 const unsigned int version);
+  }
+}
+
+GEOCAL_EXPORT_KEY(GdalRasterImage);
 #endif

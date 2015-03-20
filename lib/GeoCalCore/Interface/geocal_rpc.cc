@@ -4,11 +4,32 @@
 #include "geocal_gsl_root.h"
 #include "simple_dem.h"
 #include "image_ground_connection.h"
+#include "geocal_serialize_support.h"
 #include <boost/foreach.hpp>
 #include <limits>
 
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void Rpc::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Rpc);
+  ar & GEOCAL_NVP(error_bias) & GEOCAL_NVP(error_random)
+    & GEOCAL_NVP(rpc_type) 
+    & GEOCAL_NVP(height_offset) & GEOCAL_NVP(height_scale) 
+    & GEOCAL_NVP(latitude_offset) & GEOCAL_NVP(latitude_scale)
+    & GEOCAL_NVP(longitude_offset) & GEOCAL_NVP(longitude_scale)
+    & GEOCAL_NVP(line_offset) & GEOCAL_NVP(line_scale) 
+    & GEOCAL_NVP(sample_offset) & GEOCAL_NVP(sample_scale) 
+    & GEOCAL_NVP(line_denominator) & GEOCAL_NVP(line_numerator)
+    & GEOCAL_NVP(sample_denominator) & GEOCAL_NVP(sample_numerator)
+    & GEOCAL_NVP(fit_line_numerator) & GEOCAL_NVP(fit_sample_numerator);
+}
+
+GEOCAL_IMPLEMENT(Rpc);
+#endif
 
 //-----------------------------------------------------------------------
 /// Generate a RPC that approximates the calculation done by a

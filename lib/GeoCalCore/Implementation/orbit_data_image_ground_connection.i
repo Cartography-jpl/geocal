@@ -53,10 +53,6 @@ public:
     const;
   virtual ImageCoordinateWithDerivative 
   image_coordinate_with_derivative(const GroundCoordinate& Gc) const;
-  virtual int number_line() const;
-  virtual int number_sample() const;
-  virtual boost::shared_ptr<RasterImage> image() const;
-  virtual std::string title() const;
   %python_attribute_with_set(orbit_data, boost::shared_ptr<OrbitData>)
   %python_attribute_with_set(camera,boost::shared_ptr<Camera>)
   %python_attribute_with_set(resolution, double)

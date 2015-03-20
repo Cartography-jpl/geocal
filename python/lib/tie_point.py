@@ -2,6 +2,7 @@ import math
 import raster_image_extension
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
+from geocal_swig import IgcMapProjected
 
 class TiePoint(object):
     '''
@@ -39,7 +40,8 @@ class TiePoint(object):
             if(v): res += 1
         return res
 
-    def display(self, igc_coll, sz = 500, ref_image = None, number_row = None):
+    def display(self, igc_coll, sz = 500, ref_image = None, number_row = None,
+                map_info = None):
         '''This executes plt.imshow for the images that make up this
         tiepoint.  Since we don't store the images in a tiepoint, you
         need to also pass in the IgcCollection that this tiepoint
@@ -48,6 +50,10 @@ class TiePoint(object):
 
         You can optionally specify the number of rows to use. Otherwise,
         we choose the number of rows and columns to make a square figure
+
+        If you supply a mapinfo, we project the imagery to the surface
+        (useful for data that is very distorted from one view to another, or to
+        compare to reference image).
         '''
 
         nimg = self.number_camera
@@ -58,10 +64,16 @@ class TiePoint(object):
         number_col = int(math.ceil(nimg / float(number_row)))
         plt.clf()
         for i in range(self.number_camera):
-            plt.subplot(number_row, number_col, i + 1)
-            plt.title(igc_coll.image_title(i))
-            if(self.image_location[i]):
-                igc_coll.image(i).display(self.image_location[i][0], sz)
+            if(self.image_location[i] is not None):
+                plt.subplot(number_row, number_col, i + 1)
+                plt.title(igc_coll.title(i))
+                if(map_info):
+                    igc_proj = IgcMapProjected(map_info, 
+                                               igc_coll.image_ground_connection(i))
+                    pt = igc_proj.coordinate(igc_coll.ground_coordinate(i, self.image_location[i][0]))
+                    igc_proj.display(pt, sz)
+                else:
+                    igc_coll.image(i).display(self.image_location[i][0], sz)
         if(ref_image is not None):
             plt.subplot(number_row, number_col, self.number_camera + 1)
             plt.title("Reference Image")

@@ -21,6 +21,28 @@ BOOST_AUTO_TEST_CASE(basic_test)
   }
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported() || !VicarFile::vicar_available())
+    return;
+  boost::shared_ptr<Dem> dem;
+  try {
+    dem.reset(new SrtmDem());
+  } catch(const Exception&) {
+    // Don't worry if we can't find the data, just skip test.
+    BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
+    return;
+  } 
+  std::string d = serialize_write_string(dem);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<SrtmDem> demr = 
+    serialize_read_string<SrtmDem>(d);
+
+  BOOST_CHECK_CLOSE(demr->height_reference_surface(Geodetic(34.2,-118.03)),
+		    888.656, 1e-4);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 

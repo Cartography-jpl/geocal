@@ -122,6 +122,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -470,18 +473,8 @@ class QuaternionOrbitData(OrbitData):
     def velocity_cf_with_derivative(self):
         return self._velocity_cf_with_derivative()
       
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      if(self.from_cf):
-        return _new_from_init, (self.__class__, 1, self.time, self.position_cf, 
-    			    self.velocity_cf, self.sc_to_cf)
-      else:
-        return _new_from_init, (self.__class__, 1, self.time, self.position_ci, 
-    			    self.velocity_ci, self.sc_to_ci)
-
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit.delete_QuaternionOrbitData
 QuaternionOrbitData.ci_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_ci_look_vector,None,QuaternionOrbitData)
@@ -902,12 +895,8 @@ class KeplerOrbit(Orbit):
     def period(self):
         return self._v_period()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.min_time,self.max_time,self.epoch,self.semimajor_axis,self.eccentricity,self.inclination,self.right_ascension,self.argument_of_perigee,self.mean_anomoly)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit.delete_KeplerOrbit
 KeplerOrbit.orbit_data = new_instancemethod(_orbit.KeplerOrbit_orbit_data,None,KeplerOrbit)

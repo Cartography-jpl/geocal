@@ -115,6 +115,18 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Matrix to convert PlanetInertial to PlanetFixed including
+/// velocity. The transpose of this
+/// will convert PlanetFixed to PlanetInertial.
+//-----------------------------------------------------------------------
+
+  virtual void cf_to_ci_with_vel(const Time& T, double Cf_to_ci[6][6]) const
+  { 
+    CartesianFixed::toolkit_coordinate_interface->to_inertial_with_vel
+      (NAIF_CODE, T, Cf_to_ci); 
+  }
+
+//-----------------------------------------------------------------------
 /// Height above the reference ellipsoid.
 //-----------------------------------------------------------------------
   virtual double height_reference_surface() const;
@@ -278,6 +290,18 @@ public:
   { 
     CartesianFixed::toolkit_coordinate_interface->to_fixed(NAIF_CODE,
 							   T, Ci_to_cf); 
+  }
+
+//-----------------------------------------------------------------------
+/// Matrix to convert PlanetInertial to PlanetFixed including
+/// velocity. The transpose of this
+/// will convert PlanetFixed to PlanetInertial.
+//-----------------------------------------------------------------------
+
+  virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const
+  { 
+    CartesianFixed::toolkit_coordinate_interface->to_fixed_with_vel
+      (NAIF_CODE, T, Ci_to_cf); 
   }
 
 //-----------------------------------------------------------------------
@@ -503,6 +527,14 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
+			       double& Y, double& Height) const
+  {
+    Planetocentric<NAIF_CODE> gd(Gc);
+    X = gd.longitude();
+    Y = gd.latitude();
+    Height = gd.height_reference_surface();
+  }
+  virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
 			       double& Y, double& Height) const
   {
     Planetocentric<NAIF_CODE> gd(Gc);

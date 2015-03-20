@@ -302,6 +302,9 @@ public:
   ImageCoordinate coordinate(const GroundCoordinate& Gc) const
   { ImageCoordinate ic; map_info().coordinate(Gc, ic.sample, ic.line);
     return ic;}
+  ImageCoordinate coordinate(const Geodetic& Gc) const
+  { ImageCoordinate ic; map_info().coordinate(Gc, ic.sample, ic.line);
+    return ic;}
   
   double grid_center_line_resolution() const;
   double grid_center_sample_resolution() const;
@@ -330,6 +333,11 @@ public:
 
   boost::shared_ptr<Rpc> rpc_ptr() const
   { return boost::shared_ptr<Rpc>(new Rpc(rpc())); }
+
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 
@@ -379,5 +387,7 @@ private:
 };
 
 }
+
+GEOCAL_EXPORT_KEY(RasterImage);
 #endif
 

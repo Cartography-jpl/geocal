@@ -5,9 +5,12 @@
 # you need to modify these.
 
 # Source files for library
+geocalinc_HEADERS+= @srcsupport@/geocal_config.h
 geocalinc_HEADERS+= @srcsupport@/constant.h
 geocalinc_HEADERS+= @srcsupport@/generic_object.h
+libgeocal_la_SOURCES+= @srcsupport@/generic_object.cc
 geocalinc_HEADERS+= @srcsupport@/auto_derivative.h
+libgeocal_la_SOURCES+= @srcsupport@/auto_derivative.cc
 geocalinc_HEADERS+= @srcsupport@/auto_derivative_quaternion.h
 geocalinc_HEADERS+= @srcsupport@/array_ad.h
 geocalinc_HEADERS+= @srcsupport@/observer.h
@@ -24,6 +27,7 @@ geocalinc_HEADERS+= @srcsupport@/memory_map_array.h
 geocalinc_HEADERS+= @srcsupport@/geocal_gsl_matrix.h
 geocalinc_HEADERS+= @srcsupport@/geocal_matrix.h
 geocalinc_HEADERS+= @srcsupport@/geocal_quaternion.h
+libgeocal_la_SOURCES+= @srcsupport@/geocal_quaternion.cc
 geocalinc_HEADERS+= @srcsupport@/geocal_autoderivative_quaternion.h
 geocalinc_HEADERS+= @srcsupport@/boost/backtrace.hpp
 libgeocal_la_SOURCES+= @srcsupport@/boost/backtrace.cpp
@@ -42,6 +46,8 @@ libgeocal_la_SOURCES+= @srcsupport@/covariance.cc
 geocalinc_HEADERS+= @srcsupport@/covariance.h
 libgeocal_la_SOURCES+= @srcsupport@/statistic.cc
 geocalinc_HEADERS+= @srcsupport@/statistic.h
+geocalinc_HEADERS+=@srcsupport@/geocal_serialize_function.h
+libgeocal_la_SOURCES+= @srcsupport@/geocal_serialize_function.cc
 if HAVE_FFTW
 geocalinc_HEADERS+= @srcsupport@/geocal_fftw.h
 libgeocal_la_SOURCES+= @srcsupport@/geocal_fftw.cc
@@ -69,11 +75,13 @@ SWIG_SRC += @swigsrc@/geocal_gsl_fit_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_gsl_root_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_time_wrap.cc
 SWIG_SRC += @swigsrc@/tiled_file_wrap.cc
+SWIG_SRC += @swigsrc@/geocal_serialize_function_wrap.cc
 SWIG_SRC_FFTW += @swigsrc@/geocal_fftw_wrap.cc
 SWIG_SRC_HDF5 += @swigsrc@/hdf_file_wrap.cc
 # Test files
 EXTRA_DIST += @srcsupport@/unit_test_support.h
 EXTRA_DIST += @srcsupport@/global_fixture.h
+EXTRA_DIST += @srcsupport@/geocal_serialize_support.h
 geocal_test_all_SOURCES += @srcsupport@/global_fixture.cc
 geocal_test_all_SOURCES += @srcsupport@/global_fixture_default.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_exception_test.cc 
@@ -100,7 +108,8 @@ if HAVE_HDF5
 geocal_test_all_SOURCES+= @srcsupport@/hdf_file_test.cc 
 endif
 AM_CPPFLAGS+= -I$(srcdir)/@srcsupport@ -I$(srcdir)/@srcsupport@/boost
-
+# To pick up generated geocal_config.h file
+AM_CPPFLAGS+= -I@srcsupport@
 
 # Allow searchs for .i, .h. and .cc files in this directory
 vpath %.cc $(srcdir)/@srcsupport@

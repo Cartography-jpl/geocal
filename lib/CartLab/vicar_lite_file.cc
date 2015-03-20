@@ -1,6 +1,8 @@
+#include "geocal_internal_config.h"
 #include "vicar_lite_file.h"
 #include <boost/tokenizer.hpp>
 #include <boost/foreach.hpp>
+#include "geocal_serialize_support.h"
 #define BOOST_LEXICAL_CAST_ASSUME_C_LOCALE
 #include <boost/lexical_cast.hpp>
 #ifdef HAVE_VICAR_RTL
@@ -13,6 +15,69 @@ using namespace GeoCal;
 
 #ifdef USE_VICAR_OGR
 static VicarOgr vlogr;
+#endif
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void VicarLiteFile::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(VicarLiteFile);
+  ar & GEOCAL_NVP_(fname) & GEOCAL_NVP_(access)
+    & GEOCAL_NVP_(force_area_pixel);
+}
+
+template<class Archive>
+void VicarLiteFile::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(VicarLiteFile);
+  ar & GEOCAL_NVP_(fname) & GEOCAL_NVP_(access)
+    & GEOCAL_NVP_(force_area_pixel);
+  initialize(fname_, access_, force_area_pixel_);
+}
+
+template<class Archive>
+void VicarLiteRasterImage::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_BASE(VicarLiteRasterImage, RasterImage);
+  GEOCAL_GENERIC_BASE(RasterImage);
+  ar & GEOCAL_NVP_(band) & GEOCAL_NVP_(f)
+    & GEOCAL_NVP_(force_map_info)
+    & GEOCAL_NVP_(number_tile_line)
+    & GEOCAL_NVP_(number_tile_sample);
+}
+
+template<class Archive>
+void VicarLiteRasterImage::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_BASE(VicarLiteRasterImage, RasterImage);
+  GEOCAL_GENERIC_BASE(RasterImage);
+  ar & GEOCAL_NVP_(band) & GEOCAL_NVP_(f)
+    & GEOCAL_NVP_(force_map_info)
+    & GEOCAL_NVP_(number_tile_line)
+    & GEOCAL_NVP_(number_tile_sample);
+  initialize();
+}
+
+template<class Archive>
+void VicarLiteDem::save(Archive & ar, const unsigned int version) const
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
+    & GEOCAL_NVP_(band)
+    & GEOCAL_NVP_(f);
+}
+
+template<class Archive>
+void VicarLiteDem::load(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
+    & GEOCAL_NVP_(band)
+    & GEOCAL_NVP_(f);
+  map_info_ = f_->map_info();
+}
+
+GEOCAL_SPLIT_IMPLEMENT(VicarLiteFile);
+GEOCAL_SPLIT_IMPLEMENT(VicarLiteRasterImage);
+GEOCAL_SPLIT_IMPLEMENT(VicarLiteDem);
 #endif
 
 //-----------------------------------------------------------------------
@@ -41,14 +106,15 @@ bool VicarLiteFile::is_vicar_file(const std::string& Fname)
 /// just ignore this value.
 //-----------------------------------------------------------------------
 
-VicarLiteFile::VicarLiteFile(const std::string& Fname, access_type Access,
-			     bool Force_area_pixel)
-  : access_(Access),
-    fname_(Fname), 
-    force_area_pixel_(Force_area_pixel),
-    f_(new std::fstream(Fname.c_str(), (Access ==READ ? std::ios_base::in :
-       std::ios_base::in | std::ios_base::out)))
+void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
+			       bool Force_area_pixel)
 {
+  access_ = Access;
+  fname_ = Fname;
+  force_area_pixel_ = Force_area_pixel;
+  f_.reset(new std::fstream(Fname.c_str(), (Access ==READ ? std::ios_base::in :
+           std::ios_base::in | std::ios_base::out)));
+
   f_->exceptions(std::ios_base::badbit|std::ios_base::failbit);
 
 //-----------------------------------------------------------------------

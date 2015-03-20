@@ -42,6 +42,61 @@ BOOST_AUTO_TEST_CASE(basic_test)
     200, 201, 202, 203,
     300, 301, 302, 303;
   BOOST_CHECK_MATRIX_CLOSE(a1, a1_expect);
+
+
+  // Test adding to file
+  BOOST_CHECK_CLOSE(config.value<double>("parameter6"), 1.00000001, 1e-8);
+  BOOST_CHECK(!config.have_key("parameter10"));
+  config.add_file(test_data_dir() + "mspi_config_file_test2.txt");
+  BOOST_CHECK_CLOSE(config.value<double>("parameter6"), 2.00000001, 1e-8);
+  BOOST_CHECK_EQUAL(config.value<int>("parameter10"), 3);
+  BOOST_CHECK_EQUAL(config.value<int>("parameter10-11"), 4);
+}
+
+BOOST_AUTO_TEST_CASE(table_test)
+{
+  MspiConfigFile config(test_data_dir() + "mspi_config_file_test.txt");
+  config.add_file(test_data_dir() + "mspi_config_file_test2.txt");
+  MspiConfigTable tab(config, "L1B1");
+  BOOST_CHECK_EQUAL(tab.value<int>(0, "view_number"), 6);
+  BOOST_CHECK_EQUAL(tab.value<int>(1, "view_number"), 7);
+  BOOST_CHECK_EQUAL(tab.value<std::string>(0, "l1b1_file"), "file1.hdf");
+  BOOST_CHECK_EQUAL(tab.value<std::string>(1, "l1b1_file"), "file2.hdf");
+}
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<MspiConfigFile> config(new MspiConfigFile(test_data_dir() + "mspi_config_file_test.txt"));
+  std::string d = serialize_write_string(config);
+  if(false)
+    // Can dump to screen, if we want to see the text
+    std::cerr << d;
+  boost::shared_ptr<MspiConfigFile> config2 = 
+    serialize_read_string<MspiConfigFile>(d);
+  BOOST_CHECK_CLOSE(config2->value<double>("parameter1"), 1.1, 1e-8);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_table)
+{
+  if(!have_serialize_supported())
+    return;
+  MspiConfigFile config(test_data_dir() + "mspi_config_file_test.txt");
+  config.add_file(test_data_dir() + "mspi_config_file_test2.txt");
+  boost::shared_ptr<MspiConfigTable> tab(new MspiConfigTable(config, "L1B1"));
+  std::string d = serialize_write_string(tab);
+  if(false)
+    // Can dump to screen, if we want to see the text
+    std::cerr << d;
+  boost::shared_ptr<MspiConfigTable> tab2 = 
+    serialize_read_string<MspiConfigTable>(d);
+
+  BOOST_CHECK_EQUAL(tab2->value<int>(0, "view_number"), 6);
+  BOOST_CHECK_EQUAL(tab2->value<int>(1, "view_number"), 7);
+  BOOST_CHECK_EQUAL(tab2->value<std::string>(0, "l1b1_file"), "file1.hdf");
+  BOOST_CHECK_EQUAL(tab2->value<std::string>(1, "l1b1_file"), "file2.hdf");
+
 }
 
 BOOST_AUTO_TEST_SUITE_END()

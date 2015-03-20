@@ -29,6 +29,12 @@ BOOST_AUTO_TEST_CASE(kepler_orbit_data)
   } catch(const Exception& e) {
     BOOST_CHECK(true);
   }
+  boost::array<double, 3> velci = orb.velocity_ci(t);
+  double tspace = 0.1;
+  boost::array<double, 3> p1 = orb.position_ci(t+tspace)->position;
+  boost::array<double, 3> p2 = orb.position_ci(t)->position;
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE((p1[i] - p2[i]) / tspace, velci[i], 1.0);
 }
 
 BOOST_AUTO_TEST_CASE(kepler_orbit_data_derivative_ci)
@@ -234,4 +240,74 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK(l1(qres - q2) < 1e-8);
 }
 
+BOOST_AUTO_TEST_CASE(orbit_data_offset)
+{
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  KeplerOrbit orb(t, t + 100.0);
+  boost::shared_ptr<QuaternionOrbitData> od = 
+    boost::dynamic_pointer_cast<QuaternionOrbitData>(orb.orbit_data(t + 50));
+  boost::array<AutoDerivative<double>, 3> poff =
+    {{AutoDerivative<double>(10, 0, 6),
+      AutoDerivative<double>(20, 1, 6),
+      AutoDerivative<double>(30, 2, 6)}};
+  boost::math::quaternion<AutoDerivative<double> > sc_corr =
+    quat_rot("xyz", AutoDerivative<double>(0.01, 3, 6),
+	     AutoDerivative<double>(0.02, 4, 6),
+	     AutoDerivative<double>(0.03, 5, 6));
+  QuaternionOrbitData od2(*od, poff, sc_corr);
+  BOOST_CHECK_CLOSE(od->position_ci()->position[0] + 10,
+		    od2.position_ci()->position[0], 1e-4);
+  BOOST_CHECK_CLOSE(od->position_ci()->position[1] + 20,
+		    od2.position_ci()->position[1], 1e-4);
+  BOOST_CHECK_CLOSE(od->position_ci()->position[2] + 30,
+		    od2.position_ci()->position[2], 1e-4);
+  BOOST_CHECK_CLOSE(od->position_ci_with_derivative()[0].value() + 10,
+		    od2.position_ci_with_derivative()[0], 1e-4);
+  BOOST_CHECK_CLOSE(od->position_ci_with_derivative()[1].value() + 20,
+		    od2.position_ci_with_derivative()[1], 1e-4);
+  BOOST_CHECK_CLOSE(od->position_ci_with_derivative()[2].value() + 30,
+		    od2.position_ci_with_derivative()[2], 1e-4);
+  BOOST_CHECK_CLOSE(od2.position_cf()->position[0] - 
+		    od->position_cf()->position[0],
+		    21.272, 1e-2);
+  BOOST_CHECK_CLOSE(od2.position_cf()->position[1] - 
+		    od->position_cf()->position[1],
+		    -6.90276, 1e-2);
+  BOOST_CHECK_CLOSE(od2.position_cf()->position[2] - 
+		    od->position_cf()->position[2],
+		    29.9975, 1e-2);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_quaternion_orbit_data)
+{
+  if(!have_serialize_supported())
+    return;
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  KeplerOrbit orb(t, t + 100.0);
+  boost::shared_ptr<QuaternionOrbitData> od = 
+    boost::dynamic_pointer_cast<QuaternionOrbitData>(orb.orbit_data(t + 50));
+  std::string d = serialize_write_string(od);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<QuaternionOrbitData> odr = 
+    serialize_read_string<QuaternionOrbitData>(d);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_kepler_orbit)
+{
+  if(!have_serialize_supported())
+    return;
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  boost::shared_ptr<Orbit> orb(new KeplerOrbit(t, t + 100.0));
+  std::string d = serialize_write_string(orb);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<KeplerOrbit> orbr = 
+    serialize_read_string<KeplerOrbit>(d);
+  BOOST_CHECK_CLOSE(orbr->min_time() - t, 0.0, 1e-4);
+  BOOST_CHECK_CLOSE(orbr->max_time() - t, 100.0, 1e-4);
+  BOOST_CHECK_CLOSE(orbr->position_ci(t)->position[0], -1788501.0, 1e-4);
+  BOOST_CHECK_CLOSE(orbr->position_ci(t)->position[1], -6854177.0, 1e-4);
+  BOOST_CHECK_CLOSE(orbr->position_ci(t)->position[2], -16811.0, 1e-3);
+}
 BOOST_AUTO_TEST_SUITE_END()

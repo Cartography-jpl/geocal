@@ -99,3 +99,18 @@ def test_gdal_to_nitf_a():
     # the corners here with gdalinfo, but we don't have any easy
     # way to test this, so just make sure IGEOLO is the same
     assert f1["NITF_IGEOLO"] == "364644N1160720W364645N1160642W364611N1160641W364609N1160720W"
+
+def test_gda1_to_nitf_no_rpc():
+    '''Create a simple NITF from gda1_to_nitf, and check that everything is
+    ok. This input data does not have an RPC, so we can check that is handled
+    correct1y.'''
+    # Skip we GDAL can't read VICAR.
+    if(os.environ.get("NO_VICAR_GDALPLUGIN")):
+        raise SkipTest
+    try:
+        os.remove("gdal_to_nitf.ntf")
+    except OSError:
+        pass # Ok if doesn't exist
+    subprocess.check_call(["gdal_to_nitf", "-q",
+                           test_data + "../test_pixel_is_point.img",
+                           "gdal_to_nitf.ntf"])

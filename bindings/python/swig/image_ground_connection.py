@@ -88,6 +88,31 @@ except:
     weakref_proxy = lambda x: x
 
 
+class SwigPyIterator(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _image_ground_connection.delete_SwigPyIterator
+    def __iter__(self): return self
+SwigPyIterator.value = new_instancemethod(_image_ground_connection.SwigPyIterator_value,None,SwigPyIterator)
+SwigPyIterator.incr = new_instancemethod(_image_ground_connection.SwigPyIterator_incr,None,SwigPyIterator)
+SwigPyIterator.decr = new_instancemethod(_image_ground_connection.SwigPyIterator_decr,None,SwigPyIterator)
+SwigPyIterator.distance = new_instancemethod(_image_ground_connection.SwigPyIterator_distance,None,SwigPyIterator)
+SwigPyIterator.equal = new_instancemethod(_image_ground_connection.SwigPyIterator_equal,None,SwigPyIterator)
+SwigPyIterator.copy = new_instancemethod(_image_ground_connection.SwigPyIterator_copy,None,SwigPyIterator)
+SwigPyIterator.next = new_instancemethod(_image_ground_connection.SwigPyIterator_next,None,SwigPyIterator)
+SwigPyIterator.__next__ = new_instancemethod(_image_ground_connection.SwigPyIterator___next__,None,SwigPyIterator)
+SwigPyIterator.previous = new_instancemethod(_image_ground_connection.SwigPyIterator_previous,None,SwigPyIterator)
+SwigPyIterator.advance = new_instancemethod(_image_ground_connection.SwigPyIterator_advance,None,SwigPyIterator)
+SwigPyIterator.__eq__ = new_instancemethod(_image_ground_connection.SwigPyIterator___eq__,None,SwigPyIterator)
+SwigPyIterator.__ne__ = new_instancemethod(_image_ground_connection.SwigPyIterator___ne__,None,SwigPyIterator)
+SwigPyIterator.__iadd__ = new_instancemethod(_image_ground_connection.SwigPyIterator___iadd__,None,SwigPyIterator)
+SwigPyIterator.__isub__ = new_instancemethod(_image_ground_connection.SwigPyIterator___isub__,None,SwigPyIterator)
+SwigPyIterator.__add__ = new_instancemethod(_image_ground_connection.SwigPyIterator___add__,None,SwigPyIterator)
+SwigPyIterator.__sub__ = new_instancemethod(_image_ground_connection.SwigPyIterator___sub__,None,SwigPyIterator)
+SwigPyIterator_swigregister = _image_ground_connection.SwigPyIterator_swigregister
+SwigPyIterator_swigregister(SwigPyIterator)
+
 SHARED_PTR_DISOWN = _image_ground_connection.SHARED_PTR_DISOWN
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
@@ -97,6 +122,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -158,6 +186,16 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
 
     This class gives a generic interface that can be used for any kind of
     a connection between the ground and an image.
+
+    An important implementation issue, because of the way the templates
+    work in the boost serialization library if you derive from this class
+    and want to use boost serialize on it, make sure to derive virtual,
+    e.g
+
+    class Foo : public virtual ImageGroundConnection { blah blah };
+
+    This doesn't hurt anything, for other code and because of how boost
+    deals with multiple inheritance is required.
 
     C++ includes: image_ground_connection.h 
     """
@@ -234,6 +272,23 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         some way of handling no image coordinate data. 
         """
         return _image_ground_connection.ImageGroundConnection_image_coordinate(self, *args)
+
+    def image_coordinate_with_status(self, *args):
+        """
+        virtual void GeoCal::ImageGroundConnection::image_coordinate_with_status(const GroundCoordinate &Gc, ImageCoordinate &Res, bool &Success)
+        const
+        Variation of image_coordinate that returns a status instead of
+        throwing an exception.
+
+        If there are many points calls that might throw an exception (e.g.,
+        looking at area near the edge of the image footprint on the ground)
+        the cost of setting up and catching the exceptions can be expensive.
+
+        The default implementation just catches any
+        ImageGroundConnectionFailed exceptions and set the status accordingly.
+        But derived classes can give a more efficient implementation. 
+        """
+        return _image_ground_connection.ImageGroundConnection_image_coordinate_with_status(self, *args)
 
     def image_coordinate_jac_cf(self, *args):
         """
@@ -534,6 +589,7 @@ ImageGroundConnection.__ground_coordinate = new_instancemethod(_image_ground_con
 ImageGroundConnection.ground_coordinate_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_dem,None,ImageGroundConnection)
 ImageGroundConnection.ground_coordinate_approx_height = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_approx_height,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate,None,ImageGroundConnection)
+ImageGroundConnection.image_coordinate_with_status = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_with_status,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_cf = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm,None,ImageGroundConnection)
 ImageGroundConnection.cover = new_instancemethod(_image_ground_connection.ImageGroundConnection_cover,None,ImageGroundConnection)
@@ -672,6 +728,47 @@ class ImageGroundConnectionCopy(ImageGroundConnection):
 ImageGroundConnectionCopy._v_igc_original = new_instancemethod(_image_ground_connection.ImageGroundConnectionCopy__v_igc_original,None,ImageGroundConnectionCopy)
 ImageGroundConnectionCopy_swigregister = _image_ground_connection.ImageGroundConnectionCopy_swigregister
 ImageGroundConnectionCopy_swigregister(ImageGroundConnectionCopy)
+
+class Vector_ImageGroundConnection(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __iter__(self): return self.iterator()
+    def __init__(self, *args): 
+        _image_ground_connection.Vector_ImageGroundConnection_swiginit(self,_image_ground_connection.new_Vector_ImageGroundConnection(*args))
+    __swig_destroy__ = _image_ground_connection.delete_Vector_ImageGroundConnection
+Vector_ImageGroundConnection.iterator = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_iterator,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.__nonzero__ = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection___nonzero__,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.__bool__ = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection___bool__,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.__len__ = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection___len__,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.pop = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_pop,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.__getslice__ = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection___getslice__,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.__setslice__ = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection___setslice__,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.__delslice__ = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection___delslice__,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.__delitem__ = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection___delitem__,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.__getitem__ = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection___getitem__,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.__setitem__ = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection___setitem__,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.append = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_append,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.empty = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_empty,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.size = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_size,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.clear = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_clear,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.swap = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_swap,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.get_allocator = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_get_allocator,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.begin = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_begin,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.end = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_end,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.rbegin = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_rbegin,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.rend = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_rend,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.pop_back = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_pop_back,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.erase = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_erase,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.push_back = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_push_back,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.front = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_front,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.back = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_back,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.assign = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_assign,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.resize = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_resize,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.insert = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_insert,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.reserve = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_reserve,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection.capacity = new_instancemethod(_image_ground_connection.Vector_ImageGroundConnection_capacity,None,Vector_ImageGroundConnection)
+Vector_ImageGroundConnection_swigregister = _image_ground_connection.Vector_ImageGroundConnection_swigregister
+Vector_ImageGroundConnection_swigregister(Vector_ImageGroundConnection)
 
 
 

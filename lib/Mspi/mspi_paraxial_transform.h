@@ -3,6 +3,10 @@
 #include "printable.h"
 #include <blitz/array.h>
 #include <map>
+#ifdef USE_BOOST_SERIALIZATON
+#include <boost/serialization/map.hpp>
+#endif
+
 namespace GeoCal {
 /****************************************************************//**
   This handles the non-linearity of MSPI camera optics. This goes to
@@ -47,6 +51,12 @@ private:
   std::string fname;
   std::map<int, int> row_to_index;
   blitz::Array<double, 2> a, b, c, d;
+  MspiParaxialTransform() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(MspiParaxialTransform);
 #endif

@@ -28,6 +28,11 @@ Options:
        The number of rows to use, if not specified we try to make something
        close to a square figure.
 
+  --project-ref-image
+       Project the imagery to the reference imagery projection (useful
+       for data at large enough angles the distortion or rotation is too 
+       large to compare to each other or the ground).
+
   --size=n
        The size of the image to display [default: 500]
 
@@ -43,6 +48,9 @@ if(args.ref_image):
 else:
     ref_image = None
 
+mi = None
+if(args.project_ref_image):
+    mi = ref_image.map_info
 tp.display(igc, sz = args.size, ref_image = ref_image, 
-           number_row = args.number_row)
+           number_row = args.number_row, map_info = mi)
 plt.show()

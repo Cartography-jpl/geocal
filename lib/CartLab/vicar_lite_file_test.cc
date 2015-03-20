@@ -99,7 +99,6 @@ BOOST_AUTO_TEST_CASE(vicar_lite_file)
   f.do_test();			// Test protected members.
 }
 
-
 BOOST_AUTO_TEST_CASE(vicar_lite_raster_image)
 {
   VicarLiteRasterImage f(fname);
@@ -161,6 +160,76 @@ BOOST_AUTO_TEST_CASE(vicar_lite_point_vs_area)
   BOOST_CHECK_CLOSE
     (distance(*fpixel_is_point_make_area.ground_coordinate(-0.5, -0.5),
 	      ulc), 0, 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_file)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<VicarLiteFile> f(new VicarLiteFile(fname));
+  std::string d = serialize_write_string(f);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<VicarLiteFile> fr = 
+    serialize_read_string<VicarLiteFile>(d);
+  BOOST_CHECK_EQUAL(fr->number_band(), 1);
+  BOOST_CHECK_EQUAL(fr->number_line(), 10);
+  BOOST_CHECK_EQUAL(fr->number_sample(), 10);
+  BOOST_CHECK_CLOSE(fr->label<double>("SINC"), 1.0, 1e-4);
+  BOOST_CHECK_EQUAL(fr->label<int>("RECSIZE"), 10);
+  BOOST_CHECK_EQUAL(fr->label<std::string>("BINTFMT"), "LOW");
+  BOOST_CHECK_EQUAL(fr->map_info().number_x_pixel(), 10);
+  BOOST_CHECK_EQUAL(fr->map_info().number_y_pixel(), 10);
+  BOOST_CHECK_CLOSE(fr->map_info().ulc_x(), 44.799913294865902, 1e-4);
+  BOOST_CHECK_CLOSE(fr->map_info().ulc_y(), 35.900027777778142, 1e-4);
+  for(int i = 0; i < 10; ++i)
+    for(int j = 0; j < 10; ++j)
+      BOOST_CHECK_EQUAL(fr->read_int(0, i, j), i + j);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_raster)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<VicarLiteRasterImage> f(new VicarLiteRasterImage(fname));
+  std::string d = serialize_write_string(f);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<VicarLiteRasterImage> fr = 
+    serialize_read_string<VicarLiteRasterImage>(d);
+  BOOST_CHECK_EQUAL(fr->number_line(), 10);
+  BOOST_CHECK_EQUAL(fr->number_sample(), 10);
+  BOOST_CHECK_EQUAL(fr->number_tile_line(), 10);
+  BOOST_CHECK_EQUAL(fr->number_tile_sample(), 10);
+  BOOST_CHECK(fr->has_map_info());
+  BOOST_CHECK_EQUAL(fr->map_info().number_x_pixel(), 10);
+  BOOST_CHECK_EQUAL(fr->map_info().number_y_pixel(), 10);
+  BOOST_CHECK_CLOSE(fr->map_info().ulc_x(), 44.799913294865902, 1e-4);
+  BOOST_CHECK_CLOSE(fr->map_info().ulc_y(), 35.900027777778142, 1e-4);
+  
+  for(int i = 0; i < 10; ++i)
+    for(int j = 0; j < 10; ++j)
+      BOOST_CHECK_EQUAL((*fr)(i, j), (i + j));
+
+  BOOST_CHECK(fr->has_rpc());
+  Rpc rpc = fr->rpc();
+  ImageCoordinate ic_expect(5729.22, 27561.36);
+  Geodetic g(35.8399968, 45.0770183, 1017);
+  BOOST_CHECK_EQUAL(rpc.image_coordinate(g), ic_expect);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_dem)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<VicarLiteDem> f(new VicarLiteDem(fname));
+  std::string d = serialize_write_string(f);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<VicarLiteDem> fr = 
+    serialize_read_string<VicarLiteDem>(d);
+  Geodetic g1(35.9, 44.800, 100);
+  BOOST_CHECK_CLOSE(fr->height_reference_surface(g1), 1.0, 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

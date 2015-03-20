@@ -41,6 +41,8 @@ public:
 
   virtual double undulation(const GroundCoordinate& Gc) const
   { return map_file_->interpolate(map_file_->coordinate(Gc)); }
+  virtual double undulation(const Geodetic& Gc) const
+  { return map_file_->interpolate(map_file_->coordinate(Gc)); }
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -55,6 +57,17 @@ public:
   
 private:
   boost::shared_ptr<GdalRasterImage> map_file_;
+#ifdef USE_BOOST_SERIALIZATON
+  GdalDatum() {}
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version)
+  {
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Datum)
+      & GEOCAL_NVP_(map_file);
+  }
+#endif
+
 };
 }
 #endif

@@ -1,7 +1,27 @@
 #include "image_mask.h"
 #include <boost/foreach.hpp>
 #include <cmath>
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void ImageMask::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(ImageMask);
+}
+
+template<class Archive>
+void CombinedImageMask::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(ImageMask);
+  GEOCAL_BASE(CombinedImageMask, ImageMask);
+  ar & GEOCAL_NVP(mask_list);
+}
+
+GEOCAL_IMPLEMENT(ImageMask);
+GEOCAL_IMPLEMENT(CombinedImageMask);
+#endif
 
 //-----------------------------------------------------------------------
 /// Indicate if an ImageCoordinate is masked or not. We search for the

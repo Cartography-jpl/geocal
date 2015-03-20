@@ -83,6 +83,10 @@ public:
   virtual Time max_time() const = 0;
 
   virtual void print(std::ostream& Os) const = 0;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -195,11 +199,14 @@ public:
   { range_check(i, i, size_time_list());
     return tlist[i];
   }
-private:
+protected:
   int min_line_;
   std::vector<Time> tlist;
+  MeasuredTimeTable() { }
 };
 
 }
+
+GEOCAL_EXPORT_KEY(TimeTable);
 #endif
 

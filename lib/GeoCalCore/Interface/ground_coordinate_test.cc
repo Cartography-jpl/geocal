@@ -127,4 +127,159 @@ BOOST_AUTO_TEST_CASE(geocentric)
   BOOST_CHECK_EQUAL(g.print_to_string(), "Geocentric: (30 deg, 40 deg, 50 m)");
 }
 
+BOOST_AUTO_TEST_CASE(pos_and_vel)
+{
+  Geodetic g(10, 20, 30);
+  Ecr e(g);
+  Time t = Time::parse_time("2003-01-01T10:30:00Z");
+  boost::array<double, 3> vel_cf = {{100, 200, 300}};
+  boost::array<double, 3> vel_ci;
+  boost::shared_ptr<CartesianInertial> ci;
+  convert_position_and_velocity(t, e, vel_cf, ci, vel_ci);
+  BOOST_CHECK_CLOSE(ci->position[0], 888551.27707691176, 1e-4);
+  BOOST_CHECK_CLOSE(ci->position[1], -6218769.7591331499, 1e-4);
+  BOOST_CHECK_CLOSE(ci->position[2], 1100106.8473076127, 1e-4);
+  BOOST_CHECK_CLOSE(vel_ci[0], 628.71130860798417, 1e-4);
+  BOOST_CHECK_CLOSE(vel_ci[1], -74.22614700738886, 1e-4);
+  BOOST_CHECK_CLOSE(vel_ci[2], 299.83611083221604, 1e-4);
+  boost::shared_ptr<CartesianFixed> cf;
+  convert_position_and_velocity(t, *ci, vel_ci, cf, vel_cf);
+  BOOST_CHECK(distance(e, *cf) < 1e-4);
+  BOOST_CHECK_CLOSE(vel_cf[0], 100, 1e-4);
+  BOOST_CHECK_CLOSE(vel_cf[1], 200, 1e-4);
+  BOOST_CHECK_CLOSE(vel_cf[2], 300, 1e-4);
+  // Sanity check, the earth equator rotation speed according to
+  // wikipedia 465.1 m/s.
+  Ecr e2(Geodetic(0, 0));
+  vel_cf[0] = 0;
+  vel_cf[1] = 0;
+  vel_cf[2] = 0;
+  convert_position_and_velocity(t, e, vel_cf, ci, vel_ci);
+  double speed = sqrt(vel_ci[0] * vel_ci[0] + vel_ci[1] * vel_ci[1] + 
+		      vel_ci[2] * vel_ci[2]);
+  BOOST_CHECK(fabs(speed - 465.1) < 10.0);
+}
+
+BOOST_AUTO_TEST_CASE(pos_and_vel_with_der)
+{
+  Geodetic g(10, 20, 30);
+  Ecr cf(g);
+  Time t = Time::parse_time("2003-01-01T10:30:00Z");
+  TimeWithDerivative tder = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 7));
+  boost::array<AutoDerivative<double>, 3> cf_der = 
+    {{AutoDerivative<double>(cf.position[0], 1, 7),
+     AutoDerivative<double>(cf.position[1], 2, 7),
+      AutoDerivative<double>(cf.position[2], 3, 7)}};
+  boost::array<AutoDerivative<double>, 3> vel_cf = 
+    {{AutoDerivative<double>(100.0, 4, 7), 
+      AutoDerivative<double>(200.0, 5, 7),
+      AutoDerivative<double>(300, 6, 7)}};
+  boost::array<AutoDerivative<double>, 3> vel_ci, ci_der;
+  boost::shared_ptr<CartesianInertial> ci;
+  convert_position_and_velocity(tder, cf, cf_der, vel_cf, ci, ci_der, vel_ci);
+  BOOST_CHECK_CLOSE(ci->position[0], 888551.27707691176, 1e-4);
+  BOOST_CHECK_CLOSE(ci->position[1], -6218769.7591331499, 1e-4);
+  BOOST_CHECK_CLOSE(ci->position[2], 1100106.8473076127, 1e-4);
+  BOOST_CHECK_CLOSE(vel_ci[0].value(), 628.71130860798417, 1e-4);
+  BOOST_CHECK_CLOSE(vel_ci[1].value(), -74.22614700738886, 1e-4);
+  BOOST_CHECK_CLOSE(vel_ci[2].value(), 299.83611083221604, 1e-4);
+  boost::shared_ptr<CartesianFixed> cf2;
+  convert_position_and_velocity(tder, *ci, ci_der, vel_ci, cf2, cf_der, vel_cf);
+  BOOST_CHECK(distance(g, *cf2) < 1e-4);
+  BOOST_CHECK_CLOSE(vel_cf[0].value(), 100, 1e-4);
+  BOOST_CHECK_CLOSE(vel_cf[1].value(), 200, 1e-4);
+  BOOST_CHECK_CLOSE(vel_cf[2].value(), 300, 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(pos_and_vel_with_der_check_grad)
+{
+  Geodetic g(10, 20, 30);
+  Ecr cf(g);
+  Time t = Time::parse_time("2003-01-01T10:30:00Z");
+  TimeWithDerivative tder = 
+    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 7));
+  boost::array<AutoDerivative<double>, 3> cf_der = 
+    {{AutoDerivative<double>(cf.position[0], 1, 7),
+     AutoDerivative<double>(cf.position[1], 2, 7),
+      AutoDerivative<double>(cf.position[2], 3, 7)}};
+  boost::array<AutoDerivative<double>, 3> vel_cf = 
+    {{AutoDerivative<double>(100.0, 4, 7), 
+      AutoDerivative<double>(200.0, 5, 7),
+      AutoDerivative<double>(300, 6, 7)}};
+  boost::array<AutoDerivative<double>, 3> vel_ci, ci_der;
+  boost::shared_ptr<CartesianInertial> ci;
+  convert_position_and_velocity(tder, cf, cf_der, vel_cf, ci, ci_der, vel_ci);
+
+  boost::array<double, 3> vel_cf2 = {{100, 200, 300}};
+  boost::array<double, 3> vel_ci2;
+  boost::shared_ptr<CartesianInertial> cieps;
+  double eps = 1e-3;
+  blitz::Array<double, 2> jac_fd(3, 7);
+  blitz::Array<double, 2> jac2_fd(3, 7);
+  blitz::Array<double, 2> jac_calc(3, 7);
+  blitz::Array<double, 2> jac2_calc(3, 7);
+  blitz::Range rall(blitz::Range::all());
+  for(int i = 0; i < 3; ++i) {
+    jac_calc(i, rall) = ci_der[i].gradient();
+    jac2_calc(i, rall) = vel_ci[i].gradient();
+  }
+  convert_position_and_velocity(t + eps, cf, vel_cf2, cieps, vel_ci2);
+  for(int i = 0; i < 3; ++i) {
+    jac_fd(i, 0) = (cieps->position[i] - ci->position[i]) / eps;
+    jac2_fd(i, 0) = (vel_ci2[i] - vel_ci[i].value()) /eps;
+  }
+  eps = 10.0;
+  for(int j = 0; j < 3; ++j) {
+    double old = cf.position[j];
+    cf.position[j] += eps;
+    convert_position_and_velocity(t, cf, vel_cf2, cieps, vel_ci2);
+    cf.position[j] = old;
+    for(int i = 0; i < 3; ++i) {
+      jac_fd(i, j + 1) = (cieps->position[i] - ci->position[i]) / eps;
+      jac2_fd(i, j + 1) = (vel_ci2[i] - vel_ci[i].value()) /eps;
+    }
+  }
+  for(int j = 0; j < 3; ++j) {
+    double old = vel_cf2[j];
+    vel_cf2[j] += eps;
+    convert_position_and_velocity(t, cf, vel_cf2, cieps, vel_ci2);
+    vel_cf2[j] = old;
+    for(int i = 0; i < 3; ++i) {
+      jac_fd(i, j + 4) = (cieps->position[i] - ci->position[i]) / eps;
+      jac2_fd(i, j + 4) = (vel_ci2[i] - vel_ci[i].value()) /eps;
+    }
+  }
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac2_fd, jac2_calc, 0.1);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_eci)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<Eci> eci(new Eci(100, 200, 300));
+  std::string d = serialize_write_string(eci);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<Eci> ecir = 
+    serialize_read_string<Eci>(d);
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE(eci->position[i], ecir->position[i], 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_ecr)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<Ecr> ecr(new Ecr(100, 200, 300));
+  std::string d = serialize_write_string(ecr);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<Ecr> ecrr = 
+    serialize_read_string<Ecr>(d);
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE(ecr->position[i], ecrr->position[i], 1e-4);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

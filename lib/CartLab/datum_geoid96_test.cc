@@ -19,6 +19,35 @@ BOOST_AUTO_TEST_CASE(basic_test)
   }
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+#ifdef HAVE_BOOST_SERIALIZATON
+  if(!VicarFile::vicar_available())
+    return;
+  std::ostringstream os;
+  boost::archive::xml_oarchive oa(os);
+
+  boost::shared_ptr<Datum> d;
+  try {
+    d.reset(new DatumGeoid96());
+  } catch(const Exception&) {
+    // Don't worry if we can't find the data.
+  }
+  if(!d)
+    return;
+    oa << GEOCAL_NVP(d);
+  if(false)
+    std::cerr << os.str();
+
+  std::istringstream is(os.str());
+  boost::archive::xml_iarchive ia(is);
+  boost::shared_ptr<Datum> dr;
+  ia >> GEOCAL_NVP(dr);
+
+  BOOST_CHECK_CLOSE(dr->undulation(Geodetic(34.2,-118.03)), -33.3435, 1e-4);
+#endif
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 

@@ -1,6 +1,7 @@
 #ifndef DATUM_H
 #define DATUM_H
 #include "ground_coordinate.h"
+#include "geodetic.h"
 #include "printable.h"
 
 namespace GeoCal {
@@ -26,10 +27,23 @@ public:
   virtual double undulation(const GroundCoordinate& Gc) const = 0;
 
 //-----------------------------------------------------------------------
+/// Specialization for Gc being Geodetic. Since many of our Datums are
+/// in geodetic coordinates, this is an important specialization for
+/// performance.
+//-----------------------------------------------------------------------
+
+  virtual double undulation(const Geodetic& Gc) const = 0;
+
+//-----------------------------------------------------------------------
 /// Print to stream.
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
+
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -65,6 +79,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual double undulation(const GroundCoordinate& Gc) const { return u_; }
+  virtual double undulation(const Geodetic& Gc) const { return u_; }
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -74,8 +89,14 @@ public:
   { Os << "Simple Datum, undulation " << u_ << "m \n"; }
 private:
   double u_;			///< Value to return everywhere.
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 typedef SimpleDatum NoDatum;	///< More descriptive name in some cases
 }
+
+GEOCAL_EXPORT_KEY(Datum);
+GEOCAL_EXPORT_KEY(SimpleDatum);
 #endif

@@ -73,6 +73,8 @@ public:
   %python_attribute(update, bool)
   %python_attribute(rpc, Rpc)
   %python_attribute(map_info, MapInfo)
+  %python_attribute(has_gcps, bool)
+  %python_attribute(gcps, blitz::Array<double, 2>)
   %pythoncode {
 @rpc.setter
 def rpc(self, val):

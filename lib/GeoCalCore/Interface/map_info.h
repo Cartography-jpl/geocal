@@ -67,6 +67,8 @@ public:
 
   void coordinate(const GroundCoordinate& Gc, double& Pixel_x_index, 
 		  double& Pixel_y_index) const;
+  void coordinate(const Geodetic& Gc, double& Pixel_x_index, 
+		  double& Pixel_y_index) const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate(double Pixel_x_index, 
   	           double Pixel_y_index, const Dem& D) const;
   boost::shared_ptr<GroundCoordinate> 

@@ -84,7 +84,9 @@ def test_pickle():
         HdfOrbit_EciTod_TimeAcs
     except NameError:
         raise SkipTest
-
+    # Only run if we have serialization support in geocal
+    if(not have_serialize_supported()):
+        raise SkipTest
     orb = HdfOrbit_EciTod_TimeAcs(test_data + "sample_orbit.h5")
     t = cPickle.dumps(orb, cPickle.HIGHEST_PROTOCOL)
     orb2 = cPickle.loads(t)

@@ -1,7 +1,28 @@
 #include "with_parameter.h"
+#include "geocal_serialize_support.h"
 #include <boost/foreach.hpp>
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void WithParameter::serialize
+(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(WithParameter);
+}
+
+template<class Archive>
+void WithParameterNested::serialize
+(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(WithParameterNested);
+  ar & GEOCAL_NVP(obj_list);
+}
+
+GEOCAL_IMPLEMENT(WithParameter);
+GEOCAL_IMPLEMENT(WithParameterNested);
+#endif
 
 //-----------------------------------------------------------------------
 /// Return the part of the parameter set that passes the mask.
@@ -137,7 +158,7 @@ blitz::Array<double, 1> WithParameterNested::parameter() const
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     Array<double, 1> p = obj->parameter();
     if(p.rows() > 0) {
-      Range r(i, p.rows()-1);
+      Range r(i, i + p.rows()-1);
       res(r) = p;
       i += p.rows();
     }
@@ -153,7 +174,7 @@ void WithParameterNested::parameter(const blitz::Array<double, 1>& Parm)
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     Array<double, 1> p = obj->parameter();
     if(p.rows() > 0) {
-      Range r(i, p.rows()-1);
+      Range r(i, i + p.rows()-1);
       obj->parameter(Parm(r));
       i += p.rows();
     }
@@ -167,7 +188,7 @@ ArrayAd<double, 1> WithParameterNested::parameter_with_derivative() const
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     ArrayAd<double, 1> p = obj->parameter_with_derivative();
     if(p.rows() > 0) {
-      Range r(i, p.rows()-1);
+      Range r(i, i + p.rows()-1);
       res(r) = p;
       i += p.rows();
     }
@@ -184,7 +205,7 @@ void WithParameterNested::parameter_with_derivative
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     ArrayAd<double, 1> p = obj->parameter_with_derivative();
     if(p.rows() > 0) {
-      Range r(i, p.rows()-1);
+      Range r(i, i + p.rows()-1);
       obj->parameter_with_derivative(Parm(r));
       i += p.rows();
     }
@@ -208,7 +229,7 @@ blitz::Array<bool, 1> WithParameterNested::parameter_mask() const
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     Array<bool, 1> p = obj->parameter_mask();
     if(p.rows() > 0) {
-      Range r(i, p.rows()-1);
+      Range r(i, i + p.rows()-1);
       res(r) = p;
       i += p.rows();
     }

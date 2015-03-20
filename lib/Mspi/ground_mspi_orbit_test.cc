@@ -15,14 +15,12 @@ BOOST_AUTO_TEST_CASE(basic_test)
   CartesianInertialLookVector lv = 
     orb.ci_look_vector(t, ScLookVector(0.1,0.2,0.3));
   // From the old unit test.
-  CartesianInertialLookVector lv_exp(2.86846356437898797331e-01,
-				     -2.35281822197117601592e-01,
-				     4.85966247995245070879e-02);
+  CartesianInertialLookVector lv_exp(0.766628,-0.6288180,0.12987982709088683);
   for(int i = 0; i < 3; ++i)
     BOOST_CHECK_CLOSE(lv.direction()[i], lv_exp.direction()[i], 1e-4);
   lv = orb.ci_look_vector(t+100, ScLookVector(0.1,0.2,0.3));
   BOOST_CHECK_CLOSE(lv.direction()[0], -0.851217, 1e-4);
-  BOOST_CHECK_CLOSE(lv.direction()[1], -0.29221852, 1e-4);
+  BOOST_CHECK_CLOSE(lv.direction()[1], -0.29221994757447994, 1e-4);
   BOOST_CHECK_CLOSE(lv.direction()[2], 0.435934, 1e-4);
 }
 

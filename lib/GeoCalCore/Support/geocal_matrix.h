@@ -24,9 +24,9 @@ namespace GeoCal {
 /// Multiply a fixed size matrix with a vector. On exit res = m * x
 //-----------------------------------------------------------------------
 
-template<std::size_t D> inline void mul(const double m[D][D], 
-					const boost::array<double, D>& x,
-					boost::array<double, D>& res)
+template<class T, std::size_t D> inline void mul(const T m[D][D], 
+					const boost::array<T, D>& x,
+					boost::array<T, D>& res)
 {
   for(std::size_t i = 0; i < D; ++i) {
     res[i] = 0;
@@ -39,9 +39,9 @@ template<std::size_t D> inline void mul(const double m[D][D],
 /// Cross product
 //-----------------------------------------------------------------------
 
-inline void cross(const boost::array<double, 3>& x,
-		  const boost::array<double, 3>& y,
-		  boost::array<double, 3>& res)
+template<class T> inline void cross(const boost::array<T, 3>& x,
+		  const boost::array<T, 3>& y,
+		  boost::array<T, 3>& res)
 {
   res[0] = x[1] * y[2] - x[2] * y[1];
   res[1] = x[2] * y[0] - x[0] * y[2];
@@ -53,8 +53,8 @@ inline void cross(const boost::array<double, 3>& x,
 /// Copy a matrix. On exit, mcopy = m
 //-----------------------------------------------------------------------
 
-template<std::size_t D> inline void mat_copy(const double m[D][D], 
-					     double mcopy[D][D])
+template<class T, std::size_t D> inline void mat_copy(const T m[D][D], 
+					     T mcopy[D][D])
 {
   for(std::size_t i = 0; i < D; ++i)
     for(std::size_t j = 0; j < D; ++j)
@@ -65,8 +65,8 @@ template<std::size_t D> inline void mat_copy(const double m[D][D],
 /// Copy a matrix transpose. On exit, mcopy = m^t
 //-----------------------------------------------------------------------
 
-template<std::size_t D> inline void mat_t_copy(const double m[D][D], 
-					       double mcopy[D][D])
+template<class T, std::size_t D> inline void mat_t_copy(const T m[D][D], 
+					       T mcopy[D][D])
 {
   for(std::size_t i = 0; i < D; ++i)
     for(std::size_t j = 0; j < D; ++j)
@@ -78,9 +78,9 @@ template<std::size_t D> inline void mat_t_copy(const double m[D][D],
 /// res = m^t * x 
 //-----------------------------------------------------------------------
 
-template<std::size_t D> inline void mul_t(const double m[D][D], 
-					  const boost::array<double, D>& x,
-					  boost::array<double, D>& res)
+template<class T, std::size_t D> inline void mul_t(const T m[D][D], 
+					  const boost::array<T, D>& x,
+					  boost::array<T, D>& res)
 {
   for(std::size_t i = 0; i < D; ++i) {
     res[i] = 0;
@@ -93,10 +93,11 @@ template<std::size_t D> inline void mul_t(const double m[D][D],
 /// Dot product of two arrays.
 //-----------------------------------------------------------------------
 
-template<std::size_t D> inline double dot(const boost::array<double, D>& A,
-					  const boost::array<double, D>& B)
+template<class T, std::size_t D> inline 
+T dot(const boost::array<T, D>& A,
+	   const boost::array<T, D>& B)
 {
-  double res = 0;
+  T res = 0;
   for(std::size_t i = 0; i < D; ++i)
     res += A[i] * B[i];
   return res;
@@ -106,7 +107,8 @@ template<std::size_t D> inline double dot(const boost::array<double, D>& A,
 /// Norm of a array.
 //-----------------------------------------------------------------------
 
-template<std::size_t D> inline double norm(const boost::array<double, D>& A)
+template<class T, std::size_t D> 
+inline T norm(const boost::array<T, D>& A)
 {
   return sqrt(dot(A, A));
 }
@@ -115,9 +117,10 @@ template<std::size_t D> inline double norm(const boost::array<double, D>& A)
 /// Normalize a vector so it has length of 1.
 //-----------------------------------------------------------------------
 
-template<std::size_t D> inline void normalize(boost::array<double, D>& A)
+template<class T, std::size_t D> 
+inline void normalize(boost::array<T, D>& A)
 {
-  double u = norm(A);
+  T u = norm(A);
   for(std::size_t i = 0; i < D; ++i)
     A[i] /= u;
 }

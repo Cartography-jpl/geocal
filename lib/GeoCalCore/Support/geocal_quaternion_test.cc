@@ -66,5 +66,21 @@ BOOST_AUTO_TEST_CASE(quat_to_euler_test)
   BOOST_CHECK_CLOSE(delta * Constant::rad_to_deg, 3, 1e-8);
 }
 
+BOOST_AUTO_TEST_CASE(determine_quat_rot_test)
+{
+  boost::array<double, 3> v1 = {{1,2,3}};
+  boost::array<double, 3> v2 = {{4,5,6}};
+  normalize(v1);
+  normalize(v2);
+  boost::math::quaternion<double> q = determine_quat_rot(v1, v2);
+  boost::math::quaternion<double> v1_q(0, v1[0], v1[1], v1[2]);
+  boost::math::quaternion<double> v2_q = q * v1_q * conj(q);
+  boost::array<double, 3> v2_c = {{v2_q.R_component_2(),
+				   v2_q.R_component_3(),
+				   v2_q.R_component_4()}};
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE(v2_c[0], v2[0], 1e-4);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

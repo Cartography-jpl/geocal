@@ -65,8 +65,6 @@ public:
   {
     range_check(Lstart, 0, number_line() - (Number_line - 1));
     range_check(Sstart, 0, number_sample() - (Number_sample - 1));
-    typedef boost::multi_array_types::index_range range;
-    boost::multi_array_types::index_gen indices;
     for(int i = Lstart; i < Lstart + Number_line; ++i)
       for(int j = Sstart; j < Sstart + Number_sample; ++j, ++Res)
 	*Res = data_[i][j];
@@ -153,8 +151,6 @@ public:
   {
     range_check(Lstart, 0, number_line() - (Number_line - 1));
     range_check(Sstart, 0, number_sample() - (Number_sample - 1));
-    typedef boost::multi_array_types::index_range range;
-    boost::multi_array_types::index_gen indices;
     for(int i = Lstart; i < Lstart + Number_line; ++i)
       for(int j = Sstart; j < Sstart + Number_sample; ++j, ++Res)
 	*Res = (int) data_[i][j];

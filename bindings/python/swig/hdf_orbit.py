@@ -97,6 +97,9 @@ def _new_from_init(cls, version, *args):
     inst = cls.__new__(cls)
     inst.__init__(*args)
     return inst
+ 
+def _new_from_serialization(data):
+    return geocal_swig.serialize_read_binary(data)
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -118,11 +121,12 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.orbit_quaternion_list
 import geocal_swig.orbit
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
-class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit.Orbit):
+class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     """
     This is an implementation of an Orbit that reads position, velocity,
     and attitude quaternion from an HDF file.
@@ -158,13 +162,6 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit.Orbit):
         "/Orbit" 
         """
         _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swiginit(self,_hdf_orbit.new_HdfOrbit_EciTod_TimeAcs(*args))
-    def orbit_data(self, *args):
-        """
-        boost::shared_ptr< OrbitData > GeoCal::HdfOrbit< PositionType, TimeCreatorType >::orbit_data(const TimeWithDerivative &T) const
-
-        """
-        return _hdf_orbit.HdfOrbit_EciTod_TimeAcs_orbit_data(self, *args)
-
     def _v_file_name(self):
         """
         const std::string& GeoCal::HdfOrbit< PositionType, TimeCreatorType >::file_name() const
@@ -187,15 +184,10 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit.Orbit):
     def base_group(self):
         return self._v_base_group()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name,self.base_group)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _hdf_orbit.delete_HdfOrbit_EciTod_TimeAcs
-HdfOrbit_EciTod_TimeAcs.orbit_data = new_instancemethod(_hdf_orbit.HdfOrbit_EciTod_TimeAcs_orbit_data,None,HdfOrbit_EciTod_TimeAcs)
 HdfOrbit_EciTod_TimeAcs._v_file_name = new_instancemethod(_hdf_orbit.HdfOrbit_EciTod_TimeAcs__v_file_name,None,HdfOrbit_EciTod_TimeAcs)
 HdfOrbit_EciTod_TimeAcs._v_base_group = new_instancemethod(_hdf_orbit.HdfOrbit_EciTod_TimeAcs__v_base_group,None,HdfOrbit_EciTod_TimeAcs)
 HdfOrbit_EciTod_TimeAcs_swigregister = _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swigregister

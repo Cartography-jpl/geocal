@@ -25,6 +25,10 @@ public:
   double line;			///< Line number
   double sample;		///< Sample number
   void print(std::ostream& Os) const;
+private:
+  friend class boost::serialization::access;
+   template<class Archive>
+   void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -66,7 +70,12 @@ public:
 //-----------------------------------------------------------------------
   FrameCoordinate value() const
   { return FrameCoordinate(line.value(), sample.value()); }
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
 
+GEOCAL_EXPORT_KEY(FrameCoordinate);
+GEOCAL_EXPORT_KEY(FrameCoordinateWithDerivative);
 #endif

@@ -7,6 +7,67 @@
 #include "camera.h"
 
 namespace GeoCal {
+  namespace IgcRollingShutterHelper {
+    class IcEq;			// Internally used class. We need to
+				// declare this because we need to
+				// make it a friend class.
+    // Helper class that does a fast interpolation of position. See
+    // interpolation of position in orbit.cc, this just caches some
+    // of the intermediate values to we can rapidly calculate position
+    // at different times.
+    class PositionInterpolate {
+    public:
+      PositionInterpolate() {}
+      PositionInterpolate(const boost::array<double, 3>& P1,
+			  const boost::array<double, 3>& V1,
+			  const boost::array<double, 3>& P2,
+			  const boost::array<double, 3>& V2,
+			  Time Tmin,
+			  double Tspace)
+	: tmin(Tmin), tspace(Tspace)
+      {
+	for(int i = 0; i < 3; ++i) {
+	  c0[i] = P1[i];
+	  c1[i] = V1[i] * tspace;
+	  c2[i] = (P2[i] - P1[i]) * 3 - (V2[i] + V1[i] * 2) * tspace;
+	  c3[i] = (P2[i] - P1[i]) * (-2) + (V2[i] + V1[i]) * tspace;
+	}
+      }
+      void position(Time T, boost::array<double, 3>& Pres) const
+      {
+	double t = (T - tmin) / tspace;
+	for(int i = 0; i < 3; ++i)
+	  Pres[i] = c0[i] + (c1[i] + (c2[i] + c3[i] * t) * t) * t;
+      }
+      void velocity(Time T, boost::array<double, 3>& Vres) const
+      {
+	double t = (T - tmin) / tspace;
+	for(int i = 0; i < 3; ++i)
+	  Vres[i] = (c1[i] + (c2[i] * 2 + c3[i] * (3 * t)) * t) / tspace;
+      }
+    private:
+      boost::array<double, 3> c0, c1, c2, c3;
+      Time tmin;
+      double tspace;
+    };
+    // Helper class that does a fast interpolation of quaternion.
+    class QuaternionInterpolate {
+    public:
+      QuaternionInterpolate() {}
+      QuaternionInterpolate(const boost::math::quaternion<double>& Q1,
+			    const boost::math::quaternion<double>& Q2,
+			    const Time& Tmin,
+			    double Tspace)
+	: q1(Q1), q2(Q2), tmin(Tmin), tspace(Tspace) {}
+      boost::math::quaternion<double> operator()(const Time& Tm) const
+      { return interpolate_quaternion(q1, q2, Tm - tmin, tspace); }
+    private:
+      boost::math::quaternion<double> q1, q2;
+      Time tmin;
+      double tspace;
+    };
+  }
+
 /****************************************************************//**
   This is a ImageGroundConnection where the connection is made by
   OrbitData and a Camera. This is similar to
@@ -25,10 +86,18 @@ namespace GeoCal {
   We currently only support the line roll direction, although we 
   have some interface support for sample roll direction (just in case 
   we need to expand this in the future).
+
+  Note that this class assumes that the orbit data varies smoothly 
+  over the time that the rolling shutter operates. We speed up the
+  class by taking the orbit data at the start and end of the rolling
+  shutter and interpolating. If this is *not* true of the orbit data,
+  then there will be significant errors in the calculations done by
+  this class.
 *******************************************************************/
 
-class IgcRollingShutter : public ImageGroundConnection, 
-			  public WithParameterNested {
+class IgcRollingShutter : public virtual ImageGroundConnection, 
+			  public virtual WithParameterNested,
+			  public Observer<Orbit> {
 public:
   enum RollDirection { ROLL_LINE_DIRECTION , ROLL_SAMPLE_DIRECTION };
 
@@ -65,6 +134,8 @@ public:
 
   virtual ~IgcRollingShutter() {}
 
+  virtual void notify_update(const Orbit& Orb);
+
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
 		 boost::shared_ptr<CartesianFixed>& P) const;
@@ -74,6 +145,9 @@ public:
   ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
+  virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
+					    ImageCoordinate& Res,
+					    bool& Success) const;
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   virtual blitz::Array<double, 7> 
@@ -83,12 +157,16 @@ public:
 		     int nintegration_step = 1) const;
   virtual void footprint_resolution(int Line, int Sample, 
 				    double &Line_resolution_meter, 
-				    double &Sample_resolution_meter);
+				    double &Sample_resolution_meter) const;
   virtual bool has_time() const { return true; }
   virtual Time pixel_time(const ImageCoordinate& Ic) const
   { Time t; FrameCoordinate fc; time_table_->time(Ic, t, fc);
     return t; }
   virtual void print(std::ostream& Os) const;
+
+  virtual int number_line() const { return cam->number_line(0); }
+  virtual int number_sample() const { return cam->number_sample(0); }
+  virtual int number_band() const { return cam->number_band(); }
 
 //-----------------------------------------------------------------------
 /// Orbit that we are using
@@ -96,13 +174,7 @@ public:
 
   const boost::shared_ptr<Orbit>& orbit() const 
   { return orbit_; }
-
-//-----------------------------------------------------------------------
-/// Set orbit.
-//-----------------------------------------------------------------------
-
-  void orbit(const boost::shared_ptr<Orbit>& Orb) 
-  { orbit_ = Orb; }
+  void orbit(const boost::shared_ptr<Orbit>& Orb);
 
 //-----------------------------------------------------------------------
 /// Time table that we are using
@@ -117,19 +189,14 @@ public:
 //-----------------------------------------------------------------------
 
   void time_table(const boost::shared_ptr<TimeTable>& Tt) 
-  { time_table_ = Tt; }
+  { time_table_ = Tt; notify_update(*orbit_); }
 
 //-----------------------------------------------------------------------
 /// Camera that we are using
 //-----------------------------------------------------------------------
 
   const boost::shared_ptr<Camera>& camera() const {return cam; }
-
-//-----------------------------------------------------------------------
-/// Set Camera that we are using
-//-----------------------------------------------------------------------
-
-  void camera(const boost::shared_ptr<Camera>& C) { cam = C; }
+  void camera(const boost::shared_ptr<Camera>& C);
 
 //-----------------------------------------------------------------------
 /// Resolution in meters that we examine Dem out. This affects how
@@ -220,7 +287,33 @@ protected:
 	    double Resolution=30, int Band=0, 
 	    double Max_height=9000);
 private:
+  friend class IgcRollingShutterHelper::IcEq;
   boost::shared_ptr<Orbit> orbit_;
+  boost::shared_ptr<QuaternionOrbitData> od1;
+  boost::shared_ptr<QuaternionOrbitData> od2;
+  IgcRollingShutterHelper::PositionInterpolate pinterp;
+  IgcRollingShutterHelper::QuaternionInterpolate qinterp;
+  void position_cf(const Time& Tm, boost::array<double, 3>& Pres) const
+  { pinterp.position(Tm, Pres); }
+  boost::shared_ptr<CartesianFixed> position_cf(const Time& Tm) const
+  {
+    boost::array<double, 3> p;
+    position_cf(Tm, p);
+    return od1->position_cf()->create(p);
+  }
+  boost::math::quaternion<double> velocity_cf(const Time& Tm) const
+  {
+    boost::array<double, 3> v;
+    pinterp.velocity(Tm, v);
+    return boost::math::quaternion<double>(0, v[0], v[1], v[2]);
+  }
+  boost::math::quaternion<double> sc_to_cf(const Time& Tm) const
+  {
+    return qinterp(Tm);
+  }
+  boost::shared_ptr<QuaternionOrbitData> 
+  orbit_data(const Time& Tm) const
+  { return interpolate(*od1, *od2, Tm); }
   boost::shared_ptr<TimeTable> time_table_;
   boost::shared_ptr<Camera> cam;
   boost::shared_ptr<Refraction> refraction_;
@@ -229,7 +322,15 @@ private:
   int b;
   double max_h;
   double time_tolerance_;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 }
+
+GEOCAL_EXPORT_KEY(IgcRollingShutter);
 #endif
 

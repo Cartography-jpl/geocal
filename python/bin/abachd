@@ -50,6 +50,10 @@ Options:
   -h --help         
        Print this message
 
+  --aoi=f
+       Subset the input data so it just covers the AOI. This should be a 
+       mapinfo.
+
   --dem-file=f
        Can optionally specify a DEM file to use. The default is to use the
        SRTM Level 2 data.
@@ -168,6 +172,29 @@ def determine_subset(fname):
         igc1 = None
         igc2 = None
         subset = [sl, ss, el - sl + 1, es - ss + 1]
+    elif(args.aoi):
+        dem = read_shelve(dbfile + ":dem_initial")
+        aoi = read_shelve(args.aoi)
+        igc = GdalImageGroundConnection(fname, dem)
+        ulc_g = dem.surface_p(aoi.ground_coordinate(0,0))
+        lrc_g = dem.surface_p(aoi.ground_coordinate(aoi.number_x_pixel,
+                                                    aoi.number_y_pixel))
+        ulc = igc.image_coordinate(ulc_g)
+        lrc = igc.image_coordinate(lrc_g)
+        sl = min(max(int(floor(ulc.line), 0), igc.number_line))
+        ss = min(max(int(floor(ulc.sample), 0), igc.number_sample))
+        el = min(max(int(floor(lrc.line), 0), igc.number_line))
+        es = min(max(int(floor(lrc.sample), 0), igc.number_sample))
+        if(sl > el):
+            t = sl
+            sl = el
+            el = t
+        if(ss > es):
+            t = ss
+            ss = es
+            es = t
+        igc = None
+        subset = [sl, ss, el - sl + 1, es - ss + 1]
     return subset
 
 def import_image(fname, name, subset = None):
@@ -252,6 +279,9 @@ subset = None
 if(args.start_line):
     subset = [args.start_line, args.start_sample, args.number_line,
               args.number_sample]
+if(args.aoi):
+    susbet = determine_subset(pre_pan_raw)
+
 import_image(pre_pan_raw, "pre_pan_raw", subset = subset)
 if(pre_ms_raw):
     import_image_ms(pre_ms_raw, "pre_raw_ms", subset = determine_subset(pre_ms_raw))

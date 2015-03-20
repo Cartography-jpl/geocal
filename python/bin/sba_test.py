@@ -1,11 +1,14 @@
 from geocal import *
 import subprocess
 import os
+from nose.plugins.skip import Skip, SkipTest
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_sba():
     '''Create a simple GDAL based Igc, collect tie points on it, and run an 
     SBA.'''
+    if(not have_serialize_supported()):
+        raise SkipTest
     try:
         os.remove("sqlite_shelf.db")
     except OSError as exc:

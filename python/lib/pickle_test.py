@@ -14,6 +14,8 @@ have_afid_data = "AFIDS_VDEV_DATA" in os.environ
 
 # Test picking of Time
 def test_time_pickle():
+    if(not have_serialize_supported()):
+        raise SkipTest
     tm = Time.time_j2000(100.0)
     t = cPickle.dumps(tm, cPickle.HIGHEST_PROTOCOL)
     tm2 = cPickle.loads(t)
@@ -21,6 +23,8 @@ def test_time_pickle():
 
 # Test pickling of ImageCoordinate
 def test_image_coordinate_pickle():
+    if(not have_serialize_supported()):
+        raise SkipTest
     ic = ImageCoordinate(1, 2)
     t = cPickle.dumps(ic, cPickle.HIGHEST_PROTOCOL)
     x = cPickle.loads(t)
@@ -31,6 +35,8 @@ def test_image_coordinate_pickle():
 def test_rpc_pickle():
     # A sample RPC. Nothing special about this, these are just reasonable
     # values
+    if(not have_serialize_supported()):
+        raise SkipTest
     rpc = Rpc()
     rpc.rpc_type = Rpc.RPC_B
     rpc.line_offset = 2881
@@ -90,6 +96,8 @@ def test_rpc_pickle():
 
 def test_quaternion_camera_pickle():
     '''Test pickling of QuaternionCamera'''
+    if(not have_serialize_supported()):
+        raise SkipTest
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,
                            1.0 / 2500000,
@@ -110,6 +118,8 @@ def test_quaternion_camera_pickle():
 
 def test_quaternion_pickle():
     '''Make sure we can pickle quaternions'''
+    if(not have_serialize_supported()):
+        raise SkipTest
     t = cPickle.dumps(Quaternion_double(1, 2, 3, 4), cPickle.HIGHEST_PROTOCOL)
     q = cPickle.loads(t)
     assert_almost_equal(q.R_component_1, 1, 4)
@@ -163,6 +173,8 @@ def create_rpc_sample():
 #create_rpc_sample()
 
 def test_mapinfo_pickle():
+    if(not have_serialize_supported()):
+        raise SkipTest
     r = GdalRasterImage(test_data + "dem_foot.tif")
     m = r.map_info
     cPickle.dumps(m.transform)
@@ -180,6 +192,8 @@ def test_mapinfo_pickle():
 
 # Test pickle of VicarLiteFile
 def test_vicar_lite_file():
+    if(not have_serialize_supported()):
+        raise SkipTest
     f = VicarLiteFile(test_data + "vicar.img")
     t = cPickle.dumps(f)
     x = cPickle.loads(t)
@@ -187,6 +201,8 @@ def test_vicar_lite_file():
 
 # Test pickle of VicarLiteRasterImage
 def test_vicar_lite_raster_image():
+    if(not have_serialize_supported()):
+        raise SkipTest
     f = VicarLiteRasterImage(test_data + "vicar.img")
     t = cPickle.dumps(f)
     x = cPickle.loads(t)
@@ -194,6 +210,8 @@ def test_vicar_lite_raster_image():
 
 # Test pickle of VicarLiteDem
 def test_vicar_lite_dem():
+    if(not have_serialize_supported()):
+        raise SkipTest
     f = VicarLiteDem(test_data + "vicar.img")
     t = cPickle.dumps(f)
     x = cPickle.loads(t)
@@ -201,6 +219,8 @@ def test_vicar_lite_dem():
 
 # Test pickle of VicarRasterImage
 def test_vicar_raster_image():
+    if(not have_serialize_supported()):
+        raise SkipTest
     try:
         # Depending on the options used when building, this class might
         # not be available. If not, then just skip this test.
@@ -213,6 +233,8 @@ def test_vicar_raster_image():
     assert f.vicar_file.file_name == x.vicar_file.file_name
 
 def test_srtm():
+    if(not have_serialize_supported()):
+        raise SkipTest
     if(not have_afid_data):
         raise SkipTest
     try:
@@ -226,6 +248,8 @@ def test_srtm():
     assert dem.directory_base == dem2.directory_base
 
 def test_gdal_raster_image():
+    if(not have_serialize_supported()):
+        raise SkipTest
     r = GdalRasterImage(test_data + "rpc.ntf")
     t = cPickle.dumps(r)
     r2 = cPickle.loads(t)
@@ -235,12 +259,16 @@ def test_gdal_raster_image():
     assert r.number_tile_sample == r2.number_tile_sample
 
 def test_simple_dem():
+    if(not have_serialize_supported()):
+        raise SkipTest
     d = SimpleDem(10.0)
     t = cPickle.dumps(d)
     d2 = cPickle.loads(t)
     assert_almost_equal(d.h, d2.h)
 
 def test_forstner_feature_detector():
+    if(not have_serialize_supported()):
+        raise SkipTest
     f = ForstnerFeatureDetector()
     t = cPickle.dumps(f)
     f2 = cPickle.loads(t)
@@ -254,6 +282,8 @@ def test_forstner_feature_detector():
     assert_almost_equal(f.basic_robert_threshold, f2.basic_robert_threshold)
     
 def test_gdal_dem():
+    if(not have_serialize_supported()):
+        raise SkipTest
     # Datum is nonsense, but we want to make sure it gets restored correctly
     d = GdalDem(test_data + "dem_foot.tif", SimpleDatum(10.0))
     t = cPickle.dumps(d)
@@ -265,6 +295,8 @@ def test_gdal_dem():
     assert d.number_tile == d2.number_tile
     
 def test_ipi():
+    if(not have_serialize_supported()):
+        raise SkipTest
     tmin = Time.parse_time("2003-01-01T11:00:00Z")
     tmax = tmin + 10000 * 40.8e-3
     orb = KeplerOrbit()
@@ -284,6 +316,8 @@ def test_ipi():
     ipi2 = cPickle.loads(t)
 
 def test_simple_camera():
+    if(not have_serialize_supported()):
+        raise SkipTest
     c = SimpleCamera()
     t = cPickle.dumps(c)
     c2 = cPickle.loads(t)
@@ -296,6 +330,8 @@ def test_simple_camera():
     assert_almost_equal(c.number_sample(0), c2.number_sample(0))
 
 def test_kepler_orbit():
+    if(not have_serialize_supported()):
+        raise SkipTest
     orb = KeplerOrbit()
     t = cPickle.dumps(orb)
     orb2 = cPickle.loads(t)

@@ -1,6 +1,7 @@
 from geocal import *
 import subprocess
 import os
+from nose.plugins.skip import Skip, SkipTest
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 # Simple test to see if we have AFIDS data available. We check for the
@@ -10,6 +11,8 @@ have_afid_data = "AFIDS_VDEV_DATA" in os.environ
 
 def test_shelve_dem():
     '''Create simple GDAL based DEM.'''
+    if(not have_serialize_supported()):
+        raise SkipTest
     try:
         os.remove("sqlite_shelf.db")
     except OSError as exc:

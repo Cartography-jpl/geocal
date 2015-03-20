@@ -6,6 +6,7 @@ from image_ground_connection import *
 import multiprocessing
 from multiprocessing import Pool
 import cPickle
+from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
@@ -33,18 +34,24 @@ def test_range_img1():
     assert send == 577
 
 def test_height_grid():
+    if(not have_serialize_supported()):
+        raise SkipTest
     pool = Pool()
 #    pool = None
     print dgen.height_grid(pool = pool)
 #    dgen.plot_res()
 
 def test_height_grid_surf():
+    if(not have_serialize_supported()):
+        raise SkipTest
     pool = Pool()
 #    pool = None
     print dgen_surf.height_grid(pool = pool)
 #    dgen.plot_res()
 
 def test_pickle():
+    if(not have_serialize_supported()):
+        raise SkipTest
     t = cPickle.dumps(dgen)
     dgen2 = cPickle.loads(t)
     r = dgen2.surface_point(550, 550, 551, 551, False)

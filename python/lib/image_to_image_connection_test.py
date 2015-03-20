@@ -3,11 +3,14 @@ from image_to_image_connection import *
 from geocal_swig import *
 import os
 import cPickle
+from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 # Basic test of Rpc
 def test_rpc_image_ground_connection():
+    if(not have_serialize_supported()):
+        raise SkipTest
     # A sample RPC. Nothing special about this, these are just reasonable
     # values. Note that this gets created in pickle_test.py if you need to
     # regenerate this for some reason

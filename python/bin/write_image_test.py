@@ -6,6 +6,8 @@ test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_shelve_image():
     '''Create simple GDAL based image.'''
+    if(not have_serialize_supported()):
+        raise SkipTest
     try:
         VicarRasterImage
     except NameError:

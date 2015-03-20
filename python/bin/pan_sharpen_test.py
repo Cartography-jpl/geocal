@@ -9,6 +9,8 @@ expected_dir = os.path.dirname(__file__) + "/../../unit_test_data/expected_resul
 
 def test_pan_sharpen_map_projected():
     '''Test the pan_sharpen PDF. This test is for already map projected data'''
+    if(not have_serialize_supported()):
+        raise SkipTest
     # Skip we GDAL can't read VICAR.
     if(os.environ.get("NO_VICAR_GDALPLUGIN")):
         raise SkipTest
@@ -35,6 +37,8 @@ def test_pan_sharpen_map_projected():
 
 def test_pan_sharpen_rpc():
     '''Test the pan_sharpen PDF. This test is for data with an RPC'''
+    if(not have_serialize_supported()):
+        raise SkipTest
     # Skip we GDAL can't read VICAR.
     if(os.environ.get("NO_VICAR_GDALPLUGIN")):
         raise SkipTest

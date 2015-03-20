@@ -1,11 +1,14 @@
 from nose.tools import *
 from image_ground_connection import *
 import cPickle
+from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 dem = SimpleDem()
 
 def test_rpc_image_ground_pickle():
+    if(not have_serialize_supported()):
+        raise SkipTest
     img = VicarLiteRasterImage(test_data + "10MAY21-1.img")
     ig = RpcImageGroundConnection(img.rpc, dem, img)
     t = cPickle.dumps(ig.rpc)
@@ -17,6 +20,8 @@ def test_rpc_image_ground_pickle():
     ig2 = cPickle.loads(t)
 
 def test_vicar_image_ground_connection():
+    if(not have_serialize_supported()):
+        raise SkipTest
     igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", dem)
     t = [False] * 20
     t[0] = True
@@ -35,6 +40,8 @@ def test_vicar_image_ground_connection():
     assert_almost_equal(igc2.rpc.sample_numerator[0], 2)
 
 def test_gdal_image_ground_connection():
+    if(not have_serialize_supported()):
+        raise SkipTest
     igc1 = GdalImageGroundConnection(test_data + "10MAY21-1.tif", dem)
     t = cPickle.dumps(igc1)
     igc2 = cPickle.loads(t)

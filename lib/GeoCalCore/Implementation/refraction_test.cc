@@ -56,6 +56,8 @@ BOOST_AUTO_TEST_CASE(refraction)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+  if(!have_serialize_supported())
+    return;
   boost::shared_ptr<Refraction> r(new Refraction(0,0));
   std::string d = serialize_write_string(r);
   if(false)

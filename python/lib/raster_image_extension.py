@@ -78,6 +78,16 @@ def _read_all(self):
 
 geocal_swig.RasterImage.read_all = _read_all
 
+def _read_all_byte_scale(self):
+    '''OpenCV has some functions that only work with byte data. This function
+    reads all the data, and then scaled this to byte. Right now we just scale
+    by the maximum value - we may want to do something more sophisticated in
+    the future if we find that we need to.'''
+    d = self.read_all()
+    return (d / float(d.max()) * 255).round().astype(np.uint8)
+
+geocal_swig.RasterImage.read_all_byte_scale = _read_all_byte_scale
+
 def _footprint_geometry(self, cconver = geocal_swig.GeodeticConverter()):
     '''Return a ogr Geometry object describing the footprint of the 
     RasterImage. This includes the 4 corners of the image.

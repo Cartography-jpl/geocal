@@ -295,5 +295,30 @@ class GcpTiePointCollect(object):
                 tp.image_location[i] = ic2, lsigma, ssigma
         return tp
 
+class TiePointCollectFM(object):
+    '''Given a IgcCollection, collect tiepoints by feature matching. This is
+    very similar to TiePointCollect, except we use feature matching.
+
+    Note that unlike TiePointCollect we don't have the concept of a 'base_image' here,
+    instead we match all the images at once.'''
+    def __init__(self, igc_collection, max_ground_covariance = 20 * 20,
+                 number_feature = 500, number_octave_levels = 4):
+        pass
+
+    def detect_and_compute(self, ind):
+        '''Detect keypoints and compute descriptor the given raster image.'''
+        pass
+
+    def match_feature(self, kp_and_desc, ind0, ind1):
+        '''Match features between two images'''
+        pass
+
+    def tp_list(self, ind):
+        '''Generate list of tie points, starting with the given image.'''
+        pass
+
+    def tie_point_list(self, pool = None):
+        '''Generate a TiePointCollect.'''
+        pass
 
                                                      

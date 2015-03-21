@@ -151,9 +151,9 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
         Constructor. 
         """
         _gdal_raster_image.GdalRasterImage_swiginit(self,_gdal_raster_image.new_GdalRasterImage(*args))
-    def read_all(*args):
+    def read_all_bands(*args):
         """
-        std::vector< boost::shared_ptr< RasterImage > > GdalRasterImage::read_all(const std::string &Fname)
+        std::vector< boost::shared_ptr< RasterImage > > GdalRasterImage::read_all_bands(const std::string &Fname)
         For some formats, reading all of the data for all the bands at one
         time is much quicker than reading each band separately (assuming you
         actually want all the data).
@@ -167,9 +167,9 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
         This function reads all of the data into memory and returns
         RasterImages that can be used to read the data. 
         """
-        return _gdal_raster_image.GdalRasterImage_read_all(*args)
+        return _gdal_raster_image.GdalRasterImage_read_all_bands(*args)
 
-    read_all = staticmethod(read_all)
+    read_all_bands = staticmethod(read_all_bands)
     def _v_gdal_data_base(self):
         """
         boost::shared_ptr<GdalBase> GeoCal::GdalRasterImage::gdal_data_base_ptr() const
@@ -420,9 +420,9 @@ GdalRasterImage.metadata = new_instancemethod(_gdal_raster_image.GdalRasterImage
 GdalRasterImage_swigregister = _gdal_raster_image.GdalRasterImage_swigregister
 GdalRasterImage_swigregister(GdalRasterImage)
 
-def GdalRasterImage_read_all(*args):
+def GdalRasterImage_read_all_bands(*args):
   """
-    std::vector< boost::shared_ptr< RasterImage > > GdalRasterImage::read_all(const std::string &Fname)
+    std::vector< boost::shared_ptr< RasterImage > > GdalRasterImage::read_all_bands(const std::string &Fname)
     For some formats, reading all of the data for all the bands at one
     time is much quicker than reading each band separately (assuming you
     actually want all the data).
@@ -436,7 +436,7 @@ def GdalRasterImage_read_all(*args):
     This function reads all of the data into memory and returns
     RasterImages that can be used to read the data. 
     """
-  return _gdal_raster_image.GdalRasterImage_read_all(*args)
+  return _gdal_raster_image.GdalRasterImage_read_all_bands(*args)
 
 def GdalRasterImage_save_to_file(*args):
   return _gdal_raster_image.GdalRasterImage_save_to_file(*args)

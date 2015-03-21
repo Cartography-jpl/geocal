@@ -146,16 +146,16 @@ class RawRasterImage(geocal_swig.raster_image.RasterImage):
         Read in the given file with the given Band (0 based). 
         """
         _raw_raster_image.RawRasterImage_swiginit(self,_raw_raster_image.new_RawRasterImage(*args))
-    def read_all(*args):
+    def read_all_bands(*args):
         """
-        std::vector< boost::shared_ptr< RasterImage > > RawRasterImage::read_all(const std::string &Fname)
+        std::vector< boost::shared_ptr< RasterImage > > RawRasterImage::read_all_bands(const std::string &Fname)
         These read all three bands of a file at once.
 
         This is faster than reading each band separately. 
         """
-        return _raw_raster_image.RawRasterImage_read_all(*args)
+        return _raw_raster_image.RawRasterImage_read_all_bands(*args)
 
-    read_all = staticmethod(read_all)
+    read_all_bands = staticmethod(read_all_bands)
     def _v_file_name(self):
         """
         const std::string& GeoCal::RawRasterImage::file_name() const
@@ -191,14 +191,14 @@ RawRasterImage._v_band = new_instancemethod(_raw_raster_image.RawRasterImage__v_
 RawRasterImage_swigregister = _raw_raster_image.RawRasterImage_swigregister
 RawRasterImage_swigregister(RawRasterImage)
 
-def RawRasterImage_read_all(*args):
+def RawRasterImage_read_all_bands(*args):
   """
-    std::vector< boost::shared_ptr< RasterImage > > RawRasterImage::read_all(const std::string &Fname)
+    std::vector< boost::shared_ptr< RasterImage > > RawRasterImage::read_all_bands(const std::string &Fname)
     These read all three bands of a file at once.
 
     This is faster than reading each band separately. 
     """
-  return _raw_raster_image.RawRasterImage_read_all(*args)
+  return _raw_raster_image.RawRasterImage_read_all_bands(*args)
 
 
 

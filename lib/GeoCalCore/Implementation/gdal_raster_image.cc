@@ -578,7 +578,7 @@ do_read_all(const GdalRasterImage& d)
 //-----------------------------------------------------------------------
 
 std::vector<boost::shared_ptr<RasterImage> > 
-GdalRasterImage::read_all(const std::string& Fname)
+GdalRasterImage::read_all_bands(const std::string& Fname)
 {
   GdalRasterImage img(Fname);
   

@@ -21,7 +21,7 @@ class RawRasterImage : public RasterImageVariable {
  public:
   RawRasterImage(const std::string& Fname, int Band = 0);
   static std::vector<boost::shared_ptr<RasterImage> > 
-    read_all(const std::string& Fname);
+    read_all_bands(const std::string& Fname);
   virtual ~RawRasterImage() {}
 //-----------------------------------------------------------------------
 /// Return pixel value at given line and sample.

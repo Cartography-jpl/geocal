@@ -31,7 +31,7 @@ RawRasterImage::RawRasterImage(const std::string& Fname, int Band)
 //-----------------------------------------------------------------------
 
 std::vector<boost::shared_ptr<RasterImage> > 
-RawRasterImage::read_all(const std::string& Fname)
+RawRasterImage::read_all_bands(const std::string& Fname)
 {
   LibRaw t;
   t.open_file(Fname.c_str());

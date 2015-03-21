@@ -8633,7 +8633,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_GdalRasterImage_read_all(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_GdalRasterImage_read_all_bands(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
@@ -8646,16 +8646,16 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_read_all(PyObject *SWIGUNUSEDPARM(sel
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_read_all" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_read_all_bands" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_read_all" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_read_all_bands" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     arg1 = ptr;
   }
   {
     try {
-      result = GeoCal::GdalRasterImage::read_all((std::string const &)*arg1);
+      result = GeoCal::GdalRasterImage::read_all_bands((std::string const &)*arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -12285,8 +12285,8 @@ static PyMethodDef SwigMethods[] = {
 		"GeoCal::GdalRasterImage::GdalRasterImage(const boost::shared_ptr< Gdal< T > > &Data)\n"
 		"Constructor. \n"
 		""},
-	 { (char *)"GdalRasterImage_read_all", (PyCFunction)_wrap_GdalRasterImage_read_all, METH_O, (char *)"\n"
-		"std::vector< boost::shared_ptr< RasterImage > > GdalRasterImage::read_all(const std::string &Fname)\n"
+	 { (char *)"GdalRasterImage_read_all_bands", (PyCFunction)_wrap_GdalRasterImage_read_all_bands, METH_O, (char *)"\n"
+		"std::vector< boost::shared_ptr< RasterImage > > GdalRasterImage::read_all_bands(const std::string &Fname)\n"
 		"For some formats, reading all of the data for all the bands at one\n"
 		"time is much quicker than reading each band separately (assuming you\n"
 		"actually want all the data).\n"

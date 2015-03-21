@@ -29,7 +29,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(d3.metadata<double>("EXIF_FocalLength"),
 		    400.0, 1e-4);
   std::vector<boost::shared_ptr<RasterImage> > a = 
-    GdalRasterImage::read_all(fname2);
+    GdalRasterImage::read_all_bands(fname2);
   BOOST_CHECK_EQUAL((int) a.size(), 3);
   BOOST_CHECK_EQUAL(a[0]->number_line(), 3744);
   BOOST_CHECK_EQUAL(a[0]->number_sample(), 5616);

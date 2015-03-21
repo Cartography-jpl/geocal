@@ -55,7 +55,7 @@ int Border) const
   SubRasterImage m2out(M2,fp, Border);
   SubRasterImage m3out(M3,fp, Border);
   std::vector<boost::shared_ptr<RasterImage> > img =
-    GdalRasterImage::read_all(file_name());
+    GdalRasterImage::read_all_bands(file_name());
   boost::shared_ptr<OrbitData> odp(const_cast<ArgusOrbitData*>(this),
 				   null_deleter());
   boost::shared_ptr<Camera> camp(const_cast<Camera*>(&Cam),null_deleter());
@@ -103,7 +103,7 @@ void ArgusOrbitData::save_ortho(const MapInfo& Mi, const Camera& Cam,
 
   MapInfo misub = Mi.cover(footprint(Cam, D), Border);
   std::vector<boost::shared_ptr<RasterImage> > img =
-    GdalRasterImage::read_all(file_name());
+    GdalRasterImage::read_all_bands(file_name());
   boost::shared_ptr<OrbitData> odp(const_cast<ArgusOrbitData*>(this),
 				   null_deleter());
   boost::shared_ptr<Camera> camp(const_cast<Camera*>(&Cam),null_deleter());

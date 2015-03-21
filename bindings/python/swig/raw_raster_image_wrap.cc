@@ -5515,7 +5515,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RawRasterImage_read_all(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RawRasterImage_read_all_bands(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
@@ -5528,16 +5528,16 @@ SWIGINTERN PyObject *_wrap_RawRasterImage_read_all(PyObject *SWIGUNUSEDPARM(self
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RawRasterImage_read_all" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RawRasterImage_read_all_bands" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RawRasterImage_read_all" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RawRasterImage_read_all_bands" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     arg1 = ptr;
   }
   {
     try {
-      result = GeoCal::RawRasterImage::read_all((std::string const &)*arg1);
+      result = GeoCal::RawRasterImage::read_all_bands((std::string const &)*arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5698,8 +5698,8 @@ static PyMethodDef SwigMethods[] = {
 		"RawRasterImage::RawRasterImage(const std::string &Fname, int Band=0)\n"
 		"Read in the given file with the given Band (0 based). \n"
 		""},
-	 { (char *)"RawRasterImage_read_all", (PyCFunction)_wrap_RawRasterImage_read_all, METH_O, (char *)"\n"
-		"std::vector< boost::shared_ptr< RasterImage > > RawRasterImage::read_all(const std::string &Fname)\n"
+	 { (char *)"RawRasterImage_read_all_bands", (PyCFunction)_wrap_RawRasterImage_read_all_bands, METH_O, (char *)"\n"
+		"std::vector< boost::shared_ptr< RasterImage > > RawRasterImage::read_all_bands(const std::string &Fname)\n"
 		"These read all three bands of a file at once.\n"
 		"\n"
 		"This is faster than reading each band separately. \n"

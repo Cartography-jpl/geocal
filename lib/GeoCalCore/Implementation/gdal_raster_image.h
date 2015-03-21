@@ -44,7 +44,7 @@ public:
 		  int Number_tile = 4,
 		  int Tile_number_line = -1, int Tile_number_sample = -1);
   static std::vector<boost::shared_ptr<RasterImage> > 
-    read_all(const std::string& Fname);
+    read_all_bands(const std::string& Fname);
 
 //-----------------------------------------------------------------------
 /// Constructor.

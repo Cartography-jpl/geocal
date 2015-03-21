@@ -183,12 +183,8 @@ class GdalDem(geocal_swig.dem_tiled_file.DemTiledFile):
     def band_id(self):
         return self._v_band_id()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name,self.datum,self.band_id,self.outside_dem_is_error,self.number_tile)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _gdal_dem.delete_GdalDem
 GdalDem.elevation = new_instancemethod(_gdal_dem.GdalDem_elevation,None,GdalDem)

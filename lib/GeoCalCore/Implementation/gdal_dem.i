@@ -21,7 +21,6 @@ public:
   virtual double elevation(int Y_index, int X_index) const;
   %python_attribute(file_name, std::string)
   %python_attribute(band_id, int)
-  %pickle_init(1, self.file_name, self.datum, self.band_id, 
-	       self.outside_dem_is_error, self.number_tile)
+  %pickle_serialization();
 };
 }

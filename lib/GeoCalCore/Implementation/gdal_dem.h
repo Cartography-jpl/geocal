@@ -58,18 +58,22 @@ private:
   std::string fname;
   int band_id_;
   boost::shared_ptr<GdalBase> gdal;
+  
+  void initialize(const std::string& Fname, const boost::shared_ptr<Datum>& D,
+		  int Band_id, bool Outside_dem_is_error, 
+		  int Number_tile, int Tile_number_line, int Tile_number_sample);
 
 //-----------------------------------------------------------------------
 /// Type dispatched initialization
 //-----------------------------------------------------------------------
 
-  template<class T> void initialize(const std::string& Fname,
-				    const boost::shared_ptr<Datum>& D,
-				    int Band_id, 
-				    int Number_tile,
-				    bool Outside_dem_is_error,
-				    int Tile_number_line,
-				    int Tile_number_sample)
+  template<class T> void initialize_type(const std::string& Fname,
+					 const boost::shared_ptr<Datum>& D,
+					 int Band_id, 
+					 int Number_tile,
+					 bool Outside_dem_is_error,
+					 int Tile_number_line,
+					 int Tile_number_sample)
   {
     boost::shared_ptr<Gdal<T> > t(new Gdal<T>(Fname, Band_id, Number_tile, 
 					      false,
@@ -79,73 +83,14 @@ private:
     DemTiledFile::initialize(t, D, t->map_info(), Outside_dem_is_error,
 			     t->linear_unit_scale());
   }
-#ifdef USE_BOOST_SERIALIZATON
+  GdalDem() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version)
-  {
-    // Nothing to do
-  }
-#endif
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 }
-
-#ifdef USE_BOOST_SERIALIZATON
-// This is a little more complicated, because we can't really
-// construct a object using a default constructor. So we need to
-// directly handle the object construction.
-namespace boost { namespace serialization {
-template<class Archive> 
-inline void save_construct_data(Archive & ar, const GeoCal::GdalDem* d, 
-			 const unsigned int version)
-{
-  void_cast_register(static_cast<GeoCal::GdalDem*>(0),
-		     static_cast<GeoCal::DemTiledFile*>(0));
-  void_cast_register(static_cast<GeoCal::DemTiledFile*>(0),
-		     static_cast<GeoCal::DemMapInfo*>(0));
-  void_cast_register(static_cast<GeoCal::DemMapInfo*>(0),
-		     static_cast<GeoCal::Dem*>(0));
-  std::string file_name = d->file_name();
-  boost::shared_ptr<GeoCal::Datum> datum = d->datum_ptr();
-  int band_id = d->band_id();
-  bool outside_dem_is_error = d->outside_dem_is_error();
-  int number_tile = d->number_tile();
-  int number_tile_line = d->number_line_per_tile();
-  int number_tile_sample = d->number_sample_per_tile();
-  ar << GEOCAL_NVP(file_name)
-     << GEOCAL_NVP(band_id)
-     << GEOCAL_NVP(datum)
-     << GEOCAL_NVP(outside_dem_is_error)
-     << GEOCAL_NVP(number_tile)
-     << GEOCAL_NVP(number_tile_line)
-     << GEOCAL_NVP(number_tile_sample);
-}
-template<class Archive>
-inline void load_construct_data(Archive & ar, GeoCal::GdalDem* d,
-				const unsigned int version)
-{
-  void_cast_register(static_cast<GeoCal::GdalDem*>(0),
-		     static_cast<GeoCal::DemTiledFile*>(0));
-  void_cast_register(static_cast<GeoCal::DemTiledFile*>(0),
-		     static_cast<GeoCal::DemMapInfo*>(0));
-  void_cast_register(static_cast<GeoCal::DemMapInfo*>(0),
-		     static_cast<GeoCal::Dem*>(0));
-  std::string file_name;
-  int band_id, number_tile, number_tile_line, number_tile_sample;
-  bool outside_dem_is_error;
-  boost::shared_ptr<GeoCal::Datum> datum;
-  ar >> GEOCAL_NVP(file_name)
-     >> GEOCAL_NVP(band_id)
-     >> GEOCAL_NVP(datum)
-     >> GEOCAL_NVP(outside_dem_is_error)
-     >> GEOCAL_NVP(number_tile)
-     >> GEOCAL_NVP(number_tile_line)
-     >> GEOCAL_NVP(number_tile_sample);
-  ::new(d)GeoCal::GdalDem(file_name, datum, band_id, outside_dem_is_error,
-			  number_tile, number_tile_line, number_tile_sample);
-}
-  }
-}
-#endif
-
+GEOCAL_EXPORT_KEY(GdalDem);
 #endif

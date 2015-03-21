@@ -35,9 +35,16 @@ public:
   }
 protected:
   std::vector<boost::shared_ptr<RasterImage> > raster_image_;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 
 }
+
+GEOCAL_EXPORT_KEY(RasterImageMultiBandVariable);
+
 #endif
 

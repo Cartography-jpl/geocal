@@ -33,10 +33,17 @@ public:
   void write(int Lstart, int Sstart, const blitz::Array<int, 3>& Data);
   virtual void print(std::ostream& Os) const { Os << "RasterImageMultiBand"; }
   RasterImageMultiBandVariable overview(int Min_number_sample) const;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 
 void copy(const RasterImageMultiBand& Img_in, RasterImageMultiBand& Img_out, 
 	  bool Log_progress = false);
 }
+
+GEOCAL_EXPORT_KEY(RasterImageMultiBand);
+
 #endif

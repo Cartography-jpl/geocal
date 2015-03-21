@@ -667,6 +667,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcinterface@/with_parameter.cc \
 	@srcinterface@/sub_raster_image.cc \
 	@srcinterface@/raster_image_multi_band.cc \
+	@srcinterface@/raster_image_multi_band_variable.cc \
 	@srcinterface@/sub_raster_image_multi_band.cc \
 	@srcinterface@/image_coordinate.cc \
 	@srcinterface@/ground_coordinate.cc \
@@ -796,6 +797,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcinterface@/libgeocal_la-with_parameter.lo \
 	@srcinterface@/libgeocal_la-sub_raster_image.lo \
 	@srcinterface@/libgeocal_la-raster_image_multi_band.lo \
+	@srcinterface@/libgeocal_la-raster_image_multi_band_variable.lo \
 	@srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo \
 	@srcinterface@/libgeocal_la-image_coordinate.lo \
 	@srcinterface@/libgeocal_la-ground_coordinate.lo \
@@ -2032,6 +2034,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcinterface@/with_parameter.cc \
 	@srcinterface@/sub_raster_image.cc \
 	@srcinterface@/raster_image_multi_band.cc \
+	@srcinterface@/raster_image_multi_band_variable.cc \
 	@srcinterface@/sub_raster_image_multi_band.cc \
 	@srcinterface@/image_coordinate.cc \
 	@srcinterface@/ground_coordinate.cc \
@@ -3138,6 +3141,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcinterface@/libgeocal_la-raster_image_multi_band.lo:  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/libgeocal_la-raster_image_multi_band_variable.lo:  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo:  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
@@ -4205,6 +4211,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-orbit.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-raster_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-raster_image_multi_band.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-raster_image_multi_band_variable.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-raster_multifile.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-rpc_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Plo@am__quote@
@@ -5664,6 +5671,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/raster_image_multi_band.cc' object='@srcinterface@/libgeocal_la-raster_image_multi_band.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-raster_image_multi_band.lo `test -f '@srcinterface@/raster_image_multi_band.cc' || echo '$(srcdir)/'`@srcinterface@/raster_image_multi_band.cc
+
+@srcinterface@/libgeocal_la-raster_image_multi_band_variable.lo: @srcinterface@/raster_image_multi_band_variable.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-raster_image_multi_band_variable.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-raster_image_multi_band_variable.Tpo -c -o @srcinterface@/libgeocal_la-raster_image_multi_band_variable.lo `test -f '@srcinterface@/raster_image_multi_band_variable.cc' || echo '$(srcdir)/'`@srcinterface@/raster_image_multi_band_variable.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/libgeocal_la-raster_image_multi_band_variable.Tpo @srcinterface@/$(DEPDIR)/libgeocal_la-raster_image_multi_band_variable.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/raster_image_multi_band_variable.cc' object='@srcinterface@/libgeocal_la-raster_image_multi_band_variable.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-raster_image_multi_band_variable.lo `test -f '@srcinterface@/raster_image_multi_band_variable.cc' || echo '$(srcdir)/'`@srcinterface@/raster_image_multi_band_variable.cc
 
 @srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo: @srcinterface@/sub_raster_image_multi_band.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image_multi_band.Tpo -c -o @srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo `test -f '@srcinterface@/sub_raster_image_multi_band.cc' || echo '$(srcdir)/'`@srcinterface@/sub_raster_image_multi_band.cc

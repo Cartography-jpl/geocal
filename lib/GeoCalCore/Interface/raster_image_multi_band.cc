@@ -2,8 +2,19 @@
 #include "raster_image_multi_band_variable.h"
 #include "sub_raster_image.h"
 #include <boost/progress.hpp>
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void RasterImageMultiBand::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(RasterImageMultiBand);
+}
+
+GEOCAL_IMPLEMENT(RasterImageMultiBand);
+#endif
 
 template<class T, int D> blitz::Array<T, D> 
 to_c_order_const(const blitz::Array<T, D> &In)

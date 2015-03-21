@@ -36,6 +36,6 @@ public:
   int row_number(int Band) const;
   int band_number(int Row_number) const;
   std::string print_to_string() const;
-  %pickle_init(1, self.file_name, self.parameter);
+  %pickle_serialization();
 };
 }

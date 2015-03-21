@@ -28,11 +28,11 @@ public:
   virtual bool region_masked(const GroundCoordinate& Ulc, 
 			     const GroundCoordinate& Lrc) const;
   std::vector<boost::shared_ptr<GroundMask> > mask_list;
-  %pickle_init(1, self.mask_list)
+  %pickle_serialization();
 };
 
 }
 %template(Vector_GroundMask) std::vector<boost::shared_ptr<GeoCal::GroundMask> >;
 %extend std::vector<boost::shared_ptr<GeoCal::GroundMask> > {
-  %pickle_vector()
+  %pickle_serialization();
 };

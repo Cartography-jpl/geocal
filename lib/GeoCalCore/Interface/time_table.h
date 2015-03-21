@@ -140,6 +140,10 @@ private:
   Time min_t;
   int max_l;
   double tspace;
+  ConstantSpacingTimeTable() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -203,10 +207,15 @@ protected:
   int min_line_;
   std::vector<Time> tlist;
   MeasuredTimeTable() { }
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
 
 GEOCAL_EXPORT_KEY(TimeTable);
+GEOCAL_EXPORT_KEY(ConstantSpacingTimeTable);
+GEOCAL_EXPORT_KEY(MeasuredTimeTable);
 #endif
 

@@ -278,12 +278,8 @@ class ConstantSpacingTimeTable(TimeTable):
     def time_space(self):
         return self._v_time_space()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.min_time,self.max_time,self.time_space)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _time_table.delete_ConstantSpacingTimeTable
 ConstantSpacingTimeTable._v_time_space = new_instancemethod(_time_table.ConstantSpacingTimeTable__v_time_space,None,ConstantSpacingTimeTable)
@@ -329,15 +325,8 @@ class MeasuredTimeTable(TimeTable):
         """
         return _time_table.MeasuredTimeTable_time_list(self, *args)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      v = geocal_swig.geocal_time.Vector_Time()
-      for i in range(self.size_time_list):
-        v.push_back(self.time_list(i))
-      return _new_from_init, (self.__class__, 1, v, self.min_line)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _time_table.delete_MeasuredTimeTable
 MeasuredTimeTable._v_size_time_list = new_instancemethod(_time_table.MeasuredTimeTable__v_size_time_list,None,MeasuredTimeTable)

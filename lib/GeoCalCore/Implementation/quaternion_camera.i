@@ -102,12 +102,7 @@ protected:
   focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp, 
 		     const AutoDerivative<double>& Yfp) const;
 
-
-  %pickle_init(1, self.frame_to_sc, self.number_line(0), self.number_sample(0), 
-	       self.line_pitch, self.sample_pitch, self.focal_length, 
-	       self.principal_point(0), 
-	       self.frame_convention, self.line_direction, 
-	       self.sample_direction, self.parameter_mask)
+  %pickle_serialization()
 };
 }
 

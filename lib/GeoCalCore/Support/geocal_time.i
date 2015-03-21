@@ -82,12 +82,8 @@ public:
      double __sub__(const Time& T2) { return *$self - T2; }
      double unix_time() { return $self->unix_time_double(); }
   }
-  %pythoncode {
-def __reduce__(self):
-  return _new_time, (self.pgs,)
-
-  }
 #endif
+  %pickle_serialization();
 };
 
 class TimeWithDerivative : public GenericObject {
@@ -121,12 +117,8 @@ public:
      { return *$self - T; }
      AutoDerivative<double> __sub__(const TimeWithDerivative& T2) { return *$self - T2; }
   }
-  %pythoncode {
-def __reduce__(self):
-  return _new_time_with_derivative, (self.pgs,)
-
-  }
 #endif
+  %pickle_serialization();
 };
 
 // Don't think we actually want to use the Python typemap here, so
@@ -282,5 +274,5 @@ def __reduce__(self):
 
 %template(Vector_Time) std::vector<GeoCal::Time>;
 %extend std::vector<GeoCal::Time> {
-  %pickle_vector()
+  %pickle_serialization();
 };

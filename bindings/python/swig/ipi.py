@@ -365,12 +365,8 @@ class Ipi(geocal_swig.generic_object.GenericObject):
     def time_tolerance(self):
         return self._v_time_tolerance()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.orbit,self.camera,self.band,self.min_time,self.max_time,self.time_table,self.local_time_window_size,self.root_min_separation,self.time_tolerance)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ipi.delete_Ipi
 Ipi.image_coordinate = new_instancemethod(_ipi.Ipi_image_coordinate,None,Ipi)

@@ -30,8 +30,7 @@ public:
   %python_attribute2(ipi, ipi_ptr, boost::shared_ptr<Ipi>)
   %python_attribute(resolution, double)
   %python_attribute(maximum_height, double)
-  %pickle_init(1, self.ipi, self.dem, self.image, self.title,
-	       self.resolution, self.maximum_height)
+  %pickle_serialization()
 protected:
   IpiImageGroundConnection();
   void initialize(const boost::shared_ptr<Ipi>& I, 

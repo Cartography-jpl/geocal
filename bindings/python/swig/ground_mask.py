@@ -244,12 +244,8 @@ class CombinedGroundMask(GroundMask):
         """
         _ground_mask.CombinedGroundMask_swiginit(self,_ground_mask.new_CombinedGroundMask(*args))
     mask_list = _swig_property(_ground_mask.CombinedGroundMask_mask_list_get, _ground_mask.CombinedGroundMask_mask_list_set)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.mask_list)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ground_mask.delete_CombinedGroundMask
 CombinedGroundMask_swigregister = _ground_mask.CombinedGroundMask_swigregister
@@ -261,18 +257,8 @@ class Vector_GroundMask(object):
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _ground_mask.Vector_GroundMask_swiginit(self,_ground_mask.new_Vector_GroundMask(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
-    def to_list(self):
-       res = []
-       for i in range(self.size()):
-          res.append(self[i])
-       return res
-
     def __reduce__(self):
-      return _new_vector, (self.__class__, 1, self.to_list())
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ground_mask.delete_Vector_GroundMask
 Vector_GroundMask.iterator = new_instancemethod(_ground_mask.Vector_GroundMask_iterator,None,Vector_GroundMask)

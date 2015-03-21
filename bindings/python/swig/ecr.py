@@ -181,12 +181,8 @@ class Ecr(geocal_swig.ground_coordinate.CartesianFixed):
         return _ecr.Ecr_solar_distance(*args)
 
     solar_distance = staticmethod(solar_distance)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.position[0],self.position[1],self.position[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ecr.delete_Ecr
 Ecr.convert_to_geodetic = new_instancemethod(_ecr.Ecr_convert_to_geodetic,None,Ecr)

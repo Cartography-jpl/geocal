@@ -26,7 +26,7 @@ public:
   CombinedImageMask(const std::vector<boost::shared_ptr<ImageMask> >& Ml);
   virtual bool mask(int Line, int Sample) const;
   std::vector<boost::shared_ptr<ImageMask> > mask_list;
-  %pickle_init(1, self.mask_list)
+  %pickle_serialization();
 };
 
 }

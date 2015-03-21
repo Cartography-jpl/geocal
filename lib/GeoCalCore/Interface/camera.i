@@ -76,9 +76,7 @@ public:
   %python_attribute(focal_length, double)
   %python_attribute(line_pitch, double)
   %python_attribute(sample_pitch, double)
-  %pickle_init(1, self.beta, self.delta, self.epsilon, self.focal_length,
-	       self.line_pitch, self.sample_pitch, 
-	       self.number_line(0), self.number_sample(0))
+  %pickle_serialization();
 };
 }
 %template(Vector_Camera) std::vector<boost::shared_ptr<GeoCal::Camera> >;

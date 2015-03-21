@@ -23,6 +23,6 @@ public:
 			double& OUTPUT);
   bool has_row(int Row_number) const;
   std::string print_to_string() const;
-  %pickle_init(1, self.file_name);
+  %pickle_serialization();
 };
 }

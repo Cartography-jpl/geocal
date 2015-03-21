@@ -258,12 +258,8 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
         """
         return _air_mspi_orbit.AirMspiOrbit_orbit_data(self, *args)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name,self.gimbal_angle,self.ypr_corr,self.datum,self.vertical_def)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _air_mspi_orbit.delete_AirMspiOrbit
 AirMspiOrbit._v_data_version = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_data_version,None,AirMspiOrbit)

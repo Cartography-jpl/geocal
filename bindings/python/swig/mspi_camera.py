@@ -307,12 +307,8 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         """
         return _mspi_camera.MspiCamera_band_number(self, *args)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name,self.parameter)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _mspi_camera.delete_MspiCamera
 MspiCamera.read_config_file = new_instancemethod(_mspi_camera.MspiCamera_read_config_file,None,MspiCamera)

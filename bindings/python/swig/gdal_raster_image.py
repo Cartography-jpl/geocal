@@ -392,12 +392,8 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
         return _gdal_raster_image.GdalRasterImage_save(*args)
 
     save = staticmethod(save)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_names[0],self.band_id,self.number_tile,self.update,self.number_tile_line,self.number_tile_sample)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _gdal_raster_image.delete_GdalRasterImage
 GdalRasterImage._v_gdal_data_base = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_gdal_data_base,None,GdalRasterImage)

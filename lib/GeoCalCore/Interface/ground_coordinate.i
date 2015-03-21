@@ -120,8 +120,7 @@ public:
   // CartesianFixedLookVector(const boost::math::quaternion<double>& V);
   std::string print_to_string() const;
   static CartesianFixedLookVector solar_look_vector(const Time& T);
-  %pickle_init(1, self.look_vector[0], self.look_vector[1],
-	       self.look_vector[2])
+  %pickle_serialization();
 };
 
 double distance(const GroundCoordinate& G1, const GroundCoordinate& G2);

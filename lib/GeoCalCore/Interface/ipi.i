@@ -49,8 +49,6 @@ public:
   %python_attribute(local_time_window_size, double)
   %python_attribute(root_min_separation, double)
   %python_attribute(time_tolerance, double)
-  %pickle_init(1, self.orbit, self.camera, self.band, self.min_time,
-	       self.max_time, self.time_table, self.local_time_window_size,
-	       self.root_min_separation, self.time_tolerance)
+  %pickle_serialization();
 };
 }

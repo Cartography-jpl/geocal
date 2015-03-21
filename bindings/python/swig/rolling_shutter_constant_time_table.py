@@ -181,12 +181,8 @@ class RollingShutterConstantTimeTable(geocal_swig.time_table.TimeTable):
     def time_space(self):
         return self._v_time_space()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.min_time,self.max_time,self.time_space)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rolling_shutter_constant_time_table.delete_RollingShutterConstantTimeTable
 RollingShutterConstantTimeTable.image_coordinate = new_instancemethod(_rolling_shutter_constant_time_table.RollingShutterConstantTimeTable_image_coordinate,None,RollingShutterConstantTimeTable)

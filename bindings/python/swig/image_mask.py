@@ -230,12 +230,8 @@ class CombinedImageMask(ImageMask):
         """
         _image_mask.CombinedImageMask_swiginit(self,_image_mask.new_CombinedImageMask(*args))
     mask_list = _swig_property(_image_mask.CombinedImageMask_mask_list_get, _image_mask.CombinedImageMask_mask_list_set)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.mask_list)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _image_mask.delete_CombinedImageMask
 CombinedImageMask_swigregister = _image_mask.CombinedImageMask_swigregister

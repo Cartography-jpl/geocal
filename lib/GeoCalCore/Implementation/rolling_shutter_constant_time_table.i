@@ -20,7 +20,7 @@ public:
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
     const;
   %python_attribute(time_space, double)
-  %pickle_init(1, self.min_time, self.max_time, self.time_space)
+  %pickle_serialization();
 };
 
 }

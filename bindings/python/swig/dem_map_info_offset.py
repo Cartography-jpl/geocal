@@ -164,12 +164,8 @@ class DemMapInfoOffset(geocal_swig.dem_map_info.DemMapInfo):
     def height_offset(self):
         return self._v_height_offset()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.dem_underlying,self.height_offset)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _dem_map_info_offset.delete_DemMapInfoOffset
 DemMapInfoOffset._v_dem_underlying = new_instancemethod(_dem_map_info_offset.DemMapInfoOffset__v_dem_underlying,None,DemMapInfoOffset)

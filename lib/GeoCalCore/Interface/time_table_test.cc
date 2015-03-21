@@ -55,5 +55,46 @@ BOOST_AUTO_TEST_CASE(measured_time_table)
   BOOST_CHECK_CLOSE(fres.sample, f_expect.sample, 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(serialization_constant_time_table)
+{
+  if(!have_serialize_supported())
+    return;
+  Time t = Time::parse_time("2003-01-01T10:30:00Z");
+  Time t2 = t + 100.4 * 40.8e-3;
+  boost::shared_ptr<TimeTable> tt(new ConstantSpacingTimeTable(t, t2));
+  std::string d = serialize_write_string(tt);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<ConstantSpacingTimeTable> ttr = 
+    serialize_read_string<ConstantSpacingTimeTable>(d);
+
+  BOOST_CHECK(fabs(ttr->min_time() - t) < 1e-4);
+  BOOST_CHECK(fabs(ttr->max_time() - ( t + 100 * 40.8e-3)) < 1e-4);
+  BOOST_CHECK_EQUAL(ttr->min_line(), 0);
+  BOOST_CHECK_EQUAL(ttr->max_line(), 100);
+
+}
+
+BOOST_AUTO_TEST_CASE(serialization_measured_time_table)
+{
+  if(!have_serialize_supported())
+    return;
+  Time t = Time::parse_time("2003-01-01T10:30:00Z");
+  Time t2 = t + 100.4 * 40.8e-3;
+  std::vector<Time> tlist;
+  for(int i = 10; i <= 100; ++i)
+    tlist.push_back(t + 40.8e-3 * i);
+  boost::shared_ptr<TimeTable> tt(new MeasuredTimeTable(tlist, 10));
+  std::string d = serialize_write_string(tt);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<MeasuredTimeTable> ttr = 
+    serialize_read_string<MeasuredTimeTable>(d);
+  BOOST_CHECK(fabs(ttr->min_time() - (t + 10 * 40.8e-3)) < 1e-4);
+  BOOST_CHECK(fabs(ttr->max_time() - ( t + 100 * 40.8e-3)) < 1e-4);
+  BOOST_CHECK_EQUAL(ttr->min_line(), 10);
+  BOOST_CHECK_EQUAL(ttr->max_line(), 100);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

@@ -177,8 +177,7 @@ public:
 		    boost::shared_ptr<ImageGroundConnection>)
   %python_attribute(line_offset, double)
   %python_attribute(sample_offset, double)
-  %pickle_init(1, self.original_image_ground_connection, self.line_offset, 
-	       self.sample_offset)
+  %pickle_serialization();
 };
 
 class ImageGroundConnectionCopy: public ImageGroundConnection

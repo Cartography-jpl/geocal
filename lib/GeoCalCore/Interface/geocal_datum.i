@@ -24,6 +24,6 @@ public:
   SimpleDatum(double U = 0.0);
   %python_attribute(u, double)
   virtual double undulation(const GroundCoordinate& Gc) const;
-  %pickle_init(1, self.u)
+  %pickle_serialization();
 };
 }

@@ -172,12 +172,8 @@ class ImageCoordinate(geocal_swig.generic_object.GenericObject):
         _image_coordinate.ImageCoordinate_swiginit(self,_image_coordinate.new_ImageCoordinate(*args))
     line = _swig_property(_image_coordinate.ImageCoordinate_line_get, _image_coordinate.ImageCoordinate_line_set)
     sample = _swig_property(_image_coordinate.ImageCoordinate_sample_get, _image_coordinate.ImageCoordinate_sample_set)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.line,self.sample)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _image_coordinate.delete_ImageCoordinate
 ImageCoordinate.__str__ = new_instancemethod(_image_coordinate.ImageCoordinate___str__,None,ImageCoordinate)
@@ -206,12 +202,8 @@ class VicarImageCoordinate(geocal_swig.generic_object.GenericObject):
         _image_coordinate.VicarImageCoordinate_swiginit(self,_image_coordinate.new_VicarImageCoordinate(*args))
     line = _swig_property(_image_coordinate.VicarImageCoordinate_line_get, _image_coordinate.VicarImageCoordinate_line_set)
     sample = _swig_property(_image_coordinate.VicarImageCoordinate_sample_get, _image_coordinate.VicarImageCoordinate_sample_set)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.line,self.sample)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _image_coordinate.delete_VicarImageCoordinate
 VicarImageCoordinate.__str__ = new_instancemethod(_image_coordinate.VicarImageCoordinate___str__,None,VicarImageCoordinate)
@@ -235,12 +227,8 @@ class ImageCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
         _image_coordinate.ImageCoordinateWithDerivative_swiginit(self,_image_coordinate.new_ImageCoordinateWithDerivative(*args))
     line = _swig_property(_image_coordinate.ImageCoordinateWithDerivative_line_get, _image_coordinate.ImageCoordinateWithDerivative_line_set)
     sample = _swig_property(_image_coordinate.ImageCoordinateWithDerivative_sample_get, _image_coordinate.ImageCoordinateWithDerivative_sample_set)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.line,self.sample)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _image_coordinate.delete_ImageCoordinateWithDerivative
 ImageCoordinateWithDerivative.__str__ = new_instancemethod(_image_coordinate.ImageCoordinateWithDerivative___str__,None,ImageCoordinateWithDerivative)

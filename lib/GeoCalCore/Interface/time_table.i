@@ -43,7 +43,7 @@ public:
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
     const;
   %python_attribute(time_space, double)
-  %pickle_init(1, self.min_time, self.max_time, self.time_space)
+  %pickle_serialization();
 };
 
 class MeasuredTimeTable : public TimeTable {
@@ -54,16 +54,6 @@ public:
     const;
   %python_attribute(size_time_list, int)
   Time time_list(int i) const;
-  %pythoncode {
-@classmethod
-def pickle_format_version(cls):
-  return 1
-
-def __reduce__(self):
-  v = geocal_swig.geocal_time.Vector_Time()
-  for i in range(self.size_time_list):
-    v.push_back(self.time_list(i))
-  return _new_from_init, (self.__class__, 1, v, self.min_line)
-}  
+  %pickle_serialization();
 };
 }

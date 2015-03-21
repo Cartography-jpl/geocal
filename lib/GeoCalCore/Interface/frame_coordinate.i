@@ -42,7 +42,7 @@ public:
   double line;
   double sample;
   std::string print_to_string() const;
-  %pickle_init(1, self.line, self.sample)
+  %pickle_serialization();
 };
 
 class FrameCoordinateWithDerivative : public GenericObject {
@@ -55,6 +55,6 @@ public:
   AutoDerivative<double> sample;
   std::string print_to_string() const;
   %python_attribute(value, FrameCoordinate);
-  %pickle_init(1, self.line, self.sample)
+  %pickle_serialization();
 };
 }

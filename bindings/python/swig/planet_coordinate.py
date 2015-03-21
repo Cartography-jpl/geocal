@@ -381,12 +381,8 @@ class MarsSimpleDem(geocal_swig.dem.Dem):
     def h(self, value):
       self._v_h(value)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.h)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _planet_coordinate.delete_MarsSimpleDem
 MarsSimpleDem._v_h = new_instancemethod(_planet_coordinate.MarsSimpleDem__v_h,None,MarsSimpleDem)
@@ -678,12 +674,8 @@ class EuropaSimpleDem(geocal_swig.dem.Dem):
     def h(self, value):
       self._v_h(value)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.h)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _planet_coordinate.delete_EuropaSimpleDem
 EuropaSimpleDem._v_h = new_instancemethod(_planet_coordinate.EuropaSimpleDem__v_h,None,EuropaSimpleDem)

@@ -138,12 +138,8 @@ class FrameCoordinate(geocal_swig.generic_object.GenericObject):
         _frame_coordinate.FrameCoordinate_swiginit(self,_frame_coordinate.new_FrameCoordinate(*args))
     line = _swig_property(_frame_coordinate.FrameCoordinate_line_get, _frame_coordinate.FrameCoordinate_line_set)
     sample = _swig_property(_frame_coordinate.FrameCoordinate_sample_get, _frame_coordinate.FrameCoordinate_sample_set)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.line,self.sample)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _frame_coordinate.delete_FrameCoordinate
 FrameCoordinate.__str__ = new_instancemethod(_frame_coordinate.FrameCoordinate___str__,None,FrameCoordinate)
@@ -177,12 +173,8 @@ class FrameCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
     def value(self):
         return self._v_value()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.line,self.sample)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _frame_coordinate.delete_FrameCoordinateWithDerivative
 FrameCoordinateWithDerivative.__str__ = new_instancemethod(_frame_coordinate.FrameCoordinateWithDerivative___str__,None,FrameCoordinateWithDerivative)

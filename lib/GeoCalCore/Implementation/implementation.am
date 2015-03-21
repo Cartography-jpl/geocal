@@ -8,6 +8,7 @@
 libgeocal_la_SOURCES+= @srcimplementation@/did_datum.cc
 geocalinc_HEADERS+= @srcimplementation@/did_datum.h
 geocalinc_HEADERS+= @srcimplementation@/dem_map_info_offset.h
+libgeocal_la_SOURCES+= @srcimplementation@/dem_map_info_offset.cc
 geocalinc_HEADERS+= @srcimplementation@/map_info_image_ground_connection.h
 libgeocal_la_SOURCES+= @srcimplementation@/ground_mask_image.cc
 geocalinc_HEADERS+= @srcimplementation@/ground_mask_image.h

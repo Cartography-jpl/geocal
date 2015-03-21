@@ -669,12 +669,8 @@ class OffsetImageGroundConnection(ImageGroundConnection):
     def sample_offset(self):
         return self._v_sample_offset()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.original_image_ground_connection,self.line_offset,self.sample_offset)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _image_ground_connection.delete_OffsetImageGroundConnection
 OffsetImageGroundConnection._v_original_image_ground_connection = new_instancemethod(_image_ground_connection.OffsetImageGroundConnection__v_original_image_ground_connection,None,OffsetImageGroundConnection)

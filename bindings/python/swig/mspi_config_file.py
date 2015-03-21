@@ -174,6 +174,9 @@ class MspiConfigFile(geocal_swig.generic_object.GenericObject):
         """
         return _mspi_config_file.MspiConfigFile_have_key(self, *args)
 
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _mspi_config_file.delete_MspiConfigFile
 MspiConfigFile.add_file = new_instancemethod(_mspi_config_file.MspiConfigFile_add_file,None,MspiConfigFile)
 MspiConfigFile.add = new_instancemethod(_mspi_config_file.MspiConfigFile_add,None,MspiConfigFile)
@@ -215,6 +218,9 @@ class MspiConfigTable(geocal_swig.generic_object.GenericObject):
     @property
     def number_row(self):
         return self._v_number_row()
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _mspi_config_file.delete_MspiConfigTable
 MspiConfigTable._v_number_row = new_instancemethod(_mspi_config_file.MspiConfigTable__v_number_row,None,MspiConfigTable)

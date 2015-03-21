@@ -18,7 +18,7 @@ public:
   virtual boost::shared_ptr<GroundCoordinate> 
   surface_point(const GroundCoordinate& Gp) const;
   %python_attribute_with_set(h, double)
-  %pickle_init(1, self.h)
+  %pickle_serialization();
 };
 }
 %geocal_shared_ptr(GeoCal::SimpleDemT<GeoCal::Geodetic>);

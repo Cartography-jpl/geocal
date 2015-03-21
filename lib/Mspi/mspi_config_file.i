@@ -29,9 +29,7 @@ public:
     { return $self->value<std::string>(Key); }
   }
   std::string print_to_string() const;
-  // Doesn't work, we'll want to extend this to use boost
-  // serialization at some point.
-  //  %pickle_init(1, self.file_name);
+  %pickle_serialization();
 };
 
 class MspiConfigTable : public GenericObject {
@@ -49,8 +47,6 @@ public:
     { return $self->value<std::string>(Index, Column); }
   }
   std::string print_to_string() const;
-  // Doesn't work, we'll want to extend this to use boost
-  // serialization at some point.
-  //  %pickle_init(1, self.file_name);
+  %pickle_serialization();
 };
 }

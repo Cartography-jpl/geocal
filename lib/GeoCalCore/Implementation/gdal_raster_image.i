@@ -168,9 +168,6 @@ def __contains__(self, key):
 		   const std::string& Option = "",
 		   bool Require_copy = false,
 		   int Fill_value = -1000);
-  %pickle_init(1, self.file_names[0], 
-	       self.band_id, self.number_tile, self.update,
-	       self.number_tile_line, 
-	       self.number_tile_sample)
+  %pickle_serialization();
 };
 }

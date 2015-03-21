@@ -13,7 +13,26 @@ void TimeTable::serialize(Archive & ar, const unsigned int version)
   GEOCAL_GENERIC_BASE(TimeTable);
 }
 
+template<class Archive>
+void ConstantSpacingTimeTable::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(TimeTable);
+  GEOCAL_BASE(ConstantSpacingTimeTable, TimeTable);
+  ar & GEOCAL_NVP(min_t) & GEOCAL_NVP(max_l) & GEOCAL_NVP(tspace);
+}
+
+template<class Archive>
+void MeasuredTimeTable::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(TimeTable);
+  GEOCAL_BASE(MeasuredTimeTable, TimeTable);
+  ar & GEOCAL_NVP_(min_line)
+    & GEOCAL_NVP(tlist);
+}
+
 GEOCAL_IMPLEMENT(TimeTable);
+GEOCAL_IMPLEMENT(ConstantSpacingTimeTable);
+GEOCAL_IMPLEMENT(MeasuredTimeTable);
 #endif
 
 //-----------------------------------------------------------------------

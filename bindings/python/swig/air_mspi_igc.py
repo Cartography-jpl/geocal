@@ -243,12 +243,8 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
     def l1b1_file_name(self):
         return self._v_l1b1_file_name()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.master_config_file,self.orbit_file_name,self.l1b1_file_name,self.band,self.base_directory)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _air_mspi_igc.delete_AirMspiIgc
 AirMspiIgc._v_band = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_band,None,AirMspiIgc)

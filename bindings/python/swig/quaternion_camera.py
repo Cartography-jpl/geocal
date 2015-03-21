@@ -523,12 +523,8 @@ class QuaternionCamera(geocal_swig.camera.Camera):
         """
         return _quaternion_camera.QuaternionCamera_fit_principal_point_sample(self, *args)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.frame_to_sc,self.number_line(0),self.number_sample(0),self.line_pitch,self.sample_pitch,self.focal_length,self.principal_point(0),self.frame_convention,self.line_direction,self.sample_direction,self.parameter_mask)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     def __init__(self, *args): 
         """

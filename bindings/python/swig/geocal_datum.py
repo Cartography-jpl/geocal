@@ -177,12 +177,8 @@ class SimpleDatum(Datum):
     def u(self):
         return self._v_u()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.u)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _geocal_datum.delete_SimpleDatum
 SimpleDatum._v_u = new_instancemethod(_geocal_datum.SimpleDatum__v_u,None,SimpleDatum)

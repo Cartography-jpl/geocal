@@ -182,12 +182,8 @@ class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
         """
         return _mspi_paraxial_transform.MspiParaxialTransform_has_row(self, *args)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _mspi_paraxial_transform.delete_MspiParaxialTransform
 MspiParaxialTransform._v_file_name = new_instancemethod(_mspi_paraxial_transform.MspiParaxialTransform__v_file_name,None,MspiParaxialTransform)

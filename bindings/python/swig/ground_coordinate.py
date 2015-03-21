@@ -467,12 +467,8 @@ class CartesianFixedLookVector(geocal_swig.look_vector.LookVectorDouble):
     def __init__(self, *args): 
         _ground_coordinate.CartesianFixedLookVector_swiginit(self,_ground_coordinate.new_CartesianFixedLookVector(*args))
     solar_look_vector = staticmethod(_ground_coordinate.CartesianFixedLookVector_solar_look_vector)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ground_coordinate.delete_CartesianFixedLookVector
 CartesianFixedLookVector.__str__ = new_instancemethod(_ground_coordinate.CartesianFixedLookVector___str__,None,CartesianFixedLookVector)

@@ -156,12 +156,8 @@ class SimpleDem(geocal_swig.dem.Dem):
     def h(self, value):
       self._v_h(value)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.h)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _simple_dem.delete_SimpleDem
 SimpleDem._v_h = new_instancemethod(_simple_dem.SimpleDem__v_h,None,SimpleDem)

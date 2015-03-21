@@ -45,7 +45,7 @@ namespace GeoCal {
     double line;
     double sample;
     std::string print_to_string() const;
-    %pickle_init(1, self.line, self.sample)
+    %pickle_serialization();
   };
   class VicarImageCoordinate : public GenericObject {
   public:
@@ -55,7 +55,7 @@ namespace GeoCal {
     double line;
     double sample;
     std::string print_to_string() const;
-    %pickle_init(1, self.line, self.sample)
+    %pickle_serialization();
   };
   class ImageCoordinateWithDerivative : public GenericObject {
   public:
@@ -65,7 +65,7 @@ namespace GeoCal {
     AutoDerivative<double> line;
     AutoDerivative<double> sample;
     std::string print_to_string() const;
-    %pickle_init(1, self.line, self.sample)
+    %pickle_serialization();
   };
 }
 

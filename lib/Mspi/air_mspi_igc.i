@@ -29,9 +29,6 @@ public:
   %python_attribute(camera, boost::shared_ptr<MspiCamera>);
   %python_attribute(orbit_file_name, std::string);
   %python_attribute(l1b1_file_name, std::string);
-  %pickle_init(1, self.master_config_file, self.orbit_file_name,
-	       self.l1b1_file_name,
-	       self.band,
-	       self.base_directory);
+  %pickle_serialization();
 };
 }

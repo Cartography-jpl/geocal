@@ -917,18 +917,8 @@ class Vector_QuaternionOrbitData(object):
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _orbit.Vector_QuaternionOrbitData_swiginit(self,_orbit.new_Vector_QuaternionOrbitData(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
-    def to_list(self):
-       res = []
-       for i in range(self.size()):
-          res.append(self[i])
-       return res
-
     def __reduce__(self):
-      return _new_vector, (self.__class__, 1, self.to_list())
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit.delete_Vector_QuaternionOrbitData
 Vector_QuaternionOrbitData.iterator = new_instancemethod(_orbit.Vector_QuaternionOrbitData_iterator,None,Vector_QuaternionOrbitData)

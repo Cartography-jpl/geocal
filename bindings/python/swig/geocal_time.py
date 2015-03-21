@@ -293,9 +293,8 @@ class Time(geocal_swig.generic_object.GenericObject):
         return _geocal_time.Time_unix_time(self)
 
     def __reduce__(self):
-      return _new_time, (self.pgs,)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
-      
     def __init__(self): 
         _geocal_time.Time_swiginit(self,_geocal_time.new_Time())
     __swig_destroy__ = _geocal_time.delete_Time
@@ -469,9 +468,8 @@ class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
         return self._v_gradient()
 
     def __reduce__(self):
-      return _new_time_with_derivative, (self.pgs,)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
-      
     __swig_destroy__ = _geocal_time.delete_TimeWithDerivative
 TimeWithDerivative._v_pgs = new_instancemethod(_geocal_time.TimeWithDerivative__v_pgs,None,TimeWithDerivative)
 TimeWithDerivative._v_gps = new_instancemethod(_geocal_time.TimeWithDerivative__v_gps,None,TimeWithDerivative)
@@ -515,18 +513,8 @@ class Vector_Time(object):
     def __iter__(self): return self.iterator()
     def __init__(self, *args): 
         _geocal_time.Vector_Time_swiginit(self,_geocal_time.new_Vector_Time(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
-    def to_list(self):
-       res = []
-       for i in range(self.size()):
-          res.append(self[i])
-       return res
-
     def __reduce__(self):
-      return _new_vector, (self.__class__, 1, self.to_list())
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _geocal_time.delete_Vector_Time
 Vector_Time.iterator = new_instancemethod(_geocal_time.Vector_Time_iterator,None,Vector_Time)

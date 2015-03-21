@@ -72,6 +72,8 @@ geocal_test_data = "/data/geocal_test_data/igccol_rolling_shutter.xml"
 
 def test_fm():
     '''Test tiepoint generation using feature matching.'''
+    if(not have_serialize_supported()):
+        raise SkipTest
     if(not os.path.exists(geocal_test_data)):
         raise SkipTest
     igccol = read_shelve(geocal_test_data)

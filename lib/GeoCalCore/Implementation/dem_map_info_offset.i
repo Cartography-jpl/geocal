@@ -16,7 +16,7 @@ public:
 		   double Height_offset);
   %python_attribute(dem_underlying, boost::shared_ptr<DemMapInfo>)
   %python_attribute(height_offset, double)
-  %pickle_init(1, self.dem_underlying, self.height_offset)
+  %pickle_serialization();
 protected:
   virtual double elevation(int Y_index, int X_index) const;
 };

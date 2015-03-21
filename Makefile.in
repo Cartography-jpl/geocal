@@ -689,6 +689,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcinterface@/image_ground_connection.cc \
 	@srcinterface@/igc_collection.cc \
 	@srcimplementation@/did_datum.cc \
+	@srcimplementation@/dem_map_info_offset.cc \
 	@srcimplementation@/ground_mask_image.cc \
 	@srcimplementation@/image_mask_image.cc \
 	@srcimplementation@/raster_averaged.cc \
@@ -829,6 +830,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcinterface@/libgeocal_la-image_ground_connection.lo \
 	@srcinterface@/libgeocal_la-igc_collection.lo \
 	@srcimplementation@/libgeocal_la-did_datum.lo \
+	@srcimplementation@/libgeocal_la-dem_map_info_offset.lo \
 	@srcimplementation@/libgeocal_la-ground_mask_image.lo \
 	@srcimplementation@/libgeocal_la-image_mask_image.lo \
 	@srcimplementation@/libgeocal_la-raster_averaged.lo \
@@ -2056,6 +2058,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcinterface@/image_ground_connection.cc \
 	@srcinterface@/igc_collection.cc \
 	@srcimplementation@/did_datum.cc \
+	@srcimplementation@/dem_map_info_offset.cc \
 	@srcimplementation@/ground_mask_image.cc \
 	@srcimplementation@/image_mask_image.cc \
 	@srcimplementation@/raster_averaged.cc \
@@ -3237,6 +3240,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcimplementation@/libgeocal_la-did_datum.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-dem_map_info_offset.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-ground_mask_image.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -4114,6 +4120,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_map_info_offset.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_match.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-did_datum.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod.Plo@am__quote@
@@ -5895,6 +5902,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/did_datum.cc' object='@srcimplementation@/libgeocal_la-did_datum.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-did_datum.lo `test -f '@srcimplementation@/did_datum.cc' || echo '$(srcdir)/'`@srcimplementation@/did_datum.cc
+
+@srcimplementation@/libgeocal_la-dem_map_info_offset.lo: @srcimplementation@/dem_map_info_offset.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-dem_map_info_offset.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-dem_map_info_offset.Tpo -c -o @srcimplementation@/libgeocal_la-dem_map_info_offset.lo `test -f '@srcimplementation@/dem_map_info_offset.cc' || echo '$(srcdir)/'`@srcimplementation@/dem_map_info_offset.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-dem_map_info_offset.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-dem_map_info_offset.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/dem_map_info_offset.cc' object='@srcimplementation@/libgeocal_la-dem_map_info_offset.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-dem_map_info_offset.lo `test -f '@srcimplementation@/dem_map_info_offset.cc' || echo '$(srcdir)/'`@srcimplementation@/dem_map_info_offset.cc
 
 @srcimplementation@/libgeocal_la-ground_mask_image.lo: @srcimplementation@/ground_mask_image.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-ground_mask_image.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-ground_mask_image.Tpo -c -o @srcimplementation@/libgeocal_la-ground_mask_image.lo `test -f '@srcimplementation@/ground_mask_image.cc' || echo '$(srcdir)/'`@srcimplementation@/ground_mask_image.cc

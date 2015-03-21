@@ -52,30 +52,14 @@ private:
   }
   boost::shared_ptr<DemMapInfo> dem_;
   double height_offset_;
-#ifdef USE_BOOST_SERIALIZATON
   DemMapInfoOffset() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void save(Archive & ar, const unsigned int version) const
-  {
-    using boost::serialization::make_nvp;
-    ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo);
-    ar << make_nvp("dem_underlying", dem_)
-       << GEOCAL_NVP_(height_offset);
-  }
+  void save(Archive& Ar, const unsigned int version) const;
   template<class Archive>
-  void load(Archive & ar, const unsigned int version)
-  {
-    using boost::serialization::make_nvp;
-    ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo);
-    ar >> make_nvp("dem_underlying", dem_)
-       >> GEOCAL_NVP_(height_offset);
-    initialize(dem_, height_offset_);
-  }
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
-#endif
-
-  
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 }
+GEOCAL_EXPORT_KEY(DemMapInfoOffset)
 #endif

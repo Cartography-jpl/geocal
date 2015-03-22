@@ -11,6 +11,7 @@ except ImportError:
 from tempfile import NamedTemporaryFile
 import subprocess
 import os
+import re
 
 version="%prog May 9, 2014"
 usage="""Usage: 
@@ -85,7 +86,15 @@ with NamedTemporaryFile() as tmp:
     except NameError as exc:
         pass
 
-    if(fin.has_rpc and args.dem):
+    # Sometimes have a rpc value in a NITF file is actually invalid. We
+    # identify this by trying to use the RPC
+    rpc_is_valid = fin.has_rpc
+    if(fin.has_rpc):
+        try:
+            fin.rpc.ground_coordinate(ImageCoordinate(0.5, 0.5), SimpleDem())
+        except:
+            rpc_is_valid = False
+    if(rpc_is_valid and args.dem):
         dem = GdalDem(args.dem)
         for i,ic in enumerate([ImageCoordinate(0.5,0.5),
                                ImageCoordinate(0.5,fin.number_sample - 0.5),
@@ -112,3 +121,25 @@ with NamedTemporaryFile() as tmp:
         except OSError:
             # Ok if file doesn't exist
             pass
+    # GDAL will always convert the RPC to format B. If the underlying NITF is format
+    # A we want to update the VICAR file to also be A format.
+    if(rpc_is_valid):
+        fvrt = GdalRasterImage(in_name, args.band)
+        if(fvrt.has_metadata("RPC00A", "TRE")):
+            f = VicarFile(args.output_vicar, VicarFile.UPDATE)
+            f.rpc = fvrt.rpc00a.rpc
+            f.close()
+    else:
+        # Delete anything that might have been put into the file
+        f = VicarFile(args.output_vicar, VicarFile.UPDATE)
+        try:
+            f.label_delete("NITF_CETAG", "GEOTIFF")
+        except:
+            # Ok if fails, was presumably just not in the file.
+            pass
+        for lb in f.label_list():
+            if(re.match("GEOTIFF RPC", lb)):
+                prop, lbnm = re.split(' ', lb)
+                f.label_delete(lbnm, prop)
+
+        

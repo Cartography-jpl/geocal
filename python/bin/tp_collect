@@ -115,6 +115,68 @@ Options:
        Print program version
 """
 
+def image_match_tp_collect(args, igc, mi):
+    '''Tp collection is a bit different for image matching vs. feature matching.
+    Collect image matching into a single function, that we can call'''
+    tpcollect = []
+    if(args.gcp):
+        if(args.reference_dem):
+            dem = read_shelve(args.reference_dem)
+        else:
+            dem = igc.dem(0)
+        refimg = read_shelve(args.reference_image)
+        if(args.use_intersection_both):
+            tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
+                                                grid_spacing = args.grid_spacing,
+                                                avg_level = args.avg_level,
+                                                use_intersection = False))
+            tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
+                                                grid_spacing = args.grid_spacing,
+                                                avg_level = args.avg_level,
+                                                use_intersection = True))
+            log.info("Adding 2 gcpcollect")
+        else:
+            tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
+                                                grid_spacing = args.grid_spacing,
+                                                avg_level = args.avg_level,
+                                                use_intersection = args.use_intersection))
+            log.info("Adding 1 gcpcollect")
+    
+    if(args.base_image_spacing):
+        for i in range(0, igc.number_image, args.base_image_spacing):
+            log.info("Adding base image %d" % i)
+            tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                             map_info = mi,
+                                             grid_spacing = args.grid_spacing,
+                                             base_image_index = i,
+                                             max_ground_covariance = 
+                                             args.max_ground_sigma ** 2))
+        if(not igc.number_image % args.base_image_spacing == 0):
+            log.info("Adding base image %d" % (igc.number_image - 1, ))
+            tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                             map_info = mi,
+                                             grid_spacing = args.grid_spacing,
+                                             base_image_index = igc.number_image - 1,
+                                             max_ground_covariance = 
+                                             args.max_ground_sigma ** 2))
+    if(not args.gcp and not args.base_image_spacing):
+        log.info("Adding base image %d" % args.base_image_index)
+        tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                         map_info = mi,
+                                         grid_spacing = args.grid_spacing,
+                                         base_image_index = args.base_image_index,
+                                         max_ground_covariance = 
+                                         args.max_ground_sigma ** 2))
+    maxnumx = int(igc.image(0).number_line / args.min_grid_size)
+    maxnumy = int(igc.image(0).number_sample / args.min_grid_size)
+    numx = min(args.number_x, maxnumx)
+    numy = min(args.number_y, maxnumy)
+    tparr = TiePointCollection()
+
+    for tpcol in tpcollect:
+        tparr.extend(tpcol.tie_point_grid(numx, numy, pool = pool))
+    return tparr
+
 args = docopt_simple(usage, version=version)
 if(args.verbose):
     logging.basicConfig(level = logging.INFO)
@@ -137,63 +199,8 @@ elif(args.project_surface):
 else:
     mi = None
 
-tpcollect = []
-if(args.gcp):
-    if(args.reference_dem):
-        dem = read_shelve(args.reference_dem)
-    else:
-        dem = igc.dem(0)
-    refimg = read_shelve(args.reference_image)
-    if(args.use_intersection_both):
-        tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
-                                            grid_spacing = args.grid_spacing,
-                                            avg_level = args.avg_level,
-                                            use_intersection = False))
-        tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
-                                            grid_spacing = args.grid_spacing,
-                                            avg_level = args.avg_level,
-                                            use_intersection = True))
-        log.info("Adding 2 gcpcollect")
-    else:
-        tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
-                                            grid_spacing = args.grid_spacing,
-                                            avg_level = args.avg_level,
-                                            use_intersection = args.use_intersection))
-        log.info("Adding 1 gcpcollect")
 
-if(args.base_image_spacing):
-    for i in range(0, igc.number_image, args.base_image_spacing):
-        log.info("Adding base image %d" % i)
-        tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
-                                         map_info = mi,
-                                         grid_spacing = args.grid_spacing,
-                                         base_image_index = i,
-                                         max_ground_covariance = 
-                                         args.max_ground_sigma ** 2))
-    if(not igc.number_image % args.base_image_spacing == 0):
-        log.info("Adding base image %d" % (igc.number_image - 1, ))
-        tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
-                                         map_info = mi,
-                                         grid_spacing = args.grid_spacing,
-                                         base_image_index = igc.number_image - 1,
-                                         max_ground_covariance = 
-                                         args.max_ground_sigma ** 2))
-if(not args.gcp and not args.base_image_spacing):
-    log.info("Adding base image %d" % args.base_image_index)
-    tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
-                                     map_info = mi,
-                                     grid_spacing = args.grid_spacing,
-                                     base_image_index = args.base_image_index,
-                                     max_ground_covariance = 
-                                     args.max_ground_sigma ** 2))
-maxnumx = int(igc.image(0).number_line / args.min_grid_size)
-maxnumy = int(igc.image(0).number_sample / args.min_grid_size)
-numx = min(args.number_x, maxnumx)
-numy = min(args.number_y, maxnumy)
-tparr = TiePointCollection()
-
-for tpcol in tpcollect:
-    tparr.extend(tpcol.tie_point_grid(numx, numy, pool = pool))
+tparr = image_match_tp_collect(args, igc, mi)
 
 try:
     # Ok if this fails, it just means args.output doesn't exist yet

@@ -1,7 +1,19 @@
 #include "ground_mask_image.h"
 #include "ostream_pad.h"
-
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void GroundMaskImage::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(GroundMask);
+  GEOCAL_BASE(GroundMaskImage, GroundMask);
+  ar & GEOCAL_NVP(img) & GEOCAL_NVP(maskv) & GEOCAL_NVP_(outside_is_masked);
+}
+
+GEOCAL_IMPLEMENT(GroundMaskImage);
+#endif
 
 //-----------------------------------------------------------------------
 /// Indicate if a particular point is masked. If true, the point is

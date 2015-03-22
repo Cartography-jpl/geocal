@@ -73,6 +73,11 @@ private:
   int maskv;				    ///< Value that indicates
 					    ///a masked point.
   bool outside_is_masked_;
+  GroundMaskImage() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+GEOCAL_EXPORT_KEY(GroundMaskImage);
 #endif

@@ -22,7 +22,6 @@ public:
   virtual bool mask(const GroundCoordinate& Gc) const;
   virtual bool region_masked(const GroundCoordinate& Ulc, 
 			     const GroundCoordinate& Lrc) const;
-  %pickle_init(1, self.raster_image, self.masked_value, 
-	       self.outside_is_masked)
+  %pickle_serialization();
 };
 }

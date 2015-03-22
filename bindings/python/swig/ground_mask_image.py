@@ -182,12 +182,8 @@ class GroundMaskImage(geocal_swig.ground_mask.GroundMask):
     def outside_is_masked(self):
         return self._v_outside_is_masked()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.raster_image,self.masked_value,self.outside_is_masked)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ground_mask_image.delete_GroundMaskImage
 GroundMaskImage._v_raster_image = new_instancemethod(_ground_mask_image.GroundMaskImage__v_raster_image,None,GroundMaskImage)

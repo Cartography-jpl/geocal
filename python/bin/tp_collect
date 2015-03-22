@@ -119,6 +119,7 @@ def image_match_tp_collect(args, igc, mi):
     '''Tp collection is a bit different for image matching vs. feature matching.
     Collect image matching into a single function, that we can call'''
     tpcollect = []
+    mst = []
     if(args.gcp):
         if(args.reference_dem):
             dem = read_shelve(args.reference_dem)
@@ -135,16 +136,24 @@ def image_match_tp_collect(args, igc, mi):
                                                 avg_level = args.avg_level,
                                                 use_intersection = True))
             log.info("Adding 2 gcpcollect")
+            msg.append("Doing GCP step 1")
+            msg.append("Doing GCP step 2")
         else:
             tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
                                                 grid_spacing = args.grid_spacing,
                                                 avg_level = args.avg_level,
                                                 use_intersection = args.use_intersection))
             log.info("Adding 1 gcpcollect")
+            msg.append("Doing GCP")
     
     if(args.base_image_spacing):
         for i in range(0, igc.number_image, args.base_image_spacing):
             log.info("Adding base image %d" % i)
+            msg.append("Doing base image %d" % i)
+            if(args.project_surface):
+                ig_base = igc.image_ground_connection(i)
+                mibase = cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
+                mi = ig_base.cover(mibase)
             tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
                                              map_info = mi,
                                              grid_spacing = args.grid_spacing,
@@ -153,6 +162,11 @@ def image_match_tp_collect(args, igc, mi):
                                              args.max_ground_sigma ** 2))
         if(not igc.number_image % args.base_image_spacing == 0):
             log.info("Adding base image %d" % (igc.number_image - 1, ))
+            msg.append("Doing base image %d" % (igc.number_image - 1, ))
+            if(args.project_surface):
+                ig_base = igc.image_ground_connection(igc.number_image - 1)
+                mibase = cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
+                mi = ig_base.cover(mibase)
             tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
                                              map_info = mi,
                                              grid_spacing = args.grid_spacing,
@@ -161,6 +175,7 @@ def image_match_tp_collect(args, igc, mi):
                                              args.max_ground_sigma ** 2))
     if(not args.gcp and not args.base_image_spacing):
         log.info("Adding base image %d" % args.base_image_index)
+        msg.append("Doing base image %d" % args.base_image_index)
         tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
                                          map_info = mi,
                                          grid_spacing = args.grid_spacing,
@@ -173,7 +188,10 @@ def image_match_tp_collect(args, igc, mi):
     numy = min(args.number_y, maxnumy)
     tparr = TiePointCollection()
 
-    for tpcol in tpcollect:
+    for i, tpcol in enumerate(tpcollect):
+        log.info("---------------------------------------------------------")
+        log.info(msg[i])
+        log.info("---------------------------------------------------------")
         tparr.extend(tpcol.tie_point_grid(numx, numy, pool = pool))
     return tparr
 

@@ -79,6 +79,7 @@ extern "C" {
   void init_raster_averaged(void);
   void init_raster_subsample(void);
   void init_calc_raster(void);
+  void init_dem_to_raster(void);
   void init_calc_raster_multi_band(void);
   void init_magnify_bilinear(void);
   void init_magnify_replicate(void);
@@ -311,6 +312,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_raster_averaged", init_raster_averaged);
   init_extension_module(package, "_raster_subsample", init_raster_subsample);
   init_extension_module(package, "_calc_raster", init_calc_raster);
+  init_extension_module(package, "_dem_to_raster", init_dem_to_raster);
   init_extension_module(package, "_calc_raster_multi_band", init_calc_raster_multi_band);
   init_extension_module(package, "_magnify_bilinear", init_magnify_bilinear);
   init_extension_module(package, "_magnify_replicate", init_magnify_replicate);

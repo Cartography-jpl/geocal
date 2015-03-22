@@ -403,7 +403,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/image_mask_image_wrap.cc \
 	@swigsrc@/raster_averaged_wrap.cc \
 	@swigsrc@/raster_subsample_wrap.cc \
-	@swigsrc@/calc_raster_wrap.cc \
+	@swigsrc@/calc_raster_wrap.cc @swigsrc@/dem_to_raster_wrap.cc \
 	@swigsrc@/calc_raster_multi_band_wrap.cc \
 	@swigsrc@/magnify_bilinear_wrap.cc \
 	@swigsrc@/magnify_replicate_wrap.cc \
@@ -544,6 +544,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-raster_averaged_wrap.lo \
 	@swigsrc@/_swig_wrap_la-raster_subsample_wrap.lo \
 	@swigsrc@/_swig_wrap_la-calc_raster_wrap.lo \
+	@swigsrc@/_swig_wrap_la-dem_to_raster_wrap.lo \
 	@swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo \
 	@swigsrc@/_swig_wrap_la-magnify_bilinear_wrap.lo \
 	@swigsrc@/_swig_wrap_la-magnify_replicate_wrap.lo \
@@ -1329,6 +1330,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/raster_averaged.h \
 	@srcimplementation@/raster_subsample.h \
 	@srcimplementation@/calc_raster.h \
+	@srcimplementation@/dem_to_raster.h \
 	@srcimplementation@/calc_raster_multi_band.h \
 	@srcimplementation@/magnify_bilinear.h \
 	@srcimplementation@/magnify_replicate.h \
@@ -2175,7 +2177,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/image_mask_image_wrap.cc \
 	@swigsrc@/raster_averaged_wrap.cc \
 	@swigsrc@/raster_subsample_wrap.cc \
-	@swigsrc@/calc_raster_wrap.cc \
+	@swigsrc@/calc_raster_wrap.cc @swigsrc@/dem_to_raster_wrap.cc \
 	@swigsrc@/calc_raster_multi_band_wrap.cc \
 	@swigsrc@/magnify_bilinear_wrap.cc \
 	@swigsrc@/magnify_replicate_wrap.cc \
@@ -2327,6 +2329,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/raster_averaged.h \
 	@srcimplementation@/raster_subsample.h \
 	@srcimplementation@/calc_raster.h \
+	@srcimplementation@/dem_to_raster.h \
 	@srcimplementation@/calc_raster_multi_band.h \
 	@srcimplementation@/magnify_bilinear.h \
 	@srcimplementation@/magnify_replicate.h \
@@ -2903,6 +2906,8 @@ clean-pkgpythonswigLTLIBRARIES:
 @swigsrc@/_swig_wrap_la-raster_subsample_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-calc_raster_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-dem_to_raster_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -4310,6 +4315,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_map_info_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_match_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_tiled_file_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_to_raster_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-dfunctor_with_derivative_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-did_datum_wrap.Plo@am__quote@
@@ -4957,6 +4963,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/calc_raster_wrap.cc' object='@swigsrc@/_swig_wrap_la-calc_raster_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-calc_raster_wrap.lo `test -f '@swigsrc@/calc_raster_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/calc_raster_wrap.cc
+
+@swigsrc@/_swig_wrap_la-dem_to_raster_wrap.lo: @swigsrc@/dem_to_raster_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-dem_to_raster_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_to_raster_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-dem_to_raster_wrap.lo `test -f '@swigsrc@/dem_to_raster_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/dem_to_raster_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_to_raster_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_to_raster_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/dem_to_raster_wrap.cc' object='@swigsrc@/_swig_wrap_la-dem_to_raster_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-dem_to_raster_wrap.lo `test -f '@swigsrc@/dem_to_raster_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/dem_to_raster_wrap.cc
 
 @swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo: @swigsrc@/calc_raster_multi_band_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-calc_raster_multi_band_wrap.lo `test -f '@swigsrc@/calc_raster_multi_band_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/calc_raster_multi_band_wrap.cc

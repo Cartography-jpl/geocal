@@ -191,10 +191,16 @@ class SimultaneousBundleAdjustment(object):
             gp = self.ground_location(i)
             for j, il in enumerate(tp.image_location):
                 if(il):
-                    ic = self.igc_coll.image_coordinate(j, gp)
-                    ictp, lsigma, ssigma = il
-                    res[ind] = (ictp.line - ic.line) / lsigma
-                    res[ind + 1] = (ictp.sample - ic.sample) / ssigma
+                    try:
+                        ic = self.igc_coll.image_coordinate(j, gp)
+                        ictp, lsigma, ssigma = il
+                        res[ind] = (ictp.line - ic.line) / lsigma
+                        res[ind + 1] = (ictp.sample - ic.sample) / ssigma
+                    except RuntimeError as e:
+                        if(str(e) != "ImageGroundConnectionFailed"):
+                            raise e
+                        res[ind] = 0
+                        res[ind + 1] = 0
                     ind += 2
         return res
 
@@ -206,15 +212,20 @@ class SimultaneousBundleAdjustment(object):
             for j, il in enumerate(tp.image_location):
                 if(il):
                     ictp, lsigma, ssigma = il
-                    jac = self.igc_coll.image_coordinate_jac_cf(j, gp)
-                    # We have "-" because equation if measured - predicted
-                    ts = self.tp_slice[i].start
-                    for k in range(3):
-                        res[ind, ts + k] = -jac[0,k] / lsigma
-                        res[ind + 1, ts + k] = -jac[1,k] / ssigma
-                    self.igc_coll.image_coordinate_jac_parm(j, gp, res, ind,
+                    try:
+                        jac = self.igc_coll.image_coordinate_jac_cf(j, gp)
+                        # We have "-" because equation if measured - predicted
+                        ts = self.tp_slice[i].start
+                        for k in range(3):
+                            res[ind, ts + k] = -jac[0,k] / lsigma
+                            res[ind + 1, ts + k] = -jac[1,k] / ssigma
+                        self.igc_coll.image_coordinate_jac_parm(j, gp, res, ind,
                             self.igc_coll_param_slice.start, -1.0 / lsigma,
                             -1.0 / ssigma)
+                    except RuntimeError as e:
+                        if(str(e) != "ImageGroundConnectionFailed"):
+                            raise e
+                        pass
                     ind += 2
         self.row_index = ind
 

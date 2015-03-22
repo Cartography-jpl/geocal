@@ -9,6 +9,7 @@ import multiprocessing
 from multiprocessing import Pool
 import time
 import logging
+import cv2
 
 class TiePointWrap(object):
     '''Wrapper around tp_collect.tie_point that can be pickled. We can\'t
@@ -303,22 +304,73 @@ class TiePointCollectFM(object):
     instead we match all the images at once.'''
     def __init__(self, igc_collection, max_ground_covariance = 20 * 20,
                  number_feature = 500, number_octave_levels = 4):
-        pass
+        self.raster_image = [igc_collection.image(i) for i in range(igc_collection.number_image)]
+        self.ri = RayIntersect2(igc_collection,
+                                max_ground_covariance = max_ground_covariance)
+        self.max_ground_covariance = max_ground_covariance
+        self.sift = cv2.SIFT(number_feature, number_octave_levels)
+        self.bf = cv2.BFMatcher()
 
     def detect_and_compute(self, ind):
         '''Detect keypoints and compute descriptor the given raster image.'''
-        pass
+        print "Detecting %d " % ind
+        d = self.raster_image[ind].read_all_byte_scale()
+        kp, des = self.sift.detectAndCompute(d, None)
+        return [kp, des]
 
-    def match_feature(self, kp_and_desc, ind0, ind1):
+    def match_feature(self, kp_and_desc, ind1, ind2):
         '''Match features between two images'''
-        pass
+        kp1, des1 = kp_and_desc[ind1]
+        kp2, des2 = kp_and_desc[ind2]
+        matches = self.bf.knnMatch(des1, des2, k=2)
+        # This test is from the SIFT paper. If selects matches only if they
+        # have a single unique match that is significantly better than the
+        # next match.
+        good = []
+        for m,n in matches:
+            if m.distance < 0.75*n.distance:
+                good.append(m)
+        good = sorted(good, key = lambda x:x.distance)
+        res = []
+        for g in good:
+            ic1 = ImageCoordinate(kp1[g.queryIdx].pt[1], kp1[g.queryIdx].pt[0])
+            ic2 = ImageCoordinate(kp2[g.trainIdx].pt[1], kp2[g.trainIdx].pt[0])
+            res.append([ic1, ic2, g.queryIdx])
+        return res
 
-    def tp_list(self, ind):
+    def tp_list(self, kp_and_desc, ind):
         '''Generate list of tie points, starting with the given image.'''
-        pass
+        res = {}
+        for i in range(ind + 1, len(self.raster_image)):
+            good = self.match_feature(kp_and_desc, ind, i)
+            for ic1, ic2, idx in good:
+                if idx in res:
+                    tp = res[idx]
+                else:
+                    tp = TiePoint(len(self.raster_image))
+                    tp.image_location[ind] = (ic1, 0.5, 0.5)
+                tp.image_location[i] = (ic2, 0.5, 0.5)
+                res[idx] = tp
+        return res
 
     def tie_point_list(self, pool = None):
         '''Generate a TiePointCollect.'''
-        pass
-
+        res = TiePointCollection()
+        tstart = time.time()
+        log = logging.getLogger("geocal-python.tie_point_collect")
+        log.info("Starting feature detection")
+        kp_and_desc = [self.detect_and_compute(i)
+                       for i in range(len(self.raster_image))]
+        log.info("Done with feature detection")
+        log.info("Time: %f" % (time.time() - tstart))
+        log.info("Starting feature matching")
+        for i in range(len(self.raster_image) - 1):
+            tpl = self.tp_list(kp_and_desc, i)
+            for tp in tpl.itervalues():
+                tp2 = self.ri.ray_intersect(tp)
+                if(tp2 is not None):
+                    res.append(tp2)
+        log.info("Done with feature matching")
+        log.info("Time: %f" % (time.time() - tstart))
+        return res
                                                      

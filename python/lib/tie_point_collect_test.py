@@ -72,6 +72,9 @@ geocal_test_data = "/data/geocal_test_data/igccol_rolling_shutter.xml"
 
 def test_fm():
     '''Test tiepoint generation using feature matching.'''
+    # This takes about 2 minutes to run. This isn't that long, but is a bit too
+    # long for a unit test. So normally skip this.
+    raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
     if(not os.path.exists(geocal_test_data)):

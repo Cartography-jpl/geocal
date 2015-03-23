@@ -311,9 +311,9 @@ class TiePointCollectFM(object):
         self.sift = cv2.SIFT(number_feature, number_octave_levels)
         self.bf = cv2.BFMatcher()
 
-    def detect_and_compute(self, ind):
+    def detect_and_compute(self, ind, log):
         '''Detect keypoints and compute descriptor the given raster image.'''
-        print "Detecting %d " % ind
+        log.info("Detecting features for image %d " % ind)
         d = self.raster_image[ind].read_all_byte_scale()
         kp, des = self.sift.detectAndCompute(d, None)
         return [kp, des]
@@ -359,7 +359,7 @@ class TiePointCollectFM(object):
         tstart = time.time()
         log = logging.getLogger("geocal-python.tie_point_collect")
         log.info("Starting feature detection")
-        kp_and_desc = [self.detect_and_compute(i)
+        kp_and_desc = [self.detect_and_compute(i, log)
                        for i in range(len(self.raster_image))]
         log.info("Done with feature detection")
         log.info("Time: %f" % (time.time() - tstart))

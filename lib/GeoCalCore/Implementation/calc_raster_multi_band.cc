@@ -20,7 +20,7 @@ void CalcRasterMultiBand::load(Archive & ar, const unsigned int version)
   sstart = -1;
 }
 
-GEOCAL_IMPLEMENT(CalcRasterMultiBand);
+GEOCAL_SPLIT_IMPLEMENT(CalcRasterMultiBand);
 #endif
 
 // Suppress Doxgyen documentation

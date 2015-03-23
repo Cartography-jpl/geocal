@@ -23,7 +23,7 @@ void CalcRaster::load(Archive & ar, const unsigned int version)
   next_swap = tile.begin();
 }
 
-GEOCAL_IMPLEMENT(CalcRaster);
+GEOCAL_SPLIT_IMPLEMENT(CalcRaster);
 #endif
 
 // See base class for description of this.

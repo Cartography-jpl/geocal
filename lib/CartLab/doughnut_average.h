@@ -69,7 +69,7 @@ public:
 protected:
   virtual void calc(int Lstart, int Sstart) const; 
 private:
-  const boost::shared_ptr<RasterImageMultiBand> rimg;
+  boost::shared_ptr<RasterImageMultiBand> rimg;
   // This is the window and dougnut half size (it turns out this is a
   // more convenient number than the full window size).
   int whsize, dhsize;
@@ -81,6 +81,10 @@ private:
 
   // The input data, with 0's propagated
   mutable blitz::Array<double, 3> input_data;
+  DoughnutAverage() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 class RasterImageWrapCvdNorm: public CalcRaster {
@@ -99,6 +103,11 @@ protected:
 private:
   boost::shared_ptr<DoughnutAverage> davg_;
   int band_;
+  RasterImageWrapCvdNorm() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+
 };
 
 class RasterImageWrapPandif: public CalcRaster {
@@ -114,8 +123,15 @@ protected:
   {  data = davg_->pandif(Lstart, Sstart, data.rows(), data.cols()); }
 private:
   boost::shared_ptr<DoughnutAverage> davg_;
+  RasterImageWrapPandif() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+GEOCAL_EXPORT_KEY(DoughnutAverage);
+GEOCAL_EXPORT_KEY(RasterImageWrapCvdNorm);
+GEOCAL_EXPORT_KEY(RasterImageWrapPandif);
 #endif
 

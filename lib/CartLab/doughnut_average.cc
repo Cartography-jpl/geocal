@@ -1,7 +1,37 @@
 #include "doughnut_average.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void DoughnutAverage::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRasterMultiBand)
+    & GEOCAL_NVP(rimg)
+    & GEOCAL_NVP(whsize) & GEOCAL_NVP(dhsize) & GEOCAL_NVP_(allow_gore);
+}
+
+template<class Archive>
+void RasterImageWrapCvdNorm::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster)
+    & GEOCAL_NVP_(davg)
+    & GEOCAL_NVP_(band);
+}
+
+template<class Archive>
+void RasterImageWrapPandif::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster)
+    & GEOCAL_NVP_(davg);
+}
+
+GEOCAL_IMPLEMENT(DoughnutAverage);
+GEOCAL_IMPLEMENT(RasterImageWrapCvdNorm);
+GEOCAL_IMPLEMENT(RasterImageWrapPandif);
+#endif
 
 //-----------------------------------------------------------------------
 /// Very closely related in the doughnut average is the cvdnorm for

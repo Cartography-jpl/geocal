@@ -92,4 +92,106 @@ BOOST_AUTO_TEST_CASE(shiva)
   
 }
 
+BOOST_AUTO_TEST_CASE(serialization_doughnut_average)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<RasterImageMultiBandVariable> mb
+    (new RasterImageMultiBandVariable());
+  mb->add_raster_image(boost::shared_ptr<RasterImage>
+     (new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
+  mb->add_raster_image(boost::shared_ptr<RasterImage>
+     (new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
+  boost::shared_ptr<DoughnutAverage> davg(new DoughnutAverage(mb, 11, 5));
+  std::string d = serialize_write_string(davg);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<DoughnutAverage> davgr = 
+    serialize_read_string<DoughnutAverage>(d);
+
+  VicarLiteRasterImage cvd_expect(shiva_test_data_dir() + "cvdnorm_sub.img");
+  // Expect edges to be different because we aren't calculating
+  // outside the window. So only compare middle part of image.
+  int ls = 6;
+  int ss = 6;
+  int nl = cvd_expect.number_line() - 12;
+  int ns = cvd_expect.number_sample() - 12;
+  // Round off allows us to have up to a difference of 1.
+  BOOST_CHECK(max(abs(cvd_expect.read_double(ls, ss, nl, ns) -
+		      davgr->cvdnorm(1, ls, ss, nl, ns))) < 1.01);
+
+  VicarLiteRasterImage pandif_expect(shiva_test_data_dir() + "pandif_sub.img");
+  // Note, we removed the abs after shiva. Add back in here so we can
+  // do comparison.
+  BOOST_CHECK(max(abs(pandif_expect.read_double(ls, ss, nl, ns) -
+		      abs(davgr->pandif(ls, ss, nl, ns)))) < 1.01);
+  boost::shared_ptr<RasterImage> cvdnorm_img(new RasterImageWrapCvdNorm(davgr, 1));
+  boost::shared_ptr<RasterImage> pandif_img(new RasterImageWrapPandif(davgr));
+  BOOST_CHECK(max(abs(cvd_expect.read(ls, ss, nl, ns) -
+		      cvdnorm_img->read(ls, ss, nl, ns))) <= 2);
+  BOOST_CHECK(max(abs(pandif_expect.read(ls, ss, nl, ns) -
+		      abs(pandif_img->read(ls, ss, nl, ns)))) <= 2);
+  
+}
+
+BOOST_AUTO_TEST_CASE(serialization_cvdnorm)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<RasterImageMultiBandVariable> mb
+    (new RasterImageMultiBandVariable());
+  mb->add_raster_image(boost::shared_ptr<RasterImage>
+     (new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
+  mb->add_raster_image(boost::shared_ptr<RasterImage>
+     (new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
+  boost::shared_ptr<DoughnutAverage> davg(new DoughnutAverage(mb, 11, 5));
+  boost::shared_ptr<RasterImage> cvdnorm_img(new RasterImageWrapCvdNorm(davg, 1));
+  std::string d = serialize_write_string(cvdnorm_img);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<RasterImage> cvdnorm_imgr = 
+    serialize_read_string<RasterImage>(d);
+
+  VicarLiteRasterImage cvd_expect(shiva_test_data_dir() + "cvdnorm_sub.img");
+  // Expect edges to be different because we aren't calculating
+  // outside the window. So only compare middle part of image.
+  int ls = 6;
+  int ss = 6;
+  int nl = cvd_expect.number_line() - 12;
+  int ns = cvd_expect.number_sample() - 12;
+
+  BOOST_CHECK(max(abs(cvd_expect.read(ls, ss, nl, ns) -
+		      cvdnorm_imgr->read(ls, ss, nl, ns))) <= 2);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_pandif)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<RasterImageMultiBandVariable> mb
+    (new RasterImageMultiBandVariable());
+  mb->add_raster_image(boost::shared_ptr<RasterImage>
+     (new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
+  mb->add_raster_image(boost::shared_ptr<RasterImage>
+     (new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
+  boost::shared_ptr<DoughnutAverage> davg(new DoughnutAverage(mb, 11, 5));
+  boost::shared_ptr<RasterImage> pandif_img(new RasterImageWrapPandif(davg));
+  std::string d = serialize_write_string(pandif_img);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<RasterImage> pandif_imgr = 
+    serialize_read_string<RasterImage>(d);
+
+  VicarLiteRasterImage pandif_expect(shiva_test_data_dir() + "pandif_sub.img");
+  // Expect edges to be different because we aren't calculating
+  // outside the window. So only compare middle part of image.
+  int ls = 6;
+  int ss = 6;
+  int nl = pandif_expect.number_line() - 12;
+  int ns = pandif_expect.number_sample() - 12;
+
+  BOOST_CHECK(max(abs(pandif_expect.read(ls, ss, nl, ns) -
+		      abs(pandif_imgr->read(ls, ss, nl, ns)))) <= 2);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

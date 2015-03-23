@@ -9,13 +9,13 @@ using namespace blitz;
 template<class Archive>
 void CalcRasterMultiBand::save(Archive & ar, const unsigned int version) const
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageMultiBand);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageMultiBandVariable);
 }
 
 template<class Archive>
 void CalcRasterMultiBand::load(Archive & ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageMultiBand);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageMultiBandVariable);
   lstart = -1;
   sstart = -1;
 }

@@ -28,9 +28,7 @@ public:
   %python_attribute(allow_gore, bool)
   %python_attribute(underlying_image, 
 		    boost::shared_ptr<RasterImageMultiBand>)
-  %pickle_init(1, self.underlying_image, self.window_size, self.doughnut_size,
-	       self.allow_gore, self.raster_image(0).number_tile_line, 
-	       self.raster_image(0).number_tile_sample)
+  %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const; 
 };
@@ -41,7 +39,7 @@ public:
 			 int Band);
   %python_attribute(band, int)
   %python_attribute(davg, boost::shared_ptr<DoughnutAverage>)
-  %pickle_init(1, self.davg, self.band)
+  %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const; 
 };
@@ -50,7 +48,7 @@ class RasterImageWrapPandif: public CalcRaster {
 public:
   RasterImageWrapPandif(const boost::shared_ptr<DoughnutAverage>& Davg);
   %python_attribute(davg, boost::shared_ptr<DoughnutAverage>)
-  %pickle_init(1, self.davg)
+  %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const; 
 };

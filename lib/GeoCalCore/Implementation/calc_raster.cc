@@ -1,7 +1,30 @@
 #include "calc_raster.h"
 #include <boost/foreach.hpp>
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void CalcRaster::save(Archive & ar, const unsigned int version) const
+{
+  int number_tile = (int) tile.size();
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageVariable)
+    & GEOCAL_NVP(number_tile);
+}
+
+template<class Archive>
+void CalcRaster::load(Archive & ar, const unsigned int version)
+{
+  int number_tile;
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageVariable)
+    & GEOCAL_NVP(number_tile);
+  tile.resize(number_tile);
+  next_swap = tile.begin();
+}
+
+GEOCAL_IMPLEMENT(CalcRaster);
+#endif
 
 // See base class for description of this.
 void CalcRaster::read_ptr(int Lstart, int Sstart, int Number_line, 

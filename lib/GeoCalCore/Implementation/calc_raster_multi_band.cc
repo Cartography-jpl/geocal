@@ -1,12 +1,31 @@
 #include "calc_raster_multi_band.h"
 #include "calc_raster.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
 using namespace blitz;
 
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void CalcRasterMultiBand::save(Archive & ar, const unsigned int version) const
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageMultiBand);
+}
+
+template<class Archive>
+void CalcRasterMultiBand::load(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageMultiBand);
+  lstart = -1;
+  sstart = -1;
+}
+
+GEOCAL_IMPLEMENT(CalcRasterMultiBand);
+#endif
+
 // Suppress Doxgyen documentation
 /// @cond
-
+namespace GeoCal {
 class RasterImageWrap: public CalcRaster {
 public:
   RasterImageWrap(const CalcRasterMultiBand& Mband,
@@ -15,7 +34,7 @@ public:
 		  int Number_tile_sample,
 		  int Number_tile,
 		  int Band)
-    : CalcRaster(Ri, Number_tile), mband(Mband), band(Band) 
+    : CalcRaster(Ri, Number_tile), mband(&Mband), band(Band) 
   {
     number_tile_line_ = Number_tile_line;
     number_tile_sample_ = Number_tile_sample;
@@ -26,7 +45,7 @@ public:
 		  int Number_tile_sample,
 		  int Number_tile,
 		  int Band)
-    : CalcRaster(Nline, Nsamp, Number_tile), mband(Mband), band(Band) 
+    : CalcRaster(Nline, Nsamp, Number_tile), mband(&Mband), band(Band) 
   {
     number_tile_line_ = Number_tile_line;
     number_tile_sample_ = Number_tile_sample;
@@ -37,7 +56,7 @@ public:
 		  int Number_tile_sample,
 		  int Number_tile,
 		  int Band)
-    : CalcRaster(Mi, Number_tile), mband(Mband), band(Band) 
+    : CalcRaster(Mi, Number_tile), mband(&Mband), band(Band) 
   {
     number_tile_line_ = Number_tile_line;
     number_tile_sample_ = Number_tile_sample;
@@ -45,14 +64,31 @@ public:
 protected:
   void calc(int Lstart, int Sstart) const
   {
-    data = mband.read_double(Lstart, Sstart, data.rows(), data.cols())
+    data = mband->read_double(Lstart, Sstart, data.rows(), data.cols())
       (band, Range::all(), Range::all());
   }
 private:
-  const CalcRasterMultiBand& mband;
+  RasterImageWrap() {}
+  const CalcRasterMultiBand* mband;
   int band;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
+}
+GEOCAL_EXPORT_KEY(RasterImageWrap);
 
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void RasterImageWrap::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster)
+    & GEOCAL_NVP(mband)
+    & GEOCAL_NVP(band);
+}
+
+GEOCAL_IMPLEMENT(RasterImageWrap);
+#endif
 /// @endcond
 
 // See base class for description

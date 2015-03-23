@@ -11,6 +11,7 @@ libgeocal_la_SOURCES+= @srcinterface@/raster_image.cc
 geocalinc_HEADERS+= @srcinterface@/with_parameter.h
 libgeocal_la_SOURCES+= @srcinterface@/with_parameter.cc
 geocalinc_HEADERS+= @srcinterface@/raster_image_variable.h
+libgeocal_la_SOURCES+= @srcinterface@/raster_image_variable.cc
 geocalinc_HEADERS+= @srcinterface@/sub_raster_image.h
 libgeocal_la_SOURCES+= @srcinterface@/sub_raster_image.cc
 geocalinc_HEADERS+= @srcinterface@/raster_image_multi_band.h

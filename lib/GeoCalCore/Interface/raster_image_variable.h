@@ -97,7 +97,12 @@ protected:
   int number_line_, number_sample_, number_tile_line_, number_tile_sample_;
   boost::shared_ptr<MapInfo> map_info_;
   boost::shared_ptr<Rpc> rpc_;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+GEOCAL_EXPORT_KEY(RasterImageVariable);
 #endif

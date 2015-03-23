@@ -74,4 +74,7 @@ private:
   void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(ScaleImage);
+GEOCAL_EXPORT_KEY(ScaleImageMultiBand);
 #endif

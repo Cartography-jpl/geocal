@@ -119,7 +119,7 @@ def image_match_tp_collect(args, igc, mi):
     '''Tp collection is a bit different for image matching vs. feature matching.
     Collect image matching into a single function, that we can call'''
     tpcollect = []
-    mst = []
+    msg = []
     if(args.gcp):
         if(args.reference_dem):
             dem = read_shelve(args.reference_dem)

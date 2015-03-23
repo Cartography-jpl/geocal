@@ -16,6 +16,8 @@ public:
   SubRasterImage(const boost::shared_ptr<RasterImage>& Raster_image,
      const std::vector<boost::shared_ptr<GroundCoordinate> >& Pt,
      int boundary = 0);
+  SubRasterImage(const boost::shared_ptr<RasterImage>& Raster_image,
+     const MapInfo& Mi, int boundary = 0);
   virtual ~SubRasterImage() {}
 
 //-----------------------------------------------------------------------
@@ -75,6 +77,11 @@ private:
 					    ///underlying data
   int start_sample_;			    ///<Starting sample of
 					    ///underlying data
+  SubRasterImage() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+GEOCAL_EXPORT_KEY(SubRasterImage);
 #endif

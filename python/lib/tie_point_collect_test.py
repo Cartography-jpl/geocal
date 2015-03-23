@@ -69,7 +69,7 @@ def test_show_ref_image():
 # we can only tests that depend on this on pistol. We may fold this into
 # the afids data area at some point.
 geocal_test_data = "/data/geocal_test_data/igccol_rolling_shutter.xml"
-
+ref_img_data = "/data/geocal_test_data/ref.img"
 def test_fm():
     '''Test tiepoint generation using feature matching.'''
     # This takes about 2 minutes to run. This isn't that long, but is a bit too
@@ -80,7 +80,9 @@ def test_fm():
     if(not os.path.exists(geocal_test_data)):
         raise SkipTest
     igccol = read_shelve(geocal_test_data)
-    tp_collect = TiePointCollectFM(igccol, max_ground_covariance = 200 ** 2)
+    ref_image = VicarLiteRasterImage(ref_img_data)
+    tp_collect = TiePointCollectFM(igccol, ref_image = ref_image,
+                                   max_ground_covariance = 200 ** 2)
     # Parallel doesn't work yet.
     pool = None
     tpcol = tp_collect.tie_point_list(pool = pool)

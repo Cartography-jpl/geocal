@@ -1,6 +1,7 @@
 #include "raster_image_variable.h"
 #include "geocal_serialize_support.h"
 using namespace GeoCal;
+
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
 void RasterImageVariable::serialize(Archive & ar, const unsigned int version)

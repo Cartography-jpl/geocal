@@ -303,12 +303,25 @@ class TiePointCollectFM(object):
     Note that unlike TiePointCollect we don't have the concept of a 'base_image' here,
     instead we match all the images at once.'''
     def __init__(self, igc_collection, max_ground_covariance = 20 * 20,
-                 number_feature = 500, number_octave_levels = 4):
+                 ref_image = None,
+                 number_feature = 500, number_octave_levels = 4,
+                 number_ref_feature = 1000):
         self.raster_image = [igc_collection.image(i) for i in range(igc_collection.number_image)]
         self.ri = RayIntersect2(igc_collection,
                                 max_ground_covariance = max_ground_covariance)
         self.max_ground_covariance = max_ground_covariance
         self.sift = cv2.SIFT(number_feature, number_octave_levels)
+        self.sift_ref = cv2.SIFT(number_ref_feature, number_octave_levels)
+        if(ref_image is not None):
+            mi = ref_image.map_info
+            mi_ref = None
+            for i in range(igc_collection.number_image):
+                mi_t = igc_collection.image_ground_connection(i).cover(mi)
+                if(mi_ref is None):
+                    mi_ref = mi_t
+                else:
+                    mi_ref = mi_ref.map_union(mi_t)
+            self.ref_image = SubRasterImage(ref_image, mi_ref)
         self.bf = cv2.BFMatcher()
 
     def detect_and_compute(self, ind, log):
@@ -316,6 +329,13 @@ class TiePointCollectFM(object):
         log.info("Detecting features for image %d " % ind)
         d = self.raster_image[ind].read_all_byte_scale()
         kp, des = self.sift.detectAndCompute(d, None)
+        return [kp, des]
+
+    def detect_and_compute_ref(self, log):
+        '''Detect keypoints and compute descriptor in the reference image.'''
+        log.info("Detecting features for reference image")
+        d = self.ref_image.read_all_byte_scale()
+        kp, des = self.sift_ref.detectAndCompute(d, None)
         return [kp, des]
 
     def match_feature(self, kp_and_desc, ind1, ind2):
@@ -338,7 +358,27 @@ class TiePointCollectFM(object):
             res.append([ic1, ic2, g.queryIdx])
         return res
 
-    def tp_list(self, kp_and_desc, ind):
+    def match_feature_ref(self, kp_and_desc, kp_and_desc_ref, ind1):
+        '''Match features between two images'''
+        kp1, des1 = kp_and_desc[ind1]
+        kp2, des2 = kp_and_desc_ref
+        matches = self.bf.knnMatch(des1, des2, k=2)
+        # This test is from the SIFT paper. If selects matches only if they
+        # have a single unique match that is significantly better than the
+        # next match.
+        good = []
+        for m,n in matches:
+            if m.distance < 0.75*n.distance:
+                good.append(m)
+        good = sorted(good, key = lambda x:x.distance)
+        res = []
+        for g in good:
+            ic1 = ImageCoordinate(kp1[g.queryIdx].pt[1], kp1[g.queryIdx].pt[0])
+            ic2 = ImageCoordinate(kp2[g.trainIdx].pt[1], kp2[g.trainIdx].pt[0])
+            res.append([ic1, ic2, g.queryIdx])
+        return res
+
+    def tp_list(self, kp_and_desc, kp_and_desc_ref, ind):
         '''Generate list of tie points, starting with the given image.'''
         res = {}
         for i in range(ind + 1, len(self.raster_image)):
@@ -351,6 +391,18 @@ class TiePointCollectFM(object):
                     tp.image_location[ind] = (ic1, 0.5, 0.5)
                 tp.image_location[i] = (ic2, 0.5, 0.5)
                 res[idx] = tp
+        if(kp_and_desc_ref is not None):
+            good = self.match_feature_ref(kp_and_desc, kp_and_desc_ref, ind)
+            for ic1, ic2, idx in good:
+                if idx in res:
+                    tp = res[idx]
+                else:
+                    tp = TiePoint(len(self.raster_image))
+                    tp.image_location[ind] = (ic1, 0.5, 0.5)
+                tp.is_gcp = True
+                tp.ground_location = Ecr(self.ref_image.ground_coordinate(ic2))
+                res[idx] = tp
+            
         return res
 
     def tie_point_list(self, pool = None):
@@ -361,15 +413,22 @@ class TiePointCollectFM(object):
         log.info("Starting feature detection")
         kp_and_desc = [self.detect_and_compute(i, log)
                        for i in range(len(self.raster_image))]
+        if(self.ref_image):
+            kp_and_desc_ref = self.detect_and_compute_ref(log)
+        else:
+            kp_and_desc_ref = None
         log.info("Done with feature detection")
         log.info("Time: %f" % (time.time() - tstart))
         log.info("Starting feature matching")
         for i in range(len(self.raster_image) - 1):
-            tpl = self.tp_list(kp_and_desc, i)
+            tpl = self.tp_list(kp_and_desc, kp_and_desc_ref, i)
             for tp in tpl.itervalues():
-                tp2 = self.ri.ray_intersect(tp)
-                if(tp2 is not None):
-                    res.append(tp2)
+                if(not tp.is_gcp):
+                    tp2 = self.ri.ray_intersect(tp)
+                    if(tp2 is not None):
+                        res.append(tp2)
+                else:
+                    res.append(tp)
         log.info("Done with feature matching")
         log.info("Time: %f" % (time.time() - tstart))
         return res

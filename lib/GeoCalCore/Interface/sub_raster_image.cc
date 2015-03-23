@@ -1,7 +1,21 @@
 #include "sub_raster_image.h"
 #include "ostream_pad.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void SubRasterImage::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageVariable)
+    & GEOCAL_NVP_(data)
+    & GEOCAL_NVP_(start_line)
+    & GEOCAL_NVP_(start_sample);
+}
+
+GEOCAL_IMPLEMENT(SubRasterImage);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor.
@@ -56,6 +70,47 @@ int boundary)
 				   Raster_image->number_line() - 1.0));
   start_sample_ = (int) round(std::max(ulc.sample, 0.0));
   int esamp = (int) round(std::min(lrc.sample, 
+				   Raster_image->number_sample() - 1.0));
+  number_line_ = eline - start_line_ + 1;
+  number_sample_ = esamp - start_sample_ + 1;
+  if(number_line_ <= 0 || number_sample_ <= 0)
+    throw NoCoverage("RasterImage doesn't cover any of the area given by the list of ground points");
+
+  map_info_.reset
+    (new MapInfo(Raster_image->map_info().subset(start_sample_, start_line_, 
+	 number_sample_, number_line_)));
+  if(Raster_image->has_rpc()) {
+    rpc_.reset(new Rpc(Raster_image->rpc()));
+    rpc_->line_offset -= start_line_;
+    rpc_->sample_offset -= start_sample_;
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Create a subset of Raster_image that covers the corner points of
+/// the given MapInfo plus a optional boundary. Note that the area
+/// given by Mi may be larger than the area covered by Raster_image. In that
+/// case, we only give the portion that falls within this image.
+//-----------------------------------------------------------------------
+
+SubRasterImage::SubRasterImage(
+const boost::shared_ptr<RasterImage>& Raster_image,
+const MapInfo& Mi,
+int boundary)
+:  data_(Raster_image)
+{
+  number_tile_line_ = Raster_image->number_tile_line();
+  number_tile_sample_ = Raster_image->number_tile_sample();
+
+  ImageCoordinate ulc = Raster_image->coordinate(*Mi.ground_coordinate(0,0));
+  ImageCoordinate lrc = Raster_image->coordinate
+    (*Mi.ground_coordinate(Mi.number_x_pixel() - 1,
+			  Mi.number_y_pixel() - 1));
+  start_line_ = (int) round(std::max(ulc.line - boundary, 0.0));
+  int eline = (int) round(std::min(lrc.line + boundary, 
+				   Raster_image->number_line() - 1.0));
+  start_sample_ = (int) round(std::max(ulc.sample - boundary, 0.0));
+  int esamp = (int) round(std::min(lrc.sample + boundary, 
 				   Raster_image->number_sample() - 1.0));
   number_line_ = eline - start_line_ + 1;
   number_sample_ = esamp - start_sample_ + 1;

@@ -50,7 +50,8 @@ Options:
        you also specify "--gcp", we in addition collect gcps. [default: 0]
 
   --feature-match
-       Use feature matching instead of image matching.
+       Use feature matching instead of image matching. If you also specify
+       "--gcp", we in addition collect GCPs.
 
   --gcp
        Create GCPs, which requires the additional arguments of a reference
@@ -74,6 +75,17 @@ Options:
        on the surface, in meters. This is used to filter out bad tie-points,
        but you want this large enough you aren't filtering out good points.
        [default: 20.0]
+
+  --number-feature=n
+       Number of features to match for. [default: 500]
+
+   --number-octave-levels=n
+       Number of octave levels to include in feature matching. [default: 4]
+
+   --number-ref-feature=n
+       Number of features to match for in reference image. Since reference
+       image covers a larger area, usually you want this larger than
+       "--number-feature" value. [default: 1000]
 
   --number-process=n 
        Number of processors to use. [default: 1]
@@ -199,8 +211,16 @@ def image_match_tp_collect(args, igc, mi, pool):
     return tparr
 
 def feature_match_tp_collect(args, igc, pool):
-    tp_collect = TiePointCollectFM(igc, max_ground_covariance = 
-                                   args.max_ground_sigma ** 2)
+    if(args.gcp):
+        refimg = read_shelve(args.reference_image)
+    else:
+        refimg = None
+    tp_collect = TiePointCollectFM(igc, ref_image = refimg,
+                               number_feature = args.number_feature,
+                               number_octave_levels = args.number_octave_levels,
+                               number_ref_feature = args.number_ref_feature,
+                               max_ground_covariance = 
+                               args.max_ground_sigma ** 2)
     return tp_collect.tie_point_list(pool = pool)
     
 

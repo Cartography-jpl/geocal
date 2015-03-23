@@ -5493,6 +5493,180 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_SubRasterImage__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::RasterImage > *arg1 = 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  int arg3 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
+  boost::shared_ptr< GeoCal::RasterImage > temp2shared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::SubRasterImage *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SubRasterImage" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_SubRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SubRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SubRasterImage" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (GeoCal::SubRasterImage *)new GeoCal::SubRasterImage((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1,(GeoCal::MapInfo const &)*arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::SubRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::SubRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SubRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_SubRasterImage__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::RasterImage > *arg1 = 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
+  boost::shared_ptr< GeoCal::RasterImage > temp2shared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  GeoCal::SubRasterImage *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SubRasterImage" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_SubRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SubRasterImage" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (GeoCal::SubRasterImage *)new GeoCal::SubRasterImage((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1,(GeoCal::MapInfo const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::SubRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::SubRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SubRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_SubRasterImage(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[6];
@@ -5500,8 +5674,30 @@ SWIGINTERN PyObject *_wrap_new_SubRasterImage(PyObject *self, PyObject *args) {
   if (!(argc = SWIG_Python_UnpackTuple(args,"new_SubRasterImage",0,5,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_new_SubRasterImage__SWIG_4(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
     return _wrap_new_SubRasterImage__SWIG_2(self, argc, argv);
   }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_SubRasterImage__SWIG_3(self, argc, argv);
+  }
+check_3:
+  
   if (argc == 3) {
     return _wrap_new_SubRasterImage__SWIG_1(self, argc, argv);
   }
@@ -5514,7 +5710,9 @@ fail:
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::SubRasterImage::SubRasterImage(boost::shared_ptr< GeoCal::RasterImage > const &,int,int,int,int)\n"
     "    GeoCal::SubRasterImage::SubRasterImage(boost::shared_ptr< GeoCal::RasterImage > const &,std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &,int)\n"
-    "    GeoCal::SubRasterImage::SubRasterImage(boost::shared_ptr< GeoCal::RasterImage > const &,std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)\n");
+    "    GeoCal::SubRasterImage::SubRasterImage(boost::shared_ptr< GeoCal::RasterImage > const &,std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)\n"
+    "    GeoCal::SubRasterImage::SubRasterImage(boost::shared_ptr< GeoCal::RasterImage > const &,GeoCal::MapInfo const &,int)\n"
+    "    GeoCal::SubRasterImage::SubRasterImage(boost::shared_ptr< GeoCal::RasterImage > const &,GeoCal::MapInfo const &)\n");
   return 0;
 }
 
@@ -5706,13 +5904,12 @@ SWIGINTERN PyObject *SubRasterImage_swiginit(PyObject *SWIGUNUSEDPARM(self), PyO
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_SubRasterImage", _wrap_new_SubRasterImage, METH_VARARGS, (char *)"\n"
-		"SubRasterImage::SubRasterImage(const boost::shared_ptr< RasterImage > &Raster_image, const\n"
-		"std::vector< boost::shared_ptr< GroundCoordinate > > &Pt, int\n"
-		"boundary=0)\n"
-		"Create a subset of Raster_image that covers the given set of points,\n"
-		"plus a optional boundary.\n"
+		"SubRasterImage::SubRasterImage(const boost::shared_ptr< RasterImage > &Raster_image, const MapInfo\n"
+		"&Mi, int boundary=0)\n"
+		"Create a subset of Raster_image that covers the corner points of the\n"
+		"given MapInfo plus a optional boundary.\n"
 		"\n"
-		"Note that the area given by Pt may be large than the area covered by\n"
+		"Note that the area given by Mi may be larger than the area covered by\n"
 		"Raster_image. In that case, we only give the portion that falls within\n"
 		"this image. \n"
 		""},

@@ -135,13 +135,12 @@ class SubRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        SubRasterImage::SubRasterImage(const boost::shared_ptr< RasterImage > &Raster_image, const
-        std::vector< boost::shared_ptr< GroundCoordinate > > &Pt, int
-        boundary=0)
-        Create a subset of Raster_image that covers the given set of points,
-        plus a optional boundary.
+        SubRasterImage::SubRasterImage(const boost::shared_ptr< RasterImage > &Raster_image, const MapInfo
+        &Mi, int boundary=0)
+        Create a subset of Raster_image that covers the corner points of the
+        given MapInfo plus a optional boundary.
 
-        Note that the area given by Pt may be large than the area covered by
+        Note that the area given by Mi may be larger than the area covered by
         Raster_image. In that case, we only give the portion that falls within
         this image. 
         """
@@ -179,12 +178,8 @@ class SubRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
     def full_raster_image(self):
         return self._v_full_raster_image()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.full_raster_image,self.start_line,self.start_sample,self.number_line,self.number_sample)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _sub_raster_image.delete_SubRasterImage
 SubRasterImage._v_start_line = new_instancemethod(_sub_raster_image.SubRasterImage__v_start_line,None,SubRasterImage)

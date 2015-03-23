@@ -33,7 +33,6 @@ geocalpkgpython_PYTHON+= @srcpythonlib@/mmap_file.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/raster_tile.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/pleides_rpc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/parallel_process.py
-geocalpkgpython_PYTHON+= @srcpythonlib@/raster_image_multi_band.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/ibis_file_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_database.py
 if HAVE_PYTHON_OGR

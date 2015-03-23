@@ -32,6 +32,10 @@ protected:
 private:
   boost::shared_ptr<RasterImage> raw_data_;
   double scale_;
+  ScaleImage() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -64,6 +68,10 @@ protected:
 private:
   boost::shared_ptr<RasterImageMultiBand> raw_data_;
   double scale_;
+  ScaleImageMultiBand() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
 #endif

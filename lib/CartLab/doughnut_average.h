@@ -66,6 +66,7 @@ public:
 
   const boost::shared_ptr<RasterImageMultiBand>& underlying_image() const
   { return rimg; }
+  virtual void print(std::ostream& Os) const { Os << "DoughnutAverage"; }
 protected:
   virtual void calc(int Lstart, int Sstart) const; 
 private:

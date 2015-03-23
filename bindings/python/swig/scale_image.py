@@ -165,12 +165,8 @@ class ScaleImage(geocal_swig.calc_raster.CalcRaster):
     def scale_factor(self):
         return self._v_scale_factor()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.raw_data,self.scale_factor)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _scale_image.delete_ScaleImage
 ScaleImage._v_raw_data = new_instancemethod(_scale_image.ScaleImage__v_raw_data,None,ScaleImage)
@@ -216,12 +212,8 @@ class ScaleImageMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand
     def scale_factor(self):
         return self._v_scale_factor()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.raw_data,self.scale_factor)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _scale_image.delete_ScaleImageMultiBand
 ScaleImageMultiBand._v_raw_data = new_instancemethod(_scale_image.ScaleImageMultiBand__v_raw_data,None,ScaleImageMultiBand)

@@ -18,7 +18,7 @@ public:
 	     double Scale_factor);
   %python_attribute(raw_data, boost::shared_ptr<RasterImage>)
   %python_attribute(scale_factor, double)
-  %pickle_init(1, self.raw_data, self.scale_factor)
+  %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 };
@@ -29,7 +29,7 @@ public:
 	     double Scale_factor);
   %python_attribute(raw_data, boost::shared_ptr<RasterImageMultiBand>)
   %python_attribute(scale_factor, double)
-  %pickle_init(1, self.raw_data, self.scale_factor)
+  %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 };

@@ -33,6 +33,7 @@ public:
     range_check(band, 0, number_band());
     return raster_image_[band];
   }
+  virtual void print(std::ostream& Os) const { Os << "RasterImageMultiBandVariable"; }
 protected:
   std::vector<boost::shared_ptr<RasterImage> > raster_image_;
 private:

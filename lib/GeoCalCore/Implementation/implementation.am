@@ -56,6 +56,7 @@ libgeocal_la_SOURCES+= @srcimplementation@/memory_multi_band.cc
 geocalinc_HEADERS+= @srcimplementation@/pan_sharpen.h
 libgeocal_la_SOURCES+= @srcimplementation@/pan_sharpen.cc
 geocalinc_HEADERS+= @srcimplementation@/scale_image.h
+libgeocal_la_SOURCES+= @srcimplementation@/scale_image.cc
 geocalinc_HEADERS+= @srcimplementation@/apply_mask.h
 geocalinc_HEADERS+= @srcimplementation@/rpc_image_ground_connection.h
 libgeocal_la_SOURCES+= @srcimplementation@/rpc_image_ground_connection.cc

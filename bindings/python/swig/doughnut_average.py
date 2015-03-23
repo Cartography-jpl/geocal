@@ -247,12 +247,8 @@ class DoughnutAverage(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     def underlying_image(self):
         return self._v_underlying_image()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.underlying_image,self.window_size,self.doughnut_size,self.allow_gore,self.raster_image(0).number_tile_line,self.raster_image(0).number_tile_sample)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _doughnut_average.delete_DoughnutAverage
 DoughnutAverage.cvdnorm = new_instancemethod(_doughnut_average.DoughnutAverage_cvdnorm,None,DoughnutAverage)
@@ -299,12 +295,8 @@ class RasterImageWrapCvdNorm(geocal_swig.calc_raster.CalcRaster):
     def davg(self):
         return self._v_davg()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.davg,self.band)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _doughnut_average.delete_RasterImageWrapCvdNorm
 RasterImageWrapCvdNorm._v_band = new_instancemethod(_doughnut_average.RasterImageWrapCvdNorm__v_band,None,RasterImageWrapCvdNorm)
@@ -336,12 +328,8 @@ class RasterImageWrapPandif(geocal_swig.calc_raster.CalcRaster):
     def davg(self):
         return self._v_davg()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.davg)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _doughnut_average.delete_RasterImageWrapPandif
 RasterImageWrapPandif._v_davg = new_instancemethod(_doughnut_average.RasterImageWrapPandif__v_davg,None,RasterImageWrapPandif)

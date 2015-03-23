@@ -8,9 +8,13 @@ using namespace blitz;
 template<class Archive>
 void DoughnutAverage::serialize(Archive & ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRasterMultiBand)
-    & GEOCAL_NVP(rimg)
-    & GEOCAL_NVP(whsize) & GEOCAL_NVP(dhsize) & GEOCAL_NVP_(allow_gore);
+  std::cerr << "Step 1\n";
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRasterMultiBand);
+  std::cerr << "Step 2\n";
+  std::cerr << *rimg << "\n";
+  ar & GEOCAL_NVP(rimg);
+  std::cerr << "Step 3\n";
+  ar & GEOCAL_NVP(whsize) & GEOCAL_NVP(dhsize) & GEOCAL_NVP_(allow_gore);
 }
 
 template<class Archive>

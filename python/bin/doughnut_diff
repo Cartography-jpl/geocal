@@ -34,14 +34,16 @@ Options:
 '''
 
 args = docopt_simple(usage, version=version)
-mb = RasterImageMB(read_shelve(args.input_image_1), 
-                   read_shelve(args.input_image_2))
+mb = RasterImageMultiBandVariable()
+mb.add_raster_image(read_shelve(args.input_image_1))
+mb.add_raster_image(read_shelve(args.input_image_2))
 davg = DoughnutAverage(mb, args.window_size, args.doughnut_size,
                        not args.disallow_gore)
 pdiff = RasterImageWrapPandif(davg)
 write_shelve(args.pandiff, pdiff)
 if(args.pandiff_and_cvdnorm):
-    write_shelve(args.pandiff_and_cvdnorm, 
-                 RasterImageMB(pdiff,
-                               RasterImageWrapCvdNorm(davg, 1)))
+    mb = RasterImageMultiBandVariable()
+    mb.add_raster_image(pdiff)
+    mb.add_raster_image(RasterImageWrapCvdNorm(davg, 1))
+    write_shelve(args.pandiff_and_cvdnorm, mb)
 

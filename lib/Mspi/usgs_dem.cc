@@ -5,7 +5,7 @@
 #include <boost/foreach.hpp>
 #include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
-#ifdef VICAR_RTL
+#ifdef HAVE_VICAR_RTL
 #include "datum_geoid96.h"
 #endif
 
@@ -193,7 +193,7 @@ UsgsDem::UsgsDem
 {
   boost::shared_ptr<Datum> d(D);
   if(!d) {
-#ifdef VICAR_RTL    
+#ifdef HAVE_VICAR_RTL    
     d.reset(new DatumGeoid96());
 #else
     throw Exception("DatumGeoid96 wasn't included in the build");

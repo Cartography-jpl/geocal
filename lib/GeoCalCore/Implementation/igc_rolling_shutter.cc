@@ -146,7 +146,12 @@ public:
     // Right now just do a finite difference. We can revisit this if
     // needed. 
     double eps = 1e-3;
-    return ((*this)(Toffset + eps) - (*this)(Toffset)) / eps;
+    // This might go past the edge of the time table, so add handling
+    // to switch where eps is applied if needed.
+    if(Toffset + eps < tt->max_time() - tmin)
+      return ((*this)(Toffset + eps) - (*this)(Toffset)) / eps;
+    else
+      return ((*this)(Toffset) - (*this)(Toffset - eps)) / eps;
   }
   virtual AutoDerivative<double> f_with_derivative(double Toffset) const
   {

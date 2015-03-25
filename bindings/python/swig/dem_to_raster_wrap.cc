@@ -4979,6 +4979,19 @@ template<class T, int D> inline boost::array<T, D>
 #include "dem_to_raster.h"
 
 
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -4989,6 +5002,90 @@ template<class T, int D> inline boost::array<T, D>
 #ifdef __cplusplus
 extern "C" {
 #endif
+SWIGINTERN PyObject *_wrap_new_DemToRaster(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::Dem > *arg1 = 0 ;
+  GeoCal::MapInfo *arg2 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared1 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  GeoCal::DemToRaster *result = 0 ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"new_DemToRaster",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_DemToRaster" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_DemToRaster" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_DemToRaster" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2);
+        arg2 = const_cast< GeoCal::MapInfo * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (GeoCal::DemToRaster *)new GeoCal::DemToRaster((boost::shared_ptr< GeoCal::Dem > const &)*arg1,(GeoCal::MapInfo const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::DemToRaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::DemToRaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemToRaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_DemToRaster(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::DemToRaster *arg1 = (GeoCal::DemToRaster *) 0 ;
@@ -5038,13 +5135,22 @@ SWIGINTERN PyObject *DemToRaster_swigregister(PyObject *SWIGUNUSEDPARM(self), Py
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *DemToRaster_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
+	 { (char *)"new_DemToRaster", _wrap_new_DemToRaster, METH_VARARGS, (char *)"\n"
+		"GeoCal::DemToRaster::DemToRaster(const boost::shared_ptr< Dem > &D, const MapInfo &Mi)\n"
+		"\n"
+		""},
 	 { (char *)"delete_DemToRaster", (PyCFunction)_wrap_delete_DemToRaster, METH_O, (char *)"\n"
 		"virtual GeoCal::DemToRaster::~DemToRaster()\n"
 		"\n"
 		""},
 	 { (char *)"DemToRaster_swigregister", DemToRaster_swigregister, METH_VARARGS, NULL},
+	 { (char *)"DemToRaster_swiginit", DemToRaster_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

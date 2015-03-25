@@ -10,7 +10,7 @@ namespace GeoCal {
 *******************************************************************/
 class DemToRaster : public CalcRaster {
 public:
-  DemToRaster(const boost::shared_ptr<Dem> D, const MapInfo& Mi)
+  DemToRaster(const boost::shared_ptr<Dem>& D, const MapInfo& Mi)
     : CalcRaster(Mi), dem(D)
   {
   }

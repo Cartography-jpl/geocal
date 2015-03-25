@@ -86,16 +86,14 @@ class TiePointCollect(object):
                                 max_ground_covariance = max_ground_covariance)
         self.itoim = [None]*self.igc_collection.number_image 
         i = self.base_image_index
-        img1 = self.igc_collection.image_ground_connection(i)
+        igc1 = self.igc_collection.image_ground_connection(i)
         for j in range(self.igc_collection.number_image):
-            img2 = self.igc_collection.image_ground_connection(j)
+            igc2 = self.igc_collection.image_ground_connection(j)
             if(map_info is None):
-                self.itoim[j] = IgcImageToImageMatch(
-                    self.igc_collection.image_ground_connection(i),
-                    self.igc_collection.image_ground_connection(j),
-                    image_matcher)
+                self.itoim[j] = IgcImageToImageMatch(igc1, igc2,
+                                                     image_matcher)
             else:
-                self.itoim[j] = SurfaceImageToImageMatch(img1, img2, 
+                self.itoim[j] = SurfaceImageToImageMatch(igc1, igc2, 
                              map_info, image_matcher, grid_spacing)
 
     def __getstate__(self):
@@ -322,6 +320,8 @@ class TiePointCollectFM(object):
                 else:
                     mi_ref = mi_ref.map_union(mi_t)
             self.ref_image = SubRasterImage(ref_image, mi_ref)
+        else:
+            self.ref_image = None
         self.bf = cv2.BFMatcher()
 
     def detect_and_compute(self, ind, log):

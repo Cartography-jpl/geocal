@@ -135,8 +135,13 @@ class DemToRaster(geocal_swig.calc_raster.CalcRaster):
     C++ includes: dem_to_raster.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        GeoCal::DemToRaster::DemToRaster(const boost::shared_ptr< Dem > &D, const MapInfo &Mi)
+
+        """
+        _dem_to_raster.DemToRaster_swiginit(self,_dem_to_raster.new_DemToRaster(*args))
     __swig_destroy__ = _dem_to_raster.delete_DemToRaster
 DemToRaster_swigregister = _dem_to_raster.DemToRaster_swigregister
 DemToRaster_swigregister(DemToRaster)

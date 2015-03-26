@@ -176,15 +176,15 @@ def determine_subset(fname):
         dem = read_shelve(dbfile + ":dem_initial")
         aoi = read_shelve(args.aoi)
         igc = GdalImageGroundConnection(fname, dem)
-        ulc_g = dem.surface_p(aoi.ground_coordinate(0,0))
-        lrc_g = dem.surface_p(aoi.ground_coordinate(aoi.number_x_pixel,
+        ulc_g = dem.surface_point(aoi.ground_coordinate(0,0))
+        lrc_g = dem.surface_point(aoi.ground_coordinate(aoi.number_x_pixel,
                                                     aoi.number_y_pixel))
         ulc = igc.image_coordinate(ulc_g)
         lrc = igc.image_coordinate(lrc_g)
-        sl = min(max(int(floor(ulc.line), 0), igc.number_line))
-        ss = min(max(int(floor(ulc.sample), 0), igc.number_sample))
-        el = min(max(int(floor(lrc.line), 0), igc.number_line))
-        es = min(max(int(floor(lrc.sample), 0), igc.number_sample))
+        sl = min(max(int(floor(ulc.line)), 0), igc.number_line - 1)
+        ss = min(max(int(floor(ulc.sample)), 0), igc.number_sample - 1)
+        el = min(max(int(ceil(lrc.line)), 0), igc.number_line - 1)
+        es = min(max(int(ceil(lrc.sample)), 0), igc.number_sample - 1)
         if(sl > el):
             t = sl
             sl = el
@@ -280,7 +280,7 @@ if(args.start_line):
     subset = [args.start_line, args.start_sample, args.number_line,
               args.number_sample]
 if(args.aoi):
-    susbet = determine_subset(pre_pan_raw)
+    subset = determine_subset(pre_pan_raw)
 
 import_image(pre_pan_raw, "pre_pan_raw", subset = subset)
 if(pre_ms_raw):

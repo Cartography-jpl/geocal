@@ -49,9 +49,14 @@ Options:
        collect tiepoints with images 0, 3, 6, 9, 10 as the base image. If
        you also specify "--gcp", we in addition collect gcps. [default: 0]
 
-  --feature-match
-       Use feature matching instead of image matching. If you also specify
-       "--gcp", we in addition collect GCPs.
+  --feature-match 
+       Use feature matching instead of image matching. If
+       you also specify "--gcp", we in addition collect GCPs. 
+
+       Note that feature matching can have much larger blunders than we
+       typically see for image matching (since it can match any 2
+       features in an image). You will want to do some kind of outlier
+       rejection (e.g., "--outlier-reject-ransac")
 
   --gcp
        Create GCPs, which requires the additional arguments of a reference
@@ -99,7 +104,22 @@ Options:
   --min-grid-size=n
        If we have a smaller image, then reduce the number x and y so the
        grid cell we examine isn't smaller than this size [default: 100]
- 
+
+   --outlier-reject-ransac
+       If true, then do RANSAC outlier rejection. This fits the
+       tiepoints between pairs of images to create the Fundamental Matrix, 
+       rejecting outliers using Random sample consensus (RANSAC).
+
+       Note that the Fundamental Matrix really only applies for epipolar
+       geometry, e.g., a pair of frame pinhole cameras as single position.
+       Our cameras often aren't this (e.g., a pushbroom camera). However often
+       we are close enough that we can still used this approximation to look
+       for outliers.
+
+   --outlier-reject-ransac-threshold=f
+       Threshold to use in rejecting outliers using "--outlier-reject-ransac"
+       [default: 3.0]
+
   --reference-dem=shelve
        DEM to use with the reference image specified as file:key. 
        If not specified, we use the DEM from the first IGC.
@@ -130,7 +150,7 @@ Options:
        Print program version
 """
 
-def image_match_tp_collect(args, igc, mi, pool):
+def image_match_tp_collect(args, igc, mi, refimg, pool):
     '''Tp collection is a bit different for image matching vs. feature matching.
     Collect image matching into a single function, that we can call'''
     tpcollect = []
@@ -140,7 +160,6 @@ def image_match_tp_collect(args, igc, mi, pool):
             dem = read_shelve(args.reference_dem)
         else:
             dem = igc.dem(0)
-        refimg = read_shelve(args.reference_image)
         if(args.use_intersection_both):
             tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
                                                 grid_spacing = args.grid_spacing,
@@ -210,11 +229,7 @@ def image_match_tp_collect(args, igc, mi, pool):
         tparr.extend(tpcol.tie_point_grid(numx, numy, pool = pool))
     return tparr
 
-def feature_match_tp_collect(args, igc, pool):
-    if(args.gcp):
-        refimg = read_shelve(args.reference_image)
-    else:
-        refimg = None
+def feature_match_tp_collect(args, igc, refimg, pool):
     tp_collect = TiePointCollectFM(igc, ref_image = refimg,
                                number_feature = args.number_feature,
                                number_octave_levels = args.number_octave_levels,
@@ -245,15 +260,23 @@ elif(args.project_surface):
     mi = ig_base.cover(mibase)
 else:
     mi = None
+if(args.gcp):
+    refimg = read_shelve(args.reference_image)
+else:
+    refimg = None
 
 
 if(args.feature_match):
     if(pool != None):
         log.warning("Parallel processing for feature matching doesn't currently work.")
     pool = None
-    tparr = feature_match_tp_collect(args, igc, pool)
+    tparr = feature_match_tp_collect(args, igc, refimg, pool)
 else:
-    tparr = image_match_tp_collect(args, igc, mi, pool)
+    tparr = image_match_tp_collect(args, igc, mi, refimg, pool)
+
+if(args.outlier_reject_ransac):
+    tparr = outlier_reject_ransc(tparr, ref_image = refimg, 
+                        threshold = args.outlier_reject_ransac_threshold)
 
 try:
     # Ok if this fails, it just means args.output doesn't exist yet

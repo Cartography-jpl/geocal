@@ -298,8 +298,13 @@ class TiePointCollectFM(object):
     '''Given a IgcCollection, collect tiepoints by feature matching. This is
     very similar to TiePointCollect, except we use feature matching.
 
-    Note that unlike TiePointCollect we don't have the concept of a 'base_image' here,
-    instead we match all the images at once.'''
+    Note that unlike TiePointCollect we don't have the concept of a
+    'base_image' here, instead we match all the images at once.
+
+    Note also that feature matching can have much larger blunders than
+    we typically see for image matching (since it can match any 2 features
+    in an image). You will want to do some kind of outlier rejection after
+    using this class to determine tiepoints (e.g., outlier_reject_ransc).'''
     def __init__(self, igc_collection, max_ground_covariance = 20 * 20,
                  ref_image = None,
                  number_feature = 500, number_octave_levels = 4,
@@ -433,3 +438,68 @@ class TiePointCollectFM(object):
         log.info("Time: %f" % (time.time() - tstart))
         return res
                                                      
+def _point_list(ind1, ind2_or_ref_img, tpcol):
+    '''Internal function, gives list of points between 2 images.'''
+    pt1 = []
+    pt2 = []
+    ind = []
+    for i, tp in enumerate(tpcol):
+        ic1 = tp.image_location[ind1]
+        if(isinstance(ind2_or_ref_img,RasterImage)):
+            if(tp.is_gcp):
+                ic2 = [ind2_or_ref_img.coordinate(tp.ground_location), 0.5, 0.5]
+            else:
+                ic2 = None
+        else:
+            ic2 = tp.image_location[ind2_or_ref_img]
+        if(ic1 is not None and
+           ic2 is not None):
+            pt1.append([ic1[0].line, ic1[0].sample])
+            pt2.append([ic2[0].line, ic2[0].sample])
+            ind.append(i)
+    return [np.array(pt1), np.array(pt2), np.array(ind)]
+
+def _outlier_reject_ransc(ind1, ind2_or_ref_img, tpcol):
+    '''Internal function used to filter bad points between 2 images.'''
+    pt1, pt2, ind = _point_list(ind1, ind2_or_ref_img, tpcol)
+    if(pt1.shape[0] < 1):
+        return tpcol
+    m, mask = cv2.findFundamentalMat(pt1, pt2)
+    m = (mask == 0)
+    bad_pt = ind[m[:,0]]
+    return [tp for i, tp in enumerate(tpcol) if i not in bad_pt]
+
+def outlier_reject_ransc(tpcol, ref_image = None, threshold = 3.0):
+    '''This remove outliers from a TiePointCollection. This fits the
+    tiepoints between pairs of images to create the Fundamental Matrix, 
+    rejecting outliers using Random sample consensus (RANSAC).
+
+    Note that the Fundamental Matrix really only applies for epipolar
+    geometry, e.g., a pair of frame pinhole cameras as single position.
+    Our cameras often aren't this (e.g., a pushbroom camera). However often
+    we are close enough that we can still used this approximation to look
+    for outliers.
+
+    If a reference image is passed in, we also look at rejecting GCPs that
+    are outliers.'''
+    nimg = len(tpcol[0].image_location)
+    res = tpcol
+    log = logging.getLogger("geocal-python.tie_point_collect")
+    log.info("Starting using RANSC to reject outliers")
+    len1 = len(tpcol)
+    log.info("Starting %s" % tpcol)
+    for i in range(nimg):
+        for j in range(i + 1, nimg):
+            res = _outlier_reject_ransc(i, j, res)
+    len2 = len(res)
+    for i in range(nimg):
+        if(ref_image is not None):
+            res = _outlier_reject_ransc(i, ref_image, res)
+    len3 = len(res)
+    res = TiePointCollection(res)
+    log.info("Removed %d tiepoints" % (len1 - len2))
+    log.info("Removed %d more GCPs" % (len2 - len3))
+    log.info("Ending %s" % tpcol)
+    log.info("Completed using RANSC to reject outliers")
+    return res
+

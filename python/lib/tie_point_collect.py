@@ -499,7 +499,7 @@ def outlier_reject_ransc(tpcol, ref_image = None, threshold = 3.0):
     res = TiePointCollection(res)
     log.info("Removed %d tiepoints" % (len1 - len2))
     log.info("Removed %d more GCPs" % (len2 - len3))
-    log.info("Ending %s" % tpcol)
+    log.info("Ending %s" % res)
     log.info("Completed using RANSC to reject outliers")
     return res
 

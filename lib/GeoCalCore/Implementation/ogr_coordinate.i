@@ -47,7 +47,7 @@ public:
   double y;
   double z;
   static OgrCoordinate to_utm(const Geodetic& Gc, int zone = -999);
-  %pickle_init(1, self.ogr, self.x, self.y, self.z)
+  %pickle_serialization();
 };
 
 class OgrCoordinateConverter : public CoordinateConverter {
@@ -60,7 +60,7 @@ public:
 			       double& Y, double& Height) const;
   static boost::shared_ptr<OgrCoordinateConverter>
   utm_converter(int Zone);
-  %pickle_init(1, self.ogr)
+  %pickle_serialization();
 };
 
 }

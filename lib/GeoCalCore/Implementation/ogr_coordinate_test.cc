@@ -99,4 +99,34 @@ BOOST_AUTO_TEST_CASE(serialize_ogr_wrapper)
 		    std::string("WGS 84 / UTM zone 12N"));
 }
 
+BOOST_AUTO_TEST_CASE(serialize_ogr_coordinate_converter)
+{
+  boost::shared_ptr<OgrWrapper> ogrw = OgrWrapper::from_epsg(32612);
+  boost::shared_ptr<CoordinateConverter> cv(new OgrCoordinateConverter(ogrw));
+  std::string d = serialize_write_string(cv);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<CoordinateConverter> cvr = 
+    serialize_read_string<CoordinateConverter>(d);
+  BOOST_CHECK(cvr->is_same(*cv));
+}
+
+BOOST_AUTO_TEST_CASE(serialize_ogr_coordinate)
+{
+  boost::shared_ptr<OgrCoordinate> c(new OgrCoordinate(OgrCoordinate::to_utm(Geodetic(9, -7))));
+  BOOST_CHECK_CLOSE(c->x, 719870.729943312, 1e-6);
+  BOOST_CHECK_CLOSE(c->y, 995452.6722696, 1e-6);
+  BOOST_CHECK_CLOSE(c->z, 0.0, 1e-6);
+  BOOST_CHECK(c->utm_zone() == 29);
+  std::string d = serialize_write_string(c);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<OgrCoordinate> cr = 
+    serialize_read_string<OgrCoordinate>(d);
+  BOOST_CHECK_CLOSE(cr->x, 719870.729943312, 1e-6);
+  BOOST_CHECK_CLOSE(cr->y, 995452.6722696, 1e-6);
+  BOOST_CHECK_CLOSE(cr->z, 0.0, 1e-6);
+  BOOST_CHECK(cr->utm_zone() == 29);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

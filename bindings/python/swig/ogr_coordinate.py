@@ -355,12 +355,8 @@ class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
         return _ogr_coordinate.OgrCoordinate_to_utm(*args)
 
     to_utm = staticmethod(to_utm)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.ogr,self.x,self.y,self.z)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ogr_coordinate.delete_OgrCoordinate
 OgrCoordinate.to_geodetic = new_instancemethod(_ogr_coordinate.OgrCoordinate_to_geodetic,None,OgrCoordinate)
@@ -425,12 +421,8 @@ class OgrCoordinateConverter(geocal_swig.coordinate_converter.CoordinateConverte
         return _ogr_coordinate.OgrCoordinateConverter_utm_converter(*args)
 
     utm_converter = staticmethod(utm_converter)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.ogr)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ogr_coordinate.delete_OgrCoordinateConverter
 OgrCoordinateConverter._v_ogr = new_instancemethod(_ogr_coordinate.OgrCoordinateConverter__v_ogr,None,OgrCoordinateConverter)

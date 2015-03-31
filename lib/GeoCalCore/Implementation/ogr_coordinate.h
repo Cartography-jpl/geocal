@@ -170,6 +170,10 @@ public:
   static OgrCoordinate to_utm(const Geodetic& Gc, int zone = -999);
 private:
   boost::shared_ptr<OgrWrapper> ogr_;
+  OgrCoordinate() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -255,9 +259,15 @@ public:
   utm_converter(int Zone);
 private:
   boost::shared_ptr<OgrWrapper> ogr_;
+  OgrCoordinateConverter() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
 
 GEOCAL_EXPORT_KEY(OgrWrapper);
+GEOCAL_EXPORT_KEY(OgrCoordinate);
+GEOCAL_EXPORT_KEY(OgrCoordinateConverter);
 #endif

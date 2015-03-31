@@ -21,6 +21,24 @@ void OgrWrapper::load(Archive & ar, const unsigned int version)
   init(wkt_s);
 }
 
+template<class Archive>
+void OgrCoordinate::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(GroundCoordinate);
+  GEOCAL_BASE(OgrCoordinate, GroundCoordinate);
+  ar & GEOCAL_NVP(x) & GEOCAL_NVP(y) & GEOCAL_NVP(z) & GEOCAL_NVP_(ogr);
+}
+
+template<class Archive>
+void OgrCoordinateConverter::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(CoordinateConverter);
+  GEOCAL_BASE(OgrCoordinateConverter, CoordinateConverter);
+  ar & GEOCAL_NVP_(ogr);
+}
+
+GEOCAL_IMPLEMENT(OgrCoordinate);
+GEOCAL_IMPLEMENT(OgrCoordinateConverter);
 GEOCAL_SPLIT_IMPLEMENT(OgrWrapper);
 #endif
 

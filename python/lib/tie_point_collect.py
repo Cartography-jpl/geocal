@@ -9,7 +9,12 @@ import multiprocessing
 from multiprocessing import Pool
 import time
 import logging
-import cv2
+# Might not have cv2 available
+try:
+    import cv2
+    have_cv2 = True
+except NameError:
+    have_cv2 = False
 
 class TiePointWrap(object):
     '''Wrapper around tp_collect.tie_point that can be pickled. We can\'t
@@ -304,11 +309,13 @@ class TiePointCollectFM(object):
     Note also that feature matching can have much larger blunders than
     we typically see for image matching (since it can match any 2 features
     in an image). You will want to do some kind of outlier rejection after
-    using this class to determine tiepoints (e.g., outlier_reject_ransc).'''
+    using this class to determine tiepoints (e.g., outlier_reject_ransac).'''
     def __init__(self, igc_collection, max_ground_covariance = 20 * 20,
                  ref_image = None,
                  number_feature = 500, number_octave_levels = 4,
                  number_ref_feature = 1000):
+        if(not have_cv2):
+            raise RuntimeError("This class requires the openCV python library cv2, which is not available.")
         self.raster_image = [igc_collection.image(i) for i in range(igc_collection.number_image)]
         self.ri = RayIntersect2(igc_collection,
                                 max_ground_covariance = max_ground_covariance)
@@ -459,17 +466,19 @@ def _point_list(ind1, ind2_or_ref_img, tpcol):
             ind.append(i)
     return [np.array(pt1), np.array(pt2), np.array(ind)]
 
-def _outlier_reject_ransc(ind1, ind2_or_ref_img, tpcol):
+def _outlier_reject_ransac(ind1, ind2_or_ref_img, tpcol, threshold):
     '''Internal function used to filter bad points between 2 images.'''
+    if(not have_cv2):
+        raise RuntimeError("This function requires the openCV python library cv2, which is not available.")
     pt1, pt2, ind = _point_list(ind1, ind2_or_ref_img, tpcol)
     if(pt1.shape[0] < 1):
         return tpcol
-    m, mask = cv2.findFundamentalMat(pt1, pt2)
+    m, mask = cv2.findFundamentalMat(pt1, pt2, threshold)
     m = (mask == 0)
     bad_pt = ind[m[:,0]]
     return [tp for i, tp in enumerate(tpcol) if i not in bad_pt]
 
-def outlier_reject_ransc(tpcol, ref_image = None, threshold = 3.0):
+def outlier_reject_ransac(tpcol, ref_image = None, threshold = 3.0):
     '''This remove outliers from a TiePointCollection. This fits the
     tiepoints between pairs of images to create the Fundamental Matrix, 
     rejecting outliers using Random sample consensus (RANSAC).
@@ -485,21 +494,21 @@ def outlier_reject_ransc(tpcol, ref_image = None, threshold = 3.0):
     nimg = len(tpcol[0].image_location)
     res = tpcol
     log = logging.getLogger("geocal-python.tie_point_collect")
-    log.info("Starting using RANSC to reject outliers")
+    log.info("Starting using RANSAC to reject outliers")
     len1 = len(tpcol)
     log.info("Starting %s" % tpcol)
     for i in range(nimg):
         for j in range(i + 1, nimg):
-            res = _outlier_reject_ransc(i, j, res)
+            res = _outlier_reject_ransac(i, j, res, threshold)
     len2 = len(res)
     for i in range(nimg):
         if(ref_image is not None):
-            res = _outlier_reject_ransc(i, ref_image, res)
+            res = _outlier_reject_ransac(i, ref_image, res, threshold)
     len3 = len(res)
     res = TiePointCollection(res)
     log.info("Removed %d tiepoints" % (len1 - len2))
     log.info("Removed %d more GCPs" % (len2 - len3))
     log.info("Ending %s" % res)
-    log.info("Completed using RANSC to reject outliers")
+    log.info("Completed using RANSAC to reject outliers")
     return res
 

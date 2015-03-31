@@ -75,6 +75,8 @@ def test_fm():
     # This takes about 2 minutes to run. This isn't that long, but is a bit too
     # long for a unit test. So normally skip this.
     raise SkipTest
+    if(not have_cv2):
+        raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
     if(not os.path.exists(geocal_test_data)):

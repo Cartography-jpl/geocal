@@ -29,6 +29,6 @@ public:
     convert_from_coordinate(double X, double Y, double Height = 0) const;
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
   double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
-  %pickle_init(1);
+  %pickle_serialization();
 };
 }

@@ -30,7 +30,7 @@ public:
   %python_attribute(wkt, std::string)
   %python_attribute(pretty_wkt, std::string)
   std::string print_to_string() const;
-  %pickle_init(1, self.wkt)
+  %pickle_serialization();
 };
 
 class OgrCoordinate : public GroundCoordinate {

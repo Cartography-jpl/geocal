@@ -203,12 +203,8 @@ class GeodeticConverter(CoordinateConverter):
         """
         return _coordinate_converter.GeodeticConverter_convert_from_coordinate(self, *args)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, )
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     def __init__(self): 
         _coordinate_converter.GeodeticConverter_swiginit(self,_coordinate_converter.new_GeodeticConverter())

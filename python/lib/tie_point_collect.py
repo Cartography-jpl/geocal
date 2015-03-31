@@ -13,7 +13,7 @@ import logging
 try:
     import cv2
     have_cv2 = True
-except NameError:
+except ImportError:
     have_cv2 = False
 
 class TiePointWrap(object):

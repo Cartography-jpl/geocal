@@ -250,12 +250,8 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
     def pretty_wkt(self):
         return self._v_pretty_wkt()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.wkt)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ogr_coordinate.delete_OgrWrapper
 OgrWrapper._v_ogr = new_instancemethod(_ogr_coordinate.OgrWrapper__v_ogr,None,OgrWrapper)

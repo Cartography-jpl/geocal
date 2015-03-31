@@ -45,6 +45,7 @@ libgeocal_la_SOURCES+= @srcinterface@/look_vector.cc
 geocalinc_HEADERS+= @srcinterface@/geodetic.h
 libgeocal_la_SOURCES+= @srcinterface@/geodetic.cc
 geocalinc_HEADERS+= @srcinterface@/coordinate_converter.h
+libgeocal_la_SOURCES+= @srcinterface@/coordinate_converter.cc
 geocalinc_HEADERS+= @srcinterface@/dem.h
 libgeocal_la_SOURCES+= @srcinterface@/dem.cc
 geocalinc_HEADERS+= @srcinterface@/geocal_datum.h

@@ -26,4 +26,17 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK(gc.is_same(gc2));
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<CoordinateConverter> gc(new GeodeticConverter());
+  std::string d = serialize_write_string(gc);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<CoordinateConverter> gcr = 
+    serialize_read_string<CoordinateConverter>(d);
+  BOOST_CHECK(gcr->is_same(*gc));
+}
+
 BOOST_AUTO_TEST_SUITE_END()

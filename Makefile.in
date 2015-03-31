@@ -678,9 +678,10 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcinterface@/time_table.cc @srcinterface@/camera.cc \
 	@srcinterface@/ecr.cc @srcinterface@/eci.cc \
 	@srcinterface@/look_vector.cc @srcinterface@/geodetic.cc \
-	@srcinterface@/dem.cc @srcinterface@/geocal_datum.cc \
-	@srcinterface@/simple_dem.cc @srcinterface@/map_info.cc \
-	@srcinterface@/orbit.cc @srcinterface@/memory_raster_image.cc \
+	@srcinterface@/coordinate_converter.cc @srcinterface@/dem.cc \
+	@srcinterface@/geocal_datum.cc @srcinterface@/simple_dem.cc \
+	@srcinterface@/map_info.cc @srcinterface@/orbit.cc \
+	@srcinterface@/memory_raster_image.cc \
 	@srcinterface@/dem_map_info.cc \
 	@srcinterface@/feature_detector.cc \
 	@srcinterface@/forstner_feature_detector.cc \
@@ -815,6 +816,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcinterface@/libgeocal_la-eci.lo \
 	@srcinterface@/libgeocal_la-look_vector.lo \
 	@srcinterface@/libgeocal_la-geodetic.lo \
+	@srcinterface@/libgeocal_la-coordinate_converter.lo \
 	@srcinterface@/libgeocal_la-dem.lo \
 	@srcinterface@/libgeocal_la-geocal_datum.lo \
 	@srcinterface@/libgeocal_la-simple_dem.lo \
@@ -2051,9 +2053,10 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcinterface@/time_table.cc @srcinterface@/camera.cc \
 	@srcinterface@/ecr.cc @srcinterface@/eci.cc \
 	@srcinterface@/look_vector.cc @srcinterface@/geodetic.cc \
-	@srcinterface@/dem.cc @srcinterface@/geocal_datum.cc \
-	@srcinterface@/simple_dem.cc @srcinterface@/map_info.cc \
-	@srcinterface@/orbit.cc @srcinterface@/memory_raster_image.cc \
+	@srcinterface@/coordinate_converter.cc @srcinterface@/dem.cc \
+	@srcinterface@/geocal_datum.cc @srcinterface@/simple_dem.cc \
+	@srcinterface@/map_info.cc @srcinterface@/orbit.cc \
+	@srcinterface@/memory_raster_image.cc \
 	@srcinterface@/dem_map_info.cc \
 	@srcinterface@/feature_detector.cc \
 	@srcinterface@/forstner_feature_detector.cc \
@@ -3192,6 +3195,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcinterface@/libgeocal_la-geodetic.lo:  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/libgeocal_la-coordinate_converter.lo:  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-dem.lo: @srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-geocal_datum.lo:  \
@@ -4210,6 +4216,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-camera.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-ccorr_lsm_matcher.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-ccorr_matcher.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-coordinate_converter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-dem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-dem_map_info.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-eci.Plo@am__quote@
@@ -5801,6 +5808,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/geodetic.cc' object='@srcinterface@/libgeocal_la-geodetic.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-geodetic.lo `test -f '@srcinterface@/geodetic.cc' || echo '$(srcdir)/'`@srcinterface@/geodetic.cc
+
+@srcinterface@/libgeocal_la-coordinate_converter.lo: @srcinterface@/coordinate_converter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-coordinate_converter.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-coordinate_converter.Tpo -c -o @srcinterface@/libgeocal_la-coordinate_converter.lo `test -f '@srcinterface@/coordinate_converter.cc' || echo '$(srcdir)/'`@srcinterface@/coordinate_converter.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/libgeocal_la-coordinate_converter.Tpo @srcinterface@/$(DEPDIR)/libgeocal_la-coordinate_converter.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/coordinate_converter.cc' object='@srcinterface@/libgeocal_la-coordinate_converter.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-coordinate_converter.lo `test -f '@srcinterface@/coordinate_converter.cc' || echo '$(srcdir)/'`@srcinterface@/coordinate_converter.cc
 
 @srcinterface@/libgeocal_la-dem.lo: @srcinterface@/dem.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-dem.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-dem.Tpo -c -o @srcinterface@/libgeocal_la-dem.lo `test -f '@srcinterface@/dem.cc' || echo '$(srcdir)/'`@srcinterface@/dem.cc

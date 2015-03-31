@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="9">
+<geocal_object class_id="0" tracking_level="0" version="1">
+	<px class_id="2" class_name="GeoCal::MapInfo" tracking_level="1" version="0" object_id="_0">
+		<conv class_id="3" tracking_level="0" version="1">
+			<px class_id="4" class_name="GeoCal::GeodeticConverter" tracking_level="1" version="0" object_id="_1"></px>
+		</conv>
+		<number_x_pixel>27109425</number_x_pixel>
+		<number_y_pixel>8795732</number_y_pixel>
+		<param class_id="5" tracking_level="0" version="0">
+			<size>6</size>
+			<data>
+				<item>-120.00609312061941</item>
+				<item>9.2592593000000006e-06</item>
+				<item>0</item>
+				<item>47.011777984629603</item>
+				<item>0</item>
+				<item>-9.2592593000000006e-06</item>
+			</data>
+		</param>
+	</px>
+</geocal_object>
+</boost_serialization>
+

@@ -24,17 +24,17 @@ def cib01_data():
 
 def _write_cib01_mapinfo():
     '''Write out cib01 map info for when we don't have CIB 1 data available'''
-    with open("cib01_mapinfo.dat", "w") as f:
-        cPickle.dump(cib01_data().map_info, f, cPickle.HIGHEST_PROTOCOL)
+    geocal_swig.serialize_write("cib01_mapinfo.xml", cib01_data().map_info)
 
+# _write_cib01_mapinfo()
 
 def cib01_mapinfo(desired_resolution = None):
     '''This gets the CIB 1 meter MapInfo. This is useful when we don't
     have the CIB 1 data available, but need a reasonable 1 meter
     MapInfo. You can optionally supply a desired resolution, to scale the 
     mapinfo. '''
-    with open(os.path.dirname(__file__) + "/cib01_mapinfo.dat") as f:
-        res = cPickle.load(f)
+    res = geocal_swig.serialize_read_generic(os.path.dirname(__file__) + 
+                                             "/cib01_mapinfo.xml")
     if(desired_resolution):
         resbase = res.resolution_meter
         res = res.scale(desired_resolution / resbase,

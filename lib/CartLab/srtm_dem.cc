@@ -20,7 +20,6 @@ void SrtmDem::load(Archive & ar, const unsigned int version)
   
   f.reset(new VicarMultiFile(dbname, dirbase, "", 10000, 10000, 100000, 4, 4, 
 			      false, outside_dem_is_error_, 0, true));
-  map_info_ = f->map_info();
 }
 
 GEOCAL_SPLIT_IMPLEMENT(SrtmDem);

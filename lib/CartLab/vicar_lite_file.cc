@@ -59,25 +59,16 @@ void VicarLiteRasterImage::load(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void VicarLiteDem::save(Archive & ar, const unsigned int version) const
+void VicarLiteDem::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
     & GEOCAL_NVP_(band)
     & GEOCAL_NVP_(f);
-}
-
-template<class Archive>
-void VicarLiteDem::load(Archive & ar, const unsigned int version)
-{
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
-    & GEOCAL_NVP_(band)
-    & GEOCAL_NVP_(f);
-  map_info_ = f_->map_info();
 }
 
 GEOCAL_SPLIT_IMPLEMENT(VicarLiteFile);
 GEOCAL_SPLIT_IMPLEMENT(VicarLiteRasterImage);
-GEOCAL_SPLIT_IMPLEMENT(VicarLiteDem);
+GEOCAL_IMPLEMENT(VicarLiteDem);
 #endif
 
 //-----------------------------------------------------------------------

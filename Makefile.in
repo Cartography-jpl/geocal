@@ -2617,7 +2617,7 @@ dist_afidspythonvdev_DATA =  \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
-dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.dat
+dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 

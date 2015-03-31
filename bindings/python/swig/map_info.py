@@ -363,12 +363,8 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
     def transform(self):
         return self._v_transform()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.coordinate_converter,self.transform,self.number_x_pixel,self.number_y_pixel)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _map_info.delete_MapInfo
 MapInfo._v_coordinate_converter = new_instancemethod(_map_info.MapInfo__v_coordinate_converter,None,MapInfo)

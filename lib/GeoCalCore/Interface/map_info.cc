@@ -1,9 +1,22 @@
 #include "map_info.h"
 #include "geocal_exception.h"
 #include "ostream_pad.h"
+#include "geocal_serialize_support.h"
 #include <boost/foreach.hpp>
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void MapInfo::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(MapInfo);
+  ar & GEOCAL_NVP_(conv) & GEOCAL_NVP_(number_x_pixel) 
+    & GEOCAL_NVP_(number_y_pixel) & GEOCAL_NVP(param);
+}
+
+GEOCAL_IMPLEMENT(MapInfo);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor. Note that ulc and lrc are for the bounding box of the

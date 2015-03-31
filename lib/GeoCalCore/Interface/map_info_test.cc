@@ -143,4 +143,34 @@ BOOST_AUTO_TEST_CASE(rotated)
   BOOST_CHECK_CLOSE(yindex, (6.25  + 0.5) / 5 - 0.5, 1e-8);
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  double ulc_x = 50;
+  double ulc_y = 60;
+  double x_pixel_res = 0.25;
+  double y_pixel_res = -0.50;
+  int number_x_pixel = 100;
+  int number_y_pixel = 200;
+  boost::shared_ptr<MapInfo> mi
+    (new MapInfo(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter), 
+		 ulc_x, ulc_y, 
+		 ulc_x + x_pixel_res * number_x_pixel, 
+		 ulc_y + y_pixel_res * number_y_pixel, 
+		 number_x_pixel, number_y_pixel));
+  std::string d = serialize_write_string(mi);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<MapInfo> mir =
+    serialize_read_string<MapInfo>(d);
+  BOOST_CHECK_CLOSE(mir->lrc_x(), ulc_x + x_pixel_res * number_x_pixel, 1e-4);
+  BOOST_CHECK_CLOSE(mir->lrc_y(), ulc_y + y_pixel_res * number_y_pixel, 1e-4);
+  BOOST_CHECK_EQUAL(mir->number_x_pixel(), number_x_pixel);
+  BOOST_CHECK_EQUAL(mir->number_y_pixel(), number_y_pixel);
+  BOOST_CHECK_CLOSE(mir->ulc_x(), ulc_x, 1e-4);
+  BOOST_CHECK_CLOSE(mir->ulc_y(), ulc_y, 1e-4);
+  BOOST_CHECK_CLOSE(mir->resolution_meter(), 55302.0924, 1e-4);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

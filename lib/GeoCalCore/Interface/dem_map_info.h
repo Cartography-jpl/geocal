@@ -117,11 +117,6 @@ protected:
 				   ///exception. 
 private:
   friend class boost::serialization::access;
-  // Note that we save the datum and outside_dem_is_error, but *not* 
-  // the map_info_. This is because generally the map_info_ is read
-  // from a file or something like that, and it doesn't make sense to
-  // store in the serialization. Derived classes should make sure
-  // to fill in map_info_.
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
 };

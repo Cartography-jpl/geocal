@@ -184,7 +184,10 @@ private:
   int number_y_pixel_;		///< Number of Y pixels in image
   blitz::Array<double, 1> param; ///< Affine parameters.
   void latitude_range_correct();
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
-
+GEOCAL_EXPORT_KEY(MapInfo);
 #endif

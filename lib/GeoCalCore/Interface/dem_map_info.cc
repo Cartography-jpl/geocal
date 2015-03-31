@@ -5,19 +5,13 @@
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-  // Note that we save the datum and outside_dem_is_error, but *not* 
-  // the map_info_. This is because generally the map_info_ is read
-  // from a file or something like that, and it doesn't make sense to
-  // store in the serialization. Derived classes should make sure
-  // to fill in map_info_.
-
 template<class Archive>
 void DemMapInfo::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Dem);
   GEOCAL_BASE(DemMapInfo, Dem);
-  ar & GEOCAL_NVP_(datum) & GEOCAL_NVP_(outside_dem_is_error);
-  // No map_info_ here intentionally. 
+  ar & GEOCAL_NVP_(datum) & GEOCAL_NVP_(map_info) 
+    & GEOCAL_NVP_(outside_dem_is_error);
 }
 
 GEOCAL_IMPLEMENT(DemMapInfo);

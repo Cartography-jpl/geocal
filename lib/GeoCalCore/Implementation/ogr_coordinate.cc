@@ -1,6 +1,28 @@
 #include "ogr_coordinate.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void OgrWrapper::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(OgrWrapper);
+  std::string wkt_s = wkt();
+  ar & GEOCAL_NVP2("wkt", wkt_s);
+}
+
+template<class Archive>
+void OgrWrapper::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(OgrWrapper);
+  std::string wkt_s;
+  ar & GEOCAL_NVP2("wkt", wkt_s);
+  init(wkt_s);
+}
+
+GEOCAL_SPLIT_IMPLEMENT(OgrWrapper);
+#endif
 
 //-----------------------------------------------------------------------
 /// Geodetic coordinate system, used as base for doing transformation.
@@ -14,6 +36,15 @@ boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_geodetic;
 //-----------------------------------------------------------------------
 
 OgrWrapper::OgrWrapper(const std::string& Wkt)
+{
+  init(Wkt);
+}
+
+//-----------------------------------------------------------------------
+/// Initialize, given a WKT (Well Known Text) string.
+//-----------------------------------------------------------------------
+
+void OgrWrapper::init(const std::string& Wkt)
 {
   boost::shared_ptr<OGRSpatialReference> ogr_create(new OGRSpatialReference);
   char* wkt_str = const_cast<char*>(Wkt.c_str());

@@ -81,4 +81,22 @@ BOOST_AUTO_TEST_CASE(ogr_coordinate_converter)
   BOOST_CHECK_CLOSE(z, 0.0, 1e-6);
 }
 
+BOOST_AUTO_TEST_CASE(serialize_ogr_wrapper)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<OgrWrapper> ogrw = OgrWrapper::from_epsg(32612);
+  BOOST_CHECK_EQUAL(ogrw->projected_cs_type_geo_key(), std::string("32612"));
+  BOOST_CHECK_EQUAL(ogrw->pcs_citation_geo_key(), 
+		    std::string("WGS 84 / UTM zone 12N"));
+  std::string d = serialize_write_string(ogrw);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<OgrWrapper> ogrwr = 
+    serialize_read_string<OgrWrapper>(d);
+  BOOST_CHECK_EQUAL(ogrwr->projected_cs_type_geo_key(), std::string("32612"));
+  BOOST_CHECK_EQUAL(ogrwr->pcs_citation_geo_key(), 
+		    std::string("WGS 84 / UTM zone 12N"));
+}
+
 BOOST_AUTO_TEST_SUITE_END()

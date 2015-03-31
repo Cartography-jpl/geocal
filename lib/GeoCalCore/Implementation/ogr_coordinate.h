@@ -57,10 +57,18 @@ public:
   std::string pcs_citation_geo_key() const;
 private:
   void init(const boost::shared_ptr<OGRSpatialReference>& Ogr);
+  void init(const std::string& Wkt);
   boost::shared_ptr<OGRSpatialReference> ogr_;
   OGRCoordinateTransformation* ogr_transform_;
   OGRCoordinateTransformation* ogr_inverse_transform_;
   static boost::scoped_ptr<OGRSpatialReference> ogr_geodetic;
+  OgrWrapper() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 /****************************************************************//**
@@ -250,4 +258,6 @@ private:
 };
 
 }
+
+GEOCAL_EXPORT_KEY(OgrWrapper);
 #endif

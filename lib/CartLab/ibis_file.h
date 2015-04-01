@@ -226,6 +226,13 @@ private:
   void create_col();
   data_type read_column_data_type(int I) const;
   int read_column_size(int I) const;
+  IbisFile() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 template<class T> IbisColumn<T>::IbisColumn(IbisFile& F, int Index, 
@@ -284,5 +291,6 @@ template<> void IbisColumn<std::string>::print(std::ostream& Os) const;
 
 
 }
+GEOCAL_EXPORT_KEY(IbisFile);
 #endif
 

@@ -63,7 +63,7 @@ public:
   %python_attribute(unit, int)
   void flush();
   std::string print_to_string() const;
-  %pickle_init(1, self.file_name, self.access)
+  %pickle_serialization();
   %extend {
 // We use the C types here rather than the Vicar typedef because SWIG wants
 // to treat unsigned char differently than VicarByte, for example. So that

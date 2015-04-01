@@ -1,5 +1,6 @@
 #include "geocal_internal_config.h"
 #include "ibis_file.h"
+#include "geocal_serialize_support.h"
 #ifdef HAVE_VICAR_RTL
 #include "ibisfile.h"		// Vicar P1 routines for IBIS access.
 #endif
@@ -11,6 +12,29 @@ int v2_deactivate_a_unit(int unit);
 }
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void IbisFile::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(IbisFile);
+  ar & GEOCAL_NVP_(access) & GEOCAL_NVP_(fname);
+}
+
+template<class Archive>
+void IbisFile::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(IbisFile);
+  ar & GEOCAL_NVP_(access) & GEOCAL_NVP_(fname);
+  unit_ = -1;
+  unit_ = VicarFile::file_name_to_unit(fname_);
+  unit_open();
+  read_metadata();
+  create_col();
+}
+
+GEOCAL_SPLIT_IMPLEMENT(IbisFile);
+#endif
 
 //-----------------------------------------------------------------------
 /// This is a thin wrapper around the p1 function IBISColumnRead. If the

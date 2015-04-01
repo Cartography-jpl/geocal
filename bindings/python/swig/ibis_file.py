@@ -663,12 +663,8 @@ class IbisFile(geocal_swig.generic_object.GenericObject):
         """
         return _ibis_file.IbisFile_flush(self)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name,self.access)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ibis_file.delete_IbisFile
 IbisFile._v_access = new_instancemethod(_ibis_file.IbisFile__v_access,None,IbisFile)

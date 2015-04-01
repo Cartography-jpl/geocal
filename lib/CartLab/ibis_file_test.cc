@@ -51,4 +51,55 @@ BOOST_AUTO_TEST_CASE(ibis_file_create)
   BOOST_CHECK_EQUAL(f2.column<std::string>(5).data[1], "abcdefghij");
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!VicarFile::vicar_available())
+    return;
+  if(!have_serialize_supported())
+    return;
+
+  std::vector<std::string> fmt(6);
+  fmt[0] = "BYTE";
+  fmt[1] = "HALF";
+  fmt[2] = "FULL";
+  fmt[3] = "REAL";
+  fmt[4] = "DOUB";
+  fmt[5] = "A10";
+  IbisFile f("test_out/ibis.img", 10, fmt);
+  f.column<VicarByte>(0).data[0] = '\1';
+  f.column<VicarHalf>(1).data[2] = (VicarHalf) 2;
+  f.column<VicarFull>(2).data[4] = (VicarFull) 3;
+  f.column<VicarFloat>(3).data[6] = (VicarFloat) 4.0;
+  f.column<VicarDouble>(4).data[8] = 5.0;
+  f.column<std::string>(5).data[0] = "aaa";
+  f.column<std::string>(5).data[1] = "abcdefghijxxx"; // Test too long string.
+  f.close();
+  boost::shared_ptr<IbisFile> f2(new IbisFile("test_out/ibis.img"));
+
+  std::string d = serialize_write_string(f2);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<IbisFile> f2r =
+    serialize_read_string<IbisFile>(d);
+
+  BOOST_CHECK_EQUAL(f2r->number_row(), 10);
+  BOOST_CHECK_EQUAL(f2r->number_col(), 6);
+  BOOST_CHECK_EQUAL(f2r->column<std::string>(5).size_byte(), 11);
+  BOOST_CHECK_EQUAL(f2r->column_data_type(0), IbisFile::VICAR_BYTE);
+  BOOST_CHECK_EQUAL(f2r->column_data_type(1), IbisFile::VICAR_HALF);
+  BOOST_CHECK_EQUAL(f2r->column_data_type(2), IbisFile::VICAR_FULL);
+  BOOST_CHECK_EQUAL(f2r->column_data_type(3), IbisFile::VICAR_FLOAT);
+  BOOST_CHECK_EQUAL(f2r->column_data_type(4), IbisFile::VICAR_DOUBLE);
+  BOOST_CHECK_EQUAL(f2r->column_data_type(5), IbisFile::VICAR_ASCII);
+  BOOST_CHECK_EQUAL(f2r->column<VicarByte>(0).data[0], '\1');
+  BOOST_CHECK_EQUAL(f2r->column<VicarHalf>(1).data[2], (VicarHalf) 2);
+  BOOST_CHECK_EQUAL(f2r->column<VicarFull>(2).data[4], (VicarFull) 3);
+  BOOST_CHECK_CLOSE(f.column<VicarFloat>(3).data[6], (VicarFloat) 4.0,
+		    1e-4);
+  BOOST_CHECK_CLOSE(f.column<VicarDouble>(4).data[8], 5.0, 1e-4);
+  BOOST_CHECK_EQUAL(f2r->column<std::string>(5).data[0], "aaa");
+  BOOST_CHECK_EQUAL(f2r->column<std::string>(5).data[1], "abcdefghij");
+}
+
+
 BOOST_AUTO_TEST_SUITE_END()

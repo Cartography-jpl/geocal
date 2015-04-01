@@ -101,6 +101,8 @@ BOOST_AUTO_TEST_CASE(serialize_ogr_wrapper)
 
 BOOST_AUTO_TEST_CASE(serialize_ogr_coordinate_converter)
 {
+  if(!have_serialize_supported())
+    return;
   boost::shared_ptr<OgrWrapper> ogrw = OgrWrapper::from_epsg(32612);
   boost::shared_ptr<CoordinateConverter> cv(new OgrCoordinateConverter(ogrw));
   std::string d = serialize_write_string(cv);
@@ -113,6 +115,8 @@ BOOST_AUTO_TEST_CASE(serialize_ogr_coordinate_converter)
 
 BOOST_AUTO_TEST_CASE(serialize_ogr_coordinate)
 {
+  if(!have_serialize_supported())
+    return;
   boost::shared_ptr<OgrCoordinate> c(new OgrCoordinate(OgrCoordinate::to_utm(Geodetic(9, -7))));
   BOOST_CHECK_CLOSE(c->x, 719870.729943312, 1e-6);
   BOOST_CHECK_CLOSE(c->y, 995452.6722696, 1e-6);

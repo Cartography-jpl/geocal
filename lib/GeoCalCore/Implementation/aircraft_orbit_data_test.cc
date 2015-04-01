@@ -66,4 +66,21 @@ BOOST_AUTO_TEST_CASE(aircraft_orbit_data)
   BOOST_CHECK(l1(ecr_by.look_quaternion() - quat(0,0,1,0)) < 1e-8);
   BOOST_CHECK(l1(ecr_bz.look_quaternion() - quat(0,0,0,1)) < 1e-8);
 }
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+
+  boost::array<double, 3> vel_fixed = {{0.0, 0.0, 0.0}};
+  boost::shared_ptr<AircraftOrbitData> od
+    (new AircraftOrbitData(Time::time_pgs(100.0), Geodetic(0, 0, 100), 
+			   vel_fixed, 0.0, 0.0, 0.0));
+  std::string d = serialize_write_string(od);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<AircraftOrbitData> odr =
+    serialize_read_string<AircraftOrbitData>(d);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

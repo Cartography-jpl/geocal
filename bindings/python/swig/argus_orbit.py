@@ -268,12 +268,8 @@ class ArgusOrbitData(geocal_swig.aircraft_orbit_data.AircraftOrbitData):
     def camera_number(self):
         return self._v_camera_number()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.time,self.file_name,self.camera_number,self.position_geodetic,self.vector_cf,self.roll,self.pitch,self.heading)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _argus_orbit.delete_ArgusOrbitData
 ArgusOrbitData.save_ortho = new_instancemethod(_argus_orbit.ArgusOrbitData_save_ortho,None,ArgusOrbitData)
@@ -321,11 +317,7 @@ class ArgusOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
         This file should be a CSV file containing one record per line, with
         the fields "File,Camera,Time,Lat,Lon,Alt,Roll,Pitch,Heading". The
         first line is assumed to be a header, and is discarded. The second
-        line is the epoch that the times are measured relative to.
-
-        Orbit data, indexed by the Time. This is a multimap because it is
-        entirely possible to have multiple entries in the navigation file with
-        the same time, e.g., two cameras collect data at the same time. 
+        line is the epoch that the times are measured relative to. 
         """
         _argus_orbit.ArgusOrbit_swiginit(self,_argus_orbit.new_ArgusOrbit(*args))
     def focal_length(self, *args):
@@ -370,12 +362,8 @@ class ArgusOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     def file_name(self):
         return self._v_file_name()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _argus_orbit.delete_ArgusOrbit
 ArgusOrbit.focal_length = new_instancemethod(_argus_orbit.ArgusOrbit_focal_length,None,ArgusOrbit)

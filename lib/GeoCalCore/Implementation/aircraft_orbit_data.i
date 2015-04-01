@@ -31,9 +31,7 @@ public:
   %python_attribute(pitch, double)
   %python_attribute(heading, double)
   %python_attribute(vertical_definition, VerticalDefinition)
-  %pickle_init(1, self.time, self.position_geodetic, self.velocity_cf,
-	       self.roll, self.pitch, self.heading, 
-	       self.vertical_definition)
+  %pickle_serialization();
 };
 }
 

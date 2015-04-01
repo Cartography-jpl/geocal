@@ -10682,11 +10682,7 @@ static PyMethodDef SwigMethods[] = {
 		"This file should be a CSV file containing one record per line, with\n"
 		"the fields \"File,Camera,Time,Lat,Lon,Alt,Roll,Pitch,Heading\". The\n"
 		"first line is assumed to be a header, and is discarded. The second\n"
-		"line is the epoch that the times are measured relative to.\n"
-		"\n"
-		"Orbit data, indexed by the Time. This is a multimap because it is\n"
-		"entirely possible to have multiple entries in the navigation file with\n"
-		"the same time, e.g., two cameras collect data at the same time. \n"
+		"line is the epoch that the times are measured relative to. \n"
 		""},
 	 { (char *)"ArgusOrbit_focal_length", _wrap_ArgusOrbit_focal_length, METH_VARARGS, (char *)"\n"
 		"double ArgusOrbit::focal_length(int camera_num) const\n"

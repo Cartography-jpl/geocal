@@ -1,6 +1,19 @@
 #include "aircraft_orbit_data.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void AircraftOrbitData::serialize(Archive & ar, const unsigned int version)
+{
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionOrbitData)
+      & GEOCAL_NVP_(roll) & GEOCAL_NVP_(pitch) & GEOCAL_NVP_(heading)
+      & GEOCAL_NVP_(vertical_definition) & GEOCAL_NVP_(position_geodetic);
+}
+
+GEOCAL_IMPLEMENT(AircraftOrbitData);
+#endif
 
 //-----------------------------------------------------------------------
 /// Often with Aircraft data we don't have a direct measure of

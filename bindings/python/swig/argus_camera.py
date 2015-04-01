@@ -180,12 +180,8 @@ class ArgusCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def yaw(self):
         return self._v_yaw()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.yaw,self.pitch,self.roll,self.focal_length)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _argus_camera.delete_ArgusCamera
 ArgusCamera._v_roll = new_instancemethod(_argus_camera.ArgusCamera__v_roll,None,ArgusCamera)

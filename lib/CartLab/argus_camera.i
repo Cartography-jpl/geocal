@@ -21,6 +21,6 @@ public:
   %python_attribute(roll, double)
   %python_attribute(pitch, double)
   %python_attribute(yaw, double)
-  %pickle_init(1, self.yaw, self.pitch, self.roll, self.focal_length)
+  %pickle_serialization();
 };
 }

@@ -86,16 +86,23 @@ public:
 //-----------------------------------------------------------------------
 
   VerticalDefinition vertical_definition() const {return vertical_definition_;}
-private:
+protected:
+  AircraftOrbitData() {}
   void initialize(const Time& Tm,
 		  const Geodetic& Position, 
 		  const boost::array<double, 3>& Vel_fixed,
 		  double Roll, double Pitch,
 		  double Heading,
 		  VerticalDefinition V);
+private:
   double roll_, pitch_, heading_;
   VerticalDefinition vertical_definition_;
   Geodetic position_geodetic_;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(AircraftOrbitData);
 #endif

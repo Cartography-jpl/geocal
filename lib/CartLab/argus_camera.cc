@@ -1,7 +1,22 @@
 #include "argus_camera.h"
 #include "gdal_raster_image.h"
+#include "geocal_serialize_support.h"
 #include <sstream>
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void ArgusCamera::serialize(Archive & ar, const unsigned int version)
+{
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
+    ar & GEOCAL_NVP_(roll)
+      & GEOCAL_NVP_(pitch)
+      & GEOCAL_NVP_(yaw);
+}
+
+GEOCAL_IMPLEMENT(ArgusCamera);
+#endif
+
 
 //-----------------------------------------------------------------------
 /// Create a ARGUS camera. We read one of the image jpeg files to get

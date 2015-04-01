@@ -43,9 +43,7 @@ public:
   boost::shared_ptr<GdalRasterImage> image(int band = 1) const;
   %python_attribute(file_name, std::string)
   %python_attribute(camera_number, int)
-  %pickle_init(1, self.time, self.file_name, self.camera_number,
-	       self.position_geodetic, self.vector_cf, self.roll,
-	       self.pitch, self.heading)
+  %pickle_serialization();
 };
 
 class ArgusOrbit : public OrbitQuaternionList {
@@ -56,7 +54,7 @@ public:
   %python_attribute(number_row, int)
   boost::shared_ptr<ArgusOrbitData> nav(int row, int camera_num) const;
   %python_attribute(file_name, std::string)
-  %pickle_init(1, self.file_name)
+  %pickle_serialization();
 };
 }
 

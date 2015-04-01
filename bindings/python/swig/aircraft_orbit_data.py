@@ -215,12 +215,8 @@ class AircraftOrbitData(geocal_swig.orbit.QuaternionOrbitData):
     def vertical_definition(self):
         return self._v_vertical_definition()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.time,self.position_geodetic,self.velocity_cf,self.roll,self.pitch,self.heading,self.vertical_definition)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _aircraft_orbit_data.delete_AircraftOrbitData
 AircraftOrbitData._v_position_geodetic = new_instancemethod(_aircraft_orbit_data.AircraftOrbitData__v_position_geodetic,None,AircraftOrbitData)

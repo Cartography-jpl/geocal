@@ -11,11 +11,40 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/foreach.hpp>
+#include "geocal_serialize_support.h"
 #ifdef HAVE_VICAR_RTL
 #include "vicar_raster_image.h"
 #endif
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void ArgusOrbitData::serialize(Archive & ar, const unsigned int version)
+{
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(AircraftOrbitData);
+    ar & GEOCAL_NVP_(camera_number)
+      & GEOCAL_NVP_(file_name);
+}
+
+template<class Archive>
+void ArgusOrbit::save(Archive & ar, const unsigned int version) const
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP(fname);
+}
+
+template<class Archive>
+void ArgusOrbit::load(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP(fname);
+  init(fname);
+}
+
+GEOCAL_SPLIT_IMPLEMENT(ArgusOrbit);
+GEOCAL_IMPLEMENT(ArgusOrbitData);
+#endif
 
 /// Tolerance in seconds for two orbit data records to be in the same "row"
 double ArgusOrbit::row_time_tolerance = 0.2;
@@ -203,8 +232,13 @@ void ArgusOrbitData::print(std::ostream& Os) const
 //-----------------------------------------------------------------------
 
 ArgusOrbit::ArgusOrbit(const std::string& Fname)
-  : fname(Fname)
 {
+  init(Fname);
+}
+
+void ArgusOrbit::init(const std::string& Fname)
+{
+  fname = Fname;
   std::ifstream is(Fname.c_str());
   is.exceptions(std::ifstream::failbit | std::ifstream::badbit);
   std::string ln;

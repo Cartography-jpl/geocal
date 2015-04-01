@@ -44,6 +44,8 @@ def test_cib01_data():
     assert cib01.number_sample == 27109425
 
 def test_cib01_mapinfo():
+    if(not have_serialize_supported()):
+        raise SkipTest
     m = cib01_mapinfo()
     assert m.number_y_pixel == 8795732
     assert m.number_x_pixel == 27109425

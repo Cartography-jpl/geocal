@@ -61,17 +61,11 @@ public:
 private:
   std::vector<double> psi_x_;
   std::vector<double> psi_y_;
-#ifdef USE_BOOST_SERIALIZATON
   SpotCamera() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Camera);
-    ar & GEOCAL_NVP_(psi_x)
-      & GEOCAL_NVP_(psi_y);
-  }
-#endif
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+GEOCAL_EXPORT_KEY(SpotCamera);
 #endif

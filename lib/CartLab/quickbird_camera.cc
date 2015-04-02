@@ -1,8 +1,19 @@
 #include "quickbird_camera.h"
 #include "geocal_exception.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
 using boost::math::quaternion;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void QuickBirdCamera::serialize(Archive & ar, const unsigned int version)
+{
+    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
+}
+
+GEOCAL_IMPLEMENT(QuickBirdCamera);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor. At this point, all of the camera coefficients are

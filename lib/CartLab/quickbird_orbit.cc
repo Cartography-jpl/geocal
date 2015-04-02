@@ -2,8 +2,52 @@
 #include "ecr.h"
 #include "eci.h"
 #include "constant.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void QuickBirdOrbit::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP(eph) & GEOCAL_NVP(att);
+}
+
+template<class Archive>
+void QuickBirdEphemeris::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(QuickBirdEphemeris);
+  ar & GEOCAL_NVP(fname);
+}
+
+template<class Archive>
+void QuickBirdEphemeris::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(QuickBirdEphemeris);
+  ar & GEOCAL_NVP(fname);
+  init(fname);
+}
+
+template<class Archive>
+void QuickBirdAttitude::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(QuickBirdAttitude);
+  ar & GEOCAL_NVP(fname);
+}
+
+template<class Archive>
+void QuickBirdAttitude::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(QuickBirdAttitude);
+  ar & GEOCAL_NVP(fname);
+  init(fname);
+}
+
+GEOCAL_IMPLEMENT(QuickBirdOrbit);
+GEOCAL_SPLIT_IMPLEMENT(QuickBirdAttitude);
+GEOCAL_SPLIT_IMPLEMENT(QuickBirdEphemeris);
+#endif
 
 
 //-----------------------------------------------------------------------

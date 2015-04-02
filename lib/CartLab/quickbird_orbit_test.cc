@@ -266,4 +266,18 @@ BOOST_AUTO_TEST_CASE(derivative_sc_look2)
   BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+
+  std::string d = serialize_write_string(orb);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<QuickBirdOrbit> orbr =
+    serialize_read_string<QuickBirdOrbit>(d);
+  BOOST_CHECK(fabs(orbr->min_time() - 
+		   Time::parse_time("2006-01-06T03:38:26.790529Z")) < 1e-3);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

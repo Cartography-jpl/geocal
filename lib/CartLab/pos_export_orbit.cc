@@ -1,11 +1,31 @@
 #include "pos_export_orbit.h"
 #include "aircraft_orbit_data.h"
+#include "geocal_serialize_support.h"
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
 #include <boost/regex.hpp>
 #include <boost/exception/diagnostic_information.hpp> 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void PosExportOrbit::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(PosExportOrbit);
+  ar & GEOCAL_NVP(fname) & GEOCAL_NVP_(file_epoch);
+}
+
+template<class Archive>
+void PosExportOrbit::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(PosExportOrbit);
+  ar & GEOCAL_NVP(fname) & GEOCAL_NVP_(file_epoch);
+  init(fname, file_epoch_);
+}
+
+GEOCAL_SPLIT_IMPLEMENT(PosExportOrbit);
+#endif
 
 //-----------------------------------------------------------------------
 /// Read the given text file. Note that the time in the Applanix file
@@ -15,8 +35,14 @@ using namespace GeoCal;
 //-----------------------------------------------------------------------
 
 PosExportOrbit::PosExportOrbit(const std::string& Fname, const Time& Epoch)
-  :fname(Fname), file_epoch_(Epoch)
 {
+  init(Fname, Epoch);
+}
+
+void PosExportOrbit::init(const std::string& Fname, const Time& Epoch)
+{
+  fname = Fname;
+  file_epoch_ = Epoch;
   std::ifstream in(Fname.c_str());
   in.exceptions(std::ios_base::badbit);
   bool first_line = false;

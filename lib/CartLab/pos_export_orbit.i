@@ -16,6 +16,6 @@ public:
   const AircraftOrbitData& aircraft_orbit_data(const Time& T) const;
   %python_attribute(file_name, std::string)
   %python_attribute(file_epoch, Time)
-  %pickle_init(1, self.file_name, self.file_epoch)
+  %pickle_serialization();
 };
 }

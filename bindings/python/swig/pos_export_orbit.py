@@ -185,12 +185,8 @@ class PosExportOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     def file_epoch(self):
         return self._v_file_epoch()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name,self.file_epoch)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _pos_export_orbit.delete_PosExportOrbit
 PosExportOrbit.aircraft_orbit_data = new_instancemethod(_pos_export_orbit.PosExportOrbit_aircraft_orbit_data,None,PosExportOrbit)

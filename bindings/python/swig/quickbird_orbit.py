@@ -203,12 +203,8 @@ class QuickBirdEphemeris(geocal_swig.generic_object.GenericObject):
     def file_name(self):
         return self._v_file_name()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _quickbird_orbit.delete_QuickBirdEphemeris
 QuickBirdEphemeris._v_min_time = new_instancemethod(_quickbird_orbit.QuickBirdEphemeris__v_min_time,None,QuickBirdEphemeris)
@@ -312,12 +308,8 @@ class QuickBirdAttitude(geocal_swig.generic_object.GenericObject):
     def file_name(self):
         return self._v_file_name()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _quickbird_orbit.delete_QuickBirdAttitude
 QuickBirdAttitude._v_min_time = new_instancemethod(_quickbird_orbit.QuickBirdAttitude__v_min_time,None,QuickBirdAttitude)
@@ -382,12 +374,8 @@ class QuickBirdOrbit(geocal_swig.orbit.Orbit):
     def attitude_file_name(self):
         return self._v_attitude_file_name()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.ephemeris_file_name,self.attitude_file_name)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _quickbird_orbit.delete_QuickBirdOrbit
 QuickBirdOrbit.orbit_data = new_instancemethod(_quickbird_orbit.QuickBirdOrbit_orbit_data,None,QuickBirdOrbit)

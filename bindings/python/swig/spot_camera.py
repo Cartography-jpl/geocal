@@ -184,12 +184,8 @@ class SpotCamera(geocal_swig.camera.Camera):
     def psi_y(self):
         return self._v_psi_y()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.psi_x,self.psi_y)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _spot_camera.delete_SpotCamera
 SpotCamera._v_psi_x = new_instancemethod(_spot_camera.SpotCamera__v_psi_x,None,SpotCamera)

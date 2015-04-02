@@ -15,7 +15,7 @@ class QuickBirdCamera : public QuaternionCamera {
 public:
   QuickBirdCamera();
   virtual ~QuickBirdCamera();
-  %pickle_init(1);
+  %pickle_serialization();
 };
 
 }

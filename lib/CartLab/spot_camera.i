@@ -28,7 +28,7 @@ public:
 				 int Band) const;
   %python_attribute(psi_x, std::vector<double>)
   %python_attribute(psi_y, std::vector<double>)
-  %pickle_init(1, self.psi_x, self.psi_y)
+  %pickle_serialization();
 };
 
 }

@@ -161,12 +161,8 @@ class QuickBirdCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         """
         _quickbird_camera.QuickBirdCamera_swiginit(self,_quickbird_camera.new_QuickBirdCamera())
     __swig_destroy__ = _quickbird_camera.delete_QuickBirdCamera
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, )
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
 QuickBirdCamera_swigregister = _quickbird_camera.QuickBirdCamera_swigregister
 QuickBirdCamera_swigregister(QuickBirdCamera)

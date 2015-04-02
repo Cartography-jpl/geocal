@@ -24,8 +24,16 @@ public:
 //-----------------------------------------------------------------------
 
   QuickBirdFile(const std::string& Fname)
-  : fname(Fname)
   {
+    init(Fname);
+  }
+  QuickBirdFile()
+  {
+  }
+
+  void init(const std::string& Fname)
+  {
+    fname = Fname;
     std::ifstream in(Fname.c_str());
     in.exceptions(std::ifstream::eofbit | std::ifstream::failbit | 
 		  std::ifstream::badbit);
@@ -102,8 +110,9 @@ public:
 //-----------------------------------------------------------------------
 
   const std::string& file_name() const {return fname;}
-private:
+protected:
   std::string fname;
+private:
   std::vector<boost::array<double, D> > d;
   double tspace;
   Time stime;
@@ -122,8 +131,8 @@ public:
 /// Read the quickbird ephemeris file
 //-----------------------------------------------------------------------
 
-  QuickBirdEphemeris(const std::string& Fname) : QuickBirdFile<12>(Fname)
-  { }
+  QuickBirdEphemeris(const std::string& Fname)
+  { init(Fname); }
 
 //-----------------------------------------------------------------------
 /// Ephemeris data. This as 12 numbers in each entry. The first 3 are
@@ -141,6 +150,14 @@ public:
 //-----------------------------------------------------------------------
 
   void print(std::ostream& Os) const;
+private:
+  QuickBirdEphemeris() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 /****************************************************************//**
@@ -169,8 +186,8 @@ public:
 /// Read the quickbird attitude file
 //-----------------------------------------------------------------------
 
-  QuickBirdAttitude(const std::string& Fname) : QuickBirdFile<14>(Fname)
-  { }
+  QuickBirdAttitude(const std::string& Fname)
+  { init(Fname); }
 
 //-----------------------------------------------------------------------
 /// Attitude data. The first 4 parameters are the quaternion
@@ -190,6 +207,14 @@ public:
 //-----------------------------------------------------------------------
 
   void print(std::ostream& Os) const;
+private:
+  QuickBirdAttitude() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 
@@ -230,6 +255,14 @@ public:
 private:
   boost::shared_ptr<QuickBirdEphemeris> eph;
   boost::shared_ptr<QuickBirdAttitude> att;
+  QuickBirdOrbit() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(QuickBirdEphemeris);
+GEOCAL_EXPORT_KEY(QuickBirdAttitude);
+GEOCAL_EXPORT_KEY(QuickBirdOrbit);
 #endif

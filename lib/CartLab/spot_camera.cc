@@ -1,7 +1,23 @@
 #include "spot_camera.h"
 #include "geocal_exception.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void SpotCamera::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Camera);
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(Camera, WithParameter);
+  GEOCAL_BASE(SpotCamera, Camera);
+  ar & GEOCAL_NVP_(psi_x)
+    & GEOCAL_NVP_(psi_y);
+}
+
+GEOCAL_IMPLEMENT(SpotCamera);
+#endif
 
 //-----------------------------------------------------------------------
 /// Create a spot camera with the given PSI angles. Psi_x and Psi_y

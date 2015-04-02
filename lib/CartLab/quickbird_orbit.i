@@ -22,7 +22,7 @@ public:
   %python_attribute(ephemeris, std::vector<boost::array<double, 12> >)
   %python_attribute(file_name, std::string)
   std::string print_to_string() const;
-  %pickle_init(1, self.file_name)
+  %pickle_serialization();
 };
 
 class QuickBirdAttitude : public GenericObject {
@@ -34,7 +34,7 @@ public:
   %python_attribute(attitude, std::vector<boost::array<double, 14> >)
   %python_attribute(file_name, std::string)
   std::string print_to_string() const;
-  %pickle_init(1, self.file_name)
+  %pickle_serialization();
 };
 
 class QuickBirdOrbit : public Orbit {
@@ -46,7 +46,7 @@ public:
     const;
   %python_attribute(ephemeris_file_name, std::string)
   %python_attribute(attitude_file_name, std::string)
-  %pickle_init(1, self.ephemeris_file_name, self.attitude_file_name)
+  %pickle_serialization();
 };
 
 }

@@ -50,9 +50,18 @@ UsgsDemData::UsgsDemData
   }
   boost::regex fname_regex("([ns])(\\d+)([ew])(\\d+)_10m.tif");
   boost::smatch m;
-  MapInfo mi_ref;
-  int lat_ref = -1, lon_ref = -1;
-  int num_per_deg_lat = -1, num_per_deg_lon = -1;
+  // We got the values here by looking at one of the map info files,
+  // and just recording the information. This is from n47w087_10m.tif.
+  // We start with a 1 degree tile, and then add a 6 pixel border
+  int lat_ref = 47, lon_ref = -87;
+  int num_per_deg_lat = -10800, num_per_deg_lon = 10800;
+  int border = 6;
+  MapInfo mi_ref(boost::shared_ptr<CoordinateConverter> 
+		 (new GeodeticConverter()),
+		 lon_ref, lat_ref, lon_ref + 1, lat_ref - 1, num_per_deg_lon, 
+		 -num_per_deg_lat);
+  mi_ref = mi_ref.subset(-border, -border, num_per_deg_lon + 2 * border,
+			 -num_per_deg_lat + 2 * border);
   std::vector<std::string> flist;
   std::vector<int> loffset;
   std::vector<int> soffset;
@@ -81,40 +90,15 @@ UsgsDemData::UsgsDemData
       // position of the files by comparing the lat/lon between files.
       int lat = boost::lexical_cast<int>(m[2]) * (m[1] == "n" ? 1 : -1);
       int lon = boost::lexical_cast<int>(m[4]) * (m[3] == "e" ? 1 : -1);
-      if(flist.size() == 1) {
-	mi_ref = GdalRasterImage(flist[0]).map_info();
-	// The data is in latitude/longitude of NAD83. However this is
-	// extremely close to just WGS84. We go ahead and change to
-	// use the GeodeticConverter because this is faster than going
-	// through OGR.
-	mi_ref = MapInfo(boost::shared_ptr<CoordinateConverter>
-			 (new GeodeticConverter()),
-			 mi_ref.transform(),
-			 mi_ref.number_x_pixel(), mi_ref.number_y_pixel());
-	// If this is the first file, then initialize the mapinfo that we
-	// will calculate all the loffset and soffset against. We'll
-	// adjust this after going through all the files for the upper
-	// left corner is 0,0.
-	loffset.push_back(0);
-	soffset.push_back(0);
-	lat_ref = lat;
-	lon_ref = lon;
-	double x0, y0, x1, y1;
-	mi_ref.coordinate_to_index(lon_ref, lat_ref, x0, y0);
-	mi_ref.coordinate_to_index(lon_ref + 1.0, lat_ref + 1.0, x1, y1);
-	num_per_deg_lon = (int) round(x1 - x0);
-	num_per_deg_lat = (int) round(y1 - y0);
-      } else {
-	// Calculate the line/sample relative to our initial mapinfo.
-	int loff = (lat - lat_ref) * num_per_deg_lat;
-	int soff = (lon - lon_ref) * num_per_deg_lon;
-	loffset.push_back(loff);
-	soffset.push_back(soff);
-	lmin = std::min(loff, lmin);
-	smin = std::min(soff, smin);
-	lmax = std::max(loff, lmax);
-	smax = std::max(soff, smax);
-      }
+      // Calculate the line/sample relative to our initial mapinfo.
+      int loff = (lat - lat_ref) * num_per_deg_lat;
+      int soff = (lon - lon_ref) * num_per_deg_lon;
+      loffset.push_back(loff);
+      soffset.push_back(soff);
+      lmin = std::min(loff, lmin);
+      smin = std::min(soff, smin);
+      lmax = std::max(loff, lmax);
+      smax = std::max(soff, smax);
     }
   }
   if(flist.size() == 0) {

@@ -15,11 +15,19 @@ public:
 		       const std::string& Orbit_file_name,
 		       const std::string& L1b1_table,
 		       const std::string& Base_directory = ".");
+  // AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
+  // 		       const boost::shared_ptr<Camera>& Cam,
+  // 		       const boost::shared_ptr<Dem>& Dem,
+  // 		       const std::vector<std::string>& L1b1_file_name,
+  // 		       const std::string& Instrument_config_file,
+  // 		       int Band,
+  // 		       int Dem_resolution = 10);
   virtual ~AirMspiIgcCollection() {}
   virtual void print(std::ostream& Os) const;
   virtual int number_image() const { return (int) view_config_.size(); }
   virtual boost::shared_ptr<ImageGroundConnection> 
-  image_ground_connection(int Image_index) const;
+  image_ground_connection(int Image_index) const
+  { return air_mspi_igc(Image_index); }
   virtual boost::shared_ptr<IgcCollection> 
   subset(const std::vector<int>& Index_set) const;
 
@@ -128,18 +136,15 @@ public:
     range_check(Index, 0, number_image());
     return max_l1b1_line_[Index];
   }
-
   int view_number_to_image_index(int View_number) const;
-//-----------------------------------------------------------------------
-/// Go from view number (found in the l1b1 table file) to the index
-/// number matching it.
-//-----------------------------------------------------------------------
 
   // We'll mess with parameter in a bit, for now leave this out.
 private:
   // We do lazy evaluation, so allow this to be changed by 
   // image_ground_connection const function.
-  mutable std::vector<boost::shared_ptr<ImageGroundConnection> > igc;
+  mutable std::vector<boost::shared_ptr<AirMspiIgc> > igc;
+  boost::shared_ptr<AirMspiIgc> air_mspi_igc(int Index) const;
+
   boost::shared_ptr<Dem> dem;
   double dem_resolution;
   std::vector<MspiConfigFile> view_config_;
@@ -165,12 +170,6 @@ private:
 
   // Temp stuff, we'll remove this in a bit.
   std::string config_filename_, orbit_filename_;
-  // Probably temporary
-  boost::shared_ptr<AirMspiIgc> air_mspi_igc(int Index) const
-  {
-    return boost::dynamic_pointer_cast<AirMspiIgc>(image_ground_connection(Index));
-  }
-
   AirMspiIgcCollection() {}
   friend class boost::serialization::access;
   template<class Archive>

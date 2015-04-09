@@ -116,15 +116,19 @@ AirMspiIgcCollection::AirMspiIgcCollection
 
 }
 
-// see base class for description.
-boost::shared_ptr<ImageGroundConnection> 
-AirMspiIgcCollection::image_ground_connection(int Image_index) const
+//-----------------------------------------------------------------------
+/// Return the AirMspiIgc for the given Image_index, doing the lazy 
+/// evaluation of necessary.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<AirMspiIgc> 
+AirMspiIgcCollection::air_mspi_igc(int Image_index) const
 {
   range_check(Image_index, 0, number_image());
   // We create igc using lazy evaluation, so if this is empty go ahead 
   // and add enough space to hold all the data.
   if(igc.empty()) {
-    boost::shared_ptr<ImageGroundConnection> null_ptr;
+    boost::shared_ptr<AirMspiIgc> null_ptr;
     igc.insert(igc.end(), number_image(), null_ptr);
   }
   if(!igc[Image_index]) {
@@ -169,7 +173,15 @@ AirMspiIgcCollection::AirMspiIgcCollection
 	<< Original.number_image() - 1;
     }
 
-  // Fill this in.
+  dem = Original.dem;
+  dem_resolution = Original.dem_resolution;
+  reference_row_ = Original.reference_row_;
+  base_directory = Original.base_directory;
+  BOOST_FOREACH(int i, Index_set) {
+    view_config_.push_back(MspiConfigFile(Original.view_config_[i]));
+    min_l1b1_line_.push_back(Original.min_l1b1_line_[i]);
+    max_l1b1_line_.push_back(Original.max_l1b1_line_[i]);
+  }
 }
 
 //-----------------------------------------------------------------------

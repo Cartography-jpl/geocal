@@ -155,7 +155,7 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
 
     def image_ground_connection(self, *args):
         """
-        boost::shared_ptr< ImageGroundConnection > AirMspiIgcCollection::image_ground_connection(int Image_index) const
+        virtual boost::shared_ptr<ImageGroundConnection> GeoCal::AirMspiIgcCollection::image_ground_connection(int Image_index) const
 
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_image_ground_connection(self, *args)

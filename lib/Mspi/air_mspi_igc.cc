@@ -27,16 +27,15 @@ GEOCAL_IMPLEMENT(AirMspiIgc);
 /// You can optionally add the base directory that file names in the
 /// Master_config_file are relative to. The default is the current
 /// directory. 
-///
-/// \todo Do we want to allow the camera to be passed in, so we can
-/// share one in the IgcCollection?
 //-----------------------------------------------------------------------
 
-AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
-		       const std::string& Orbit_file_name,
-		       const std::string& L1b1_file_name,
-		       int Band,
-		       const std::string& Base_directory)
+AirMspiIgc::AirMspiIgc
+(const std::string& Master_config_file,
+ const std::string& Orbit_file_name,
+ const std::string& L1b1_file_name,
+ int Band,
+ const std::string& Base_directory,
+ const std::string& Title)
 {
   MspiConfigFile c(Master_config_file);
   // Get camera set up
@@ -93,11 +92,39 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
 
   // Short term, have image empty.
   boost::shared_ptr<RasterImage> img;
-  std::string title = "Image";
 
   // Ready now to initialize ipi and Igc
   boost::shared_ptr<Ipi> ipi(new Ipi(orb, cam, Band, tmin, tmax, tt));
-  initialize(ipi, dem, img, title, dem_resolution);
+  initialize(ipi, dem, img, Title, dem_resolution);
+}
+
+//-----------------------------------------------------------------------
+/// Constructor. This variation of the constructor directly takes the
+/// information needed to construct the object, rather than reading
+/// this from the master configuration file.
+//-----------------------------------------------------------------------
+
+AirMspiIgc::AirMspiIgc
+(const boost::shared_ptr<Orbit>& Orb,
+ const boost::shared_ptr<Camera>& Cam,
+ const boost::shared_ptr<Dem>& Dem,
+ const std::string& L1b1_file_name,
+ const std::string& Instrument_config_file,
+ int Band,
+ const std::string& Title,
+ int Dem_resolution)
+{
+
+  // Short term, have image empty.
+  boost::shared_ptr<RasterImage> img;
+  std::string title = "Image";
+
+  boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name,
+						       Instrument_config_file));
+  Time tmin = std::max(Orb->min_time(), tt->min_time());
+  Time tmax = std::min(Orb->max_time(), tt->max_time());
+  boost::shared_ptr<Ipi> ipi(new Ipi(Orb, Cam, Band, tmin, tmax, tt));
+  initialize(ipi, Dem, img, title, Dem_resolution);
 }
 
 void AirMspiIgc::print(std::ostream& Os) const 

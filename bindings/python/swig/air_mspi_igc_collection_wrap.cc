@@ -6431,7 +6431,7 @@ static PyMethodDef SwigMethods[] = {
 		"default is the current directory. \n"
 		""},
 	 { (char *)"AirMspiIgcCollection_image_ground_connection", _wrap_AirMspiIgcCollection_image_ground_connection, METH_VARARGS, (char *)"\n"
-		"boost::shared_ptr< ImageGroundConnection > AirMspiIgcCollection::image_ground_connection(int Image_index) const\n"
+		"virtual boost::shared_ptr<ImageGroundConnection> GeoCal::AirMspiIgcCollection::image_ground_connection(int Image_index) const\n"
 		"\n"
 		""},
 	 { (char *)"AirMspiIgcCollection_have_config", _wrap_AirMspiIgcCollection_have_config, METH_VARARGS, (char *)"\n"

@@ -37,10 +37,6 @@ BOOST_AUTO_TEST_CASE(serialization)
     std::cerr << d;
   boost::shared_ptr<AirMspiIgc> igcr = 
     serialize_read_string<AirMspiIgc>(d);
-  // Check band, camera, orbit, time_table, orbit_file_name,
-  // l1b1_file_name
-  BOOST_CHECK_EQUAL(igcr->base_directory(), igc->base_directory());
-  BOOST_CHECK_EQUAL(igcr->master_config_file(), igc->master_config_file());
 #else
   BOOST_WARN_MESSAGE(false, "Skipping AirMspiIgc test, because we haven't build ith MSPI_SHARED support");
 #endif

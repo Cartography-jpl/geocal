@@ -165,29 +165,6 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
     def band(self, value):
       self._v_band(value)
 
-    def _v_base_directory(self):
-        """
-        const std::string& GeoCal::AirMspiIgc::base_directory() const
-        The base directory that various files in the master config file are
-        relative to. 
-        """
-        return _air_mspi_igc.AirMspiIgc__v_base_directory(self)
-
-    @property
-    def base_directory(self):
-        return self._v_base_directory()
-
-    def _v_master_config_file(self):
-        """
-        const std::string& GeoCal::AirMspiIgc::master_config_file() const
-        The name of the master config file used to create this object. 
-        """
-        return _air_mspi_igc.AirMspiIgc__v_master_config_file(self)
-
-    @property
-    def master_config_file(self):
-        return self._v_master_config_file()
-
     def _v_orbit(self):
         """
         boost::shared_ptr<AirMspiOrbit> GeoCal::AirMspiIgc::orbit() const
@@ -221,17 +198,6 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
     def camera(self):
         return self._v_camera()
 
-    def _v_orbit_file_name(self):
-        """
-        std::string GeoCal::AirMspiIgc::orbit_file_name() const
-        The name of the orbit file. 
-        """
-        return _air_mspi_igc.AirMspiIgc__v_orbit_file_name(self)
-
-    @property
-    def orbit_file_name(self):
-        return self._v_orbit_file_name()
-
     def _v_l1b1_file_name(self):
         """
         std::string GeoCal::AirMspiIgc::l1b1_file_name() const
@@ -248,12 +214,9 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
 
     __swig_destroy__ = _air_mspi_igc.delete_AirMspiIgc
 AirMspiIgc._v_band = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_band,None,AirMspiIgc)
-AirMspiIgc._v_base_directory = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_base_directory,None,AirMspiIgc)
-AirMspiIgc._v_master_config_file = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_master_config_file,None,AirMspiIgc)
 AirMspiIgc._v_orbit = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_orbit,None,AirMspiIgc)
 AirMspiIgc._v_time_table = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_time_table,None,AirMspiIgc)
 AirMspiIgc._v_camera = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_camera,None,AirMspiIgc)
-AirMspiIgc._v_orbit_file_name = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_orbit_file_name,None,AirMspiIgc)
 AirMspiIgc._v_l1b1_file_name = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_l1b1_file_name,None,AirMspiIgc)
 AirMspiIgc_swigregister = _air_mspi_igc.AirMspiIgc_swigregister
 AirMspiIgc_swigregister(AirMspiIgc)

@@ -5689,92 +5689,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_AirMspiIgc__v_base_directory(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::AirMspiIgc *arg1 = (GeoCal::AirMspiIgc *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::AirMspiIgc const > tempshared1 ;
-  boost::shared_ptr< GeoCal::AirMspiIgc const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgc_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgc__v_base_directory" "', argument " "1"" of type '" "GeoCal::AirMspiIgc const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgc > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgc > * >(argp1);
-      arg1 = const_cast< GeoCal::AirMspiIgc * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgc > * >(argp1);
-      arg1 = const_cast< GeoCal::AirMspiIgc * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::AirMspiIgc const *)arg1)->base_directory();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_AirMspiIgc__v_master_config_file(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::AirMspiIgc *arg1 = (GeoCal::AirMspiIgc *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::AirMspiIgc const > tempshared1 ;
-  boost::shared_ptr< GeoCal::AirMspiIgc const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgc_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgc__v_master_config_file" "', argument " "1"" of type '" "GeoCal::AirMspiIgc const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgc > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgc > * >(argp1);
-      arg1 = const_cast< GeoCal::AirMspiIgc * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgc > * >(argp1);
-      arg1 = const_cast< GeoCal::AirMspiIgc * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::AirMspiIgc const *)arg1)->master_config_file();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_AirMspiIgc__v_orbit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::AirMspiIgc *arg1 = (GeoCal::AirMspiIgc *) 0 ;
@@ -5910,49 +5824,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_AirMspiIgc__v_orbit_file_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::AirMspiIgc *arg1 = (GeoCal::AirMspiIgc *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::AirMspiIgc const > tempshared1 ;
-  boost::shared_ptr< GeoCal::AirMspiIgc const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgc_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgc__v_orbit_file_name" "', argument " "1"" of type '" "GeoCal::AirMspiIgc const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgc > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgc > * >(argp1);
-      arg1 = const_cast< GeoCal::AirMspiIgc * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgc > * >(argp1);
-      arg1 = const_cast< GeoCal::AirMspiIgc * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::AirMspiIgc const *)arg1)->orbit_file_name();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_AirMspiIgc__v_l1b1_file_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::AirMspiIgc *arg1 = (GeoCal::AirMspiIgc *) 0 ;
@@ -6067,15 +5938,6 @@ static PyMethodDef SwigMethods[] = {
 		"void GeoCal::AirMspiIgc::band(int B)\n"
 		"Set band that we are using. \n"
 		""},
-	 { (char *)"AirMspiIgc__v_base_directory", (PyCFunction)_wrap_AirMspiIgc__v_base_directory, METH_O, (char *)"\n"
-		"const std::string& GeoCal::AirMspiIgc::base_directory() const\n"
-		"The base directory that various files in the master config file are\n"
-		"relative to. \n"
-		""},
-	 { (char *)"AirMspiIgc__v_master_config_file", (PyCFunction)_wrap_AirMspiIgc__v_master_config_file, METH_O, (char *)"\n"
-		"const std::string& GeoCal::AirMspiIgc::master_config_file() const\n"
-		"The name of the master config file used to create this object. \n"
-		""},
 	 { (char *)"AirMspiIgc__v_orbit", (PyCFunction)_wrap_AirMspiIgc__v_orbit, METH_O, (char *)"\n"
 		"boost::shared_ptr<AirMspiOrbit> GeoCal::AirMspiIgc::orbit() const\n"
 		"Orbit we are using. \n"
@@ -6087,10 +5949,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"AirMspiIgc__v_camera", (PyCFunction)_wrap_AirMspiIgc__v_camera, METH_O, (char *)"\n"
 		"boost::shared_ptr<MspiCamera> GeoCal::AirMspiIgc::camera() const\n"
 		"Camera we are using. \n"
-		""},
-	 { (char *)"AirMspiIgc__v_orbit_file_name", (PyCFunction)_wrap_AirMspiIgc__v_orbit_file_name, METH_O, (char *)"\n"
-		"std::string GeoCal::AirMspiIgc::orbit_file_name() const\n"
-		"The name of the orbit file. \n"
 		""},
 	 { (char *)"AirMspiIgc__v_l1b1_file_name", (PyCFunction)_wrap_AirMspiIgc__v_l1b1_file_name, METH_O, (char *)"\n"
 		"std::string GeoCal::AirMspiIgc::l1b1_file_name() const\n"

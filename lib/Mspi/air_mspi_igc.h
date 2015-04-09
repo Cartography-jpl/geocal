@@ -32,24 +32,11 @@ public:
   void band(int B) { ipi_ptr()->band(B); }
 
 //-----------------------------------------------------------------------
-/// The base directory that various files in the master config file
-/// are relative to.
-//-----------------------------------------------------------------------
-
-  const std::string& base_directory() const {return bdir; }
-
-//-----------------------------------------------------------------------
 /// Camera we are using.
 //-----------------------------------------------------------------------
 
   boost::shared_ptr<MspiCamera> camera() const
   { return boost::dynamic_pointer_cast<MspiCamera>(ipi().camera_ptr()); }
-
-//-----------------------------------------------------------------------
-/// The name of the master config file used to create this object.
-//-----------------------------------------------------------------------
-  
-  const std::string& master_config_file() const { return mconfig; }
 
 //-----------------------------------------------------------------------
 /// Orbit we are using.
@@ -70,13 +57,6 @@ public:
   }
 
 //-----------------------------------------------------------------------
-/// The name of the orbit file
-//-----------------------------------------------------------------------
-
-  std::string orbit_file_name() const
-  { return orbit()->file_name(); }
-
-//-----------------------------------------------------------------------
 /// The name of the l1b1 file
 //-----------------------------------------------------------------------
 
@@ -87,7 +67,6 @@ public:
 
   virtual void print(std::ostream& Os) const;
 private:
-  std::string bdir, mconfig;
   AirMspiIgc() {}
   friend class boost::serialization::access;
   template<class Archive>

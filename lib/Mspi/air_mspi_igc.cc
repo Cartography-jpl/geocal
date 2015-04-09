@@ -6,6 +6,7 @@
 #include "simple_dem.h"
 #include "usgs_dem.h"
 #include "geocal_serialize_support.h"
+#include "ostream_pad.h"
 
 using namespace GeoCal;
 
@@ -14,8 +15,6 @@ template<class Archive>
 void AirMspiIgc::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IpiImageGroundConnection);
-  ar & GEOCAL_NVP2("base_directory", bdir) 
-    & GEOCAL_NVP2("master_config_file", mconfig);
 }
 
 GEOCAL_IMPLEMENT(AirMspiIgc);
@@ -38,8 +37,6 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
 		       const std::string& L1b1_file_name,
 		       int Band,
 		       const std::string& Base_directory)
-: bdir(Base_directory),
-  mconfig(Master_config_file)
 {
   MspiConfigFile c(Master_config_file);
   // Get camera set up
@@ -105,10 +102,10 @@ AirMspiIgc::AirMspiIgc(const std::string& Master_config_file,
 
 void AirMspiIgc::print(std::ostream& Os) const 
 {
-  Os << "AirMspiIgc:\n"
-     << "  Master config file: " << master_config_file() << "\n"
-     << "  Orbit file name:    " << orbit_file_name() << "\n"
-     << "  Base directory:     " << base_directory() << "\n";
+  OstreamPad opad(Os, "    ");
+  Os << "AirMspiIgc:\n";
+  IpiImageGroundConnection::print(opad);
+  opad.strict_sync();
 }
 
 

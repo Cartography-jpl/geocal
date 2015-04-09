@@ -22,12 +22,9 @@ public:
 	     int Band,
 	     const std::string& Base_directory = ".");
   %python_attribute_with_set(band, int);
-  %python_attribute(base_directory, std::string);
-  %python_attribute(master_config_file, std::string);
   %python_attribute(orbit, boost::shared_ptr<AirMspiOrbit>);
   %python_attribute(time_table, boost::shared_ptr<AirMspiTimeTable>);
   %python_attribute(camera, boost::shared_ptr<MspiCamera>);
-  %python_attribute(orbit_file_name, std::string);
   %python_attribute(l1b1_file_name, std::string);
   %pickle_serialization();
 };

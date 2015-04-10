@@ -5668,39 +5668,12 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_UsgsDemData__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
-  PyObject *resultobj = 0;
-  GeoCal::UsgsDemData *result = 0 ;
-  
-  if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
-  {
-    try {
-      result = (GeoCal::UsgsDemData *)new GeoCal::UsgsDemData();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::UsgsDemData > *smartresult = result ? new boost::shared_ptr<  GeoCal::UsgsDemData >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__UsgsDemData_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_new_UsgsDemData(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[7];
   
   if (!(argc = SWIG_Python_UnpackTuple(args,"new_UsgsDemData",0,6,argv))) SWIG_fail;
   --argc;
-  if (argc == 0) {
-    return _wrap_new_UsgsDemData__SWIG_6(self, argc, argv);
-  }
   if (argc == 1) {
     return _wrap_new_UsgsDemData__SWIG_5(self, argc, argv);
   }
@@ -5728,8 +5701,7 @@ fail:
     "    GeoCal::UsgsDemData::UsgsDemData(std::string const &,bool,int,int)\n"
     "    GeoCal::UsgsDemData::UsgsDemData(std::string const &,bool,int)\n"
     "    GeoCal::UsgsDemData::UsgsDemData(std::string const &,bool)\n"
-    "    GeoCal::UsgsDemData::UsgsDemData(std::string const &)\n"
-    "    GeoCal::UsgsDemData::UsgsDemData()\n");
+    "    GeoCal::UsgsDemData::UsgsDemData(std::string const &)\n");
   return 0;
 }
 
@@ -5873,31 +5845,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_UsgsDem__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
-  PyObject *resultobj = 0;
-  GeoCal::UsgsDem *result = 0 ;
-  
-  if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
-  {
-    try {
-      result = (GeoCal::UsgsDem *)new GeoCal::UsgsDem();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::UsgsDem > *smartresult = result ? new boost::shared_ptr<  GeoCal::UsgsDem >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__UsgsDem_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_UsgsDem__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_UsgsDem__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   bool arg2 ;
@@ -5980,9 +5928,6 @@ SWIGINTERN PyObject *_wrap_new_UsgsDem(PyObject *self, PyObject *args) {
   
   if (!(argc = SWIG_Python_UnpackTuple(args,"new_UsgsDem",0,3,argv))) SWIG_fail;
   --argc;
-  if (argc == 0) {
-    return _wrap_new_UsgsDem__SWIG_2(self, argc, argv);
-  }
   if (argc == 1) {
     return _wrap_new_UsgsDem__SWIG_1(self, argc, argv);
   }
@@ -5990,7 +5935,7 @@ SWIGINTERN PyObject *_wrap_new_UsgsDem(PyObject *self, PyObject *args) {
     return _wrap_new_UsgsDem__SWIG_0(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_UsgsDem__SWIG_3(self, argc, argv);
+    return _wrap_new_UsgsDem__SWIG_2(self, argc, argv);
   }
   
 fail:
@@ -5998,7 +5943,6 @@ fail:
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::UsgsDem::UsgsDem(std::string const &,bool)\n"
     "    GeoCal::UsgsDem::UsgsDem(std::string const &)\n"
-    "    GeoCal::UsgsDem::UsgsDem()\n"
     "    GeoCal::UsgsDem::UsgsDem(std::string const &,bool,boost::shared_ptr< GeoCal::Datum > const &)\n");
   return 0;
 }

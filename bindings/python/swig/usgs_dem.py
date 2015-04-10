@@ -162,6 +162,9 @@ class UsgsDemData(geocal_swig.raster_multifile.RasterMultifile):
         Number_sample_per_tile Number_tile_each_file tiles. 
         """
         _usgs_dem.UsgsDemData_swiginit(self,_usgs_dem.new_UsgsDemData(*args))
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _usgs_dem.delete_UsgsDemData
 UsgsDemData_swigregister = _usgs_dem.UsgsDemData_swigregister
 UsgsDemData_swigregister(UsgsDemData)
@@ -200,12 +203,8 @@ class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
     def directory_base(self):
         return self._v_directory_base()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.directory_base,self.outside_dem_is_error,self.datum)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _usgs_dem.delete_UsgsDem
 UsgsDem._v_directory_base = new_instancemethod(_usgs_dem.UsgsDem__v_directory_base,None,UsgsDem)

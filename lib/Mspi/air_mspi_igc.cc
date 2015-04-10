@@ -56,13 +56,10 @@ AirMspiIgc::AirMspiIgc
   // requested. We can modify the code to support this if needed.
   if(c.value<bool>("use_static_gimbal"))
     throw Exception("We don't currently support static gimbals");
-  MspiConfigFile cam_config(fname);
-  if(extra_config != "")
-    cam_config.add_file(extra_config);
   blitz::Array<double, 1> gimbal_angle(3);
-  gimbal_angle = cam_config.value<double>("gimbal_epsilon"),
-    cam_config.value<double>("gimbal_psi"),
-    cam_config.value<double>("gimbal_theta");
+  gimbal_angle = cam->gimbal_epsilon(),
+    cam->gimbal_psi(),
+    cam->gimbal_theta();
   boost::shared_ptr<AirMspiOrbit> 
     orb(new AirMspiOrbit(Orbit_file_name, gimbal_angle));
 

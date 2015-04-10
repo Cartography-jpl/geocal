@@ -22,6 +22,9 @@ void MspiCamera::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(yaw)
     & GEOCAL_NVP_(pitch)
     & GEOCAL_NVP_(roll)
+    & GEOCAL_NVP_(gimbal_epsilon)
+    & GEOCAL_NVP_(gimbal_psi)
+    & GEOCAL_NVP_(gimbal_theta)
     & GEOCAL_NVP_(row_number)
     & GEOCAL_NVP_(paraxial_transform)
     & GEOCAL_NVP_(inversion);
@@ -61,6 +64,15 @@ void MspiCamera::read_config_file(const std::string& File_name,
   yaw_ = c.value<double>("camera_yaw") * Constant::deg_to_rad;
   pitch_ = c.value<double>("camera_pitch") * Constant::deg_to_rad;
   roll_ = c.value<double>("camera_roll") * Constant::deg_to_rad;
+  if(c.have_key("gimbal_epsilon")) {
+    gimbal_epsilon_ = c.value<double>("gimbal_epsilon");
+    gimbal_psi_ = c.value<double>("gimbal_psi");
+    gimbal_theta_ = c.value<double>("gimbal_theta");
+  } else {
+    gimbal_epsilon_ = 0;
+    gimbal_psi_ = 0;
+    gimbal_theta_ = 0;
+  }
   focal_length_ = c.value<double>("focal_length");
   double s_origin = c.value<double>("origin");
   nline_ = 1;

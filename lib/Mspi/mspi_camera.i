@@ -28,6 +28,9 @@ public:
   %python_attribute(roll, double);
   %python_attribute(boresight_angle, double);
   %python_attribute(inversion, bool);
+  %python_attribute(gimbal_epsilon, double);
+  %python_attribute(gimbal_psi, double);
+  %python_attribute(gimbal_theta, double);
   double angular_separation(int Reference_band, int Target_band) const;
   void paraxial_offset(int Band,
 		       const FrameCoordinate& F,

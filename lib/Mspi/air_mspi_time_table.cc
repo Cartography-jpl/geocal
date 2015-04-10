@@ -91,7 +91,7 @@ void AirMspiTimeTable::print(std::ostream& Os) const
 //-----------------------------------------------------------------------
 
 int AirMspiTimeTable::reference_row_calc
-(const std::string& Instrument_config_file_name) const
+(const std::string& Instrument_config_file_name)
 {
   // Determine mapping from instrument_band, row_type to row_number
   MspiConfigFile iconfig(Instrument_config_file_name);

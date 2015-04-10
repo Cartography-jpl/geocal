@@ -14,15 +14,13 @@ void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(IgcCollection);
   GEOCAL_BASE(AirMspiIgcCollection, IgcCollection);
-  // Temp, leave DEM out since we don't have ugsdem serialized yet.
-  //  ar & GEOCAL_NVP(dem) & GEOCAL_NVP(dem_resolution) &
-  //  GEOCAL_NVP_(view_config)
-  ar & GEOCAL_NVP_(view_config)
+  ar & GEOCAL_NVP(dem) & GEOCAL_NVP(dem_resolution)
+    & GEOCAL_NVP_(camera) 
+    & GEOCAL_NVP_(orbit)
+    & GEOCAL_NVP_(view_config)
     & GEOCAL_NVP_(reference_row)
-    & GEOCAL_NVP_(min_l1b1_line) & GEOCAL_NVP_(max_l1b1_line)
     & GEOCAL_NVP(base_directory)
-    & GEOCAL_NVP_(config_filename)
-    & GEOCAL_NVP_(orbit_filename);
+    & GEOCAL_NVP_(min_l1b1_line) & GEOCAL_NVP_(max_l1b1_line);
 }
 
 GEOCAL_IMPLEMENT(AirMspiIgcCollection);
@@ -46,9 +44,34 @@ AirMspiIgcCollection::AirMspiIgcCollection
 {
   MspiConfigFile c(Master_config_file);
 
-  // Temp
-  config_filename_ = Master_config_file;
-  orbit_filename_ = Orbit_file_name;
+  // Get camera set up
+  std::string fname = c.value<std::string>("camera_model_config");
+  if(fname[0] != '/')
+    fname = Base_directory + "/" + fname;
+  std::string extra_config = "";
+  if(c.have_key("extra_camera_model_config")) {
+    extra_config = c.value<std::string>("extra_camera_model_config");
+    if(extra_config[0] != '/')
+      extra_config = Base_directory + "/" + extra_config;
+  }
+  camera_.reset(new MspiCamera(fname, extra_config));
+
+  // Not sure if we still need the "static gimbal", but we don't
+  // currently support this. So check, and issue an error if this is
+  // requested. We can modify the code to support this if needed.
+  if(c.value<bool>("use_static_gimbal"))
+    throw Exception("We don't currently support static gimbals");
+  blitz::Array<double, 1> gimbal_angle(3);
+  gimbal_angle = camera_->gimbal_epsilon(),
+    camera_->gimbal_psi(),
+    camera_->gimbal_theta();
+  orbit_.reset(new AirMspiOrbit(Orbit_file_name, gimbal_angle));
+
+  // Get reference row needed by AirMspiTimeTable.
+  fname = c.value<std::string>("instrument_info_config");
+  if(fname[0] != '/')
+    fname = Base_directory + "/" + fname;
+  reference_row_ = AirMspiTimeTable::reference_row_calc(fname);
 
   // Get DEM set up
   if(c.value<std::string>("dem_type") == "usgs") {
@@ -72,7 +95,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
       std::string fname = vtab.value<std::string>(i, "extra_config_file");
       if(fname != "-") {
 	if(fname[0] != '/')
-	  fname = base_directory + "/" + fname;
+	  fname = Base_directory + "/" + fname;
 	vc.add_file(fname);
       }
     }
@@ -83,28 +106,28 @@ AirMspiIgcCollection::AirMspiIgcCollection
     vc.add("resolution", vtab.value<std::string>(i, "resolution"));
     view_config_.push_back(vc);
   }
-  // Go through and fill in some data that we need to read the l1b1
-  // file for.
-  AirMspiIgc igcscratch(config_filename_,
-			orbit_filename_,
-			l1b1_file_name(0), 0,
-			base_directory);
-  reference_row_ = igcscratch.time_table()->reference_row();
-  boost::shared_ptr<AirMspiOrbit> orb = igcscratch.orbit();
+  calc_min_max_l1b1_line();
+}
 
+//-----------------------------------------------------------------------
+/// Go through and fill in min and max l1b1 lines that we need to read
+/// the l1b1 file for.
+//-----------------------------------------------------------------------
+void AirMspiIgcCollection::calc_min_max_l1b1_line()
+{
   for(int i = 0; i < number_image(); ++i) {
     AirMspiTimeTable tt(l1b1_file_name(i), reference_row_);
     view_config_[i].add("l1b1_granule_id", tt.l1b1_granule_id());
     int min_ln = tt.min_line();
     int max_ln = tt.max_line();
     // Trim time if orbit doesn't cover the full range the time table does.
-    if(orb->min_time() > tt.min_time())
+    if(orbit_->min_time() > tt.min_time())
       min_ln = std::max(min_ln,
-			(int) ceil(tt.image_coordinate(orb->min_time(), 
+			(int) ceil(tt.image_coordinate(orbit_->min_time(), 
 		       FrameCoordinate(0,0)).line) + 2);
-    if(orb->max_time() < tt.max_time())
+    if(orbit_->max_time() < tt.max_time())
       max_ln = std::min(max_ln,
-			(int) floor(tt.image_coordinate(orb->max_time(), 
+			(int) floor(tt.image_coordinate(orbit_->max_time(), 
 		       FrameCoordinate(0,0)).line) - 2);
     if(have_config(i, "min_l1b1_line"))
       min_ln = std::max(min_ln, config_value<int>(i, "min_l1b1_line"));
@@ -132,11 +155,14 @@ AirMspiIgcCollection::air_mspi_igc(int Image_index) const
     igc.insert(igc.end(), number_image(), null_ptr);
   }
   if(!igc[Image_index]) {
-    // Temp, we'll clean this up in a bit.
-    igc[Image_index].reset(new AirMspiIgc(config_filename_,
-					  orbit_filename_,
-					  l1b1_file_name(Image_index), 0,
-					  base_directory));
+    igc[Image_index].reset(new AirMspiIgc(orbit_,
+					  camera_,
+					  dem,
+					  l1b1_file_name(Image_index), 
+					  reference_row_,
+					  0,
+					  "Image",
+					  dem_resolution));
   }
   return igc[Image_index];
 }
@@ -175,6 +201,8 @@ AirMspiIgcCollection::AirMspiIgcCollection
 
   dem = Original.dem;
   dem_resolution = Original.dem_resolution;
+  camera_ = Original.camera_;
+  orbit_ = Original.orbit_;
   reference_row_ = Original.reference_row_;
   base_directory = Original.base_directory;
   BOOST_FOREACH(int i, Index_set) {

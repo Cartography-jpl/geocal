@@ -106,7 +106,7 @@ AirMspiIgc::AirMspiIgc
  const boost::shared_ptr<Camera>& Cam,
  const boost::shared_ptr<Dem>& Dem,
  const std::string& L1b1_file_name,
- const std::string& Instrument_config_file,
+ int Reference_row,
  int Band,
  const std::string& Title,
  int Dem_resolution)
@@ -114,14 +114,13 @@ AirMspiIgc::AirMspiIgc
 
   // Short term, have image empty.
   boost::shared_ptr<RasterImage> img;
-  std::string title = "Image";
 
   boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name,
-						       Instrument_config_file));
+						       Reference_row));
   Time tmin = std::max(Orb->min_time(), tt->min_time());
   Time tmax = std::min(Orb->max_time(), tt->max_time());
   boost::shared_ptr<Ipi> ipi(new Ipi(Orb, Cam, Band, tmin, tmax, tt));
-  initialize(ipi, Dem, img, title, Dem_resolution);
+  initialize(ipi, Dem, img, Title, Dem_resolution);
 }
 
 void AirMspiIgc::print(std::ostream& Os) const 

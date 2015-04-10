@@ -19,15 +19,15 @@ public:
   AirMspiIgc(const std::string& Master_config_file,
 	     const std::string& Orbit_file_name,
 	     const std::string& L1b1_file_name,
-	     int Band,
+	     int Band = 0,
 	     const std::string& Base_directory = ".",
 	     const std::string& Title = "Image");
   AirMspiIgc(const boost::shared_ptr<Orbit>& Orb,
 	     const boost::shared_ptr<Camera>& Cam,
 	     const boost::shared_ptr<Dem>& Dem,
 	     const std::string& L1b1_file_name,
-	     const std::string& Instrument_config_file,
-	     int Band,
+	     int Reference_row,
+	     int Band = 0,
 	     const std::string& Title = "Image",
 	     int Dem_resolution = 10);
   %python_attribute_with_set(band, int);

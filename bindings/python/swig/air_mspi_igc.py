@@ -140,8 +140,8 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
         """
         AirMspiIgc::AirMspiIgc(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
         Camera > &Cam, const boost::shared_ptr< Dem > &Dem, const std::string
-        &L1b1_file_name, const std::string &Instrument_config_file, int Band,
-        const std::string &Title="Image", int Dem_resolution=10)
+        &L1b1_file_name, int Reference_row, int Band=0, const std::string
+        &Title="Image", int Dem_resolution=10)
         Constructor.
 
         This variation of the constructor directly takes the information

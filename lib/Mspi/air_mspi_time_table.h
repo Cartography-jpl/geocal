@@ -28,12 +28,14 @@ public:
 //-----------------------------------------------------------------------
 
   const std::string& l1b1_granule_id() const { return l1b1_granule_id_; }
+
+  static int 
+  reference_row_calc(const std::string& Instrument_config_file_name);
  
 private:
   std::string l1b1_file_name_;
   std::string l1b1_granule_id_;
   int refrow;
-  int reference_row_calc(const std::string& Instrument_config_file_name) const;
   void read_data();
   AirMspiTimeTable() {}
   friend class boost::serialization::access;

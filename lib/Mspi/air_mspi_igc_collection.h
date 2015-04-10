@@ -140,18 +140,23 @@ public:
 
   // We'll mess with parameter in a bit, for now leave this out.
 private:
+  boost::shared_ptr<Dem> dem;
+  double dem_resolution;
+  boost::shared_ptr<MspiCamera> camera_;
+  boost::shared_ptr<AirMspiOrbit> orbit_;
+  std::vector<MspiConfigFile> view_config_;
+  // Reference row time table to use.
+  int reference_row_;
+  std::string base_directory;
+  std::vector<int> min_l1b1_line_, max_l1b1_line_;
+
   // We do lazy evaluation, so allow this to be changed by 
   // image_ground_connection const function.
   mutable std::vector<boost::shared_ptr<AirMspiIgc> > igc;
   boost::shared_ptr<AirMspiIgc> air_mspi_igc(int Index) const;
 
-  boost::shared_ptr<Dem> dem;
-  double dem_resolution;
-  std::vector<MspiConfigFile> view_config_;
-  // Reference row time table to use.
-  int reference_row_;
-  std::vector<int> min_l1b1_line_, max_l1b1_line_;
-  std::string base_directory;
+  void calc_min_max_l1b1_line();
+
   AirMspiIgcCollection(const AirMspiIgcCollection& Original, 
 		       const std::vector<int>& Index_set);
 
@@ -168,8 +173,6 @@ private:
     return res;
   }
 
-  // Temp stuff, we'll remove this in a bit.
-  std::string config_filename_, orbit_filename_;
   AirMspiIgcCollection() {}
   friend class boost::serialization::access;
   template<class Archive>

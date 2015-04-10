@@ -1,5 +1,6 @@
 #include "usgs_dem.h"
 #include "gdal_raster_image.h"
+#include "geocal_serialize_support.h"
 #include <cstdlib>
 #include <boost/filesystem.hpp>
 #include <boost/foreach.hpp>
@@ -11,24 +12,69 @@
 
 using namespace GeoCal;
 
-//-----------------------------------------------------------------------
-/// Constructor. You can provide the directory to look for USGS DEM
-/// data, or if you leave this blank we use the value of environment
-/// variable USGSDATA.
-///
-/// We don't have USGS files that completely cover the area. If you
-/// ask for a point outside of the area this can either be treated as
-/// an error, or alternatively you can return a value of FILL_VALUE
-/// instead. This is controlled by No_coverage_is_error.
-///
-/// There are two kinds of tiling going on. At the top level, we have
-/// a number of files open at one time, given by Number_file. For each
-/// file, we read that it tiles with the given Number_line_per_tile x
-/// Number_sample_per_tile
-/// Number_tile_each_file tiles.
-//-----------------------------------------------------------------------
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void UsgsDemData::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(RasterImage);
+  GEOCAL_BASE(RasterImageVariable, RasterImage)
+  GEOCAL_BASE(RasterMultifile, RasterImageVariable)
+  GEOCAL_BASE(UsgsDemData, RasterMultifile);
+  int number_file = number_tile();
+  ar & GEOCAL_NVP(dirbase)
+    & GEOCAL_NVP(number_line_per_tile)
+    & GEOCAL_NVP(number_sample_per_tile)
+    & GEOCAL_NVP(number_tile_each_file)
+    & GEOCAL_NVP_(no_coverage_is_error)
+    & GEOCAL_NVP(number_file);
+}
 
-UsgsDemData::UsgsDemData
+template<class Archive>
+void UsgsDemData::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(RasterImage);
+  GEOCAL_BASE(RasterImageVariable, RasterImage)
+  GEOCAL_BASE(RasterMultifile, RasterImageVariable)
+  GEOCAL_BASE(UsgsDemData, RasterMultifile);
+  int number_file;
+  ar & GEOCAL_NVP(dirbase)
+    & GEOCAL_NVP(number_line_per_tile)
+    & GEOCAL_NVP(number_sample_per_tile)
+    & GEOCAL_NVP(number_tile_each_file)
+    & GEOCAL_NVP_(no_coverage_is_error)
+    & GEOCAL_NVP(number_file);
+  init(dirbase, no_coverage_is_error_, number_line_per_tile,
+       number_sample_per_tile, number_tile_each_file, number_file);
+}
+
+template<class Archive>
+void UsgsDem::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(Dem);
+  GEOCAL_BASE(DemMapInfo, Dem);
+  GEOCAL_BASE(UsgsDem, DemMapInfo);
+  ar & GEOCAL_NVP_(datum)
+    & GEOCAL_NVP_(outside_dem_is_error)
+    & GEOCAL_NVP2("usgs_dem_data", f);
+}
+
+template<class Archive>
+void UsgsDem::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Dem);
+  GEOCAL_BASE(DemMapInfo, Dem);
+  GEOCAL_BASE(UsgsDem, DemMapInfo);
+  ar & GEOCAL_NVP_(datum)
+    & GEOCAL_NVP_(outside_dem_is_error)
+    & GEOCAL_NVP2("usgs_dem_data", f);
+  map_info_ = f->map_info();
+}
+
+GEOCAL_SPLIT_IMPLEMENT(UsgsDemData);
+GEOCAL_SPLIT_IMPLEMENT(UsgsDem);
+#endif
+
+void UsgsDemData::init
 (const std::string& Dir,
  bool No_coverage_is_error,
  int Number_line_per_tile,
@@ -36,11 +82,11 @@ UsgsDemData::UsgsDemData
  int Number_tile_each_file, 
  int Number_file
 )
-: RasterMultifile(Number_file, No_coverage_is_error, FILL_VALUE),
-  number_line_per_tile(Number_line_per_tile),
-  number_sample_per_tile(Number_sample_per_tile),
-  number_tile_each_file(Number_tile_each_file)
 {
+  RasterMultifile::init(Number_file, No_coverage_is_error, FILL_VALUE);
+  number_line_per_tile = Number_line_per_tile;
+  number_sample_per_tile = Number_sample_per_tile;
+  number_tile_each_file =Number_tile_each_file;
   dirbase = Dir;
   if(dirbase == "") {
     char *t = getenv("USGSDATA");
@@ -48,6 +94,11 @@ UsgsDemData::UsgsDemData
       throw Exception("Need to either pass in the directory of the USGS DEM data, or set the environment variable USGSDATA");
     dirbase = t;
   }
+  init_loc_to_file();
+}
+
+void UsgsDemData::init_loc_to_file()
+{
   boost::regex fname_regex("([ns])(\\d+)([ew])(\\d+)_10m.tif");
   boost::smatch m;
   // We got the values here by looking at one of the map info files,

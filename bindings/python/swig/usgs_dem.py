@@ -143,7 +143,7 @@ class UsgsDemData(geocal_swig.raster_multifile.RasterMultifile):
     FILL_VALUE = _usgs_dem.UsgsDemData_FILL_VALUE
     def __init__(self, *args): 
         """
-        UsgsDemData::UsgsDemData(const std::string &Dir="", bool No_coverage_is_error=true, int
+        GeoCal::UsgsDemData::UsgsDemData(const std::string &Dir, bool No_coverage_is_error=true, int
         Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
         Number_tile_each_file=4, int Number_file=4)
         Constructor.
@@ -176,7 +176,7 @@ class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        UsgsDem::UsgsDem(const std::string &Dir="", bool Outside_dem_is_error=true, const
+        UsgsDem::UsgsDem(const std::string &Dir, bool Outside_dem_is_error=true, const
         boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >())
         Constructor.
 

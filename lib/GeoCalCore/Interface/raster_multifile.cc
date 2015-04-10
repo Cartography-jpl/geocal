@@ -1,7 +1,34 @@
 #include "raster_multifile.h"
 #include <boost/foreach.hpp>
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void RasterMultifile::save(Archive & ar, const unsigned int version) const
+{
+  int number_tile = (int) tile.size();
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageVariable)
+    & GEOCAL_NVP_(no_coverage_is_error)
+    & GEOCAL_NVP_(no_coverage_fill_value)
+    & GEOCAL_NVP(number_tile);
+}
+
+template<class Archive>
+void RasterMultifile::load(Archive & ar, const unsigned int version)
+{
+  int number_tile;
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageVariable)
+    & GEOCAL_NVP_(no_coverage_is_error)
+    & GEOCAL_NVP_(no_coverage_fill_value)
+    & GEOCAL_NVP(number_tile);
+  tile.resize(number_tile);
+  next_swap = tile.begin();
+}
+
+GEOCAL_SPLIT_IMPLEMENT(RasterMultifile);
+#endif
 
 //-----------------------------------------------------------------------
 /// Read a subset of the data.

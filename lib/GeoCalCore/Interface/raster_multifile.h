@@ -191,13 +191,24 @@ protected:
 /// use this.
 //-----------------------------------------------------------------------
 
-  RasterMultifile(int Number_tile = 4,
-			bool No_coverage_is_error = true, 
-			int No_coverage_fill_value = -1)
-    : no_coverage_is_error_(No_coverage_is_error),
-      no_coverage_fill_value_(No_coverage_fill_value),
-      tile(Number_tile)
+  RasterMultifile(int Number_tile,
+		  bool No_coverage_is_error = true, 
+		  int No_coverage_fill_value = -1)
   {
+    init(Number_tile, No_coverage_is_error, No_coverage_fill_value);
+  }
+
+  RasterMultifile()
+  {
+  }
+
+  void init(int Number_tile = 4,
+	    bool No_coverage_is_error = true, 
+	    int No_coverage_fill_value = -1)
+  {
+    no_coverage_is_error_  = No_coverage_is_error;
+    no_coverage_fill_value_ = No_coverage_fill_value;
+    tile.resize(Number_tile);
     next_swap = tile.begin();
   }
 
@@ -233,14 +244,22 @@ protected:
 //-----------------------------------------------------------------------
 
   int no_coverage_fill_value_;
+
 private:
   mutable RasterMultifileTile mt_scratch;
   RasterMultifileTile& swap(int Line, int Sample) const;
   mutable std::vector<RasterMultifileTile> tile;
   mutable std::vector<RasterMultifileTile>::iterator next_swap;
 				///< Next tile to be swapped.
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 }
 
+GEOCAL_EXPORT_KEY(RasterMultifile);
 #endif

@@ -17,11 +17,33 @@ namespace GeoCal {
 class UsgsDemData: public RasterMultifile {
 public:
   enum {FILL_VALUE=0};
-  UsgsDemData(const std::string& Dir = "",
+
+//-----------------------------------------------------------------------
+/// Constructor. You can provide the directory to look for USGS DEM
+/// data, or if you leave this blank we use the value of environment
+/// variable USGSDATA.
+///
+/// We don't have USGS files that completely cover the area. If you
+/// ask for a point outside of the area this can either be treated as
+/// an error, or alternatively you can return a value of FILL_VALUE
+/// instead. This is controlled by No_coverage_is_error.
+///
+/// There are two kinds of tiling going on. At the top level, we have
+/// a number of files open at one time, given by Number_file. For each
+/// file, we read that it tiles with the given Number_line_per_tile x
+/// Number_sample_per_tile
+/// Number_tile_each_file tiles.
+//-----------------------------------------------------------------------
+
+  UsgsDemData(const std::string& Dir,
 	      bool No_coverage_is_error = true,
 	      int Number_line_per_tile = -1,
 	      int Number_sample_per_tile = -1, 
-	      int Number_tile_each_file = 4, int Number_file = 4);
+	      int Number_tile_each_file = 4, int Number_file = 4)
+  {
+    init(Dir, No_coverage_is_error, Number_line_per_tile, 
+	 Number_sample_per_tile, Number_tile_each_file, Number_file);
+  }
   virtual ~UsgsDemData() { }
 
 //-----------------------------------------------------------------------
@@ -40,6 +62,20 @@ private:
 				/// for each file
   int number_tile_each_file;	///< Number of tiles in a single file.
   LocationToFile loc_to_file;
+  void init_loc_to_file();
+  void init(const std::string& Dir,
+	    bool No_coverage_is_error = true,
+	    int Number_line_per_tile = -1,
+	    int Number_sample_per_tile = -1, 
+	    int Number_tile_each_file = 4, int Number_file = 4);
+
+  UsgsDemData() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 /****************************************************************//**
@@ -47,7 +83,7 @@ private:
 *******************************************************************/
 class UsgsDem : public DemMapInfo {
 public:
-  UsgsDem(const std::string& Dir = "",
+  UsgsDem(const std::string& Dir,
 	  bool Outside_dem_is_error = true,
 	  const boost::shared_ptr<Datum>& D = 
 	  boost::shared_ptr<Datum>());
@@ -88,53 +124,17 @@ protected:
   virtual void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<UsgsDemData> f;
-#ifdef USE_BOOST_SERIALIZATON
+  UsgsDem() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version)
-  {
-    // Nothing to do
-  }
-#endif
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 }
 
-#ifdef USE_BOOST_SERIALIZATON
-// This is a little more complicated, because we can't really
-// construct a object using a default constructor. So we need to
-// directly handle the object construction.
-namespace boost { namespace serialization {
-template<class Archive> 
-inline void save_construct_data(Archive & ar, const GeoCal::UsgsDem* d, 
-			 const unsigned int version)
-{
-  void_cast_register(static_cast<GeoCal::UsgsDem*>(0),
-		     static_cast<GeoCal::DemMapInfo*>(0));
-  std::string directory_base = d->directory_base();
-  bool outside_dem_is_error = d->outside_dem_is_error();
-  boost::shared_ptr<GeoCal::Datum> datum = d->datum_ptr();
-  ar << GEOCAL_NVP(directory_base)
-     << GEOCAL_NVP(outside_dem_is_error)
-     << GEOCAL_NVP(datum);
-}
-template<class Archive>
-inline void load_construct_data(Archive & ar, GeoCal::UsgsDem* d,
-				const unsigned int version)
-{
-  void_cast_register(static_cast<GeoCal::UsgsDem*>(0),
-		     static_cast<GeoCal::DemMapInfo*>(0));
-  std::string directory_base;
-  bool outside_dem_is_error;
-  boost::shared_ptr<GeoCal::Datum> datum;
-  ar >> GEOCAL_NVP(directory_base)
-     >> GEOCAL_NVP(outside_dem_is_error)
-     >> GEOCAL_NVP(datum);
-  ::new(d)GeoCal::UsgsDem(directory_base, outside_dem_is_error,
-			  datum);
-}
-  }
-}
-#endif
-
+GEOCAL_EXPORT_KEY(UsgsDemData);
+GEOCAL_EXPORT_KEY(UsgsDem);
 #endif
 

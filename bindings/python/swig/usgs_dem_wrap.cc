@@ -6103,7 +6103,7 @@ SWIGINTERN PyObject *UsgsDem_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_UsgsDemData", _wrap_new_UsgsDemData, METH_VARARGS, (char *)"\n"
-		"UsgsDemData::UsgsDemData(const std::string &Dir=\"\", bool No_coverage_is_error=true, int\n"
+		"GeoCal::UsgsDemData::UsgsDemData(const std::string &Dir, bool No_coverage_is_error=true, int\n"
 		"Number_line_per_tile=-1, int Number_sample_per_tile=-1, int\n"
 		"Number_tile_each_file=4, int Number_file=4)\n"
 		"Constructor.\n"
@@ -6128,7 +6128,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"UsgsDemData_swigregister", UsgsDemData_swigregister, METH_VARARGS, NULL},
 	 { (char *)"UsgsDemData_swiginit", UsgsDemData_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_UsgsDem", _wrap_new_UsgsDem, METH_VARARGS, (char *)"\n"
-		"UsgsDem::UsgsDem(const std::string &Dir=\"\", bool Outside_dem_is_error=true, const\n"
+		"UsgsDem::UsgsDem(const std::string &Dir, bool Outside_dem_is_error=true, const\n"
 		"boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >())\n"
 		"Constructor.\n"
 		"\n"

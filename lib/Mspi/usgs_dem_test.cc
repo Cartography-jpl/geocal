@@ -44,27 +44,39 @@ BOOST_AUTO_TEST_CASE(usgs_dem)
   BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(43.5, -68.5)),
 		    10, 1e-4);
 }
+
+BOOST_AUTO_TEST_CASE(usgs_dem_data_serialization)
+{
+  if(!have_serialize_supported())
+    return;
+
+  boost::shared_ptr<UsgsDemData> usgs_data
+    (new UsgsDemData(test_data_dir() + "usgs_dem", false));
+  std::string d = serialize_write_string(usgs_data);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<UsgsDemData> usgs_datar =
+    serialize_read_string<UsgsDemData>(d);
+  double val = usgs_datar->interpolate(usgs_datar->coordinate(Geodetic(43.5, -68.5)));
+  BOOST_CHECK_CLOSE(val, 0.0, 1e-4);
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
-#ifdef HAVE_BOOST_SERIALIZATON
-  std::ostringstream os;
-  boost::archive::xml_oarchive oa(os);
+
+  if(!have_serialize_supported())
+    return;
 
   boost::shared_ptr<Datum> datum(new SimpleDatum(10.0));
-  boost::shared_ptr<Dem> d(new UsgsDem(test_data_dir() + "usgs_dem", false, 
+  boost::shared_ptr<Dem> dem(new UsgsDem(test_data_dir() + "usgs_dem", false, 
 				       datum));
-  oa << GEOCAL_NVP(d);
+  std::string d = serialize_write_string(dem);
   if(false)
-    std::cerr << os.str();
-
-  std::istringstream is(os.str());
-  boost::archive::xml_iarchive ia(is);
-  boost::shared_ptr<Dem> dr;
-  ia >> GEOCAL_NVP(dr);
-
-  BOOST_CHECK_CLOSE(dr->height_reference_surface(Geodetic(43.5, -68.5)),
+    std::cerr << d;
+  boost::shared_ptr<Dem> demr =
+    serialize_read_string<Dem>(d);
+  BOOST_CHECK_CLOSE(demr->height_reference_surface(Geodetic(43.5, -68.5)),
 		    10, 1e-4);
-#endif
 }
 
 

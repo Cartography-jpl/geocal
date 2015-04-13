@@ -111,6 +111,7 @@ libgeocal_la_SOURCES+= @srcimplementation@/igc_ray_caster.cc
 # File only included if we have GDAL library
 if HAVE_GDAL
   geocalinc_HEADERS+= @srcimplementation@/gdal_datum.h
+  libgeocal_la_SOURCES+= @srcimplementation@/gdal_datum.cc
   geocalinc_HEADERS+= @srcimplementation@/geocal_gdal.h
   libgeocal_la_SOURCES+= @srcimplementation@/geocal_gdal.cc
   geocalinc_HEADERS+= @srcimplementation@/gdal_dem.h

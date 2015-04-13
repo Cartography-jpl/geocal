@@ -57,17 +57,12 @@ public:
   
 private:
   boost::shared_ptr<GdalRasterImage> map_file_;
-#ifdef USE_BOOST_SERIALIZATON
   GdalDatum() {}
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Datum)
-      & GEOCAL_NVP_(map_file);
-  }
-#endif
-
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(GdalDatum);
 #endif

@@ -151,12 +151,8 @@ class DidDatum(geocal_swig.geocal_datum.Datum):
     def file_name(self):
         return self._v_file_name()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _did_datum.delete_DidDatum
 DidDatum._v_file_name = new_instancemethod(_did_datum.DidDatum__v_file_name,None,DidDatum)

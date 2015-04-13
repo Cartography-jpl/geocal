@@ -1,7 +1,31 @@
 #include "did_datum.h"
+#include "geocal_serialize_support.h"
 #include <cmath>
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void DidDatum::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(Datum);
+  GEOCAL_BASE(DidDatum, Datum);
+  std::string fname = file_name();
+  ar & GEOCAL_NVP(fname);
+}
+
+template<class Archive>
+void DidDatum::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Datum);
+  GEOCAL_BASE(DidDatum, Datum);
+  std::string fname;
+  ar & GEOCAL_NVP(fname);
+  initialize(fname);
+}
+
+GEOCAL_SPLIT_IMPLEMENT(DidDatum);
+#endif
 
 const int msl_number_row = 2160;
 const int msl_number_col = 4320;

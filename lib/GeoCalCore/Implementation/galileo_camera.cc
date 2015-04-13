@@ -1,6 +1,18 @@
 #include "galileo_camera.h"
 #include "geocal_gsl_root.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+
+template<class Archive>
+void GalileoCamera::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
+}
+
+GEOCAL_IMPLEMENT(GalileoCamera);
+#endif
 
 // Note that the various constants come from the spice kernel
 // gll36001.ti.

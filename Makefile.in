@@ -189,7 +189,8 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_multi_band.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/image_point_display.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate.h
-@HAVE_GDAL_TRUE@am__append_26 = @srcimplementation@/geocal_gdal.cc \
+@HAVE_GDAL_TRUE@am__append_26 = @srcimplementation@/gdal_datum.cc \
+@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_multi_band.cc \
@@ -735,6 +736,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/hdf_orbit.cc \
 	@srcimplementation@/orbit_offset_correction.cc \
 	@srcimplementation@/igc_ray_caster.cc \
+	@srcimplementation@/gdal_datum.cc \
 	@srcimplementation@/geocal_gdal.cc \
 	@srcimplementation@/gdal_dem.cc \
 	@srcimplementation@/gdal_raster_image.cc \
@@ -770,7 +772,8 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 @HAVE_FFTW_TRUE@am__objects_18 = @srcimplementation@/libgeocal_la-phase_correlation_matcher.lo
 @HAVE_HDF5_TRUE@am__objects_19 =  \
 @HAVE_HDF5_TRUE@	@srcimplementation@/libgeocal_la-hdf_orbit.lo
-@HAVE_GDAL_TRUE@am__objects_20 = @srcimplementation@/libgeocal_la-geocal_gdal.lo \
+@HAVE_GDAL_TRUE@am__objects_20 = @srcimplementation@/libgeocal_la-gdal_datum.lo \
+@HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-geocal_gdal.lo \
 @HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_dem.lo \
 @HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_raster_image.lo \
 @HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_multi_band.lo \
@@ -3387,6 +3390,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcimplementation@/libgeocal_la-igc_ray_caster.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-gdal_datum.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-geocal_gdal.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -4147,6 +4153,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod_burl.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-galileo_camera.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_datum.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_dem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_multi_band.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_raster_image.Plo@am__quote@
@@ -6249,6 +6256,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_ray_caster.cc' object='@srcimplementation@/libgeocal_la-igc_ray_caster.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-igc_ray_caster.lo `test -f '@srcimplementation@/igc_ray_caster.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_ray_caster.cc
+
+@srcimplementation@/libgeocal_la-gdal_datum.lo: @srcimplementation@/gdal_datum.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-gdal_datum.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_datum.Tpo -c -o @srcimplementation@/libgeocal_la-gdal_datum.lo `test -f '@srcimplementation@/gdal_datum.cc' || echo '$(srcdir)/'`@srcimplementation@/gdal_datum.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_datum.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_datum.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/gdal_datum.cc' object='@srcimplementation@/libgeocal_la-gdal_datum.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-gdal_datum.lo `test -f '@srcimplementation@/gdal_datum.cc' || echo '$(srcdir)/'`@srcimplementation@/gdal_datum.cc
 
 @srcimplementation@/libgeocal_la-geocal_gdal.lo: @srcimplementation@/geocal_gdal.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-geocal_gdal.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-geocal_gdal.Tpo -c -o @srcimplementation@/libgeocal_la-geocal_gdal.lo `test -f '@srcimplementation@/geocal_gdal.cc' || echo '$(srcdir)/'`@srcimplementation@/geocal_gdal.cc

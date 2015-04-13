@@ -35,27 +35,16 @@ private:
   boost::shared_ptr<MemoryMapArray<char, 3> > msl_;
                                 ///< Data. We read this as raw bytes
                                 ///so we don't have any endian problems.
-#ifdef USE_BOOST_SERIALIZATON
   DidDatum() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void save(Archive & ar, const unsigned int version) const
-  {
-    ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(Datum);
-    std::string fname = file_name();
-    ar << GEOCAL_NVP(fname);
-  }
+  void save(Archive& Ar, const unsigned int version) const;
   template<class Archive>
-  void load(Archive & ar, const unsigned int version)
-  {
-    ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(Datum);
-    std::string fname;
-    ar >> GEOCAL_NVP(fname);
-    initialize(fname);
-  }
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
-#endif
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 }
+
+GEOCAL_EXPORT_KEY(DidDatum);
 #endif

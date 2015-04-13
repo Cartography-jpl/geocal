@@ -146,12 +146,8 @@ class GalileoCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         Constructor. Right now we have everything hardcoded for the camera. 
         """
         _galileo_camera.GalileoCamera_swiginit(self,_galileo_camera.new_GalileoCamera())
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, )
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _galileo_camera.delete_GalileoCamera
 GalileoCamera_swigregister = _galileo_camera.GalileoCamera_swigregister

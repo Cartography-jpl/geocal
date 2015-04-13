@@ -14,7 +14,7 @@ namespace GeoCal {
 class GalileoCamera: public QuaternionCamera {
 public:
   GalileoCamera();
-  %pickle_init(1);
+  %pickle_serialization();
 };
 }
 

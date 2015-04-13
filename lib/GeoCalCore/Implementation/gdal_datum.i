@@ -21,7 +21,7 @@ public:
   GdalDatum(const boost::shared_ptr<GdalRasterImage>& Map_file);
   virtual double undulation(const GroundCoordinate& Gc) const;
   %python_attribute(map_file, boost::shared_ptr<GdalRasterImage>)
-  %pickle_init(1, self.map_file)
+  %pickle_serialization()
 };
 
 }

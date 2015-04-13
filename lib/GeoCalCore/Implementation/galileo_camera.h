@@ -31,14 +31,11 @@ public:
   virtual void print(std::ostream& Os) const
   { Os << "Galileo camera (based on spice kernel file gll36001.ti)"; }
 private:
-#ifdef USE_BOOST_SERIALIZATON
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version)
-  {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
-  }
-#endif
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(GalileoCamera);
 #endif

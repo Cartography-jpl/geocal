@@ -156,12 +156,8 @@ class GdalDatum(geocal_swig.geocal_datum.Datum):
     def map_file(self):
         return self._v_map_file()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.map_file)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _gdal_datum.delete_GdalDatum
 GdalDatum._v_map_file = new_instancemethod(_gdal_datum.GdalDatum__v_map_file,None,GdalDatum)

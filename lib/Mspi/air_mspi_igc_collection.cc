@@ -27,6 +27,34 @@ GEOCAL_IMPLEMENT(AirMspiIgcCollection);
 #endif
 
 //-----------------------------------------------------------------------
+/// This create a AirMspiIgcCollection by directly giving the various
+/// pieces needed to construct it.
+//-----------------------------------------------------------------------
+
+AirMspiIgcCollection::AirMspiIgcCollection
+(const boost::shared_ptr<Orbit>& Orb,
+ const boost::shared_ptr<Camera>& Cam,
+ const boost::shared_ptr<Dem>& D,
+ const std::vector<std::string>& L1b1_file_name,
+ int Reference_row,
+ int Dem_resolution,
+ const std::string& Base_directory)
+  : base_directory(Base_directory),
+    camera_(Cam),
+    orbit_(Orb),
+    reference_row_(Reference_row),
+    dem(D),
+    dem_resolution(Dem_resolution)
+{
+  BOOST_FOREACH(const std::string& fname, L1b1_file_name) {
+    MspiConfigFile vc;
+    vc.add("l1b1_file", fname);
+    view_config_.push_back(vc);
+  }
+  calc_min_max_l1b1_line();
+}
+
+//-----------------------------------------------------------------------
 /// This creates a AirMspiIgcCollection by reading the given master
 /// config file. Various files found in the input files can have
 /// relative paths. You can specify the base directory these paths are
@@ -54,7 +82,8 @@ AirMspiIgcCollection::AirMspiIgcCollection
     if(extra_config[0] != '/')
       extra_config = Base_directory + "/" + extra_config;
   }
-  camera_.reset(new MspiCamera(fname, extra_config));
+  boost::shared_ptr<MspiCamera> mspi_camera(new MspiCamera(fname, extra_config));
+  camera_ = mspi_camera;
 
   // Not sure if we still need the "static gimbal", but we don't
   // currently support this. So check, and issue an error if this is
@@ -62,9 +91,9 @@ AirMspiIgcCollection::AirMspiIgcCollection
   if(c.value<bool>("use_static_gimbal"))
     throw Exception("We don't currently support static gimbals");
   blitz::Array<double, 1> gimbal_angle(3);
-  gimbal_angle = camera_->gimbal_epsilon(),
-    camera_->gimbal_psi(),
-    camera_->gimbal_theta();
+  gimbal_angle = mspi_camera->gimbal_epsilon(),
+    mspi_camera->gimbal_psi(),
+    mspi_camera->gimbal_theta();
   orbit_.reset(new AirMspiOrbit(Orbit_file_name, gimbal_angle));
 
   // Get reference row needed by AirMspiTimeTable.

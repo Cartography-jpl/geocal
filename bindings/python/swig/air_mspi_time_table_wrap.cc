@@ -5300,6 +5300,44 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_AirMspiTimeTable_reference_row_calc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiTimeTable_reference_row_calc" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AirMspiTimeTable_reference_row_calc" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = (int)GeoCal::AirMspiTimeTable::reference_row_calc((std::string const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_AirMspiTimeTable(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::AirMspiTimeTable *arg1 = (GeoCal::AirMspiTimeTable *) 0 ;
@@ -5370,6 +5408,14 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"AirMspiTimeTable__v_l1b1_granule_id", (PyCFunction)_wrap_AirMspiTimeTable__v_l1b1_granule_id, METH_O, (char *)"\n"
 		"const std::string& GeoCal::AirMspiTimeTable::l1b1_granule_id() const\n"
 		"The file granule id we are using. \n"
+		""},
+	 { (char *)"AirMspiTimeTable_reference_row_calc", (PyCFunction)_wrap_AirMspiTimeTable_reference_row_calc, METH_O, (char *)"\n"
+		"int AirMspiTimeTable::reference_row_calc(const std::string &Instrument_config_file_name)\n"
+		"Determine the reference row to use for the time table.\n"
+		"\n"
+		"This comes from the 660nm I band. Note that the band number used in\n"
+		"the instrument config file is not the same as the band number used in\n"
+		"the camera. Instead this is a spectral band number. \n"
 		""},
 	 { (char *)"delete_AirMspiTimeTable", (PyCFunction)_wrap_delete_AirMspiTimeTable, METH_O, (char *)"\n"
 		"virtual GeoCal::AirMspiTimeTable::~AirMspiTimeTable()\n"

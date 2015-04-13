@@ -21,6 +21,13 @@ public:
 		       const std::string& Orbit_file_name,
 		       const std::string& L1b1_table,
 		       const std::string& Base_directory = ".");
+  AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
+   		       const boost::shared_ptr<Camera>& Cam,
+   		       const boost::shared_ptr<Dem>& D,
+   		       const std::vector<std::string>& L1b1_file_name,
+		       int Reference_row,
+		       int Dem_resolution = 10,
+		       const std::string& Base_directory = ".");
   %python_attribute(number_image, virtual int);
   virtual boost::shared_ptr<ImageGroundConnection> 
   image_ground_connection(int Image_index) const;

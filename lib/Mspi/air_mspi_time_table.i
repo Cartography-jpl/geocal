@@ -18,5 +18,7 @@ public:
   %python_attribute(reference_row, int);
   %python_attribute(l1b1_file_name, std::string);
   %python_attribute(l1b1_granule_id, std::string);
+  static int 
+  reference_row_calc(const std::string& Instrument_config_file_name);
 };
 }

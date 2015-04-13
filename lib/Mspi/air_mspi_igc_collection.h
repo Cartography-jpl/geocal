@@ -15,13 +15,13 @@ public:
 		       const std::string& Orbit_file_name,
 		       const std::string& L1b1_table,
 		       const std::string& Base_directory = ".");
-  // AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
-  // 		       const boost::shared_ptr<Camera>& Cam,
-  // 		       const boost::shared_ptr<Dem>& Dem,
-  // 		       const std::vector<std::string>& L1b1_file_name,
-  // 		       const std::string& Instrument_config_file,
-  // 		       int Band,
-  // 		       int Dem_resolution = 10);
+  AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
+   		       const boost::shared_ptr<Camera>& Cam,
+   		       const boost::shared_ptr<Dem>& D,
+   		       const std::vector<std::string>& L1b1_file_name,
+		       int Reference_row,
+		       int Dem_resolution = 10,
+		       const std::string& Base_directory = ".");
   virtual ~AirMspiIgcCollection() {}
   virtual void print(std::ostream& Os) const;
   virtual int number_image() const { return (int) view_config_.size(); }
@@ -142,8 +142,8 @@ public:
 private:
   boost::shared_ptr<Dem> dem;
   double dem_resolution;
-  boost::shared_ptr<MspiCamera> camera_;
-  boost::shared_ptr<AirMspiOrbit> orbit_;
+  boost::shared_ptr<Camera> camera_;
+  boost::shared_ptr<Orbit> orbit_;
   std::vector<MspiConfigFile> view_config_;
   // Reference row time table to use.
   int reference_row_;

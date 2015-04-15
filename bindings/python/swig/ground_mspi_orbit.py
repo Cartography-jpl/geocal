@@ -209,12 +209,8 @@ class GroundMspiOrbit(geocal_swig.orbit.Orbit):
         """
         return _ground_mspi_orbit.GroundMspiOrbit_orbit_data(self, *args)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.start_time,self.position,self.azimuth,self.start_elevation_angle,self.rotation_rate)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ground_mspi_orbit.delete_GroundMspiOrbit
 GroundMspiOrbit._v_start_time = new_instancemethod(_ground_mspi_orbit.GroundMspiOrbit__v_start_time,None,GroundMspiOrbit)

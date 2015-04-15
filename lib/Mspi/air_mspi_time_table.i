@@ -20,5 +20,6 @@ public:
   %python_attribute(l1b1_granule_id, std::string);
   static int 
   reference_row_calc(const std::string& Instrument_config_file_name);
+  %pickle_serialization();
 };
 }

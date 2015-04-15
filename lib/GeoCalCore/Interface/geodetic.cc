@@ -3,9 +3,35 @@
 #include "ecr.h"
 #include "constant.h"
 #include "wgs84_constant.h"
+#include "geocal_serialize_support.h"
 #include <cmath>
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void Geodetic::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(GroundCoordinate);
+  GEOCAL_BASE(Geodetic, GroundCoordinate);
+  ar & GEOCAL_NVP2("latitude", lat_)
+    & GEOCAL_NVP2("longitude", lon_)
+    & GEOCAL_NVP_(height_ellipsoid);
+}
+
+template<class Archive>
+void Geocentric::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(GroundCoordinate);
+  GEOCAL_BASE(Geocentric, GroundCoordinate);
+  ar & GEOCAL_NVP2("latitude", lat_)
+    & GEOCAL_NVP2("longitude", lon_)
+    & GEOCAL_NVP_(height_ellipsoid);
+}
+
+GEOCAL_IMPLEMENT(Geodetic);
+GEOCAL_IMPLEMENT(Geocentric);
+#endif
 
 //-----------------------------------------------------------------------
 /// Convert from GroundCoor.

@@ -73,6 +73,9 @@ private:
 				// optimize the conversion of Ecr to
 				// Geodetic, which it turns out is a
 				// bottleneck in some programs.
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -132,6 +135,11 @@ private:
   double lat_;			///< Latitude, in degrees.
   double lon_;			///< Longitude, in degrees.
   double height_ellipsoid_;	///< Height above ellipsoid, in meters.
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+GEOCAL_EXPORT_KEY(Geodetic);
+GEOCAL_EXPORT_KEY(Geocentric);
 #endif

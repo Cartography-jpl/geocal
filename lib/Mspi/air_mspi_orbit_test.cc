@@ -273,4 +273,38 @@ BOOST_AUTO_TEST_CASE(derivative_sc_look2)
   BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  // We might be missing orb if GDAL support wasn't built in. Silently
+  // skip test if we are missing orb.
+  if(!orb)
+    return;
+  std::string d = serialize_write_string(orb);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<AirMspiOrbit> orbr = 
+    serialize_read_string<AirMspiOrbit>(d);
+  BOOST_CHECK(orb->file_name() == test_data_dir() + 
+	      "airmspi_orbit_file_test.hdf");
+  BOOST_CHECK(orbr->flight_description() == "This is a dummy flight description");
+  BOOST_CHECK(orbr->data_version() == "v1");
+  BOOST_CHECK_CLOSE(orbr->time_spacing(), 0.015625, 1e-4);
+  BOOST_CHECK_CLOSE(orbr->min_time() - epoch, 0.490792, 1e-4);
+  BOOST_CHECK_CLOSE(orbr->max_time() - epoch, 16.975167, 1e-4);
+  BOOST_CHECK_CLOSE(orbr->nav_data(634).gimbal_pos, 0.0522535, 1e-4);
+  BOOST_CHECK_CLOSE(orbr->nav_data(634).gimbal_vel, -0.00102626475, 1e-4);
+  Time t1 = epoch + 10;
+  Time t2 = epoch + 10.5;
+  Time t3 = epoch + 11.0;
+  boost::shared_ptr<CartesianFixed> p1, p2, p3;
+  p1 = Eci(-4.04227e+06, 2.89117e+06, 4.01598e+06).convert_to_cf(t1);
+  p2 = Eci(-4.04237e+06, 2.89102e+06, 4.01598e+06).convert_to_cf(t2);
+  p3 = Eci(-4.04248e+06, 2.89087e+06, 4.01598e+06).convert_to_cf(t3);
+  BOOST_CHECK(GeoCal::distance(*orbr->position_cf(t1), *p1) < 5);
+  BOOST_CHECK(GeoCal::distance(*orbr->position_cf(t2), *p2) < 5);
+  BOOST_CHECK(GeoCal::distance(*orbr->position_cf(t3), *p3) < 5);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

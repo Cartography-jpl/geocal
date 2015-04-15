@@ -19,7 +19,7 @@ public:
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   Geodetic(double Latitude, double Longitude, double Height_ellipsoid = 0);
   Geodetic();
-  %pickle_init(1, self.latitude, self.longitude, self.height_reference_surface)
+  %pickle_serialization();
 };
 
 class Geocentric : public GroundCoordinate {
@@ -28,7 +28,7 @@ public:
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   Geocentric(double Latitude, double Longitude, double Height_ellipsoid = 0);
   Geocentric();
-  %pickle_init(1, self.latitude, self.longitude, self.height_reference_surface)
+  %pickle_serialization();
 };
 
 }

@@ -24,4 +24,24 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(lv.direction()[2], 0.435934, 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  Time t = Time::parse_time("1996-07-03T04:13:57.987654Z") + 10;
+  boost::shared_ptr<GroundCoordinate> p(new Geodetic(10, 20, 30));
+  boost::shared_ptr<Orbit> orb(new GroundMspiOrbit(t, p, 40, 50, 1.7));
+  CartesianInertialLookVector lv = 
+    orb->ci_look_vector(t, ScLookVector(0.1,0.2,0.3));
+  std::string d = serialize_write_string(orb);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<GroundMspiOrbit> orbr = 
+    serialize_read_string<GroundMspiOrbit>(d);
+  CartesianInertialLookVector lv2 = 
+    orb->ci_look_vector(t, ScLookVector(0.1,0.2,0.3));
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE(lv.direction()[i], lv2.direction()[i], 1e-4);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

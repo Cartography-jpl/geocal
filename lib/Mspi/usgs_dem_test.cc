@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(usgs_dem)
 		    10, 1e-4);
 }
 
-BOOST_AUTO_TEST_CASE(usgs_dem_data_serialization)
+BOOST_AUTO_TEST_CASE(serialization_usgs_dem_data)
 {
   if(!have_serialize_supported())
     return;

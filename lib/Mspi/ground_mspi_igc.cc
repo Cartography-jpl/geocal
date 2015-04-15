@@ -3,8 +3,20 @@
 #include "mspi_camera.h"
 #include "time_table.h"
 #include "simple_dem.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void GroundMspiIgc::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IpiImageGroundConnection)
+    & GEOCAL_NVP(mspi_cam);
+}
+
+GEOCAL_IMPLEMENT(GroundMspiIgc);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor. The angles are in degrees, and the rate is in degress

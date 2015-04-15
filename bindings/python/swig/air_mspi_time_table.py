@@ -183,6 +183,9 @@ class AirMspiTimeTable(geocal_swig.time_table.MeasuredTimeTable):
         return _air_mspi_time_table.AirMspiTimeTable_reference_row_calc(*args)
 
     reference_row_calc = staticmethod(reference_row_calc)
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _air_mspi_time_table.delete_AirMspiTimeTable
 AirMspiTimeTable._v_reference_row = new_instancemethod(_air_mspi_time_table.AirMspiTimeTable__v_reference_row,None,AirMspiTimeTable)
 AirMspiTimeTable._v_l1b1_file_name = new_instancemethod(_air_mspi_time_table.AirMspiTimeTable__v_l1b1_file_name,None,AirMspiTimeTable)

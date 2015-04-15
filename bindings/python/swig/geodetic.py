@@ -137,12 +137,8 @@ class Geodetic(geocal_swig.ground_coordinate.GroundCoordinate):
         Default constructor. 
         """
         _geodetic.Geodetic_swiginit(self,_geodetic.new_Geodetic(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.latitude,self.longitude,self.height_reference_surface)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _geodetic.delete_Geodetic
 Geodetic_swigregister = _geodetic.Geodetic_swigregister
@@ -162,12 +158,8 @@ class Geocentric(geocal_swig.ground_coordinate.GroundCoordinate):
         Default constructor. 
         """
         _geodetic.Geocentric_swiginit(self,_geodetic.new_Geocentric(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.latitude,self.longitude,self.height_reference_surface)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _geodetic.delete_Geocentric
 Geocentric_swigregister = _geodetic.Geocentric_swigregister

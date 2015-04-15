@@ -10,7 +10,7 @@ namespace GeoCal {
   This is an ImageGroundConnection for GroundMspi.
 *******************************************************************/
 
-class GroundMspiIgc : public IpiImageGroundConnection {
+class GroundMspiIgc : public virtual IpiImageGroundConnection {
 public:
   GroundMspiIgc(const Time& Start_time,
 		boost::shared_ptr<GroundCoordinate>& Pos,
@@ -52,7 +52,14 @@ private:
   // QuaternionCamera (which can convert to and from DcsLookVector,
   // that a general camera can't.
   boost::shared_ptr<QuaternionCamera> mspi_cam;
+
+  GroundMspiIgc() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(GroundMspiIgc);
 #endif
 

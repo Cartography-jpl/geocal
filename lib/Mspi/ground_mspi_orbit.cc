@@ -1,6 +1,21 @@
 #include "ground_mspi_orbit.h"
 #include "constant.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void GroundMspiOrbit::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP(tstart)
+    & GEOCAL_NVP(pos)
+    & GEOCAL_NVP_(azimuth) & GEOCAL_NVP_(start_elevation_angle)
+    & GEOCAL_NVP_(rotation_rate);
+}
+
+GEOCAL_IMPLEMENT(GroundMspiOrbit);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor. The azimuth and zenith angles should be in degrees.

@@ -282,4 +282,30 @@ BOOST_AUTO_TEST_CASE(serialization_ecr)
     BOOST_CHECK_CLOSE(ecr->position[i], ecrr->position[i], 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(serialization_geodetic)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<GroundCoordinate> gp(new Geodetic(30, 40, 50));
+  std::string d = serialize_write_string(gp);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<GroundCoordinate> gpr = 
+    serialize_read_string<GroundCoordinate>(d);
+  BOOST_CHECK(distance(*gp, *gpr) < 1e-2);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_geocentric)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<GroundCoordinate> gp(new Geocentric(30, 40, 50));
+  std::string d = serialize_write_string(gp);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<GroundCoordinate> gpr = 
+    serialize_read_string<GroundCoordinate>(d);
+  BOOST_CHECK(distance(*gp, *gpr) < 1e-2);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

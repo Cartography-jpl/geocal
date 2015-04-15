@@ -71,7 +71,13 @@ private:
   Time tstart;
   boost::shared_ptr<GroundCoordinate> pos;
   double azimuth_, start_elevation_angle_, rotation_rate_;
+  GroundMspiOrbit() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(GroundMspiOrbit);
 #endif
 

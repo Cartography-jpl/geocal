@@ -27,7 +27,6 @@ public:
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const;
-  %pickle_init(1, self.start_time, self.position, self.azimuth,
-	       self.start_elevation_angle, self.rotation_rate);
+  %pickle_serialization();
 };
 }

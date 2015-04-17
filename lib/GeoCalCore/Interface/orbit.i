@@ -330,14 +330,25 @@ namespace boost {
   namespace serialization {
     template<class Archive>
     void serialize(Archive& ar, SwigDirector_Orbit& Orb, const unsigned int version) {
+      std::cerr << "In serialize\n";
       ar & boost::serialization::make_nvp(BOOST_PP_STRINGIZE(Orbit),
 					  boost::serialization::base_object<GeoCal::Orbit>(Orb));
+      std::cerr << "Orb min time: " << Orb.min_time() << "\n";
     }
     template<class Archive> 
     void save_construct_data(Archive & ar, const SwigDirector_Orbit* d, 
 			     const unsigned int version)
     {
-      std::string python_object = cpickle_dumps(d->swig_get_self());
+      PyObject* obj = PyObject_CallMethodObjArgs(d->swig_get_self(),
+			PyString_FromString("__boost_serialize_save__"),
+			NULL);
+      if(PyErr_Occurred()) {
+	GeoCal::Exception e;
+	e << "Python error occurred:\n"
+	  << parse_python_exception();
+	throw e;
+      }
+      std::string python_object = PyString_AsString(obj);
       ar & GEOCAL_NVP(python_object);
     }
     template<class Archive>
@@ -346,7 +357,28 @@ namespace boost {
     {
       std::string python_object;
       ar & GEOCAL_NVP(python_object);
-      PyObject* obj = cpickle_loads(python_object);
+      PyObject* lis = cpickle_loads(python_object);
+      PyObject* func = PyTuple_GetItem(lis, 0);
+      if(PyErr_Occurred()) {
+	GeoCal::Exception e;
+	e << "Python error occurred:\n"
+	  << parse_python_exception();
+	throw e;
+      }
+      PyObject* arg = PyTuple_GetItem(lis, 1);
+      if(PyErr_Occurred()) {
+	GeoCal::Exception e;
+	e << "Python error occurred:\n"
+	  << parse_python_exception();
+	throw e;
+      }
+      PyObject* obj = PyObject_Call(func, arg, NULL);
+      if(PyErr_Occurred()) {
+	GeoCal::Exception e;
+	e << "Python error occurred:\n"
+	  << parse_python_exception();
+	throw e;
+      }
       ::new(d)SwigDirector_Orbit(obj);
     }
   }

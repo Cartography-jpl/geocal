@@ -4102,6 +4102,52 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "geocal_serialize_function.h"
+#include "geocal_exception.h"
+// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
+std::string parse_python_exception();
+
+
+//--------------------------------------------------------------
+/// Support routines for calling cPickle.dumps from C
+//--------------------------------------------------------------
+
+inline PyObject* cpickle_module()
+{
+  static PyObject* mod = 0;
+  if(!mod)
+    mod = PyImport_ImportModule("cPickle");
+  return mod;
+}
+
+inline std::string cpickle_dumps(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(cpickle_module(),
+					     PyString_FromString("dumps"),
+					     obj, NULL);
+  if(PyErr_Occurred()) {
+    GeoCal::Exception e;
+    e << "Python error occurred:\n"
+      << parse_python_exception();
+    throw e;
+  }
+  return std::string(PyString_AsString(res));
+}
+
+inline PyObject* cpickle_loads(const std::string& S)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(cpickle_module(),
+					     PyString_FromString("loads"),
+					     PyString_FromString(S.c_str()), 
+					     NULL);
+  if(PyErr_Occurred()) {
+    GeoCal::Exception e;
+    e << "Python error occurred:\n"
+      << parse_python_exception();
+    throw e;
+  }
+  return res;
+}
+
 
 
 namespace swig {  
@@ -5237,6 +5283,14 @@ template<class T, int D> inline boost::array<T, D>
 
 
 #include "orbit.h"
+// #include "geocal_serialize_function.h"
+// #include "geocal_serialize_support.h"
+// #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+// #include <boost/archive/polymorphic_xml_iarchive.hpp>
+// #include <boost/archive/polymorphic_xml_oarchive.hpp>
+// #include <boost/archive/polymorphic_binary_iarchive.hpp>
+// #include <boost/archive/polymorphic_binary_oarchive.hpp>
+// #endif
 
 
 #include <limits.h>
@@ -5634,6 +5688,53 @@ namespace swig {
 	};
       }
     
+
+#include "geocal_serialize_support.h"
+#include "orbit_wrap.h"
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+
+namespace boost {
+  namespace serialization {
+    template<class Archive>
+    void serialize(Archive& ar, SwigDirector_Orbit& Orb, const unsigned int version) {
+      ar & boost::serialization::make_nvp(BOOST_PP_STRINGIZE(Orbit),
+					  boost::serialization::base_object<GeoCal::Orbit>(Orb));
+    }
+    template<class Archive> 
+    void save_construct_data(Archive & ar, const SwigDirector_Orbit* d, 
+			     const unsigned int version)
+    {
+      std::string python_object = cpickle_dumps(d->swig_get_self());
+      ar & GEOCAL_NVP(python_object);
+    }
+    template<class Archive>
+    void load_construct_data(Archive & ar, SwigDirector_Orbit* d,
+			     const unsigned int version)
+    {
+      std::string python_object;
+      ar & GEOCAL_NVP(python_object);
+      PyObject* obj = cpickle_loads(python_object);
+      ::new(d)SwigDirector_Orbit(obj);
+    }
+  }
+}
+BOOST_CLASS_EXPORT_KEY(SwigDirector_Orbit);
+BOOST_CLASS_EXPORT_IMPLEMENT(SwigDirector_Orbit);
+ template void boost::serialization::serialize(boost::archive::polymorphic_oarchive& ar, SwigDirector_Orbit& Orb, const unsigned int version);
+ template void boost::serialization::serialize(boost::archive::polymorphic_iarchive& ar, SwigDirector_Orbit& Orb, const unsigned int version);
+template
+
+void boost::serialization::save_construct_data
+(polymorphic_oarchive & ar, const SwigDirector_Orbit* d, 
+ const unsigned int version);
+
+template
+void boost::serialization::load_construct_data
+(polymorphic_iarchive & ar, SwigDirector_Orbit* d, const unsigned int version);
+
+#endif  
+
 
   namespace swig {
     template <>  struct traits<boost::shared_ptr< GeoCal::QuaternionOrbitData > > {
@@ -6852,6 +6953,43 @@ boost::shared_ptr< GeoCal::OrbitData > SwigDirector_Orbit::orbit_data(GeoCal::Ti
   }
   if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::OrbitData > * >(swig_argp);
   return (boost::shared_ptr< GeoCal::OrbitData >) c_result;
+}
+
+
+std::string SwigDirector_Orbit::print_to_string() {
+  std::string c_result;
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 25;
+  const char * const swig_method_name = "__str__";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject args = PyTuple_New(0);
+  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject*) args, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"__str__");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  std::string *swig_optr = 0;
+  int swig_ores = SWIG_AsPtr_std_string(result, &swig_optr);
+  if (!SWIG_IsOK(swig_ores) || !swig_optr) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError((swig_optr ? swig_ores : SWIG_TypeError))), "in output value of type '""std::string""'");
+  }
+  c_result = *swig_optr;
+  if (SWIG_IsNewObj(swig_ores)) delete swig_optr;
+  return (std::string) c_result;
 }
 
 
@@ -16006,6 +16144,8 @@ SWIGINTERN PyObject *_wrap_Orbit___str__(PyObject *SWIGUNUSEDPARM(self), PyObjec
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
   boost::shared_ptr< GeoCal::Orbit > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   std::string result;
   
   if (!args) SWIG_fail;
@@ -16025,14 +16165,24 @@ SWIGINTERN PyObject *_wrap_Orbit___str__(PyObject *SWIGUNUSEDPARM(self), PyObjec
       arg1 = const_cast< GeoCal::Orbit * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    try {
-      result = (arg1)->print_to_string();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = (arg1)->GeoCal::Orbit::print_to_string();
+        } else {
+          result = (arg1)->print_to_string();
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;

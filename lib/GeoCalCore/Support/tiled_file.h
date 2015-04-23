@@ -3,6 +3,7 @@
 #include "tile.h"
 #include "map_info.h"
 #include "geocal_exception.h"
+#include "generic_object.h"
 #include <boost/shared_ptr.hpp>
 #include <boost/foreach.hpp>
 #include <iostream>
@@ -60,7 +61,7 @@ private:
   types, as get_int, put_double, read_int etc.
 *******************************************************************/
 
-template<std::size_t D> class TiledFileBase {
+template<std::size_t D> class TiledFileBase: public virtual GenericObject {
 public:
 //-----------------------------------------------------------------------
 /// Data type for index (e.g., int).

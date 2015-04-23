@@ -705,6 +705,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/magnify_bilinear.cc \
 	@srcimplementation@/magnify_replicate.cc \
 	@srcimplementation@/smooth_image.cc \
+	@srcimplementation@/raster_image_tiled_file.cc \
 	@srcimplementation@/map_reprojected_image.cc \
 	@srcimplementation@/igc_map_projected.cc \
 	@srcimplementation@/igc_simulated.cc \
@@ -852,6 +853,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-magnify_bilinear.lo \
 	@srcimplementation@/libgeocal_la-magnify_replicate.lo \
 	@srcimplementation@/libgeocal_la-smooth_image.lo \
+	@srcimplementation@/libgeocal_la-raster_image_tiled_file.lo \
 	@srcimplementation@/libgeocal_la-map_reprojected_image.lo \
 	@srcimplementation@/libgeocal_la-igc_map_projected.lo \
 	@srcimplementation@/libgeocal_la-igc_simulated.lo \
@@ -2086,6 +2088,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/magnify_bilinear.cc \
 	@srcimplementation@/magnify_replicate.cc \
 	@srcimplementation@/smooth_image.cc \
+	@srcimplementation@/raster_image_tiled_file.cc \
 	@srcimplementation@/map_reprojected_image.cc \
 	@srcimplementation@/igc_map_projected.cc \
 	@srcimplementation@/igc_simulated.cc \
@@ -3302,6 +3305,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcimplementation@/libgeocal_la-smooth_image.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-raster_image_tiled_file.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-map_reprojected_image.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -4201,6 +4207,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-quadratic_geometric_model.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-quaternion_camera.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_averaged.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo@am__quote@
@@ -6058,6 +6065,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/smooth_image.cc' object='@srcimplementation@/libgeocal_la-smooth_image.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-smooth_image.lo `test -f '@srcimplementation@/smooth_image.cc' || echo '$(srcdir)/'`@srcimplementation@/smooth_image.cc
+
+@srcimplementation@/libgeocal_la-raster_image_tiled_file.lo: @srcimplementation@/raster_image_tiled_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-raster_image_tiled_file.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Tpo -c -o @srcimplementation@/libgeocal_la-raster_image_tiled_file.lo `test -f '@srcimplementation@/raster_image_tiled_file.cc' || echo '$(srcdir)/'`@srcimplementation@/raster_image_tiled_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/raster_image_tiled_file.cc' object='@srcimplementation@/libgeocal_la-raster_image_tiled_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-raster_image_tiled_file.lo `test -f '@srcimplementation@/raster_image_tiled_file.cc' || echo '$(srcdir)/'`@srcimplementation@/raster_image_tiled_file.cc
 
 @srcimplementation@/libgeocal_la-map_reprojected_image.lo: @srcimplementation@/map_reprojected_image.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-map_reprojected_image.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-map_reprojected_image.Tpo -c -o @srcimplementation@/libgeocal_la-map_reprojected_image.lo `test -f '@srcimplementation@/map_reprojected_image.cc' || echo '$(srcdir)/'`@srcimplementation@/map_reprojected_image.cc

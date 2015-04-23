@@ -15,24 +15,27 @@ BOOST_AUTO_TEST_CASE(air_mspi_l1b1_file)
 #endif
 }
 
+BOOST_AUTO_TEST_CASE(air_mspi_l1b1)
+{
+#ifdef HAVE_MSPI_SHARED
+  AirMspiL1b1 f(test_data_dir() + "/mspi/3.l1b1.hdf5");
+#else
+  BOOST_WARN_MESSAGE(false, "Skipping AirMspiL1b1 test, because we haven't build ith MSPI_SHARED support");
+#endif
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
 #ifdef HAVE_MSPI_SHARED
   if(!have_serialize_supported())
     return;
-  // boost::shared_ptr<TimeTable> 
-  //   tt(new AirMspiTimeTable(test_data_dir() + "/mspi/3.l1b1.hdf5",
-  // 		    test_data_dir() + "/mspi/3.instrument_info.config"));
-  // std::string d = serialize_write_string(tt);
-  // if(false)
-  //   std::cerr << d;
-  // boost::shared_ptr<TimeTable> ttr = 
-  //   serialize_read_string<TimeTable>(d);
-  // Time t, t2;
-  // FrameCoordinate fc, fc2;
-  // tt->time(ImageCoordinate(0, 100), t, fc);
-  // ttr->time(ImageCoordinate(0, 100), t2, fc2);
-  // BOOST_CHECK(fabs(t - t2) < 1e-4);
+  boost::shared_ptr<AirMspiL1b1> 
+    l1b1(new AirMspiL1b1(test_data_dir() + "/mspi/3.l1b1.hdf5"));
+  std::string d = serialize_write_string(l1b1);
+  if(true)
+    std::cerr << d;
+  boost::shared_ptr<AirMspiL1b1> l1b1r =
+    serialize_read_string<AirMspiL1b1>(d);
 #else
   BOOST_WARN_MESSAGE(false, "Skipping AirMspiL1b1 test, because we haven't build with MSPI_SHARED support");
 #endif

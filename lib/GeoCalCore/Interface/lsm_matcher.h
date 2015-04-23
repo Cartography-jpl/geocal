@@ -176,8 +176,15 @@ private:
 
 // Maximum number of iterations before giving up.
   static const int max_iteration = 6;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(LsmMatcher);
+
 #endif
 

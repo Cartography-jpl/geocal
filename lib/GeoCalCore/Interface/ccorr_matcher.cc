@@ -1,8 +1,27 @@
 #include "ccorr_matcher.h"
+#include "geocal_serialize_support.h"
 #include <blitz/array.h>
 
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void CcorrMatcher::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(ImageMatcher);
+  GEOCAL_BASE(CcorrMatcher, ImageMatcher);
+  ar & GEOCAL_NVP_(min_correlation)
+    & GEOCAL_NVP_(min_variance)
+    & GEOCAL_NVP_(target_number_line)
+    & GEOCAL_NVP_(target_number_sample)
+    & GEOCAL_NVP_(template_number_line)
+    & GEOCAL_NVP_(template_number_sample);
+}
+
+
+GEOCAL_IMPLEMENT(CcorrMatcher);
+#endif
 
 //-----------------------------------------------------------------------
 // Constructor. Default values were tuned for MISR imagery, but work
@@ -102,6 +121,8 @@ void CcorrMatcher::match_mask
 // Otherwise, extract the template and target from the input imagery 
 //-----------------------------------------------------------------------
 
+  templ.resize(template_number_line(), template_number_sample());
+  target.resize(target_number_line(), target_number_sample());
   Ref.read_ptr(ref_line, ref_sample, template_number_line(), 
 	       template_number_sample(), templ.data());
   New.read_ptr(new_line, new_sample, target_number_line(), 

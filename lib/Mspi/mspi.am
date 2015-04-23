@@ -17,6 +17,8 @@ geocalinc_HEADERS+= @srcmspi@/usgs_dem.h
 libgeocal_la_SOURCES+= @srcmspi@/usgs_dem.cc
 geocalinc_HEADERS+= @srcmspi@/air_mspi_time_table.h
 libgeocal_la_SOURCES+= @srcmspi@/air_mspi_time_table.cc
+geocalinc_HEADERS+= @srcmspi@/air_mspi_l1b1.h
+libgeocal_la_SOURCES+= @srcmspi@/air_mspi_l1b1.cc
 geocalinc_HEADERS+= @srcmspi@/air_mspi_igc.h
 libgeocal_la_SOURCES+= @srcmspi@/air_mspi_igc.cc
 geocalinc_HEADERS+= @srcmspi@/air_mspi_igc_collection.h
@@ -30,6 +32,7 @@ SWIG_SRC += @swigsrc@/ground_mspi_orbit_wrap.cc
 SWIG_SRC += @swigsrc@/ground_mspi_igc_wrap.cc
 SWIG_SRC += @swigsrc@/usgs_dem_wrap.cc
 SWIG_SRC += @swigsrc@/air_mspi_time_table_wrap.cc
+SWIG_SRC += @swigsrc@/air_mspi_l1b1_wrap.cc
 SWIG_SRC += @swigsrc@/air_mspi_igc_wrap.cc
 SWIG_SRC += @swigsrc@/air_mspi_igc_collection_wrap.cc
 
@@ -42,6 +45,7 @@ geocal_test_all_SOURCES+= @srcmspi@/ground_mspi_orbit_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/ground_mspi_igc_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/usgs_dem_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/air_mspi_time_table_test.cc
+geocal_test_all_SOURCES+= @srcmspi@/air_mspi_l1b1_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/air_mspi_igc_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/air_mspi_igc_collection_test.cc
 

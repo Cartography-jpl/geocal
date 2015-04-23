@@ -457,7 +457,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/ground_mspi_orbit_wrap.cc \
 	@swigsrc@/ground_mspi_igc_wrap.cc @swigsrc@/usgs_dem_wrap.cc \
 	@swigsrc@/air_mspi_time_table_wrap.cc \
-	@swigsrc@/air_mspi_igc_wrap.cc \
+	@swigsrc@/air_mspi_l1b1_wrap.cc @swigsrc@/air_mspi_igc_wrap.cc \
 	@swigsrc@/air_mspi_igc_collection_wrap.cc \
 	@swigsrc@/eci_tod_burl_wrap.cc @swigsrc@/geocal_fftw_wrap.cc \
 	@swigsrc@/phase_correlation_matcher_wrap.cc \
@@ -607,6 +607,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ground_mspi_igc_wrap.lo \
 	@swigsrc@/_swig_wrap_la-usgs_dem_wrap.lo \
 	@swigsrc@/_swig_wrap_la-air_mspi_time_table_wrap.lo \
+	@swigsrc@/_swig_wrap_la-air_mspi_l1b1_wrap.lo \
 	@swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo \
 	@swigsrc@/_swig_wrap_la-air_mspi_igc_collection_wrap.lo
 am__objects_2 = @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo
@@ -763,8 +764,8 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcmspi@/mspi_paraxial_transform.cc @srcmspi@/mspi_camera.cc \
 	@srcmspi@/air_mspi_orbit.cc @srcmspi@/ground_mspi_orbit.cc \
 	@srcmspi@/ground_mspi_igc.cc @srcmspi@/usgs_dem.cc \
-	@srcmspi@/air_mspi_time_table.cc @srcmspi@/air_mspi_igc.cc \
-	@srcmspi@/air_mspi_igc_collection.cc
+	@srcmspi@/air_mspi_time_table.cc @srcmspi@/air_mspi_l1b1.cc \
+	@srcmspi@/air_mspi_igc.cc @srcmspi@/air_mspi_igc_collection.cc
 @HAVE_FFTW_TRUE@am__objects_15 =  \
 @HAVE_FFTW_TRUE@	@srcsupport@/libgeocal_la-geocal_fftw.lo
 @HAVE_HDF5_TRUE@am__objects_16 =  \
@@ -908,6 +909,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcmspi@/libgeocal_la-ground_mspi_igc.lo \
 	@srcmspi@/libgeocal_la-usgs_dem.lo \
 	@srcmspi@/libgeocal_la-air_mspi_time_table.lo \
+	@srcmspi@/libgeocal_la-air_mspi_l1b1.lo \
 	@srcmspi@/libgeocal_la-air_mspi_igc.lo \
 	@srcmspi@/libgeocal_la-air_mspi_igc_collection.lo
 libgeocal_la_OBJECTS = $(am_libgeocal_la_OBJECTS)
@@ -1034,7 +1036,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcmspi@/ground_mspi_orbit_test.cc \
 	@srcmspi@/ground_mspi_igc_test.cc @srcmspi@/usgs_dem_test.cc \
 	@srcmspi@/air_mspi_time_table_test.cc \
-	@srcmspi@/air_mspi_igc_test.cc \
+	@srcmspi@/air_mspi_l1b1_test.cc @srcmspi@/air_mspi_igc_test.cc \
 	@srcmspi@/air_mspi_igc_collection_test.cc
 @HAVE_FFTW_TRUE@am__objects_23 = @srcsupport@/geocal_test_all-geocal_fftw_test.$(OBJEXT)
 @HAVE_HDF5_TRUE@am__objects_24 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
@@ -1165,6 +1167,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcmspi@/geocal_test_all-ground_mspi_igc_test.$(OBJEXT) \
 	@srcmspi@/geocal_test_all-usgs_dem_test.$(OBJEXT) \
 	@srcmspi@/geocal_test_all-air_mspi_time_table_test.$(OBJEXT) \
+	@srcmspi@/geocal_test_all-air_mspi_l1b1_test.$(OBJEXT) \
 	@srcmspi@/geocal_test_all-air_mspi_igc_test.$(OBJEXT) \
 	@srcmspi@/geocal_test_all-air_mspi_igc_collection_test.$(OBJEXT)
 geocal_test_all_OBJECTS = $(am_geocal_test_all_OBJECTS)
@@ -1411,8 +1414,8 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcmspi@/mspi_paraxial_transform.h @srcmspi@/mspi_camera.h \
 	@srcmspi@/air_mspi_orbit.h @srcmspi@/ground_mspi_orbit.h \
 	@srcmspi@/ground_mspi_igc.h @srcmspi@/usgs_dem.h \
-	@srcmspi@/air_mspi_time_table.h @srcmspi@/air_mspi_igc.h \
-	@srcmspi@/air_mspi_igc_collection.h
+	@srcmspi@/air_mspi_time_table.h @srcmspi@/air_mspi_l1b1.h \
+	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h
 HEADERS = $(geocalinc_HEADERS) $(include_HEADERS) $(libraw_HEADERS) \
 	$(sdbx_HEADERS) $(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
 	$(sdbxsupport_HEADERS)
@@ -2129,8 +2132,8 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcmspi@/mspi_paraxial_transform.cc @srcmspi@/mspi_camera.cc \
 	@srcmspi@/air_mspi_orbit.cc @srcmspi@/ground_mspi_orbit.cc \
 	@srcmspi@/ground_mspi_igc.cc @srcmspi@/usgs_dem.cc \
-	@srcmspi@/air_mspi_time_table.cc @srcmspi@/air_mspi_igc.cc \
-	@srcmspi@/air_mspi_igc_collection.cc
+	@srcmspi@/air_mspi_time_table.cc @srcmspi@/air_mspi_l1b1.cc \
+	@srcmspi@/air_mspi_igc.cc @srcmspi@/air_mspi_igc_collection.cc
 
 # Files that contain SWIG wrapper information.
 
@@ -2244,7 +2247,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/ground_mspi_orbit_wrap.cc \
 	@swigsrc@/ground_mspi_igc_wrap.cc @swigsrc@/usgs_dem_wrap.cc \
 	@swigsrc@/air_mspi_time_table_wrap.cc \
-	@swigsrc@/air_mspi_igc_wrap.cc \
+	@swigsrc@/air_mspi_l1b1_wrap.cc @swigsrc@/air_mspi_igc_wrap.cc \
 	@swigsrc@/air_mspi_igc_collection_wrap.cc
 SWIG_SRC_CARTO = @swigsrc@/eci_tod_burl_wrap.cc
 SWIG_SRC_FFTW = @swigsrc@/geocal_fftw_wrap.cc \
@@ -2400,8 +2403,8 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcmspi@/mspi_paraxial_transform.h @srcmspi@/mspi_camera.h \
 	@srcmspi@/air_mspi_orbit.h @srcmspi@/ground_mspi_orbit.h \
 	@srcmspi@/ground_mspi_igc.h @srcmspi@/usgs_dem.h \
-	@srcmspi@/air_mspi_time_table.h @srcmspi@/air_mspi_igc.h \
-	@srcmspi@/air_mspi_igc_collection.h
+	@srcmspi@/air_mspi_time_table.h @srcmspi@/air_mspi_l1b1.h \
+	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h
 # Test files
 geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
@@ -2497,7 +2500,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcmspi@/ground_mspi_orbit_test.cc \
 	@srcmspi@/ground_mspi_igc_test.cc @srcmspi@/usgs_dem_test.cc \
 	@srcmspi@/air_mspi_time_table_test.cc \
-	@srcmspi@/air_mspi_igc_test.cc \
+	@srcmspi@/air_mspi_l1b1_test.cc @srcmspi@/air_mspi_igc_test.cc \
 	@srcmspi@/air_mspi_igc_collection_test.cc
 libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) \
 	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) \
@@ -3044,6 +3047,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-air_mspi_time_table_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-air_mspi_l1b1_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-air_mspi_igc_collection_wrap.lo:  \
@@ -3513,6 +3518,8 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/libgeocal_la-air_mspi_time_table.lo:  \
 	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/libgeocal_la-air_mspi_l1b1.lo: @srcmspi@/$(am__dirstamp) \
+	@srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/libgeocal_la-air_mspi_igc.lo: @srcmspi@/$(am__dirstamp) \
 	@srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/libgeocal_la-air_mspi_igc_collection.lo:  \
@@ -3958,6 +3965,8 @@ clean-checkPROGRAMS:
 	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/geocal_test_all-air_mspi_time_table_test.$(OBJEXT):  \
 	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/geocal_test_all-air_mspi_l1b1_test.$(OBJEXT):  \
+	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/geocal_test_all-air_mspi_igc_test.$(OBJEXT):  \
 	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/geocal_test_all-air_mspi_igc_collection_test.$(OBJEXT):  \
@@ -4266,6 +4275,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-with_parameter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_igc_collection_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_igc_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_l1b1_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_orbit_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_time_table_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-ground_mspi_igc_test.Po@am__quote@
@@ -4277,6 +4287,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-usgs_dem_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_igc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_igc_collection.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_l1b1.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_orbit.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_time_table.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-ground_mspi_igc.Plo@am__quote@
@@ -4327,6 +4338,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_collection_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_l1b1_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_orbit_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_time_table_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-aircraft_orbit_data_wrap.Plo@am__quote@
@@ -5430,6 +5442,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/air_mspi_time_table_wrap.cc' object='@swigsrc@/_swig_wrap_la-air_mspi_time_table_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-air_mspi_time_table_wrap.lo `test -f '@swigsrc@/air_mspi_time_table_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/air_mspi_time_table_wrap.cc
+
+@swigsrc@/_swig_wrap_la-air_mspi_l1b1_wrap.lo: @swigsrc@/air_mspi_l1b1_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-air_mspi_l1b1_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_l1b1_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-air_mspi_l1b1_wrap.lo `test -f '@swigsrc@/air_mspi_l1b1_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/air_mspi_l1b1_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_l1b1_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_l1b1_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/air_mspi_l1b1_wrap.cc' object='@swigsrc@/_swig_wrap_la-air_mspi_l1b1_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-air_mspi_l1b1_wrap.lo `test -f '@swigsrc@/air_mspi_l1b1_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/air_mspi_l1b1_wrap.cc
 
 @swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo: @swigsrc@/air_mspi_igc_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo `test -f '@swigsrc@/air_mspi_igc_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/air_mspi_igc_wrap.cc
@@ -6550,6 +6569,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/air_mspi_time_table.cc' object='@srcmspi@/libgeocal_la-air_mspi_time_table.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/libgeocal_la-air_mspi_time_table.lo `test -f '@srcmspi@/air_mspi_time_table.cc' || echo '$(srcdir)/'`@srcmspi@/air_mspi_time_table.cc
+
+@srcmspi@/libgeocal_la-air_mspi_l1b1.lo: @srcmspi@/air_mspi_l1b1.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/libgeocal_la-air_mspi_l1b1.lo -MD -MP -MF @srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_l1b1.Tpo -c -o @srcmspi@/libgeocal_la-air_mspi_l1b1.lo `test -f '@srcmspi@/air_mspi_l1b1.cc' || echo '$(srcdir)/'`@srcmspi@/air_mspi_l1b1.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_l1b1.Tpo @srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_l1b1.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/air_mspi_l1b1.cc' object='@srcmspi@/libgeocal_la-air_mspi_l1b1.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/libgeocal_la-air_mspi_l1b1.lo `test -f '@srcmspi@/air_mspi_l1b1.cc' || echo '$(srcdir)/'`@srcmspi@/air_mspi_l1b1.cc
 
 @srcmspi@/libgeocal_la-air_mspi_igc.lo: @srcmspi@/air_mspi_igc.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/libgeocal_la-air_mspi_igc.lo -MD -MP -MF @srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_igc.Tpo -c -o @srcmspi@/libgeocal_la-air_mspi_igc.lo `test -f '@srcmspi@/air_mspi_igc.cc' || echo '$(srcdir)/'`@srcmspi@/air_mspi_igc.cc
@@ -8307,6 +8333,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/air_mspi_time_table_test.cc' object='@srcmspi@/geocal_test_all-air_mspi_time_table_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-air_mspi_time_table_test.obj `if test -f '@srcmspi@/air_mspi_time_table_test.cc'; then $(CYGPATH_W) '@srcmspi@/air_mspi_time_table_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/air_mspi_time_table_test.cc'; fi`
+
+@srcmspi@/geocal_test_all-air_mspi_l1b1_test.o: @srcmspi@/air_mspi_l1b1_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-air_mspi_l1b1_test.o -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_l1b1_test.Tpo -c -o @srcmspi@/geocal_test_all-air_mspi_l1b1_test.o `test -f '@srcmspi@/air_mspi_l1b1_test.cc' || echo '$(srcdir)/'`@srcmspi@/air_mspi_l1b1_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_l1b1_test.Tpo @srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_l1b1_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/air_mspi_l1b1_test.cc' object='@srcmspi@/geocal_test_all-air_mspi_l1b1_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-air_mspi_l1b1_test.o `test -f '@srcmspi@/air_mspi_l1b1_test.cc' || echo '$(srcdir)/'`@srcmspi@/air_mspi_l1b1_test.cc
+
+@srcmspi@/geocal_test_all-air_mspi_l1b1_test.obj: @srcmspi@/air_mspi_l1b1_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-air_mspi_l1b1_test.obj -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_l1b1_test.Tpo -c -o @srcmspi@/geocal_test_all-air_mspi_l1b1_test.obj `if test -f '@srcmspi@/air_mspi_l1b1_test.cc'; then $(CYGPATH_W) '@srcmspi@/air_mspi_l1b1_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/air_mspi_l1b1_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_l1b1_test.Tpo @srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_l1b1_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/air_mspi_l1b1_test.cc' object='@srcmspi@/geocal_test_all-air_mspi_l1b1_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-air_mspi_l1b1_test.obj `if test -f '@srcmspi@/air_mspi_l1b1_test.cc'; then $(CYGPATH_W) '@srcmspi@/air_mspi_l1b1_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/air_mspi_l1b1_test.cc'; fi`
 
 @srcmspi@/geocal_test_all-air_mspi_igc_test.o: @srcmspi@/air_mspi_igc_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-air_mspi_igc_test.o -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_igc_test.Tpo -c -o @srcmspi@/geocal_test_all-air_mspi_igc_test.o `test -f '@srcmspi@/air_mspi_igc_test.cc' || echo '$(srcdir)/'`@srcmspi@/air_mspi_igc_test.cc

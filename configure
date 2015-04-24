@@ -2775,6 +2775,9 @@ ac_config_headers="$ac_config_headers lib/GeoCalCore/Support/geocal_config.h lib
 # build, this is just "." relative to srcdir.
 geocal_topdir=.
 
+# expand $ac_aux_dir to an absolute path
+am_aux_dir=`cd $ac_aux_dir && pwd`
+
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -3564,6 +3567,65 @@ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $CC understands -c and -o together" >&5
+$as_echo_n "checking whether $CC understands -c and -o together... " >&6; }
+if ${am_cv_prog_cc_c_o+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+  # Make sure it works both with $CC and with simple cc.
+  # Following AC_PROG_CC_C_O, we do the test twice because some
+  # compilers refuse to overwrite an existing .o file with -o,
+  # though they will create one.
+  am_cv_prog_cc_c_o=yes
+  for am_i in 1 2; do
+    if { echo "$as_me:$LINENO: $CC -c conftest.$ac_ext -o conftest2.$ac_objext" >&5
+   ($CC -c conftest.$ac_ext -o conftest2.$ac_objext) >&5 2>&5
+   ac_status=$?
+   echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); } \
+         && test -f conftest2.$ac_objext; then
+      : OK
+    else
+      am_cv_prog_cc_c_o=no
+      break
+    fi
+  done
+  rm -f core conftest*
+  unset am_i
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $am_cv_prog_cc_c_o" >&5
+$as_echo "$am_cv_prog_cc_c_o" >&6; }
+if test "$am_cv_prog_cc_c_o" != yes; then
+   # Losing compiler, so override with the script.
+   # FIXME: It is wrong to rewrite CC.
+   # But if we don't then we get into trouble of one sort or another.
+   # A longer-term fix would be to have automake use am__CC in this case,
+   # and then we could set am__CC="\$(top_srcdir)/compile \$(CC)"
+   CC="$am_aux_dir/compile $CC"
+fi
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
 ac_ext=cpp
 ac_cpp='$CXXCPP $CPPFLAGS'
 ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -3821,7 +3883,7 @@ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
-am__api_version='1.13'
+am__api_version='1.14'
 
 # Find a good install program.  We prefer a C program (faster),
 # so one script is as good as another.  But avoid the broken or
@@ -3992,9 +4054,6 @@ test "$program_suffix" != NONE &&
 # By default was `s,x,x', remove it if useless.
 ac_script='s/[\\$]/&&/g;s/;s,x,x,$//'
 program_transform_name=`$as_echo "$program_transform_name" | sed "$ac_script"`
-
-# expand $ac_aux_dir to an absolute path
-am_aux_dir=`cd $ac_aux_dir && pwd`
 
 if test x"${MISSING+set}" != xset; then
   case $am_aux_dir in
@@ -7904,116 +7963,6 @@ func_stripname_cnf ()
   esac
 } # func_stripname_cnf
 
-if test "x$CC" != xcc; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $CC and cc understand -c and -o together" >&5
-$as_echo_n "checking whether $CC and cc understand -c and -o together... " >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether cc understands -c and -o together" >&5
-$as_echo_n "checking whether cc understands -c and -o together... " >&6; }
-fi
-set dummy $CC; ac_cc=`$as_echo "$2" |
-		      sed 's/[^a-zA-Z0-9_]/_/g;s/^[0-9]/_/'`
-if eval \${ac_cv_prog_cc_${ac_cc}_c_o+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-int
-main ()
-{
-
-  ;
-  return 0;
-}
-_ACEOF
-# Make sure it works both with $CC and with simple cc.
-# We do the test twice because some compilers refuse to overwrite an
-# existing .o file with -o, though they will create one.
-ac_try='$CC -c conftest.$ac_ext -o conftest2.$ac_objext >&5'
-rm -f conftest2.*
-if { { case "(($ac_try" in
-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
-  *) ac_try_echo=$ac_try;;
-esac
-eval ac_try_echo="\"\$as_me:${as_lineno-$LINENO}: $ac_try_echo\""
-$as_echo "$ac_try_echo"; } >&5
-  (eval "$ac_try") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; } &&
-   test -f conftest2.$ac_objext && { { case "(($ac_try" in
-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
-  *) ac_try_echo=$ac_try;;
-esac
-eval ac_try_echo="\"\$as_me:${as_lineno-$LINENO}: $ac_try_echo\""
-$as_echo "$ac_try_echo"; } >&5
-  (eval "$ac_try") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; };
-then
-  eval ac_cv_prog_cc_${ac_cc}_c_o=yes
-  if test "x$CC" != xcc; then
-    # Test first that cc exists at all.
-    if { ac_try='cc -c conftest.$ac_ext >&5'
-  { { case "(($ac_try" in
-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
-  *) ac_try_echo=$ac_try;;
-esac
-eval ac_try_echo="\"\$as_me:${as_lineno-$LINENO}: $ac_try_echo\""
-$as_echo "$ac_try_echo"; } >&5
-  (eval "$ac_try") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; }; then
-      ac_try='cc -c conftest.$ac_ext -o conftest2.$ac_objext >&5'
-      rm -f conftest2.*
-      if { { case "(($ac_try" in
-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
-  *) ac_try_echo=$ac_try;;
-esac
-eval ac_try_echo="\"\$as_me:${as_lineno-$LINENO}: $ac_try_echo\""
-$as_echo "$ac_try_echo"; } >&5
-  (eval "$ac_try") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; } &&
-	 test -f conftest2.$ac_objext && { { case "(($ac_try" in
-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
-  *) ac_try_echo=$ac_try;;
-esac
-eval ac_try_echo="\"\$as_me:${as_lineno-$LINENO}: $ac_try_echo\""
-$as_echo "$ac_try_echo"; } >&5
-  (eval "$ac_try") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; };
-      then
-	# cc works too.
-	:
-      else
-	# cc exists but doesn't like -o.
-	eval ac_cv_prog_cc_${ac_cc}_c_o=no
-      fi
-    fi
-  fi
-else
-  eval ac_cv_prog_cc_${ac_cc}_c_o=no
-fi
-rm -f core conftest*
-
-fi
-if eval test \$ac_cv_prog_cc_${ac_cc}_c_o = yes; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-$as_echo "#define NO_MINUS_C_MINUS_O 1" >>confdefs.h
-
-fi
 
 
 
@@ -8273,87 +8222,96 @@ mkdir_p='$(MKDIR_P)'
 AMTAR='$${TAR-tar}'
 
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking how to create a pax tar archive" >&5
-$as_echo_n "checking how to create a pax tar archive... " >&6; }
-# Loop over all known methods to create a tar archive until one works.
+# We'll loop over all known methods to create a tar archive until one works.
 _am_tools='gnutar  pax cpio none'
-_am_tools=${am_cv_prog_tar_pax-$_am_tools}
-# Do not fold the above two line into one, because Tru64 sh and
-# Solaris sh will not grok spaces in the rhs of '-'.
-for _am_tool in $_am_tools
-do
-  case $_am_tool in
-  gnutar)
-    for _am_tar in tar gnutar gtar;
-    do
-      { echo "$as_me:$LINENO: $_am_tar --version" >&5
+
+
+
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking how to create a pax tar archive" >&5
+$as_echo_n "checking how to create a pax tar archive... " >&6; }
+
+  # Go ahead even if we have the value already cached.  We do so because we
+  # need to set the values for the 'am__tar' and 'am__untar' variables.
+  _am_tools=${am_cv_prog_tar_pax-$_am_tools}
+
+  for _am_tool in $_am_tools; do
+    case $_am_tool in
+    gnutar)
+      for _am_tar in tar gnutar gtar; do
+        { echo "$as_me:$LINENO: $_am_tar --version" >&5
    ($_am_tar --version) >&5 2>&5
    ac_status=$?
    echo "$as_me:$LINENO: \$? = $ac_status" >&5
    (exit $ac_status); } && break
-    done
-    am__tar="$_am_tar --format=posix -chf - "'"$$tardir"'
-    am__tar_="$_am_tar --format=posix -chf - "'"$tardir"'
-    am__untar="$_am_tar -xf -"
-    ;;
-  plaintar)
-    # Must skip GNU tar: if it does not support --format= it doesn't create
-    # ustar tarball either.
-    (tar --version) >/dev/null 2>&1 && continue
-    am__tar='tar chf - "$$tardir"'
-    am__tar_='tar chf - "$tardir"'
-    am__untar='tar xf -'
-    ;;
-  pax)
-    am__tar='pax -L -x pax -w "$$tardir"'
-    am__tar_='pax -L -x pax -w "$tardir"'
-    am__untar='pax -r'
-    ;;
-  cpio)
-    am__tar='find "$$tardir" -print | cpio -o -H pax -L'
-    am__tar_='find "$tardir" -print | cpio -o -H pax -L'
-    am__untar='cpio -i -H pax -d'
-    ;;
-  none)
-    am__tar=false
-    am__tar_=false
-    am__untar=false
-    ;;
-  esac
+      done
+      am__tar="$_am_tar --format=posix -chf - "'"$$tardir"'
+      am__tar_="$_am_tar --format=posix -chf - "'"$tardir"'
+      am__untar="$_am_tar -xf -"
+      ;;
+    plaintar)
+      # Must skip GNU tar: if it does not support --format= it doesn't create
+      # ustar tarball either.
+      (tar --version) >/dev/null 2>&1 && continue
+      am__tar='tar chf - "$$tardir"'
+      am__tar_='tar chf - "$tardir"'
+      am__untar='tar xf -'
+      ;;
+    pax)
+      am__tar='pax -L -x pax -w "$$tardir"'
+      am__tar_='pax -L -x pax -w "$tardir"'
+      am__untar='pax -r'
+      ;;
+    cpio)
+      am__tar='find "$$tardir" -print | cpio -o -H pax -L'
+      am__tar_='find "$tardir" -print | cpio -o -H pax -L'
+      am__untar='cpio -i -H pax -d'
+      ;;
+    none)
+      am__tar=false
+      am__tar_=false
+      am__untar=false
+      ;;
+    esac
 
-  # If the value was cached, stop now.  We just wanted to have am__tar
-  # and am__untar set.
-  test -n "${am_cv_prog_tar_pax}" && break
+    # If the value was cached, stop now.  We just wanted to have am__tar
+    # and am__untar set.
+    test -n "${am_cv_prog_tar_pax}" && break
 
-  # tar/untar a dummy directory, and stop if the command works
-  rm -rf conftest.dir
-  mkdir conftest.dir
-  echo GrepMe > conftest.dir/file
-  { echo "$as_me:$LINENO: tardir=conftest.dir && eval $am__tar_ >conftest.tar" >&5
+    # tar/untar a dummy directory, and stop if the command works.
+    rm -rf conftest.dir
+    mkdir conftest.dir
+    echo GrepMe > conftest.dir/file
+    { echo "$as_me:$LINENO: tardir=conftest.dir && eval $am__tar_ >conftest.tar" >&5
    (tardir=conftest.dir && eval $am__tar_ >conftest.tar) >&5 2>&5
    ac_status=$?
    echo "$as_me:$LINENO: \$? = $ac_status" >&5
    (exit $ac_status); }
-  rm -rf conftest.dir
-  if test -s conftest.tar; then
-    { echo "$as_me:$LINENO: $am__untar <conftest.tar" >&5
+    rm -rf conftest.dir
+    if test -s conftest.tar; then
+      { echo "$as_me:$LINENO: $am__untar <conftest.tar" >&5
    ($am__untar <conftest.tar) >&5 2>&5
    ac_status=$?
    echo "$as_me:$LINENO: \$? = $ac_status" >&5
    (exit $ac_status); }
-    grep GrepMe conftest.dir/file >/dev/null 2>&1 && break
-  fi
-done
-rm -rf conftest.dir
+      { echo "$as_me:$LINENO: cat conftest.dir/file" >&5
+   (cat conftest.dir/file) >&5 2>&5
+   ac_status=$?
+   echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }
+      grep GrepMe conftest.dir/file >/dev/null 2>&1 && break
+    fi
+  done
+  rm -rf conftest.dir
 
-if ${am_cv_prog_tar_pax+:} false; then :
+  if ${am_cv_prog_tar_pax+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   am_cv_prog_tar_pax=$_am_tool
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $am_cv_prog_tar_pax" >&5
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $am_cv_prog_tar_pax" >&5
 $as_echo "$am_cv_prog_tar_pax" >&6; }
+
 
 
 
@@ -8615,6 +8573,47 @@ fi
 
 
 
+# POSIX will say in a future version that running "rm -f" with no argument
+# is OK; and we want to be able to make that assumption in our Makefile
+# recipes.  So use an aggressive probe to check that the usage we want is
+# actually supported "in the wild" to an acceptable degree.
+# See automake bug#10828.
+# To make any issue more visible, cause the running configure to be aborted
+# by default if the 'rm' program in use doesn't match our expectations; the
+# user can still override this though.
+if rm -f && rm -fr && rm -rf; then : OK; else
+  cat >&2 <<'END'
+Oops!
+
+Your 'rm' program seems unable to run without file operands specified
+on the command line, even when the '-f' option is present.  This is contrary
+to the behaviour of most rm programs out there, and not conforming with
+the upcoming POSIX standard: <http://austingroupbugs.net/view.php?id=542>
+
+Please tell bug-automake@gnu.org about your system, including the value
+of your $PATH and any error possibly output before this message.  This
+can help us improve future automake versions.
+
+END
+  if test x"$ACCEPT_INFERIOR_RM_PROGRAM" = x"yes"; then
+    echo 'Configuration will proceed anyway, since you have set the' >&2
+    echo 'ACCEPT_INFERIOR_RM_PROGRAM variable to "yes"' >&2
+    echo >&2
+  else
+    cat >&2 <<'END'
+Aborting the configuration process, to ensure you take notice of the issue.
+
+You can download and install GNU coreutils to get an 'rm' implementation
+that behaves properly: <http://www.gnu.org/software/coreutils/>.
+
+If you want to complete the configuration process using your problematic
+'rm' anyway, export the environment variable ACCEPT_INFERIOR_RM_PROGRAM
+to "yes", and re-run configure.
+
+END
+    as_fn_error $? "Your 'rm' program is bad, sorry." "$LINENO" 5
+  fi
+fi
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable maintainer-specific portions of Makefiles" >&5
 $as_echo_n "checking whether to enable maintainer-specific portions of Makefiles... " >&6; }
@@ -16643,13 +16642,51 @@ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $CC understands -c and -o together" >&5
+$as_echo_n "checking whether $CC understands -c and -o together... " >&6; }
+if ${am_cv_prog_cc_c_o+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
 
-# FIXME: we rely on the cache variable name because
-# there is no other way.
-set dummy $CC
-am_cc=`echo $2 | sed 's/[^a-zA-Z0-9_]/_/g;s/^[0-9]/_/'`
-eval am_t=\$ac_cv_prog_cc_${am_cc}_c_o
-if test "$am_t" != yes; then
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+  # Make sure it works both with $CC and with simple cc.
+  # Following AC_PROG_CC_C_O, we do the test twice because some
+  # compilers refuse to overwrite an existing .o file with -o,
+  # though they will create one.
+  am_cv_prog_cc_c_o=yes
+  for am_i in 1 2; do
+    if { echo "$as_me:$LINENO: $CC -c conftest.$ac_ext -o conftest2.$ac_objext" >&5
+   ($CC -c conftest.$ac_ext -o conftest2.$ac_objext) >&5 2>&5
+   ac_status=$?
+   echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); } \
+         && test -f conftest2.$ac_objext; then
+      : OK
+    else
+      am_cv_prog_cc_c_o=no
+      break
+    fi
+  done
+  rm -f core conftest*
+  unset am_i
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $am_cv_prog_cc_c_o" >&5
+$as_echo "$am_cv_prog_cc_c_o" >&6; }
+if test "$am_cv_prog_cc_c_o" != yes; then
    # Losing compiler, so override with the script.
    # FIXME: It is wrong to rewrite CC.
    # But if we don't then we get into trouble of one sort or another.
@@ -16657,6 +16694,13 @@ if test "$am_t" != yes; then
    # and then we could set am__CC="\$(top_srcdir)/compile \$(CC)"
    CC="$am_aux_dir/compile $CC"
 fi
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
 
 
 
@@ -16710,6 +16754,7 @@ fi
 
 #=================================================================
 # Add prefix, THIRDPARTY, and /opt/afids_support for pkgconfig file
+
 
 
 
@@ -17019,6 +17064,7 @@ if test -n "$VICAR_RTL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_VICAR_RTL_CFLAGS=`$PKG_CONFIG --cflags "vicar-rtl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17035,6 +17081,7 @@ if test -n "$VICAR_RTL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_VICAR_RTL_LIBS=`$PKG_CONFIG --libs "vicar-rtl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17054,9 +17101,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "vicar-rtl" 2>&1`
+	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "vicar-rtl" 2>&1`
         else
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --print-errors "vicar-rtl" 2>&1`
+	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "vicar-rtl" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$VICAR_RTL_PKG_ERRORS" >&5
@@ -17077,7 +17124,7 @@ fi
      VICAR_RTL_PREFIX=`$PKG_CONFIG --variable=prefix "vicar-rtl" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/vicar_rtl/zvproto.h" && test -r "$ac_path_tmp/include/vicar_rtl/zvproto.h"; then
           VICAR_RTL_PREFIX=$ac_path_tmp
           VICAR_RTL_CFLAGS="-I$ac_path_tmp/include/vicar_rtl/"
@@ -17377,6 +17424,7 @@ if test -n "$HDF5_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_CFLAGS=`$PKG_CONFIG --cflags "hdf5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17393,6 +17441,7 @@ if test -n "$HDF5_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_LIBS=`$PKG_CONFIG --libs "hdf5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17412,9 +17461,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdf5" 2>&1`
         else
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdf5" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$HDF5_PKG_ERRORS" >&5
@@ -17435,7 +17484,7 @@ fi
      HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/hdf5.h" && test -r "$ac_path_tmp/include/hdf5.h"; then
           HDF5_PREFIX=$ac_path_tmp
           HDF5_CFLAGS="-I$ac_path_tmp/include/"
@@ -17537,6 +17586,7 @@ if test -n "$HDFEOS5_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDFEOS5_CFLAGS=`$PKG_CONFIG --cflags "hdfeos5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17553,6 +17603,7 @@ if test -n "$HDFEOS5_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDFEOS5_LIBS=`$PKG_CONFIG --libs "hdfeos5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17572,9 +17623,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdfeos5" 2>&1`
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdfeos5" 2>&1`
         else
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdfeos5" 2>&1`
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdfeos5" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$HDFEOS5_PKG_ERRORS" >&5
@@ -17595,7 +17646,7 @@ fi
      HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h"; then
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/hdfeos5/"
@@ -17637,6 +17688,7 @@ if test -n "$HDFEOS5_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDFEOS5_CFLAGS=`$PKG_CONFIG --cflags "hdfeos5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17653,6 +17705,7 @@ if test -n "$HDFEOS5_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDFEOS5_LIBS=`$PKG_CONFIG --libs "hdfeos5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -17672,9 +17725,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdfeos5" 2>&1`
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdfeos5" 2>&1`
         else
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdfeos5" 2>&1`
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdfeos5" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$HDFEOS5_PKG_ERRORS" >&5
@@ -17695,7 +17748,7 @@ fi
      HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/HE5_HdfEosDef.h"; then
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/"
@@ -18176,6 +18229,7 @@ if test -n "$BLITZ_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_BLITZ_CFLAGS=`$PKG_CONFIG --cflags "blitz" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18192,6 +18246,7 @@ if test -n "$BLITZ_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_BLITZ_LIBS=`$PKG_CONFIG --libs "blitz" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18211,9 +18266,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "blitz" 2>&1`
+	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "blitz" 2>&1`
         else
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --print-errors "blitz" 2>&1`
+	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "blitz" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$BLITZ_PKG_ERRORS" >&5
@@ -18234,7 +18289,7 @@ fi
      BLITZ_PREFIX=`$PKG_CONFIG --variable=prefix "blitz" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/blitz/blitz.h" && test -r "$ac_path_tmp/include/blitz/blitz.h"; then
           BLITZ_PREFIX=$ac_path_tmp
           BLITZ_CFLAGS="-I$ac_path_tmp/include/blitz/"
@@ -18368,6 +18423,7 @@ if test -n "$GSL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GSL_CFLAGS=`$PKG_CONFIG --cflags "gsl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18384,6 +18440,7 @@ if test -n "$GSL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GSL_LIBS=`$PKG_CONFIG --libs "gsl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18403,9 +18460,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "gsl" 2>&1`
+	        GSL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gsl" 2>&1`
         else
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --print-errors "gsl" 2>&1`
+	        GSL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gsl" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$GSL_PKG_ERRORS" >&5
@@ -18426,7 +18483,7 @@ fi
      GSL_PREFIX=`$PKG_CONFIG --variable=prefix "gsl" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/gsl/gsl_blas.h" && test -r "$ac_path_tmp/include/gsl/gsl_blas.h"; then
           GSL_PREFIX=$ac_path_tmp
           GSL_CFLAGS="-I$ac_path_tmp/include/"
@@ -18566,6 +18623,7 @@ if test -n "$SPICE_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_SPICE_CFLAGS=`$PKG_CONFIG --cflags "spice" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18582,6 +18640,7 @@ if test -n "$SPICE_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_SPICE_LIBS=`$PKG_CONFIG --libs "spice" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18601,9 +18660,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "spice" 2>&1`
+	        SPICE_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "spice" 2>&1`
         else
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --print-errors "spice" 2>&1`
+	        SPICE_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "spice" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$SPICE_PKG_ERRORS" >&5
@@ -18624,7 +18683,7 @@ fi
      SPICE_PREFIX=`$PKG_CONFIG --variable=prefix "spice" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/SpiceCK.h" && test -r "$ac_path_tmp/include/SpiceCK.h"; then
           SPICE_PREFIX=$ac_path_tmp
           SPICE_CFLAGS="-I$ac_path_tmp/include/"
@@ -18759,6 +18818,7 @@ if test -n "$HDF5_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_CFLAGS=`$PKG_CONFIG --cflags "hdf5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18775,6 +18835,7 @@ if test -n "$HDF5_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_HDF5_LIBS=`$PKG_CONFIG --libs "hdf5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -18794,9 +18855,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdf5" 2>&1`
         else
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors "hdf5" 2>&1`
+	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdf5" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$HDF5_PKG_ERRORS" >&5
@@ -18817,7 +18878,7 @@ fi
      HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/hdf5.h" && test -r "$ac_path_tmp/include/hdf5.h"; then
           HDF5_PREFIX=$ac_path_tmp
           HDF5_CFLAGS="-I$ac_path_tmp/include/"
@@ -19087,6 +19148,7 @@ if test -n "$FFTW_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_FFTW_CFLAGS=`$PKG_CONFIG --cflags "fftw3" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19103,6 +19165,7 @@ if test -n "$FFTW_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_FFTW_LIBS=`$PKG_CONFIG --libs "fftw3" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19122,9 +19185,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "fftw3" 2>&1`
+	        FFTW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "fftw3" 2>&1`
         else
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --print-errors "fftw3" 2>&1`
+	        FFTW_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "fftw3" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$FFTW_PKG_ERRORS" >&5
@@ -19145,7 +19208,7 @@ fi
      FFTW_PREFIX=`$PKG_CONFIG --variable=prefix "fftw3" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/fftw3.h" && test -r "$ac_path_tmp/include/fftw3.h"; then
           FFTW_PREFIX=$ac_path_tmp
           FFTW_CFLAGS="-I$ac_path_tmp/include/"
@@ -19283,6 +19346,7 @@ if test -n "$GDAL_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GDAL_CFLAGS=`$PKG_CONFIG --cflags "gdal" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19299,6 +19363,7 @@ if test -n "$GDAL_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_GDAL_LIBS=`$PKG_CONFIG --libs "gdal" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19318,9 +19383,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "gdal" 2>&1`
+	        GDAL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gdal" 2>&1`
         else
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --print-errors "gdal" 2>&1`
+	        GDAL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gdal" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$GDAL_PKG_ERRORS" >&5
@@ -19341,7 +19406,7 @@ fi
      GDAL_PREFIX=`$PKG_CONFIG --variable=prefix "gdal" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/gdal.h" && test -r "$ac_path_tmp/include/gdal.h"; then
           GDAL_PREFIX=$ac_path_tmp
           GDAL_CFLAGS="-I$ac_path_tmp/include/"
@@ -19850,6 +19915,7 @@ if test -n "$CARTO_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_CARTO_CFLAGS=`$PKG_CONFIG --cflags "carto" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19866,6 +19932,7 @@ if test -n "$CARTO_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_CARTO_LIBS=`$PKG_CONFIG --libs "carto" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -19885,9 +19952,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "carto" 2>&1`
+	        CARTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "carto" 2>&1`
         else
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --print-errors "carto" 2>&1`
+	        CARTO_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "carto" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$CARTO_PKG_ERRORS" >&5
@@ -19908,7 +19975,7 @@ fi
      CARTO_PREFIX=`$PKG_CONFIG --variable=prefix "carto" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/carto/burl.h" && test -r "$ac_path_tmp/include/carto/burl.h"; then
           CARTO_PREFIX=$ac_path_tmp
           CARTO_CFLAGS="-I$ac_path_tmp/include/carto/"
@@ -23351,7 +23418,7 @@ $as_echo X"$mf" |
     DEPDIR=`sed -n 's/^DEPDIR = //p' < "$mf"`
     test -z "$DEPDIR" && continue
     am__include=`sed -n 's/^am__include = //p' < "$mf"`
-    test -z "am__include" && continue
+    test -z "$am__include" && continue
     am__quote=`sed -n 's/^am__quote = //p' < "$mf"`
     # Find all dependency output files, they are included files with
     # $(DEPDIR) in their names.  We invoke sed twice because it is the

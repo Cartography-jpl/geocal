@@ -16,7 +16,7 @@ AC_DEFUN([AC_SEARCH_LIB],
      [$1][_PREFIX]=`$PKG_CONFIG --variable=prefix "$2" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/$3$4" && test -r "$ac_path_tmp/include/$3$4"; then
           [$1][_PREFIX]=$ac_path_tmp
           [$1][_CFLAGS]="-I$ac_path_tmp/include/$3"

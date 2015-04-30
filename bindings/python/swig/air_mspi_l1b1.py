@@ -125,7 +125,102 @@ import geocal_swig.raster_image_tiled_file
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
-class AirMspiL1b1(geocal_swig.generic_object.GenericObject):
+class AirMspiL1b1File(geocal_swig.generic_object.GenericObject):
+    """
+    This provides access to a AirMspiL1b1File.
+
+    C++ includes: air_mspi_l1b1.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        AirMspiL1b1File::AirMspiL1b1File(const std::string &Fname, const std::string &Swath_to_use="660-I",
+        int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int
+        Number_tile=4)
+        Constructor. 
+        """
+        _air_mspi_l1b1.AirMspiL1b1File_swiginit(self,_air_mspi_l1b1.new_AirMspiL1b1File(*args))
+    def _v_number_row_index(self):
+        """
+        int AirMspiL1b1File::number_row_index() const
+        Number of row index.
+
+        Note that a lot of the MSPI shared stuff is written using
+        "row_number", which is an underlying CCD row I think. Row_index is
+        just an index into the available rows. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File__v_number_row_index(self)
+
+    @property
+    def number_row_index(self):
+        return self._v_number_row_index()
+
+    def _v_file_name(self):
+        """
+        const std::string& GeoCal::AirMspiL1b1File::file_name() const
+        The file name we are using. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File__v_file_name(self)
+
+    @property
+    def file_name(self):
+        return self._v_file_name()
+
+    def _v_swath_to_use(self):
+        """
+        std::string GeoCal::AirMspiL1b1File::swath_to_use() const
+        Swath we are using to read data from. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File__v_swath_to_use(self)
+
+    @property
+    def swath_to_use(self):
+        return self._v_swath_to_use()
+
+    def field_names(self, *args):
+        """
+        std::vector< std::string > AirMspiL1b1File::field_names(int Row_index) const
+        Return the field names for the given row_index. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File_field_names(self, *args)
+
+    def wavelength(self, *args):
+        """
+        float AirMspiL1b1File::wavelength(int Row_index) const
+        Return the wavelength for the given row_index. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File_wavelength(self, *args)
+
+    def polarization_angle(self, *args):
+        """
+        float AirMspiL1b1File::polarization_angle(int Row_index) const
+        Return the polarization angle for the given row_index. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File_polarization_angle(self, *args)
+
+    def swath_name(self, *args):
+        """
+        std::string AirMspiL1b1File::swath_name(int Row_index) const
+        Return the swath name for the given row_index. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File_swath_name(self, *args)
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _air_mspi_l1b1.delete_AirMspiL1b1File
+AirMspiL1b1File._v_number_row_index = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File__v_number_row_index,None,AirMspiL1b1File)
+AirMspiL1b1File._v_file_name = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File__v_file_name,None,AirMspiL1b1File)
+AirMspiL1b1File._v_swath_to_use = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File__v_swath_to_use,None,AirMspiL1b1File)
+AirMspiL1b1File.field_names = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File_field_names,None,AirMspiL1b1File)
+AirMspiL1b1File.wavelength = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File_wavelength,None,AirMspiL1b1File)
+AirMspiL1b1File.polarization_angle = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File_polarization_angle,None,AirMspiL1b1File)
+AirMspiL1b1File.swath_name = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File_swath_name,None,AirMspiL1b1File)
+AirMspiL1b1File_swigregister = _air_mspi_l1b1.AirMspiL1b1File_swigregister
+AirMspiL1b1File_swigregister(AirMspiL1b1File)
+
+class AirMspiL1b1(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
     """
     C++ includes: air_mspi_l1b1.h
 
@@ -134,10 +229,15 @@ class AirMspiL1b1(geocal_swig.generic_object.GenericObject):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::AirMspiL1b1::AirMspiL1b1(const std::string &Fname)
-
+        AirMspiL1b1::AirMspiL1b1(const std::string &Fname, const std::string &Swath_to_use="660-I",
+        int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int
+        Number_tile=4)
+        Constructor. 
         """
         _air_mspi_l1b1.AirMspiL1b1_swiginit(self,_air_mspi_l1b1.new_AirMspiL1b1(*args))
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _air_mspi_l1b1.delete_AirMspiL1b1
 AirMspiL1b1_swigregister = _air_mspi_l1b1.AirMspiL1b1_swigregister
 AirMspiL1b1_swigregister(AirMspiL1b1)

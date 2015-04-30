@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<AirMspiL1b1> 
     l1b1(new AirMspiL1b1(test_data_dir() + "/mspi/3.l1b1.hdf5"));
   std::string d = serialize_write_string(l1b1);
-  if(true)
+  if(false)
     std::cerr << d;
   boost::shared_ptr<AirMspiL1b1> l1b1r =
     serialize_read_string<AirMspiL1b1>(d);

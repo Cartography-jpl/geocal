@@ -657,7 +657,7 @@ libgeocal_la_DEPENDENCIES = $(am__DEPENDENCIES_1) libraw.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
-	@srcsupport@/auto_derivative.cc \
+	@srcsupport@/auto_derivative.cc @srcsupport@/tiled_file.cc \
 	@srcsupport@/geocal_quaternion.cc \
 	@srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/geocal_gsl_matrix.cc \
@@ -794,6 +794,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 @HAVE_GDAL_TRUE@@HAVE_VICAR_RTL_TRUE@am__objects_22 = @srccartlab@/libgeocal_la-vicar_ogr.lo
 am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcsupport@/libgeocal_la-auto_derivative.lo \
+	@srcsupport@/libgeocal_la-tiled_file.lo \
 	@srcsupport@/libgeocal_la-geocal_quaternion.lo \
 	@srcsupport@/boost/libgeocal_la-backtrace.lo \
 	@srcsupport@/libgeocal_la-geocal_gsl_matrix.lo \
@@ -2041,7 +2042,7 @@ check_DATA =
 
 # Source files for library
 libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
-	@srcsupport@/auto_derivative.cc \
+	@srcsupport@/auto_derivative.cc @srcsupport@/tiled_file.cc \
 	@srcsupport@/geocal_quaternion.cc \
 	@srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/geocal_gsl_matrix.cc \
@@ -3115,6 +3116,8 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
 @srcsupport@/libgeocal_la-auto_derivative.lo:  \
 	@srcsupport@/$(am__dirstamp) \
+	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcsupport@/libgeocal_la-tiled_file.lo: @srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
 @srcsupport@/libgeocal_la-geocal_quaternion.lo:  \
 	@srcsupport@/$(am__dirstamp) \
@@ -4342,6 +4345,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-geocal_time.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-hdf_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-statistic.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-tiled_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_collection_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_wrap.Plo@am__quote@
@@ -5645,6 +5649,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/auto_derivative.cc' object='@srcsupport@/libgeocal_la-auto_derivative.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/libgeocal_la-auto_derivative.lo `test -f '@srcsupport@/auto_derivative.cc' || echo '$(srcdir)/'`@srcsupport@/auto_derivative.cc
+
+@srcsupport@/libgeocal_la-tiled_file.lo: @srcsupport@/tiled_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/libgeocal_la-tiled_file.lo -MD -MP -MF @srcsupport@/$(DEPDIR)/libgeocal_la-tiled_file.Tpo -c -o @srcsupport@/libgeocal_la-tiled_file.lo `test -f '@srcsupport@/tiled_file.cc' || echo '$(srcdir)/'`@srcsupport@/tiled_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/libgeocal_la-tiled_file.Tpo @srcsupport@/$(DEPDIR)/libgeocal_la-tiled_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/tiled_file.cc' object='@srcsupport@/libgeocal_la-tiled_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/libgeocal_la-tiled_file.lo `test -f '@srcsupport@/tiled_file.cc' || echo '$(srcdir)/'`@srcsupport@/tiled_file.cc
 
 @srcsupport@/libgeocal_la-geocal_quaternion.lo: @srcsupport@/geocal_quaternion.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/libgeocal_la-geocal_quaternion.lo -MD -MP -MF @srcsupport@/$(DEPDIR)/libgeocal_la-geocal_quaternion.Tpo -c -o @srcsupport@/libgeocal_la-geocal_quaternion.lo `test -f '@srcsupport@/geocal_quaternion.cc' || echo '$(srcdir)/'`@srcsupport@/geocal_quaternion.cc

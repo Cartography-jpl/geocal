@@ -206,6 +206,12 @@ protected:
   unsigned int number_tile_;
   boost::array<index, D> tile_size_; 
 				///< Nominal size of tile.
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 /****************************************************************//**
@@ -686,6 +692,22 @@ private:
 				///< Next tile to be swapped.
   mutable std::vector<Tile<T, D> > tile_; 
 				///< Tiles
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
+
+// Can't pass template with a "," in it to the BOOST macros. There are
+// ways around this, but easiest to just use a typedef.
+typedef TiledFile<int, 2> TiledFile_int_2;
+typedef TiledFile<float, 2> TiledFile_float_2;
+
 }
+
+GEOCAL_EXPORT_KEY(TiledFileBase<2>);
+GEOCAL_EXPORT_KEY(TiledFile_int_2);
+GEOCAL_EXPORT_KEY(TiledFile_float_2);
 #endif

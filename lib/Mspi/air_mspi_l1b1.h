@@ -15,7 +15,9 @@ namespace GeoCal {
 *******************************************************************/
 class AirMspiL1b1File: public TiledFile<float, 2> {
 public:
-  AirMspiL1b1File(const std::string& Fname);
+  AirMspiL1b1File(const std::string& Fname, int Tile_number_line = -1,
+		  int Tile_number_sample = -1, 
+		  unsigned int Number_tile = 4);
   virtual ~AirMspiL1b1File() {}
 
 //-----------------------------------------------------------------------
@@ -39,7 +41,6 @@ protected:
 private:
   std::string fname;
   boost::shared_ptr<MSPI::Shared::L1B1Reader> l1b1_reader;
-  void init(const std::string& Fname);
   AirMspiL1b1File() {}
   friend class boost::serialization::access;
   template<class Archive>

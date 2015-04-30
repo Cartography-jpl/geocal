@@ -23,6 +23,7 @@ geocalinc_HEADERS+= @srcsupport@/printable.h
 geocalinc_HEADERS+= @srcsupport@/geocal_exception.h
 geocalinc_HEADERS+= @srcsupport@/tile.h
 geocalinc_HEADERS+= @srcsupport@/tiled_file.h
+libgeocal_la_SOURCES+= @srcsupport@/tiled_file.cc
 geocalinc_HEADERS+= @srcsupport@/memory_map_array.h
 geocalinc_HEADERS+= @srcsupport@/geocal_gsl_matrix.h
 geocalinc_HEADERS+= @srcsupport@/geocal_matrix.h

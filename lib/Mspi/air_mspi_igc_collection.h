@@ -145,8 +145,6 @@ private:
   boost::shared_ptr<Camera> camera_;
   boost::shared_ptr<Orbit> orbit_;
   std::vector<MspiConfigFile> view_config_;
-  // Reference row time table to use.
-  int reference_row_;
   std::string base_directory;
   std::vector<int> min_l1b1_line_, max_l1b1_line_;
 

@@ -18,7 +18,6 @@ void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(camera) 
     & GEOCAL_NVP_(orbit)
     & GEOCAL_NVP_(view_config)
-    & GEOCAL_NVP_(reference_row)
     & GEOCAL_NVP(base_directory)
     & GEOCAL_NVP_(min_l1b1_line) & GEOCAL_NVP_(max_l1b1_line);
 }
@@ -42,7 +41,6 @@ AirMspiIgcCollection::AirMspiIgcCollection
   : base_directory(Base_directory),
     camera_(Cam),
     orbit_(Orb),
-    reference_row_(Reference_row),
     dem(D),
     dem_resolution(Dem_resolution)
 {
@@ -100,7 +98,6 @@ AirMspiIgcCollection::AirMspiIgcCollection
   fname = c.value<std::string>("instrument_info_config");
   if(fname[0] != '/')
     fname = Base_directory + "/" + fname;
-  reference_row_ = AirMspiTimeTable::reference_row_calc(fname);
 
   // Get DEM set up
   if(c.value<std::string>("dem_type") == "usgs") {
@@ -145,7 +142,9 @@ AirMspiIgcCollection::AirMspiIgcCollection
 void AirMspiIgcCollection::calc_min_max_l1b1_line()
 {
   for(int i = 0; i < number_image(); ++i) {
-    AirMspiTimeTable tt(l1b1_file_name(i), reference_row_);
+    // Come back to reference_row_
+    //    AirMspiTimeTable tt(l1b1_file_name(i), reference_row_);
+    AirMspiTimeTable tt(l1b1_file_name(i));
     view_config_[i].add("l1b1_granule_id", tt.l1b1_granule_id());
     int min_ln = tt.min_line();
     int max_ln = tt.max_line();
@@ -188,7 +187,7 @@ AirMspiIgcCollection::air_mspi_igc(int Image_index) const
 					  camera_,
 					  dem,
 					  l1b1_file_name(Image_index), 
-					  reference_row_,
+					  -1,
 					  0,
 					  "Image",
 					  dem_resolution));
@@ -232,7 +231,6 @@ AirMspiIgcCollection::AirMspiIgcCollection
   dem_resolution = Original.dem_resolution;
   camera_ = Original.camera_;
   orbit_ = Original.orbit_;
-  reference_row_ = Original.reference_row_;
   base_directory = Original.base_directory;
   BOOST_FOREACH(int i, Index_set) {
     view_config_.push_back(MspiConfigFile(Original.view_config_[i]));

@@ -79,11 +79,7 @@ AirMspiIgc::AirMspiIgc
   }
 
   // Get the time table and L1B1 data.
-  fname = c.value<std::string>("instrument_info_config");
-  if(fname[0] != '/')
-    fname = Base_directory + "/" + fname;
-  boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name,
-						       fname));
+  boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name));
   Time tmin = std::max(orb->min_time(), tt->min_time());
   Time tmax = std::min(orb->max_time(), tt->max_time());
 
@@ -114,9 +110,8 @@ AirMspiIgc::AirMspiIgc
 
   // Short term, have image empty.
   boost::shared_ptr<RasterImage> img;
-
-  boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name,
-						       Reference_row));
+  // Need to come back with Reference_row fix
+  boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name));
   Time tmin = std::max(Orb->min_time(), tt->min_time());
   Time tmax = std::min(Orb->max_time(), tt->max_time());
   boost::shared_ptr<Ipi> ipi(new Ipi(Orb, Cam, Band, tmin, tmax, tt));

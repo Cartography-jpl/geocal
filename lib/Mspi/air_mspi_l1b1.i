@@ -21,10 +21,16 @@ public:
   %python_attribute(number_row_index, int);
   %python_attribute(file_name, std::string);
   %python_attribute(swath_to_use, std::string);
+  %python_attribute(row_index_to_use, int);
+  %python_attribute(row_number_to_use, int);
+  %python_attribute(granule_id, std::string);
+  %python_attribute(time, std::vector<Time>);
   std::vector<std::string> field_names(int Row_index) const;
   float wavelength(int Row_index) const;
   float polarization_angle(int Row_index) const;
   std::string swath_name(int Row_index) const;
+  int row_index_to_row_number(int Row_index) const;
+  int row_number_to_row_index(int Row_number) const;
   %pickle_serialization();
 };
 

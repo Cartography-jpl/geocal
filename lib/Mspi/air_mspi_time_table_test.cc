@@ -9,8 +9,7 @@ BOOST_FIXTURE_TEST_SUITE(air_mspi_time_table, GlobalFixture)
 BOOST_AUTO_TEST_CASE(chain_test)
 {
 #ifdef HAVE_MSPI_SHARED
-  AirMspiTimeTable tt(test_data_dir() + "/mspi/3.l1b1.hdf5",
-		      test_data_dir() + "/mspi/3.instrument_info.config");
+  AirMspiTimeTable tt(test_data_dir() + "/mspi/3.l1b1.hdf5");
   Time t, t2;
   FrameCoordinate fc;
   tt.time(ImageCoordinate(0, 100), t, fc);
@@ -29,8 +28,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   if(!have_serialize_supported())
     return;
   boost::shared_ptr<TimeTable> 
-    tt(new AirMspiTimeTable(test_data_dir() + "/mspi/3.l1b1.hdf5",
-		    test_data_dir() + "/mspi/3.instrument_info.config"));
+    tt(new AirMspiTimeTable(test_data_dir() + "/mspi/3.l1b1.hdf5"));
   std::string d = serialize_write_string(tt);
   if(false)
     std::cerr << d;

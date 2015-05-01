@@ -12,6 +12,14 @@ namespace MSPI {
 namespace GeoCal {
 /****************************************************************//**
   This provides access to a AirMspiL1b1File. 
+
+  Note that somewhat confusingly, row index is *not* the same as the
+  MspiCamera band index. In fact, for the current configuration the
+  MspiCamera bands run in the *opposite* order from the row index. 
+  You should not assume any particular relationship between the 2,
+  instead you'll want to relate the *row numbers* to each other, which
+  are consistent. AirMspiIgc handles this correctly, but if you are
+  directly working with these classes you'll need to do that yourself.
 *******************************************************************/
 class AirMspiL1b1File: public TiledFile<float, 2> {
 public:
@@ -21,18 +29,45 @@ public:
 		  int Tile_number_sample = -1, 
 		  unsigned int Number_tile = 4);
   virtual ~AirMspiL1b1File() {}
-  int number_row_index() const;
+
+//-----------------------------------------------------------------------
+/// Number of row index. Note that a lot of the MSPI shared stuff is
+/// written using "row_number", which is an underlying CCD row I
+/// think. Row_index is just an index into the available rows.
+//-----------------------------------------------------------------------
+
+  int number_row_index() const 
+  {fill_in_row_number(); return (int) row_number_.size();}
+
   std::vector<std::string> field_names(int Row_index) const;
   float wavelength(int Row_index) const;
   float polarization_angle(int Row_index) const;
   std::string swath_name(int Row_index) const;
+  std::string granule_id() const;
+  std::vector<Time> time() const;
 
 //-----------------------------------------------------------------------
 /// Swath we are using to read data from.
 //-----------------------------------------------------------------------
 
   std::string swath_to_use() const 
-  { return swath_name(row_index_to_row(row_index_to_use)); }
+  { return swath_name(row_index_to_use_); }
+
+//-----------------------------------------------------------------------
+/// Row index to use.
+//-----------------------------------------------------------------------
+
+  int row_index_to_use() const {return row_index_to_use_;}
+
+//-----------------------------------------------------------------------
+/// Row number to use.
+//-----------------------------------------------------------------------
+
+  int row_number_to_use() const 
+  {return row_index_to_row_number(row_index_to_use_);}
+
+  int row_index_to_row_number(int Row_index) const;
+  int row_number_to_row_index(int Row_number) const;
 
 //-----------------------------------------------------------------------
 /// The file name we are using.
@@ -52,8 +87,9 @@ protected:
 			      const float* V) const
   { throw Exception("AirMspiL1b1File is read only, can't write"); }
 private:
-  int row_index_to_use;
-  int row_index_to_row(int Row_index) const;
+  int row_index_to_use_;
+  mutable std::vector<int> row_number_;
+  void fill_in_row_number() const;
   std::string fname;
   boost::shared_ptr<MSPI::Shared::L1B1Reader> l1b1_reader;
   AirMspiL1b1File() {}

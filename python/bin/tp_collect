@@ -82,7 +82,9 @@ Options:
        [default: 20.0]
 
   --number-feature=n
-       Number of features to match for. [default: 500]
+       Number of features to match for. Note that a value of 0 means "find 
+       as many as you can", and for smaller images this if often a good 
+       choice. [default: 500]
 
    --number-octave-levels=n
        Number of octave levels to include in feature matching. [default: 4]
@@ -90,7 +92,9 @@ Options:
    --number-ref-feature=n
        Number of features to match for in reference image. Since reference
        image covers a larger area, usually you want this larger than
-       "--number-feature" value. [default: 1000]
+       "--number-feature" value. Note that a value of 0 means "find 
+       as many as you can", and for smaller images this if often a good 
+       choice. [default: 1000]
 
   --number-process=n 
        Number of processors to use. [default: 1]
@@ -275,8 +279,8 @@ else:
     tparr = image_match_tp_collect(args, igc, mi, refimg, pool)
 
 if(args.outlier_reject_ransac):
-    tparr = outlier_reject_ransc(tparr, ref_image = refimg, 
-                        threshold = args.outlier_reject_ransac_threshold)
+    tparr = outlier_reject_ransac(tparr, ref_image = refimg, 
+                           threshold = args.outlier_reject_ransac_threshold)
 
 try:
     # Ok if this fails, it just means args.output doesn't exist yet

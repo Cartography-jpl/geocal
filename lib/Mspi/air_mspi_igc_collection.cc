@@ -39,12 +39,12 @@ AirMspiIgcCollection::AirMspiIgcCollection
  const std::string& Swath_to_use,
  int Dem_resolution,
  const std::string& Base_directory)
-  : base_directory(Base_directory),
-    camera_(Cam),
-    orbit_(Orb),
-    dem(D),
-    swath_to_use(Swath_to_use),
-    dem_resolution(Dem_resolution)
+  :  dem(D),
+     dem_resolution(Dem_resolution),
+     camera_(Cam),
+     orbit_(Orb),
+     base_directory(Base_directory),
+     swath_to_use(Swath_to_use)
 {
   BOOST_FOREACH(const std::string& fname, L1b1_file_name) {
     MspiConfigFile vc;

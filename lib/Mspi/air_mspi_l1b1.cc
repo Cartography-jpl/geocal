@@ -150,6 +150,22 @@ std::string AirMspiL1b1File::granule_id() const
 #endif
 }
 
+void AirMspiL1b1File::read_tile(const boost::array<index, 2>& Min_index, 
+	       const boost::array<index, 2>& Max_index, 
+	       float* Res) const
+{
+#ifdef HAVE_MSPI_SHARED
+  boost::multi_array<float, 2> d = 
+    l1b1_reader->read_data(row_number_to_use(), "I", Min_index[0],
+			   Max_index[0] - Min_index[0]);
+  for(int i = 0; i < d.shape()[0]; ++i)
+    for(int j = Min_index[1]; j < Max_index[1]; ++j, ++Res)
+      *Res = d[i][j];
+#else
+  throw Exception("This class requires that MSPI Shared library be available");
+#endif
+}
+
 //-----------------------------------------------------------------------
 /// Return the time for each line.
 //-----------------------------------------------------------------------

@@ -85,10 +85,7 @@ protected:
   typedef TiledFile<float, 2>::index index;
   virtual void read_tile(const boost::array<index, 2>& Min_index, 
 			 const boost::array<index, 2>& Max_index, 
-			 float* Res) const
-  {
-    //Temp
-  }
+			 float* Res) const;
   virtual void write_tile(const boost::array<index, 2>& Min_index, 
 			      const boost::array<index, 2>& Max_index, 
 			      const float* V) const

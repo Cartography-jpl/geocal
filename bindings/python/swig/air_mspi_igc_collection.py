@@ -139,9 +139,10 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
     def __init__(self, *args): 
         """
         AirMspiIgcCollection::AirMspiIgcCollection(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
-        Camera > &Cam, const boost::shared_ptr< Dem > &D, const std::vector<
-        std::string > &L1b1_file_name, int Reference_row, int
-        Dem_resolution=10, const std::string &Base_directory=".")
+        MspiCamera > &Cam, const boost::shared_ptr< Dem > &D, const
+        std::vector< std::string > &L1b1_file_name, const std::string
+        &Swath_to_use="660-I", int Dem_resolution=10, const std::string
+        &Base_directory=".")
         This create a AirMspiIgcCollection by directly giving the various
         pieces needed to construct it. 
         """

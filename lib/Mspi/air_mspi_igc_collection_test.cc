@@ -13,6 +13,7 @@ BOOST_AUTO_TEST_CASE(chain_test)
     igcol(test_data_dir() + "mspi/3.master.config", 
 	  test_data_dir() + "mspi/3.nav_gimbal.hdf4",
 	  test_data_dir() + "mspi/3.l1b1_table",
+	  "660-I",
 	  test_data_dir() + "mspi");
   BOOST_CHECK_EQUAL(igcol.number_image(), 2);
   BOOST_CHECK_EQUAL(igcol.number_band(0), 14);
@@ -30,6 +31,7 @@ BOOST_AUTO_TEST_CASE(serialization)
     (new  AirMspiIgcCollection (test_data_dir() + "mspi/3.master.config", 
 				test_data_dir() + "mspi/3.nav_gimbal.hdf4",
 				test_data_dir() + "mspi/3.l1b1_table",
+				"660-I",
 				test_data_dir() + "mspi"));
   std::string d = serialize_write_string(igcol);
   if(false)

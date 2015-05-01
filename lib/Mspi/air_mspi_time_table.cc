@@ -14,7 +14,7 @@ void AirMspiTimeTable::save(Archive & ar, const unsigned int version) const
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_BASE(AirMspiTimeTable, TimeTable);
-  ar & GEOCAL_NVP(l1b1_file);
+  ar & GEOCAL_NVP_(l1b1_file);
 }
 
 template<class Archive>
@@ -22,7 +22,7 @@ void AirMspiTimeTable::load(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_BASE(AirMspiTimeTable, TimeTable);
-  ar & GEOCAL_NVP(l1b1_file);
+  ar & GEOCAL_NVP_(l1b1_file);
   read_data();
 }
 
@@ -36,7 +36,7 @@ GEOCAL_SPLIT_IMPLEMENT(AirMspiTimeTable);
 AirMspiTimeTable::AirMspiTimeTable
 (const std::string& L1b1_file_name, 
  const std::string& Swath_to_use)
-  : l1b1_file(new AirMspiL1b1File(L1b1_file_name, Swath_to_use))
+  : l1b1_file_(new AirMspiL1b1File(L1b1_file_name, Swath_to_use))
 {
   read_data();
 }
@@ -44,13 +44,13 @@ AirMspiTimeTable::AirMspiTimeTable
 void AirMspiTimeTable::read_data()
 {
   min_line_ = 0;
-  tlist = l1b1_file->time();
+  tlist = l1b1_file_->time();
 }
 
 void AirMspiTimeTable::print(std::ostream& Os) const 
 {
   Os << "AirMspiTimeTable:\n"
      << "  L1b1 file name: " << l1b1_file_name() << "\n"
-     << "  Swath to use:   " << l1b1_file->swath_to_use() << "\n";
+     << "  Swath to use:   " << l1b1_file_->swath_to_use() << "\n";
 }
 

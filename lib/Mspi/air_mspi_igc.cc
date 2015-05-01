@@ -33,9 +33,13 @@ AirMspiIgc::AirMspiIgc
 (const std::string& Master_config_file,
  const std::string& Orbit_file_name,
  const std::string& L1b1_file_name,
- int Band,
+ const std::string& Swath_to_use,
  const std::string& Base_directory,
- const std::string& Title)
+ const std::string& Title,
+ int Tile_number_line,
+ int Tile_number_sample, 
+ unsigned int Number_tile
+)
 {
   MspiConfigFile c(Master_config_file);
   // Get camera set up
@@ -79,15 +83,18 @@ AirMspiIgc::AirMspiIgc
   }
 
   // Get the time table and L1B1 data.
-  boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name));
+  boost::shared_ptr<AirMspiTimeTable> 
+    tt(new AirMspiTimeTable(L1b1_file_name, Swath_to_use));
   Time tmin = std::max(orb->min_time(), tt->min_time());
   Time tmax = std::min(orb->max_time(), tt->max_time());
+  int band = cam->band_number(tt->l1b1_file()->row_number_to_use());
 
-  // Short term, have image empty.
-  boost::shared_ptr<RasterImage> img;
+  boost::shared_ptr<RasterImage> img
+    (new AirMspiL1b1(tt->l1b1_file(), Tile_number_line, Tile_number_sample,
+		     Number_tile));
 
   // Ready now to initialize ipi and Igc
-  boost::shared_ptr<Ipi> ipi(new Ipi(orb, cam, Band, tmin, tmax, tt));
+  boost::shared_ptr<Ipi> ipi(new Ipi(orb, cam, band, tmin, tmax, tt));
   initialize(ipi, dem, img, Title, dem_resolution);
 }
 
@@ -99,23 +106,39 @@ AirMspiIgc::AirMspiIgc
 
 AirMspiIgc::AirMspiIgc
 (const boost::shared_ptr<Orbit>& Orb,
- const boost::shared_ptr<Camera>& Cam,
+ const boost::shared_ptr<MspiCamera>& Cam,
  const boost::shared_ptr<Dem>& Dem,
  const std::string& L1b1_file_name,
- int Reference_row,
- int Band,
+ const std::string& Swath_to_use,
  const std::string& Title,
- int Dem_resolution)
+ int Dem_resolution,
+ int Tile_number_line,
+ int Tile_number_sample, 
+ unsigned int Number_tile
+ )
 {
-
-  // Short term, have image empty.
-  boost::shared_ptr<RasterImage> img;
-  // Need to come back with Reference_row fix
-  boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name));
+  boost::shared_ptr<AirMspiTimeTable> 
+    tt(new AirMspiTimeTable(L1b1_file_name, Swath_to_use));
+  boost::shared_ptr<RasterImage> img
+    (new AirMspiL1b1(tt->l1b1_file(), Tile_number_line, Tile_number_sample,
+		     Number_tile));
   Time tmin = std::max(Orb->min_time(), tt->min_time());
   Time tmax = std::min(Orb->max_time(), tt->max_time());
-  boost::shared_ptr<Ipi> ipi(new Ipi(Orb, Cam, Band, tmin, tmax, tt));
+  int bandn = Cam->band_number(tt->l1b1_file()->row_number_to_use());
+  boost::shared_ptr<Ipi> ipi(new Ipi(Orb, Cam, bandn, tmin, tmax, tt));
   initialize(ipi, Dem, img, Title, Dem_resolution);
+}
+
+//-----------------------------------------------------------------------
+/// Set band that we are using.
+//-----------------------------------------------------------------------
+
+void AirMspiIgc::band(int B) 
+{ 
+  ipi_ptr()->band(B);
+  int rind = 
+    time_table()->l1b1_file()->row_number_to_row_index(camera()->row_number(B));
+  time_table()->l1b1_file()->row_index_to_use(rind);
 }
 
 void AirMspiIgc::print(std::ostream& Os) const 

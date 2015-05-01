@@ -5397,42 +5397,12 @@ SWIG_From_std_string  (const std::string& s)
 }
 
 
-SWIGINTERN int
-SWIG_AsVal_std_string (PyObject * obj, std::string *val)
-{
-  std::string* v = (std::string *) 0;
-  int res = SWIG_AsPtr_std_string (obj, &v);
-  if (!SWIG_IsOK(res)) return res;
-  if (v) {
-    if (val) *val = *v;
-    if (SWIG_IsNewObj(res)) {
-      delete v;
-      res = SWIG_DelNewMask(res);
-    }
-    return res;
+  namespace swig {
+    template <>  struct traits<GeoCal::Time > {
+      typedef pointer_category category;
+      static const char* type_name() { return"GeoCal::Time"; }
+    };
   }
-  return SWIG_ERROR;
-}
-
-
-namespace swig {
-  template <> struct traits<std::string > {
-    typedef value_category category;
-    static const char* type_name() { return"std::string"; }
-  };  
-  template <>  struct traits_asval<std::string > {   
-    typedef std::string value_type;
-    static int asval(PyObject *obj, value_type *val) { 
-      return SWIG_AsVal_std_string (obj, val);
-    }
-  };
-  template <>  struct traits_from<std::string > {
-    typedef std::string value_type;
-    static PyObject *from(const value_type& val) {
-      return SWIG_From_std_string  (val);
-    }
-  };
-}
 
 
 namespace swig {
@@ -5531,6 +5501,54 @@ namespace swig {
       }
     };
   }
+
+
+      namespace swig {
+	template <>  struct traits<std::vector<GeoCal::Time, std::allocator< GeoCal::Time > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "GeoCal::Time" "," "std::allocator< GeoCal::Time >" " >";
+	  }
+	};
+      }
+    
+
+SWIGINTERN int
+SWIG_AsVal_std_string (PyObject * obj, std::string *val)
+{
+  std::string* v = (std::string *) 0;
+  int res = SWIG_AsPtr_std_string (obj, &v);
+  if (!SWIG_IsOK(res)) return res;
+  if (v) {
+    if (val) *val = *v;
+    if (SWIG_IsNewObj(res)) {
+      delete v;
+      res = SWIG_DelNewMask(res);
+    }
+    return res;
+  }
+  return SWIG_ERROR;
+}
+
+
+namespace swig {
+  template <> struct traits<std::string > {
+    typedef value_category category;
+    static const char* type_name() { return"std::string"; }
+  };  
+  template <>  struct traits_asval<std::string > {   
+    typedef std::string value_type;
+    static int asval(PyObject *obj, value_type *val) { 
+      return SWIG_AsVal_std_string (obj, val);
+    }
+  };
+  template <>  struct traits_from<std::string > {
+    typedef std::string value_type;
+    static PyObject *from(const value_type& val) {
+      return SWIG_From_std_string  (val);
+    }
+  };
+}
 
 
       namespace swig {
@@ -6029,6 +6047,178 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_AirMspiL1b1File__v_row_index_to_use(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiL1b1File *arg1 = (GeoCal::AirMspiL1b1File *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiL1b1File__v_row_index_to_use" "', argument " "1"" of type '" "GeoCal::AirMspiL1b1File const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::AirMspiL1b1File const *)arg1)->row_index_to_use();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiL1b1File__v_row_number_to_use(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiL1b1File *arg1 = (GeoCal::AirMspiL1b1File *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiL1b1File__v_row_number_to_use" "', argument " "1"" of type '" "GeoCal::AirMspiL1b1File const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::AirMspiL1b1File const *)arg1)->row_number_to_use();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiL1b1File__v_granule_id(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiL1b1File *arg1 = (GeoCal::AirMspiL1b1File *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiL1b1File__v_granule_id" "', argument " "1"" of type '" "GeoCal::AirMspiL1b1File const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::AirMspiL1b1File const *)arg1)->granule_id();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiL1b1File__v_time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiL1b1File *arg1 = (GeoCal::AirMspiL1b1File *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiL1b1File__v_time" "', argument " "1"" of type '" "GeoCal::AirMspiL1b1File const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::AirMspiL1b1File const *)arg1)->time();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_AirMspiL1b1File_field_names(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::AirMspiL1b1File *arg1 = (GeoCal::AirMspiL1b1File *) 0 ;
@@ -6223,6 +6413,106 @@ SWIGINTERN PyObject *_wrap_AirMspiL1b1File_swath_name(PyObject *SWIGUNUSEDPARM(s
     }
   }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiL1b1File_row_index_to_row_number(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiL1b1File *arg1 = (GeoCal::AirMspiL1b1File *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  int result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiL1b1File_row_index_to_row_number",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiL1b1File_row_index_to_row_number" "', argument " "1"" of type '" "GeoCal::AirMspiL1b1File const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiL1b1File_row_index_to_row_number" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = (int)((GeoCal::AirMspiL1b1File const *)arg1)->row_index_to_row_number(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiL1b1File_row_number_to_row_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiL1b1File *arg1 = (GeoCal::AirMspiL1b1File *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  int result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiL1b1File_row_number_to_row_index",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiL1b1File_row_number_to_row_index" "', argument " "1"" of type '" "GeoCal::AirMspiL1b1File const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiL1b1File * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiL1b1File_row_number_to_row_index" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = (int)((GeoCal::AirMspiL1b1File const *)arg1)->row_number_to_row_index(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -6585,6 +6875,270 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_AirMspiL1b1__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > *arg1 = 0 ;
+  int arg2 ;
+  int arg3 ;
+  unsigned int arg4 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > temp2shared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  unsigned int val4 ;
+  int ecode4 = 0 ;
+  GeoCal::AirMspiL1b1 *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AirMspiL1b1" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::AirMspiL1b1File > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_AirMspiL1b1" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_AirMspiL1b1" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_unsigned_SS_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_AirMspiL1b1" "', argument " "4"" of type '" "unsigned int""'");
+  } 
+  arg4 = static_cast< unsigned int >(val4);
+  {
+    try {
+      result = (GeoCal::AirMspiL1b1 *)new GeoCal::AirMspiL1b1((boost::shared_ptr< GeoCal::AirMspiL1b1File > const &)*arg1,arg2,arg3,arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AirMspiL1b1 > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiL1b1 >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AirMspiL1b1__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > *arg1 = 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > temp2shared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::AirMspiL1b1 *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AirMspiL1b1" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::AirMspiL1b1File > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_AirMspiL1b1" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_AirMspiL1b1" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (GeoCal::AirMspiL1b1 *)new GeoCal::AirMspiL1b1((boost::shared_ptr< GeoCal::AirMspiL1b1File > const &)*arg1,arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AirMspiL1b1 > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiL1b1 >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AirMspiL1b1__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > *arg1 = 0 ;
+  int arg2 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > temp2shared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  GeoCal::AirMspiL1b1 *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AirMspiL1b1" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::AirMspiL1b1File > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_AirMspiL1b1" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = (GeoCal::AirMspiL1b1 *)new GeoCal::AirMspiL1b1((boost::shared_ptr< GeoCal::AirMspiL1b1File > const &)*arg1,arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AirMspiL1b1 > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiL1b1 >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AirMspiL1b1__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > *arg1 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiL1b1File > temp2shared1 ;
+  GeoCal::AirMspiL1b1 *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AirMspiL1b1" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::AirMspiL1b1File > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    try {
+      result = (GeoCal::AirMspiL1b1 *)new GeoCal::AirMspiL1b1((boost::shared_ptr< GeoCal::AirMspiL1b1File > const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AirMspiL1b1 > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiL1b1 >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_AirMspiL1b1(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[6];
@@ -6592,14 +7146,86 @@ SWIGINTERN PyObject *_wrap_new_AirMspiL1b1(PyObject *self, PyObject *args) {
   if (!(argc = SWIG_Python_UnpackTuple(args,"new_AirMspiL1b1",0,5,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_new_AirMspiL1b1__SWIG_8(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 1) {
     return _wrap_new_AirMspiL1b1__SWIG_4(self, argc, argv);
   }
+  if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_AirMspiL1b1__SWIG_7(self, argc, argv);
+  }
+check_3:
+  
   if (argc == 2) {
     return _wrap_new_AirMspiL1b1__SWIG_3(self, argc, argv);
   }
   if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_AirMspiL1b1__SWIG_6(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 3) {
     return _wrap_new_AirMspiL1b1__SWIG_2(self, argc, argv);
   }
+  if (argc == 4) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_7;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_7;
+    {
+      {
+        int res = SWIG_AsVal_unsigned_SS_int(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_7;
+    return _wrap_new_AirMspiL1b1__SWIG_5(self, argc, argv);
+  }
+check_7:
+  
   if (argc == 4) {
     return _wrap_new_AirMspiL1b1__SWIG_1(self, argc, argv);
   }
@@ -6614,7 +7240,11 @@ fail:
     "    GeoCal::AirMspiL1b1::AirMspiL1b1(std::string const &,std::string const &,int,int)\n"
     "    GeoCal::AirMspiL1b1::AirMspiL1b1(std::string const &,std::string const &,int)\n"
     "    GeoCal::AirMspiL1b1::AirMspiL1b1(std::string const &,std::string const &)\n"
-    "    GeoCal::AirMspiL1b1::AirMspiL1b1(std::string const &)\n");
+    "    GeoCal::AirMspiL1b1::AirMspiL1b1(std::string const &)\n"
+    "    GeoCal::AirMspiL1b1::AirMspiL1b1(boost::shared_ptr< GeoCal::AirMspiL1b1File > const &,int,int,unsigned int)\n"
+    "    GeoCal::AirMspiL1b1::AirMspiL1b1(boost::shared_ptr< GeoCal::AirMspiL1b1File > const &,int,int)\n"
+    "    GeoCal::AirMspiL1b1::AirMspiL1b1(boost::shared_ptr< GeoCal::AirMspiL1b1File > const &,int)\n"
+    "    GeoCal::AirMspiL1b1::AirMspiL1b1(boost::shared_ptr< GeoCal::AirMspiL1b1File > const &)\n");
   return 0;
 }
 
@@ -6681,7 +7311,7 @@ static PyMethodDef SwigMethods[] = {
 		"Constructor. \n"
 		""},
 	 { (char *)"AirMspiL1b1File__v_number_row_index", (PyCFunction)_wrap_AirMspiL1b1File__v_number_row_index, METH_O, (char *)"\n"
-		"int AirMspiL1b1File::number_row_index() const\n"
+		"int GeoCal::AirMspiL1b1File::number_row_index() const\n"
 		"Number of row index.\n"
 		"\n"
 		"Note that a lot of the MSPI shared stuff is written using\n"
@@ -6695,6 +7325,22 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"AirMspiL1b1File__v_swath_to_use", (PyCFunction)_wrap_AirMspiL1b1File__v_swath_to_use, METH_O, (char *)"\n"
 		"std::string GeoCal::AirMspiL1b1File::swath_to_use() const\n"
 		"Swath we are using to read data from. \n"
+		""},
+	 { (char *)"AirMspiL1b1File__v_row_index_to_use", (PyCFunction)_wrap_AirMspiL1b1File__v_row_index_to_use, METH_O, (char *)"\n"
+		"void GeoCal::AirMspiL1b1File::row_index_to_use(int Row_index)\n"
+		"\n"
+		""},
+	 { (char *)"AirMspiL1b1File__v_row_number_to_use", (PyCFunction)_wrap_AirMspiL1b1File__v_row_number_to_use, METH_O, (char *)"\n"
+		"int GeoCal::AirMspiL1b1File::row_number_to_use() const\n"
+		"Row number to use. \n"
+		""},
+	 { (char *)"AirMspiL1b1File__v_granule_id", (PyCFunction)_wrap_AirMspiL1b1File__v_granule_id, METH_O, (char *)"\n"
+		"std::string AirMspiL1b1File::granule_id() const\n"
+		"Return the granule id. \n"
+		""},
+	 { (char *)"AirMspiL1b1File__v_time", (PyCFunction)_wrap_AirMspiL1b1File__v_time, METH_O, (char *)"\n"
+		"std::vector< Time > AirMspiL1b1File::time() const\n"
+		"Return the time for each line. \n"
 		""},
 	 { (char *)"AirMspiL1b1File_field_names", _wrap_AirMspiL1b1File_field_names, METH_VARARGS, (char *)"\n"
 		"std::vector< std::string > AirMspiL1b1File::field_names(int Row_index) const\n"
@@ -6712,6 +7358,14 @@ static PyMethodDef SwigMethods[] = {
 		"std::string AirMspiL1b1File::swath_name(int Row_index) const\n"
 		"Return the swath name for the given row_index. \n"
 		""},
+	 { (char *)"AirMspiL1b1File_row_index_to_row_number", _wrap_AirMspiL1b1File_row_index_to_row_number, METH_VARARGS, (char *)"\n"
+		"int AirMspiL1b1File::row_index_to_row_number(int Row_index) const\n"
+		"Map Row index to row number. \n"
+		""},
+	 { (char *)"AirMspiL1b1File_row_number_to_row_index", _wrap_AirMspiL1b1File_row_number_to_row_index, METH_VARARGS, (char *)"\n"
+		"int AirMspiL1b1File::row_number_to_row_index(int Row_number) const\n"
+		"Map row number to row index. \n"
+		""},
 	 { (char *)"delete_AirMspiL1b1File", (PyCFunction)_wrap_delete_AirMspiL1b1File, METH_O, (char *)"\n"
 		"virtual GeoCal::AirMspiL1b1File::~AirMspiL1b1File()\n"
 		"\n"
@@ -6719,8 +7373,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"AirMspiL1b1File_swigregister", AirMspiL1b1File_swigregister, METH_VARARGS, NULL},
 	 { (char *)"AirMspiL1b1File_swiginit", AirMspiL1b1File_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_AirMspiL1b1", _wrap_new_AirMspiL1b1, METH_VARARGS, (char *)"\n"
-		"AirMspiL1b1::AirMspiL1b1(const std::string &Fname, const std::string &Swath_to_use=\"660-I\",\n"
-		"int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int\n"
+		"AirMspiL1b1::AirMspiL1b1(const boost::shared_ptr< AirMspiL1b1File > &L1b1_file, int\n"
+		"Tile_number_line=-1, int Tile_number_sample=-1, unsigned int\n"
 		"Number_tile=4)\n"
 		"Constructor. \n"
 		""},

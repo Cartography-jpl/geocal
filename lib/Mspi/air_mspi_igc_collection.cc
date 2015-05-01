@@ -19,6 +19,7 @@ void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(orbit)
     & GEOCAL_NVP_(view_config)
     & GEOCAL_NVP(base_directory)
+    & GEOCAL_NVP(swath_to_use)
     & GEOCAL_NVP_(min_l1b1_line) & GEOCAL_NVP_(max_l1b1_line);
 }
 
@@ -32,16 +33,17 @@ GEOCAL_IMPLEMENT(AirMspiIgcCollection);
 
 AirMspiIgcCollection::AirMspiIgcCollection
 (const boost::shared_ptr<Orbit>& Orb,
- const boost::shared_ptr<Camera>& Cam,
+ const boost::shared_ptr<MspiCamera>& Cam,
  const boost::shared_ptr<Dem>& D,
  const std::vector<std::string>& L1b1_file_name,
- int Reference_row,
+ const std::string& Swath_to_use,
  int Dem_resolution,
  const std::string& Base_directory)
   : base_directory(Base_directory),
     camera_(Cam),
     orbit_(Orb),
     dem(D),
+    swath_to_use(Swath_to_use),
     dem_resolution(Dem_resolution)
 {
   BOOST_FOREACH(const std::string& fname, L1b1_file_name) {
@@ -64,9 +66,11 @@ AirMspiIgcCollection::AirMspiIgcCollection
  const std::string& Master_config_file,
  const std::string& Orbit_file_name,
  const std::string& L1b1_table,
+ const std::string& Swath_to_use,
  const std::string& Base_directory
 )
-  : base_directory(Base_directory)
+  : base_directory(Base_directory),
+    swath_to_use(Swath_to_use)
 {
   MspiConfigFile c(Master_config_file);
 
@@ -142,9 +146,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
 void AirMspiIgcCollection::calc_min_max_l1b1_line()
 {
   for(int i = 0; i < number_image(); ++i) {
-    // Come back to reference_row_
-    //    AirMspiTimeTable tt(l1b1_file_name(i), reference_row_);
-    AirMspiTimeTable tt(l1b1_file_name(i));
+    AirMspiTimeTable tt(l1b1_file_name(i), swath_to_use);
     view_config_[i].add("l1b1_granule_id", tt.l1b1_granule_id());
     int min_ln = tt.min_line();
     int max_ln = tt.max_line();
@@ -187,8 +189,7 @@ AirMspiIgcCollection::air_mspi_igc(int Image_index) const
 					  camera_,
 					  dem,
 					  l1b1_file_name(Image_index), 
-					  -1,
-					  0,
+					  swath_to_use,
 					  "Image",
 					  dem_resolution));
   }
@@ -232,6 +233,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
   camera_ = Original.camera_;
   orbit_ = Original.orbit_;
   base_directory = Original.base_directory;
+  swath_to_use = Original.swath_to_use;
   BOOST_FOREACH(int i, Index_set) {
     view_config_.push_back(MspiConfigFile(Original.view_config_[i]));
     min_l1b1_line_.push_back(Original.min_l1b1_line_[i]);

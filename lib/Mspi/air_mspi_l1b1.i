@@ -41,6 +41,10 @@ public:
 	      int Tile_number_line = -1,
 	      int Tile_number_sample = -1, 
 	      unsigned int Number_tile = 4);
+  AirMspiL1b1(const boost::shared_ptr<AirMspiL1b1File>& L1b1_file,
+	      int Tile_number_line = -1,
+	      int Tile_number_sample = -1, 
+	      unsigned int Number_tile = 4);
   %pickle_serialization();
 };
 }

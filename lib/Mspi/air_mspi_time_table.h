@@ -19,15 +19,22 @@ public:
 /// The file name we are using.
 //-----------------------------------------------------------------------
 
-  std::string l1b1_file_name() const { return l1b1_file->file_name(); }
+  std::string l1b1_file_name() const { return l1b1_file_->file_name(); }
 
 //-----------------------------------------------------------------------
 /// The file granule id we are using.
 //-----------------------------------------------------------------------
 
-  std::string l1b1_granule_id() const { return l1b1_file->granule_id(); }
+  std::string l1b1_granule_id() const { return l1b1_file_->granule_id(); }
+
+//-----------------------------------------------------------------------
+/// Underlying L1b1File.
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<AirMspiL1b1File>& l1b1_file() const 
+  { return l1b1_file_; } 
 private:
-  boost::shared_ptr<AirMspiL1b1File> l1b1_file;
+  boost::shared_ptr<AirMspiL1b1File> l1b1_file_;
   void read_data();
   AirMspiTimeTable() {}
   friend class boost::serialization::access;

@@ -129,6 +129,14 @@ class AirMspiL1b1File(geocal_swig.generic_object.GenericObject):
     """
     This provides access to a AirMspiL1b1File.
 
+    Note that somewhat confusingly, row index is not the same as the
+    MspiCamera band index. In fact, for the current configuration the
+    MspiCamera bands run in the opposite order from the row index. You
+    should not assume any particular relationship between the 2, instead
+    you'll want to relate the row numbers to each other, which are
+    consistent. AirMspiIgc handles this correctly, but if you are directly
+    working with these classes you'll need to do that yourself.
+
     C++ includes: air_mspi_l1b1.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -143,7 +151,7 @@ class AirMspiL1b1File(geocal_swig.generic_object.GenericObject):
         _air_mspi_l1b1.AirMspiL1b1File_swiginit(self,_air_mspi_l1b1.new_AirMspiL1b1File(*args))
     def _v_number_row_index(self):
         """
-        int AirMspiL1b1File::number_row_index() const
+        int GeoCal::AirMspiL1b1File::number_row_index() const
         Number of row index.
 
         Note that a lot of the MSPI shared stuff is written using
@@ -178,6 +186,50 @@ class AirMspiL1b1File(geocal_swig.generic_object.GenericObject):
     def swath_to_use(self):
         return self._v_swath_to_use()
 
+    def _v_row_index_to_use(self):
+        """
+        void GeoCal::AirMspiL1b1File::row_index_to_use(int Row_index)
+
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File__v_row_index_to_use(self)
+
+    @property
+    def row_index_to_use(self):
+        return self._v_row_index_to_use()
+
+    def _v_row_number_to_use(self):
+        """
+        int GeoCal::AirMspiL1b1File::row_number_to_use() const
+        Row number to use. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File__v_row_number_to_use(self)
+
+    @property
+    def row_number_to_use(self):
+        return self._v_row_number_to_use()
+
+    def _v_granule_id(self):
+        """
+        std::string AirMspiL1b1File::granule_id() const
+        Return the granule id. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File__v_granule_id(self)
+
+    @property
+    def granule_id(self):
+        return self._v_granule_id()
+
+    def _v_time(self):
+        """
+        std::vector< Time > AirMspiL1b1File::time() const
+        Return the time for each line. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File__v_time(self)
+
+    @property
+    def time(self):
+        return self._v_time()
+
     def field_names(self, *args):
         """
         std::vector< std::string > AirMspiL1b1File::field_names(int Row_index) const
@@ -206,6 +258,20 @@ class AirMspiL1b1File(geocal_swig.generic_object.GenericObject):
         """
         return _air_mspi_l1b1.AirMspiL1b1File_swath_name(self, *args)
 
+    def row_index_to_row_number(self, *args):
+        """
+        int AirMspiL1b1File::row_index_to_row_number(int Row_index) const
+        Map Row index to row number. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File_row_index_to_row_number(self, *args)
+
+    def row_number_to_row_index(self, *args):
+        """
+        int AirMspiL1b1File::row_number_to_row_index(int Row_number) const
+        Map row number to row index. 
+        """
+        return _air_mspi_l1b1.AirMspiL1b1File_row_number_to_row_index(self, *args)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -213,10 +279,16 @@ class AirMspiL1b1File(geocal_swig.generic_object.GenericObject):
 AirMspiL1b1File._v_number_row_index = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File__v_number_row_index,None,AirMspiL1b1File)
 AirMspiL1b1File._v_file_name = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File__v_file_name,None,AirMspiL1b1File)
 AirMspiL1b1File._v_swath_to_use = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File__v_swath_to_use,None,AirMspiL1b1File)
+AirMspiL1b1File._v_row_index_to_use = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File__v_row_index_to_use,None,AirMspiL1b1File)
+AirMspiL1b1File._v_row_number_to_use = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File__v_row_number_to_use,None,AirMspiL1b1File)
+AirMspiL1b1File._v_granule_id = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File__v_granule_id,None,AirMspiL1b1File)
+AirMspiL1b1File._v_time = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File__v_time,None,AirMspiL1b1File)
 AirMspiL1b1File.field_names = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File_field_names,None,AirMspiL1b1File)
 AirMspiL1b1File.wavelength = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File_wavelength,None,AirMspiL1b1File)
 AirMspiL1b1File.polarization_angle = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File_polarization_angle,None,AirMspiL1b1File)
 AirMspiL1b1File.swath_name = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File_swath_name,None,AirMspiL1b1File)
+AirMspiL1b1File.row_index_to_row_number = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File_row_index_to_row_number,None,AirMspiL1b1File)
+AirMspiL1b1File.row_number_to_row_index = new_instancemethod(_air_mspi_l1b1.AirMspiL1b1File_row_number_to_row_index,None,AirMspiL1b1File)
 AirMspiL1b1File_swigregister = _air_mspi_l1b1.AirMspiL1b1File_swigregister
 AirMspiL1b1File_swigregister(AirMspiL1b1File)
 
@@ -229,8 +301,8 @@ class AirMspiL1b1(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        AirMspiL1b1::AirMspiL1b1(const std::string &Fname, const std::string &Swath_to_use="660-I",
-        int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int
+        AirMspiL1b1::AirMspiL1b1(const boost::shared_ptr< AirMspiL1b1File > &L1b1_file, int
+        Tile_number_line=-1, int Tile_number_sample=-1, unsigned int
         Number_tile=4)
         Constructor. 
         """

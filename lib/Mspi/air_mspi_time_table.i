@@ -8,6 +8,7 @@
 %}
 
 %base_import(time_table)
+%import "air_mspi_l1b1.i"
 
 %geocal_shared_ptr(GeoCal::AirMspiTimeTable);
 namespace GeoCal {
@@ -17,6 +18,7 @@ public:
 		   const std::string& Swath_to_use = "660-I");
   %python_attribute(l1b1_file_name, std::string);
   %python_attribute(l1b1_granule_id, std::string);
+  %python_attribute(l1b1_file, boost::shared_ptr<AirMspiL1b1File>);
   %pickle_serialization();
 };
 }

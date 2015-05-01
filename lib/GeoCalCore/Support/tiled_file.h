@@ -681,6 +681,21 @@ protected:
   }
 
 //-----------------------------------------------------------------------
+/// Clear out tiles, useful if something has changed to make cache
+/// data invalid (e.g., we changed the band we are looking at).
+//-----------------------------------------------------------------------
+  
+  virtual void clear_tile() const
+  {
+    boost::array<index, D> min_index;
+    for(std::size_t i = 0; i < D; ++i)
+      min_index[i] = 0;
+    typedef Tile<T, D> Tl;
+    BOOST_FOREACH(Tl& t, tile_)
+      t.swap(min_index, min_index);
+  }
+  
+//-----------------------------------------------------------------------
 /// Write a tile to disk. Derived classes need to supply this function.
 //-----------------------------------------------------------------------
 

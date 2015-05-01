@@ -34,7 +34,7 @@ template<class Archive>
 void AirMspiL1b1::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageTiledFile)
-    & GEOCAL_NVP(l1b1);
+    & GEOCAL_NVP_(l1b1_file);
 }
 
 GEOCAL_IMPLEMENT(AirMspiL1b1);
@@ -222,8 +222,23 @@ AirMspiL1b1::AirMspiL1b1
  int Tile_number_sample,
  unsigned int Number_tile
 )
+  : l1b1_file_(new AirMspiL1b1File(Fname, Swath_to_use, Tile_number_line, 
+				   Tile_number_sample, Number_tile))
 {
-  l1b1.reset(new AirMspiL1b1File(Fname, Swath_to_use, Tile_number_line, 
-				 Tile_number_sample, Number_tile));
-  initialize(l1b1);
+  initialize(l1b1_file_);
+}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+AirMspiL1b1::AirMspiL1b1
+(const boost::shared_ptr<AirMspiL1b1File>& L1b1_file,
+ int Tile_number_line,
+ int Tile_number_sample,
+ unsigned int Number_tile
+)
+  : l1b1_file_(L1b1_file)
+{
+  initialize(l1b1_file_);
 }

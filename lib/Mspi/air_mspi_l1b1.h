@@ -66,6 +66,13 @@ public:
   int row_number_to_use() const 
   {return row_index_to_row_number(row_index_to_use_);}
 
+  void row_index_to_use(int Row_index) 
+  { 
+    flush();
+    clear_tile();
+    row_index_to_use_ = Row_index;
+  }
+    
   int row_index_to_row_number(int Row_index) const;
   int row_number_to_row_index(int Row_number) const;
 
@@ -108,9 +115,20 @@ public:
 	      int Tile_number_line = -1,
 	      int Tile_number_sample = -1, 
 	      unsigned int Number_tile = 4);
+  AirMspiL1b1(const boost::shared_ptr<AirMspiL1b1File>& L1b1_file,
+	      int Tile_number_line = -1,
+	      int Tile_number_sample = -1, 
+	      unsigned int Number_tile = 4);
   virtual ~AirMspiL1b1() {}
+
+//-----------------------------------------------------------------------
+/// Underlying L1b1File.
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<AirMspiL1b1File>& l1b1_file() const 
+  { return l1b1_file_; } 
 private:
-  boost::shared_ptr<AirMspiL1b1File> l1b1;
+  boost::shared_ptr<AirMspiL1b1File> l1b1_file_;
   AirMspiL1b1() {}
   friend class boost::serialization::access;
   template<class Archive>

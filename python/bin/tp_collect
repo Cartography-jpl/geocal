@@ -120,9 +120,9 @@ Options:
        we are close enough that we can still used this approximation to look
        for outliers.
 
-   --outlier-reject-ransac-threshold=f
+   --outlier-reject-ransac-threshold=d
        Threshold to use in rejecting outliers using "--outlier-reject-ransac"
-       [default: 3.0]
+       [default: 3]
 
   --reference-dem=shelve
        DEM to use with the reference image specified as file:key. 

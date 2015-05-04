@@ -478,7 +478,7 @@ def _outlier_reject_ransac(ind1, ind2_or_ref_img, tpcol, threshold):
     bad_pt = ind[m[:,0]]
     return [tp for i, tp in enumerate(tpcol) if i not in bad_pt]
 
-def outlier_reject_ransac(tpcol, ref_image = None, threshold = 3.0):
+def outlier_reject_ransac(tpcol, ref_image = None, threshold = 3):
     '''This remove outliers from a TiePointCollection. This fits the
     tiepoints between pairs of images to create the Fundamental Matrix, 
     rejecting outliers using Random sample consensus (RANSAC).

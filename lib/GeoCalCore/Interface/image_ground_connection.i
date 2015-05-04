@@ -198,9 +198,7 @@ public:
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
   %python_attribute(igc_original, boost::shared_ptr<ImageGroundConnection>)
-  %pickle_init(1, self.igc_original, self.dem, self.image,
-	       self.image_multi_band, self.title, self.image_mask,
-	       self.ground_mask)
+  %pickle_serialization();
 };
 
 }

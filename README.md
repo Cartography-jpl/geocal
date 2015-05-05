@@ -12,6 +12,26 @@ This uses the standard autotools build (the configure/make cycle common
 to many software packages). Generic instructions can be be found in
 the [INSTALL](INSTALL) file.
 
+A note on the build. We have unit tests run with the standard GNU target
+"make check". There is also a standard GNU target "installcheck" that can
+be used to run unit tests that require the install step first. However this
+is less commonly known, so I wanted to point this out. The various python 
+unit tests can only be tested after an install. So a full test cycle would
+be:
+
+'''
+make -j 20 all
+make -j 20 check
+make install
+make -j 20 installcheck
+''''
+
+Replace -j 20 with whatever is reasonable on your system. Also note that
+the install step can't be done in parallel, again this is pretty standard
+GNU build.
+
+## Dependencies
+
 The GeoCal library has a few required library dependencies, and a number
 of optional libraries. The configure step will search for the optional
 libraries, and in if found the code that depends on them will be included.
@@ -47,3 +67,82 @@ GeoCal is now configured
   Have VICAR GDAL Plugin:        yes
   Have VICAR Run Time Library:   yes
 ```
+
+The required libraries are [http://www.boost.org](Boost) 
+(need version >= 1.46), [http://sourceforge.net/projects/blitz/](Blitz) (need
+0.9), [http://www.gnu.org/software/gsl](GSL), 
+[http://naif.jpl.nasa.gov/naif/toolkit.html](CSPICE),
+[http://www.gdal.org](GDAL), [https://www.python.org/](python).
+
+A few notes, we require Blitz version 0.9, not the latest 0.10. There were
+incompatible changes made in the update from 0.9 to 0.10, and we have not
+modified GeoCal for the changes yet.
+
+The normal distribution of CSPICE is a static library. We require a shared
+verison of this library. A shared build of this is available in the much
+larger [https://github.jpl.nasa.gov/Cartography/afids](AFIDS) package. 
+Contact the software author (Mike.M.Smyth@jpl.nasa.gov) for a simple tar 
+file to build just CSPICE. I have plans to pull this out as a separate
+git repository, but this hasn't been done yet. 
+
+In addition, CSPICE depends on a number of spice kernels to actually work.
+Again, we have the at [https://github.jpl.nasa.gov/Cartography/afids](AFIDS),
+but contact Mike.M.Smyth@jpl.nasa.gov to give you just the data files. 
+
+When using the CSPICE library, you'll need to set the environment variable
+SPICEDATA to point to the location of the data, e.g.,:
+
+'''
+export SPICEDATA=/data/linux_ops/AIRMSPI/tools_03232015/install_fedora20/data/cspice
+'''
+
+(This is not needed to build or run the unit tests).
+
+The python version should be 2.7, we don't support python 3 yet. In addition
+to python, you should have the python libraries numpy, scipy, matplotlib,
+h5py, nose, sphinx, and recommended by not required ipython. I often install
+these in a virtual environment, which you can do if you don't want to 
+install these at the system level.
+
+## Optional dependencies
+
+There are other libraries that will be used if available.
+
+The [http://www.stack.nl/~dimitri/doxygen](Doxygen) tools will be used to
+make HTML documentation of the C++ library. This documentation is also
+available in python.
+
+The [http://www.swig.org/](SWIG) tool is used to create python wrappers.
+This is only needed if you are doing code development, if you just want to
+build the existing python wrappers SWIG is not necessary.
+
+The library 
+[https://github.jpl.nasa.gov/Cartography/vicar_gdalplugin](VICAR GDAL Plugin)
+adds support to GDAL for the VICAR file format.
+
+The library
+[https://github.jpl.nasa.gov/Cartography/vicar_rtl](VICAR RTL) gives support
+for reading and writing VICAR format files. Even without this library GeoCal
+has some basic support for reading VICAR file format.
+
+The AFIDS data directories can be used to supply various data sets such
+as the SRTM DEM. Contact Mike.M.Smyth@jpl.nasa.gov for details about this.
+
+The [http://www.hdfgroup.org/HDF5](HDF5) library can be used to directly
+read and write HDF 5. There is also already support in GDAL for using HDF 5
+(depending on the build options used for GDAL).
+
+The [http://www.fftw.org](FFTW) library can be used to do phase correlation
+image matching.
+
+The carto library is used for a few cartography lab classes. These are 
+primarily used for backwards testing, most people will not be interested
+in this code.
+
+The python OGR library is an optional installation of 
+[http://www.gdal.org](GDAL). If available, this can be used by code that
+works with for example ESRI Shape files.
+
+The [https://github.jpl.nasa.gov/MSPI/MSPI-Shared](MSPI-Shared) library
+can be used to support MSPI file format read and write classes.
+

@@ -20,7 +20,8 @@ If not found, then that portion of the library will not be built.
 A summary of what will be built will be displayed at the end of the configure
 step. For example:
 
-`pistol% ../geocal-repo/configure
+```
+pistol% ../geocal-repo/configure
   <lots of checking messages>
 
 GeoCal is now configured
@@ -45,4 +46,4 @@ GeoCal is now configured
   Have SPICE:                    yes
   Have VICAR GDAL Plugin:        yes
   Have VICAR Run Time Library:   yes
-`
+```

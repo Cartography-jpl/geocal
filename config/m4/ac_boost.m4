@@ -138,6 +138,61 @@ if test "x$want_boost" = "xyes"; then
  	   ])
  	   AC_LANG_POP([C++])
         fi
+# We have a fix needed for specific versions of boost. Go ahead and
+# check for these.
+        if test "$succeeded" = "yes" ; then
+	   CPPFLAGS_SAVED="$CPPFLAGS"
+	   CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
+	   export CPPFLAGS
+
+ 	   LDFLAGS_SAVED="$LDFLAGS"
+ 	   LDFLAGS="$LDFLAGS $BOOST_LDFLAGS"
+ 	   export LDFLAGS
+
+ 	   AC_REQUIRE([AC_PROG_CXX])
+ 	   AC_LANG_PUSH(C++)
+
+ 	   AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+ 	   @%:@include <boost/version.hpp>
+ 	   ]], [[
+ 	   #if BOOST_VERSION / 100 == 1056
+ 	   // At 1.56
+ 	   #else
+ 	   #  error Boost version is not 1.56
+ 	   #endif
+ 	   ]])],[
+	   BOOST_CPPFLAGS="-I$srcdir/boost_fix/1.56 $BOOST_CPPFLAGS"
+ 	   ],[
+ 	   ])
+
+ 	   AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+ 	   @%:@include <boost/version.hpp>
+ 	   ]], [[
+ 	   #if BOOST_VERSION / 100 == 1057
+ 	   // At 1.57
+ 	   #else
+ 	   #  error Boost version is not 1.57
+ 	   #endif
+ 	   ]])],[
+	   BOOST_CPPFLAGS="-I$srcdir/boost_fix/1.57 $BOOST_CPPFLAGS"
+ 	   ],[
+ 	   ])
+
+ 	   AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+ 	   @%:@include <boost/version.hpp>
+ 	   ]], [[
+ 	   #if BOOST_VERSION / 100 == 1058
+ 	   // At 1.58
+ 	   #else
+ 	   #  error Boost version is not 1.58
+ 	   #endif
+ 	   ]])],[
+	   BOOST_CPPFLAGS="-I$srcdir/boost_fix/1.58 $BOOST_CPPFLAGS"
+ 	   ],[
+ 	   ])
+
+ 	   AC_LANG_POP([C++])
+        fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])

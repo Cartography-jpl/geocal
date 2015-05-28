@@ -68,7 +68,7 @@ protected:
     get_helper_collection(){
         return *this;
     }
-a    // account for bogus gcc warning
+    // account for bogus gcc warning
     #if defined(__GNUC__)
     virtual
     #endif

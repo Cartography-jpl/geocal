@@ -57,7 +57,7 @@ def test_view_angle():
 def test_footprint_geometry():
     igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", dem)
     # Depends on options used in build, we might not have this available
-    if(not igc1.footprint_geometry):
+    if(not have_shape_file):
         raise SkipTest
     g = igc1.footprint_geometry()
     assert g.IsValid()

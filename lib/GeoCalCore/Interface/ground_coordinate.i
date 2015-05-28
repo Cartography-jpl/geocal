@@ -81,6 +81,8 @@ public:
       enu_to_cf(const GroundCoordinate& Ref_pt);
   static LnLookVector solar_look_vector(const Time& T, 
 					const GroundCoordinate& Ref_pt);
+  %python_attribute(view_azimuth, double)
+  %python_attribute(view_zenith, double)
   %pickle_init(1, self.look_vector[0], self.look_vector[1],
 	       self.look_vector[2])
 };

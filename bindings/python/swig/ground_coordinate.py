@@ -436,6 +436,14 @@ class LnLookVector(geocal_swig.look_vector.LookVectorDouble):
     cf_to_enu = staticmethod(_ground_coordinate.LnLookVector_cf_to_enu)
     enu_to_cf = staticmethod(_ground_coordinate.LnLookVector_enu_to_cf)
     solar_look_vector = staticmethod(_ground_coordinate.LnLookVector_solar_look_vector)
+    @property
+    def view_azimuth(self):
+        return self._v_view_azimuth()
+
+    @property
+    def view_zenith(self):
+        return self._v_view_zenith()
+
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -446,6 +454,8 @@ class LnLookVector(geocal_swig.look_vector.LookVectorDouble):
     __swig_destroy__ = _ground_coordinate.delete_LnLookVector
 LnLookVector.to_cf = new_instancemethod(_ground_coordinate.LnLookVector_to_cf,None,LnLookVector)
 LnLookVector.__str__ = new_instancemethod(_ground_coordinate.LnLookVector___str__,None,LnLookVector)
+LnLookVector._v_view_azimuth = new_instancemethod(_ground_coordinate.LnLookVector__v_view_azimuth,None,LnLookVector)
+LnLookVector._v_view_zenith = new_instancemethod(_ground_coordinate.LnLookVector__v_view_zenith,None,LnLookVector)
 LnLookVector_swigregister = _ground_coordinate.LnLookVector_swigregister
 LnLookVector_swigregister(LnLookVector)
 

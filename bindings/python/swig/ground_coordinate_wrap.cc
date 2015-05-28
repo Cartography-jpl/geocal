@@ -8610,6 +8610,92 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_LnLookVector__v_view_azimuth(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::LnLookVector *arg1 = (GeoCal::LnLookVector *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::LnLookVector const > tempshared1 ;
+  boost::shared_ptr< GeoCal::LnLookVector const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector__v_view_azimuth" "', argument " "1"" of type '" "GeoCal::LnLookVector const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVector > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVector > * >(argp1);
+      arg1 = const_cast< GeoCal::LnLookVector * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVector > * >(argp1);
+      arg1 = const_cast< GeoCal::LnLookVector * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::LnLookVector const *)arg1)->view_azimuth();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_LnLookVector__v_view_zenith(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::LnLookVector *arg1 = (GeoCal::LnLookVector *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::LnLookVector const > tempshared1 ;
+  boost::shared_ptr< GeoCal::LnLookVector const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector__v_view_zenith" "', argument " "1"" of type '" "GeoCal::LnLookVector const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVector > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVector > * >(argp1);
+      arg1 = const_cast< GeoCal::LnLookVector * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVector > * >(argp1);
+      arg1 = const_cast< GeoCal::LnLookVector * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::LnLookVector const *)arg1)->view_zenith();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_LnLookVector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::LnLookVector *arg1 = (GeoCal::LnLookVector *) 0 ;
@@ -12046,6 +12132,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"LnLookVector_cf_to_enu", (PyCFunction)_wrap_LnLookVector_cf_to_enu, METH_O, NULL},
 	 { (char *)"LnLookVector_enu_to_cf", (PyCFunction)_wrap_LnLookVector_enu_to_cf, METH_O, NULL},
 	 { (char *)"LnLookVector_solar_look_vector", _wrap_LnLookVector_solar_look_vector, METH_VARARGS, NULL},
+	 { (char *)"LnLookVector__v_view_azimuth", (PyCFunction)_wrap_LnLookVector__v_view_azimuth, METH_O, NULL},
+	 { (char *)"LnLookVector__v_view_zenith", (PyCFunction)_wrap_LnLookVector__v_view_zenith, METH_O, NULL},
 	 { (char *)"delete_LnLookVector", (PyCFunction)_wrap_delete_LnLookVector, METH_O, NULL},
 	 { (char *)"LnLookVector_swigregister", LnLookVector_swigregister, METH_VARARGS, NULL},
 	 { (char *)"LnLookVector_swiginit", LnLookVector_swiginit, METH_VARARGS, NULL},

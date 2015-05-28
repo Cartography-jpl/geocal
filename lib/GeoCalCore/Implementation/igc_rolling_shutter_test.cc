@@ -5,7 +5,9 @@
 #include "simple_dem.h"
 #include "memory_raster_image.h"
 #include "ecr.h"
+#ifdef HAVE_HDF5
 #include "hdf_orbit.h"
+#endif
 #include "eci_tod.h"
 #include "orbit_offset_correction.h"
 #include "igc_collection.h"

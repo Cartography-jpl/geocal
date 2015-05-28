@@ -1,5 +1,7 @@
 #include "unit_test_support.h"
+#ifdef HAVE_HDF5
 #include "hdf_orbit.h"
+#endif
 #include "eci_tod.h"
 #include "orbit_offset_correction.h"
 #include "geocal_quaternion.h"

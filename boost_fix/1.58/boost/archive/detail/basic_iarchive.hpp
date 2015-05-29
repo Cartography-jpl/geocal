@@ -66,6 +66,7 @@ protected:
     virtual
     #endif
     ~basic_iarchive();
+public:
     // note: NOT part of the public API.
     void next_object_pointer(void *t);
     void register_basic_serializer(

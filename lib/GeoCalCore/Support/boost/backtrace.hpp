@@ -9,6 +9,7 @@
 #define BOOST_BACKTRACE_HPP
 
 #include <boost/config.hpp>
+#include <string>
 #include <stdexcept>
 #include <typeinfo>
 #include <vector>

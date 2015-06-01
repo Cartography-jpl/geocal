@@ -12,6 +12,13 @@
 #include <vector>
 
 namespace GeoCal {
+
+class QuaternionOrbitData;
+boost::shared_ptr<QuaternionOrbitData>
+  interpolate(const QuaternionOrbitData& t1, 
+	      const QuaternionOrbitData& t2, 
+	      const TimeWithDerivative& tm);
+
 /****************************************************************//**
   This class is used to convert ScLookVector,
   CartesianInertialLookVector and CartesianFixedLookVector to and 
@@ -856,10 +863,6 @@ private:
   void serialize(Archive & ar, const unsigned int version);
 };
 
-  boost::shared_ptr<QuaternionOrbitData>
-  interpolate(const QuaternionOrbitData& t1, 
-	      const QuaternionOrbitData& t2, 
-	      const TimeWithDerivative& tm);
 }
 
 GEOCAL_EXPORT_KEY(QuaternionOrbitData);

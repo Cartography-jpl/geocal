@@ -2,13 +2,7 @@ from geocal_swig import *
 import numpy as np
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
-try:
-    # Depending of the build options, this might be missing. Just skip stuff
-    # depending on ShapeFile if we don't have this.
-    from shape_file import *
-    have_shape_file = True
-except ImportError:
-    have_shape_file = False
+from shape_file import *
 
 # Add some useful functions to RasterImage
 def _read_with_pad(self, Lstart, Sstart, Number_line, Number_sample):

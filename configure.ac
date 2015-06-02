@@ -73,10 +73,6 @@ AC_CARTO(optional, cannot_build, default_search)
 AFIDS_PYTHON(required, can_build, default_search)
 
 #=================================================================
-# Python OGR library
-AC_PYTHON_OGR(optional, cannot_build, default_search)
-
-#=================================================================
 # Location of all the source code directories
 GEOCAL_SOURCE_DIRECTORY
 
@@ -186,7 +182,6 @@ LOC_MSG([  Have FFTW:                     ${have_fftw}])
 LOC_MSG([  Have HDF5:                     ${have_hdf5}])
 LOC_MSG([  Have HDFEOS5:                  ${have_hdfeos5}])
 LOC_MSG([  Have MSPI-Shared:              ${have_mspi_shared}])
-LOC_MSG([  Have Python OGR Module:        ${have_python_ogr}])
 LOC_MSG([  Have SPICE:                    ${have_spice}])
 LOC_MSG([  Have VICAR GDAL Plugin:        ${have_vicar_gdalplugin}])
 LOC_MSG([  Have VICAR Run Time Library:   ${have_vicar_rtl}])

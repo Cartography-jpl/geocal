@@ -3,13 +3,7 @@ from math import *
 import numpy as np
 import os.path
 import re
-try:
-    # Depending of the build options, this might be missing. Just skip stuff
-    # depending on ShapeFile if we don't have this.
-    from shape_file import *
-    have_shape_file = True
-except ImportError:
-    have_shape_file = False
+from shape_file import *
 
 def _new_from_init(cls, version, *args):
     '''Handle older versions'''

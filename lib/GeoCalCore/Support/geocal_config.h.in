@@ -1,7 +1,21 @@
-/* lib/GeoCalCore/Support/geocal_config.h.in.  Generated from configure.ac by autoheader.  */
+/* geocal/lib/GeoCalCore/Support/geocal_config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Disable assertions in boost */
 #undef BOOST_DISABLE_ASSERTS
+
+/* Define to dummy `main' function (if any) required to link to the Fortran
+   libraries. */
+#undef F77_DUMMY_MAIN
+
+/* Define to a macro mangling the given C identifier (in lower and upper
+   case), which must not contain underscores, for linking with Fortran. */
+#undef F77_FUNC
+
+/* As F77_FUNC, but for C identifiers containing underscores. */
+#undef F77_FUNC_
+
+/* Define if F77 and FC dummy `main' functions are identical. */
+#undef FC_DUMMY_MAIN_EQ_F77
 
 /* Defined if we have boost serialization */
 #undef GEOCAL_HAVE_BOOST_SERIALIZATION
@@ -21,11 +35,17 @@
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 
+/* Defined if we have Expat */
+#undef HAVE_EXPAT
+
 /* Defined if we have FFTW */
 #undef HAVE_FFTW
 
 /* Defined if we have GDAL */
 #undef HAVE_GDAL
+
+/* Defined if we have GEOS */
+#undef HAVE_GEOS
 
 /* Defined if we have GSL */
 #undef HAVE_GSL
@@ -44,6 +64,12 @@
 
 /* Define if you have ncurses.h */
 #undef HAVE_NCURSES_H
+
+/* Defined if we have Ogdi */
+#undef HAVE_OGDI
+
+/* Defined if we have Openjpeg */
+#undef HAVE_OPENJPEG
 
 /* Define to 1 if you have the `sincos' function. */
 #undef HAVE_SINCOS
@@ -74,6 +100,9 @@
 
 /* Defined if we have VICAR RTL */
 #undef HAVE_VICAR_RTL
+
+/* Include AFIDS configuration A stuff */
+#undef INCLUDE_AFIDS_A
 
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */

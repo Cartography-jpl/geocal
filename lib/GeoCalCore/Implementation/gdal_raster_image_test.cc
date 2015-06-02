@@ -66,6 +66,8 @@ BOOST_AUTO_TEST_CASE(create)
   GdalRasterImage out("test_out/gdalrpc.tif", "gtiff", 10, 11, 1, 
 		      GdalRasterImage::Byte);
   Rpc rpc;
+  rpc.error_bias = 0;
+  rpc.error_random = 0;
   rpc.rpc_type = Rpc::RPC_B;
   rpc.line_offset = 2881;
   rpc.line_scale = 2921;

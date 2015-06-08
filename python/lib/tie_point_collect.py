@@ -53,6 +53,7 @@ class TiePointCollect(object):
                  end_image_index = None,
                  avg_level = 0, use_intersection = False,
                  grid_spacing = 1,
+                 surface_image = None,
                  scale_factor = None):
         '''This sets up for doing tie point collection. A IgcCollection
         needs to be supplied.
@@ -73,6 +74,10 @@ class TiePointCollect(object):
         between 0.0 and 1.0. Since the image matchers expect integer
         data, you want get any results unless you scale to a different
         range.
+
+        You can pass a list of surface projected images to match with.
+        These should be the projection of the igc_collection, and can
+        be used as an alternative to doing the projection on the fly.
         
         There is a trade off between getting the largest coverage (by
         taking a union of all the igc on the surface) and the
@@ -110,8 +115,14 @@ class TiePointCollect(object):
                 igc2 = ImageGroundConnectionCopy(igc2)
                 igc2.image = ScaleImage(igc2.image, scale_factor)
             if(map_info is None):
-                self.itoim[j] = IgcImageToImageMatch(igc1, igc2,
-                                                     image_matcher)
+                if(surface_image is None):
+                    self.itoim[j] = IgcImageToImageMatch(igc1, igc2,
+                                                         image_matcher)
+                else:
+                    self.itoim[j] = \
+                        SurfaceImageToImageMatch(igc1, surface_image[i],
+                                                 igc2, surface_image[j],
+                                                 image_matcher)
             else:
                 self.itoim[j] = SurfaceImageToImageMatch(igc1, igc2, 
                               map_info, image_matcher, grid_spacing)
@@ -124,6 +135,7 @@ class TiePointCollect(object):
                 "start_image_index" : self.start_image_index,
                 "end_image_index" : self.end_image_index,
                 "avg_level" : self.avg_level,
+                "surface_image" : self.surface_image,
                 "scale_factor": self.scale_factor
                 }
 
@@ -134,6 +146,7 @@ class TiePointCollect(object):
                       start_image_index = dict["start_image_index"],
                       end_image_index = dict["end_image_index"],
                       avg_level = dict["avg_level"],
+                      surface_image = dict["surface_image"],
                       scale_factor = dict["scale_factor"]
                       )
 

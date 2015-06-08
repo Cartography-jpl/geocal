@@ -1246,7 +1246,7 @@ am__can_run_installinfo = \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
 am__geocalpkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
-	@srcpythonlib@/job_handle.py \
+	@srcpythonlib@/job_handle.py @srcpythonlib@/ipython.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py \
 	@srcpythonlib@/igc_collection_extension.py \
@@ -2583,7 +2583,7 @@ _swig_wrap_la_LIBADD = libgeocal.la
 _swig_wrap_la_SOURCES = $(INCLUDE_SWIG_SRC) @swigsrc@/swig_wrap.cc
 installafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
-	@srcpythonlib@/job_handle.py \
+	@srcpythonlib@/job_handle.py @srcpythonlib@/ipython.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py \
 	@srcpythonlib@/igc_collection_extension.py \

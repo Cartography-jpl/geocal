@@ -9,6 +9,9 @@ class TiePoint(object):
     This is a tiepoint. This is little more than a structure.
     This contains the following pieces
 
+    id
+       ID number, can be used to identify a tie point.
+
     image_location
        This is an array of a fixed number of cameras. A location
        either is \'None\' if we don\'t have an image location for that, or
@@ -26,6 +29,7 @@ class TiePoint(object):
         self.image_location = [None] * ncam
         self.ground_location = None
         self.is_gcp = False
+        self.id = 1
 
     @property
     def number_camera(self):

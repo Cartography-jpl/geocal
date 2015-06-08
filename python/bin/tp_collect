@@ -303,6 +303,9 @@ try:
 except KeyError:
     pass
 
+for i in range(len(tparr)):
+    tparr[i].id = i
+
 write_shelve(args.output, tparr)
 
 

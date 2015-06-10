@@ -9,13 +9,14 @@ import warnings
 warnings.simplefilter(action = "ignore", category = FutureWarning)
 from IPython.html.widgets import interact
 
-def tie_point_display(tpcol, igccol):
+def tie_point_display(tpcol, igccol, surface_image=None):
     '''This function is a simple wrapper around the tiepoint display
     routine, which allows some simple widget modifications.
     '''
     def tpdisp(scale = 3, size="50", tpind="0"):
         plt.rcParams["figure.figsize"] = (6 * scale, 4 * scale)
-        tpcol[int(tpind)].display(igccol, int(size))
+        tpcol[int(tpind)].display(igccol, int(size), 
+                                  surface_image = surface_image)
     interact(tpdisp, scale = 3, size="50", tpind="0")
 
 def load_ipython_extension(ipython):

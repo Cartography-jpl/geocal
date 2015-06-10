@@ -101,6 +101,7 @@ class TiePointCollect(object):
         self.base_image_index = base_image_index
         self.max_ground_covariance = max_ground_covariance
         self.igc_collection = igc_collection
+        self.surface_image = surface_image
         self.ri = RayIntersect2(self.igc_collection,
                                 max_ground_covariance = max_ground_covariance)
         self.itoim = [None]*self.igc_collection.number_image 

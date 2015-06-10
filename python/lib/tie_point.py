@@ -45,7 +45,7 @@ class TiePoint(object):
         return res
 
     def display(self, igc_coll, sz = 500, ref_image = None, number_row = None,
-                map_info = None):
+                map_info = None, surface_image = None):
         '''This executes plt.imshow for the images that make up this
         tiepoint.  Since we don't store the images in a tiepoint, you
         need to also pass in the IgcCollection that this tiepoint
@@ -58,6 +58,9 @@ class TiePoint(object):
         If you supply a mapinfo, we project the imagery to the surface
         (useful for data that is very distorted from one view to another, or to
         compare to reference image).
+
+        As an alternative to mapinfo, you can supply a list of already 
+        projected images. This should have been projected using igc_coll.
         '''
 
         nimg = self.number_camera
@@ -76,6 +79,9 @@ class TiePoint(object):
                                                igc_coll.image_ground_connection(i))
                     pt = igc_proj.coordinate(igc_coll.ground_coordinate(i, self.image_location[i][0]))
                     igc_proj.display(pt, sz)
+                elif(surface_image):
+                    pt = surface_image[i].coordinate(igc_coll.ground_coordinate(i, self.image_location[i][0]))
+                    surface_image[i].display(pt, sz)
                 else:
                     igc_coll.image(i).display(self.image_location[i][0], sz)
         if(ref_image is not None):

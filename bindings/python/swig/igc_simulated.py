@@ -144,16 +144,17 @@ class IgcSimulated(geocal_swig.calc_raster.CalcRaster):
 
     We do this in two steps:
 
-    We calculate roughly what the difference in resolution is between the
-    original data and the image we are generating. We do this by looking
-    at the center pixel of the original data and the pixel +1 in line and
-    sample. We then use RasterAveraged to average the original data to
-    roughly the resolution of the final image. If the final image is near
-    the same resolution as the original, or if it has a higher resolution,
-    then we don't do any averaging. Alternatively, you can pass in the
-    averaging factor (include a value of 1 which turns this behavior off).
+    1. We calculate roughly what the difference in resolution is between
+    the original data and the image we are generating. We do this by
+    looking at the center pixel of the original data and the pixel +1 in
+    line and sample. We then use RasterAveraged to average the original
+    data to roughly the resolution of the final image. If the final image
+    is near the same resolution as the original, or if it has a higher
+    resolution, then we don't do any averaging. Alternatively, you can
+    pass in the averaging factor (include a value of 1 which turns this
+    behavior off).
 
-    We then interpolate the possibly averaged data to the final image.
+    2. We then interpolate the possibly averaged data to the final image.
 
     This class calculates the data on the fly. Sometimes this is what you
     want, but if you are going to be using the resulting data a few times,

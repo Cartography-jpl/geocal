@@ -167,7 +167,7 @@ class GroundMask(geocal_swig.generic_object.GenericObject):
     small areas where these difference aren't very important. If you need
     detailed, accurate information about a region in a specific map
     projection then you should simply look at each individual point. The
-    region is useful for the "don't bother looking here for tie points,
+    region is useful for the "don't bother   looking here for tie points,
     look somewhere else" sorts of uses.
 
     If the region search returns true, then all of the region is masked.

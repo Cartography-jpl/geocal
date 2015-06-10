@@ -1,0 +1,73 @@
+#! /usr/bin/env python
+#
+# This projects all the images of a IGC collection to a common projection
+# on the surface. This can be used as a first step to generating tiepoints.
+
+from geocal import *
+import multiprocessing
+from multiprocessing import Pool
+
+version = "June 10, 2015"
+usage='''Usage: 
+  surface_image_project [options] <igccol> <basefname> <output>
+  surface_image_project -h | --help
+  surface_image_project -v | --version
+
+This projects all the images of a IGC collection to a common projection
+on the surface. This can be used as a first step to generating tiepoints.
+
+The basefname is used for the base file name to use. If this is "foo" then
+the first index of the igc is sames as foo0.img, the second as foo1.img, etc.
+
+We project the base image at full resolution, and then all the other image 
+index to the same project (and same subset)
+
+Options:
+  -h --help         
+       Print this message
+
+  --base-image-index=n
+       The image to consider the base image in matching. [default: 0]
+
+  --number-process=n
+       Number of processors to use. [default: 1]
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+igccol = read_shelve(args.igccol)
+igcbase = igccol.image_ground_connection(args.base_image_index)
+mibase = cib01_mapinfo(igcbase.resolution_meter())
+mi = igcbase.cover(mibase)
+
+class ProjectWrap(object):
+    '''Wrapper to project an image, so we can do this in parallel'''
+    def __init__(self, basefname, igccol, mi):
+        self.igccol = igccol
+        self.mi = mi
+        self.basefname = basefname
+    def __call__(self, i):
+        print "Doing %d" % i
+        t = IgcMapProjected(self.mi, self.igccol.image_ground_connection(i), 10)
+        f = VicarRasterImage("%s%d.img" % (self.basefname, i), t.map_info, 
+                             "HALF")
+        f.close()
+        f = VicarLiteRasterImage("%s%d.img" % (self.basefname, i), 1, 
+                                 VicarLiteFile.UPDATE)
+        copy(t, f)
+        print "Done with %d" % i 
+
+func = ProjectWrap(args.basefname, igccol, mi)
+if(args.number_process > 1):
+    pool = Pool(args.number_process)
+    res = pool.map(func, range(igccol.number_image))
+else:
+    res = map(func, range(igccol.number_image))
+
+surface_image = [VicarLiteRasterImage("%s%d.img" % (args.basefname, i)) 
+                 for i in range(igccol.number_image)]
+
+write_shelve(args.output, surface_image)

@@ -136,12 +136,18 @@ Options:
        base image. See also --map-info option.
 
   --scale-factor=f
-        You can optionally pass in a scale factor. This is applied to
-        the raster data before image matching. This is useful for
-        example AirMSPI data where the image is a reflectance value
-        between 0.0 and 1.0. Since the image matchers expect integer
-        data, you want get any results unless you scale to a different
-        range.
+       You can optionally pass in a scale factor. This is applied to
+       the raster data before image matching. This is useful for
+       example AirMSPI data where the image is a reflectance value
+       between 0.0 and 1.0. Since the image matchers expect integer
+       data, you want get any results unless you scale to a different
+       range.
+
+  --surface-image=shelve
+       Like project-surface, but use already projected imagery. This will
+       often run much faster, since we don't need to project. The imagery
+       should all be at the same resolution, although it doesn't need to
+       have the same coverage.
 
   --use-intersection 
        This only applies to gcps. There is a trade off between getting
@@ -167,6 +173,10 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
     Collect image matching into a single function, that we can call'''
     tpcollect = []
     msg = []
+    if(args.surface_image):
+        surface_image = read_shelve(args.surface_image)
+    else:
+        surface_image = None
     if(args.gcp):
         if(args.reference_dem):
             dem = read_shelve(args.reference_dem)
@@ -207,6 +217,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
                                              scale_factor = args.scale_factor,
                                              map_info = mi,
                                              grid_spacing = args.grid_spacing,
+                                             surface_image = surface_image,
                                              base_image_index = i,
                                              max_ground_covariance = 
                                              args.max_ground_sigma ** 2))
@@ -221,6 +232,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
                                              scale_factor = args.scale_factor,
                                              map_info = mi,
                                              grid_spacing = args.grid_spacing,
+                                             surface_image = surface_image,
                                              base_image_index = igc.number_image - 1,
                                              max_ground_covariance = 
                                              args.max_ground_sigma ** 2))
@@ -231,6 +243,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
                                          scale_factor = args.scale_factor,
                                          map_info = mi,
                                          grid_spacing = args.grid_spacing,
+                                         surface_image = surface_image,
                                          base_image_index = args.base_image_index,
                                          max_ground_covariance = 
                                          args.max_ground_sigma ** 2))
@@ -302,6 +315,9 @@ try:
         tparr.extend(read_shelve(args.output))
 except KeyError:
     pass
+
+for i in range(len(tparr)):
+    tparr[i].id = i
 
 write_shelve(args.output, tparr)
 

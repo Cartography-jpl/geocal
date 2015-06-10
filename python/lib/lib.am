@@ -1,4 +1,5 @@
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_handle.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/ipython.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/safe_matplotlib_import.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/misc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/igc_collection_extension.py

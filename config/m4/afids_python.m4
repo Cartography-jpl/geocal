@@ -49,7 +49,7 @@ if test "x$want_python" = "xyes"; then
      AM_CONDITIONAL([HAVE_NOSETESTS], [true])
    else
      AC_PYTHON_DEVEL([>= '2.6.1'])
-     AC_PYTHON_MODULE_WITH_VERSION(numpy, [1.6.1], [numpy.version.version])
+     AC_PYTHON_MODULE_WITH_VERSION(numpy, [1.7.0], [numpy.version.version])
      AC_PYTHON_MODULE_WITH_VERSION(scipy, [0.10.1], [scipy.version.version])
      AC_PYTHON_MODULE_WITH_VERSION(matplotlib, [1.0.1], [matplotlib.__version__])
      AC_PYTHON_MODULE(h5py, 1)

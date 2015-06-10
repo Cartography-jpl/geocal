@@ -136,19 +136,15 @@ class MaterialDetect(geocal_swig.calc_raster.CalcRaster):
     We read a IBIS file that describes the thresholds for a number of
     material classes. For each material class, we do the following:
 
-    First, the difference in the pan bands is compared to a threshold. The
-    difference is normally calculated by DoughnutAverage, using the
+    1. First, the difference in the pan bands is compared to a threshold.
+    The difference is normally calculated by DoughnutAverage, using the
     pandif_raster_image. But something else could be used, all this class
     cares about is having a difference it can compare against a threshold.
-
-    Compare pan data to a shadow threshold. This masks at very dark pixels
-    that we assume are in shadow.
-
-    For each point, we calculate the required ratios between the
-    multispectral bands, take the difference with the supplied class mean
-    and divide by the class sigma.
-
-    We sum the abs value of for each of the band ratios divided by the
+    2. Compare pan data to a shadow threshold. This masks at very dark
+    pixels that we assume are in shadow. 3. For each point, we calculate
+    the required ratios between the multispectral bands, take the
+    difference with the supplied class mean and divide by the class sigma.
+    4. We sum the abs value of for each of the band ratios divided by the
     number of band ratios (i.e, we use a L1 norm). This is compared
     against a second threshold.
 

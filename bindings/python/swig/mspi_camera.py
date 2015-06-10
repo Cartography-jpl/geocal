@@ -320,7 +320,8 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         Return angular separation (in radians) between the given reference and
         target bands in the real focal plane.
 
-        (MSPI L1B2 ATB equation 14 modified to use Forigin in place of b0) 
+        (MSPI L1B2 ATB equation 14 -- *modified* to use Forigin in place of
+        b0) 
         """
         return _mspi_camera.MspiCamera_angular_separation(self, *args)
 

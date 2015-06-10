@@ -141,7 +141,7 @@ class VicarLiteFile(geocal_swig.generic_object.GenericObject):
     RTL library, or don't want to be constrained to running in the Vicar
     environment.
 
-    This class does not handle new VICAR features such as compression.
+    This class does *not* handle new VICAR features such as compression.
 
     C++ includes: vicar_lite_file.h 
     """

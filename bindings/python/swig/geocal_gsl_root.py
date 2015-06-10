@@ -145,7 +145,7 @@ def gsl_root_with_derivative(*args):
     Eps=1e-6, double Eps_abs=1e-8)
     This finds the root of a function, and propagates the derivative of
     the solution with respect to any parameters in the function (i.e., we
-    aren't talking about the derivative wrt X here). 
+    *aren't* talking about the derivative wrt X here). 
     """
   return _geocal_gsl_root.gsl_root_with_derivative(*args)
 

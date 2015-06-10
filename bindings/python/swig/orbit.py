@@ -175,14 +175,14 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
 
     def ci_look_vector(self, *args):
         """
-        virtual CartesianInertialLookVector GeoCal::OrbitData::ci_look_vector(const ScLookVector &Sl) const =0
+        virtual CartesianInertialLookVectorWithDerivative GeoCal::OrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const =0
         Convert from ScLookVector to CartesianInertialLookVector. 
         """
         return _orbit.OrbitData_ci_look_vector(self, *args)
 
     def cf_look_vector(self, *args):
         """
-        virtual CartesianFixedLookVector GeoCal::OrbitData::cf_look_vector(const ScLookVector &Sl) const =0
+        virtual CartesianFixedLookVectorWithDerivative GeoCal::OrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const =0
         Convert from ScLookVector to CartesianFixedLookVector. 
         """
         return _orbit.OrbitData_cf_look_vector(self, *args)
@@ -337,7 +337,7 @@ class QuaternionOrbitData(OrbitData):
     the planet, as well as the aberration of light (a small correction due
     to the movement of the spacecraft relative to the planet).
 
-    This does not account for atmospheric refraction. Depending on the
+    This does *not* account for atmospheric refraction. Depending on the
     zenith angle, this can be somewhat important for satellites. From the
     approximate atmospheric model described in "Theoretical Basis of the
     SDP Toolkit Geolocation package for the ECS", Table 6-5 the linear
@@ -353,7 +353,7 @@ class QuaternionOrbitData(OrbitData):
     you can avoid the need of using one of these toolkits.
 
     Note that we allow most pieces of this to be AutoDerivative, useful
-    for propagating jacobians. We do not support time being a
+    for propagating jacobians. We do *not* support time being a
     AutoDerivative, so supporting things like time offset isn't currently
     in here. We probably could do this, we'd just need to think through
     how to support this.
@@ -377,14 +377,14 @@ class QuaternionOrbitData(OrbitData):
         _orbit.QuaternionOrbitData_swiginit(self,_orbit.new_QuaternionOrbitData(*args))
     def ci_look_vector(self, *args):
         """
-        CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVector &Sl) const
+        CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const
         Convert to CartesianInertialLookVector. 
         """
         return _orbit.QuaternionOrbitData_ci_look_vector(self, *args)
 
     def cf_look_vector(self, *args):
         """
-        CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVector &Sl) const
+        CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const
         Convert to CartesianFixedLookVector. 
         """
         return _orbit.QuaternionOrbitData_cf_look_vector(self, *args)

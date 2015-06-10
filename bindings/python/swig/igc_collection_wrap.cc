@@ -8271,7 +8271,11 @@ static PyMethodDef SwigMethods[] = {
 		"the image_coordinate. Callers can catch this exception if they have\n"
 		"some way of handling no image coordinate data. \n"
 		""},
-	 { (char *)"IgcCollection_image_coordinate_jac_cf", _wrap_IgcCollection_image_coordinate_jac_cf, METH_VARARGS, NULL},
+	 { (char *)"IgcCollection_image_coordinate_jac_cf", _wrap_IgcCollection_image_coordinate_jac_cf, METH_VARARGS, (char *)"\n"
+		"virtual blitz::Array<double, 2> GeoCal::IgcCollection::image_coordinate_jac_cf(int Image_index, const CartesianFixed &Gc) const\n"
+		"Return the Jacobian of the image coordinates with respect to the X, Y,\n"
+		"and Z components of the CartesianFixed ground location. \n"
+		""},
 	 { (char *)"IgcCollection_title", _wrap_IgcCollection_title, METH_VARARGS, (char *)"\n"
 		"virtual std::string GeoCal::IgcCollection::title(int Image_index) const\n"
 		"Title that we can use to describe the image.\n"

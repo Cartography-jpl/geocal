@@ -182,6 +182,14 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
         """
         return _igc_collection.IgcCollection_image_coordinate(self, *args)
 
+    def image_coordinate_jac_cf(self, *args):
+        """
+        virtual blitz::Array<double, 2> GeoCal::IgcCollection::image_coordinate_jac_cf(int Image_index, const CartesianFixed &Gc) const
+        Return the Jacobian of the image coordinates with respect to the X, Y,
+        and Z components of the CartesianFixed ground location. 
+        """
+        return _igc_collection.IgcCollection_image_coordinate_jac_cf(self, *args)
+
     def title(self, *args):
         """
         virtual std::string GeoCal::IgcCollection::title(int Image_index) const

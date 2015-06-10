@@ -21486,11 +21486,11 @@ static PyMethodDef SwigMethods[] = {
 		"value. \n"
 		""},
 	 { (char *)"OrbitData_ci_look_vector", _wrap_OrbitData_ci_look_vector, METH_VARARGS, (char *)"\n"
-		"virtual CartesianInertialLookVector GeoCal::OrbitData::ci_look_vector(const ScLookVector &Sl) const =0\n"
+		"virtual CartesianInertialLookVectorWithDerivative GeoCal::OrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const =0\n"
 		"Convert from ScLookVector to CartesianInertialLookVector. \n"
 		""},
 	 { (char *)"OrbitData_cf_look_vector", _wrap_OrbitData_cf_look_vector, METH_VARARGS, (char *)"\n"
-		"virtual CartesianFixedLookVector GeoCal::OrbitData::cf_look_vector(const ScLookVector &Sl) const =0\n"
+		"virtual CartesianFixedLookVectorWithDerivative GeoCal::OrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const =0\n"
 		"Convert from ScLookVector to CartesianFixedLookVector. \n"
 		""},
 	 { (char *)"OrbitData_sc_look_vector", _wrap_OrbitData_sc_look_vector, METH_VARARGS, (char *)"\n"
@@ -21572,11 +21572,11 @@ static PyMethodDef SwigMethods[] = {
 		"coordinates). \n"
 		""},
 	 { (char *)"QuaternionOrbitData_ci_look_vector", _wrap_QuaternionOrbitData_ci_look_vector, METH_VARARGS, (char *)"\n"
-		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVector &Sl) const\n"
+		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const\n"
 		"Convert to CartesianInertialLookVector. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_cf_look_vector", _wrap_QuaternionOrbitData_cf_look_vector, METH_VARARGS, (char *)"\n"
-		"CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVector &Sl) const\n"
+		"CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const\n"
 		"Convert to CartesianFixedLookVector. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_sc_look_vector", _wrap_QuaternionOrbitData_sc_look_vector, METH_VARARGS, (char *)"\n"

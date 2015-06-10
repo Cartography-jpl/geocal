@@ -129,11 +129,11 @@ class AirMspiL1b1File(geocal_swig.generic_object.GenericObject):
     """
     This provides access to a AirMspiL1b1File.
 
-    Note that somewhat confusingly, row index is not the same as the
+    Note that somewhat confusingly, row index is *not* the same as the
     MspiCamera band index. In fact, for the current configuration the
-    MspiCamera bands run in the opposite order from the row index. You
+    MspiCamera bands run in the *opposite* order from the row index. You
     should not assume any particular relationship between the 2, instead
-    you'll want to relate the row numbers to each other, which are
+    you'll want to relate the *row numbers* to each other, which are
     consistent. AirMspiIgc handles this correctly, but if you are directly
     working with these classes you'll need to do that yourself.
 

@@ -146,7 +146,7 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
 
     Also a note for developers. The Vicar RTL library uses various
     variable argument functions. You need to end the list of arguments
-    with "NULL". Note that a cast to a point type is mandatory, you
+    with "NULL". Note that a cast to a point type is *mandatory*, you
     can't just say "0". If say "0" then you will get fairly difficult
     to track down errors. Without the cast, this gets passed as an int,
     which the RTL library code will then try to interpret as a char *.

@@ -182,7 +182,7 @@ class Rpc(geocal_swig.generic_object.GenericObject):
     treat these as integers. If you store a RPC into a file with one of
     these formats, the data will be truncated. If you plan on saving to
     one of these formats, you should be aware of this and keep these an
-    whole numbers. This limitation is not present in the VICAR file
+    whole numbers. This limitation is *not* present in the VICAR file
     format.
 
     C++ includes: geocal_rpc.h 
@@ -336,7 +336,7 @@ class Rpc(geocal_swig.generic_object.GenericObject):
         and just skips to the next point. But if we are using python code for
         the ImageGroundConnection we can't translate errors to
         ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
-        optionally specify Ignore_error as true, in which case we ignore all
+        optionally specify Ignore_error as true, in which case we ignore *all*
         exceptions and just skip to the next point.
 
         We normally look at all image points when generating the RPC. You can
@@ -483,7 +483,7 @@ def Rpc_generate_rpc(*args):
     and just skips to the next point. But if we are using python code for
     the ImageGroundConnection we can't translate errors to
     ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
-    optionally specify Ignore_error as true, in which case we ignore all
+    optionally specify Ignore_error as true, in which case we ignore *all*
     exceptions and just skip to the next point.
 
     We normally look at all image points when generating the RPC. You can

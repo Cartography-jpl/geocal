@@ -10074,7 +10074,7 @@ static PyMethodDef SwigMethods[] = {
 		"and just skips to the next point. But if we are using python code for\n"
 		"the ImageGroundConnection we can't translate errors to\n"
 		"ImageGroundConnectionFailed (this is a limitation of SWIG). So you can\n"
-		"optionally specify Ignore_error as true, in which case we ignore all\n"
+		"optionally specify Ignore_error as true, in which case we ignore *all*\n"
 		"exceptions and just skip to the next point.\n"
 		"\n"
 		"We normally look at all image points when generating the RPC. You can\n"

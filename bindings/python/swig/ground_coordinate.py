@@ -266,7 +266,7 @@ class CartesianInertial(geocal_swig.generic_object.GenericObject):
         Calculate matrix that can be used to convert CartesianInertial to
         CartesianFixed at the given Time, including velocity.
 
-        Note that unlike the 3x3 matrix, this is not orthogonal so the
+        Note that unlike the 3x3 matrix, this is *not* orthogonal so the
         transpose is not the inverse. 
         """
         return _ground_coordinate.CartesianInertial_ci_to_cf_with_vel(self, *args)
@@ -370,7 +370,7 @@ class CartesianFixed(GroundCoordinate):
         Calculate matrix that can be used to convert CartesianFixed to
         CartesianInertial at the given Time, including velocity.
 
-        Note that unlike the 3x3 matrix, this is not orthogonal so the
+        Note that unlike the 3x3 matrix, this is *not* orthogonal so the
         transpose is not the inverse. 
         """
         return _ground_coordinate.CartesianFixed_cf_to_ci_with_vel(self, *args)

@@ -6586,7 +6586,8 @@ static PyMethodDef SwigMethods[] = {
 		"Return angular separation (in radians) between the given reference and\n"
 		"target bands in the real focal plane.\n"
 		"\n"
-		"(MSPI L1B2 ATB equation 14 modified to use Forigin in place of b0) \n"
+		"(MSPI L1B2 ATB equation 14 -- *modified* to use Forigin in place of\n"
+		"b0) \n"
 		""},
 	 { (char *)"MspiCamera_paraxial_offset", _wrap_MspiCamera_paraxial_offset, METH_VARARGS, (char *)"\n"
 		"void MspiCamera::paraxial_offset(int Band, const FrameCoordinate &F, double &Line_offset, double\n"

@@ -136,7 +136,7 @@ class PhaseCorrelationMatcher(geocal_swig.image_matcher.ImageMatcher):
     other functionality for handling the predictor.
 
     The original code was based on the paper: C. D. Kuglin and D. C.
-    Hines, "The phase correlation     image alignment method," Proc.
+    Hines, "The phase correlation       image alignment method," Proc.
     IEEE 1975 International Conference on Cybernetics and Society,
     September, 1975, pp. 163-165.
 

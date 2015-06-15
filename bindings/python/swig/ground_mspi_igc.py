@@ -180,6 +180,9 @@ class GroundMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnec
     def band(self, value):
       self._v_band(value)
 
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _ground_mspi_igc.delete_GroundMspiIgc
 GroundMspiIgc.solar_look = new_instancemethod(_ground_mspi_igc.GroundMspiIgc_solar_look,None,GroundMspiIgc)
 GroundMspiIgc.normal_look = new_instancemethod(_ground_mspi_igc.GroundMspiIgc_normal_look,None,GroundMspiIgc)

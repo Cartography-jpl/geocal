@@ -1893,7 +1893,8 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/airmspi_dem \
 	$(srcdir)/$(srcpythonbin)/pan_to_ms_igc \
 	$(srcdir)/$(srcpythonbin)/job_database_check_and_run \
-	$(srcdir)/$(srcpythonbin)/usgs_create_ocean_tile
+	$(srcdir)/$(srcpythonbin)/usgs_create_ocean_tile \
+	$(srcdir)/$(srcpythonbin)/surface_image_project
 AM_LDFLAGS = 
 
 #=================================================================

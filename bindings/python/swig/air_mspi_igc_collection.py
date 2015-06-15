@@ -235,6 +235,9 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_view_number_to_image_index(self, *args)
 
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _air_mspi_igc_collection.delete_AirMspiIgcCollection
 AirMspiIgcCollection.image_ground_connection = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_image_ground_connection,None,AirMspiIgcCollection)
 AirMspiIgcCollection.have_config = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_have_config,None,AirMspiIgcCollection)

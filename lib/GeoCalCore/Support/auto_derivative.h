@@ -836,38 +836,7 @@ pow2(const GeoCal::AutoDerivative<double>& base)
 }
 }
 
-#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-#include <boost/serialization/split_free.hpp>
-// Add serialization of blitz::Array<T, 1> and blitz::Array<T, 2>
-namespace boost {
-  namespace serialization {
-    template<class Archive, class T>
-    void save(Archive& ar, const blitz::Array<T, 1>& A, 
-	      const unsigned version);
-    template<typename Archive, class T>
-    void load(Archive& ar, blitz::Array<T, 1>& A, 
-	      const unsigned version);
-    template<class Archive, class T>
-    void save(Archive& ar, const blitz::Array<T, 2>& A, 
-	      const unsigned version);
-    template<typename Archive, class T>
-    void load(Archive& ar, blitz::Array<T, 2>& A, 
-	      const unsigned version);
-  }
-}
-typedef blitz::Array<double, 1> blitz_double_array_1d;
-typedef blitz::Array<double, 2> blitz_double_array_2d;
-typedef blitz::Array<bool, 1> blitz_bool_array_1d;
-typedef blitz::Array<std::string, 1> blitz_string_array_1d;
-typedef blitz::Array<std::string, 2> blitz_string_array_2d;
-BOOST_SERIALIZATION_SPLIT_FREE(blitz_double_array_1d);
-BOOST_SERIALIZATION_SPLIT_FREE(blitz_double_array_2d);
-BOOST_SERIALIZATION_SPLIT_FREE(blitz_string_array_1d);
-BOOST_SERIALIZATION_SPLIT_FREE(blitz_string_array_2d);
-BOOST_SERIALIZATION_SPLIT_FREE(blitz_bool_array_1d);
-
-#endif
-
+// Can extend this to other types as needed.
 GEOCAL_EXPORT_KEY(AutoDerivative<double>);
 // Treat autoderivatives as primative, so we don't track multiple pointer
 // to same object.

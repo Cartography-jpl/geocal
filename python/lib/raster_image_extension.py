@@ -58,7 +58,7 @@ def _display(self, ic, sz, cross_hair = True):
     else:
         min = 0
     if(cross_hair):
-        plt.plot(ic.sample, ic.line, 'w+', markersize = 20)
+        plt.plot(ic.sample, ic.line, 'r+', markersize = 20)
     plt.imshow(self.read_with_pad(ln, smp, nline, nsamp), cmap = plt.cm.gray,
                vmin = min, vmax = max, 
                extent = [smp, smp + nsamp, ln + nline, ln])

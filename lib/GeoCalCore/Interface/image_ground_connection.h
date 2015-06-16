@@ -558,11 +558,12 @@ public:
 //-----------------------------------------------------------------------
 
   double sample_offset() const { return sample_offset_.value();}
+protected:
+  OffsetImageGroundConnection() {}
 private:
   boost::shared_ptr<ImageGroundConnection> ig_;
   AutoDerivative<double> line_offset_;
   AutoDerivative<double> sample_offset_;
-  OffsetImageGroundConnection() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -581,12 +582,12 @@ class ImageGroundConnectionCopy: public virtual ImageGroundConnection
 public:
   ImageGroundConnectionCopy
   (const boost::shared_ptr<ImageGroundConnection>& Igc)
-    : ImageGroundConnection(Igc->dem_ptr(), Igc->image(),
-			    Igc->image_multi_band(),
-			    Igc->title(), Igc->image_mask(), 
-			    Igc->ground_mask()),
-      igc(Igc)
+    : igc(Igc)
   {
+    initialize(Igc->dem_ptr(), Igc->image(),
+	       Igc->image_multi_band(),
+	       Igc->title(), Igc->image_mask(), 
+	       Igc->ground_mask());
   }
   ImageGroundConnectionCopy
   (const boost::shared_ptr<ImageGroundConnection>& Igc,
@@ -596,9 +597,9 @@ public:
    const std::string& Title,
    const boost::shared_ptr<ImageMask>& Img_mask,
    const boost::shared_ptr<GroundMask>& Ground_mask)
-    : ImageGroundConnection(d, Img, Img_mb, Title, Img_mask, Ground_mask),
-      igc(Igc)
+    : igc(Igc)
   {
+    initialize(d, Img, Img_mb, Title, Img_mask, Ground_mask);
   }
   virtual ~ImageGroundConnectionCopy() {}
   virtual void cf_look_vector(const ImageCoordinate& Ic, 
@@ -647,9 +648,10 @@ public:
   virtual blitz::Array<bool, 1> parameter_mask() const
   { return igc->parameter_mask(); }
   virtual void print(std::ostream& Os) const;
-private:
-  boost::shared_ptr<ImageGroundConnection> igc;
+protected:
   ImageGroundConnectionCopy() {}
+  boost::shared_ptr<ImageGroundConnection> igc;
+private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

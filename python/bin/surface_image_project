@@ -32,6 +32,11 @@ Options:
   --number-process=n
        Number of processors to use. [default: 1]
 
+  --scale=f
+       Factor to scale image by. This can be particularly useful when you
+       are mapping float data to an integer type like HALF (e.g., reflectance
+       from 0.0 to 1.0 expressed as a HALF VICAR file).
+
   -v --version      
        Print program version
 '''
@@ -45,13 +50,17 @@ mi = igcbase.cover(mibase)
 
 class ProjectWrap(object):
     '''Wrapper to project an image, so we can do this in parallel'''
-    def __init__(self, basefname, igccol, mi):
+    def __init__(self, basefname, igccol, mi, scale):
         self.igccol = igccol
         self.mi = mi
         self.basefname = basefname
+        self.scale = scale
     def __call__(self, i):
         print "Doing %d" % i
-        t = IgcMapProjected(self.mi, self.igccol.image_ground_connection(i), 10)
+        igc = self.igccol.image_ground_connection(i)
+        if(self.scale is not None):
+            igc = ScaleImageGroundConnection(igc, self.scale)
+        t = IgcMapProjected(self.mi, igc, 10)
         f = VicarRasterImage("%s%d.img" % (self.basefname, i), t.map_info, 
                              "HALF")
         f.close()
@@ -60,7 +69,7 @@ class ProjectWrap(object):
         copy(t, f)
         print "Done with %d" % i 
 
-func = ProjectWrap(args.basefname, igccol, mi)
+func = ProjectWrap(args.basefname, igccol, mi, args.scale)
 if(args.number_process > 1):
     pool = Pool(args.number_process)
     res = pool.map(func, range(igccol.number_image))

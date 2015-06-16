@@ -128,6 +128,9 @@ import geocal_swig.generic_object
 import geocal_swig.calc_raster_multi_band
 import geocal_swig.raster_image_multi_band_variable
 import geocal_swig.raster_image_multi_band
+import geocal_swig.image_ground_connection
+import geocal_swig.with_parameter
+import geocal_swig.geocal_exception
 class ScaleImage(geocal_swig.calc_raster.CalcRaster):
     """
     This is a simple adapter that multiples a underlying image by a scale
@@ -220,6 +223,27 @@ ScaleImageMultiBand._v_raw_data = new_instancemethod(_scale_image.ScaleImageMult
 ScaleImageMultiBand._v_scale_factor = new_instancemethod(_scale_image.ScaleImageMultiBand__v_scale_factor,None,ScaleImageMultiBand)
 ScaleImageMultiBand_swigregister = _scale_image.ScaleImageMultiBand_swigregister
 ScaleImageMultiBand_swigregister(ScaleImageMultiBand)
+
+class ScaleImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
+    """
+    C++ includes: scale_image.h
+
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        ScaleImageGroundConnection::ScaleImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > &Igc, double
+        Scale_factor)
+        Scale the image of an ImageGroundConnection. 
+        """
+        _scale_image.ScaleImageGroundConnection_swiginit(self,_scale_image.new_ScaleImageGroundConnection(*args))
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _scale_image.delete_ScaleImageGroundConnection
+ScaleImageGroundConnection_swigregister = _scale_image.ScaleImageGroundConnection_swigregister
+ScaleImageGroundConnection_swigregister(ScaleImageGroundConnection)
 
 
 

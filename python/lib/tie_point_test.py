@@ -24,6 +24,8 @@ def test_tie_point():
     '''
     if(not os.path.exists(geocal_test_igc)):
         raise SkipTest
+    if(not have_serialize_supported()):
+        raise SkipTest
     igccol = read_shelve(geocal_test_igc)
     tpcol = read_shelve(geocal_test_tpcol)
     tp = tpcol[0]

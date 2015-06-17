@@ -8,6 +8,12 @@ from geocal import *
 import warnings
 warnings.simplefilter(action = "ignore", category = FutureWarning)
 from IPython.html.widgets import interact
+try:
+    # Use prettier plots, if available
+    import seaborn as sns
+    sns.set(style='ticks', palette='Set2')
+except ImportError:
+    pass
 
 def tie_point_display(tpcol, igccol, surface_image=None, tpind=0):
     '''This function is a simple wrapper around the tiepoint display
@@ -18,26 +24,14 @@ def tie_point_display(tpcol, igccol, surface_image=None, tpind=0):
         tp = tpcol[int(tpind)]
         tp.display(igccol, int(size), surface_image = surface_image)
         plt.show()
-        ind = []
-        line_res = []
-        sample_res = []
-        lsigma = []
-        ssigma = []
-        for i, iloc in enumerate(tp.image_location):
-            if(tp.image_location[i]):
-                try:
-                    icpred = igccol.image_coordinate(i, tp.ground_location)
-                    ic, ls, ss = tp.image_location[i]
-                    ind.append(i)
-                    line_res.append(ic.line - icpred.line)
-                    sample_res.append(ic.sample - icpred.sample)
-                    lsigma = ls
-                    ssigma = ss
-                except ImageGroundConnectionFailed:
-                    pass
+        ind = range(tp.number_camera)
+        residual = tp.ic_diff(igccol)
+        sigma = tp.ic_sigma
         plt.rcParams["figure.figsize"] = (6, 4)
-        plt.errorbar(ind, line_res, lsigma, fmt='o', label="Line residual")
-        plt.errorbar(ind, sample_res, ssigma, fmt='o', label="Sample residual")
+        plt.errorbar(ind, residual[0,:], sigma[0,:], fmt='o', 
+                     label="Line residual")
+        plt.errorbar(ind, residual[1,:], sigma[1,:], fmt='o', 
+                     label="Sample residual")
         plt.xlabel("Image index")
         plt.ylabel("Residual")
         if(tp.is_gcp):

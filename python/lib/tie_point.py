@@ -3,6 +3,7 @@ import raster_image_extension
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
 from geocal_swig import IgcMapProjected
+import numpy as np
 
 class TiePoint(object):
     '''
@@ -43,6 +44,55 @@ class TiePoint(object):
         for v in self.image_location:
             if(v): res += 1
         return res
+
+    @property
+    def ic(self):
+        '''This repackages the image_location, in a better way for doing
+        such things as plotting. We return a 2D array with the first row
+        being the image line and the second the image sample. The columns
+        are the image indexes. For image locations that are missing, we
+        return a np.NaN'''
+        res = np.empty((2, self.number_camera))
+        for i, iloc in enumerate(self.image_location):
+            if(iloc):
+                res[0,i] = iloc[0].line
+                res[1,i] = iloc[0].sample
+            else:
+                res[0,i] = np.NaN
+                res[1,i] = np.NaN
+        return res
+
+    @property
+    def ic_sigma(self):
+        '''Like ic, but returned line and sample sigma.'''
+        res = np.empty((2, self.number_camera))
+        for i, iloc in enumerate(self.image_location):
+            if(iloc):
+                res[0,i] = iloc[1]
+                res[1,i] = iloc[2]
+            else:
+                res[0,i] = np.NaN
+                res[1,i] = np.NaN
+        return res
+        
+
+    def ic_pred(self, igccol):
+        '''Like ic, but uses the supplied igccol to predict the image 
+        location given our current ground position.'''
+        res = np.empty((2, self.number_camera))
+        for i in range(self.number_camera):
+            try:
+                ic = igccol.image_coordinate(i, self.ground_location)
+                res[0,i] = ic.line
+                res[1,i] = ic.sample
+            except ImageGroundConnectionFailed:
+                res[0,i] = np.NaN
+                res[1,i] = np.NaN
+        return res
+    
+    def ic_diff(self, igccol):
+        '''Difference between observed and predicted image coordinates'''
+        return self.ic - self.ic_pred(igccol)
 
     def display(self, igc_coll, sz = 500, ref_image = None, number_row = None,
                 map_info = None, surface_image = None):

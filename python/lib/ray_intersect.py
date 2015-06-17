@@ -2,17 +2,19 @@ from geocal_swig import *
 import numpy as np
 import numpy.linalg as la
 import math
+from lm_optimize import *
+from scipy.sparse import block_diag
 
 class RayIntersect2:
     '''This class is used to find the intersection of two or more rays
     on the surface. Note that in general the points don\'t actually 
     intersect, this finds the values that are closest to the rays.'''
-    def __init__(self, igc_coll, 
+    def __init__(self, igccol, 
                  delta_height = 10, max_ground_covariance = 20 * 20):
-        self.igc_coll = igc_coll
+        self.igccol = igccol
         self.delta_height = delta_height
         self.max_ground_covariance = max_ground_covariance
-        if(self.igc_coll.number_image < 2):
+        if(self.igccol.number_image < 2):
             raise RuntimeError("Need to have at least 2 images in IgcCollection")
     
     def ray_intersect(self, tie_point):
@@ -28,9 +30,9 @@ class RayIntersect2:
         var = np.array([0.0,0,0])
         cnt = 0
         max_dist = 0
-        for i1 in range(self.igc_coll.number_image):
+        for i1 in range(self.igccol.number_image):
             if(not tie_point.image_location[i1]): continue
-            for i2 in range(i1 + 1, self.igc_coll.number_image):
+            for i2 in range(i1 + 1, self.igccol.number_image):
                 if(tie_point.image_location[i2]): break
             else:
                 break
@@ -59,13 +61,72 @@ class RayIntersect2:
     def two_ray_intersect(self, ic1, ic2, index_1 = 0, index_2 = 1):
         '''Find the intersection of the ground for two rays given by
         two image coordinates. Can optionally supply the index into
-        igc_coll, the default is that this is the first two entries.
+        igccol, the default is that this is the first two entries.
         
         This returns the value as a np.array of Ecr position, and the
         distance
         '''
-        ri = RayIntersect(self.igc_coll.image_ground_connection(index_1),
-                          self.igc_coll.image_ground_connection(index_2))
+        ri = RayIntersect(self.igccol.image_ground_connection(index_1),
+                          self.igccol.image_ground_connection(index_2))
         return ri.two_ray_intersect(ic1, ic2)
         
+
+class RayIntersect3:
+    '''This class is used to find the intersection of two or more rays
+    on the surface. Note that in general the points don\'t actually 
+    intersect, this finds the values that minimizes the residual.'''
+    def __init__(self, igccol, 
+                 delta_height = 10, max_ground_covariance = 20 * 20):
+        self.ri= RayIntersect2(igccol, delta_height, max_ground_covariance)
+        self.igccol = igccol
+
+    def coll_eq(self, x):
+        res = np.empty(2 * self.tp.number_image_location)
+        j = 0
+        pt = Ecr(x[0], x[1], x[2])
+        for i in range(self.tp.number_camera):
+            if(self.tp.image_location[i]):
+                ic, lsigma, ssigma = self.tp.image_location[i]
+                try:
+                    icpred = self.igccol.image_coordinate(i, pt)
+                    res[j] = (ic.line - icpred.line) / lsigma
+                    res[j + 1] = (ic.sample - icpred.sample) / ssigma
+                except RuntimeError as e:
+                    if(str(e) != "ImageGroundConnectionFailed"):
+                        raise e
+                    res[j] = 0
+                    res[j + 1] = 0
+                j += 2
+        return res
+
+    def coll_jac(self, x):
+        res = np.empty((2 * self.tp.number_image_location, 3))
+        j = 0
+        pt = Ecr(x[0], x[1], x[2])
+        for i in range(self.tp.number_camera):
+            if(self.tp.image_location[i]):
+                ic, lsigma, ssigma = self.tp.image_location[i]
+                try:
+                    jac = self.igccol.image_coordinate_jac_cf(i, pt)
+                    res[j, :] = -jac[0,:] / lsigma
+                    res[j + 1, :] = -jac[1,:] / ssigma
+                except RuntimeError as e:
+                    if(str(e) != "ImageGroundConnectionFailed"):
+                        raise e
+                    res[j, :] = 0
+                    res[j + 1, :] = 0
+                j += 2
+        return block_diag((res,), format="csr")
+
+    def ray_intersect(self, tp):
+        # Start with what RayIntersect2 gives as the ground location
+        tp = self.ri.ray_intersect(tp)
+        if(tp is None):
+            return None
+        self.tp = tp
+        x0 = self.tp.ground_location.position
+        x = lm_optimize(self.coll_eq, x0, self.coll_jac)
+        tp.ground_location = Ecr(x[0], x[1], x[2])
+        return tp
+         
         

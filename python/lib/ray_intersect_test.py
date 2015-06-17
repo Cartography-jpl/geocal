@@ -33,4 +33,19 @@ def test_tp():
     ri.ray_intersect(tp)
     assert distance(tp.ground_location, Geodetic(36.7731550801,
                                                  -116.116742412, 1276.05)) < 1
+
+def test_ray_intersect3():
+    demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
+    igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", demin)
+    igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
+    igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
+    igc_coll = IgcArray([igc1, igc2, igc3])
+    ri = RayIntersect3(igc_coll)
+    tp = TiePoint(3)
+    tp.image_location[0] = ImageCoordinate(944, 916), 0.1, 0.1
+    tp.image_location[1] = ImageCoordinate(975.65, 934.365), 0.1, 0.1
+    tp.image_location[2] = ImageCoordinate(1007.83, 950.128), 0.1, 0.1
+    ri.ray_intersect(tp)
+    assert distance(tp.ground_location, Geodetic(36.7731550801,
+                                                 -116.116742412, 1276.05)) < 1
     

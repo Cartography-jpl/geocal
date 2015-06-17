@@ -163,7 +163,23 @@ class TiePointCollection(list):
         return cnt
 
     def data_frame(self, igccol, image_index):
-        '''Return a pandas DataFrame for the given image_index.'''
+        '''Return a pandas DataFrame for the given image_index.
+        
+        Note that in addition to the normal pandas plotting (e.g., 
+        something like df.plot(x='sample', y='line_residual', kind='scatter'))
+        a useful plot to make is a distribution of the residuals. You
+        can set up a nice colormap for this and display the data by:
+
+        import matplotlib as mpl
+        import matplotlib.pylab as plt
+        import pandas as pd
+        import seaborn as sns
+
+        df = tpcol.data_frame(igccol, image_index)
+        cmap = mpl.colors.ListedColormap(sns.color_palette("RdBu_r", 256))
+        plt.scatter(df.line, df.sample, c = df.line_residual, cmap = cmap)
+        plt.colorbar()
+        '''
         if(not have_pandas):
             raise RuntimeError("Need to have pandas installed to use this function.")
         igc = igccol.image_ground_connection(image_index)

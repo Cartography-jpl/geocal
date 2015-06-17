@@ -4,6 +4,12 @@ import safe_matplotlib_import
 import matplotlib.pyplot as plt
 from geocal_swig import IgcMapProjected
 import numpy as np
+# Optional support for pandas
+try:
+    import pandas as pd
+    have_pandas = True
+except ImportError:
+    have_pandas = False
 
 class TiePoint(object):
     '''
@@ -85,7 +91,9 @@ class TiePoint(object):
                 ic = igccol.image_coordinate(i, self.ground_location)
                 res[0,i] = ic.line
                 res[1,i] = ic.sample
-            except ImageGroundConnectionFailed:
+            except RuntimeError as e:
+                if(str(e) != "ImageGroundConnectionFailed"):
+                    raise e
                 res[0,i] = np.NaN
                 res[1,i] = np.NaN
         return res
@@ -153,6 +161,48 @@ class TiePointCollection(list):
             if(i.is_gcp):
                 cnt += 1
         return cnt
+
+    def data_frame(self, igccol, image_index):
+        '''Return a pandas DataFrame for the given image_index.'''
+        if(not have_pandas):
+            raise RuntimeError("Need to have pandas installed to use this function.")
+        igc = igccol.image_ground_connection(image_index)
+        ind = [ tp.id for tp in self ]
+        is_gcp = [ tp.is_gcp for tp in self ]
+        data = np.full((len(self), 8), np.NaN)
+        for i, tp in enumerate(self):
+            iloc = tp.image_location[image_index]
+            if(iloc):
+                data[i,0] = iloc[0].line
+                data[i,1] = iloc[0].sample
+                data[i,2] = iloc[1]
+                data[i,3] = iloc[2]
+                try:
+                    icpred = igc.image_coordinate(tp.ground_location)
+                    data[i, 4] = icpred.line
+                    data[i, 5] = icpred.sample
+                except RuntimeError as e:
+                    if(str(e) != "ImageGroundConnectionFailed"):
+                        raise e
+        data[:,6] = data[i, 0] - data[i, 4]
+        data[:,7] = data[i, 1] - data[i, 5]
+        return pd.DataFrame({ 'line' : data[:,0],
+                              'sample' : data[:, 1],
+                              'line_sigma' : data[:, 2],
+                              'sample_sigma' : data[:, 3],
+                              'line_pred' : data[:, 4],
+                              'sample_pred' : data[:, 5],
+                              'line_residual' : data[:, 6],
+                              'sample_residual' : data[:, 7],
+                              'is_gcp' : is_gcp },
+                            index=ind)
+
+    def panel(self, igccol):
+        '''Return a pandas Panel for all the image indexes'''
+        d = {}
+        for i in range(self[0].number_camera):
+            d["image_%d" % i] = self.data_frame(igccol, i)
+        return pd.Panel(d)
 
     def __str__(self):
         res =  "TiePointCollection\n"

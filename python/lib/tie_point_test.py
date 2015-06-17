@@ -33,6 +33,8 @@ def test_tie_point():
     print tp.ic_sigma
     print tp.ic_pred(igccol)
     print tp.ic_diff(igccol)
+    print tpcol.data_frame(igccol, 0)
+    print tpcol.panel(igccol)
 
 # If you run this, make sure to include this import. Otherwise the namespace
 # for the tiepoint isn't correct in the TiePointCollection shelf

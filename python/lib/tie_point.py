@@ -185,31 +185,33 @@ class TiePointCollection(list):
         igc = igccol.image_ground_connection(image_index)
         ind = [ tp.id for tp in self ]
         is_gcp = [ tp.is_gcp for tp in self ]
+        nimgloc = [ tp.number_image_location for tp in self ]
         data = np.full((len(self), 8), np.NaN)
         for i, tp in enumerate(self):
             iloc = tp.image_location[image_index]
             if(iloc):
-                data[i,0] = iloc[0].line
-                data[i,1] = iloc[0].sample
-                data[i,2] = iloc[1]
-                data[i,3] = iloc[2]
                 try:
                     icpred = igc.image_coordinate(tp.ground_location)
+                    data[i,0] = iloc[0].line
+                    data[i,1] = iloc[0].sample
+                    data[i,2] = iloc[1]
+                    data[i,3] = iloc[2]
                     data[i, 4] = icpred.line
                     data[i, 5] = icpred.sample
                 except RuntimeError as e:
                     if(str(e) != "ImageGroundConnectionFailed"):
                         raise e
-        data[:,6] = data[i, 0] - data[i, 4]
-        data[:,7] = data[i, 1] - data[i, 5]
+        data[:,6] = data[:, 0] - data[:, 4]
+        data[:,7] = data[:, 1] - data[:, 5]
         return pd.DataFrame({ 'line' : data[:,0],
-                              'sample' : data[:, 1],
+                              'samp' : data[:, 1],
+                              'number_image_location' : nimgloc,
                               'line_sigma' : data[:, 2],
-                              'sample_sigma' : data[:, 3],
+                              'samp_sigma' : data[:, 3],
                               'line_pred' : data[:, 4],
-                              'sample_pred' : data[:, 5],
+                              'samp_pred' : data[:, 5],
                               'line_residual' : data[:, 6],
-                              'sample_residual' : data[:, 7],
+                              'samp_residual' : data[:, 7],
                               'is_gcp' : is_gcp },
                             index=ind)
 

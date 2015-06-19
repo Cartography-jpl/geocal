@@ -32,6 +32,12 @@ Options:
   --number-process=n
        Number of processors to use. [default: 1]
 
+  --ref-image=f
+       Instead of using the resolution of the base image, use the resolution
+       from the supplied reference image. Useful when the reference image is
+       near the base image resolution and we want to also match the reference
+       image to the images for GCPs.
+
   --scale=f
        Factor to scale image by. This can be particularly useful when you
        are mapping float data to an integer type like HALF (e.g., reflectance
@@ -45,7 +51,10 @@ args = docopt_simple(usage, version=version)
 
 igccol = read_shelve(args.igccol)
 igcbase = igccol.image_ground_connection(args.base_image_index)
-mibase = cib01_mapinfo(igcbase.resolution_meter())
+if(args.ref_image):
+    mibase = read_shelve(args.ref_image).map_info
+else:
+    mibase = cib01_mapinfo(igcbase.resolution_meter())
 mi = igcbase.cover(mibase)
 
 class ProjectWrap(object):

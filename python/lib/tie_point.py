@@ -129,7 +129,13 @@ class TiePoint(object):
         number_col = int(math.ceil(nimg / float(number_row)))
         plt.clf()
         for i in range(self.number_camera):
-            if(self.image_location[i] is not None):
+            if(self.image_location[i] is None):
+                plt.subplot(number_row, number_col, i + 1)
+                plt.title(igc_coll.title(i))
+                d = np.zeros((sz, sz))
+                plt.imshow(d, cmap=plt.cm.gray,vmin=-1,vmax=0,
+                           extent = [0,sz,0,sz])
+            else:
                 plt.subplot(number_row, number_col, i + 1)
                 plt.title(igc_coll.title(i))
                 if(map_info):
@@ -148,6 +154,10 @@ class TiePoint(object):
             if(self.is_gcp):
                 ic = ref_image.coordinate(self.ground_location)
                 ref_image.display(ic, sz)
+            else:
+                d = np.zeros((sz, sz))
+                plt.imshow(d, cmap=plt.cm.gray,vmin=-1,vmax=0,
+                           extent = [0,sz,0,sz])
 
 class TiePointCollection(list):
     '''This is just a list of TiePoint, with a few useful functions defined'''

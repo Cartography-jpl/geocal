@@ -5,6 +5,7 @@
 #include "usgs_dem.h"
 #include "simple_dem.h"
 #include "geocal_serialize_support.h"
+#include <boost/lexical_cast.hpp>
 
 using namespace GeoCal;
 
@@ -190,7 +191,7 @@ AirMspiIgcCollection::air_mspi_igc(int Image_index) const
 					  dem,
 					  l1b1_file_name(Image_index), 
 					  swath_to_use,
-					  "Image",
+					  "Image " + boost::lexical_cast<std::string>(Image_index),
 					  dem_resolution));
   }
   return igc[Image_index];

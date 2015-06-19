@@ -89,7 +89,7 @@ public:
     bool success;
     ipi_->image_coordinate_extended(Gc, res, success);
     if(!success)
-      throw ImageGroundConnectionFailed("IPI failed");
+      throw ImageGroundConnectionFailed();
     return res; 
   }
   virtual void image_coordinate_with_status(const GroundCoordinate& Gc,

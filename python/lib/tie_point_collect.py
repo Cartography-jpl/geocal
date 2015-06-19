@@ -231,6 +231,7 @@ class GcpTiePointCollect(object):
     def __init__(self, ref_image, dem, igc_collection,
                  avg_level = 0, use_intersection = False,
                  image_matcher = None,
+                 surface_image = None,
                  scale_factor = None,
                  grid_spacing = 1):
         '''This sets up for doing a tie point collection with a reference
@@ -253,6 +254,12 @@ class GcpTiePointCollect(object):
         data, you want get any results unless you scale to a different
         range.
         
+        You can pass a list of surface projected images to match with.
+        These should be the projection of the igc_collection, and can
+        be used as an alternative to doing the projection on the fly.
+        This should be the same resolution/map projection as the reference
+        image (but doesn't have to have the same coverage).
+
         There is a trade off between getting the largest coverage (by
         taking a union of all the igc on the surface} and the
         strongest points (by looking at places seen by all the
@@ -270,6 +277,7 @@ class GcpTiePointCollect(object):
         self.igc_collection = igc_collection
         self.dem = dem
         self.ref_image = ref_image
+        self.surface_image = surface_image
         # Find an area that covers all the ground projected images
         mi = self.igc_collection.image_ground_connection(0).\
             cover(ref_image.map_info)
@@ -292,13 +300,21 @@ class GcpTiePointCollect(object):
             igc2 = self.igc_collection.image_ground_connection(j)
             if(scale_factor is not None):
                 igc2 = ScaleImageGroundConnection(igc2, scale_factor)
-            self.itoim[j] = SurfaceImageToImageMatch(self.ref_igc, igc2,
+            if(surface_image is None):
+                self.itoim[j] = SurfaceImageToImageMatch(self.ref_igc, igc2,
                               mi, self.image_matcher, grid_spacing)
+            else:
+                self.itoim[j] = \
+                    SurfaceImageToImageMatch(self.ref_igc, self.ref_image,
+                                             igc2, surface_image[j],
+                                             self.image_matcher)
+                
 
     def __getstate__(self):
         return {"ref_image" : self.ref_image,
                 "dem" : self.dem,
                 "image_matcher" : self.image_matcher,
+                "surface_image" : self.surface_image,
                 "igc_collection" : self.igc_collection,
                 "avg_level" : self.avg_level,
                 }
@@ -306,6 +322,7 @@ class GcpTiePointCollect(object):
     def __setstate__(self, dict):
         self.__init__(dict["ref_image"], dict["dem"], dict["igc_collection"],
                       image_matcher = dict["image_matcher"],
+                      surface_image = dict["surface_image"],
                       avg_level = dict["avg_level"])
 
     @property

@@ -201,12 +201,14 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
         if(args.use_intersection_both):
             tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
                                                 grid_spacing = args.grid_spacing,
+                                                surface_image = surface_image,
                                                 avg_level = args.avg_level,
                                                 image_matcher = image_matcher,
                                                 scale_factor = args.scale_factor,
                                                 use_intersection = False))
             tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
                                                 grid_spacing = args.grid_spacing,
+                                                surface_image = surface_image,
                                                 avg_level = args.avg_level,
                                                 image_matcher = image_matcher,
                                                 scale_factor = args.scale_factor,
@@ -217,6 +219,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
         else:
             tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
                                                 grid_spacing = args.grid_spacing,
+                                                surface_image = surface_image,
                                                 avg_level = args.avg_level,
                                                 image_matcher = image_matcher,
                                                 scale_factor = args.scale_factor,

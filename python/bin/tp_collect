@@ -75,11 +75,20 @@ Options:
        resolution that matching the raw images will fail. See
        also --project-surface that automatically finds the map info to use.
 
+  --matcher=f
+       Can pass the matcher to use as a shelve or xml file. Useful when
+       you want to use a different matcher (e.g., phase correlation matcher)
+       or different parameters for the standard ccorr/lsm matcher.
+
   --max-ground-sigma=d
        How far off the various matched points can miss when intersecting
        on the surface, in meters. This is used to filter out bad tie-points,
        but you want this large enough you aren't filtering out good points.
        [default: 20.0]
+
+  --min-grid-size=n
+       If we have a smaller image, then reduce the number x and y so the
+       grid cell we examine isn't smaller than this size [default: 100]
 
   --number-feature=n
        Number of features to match for. Note that a value of 0 means "find 
@@ -104,10 +113,6 @@ Options:
 
   --number-y=n      
        Number of grid points in the Y direction to try for [default: 100]
-
-  --min-grid-size=n
-       If we have a smaller image, then reduce the number x and y so the
-       grid cell we examine isn't smaller than this size [default: 100]
 
    --outlier-reject-ransac
        If true, then do RANSAC outlier rejection. This fits the
@@ -177,6 +182,10 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
         surface_image = read_shelve(args.surface_image)
     else:
         surface_image = None
+    if(args.matcher):
+       image_matcher = read_shelve(args.matcher)
+    else:       
+       image_matcher = None
     if(args.gcp):
         if(args.reference_dem):
             dem = read_shelve(args.reference_dem)
@@ -186,11 +195,13 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
             tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
                                                 grid_spacing = args.grid_spacing,
                                                 avg_level = args.avg_level,
+                                                image_matcher = image_matcher,
                                                 scale_factor = args.scale_factor,
                                                 use_intersection = False))
             tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
                                                 grid_spacing = args.grid_spacing,
                                                 avg_level = args.avg_level,
+                                                image_matcher = image_matcher,
                                                 scale_factor = args.scale_factor,
                                                 use_intersection = True))
             log.info("Adding 2 gcpcollect")
@@ -200,6 +211,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
             tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
                                                 grid_spacing = args.grid_spacing,
                                                 avg_level = args.avg_level,
+                                                image_matcher = image_matcher,
                                                 scale_factor = args.scale_factor,
                                                 use_intersection = args.use_intersection))
             log.info("Adding 1 gcpcollect")
@@ -214,6 +226,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
                 mibase = cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
                 mi = ig_base.cover(mibase)
             tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                             image_matcher = image_matcher,
                                              scale_factor = args.scale_factor,
                                              map_info = mi,
                                              grid_spacing = args.grid_spacing,
@@ -229,6 +242,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
                 mibase = cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
                 mi = ig_base.cover(mibase)
             tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                             image_matcher = image_matcher,
                                              scale_factor = args.scale_factor,
                                              map_info = mi,
                                              grid_spacing = args.grid_spacing,
@@ -240,6 +254,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
         log.info("Adding base image %d" % args.base_image_index)
         msg.append("Doing base image %d" % args.base_image_index)
         tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                         image_matcher = image_matcher,
                                          scale_factor = args.scale_factor,
                                          map_info = mi,
                                          grid_spacing = args.grid_spacing,

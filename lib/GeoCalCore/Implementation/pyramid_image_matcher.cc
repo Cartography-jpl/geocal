@@ -1,6 +1,7 @@
 #include "pyramid_image_matcher.h"
 #include "raster_averaged.h"
 #include "null_deleter.h"
+#include "ostream_pad.h"
 using namespace GeoCal;
 
 // See base class for description
@@ -49,8 +50,11 @@ void PyramidImageMatcher::match_mask
 
 void PyramidImageMatcher::print(std::ostream& Os) const
 {
+  OstreamPad opad(Os, "    ");
   Os << "PyramidImageMatcher:\n"
      << "  Start level: " << start_level_ << "\n"
-     << "  Underlying matcher:\n" << match_ << "\n";
+     << "  Underlying matcher:\n";
+  opad << *match_;
+  opad.strict_sync();
 }
 

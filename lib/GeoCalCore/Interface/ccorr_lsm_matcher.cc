@@ -1,4 +1,5 @@
 #include "ccorr_lsm_matcher.h"
+#include "ostream_pad.h"
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
@@ -49,9 +50,14 @@ void CcorrLsmMatcher::match_mask
 
 void CcorrLsmMatcher::print(std::ostream& Os) const
 {
+  OstreamPad opad(Os, "    ");
   Os << "Cross correlation + least squares matcher:\n"
      << "  Accept Ccorr only: " << (accept_ccorr_only_ ? "true" : "false") 
      << "\n"
-     << "  Cross correlation matcher: \n" << *ccorr_matcher_
-     << "  Least squares matcher:\n" << *lsm_matcher_;
+     << "  Cross correlation matcher: \n";
+  opad << *ccorr_matcher_;
+  opad.strict_sync();
+  Os << "  Least squares matcher:\n";
+  opad << *lsm_matcher_;
+  opad.strict_sync();
 }

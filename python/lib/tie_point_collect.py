@@ -112,13 +112,11 @@ class TiePointCollect(object):
         i = self.base_image_index
         igc1 = self.igc_collection.image_ground_connection(i)
         if(scale_factor is not None):
-            igc1 = ImageGroundConnectionCopy(igc1)
-            igc1.image = ScaleImage(igc1.image, scale_factor)
+            igc1 = ScaleImageGroundConnection(igc1, scale_factor)
         for j in range(self.igc_collection.number_image):
             igc2 = self.igc_collection.image_ground_connection(j)
             if(scale_factor is not None):
-                igc2 = ImageGroundConnectionCopy(igc2)
-                igc2.image = ScaleImage(igc2.image, scale_factor)
+                igc2 = ScaleImageGroundConnection(igc2, scale_factor)
             if(map_info is None):
                 if(surface_image is None):
                     self.itoim[j] = IgcImageToImageMatch(igc1, igc2,
@@ -293,8 +291,7 @@ class GcpTiePointCollect(object):
         for j in range(self.igc_collection.number_image):
             igc2 = self.igc_collection.image_ground_connection(j)
             if(scale_factor is not None):
-                igc2 = ImageGroundConnectionCopy(igc2)
-                igc2.image = ScaleImage(igc2.image, scale_factor)
+                igc2 = ScaleImageGroundConnection(igc2, scale_factor)
             self.itoim[j] = SurfaceImageToImageMatch(self.ref_igc, igc2,
                               mi, self.image_matcher, grid_spacing)
 

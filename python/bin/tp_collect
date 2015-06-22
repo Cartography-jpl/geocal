@@ -186,13 +186,6 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
        image_matcher = read_shelve(args.matcher)
     else:       
        image_matcher = None
-    # temp, until we get this serialized
-    target_size = 37
-    ref_size = 9
-    ccorr = CcorrMatcher(target_size, target_size, ref_size, ref_size)
-    lsm = LsmMatcher(21, 21, 3, 0.0625, 0.2, 0.5, 4.0, 0.15, 1)
-    mch = CcorrLsmMatcher(ccorr,lsm)
-    image_matcher = PyramidImageMatcher(mch, 2)
     if(args.gcp):
         if(args.reference_dem):
             dem = read_shelve(args.reference_dem)

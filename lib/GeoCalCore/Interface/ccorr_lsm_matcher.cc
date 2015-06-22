@@ -1,6 +1,22 @@
 #include "ccorr_lsm_matcher.h"
+#include "geocal_serialize_support.h"
 #include "ostream_pad.h"
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void CcorrLsmMatcher::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(ImageMatcher);
+  GEOCAL_BASE(CcorrLsmMatcher, ImageMatcher);
+  ar & GEOCAL_NVP_(accept_ccorr_only)
+    & GEOCAL_NVP_(ccorr_matcher)
+    & GEOCAL_NVP_(lsm_matcher);
+}
+
+
+GEOCAL_IMPLEMENT(CcorrLsmMatcher);
+#endif
 
 //-----------------------------------------------------------------------
 /// Match a point found in the reference image with a point in the new

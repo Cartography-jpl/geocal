@@ -191,12 +191,8 @@ class CcorrLsmMatcher(geocal_swig.image_matcher.ImageMatcher):
     def accept_ccorr_only(self):
         return self._v_accept_ccorr_only()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.ccorr_matcher,self.lsm_matcher,self.accept_ccorr_only)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ccorr_lsm_matcher.delete_CcorrLsmMatcher
 CcorrLsmMatcher._v_ccorr_matcher = new_instancemethod(_ccorr_lsm_matcher.CcorrLsmMatcher__v_ccorr_matcher,None,CcorrLsmMatcher)

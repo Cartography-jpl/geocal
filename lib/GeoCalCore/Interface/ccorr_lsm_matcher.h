@@ -96,8 +96,13 @@ private:
   bool accept_ccorr_only_;
   boost::shared_ptr<CcorrMatcher> ccorr_matcher_;
   boost::shared_ptr<LsmMatcher> lsm_matcher_;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(CcorrLsmMatcher);
 #endif
 

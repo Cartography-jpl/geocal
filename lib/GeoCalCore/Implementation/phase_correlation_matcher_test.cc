@@ -59,4 +59,33 @@ BOOST_AUTO_TEST_CASE(picmtch4_test)
   BOOST_CHECK_CLOSE(m2.correlation_last_match(), 0.104, 1e-2);
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<ImageMatcher> m(new PhaseCorrelationMatcher(32,96));
+  std::string d = serialize_write_string(m);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<PhaseCorrelationMatcher> mr = 
+    serialize_read_string<PhaseCorrelationMatcher>(d);
+
+  boost::shared_ptr<RasterImage> img1(new VicarLiteRasterImage(test_data_dir() + "phase_correlation/xxim1"));
+  boost::shared_ptr<RasterImage> img2(new VicarLiteRasterImage(test_data_dir() + "phase_correlation/xxim2"));
+  ImageCoordinate ref_ic(150.0, 150.0);
+  ImageCoordinate new_ic;
+  new_ic.line = ref_ic.line;
+  new_ic.sample = ref_ic.sample;
+  ImageCoordinate new_ic_expected(ref_ic.line - 4, ref_ic.sample - 5);
+  ImageCoordinate new_res;
+  double line_sigma, sample_sigma;
+  bool success;
+  mr->match(*img1, *img2, ref_ic, new_ic, new_res, line_sigma, 
+	   sample_sigma, success);
+  BOOST_CHECK(success);
+  BOOST_CHECK(fabs(new_res.line - new_ic_expected.line) < line_sigma);
+  BOOST_CHECK(fabs(new_res.sample - new_ic_expected.sample) < sample_sigma);
+  BOOST_CHECK_CLOSE(mr->correlation_last_match(), 0.128168, 1e-2);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

@@ -53,5 +53,34 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK(!success);
 }
 
+BOOST_AUTO_TEST_CASE(serialize)
+{
+  boost::shared_ptr<ImageMatcher> m
+    (new LsmMatcher(21, 19, 3, 0.06, 0.2, 0.5, 2.0, 0.125, 0.1));
+  std::string d = serialize_write_string(m);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<LsmMatcher> mr = serialize_read_string<LsmMatcher>(d);
+
+  BOOST_CHECK_EQUAL(mr->number_line(), 21);
+  BOOST_CHECK_EQUAL(mr->number_sample(), 19);
+  BOOST_CHECK_EQUAL(mr->border_size(), 3);
+  BOOST_CHECK_CLOSE(mr->precision_goal(), 0.06, 1e-4);
+  BOOST_CHECK_CLOSE(mr->precision_requirement(), 0.2, 1e-4);
+  BOOST_CHECK_CLOSE(mr->rad_uncertainty_factor(), 2.0, 1e-4);
+  BOOST_CHECK_CLOSE(mr->precision_min_geo_goal(), 0.125, 1e-4);
+  BOOST_CHECK_CLOSE(mr->precision_min_rad_goal(), 0.1, 1e-4);
+  ImageCoordinate new_res;
+  double line_sigma, sample_sigma;
+  bool success;
+  mr->match(ref_img, new_img, ref_ic, 
+	  ImageCoordinate(new_ic.line + 0.8, new_ic.sample - 0.5), new_res,
+	  line_sigma, sample_sigma, success);
+  BOOST_CHECK(fabs(new_res.line - new_ic.line) < mr->precision_requirement());
+  BOOST_CHECK(fabs(new_res.sample - new_ic.sample) < mr->precision_requirement());
+  BOOST_CHECK(success);
+  BOOST_CHECK_CLOSE(line_sigma, mr->precision_goal(), 1e-4);
+  BOOST_CHECK_CLOSE(sample_sigma, mr->precision_goal(), 1e-4);
+}
 BOOST_AUTO_TEST_SUITE_END()
 

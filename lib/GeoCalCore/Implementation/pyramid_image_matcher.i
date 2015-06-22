@@ -24,7 +24,7 @@ public:
 			  bool &OUTPUT, int *OUTPUT) const;
   %python_attribute(start_level, int)
   %python_attribute(underlying_matcher, boost::shared_ptr<ImageMatcher>)
-  %pickle_init(1, self.underlying_matcher, self.start_level)
+  %pickle_serialization();
 };
 }
 

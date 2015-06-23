@@ -31,6 +31,7 @@ public:
   %python_attribute(gimbal_epsilon, double);
   %python_attribute(gimbal_psi, double);
   %python_attribute(gimbal_theta, double);
+  %python_attribute_with_set(parameter_mask, blitz::Array<bool, 1>);
   double angular_separation(int Reference_band, int Target_band) const;
   void paraxial_offset(int Band,
 		       const FrameCoordinate& F,

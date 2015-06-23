@@ -337,8 +337,9 @@ void MspiCamera::paraxial_offset
   Sample_offset = (xf - xf_prime) / sample_pitch();
 }
 
-void MspiCamera::parameter_mask(const blitz::Array<bool, 1>& Pm) const
+void MspiCamera::parameter_mask(const blitz::Array<bool, 1>& Pm)
 {
-  if(Pm.rows() != 6)
+  if(Pm.rows() != parameter_mask_.rows())
     throw Exception("Parameter mask must have a size of exactly 6");
+  parameter_mask_ = Pm;
 }

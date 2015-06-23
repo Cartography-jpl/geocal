@@ -9,7 +9,8 @@ namespace GeoCal {
   This is an IgcCollection for AirMspi.
 *******************************************************************/
 
-class AirMspiIgcCollection : public virtual IgcCollection {
+class AirMspiIgcCollection : public virtual IgcCollection, 
+			     public virtual WithParameterNested {
 public:
   AirMspiIgcCollection(const std::string& Master_config_file,
 		       const std::string& Orbit_file_name,
@@ -138,8 +139,14 @@ public:
     return max_l1b1_line_[Index];
   }
   int view_number_to_image_index(int View_number) const;
-
-  // We'll mess with parameter in a bit, for now leave this out.
+  virtual blitz::Array<double, 1> parameter() const
+  { return WithParameterNested::parameter(); }
+  virtual void parameter(const blitz::Array<double, 1>& Parm)
+  { WithParameterNested::parameter(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return WithParameterNested::parameter_with_derivative(); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  { WithParameterNested::parameter_with_derivative(Parm);}
 private:
   boost::shared_ptr<Dem> dem;
   double dem_resolution;

@@ -177,7 +177,7 @@ public:
   virtual std::vector<std::string> parameter_name() const;
   virtual blitz::Array<bool, 1> parameter_mask() const 
   { return parameter_mask_; }
-  virtual void parameter_mask(const blitz::Array<bool, 1>& Pm) const;
+  virtual void parameter_mask(const blitz::Array<bool, 1>& Pm);
   virtual void print(std::ostream& Os) const;
   virtual void notify_update()
   {

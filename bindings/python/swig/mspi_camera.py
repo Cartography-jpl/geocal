@@ -314,6 +314,21 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def gimbal_theta(self):
         return self._v_gimbal_theta()
 
+    def _v_parameter_mask(self, *args):
+        """
+        void MspiCamera::parameter_mask(const blitz::Array< bool, 1 > &Pm)
+
+        """
+        return _mspi_camera.MspiCamera__v_parameter_mask(self, *args)
+
+    @property
+    def parameter_mask(self):
+        return self._v_parameter_mask()
+
+    @parameter_mask.setter
+    def parameter_mask(self, value):
+      self._v_parameter_mask(value)
+
     def angular_separation(self, *args):
         """
         double MspiCamera::angular_separation(int Reference_band, int Target_band) const
@@ -373,6 +388,7 @@ MspiCamera._v_inversion = new_instancemethod(_mspi_camera.MspiCamera__v_inversio
 MspiCamera._v_gimbal_epsilon = new_instancemethod(_mspi_camera.MspiCamera__v_gimbal_epsilon,None,MspiCamera)
 MspiCamera._v_gimbal_psi = new_instancemethod(_mspi_camera.MspiCamera__v_gimbal_psi,None,MspiCamera)
 MspiCamera._v_gimbal_theta = new_instancemethod(_mspi_camera.MspiCamera__v_gimbal_theta,None,MspiCamera)
+MspiCamera._v_parameter_mask = new_instancemethod(_mspi_camera.MspiCamera__v_parameter_mask,None,MspiCamera)
 MspiCamera.angular_separation = new_instancemethod(_mspi_camera.MspiCamera_angular_separation,None,MspiCamera)
 MspiCamera.paraxial_offset = new_instancemethod(_mspi_camera.MspiCamera_paraxial_offset,None,MspiCamera)
 MspiCamera.row_number = new_instancemethod(_mspi_camera.MspiCamera_row_number,None,MspiCamera)

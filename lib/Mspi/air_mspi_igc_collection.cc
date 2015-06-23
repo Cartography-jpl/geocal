@@ -15,7 +15,10 @@ void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(IgcCollection);
   GEOCAL_BASE(AirMspiIgcCollection, IgcCollection);
-  ar & GEOCAL_NVP(dem) & GEOCAL_NVP(dem_resolution)
+  GEOCAL_GENERIC_BASE(WithParameterNested);
+  GEOCAL_BASE(AirMspiIgcCollection, WithParameterNested);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested)
+    & GEOCAL_NVP(dem) & GEOCAL_NVP(dem_resolution)
     & GEOCAL_NVP_(camera) 
     & GEOCAL_NVP_(orbit)
     & GEOCAL_NVP_(view_config)
@@ -47,6 +50,8 @@ AirMspiIgcCollection::AirMspiIgcCollection
      base_directory(Base_directory),
      swath_to_use(Swath_to_use)
 {
+  add_object(Cam);
+  add_object(Orb);
   BOOST_FOREACH(const std::string& fname, L1b1_file_name) {
     MspiConfigFile vc;
     vc.add("l1b1_file", fname);
@@ -138,6 +143,8 @@ AirMspiIgcCollection::AirMspiIgcCollection
     view_config_.push_back(vc);
   }
   calc_min_max_l1b1_line();
+  add_object(camera_);
+  add_object(orbit_);
 }
 
 //-----------------------------------------------------------------------
@@ -208,7 +215,25 @@ AirMspiIgcCollection::subset(const std::vector<int>& Index_set) const
 // see base class for description.
 void AirMspiIgcCollection::print(std::ostream& Os) const 
 {
+  OstreamPad opad(Os, "    ");  
   Os << "AirMspiIgcCollection:\n";
+  Os << "  Dem:\n";
+  opad << *dem;
+  opad.strict_sync();
+  Os << "  Dem resolution: " << dem_resolution << "\n"
+     << "  Camera:\n";
+  opad << *camera_;
+  opad.strict_sync();
+  Os << "  Orbit:\n";
+  opad << *orbit_;
+  opad.strict_sync();
+  Os << "  Base directory: " << base_directory << "\n"
+     << "  Swath to use: " << swath_to_use << "\n"
+     << "  Parameter:\n";
+  blitz::Array<double, 1> p = parameter_subset();
+  std::vector<std::string> pname = parameter_name_subset();
+  for(int i = 0; i < p.rows(); ++i)
+    Os << "    " << pname[i] << ": " << p(i) << "\n";
 }
 
 

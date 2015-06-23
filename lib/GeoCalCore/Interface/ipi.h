@@ -57,12 +57,21 @@ public:
   virtual ~Ipi() {}
   void image_coordinate(const GroundCoordinate& Gp, ImageCoordinate& Ic,
 			bool& Success) const;
+  void image_coordinate_with_derivative(const GroundCoordinate& Gp, ImageCoordinateWithDerivative& Ic,
+			bool& Success) const;
   void image_coordinate_extended(const GroundCoordinate& Gp, 
 				 ImageCoordinate& Ic,
+				 bool& Success) const;
+  void image_coordinate_with_derivative_extended(const GroundCoordinate& Gp, 
+				 ImageCoordinateWithDerivative& Ic,
 				 bool& Success) const;
   double resolution_meter() const;
   void time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 	    bool& Success) const;
+  void time_with_derivative(const GroundCoordinate& Gp, 
+			    TimeWithDerivative& Tres, 
+			    FrameCoordinateWithDerivative& Fres,
+			    bool& Success) const;
   void print(std::ostream& Os) const;
   std::vector<boost::shared_ptr<GroundCoordinate> > footprint(const Dem& D) 
     const;

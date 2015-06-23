@@ -267,7 +267,7 @@ class TiePointCollect(object):
             ic2, lsigma, ssigma, success, diagnostic = \
                 self.itoim[i].match(ic1)
             if(success):
-                tp.ground_location = self.ref_igc.ground_coordinate(ic2)
+                tp.ground_location = Ecr(self.ref_igc.ground_coordinate(ic2))
                 tp.is_gcp = True
                 return tp
         return self.ri.ray_intersect(tp)

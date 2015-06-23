@@ -11,7 +11,8 @@ namespace GeoCal {
 /****************************************************************//**
   This is an ImageGroundConnection for AirMspi.
 *******************************************************************/
-class AirMspiIgc : public virtual IpiImageGroundConnection {
+class AirMspiIgc : public virtual IpiImageGroundConnection,
+		   public virtual WithParameterNested {
 public:
   AirMspiIgc(const std::string& Master_config_file,
 	     const std::string& Orbit_file_name,
@@ -75,6 +76,14 @@ public:
   { return "fake_name"; }
 
   virtual void print(std::ostream& Os) const;
+  virtual blitz::Array<double, 1> parameter() const
+  { return WithParameterNested::parameter(); }
+  virtual void parameter(const blitz::Array<double, 1>& Parm)
+  { WithParameterNested::parameter(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return WithParameterNested::parameter_with_derivative(); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  { WithParameterNested::parameter_with_derivative(Parm);}
 private:
   AirMspiIgc() {}
   friend class boost::serialization::access;

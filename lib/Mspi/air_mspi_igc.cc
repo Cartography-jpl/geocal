@@ -14,7 +14,10 @@ using namespace GeoCal;
 template<class Archive>
 void AirMspiIgc::serialize(Archive & ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IpiImageGroundConnection);
+  GEOCAL_GENERIC_BASE(WithParameterNested);
+  GEOCAL_BASE(AirMspiIgc, WithParameterNested);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IpiImageGroundConnection)
+    & BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested);
 }
 
 GEOCAL_IMPLEMENT(AirMspiIgc);
@@ -96,6 +99,8 @@ AirMspiIgc::AirMspiIgc
   // Ready now to initialize ipi and Igc
   boost::shared_ptr<Ipi> ipi(new Ipi(orb, cam, band, tmin, tmax, tt));
   initialize(ipi, dem, img, Title, dem_resolution);
+  add_object(cam);
+  add_object(orb);
 }
 
 //-----------------------------------------------------------------------
@@ -127,6 +132,8 @@ AirMspiIgc::AirMspiIgc
   int bandn = Cam->band_number(tt->l1b1_file()->row_number_to_use());
   boost::shared_ptr<Ipi> ipi(new Ipi(Orb, Cam, bandn, tmin, tmax, tt));
   initialize(ipi, Dem, img, Title, Dem_resolution);
+  add_object(Cam);
+  add_object(Orb);
 }
 
 //-----------------------------------------------------------------------

@@ -86,19 +86,22 @@ public:
 /// Yaw angle, in radians.
 //-----------------------------------------------------------------------
 
-  double yaw() const {return yaw_;}
+  double yaw() const {return yaw_.value();}
+  AutoDerivative<double> yaw_with_derivative() const { return yaw_; }
 
 //-----------------------------------------------------------------------
 /// Pitch angle, in radians.
 //-----------------------------------------------------------------------
 
-  double pitch() const {return pitch_;}
+  double pitch() const {return pitch_.value();}
+  AutoDerivative<double> pitch_with_derivative() const { return pitch_; }
 
 //-----------------------------------------------------------------------
 /// Roll angle, in radians.
 //-----------------------------------------------------------------------
 
-  double roll() const {return roll_;}
+  double roll() const {return roll_.value();}
+  AutoDerivative<double> roll_with_derivative() const { return roll_; }
 
 //-----------------------------------------------------------------------
 /// This is the integration time in seconds.
@@ -122,7 +125,9 @@ public:
 /// them here.
 //-----------------------------------------------------------------------
 
-  double gimbal_epsilon() const { return gimbal_epsilon_; }
+  double gimbal_epsilon() const { return gimbal_epsilon_.value(); }
+  AutoDerivative<double> gimbal_epsilon_with_derivative() const 
+  { return gimbal_epsilon_; }
 
 //-----------------------------------------------------------------------
 /// Gimbal psi in degrees. We don't actually include the gimbal
@@ -132,7 +137,9 @@ public:
 /// them here.
 //-----------------------------------------------------------------------
 
-  double gimbal_psi() const { return gimbal_psi_; }
+  double gimbal_psi() const { return gimbal_psi_.value(); }
+  AutoDerivative<double> gimbal_psi_with_derivative() const 
+  { return gimbal_psi_; }
 
 //-----------------------------------------------------------------------
 /// Gimbal theta in degrees. We don't actually include the gimbal
@@ -142,7 +149,9 @@ public:
 /// them here.
 //-----------------------------------------------------------------------
 
-  double gimbal_theta() const { return gimbal_theta_; }
+  double gimbal_theta() const { return gimbal_theta_.value(); }
+  AutoDerivative<double> gimbal_theta_with_derivative() const 
+  { return gimbal_theta_; }
 
 //-----------------------------------------------------------------------
 /// Return the camera row number for the given band. This ends up
@@ -159,10 +168,18 @@ public:
 		       double& Line_offset,
 		       double& Sample_offset) const;
   int band_number(int Row_number) const;
-  virtual blitz::Array<double, 1> parameter() const;
-  virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual blitz::Array<double, 1> parameter() const
+  { return parameter_with_derivative().value(); }
+  virtual void parameter(const blitz::Array<double, 1>& Parm)
+  {  parameter_with_derivative(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const;
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
   virtual void print(std::ostream& Os) const;
+  virtual void notify_update()
+  {
+    notify_update_do(*this);
+  }
 protected:
   virtual void dcs_to_focal_plane(int Band,
 				  const boost::math::quaternion<double>& Dcs,
@@ -183,12 +200,13 @@ protected:
 private:
   std::string fname, granule_id_;
   // Camera angles, in radians
-  double epsilon_, psi_, theta_, boresight_angle_, yaw_, pitch_, roll_;
+  double epsilon_, psi_, theta_, boresight_angle_;
+  AutoDerivative<double> yaw_, pitch_, roll_;
   // Gimbal angles, in degrees. We don't actually include these in the
   // camera model, instead these are handled by AirMspiOrbit. But the
   // values are stored in the camera configuration file, so it makes
   // sense to read and store them here.
-  double gimbal_epsilon_, gimbal_psi_, gimbal_theta_;
+  AutoDerivative<double> gimbal_epsilon_, gimbal_psi_, gimbal_theta_;
   // Give the row number for each band.
   std::vector<int> row_number_;
   // Transformation to and from the paraxial coordinates

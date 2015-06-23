@@ -133,22 +133,25 @@ void MspiCamera::read_config_file(const std::string& File_name,
 
 // See base class for description
 
-blitz::Array<double, 1> MspiCamera::parameter() const
+ArrayAd<double, 1> MspiCamera::parameter_with_derivative() const
 {
-  Array<double, 1> res(3);
-  res = yaw_, pitch_, roll_;
-  return res;
+  Array<AutoDerivative<double>, 1> res(6);
+  res = yaw_, pitch_, roll_, gimbal_epsilon_, gimbal_psi_, gimbal_theta_;
+  return ArrayAd<double, 1>(res);
 }
 
 // See base class for description
 
-void MspiCamera::parameter(const blitz::Array<double, 1>& Parm)
+void MspiCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
 {
-  if(Parm.rows() != 3)
+  if(Parm.rows() != 6)
     throw Exception("Parameter must have a size of exactly 3");
   yaw_ = Parm(0);
   pitch_ = Parm(1);
   roll_ = Parm(2);
+  gimbal_epsilon_ = Parm(3);
+  gimbal_psi_ = Parm(4);
+  gimbal_theta_ = Parm(5);
   // Confirmed that old code had these angles negative. We need to
   // verify that this is actually what is intended, but it does match
   // the old code.
@@ -158,6 +161,7 @@ void MspiCamera::parameter(const blitz::Array<double, 1>& Parm)
   frame_to_sc_ = quat_rot("ZYXYXYZ", -yaw(), -pitch(), 
 			  -roll(), -boresight_angle(), theta(), psi(), 
 			  epsilon());
+  notify_update();
 }
 
 // See base class for description
@@ -168,6 +172,9 @@ std::vector<std::string> MspiCamera::parameter_name() const
   res.push_back("Yaw (radians)");
   res.push_back("Pitch (radians)");
   res.push_back("Roll (radians)");
+  res.push_back("Gimbal epsilon (radians)");
+  res.push_back("Gimbal psi (radians)");
+  res.push_back("Gimbal theta (radians)");
   return res;
 }
 

@@ -81,7 +81,7 @@ public:
   const AutoDerivativeRef<T>& operator=(const AutoDerivativeRef<T>& D) const
   {
     v = D.value();
-    if(D.gradient().rows())
+    if(D.gradient().rows() == 0)
       grad = 0;
     else if(grad.rows() == D.gradient().rows())
       grad = D.gradient();

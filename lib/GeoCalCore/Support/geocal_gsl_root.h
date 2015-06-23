@@ -24,5 +24,9 @@ gsl_root_with_derivative(const DFunctorWithDerivative& F,
 std::vector<double> root_list(const DFunctor& F, 
 	        double Xmin, double Xmax, double Root_minimum_spacing,
 		double Eps = 1e-6);
+
+std::vector<AutoDerivative<double> > root_list(const DFunctorWithDerivative& F, 
+	        double Xmin, double Xmax, double Root_minimum_spacing,
+		double Eps = 1e-6);
 }
 #endif

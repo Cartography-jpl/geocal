@@ -129,6 +129,58 @@ void MspiParaxialTransform::paraxial_to_real
 	    df(11) * xf6 * yf2);
 }
 
+void MspiParaxialTransform::paraxial_to_real
+(int Row_number, const AutoDerivative<double>& Paraxial_x,
+ const AutoDerivative<double>& Paraxial_y, 
+ AutoDerivative<double>& Real_x, 
+ AutoDerivative<double>& Real_y) const
+{
+  Range ra = Range::all();
+  if(!has_row(Row_number)) {
+    Exception e;
+    e << "Don't have row " << Row_number;
+    throw e;
+  }
+  int index = row_to_index.find(Row_number)->second;
+  Array<double, 1> cf = c(index, ra);
+  Array<double, 1> df = d(index, ra);
+
+  AutoDerivative<double> xf = Paraxial_x;
+  AutoDerivative<double> yf = Paraxial_y;
+  AutoDerivative<double> xf2 = xf * xf;
+  AutoDerivative<double> xf3 = xf2 * xf;
+  AutoDerivative<double> xf4 = xf3 * xf;
+  AutoDerivative<double> xf5 = xf3 * xf2;
+  AutoDerivative<double> xf6 = xf5 * xf;
+  AutoDerivative<double> xf7 = xf5 * xf2;
+  AutoDerivative<double> yf2 = yf * yf;
+  Real_x = (cf(0) * xf + 
+	    cf(1) * xf * yf + 
+	    cf(2) * xf * yf2 + 
+	    cf(3) * xf3 + 
+	    cf(4) * xf3 * yf + 
+	    cf(5) * xf3 * yf2 + 
+	    cf(6) * xf5 + 
+	    cf(7) * xf5 * yf +
+	    cf(8) * xf5 * yf2 + 
+	    cf(9) * xf7 + 
+	    cf(10) * xf7 * yf + 
+	    cf(11) * xf7 * yf2);
+
+  Real_y = (df(0) * 1 +
+	    df(1) * yf +
+	    df(2) * yf2 +
+	    df(3) * xf2 +
+	    df(4) * xf2 * yf +
+	    df(5) * xf2 * yf2 +
+	    df(6) * xf4 +
+	    df(7) * xf4 * yf +
+	    df(8) * xf4 * yf2 +
+	    df(9) * xf6 +
+	    df(10) * xf6 * yf +
+	    df(11) * xf6 * yf2);
+}
+
 //-----------------------------------------------------------------------
 /// Convert from real coordinates to paraxial.
 //-----------------------------------------------------------------------
@@ -156,6 +208,43 @@ void MspiParaxialTransform::real_to_paraxial
   double xfp5 = xfp4 * xfp;
   double xfp6 = xfp5 * xfp;
   double xfp7 = xfp6 * xfp;
+
+  Paraxial_x = (af(0) * xfp + 
+		af(1) * xfp3 +
+		af(2)  * xfp5 +
+		af(3) * xfp7);
+
+  Paraxial_y = (bf(0) +
+		yfp +
+		bf(1) * xfp2 +
+		bf(2) * xfp4 +
+		bf(3) * xfp6);
+}
+
+void MspiParaxialTransform::real_to_paraxial
+(int Row_number, const AutoDerivative<double>& Real_x, 
+ const AutoDerivative<double>& Real_y, AutoDerivative<double>& Paraxial_x,
+ AutoDerivative<double>& Paraxial_y) const
+{
+  Range ra = Range::all();
+  if(!has_row(Row_number)) {
+    Exception e;
+    e << "Don't have row " << Row_number;
+    throw e;
+  }
+  int index = row_to_index.find(Row_number)->second;
+  Array<double, 1> af = a(index, ra);
+  Array<double, 1> bf = b(index, ra);
+
+  AutoDerivative<double> xfp = Real_x;
+  AutoDerivative<double> yfp = Real_y;
+
+  AutoDerivative<double> xfp2 = xfp * xfp;
+  AutoDerivative<double> xfp3 = xfp2 * xfp;
+  AutoDerivative<double> xfp4 = xfp3 * xfp;
+  AutoDerivative<double> xfp5 = xfp4 * xfp;
+  AutoDerivative<double> xfp6 = xfp5 * xfp;
+  AutoDerivative<double> xfp7 = xfp6 * xfp;
 
   Paraxial_x = (af(0) * xfp + 
 		af(1) * xfp3 +

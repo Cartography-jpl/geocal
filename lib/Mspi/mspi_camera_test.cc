@@ -297,4 +297,52 @@ BOOST_AUTO_TEST_CASE(serialization)
   }
 }
 
+BOOST_AUTO_TEST_CASE(jac_test)
+{
+  // Compare finite difference jacobian to what we calculate using
+  // AutoDerivative.
+  MspiCamera cam(test_data_dir() + "AIRMSPI_CONFIG_CAMERA_MODEL_0003.config");
+  // Print out parameter, useful if we are diagnosing and issue.
+  if(0)
+    for(int i = 0; i < cam.parameter().rows(); ++i)
+      std::cerr << i << ": " << cam.parameter()(i)
+		<< " " << cam.parameter_name()[i] << "\n";
+  cam.add_identity_gradient();
+  FrameCoordinate fc(-0.9, 100);
+  ScLookVector slv = cam.sc_look_vector(fc, 0);
+  // Camera doesn't exactly calculate reverse (just "pretty close").
+  // Jacobian is sensitive to the difference, so we will use the
+  // calculated inverse in the finite difference.
+  FrameCoordinate fc_calc = cam.frame_coordinate(slv, 0);
+  ScLookVectorWithDerivative slvwd = 
+    cam.sc_look_vector_with_derivative(fc, 0);
+  FrameCoordinateWithDerivative fcwd = 
+    cam.frame_coordinate_with_derivative(slv, 0);
+  blitz::Array<double, 1> eps(6);
+  eps = 1e-5,1e-5,1e-5,1e-5,1e-5,1e-5;
+  blitz::Array<double, 2> jac_fd(3, 6);
+  blitz::Array<double, 2> jac_calc(3, 6);
+  jac_calc(0, blitz::Range::all()) = slvwd.look_vector[0].gradient();
+  jac_calc(1, blitz::Range::all()) = slvwd.look_vector[1].gradient();
+  jac_calc(2, blitz::Range::all()) = slvwd.look_vector[2].gradient();
+  blitz::Array<double, 2> jac2_fd(2, 6);
+  blitz::Array<double, 2> jac2_calc(2, 6);
+  jac2_calc(0, blitz::Range::all()) = fcwd.line.gradient();
+  jac2_calc(1, blitz::Range::all()) = fcwd.sample.gradient();
+  blitz::Array<double, 1> p0 = cam.parameter();
+  for(int i = 0; i < 6; ++i) {
+    blitz::Array<double, 1> p(p0.copy());
+    p(i) += eps(i);
+    cam.parameter(p);
+    ScLookVector slvp = cam.sc_look_vector(fc, 0);
+    for(int j = 0; j < 3; ++j)
+      jac_fd(j, i) = (slvp.look_vector[j] - slv.look_vector[j]) / eps(i);
+    FrameCoordinate fcp = cam.frame_coordinate(slv, 0);
+    jac2_fd(0, i) = (fcp.line - fc_calc.line) / eps(i);
+    jac2_fd(1, i) = (fcp.sample - fc_calc.sample) / eps(i);
+  }
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_calc, jac_fd, 1e-3);
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac2_calc, jac2_fd, 1e-2);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

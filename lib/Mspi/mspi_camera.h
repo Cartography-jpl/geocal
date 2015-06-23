@@ -175,6 +175,9 @@ public:
   virtual ArrayAd<double, 1> parameter_with_derivative() const;
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
+  virtual blitz::Array<bool, 1> parameter_mask() const 
+  { return parameter_mask_; }
+  virtual void parameter_mask(const blitz::Array<bool, 1>& Pm) const;
   virtual void print(std::ostream& Os) const;
   virtual void notify_update()
   {
@@ -187,16 +190,12 @@ protected:
   virtual void dcs_to_focal_plane(int Band,
 				  const boost::math::quaternion<AutoDerivative<double> >& Dcs,
 				  AutoDerivative<double>& Xfp, 
-				  AutoDerivative<double>& Yfp) const
-  { throw Exception("No Implemented yet"); }
+				  AutoDerivative<double>& Yfp) const;
   virtual boost::math::quaternion<double> 
   focal_plane_to_dcs(int Band, double Xfp, double Yfp) const;
   virtual boost::math::quaternion<AutoDerivative<double> > 
   focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp, 
-		     const AutoDerivative<double>& Yfp) const
-  {
-    throw Exception("No Implemented yet");
-  }
+		     const AutoDerivative<double>& Yfp) const;
 private:
   std::string fname, granule_id_;
   // Camera angles, in radians
@@ -212,6 +211,8 @@ private:
   // Transformation to and from the paraxial coordinates
   boost::shared_ptr<MspiParaxialTransform> paraxial_transform_;
   int inversion_;
+  blitz::Array<bool, 1> parameter_mask_;
+				// Mask of parameters we are fitting for.
 
   MspiCamera() {}
   friend class boost::serialization::access;

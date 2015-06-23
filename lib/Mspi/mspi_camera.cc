@@ -27,7 +27,8 @@ void MspiCamera::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(gimbal_theta)
     & GEOCAL_NVP_(row_number)
     & GEOCAL_NVP_(paraxial_transform)
-    & GEOCAL_NVP_(inversion);
+    & GEOCAL_NVP_(inversion)
+    & GEOCAL_NVP_(parameter_mask);
 }
 
 
@@ -122,6 +123,9 @@ void MspiCamera::read_config_file(const std::string& File_name,
   psi_ = 0;
   theta_ = 0;
 
+  parameter_mask_.resize(6);
+  parameter_mask_ = true;
+
 //--------------------------------------------------------------------------
 // Setup rotation matrix. This is a side effect of setting the parameters.
 //--------------------------------------------------------------------------
@@ -145,7 +149,7 @@ ArrayAd<double, 1> MspiCamera::parameter_with_derivative() const
 void MspiCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
 {
   if(Parm.rows() != 6)
-    throw Exception("Parameter must have a size of exactly 3");
+    throw Exception("Parameter must have a size of exactly 6");
   yaw_ = Parm(0);
   pitch_ = Parm(1);
   roll_ = Parm(2);
@@ -158,9 +162,13 @@ void MspiCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
   // 
   // The negative values give a passive rotation, vs. active rotation
   // for positive values
-  frame_to_sc_ = quat_rot("ZYXYXYZ", -yaw(), -pitch(), 
-			  -roll(), -boresight_angle(), theta(), psi(), 
-			  epsilon());
+  frame_to_sc_ = quat_rot("ZYXYXYZ", -yaw_with_derivative(), 
+			  -pitch_with_derivative(), 
+			  -roll_with_derivative(), 
+			  AutoDerivative<double>(-boresight_angle()), 
+			  AutoDerivative<double>(theta()), 
+			  AutoDerivative<double>(psi()), 
+			  AutoDerivative<double>(epsilon()));
   notify_update();
 }
 
@@ -200,6 +208,28 @@ void MspiCamera::dcs_to_focal_plane(int Band,
 					Xfp, Yfp);
 }
 
+void MspiCamera::dcs_to_focal_plane(int Band,
+	    const boost::math::quaternion<AutoDerivative<double> >& Dcs,
+	    AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const
+{
+//---------------------------------------------------------
+// Go to paraxial focal plane. Units are millimeters.
+//---------------------------------------------------------
+
+  AutoDerivative<double> yf = 
+    (focal_length() / Dcs.R_component_4()) * (-Dcs.R_component_2());
+  AutoDerivative<double> xf = 
+    (focal_length() / Dcs.R_component_4()) * Dcs.R_component_3();
+
+//-------------------------------------------------------------------------
+// Transform paraxial focal plane coordinate to real focal plane coordinate.
+// Units are millimeters.
+//-------------------------------------------------------------------------
+  
+  paraxial_transform_->paraxial_to_real(row_number_[Band], xf, yf, 
+					Xfp, Yfp);
+}
+
 // See base class for description
 boost::math::quaternion<double> 
 MspiCamera::focal_plane_to_dcs(int Band, double Xfp, double Yfp) const
@@ -217,6 +247,25 @@ MspiCamera::focal_plane_to_dcs(int Band, double Xfp, double Yfp) const
 //-------------------------------------------------------------------------
 
   return boost::math::quaternion<double>(0, -yf, xf, focal_length());
+}
+
+boost::math::quaternion<AutoDerivative<double> >
+MspiCamera::focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp, 
+			       const AutoDerivative<double>& Yfp) const
+{
+//-------------------------------------------------------------------------
+/// Convert to paraxial coordinates.
+//-------------------------------------------------------------------------
+
+  AutoDerivative<double> xf, yf;
+  paraxial_transform_->real_to_paraxial(row_number_[Band], Xfp, Yfp,
+					xf, yf);
+
+//-------------------------------------------------------------------------
+/// Then to detector coordinates look vector.
+//-------------------------------------------------------------------------
+
+  return boost::math::quaternion<AutoDerivative<double> >(0, -yf, xf, focal_length());
 }
 
 
@@ -286,4 +335,10 @@ void MspiCamera::paraxial_offset
 					xf, yf);
   Line_offset = inversion_ * (yf - yf_prime) / line_pitch();
   Sample_offset = (xf - xf_prime) / sample_pitch();
+}
+
+void MspiCamera::parameter_mask(const blitz::Array<bool, 1>& Pm) const
+{
+  if(Pm.rows() != 6)
+    throw Exception("Parameter mask must have a size of exactly 6");
 }

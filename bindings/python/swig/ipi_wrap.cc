@@ -6303,11 +6303,11 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Ipi_image_coordinate_extended(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Ipi_image_coordinate_with_derivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Ipi *arg1 = (GeoCal::Ipi *) 0 ;
   GeoCal::GroundCoordinate *arg2 = 0 ;
-  GeoCal::ImageCoordinate *arg3 = 0 ;
+  GeoCal::ImageCoordinateWithDerivative *arg3 = 0 ;
   bool *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -6316,21 +6316,20 @@ SWIGINTERN PyObject *_wrap_Ipi_image_coordinate_extended(PyObject *SWIGUNUSEDPAR
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
-  GeoCal::ImageCoordinate temp3 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative > tempshared3 ;
   bool temp4 ;
   int res4 = SWIG_TMPOBJ ;
-  PyObject *swig_obj[2] ;
+  PyObject *swig_obj[3] ;
   
-  {
-    arg3 = &temp3;
-  }
   arg4 = &temp4;
-  if (!SWIG_Python_UnpackTuple(args,"Ipi_image_coordinate_extended",2,2,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"Ipi_image_coordinate_with_derivative",3,3,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ipi_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Ipi_image_coordinate_extended" "', argument " "1"" of type '" "GeoCal::Ipi const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Ipi_image_coordinate_with_derivative" "', argument " "1"" of type '" "GeoCal::Ipi const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
@@ -6352,10 +6351,10 @@ SWIGINTERN PyObject *_wrap_Ipi_image_coordinate_extended(PyObject *SWIGUNUSEDPAR
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Ipi_image_coordinate_extended" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Ipi_image_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Ipi_image_coordinate_extended" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Ipi_image_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
@@ -6367,8 +6366,33 @@ SWIGINTERN PyObject *_wrap_Ipi_image_coordinate_extended(PyObject *SWIGUNUSEDPAR
     }
   }
   {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinateWithDerivative *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Ipi_image_coordinate_with_derivative" "', argument " "3"" of type '" "GeoCal::ImageCoordinateWithDerivative &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Ipi_image_coordinate_with_derivative" "', argument " "3"" of type '" "GeoCal::ImageCoordinateWithDerivative &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > * >(argp3);
+        arg3 = const_cast< GeoCal::ImageCoordinateWithDerivative * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::ImageCoordinateWithDerivative * >(reinterpret_cast< boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > * >(argp3)->get());
+      }
+    }
+  }
+  {
     try {
-      ((GeoCal::Ipi const *)arg1)->image_coordinate_extended((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4);
+      ((GeoCal::Ipi const *)arg1)->image_coordinate_with_derivative((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6376,10 +6400,115 @@ SWIGINTERN PyObject *_wrap_Ipi_image_coordinate_extended(PyObject *SWIGUNUSEDPAR
     }
   }
   resultobj = SWIG_Py_Void();
-  {
-    boost::shared_ptr<GeoCal::ImageCoordinate> *smartresult = new boost::shared_ptr<GeoCal::ImageCoordinate>(new GeoCal::ImageCoordinate(*arg3));
-    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN));
+  if (SWIG_IsTmpObj(res4)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_bool((*arg4)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res4) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg4), SWIGTYPE_p_bool, new_flags));
   }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Ipi_image_coordinate_with_derivative_extended(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Ipi *arg1 = (GeoCal::Ipi *) 0 ;
+  GeoCal::GroundCoordinate *arg2 = 0 ;
+  GeoCal::ImageCoordinateWithDerivative *arg3 = 0 ;
+  bool *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Ipi const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Ipi const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative > tempshared3 ;
+  bool temp4 ;
+  int res4 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[3] ;
+  
+  arg4 = &temp4;
+  if (!SWIG_Python_UnpackTuple(args,"Ipi_image_coordinate_with_derivative_extended",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ipi_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Ipi_image_coordinate_with_derivative_extended" "', argument " "1"" of type '" "GeoCal::Ipi const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      arg1 = const_cast< GeoCal::Ipi * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      arg1 = const_cast< GeoCal::Ipi * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Ipi_image_coordinate_with_derivative_extended" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Ipi_image_coordinate_with_derivative_extended" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinateWithDerivative *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Ipi_image_coordinate_with_derivative_extended" "', argument " "3"" of type '" "GeoCal::ImageCoordinateWithDerivative &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Ipi_image_coordinate_with_derivative_extended" "', argument " "3"" of type '" "GeoCal::ImageCoordinateWithDerivative &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > * >(argp3);
+        arg3 = const_cast< GeoCal::ImageCoordinateWithDerivative * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::ImageCoordinateWithDerivative * >(reinterpret_cast< boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::Ipi const *)arg1)->image_coordinate_with_derivative_extended((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
   if (SWIG_IsTmpObj(res4)) {
     resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_bool((*arg4)));
   } else {
@@ -6477,6 +6606,104 @@ SWIGINTERN PyObject *_wrap_Ipi_time(PyObject *SWIGUNUSEDPARM(self), PyObject *ar
   {
     boost::shared_ptr<GeoCal::FrameCoordinate> *smartresult = new boost::shared_ptr<GeoCal::FrameCoordinate>(new GeoCal::FrameCoordinate(*arg4));
     resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN));
+  }
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_bool((*arg5)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_bool, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Ipi_time_with_derivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Ipi *arg1 = (GeoCal::Ipi *) 0 ;
+  GeoCal::GroundCoordinate *arg2 = 0 ;
+  GeoCal::TimeWithDerivative *arg3 = 0 ;
+  GeoCal::FrameCoordinateWithDerivative *arg4 = 0 ;
+  bool *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Ipi const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Ipi const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
+  GeoCal::TimeWithDerivative temp3 ;
+  GeoCal::FrameCoordinateWithDerivative temp4 ;
+  bool temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[2] ;
+  
+  {
+    arg3 = &temp3;
+  }
+  {
+    arg4 = &temp4;
+  }
+  arg5 = &temp5;
+  if (!SWIG_Python_UnpackTuple(args,"Ipi_time_with_derivative",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ipi_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Ipi_time_with_derivative" "', argument " "1"" of type '" "GeoCal::Ipi const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      arg1 = const_cast< GeoCal::Ipi * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      arg1 = const_cast< GeoCal::Ipi * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Ipi_time_with_derivative" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Ipi_time_with_derivative" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::Ipi const *)arg1)->time_with_derivative((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4,*arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<GeoCal::TimeWithDerivative> *smartresult = new boost::shared_ptr<GeoCal::TimeWithDerivative>(new GeoCal::TimeWithDerivative(*arg3));
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN));
+  }
+  {
+    boost::shared_ptr<GeoCal::FrameCoordinateWithDerivative> *smartresult = new boost::shared_ptr<GeoCal::FrameCoordinateWithDerivative>(new GeoCal::FrameCoordinateWithDerivative(*arg4));
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN));
   }
   if (SWIG_IsTmpObj(res5)) {
     resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_bool((*arg5)));
@@ -7378,18 +7605,15 @@ static PyMethodDef SwigMethods[] = {
 		"true, then Ic will have a line and sample number inside of the image\n"
 		"given by the Camera and TimeTable. \n"
 		""},
-	 { (char *)"Ipi_image_coordinate_extended", _wrap_Ipi_image_coordinate_extended, METH_VARARGS, (char *)"\n"
-		"void Ipi::image_coordinate_extended(const GroundCoordinate &Gp, ImageCoordinate &Ic, bool &Success) const\n"
-		"This is like image_coordinate, by we try to handle points out of the\n"
-		"time and sample range of the data (so this returns line and samples\n"
-		"outside of the range of the TimeTable and Camera).\n"
+	 { (char *)"Ipi_image_coordinate_with_derivative", _wrap_Ipi_image_coordinate_with_derivative, METH_VARARGS, (char *)"\n"
+		"void Ipi::image_coordinate_with_derivative(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool\n"
+		"&Success) const\n"
 		"\n"
-		"In some cases this is more useful than having image_coordinate fail.\n"
-		"Note that we still might have Success false, if for example the point\n"
-		"is outside the range of the Orbit.\n"
+		""},
+	 { (char *)"Ipi_image_coordinate_with_derivative_extended", _wrap_Ipi_image_coordinate_with_derivative_extended, METH_VARARGS, (char *)"\n"
+		"void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool\n"
+		"&Success) const\n"
 		"\n"
-		"For points outside of the TimeTable range, we just extrapolate the\n"
-		"last two lines in the time table. \n"
 		""},
 	 { (char *)"Ipi_time", _wrap_Ipi_time, METH_VARARGS, (char *)"\n"
 		"void Ipi::time(const GroundCoordinate &Gp, Time &Tres, FrameCoordinate &Fres, bool\n"
@@ -7406,6 +7630,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"If it is more useful to you, image_coordinate has the opposite\n"
 		"behavior, it rejects any points that are outside of the actual image.\n"
+		"\n"
+		""},
+	 { (char *)"Ipi_time_with_derivative", _wrap_Ipi_time_with_derivative, METH_VARARGS, (char *)"\n"
+		"void Ipi::time_with_derivative(const GroundCoordinate &Gp, TimeWithDerivative &Tres,\n"
+		"FrameCoordinateWithDerivative &Fres, bool &Success) const\n"
 		"\n"
 		""},
 	 { (char *)"Ipi_footprint", _wrap_Ipi_footprint, METH_VARARGS, (char *)"\n"

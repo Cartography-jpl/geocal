@@ -6056,7 +6056,7 @@ static PyMethodDef SwigMethods[] = {
 		"aren't talking about the derivative wrt X here). \n"
 		""},
 	 { (char *)"root_list", _wrap_root_list, METH_VARARGS, (char *)"\n"
-		"std::vector< double > GeoCal::root_list(const DFunctor &F, double Xmin, double Xmax, double\n"
+		"std::vector< AutoDerivative< double > > GeoCal::root_list(const DFunctorWithDerivative &F, double Xmin, double Xmax, double\n"
 		"Root_minimum_spacing, double Eps=1e-6)\n"
 		"This will find a (possible empty) list of roots of a function, where\n"
 		"the roots have a seperation of at least the supplied minimum\n"

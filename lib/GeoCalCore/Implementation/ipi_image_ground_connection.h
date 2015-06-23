@@ -92,6 +92,8 @@ public:
       throw ImageGroundConnectionFailed();
     return res; 
   }
+  virtual blitz::Array<double, 2> 
+  image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
 					    ImageCoordinate& Res,
 					    bool& Success) const

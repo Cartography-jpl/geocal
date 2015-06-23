@@ -54,6 +54,9 @@ class TiePointCollect(object):
                  avg_level = 0, use_intersection = False,
                  grid_spacing = 1,
                  image_matcher = None,
+                 gcp_image_matcher = None,
+                 ref_image = None,
+                 ref_dem = None,
                  surface_image = None,
                  scale_factor = None):
         '''This sets up for doing tie point collection. A IgcCollection
@@ -87,6 +90,11 @@ class TiePointCollect(object):
         using the largest coverage first and then the intersection
         second.  which one is used is controlled by the option
         "use_intersection"
+
+        Can supply a reference image. If present, we use this as ground
+        truth and generate GCPs if we can. Note that this pretty much
+        duplicates what GcpTiePointCollect does. I think we may eventually 
+        do away with GcpTiePointCollect.
         '''
         if(image_matcher is None):
             self.image_matcher = CcorrLsmMatcher()
@@ -94,11 +102,17 @@ class TiePointCollect(object):
                 self.image_matcher = PyramidImageMatcher(self.image_matcher, avg_level)
         else:
             self.image_matcher = image_matcher
+        if(gcp_image_matcher is not None):
+            self.gcp_image_matcher = gcp_image_matcher
+        else:
+            self.gcp_image_matcher = self.image_matcher
         self.start_image_index = start_image_index
         if(end_image_index is None):
             self.end_image_index = igc_collection.number_image
         else:
             self.end_image_index = end_image_index
+        self.ref_image = ref_image
+        self.ref_dem = ref_dem
         self.avg_level = avg_level
         self.scale_factor = scale_factor
         self.map_info = map_info
@@ -108,7 +122,10 @@ class TiePointCollect(object):
         self.surface_image = surface_image
         self.ri = RayIntersect2(self.igc_collection,
                                 max_ground_covariance = max_ground_covariance)
-        self.itoim = [None]*self.igc_collection.number_image 
+        if(self.ref_image is not None):
+            self.itoim = [None]*(self.igc_collection.number_image + 1)
+        else:
+            self.itoim = [None]*self.igc_collection.number_image 
         i = self.base_image_index
         igc1 = self.igc_collection.image_ground_connection(i)
         if(scale_factor is not None):
@@ -129,6 +146,22 @@ class TiePointCollect(object):
             else:
                 self.itoim[j] = SurfaceImageToImageMatch(igc1, igc2, 
                               map_info, self.image_matcher, grid_spacing)
+        if(self.ref_image is not None):
+            dem = self.ref_dem
+            if(dem is None):
+                dem = igc1.dem
+            self.ref_igc = MapInfoImageGroundConnection(self.ref_image, 
+                dem, "Reference Image")
+            j = self.igc_collection.number_image
+            if(surface_image is not None):
+                self.itoim[j] = SurfaceImageToImageMatch(igc1, surface_image[i],
+                        self.ref_igc, self.ref_image, self.gcp_image_matcher)
+            else:
+                mi = map_info
+                if(mi is None):
+                    mi = igc1.coverage(ref_image.map_info)
+                self.itoim[j] = SurfaceImageToImageMatch(igc1, ref_igc,
+                                 mi, self.gcp_image_matcher, grid_spacing)
 
     def __getstate__(self):
         return {"igc_collection": self.igc_collection,
@@ -139,6 +172,9 @@ class TiePointCollect(object):
                 "end_image_index" : self.end_image_index,
                 "avg_level" : self.avg_level,
                 "image_matcher" : self.image_matcher,
+                "gcp_image_matcher" : self.gcp_image_matcher,
+                "ref_image" : self.ref_image,
+                "ref_dem" : self.ref_dem,
                 "surface_image" : self.surface_image,
                 "scale_factor": self.scale_factor
                 }
@@ -150,6 +186,9 @@ class TiePointCollect(object):
                       start_image_index = dict["start_image_index"],
                       end_image_index = dict["end_image_index"],
                       image_matcher = dict["image_matcher"],
+                      gcp_image_matcher = dict["gcp_image_matcher"],
+                      ref_image = dict["ref_image"],
+                      ref_dem = dict["ref_dem"],
                       avg_level = dict["avg_level"],
                       surface_image = dict["surface_image"],
                       scale_factor = dict["scale_factor"]
@@ -223,11 +262,23 @@ class TiePointCollect(object):
                     self.itoim[i].match(ic1)
                 if(success):
                     tp.image_location[i] = ic2, lsigma, ssigma
+        if(self.ref_image is not None):
+            i = self.igc_collection.number_image
+            ic2, lsigma, ssigma, success, diagnostic = \
+                self.itoim[i].match(ic1)
+            if(success):
+                tp.ground_location = self.ref_igc.ground_coordinate(ic2)
+                tp.is_gcp = True
+                return tp
         return self.ri.ray_intersect(tp)
 
 class GcpTiePointCollect(object):
     '''Given a IgcCollection and a reference image, collect GCPs by 
-    image matching.'''
+    image matching.
+
+    Note that this somewhat duplicates what TiePointCollect does, I think
+    we may do away with this as a separate class at some point.
+    '''
     def __init__(self, ref_image, dem, igc_collection,
                  avg_level = 0, use_intersection = False,
                  image_matcher = None,

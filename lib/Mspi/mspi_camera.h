@@ -52,13 +52,13 @@ public:
   const std::string& granule_id() const {return granule_id_;}
 
 //-----------------------------------------------------------------------
-/// Epsilon angle, in radians.
+/// Epsilon angle, in degrees.
 //-----------------------------------------------------------------------
 
   double epsilon() const {return epsilon_;}
 
 //-----------------------------------------------------------------------
-/// Psi angle, in radians.
+/// Psi angle, in degrees.
 //-----------------------------------------------------------------------
 
   double psi() const {return psi_;}
@@ -71,33 +71,33 @@ public:
   bool inversion() const { return inversion_ == -1; }
 
 //-----------------------------------------------------------------------
-/// Theta angle, in radians.
+/// Theta angle, in degrees.
 //-----------------------------------------------------------------------
 
   double theta() const {return theta_;}
 
 //-----------------------------------------------------------------------
-/// Boresight angle, in radians.
+/// Boresight angle, in degrees.
 //-----------------------------------------------------------------------
 
   double boresight_angle() const {return boresight_angle_;}
 
 //-----------------------------------------------------------------------
-/// Yaw angle, in radians.
+/// Yaw angle, in degrees.
 //-----------------------------------------------------------------------
 
   double yaw() const {return yaw_.value();}
   AutoDerivative<double> yaw_with_derivative() const { return yaw_; }
 
 //-----------------------------------------------------------------------
-/// Pitch angle, in radians.
+/// Pitch angle, in degrees.
 //-----------------------------------------------------------------------
 
   double pitch() const {return pitch_.value();}
   AutoDerivative<double> pitch_with_derivative() const { return pitch_; }
 
 //-----------------------------------------------------------------------
-/// Roll angle, in radians.
+/// Roll angle, in degrees.
 //-----------------------------------------------------------------------
 
   double roll() const {return roll_.value();}
@@ -198,7 +198,7 @@ protected:
 		     const AutoDerivative<double>& Yfp) const;
 private:
   std::string fname, granule_id_;
-  // Camera angles, in radians
+  // Camera angles, in degrees
   double epsilon_, psi_, theta_, boresight_angle_;
   AutoDerivative<double> yaw_, pitch_, roll_;
   // Gimbal angles, in degrees. We don't actually include these in the

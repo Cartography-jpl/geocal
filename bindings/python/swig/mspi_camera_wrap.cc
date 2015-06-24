@@ -6930,27 +6930,27 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"MspiCamera__v_epsilon", (PyCFunction)_wrap_MspiCamera__v_epsilon, METH_O, (char *)"\n"
 		"double GeoCal::MspiCamera::epsilon() const\n"
-		"Epsilon angle, in radians. \n"
+		"Epsilon angle, in degrees. \n"
 		""},
 	 { (char *)"MspiCamera__v_psi", (PyCFunction)_wrap_MspiCamera__v_psi, METH_O, (char *)"\n"
 		"double GeoCal::MspiCamera::psi() const\n"
-		"Psi angle, in radians. \n"
+		"Psi angle, in degrees. \n"
 		""},
 	 { (char *)"MspiCamera__v_theta", (PyCFunction)_wrap_MspiCamera__v_theta, METH_O, (char *)"\n"
 		"double GeoCal::MspiCamera::theta() const\n"
-		"Theta angle, in radians. \n"
+		"Theta angle, in degrees. \n"
 		""},
 	 { (char *)"MspiCamera__v_yaw", (PyCFunction)_wrap_MspiCamera__v_yaw, METH_O, (char *)"\n"
 		"double GeoCal::MspiCamera::yaw() const\n"
-		"Yaw angle, in radians. \n"
+		"Yaw angle, in degrees. \n"
 		""},
 	 { (char *)"MspiCamera__v_pitch", (PyCFunction)_wrap_MspiCamera__v_pitch, METH_O, (char *)"\n"
 		"double GeoCal::MspiCamera::pitch() const\n"
-		"Pitch angle, in radians. \n"
+		"Pitch angle, in degrees. \n"
 		""},
 	 { (char *)"MspiCamera__v_roll", (PyCFunction)_wrap_MspiCamera__v_roll, METH_O, (char *)"\n"
 		"double GeoCal::MspiCamera::roll() const\n"
-		"Roll angle, in radians. \n"
+		"Roll angle, in degrees. \n"
 		""},
 	 { (char *)"MspiCamera__v_yaw_with_derivative", (PyCFunction)_wrap_MspiCamera__v_yaw_with_derivative, METH_O, (char *)"\n"
 		"AutoDerivative<double> GeoCal::MspiCamera::yaw_with_derivative() const\n"
@@ -6966,7 +6966,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"MspiCamera__v_boresight_angle", (PyCFunction)_wrap_MspiCamera__v_boresight_angle, METH_O, (char *)"\n"
 		"double GeoCal::MspiCamera::boresight_angle() const\n"
-		"Boresight angle, in radians. \n"
+		"Boresight angle, in degrees. \n"
 		""},
 	 { (char *)"MspiCamera__v_inversion", (PyCFunction)_wrap_MspiCamera__v_inversion, METH_O, (char *)"\n"
 		"bool GeoCal::MspiCamera::inversion() const\n"

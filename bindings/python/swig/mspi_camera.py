@@ -180,7 +180,7 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def _v_epsilon(self):
         """
         double GeoCal::MspiCamera::epsilon() const
-        Epsilon angle, in radians. 
+        Epsilon angle, in degrees. 
         """
         return _mspi_camera.MspiCamera__v_epsilon(self)
 
@@ -191,7 +191,7 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def _v_psi(self):
         """
         double GeoCal::MspiCamera::psi() const
-        Psi angle, in radians. 
+        Psi angle, in degrees. 
         """
         return _mspi_camera.MspiCamera__v_psi(self)
 
@@ -202,7 +202,7 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def _v_theta(self):
         """
         double GeoCal::MspiCamera::theta() const
-        Theta angle, in radians. 
+        Theta angle, in degrees. 
         """
         return _mspi_camera.MspiCamera__v_theta(self)
 
@@ -213,7 +213,7 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def _v_yaw(self):
         """
         double GeoCal::MspiCamera::yaw() const
-        Yaw angle, in radians. 
+        Yaw angle, in degrees. 
         """
         return _mspi_camera.MspiCamera__v_yaw(self)
 
@@ -224,7 +224,7 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def _v_pitch(self):
         """
         double GeoCal::MspiCamera::pitch() const
-        Pitch angle, in radians. 
+        Pitch angle, in degrees. 
         """
         return _mspi_camera.MspiCamera__v_pitch(self)
 
@@ -235,7 +235,7 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def _v_roll(self):
         """
         double GeoCal::MspiCamera::roll() const
-        Roll angle, in radians. 
+        Roll angle, in degrees. 
         """
         return _mspi_camera.MspiCamera__v_roll(self)
 
@@ -279,7 +279,7 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def _v_boresight_angle(self):
         """
         double GeoCal::MspiCamera::boresight_angle() const
-        Boresight angle, in radians. 
+        Boresight angle, in degrees. 
         """
         return _mspi_camera.MspiCamera__v_boresight_angle(self)
 

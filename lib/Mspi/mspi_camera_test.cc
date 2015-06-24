@@ -21,8 +21,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(cam.psi(), 0, 1e-8);
   BOOST_CHECK_CLOSE(cam.theta(), 0, 1e-8);
   BOOST_CHECK_CLOSE(cam.boresight_angle(), 0, 1e-8);
-  BOOST_CHECK_CLOSE(cam.yaw(), 180.0 * Constant::deg_to_rad, 1e-8);
-  BOOST_CHECK_CLOSE(cam.pitch(), 90.0 * Constant::deg_to_rad, 1e-8);
+  BOOST_CHECK_CLOSE(cam.yaw(), 180.0, 1e-8);
+  BOOST_CHECK_CLOSE(cam.pitch(), 90.0, 1e-8);
   BOOST_CHECK_CLOSE(cam.roll(), 0, 1e-8);
   BOOST_CHECK_CLOSE(cam.focal_length(), 27.825088, 1e-8);
   BOOST_CHECK_CLOSE(cam.line_pitch(), 0.010, 1e-8);

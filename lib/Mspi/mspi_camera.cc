@@ -61,10 +61,10 @@ void MspiCamera::read_config_file(const std::string& File_name,
 // Value we read from the configuration file.
 //-------------------------------------------------------
 
-  boresight_angle_ = c.value<double>("boresight_angle") * Constant::deg_to_rad;
-  yaw_ = c.value<double>("camera_yaw") * Constant::deg_to_rad;
-  pitch_ = c.value<double>("camera_pitch") * Constant::deg_to_rad;
-  roll_ = c.value<double>("camera_roll") * Constant::deg_to_rad;
+  boresight_angle_ = c.value<double>("boresight_angle");
+  yaw_ = c.value<double>("camera_yaw");
+  pitch_ = c.value<double>("camera_pitch");
+  roll_ = c.value<double>("camera_roll");
   if(c.have_key("gimbal_epsilon")) {
     gimbal_epsilon_ = c.value<double>("gimbal_epsilon");
     gimbal_psi_ = c.value<double>("gimbal_psi");
@@ -162,13 +162,14 @@ void MspiCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
   // 
   // The negative values give a passive rotation, vs. active rotation
   // for positive values
-  frame_to_sc_ = quat_rot("ZYXYXYZ", -yaw_with_derivative(), 
-			  -pitch_with_derivative(), 
-			  -roll_with_derivative(), 
-			  AutoDerivative<double>(-boresight_angle()), 
-			  AutoDerivative<double>(theta()), 
-			  AutoDerivative<double>(psi()), 
-			  AutoDerivative<double>(epsilon()));
+  frame_to_sc_ = 
+    quat_rot("ZYXYXYZ", -yaw_with_derivative() * Constant::deg_to_rad, 
+	     -pitch_with_derivative() * Constant::deg_to_rad, 
+	     -roll_with_derivative()  * Constant::deg_to_rad, 
+	     AutoDerivative<double>(-boresight_angle())  * Constant::deg_to_rad, 
+	     AutoDerivative<double>(theta()) * Constant::deg_to_rad, 
+	     AutoDerivative<double>(psi())  * Constant::deg_to_rad, 
+	     AutoDerivative<double>(epsilon())  * Constant::deg_to_rad);
   notify_update();
 }
 
@@ -177,12 +178,12 @@ void MspiCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
 std::vector<std::string> MspiCamera::parameter_name() const
 {
   std::vector<std::string> res;
-  res.push_back("Yaw (radians)");
-  res.push_back("Pitch (radians)");
-  res.push_back("Roll (radians)");
-  res.push_back("Gimbal epsilon (radians)");
-  res.push_back("Gimbal psi (radians)");
-  res.push_back("Gimbal theta (radians)");
+  res.push_back("Yaw (degrees)");
+  res.push_back("Pitch (degrees)");
+  res.push_back("Roll (degrees)");
+  res.push_back("Gimbal epsilon (degrees)");
+  res.push_back("Gimbal psi (degrees)");
+  res.push_back("Gimbal theta (degrees)");
   return res;
 }
 

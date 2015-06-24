@@ -1,6 +1,7 @@
 #ifndef AIRMSPI_ORBIT_H
 #define AIRMSPI_ORBIT_H
 #include "orbit.h"		// Definition of Orbit
+#include "mspi_camera.h"	// Definition of MspiCamera.
 #include "gdal_raster_image.h"	// Definition of GdalRasterImage
 #include "geocal_datum.h"	// Definition of Datum
 #include "aircraft_orbit_data.h"
@@ -62,6 +63,13 @@ public:
 	       AircraftOrbitData::GEODETIC_VERTICAL);
 
   AirMspiOrbit(const std::string& Fname, 
+	       const boost::shared_ptr<Datum>& D
+	       = boost::shared_ptr<Datum>(new NoDatum()),
+	       AircraftOrbitData::VerticalDefinition Def = 
+	       AircraftOrbitData::GEODETIC_VERTICAL);
+
+  AirMspiOrbit(const std::string& Fname, 
+	       const boost::shared_ptr<MspiCamera>& Cam,
 	       const boost::shared_ptr<Datum>& D
 	       = boost::shared_ptr<Datum>(new NoDatum()),
 	       AircraftOrbitData::VerticalDefinition Def = 
@@ -152,6 +160,8 @@ private:
   AircraftOrbitData::VerticalDefinition vdef_;
   double tspace_;
   bool old_format;
+  // Supplied gimbal angles.
+  boost::shared_ptr<MspiCamera> cam;
   AirMspiOrbit() {}
   friend class boost::serialization::access;
   template<class Archive>

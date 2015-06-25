@@ -56,6 +56,7 @@ AirMspiIgc::AirMspiIgc
       extra_config = Base_directory + "/" + extra_config;
   }
   boost::shared_ptr<MspiCamera> cam(new MspiCamera(fname, extra_config));
+  boost::shared_ptr<MspiGimbal> gim(new MspiGimbal(fname, extra_config));
 
   // Get orbit set up
   // Not sure if we still need the "static gimbal", but we don't
@@ -63,12 +64,8 @@ AirMspiIgc::AirMspiIgc
   // requested. We can modify the code to support this if needed.
   if(c.value<bool>("use_static_gimbal"))
     throw Exception("We don't currently support static gimbals");
-  blitz::Array<double, 1> gimbal_angle(3);
-  gimbal_angle = cam->gimbal_epsilon(),
-    cam->gimbal_psi(),
-    cam->gimbal_theta();
   boost::shared_ptr<AirMspiOrbit> 
-    orb(new AirMspiOrbit(Orbit_file_name, gimbal_angle));
+    orb(new AirMspiOrbit(Orbit_file_name, gim));
 
   // Get DEM set up
   boost::shared_ptr<Dem> dem;

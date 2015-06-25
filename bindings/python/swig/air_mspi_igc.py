@@ -127,9 +127,9 @@ import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
 import geocal_swig.observer
-import geocal_swig.quaternion_camera
 import geocal_swig.raster_image_tiled_file
 import geocal_swig.raster_image_variable
+import geocal_swig.quaternion_camera
 class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnection):
     """
     This is an ImageGroundConnection for AirMspi.

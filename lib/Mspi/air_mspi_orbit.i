@@ -9,7 +9,7 @@
 
 %base_import(orbit)
 %import "aircraft_orbit_data.i"
-%import "mspi_camera.i"
+%import "mspi_gimbal.i"
 %import "geocal_datum.i"
 
 %geocal_shared_ptr(GeoCal::AirMspiOrbit);
@@ -34,13 +34,13 @@ public:
 	       AircraftOrbitData::GEODETIC_VERTICAL);
   AirMspiOrbit(const std::string& Fname);
   AirMspiOrbit(const std::string& Fname,
-	       const boost::shared_ptr<MspiCamera>& Cam);
+	       const boost::shared_ptr<MspiGimbal>& Gim);
   AirMspiOrbit(const std::string& Fname, 
                const boost::shared_ptr<Datum>& D,
 	       AircraftOrbitData::VerticalDefinition Def = 
 	       AircraftOrbitData::GEODETIC_VERTICAL);
   AirMspiOrbit(const std::string& Fname, 
-	       const boost::shared_ptr<MspiCamera>& Cam,
+	       const boost::shared_ptr<MspiGimbal>& Gim,
                const boost::shared_ptr<Datum>& D,
 	       AircraftOrbitData::VerticalDefinition Def = 
 	       AircraftOrbitData::GEODETIC_VERTICAL);

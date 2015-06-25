@@ -22,9 +22,6 @@ void MspiCamera::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(yaw)
     & GEOCAL_NVP_(pitch)
     & GEOCAL_NVP_(roll)
-    & GEOCAL_NVP_(gimbal_epsilon)
-    & GEOCAL_NVP_(gimbal_psi)
-    & GEOCAL_NVP_(gimbal_theta)
     & GEOCAL_NVP_(row_number)
     & GEOCAL_NVP_(paraxial_transform)
     & GEOCAL_NVP_(inversion)
@@ -65,15 +62,6 @@ void MspiCamera::read_config_file(const std::string& File_name,
   yaw_ = c.value<double>("camera_yaw");
   pitch_ = c.value<double>("camera_pitch");
   roll_ = c.value<double>("camera_roll");
-  if(c.have_key("gimbal_epsilon")) {
-    gimbal_epsilon_ = c.value<double>("gimbal_epsilon");
-    gimbal_psi_ = c.value<double>("gimbal_psi");
-    gimbal_theta_ = c.value<double>("gimbal_theta");
-  } else {
-    gimbal_epsilon_ = 0;
-    gimbal_psi_ = 0;
-    gimbal_theta_ = 0;
-  }
   focal_length_ = c.value<double>("focal_length");
   double s_origin = c.value<double>("origin");
   nline_ = 1;
@@ -123,7 +111,7 @@ void MspiCamera::read_config_file(const std::string& File_name,
   psi_ = 0;
   theta_ = 0;
 
-  parameter_mask_.resize(6);
+  parameter_mask_.resize(3);
   parameter_mask_ = true;
 
 //--------------------------------------------------------------------------
@@ -139,8 +127,8 @@ void MspiCamera::read_config_file(const std::string& File_name,
 
 ArrayAd<double, 1> MspiCamera::parameter_with_derivative() const
 {
-  Array<AutoDerivative<double>, 1> res(6);
-  res = yaw_, pitch_, roll_, gimbal_epsilon_, gimbal_psi_, gimbal_theta_;
+  Array<AutoDerivative<double>, 1> res(3);
+  res = yaw_, pitch_, roll_;
   return ArrayAd<double, 1>(res);
 }
 
@@ -148,14 +136,11 @@ ArrayAd<double, 1> MspiCamera::parameter_with_derivative() const
 
 void MspiCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
 {
-  if(Parm.rows() != 6)
-    throw Exception("Parameter must have a size of exactly 6");
+  if(Parm.rows() != 3)
+    throw Exception("Parameter must have a size of exactly 3");
   yaw_ = Parm(0);
   pitch_ = Parm(1);
   roll_ = Parm(2);
-  gimbal_epsilon_ = Parm(3);
-  gimbal_psi_ = Parm(4);
-  gimbal_theta_ = Parm(5);
   // Confirmed that old code had these angles negative. We need to
   // verify that this is actually what is intended, but it does match
   // the old code.
@@ -181,9 +166,6 @@ std::vector<std::string> MspiCamera::parameter_name() const
   res.push_back("Yaw (degrees)");
   res.push_back("Pitch (degrees)");
   res.push_back("Roll (degrees)");
-  res.push_back("Gimbal epsilon (degrees)");
-  res.push_back("Gimbal psi (degrees)");
-  res.push_back("Gimbal theta (degrees)");
   return res;
 }
 
@@ -341,6 +323,6 @@ void MspiCamera::paraxial_offset
 void MspiCamera::parameter_mask(const blitz::Array<bool, 1>& Pm)
 {
   if(Pm.rows() != parameter_mask_.rows())
-    throw Exception("Parameter mask must have a size of exactly 6");
+    throw Exception("Parameter mask must have a size of exactly 3");
   parameter_mask_ = Pm;
 }

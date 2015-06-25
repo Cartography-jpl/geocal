@@ -91,6 +91,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
       extra_config = Base_directory + "/" + extra_config;
   }
   boost::shared_ptr<MspiCamera> mspi_camera(new MspiCamera(fname, extra_config));
+  boost::shared_ptr<MspiGimbal> mspi_gimbal(new MspiGimbal(fname, extra_config));
   camera_ = mspi_camera;
 
   // Not sure if we still need the "static gimbal", but we don't
@@ -98,11 +99,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
   // requested. We can modify the code to support this if needed.
   if(c.value<bool>("use_static_gimbal"))
     throw Exception("We don't currently support static gimbals");
-  blitz::Array<double, 1> gimbal_angle(3);
-  gimbal_angle = mspi_camera->gimbal_epsilon(),
-    mspi_camera->gimbal_psi(),
-    mspi_camera->gimbal_theta();
-  orbit_.reset(new AirMspiOrbit(Orbit_file_name, gimbal_angle));
+  orbit_.reset(new AirMspiOrbit(Orbit_file_name, mspi_gimbal));
 
   // Get reference row needed by AirMspiTimeTable.
   fname = c.value<std::string>("instrument_info_config");

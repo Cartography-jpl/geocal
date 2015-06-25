@@ -318,19 +318,20 @@ BOOST_AUTO_TEST_CASE(jac_test)
     cam.sc_look_vector_with_derivative(fc, 0);
   FrameCoordinateWithDerivative fcwd = 
     cam.frame_coordinate_with_derivative(slv, 0);
-  blitz::Array<double, 1> eps(6);
-  eps = 1e-5,1e-5,1e-5,1e-5,1e-5,1e-5;
-  blitz::Array<double, 2> jac_fd(3, 6);
-  blitz::Array<double, 2> jac_calc(3, 6);
+  const int parm_size = 3;
+  blitz::Array<double, 1> eps(parm_size);
+  eps = 1e-5,1e-5,1e-5;
+  blitz::Array<double, 2> jac_fd(3, parm_size);
+  blitz::Array<double, 2> jac_calc(3, parm_size);
   jac_calc(0, blitz::Range::all()) = slvwd.look_vector[0].gradient();
   jac_calc(1, blitz::Range::all()) = slvwd.look_vector[1].gradient();
   jac_calc(2, blitz::Range::all()) = slvwd.look_vector[2].gradient();
-  blitz::Array<double, 2> jac2_fd(2, 6);
-  blitz::Array<double, 2> jac2_calc(2, 6);
+  blitz::Array<double, 2> jac2_fd(2, parm_size);
+  blitz::Array<double, 2> jac2_calc(2, parm_size);
   jac2_calc(0, blitz::Range::all()) = fcwd.line.gradient();
   jac2_calc(1, blitz::Range::all()) = fcwd.sample.gradient();
   blitz::Array<double, 1> p0 = cam.parameter();
-  for(int i = 0; i < 6; ++i) {
+  for(int i = 0; i < parm_size; ++i) {
     blitz::Array<double, 1> p(p0.copy());
     p(i) += eps(i);
     cam.parameter(p);

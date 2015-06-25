@@ -118,46 +118,11 @@ public:
   }
 
 //-----------------------------------------------------------------------
-/// Gimbal epsilon in degrees. We don't actually include the gimbal
-/// angles in the camera model, instead this is handled by
-/// AirMspiOrbit. However the gimbal parameters are recorded in the
-/// camera configuration file, so it make sense to read and report
-/// them here.
-//-----------------------------------------------------------------------
-
-  double gimbal_epsilon() const { return gimbal_epsilon_.value(); }
-  AutoDerivative<double> gimbal_epsilon_with_derivative() const 
-  { return gimbal_epsilon_; }
-
-//-----------------------------------------------------------------------
-/// Gimbal psi in degrees. We don't actually include the gimbal
-/// angles in the camera model, instead this is handled by
-/// AirMspiOrbit. However the gimbal parameters are recorded in the
-/// camera configuration file, so it make sense to read and report
-/// them here.
-//-----------------------------------------------------------------------
-
-  double gimbal_psi() const { return gimbal_psi_.value(); }
-  AutoDerivative<double> gimbal_psi_with_derivative() const 
-  { return gimbal_psi_; }
-
-//-----------------------------------------------------------------------
-/// Gimbal theta in degrees. We don't actually include the gimbal
-/// angles in the camera model, instead this is handled by
-/// AirMspiOrbit. However the gimbal parameters are recorded in the
-/// camera configuration file, so it make sense to read and report
-/// them here.
-//-----------------------------------------------------------------------
-
-  double gimbal_theta() const { return gimbal_theta_.value(); }
-  AutoDerivative<double> gimbal_theta_with_derivative() const 
-  { return gimbal_theta_; }
-
-//-----------------------------------------------------------------------
 /// Return the camera row number for the given band. This ends up
 /// being used in other places (e.g., the "Row Table" in L1B1 files),
 /// so we make this available. 
 //-----------------------------------------------------------------------
+
   int row_number(int Band) const {
     range_check(Band, 0, number_band());
     return row_number_[Band];
@@ -201,11 +166,6 @@ private:
   // Camera angles, in degrees
   double epsilon_, psi_, theta_, boresight_angle_;
   AutoDerivative<double> yaw_, pitch_, roll_;
-  // Gimbal angles, in degrees. We don't actually include these in the
-  // camera model, instead these are handled by AirMspiOrbit. But the
-  // values are stored in the camera configuration file, so it makes
-  // sense to read and store them here.
-  AutoDerivative<double> gimbal_epsilon_, gimbal_psi_, gimbal_theta_;
   // Give the row number for each band.
   std::vector<int> row_number_;
   // Transformation to and from the paraxial coordinates

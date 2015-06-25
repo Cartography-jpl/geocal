@@ -125,7 +125,6 @@ import geocal_swig.orbit
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
-import geocal_swig.quaternion_camera
 class AirMspiOrbit(geocal_swig.orbit.Orbit):
     """
     This reads the AirMSPI orbit file.
@@ -142,7 +141,7 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        AirMspiOrbit::AirMspiOrbit(const std::string &Fname, const boost::shared_ptr< MspiCamera > &Cam,
+        AirMspiOrbit::AirMspiOrbit(const std::string &Fname, const boost::shared_ptr< MspiGimbal > &Gim,
         const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
         NoDatum()), AircraftOrbitData::VerticalDefinition
         Def=AircraftOrbitData::GEODETIC_VERTICAL)

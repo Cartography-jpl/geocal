@@ -299,87 +299,6 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def inversion(self):
         return self._v_inversion()
 
-    def _v_gimbal_epsilon(self):
-        """
-        double GeoCal::MspiCamera::gimbal_epsilon() const
-        Gimbal epsilon in degrees.
-
-        We don't actually include the gimbal angles in the camera model,
-        instead this is handled by AirMspiOrbit. However the gimbal parameters
-        are recorded in the camera configuration file, so it make sense to
-        read and report them here. 
-        """
-        return _mspi_camera.MspiCamera__v_gimbal_epsilon(self)
-
-    @property
-    def gimbal_epsilon(self):
-        return self._v_gimbal_epsilon()
-
-    def _v_gimbal_psi(self):
-        """
-        double GeoCal::MspiCamera::gimbal_psi() const
-        Gimbal psi in degrees.
-
-        We don't actually include the gimbal angles in the camera model,
-        instead this is handled by AirMspiOrbit. However the gimbal parameters
-        are recorded in the camera configuration file, so it make sense to
-        read and report them here. 
-        """
-        return _mspi_camera.MspiCamera__v_gimbal_psi(self)
-
-    @property
-    def gimbal_psi(self):
-        return self._v_gimbal_psi()
-
-    def _v_gimbal_theta(self):
-        """
-        double GeoCal::MspiCamera::gimbal_theta() const
-        Gimbal theta in degrees.
-
-        We don't actually include the gimbal angles in the camera model,
-        instead this is handled by AirMspiOrbit. However the gimbal parameters
-        are recorded in the camera configuration file, so it make sense to
-        read and report them here. 
-        """
-        return _mspi_camera.MspiCamera__v_gimbal_theta(self)
-
-    @property
-    def gimbal_theta(self):
-        return self._v_gimbal_theta()
-
-    def _v_gimbal_epsilon_with_derivative(self):
-        """
-        AutoDerivative<double> GeoCal::MspiCamera::gimbal_epsilon_with_derivative() const
-
-        """
-        return _mspi_camera.MspiCamera__v_gimbal_epsilon_with_derivative(self)
-
-    @property
-    def gimbal_epsilon_with_derivative(self):
-        return self._v_gimbal_epsilon_with_derivative()
-
-    def _v_gimbal_psi_with_derivative(self):
-        """
-        AutoDerivative<double> GeoCal::MspiCamera::gimbal_psi_with_derivative() const
-
-        """
-        return _mspi_camera.MspiCamera__v_gimbal_psi_with_derivative(self)
-
-    @property
-    def gimbal_psi_with_derivative(self):
-        return self._v_gimbal_psi_with_derivative()
-
-    def _v_gimbal_theta_with_derivative(self):
-        """
-        AutoDerivative<double> GeoCal::MspiCamera::gimbal_theta_with_derivative() const
-
-        """
-        return _mspi_camera.MspiCamera__v_gimbal_theta_with_derivative(self)
-
-    @property
-    def gimbal_theta_with_derivative(self):
-        return self._v_gimbal_theta_with_derivative()
-
     def _v_parameter_mask(self, *args):
         """
         void MspiCamera::parameter_mask(const blitz::Array< bool, 1 > &Pm)
@@ -454,12 +373,6 @@ MspiCamera._v_pitch_with_derivative = new_instancemethod(_mspi_camera.MspiCamera
 MspiCamera._v_roll_with_derivative = new_instancemethod(_mspi_camera.MspiCamera__v_roll_with_derivative,None,MspiCamera)
 MspiCamera._v_boresight_angle = new_instancemethod(_mspi_camera.MspiCamera__v_boresight_angle,None,MspiCamera)
 MspiCamera._v_inversion = new_instancemethod(_mspi_camera.MspiCamera__v_inversion,None,MspiCamera)
-MspiCamera._v_gimbal_epsilon = new_instancemethod(_mspi_camera.MspiCamera__v_gimbal_epsilon,None,MspiCamera)
-MspiCamera._v_gimbal_psi = new_instancemethod(_mspi_camera.MspiCamera__v_gimbal_psi,None,MspiCamera)
-MspiCamera._v_gimbal_theta = new_instancemethod(_mspi_camera.MspiCamera__v_gimbal_theta,None,MspiCamera)
-MspiCamera._v_gimbal_epsilon_with_derivative = new_instancemethod(_mspi_camera.MspiCamera__v_gimbal_epsilon_with_derivative,None,MspiCamera)
-MspiCamera._v_gimbal_psi_with_derivative = new_instancemethod(_mspi_camera.MspiCamera__v_gimbal_psi_with_derivative,None,MspiCamera)
-MspiCamera._v_gimbal_theta_with_derivative = new_instancemethod(_mspi_camera.MspiCamera__v_gimbal_theta_with_derivative,None,MspiCamera)
 MspiCamera._v_parameter_mask = new_instancemethod(_mspi_camera.MspiCamera__v_parameter_mask,None,MspiCamera)
 MspiCamera.angular_separation = new_instancemethod(_mspi_camera.MspiCamera_angular_separation,None,MspiCamera)
 MspiCamera.paraxial_offset = new_instancemethod(_mspi_camera.MspiCamera_paraxial_offset,None,MspiCamera)

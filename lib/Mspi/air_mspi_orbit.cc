@@ -13,13 +13,13 @@ void AirMspiOrbit::save(Archive & ar, const unsigned int version) const
     & GEOCAL_NVP(data)
     & GEOCAL_NVP(tile_number_line)
     & GEOCAL_NVP_(datum)
+    & GEOCAL_NVP(gimbal)
     & GEOCAL_NVP_(gimbal_angle)
     & GEOCAL_NVP_(ypr_corr)
     & GEOCAL_NVP(m)
     & GEOCAL_NVP_(vdef)
     & GEOCAL_NVP_(tspace)
-    & GEOCAL_NVP(old_format)
-    & GEOCAL_NVP(cam);
+    & GEOCAL_NVP(old_format);
 }
 
 template<class Archive>
@@ -29,13 +29,13 @@ void AirMspiOrbit::load(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(data)
     & GEOCAL_NVP(tile_number_line)
     & GEOCAL_NVP_(datum)
+    & GEOCAL_NVP(gimbal)
     & GEOCAL_NVP_(gimbal_angle)
     & GEOCAL_NVP_(ypr_corr)
     & GEOCAL_NVP(m)
     & GEOCAL_NVP_(vdef)
     & GEOCAL_NVP_(tspace)
-    & GEOCAL_NVP(old_format)
-    & GEOCAL_NVP(cam);
+    & GEOCAL_NVP(old_format);
   blitz::Array<double, 2> empty;
   for(int i = 0; i < 2; ++i)
     data_cache_.push_back(empty);
@@ -169,7 +169,7 @@ AirMspiOrbit::AirMspiOrbit(const std::string& Fname,
 }
 
 AirMspiOrbit::AirMspiOrbit(const std::string& Fname,
-			   const boost::shared_ptr<MspiCamera>& Cam,
+			   const boost::shared_ptr<MspiGimbal>& Gim,
 			   const boost::shared_ptr<Datum>& D,
 			   AircraftOrbitData::VerticalDefinition Def)
   : data(new GdalRasterImage(Fname)), 
@@ -177,12 +177,12 @@ AirMspiOrbit::AirMspiOrbit(const std::string& Fname,
     gimbal_angle_(3),
     ypr_corr_(3),
     vdef_(Def),
-    cam(Cam)
+    gimbal(Gim)
 {
   // These will be AutoDerivative later
-  gimbal_angle_ = cam->gimbal_epsilon(),
-    cam->gimbal_psi(),
-    cam->gimbal_theta();
+  gimbal_angle_ = gimbal->epsilon(),
+    gimbal->psi(),
+    gimbal->theta();
 
   ypr_corr_ = 0;
   initialize();

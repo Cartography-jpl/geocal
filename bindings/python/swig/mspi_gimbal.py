@@ -139,6 +139,14 @@ class MspiGimbal(geocal_swig.with_parameter.WithParameter):
         file. 
         """
         _mspi_gimbal.MspiGimbal_swiginit(self,_mspi_gimbal.new_MspiGimbal(*args))
+    def read_config_file(self, *args):
+        """
+        void MspiGimbal::read_config_file(const std::string &File_name, const std::string
+        &Extra_config_file="")
+        Read in the given configuration file. 
+        """
+        return _mspi_gimbal.MspiGimbal_read_config_file(self, *args)
+
     def _v_epsilon(self):
         """
         double GeoCal::MspiGimbal::epsilon() const
@@ -230,6 +238,7 @@ class MspiGimbal(geocal_swig.with_parameter.WithParameter):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _mspi_gimbal.delete_MspiGimbal
+MspiGimbal.read_config_file = new_instancemethod(_mspi_gimbal.MspiGimbal_read_config_file,None,MspiGimbal)
 MspiGimbal._v_epsilon = new_instancemethod(_mspi_gimbal.MspiGimbal__v_epsilon,None,MspiGimbal)
 MspiGimbal._v_epsilon_with_derivative = new_instancemethod(_mspi_gimbal.MspiGimbal__v_epsilon_with_derivative,None,MspiGimbal)
 MspiGimbal._v_psi = new_instancemethod(_mspi_gimbal.MspiGimbal__v_psi,None,MspiGimbal)

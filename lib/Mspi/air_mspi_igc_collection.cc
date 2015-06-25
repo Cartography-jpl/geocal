@@ -20,6 +20,7 @@ void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested)
     & GEOCAL_NVP(dem) & GEOCAL_NVP(dem_resolution)
     & GEOCAL_NVP_(camera) 
+    & GEOCAL_NVP_(gimbal) 
     & GEOCAL_NVP_(orbit)
     & GEOCAL_NVP_(view_config)
     & GEOCAL_NVP(base_directory)
@@ -38,6 +39,7 @@ GEOCAL_IMPLEMENT(AirMspiIgcCollection);
 AirMspiIgcCollection::AirMspiIgcCollection
 (const boost::shared_ptr<Orbit>& Orb,
  const boost::shared_ptr<MspiCamera>& Cam,
+ const boost::shared_ptr<MspiGimbal>& Gim,
  const boost::shared_ptr<Dem>& D,
  const std::vector<std::string>& L1b1_file_name,
  const std::string& Swath_to_use,
@@ -46,11 +48,13 @@ AirMspiIgcCollection::AirMspiIgcCollection
   :  dem(D),
      dem_resolution(Dem_resolution),
      camera_(Cam),
+     gimbal_(Gim),
      orbit_(Orb),
      base_directory(Base_directory),
      swath_to_use(Swath_to_use)
 {
   add_object(Cam);
+  add_object(Gim);
   add_object(Orb);
   BOOST_FOREACH(const std::string& fname, L1b1_file_name) {
     MspiConfigFile vc;
@@ -93,6 +97,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
   boost::shared_ptr<MspiCamera> mspi_camera(new MspiCamera(fname, extra_config));
   boost::shared_ptr<MspiGimbal> mspi_gimbal(new MspiGimbal(fname, extra_config));
   camera_ = mspi_camera;
+  gimbal_ = mspi_gimbal;
 
   // Not sure if we still need the "static gimbal", but we don't
   // currently support this. So check, and issue an error if this is
@@ -141,6 +146,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
   }
   calc_min_max_l1b1_line();
   add_object(camera_);
+  add_object(gimbal_);
   add_object(orbit_);
 }
 
@@ -192,6 +198,7 @@ AirMspiIgcCollection::air_mspi_igc(int Image_index) const
   if(!igc[Image_index]) {
     igc[Image_index].reset(new AirMspiIgc(orbit_,
 					  camera_,
+					  gimbal_,
 					  dem,
 					  l1b1_file_name(Image_index), 
 					  swath_to_use,
@@ -221,6 +228,8 @@ void AirMspiIgcCollection::print(std::ostream& Os) const
      << "  Camera:\n";
   opad << *camera_;
   opad.strict_sync();
+  Os << "  Gimbal:\n";
+  opad << *gimbal_;
   Os << "  Orbit:\n";
   opad << *orbit_;
   opad.strict_sync();
@@ -254,6 +263,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
   dem = Original.dem;
   dem_resolution = Original.dem_resolution;
   camera_ = Original.camera_;
+  gimbal_ = Original.gimbal_;
   orbit_ = Original.orbit_;
   base_directory = Original.base_directory;
   swath_to_use = Original.swath_to_use;

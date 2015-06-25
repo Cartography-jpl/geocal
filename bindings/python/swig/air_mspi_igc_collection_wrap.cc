@@ -5847,11 +5847,12 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_3(PyObject *SWIGUNUSED
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::MspiCamera > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > *arg3 = 0 ;
-  std::vector< std::string,std::allocator< std::string > > *arg4 = 0 ;
-  std::string *arg5 = 0 ;
-  int arg6 ;
-  std::string *arg7 = 0 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
+  std::vector< std::string,std::allocator< std::string > > *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  int arg7 ;
+  std::string *arg8 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
@@ -5862,13 +5863,212 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_3(PyObject *SWIGUNUSED
   boost::shared_ptr< GeoCal::MspiCamera > temp2shared2 ;
   void *argp3 ;
   int res3 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > tempshared3 ;
-  boost::shared_ptr< GeoCal::Dem > temp2shared3 ;
-  int res4 = SWIG_OLDOBJ ;
+  boost::shared_ptr< GeoCal::MspiGimbal > tempshared3 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared4 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared4 ;
   int res5 = SWIG_OLDOBJ ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int res7 = SWIG_OLDOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  int val7 ;
+  int ecode7 = 0 ;
+  int res8 = SWIG_OLDOBJ ;
+  GeoCal::AirMspiIgcCollection *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AirMspiIgcCollection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AirMspiIgcCollection" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::MspiCamera > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::MspiGimbal > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
+      arg3 = &tempshared3;
+    } else {
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3) : &tempshared3;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
+    }
+  }
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4) : &tempshared4;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
+  }
+  {
+    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
+    res5 = swig::asptr(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_AirMspiIgcCollection" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  {
+    std::string *ptr = (std::string *)0;
+    res8 = SWIG_AsPtr_std_string(swig_obj[7], &ptr);
+    if (!SWIG_IsOK(res8)) {
+      SWIG_exception_fail(SWIG_ArgError(res8), "in method '" "new_AirMspiIgcCollection" "', argument " "8"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "8"" of type '" "std::string const &""'"); 
+    }
+    arg8 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5,(std::string const &)*arg6,arg7,(std::string const &)*arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AirMspiIgcCollection > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiIgcCollection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res8)) delete arg8;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res8)) delete arg8;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiCamera > *arg2 = 0 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
+  std::vector< std::string,std::allocator< std::string > > *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  int arg7 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MspiCamera > tempshared2 ;
+  boost::shared_ptr< GeoCal::MspiCamera > temp2shared2 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > tempshared3 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared4 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared4 ;
+  int res5 = SWIG_OLDOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  int val7 ;
+  int ecode7 = 0 ;
   GeoCal::AirMspiIgcCollection *result = 0 ;
   
   if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
@@ -5924,16 +6124,16 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_3(PyObject *SWIGUNUSED
   }
   {
     int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::MspiGimbal > const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
       arg3 = &tempshared3;
     } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3) : &tempshared3;
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3) : &tempshared3;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -5948,46 +6148,60 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_3(PyObject *SWIGUNUSED
     }
   }
   {
-    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
-    res4 = swig::asptr(swig_obj[3], &ptr);
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4) : &tempshared4;
     }
-    arg4 = ptr;
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
   }
   {
-    std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
+    res5 = swig::asptr(swig_obj[4], &ptr);
     if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     arg5 = ptr;
   }
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
   {
     std::string *ptr = (std::string *)0;
-    res7 = SWIG_AsPtr_std_string(swig_obj[6], &ptr);
-    if (!SWIG_IsOK(res7)) {
-      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_AirMspiIgcCollection" "', argument " "7"" of type '" "std::string const &""'"); 
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "7"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
     }
-    arg7 = ptr;
+    arg6 = ptr;
   }
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_AirMspiIgcCollection" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
   {
     try {
-      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::Dem > const &)*arg3,(std::vector< std::string,std::allocator< std::string > > const &)*arg4,(std::string const &)*arg5,arg6,(std::string const &)*arg7);
+      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5,(std::string const &)*arg6,arg7);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5998,26 +6212,24 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_3(PyObject *SWIGUNUSED
     boost::shared_ptr<  GeoCal::AirMspiIgcCollection > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiIgcCollection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
-  if (SWIG_IsNewObj(res7)) delete arg7;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
-  if (SWIG_IsNewObj(res7)) delete arg7;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::MspiCamera > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > *arg3 = 0 ;
-  std::vector< std::string,std::allocator< std::string > > *arg4 = 0 ;
-  std::string *arg5 = 0 ;
-  int arg6 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
+  std::vector< std::string,std::allocator< std::string > > *arg5 = 0 ;
+  std::string *arg6 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
@@ -6028,12 +6240,14 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSED
   boost::shared_ptr< GeoCal::MspiCamera > temp2shared2 ;
   void *argp3 ;
   int res3 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > tempshared3 ;
-  boost::shared_ptr< GeoCal::Dem > temp2shared3 ;
-  int res4 = SWIG_OLDOBJ ;
+  boost::shared_ptr< GeoCal::MspiGimbal > tempshared3 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared4 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared4 ;
   int res5 = SWIG_OLDOBJ ;
-  int val6 ;
-  int ecode6 = 0 ;
+  int res6 = SWIG_OLDOBJ ;
   GeoCal::AirMspiIgcCollection *result = 0 ;
   
   if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
@@ -6089,16 +6303,16 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSED
   }
   {
     int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::MspiGimbal > const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
       arg3 = &tempshared3;
     } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3) : &tempshared3;
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3) : &tempshared3;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -6113,35 +6327,55 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSED
     }
   }
   {
-    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
-    res4 = swig::asptr(swig_obj[3], &ptr);
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4) : &tempshared4;
     }
-    arg4 = ptr;
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
   }
   {
-    std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
+    res5 = swig::asptr(swig_obj[4], &ptr);
     if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     arg5 = ptr;
   }
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
   {
     try {
-      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::Dem > const &)*arg3,(std::vector< std::string,std::allocator< std::string > > const &)*arg4,(std::string const &)*arg5,arg6);
+      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5,(std::string const &)*arg6);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6152,23 +6386,23 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSED
     boost::shared_ptr<  GeoCal::AirMspiIgcCollection > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiIgcCollection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::MspiCamera > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > *arg3 = 0 ;
-  std::vector< std::string,std::allocator< std::string > > *arg4 = 0 ;
-  std::string *arg5 = 0 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
+  std::vector< std::string,std::allocator< std::string > > *arg5 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
@@ -6179,9 +6413,12 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSED
   boost::shared_ptr< GeoCal::MspiCamera > temp2shared2 ;
   void *argp3 ;
   int res3 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > tempshared3 ;
-  boost::shared_ptr< GeoCal::Dem > temp2shared3 ;
-  int res4 = SWIG_OLDOBJ ;
+  boost::shared_ptr< GeoCal::MspiGimbal > tempshared3 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared4 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared4 ;
   int res5 = SWIG_OLDOBJ ;
   GeoCal::AirMspiIgcCollection *result = 0 ;
   
@@ -6238,16 +6475,16 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSED
   }
   {
     int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::MspiGimbal > const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
       arg3 = &tempshared3;
     } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3) : &tempshared3;
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3) : &tempshared3;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -6262,30 +6499,44 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSED
     }
   }
   {
-    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
-    res4 = swig::asptr(swig_obj[3], &ptr);
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4) : &tempshared4;
     }
-    arg4 = ptr;
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
   }
   {
-    std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
+    res5 = swig::asptr(swig_obj[4], &ptr);
     if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     arg5 = ptr;
   }
   {
     try {
-      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::Dem > const &)*arg3,(std::vector< std::string,std::allocator< std::string > > const &)*arg4,(std::string const &)*arg5);
+      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6296,180 +6547,23 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSED
     boost::shared_ptr<  GeoCal::AirMspiIgcCollection > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiIgcCollection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiCamera > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > *arg3 = 0 ;
-  std::vector< std::string,std::allocator< std::string > > *arg4 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
-  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::MspiCamera > tempshared2 ;
-  boost::shared_ptr< GeoCal::MspiCamera > temp2shared2 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > tempshared3 ;
-  boost::shared_ptr< GeoCal::Dem > temp2shared3 ;
-  int res4 = SWIG_OLDOBJ ;
-  GeoCal::AirMspiIgcCollection *result = 0 ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AirMspiIgcCollection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
-      arg1 = &tempshared1;
-    } else {
-      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg1 = &temp2shared1;
-    }
-  }
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AirMspiIgcCollection" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::MspiCamera > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2) : &tempshared2;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  {
-    int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
-      arg3 = &tempshared3;
-    } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3) : &tempshared3;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg3 = &temp2shared3;
-    }
-  }
-  {
-    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
-    res4 = swig::asptr(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
-    }
-    arg4 = ptr;
-  }
-  {
-    try {
-      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::Dem > const &)*arg3,(std::vector< std::string,std::allocator< std::string > > const &)*arg4);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::AirMspiIgcCollection > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiIgcCollection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
   return NULL;
 }
 
 
 SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[8];
+  PyObject *argv[9];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_AirMspiIgcCollection",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_AirMspiIgcCollection",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 3) {
     return _wrap_new_AirMspiIgcCollection__SWIG_2(self, argc, argv);
   }
-  if (argc == 4) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    {
-      int res = swig::asptr(argv[3], (std::vector<std::string,std::allocator< std::string > >**)(0));
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    return _wrap_new_AirMspiIgcCollection__SWIG_6(self, argc, argv);
-  }
-check_2:
-  
   if (argc == 4) {
     return _wrap_new_AirMspiIgcCollection__SWIG_1(self, argc, argv);
   }
@@ -6479,33 +6573,41 @@ check_2:
       int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_4;
+    if (!_v) goto check_3;
     {
       int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_4;
+    if (!_v) goto check_3;
     {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0);
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_4;
+    if (!_v) goto check_3;
     {
-      int res = swig::asptr(argv[3], (std::vector<std::string,std::allocator< std::string > >**)(0));
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_4;
-    return _wrap_new_AirMspiIgcCollection__SWIG_5(self, argc, argv);
+    if (!_v) goto check_3;
+    {
+      int res = swig::asptr(argv[4], (std::vector<std::string,std::allocator< std::string > >**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_AirMspiIgcCollection__SWIG_6(self, argc, argv);
   }
-check_4:
+check_3:
   
   if (argc == 5) {
     return _wrap_new_AirMspiIgcCollection__SWIG_0(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_AirMspiIgcCollection__SWIG_4(self, argc, argv);
+    return _wrap_new_AirMspiIgcCollection__SWIG_5(self, argc, argv);
   }
   if (argc == 7) {
+    return _wrap_new_AirMspiIgcCollection__SWIG_4(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_new_AirMspiIgcCollection__SWIG_3(self, argc, argv);
   }
   
@@ -6515,10 +6617,10 @@ fail:
     "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(std::string const &,std::string const &,std::string const &)\n"
-    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &,int,std::string const &)\n"
-    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &,int)\n"
-    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &)\n"
-    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &)\n");
+    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::MspiGimbal > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &,int,std::string const &)\n"
+    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::MspiGimbal > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &,int)\n"
+    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::MspiGimbal > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &)\n"
+    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::MspiGimbal > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &)\n");
   return 0;
 }
 
@@ -6924,6 +7026,58 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_camera(PyObject *SWIGUNUSEDPARM(
   {
     try {
       result = ((GeoCal::AirMspiIgcCollection const *)arg1)->camera(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_gimbal(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  boost::shared_ptr< GeoCal::MspiGimbal > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_gimbal",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_gimbal" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_gimbal" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = ((GeoCal::AirMspiIgcCollection const *)arg1)->gimbal(arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -7375,10 +7529,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_AirMspiIgcCollection", _wrap_new_AirMspiIgcCollection, METH_VARARGS, (char *)"\n"
 		"AirMspiIgcCollection::AirMspiIgcCollection(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<\n"
-		"MspiCamera > &Cam, const boost::shared_ptr< Dem > &D, const\n"
-		"std::vector< std::string > &L1b1_file_name, const std::string\n"
-		"&Swath_to_use=\"660-I\", int Dem_resolution=10, const std::string\n"
-		"&Base_directory=\".\")\n"
+		"MspiCamera > &Cam, const boost::shared_ptr< MspiGimbal > &Gim, const\n"
+		"boost::shared_ptr< Dem > &D, const std::vector< std::string >\n"
+		"&L1b1_file_name, const std::string &Swath_to_use=\"660-I\", int\n"
+		"Dem_resolution=10, const std::string &Base_directory=\".\")\n"
 		"This create a AirMspiIgcCollection by directly giving the various\n"
 		"pieces needed to construct it. \n"
 		""},
@@ -7402,6 +7556,11 @@ static PyMethodDef SwigMethods[] = {
 		"boost::shared_ptr<MspiCamera> GeoCal::AirMspiIgcCollection::camera(int Index) const\n"
 		"Return specific camera we are using, needed for some routines that\n"
 		"depend on the details of MspiCamera. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_gimbal", _wrap_AirMspiIgcCollection_gimbal, METH_VARARGS, (char *)"\n"
+		"boost::shared_ptr<MspiGimbal> GeoCal::AirMspiIgcCollection::gimbal(int Index) const\n"
+		"Return specific gimbal we are using, needed for some routines that\n"
+		"depend on the details of MspiGimbal. \n"
 		""},
 	 { (char *)"AirMspiIgcCollection_time_table", _wrap_AirMspiIgcCollection_time_table, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr<TimeTable> GeoCal::AirMspiIgcCollection::time_table(int Index) const\n"

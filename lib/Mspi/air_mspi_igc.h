@@ -25,6 +25,7 @@ public:
 	     unsigned int Number_tile = 4);
   AirMspiIgc(const boost::shared_ptr<Orbit>& Orb,
 	     const boost::shared_ptr<MspiCamera>& Cam,
+	     const boost::shared_ptr<MspiGimbal>& Gim,
 	     const boost::shared_ptr<Dem>& Dem,
 	     const std::string& L1b1_file_name,
 	     const std::string& Swath_to_use = "660-I",
@@ -47,6 +48,13 @@ public:
 
   boost::shared_ptr<MspiCamera> camera() const
   { return boost::dynamic_pointer_cast<MspiCamera>(ipi().camera_ptr()); }
+
+//-----------------------------------------------------------------------
+/// Gimbal we are using.
+//-----------------------------------------------------------------------
+
+  boost::shared_ptr<MspiGimbal> gimbal() const
+  { return boost::dynamic_pointer_cast<MspiGimbal>(gimbal_); }
 
 //-----------------------------------------------------------------------
 /// Orbit we are using.
@@ -85,6 +93,7 @@ public:
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
   { WithParameterNested::parameter_with_derivative(Parm);}
 private:
+  boost::shared_ptr<MspiGimbal> gimbal_;
   AirMspiIgc() {}
   friend class boost::serialization::access;
   template<class Archive>

@@ -27,6 +27,7 @@ public:
 	     unsigned int Number_tile = 4);
   AirMspiIgc(const boost::shared_ptr<Orbit>& Orb,
 	     const boost::shared_ptr<MspiCamera>& Cam,
+	     const boost::shared_ptr<MspiGimbal>& Gim,
 	     const boost::shared_ptr<Dem>& Dem,
 	     const std::string& L1b1_file_name,
 	     const std::string& Swath_to_use = "660-I",
@@ -39,6 +40,7 @@ public:
   %python_attribute(orbit, boost::shared_ptr<AirMspiOrbit>);
   %python_attribute(time_table, boost::shared_ptr<AirMspiTimeTable>);
   %python_attribute(camera, boost::shared_ptr<MspiCamera>);
+  %python_attribute(gimbal, boost::shared_ptr<MspiGimbal>);
   %python_attribute(l1b1_file_name, std::string);
   %pickle_serialization();
 };

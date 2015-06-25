@@ -16,29 +16,8 @@
 namespace GeoCal {
 class AirMspiOrbit : public Orbit {
 public:
-  AirMspiOrbit(const std::string& Fname, 
-	       const blitz::Array<double, 1>& Gimbal_angle,
-	       const blitz::Array<double, 1>& Ypc_corr);
-  AirMspiOrbit(const std::string& Fname, 
-	       const blitz::Array<double, 1>& Gimbal_angle,
-	       const blitz::Array<double, 1>& Ypc_corr,
-               const boost::shared_ptr<Datum>& D,
-	       AircraftOrbitData::VerticalDefinition Def = 
-	       AircraftOrbitData::GEODETIC_VERTICAL);
-  AirMspiOrbit(const std::string& Fname, 
-	       const blitz::Array<double, 1>& Gimbal_angle);
-  AirMspiOrbit(const std::string& Fname, 
-	       const blitz::Array<double, 1>& Gimbal_angle,
-               const boost::shared_ptr<Datum>& D,
-	       AircraftOrbitData::VerticalDefinition Def = 
-	       AircraftOrbitData::GEODETIC_VERTICAL);
-  AirMspiOrbit(const std::string& Fname);
   AirMspiOrbit(const std::string& Fname,
 	       const boost::shared_ptr<MspiGimbal>& Gim);
-  AirMspiOrbit(const std::string& Fname, 
-               const boost::shared_ptr<Datum>& D,
-	       AircraftOrbitData::VerticalDefinition Def = 
-	       AircraftOrbitData::GEODETIC_VERTICAL);
   AirMspiOrbit(const std::string& Fname, 
 	       const boost::shared_ptr<MspiGimbal>& Gim,
                const boost::shared_ptr<Datum>& D,
@@ -48,8 +27,6 @@ public:
   %python_attribute(file_name, std::string);
   %python_attribute(datum, boost::shared_ptr<Datum>);
   %python_attribute(flight_description, std::string);
-  %python_attribute(gimbal_angle, blitz::Array<double, 1>);
-  %python_attribute(ypr_corr, blitz::Array<double, 1>);
   %python_attribute(time_spacing, double);
   %python_attribute(vertical_def, AircraftOrbitData::VerticalDefinition);
   boost::shared_ptr<QuaternionOrbitData> orbit_data_index(int Index) const;

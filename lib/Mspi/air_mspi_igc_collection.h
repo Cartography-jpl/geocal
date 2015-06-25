@@ -19,6 +19,7 @@ public:
 		       const std::string& Base_directory = ".");
   AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
    		       const boost::shared_ptr<MspiCamera>& Cam,
+   		       const boost::shared_ptr<MspiGimbal>& Gim,
    		       const boost::shared_ptr<Dem>& D,
    		       const std::vector<std::string>& L1b1_file_name,
 		       const std::string& Swath_to_use = "660-I",
@@ -52,6 +53,16 @@ public:
   boost::shared_ptr<MspiCamera> camera(int Index) const
   {
     return air_mspi_igc(Index)->camera();
+  }
+
+//-----------------------------------------------------------------------
+/// Return specific gimbal we are using, needed for some routines that
+/// depend on the details of MspiGimbal.
+//-----------------------------------------------------------------------
+
+  boost::shared_ptr<MspiGimbal> gimbal(int Index) const
+  {
+    return air_mspi_igc(Index)->gimbal();
   }
 
 //-----------------------------------------------------------------------
@@ -151,6 +162,7 @@ private:
   boost::shared_ptr<Dem> dem;
   double dem_resolution;
   boost::shared_ptr<MspiCamera> camera_;
+  boost::shared_ptr<MspiGimbal> gimbal_;
   boost::shared_ptr<Orbit> orbit_;
   std::vector<MspiConfigFile> view_config_;
   std::string base_directory;

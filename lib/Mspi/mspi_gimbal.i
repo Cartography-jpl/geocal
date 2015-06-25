@@ -15,6 +15,10 @@ namespace GeoCal {
 class MspiGimbal : public WithParameter {
 public:
   MspiGimbal(double Epsilon, double Psi, double Theta);
+  MspiGimbal(const std::string& File_name, 
+	     const std::string& Extra_config_file = "");
+  void read_config_file(const std::string& File_name,
+			const std::string& Extra_config_file = "");
   %python_attribute(epsilon, double);
   %python_attribute(epsilon_with_derivative, AutoDerivative<double>);
   %python_attribute(psi, double);

@@ -24,6 +24,7 @@ public:
 		       const std::string& Base_directory = ".");
   AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
    		       const boost::shared_ptr<MspiCamera>& Cam,
+   		       const boost::shared_ptr<MspiGimbal>& Gim,
    		       const boost::shared_ptr<Dem>& D,
    		       const std::vector<std::string>& L1b1_file_name,
 		       const std::string& Swath_to_use = "660-I",
@@ -48,6 +49,7 @@ public:
   }
   boost::shared_ptr<AirMspiOrbit> orbit(int Index) const;
   boost::shared_ptr<MspiCamera> camera(int Index) const;
+  boost::shared_ptr<MspiGimbal> gimbal(int Index) const;
   boost::shared_ptr<TimeTable> time_table(int Index) const;
   int number_band(int Index);
   int band(int Index);

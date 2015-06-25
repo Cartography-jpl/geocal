@@ -145,7 +145,7 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
         const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
         NoDatum()), AircraftOrbitData::VerticalDefinition
         Def=AircraftOrbitData::GEODETIC_VERTICAL)
-
+        Read the given file. 
         """
         _air_mspi_orbit.AirMspiOrbit_swiginit(self,_air_mspi_orbit.new_AirMspiOrbit(*args))
     def _v_data_version(self):
@@ -191,33 +191,6 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
     @property
     def flight_description(self):
         return self._v_flight_description()
-
-    def _v_gimbal_angle(self):
-        """
-        blitz::Array<double, 1> GeoCal::AirMspiOrbit::gimbal_angle() const
-        Gimbal angles.
-
-        This is in degrees, and is in the order epsilon, psi, theta. 
-        """
-        return _air_mspi_orbit.AirMspiOrbit__v_gimbal_angle(self)
-
-    @property
-    def gimbal_angle(self):
-        return self._v_gimbal_angle()
-
-    def _v_ypr_corr(self):
-        """
-        blitz::Array<double, 1> GeoCal::AirMspiOrbit::ypr_corr() const
-        YPR correction.
-
-        This is a pretty simple error model, we may modify this is the future.
-        This is in degrees 
-        """
-        return _air_mspi_orbit.AirMspiOrbit__v_ypr_corr(self)
-
-    @property
-    def ypr_corr(self):
-        return self._v_ypr_corr()
 
     def _v_time_spacing(self):
         """
@@ -266,8 +239,6 @@ AirMspiOrbit._v_data_version = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__
 AirMspiOrbit._v_file_name = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_file_name,None,AirMspiOrbit)
 AirMspiOrbit._v_datum = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_datum,None,AirMspiOrbit)
 AirMspiOrbit._v_flight_description = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_flight_description,None,AirMspiOrbit)
-AirMspiOrbit._v_gimbal_angle = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_gimbal_angle,None,AirMspiOrbit)
-AirMspiOrbit._v_ypr_corr = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_ypr_corr,None,AirMspiOrbit)
 AirMspiOrbit._v_time_spacing = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_time_spacing,None,AirMspiOrbit)
 AirMspiOrbit._v_vertical_def = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_vertical_def,None,AirMspiOrbit)
 AirMspiOrbit.orbit_data_index = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_data_index,None,AirMspiOrbit)

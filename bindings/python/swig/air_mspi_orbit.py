@@ -125,6 +125,50 @@ import geocal_swig.orbit
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
+class AirMspiNavData(geocal_swig.generic_object.GenericObject):
+    """
+    Simple structure that describes navigation data at a point in time.
+
+    C++ includes: air_mspi_orbit.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        AirMspiNavData::AirMspiNavData(const blitz::Array< double, 1 > &Raw_data, const Datum &datum, bool
+        Old_format)
+        Constructor, that takes raw data and create AirMspiNavData from this.
+
+        Note that I'm not sure about the datum here, the height might be
+        relative to WGS-84 already. I'll check with Mike Bull. 
+        """
+        _air_mspi_orbit.AirMspiNavData_swiginit(self,_air_mspi_orbit.new_AirMspiNavData(*args))
+    position = _swig_property(_air_mspi_orbit.AirMspiNavData_position_get, _air_mspi_orbit.AirMspiNavData_position_set)
+    velocity = _swig_property(_air_mspi_orbit.AirMspiNavData_velocity_get, _air_mspi_orbit.AirMspiNavData_velocity_set)
+    ypr = _swig_property(_air_mspi_orbit.AirMspiNavData_ypr_get, _air_mspi_orbit.AirMspiNavData_ypr_set)
+    ypr_rate = _swig_property(_air_mspi_orbit.AirMspiNavData_ypr_rate_get, _air_mspi_orbit.AirMspiNavData_ypr_rate_set)
+    gimbal_pos = _swig_property(_air_mspi_orbit.AirMspiNavData_gimbal_pos_get, _air_mspi_orbit.AirMspiNavData_gimbal_pos_set)
+    gimbal_vel = _swig_property(_air_mspi_orbit.AirMspiNavData_gimbal_vel_get, _air_mspi_orbit.AirMspiNavData_gimbal_vel_set)
+    def interpolate(*args):
+        """
+        AirMspiNavData AirMspiNavData::interpolate(const AirMspiNavData &N1, const AirMspiNavData &N2, double f)
+
+        """
+        return _air_mspi_orbit.AirMspiNavData_interpolate(*args)
+
+    interpolate = staticmethod(interpolate)
+    __swig_destroy__ = _air_mspi_orbit.delete_AirMspiNavData
+AirMspiNavData.__str__ = new_instancemethod(_air_mspi_orbit.AirMspiNavData___str__,None,AirMspiNavData)
+AirMspiNavData_swigregister = _air_mspi_orbit.AirMspiNavData_swigregister
+AirMspiNavData_swigregister(AirMspiNavData)
+
+def AirMspiNavData_interpolate(*args):
+  """
+    AirMspiNavData AirMspiNavData::interpolate(const AirMspiNavData &N1, const AirMspiNavData &N2, double f)
+
+    """
+  return _air_mspi_orbit.AirMspiNavData_interpolate(*args)
+
 class AirMspiOrbit(geocal_swig.orbit.Orbit):
     """
     This reads the AirMSPI orbit file.
@@ -224,6 +268,18 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
         """
         return _air_mspi_orbit.AirMspiOrbit_gimbal_position(self, *args)
 
+    def nav_data(self, *args):
+        """
+        AirMspiNavData AirMspiOrbit::nav_data(Time T) const
+        Nav data at the given time.
+
+        Note that we interpolate the nav data, in a way different than we do
+        for the actual orbit_data. This is meant for use in various reporting
+        tools Mike Bull uses, not for actually calculating the orbit data
+        with. 
+        """
+        return _air_mspi_orbit.AirMspiOrbit_nav_data(self, *args)
+
     def orbit_data_index(self, *args):
         """
         boost::shared_ptr< QuaternionOrbitData > AirMspiOrbit::orbit_data_index(int Index) const
@@ -249,6 +305,7 @@ AirMspiOrbit._v_flight_description = new_instancemethod(_air_mspi_orbit.AirMspiO
 AirMspiOrbit._v_time_spacing = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_time_spacing,None,AirMspiOrbit)
 AirMspiOrbit._v_vertical_def = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_vertical_def,None,AirMspiOrbit)
 AirMspiOrbit.gimbal_position = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_gimbal_position,None,AirMspiOrbit)
+AirMspiOrbit.nav_data = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_nav_data,None,AirMspiOrbit)
 AirMspiOrbit.orbit_data_index = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_data_index,None,AirMspiOrbit)
 AirMspiOrbit.orbit_data = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_data,None,AirMspiOrbit)
 AirMspiOrbit_swigregister = _air_mspi_orbit.AirMspiOrbit_swigregister

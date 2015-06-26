@@ -26,6 +26,8 @@ public:
 		    double Roll, double Pitch,
 		    double Heading,
 		    VerticalDefinition V = GEODETIC_VERTICAL);
+  AircraftOrbitData(const QuaternionOrbitData& Od,
+		    VerticalDefinition V = GEODETIC_VERTICAL);
   %python_attribute(position_geodetic, Geodetic)
   %python_attribute(roll, double)
   %python_attribute(pitch, double)

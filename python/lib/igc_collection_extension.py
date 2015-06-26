@@ -96,9 +96,9 @@ def _determine_orbit_to_match(self, ic, ind):
     for i in range(self.number_image):
         igc = self.image_ground_connection(i)
         tm, fc = igc.time_table.time(ic)
-        self.orbit.insert_time_point(igc.time_table.min_time)
-        self.orbit.insert_time_point(tm)
-        self.orbit.insert_time_point(igc.time_table.max_time)
+        self.orbit.insert_attitude_time_point(igc.time_table.min_time)
+        self.orbit.insert_attitude_time_point(tm)
+        self.orbit.insert_attitude_time_point(igc.time_table.max_time)
     for i in range(self.number_image):
         self._determine_orbit_parm(gp, ic, i)
 

@@ -259,12 +259,12 @@ class OrbitOffsetCorrection(geocal_swig.orbit.Orbit):
         """
         return _orbit_offset_correction.OrbitOffsetCorrection_update_quaterion(self, *args)
 
-    def insert_time_point(self, *args):
+    def insert_attitude_time_point(self, *args):
         """
-        void GeoCal::OrbitOffsetCorrection::insert_time_point(Time T_pt)
+        void GeoCal::OrbitOffsetCorrection::insert_attitude_time_point(Time T_pt)
         Add a time pointer where we are going to do an attitude correction. 
         """
-        return _orbit_offset_correction.OrbitOffsetCorrection_insert_time_point(self, *args)
+        return _orbit_offset_correction.OrbitOffsetCorrection_insert_attitude_time_point(self, *args)
 
     def orbit_data(self, *args):
         """
@@ -284,7 +284,7 @@ OrbitOffsetCorrection._v_fit_pitch = new_instancemethod(_orbit_offset_correction
 OrbitOffsetCorrection._v_fit_roll = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_roll,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection._v_orbit_uncorrected = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_orbit_uncorrected,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection.update_quaterion = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_update_quaterion,None,OrbitOffsetCorrection)
-OrbitOffsetCorrection.insert_time_point = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_insert_time_point,None,OrbitOffsetCorrection)
+OrbitOffsetCorrection.insert_attitude_time_point = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_insert_attitude_time_point,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection.orbit_data = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_orbit_data,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection_swigregister = _orbit_offset_correction.OrbitOffsetCorrection_swigregister
 OrbitOffsetCorrection_swigregister(OrbitOffsetCorrection)

@@ -207,7 +207,7 @@ def create_igc_collection_rolling_shutter():
     orb = OrbitOffsetCorrection(igccol.orbit)
     for i in range(10):
         tm, fc = igccol.image_ground_connection(i).time_table.time(ic)
-        orb.insert_time_point(tm)
+        orb.insert_attitude_time_point(tm)
     igccol.orbit = orb
     write_shelve(geocal_test_data + "igccol_rolling_shutter_temp.xml", igccol)
     create_image_data_all()

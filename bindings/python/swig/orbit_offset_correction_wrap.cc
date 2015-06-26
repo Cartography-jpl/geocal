@@ -6335,7 +6335,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_insert_time_point(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_insert_attitude_time_point(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitOffsetCorrection *arg1 = (GeoCal::OrbitOffsetCorrection *) 0 ;
   GeoCal::Time arg2 ;
@@ -6347,12 +6347,12 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_insert_time_point(PyObject *SWI
   int res2 = 0 ;
   PyObject *swig_obj[2] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"OrbitOffsetCorrection_insert_time_point",2,2,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"OrbitOffsetCorrection_insert_attitude_time_point",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitOffsetCorrection_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection_insert_time_point" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection_insert_attitude_time_point" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > * >(argp1);
@@ -6367,10 +6367,10 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_insert_time_point(PyObject *SWI
     int newmem = 0;
     res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitOffsetCorrection_insert_time_point" "', argument " "2"" of type '" "GeoCal::Time""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitOffsetCorrection_insert_attitude_time_point" "', argument " "2"" of type '" "GeoCal::Time""'"); 
     }
     if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitOffsetCorrection_insert_time_point" "', argument " "2"" of type '" "GeoCal::Time""'");
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitOffsetCorrection_insert_attitude_time_point" "', argument " "2"" of type '" "GeoCal::Time""'");
     } else {
       arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2)->get());
       if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2);
@@ -6378,7 +6378,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_insert_time_point(PyObject *SWI
   }
   {
     try {
-      (arg1)->insert_time_point(arg2);
+      (arg1)->insert_attitude_time_point(arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6647,8 +6647,8 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This is occasionally more convenient that updating the parameters. \n"
 		""},
-	 { (char *)"OrbitOffsetCorrection_insert_time_point", _wrap_OrbitOffsetCorrection_insert_time_point, METH_VARARGS, (char *)"\n"
-		"void GeoCal::OrbitOffsetCorrection::insert_time_point(Time T_pt)\n"
+	 { (char *)"OrbitOffsetCorrection_insert_attitude_time_point", _wrap_OrbitOffsetCorrection_insert_attitude_time_point, METH_VARARGS, (char *)"\n"
+		"void GeoCal::OrbitOffsetCorrection::insert_attitude_time_point(Time T_pt)\n"
 		"Add a time pointer where we are going to do an attitude correction. \n"
 		""},
 	 { (char *)"OrbitOffsetCorrection_orbit_data", _wrap_OrbitOffsetCorrection_orbit_data, METH_VARARGS, (char *)"\n"

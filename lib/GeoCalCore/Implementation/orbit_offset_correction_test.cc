@@ -55,14 +55,14 @@ BOOST_AUTO_TEST_CASE(basic)
   // Skip test if we don't have HDF5 support
   if(!orb_uncorr)
     return;
-  orb->insert_time_point(t);
-  orb->insert_time_point(t + 10);
+  orb->insert_attitude_time_point(t);
+  orb->insert_attitude_time_point(t + 10);
   blitz::Array<double, 1> parm(9);
   parm = 1, 2, 3, 4, 5, 6, 7, 8, 9;
   orb->parameter(parm);
   orb->add_identity_gradient();
   BOOST_CHECK_MATRIX_CLOSE_TOL(orb->parameter(), parm, 1e-4);
-  std::vector<Time> tp = orb->time_point();
+  std::vector<Time> tp = orb->attitude_time_point();
   BOOST_CHECK(fabs(t - tp[0]) < 1e-4);
   BOOST_CHECK((t + 10 - tp[1]) < 1e-4);
   blitz::Array<bool, 1> pm(9);
@@ -106,8 +106,8 @@ BOOST_AUTO_TEST_CASE(check_attitude)
   if(!orb_uncorr)
     return;
   // We have a separate test for the attitude, just because it is so long
-  orb->insert_time_point(t);
-  orb->insert_time_point(t + 10);
+  orb->insert_attitude_time_point(t);
+  orb->insert_attitude_time_point(t + 10);
   blitz::Array<double, 1> parm(9);
   parm = 1, 2, 3, 4, 5, 6, 7, 8, 9;
   orb->parameter(parm);
@@ -201,13 +201,13 @@ BOOST_AUTO_TEST_CASE(serialization)
   // Skip test if we don't have HDF5 or serialization support
   if(!orb_uncorr || !have_serialize_supported())
     return;
-  orb->insert_time_point(t);
-  orb->insert_time_point(t + 10);
+  orb->insert_attitude_time_point(t);
+  orb->insert_attitude_time_point(t + 10);
   blitz::Array<double, 1> parm(9);
   parm = 1, 2, 3, 4, 5, 6, 7, 8, 9;
   orb->parameter(parm);
   std::string d = serialize_write_string(orb);
-  if(false)
+  if(true)
     std::cerr << d;
   boost::shared_ptr<Orbit> orbr = 
     serialize_read_string<OrbitOffsetCorrection>(d);

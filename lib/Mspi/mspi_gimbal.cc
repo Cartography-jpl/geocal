@@ -12,7 +12,8 @@ void MspiGimbal::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_BASE(MspiGimbal, WithParameter);
-  ar & GEOCAL_NVP_(epsilon) & GEOCAL_NVP_(psi) & GEOCAL_NVP_(theta);
+  ar & GEOCAL_NVP_(epsilon) & GEOCAL_NVP_(psi) & GEOCAL_NVP_(theta)
+    & GEOCAL_NVP_(parameter_mask);
 }
 
 GEOCAL_IMPLEMENT(MspiGimbal);
@@ -94,9 +95,9 @@ std::vector<std::string> MspiGimbal::parameter_name() const
 // See base class for description
 void MspiGimbal::parameter_mask(const blitz::Array<bool, 1>& Pm) 
 {
-  if(Pm.rows() != pm.rows())
+  if(Pm.rows() != parameter_mask_.rows())
     throw Exception("Parameter mask must have a size of exactly 3");
-  pm = Pm;
+  parameter_mask_ = Pm;
 }
 
 // See base class for description

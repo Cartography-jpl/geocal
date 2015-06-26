@@ -16,8 +16,9 @@ public:
 //-----------------------------------------------------------------------
 
   MspiGimbal(double Epsilon, double Psi, double Theta)
-    : epsilon_(Epsilon), psi_(Psi), theta_(Theta), pm(3), cache_valid(false)
-  { pm = true; }
+    : epsilon_(Epsilon), psi_(Psi), theta_(Theta), parameter_mask_(3), 
+      cache_valid(false)
+  { parameter_mask_ = true; }
 
 //-----------------------------------------------------------------------
 /// Constructor, which creates a MspiGimbal from the given
@@ -26,8 +27,8 @@ public:
 
   MspiGimbal(const std::string& File_name, 
 	     const std::string& Extra_config_file = "")
-    : pm(3), cache_valid(false)
-  { pm = true; read_config_file(File_name, Extra_config_file); }
+    : parameter_mask_(3), cache_valid(false)
+  { parameter_mask_ = true; read_config_file(File_name, Extra_config_file); }
 
   void read_config_file(const std::string& File_name,
 			const std::string& Extra_config_file = "");
@@ -71,12 +72,12 @@ public:
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
   virtual blitz::Array<bool, 1> parameter_mask() const
-  { return pm; }
+  { return parameter_mask_; }
   virtual void parameter_mask(const blitz::Array<bool, 1>& Pm);
   virtual void print(std::ostream& Os) const;
 private:
   AutoDerivative<double> epsilon_, psi_, theta_;
-  blitz::Array<bool, 1> pm;
+  blitz::Array<bool, 1> parameter_mask_;
   mutable bool cache_valid;
   mutable boost::math::quaternion<AutoDerivative<double> > m;
 

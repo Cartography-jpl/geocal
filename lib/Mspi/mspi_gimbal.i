@@ -25,6 +25,7 @@ public:
   %python_attribute(psi_with_derivative, AutoDerivative<double>);
   %python_attribute(theta, double);
   %python_attribute(theta_with_derivative, AutoDerivative<double>);
+  %python_attribute_with_set(parameter_mask, blitz::Array<bool, 1>);
   boost::math::quaternion<AutoDerivative<double> >  
   station_to_sc(const AutoDerivative<double>& Gimbal_pos) const;
   %pickle_serialization();

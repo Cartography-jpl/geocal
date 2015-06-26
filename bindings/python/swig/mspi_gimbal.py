@@ -223,6 +223,21 @@ class MspiGimbal(geocal_swig.with_parameter.WithParameter):
     def theta_with_derivative(self):
         return self._v_theta_with_derivative()
 
+    def _v_parameter_mask(self, *args):
+        """
+        void MspiGimbal::parameter_mask(const blitz::Array< bool, 1 > &Pm)
+
+        """
+        return _mspi_gimbal.MspiGimbal__v_parameter_mask(self, *args)
+
+    @property
+    def parameter_mask(self):
+        return self._v_parameter_mask()
+
+    @parameter_mask.setter
+    def parameter_mask(self, value):
+      self._v_parameter_mask(value)
+
     def station_to_sc(self, *args):
         """
         boost::math::quaternion< AutoDerivative< double > > MspiGimbal::station_to_sc(const AutoDerivative< double > &Gimbal_pos) const
@@ -245,6 +260,7 @@ MspiGimbal._v_psi = new_instancemethod(_mspi_gimbal.MspiGimbal__v_psi,None,MspiG
 MspiGimbal._v_psi_with_derivative = new_instancemethod(_mspi_gimbal.MspiGimbal__v_psi_with_derivative,None,MspiGimbal)
 MspiGimbal._v_theta = new_instancemethod(_mspi_gimbal.MspiGimbal__v_theta,None,MspiGimbal)
 MspiGimbal._v_theta_with_derivative = new_instancemethod(_mspi_gimbal.MspiGimbal__v_theta_with_derivative,None,MspiGimbal)
+MspiGimbal._v_parameter_mask = new_instancemethod(_mspi_gimbal.MspiGimbal__v_parameter_mask,None,MspiGimbal)
 MspiGimbal.station_to_sc = new_instancemethod(_mspi_gimbal.MspiGimbal_station_to_sc,None,MspiGimbal)
 MspiGimbal_swigregister = _mspi_gimbal.MspiGimbal_swigregister
 MspiGimbal_swigregister(MspiGimbal)

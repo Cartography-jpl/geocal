@@ -7950,7 +7950,7 @@ SWIGINTERN PyObject *_wrap_AirMspiIgc__v_orbit(PyObject *SWIGUNUSEDPARM(self), P
   boost::shared_ptr< GeoCal::AirMspiIgc const > tempshared1 ;
   boost::shared_ptr< GeoCal::AirMspiIgc const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  boost::shared_ptr< GeoCal::AirMspiOrbit > result;
+  boost::shared_ptr< GeoCal::Orbit > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -8238,7 +8238,7 @@ static PyMethodDef SwigMethods[] = {
 		"Set band that we are using. \n"
 		""},
 	 { (char *)"AirMspiIgc__v_orbit", (PyCFunction)_wrap_AirMspiIgc__v_orbit, METH_O, (char *)"\n"
-		"boost::shared_ptr<AirMspiOrbit> GeoCal::AirMspiIgc::orbit() const\n"
+		"boost::shared_ptr<Orbit> GeoCal::AirMspiIgc::orbit() const\n"
 		"Orbit we are using. \n"
 		""},
 	 { (char *)"AirMspiIgc__v_time_table", (PyCFunction)_wrap_AirMspiIgc__v_time_table, METH_O, (char *)"\n"

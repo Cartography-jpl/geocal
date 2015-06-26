@@ -47,7 +47,7 @@ public:
     std::string config_value_string(int Index, const std::string& Key) const
     { return $self->config_value<std::string>(Index, Key); }
   }
-  boost::shared_ptr<AirMspiOrbit> orbit(int Index) const;
+  boost::shared_ptr<Orbit> orbit(int Index) const;
   boost::shared_ptr<MspiCamera> camera(int Index) const;
   boost::shared_ptr<MspiGimbal> gimbal(int Index) const;
   boost::shared_ptr<TimeTable> time_table(int Index) const;

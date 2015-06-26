@@ -217,6 +217,13 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
     def vertical_def(self):
         return self._v_vertical_def()
 
+    def gimbal_position(self, *args):
+        """
+        double GeoCal::AirMspiOrbit::gimbal_position(Time T) const
+        Return the gimbal position at time T in degrees. 
+        """
+        return _air_mspi_orbit.AirMspiOrbit_gimbal_position(self, *args)
+
     def orbit_data_index(self, *args):
         """
         boost::shared_ptr< QuaternionOrbitData > AirMspiOrbit::orbit_data_index(int Index) const
@@ -241,6 +248,7 @@ AirMspiOrbit._v_datum = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_datum
 AirMspiOrbit._v_flight_description = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_flight_description,None,AirMspiOrbit)
 AirMspiOrbit._v_time_spacing = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_time_spacing,None,AirMspiOrbit)
 AirMspiOrbit._v_vertical_def = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_vertical_def,None,AirMspiOrbit)
+AirMspiOrbit.gimbal_position = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_gimbal_position,None,AirMspiOrbit)
 AirMspiOrbit.orbit_data_index = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_data_index,None,AirMspiOrbit)
 AirMspiOrbit.orbit_data = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_data,None,AirMspiOrbit)
 AirMspiOrbit_swigregister = _air_mspi_orbit.AirMspiOrbit_swigregister

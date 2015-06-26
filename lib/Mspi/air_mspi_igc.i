@@ -37,7 +37,7 @@ public:
 	     int Tile_number_sample = -1, 
 	     unsigned int Number_tile = 4);
   %python_attribute_with_set(band, int);
-  %python_attribute(orbit, boost::shared_ptr<AirMspiOrbit>);
+  %python_attribute(orbit, boost::shared_ptr<Orbit>);
   %python_attribute(time_table, boost::shared_ptr<AirMspiTimeTable>);
   %python_attribute(camera, boost::shared_ptr<MspiCamera>);
   %python_attribute(gimbal, boost::shared_ptr<MspiGimbal>);

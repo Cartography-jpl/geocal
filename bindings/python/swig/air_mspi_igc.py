@@ -170,7 +170,7 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
 
     def _v_orbit(self):
         """
-        boost::shared_ptr<AirMspiOrbit> GeoCal::AirMspiIgc::orbit() const
+        boost::shared_ptr<Orbit> GeoCal::AirMspiIgc::orbit() const
         Orbit we are using. 
         """
         return _air_mspi_igc.AirMspiIgc__v_orbit(self)

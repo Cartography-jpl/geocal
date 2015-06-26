@@ -60,9 +60,9 @@ public:
 /// Orbit we are using.
 //-----------------------------------------------------------------------
 
-  boost::shared_ptr<AirMspiOrbit> orbit() const
+  boost::shared_ptr<Orbit> orbit() const
   {
-    return boost::dynamic_pointer_cast<AirMspiOrbit>(ipi().orbit_ptr());
+    return ipi().orbit_ptr();
   }
 
 //-----------------------------------------------------------------------

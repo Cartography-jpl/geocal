@@ -36,11 +36,10 @@ public:
 
 
 //-----------------------------------------------------------------------
-/// Return specific orbit we are using, needed for some routines that
-/// depend on the details of AirMspiOrbit.
+/// Return specific orbit we are using.
 //-----------------------------------------------------------------------
 
-  boost::shared_ptr<AirMspiOrbit> orbit(int Index) const
+  boost::shared_ptr<Orbit> orbit(int Index) const
   {
     return air_mspi_igc(Index)->orbit();
   }

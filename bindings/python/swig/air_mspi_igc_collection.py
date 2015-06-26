@@ -167,9 +167,8 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
 
     def orbit(self, *args):
         """
-        boost::shared_ptr<AirMspiOrbit> GeoCal::AirMspiIgcCollection::orbit(int Index) const
-        Return specific orbit we are using, needed for some routines that
-        depend on the details of AirMspiOrbit. 
+        boost::shared_ptr<Orbit> GeoCal::AirMspiIgcCollection::orbit(int Index) const
+        Return specific orbit we are using. 
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_orbit(self, *args)
 

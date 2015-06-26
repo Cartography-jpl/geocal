@@ -6948,7 +6948,7 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_orbit(PyObject *SWIGUNUSEDPARM(s
   int val2 ;
   int ecode2 = 0 ;
   PyObject *swig_obj[2] ;
-  boost::shared_ptr< GeoCal::AirMspiOrbit > result;
+  boost::shared_ptr< GeoCal::Orbit > result;
   
   if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_orbit",2,2,swig_obj)) SWIG_fail;
   {
@@ -7548,9 +7548,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"AirMspiIgcCollection_config_value_int", _wrap_AirMspiIgcCollection_config_value_int, METH_VARARGS, NULL},
 	 { (char *)"AirMspiIgcCollection_config_value_string", _wrap_AirMspiIgcCollection_config_value_string, METH_VARARGS, NULL},
 	 { (char *)"AirMspiIgcCollection_orbit", _wrap_AirMspiIgcCollection_orbit, METH_VARARGS, (char *)"\n"
-		"boost::shared_ptr<AirMspiOrbit> GeoCal::AirMspiIgcCollection::orbit(int Index) const\n"
-		"Return specific orbit we are using, needed for some routines that\n"
-		"depend on the details of AirMspiOrbit. \n"
+		"boost::shared_ptr<Orbit> GeoCal::AirMspiIgcCollection::orbit(int Index) const\n"
+		"Return specific orbit we are using. \n"
 		""},
 	 { (char *)"AirMspiIgcCollection_camera", _wrap_AirMspiIgcCollection_camera, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr<MspiCamera> GeoCal::AirMspiIgcCollection::camera(int Index) const\n"

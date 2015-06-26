@@ -29,6 +29,7 @@ public:
   %python_attribute(flight_description, std::string);
   %python_attribute(time_spacing, double);
   %python_attribute(vertical_def, AircraftOrbitData::VerticalDefinition);
+  double gimbal_position(Time T) const;
   boost::shared_ptr<QuaternionOrbitData> orbit_data_index(int Index) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 

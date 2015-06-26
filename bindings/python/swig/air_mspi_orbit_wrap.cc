@@ -5936,6 +5936,64 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_AirMspiOrbit_gimbal_position(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiOrbit *arg1 = (GeoCal::AirMspiOrbit *) 0 ;
+  GeoCal::Time arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiOrbit const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiOrbit const > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject *swig_obj[2] ;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiOrbit_gimbal_position",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiOrbit_gimbal_position" "', argument " "1"" of type '" "GeoCal::AirMspiOrbit const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AirMspiOrbit_gimbal_position" "', argument " "2"" of type '" "GeoCal::Time""'"); 
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AirMspiOrbit_gimbal_position" "', argument " "2"" of type '" "GeoCal::Time""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2);
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::AirMspiOrbit const *)arg1)->gimbal_position(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_AirMspiOrbit_orbit_data_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::AirMspiOrbit *arg1 = (GeoCal::AirMspiOrbit *) 0 ;
@@ -6237,6 +6295,10 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This should almost always be GEODETIC_VERTICAL, but we have this in\n"
 		"place to be able to match old test data. \n"
+		""},
+	 { (char *)"AirMspiOrbit_gimbal_position", _wrap_AirMspiOrbit_gimbal_position, METH_VARARGS, (char *)"\n"
+		"double GeoCal::AirMspiOrbit::gimbal_position(Time T) const\n"
+		"Return the gimbal position at time T in degrees. \n"
 		""},
 	 { (char *)"AirMspiOrbit_orbit_data_index", _wrap_AirMspiOrbit_orbit_data_index, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr< QuaternionOrbitData > AirMspiOrbit::orbit_data_index(int Index) const\n"

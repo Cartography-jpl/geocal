@@ -90,6 +90,14 @@ public:
 
   AirMspiNavData nav_data(int Index) const;
   AirMspiNavData nav_data(Time T) const;
+
+//-----------------------------------------------------------------------
+/// Return the gimbal position at time T in degrees.
+//-----------------------------------------------------------------------
+  
+  double gimbal_position(Time T) const
+  { return nav_data(T).gimbal_pos * GeoCal::Constant::rad_to_deg; }
+    
   boost::shared_ptr<QuaternionOrbitData> orbit_data_index(int Index) const;
 
 //-----------------------------------------------------------------------

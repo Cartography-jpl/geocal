@@ -55,6 +55,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(serialize)
 {
+  if(!have_serialize_supported())
+    return;
   boost::shared_ptr<ImageMatcher> m
     (new LsmMatcher(21, 19, 3, 0.06, 0.2, 0.5, 2.0, 0.125, 0.1));
   std::string d = serialize_write_string(m);

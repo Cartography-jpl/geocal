@@ -162,8 +162,12 @@ boost::shared_ptr<OrbitData> OrbitOffsetCorrection::orbit_data(Time T) const
       acorr = value(interpolate(q1, q2, T - t1, t2 - t1));
     }
   }
-  if(use_local_north_coordinate_)
-    throw Exception("Not done yet");
+  if(use_local_north_coordinate_)  {
+    LnLookVectorWithDerivative lv(pcorr);
+    CartesianFixedLookVectorWithDerivative clv = 
+      lv.to_cf(*oc_uncorr->position_cf());
+    pcorr = clv.look_vector;
+  }
   return boost::shared_ptr<OrbitData>
     (new QuaternionOrbitData(*oc_uncorr, pcorr, acorr));
 }
@@ -247,8 +251,12 @@ OrbitOffsetCorrection::orbit_data(const TimeWithDerivative& T) const
       acorr = interpolate(q1, q2, T - t1, t2 - t1);
     }
   }
-  if(use_local_north_coordinate_)
-    throw Exception("Not done yet");
+  if(use_local_north_coordinate_)  {
+    LnLookVectorWithDerivative lv(pcorr);
+    CartesianFixedLookVectorWithDerivative clv = 
+      lv.to_cf(*oc_uncorr->position_cf());
+    pcorr = clv.look_vector;
+  }
   return boost::shared_ptr<OrbitData>
     (new QuaternionOrbitData(*oc_uncorr, pcorr, acorr));
 }

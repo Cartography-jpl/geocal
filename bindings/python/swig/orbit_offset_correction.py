@@ -156,8 +156,9 @@ class OrbitOffsetCorrection(geocal_swig.orbit.Orbit):
     def __init__(self, *args): 
         """
         OrbitOffsetCorrection::OrbitOffsetCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, bool
-        Outside_is_error=false, bool Fit_position=true, bool Fit_yaw=true,
-        bool Fit_pitch=true, bool Fit_roll=true)
+        Outside_is_error=false, bool Fit_position_x=true, bool
+        Fit_position_y=true, bool Fit_position_z=true, bool Fit_yaw=true, bool
+        Fit_pitch=true, bool Fit_roll=true)
         Constructor.
 
         This has no time points for doing corrections, but you can add those
@@ -179,20 +180,50 @@ class OrbitOffsetCorrection(geocal_swig.orbit.Orbit):
     def outside_is_error(self, value):
       self._v_outside_is_error(value)
 
-    def _v_fit_position(self, *args):
+    def _v_fit_position_x(self, *args):
         """
-        void GeoCal::OrbitOffsetCorrection::fit_position(bool V)
+        void GeoCal::OrbitOffsetCorrection::fit_position_x(bool V)
 
         """
-        return _orbit_offset_correction.OrbitOffsetCorrection__v_fit_position(self, *args)
+        return _orbit_offset_correction.OrbitOffsetCorrection__v_fit_position_x(self, *args)
 
     @property
-    def fit_position(self):
-        return self._v_fit_position()
+    def fit_position_x(self):
+        return self._v_fit_position_x()
 
-    @fit_position.setter
-    def fit_position(self, value):
-      self._v_fit_position(value)
+    @fit_position_x.setter
+    def fit_position_x(self, value):
+      self._v_fit_position_x(value)
+
+    def _v_fit_position_y(self, *args):
+        """
+        void GeoCal::OrbitOffsetCorrection::fit_position_y(bool V)
+
+        """
+        return _orbit_offset_correction.OrbitOffsetCorrection__v_fit_position_y(self, *args)
+
+    @property
+    def fit_position_y(self):
+        return self._v_fit_position_y()
+
+    @fit_position_y.setter
+    def fit_position_y(self, value):
+      self._v_fit_position_y(value)
+
+    def _v_fit_position_z(self, *args):
+        """
+        void GeoCal::OrbitOffsetCorrection::fit_position_z(bool V)
+
+        """
+        return _orbit_offset_correction.OrbitOffsetCorrection__v_fit_position_z(self, *args)
+
+    @property
+    def fit_position_z(self):
+        return self._v_fit_position_z()
+
+    @fit_position_z.setter
+    def fit_position_z(self, value):
+      self._v_fit_position_z(value)
 
     def _v_fit_yaw(self, *args):
         """
@@ -278,7 +309,9 @@ class OrbitOffsetCorrection(geocal_swig.orbit.Orbit):
 
     __swig_destroy__ = _orbit_offset_correction.delete_OrbitOffsetCorrection
 OrbitOffsetCorrection._v_outside_is_error = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_outside_is_error,None,OrbitOffsetCorrection)
-OrbitOffsetCorrection._v_fit_position = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_position,None,OrbitOffsetCorrection)
+OrbitOffsetCorrection._v_fit_position_x = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_position_x,None,OrbitOffsetCorrection)
+OrbitOffsetCorrection._v_fit_position_y = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_position_y,None,OrbitOffsetCorrection)
+OrbitOffsetCorrection._v_fit_position_z = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_position_z,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection._v_fit_yaw = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_yaw,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection._v_fit_pitch = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_pitch,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection._v_fit_roll = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_roll,None,OrbitOffsetCorrection)

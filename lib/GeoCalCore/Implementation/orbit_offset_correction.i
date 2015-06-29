@@ -14,12 +14,16 @@ class OrbitOffsetCorrection: public Orbit {
 public:
   OrbitOffsetCorrection(const boost::shared_ptr<Orbit> Orb_uncorr,
 			bool Outside_is_error = false,
-			bool Fit_position = true,
+			bool Fit_position_x = true,
+			bool Fit_position_y = true,
+			bool Fit_position_z = true,
 			bool Fit_yaw = true,
 			bool Fit_pitch = true,
 			bool Fit_roll = true);
   %python_attribute_with_set(outside_is_error, bool);
-  %python_attribute_with_set(fit_position, bool);
+  %python_attribute_with_set(fit_position_x, bool);
+  %python_attribute_with_set(fit_position_y, bool);
+  %python_attribute_with_set(fit_position_z, bool);
   %python_attribute_with_set(fit_yaw, bool);
   %python_attribute_with_set(fit_pitch, bool);
   %python_attribute_with_set(fit_roll, bool);

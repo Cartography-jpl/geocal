@@ -29,7 +29,9 @@ class OrbitOffsetCorrection: public Orbit {
 public:
   OrbitOffsetCorrection(const boost::shared_ptr<Orbit> Orb_uncorr,
 			bool Outside_is_error = false,
-			bool Fit_position = true,
+			bool Fit_position_x = true,
+			bool Fit_position_y = true,
+			bool Fit_position_z = true,
 			bool Fit_yaw = true,
 			bool Fit_pitch = true,
 			bool Fit_roll = true);
@@ -48,8 +50,13 @@ public:
 //-----------------------------------------------------------------------
 /// If true, fit for the position correction.
 //-----------------------------------------------------------------------
-  bool fit_position() const { return fit_position_; }
-  void fit_position(bool V) { fit_position_ = V; }
+  bool fit_position_x() const { return fit_position_x_; }
+  void fit_position_x(bool V) { fit_position_x_ = V; }
+  bool fit_position_y() const { return fit_position_y_; }
+  void fit_position_y(bool V) { fit_position_y_ = V; }
+  bool fit_position_z() const { return fit_position_z_; }
+  void fit_position_z(bool V) { fit_position_z_ = V; }
+
 
 //-----------------------------------------------------------------------
 /// If true, fit for the yaw correction.
@@ -117,7 +124,8 @@ private:
   att_map_type att_corr;
   pos_map_type pos_corr;
   bool outside_is_error_;
-  bool fit_position_, fit_yaw_, fit_pitch_, fit_roll_;
+  bool fit_position_x_, fit_position_y_, fit_position_z_, fit_yaw_, 
+    fit_pitch_, fit_roll_;
   OrbitOffsetCorrection() {}
   friend class boost::serialization::access;
   template<class Archive>

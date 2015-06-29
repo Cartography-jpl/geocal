@@ -5239,6 +5239,202 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_0(PyObject *SWIGUNUSE
   bool arg4 ;
   bool arg5 ;
   bool arg6 ;
+  bool arg7 ;
+  bool arg8 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  bool val4 ;
+  int ecode4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  bool val7 ;
+  int ecode7 = 0 ;
+  bool val8 ;
+  int ecode8 = 0 ;
+  GeoCal::OrbitOffsetCorrection *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitOffsetCorrection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const""'"); 
+    }
+    if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>((&arg1)->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      (&arg1)->reset((&arg1)->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+    }
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_OrbitOffsetCorrection" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_OrbitOffsetCorrection" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_OrbitOffsetCorrection" "', argument " "4"" of type '" "bool""'");
+  } 
+  arg4 = static_cast< bool >(val4);
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_OrbitOffsetCorrection" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_OrbitOffsetCorrection" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  ecode7 = SWIG_AsVal_bool(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_OrbitOffsetCorrection" "', argument " "7"" of type '" "bool""'");
+  } 
+  arg7 = static_cast< bool >(val7);
+  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_OrbitOffsetCorrection" "', argument " "8"" of type '" "bool""'");
+  } 
+  arg8 = static_cast< bool >(val8);
+  {
+    try {
+      result = (GeoCal::OrbitOffsetCorrection *)new GeoCal::OrbitOffsetCorrection(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitOffsetCorrection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitOffsetCorrection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::Orbit > arg1 ;
+  bool arg2 ;
+  bool arg3 ;
+  bool arg4 ;
+  bool arg5 ;
+  bool arg6 ;
+  bool arg7 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  bool val4 ;
+  int ecode4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  bool val7 ;
+  int ecode7 = 0 ;
+  GeoCal::OrbitOffsetCorrection *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitOffsetCorrection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const""'"); 
+    }
+    if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>((&arg1)->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      (&arg1)->reset((&arg1)->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+    }
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_OrbitOffsetCorrection" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_OrbitOffsetCorrection" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_OrbitOffsetCorrection" "', argument " "4"" of type '" "bool""'");
+  } 
+  arg4 = static_cast< bool >(val4);
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_OrbitOffsetCorrection" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_OrbitOffsetCorrection" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  ecode7 = SWIG_AsVal_bool(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_OrbitOffsetCorrection" "', argument " "7"" of type '" "bool""'");
+  } 
+  arg7 = static_cast< bool >(val7);
+  {
+    try {
+      result = (GeoCal::OrbitOffsetCorrection *)new GeoCal::OrbitOffsetCorrection(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitOffsetCorrection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitOffsetCorrection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::Orbit > arg1 ;
+  bool arg2 ;
+  bool arg3 ;
+  bool arg4 ;
+  bool arg5 ;
+  bool arg6 ;
   void *argp1 ;
   int res1 = 0 ;
   bool val2 ;
@@ -5317,7 +5513,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > arg1 ;
   bool arg2 ;
@@ -5395,7 +5591,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > arg1 ;
   bool arg2 ;
@@ -5465,7 +5661,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > arg1 ;
   bool arg2 ;
@@ -5527,7 +5723,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > arg1 ;
   bool arg2 ;
@@ -5581,7 +5777,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > arg1 ;
   void *argp1 ;
@@ -5629,32 +5825,40 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[7];
+  PyObject *argv[9];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_OrbitOffsetCorrection",0,6,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_OrbitOffsetCorrection",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_new_OrbitOffsetCorrection__SWIG_5(self, argc, argv);
+    return _wrap_new_OrbitOffsetCorrection__SWIG_7(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_new_OrbitOffsetCorrection__SWIG_4(self, argc, argv);
+    return _wrap_new_OrbitOffsetCorrection__SWIG_6(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_OrbitOffsetCorrection__SWIG_3(self, argc, argv);
+    return _wrap_new_OrbitOffsetCorrection__SWIG_5(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_new_OrbitOffsetCorrection__SWIG_2(self, argc, argv);
+    return _wrap_new_OrbitOffsetCorrection__SWIG_4(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_new_OrbitOffsetCorrection__SWIG_1(self, argc, argv);
+    return _wrap_new_OrbitOffsetCorrection__SWIG_3(self, argc, argv);
   }
   if (argc == 6) {
+    return _wrap_new_OrbitOffsetCorrection__SWIG_2(self, argc, argv);
+  }
+  if (argc == 7) {
+    return _wrap_new_OrbitOffsetCorrection__SWIG_1(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_new_OrbitOffsetCorrection__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_OrbitOffsetCorrection'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitOffsetCorrection::OrbitOffsetCorrection(boost::shared_ptr< GeoCal::Orbit > const,bool,bool,bool,bool,bool,bool,bool)\n"
+    "    GeoCal::OrbitOffsetCorrection::OrbitOffsetCorrection(boost::shared_ptr< GeoCal::Orbit > const,bool,bool,bool,bool,bool,bool)\n"
     "    GeoCal::OrbitOffsetCorrection::OrbitOffsetCorrection(boost::shared_ptr< GeoCal::Orbit > const,bool,bool,bool,bool,bool)\n"
     "    GeoCal::OrbitOffsetCorrection::OrbitOffsetCorrection(boost::shared_ptr< GeoCal::Orbit > const,bool,bool,bool,bool)\n"
     "    GeoCal::OrbitOffsetCorrection::OrbitOffsetCorrection(boost::shared_ptr< GeoCal::Orbit > const,bool,bool,bool)\n"
@@ -5778,7 +5982,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_x__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitOffsetCorrection *arg1 = (GeoCal::OrbitOffsetCorrection *) 0 ;
   void *argp1 = 0 ;
@@ -5792,7 +5996,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position__SWIG_0(PyObjec
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitOffsetCorrection_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection__v_fit_position" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection__v_fit_position_x" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
@@ -5805,7 +6009,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position__SWIG_0(PyObjec
   }
   {
     try {
-      result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_position();
+      result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_position_x();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5819,7 +6023,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_x__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitOffsetCorrection *arg1 = (GeoCal::OrbitOffsetCorrection *) 0 ;
   bool *arg2 = 0 ;
@@ -5836,7 +6040,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position__SWIG_1(PyObjec
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitOffsetCorrection_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection__v_fit_position" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection__v_fit_position_x" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > * >(argp1);
@@ -5849,13 +6053,13 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position__SWIG_1(PyObjec
   }
   ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OrbitOffsetCorrection__v_fit_position" "', argument " "2"" of type '" "bool""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OrbitOffsetCorrection__v_fit_position_x" "', argument " "2"" of type '" "bool""'");
   } 
   temp2 = static_cast< bool >(val2);
   arg2 = &temp2;
   {
     try {
-      (arg1)->fit_position((bool const &)*arg2);
+      (arg1)->fit_position_x((bool const &)*arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5869,24 +6073,250 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_x(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[3];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitOffsetCorrection__v_fit_position",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitOffsetCorrection__v_fit_position_x",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_OrbitOffsetCorrection__v_fit_position__SWIG_0(self, argc, argv);
+    return _wrap_OrbitOffsetCorrection__v_fit_position_x__SWIG_0(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_OrbitOffsetCorrection__v_fit_position__SWIG_1(self, argc, argv);
+    return _wrap_OrbitOffsetCorrection__v_fit_position_x__SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OrbitOffsetCorrection__v_fit_position'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OrbitOffsetCorrection__v_fit_position_x'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::OrbitOffsetCorrection::fit_position() const\n"
-    "    GeoCal::OrbitOffsetCorrection::fit_position(bool const &)\n");
+    "    GeoCal::OrbitOffsetCorrection::fit_position_x() const\n"
+    "    GeoCal::OrbitOffsetCorrection::fit_position_x(bool const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_y__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitOffsetCorrection *arg1 = (GeoCal::OrbitOffsetCorrection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection const > *smartarg1 = 0 ;
+  bool result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitOffsetCorrection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection__v_fit_position_y" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_position_y();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_y__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitOffsetCorrection *arg1 = (GeoCal::OrbitOffsetCorrection *) 0 ;
+  bool *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection > *smartarg1 = 0 ;
+  bool temp2 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitOffsetCorrection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection__v_fit_position_y" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OrbitOffsetCorrection__v_fit_position_y" "', argument " "2"" of type '" "bool""'");
+  } 
+  temp2 = static_cast< bool >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->fit_position_y((bool const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_y(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitOffsetCorrection__v_fit_position_y",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_OrbitOffsetCorrection__v_fit_position_y__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_OrbitOffsetCorrection__v_fit_position_y__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OrbitOffsetCorrection__v_fit_position_y'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitOffsetCorrection::fit_position_y() const\n"
+    "    GeoCal::OrbitOffsetCorrection::fit_position_y(bool const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_z__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitOffsetCorrection *arg1 = (GeoCal::OrbitOffsetCorrection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection const > *smartarg1 = 0 ;
+  bool result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitOffsetCorrection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection__v_fit_position_z" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_position_z();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_z__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitOffsetCorrection *arg1 = (GeoCal::OrbitOffsetCorrection *) 0 ;
+  bool *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection > *smartarg1 = 0 ;
+  bool temp2 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitOffsetCorrection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection__v_fit_position_z" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OrbitOffsetCorrection__v_fit_position_z" "', argument " "2"" of type '" "bool""'");
+  } 
+  temp2 = static_cast< bool >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->fit_position_z((bool const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_z(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitOffsetCorrection__v_fit_position_z",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_OrbitOffsetCorrection__v_fit_position_z__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_OrbitOffsetCorrection__v_fit_position_z__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OrbitOffsetCorrection__v_fit_position_z'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitOffsetCorrection::fit_position_z() const\n"
+    "    GeoCal::OrbitOffsetCorrection::fit_position_z(bool const &)\n");
   return 0;
 }
 
@@ -6610,8 +7040,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_OrbitOffsetCorrection", _wrap_new_OrbitOffsetCorrection, METH_VARARGS, (char *)"\n"
 		"OrbitOffsetCorrection::OrbitOffsetCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, bool\n"
-		"Outside_is_error=false, bool Fit_position=true, bool Fit_yaw=true,\n"
-		"bool Fit_pitch=true, bool Fit_roll=true)\n"
+		"Outside_is_error=false, bool Fit_position_x=true, bool\n"
+		"Fit_position_y=true, bool Fit_position_z=true, bool Fit_yaw=true, bool\n"
+		"Fit_pitch=true, bool Fit_roll=true)\n"
 		"Constructor.\n"
 		"\n"
 		"This has no time points for doing corrections, but you can add those\n"
@@ -6621,8 +7052,16 @@ static PyMethodDef SwigMethods[] = {
 		"void GeoCal::OrbitOffsetCorrection::outside_is_error(bool Outside_is_error)\n"
 		"\n"
 		""},
-	 { (char *)"OrbitOffsetCorrection__v_fit_position", _wrap_OrbitOffsetCorrection__v_fit_position, METH_VARARGS, (char *)"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position(bool V)\n"
+	 { (char *)"OrbitOffsetCorrection__v_fit_position_x", _wrap_OrbitOffsetCorrection__v_fit_position_x, METH_VARARGS, (char *)"\n"
+		"void GeoCal::OrbitOffsetCorrection::fit_position_x(bool V)\n"
+		"\n"
+		""},
+	 { (char *)"OrbitOffsetCorrection__v_fit_position_y", _wrap_OrbitOffsetCorrection__v_fit_position_y, METH_VARARGS, (char *)"\n"
+		"void GeoCal::OrbitOffsetCorrection::fit_position_y(bool V)\n"
+		"\n"
+		""},
+	 { (char *)"OrbitOffsetCorrection__v_fit_position_z", _wrap_OrbitOffsetCorrection__v_fit_position_z, METH_VARARGS, (char *)"\n"
+		"void GeoCal::OrbitOffsetCorrection::fit_position_z(bool V)\n"
 		"\n"
 		""},
 	 { (char *)"OrbitOffsetCorrection__v_fit_yaw", _wrap_OrbitOffsetCorrection__v_fit_yaw, METH_VARARGS, (char *)"\n"

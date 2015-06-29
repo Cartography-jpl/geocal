@@ -68,10 +68,14 @@ BOOST_AUTO_TEST_CASE(basic)
   blitz::Array<bool, 1> pm(9);
   pm = true, true, true, true, true, true, true, true, true;
   BOOST_CHECK(blitz::all(orb->parameter_mask() == pm));
-  orb->fit_position(false);
+  orb->fit_position_x(false);
+  orb->fit_position_y(false);
+  orb->fit_position_z(false);
   pm = false, false, false, true, true, true, true, true, true;
   BOOST_CHECK(blitz::all(orb->parameter_mask() == pm));
-  orb->fit_position(true);
+  orb->fit_position_x(true);
+  orb->fit_position_y(true);
+  orb->fit_position_z(true);
   orb->fit_yaw(false);
   pm = true, true, true, false, true, true, false, true, true;
   BOOST_CHECK(blitz::all(orb->parameter_mask() == pm));
@@ -207,7 +211,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   parm = 1, 2, 3, 4, 5, 6, 7, 8, 9;
   orb->parameter(parm);
   std::string d = serialize_write_string(orb);
-  if(true)
+  if(false)
     std::cerr << d;
   boost::shared_ptr<Orbit> orbr = 
     serialize_read_string<OrbitOffsetCorrection>(d);

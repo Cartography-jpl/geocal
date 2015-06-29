@@ -14,7 +14,9 @@ void OrbitOffsetCorrection::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(att_corr)
     & GEOCAL_NVP(pos_corr)
     & GEOCAL_NVP_(outside_is_error)
-    & GEOCAL_NVP_(fit_position)
+    & GEOCAL_NVP_(fit_position_x)
+    & GEOCAL_NVP_(fit_position_y)
+    & GEOCAL_NVP_(fit_position_z)
     & GEOCAL_NVP_(fit_yaw)
     & GEOCAL_NVP_(fit_pitch)
     & GEOCAL_NVP_(fit_roll);
@@ -31,14 +33,18 @@ GEOCAL_IMPLEMENT(OrbitOffsetCorrection);
 OrbitOffsetCorrection::OrbitOffsetCorrection(
 const boost::shared_ptr<Orbit> Orb_uncorr,
 bool Outside_is_error,
-bool Fit_position,
+bool Fit_position_x,
+bool Fit_position_y,
+bool Fit_position_z,
 bool Fit_yaw,
 bool Fit_pitch,
 bool Fit_roll)
 : Orbit(Orb_uncorr->min_time(), Orb_uncorr->max_time()),
   orb_uncorr(Orb_uncorr),
   outside_is_error_(Outside_is_error),
-  fit_position_(Fit_position),
+  fit_position_x_(Fit_position_x),
+  fit_position_y_(Fit_position_y),
+  fit_position_z_(Fit_position_z),
   fit_yaw_(Fit_yaw),
   fit_pitch_(Fit_pitch),
   fit_roll_(Fit_roll)
@@ -297,9 +303,9 @@ blitz::Array<bool, 1> OrbitOffsetCorrection::parameter_mask() const
   blitz::Array<bool, 1> res(3 * pos_corr.size() + 3 * att_corr.size());
   int j = 0;
   for(int i = 0; i < (int) pos_corr.size(); ++i, j+=3) {
-    res(j + 0) = fit_position();
-    res(j + 1) = fit_position();
-    res(j + 2) = fit_position();
+    res(j + 0) = fit_position_x();
+    res(j + 1) = fit_position_y();
+    res(j + 2) = fit_position_z();
   }
   for(int i = 0; i < (int) att_corr.size(); ++i, j+=3) {
     res(j + 0) = fit_yaw();
@@ -317,10 +323,12 @@ void OrbitOffsetCorrection::print(std::ostream& Os) const
      << "  Underlying orbit:\n";
   opad << *orbit_uncorrected() << "\n";
   opad.strict_sync();
-  Os << "  Fit position: " << (fit_position() ? "True" : "False") << "\n"
-     << "  Fit yaw:      " << (fit_yaw() ? "True" : "False") << "\n"
-     << "  Fit pitch:    " << (fit_pitch() ? "True" : "False") << "\n"
-     << "  Fit roll:     " << (fit_roll() ? "True" : "False") << "\n";
+  Os << "  Fit position x: " << (fit_position_x() ? "True" : "False") << "\n"
+     << "  Fit position y: " << (fit_position_y() ? "True" : "False") << "\n"
+     << "  Fit position z: " << (fit_position_z() ? "True" : "False") << "\n"
+     << "  Fit yaw:        " << (fit_yaw() ? "True" : "False") << "\n"
+     << "  Fit pitch:      " << (fit_pitch() ? "True" : "False") << "\n"
+     << "  Fit roll:       " << (fit_roll() ? "True" : "False") << "\n";
   Os << "  Parameter:\n";
   std::vector<std::string> pname = parameter_name();
   blitz::Array<double, 1> parm = parameter();

@@ -234,12 +234,8 @@ class ForstnerFeatureDetector(geocal_swig.feature_detector.FeatureDetector):
     def basic_robert_threshold(self):
         return self._v_basic_robert_threshold()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.basic_ip_large_number,self.maximum_weight_threshold,self.forstner_max_window_large_size,self.forstner_max_window_small_size,self.forstner_window_size,self.roundness_threshold,self.weight_threshold,self.basic_robert_threshold)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _forstner_feature_detector.delete_ForstnerFeatureDetector
 ForstnerFeatureDetector._v_basic_ip_large_number = new_instancemethod(_forstner_feature_detector.ForstnerFeatureDetector__v_basic_ip_large_number,None,ForstnerFeatureDetector)

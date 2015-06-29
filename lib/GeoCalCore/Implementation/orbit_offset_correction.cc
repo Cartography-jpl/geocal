@@ -19,7 +19,8 @@ void OrbitOffsetCorrection::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(fit_position_z)
     & GEOCAL_NVP_(fit_yaw)
     & GEOCAL_NVP_(fit_pitch)
-    & GEOCAL_NVP_(fit_roll);
+    & GEOCAL_NVP_(fit_roll)
+    & GEOCAL_NVP_(use_local_north_coordinate);
 }
 
 GEOCAL_IMPLEMENT(OrbitOffsetCorrection);
@@ -33,6 +34,7 @@ GEOCAL_IMPLEMENT(OrbitOffsetCorrection);
 OrbitOffsetCorrection::OrbitOffsetCorrection(
 const boost::shared_ptr<Orbit> Orb_uncorr,
 bool Outside_is_error,
+bool Use_local_north_coordinate,
 bool Fit_position_x,
 bool Fit_position_y,
 bool Fit_position_z,
@@ -47,7 +49,8 @@ bool Fit_roll)
   fit_position_z_(Fit_position_z),
   fit_yaw_(Fit_yaw),
   fit_pitch_(Fit_pitch),
-  fit_roll_(Fit_roll)
+  fit_roll_(Fit_roll),
+  use_local_north_coordinate_(Use_local_north_coordinate)
 {
   boost::array<AutoDerivative<double>, 3> pc;
   pc[0] = 0;
@@ -68,6 +71,18 @@ std::vector<Time> OrbitOffsetCorrection::attitude_time_point() const
   return res;
 }
 
+//-----------------------------------------------------------------------
+/// Return list of time points that we have position corrections for.
+//-----------------------------------------------------------------------
+
+std::vector<Time> OrbitOffsetCorrection::position_time_point() const
+{
+  std::vector<Time> res;
+  BOOST_FOREACH(pos_map_pair_type e, pos_corr)
+    res.push_back(e.first);
+  return res;
+}
+
 // See base class for description
 boost::shared_ptr<OrbitData> OrbitOffsetCorrection::orbit_data(Time T) const
 {
@@ -75,13 +90,13 @@ boost::shared_ptr<OrbitData> OrbitOffsetCorrection::orbit_data(Time T) const
     boost::dynamic_pointer_cast<QuaternionOrbitData>(orb_uncorr->orbit_data(T));
   if(!oc_uncorr)
     throw Exception("OrbitOffsetCorrection only works with orbits that return a QuaternionOrbitData");
-  boost::array<AutoDerivative<double>, 3> poff;
+  boost::array<AutoDerivative<double>, 3> pcorr;
 
   if(pos_corr.size() == 0) {
     if(outside_is_error_)
       throw Exception("Can interpolate because we have no time points");
     else
-      poff[2] = poff[1] = poff[0] = 0;
+      pcorr[2] = pcorr[1] = pcorr[0] = 0;
   } else {
     pos_map_type::const_iterator i = pos_corr.lower_bound(T);
     if(i == pos_corr.end()) {
@@ -91,7 +106,7 @@ boost::shared_ptr<OrbitData> OrbitOffsetCorrection::orbit_data(Time T) const
 	throw e;
       } else {
 	for(int j = 0; j < 3; ++j)
-	  poff[j] = pos_corr.rbegin()->second[j].value();
+	  pcorr[j] = pos_corr.rbegin()->second[j].value();
       }
     } else if(i == pos_corr.begin()) {
       if(outside_is_error_) {
@@ -100,7 +115,7 @@ boost::shared_ptr<OrbitData> OrbitOffsetCorrection::orbit_data(Time T) const
 	throw e;
       } else {
 	for(int j = 0; j < 3; ++j)
-	  poff[j] = i->second[j].value();
+	  pcorr[j] = i->second[j].value();
       }
     } else {
       boost::array<AutoDerivative<double>, 3> p2 = i->second;
@@ -108,9 +123,9 @@ boost::shared_ptr<OrbitData> OrbitOffsetCorrection::orbit_data(Time T) const
       --i;
       boost::array<AutoDerivative<double>, 3 > p1 = i->second;
       Time t1 = i->first;
-      throw Exception("Not done yet");
-      //blah;
-      //acorr = value(interpolate(q1, q2, T - t1, t2 - t1));
+      double tspace = (T - t1) / (t2 - t1);
+      for(int j = 0; j < 3; ++j)
+	pcorr[j] = p1[j] + (p2[j] - p1[j]) * tspace;
     }
   }
 
@@ -147,8 +162,10 @@ boost::shared_ptr<OrbitData> OrbitOffsetCorrection::orbit_data(Time T) const
       acorr = value(interpolate(q1, q2, T - t1, t2 - t1));
     }
   }
+  if(use_local_north_coordinate_)
+    throw Exception("Not done yet");
   return boost::shared_ptr<OrbitData>
-    (new QuaternionOrbitData(*oc_uncorr, poff, acorr));
+    (new QuaternionOrbitData(*oc_uncorr, pcorr, acorr));
 }
 
 // See base class for description
@@ -191,9 +208,9 @@ OrbitOffsetCorrection::orbit_data(const TimeWithDerivative& T) const
       --i;
       boost::array<AutoDerivative<double>, 3 > p1 = i->second;
       Time t1 = i->first;
-      throw Exception("Not done yet");
-      //blah;
-      //acorr = value(interpolate(q1, q2, T - t1, t2 - t1));
+      AutoDerivative<double> tspace = (T - t1) / (t2 - t1);
+      for(int j = 0; j < 3; ++j)
+	pcorr[j] = p1[j] + (p2[j] - p1[j]) * tspace;
     }
   }
 
@@ -230,6 +247,8 @@ OrbitOffsetCorrection::orbit_data(const TimeWithDerivative& T) const
       acorr = interpolate(q1, q2, T - t1, t2 - t1);
     }
   }
+  if(use_local_north_coordinate_)
+    throw Exception("Not done yet");
   return boost::shared_ptr<OrbitData>
     (new QuaternionOrbitData(*oc_uncorr, pcorr, acorr));
 }

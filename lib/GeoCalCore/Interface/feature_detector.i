@@ -31,7 +31,7 @@ public:
         return 0;
      }
   }
-  %pickle_init(1, self.image_coordinate, self.weight)
+  %pickle_serialization();
 };
 
 class FeatureDetector : public GenericObject {

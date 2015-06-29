@@ -14,6 +14,7 @@ class OrbitOffsetCorrection: public Orbit {
 public:
   OrbitOffsetCorrection(const boost::shared_ptr<Orbit> Orb_uncorr,
 			bool Outside_is_error = false,
+			bool Use_local_north_coordinate = false,
 			bool Fit_position_x = true,
 			bool Fit_position_y = true,
 			bool Fit_position_z = true,
@@ -24,12 +25,17 @@ public:
   %python_attribute_with_set(fit_position_x, bool);
   %python_attribute_with_set(fit_position_y, bool);
   %python_attribute_with_set(fit_position_z, bool);
+  %python_attribute_with_set(fit_position_e, bool);
+  %python_attribute_with_set(fit_position_n, bool);
+  %python_attribute_with_set(fit_position_u, bool);
+  %python_attribute_with_set(use_local_north_coordinate, bool);
   %python_attribute_with_set(fit_yaw, bool);
   %python_attribute_with_set(fit_pitch, bool);
   %python_attribute_with_set(fit_roll, bool);
   %python_attribute(orbit_uncorrected, boost::shared_ptr<Orbit>);
   void update_quaterion(int Ind, const boost::math::quaternion<double>& Q);
   void insert_attitude_time_point(Time T_pt);
+  void insert_position_time_point(Time T_pt);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const;

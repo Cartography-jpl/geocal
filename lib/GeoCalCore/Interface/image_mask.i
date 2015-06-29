@@ -32,6 +32,8 @@ public:
 }
 %template(Vector_ImageMask) std::vector<boost::shared_ptr<GeoCal::ImageMask> >;
 
-%extend std::vector<boost::shared_ptr<GeoCal::ImageMask> > {
-  %pickle_init(1, list(self))
-};
+// I don't think this is needed anymore. Comment this out and see if
+// anything breaks.
+// %extend std::vector<boost::shared_ptr<GeoCal::ImageMask> > {
+//   %pickle_init(1, list(self))
+// };

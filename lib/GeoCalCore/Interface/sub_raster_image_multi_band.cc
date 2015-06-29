@@ -1,8 +1,25 @@
 #include "sub_raster_image_multi_band.h"
 #include "sub_raster_image.h"
+#include "geocal_serialize_support.h"
 #include "ostream_pad.h"
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void SubRasterImageMultiBand::serialize(Archive & ar, 
+					const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageMultiBandVariable)
+    & GEOCAL_NVP(rmb)
+    & GEOCAL_NVP(sl)
+    & GEOCAL_NVP(ss)
+    & GEOCAL_NVP(nl)
+    & GEOCAL_NVP(ns);
+}
+
+GEOCAL_IMPLEMENT(SubRasterImageMultiBand);
+#endif
 
 SubRasterImageMultiBand::SubRasterImageMultiBand
 (const boost::shared_ptr<RasterImageMultiBand>& Rmb,

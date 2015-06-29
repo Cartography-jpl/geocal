@@ -27,12 +27,7 @@ public:
   %python_attribute(roundness_threshold, double)
   %python_attribute(weight_threshold, double)
   %python_attribute(basic_robert_threshold, double)
-  %pickle_init(1, self.basic_ip_large_number, self.maximum_weight_threshold,
-	       self.forstner_max_window_large_size, 
-	       self.forstner_max_window_small_size,
-	       self.forstner_window_size,
-	       self.roundness_threshold, self.weight_threshold,
-	       self.basic_robert_threshold)
+  %pickle_serialization();
 };
 }
 

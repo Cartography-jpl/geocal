@@ -118,6 +118,10 @@ public:
 
   virtual ~ScLookVector() {}
   virtual void print(std::ostream& Os) const;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -161,6 +165,10 @@ public:
 
   virtual ~ScLookVectorWithDerivative() {}
   virtual void print(std::ostream& Os) const;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -194,6 +202,10 @@ public:
 
   virtual ~CartesianInertialLookVector() {}
   virtual void print(std::ostream& Os) const;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -230,6 +242,10 @@ public:
 
   virtual ~CartesianInertialLookVectorWithDerivative() {}
   virtual void print(std::ostream& Os) const;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -268,6 +284,10 @@ public:
   virtual void print(std::ostream& Os) const;
 
   static CartesianFixedLookVector solar_look_vector(const Time& T);
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -305,6 +325,10 @@ public:
   CartesianFixedLookVectorWithDerivative(const boost::math::quaternion<AutoDerivative<double> >& V) : LookVector<AutoDerivative<double> >(V) {}
   virtual ~CartesianFixedLookVectorWithDerivative() {}
   virtual void print(std::ostream& Os) const;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -397,7 +421,100 @@ public:
   
   static LnLookVector solar_look_vector(const Time& T, 
 					const GroundCoordinate& Ref_pt);
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
 
+/****************************************************************//**
+  This is a look vector in LocalNorth coordinates. Note that there are
+  2 common local north coordinate. The first is ENU (for "East, North,
+  Up") where the local east axis is 'x', north is 'y' and up is Z. The
+  other is NED (for North, East, Down), where local north is 'x', east
+  is 'y' and 'z' is down. NED is used commonly for aircraft data
+  (see AircraftOrbitData), since you tend to look down. This class 
+  is for ENU, e.g., for calculating view zenith and azimuth angles.
+*******************************************************************/
+
+class LnLookVectorWithDerivative : public LookVector<AutoDerivative<double> > {
+public:
+//-----------------------------------------------------------------------
+/// Constructor that translates a CartesianFixedLookVectorWithDerivative to a
+/// LnLookVectorWithDerivative, using the coordinate system at the given Ref_pt.
+//-----------------------------------------------------------------------
+
+  LnLookVectorWithDerivative(const CartesianFixedLookVectorWithDerivative& Lv, 
+	       const GroundCoordinate& Ref_pt)
+  {
+    boost::math::quaternion<double> to_ln = LnLookVector::cf_to_enu(Ref_pt);
+    look_quaternion(to_ln * Lv.look_quaternion() * conj(to_ln));
+  }
+
+//-----------------------------------------------------------------------
+/// Translate from LnLookVectorWithDerivative to 
+/// CartesianFixedLookVectorWithDerivative, using the
+/// coordinate system at the given Ref_pt.
+//-----------------------------------------------------------------------
+
+  CartesianFixedLookVectorWithDerivative 
+  to_cf(const GroundCoordinate& Ref_pt) const
+  {
+    boost::math::quaternion<double> to_cf = LnLookVector::enu_to_cf(Ref_pt);
+    return CartesianFixedLookVectorWithDerivative
+      (to_cf * look_quaternion() * conj(to_cf));
+  }
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVectorWithDerivative() {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVectorWithDerivative(const boost::array<AutoDerivative<double>, 3>& Lv)
+    : LookVector<AutoDerivative<double> >(Lv) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVectorWithDerivative(const AutoDerivative<double>& x, 
+			     const AutoDerivative<double>& y, 
+			     const AutoDerivative<double>& z) : 
+    LookVector<AutoDerivative<double> >(x,y,z) {}
+
+//-----------------------------------------------------------------------
+/// Constructor. 
+//-----------------------------------------------------------------------
+
+  LnLookVectorWithDerivative(const boost::math::quaternion<AutoDerivative<double> >& V) 
+    : LookVector<AutoDerivative<double> >(V) {}
+
+  virtual ~LnLookVectorWithDerivative() {}
+  virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Return view zenith angle in degrees.
+//-----------------------------------------------------------------------
+
+  AutoDerivative<double> view_zenith() const
+  { return std::acos(direction()[2]) * Constant::rad_to_deg; }
+
+//-----------------------------------------------------------------------
+/// Return view azimuth angle in degrees.
+//-----------------------------------------------------------------------
+  
+  AutoDerivative<double> view_azimuth() const
+  { return std::atan2(look_vector[0], look_vector[1]) * Constant::rad_to_deg +
+      180.0; }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -432,6 +549,10 @@ public:
 
   virtual ~DcsLookVector() {}
   virtual void print(std::ostream& Os) const;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -469,8 +590,22 @@ public:
 
   virtual ~DcsLookVectorWithDerivative() {}
   virtual void print(std::ostream& Os) const;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
 
+GEOCAL_EXPORT_KEY(ScLookVector);
+GEOCAL_EXPORT_KEY(ScLookVectorWithDerivative);
+GEOCAL_EXPORT_KEY(CartesianInertialLookVector);
+GEOCAL_EXPORT_KEY(CartesianInertialLookVectorWithDerivative);
+GEOCAL_EXPORT_KEY(CartesianFixedLookVector);
+GEOCAL_EXPORT_KEY(CartesianFixedLookVectorWithDerivative);
+GEOCAL_EXPORT_KEY(LnLookVector);
+GEOCAL_EXPORT_KEY(LnLookVectorWithDerivative);
+GEOCAL_EXPORT_KEY(DcsLookVector);
+GEOCAL_EXPORT_KEY(DcsLookVectorWithDerivative);
 #endif

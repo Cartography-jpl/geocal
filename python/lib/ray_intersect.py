@@ -84,7 +84,7 @@ class RayIntersect3:
         res = np.empty(2 * self.tp.number_image_location)
         j = 0
         pt = Ecr(x[0], x[1], x[2])
-        for i in range(self.tp.number_camera):
+        for i in range(self.tp.number_image):
             if(self.tp.image_location[i]):
                 ic, lsigma, ssigma = self.tp.image_location[i]
                 try:
@@ -103,7 +103,7 @@ class RayIntersect3:
         res = np.empty((2 * self.tp.number_image_location, 3))
         j = 0
         pt = Ecr(x[0], x[1], x[2])
-        for i in range(self.tp.number_camera):
+        for i in range(self.tp.number_image):
             if(self.tp.image_location[i]):
                 ic, lsigma, ssigma = self.tp.image_location[i]
                 try:

@@ -17,7 +17,24 @@ geocal_test_tpcol = "/data/geocal_test_data/data.db:tpcol"
 def test_basic():
     '''Basic test of tiepoint'''
     t = TiePoint(5)
-    assert t.number_camera, 5
+    assert t.number_image, 5
+
+def test_create_multiple_pass():
+    '''Test create_multiple_pass'''
+    if(not os.path.exists(geocal_test_igc)):
+        raise SkipTest
+    if(not have_serialize_supported()):
+        raise SkipTest
+    tpcol1 = read_shelve(geocal_test_tpcol)
+    igccol1 = read_shelve(geocal_test_igc)
+    tpcol2 = read_shelve(geocal_test_tpcol)
+    igccol2 = read_shelve(geocal_test_igc)
+    igccol = IgcMultiplePass()
+    igccol.add_igc(igccol1)
+    igccol.add_igc(igccol2)
+    tpcol = TiePointCollection.create_multiple_pass(tpcol1, tpcol2)
+    assert igccol.number_image == tpcol[0].number_image
+    
 
 def test_tie_point():
     '''Further testing of tiepoint, requires access to the geocal_test_data

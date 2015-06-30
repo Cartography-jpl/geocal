@@ -3,6 +3,7 @@ import raster_image_extension
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
 from geocal_swig import IgcMapProjected
+import copy
 import numpy as np
 # Optional support for pandas
 try:
@@ -39,8 +40,8 @@ class TiePoint(object):
         self.id = 1
 
     @property
-    def number_camera(self):
-        "Number of cameras covered by the tie point"
+    def number_image(self):
+        "Number of images covered by the tie point"
         return len(self.image_location)
     
     @property
@@ -58,7 +59,7 @@ class TiePoint(object):
         being the image line and the second the image sample. The columns
         are the image indexes. For image locations that are missing, we
         return a np.NaN'''
-        res = np.empty((2, self.number_camera))
+        res = np.empty((2, self.number_image))
         for i, iloc in enumerate(self.image_location):
             if(iloc):
                 res[0,i] = iloc[0].line
@@ -71,7 +72,7 @@ class TiePoint(object):
     @property
     def ic_sigma(self):
         '''Like ic, but returned line and sample sigma.'''
-        res = np.empty((2, self.number_camera))
+        res = np.empty((2, self.number_image))
         for i, iloc in enumerate(self.image_location):
             if(iloc):
                 res[0,i] = iloc[1]
@@ -85,8 +86,8 @@ class TiePoint(object):
     def ic_pred(self, igccol):
         '''Like ic, but uses the supplied igccol to predict the image 
         location given our current ground position.'''
-        res = np.empty((2, self.number_camera))
-        for i in range(self.number_camera):
+        res = np.empty((2, self.number_image))
+        for i in range(self.number_image):
             try:
                 ic = igccol.image_coordinate(i, self.ground_location)
                 res[0,i] = ic.line
@@ -121,14 +122,14 @@ class TiePoint(object):
         projected images. This should have been projected using igc_coll.
         '''
 
-        nimg = self.number_camera
+        nimg = self.number_image
         if(ref_image is not None):
             nimg = nimg + 1
         if(not number_row):
             number_row = int(math.ceil(math.sqrt(nimg)))
         number_col = int(math.ceil(nimg / float(number_row)))
         plt.clf()
-        for i in range(self.number_camera):
+        for i in range(self.number_image):
             if(self.image_location[i] is None):
                 plt.subplot(number_row, number_col, i + 1)
                 plt.title(igc_coll.title(i))
@@ -149,7 +150,7 @@ class TiePoint(object):
                 else:
                     igc_coll.image(i).display(self.image_location[i][0], sz)
         if(ref_image is not None):
-            plt.subplot(number_row, number_col, self.number_camera + 1)
+            plt.subplot(number_row, number_col, self.number_image + 1)
             plt.title("Reference Image")
             if(self.is_gcp):
                 ic = ref_image.coordinate(self.ground_location)
@@ -163,6 +164,31 @@ class TiePointCollection(list):
     '''This is just a list of TiePoint, with a few useful functions defined'''
     def __init__(self, inital_array = []):
         self.extend(inital_array)
+
+    @classmethod
+    def create_multiple_pass(cls, *args):
+        '''This is used to complement IgcMultiplePass. It takes a list of
+        TiePointCollections. It assumes the first goes with the first 
+        IgcCollection, the second with the second IgcCollection and so on.
+        We merge all the tiepoints together, with the addition that we 
+        shuffle the image_location to match the stacked image numbering 
+        IgcMultiplePass uses. So for example if we have 3 IgcCollection each
+        with 9 views then the first set of tiepoints have locations from 
+        image 0 to 8, the second set from 9 to 17, and the third 18 to 26.
+        '''
+        res = TiePointCollection()
+        ncam = 0
+        for tpcol in args:
+            ncam += tpcol[0].number_image
+        ioff = 0
+        for tpcol in args:
+            for tp in tpcol:
+                mytp = copy.copy(tp)
+                mytp.image_location = [None] * ncam
+                mytp.image_location[ioff:(ioff + tp.number_image)] = tp.image_location
+                res.append(mytp)
+            ioff += tpcol[0].number_image
+        return res
 
     @property
     def number_gcp(self):
@@ -228,7 +254,7 @@ class TiePointCollection(list):
     def panel(self, igccol):
         '''Return a pandas Panel for all the image indexes'''
         d = {}
-        for i in range(self[0].number_camera):
+        for i in range(self[0].number_image):
             d["image_%d" % i] = self.data_frame(igccol, i)
         return pd.Panel(d)
 

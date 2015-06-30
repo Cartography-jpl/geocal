@@ -42,7 +42,7 @@ igccol = read_shelve(args.igccol)
 # can be found in Dr. Charles G. O'Hara "Accuracy Analyst: A Horizontal 
 # Accuracy Assessment Tool.
 goodtp = TiePointCollection()
-diff = [ [ ] for i in range(tpcol[0].number_camera)]
+diff = [ [ ] for i in range(tpcol[0].number_image)]
 for tp in tpcol:
     if(tp.is_gcp):
         smp, ln = dem.map_info.coordinate(tp.ground_location)

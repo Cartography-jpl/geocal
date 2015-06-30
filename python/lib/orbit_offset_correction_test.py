@@ -73,6 +73,7 @@ def test_orbit_offset_pos():
     t1 = t2 - 10
     t3 = t2 + 10
     orb = OrbitOffsetCorrection(orb_uncorr)
+    orb.insert_position_time_point(t1)
     orb.insert_attitude_time_point(t1)
     orb.insert_attitude_time_point(t2)
     orb.insert_attitude_time_point(t3)
@@ -96,6 +97,7 @@ def test_insert_attitude_time_point():
     t1 = t2 - 10
     t3 = t2 + 10
     orb = OrbitOffsetCorrection(orb_uncorr)
+    orb.insert_position_time_point(t1)
     orb.parameter = [0, 0, 0]
     orb.insert_attitude_time_point(t1)
     assert (orb.parameter == [0, 0, 0, 0, 0, 0]).all()
@@ -119,6 +121,7 @@ def test_frame_coordinate():
     t1 = t2 - 10
     t3 = t2 + 10
     orb = OrbitOffsetCorrection(orb_uncorr)
+    orb.insert_position_time_point(t1)
     orb.insert_attitude_time_point(t1)
     orb.insert_attitude_time_point(t2)
     orb.insert_attitude_time_point(t3)
@@ -140,6 +143,7 @@ def test_observer():
     t1 = t2 - 10
     t3 = t2 + 10
     orb = OrbitOffsetCorrection(orb_uncorr)
+    orb.insert_position_time_point(t1)
     orb.insert_attitude_time_point(t1)
     orb.insert_attitude_time_point(t2)
     orb.insert_attitude_time_point(t3)
@@ -164,6 +168,7 @@ def test_frame_coordinate_with_der():
     t1 = t2 - 10
     t3 = t2 + 10
     orb = OrbitOffsetCorrection(orb_uncorr)
+    orb.insert_position_time_point(t1)
     orb.insert_attitude_time_point(t1)
     orb.insert_attitude_time_point(t2)
     orb.insert_attitude_time_point(t3)

@@ -55,6 +55,7 @@ BOOST_AUTO_TEST_CASE(basic)
   // Skip test if we don't have HDF5 support
   if(!orb_uncorr)
     return;
+  orb->insert_position_time_point(t);
   orb->insert_attitude_time_point(t);
   orb->insert_attitude_time_point(t + 10);
   blitz::Array<double, 1> parm(9);
@@ -110,6 +111,7 @@ BOOST_AUTO_TEST_CASE(check_attitude)
   if(!orb_uncorr)
     return;
   // We have a separate test for the attitude, just because it is so long
+  orb->insert_position_time_point(t);
   orb->insert_attitude_time_point(t);
   orb->insert_attitude_time_point(t + 10);
   blitz::Array<double, 1> parm(9);
@@ -205,6 +207,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   // Skip test if we don't have HDF5 or serialization support
   if(!orb_uncorr || !have_serialize_supported())
     return;
+  orb->insert_position_time_point(t);
   orb->insert_attitude_time_point(t);
   orb->insert_attitude_time_point(t + 10);
   blitz::Array<double, 1> parm(9);

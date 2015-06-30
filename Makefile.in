@@ -661,9 +661,11 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcsupport@/tiled_file.cc @srcsupport@/geocal_quaternion.cc \
 	@srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/geocal_gsl_matrix.cc \
-	@srcsupport@/geocal_gsl_fit.cc @srcsupport@/geocal_gsl_root.cc \
-	@srcsupport@/geocal_time.cc @srcsupport@/covariance.cc \
-	@srcsupport@/statistic.cc \
+	@srcsupport@/geocal_gsl_fit.cc @srcsupport@/functor.cc \
+	@srcsupport@/vfunctor_with_derivative.cc \
+	@srcsupport@/dfunctor_with_derivative.cc \
+	@srcsupport@/geocal_gsl_root.cc @srcsupport@/geocal_time.cc \
+	@srcsupport@/covariance.cc @srcsupport@/statistic.cc \
 	@srcsupport@/geocal_serialize_function.cc \
 	@srcsupport@/blitz_array_serialize_support.cc \
 	@srcsupport@/geocal_fftw.cc @srcsupport@/hdf_file.cc \
@@ -690,6 +692,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcinterface@/feature_detector.cc \
 	@srcinterface@/forstner_feature_detector.cc \
 	@srcinterface@/image_matcher.cc \
+	@srcinterface@/image_to_image_match.cc \
 	@srcinterface@/ccorr_matcher.cc @srcinterface@/lsm_matcher.cc \
 	@srcinterface@/ccorr_lsm_matcher.cc \
 	@srcinterface@/geocal_rpc.cc @srcinterface@/rpc_image.cc \
@@ -803,6 +806,9 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcsupport@/boost/libgeocal_la-backtrace.lo \
 	@srcsupport@/libgeocal_la-geocal_gsl_matrix.lo \
 	@srcsupport@/libgeocal_la-geocal_gsl_fit.lo \
+	@srcsupport@/libgeocal_la-functor.lo \
+	@srcsupport@/libgeocal_la-vfunctor_with_derivative.lo \
+	@srcsupport@/libgeocal_la-dfunctor_with_derivative.lo \
 	@srcsupport@/libgeocal_la-geocal_gsl_root.lo \
 	@srcsupport@/libgeocal_la-geocal_time.lo \
 	@srcsupport@/libgeocal_la-covariance.lo \
@@ -840,6 +846,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcinterface@/libgeocal_la-feature_detector.lo \
 	@srcinterface@/libgeocal_la-forstner_feature_detector.lo \
 	@srcinterface@/libgeocal_la-image_matcher.lo \
+	@srcinterface@/libgeocal_la-image_to_image_match.lo \
 	@srcinterface@/libgeocal_la-ccorr_matcher.lo \
 	@srcinterface@/libgeocal_la-lsm_matcher.lo \
 	@srcinterface@/libgeocal_la-ccorr_lsm_matcher.lo \
@@ -2060,9 +2067,11 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcsupport@/tiled_file.cc @srcsupport@/geocal_quaternion.cc \
 	@srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/geocal_gsl_matrix.cc \
-	@srcsupport@/geocal_gsl_fit.cc @srcsupport@/geocal_gsl_root.cc \
-	@srcsupport@/geocal_time.cc @srcsupport@/covariance.cc \
-	@srcsupport@/statistic.cc \
+	@srcsupport@/geocal_gsl_fit.cc @srcsupport@/functor.cc \
+	@srcsupport@/vfunctor_with_derivative.cc \
+	@srcsupport@/dfunctor_with_derivative.cc \
+	@srcsupport@/geocal_gsl_root.cc @srcsupport@/geocal_time.cc \
+	@srcsupport@/covariance.cc @srcsupport@/statistic.cc \
 	@srcsupport@/geocal_serialize_function.cc \
 	@srcsupport@/blitz_array_serialize_support.cc $(am__append_14) \
 	$(am__append_16) @srcinterface@/raster_image.cc \
@@ -2088,6 +2097,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcinterface@/feature_detector.cc \
 	@srcinterface@/forstner_feature_detector.cc \
 	@srcinterface@/image_matcher.cc \
+	@srcinterface@/image_to_image_match.cc \
 	@srcinterface@/ccorr_matcher.cc @srcinterface@/lsm_matcher.cc \
 	@srcinterface@/ccorr_lsm_matcher.cc \
 	@srcinterface@/geocal_rpc.cc @srcinterface@/rpc_image.cc \
@@ -3162,6 +3172,14 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcsupport@/libgeocal_la-geocal_gsl_fit.lo:  \
 	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcsupport@/libgeocal_la-functor.lo: @srcsupport@/$(am__dirstamp) \
+	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcsupport@/libgeocal_la-vfunctor_with_derivative.lo:  \
+	@srcsupport@/$(am__dirstamp) \
+	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcsupport@/libgeocal_la-dfunctor_with_derivative.lo:  \
+	@srcsupport@/$(am__dirstamp) \
+	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
 @srcsupport@/libgeocal_la-geocal_gsl_root.lo:  \
 	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
@@ -3272,6 +3290,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-image_matcher.lo:  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/libgeocal_la-image_to_image_match.lo:  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-ccorr_matcher.lo:  \
@@ -4304,6 +4325,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-image_ground_connection.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-image_mask.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-image_matcher.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-image_to_image_match.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-ipi.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-look_vector.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-lsm_matcher.Plo@am__quote@
@@ -4379,6 +4401,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-auto_derivative.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-blitz_array_serialize_support.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-covariance.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-dfunctor_with_derivative.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-functor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-generic_object.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-geocal_fftw.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-geocal_gsl_fit.Plo@am__quote@
@@ -4390,6 +4414,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-hdf_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-statistic.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-tiled_file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-vfunctor_with_derivative.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_collection_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_wrap.Plo@am__quote@
@@ -5744,6 +5769,27 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/libgeocal_la-geocal_gsl_fit.lo `test -f '@srcsupport@/geocal_gsl_fit.cc' || echo '$(srcdir)/'`@srcsupport@/geocal_gsl_fit.cc
 
+@srcsupport@/libgeocal_la-functor.lo: @srcsupport@/functor.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/libgeocal_la-functor.lo -MD -MP -MF @srcsupport@/$(DEPDIR)/libgeocal_la-functor.Tpo -c -o @srcsupport@/libgeocal_la-functor.lo `test -f '@srcsupport@/functor.cc' || echo '$(srcdir)/'`@srcsupport@/functor.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/libgeocal_la-functor.Tpo @srcsupport@/$(DEPDIR)/libgeocal_la-functor.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/functor.cc' object='@srcsupport@/libgeocal_la-functor.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/libgeocal_la-functor.lo `test -f '@srcsupport@/functor.cc' || echo '$(srcdir)/'`@srcsupport@/functor.cc
+
+@srcsupport@/libgeocal_la-vfunctor_with_derivative.lo: @srcsupport@/vfunctor_with_derivative.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/libgeocal_la-vfunctor_with_derivative.lo -MD -MP -MF @srcsupport@/$(DEPDIR)/libgeocal_la-vfunctor_with_derivative.Tpo -c -o @srcsupport@/libgeocal_la-vfunctor_with_derivative.lo `test -f '@srcsupport@/vfunctor_with_derivative.cc' || echo '$(srcdir)/'`@srcsupport@/vfunctor_with_derivative.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/libgeocal_la-vfunctor_with_derivative.Tpo @srcsupport@/$(DEPDIR)/libgeocal_la-vfunctor_with_derivative.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/vfunctor_with_derivative.cc' object='@srcsupport@/libgeocal_la-vfunctor_with_derivative.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/libgeocal_la-vfunctor_with_derivative.lo `test -f '@srcsupport@/vfunctor_with_derivative.cc' || echo '$(srcdir)/'`@srcsupport@/vfunctor_with_derivative.cc
+
+@srcsupport@/libgeocal_la-dfunctor_with_derivative.lo: @srcsupport@/dfunctor_with_derivative.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/libgeocal_la-dfunctor_with_derivative.lo -MD -MP -MF @srcsupport@/$(DEPDIR)/libgeocal_la-dfunctor_with_derivative.Tpo -c -o @srcsupport@/libgeocal_la-dfunctor_with_derivative.lo `test -f '@srcsupport@/dfunctor_with_derivative.cc' || echo '$(srcdir)/'`@srcsupport@/dfunctor_with_derivative.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/libgeocal_la-dfunctor_with_derivative.Tpo @srcsupport@/$(DEPDIR)/libgeocal_la-dfunctor_with_derivative.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/dfunctor_with_derivative.cc' object='@srcsupport@/libgeocal_la-dfunctor_with_derivative.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/libgeocal_la-dfunctor_with_derivative.lo `test -f '@srcsupport@/dfunctor_with_derivative.cc' || echo '$(srcdir)/'`@srcsupport@/dfunctor_with_derivative.cc
+
 @srcsupport@/libgeocal_la-geocal_gsl_root.lo: @srcsupport@/geocal_gsl_root.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/libgeocal_la-geocal_gsl_root.lo -MD -MP -MF @srcsupport@/$(DEPDIR)/libgeocal_la-geocal_gsl_root.Tpo -c -o @srcsupport@/libgeocal_la-geocal_gsl_root.lo `test -f '@srcsupport@/geocal_gsl_root.cc' || echo '$(srcdir)/'`@srcsupport@/geocal_gsl_root.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/libgeocal_la-geocal_gsl_root.Tpo @srcsupport@/$(DEPDIR)/libgeocal_la-geocal_gsl_root.Plo
@@ -6009,6 +6055,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/image_matcher.cc' object='@srcinterface@/libgeocal_la-image_matcher.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-image_matcher.lo `test -f '@srcinterface@/image_matcher.cc' || echo '$(srcdir)/'`@srcinterface@/image_matcher.cc
+
+@srcinterface@/libgeocal_la-image_to_image_match.lo: @srcinterface@/image_to_image_match.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-image_to_image_match.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-image_to_image_match.Tpo -c -o @srcinterface@/libgeocal_la-image_to_image_match.lo `test -f '@srcinterface@/image_to_image_match.cc' || echo '$(srcdir)/'`@srcinterface@/image_to_image_match.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/libgeocal_la-image_to_image_match.Tpo @srcinterface@/$(DEPDIR)/libgeocal_la-image_to_image_match.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/image_to_image_match.cc' object='@srcinterface@/libgeocal_la-image_to_image_match.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-image_to_image_match.lo `test -f '@srcinterface@/image_to_image_match.cc' || echo '$(srcdir)/'`@srcinterface@/image_to_image_match.cc
 
 @srcinterface@/libgeocal_la-ccorr_matcher.lo: @srcinterface@/ccorr_matcher.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-ccorr_matcher.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-ccorr_matcher.Tpo -c -o @srcinterface@/libgeocal_la-ccorr_matcher.lo `test -f '@srcinterface@/ccorr_matcher.cc' || echo '$(srcdir)/'`@srcinterface@/ccorr_matcher.cc

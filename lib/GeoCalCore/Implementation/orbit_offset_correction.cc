@@ -52,11 +52,6 @@ bool Fit_roll)
   fit_roll_(Fit_roll),
   use_local_north_coordinate_(Use_local_north_coordinate)
 {
-  boost::array<AutoDerivative<double>, 3> pc;
-  pc[0] = 0;
-  pc[1] = 0;
-  pc[2] = 0;
-  pos_corr[min_time()] = pc;
 }
 
 //-----------------------------------------------------------------------
@@ -264,7 +259,7 @@ OrbitOffsetCorrection::orbit_data(const TimeWithDerivative& T) const
 // See base class for description
 ArrayAd<double, 1> OrbitOffsetCorrection::parameter_with_derivative() const
 {
-  blitz::Array<AutoDerivative<double>, 1> res(3 + 3 * att_corr.size());
+  blitz::Array<AutoDerivative<double>, 1> res(3 * pos_corr.size() + 3 * att_corr.size());
   int i = 0;
   BOOST_FOREACH(pos_map_pair_type e, pos_corr) {
     res(i + 0) = e.second[0];
@@ -350,7 +345,9 @@ void OrbitOffsetCorrection::print(std::ostream& Os) const
      << "  Underlying orbit:\n";
   opad << *orbit_uncorrected() << "\n";
   opad.strict_sync();
-  Os << "  Fit position x: " << (fit_position_x() ? "True" : "False") << "\n"
+  Os << " Use LocalNorth:  " 
+     << (use_local_north_coordinate() ? "True" : "False") << "\n"
+     << "  Fit position x: " << (fit_position_x() ? "True" : "False") << "\n"
      << "  Fit position y: " << (fit_position_y() ? "True" : "False") << "\n"
      << "  Fit position z: " << (fit_position_z() ? "True" : "False") << "\n"
      << "  Fit yaw:        " << (fit_yaw() ? "True" : "False") << "\n"

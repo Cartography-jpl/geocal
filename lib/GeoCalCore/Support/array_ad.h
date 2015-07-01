@@ -379,7 +379,21 @@ private:
   blitz::Array<T, D> val;
   blitz::Array<T, D + 1> jac;
   bool is_const;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
+// Can extend this to other types as needed.
+typedef ArrayAd<double, 1> ArrayAd_1d;
+typedef ArrayAd<double, 2> ArrayAd_2d;
+typedef ArrayAd<double, 3> ArrayAd_3d;
+typedef ArrayAd<double, 4> ArrayAd_4d;
+
 }
+
+GEOCAL_EXPORT_KEY(ArrayAd_1d);
+GEOCAL_EXPORT_KEY(ArrayAd_2d);
+GEOCAL_EXPORT_KEY(ArrayAd_3d);
+GEOCAL_EXPORT_KEY(ArrayAd_4d);
 #endif
 

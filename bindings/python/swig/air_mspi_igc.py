@@ -141,11 +141,11 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
     def __init__(self, *args): 
         """
         AirMspiIgc::AirMspiIgc(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
-        MspiCamera > &Cam, const boost::shared_ptr< Dem > &Dem, const
-        std::string &L1b1_file_name, const std::string
-        &Swath_to_use="660-I", const std::string &Title="Image", int
-        Dem_resolution=10, int Tile_number_line=-1, int Tile_number_sample=-1,
-        unsigned int Number_tile=4)
+        MspiCamera > &Cam, const boost::shared_ptr< MspiGimbal > &Gim, const
+        boost::shared_ptr< Dem > &Dem, const std::string &L1b1_file_name,
+        const std::string &Swath_to_use="660-I", const std::string
+        &Title="Image", int Dem_resolution=10, int Tile_number_line=-1, int
+        Tile_number_sample=-1, unsigned int Number_tile=4)
         Constructor.
 
         This variation of the constructor directly takes the information
@@ -170,7 +170,7 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
 
     def _v_orbit(self):
         """
-        boost::shared_ptr<AirMspiOrbit> GeoCal::AirMspiIgc::orbit() const
+        boost::shared_ptr<Orbit> GeoCal::AirMspiIgc::orbit() const
         Orbit we are using. 
         """
         return _air_mspi_igc.AirMspiIgc__v_orbit(self)
@@ -201,6 +201,17 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
     def camera(self):
         return self._v_camera()
 
+    def _v_gimbal(self):
+        """
+        boost::shared_ptr<MspiGimbal> GeoCal::AirMspiIgc::gimbal() const
+        Gimbal we are using. 
+        """
+        return _air_mspi_igc.AirMspiIgc__v_gimbal(self)
+
+    @property
+    def gimbal(self):
+        return self._v_gimbal()
+
     def _v_l1b1_file_name(self):
         """
         std::string GeoCal::AirMspiIgc::l1b1_file_name() const
@@ -220,6 +231,7 @@ AirMspiIgc._v_band = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_band,None,Ai
 AirMspiIgc._v_orbit = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_orbit,None,AirMspiIgc)
 AirMspiIgc._v_time_table = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_time_table,None,AirMspiIgc)
 AirMspiIgc._v_camera = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_camera,None,AirMspiIgc)
+AirMspiIgc._v_gimbal = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_gimbal,None,AirMspiIgc)
 AirMspiIgc._v_l1b1_file_name = new_instancemethod(_air_mspi_igc.AirMspiIgc__v_l1b1_file_name,None,AirMspiIgc)
 AirMspiIgc_swigregister = _air_mspi_igc.AirMspiIgc_swigregister
 AirMspiIgc_swigregister(AirMspiIgc)

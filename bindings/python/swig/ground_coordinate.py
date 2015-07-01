@@ -444,12 +444,8 @@ class LnLookVector(geocal_swig.look_vector.LookVectorDouble):
     def view_zenith(self):
         return self._v_view_zenith()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ground_coordinate.delete_LnLookVector
 LnLookVector.to_cf = new_instancemethod(_ground_coordinate.LnLookVector_to_cf,None,LnLookVector)
@@ -470,6 +466,30 @@ LnLookVector_enu_to_cf = _ground_coordinate.LnLookVector_enu_to_cf
 def LnLookVector_solar_look_vector(*args):
   return _ground_coordinate.LnLookVector_solar_look_vector(*args)
 LnLookVector_solar_look_vector = _ground_coordinate.LnLookVector_solar_look_vector
+
+class LnLookVectorWithDerivative(geocal_swig.look_vector.LookVectorAutoDerivativeDouble):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        _ground_coordinate.LnLookVectorWithDerivative_swiginit(self,_ground_coordinate.new_LnLookVectorWithDerivative(*args))
+    @property
+    def view_azimuth(self):
+        return self._v_view_azimuth()
+
+    @property
+    def view_zenith(self):
+        return self._v_view_zenith()
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _ground_coordinate.delete_LnLookVectorWithDerivative
+LnLookVectorWithDerivative.to_cf = new_instancemethod(_ground_coordinate.LnLookVectorWithDerivative_to_cf,None,LnLookVectorWithDerivative)
+LnLookVectorWithDerivative.__str__ = new_instancemethod(_ground_coordinate.LnLookVectorWithDerivative___str__,None,LnLookVectorWithDerivative)
+LnLookVectorWithDerivative._v_view_azimuth = new_instancemethod(_ground_coordinate.LnLookVectorWithDerivative__v_view_azimuth,None,LnLookVectorWithDerivative)
+LnLookVectorWithDerivative._v_view_zenith = new_instancemethod(_ground_coordinate.LnLookVectorWithDerivative__v_view_zenith,None,LnLookVectorWithDerivative)
+LnLookVectorWithDerivative_swigregister = _ground_coordinate.LnLookVectorWithDerivative_swigregister
+LnLookVectorWithDerivative_swigregister(LnLookVectorWithDerivative)
 
 class CartesianFixedLookVector(geocal_swig.look_vector.LookVectorDouble):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')

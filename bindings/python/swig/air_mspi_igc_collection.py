@@ -139,10 +139,10 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
     def __init__(self, *args): 
         """
         AirMspiIgcCollection::AirMspiIgcCollection(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
-        MspiCamera > &Cam, const boost::shared_ptr< Dem > &D, const
-        std::vector< std::string > &L1b1_file_name, const std::string
-        &Swath_to_use="660-I", int Dem_resolution=10, const std::string
-        &Base_directory=".")
+        MspiCamera > &Cam, const boost::shared_ptr< MspiGimbal > &Gim, const
+        boost::shared_ptr< Dem > &D, const std::vector< std::string >
+        &L1b1_file_name, const std::string &Swath_to_use="660-I", int
+        Dem_resolution=10, const std::string &Base_directory=".")
         This create a AirMspiIgcCollection by directly giving the various
         pieces needed to construct it. 
         """
@@ -167,9 +167,8 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
 
     def orbit(self, *args):
         """
-        boost::shared_ptr<AirMspiOrbit> GeoCal::AirMspiIgcCollection::orbit(int Index) const
-        Return specific orbit we are using, needed for some routines that
-        depend on the details of AirMspiOrbit. 
+        boost::shared_ptr<Orbit> GeoCal::AirMspiIgcCollection::orbit(int Index) const
+        Return specific orbit we are using. 
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_orbit(self, *args)
 
@@ -180,6 +179,14 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
         depend on the details of MspiCamera. 
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_camera(self, *args)
+
+    def gimbal(self, *args):
+        """
+        boost::shared_ptr<MspiGimbal> GeoCal::AirMspiIgcCollection::gimbal(int Index) const
+        Return specific gimbal we are using, needed for some routines that
+        depend on the details of MspiGimbal. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_gimbal(self, *args)
 
     def time_table(self, *args):
         """
@@ -235,6 +242,9 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_view_number_to_image_index(self, *args)
 
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _air_mspi_igc_collection.delete_AirMspiIgcCollection
 AirMspiIgcCollection.image_ground_connection = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_image_ground_connection,None,AirMspiIgcCollection)
 AirMspiIgcCollection.have_config = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_have_config,None,AirMspiIgcCollection)
@@ -243,6 +253,7 @@ AirMspiIgcCollection.config_value_int = new_instancemethod(_air_mspi_igc_collect
 AirMspiIgcCollection.config_value_string = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_config_value_string,None,AirMspiIgcCollection)
 AirMspiIgcCollection.orbit = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_orbit,None,AirMspiIgcCollection)
 AirMspiIgcCollection.camera = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_camera,None,AirMspiIgcCollection)
+AirMspiIgcCollection.gimbal = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_gimbal,None,AirMspiIgcCollection)
 AirMspiIgcCollection.time_table = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_time_table,None,AirMspiIgcCollection)
 AirMspiIgcCollection.number_band = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_number_band,None,AirMspiIgcCollection)
 AirMspiIgcCollection.band = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_band,None,AirMspiIgcCollection)

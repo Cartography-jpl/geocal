@@ -1,6 +1,7 @@
 #ifndef AIRMSPI_ORBIT_H
 #define AIRMSPI_ORBIT_H
 #include "orbit.h"		// Definition of Orbit
+#include "mspi_gimbal.h"	// Definition of MspiGimbal.
 #include "gdal_raster_image.h"	// Definition of GdalRasterImage
 #include "geocal_datum.h"	// Definition of Datum
 #include "aircraft_orbit_data.h"
@@ -48,20 +49,7 @@ private:
 class AirMspiOrbit : public Orbit {
 public:
   AirMspiOrbit(const std::string& Fname, 
-	       const blitz::Array<double, 1>& Gimbal_angle,
-	       const blitz::Array<double, 1>& Ypc_corr,
-	       const boost::shared_ptr<Datum>& D
-	       = boost::shared_ptr<Datum>(new NoDatum()),
-	       AircraftOrbitData::VerticalDefinition Def = 
-	       AircraftOrbitData::GEODETIC_VERTICAL);
-  AirMspiOrbit(const std::string& Fname, 
-	       const blitz::Array<double, 1>& Gimbal_angle,
-	       const boost::shared_ptr<Datum>& D
-	       = boost::shared_ptr<Datum>(new NoDatum()),
-	       AircraftOrbitData::VerticalDefinition Def = 
-	       AircraftOrbitData::GEODETIC_VERTICAL);
-
-  AirMspiOrbit(const std::string& Fname, 
+	       const boost::shared_ptr<MspiGimbal>& Gim,
 	       const boost::shared_ptr<Datum>& D
 	       = boost::shared_ptr<Datum>(new NoDatum()),
 	       AircraftOrbitData::VerticalDefinition Def = 
@@ -100,22 +88,16 @@ public:
   std::string flight_description() const 
   { return data->metadata<std::string>("flight_description"); }
 
-//-----------------------------------------------------------------------
-/// Gimbal angles. This is in degrees, and is in the order epsilon,
-/// psi, theta.
-//-----------------------------------------------------------------------
-
-  blitz::Array<double, 1> gimbal_angle() const { return gimbal_angle_;}
-
-//-----------------------------------------------------------------------
-/// YPR correction. This is a pretty simple error model, we may modify
-/// this is the future. This is in degrees
-//-----------------------------------------------------------------------
-
-  blitz::Array<double, 1> ypr_corr() const { return ypr_corr_;}
-
   AirMspiNavData nav_data(int Index) const;
   AirMspiNavData nav_data(Time T) const;
+
+//-----------------------------------------------------------------------
+/// Return the gimbal position at time T in degrees.
+//-----------------------------------------------------------------------
+  
+  double gimbal_position(Time T) const
+  { return nav_data(T).gimbal_pos * GeoCal::Constant::rad_to_deg; }
+    
   boost::shared_ptr<QuaternionOrbitData> orbit_data_index(int Index) const;
 
 //-----------------------------------------------------------------------
@@ -146,19 +128,14 @@ private:
   mutable std::vector<blitz::Array<double, 2> >::iterator next_swap_;
   int tile_number_line;
   boost::shared_ptr<Datum> datum_;
-  blitz::Array<double, 1> gimbal_angle_;
-  blitz::Array<double, 1> ypr_corr_;
-  boost::math::quaternion<double> m;
   AircraftOrbitData::VerticalDefinition vdef_;
   double tspace_;
   bool old_format;
-  AirMspiOrbit() {}
+  boost::shared_ptr<MspiGimbal> gimbal;
+  AirMspiOrbit();
   friend class boost::serialization::access;
   template<class Archive>
-  void save(Archive& Ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive& Ar, const unsigned int version);
-  GEOCAL_SPLIT_MEMBER();
+  void serialize(Archive& Ar, const unsigned int version);
 };
 }
 GEOCAL_EXPORT_KEY(AirMspiOrbit);

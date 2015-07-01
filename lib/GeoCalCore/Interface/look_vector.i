@@ -43,8 +43,7 @@ public:
   ScLookVector(double x, double y, double z);
   ScLookVector(const boost::array<double, 3>& Lv);
   std::string print_to_string() const;
-  %pickle_init(1, self.look_vector[0], self.look_vector[1],
-	       self.look_vector[2])
+  %pickle_serialization();
 };
 
 class ScLookVectorWithDerivative : public LookVector<AutoDerivative<double> > {
@@ -56,8 +55,7 @@ public:
   ScLookVectorWithDerivative(const boost::array<AutoDerivative<double> , 3>& Lv);
   ScLookVectorWithDerivative(const ScLookVector& Slv);
   std::string print_to_string() const;
-  %pickle_init(1, self.look_vector[0], self.look_vector[1],
-	       self.look_vector[2])
+  %pickle_serialization();
 };
 
 class CartesianInertialLookVector : public LookVector<double> {
@@ -67,8 +65,7 @@ public:
   CartesianInertialLookVector(double x, double y, double z);
   CartesianInertialLookVector(const boost::math::quaternion<double>& V);
   std::string print_to_string() const;
-  %pickle_init(1, self.look_vector[0], self.look_vector[1],
-	       self.look_vector[2])
+  %pickle_serialization();
 };
 
 class CartesianInertialLookVectorWithDerivative : public LookVector<AutoDerivative<double> > {
@@ -80,12 +77,14 @@ public:
 					    const AutoDerivative<double>& z);
   CartesianInertialLookVectorWithDerivative(const boost::math::quaternion<AutoDerivative<double> >& V);
   std::string print_to_string() const;
-  %pickle_init(1, self.look_vector[0], self.look_vector[1],
-	       self.look_vector[2])
+  %pickle_serialization();
 };
 
 // LnLookVector is in ground_coordinate.i instead of here, to break a
 // SWIG circular dependency.
+
+// LnLookVectorWithDerivative is in ground_coordinate.i instead of
+// here, to break a SWIG circular dependency.
 
 class DcsLookVector : public LookVector<double> {
 public:
@@ -93,8 +92,7 @@ public:
   DcsLookVector(double x, double y, double z);
   DcsLookVector(const boost::array<double, 3>& Lv);
   std::string print_to_string() const;
-  %pickle_init(1, self.look_vector[0], self.look_vector[1],
-	       self.look_vector[2])
+  %pickle_serialization();
 };
 
 class DcsLookVectorWithDerivative : public LookVector<AutoDerivative<double> > {
@@ -105,8 +103,7 @@ public:
 			     const AutoDerivative<double>&  z);
   DcsLookVectorWithDerivative(const boost::array<AutoDerivative<double> , 3>& Lv);
   std::string print_to_string() const;
-  %pickle_init(1, self.look_vector[0], self.look_vector[1],
-	       self.look_vector[2])
+  %pickle_serialization();
 };
 
 
@@ -119,8 +116,7 @@ public:
 					 const AutoDerivative<double>& z);
   CartesianFixedLookVectorWithDerivative(const boost::math::quaternion<AutoDerivative<double> >& V);
   std::string print_to_string() const;
-  %pickle_init(1, self.look_vector[0], self.look_vector[1],
-	       self.look_vector[2])
+  %pickle_serialization();
 };
 
 // CartesianFixedLookVector is in ground_coordinate.i instead of here,

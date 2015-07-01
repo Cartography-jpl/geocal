@@ -228,6 +228,9 @@ class AutoDerivativeDouble(geocal_swig.generic_object.GenericObject):
     def gradient(self,val):
         self._gradient_set(val)
       
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _auto_derivative.delete_AutoDerivativeDouble
 AutoDerivativeDouble._v_number_variable = new_instancemethod(_auto_derivative.AutoDerivativeDouble__v_number_variable,None,AutoDerivativeDouble)
 AutoDerivativeDouble._v_is_constant = new_instancemethod(_auto_derivative.AutoDerivativeDouble__v_is_constant,None,AutoDerivativeDouble)

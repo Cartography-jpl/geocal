@@ -319,12 +319,8 @@ class ArrayAd_double_1(object):
         t.append(val)
         self.write(*t)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.value,self.jacobian,self.is_constant)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _array_ad.delete_ArrayAd_double_1
 ArrayAd_double_1.resize_number_variable = new_instancemethod(_array_ad.ArrayAd_double_1_resize_number_variable,None,ArrayAd_double_1)
@@ -513,12 +509,8 @@ class ArrayAd_double_2(object):
         t.append(val)
         self.write(*t)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.value,self.jacobian,self.is_constant)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _array_ad.delete_ArrayAd_double_2
 ArrayAd_double_2.resize_number_variable = new_instancemethod(_array_ad.ArrayAd_double_2_resize_number_variable,None,ArrayAd_double_2)
@@ -707,12 +699,8 @@ class ArrayAd_double_3(object):
         t.append(val)
         self.write(*t)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.value,self.jacobian,self.is_constant)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _array_ad.delete_ArrayAd_double_3
 ArrayAd_double_3.resize_number_variable = new_instancemethod(_array_ad.ArrayAd_double_3_resize_number_variable,None,ArrayAd_double_3)
@@ -901,12 +889,8 @@ class ArrayAd_double_4(object):
         t.append(val)
         self.write(*t)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.value,self.jacobian,self.is_constant)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _array_ad.delete_ArrayAd_double_4
 ArrayAd_double_4.resize_number_variable = new_instancemethod(_array_ad.ArrayAd_double_4_resize_number_variable,None,ArrayAd_double_4)

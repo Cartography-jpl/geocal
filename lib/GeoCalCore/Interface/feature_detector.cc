@@ -1,9 +1,29 @@
 #include "feature_detector.h"
 #include "sub_raster_image.h"
 #include "null_deleter.h"
+#include "geocal_serialize_support.h"
 #include <cmath>
 #include <boost/foreach.hpp>
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void InterestPoint::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(InterestPoint);
+  ar & GEOCAL_NVP(image_coordinate)
+    & GEOCAL_NVP(weight);
+}
+
+template<class Archive>
+void FeatureDetector::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(FeatureDetector);
+}
+
+GEOCAL_IMPLEMENT(InterestPoint);
+GEOCAL_IMPLEMENT(FeatureDetector);
+#endif
 
 //-----------------------------------------------------------------------
 /// Print InterestPoint to a stream.

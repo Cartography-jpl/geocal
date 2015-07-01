@@ -52,13 +52,13 @@ public:
   const std::string& granule_id() const {return granule_id_;}
 
 //-----------------------------------------------------------------------
-/// Epsilon angle, in radians.
+/// Epsilon angle, in degrees.
 //-----------------------------------------------------------------------
 
   double epsilon() const {return epsilon_;}
 
 //-----------------------------------------------------------------------
-/// Psi angle, in radians.
+/// Psi angle, in degrees.
 //-----------------------------------------------------------------------
 
   double psi() const {return psi_;}
@@ -71,34 +71,37 @@ public:
   bool inversion() const { return inversion_ == -1; }
 
 //-----------------------------------------------------------------------
-/// Theta angle, in radians.
+/// Theta angle, in degrees.
 //-----------------------------------------------------------------------
 
   double theta() const {return theta_;}
 
 //-----------------------------------------------------------------------
-/// Boresight angle, in radians.
+/// Boresight angle, in degrees.
 //-----------------------------------------------------------------------
 
   double boresight_angle() const {return boresight_angle_;}
 
 //-----------------------------------------------------------------------
-/// Yaw angle, in radians.
+/// Yaw angle, in degrees.
 //-----------------------------------------------------------------------
 
-  double yaw() const {return yaw_;}
+  double yaw() const {return yaw_.value();}
+  AutoDerivative<double> yaw_with_derivative() const { return yaw_; }
 
 //-----------------------------------------------------------------------
-/// Pitch angle, in radians.
+/// Pitch angle, in degrees.
 //-----------------------------------------------------------------------
 
-  double pitch() const {return pitch_;}
+  double pitch() const {return pitch_.value();}
+  AutoDerivative<double> pitch_with_derivative() const { return pitch_; }
 
 //-----------------------------------------------------------------------
-/// Roll angle, in radians.
+/// Roll angle, in degrees.
 //-----------------------------------------------------------------------
 
-  double roll() const {return roll_;}
+  double roll() const {return roll_.value();}
+  AutoDerivative<double> roll_with_derivative() const { return roll_; }
 
 //-----------------------------------------------------------------------
 /// This is the integration time in seconds.
@@ -115,40 +118,11 @@ public:
   }
 
 //-----------------------------------------------------------------------
-/// Gimbal epsilon in degrees. We don't actually include the gimbal
-/// angles in the camera model, instead this is handled by
-/// AirMspiOrbit. However the gimbal parameters are recorded in the
-/// camera configuration file, so it make sense to read and report
-/// them here.
-//-----------------------------------------------------------------------
-
-  double gimbal_epsilon() const { return gimbal_epsilon_; }
-
-//-----------------------------------------------------------------------
-/// Gimbal psi in degrees. We don't actually include the gimbal
-/// angles in the camera model, instead this is handled by
-/// AirMspiOrbit. However the gimbal parameters are recorded in the
-/// camera configuration file, so it make sense to read and report
-/// them here.
-//-----------------------------------------------------------------------
-
-  double gimbal_psi() const { return gimbal_psi_; }
-
-//-----------------------------------------------------------------------
-/// Gimbal theta in degrees. We don't actually include the gimbal
-/// angles in the camera model, instead this is handled by
-/// AirMspiOrbit. However the gimbal parameters are recorded in the
-/// camera configuration file, so it make sense to read and report
-/// them here.
-//-----------------------------------------------------------------------
-
-  double gimbal_theta() const { return gimbal_theta_; }
-
-//-----------------------------------------------------------------------
 /// Return the camera row number for the given band. This ends up
 /// being used in other places (e.g., the "Row Table" in L1B1 files),
 /// so we make this available. 
 //-----------------------------------------------------------------------
+
   int row_number(int Band) const {
     range_check(Band, 0, number_band());
     return row_number_[Band];
@@ -159,10 +133,21 @@ public:
 		       double& Line_offset,
 		       double& Sample_offset) const;
   int band_number(int Row_number) const;
-  virtual blitz::Array<double, 1> parameter() const;
-  virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual blitz::Array<double, 1> parameter() const
+  { return parameter_with_derivative().value(); }
+  virtual void parameter(const blitz::Array<double, 1>& Parm)
+  {  parameter_with_derivative(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const;
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
+  virtual blitz::Array<bool, 1> parameter_mask() const 
+  { return parameter_mask_; }
+  virtual void parameter_mask(const blitz::Array<bool, 1>& Pm);
   virtual void print(std::ostream& Os) const;
+  virtual void notify_update()
+  {
+    notify_update_do(*this);
+  }
 protected:
   virtual void dcs_to_focal_plane(int Band,
 				  const boost::math::quaternion<double>& Dcs,
@@ -170,30 +155,24 @@ protected:
   virtual void dcs_to_focal_plane(int Band,
 				  const boost::math::quaternion<AutoDerivative<double> >& Dcs,
 				  AutoDerivative<double>& Xfp, 
-				  AutoDerivative<double>& Yfp) const
-  { throw Exception("No Implemented yet"); }
+				  AutoDerivative<double>& Yfp) const;
   virtual boost::math::quaternion<double> 
   focal_plane_to_dcs(int Band, double Xfp, double Yfp) const;
   virtual boost::math::quaternion<AutoDerivative<double> > 
   focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp, 
-		     const AutoDerivative<double>& Yfp) const
-  {
-    throw Exception("No Implemented yet");
-  }
+		     const AutoDerivative<double>& Yfp) const;
 private:
   std::string fname, granule_id_;
-  // Camera angles, in radians
-  double epsilon_, psi_, theta_, boresight_angle_, yaw_, pitch_, roll_;
-  // Gimbal angles, in degrees. We don't actually include these in the
-  // camera model, instead these are handled by AirMspiOrbit. But the
-  // values are stored in the camera configuration file, so it makes
-  // sense to read and store them here.
-  double gimbal_epsilon_, gimbal_psi_, gimbal_theta_;
+  // Camera angles, in degrees
+  double epsilon_, psi_, theta_, boresight_angle_;
+  AutoDerivative<double> yaw_, pitch_, roll_;
   // Give the row number for each band.
   std::vector<int> row_number_;
   // Transformation to and from the paraxial coordinates
   boost::shared_ptr<MspiParaxialTransform> paraxial_transform_;
   int inversion_;
+  blitz::Array<bool, 1> parameter_mask_;
+				// Mask of parameters we are fitting for.
 
   MspiCamera() {}
   friend class boost::serialization::access;

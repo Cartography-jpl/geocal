@@ -9,7 +9,8 @@ namespace GeoCal {
   This is an IgcCollection for AirMspi.
 *******************************************************************/
 
-class AirMspiIgcCollection : public virtual IgcCollection {
+class AirMspiIgcCollection : public virtual IgcCollection, 
+			     public virtual WithParameterNested {
 public:
   AirMspiIgcCollection(const std::string& Master_config_file,
 		       const std::string& Orbit_file_name,
@@ -18,6 +19,7 @@ public:
 		       const std::string& Base_directory = ".");
   AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
    		       const boost::shared_ptr<MspiCamera>& Cam,
+   		       const boost::shared_ptr<MspiGimbal>& Gim,
    		       const boost::shared_ptr<Dem>& D,
    		       const std::vector<std::string>& L1b1_file_name,
 		       const std::string& Swath_to_use = "660-I",
@@ -34,11 +36,10 @@ public:
 
 
 //-----------------------------------------------------------------------
-/// Return specific orbit we are using, needed for some routines that
-/// depend on the details of AirMspiOrbit.
+/// Return specific orbit we are using.
 //-----------------------------------------------------------------------
 
-  boost::shared_ptr<AirMspiOrbit> orbit(int Index) const
+  boost::shared_ptr<Orbit> orbit(int Index) const
   {
     return air_mspi_igc(Index)->orbit();
   }
@@ -51,6 +52,16 @@ public:
   boost::shared_ptr<MspiCamera> camera(int Index) const
   {
     return air_mspi_igc(Index)->camera();
+  }
+
+//-----------------------------------------------------------------------
+/// Return specific gimbal we are using, needed for some routines that
+/// depend on the details of MspiGimbal.
+//-----------------------------------------------------------------------
+
+  boost::shared_ptr<MspiGimbal> gimbal(int Index) const
+  {
+    return air_mspi_igc(Index)->gimbal();
   }
 
 //-----------------------------------------------------------------------
@@ -138,12 +149,19 @@ public:
     return max_l1b1_line_[Index];
   }
   int view_number_to_image_index(int View_number) const;
-
-  // We'll mess with parameter in a bit, for now leave this out.
+  virtual blitz::Array<double, 1> parameter() const
+  { return WithParameterNested::parameter(); }
+  virtual void parameter(const blitz::Array<double, 1>& Parm)
+  { WithParameterNested::parameter(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return WithParameterNested::parameter_with_derivative(); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  { WithParameterNested::parameter_with_derivative(Parm);}
 private:
   boost::shared_ptr<Dem> dem;
   double dem_resolution;
   boost::shared_ptr<MspiCamera> camera_;
+  boost::shared_ptr<MspiGimbal> gimbal_;
   boost::shared_ptr<Orbit> orbit_;
   std::vector<MspiConfigFile> view_config_;
   std::string base_directory;

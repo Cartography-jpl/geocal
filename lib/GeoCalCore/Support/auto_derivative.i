@@ -97,7 +97,7 @@ def gradient(self):
 def gradient(self,val):
     self._gradient_set(val)
   }
-
+  %pickle_serialization();
 };
 }
 

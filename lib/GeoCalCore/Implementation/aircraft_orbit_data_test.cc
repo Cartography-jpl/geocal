@@ -67,6 +67,33 @@ BOOST_AUTO_TEST_CASE(aircraft_orbit_data)
   BOOST_CHECK(l1(ecr_bz.look_quaternion() - quat(0,0,0,1)) < 1e-8);
 }
 
+BOOST_AUTO_TEST_CASE(aircraft_orbit_data_conversion)
+{
+  boost::array<double, 3> vel_fixed = {{100.0, 200.0, 300.0}};
+  boost::shared_ptr<QuaternionOrbitData> od1
+    (new AircraftOrbitData(Time::time_pgs(100.0), Geodetic(30, 40, 100), 
+			   vel_fixed, 5.0, 10.0, 20.0));
+  AircraftOrbitData od2(*od1);
+  BOOST_CHECK(distance(Geodetic(30, 40, 100), od2.position_geodetic()) < 0.1);
+  BOOST_CHECK_CLOSE(od2.roll(), 5, 1e-8);
+  BOOST_CHECK_CLOSE(od2.pitch(), 10, 1e-8);
+  BOOST_CHECK_CLOSE(od2.heading(), 20, 1e-8);
+}
+
+BOOST_AUTO_TEST_CASE(aircraft_orbit_data_conversion2)
+{
+  double hpr[3] = {-1.4639910e+02,     1.6479492e-02,    -6.2622070e-01};
+  boost::array<double, 3> vel_fixed = {{100.0, 200.0, 300.0}};
+  boost::shared_ptr<QuaternionOrbitData> od1
+    (new AircraftOrbitData(Time::time_pgs(100.0), Geodetic(30, 40, 100), 
+			   vel_fixed, hpr[2], hpr[1], hpr[0]));
+  AircraftOrbitData od2(*od1);
+  BOOST_CHECK(distance(Geodetic(30, 40, 100), od2.position_geodetic()) < 0.1);
+  BOOST_CHECK_CLOSE(od2.roll(), hpr[2], 1e-8);
+  BOOST_CHECK_CLOSE(od2.pitch(), hpr[1], 1e-8);
+  BOOST_CHECK_CLOSE(od2.heading(), hpr[0], 1e-8);
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())

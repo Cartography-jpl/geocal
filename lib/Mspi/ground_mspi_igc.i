@@ -34,5 +34,6 @@ public:
   DcsLookVector normal_look(int Line_number) const;
   DcsLookVector pixel_look(int Sample_number) const;
   %python_attribute_with_set(band, int)
+  %pickle_serialization();
 };
 }

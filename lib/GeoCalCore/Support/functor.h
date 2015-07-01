@@ -27,6 +27,10 @@ public:
   {
     os << "Functor";
   }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -39,4 +43,7 @@ public:
 *******************************************************************/
   typedef Functor<blitz::Array<double, 1>, blitz::Array<double, 1> > VFunctor;
 }
+
+GEOCAL_EXPORT_KEY(DFunctor);
+GEOCAL_EXPORT_KEY(VFunctor);
 #endif

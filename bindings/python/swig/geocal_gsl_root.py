@@ -151,7 +151,7 @@ def gsl_root_with_derivative(*args):
 
 def root_list(*args):
   """
-    std::vector< double > GeoCal::root_list(const DFunctor &F, double Xmin, double Xmax, double
+    std::vector< AutoDerivative< double > > GeoCal::root_list(const DFunctorWithDerivative &F, double Xmin, double Xmax, double
     Root_minimum_spacing, double Eps=1e-6)
     This will find a (possible empty) list of roots of a function, where
     the roots have a seperation of at least the supplied minimum

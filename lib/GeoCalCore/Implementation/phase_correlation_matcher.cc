@@ -1,8 +1,46 @@
 #include "phase_correlation_matcher.h"
+#include "geocal_serialize_support.h"
 #include <blitz/array.h>
 
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void PhaseCorrelationMatcher::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(ImageMatcher);
+  GEOCAL_BASE(PhaseCorrelationMatcher, ImageMatcher);
+  ar & GEOCAL_NVP(fftsize)
+    & GEOCAL_NVP(search)
+    & GEOCAL_NVP(nohpf)
+    & GEOCAL_NVP(subpix);
+}
+
+template<class Archive>
+void PhaseCorrelationMatcher::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(ImageMatcher);
+  GEOCAL_BASE(PhaseCorrelationMatcher, ImageMatcher);
+  ar & GEOCAL_NVP(fftsize)
+    & GEOCAL_NVP(search)
+    & GEOCAL_NVP(nohpf)
+    & GEOCAL_NVP(subpix);
+  // Default constructor stet this up, presumably the wrong size. Free
+  // and then recreate
+  fftw_free(afftin);
+  fftw_free(afftout);
+  fftw_free(bfftin);
+  fftw_free(bfftout);
+  afftin = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
+  afftout = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
+  bfftin = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
+  bfftout = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
+}
+
+
+GEOCAL_SPLIT_IMPLEMENT(PhaseCorrelationMatcher);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor. 

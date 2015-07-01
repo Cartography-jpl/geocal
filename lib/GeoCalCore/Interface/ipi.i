@@ -31,11 +31,17 @@ public:
       double Time_tolerance = 40.8e-3 * 1.0 / 16);
   void image_coordinate(const GroundCoordinate& Gp, ImageCoordinate &OUTPUT,
 			bool &OUTPUT) const;
-  void image_coordinate_extended(const GroundCoordinate& Gp, 
-				 ImageCoordinate &OUTPUT,
+  void image_coordinate_with_derivative(const GroundCoordinate& Gp, ImageCoordinateWithDerivative &OUTPUT,
+			bool &OUTPUT) const;
+  void image_coordinate_with_derivative_extended(const GroundCoordinate& Gp, 
+				 ImageCoordinateWithDerivative &OUTPUT,
 				 bool &OUTPUT) const;
   void time(const GroundCoordinate& Gp, Time &OUTPUT, FrameCoordinate &OUTPUT,
 	    bool &OUTPUT) const;
+  void time_with_derivative(const GroundCoordinate& Gp, 
+			    TimeWithDerivative& OUTPUT, 
+			    FrameCoordinateWithDerivative& OUTPUT,
+			    bool& OUTPUT) const;
   std::vector<boost::shared_ptr<GroundCoordinate> > footprint(const Dem& D) 
     const;
   %python_attribute(resolution_meter, double)

@@ -1,6 +1,7 @@
 #ifndef MSPI_PARAXIAL_TRANSFORM_H
 #define MSPI_PARAXIAL_TRANSFORM_H
 #include "printable.h"
+#include "auto_derivative.h"
 #include <blitz/array.h>
 #include <map>
 #ifdef USE_BOOST_SERIALIZATON
@@ -29,11 +30,21 @@ public:
   void paraxial_to_real(int Row_number, double Paraxial_x,
 			double Paraxial_y, double& Real_x, 
 			double& Real_y) const;
+  void paraxial_to_real(int Row_number, const AutoDerivative<double>& 
+			Paraxial_x,
+			const AutoDerivative<double>& Paraxial_y, 
+			AutoDerivative<double>& Real_x, 
+			AutoDerivative<double>& Real_y) const;
   void real_to_paraxial(int Row_number,
 			double Real_x,
 			double Real_y,
 			double& Paraxial_x,
 			double& Paraxial_y) const;
+  void real_to_paraxial(int Row_number,
+			const AutoDerivative<double>& Real_x,
+			const AutoDerivative<double>& Real_y,
+			AutoDerivative<double>& Paraxial_x,
+			AutoDerivative<double>& Paraxial_y) const;
   
 //-----------------------------------------------------------------------
 /// File name for MspiConfigFile.

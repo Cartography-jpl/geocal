@@ -266,12 +266,8 @@ class ScLookVector(LookVectorDouble):
         Constructor using quaternion. 
         """
         _look_vector.ScLookVector_swiginit(self,_look_vector.new_ScLookVector(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_ScLookVector
 ScLookVector.__str__ = new_instancemethod(_look_vector.ScLookVector___str__,None,ScLookVector)
@@ -293,12 +289,8 @@ class ScLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
 
         """
         _look_vector.ScLookVectorWithDerivative_swiginit(self,_look_vector.new_ScLookVectorWithDerivative(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_ScLookVectorWithDerivative
 ScLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.ScLookVectorWithDerivative___str__,None,ScLookVectorWithDerivative)
@@ -319,12 +311,8 @@ class CartesianInertialLookVector(LookVectorDouble):
         Constructor using quaternion. 
         """
         _look_vector.CartesianInertialLookVector_swiginit(self,_look_vector.new_CartesianInertialLookVector(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_CartesianInertialLookVector
 CartesianInertialLookVector.__str__ = new_instancemethod(_look_vector.CartesianInertialLookVector___str__,None,CartesianInertialLookVector)
@@ -345,12 +333,8 @@ class CartesianInertialLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
         Constructor using quaternion. 
         """
         _look_vector.CartesianInertialLookVectorWithDerivative_swiginit(self,_look_vector.new_CartesianInertialLookVectorWithDerivative(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_CartesianInertialLookVectorWithDerivative
 CartesianInertialLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.CartesianInertialLookVectorWithDerivative___str__,None,CartesianInertialLookVectorWithDerivative)
@@ -371,12 +355,8 @@ class DcsLookVector(LookVectorDouble):
         Constructor. 
         """
         _look_vector.DcsLookVector_swiginit(self,_look_vector.new_DcsLookVector(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_DcsLookVector
 DcsLookVector.__str__ = new_instancemethod(_look_vector.DcsLookVector___str__,None,DcsLookVector)
@@ -398,12 +378,8 @@ class DcsLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
         Constructor using quaternion. 
         """
         _look_vector.DcsLookVectorWithDerivative_swiginit(self,_look_vector.new_DcsLookVectorWithDerivative(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_DcsLookVectorWithDerivative
 DcsLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.DcsLookVectorWithDerivative___str__,None,DcsLookVectorWithDerivative)
@@ -424,12 +400,8 @@ class CartesianFixedLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
         Constructor using quaternion. 
         """
         _look_vector.CartesianFixedLookVectorWithDerivative_swiginit(self,_look_vector.new_CartesianFixedLookVectorWithDerivative(*args))
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.look_vector[0],self.look_vector[1],self.look_vector[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_CartesianFixedLookVectorWithDerivative
 CartesianFixedLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.CartesianFixedLookVectorWithDerivative___str__,None,CartesianFixedLookVectorWithDerivative)

@@ -1,7 +1,28 @@
 #include "forstner_feature_detector.h"
+#include "geocal_serialize_support.h"
 #include <blitz/array.h>
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void ForstnerFeatureDetector::serialize(Archive & ar, 
+					const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(FeatureDetector);
+  GEOCAL_BASE(ForstnerFeatureDetector, FeatureDetector);
+  ar & GEOCAL_NVP_(basic_ip_large_number)
+    & GEOCAL_NVP_(basic_robert_threshold)
+    & GEOCAL_NVP_(forstner_max_window_large_size)
+    & GEOCAL_NVP_(forstner_max_window_small_size)
+    & GEOCAL_NVP_(forstner_window_size)
+    & GEOCAL_NVP_(maximum_weight_threshold)
+    & GEOCAL_NVP_(roundness_threshold)
+    & GEOCAL_NVP_(weight_threshold);
+}
+
+GEOCAL_IMPLEMENT(ForstnerFeatureDetector);
+#endif
 
 //-----------------------------------------------------------------------
 // Stencils used to calculate Roberts gradient.

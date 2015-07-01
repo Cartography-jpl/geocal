@@ -59,8 +59,14 @@ public:
 private:
   boost::shared_ptr<ImageMatcher> match_;
   int start_level_;
+  PyramidImageMatcher() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(PyramidImageMatcher);
 #endif
 
 

@@ -173,12 +173,8 @@ class PyramidImageMatcher(geocal_swig.image_matcher.ImageMatcher):
     def underlying_matcher(self):
         return self._v_underlying_matcher()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.underlying_matcher,self.start_level)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _pyramid_image_matcher.delete_PyramidImageMatcher
 PyramidImageMatcher._v_start_level = new_instancemethod(_pyramid_image_matcher.PyramidImageMatcher__v_start_level,None,PyramidImageMatcher)

@@ -120,8 +120,9 @@ class TiePointCollect(object):
         self.max_ground_covariance = max_ground_covariance
         self.igc_collection = igc_collection
         self.surface_image = surface_image
-        self.ri = RayIntersect2(self.igc_collection,
-                                max_ground_covariance = max_ground_covariance)
+        if(self.igc_collection.number_image > 1):
+            self.ri = RayIntersect3(self.igc_collection,
+                                  max_ground_covariance = max_ground_covariance)
         if(self.ref_image is not None):
             self.itoim = [None]*(self.igc_collection.number_image + 1)
         else:
@@ -437,7 +438,8 @@ class TiePointCollectFM(object):
         if(not have_cv2):
             raise RuntimeError("This class requires the openCV python library cv2, which is not available.")
         self.raster_image = [igc_collection.image(i) for i in range(igc_collection.number_image)]
-        self.ri = RayIntersect2(igc_collection,
+        if(self.igc_collection.number_image > 1):
+            self.ri = RayIntersect3(igc_collection,
                                 max_ground_covariance = max_ground_covariance)
         self.max_ground_covariance = max_ground_covariance
         self.sift = cv2.SIFT(number_feature, number_octave_levels)
@@ -552,7 +554,7 @@ class TiePointCollectFM(object):
         log.info("Done with feature detection")
         log.info("Time: %f" % (time.time() - tstart))
         log.info("Starting feature matching")
-        for i in range(len(self.raster_image) - 1):
+        for i in range(len(self.raster_image)):
             tpl = self.tp_list(kp_and_desc, kp_and_desc_ref, i)
             for tp in tpl.itervalues():
                 if(not tp.is_gcp):

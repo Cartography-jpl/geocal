@@ -29,6 +29,13 @@ Options:
   --base-image-index=n
        The image to consider the base image in matching. [default: 0]
 
+  --grid-spacing=g
+       Grid spacing to exactly calculate the image ground connection
+       for, doing a linear interpolation in between. This can greatly
+       affect how long the processing takes. If the grid spacing is
+       something like the DEM resolution, usually you get almost as
+       good output but much faster. [default: 10]
+
   --number-process=n
        Number of processors to use. [default: 1]
 
@@ -59,17 +66,18 @@ mi = igcbase.cover(mibase)
 
 class ProjectWrap(object):
     '''Wrapper to project an image, so we can do this in parallel'''
-    def __init__(self, basefname, igccol, mi, scale):
+    def __init__(self, basefname, igccol, mi, scale, grid_spacing):
         self.igccol = igccol
         self.mi = mi
         self.basefname = basefname
         self.scale = scale
+        self.grid_spacing = grid_spacing
     def __call__(self, i):
         print "Doing %d" % i
         igc = self.igccol.image_ground_connection(i)
         if(self.scale is not None):
             igc = ScaleImageGroundConnection(igc, self.scale)
-        t = IgcMapProjected(self.mi, igc, 10)
+        t = IgcMapProjected(self.mi, igc, grid_spacing)
         f = VicarRasterImage("%s%d.img" % (self.basefname, i), t.map_info, 
                              "HALF")
         f.close()
@@ -78,7 +86,7 @@ class ProjectWrap(object):
         copy(t, f)
         print "Done with %d" % i 
 
-func = ProjectWrap(args.basefname, igccol, mi, args.scale)
+func = ProjectWrap(args.basefname, igccol, mi, args.scale, args.grid_spacing)
 if(args.number_process > 1):
     pool = Pool(args.number_process)
     res = pool.map(func, range(igccol.number_image))

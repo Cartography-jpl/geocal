@@ -77,7 +77,7 @@ class ProjectWrap(object):
         igc = self.igccol.image_ground_connection(i)
         if(self.scale is not None):
             igc = ScaleImageGroundConnection(igc, self.scale)
-        t = IgcMapProjected(self.mi, igc, grid_spacing)
+        t = IgcMapProjected(self.mi, igc, self.grid_spacing)
         f = VicarRasterImage("%s%d.img" % (self.basefname, i), t.map_info, 
                              "HALF")
         f.close()

@@ -163,6 +163,9 @@ Options:
   --verbose
        Print more information as we run.
 
+  --debug
+       Print even more verbose information.
+
   -v --version      
        Print program version
 """
@@ -269,7 +272,12 @@ def feature_match_tp_collect(args, igc, refimg, pool):
 args = docopt_simple(usage, version=version)
 if(args.verbose):
     logging.basicConfig(level = logging.INFO)
+if(args.debug):
+    logging.basicConfig(level = logging.DEBUG)
 log = logging.getLogger("geocal-python.tp_collect")
+# This is really verbose, so we don't in general want to see this
+log_optimize = logging.getLogger("geocal-python.lm_optimize")
+log_optimize.setLevel(logging.WARNING)
 pool = None
 if(args.number_process > 1):
     pool = Pool(args.number_process)

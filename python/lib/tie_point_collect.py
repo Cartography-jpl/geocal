@@ -24,22 +24,22 @@ class TiePointWrap(object):
         self.tp_collect = tp_collect
     def __call__(self, ic):
         log = logging.getLogger("geocal-python.tie_point_collect")
-        log.info("Processing point (%f, %f)" % (ic.line, ic.sample) )
+        log.debug("Processing point (%f, %f)" % (ic.line, ic.sample) )
         for h in logging.getLogger("geocal-python").handlers:
             h.flush()
         try:
             tp = self.tp_collect.tie_point(ic)
             if(tp is None):
-                log.info("Got 0 matches")
+                log.debug("Got 0 matches")
             else:
-                log.info("Got %d matches" % tp.number_image_location)
+                log.debug("Got %d matches" % tp.number_image_location)
             return tp
         except RuntimeError:
         # We may try to find points that don't actually intersect
         # the ground (e.g., we are at a steep angle and above
         # the surface). In that case, just skip this point and
         # go to the next one
-            log.info("Got 0 matches")
+            log.debug("Got 0 matches")
             pass
         for h in logging.getLogger("geoca1-python").handlers:
             h.flush()
@@ -248,7 +248,10 @@ class TiePointCollect(object):
             res = map(func, iplist)
         log.info("Done with matching")
         log.info("Time: %f" % (time.time() - tstart))
-        return TiePointCollection(filter(lambda i : i is not None, res))
+        res = TiePointCollection(filter(lambda i : i is not None, res))
+        log.info("Total number tp: %d" % len(res))
+        log.info("Number GCPs:     %d" % res.number_gcp)
+        return res
 
     def tie_point(self, ic1):
         '''Return a tie point that is roughly at the given location in the
@@ -400,9 +403,12 @@ class GcpTiePointCollect(object):
             res = map(func, iplist)
         log.info("Done with matching")
         log.info("Time: %f" % (time.time() - tstart))
-        return TiePointCollection(
+        res = TiePointCollection(
             filter(lambda i : i is not None and i.number_image_location > 0,
                    res))
+        log.info("Total number tp: %d" % len(res))
+        log.info("Number GCPs:     %d" % res.number_gcp)
+        return res
 
     def tie_point(self, ic1):
         '''Return a tie point that is roughly at the given location in the

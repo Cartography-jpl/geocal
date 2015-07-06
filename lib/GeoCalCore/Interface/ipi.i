@@ -28,7 +28,7 @@ public:
       const boost::shared_ptr<TimeTable>& Tt = boost::shared_ptr<TimeTable>(),
       double Local_time_window_size = 5.0,
       double Root_min_separation = 30.0, 
-      double Time_tolerance = 40.8e-3 * 1.0 / 16);
+      double Time_tolerance = 1e-6);
   void image_coordinate(const GroundCoordinate& Gp, ImageCoordinate &OUTPUT,
 			bool &OUTPUT) const;
   void image_coordinate_with_derivative(const GroundCoordinate& Gp, ImageCoordinateWithDerivative &OUTPUT,

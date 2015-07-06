@@ -7585,7 +7585,7 @@ static PyMethodDef SwigMethods[] = {
 		"Camera > &Cam, int Band, Time Tmin, Time Tmax, const\n"
 		"boost::shared_ptr< TimeTable > &Tt=boost::shared_ptr< TimeTable >(),\n"
 		"double Local_time_window_size=5.0, double Root_min_separation=30.0,\n"
-		"double Time_tolerance=40.8e-3 *1.0/16)\n"
+		"double Time_tolerance=1e-6)\n"
 		"Constructor.\n"
 		"\n"
 		"If you only want to get the Time from the Ipi and not ImageCoordinate,\n"

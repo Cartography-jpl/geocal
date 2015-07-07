@@ -12,7 +12,8 @@ namespace GeoCal {
 class PyramidImageMatcher : public ImageMatcher {
 public:
   PyramidImageMatcher(const boost::shared_ptr<ImageMatcher>& Im,
-		      int start_level);
+		      int start_level,
+		      bool Only_accept_finest_resolution = false);
   virtual void match_mask(const RasterImage& Ref, 
 			  const ImageMask& Ref_mask,
 			  const RasterImage& New, 
@@ -23,6 +24,7 @@ public:
 			  double &OUTPUT, double &OUTPUT,
 			  bool &OUTPUT, int *OUTPUT) const;
   %python_attribute(start_level, int)
+  %python_attribute(only_accept_finest_resolution, bool)
   %python_attribute(underlying_matcher, boost::shared_ptr<ImageMatcher>)
   %pickle_serialization();
 };

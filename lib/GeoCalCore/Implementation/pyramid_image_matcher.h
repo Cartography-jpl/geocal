@@ -22,11 +22,16 @@ p  of 2 (e.g., 4). If successful, we then proceed to the next level,
 class PyramidImageMatcher : public ImageMatcher {
 public:
 //-----------------------------------------------------------------------
-/// Constructor.
+/// Constructor. The start level is how coarse to do the initial
+/// matching. By default we accept any level of matching (just with a
+/// larger error), but you can optionally specify that we only accept
+/// a point if we can match at the finest resolution
 //-----------------------------------------------------------------------
   PyramidImageMatcher(const boost::shared_ptr<ImageMatcher>& Im,
-		      int start_level)
-    : match_(Im), start_level_(start_level)
+		      int start_level, 
+		      bool Only_accept_finest_resolution = false)
+    : match_(Im), start_level_(start_level), 
+      only_accept_finest_resolution_(Only_accept_finest_resolution)
   {
     range_min_check(start_level, 1);
   }
@@ -39,6 +44,14 @@ public:
 
   boost::shared_ptr<ImageMatcher> underlying_matcher() const
   { return match_; }
+
+//-----------------------------------------------------------------------
+/// If true, we only accept points that can be matched at the finest 
+/// resolution.
+//-----------------------------------------------------------------------
+
+  bool only_accept_finest_resolution() const 
+  {return only_accept_finest_resolution_;}
 
 //-----------------------------------------------------------------------
 /// Starting level, so we average by 2^start_level.
@@ -59,6 +72,7 @@ public:
 private:
   boost::shared_ptr<ImageMatcher> match_;
   int start_level_;
+  bool only_accept_finest_resolution_;
   PyramidImageMatcher() {}
   friend class boost::serialization::access;
   template<class Archive>

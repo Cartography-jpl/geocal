@@ -12,7 +12,8 @@ void PyramidImageMatcher::serialize(Archive & ar, const unsigned int version)
   GEOCAL_GENERIC_BASE(ImageMatcher);
   GEOCAL_BASE(PyramidImageMatcher, ImageMatcher);
   ar & GEOCAL_NVP_(match)
-    & GEOCAL_NVP_(start_level);
+    & GEOCAL_NVP_(start_level)
+    & GEOCAL_NVP_(only_accept_finest_resolution);
 }
 
 
@@ -48,7 +49,7 @@ void PyramidImageMatcher::match_mask
     match_->match_mask(refavg, refmaskavg, newavg, newmaskavg,
 		       ref_loc_avg, new_guess_avg, res_avg, lsigma, ssigma,
 		       suc, &diag);
-    if(suc) {
+    if(suc && (lv == 1 || !only_accept_finest_resolution_)) {
       New_res.line = res_avg.line * fac;
       New_res.sample = res_avg.sample * fac;
       guess = New_res;
@@ -70,6 +71,8 @@ void PyramidImageMatcher::print(std::ostream& Os) const
   OstreamPad opad(Os, "    ");
   Os << "PyramidImageMatcher:\n"
      << "  Start level: " << start_level_ << "\n"
+     << "  Only accept finest resolution matches: " 
+     << only_accept_finest_resolution_ << "\n"
      << "  Underlying matcher:\n";
   opad << *match_;
   opad.strict_sync();

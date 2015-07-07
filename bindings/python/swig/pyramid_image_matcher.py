@@ -147,8 +147,14 @@ class PyramidImageMatcher(geocal_swig.image_matcher.ImageMatcher):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::PyramidImageMatcher::PyramidImageMatcher(const boost::shared_ptr< ImageMatcher > &Im, int start_level)
-        Constructor. 
+        GeoCal::PyramidImageMatcher::PyramidImageMatcher(const boost::shared_ptr< ImageMatcher > &Im, int start_level, bool
+        Only_accept_finest_resolution=false)
+        Constructor.
+
+        The start level is how coarse to do the initial matching. By default
+        we accept any level of matching (just with a larger error), but you
+        can optionally specify that we only accept a point if we can match at
+        the finest resolution 
         """
         _pyramid_image_matcher.PyramidImageMatcher_swiginit(self,_pyramid_image_matcher.new_PyramidImageMatcher(*args))
     def _v_start_level(self):
@@ -161,6 +167,18 @@ class PyramidImageMatcher(geocal_swig.image_matcher.ImageMatcher):
     @property
     def start_level(self):
         return self._v_start_level()
+
+    def _v_only_accept_finest_resolution(self):
+        """
+        bool GeoCal::PyramidImageMatcher::only_accept_finest_resolution() const
+        If true, we only accept points that can be matched at the finest
+        resolution. 
+        """
+        return _pyramid_image_matcher.PyramidImageMatcher__v_only_accept_finest_resolution(self)
+
+    @property
+    def only_accept_finest_resolution(self):
+        return self._v_only_accept_finest_resolution()
 
     def _v_underlying_matcher(self):
         """
@@ -178,6 +196,7 @@ class PyramidImageMatcher(geocal_swig.image_matcher.ImageMatcher):
 
     __swig_destroy__ = _pyramid_image_matcher.delete_PyramidImageMatcher
 PyramidImageMatcher._v_start_level = new_instancemethod(_pyramid_image_matcher.PyramidImageMatcher__v_start_level,None,PyramidImageMatcher)
+PyramidImageMatcher._v_only_accept_finest_resolution = new_instancemethod(_pyramid_image_matcher.PyramidImageMatcher__v_only_accept_finest_resolution,None,PyramidImageMatcher)
 PyramidImageMatcher._v_underlying_matcher = new_instancemethod(_pyramid_image_matcher.PyramidImageMatcher__v_underlying_matcher,None,PyramidImageMatcher)
 PyramidImageMatcher_swigregister = _pyramid_image_matcher.PyramidImageMatcher_swigregister
 PyramidImageMatcher_swigregister(PyramidImageMatcher)

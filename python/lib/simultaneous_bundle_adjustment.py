@@ -31,7 +31,8 @@ class SimultaneousBundleAdjustment(object):
     predicted image locations and the actual image locations given by
     the tiepoints.'''
     def __init__(self, igc_coll, tpcol,
-                 dem, dem_sigma = 10, gcp_sigma = 10, tp_epsilon = 1):
+                 dem, dem_sigma = 10, gcp_sigma = 10, tp_sigma = None, 
+                 tp_epsilon = 1):
         '''Constructor. This takes a IgcCollection, and a 
         TiePointCollection. The camera order used in each TiePoint 
         should match the order of IgcCollection.
@@ -42,8 +43,15 @@ class SimultaneousBundleAdjustment(object):
 
         Likewise, the GCP constraint is scaled by 1/gcp_sigma.
 
+        By default, the location of the tiepoints (which aren't GCPs) is 
+        not constrained at all. But it can be useful in some case to loosely
+        constrain this (e.g., have a sigma that is 10 * the GCP sigma) to
+        prevent the points from being moved too far. If you supply a 
+        tp_sigma, then we add a GCP constraint equation for points that 
+        aren't marked as GCPs that is this looser value.
+
         We calculate the jacobians with respect to moving the tiepoint on
-        the surface numerically, the epsilon used for the CartesianFixed 
+        the surface numerically, the tp_epsilon used for the CartesianFixed 
         coordinates can be optionally supplied.
         '''
         self.igc_coll = igc_coll
@@ -52,6 +60,7 @@ class SimultaneousBundleAdjustment(object):
         self.dem_sigma = dem_sigma
         self.gcp_sigma = gcp_sigma
         self.tp_epsilon = tp_epsilon
+        self.tp_sigma = tp_sigma
         self.niloc = 0
         for tp in self.tpcol: 
             self.niloc += tp.number_image_location
@@ -119,9 +128,16 @@ class SimultaneousBundleAdjustment(object):
     def sba_jacobian(self, parm):
         '''Return Jacobian for SBA equation'''
         self.parameter = parm
-        res = _coo_helper((len(self.tpcol) + self.tpcol.number_gcp * 3 +
-                           self.niloc * 2 + len(self.parameter), 
-                           len(self.parameter)))
+        len_surface_constraint = len(self.tpcol)
+        if(self.tp_sigma is not None):
+            len_gcp_constraint = len(self.tpcol) * 3
+        else:
+            len_gcp_constraint = self.tpcol.number_gcp * 3
+        len_collinearity = self.niloc * 2
+        len_parameter = len(self.parameter)
+        res = _coo_helper((len_surface_constraint + len_gcp_constraint +
+                           len_collinearity + len_parameter,
+                           len_parameter))
         self.row_index = 0
         self.__surface_constraint_jacobian(res)
         self.__gcp_constraint_jacobian(res)
@@ -133,12 +149,20 @@ class SimultaneousBundleAdjustment(object):
         '''Calculate the GCP constraint equations. This is the penalty
         we get from placing a tiepoint somewhere other than the location
         given by the GCP'''
-        res = np.empty(3 * self.tpcol.number_gcp)
+        if(self.tp_sigma is not None):
+            len_gcp_constraint = len(self.tpcol) * 3
+        else:
+            len_gcp_constraint = self.tpcol.number_gcp * 3
+        res = np.empty(len_gcp_constraint)
         i = 0
         for tp_index, tp in enumerate(self.tpcol):
             if(tp.is_gcp):
                 res[i:(i+3)] = (self.index_to_tp_offset(tp_index) / 
                                 self.gcp_sigma)
+                i += 3
+            elif(self.tp_sigma is not None):
+                res[i:(i+3)] = (self.index_to_tp_offset(tp_index) / 
+                                self.tp_sigma)
                 i += 3
         return res
 
@@ -151,6 +175,11 @@ class SimultaneousBundleAdjustment(object):
                 pind = self.tp_index_to_parameter_index(tp_index)
                 for j in range(3):
                     res[self.row_index + j, pind + j] = 1.0 / self.gcp_sigma
+                self.row_index += 3
+            elif(self.tp_sigma is not None):
+                pind = self.tp_index_to_parameter_index(tp_index)
+                for j in range(3):
+                    res[self.row_index + j, pind + j] = 1.0 / self.tp_sigma
                 self.row_index += 3
 
     def surface_constraint(self):

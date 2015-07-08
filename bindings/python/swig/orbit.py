@@ -664,7 +664,11 @@ class Orbit(ObservableOrbit,geocal_swig.with_parameter.WithParameter):
     def orbit_data(self, *args):
         """
         virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const =0
+        Return OrbitData for the given time.
 
+        We should have min_time() <= T < max_time(). This version should
+        include any AutoDerivative information if the orbit model has
+        parameters. 
         """
         return _orbit.Orbit_orbit_data(self, *args)
 
@@ -775,7 +779,11 @@ class KeplerOrbit(Orbit):
     def orbit_data(self, *args):
         """
         boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(const TimeWithDerivative &T) const
+        Return OrbitData for the given time.
 
+        We should have min_time() <= T < max_time(). This version should
+        include any AutoDerivative information if the orbit model has
+        parameters. 
         """
         return _orbit.KeplerOrbit_orbit_data(self, *args)
 

@@ -27,6 +27,206 @@ GEOCAL_IMPLEMENT(OrbitOffsetCorrection);
 #endif
 
 //-----------------------------------------------------------------------
+/// Position correction with derivative.
+//-----------------------------------------------------------------------
+
+boost::array<AutoDerivative<double>, 3 > 
+OrbitOffsetCorrection::pcorr_with_derivative(
+const TimeWithDerivative& Tm,
+const CartesianFixed& Pos_uncorr
+) const
+{
+  boost::array<AutoDerivative<double>, 3 > pcorr;
+  if(pos_corr.size() == 0) {
+    if(outside_is_error_)
+      throw Exception("Can interpolate because we have no time points");
+    else
+      for(int j = 0; j < 3; ++j)
+	pcorr[j] = 0;
+  } else {
+    pos_map_type::const_iterator i = pos_corr.lower_bound(Tm.value());
+    if(i == pos_corr.end()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << Tm.value() << " is outside of range of time points";
+	throw e;
+      } else {
+	pcorr = pos_corr.rbegin()->second;
+      }
+    } else if(i == pos_corr.begin()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << Tm.value() << " is outside of range of time points";
+	throw e;
+      } else {
+	pcorr = i->second;
+      }
+    } else {
+      boost::array<AutoDerivative<double>, 3 > p2 = i->second;
+      Time t2 = i->first;
+      --i;
+      boost::array<AutoDerivative<double>, 3 > p1 = i->second;
+      Time t1 = i->first;
+      AutoDerivative<double> tspace = (Tm - t1) / (t2 - t1);
+      for(int j = 0; j < 3; ++j)
+	pcorr[j] = p1[j] + (p2[j] - p1[j]) * tspace;
+    }
+  }
+  if(use_local_north_coordinate_)  {
+    LnLookVectorWithDerivative lv(pcorr);
+    CartesianFixedLookVectorWithDerivative clv = lv.to_cf(Pos_uncorr);
+    pcorr = clv.look_vector;
+  }
+  return pcorr;
+}
+
+//-----------------------------------------------------------------------
+/// Position correction.
+//-----------------------------------------------------------------------
+
+boost::array<double, 3 > 
+OrbitOffsetCorrection::pcorr(
+const Time& Tm,
+const CartesianFixed& Pos_uncorr
+) const
+{
+  boost::array<double, 3 > pcorr;
+  if(pos_corr.size() == 0) {
+    if(outside_is_error_)
+      throw Exception("Can interpolate because we have no time points");
+    else
+      for(int j = 0; j < 3; ++j)
+	pcorr[j] = 0;
+  } else {
+    pos_map_type::const_iterator i = pos_corr.lower_bound(Tm);
+    if(i == pos_corr.end()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << Tm << " is outside of range of time points";
+	throw e;
+      } else {
+	for(int j = 0; j < 3; ++j)
+	  pcorr[j] = pos_corr.rbegin()->second[j].value();
+      }
+    } else if(i == pos_corr.begin()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << Tm << " is outside of range of time points";
+	throw e;
+      } else {
+	for(int j = 0; j < 3; ++j)
+	  pcorr[j] = i->second[j].value();
+      }
+    } else {
+      boost::array<double, 3 > p2;
+      for(int j = 0; j < 3; ++j)
+	p2[j] = i->second[j].value();
+      Time t2 = i->first;
+      --i;
+      boost::array<double, 3 > p1;
+      for(int j = 0; j < 3; ++j)
+	p1[j] = i->second[j].value();
+      Time t1 = i->first;
+      double tspace = (Tm - t1) / (t2 - t1);
+      for(int j = 0; j < 3; ++j)
+	pcorr[j] = p1[j] + (p2[j] - p1[j]) * tspace;
+    }
+  }
+  if(use_local_north_coordinate_)  {
+    LnLookVector lv(pcorr);
+    CartesianFixedLookVector clv = lv.to_cf(Pos_uncorr);
+    pcorr = clv.look_vector;
+  }
+  return pcorr;
+}
+
+//-----------------------------------------------------------------------
+/// Attitude correction with derivative.
+//-----------------------------------------------------------------------
+
+boost::math::quaternion<AutoDerivative<double> > 
+OrbitOffsetCorrection::acorr_with_derivative(const TimeWithDerivative& T) const
+{
+  boost::math::quaternion<AutoDerivative<double> > res;
+  if(att_corr.size() == 0) {
+    if(outside_is_error_)
+      throw Exception("Can interpolate because we have no time points");
+    else
+      res = boost::math::quaternion<AutoDerivative<double> >(1,0,0,0);
+  } else {
+    att_map_type::const_iterator i = att_corr.lower_bound(T.value());
+    if(i == att_corr.end()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << T.value() << " is outside of range of time points";
+	throw e;
+      } else {
+	res = att_corr.rbegin()->second;
+      }
+    } else if(i == att_corr.begin()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << T << " is outside of range of time points";
+	throw e;
+      } else {
+	res = i->second;
+      }
+    } else {
+      boost::math::quaternion<AutoDerivative<double> > q2 = i->second;
+      Time t2 = i->first;
+      --i;
+      boost::math::quaternion<AutoDerivative<double> > q1 = i->second;
+      Time t1 = i->first;
+      res = interpolate(q1, q2, T - t1, t2 - t1);
+    }
+  }
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Attitude correction.
+//-----------------------------------------------------------------------
+
+boost::math::quaternion<double> 
+OrbitOffsetCorrection::acorr(const Time& T) const
+{
+  boost::math::quaternion<double> res;
+  if(att_corr.size() == 0) {
+    if(outside_is_error_)
+      throw Exception("Can interpolate because we have no time points");
+    else
+      res = boost::math::quaternion<double>(1,0,0,0);
+  } else {
+    att_map_type::const_iterator i = att_corr.lower_bound(T);
+    if(i == att_corr.end()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << T << " is outside of range of time points";
+	throw e;
+      } else {
+	res = value(att_corr.rbegin()->second);
+      }
+    } else if(i == att_corr.begin()) {
+      if(outside_is_error_) {
+	Exception e;
+	e << "Time " << T << " is outside of range of time points";
+	throw e;
+      } else {
+	res = value(i->second);
+      }
+    } else {
+      boost::math::quaternion<double> q2 = value(i->second);
+      Time t2 = i->first;
+      --i;
+      boost::math::quaternion<double> q1 = value(i->second);
+      Time t1 = i->first;
+      res = interpolate(q1, q2, T - t1, t2 - t1);
+    }
+  }
+  return res;
+}
+
+//-----------------------------------------------------------------------
 /// Constructor. This has no time points for doing corrections, but
 /// you can add those using insert_time_point.
 //-----------------------------------------------------------------------
@@ -85,86 +285,10 @@ boost::shared_ptr<OrbitData> OrbitOffsetCorrection::orbit_data(Time T) const
     boost::dynamic_pointer_cast<QuaternionOrbitData>(orb_uncorr->orbit_data(T));
   if(!oc_uncorr)
     throw Exception("OrbitOffsetCorrection only works with orbits that return a QuaternionOrbitData");
-  boost::array<AutoDerivative<double>, 3> pcorr;
 
-  if(pos_corr.size() == 0) {
-    if(outside_is_error_)
-      throw Exception("Can interpolate because we have no time points");
-    else
-      pcorr[2] = pcorr[1] = pcorr[0] = 0;
-  } else {
-    pos_map_type::const_iterator i = pos_corr.lower_bound(T);
-    if(i == pos_corr.end()) {
-      if(outside_is_error_) {
-	Exception e;
-	e << "Time " << T << " is outside of range of time points";
-	throw e;
-      } else {
-	for(int j = 0; j < 3; ++j)
-	  pcorr[j] = pos_corr.rbegin()->second[j].value();
-      }
-    } else if(i == pos_corr.begin()) {
-      if(outside_is_error_) {
-	Exception e;
-	e << "Time " << T << " is outside of range of time points";
-	throw e;
-      } else {
-	for(int j = 0; j < 3; ++j)
-	  pcorr[j] = i->second[j].value();
-      }
-    } else {
-      boost::array<AutoDerivative<double>, 3> p2 = i->second;
-      Time t2 = i->first;
-      --i;
-      boost::array<AutoDerivative<double>, 3 > p1 = i->second;
-      Time t1 = i->first;
-      double tspace = (T - t1) / (t2 - t1);
-      for(int j = 0; j < 3; ++j)
-	pcorr[j] = p1[j] + (p2[j] - p1[j]) * tspace;
-    }
-  }
-
-  boost::math::quaternion<AutoDerivative<double> > acorr;
-  if(att_corr.size() == 0) {
-    if(outside_is_error_)
-      throw Exception("Can interpolate because we have no time points");
-    else
-      acorr = boost::math::quaternion<AutoDerivative<double> >(1,0,0,0);
-  } else {
-    att_map_type::const_iterator i = att_corr.lower_bound(T);
-    if(i == att_corr.end()) {
-      if(outside_is_error_) {
-	Exception e;
-	e << "Time " << T << " is outside of range of time points";
-	throw e;
-      } else {
-	acorr = value(att_corr.rbegin()->second);
-      }
-    } else if(i == att_corr.begin()) {
-      if(outside_is_error_) {
-	Exception e;
-	e << "Time " << T << " is outside of range of time points";
-	throw e;
-      } else {
-	acorr = value(i->second);
-      }
-    } else {
-      boost::math::quaternion<AutoDerivative<double> > q2 = i->second;
-      Time t2 = i->first;
-      --i;
-      boost::math::quaternion<AutoDerivative<double> > q1 = i->second;
-      Time t1 = i->first;
-      acorr = value(interpolate(q1, q2, T - t1, t2 - t1));
-    }
-  }
-  if(use_local_north_coordinate_)  {
-    LnLookVectorWithDerivative lv(pcorr);
-    CartesianFixedLookVectorWithDerivative clv = 
-      lv.to_cf(*oc_uncorr->position_cf());
-    pcorr = clv.look_vector;
-  }
   return boost::shared_ptr<OrbitData>
-    (new QuaternionOrbitData(*oc_uncorr, pcorr, acorr));
+    (new QuaternionOrbitData(*oc_uncorr, pcorr(T, *oc_uncorr->position_cf()),
+			     acorr(T)));
 }
 
 // See base class for description
@@ -175,85 +299,11 @@ OrbitOffsetCorrection::orbit_data(const TimeWithDerivative& T) const
     boost::dynamic_pointer_cast<QuaternionOrbitData>(orb_uncorr->orbit_data(T));
   if(!oc_uncorr)
     throw Exception("OrbitOffsetCorrection only works with orbits that return a QuaternionOrbitData");
-
-  boost::array<AutoDerivative<double>, 3 > pcorr;
-  if(pos_corr.size() == 0) {
-    if(outside_is_error_)
-      throw Exception("Can interpolate because we have no time points");
-    else
-      for(int j = 0; j < 3; ++j)
-	pcorr[j] = 0;
-  } else {
-    pos_map_type::const_iterator i = pos_corr.lower_bound(T.value());
-    if(i == pos_corr.end()) {
-      if(outside_is_error_) {
-	Exception e;
-	e << "Time " << T.value() << " is outside of range of time points";
-	throw e;
-      } else {
-	pcorr = pos_corr.rbegin()->second;
-      }
-    } else if(i == pos_corr.begin()) {
-      if(outside_is_error_) {
-	Exception e;
-	e << "Time " << T << " is outside of range of time points";
-	throw e;
-      } else {
-	pcorr = i->second;
-      }
-    } else {
-      boost::array<AutoDerivative<double>, 3 > p2 = i->second;
-      Time t2 = i->first;
-      --i;
-      boost::array<AutoDerivative<double>, 3 > p1 = i->second;
-      Time t1 = i->first;
-      AutoDerivative<double> tspace = (T - t1) / (t2 - t1);
-      for(int j = 0; j < 3; ++j)
-	pcorr[j] = p1[j] + (p2[j] - p1[j]) * tspace;
-    }
-  }
-
-  boost::math::quaternion<AutoDerivative<double> > acorr;
-  if(att_corr.size() == 0) {
-    if(outside_is_error_)
-      throw Exception("Can interpolate because we have no time points");
-    else
-      acorr = boost::math::quaternion<AutoDerivative<double> >(1,0,0,0);
-  } else {
-    att_map_type::const_iterator i = att_corr.lower_bound(T.value());
-    if(i == att_corr.end()) {
-      if(outside_is_error_) {
-	Exception e;
-	e << "Time " << T.value() << " is outside of range of time points";
-	throw e;
-      } else {
-	acorr = att_corr.rbegin()->second;
-      }
-    } else if(i == att_corr.begin()) {
-      if(outside_is_error_) {
-	Exception e;
-	e << "Time " << T << " is outside of range of time points";
-	throw e;
-      } else {
-	acorr = i->second;
-      }
-    } else {
-      boost::math::quaternion<AutoDerivative<double> > q2 = i->second;
-      Time t2 = i->first;
-      --i;
-      boost::math::quaternion<AutoDerivative<double> > q1 = i->second;
-      Time t1 = i->first;
-      acorr = interpolate(q1, q2, T - t1, t2 - t1);
-    }
-  }
-  if(use_local_north_coordinate_)  {
-    LnLookVectorWithDerivative lv(pcorr);
-    CartesianFixedLookVectorWithDerivative clv = 
-      lv.to_cf(*oc_uncorr->position_cf());
-    pcorr = clv.look_vector;
-  }
+    
   return boost::shared_ptr<OrbitData>
-    (new QuaternionOrbitData(*oc_uncorr, pcorr, acorr));
+    (new QuaternionOrbitData(*oc_uncorr, 
+		     pcorr_with_derivative(T, *oc_uncorr->position_cf()), 
+		     acorr_with_derivative(T)));
 }
 
 // See base class for description

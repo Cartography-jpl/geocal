@@ -162,6 +162,16 @@ private:
   typedef std::pair<Time, boost::array<AutoDerivative<double>, 3 > > pos_map_pair_type;
   att_map_type att_corr;
   pos_map_type pos_corr;
+  boost::array<AutoDerivative<double>, 3 > 
+  pcorr_with_derivative(const TimeWithDerivative& Tm, 
+			const CartesianFixed& Pos_uncorr) const;
+  boost::array<double, 3 > 
+  pcorr(const Time& Tm,
+	const CartesianFixed& Pos_uncorr) const;
+  boost::math::quaternion<AutoDerivative<double> > 
+  acorr_with_derivative(const TimeWithDerivative& T) const;
+  boost::math::quaternion<double> 
+  acorr(const Time& T) const;
   bool outside_is_error_;
   bool fit_position_x_, fit_position_y_, fit_position_z_, fit_yaw_, 
     fit_pitch_, fit_roll_;

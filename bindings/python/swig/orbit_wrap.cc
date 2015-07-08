@@ -21708,7 +21708,11 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Orbit_orbit_data", _wrap_Orbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const =0\n"
+		"Return OrbitData for the given time.\n"
 		"\n"
+		"We should have min_time() <= T < max_time(). This version should\n"
+		"include any AutoDerivative information if the orbit model has\n"
+		"parameters. \n"
 		""},
 	 { (char *)"Orbit___str__", (PyCFunction)_wrap_Orbit___str__, METH_O, NULL},
 	 { (char *)"Orbit__v_parameter", _wrap_Orbit__v_parameter, METH_VARARGS, NULL},
@@ -21739,7 +21743,11 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"KeplerOrbit_orbit_data", _wrap_KeplerOrbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(const TimeWithDerivative &T) const\n"
+		"Return OrbitData for the given time.\n"
 		"\n"
+		"We should have min_time() <= T < max_time(). This version should\n"
+		"include any AutoDerivative information if the orbit model has\n"
+		"parameters. \n"
 		""},
 	 { (char *)"KeplerOrbit__v_epoch", _wrap_KeplerOrbit__v_epoch, METH_VARARGS, (char *)"\n"
 		"void GeoCal::KeplerOrbit::epoch(const Time &Epoch)\n"

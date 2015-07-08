@@ -210,6 +210,10 @@ public:
 		      const boost::array<AutoDerivative<double>, 3>& Pos_off,
 		      const boost::math::quaternion<AutoDerivative<double> >&
 		      Sc_to_sc_corr);
+  QuaternionOrbitData(const QuaternionOrbitData& Start,
+		      const boost::array<double, 3>& Pos_off,
+		      const boost::math::quaternion<double>&
+		      Sc_to_sc_corr);
   QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<double, 3>& vel_fixed,
 		      const boost::math::quaternion<double>& sc_to_cf_q);
@@ -618,10 +622,20 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return OrbitData for the given time. We should have min_time() <=
-/// T < max_time().
+/// T < max_time(). Note for orbit models that you do *not* need to 
+/// include the derivative information for this version of orbit_data
+/// (which can be a great speed up). Users that want that information
+/// should call the TimeWithDerivative version.
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;
+
+//-----------------------------------------------------------------------
+/// Return OrbitData for the given time. We should have min_time() <=
+/// T < max_time(). This version *should* include any AutoDerivative
+/// information if the orbit model has parameters.
+//-----------------------------------------------------------------------
+
   virtual boost::shared_ptr<OrbitData> 
   orbit_data(const TimeWithDerivative& T) const  = 0;
   virtual void print(std::ostream& Os) const { Os << "Orbit"; }

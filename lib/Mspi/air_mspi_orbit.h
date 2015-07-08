@@ -99,6 +99,7 @@ public:
   { return nav_data(T).gimbal_pos * GeoCal::Constant::rad_to_deg; }
     
   boost::shared_ptr<QuaternionOrbitData> orbit_data_index(int Index) const;
+  boost::shared_ptr<QuaternionOrbitData> orbit_data_index_with_derivative(int Index) const;
 
 //-----------------------------------------------------------------------
 /// Spacing in time between measurements. This is in seconds.

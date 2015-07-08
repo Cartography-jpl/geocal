@@ -7285,7 +7285,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"AirMspiOrbit_orbit_data_index", _wrap_AirMspiOrbit_orbit_data_index, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr< QuaternionOrbitData > AirMspiOrbit::orbit_data_index(int Index) const\n"
-		"Orbit data for given index. \n"
+		"\n"
 		""},
 	 { (char *)"AirMspiOrbit_orbit_data", _wrap_AirMspiOrbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr< OrbitData > AirMspiOrbit::orbit_data(const TimeWithDerivative &T) const\n"

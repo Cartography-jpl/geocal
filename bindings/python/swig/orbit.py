@@ -353,10 +353,10 @@ class QuaternionOrbitData(OrbitData):
     you can avoid the need of using one of these toolkits.
 
     Note that we allow most pieces of this to be AutoDerivative, useful
-    for propagating jacobians. We do not support time being a
-    AutoDerivative, so supporting things like time offset isn't currently
-    in here. We probably could do this, we'd just need to think through
-    how to support this.
+    for propagating jacobians. By convention an Orbit uses the
+    AutoDerivative if orbit_data is called with a TimeWithDerivative, but
+    doesn't if it isn't. This means the AutoDerivative can be available,
+    but if not needed we save time by not calculating these.
 
     C++ includes: orbit.h 
     """

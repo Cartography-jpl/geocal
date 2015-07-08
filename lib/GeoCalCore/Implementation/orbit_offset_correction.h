@@ -149,6 +149,12 @@ public:
   virtual std::vector<std::string> parameter_name() const;
   virtual blitz::Array<bool, 1> parameter_mask() const;
   virtual void print(std::ostream& Os) const;
+  virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const;
+  virtual boost::array<AutoDerivative<double>, 3> 
+  position_ci_with_derivative(const TimeWithDerivative& T) const;
+  virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
+  virtual boost::array<AutoDerivative<double>, 3> 
+  position_cf_with_derivative(const TimeWithDerivative& T) const;
 protected:
   virtual void notify_update()
   {
@@ -176,7 +182,10 @@ private:
   bool fit_position_x_, fit_position_y_, fit_position_z_, fit_yaw_, 
     fit_pitch_, fit_roll_;
   bool use_local_north_coordinate_;
-  OrbitOffsetCorrection() {}
+  mutable bool pos_corr_is_cf_cache_;
+  mutable bool pos_corr_is_cf_cache_valid_;
+  bool pos_corr_is_cf() const;
+  OrbitOffsetCorrection() : pos_corr_is_cf_cache_valid_(false) {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

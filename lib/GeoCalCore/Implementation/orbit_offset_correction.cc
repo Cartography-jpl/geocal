@@ -2,6 +2,7 @@
 #include "geocal_serialize_support.h"
 #include "ostream_pad.h"
 #include "constant.h"
+#include "ecr.h"
 #include <boost/foreach.hpp>
 using namespace GeoCal;
 
@@ -25,6 +26,24 @@ void OrbitOffsetCorrection::serialize(Archive & ar, const unsigned int version)
 
 GEOCAL_IMPLEMENT(OrbitOffsetCorrection);
 #endif
+
+//-----------------------------------------------------------------------
+/// Indicate if the position correction is relative to CartesianFixed 
+/// coordinates.
+//-----------------------------------------------------------------------
+
+bool OrbitOffsetCorrection::pos_corr_is_cf() const
+{
+  if(!pos_corr_is_cf_cache_valid_) {
+    boost::shared_ptr<QuaternionOrbitData> oc_uncorr = 
+      boost::dynamic_pointer_cast<QuaternionOrbitData>(orb_uncorr->orbit_data(orb_uncorr->min_time()));
+    if(!oc_uncorr)
+      throw Exception("OrbitOffsetCorrection only works with orbits that return a QuaternionOrbitData");
+    pos_corr_is_cf_cache_ = oc_uncorr->from_cf();
+    pos_corr_is_cf_cache_valid_ = true;
+  }
+  return pos_corr_is_cf_cache_;
+}
 
 //-----------------------------------------------------------------------
 /// Position correction with derivative.
@@ -73,6 +92,8 @@ const CartesianFixed& Pos_uncorr
     }
   }
   if(use_local_north_coordinate_)  {
+    if(!pos_corr_is_cf())
+      throw Exception("Can't use local north coordinates if underlying orbit uses CartesianInertial");
     LnLookVectorWithDerivative lv(pcorr);
     CartesianFixedLookVectorWithDerivative clv = lv.to_cf(Pos_uncorr);
     pcorr = clv.look_vector;
@@ -133,6 +154,8 @@ const CartesianFixed& Pos_uncorr
     }
   }
   if(use_local_north_coordinate_)  {
+    if(!pos_corr_is_cf())
+      throw Exception("Can't use local north coordinates if underlying orbit uses CartesianInertial");
     LnLookVector lv(pcorr);
     CartesianFixedLookVector clv = lv.to_cf(Pos_uncorr);
     pcorr = clv.look_vector;
@@ -250,7 +273,8 @@ bool Fit_roll)
   fit_yaw_(Fit_yaw),
   fit_pitch_(Fit_pitch),
   fit_roll_(Fit_roll),
-  use_local_north_coordinate_(Use_local_north_coordinate)
+  use_local_north_coordinate_(Use_local_north_coordinate),
+  pos_corr_is_cf_cache_valid_(false)
 {
 }
 
@@ -413,3 +437,62 @@ void OrbitOffsetCorrection::print(std::ostream& Os) const
        << pname[i] << "\n";
 }
 
+// See base class for description.
+boost::shared_ptr<CartesianInertial> 
+OrbitOffsetCorrection::position_ci(Time T) const
+{
+  if(pos_corr_is_cf())
+    return orbit_data(T)->position_ci();
+  boost::shared_ptr<CartesianInertial> ci = orb_uncorr->position_ci(T);
+  boost::array<double, 3> pcr = pcorr(T, Ecr(0,0,0));
+  for(int j = 0; j < 3; ++j)
+    ci->position[j] += pcr[j];
+  return ci;
+}
+
+// See base class for description.
+boost::array<AutoDerivative<double>, 3> 
+OrbitOffsetCorrection::position_ci_with_derivative(
+const TimeWithDerivative& T
+) const
+{
+  if(pos_corr_is_cf())
+    return orbit_data(T)->position_ci_with_derivative();
+  boost::array<AutoDerivative<double>, 3> ci = 
+    orb_uncorr->position_ci_with_derivative(T);  
+  boost::array<AutoDerivative<double>, 3> pcr =
+    pcorr_with_derivative(T, Ecr(0,0,0));
+  for(int j = 0; j < 3; ++j)
+    ci[j] += pcr[j];
+  return ci;
+}
+
+// See base class for description.
+boost::shared_ptr<CartesianFixed> 
+OrbitOffsetCorrection::position_cf(Time T) const
+{
+  if(!pos_corr_is_cf())
+    return orbit_data(T)->position_cf();
+  boost::shared_ptr<CartesianFixed> cf = orb_uncorr->position_cf(T);
+  boost::array<double, 3> pcr = pcorr(T, *cf);
+  for(int j = 0; j < 3; ++j)
+    cf->position[j] += pcr[j];
+  return cf;
+}
+
+// See base class for description.
+boost::array<AutoDerivative<double>, 3> 
+OrbitOffsetCorrection::position_cf_with_derivative(
+const TimeWithDerivative& T
+) const
+{
+  if(!pos_corr_is_cf())
+    return orbit_data(T)->position_cf_with_derivative();
+  boost::array<AutoDerivative<double>, 3> cf = 
+    orb_uncorr->position_cf_with_derivative(T);  
+  boost::array<AutoDerivative<double>, 3> pcr =
+    pcorr_with_derivative(T, *orb_uncorr->position_cf(T.value()));
+  for(int j = 0; j < 3; ++j)
+    cf[j] += pcr[j];
+  return cf;
+}

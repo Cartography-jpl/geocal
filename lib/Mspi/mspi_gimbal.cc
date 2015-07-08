@@ -3,6 +3,7 @@
 #include "constant.h"
 #include "geocal_serialize_support.h"
 #include "geocal_quaternion.h"
+#include "geocal_autoderivative_quaternion.h"
 using namespace GeoCal;
 using namespace blitz;
 
@@ -48,19 +49,32 @@ void MspiGimbal::read_config_file(const std::string& File_name,
 //-----------------------------------------------------------------------
 
 boost::math::quaternion<AutoDerivative<double> >  
-MspiGimbal::station_to_sc(const AutoDerivative<double>& Gimbal_pos) const
+MspiGimbal::station_to_sc_with_derivative(const AutoDerivative<double>& Gimbal_pos) const
+{
+  fill_in_cache();
+  return m_with_der * quat_rot("y", Gimbal_pos);
+}
+
+boost::math::quaternion<double>  
+MspiGimbal::station_to_sc(double Gimbal_pos) const
+{
+  fill_in_cache();
+  return m * quat_rot("y", Gimbal_pos);
+}
+
+void MspiGimbal::fill_in_cache() const
 {
   if(!cache_valid) {
   // Portion of quaternion that is constant.
   // Negative sign is because these are passive rotations 
   // (the quaternion definition is active)
-    m = quat_rot("zyx", 
-		 -epsilon_ * Constant::deg_to_rad, 
-		 -psi_ * Constant::deg_to_rad, 
-		 -theta_ * Constant::deg_to_rad);
+    m_with_der = quat_rot("zyx", 
+			  -epsilon_ * Constant::deg_to_rad, 
+			  -psi_ * Constant::deg_to_rad, 
+			  -theta_ * Constant::deg_to_rad);
+    m = value(m_with_der);
     cache_valid = true;
   }
-  return m * quat_rot("y", Gimbal_pos);
 }
 
 // See base class for description

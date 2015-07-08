@@ -212,7 +212,7 @@ boost::shared_ptr<QuaternionOrbitData> AirMspiOrbit::orbit_data_index(int Index)
   AirMspiNavData n2 = nav_data(Index + 1);
   // This goes from station to spacecraft
   boost::math::quaternion<AutoDerivative<double> > station_to_sc =
-    gimbal->station_to_sc(n1.gimbal_pos);
+    gimbal->station_to_sc_with_derivative(n1.gimbal_pos);
   // This goes from spacecraft to cf
   AircraftOrbitData od(min_time() + Index * time_spacing(), n1.position,
 		       min_time() + (Index + 1) * time_spacing(), n2.position,

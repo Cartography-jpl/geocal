@@ -66,7 +66,10 @@ public:
   { return theta_; }
 
   boost::math::quaternion<AutoDerivative<double> >  
-  station_to_sc(const AutoDerivative<double>& Gimbal_pos) const;
+  station_to_sc_with_derivative(const AutoDerivative<double>& Gimbal_pos) const;
+
+  boost::math::quaternion<double>  
+  station_to_sc(double Gimbal_pos) const;
 
   virtual ArrayAd<double, 1> parameter_with_derivative() const;
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
@@ -79,8 +82,9 @@ private:
   AutoDerivative<double> epsilon_, psi_, theta_;
   blitz::Array<bool, 1> parameter_mask_;
   mutable bool cache_valid;
-  mutable boost::math::quaternion<AutoDerivative<double> > m;
-
+  mutable boost::math::quaternion<AutoDerivative<double> > m_with_der;
+  mutable boost::math::quaternion<double> m;
+  void fill_in_cache() const;
   MspiGimbal() : cache_valid(false) {}
   friend class boost::serialization::access;
   template<class Archive>

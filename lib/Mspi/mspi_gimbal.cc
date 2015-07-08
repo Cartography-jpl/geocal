@@ -72,7 +72,9 @@ void MspiGimbal::fill_in_cache() const
 			  -epsilon_ * Constant::deg_to_rad, 
 			  -psi_ * Constant::deg_to_rad, 
 			  -theta_ * Constant::deg_to_rad);
+    normalize(m_with_der);
     m = value(m_with_der);
+    normalize(m);
     cache_valid = true;
   }
 }

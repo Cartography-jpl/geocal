@@ -3,6 +3,7 @@
 #include "constant.h"
 #include "aircraft_orbit_data.h"
 #include "geocal_serialize_support.h"
+#include "ecr.h"
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
@@ -238,7 +239,7 @@ AirMspiOrbit::orbit_data_index(int Index) const
   AirMspiNavData n2 = nav_data(Index + 1);
   // This goes from station to spacecraft
   boost::math::quaternion<double> station_to_sc =
-    value(gimbal->station_to_sc_with_derivative(n1.gimbal_pos));
+    gimbal->station_to_sc(n1.gimbal_pos);
   // boost::math::quaternion<double> station_to_sc =
   //   gimbal->station_to_sc(n1.gimbal_pos);
   // This goes from spacecraft to cf
@@ -260,10 +261,8 @@ boost::shared_ptr<OrbitData> AirMspiOrbit::orbit_data(Time T) const
 {
   range_check(T, min_time(), max_time());
   int i = (int) floor((T - min_time()) / time_spacing());
-  boost::shared_ptr<QuaternionOrbitData> q1 = 
-    orbit_data_index(i); 
-  boost::shared_ptr<QuaternionOrbitData> q2 = 
-    orbit_data_index(i + 1); 
+  boost::shared_ptr<QuaternionOrbitData> q1 = orbit_data_index(i); 
+  boost::shared_ptr<QuaternionOrbitData> q2 = orbit_data_index(i + 1); 
   return GeoCal::interpolate(*q1, *q2, T);
 }
 
@@ -277,6 +276,27 @@ boost::shared_ptr<OrbitData> AirMspiOrbit::orbit_data
   boost::shared_ptr<QuaternionOrbitData> q2 = 
     orbit_data_index_with_derivative(i + 1); 
   return GeoCal::interpolate(*q1, *q2, T);
+}
+
+boost::shared_ptr<CartesianFixed> AirMspiOrbit::position_cf(Time T) const
+{
+  range_check(T, min_time(), max_time());
+  int i = (int) floor((T- min_time()) / time_spacing());
+  double t = (T - min_time()) - i * time_spacing();
+  boost::array<double, 3> p1 = 
+    nav_data(i).position.convert_to_cf()->position;
+  boost::array<double, 3> p2 = 
+    nav_data(i + 1).position.convert_to_cf()->position;
+  boost::array<double, 3> p3 = 
+    nav_data(i + 2).position.convert_to_cf()->position;
+  boost::array<double, 3> vel1, vel2;
+  for(int i = 0; i < 3; ++i) {
+    vel1[i] = (p2[i] - p1[i]) / time_spacing();
+    vel2[i] = (p3[i] - p2[i]) / time_spacing();
+  }
+  boost::array<double, 3> pres, vres;
+  interpolate(p1, vel1, p2, vel2, t, time_spacing(), pres, vres);
+  return boost::shared_ptr<CartesianFixed>(new Ecr(pres));
 }
 
 void AirMspiOrbit::print(std::ostream& Os) const {

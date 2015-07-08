@@ -100,6 +100,7 @@ public:
     
   boost::shared_ptr<QuaternionOrbitData> orbit_data_index(int Index) const;
   boost::shared_ptr<QuaternionOrbitData> orbit_data_index_with_derivative(int Index) const;
+  boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
 
 //-----------------------------------------------------------------------
 /// Spacing in time between measurements. This is in seconds.

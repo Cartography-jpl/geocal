@@ -196,32 +196,34 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
     virtual ~IpiEq() {}
     virtual double operator()(const double& Toffset) const
     {
-      Time t = tmin + Toffset;
-      return cam->frame_line_coordinate(orb->sc_look_vector(t, look_vector(t)), 
+      boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + Toffset);
+      return cam->frame_line_coordinate(od->sc_look_vector(look_vector(od)), 
 					band);
     }
     FrameCoordinate frame_coordinate(const double& Toffset) const
     {
-      Time t = tmin + Toffset;
-      return cam->frame_coordinate(orb->sc_look_vector(t, look_vector(t)), 
+      boost::shared_ptr<OrbitData> od = 
+	orb->orbit_data(tmin + Toffset);
+      return cam->frame_coordinate(od->sc_look_vector(look_vector(od)), 
 				   band);
     }
     bool false_root(double Toffset) const
     {
-      Time t = tmin + Toffset;
+      boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + Toffset);
       const double allowed_intersection_error = 50000;
 				// How far off we can be from actual position 
 				// of point and still call it a true
 				// solution.
-      return (distance(*(orb->position_cf(t)->
-		 reference_surface_intersect_approximate(look_vector(t), 
+      return (distance(*(od->position_cf()->
+		 reference_surface_intersect_approximate(look_vector(od), 
 					 height)),
 			 *p) > allowed_intersection_error);
     }
-    CartesianFixedLookVector look_vector(Time T) const
+    CartesianFixedLookVector look_vector
+    (const boost::shared_ptr<OrbitData>& Od) const
     {
       boost::array<double, 3> p1 = p->position;
-      boost::array<double, 3> p2 = orb->position_cf(T)->position;
+      boost::array<double, 3> p2 = Od->position_cf()->position;
       CartesianFixedLookVector lv;
       lv.look_vector[0] = p1[0] - p2[0];
       lv.look_vector[1] = p1[1] - p2[1];
@@ -306,8 +308,8 @@ FrameCoordinateWithDerivative& Fres,
     virtual ~IpiEq() {}
     virtual double operator()(const double& Toffset) const
     {
-      Time t = tmin + Toffset;
-      return cam->frame_line_coordinate(orb->sc_look_vector(t, look_vector(t)), 
+      boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + Toffset);
+      return cam->frame_line_coordinate(od->sc_look_vector(look_vector(od)), 
 					band);
     }
     virtual double df(double Toffset) const
@@ -324,43 +326,47 @@ FrameCoordinateWithDerivative& Fres,
     }
     virtual AutoDerivative<double> f_with_derivative(double Toffset) const
     {
-      Time t = tmin + Toffset;
+      boost::shared_ptr<OrbitData> od = 
+	orb->orbit_data(TimeWithDerivative(tmin) + Toffset);
       return cam->frame_coordinate_with_derivative
-	(orb->sc_look_vector(t, look_vector_with_derivative(t)), 
+	(od->sc_look_vector(look_vector_with_derivative(od)), 
 	 band).line;
     }
     FrameCoordinateWithDerivative frame_coordinate(const AutoDerivative<double>& Toffset) const
     {
-      TimeWithDerivative t = TimeWithDerivative(tmin) + Toffset;
+      boost::shared_ptr<OrbitData> od = 
+	orb->orbit_data(TimeWithDerivative(tmin) + Toffset);
       return cam->frame_coordinate_with_derivative
-	(orb->sc_look_vector(t, look_vector_with_derivative(t)), band);
+	(od->sc_look_vector(look_vector_with_derivative(od)), band);
     }
     bool false_root(double Toffset) const
     {
-      Time t = tmin + Toffset;
+      boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + Toffset);
       const double allowed_intersection_error = 50000;
 				// How far off we can be from actual position 
 				// of point and still call it a true
 				// solution.
-      return (distance(*(orb->position_cf(t)->
-		 reference_surface_intersect_approximate(look_vector(t), 
+      return (distance(*(od->position_cf()->
+		 reference_surface_intersect_approximate(look_vector(od), 
 					 height)),
 			 *p) > allowed_intersection_error);
     }
-    CartesianFixedLookVector look_vector(Time T) const
+    CartesianFixedLookVector look_vector
+    (const boost::shared_ptr<OrbitData>& Od) const
     {
       boost::array<double, 3> p1 = p->position;
-      boost::array<double, 3> p2 = orb->position_cf(T)->position;
+      boost::array<double, 3> p2 = Od->position_cf()->position;
       CartesianFixedLookVector lv;
       lv.look_vector[0] = p1[0] - p2[0];
       lv.look_vector[1] = p1[1] - p2[1];
       lv.look_vector[2] = p1[2] - p2[2];
       return lv;
     }
-    CartesianFixedLookVectorWithDerivative look_vector_with_derivative(const TimeWithDerivative T) const
+    CartesianFixedLookVectorWithDerivative look_vector_with_derivative
+    (const boost::shared_ptr<OrbitData>& Od) const
     {
       boost::array<double, 3> p1 = p->position;
-      boost::array<AutoDerivative<double>, 3> p2 = orb->position_cf_with_derivative(T);
+      boost::array<AutoDerivative<double>, 3> p2 = Od->position_cf_with_derivative();
       CartesianFixedLookVectorWithDerivative lv;
       lv.look_vector[0] = p1[0] - p2[0];
       lv.look_vector[1] = p1[1] - p2[1];

@@ -240,6 +240,13 @@ def determine_quat_rot(*args):
     """
   return _geocal_quaternion.determine_quat_rot(*args)
 
+def quat_normalize(*args):
+  """
+    void GeoCal::normalize(boost::math::quaternion< double > &Q)
+    Normalize a quaternion. 
+    """
+  return _geocal_quaternion.quat_normalize(*args)
+
 def quat_rot_x(*args):
   """
     boost::math::quaternion<T> GeoCal::quat_rot_x(const T &A)

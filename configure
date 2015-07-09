@@ -17077,7 +17077,7 @@ fi
      VICAR_RTL_PREFIX=`$PKG_CONFIG --variable=prefix "vicar-rtl" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/vicar_rtl/zvproto.h" && test -r "$ac_path_tmp/include/vicar_rtl/zvproto.h"; then
           VICAR_RTL_PREFIX=$ac_path_tmp
           VICAR_RTL_CFLAGS="-I$ac_path_tmp/include/vicar_rtl/"
@@ -17435,7 +17435,7 @@ fi
      HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/hdf5.h" && test -r "$ac_path_tmp/include/hdf5.h"; then
           HDF5_PREFIX=$ac_path_tmp
           HDF5_CFLAGS="-I$ac_path_tmp/include/"
@@ -17595,7 +17595,7 @@ fi
      HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h"; then
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/hdfeos5/"
@@ -17695,7 +17695,7 @@ fi
      HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/HE5_HdfEosDef.h"; then
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/"
@@ -18057,6 +18057,110 @@ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
         fi
+# We have a fix needed for specific versions of boost. Go ahead and
+# check for these.
+        if test "$succeeded" = "yes" ; then
+	   CPPFLAGS_SAVED="$CPPFLAGS"
+	   CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
+	   export CPPFLAGS
+
+ 	   LDFLAGS_SAVED="$LDFLAGS"
+ 	   LDFLAGS="$LDFLAGS $BOOST_LDFLAGS"
+ 	   export LDFLAGS
+
+
+ 	   ac_ext=cpp
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+
+ 	   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+ 	   #include <boost/version.hpp>
+
+int
+main ()
+{
+
+ 	   #if BOOST_VERSION / 100 == 1056
+ 	   // At 1.56
+ 	   #else
+ 	   #  error Boost version is not 1.56
+ 	   #endif
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+
+	   BOOST_CPPFLAGS="-I$srcdir/boost_fix/1.56 $BOOST_CPPFLAGS"
+
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+
+ 	   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+ 	   #include <boost/version.hpp>
+
+int
+main ()
+{
+
+ 	   #if BOOST_VERSION / 100 == 1057
+ 	   // At 1.57
+ 	   #else
+ 	   #  error Boost version is not 1.57
+ 	   #endif
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+
+	   BOOST_CPPFLAGS="-I$srcdir/boost_fix/1.57 $BOOST_CPPFLAGS"
+
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+
+ 	   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+ 	   #include <boost/version.hpp>
+
+int
+main ()
+{
+
+ 	   #if BOOST_VERSION / 100 == 1058
+ 	   // At 1.58
+ 	   #else
+ 	   #  error Boost version is not 1.58
+ 	   #endif
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+
+	   BOOST_CPPFLAGS="-I$srcdir/boost_fix/1.58 $BOOST_CPPFLAGS"
+
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+
+ 	   ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+        fi
 
         if test "$succeeded" != "yes" ; then
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
@@ -18234,7 +18338,7 @@ fi
      BLITZ_PREFIX=`$PKG_CONFIG --variable=prefix "blitz" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/blitz/blitz.h" && test -r "$ac_path_tmp/include/blitz/blitz.h"; then
           BLITZ_PREFIX=$ac_path_tmp
           BLITZ_CFLAGS="-I$ac_path_tmp/include/blitz/"
@@ -18426,7 +18530,7 @@ fi
      GSL_PREFIX=`$PKG_CONFIG --variable=prefix "gsl" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/gsl/gsl_blas.h" && test -r "$ac_path_tmp/include/gsl/gsl_blas.h"; then
           GSL_PREFIX=$ac_path_tmp
           GSL_CFLAGS="-I$ac_path_tmp/include/"
@@ -18624,7 +18728,7 @@ fi
      SPICE_PREFIX=`$PKG_CONFIG --variable=prefix "spice" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/SpiceCK.h" && test -r "$ac_path_tmp/include/SpiceCK.h"; then
           SPICE_PREFIX=$ac_path_tmp
           SPICE_CFLAGS="-I$ac_path_tmp/include/"
@@ -18817,7 +18921,7 @@ fi
      HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/hdf5.h" && test -r "$ac_path_tmp/include/hdf5.h"; then
           HDF5_PREFIX=$ac_path_tmp
           HDF5_CFLAGS="-I$ac_path_tmp/include/"
@@ -19145,7 +19249,7 @@ fi
      FFTW_PREFIX=`$PKG_CONFIG --variable=prefix "fftw3" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/fftw3.h" && test -r "$ac_path_tmp/include/fftw3.h"; then
           FFTW_PREFIX=$ac_path_tmp
           FFTW_CFLAGS="-I$ac_path_tmp/include/"
@@ -19341,7 +19445,7 @@ fi
      GDAL_PREFIX=`$PKG_CONFIG --variable=prefix "gdal" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/gdal.h" && test -r "$ac_path_tmp/include/gdal.h"; then
           GDAL_PREFIX=$ac_path_tmp
           GDAL_CFLAGS="-I$ac_path_tmp/include/"
@@ -19908,7 +20012,7 @@ fi
      CARTO_PREFIX=`$PKG_CONFIG --variable=prefix "carto" 2>/dev/null`
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/carto/burl.h" && test -r "$ac_path_tmp/include/carto/burl.h"; then
           CARTO_PREFIX=$ac_path_tmp
           CARTO_CFLAGS="-I$ac_path_tmp/include/carto/"

@@ -409,6 +409,8 @@ void LsmMatcher::match_mask
       return;
     }
   }
+  if(Diagnostic)
+    *Diagnostic = EXCEED_MAX_ITERATION;
 }
 
 //-----------------------------------------------------------------------

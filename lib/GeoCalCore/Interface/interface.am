@@ -65,6 +65,7 @@ libgeocal_la_SOURCES+= @srcinterface@/feature_detector.cc
 geocalinc_HEADERS+= @srcinterface@/forstner_feature_detector.h
 libgeocal_la_SOURCES+= @srcinterface@/forstner_feature_detector.cc
 geocalinc_HEADERS+= @srcinterface@/image_matcher.h
+libgeocal_la_SOURCES+= @srcinterface@/image_matcher.cc
 geocalinc_HEADERS+= @srcinterface@/image_to_image_match.h
 geocalinc_HEADERS+= @srcinterface@/ccorr_matcher.h
 libgeocal_la_SOURCES+= @srcinterface@/ccorr_matcher.cc

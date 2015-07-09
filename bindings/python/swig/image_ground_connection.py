@@ -713,12 +713,8 @@ class ImageGroundConnectionCopy(ImageGroundConnection):
     def igc_original(self):
         return self._v_igc_original()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.igc_original,self.dem,self.image,self.image_multi_band,self.title,self.image_mask,self.ground_mask)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _image_ground_connection.delete_ImageGroundConnectionCopy
 ImageGroundConnectionCopy._v_igc_original = new_instancemethod(_image_ground_connection.ImageGroundConnectionCopy__v_igc_original,None,ImageGroundConnectionCopy)

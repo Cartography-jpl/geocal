@@ -207,12 +207,8 @@ class CcorrMatcher(geocal_swig.image_matcher.ImageMatcher):
     def template_number_sample(self):
         return self._v_template_number_sample()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.target_number_line,self.target_number_sample,self.template_number_line,self.template_number_sample,self.min_correlation,self.min_variance)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ccorr_matcher.delete_CcorrMatcher
 CcorrMatcher._v_min_correlation = new_instancemethod(_ccorr_matcher.CcorrMatcher__v_min_correlation,None,CcorrMatcher)

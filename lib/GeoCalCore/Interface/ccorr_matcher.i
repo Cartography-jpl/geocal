@@ -30,9 +30,7 @@ public:
   %python_attribute(target_number_sample, int)
   %python_attribute(template_number_line, int)
   %python_attribute(template_number_sample, int)
-  %pickle_init(1, self.target_number_line, self.target_number_sample, 
-	       self.template_number_line, self.template_number_sample,
-	       self.min_correlation, self.min_variance)
+  %pickle_serialization();
 };
 }
 

@@ -82,7 +82,9 @@ Options:
        [default: 20.0]
 
   --number-feature=n
-       Number of features to match for. [default: 500]
+       Number of features to match for. Note that a value of 0 means "find 
+       as many as you can", and for smaller images this if often a good 
+       choice. [default: 500]
 
    --number-octave-levels=n
        Number of octave levels to include in feature matching. [default: 4]
@@ -90,7 +92,9 @@ Options:
    --number-ref-feature=n
        Number of features to match for in reference image. Since reference
        image covers a larger area, usually you want this larger than
-       "--number-feature" value. [default: 1000]
+       "--number-feature" value. Note that a value of 0 means "find 
+       as many as you can", and for smaller images this if often a good 
+       choice. [default: 1000]
 
   --number-process=n 
        Number of processors to use. [default: 1]
@@ -116,9 +120,9 @@ Options:
        we are close enough that we can still used this approximation to look
        for outliers.
 
-   --outlier-reject-ransac-threshold=f
+   --outlier-reject-ransac-threshold=d
        Threshold to use in rejecting outliers using "--outlier-reject-ransac"
-       [default: 3.0]
+       [default: 3]
 
   --reference-dem=shelve
        DEM to use with the reference image specified as file:key. 
@@ -130,6 +134,14 @@ Options:
        resolution that matching the raw images will fail. We use a geographic
        projection that matches the resolution of the center pixel of the 
        base image. See also --map-info option.
+
+  --scale-factor=f
+        You can optionally pass in a scale factor. This is applied to
+        the raster data before image matching. This is useful for
+        example AirMSPI data where the image is a reflectance value
+        between 0.0 and 1.0. Since the image matchers expect integer
+        data, you want get any results unless you scale to a different
+        range.
 
   --use-intersection 
        This only applies to gcps. There is a trade off between getting
@@ -164,10 +176,12 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
             tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
                                                 grid_spacing = args.grid_spacing,
                                                 avg_level = args.avg_level,
+                                                scale_factor = args.scale_factor,
                                                 use_intersection = False))
             tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
                                                 grid_spacing = args.grid_spacing,
                                                 avg_level = args.avg_level,
+                                                scale_factor = args.scale_factor,
                                                 use_intersection = True))
             log.info("Adding 2 gcpcollect")
             msg.append("Doing GCP step 1")
@@ -176,6 +190,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
             tpcollect.append(GcpTiePointCollect(refimg, dem, igc, 
                                                 grid_spacing = args.grid_spacing,
                                                 avg_level = args.avg_level,
+                                                scale_factor = args.scale_factor,
                                                 use_intersection = args.use_intersection))
             log.info("Adding 1 gcpcollect")
             msg.append("Doing GCP")
@@ -189,6 +204,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
                 mibase = cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
                 mi = ig_base.cover(mibase)
             tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                             scale_factor = args.scale_factor,
                                              map_info = mi,
                                              grid_spacing = args.grid_spacing,
                                              base_image_index = i,
@@ -202,6 +218,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
                 mibase = cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
                 mi = ig_base.cover(mibase)
             tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                             scale_factor = args.scale_factor,
                                              map_info = mi,
                                              grid_spacing = args.grid_spacing,
                                              base_image_index = igc.number_image - 1,
@@ -211,6 +228,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
         log.info("Adding base image %d" % args.base_image_index)
         msg.append("Doing base image %d" % args.base_image_index)
         tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+                                         scale_factor = args.scale_factor,
                                          map_info = mi,
                                          grid_spacing = args.grid_spacing,
                                          base_image_index = args.base_image_index,
@@ -275,8 +293,8 @@ else:
     tparr = image_match_tp_collect(args, igc, mi, refimg, pool)
 
 if(args.outlier_reject_ransac):
-    tparr = outlier_reject_ransc(tparr, ref_image = refimg, 
-                        threshold = args.outlier_reject_ransac_threshold)
+    tparr = outlier_reject_ransac(tparr, ref_image = refimg, 
+                           threshold = args.outlier_reject_ransac_threshold)
 
 try:
     # Ok if this fails, it just means args.output doesn't exist yet

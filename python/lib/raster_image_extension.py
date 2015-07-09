@@ -78,12 +78,19 @@ def _read_all(self):
 
 geocal_swig.RasterImage.read_all = _read_all
 
+def _read_all_double(self):
+    '''Do a read for the whole image. We do this often enough that it is
+    nice to have a function for this.'''
+    return self.read_double(0,0,self.number_line, self.number_sample)
+
+geocal_swig.RasterImage.read_all_double = _read_all_double
+
 def _read_all_byte_scale(self):
     '''OpenCV has some functions that only work with byte data. This function
     reads all the data, and then scaled this to byte. Right now we just scale
     by the maximum value - we may want to do something more sophisticated in
     the future if we find that we need to.'''
-    d = self.read_all()
+    d = self.read_all_double()
     return (d / float(d.max()) * 255).round().astype(np.uint8)
 
 geocal_swig.RasterImage.read_all_byte_scale = _read_all_byte_scale

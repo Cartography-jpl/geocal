@@ -124,6 +124,9 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.time_table
 import geocal_swig.generic_object
 import geocal_swig.geocal_time
+import geocal_swig.raster_image_tiled_file
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
 class AirMspiTimeTable(geocal_swig.time_table.MeasuredTimeTable):
     """
     This is a time table based on AirMSPI L1B data.
@@ -134,24 +137,14 @@ class AirMspiTimeTable(geocal_swig.time_table.MeasuredTimeTable):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        AirMspiTimeTable::AirMspiTimeTable(const std::string &L1b1_file_name, int Reference_row)
-        Variation of constructor that takes the reference row to use. 
+        AirMspiTimeTable::AirMspiTimeTable(const std::string &L1b1_file_name, const std::string
+        &Swath_to_use="660-I")
+        Constructor. 
         """
         _air_mspi_time_table.AirMspiTimeTable_swiginit(self,_air_mspi_time_table.new_AirMspiTimeTable(*args))
-    def _v_reference_row(self):
-        """
-        int GeoCal::AirMspiTimeTable::reference_row() const
-
-        """
-        return _air_mspi_time_table.AirMspiTimeTable__v_reference_row(self)
-
-    @property
-    def reference_row(self):
-        return self._v_reference_row()
-
     def _v_l1b1_file_name(self):
         """
-        const std::string& GeoCal::AirMspiTimeTable::l1b1_file_name() const
+        std::string GeoCal::AirMspiTimeTable::l1b1_file_name() const
         The file name we are using. 
         """
         return _air_mspi_time_table.AirMspiTimeTable__v_l1b1_file_name(self)
@@ -162,7 +155,7 @@ class AirMspiTimeTable(geocal_swig.time_table.MeasuredTimeTable):
 
     def _v_l1b1_granule_id(self):
         """
-        const std::string& GeoCal::AirMspiTimeTable::l1b1_granule_id() const
+        std::string GeoCal::AirMspiTimeTable::l1b1_granule_id() const
         The file granule id we are using. 
         """
         return _air_mspi_time_table.AirMspiTimeTable__v_l1b1_granule_id(self)
@@ -171,38 +164,26 @@ class AirMspiTimeTable(geocal_swig.time_table.MeasuredTimeTable):
     def l1b1_granule_id(self):
         return self._v_l1b1_granule_id()
 
-    def reference_row_calc(*args):
+    def _v_l1b1_file(self):
         """
-        int AirMspiTimeTable::reference_row_calc(const std::string &Instrument_config_file_name)
-        Determine the reference row to use for the time table.
-
-        This comes from the 660nm I band. Note that the band number used in
-        the instrument config file is not the same as the band number used in
-        the camera. Instead this is a spectral band number. 
+        const boost::shared_ptr<AirMspiL1b1File>& GeoCal::AirMspiTimeTable::l1b1_file() const
+        Underlying L1b1File. 
         """
-        return _air_mspi_time_table.AirMspiTimeTable_reference_row_calc(*args)
+        return _air_mspi_time_table.AirMspiTimeTable__v_l1b1_file(self)
 
-    reference_row_calc = staticmethod(reference_row_calc)
+    @property
+    def l1b1_file(self):
+        return self._v_l1b1_file()
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _air_mspi_time_table.delete_AirMspiTimeTable
-AirMspiTimeTable._v_reference_row = new_instancemethod(_air_mspi_time_table.AirMspiTimeTable__v_reference_row,None,AirMspiTimeTable)
 AirMspiTimeTable._v_l1b1_file_name = new_instancemethod(_air_mspi_time_table.AirMspiTimeTable__v_l1b1_file_name,None,AirMspiTimeTable)
 AirMspiTimeTable._v_l1b1_granule_id = new_instancemethod(_air_mspi_time_table.AirMspiTimeTable__v_l1b1_granule_id,None,AirMspiTimeTable)
+AirMspiTimeTable._v_l1b1_file = new_instancemethod(_air_mspi_time_table.AirMspiTimeTable__v_l1b1_file,None,AirMspiTimeTable)
 AirMspiTimeTable_swigregister = _air_mspi_time_table.AirMspiTimeTable_swigregister
 AirMspiTimeTable_swigregister(AirMspiTimeTable)
-
-def AirMspiTimeTable_reference_row_calc(*args):
-  """
-    int AirMspiTimeTable::reference_row_calc(const std::string &Instrument_config_file_name)
-    Determine the reference row to use for the time table.
-
-    This comes from the 660nm I band. Note that the band number used in
-    the instrument config file is not the same as the band number used in
-    the camera. Instead this is a spectral band number. 
-    """
-  return _air_mspi_time_table.AirMspiTimeTable_reference_row_calc(*args)
 
 
 

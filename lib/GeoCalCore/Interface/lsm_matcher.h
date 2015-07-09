@@ -50,7 +50,7 @@ public:
   enum Diagnostic {NO_FAIL = 0, IMAGE_MASKED = 1, TOO_CLOSE_TO_IMAGE_EDGE = 2,
 		   EXCEED_MAX_SIGMA = 5, EXCEED_MAX_RADIANCE_VARIANCE = 6,
 		   EXCEED_PRECISION_REQUIREMENT = 7, MOVE_PAST_TARGET = 8,
-                   SOLVE_FAILED = 9};
+                   SOLVE_FAILED = 9, EXCEED_MAX_ITERATION=10};
   LsmMatcher(int Number_line = 21, int Number_sample = 21, int
      Border_size = 3, double Precision_goal = 0.0625, 
      double Precision_requirement = 0.2, 
@@ -176,8 +176,15 @@ private:
 
 // Maximum number of iterations before giving up.
   static const int max_iteration = 6;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(LsmMatcher);
+
 #endif
 

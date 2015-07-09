@@ -3,6 +3,7 @@
 #include "tile.h"
 #include "map_info.h"
 #include "geocal_exception.h"
+#include "generic_object.h"
 #include <boost/shared_ptr.hpp>
 #include <boost/foreach.hpp>
 #include <iostream>
@@ -60,7 +61,7 @@ private:
   types, as get_int, put_double, read_int etc.
 *******************************************************************/
 
-template<std::size_t D> class TiledFileBase {
+template<std::size_t D> class TiledFileBase: public virtual GenericObject {
 public:
 //-----------------------------------------------------------------------
 /// Data type for index (e.g., int).
@@ -205,6 +206,12 @@ protected:
   unsigned int number_tile_;
   boost::array<index, D> tile_size_; 
 				///< Nominal size of tile.
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 /****************************************************************//**
@@ -674,6 +681,21 @@ protected:
   }
 
 //-----------------------------------------------------------------------
+/// Clear out tiles, useful if something has changed to make cache
+/// data invalid (e.g., we changed the band we are looking at).
+//-----------------------------------------------------------------------
+  
+  virtual void clear_tile() const
+  {
+    boost::array<index, D> min_index;
+    for(std::size_t i = 0; i < D; ++i)
+      min_index[i] = 0;
+    typedef Tile<T, D> Tl;
+    BOOST_FOREACH(Tl& t, tile_)
+      t.swap(min_index, min_index);
+  }
+  
+//-----------------------------------------------------------------------
 /// Write a tile to disk. Derived classes need to supply this function.
 //-----------------------------------------------------------------------
 
@@ -685,6 +707,22 @@ private:
 				///< Next tile to be swapped.
   mutable std::vector<Tile<T, D> > tile_; 
 				///< Tiles
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
+
+// Can't pass template with a "," in it to the BOOST macros. There are
+// ways around this, but easiest to just use a typedef.
+typedef TiledFile<int, 2> TiledFile_int_2;
+typedef TiledFile<float, 2> TiledFile_float_2;
+
 }
+
+GEOCAL_EXPORT_KEY(TiledFileBase<2>);
+GEOCAL_EXPORT_KEY(TiledFile_int_2);
+GEOCAL_EXPORT_KEY(TiledFile_float_2);
 #endif

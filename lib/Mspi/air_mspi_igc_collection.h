@@ -14,12 +14,13 @@ public:
   AirMspiIgcCollection(const std::string& Master_config_file,
 		       const std::string& Orbit_file_name,
 		       const std::string& L1b1_table,
+		       const std::string& Swath_to_use = "660-I",
 		       const std::string& Base_directory = ".");
   AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
-   		       const boost::shared_ptr<Camera>& Cam,
+   		       const boost::shared_ptr<MspiCamera>& Cam,
    		       const boost::shared_ptr<Dem>& D,
    		       const std::vector<std::string>& L1b1_file_name,
-		       int Reference_row,
+		       const std::string& Swath_to_use = "660-I",
 		       int Dem_resolution = 10,
 		       const std::string& Base_directory = ".");
   virtual ~AirMspiIgcCollection() {}
@@ -142,12 +143,11 @@ public:
 private:
   boost::shared_ptr<Dem> dem;
   double dem_resolution;
-  boost::shared_ptr<Camera> camera_;
+  boost::shared_ptr<MspiCamera> camera_;
   boost::shared_ptr<Orbit> orbit_;
   std::vector<MspiConfigFile> view_config_;
-  // Reference row time table to use.
-  int reference_row_;
   std::string base_directory;
+  std::string swath_to_use;
   std::vector<int> min_l1b1_line_, max_l1b1_line_;
 
   // We do lazy evaluation, so allow this to be changed by 

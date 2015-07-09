@@ -20,12 +20,13 @@ public:
   AirMspiIgcCollection(const std::string& Master_config_file,
 		       const std::string& Orbit_file_name,
 		       const std::string& L1b1_table,
+		       const std::string& Swath_to_use = "660-I",
 		       const std::string& Base_directory = ".");
   AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
-   		       const boost::shared_ptr<Camera>& Cam,
+   		       const boost::shared_ptr<MspiCamera>& Cam,
    		       const boost::shared_ptr<Dem>& D,
    		       const std::vector<std::string>& L1b1_file_name,
-		       int Reference_row,
+		       const std::string& Swath_to_use = "660-I",
 		       int Dem_resolution = 10,
 		       const std::string& Base_directory = ".");
   %python_attribute(number_image, virtual int);

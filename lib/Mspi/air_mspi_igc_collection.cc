@@ -230,6 +230,7 @@ void AirMspiIgcCollection::print(std::ostream& Os) const
   opad.strict_sync();
   Os << "  Gimbal:\n";
   opad << *gimbal_;
+  opad.strict_sync();
   Os << "  Orbit:\n";
   opad << *orbit_;
   opad.strict_sync();

@@ -184,6 +184,7 @@ MspiConfigFile.have_key = new_instancemethod(_mspi_config_file.MspiConfigFile_ha
 MspiConfigFile.value_double = new_instancemethod(_mspi_config_file.MspiConfigFile_value_double,None,MspiConfigFile)
 MspiConfigFile.value_int = new_instancemethod(_mspi_config_file.MspiConfigFile_value_int,None,MspiConfigFile)
 MspiConfigFile.value_string = new_instancemethod(_mspi_config_file.MspiConfigFile_value_string,None,MspiConfigFile)
+MspiConfigFile.value_bool = new_instancemethod(_mspi_config_file.MspiConfigFile_value_bool,None,MspiConfigFile)
 MspiConfigFile.__str__ = new_instancemethod(_mspi_config_file.MspiConfigFile___str__,None,MspiConfigFile)
 MspiConfigFile_swigregister = _mspi_config_file.MspiConfigFile_swigregister
 MspiConfigFile_swigregister(MspiConfigFile)

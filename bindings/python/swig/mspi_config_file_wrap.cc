@@ -5145,6 +5145,7 @@ SWIG_From_std_string  (const std::string& s)
   return SWIG_FromCharPtrAndSize(s.data(), s.size());
 }
 
+SWIGINTERN bool GeoCal_MspiConfigFile_value_bool(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<bool>(Key); }
 
 #include <limits.h>
 #if !defined(SWIG_NO_LLONG_MAX)
@@ -5700,6 +5701,63 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MspiConfigFile_value_bool(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiConfigFile *arg1 = (GeoCal::MspiConfigFile *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile const > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  bool result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"MspiConfigFile_value_bool",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiConfigFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiConfigFile_value_bool" "', argument " "1"" of type '" "GeoCal::MspiConfigFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MspiConfigFile_value_bool" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiConfigFile_value_bool" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      result = (bool)GeoCal_MspiConfigFile_value_bool((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MspiConfigFile___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiConfigFile *arg1 = (GeoCal::MspiConfigFile *) 0 ;
@@ -6224,6 +6282,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MspiConfigFile_value_double", _wrap_MspiConfigFile_value_double, METH_VARARGS, NULL},
 	 { (char *)"MspiConfigFile_value_int", _wrap_MspiConfigFile_value_int, METH_VARARGS, NULL},
 	 { (char *)"MspiConfigFile_value_string", _wrap_MspiConfigFile_value_string, METH_VARARGS, NULL},
+	 { (char *)"MspiConfigFile_value_bool", _wrap_MspiConfigFile_value_bool, METH_VARARGS, NULL},
 	 { (char *)"MspiConfigFile___str__", (PyCFunction)_wrap_MspiConfigFile___str__, METH_O, NULL},
 	 { (char *)"delete_MspiConfigFile", (PyCFunction)_wrap_delete_MspiConfigFile, METH_O, (char *)"\n"
 		"virtual GeoCal::MspiConfigFile::~MspiConfigFile()\n"

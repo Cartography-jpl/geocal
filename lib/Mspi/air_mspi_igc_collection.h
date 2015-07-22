@@ -26,6 +26,8 @@ public:
 		       int Dem_resolution = 10,
 		       const std::string& Base_directory = ".");
   virtual ~AirMspiIgcCollection() {}
+  void replace_view_config(const std::string& Master_config_file,
+			   const std::string& L1b1_table);
   virtual void print(std::ostream& Os) const;
   virtual int number_image() const { return (int) view_config_.size(); }
   virtual boost::shared_ptr<ImageGroundConnection> 

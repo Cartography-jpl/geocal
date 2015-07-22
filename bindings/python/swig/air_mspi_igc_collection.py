@@ -242,6 +242,21 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_view_number_to_image_index(self, *args)
 
+    def replace_view_config(self, *args):
+        """
+        void AirMspiIgcCollection::replace_view_config(const std::string &Master_config_file, const std::string &L1b1_table)
+        There is various metadata needed by the airmspi programs that is only
+        available once a master config and l1b1_table file are created.
+
+        This is created as part of AirMspiMapInfoProcessor (a python class
+        found in the MSPI-Ground software, not here in GeoCal). We need to be
+        able to add in this metadata to an existing IgcCollection. This
+        function does this. Because we may also have direction to process only
+        a subset of the data, this also recalculates the minimum and maximum
+        L1B1 lines to use. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_replace_view_config(self, *args)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -260,6 +275,7 @@ AirMspiIgcCollection.band = new_instancemethod(_air_mspi_igc_collection.AirMspiI
 AirMspiIgcCollection.min_l1b1_line = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_min_l1b1_line,None,AirMspiIgcCollection)
 AirMspiIgcCollection.max_l1b1_line = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_max_l1b1_line,None,AirMspiIgcCollection)
 AirMspiIgcCollection.view_number_to_image_index = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_view_number_to_image_index,None,AirMspiIgcCollection)
+AirMspiIgcCollection.replace_view_config = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_replace_view_config,None,AirMspiIgcCollection)
 AirMspiIgcCollection_swigregister = _air_mspi_igc_collection.AirMspiIgcCollection_swigregister
 AirMspiIgcCollection_swigregister(AirMspiIgcCollection)
 

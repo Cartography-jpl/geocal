@@ -57,6 +57,8 @@ public:
   int min_l1b1_line(int Index) const;
   int max_l1b1_line(int Index) const;
   int view_number_to_image_index(int View_number) const;
+  void replace_view_config(const std::string& Master_config_file,
+			   const std::string& L1b1_table);
   %pickle_serialization();
 };
 }

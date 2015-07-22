@@ -87,12 +87,12 @@ AirMspiIgcCollection::AirMspiIgcCollection
   // Get camera set up
   std::string fname = c.value<std::string>("camera_model_config");
   if(fname[0] != '/')
-    fname = Base_directory + "/" + fname;
+    fname = base_directory + "/" + fname;
   std::string extra_config = "";
   if(c.have_key("extra_camera_model_config")) {
     extra_config = c.value<std::string>("extra_camera_model_config");
     if(extra_config[0] != '/')
-      extra_config = Base_directory + "/" + extra_config;
+      extra_config = base_directory + "/" + extra_config;
   }
   boost::shared_ptr<MspiCamera> mspi_camera(new MspiCamera(fname, extra_config));
   boost::shared_ptr<MspiGimbal> mspi_gimbal(new MspiGimbal(fname, extra_config));
@@ -105,11 +105,6 @@ AirMspiIgcCollection::AirMspiIgcCollection
   if(c.value<bool>("use_static_gimbal"))
     throw Exception("We don't currently support static gimbals");
   orbit_.reset(new AirMspiOrbit(Orbit_file_name, mspi_gimbal));
-
-  // Get reference row needed by AirMspiTimeTable.
-  fname = c.value<std::string>("instrument_info_config");
-  if(fname[0] != '/')
-    fname = Base_directory + "/" + fname;
 
   // Get DEM set up
   if(c.value<std::string>("dem_type") == "usgs") {
@@ -124,6 +119,30 @@ AirMspiIgcCollection::AirMspiIgcCollection
     dem_resolution = 10.0;
   }
 
+  replace_view_config(Master_config_file, L1b1_table);
+
+  add_object(camera_);
+  add_object(gimbal_);
+  add_object(orbit_);
+}
+
+//-----------------------------------------------------------------------
+/// There is various metadata needed by the airmspi programs that is
+/// only available once a master config and l1b1_table file are
+/// created. This is created as part of AirMspiMapInfoProcessor (a
+/// python class found in the MSPI-Ground software, not here in
+/// GeoCal). We need to be able to add in this metadata to an existing 
+/// IgcCollection. This function does this. Because we may also have
+/// direction to process only a subset of the data, this also
+/// recalculates the minimum and maximum L1B1 lines to use.
+//-----------------------------------------------------------------------
+
+void AirMspiIgcCollection::replace_view_config
+(const std::string& Master_config_file,
+ const std::string& L1b1_table)
+{
+  MspiConfigFile c(Master_config_file);
+
   // Set up view information
   MspiConfigFile vconfig(L1b1_table);
   MspiConfigTable vtab(vconfig, "L1B1");
@@ -133,7 +152,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
       std::string fname = vtab.value<std::string>(i, "extra_config_file");
       if(fname != "-") {
 	if(fname[0] != '/')
-	  fname = Base_directory + "/" + fname;
+	  fname = base_directory + "/" + fname;
 	vc.add_file(fname);
       }
     }
@@ -145,10 +164,8 @@ AirMspiIgcCollection::AirMspiIgcCollection
     view_config_.push_back(vc);
   }
   calc_min_max_l1b1_line();
-  add_object(camera_);
-  add_object(gimbal_);
-  add_object(orbit_);
 }
+
 
 //-----------------------------------------------------------------------
 /// Go through and fill in min and max l1b1 lines that we need to read

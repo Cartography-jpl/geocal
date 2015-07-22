@@ -7476,6 +7476,77 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_replace_view_config(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_replace_view_config",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_replace_view_config" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AirMspiIgcCollection_replace_view_config" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AirMspiIgcCollection_replace_view_config" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "AirMspiIgcCollection_replace_view_config" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AirMspiIgcCollection_replace_view_config" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    try {
+      (arg1)->replace_view_config((std::string const &)*arg2,(std::string const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_AirMspiIgcCollection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
@@ -7600,6 +7671,18 @@ static PyMethodDef SwigMethods[] = {
 		"int AirMspiIgcCollection::view_number_to_image_index(int View_number) const\n"
 		"Go from view number (found in the l1b1 table file) to the index number\n"
 		"matching it. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_replace_view_config", _wrap_AirMspiIgcCollection_replace_view_config, METH_VARARGS, (char *)"\n"
+		"void AirMspiIgcCollection::replace_view_config(const std::string &Master_config_file, const std::string &L1b1_table)\n"
+		"There is various metadata needed by the airmspi programs that is only\n"
+		"available once a master config and l1b1_table file are created.\n"
+		"\n"
+		"This is created as part of AirMspiMapInfoProcessor (a python class\n"
+		"found in the MSPI-Ground software, not here in GeoCal). We need to be\n"
+		"able to add in this metadata to an existing IgcCollection. This\n"
+		"function does this. Because we may also have direction to process only\n"
+		"a subset of the data, this also recalculates the minimum and maximum\n"
+		"L1B1 lines to use. \n"
 		""},
 	 { (char *)"delete_AirMspiIgcCollection", (PyCFunction)_wrap_delete_AirMspiIgcCollection, METH_O, (char *)"\n"
 		"virtual GeoCal::AirMspiIgcCollection::~AirMspiIgcCollection()\n"

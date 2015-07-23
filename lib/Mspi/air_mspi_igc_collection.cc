@@ -141,6 +141,7 @@ void AirMspiIgcCollection::replace_view_config
 (const std::string& Master_config_file,
  const std::string& L1b1_table)
 {
+  view_config_.clear();
   MspiConfigFile c(Master_config_file);
 
   // Set up view information

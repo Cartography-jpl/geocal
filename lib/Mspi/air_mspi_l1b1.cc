@@ -1,6 +1,7 @@
 #include "geocal_internal_config.h"
 #include "air_mspi_l1b1.h"
 #include "geocal_serialize_support.h"
+#include "air_mspi_file.h"
 #ifdef HAVE_MSPI_SHARED
 #include "MSPI-Shared/File/L1B1File/src/l1b1_reader.h"
 #endif
@@ -24,7 +25,7 @@ void AirMspiL1b1File::load(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(fname)
     & GEOCAL_NVP_(row_index_to_use);
 #ifdef HAVE_MSPI_SHARED
-  l1b1_reader.reset(new MSPI::Shared::L1B1Reader(fname));
+  l1b1_reader.reset(new MSPI::Shared::L1B1Reader(air_mspi_true_file_name(fname)));
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif
@@ -56,7 +57,7 @@ AirMspiL1b1File::AirMspiL1b1File
 {
 #ifdef HAVE_MSPI_SHARED
   fname = Fname;
-  l1b1_reader.reset(new MSPI::Shared::L1B1Reader(Fname));
+  l1b1_reader.reset(new MSPI::Shared::L1B1Reader(air_mspi_true_file_name(Fname)));
   row_index_to_use_ = -1;
   for(int i = 0; i < number_row_index(); ++i)
     if(swath_name(i) == Swath_to_use)
@@ -158,7 +159,7 @@ void AirMspiL1b1File::read_tile(const boost::array<index, 2>& Min_index,
   boost::multi_array<float, 2> d = 
     l1b1_reader->read_data(row_number_to_use(), "I", Min_index[0],
 			   Max_index[0] - Min_index[0]);
-  for(int i = 0; i < d.shape()[0]; ++i)
+  for(int i = 0; i < (int) d.shape()[0]; ++i)
     for(int j = Min_index[1]; j < Max_index[1]; ++j, ++Res)
       *Res = d[i][j];
 #else

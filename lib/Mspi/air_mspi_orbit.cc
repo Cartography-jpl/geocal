@@ -8,10 +8,10 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void AirMspiOrbit::serialize(Archive & ar, const unsigned int version)
+void AirMspiOrbit::save(Archive & ar, const unsigned int version) const
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP(data)
+    & GEOCAL_NVP_(file_name)
     & GEOCAL_NVP(tile_number_line)
     & GEOCAL_NVP_(datum)
     & GEOCAL_NVP(gimbal)
@@ -20,7 +20,21 @@ void AirMspiOrbit::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(old_format);
 }
 
-GEOCAL_IMPLEMENT(AirMspiOrbit);
+template<class Archive>
+void AirMspiOrbit::load(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP_(file_name)
+    & GEOCAL_NVP(tile_number_line)
+    & GEOCAL_NVP_(datum)
+    & GEOCAL_NVP(gimbal)
+    & GEOCAL_NVP_(vdef)
+    & GEOCAL_NVP_(tspace)
+    & GEOCAL_NVP(old_format);
+  data.reset(new GdalRasterImage(air_mspi_true_file_name(file_name_)));
+}
+
+GEOCAL_SPLIT_IMPLEMENT(AirMspiOrbit);
 #endif
 
 AirMspiOrbit::AirMspiOrbit() 
@@ -130,16 +144,12 @@ AirMspiOrbit::AirMspiOrbit(const std::string& Fname,
 			   const boost::shared_ptr<MspiGimbal>& Gim,
 			   const boost::shared_ptr<Datum>& D,
 			   AircraftOrbitData::VerticalDefinition Def)
-  : data(new GdalRasterImage(Fname)), 
+  : file_name_(Fname),
     datum_(D),
     vdef_(Def),
     gimbal(Gim)
 {
-  initialize();
-}
-
-void AirMspiOrbit::initialize()
-{
+  data.reset(new GdalRasterImage(air_mspi_true_file_name(file_name_)));
   Time epoch = Time::parse_time(data->metadata<std::string>("epoch"));
   min_tm = epoch + data->metadata<double>("first_time");
   max_tm = epoch + data->metadata<double>("last_time");

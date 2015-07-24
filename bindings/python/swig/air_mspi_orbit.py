@@ -312,4 +312,8 @@ AirMspiOrbit_swigregister = _air_mspi_orbit.AirMspiOrbit_swigregister
 AirMspiOrbit_swigregister(AirMspiOrbit)
 
 
+def air_mspi_true_file_name(*args):
+  return _air_mspi_orbit.air_mspi_true_file_name(*args)
+air_mspi_true_file_name = _air_mspi_orbit.air_mspi_true_file_name
+
 

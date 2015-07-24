@@ -1,6 +1,8 @@
 geocalinc_HEADERS+= @srcmspi@/filtering_fstream.h
 geocalinc_HEADERS+= @srcmspi@/ifstream_cs.h
 libgeocal_la_SOURCES+= @srcmspi@/ifstream_cs.cc
+geocalinc_HEADERS+= @srcmspi@/air_mspi_file.h
+libgeocal_la_SOURCES+= @srcmspi@/air_mspi_file.cc
 geocalinc_HEADERS+= @srcmspi@/mspi_config_file.h
 libgeocal_la_SOURCES+= @srcmspi@/mspi_config_file.cc
 geocalinc_HEADERS+= @srcmspi@/mspi_paraxial_transform.h

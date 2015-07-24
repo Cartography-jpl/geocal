@@ -769,7 +769,8 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srccartlab@/vicar_file.cc @srccartlab@/vicar_raster_image.cc \
 	@srccartlab@/vicar_multi_file.cc @srccartlab@/datum_geoid96.cc \
 	@srccartlab@/srtm_dem.cc @srccartlab@/vicar_ogr.cc \
-	@srcmspi@/ifstream_cs.cc @srcmspi@/mspi_config_file.cc \
+	@srcmspi@/ifstream_cs.cc @srcmspi@/air_mspi_file.cc \
+	@srcmspi@/mspi_config_file.cc \
 	@srcmspi@/mspi_paraxial_transform.cc @srcmspi@/mspi_camera.cc \
 	@srcmspi@/mspi_gimbal.cc @srcmspi@/air_mspi_orbit.cc \
 	@srcmspi@/ground_mspi_orbit.cc @srcmspi@/ground_mspi_igc.cc \
@@ -921,6 +922,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srccartlab@/libgeocal_la-doughnut_average.lo \
 	@srccartlab@/libgeocal_la-paint_class.lo $(am__objects_21) \
 	$(am__objects_22) @srcmspi@/libgeocal_la-ifstream_cs.lo \
+	@srcmspi@/libgeocal_la-air_mspi_file.lo \
 	@srcmspi@/libgeocal_la-mspi_config_file.lo \
 	@srcmspi@/libgeocal_la-mspi_paraxial_transform.lo \
 	@srcmspi@/libgeocal_la-mspi_camera.lo \
@@ -1438,7 +1440,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srccartlab@/vicar_multi_file.h @srccartlab@/datum_geoid96.h \
 	@srccartlab@/srtm_dem.h @srccartlab@/vicar_ogr.h \
 	@srcmspi@/filtering_fstream.h @srcmspi@/ifstream_cs.h \
-	@srcmspi@/mspi_config_file.h \
+	@srcmspi@/air_mspi_file.h @srcmspi@/mspi_config_file.h \
 	@srcmspi@/mspi_paraxial_transform.h @srcmspi@/mspi_camera.h \
 	@srcmspi@/mspi_gimbal.h @srcmspi@/air_mspi_orbit.h \
 	@srcmspi@/ground_mspi_orbit.h @srcmspi@/ground_mspi_igc.h \
@@ -2166,7 +2168,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srccartlab@/worldview2_cloudmask.cc \
 	@srccartlab@/doughnut_average.cc @srccartlab@/paint_class.cc \
 	$(am__append_32) $(am__append_34) @srcmspi@/ifstream_cs.cc \
-	@srcmspi@/mspi_config_file.cc \
+	@srcmspi@/air_mspi_file.cc @srcmspi@/mspi_config_file.cc \
 	@srcmspi@/mspi_paraxial_transform.cc @srcmspi@/mspi_camera.cc \
 	@srcmspi@/mspi_gimbal.cc @srcmspi@/air_mspi_orbit.cc \
 	@srcmspi@/ground_mspi_orbit.cc @srcmspi@/ground_mspi_igc.cc \
@@ -2441,7 +2443,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srccartlab@/doughnut_average.h @srccartlab@/paint_class.h \
 	$(am__append_31) $(am__append_33) \
 	@srcmspi@/filtering_fstream.h @srcmspi@/ifstream_cs.h \
-	@srcmspi@/mspi_config_file.h \
+	@srcmspi@/air_mspi_file.h @srcmspi@/mspi_config_file.h \
 	@srcmspi@/mspi_paraxial_transform.h @srcmspi@/mspi_camera.h \
 	@srcmspi@/mspi_gimbal.h @srcmspi@/air_mspi_orbit.h \
 	@srcmspi@/ground_mspi_orbit.h @srcmspi@/ground_mspi_igc.h \
@@ -3579,6 +3581,8 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@: > @srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/libgeocal_la-ifstream_cs.lo: @srcmspi@/$(am__dirstamp) \
 	@srcmspi@/$(DEPDIR)/$(am__dirstamp)
+@srcmspi@/libgeocal_la-air_mspi_file.lo: @srcmspi@/$(am__dirstamp) \
+	@srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/libgeocal_la-mspi_config_file.lo: @srcmspi@/$(am__dirstamp) \
 	@srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/libgeocal_la-mspi_paraxial_transform.lo:  \
@@ -4378,6 +4382,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-mspi_gimbal_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-mspi_paraxial_transform_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-usgs_dem_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_igc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_igc_collection.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_l1b1.Plo@am__quote@
@@ -6700,6 +6705,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/ifstream_cs.cc' object='@srcmspi@/libgeocal_la-ifstream_cs.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/libgeocal_la-ifstream_cs.lo `test -f '@srcmspi@/ifstream_cs.cc' || echo '$(srcdir)/'`@srcmspi@/ifstream_cs.cc
+
+@srcmspi@/libgeocal_la-air_mspi_file.lo: @srcmspi@/air_mspi_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/libgeocal_la-air_mspi_file.lo -MD -MP -MF @srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_file.Tpo -c -o @srcmspi@/libgeocal_la-air_mspi_file.lo `test -f '@srcmspi@/air_mspi_file.cc' || echo '$(srcdir)/'`@srcmspi@/air_mspi_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_file.Tpo @srcmspi@/$(DEPDIR)/libgeocal_la-air_mspi_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/air_mspi_file.cc' object='@srcmspi@/libgeocal_la-air_mspi_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/libgeocal_la-air_mspi_file.lo `test -f '@srcmspi@/air_mspi_file.cc' || echo '$(srcdir)/'`@srcmspi@/air_mspi_file.cc
 
 @srcmspi@/libgeocal_la-mspi_config_file.lo: @srcmspi@/mspi_config_file.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/libgeocal_la-mspi_config_file.lo -MD -MP -MF @srcmspi@/$(DEPDIR)/libgeocal_la-mspi_config_file.Tpo -c -o @srcmspi@/libgeocal_la-mspi_config_file.lo `test -f '@srcmspi@/mspi_config_file.cc' || echo '$(srcdir)/'`@srcmspi@/mspi_config_file.cc

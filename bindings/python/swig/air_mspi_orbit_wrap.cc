@@ -7206,6 +7206,44 @@ SWIGINTERN PyObject *AirMspiOrbit_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObj
   return SWIG_Python_InitShadowInstance(args);
 }
 
+SWIGINTERN PyObject *_wrap_air_mspi_true_file_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "air_mspi_true_file_name" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "air_mspi_true_file_name" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = GeoCal::air_mspi_true_file_name((std::string const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_AirMspiNavData", _wrap_new_AirMspiNavData, METH_VARARGS, (char *)"\n"
@@ -7297,6 +7335,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"AirMspiOrbit_swigregister", AirMspiOrbit_swigregister, METH_VARARGS, NULL},
 	 { (char *)"AirMspiOrbit_swiginit", AirMspiOrbit_swiginit, METH_VARARGS, NULL},
+	 { (char *)"air_mspi_true_file_name", (PyCFunction)_wrap_air_mspi_true_file_name, METH_O, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

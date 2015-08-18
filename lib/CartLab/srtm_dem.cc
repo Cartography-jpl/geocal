@@ -62,7 +62,7 @@ SrtmDemData::SrtmDemData
   file_name_end = "_L2.hlf";
   // We read n0e100_L2.hlf. Note that for some odd reason, n0e100 is
   // actually the lower left corner, rather than the upper left corner.
-  // This doesn't really change anything in VicarMultifile, except that
+  // This doesn't really change anything in VicarCartLabMultifile, except that
   // we need to make sure to get the mapinfo right.
   lat_ref = 0, lon_ref = 100;
   int num_per_deg = 3600;

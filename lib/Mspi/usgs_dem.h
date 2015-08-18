@@ -2,8 +2,6 @@
 #define USGS_DEM_H
 #include "dem_map_info.h"
 #include "cart_lab_multifile.h"
-#include "location_to_file.h"
-#include "ostream_pad.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -17,24 +15,6 @@ namespace GeoCal {
 class UsgsDemData: public GdalCartLabMultifile {
 public:
   enum {FILL_VALUE=0};
-
-//-----------------------------------------------------------------------
-/// Constructor. You can provide the directory to look for USGS DEM
-/// data, or if you leave this blank we use the value of environment
-/// variable USGSDATA.
-///
-/// We don't have USGS files that completely cover the area. If you
-/// ask for a point outside of the area this can either be treated as
-/// an error, or alternatively you can return a value of FILL_VALUE
-/// instead. This is controlled by No_coverage_is_error.
-///
-/// There are two kinds of tiling going on. At the top level, we have
-/// a number of files open at one time, given by Number_file. For each
-/// file, we read it with tiles with the given Number_line_per_tile x
-/// Number_sample_per_tile, having up to Number_tile_each_file tiles.
-/// If the Number_line_per_tile or Number_sample_per_tile is -1 we
-/// read the entire file.
-//-----------------------------------------------------------------------
 
   UsgsDemData(const std::string& Dir,
 	      bool No_coverage_is_error = true,

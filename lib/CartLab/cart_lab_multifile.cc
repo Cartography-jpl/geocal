@@ -1,4 +1,6 @@
 #include "cart_lab_multifile.h"
+#include "vicar_lite_file.h"
+#include "vicar_raster_image.h"
 #include "gdal_raster_image.h"
 #include "geocal_serialize_support.h"
 #include <cstdlib>
@@ -61,8 +63,17 @@ void GdalCartLabMultifile::serialize(Archive & ar, const unsigned int version)
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartLabMultifile);
 }
 
+template<class Archive>
+void VicarCartLabMultifile::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartLabMultifile)
+    & GEOCAL_NVP(favor_memory_mapped)
+    & GEOCAL_NVP(force_area_pixel);
+}
+
 GEOCAL_SPLIT_IMPLEMENT(CartLabMultifile);
 GEOCAL_IMPLEMENT(GdalCartLabMultifile);
+GEOCAL_IMPLEMENT(VicarCartLabMultifile);
 #endif
 
 CartLabMultifile::CartLabMultifile
@@ -174,6 +185,45 @@ RasterMultifileTile GdalCartLabMultifile::get_file(int Line, int Sample) const
 			 number_line_per_tile, number_sample_per_tile));
   ImageCoordinate ic = 
     coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
+  int ln = (int) round(ic.line);
+  int smp = (int) round(ic.sample);
+  return RasterMultifileTile(f, ln, smp);
+}
+
+RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
+{
+  std::string fname = loc_to_file.find(Line, Sample);
+  if(fname =="")
+    return RasterMultifileTile();
+  //-----------------------------------------------------------------------
+  // If we are using memory mapped io by preference, try that first.
+  // We allow this to fail, the file might be too large to do memory
+  // mapped io (particular on the mac, which is limited to 2G).
+  //-----------------------------------------------------------------------
+
+  boost::shared_ptr<RasterImage> f;
+  try {
+    if(favor_memory_mapped) {
+      boost::shared_ptr<VicarLiteRasterImage> 
+	f2(new VicarLiteRasterImage(fname, 1, VicarLiteFile::READ,
+				    -1, -1, force_area_pixel));
+      if(!f2->is_compressed())  // Can only use memory mapped for
+				// uncompressed files.
+	f = f2;
+    }
+  } catch(const Exception& E) {
+    // Ignore errors, we drop down to using the Vicar routines below.
+  }
+  if(!f.get())
+    f.reset(new VicarRasterImage(fname, 1, VicarFile::READ,
+				 number_line_per_tile, 
+				 number_tile_each_file, force_area_pixel));
+
+  ImageCoordinate ic = 
+    coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
+  ImageCoordinate ic2 = 
+    coordinate(*(f->ground_coordinate(ImageCoordinate(f->number_line() - 1,
+					      f->number_sample() - 1))));
   int ln = (int) round(ic.line);
   int smp = (int) round(ic.sample);
   return RasterMultifileTile(f, ln, smp);

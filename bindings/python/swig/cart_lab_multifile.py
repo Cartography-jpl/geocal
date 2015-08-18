@@ -201,5 +201,32 @@ class GdalCartLabMultifile(CartLabMultifile):
 GdalCartLabMultifile_swigregister = _cart_lab_multifile.GdalCartLabMultifile_swigregister
 GdalCartLabMultifile_swigregister(GdalCartLabMultifile)
 
+class VicarCartLabMultifile(CartLabMultifile):
+    """
+    This is a CartLabMultifile where we use Vicar to read each of the
+    tiles.
+
+    If desired we can favor doing memory mapping when possible rather than
+    using the VICAR RTL (i.e., we use VicarLiteRasterImage).
+
+    The force_area_pixel_ forces the files to be treated as "pixel as
+    area" rather than "pixel as point". This is really just meant as a
+    work around for the SRTM data, which incorrectly labels the data as
+    "point" rather than "area". Since this is a 15 meter difference,
+    it matters for many applications. Most users should just ignore this
+    value.
+
+    C++ includes: cart_lab_multifile.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined")
+    __repr__ = _swig_repr
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _cart_lab_multifile.delete_VicarCartLabMultifile
+VicarCartLabMultifile_swigregister = _cart_lab_multifile.VicarCartLabMultifile_swigregister
+VicarCartLabMultifile_swigregister(VicarCartLabMultifile)
+
 
 

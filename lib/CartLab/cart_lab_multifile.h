@@ -144,9 +144,68 @@ private:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
 };
+
+/****************************************************************//**
+  This is a CartLabMultifile where we use Vicar to read each of the
+  tiles. If desired we can favor doing memory mapping when possible 
+  rather than using the VICAR RTL (i.e., we use
+  VicarLiteRasterImage). 
+
+  The force_area_pixel_ forces the files to be treated as
+  "pixel as area" rather than "pixel as point". This is really just
+  meant as a work around for the SRTM data, which incorrectly labels
+  the data as "point" rather than "area". Since this is a 15 meter
+  difference, it matters for many applications. Most users should
+  just ignore this value.
+*******************************************************************/
+class VicarCartLabMultifile : public CartLabMultifile {
+public:
+  virtual ~VicarCartLabMultifile() {}
+protected:
+  VicarCartLabMultifile() {}
+  VicarCartLabMultifile(int Number_tile,
+		       bool No_coverage_is_error = true, 
+		       int No_coverage_fill_value = -1) 
+    : CartLabMultifile(Number_tile, No_coverage_is_error, 
+		       No_coverage_fill_value)
+  {
+  }
+  VicarCartLabMultifile(const std::string& Dir,
+			const std::string& Dir_env_variable = "",
+			int Number_line_per_tile = -1,
+			int Number_sample_per_tile = -1, 
+			int Number_tile_each_file = 4,
+			int Number_tile = 4,
+			bool Favor_memory_mapped = true,
+			bool No_coverage_is_error = true, 
+			int No_coverage_fill_value = -1,
+			bool Force_area_pixel = false)
+    : CartLabMultifile(Dir, Dir_env_variable, Number_line_per_tile, 
+		       Number_sample_per_tile,
+		       Number_tile_each_file, Number_tile,
+		       No_coverage_is_error,
+		       No_coverage_fill_value),
+      favor_memory_mapped(Favor_memory_mapped),
+      force_area_pixel(Force_area_pixel)
+  {
+  }
+  virtual RasterMultifileTile get_file(int Line, int Sample) const;
+
+  bool favor_memory_mapped;	///< Whether we use memory mapping or
+				///not when reading an uncompressed
+				///file. 
+  bool force_area_pixel;	///< If true force map to have pixel
+				///as area rather than point, meant as
+				///a work around for the SRTM data.
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
 }
 
 GEOCAL_EXPORT_KEY(CartLabMultifile);
 GEOCAL_EXPORT_KEY(GdalCartLabMultifile);
+GEOCAL_EXPORT_KEY(VicarCartLabMultifile);
 #endif
 

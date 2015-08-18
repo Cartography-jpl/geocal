@@ -11,6 +11,7 @@
 
 %geocal_shared_ptr(GeoCal::CartLabMultifile);
 %geocal_shared_ptr(GeoCal::GdalCartLabMultifile);
+%geocal_shared_ptr(GeoCal::VicarCartLabMultifile);
 namespace GeoCal {
 %nodefaultctor CartLabMultifile;
 class CartLabMultifile: public RasterMultifile {
@@ -21,6 +22,12 @@ public:
 
 %nodefaultctor GdalCartLabMultifile;
 class GdalCartLabMultifile: public CartLabMultifile {
+public:
+  %pickle_serialization();
+};
+
+%nodefaultctor VicarCartLabMultifile;
+class VicarCartLabMultifile: public CartLabMultifile {
 public:
   %pickle_serialization();
 };

@@ -178,7 +178,6 @@ extern "C" {
   void init_vicar_argument(void);
   void init_vicar_dem(void);
   void init_cart_lab_multifile(void);
-  void init_vicar_multi_file(void);
   void init_datum_geoid96(void);
   void init_srtm_dem(void);
   void init_vicar_raster_image(void);
@@ -415,7 +414,6 @@ void init_swig_wrap(void)
   init_extension_module(package, "_vicar_argument", init_vicar_argument);
   init_extension_module(package, "_vicar_dem", init_vicar_dem);
   init_extension_module(package, "_cart_lab_multifile", init_cart_lab_multifile);
-  init_extension_module(package, "_vicar_multi_file", init_vicar_multi_file);
   init_extension_module(package, "_datum_geoid96", init_datum_geoid96);
   init_extension_module(package, "_srtm_dem", init_srtm_dem);
   init_extension_module(package, "_vicar_raster_image", init_vicar_raster_image);

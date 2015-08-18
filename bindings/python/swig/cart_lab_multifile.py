@@ -8,7 +8,7 @@
 
 from sys import version_info
 if version_info >= (3,0,0):
-    new_instancemethod = lambda func, inst, cls: _usgs_dem.SWIG_PyInstanceMethod_New(func)
+    new_instancemethod = lambda func, inst, cls: _cart_lab_multifile.SWIG_PyInstanceMethod_New(func)
 else:
     from new import instancemethod as new_instancemethod
 if version_info >= (2,6,0):
@@ -17,20 +17,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_usgs_dem', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_cart_lab_multifile', [dirname(__file__)])
         except ImportError:
-            import _usgs_dem
-            return _usgs_dem
+            import _cart_lab_multifile
+            return _cart_lab_multifile
         if fp is not None:
             try:
-                _mod = imp.load_module('_usgs_dem', fp, pathname, description)
+                _mod = imp.load_module('_cart_lab_multifile', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _usgs_dem = swig_import_helper()
+    _cart_lab_multifile = swig_import_helper()
     del swig_import_helper
 else:
-    import _usgs_dem
+    import _cart_lab_multifile
 del version_info
 try:
     _swig_property = property
@@ -88,7 +88,7 @@ except:
     weakref_proxy = lambda x: x
 
 
-SHARED_PTR_DISOWN = _usgs_dem.SHARED_PTR_DISOWN
+SHARED_PTR_DISOWN = _cart_lab_multifile.SHARED_PTR_DISOWN
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -121,86 +121,56 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.dem_map_info
-import geocal_swig.dem
-import geocal_swig.generic_object
-import geocal_swig.cart_lab_multifile
 import geocal_swig.raster_multifile
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
-class UsgsDemData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
+import geocal_swig.generic_object
+class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
     """
-    This is used to read the USGS DEM data.
+    There are 2 kinds of multi-file databases that the cartlab produces.
 
-    This then get used by UsgsDem. Although you can use this class
-    directly, generally you'll use this through UsgsDem class.
+    The first uses an IBIS file to describe the file structure, this is
+    used by for example SrtmDem. This is handled by the class
+    VicarMultiFile.
 
-    If we don't have data for a particular location, we return FILL_VALUE.
+    The other uses a naming convention, with fixed size tiles in each
+    file. Examples are the Landsat 7 data, or the USGS DEM. This class
+    provides support for the common behavior of these types of databases.
+    For right now we assume that the data needs to be read by GDAL (so the
+    data is not VICAR format, but something like geotiff). We could relax
+    that if needed.
 
-    C++ includes: usgs_dem.h 
-    """
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-    FILL_VALUE = _usgs_dem.UsgsDemData_FILL_VALUE
-    def __init__(self, *args): 
-        """
-        UsgsDemData::UsgsDemData(const std::string &Dir, bool No_coverage_is_error=true, int
-        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_file=4)
-        Constructor.
+    The file names are always of the form "n66e130_<extension>" or
+    "s9w62_<extension>". The coordinates in the name give something
+    close to the upper left corner of the tile covered by the at file. In
+    general this won't be the exact upper left corner, there may be some
+    offset or border added to the files (this varies from dataset to
+    dataset). Derived classes should fill in a "reference map info",
+    which is just the coordinates for a particular file (e.g., use
+    gdalinfo to find the information). We then determine the map info for
+    every other file by finding the offset relative to this reference map
+    info. We do this by the naming convention rather than just reading
+    each file and getting the map info metadata because it is much
+    quicker. See for example UsgsDem for an example of filling in this
+    information.
 
-        You can provide the directory to look for USGS DEM data, or if you
-        leave this blank we use the value of environment variable USGSDATA.
+    Note that some databases have 0 padding in the file name (e.g, USGS
+    DEM has files like "n47w087_10m.tif"). While others don't (e.g.,
+    SRTM has file names like "n47w87_L2.hlf"). Either naming convention
+    works with this file, we actually build up the files by reading the
+    directory.
 
-        We don't have USGS files that completely cover the area. If you ask
-        for a point outside of the area this can either be treated as an
-        error, or alternatively you can return a value of FILL_VALUE instead.
-        This is controlled by No_coverage_is_error.
-
-        There are two kinds of tiling going on. At the top level, we have a
-        number of files open at one time, given by Number_file. For each file,
-        we read it with tiles with the given Number_line_per_tile x
-        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
-        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
-        entire file. 
-        """
-        _usgs_dem.UsgsDemData_swiginit(self,_usgs_dem.new_UsgsDemData(*args))
-    def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
-
-    __swig_destroy__ = _usgs_dem.delete_UsgsDemData
-UsgsDemData_swigregister = _usgs_dem.UsgsDemData_swigregister
-UsgsDemData_swigregister(UsgsDemData)
-
-class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
-    """
-    This class provides access to the USGS Dem.
-
-    C++ includes: usgs_dem.h 
+    C++ includes: cart_lab_multifile.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
-    def __init__(self, *args): 
-        """
-        UsgsDem::UsgsDem(const std::string &Dir, bool Outside_dem_is_error=true, const
-        boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >())
-        Constructor.
-
-        You can provide the directory to look for USGS DEM data, or if you
-        leave this blank we use the value of environment variable USGSDATA.
-
-        We don't have USGS files that completely cover the area. If you ask
-        for a point outside of the area this can either be treated as an
-        error, or alternatively you can return a value of 0 instead. This is
-        controlled by Outside_dem_is_error. 
-        """
-        _usgs_dem.UsgsDem_swiginit(self,_usgs_dem.new_UsgsDem(*args))
     def _v_directory_base(self):
         """
-        const std::string& GeoCal::UsgsDem::directory_base() const
+        const std::string& GeoCal::CartLabMultifile::directory_base() const
         Database base directory. 
         """
-        return _usgs_dem.UsgsDem__v_directory_base(self)
+        return _cart_lab_multifile.CartLabMultifile__v_directory_base(self)
 
     @property
     def directory_base(self):
@@ -209,10 +179,27 @@ class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
-    __swig_destroy__ = _usgs_dem.delete_UsgsDem
-UsgsDem._v_directory_base = new_instancemethod(_usgs_dem.UsgsDem__v_directory_base,None,UsgsDem)
-UsgsDem_swigregister = _usgs_dem.UsgsDem_swigregister
-UsgsDem_swigregister(UsgsDem)
+    __swig_destroy__ = _cart_lab_multifile.delete_CartLabMultifile
+CartLabMultifile._v_directory_base = new_instancemethod(_cart_lab_multifile.CartLabMultifile__v_directory_base,None,CartLabMultifile)
+CartLabMultifile_swigregister = _cart_lab_multifile.CartLabMultifile_swigregister
+CartLabMultifile_swigregister(CartLabMultifile)
+
+class GdalCartLabMultifile(CartLabMultifile):
+    """
+    This is a CartLabMultifile where we use GDAL to read each of the
+    tiles, e.g., the tiles are geotiff files.
+
+    C++ includes: cart_lab_multifile.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined")
+    __repr__ = _swig_repr
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _cart_lab_multifile.delete_GdalCartLabMultifile
+GdalCartLabMultifile_swigregister = _cart_lab_multifile.GdalCartLabMultifile_swigregister
+GdalCartLabMultifile_swigregister(GdalCartLabMultifile)
 
 
 

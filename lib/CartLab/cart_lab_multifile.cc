@@ -4,6 +4,7 @@
 #include "gdal_raster_image.h"
 #include "geocal_serialize_support.h"
 #include <cstdlib>
+#include <cstdio>
 #include <cmath>
 #include <boost/filesystem.hpp>
 #include <boost/foreach.hpp>
@@ -227,4 +228,69 @@ RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
   int ln = (int) round(ic.line);
   int smp = (int) round(ic.sample);
   return RasterMultifileTile(f, ln, smp);
+}
+
+class TempFile {
+public:
+  TempFile() {temp_fname = tmpnam(0);}
+  ~TempFile() {unlink(temp_fname);}
+  char* temp_fname;
+};
+
+//-----------------------------------------------------------------------
+/// Create a stand alone file that contains a subset of the full file.
+/// This handles whatever mosaicing/subsetting is needed for the
+/// underlying tile files. We use GDAL to generate this, so you pass
+/// in the driver to use like you do with a GdalRasterImage (e.g.,
+/// "gtiff") and whatever options (e.g., 
+/// "TILED=YES BLOCKXSIZE=16 BLOCKYSIZE=32 COMPRESS=JPEG
+/// JPEG_QUALITY=90").
+/// We cover the given set of points, along with whatever boundary you
+/// request (just like MapInfo cover function).
+///
+/// This executes the command shell gdalbuildvrt, which must be in the
+/// path. Right now with GDAL the same functionality can't be done
+/// through C++, but there is talk of making VRTBuilder found in
+/// gdalbuildvrt available. For now though, we just use a system call.
+//-----------------------------------------------------------------------
+
+void CartLabMultifile::create_subset_file
+(const std::string& Oname, const std::string& Driver,
+ const std::vector<boost::shared_ptr<GroundCoordinate> >& Pt, 
+ const std::string& Options,
+ int Boundary) const
+{
+  MapInfo msub = map_info().cover(Pt, Boundary);
+  ImageCoordinate ic = coordinate(*msub.ground_coordinate(0,0));
+  std::vector<std::string> flist = 
+    loc_to_file.find_region((int) round(ic.line), (int) round(ic.sample), 
+			    msub.number_y_pixel(), msub.number_x_pixel());
+  std::vector<double> lat, lon;
+  Geodetic g1 = Geodetic(*msub.ground_coordinate(-0.5,-0.5));
+  Geodetic g2 = Geodetic(*msub.ground_coordinate(-0.5,msub.number_y_pixel()-0.5));
+  Geodetic g3 = Geodetic(*msub.ground_coordinate(msub.number_x_pixel()-0.5,
+						 msub.number_y_pixel()-0.5));
+  Geodetic g4 = Geodetic(*msub.ground_coordinate(msub.number_x_pixel()-0.5,-0.5));
+  double lat_min = std::min(g1.latitude(), std::min(g2.latitude(),
+			    std::min(g3.latitude(), g4.latitude())));
+  double lat_max = std::max(g1.latitude(), std::max(g2.latitude(),
+			    std::max(g3.latitude(), g4.latitude())));
+  double lon_min = std::min(g1.longitude(), std::min(g2.longitude(),
+			    std::min(g3.longitude(), g4.longitude())));
+  double lon_max = std::max(g1.longitude(), std::max(g2.longitude(),
+			    std::max(g3.longitude(), g4.longitude())));
+  std::ostringstream command;
+  command << "gdalbuildvrt -q"
+	  << " -te " << std::setprecision(12)
+	  << lon_min << " " << lat_min << " " << lon_max << " "
+	  << lat_max;
+  TempFile f;
+  command << " " << f.temp_fname;
+  BOOST_FOREACH(std::string f, flist)
+    command << " " << f;
+  // Can ignore system status, we just fail in the next step when we
+  // try to use the file.
+  system(command.str().c_str());
+  GdalRasterImage d(f.temp_fname);
+  gdal_create_copy(Oname, Driver, *d.data_set(), Options);
 }

@@ -165,6 +165,28 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
+    def create_subset_file(self, *args):
+        """
+        void CartLabMultifile::create_subset_file(const std::string &Oname, const std::string &Driver, const
+        std::vector< boost::shared_ptr< GroundCoordinate > > &Pt, const
+        std::string &Options="", int boundary=0) const
+        Create a stand alone file that contains a subset of the full file.
+
+        This handles whatever mosaicing/subsetting is needed for the
+        underlying tile files. We use GDAL to generate this, so you pass in
+        the driver to use like you do with a GdalRasterImage (e.g., "gtiff")
+        and whatever options (e.g., "TILED=YES BLOCKXSIZE=16 BLOCKYSIZE=32
+        COMPRESS=JPEG JPEG_QUALITY=90"). We cover the given set of points,
+        along with whatever boundary you request (just like MapInfo cover
+        function).
+
+        This executes the command shell gdalbuildvrt, which must be in the
+        path. Right now with GDAL the same functionality can't be done through
+        C++, but there is talk of making VRTBuilder found in gdalbuildvrt
+        available. For now though, we just use a system call. 
+        """
+        return _cart_lab_multifile.CartLabMultifile_create_subset_file(self, *args)
+
     def _v_directory_base(self):
         """
         const std::string& GeoCal::CartLabMultifile::directory_base() const
@@ -180,6 +202,7 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _cart_lab_multifile.delete_CartLabMultifile
+CartLabMultifile.create_subset_file = new_instancemethod(_cart_lab_multifile.CartLabMultifile_create_subset_file,None,CartLabMultifile)
 CartLabMultifile._v_directory_base = new_instancemethod(_cart_lab_multifile.CartLabMultifile__v_directory_base,None,CartLabMultifile)
 CartLabMultifile_swigregister = _cart_lab_multifile.CartLabMultifile_swigregister
 CartLabMultifile_swigregister(CartLabMultifile)

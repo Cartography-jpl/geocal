@@ -46,6 +46,11 @@ public:
 //-----------------------------------------------------------------------
 
   const std::string& directory_base() const {return dirbase;}
+  void create_subset_file
+  (const std::string& Oname, const std::string& Driver,
+   const std::vector<boost::shared_ptr<GroundCoordinate> >& Pt, 
+   const std::string& Options = "",   
+   int boundary = 0) const;
 protected:
   CartLabMultifile() {}
   CartLabMultifile(int Number_tile,

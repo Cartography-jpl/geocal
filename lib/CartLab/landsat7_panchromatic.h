@@ -4,7 +4,9 @@
 namespace GeoCal {
 /****************************************************************//**
   This is used to read the global Landsat 7 panchromatic band. This
-  data has 15 meter resolution.
+  data has 15 meter resolution. The geolocation accuracy was estimated
+  by Tom Logan at 1/3 pixel or so (so 5m). Not sure how accurate this
+  estimate is, perhaps Tom has a better estimate.
 *******************************************************************/
 class Landsat7Panchromatic: public GdalCartLabMultifile {
 public:

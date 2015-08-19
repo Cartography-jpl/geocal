@@ -5453,7 +5453,7 @@ SWIG_From_std_string  (const std::string& s)
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_CartLabMultifile__v_create_subset_file__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::CartLabMultifile *arg1 = (GeoCal::CartLabMultifile *) 0 ;
   std::string *arg2 = 0 ;
@@ -5477,7 +5477,7 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_0(PyObject 
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartLabMultifile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartLabMultifile_create_subset_file" "', argument " "1"" of type '" "GeoCal::CartLabMultifile const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "1"" of type '" "GeoCal::CartLabMultifile const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartLabMultifile > * >(argp1);
@@ -5492,10 +5492,10 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_0(PyObject 
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartLabMultifile_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     arg2 = ptr;
   }
@@ -5503,10 +5503,10 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_0(PyObject 
     std::string *ptr = (std::string *)0;
     res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CartLabMultifile_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
     }
     arg3 = ptr;
   }
@@ -5514,10 +5514,10 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_0(PyObject 
     std::vector<boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *)0;
     res4 = swig::asptr(swig_obj[3], &ptr);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "CartLabMultifile_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
     }
     arg4 = ptr;
   }
@@ -5525,16 +5525,16 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_0(PyObject 
     std::string *ptr = (std::string *)0;
     res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
     if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "CartLabMultifile_create_subset_file" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "5"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "5"" of type '" "std::string const &""'"); 
     }
     arg5 = ptr;
   }
   ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
   if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "CartLabMultifile_create_subset_file" "', argument " "6"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "6"" of type '" "int""'");
   } 
   arg6 = static_cast< int >(val6);
   {
@@ -5561,7 +5561,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_CartLabMultifile__v_create_subset_file__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::CartLabMultifile *arg1 = (GeoCal::CartLabMultifile *) 0 ;
   std::string *arg2 = 0 ;
@@ -5582,7 +5582,7 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_1(PyObject 
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartLabMultifile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartLabMultifile_create_subset_file" "', argument " "1"" of type '" "GeoCal::CartLabMultifile const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "1"" of type '" "GeoCal::CartLabMultifile const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartLabMultifile > * >(argp1);
@@ -5597,10 +5597,10 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_1(PyObject 
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartLabMultifile_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     arg2 = ptr;
   }
@@ -5608,10 +5608,10 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_1(PyObject 
     std::string *ptr = (std::string *)0;
     res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CartLabMultifile_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
     }
     arg3 = ptr;
   }
@@ -5619,10 +5619,10 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_1(PyObject 
     std::vector<boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *)0;
     res4 = swig::asptr(swig_obj[3], &ptr);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "CartLabMultifile_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
     }
     arg4 = ptr;
   }
@@ -5630,10 +5630,10 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_1(PyObject 
     std::string *ptr = (std::string *)0;
     res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
     if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "CartLabMultifile_create_subset_file" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "5"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "5"" of type '" "std::string const &""'"); 
     }
     arg5 = ptr;
   }
@@ -5661,7 +5661,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_CartLabMultifile__v_create_subset_file__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::CartLabMultifile *arg1 = (GeoCal::CartLabMultifile *) 0 ;
   std::string *arg2 = 0 ;
@@ -5680,7 +5680,7 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_2(PyObject 
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartLabMultifile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartLabMultifile_create_subset_file" "', argument " "1"" of type '" "GeoCal::CartLabMultifile const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "1"" of type '" "GeoCal::CartLabMultifile const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartLabMultifile > * >(argp1);
@@ -5695,10 +5695,10 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_2(PyObject 
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartLabMultifile_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     arg2 = ptr;
   }
@@ -5706,10 +5706,10 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_2(PyObject 
     std::string *ptr = (std::string *)0;
     res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CartLabMultifile_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
     }
     arg3 = ptr;
   }
@@ -5717,10 +5717,10 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_2(PyObject 
     std::vector<boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *)0;
     res4 = swig::asptr(swig_obj[3], &ptr);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "CartLabMultifile_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile__v_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
     }
     arg4 = ptr;
   }
@@ -5746,24 +5746,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_CartLabMultifile__v_create_subset_file(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[7];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"CartLabMultifile_create_subset_file",0,6,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"CartLabMultifile__v_create_subset_file",0,6,argv))) SWIG_fail;
   --argc;
   if (argc == 4) {
-    return _wrap_CartLabMultifile_create_subset_file__SWIG_2(self, argc, argv);
+    return _wrap_CartLabMultifile__v_create_subset_file__SWIG_2(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_CartLabMultifile_create_subset_file__SWIG_1(self, argc, argv);
+    return _wrap_CartLabMultifile__v_create_subset_file__SWIG_1(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_CartLabMultifile_create_subset_file__SWIG_0(self, argc, argv);
+    return _wrap_CartLabMultifile__v_create_subset_file__SWIG_0(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'CartLabMultifile_create_subset_file'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'CartLabMultifile__v_create_subset_file'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::CartLabMultifile::create_subset_file(std::string const &,std::string const &,std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &,std::string const &,int) const\n"
     "    GeoCal::CartLabMultifile::create_subset_file(std::string const &,std::string const &,std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &,std::string const &) const\n"
@@ -5964,7 +5964,7 @@ SWIGINTERN PyObject *VicarCartLabMultifile_swigregister(PyObject *SWIGUNUSEDPARM
 
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"CartLabMultifile_create_subset_file", _wrap_CartLabMultifile_create_subset_file, METH_VARARGS, (char *)"\n"
+	 { (char *)"CartLabMultifile__v_create_subset_file", _wrap_CartLabMultifile__v_create_subset_file, METH_VARARGS, (char *)"\n"
 		"void CartLabMultifile::create_subset_file(const std::string &Oname, const std::string &Driver, const\n"
 		"std::vector< boost::shared_ptr< GroundCoordinate > > &Pt, const\n"
 		"std::string &Options=\"\", int boundary=0) const\n"

@@ -165,7 +165,7 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
-    def create_subset_file(self, *args):
+    def _v_create_subset_file(self, *args):
         """
         void CartLabMultifile::create_subset_file(const std::string &Oname, const std::string &Driver, const
         std::vector< boost::shared_ptr< GroundCoordinate > > &Pt, const
@@ -185,7 +185,7 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
         C++, but there is talk of making VRTBuilder found in gdalbuildvrt
         available. For now though, we just use a system call. 
         """
-        return _cart_lab_multifile.CartLabMultifile_create_subset_file(self, *args)
+        return _cart_lab_multifile.CartLabMultifile__v_create_subset_file(self, *args)
 
     def _v_directory_base(self):
         """
@@ -201,8 +201,20 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
+    def create_subset_file(self, Oname, Driver, Pt, Options = "", Boundary = 0):
+        
+        
+        
+        if(isinstance(Pt, geocal_swig.Vector_GroundCoordinate)):
+            t = Pt
+        else:
+            t = geocal_swig.Vector_GroundCoordinate()
+            for p in Pt:
+                t.push_back(p)
+        return self._v_create_subset_file(Oname, Driver, t, Options, Boundary)
+
     __swig_destroy__ = _cart_lab_multifile.delete_CartLabMultifile
-CartLabMultifile.create_subset_file = new_instancemethod(_cart_lab_multifile.CartLabMultifile_create_subset_file,None,CartLabMultifile)
+CartLabMultifile._v_create_subset_file = new_instancemethod(_cart_lab_multifile.CartLabMultifile__v_create_subset_file,None,CartLabMultifile)
 CartLabMultifile._v_directory_base = new_instancemethod(_cart_lab_multifile.CartLabMultifile__v_directory_base,None,CartLabMultifile)
 CartLabMultifile_swigregister = _cart_lab_multifile.CartLabMultifile_swigregister
 CartLabMultifile_swigregister(CartLabMultifile)

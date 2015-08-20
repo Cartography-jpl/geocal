@@ -94,6 +94,8 @@ geocalinc_HEADERS+= @srcimplementation@/igc_collection_orbit_data.h
 libgeocal_la_SOURCES+= @srcimplementation@/igc_collection_orbit_data.cc
 geocalinc_HEADERS+= @srcimplementation@/rolling_shutter_constant_time_table.h
 libgeocal_la_SOURCES+= @srcimplementation@/rolling_shutter_constant_time_table.cc
+geocalinc_HEADERS+= @srcimplementation@/piecewise_linear.h
+libgeocal_la_SOURCES+= @srcimplementation@/piecewise_linear.cc
 if HAVE_FFTW
 geocalinc_HEADERS+= @srcimplementation@/phase_correlation_matcher.h
 libgeocal_la_SOURCES+= @srcimplementation@/phase_correlation_matcher.cc
@@ -213,6 +215,7 @@ SWIG_SRC += @swigsrc@/igc_multiple_pass_wrap.cc
 SWIG_SRC += @swigsrc@/igc_collection_rolling_shutter_wrap.cc
 SWIG_SRC += @swigsrc@/igc_collection_orbit_data_wrap.cc
 SWIG_SRC += @swigsrc@/rolling_shutter_constant_time_table_wrap.cc
+SWIG_SRC += @swigsrc@/piecewise_linear_wrap.cc
 SWIG_SRC += @swigsrc@/orbit_offset_correction_wrap.cc
 SWIG_SRC_HDF5 += @swigsrc@/hdf_orbit_wrap.cc
 SWIG_SRC_HDF5_CARTO += @swigsrc@/hdf_orbit_carto_wrap.cc
@@ -257,6 +260,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/igc_rolling_shutter_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_array_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_multiple_pass_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_collection_rolling_shutter_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/piecewise_linear_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_collection_orbit_data_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_offset_correction_test.cc
 

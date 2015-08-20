@@ -121,6 +121,7 @@ extern "C" {
   void init_igc_collection_rolling_shutter(void);
   void init_igc_collection_orbit_data(void);
   void init_rolling_shutter_constant_time_table(void);
+  void init_piecewise_linear(void);
   void init_orbit_offset_correction(void);
   void init_argus_camera(void);
   void init_argus_orbit(void);
@@ -358,6 +359,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_igc_collection_rolling_shutter", init_igc_collection_rolling_shutter);
   init_extension_module(package, "_igc_collection_orbit_data", init_igc_collection_orbit_data);
   init_extension_module(package, "_rolling_shutter_constant_time_table", init_rolling_shutter_constant_time_table);
+  init_extension_module(package, "_piecewise_linear", init_piecewise_linear);
   init_extension_module(package, "_orbit_offset_correction", init_orbit_offset_correction);
   init_extension_module(package, "_argus_camera", init_argus_camera);
   init_extension_module(package, "_argus_orbit", init_argus_orbit);

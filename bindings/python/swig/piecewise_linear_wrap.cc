@@ -5144,6 +5144,47 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
+#else
+      return PyString_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -5312,6 +5353,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_PiecewiseLinear___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::PiecewiseLinear *arg1 = (GeoCal::PiecewiseLinear *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear const > tempshared1 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PiecewiseLinear___str__" "', argument " "1"" of type '" "GeoCal::PiecewiseLinear const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp1);
+      arg1 = const_cast< GeoCal::PiecewiseLinear * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp1);
+      arg1 = const_cast< GeoCal::PiecewiseLinear * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::PiecewiseLinear const *)arg1)->print_to_string();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_PiecewiseLinear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PiecewiseLinear *arg1 = (GeoCal::PiecewiseLinear *) 0 ;
@@ -5374,6 +5458,7 @@ static PyMethodDef SwigMethods[] = {
 		"const blitz::Array< int, 1 > &T)\n"
 		"\n"
 		""},
+	 { (char *)"PiecewiseLinear___str__", (PyCFunction)_wrap_PiecewiseLinear___str__, METH_O, NULL},
 	 { (char *)"delete_PiecewiseLinear", (PyCFunction)_wrap_delete_PiecewiseLinear, METH_O, (char *)"\n"
 		"virtual GeoCal::PiecewiseLinear::~PiecewiseLinear()\n"
 		"\n"

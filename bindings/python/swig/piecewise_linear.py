@@ -146,6 +146,7 @@ class PiecewiseLinear(geocal_swig.with_parameter.WithParameter):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _piecewise_linear.delete_PiecewiseLinear
+PiecewiseLinear.__str__ = new_instancemethod(_piecewise_linear.PiecewiseLinear___str__,None,PiecewiseLinear)
 PiecewiseLinear_swigregister = _piecewise_linear.PiecewiseLinear_swigregister
 PiecewiseLinear_swigregister(PiecewiseLinear)
 

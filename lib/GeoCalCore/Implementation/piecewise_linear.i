@@ -17,6 +17,7 @@ public:
 		  const ArrayAd<double, 1>& Y,
 		  const blitz::Array<int, 1>& T);
   %pickle_serialization();
+  std::string print_to_string() const;
 };
 
 }

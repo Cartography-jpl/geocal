@@ -1,8 +1,8 @@
 #include "cart_lab_multifile.h"
 #include "vicar_lite_file.h"
-#include "vicar_raster_image.h"
 #include "gdal_raster_image.h"
 #include "geocal_serialize_support.h"
+#include "geocal_internal_config.h"
 #include <cstdlib>
 #include <cstdio>
 #include <cmath>
@@ -10,6 +10,9 @@
 #include <boost/foreach.hpp>
 #include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
+#ifdef HAVE_VICAR_RTL
+#include "vicar_raster_image.h"
+#endif
 
 using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
@@ -215,10 +218,15 @@ RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
   } catch(const Exception& E) {
     // Ignore errors, we drop down to using the Vicar routines below.
   }
-  if(!f.get())
+  if(!f.get()) {
+#ifdef HAVE_VICAR_RTL
     f.reset(new VicarRasterImage(fname, 1, VicarFile::READ,
 				 number_line_per_tile, 
 				 number_tile_each_file, force_area_pixel));
+#else
+    throw Exception("Wasn't compiled with support for VICAR RTL. If you need thsi functionality, install the VICAR RTL and rebuild GeoCal");
+#endif
+  }
 
   ImageCoordinate ic = 
     coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));

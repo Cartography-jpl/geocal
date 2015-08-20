@@ -22,6 +22,8 @@ geocalinc_HEADERS+= @srccartlab@/doughnut_average.h
 libgeocal_la_SOURCES+= @srccartlab@/doughnut_average.cc
 geocalinc_HEADERS+= @srccartlab@/paint_class.h
 libgeocal_la_SOURCES+= @srccartlab@/paint_class.cc
+geocalinc_HEADERS+= @srccartlab@/cart_lab_multifile.h
+libgeocal_la_SOURCES+= @srccartlab@/cart_lab_multifile.cc
 if HAVE_VICAR_RTL
 geocalinc_HEADERS+= @srccartlab@/material_detect.h
 libgeocal_la_SOURCES+= @srccartlab@/material_detect.cc
@@ -36,8 +38,6 @@ libgeocal_la_SOURCES+= @srccartlab@/vicar_file.cc
 geocalinc_HEADERS+= @srccartlab@/vicar_tiled_file.h
 geocalinc_HEADERS+= @srccartlab@/vicar_raster_image.h
 libgeocal_la_SOURCES+= @srccartlab@/vicar_raster_image.cc
-geocalinc_HEADERS+= @srccartlab@/cart_lab_multifile.h
-libgeocal_la_SOURCES+= @srccartlab@/cart_lab_multifile.cc
 geocalinc_HEADERS+= @srccartlab@/datum_geoid96.h
 libgeocal_la_SOURCES+= @srccartlab@/datum_geoid96.cc
 geocalinc_HEADERS+= @srccartlab@/srtm_dem.h

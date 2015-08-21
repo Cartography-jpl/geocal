@@ -108,6 +108,8 @@ if HAVE_HDF5
 geocalinc_HEADERS+= @srcimplementation@/hdf_orbit.h
 libgeocal_la_SOURCES+= @srcimplementation@/hdf_orbit.cc
 endif
+geocalinc_HEADERS+= @srcimplementation@/orbit_correction.h
+libgeocal_la_SOURCES+= @srcimplementation@/orbit_correction.cc
 geocalinc_HEADERS+= @srcimplementation@/orbit_offset_correction.h
 libgeocal_la_SOURCES+= @srcimplementation@/orbit_offset_correction.cc
 geocalinc_HEADERS+= @srcimplementation@/igc_ray_caster.h
@@ -216,6 +218,7 @@ SWIG_SRC += @swigsrc@/igc_collection_rolling_shutter_wrap.cc
 SWIG_SRC += @swigsrc@/igc_collection_orbit_data_wrap.cc
 SWIG_SRC += @swigsrc@/rolling_shutter_constant_time_table_wrap.cc
 SWIG_SRC += @swigsrc@/piecewise_linear_wrap.cc
+SWIG_SRC += @swigsrc@/orbit_correction_wrap.cc
 SWIG_SRC += @swigsrc@/orbit_offset_correction_wrap.cc
 SWIG_SRC_HDF5 += @swigsrc@/hdf_orbit_wrap.cc
 SWIG_SRC_HDF5_CARTO += @swigsrc@/hdf_orbit_carto_wrap.cc

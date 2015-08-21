@@ -121,11 +121,12 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.orbit_correction
 import geocal_swig.orbit
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
-class OrbitOffsetCorrection(geocal_swig.orbit.Orbit):
+class OrbitOffsetCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     """
     This class gives an orbit that tries to correct errors in another
     underlying orbit.
@@ -334,17 +335,6 @@ class OrbitOffsetCorrection(geocal_swig.orbit.Orbit):
     def fit_roll(self, value):
       self._v_fit_roll(value)
 
-    def _v_orbit_uncorrected(self):
-        """
-        boost::shared_ptr<Orbit> GeoCal::OrbitOffsetCorrection::orbit_uncorrected() const
-        The uncorrected orbit. 
-        """
-        return _orbit_offset_correction.OrbitOffsetCorrection__v_orbit_uncorrected(self)
-
-    @property
-    def orbit_uncorrected(self):
-        return self._v_orbit_uncorrected()
-
     def update_quaterion(self, *args):
         """
         void GeoCal::OrbitOffsetCorrection::update_quaterion(int Ind, const boost::math::quaternion< double > &Q)
@@ -368,13 +358,6 @@ class OrbitOffsetCorrection(geocal_swig.orbit.Orbit):
         """
         return _orbit_offset_correction.OrbitOffsetCorrection_insert_position_time_point(self, *args)
 
-    def orbit_data(self, *args):
-        """
-        boost::shared_ptr< OrbitData > OrbitOffsetCorrection::orbit_data(const TimeWithDerivative &T) const
-
-        """
-        return _orbit_offset_correction.OrbitOffsetCorrection_orbit_data(self, *args)
-
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -390,11 +373,9 @@ OrbitOffsetCorrection._v_use_local_north_coordinate = new_instancemethod(_orbit_
 OrbitOffsetCorrection._v_fit_yaw = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_yaw,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection._v_fit_pitch = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_pitch,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection._v_fit_roll = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_fit_roll,None,OrbitOffsetCorrection)
-OrbitOffsetCorrection._v_orbit_uncorrected = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection__v_orbit_uncorrected,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection.update_quaterion = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_update_quaterion,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection.insert_attitude_time_point = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_insert_attitude_time_point,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection.insert_position_time_point = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_insert_position_time_point,None,OrbitOffsetCorrection)
-OrbitOffsetCorrection.orbit_data = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_orbit_data,None,OrbitOffsetCorrection)
 OrbitOffsetCorrection_swigregister = _orbit_offset_correction.OrbitOffsetCorrection_swigregister
 OrbitOffsetCorrection_swigregister(OrbitOffsetCorrection)
 

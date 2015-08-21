@@ -1,6 +1,6 @@
 #ifndef ORBIT_OFFSET_CORRECTION_H
 #define ORBIT_OFFSET_CORRECTION_H
-#include "orbit.h"
+#include "orbit_correction.h"
 #include <map>
 
 namespace GeoCal {
@@ -29,7 +29,7 @@ namespace GeoCal {
   The underlying orbit should return a QuaternionOrbitData orbit data, 
   since this is currently the only type supported.
 *******************************************************************/
-class OrbitOffsetCorrection: public Orbit {
+class OrbitOffsetCorrection: public OrbitCorrection {
 public:
   OrbitOffsetCorrection(const boost::shared_ptr<Orbit> Orb_uncorr,
 			bool Outside_is_error = false,
@@ -101,11 +101,6 @@ public:
   bool fit_roll() const { return fit_roll_; }
   void fit_roll(bool V) { fit_roll_ = V; }
 
-//-----------------------------------------------------------------------
-/// The uncorrected orbit.
-//-----------------------------------------------------------------------
-  boost::shared_ptr<Orbit> orbit_uncorrected() const 
-  { return orb_uncorr; }
   std::vector<Time> attitude_time_point() const;
   std::vector<Time> position_time_point() const;
 
@@ -141,51 +136,38 @@ public:
     pos_corr[T_pt] = pc;
     notify_update();
   }
-  virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
-  virtual boost::shared_ptr<OrbitData> 
-  orbit_data(const TimeWithDerivative& T) const;
   virtual ArrayAd<double, 1> parameter_with_derivative() const;
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
   virtual blitz::Array<bool, 1> parameter_mask() const;
   virtual void print(std::ostream& Os) const;
-  virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const;
-  virtual boost::array<AutoDerivative<double>, 3> 
-  position_ci_with_derivative(const TimeWithDerivative& T) const;
-  virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
-  virtual boost::array<AutoDerivative<double>, 3> 
-  position_cf_with_derivative(const TimeWithDerivative& T) const;
 protected:
   virtual void notify_update()
   {
     notify_update_do(*this);
   }
+  virtual boost::array<AutoDerivative<double>, 3 > 
+  pcorr_with_derivative(const TimeWithDerivative& Tm, 
+			const CartesianFixed& Pos_uncorr) const;
+  virtual boost::array<double, 3 > 
+  pcorr(const Time& Tm,
+	const CartesianFixed& Pos_uncorr) const;
+  virtual boost::math::quaternion<AutoDerivative<double> > 
+  acorr_with_derivative(const TimeWithDerivative& T) const;
+  virtual boost::math::quaternion<double> 
+  acorr(const Time& T) const;
 private:
-  boost::shared_ptr<Orbit> orb_uncorr;
   typedef std::map<Time, boost::math::quaternion<AutoDerivative<double> > > att_map_type;
   typedef std::pair<Time, boost::math::quaternion<AutoDerivative<double> > > att_map_pair_type;
   typedef std::map<Time, boost::array<AutoDerivative<double>, 3 > > pos_map_type;
   typedef std::pair<Time, boost::array<AutoDerivative<double>, 3 > > pos_map_pair_type;
   att_map_type att_corr;
   pos_map_type pos_corr;
-  boost::array<AutoDerivative<double>, 3 > 
-  pcorr_with_derivative(const TimeWithDerivative& Tm, 
-			const CartesianFixed& Pos_uncorr) const;
-  boost::array<double, 3 > 
-  pcorr(const Time& Tm,
-	const CartesianFixed& Pos_uncorr) const;
-  boost::math::quaternion<AutoDerivative<double> > 
-  acorr_with_derivative(const TimeWithDerivative& T) const;
-  boost::math::quaternion<double> 
-  acorr(const Time& T) const;
   bool outside_is_error_;
   bool fit_position_x_, fit_position_y_, fit_position_z_, fit_yaw_, 
     fit_pitch_, fit_roll_;
   bool use_local_north_coordinate_;
-  mutable bool pos_corr_is_cf_cache_;
-  mutable bool pos_corr_is_cf_cache_valid_;
-  bool pos_corr_is_cf() const;
-  OrbitOffsetCorrection() : pos_corr_is_cf_cache_valid_(false) {}
+  OrbitOffsetCorrection() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -194,4 +176,3 @@ private:
 
 GEOCAL_EXPORT_KEY(OrbitOffsetCorrection);
 #endif
-
